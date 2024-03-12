@@ -234,8 +234,7 @@ export class Kitchen {
             (1 + vialBonus / 100) *
             stampMath * mealMath * cardImpact *
             (1 + (kitchenEffBonus * Math.floor((this.mealLevels + (this.recipeLevels + this.luckLevels)) / 10)) / 100);
-        // 5 * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.CookinzzDN1)) * Math.max(1, c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.MealSpdz)) * Math.max(1, q._customBlock_AtomCollider("AtomBonuses", 8, 0)) * (1 + q._customBlock_GamingStatType("MSA_Bonus", 1, 0) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("Cooking")[b | 0][7]) / 10) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.RecCook) / 100) * (1 + l._customBlock_StampBonusOfTypeX("RecipeCook") / 100) * (1 + p._customBlock_MealBonus("Rcook") / 100) * (1 + Math.min(6 * t._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss4A"), 50) / 100) * (1 + p._customBlock_MealBonus("KitchenEff") * Math.floor((c.asNumber(a.engine.getGameAttribute("Cooking")[b | 0][6]) + (c.asNumber(a.engine.getGameAttribute("Cooking")[b | 0][7]) + c.asNumber(a.engine.getGameAttribute("Cooking")[b | 0][8]))) / 10) / 100);
-    }
+  }
 
     getLuck = () => {
         return 1 + Math.pow(5 * this.luckLevels, 0.85) / 100;
