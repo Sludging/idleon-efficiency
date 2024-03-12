@@ -592,7 +592,7 @@ function DeathnoteDisplay() {
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox width={{ max: '200px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                        <ShadowBox width={{ max: deathnoteData.hasMinibosses ? '180px' : '200px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                             <Box>
                                 <Text size="small">{worldName}</Text>
                                 <Text size="small">({worldTierInfo[index]}%)</Text>
