@@ -595,7 +595,12 @@ export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const players = data.get("players") as Player[];
 
-    farming.farmingLevel = players[0]?.skills.get(SkillsIndex.Farming)?.level ?? 0;
+    let levels: number[] = [];
+    players.forEach(player => {
+        levels.push(player.skills.get(SkillsIndex.Farming)?.level ?? 0);
+    })
+
+    farming.farmingLevel = Math.max(...levels);
 }
 
 export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {

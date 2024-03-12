@@ -392,7 +392,11 @@ export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => 
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
 
-    summoning.summoningLevel = players[0]?.skills.get(SkillsIndex.Summoning)?.level ?? 0;
+    let levels: number[] = [];
+    players.forEach(player => {
+        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
+    })
+    summoning.summoningLevel = Math.max(...levels);
 
     summoning.updateSecondaryBonus();
 }
