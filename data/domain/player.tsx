@@ -680,6 +680,20 @@ export class Players extends Domain {
     }
 }
 
+export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
+    let activeIndex = 0;
+    let lowestActiveTime = 101;
+
+    players.forEach((player, index) => {
+        if (player.afkFor < 100 && lowestActiveTime > player.afkFor) {
+            lowestActiveTime = player.afkFor;
+            activeIndex = index;
+        }
+    })
+
+    return activeIndex;
+}
+
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
