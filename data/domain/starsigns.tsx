@@ -46,7 +46,7 @@ export class StarSigns extends Domain  {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "StarSignsUnlocked", perPlayer: false, default: []},
+            { key: "StarSg", perPlayer: false, default: []},
         ]
     }
 
@@ -56,17 +56,17 @@ export class StarSigns extends Domain  {
 
     parse(data: Map<string, any>): void {
         const starSigns = data.get("starsigns") as StarSigns;      
-        const starSignsUnlockedData = data.get("StarSg") as string;
+        const starSignsUnlockedData = data.get("StarSg") as any[];
 
         console.log(starSignsUnlockedData);
 
         starSigns.unlockedStarSigns = [];
         if (starSignsUnlockedData) {
-            /*starSignsUnlockedData.map((key: string, value: string | number) => {
+            Object.keys(starSignsUnlockedData).forEach(key => {
                 if (!starSigns.unlockedStarSigns.includes(key)) {
                     starSigns.unlockedStarSigns.push(key);
                 }
-            });*/
+            });
     
             console.log(starSigns.unlockedStarSigns);
         }    
