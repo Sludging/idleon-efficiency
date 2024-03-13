@@ -1,4 +1,4 @@
-import { StarSignMap, StarSign } from './starsigns';
+import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
 import { Card, CardInfo } from "./cards";
@@ -697,17 +697,24 @@ export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
+    const starSigns = data.get("starsigns") as StarSigns;
 
     const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
     const infiniteStars = infiniteBonus.getBonus();
 
-    // TODO: Need to care about what signs are unlocked, which .. I never did before.
     Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
         players.forEach(player => {
             // If player isn't manually aligned to this sign, add it
-            if (!player.starSigns.find(sign => sign.name == starSign.name)) {
+            if (!player.starSigns.find(sign => sign.name == starSign.name) && starSigns.isStarSignUnlocked(starSign.name)) {
                 player.starSigns.push(starSign.duplicate(true));
             }
+        })
+    })
+
+    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
+    players.forEach(player => {
+        player.starSigns.forEach(sign => {
+            sign.seraphCosmosBonus = seraphCosmosBonus;
         })
     })
 }

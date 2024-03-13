@@ -58,8 +58,6 @@ export class StarSigns extends Domain  {
         const starSigns = data.get("starsigns") as StarSigns;      
         const starSignsUnlockedData = data.get("StarSg") as any[];
 
-        console.log(starSignsUnlockedData);
-
         starSigns.unlockedStarSigns = [];
         if (starSignsUnlockedData) {
             Object.keys(starSignsUnlockedData).forEach(key => {
@@ -67,8 +65,6 @@ export class StarSigns extends Domain  {
                     starSigns.unlockedStarSigns.push(key);
                 }
             });
-    
-            console.log(starSigns.unlockedStarSigns);
         }    
     }
 

@@ -569,10 +569,6 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire, sigils.sigils[18].getBonus());
         kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck, sigils.sigils[18].getBonus());
 
-        if (index == 0) {
-            console.log(`Star sign : ${starsign58}`);
-        }
-
         // if actively cooking
         if (kitchen.activeMeal != -1) {
             cooking.meals[kitchen.activeMeal].cookingContribution += kitchen.mealSpeed;
