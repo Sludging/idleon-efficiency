@@ -16,6 +16,7 @@ import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
 import { JadeUpgrade, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
+import { StarSigns } from "../starsigns";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -627,6 +628,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
+    const starSigns = data.get("starsigns") as StarSigns;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -651,14 +653,14 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
     const mealBonusZCropEvoSumm = cooking.getMealBonusForKey("zCropEvoSumm");
     const stampCropEvolutionChance = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "CropEvo" ? stamp.getBonus() : 0, 0);
-    const starSignBonus65 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Crop Evo chance per Farming LV"), 0);
+    const starSignBonus65 = starSigns.isStarSignUnlocked("Cropiovo Minor") ? 3 * starSigns.getSeraphCosmosBonus() : 0;
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance);
     
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
-    const starSignBonus67 = players[0].starSigns.filter(sign => sign.bonuses.find(bonus => bonus.text == "OG Chance") != undefined).reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
+    const starSignBonus67 = starSigns.isStarSignUnlocked("O.G. Signalais") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
     farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
     
     farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
