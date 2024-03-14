@@ -24,12 +24,12 @@ const SeedSection = ({ seed, farming }: { seed: Seed, farming: Farming }) => {
             <Box align="center" direction="row">
                 <Text size="medium">{seed?.data?.name} SEED {(seed?.data?.lvlReq ?? 0) > farming.farmingLevel ? `(Lv required : ${(seed?.data?.lvlReq ?? 0)})` : `(Cycle time : ${toTime(seed.getFullCycleGrowthTime() / farming.growthRate)})`}</Text>
             </Box>
-            <Box gap="xxsmall" direction="row" wrap align="center">
+            <Box gap="xxsmall" direction="row" wrap>
                 {
                     farming.cropDepot.filter(crop => crop.seedIndex == seed.index).map((crop, index) => {
                         const nextCropChance = crop.nextCropChance * 100;
                         return (
-                            <Box key={index} style={{ opacity: crop.discovered ? 1 : 0.5 }} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
+                            <Box key={index} style={{ opacity: crop.discovered ? 1 : 0.5 }} border={{ color: 'grey-1' }} margin={{ bottom: 'xxsmall' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
                                 <TipDisplay
                                     size='medium'
                                     heading={farming.getCropName(crop.index)}
