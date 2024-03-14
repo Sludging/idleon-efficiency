@@ -62,7 +62,7 @@ function Sneaking() {
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Jade Upgrades", "Sneaking Upgrades", "Inventory", "Pristine Charms", (sneaking.beanstalking.unlocked ? "Beanstalck" : "")].filter(tab => tab != "").map((tabName, index) => (
+                {["Jade Upgrades", "Sneaking Upgrades", "Inventory", "Pristine Charms", (sneaking.beanstalking.unlocked ? "Beanstalk" : "")].filter(tab => tab != "").map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
@@ -71,7 +71,7 @@ function Sneaking() {
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
             {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}
             {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
-            {activeTab == "Beanstalck" && <BeanstalkingDisplay beanstalking={sneaking.beanstalking} />}
+            {activeTab == "Beanstalk" && <BeanstalkingDisplay beanstalking={sneaking.beanstalking} />}
         </Box>
     )
 }
