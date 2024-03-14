@@ -261,11 +261,12 @@ export class Player {
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
         family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number,
-        zGoldFoddMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalckingStack: number, beanstalckingItem: Food | undefined) => {
+        zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, beanstalkingItem: Food | undefined) => {
         let gearBonus = this.getMiscBonusFromGear("Money");
+        const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoddMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14)), 0);
-        const beanstalckingBonus = beanstalckingItem?.goldFoodBonus(beanstalckingStack,this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoddMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14)) ?? 0;
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
+        const beanstalkingBonus = beanstalkingItem?.goldFoodBonus(beanstalkingStack, goldFoodBoost) ?? 0;
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
@@ -288,7 +289,7 @@ export class Player {
                 + dungeonBonus + arcadeBonus + boxBonus + (guildBonus * currentWorldBonus) +
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper +
-                goldenFoodBonus + beanstalckingBonus) / 100);
+                goldenFoodBonus + beanstalkingBonus) / 100);
 
         // Reset any existing data, since next section should include all the required info.
         this.monsterCash.sources = [];
@@ -311,7 +312,7 @@ export class Player {
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
         this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus});
-        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalckingBonus});
+        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus});
     }
 
     setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
@@ -851,7 +852,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
     const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
-    const beanstalckingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
+    const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
     players.forEach(player => {
         const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
         const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
@@ -861,7 +862,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
             dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
-            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalckingBonus?.getStackSize() ?? 0, beanstalckingBonus?.item);
+            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item);
     })
 
     // Crystal Spawn Chance

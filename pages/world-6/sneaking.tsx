@@ -18,7 +18,7 @@ import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgr
 import TabButton from '../../components/base/TabButton';
 import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
 import { SneakingInventory } from '../../components/world-6/sneaking/sneakingInventory';
-import { BeanstalckingDisplay } from '../../components/world-6/sneaking/beanstacking';
+import { BeanstalkingDisplay } from '../../components/world-6/sneaking/beanstacking';
 
 
 function Sneaking() {
@@ -71,7 +71,7 @@ function Sneaking() {
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
             {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}
             {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
-            {activeTab == "Beanstalck" && <BeanstalckingDisplay beanstalcking={sneaking.beanstalking} />}
+            {activeTab == "Beanstalck" && <BeanstalkingDisplay beanstalking={sneaking.beanstalking} />}
         </Box>
     )
 }

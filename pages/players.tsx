@@ -55,6 +55,8 @@ import { Chip } from '../data/domain/lab';
 import { AnvilWrapper } from '../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../data/domain/alerts';
 import { POExtra } from '../data/domain/postoffice';
+import { Cooking } from '../data/domain/cooking';
+import { Sneaking } from '../data/domain/world-6/sneaking';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -548,11 +550,17 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const achievementsInfo = theData.get("achievements") as Achievement[];
     const sigils = theData.get("sigils") as Sigils;
     const alchemy = theData.get("alchemy") as Alchemy;
+    const cooking = theData.get("cooking") as Cooking;
+    const sneaking = theData.get("sneaking") as Sneaking;
+    const bribes = theData.get("bribes") as Bribe[];
 
+    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble);
+    const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
+    const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0));
 
 
     return (

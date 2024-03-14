@@ -7,14 +7,14 @@ import { Sneaking, SneakingItem, SneakingTrinket, SneakingWeapon, Beanstalking }
 import { NinjaItemTypeEnum } from "../../../data/domain/enum/ninjaItemTypeEnum";
 import TipDisplay from "../../base/TipDisplay";
 
-export const BeanstalckingDisplay = ({ beanstalcking }: { beanstalcking: Beanstalking }) => {
-    if (!beanstalcking) {
+export const BeanstalkingDisplay = ({ beanstalking }: { beanstalking: Beanstalking }) => {
+    if (!beanstalking) {
         return (
             <Text>Loading...</Text>
         )
     }
 
-    if (!beanstalcking.unlocked) {
+    if (!beanstalking.unlocked) {
         return (
             <Box margin={{ top: 'large' }}>
                 <Text>You first need to unlock Beanstalk in the Emporium</Text>
@@ -28,10 +28,10 @@ export const BeanstalckingDisplay = ({ beanstalcking }: { beanstalcking: Beansta
                 <ShadowBox background="dark-1" pad="small">
                     <Box gap="small">
                         {
-                            beanstalcking.bonuses.map((bonus, index) => (
+                            beanstalking.bonuses.map((bonus, index) => (
                                 <Box style={{ opacity: bonus.level > 0 ? 1 : 0.5 }} direction="row" key={index} align="center" gap="xsmall">
                                     <IconImage data={bonus.item.getImageData()} />
-                                    <Text color={bonus.level == 2 ? 'green-1' : ''} size="small">{beanstalcking.getBonusText(bonus.type)}</Text>
+                                    <Text color={bonus.level == 2 ? 'green-1' : ''} size="small">{beanstalking.getBonusText(bonus.type)}</Text>
                                 </Box>
                             ))
                         }
