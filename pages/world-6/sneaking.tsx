@@ -18,6 +18,7 @@ import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgr
 import TabButton from '../../components/base/TabButton';
 import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
 import { SneakingInventory } from '../../components/world-6/sneaking/sneakingInventory';
+import { BeanstalckingDisplay } from '../../components/world-6/sneaking/beanstacking';
 
 
 function Sneaking() {
@@ -61,7 +62,7 @@ function Sneaking() {
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Jade Upgrades", "Sneaking Upgrades", "Inventory", "Pristine Charms"].map((tabName, index) => (
+                {["Jade Upgrades", "Sneaking Upgrades", "Inventory", "Pristine Charms", (sneaking.beanstalking.unlocked ? "Beanstalck" : "")].filter(tab => tab != "").map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
@@ -70,6 +71,7 @@ function Sneaking() {
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
             {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}
             {activeTab == "Pristine Charms" && <PristineCharmSection charms={sneaking.pristineCharms} />}
+            {activeTab == "Beanstalck" && <BeanstalckingDisplay beanstalcking={sneaking.beanstalking} />}
         </Box>
     )
 }

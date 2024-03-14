@@ -7,7 +7,7 @@ import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 
 export const CropDepotDisplay = ({ farming }: { farming: Farming }) => {
     return (
-        <Box width="auto">
+        <Box>
             {
                 farming.seeds.map((seed, index) => (
                     <SeedSection key={index} seed={seed} farming={farming} />
@@ -20,7 +20,7 @@ export const CropDepotDisplay = ({ farming }: { farming: Farming }) => {
 
 const SeedSection = ({ seed, farming }: { seed: Seed, farming: Farming }) => {
     return (       
-        <ShadowBox width={"auto"} style={{ opacity: (seed?.data?.lvlReq ?? 0) > farming.farmingLevel ? 0.5 : 1 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
+        <ShadowBox style={{ opacity: (seed?.data?.lvlReq ?? 0) > farming.farmingLevel ? 0.5 : 1 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
             <Box align="center" direction="row">
                 <Text size="medium">{seed?.data?.name} SEED {(seed?.data?.lvlReq ?? 0) > farming.farmingLevel ? `(Lv required : ${(seed?.data?.lvlReq ?? 0)})` : `(Cycle time : ${toTime(seed.getFullCycleGrowthTime() / farming.growthRate)})`}</Text>
             </Box>
