@@ -24,6 +24,23 @@ export class MarketUpgrade {
 
     constructor(public index: number, public data: MarketInfoModel) {}
 
+    getTotalCostUntilLevel = (currentLevel: number = this.level, targetLevel: number = this.data.maxLvl): MarketUpgradeCost[] => {
+        let costs: MarketUpgradeCost[] = [];
+
+        for (let i = currentLevel; i < targetLevel; i++) {
+            const cost = this.getNextLevelCost(i);
+
+            const foundCost = costs.find(foundCost => foundCost.cropId == cost.cropId);
+            if (foundCost) {
+                foundCost.cropQuantity += cost.cropQuantity;
+            } else {
+                costs.push(cost);
+            }
+        }        
+
+        return costs;
+    }
+
     getNextLevelCost = (currentLevel: number = this.level): MarketUpgradeCost => {
         let cropId = 0;
         if (this.index > 7) {

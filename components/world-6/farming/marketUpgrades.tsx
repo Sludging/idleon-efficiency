@@ -1,7 +1,7 @@
 import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
 import { useContext, useState } from "react";
 import TabButton from "../../base/TabButton";
-import { Crop, Farming, MarketUpgrade } from "../../../data/domain/world-6/farming";
+import { Crop, Farming, MarketUpgrade, MarketUpgradeCost } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
@@ -45,6 +45,9 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                     }
                                 });
 
+                                // Get cost to max upgrade
+                                const costToMax = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 100) ? 100 : upgrade.data.maxLvl);
+
                                 let label = "";
                                 if (upgrade.unlocked) {
                                     label = (upgrade.level > 0 ? "Next level cost" : "Unlock Cost");
@@ -63,32 +66,38 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                             size='medium'
                                                             heading={"More next levels cost"}
                                                             body={
-                                                                <Box gap="xxsmall">
-                                                                    {(futureLevelsCost[0].cropQuantity > 0)
-                                                                        && <Box gap="xsmall" direction="row" align="center">
-                                                                                <IconImage data={Crop.getCropIconData(futureLevelsCost[0].cropId)} />
-                                                                                <Text color={canAffortFutureLevels[0] ? 'green-1' : ''} size="small">{futureLevelsCost[0].cropQuantity}</Text>
-                                                                            </Box>}
-                                                                    {(futureLevelsCost[1].cropQuantity > 0)
-                                                                        && <Box gap="xsmall" direction="row" align="center">
-                                                                                <IconImage data={Crop.getCropIconData(futureLevelsCost[1].cropId)} />
-                                                                                <Text color={canAffortFutureLevels[1] ? 'green-1' : ''} size="small">{futureLevelsCost[1].cropQuantity}</Text>
-                                                                            </Box>}
-                                                                    {(futureLevelsCost[2].cropQuantity > 0)
-                                                                        && <Box gap="xsmall" direction="row" align="center">
-                                                                                <IconImage data={Crop.getCropIconData(futureLevelsCost[2].cropId)} />
-                                                                                <Text color={canAffortFutureLevels[2] ? 'green-1' : ''} size="small">{futureLevelsCost[2].cropQuantity}</Text>
-                                                                            </Box>}
-                                                                    {(futureLevelsCost[3].cropQuantity > 0)
-                                                                        && <Box gap="xsmall" direction="row" align="center">
-                                                                                <IconImage data={Crop.getCropIconData(futureLevelsCost[3].cropId)} />
-                                                                                <Text color={canAffortFutureLevels[3] ? 'green-1' : ''} size="small">{futureLevelsCost[3].cropQuantity}</Text>
-                                                                            </Box>}
-                                                                    {(futureLevelsCost[4].cropQuantity > 0)
-                                                                        && <Box gap="xsmall" direction="row" align="center">
-                                                                                <IconImage data={Crop.getCropIconData(futureLevelsCost[4].cropId)} />
-                                                                                <Text color={canAffortFutureLevels[4] ? 'green-1' : ''} size="small">{futureLevelsCost[4].cropQuantity}</Text>
-                                                                            </Box>}
+                                                                <Box gap="small">
+                                                                    {upgrade.index > 0 &&
+                                                                    <Box gap="xxsmall">
+                                                                        {
+                                                                            futureLevelsCost.map((cost, index) => {
+                                                                                return ((cost.cropQuantity > 0)
+                                                                                    && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                            <IconImage data={Crop.getCropIconData(cost.cropId)} />
+                                                                                            <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{cost.cropQuantity}</Text>
+                                                                                        </Box>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </Box>}
+                                                                    <ComponentAndLabel
+                                                                        label={(upgrade.data.maxLvl - upgrade.level > 100) ? "Total cost for next 100 levels" : "Total cost to max"}
+                                                                        labelColor=''
+                                                                        component={
+                                                                            <Box gap="xsmall">
+                                                                                {
+                                                                                    costToMax.map((cost, index) => {
+                                                                                        return ((cost.cropQuantity > 0)
+                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                    <IconImage data={Crop.getCropIconData(cost.cropId)} />
+                                                                                                    <Text color={(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0) > cost.cropQuantity ? 'green-1' : ''} size="small">{(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0)}/{cost.cropQuantity}</Text>
+                                                                                                </Box>
+                                                                                        )
+                                                                                        })
+                                                                                }
+                                                                            </Box>                                                                          
+                                                                        }
+                                                                    />
                                                                 </Box>
                                                             }
                                                             direction={TipDirection.Down}
@@ -159,6 +168,9 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                 }
                             });
 
+                            // Get costs to max upgrade as for night market there's only one cost type
+                            const costToMax = upgrade.getTotalCostUntilLevel();
+
                             let label = "";
                             if (upgrade.unlocked) {
                                 label = (upgrade.level > 0 ? "Next level cost" : "Unlock Cost");
@@ -177,32 +189,37 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                         size='medium'
                                                         heading={"More next levels cost"}
                                                         body={
-                                                            <Box gap="xxsmall">
-                                                                {(futureLevelsCost[0].cropQuantity > 0)
-                                                                    && <Box gap="xsmall" direction="row" align="center">
-                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                            <Text color={canAffortFutureLevels[0] ? 'green-1' : ''} size="small">{futureLevelsCost[0].cropQuantity}</Text>
-                                                                        </Box>}
-                                                                {(futureLevelsCost[1].cropQuantity > 0)
-                                                                    && <Box gap="xsmall" direction="row" align="center">
-                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                            <Text color={canAffortFutureLevels[1] ? 'green-1' : ''} size="small">{futureLevelsCost[1].cropQuantity}</Text>
-                                                                        </Box>}
-                                                                {(futureLevelsCost[2].cropQuantity > 0)
-                                                                    && <Box gap="xsmall" direction="row" align="center">
-                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                            <Text color={canAffortFutureLevels[2] ? 'green-1' : ''} size="small">{futureLevelsCost[2].cropQuantity}</Text>
-                                                                        </Box>}
-                                                                {(futureLevelsCost[3].cropQuantity > 0)
-                                                                    && <Box gap="xsmall" direction="row" align="center">
-                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                            <Text color={canAffortFutureLevels[3] ? 'green-1' : ''} size="small">{futureLevelsCost[3].cropQuantity}</Text>
-                                                                        </Box>}
-                                                                {(futureLevelsCost[4].cropQuantity > 0)
-                                                                    && <Box gap="xsmall" direction="row" align="center">
-                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                            <Text color={canAffortFutureLevels[4] ? 'green-1' : ''} size="small">{futureLevelsCost[4].cropQuantity}</Text>
-                                                                        </Box>}
+                                                            <Box gap="small">
+                                                                <Box gap="xxsmall">
+                                                                    {
+                                                                        futureLevelsCost.map((cost, index) => {
+                                                                            return ((cost.cropQuantity > 0)
+                                                                                && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                        <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                        <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{cost.cropQuantity}</Text>
+                                                                                    </Box>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </Box>
+                                                                <ComponentAndLabel
+                                                                    label="Total cost to max"
+                                                                    labelColor=''
+                                                                    component={
+                                                                        <Box gap="xsmall">
+                                                                            {
+                                                                                costToMax.map((cost, index) => {
+                                                                                    return ((cost.cropQuantity > 0)
+                                                                                        && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{cost.cropQuantity}</Text>
+                                                                                            </Box>
+                                                                                    )
+                                                                                    })
+                                                                            }
+                                                                        </Box>                                                                          
+                                                                    }
+                                                                />
                                                             </Box>
                                                         }
                                                         direction={TipDirection.Down}
