@@ -74,7 +74,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                                 return ((cost.cropQuantity > 0)
                                                                                     && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                             <IconImage data={Crop.getCropIconData(cost.cropId)} />
-                                                                                            <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{cost.cropQuantity}</Text>
+                                                                                            <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
                                                                                         </Box>
                                                                                 )
                                                                             })
@@ -90,7 +90,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                                         return ((cost.cropQuantity > 0)
                                                                                             && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                                     <IconImage data={Crop.getCropIconData(cost.cropId)} />
-                                                                                                    <Text color={(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0) > cost.cropQuantity ? 'green-1' : ''} size="small">{(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0)}/{cost.cropQuantity}</Text>
+                                                                                                    <Text color={(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0) > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0)}/{nFormatter(cost.cropQuantity)}</Text>
                                                                                                 </Box>
                                                                                         )
                                                                                         })
@@ -107,7 +107,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                 component={
                                                                     <Box gap="xsmall" direction="row" align="center">
                                                                         <IconImage data={Crop.getCropIconData(nextLevelCost.cropId)} />
-                                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nextLevelCost.cropQuantity}</Text>
+                                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
                                                                     </Box>                                                                          
                                                                 }
                                                             />
@@ -196,7 +196,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                             return ((cost.cropQuantity > 0)
                                                                                 && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                         <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                        <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{cost.cropQuantity}</Text>
+                                                                                        <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
                                                                                     </Box>
                                                                             )
                                                                         })
@@ -212,7 +212,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                                     return ((cost.cropQuantity > 0)
                                                                                         && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                                 <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                                <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{cost.cropQuantity}</Text>
+                                                                                                <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
                                                                                             </Box>
                                                                                     )
                                                                                     })
@@ -229,7 +229,7 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                             component={
                                                                 <Box gap="xsmall" direction="row" align="center">
                                                                     <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                    <Text color={canAfford ? 'green-1' : ''} size="small">{nextLevelCost.cropQuantity}</Text>
+                                                                    <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
                                                                 </Box>                                                                          
                                                             }
                                                         />

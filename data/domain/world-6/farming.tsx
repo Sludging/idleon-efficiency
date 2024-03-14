@@ -549,7 +549,7 @@ export class Farming extends Domain {
                     // No bonus there yet
                     return upgrade.data.bonus;
                 case 9: // GMO
-                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ this.getMarketUpgradeBonusValue(upgradeId).toString()+")";
+                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ nFormatter(this.getMarketUpgradeBonusValue(upgradeId))+")";
                 case 11:
                     return upgrade.data.bonus.replace(/}/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
                 case 13:
