@@ -169,6 +169,9 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                             });
 
                             // Get costs to max upgrade as for night market there's only one cost type
+                            const costTo10 = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 10) ? upgrade.level + 10 : upgrade.data.maxLvl);
+                            const costTo25 = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 25) ? upgrade.level + 25 : upgrade.data.maxLvl);
+                            const costTo50 = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 50) ? upgrade.level + 50 : upgrade.data.maxLvl);
                             const costToMax = upgrade.getTotalCostUntilLevel();
 
                             let label = "";
@@ -202,11 +205,74 @@ export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
                                                                         })
                                                                     }
                                                                 </Box>
+                                                                {
+                                                                    (upgrade.data.maxLvl - upgrade.level > 10) &&
+                                                                    <ComponentAndLabel
+                                                                        label="Total cost for next 10 levels"
+                                                                        labelColor=''
+                                                                        component={
+                                                                            <Box gap="xsmall">                                                                            
+                                                                                {
+                                                                                    costTo10.map((cost, index) => {
+                                                                                        return ((cost.cropQuantity > 0)
+                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                                </Box>
+                                                                                        )
+                                                                                        })
+                                                                                }
+                                                                            </Box>                                                                          
+                                                                        }
+                                                                    />
+                                                                }
+                                                                {
+                                                                    (upgrade.data.maxLvl - upgrade.level > 25) && 
+                                                                    <ComponentAndLabel
+                                                                        label="Total cost for next 25 levels"
+                                                                        labelColor=''
+                                                                        component={
+                                                                            <Box gap="xsmall">                                                                            
+                                                                                {
+                                                                                    costTo25.map((cost, index) => {
+                                                                                        return ((cost.cropQuantity > 0)
+                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                                </Box>
+                                                                                        )
+                                                                                        })
+                                                                                }
+                                                                            </Box>                                                                          
+                                                                        }
+                                                                    />
+                                                                }
+                                                                {
+                                                                    (upgrade.data.maxLvl - upgrade.level > 50) && 
+                                                                    <ComponentAndLabel
+                                                                        label="Total cost for next 50 levels"
+                                                                        labelColor=''
+                                                                        component={
+                                                                            <Box gap="xsmall">                                                                            
+                                                                                {
+                                                                                    costTo50.map((cost, index) => {
+                                                                                        return ((cost.cropQuantity > 0)
+                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                                </Box>
+                                                                                        )
+                                                                                        })
+                                                                                }
+                                                                            </Box>                                                                          
+                                                                        }
+                                                                    />
+                                                                }
                                                                 <ComponentAndLabel
                                                                     label="Total cost to max"
                                                                     labelColor=''
                                                                     component={
-                                                                        <Box gap="xsmall">
+                                                                        <Box gap="xsmall">                                                                            
                                                                             {
                                                                                 costToMax.map((cost, index) => {
                                                                                     return ((cost.cropQuantity > 0)
