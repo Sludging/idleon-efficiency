@@ -7,7 +7,7 @@ import { BaseNinjaItemBase, initNinjaItemRepo } from "../data/NinjaItemRepo";
 import { NinjaUpgradeBase, initNinjaUpgradeRepo } from "../data/NinjaUpgradeRepo";
 import { NinjaItemTypeEnum } from "../enum/ninjaItemTypeEnum";
 import { ImageData } from "../imageData";
-import { Item } from "../items";
+import { Food, Item, initAllItems } from "../items";
 import { JadeUpgradeModel } from "../model/jadeUpgradeModel";
 import { NinjaPristineCharmModel } from '../model/ninjaPristineCharmModel';
 import { NinjaUpgradeModel } from "../model/ninjaUpgradeModel";
@@ -15,6 +15,7 @@ import { NinjaItemModel } from '../model/ninjaItemModel';
 import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { BaseNinjaItemModel } from "../model/baseNinjaItemModel";
+import { itemMap } from "../../maps";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -297,12 +298,66 @@ export class PristineCharm {
     }
 }
 
+export enum BeanstalkingBonusType {
+    GoldenPeanut = 0,
+    ButterBar = 1,
+    GoldenJam = 2,
+    GoldenKebabs = 3,
+    GoldenMeatPie = 4,
+    GoldenNomwitch = 5,
+    GoldenHam = 6,
+    GoldenBread = 7,
+    GoldenRibs = 8,
+    GoldenCheese = 9,
+    GoldenGrilledCheese = 10,
+    GoldenHampter = 11,
+    GoldenNigiri = 12,
+    GoldenDumpling = 13,
+}
+
+export class BeanstalkingBonus {
+    constructor(public type: BeanstalkingBonusType, public level: number = 0, public item: Food) {}
+
+    getStackSize = (): number => {
+        return this.level == 2 ? 100000 : this.level == 1 ? 10000 : 0;
+    }
+}
+
+export class Beanstalking {
+    bonuses: BeanstalkingBonus[] = [];
+    unlocked: boolean = false;
+    supersizedUnlocked: boolean = false;
+
+    constructor() {}
+
+    getBonus = (type: BeanstalkingBonusType): number => {
+        const bonus = this.bonuses.find(bonus => bonus.type == type);
+
+        if (!bonus || this.unlocked == false) {
+            return 0;
+        } else {
+            return bonus.item.goldFoodBonus(bonus.getStackSize(), 1);
+        }
+    }
+
+    getBonusText = (type: BeanstalkingBonusType): string => {
+        const bonus = this.bonuses.find(bonus => bonus.type == type);
+
+        if (!bonus) {
+            return "";
+        } else {
+            return bonus.item.getBonusText(bonus.getStackSize(), 1);
+        }
+    }
+}
+
 export class Sneaking extends Domain {
     inventory: (SneakingItem | undefined)[] = [];
     players: SneakingPlayer[] = [];
     pristineCharms: PristineCharm[] = [];
     doors: SneakingDoor[] = [];
     jade: number = 0;
+    beanstalking: Beanstalking = new Beanstalking();
 
     minibossKills: number[] = [];
 
@@ -404,7 +459,7 @@ export class Sneaking extends Domain {
         })
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
-        const lettersOfEnabledUpgrades = ninjaData[102][9]
+        const lettersOfEnabledUpgrades = ninjaData[102][9];
         const purchasedUpgrades: number[] = [];
         for (const upgradeLetter of lettersOfEnabledUpgrades) {
             purchasedUpgrades.push(letterToNumber(upgradeLetter));
@@ -422,6 +477,33 @@ export class Sneaking extends Domain {
 
         sneaking.minibossKills = [];
         sneaking.minibossKills = ninjaData[105] as number[];
+
+        sneaking.beanstalking = new Beanstalking();
+        const beanStalkingData = ninjaData[104] as number[];
+        const goldenFoods = initAllItems().filter(item => item.type == "Golden Food") as Food[];
+        Object.values(BeanstalkingBonusType).forEach((key, index) => {
+            if (index < beanStalkingData.length) {
+                let item: Food | undefined = undefined;
+                switch(index) {
+                    case BeanstalkingBonusType.GoldenPeanut:
+                        item = goldenFoods.find(food => food.internalName == "PeanutG");
+                        break;
+                    case BeanstalkingBonusType.ButterBar:
+                        item = goldenFoods.find(food => food.internalName == "ButterBar");
+                        break;
+                    default:
+                        item = goldenFoods.find(food => food.internalName == `FoodG${index-1}`);
+                        break;
+                }
+                if(item) {
+                    const level = beanStalkingData[index];
+
+                    sneaking.beanstalking.bonuses.push(new BeanstalkingBonus(index, level, item));
+                }
+            }
+        });
+        sneaking.beanstalking.unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 1)?.purchased ?? false;
+        sneaking.beanstalking.supersizedUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 2)?.purchased ?? false;
     }
 
     updatePlayersActivity = () => {
