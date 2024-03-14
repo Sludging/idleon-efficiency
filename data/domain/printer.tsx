@@ -153,10 +153,11 @@ export const updatePrinter = (data: Map<string, any>) => {
     })
 
     const daysSinceLastPrint = optLacc[125];
-    const pristineBonus = (sneaking.pristineCharms.find(charm => charm.index == 15)?.unlocked ?? false) ? 25 : 0;
+    const pristineCharm15 = sneaking.pristineCharms.find(charm => charm.index == 15);
     printer.samples.flatMap(player => player).forEach(sample => {
         sample.artifactBoost = sailing.artifacts[4].getBonus() * daysSinceLastPrint
         sample.skillMasteryBoost = skillMastery.getTotalBonusByIndex(5);
+        sample.pristineCharmBoost = (pristineCharm15 && pristineCharm15.unlocked) ? pristineCharm15.data.x1 : 0;
     });
 
     const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()

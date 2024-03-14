@@ -308,11 +308,11 @@ export function updateStamps(data: Map<string, any>) {
     const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
  
     const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
-    const pristineCharmBonus = (sneaking.pristineCharms.find(charm => charm.index == 17)?.unlocked ?? false) ? 1.25 : 1;
+    const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.index == 17);
     const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
     allButMisc.forEach(stamp => {
         stamp.labMultiplier = labBonus;
-        stamp.pristineCharmMultiplier = pristineCharmBonus;
+        stamp.pristineCharmMultiplier = (pristineCharm17 && pristineCharm17.unlocked) ? (1 + pristineCharm17.data.x1 / 100) : 1;
     })
 
     const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 5)?.purchased ?? false;

@@ -13,7 +13,7 @@ import { Lab } from '../lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../stamps';
 import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
-import { JadeUpgrade, Sneaking } from "./sneaking";
+import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
@@ -676,9 +676,9 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
-    const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
+    const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.index == 11);
     const starSignBonus67 = starSigns.isStarSignUnlocked("O.G. Signalais") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
-    farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
+    farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67);
     
     farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
 
