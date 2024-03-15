@@ -7,6 +7,7 @@ import { Item } from "./items";
 import { DreamChallengeModel } from "./model/dreamChallengeModel";
 import { DreamUpgradeModel } from "./model/dreamUpgradeModel";
 import { ImageData } from './imageData';
+import { TotalizerBonus } from "./worship";
 
 class Challenge {
     complete: boolean = false;
@@ -122,7 +123,7 @@ class Upgrade {
     }
 }
 
-export const isFoodLust = (x: Upgrade): x is FoodLust => "bossesKilled" in x
+export const isFoodLust = (x: Upgrade): x is FoodLust => "bossesKilled" in x;
 
 export class FoodLust extends Upgrade {
     bossesKilled: number = 0; // Stored at optionslist [193]
@@ -150,6 +151,22 @@ export class FoodLust extends Upgrade {
         const bonusValue = this.getBonus();
         const extraText = this.isCapped() ? `Max discount` : `${this.bossesKilled} bosses killed`;
         return `Meal Cost: ${nFormatter(bonusValue * 100)}% (${extraText})`
+    }
+}
+
+export const isMetalDetector = (x: Upgrade): x is MetalDetector => "nuggetsDugSinceBestNugget" in x;
+
+export class MetalDetector extends Upgrade {
+    nuggetsDugSinceBestNugget: number = 0; // Stored at optionslist [192]
+
+    getTotalBonus = () => {
+        return 1 + (this.getBonus() * this.nuggetsDugSinceBestNugget) / 100;
+    }
+
+    override getBonusText = () => {
+        const bonusValue = this.getBonus();
+        const totaBonusValue = this.getTotalBonus();
+        return `Total Bonus: x${nFormatter(totaBonusValue)} Nug Size (${bonusValue}% per small nug)`
     }
 }
 
@@ -188,6 +205,7 @@ export class Equinox extends Domain {
         this.upgrades = initDreamUpgradeRepo().map(upgrade => {
             switch (upgrade.index) {
                 case 9: return new FoodLust(upgrade.index, upgrade.data)
+                case 7: return new MetalDetector(upgrade.index, upgrade.data)
                 default: return new Upgrade(upgrade.index, upgrade.data)
             }
         });
@@ -229,6 +247,7 @@ export class Equinox extends Domain {
         equinox.activeChallenges = equinox.challenges.filter(challenge => !challenge.complete).slice(0, this.numberOfActiveChallenges);
 
         (equinox.upgrades[9] as FoodLust).bossesKilled = optionList[193];
+        (equinox.upgrades[7] as MetalDetector).nuggetsDugSinceBestNugget = optionList[192];
     }
 
     static cloudImageData = (): ImageData => {

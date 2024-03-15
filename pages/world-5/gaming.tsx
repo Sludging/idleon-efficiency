@@ -34,7 +34,7 @@ function Gaming() {
         }
 
         return gaming.getNuggetRange();
-    }, [gaming])
+    }, [gaming, gaming?.equinoxBonustoNuggets])
 
     if (!gaming) {
         return (

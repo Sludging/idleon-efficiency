@@ -6,6 +6,7 @@ import { Construction } from "./construction";
 import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { GamingUpgradeBase, initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
+import { Equinox, MetalDetector } from "./equinox";
 import { Item } from "./items";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
@@ -64,6 +65,8 @@ export class Gaming extends Domain {
     rawGamingData: any[] = [];
     rawSproutData: number[][] = [];
 
+    equinoxBonustoNuggets: number = 1;
+
     getCurrentWater = (): number => {
         return Math.floor(Math.pow(this.rawSproutData[25][1] * (1 + this.importBoxes[0].getBonus() / 100) / 3600, .75));
     }
@@ -88,8 +91,8 @@ export class Gaming extends Domain {
 
     getNuggetRange = (): number[] => {
         const boxUpgrade = this.importBoxes[1].getBonus();
-        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64));
-        const minStat = boxUpgrade * (1 / Math.pow(1, .64));
+        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64)) * this.equinoxBonustoNuggets;
+        const minStat = boxUpgrade * (1 / Math.pow(1, .64)) * this.equinoxBonustoNuggets;
         return [minStat, maxStat];
     }
 
@@ -135,6 +138,9 @@ export class Gaming extends Domain {
 
 export const updateGaming = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
+    const equinox = data.get("equinox") as Equinox;
+
+    gaming.equinoxBonustoNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
 
     return gaming;
 }
