@@ -130,12 +130,17 @@ declare const window: Window &
 
 // Ad related things
 var pwUnits = [
-  // TODO: Add left/right rails
   {
     type: 'bottom_rail'
   },
   {
     type: 'corner_ad_video'
+  },
+  {
+    type: 'left_rail'
+  },
+  {
+    type: 'right_rail'
   }
 ]
 
@@ -233,14 +238,17 @@ function MyApp({ Component, pageProps }: AppProps) {
           __html: `
             var init = function () {
               window.ramp
-                // pass in the array 'pwUnits' defined right above
-                .addUnits(${JSON.stringify(pwUnits)})
+                .destroyUnits('all')
                 .then(() => {
-                  window.ramp.displayUnits()
-                }).catch((e) => {
-                  // catch errors
-                  window.ramp.displayUnits()
-                  console.log(e)
+                  // pass in the array 'pwUnits' defined right above
+                  .addUnits(${JSON.stringify(pwUnits)})
+                  .then(() => {
+                    window.ramp.displayUnits()
+                  }).catch((e) => {
+                    // catch errors
+                    window.ramp.displayUnits()
+                    console.log(e)
+                  })
                 })
             }
             window.ramp.que.push(init);
