@@ -1,7 +1,9 @@
 import { letterToNumber, range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
+import { Arcade } from "./arcade";
 import { AtomCollider } from "./atomCollider";
 import { Domain, RawData } from "./base/domain";
+import { Bribe } from "./bribes";
 import { Construction } from "./construction";
 import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
@@ -67,6 +69,10 @@ export class Gaming extends Domain {
 
     equinoxBonustoNuggets: number = 1;
 
+    bribeBonusToShovelSpeed: number = 0;
+    islandExpeditionBonusToShovelSpeed: number = 0;
+    arcadeBonusToShovelSpeed: number = 0;
+
     getCurrentWater = (): number => {
         return Math.floor(Math.pow(this.rawSproutData[25][1] * (1 + this.importBoxes[0].getBonus() / 100) / 3600, .75));
     }
@@ -79,7 +85,8 @@ export class Gaming extends Domain {
     }
 
     getShovelCount = (): number => {
-        return Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44));
+        const baseShovelCount = Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44));
+        return Math.round(baseShovelCount * (1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed)) / 100);
     }
 
     getNextShovelTime = (): number => {
@@ -139,8 +146,14 @@ export class Gaming extends Domain {
 export const updateGaming = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
     const equinox = data.get("equinox") as Equinox;
+    const bribes = data.get("bribes") as Bribe[];
+    const arcade = data.get("arcade") as Arcade;
 
     gaming.equinoxBonustoNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
+
+    gaming.bribeBonusToShovelSpeed = bribes.find(bribe => bribe.bribeIndex == 37)?.value ?? 0;
+    gaming.islandExpeditionBonusToShovelSpeed = 0; // TODO : update this once island expeditions are supported in IE, should be 25 if activated
+    gaming.arcadeBonusToShovelSpeed = arcade.bonuses.find(bonus => bonus.effect == "+{% Nugget Regen")?.getBonus() ?? 0;;
 
     return gaming;
 }
