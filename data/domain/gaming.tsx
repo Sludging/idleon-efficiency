@@ -84,17 +84,17 @@ export class Gaming extends Domain {
         return absoluteTimeToNextWater - this.rawSproutData[25][1];
     }
 
+    getShovelSpeedBonus = (): number => {
+        return 1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100;
+    }
+
     getShovelCount = (): number => {
-        const baseShovelCount = Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44));
-        const bonus = 1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100;
-        return Math.round(baseShovelCount * bonus);
+        return Math.round(Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44)) * this.getShovelSpeedBonus());
     }
 
     getNextShovelTime = (): number => {
-        const bonus = 1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100;
-
         // Math in seconds.
-        const absoluteTimeToNextShovel = Math.pow((this.getShovelCount() + 1)/bonus, 25 / 11) * 3600;
+        const absoluteTimeToNextShovel = Math.pow((this.getShovelCount() + 1) / this.getShovelSpeedBonus(), 25 / 11) * 3600;
 
         return absoluteTimeToNextShovel - this.rawSproutData[26][1];
     }
