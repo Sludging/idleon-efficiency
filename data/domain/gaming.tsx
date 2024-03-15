@@ -86,7 +86,8 @@ export class Gaming extends Domain {
 
     getShovelCount = (): number => {
         const baseShovelCount = Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44));
-        return Math.round(baseShovelCount * (1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100));
+        const bonus = 1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100;
+        return Math.round(baseShovelCount * bonus);
     }
 
     getNextShovelTime = (): number => {
