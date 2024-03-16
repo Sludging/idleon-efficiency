@@ -18,6 +18,7 @@ import { Player } from "./player"
 import { SkillsIndex } from "./SkillsIndex"
 import { Storage } from "./storage"
 import { TaskBoard } from "./tasks"
+import { Sneaking } from "./world-6/sneaking"
 
 export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
 
@@ -30,6 +31,7 @@ export class MainframeBonus {
     name: string
     description: string
 
+    unlocked: boolean = false;
     active: boolean = false;
 
     constructor(public index: number, data: LabBonusModel) {
@@ -40,6 +42,9 @@ export class MainframeBonus {
         this.bonusOff = data.bonusOn;
         this.name = data.name;
         this.description = data.description;
+        if (index < 14) {
+            this.unlocked = true;
+        }
     }
 
     getImageData = (): ImageData => {
@@ -70,6 +75,8 @@ export class MainframeBonus {
                 case 9: return new FungiFingerBonus(bonus.index, bonus.data);
                 case 11: return new UnadulteratedBankingBonus(bonus.index, bonus.data);
                 case 13: return new ViralConnectionBonus(bonus.index, bonus.data);
+                case 15: return new SlabSovereigntyBonus(bonus.index, bonus.data);
+                case 17: return new DepotStudiesPhD(bonus.index, bonus.data);
                 default: return new MainframeBonus(bonus.index, bonus.data);
             }
         });
@@ -119,6 +126,22 @@ export class ViralConnectionBonus extends MainframeBonus {
 export class SpelunkerObolBonus extends MainframeBonus {
     override getRange = () => {
         return 80;
+    }
+}
+
+export class SlabSovereigntyBonus extends MainframeBonus {
+    jewelBoost: number = 0;
+
+    override getBonus = () => {
+        return (this.bonusOn + this.jewelBoost);
+    }
+}
+
+export class DepotStudiesPhD extends MainframeBonus {
+    jewelBoost: number = 0;
+
+    override getBonus = () => {
+        return (this.bonusOn + this.jewelBoost);
     }
 }
 
@@ -407,7 +430,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
 
     lab.bonuses.filter(bonus => !bonus.active).forEach(bonus => {
         const inRange = lab.getDistance(playerCords.x, playerCords.y, bonus.x, bonus.y) < bonus.getRange(connectionRangeBonus, extraPxFromBonuses);
-        if (inRange) {
+        if (inRange && bonus.unlocked) {
             bonus.active = true;
             hasImpact = true;
         }
@@ -436,6 +459,12 @@ export const updateLab = (data: Map<string, any>) => {
     const taskBoard = data.get("taskboard") as TaskBoard;
     const divinity = data.get("divinity") as Divinity;
     const equinox = data.get("equinox") as Equinox; // only care about parse data, i.e. upgrade level.
+    const sneaking = data.get("sneaking") as Sneaking;
+
+    lab.bonuses[14].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 8)?.purchased ?? false;
+    lab.bonuses[15].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 9)?.purchased ?? false;
+    lab.bonuses[16].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 10)?.purchased ?? false;
+    lab.bonuses[17].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 11)?.purchased ?? false;
 
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
@@ -546,11 +575,19 @@ export const updateLab = (data: Map<string, any>) => {
     (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     // Emerald Rhombol
     if (lab.jewels[13].active) {
-        (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus()
-
+        (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus();
     }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
 
+    // Emerald Rhombol
+    if (lab.jewels[18].active) {
+        (lab.bonuses[15] as SlabSovereigntyBonus).jewelBoost = lab.jewels[18].getBonus();
+    }
+
+    // Emerald Rhombol
+    if (lab.jewels[20].active) {
+        (lab.bonuses[17] as DepotStudiesPhD).jewelBoost = lab.jewels[20].getBonus();
+    }
 
     return lab;
 }

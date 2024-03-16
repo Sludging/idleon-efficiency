@@ -123,7 +123,7 @@ function MainframeDisplay() {
                                     heading={bonus.name}
                                 >
                                     <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} border={bonus.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined}>
-                                        <Box title={bonus.name}>
+                                        <Box title={bonus.name} style={{ opacity: bonus.unlocked ? 1 : 0.5, filter: bonus.unlocked ? 'grayscale(0)' : 'grayscale(70%)' }}>
                                             <IconImage data={bonus.getImageData()} />
                                         </Box>
                                     </ShadowBox>
