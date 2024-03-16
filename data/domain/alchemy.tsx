@@ -355,7 +355,7 @@ export class Vial {
     }
 
     getNumberToRoll = () => {
-        return 100 - vialPercentages[this.vialIndex];
+        return 100 - vialPercentages[this.vialIndex < vialPercentages.length ? this.vialIndex : vialPercentages.length - 1];
     }
 
     getMaterialCost = (): Map<Item, number> => {
