@@ -2,7 +2,7 @@ import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
 import { Statues, updateStatueBonuses } from './statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayers } from './player';
-import { Alchemy, updateAlchemy } from './alchemy';
+import { Alchemy, updateAlchemy, updateAlchemySlabBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -36,9 +36,9 @@ import { Divinity, updateDivinity } from './divinity';
 import { Sailing, updateMinTravelTime, updateSailing } from './sailing';
 import { Gaming, updateGaming, updateSuperbitImpacts } from './gaming';
 import { AtomCollider, updateAtomCollider } from './atomCollider';
-import { updateArtifacts } from './sailing/artifacts';
+import { updateArtifacts, updateSailingArtifactSlabBoost } from './sailing/artifacts';
 import { Constellations } from './constellations';
-import { Slab } from './slab';
+import { Slab, updateSlabBonusDisplay } from './slab';
 import { Capacity, updateCapacity } from './capacity';
 import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './deathnote';
 import parseCompanions, { updateCompanionImpact } from './companions';
@@ -196,6 +196,8 @@ const postProcessingMap: Record<string, Function> = {
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
+    "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
+    "alchemySlabBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemySlabBubbles(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
@@ -224,6 +226,7 @@ const postProcessingMap: Record<string, Function> = {
 const postPostProcessingMap: Record<string, Function> = {
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
+    "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),

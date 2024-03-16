@@ -4,7 +4,7 @@ import { CaptainBonusBase, initCaptainBonusRepo } from './data/CaptainBonusRepo'
 import { CaptainBonusModel } from './model/captainBonusModel';
 import { ImageData } from "./imageData";
 import { IslandInfoModel } from "./model/islandInfoModel";
-import { Artifact } from "./sailing/artifacts";
+import { Artifact, SlabInfluencedArtifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
 import { Sigils } from "./sigils";
 import { Divinity } from "./divinity";
@@ -24,6 +24,7 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Worship, TotalizerBonus } from "./worship";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
+import { Slab, SlabBonusesText } from "./slab";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -374,7 +375,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus) / 125);
+        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
@@ -386,7 +387,6 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.speedBaseMath = speedBaseMath;
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
     });
-
 
     return sailing;
 }

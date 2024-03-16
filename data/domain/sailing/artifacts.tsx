@@ -3,6 +3,7 @@ import { AtomCollider } from "../atomCollider";
 import { Cooking } from "../cooking";
 import { ArtifactBase } from "../data/ArtifactRepo";
 import { ImageData } from "../imageData";
+import { Lab, SlabSovereigntyBonus } from "../lab";
 import { ArtifactModel } from "../model/artifactModel";
 import { Player } from "../player";
 import { Sailing } from "../sailing";
@@ -163,9 +164,10 @@ export class GoldRelicArtifact extends Artifact {
 
 export class SlabInfluencedArtifact extends Artifact {
     lootyCount: number = 0;
+    slabSoverignBonus: number = 1;
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier();
+            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier() * this.slabSoverignBonus;
         }
 
         return 0;
@@ -351,4 +353,16 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[29] as TheTrueLanternArtifact).particlesOwned = collider.particles;
 
     return sailing.artifacts;
+}
+
+export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const lab = data.get("lab") as Lab;
+
+    const sovereignBonus = lab.bonuses[15].active ? (1 + (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() / 100) : 1;
+
+    (sailing.artifacts[2] as SlabInfluencedArtifact).slabSoverignBonus = sovereignBonus;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).slabSoverignBonus = sovereignBonus;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).slabSoverignBonus = sovereignBonus;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).slabSoverignBonus = sovereignBonus;
 }

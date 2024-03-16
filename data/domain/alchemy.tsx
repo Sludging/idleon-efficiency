@@ -17,6 +17,7 @@ import { TaskBoard } from './tasks';
 import { Rift } from './rift';
 import { Domain, RawData } from './base/domain';
 import { MapInfo } from './maps';
+import { Slab } from './slab';
 
 export enum CauldronIndex {
     Power = 0,
@@ -168,6 +169,28 @@ export class Bubble {
 
 }
 
+export class ImpactedBySlabBubble extends Bubble {
+    lootyCount: number = 0;
+
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new ImpactedBySlabBubble(id, data, iconPrefix, bubbleIndex);
+    }
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+    // Math.floor(this.lootyCount / 100)
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
+    }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let titleText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        titleText += ` (${this.lootyCount} items found = ${bonus.toString()} bonus stats)`;
+        return handleToolBubbles(titleText, this.name);
+    }
+}
+
 export class DiamonChefBubble extends Bubble {
     diamonMeals: number = 0;
 
@@ -261,6 +284,9 @@ export class Cauldron {
             }
             else if (bubble.name == "Cropius Mapper") {
                 toReturn.bubbles.push(CropiusMapperBubble.fromBase(bubble.name, bubble, iconPrefix, index));
+            }
+            else if (["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.bonusKey)) {
+                toReturn.bubbles.push(ImpactedBySlabBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.name, bubble, iconPrefix, index));
@@ -591,6 +617,18 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
             }
         })
     })
+}
+
+
+export function updateAlchemySlabBubbles(data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const slab = data.get("slab") as Slab;
+
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.data.bonusKey))).forEach(bubble => {
+        (bubble as ImpactedBySlabBubble).lootyCount = slab.rawObtainedCount;
+    })
+
+    return alchemy;
 }
 
 export function updateAlchemy(data: Map<string, any>) {
