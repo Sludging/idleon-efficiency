@@ -48,7 +48,7 @@ import { Rift } from './rift';
 import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
-import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningPristineCharm } from './world-6/summoning';
+import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateStarSignsUnlocked } from './starsigns';
 
@@ -202,12 +202,13 @@ const postProcessingMap: Record<string, Function> = {
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
-    "summoningPristineCharm": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningPristineCharm(accountData),
+    "summoningPristineCharm": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
+    "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
@@ -233,7 +234,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
-    "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
 }
 

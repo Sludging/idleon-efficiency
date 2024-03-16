@@ -13,6 +13,7 @@ import { Sneaking } from "./sneaking";
 import { nFormatter } from "../../utility";
 import { Deathnote, deathNoteMobOrder } from '../deathnote';
 import { SummonEnemyModel } from "../model/summonEnemyModel";
+import { Sailing } from "../sailing";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -95,13 +96,14 @@ export class SummonUpgrade {
 export class SummonBonus {
     bonusValue: number = 0;
     pristineCharmBonus: number = 1;
+    artifactBonus: number = 1;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
     }
 
     getBonus = (): number => {
-        return 3.5 * this.bonusValue * this.pristineCharmBonus;
+        return 3.5 * this.bonusValue * this.pristineCharmBonus * this.artifactBonus;
     }
 
     getBonusText = (): string => {
@@ -401,13 +403,16 @@ export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => 
     summoning.updateSecondaryBonus();
 }
 
-export const updateSummoningPristineCharm = (data: Map<string, any>) => {
+export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
+    const sailing = data.get("sailing") as Sailing;
 
     const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
-    if (crystalComb && crystalComb.unlocked) {
-        const bonusValue = (1 + crystalComb.data.x1 / 100);
-        summoning.summonBonuses.forEach(bonus => bonus.pristineCharmBonus = bonusValue);
-    }
+    const charmBonus = (crystalComb && crystalComb.unlocked) ? (1 + crystalComb.data.x1 / 100) : 1;
+    const sailingArtifactBonus = 1 + sailing.artifacts[32].getBonus() / 100;
+    summoning.summonBonuses.forEach(bonus => {
+        bonus.pristineCharmBonus = charmBonus;
+        bonus.artifactBonus = sailingArtifactBonus;
+    });
 }

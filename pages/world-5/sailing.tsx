@@ -282,7 +282,7 @@ function ArtifactDisplay() {
                                         label="ANCIENT BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.ancientBonus}
                                         margin={{bottom: 'small'}}
                                     />
@@ -290,8 +290,16 @@ function ArtifactDisplay() {
                                         label="ELDRITCH BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.eldritchBonus!}
+                                        margin={{ bottom: 'small' }}
+                                    />
+                                    <TextAndLabel
+                                        label="SOVEREIGN BONUS"
+                                        labelSize='xsmall'
+                                        textSize='12px'
+                                        textColor={[ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        text={artifact.data.sovereignBonus!}
                                     />
                                 </Box>
                             </Box>

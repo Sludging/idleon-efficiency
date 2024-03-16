@@ -17,6 +17,7 @@ import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
+import { Sailing } from "../sailing";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -277,7 +278,7 @@ export class CropScientist {
             switch (bonus.bonusText) {
                 case CropScientistBonusText.CookingSpeed:
                 case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + bonusFromLabBonus17 / 100);
                     break;
                 case CropScientistBonusText.ShinyPetLvlUpRate:
                 case CropScientistBonusText.CashBonus:
@@ -285,7 +286,7 @@ export class CropScientist {
                 case CropScientistBonusText.TotalDamage:
                 case CropScientistBonusText.BaseCritterPerTrap:
                 default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + bonusFromLabBonus17 / 100);
                     break;
             }
         })
