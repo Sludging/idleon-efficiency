@@ -132,6 +132,7 @@ export class IdleonData {
     private lastUpdated: Date
 
     public initialized: boolean = false;
+    public lastModified: Date = new Date();
 
     constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
@@ -250,7 +251,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
 }
 
-export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
