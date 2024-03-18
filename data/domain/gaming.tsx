@@ -9,6 +9,7 @@ import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { GamingUpgradeBase, initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
 import { Equinox, MetalDetector } from "./equinox";
+import { IslandExpeditions } from "./islandExpedition";
 import { Item } from "./items";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
@@ -151,11 +152,12 @@ export const updateGaming = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const bribes = data.get("bribes") as Bribe[];
     const arcade = data.get("arcade") as Arcade;
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
 
     gaming.equinoxBonustoNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
 
     gaming.bribeBonusToShovelSpeed = bribes.find(bribe => bribe.bribeIndex == 37)?.value ?? 0;
-    gaming.islandExpeditionBonusToShovelSpeed = 0; // TODO : update this once island expeditions are supported in IE, should be 25 if activated
+    gaming.islandExpeditionBonusToShovelSpeed = islandExpeditions.bonusToShovelSpeed;
     gaming.arcadeBonusToShovelSpeed = arcade.bonuses.find(bonus => bonus.effect == "+{% Nugget Regen")?.getBonus() ?? 0;;
 
     return gaming;

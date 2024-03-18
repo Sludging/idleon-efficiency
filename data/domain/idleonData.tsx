@@ -51,6 +51,7 @@ import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateStarSignsUnlocked } from './starsigns';
+import { IslandExpeditions } from './islandExpedition';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -122,7 +123,8 @@ const domainList: Domain[] = [
     new Sneaking("sneaking"),
     new Summoning("summoning"),
     new Farming("farming"),
-    new StarSigns("starsigns")
+    new StarSigns("starsigns"),
+    new IslandExpeditions("islandExpeditions"),
 ]
 
 export class IdleonData {

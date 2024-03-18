@@ -23,6 +23,7 @@ import { Summoning } from "./world-6/summoning";
 import { Arcade } from "./arcade";
 import { Sneaking } from "./world-6/sneaking";
 import { StarSigns } from "./starsigns";
+import { IslandExpeditions } from './islandExpedition';
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -261,9 +262,10 @@ export class Kitchen {
         return Math.floor(2 * this.index + upgradeType);
     }
 
-    getSpiceUpgradeCost = (alchemyBonus: number, mealCostBonus: number, petBonusActive: boolean, upgradeType: UpgradeType, sigilBonus: number) => {
+    getSpiceUpgradeCost = (alchemyBonus: number, mealCostBonus: number, petBonusActive: boolean, upgradeType: UpgradeType, sigilBonus: number, islandEpeditionBonus: number) => {
         const baseMath = 1 /
             ((1 + (alchemyBonus + sigilBonus) / 100) *
+                (1 + islandEpeditionBonus / 100) *
                 (1 + mealCostBonus / 100) *
                 (1 + (this.richelin ? 40 : 0) / 100) *
                 (1 + (0.5 * (petBonusActive ? 1 : 0))))
@@ -487,6 +489,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sneaking = data.get("sneaking") as Sneaking;
     const starSigns = data.get("starsigns") as StarSigns;
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -556,6 +559,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const kitchenCosts = alchemy.vials.filter(vial => vial.description.includes("Kitchen Upgrading Cost")).reduce((sum, vial) => sum += vial.getBonus(), 0);
     const mealKitchenCosts = cooking?.meals.filter(meal => meal.bonusKey == "KitchC").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const arenaBonusActive = breeding.hasBonus(7);
+    const islandExpeditionReduction = islandExpeditions.reductionToKitchenCosts;
 
     let totalContribution = 0;
     cooking.kitchens.forEach((kitchen, index) => {
@@ -565,9 +569,9 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, trollCardBonus, kitchenEfficientBonus, diamonChef, atomBonus, worshipBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 
-        kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed, sigils.sigils[18].getBonus());
-        kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire, sigils.sigils[18].getBonus());
-        kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck, sigils.sigils[18].getBonus());
+        kitchen.speedUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Speed, sigils.sigils[18].getBonus(), islandExpeditionReduction);
+        kitchen.fireUpgradeCost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Fire, sigils.sigils[18].getBonus(), islandExpeditionReduction);
+        kitchen.luckUpgradecost = kitchen.getSpiceUpgradeCost(kitchenCosts, mealKitchenCosts, arenaBonusActive, UpgradeType.Luck, sigils.sigils[18].getBonus(), islandExpeditionReduction);
 
         // if actively cooking
         if (kitchen.activeMeal != -1) {
