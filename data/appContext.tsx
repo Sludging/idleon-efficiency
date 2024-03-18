@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+'use client'
+
+import React, { useState, useMemo, useEffect } from 'react';
 import { getApp } from 'firebase/app';
 import { useContext } from 'react';
 import { AuthContext, AuthStatus } from './firebase/authContext';
 
 import { sendEvent } from '../lib/gtag';
 
-
 import { FirestoreData } from './firebase/data';
 import { initAllItems } from './domain/items';
 import { Cloudsave } from './domain/cloudsave';
 import { IdleonData, initAccountDataKeys, updateIdleonData } from './domain/idleonData';
+import { getSubDomain, isSubDomain } from './utility';
+import useSWR from 'swr';
+import { fetcher } from './fetchers/getProfile';
 
 export enum AppStatus {
   Init,
@@ -45,25 +49,26 @@ Known paths:
 1. _uid/${user.uid} = character names
 */
 
+const allItems = initAllItems();
+const initData = initAccountDataKeys(new Map(), allItems);
+const idleonData = new IdleonData(initData, new Date());
+idleonData.initialized = true;
 
 
-export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, accountData: Map<string, any>, children?: React.ReactNode }> = ({ appLoading, data, domain, accountData, children }) => {
-  // This section is called multiple times so I used memos, is that .. an issue?
-  const allItems = useMemo(() => initAllItems(), []);
-  useMemo(() => initAccountDataKeys(accountData, allItems), []);
-
-  const [idleonData, setData] = useState<IdleonData>(new IdleonData(accountData, new Date()));
+export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [appStatus, setAppStatus] = useState<AppStatus>(AppStatus.Ready);
   const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.Init);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
+  const [currentDomain, setCurrentDomain] = useState<string>("");
   const authContext = useContext(AuthContext);
   const user = authContext?.user;
 
-  const handleStaticData = useCallback(async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
+  const handleStaticData = async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
     setDataStatus(DataStatus.Loading);
     const cloudsave = Cloudsave.fromJSON(data.data)
-    const newData = await updateIdleonData(idleonData.getData(), cloudsave, data.charNames, [], allItems, {}, true);
-    setData(newData);
+    console.log("Handle Static", idleonData, cloudsave)
+    updateIdleonData(idleonData.getData(), cloudsave, data.charNames, [], allItems, {}, true);
+    idleonData.setLastUpdated(idleonData.getData().get("lastUpdated") as Date);
     sendEvent({
       action: "handle_static",
       category: "engagement",
@@ -71,12 +76,12 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
       value: 1,
     });
     setDataStatus(DataStatus.StaticData);
-  }, [appStatus, dataStatus]);
+  };
 
-  const handleLiveData = async (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
+  const handleLiveData = (cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
     setDataStatus(DataStatus.Loading);
-    const newData = await updateIdleonData(idleonData.getData(), cloudsave, charNames, companions, allItems, serverVars, false);
-    setData(newData);
+    updateIdleonData(idleonData.getData(), cloudsave, charNames, [], allItems, {}, true);
+    idleonData.setLastUpdated(idleonData.getData().get("lastUpdated") as Date);
     sendEvent({
       action: "handle_snapshot",
       category: "engagement",
@@ -88,41 +93,47 @@ export const AppProvider: React.FC<{ appLoading: boolean, data: { data: Map<stri
 
   useEffect(() => {
     // Don't do anything while the auth is still being figured out.
-    if (authContext?.authStatus == AuthStatus.Loading) {
-      return;
+    if (authContext?.authStatus != AuthStatus.Loading) {
+      const subDomain = isSubDomain();
+      const domain = getSubDomain();
+      const app = getApp();
+      // Regular usage, and firestore hasn't been initialised yet.
+      if (!subDomain && !fireStore && AuthStatus.Valid && user) {
+        setFireStore(new FirestoreData(user.uid, app, handleLiveData));
+      }
+      // Domain has been provided, it's valid and the profile data hasn't been parsed yet.
+      else if (subDomain && domain != currentDomain && dataStatus != DataStatus.StaticData) {
+        fetcher(domain)
+          .then(value => {
+            const { data, charNames, domain } = value;
+            // If there's no data, it's an invalid profile
+            if (!data || data.size == 0) {
+              setAppStatus(AppStatus.InvalidProfile);
+            }
+            else { // Else, we have data we need to parse.
+              handleStaticData(domain, { data: data, charNames: charNames as string[] });
+            }
+          })
+        setCurrentDomain(domain);
+      }
+      // No domain and no logged in user, we have no data.
+      if (!subDomain && authContext?.authStatus == AuthStatus.NoUser) {
+        setDataStatus(DataStatus.NoData);
+      }
+      // No domain, there's a valid user but we have no actual data. Probably wrong account?
+      if (!subDomain && authContext?.authStatus == AuthStatus.Valid && dataStatus == DataStatus.NoData) {
+        setDataStatus(DataStatus.MissingData);
+      };
     }
+  }, [authContext, appStatus,dataStatus]);
 
-    const app = getApp();
-    // Regular usage, and firestore hasn't been initialised yet.
-    if (!domain && !fireStore && AuthStatus.Valid && user) {
-      setFireStore(new FirestoreData(user.uid, app, handleLiveData));
-    }
-    // Domain has been provided, it's valid and the profile data hasn't been parsed yet.
-    else if (domain && domain != "" && dataStatus != DataStatus.StaticData) {
-      // If there's no data, it's an invalid profile
-      if (!data || data.data.size == 0) {
-        setAppStatus(AppStatus.InvalidProfile);
-      }
-      else { // Else, we have data we need to parse.
-        handleStaticData(domain, data);
-      }
-    }
-    // No domain and no logged in user, we have no data.
-    if (!domain && authContext?.authStatus == AuthStatus.NoUser) {
-      setDataStatus(DataStatus.NoData);
-    }
-    // No domain, there's a valid user but we have no actual data. Probably wrong account?
-    if (!domain && authContext?.authStatus == AuthStatus.Valid && dataStatus == DataStatus.NoData) {
-      setDataStatus(DataStatus.MissingData);
-    }
-  }, [domain, user, authContext, data, appLoading]);
 
   const contextValue = useMemo(() => ({
     data: idleonData,
     status: appStatus,
     dataStatus: dataStatus,
-    profile: domain
-  }), [idleonData, appStatus, dataStatus, domain]);
+    profile: currentDomain
+  }), [idleonData, appStatus, dataStatus, currentDomain]);
 
   return (
     <AppContext.Provider value={contextValue}>

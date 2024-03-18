@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
 import { EmptyCircle, Tools, UserSettings, BarChart, CircleInformation } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
