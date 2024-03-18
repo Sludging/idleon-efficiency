@@ -15,6 +15,7 @@ import { customHandCraftedListOfUnobtainableItems, Slab as SlabDomain } from '..
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { NoteModel } from '../../data/domain/model/noteModel';
 import ShadowBox from '../../components/base/ShadowBox';
+import { nFormatter } from '../../data/utility';
 
 
 
@@ -99,7 +100,7 @@ function Slab() {
                                                 label={bonus.type}
                                                 component={
                                                     <Box gap="small" direction="row" align="center">
-                                                        <Text size="small">{`+${bonus.bonus}%`}</Text>
+                                                        <Text size="small">{`+${Math.ceil(bonus.bonus)}%`}</Text>
                                                     </Box>
                                                 }
                                             />

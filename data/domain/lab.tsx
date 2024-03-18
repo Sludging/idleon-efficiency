@@ -19,6 +19,7 @@ import { SkillsIndex } from "./SkillsIndex"
 import { Storage } from "./storage"
 import { TaskBoard } from "./tasks"
 import { Sneaking } from "./world-6/sneaking"
+import { Summoning } from "./world-6/summoning"
 
 export const chipSlotReq = [5, 10, 15, 25, 35, 50, 75];
 
@@ -68,7 +69,7 @@ export class MainframeBonus {
     }
 
     static fromBase(data: LabBonusBase[]): MainframeBonus[] {
-        return data.map(bonus => {
+        const bonuses = data.map(bonus => {
             switch (bonus.index) {
                 case 0: return new AnimalFarmBonus(bonus.index, bonus.data);
                 case 8: return new SpelunkerObolBonus(bonus.index, bonus.data);
@@ -80,6 +81,9 @@ export class MainframeBonus {
                 default: return new MainframeBonus(bonus.index, bonus.data);
             }
         });
+
+        // For some reasons the bonuses are in a strange order
+        return bonuses.sort((bonus1, bonus2) => bonus1.index < bonus2.index ? -1 : 1);
     }
 }
 
@@ -124,8 +128,15 @@ export class ViralConnectionBonus extends MainframeBonus {
 }
 
 export class SpelunkerObolBonus extends MainframeBonus {
+    jewelBoost: number = 0;
+
     override getRange = () => {
         return 80;
+    }
+
+    override getBonus = () => {
+        console.log("coucou 2");
+        return this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }
 
@@ -133,7 +144,7 @@ export class SlabSovereigntyBonus extends MainframeBonus {
     jewelBoost: number = 0;
 
     override getBonus = () => {
-        return (this.bonusOn + this.jewelBoost);
+        return  this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }
 
@@ -141,7 +152,7 @@ export class DepotStudiesPhD extends MainframeBonus {
     jewelBoost: number = 0;
 
     override getBonus = () => {
-        return (this.bonusOn + this.jewelBoost);
+        return  this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }
 
@@ -178,7 +189,7 @@ export class Jewel {
     }
 
     static fromBase(data: JewelBase[]): Jewel[] {
-        return data.map(jewel => {
+        const jewels = data.map(jewel => {
             switch (jewel.index) {
                 case 0: return new AmethystRhinestoneJewel(jewel.index, jewel.data);
                 case 5: return new SapphireRhombolJewel(jewel.index, jewel.data);
@@ -186,9 +197,13 @@ export class Jewel {
                 case 10: return new PyritePyramiteJewel(jewel.index, jewel.data);
                 case 12: return new EmeraldNavetteJewel(jewel.index, jewel.data);
                 case 14: return new EmeraldPyramiteJewel(jewel.index, jewel.data);
+                case 19: return new PureOpalNavette(jewel.index, jewel.data);
                 default: return new Jewel(jewel.index, jewel.data);
             }
         });
+
+        // Like for bonuses, making sure they're in the index order
+        return jewels.sort((jewel1, jewel2) => jewel1.index < jewel2.index ? -1 : 1);
     }
 }
 
@@ -257,6 +272,20 @@ export class EmeraldPyramiteJewel extends Jewel {
     override getBonusText = () => {
         const increaseBy = this.data.bonusGiven * this.bonusMultiplier;
         return `${this.data.effect.replace(/}/g, increaseBy.toString()).replace(/{/g, this.getBonus().toString())}${this.bonusMultiplier > 1 ? ` (${this.bonusMultiplier}x multiplier from mainframe bonus)` : ""}`;
+    }
+}
+
+export class PureOpalNavette extends Jewel {
+    override getRange = () => {
+        return 80;
+    }
+
+    override getBonus = () => {
+        if (!this.active) {
+            return 0;
+        }
+
+        return this.data.bonusGiven;
     }
 }
 
@@ -330,7 +359,7 @@ export class Lab extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
-        this.bonuses = MainframeBonus.fromBase(initLabBonusRepo())
+        this.bonuses = MainframeBonus.fromBase(initLabBonusRepo());
         this.jewels = Jewel.fromBase(initJewelRepo());
         this.chips = Chip.fromBase(initChipRepo());
 
@@ -460,6 +489,7 @@ export const updateLab = (data: Map<string, any>) => {
     const divinity = data.get("divinity") as Divinity;
     const equinox = data.get("equinox") as Equinox; // only care about parse data, i.e. upgrade level.
     const sneaking = data.get("sneaking") as Sneaking;
+    const summoning = data.get("summoning") as Summoning;
 
     lab.bonuses[14].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 8)?.purchased ?? false;
     lab.bonuses[15].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 9)?.purchased ?? false;
@@ -503,7 +533,8 @@ export const updateLab = (data: Map<string, any>) => {
     if (connectionMerit) {
         extraPxFromBonuses = connectionMerit.bonusPerLevel * connectionMerit.level;
     }
-    extraPxFromBonuses += equinox.upgrades[6].getBonus()
+    extraPxFromBonuses += equinox.upgrades[6].getBonus();
+    extraPxFromBonuses += (summoning.summonBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0);
 
     // Figure out best bubo (for purple) and his bonus.
     const bestBubo = playerData.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 535)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, playerData[0]);
@@ -560,8 +591,10 @@ export const updateLab = (data: Map<string, any>) => {
         _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, buboPxBoost);
     }
 
-    const jewelMultiplier = (lab.bonuses.find(bonus => bonus.index == 8)?.active ?? false) ? 1.5 : 1;
-    lab.jewels.forEach(jewel => jewel.bonusMultiplier = jewelMultiplier);
+    (lab.bonuses[8] as SpelunkerObolBonus).jewelBoost = (lab.jewels[19].getBonus() / 100);
+    const jewelMultiplier = (lab.bonuses[8] as SpelunkerObolBonus).getBonus();
+    
+    lab.jewels.filter(jewel => jewel.index != 19).forEach(jewel => jewel.bonusMultiplier = jewelMultiplier);
 
     // Special Jewel handling
     (lab.jewels[0] as AmethystRhinestoneJewel).numberOfActivePurples = lab.jewels.filter(jewel => (jewel.data.name.includes("Amethyst") || jewel.data.name.includes("Purple")) && jewel.active).length;
@@ -572,7 +605,7 @@ export const updateLab = (data: Map<string, any>) => {
     // Special Bonus handling
     (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
 
-    (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    (lab.bonuses.find(bonus => bonus.index == 9) as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     // Emerald Rhombol
     if (lab.jewels[13].active) {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus();

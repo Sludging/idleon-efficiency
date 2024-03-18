@@ -112,7 +112,7 @@ function MainframeDisplay() {
                 <Text>Bonuses</Text>
                 <Box gap="small" direction="row" wrap>
                     {
-                        lab && lab.bonuses.sort((bonus1, bonus2) => bonus1.x < bonus2.x ? -1 : 1).map((bonus, index) => {
+                        lab && lab.bonuses.slice().sort((bonus1, bonus2) => bonus1.x < bonus2.x ? -1 : 1).map((bonus, index) => {
                             return (
                                 <TipDisplay
                                     key={index}
@@ -138,7 +138,7 @@ function MainframeDisplay() {
                 <Text>Jewels</Text>
                 <Box gap="small" direction="row" wrap>
                     {
-                        lab && lab.jewels.sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.x ? -1 : 1).map((jewel, index) => {
+                        lab && lab.jewels.slice().sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.x ? -1 : 1).map((jewel, index) => {
                             return (
                                 <Box key={index} margin={{ right: 'small', bottom: 'small' }} >
                                     <TipDisplay
