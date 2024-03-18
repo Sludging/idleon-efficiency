@@ -405,7 +405,7 @@ export class Sneaking extends Domain {
         const charCount = data.get("charCount") as number;
 
         // Old accounts won't have this data, exit early.
-        if (!ninjaData) {
+        if (!ninjaData || ninjaData.length == 0) {
             return;
         }
 

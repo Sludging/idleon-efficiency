@@ -1,3 +1,5 @@
+"use client"
+
 const Discord = ({ fill = "#283F70", width, height }: { fill?: string, width: string, height: string }) => {
     return (
         <svg width={width} height={height} viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">

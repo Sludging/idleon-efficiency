@@ -131,6 +131,8 @@ export class IdleonData {
     private data: Map<string, any>
     private lastUpdated: Date
 
+    public initialized: boolean = false;
+
     constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
         this.lastUpdated = lastUpdated;
@@ -156,6 +158,10 @@ export class IdleonData {
         }
 
         return "";
+    }
+
+    public setLastUpdated = (lastUpdated: Date) => {
+        this.lastUpdated = lastUpdated;
     }
 }
 
@@ -244,7 +250,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
 }
 
-export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
@@ -318,8 +324,4 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
     // const players = accountData.get("players") as Player[];
     // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
-
-    const newData = new IdleonData(accountData, lastUpdated);
-
-    return newData;
 }

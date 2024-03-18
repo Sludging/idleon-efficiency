@@ -10,6 +10,7 @@
     "ssl:setup": "node scripts/create-ssl-certs.js"
   },
   "dependencies": {
+    "@next/third-parties": "^14.1.3",
     "@phosphor-icons/react": "^2.0.14",
     "@sentry/nextjs": "^7.80.1",
     "@types/react-dom": "^18.2.15",

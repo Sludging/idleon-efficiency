@@ -343,3 +343,17 @@ export const letterToNumber = (char: string) => {
 export const uniqueFilter = (value: any, index: number, self: any) => {
     return self.indexOf(value) === index;
 }
+
+export const getSubDomain = () => {
+    const windowLocation = typeof window !== "undefined" ? window.location.host : ""
+    let urlDomain = windowLocation != "" ? windowLocation.split('.')[0] : "";
+
+    return urlDomain;
+}
+
+// Check if 
+export const isSubDomain = () => {
+   const urlDomain = getSubDomain();
+
+    return !["localhost:3000", "www", "preview"].includes(urlDomain);
+}

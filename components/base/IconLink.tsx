@@ -1,4 +1,6 @@
-import { Anchor, Box } from "grommet";
+"use client"
+
+import { Box } from "grommet";
 import Link from "next/link";
 import { ComponentType, createElement, useState } from "react";
 
