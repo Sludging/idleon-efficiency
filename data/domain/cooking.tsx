@@ -96,6 +96,9 @@ export class Meal {
     // Calculated
     maxLevel: number = 30;
 
+    // Jade upgrade, equivalent to No Bubbles Left Behind
+    noMealLeftBehindAffected: boolean = false;
+
     constructor(public mealIndex: number, data: MealModel) {
         this.name = data.name;
         this.cookReq = data.cookingReq;
@@ -373,6 +376,23 @@ export class Cooking extends Domain {
         return this.meals.filter(meal => meal.bonusKey == bonusKey).reduce((sum, meal) => sum += meal.getBonus(), 0);
     }
 
+    updateNoMealLeftBehind = (bonusActivated: boolean) => {
+        if (bonusActivated) {
+            let mealToUpgrade = 1;
+    
+            const sortedMeals = this.meals.filter(meal => meal.level > 5 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
+                // If same level, then go with higher meal index.
+                if (meal1.level == meal2.level) {
+                    return meal1.mealIndex > meal2.mealIndex ? -1 : 1
+                }
+                return meal1.level < meal2.level ? -1 : 1
+            });
+            sortedMeals.slice(0, mealToUpgrade).forEach(meal => meal.noMealLeftBehindAffected = true);
+        } else {
+            this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
+        }
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "Cooking", perPlayer: false, default: [] },
@@ -624,6 +644,8 @@ export const updateCooking = (data: Map<string, any>) => {
             meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
         }
     });
+
+    cooking.updateNoMealLeftBehind(sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "No Meal Left Behind")?.purchased ?? false);
 
     populateDiscovery(cooking);
 

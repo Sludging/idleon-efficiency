@@ -19,6 +19,7 @@ import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } f
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { AtomCollider } from '../../data/domain/atomCollider';
+import { Ascending } from 'grommet-icons';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -308,6 +309,10 @@ function Cooking() {
                         options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to Max"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
+                    <Box direction="row" align="center">
+                        <Ascending color="Legendary" size="large" />
+                        <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot; Jade Emporium bonus</Text>
+                    </Box>
                 </Box>
                 <Grid columns={size == "small" ? "1/2" : "1/3"}>
                     <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
@@ -384,27 +389,29 @@ function Cooking() {
                                             direction={TipDirection.Down}
                                             size='small'
                                         >
-
-
-                                            <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
-                                                <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
-                                                {meal.level > 0 ?
-                                                    <Text color={meal.level == meal.maxLevel ? '' : meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
-                                                    :
-                                                    <Box direction="row" gap="xsmall">
-                                                        {
-                                                            meal.timeOptimalSpices.map((spice, index) => (
-                                                                <IconImage key={index} data={{
-                                                                    location: `CookingSpice${spice}`,
-                                                                    width: 36,
-                                                                    height: 36
-                                                                }} />
-                                                            ))
-                                                        }
-                                                    </Box>
+                                            <Box direction="row" align="center"  justify="between">
+                                                <Box direction="row" width="100%" justify="between" pad={!meal.noMealLeftBehindAffected ? { top: 'small' } : undefined}>
+                                                    <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                    {meal.level > 0 ?
+                                                        <Text color={meal.level == meal.maxLevel ? '' : meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
+                                                        :
+                                                        <Box direction="row" gap="xsmall">
+                                                            {
+                                                                meal.timeOptimalSpices.map((spice, index) => (
+                                                                    <IconImage key={index} data={{
+                                                                        location: `CookingSpice${spice}`,
+                                                                        width: 36,
+                                                                        height: 36
+                                                                    }} />
+                                                                ))
+                                                            }
+                                                        </Box>
+                                                    }                                                
+                                                </Box>
+                                                {
+                                                    meal.noMealLeftBehindAffected && <Ascending color="Legendary" size="40px" />
                                                 }
                                             </Box>
-
                                         </TipDisplay>
                                         <Text size="xsmall" color="grey-2">{getMealExtraText(meal)}</Text>
                                     </Box>
