@@ -9,6 +9,7 @@ import { Sailing } from "./sailing";
 import { Stamp } from "./stamps";
 import { Alchemy as AlchemyData } from '../../data/domain/alchemy';
 import { Summoning } from "./world-6/summoning";
+import { Sneaking } from "./world-6/sneaking";
 
 export class Sigil {
     progress: number = 0
@@ -17,6 +18,8 @@ export class Sigil {
     activePlayers: number = 0;
 
     artifactBoost: number = 0;
+
+    canBeIonized: boolean = false;
 
     constructor(public index: number, public data: SigilModel) { }
 
@@ -29,12 +32,12 @@ export class Sigil {
         }
     }
 
-    getBonus = () => {
-        const baseBoost = this.boostLevel == 1 ? this.data.boostBonus : this.boostLevel == 0 ? this.data.unlockBonus : 0;
+    getBonus = (): number => {
+        const baseBoost = this.boostLevel == 2 ? (this.data.x2 ?? this.data.boostBonus) : this.boostLevel == 1 ? this.data.boostBonus : this.boostLevel == 0 ? this.data.unlockBonus : 0;
         return baseBoost * (1 + this.artifactBoost);
     }
 
-    getBonusText = () => {
+    getBonusText = (): string => {
         return this.data.desc.replace(/{/, this.getBonus().toString());
     }
 
@@ -50,8 +53,8 @@ export class Sigils extends Domain {
     chargeSpeed: number = 0;
 
     // "SigilBonusSpeed" == d
-    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number, summoningBonus8: number) => {
-        this.chargeSpeed = (1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100)) * summoningBonus8;
+    setSigilSpeed = (achievBonus112: number, gemStoreBonus110: number, stampStampC12: number, vialBonus61: number, summoningBonus8: number, vialBonusTurtle: number) => {
+        this.chargeSpeed = (1 + ((achievBonus112 + stampStampC12 + this.sigils[12].getBonus() + gemStoreBonus110 + vialBonus61) / 100)) * summoningBonus8 * (1 + vialBonusTurtle / 100);
     }
 
     getRawKeys(): RawData[] {
@@ -94,10 +97,13 @@ export class Sigils extends Domain {
 export const updateSigils = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
     const sailing = data.get("sailing") as Sailing;
+    const sneaking = data.get("sneaking") as Sneaking; // Need only parsed data
     
     const artifactBonus = sailing.artifacts[16].getBonus();
+    const canBeIonized = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Ionized Sigils")?.purchased ?? false);
     sigils.sigils.forEach(sigil => {
         sigil.artifactBoost = artifactBonus;
+        sigil.canBeIonized = canBeIonized;
     })
 
     return sigils;
@@ -114,10 +120,11 @@ export const updateSigilsChargeSpeed = (data: Map<string, any>) => {
     const sigilAchiev = achievements[112].completed ? 20 : 0;
     const sigilGemBonus = (gemStore.purchases.find(purchase => purchase.no == 110)?.pucrhased ?? 0) * 20;
     const stampBonus = stampData[2]?.find(stamp => stamp.raw_name == "StampC12")?.getBonus() || 0;
-    const vialBonus = alchemy.vials?.find(vial => vial.vialIndex == 61)?.getBonus() || 0;
+    const vialBonus61 = alchemy.vials?.find(vial => vial.vialIndex == 61)?.getBonus() || 0;
+    const turtleVialBonus = alchemy.getVialBonusForKey("6turtle");
     const summoningBonus = 1 + (summoning.summonBonuses?.find(bonus => bonus.data.bonusId == 8)?.getBonus() ?? 0) / 100;
 
-    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus, summoningBonus);
+    sigils.setSigilSpeed(sigilAchiev, sigilGemBonus, stampBonus, vialBonus61, summoningBonus, turtleVialBonus);
 
     return sigils;
 }
