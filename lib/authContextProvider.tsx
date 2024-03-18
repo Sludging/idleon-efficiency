@@ -2,7 +2,6 @@
  
 import React from 'react'
 import { AuthProvider } from '../data/firebase/authContext'
-import { useRouter } from 'next/navigation'
  
 export default function AuthContextProvider({
   children,

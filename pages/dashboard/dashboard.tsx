@@ -154,6 +154,9 @@ function Dashboard() {
     const alertData = theData.get("alerts") as Alerts;
 
     const playerAlerts = useMemo(() => {
+        if (!alertData) {
+            return [];
+        }
         return Object.entries(alertData.playerAlerts).filter(([_, alerts]) => alerts.length > 0)
     }, [alertData]);
 
