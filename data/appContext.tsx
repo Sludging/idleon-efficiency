@@ -109,6 +109,7 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({ children
             // If there's no data, it's an invalid profile
             if (!data || data.size == 0) {
               setAppStatus(AppStatus.InvalidProfile);
+              setDataStatus(DataStatus.MissingData)
             }
             else { // Else, we have data we need to parse.
               handleStaticData(domain, { data: data, charNames: charNames as string[] });
