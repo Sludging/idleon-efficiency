@@ -346,7 +346,14 @@ export const uniqueFilter = (value: any, index: number, self: any) => {
 
 export const getSubDomain = () => {
     const windowLocation = typeof window !== "undefined" ? window.location.host : ""
-    let urlDomain = windowLocation != "" ? windowLocation.split('.')[0] : "";
+    const locationSplit = windowLocation.split('.');
+
+    // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
+    // This is currently only for when testing with vercel (it ends up being 'vercel.app') to avoid invalid profile issues.
+    if (locationSplit.length > 1 && locationSplit[1] != "idleonefficiency") {
+        return "";
+    }
+    let urlDomain = windowLocation != "" ? locationSplit[0] : "";
 
     return urlDomain;
 }
