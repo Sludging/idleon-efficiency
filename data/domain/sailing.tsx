@@ -25,6 +25,7 @@ import { Worship, TotalizerBonus } from "./worship";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Slab, SlabBonusesText } from "./slab";
+import { StarSigns } from "./starsigns";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -350,6 +351,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const rift = data.get("rift") as Rift;
     const worship = data.get("worship") as Worship;
+    const starSigns = data.get("starsigns") as StarSigns;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -373,9 +375,10 @@ export const updateSailing = (data: Map<string, any>) => {
     const mealBonus = cooking.getMealBonusForKey("Sailing");
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
+    const starsignBonus = starSigns.isStarSignUnlocked("C. Shanti Minor") ? 20 * starSigns.getSeraphCosmosBonus() : 0;
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus) / 125);
+        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
