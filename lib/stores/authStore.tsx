@@ -161,12 +161,14 @@ export const createAuthStore = (
             await auth.authStateReady()
 
             if (auth.currentUser) {
+                console.log("AuthStore - User Exists", auth.currentUser);
                 set((state) => ({
                     user: auth.currentUser!,
                     authStatus: AuthStatus.Valid,
                 }))
             }
             else {
+                console.log("AuthStore - No User");
                 set((state) => ({
                     user: undefined,
                     authStatus: AuthStatus.NoUser,
