@@ -11,6 +11,8 @@ const useCDN = ["production", "preview"].includes(process.env.NODE_ENV)
 // This will allow me to clean it up periodically without fear of deleting latest code.
 const currentPatch = "2.0.5"
 
+console.log("Current Patch: ", currentPatch, process.env.NODE_ENV)
+
 const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
