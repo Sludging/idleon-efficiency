@@ -250,7 +250,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
 }
 
-export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
@@ -286,7 +286,7 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
         parseData.set("charCount", validCharCount);
         parseData.set("OptLacc", accountData.get("OptLacc"));
         parseData.set("lastUpdated", accountData.get("lastUpdated"));
-        parseData.set("itemsData", allItems);
+        parseData.set("itemsData", accountData.get("itemsData"));
         parseData.set("playerNames", charNames);
         parseData.set("servervars", serverVars);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
@@ -324,4 +324,8 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
     // const players = accountData.get("players") as Player[];
     // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+
+    const newData = new IdleonData(accountData, lastUpdated);
+
+    return newData;
 }

@@ -8,7 +8,6 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import IconImage from "../../components/base/IconImage";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
-import { AppContext, AppStatus, DataStatus } from "../../data/appContext";
 import { Account, Key } from "../../data/domain/account";
 import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts";
 import { EnemyInfo } from "../../data/domain/enemies";
@@ -19,6 +18,8 @@ import CoinsDisplay from "../../components/coinsDisplay";
 import { TimeDown } from "../../components/base/TimeDisplay";
 import { Arcade } from "../../data/domain/arcade";
 import { AFKTypeEnum } from "../../data/domain/enum/aFKTypeEnum";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
+import { DataStatus } from "../../lib/stores/appDataStore";
 
 const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
@@ -146,9 +147,12 @@ function DashboardWidget({ children, direction = "row", wrap, heading, gridArea 
 }
 
 function Dashboard() {
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
-    const theData = appContext.data.getData();
+
+    const { theData, dataStatus } = useAppDataStore((state) => ({
+        theData: state.data.getData(),
+        dataStatus: state.dataStatus,
+    }));
 
     const accountData = theData.get("account") as Account;
     const alertData = theData.get("alerts") as Alerts;
@@ -158,9 +162,9 @@ function Dashboard() {
     }, [alertData]);
 
     // We have a single column layout if it's a public profile, small screen, or not player alerts. Else 2 columns.
-    const mainColumns = appContext.dataStatus == DataStatus.StaticData || size == "small" || playerAlerts.length == 0 ? ["100%"] : ["75%", "25%"];
+    const mainColumns = dataStatus == DataStatus.StaticData || size == "small" || playerAlerts.length == 0 ? ["100%"] : ["75%", "25%"];
     // If single column, use a different grid layout.
-    const dashboardGridArea = appContext.dataStatus == DataStatus.StaticData || playerAlerts.length == 0 ?
+    const dashboardGridArea = dataStatus == DataStatus.StaticData || playerAlerts.length == 0 ?
         [
             { name: 'accountItems', start: [0, 0], end: [2, 0] },
             { name: 'money', start: [0, 1], end: [1, 1] },
@@ -295,7 +299,7 @@ function Dashboard() {
                             }
                         </DashboardWidget>
                         {
-                            alertData.generalAlerts.length > 0 && appContext.dataStatus != DataStatus.StaticData &&
+                            alertData.generalAlerts.length > 0 && dataStatus != DataStatus.StaticData &&
                             <DashboardWidget heading="Global Alerts" gridArea="globalAlerts">
                                 {
                                     alertData.generalAlerts.map((alert, index) => (
@@ -309,7 +313,7 @@ function Dashboard() {
                     </Grid>
                 </Box>
                 {
-                    appContext.dataStatus != DataStatus.StaticData && playerAlerts.length > 0 &&
+                    dataStatus != DataStatus.StaticData && playerAlerts.length > 0 &&
                     <Box background="dark-1" pad={{ left: 'medium', right: 'medium' }}>
                         <Heading level="3" size="medium" style={{ fontWeight: 'normal' }}>Alerts</Heading>
                         <Box>

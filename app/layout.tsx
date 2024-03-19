@@ -5,10 +5,10 @@ import { customTheme } from "../lib/grommetTheme";
 import { Box, Grommet, Main } from 'grommet';
 import { Navigation } from '../components/navigation';
 import { HeaderComponent } from '../components/header/header';
-import AppContextProvider from '../lib/appContextProvider';
 import ContentWrapper from '../components/contentWrapper';
 import { FooterComponent } from '../components/footer/footer';
 import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
+import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -23,7 +23,7 @@ export default function RootLayout({
                 <StyledComponentsRegistry>
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
-                            <AppContextProvider>
+                            <AppDataStoreProvider>
                                 <Box flex margin={{ horizontal: "auto" }} height={{ min: "100%" }}>
                                     <HeaderComponent />
                                     <Navigation />
@@ -34,7 +34,7 @@ export default function RootLayout({
                                     </Main>
                                     <FooterComponent />
                                 </Box>
-                            </AppContextProvider>
+                            </AppDataStoreProvider>
                         </AuthStoreProvider>
                     </Grommet>
                 </StyledComponentsRegistry>

@@ -5,7 +5,6 @@ import {
     Main,
 } from "grommet"
 import { useContext } from 'react'
-import { AppContext, AppStatus, DataStatus } from '../data/appContext'
 import { AuthStatus } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
@@ -13,6 +12,8 @@ import { HeaderComponent } from './header/header';
 import { Navigation } from './navigation';
 import { FooterComponent } from './footer/footer';
 import { useAuthStore } from '../lib/providers/authStoreProvider';
+import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
+import { AppStatus, DataStatus } from '../lib/stores/appDataStore';
 
 declare const window: Window &
     typeof globalThis & {
@@ -33,11 +34,16 @@ export default function Layout({
     const { authStatus } = useAuthStore(
         (state) => state,
     )
-    const appContext = useContext(AppContext);
+    const { dataStatus, appStatus } = useAppDataStore(
+        (state) => ({
+            dataStatus: state.dataStatus,
+            appStatus: state.status
+        })
+    )
     const router = useRouter();
-    const validState = appContext.status == AppStatus.Ready;
+    const validState = appStatus == AppStatus.Ready;
 
-    if (authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && !["/", "/privacy-policy"].includes(router.pathname)) {
+    if (authStatus == AuthStatus.NoUser && appStatus == AppStatus.Ready && dataStatus == DataStatus.NoData && !["/", "/privacy-policy"].includes(router.pathname)) {
         router.push('/');
     }
 
