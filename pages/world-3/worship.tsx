@@ -18,7 +18,7 @@ function Worship() {
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Worship</Heading>
             <Box gap="small">
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Charge", "Totems", "Prayers", "Totalizer"].map((tabName, index) => (
+                    {["Charge", "Totems", "Prayers"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
