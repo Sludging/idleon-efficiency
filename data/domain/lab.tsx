@@ -135,7 +135,6 @@ export class SpelunkerObolBonus extends MainframeBonus {
     }
 
     override getBonus = () => {
-        console.log("coucou 2");
         return this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }

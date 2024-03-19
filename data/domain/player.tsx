@@ -131,6 +131,7 @@ export class Player {
     extraLevelsFromES: number = 0;
     extraLevelsFromSlug: number = 0;
     extraLevelsFromEquinox: number = 0;
+    extraLevelsFromAchievements: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -737,11 +738,87 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     })
 }
 
+export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const family = data.get("family") as Family;
+
+    // Max talent level from Elemental Sorcerer
+    players.forEach(player => {
+        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
+        console.log(esBonus);
+        // Only update if different.
+        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? esBonus : 0;
+                    talent.maxLevel += esBonus;
+                });
+            player.extraLevelsFromES = esBonus;
+        }
+    })
+
+    return players;
+}
+
+export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const divinity = data.get("divinity") as Divinity;
+    const equinox = data.get("equinox") as Equinox;
+    const achievementsInfo = data.get("achievements") as Achievement[];
+
+    // Update max talent level due to bear.
+    // Update players talents levels due to elite class level increase talents.
+    const bearGod = divinity.gods[1];
+    bearGod.linkedPlayers.forEach(linkedPlayer => {
+        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
+        // Only update if different.
+        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
+            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? bearBonus : 0;
+                    talent.maxLevel += bearBonus;
+                });
+            linkedPlayer.extraLevelsFromBear = bearBonus;
+        }
+    })
+
+    // Max talent level from Equinox
+    players.forEach(player => {
+        const equinoxBonus = equinox.upgrades[10].getBonus();
+        // Only update if different.
+        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? equinoxBonus : 0;
+                    talent.maxLevel += equinoxBonus;
+                });
+            player.extraLevelsFromEquinox = equinoxBonus;
+        }
+    })
+
+
+    // Bonus talent level from achievement
+    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
+    if (totalTalentFromAchievments > 0) {
+        players.forEach(player => {
+            if (player.extraLevelsFromAchievements == 0 || player.extraLevelsFromAchievements != totalTalentFromAchievments) {
+                player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                    .forEach(talent => {
+                        talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
+                        talent.maxLevel += totalTalentFromAchievments;
+                    });
+                player.extraLevelsFromAchievements = totalTalentFromAchievments;
+            }
+        })
+    }
+
+    return players;
+}
+
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
-    const divinity = data.get("divinity") as Divinity;
     const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
@@ -757,13 +834,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             if (player.activeBubbles.length == 0) {
                 player.activeBubbles = bubbleArray;
             }
-        }
-    })
-
-    // Track player deathnote data on the player object as well.
-    players.forEach(player => {
-        if (deathnote.playerKillsByMap.has(player.playerID)) {
-            player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
         }
     })
 
@@ -790,22 +860,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             });
     })
 
-    // Update max talent level due to bear.
-    // Update players talents levels due to elite class level increase talents.
-    const bearGod = divinity.gods[1];
-    bearGod.linkedPlayers.forEach(linkedPlayer => {
-        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        // Only update if different.
-        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
-            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? bearBonus : 0;
-                    talent.maxLevel += bearBonus;
-                });
-            linkedPlayer.extraLevelsFromBear = bearBonus;
-        }
-    })
-
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
 }
@@ -824,8 +878,9 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
-    const equinox = data.get("equinox") as Equinox;
     const sneaking = data.get("sneaking") as Sneaking;
+    const family = data.get("family") as Family;
+    const prayers = data.get("prayers") as Prayer[];
 
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
@@ -843,10 +898,8 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
-    const family = data.get("family") as Family;
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-    const prayers = data.get("prayers") as Prayer[];
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.index == 16);
     const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
@@ -871,47 +924,6 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     players.forEach(player => {
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
     })
-
-    // Max talent level from Elemental Sorcerer
-    players.forEach(player => {
-        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
-        // Only update if different.
-        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? esBonus : 0;
-                    talent.maxLevel += esBonus;
-                });
-            player.extraLevelsFromES = esBonus;
-        }
-    })
-
-    // Max talent level from Equinox
-    players.forEach(player => {
-        const equinoxBonus = equinox.upgrades[10].getBonus();
-        // Only update if different.
-        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? equinoxBonus : 0;
-                    talent.maxLevel += equinoxBonus;
-                });
-            player.extraLevelsFromEquinox = equinoxBonus;
-        }
-    })
-
-
-    // Bonus talent level from achievement
-    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
-    if (totalTalentFromAchievments > 0) {
-        players.forEach(player => {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
-                    talent.maxLevel += totalTalentFromAchievments;
-                });
-        })
-    }
 }
 
 
