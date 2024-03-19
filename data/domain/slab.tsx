@@ -1,23 +1,28 @@
 import { Domain, RawData } from './base/domain';
-import { JadeUpgradeBase } from './data/JadeUpgradeRepo';
 import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
 import { Item } from './items'
 import { Lab, SlabSovereigntyBonus } from './lab';
 import { Sailing } from './sailing';
-import { ArtifactStatus, SlabInfluencedArtifact } from './sailing/artifacts';
+import { SlabInfluencedArtifact } from './sailing/artifacts';
 import { Sneaking } from './world-6/sneaking';
+import { ImageData } from "./imageData";
 
 export enum SlabBonusesText {
     TotalDamage = "Total Damage",
     DivinityPoints = "Divinity Points",
-    JadeCoins = "Jade Coins",
     SailingSpeed = "Sailing Speed",
     MoreBits = "Gaming Bits",
+    JadeCoins = "Jade Coins",
     AllEssenceGain = "All Essences Gain"
 }
 
 export class SlabBonus {
     bonus: number = 0;
+    icon: ImageData = {
+        location: ``,
+        width: 0,
+        height: 0
+    };
 
     constructor(public type: SlabBonusesText) { }
 }
@@ -105,21 +110,43 @@ export const updateSlabBonusDisplay = (data: Map<string, any>) => {
         switch (bonus.type) {
             case SlabBonusesText.AllEssenceGain:
                 bonus.bonus = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name = "Essence Confetti")?.purchased ?? false) ? (Math.floor(Math.max(0, slab.rawObtainedCount - 1000) / 10) * 3 * slabSoverignBonus) : 0;
+                bonus.icon = {
+                    location: 'Slab5',
+                    width: 22,
+                    height: 20
+                }
                 break;
             case SlabBonusesText.DivinityPoints:
                 bonus.bonus = (sailing.artifacts[18] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[18] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
                 break;
             case SlabBonusesText.JadeCoins:
                 bonus.bonus = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name = "Jade Coin Magnetism")?.purchased ?? false) ? (Math.floor(Math.max(0, slab.rawObtainedCount - 1000) / 10) * 5 * slabSoverignBonus) : 0;
+                bonus.icon = {
+                    location: 'Slab4',
+                    width: 22,
+                    height: 20
+                }
                 break;
             case SlabBonusesText.MoreBits:
                 bonus.bonus = (sailing.artifacts[20] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[20] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
                 break;
             case SlabBonusesText.SailingSpeed:
                 bonus.bonus = (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[10] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
                 break;
             case SlabBonusesText.TotalDamage:
                 bonus.bonus = (sailing.artifacts[2] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[2] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
                 break;
         }
     })
