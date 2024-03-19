@@ -4,8 +4,7 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useState } from 'react';
-import { AppContext } from '../../data/appContext';
+import { useState } from 'react';
 import { Summoning as SummoningDomain } from '../../data/domain/world-6/summoning';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
@@ -15,13 +14,14 @@ import TabButton from '../../components/base/TabButton';
 import { SummoningBonuses } from '../../components/world-6/summoning/summoningBonuses';
 import { SummoningUpgrades } from '../../components/world-6/summoning/summoningUpgrades';
 import { SummoningBattles } from '../../components/world-6/summoning/summoningBattles';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function Summoning() {
-    const appContext = useContext(AppContext);
-    const data = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const [activeTab, setActiveTab] = useState<string>("Winner bonuses");
 
-    const summoning = data.get("summoning") as SummoningDomain;
+    const summoning = theData.get("summoning") as SummoningDomain;
 
     if (!summoning) {
         return <>Loading...</>

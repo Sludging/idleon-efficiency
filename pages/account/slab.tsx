@@ -5,8 +5,7 @@ import {
     Heading,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useState, useEffect, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import IconImage from '../../components/base/IconImage';
@@ -57,8 +56,8 @@ function Slab() {
     const [slabInfo, setSlabInfo] = useState<SlabDomain>();
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const appContext = useContext(AppContext);
-
+    const theData = useAppDataStore((state) => state.data.getData()); 
+    
     const missingItems = useMemo(() => {
         if (!slabInfo) {
             return [];
@@ -76,9 +75,8 @@ function Slab() {
     }, [slabInfo, appContext]);
 
     useEffect(() => {
-        setSlabInfo(appContext.data.getData().get("slab"));
-
-    }, [appContext]);
+        setSlabInfo(theData.get("slab"));
+    }, [theData]);
 
     if (!slabInfo) {
         return <Box>Loading</Box>

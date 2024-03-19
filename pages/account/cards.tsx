@@ -5,8 +5,7 @@ import {
     Grid,
     Stack
 } from 'grommet'
-import { useEffect, useContext, useState } from 'react';
-import { AppContext } from '../../data/appContext';
+import { useEffect, useState } from 'react';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
 import IconImage, { AdaptativeIconImage } from '../../components/base/IconImage';
@@ -14,6 +13,7 @@ import { Card } from '../../data/domain/cards';
 import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 const shouldHideCard = ({ card }: { card: Card }) => {
     return false;
@@ -102,7 +102,7 @@ const CardBox = ({ card }: { card: Card }) => {
 
 const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
     const currentLevel = cardSet.getLevel();
-    const nextLevel = currentLevel+1;
+    const nextLevel = currentLevel + 1;
     const totalCardLevels = cardSet.getCardsTotalStars()
 
     return (
@@ -130,11 +130,11 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
                             <Box>
                                 <IconImage data={cardSet.getBorderImageData()} />
                             </Box>
-                        </Stack>        
+                        </Stack>
                         <Box direction='column' gap='none'>
-                            <AdaptativeIconImage data={cardSet.getBannerImageData()}/>
+                            <AdaptativeIconImage data={cardSet.getBannerImageData()} />
                             <Text size='medium' color={cardSet.getBonus() == 0 ? 'grey' : ''}>{cardSet.getBonusText()}</Text>
-                        </Box>                    
+                        </Box>
                     </Box>
                 </TipDisplay>
                 <Grid width='100%' columns='small' gap='small'>
@@ -150,15 +150,12 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
 function CardsDisplay() {
     const [cards, setCardsData] = useState<Card[]>();
     const cardSets = CardSet.fromBase(initCardSetRepo(), cards) as CardSet[];
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setCardsData(theData.get("cards"));
-            cardSets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
-        }
-    }, [appContext, cardSets, cards])
+        setCardsData(theData.get("cards"));
+        cardSets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
+    }, [theData, cardSets, cards])
 
     if (!cards || !cardSets) {
         return null;

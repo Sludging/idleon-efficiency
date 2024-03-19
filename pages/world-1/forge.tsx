@@ -4,8 +4,7 @@ import {
     Heading,
     Text,
 } from 'grommet'
-import { useEffect, useContext, useState, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useEffect, useState, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 
 import ShadowBox from '../../components/base/ShadowBox';
@@ -17,6 +16,7 @@ import TabButton from '../../components/base/TabButton';
 import { Item } from '../../data/domain/items';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import IconImage from '../../components/base/IconImage';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function ForgeItem({ item, title }: { item: Item, title: string }) {
     if (item.displayName == "Blank") {
@@ -48,7 +48,7 @@ function ForgeItem({ item, title }: { item: Item, title: string }) {
 function Forge() {
     const [forge, setForge] = useState<ForgeDomain | undefined>(undefined);
     const [activeTab, setActiveTab] = useState<string>("Slots");
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;
@@ -60,11 +60,8 @@ function Forge() {
     }, [appContext, forge])
 
     useEffect(() => {
-        if (appContext) {
-            const idleonData = appContext.data.getData();
-            setForge(idleonData.get("forge"));
-        }
-    }, [appContext]);
+        setForge(theData.get("forge"));
+    }, [theData]);
 
     return (
         <Box>

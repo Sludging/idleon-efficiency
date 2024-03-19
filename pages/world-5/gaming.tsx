@@ -5,13 +5,13 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ShadowBox from '../../components/base/ShadowBox';
-import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
+import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
-import { AppContext } from '../../data/appContext';
 import { Gaming as GamingDomain } from '../../data/domain/gaming';
 import { nFormatter, bitsFormatter } from '../../data/utility';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 // Gaming[0] = current bits
 // Gaming[6] = Unlocked imports?
@@ -19,14 +19,11 @@ import { nFormatter, bitsFormatter } from '../../data/utility';
 
 function Gaming() {
     const [gaming, setGaming] = useState<GamingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setGaming(theData.get("gaming"));
-        }
-    }, [appContext]);
+        setGaming(theData.get("gaming"));
+    }, [theData]);
 
     const nuggetRange = useMemo(() => {
         if (!gaming) {

@@ -13,8 +13,7 @@ import styled from 'styled-components'
 
 import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../data/domain/alchemy';
 import { Achievement, AchievementConst } from '../../data/domain/achievements'
-import { useEffect, useState, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useEffect, useState, useContext } from 'react';
 import { nFormatter, round } from '../../data/utility'
 import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
@@ -159,11 +158,23 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                                         {
                                             bubble.labUpgrade && <Ascending color="Legendary" size="large" />
                                         }
-                                    </Box>
-                                </Tip>
-                            </Box>
-                        )
-                    })
+                                        dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
+                                    >
+                                        <Box direction="row" fill align="center">
+                                            <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }}>
+                                                <IconImage data={bubble.getImageData()} scale={0.8} />
+                                            </Box>
+                                            <Box direction="row" gap="xsmall" align="center">
+                                                <Text size="small">{bubble.level}</Text>
+                                            </Box>
+                                            {
+                                                bubble.labUpgrade && <Ascending color="Legendary" size="large" />
+                                            }
+                                        </Box>
+                                    </Tip>
+                                </Box>
+                            )
+                        })
                 }
             </Box>
         </Box>
@@ -196,8 +207,7 @@ function VialTipInfo({ vial }: { vial: Vial }) {
 }
 
 function VialsDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const alchemyData = theData.get("alchemy") as AlchemyData;
 
@@ -214,10 +224,10 @@ function VialsDisplay() {
                                 size="medium"
                             >
                                 <Stack anchor='center' margin={{ right: 'small' }}>
-                                    <Box style={{opacity: vial.level == 0 ? 0.3 : 1}}>
+                                    <Box style={{ opacity: vial.level == 0 ? 0.3 : 1 }}>
                                         <IconImage data={vial.getBackgroundImageData()} />
                                     </Box>
-                                    <Box style={{opacity: vial.level == 0 ? 0.6 : 1}}>
+                                    <Box style={{ opacity: vial.level == 0 ? 0.6 : 1 }}>
                                         <IconImage data={vial.getImageData()} scale={1.3} />
                                     </Box>
                                 </Stack>
@@ -232,14 +242,11 @@ function VialsDisplay() {
 
 function SigilsDisplay() {
     const [sigilData, setSigilData] = useState<Sigils>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            setSigilData(theData.get("sigils"));
-        }
-    }, [appContext]);
+        setSigilData(theData.get("sigils"));
+    }, [theData]);
 
     return (
         <Box pad="medium" gap="small">
@@ -286,9 +293,8 @@ function BubblesDisplay() {
     const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
 
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
-
+    const theData = useAppDataStore((state) => state.data.getData());
+    
     const alchemyData = theData.get("alchemy") as AlchemyData;
     const achievementsInfo = theData.get("achievements") as Achievement[];
     // get undeveloped costs bubble level
@@ -296,7 +302,7 @@ function BubblesDisplay() {
     const barleyBrewVialLevel = alchemyData.getBarleyBrewVialLevel();
     const vialMultiplier = alchemyData.vials[0].bonusMulitplier
     const hasAlchemyAchievement = achievementsInfo[AchievementConst.SmartBoiIndex].completed;
-    
+
 
     const collider = theData.get("collider") as AtomCollider;
     const particles = collider.particles
@@ -364,7 +370,7 @@ function BubblesDisplay() {
             <Grid columns="1/4">
                 {
                     alchemyData && alchemyData.cauldrons
-                        .slice().sort((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1) 
+                        .slice().sort((cauldron1, cauldron2) => cauldron1.bubbles[0].cauldronIndex > cauldron2.bubbles[0].cauldronIndex ? 1 : -1)
                         .map((cauldron, index) => {
                             return (<CauldronDisplay key={`tab_${index}`} cauldron={cauldron} undevelopedCostsBubbleLevel={undevelopedCostsBubbleLevel} barleyBrewVialLevel={barleyBrewVialLevel} hasAchievement={hasAlchemyAchievement} discountLevel={parseInt(discountLevel)} classMultiBonus={classMulti} vialMultiplier={vialMultiplier} particles={particles} />)
                         })

@@ -15,19 +15,17 @@ import {
     CheckBox
 } from 'grommet'
 import { useState, useEffect, useContext, useMemo, MouseEventHandler } from 'react';
-import { AppContext } from '../data/appContext'
-import { GemStore } from '../data/domain/gemPurchases';
 
 import { Activity, Player, SkillData } from '../data/domain/player';
 import { SkillsIndex } from "../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../data/domain/talents';
-import { Capacity, CapacityConst, playerInventoryBagMapping } from '../data/domain/capacity';
+import { Capacity, playerInventoryBagMapping } from '../data/domain/capacity';
 import { Alchemy, Bubble, CauldronIndex } from "../data/domain/alchemy";
 import { Stamp } from '../data/domain/stamps';
-import { Shrine, ShrineConstants } from '../data/domain/shrines';
+import { Shrine } from '../data/domain/shrines';
 import { PlayerStatues } from '../data/domain/statues';
 
-import { getCoinsArray, lavaFunc, notUndefined, nFormatter } from '../data/utility';
+import { getCoinsArray, nFormatter } from '../data/utility';
 import CoinsDisplay from '../components/coinsDisplay';
 import { css } from 'styled-components'
 import ShadowBox from '../components/base/ShadowBox';
@@ -41,7 +39,6 @@ import { TimeDown, TimeUp } from '../components/base/TimeDisplay';
 import { Worship } from '../data/domain/worship';
 import ObolsInfo from '../components/account/task-board/obolsInfo';
 import TextAndLabel, { ComponentAndLabel } from '../components/base/TextAndLabel';
-import { Bribe, BribeStatus } from '../data/domain/bribes';
 import { Skilling } from '../data/domain/skilling';
 import { Family } from '../data/domain/family';
 import { Achievement, AchievementConst } from '../data/domain/achievements';
@@ -58,6 +55,7 @@ import { POExtra } from '../data/domain/postoffice';
 import { Cooking } from '../data/domain/cooking';
 import { Sneaking } from '../data/domain/world-6/sneaking';
 
+import { useShallow } from 'zustand/react/shallow'
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
 
@@ -196,33 +194,33 @@ function ShowSkills(props: SkillProps) {
 }
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
-    const appContext = useContext(AppContext);
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date | undefined })
+    ));
     const size = useContext(ResponsiveContext)
 
-    const alerts = appContext.data.getData().get("alerts") as Alerts;
-    const worship = appContext.data.getData().get("worship") as Worship;
+    const alerts = theData.get("alerts") as Alerts;
+    const worship = theData.get("worship") as Worship;
     const playerCoins = useMemo(() => getCoinsArray(player.money), [player]);
     const activeShrines = useMemo(() => {
-        const theData = appContext.data.getData();
         const shrines = theData.get("shrines") as Shrine[];
         if (shrines) {
             return shrines.filter((shrine) => shrine.isShrineActive(player.currentMapId) && shrine.level > 0);
         }
         return [];
-    }, [appContext, player]);
+    }, [theData, player]);
 
     const cardSetAlert = useMemo(() => {
         return alerts.getPlayerAlertsOfType(player.playerID, "CardSet").pop() as CardSetAlert;
     }, [alerts, player]);
 
     const activePrayers = useMemo(() => {
-        const theData = appContext.data.getData();
         const prayers = theData.get("prayers") as Prayer[];
         if (prayers) {
             return player.activePrayers.map((prayerIndex) => prayers[prayerIndex]);
         }
         return [];
-    }, [appContext, player]);
+    }, [theData, player]);
 
     const playerWorshipInfo = useMemo(() => {
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
@@ -237,12 +235,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
 
 
     const secondsSinceUpdate = useMemo(() => {
-        const lastUpdated = appContext.data.getLastUpdated(true) as Date | undefined;
         if (lastUpdated) {
             return (new Date().getTime() - lastUpdated.getTime()) / 1000;
         }
         return 0;
-    }, [appContext]);
+    }, [theData, lastUpdated]);
 
     return (
         <Box pad="medium">
@@ -296,11 +293,11 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         </Text>
                     }
                     {
-                       player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
-                        <Text key={`sign_${index}`} size="small">Sign {index + 1}: {sign.getText()}</Text>
-                       )) 
+                        player.starSigns.filter(sign => sign.aligned == true).map((sign, index) => (
+                            <Text key={`sign_${index}`} size="small">Sign {index + 1}: {sign.getText()}</Text>
+                        ))
                     }
-                    
+
                     <Box direction="row" gap="xsmall">
                         <Text size="small">Away Since =</Text>
                         {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}
@@ -574,8 +571,7 @@ function ItemDisplay({ item, size = "50px", goldFoodMulti }: { item: Item | unde
 
 
 function EquipmentDisplay({ player }: { player: Player }) {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
     const family = theData.get("family") as Family;
     const stampData = theData.get("stamps") as Stamp[][];
     const achievementsInfo = theData.get("achievements") as Achievement[];
@@ -680,10 +676,10 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
 }
 
 function AnvilDisplay({ player }: { player: Player }) {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
-    const anvils = appContext.data.getData().get("anvil") as AnvilWrapper;
-    const storage = appContext.data.getData().get("storage") as Storage;
+    const anvils = theData.get("anvil") as AnvilWrapper;
+    const storage = theData.get("storage") as Storage;
     const playerAnvil = anvils.playerAnvils[player.playerID];
 
 
@@ -788,14 +784,13 @@ function AnvilDisplay({ player }: { player: Player }) {
 }
 
 function CarryCapacityDisplay({ player }: { player: Player }) {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
     const size = useContext(ResponsiveContext);
 
     const playerCapacity = useMemo(() => {
-        const theData = appContext.data.getData();
         const capacity = theData.get("capacity") as Capacity;
         return capacity.players[player.playerID];
-    }, [appContext, player])
+    }, [theData, player])
 
     return (
         <Box pad="medium" gap="small">
@@ -803,7 +798,7 @@ function CarryCapacityDisplay({ player }: { player: Player }) {
             <Grid columns={size == "small" ? "1" : "1/2"}>
                 {
                     playerCapacity.bags.map((bag, index) => (
-                        <Box direction="row" key={index} gap="medium" pad="small" align="center" justify="between" width={{max: '300px'}}>
+                        <Box direction="row" key={index} gap="medium" pad="small" align="center" justify="between" width={{ max: '300px' }}>
                             <IconImage data={bag.getImageData()} scale={1.3} />
                             <TextAndLabel label="Per Slot" text={Intl.NumberFormat().format(bag.maxCarry)} />
                             <TextAndLabel label="Full Inventory" text={nFormatter(bag.maxCarry * playerCapacity.totalInventorySlots)} />
@@ -971,14 +966,13 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }
 function InventoryDisplay({ player }: { player: Player }) {
     const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
     const size = useContext(ResponsiveContext);
-    const appContext = useContext(AppContext);
-    const allItems = appContext.data.getData().get("itemsData") as Item[];
+    const theData = useAppDataStore((state) => state.data.getData());
+    const allItems = theData.get("itemsData") as Item[];
 
     useEffect(() => {
-        const theData = appContext.data.getData();
         const storage = theData.get("storage") as Storage;
         setPlayerInventory(storage.playerStorage[player.playerID]);
-    }, [appContext, player])
+    }, [theData, player])
 
     const emptySlots = useMemo(() => {
         return playerInventory?.filter((item) => item.internalName == "Blank").length ?? 0;
@@ -1192,26 +1186,23 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
 
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const poExtra = theData.get("POExtra");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            const statues = theData.get("statues");
-            if (statues) {
-                setPlayerStatues(statues[player.playerID]);
-            }
-            if (player.activeBubbles.length > 0) {
-                setActiveBubbles(player.activeBubbles);
-            }
+        const statues = theData.get("statues");
+        if (statues) {
+            setPlayerStatues(statues[player.playerID]);
+        }
+        if (player.activeBubbles.length > 0) {
+            setActiveBubbles(player.activeBubbles);
         }
         if ((player.classId != ClassIndex.Barbarian && player.classId != ClassIndex.Blood_Berserker) && index == 11) {
             setIndex(1);
         }
-    }, [appContext, player]);
+    }, [theData, player]);
 
     return (
         <ShadowBox flex={false}>
@@ -1302,20 +1293,17 @@ function Players() {
     const [index, setIndex] = useState<number>(0);
     const [activePlayer, setActivePlayer] = useState<string>('');
     const size = useContext(ResponsiveContext);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-            if (playerData && playerData.length > 0 && activePlayer === '') {
-                const firstPlayer = playerData[0];
-                setActivePlayer(firstPlayer.playerID.toString() ?? '');
-            }
+        setPlayerData(theData.get("players"));
+        if (playerData && playerData.length > 0 && activePlayer === '') {
+            const firstPlayer = playerData[0];
+            setActivePlayer(firstPlayer.playerID.toString() ?? '');
         }
-    }, [appContext, activePlayer, playerData]);
+    }, [theData, activePlayer, playerData]);
 
     if (!playerData || playerData.length == 0) {
         return <Box>Nothing to see here.</Box>

@@ -15,11 +15,11 @@ import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { AppContext } from '../../data/appContext';
 import { BoatUpgradeType, CaptainTrait, IslandStatus, Sailing as SailingDomain } from '../../data/domain/sailing';
 import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
 import { nFormatter, range, round } from '../../data/utility';
 import styled from 'styled-components';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 const BlankBox = styled.div`
 height: 10px;
@@ -36,15 +36,11 @@ background-color: black;
 
 function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     if (!sailing) {
         return null;
@@ -147,15 +143,11 @@ function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
 
 function CaptainsDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     if (!sailing) {
         return null;
@@ -220,14 +212,11 @@ function CaptainsDisplay() {
 function ArtifactDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
     const [hideUnobtained, setHideUnobtained] = useState(false);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     const artifactsToShow = useMemo(() => {
         if (!sailing) {
@@ -284,7 +273,7 @@ function ArtifactDisplay() {
                                         textSize='12px'
                                         textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.ancientBonus}
-                                        margin={{bottom: 'small'}}
+                                        margin={{ bottom: 'small' }}
                                     />
                                     <TextAndLabel
                                         label="ELDRITCH BONUS"
@@ -313,14 +302,11 @@ function ArtifactDisplay() {
 
 function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     if (!sailing) {
         return null;
@@ -415,14 +401,11 @@ function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boole
 
 function IslandDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     if (!sailing) {
         return null;
@@ -473,11 +456,8 @@ function Sailing() {
     const appContext = useContext(AppContext);
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setSailing(theData.get("sailing"));
-        }
-    }, [appContext]);
+        setSailing(theData.get("sailing"));
+    }, [theData]);
 
     const starSignUnlocked = useMemo(() => {
         if (sailing) {

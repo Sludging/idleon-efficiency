@@ -37,11 +37,10 @@ function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string,
 }
 
 function ConstructMasteryDisplay() {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const skillMilestones = [250, 500, 750, 1000, 1250, 1500, 2500];
 
-    const theData = appContext.data.getData();
     const rift = theData.get("rift") as Rift;
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
     const construction = theData.get("construction") as Construction;
@@ -89,11 +88,10 @@ function ConstructMasteryDisplay() {
 }
 
 function SkillMasteryDisplay() {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const skillMilestones = [150, 200, 300, 400, 500, 750, 1000];
 
-    const theData = appContext.data.getData();
     const rift = theData.get("rift") as Rift;
     const players = theData.get("players") as Player[];
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
@@ -169,9 +167,8 @@ const KillroyPrimeTooltip = ({ bonus }: { bonus: KillroyPrime }) => {
 }
 
 function RiftBonusDisplay() {
-    const appContext = useContext(AppContext);
-
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+    
     const rift = theData.get("rift") as Rift;
 
     if (!rift) {

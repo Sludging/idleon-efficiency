@@ -9,7 +9,6 @@ import {
 
 import { useEffect, useState, useContext, useMemo, MouseEventHandler } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
-import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import { NPC, QuestInformation as SpecialQuestInfo, Quests as QuestInfo } from "../../data/domain/quests";
@@ -21,6 +20,7 @@ import IconImage from "../../components/base/IconImage";
 import { QuestTypeEnum } from "../../data/domain/enum/questTypeEnum";
 import { ImageData } from "../../data/domain/imageData";
 import { CharacterBox } from "../../components/base/CharacterBox";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 enum CharacterBoxStatus {
     Complete,
@@ -184,7 +184,7 @@ function Quests() {
     const [index, setIndex] = useState<number>(1);
     const [activeWorld, setActiveWorld] = useState<string>("Blunder Hills");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
     const size = useContext(ResponsiveContext)
 
     const npcsToShow = useMemo(() => {
@@ -209,12 +209,9 @@ function Quests() {
     }, [questsData, activeWorld])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-            setQuestData(theData.get("quests"));
-        }
-    }, [appContext])
+        setPlayerData(theData.get("players"));
+        setQuestData(theData.get("quests"));
+    }, [theData])
     return (
         <Box>
             <NextSeo title="Quests" />

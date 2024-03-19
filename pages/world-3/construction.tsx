@@ -13,7 +13,6 @@ import {
     TableBody
 } from 'grommet'
 import React, { useEffect, useContext, useState, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
 import ShadowBox from '../../components/base/ShadowBox';
@@ -40,16 +39,18 @@ import { SaltLickDisplay } from '../../components/world-3/construction/saltLick'
 import { ArtifactStatus } from '../../data/domain/sailing/artifacts';
 import { AtomColliderDisplay } from '../../components/world-3/construction/atomCollider';
 import { Sailing } from '../../data/domain/sailing';
-
+import { useShallow } from 'zustand/react/shallow';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function RefineryDisplay() {
     const [squirePowha, setSquirePowha] = useState<boolean>(false);
 
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
-    const lastUpdated = appContext.data.getLastUpdated(true) as Date;
+    const { theData, lastUpdated } = useAppDataStore(
+        useShallow((state) => (
+            { theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date }
+        )));
     const refineryData = theData.get("refinery") as Refinery;
     const itemData = theData.get("itemsData") as Item[];
     const storage = theData.get("storage") as Storage;
@@ -129,9 +130,9 @@ function RefineryDisplay() {
                             <ShadowBox margin={{ right: 'large', bottom: 'small' }} background="dark-1" key={index} gap="xsmall" pad="medium" align="center">
                                 <TextAndLabel center textSize='xsmall' labelSize='medium' text='Next cycle in' label={cycleInfo.name} />
                                 <Box>
-                                    { saltsUnlocked ?
-                                    <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} /> :
-                                    <StaticTime fromSeconds={cycleInfo.cycleTime - cycleInfo.timePast} />
+                                    {saltsUnlocked ?
+                                        <TimeDown addSeconds={cycleInfo.cycleTime - cycleInfo.timePast} resetToSeconds={cycleInfo.cycleTime} /> :
+                                        <StaticTime fromSeconds={cycleInfo.cycleTime - cycleInfo.timePast} />
                                     }
                                 </Box>
                                 <Text margin={{ top: 'small' }} color="accent-3" size="12px">* Might be off by a few seconds.</Text>
@@ -201,7 +202,7 @@ function RefineryDisplay() {
 
                     if (saltItem) {
                         return (
-                            <ShadowBox key={index} background="dark-1" style={{opacity: info.rank == 0 ? 0.5 : 1}}>
+                            <ShadowBox key={index} background="dark-1" style={{ opacity: info.rank == 0 ? 0.5 : 1 }}>
                                 <Grid columns={size == "small" ? ["50%", "50%"] : ["15%", "20%", "25%", "20%", "20%"]}>
                                     <Box direction="row" gap="medium" align="center" background="dark-2" pad="medium" justify="center" fill>
                                         <Box align="center">
@@ -372,24 +373,19 @@ function SampleBox({ sample, itemData, printing = false, slotUnlocked = false }:
 }
 
 function PrinterDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const itemData = theData.get("itemsData") as Item[];
     const printerData = theData.get("printer") as Printer;
     const playerData = theData.get("players") as Player[];
 
     const printerArtifact = useMemo(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            const sailing = theData.get("sailing") as Sailing;
-            return sailing.artifacts[4];
-        }
-    }, [appContext])
+        const sailing = theData.get("sailing") as Sailing;
+        return sailing.artifacts[4];
+    }, [theData])
 
     const daysSinceLastSample = useMemo(() => {
-        if (appContext && printerArtifact) {
-            const theData = appContext.data.getData();
+        if (printerArtifact) {
             const optLacc = theData.get("OptLacc");
             if (!optLacc) {
                 return 0;
@@ -397,13 +393,13 @@ function PrinterDisplay() {
             return optLacc[125];
         }
         return 0;
-    }, [appContext, printerArtifact]);
+    }, [theData, printerArtifact]);
 
     const artifactBoost = useMemo(() => {
         if (printerArtifact) {
             return daysSinceLastSample * printerArtifact.getBonus();
         }
-    }, [appContext, printerArtifact, daysSinceLastSample])
+    }, [printerArtifact, daysSinceLastSample])
 
     const masteroInfo = useMemo(() => {
         const masteroes = playerData?.filter(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId));
@@ -526,7 +522,7 @@ function PrinterDisplay() {
 
 function DeathnoteDisplay() {
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
     const size = useContext(ResponsiveContext);
 
     const monsterInfo = EnemyInfo;
@@ -573,11 +569,8 @@ function DeathnoteDisplay() {
     }, [appContext, deathNoteByWorld, deathnoteData])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setDeathnoteData(theData.get("deathnote"));
-        }
-    }, [appContext]);
+        setDeathnoteData(theData.get("deathnote"));
+    }, [theData]);
 
     if (!deathnoteData) {
         return (
@@ -648,8 +641,8 @@ function DeathnoteDisplay() {
 }
 
 function ShrinesDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const shrineData = theData.get("shrines") as Shrine[];
 
     return (
@@ -661,7 +654,7 @@ function ShrinesDisplay() {
             <Box>
                 {shrineData.map((shrine, index) => {
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }} style={{opacity: shrine.level == 0 ? 0.5 : 1}}>
+                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }} style={{ opacity: shrine.level == 0 ? 0.5 : 1 }}>
                             <Box gap="small">
                                 <Box direction="row" align="center">
                                     <Box margin={{ right: 'small' }}>

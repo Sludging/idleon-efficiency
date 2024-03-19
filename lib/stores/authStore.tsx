@@ -167,7 +167,6 @@ export const createAuthStore = (
                 }))
             }
             else {
-                console.log("AuthStore - No User");
                 set((state) => ({
                     user: undefined,
                     authStatus: AuthStatus.NoUser,

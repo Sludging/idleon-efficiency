@@ -1,19 +1,11 @@
 import {
     Box,
-    Table,
-    TableHeader,
-    TableRow,
-    TableBody,
-    TableCell,
     Heading,
     Text,
     Grid,
-    ResponsiveContext,
     Stack,
     Meter
 } from 'grommet'
-import { useContext } from 'react';
-import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 
 import ShadowBox from '../../components/base/ShadowBox';
@@ -22,11 +14,11 @@ import { Equinox as EquinoxDomain, isFoodLust } from '../../data/domain/equinox'
 
 import { TimeDown } from "../../components/base/TimeDisplay";
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function Equinox() {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
-    const theData = appContext.data.getData();
     const equinox = theData.get("equinox") as EquinoxDomain;
 
     if (!equinox) {

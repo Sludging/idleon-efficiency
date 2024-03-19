@@ -6,7 +6,6 @@ import {
     Text,
 } from 'grommet'
 import { useContext, useMemo, useState } from 'react';
-import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 import { Anvil as AnvilModel, AnvilProduct, AnvilWrapper } from '../../data/domain/anvil';
 import { Player } from '../../data/domain/player';
@@ -19,6 +18,7 @@ import { getCoinsArray, nFormatter } from '../../data/utility';
 import CoinsDisplay from '../../components/coinsDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { CharacterBox } from '../../components/base/CharacterBox';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player, playerAnvil: AnvilModel, anvilItem: AnvilProduct }) {
     return (
@@ -64,11 +64,11 @@ function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player
 }
 
 function PointsDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const anvilWrapper = theData.get("anvil") as AnvilWrapper;
     const players = theData.get("players") as Player[];
-    const storage = appContext.data.getData().get("storage") as Storage;
+    const storage = theData.get("storage") as Storage;
 
     const totalMatCosts = useMemo(() => {
         const finalCosts: Record<string, {
@@ -165,8 +165,8 @@ function PointsDisplay() {
 }
 
 function AnvilProductionDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const anvilWrapper = theData.get("anvil") as AnvilWrapper;
     const players = theData.get("players") as Player[];
 

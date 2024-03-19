@@ -8,22 +8,21 @@ import {
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { NextSeo } from 'next-seo';
 import TabButton from "../../components/base/TabButton";
-import { AppContext } from "../../data/appContext";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import ShadowBox from "../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { dateToText } from "../../data/utility";
 import IconImage from "../../components/base/IconImage";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 function DungeonItems() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const appContext = useContext(AppContext);
-    const idleonData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        setDungeonData(idleonData.get("dungeons") as Dungeons);
-    }, [idleonData]);
+        setDungeonData(theData.get("dungeons") as Dungeons);
+    }, [theData]);
 
     if (dungeonData) {
         return (
@@ -67,12 +66,11 @@ function DungeonItems() {
 
 function DungeonPassives() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const appContext = useContext(AppContext);
-    const idleonData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        setDungeonData(idleonData.get("dungeons") as Dungeons);
-    }, [idleonData]);
+        setDungeonData(theData.get("dungeons") as Dungeons);
+    }, [theData]);
 
     if (dungeonData) {
         return (
@@ -146,12 +144,11 @@ function DungeonPassives() {
 
 function DungeonTraits() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const appContext = useContext(AppContext);
-    const idleonData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        setDungeonData(idleonData.get("dungeons") as Dungeons);
-    }, [idleonData]);
+        setDungeonData(theData.get("dungeons") as Dungeons);
+    }, [theData]);
 
     if (dungeonData) {
         return (
@@ -199,8 +196,7 @@ function DungeonsDisplay() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const [subTab, setSubTab] = useState<string>("Items");
     const [serverVars, setServerVars] = useState<Record<string, any>>({})
-    const appContext = useContext(AppContext);
-    const idleonData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const nextHappyHour = useMemo(() => {
         if (serverVars && Object.keys(serverVars).includes("HappyHours")) {
@@ -250,9 +246,9 @@ function DungeonsDisplay() {
     }, [serverVars]);
 
     useEffect(() => {
-        setDungeonData(idleonData.get("dungeons") as Dungeons);
-        setServerVars(idleonData.get("servervars"));
-    }, [idleonData]);
+        setDungeonData(theData.get("dungeons") as Dungeons);
+        setServerVars(theData.get("servervars"));
+    }, [theData]);
 
     return (
         <Box>

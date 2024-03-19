@@ -7,7 +7,6 @@ import {
 
 import { useEffect, useState, useContext } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
-import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import LeftNavButton from "../../components/base/LeftNavButton";
@@ -17,10 +16,11 @@ import TextAndLabel from "../../components/base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { ItemStat } from "../../data/domain/items";
 import IconImage from "../../components/base/IconImage";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 function ObolInventory() {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if (description) {
@@ -35,9 +35,8 @@ function ObolInventory() {
     }
 
     useEffect(() => {
-        const theData = appContext.data.getData();
         setObolsData(theData.get("obols"));
-    }, [appContext])
+    }, [theData])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (
@@ -50,37 +49,37 @@ function ObolInventory() {
             <Text size="large">Inventory</Text>
             {
                 obolsData && [...obolsData.inventory].map(([type, obols], index) => (
-                    <Box key={index} pad="small" gap="small" border={index + 1 < obolsData.inventory.size ? {side: 'bottom', color: 'grey-1', size: '2px'} : undefined}>
+                    <Box key={index} pad="small" gap="small" border={index + 1 < obolsData.inventory.size ? { side: 'bottom', color: 'grey-1', size: '2px' } : undefined}>
                         <Text size="medium">{ObolType[type]}</Text>
                         <Box direction="row" wrap>
                             {
                                 obols.filter(obol => !obol.locked && obol.item.internalName != "Blank")
-                                .sort((obol1, obol2) =>  obol1.getRarity() == obol2.getRarity() ? obol1.type > obol2.type ? -1 : 1 : obol1.getRarity() > obol2.getRarity() ? -1 : 1)
-                                .map((obol, obolIndex) => {
-                                    return (
-                                        <TipDisplay
-                                            key={obolIndex}
-                                            heading={`${obol.item.displayName} (${obol.item.type})`}
-                                            body={<Box>{statsDisplay(obol.item.itemStats, obol.item.description)}<Text size="xsmall">*A work in progress, therefore not always accurate.</Text></Box>}
-                                            size={"large"}
-                                            direction={TipDirection.Down}
-                                            maxWidth="large"
-                                        >
-                                            <IconImage data={obol.item.getImageData()} />
-                                        </TipDisplay>
-                                    )
-                                })
+                                    .sort((obol1, obol2) => obol1.getRarity() == obol2.getRarity() ? obol1.type > obol2.type ? -1 : 1 : obol1.getRarity() > obol2.getRarity() ? -1 : 1)
+                                    .map((obol, obolIndex) => {
+                                        return (
+                                            <TipDisplay
+                                                key={obolIndex}
+                                                heading={`${obol.item.displayName} (${obol.item.type})`}
+                                                body={<Box>{statsDisplay(obol.item.itemStats, obol.item.description)}<Text size="xsmall">*A work in progress, therefore not always accurate.</Text></Box>}
+                                                size={"large"}
+                                                direction={TipDirection.Down}
+                                                maxWidth="large"
+                                            >
+                                                <IconImage data={obol.item.getImageData()} />
+                                            </TipDisplay>
+                                        )
+                                    })
                             }
                         </Box>
                         <Box direction="row" gap="medium">
-                        <TextAndLabel
-                            label={"Empty Slots"}
-                            text={obols.filter(obol => obol.item.internalName == "Blank").length.toString() ?? "0"}
-                        />
-                        <TextAndLabel
-                            label={"Total Slots"}
-                            text={obols.filter(obol => !obol.item.internalName.includes("Locked")).length.toString() ?? "0"}
-                        />
+                            <TextAndLabel
+                                label={"Empty Slots"}
+                                text={obols.filter(obol => obol.item.internalName == "Blank").length.toString() ?? "0"}
+                            />
+                            <TextAndLabel
+                                label={"Total Slots"}
+                                text={obols.filter(obol => !obol.item.internalName.includes("Locked")).length.toString() ?? "0"}
+                            />
                         </Box>
                     </Box>
                 ))
@@ -91,17 +90,14 @@ function ObolInventory() {
 
 function Obols() {
     const [playerData, setPlayerData] = useState<Player[]>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const [index, setIndex] = useState<number>(-1);
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-        }
-    }, [appContext])
+        setPlayerData(theData.get("players"));
+    }, [theData])
     return (
         <Box>
             <NextSeo title="Obols" />

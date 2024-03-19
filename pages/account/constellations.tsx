@@ -10,7 +10,6 @@ import {
 
 import { useEffect, useState, useContext } from 'react';
 import ShadowBox from "../../components/base/ShadowBox";
-import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import { Player } from "../../data/domain/player";
 import IconImage from "../../components/base/IconImage";
@@ -18,12 +17,14 @@ import { Constellation } from "../../data/domain/constellations";
 import { CharacterBox } from "../../components/base/CharacterBox";
 import TextAndLabel from "../../components/base/TextAndLabel";
 import { Document, Fireball, Map } from "grommet-icons";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [constellations, setConstellations] = useState<Constellation[]>();
     const [index, setIndex] = useState<number>(0);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const size = useContext(ResponsiveContext)
 
     const onActive = (nextIndex: number) => setIndex(nextIndex);
@@ -40,12 +41,9 @@ function Constellations() {
     }
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setPlayerData(theData.get("players"));
-            setConstellations(theData.get("constellations"));
-        }
-    }, [appContext])
+        setPlayerData(theData.get("players"));
+        setConstellations(theData.get("constellations"));
+    }, [theData])
     return (
         <Box>
             <NextSeo title="Constellations" />
@@ -73,7 +71,7 @@ function Constellations() {
                                                             <TextAndLabel textSize="small" label={"Requirement"} text={filteredConstellation.data.requirement.split("@")[0]} />
                                                         </Box>
                                                         <Box direction="row" gap="small">
-                                                            <Fireball color="brand" size="18px"/>
+                                                            <Fireball color="brand" size="18px" />
                                                             <TextAndLabel textSize="small" label={"Points"} text={filteredConstellation.data.starChartPoints.toString()} />
                                                         </Box>
                                                     </Box>

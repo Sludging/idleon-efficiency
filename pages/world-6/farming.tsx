@@ -87,14 +87,14 @@ function Farming() {
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Farming</Heading>
                 <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies. THE UI ISN&apos;T FINAL!</Text>
                 <Text>Farming Lv: {farming.farmingLevel}</Text>
-                <Box direction="row" gap="xsmall" margin={{ bottom: 'small' }}  wrap>
+                <Box direction="row" gap="xsmall" margin={{ bottom: 'small' }} wrap>
                     <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
                             label='Magic Beans'
                             component={
                                 <Box>
                                     <Box gap="small" direction="row" align="center">
-                                        <IconImage data={Crop.getMagicBeanIconData()}/>
+                                        <IconImage data={Crop.getMagicBeanIconData()} />
                                         <Text size="small">{nFormatter(farming.magicBeansOwned)}</Text>
                                     </Box>
                                     <Box gap="small" direction="row" align="center">
@@ -113,19 +113,19 @@ function Farming() {
                                     <IconImage data={FarmingDomain.getInstaGrowImageData()} />
                                     <Text size="small">{nFormatter(farming.instaGrowToolLeft)}</Text>
                                 </Box>
-                            }                            
+                            }
                         />
                     </ShadowBox>
                     <ShadowBox background="dark-1" gap="xsmall" pad="small" align="center">
                         <ComponentAndLabel
                             label={`Crop scientist (crop types found : ${farming.cropScientist.discoveredCrops})`}
                             component={
-                                <Box gap="small" direction="row" margin={{top:"xsmall"}} wrap>
+                                <Box gap="small" direction="row" margin={{ top: "xsmall" }} wrap>
                                     {
                                         farming.cropScientist.bonuses.map((bonus, index) => {
                                             return (
                                                 <Box key={index} border={{ color: 'grey-1' }} background="accent-4">
-                                                    <ShadowBox style={{ opacity: bonus.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad={"xsmall"}>                                                    
+                                                    <ShadowBox style={{ opacity: bonus.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad={"xsmall"}>
                                                         <ComponentAndLabel
                                                             label={CropScientist.getBonusTitle(bonus.bonusText)}
                                                             component={
@@ -133,7 +133,7 @@ function Farming() {
                                                                     <Text size="small">{farming.cropScientist.getShortBonusText(bonus.bonusText)}</Text>
                                                                 </Box>
                                                             }
-                                                        />                                                        
+                                                        />
                                                     </ShadowBox>
                                                 </Box>
                                             )
