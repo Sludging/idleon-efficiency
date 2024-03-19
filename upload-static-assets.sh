@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Get the current prefix by extracting it from the next.config.js file.
-CURRENT_PATCH=$(grep -P -o '^const currentPatch = "\K[a-zA-Z0-9\.-]*' next.config.js)
+CURRENT_PATCH=$(grep -P -o '^let currentPatch = "\K[a-zA-Z0-9\.-]*' next.config.js)
 
 if [ "$NODE_ENV" = "production" ] || [ "$NODE_ENV" = "preview" ]; then
     echo "Uploading latest build files to idleon-efficiency-images/${CURRENT_PATCH}/_next/static"
