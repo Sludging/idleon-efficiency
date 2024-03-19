@@ -7,7 +7,6 @@ import { NextSeo } from 'next-seo';
 import { ChargeDisplay } from '../../components/world-3/worship/charge';
 import { PrayerDisplay } from '../../components/world-3/worship/prayers';
 import { TotemDisplay } from '../../components/world-3/worship/totem';
-import { TotalizerDisplay } from '../../components/world-3/worship/totalizer';
 import TabButton from '../../components/base/TabButton';
 
 function Worship() {
@@ -27,7 +26,6 @@ function Worship() {
                 {activeTab == "Charge" && <ChargeDisplay />}
                 {activeTab == "Totems" && <TotemDisplay />}
                 {activeTab == "Prayers" && <PrayerDisplay />}
-                {activeTab == "Totalizer" && <TotalizerDisplay />}
             </Box>
         </Box>
     )

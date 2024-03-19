@@ -97,7 +97,6 @@ export class Totalizer {
             case TotalizerBonus.ExpMulti:
             case TotalizerBonus.SkillExp:
             case TotalizerBonus.FarmingExp:
-            // TODO : check if JadeCoin and EssenceGain really are 1% bonus like FarmingExp (haven't unlocked those two myself)
             case TotalizerBonus.JadeCoin:
             case TotalizerBonus.EssenceGain:
                 return Math.floor(this.totalWaves / 10);
@@ -109,15 +108,15 @@ export class Totalizer {
 
     getText = (bonus: TotalizerBonus): string => {
         switch (bonus) {
-            case TotalizerBonus.Damage: return "{% bonus Damage";
-            case TotalizerBonus.BoatSpeed: return "{% bonus Sailing Speed";
-            case TotalizerBonus.ExpMulti: return "{% bonus Class EXP";
-            case TotalizerBonus.SkillExp: return "{% bonus Skill EXP";
-            case TotalizerBonus.Cooking: return "{% bonus Meal Cooking speed";
-            case TotalizerBonus.BitValue: return "{% Bits for Gaming";
-            case TotalizerBonus.FarmingExp: return "{% bonus Farming EXP";
-            case TotalizerBonus.JadeCoin: return "{% bonus Jade Coins Gain";
-            case TotalizerBonus.EssenceGain: return "{% All Essence Gain";
+            case TotalizerBonus.Damage: return "+{% Damage";
+            case TotalizerBonus.BoatSpeed: return "+{% Sailing Speed";
+            case TotalizerBonus.ExpMulti: return "+{% Class EXP";
+            case TotalizerBonus.SkillExp: return "+{% Skill EXP";
+            case TotalizerBonus.Cooking: return "+{% Meal Cooking speed";
+            case TotalizerBonus.BitValue: return "+{% Bits for Gaming";
+            case TotalizerBonus.FarmingExp: return "+{% Farming EXP";
+            case TotalizerBonus.JadeCoin: return "+{% Jade Coins ";
+            case TotalizerBonus.EssenceGain: return "+{% All Essence Gain";
             default: return "";
         }
     }
