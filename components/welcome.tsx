@@ -14,11 +14,12 @@ import {
 } from 'grommet'
 import styled from 'styled-components'
 import { useContext, useState, MouseEventHandler } from 'react';
-import { AuthContext, AuthStatus } from '../data/firebase/authContext'
+import { AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
 import { AppContext, DataStatus } from '../data/appContext';
+import { useAuthStore } from '../lib/providers/authStoreProvider';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -40,7 +41,9 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 }
 
 export default function Welcome() {
-    const authData = useContext(AuthContext);
+    const { user, authStatus, emailLogin, appleLogin } = useAuthStore(
+        (state) => state,
+      )
     const appContext = useContext(AppContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -49,20 +52,20 @@ export default function Welcome() {
 
     const size = useContext(ResponsiveContext);
 
-    const isLoading = authData?.authStatus == AuthStatus.Loading ?? true;
+    const isLoading = authStatus == AuthStatus.Loading ?? true;
 
 
     const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
                 if (value2) {
-                    toCall(value, value2, handleError);
+                    toCall(value, value2);
                 }
                 else if (value) {
-                    toCall(value, handleError);
+                    toCall(value);
                 }
                 else {
-                    toCall(handleError);
+                    toCall();
                 }
             }
         }
@@ -103,7 +106,7 @@ export default function Welcome() {
                     </Grid>
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
-                    {!isLoading && !authData?.user && appContext.dataStatus != DataStatus.StaticData &&
+                    {!isLoading && !user && appContext.dataStatus != DataStatus.StaticData &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             <Box>
                                 <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
@@ -111,7 +114,7 @@ export default function Welcome() {
                                         <Text size="24px">Sign in with social</Text>
                                         <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
                                         <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
-                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(authData?.appleFunction) } />
+                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(appleLogin) } />
                                     </Box>
                                     {size != "small" && <Box align="center">
                                         <VerticalLine />
@@ -135,7 +138,7 @@ export default function Welcome() {
                                             type='password'
                                             onChange={event => setPassword(event.target.value)}
                                         />
-                                        <Button primary color="brand" label="Login" onClick={() => onButtonClick(authData?.emailLoginFunction, email, password)} />
+                                        <Button primary color="brand" label="Login" onClick={() => onButtonClick(emailLogin, email, password)} />
 
                                     </Box>
                                 </Grid>

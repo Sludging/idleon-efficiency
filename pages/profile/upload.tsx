@@ -2,7 +2,6 @@ import {
     Anchor,
     Box,
     Button,
-    CheckBox,
     Heading,
     Notification,
     Paragraph,
@@ -14,15 +13,17 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { AppContext } from '../../data/appContext'
 import { NextSeo } from 'next-seo';
 import { ProfileUploader } from '../../data/storage/profiles';
-import { AuthContext } from '../../data/firebase/authContext';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { dateToIntString } from '../../data/utility';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
+import { useAuthStore } from '../../lib/providers/authStoreProvider';
 
 function UploadProfile() {
-    const authContext = useContext(AuthContext);
+    const { user } = useAuthStore(
+        (state) => state,
+    )
     const appContext = useContext(AppContext);
 
     const [uploadSensitiveData, setUploadSensitiveData] = useState<boolean>(false);
@@ -50,7 +51,6 @@ function UploadProfile() {
     }, [lastUpload]);
 
     const uploadData = async () => {
-        const user = authContext?.user;
         if (user) {
             setUploading(true);
             const uploader = new ProfileUploader();
@@ -77,16 +77,15 @@ function UploadProfile() {
     }, [lastUpload]);
 
     useEffect(() => {
-        const user = authContext?.user;
         if (user) {
             const localDate = localStorage.getItem(`${user.uid}/last_profile_upload`);
             if (localDate) {
                 setLastUpload(new Date(localDate));
             }
         }
-    }, [appContext, authContext, showToast])
+    }, [appContext, user, showToast])
 
-    if (!authContext?.user) {
+    if (!user) {
         <Box align="center" pad="medium">
             <Heading level='3'>Go Away, you aren&apos;t logged in.</Heading>
         </Box>

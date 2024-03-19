@@ -1,23 +1,18 @@
 import React from 'react'
-import Image from "next/image";
 import {
     Text,
     Box,
     Main,
-    Footer,
-    Anchor,
 } from "grommet"
 import { useContext } from 'react'
 import { AppContext, AppStatus, DataStatus } from '../data/appContext'
-import { AuthContext, AuthStatus } from '../data/firebase/authContext'
+import { AuthStatus } from '../data/firebase/authContext'
 import { useRouter } from 'next/dist/client/router';
 
-import Icon from './leaderboards/icon';
-import Discord from '../lib/discord';
-import IconLink from './base/IconLink';
 import { HeaderComponent } from './header/header';
 import { Navigation } from './navigation';
 import { FooterComponent } from './footer/footer';
+import { useAuthStore } from '../lib/providers/authStoreProvider';
 
 declare const window: Window &
     typeof globalThis & {
@@ -35,13 +30,14 @@ export default function Layout({
 }: {
     children: React.ReactNode
 }) {
-    const authData = useContext(AuthContext);
+    const { authStatus } = useAuthStore(
+        (state) => state,
+    )
     const appContext = useContext(AppContext);
     const router = useRouter();
-
     const validState = appContext.status == AppStatus.Ready;
 
-    if (authData?.authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && !["/", "/privacy-policy"].includes(router.pathname)) {
+    if (authStatus == AuthStatus.NoUser && appContext.status == AppStatus.Ready && appContext.dataStatus == DataStatus.NoData && !["/", "/privacy-policy"].includes(router.pathname)) {
         router.push('/');
     }
 

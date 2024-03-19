@@ -2,8 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { getApp } from 'firebase/app';
-import { useContext } from 'react';
-import { AuthContext, AuthStatus } from './firebase/authContext';
+import { AuthStatus } from './firebase/authContext';
 
 import { sendEvent } from '../lib/gtag';
 
@@ -12,8 +11,8 @@ import { initAllItems } from './domain/items';
 import { Cloudsave } from './domain/cloudsave';
 import { IdleonData, initAccountDataKeys, updateIdleonData } from './domain/idleonData';
 import { getSubDomain, isSubDomain } from './utility';
-import useSWR from 'swr';
 import { fetcher } from './fetchers/getProfile';
+import { useAuthStore } from '../lib/providers/authStoreProvider';
 
 export enum AppStatus {
   Init,
@@ -60,8 +59,9 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({ children
   const [dataStatus, setDataStatus] = useState<DataStatus>(DataStatus.Init);
   const [fireStore, setFireStore] = useState<FirestoreData | undefined>(undefined);
   const [currentDomain, setCurrentDomain] = useState<string>("");
-  const authContext = useContext(AuthContext);
-  const user = authContext?.user;
+  const { user, authStatus } = useAuthStore(
+    (state) => state,
+  )
 
   const handleStaticData = async (profile: string, data: { data: Map<string, any>, charNames: string[] }) => {
     setDataStatus(DataStatus.Loading);
@@ -93,7 +93,7 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Don't do anything while the auth is still being figured out.
-    if (authContext?.authStatus != AuthStatus.Loading) {
+    if (authStatus != AuthStatus.Loading) {
       const subDomain = isSubDomain();
       const domain = getSubDomain();
       const app = getApp();
@@ -118,15 +118,15 @@ export const AppProvider: React.FC<{ children?: React.ReactNode }> = ({ children
         setCurrentDomain(domain);
       }
       // No domain and no logged in user, we have no data.
-      if (!subDomain && authContext?.authStatus == AuthStatus.NoUser) {
+      if (!subDomain && authStatus == AuthStatus.NoUser) {
         setDataStatus(DataStatus.NoData);
       }
       // No domain, there's a valid user but we have no actual data. Probably wrong account?
-      if (!subDomain && authContext?.authStatus == AuthStatus.Valid && dataStatus == DataStatus.NoData) {
+      if (!subDomain && authStatus == AuthStatus.Valid && dataStatus == DataStatus.NoData) {
         setDataStatus(DataStatus.MissingData);
       };
     }
-  }, [authContext, appStatus,dataStatus]);
+  }, [authStatus, user, appStatus, dataStatus]);
 
 
   const contextValue = useMemo(() => ({

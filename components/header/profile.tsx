@@ -2,15 +2,18 @@
 
 import Link from 'next/link';
 import { useContext, useState } from "react";
-import { AuthContext, AuthStatus } from "../../data/firebase/authContext";
+import { AuthStatus } from "../../data/firebase/authContext";
 import { Avatar, Box, Button, DropButton, ThemeContext, ThemeType } from "grommet";
 import { CaretDownFill, User } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
 import { AppContext, DataStatus } from '../../data/appContext';
 import TextAndLabel from '../base/TextAndLabel';
+import { useAuthStore } from '../../lib/providers/authStoreProvider';
 
 export const Profile = () => {
-    const authData = useContext(AuthContext);
+    const { authStatus, logout } = useAuthStore(
+        (state) => state,
+    )
     const appContext = useContext(AppContext);
     const theme = useContext<ThemeType>(ThemeContext);
 
@@ -32,7 +35,7 @@ export const Profile = () => {
         }
     }
 
-    if (authData?.authStatus == AuthStatus.Valid) {
+    if (authStatus == AuthStatus.Valid) {
         return (
             <Box direction="row">
                 <DropButton
@@ -64,7 +67,7 @@ export const Profile = () => {
                             </Link>
                             }
                             < Box border={{ color: 'grey-1' }} fill />
-                            <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(authData?.logoutFunction); setProfileDropDownOpen(false) }}>
+                            <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(logout); setProfileDropDownOpen(false) }}>
                                 <Box pad="small">Sign Out</Box>
                             </Button>
                         </Box>
