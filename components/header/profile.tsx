@@ -6,15 +6,19 @@ import { AuthStatus } from "../../data/firebase/authContext";
 import { Avatar, Box, Button, DropButton, ThemeContext, ThemeType } from "grommet";
 import { CaretDownFill, User } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
-import { AppContext, DataStatus } from '../../data/appContext';
-import TextAndLabel from '../base/TextAndLabel';
 import { useAuthStore } from '../../lib/providers/authStoreProvider';
+import { DataStatus } from '../../lib/stores/appDataStore';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow'
+import TextAndLabel from '../base/TextAndLabel';
 
 export const Profile = () => {
     const { authStatus, logout } = useAuthStore(
-        (state) => state,
+        useShallow((state) => ({ authStatus: state.authStatus, logout: state.logout })),
     )
-    const appContext = useContext(AppContext);
+    const { profile, dataStatus } = useAppDataStore(
+        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus }))
+    )
     const theme = useContext<ThemeType>(ThemeContext);
 
     const [profileDropDownOpen, setProfileDropDownOpen] = useState<boolean>(false);
@@ -34,8 +38,6 @@ export const Profile = () => {
             console.log(e);
         }
     }
-
-    console.log("Profile [Render]", AuthStatus[authStatus]);
 
     if (authStatus == AuthStatus.Valid) {
         return (
@@ -62,9 +64,9 @@ export const Profile = () => {
                     onClick={() => setProfileDropDownOpen(true)}
                     dropContent={
                         <Box width="small" border={{ color: 'grey-1' }} round="small">
-                            {appContext.dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
+                            {dataStatus == DataStatus.LiveData && <Link href={'/profile/upload'} legacyBehavior>
                                 <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                    <Box pad="small">Public Profile</Box>
+                                    <Box align="center" pad="small">Public Profile</Box>
                                 </Button>
                             </Link>
                             }
@@ -79,9 +81,9 @@ export const Profile = () => {
         )
     }
 
-    if (appContext.dataStatus == DataStatus.StaticData) {
+    if (dataStatus == DataStatus.StaticData) {
         return (
-            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={appContext.profile} />
+            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={profile} />
         )
     }
 }

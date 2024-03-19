@@ -18,8 +18,10 @@ import { AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
-import { AppContext, DataStatus } from '../data/appContext';
 import { useAuthStore } from '../lib/providers/authStoreProvider';
+import { DataStatus } from '../lib/stores/appDataStore';
+import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow'
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -42,9 +44,16 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 
 export default function Welcome() {
     const { user, authStatus, emailLogin, appleLogin } = useAuthStore(
-        (state) => state,
-      )
-    const appContext = useContext(AppContext);
+        useShallow((state) => ({
+            user: state.user,
+            authStatus: state.authStatus,
+            emailLogin: state.emailLogin,
+            appleLogin: state.appleLogin,
+        })),
+    )
+    const { profile, dataStatus } = useAppDataStore(
+        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus }))
+    )
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
@@ -106,15 +115,15 @@ export default function Welcome() {
                     </Grid>
                 </Box>
                 <Box width={{ max: '1440px' }} pad="large" fill margin={{ left: 'auto', right: 'auto' }} style={{ position: 'relative', top: '150px' }} >
-                    {!isLoading && !user && appContext.dataStatus != DataStatus.StaticData &&
+                    {!isLoading && !user && dataStatus != DataStatus.StaticData &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false}>
                             <Box>
-                                <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large"}}>
-                                    <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined}} border={size == "small" ? {size: '2px', color: 'grey-1', side: 'bottom'} : undefined}>
+                                <Grid columns={size == "small" ? ["100%"] : ["45%", "10%", "45%"]} pad={{ left: "large" }}>
+                                    <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined }} border={size == "small" ? { size: '2px', color: 'grey-1', side: 'bottom' } : undefined}>
                                         <Text size="24px">Sign in with social</Text>
                                         <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
                                         <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
-                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() =>onButtonClick(appleLogin) } />
+                                        <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() => onButtonClick(appleLogin)} />
                                     </Box>
                                     {size != "small" && <Box align="center">
                                         <VerticalLine />
@@ -124,7 +133,7 @@ export default function Welcome() {
                                         <VerticalLine />
                                     </Box>
                                     }
-                                    <Box gap="small" pad={{ left: 'large', right: 'large', top: size == "small" ? 'medium' : undefined}}>
+                                    <Box gap="small" pad={{ left: 'large', right: 'large', top: size == "small" ? 'medium' : undefined }}>
                                         <Text size="24px">Sign in with email</Text>
                                         <Text size="xsmall">Use this if you signed into Legends of Idleon using email</Text>
                                         <TextInput
@@ -152,12 +161,12 @@ export default function Welcome() {
                         </ShadowBox>
                     }
                     {
-                        appContext.dataStatus == DataStatus.StaticData && 
+                        dataStatus == DataStatus.StaticData &&
                         <ShadowBox pad="large" background="dark-2" fill margin={{ left: 'auto', right: 'auto' }} flex={false} align='center'>
                             <Box gap="medium">
                                 <Box direction="row" gap='xsmall'>
                                     <Text size='large'>You are viewing the public profile of:</Text>
-                                    <Text size='large' color="accent-1">{appContext.profile}</Text>
+                                    <Text size='large' color="accent-1">{profile}</Text>
                                 </Box>
                                 <Box gap="small" align="center">
                                     <Text size="large">Try it for yourself!</Text>
