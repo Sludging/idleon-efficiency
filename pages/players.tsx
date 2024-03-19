@@ -794,24 +794,28 @@ function TalentDisplay({ player }: { player: Player }) {
                 {player.extraLevelsFromTalent > 0 && <TextAndLabel label="Symbols Of Beyond" text={`+${player.extraLevelsFromTalent}`} />}
                 {player.extraLevelsFromBear > 0 && <TextAndLabel label="Bear God" text={`+${player.extraLevelsFromBear}`} />}
                 {player.extraLevelsFromES > 0 && <TextAndLabel label="Elemental Sorcerer" text={`+${player.extraLevelsFromES}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0) && <CheckBox
-                    checked={bookMaxLevel}
-                    label={<Box direction="row" align="center">
-                        <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
-                        <TipDisplay
-                            body={<Box gap="xsmall">
-                                <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
-                            </Box>}
-                            size="small"
-                            heading='Show book level'
-                            maxWidth='medium'
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>}
-                    onChange={(event) => setBookMaxLevel(event.target.checked)}
-                />
+                {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
+                {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
+                {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) && 
+                    <CheckBox
+                        checked={bookMaxLevel}
+                        label={<Box direction="row" align="center">
+                            <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
+                            <TipDisplay
+                                body={<Box gap="xsmall">
+                                    <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
+                                </Box>}
+                                size="small"
+                                heading='Show book level'
+                                maxWidth='medium'
+                                direction={TipDirection.Down}
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>}
+                        onChange={(event) => setBookMaxLevel(event.target.checked)}
+                    />
                 }
             </Box>
             {
@@ -824,7 +828,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex)) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES) : talent.maxLevel;
+                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex)) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES - player.extraLevelsFromAchievements - player.extraLevelsFromSlug - player.extraLevelsFromEquinox) : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip
@@ -842,10 +846,8 @@ function TalentDisplay({ player }: { player: Player }) {
                                                             <Box title={talent.name} style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
                                                                 <IconImage data={talent.getImageData()} scale={size == "small" ? 0.5 : 0.8} />
                                                             </Box>
-                                                            <Box direction="row" gap="xxsmall">
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>{talent.level} </Text>
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>/</Text>
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>{maxLeveLToShow}</Text>
+                                                            <Box direction="row">
+                                                                <Text color={talent.maxLevel > 0 && talent.level >= talent.maxLevel ? 'status-ok' : ''} size={size == "small" ? "xsmall" : "small"}>{`${talent.level} / ${maxLeveLToShow}`}</Text>
                                                             </Box>
                                                         </Box>
                                                     </Tip>
