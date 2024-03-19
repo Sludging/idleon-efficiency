@@ -3,7 +3,7 @@
 # Get the current prefix by extracting it from the next.config.js file.
 CURRENT_PATCH=$(grep -P -o '^let currentPatch = "\K[a-zA-Z0-9\.-]*' next.config.js)
 
-if [ "$NODE_ENV" = "production" ] || [ "$NODE_ENV" = "preview" ]; then
+if [ "$VERCEL_ENV" = "production" ] || [ "$VERCEL_ENV" = "preview" ]; then
     MAX_AGE=2592000
     # In preview we want to have a shorter time for refetching,
     # so use shorter max age and use a preview specific folder
