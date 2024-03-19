@@ -28,7 +28,8 @@
     "react-dom": "^18.2.0",
     "react-timer-hook": "^3.0.7",
     "styled-components": "^5.3.11",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

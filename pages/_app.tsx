@@ -4,7 +4,6 @@ import { Rubik } from 'next/font/google';
 
 import { dark, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
-import { AuthProvider } from '../data/firebase/authContext';
 import { AppProvider } from '../data/appContext';
 
 import Script from 'next/script'
@@ -18,6 +17,7 @@ import Layout from '../components/layout';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 import { useEffect } from 'react';
+import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
 
 const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 
@@ -192,14 +192,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
       <Grommet theme={customTheme} full>
-        <AuthProvider>
+        <AuthStoreProvider>
           <AppProvider>
             <DefaultSeo {...SEO} />
               <Layout>
                 <Component {...pageProps} />
               </Layout>
           </AppProvider>
-        </AuthProvider>
+        </AuthStoreProvider>
       </Grommet>
     </>
   )
