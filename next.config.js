@@ -14,6 +14,8 @@ if (process.env.NODE_ENV == "preview") {
   currentPatch += "-preview"
 }
 
+console.log("Current Patch: ", currentPatch, process.env.NODE_ENV)
+
 const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
