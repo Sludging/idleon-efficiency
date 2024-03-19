@@ -35,6 +35,8 @@ export const Profile = () => {
         }
     }
 
+    console.log("Profile [Render]", AuthStatus[authStatus]);
+
     if (authStatus == AuthStatus.Valid) {
         return (
             <Box direction="row">

@@ -40,6 +40,7 @@ export const useAuthStore = <T,>(
   // Probably a better way to handle this, but it works for now.
   const currentState = authStoreContext.getState()
   if (!currentState.initialized) {
+    console.log("Calling init");
     currentState.initialize();
   }
 
