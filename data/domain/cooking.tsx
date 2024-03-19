@@ -80,6 +80,16 @@ export class Meal {
     timeToThirty: number = 0;
     timeToSixty: number = 0;
     timeToMax: number = 0;
+    
+    // Active cooking values with Silkrode bonus
+    cookingContributionWithSilkrode: number = 0;
+    timeToNextWithSilkrode: number = 0;
+    timeToDiamondWithSilkrode: number = 0;
+    timeToPurpleWithSilkrode: number = 0;
+    timeToVoidWithSilkrode: number = 0;
+    timeToThirtyWithSilkrode: number = 0;
+    timeToSixtyWithSilkrode: number = 0;
+    timeToMaxWithSilkrode: number = 0;
 
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
@@ -92,6 +102,12 @@ export class Meal {
     zerkerLadlesToLevel: number = -1;
     ladlesToNextMilestone: number = -1;
     zerkerLadlesToNextMilestone: number = -1;
+
+    // Ladles with Silkrode bonus
+    ladlesToLevelWithSilkrode: number = -1;
+    zerkerLadlesToLevelWithSilkrode: number = -1;
+    ladlesToNextMilestoneWithSilkrode: number = -1;
+    zerkerLadlesToNextMilestoneWithSilkrode: number = -1;
 
     // Calculated
     maxLevel: number = 30;
@@ -211,9 +227,10 @@ export class Kitchen {
     richelin: boolean = false;
 
     mealSpeed: number = 1;
-    mealSpeedWithSilkrode: number = 1;
     fireSpeed: number = 1;
     recipeLuck: number = 1;
+    
+    mealSpeedWithSilkrode: number = 1;
 
     constructor(public index: number) { }
 
@@ -298,6 +315,7 @@ export class Cooking extends Domain {
 
     bestBerserker: Player | undefined;
     totalCookingSpeed: number = 0;
+    totalCookingSpeedWithSilkrode: number = 0;
 
     mealsDiscovered: number = 0;
     mealsAtVoid: number = 0;
@@ -531,6 +549,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
+        meal.cookingContributionWithSilkrode = 0;
         meal.maxLevel = 30;
     });
 
@@ -582,6 +601,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const islandExpeditionReduction = islandExpeditions.reductionToKitchenCosts;
 
     let totalContribution = 0;
+    let totalContributionWithSilkrode = 0;
     cooking.kitchens.forEach((kitchen, index) => {
 
         kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
@@ -596,7 +616,9 @@ export const updateCooking = (data: Map<string, any>) => {
         // if actively cooking
         if (kitchen.activeMeal != -1) {
             cooking.meals[kitchen.activeMeal].cookingContribution += kitchen.mealSpeed;
+            cooking.meals[kitchen.activeMeal].cookingContributionWithSilkrode += kitchen.mealSpeedWithSilkrode;
             totalContribution += kitchen.mealSpeed;
+            totalContributionWithSilkrode += kitchen.mealSpeedWithSilkrode;
         }
     })
 
@@ -605,6 +627,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const jadeUpgradeMaxMealLevel = (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 20)?.purchased ? 10 : 0) + (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 21)?.purchased ? 10 : 0)
     cooking.meals.forEach(meal => {
         const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
+        const cookingSpeedWithSilkrode = meal.cookingContributionWithSilkrode > 0 ? meal.cookingContributionWithSilkrode : totalContributionWithSilkrode;
         meal.maxLevel += artifactMaxMealLevel;
         meal.maxLevel += jadeUpgradeMaxMealLevel;
 
@@ -619,9 +642,19 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToThirty = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToMax = Math.max(0, ((meal.getCostsTillMaxLevel() - meal.count) * meal.cookReq) / cookingSpeed);
 
+        meal.timeToDiamondWithSilkrode = Math.max(0, ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+        meal.timeToPurpleWithSilkrode = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+        meal.timeToVoidWithSilkrode = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+        meal.timeToThirtyWithSilkrode = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+        meal.timeToMaxWithSilkrode = Math.max(0, ((meal.getCostsTillMaxLevel() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+
         meal.timeToNext = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.ladlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed)));
         meal.zerkerLadlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100)));
+
+        meal.timeToNextWithSilkrode = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
+        meal.ladlesToLevelWithSilkrode = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode)));
+        meal.zerkerLadlesToLevelWithSilkrode = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode) / (1 + zerkerBonus / 100)));
 
         let milestoneCosts = 0;
         if (meal.timeToDiamond > 0) {
@@ -642,6 +675,9 @@ export const updateCooking = (data: Map<string, any>) => {
         if (milestoneCosts > 0) {
             meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed));
             meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
+
+            meal.ladlesToNextMilestoneWithSilkrode = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode));
+            meal.zerkerLadlesToNextMilestoneWithSilkrode = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode) / (1 + zerkerBonus / 100));
         }
     });
 
@@ -651,6 +687,7 @@ export const updateCooking = (data: Map<string, any>) => {
 
     // Nice to have maths
     cooking.totalCookingSpeed = totalContribution;
+    cooking.totalCookingSpeedWithSilkrode = totalContributionWithSilkrode;
     cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
     cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
     cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
