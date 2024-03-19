@@ -309,10 +309,13 @@ function Cooking() {
                         options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to Max"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
-                    <Box direction="row" align="center">
-                        <Ascending color="Legendary" size="large" />
-                        <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot; Jade Emporium bonus</Text>
-                    </Box>
+                    {
+                        cooking.meals.filter(meal => meal.noMealLeftBehindAffected == true).length > 0 &&
+                        <Box direction="row" align="center">
+                            <Ascending color="Legendary" size="large" />
+                            <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot; Jade Emporium bonus</Text>
+                        </Box>
+                    }
                 </Box>
                 <Grid columns={size == "small" ? "1/2" : "1/3"}>
                     <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
