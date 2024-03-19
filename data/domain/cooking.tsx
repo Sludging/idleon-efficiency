@@ -78,7 +78,6 @@ export class Meal {
     timeToPurple: number = 0;
     timeToVoid: number = 0;
     timeToThirty: number = 0;
-    timeToSixty: number = 0;
     timeToMax: number = 0;
     
     // Active cooking values with Silkrode bonus
@@ -88,7 +87,6 @@ export class Meal {
     timeToPurpleWithSilkrode: number = 0;
     timeToVoidWithSilkrode: number = 0;
     timeToThirtyWithSilkrode: number = 0;
-    timeToSixtyWithSilkrode: number = 0;
     timeToMaxWithSilkrode: number = 0;
 
     // Void plate achivement
@@ -322,6 +320,8 @@ export class Cooking extends Domain {
     mealsAtDiamond: number = 0;
 
     foodLustDiscountCapped: boolean = false;
+
+    canBeBoostedBySilkrode: boolean = false;
 
     getMaxMeals = () => {
         return this.meals.length;
@@ -571,7 +571,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
-    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
+    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * Math.max(1, starSigns.getSeraphCosmosBonus()) : 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
@@ -691,6 +691,7 @@ export const updateCooking = (data: Map<string, any>) => {
     cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
     cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
     cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
+    cooking.canBeBoostedBySilkrode = (starsign58 > 0);
 
     return cooking;
 }
