@@ -5,15 +5,14 @@ import {
     Text,
 } from 'grommet'
 import { useContext } from 'react';
-import { AppContext } from '../../../data/appContext'
 import { Worship as WorshipDomain } from '../../../data/domain/worship';
 import ShadowBox from "../../base/ShadowBox";
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
 export function TotalizerDisplay() {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
     const worship = theData.get("worship") as WorshipDomain;
 
     if (!worship.totalizer.unlocked) {

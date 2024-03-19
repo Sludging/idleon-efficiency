@@ -6,14 +6,14 @@ import {
     CheckBox,
     Button
 } from "grommet"
-import { ChangeEvent, useCallback, useContext, useState } from 'react';
-import { AppContext } from '../../data/appContext';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { NextSeo } from 'next-seo';
 import ShadowBox from "../../components/base/ShadowBox";
 import IconImage from "../../components/base/IconImage";
 import { Companion } from "../../data/domain/companions";
 import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
 import { CircleInformation } from "grommet-icons";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 const CompanionBox = ({ companion, editable = false }: { companion: Companion, editable: boolean }) => {
     const [checked, setChecked] = useState<boolean>(companion.owned);
@@ -45,8 +45,8 @@ const CompanionBox = ({ companion, editable = false }: { companion: Companion, e
 
 function CompanionDisplay() {
     const [allowEditing, setAllowEditing] = useState<boolean>(false);
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const companions = theData.get("companions") as Companion[];
 
     const editCompanions = () => {

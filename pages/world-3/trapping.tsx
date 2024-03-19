@@ -10,8 +10,7 @@ import {
     Grid,
     ResponsiveContext
 } from 'grommet'
-import { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useContext } from 'react';
 import { NextSeo } from 'next-seo';
 
 import { Trap, TrapSet } from '../../data/domain/traps';
@@ -20,6 +19,7 @@ import { Player } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import IconImage from '../../components/base/IconImage';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -93,9 +93,8 @@ function PlayerTraps(props: PlayerTrapProps) {
 }
 
 function Traps() {
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
-    const theData = appContext.data.getData();
     const playerTraps = theData.get("traps") as Trap[][];
     const playerNames = theData.get("playerNames") as string[];
     const playerData = theData.get("players") as Player[];

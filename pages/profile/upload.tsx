@@ -9,8 +9,7 @@ import {
     StatusType,
     Text
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useState, useEffect, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 import { ProfileUploader } from '../../data/storage/profiles';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
@@ -19,12 +18,18 @@ import { dateToIntString } from '../../data/utility';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
 import { useAuthStore } from '../../lib/providers/authStoreProvider';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function UploadProfile() {
     const { user } = useAuthStore(
         (state) => state,
     )
-    const appContext = useContext(AppContext);
+    const { theData, data } = useAppDataStore(
+        useShallow((state) => ({
+            theData: state.data.getData(),
+            data: state.data,
+        })));
 
     const [uploadSensitiveData, setUploadSensitiveData] = useState<boolean>(false);
     const [lastUpload, setLastUpload] = useState<Date | undefined>(undefined);
@@ -34,13 +39,12 @@ function UploadProfile() {
     const [toastMessage, setToastMessage] = useState<string>("");
 
     const firstCharName = useMemo(() => {
-        const theData = appContext.data.getData();
         const playerNames = theData.get('playerNames') as string[];
         if (playerNames) {
             return playerNames[0];
         }
         return undefined;
-    }, [appContext]);
+    }, [theData]);
 
     const secondsSinceLastUpload = useMemo(() => {
         if (!lastUpload) {
@@ -54,7 +58,7 @@ function UploadProfile() {
         if (user) {
             setUploading(true);
             const uploader = new ProfileUploader();
-            const uploadRes = await uploader.uploadProfile(appContext.data, user, !uploadSensitiveData);
+            const uploadRes = await uploader.uploadProfile(data, user, !uploadSensitiveData);
             let message = "";
             if (uploadRes.success) {
                 localStorage.setItem(`${user.uid}/last_profile_upload`, new Date().toISOString());
@@ -83,7 +87,7 @@ function UploadProfile() {
                 setLastUpload(new Date(localDate));
             }
         }
-    }, [appContext, user, showToast])
+    }, [user])
 
     if (!user) {
         <Box align="center" pad="medium">

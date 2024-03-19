@@ -15,7 +15,6 @@ import {
 
 import { Stamp } from '../../data/domain/stamps';
 import { useEffect, useState, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext';
 import { getCoinsArray, nFormatter } from '../../data/utility'
 import CoinsDisplay from "../../components/coinsDisplay";
 import styled from 'styled-components'
@@ -29,6 +28,7 @@ import { AtomCollider } from "../../data/domain/atomCollider";
 import { Storage } from "../../data/domain/storage";
 import { CircleInformation } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -36,8 +36,8 @@ const ShadowBox = styled(Box)`
 
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
     const theme = useContext(ThemeContext);
@@ -191,12 +191,11 @@ const HoverBox = styled(Box)`
 
 function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
     const [storage, setStorage] = useState<Storage>();
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
         setStorage(theData.get("storage"));
-    }, [appContext, theData])
+    }, [theData])
 
     const tabLevel = tab.reduce((sum, stamp) => sum += stamp.level, 0);
     return (
@@ -224,20 +223,16 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 }
 
 function Stamps() {
-    const appContext = useContext(AppContext);
     const theme = useContext(ThemeContext);
     const [highlight, sethighlight] = useState(false);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const stampData = theData.get("stamps") as Stamp[][];
 
     const hydrogen = useMemo(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            const collider = theData.get("collider") as AtomCollider;
-            return collider.atoms[0];
-        }
-        return undefined;
-    }, [appContext])
+        const collider = theData.get("collider") as AtomCollider;
+        return collider.atoms[0];
+    }, [theData])
 
     const gildedCount = useMemo(() => {
         if (stampData) {

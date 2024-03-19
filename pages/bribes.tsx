@@ -4,21 +4,19 @@ import {
     Heading
 } from "grommet"
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import ShadowBox from "../components/base/ShadowBox";
-import { AppContext } from '../data/appContext';
 import { Bribe, BribeStatus } from "../data/domain/bribes";
+import { useAppDataStore } from "../lib/providers/appDataStoreProvider";
 
 function Bribes() {
     const [bribeData, setBribeData] = useState<Bribe[]>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBribeData(theData.get("bribes"));
-        }
-    }, [appContext])
+        setBribeData(theData.get("bribes"));
+    }, [theData])
+
     return (
         <Box gap="small">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Bribes</Heading>

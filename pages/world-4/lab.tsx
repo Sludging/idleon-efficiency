@@ -5,16 +5,16 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { AppContext } from '../../data/appContext';
 import { Chip, Lab as LabDomain } from '../../data/domain/lab';
 import { Player } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { CharacterBox } from '../../components/base/CharacterBox';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function CharacterBoxOld({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
     const theBox = (
@@ -66,14 +66,11 @@ function CharacterBoxOld({ player, lineWidth, supped = false }: { player: Player
 
 function MainframeDisplay() {
     const [lab, setLab] = useState<LabDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setLab(theData.get("lab"));
-        }
-    }, [appContext]);
+        setLab(theData.get("lab"));
+    }, [theData]);
 
     if (!lab) {
         return <Box>Loading</Box>;
@@ -167,15 +164,12 @@ function MainframeDisplay() {
 function ChipDisplay() {
     const [lab, setLab] = useState<LabDomain>();
     const [playersData, setPlayersData] = useState<Player[]>([]);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setLab(theData.get("lab"));
-            setPlayersData(theData.get("players"));
-        }
-    }, [appContext]);
+        setLab(theData.get("lab"));
+        setPlayersData(theData.get("players"));
+    }, [theData]);
 
     if (!lab) {
         return <Box>Loading</Box>;

@@ -1,44 +1,42 @@
 import { Box, Grid, ResponsiveContext, Stack, Text, Tip } from "grommet";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Achievement } from "../../../data/domain/achievements";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 function Achivements({ worldIndex }: { worldIndex: number }) {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
     const [worldLetter, setWorldLetter] = useState<string>('A');
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
+
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const achievementsToShow = useMemo(() => {
         if (achievementData) {
             return achievementData.filter(x => x.data.name != "FILLERZZZ ACH" && x.worldLetter == worldLetter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex);
         }
         return [];
-    }, [achievementData, worldLetter])
+    }, [theData, worldLetter])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setAchievementData(theData.get("achievements"));
-            if (worldIndex == 0) {
-                setWorldLetter('A');
-            }
-            if (worldIndex == 1) {
-                setWorldLetter('B');
-            }
-            if (worldIndex == 2) {
-                setWorldLetter('C');
-            }
-            if (worldIndex == 3) {
-                setWorldLetter('D');
-            }
-            if (worldIndex == 4) {
-                setWorldLetter('E');
-            }
+        setAchievementData(theData.get("achievements"));
+        if (worldIndex == 0) {
+            setWorldLetter('A');
         }
-    }, [appContext, worldIndex])
+        if (worldIndex == 1) {
+            setWorldLetter('B');
+        }
+        if (worldIndex == 2) {
+            setWorldLetter('C');
+        }
+        if (worldIndex == 3) {
+            setWorldLetter('D');
+        }
+        if (worldIndex == 4) {
+            setWorldLetter('E');
+        }
+    }, [theData])
 
     return (
         <ShadowBox background="dark-1" pad="medium">

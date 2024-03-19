@@ -4,8 +4,6 @@ import {
     Stack,
     Text,
 } from 'grommet'
-import { useContext } from 'react';
-import { AppContext } from '../../../data/appContext'
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Worship as WorshipDomain } from '../../../data/domain/worship';
 import ShadowBox from "../../base/ShadowBox";
@@ -13,11 +11,11 @@ import IconImage from '../../base/IconImage';
 import { Player } from '../../../data/domain/player';
 import { TimeDisplaySize, TimeDown } from '../../base/TimeDisplay';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
 export function ChargeDisplay() {
-    const appContext = useContext(AppContext);
-
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+    
     const playerData = theData.get("players") as Player[];
     const worship = theData.get("worship") as WorshipDomain;
 
