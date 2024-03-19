@@ -745,7 +745,6 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     // Max talent level from Elemental Sorcerer
     players.forEach(player => {
         const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
-        console.log(esBonus);
         // Only update if different.
         if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
             player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))

@@ -1,6 +1,7 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
+import { Card } from "./cards";
 import { MapDataBase } from "./data/MapDataRepo";
 import { Gaming } from "./gaming";
 import { Item } from "./items";
@@ -232,13 +233,13 @@ export const updateWorshipTotalizer = (data: Map<string, any>) => {
     if (gaming.superbits[16].unlocked) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
-    if (sneaking.jadeUpgrades[12].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 12)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
     }
-    if (sneaking.jadeUpgrades[13].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 13)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
     }
-    if (sneaking.jadeUpgrades[14].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 14)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
     }
 
@@ -250,6 +251,7 @@ export const updateWorship = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const stamps = data.get("stamps") as Stamp[][];
+    const cards = data.get("cards") as Card[];
 
     // Reset the data since it will all be calculated in the next section.
     worship.playerData = [];
@@ -259,14 +261,15 @@ export const updateWorship = (data: Map<string, any>) => {
             const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
             const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
             const gospelLeaderBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.GospelLeader);
-            const popeFromActive = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope");
+            const popeFromActive = player.activeBubbles.find(bubble => bubble.name == "Call Me Pope");
             const popeBonus = popeFromActive ? alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.CallMePope) : 0;
 
             // Make skull info available.
             const playerSkull = player.gear.tools[5] ? (player.gear.tools[5].data.item as SkullItemModel) : undefined;
 
             // max charge
-            const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? 0;
+            let maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? cards.find(card => card.id == "SoulCard4" && card.passive == true)?.getBonus() ?? 0;
+            maxChargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard6")?.getBonus() ?? cards.find(card => card.id == "SoulCard6" && card.passive == true)?.getBonus() ?? 0;
             const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
             const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
             const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
@@ -275,7 +278,8 @@ export const updateWorship = (data: Map<string, any>) => {
             const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
             const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
             const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
+            let chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? cards.find(card => card.id == "SoulCard5" && card.passive == true)?.getBonus() ?? 0;
+            chargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard7")?.getBonus() ?? cards.find(card => card.id == "SoulCard7" && card.passive == true)?.getBonus() ?? 0;
             const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
 
             worship.playerData.push({
