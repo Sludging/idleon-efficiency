@@ -50,7 +50,7 @@ import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
-import { StarSigns, updateStarSignsUnlocked } from './starsigns';
+import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -193,6 +193,7 @@ const postProcessingMap: Record<string, Function> = {
     "updatePlayerTalentLevelESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelESBonus(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
+    "updateInfinityStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updateInfinityStarSigns(accountData),
     "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     "playerStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStarSigns(accountData),
     "cards": (doc: Cloudsave, accountData: Map<string, any>) => updateCards(accountData),

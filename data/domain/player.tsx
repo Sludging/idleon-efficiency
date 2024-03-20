@@ -705,25 +705,25 @@ export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
 
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
-    const rift = data.get("rift") as Rift;
     const starSigns = data.get("starsigns") as StarSigns;
 
-    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
-    const infiniteStars = infiniteBonus.getBonus();
-
-    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
-        players.forEach(player => {
-            // If player isn't manually aligned to this sign, add it
-            if (!player.starSigns.find(sign => sign.name == starSign.name) && starSigns.isStarSignUnlocked(starSign.name)) {
-                player.starSigns.push(starSign.duplicate(true));
+    // Apply Seraph Bonus to manually equipped star signs as the ones in InfinityStarSigns already have it
+    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
+    players.forEach(player => {
+        player.starSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {
+            if (sign.seraphCosmosBonus != seraphCosmosBonus) {
+                sign.seraphCosmosBonus = seraphCosmosBonus
             }
         })
     })
 
-    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
-    players.forEach(player => {
-        player.starSigns.forEach(sign => {
-            sign.seraphCosmosBonus = seraphCosmosBonus;
+    // Add Star signs impacted by infinity shiny pet bonus to star signs of the player
+    starSigns.infinityStarSigns.forEach(starSign => {
+        players.forEach(player => {
+            // If player isn't manually aligned to this sign, add it
+            if (!player.starSigns.find(sign => sign.name == starSign.name)) {
+                player.starSigns.push(starSign.duplicate(true));
+            }
         })
     })
 }

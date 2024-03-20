@@ -3,6 +3,7 @@ import { Domain } from './base/domain';
 import { RawData } from './base/domain';
 import { Item } from "./items";
 import { Summoning } from "./world-6/summoning";
+import { InfiniteStarsBonus, Rift } from "./rift";
 
 interface StarBonus {
     text: string,
@@ -41,7 +42,9 @@ export class StarSign {
 }
 
 export class StarSigns extends Domain  {
-    unlockedStarSigns: string[] = [];
+    unlockedStarSignsNames: string[] = [];
+    unlockedStarSigns: StarSign[] = [];
+    infinityStarSigns: StarSign[] = [];
     summoningLevel: number = 0;
 
     getRawKeys(): RawData[] {
@@ -61,15 +64,21 @@ export class StarSigns extends Domain  {
         starSigns.unlockedStarSigns = [];
         if (starSignsUnlockedData) {
             Object.keys(starSignsUnlockedData).forEach(key => {
-                if (!starSigns.unlockedStarSigns.includes(key)) {
-                    starSigns.unlockedStarSigns.push(key);
+                if (!starSigns.unlockedStarSignsNames.includes(key)) {
+                    starSigns.unlockedStarSignsNames.push(key);
                 }
             });
-        }    
+        }
+
+        Object.entries(StarSignMap).forEach(([_, starSign]) => {
+            if (starSigns.isStarSignUnlocked(starSign.name) && !starSigns.unlockedStarSigns.find(sign => sign.name == starSign.name)) {
+                starSigns.unlockedStarSigns.push(starSign.duplicate());
+            }
+        })
     }
 
     isStarSignUnlocked = (starSignName: string): boolean => {
-        return this.unlockedStarSigns.includes(starSignName.replaceAll(' ', '_'));
+        return this.unlockedStarSignsNames.includes(starSignName.replaceAll(' ', '_'));
     }
 
     getSeraphCosmosBonus = (): number => {
@@ -97,6 +106,37 @@ export const updateStarSignsUnlocked = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
 
     starSigns.summoningLevel = summoning.summoningLevel;
+    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
+    starSigns.unlockedStarSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {
+        if (sign.seraphCosmosBonus != seraphCosmosBonus) {
+            sign.seraphCosmosBonus = seraphCosmosBonus
+        }
+    })
+
+    return starSigns;
+}
+
+export const updateInfinityStarSigns = (data: Map<string, any>) =>  {
+    const rift = data.get("rift") as Rift;
+    const starSigns = data.get("starsigns") as StarSigns;
+
+    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
+    const infiniteStars = infiniteBonus.getBonus();
+
+    starSigns.infinityStarSigns = [];
+
+    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
+        if (starSigns.isStarSignUnlocked(starSign.name) && !starSigns.infinityStarSigns.find(sign => sign.name == starSign.name)) {
+            starSigns.infinityStarSigns.push(starSign.duplicate(true));
+        }
+    })
+
+    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
+    starSigns.infinityStarSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {
+        if (sign.seraphCosmosBonus != seraphCosmosBonus) {
+            sign.seraphCosmosBonus = seraphCosmosBonus
+        }
+    })
 }
 
 export const StarSignMap: Record<number, StarSign> = {
