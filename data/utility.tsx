@@ -352,8 +352,7 @@ export const getSubDomain = () => {
     // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
     // This is currently only for when testing with vercel (it ends up being 'vercel.app') to avoid invalid profile issues.
     if (locationSplit.length > 1 && !allowedTopDomains.includes(locationSplit[1])) {
-        console.log("Not a valid subdomain", windowLocation, locationSplit);
-        return "";
+        return "www";
     }
     let urlDomain = windowLocation != "" ? locationSplit[0] : "";
 

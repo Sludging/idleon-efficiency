@@ -9,6 +9,7 @@ import { initAllItems } from '../../data/domain/items'
 import { initAccountDataKeys } from '../../data/domain/idleonData'
 import { AuthStatus } from '../../data/firebase/authContext'
 import { isSubDomain } from '../../data/utility'
+import { useShallow } from 'zustand/react/shallow'
 
 export const AppDataStoreContext = createContext<StoreApi<AppDataStore> | null>(
   null,
@@ -24,7 +25,7 @@ export const AppDataStoreProvider = ({
   const storeRef = useRef<StoreApi<AppDataStore>>()
   if (!storeRef.current) {
     const allItems = initAllItems();
-    const initData = initAccountDataKeys(new Map(), allItems)
+    const initData = initAccountDataKeys(allItems)
     storeRef.current = createAppDataStore(initAppDataStore(initData))
   }
 
@@ -40,7 +41,7 @@ export const useAppDataStore = <T,>(
 ): T => {
   const appDataStoreContext = useContext(AppDataStoreContext)
   const { user, authStatus } = useAuthStore(
-    (state) => ({ user: state.user, authStatus: state.authStatus }),
+    useShallow((state) => ({ user: state.user, authStatus: state.authStatus })),
   )
 
   if (!appDataStoreContext) {

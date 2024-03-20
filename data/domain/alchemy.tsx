@@ -665,6 +665,8 @@ export class Alchemy extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
+        this.cauldrons = [];
+        this.vials = [];
         const data = initBubbleRepo();
 
         data.forEach(cauldron => {

@@ -165,7 +165,8 @@ export class IdleonData {
     }
 }
 
-export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Item[]) => {
+export const initAccountDataKeys = (allItems: Item[]) => {
+    const accountData: Map<string, any> = new Map();
     accountData.set("itemsData", allItems);
     domainList.forEach(dataDomain => {
         if (!dataDomain.initialized) {
@@ -177,7 +178,6 @@ export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Ite
             }
             else {
                 accountData.set(key, domainData);
-                dataDomain.markInitialized();
             }
         }
     })
