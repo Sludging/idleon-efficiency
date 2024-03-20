@@ -41,7 +41,7 @@ function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: 
     )
 }
 
-function KitchenDisplay({ kitchen, cooking, silkRodeChip }: { kitchen: Kitchen, cooking: CookingDomain, silkRodeChip: boolean }) {
+function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { kitchen: Kitchen, cooking: CookingDomain, silkRodeChip: boolean, starSignEquipped: boolean }) {
     const spiceValues = cooking.spicesToValues(kitchen.activeRecipe);
     const possibleMeals = cooking.getMealsFromSpiceValues(spiceValues);
     const timeToFinish = ((cooking.getRecipeTime(possibleMeals) - kitchen.progress) / kitchen.fireSpeed) * 3600;
@@ -54,7 +54,7 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip }: { kitchen: Kitchen, 
             <Box>
                 <Grid columns={["60%", "40%"]} gap="small">
                     <Text size="small" color="grey-2">Cooking Speed:</Text>
-                    <Text size="small">{`${nFormatter(silkRodeChip ? kitchen.mealSpeedWithSilkrode : kitchen.mealSpeed, "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${nFormatter(starSignEquipped ? (silkRodeChip ? kitchen.mealSpeedWithSilkrode : kitchen.mealSpeed) : kitchen.mealSpeedWithoutStarSign, "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">Recipe Fire Speed:</Text>
                     <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">New Recipe Luck:</Text>
@@ -82,7 +82,7 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip }: { kitchen: Kitchen, 
                         <Box>
                             <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
                         </Box>
-                        <Text size="small">{nFormatter((silkRodeChip ? kitchen.mealSpeedWithSilkrode : kitchen.mealSpeed) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
+                        <Text size="small">{nFormatter((starSignEquipped ? (silkRodeChip ? kitchen.mealSpeedWithSilkrode : kitchen.mealSpeed) : kitchen.mealSpeedWithoutStarSign) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                     </Box>
                 }
                 {
@@ -128,7 +128,7 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip }: { kitchen: Kitchen, 
     )
 }
 
-function KitchensDisplay({silkRodeChip} : {silkRodeChip: boolean}) {
+function KitchensDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [cooking, setCooking] = useState<CookingDomain>();
     const appContext = useContext(AppContext);
 
@@ -152,7 +152,7 @@ function KitchensDisplay({silkRodeChip} : {silkRodeChip: boolean}) {
                 {
                     cooking?.kitchens.filter(kitchen => kitchen.status != KitchenStatus.Locked).map((kitchen, index) => {
                         return (
-                            <KitchenDisplay key={index} kitchen={kitchen} silkRodeChip={silkRodeChip} cooking={cooking} />
+                            <KitchenDisplay key={index} kitchen={kitchen} silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} cooking={cooking} />
                         )
                     })
                 }
@@ -164,6 +164,7 @@ function KitchensDisplay({silkRodeChip} : {silkRodeChip: boolean}) {
 function Cooking() {
     const [sort, setSort] = useState<string>('');
     const [silkRodeChip, setSilkrode] = useState(false);
+    const [starSignEquipped, setStarSignEquipped] = useState(false);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -198,13 +199,27 @@ function Cooking() {
         return 1;
     }, [cooking])
 
-    const canUseSilkrode = useMemo(() => {
+    const starSignUnlocked = useMemo(() => {
         if (cooking) {
-            return cooking.canBeBoostedBySilkrode;
+            if (cooking.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return cooking.starSignUnlocked;
         }
 
         return false;
-    }, [cooking])
+    }, [appContext, cooking])
+
+    const starSignInfinity = useMemo(() => {
+        if (cooking) {
+            if (cooking.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return cooking.starSignInfinity;
+        }
+
+        return false;
+    }, [appContext, cooking])
 
     const mealsToShow = useMemo(() => {
         return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
@@ -255,12 +270,12 @@ function Cooking() {
         if (meal.level == 0) return "" //undiscovered meals
         switch (sort) {
             case "Level": return ""; //level already shown
-            case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime((silkRodeChip ? meal.timeToNextWithSilkrode : meal.timeToNext) * 3600) : "Already max level!";
-            case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime((silkRodeChip ? meal.timeToDiamondWithSilkrode : meal.timeToDiamond) * 3600) : "Already Diamond!";
-            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime((silkRodeChip ? meal.timeToPurpleWithSilkrode : meal.timeToPurple) * 3600) : "Already Purple!";
-            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime((silkRodeChip ? meal.timeToVoidWithSilkrode : meal.timeToVoid) * 3600) : "Already Void!";
-            case "Least Time to 30": return meal.timeToThirty > 0 ? toTime((silkRodeChip ? meal.timeToThirtyWithSilkrode : meal.timeToThirty) * 3600) : "Already 30!";
-            case "Least Time to Max": return meal.timeToMax > 0 ? toTime((silkRodeChip ? meal.timeToMaxWithSilkrode : meal.timeToMax) * 3600) : `Already max level!`;
+            case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToNextWithSilkrode : meal.timeToNext) : meal.timeToNextWithoutStarSign) * 3600) : "Already max level!";
+            case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToDiamondWithSilkrode : meal.timeToDiamond) : meal.timeToDiamondWithoutStarSign) * 3600) : "Already Diamond!";
+            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToPurpleWithSilkrode : meal.timeToPurple) : meal.timeToPurpleWithoutStarSign) * 3600) : "Already Purple!";
+            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToVoidWithSilkrode : meal.timeToVoid) : meal.timeToVoidWithoutStarSign) * 3600) : "Already Void!";
+            case "Least Time to 30": return meal.timeToThirty > 0 ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToThirtyWithSilkrode : meal.timeToThirty) : meal.timeToThirtyWithoutStarSign) * 3600) : "Already 30!";
+            case "Least Time to Max": return meal.timeToMax > 0 ? toTime((starSignEquipped ? (silkRodeChip ? meal.timeToMaxWithSilkrode : meal.timeToMax) : meal.timeToMaxWithoutStarSign) * 3600) : `Already max level!`;
         }
     }
 
@@ -303,7 +318,7 @@ function Cooking() {
                 </Box>
             </Box>
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
-                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? (silkRodeChip ? cooking.totalCookingSpeedWithSilkrode : cooking.totalCookingSpeed) : 0)} margin={{ right: 'medium' }} />
+                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? (starSignEquipped ? (silkRodeChip ? cooking.totalCookingSpeedWithSilkrode : cooking.totalCookingSpeed) : cooking.totalCookingSpeedWithoutStarSign) : 0)} margin={{ right: 'medium' }} />
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
@@ -311,7 +326,7 @@ function Cooking() {
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
-                <Box direction="row" gap="medium">
+                <Box direction="row" gap="medium" wrap>
                     <Select size="small"
                         placeholder="Sort by"
                         clear
@@ -320,23 +335,50 @@ function Cooking() {
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
                     {
-                        canUseSilkrode &&
+                        starSignUnlocked &&
+                        <Box direction='row' gap='small'>
+                            <CheckBox
+                                checked={starSignEquipped}
+                                label="Gordonius Major Equipped"
+                                onChange={(event) => setStarSignEquipped(event.target.checked)}
+                                disabled={starSignInfinity}
+                            />
+                            <TipDisplay
+                                heading="Gordonius Major"
+                                size='medium'
+                                maxWidth='medium'
+                                body={
+                                    <Box>
+                                        <Text size='small'>Looks like you unlocked the Gordonius Major star sign</Text>
+                                        {
+                                            starSignInfinity ?
+                                            <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                            :
+                                            <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                        }
+                                    </Box>
+                                }
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>
+                    }
+                    {
+                        starSignUnlocked &&
                         <Box direction='row' gap='small'>
                             <CheckBox
                                 checked={silkRodeChip}
                                 label="Silkrode Nanochip Equipped"
                                 onChange={(event) => setSilkrode(event.target.checked)}
+                                disabled={!starSignEquipped}
                             />
                             <TipDisplay
                                 heading="Silkrode Nanochip"
                                 size='medium'
+                                maxWidth='medium'
                                 body={
                                     <Box>
-                                        <Text size='small'>Looks like you unlocked the Gordonius Major star sign</Text>
-                                        <Text margin={{top:'xsmall'}} size='small'>For consistency's sake and to avoid character based calculations on a global </Text>
-                                        <Text size='small'>page, this star sign is considered equipped at all time</Text>
-                                        <Text margin={{top:'xsmall'}} size='small'>You can check this checkbox to get accurate values when equipping the </Text>
-                                        <Text size='small'>Silkrode Nanochip in the Lab (double star sign bonus)</Text>
+                                        <Text size='small'>You can check this checkbox to get accurate values when equipping the Silkrode Nanochip in the Lab (double star sign bonus)</Text>
                                     </Box>
                                 }
                             >
@@ -385,15 +427,15 @@ function Cooking() {
                                                     <Box>
                                                         <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
                                                         <Box>
-                                                            {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(silkRodeChip ? meal.cookingContributionWithSilkrode : meal.cookingContribution, "Smaller")}</Text>}
-                                                            {meal.timeToNext > 0 && <Text>Time to next level: {toTime(silkRodeChip ? meal.timeToNextWithSilkrode : meal.timeToNext * 3600)}</Text>}
-                                                            {meal.ladlesToLevel > 0 && <Text size="small">{silkRodeChip ? meal.ladlesToLevelWithSilkrode : meal.ladlesToLevel} Ladles to next level ({silkRodeChip ? meal.zerkerLadlesToLevelWithSilkrode : meal.zerkerLadlesToLevel} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
-                                                            {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(silkRodeChip ? meal.timeToDiamondWithSilkrode : meal.timeToDiamond * 3600)}</Text>}
-                                                            {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(silkRodeChip ? meal.timeToPurpleWithSilkrode : meal.timeToPurple * 3600)}</Text>}
-                                                            {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(silkRodeChip ? meal.timeToVoidWithSilkrode : meal.timeToVoid * 3600)}</Text>}
-                                                            {meal.timeToVoid <= 0 && meal.timeToThirty > 0 && <Text>Time to 30: {toTime(silkRodeChip ? meal.timeToThirtyWithSilkrode : meal.timeToThirty * 3600)}</Text>}
-                                                            {meal.timeToThirty <= 0 && meal.timeToMax > 0 && <Text>Time to Max: {toTime(silkRodeChip ? meal.timeToMaxWithSilkrode : meal.timeToMax * 3600)}</Text>}
-                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{silkRodeChip ? meal.ladlesToNextMilestoneWithSilkrode : meal.ladlesToNextMilestone} Ladles to next milestone ({silkRodeChip ? meal.zerkerLadlesToNextMilestoneWithSilkrode : meal.zerkerLadlesToNextMilestone} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(starSignEquipped ? (silkRodeChip ? meal.cookingContributionWithSilkrode : meal.cookingContribution) : meal.cookingContributionWithoutStarSign, "Smaller")}</Text>}
+                                                            {meal.timeToNext > 0 && <Text>Time to next level: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToNextWithSilkrode : meal.timeToNext) : meal.timeToNextWithoutStarSign * 3600)}</Text>}
+                                                            {meal.ladlesToLevel > 0 && <Text size="small">{starSignEquipped ? (silkRodeChip ? meal.ladlesToLevelWithSilkrode : meal.ladlesToLevel) : meal.ladlesToLevelWithoutStarSign} Ladles to next level ({starSignEquipped ? (silkRodeChip ? meal.zerkerLadlesToLevelWithSilkrode : meal.zerkerLadlesToLevel) : meal.zerkerLadlesToLevelWithoutStarSign} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToDiamondWithSilkrode : meal.timeToDiamond) : meal.timeToDiamondWithoutStarSign * 3600)}</Text>}
+                                                            {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToPurpleWithSilkrode : meal.timeToPurple) : meal.timeToPurpleWithoutStarSign * 3600)}</Text>}
+                                                            {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToVoidWithSilkrode : meal.timeToVoid) : meal.timeToVoidWithoutStarSign * 3600)}</Text>}
+                                                            {meal.timeToVoid <= 0 && meal.timeToThirty > 0 && <Text>Time to 30: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToThirtyWithSilkrode : meal.timeToThirty) : meal.timeToThirtyWithoutStarSign * 3600)}</Text>}
+                                                            {meal.timeToThirty <= 0 && meal.timeToMax > 0 && <Text>Time to Max: {toTime(starSignEquipped ? (silkRodeChip ? meal.timeToMaxWithSilkrode : meal.timeToMax) : meal.timeToMaxWithoutStarSign * 3600)}</Text>}
+                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{starSignEquipped ? (silkRodeChip ? meal.ladlesToNextMilestoneWithSilkrode : meal.ladlesToNextMilestone) : meal.ladlesToNextMilestoneWithoutStarSign} Ladles to next milestone ({starSignEquipped ? (silkRodeChip ? meal.zerkerLadlesToNextMilestoneWithSilkrode : meal.zerkerLadlesToNextMilestone) : meal.zerkerLadlesToNextMilestoneWithoutStarSign} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
                                                         </Box>
                                                         <Text size="xsmall">* {meal.cookingContribution > 0 ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
                                                     </Box> :
@@ -459,7 +501,7 @@ function Cooking() {
                     }
                 </Grid>
             </Box>
-            <KitchensDisplay silkRodeChip={silkRodeChip} />
+            <KitchensDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} />
         </Box >
     )
 }

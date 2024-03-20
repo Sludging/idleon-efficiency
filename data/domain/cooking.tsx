@@ -80,7 +80,7 @@ export class Meal {
     timeToThirty: number = 0;
     timeToMax: number = 0;
     
-    // Active cooking values with Silkrode bonus
+    // Active cooking values without Star Sign bonus
     cookingContributionWithSilkrode: number = 0;
     timeToNextWithSilkrode: number = 0;
     timeToDiamondWithSilkrode: number = 0;
@@ -88,6 +88,15 @@ export class Meal {
     timeToVoidWithSilkrode: number = 0;
     timeToThirtyWithSilkrode: number = 0;
     timeToMaxWithSilkrode: number = 0;
+
+    // Active cooking values with Silkrode bonus
+    cookingContributionWithoutStarSign: number = 0;
+    timeToNextWithoutStarSign: number = 0;
+    timeToDiamondWithoutStarSign: number = 0;
+    timeToPurpleWithoutStarSign: number = 0;
+    timeToVoidWithoutStarSign: number = 0;
+    timeToThirtyWithoutStarSign: number = 0;
+    timeToMaxWithoutStarSign: number = 0;
 
     // Void plate achivement
     reducedCostToUpgrade: boolean = false;
@@ -100,6 +109,12 @@ export class Meal {
     zerkerLadlesToLevel: number = -1;
     ladlesToNextMilestone: number = -1;
     zerkerLadlesToNextMilestone: number = -1;
+
+    // Ladles without Starsign bonus
+    ladlesToLevelWithoutStarSign: number = -1;
+    zerkerLadlesToLevelWithoutStarSign: number = -1;
+    ladlesToNextMilestoneWithoutStarSign: number = -1;
+    zerkerLadlesToNextMilestoneWithoutStarSign: number = -1;
 
     // Ladles with Silkrode bonus
     ladlesToLevelWithSilkrode: number = -1;
@@ -225,11 +240,12 @@ export class Kitchen {
     richelin: boolean = false;
 
     mealSpeed: number = 1;
+    mealSpeedWithoutStarSign: number = 1;
+    mealSpeedWithSilkrode: number = 1;
+
     fireSpeed: number = 1;
     recipeLuck: number = 1;
     
-    mealSpeedWithSilkrode: number = 1;
-
     constructor(public index: number) { }
 
     // "CookingSPEED" == d
@@ -313,6 +329,7 @@ export class Cooking extends Domain {
 
     bestBerserker: Player | undefined;
     totalCookingSpeed: number = 0;
+    totalCookingSpeedWithoutStarSign: number = 0;
     totalCookingSpeedWithSilkrode: number = 0;
 
     mealsDiscovered: number = 0;
@@ -321,7 +338,8 @@ export class Cooking extends Domain {
 
     foodLustDiscountCapped: boolean = false;
 
-    canBeBoostedBySilkrode: boolean = false;
+    starSignUnlocked: boolean = false;
+    starSignInfinity: boolean = false;
 
     getMaxMeals = () => {
         return this.meals.length;
@@ -571,7 +589,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
-    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
+    const starsign58 = starSigns.unlockedStarSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
@@ -601,10 +619,12 @@ export const updateCooking = (data: Map<string, any>) => {
     const islandExpeditionReduction = islandExpeditions.reductionToKitchenCosts;
 
     let totalContribution = 0;
+    let totalContributionWithoutStarSign = 0;
     let totalContributionWithSilkrode = 0;
     cooking.kitchens.forEach((kitchen, index) => {
 
         kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed(0, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
         kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed(starsign58*2, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, trollCardBonus, kitchenEfficientBonus, diamonChef, atomBonus, worshipBonus);
         kitchen.recipeLuck = kitchen.getLuck();
@@ -616,8 +636,10 @@ export const updateCooking = (data: Map<string, any>) => {
         // if actively cooking
         if (kitchen.activeMeal != -1) {
             cooking.meals[kitchen.activeMeal].cookingContribution += kitchen.mealSpeed;
+            cooking.meals[kitchen.activeMeal].cookingContributionWithoutStarSign += kitchen.mealSpeedWithoutStarSign;
             cooking.meals[kitchen.activeMeal].cookingContributionWithSilkrode += kitchen.mealSpeedWithSilkrode;
             totalContribution += kitchen.mealSpeed;
+            totalContributionWithoutStarSign += kitchen.mealSpeedWithoutStarSign;
             totalContributionWithSilkrode += kitchen.mealSpeedWithSilkrode;
         }
     })
@@ -627,6 +649,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const jadeUpgradeMaxMealLevel = (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 20)?.purchased ? 10 : 0) + (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 21)?.purchased ? 10 : 0)
     cooking.meals.forEach(meal => {
         const cookingSpeed = meal.cookingContribution > 0 ? meal.cookingContribution : totalContribution;
+        const cookingSpeedWithoutStarSign = meal.cookingContributionWithoutStarSign > 0 ? meal.cookingContributionWithoutStarSign : totalContributionWithoutStarSign;
         const cookingSpeedWithSilkrode = meal.cookingContributionWithSilkrode > 0 ? meal.cookingContributionWithSilkrode : totalContributionWithSilkrode;
         meal.maxLevel += artifactMaxMealLevel;
         meal.maxLevel += jadeUpgradeMaxMealLevel;
@@ -642,6 +665,12 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToThirty = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.timeToMax = Math.max(0, ((meal.getCostsTillMaxLevel() - meal.count) * meal.cookReq) / cookingSpeed);
 
+        meal.timeToDiamondWithoutStarSign = Math.max(0, ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+        meal.timeToPurpleWithoutStarSign = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+        meal.timeToVoidWithoutStarSign = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+        meal.timeToThirtyWithoutStarSign = Math.max(0, ((meal.getCostsTillThirty() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+        meal.timeToMaxWithoutStarSign = Math.max(0, ((meal.getCostsTillMaxLevel() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+
         meal.timeToDiamondWithSilkrode = Math.max(0, ((meal.getCostsTillDiamond() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
         meal.timeToPurpleWithSilkrode = Math.max(0, ((meal.getCostsTillPurple() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
         meal.timeToVoidWithSilkrode = Math.max(0, ((meal.getCostsTillVoid() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
@@ -651,6 +680,10 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.timeToNext = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed);
         meal.ladlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed)));
         meal.zerkerLadlesToLevel = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100)));
+
+        meal.timeToNextWithoutStarSign = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign);
+        meal.ladlesToLevelWithoutStarSign = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign)));
+        meal.zerkerLadlesToLevelWithoutStarSign = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign) / (1 + zerkerBonus / 100)));
 
         meal.timeToNextWithSilkrode = Math.max(0, ((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode);
         meal.ladlesToLevelWithSilkrode = Math.max(0, Math.ceil((((meal.getMealLevelCost() - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode)));
@@ -676,6 +709,9 @@ export const updateCooking = (data: Map<string, any>) => {
             meal.ladlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed));
             meal.zerkerLadlesToNextMilestone = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeed) / (1 + zerkerBonus / 100));
 
+            meal.ladlesToNextMilestoneWithoutStarSign = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign));
+            meal.zerkerLadlesToNextMilestoneWithoutStarSign = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithoutStarSign) / (1 + zerkerBonus / 100));
+
             meal.ladlesToNextMilestoneWithSilkrode = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode));
             meal.zerkerLadlesToNextMilestoneWithSilkrode = Math.ceil((((milestoneCosts - meal.count) * meal.cookReq) / cookingSpeedWithSilkrode) / (1 + zerkerBonus / 100));
         }
@@ -687,11 +723,13 @@ export const updateCooking = (data: Map<string, any>) => {
 
     // Nice to have maths
     cooking.totalCookingSpeed = totalContribution;
+    cooking.totalCookingSpeedWithoutStarSign = totalContributionWithoutStarSign;
     cooking.totalCookingSpeedWithSilkrode = totalContributionWithSilkrode;
     cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
     cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
     cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);
-    cooking.canBeBoostedBySilkrode = (starsign58 > 0);
+    cooking.starSignUnlocked = starSigns.isStarSignUnlocked("Gordonius Major");
+    cooking.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "Gordonius Major") != undefined);
 
     return cooking;
 }
