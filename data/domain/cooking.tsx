@@ -416,6 +416,7 @@ export class Cooking extends Domain {
     }
 
     updateNoMealLeftBehind = (bonusActivated: boolean) => {
+        this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
         if (bonusActivated) {
             let mealToUpgrade = 1;
     
@@ -427,8 +428,6 @@ export class Cooking extends Domain {
                 return meal1.level < meal2.level ? -1 : 1
             });
             sortedMeals.slice(0, mealToUpgrade).forEach(meal => meal.noMealLeftBehindAffected = true);
-        } else {
-            this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
         }
     }
 
