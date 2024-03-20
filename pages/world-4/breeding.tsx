@@ -15,7 +15,6 @@ import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../components/base/TimeDisplay';
-import { AppContext } from '../../data/appContext';
 import { Breeding as BreedingDomain, Pet, petArenaBonuses, territoryNiceNames, waveReqs } from '../../data/domain/breeding';
 import { Cooking } from '../../data/domain/cooking';
 import { EnemyInfo } from '../../data/domain/enemies';
@@ -23,12 +22,13 @@ import { Player } from '../../data/domain/player';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { nFormatter, uniqueFilter } from '../../data/utility';
 import { BorderType } from 'grommet/utils';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function TerritoryDisplay() {
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {
@@ -92,10 +92,10 @@ function TerritoryDisplay() {
 
 function PetUpgradeDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const upgradeCosts = useMemo(() => {
-        const cooking = appContext.data.getData().get("cooking") as Cooking;
+        const cooking = theData.get("cooking") as Cooking;
         if (cooking && breeding) {
             return breeding.upgrade.map(upgrade => {
                 const meal = upgrade.data.cost != -1 ? cooking.meals[upgrade.data.cost] : undefined
@@ -120,14 +120,11 @@ function PetUpgradeDisplay() {
             });
         }
         return [];
-    }, [appContext, breeding])
+    }, [theData, breeding])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
+        setBreeding(theData.get("breeding"));
+    }, [theData]);
 
     if (!breeding) {
         return (
@@ -172,19 +169,16 @@ function PetUpgradeDisplay() {
 function ArenaBonusDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const [playerData, setPlayerData] = useState<Player[]>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     const beastMasters = useMemo(() => {
         return playerData?.filter(player => (player.classId == ClassIndex.Beast_Master)) ?? [];
     }, [playerData])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-            setPlayerData(theData.get("players"));
-        }
-    }, [appContext]);
+        setBreeding(theData.get("breeding"));
+        setPlayerData(theData.get("players"));
+    }, [theData]);
 
     if (!breeding) {
         return (
@@ -247,11 +241,12 @@ function ShinyDisplay() {
     const [filter, setFilter] = useState<string[]>([]);
     const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
     const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const size = useContext(ResponsiveContext);
 
     // Get breeding data, if it's not available yet just show placeholder loading.
-    const breeding = appContext.data.getData().get("breeding") as BreedingDomain;
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
@@ -270,7 +265,7 @@ function ShinyDisplay() {
         // The reason for the 2nd one is to allow the search to remove filters based on user typing.
         setAllFilterOptions(filterOptions);
         setCurrentFilterOptions(filterOptions);
-    }, [appContext, breeding]);
+    }, [theData, breeding]);
 
     const petsToShow = useMemo(() => {
         // If we are still loading, do nothing.
@@ -394,9 +389,10 @@ function ShinyDisplay() {
 
 
 function EggDisplay() {
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
-    const theData = appContext.data.getData();
+
+    const theData = useAppDataStore((state) => state.data.getData());
+    
     const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {

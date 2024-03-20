@@ -8,6 +8,7 @@ export class FirestoreData {
     app: FirebaseApp;
     db: Firestore;
     realDB: Database;
+    userUid: string
 
     charNames: string[] = [];
     companions: number[] = [];
@@ -18,6 +19,7 @@ export class FirestoreData {
 
     constructor(public uid: string, app: FirebaseApp, onUpdate: Function) {
         this.app = app;
+        this.userUid = uid;
         this.db = initializeFirestore(app, {});
         this.realDB = getDatabase(app);
         this.getServerVars();
@@ -73,7 +75,7 @@ export class FirestoreData {
             { includeMetadataChanges: true }, (doc) => {
                 if (doc.exists()) {
                     const cloudsave = doc.data();
-                    this.onUpdateFunction(cloudsave, this.charNames, this.serverVars, this.companions);
+                    this.onUpdateFunction(this.userUid, cloudsave, this.charNames, this.serverVars, this.companions);
                 }
             });
     }

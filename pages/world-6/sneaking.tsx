@@ -4,8 +4,7 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useMemo, useState } from 'react';
-import { AppContext } from '../../data/appContext';
+import { useMemo, useState } from 'react';
 import { Sneaking as SneakingDomain } from '../../data/domain/world-6/sneaking';
 import ShadowBox from '../../components/base/ShadowBox';
 import IconImage from '../../components/base/IconImage';
@@ -18,15 +17,15 @@ import { SneakingUpgrades } from '../../components/world-6/sneaking/sneakingUpgr
 import TabButton from '../../components/base/TabButton';
 import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
 import { SneakingInventory } from '../../components/world-6/sneaking/sneakingInventory';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 function Sneaking() {
-    const appContext = useContext(AppContext);
-    const data = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
     const [activeTab, setActiveTab] = useState<string>("Jade Upgrades");
 
-    const sneaking = data.get("sneaking") as SneakingDomain;
-    const players = data.get("players") as Player[];
+    const sneaking = theData.get("sneaking") as SneakingDomain;
+    const players = theData.get("players") as Player[];
 
     const jadeUpgrades = useMemo(() => {
         if (!sneaking) {
@@ -34,7 +33,7 @@ function Sneaking() {
         }
 
         return sneaking.jadeUpgrades?.slice().sort((upgrade1, upgrade2) => upgrade1.displayOrder > upgrade2.displayOrder ? 1 : -1);
-    }, [appContext, sneaking])
+    }, [theData, sneaking])
 
     if (!sneaking) {
         return <>Loading...</>

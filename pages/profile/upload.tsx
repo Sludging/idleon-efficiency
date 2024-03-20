@@ -2,7 +2,6 @@ import {
     Anchor,
     Box,
     Button,
-    CheckBox,
     Heading,
     Notification,
     Paragraph,
@@ -10,20 +9,27 @@ import {
     StatusType,
     Text
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useState, useEffect, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 import { ProfileUploader } from '../../data/storage/profiles';
-import { AuthContext } from '../../data/firebase/authContext';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { dateToIntString } from '../../data/utility';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { TimeDown } from '../../components/base/TimeDisplay';
+import { useAuthStore } from '../../lib/providers/authStoreProvider';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function UploadProfile() {
-    const authContext = useContext(AuthContext);
-    const appContext = useContext(AppContext);
+    const { user } = useAuthStore(
+        (state) => state,
+    )
+    const { theData, data } = useAppDataStore(
+        useShallow((state) => ({
+            theData: state.data.getData(),
+            data: state.data,
+        })));
 
     const [uploadSensitiveData, setUploadSensitiveData] = useState<boolean>(false);
     const [lastUpload, setLastUpload] = useState<Date | undefined>(undefined);
@@ -33,13 +39,12 @@ function UploadProfile() {
     const [toastMessage, setToastMessage] = useState<string>("");
 
     const firstCharName = useMemo(() => {
-        const theData = appContext.data.getData();
         const playerNames = theData.get('playerNames') as string[];
         if (playerNames) {
             return playerNames[0];
         }
         return undefined;
-    }, [appContext]);
+    }, [theData]);
 
     const secondsSinceLastUpload = useMemo(() => {
         if (!lastUpload) {
@@ -50,11 +55,10 @@ function UploadProfile() {
     }, [lastUpload]);
 
     const uploadData = async () => {
-        const user = authContext?.user;
         if (user) {
             setUploading(true);
             const uploader = new ProfileUploader();
-            const uploadRes = await uploader.uploadProfile(appContext.data, user, !uploadSensitiveData);
+            const uploadRes = await uploader.uploadProfile(data, user, !uploadSensitiveData);
             let message = "";
             if (uploadRes.success) {
                 localStorage.setItem(`${user.uid}/last_profile_upload`, new Date().toISOString());
@@ -77,16 +81,15 @@ function UploadProfile() {
     }, [lastUpload]);
 
     useEffect(() => {
-        const user = authContext?.user;
         if (user) {
             const localDate = localStorage.getItem(`${user.uid}/last_profile_upload`);
             if (localDate) {
                 setLastUpload(new Date(localDate));
             }
         }
-    }, [appContext, authContext, showToast])
+    }, [user])
 
-    if (!authContext?.user) {
+    if (!user) {
         <Box align="center" pad="medium">
             <Heading level='3'>Go Away, you aren&apos;t logged in.</Heading>
         </Box>

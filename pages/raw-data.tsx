@@ -1,15 +1,15 @@
 import {
     Box, Button, Text,
 } from 'grommet'
-import { useState, useEffect, useContext } from 'react';
-import { AppContext } from '../data/appContext'
+import { useState, useEffect } from 'react';
 import { NextSeo } from 'next-seo';
+import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const appContext = useContext(AppContext);
-    
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const copyToClipboard = () => {
         if (navigator && navigator.clipboard) {
             setCopyMessage("Copied!");
@@ -22,26 +22,22 @@ function RawData() {
     }
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            // This is very ugly but I don't really want to overthink this.
-            const rawData = theData.get("rawData");
-            if (rawData) {
-                const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
-                if (cleanRaw) {
-                    cleanRaw["playerNames"] = theData.get("playerNames");
-                }
-                setRawData(cleanRaw);
+        // This is very ugly but I don't really want to overthink this.
+        const rawData = theData.get("rawData");
+        if (rawData) {
+            const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
+            if (cleanRaw) {
+                cleanRaw["playerNames"] = theData.get("playerNames");
             }
-            
+            setRawData(cleanRaw);
         }
-    }, [appContext]);
+    }, [theData]);
     return (
         <Box align="center" pad="medium">
             <NextSeo title="Raw Data" />
             <Box direction="row" gap="medium" align="center">
                 <Button style={{ color: "white" }} primary color="brand" label="Copy Raw JSON" onClick={() => copyToClipboard()} />
-                { copyMessage != "" && <Text>{copyMessage}</Text> }
+                {copyMessage != "" && <Text>{copyMessage}</Text>}
             </Box>
             <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
         </Box>

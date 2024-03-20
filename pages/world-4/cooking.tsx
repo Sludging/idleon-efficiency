@@ -13,12 +13,12 @@ import ShadowBox from '../../components/base/ShadowBox';
 import { TimeDown } from '../../components/base/TimeDisplay';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import CoinsDisplay from '../../components/coinsDisplay';
-import { AppContext } from '../../data/appContext';
 import { territoryNiceNames } from '../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../data/domain/cooking';
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { AtomCollider } from '../../data/domain/atomCollider';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -128,14 +128,11 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
 
 function KitchensDisplay() {
     const [cooking, setCooking] = useState<CookingDomain>();
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setCooking(theData.get("cooking"));
-        }
-    }, [appContext]);
+        setCooking(theData.get("cooking"));
+    }, [theData]);
 
     return (
         <Box margin={{ bottom: 'medium' }} gap="small">
@@ -161,21 +158,16 @@ function KitchensDisplay() {
 
 function Cooking() {
     const [sort, setSort] = useState<string>('');
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
+
     const cooking = theData.get("cooking") as CookingDomain;
 
     const hasColliderBonus = useMemo(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            const collider = theData.get("collider") as AtomCollider;
-            return collider.atoms[8].level > 0;
-        }
-
-        return false;
-    }, [appContext]);
+        const collider = theData.get("collider") as AtomCollider;
+        return collider.atoms[8].level > 0;
+    }, [theData]);
 
     // equinox discount
     const mealCostAfterFoodLust = useMemo(() => {
@@ -230,7 +222,7 @@ function Cooking() {
                         return indexSort;
                 }
             })
-    }, [appContext, cooking, sort])
+    }, [theData, cooking, sort])
 
     function getMealExtraText(meal: Meal) {
         if (meal.level == 0) return "" //undiscovered meals
@@ -378,7 +370,7 @@ function Cooking() {
 
 
                                             <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
-                                                <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                <Text style={{ opacity: meal.level == 0 ? 0.3 : 1 }} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
                                                 {meal.level > 0 ?
                                                     <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
                                                     :

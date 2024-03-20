@@ -5,27 +5,24 @@ import {
     CheckBox,
     Select
 } from "grommet"
-import { useEffect, useState, useContext, useMemo } from 'react';
-import { AppContext } from '../../data/appContext';
+import { useEffect, useState, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 import ShadowBox from "../../components/base/ShadowBox";
 import { Storage } from "../../data/domain/storage";
 import { nFormatter, notUndefined } from "../../data/utility";
 import IconImage from "../../components/base/IconImage";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 function StorageDisplay() {
     const [storage, setStorage] = useState<Storage>();
     const [typeFilter, setTypeFilter] = useState<string>('None');
     const [subTypeFilter, setSubTypeFilter] = useState<string>('None');
     const [grouped, setGrouped] = useState<boolean>(false);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        if (appContext.data.getData().size > 0) {
-            const theData = appContext.data.getData();
-            setStorage(theData.get("storage"));
-        }
-    }, [appContext])
+        setStorage(theData.get("storage"));
+    }, [theData])
 
     const chestItemsToShow = useMemo(() => {
         let filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank") ?? [];
@@ -72,61 +69,61 @@ function StorageDisplay() {
                         clear
                         value={typeFilter}
                         options={[...storageTypes]}
-                        onChange={({ value: nextValue }) => { setTypeFilter(nextValue != '' ? nextValue : 'None'); setSubTypeFilter('None');}}
+                        onChange={({ value: nextValue }) => { setTypeFilter(nextValue != '' ? nextValue : 'None'); setSubTypeFilter('None'); }}
                     />
-                    { storageSubTypes.length > 0 && 
+                    {storageSubTypes.length > 0 &&
                         <Select
                             placeholder="Filter by Sub type"
                             clear
                             value={subTypeFilter}
                             options={[...storageSubTypes]}
-                            onChange={({ value: nextValue }) => { setSubTypeFilter(nextValue != '' ? nextValue : 'None')}}
+                            onChange={({ value: nextValue }) => { setSubTypeFilter(nextValue != '' ? nextValue : 'None') }}
                         />
                     }
                 </Box>
             </Box>
-                {
-                    grouped ? (typeFilter == "None" ? storageTypes : storageSubTypes).map((type) => {
-                        if (chestItemsToShow.filter(x => (typeFilter == "None" ? x.getArchType() : x.type) == type).length == 0) {
-                            return undefined;
-                        }
-                        return (<ShadowBox key={type} background="dark-1" pad="medium" gap="small">
-                            <Text>{type}</Text>
-                            <Box direction="row" wrap>
+            {
+                grouped ? (typeFilter == "None" ? storageTypes : storageSubTypes).map((type) => {
+                    if (chestItemsToShow.filter(x => (typeFilter == "None" ? x.getArchType() : x.type) == type).length == 0) {
+                        return undefined;
+                    }
+                    return (<ShadowBox key={type} background="dark-1" pad="medium" gap="small">
+                        <Text>{type}</Text>
+                        <Box direction="row" wrap>
                             {
                                 chestItemsToShow.filter(x => (typeFilter == "None" ? x.getArchType() : x.type) == type).map((item, index) => (
-                                    <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
-                                        <Box direction="row" pad={{vertical: 'small'}} align="center">
+                                    <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
+                                        <Box direction="row" pad={{ vertical: 'small' }} align="center">
                                             <Box>
-                                                <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1}/>
+                                                <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
                                             </Box>
                                             <Text color={item.count > 1e7 ? 'green-1' : ''} size="small">{nFormatter(item.count)}</Text>
                                         </Box>
                                     </Box>
                                 ))
-                                }
-                            </Box>
-                        </ShadowBox>)
-                    }).filter(notUndefined) 
+                            }
+                        </Box>
+                    </ShadowBox>)
+                }).filter(notUndefined)
                     :
                     <ShadowBox background="dark-1" pad="medium" gap="small">
-                        { typeFilter != "None" && <Text>{subTypeFilter == "None" ? typeFilter : subTypeFilter}</Text>}
+                        {typeFilter != "None" && <Text>{subTypeFilter == "None" ? typeFilter : subTypeFilter}</Text>}
                         <Box direction="row" wrap>
-                        {
-                            chestItemsToShow.map((item, index) => (
-                                <Box key={index} border={{color: 'grey-1' }}  background="accent-4" width={{max: '100px', min: '100px'}} align="center">
-                                    <Box direction="row" pad={{vertical: 'small'}} align="center">
-                                        <Box>
-                                            <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
+                            {
+                                chestItemsToShow.map((item, index) => (
+                                    <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '100px', min: '100px' }} align="center">
+                                        <Box direction="row" pad={{ vertical: 'small' }} align="center">
+                                            <Box>
+                                                <IconImage data={item.getImageData()} scale={item.getImageData().width > 36 ? 0.5 : 1} />
+                                            </Box>
+                                            <Text color={item.count > 1e7 ? 'green-1' : ''} size="small">{nFormatter(item.count)}</Text>
                                         </Box>
-                                        <Text color={item.count > 1e7 ? 'green-1' : ''} size="small">{nFormatter(item.count)}</Text>
                                     </Box>
-                                </Box>
-                            ))
+                                ))
                             }
                         </Box>
                     </ShadowBox>
-                }
+            }
         </Box>
     )
 }

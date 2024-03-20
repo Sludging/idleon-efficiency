@@ -10,7 +10,9 @@ const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
         if (typeof(data) === "string" && data.match(regex) != null) {
             return JSON.parse(doc.get(key))
         }
-        return data;
+        if (data) {
+            return data;
+        }
     }
     catch (e) {
         console.debug(key, doc.get(key), e)

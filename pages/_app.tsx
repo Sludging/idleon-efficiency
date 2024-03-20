@@ -2,11 +2,8 @@ import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { css } from 'styled-components';
 import { Rubik } from 'next/font/google';
 
-import { useEffect, useState } from 'react';
 import { dark, Grommet } from 'grommet';
 import { deepMerge } from 'grommet/utils';
-import { AuthProvider } from '../data/firebase/authContext';
-import { AppProvider } from '../data/appContext';
 
 import Script from 'next/script'
 import { useRouter } from 'next/router'
@@ -18,8 +15,9 @@ import Layout from '../components/layout';
 
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
-import useSWR from 'swr';
-import { fetcher } from '../data/fetchers/getProfile';
+import { useEffect } from 'react';
+import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
+import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
 
 const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 
@@ -126,36 +124,8 @@ declare const window: Window &
   }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [domain, setDomain] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
-  const [publicData, setPublicData] = useState<{ data: Map<string, any>, charNames: string[] } | undefined>(undefined);
-  const accountData = new Map();
   const router = useRouter()
-
-  const { data, error } = useSWR(publicData == undefined ? { windowLocation: typeof window !== "undefined" ? window.location.host : "", oldDomain: domain } : null, fetcher, {
-    shouldRetryOnError: false,
-    dedupingInterval: 5000,
-    refreshInterval: 1000 * 60 * 30 // every 30 minutes
-  });
-
   useEffect(() => {
-    // If no response yet, mark as loading.
-    if (!data && !error) {
-      setLoading(true);
-    }
-    // If we have a response, track the domain name and mark loading as finished.
-    if (data) {
-      setDomain(data.domain);
-      setLoading(false);
-    }
-
-    // If we got a valid response, handle static data.
-    if (data && !error) {
-      if (data.data && data.charNames) {
-        setPublicData(data as { data: Map<string, any>, charNames: string[] });
-      }
-    }
-
     const handleRouteChange = (url: string) => {
       if (typeof window.gtag !== 'undefined') {
         window.gtag('config', "G-RDM3GQEGMB", {
@@ -167,7 +137,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [router.events, data, error])
+  }, [router.events])
 
   return (
     <>
@@ -195,19 +165,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
       <Grommet theme={customTheme} full>
-        <AuthProvider appLoading={loading} data={publicData} domain={domain}>
-          <AppProvider appLoading={loading} data={publicData} domain={domain} accountData={accountData}>
+        <AuthStoreProvider>
+          <AppDataStoreProvider>
             <DefaultSeo {...SEO} />
-            {
-              router.pathname.includes("leaderboards") ?
-                <Component {...pageProps} />
-              :
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-            }
-          </AppProvider>
-        </AuthProvider>
+          </AppDataStoreProvider>
+        </AuthStoreProvider>
       </Grommet>
     </>
   )

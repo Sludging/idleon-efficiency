@@ -120,6 +120,7 @@ export class Forge extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
+        this.upgrades = [];
         this.upgrades.push(new ForgeUpgrade(
             "New Forge Slot",
             16,

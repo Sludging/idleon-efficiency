@@ -127,6 +127,8 @@ export class IdleonData {
     private data: Map<string, any>
     private lastUpdated: Date
 
+    public initialized: boolean = false;
+
     constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
         this.lastUpdated = lastUpdated;
@@ -153,9 +155,14 @@ export class IdleonData {
 
         return "";
     }
+
+    public setLastUpdated = (lastUpdated: Date) => {
+        this.lastUpdated = lastUpdated;
+    }
 }
 
-export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Item[]) => {
+export const initAccountDataKeys = (allItems: Item[]) => {
+    const accountData: Map<string, any> = new Map();
     accountData.set("itemsData", allItems);
     domainList.forEach(dataDomain => {
         if (!dataDomain.initialized) {
@@ -167,7 +174,6 @@ export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Ite
             }
             else {
                 accountData.set(key, domainData);
-                dataDomain.markInitialized();
             }
         }
     })
@@ -229,7 +235,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
 }
 
-export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
@@ -265,7 +271,7 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
         parseData.set("charCount", validCharCount);
         parseData.set("OptLacc", accountData.get("OptLacc"));
         parseData.set("lastUpdated", accountData.get("lastUpdated"));
-        parseData.set("itemsData", allItems);
+        parseData.set("itemsData", accountData.get("itemsData"));
         parseData.set("playerNames", charNames);
         parseData.set("servervars", serverVars);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.

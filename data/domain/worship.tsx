@@ -185,6 +185,7 @@ export class Worship extends Domain {
     }
 
     init(allItems: Item[], charCount: number) {
+        this.totemInfo = [];
         [...Array(7)].forEach((_, index) => {
             this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
         });

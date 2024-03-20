@@ -1,17 +1,16 @@
 import { Box, CheckBox, Grid, Text } from "grommet";
-import { useContext, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useMemo, useState } from "react";
 import { AtomCollider } from "../../../data/domain/atomCollider";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 export function AtomColliderDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
-    const theData = appContext.data.getData();
     const atomCollider = theData.get("collider") as AtomCollider;
 
     const atomsToShow = useMemo(() => {

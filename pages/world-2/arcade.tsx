@@ -3,8 +3,7 @@ import {
     Text,
     Heading,
 } from 'grommet'
-import { useEffect, useContext, useState, useMemo } from 'react';
-import { AppContext } from '../../data/appContext'
+import { useEffect, useState, useMemo } from 'react';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
@@ -12,19 +11,19 @@ import { Arcade as ArcadeData } from '../../data/domain/arcade';
 import { Stamp } from '../../data/domain/stamps';
 import { StaticTime, TimeDisplaySize } from '../../components/base/TimeDisplay';
 import IconImage from '../../components/base/IconImage';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function Arcade() {
     const [arcadeData, setArcadeData] = useState<ArcadeData>();
     const [stampData, setStampData] = useState<Stamp[][]>([]);
     const [serverVars, setServerVars] = useState<Record<string, any>>({})
-    const appContext = useContext(AppContext);
+    const theData = useAppDataStore((state) => state.data.getData());
 
     useEffect(() => {
-        const theData = appContext.data.getData();
         setArcadeData(theData.get("arcade"));
         setStampData(theData.get("stamps"));
         setServerVars(theData.get("servervars"));
-    }, [appContext])
+    }, [theData])
 
     const activeArcadeBonuses = useMemo(() => {
         if (serverVars && Object.keys(serverVars).includes("ArcadeBonuses")) {
@@ -47,9 +46,9 @@ function Arcade() {
             <Box gap="small">
                 <Box direction="row">
                     <TextAndLabel text={arcadeData?.balls?.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
-                    <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }}/>
-                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.secondsPerBall ?? 0} size={TimeDisplaySize.Small} /> } label="Time per ball" margin={{ right: 'medium' }}/>
-                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.maxClaimTime ?? 0} size={TimeDisplaySize.Small} /> } label="Max Claim time" margin={{ right: 'medium' }}/>
+                    <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }} />
+                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.secondsPerBall ?? 0} size={TimeDisplaySize.Small} />} label="Time per ball" margin={{ right: 'medium' }} />
+                    <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.maxClaimTime ?? 0} size={TimeDisplaySize.Small} />} label="Max Claim time" margin={{ right: 'medium' }} />
                     <TextAndLabel text={`${(arcadeData?.ballsToClaim ?? 0).toString()}/${arcadeData?.maxBalls}`} label="Balls to claim" />
                 </Box>
                 <Text>Gold Balls Shop</Text>
@@ -58,7 +57,7 @@ function Arcade() {
                         arcadeData && arcadeData.bonuses.map((bonus, index) => {
                             return (
                                 <ShadowBox background="dark-1" key={index} direction="row">
-                                    <Box justify="start" direction="row" fill border={index != arcadeData.bonuses.length - 1 ? {side: 'bottom', color: 'accent-3', size: '1px'} : undefined} pad="medium">
+                                    <Box justify="start" direction="row" fill border={index != arcadeData.bonuses.length - 1 ? { side: 'bottom', color: 'accent-3', size: '1px' } : undefined} pad="medium">
                                         <Box style={{ opacity: activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0 ? 1 : 0.3 }} margin={{ right: 'medium' }}>
                                             <IconImage data={bonus.getImageData()} />
                                         </Box>
