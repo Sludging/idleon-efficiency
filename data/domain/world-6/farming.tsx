@@ -17,7 +17,6 @@ import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
-import { Sailing } from "../sailing";
 
 export class MarketUpgrade {
     level: number = 0;
@@ -375,6 +374,7 @@ export class Farming extends Domain {
     starSignOGInfinity: boolean = false;
 ;
     cropDepot: Crop[] = [];
+    cropsToCollect: CropQuantity[] = [];
     cropScientist: CropScientist = new CropScientist();
 
     canOvergrow: boolean = false;
@@ -477,6 +477,26 @@ export class Farming extends Domain {
         this.farmPlots.forEach(plot => {
             plot.growthRate = growthRate;
         })
+    }
+
+    updateCropsToCollect = () => {
+        this.cropsToCollect = [];
+
+        this.farmPlots.forEach(plot => {
+            if (plot.quantityToCollect > 0) {
+                const collect = this.cropsToCollect.find(collect => collect.crop.index == plot.cropIndex);
+                if (collect) {
+                    collect.quantity += plot.getQuantityToCollect();
+                } else {
+                    const crop = this.cropDepot.find(crop => crop.index == plot.cropIndex);
+                    if (crop) {
+                        this.cropsToCollect.push({ crop: crop, quantity: plot.getQuantityToCollect() });
+                    }
+                }
+            }
+        })
+
+        this.cropsToCollect.sort((collect1, collect2) => { return collect1.crop.index > collect2.crop.index ? 1 : -1 });
     }
     
     updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
@@ -655,7 +675,6 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
-    const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
     const starSigns = data.get("starsigns") as StarSigns;
@@ -692,7 +711,9 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.index == 11);
     const starSignBonus67 = starSigns.unlockedStarSigns.find(sign => sign.name == "O.G. Signalais")?.getBonus("OG Chance") ?? 0;
     farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67);
-    
+
+    farming.updateCropsToCollect();
+
     farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
 
     // Nice info to have for the UI
@@ -707,6 +728,11 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 export interface MarketUpgradeCost {
     cropId: number,
     cropQuantity: number,
+}
+
+export interface CropQuantity {
+    crop: Crop,
+    quantity: number
 }
 
 export enum CropScientistBonusText {

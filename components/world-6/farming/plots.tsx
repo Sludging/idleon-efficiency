@@ -1,6 +1,6 @@
 import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
-import { Crop, Plot, PlotGrowthStage, Farming } from "../../../data/domain/world-6/farming";
+import { Crop, Plot, PlotGrowthStage, Farming, CropQuantity } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import { nFormatter, toTime } from "../../../data/utility";
 import { useContext, useEffect, useMemo, useState } from "react";
@@ -28,6 +28,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
 
     return (
         <Box width="100%">
+            <CropToCollectDisplay cropsToCollect={farming.cropsToCollect} />
             <Text size="xsmall">* There could be a difference of a few seconds between IE and in-game</Text>
             <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 9) }} gap={"small"} fill>
                 {
@@ -42,6 +43,36 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
                     })
                 }
             </Grid>
+        </Box>
+    )
+}
+
+const CropToCollectDisplay = ({ cropsToCollect }: { cropsToCollect: CropQuantity[] }) => {
+    if (!cropsToCollect || cropsToCollect.length == 0) {
+        return null;
+    }
+
+    return (
+        <Box direction="row" margin={{ bottom: 'small' }}>
+            <ShadowBox style={{ opacity: cropsToCollect.length > 0 ? 1 : 0.5 }} background="dark-1" gap="xsmall" pad="small" align="left">
+                <Box align="center" direction="row">
+                    <Text size="medium">Crops to collect</Text>
+                </Box>
+                <Box gap="xxsmall" direction="row" wrap>
+                    {
+                        cropsToCollect.map((collect, index) => {
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} margin={{ bottom: 'xxsmall' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
+                                    <Box direction="row" pad={{ vertical: 'xsmall' }} align="center" gap='xsmall'>
+                                        <Text size="xsmall">{nFormatter(Math.floor(collect.quantity))}</Text>
+                                        <IconImage data={Crop.getCropIconData(collect.crop.index)} />
+                                    </Box>
+                                </Box>
+                            )
+                        })
+                    }
+                </Box>
+            </ShadowBox>
         </Box>
     )
 }

@@ -38,24 +38,31 @@ export const MarketUpgradesDisplay = () => {
                             farming.marketUpgrades.slice(0, 8).map((upgrade, index) => {
                                 const nextLevelCost = upgrade.getNextLevelCost();
                                 const canAfford = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) > nextLevelCost.cropQuantity;
+                                const canAffordWithCollect = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) + (farming.cropsToCollect.find(collect => collect.crop.index == nextLevelCost.cropId)?.quantity ?? 0) > nextLevelCost.cropQuantity;
 
                                 // Cost for 5 more levels
                                 const futureLevelsCost = [upgrade.getNextLevelCost(upgrade.level + 1), upgrade.getNextLevelCost(upgrade.level + 2), upgrade.getNextLevelCost(upgrade.level + 3), upgrade.getNextLevelCost(upgrade.level + 4), upgrade.getNextLevelCost(upgrade.level + 5)];
                                 let canAffortFutureLevels: boolean[] = [];
+                                let canAffortFutureLevelsWithCollect: boolean[] = [];
                                 futureLevelsCost.forEach((cost, index) => {
                                     if (cost.cropQuantity > 0) {
                                         let currencyLeft = (farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0);
+                                        let currencyLeftWithCollect = currencyLeft + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.quantity ?? 0);
                                         if (nextLevelCost.cropId == cost.cropId) {
                                             currencyLeft -= nextLevelCost.cropQuantity;
+                                            currencyLeftWithCollect -= nextLevelCost.cropQuantity;
                                         }
                                         for (let i = 0; i < index; i++) {
                                             if (futureLevelsCost[i].cropId == cost.cropId) {
                                                 currencyLeft -= futureLevelsCost[i].cropQuantity;
+                                                currencyLeftWithCollect -= futureLevelsCost[i].cropQuantity;
                                             }
                                         }
                                         canAffortFutureLevels.push(currencyLeft > cost.cropQuantity);
+                                        canAffortFutureLevelsWithCollect.push(currencyLeftWithCollect > cost.cropQuantity);
                                     } else {
                                         canAffortFutureLevels.push(false);
+                                        canAffortFutureLevelsWithCollect.push(false);
                                     }
                                 });
 
@@ -88,7 +95,7 @@ export const MarketUpgradesDisplay = () => {
                                                                                 return ((cost.cropQuantity > 0)
                                                                                     && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                             <IconImage data={Crop.getCropIconData(cost.cropId)} />
-                                                                                            <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
+                                                                                            <Text color={canAffortFutureLevels[index] ? 'green-1' : canAffortFutureLevelsWithCollect[index] ? 'orange' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
                                                                                         </Box>
                                                                                 )
                                                                             })
@@ -101,11 +108,14 @@ export const MarketUpgradesDisplay = () => {
                                                                             <Box gap="xsmall">
                                                                                 {
                                                                                     costToMax.map((cost, index) => {
-                                                                                        return ((cost.cropQuantity > 0)
-                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                        const quantityAvailable = (farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0);
+                                                                                        const quantityWithCollect = quantityAvailable + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.quantity ?? 0);
+                                                                                        return (
+                                                                                            (cost.cropQuantity > 0) &&
+                                                                                            <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                                     <IconImage data={Crop.getCropIconData(cost.cropId)} />
-                                                                                                    <Text color={(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0) > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0)}/{nFormatter(cost.cropQuantity)}</Text>
-                                                                                                </Box>
+                                                                                                    <Text color={quantityAvailable > cost.cropQuantity ? 'green-1' : quantityWithCollect > cost.cropQuantity ? 'orange' : ''} size="small">{nFormatter(farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                            </Box>
                                                                                         )
                                                                                         })
                                                                                 }
@@ -121,7 +131,7 @@ export const MarketUpgradesDisplay = () => {
                                                                 component={
                                                                     <Box gap="xsmall" direction="row" align="center">
                                                                         <IconImage data={Crop.getCropIconData(nextLevelCost.cropId)} />
-                                                                        <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
+                                                                        <Text color={canAfford ? 'green-1' : canAffordWithCollect ? 'orange' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
                                                                     </Box>                                                                          
                                                                 }
                                                             />
@@ -161,24 +171,31 @@ export const MarketUpgradesDisplay = () => {
                         farming.marketUpgrades.slice(8).map((upgrade, index) => {
                             const nextLevelCost = upgrade.getNextLevelCost();
                             const canAfford = farming.magicBeansOwned > nextLevelCost.cropQuantity;
+                            const canAffordWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot > nextLevelCost.cropQuantity;
 
                             // Cost for 5 more levels
                             const futureLevelsCost = [upgrade.getNextLevelCost(upgrade.level + 1), upgrade.getNextLevelCost(upgrade.level + 2), upgrade.getNextLevelCost(upgrade.level + 3), upgrade.getNextLevelCost(upgrade.level + 4), upgrade.getNextLevelCost(upgrade.level + 5)];
                             let canAffortFutureLevels: boolean[] = [];
+                            let canAffortFutureLevelsWithCollect: boolean[] = [];
                             futureLevelsCost.forEach((cost, index) => {
                                 if (cost.cropQuantity > 0) {
                                     let currencyLeft = farming.magicBeansOwned;
+                                    let currencyLeftWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot;
                                     if (nextLevelCost.cropId == cost.cropId) {
                                         currencyLeft -= nextLevelCost.cropQuantity;
+                                        currencyLeftWithCollect -= nextLevelCost.cropQuantity;
                                     }
                                     for (let i = 0; i < index; i++) {
                                         if (futureLevelsCost[i].cropId == cost.cropId) {
                                             currencyLeft -= futureLevelsCost[i].cropQuantity;
+                                            currencyLeftWithCollect -= futureLevelsCost[i].cropQuantity;
                                         }
                                     }
                                     canAffortFutureLevels.push(currencyLeft > cost.cropQuantity);
+                                    canAffortFutureLevelsWithCollect.push(currencyLeftWithCollect > cost.cropQuantity);
                                 } else {
                                     canAffortFutureLevels.push(false);
+                                    canAffortFutureLevelsWithCollect.push(false);
                                 }
                             });
 
@@ -213,7 +230,7 @@ export const MarketUpgradesDisplay = () => {
                                                                             return ((cost.cropQuantity > 0)
                                                                                 && <Box gap="xsmall" direction="row" align="center" key={index}>
                                                                                         <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                        <Text color={canAffortFutureLevels[index] ? 'green-1' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
+                                                                                        <Text color={canAffortFutureLevels[index] ? 'green-1' : canAffortFutureLevelsWithCollect[index] ? 'orange' : ''} size="small">{nFormatter(cost.cropQuantity)}</Text>
                                                                                     </Box>
                                                                             )
                                                                         })
@@ -228,11 +245,13 @@ export const MarketUpgradesDisplay = () => {
                                                                             <Box gap="xsmall">                                                                            
                                                                                 {
                                                                                     costTo10.map((cost, index) => {
-                                                                                        return ((cost.cropQuantity > 0)
-                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
-                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
-                                                                                                </Box>
+                                                                                        const beansLeft = farming.magicBeansOwned;
+                                                                                        const beansWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot;
+                                                                                        return ((cost.cropQuantity > 0) &&
+                                                                                            <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                <Text color={beansLeft > cost.cropQuantity ? 'green-1' : beansWithCollect > cost.cropQuantity ? 'orange' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                            </Box>
                                                                                         )
                                                                                         })
                                                                                 }
@@ -249,11 +268,13 @@ export const MarketUpgradesDisplay = () => {
                                                                             <Box gap="xsmall">                                                                            
                                                                                 {
                                                                                     costTo25.map((cost, index) => {
-                                                                                        return ((cost.cropQuantity > 0)
-                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
-                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
-                                                                                                </Box>
+                                                                                        const beansLeft = farming.magicBeansOwned;
+                                                                                        const beansWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot;
+                                                                                        return ((cost.cropQuantity > 0) &&
+                                                                                            <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                <Text color={beansLeft > cost.cropQuantity ? 'green-1' : beansWithCollect > cost.cropQuantity ? 'orange' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                            </Box>
                                                                                         )
                                                                                         })
                                                                                 }
@@ -270,11 +291,13 @@ export const MarketUpgradesDisplay = () => {
                                                                             <Box gap="xsmall">                                                                            
                                                                                 {
                                                                                     costTo50.map((cost, index) => {
-                                                                                        return ((cost.cropQuantity > 0)
-                                                                                            && <Box gap="xsmall" direction="row" align="center" key={index}>
-                                                                                                    <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                                    <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
-                                                                                                </Box>
+                                                                                        const beansLeft = farming.magicBeansOwned;
+                                                                                        const beansWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot;
+                                                                                        return ((cost.cropQuantity > 0) &&
+                                                                                            <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                                <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                                <Text color={beansLeft > cost.cropQuantity ? 'green-1' : beansWithCollect > cost.cropQuantity ? 'orange' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                            </Box>
                                                                                         )
                                                                                         })
                                                                                 }
@@ -289,11 +312,13 @@ export const MarketUpgradesDisplay = () => {
                                                                         <Box gap="xsmall">                                                                            
                                                                             {
                                                                                 costToMax.map((cost, index) => {
-                                                                                    return ((cost.cropQuantity > 0)
-                                                                                        && <Box gap="xsmall" direction="row" align="center" key={index}>
-                                                                                                <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                                                <Text color={farming.magicBeansOwned > cost.cropQuantity ? 'green-1' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
-                                                                                            </Box>
+                                                                                    const beansLeft = farming.magicBeansOwned;
+                                                                                    const beansWithCollect = farming.magicBeansOwned + farming.magicBeansFromDepot;
+                                                                                    return ((cost.cropQuantity > 0) &&
+                                                                                        <Box gap="xsmall" direction="row" align="center" key={index}>
+                                                                                            <IconImage data={Crop.getMagicBeanIconData()} />
+                                                                                            <Text color={beansLeft > cost.cropQuantity ? 'green-1' : beansWithCollect > cost.cropQuantity ? 'orange' : ''} size="small">{nFormatter(farming.magicBeansOwned)}/{nFormatter(cost.cropQuantity)}</Text>
+                                                                                        </Box>
                                                                                     )
                                                                                     })
                                                                             }
@@ -309,7 +334,7 @@ export const MarketUpgradesDisplay = () => {
                                                             component={
                                                                 <Box gap="xsmall" direction="row" align="center">
                                                                     <IconImage data={Crop.getMagicBeanIconData()} />
-                                                                    <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
+                                                                    <Text color={canAfford ? 'green-1' : canAffordWithCollect ? 'orange' : ''} size="small">{nFormatter(nextLevelCost.cropQuantity)}</Text>
                                                                 </Box>                                                                          
                                                             }
                                                         />
