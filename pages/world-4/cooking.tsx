@@ -336,7 +336,7 @@ function Cooking() {
                     />
                     {
                         starSignUnlocked &&
-                        <Box direction='row' gap='small'>
+                        <Box direction='row' gap='xsmall'>
                             <CheckBox
                                 checked={starSignEquipped}
                                 label="Gordonius Major Equipped"
@@ -365,7 +365,7 @@ function Cooking() {
                     }
                     {
                         starSignUnlocked &&
-                        <Box direction='row' gap='small'>
+                        <Box direction='row' gap='xsmall'>
                             <CheckBox
                                 checked={silkRodeChip}
                                 label="Silkrode Nanochip Equipped"
