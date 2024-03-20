@@ -138,12 +138,14 @@ export class Gaming extends Domain {
         gaming.importBoxes[0].level = gamingSproutData[25][0];
         gaming.importBoxes[1].level = gamingSproutData[26][0];
 
-        [...(gamingData[12] as string)].forEach(char => {
-            const bitIndex = letterToNumber(char);
-            if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
-                gaming.superbits[bitIndex].unlocked = true;
-            }
-        })
+        if (gamingData[12] != undefined && gamingData[12] != null && (gamingData[12] as string) != "") {
+            [...(gamingData[12] as string)].forEach(char => {
+                const bitIndex = letterToNumber(char);
+                if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
+                    gaming.superbits[bitIndex].unlocked = true;
+                }
+            })
+        }
     }
 }
 
