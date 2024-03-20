@@ -124,6 +124,7 @@ export class Boat {
 
     // Helper values.
     speedBaseMath = 0;
+    speedBaseMathWithSilkrode = 0;
     unendingSearchBonus = 0;
     minTravelTime = 120;
 
@@ -199,6 +200,24 @@ export class Boat {
 
         return boatSpeed;
     }
+
+    getSpeedValueWithSilkrode = (
+        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
+            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
+    ) => {
+        // Check if captain is boosting the value.
+        const captainBonus = includeCaptain ?
+            this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
+            : 0;
+
+        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
+        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMathWithSilkrode;
+        if (islandBound && this.assignIsland) {
+            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
+        }
+
+        return boatSpeed;
+    }
 }
 
 export class Island {
@@ -224,7 +243,6 @@ export class Island {
 export class Ship {
     lootLevel: number = 0;
     speedLevel: number = 0;
-
 }
 
 // Sailing: [
@@ -379,6 +397,8 @@ export const updateSailing = (data: Map<string, any>) => {
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
         * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
+    const speedBaseMathWithSilkrode = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
+        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
@@ -388,6 +408,7 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
         boat.speedBaseMath = speedBaseMath;
+        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
     });
 
