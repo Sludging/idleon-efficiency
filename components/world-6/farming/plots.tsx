@@ -1,35 +1,41 @@
 import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
-import { Crop, Plot, PlotGrowthStage } from "../../../data/domain/world-6/farming";
+import { Crop, Plot, PlotGrowthStage, Farming } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import { nFormatter, toTime } from "../../../data/utility";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { ComponentAndLabel } from "../../base/TextAndLabel";
 import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
 import { StaticTime, TimeDisplaySize, TimeDown, TimeDownWithCallback } from "../../base/TimeDisplay";
+import { AppContext } from "../../../data/appContext";
 
-export const PlotsDisplay = ({ farmingPlots, cropDepot, canOvergrow }: { farmingPlots: Plot[], cropDepot: Crop[], canOvergrow: boolean }) => {
+export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquipped} : {silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean}) => {
+    const [farming, setFarming] = useState<Farming>();
     const size = useContext(ResponsiveContext);
+    const appContext = useContext(AppContext);
 
-    const plots = useMemo(() => {
-        if (!farmingPlots) {
-            return [];
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setFarming(theData.get("farming"));
         }
-
-        return farmingPlots;
-    }, [farmingPlots])
+    }, [appContext]);
+    
+    if (!farming) {
+        return null;
+    }
 
     return (
         <Box width="100%">
             <Text size="xsmall">* There could be a difference of a few seconds between IE and in-game</Text>
             <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 9) }} gap={"small"} fill>
                 {
-                    plots.map((plot, index) => {
+                    farming.farmPlots.map((plot, index) => {
                         return (
                             <ShadowBox key={index} background="dark-1">
                                 <Box align="center">
-                                    <PlotDisplay farmingPlot={plot} cropDepot={cropDepot} canOvergrow={canOvergrow} />
+                                    <PlotDisplay farmingPlot={plot} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />
                                 </Box>
                             </ShadowBox>
                         )
@@ -40,7 +46,7 @@ export const PlotsDisplay = ({ farmingPlots, cropDepot, canOvergrow }: { farming
     )
 }
 
-const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean }) => {
+const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSignEvoEquipped, starSignOGEquipped }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean, silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean }) => {
     const [readyToCollect, setReadyToCollect] = useState<boolean>(farmingPlot.readyToCollect);
     const [plotCanOvergrow, setCanOvergrow] = useState<boolean>(readyToCollect && canOvergrow);
     const [completedOGcycles, setCompletedOGCycles] = useState<number>(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
@@ -56,7 +62,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plo
     const growthStage: PlotGrowthStage = plot.getGrowthStage();
     const baseCrop = cropDepot.find(crop => crop.index == plot.cropIndex);
     // Second test is used to avoid getting a crop if current crop is last crop for its seed
-    const nextCrop = cropDepot.find(crop => crop.index == plot.cropIndex+1 && crop.seedIndex == plot.seed.index);
+    const nextCrop = cropDepot.find(crop => crop.index == plot.cropIndex+1 && crop.seed.index == (plot.seed?.index ?? -1));
 
     if (!baseCrop || growthStage == PlotGrowthStage.Empty) {
         return (
@@ -70,7 +76,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plo
     plot.updatePlotGrowthSinceLastRefresh();
 
     // To get it to %
-    const nextCropChance = baseCrop.nextCropChance * 100;
+    const nextCropChance = baseCrop.getEvolutionChance(starSignEvoEquipped, silkRodeChip) * 100;
     const currentCropIsUndiscovered = (baseCrop.discovered == false ?? false);
     const nextCropIsUndiscovered = (nextCrop?.discovered == false ?? false);
 
@@ -139,7 +145,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plo
                         </Box>
                 }
                 </Box>
-                {!readyToCollect && 
+                {!readyToCollect && plot.seed && 
                     <ComponentAndLabel
                     label="Fully grown in :"
                     labelSize="11px"
@@ -166,7 +172,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plo
                         </Box>
                     }
                 />}
-                {plotCanOvergrow && <ComponentAndLabel
+                {plotCanOvergrow && plot.seed && <ComponentAndLabel
                     label="Next OG cycle end in :"
                     labelSize="11px"
                     component={
@@ -184,7 +190,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow }: { farmingPlot: Plo
                     label="Next OG chance :"
                     labelSize="11px"
                     component={
-                        <Text size="xsmall">{nFormatter(Math.min(100, plot.getPlotNextOGChance() * 100))}%</Text>
+                        <Text size="xsmall">{nFormatter(Math.min(100, plot.getPlotNextOGChance(starSignOGEquipped, silkRodeChip) * 100))}%</Text>
                     }
                 />}
             </Box>

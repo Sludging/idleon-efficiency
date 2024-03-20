@@ -1,5 +1,5 @@
 import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TabButton from "../../base/TabButton";
 import { Crop, Farming, MarketUpgrade, MarketUpgradeCost } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
@@ -7,9 +7,23 @@ import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
+import { AppContext } from "../../../data/appContext";
 
-export const MarketUpgradesDisplay = ({ farming }: { farming: Farming }) => {
+export const MarketUpgradesDisplay = () => {
+    const [farming, setFarming] = useState<Farming>();
+    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
+
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setFarming(theData.get("farming"));
+        }
+    }, [appContext]);
+    
+    if (!farming) {
+        return null;
+    }
 
     return (
         <Box gap="medium" width="100%">
