@@ -340,7 +340,12 @@ function Cooking() {
                             <CheckBox
                                 checked={starSignEquipped}
                                 label="Gordonius Major Equipped"
-                                onChange={(event) => setStarSignEquipped(event.target.checked)}
+                                onChange={(event) => {
+                                    setStarSignEquipped(event.target.checked);
+                                    if(!event.target.checked) {
+                                        setSilkrode(false);
+                                    }
+                                }}
                                 disabled={starSignInfinity}
                             />
                             <TipDisplay
