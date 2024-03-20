@@ -198,6 +198,14 @@ function Cooking() {
         return 1;
     }, [cooking])
 
+    const canUseSilkrode = useMemo(() => {
+        if (cooking) {
+            return cooking.canBeBoostedBySilkrode;
+        }
+
+        return false;
+    }, [cooking])
+
     const mealsToShow = useMemo(() => {
         return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
@@ -295,7 +303,7 @@ function Cooking() {
                 </Box>
             </Box>
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
-                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? silkRodeChip ? cooking.totalCookingSpeedWithSilkrode : cooking.totalCookingSpeed : 0)} margin={{ right: 'medium' }} />
+                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? (silkRodeChip ? cooking.totalCookingSpeedWithSilkrode : cooking.totalCookingSpeed) : 0)} margin={{ right: 'medium' }} />
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
@@ -312,7 +320,7 @@ function Cooking() {
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
                     {
-                        cooking.canBeBoostedBySilkrode &&
+                        canUseSilkrode &&
                         <Box direction='row' gap='small'>
                             <CheckBox
                                 checked={silkRodeChip}

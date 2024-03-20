@@ -571,7 +571,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const artifactBonus = sailing.artifacts[13].getBonus();
     const atomBonus = collider.atoms[8].getBonus();
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.Cooking);
-    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * Math.max(1, starSigns.getSeraphCosmosBonus()) : 0;
+    const starsign58 = starSigns.isStarSignUnlocked("Gordonius Major") ? 15 * starSigns.getSeraphCosmosBonus() : 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
