@@ -26,6 +26,7 @@ import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Slab, SlabBonusesText } from "./slab";
 import { StarSigns } from "./starsigns";
+import { Sneaking } from "./world-6/sneaking";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -185,8 +186,8 @@ export class Boat {
     }
 
     getSpeedValue = (
-        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
-            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
+        { starSignEquipped, silkRodeEquipped, speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
+            : { starSignEquipped: boolean, silkRodeEquipped: boolean, speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { starSignEquipped:false, silkRodeEquipped:false, speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
     ) => {
         // Check if captain is boosting the value.
         const captainBonus = includeCaptain ?
@@ -194,43 +195,7 @@ export class Boat {
             : 0;
 
         const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMath;
-        if (islandBound && this.assignIsland) {
-            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
-        }
-
-        return boatSpeed;
-    }
-
-    getSpeedValueWithSilkrode = (
-        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
-            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
-    ) => {
-        // Check if captain is boosting the value.
-        const captainBonus = includeCaptain ?
-            this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
-            : 0;
-
-        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMathWithSilkrode;
-        if (islandBound && this.assignIsland) {
-            return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
-        }
-
-        return boatSpeed;
-    }
-
-    getSpeedValueWithoutStarSign = (
-        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
-            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
-    ) => {
-        // Check if captain is boosting the value.
-        const captainBonus = includeCaptain ?
-            this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
-            : 0;
-
-        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMathWithoutStarSign;
+        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
@@ -392,6 +357,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const worship = data.get("worship") as Worship;
     const starSigns = data.get("starsigns") as StarSigns;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -437,8 +403,15 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
     });
 
+    // Nice info to have for the UI
     sailing.starSignUnlocked = starSigns.isStarSignUnlocked("C. Shanti Minor");
     sailing.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "C. Shanti Minor") != undefined);
+
+    // Update available artifacts from Emporium Upgrades
+    const lastIsland = sailing.islands.find(island => island.index == 14);
+    if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
+        lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
+    }
 
     return sailing;
 }
