@@ -17,7 +17,7 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
             return achievementData.filter(x => x.data.name != "FILLERZZZ ACH" && x.worldLetter == worldLetter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex);
         }
         return [];
-    }, [theData, worldLetter])
+    }, [worldLetter, achievementData])
 
     useEffect(() => {
         setAchievementData(theData.get("achievements"));
@@ -36,7 +36,7 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
         if (worldIndex == 4) {
             setWorldLetter('E');
         }
-    }, [theData])
+    }, [theData, worldIndex])
 
     return (
         <ShadowBox background="dark-1" pad="medium">
