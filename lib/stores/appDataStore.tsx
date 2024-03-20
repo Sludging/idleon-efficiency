@@ -121,7 +121,7 @@ export const createAppDataStore = (
                 else { // Else, we have data we need to parse.
                     set((state) => ({ dataStatus: DataStatus.Loading }));
                     const newData = await handleStaticData(domain, get().data, { data: data, charNames: charNames as string[] });
-                    set((state) => ({ dataStatus: DataStatus.StaticData, data: newData, profile: domain }));
+                    set((state) => ({ dataStatus: DataStatus.StaticData, data: newData, profile: domain, status: AppStatus.Ready }));
                 }
             }
             // No domain and no logged in user, we have no data.
@@ -137,7 +137,7 @@ export const createAppDataStore = (
         handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
             set((state) => ({ dataStatus: DataStatus.Loading }));
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
-            set((state) => ({ dataStatus: DataStatus.LiveData, data: newData }));
+            set((state) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready }));
         },
     }))
 }
