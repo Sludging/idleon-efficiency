@@ -178,7 +178,7 @@ export class ImpactedBySlabBubble extends Bubble {
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         super(id, data, iconPrefix, bubbleIndex);
     }
-    // Math.floor(this.lootyCount / 100)
+    
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
         return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
@@ -187,6 +187,29 @@ export class ImpactedBySlabBubble extends Bubble {
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
         let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
         bonusText += ` (${this.lootyCount} items found = ${bonus.toString()} bonus stats)`;
+        return bonusText;
+    }
+}
+
+export class ImpactedByTheTomeBubble extends Bubble {
+    theTomeTotalScore: number = 0;
+
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new ImpactedByTheTomeBubble(id, data, iconPrefix, bubbleIndex);
+    }
+
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        return roundResult ? round(Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus) : Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
+    }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        bonusText += ` (${this.theTomeTotalScore} total score = ${bonus.toString()} total bonus)`;
         return bonusText;
     }
 }
@@ -287,6 +310,9 @@ export class Cauldron {
             }
             else if (["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.bonusKey)) {
                 toReturn.bubbles.push(ImpactedBySlabBubble.fromBase(bubble.name, bubble, iconPrefix, index));
+            }
+            else if (["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.bonusKey)) {
+                toReturn.bubbles.push(ImpactedByTheTomeBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.name, bubble, iconPrefix, index));
@@ -626,6 +652,18 @@ export function updateAlchemySlabBubbles(data: Map<string, any>) {
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.data.bonusKey))).forEach(bubble => {
         (bubble as ImpactedBySlabBubble).lootyCount = slab.rawObtainedCount;
+    })
+
+    return alchemy;
+}
+
+export function updateAlchemyTomeBubbles(data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const tomeScore = 0; // TODO : Once The Tome is implemented, need to update with the actual value
+
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
+        .forEach(bubble => {
+            (bubble as ImpactedByTheTomeBubble).theTomeTotalScore = tomeScore;
     })
 
     return alchemy;
