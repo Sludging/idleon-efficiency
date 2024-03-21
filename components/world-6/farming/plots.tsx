@@ -28,7 +28,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
 
     return (
         <Box width="100%">
-            <CropToCollectDisplay cropsToCollect={farming.cropsToCollect} />
+            <CropToCollectDisplay cropsToCollect={farming.cropsToCollect} marketBonus5={farming.getMarketUpgradeBonusValue(5)} />
             <Text size="xsmall">* There could be a difference of a few seconds between IE and in-game</Text>
             <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 9) }} gap={"small"} fill>
                 {
@@ -47,7 +47,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
     )
 }
 
-const CropToCollectDisplay = ({ cropsToCollect }: { cropsToCollect: CropQuantity[] }) => {
+const CropToCollectDisplay = ({ cropsToCollect, marketBonus5 }: { cropsToCollect: CropQuantity[], marketBonus5: number }) => {
     if (!cropsToCollect || cropsToCollect.length == 0) {
         return null;
     }
@@ -55,8 +55,9 @@ const CropToCollectDisplay = ({ cropsToCollect }: { cropsToCollect: CropQuantity
     return (
         <Box direction="row" margin={{ bottom: 'small' }}>
             <ShadowBox style={{ opacity: cropsToCollect.length > 0 ? 1 : 0.5 }} background="dark-1" gap="xsmall" pad="small" align="left">
-                <Box align="center" direction="row">
+                <Box align="center" direction="row" gap="xsmall">
                     <Text size="medium">Crops to collect</Text>
+                    {marketBonus5 > 0 && <Text size="small" color="accent-2">(doesn't include your {marketBonus5}% chance to double the quantity collected)</Text>}
                 </Box>
                 <Box gap="xxsmall" direction="row" wrap>
                     {
