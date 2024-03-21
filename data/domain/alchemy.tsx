@@ -185,9 +185,9 @@ export class ImpactedBySlabBubble extends Bubble {
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
-        titleText += ` (${this.lootyCount} items found = ${bonus.toString()} bonus stats)`;
-        return handleToolBubbles(titleText, this.name);
+        let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        bonusText += ` (${this.lootyCount} items found = ${bonus.toString()} bonus stats)`;
+        return bonusText;
     }
 }
 
