@@ -68,7 +68,7 @@ export class Gaming extends Domain {
     rawGamingData: any[] = [];
     rawSproutData: number[][] = [];
 
-    equinoxBonustoNuggets: number = 1;
+    equinoxBonusToNuggets: number = 1;
 
     bribeBonusToShovelSpeed: number = 0;
     islandExpeditionBonusToShovelSpeed: number = 0;
@@ -102,8 +102,8 @@ export class Gaming extends Domain {
 
     getNuggetRange = (): number[] => {
         const boxUpgrade = this.importBoxes[1].getBonus();
-        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64)) * this.equinoxBonustoNuggets;
-        const minStat = boxUpgrade * (1 / Math.pow(1, .64)) * this.equinoxBonustoNuggets;
+        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64)) * this.equinoxBonusToNuggets;
+        const minStat = boxUpgrade * (1 / Math.pow(1, .64)) * this.equinoxBonusToNuggets;
         return [minStat, maxStat];
     }
 
@@ -156,7 +156,7 @@ export const updateGaming = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
 
-    gaming.equinoxBonustoNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
+    gaming.equinoxBonusToNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
 
     gaming.bribeBonusToShovelSpeed = bribes.find(bribe => bribe.bribeIndex == 37)?.value ?? 0;
     gaming.islandExpeditionBonusToShovelSpeed = islandExpeditions.bonusToShovelSpeed;
