@@ -85,7 +85,7 @@ export class Crop {
             return 0;            
         } else {                
             const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay ?? 0, (this.index - (this.seed.data.cropIdMin ?? 0)));
+            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.index - this.seed.data.cropIdMin));
         }
     }
 
@@ -510,13 +510,6 @@ export class Farming extends Domain {
     }
 
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
-        console.log("Market bonus 11 :");
-        console.log(bonusFromMarketUpgrade11);
-        console.log("Pristine Charm 11 :");
-        console.log(bonusFromPristineCharm11);
-        console.log("Star sign 67 :");
-        console.log(bonusFromStarSign67);
-
         this.farmPlots.forEach(plot => {
             plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67);
         });
