@@ -510,6 +510,13 @@ export class Farming extends Domain {
     }
 
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
+        console.log("Market bonus 11 :");
+        console.log(bonusFromMarketUpgrade11);
+        console.log("Pristine Charm 11 :");
+        console.log(bonusFromPristineCharm11);
+        console.log("Star sign 67 :");
+        console.log(bonusFromStarSign67);
+
         this.farmPlots.forEach(plot => {
             plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67);
         });
