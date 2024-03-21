@@ -67,7 +67,7 @@ export const MarketUpgradesDisplay = () => {
                                 });
 
                                 // Get cost to max upgrade
-                                const costToMax = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 100) ? 100 : upgrade.data.maxLvl);
+                                const costToMax = upgrade.getTotalCostUntilLevel(upgrade.level, (upgrade.data.maxLvl - upgrade.level > 100) ? upgrade.level + 100 : upgrade.data.maxLvl);
 
                                 let label = "";
                                 if (upgrade.unlocked) {
