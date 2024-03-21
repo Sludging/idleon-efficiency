@@ -594,7 +594,7 @@ export const updateLab = (data: Map<string, any>) => {
     // Pure Opal Navette
     (lab.bonuses[8] as SpelunkerObolBonus).jewelBoost = (lab.jewels[19].getBonus() / 100);
     const jewelMultiplier = (lab.bonuses[8] as SpelunkerObolBonus).getBonus();
-    
+
     lab.jewels.filter(jewel => jewel.index != 19).forEach(jewel => jewel.bonusMultiplier = jewelMultiplier);
 
     // Special Jewel handling
@@ -606,7 +606,7 @@ export const updateLab = (data: Map<string, any>) => {
     // Special Bonus handling
     (lab.bonuses[0] as AnimalFarmBonus).totalSpecies = breeding.speciesUnlocks.reduce((sum, world) => sum += world, 0);
 
-    (lab.bonuses.find(bonus => bonus.index == 9) as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    (lab.bonuses[9] as FungiFingerBonus).greenMushroomKilled = deathnote.mobKillCount.get("mushG")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
     // Emerald Rhombol
     if (lab.jewels[13].active) {
         (lab.bonuses[9] as FungiFingerBonus).jewelBoost = lab.jewels[13].getBonus();
