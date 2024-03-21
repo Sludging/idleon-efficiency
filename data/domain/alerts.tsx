@@ -197,7 +197,7 @@ export class CropReadyAlert extends GlobalAlert {
 
 export class EquinoxBarFull extends GlobalAlert {
     constructor() {
-        super(`Equinox bar is full, go upgrade a cloud`, AlertType.EquinoxFull, Equinox.cloudImageData());
+        super(`Equinox bar is full, go upgrade a bonus`, AlertType.EquinoxFull, Equinox.cloudImageData());
 
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
