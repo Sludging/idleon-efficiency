@@ -591,6 +591,7 @@ export const updateLab = (data: Map<string, any>) => {
         _calculatePlayersLineWidth(lab, cooking, breeding, cards, gemStore, buboPxBoost);
     }
 
+    // Pure Opal Navette
     (lab.bonuses[8] as SpelunkerObolBonus).jewelBoost = (lab.jewels[19].getBonus() / 100);
     const jewelMultiplier = (lab.bonuses[8] as SpelunkerObolBonus).getBonus();
     
@@ -612,12 +613,12 @@ export const updateLab = (data: Map<string, any>) => {
     }
     (lab.bonuses[11] as UnadulteratedBankingBonus).greenStacks = [...new Set(storage.chest.filter(item => item.count >= 1e7).map(item => item.internalName))].length;
 
-    // Emerald Rhombol
+    // Pure Opal Rhinestone
     if (lab.jewels[18].active) {
         (lab.bonuses[15] as SlabSovereigntyBonus).jewelBoost = lab.jewels[18].getBonus();
     }
 
-    // Emerald Rhombol
+    // Pure Opal Rhombol
     if (lab.jewels[20].active) {
         (lab.bonuses[17] as DepotStudiesPhD).jewelBoost = lab.jewels[20].getBonus();
     }
