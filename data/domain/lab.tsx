@@ -43,6 +43,7 @@ export class MainframeBonus {
         this.bonusOff = data.bonusOn;
         this.name = data.name;
         this.description = data.description;
+        // First 14 nodes are unlocked by default, the next ones are to be purchased in Emporium bonuses so we check that later
         if (index < 14) {
             this.unlocked = true;
         }
