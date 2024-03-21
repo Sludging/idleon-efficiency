@@ -217,7 +217,8 @@ export class JadeUpgrade {
     unlockCost = (): number => {
         return (
             (300 + 500 * this.displayOrder + Math.pow(this.displayOrder, 3)) 
-            * Math.pow(this.costExponent, this .displayOrder)
+            * Math.pow(this.costExponent, this.displayOrder)
+            * Math.pow(3.07, Math.max(0, this.displayOrder - 28))
         )
     }
 }
