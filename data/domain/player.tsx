@@ -766,7 +766,6 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const achievementsInfo = data.get("achievements") as Achievement[];
 
     // Update max talent level due to bear.
-    // Update players talents levels due to elite class level increase talents.
     const bearGod = divinity.gods[1];
     bearGod.linkedPlayers.forEach(linkedPlayer => {
         const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
