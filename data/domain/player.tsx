@@ -899,8 +899,8 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
-    const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.index == 16);
-    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
+    const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.data.itemId == 16);
+    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
     const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
     const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);

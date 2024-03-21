@@ -715,7 +715,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
-    const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.index == 11);
+    const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.data.itemId == 11);
     const starSignBonus67 = starSigns.unlockedStarSigns.find(sign => sign.name == "O.G. Signalais")?.getBonus("OG Chance") ?? 0;
     farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67);
 

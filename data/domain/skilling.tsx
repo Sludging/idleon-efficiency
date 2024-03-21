@@ -62,7 +62,7 @@ export class Skilling {
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
-        const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
+        const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
         const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
         const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
         const goldFoodAchievement = achievements[AchievementConst.GoldFood].completed;

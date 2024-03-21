@@ -554,7 +554,7 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const sneaking = theData.get("sneaking") as Sneaking;
     const bribes = theData.get("bribes") as Bribe[];
 
-    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.index == 14);
+    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);

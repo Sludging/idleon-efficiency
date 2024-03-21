@@ -153,7 +153,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     })
 
     const daysSinceLastPrint = optLacc[125];
-    const pristineCharm15 = sneaking.pristineCharms.find(charm => charm.index == 15);
+    const pristineCharm15 = sneaking.pristineCharms.find(charm => charm.data.itemId == 15);
     printer.samples.flatMap(player => player).forEach(sample => {
         sample.artifactBoost = sailing.artifacts[4].getBonus() * daysSinceLastPrint
         sample.skillMasteryBoost = skillMastery.getTotalBonusByIndex(5);

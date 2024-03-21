@@ -308,7 +308,7 @@ export function updateStamps(data: Map<string, any>) {
     const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
  
     const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
-    const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.index == 17);
+    const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.data.itemId == 17);
     const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
     allButMisc.forEach(stamp => {
         stamp.labMultiplier = labBonus;
