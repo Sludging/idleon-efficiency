@@ -337,7 +337,17 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
 
     // Equinox Bar Full
     const equinoxBarFull = (equinox.bar.current == equinox.bar.max);
-    if (equinoxBarFull) {
+    let canUpgradeSomething = false;
+    // .some() is like .forEach(), but return false "break" the loop to avoid looping on all upgrade if we already found an upgrade that can be upgraded
+    equinox.upgrades.some(upgrade => {
+        if (upgrade.level < upgrade.maxLevel) {
+            canUpgradeSomething = true;
+            return false;
+        }
+
+        return true;
+    })
+    if (equinoxBarFull && canUpgradeSomething) {
         globalAlerts.push(new EquinoxBarFull());
     }
 
