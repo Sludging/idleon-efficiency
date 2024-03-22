@@ -263,10 +263,10 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const equinox = data.get("equinox") as Equinox;
     const alchemy = data.get("alchemy") as Alchemy
     const rawData = data.get("rawData") as Record<string, any>;
-    const bundleInfo = rawData["BundlesReceived"] as Record<string, number>;
+    const bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
     const lastUpdated = data.get("lastUpdated") as Date;
 
-    const hasBundle = bundleInfo == undefined ? false : bundleInfo["bun_q"] != undefined;
+    const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
     const baseMultiplier = hasBundle ? 90 : 60;
 
     const marbleMocha = alchemy.vials.find(vial => vial.name == "Marble Mocha")?.getBonus() ?? 0;
