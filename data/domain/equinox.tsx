@@ -266,6 +266,8 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const bundleInfo = rawData["BundlesReceived"] as Record<string, number>;
     const lastUpdated = data.get("lastUpdated") as Date;
 
+    console.log(bundleInfo);
+
     const hasBundle = bundleInfo == undefined ? false : bundleInfo["bun_q"] != undefined;
     const baseMultiplier = hasBundle ? 90 : 60;
 
