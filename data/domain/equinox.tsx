@@ -8,7 +8,6 @@ import { DreamChallengeModel } from "./model/dreamChallengeModel";
 import { DreamUpgradeModel } from "./model/dreamUpgradeModel";
 import { ImageData } from './imageData';
 import { TotalizerBonus } from "./worship";
-import { Key } from './account';
 
 class Challenge {
     complete: boolean = false;
