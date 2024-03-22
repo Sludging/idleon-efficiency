@@ -235,12 +235,26 @@ function Cooking() {
                     else if (timeA < 0 && timeB < 0) return indexSort //both reached
                     else return timeA > timeB ? -1 : 1 //one reached, one not
                 }
+
+                function moveMaxedToEnd(meal1: Meal, meal2: Meal) {
+                    if (meal1.level == meal1.maxLevel) {
+                        if (meal2.level == meal2.maxLevel) {
+                            return indexSort;
+                        } else {
+                            return 1;
+                        }
+                    }
+                    if (meal2.level == meal2.maxLevel) {
+                        return -1;
+                    }
+                    return meal1.getTimeTill(meal1.getMealLevelCost(), starSignEquipped, silkRodeChip, false) > meal2.getTimeTill(meal2.getMealLevelCost(), starSignEquipped, silkRodeChip, false) ? 1 : -1;
+                }
                 
                 switch (sort) {
                     case "Level":
                         return meal1.level > meal2.level ? -1 : 1;
                     case "Least Time to Cook Next":
-                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getMealLevelCost(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getMealLevelCost(), starSignEquipped, silkRodeChip, false));
+                        return moveMaxedToEnd(meal1, meal2);
                     case "Least Time to Diamond":
                         return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillDiamond(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillDiamond(), starSignEquipped, silkRodeChip, false));
                     case "Least Time to Purple":
