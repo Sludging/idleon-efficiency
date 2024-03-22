@@ -1,3 +1,4 @@
+import { SkillsIndex } from "./SkillsIndex";
 import { Alchemy } from "./alchemy";
 import { CompanionBase, initCompanionRepo } from "./data/CompanionRepo";
 import { Divinity } from "./divinity";
@@ -58,7 +59,10 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
 
         // And all players are linked to all gods.
         divinity.playerInfo.forEach(player => {
-            player.gods = divinity.gods;
+            // Doot is activated only for characters that are level 2 or above in divinity
+            if (players.find(playerFind => playerFind.playerID == player.playerIndex)?.skills.get(SkillsIndex.Divinity) ?? 0 >= 2) {
+                player.gods = divinity.gods;
+            }
         })
     }
 
