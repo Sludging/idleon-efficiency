@@ -267,7 +267,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
     const lastUpdated = data.get("lastUpdated") as Date;
 
-    const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_z == 1;
+    const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
     const baseMultiplier = hasBundle ? 90 : 60;
 
     const marbleMocha = alchemy.vials.find(vial => vial.name == "Marble Mocha")?.getBonus() ?? 0;
