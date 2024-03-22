@@ -38,7 +38,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                     </Box>
                     <Box wrap direction="row" justify="center">
                         {
-                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length).map((essence, index) => {
+                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length && essence.display).map((essence, index) => {
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">
@@ -50,7 +50,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                                                 if (index < essence.victories) {
                                                     return null;
                                                 }
-                                                const isNextBattle: boolean = (index == essence.victories && essence.display);
+                                                const isNextBattle: boolean = (index == essence.victories && essence.unlocked);
                                                 return (
                                                     <Box key={index} style={{ opacity: isNextBattle == true ? 1 : 0.6 }} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }} border={{ side: 'top', color: "grey-1" }}>
                                                         <Box direction="row" align="center" gap="small">

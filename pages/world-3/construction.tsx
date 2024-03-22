@@ -27,7 +27,7 @@ import { Printer, Sample } from '../../data/domain/printer';
 import { Player } from '../../data/domain/player';
 import { CircleInformation, Info, Star, StatusWarning, Trash } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { Deathnote } from '../../data/domain/deathnote';
+import { Deathnote, deathNoteMinibossesOrder } from '../../data/domain/deathnote';
 import { EnemyInfo } from '../../data/domain/enemies';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../data/domain/talents';
@@ -546,6 +546,14 @@ function DeathnoteDisplay() {
                 }
 
                 toReturn.get(monsterData.mapData.world)?.set(monsterData.details.Name, killCount);
+            } else if (monsterData && deathnoteData.hasMinibosses && deathNoteMinibossesOrder.includes(monsterData?.id ?? "")) {
+                // Need the monster to be loaded, the Jade upgrade purchased and the monster to be part of the miniboss list
+                // If all that then mean it should be displayed on the Minibosses section
+                if (!toReturn.has("Minibosses")) {
+                    toReturn.set("Minibosses", new Map<string, number>());
+                }
+
+                toReturn.get("Minibosses")?.set(monsterData.details.Name, killCount);
             }
         });
         return toReturn;
@@ -558,7 +566,7 @@ function DeathnoteDisplay() {
         }
 
         [...deathNoteByWorld.entries()].forEach(([worldName, deathnoteMobs]) => {
-            const worldRankSum = [...deathnoteMobs.values()].reduce((sum, killCount) => sum += deathnoteData?.getDeathnoteRank(killCount) ?? 0, 0);
+            const worldRankSum = [...deathnoteMobs.values()].reduce((sum, killCount) => sum += (worldName == "Minibosses" ? deathnoteData?.getDeathnoteMinibossRank(killCount) : deathnoteData?.getDeathnoteRank(killCount)) ?? 0, 0);
             toReturn.push(worldRankSum);
         })
         return toReturn;
@@ -584,12 +592,16 @@ function DeathnoteDisplay() {
             {
                 deathNoteByWorld && [...deathNoteByWorld.entries()].map(([worldName, deathnoteMobs], index) => {
                     return (
-                        <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                            <Text size="small">{worldName} ({worldTierInfo[index]}%)</Text>
+                        <ShadowBox width={{ max: deathnoteData.hasMinibosses ? '180px' : '200px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                            <Box>
+                                <Text size="small">{worldName}</Text>
+                                <Text size="small">({worldTierInfo[index]}%)</Text>
+                            </Box>
                             {
                                 [...deathnoteMobs.entries()].map(([mobName, killCount], mobIndex) => {
-                                    const deathnoteRank = deathnoteData.getDeathnoteRank(killCount);
-                                    const hasNextRank = deathnoteData.getNextRankReq(deathnoteRank) > 0;
+                                    const deathnoteRank = ("Minibosses" == worldName ? deathnoteData.getDeathnoteMinibossRank(killCount) : deathnoteData.getDeathnoteRank(killCount));
+                                    const nextRank = ("Minibosses" == worldName ? deathnoteData.getNextMinibossRankReq(deathnoteRank) : deathnoteData.getNextRankReq(deathnoteRank));
+                                    const hasNextRank = (nextRank > 0);
                                     return (
                                         <Box key={mobIndex} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }}>
                                             <Box direction="row" align="center" gap="small">
@@ -614,10 +626,10 @@ function DeathnoteDisplay() {
                                                                 color: 'brand'
                                                             }
                                                         ]}
-                                                        max={hasNextRank ? deathnoteData?.getNextRankReq(deathnoteRank) : killCount} />
+                                                        max={hasNextRank ? nextRank : killCount} />
                                                     <Box direction="row" justify={hasNextRank ? "between" : "center"} align={hasNextRank ? "" : "center"}>
                                                         <Text color='grey-2' size="xsmall">{nFormatter(killCount)}</Text>
-                                                        {hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(deathnoteData.getNextRankReq(deathnoteRank))}</Text>}
+                                                        {hasNextRank && <Text color='grey-2' size="xsmall">{nFormatter(nextRank)}</Text>}
                                                     </Box>
                                                 </Box>
 

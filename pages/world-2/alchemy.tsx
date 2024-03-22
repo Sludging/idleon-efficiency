@@ -242,22 +242,28 @@ function SigilsDisplay() {
     }, [appContext]);
 
     return (
-        <Box pad="medium">
+        <Box pad="medium" gap="small">
+            <Box>
+                <TextAndLabel
+                    label="Charge speed per player"
+                    text={nFormatter(sigilData?.chargeSpeed ?? 0)}
+                />
+            </Box>
             <Grid columns="1/3">
                 {
                     sigilData?.sigils.map((sigil, index) => {
-                        const reqLimit = sigil.boostLevel < 0 ? sigil.data.unlockCost : sigil.data.boostCost;
+                        const reqLimit = (sigil.boostLevel == 1 && sigil.canBeIonized) ? (sigil.data.x1 ?? 0) : sigil.boostLevel == 0 ? sigil.data.boostCost : sigil.boostLevel == -1 ? sigil.data.unlockCost : 0;
                         const chargeSpeed = sigil.activePlayers * sigilData.chargeSpeed;
                         const timeToNext = ((reqLimit - sigil.progress) / chargeSpeed) * 3600;
                         return (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} gap="medium" align="start" pad="small" border={sigil.activePlayers > 0 ? { color: 'green-1', size: '1px' } : undefined}>
-                                <IconImage style={sigil.boostLevel == 1 ? { filter: 'hue-rotate(190deg)' } : sigil.boostLevel == -1 ? { opacity: 0.2 } : undefined} data={sigil.getImageData()} />
+                                <IconImage style={sigil.boostLevel == 2 ? { filter: 'hue-rotate(130deg)' } : sigil.boostLevel == 1 ? { filter: 'hue-rotate(200deg)' } : sigil.boostLevel == -1 ? { opacity: 0.2 } : undefined} data={sigil.getImageData()} />
                                 <Box direction="row" gap="medium">
                                     <TextAndLabel textSize="xsmall" label="Name" text={sigil.data.name} />
                                     <TextAndLabel textSize="xsmall" label="Description" text={sigil.getBonusText()} />
                                 </Box>
                                 <Box direction="row" gap="medium">
-                                    <TextAndLabel textSize="xsmall" label="Progress" text={sigil.boostLevel != 1 ? `${nFormatter(sigil.progress, "Smaller")}/${nFormatter(reqLimit, "Smaller")}` : "Maxed"} />
+                                    <TextAndLabel textSize="xsmall" label="Progress" text={timeToNext > 0 ? `${nFormatter(sigil.progress, "Smaller")}/${nFormatter(reqLimit, "Smaller")}` : "Maxed"} />
                                     {sigil.activePlayers > 0 &&
                                         <ComponentAndLabel
                                             label="Time To max"

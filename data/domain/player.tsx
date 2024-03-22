@@ -1,4 +1,4 @@
-import { StarSignMap, StarSign } from './starsigns';
+import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
 import { Card, CardInfo } from "./cards";
@@ -32,6 +32,7 @@ import { Deathnote } from './deathnote';
 import { InfiniteStarsBonus, Rift } from './rift';
 import { Domain, RawData } from './base/domain';
 import { Equinox } from './equinox';
+import { BeanstalkingBonusType, PristineCharm, Sneaking } from './world-6/sneaking';
 
 export class PlayerStats {
     strength: number = 0;
@@ -130,6 +131,7 @@ export class Player {
     extraLevelsFromES: number = 0;
     extraLevelsFromSlug: number = 0;
     extraLevelsFromEquinox: number = 0;
+    extraLevelsFromAchievements: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -214,9 +216,10 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number, bubbleBonus: number) => {
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
-        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + bubbleBonus + sigilBonus) / 100;
+
+        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14) / 100;
     }
 
     getMiscBonusFromGear = (bonusType: string) => {
@@ -257,11 +260,14 @@ export class Player {
     }
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
-        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number) => {
+        petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number,
+        zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, beanstalkingItem: Food | undefined) => {
         let gearBonus = this.getMiscBonusFromGear("Money");
+        const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus)), 0);
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
+        const beanstalkingBonus = beanstalkingItem?.goldFoodBonus(beanstalkingStack, goldFoodBoost) ?? 0;
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
         const boxBonus = poBox?.bonuses[2].getBonus(poBox.level, 2) ?? 0;
@@ -274,6 +280,7 @@ export class Player {
             (1 + mealBonus / 100) *
             (1 + (petArenaBonus1 * 0.5) + petArenaBonus2) *
             (1 + labBonus / 100) *
+            (1 + pristineBonus / 100) *
             (1 + prayerBonus / 100)
 
         const americaTipper = (this.talents.find(talent => talent.skillIndex == 644)?.getBonus() ?? 0) * ((this.skills.get(SkillsIndex.Cooking)?.level ?? 0) / 10);
@@ -283,7 +290,7 @@ export class Player {
                 + dungeonBonus + arcadeBonus + boxBonus + (guildBonus * currentWorldBonus) +
                 (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper +
-                goldenFoodBonus) / 100);
+                goldenFoodBonus + beanstalkingBonus) / 100);
 
         // Reset any existing data, since next section should include all the required info.
         this.monsterCash.sources = [];
@@ -305,6 +312,8 @@ export class Player {
             name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
+        this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus});
+        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus});
     }
 
     setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
@@ -680,15 +689,36 @@ export class Players extends Domain {
     }
 }
 
+export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
+    let activeIndex = 0;
+    let lowestActiveTime = 101;
+
+    players.forEach((player, index) => {
+        if (player.afkFor < 100 && lowestActiveTime > player.afkFor) {
+            lowestActiveTime = player.afkFor;
+            activeIndex = index;
+        }
+    })
+
+    return activeIndex;
+}
+
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
-    const rift = data.get("rift") as Rift;
+    const starSigns = data.get("starsigns") as StarSigns;
 
-    const infiniteBonus = rift.bonuses.find(bonus => bonus.name == "Infinite Stars") as InfiniteStarsBonus;
-    const infiniteStars = infiniteBonus.getBonus();
+    // Apply Seraph Bonus to manually equipped star signs as the ones in InfinityStarSigns already have it
+    const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
+    players.forEach(player => {
+        player.starSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {
+            if (sign.seraphCosmosBonus != seraphCosmosBonus) {
+                sign.seraphCosmosBonus = seraphCosmosBonus
+            }
+        })
+    })
 
-    // TODO: Need to care about what signs are unlocked, which .. I never did before.
-    Object.entries(StarSignMap).slice(0, infiniteStars).forEach(([_, starSign]) => {
+    // Add Star signs impacted by infinity shiny pet bonus to star signs of the player
+    starSigns.infinityStarSigns.forEach(starSign => {
         players.forEach(player => {
             // If player isn't manually aligned to this sign, add it
             if (!player.starSigns.find(sign => sign.name == starSign.name)) {
@@ -708,11 +738,85 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     })
 }
 
+export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const family = data.get("family") as Family;
+
+    // Max talent level from Elemental Sorcerer
+    players.forEach(player => {
+        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
+        // Only update if different.
+        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? esBonus : 0;
+                    talent.maxLevel += esBonus;
+                });
+            player.extraLevelsFromES = esBonus;
+        }
+    })
+
+    return players;
+}
+
+export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const divinity = data.get("divinity") as Divinity;
+    const equinox = data.get("equinox") as Equinox;
+    const achievementsInfo = data.get("achievements") as Achievement[];
+
+    // Update max talent level due to bear.
+    const bearGod = divinity.gods[1];
+    bearGod.linkedPlayers.forEach(linkedPlayer => {
+        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
+        // Only update if different.
+        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
+            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? bearBonus : 0;
+                    talent.maxLevel += bearBonus;
+                });
+            linkedPlayer.extraLevelsFromBear = bearBonus;
+        }
+    })
+
+    // Max talent level from Equinox
+    players.forEach(player => {
+        const equinoxBonus = equinox.upgrades[10].getBonus();
+        // Only update if different.
+        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? equinoxBonus : 0;
+                    talent.maxLevel += equinoxBonus;
+                });
+            player.extraLevelsFromEquinox = equinoxBonus;
+        }
+    })
+
+
+    // Bonus talent level from achievement
+    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
+    if (totalTalentFromAchievments > 0) {
+        players.forEach(player => {
+            if (player.extraLevelsFromAchievements == 0 || player.extraLevelsFromAchievements != totalTalentFromAchievments) {
+                player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                    .forEach(talent => {
+                        talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
+                        talent.maxLevel += totalTalentFromAchievments;
+                    });
+                player.extraLevelsFromAchievements = totalTalentFromAchievments;
+            }
+        })
+    }
+
+    return players;
+}
+
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
-    const divinity = data.get("divinity") as Divinity;
     const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
@@ -728,13 +832,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             if (player.activeBubbles.length == 0) {
                 player.activeBubbles = bubbleArray;
             }
-        }
-    })
-
-    // Track player deathnote data on the player object as well.
-    players.forEach(player => {
-        if (deathnote.playerKillsByMap.has(player.playerID)) {
-            player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
         }
     })
 
@@ -761,22 +858,6 @@ export const updatePlayers = (data: Map<string, any>) => {
             });
     })
 
-    // Update max talent level due to bear.
-    // Update players talents levels due to elite class level increase talents.
-    const bearGod = divinity.gods[1];
-    bearGod.linkedPlayers.forEach(linkedPlayer => {
-        const bearBonus = Math.ceil(bearGod.getMinorLinkBonus(linkedPlayer));
-        // Only update if different.
-        if (linkedPlayer.extraLevelsFromBear == 0 || linkedPlayer.extraLevelsFromBear != bearBonus) {
-            linkedPlayer.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? bearBonus : 0;
-                    talent.maxLevel += bearBonus;
-                });
-            linkedPlayer.extraLevelsFromBear = bearBonus;
-        }
-    })
-
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
 }
@@ -795,7 +876,9 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const sigils = data.get("sigils") as Sigils;
     const shrines = data.get("shrines") as Shrine[];
-    const equinox = data.get("equinox") as Equinox;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const family = data.get("family") as Family;
+    const prayers = data.get("prayers") as Prayer[];
 
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
@@ -813,11 +896,14 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
-    const family = data.get("family") as Family;
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
-    const prayers = data.get("prayers") as Prayer[];
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
+    const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.data.itemId == 16);
+    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
+    const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
+    const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
+    const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
     players.forEach(player => {
         const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
         const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
@@ -825,8 +911,9 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
 
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
-            petArenaBonus1, petArenaBonus2, labBonus, vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble);
+            petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
+            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item);
     })
 
     // Crystal Spawn Chance
@@ -835,47 +922,6 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     players.forEach(player => {
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
     })
-
-    // Max talent level from Elemental Sorcerer
-    players.forEach(player => {
-        const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
-        // Only update if different.
-        if (player.extraLevelsFromES == 0 || player.extraLevelsFromES != esBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? esBonus : 0;
-                    talent.maxLevel += esBonus;
-                });
-            player.extraLevelsFromES = esBonus;
-        }
-    })
-
-    // Max talent level from Equinox
-    players.forEach(player => {
-        const equinoxBonus = equinox.upgrades[10].getBonus();
-        // Only update if different.
-        if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? equinoxBonus : 0;
-                    talent.maxLevel += equinoxBonus;
-                });
-            player.extraLevelsFromEquinox = equinoxBonus;
-        }
-    })
-
-
-    // Bonus talent level from achievement
-    const totalTalentFromAchievments = [achievementsInfo[291]].reduce((sum, achiev) => sum += achiev.completed ? 1 : 0, 0);
-    if (totalTalentFromAchievments > 0) {
-        players.forEach(player => {
-            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
-                .forEach(talent => {
-                    talent.level += talent.level > 0 ? totalTalentFromAchievments : 0;
-                    talent.maxLevel += totalTalentFromAchievments;
-                });
-        })
-    }
 }
 
 

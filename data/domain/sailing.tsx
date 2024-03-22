@@ -4,7 +4,7 @@ import { CaptainBonusBase, initCaptainBonusRepo } from './data/CaptainBonusRepo'
 import { CaptainBonusModel } from './model/captainBonusModel';
 import { ImageData } from "./imageData";
 import { IslandInfoModel } from "./model/islandInfoModel";
-import { Artifact } from "./sailing/artifacts";
+import { Artifact, SlabInfluencedArtifact } from "./sailing/artifacts";
 import { Cooking } from "./cooking";
 import { Sigils } from "./sigils";
 import { Divinity } from "./divinity";
@@ -24,6 +24,9 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Worship, TotalizerBonus } from "./worship";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
+import { Slab, SlabBonusesText } from "./slab";
+import { StarSigns } from "./starsigns";
+import { Sneaking } from "./world-6/sneaking";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -122,6 +125,8 @@ export class Boat {
 
     // Helper values.
     speedBaseMath = 0;
+    speedBaseMathWithoutStarSign = 0;
+    speedBaseMathWithSilkrode = 0;
     unendingSearchBonus = 0;
     minTravelTime = 120;
 
@@ -181,8 +186,8 @@ export class Boat {
     }
 
     getSpeedValue = (
-        { speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
-            : { speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
+        { starSignEquipped, silkRodeEquipped, speedUpgrades = this.speedUpgrades, includeCaptain = true, islandBound = false }
+            : { starSignEquipped: boolean, silkRodeEquipped: boolean, speedUpgrades?: number, includeCaptain?: boolean, islandBound?: boolean } = { starSignEquipped:false, silkRodeEquipped:false, speedUpgrades: this.speedUpgrades, includeCaptain: true, islandBound: false }
     ) => {
         // Check if captain is boosting the value.
         const captainBonus = includeCaptain ?
@@ -190,7 +195,7 @@ export class Boat {
             : 0;
 
         const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * this.speedBaseMath;
+        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
@@ -222,7 +227,6 @@ export class Island {
 export class Ship {
     lootLevel: number = 0;
     speedLevel: number = 0;
-
 }
 
 // Sailing: [
@@ -244,6 +248,9 @@ export class Sailing extends Domain {
     boatsUnlocked = 1;
 
     shinyMinSpeedBonus: number = 0;
+
+    starSignInfinity: boolean = false;
+    starSignUnlocked: boolean = false;
 
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
@@ -349,6 +356,8 @@ export const updateSailing = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const rift = data.get("rift") as Rift;
     const worship = data.get("worship") as Worship;
+    const starSigns = data.get("starsigns") as StarSigns;
+    const sneaking = data.get("sneaking") as Sneaking;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -372,9 +381,14 @@ export const updateSailing = (data: Map<string, any>) => {
     const mealBonus = cooking.getMealBonusForKey("Sailing");
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
+    const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
     const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
     const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + sailing.artifacts[10].getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus) / 125);
+        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
+    const speedBaseMathWithSilkrode = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
+        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
+    const speedBaseMathWithoutStarSign = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
+    * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
 
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
@@ -384,9 +398,20 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
         boat.speedBaseMath = speedBaseMath;
+        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
+        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
     });
 
+    // Nice info to have for the UI
+    sailing.starSignUnlocked = starSigns.isStarSignUnlocked("C. Shanti Minor");
+    sailing.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "C. Shanti Minor") != undefined);
+
+    // Update available artifacts from Emporium Upgrades
+    const lastIsland = sailing.islands.find(island => island.index == 14);
+    if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
+        lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
+    }
 
     return sailing;
 }

@@ -26,6 +26,9 @@ import { Domain, RawData } from './base/domain';
 import { Worship } from './worship';
 import { Summoning } from './world-6/summoning';
 import { Guild } from './guild';
+import { Bribe } from './bribes';
+import { Sneaking } from './world-6/sneaking';
+import { Cooking } from './cooking';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -284,6 +287,9 @@ export const updateAnvil = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
     const summoning = data.get("summoning") as Summoning;
     const guild = data.get("guild") as Guild;
+    const cooking = data.get("cooking") as Cooking;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const bribes = data.get("bribes") as Bribe[];
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     // Cap stuff
@@ -311,7 +317,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
         const goldFoodStampBonus = getStampBonusForKey(stampData, "GFood");
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning);
+        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning, sneaking, bribes, cooking);
         const mmanBonus = players.find(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId))?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);

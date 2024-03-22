@@ -3,6 +3,7 @@ import { AtomCollider } from "../atomCollider";
 import { Cooking } from "../cooking";
 import { ArtifactBase } from "../data/ArtifactRepo";
 import { ImageData } from "../imageData";
+import { Lab, SlabSovereigntyBonus } from "../lab";
 import { ArtifactModel } from "../model/artifactModel";
 import { Player } from "../player";
 import { Sailing } from "../sailing";
@@ -13,7 +14,8 @@ export enum ArtifactStatus {
     Unobtained,
     Obtained,
     Ancient,
-    Eldritch
+    Eldritch,
+    Sovereign
 }
 
 export class Artifact {
@@ -72,6 +74,9 @@ export class Artifact {
             case 3:
                 this.status = ArtifactStatus.Eldritch;
                 break;
+            case 4:
+                this.status = ArtifactStatus.Sovereign;
+                break;
         }
     }
 
@@ -105,6 +110,13 @@ export class Artifact {
         return this.data.eldritchBonusQty;
     }
 
+    getSovereignBonus = () => {
+        if (this.data.sovereignBonus == "The artifact's main bonus is quadrupled!") {
+            return this.data.qtyBonus;
+        }
+        return this.data.sovereignBonusQty;
+    }
+
     hasCalculatedBonus = () => {
         return this.data.bonus.includes("Total Bonus: ");
     }
@@ -130,6 +142,9 @@ export class Artifact {
         if (this.status == ArtifactStatus.Eldritch) { 
             return 3;
         }
+        if (this.status == ArtifactStatus.Sovereign) {
+            return 4;
+        }
 
         return 1;
     }
@@ -154,6 +169,7 @@ export class GoldRelicArtifact extends Artifact {
                 case ArtifactStatus.Obtained: return this.data.qtyBonus;
                 case ArtifactStatus.Ancient: return this.data.qtyBonus + this.data.ancientBonusQty;
                 case ArtifactStatus.Eldritch: return this.data.qtyBonus + (this.data.eldritchBonusQty ?? 0);
+                case ArtifactStatus.Sovereign: return this.data.qtyBonus + (this.data.sovereignBonusQty ?? 0);
             }
         }
 
@@ -163,9 +179,10 @@ export class GoldRelicArtifact extends Artifact {
 
 export class SlabInfluencedArtifact extends Artifact {
     lootyCount: number = 0;
+    slabSovereignBonus: number = 1;
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier();
+            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier() * this.slabSovereignBonus;
         }
 
         return 0;
@@ -201,6 +218,9 @@ export class AshenUrnArtifact extends Artifact {
         }
         if (this.status == ArtifactStatus.Eldritch) { 
             return 600;
+        }
+        if (this.status == ArtifactStatus.Sovereign) { 
+            return 800;
         }
 
         return 200;
@@ -351,4 +371,16 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[29] as TheTrueLanternArtifact).particlesOwned = collider.particles;
 
     return sailing.artifacts;
+}
+
+export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const lab = data.get("lab") as Lab;
+
+    const sovereignBonus = lab.bonuses[15].active ? (1 + (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() / 100) : 1;
+
+    (sailing.artifacts[2] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
 }

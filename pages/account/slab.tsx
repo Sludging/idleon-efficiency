@@ -12,8 +12,10 @@ import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import IconImage from '../../components/base/IconImage';
 import { SourcesModel } from '../../data/domain/model/sourcesModel';
 import { customHandCraftedListOfUnobtainableItems, Slab as SlabDomain } from '../../data/domain/slab';
-import TextAndLabel from '../../components/base/TextAndLabel';
+import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { NoteModel } from '../../data/domain/model/noteModel';
+import ShadowBox from '../../components/base/ShadowBox';
+import { nFormatter } from '../../data/utility';
 
 
 
@@ -86,6 +88,29 @@ function Slab() {
         <Box gap="medium">
             <NextSeo title="Slab" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Slab</Heading>
+            <ShadowBox background="dark-1" pad="small">
+                <Box gap="small" direction="row" wrap>
+                    {
+                        slabInfo.bonuses.map((bonus, index) => {
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4">
+                                    <ShadowBox style={{ opacity: bonus.bonus > 0 ? 1 : 0.5 }} key={index} background="dark-1" pad={"xsmall"}>
+                                        <ComponentAndLabel
+                                            label={bonus.type}
+                                            component={
+                                                <Box gap="xsmall" direction="row" align="center">
+                                                    <IconImage data={bonus.icon}/>
+                                                    <Text size="small">{`+${Math.ceil(bonus.bonus)}%`}</Text>
+                                                </Box>
+                                            }
+                                        />
+                                    </ShadowBox>
+                                </Box>
+                            )
+                        })
+                    }
+                </Box>
+            </ShadowBox>
             <Box direction="row" gap="medium">
                 <TextAndLabel label="Items Found" text={`${slabInfo.rawObtainedCount}/${slabInfo.obtainableCount}`} />
                 <TextAndLabel label="Missing" tooltip={<Text>This is ignoring items that can't be obtained at the moment</Text>} text={`${missingItems.length}`} />

@@ -15,6 +15,9 @@ import { Breeding } from "./breeding";
 import { Worship, TotalizerBonus } from "./worship";
 import { Summoning } from "./world-6/summoning";
 import { Guild } from './guild';
+import { BeanstalkingBonusType, Sneaking } from "./world-6/sneaking";
+import { Bribe } from "./bribes";
+import { Cooking } from "./cooking";
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -52,13 +55,22 @@ export class Skilling {
             breeding: Breeding, 
             worship: Worship,
             guild: Guild,
-            summoning: Summoning
+            summoning: Summoning,
+            sneaking: Sneaking,
+            bribes: Bribe[],
+            cooking: Cooking
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
+        const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
+        const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
+        const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
         const goldFoodAchievement = achievements[AchievementConst.GoldFood].completed;
+        const goldFoodBoost = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0));
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
-            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus)), 0);
+            .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
+        const beanstalkBaseBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenHam);
+        const bonusFromBeanstalk = beanstalkBaseBonus ? beanstalkBaseBonus.item.goldFoodBonus(beanstalkBaseBonus.getStackSize(), goldFoodBoost) : 0;
         const cardSetBonus = player.cardInfo?.getBonusForId(3) ?? 0;
         const shrineBonus = shrines[ShrineConstants.ExpShrine].getBonus(player.currentMapId);
         const statueBonus = playerStatues.statues[StatueConst.SkillXpIndex].getBonus(player);
@@ -83,7 +95,7 @@ export class Skilling {
         const myriadBox = player.postOffice.find(box => box.index == 20)
         const poBonus = myriadBox?.bonuses[2].getBonus(myriadBox.level, 2) ?? 0;
 
-        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))));
+        return starSignBonus + guildBonus + (skillingCardBonus + goldenFoodBonus + bonusFromBeanstalk) + (cardSetBonus + w5crystalCardBonus + shrineBonus + statueBonus + (prayerIncrease - prayerDecrease + (equipmentBonus + (masteroBuff + (saltLickBonus + dungeonBonus + poBonus + divinityBonus + achieveBonuses + riftBonus + shinyBonus + worshipBonus + summoningBonus)))));
     }
 
     static getSkillImageData = (skill: SkillsIndex): ImageData => {

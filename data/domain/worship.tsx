@@ -1,6 +1,7 @@
 import { notUndefined, round } from "../utility";
 import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
+import { Card } from "./cards";
 import { MapDataBase } from "./data/MapDataRepo";
 import { Gaming } from "./gaming";
 import { Item } from "./items";
@@ -97,7 +98,6 @@ export class Totalizer {
             case TotalizerBonus.ExpMulti:
             case TotalizerBonus.SkillExp:
             case TotalizerBonus.FarmingExp:
-            // TODO : check if JadeCoin and EssenceGain really are 1% bonus like FarmingExp (haven't unlocked those two myself)
             case TotalizerBonus.JadeCoin:
             case TotalizerBonus.EssenceGain:
                 return Math.floor(this.totalWaves / 10);
@@ -109,15 +109,15 @@ export class Totalizer {
 
     getText = (bonus: TotalizerBonus): string => {
         switch (bonus) {
-            case TotalizerBonus.Damage: return "{% bonus Damage";
-            case TotalizerBonus.BoatSpeed: return "{% bonus Sailing Speed";
-            case TotalizerBonus.ExpMulti: return "{% bonus Class EXP";
-            case TotalizerBonus.SkillExp: return "{% bonus Skill EXP";
-            case TotalizerBonus.Cooking: return "{% bonus Meal Cooking speed";
-            case TotalizerBonus.BitValue: return "{% Bits for Gaming";
-            case TotalizerBonus.FarmingExp: return "{% bonus Farming EXP";
-            case TotalizerBonus.JadeCoin: return "{% bonus Jade Coins Gain";
-            case TotalizerBonus.EssenceGain: return "{% All Essence Gain";
+            case TotalizerBonus.Damage: return "+{% Damage";
+            case TotalizerBonus.BoatSpeed: return "+{% Sailing Speed";
+            case TotalizerBonus.ExpMulti: return "+{% Class EXP";
+            case TotalizerBonus.SkillExp: return "+{% Skill EXP";
+            case TotalizerBonus.Cooking: return "+{% Meal Cooking speed";
+            case TotalizerBonus.BitValue: return "+{% Bits for Gaming";
+            case TotalizerBonus.FarmingExp: return "+{% Farming EXP";
+            case TotalizerBonus.JadeCoin: return "+{% Jade Coins ";
+            case TotalizerBonus.EssenceGain: return "+{% All Essence Gain";
             default: return "";
         }
     }
@@ -205,50 +205,10 @@ export class Worship extends Domain {
     }
 }
 
-export const updateWorship = (data: Map<string, any>) => {
+export const updateWorshipTotalizer = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
-    const players = data.get("players") as Player[];
-    const alchemy = data.get("alchemy") as Alchemy;
-    const stamps = data.get("stamps") as Stamp[][];
     const gaming = data.get("gaming") as Gaming;
     const sneaking = data.get("sneaking") as Sneaking;
-
-    // Reset the data since it will all be calculated in the next section.
-    worship.playerData = [];
-    
-    if (worship.totemInfo.length > 0) {
-        players.forEach(player => {
-            const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
-            const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
-            const gospelLeaderBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.GospelLeader);
-            const popeFromActive = getActiveBubbles(alchemy, player.activeBubblesString).find(x => x.name == "Call Me Pope");
-            const popeBonus = popeFromActive ? alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.CallMePope) : 0;
-
-            // Make skull info available.
-            const playerSkull = player.gear.tools[5] ? (player.gear.tools[5].data.item as SkullItemModel) : undefined;
-
-            // max charge
-            const maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? 0;
-            const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
-            const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
-            const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
-
-            // charge rate
-            const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
-            const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
-            const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
-            const chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? 0;
-            const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
-
-            worship.playerData.push({
-                maxCharge: maxCharge,
-                chargeRate: chargeRate,
-                currentCharge: round(player.currentCharge),
-                estimatedCharge: round(Worship.getEstimatedCharge(player.currentCharge, chargeRate, maxCharge, player.afkFor)),
-                playerID: player.playerID
-            })
-        });
-    }
 
     worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
 
@@ -273,14 +233,63 @@ export const updateWorship = (data: Map<string, any>) => {
     if (gaming.superbits[16].unlocked) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
-    if (sneaking.jadeUpgrades[12].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 12)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.FarmingExp);
     }
-    if (sneaking.jadeUpgrades[13].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 13)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.JadeCoin);
     }
-    if (sneaking.jadeUpgrades[14].purchased) {
+    if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 14)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
+    }
+
+    return worship;
+}
+
+export const updateWorship = (data: Map<string, any>) => {
+    const worship = data.get("worship") as Worship;
+    const players = data.get("players") as Player[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const stamps = data.get("stamps") as Stamp[][];
+    const cards = data.get("cards") as Card[];
+
+    // Reset the data since it will all be calculated in the next section.
+    worship.playerData = [];
+    
+    if (worship.totemInfo.length > 0) {
+        players.forEach(player => {
+            const worshipLevel = player.skills.get(SkillsIndex.Worship)?.level;
+            const praydayStamp = stamps[StampTab.Skill][StampConsts.PraydayIndex];
+            const gospelLeaderBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.GospelLeader);
+            const popeFromActive = player.activeBubbles.find(bubble => bubble.name == "Call Me Pope");
+            const popeBonus = popeFromActive ? alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, AlchemyConst.CallMePope) : 0;
+
+            // Make skull info available.
+            const playerSkull = player.gear.tools[5] ? (player.gear.tools[5].data.item as SkullItemModel) : undefined;
+
+            // max charge
+            let maxChargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard4")?.getBonus() ?? cards.find(card => card.id == "SoulCard4" && card.passive == true)?.getBonus() ?? 0;
+            maxChargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard6")?.getBonus() ?? cards.find(card => card.id == "SoulCard6" && card.passive == true)?.getBonus() ?? 0;
+            const talentChargeBonus = player.activeBuffs.find(x => x.skillIndex == TalentConst.ChargeSiphonIndex)?.getBonus(false, true) ?? 0;
+            const postOfficeBonus = player.postOffice[18].bonuses[1].getBonus(player.postOffice[18].level, 1);
+            const maxCharge = playerSkull ? Worship.getMaxCharge(playerSkull.maxCharge, maxChargeCardBonus, talentChargeBonus, praydayStamp.getBonus(worshipLevel), gospelLeaderBonus, worshipLevel, popeBonus, postOfficeBonus) : 0;
+
+            // charge rate
+            const flowinStamp = stamps[StampTab.Skill][StampConsts.FlowinIndex];
+            const chargeSpeedTalent = player.talents.find(x => x.skillIndex == TalentConst.NearbyOutletIndex);
+            const talentBonus = chargeSpeedTalent?.getBonus() ?? 0;
+            let chargeCardBonus = player.cardInfo?.equippedCards.find(x => x.id == "SoulCard5")?.getBonus() ?? cards.find(card => card.id == "SoulCard5" && card.passive == true)?.getBonus() ?? 0;
+            chargeCardBonus += player.cardInfo?.equippedCards.find(x => x.id == "SoulCard7")?.getBonus() ?? cards.find(card => card.id == "SoulCard7" && card.passive == true)?.getBonus() ?? 0;
+            const chargeRate = playerSkull ? Worship.getChargeRate(playerSkull.Speed, worshipLevel, popeBonus, chargeCardBonus, flowinStamp.getBonus(worshipLevel), talentBonus) : 0;
+
+            worship.playerData.push({
+                maxCharge: maxCharge,
+                chargeRate: chargeRate,
+                currentCharge: round(player.currentCharge),
+                estimatedCharge: round(Worship.getEstimatedCharge(player.currentCharge, chargeRate, maxCharge, player.afkFor)),
+                playerID: player.playerID
+            })
+        });
     }
 
     const bestWizard = players.filter(player => [ClassIndex.Wizard, ClassIndex.Elemental_Sorcerer].includes(player.classId)).sort((player1, player2) => player1.getTalentMaxLevel(475) > player2.getTalentMaxLevel(475) ? -1 : 1)[0];

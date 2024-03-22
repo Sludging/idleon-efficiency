@@ -13,15 +13,33 @@ import { Lab } from '../lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../stamps';
 import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
-import { JadeUpgrade, Sneaking } from "./sneaking";
+import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
+import { StarSigns } from "../starsigns";
 
 export class MarketUpgrade {
     level: number = 0;
     unlocked: boolean = false;
 
     constructor(public index: number, public data: MarketInfoModel) {}
+
+    getTotalCostUntilLevel = (currentLevel: number = this.level, targetLevel: number = this.data.maxLvl): MarketUpgradeCost[] => {
+        let costs: MarketUpgradeCost[] = [];
+
+        for (let i = currentLevel; i < targetLevel; i++) {
+            const cost = this.getNextLevelCost(i);
+
+            const foundCost = costs.find(foundCost => foundCost.cropId == cost.cropId);
+            if (foundCost) {
+                foundCost.cropQuantity += cost.cropQuantity;
+            } else {
+                costs.push(cost);
+            }
+        }        
+
+        return costs;
+    }
 
     getNextLevelCost = (currentLevel: number = this.level): MarketUpgradeCost => {
         let cropId = 0;
@@ -47,26 +65,32 @@ export class Crop {
     discovered: boolean = false;
     quantityOwned: number = 0;
 
-    nextCropChance: number = 0;
+    // used to calculate Next Crop Chance
+    farmingLevel: number = 0;
+    allBonusesEffect: number = 0;
+    allBonusesEffectWithoutStarSign: number = 0;
+    allBonusesEffectWithSilkrode: number = 0;
     
-    constructor(public index: number, public seedIndex: number) { }
+    constructor(public index: number, public seed: Seed) { }
 
-    updateNextCropChance = (seed: Seed | undefined, farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
-        let evolutionChance = 0;
-        const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-        const allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
+    updateNextCropChance = (farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
+        this.allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100);
+        this.allBonusesEffectWithoutStarSign = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + 0 * farmingLevel / 100);
+        this.allBonusesEffectWithSilkrode = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + (bonusFromStarSign65 * 2) * farmingLevel / 100);
+        this.farmingLevel = farmingLevel;
+    }
 
-        if (seed) {
-            if (farmingLevel < 2 || this.index == seed.data?.cropIdMax) {
-                evolutionChance = 0;            
-            } else {                
-                evolutionChance = allBonusesEffect * (seedBaseEvolutionChance) * Math.pow(seed.data?.nextCropDecay ?? 0, (this.index - (seed.data?.cropIdMin ?? 0)));
-            }
-        } else {
-            evolutionChance = allBonusesEffect;
-        }        
+    getEvolutionChance = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+        if (this.farmingLevel < 2 || this.index == this.seed.data.cropIdMax) {
+            return 0;            
+        } else {                
+            const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
+            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.index - this.seed.data.cropIdMin));
+        }
+    }
 
-        this.nextCropChance = evolutionChance;
+    getAllBonusEffect = (starSignEquipped: boolean, silkrodeBonus: boolean): number => {
+        return starSignEquipped ? (silkrodeBonus ? this.allBonusesEffectWithSilkrode : this.allBonusesEffect) : this.allBonusesEffectWithoutStarSign;
     }
 
     static getCropIconData = (cropId: number): ImageData => {
@@ -95,7 +119,7 @@ export class Crop {
 }
 
 export class Seed {
-    constructor(public index: number = -1, public data: SeedInfoModel | undefined = undefined) { }
+    constructor(public index: number = -1, public data: SeedInfoModel) { }
 
     getFullCycleGrowthTime = (): number => {
         if (this.index == -1) {
@@ -107,8 +131,7 @@ export class Seed {
 }
 
 export class Plot {
-    // -1 means the Plot is empty
-    seed: Seed = new Seed();
+    seed: Seed | undefined = undefined;
     // CropId
     cropIndex: number = 0;
     // If true can't evolve, but can still OverGrow
@@ -153,7 +176,7 @@ export class Plot {
         this.lastRefresh = (time.getTime() / 1000);
 
         let timeLeftToUse = gapFromLastRefresh * this.growthRate;
-        const cycleDuration = this.seed.getFullCycleGrowthTime();
+        const cycleDuration = this.seed?.getFullCycleGrowthTime() ?? 0;
 
         // Nothing to do for empty plots.
         if (cycleDuration == 0) {
@@ -185,15 +208,19 @@ export class Plot {
         }
     }
 
-    getPlotNextOGChance = (currentOGlevel: number = this.OGlevel) => {
-        return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * (1 + this.bonusOGChanceFromStarSign67 / 100);
+    getPlotNextOGChance = (starSignEquipped: boolean, silkrodeBonus: boolean, currentOGlevel: number = this.OGlevel) => {
+        return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * this.getStarSignBonus(starSignEquipped, silkrodeBonus);
+    }
+
+    getStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+        return starSignEquipped ? (silkrodeBonus ? (1 + (this.bonusOGChanceFromStarSign67*2) / 100) : (1 + this.bonusOGChanceFromStarSign67 / 100)) : 1;
     }
 
     getGrowthStage(): PlotGrowthStage {
-        const cycleTime = this.seed.getFullCycleGrowthTime();
+        const cycleTime = this.seed?.getFullCycleGrowthTime() ?? 0;
 
         switch (true) {
-            case this.seed.index == -1: return PlotGrowthStage.Empty;
+            case this.seed == undefined || this.seed?.index == -1 || cycleTime == 0: return PlotGrowthStage.Empty;
             case this.readyToCollect == true: return PlotGrowthStage.Grown;
             case this.growthTime >= (cycleTime * 4/5): return PlotGrowthStage.GrowStage4;
             case this.growthTime >= (cycleTime * 3/5): return PlotGrowthStage.GrowStage3;
@@ -259,7 +286,7 @@ export class CropScientist {
             switch (bonus.bonusText) {
                 case CropScientistBonusText.CookingSpeed:
                 case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + bonusFromLabBonus17 / 100);
                     break;
                 case CropScientistBonusText.ShinyPetLvlUpRate:
                 case CropScientistBonusText.CashBonus:
@@ -267,7 +294,7 @@ export class CropScientist {
                 case CropScientistBonusText.TotalDamage:
                 case CropScientistBonusText.BaseCritterPerTrap:
                 default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + (bonusFromLabBonus17 / 100));
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + bonusFromLabBonus17 / 100);
                     break;
             }
         })
@@ -340,8 +367,14 @@ export class CropScientist {
 export class Farming extends Domain {
     farmPlots: Plot[] = [];
     marketUpgrades: MarketUpgrade[] = initMarketInfoRepo().map((upgrade) => { return new MarketUpgrade(upgrade.index, upgrade.data) });
-    seeds: Seed[] = initSeedInfoRepo().map((seed) => { return new Seed(seed.index, seed.data) });;
+    seeds: Seed[] = initSeedInfoRepo().map((seed) => { return new Seed(seed.index, seed.data) });
+    starSignEvoUnlocked: boolean = false;
+    starSignEvoInfinity: boolean = false;
+    starSignOGUnlocked: boolean = false;
+    starSignOGInfinity: boolean = false;
+;
     cropDepot: Crop[] = [];
+    cropsToCollect: CropQuantity[] = [];
     cropScientist: CropScientist = new CropScientist();
 
     canOvergrow: boolean = false;
@@ -389,8 +422,8 @@ export class Farming extends Domain {
 
         farming.cropDepot = [];
         farming.seeds.forEach((seed) => {
-            for (let i = (seed.data?.cropIdMin ?? 0); i <= (seed.data?.cropIdMax ?? 0); i++) {
-                farming.cropDepot.push(new Crop(i, seed.index));
+            for (let i = (seed.data.cropIdMin); i <= (seed.data.cropIdMax); i++) {
+                farming.cropDepot.push(new Crop(i, seed));
             }
         })
         
@@ -416,8 +449,8 @@ export class Farming extends Domain {
         plotsData.forEach((plotInfo, index) => {
             let plot: Plot = new Plot(index);            
             // If seedIndex = -1 then the plot is empty, so no more information are needed (all other plotInfo should be at 0 anyway in this case)
-            plot.seed = farming.seeds.find(seed => seed.index == plotInfo[0]) ?? new Seed();
-            if (plot.seed.index > -1) {
+            plot.seed = farming.seeds.find(seed => seed.index == plotInfo[0]) ?? undefined;
+            if (plot.seed) {
                 plot.growthTime = plotInfo[1];
                 plot.cropIndex = plotInfo[2] + (plot.seed.data?.cropIdMin ?? 0);
                 plot.locked = (plotInfo[3] == 1);
@@ -445,13 +478,32 @@ export class Farming extends Domain {
             plot.growthRate = growthRate;
         })
     }
+
+    updateCropsToCollect = () => {
+        this.cropsToCollect = [];
+
+        this.farmPlots.forEach(plot => {
+            if (plot.quantityToCollect > 0) {
+                const collect = this.cropsToCollect.find(collect => collect.crop.index == plot.cropIndex);
+                if (collect) {
+                    collect.quantity += plot.getQuantityToCollect();
+                } else {
+                    const crop = this.cropDepot.find(crop => crop.index == plot.cropIndex);
+                    if (crop) {
+                        this.cropsToCollect.push({ crop: crop, quantity: plot.getQuantityToCollect() });
+                    }
+                }
+            }
+        })
+
+        this.cropsToCollect.sort((collect1, collect2) => { return collect1.crop.index > collect2.crop.index ? 1 : -1 });
+    }
     
     updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
         let fromCrops = 0;
         
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
-            const seed = this.seeds.find(seed => seed.index == crop.seedIndex);
-            fromCrops += (crop.quantityOwned * Math.pow(2.5, (seed?.index ?? 0)) * Math.pow(1.08, crop.index - (seed?.data?.cropIdMin ?? 0)));
+            fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin));
         });
         
         this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * ( 1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
@@ -465,8 +517,7 @@ export class Farming extends Domain {
     
     updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
         this.cropDepot.forEach(crop => {
-            const seed = this.seeds.find(seed => seed.index == crop.seedIndex);
-            crop.updateNextCropChance(seed, this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
+            crop.updateNextCropChance(this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
         });
     }
 
@@ -531,7 +582,7 @@ export class Farming extends Domain {
                     // No bonus there yet
                     return upgrade.data.bonus;
                 case 9: // GMO
-                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ this.getMarketUpgradeBonusValue(upgradeId).toString()+")";
+                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ nFormatter(this.getMarketUpgradeBonusValue(upgradeId))+")";
                 case 11:
                     return upgrade.data.bonus.replace(/}/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
                 case 13:
@@ -595,7 +646,12 @@ export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const players = data.get("players") as Player[];
 
-    farming.farmingLevel = players[0]?.skills.get(SkillsIndex.Farming)?.level ?? 0;
+    let levels: number[] = [];
+    players.forEach(player => {
+        levels.push(player.skills.get(SkillsIndex.Farming)?.level ?? 0);
+    })
+
+    farming.farmingLevel = Math.max(...levels);
 }
 
 export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
@@ -619,9 +675,9 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
-    const players = data.get("players") as Player[];
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
+    const starSigns = data.get("starsigns") as StarSigns;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -646,17 +702,25 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
     const mealBonusZCropEvoSumm = cooking.getMealBonusForKey("zCropEvoSumm");
     const stampCropEvolutionChance = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "CropEvo" ? stamp.getBonus() : 0, 0);
-    const starSignBonus65 = players[0].starSigns.reduce((sum, sign) => sum += sign.getBonus("Crop Evo chance per Farming LV"), 0);
+    const starSignBonus65 = starSigns.unlockedStarSigns.find(sign => sign.name == "Cropiovo Minor")?.getBonus("Crop Evo chance per Farming LV") ?? 0;
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance);
     
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
-    const pristineCharmBonus11 = sneaking.pristineCharms.find(charm => charm.index == 11)?.unlocked ? 50 : 0;
-    const starSignBonus67 = players[0].starSigns.filter(sign => sign.bonuses.find(bonus => bonus.text == "OG Chance") != undefined).reduce((sum, sign) => sum += sign.getBonus("OG Chance"), 0);
-    farming.updatePlotsOGChance(marketBonus11, pristineCharmBonus11, starSignBonus67);
-    
+    const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.data.itemId == 11);
+    const starSignBonus67 = starSigns.unlockedStarSigns.find(sign => sign.name == "O.G. Signalais")?.getBonus("OG Chance") ?? 0;
+    farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67);
+
+    farming.updateCropsToCollect();
+
     farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
+
+    // Nice info to have for the UI
+    farming.starSignOGUnlocked = starSigns.isStarSignUnlocked("O.G. Signalais");
+    farming.starSignOGInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "O.G. Signalais") != undefined);
+    farming.starSignEvoUnlocked = starSigns.isStarSignUnlocked("Cropiovo Minor");
+    farming.starSignEvoInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "Cropiovo Minor") != undefined);
 
     return farming;
 }
@@ -664,6 +728,11 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
 export interface MarketUpgradeCost {
     cropId: number,
     cropQuantity: number,
+}
+
+export interface CropQuantity {
+    crop: Crop,
+    quantity: number
 }
 
 export enum CropScientistBonusText {

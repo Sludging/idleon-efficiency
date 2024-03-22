@@ -22,6 +22,23 @@ export function TotemDisplay() {
 
     return (
         <Box gap="medium">
+            {
+                worship.totalizer.unlockedBonuses.length > 0 &&
+                <Box gap="medium" width="large">
+                    <Text>Totalizer bonuses</Text>
+                    <Grid columns={{ count: 'fit', size: 'small' }}>
+                        {
+                            worship.totalizer.unlockedBonuses.map((bonus, index) => (
+                                <ShadowBox key={index} background="dark-1" pad="small" justify='center' margin={{ right: 'small', bottom: 'xsmall' }}>
+                                    <Box direction='row'>
+                                        <Text size='small'>{worship.totalizer.getBonusText(bonus)}</Text>
+                                    </Box>
+                                </ShadowBox>
+                            ))
+                        }
+                    </Grid>
+                </Box>
+            }
             <Box width="medium" gap="medium" direction="row">
                 <ComponentAndLabel
                     label="Worship Efficiency"

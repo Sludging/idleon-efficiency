@@ -1,11 +1,15 @@
 import { letterToNumber, range } from "../utility";
 import { SkillsIndex } from "./SkillsIndex";
+import { Arcade } from "./arcade";
 import { AtomCollider } from "./atomCollider";
 import { Domain, RawData } from "./base/domain";
+import { Bribe } from "./bribes";
 import { Construction } from "./construction";
 import { GamingBoxBase, initGamingBoxRepo } from "./data/GamingBoxRepo";
 import { GamingSuperbitBase, initGamingSuperbitsRepo } from "./data/GamingSuperbitsRepo";
 import { GamingUpgradeBase, initGamingUpgradeRepo } from "./data/GamingUpgradeRepo";
+import { Equinox, MetalDetector } from "./equinox";
+import { IslandExpeditions } from "./islandExpedition";
 import { Item } from "./items";
 import { GamingBoxModel } from "./model/gamingBoxModel";
 import { GamingSuperbitModel } from "./model/gamingSuperbitModel";
@@ -64,6 +68,12 @@ export class Gaming extends Domain {
     rawGamingData: any[] = [];
     rawSproutData: number[][] = [];
 
+    equinoxBonusToNuggets: number = 1;
+
+    bribeBonusToShovelSpeed: number = 0;
+    islandExpeditionBonusToShovelSpeed: number = 0;
+    arcadeBonusToShovelSpeed: number = 0;
+
     getCurrentWater = (): number => {
         return Math.floor(Math.pow(this.rawSproutData[25][1] * (1 + this.importBoxes[0].getBonus() / 100) / 3600, .75));
     }
@@ -75,21 +85,25 @@ export class Gaming extends Domain {
         return absoluteTimeToNextWater - this.rawSproutData[25][1];
     }
 
+    getShovelSpeedBonus = (): number => {
+        return 1 + (this.islandExpeditionBonusToShovelSpeed + this.bribeBonusToShovelSpeed + this.arcadeBonusToShovelSpeed) / 100;
+    }
+
     getShovelCount = (): number => {
-        return Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44));
+        return Math.round(Math.floor(Math.pow(this.rawSproutData[26][1] / 3600, .44)) * this.getShovelSpeedBonus());
     }
 
     getNextShovelTime = (): number => {
         // Math in seconds.
-        const absoluteTimeToNextShovel = Math.pow(this.getShovelCount() + 1, 25 / 11) * 3600;
+        const absoluteTimeToNextShovel = Math.pow((this.getShovelCount() + 1) / this.getShovelSpeedBonus(), 25 / 11) * 3600;
 
         return absoluteTimeToNextShovel - this.rawSproutData[26][1];
     }
 
     getNuggetRange = (): number[] => {
         const boxUpgrade = this.importBoxes[1].getBonus();
-        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64));
-        const minStat = boxUpgrade * (1 / Math.pow(1, .64));
+        const maxStat = boxUpgrade * (1 / Math.pow(1e-5, .64)) * this.equinoxBonusToNuggets;
+        const minStat = boxUpgrade * (1 / Math.pow(1, .64)) * this.equinoxBonusToNuggets;
         return [minStat, maxStat];
     }
 
@@ -124,17 +138,29 @@ export class Gaming extends Domain {
         gaming.importBoxes[0].level = gamingSproutData[25][0];
         gaming.importBoxes[1].level = gamingSproutData[26][0];
 
-        [...(gamingData[12] as string)].forEach(char => {
-            const bitIndex = letterToNumber(char);
-            if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
-                gaming.superbits[bitIndex].unlocked = true;
-            }
-        })
+        if (gamingData[12] != undefined && gamingData[12] != null && (gamingData[12] as string) != "") {
+            [...(gamingData[12] as string)].forEach(char => {
+                const bitIndex = letterToNumber(char);
+                if (bitIndex >= 0 && bitIndex < gaming.superbits.length) { // This should never not be the case but .. you know.
+                    gaming.superbits[bitIndex].unlocked = true;
+                }
+            })
+        }
     }
 }
 
 export const updateGaming = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
+    const equinox = data.get("equinox") as Equinox;
+    const bribes = data.get("bribes") as Bribe[];
+    const arcade = data.get("arcade") as Arcade;
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
+
+    gaming.equinoxBonusToNuggets = Math.max(1, (equinox.upgrades[7] as MetalDetector).getTotalBonus());
+
+    gaming.bribeBonusToShovelSpeed = bribes.find(bribe => bribe.bribeIndex == 37)?.value ?? 0;
+    gaming.islandExpeditionBonusToShovelSpeed = islandExpeditions.bonusToShovelSpeed;
+    gaming.arcadeBonusToShovelSpeed = arcade.bonuses.find(bonus => bonus.effect == "+{% Nugget Regen")?.getBonus() ?? 0;;
 
     return gaming;
 }

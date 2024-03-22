@@ -8,6 +8,7 @@ import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
 import { Sailing } from "./sailing";
 import { ClassIndex } from "./talents";
+import { Sneaking } from "./world-6/sneaking";
 
 export class Sample {
     inLab: boolean = false;
@@ -15,6 +16,7 @@ export class Sample {
     artifactBoost: number = 0;
     divineKnightBoost: number = 0;
     skillMasteryBoost: number = 0;
+    pristineCharmBoost: number = 0;
     // Number of slots printing this sample.
     printing: number = 0;
 
@@ -32,7 +34,7 @@ export class Sample {
         let baseQuantity = this.printingQuantity;
         baseQuantity *= this.inLab ? 2 : 1;
         baseQuantity *= this.harriep ? 3 : 1;
-        return baseQuantity * (1 + (this.artifactBoost + this.divineKnightBoost) / 100) * (1 + this.skillMasteryBoost / 100);
+        return baseQuantity * (1 + (this.artifactBoost + this.divineKnightBoost) / 100) * (1 + ((this.skillMasteryBoost + this.pristineCharmBoost) / 100));
     }
 
     isOutdatedPrint = () => {
@@ -135,7 +137,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const gemStore = data.get("gems") as GemStore;
     const rift = data.get("rift") as Rift;
     const optLacc = data.get("OptLacc");
-
+    const sneaking = data.get("sneaking") as Sneaking;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -151,9 +153,11 @@ export const updatePrinter = (data: Map<string, any>) => {
     })
 
     const daysSinceLastPrint = optLacc[125];
+    const pristineCharm15 = sneaking.pristineCharms.find(charm => charm.data.itemId == 15);
     printer.samples.flatMap(player => player).forEach(sample => {
         sample.artifactBoost = sailing.artifacts[4].getBonus() * daysSinceLastPrint
         sample.skillMasteryBoost = skillMastery.getTotalBonusByIndex(5);
+        sample.pristineCharmBoost = (pristineCharm15 && pristineCharm15.unlocked) ? pristineCharm15.data.x1 : 0;
     });
 
     const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()

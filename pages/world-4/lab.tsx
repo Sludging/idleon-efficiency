@@ -83,14 +83,14 @@ function MainframeDisplay() {
         <Box>
             <Box pad="small">
                 <Text>Players in tubes</Text>
-                <Box pad={{ top: "small", bottom: "small" }} fill direction="row" wrap>
+                <Grid columns={{ size: 'auto', count: 8 }} pad={{ top: "small", bottom: "small" }}>
                     {
                         lab?.playersInTubes?.map((player, index) => (
                             <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
                                 <CharacterBox
                                     player={player}
                                     borderColor={player.labInfo.supped ? 'green-1' : 'grey-1'}>
-                                    <Box direction="row" margin={{ top: 'xsmall' }}>
+                                    <Box direction="row" margin={{ top: 'xsmall' }} justify="center">
                                         <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
                                             <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
                                                 <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
@@ -105,14 +105,14 @@ function MainframeDisplay() {
                             </Box>
                         ))
                     }
-                </Box>
+                </Grid>
             </Box>
             <Text size="xsmall">* Green border means active, low opacity means not obtained yet.</Text>
             <Box pad="small" gap="small">
                 <Text>Bonuses</Text>
                 <Box gap="small" direction="row" wrap>
                     {
-                        lab && lab.bonuses.sort((bonus1, bonus2) => bonus1.x < bonus2.x ? -1 : 1).map((bonus, index) => {
+                        lab && lab.bonuses.slice().sort((bonus1, bonus2) => bonus1.x < bonus2.x ? -1 : 1).map((bonus, index) => {
                             return (
                                 <TipDisplay
                                     key={index}
@@ -123,7 +123,7 @@ function MainframeDisplay() {
                                     heading={bonus.name}
                                 >
                                     <ShadowBox background="dark-1" pad="small" key={index} margin={{ right: 'small', bottom: 'small' }} border={bonus.active ? { side: 'all', size: '2px', color: 'green-1' } : undefined}>
-                                        <Box title={bonus.name}>
+                                        <Box title={bonus.name} style={{ opacity: bonus.unlocked ? 1 : 0.5, filter: bonus.unlocked ? 'grayscale(0)' : 'grayscale(70%)' }}>
                                             <IconImage data={bonus.getImageData()} />
                                         </Box>
                                     </ShadowBox>
@@ -138,7 +138,7 @@ function MainframeDisplay() {
                 <Text>Jewels</Text>
                 <Box gap="small" direction="row" wrap>
                     {
-                        lab && lab.jewels.sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.x ? -1 : 1).map((jewel, index) => {
+                        lab && lab.jewels.slice().sort((jewel1, jewel2) => jewel1.data.x < jewel2.data.x ? -1 : 1).map((jewel, index) => {
                             return (
                                 <Box key={index} margin={{ right: 'small', bottom: 'small' }} >
                                     <TipDisplay

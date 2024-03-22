@@ -1,5 +1,6 @@
 import {
     Box,
+    CheckBox,
     Grid,
     Heading,
     ResponsiveContext,
@@ -19,6 +20,7 @@ import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } f
 import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { AtomCollider } from '../../data/domain/atomCollider';
+import { Ascending, CircleInformation } from 'grommet-icons';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -39,7 +41,7 @@ function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: 
     )
 }
 
-function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: CookingDomain }) {
+function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { kitchen: Kitchen, cooking: CookingDomain, silkRodeChip: boolean, starSignEquipped: boolean }) {
     const spiceValues = cooking.spicesToValues(kitchen.activeRecipe);
     const possibleMeals = cooking.getMealsFromSpiceValues(spiceValues);
     const timeToFinish = ((cooking.getRecipeTime(possibleMeals) - kitchen.progress) / kitchen.fireSpeed) * 3600;
@@ -52,7 +54,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
             <Box>
                 <Grid columns={["60%", "40%"]} gap="small">
                     <Text size="small" color="grey-2">Cooking Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.mealSpeed, "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip), "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">Recipe Fire Speed:</Text>
                     <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Smaller")}/hr`}</Text>
                     <Text size="small" color="grey-2">New Recipe Luck:</Text>
@@ -80,7 +82,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
                         <Box>
                             <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
                         </Box>
-                        <Text size="small">{nFormatter(kitchen.mealSpeed / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
+                        <Text size="small">{nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
                     </Box>
                 }
                 {
@@ -126,7 +128,7 @@ function KitchenDisplay({ kitchen, cooking }: { kitchen: Kitchen, cooking: Cooki
     )
 }
 
-function KitchensDisplay() {
+function KitchensDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [cooking, setCooking] = useState<CookingDomain>();
     const appContext = useContext(AppContext);
 
@@ -150,7 +152,7 @@ function KitchensDisplay() {
                 {
                     cooking?.kitchens.filter(kitchen => kitchen.status != KitchenStatus.Locked).map((kitchen, index) => {
                         return (
-                            <KitchenDisplay key={index} kitchen={kitchen} cooking={cooking} />
+                            <KitchenDisplay key={index} kitchen={kitchen} silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} cooking={cooking} />
                         )
                     })
                 }
@@ -161,6 +163,8 @@ function KitchensDisplay() {
 
 function Cooking() {
     const [sort, setSort] = useState<string>('');
+    const [silkRodeChip, setSilkrode] = useState(false);
+    const [starSignEquipped, setStarSignEquipped] = useState(false);
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
@@ -186,6 +190,36 @@ function Cooking() {
         return 1;
     }, [cooking])
 
+    // meal max level
+    const mealMaxlevel = useMemo(() => {
+        if (cooking) {
+            return cooking.meals[0].maxLevel;
+        }
+
+        return 1;
+    }, [cooking])
+
+    const starSignUnlocked = useMemo(() => {
+        if (cooking) {
+            if (cooking.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return cooking.starSignUnlocked;
+        }
+
+        return false;
+    }, [appContext, cooking])
+
+    const starSignInfinity = useMemo(() => {
+        if (cooking) {
+            if (cooking.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return cooking.starSignInfinity;
+        }
+
+        return false;
+    }, [appContext, cooking])
 
     const mealsToShow = useMemo(() => {
         return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
@@ -193,17 +227,7 @@ function Cooking() {
                 const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
 
                 //undiscovered meals get pushed to bottom
-                if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1
-
-                function moveMaxedToEnd(meal1: Meal, meal2: Meal) {
-                    if (meal1.level == meal1.maxLevel) {
-                        return -1;
-                    }
-                    if (meal2.level == meal2.maxLevel) {
-                        return -1;
-                    }
-                    return meal1.timeToNext > meal2.timeToNext ? 1 : -1;
-                }
+                if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1;
 
                 function sortByTimeAndIndex(timeA: number, timeB: number) {
                     //negative times get switched to index sorting
@@ -211,21 +235,22 @@ function Cooking() {
                     else if (timeA < 0 && timeB < 0) return indexSort //both reached
                     else return timeA > timeB ? -1 : 1 //one reached, one not
                 }
+                
                 switch (sort) {
                     case "Level":
                         return meal1.level > meal2.level ? -1 : 1;
                     case "Least Time to Cook Next":
-                        return moveMaxedToEnd(meal1, meal2);
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getMealLevelCost(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getMealLevelCost(), starSignEquipped, silkRodeChip, false));
                     case "Least Time to Diamond":
-                        return sortByTimeAndIndex(meal1.timeToDiamond, meal2.timeToDiamond);
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillDiamond(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillDiamond(), starSignEquipped, silkRodeChip, false));
                     case "Least Time to Purple":
-                        return sortByTimeAndIndex(meal1.timeToPurple, meal2.timeToPurple);
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillPurple(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillPurple(), starSignEquipped, silkRodeChip, false));
                     case "Least Time to Void":
-                        return sortByTimeAndIndex(meal1.timeToVoid, meal2.timeToVoid);
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillVoid(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillVoid(), starSignEquipped, silkRodeChip, false));
                     case "Least Time to 30":
-                        return sortByTimeAndIndex(meal1.timeToThirty, meal2.timeToThirty);
-                    case "Least Time to 60":
-                        return sortByTimeAndIndex(meal1.timeToSixty, meal2.timeToSixty);
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillThirty(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillThirty(), starSignEquipped, silkRodeChip, false));
+                    case "Least Time to Max":
+                        return sortByTimeAndIndex(meal1.getTimeTill(meal1.getCostsTillMaxLevel(), starSignEquipped, silkRodeChip, false), meal2.getTimeTill(meal2.getCostsTillMaxLevel(), starSignEquipped, silkRodeChip, false));
                     default:
                         return indexSort;
                 }
@@ -234,14 +259,15 @@ function Cooking() {
 
     function getMealExtraText(meal: Meal) {
         if (meal.level == 0) return "" //undiscovered meals
+        const useContribution = meal.getContributionSpeed(starSignEquipped, silkRodeChip) > 0;
         switch (sort) {
             case "Level": return ""; //level already shown
-            case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime(meal.timeToNext * 3600) : "Already max level!";
-            case "Least Time to Diamond": return meal.timeToDiamond > 0 ? toTime(meal.timeToDiamond * 3600) : "Already Diamond!";
-            case "Least Time to Purple": return meal.timeToPurple > 0 ? toTime(meal.timeToPurple * 3600) : "Already Purple!";
-            case "Least Time to Void": return meal.timeToVoid > 0 ? toTime(meal.timeToVoid * 3600) : "Already Void!";
-            case "Least Time to 30": return meal.timeToThirty > 0 ? toTime(meal.timeToThirty * 3600) : "Already 30!";
-            case "Least Time to 60": return meal.timeToSixty > 0 ? toTime(meal.timeToSixty * 3600) : "Already 60!";
+            case "Least Time to Cook Next": return meal.level < meal.maxLevel ? toTime(meal.getTimeTill(meal.getMealLevelCost(), starSignEquipped, silkRodeChip, useContribution) * 3600) : "Already max level!";
+            case "Least Time to Diamond": return meal.getCostsTillDiamond() > 0 ? toTime(meal.getTimeTill(meal.getCostsTillDiamond(), starSignEquipped, silkRodeChip, useContribution) * 3600) : "Already Diamond!";
+            case "Least Time to Purple": return meal.getCostsTillPurple() > 0 ? toTime(meal.getTimeTill(meal.getCostsTillPurple(), starSignEquipped, silkRodeChip, useContribution) * 3600) : "Already Purple!";
+            case "Least Time to Void": return meal.getCostsTillVoid() > 0 ? toTime(meal.getTimeTill(meal.getCostsTillVoid(), starSignEquipped, silkRodeChip, useContribution) * 3600) : "Already Void!";
+            case "Least Time to 30": return meal.getCostsTillThirty() > 0 ? toTime(meal.getTimeTill(meal.getCostsTillThirty(), starSignEquipped, silkRodeChip, useContribution) * 3600) : "Already 30!";
+            case "Least Time to Max": return meal.getCostsTillMaxLevel() > 0 ? toTime(meal.getTimeTill(meal.getCostsTillMaxLevel(), starSignEquipped, silkRodeChip, useContribution) * 3600) : `Already max level!`;
         }
     }
 
@@ -284,7 +310,7 @@ function Cooking() {
                 </Box>
             </Box>
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
-                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking?.totalCookingSpeed ?? 0)} margin={{ right: 'medium' }} />
+                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? cooking.getTotalCookingSpeed(starSignEquipped, silkRodeChip) : 0)} margin={{ right: 'medium' }} />
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
@@ -292,14 +318,78 @@ function Cooking() {
             </Box>
             <Box margin={{ bottom: 'medium' }} gap="small">
                 <Text>Meals</Text>
-                <Box direction="row" gap="medium">
+                <Box direction="row" gap="medium" wrap>
                     <Select size="small"
                         placeholder="Sort by"
                         clear
                         value={sort}
-                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to 60"]}
+                        options={["Level", "Least Time to Cook Next", "Least Time to Diamond", "Least Time to Purple", "Least Time to Void", "Least Time to 30", "Least Time to Max"]}
                         onChange={({ value: nextValue }) => { setSort(nextValue); }}
                     />
+                    {
+                        starSignUnlocked &&
+                        <Box direction='row' gap='xsmall'>
+                            <CheckBox
+                                checked={starSignEquipped}
+                                label="Gordonius Major Equipped"
+                                onChange={(event) => {
+                                    setStarSignEquipped(event.target.checked);
+                                    if(!event.target.checked) {
+                                        setSilkrode(false);
+                                    }
+                                }}
+                                disabled={starSignInfinity}
+                            />
+                            <TipDisplay
+                                heading="Gordonius Major"
+                                size='medium'
+                                maxWidth='medium'
+                                body={
+                                    <Box>
+                                        <Text size='small'>Looks like you unlocked the Gordonius Major star sign</Text>
+                                        {
+                                            starSignInfinity ?
+                                            <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                            :
+                                            <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                        }
+                                    </Box>
+                                }
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>
+                    }
+                    {
+                        starSignUnlocked &&
+                        <Box direction='row' gap='xsmall'>
+                            <CheckBox
+                                checked={silkRodeChip}
+                                label="Silkrode Nanochip Equipped"
+                                onChange={(event) => setSilkrode(event.target.checked)}
+                                disabled={!starSignEquipped}
+                            />
+                            <TipDisplay
+                                heading="Silkrode Nanochip"
+                                size='medium'
+                                maxWidth='medium'
+                                body={
+                                    <Box>
+                                        <Text size='small'>You can check this checkbox to get accurate values when equipping the Silkrode Nanochip in the Lab (double star sign bonus)</Text>
+                                    </Box>
+                                }
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>
+                    }
+                    {
+                        cooking.meals.filter(meal => meal.noMealLeftBehindAffected == true).length > 0 &&
+                        <Box direction="row" align="center">
+                            <Ascending color="Legendary" size="large" />
+                            <Text size="xsmall">Indicates meals that will level from &quot;No Meal Left Behind&quot; Jade Emporium bonus</Text>
+                        </Box>
+                    }
                 </Box>
                 <Grid columns={size == "small" ? "1/2" : "1/3"}>
                     <Box direction="row" pad={{ left: '70px', right: '25px' }} justify="between" align="center" margin={{ right: 'small', bottom: 'small' }}>
@@ -317,95 +407,108 @@ function Cooking() {
                         </Box>
                     }
                     {
-                        mealsToShow?.map((meal, index) => (
-                            <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
-                                <Box direction="row" align='center' fill>
-                                    <Box direction="row" align="center" margin={{ right: 'small' }}>
-                                        <Text size="small">{meal.level}</Text>
-                                        <Box margin={{ bottom: 'small' }}>
-                                            <IconImage data={meal.getImageData()} />
+                        mealsToShow?.map((meal, index) => {
+                            const useContribution = meal.getContributionSpeed(starSignEquipped, silkRodeChip) > 0;
+                            const nextLevelCost = meal.getMealLevelCost();
+                            const diamondLevelCost = meal.getCostsTillDiamond();
+                            const purpleLevelCost = meal.getCostsTillPurple();
+                            const voidLevelCost = meal.getCostsTillVoid();
+                            const thirtyLevelCost = meal.getCostsTillThirty();
+                            const maxLevelCost = meal.getCostsTillMaxLevel();
+                            const nextMilestoneCost = meal.getNextMilestoneCost();
+                            return (
+                                <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} direction="row" pad="small" gap="small" align="center" border={meal.cookingContribution > 0 ? { color: 'green-1', size: '1px' } : undefined}>
+                                    <Box direction="row" align='center' fill>
+                                        <Box direction="row" align="center" margin={{ right: 'small' }}>
+                                            <Text size="small">{meal.level}</Text>
+                                            <Box margin={{ bottom: 'small' }}>
+                                                <IconImage data={meal.getImageData()} />
+                                            </Box>
+                                        </Box>
+                                        <Box fill>
+                                            <TipDisplay
+                                                heading={meal.name}
+                                                body={
+                                                    meal.level > 0 ?
+                                                        <Box>
+                                                            <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
+                                                            <Box>
+                                                                {useContribution && <Text>Cooking speed: {nFormatter(meal.getContributionSpeed(starSignEquipped, silkRodeChip), "Smaller")}</Text>}
+                                                                {nextLevelCost > 0 && <Text>Time to next level: {toTime(meal.getTimeTill(nextLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {nextLevelCost > 0 && <Text size="small">{meal.getLadlesTo(nextLevelCost, starSignEquipped, silkRodeChip, useContribution)} Ladles to next level ({meal.getLadlesTo(nextLevelCost, starSignEquipped, silkRodeChip, useContribution, cooking.getZerkerBonus())} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                                {diamondLevelCost > 0 && <Text>Time to Diamond: {toTime(meal.getTimeTill(diamondLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {diamondLevelCost <= 0 && purpleLevelCost > 0 && <Text>Time to Purple: {toTime(meal.getTimeTill(purpleLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {purpleLevelCost <= 0 && voidLevelCost > 0 && <Text>Time to Void: {toTime(meal.getTimeTill(voidLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {voidLevelCost <= 0 && thirtyLevelCost > 0 && <Text>Time to 30: {toTime(meal.getTimeTill(thirtyLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {thirtyLevelCost <= 0 && maxLevelCost > 0 && <Text>Time to Max: {toTime(meal.getTimeTill(maxLevelCost, starSignEquipped, silkRodeChip, useContribution) * 3600)}</Text>}
+                                                                {nextMilestoneCost > 0 && <Text size="small">{meal.getLadlesTo(nextMilestoneCost, starSignEquipped, silkRodeChip, useContribution)} Ladles to next milestone ({meal.getLadlesTo(nextMilestoneCost, starSignEquipped, silkRodeChip, useContribution, cooking.getZerkerBonus())} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
+                                                            </Box>
+                                                            <Text size="xsmall">* {useContribution ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
+                                                        </Box> :
+                                                        <Box>
+                                                            <Text>Bonus: {meal.getBonusText()}</Text>
+                                                            <Text>Chance: {nFormatter(meal.timeDiscoveryChance * 100, "Smaller")}%</Text>
+                                                            <Text>Time: {toTime(meal.timeDiscoveryTime)}</Text>
+                                                            {
+                                                                meal.chanceDiscoveryChance > meal.timeDiscoveryChance &&
+                                                                <Box>
+                                                                    <hr style={{ width: "100%" }} />
+                                                                    <Text>Can achieve higher chance with longer time using:</Text>
+                                                                    <Box direction="row">
+                                                                        {
+                                                                            meal.chanceOptimalSpices.map((spice, index) => (
+                                                                                <IconImage key={index} data={{
+                                                                                    location: `CookingSpice${spice}`,
+                                                                                    width: 36,
+                                                                                    height: 36
+                                                                                }} />
+                                                                            ))
+                                                                        }
+                                                                    </Box>
+                                                                    <Text>Chance: {nFormatter(meal.chanceDiscoveryChance * 100, "Smaller")}%</Text>
+                                                                    <Text>Time: {toTime(meal.chanceDiscoveryTime)}</Text>
+                                                                </Box>
+                                                            }
+                                                            <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
+                                                        </Box>
+                                                }
+                                                direction={TipDirection.Down}
+                                                size='small'
+                                            >
+                                                <Box direction="row" align="center"  justify="between">
+                                                    <Box direction="row" width="100%" justify="between" pad={!meal.noMealLeftBehindAffected ? { top: 'small' } : undefined}>
+                                                        <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                        {meal.level > 0 ?
+                                                            <Text color={meal.level == meal.maxLevel ? '' : meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
+                                                            :
+                                                            <Box direction="row" gap="xsmall">
+                                                                {
+                                                                    meal.timeOptimalSpices.map((spice, index) => (
+                                                                        <IconImage key={index} data={{
+                                                                            location: `CookingSpice${spice}`,
+                                                                            width: 36,
+                                                                            height: 36
+                                                                        }} />
+                                                                    ))
+                                                                }
+                                                            </Box>
+                                                        }                                                
+                                                    </Box>
+                                                    {
+                                                        meal.noMealLeftBehindAffected && <Ascending color="Legendary" size="40px" />
+                                                    }
+                                                </Box>
+                                            </TipDisplay>
+                                            <Text size="xsmall" color="grey-2">{getMealExtraText(meal)}</Text>
                                         </Box>
                                     </Box>
-                                    <Box fill>
-                                        <TipDisplay
-                                            heading={meal.name}
-                                            body={
-                                                meal.level > 0 ?
-                                                    <Box>
-                                                        <Text>Next level bonus: {meal.getBonusText(meal.level + 1)}</Text>
-                                                        <Box>
-                                                            {meal.cookingContribution > 0 && <Text>Cooking speed: {nFormatter(meal.cookingContribution, "Smaller")}</Text>}
-                                                            {meal.timeToNext > 0 && <Text>Time to next level: {toTime(meal.timeToNext * 3600)}</Text>}
-                                                            {meal.ladlesToLevel > 0 && <Text size="small">{meal.ladlesToLevel} Ladles to next level ({meal.zerkerLadlesToLevel} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
-                                                            {meal.timeToDiamond > 0 && <Text>Time to Diamond: {toTime(meal.timeToDiamond * 3600)}</Text>}
-                                                            {meal.timeToDiamond <= 0 && meal.timeToPurple > 0 && <Text>Time to Purple: {toTime(meal.timeToPurple * 3600)}</Text>}
-                                                            {meal.timeToPurple <= 0 && meal.timeToVoid > 0 && <Text>Time to Void: {toTime(meal.timeToVoid * 3600)}</Text>}
-                                                            {meal.timeToVoid <= 0 && meal.timeToThirty > 0 && <Text>Time to 30: {toTime(meal.timeToThirty * 3600)}</Text>}
-                                                            {meal.ladlesToNextMilestone > 0 && <Text size="small">{meal.ladlesToNextMilestone} Ladles to next milestone ({meal.zerkerLadlesToNextMilestone} if using {cooking?.bestBerserker?.playerName ?? "zerker"})</Text>}
-                                                        </Box>
-                                                        <Text size="xsmall">* {meal.cookingContribution > 0 ? "The time is calculated based on your current cooking speed for this meal." : "The time is calculated assuming all kitchens are cooking the same meal."}</Text>
-                                                    </Box> :
-                                                    <Box>
-                                                        <Text>Bonus: {meal.getBonusText()}</Text>
-                                                        <Text>Chance: {nFormatter(meal.timeDiscoveryChance * 100, "Smaller")}%</Text>
-                                                        <Text>Time: {toTime(meal.timeDiscoveryTime)}</Text>
-                                                        {
-                                                            meal.chanceDiscoveryChance > meal.timeDiscoveryChance &&
-                                                            <Box>
-                                                                <hr style={{ width: "100%" }} />
-                                                                <Text>Can achieve higher chance with longer time using:</Text>
-                                                                <Box direction="row">
-                                                                    {
-                                                                        meal.chanceOptimalSpices.map((spice, index) => (
-                                                                            <IconImage key={index} data={{
-                                                                                location: `CookingSpice${spice}`,
-                                                                                width: 36,
-                                                                                height: 36
-                                                                            }} />
-                                                                        ))
-                                                                    }
-                                                                </Box>
-                                                                <Text>Chance: {nFormatter(meal.chanceDiscoveryChance * 100, "Smaller")}%</Text>
-                                                                <Text>Time: {toTime(meal.chanceDiscoveryTime)}</Text>
-                                                            </Box>
-                                                        }
-                                                        <Text size="xsmall">* Chance/Time is based on your first kitchen luck stat.</Text>
-                                                    </Box>
-                                            }
-                                            direction={TipDirection.Down}
-                                            size='small'
-                                        >
-
-
-                                            <Box direction="row" justify="between" align="center" pad={{ top: 'small' }}>
-                                                <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
-                                                {meal.level > 0 ?
-                                                    <Text color={meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
-                                                    :
-                                                    <Box direction="row" gap="xsmall">
-                                                        {
-                                                            meal.timeOptimalSpices.map((spice, index) => (
-                                                                <IconImage key={index} data={{
-                                                                    location: `CookingSpice${spice}`,
-                                                                    width: 36,
-                                                                    height: 36
-                                                                }} />
-                                                            ))
-                                                        }
-                                                    </Box>
-                                                }
-                                            </Box>
-
-                                        </TipDisplay>
-                                        <Text size="xsmall" color="grey-2">{getMealExtraText(meal)}</Text>
-                                    </Box>
-                                </Box>
-                            </ShadowBox>
-                        ))
+                                </ShadowBox>
+                            )
+                        })
                     }
                 </Grid>
             </Box>
-            <KitchensDisplay />
+            <KitchensDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} />
         </Box >
     )
 }

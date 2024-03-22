@@ -1,11 +1,12 @@
 import {
     Box,
+    CheckBox,
     Heading,
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { Crop, Farming as FarmingDomain, CropScientist } from '../../data/domain/world-6/farming';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { AppContext } from '../../data/appContext';
 import ShadowBox from '../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
@@ -15,14 +16,67 @@ import TabButton from '../../components/base/TabButton';
 import { MarketUpgradesDisplay } from '../../components/world-6/farming/marketUpgrades';
 import { CropDepotDisplay } from '../../components/world-6/farming/cropDepot';
 import { PlotsDisplay } from '../../components/world-6/farming/plots';
+import TipDisplay from '../../components/base/TipDisplay';
+import { CircleInformation } from 'grommet-icons';
 
 function Farming() {
-    const appContext = useContext(AppContext);
-    const data = appContext.data.getData();
-    const lastUpdated = appContext.data.getLastUpdated(true) as Date;
     const [activeTab, setActiveTab] = useState<string>("Plots");
+    const [silkRodeChip, setSilkrode] = useState(false);
+    const [starSignEvoEquipped, setStarSignEvoEquipped] = useState(false);
+    const [starSignOGEquipped, setStarSignOGEquipped] = useState(false);
+    const [farming, setFarming] = useState<FarmingDomain>();
+    const appContext = useContext(AppContext);
 
-    const farming = data.get("farming") as FarmingDomain;
+    useEffect(() => {
+        if (appContext) {
+            const theData = appContext.data.getData();
+            setFarming(theData.get("farming"));
+        }
+    }, [appContext]);
+
+    const starSignOGUnlocked = useMemo(() => {
+        if (farming) {
+            if (farming.starSignOGInfinity) {
+                setStarSignOGEquipped(true);
+            }
+            return farming.starSignOGUnlocked;
+        }
+
+        return false;
+    }, [appContext, farming])
+
+    const starSignOGInfinity = useMemo(() => {
+        if (farming) {
+            if (farming.starSignOGInfinity) {
+                setStarSignOGEquipped(true);
+            }
+            return farming.starSignOGInfinity;
+        }
+
+        return false;
+    }, [appContext, farming])
+
+    const starSignEvoUnlocked = useMemo(() => {
+        if (farming) {
+            if (farming.starSignEvoInfinity) {
+                setStarSignEvoEquipped(true);
+            }
+            return farming.starSignEvoUnlocked;
+        }
+
+        return false;
+    }, [appContext, farming])
+
+    const starSignEvoInfinity = useMemo(() => {
+        if (farming) {
+            if (farming.starSignEvoInfinity) {
+                setStarSignEvoEquipped(true);
+            }
+            return farming.starSignEvoInfinity;
+        }
+
+        return false;
+    }, [appContext, farming])
 
     if (!farming) {
         return <>Loading...</>
@@ -90,6 +144,99 @@ function Farming() {
                         />
                     </ShadowBox>
                 </Box>
+                <Box direction='row' gap="medium" wrap>
+                {
+                    starSignEvoUnlocked &&
+                    <Box direction='row' gap='xsmall'>
+                        <CheckBox
+                            checked={starSignEvoEquipped}
+                            label="Cropiovo Minor Equipped"
+                            onChange={(event) => {
+                                setStarSignEvoEquipped(event.target.checked);
+                                if(!event.target.checked && !starSignOGEquipped) {
+                                    setSilkrode(false);
+                                }
+                            }}
+                            disabled={starSignEvoInfinity}
+                        />
+                        <TipDisplay
+                            heading="Cropiovo Minor"
+                            size='medium'
+                            maxWidth='medium'
+                            body={
+                                <Box>
+                                    <Text size='small'>Looks like you unlocked the Cropiovo Minor star sign (Crop Evo Chance)</Text>
+                                    {
+                                        starSignEvoInfinity ?
+                                        <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                        :
+                                        <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                    }
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
+                }
+                {
+                    starSignOGUnlocked &&
+                    <Box direction='row' gap='xsmall'>
+                        <CheckBox
+                            checked={starSignOGEquipped}
+                            label="O.G. Signalais Equipped"
+                            onChange={(event) => {
+                                setStarSignOGEquipped(event.target.checked);
+                                if(!event.target.checked && !starSignEvoEquipped) {
+                                    setSilkrode(false);
+                                }
+                            }}
+                            disabled={starSignOGInfinity}
+                        />
+                        <TipDisplay
+                            heading="O.G. Signalais"
+                            size='medium'
+                            maxWidth='medium'
+                            body={
+                                <Box>
+                                    <Text size='small'>Looks like you unlocked the O.G. Signalais star sign (plot OG chance)</Text>
+                                    {
+                                        starSignOGInfinity ?
+                                        <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                        :
+                                        <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                    }
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
+                }
+                {
+                    (starSignEvoUnlocked || starSignOGUnlocked) &&
+                    <Box direction='row' gap='xsmall'>
+                        <CheckBox
+                            checked={silkRodeChip}
+                            label="Silkrode Nanochip Equipped"
+                            onChange={(event) => setSilkrode(event.target.checked)}
+                            disabled={!starSignEvoEquipped && !starSignOGEquipped}
+                        />
+                        <TipDisplay
+                            heading="Silkrode Nanochip"
+                            size='medium'
+                            maxWidth='medium'
+                            body={
+                                <Box>
+                                    <Text size='small'>You can check this checkbox to get accurate values when equipping the Silkrode Nanochip in the Lab (double star sign bonus)</Text>
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
+                }
+                </Box>
                 <Box align="center" direction="row" justify="center" gap="small">
                     {["Plots", "Market Upgrades", "Crop Depot"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
@@ -97,9 +244,9 @@ function Farming() {
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Plots" && <PlotsDisplay plots={farming.farmPlots} cropDepot={farming.cropDepot} />}
-                    {activeTab == "Market Upgrades" && <MarketUpgradesDisplay farming={farming} />}
-                    {activeTab == "Crop Depot" && <CropDepotDisplay farming={farming} />}
+                    {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />}
+                    {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}
+                    {activeTab == "Crop Depot" && <CropDepotDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEvoEquipped} />}
                 </Box>
             </Box>
         )

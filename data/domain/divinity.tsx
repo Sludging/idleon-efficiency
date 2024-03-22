@@ -9,6 +9,7 @@ import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
+import { Sneaking } from "./world-6/sneaking";
 
 export class DivinityGod {
     blessLevel: number = 0;
@@ -17,6 +18,7 @@ export class DivinityGod {
 
     // updated values
     activeBubblePassiveBonus: number = 0;
+    jadeUpgradeBlessingBonus: number = 0;
     constructor(public index: number, public data: GodInfoModel) { }
 
 
@@ -59,7 +61,7 @@ export class DivinityGod {
             return 0;
         }
 
-        return this.blessLevel * this.data.blessingPerLevel;
+        return this.blessLevel * this.data.blessingPerLevel * (1 + this.jadeUpgradeBlessingBonus / 100);
     }
 
     getImageData = (): ImageData => {
@@ -177,11 +179,14 @@ export const updateDivinity = (data: Map<string, any>) => {
     const divinity = data.get("divinity") as Divinity;
     const alchemy = data.get("alchemy") as Alchemy;
     const players = data.get("players") as Player[];
+    const sneaking = data.get("sneaking") as Sneaking;
 
     // God related math values;
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
+    const jadeUpgradeBlessingBoost = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "True Godly Blessings")?.purchased ?? false) ? 5 : 0;
     divinity.gods.forEach(god => {
         god.activeBubblePassiveBonus = activeBubblePassiveDivinityBonus;
+        god.jadeUpgradeBlessingBonus = jadeUpgradeBlessingBoost;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
     })

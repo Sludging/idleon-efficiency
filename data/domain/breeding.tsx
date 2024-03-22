@@ -443,7 +443,7 @@ export class Breeding extends Domain {
             breeding.upgrade[index].level = upgrade;
         })
 
-        const fencePets = pets.slice(0, 26);
+        const fencePets = pets.slice(0, 27);
 
         fencePets.forEach(pet => {
             if (pet[0] == "none") {

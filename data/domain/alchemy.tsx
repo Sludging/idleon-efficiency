@@ -17,6 +17,7 @@ import { TaskBoard } from './tasks';
 import { Rift } from './rift';
 import { Domain, RawData } from './base/domain';
 import { MapInfo } from './maps';
+import { Slab } from './slab';
 
 export enum CauldronIndex {
     Power = 0,
@@ -64,7 +65,7 @@ const cauldronIndex: Record<string, number> = {
 
 export const VialIndex = 4;
 
-const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
+const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
 const vialCostPerLevel = [0, 100, 1000, 2500, 10000, 50000, 100000, 500000, 1000001, 5000000, 25000000, 100000000, 1000000000, 50000000000];
 
 const calcBubbleMatCost = (bubbleLvl: number, bubbleIndex: number, baseCost: number, isLiquid: boolean, cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean, bubbleNewMultiLevel: number = 0, vialMultiplier: number = 1, isBits: boolean): number => {
@@ -168,6 +169,51 @@ export class Bubble {
 
 }
 
+export class ImpactedBySlabBubble extends Bubble {
+    lootyCount: number = 0;
+
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new ImpactedBySlabBubble(id, data, iconPrefix, bubbleIndex);
+    }
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+    
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
+    }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        bonusText += ` (${this.lootyCount} items found = ${bonus.toString()} bonus stats)`;
+        return bonusText;
+    }
+}
+
+export class ImpactedByTheTomeBubble extends Bubble {
+    theTomeTotalScore: number = 0;
+
+    static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
+        return new ImpactedByTheTomeBubble(id, data, iconPrefix, bubbleIndex);
+    }
+
+    constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
+        super(id, data, iconPrefix, bubbleIndex);
+    }
+
+    override getBonus = (roundResult: boolean = false): number => {
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        return roundResult ? round(Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus) : Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
+    }
+
+    override getBonusText = (bonus: number = this.getBonus(true)): string => {
+        let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        bonusText += ` (${this.theTomeTotalScore} total score = ${bonus.toString()} total bonus)`;
+        return bonusText;
+    }
+}
+
 export class DiamonChefBubble extends Bubble {
     diamonMeals: number = 0;
 
@@ -262,6 +308,12 @@ export class Cauldron {
             else if (bubble.name == "Cropius Mapper") {
                 toReturn.bubbles.push(CropiusMapperBubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
+            else if (["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.bonusKey)) {
+                toReturn.bubbles.push(ImpactedBySlabBubble.fromBase(bubble.name, bubble, iconPrefix, index));
+            }
+            else if (["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.bonusKey)) {
+                toReturn.bubbles.push(ImpactedByTheTomeBubble.fromBase(bubble.name, bubble, iconPrefix, index));
+            }
             else {
                 toReturn.bubbles.push(Bubble.fromBase(bubble.name, bubble, iconPrefix, index));
             }
@@ -329,7 +381,7 @@ export class Vial {
     }
 
     getNumberToRoll = () => {
-        return 100 - vialPercentages[this.vialIndex];
+        return 100 - vialPercentages[this.vialIndex < vialPercentages.length ? this.vialIndex : vialPercentages.length - 1];
     }
 
     getMaterialCost = (): Map<Item, number> => {
@@ -591,6 +643,30 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
             }
         })
     })
+}
+
+
+export function updateAlchemySlabBubbles(data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const slab = data.get("slab") as Slab;
+
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W2", "W4", "A2", "A4", "M2", "M4"].includes(bubble.data.bonusKey))).forEach(bubble => {
+        (bubble as ImpactedBySlabBubble).lootyCount = slab.rawObtainedCount;
+    })
+
+    return alchemy;
+}
+
+export function updateAlchemyTomeBubbles(data: Map<string, any>) {
+    const alchemy = data.get("alchemy") as Alchemy;
+    const tomeScore = 0; // TODO : Once The Tome is implemented, need to update with the actual value
+
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
+        .forEach(bubble => {
+            (bubble as ImpactedByTheTomeBubble).theTomeTotalScore = tomeScore;
+    })
+
+    return alchemy;
 }
 
 export function updateAlchemy(data: Map<string, any>) {

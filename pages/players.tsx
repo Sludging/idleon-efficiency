@@ -55,6 +55,8 @@ import { Chip } from '../data/domain/lab';
 import { AnvilWrapper } from '../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../data/domain/alerts';
 import { POExtra } from '../data/domain/postoffice';
+import { Cooking } from '../data/domain/cooking';
+import { Sneaking } from '../data/domain/world-6/sneaking';
 
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
@@ -548,11 +550,17 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const achievementsInfo = theData.get("achievements") as Achievement[];
     const sigils = theData.get("sigils") as Sigils;
     const alchemy = theData.get("alchemy") as Alchemy;
+    const cooking = theData.get("cooking") as Cooking;
+    const sneaking = theData.get("sneaking") as Sneaking;
+    const bribes = theData.get("bribes") as Bribe[];
 
+    const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
     const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble);
+    const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
+    const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0));
 
 
     return (
@@ -786,24 +794,28 @@ function TalentDisplay({ player }: { player: Player }) {
                 {player.extraLevelsFromTalent > 0 && <TextAndLabel label="Symbols Of Beyond" text={`+${player.extraLevelsFromTalent}`} />}
                 {player.extraLevelsFromBear > 0 && <TextAndLabel label="Bear God" text={`+${player.extraLevelsFromBear}`} />}
                 {player.extraLevelsFromES > 0 && <TextAndLabel label="Elemental Sorcerer" text={`+${player.extraLevelsFromES}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0) && <CheckBox
-                    checked={bookMaxLevel}
-                    label={<Box direction="row" align="center">
-                        <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
-                        <TipDisplay
-                            body={<Box gap="xsmall">
-                                <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
-                            </Box>}
-                            size="small"
-                            heading='Show book level'
-                            maxWidth='medium'
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>}
-                    onChange={(event) => setBookMaxLevel(event.target.checked)}
-                />
+                {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
+                {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
+                {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) && 
+                    <CheckBox
+                        checked={bookMaxLevel}
+                        label={<Box direction="row" align="center">
+                            <Text margin={{ right: 'xsmall' }} size="small">Show book level</Text>
+                            <TipDisplay
+                                body={<Box gap="xsmall">
+                                    <Text>This will match the in-game UI showing you the max level without bonuses from symbols and bear god.</Text>
+                                </Box>}
+                                size="small"
+                                heading='Show book level'
+                                maxWidth='medium'
+                                direction={TipDirection.Down}
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>}
+                        onChange={(event) => setBookMaxLevel(event.target.checked)}
+                    />
                 }
             </Box>
             {
@@ -816,7 +828,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex)) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES) : talent.maxLevel;
+                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex)) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES - player.extraLevelsFromAchievements - player.extraLevelsFromSlug - player.extraLevelsFromEquinox) : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip
@@ -834,10 +846,8 @@ function TalentDisplay({ player }: { player: Player }) {
                                                             <Box title={talent.name} style={{ opacity: talent.level > 0 ? 1 : 0.2 }} align="center">
                                                                 <IconImage data={talent.getImageData()} scale={size == "small" ? 0.5 : 0.8} />
                                                             </Box>
-                                                            <Box direction="row" gap="xxsmall">
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>{talent.level} </Text>
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>/</Text>
-                                                                <Text size={size == "small" ? "xsmall" : "small"}>{maxLeveLToShow}</Text>
+                                                            <Box direction="row">
+                                                                <Text color={talent.maxLevel > 0 && talent.level >= talent.maxLevel ? 'status-ok' : ''} size={size == "small" ? "xsmall" : "small"}>{`${talent.level} / ${maxLeveLToShow}`}</Text>
                                                             </Box>
                                                         </Box>
                                                     </Tip>

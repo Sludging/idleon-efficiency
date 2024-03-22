@@ -141,7 +141,7 @@ function SkillMasteryDisplay() {
                             <Box>
                                 {
                                     skillMilestones.map((milestone, index) => (
-                                        <Box key={`milestone_${index}`} style={{ opacity: skillLevel > milestone ? 1 : 0.5 }} margin={{ bottom: 'xsmall' }}>
+                                        <Box key={`milestone_${index}`} style={{ opacity: skillLevel >= milestone ? 1 : 0.5 }} margin={{ bottom: 'xsmall' }}>
                                             <Text size="small">{skillMastery.getBonusText(skillIndex, index)}</Text>
                                         </Box>
                                     ))

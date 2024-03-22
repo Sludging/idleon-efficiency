@@ -1,6 +1,31 @@
 import { Domain, RawData } from './base/domain';
 import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
 import { Item } from './items'
+import { Lab, SlabSovereigntyBonus } from './lab';
+import { Sailing } from './sailing';
+import { SlabInfluencedArtifact } from './sailing/artifacts';
+import { Sneaking } from './world-6/sneaking';
+import { ImageData } from "./imageData";
+
+export enum SlabBonusesText {
+    TotalDamage = "Total Damage",
+    DivinityPoints = "Divinity Points",
+    SailingSpeed = "Sailing Speed",
+    MoreBits = "Gaming Bits",
+    JadeCoins = "Jade Coins",
+    AllEssenceGain = "All Essences Gain"
+}
+
+export class SlabBonus {
+    bonus: number = 0;
+    icon: ImageData = {
+        location: ``,
+        width: 0,
+        height: 0
+    };
+
+    constructor(public type: SlabBonusesText) { }
+}
 
 export class Slab extends Domain {
     obtainableItems: Item[] = [];
@@ -8,6 +33,8 @@ export class Slab extends Domain {
     rawObtainedCount: number = 0;
     // Keeping track of the max possible slab items to make it easy to display.
     obtainableCount: number = 0;
+
+    bonuses: SlabBonus[] = [];
 
     getRawKeys(): RawData[] {
         return [
@@ -56,6 +83,11 @@ export class Slab extends Domain {
         // Keep track of raw data for easy access in the UI and maths.
         slab.rawObtainedCount = lootedInfo.length;
         slab.obtainableCount = slabItems.length;
+
+        slab.bonuses = [];
+        Object.values(SlabBonusesText).forEach((key, index) => {
+            slab.bonuses.push(new SlabBonus(key));
+        });
     }
 }
 
@@ -65,6 +97,62 @@ export const slabItems = initSlabItemSortRepo().map(slabItem => {
         order: slabItem.data.order,
     }
 });
+
+export const updateSlabBonusDisplay = (data: Map<string, any>) => {
+    const slab = data.get("slab") as Slab;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const sailing = data.get("sailing") as Sailing;
+    const lab = data.get("lab") as Lab;
+
+    const slabSoverignBonus = lab.bonuses[15].active ? (1 + (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() / 100) : 1;
+
+    slab.bonuses.forEach(bonus => {
+        switch (bonus.type) {
+            case SlabBonusesText.AllEssenceGain:
+                bonus.bonus = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name = "Essence Confetti")?.purchased ?? false) ? (Math.floor(Math.max(0, slab.rawObtainedCount - 1000) / 10) * 3 * slabSoverignBonus) : 0;
+                bonus.icon = {
+                    location: 'Slab5',
+                    width: 22,
+                    height: 20
+                }
+                break;
+            case SlabBonusesText.DivinityPoints:
+                bonus.bonus = (sailing.artifacts[18] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[18] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
+                break;
+            case SlabBonusesText.JadeCoins:
+                bonus.bonus = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name = "Jade Coin Magnetism")?.purchased ?? false) ? (Math.floor(Math.max(0, slab.rawObtainedCount - 1000) / 10) * 5 * slabSoverignBonus) : 0;
+                bonus.icon = {
+                    location: 'Slab4',
+                    width: 22,
+                    height: 20
+                }
+                break;
+            case SlabBonusesText.MoreBits:
+                bonus.bonus = (sailing.artifacts[20] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[20] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
+                break;
+            case SlabBonusesText.SailingSpeed:
+                bonus.bonus = (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[10] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
+                break;
+            case SlabBonusesText.TotalDamage:
+                bonus.bonus = (sailing.artifacts[2] as SlabInfluencedArtifact).getBonus();
+                bonus.icon = (sailing.artifacts[2] as SlabInfluencedArtifact).getImageData();
+                bonus.icon.width = 22;
+                bonus.icon.height = 20;
+                break;
+        }
+    })
+
+    return slab;
+}
 
 export const customHandCraftedListOfUnobtainableItems = [
     "Godshard",

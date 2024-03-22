@@ -5,6 +5,7 @@ import { ImageData } from './imageData';
 import { Item } from './items';
 import { StatueDataModel } from './model/statueDataModel';
 import { Player } from './player';
+import { Sailing } from './sailing';
 
 export const StatueConst = {
     LevelIndex: 0,
@@ -27,6 +28,7 @@ export class Statue {
     public statueNumber: number = 0;
 
     voodooStatuficationBonus: number = 1;
+    onyxStatueBonus: number = 2;
 
     constructor(public index: number, public displayName: string, public internalName: string, public bonus: string, public statueData: StatueDataModel) {
         const StatueNumberRegex = /EquipmentStatues(\d+)/gm;
@@ -89,7 +91,7 @@ export class Statue {
                 default: talentBonus = 1;
             }
         }
-        return this.level * this.statueData.bonus * talentBonus * this.voodooStatuficationBonus * (this.type == StatusType.Onyx ? 2 : 1);
+        return this.level * this.statueData.bonus * talentBonus * this.voodooStatuficationBonus * (this.type == StatusType.Onyx ? this.onyxStatueBonus : 1);
     }
 
     getBonusText = (player: Player | undefined = undefined) => {
@@ -181,6 +183,7 @@ export class Statues extends Domain {
 export const updateStatueBonuses = (data: Map<string, any>) => {
     const statues = data.get("statues") as PlayerStatues[];
     const playerData = data.get("players") as Player[];
+    const sailing = data.get("sailing") as Sailing;
 
     const bestVoidMan = playerData.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 56)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, playerData[0]);
     if (bestVoidMan) {
@@ -188,4 +191,9 @@ export const updateStatueBonuses = (data: Map<string, any>) => {
             statue.voodooStatuficationBonus = (1 + (bestVoidMan.talents.find(talent => talent.skillIndex == 56)?.getBonus() ?? 0) / 100);
         })
     }
+
+    const onyxStatueBonus = 2 + Math.max(0, sailing.artifacts[30].getBonus()) / 100;
+    statues.flatMap(player => player.statues).forEach(statue => {
+        statue.onyxStatueBonus = onyxStatueBonus;
+    })
 }

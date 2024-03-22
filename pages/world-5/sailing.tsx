@@ -5,7 +5,7 @@ import {
     Heading,
     Text,
 } from 'grommet'
-import { FormNext } from 'grommet-icons';
+import { CircleInformation, FormNext } from 'grommet-icons';
 import { NextSeo } from 'next-seo';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../components/base/IconImage';
@@ -34,7 +34,7 @@ border: 1px solid black;
 background-color: black;
 `
 
-function ShipsDisplay() {
+function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
     const appContext = useContext(AppContext);
 
@@ -112,10 +112,10 @@ function ShipsDisplay() {
                                     </Box>
                                     <Box direction="row" gap="xsmall" align='center'>
                                         <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.7} />
-                                        <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue()))}</Text>
+                                        <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip})))}</Text>
                                     </Box>
                                     <FormNext color="grey-2" size="16px" />
-                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ speedUpgrades: boat.speedUpgrades + 1 })))}</Text>
+                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, speedUpgrades:(boat.speedUpgrades + 1)})))}</Text>
                                     <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                         <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
                                         <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
@@ -282,7 +282,7 @@ function ArtifactDisplay() {
                                         label="ANCIENT BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.ancientBonus}
                                         margin={{bottom: 'small'}}
                                     />
@@ -290,8 +290,16 @@ function ArtifactDisplay() {
                                         label="ELDRITCH BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Eldritch].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.eldritchBonus!}
+                                        margin={{ bottom: 'small' }}
+                                    />
+                                    <TextAndLabel
+                                        label="SOVEREIGN BONUS"
+                                        labelSize='xsmall'
+                                        textSize='12px'
+                                        textColor={[ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        text={artifact.data.sovereignBonus!}
                                     />
                                 </Box>
                             </Box>
@@ -303,7 +311,7 @@ function ArtifactDisplay() {
     )
 }
 
-function OverviewDisplay() {
+function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
     const appContext = useContext(AppContext);
 
@@ -340,7 +348,7 @@ function OverviewDisplay() {
                                         </Box>
                                         <Box direction="row" gap="xsmall" align='center'>
                                             <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.8} />
-                                            <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ includeCaptain: false })))}</Text>
+                                            <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, includeCaptain: false })))}</Text>
                                         </Box>
                                     </Box>
                                 </Box>
@@ -372,11 +380,11 @@ function OverviewDisplay() {
                                     labelSize='xsmall'
                                     right={true}
                                     textSize="small"
-                                    label="2hrs dist"
-                                    textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue() * 2 ? 'accent-1' : ''}
-                                    text={nFormatter(boat.getSpeedValue() * 2)}
+                                    label="Ideal dist"
+                                    textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip}) * (boat.minTravelTime / 60) ? 'accent-1' : ''}
+                                    text={nFormatter(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip}) * (boat.minTravelTime / 60))}
                                     tooltip={
-                                        <Box>This is how far the ship travels in 2h, you want to target islands that have less distance than this.</Box>
+                                        <Text>This is how far the ship travels in the Minimum Travel Time, you want to target islands that have less distance than this.</Text>
                                     }
                                 />
                                 <TextAndLabel
@@ -391,7 +399,7 @@ function OverviewDisplay() {
                                         labelSize='xsmall'
                                         label="Time till arrival"
                                         component={
-                                            <TimeDown size={TimeDisplaySize.XSmall} addSeconds={((boat.assignIsland.data.distance - boat.distanceTravelled) / boat.getSpeedValue({ islandBound: true })) * 3600} />
+                                            <TimeDown size={TimeDisplaySize.XSmall} addSeconds={((boat.assignIsland.data.distance - boat.distanceTravelled) / boat.getSpeedValue({ starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, islandBound: true })) * 3600} />
                                         }
                                     />
                                 }
@@ -439,9 +447,9 @@ function IslandDisplay() {
                         <Box direction="row">
                             {
                                 island.artifacts.map((artifact, aIndex) => (
-                                    <Box key={aIndex} margin={{ right: 'small' }} border={artifact.status == ArtifactStatus.Ancient ? { color: 'green-1', side: 'all' } : undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
+                                    <Box key={aIndex} margin={{ right: 'small' }} border={artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } : artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } : artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } : undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
                                         <TipDisplay
-                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Ancient ? " (Ancient)" : ""}`}
+                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" : artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" : artifact.status == ArtifactStatus.Ancient ? " (Ancient)" : ""}`}
                                             body={<Text>{artifact.getBonusText()}</Text>}
                                         >
                                             <IconImage data={artifact.getImageData()} />
@@ -460,6 +468,8 @@ function IslandDisplay() {
 function Sailing() {
     const [activeTab, setActiveTab] = useState<string>("Overview");
     const [sailing, setSailing] = useState<SailingDomain>();
+    const [silkRodeChip, setSilkrode] = useState(false);
+    const [starSignEquipped, setStarSignEquipped] = useState(false);
     const appContext = useContext(AppContext);
 
     useEffect(() => {
@@ -468,6 +478,28 @@ function Sailing() {
             setSailing(theData.get("sailing"));
         }
     }, [appContext]);
+
+    const starSignUnlocked = useMemo(() => {
+        if (sailing) {
+            if (sailing.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return sailing.starSignUnlocked;
+        }
+
+        return false;
+    }, [appContext, sailing])
+
+    const starSignInfinity = useMemo(() => {
+        if (sailing) {
+            if (sailing.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return sailing.starSignInfinity;
+        }
+
+        return false;
+    }, [appContext, sailing])
 
     if (!sailing) {
         return <Box>Loading</Box>
@@ -521,17 +553,76 @@ function Sailing() {
                     }
                 </Box>
             </Box>
+            <Box direction='row' gap="medium" wrap>
+                {
+                    starSignUnlocked &&
+                    <Box direction='row' gap='xsmall'>
+                        <CheckBox
+                            checked={starSignEquipped}
+                            label="C. Shanti Minor Equipped"
+                            onChange={(event) => {
+                                setStarSignEquipped(event.target.checked);
+                                if(!event.target.checked) {
+                                    setSilkrode(false);
+                                }
+                            }}
+                            disabled={starSignInfinity}
+                        />
+                        <TipDisplay
+                            heading="C. Shanti Minor"
+                            size='medium'
+                            maxWidth='medium'
+                            body={
+                                <Box>
+                                    <Text size='small'>Looks like you unlocked the C. Shanti Minor star sign</Text>
+                                    {
+                                        starSignInfinity ?
+                                        <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                        :
+                                        <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                    }
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
+                }
+                {
+                    starSignUnlocked &&
+                    <Box direction='row' gap='xsmall'>
+                        <CheckBox
+                            checked={silkRodeChip}
+                            label="Silkrode Nanochip Equipped"
+                            onChange={(event) => setSilkrode(event.target.checked)}
+                            disabled={!starSignEquipped}
+                        />
+                        <TipDisplay
+                            heading="Silkrode Nanochip"
+                            size='medium'
+                            maxWidth='medium'
+                            body={
+                                <Box>
+                                    <Text size='small'>You can check this checkbox to get accurate values when equipping the Silkrode Nanochip in the Lab (double star sign bonus)</Text>
+                                </Box>
+                            }
+                        >
+                            <CircleInformation size="small" />
+                        </TipDisplay>
+                    </Box>
+                }
+            </Box>
             <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
                 {["Overview", "Islands", "Artifacts", "Captains", "Boats"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
             </Box>
-            {activeTab == "Overview" && <OverviewDisplay />}
+            {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped}/>}
             {activeTab == "Islands" && <IslandDisplay />}
             {activeTab == "Artifacts" && <ArtifactDisplay />}
             {activeTab == "Captains" && <CaptainsDisplay />}
-            {activeTab == "Boats" && <ShipsDisplay />}
+            {activeTab == "Boats" && <ShipsDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped}/>}
         </Box>
     )
 }

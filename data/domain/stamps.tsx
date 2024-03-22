@@ -41,7 +41,8 @@ export class Stamp {
     materialItem: Item | undefined = undefined;
 
     // Update field
-    multiplier: number = 1;
+    labMultiplier: number = 1;
+    pristineCharmMultiplier: number = 1;
     sigilDiscount: number = 0;
     hasBribe: boolean = false;
     vialDiscount: number = 0;
@@ -204,9 +205,9 @@ export class Stamp {
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
         if (this.removeLimitFromUnderLevel == false && skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
-            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.multiplier;
+            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.labMultiplier * this.pristineCharmMultiplier;
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.multiplier;
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.labMultiplier * this.pristineCharmMultiplier;
     }
 
     isMaxLevel = (): boolean => {
@@ -305,13 +306,14 @@ export function updateStamps(data: Map<string, any>) {
     const optLacc = data.get("OptLacc"); 
     const gildedStampCount = parseInt(optLacc[154]);
     const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
-    
-    if (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) {
-        const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
-        allButMisc.forEach(stamp => {
-            stamp.multiplier = 2;
-        })
-    }
+ 
+    const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
+    const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.data.itemId == 17);
+    const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
+    allButMisc.forEach(stamp => {
+        stamp.labMultiplier = labBonus;
+        stamp.pristineCharmMultiplier = (pristineCharm17 && pristineCharm17.unlocked) ? (1 + pristineCharm17.data.x1 / 100) : 1;
+    })
 
     const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 5)?.purchased ?? false;
     const discountBribe = bribes[BribeConst.StampBribe];
