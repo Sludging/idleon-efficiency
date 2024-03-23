@@ -758,7 +758,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(107, <AchievementModel>{
                 "name": "Threadin' the Needle",
                 "qty": 1,
-                "desc": "Pass through the teenie tiny Lava hoop in the Catching Minigame. It only appears if you go through 20 hoops in a row!",
+                "desc": "Pass through the teenie tiny Lava hoop in the Catching Minigame. It only appears if you go through 25 hoops in a row!",
                 "rewards": "5% catching EXP for &all characters",
                 "world": "Yum-Yum Desert"
             }),

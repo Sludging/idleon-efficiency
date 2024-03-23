@@ -36,7 +36,7 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Picnic Stowaway8", <QuestNameModel>{"name": "Beating Up Frogs for some Sauce", "difficulty": 3}),
         new QuestNameBase("Picnic Stowaway12", <QuestNameModel>{"name": "Live-Action Entertainment", "difficulty": 3}),
         new QuestNameBase("Scripticus23", <QuestNameModel>{"name": "The Smithing Grind", "difficulty": 2}),
-        new QuestNameBase("Scripticus25", <QuestNameModel>{"name": "The Unoccupied Picnic", "difficulty": 4}),
+        new QuestNameBase("Scripticus25", <QuestNameModel>{"name": "Warrior, Archer or Mage?", "difficulty": 4}),
         new QuestNameBase("Glumlee9", <QuestNameModel>{"name": "Literally Burning your Money", "difficulty": 1}),
         new QuestNameBase("Stiltzcho5", <QuestNameModel>{"name": "Outta the Way Slimes", "difficulty": 3}),
         new QuestNameBase("Stiltzcho10", <QuestNameModel>{"name": "No Stone Unturned", "difficulty": 3}),

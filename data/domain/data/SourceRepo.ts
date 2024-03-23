@@ -10118,6 +10118,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Quest83", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
+                        "txtName": "Outer World Town Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("FoodHealth14", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -10179,6 +10189,16 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("StampC22", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
+                        "txtName": "Magma Rivertown Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest84", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
@@ -10858,8 +10878,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11405,8 +11424,8 @@ export const initSourceRepo = () => {
         new SourcesBase("InvBag2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
-                        "wikiName": "[[Scripticus#The Unoccupied Picnic|The Unoccupied Picnic]]",
-                        "txtName": "Scripticus: The Unoccupied Picnic"
+                        "wikiName": "[[Scripticus#Warrior, Archer or Mage?|Warrior, Archer or Mage?]]",
+                        "txtName": "Scripticus: Warrior, Archer or Mage?"
                     }
                 ],
                 "recipeFrom": [],
@@ -11422,8 +11441,8 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": [
                     <SourceModel>{
-                        "wikiName": "[[Scripticus#The Unoccupied Picnic|The Unoccupied Picnic]]",
-                        "txtName": "Scripticus: The Unoccupied Picnic"
+                        "wikiName": "[[Scripticus#Warrior, Archer or Mage?|Warrior, Archer or Mage?]]",
+                        "txtName": "Scripticus: Warrior, Archer or Mage?"
                     }
                 ]
             }),
@@ -12796,7 +12815,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13676,17 +13696,27 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentCape0", <SourcesModel>{
+        new SourcesBase("GemP35", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentNametag3", <SourcesModel>{
+        new SourcesBase("EquipmentHats80", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest77", <SourcesModel>{
+        new SourcesBase("ClassSwapB", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

@@ -191,7 +191,7 @@ export const initPrayerRepo = () => {
         new PrayerBase(14, <PrayerModel>{
                 "name": "Vacuous Tissue",
                 "id": 4,
-                "bonus": "+100% Dungeon Credits and Flurbos from Boosted Runs",
+                "bonus": "+100% Dungeon Credits and Flurbos",
                 "curse": "Use 2x Dungeon Passes per run.",
                 "x1": 10,
                 "x2": 10,

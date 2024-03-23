@@ -804,6 +804,13 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 16,
                         "purchasePrice": 2800000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Outer World Town",
+                        "item": "Quest83",
+                        "quantity": 1,
+                        "no": 17,
+                        "purchasePrice": 400000000000
                     }
                 ]
             }),
@@ -858,6 +865,13 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 7,
                         "purchasePrice": 120000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "Quest84",
+                        "quantity": 1,
+                        "no": 8,
+                        "purchasePrice": 4000000000000000
                     }
                 ]
             }),

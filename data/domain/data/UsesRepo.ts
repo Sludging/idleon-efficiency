@@ -29086,8 +29086,8 @@ export const initUsesRepo = () => {
                 "uses": [
                     <UseModel>{
                         "repoSource": "NpcRepo",
-                        "key": "Scripticus@The Unoccupied Picnic",
-                        "name": "The Unoccupied Picnic Requirements",
+                        "key": "Scripticus@Warrior, Archer or Mage?",
+                        "name": "Warrior, Archer or Mage? Requirements",
                         "amount": 1,
                         "type": "quest"
                     }
