@@ -295,10 +295,10 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Power Cauldron",
                         "name": "Tome Strength",
-                        "x1": 5,
+                        "x1": 2.5,
                         "x2": 60,
                         "func": "decay",
-                        "description": "+{% STR for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
+                        "description": "+{% STR for every 2000 Tome Completion Points over 5000. So you'd get one stack of this at 7000 pts, two at 9000, etc",
                         "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W8"
                     },
@@ -315,10 +315,10 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Power Cauldron",
                         "name": "Crop Chapter",
-                        "x1": 30,
+                        "x1": 12,
                         "x2": 50,
                         "func": "decay",
-                        "description": "+{% Crop Evolution chance for every 500 Tome Completion Points above 1000.",
+                        "description": "+{% Crop Evolution chance for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W10AllCharz"
                     }
@@ -615,20 +615,20 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Quicc Cauldron",
                         "name": "Tome Agility",
-                        "x1": 5,
+                        "x1": 2.5,
                         "x2": 60,
                         "func": "decay",
-                        "description": "+{% AGI for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
+                        "description": "+{% AGI for every 2000 Tome Completion Points over 5000. So you'd get one stack of this at 7000 pts, two at 9000, etc",
                         "requirements": [<ComponentModel>{"item": "Bug13", "quantity": 750}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "A9"
                     },
                     <BubbleModel>{
                         "cauldron": "Quicc Cauldron",
                         "name": "Stealth Chapter",
-                        "x1": 20,
+                        "x1": 10,
                         "x2": 50,
                         "func": "decay",
-                        "description": "+{% Stealth (the stat that lowers dedection rate in Sneaking) for every 500 Tome Completion Points above 1000.",
+                        "description": "+{% Stealth (the stat that lowers detection rate in Sneaking) for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<CropComponentModel>{"cropId": "99", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "A10AllCharz"
                     }
@@ -925,20 +925,20 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "High-IQ Cauldron",
                         "name": "Tome Wisdom",
-                        "x1": 5,
+                        "x1": 2.5,
                         "x2": 60,
                         "func": "decay",
-                        "description": "+{% WIS for every 500 Tome Completion Points above 1000. NOTE: The tome is coming in an upcoming weekly update!",
+                        "description": "+{% WIS for every 2000 Tome Completion Points over 5000. So you'd get one stack of this at 7000 pts, two at 9000, etc",
                         "requirements": [<CropComponentModel>{"cropId": "72", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "M9"
                     },
                     <BubbleModel>{
                         "cauldron": "High-IQ Cauldron",
                         "name": "Essence Chapter",
-                        "x1": 30,
+                        "x1": 15,
                         "x2": 50,
                         "func": "decay",
-                        "description": "+{% All Essence Gain for every 500 Tome Completion Points above 1000.",
+                        "description": "+{% All Essence Gain for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<JadeComponentModel>{"quantity": 250000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "M10AllCharz"
                     }
