@@ -558,7 +558,7 @@ export const updateCooking = (data: Map<string, any>) => {
         kitchen.richelin = (gemStore.purchases.find(purchase => purchase.no == 120)?.pucrhased ?? -1) > kitchen.index;
     });
 
-    const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0; // TODO: Remove hardcoding
+    const jewelMealBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
     const voidPlateAchiev = achievements[233].completed;
     const foodLust = (equinox.upgrades[9] as FoodLust);
     cooking.meals.forEach(meal => {
@@ -568,7 +568,11 @@ export const updateCooking = (data: Map<string, any>) => {
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
+        meal.cookingContributionWithoutStarSign = 0;
         meal.cookingContributionWithSilkrode = 0;
+        meal.cookingTotalSpeed = 0;
+        meal.cookingTotalSpeedWithoutStarSign = 0;
+        meal.cookingTotalSpeedWithSilkrode = 0;
         meal.maxLevel = 30;
     });
 
@@ -583,8 +587,8 @@ export const updateCooking = (data: Map<string, any>) => {
     const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const meal63Bonus = cooking?.meals.filter(meal => meal.bonusKey == "zMealFarm").reduce((sum, meal) => sum += meal.getBonus(), 0);
     const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const jewel0Bonus = mainframe.jewels[0].getBonus(); // TODO: Remove hardcoding
-    const jewel14Bonus = mainframe.jewels[14].getBonus(); // TODO: Remove hardcoding
+    const jewel0Bonus = mainframe.jewels[0].getBonus();
+    const jewel14Bonus = mainframe.jewels[14].getBonus();
     const trollCardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
     const ceramicCardBonus = cards.find(card => card.id == "w6c1")?.getBonus() ?? 0;
     const artifactBonus = sailing.artifacts[13].getBonus();
