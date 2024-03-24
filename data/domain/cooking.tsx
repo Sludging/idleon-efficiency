@@ -568,7 +568,11 @@ export const updateCooking = (data: Map<string, any>) => {
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
+        meal.cookingContributionWithoutStarSign = 0;
         meal.cookingContributionWithSilkrode = 0;
+        meal.cookingTotalSpeed = 0;
+        meal.cookingTotalSpeedWithoutStarSign = 0;
+        meal.cookingTotalSpeedWithSilkrode = 0;
         meal.maxLevel = 30;
     });
 
