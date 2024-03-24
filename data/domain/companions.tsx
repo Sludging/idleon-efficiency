@@ -37,7 +37,11 @@ export default function parseCompanions(ownedCompanions: number[]) {
 
     companions.forEach(companion => {
         const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-        companion.owned = editedCompanion ? editedCompanion.owned : ownedCompanions.includes(companion.id);
+        // Check if user edited it before, else default to false.
+        const editState =  editedCompanion ? editedCompanion.owned : false;
+        // We might have an old edit state, so priority for source of truth is currently owned companions
+        // if that one is false, use the edited value.
+        companion.owned = ownedCompanions.includes(companion.id) || editState;
         companion.real = ownedCompanions.includes(companion.id);
     })
 
