@@ -4,7 +4,7 @@ import { Domain, RawData } from "./base/domain";
 import { Construction } from "./construction";
 import { Equinox, FoodLust } from "./equinox";
 import { ImageData } from "./imageData";
-import { Item } from "./items";
+import { Item, Equipment } from './items';
 import { ObolsData, Obol } from "./obols";
 import { Activity, Player } from "./player";
 import { Prayer } from "./prayers";
@@ -15,6 +15,7 @@ import { Talent } from "./talents";
 import { Trap } from "./traps";
 import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
+import { Storage } from "./storage";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -31,7 +32,8 @@ export enum AlertType {
     Cooking = "Cooking",
     Farming = "Farming",
     Sneaking = "Sneaking",
-    EquinoxFull = "Equinox Full"
+    EquinoxFull = "Equinox Full",
+    CanCraftLuckierLad = "Can craft Luckier Lad"
 }
 
 export abstract class Alert {
@@ -204,6 +206,15 @@ export class EquinoxBarFull extends GlobalAlert {
     }
 }
 
+export class CanCraftLuckierLad extends GlobalAlert {
+    constructor() {
+        super(`You have enough Lucky Lads accross your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
+
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
 export class Alerts extends Domain {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -294,7 +305,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -351,6 +362,14 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         globalAlerts.push(new CropReadyAlert(farmingCropsReady, farmingCropsWithOG));
     }
 
+    // Can craft Luckier Lad
+    const recipeUnlocked = equinox.challenges.find(challenge => challenge.index == 16)?.complete ?? false;
+    const luckyLadOwned = storage.amountInStorage("Trophy2");
+    // If the recipe is unlocked and we have 75 or more Lucky lads, display the alert
+    if (recipeUnlocked && luckyLadOwned >= 75) {
+        globalAlerts.push(new CanCraftLuckierLad());
+    }
+
     return globalAlerts;
 }
 
@@ -367,6 +386,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const construction = data.get("construction") as Construction;
     const equinox = data.get("equinox") as Equinox;
     const farming = data.get("farming") as Farming;
+    const storage = data.get("storage") as Storage;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -374,6 +394,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage);
     return alerts;
 }
