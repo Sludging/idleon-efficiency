@@ -286,7 +286,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     }
 
     // Cooldown alerts
-    const cooldownTalentIndexes = [32, 130, 370, 490] // Ignoring Charge Syphon (475) for now.
+    const cooldownTalentIndexes = [32, 130, 370, 475, 490]
     cooldownTalentIndexes.forEach(cdTalent => {
         const talent = player.talents.find(talent => talent.skillIndex == cdTalent && talent.level > 0);
         if (talent) {
