@@ -141,8 +141,8 @@ function Forge() {
                                 const timeTillEmpty = Math.round(slot.ores.count / slot.getOrePerInterval()) * (oreInterval / (4 * slotSpeed))
                                 return (
                                     <ShadowBox background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" fill justify="between" align="center">
-                                        <Box style={{ opacity: slot.brimestone ? 1 : 0.2 }}>
-                                            <IconImage data={{location: 'GemP4', height: 36, width: 36}} />
+                                        <Box style={{ opacity: slot.ores.count > 0 ? 1 : 0.5 }}>
+                                            <IconImage data={{location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36}} />
                                         </Box>
                                         <ForgeItem item={slot.ores} title="Ores" />
                                         <ForgeItem item={slot.oils} title="Oils" />
