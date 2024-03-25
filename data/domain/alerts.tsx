@@ -349,9 +349,11 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     // Equinox Bar Full
     const equinoxBarFull = (equinox.bar.current == equinox.bar.max);
     // Check if there's an unlocked upgrade that can be leveled
-    let canUpgradeSomething = equinox.upgrades.filter(upgrade => upgrade.unlocked == true).some(upgrade => upgrade.level < upgrade.maxLevel)
+    const canUpgradeSomething = equinox.upgrades.filter(upgrade => upgrade.unlocked == true).some(upgrade => upgrade.level < upgrade.maxLevel);
+    // The first upgrade is always unlocked, so to avoid showing the alert for beginner accounts that shouldn't have this, verify if there's at a level in any upgrade
+    const totalLevels = equinox.upgrades.reduce((total: number, upgrade) => {return total + upgrade.level}, 0);
     // If bar is full and have an upgrade that can be improved, display the alert
-    if (equinoxBarFull && canUpgradeSomething) {
+    if (equinoxBarFull && canUpgradeSomething && totalLevels > 0) {
         globalAlerts.push(new EquinoxBarFull());
     }
 
