@@ -309,7 +309,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     const globalAlerts: Alert[] = [];
 
     // Worship
-    if (worship.totalData.overFlowTime <= 0) {
+    if (worship.totalData.maxCharge > 0 && worship.totalData.overFlowTime <= 0 ) {
         globalAlerts.push(new GlobalAlert("Overflowing charge. Go to World 3 -> Worship for more details.", AlertType.Worship, Skilling.getSkillImageData(SkillsIndex.Worship)))
     }
 
