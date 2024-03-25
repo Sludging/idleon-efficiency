@@ -53,11 +53,11 @@ function Forge() {
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;
         return [...(forge?.slots ?? [])].sort((slot1, slot2) => slot1.getTimeTillEmpty(forgeSpeed) < slot2.getTimeTillEmpty(forgeSpeed) ? -1 : 1)[0];
-    }, [forge])
+    }, [appContext, forge])
 
     const totalCost = useMemo(() => {
         return forge?.upgrades.reduce((sum, upgrade) => sum += upgrade.getMaxCost(), 0) ?? 0;
-    }, [forge])
+    }, [appContext, forge])
 
     useEffect(() => {
         if (appContext) {
@@ -139,23 +139,37 @@ function Forge() {
                                 const slotSpeed = slot.getSpeed(forge.upgrades[2].getStat());
                                 const oreInterval = slot.getOreInterval();
                                 const timeTillEmpty = Math.round(slot.ores.count / slot.getOrePerInterval()) * (oreInterval / (4 * slotSpeed))
-                                return (
-                                    <ShadowBox background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" fill justify="between" align="center">
-                                        <Box style={{ opacity: slot.brimestone ? 1 : 0.2 }}>
-                                            <IconImage data={{location: 'GemP4', height: 36, width: 36}} />
-                                        </Box>
-                                        <ForgeItem item={slot.ores} title="Ores" />
-                                        <ForgeItem item={slot.oils} title="Oils" />
-                                        <ForgeItem item={slot.bars} title="Bars" />
-                                        <Box gap="xsmall">
-                                            <ComponentAndLabel
-                                                label="Time Till Empty"
-                                                component={<TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />}
-                                            />
-                                            <Text size="10px">* Not fully accurate with oils yet.</Text>
-                                        </Box>
-                                    </ShadowBox>
-                                )
+                                const slotBought = index < forge.upgrades[0].getStat();
+                                if (slotBought) {
+                                    return (
+                                        <ShadowBox style={{ opacity: slot.ores.count > 0 ? 1 : 0.8 }} background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" fill justify="between" align="center">
+                                            <Box>
+                                                <IconImage data={{location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36}} />
+                                            </Box>
+                                            <ForgeItem item={slot.ores} title="Ores" />
+                                            <ForgeItem item={slot.oils} title="Oils" />
+                                            <ForgeItem item={slot.bars} title="Bars" />
+                                            <Box gap="xsmall">
+                                                <ComponentAndLabel
+                                                    label="Time Till Empty"
+                                                    component={<TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />}
+                                                />
+                                                <Text size="10px">* Not fully accurate with oils yet.</Text>
+                                            </Box>
+                                        </ShadowBox>
+                                    )
+                                } else {
+                                    return (
+                                        <ShadowBox style={{ opacity: 0.3 }} background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" justify="between" fill align="center">
+                                            <Box>
+                                                <IconImage data={{location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36}} />
+                                            </Box>
+                                            <Box direction='row' fill justify='center'>
+                                                <Text size="medium">You need to buy this slot in upgrades</Text>
+                                            </Box>
+                                        </ShadowBox> 
+                                    )
+                                }
                             })
                         }
                     </Box>
