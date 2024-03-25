@@ -345,7 +345,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     </Box>
                     <Box>
                         <Text>Active Bubbles:</Text>
-                        <Box direction="row" gap="medium">
+                        <Box direction="row" gap="small">
                             {
 
                                 activeBubbles.map((bubble, bubbleIndex) => {
@@ -431,32 +431,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 )}
                             </Box>
                         </Box>
-                    }
-                    {
-                        activeShrines.length > 0 &&
-                        <Box gap="small">
-                            <Text>Active Shrines:</Text>
-                            <Box direction="row" wrap>
-                                {
-                                    activeShrines.map((shrine, index) => {
-                                        return (
-                                            <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
-                                                <TipDisplay
-                                                    heading={`${shrine.name} (${shrine.level})`}
-                                                    body={shrine.getBonusText(player.currentMapId)}
-                                                    size={size}
-                                                    direction={TipDirection.Down}
-                                                >
-                                                    <IconImage data={shrine.getImageData()} scale={0.7} />
-                                                </TipDisplay>
-                                            </Box>
-                                        )
-                                    })
-
-                                }
-                            </Box>
-                        </Box>
-                    }
+                    }                    
                     {
                         activePrayers.length > 0 &&
                         <Box gap="small">
@@ -480,6 +455,62 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                                     <Box width={{ min: '50px', max: '50px' }}>
                                                         <IconImage data={prayer.getImageData()} />
                                                     </Box>
+                                                </TipDisplay>
+                                            </Box>
+                                        )
+                                    })
+
+                                }
+                            </Box>
+                        </Box>
+                    }
+                    {
+                        player.labInfo.chips.length > 0 &&
+                        <Box gap="small">
+                            <Text>Chips:</Text>
+                            <Box direction="row">
+                                {
+                                    player.labInfo.chips.map((slot, index) => (
+                                        <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
+                                            {
+                                                slot.chip ?
+                                                    <TipDisplay
+                                                        heading={slot.chip.data.name}
+                                                        body={slot.chip.getBonusText()}
+                                                        direction={TipDirection.Down}
+                                                        size='small'>
+                                                        <IconImage data={(slot.chip as Chip).getImageData()} />
+                                                    </TipDisplay> 
+                                                    :
+                                                    <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
+                                                        {
+                                                            (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
+                                                        }
+                
+                                                    </Box>
+                                            }
+                                        </Box>
+                                    ))
+                                }
+                            </Box>
+                        </Box>
+                    }
+                    {
+                        activeShrines.length > 0 &&
+                        <Box gap="small">
+                            <Text>Active Shrines:</Text>
+                            <Box direction="row" wrap>
+                                {
+                                    activeShrines.map((shrine, index) => {
+                                        return (
+                                            <Box key={index} margin={{ right: 'small', bottom: 'small' }}>
+                                                <TipDisplay
+                                                    heading={`${shrine.name} (${shrine.level})`}
+                                                    body={shrine.getBonusText(player.currentMapId)}
+                                                    size={size}
+                                                    direction={TipDirection.Down}
+                                                >
+                                                    <IconImage data={shrine.getImageData()} scale={0.7} />
                                                 </TipDisplay>
                                             </Box>
                                         )
@@ -1107,40 +1138,6 @@ function ZowInfo({ player }: { player: Player }) {
     )
 }
 
-function ChipInfo({ player }: { player: Player }) {
-
-    return (
-        <Box pad="medium" gap="medium" fill>
-            <Text size='medium'>Chips</Text>
-            <Box direction="row">
-                {
-                    player.labInfo.chips.map((slot, index) => (
-                        <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
-                            {
-                                slot.chip ?
-                                    <TipDisplay
-                                        heading={slot.chip.data.name}
-                                        body={slot.chip.getBonusText()}
-                                        direction={TipDirection.Down}
-                                        size='small'>
-                                        <IconImage data={(slot.chip as Chip).getImageData()} />
-                                    </TipDisplay> :
-                                    <Box width={{ max: '42px', min: '42px' }} height={{ max: '42px', min: '42px' }} align="center">
-                                        {
-                                            (player.skills.get(SkillsIndex.Intellect)?.level ?? 0) < slot.lvlReq && <Text size="xsmall">Lv {slot.lvlReq}</Text>
-                                        }
-
-                                    </Box>
-                            }
-                        </Box>
-                    ))
-                }
-            </Box>
-        </Box>
-    )
-}
-
-
 interface PlayerTabProps {
     player: Player
 }
@@ -1197,7 +1194,6 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
-                    <SpecialButton isActive={index == 12} clickHandler={() => onActive(12)} text={"Chips"} />
                     {
                         (player.classId == ClassIndex.Barbarian || player.classId == ClassIndex.Blood_Berserker) &&
                         <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow"} />
@@ -1215,7 +1211,6 @@ function PlayerTab({ player }: PlayerTabProps) {
                     {index == 9 && <InventoryDisplay player={player} />}
                     {index == 10 && <ObolsInfo playerIndex={player.playerID} title={"Obols"} level={player.level} />}
                     {index == 11 && <ZowInfo player={player} />}
-                    {index == 12 && <ChipInfo player={player} />}
                 </Box>
             </Grid>
         </ShadowBox>
