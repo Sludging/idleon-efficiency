@@ -256,11 +256,51 @@ function CardsDisplay() {
         <Box gap='medium'>
             <NextSeo title="Cards" />
             <Heading level='2' size='medium' style={{ fontWeight: 'normal' }}>Cards</Heading>
-            <Grid columns={{ size: 'auto', count: 1 }} gap='medium'>
-                {
-                    cardSets?.map((cardSet, index) => <CardSetBox key={index} cardSet={cardSet} />)
-                }
-            </Grid>
+            <Box direction="row" gap="medium">
+                <Select size="small"
+                    placeholder="Sort by"
+                    clear
+                    value={sort}
+                    options={sortOptions}
+                    onChange={({ value: nextValue }) => { setSort(nextValue); }}
+                />
+                <SelectMultiple
+                    size="small"
+                    placeholder="Filter by"
+                    searchPlaceholder="Search bonuses"
+                    value={filter}
+                    options={currentFilterOptions}
+                    onChange={({ value: nextValue }) => { setFilter(nextValue); }}
+                    onSearch={text => {
+                        // The line below escapes regular expression special characters:
+                        // [ \ ^ $ . | ? * + ( )
+                        const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+
+                        // Create the regular expression with modified value which
+                        // handles escaping special characters. Without escaping special
+                        // characters, errors will appear in the console
+                        const exp = new RegExp(escapedText, 'i');
+                        setCurrentFilterOptions(allFilterOptions.filter(o => exp.test(o)));
+                    }}
+                    onClose={() => setCurrentFilterOptions(allFilterOptions)}
+                />
+            </Box>
+            {
+                sort == '' && filter.length == 0 &&
+                <Grid columns={{ size: 'auto', count: 1 }} gap='medium'>
+                    {
+                        cardSets?.map((cardSet, index) => <CardSetBox key={index} cardSet={cardSet} />)
+                    }
+                </Grid>
+            }      
+            {
+                (sort != '' || filter.length > 0) &&
+                <Grid width='100%' columns='small' gap='small'>
+                    {
+                        cardsToShow?.map((card, index) => <CardBox key={index} card={card} />)
+                    }
+                </Grid>
+            }         
         </Box>
     )
 }
