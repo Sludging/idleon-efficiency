@@ -147,7 +147,7 @@ export class Deathnote extends Domain {
                     klaData.forEach(playerKillData => {
                         if (mapData.index < playerKillData.length) {
                             const killCount = mapData.data.portalRequirements[0] - playerKillData[mapData.index][0];
-                            // Every mob into the deathNoteMobOrder should be there have they're inserted during init
+                            // Every mob should be there as they're inserted during init
                             deathNote.mobKillCount.get(monster)?.push(killCount);
                         }
                     })
