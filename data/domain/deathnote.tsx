@@ -50,7 +50,6 @@ export class Deathnote extends Domain {
             case killCount > 25000 && killCount < 100000: return 5;
             case killCount > 100000 && killCount < 1000000: return 7;
             case killCount > 1000000 && killCount < 10000000: return 10;
-            case killCount > 10000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
         }
     }
@@ -78,7 +77,6 @@ export class Deathnote extends Domain {
             case 4: return 25000;
             case 5: return 100000;
             case 7: return 1000000;
-            case 10: return this.hasRiftBonus ? 10000000 : 0;
             default: return 0;
         }
     }
@@ -128,19 +126,33 @@ export class Deathnote extends Domain {
         const charCount = data.get("charCount") as number;
         const klaData = range(0, charCount).map((_, i) => { return data.get(`KLA_${i}`) }) as number[][][];
 
+        // Get the kill count per map (so we can get values for strange maps that can be chowed/zowed)
         klaData.forEach((playerKillData, pIndex) => {
             deathNote.playerKillsByMap.set(pIndex, new Map());
             playerKillData.forEach((mapInfo, mapIndex) => {
                 if (mapIndex < MapInfo.length) {
                     const mapData = MapInfo[mapIndex];
                     const killCount = mapData.data.portalRequirements[0] - mapInfo[0];
-                    if (deathNote.mobKillCount.has(mapData.data.enemy)) {
-                        deathNote.mobKillCount.get(mapData.data.enemy)?.push(killCount); //do we really only care about 0?
-                    }
 
                     deathNote.playerKillsByMap.get(pIndex)?.set(mapIndex, killCount);
                 }
             });
+        })
+
+        // Get the Deathnote kills for each mob in the death note list
+        deathNoteMobOrder.forEach((world) => {
+            world.forEach((monster) => {
+                const mapData = MapInfo.find(map => map.data.enemy == monster);
+                if (mapData) {                 
+                    klaData.forEach(playerKillData => {
+                        if (mapData.index < playerKillData.length) {
+                            const killCount = mapData.data.portalRequirements[0] - playerKillData[mapData.index][0];
+                            // Every mob should be there as they're inserted during init
+                            deathNote.mobKillCount.get(monster)?.push(killCount);
+                        }
+                    })
+                }
+            })
         })
     }
 }
