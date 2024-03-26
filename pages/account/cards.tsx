@@ -154,7 +154,7 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
 }
 
 function CardsDisplay() {
-    const [cards, setCardsData] = useState<Card[]>();
+    const [cards, setCardsData] = useState<Card[]>([]);
     const [sort, setSort] = useState<string>('');
     const [filter, setFilter] = useState<string[]>([]);
     const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
@@ -168,18 +168,16 @@ function CardsDisplay() {
             setCardsData(theData.get("cards"));
             cardSets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
 
-            if (cards) {
-                const filterOptions = cards.filter(card => card.displayName != "New Monster?").map(card => {
-                    return card.data.effect.replaceAll('+', '').replaceAll('%', '').replaceAll('{', '').replaceAll('(Passive)', '').trim();
-                }).filter(uniqueFilter).sort();
-        
-                // We keep two set of state, all available filter options and currently available ones.
-                // The reason for the 2nd one is to allow the search to remove filters based on user typing.
-                setAllFilterOptions(filterOptions);
-                setCurrentFilterOptions(filterOptions);
-            }
+            const filterOptions = cards.filter(card => card.displayName != "New Monster?").map(card => {
+                return card.data.effect.replaceAll('+', '').replaceAll('%', '').replaceAll('{', '').replaceAll('(Passive)', '').trim();
+            }).filter(uniqueFilter).sort();
+    
+            // We keep two set of state, all available filter options and currently available ones.
+            // The reason for the 2nd one is to allow the search to remove filters based on user typing.
+            setAllFilterOptions(filterOptions);
+            setCurrentFilterOptions(filterOptions);
         }
-    }, [appContext])
+    }, [appContext, cardSets])
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Cards to Next Level"];
