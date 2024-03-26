@@ -50,7 +50,6 @@ export class Deathnote extends Domain {
             case killCount > 25000 && killCount < 100000: return 5;
             case killCount > 100000 && killCount < 1000000: return 7;
             case killCount > 1000000 && killCount < 10000000: return 10;
-            case killCount > 10000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
         }
     }
@@ -78,7 +77,6 @@ export class Deathnote extends Domain {
             case 4: return 25000;
             case 5: return 100000;
             case 7: return 1000000;
-            case 10: return this.hasRiftBonus ? 10000000 : 0;
             default: return 0;
         }
     }
