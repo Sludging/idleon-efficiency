@@ -64,10 +64,13 @@ const CardBox = ({ card }: { card: Card }) => {
                                 <IconImage data={Card.getStarImageForLevel(4)} />
                                 <Text size="small"> : {card.getBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
                             </Box>
-                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
-                                <IconImage data={Card.getStarImageForLevel(5)} />
-                                <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
-                            </Box>
+                            {
+                                card.fivestar &&
+                                <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                    <IconImage data={Card.getStarImageForLevel(5)} />
+                                    <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
+                                </Box>
+                            }
                         </Box>
                         {(!isMaxed) &&
                             <Box>
