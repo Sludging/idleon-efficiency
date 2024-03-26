@@ -3,9 +3,11 @@ import {
     Text,
     Heading,
     Grid,
-    Stack
+    Stack,
+    Select,
+    SelectMultiple
 } from 'grommet'
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../data/appContext';
 import { NextSeo } from 'next-seo';
 import ShadowBox from '../../components/base/ShadowBox';
@@ -14,6 +16,7 @@ import { Card } from '../../data/domain/cards';
 import { CardSet } from '../../data/domain/cardSets';
 import TipDisplay from '../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../data/domain/data/CardSetRepo';
+import { uniqueFilter } from '../../data/utility';
 
 const shouldHideCard = ({ card }: { card: Card }) => {
     return false;
@@ -152,6 +155,10 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
 
 function CardsDisplay() {
     const [cards, setCardsData] = useState<Card[]>();
+    const [sort, setSort] = useState<string>('');
+    const [filter, setFilter] = useState<string[]>([]);
+    const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
+    const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
     const cardSets = CardSet.fromBase(initCardSetRepo(), cards) as CardSet[];
     const appContext = useContext(AppContext);
 
@@ -160,8 +167,86 @@ function CardsDisplay() {
             const theData = appContext.data.getData();
             setCardsData(theData.get("cards"));
             cardSets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
+
+            if (cards) {
+                const filterOptions = cards.filter(card => card.displayName != "New Monster?").map(card => {
+                    return card.data.effect.replaceAll('+', '').replaceAll('%', '').replaceAll('{', '').replaceAll('(Passive)', '').trim();
+                }).filter(uniqueFilter).sort();
+        
+                // We keep two set of state, all available filter options and currently available ones.
+                // The reason for the 2nd one is to allow the search to remove filters based on user typing.
+                setAllFilterOptions(filterOptions);
+                setCurrentFilterOptions(filterOptions);
+            }
         }
-    }, [appContext, cardSets, cards])
+    }, [appContext])
+
+    // our sort options are fixed, so just statically set them.
+    const sortOptions = ["Level", "Least Cards to Next Level"];
+
+    const cardsToShow = useMemo(() => {
+        // If we are still loading, do nothing.
+        if (!cards) {
+            return [];
+        }
+
+        let cardsToDisplay = cards.filter(card => card.displayName != "New Monster?");
+
+        // If we have any filters configured, filter them out of the base set
+        if (filter.length != 0) {
+            cardsToDisplay = cardsToDisplay.filter(card => filter.includes(card.data.effect.replaceAll('+', '').replaceAll('%', '').replaceAll('{', '').replaceAll('(Passive)', '').trim()));
+        }
+
+        // Now we sort
+        return cardsToDisplay?.sort((card1, card2) => {
+            // Base case scenario they are just by index.
+            const indexSort = card1.index > card2.index ? 1 : -1;
+
+            // Least cards to next level sort function
+            function sortByCardsToNextLevel(card1: Card, card2: Card) {
+                const currentCard1Level = card1.getStars();
+                // If card is max level, move it to the end
+                if (card1.fivestar ? currentCard1Level == 5 : currentCard1Level == 4) {
+                    return 1;
+                }
+                const currentCard2Level = card2.getStars();
+                // If card is max level, move it to the end
+                if (card2.fivestar ? currentCard2Level == 5 : currentCard2Level == 4) {
+                    return -1;
+                }
+                // Else sort by cards till next level
+                return (card1.count > 0 ? (card1.getCardsForStar(currentCard1Level + 1) - card1.count) : 1) > (card2.count > 0 ? (card2.getCardsForStar(currentCard2Level + 1) - card2.count) : 1) ? 1 : -1;
+            }
+
+            // Sort by level sort function
+            function sortByLevel(card1: Card, card2: Card) {
+                // Card will be level 0 if they either have no cards at all or if they are level 0 (so borderless)
+                if (card1.count == 0 || card2.count == 0) {
+                    return card1.count > card2.count ? -1 : 1;
+                }
+
+                // If they both have at least one card, we can do traditionnal checks
+                const currentCard1Level = card1.getStars();
+                const currentCard2Level = card2.getStars();
+                if (currentCard1Level == currentCard2Level) {
+                    // If level is still equal, sort by time until next level
+                    return sortByCardsToNextLevel(card1, card2);
+                } else {
+                    // if level isn't equal, just sort by level
+                    return currentCard1Level > currentCard2Level ? -1 : 1;
+                }
+            }
+
+            switch (sort) {
+                case "Level":
+                    return sortByLevel(card1, card2);
+                case "Least Cards to Next Level":
+                    return sortByCardsToNextLevel(card1, card2);
+                default:
+                    return indexSort;
+            }
+        })
+    }, [cards, sort, filter])
 
     if (!cards || !cardSets) {
         return null;
