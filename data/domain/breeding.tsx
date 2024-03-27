@@ -239,11 +239,7 @@ export class Pet {
     }
 
     calculateBreedingLevel = () => {
-        if (this.breedingProgress == 0) {
-            return 0;
-        }
-
-        return Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
+        return 1 + Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
     }
 
     getBreedabilityBonus = () => {
@@ -251,7 +247,9 @@ export class Pet {
     }
 
     getNextBreedingGoal = () => {
-        return Math.floor((1 + Math.pow(this.shinyLevel, 1.6)) * Math.pow(1.7, this.shinyLevel));
+        // Breeding can't exceed lv.9 for now
+        if (this.breedingLevel >= 10) return 0;
+        return Math.pow(Math.pow(Math.E, Math.pow(this.breedingLevel, 1.25)), 1/0.725) - 1;
     }
 
     getShinyBonus = () => {
