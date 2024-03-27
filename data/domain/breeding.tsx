@@ -148,9 +148,12 @@ export class Pet {
     shinyLevel: number = 0;
     geneLevel: number = 0;
     breedingProgress: number = 0;
-    breedingLevel: number =0;
+    breedingLevel: number = 0;
 
     geneUpgradeCostReduction: number = 0;
+
+    // Correspond the index of the pet within his own world specifically (it's not stored anywhere else)
+    indexInWorld: number = 0;
 
     constructor(public index: number, public data: PetStatModel, public gene: PetGene, public shinyBonus: ShinyBonusData, public power: number = 0) { }
 
@@ -195,7 +198,7 @@ export class Pet {
     }
 
     getGeneNextLevelCost = (currentLevel: number = this.geneLevel) => {
-        return (10 + (5 + this.data.unlockOrder + currentLevel) + Math.pow(Math.max(this.data.unlockOrder - 3, 1), 1.7)) * Math.pow(Math.max(this.data.unlockOrder + 1 - 6, 1), 1.12) * Math.pow(1.052 + .01 * Math.floor(currentLevel / 10), currentLevel) * Math.max(.01, 1 - this.geneUpgradeCostReduction / 100);
+        return (10 + (5 + this.indexInWorld + currentLevel) + Math.pow(Math.max(this.indexInWorld - 3, 1), 1.7)) * Math.pow(Math.max(this.indexInWorld + 1 - 6, 1), 1.12) * Math.pow(1.052 + .01 * Math.floor(currentLevel / 10), currentLevel) * Math.max(0.01, 1 - this.geneUpgradeCostReduction / 100);
     }
 
     getBackgroundImageData = (): ImageData => {
@@ -241,7 +244,12 @@ export class Pet {
         }
 
         // TODO : get the formula for this and calculate it
+        //1 + Math.log(Math.max(1, Math.pow(c.asNumber(a.engine.getGameAttribute("Breeding")[e + 13 | 0][f | 0]) + 1, .725)))
         return 100;
+    }
+
+    getBreedabilityBonus = () => {
+        return 1 + Math.log(Math.max(1, Math.pow(this.breedingProgress + 1, .725))); 
     }
 
     getShinyBonus = () => {
@@ -259,7 +267,7 @@ export class Pet {
 
     static fromBase(data: PetStatBase[], genes: PetGene[]): Pet[] {
         const randoList = initRandoListRepo();
-        return data.map(pet => {
+        const allPets = data.map(pet => {
             const petGeneIndex = parseInt(randoList[55].data.elements[pet.data.unlockOrder - 1]);
             const shinyIndex = parseInt(randoList[90].data.elements[pet.data.unlockOrder]);
             return new Pet(pet.index, pet.data, genes[petGeneIndex], {
@@ -268,6 +276,11 @@ export class Pet {
                 text: randoList[91].data.elements[shinyIndex].replace(/_/g, " ")
             }, 0);
         });
+        allPets.forEach(pet => {
+            const sameWorldPets = allPets.filter(findPet => findPet.data.world == pet.data.world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
+            pet.indexInWorld = sameWorldPets.findIndex(findPet => findPet.index == pet.index);
+        });
+        return allPets;
     }
 }
 
@@ -520,9 +533,11 @@ export class Breeding extends Domain {
             worldPets.forEach((pet, pIndex) => {
                 pet.shinyProgress = breedingData[22 + pet.data.world][pIndex];
                 pet.shinyLevel = pet.calculateShinyLevel();
-                pet.breedingProgress = breedingData[4 + pet.data.world][pIndex];
-                pet.breedingLevel = 0;
+                pet.breedingProgress = breedingData[13 + pet.data.world][pIndex];
+                pet.breedingLevel = pet.calculateBreedingLevel();
                 pet.geneLevel = breedingData[4 + pet.data.world][pIndex];
+
+                pet.geneUpgradeCostReduction = breeding.upgrade[1].getBonus();
             })
         });
 
