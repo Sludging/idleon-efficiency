@@ -26,7 +26,7 @@ import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './forge';
 import { Cooking, updateCooking } from './cooking';
 import { Lab, updateLab } from './lab';
-import { Breeding, updateAllShinyEffects, updateBreeding } from './breeding';
+import { Breeding, updateAllShinyEffects, updateBreeding, updateBreedingDisplayData } from './breeding';
 import { notUndefined } from '../utility';
 import { Sigils, updateSigils, updateSigilsChargeSpeed } from './sigils';
 import { AnvilWrapper, updateAnvil } from './anvil';
@@ -241,6 +241,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
+    "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
 }
 
 export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
