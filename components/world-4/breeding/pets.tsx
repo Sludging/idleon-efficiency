@@ -163,7 +163,11 @@ function ShinyDisplay() {
             function sortByTime(pet1: Pet, pet2: Pet) {
                 // If pet is max level, move it to the end
                 if (pet1.shinyLevel >= 20) {
-                    return -1;
+                    if (pet2.shinyLevel >= 20) {
+                        return indexSort;
+                    } else {
+                        return 1;
+                    }
                 }
                 // If pet is max level, move it to the end
                 if (pet2.shinyLevel >= 20) {
@@ -289,6 +293,18 @@ function BreedabilityDisplay() {
 
             // Least time to next level sort function
             function sortByTime(pet1: Pet, pet2: Pet) {
+                // If pet is max level, move it to the end
+                if (pet1.breedingLevel >= 9) {
+                    if (pet2.breedingLevel >= 9) {
+                        return indexSort;
+                    } else {
+                        return 1;
+                    }
+                }
+                // If pet is max level, move it to the end
+                if (pet2.breedingLevel >= 9) {
+                    return -1;
+                }
                 // Else sort by time till next level.
                 return (pet1.getNextBreedingGoal() - pet1.breedingProgress) > (pet2.getNextBreedingGoal() - pet2.breedingProgress) ? 1 : -1;
             }
@@ -348,7 +364,7 @@ function BreedabilityDisplay() {
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
                                         <Text size="16px">Lvl: {pet.breedingLevel}</Text>
-                                        <Text size="16px">{Math.floor(pet.breedingProgress)}/{pet.getNextBreedingGoal()}</Text>
+                                        <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())}</Text>
                                     </Box>
                                     <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
                                 </Grid>
