@@ -243,8 +243,7 @@ export class Pet {
             return 0;
         }
 
-        // TODO : get the formula for this and calculate it
-        return 100;
+        return Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
     }
 
     getBreedabilityBonus = () => {
@@ -252,8 +251,6 @@ export class Pet {
     }
 
     getNextBreedingGoal = () => {
-        if (this.breedingLevel == 0) return 0;
-        // TODO : calculate this
         return Math.floor((1 + Math.pow(this.shinyLevel, 1.6)) * Math.pow(1.7, this.shinyLevel));
     }
 

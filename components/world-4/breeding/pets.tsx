@@ -348,7 +348,7 @@ function BreedabilityDisplay() {
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
                                         <Text size="16px">Lvl: {pet.breedingLevel}</Text>
-                                        <Text size="16px">{Math.floor(pet.breedingProgress)}/{pet.getNextBreedingGoal()} days</Text>
+                                        <Text size="16px">{Math.floor(pet.breedingProgress)}/{pet.getNextBreedingGoal()}</Text>
                                     </Box>
                                     <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
                                 </Grid>
