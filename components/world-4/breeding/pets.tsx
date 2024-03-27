@@ -1,5 +1,6 @@
 import {
     Box,
+    CheckBox,
     Grid,
     ResponsiveContext,
     Select,
@@ -16,9 +17,39 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TabButton from "../../base/TabButton";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
+import { CircleInformation } from 'grommet-icons';
 
 export const PetsDisplay = () => {
     const [activeTab, setActiveTab] = useState<string>("All");
+    const [silkRodeChip, setSilkrode] = useState(false);
+    const [starSignEquipped, setStarSignEquipped] = useState(false);
+    const appContext = useContext(AppContext);
+
+    const breeding = useMemo(() => {
+        return appContext.data.getData().get("breeding") as BreedingDomain;
+    }, [appContext])
+
+    const starSignUnlocked = useMemo(() => {
+        if (breeding) {
+            if (breeding.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return breeding.starSignUnlocked;
+        }
+
+        return false;
+    }, [appContext, breeding])
+
+    const starSignInfinity = useMemo(() => {
+        if (breeding) {
+            if (breeding.starSignInfinity) {
+                setStarSignEquipped(true);
+            }
+            return breeding.starSignInfinity;
+        }
+
+        return false;
+    }, [appContext, breeding])
 
     return (
         <Box margin={{top: "small"}}>
@@ -28,14 +59,73 @@ export const PetsDisplay = () => {
                 ))
                 }
             </Box>
-            {activeTab == "All" && <PetDisplay />}
-            {activeTab == "Shiny" && <ShinyDisplay />}
-            {activeTab == "Breedability" && <BreedabilityDisplay />}
+            <Box direction="row" gap="medium" margin={{bottom: "small"}} wrap>
+            {
+                starSignUnlocked &&
+                <Box direction='row' gap='xsmall'>
+                    <CheckBox
+                        checked={starSignEquipped}
+                        label="Breedabilli Equipped"
+                        onChange={(event) => {
+                            setStarSignEquipped(event.target.checked);
+                            if(!event.target.checked) {
+                                setSilkrode(false);
+                            }
+                        }}
+                        disabled={starSignInfinity}
+                    />
+                    <TipDisplay
+                        heading="Breedabilli"
+                        size='medium'
+                        maxWidth='medium'
+                        body={
+                            <Box>
+                                <Text size='small'>Looks like you unlocked the Breedabilli star sign</Text>
+                                {
+                                    starSignInfinity ?
+                                    <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                    :
+                                    <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                }
+                            </Box>
+                        }
+                    >
+                        <CircleInformation size="small" />
+                    </TipDisplay>
+                </Box>
+            }
+            {
+                starSignUnlocked &&
+                <Box direction='row' gap='xsmall'>
+                    <CheckBox
+                        checked={silkRodeChip}
+                        label="Silkrode Nanochip Equipped"
+                        onChange={(event) => setSilkrode(event.target.checked)}
+                        disabled={!starSignEquipped}
+                    />
+                    <TipDisplay
+                        heading="Silkrode Nanochip"
+                        size='medium'
+                        maxWidth='medium'
+                        body={
+                            <Box>
+                                <Text size='small'>You can check this checkbox to get accurate values when equipping the Silkrode Nanochip in the Lab (double star sign bonus)</Text>
+                            </Box>
+                        }
+                    >
+                        <CircleInformation size="small" />
+                    </TipDisplay>
+                </Box>
+            }
+            </Box>
+            {activeTab == "All" && <AllPetDisplay />}
+            {activeTab == "Shiny" && <ShinyDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} />}
+            {activeTab == "Breedability" && <BreedabilityDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped} />}
         </Box>
     )
 }
 
-function PetDisplay() {
+function AllPetDisplay() {
     const appContext = useContext(AppContext);
 
     const breeding = useMemo(() => {
@@ -109,7 +199,7 @@ function PetDisplay() {
     )
 }
 
-function ShinyDisplay() {
+const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
     const [sort, setSort] = useState<string>('');
     const [filter, setFilter] = useState<string[]>([]);
     const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
@@ -121,6 +211,11 @@ function ShinyDisplay() {
     const breeding = useMemo(() => {
         return appContext.data.getData().get("breeding") as BreedingDomain;
     }, [appContext])
+
+    const gapFromSave = useMemo(() => {
+        const time = new Date();
+        return (time.getTime() / 1000) - breeding.saveTime;
+    }, [breeding])
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
@@ -265,7 +360,7 @@ function ShinyDisplay() {
     )
 }
 
-function BreedabilityDisplay() {
+const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
     const [sort, setSort] = useState<string>('');
     const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
@@ -274,6 +369,11 @@ function BreedabilityDisplay() {
     const breeding = useMemo(() => {
         return appContext.data.getData().get("breeding") as BreedingDomain;
     }, [appContext])
+    
+    const gapFromSave = useMemo(() => {
+        const time = new Date();
+        return (time.getTime() / 1000) - breeding.saveTime;
+    }, [breeding])
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
