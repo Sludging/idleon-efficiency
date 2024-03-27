@@ -244,12 +244,17 @@ export class Pet {
         }
 
         // TODO : get the formula for this and calculate it
-        //1 + Math.log(Math.max(1, Math.pow(c.asNumber(a.engine.getGameAttribute("Breeding")[e + 13 | 0][f | 0]) + 1, .725)))
         return 100;
     }
 
     getBreedabilityBonus = () => {
         return 1 + Math.log(Math.max(1, Math.pow(this.breedingProgress + 1, .725))); 
+    }
+
+    getNextBreedingGoal = () => {
+        if (this.breedingLevel == 0) return 0;
+        // TODO : calculate this
+        return Math.floor((1 + Math.pow(this.shinyLevel, 1.6)) * Math.pow(1.7, this.shinyLevel));
     }
 
     getShinyBonus = () => {
