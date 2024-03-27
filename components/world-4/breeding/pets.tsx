@@ -294,15 +294,15 @@ function BreedabilityDisplay() {
             // Least time to next level sort function
             function sortByTime(pet1: Pet, pet2: Pet) {
                 // If pet is max level, move it to the end
-                if (pet1.breedingLevel >= 9) {
-                    if (pet2.breedingLevel >= 9) {
+                if (pet1.breedingLevel >= 10) {
+                    if (pet2.breedingLevel >= 10) {
                         return indexSort;
                     } else {
                         return 1;
                     }
                 }
                 // If pet is max level, move it to the end
-                if (pet2.breedingLevel >= 9) {
+                if (pet2.breedingLevel >= 10) {
                     return -1;
                 }
                 // Else sort by time till next level.

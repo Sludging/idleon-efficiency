@@ -247,7 +247,7 @@ export class Pet {
     }
 
     getNextBreedingGoal = () => {
-        // Breeding can't exceed lv.9 for now
+        // Breeding can't exceed lv.10 for now
         if (this.breedingLevel >= 10) return 0;
         return Math.pow(Math.pow(Math.E, Math.pow(this.breedingLevel, 1.25)), 1/0.725) - 1;
     }
