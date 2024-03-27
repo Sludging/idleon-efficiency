@@ -282,7 +282,7 @@ function PetDisplay() {
             // Get all the pets for this world, and sort them in the unlock order
             const petsOfWorld = breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
             return (                
-                <ShadowBox style={{ opacity: breeding.speciesUnlocks[world] > 0 ? 1 : 0.5 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
+                <ShadowBox key={world} style={{ opacity: breeding.speciesUnlocks[world] > 0 ? 1 : 0.5 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
                     <Box gap="small" direction="row" pad="xsmall" align='center'>
                         <IconImage data={{ location: `Genetic${world}`, width: 37, height: 37 }}/>
                         <Text size='small'>{nFormatter(breeding.worldGenes[world])}</Text>
