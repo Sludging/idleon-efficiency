@@ -497,7 +497,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                     <Grid columns={["50%", "50%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
-                                            <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())}</Text>
+                                            <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                         </Box>
                                         <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
                                     </Grid>
@@ -508,7 +508,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                     <Grid columns={["50%", "50%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
-                                            <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())}</Text>
+                                            <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                         </Box>
                                         <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
                                     </Grid>
