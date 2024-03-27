@@ -359,7 +359,7 @@ function BreedabilityDisplay() {
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
 
                         return (
-                            <ShadowBox background="dark-1" border={currentlyLevelingBreedingBorderProp} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.breedingLevel > 0 ? 1 : .5 }}>
+                            <ShadowBox background="dark-1" border={currentlyLevelingBreedingBorderProp} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.getBreedabilityBonus() >= 1.01 ? 1 : .5 }}>
                                 <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
                                 <Grid columns={["50%", "50%"]} fill align="center">
                                     <Box>
