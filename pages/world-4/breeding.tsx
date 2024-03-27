@@ -23,6 +23,7 @@ import { Player } from '../../data/domain/player';
 import { ClassIndex, Talent } from '../../data/domain/talents';
 import { nFormatter, uniqueFilter } from '../../data/utility';
 import { BorderType } from 'grommet/utils';
+import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 
 function TerritoryDisplay() {
     const appContext = useContext(AppContext);
@@ -242,6 +243,92 @@ function ArenaBonusDisplay() {
     )
 }
 
+function PetTab() {
+    const [activeTab, setActiveTab] = useState<string>("All");
+
+    return (
+        <Box margin={{top: "small"}}>
+            <Box align="center" direction="row" justify="center" gap="small" margin={{bottom: "small"}}>
+                {["All", "Shiny"].map((tabName, index) => (
+                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                ))
+                }
+            </Box>
+            {activeTab == "All" && <PetDisplay />}
+            {activeTab == "Shiny" && <ShinyDisplay />}
+        </Box>
+    )
+}
+
+function PetDisplay() {
+    const appContext = useContext(AppContext);
+
+    // Get breeding data, if it's not available yet just show placeholder loading.
+    const breeding = appContext.data.getData().get("breeding") as BreedingDomain;
+
+    if (!breeding) {
+        return (
+            <Box>
+                Still loading...
+            </Box>
+        )
+    }
+
+    // Will need to update this once new pets from world 5 are implemented into the game
+    const worldsToDisplay = [0,1,2,3];
+
+    return (
+        worldsToDisplay.map(world => {
+            // Get all the pets for this world, and sort them in the unlock order
+            const petsOfWorld = breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
+            return (                
+                <ShadowBox style={{ opacity: breeding.speciesUnlocks[world] > 0 ? 1 : 0.5 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
+                    <Box gap="small" direction="row" pad="xsmall" align='center'>
+                        <IconImage data={{ location: `Genetic${world}`, width: 37, height: 37 }}/>
+                        <Text size='small'>{nFormatter(breeding.worldGenes[world])}</Text>
+                    </Box>
+                    <Box gap="small" direction="row" pad="xsmall" wrap>
+                        {
+                            petsOfWorld.map((pet, index) => {
+                                const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+                                return (
+                                    <Box key={index} justify='between' direction='row' style={{ opacity: breeding.speciesUnlocks[world] > index ? 1 : 0.5 }} border={{ color: 'grey-1' }} margin={{ bottom: 'small' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
+                                        <Box align="center" justify="start">
+                                            <TipDisplay
+                                                size='medium'
+                                                heading={enemy?.details.Name ?? "Unknown"}
+                                                body={
+                                                    <Text>Next Crop chance : %</Text>
+                                                }
+                                                direction={TipDirection.Down}
+                                            >
+                                                <Box direction="row" pad={{ vertical: 'xsmall' }} align="center" justify="center" gap='xsmall'>
+                                                    <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }}/>
+                                                </Box>
+                                            </TipDisplay>
+                                        </Box>
+                                        <Box alignSelf='start'>
+                                            <TipDisplay
+                                                size='small'
+                                                maxWidth='medium'
+                                                heading={pet.gene.data.name}
+                                                body={pet.gene.data.description}
+                                                direction={TipDirection.Down}                                
+                                            >
+                                                <IconImage data={{ location: `GeneReady${pet.gene.index}`, width: 20, height: 20 }}/>
+                                            </TipDisplay>
+                                        </Box>
+                                    </Box>
+                                )
+                            })
+                        }
+                    </Box>
+                </ShadowBox>
+            )
+        })
+    )
+}
+
 function ShinyDisplay() {
     const [sort, setSort] = useState<string>('');
     const [filter, setFilter] = useState<string[]>([]);
@@ -337,7 +424,7 @@ function ShinyDisplay() {
     return (
         <Box gap="small">
             <Text>Shiny Bonuses</Text>
-            <Box direction="row" gap="medium">
+            <Box direction="row" gap="medium" margin={{bottom: "small"}}>
                 <Select size="small"
                     placeholder="Sort by"
                     clear
@@ -466,7 +553,7 @@ function Breeding() {
                 <EggDisplay />
             </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Territory", "Upgrades", "Arena", "Shiny"].map((tabName, index) => (
+                {["Territory", "Upgrades", "Arena", "Pets"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                 ))
                 }
@@ -474,7 +561,7 @@ function Breeding() {
             {activeTab == "Arena" && <ArenaBonusDisplay />}
             {activeTab == "Upgrades" && <PetUpgradeDisplay />}
             {activeTab == "Territory" && <TerritoryDisplay />}
-            {activeTab == "Shiny" && <ShinyDisplay />}
+            {activeTab == "Pets" && <PetTab />}
         </Box>
     )
 }
