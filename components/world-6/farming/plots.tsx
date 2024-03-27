@@ -126,7 +126,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
                 {
                     !canEvolve ?
                         <Box direction="row" align="center" justify="between">
-                            <Box direction="row"  gap="xsmall" align="center" justify="start">
+                            <Box direction="row" gap="xsmall" align="center" justify="start">
                                 <Text size="small">{quantityToDisplay}</Text>
                                 <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
                                 {currentCropIsUndiscovered &&
