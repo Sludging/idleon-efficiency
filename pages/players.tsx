@@ -1067,31 +1067,43 @@ function ZowInfo({ player }: { player: Player }) {
         }
         return false;
     }
-    const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 100000).length;
+    const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];
-        if (mapData.data.enemy === undefined || count > 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
+        if (mapData.data.enemy === undefined || count >= 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
     });
 
-    const chowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count > 1000000).length;
+    const chowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 1000000).length;
     const toChow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];
-        if (mapData.data.enemy === undefined || count > 1000000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
+        if (mapData.data.enemy === undefined || count >= 1000000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
+            return null;
+        }
+        return [mapId, count]
+    });
+
+    const superchowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 100000000).length;
+    const toSuperChow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
+        const mapData = MapInfo[mapId];
+        if (mapData.data.enemy === undefined || count >= 100000000 || ignoreArea(mapData.data.map.name) || mapData.data.map.name == "Z") {
             return null;
         }
         return [mapId, count]
     });
 
     return (
-        <Box pad="medium" gap="medium" fill>
-            <Box direction="row" gap="small">
-                <Text>Current zow count: {zowCount}</Text>
-                <Text>Current chow count: {chowCount}</Text>
+        <Box pad="medium" fill>
+            <Heading level="4">Kills Summary</Heading>
+            <Box>
+                <Text size='small'>Current zow count: {zowCount}</Text>
+                <Text size='small'>Current chow count: {chowCount}</Text>
+                <Text size='small'>Current superchow count: {superchowCount}</Text>
             </Box>
-            <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be zowed:</Heading>
+
+            <Heading level="4">Zows Remaining (Needs 100k)</Heading>
             <Box direction="row" wrap>
                 {
                     toZow.map((data, index) => {
@@ -1113,10 +1125,31 @@ function ZowInfo({ player }: { player: Player }) {
                 }
             </Box>
 
-            <Heading level="3" margin={{ bottom: '1px', top: '1px' }} >To be chowed:</Heading>
+            <Heading level="4">Chows Remaining (Needs 1m)</Heading>
             <Box direction="row" wrap>
                 {
                     toChow.map((data, index) => {
+                        if (data) {
+                            const mapData = MapInfo[data[0]];
+                            const enemyData = EnemyInfo.find(enemy => enemy.id == mapData.data.enemy);
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
+                                    {enemyData &&
+                                        <Box title={mapData.data.map.name}>
+                                            <IconImage data={enemyData.getImageData()} />
+                                        </Box>
+                                    }
+                                    <Text>{nFormatter(data[1])}</Text>
+                                </Box>
+                            )
+                        }
+                    })
+                }
+            </Box>
+            <Heading level="4">Super Chows Remaining (Needs 100m)</Heading>
+            <Box direction="row" wrap>
+                {
+                    toSuperChow.map((data, index) => {
                         if (data) {
                             const mapData = MapInfo[data[0]];
                             const enemyData = EnemyInfo.find(enemy => enemy.id == mapData.data.enemy);
