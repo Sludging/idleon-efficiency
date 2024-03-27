@@ -146,6 +146,11 @@ interface ShinyBonusData {
 export class Pet {
     shinyProgress: number = 0;
     shinyLevel: number = 0;
+    geneLevel: number = 0;
+    breedingProgress: number = 0;
+    breedingLevel: number =0;
+
+    geneUpgradeCostReduction: number = 0;
 
     constructor(public index: number, public data: PetStatModel, public gene: PetGene, public shinyBonus: ShinyBonusData, public power: number = 0) { }
 
@@ -189,6 +194,10 @@ export class Pet {
         return 0;
     }
 
+    getGeneNextLevelCost = (currentLevel: number = this.geneLevel) => {
+        return (10 + (5 + this.data.unlockOrder + currentLevel) + Math.pow(Math.max(this.data.unlockOrder - 3, 1), 1.7)) * Math.pow(Math.max(this.data.unlockOrder + 1 - 6, 1), 1.12) * Math.pow(1.052 + .01 * Math.floor(currentLevel / 10), currentLevel) * Math.max(.01, 1 - this.geneUpgradeCostReduction / 100);
+    }
+
     getBackgroundImageData = (): ImageData => {
         let cardNumber: number = 4;
         switch (this.gene.data.abilityType) {
@@ -224,6 +233,15 @@ export class Pet {
 
         // Should never get there but, better safe then sorry. I believe 20 is max level for shiny pets.
         return 20;
+    }
+
+    calculateBreedingLevel = () => {
+        if (this.breedingProgress == 0) {
+            return 0;
+        }
+
+        // TODO : get the formula for this and calculate it
+        return 100;
     }
 
     getShinyBonus = () => {
@@ -367,6 +385,7 @@ export class Breeding extends Domain {
     speciesUnlocks: number[] = [];
     skillLevel: number = 0;
     deadCells: number = 0;
+    worldGenes: number[] = [];
 
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
@@ -493,13 +512,17 @@ export class Breeding extends Domain {
             }
         })
 
-        breeding.deadCells = breedingData[3][8];
+        breeding.worldGenes = breedingData[3];
+        breeding.deadCells = breeding.worldGenes[breeding.worldGenes.length-1];
 
-        // Calculate pet shiny levels.
+        // Calculate pet shiny levels, breeding level, and gene level
         GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world).forEach((worldPets, _) => {
             worldPets.forEach((pet, pIndex) => {
-                pet.shinyProgress = breedingData[22 + pet.data.world][pIndex]
+                pet.shinyProgress = breedingData[22 + pet.data.world][pIndex];
                 pet.shinyLevel = pet.calculateShinyLevel();
+                pet.breedingProgress = breedingData[4 + pet.data.world][pIndex];
+                pet.breedingLevel = 0;
+                pet.geneLevel = breedingData[4 + pet.data.world][pIndex];
             })
         });
 
