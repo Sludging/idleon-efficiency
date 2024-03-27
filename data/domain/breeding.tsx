@@ -417,8 +417,6 @@ export class Breeding extends Domain {
     breedingSpeedMultiWithSilkrode: number = 0;
     breedingSpeedMultiWithoutStarSign: number = 0;
 
-    saveTime: number = 0;
-
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
             return false;
@@ -711,7 +709,6 @@ export const updateBreedingDisplayData = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const cooking = data.get("cooking") as Cooking;
     const achievements = data.get("achievements") as Achievement[];
-    const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
 
     // Calculate Shiny speed multiplier
     const labEmeraldUlthuriteBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
@@ -735,8 +732,6 @@ export const updateBreedingDisplayData = (data: Map<string, any>) => {
     // Nice info to have for the UI
     breeding.starSignUnlocked = starSigns.isStarSignUnlocked("Breedabilli");
     breeding.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "Breedabilli") != undefined);
-
-    breeding.saveTime = timeAway['GlobalTime'];
 
     return breeding;
 }
