@@ -391,10 +391,10 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6b3", "health": 2.5e+12, "colour": 0, "size": 400},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+12, "colour": 0, "size": 300},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 5e+11, "colour": 0, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 5e+11, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6b3", "health": 5e+11, "colour": 0, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 2e+11, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+11, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+11, "colour": 0, "size": 200},
                     <TerritoryEnemyModel>{"id": "w6a4", "health": 1000, "colour": 0, "size": 100}
                 ]
             }),
@@ -408,11 +408,11 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 7.5e+13, "colour": 0, "size": 500},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+13, "colour": 40, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 5e+12, "colour": 230, "size": 100},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 3e+13, "colour": 110, "size": 300},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+13, "colour": 290, "size": 200}
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 7.5e+12, "colour": 0, "size": 500},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+12, "colour": 40, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 5e+11, "colour": 230, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 3e+12, "colour": 110, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+12, "colour": 290, "size": 200}
                 ]
             }),
         new TerritoryFightBase(24, <TerritoryFightModel>{
@@ -425,8 +425,8 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6d1", "health": 1e+16, "colour": 65, "size": 600},
-                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+13, "colour": 85, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+14, "colour": 65, "size": 600},
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+12, "colour": 85, "size": 100},
                     <TerritoryEnemyModel>{"id": "Mob3", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}

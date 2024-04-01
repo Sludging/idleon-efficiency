@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "The_Tome_v2.04;NEW_UPDATE_PATCH_NOTES_@_*The_Tome_has_been_added,_find_it_in_World_4_town!_@_*The_Tome_keeps_track_of_your_total_account_progression,_by_scoring_you_on_81_different_metrics_within_the_game._@_*Compare_your_Tome_Score_to_EVERYONE_who_plays_IdleOn_by_looking_at_your_Tome_Rank_displayed_above_the_Tome._This_only_shows_up_if_you're_in_the_top_50%_of_players._@_*Add_new_bonus_types_to_the_Tome_by_buying_new_Tome_Pages_from_Town_Shops_in_World_4_and_5!_@_*World_6_bubbles_related_to_Tome_now_do_the_thing_they_say_they_do!_@_*The_Tome_Rank_displayed_above_the_Tome_is_indeed_based_on_every_IdleOn_player,_but_importantly,_only_players_who_have_reached_the_Tome._@_*Patch_notes_readers!!!_Whats_good,_I_aint_got_anything_else_to_say_here,_hope_you_have_a_great_day_though_fr;*Le",
+                    "Secret_Minibosses_v2.05;NEW_UPDATE_PATCH_NOTES_@_*Domeo_Magmus_Miniboss_can_be_summoned_from_within_World_5._I'll_give_you_a_hint,_look_in_the_first_5_maps_for_something_out_of_place..._@_*Demented_Spirilord_Miniboss_can_be_summoned_from_within_World_6._Need_another_hint?_There's_a_new_burial_marker_in_the_Mama_Troll_map..._@_*New_Obol_found_from_World_5_Miniboss_@_*New_Keychain_found_from_World_6_Miniboss_@_*5_New_Smithing_recipes_added_to_the_new_Miniboss_Drop_Tables._@_*New_Golden_Food_added,_found_primarily_in_the_new_Miniboss_Drop_Tables._@_*Stamps_now_display_their_LV!_Also,_little_arrows_were_added_to_help_show_which_stamps_need_what_to_update._Green_and_Black_mean_money,_Blue_and_Invisible_mean_materials!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2368,6 +2368,10 @@ export const initRandoListRepo = () => {
                 "elements": [
                     "TestObj16",
                     "TestObj5",
+                    "TestObj8",
+                    "TestObj14",
+                    "TestObj15",
+                    "EquipmentWeapons1",
                     "Trophy4",
                     "EquipmentCape1",
                     "EquipmentWeapons2",

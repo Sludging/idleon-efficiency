@@ -255,9 +255,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3,
+                    "birthWeight": 2.98,
                     "starSign": "Cancer",
-                    "mothersMaidenName": "Miller",
+                    "mothersMaidenName": "Ventotla",
                     "notes": " "
                 },
                 "quests": {},
@@ -276,9 +276,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.4,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Mills",
+                    "birthWeight": 8.87,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Weiss",
                     "notes": " "
                 },
                 "quests": {},
@@ -650,7 +650,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 9.32,
                     "starSign": "eo",
                     "mothersMaidenName": "Thompson",
-                    "notes": "The [[Woodsman]] is found in [[Worlds#G2 - Spore Meadows|Spore Meadows]], the first zone to the right of the starting town, located next to an oak tree with a stump next to him.$$NEWLINE$$$$NEWLINE$$His quests focus on improving the player's capabilities in the [[File:Choppin Skill Icon.png]] [[Choppin]] Skill. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Woodsman Token}}."
+                    "notes": "'''Requires Lv. 5 [[Choppin]] for the NPC to appear'''. The [[Woodsman]] is found in [[Worlds#G2 - Spore Meadows|Spore Meadows]], the first zone to the right of the starting town, located next to an oak tree with a stump next to him.$$NEWLINE$$$$NEWLINE$$His quests focus on improving the player's capabilities in the [[File:Choppin Skill Icon.png]] [[Choppin]] Skill. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Woodsman Token}}."
                 },
                 "quests": {
                     "A noob's first swing": <ItemQuestModel>{
@@ -939,11 +939,11 @@ export const initNpcRepo = () => {
                             <CustomReqModel>{"desc": "Orange Tee Crafted:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
-                    "The Unoccupied Picnic": <ItemQuestModel>{
+                    "Warrior, Archer or Mage?": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
                         "DialogueText": "Wait wait you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map it's after Frogs...",
                         "NextIndex": 27,
-                        "Name": "The Unoccupied Picnic",
+                        "Name": "Warrior, Archer or Mage?",
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 50,
@@ -954,9 +954,7 @@ export const initNpcRepo = () => {
                         ],
                         "QuestName": "Scripticus8",
                         "Difficulty": 4,
-                        "note": <NoteModel>{
-                            "note": "There are '''TWO''' {{CraftReq|Golden Jam}} items. You want the {{CraftReq|Golden Jam (Quest)}} item for this."
-                        },
+                        "note": <NoteModel>{"note": " "},
                         "ItemReq": [<ComponentModel>{"item": "Quest5", "quantity": 1}]
                     },
                     "Stiltzcho, the Leaf Scout": <ItemQuestModel>{
@@ -1218,7 +1216,7 @@ export const initNpcRepo = () => {
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
                         "DialogueText": "Wait wait you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map it's after Frogs...",
                         "NextIndex": 27,
-                        "Name": "The Unoccupied Picnic"
+                        "Name": "Warrior, Archer or Mage?"
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
@@ -13081,7 +13079,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "This is.... acceptable. You may proceed to the Task TV behind me.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -13174,7 +13172,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bruh what even ARE you...? Ain't never saw that class you got there is that even legit?",
-                        "NextIndex": -1,
+                        "NextIndex": 6,
                         "Name": ""
                     }
                 ]
@@ -13355,7 +13353,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I hate this. I wish things could just fix themself naturally and come to a conclusion but I guess things are never gonna change ^",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -13531,7 +13529,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well done laddy! I take my cap off to ye that was some fine sailin' ye must have done!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -13664,7 +13662,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ah now I understand you perfectly... yes it is wonderful weather we're having.",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -13803,7 +13801,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -13867,7 +13865,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -13953,7 +13951,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can access the rift from the World Map... <br> <br> I wonder when those Null Nightmares are gonna join me for brunch they're 5 decades late! Eh any year now I'm sure they'll show up...",
-                        "NextIndex": -1,
+                        "NextIndex": 7,
                         "Name": ""
                     }
                 ]
@@ -14127,7 +14125,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "ONE OF US! ONE OF US!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -14183,7 +14181,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Spring spring spring!! Yippie!! Nice nametag its so poggers!",
-                        "NextIndex": -1,
+                        "NextIndex": 4,
                         "Name": ""
                     }
                 ]
@@ -14328,7 +14326,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You absolute legend! You made this tired mole very happy I really never thought I'd see the day that someone stood up to the boss!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -14464,7 +14462,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Magnificent... and to think that my brilliance that irradiates from the surface of my being was ever called into question bluhahugue!",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -14861,7 +14859,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're definitely royal. I don't know where you were born but that was a royal quantity of effort no doubt. I mean I could totally see MYSELF putting in that amount of effort! I-i-if I ever needed to of course!",
-                        "NextIndex": -1,
+                        "NextIndex": 34,
                         "Name": ""
                     }
                 ]
@@ -14873,9 +14871,9 @@ export const initNpcRepo = () => {
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 8.71,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Illingsworth",
-                    "notes": " "
+                    "starSign": "ibra",
+                    "mothersMaidenName": "llingsworth",
+                    "notes": ""
                 },
                 "quests": {
                     "Seed Planting": <CustomQuestModel>{
@@ -15109,21 +15107,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can tell you have cultivated a respect for our way of life out here in the Spirited Valley. Go now venture off to wherever your spirit yearns for.",
-                        "NextIndex": -1,
+                        "NextIndex": 19,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Hoov", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Picnic Bridgeways",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 5.55,
                     "starSign": "Sagittarius",
                     "mothersMaidenName": "Ashwoon",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {
                     "Sneak Dropout": <CustomQuestModel>{
@@ -15286,21 +15284,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You better lose the toast not the ice cream the frosting the cherry you better eat it 'till it's gone...? Nah that ain't it either how About...",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Woodlin Elder", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Edge of the Valley",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 2.81,
                     "starSign": "Taurus",
                     "mothersMaidenName": "Hancock",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {
                     "Portal Issues": <CustomQuestModel>{
@@ -15478,21 +15476,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "'The Elder nods his head slowly in acknowledgement of your counting abilities'",
-                        "NextIndex": -1,
+                        "NextIndex": 16,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Tribal Shaman", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Bamboo Laboredge",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 2.54,
                     "starSign": "Virgo",
                     "mothersMaidenName": "Soukup",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {},
                 "dialogue": [
@@ -15517,21 +15515,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Of course you do! Well that's to bad. Knowing how to interact with them makes me feel special and telling you would diminish that feeling. <br> Come back later to learn the ways of the Summoning Stones",
-                        "NextIndex": -1,
+                        "NextIndex": 3,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Sussy Gene", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Above the Clouds",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 6.52,
                     "starSign": "Gemini",
                     "mothersMaidenName": "Soloman",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {
                     "Goofin' Around": <CustomQuestModel>{
@@ -15666,21 +15664,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can't believe you did all that! I'll need to think of more things for later!",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Legumulyte", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Troll Broodnest",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 8.61,
                     "starSign": "Scorpio",
                     "mothersMaidenName": "Tiernan",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {},
                 "dialogue": [
@@ -15693,21 +15691,21 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Pls giv crop transfer ticket. I give magic beans you become better farmer grow more crop... give me more next time yeees...",
-                        "NextIndex": -1,
+                        "NextIndex": 1,
                         "Name": ""
                     }
                 ]
             }),
         new NpcBase("Potti", <NpcModel>{
                 "head": <NpcHeadModel>{
-                    "location": "Unknown",
+                    "location": "Sleepy Skyline",
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
                     "birthWeight": 6.14,
-                    "starSign": "Leo",
+                    "starSign": "eo",
                     "mothersMaidenName": "Dugelman",
-                    "notes": " "
+                    "notes": ""
                 },
                 "quests": {},
                 "dialogue": [
@@ -15737,9 +15735,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.75,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Anderson",
+                    "birthWeight": 5.47,
+                    "starSign": "Aries",
+                    "mothersMaidenName": "Orwig",
                     "notes": " "
                 },
                 "quests": {},

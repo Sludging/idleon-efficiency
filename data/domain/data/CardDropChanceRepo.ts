@@ -73,6 +73,8 @@ export const initCardDropChanceRepo = () => {
         new CardDropChanceBase("CardsZ11", <CardDropChanceModel>{"dropChance": 0.002}),
         new CardDropChanceBase("CardsZ17", <CardDropChanceModel>{"dropChance": 0.003}),
         new CardDropChanceBase("CardsZ13", <CardDropChanceModel>{"dropChance": 0.2}),
+        new CardDropChanceBase("CardsZ24", <CardDropChanceModel>{"dropChance": 0.001}),
+        new CardDropChanceBase("CardsZ25", <CardDropChanceModel>{"dropChance": 0.001}),
         new CardDropChanceBase("CardsG1", <CardDropChanceModel>{"dropChance": 2e-05}),
         new CardDropChanceBase("CardsG2", <CardDropChanceModel>{"dropChance": 2e-05}),
         new CardDropChanceBase("CardsG3", <CardDropChanceModel>{"dropChance": 2e-05}),

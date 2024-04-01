@@ -356,6 +356,8 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "babaMummy", "chance": 0.5, "quantity": 1},
                     <SubTableModel>{"name": "mini3a", "chance": 0.5, "quantity": 1},
                     <SubTableModel>{"name": "mini4a", "chance": 0.5, "quantity": 1},
+                    <SubTableModel>{"name": "mini5a", "chance": 0.5, "quantity": 1},
+                    <SubTableModel>{"name": "mini6a", "chance": 0.5, "quantity": 1},
                     <SubTableModel>{"name": "GiantMobzz69", "chance": 1, "quantity": 1}
                 ]
             }),

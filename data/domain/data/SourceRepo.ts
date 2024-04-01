@@ -3089,6 +3089,30 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("EquipmentHats107", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus|Recipe from Domeo Magmus]]", "txtName": "Domeo Magmus"}
+                ],
+                "recipeFrom": [<SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"}],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentShoes39", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus|Recipe from Domeo Magmus]]", "txtName": "Domeo Magmus"}
+                ],
+                "recipeFrom": [<SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"}],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings35", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus|Recipe from Domeo Magmus]]", "txtName": "Domeo Magmus"}
+                ],
+                "recipeFrom": [<SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"}],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentHats105", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
@@ -3209,6 +3233,17 @@ export const initSourceRepo = () => {
         new SourcesBase("MaxCapBagM11", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings36", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{
+                        "wikiName": "[[Demented Spiritlord|Recipe from Demented Spiritlord]]",
+                        "txtName": "Demented Spiritlord"
+                    }
+                ],
+                "recipeFrom": [<SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}],
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats106", <SourcesModel>{
@@ -3363,6 +3398,19 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("FoodG13", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"},
+                    <SourceModel>{
+                        "wikiName": "[[Demented Spiritlord|Recipe from Demented Spiritlord]]",
+                        "txtName": "Demented Spiritlord"
+                    },
+                    <SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}
+                ],
+                "recipeFrom": [<SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentSmithingTabs7", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
@@ -3452,6 +3500,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Chaotic Troll]]", "txtName": "Chaotic Troll"},
                     <SourceModel>{"wikiName": "[[Blitzkrieg Troll]]", "txtName": "Blitzkrieg Troll"},
                     <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"},
+                    <SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"},
                     <SourceModel>{"wikiName": "[[Purp Mushroom]]", "txtName": "Purp Mushroom"},
                     <SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"},
                     <SourceModel>{"wikiName": "[[Donut]]", "txtName": "Donut"},
@@ -5285,7 +5335,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Biggie Hours]]", "txtName": "Biggie Hours"},
                     <SourceModel>{"wikiName": "[[King Doot]]", "txtName": "King Doot"},
                     <SourceModel>{"wikiName": "[[Dilapidated Slush]]", "txtName": "Dilapidated Slush"},
-                    <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"}
+                    <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
+                    <SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"},
+                    <SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6308,6 +6360,44 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("CardsZ24", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ObolLava", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Key5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Domeo Magmus]]", "txtName": "Domeo Magmus"},
+                    <SourceModel>{"wikiName": "[[Biggole Mole]]", "txtName": "Biggole Mole"},
+                    <SourceModel>{"wikiName": "[[Crawler]]", "txtName": "Crawler"},
+                    <SourceModel>{"wikiName": "[[Tremor Wurm]]", "txtName": "Tremor Wurm"},
+                    <SourceModel>{
+                        "wikiName": "[[Tired Mole#Establishing Order among Molekind|Establishing Order among Molekind]]",
+                        "txtName": "Tired Mole: Establishing Order among Molekind"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Tired Mole#Like taking Keys from a Crawler|Like taking Keys from a Crawler]]",
+                        "txtName": "Tired Mole: Like taking Keys from a Crawler"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsZ25", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain29", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Demented Spiritlord]]", "txtName": "Demented Spiritlord"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("GalaxyA1", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Purp Mushroom]]", "txtName": "Purp Mushroom"}],
                 "recipeFrom": [],
@@ -6664,23 +6754,6 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("LavaB6", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Biggole Mole]]", "txtName": "Biggole Mole"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Key5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Biggole Mole]]", "txtName": "Biggole Mole"},
-                    <SourceModel>{"wikiName": "[[Crawler]]", "txtName": "Crawler"},
-                    <SourceModel>{"wikiName": "[[Tremor Wurm]]", "txtName": "Tremor Wurm"},
-                    <SourceModel>{
-                        "wikiName": "[[Tired Mole#Establishing Order among Molekind|Establishing Order among Molekind]]",
-                        "txtName": "Tired Mole: Establishing Order among Molekind"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Tired Mole#Like taking Keys from a Crawler|Like taking Keys from a Crawler]]",
-                        "txtName": "Tired Mole: Like taking Keys from a Crawler"
-                    }
-                ],
                 "recipeFrom": [],
                 "questAss": []
             }),

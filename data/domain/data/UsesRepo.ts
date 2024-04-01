@@ -8390,6 +8390,13 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 6,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Poison Tincture",
                         "name": "Vials: Poison Tincture",
@@ -12425,6 +12432,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Recipe",
+                        "amount": 10,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "PostOfficeRepo",
                         "key": "Down Undelivery",
                         "name": "Down Undelivery Order",
@@ -12660,6 +12681,13 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentRings28",
                         "name": "Midnight Stopwatch Detailed Recipe",
+                        "amount": 30,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
                         "amount": 30,
                         "type": "detRecipe"
                     },
@@ -14200,6 +14228,20 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 8,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
+                        "amount": 40,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentPunching10",
                         "name": "Pentastud Slapper Detailed Recipe",
                         "amount": 15,
@@ -14752,6 +14794,13 @@ export const initUsesRepo = () => {
                         "key": "FishingRod10",
                         "name": "Dreadlo Rod Detailed Recipe",
                         "amount": 300,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 1000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -15868,6 +15917,13 @@ export const initUsesRepo = () => {
                         "name": "Dawn Stopwatch Detailed Recipe",
                         "amount": 1,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
+                        "amount": 2,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.aRing,
@@ -16066,6 +16122,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
+                        "amount": 800,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentBows13",
                         "name": "Pristine Longbow Detailed Recipe",
                         "amount": 350,
@@ -16221,6 +16284,13 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentRings29",
                         "name": "Dawn Stopwatch Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
                         "amount": 1,
                         "type": "detRecipe"
                     }
@@ -16695,6 +16765,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 1450,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentTools14",
                         "name": "Marbiglass Pickaxe Detailed Recipe",
                         "amount": 400,
@@ -17084,6 +17161,13 @@ export const initUsesRepo = () => {
                         "key": "CatchingNet10",
                         "name": "Dreadlo Matted Netting Detailed Recipe",
                         "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 120000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -20897,6 +20981,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 4000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentTools14",
                         "name": "Marbiglass Pickaxe Detailed Recipe",
                         "amount": 6000,
@@ -21100,6 +21191,13 @@ export const initUsesRepo = () => {
                         "key": "EquipmentShoes25",
                         "name": "Diabolical Toe Tips Detailed Recipe",
                         "amount": 120000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 240000,
                         "type": "detRecipe"
                     },
                     <UseModel>{
@@ -21811,6 +21909,13 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes37",
                         "name": "Marbiglass Soles Detailed Recipe",
                         "amount": 8,
@@ -21840,6 +21945,13 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentShoes33",
                         "name": "Sheek Scrubs Detailed Recipe",
+                        "amount": 4,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
                         "amount": 4,
                         "type": "detRecipe"
                     }
@@ -23461,6 +23573,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Pearl Seltzer",
                         "name": "Vials: Pearl Seltzer",
@@ -24573,6 +24699,20 @@ export const initUsesRepo = () => {
                         "name": "Mittens of the Gods Detailed Recipe",
                         "amount": 1000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
                     }
                 ],
                 "typeGen": TypeGenEnum.cFood,
@@ -25327,6 +25467,20 @@ export const initUsesRepo = () => {
                         "type": "detRecipe"
                     },
                     <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Recipe",
+                        "amount": 1000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Detailed Recipe",
+                        "amount": 1000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
                         "repoSource": "BubbleRepo",
                         "key": "Vials@Ash Agua",
                         "name": "Vials: Ash Agua",
@@ -25495,6 +25649,20 @@ export const initUsesRepo = () => {
                         "repoSource": "RecipeRepo",
                         "key": "EquipmentPendant30",
                         "name": "The Divine Scarf Detailed Recipe",
+                        "amount": 10,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Recipe",
+                        "amount": 10,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
                         "amount": 10,
                         "type": "detRecipe"
                     },
@@ -26054,6 +26222,20 @@ export const initUsesRepo = () => {
                     },
                     <UseModel>{
                         "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Recipe",
+                        "amount": 50000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Detailed Recipe",
+                        "amount": 50000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
                         "key": "EquipmentWands12",
                         "name": "Sparky Marble Staff Detailed Recipe",
                         "amount": 5000000,
@@ -26102,6 +26284,125 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.aPendant,
                 "type": "Pendant"
+            }),
+        new UsesBase("EquipmentHats25", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aHelmet,
+                "type": "Helmet"
+            }),
+        new UsesBase("LavaA1b", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentHats107",
+                        "name": "Shiny Bored Beanie Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC16",
+                        "name": "Talent IV Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
+        new UsesBase("EquipmentShoes33", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShoes,
+                "type": "Shoes"
+            }),
+        new UsesBase("EquipmentShoes31", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentShoes39",
+                        "name": "Divvy Slippers Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aShoes,
+                "type": "Shoes"
+            }),
+        new UsesBase("EquipmentRings28", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aRing,
+                "type": "Ring"
+            }),
+        new UsesBase("EquipmentRings29", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aRing,
+                "type": "Ring"
+            }),
+        new UsesBase("Crystal5", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Recipe",
+                        "amount": 25,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings35",
+                        "name": "Zero Point Stopwatch Detailed Recipe",
+                        "amount": 25,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.dQuest,
+                "type": "Quest Item"
             }),
         new UsesBase("EquipmentHats83", <UsesModel>{
                 "uses": [
@@ -27144,6 +27445,53 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Golden Food"
             }),
+        new UsesBase("EquipmentRings18", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings36",
+                        "name": "Demented Emperor Opal Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings36",
+                        "name": "Demented Emperor Opal Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    }
+                ],
+                "typeGen": TypeGenEnum.aRing,
+                "type": "Ring"
+            }),
+        new UsesBase("SpiD3", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings36",
+                        "name": "Demented Emperor Opal Recipe",
+                        "amount": 10000000,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "EquipmentRings36",
+                        "name": "Demented Emperor Opal Detailed Recipe",
+                        "amount": 10000000,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "BubbleRepo",
+                        "key": "Vials@Royale Cola",
+                        "name": "Vials: Royale Cola",
+                        "amount": "Lots",
+                        "type": "vial"
+                    }
+                ],
+                "typeGen": TypeGenEnum.bCraft,
+                "type": "Monster Drop"
+            }),
         new UsesBase("EquipmentHats105", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28143,6 +28491,33 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.cFood,
                 "type": "Golden Food"
             }),
+        new UsesBase("FoodG4", <UsesModel>{
+                "uses": [
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Recipe",
+                        "amount": 1,
+                        "type": "recipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "RecipeRepo",
+                        "key": "FoodG13",
+                        "name": "Golden Cake Detailed Recipe",
+                        "amount": 1,
+                        "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "ItemRepo",
+                        "key": "StampC7",
+                        "name": "Golden Apple Stamp Material",
+                        "amount": "Lots",
+                        "type": "stamp"
+                    }
+                ],
+                "typeGen": TypeGenEnum.cFood,
+                "type": "Golden Food"
+            }),
         new UsesBase("DesertB2", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28714,19 +29089,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("SpiD3", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "BubbleRepo",
-                        "key": "Vials@Royale Cola",
-                        "name": "Vials: Royale Cola",
-                        "amount": "Lots",
-                        "type": "vial"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bCraft,
-                "type": "Monster Drop"
-            }),
         new UsesBase("Critter11", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28878,19 +29240,6 @@ export const initUsesRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "type": "Monster Drop"
             }),
-        new UsesBase("FoodG4", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC7",
-                        "name": "Golden Apple Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    }
-                ],
-                "typeGen": TypeGenEnum.cFood,
-                "type": "Golden Food"
-            }),
         new UsesBase("SnowA4", <UsesModel>{
                 "uses": [
                     <UseModel>{
@@ -28923,19 +29272,6 @@ export const initUsesRepo = () => {
                 ],
                 "typeGen": TypeGenEnum.bLeaf,
                 "type": "Leaf"
-            }),
-        new UsesBase("LavaA1b", <UsesModel>{
-                "uses": [
-                    <UseModel>{
-                        "repoSource": "ItemRepo",
-                        "key": "StampC16",
-                        "name": "Talent IV Stamp Material",
-                        "amount": "Lots",
-                        "type": "stamp"
-                    }
-                ],
-                "typeGen": TypeGenEnum.bCraft,
-                "type": "Monster Drop"
             }),
         new UsesBase("Leaf2", <UsesModel>{
                 "uses": [

@@ -1677,6 +1677,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats107", <ArmourItemModel>{
+                "internalName": "EquipmentHats107",
+                "displayName": "Shiny Bored Beanie",
+                "sellPrice": 500,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 9,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 20,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 100,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 2,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats2", <ArmourItemModel>{
                 "internalName": "EquipmentHats2",
                 "displayName": "Royal Turban",
@@ -5520,6 +5541,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentShoes39", <ArmourItemModel>{
+                "internalName": "EquipmentShoes39",
+                "displayName": "Divvy Slippers",
+                "sellPrice": 3000,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 200,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 5,
+                "WIS": 12,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "42% Divinity Exp",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentShoes24", <ArmourItemModel>{
                 "internalName": "EquipmentShoes24",
                 "displayName": "Lustre Shieldshoe",
@@ -7050,6 +7092,48 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "30% Kills In World 5",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings35", <ArmourItemModel>{
+                "internalName": "EquipmentRings35",
+                "displayName": "Zero Point Stopwatch",
+                "sellPrice": 5000,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 250,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 5,
+                "miscUp1": "4% All Afk Gain",
+                "miscUp2": "5% Skill Efficiency",
+                "Upgrade_Slots_Left": 4,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings36", <ArmourItemModel>{
+                "internalName": "EquipmentRings36",
+                "displayName": "Demented Emperor Opal",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 500,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 12,
+                "STR": 50,
+                "AGI": 50,
+                "WIS": 50,
+                "LUK": 50,
+                "Defence": 15,
+                "miscUp1": "10% All Stats",
+                "miscUp2": "1% Damage Multi",
+                "Upgrade_Slots_Left": 1,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -16658,6 +16742,29 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("ObolLava", <ObolItemModel>{
+                "internalName": "ObolLava",
+                "displayName": "Magma Obol of Big Time Domeo",
+                "sellPrice": 20,
+                "typeGen": TypeGenEnum.aObolHexagon,
+                "Type": "Hexagon Obol",
+                "lvReqToCraft": 0,
+                "lvReqToEquip": 0,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "14% Drop Chance",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "family": "Lava",
+                "rarity": "Magma",
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("ObolTroll", <ObolItemModel>{
                 "internalName": "ObolTroll",
                 "displayName": "Jagged Obol of Massive Trolling",
@@ -18487,6 +18594,25 @@ export const initSpecificItemRepo = () => {
                 "lvReqToEquip": 1,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 1,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 5,
+                "miscUp1": "",
+                "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                "Upgrade_Slots_Left": 0
+            }),
+        new BaseItemBase("EquipmentKeychain29", <KeychainItemModel>{
+                "internalName": "EquipmentKeychain29",
+                "displayName": "Spiritlord Horn Chain",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aKeychain,
+                "Type": "Keychain",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 400,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 25,
                 "STR": 0,
                 "AGI": 0,
                 "WIS": 0,
@@ -21315,6 +21441,15 @@ export const initSpecificItemRepo = () => {
                 "Type": "Golden Food",
                 "description": "Increases all AFK Gains rate. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases all AFK Gains rate by [%.", "amount": 4}
+            }),
+        new BaseItemBase("FoodG13", <GoldenFoodItemModel>{
+                "internalName": "FoodG13",
+                "displayName": "Golden Cake",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Golden Food",
+                "description": "Increases Drop Rarity. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Drop Rarity by [%.", "amount": 8}
             }),
         new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
@@ -30419,7 +30554,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{% Sailing Speed (Passive)",
                     "bonus": 6,
-                    "order": 20
+                    "order": 21
                 },
                 "dropChance": 0.0008
             }),
@@ -30435,7 +30570,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% EXP from monsters",
                     "bonus": 8,
-                    "order": 21
+                    "order": 22
                 },
                 "dropChance": 0.0008
             }),
@@ -30451,7 +30586,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Money from Monsters",
                     "bonus": 18,
-                    "order": 22
+                    "order": 23
                 },
                 "dropChance": 0.0008
             }),
@@ -30467,7 +30602,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 6,
                     "effect": "+{% Total Drop Rate",
                     "bonus": 12,
-                    "order": 23
+                    "order": 25
                 },
                 "dropChance": 1
             }),
@@ -30483,7 +30618,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 9,
                     "effect": "+{% Total Damage Multi",
                     "bonus": 8,
-                    "order": 24
+                    "order": 26
                 },
                 "dropChance": 1
             }),
@@ -30499,9 +30634,41 @@ export const initSpecificItemRepo = () => {
                     "perTier": 13,
                     "effect": "+{% Multikill per tier",
                     "bonus": 20,
-                    "order": 25
+                    "order": 27
                 },
                 "dropChance": 1
+            }),
+        new BaseItemBase("CardsZ24", <CardItemModel>{
+                "internalName": "CardsZ24",
+                "displayName": "Domeo Magmus Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z24",
+                    "category": "Bosses",
+                    "perTier": 4,
+                    "effect": "+{% Total Drop Rate (Passive)",
+                    "bonus": 1.5,
+                    "order": 20
+                },
+                "dropChance": 0.001
+            }),
+        new BaseItemBase("CardsZ25", <CardItemModel>{
+                "internalName": "CardsZ25",
+                "displayName": "Demented Spiritlord Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z25",
+                    "category": "Bosses",
+                    "perTier": 5,
+                    "effect": "+{% Fighting AFK gain rate",
+                    "bonus": 2.5,
+                    "order": 24
+                },
+                "dropChance": 0.001
             })    
 ]
 }
