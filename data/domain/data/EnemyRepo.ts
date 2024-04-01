@@ -6732,7 +6732,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss4B",
-                    "next": "Boss5A",
+                    "next": "mini5a",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -6782,7 +6782,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "Boss4C",
+                    "prev": "mini5a",
                     "next": "Boss5B",
                     "hasCrystal": true,
                     "crystalName": undefined,
@@ -6903,7 +6903,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss5B",
-                    "next": "Boss6A",
+                    "next": "mini6a",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -6956,7 +6956,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "Boss5C",
+                    "prev": "mini6a",
                     "next": "Boss6B",
                     "hasCrystal": true,
                     "crystalName": undefined,
@@ -7313,6 +7313,94 @@ export const initEnemyRepo = () => {
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss3C",
                     "next": "Boss4A",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("mini5a", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Domeo Magmus",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 6,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 40,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 0,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 8,
+                    "MonsterHPTotal": 1000000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 20000000,
+                    "ExpType": 0,
+                    "Defence": 4500,
+                    "MoveSPEED": 3,
+                    "Damages": [150000, 450],
+                    "DefFor0": 106605
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 250000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 33, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolLava", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 34, "chance": 0.002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Key5", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 35, "chance": 0.0005, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG13", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable13", "quantity": 1, "chance": 0.5, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss4C",
+                    "next": "Boss5A",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("mini6a", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Demented Spiritlord",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 6,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 40,
+                    "HeightOfMonster": 83,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 0,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 8,
+                    "MonsterHPTotal": 2.5e+13,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 2000000000,
+                    "ExpType": 0,
+                    "Defence": 4500,
+                    "MoveSPEED": 3,
+                    "Damages": [1000000, 450],
+                    "DefFor0": 505546
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 2500000, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ25", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 22, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentKeychain29", "quantity": 1, "chance": 0.0004, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 46, "chance": 0.0008, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG13", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable13", "quantity": 1, "chance": 0.5, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss5C",
+                    "next": "Boss6A",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true

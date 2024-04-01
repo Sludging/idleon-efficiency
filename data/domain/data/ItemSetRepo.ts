@@ -266,6 +266,7 @@ export const initItemSetRepo = () => {
         new ItemSetBase("ObolGoldWorship", <ItemSetModel>{"set": "Golden"}),
         new ItemSetBase("ObolPlatinumWorship", <ItemSetModel>{"set": "Platinum"}),
         new ItemSetBase("ObolPinkWorship", <ItemSetModel>{"set": "Dementia"}),
+        new ItemSetBase("ObolLava", <ItemSetModel>{"set": "Magma"}),
         new ItemSetBase("ObolKruk", <ItemSetModel>{"set": "Molten"}),
         new ItemSetBase("MaxCapBagT2", <ItemSetModel>{"set": "Miniature"}),
         new ItemSetBase("MaxCapBag1", <ItemSetModel>{"set": "Cramped"}),

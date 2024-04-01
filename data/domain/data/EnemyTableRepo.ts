@@ -1027,6 +1027,30 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable13", "quantity": 1, "chance": 0.5, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("mini5a", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 250000, "chance": 1, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsZ24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 33, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "ObolLava", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
+                    <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 34, "chance": 0.002, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Key5", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
+                    <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 35, "chance": 0.0005, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodG13", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable13", "quantity": 1, "chance": 0.5, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("mini6a", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 2500000, "chance": 1, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsZ25", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 22, "chance": 0.0008, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentKeychain29", "quantity": 1, "chance": 0.0004, "questLink": "N/A"},
+                    <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 46, "chance": 0.0008, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodG13", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable13", "quantity": 1, "chance": 0.5, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("mushP", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 550, "chance": 0.5, "questLink": "N/A"},

@@ -757,13 +757,20 @@ export const initEnemyNavRepo = () => {
             }),
         new EnemyNavBase("Boss4C", <EnemyNavModel>{
                 "prev": "Boss4B",
+                "next": "mini5a",
+                "hasCrystal": true,
+                "crystalName": undefined,
+                "hasCard": true
+            }),
+        new EnemyNavBase("mini5a", <EnemyNavModel>{
+                "prev": "Boss4C",
                 "next": "Boss5A",
                 "hasCrystal": true,
                 "crystalName": undefined,
                 "hasCard": true
             }),
         new EnemyNavBase("Boss5A", <EnemyNavModel>{
-                "prev": "Boss4C",
+                "prev": "mini5a",
                 "next": "Boss5B",
                 "hasCrystal": true,
                 "crystalName": undefined,
@@ -778,13 +785,20 @@ export const initEnemyNavRepo = () => {
             }),
         new EnemyNavBase("Boss5C", <EnemyNavModel>{
                 "prev": "Boss5B",
+                "next": "mini6a",
+                "hasCrystal": true,
+                "crystalName": undefined,
+                "hasCard": true
+            }),
+        new EnemyNavBase("mini6a", <EnemyNavModel>{
+                "prev": "Boss5C",
                 "next": "Boss6A",
                 "hasCrystal": true,
                 "crystalName": undefined,
                 "hasCard": true
             }),
         new EnemyNavBase("Boss6A", <EnemyNavModel>{
-                "prev": "Boss5C",
+                "prev": "mini6a",
                 "next": "Boss6B",
                 "hasCrystal": true,
                 "crystalName": undefined,
