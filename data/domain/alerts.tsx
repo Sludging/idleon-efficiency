@@ -210,7 +210,7 @@ export class EquinoxBarFull extends GlobalAlert {
 
 export class CanCraftLuckierLad extends GlobalAlert {
     constructor() {
-        super(`You have enough Lucky Lads accross your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
+        super(`You have enough Lucky Lads across your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
 
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
