@@ -75,6 +75,10 @@ export class Miniboss {
                 return Math.min(10, Math.floor(Math.pow(daysSinceKill - 3, .55)));
             case "mini4a":
                 return Math.min(8, Math.floor(Math.pow(daysSinceKill - 3, .5)));
+            case "mini5a":
+                return Math.min(6, Math.floor(Math.pow(daysSinceKill - 3, .5)));
+            case "mini6a":
+                return Math.min(6, Math.floor(Math.pow(daysSinceKill - 3, .5)));
             default:
                 return -1;
         }
@@ -86,13 +90,17 @@ export class Miniboss {
                 return 10;
             case "mini4a":
                 return 8;
+            case "mini5a":
+                return 6;
+            case "mini6a":
+                return 6;
             default:
                 return -1;
         }
     }
 
     getDaysToNext = () => {
-        if ((this.bossInternalName == "mini3a" && this.currentCount == 10) || (this.bossInternalName == "mini4a" && this.currentCount == 8)) {
+        if (this.currentCount == this.getMaxCount()) {
             return Number.MAX_SAFE_INTEGER;
         }
 
@@ -141,6 +149,8 @@ export class Account extends Domain {
     init(allItems: Item[], charCount: number) {
         this.miniBosses.push(new Miniboss("mini3a", 0));
         this.miniBosses.push(new Miniboss("mini4a", 0));
+        this.miniBosses.push(new Miniboss("mini5a", 0));
+        this.miniBosses.push(new Miniboss("mini6a", 0));
 
         allItems.filter(item => isBossKeyRegex().exec(item.internalName)).forEach((keyItem) => {
             const newKey = new Key(keyItem.duplicate());
@@ -175,6 +185,14 @@ export class Account extends Domain {
             // W4 Mini Boss
             if (boss.bossInternalName == "mini4a") {
                 boss.setDaysSinceLastKill(optionList[98] as number || 0);
+            }
+            // W5 Mini Boss
+            if (boss.bossInternalName == "mini5a") {
+                boss.setDaysSinceLastKill(optionList[225] as number || 0);
+            }
+            // W6 Mini Boss
+            if (boss.bossInternalName == "mini6a") {
+                boss.setDaysSinceLastKill(optionList[226] as number || 0);
             }
         })
     }

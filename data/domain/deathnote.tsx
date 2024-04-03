@@ -17,7 +17,7 @@ export const deathNoteMobOrder = [
     "w6a1 w6a2 w6a3 w6a4 w6a5 w6b1 w6b2 w6b3 w6b4 w6c1 w6c2 w6d1 w6d2 w6d3".split(" "),
 ];
 
-export const deathNoteMinibossesOrder = "poopBig babayaga babaHour babaMummy mini3a mini4a".split(" ");
+export const deathNoteMinibossesOrder = "poopBig babayaga babaHour babaMummy mini3a mini4a mini5a mini6a".split(" ");
 
 export class Deathnote extends Domain {
     mobKillCount: Map<string, number[]> = new Map()

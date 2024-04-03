@@ -557,7 +557,7 @@ function DeathnoteDisplay() {
             }
         });
         return toReturn;
-    }, [deathnoteData, monsterInfo])
+    }, [appContext, deathnoteData, monsterInfo])
 
     const worldTierInfo = useMemo(() => {
         const toReturn: number[] = [];
@@ -570,7 +570,7 @@ function DeathnoteDisplay() {
             toReturn.push(worldRankSum);
         })
         return toReturn;
-    }, [deathNoteByWorld, deathnoteData])
+    }, [appContext, deathNoteByWorld, deathnoteData])
 
     useEffect(() => {
         if (appContext) {
