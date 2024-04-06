@@ -16,6 +16,7 @@ import { Trap } from "./traps";
 import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
 import { Storage } from "./storage";
+import { SummonEssenceColor, Summoning } from "./world-6/summoning";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -33,7 +34,8 @@ export enum AlertType {
     Farming = "Farming",
     Sneaking = "Sneaking",
     EquinoxFull = "Equinox Full",
-    CanCraftLuckierLad = "Can craft Luckier Lad"
+    CanCraftLuckierLad = "Can craft Luckier Lad",
+    CanBuyFamiliar = "Can buy a familiar for Summoning",
 }
 
 export abstract class Alert {
@@ -208,10 +210,21 @@ export class EquinoxBarFull extends GlobalAlert {
 
 export class CanCraftLuckierLad extends GlobalAlert {
     constructor() {
-        super(`You have enough Lucky Lads accross your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
+        super(`You have enough Lucky Lads across your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
 
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
+    }
+}
+
+export class CanBuySummoningFamiliar extends GlobalAlert {
+    constructor() {
+        super(`You have enough white essence to buy a familiar, go get it`, AlertType.CanBuyFamiliar, 
+            {
+                location: 'SumUpgIc2',
+                height: 50,
+                width: 50,
+            });
     }
 }
 
@@ -305,7 +318,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -371,6 +384,14 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     if (recipeUnlocked && luckyLadOwned >= 75) {
         globalAlerts.push(new CanCraftLuckierLad());
     }
+    
+    // Can buy a familiar for Summoning (in case cost reset for example)
+    const familiarUpgradeUnlocked = summoning.summonUpgrades.find(bonus => bonus.index == 2)?.unlocked ?? false;
+    const canBuyFamiliar = (summoning.summonUpgrades.find(bonus => bonus.index == 2)?.nextLevelCost() ?? 0) < (summoning.summonEssences.find(essence => essence.color == SummonEssenceColor.White)?.quantity ?? 0);
+    // If the upgrade is unlocked and can buy a level, display the alert
+    if (familiarUpgradeUnlocked && canBuyFamiliar) {
+        globalAlerts.push(new CanBuySummoningFamiliar());
+    }
 
     return globalAlerts;
 }
@@ -389,6 +410,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const farming = data.get("farming") as Farming;
     const storage = data.get("storage") as Storage;
+    const summoning = data.get("summoning") as Summoning;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -396,6 +418,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage, summoning);
     return alerts;
 }
