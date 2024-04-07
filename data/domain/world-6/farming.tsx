@@ -372,7 +372,7 @@ export class Farming extends Domain {
     starSignEvoInfinity: boolean = false;
     starSignOGUnlocked: boolean = false;
     starSignOGInfinity: boolean = false;
-;
+
     cropDepot: Crop[] = [];
     cropsToCollect: CropQuantity[] = [];
     cropScientist: CropScientist = new CropScientist();
