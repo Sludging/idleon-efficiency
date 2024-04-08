@@ -207,6 +207,7 @@ export class ConstructionMastery extends RiftBonus {
             case this.buildingLevels < 1250: return 4;
             case this.buildingLevels < 1500: return 5;
             case this.buildingLevels < 2500: return 6;
+            case this.buildingLevels >= 2500: return 7;
             default: return -1;
         }
     }
