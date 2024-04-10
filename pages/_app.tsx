@@ -20,6 +20,7 @@ import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 import useSWR from 'swr';
 import { fetcher } from '../data/fetchers/getProfile';
+import Ramp from '../lib/ramp';
 
 const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 
@@ -123,19 +124,24 @@ const customTheme = deepMerge(dark, {
 declare const window: Window &
   typeof globalThis & {
     gtag: any
-    ramp: any
     _pwGA4PageviewId: string
     dataLayer: any
   }
 
 // Ad related things
 var pwUnits = [
-  // TODO: Add left/right rails
-  {
-    type: 'bottom_rail'
-  },
+  // Disabled for now, I don't like it.
+  // {
+  //   type: 'bottom_rail'
+  // },
   {
     type: 'corner_ad_video'
+  },
+  {
+    type: 'left_rail'
+  },
+  {
+    type: 'right_rail'
   }
 ]
 
@@ -195,17 +201,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
       />
       <Script
-        id="ramp-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.ramp = window.ramp || {};
-            window.ramp.que = window.ramp.que || [];
-            window.ramp.passiveMode = true;
-          `
-        }}
-      />
-      <Script
         id="gtag-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -226,33 +221,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             });
         `}}
       />
-      <Script
-        id="playwire-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            var init = function () {
-              window.ramp
-                // pass in the array 'pwUnits' defined right above
-                .addUnits(${JSON.stringify(pwUnits)})
-                .then(() => {
-                  window.ramp.displayUnits()
-                }).catch((e) => {
-                  // catch errors
-                  window.ramp.displayUnits()
-                  console.log(e)
-                })
-            }
-            window.ramp.que.push(init);
-          `
-        }}
-      />
-      <Script
-        strategy="afterInteractive"
-        defer
-        async
-        src={`https://cdn.intergient.com/1025192/74808/ramp.js`}
-      />
+      <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
       <Grommet theme={customTheme} full>
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
           <AppProvider appLoading={loading} data={publicData} domain={domain} accountData={accountData}>
