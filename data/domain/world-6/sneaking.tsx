@@ -460,7 +460,7 @@ export class Sneaking extends Domain {
         })
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
-        const lettersOfEnabledUpgrades = ninjaData[102][9];
+        const lettersOfEnabledUpgrades = ninjaData[102][9] ?? "";
         const purchasedUpgrades: number[] = [];
         for (const upgradeLetter of lettersOfEnabledUpgrades) {
             purchasedUpgrades.push(letterToNumber(upgradeLetter));
