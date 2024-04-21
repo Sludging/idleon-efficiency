@@ -279,7 +279,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect STR has on Damage is increased by +{%",
-                        "requirements": [<CropComponentModel>{"cropId": "3", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<CropComponentModel>{"cropId": "4", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "W6"
                     },
                     <BubbleModel>{
@@ -299,7 +299,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{% STR for every 2000 Tome Completion Points over 5000. So you'd get one stack of this at 7000 pts, two at 9000, etc",
-                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "2", "quantity": 500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W8"
                     },
                     <BubbleModel>{
@@ -319,7 +319,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decay",
                         "description": "+{% Crop Evolution chance for every 2000 Tome Completion Points above 5000.",
-                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "4", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W10AllCharz"
                     }
                 ]
@@ -909,7 +909,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "+{ Choppin and Worship Power. This bonus increases based on every 10 Class LVs you are above 500.",
-                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<SummonComponentModel>{"summonId": "1", "quantity": 950}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "M7"
                     },
                     <BubbleModel>{
@@ -1226,7 +1226,7 @@ export const initBubbleRepo = () => {
                         "x2": 70,
                         "func": "decay",
                         "description": "Your ninja twins do +{% more damage to doors! Knock knock, let 'em in, let 'em in!",
-                        "requirements": [<CropComponentModel>{"cropId": "60", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
+                        "requirements": [<CropComponentModel>{"cropId": "30", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 5}],
                         "bonusKey": "Y8"
                     },
                     <BubbleModel>{
@@ -1236,7 +1236,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "{x Item Find chance for your ninja twin while sneaking!",
-                        "requirements": [<SummonComponentModel>{"summonId": "0", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [<SummonComponentModel>{"summonId": "3", "quantity": 1200}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "Y9ACTIVE"
                     },
                     <BubbleModel>{
