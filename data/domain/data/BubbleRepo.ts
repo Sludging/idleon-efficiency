@@ -279,7 +279,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "The effect STR has on Damage is increased by +{%",
-                        "requirements": [<CropComponentModel>{"cropId": "3", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
+                        "requirements": [<CropComponentModel>{"cropId": "4", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "W6"
                     },
                     <BubbleModel>{
