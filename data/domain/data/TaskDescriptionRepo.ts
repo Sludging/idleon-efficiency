@@ -2019,6 +2019,196 @@ export const initTaskDescriptionRepo = () => {
                     -1,
                     -1
                 ]
+            }),
+        new TaskDescriptionBase(106, <TaskDescriptionModel>{
+                "name": "Crop Numbah",
+                "description": "Have a total of { digits across all crops owned, so 813 apples is +3 digits",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Thats a LOT of crops... yea best I can give is 4 magic beans.",
+                "numbers": [
+                    30,
+                    60,
+                    120,
+                    180,
+                    250,
+                    350,
+                    500,
+                    750,
+                    1000,
+                    1400
+                ]
+            }),
+        new TaskDescriptionBase(107, <TaskDescriptionModel>{
+                "name": "OG, Oh Geez",
+                "description": "Overgrow your crops a total of { times.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Oh Geez... you lost so much gains by waiting for 1024x all those times!",
+                "numbers": [
+                    100,
+                    300,
+                    1000,
+                    2500,
+                    5000,
+                    10000,
+                    25000,
+                    50000,
+                    100000,
+                    250000
+                ]
+            }),
+        new TaskDescriptionBase(108, <TaskDescriptionModel>{
+                "name": "Peak Sneak",
+                "description": "Have at least one Ninja Twin with a Sneaking LV of {",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Woah impressive, when did you finish this? I didn't even notice...",
+                "numbers": [
+                    20,
+                    30,
+                    50,
+                    75,
+                    100,
+                    120,
+                    140,
+                    160,
+                    180,
+                    210
+                ]
+            }),
+        new TaskDescriptionBase(109, <TaskDescriptionModel>{
+                "name": "Gold's Charm",
+                "description": "Have the total +LV of all your best Gold Charms in Sneaking add up to {",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|All those LVs and you still want more, when will it be enough?",
+                "numbers": [
+                    20,
+                    50,
+                    100,
+                    150,
+                    200,
+                    250,
+                    300,
+                    350,
+                    400,
+                    500
+                ]
+            }),
+        new TaskDescriptionBase(110, <TaskDescriptionModel>{
+                "name": "Essential Digits",
+                "description": "Have a total of { digits across all essence owned within Summoning.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Essentially speaking, you have a lot of unspent essence.",
+                "numbers": [
+                    4,
+                    10,
+                    15,
+                    20,
+                    30,
+                    45,
+                    60,
+                    80,
+                    100,
+                    125
+                ]
+            }),
+        new TaskDescriptionBase(111, <TaskDescriptionModel>{
+                "name": "I'll Take It",
+                "description": "Find { items while sneaking around.",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|You stole all those items. Hope you're proud... oh you are? Well good!",
+                "numbers": [
+                    10,
+                    25,
+                    100,
+                    250,
+                    500,
+                    1000,
+                    2000,
+                    3500,
+                    7500,
+                    15000
+                ]
+            }),
+        new TaskDescriptionBase(112, <TaskDescriptionModel>{
+                "name": "Pillaging The Emperor!",
+                "description": "}",
+                "extraStr": "The Emperor's Castle has not yet been discovered...|Defeat Kattlekruk without letting moles heal him more than 5 times|Defeat Kattlekruk on 6 players, in order, starting with the 1st|Kill Chaotic Kattlekruk.|Kill Chaotic Kattlekruk without letting moles heal more than 3 times.|Defeat Chaotic Kattlekruk within 30 seconds of entering.|Defeat Chaotic Kattlekruk on 7 players, in order from the 1st|Defeat Nightmare Kattlekruk, the scariest boss of all time.|Defeat Nightmare Kattlekruk before he heals even once from moles|Defeat Nightmare Kattlekruk on 10 players, in order from the 1st",
+                "number1": 10,
+                "descLine2": "2|1|Kattlekruk's demeanor gives you the feeling there are powers greater than the Gods",
+                "numbers": [
+                    1,
+                    1,
+                    6,
+                    1,
+                    1,
+                    1,
+                    7,
+                    1,
+                    1,
+                    10
+                ]
+            }),
+        new TaskDescriptionBase(113, <TaskDescriptionModel>{
+                "name": "Achievement Theist",
+                "description": "Complete { Spirited Valley achieves, accessed with that button in the top left!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Filler haha",
+                "numbers": [
+                    5,
+                    10,
+                    15,
+                    20,
+                    25,
+                    30,
+                    40,
+                    50,
+                    60,
+                    70
+                ]
+            }),
+        new TaskDescriptionBase(114, <TaskDescriptionModel>{
+                "name": "Nope",
+                "description": "You have enough daily stuff already. Go do the other world's daily task!",
+                "extraStr": "Blank420q",
+                "number1": 6,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
+            }),
+        new TaskDescriptionBase(115, <TaskDescriptionModel>{
+                "name": "Nuh uh",
+                "description": "Seriously, you don't need more daily stuff to do. I wont let you.",
+                "extraStr": "Blank420q",
+                "number1": 4,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
             })    
 ]
 }

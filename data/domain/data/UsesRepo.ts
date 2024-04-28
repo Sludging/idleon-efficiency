@@ -26693,6 +26693,13 @@ export const initUsesRepo = () => {
                         "name": "Tatters of the Gods Detailed Recipe",
                         "amount": 5000000,
                         "type": "detRecipe"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Spirit Sungmin@Mind, Body, Soul, Tasks",
+                        "name": "Mind, Body, Soul, Tasks Requirements",
+                        "amount": 2500,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -27049,6 +27056,13 @@ export const initUsesRepo = () => {
                         "name": "Atomic Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Spirit Sungmin@Mind, Body, Soul, Tasks",
+                        "name": "Mind, Body, Soul, Tasks Requirements",
+                        "amount": 500,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,
@@ -29058,6 +29072,13 @@ export const initUsesRepo = () => {
                         "name": "Void Sword Stamp Material",
                         "amount": "Lots",
                         "type": "stamp"
+                    },
+                    <UseModel>{
+                        "repoSource": "NpcRepo",
+                        "key": "Spirit Sungmin@Mind, Body, Soul, Tasks",
+                        "name": "Mind, Body, Soul, Tasks Requirements",
+                        "amount": 1000,
+                        "type": "quest"
                     }
                 ],
                 "typeGen": TypeGenEnum.bCraft,

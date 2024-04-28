@@ -1887,6 +1887,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats108", <ArmourItemModel>{
+                "internalName": "EquipmentHats108",
+                "displayName": "3rd Anniversary Ice Cream Topper",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 5,
+                "miscUp1": "4% Xp From Monsters",
+                "miscUp2": "3% Drop Chance",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats56", <ArmourItemModel>{
                 "internalName": "EquipmentHats56",
                 "displayName": "Bunny Ears",
@@ -18052,6 +18073,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag10", <ArmourItemModel>{
+                "internalName": "EquipmentNametag10",
+                "displayName": "3rd Anniversary IdleOn Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 3,
+                "miscUp1": "3% All Afk Gain",
+                "miscUp2": "3% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -22411,6 +22453,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Droppable",
                 "description": "Drop a stack of 7 of these on the Tome to permanently add a new Bonus Type! "
+            }),
+        new BaseItemBase("Quest85", <DescItemModel>{
+                "internalName": "Quest85",
+                "displayName": "Anniversary Box",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "IdleOn is 3 years old! Hold down to open this box and celebrate! Contains a random Anniversary goodie, from event cards to foods! ALSO, if you open a total of 500 Boxes, you'll get a limited edition Anniversary event NAMETAG! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",

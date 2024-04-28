@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Secret_Minibosses_v2.05;NEW_UPDATE_PATCH_NOTES_@_*Domeo_Magmus_Miniboss_can_be_summoned_from_within_World_5._I'll_give_you_a_hint,_look_in_the_first_5_maps_for_something_out_of_place..._@_*Demented_Spirilord_Miniboss_can_be_summoned_from_within_World_6._Need_another_hint?_There's_a_new_burial_marker_in_the_Mama_Troll_map..._@_*New_Obol_found_from_World_5_Miniboss_@_*New_Keychain_found_from_World_6_Miniboss_@_*5_New_Smithing_recipes_added_to_the_new_Miniboss_Drop_Tables._@_*New_Golden_Food_added,_found_primarily_in_the_new_Miniboss_Drop_Tables._@_*Stamps_now_display_their_LV!_Also,_little_arrows_were_added_to_help_show_which_stamps_need_what_to_update._Green_and_Black_mean_money,_Blue_and_Invisible_mean_materials!;*Le",
+                    "World_6_Tasks_v2.06;NEW_UPDATE_PATCH_NOTES_@_*Unlock_the_World_6_Taskboard_by_talking_to_Spirit_Sungmin_in_World_6_Town!_Find_them_in_the_top_left_corner,_next_to_the_crop_scientist!_@_*Complete_the_World_6_tasks_for_merits_to_spend_on_the_5_new_merit_upgrades!_@_*Complete_35_new_World_6_Achievements,_each_one_giving_a_reward!_@_*Unlock_the_4_backgrounds_of_the_Spirited_Valley_to_use_on_the_Main_Menu,_earned_by_completing_certain_Achievements._@_*The_3rd_Anniversary_Event_is_still_going,_collect_those_boxes_daily_for_free_rewards!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2644,7 +2644,8 @@ export const initRandoListRepo = () => {
                     "Tribal_Shaman",
                     "Legumulyte",
                     "Potti",
-                    "Sussy_Gene"
+                    "Sussy_Gene",
+                    "Spirit_Sungmin"
                 ]
             }),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),

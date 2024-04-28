@@ -26,6 +26,7 @@ import { Sigils } from "../../data/domain/sigils";
 import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
 import { TimeDown } from "../../components/base/TimeDisplay";
 import { AtomCollider } from "../../data/domain/atomCollider";
+import P2WDisplay from "../../components/world-2/alchemy/p2w";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -385,7 +386,7 @@ function Alchemy() {
             <Box>
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
                 <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                    {["Bubbles", "Vials", "Sigils"].map((tabName, index) => (
+                    {["Bubbles", "Vials", "Sigils", "P2W"].map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
@@ -393,6 +394,7 @@ function Alchemy() {
                 {activeTab == "Bubbles" && <BubblesDisplay />}
                 {activeTab == "Vials" && <VialsDisplay />}
                 {activeTab == "Sigils" && <SigilsDisplay />}
+                {activeTab == "P2W" && <P2WDisplay />}
             </Box>
         </Box>
     )

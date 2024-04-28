@@ -13870,6 +13870,70 @@ export const initNpcRepo = () => {
                     }
                 ]
             }),
+        new NpcBase("Spirit Sungmin", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Spirited Valley",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 1.03,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Norquist",
+                    "notes": " "
+                },
+                "quests": {
+                    "Mind, Body, Soul, Tasks": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "Before I bestow upon you my tasks I must ensure your preparedness... <br> QUEST:Kills some mobs and gather monster parts to show you're ready for the World 6 tasks!",
+                        "NextIndex": 4,
+                        "Name": "Mind, Body, Soul, Tasks",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "GemP30", "quantity": 2}, <ComponentModel>{"item": "Quest81", "quantity": 2}],
+                        "QuestName": "Spirit Sungmin1",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "ItemReq": [
+                            <ComponentModel>{"item": "SpiA1", "quantity": 2500},
+                            <ComponentModel>{"item": "SpiA2", "quantity": 1000},
+                            <ComponentModel>{"item": "SpiA3", "quantity": 500}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Traveler your arrival is a pleasure. Please consider yourself home.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I am sure you are familiar with my passion for tasks my bretheren abroad share the same ambitions.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "Before I bestow upon you my tasks I must ensure your preparedness... <br> QUEST:Kills some mobs and gather monster parts to show you're ready for the World 6 tasks!",
+                        "NextIndex": 4,
+                        "Name": "Mind, Body, Soul, Tasks"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Please clear your inventory.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You are ready complete my tasks at your own pace.",
+                        "NextIndex": 9999,
+                        "Name": ""
+                    }
+                ]
+            }),
         new NpcBase("Rift Ripper", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "The Untraveled Octopath",
