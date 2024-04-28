@@ -528,7 +528,7 @@ export const initAchievementRepo = () => {
                 "name": "Golden Fly",
                 "qty": 1,
                 "desc": "Pass through the small golden hoop in the Catching Minigame. It's worth 3 points!",
-                "rewards": "**5% Catching &Efficiency",
+                "rewards": "*5% Catching &Efficiency",
                 "world": "Yum-Yum Desert"
             }),
         new AchievementBase(75, <AchievementModel>{
@@ -1997,7 +1997,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(284, <AchievementModel>{
                 "name": "Smokin' Stars",
                 "qty": 1,
-                "desc": "Complete all constellations in the Smolderin' Plateau. You can check you progress within the Telescope.",
+                "desc": "Complete all constellations in the Smolderin' Plateau. You can check your progress within the Telescope.",
                 "rewards": "20% All Skill EXP",
                 "world": "Smolderin' Plateau"
             }),
@@ -2455,6 +2455,496 @@ export const initAchievementRepo = () => {
                 "desc": "-",
                 "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
                 "world": "Smolderin' Plateau"
+            }),
+        new AchievementBase(350, <AchievementModel>{
+                "name": "Valley Visitor",
+                "qty": 1,
+                "desc": "Reach World 6, the Spirited Valley! You'll love it here, all the spirits are very friendly!",
+                "rewards": "10% Money for all &characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(351, <AchievementModel>{
+                "name": "Scorin' the Ladies",
+                "qty": 1,
+                "desc": "Have a stack of exactly 250,000 Ladybugs in your Storage Chest.",
+                "rewards": "10% Catching &Efficiency",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(352, <AchievementModel>{
+                "name": "Effervess Enthusiess",
+                "qty": 1,
+                "desc": "Have a stack of exactly 5,000,000 Effervescent Logs in your Storage Chest.",
+                "rewards": "10% Choppin Efficiency",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(353, <AchievementModel>{
+                "name": "That's MY Crown",
+                "qty": 1,
+                "desc": "Have a stack of exactly 100,000,000 Royal Headpiece in your Storage Chest.",
+                "rewards": "*Dharma Mesa BG",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(354, <AchievementModel>{
+                "name": "Leet Lanterns",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Oh yea, that's a good number. Sure, it's no 69420, but it's vintage!",
+                "rewards": "4% Damage for all &characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(355, <AchievementModel>{
+                "name": "Lil' Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 32x on a single crop.",
+                "rewards": "*1.05x Crop Evo &chance",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(356, <AchievementModel>{
+                "name": "Major Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 1,024x on a single crop.",
+                "rewards": "15% Farming EXP",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(357, <AchievementModel>{
+                "name": "Unreal Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 8",
+                "rewards": "192x on a single crop.",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(358, <AchievementModel>{
+                "name": "Doctor Repellant",
+                "qty": 1,
+                "desc": "Have 10,000 or more Apple crops in your Depot at once. You can lock the first crop before it grows to guarantee an apple!",
+                "rewards": "*W6 Shop EZ Access",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(359, <AchievementModel>{
+                "name": "Cob Enjoyer",
+                "qty": 1,
+                "desc": "Have 1,000,000 or more Corn crops in your Depot at once. Mmmm, Corn!",
+                "rewards": "15% All Skill EXP",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(360, <AchievementModel>{
+                "name": "Science Undergrad",
+                "qty": 1,
+                "desc": "Find 30 unique crops, as shown by the Crop Scientist!",
+                "rewards": "10% Farm EXP",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(361, <AchievementModel>{
+                "name": "Science Graduate",
+                "qty": 1,
+                "desc": "Find 70 unique crops, as shown by the Crop Scientist!",
+                "rewards": "*Spirit Fields BG",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(362, <AchievementModel>{
+                "name": "Science Post Doc",
+                "qty": 1,
+                "desc": "Find 110 unique crops, as shown by the Crop Scientist!",
+                "rewards": "1% All Stat &for all characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(363, <AchievementModel>{
+                "name": "Crop Flooding",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ That's... That's enough... THAT'S ENOUGH WATER! THAT'S ENOUGH!",
+                "rewards": "5% Magic Beans &from Legumulyte",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(364, <AchievementModel>{
+                "name": "Legumulucky",
+                "qty": 1,
+                "desc": "Make a crop trade with the Legumulyte worth exactly 777 magic beans.",
+                "rewards": "2% Damage for all &characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(365, <AchievementModel>{
+                "name": "Big Time Land Owner",
+                "qty": 1,
+                "desc": "Get 27 plots of land in your farm.",
+                "rewards": "*1.15x Crop OG Chance",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(366, <AchievementModel>{
+                "name": "Ceramic Sneaking",
+                "qty": 1,
+                "desc": "Reach the Sneaking Floor with the Petrified Ceramist guest.",
+                "rewards": "*1.03x Jade Gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(367, <AchievementModel>{
+                "name": "Top Floor Sneaking",
+                "qty": 1,
+                "desc": "Reach what seems like the top Floor of Sneaking with the Eldar Kingulyte guest.",
+                "rewards": "*1.07x Jade Gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(368, <AchievementModel>{
+                "name": "Untying Extraordinaire",
+                "qty": 1,
+                "desc": "Untie 6 other Ninja Twins.",
+                "rewards": "*1.05x Stealth for &all Ninja Twins",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(369, <AchievementModel>{
+                "name": "Lucky Stealy",
+                "qty": 1,
+                "desc": "Successfully find 6 items in a row, in a single AFK claim within Sneaking.",
+                "rewards": "*1.05x Jade Gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(370, <AchievementModel>{
+                "name": "Yellow Belt",
+                "qty": 1,
+                "desc": "Find a 论50 Yellow Belt Sneaking Charm. Yes, exactly 论50.",
+                "rewards": "10% Sneaking EXP gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(371, <AchievementModel>{
+                "name": "Straw Hat Stacking",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ It's a shame you can't wear them all at once...",
+                "rewards": "*1.01x DMG Multiplier &for all characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(372, <AchievementModel>{
+                "name": "Best Bloomie",
+                "qty": 1,
+                "desc": "Get a Bloomy Summoning Familiar.",
+                "rewards": "*1.05x All Essence &Gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(373, <AchievementModel>{
+                "name": "Regalis My Beloved",
+                "qty": 1,
+                "desc": "Get a Regalis Summoning Familiar.",
+                "rewards": "*1.01x larger Winners &Bonuses from Summoning",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(374, <AchievementModel>{
+                "name": "This, is, Summoning!",
+                "qty": 1,
+                "desc": "Survive for 200 seconds in the Endless Summoning Mode, which isn't out yet.",
+                "rewards": "*1.05x All Essence &Gain",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(375, <AchievementModel>{
+                "name": "Summoning CM",
+                "qty": 1,
+                "desc": "Get 10 Career Wins within Summoning",
+                "rewards": "3% Damage for all &characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(376, <AchievementModel>{
+                "name": "Summoning IM",
+                "qty": 1,
+                "desc": "Get 25 Career Wins within Summoning",
+                "rewards": "20% Money for all &characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(377, <AchievementModel>{
+                "name": "Summoning GM",
+                "qty": 1,
+                "desc": "Get 58 Career Wins within Summoning",
+                "rewards": "6% Drop Chance &for all characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(378, <AchievementModel>{
+                "name": "Penta Defence",
+                "qty": 1,
+                "desc": "Reach Wave 50 in Breezy Battle without placing more than 5 Towers in total.",
+                "rewards": "*Lullaby Airways BG",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(379, <AchievementModel>{
+                "name": "Spectre Stars",
+                "qty": 1,
+                "desc": "Complete all constellations in the Spirited Valley. You can check your progress within the Telescope.",
+                "rewards": "*1.01x larger Winners &Bonuses from Summoning",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(380, <AchievementModel>{
+                "name": "Beanstacker Trainee",
+                "qty": 1,
+                "desc": "Add 5 different golden foods to The Beanstalk.",
+                "rewards": "2% All Golden Food &Bonuses",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(381, <AchievementModel>{
+                "name": "Big Big Hampter",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Hampter is worth it!",
+                "rewards": "4% Drop Chance &for all characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(382, <AchievementModel>{
+                "name": "Ghost Buster",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ You took out the baddest spirit of them all!",
+                "rewards": "*Bamboo Forest BG",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(383, <AchievementModel>{
+                "name": "Beanstacker Prodigy",
+                "qty": 1,
+                "desc": "Add 14 different golden foods to The Beanstalk.",
+                "rewards": "3% All Golden Food &Bonuses",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(384, <AchievementModel>{
+                "name": "W6 is Donezo",
+                "qty": 1,
+                "desc": "Get a Lava Skull or higher on every Spirited Valley monster in the Deathnote.",
+                "rewards": "*1.01x DMG Multiplier &for all characters",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(385, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(386, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(387, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(388, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(389, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(390, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(391, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(392, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(393, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(394, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(395, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(396, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(397, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(398, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(399, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(400, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(401, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(402, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(403, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(404, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(405, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(406, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(407, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(408, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(409, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(410, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(411, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(412, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(413, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(414, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(415, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(416, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(417, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(418, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
+            }),
+        new AchievementBase(419, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Spirited Valley"
             })    
 ]
 }

@@ -13348,6 +13348,77 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("GemP30", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Spirit Sungmin#Mind, Body, Soul, Tasks|Mind, Body, Soul, Tasks]]",
+                        "txtName": "Spirit Sungmin: Mind, Body, Soul, Tasks"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Visiting the Farmer's Market|Visiting the Farmer's Market]]",
+                        "txtName": "Lafu Shi: Visiting the Farmer's Market"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Climbing the Ninja Hotel|Climbing the Ninja Hotel]]",
+                        "txtName": "Lafu Shi: Climbing the Ninja Hotel"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Emporium Investing|Emporium Investing]]",
+                        "txtName": "Lafu Shi: Emporium Investing"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
+                        "txtName": "Lafu Shi: Essence Juicing"
+                    },
+                    <SourceModel>{"wikiName": "[[Hoov#Sneak Dropout|Sneak Dropout]]", "txtName": "Hoov: Sneak Dropout"},
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
+                        "txtName": "Hoov: Sneak Registration"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
+                        "txtName": "Woodlin Elder: Big Lock Picking"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest81", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Spirit Sungmin#Mind, Body, Soul, Tasks|Mind, Body, Soul, Tasks]]",
+                        "txtName": "Spirit Sungmin: Mind, Body, Soul, Tasks"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Seed Planting|Seed Planting]]",
+                        "txtName": "Lafu Shi: Seed Planting"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Visiting the Farmer's Market|Visiting the Farmer's Market]]",
+                        "txtName": "Lafu Shi: Visiting the Farmer's Market"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Climbing the Ninja Hotel|Climbing the Ninja Hotel]]",
+                        "txtName": "Lafu Shi: Climbing the Ninja Hotel"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Emporium Investing|Emporium Investing]]",
+                        "txtName": "Lafu Shi: Emporium Investing"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
+                        "txtName": "Lafu Shi: Essence Juicing"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
+                        "txtName": "Woodlin Elder: Big Lock Picking"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest70", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -13463,69 +13534,6 @@ export const initSourceRepo = () => {
                         "txtName": "Sussy Gene: Loiterin' Around"
                     },
                     <SourceModel>{"wikiName": "[[Arcade]]", "txtName": "Arcade"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest81", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Seed Planting|Seed Planting]]",
-                        "txtName": "Lafu Shi: Seed Planting"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Visiting the Farmer's Market|Visiting the Farmer's Market]]",
-                        "txtName": "Lafu Shi: Visiting the Farmer's Market"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Climbing the Ninja Hotel|Climbing the Ninja Hotel]]",
-                        "txtName": "Lafu Shi: Climbing the Ninja Hotel"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Emporium Investing|Emporium Investing]]",
-                        "txtName": "Lafu Shi: Emporium Investing"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
-                        "txtName": "Lafu Shi: Essence Juicing"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
-                        "txtName": "Woodlin Elder: Big Lock Picking"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GemP30", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Visiting the Farmer's Market|Visiting the Farmer's Market]]",
-                        "txtName": "Lafu Shi: Visiting the Farmer's Market"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Climbing the Ninja Hotel|Climbing the Ninja Hotel]]",
-                        "txtName": "Lafu Shi: Climbing the Ninja Hotel"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Emporium Investing|Emporium Investing]]",
-                        "txtName": "Lafu Shi: Emporium Investing"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Lafu Shi#Essence Juicing|Essence Juicing]]",
-                        "txtName": "Lafu Shi: Essence Juicing"
-                    },
-                    <SourceModel>{"wikiName": "[[Hoov#Sneak Dropout|Sneak Dropout]]", "txtName": "Hoov: Sneak Dropout"},
-                    <SourceModel>{
-                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
-                        "txtName": "Hoov: Sneak Registration"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Woodlin Elder#Big Lock Picking|Big Lock Picking]]",
-                        "txtName": "Woodlin Elder: Big Lock Picking"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
