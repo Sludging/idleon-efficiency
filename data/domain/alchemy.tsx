@@ -428,7 +428,7 @@ export class P2W {
     vialsRng: number = 0;
 
     getCauldronCost = (
-        type: "Speed" | "NewBubble" | "BoostReq", 
+        type: "Speed" | "NewBubble" | "BoostReq",
         level: number
     ): number => {
         switch (type) {
@@ -447,7 +447,7 @@ export class P2W {
     ) => {
         let max = 0;
         let currentLevel = 0;
-        switch(type) {
+        switch (type) {
             case "Speed": {
                 max = P2W_CAULDRON_SPEED_MAX;
                 currentLevel = this.cauldronLevels[cauldron].speed;
@@ -487,7 +487,7 @@ export class P2W {
         let max = 0;
         let currentLevel = 0;
 
-        switch(type) {
+        switch (type) {
             case "Regen": {
                 max = P2W_LIQUIDS_REGEN_MAX;
                 currentLevel = this.liquidLevels[liquid].regen;
@@ -498,7 +498,7 @@ export class P2W {
                 currentLevel = this.liquidLevels[liquid].capacity;
                 break;
             }
-        } 
+        }
 
         if (max == currentLevel) {
             return 0;
@@ -510,9 +510,9 @@ export class P2W {
     getVialsCost = (type: "Attempts" | "RNG", level: number): number => {
         switch (type) {
             case "Attempts":
-                return Math.round(1e4 * Math.pow(2,level))
+                return Math.round(1e4 * Math.pow(2, level))
             case "RNG":
-                return Math.round(5e3 * Math.pow(1.25,level))
+                return Math.round(5e3 * Math.pow(1.25, level))
         }
     }
 
@@ -775,53 +775,59 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         bubble.rawRequirements.forEach(req => {
             switch (true) {
-                case isLiquidComponent(req): {
-                    const itemName = `Liquid${req.liquidNo}`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isComponent(req): {
-                    const itemName = req.item;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isSpiceComponent(req): {
-                    const itemName = `CookingSpice${req.spiceNo}`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isCropComponent(req): {
-                    const itemName = `FarmCrop${req.cropId}`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isSummonComponent(req): {
-                    const itemName = `W6item${parseInt(req.summonId) + 6}_x1`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isSailingTreasureComponent(req): {
-                    const itemName = `SailTr${req.sailTreasureNo}`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = req.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
                 // Jade upgrades only have quantity field which isn't distinct so can't use a type guard, hardcoded for now
                 case (["Quickdraw Quiver", "Essence Chapter"].includes(bubble.name)): {
                     const itemName = `W6item0_x1`;
                     const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
                     reqItem.count = (req as JadeComponentModel).quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isComponent(req): {
+                    const comp = req as ComponentModel;
+                    const itemName = comp.item;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = comp.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isLiquidComponent(req): {
+                    const liquid = req as LiquidComponentModel;
+                    const itemName = `Liquid${liquid.liquidNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = liquid.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSpiceComponent(req): {
+                    const spice = req as SpiceComponentModel;
+                    const itemName = `CookingSpice${spice.spiceNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = spice.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isCropComponent(req): {
+                    const crop = req as CropComponentModel;
+                    const itemName = `FarmCrop${crop.cropId}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = crop.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSummonComponent(req): {
+                    const summon = req as SummonComponentModel;
+                    const itemName = `W6item${parseInt(summon.summonId) + 6}_x1`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = summon.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSailingTreasureComponent(req): {
+                    const treasure = req as SailTreasureComponentModel;
+                    const itemName = `SailTr${treasure.sailTreasureNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = treasure.quantity;
                     bubble.requirements.push(reqItem);
                     return;
                 }
@@ -832,16 +838,18 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.vials.forEach(vial => {
         vial.rawRequirements.forEach(req => {
             if (isLiquidComponent(req)) {
-                const itemName = `Liquid${req.liquidNo}`;
+                const liquid = req as LiquidComponentModel;
+                const itemName = `Liquid${liquid.liquidNo}`;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
+                reqItem.count = liquid.quantity;
                 vial.requirements.push(reqItem);
             }
 
             if (isComponent(req)) {
-                const itemName = req.item;
+                const comp = req as ComponentModel;
+                const itemName = comp.item;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
+                reqItem.count = comp.quantity;
                 vial.requirements.push(reqItem);
             }
         })
