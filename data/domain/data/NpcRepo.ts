@@ -255,9 +255,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.98,
+                    "birthWeight": 8.16,
                     "starSign": "Cancer",
-                    "mothersMaidenName": "Ventotla",
+                    "mothersMaidenName": "Ferry",
                     "notes": " "
                 },
                 "quests": {},
@@ -276,9 +276,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.87,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Weiss",
+                    "birthWeight": 9.45,
+                    "starSign": "Capricorn",
+                    "mothersMaidenName": "Soloman",
                     "notes": " "
                 },
                 "quests": {},
@@ -650,7 +650,7 @@ export const initNpcRepo = () => {
                     "birthWeight": 9.32,
                     "starSign": "eo",
                     "mothersMaidenName": "Thompson",
-                    "notes": "'''Requires Lv. 5 [[Choppin]] for the NPC to appear'''. The [[Woodsman]] is found in [[Worlds#G2 - Spore Meadows|Spore Meadows]], the first zone to the right of the starting town, located next to an oak tree with a stump next to him.$$NEWLINE$$$$NEWLINE$$His quests focus on improving the player's capabilities in the [[File:Choppin Skill Icon.png]] [[Choppin]] Skill. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Woodsman Token}}."
+                    "notes": "'''Requires Lv. 5 [[Choppin]] on your first character for the NPC to appear.'''. The [[Woodsman]] is found in [[Worlds#G2 - Spore Meadows|Spore Meadows]], the first zone to the right of the starting town, located next to an oak tree with a stump next to him.$$NEWLINE$$$$NEWLINE$$His quests focus on improving the player's capabilities in the [[File:Choppin Skill Icon.png]] [[Choppin]] Skill. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Woodsman Token}}."
                 },
                 "quests": {
                     "A noob's first swing": <ItemQuestModel>{
@@ -1040,7 +1040,7 @@ export const initNpcRepo = () => {
                     },
                     "Can't somebody else do it?": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 5 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
+                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 8 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
                         "NextIndex": 54,
                         "Name": "Can't somebody else do it?",
                         "ConsumeItems": false,
@@ -1376,7 +1376,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 5 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
+                        "DialogueText": "No real gamer does everything themself! <br> QUEST:Reach Lv 8 then create a 2nd character! They gather resources WHILE you play on your 1st character!!",
                         "NextIndex": 54,
                         "Name": "Can't somebody else do it?"
                     },
@@ -1988,11 +1988,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 34,
-                        "Rewards": [
-                            <ComponentModel>{"item": "FoodG2", "quantity": 10},
-                            <ComponentModel>{"item": "FoodG1", "quantity": 20},
-                            <ComponentModel>{"item": "PremiumGem", "quantity": 2}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "FoodG2", "quantity": 10}, <ComponentModel>{"item": "FoodG1", "quantity": 20}],
                         "QuestName": "Picnic Stowaway8",
                         "Difficulty": 5,
                         "note": <NoteModel>{"note": " "},
@@ -2042,11 +2038,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 45,
-                        "Rewards": [
-                            <ComponentModel>{"item": "Quest9", "quantity": 1},
-                            <ComponentModel>{"item": "FoodG3", "quantity": 10},
-                            <ComponentModel>{"item": "PremiumGem", "quantity": 3}
-                        ],
+                        "Rewards": [<ComponentModel>{"item": "Quest9", "quantity": 1}, <ComponentModel>{"item": "FoodG3", "quantity": 10}],
                         "QuestName": "Picnic Stowaway11",
                         "Difficulty": 6,
                         "note": <NoteModel>{"note": ""},
@@ -8357,9 +8349,58 @@ export const initNpcRepo = () => {
                         "CustomType": "Centurion5",
                         "CustomArray": [
                             <CustomReqModel>{"desc": "1st Colosseum:", "finalV": 180, "type": "GreaterEqual", "startV": 0},
-                            <CustomReqModel>{"desc": "2nd Colosseum:", "finalV": 170, "type": "GreaterEqual", "startV": 0},
-                            <CustomReqModel>{"desc": "3rd Colosseum:", "finalV": 160, "type": "GreaterEqual", "startV": 0}
+                            <CustomReqModel>{"desc": "2nd Colosseum:", "finalV": 180, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "3rd Colosseum:", "finalV": 180, "type": "GreaterEqual", "startV": 0}
                         ]
+                    },
+                    "Centurio Rank": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Centurio is granted to those who enter the Colosseum of the stars and exit victorious. <br> QUEST:Complete the Astro Colosseum within World 4",
+                        "NextIndex": 27,
+                        "Name": "Centurio Rank",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 26,
+                        "Rewards": [<ComponentModel>{"item": "Timecandy4", "quantity": 1}, <ComponentModel>{"item": "Pearl5", "quantity": 5}],
+                        "QuestName": "Centurion6",
+                        "Difficulty": 6,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Centurion6",
+                        "CustomArray": [<CustomReqModel>{"desc": "Win W4 Colosseum:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Legatus Rank": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Legatus is granted to anyone powerful enough to best the magma mobs of the Smoldering Plateau colosseum and live. <br> QUEST:Complete the Molten Colosseum within World 5",
+                        "NextIndex": 30,
+                        "Name": "Legatus Rank",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 3,
+                        "NoSpaceIndex": 29,
+                        "Rewards": [
+                            <ComponentModel>{"item": "Timecandy5", "quantity": 1},
+                            <ComponentModel>{"item": "Pearl5", "quantity": 6},
+                            <ComponentModel>{"item": "Pearl6", "quantity": 8}
+                        ],
+                        "QuestName": "Centurion7",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Centurion7",
+                        "CustomArray": [<CustomReqModel>{"desc": "Win W5 Colosseum:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Glorious Gladiator": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Glorious Gladiator belongs only to those brave enough to challenge every colosseum and strong enough to conquer them all. QUEST:Complete the Whimsical Colosseum within World 6",
+                        "NextIndex": 33,
+                        "Name": "Glorious Gladiator",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 32,
+                        "Rewards": [<ComponentModel>{"item": "Trophy22", "quantity": 1}],
+                        "QuestName": "Centurion8",
+                        "Difficulty": 9,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Centurion8",
+                        "CustomArray": [<CustomReqModel>{"desc": "Win W6 Colosseum:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
                     }
                 },
                 "dialogue": [
@@ -8503,7 +8544,67 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "So you think you can do it? Well you'll have to come back in a future update to find out.",
+                        "DialogueText": "Well well well the Optio rank has returned from their unrelated adventures.",
+                        "NextIndex": 24,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Only three ranks separate you from Ordinary Optio and Glorious Gladiator.",
+                        "NextIndex": 25,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Centurio is granted to those who enter the Colosseum of the stars and exit victorious. <br> QUEST:Complete the Astro Colosseum within World 4",
+                        "NextIndex": 27,
+                        "Name": "Centurio Rank"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Please clear some space all promotions come with rewards!",
+                        "NextIndex": 25,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well done you may call yourself Centurio amongst the other combatants...",
+                        "NextIndex": 28,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Legatus is granted to anyone powerful enough to best the magma mobs of the Smoldering Plateau colosseum and live. <br> QUEST:Complete the Molten Colosseum within World 5",
+                        "NextIndex": 30,
+                        "Name": "Legatus Rank"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Please clear some space all promotions come with rewards!",
+                        "NextIndex": 28,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well done you may call yourself Legatus amongst the other combatants...",
+                        "NextIndex": 31,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "The rank of Glorious Gladiator belongs only to those brave enough to challenge every colosseum and strong enough to conquer them all. QUEST:Complete the Whimsical Colosseum within World 6",
+                        "NextIndex": 33,
+                        "Name": "Glorious Gladiator"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Please clear some space all promotions come with rewards!",
+                        "NextIndex": 31,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "I am in awe of your accomplishment he who has achieved the rank of Glorious Gladiator! You are amongst the most legendary combatants to ever grace the colosseums.",
                         "NextIndex": -1,
                         "Name": ""
                     }
@@ -12435,96 +12536,6 @@ export const initNpcRepo = () => {
                     }
                 ]
             }),
-        new NpcBase("Blobbo", <NpcModel>{
-                "head": <NpcHeadModel>{
-                    "location": "Cocoa Tunnel",
-                    "world": "Hyperion Nebula",
-                    "noQuest": 2,
-                    "type": "",
-                    "birthWeight": 2.28,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Resnick",
-                    "notes": ""
-                },
-                "quests": {
-                    "A Honker Took mah Baby!": <ItemQuestModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Blububblblbluubl! <br> QUEST:My Blobinese is a bit rusty but I think she's saying her children went running after some Honker Critters and have been missing ever since. Maybe get some honkers and they'll come back?",
-                        "NextIndex": 3,
-                        "Name": "A Honker Took mah Baby!",
-                        "ConsumeItems": true,
-                        "InventorySpacesNeeded": 1,
-                        "NoSpaceIndex": 2,
-                        "Rewards": [<ComponentModel>{"item": "Ladle", "quantity": 48}, <ComponentModel>{"item": "PetEgg", "quantity": 10}],
-                        "QuestName": "Blobbo1",
-                        "Difficulty": 4,
-                        "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "Critter9", "quantity": 10000}]
-                    },
-                    "Glitter Critter": <ItemQuestModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "BLU! BLU! Blubulelblbublbublble!! <br> QUEST:Ah I see she actually said her children love shiny things and chased after some shiny critters. Bring as many shiny critters as you can I'm sure they'll come flopping back!",
-                        "NextIndex": 6,
-                        "Name": "Glitter Critter",
-                        "ConsumeItems": true,
-                        "InventorySpacesNeeded": 1,
-                        "NoSpaceIndex": 5,
-                        "Rewards": [<ComponentModel>{"item": "Ladle", "quantity": 48}, <ComponentModel>{"item": "PetEgg", "quantity": 15}],
-                        "QuestName": "Blobbo2",
-                        "Difficulty": 5,
-                        "note": <NoteModel>{"note": ""},
-                        "ItemReq": [
-                            <ComponentModel>{"item": "Critter8A", "quantity": 30},
-                            <ComponentModel>{"item": "Critter6A", "quantity": 60},
-                            <ComponentModel>{"item": "Critter3A", "quantity": 200}
-                        ]
-                    }
-                },
-                "dialogue": [
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Blublbublbub.... BLUBLBUBLB!",
-                        "NextIndex": 1,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Blububblblbluubl! <br> QUEST:My Blobinese is a bit rusty but I think she's saying her children went running after some Honker Critters and have been missing ever since. Maybe get some honkers and they'll come back?",
-                        "NextIndex": 3,
-                        "Name": "A Honker Took mah Baby!"
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "BLULL BLUBINBLUBBERY!",
-                        "NextIndex": 1,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Blububublbulbublobbblb...!!!",
-                        "NextIndex": 4,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "BLU! BLU! Blubulelblbublbublble!! <br> QUEST:Ah I see she actually said her children love shiny things and chased after some shiny critters. Bring as many shiny critters as you can I'm sure they'll come flopping back!",
-                        "NextIndex": 6,
-                        "Name": "Glitter Critter"
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "BLULL BLUBINBLUBBERY!",
-                        "NextIndex": 4,
-                        "Name": ""
-                    },
-                    <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Blunb Blu ###",
-                        "NextIndex": -1,
-                        "Name": ""
-                    }
-                ]
-            }),
         new NpcBase("Capital P", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Jelly Cube Bridge",
@@ -13016,6 +13027,96 @@ export const initNpcRepo = () => {
                     }
                 ]
             }),
+        new NpcBase("Blobbo", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Cocoa Tunnel",
+                    "world": "Hyperion Nebula",
+                    "noQuest": 2,
+                    "type": "",
+                    "birthWeight": 2.28,
+                    "starSign": "Pisces",
+                    "mothersMaidenName": "Resnick",
+                    "notes": ""
+                },
+                "quests": {
+                    "A Honker Took mah Baby!": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "Blububblblbluubl! <br> QUEST:My Blobinese is a bit rusty but I think she's saying her children went running after some Honker Critters and have been missing ever since. Maybe get some honkers and they'll come back?",
+                        "NextIndex": 3,
+                        "Name": "A Honker Took mah Baby!",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 2,
+                        "Rewards": [<ComponentModel>{"item": "Ladle", "quantity": 48}, <ComponentModel>{"item": "PetEgg", "quantity": 10}],
+                        "QuestName": "Blobbo1",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": ""},
+                        "ItemReq": [<ComponentModel>{"item": "Critter9", "quantity": 10000}]
+                    },
+                    "Glitter Critter": <ItemQuestModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "BLU! BLU! Blubulelblbublbublble!! <br> QUEST:Ah I see she actually said her children love shiny things and chased after some shiny critters. Bring as many shiny critters as you can I'm sure they'll come flopping back!",
+                        "NextIndex": 6,
+                        "Name": "Glitter Critter",
+                        "ConsumeItems": true,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 5,
+                        "Rewards": [<ComponentModel>{"item": "Ladle", "quantity": 48}, <ComponentModel>{"item": "PetEgg", "quantity": 15}],
+                        "QuestName": "Blobbo2",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": ""},
+                        "ItemReq": [
+                            <ComponentModel>{"item": "Critter8A", "quantity": 30},
+                            <ComponentModel>{"item": "Critter6A", "quantity": 60},
+                            <ComponentModel>{"item": "Critter3A", "quantity": 200}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Blublbublbub.... BLUBLBUBLB!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "Blububblblbluubl! <br> QUEST:My Blobinese is a bit rusty but I think she's saying her children went running after some Honker Critters and have been missing ever since. Maybe get some honkers and they'll come back?",
+                        "NextIndex": 3,
+                        "Name": "A Honker Took mah Baby!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BLULL BLUBINBLUBBERY!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Blububublbulbublobbblb...!!!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
+                        "DialogueText": "BLU! BLU! Blubulelblbublbublble!! <br> QUEST:Ah I see she actually said her children love shiny things and chased after some shiny critters. Bring as many shiny critters as you can I'm sure they'll come flopping back!",
+                        "NextIndex": 6,
+                        "Name": "Glitter Critter"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BLULL BLUBINBLUBBERY!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Blunb Blu ###",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
         new NpcBase("Nebula Neddy", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Outer World Town",
@@ -13079,7 +13180,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "This is.... acceptable. You may proceed to the Task TV behind me.",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13172,7 +13273,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bruh what even ARE you...? Ain't never saw that class you got there is that even legit?",
-                        "NextIndex": 6,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13353,7 +13454,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I hate this. I wish things could just fix themself naturally and come to a conclusion but I guess things are never gonna change ^",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13529,7 +13630,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well done laddy! I take my cap off to ye that was some fine sailin' ye must have done!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13662,7 +13763,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ah now I understand you perfectly... yes it is wonderful weather we're having.",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13801,7 +13902,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13865,7 +13966,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -13876,10 +13977,10 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.03,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Norquist",
-                    "notes": " "
+                    "birthWeight": 1.01,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Sawyer",
+                    "notes": ""
                 },
                 "quests": {
                     "Mind, Body, Soul, Tasks": <ItemQuestModel>{
@@ -13929,7 +14030,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You are ready complete my tasks at your own pace.",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14015,7 +14116,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can access the rift from the World Map... <br> <br> I wonder when those Null Nightmares are gonna join me for brunch they're 5 decades late! Eh any year now I'm sure they'll show up...",
-                        "NextIndex": 7,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14189,7 +14290,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "ONE OF US! ONE OF US!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14245,7 +14346,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Spring spring spring!! Yippie!! Nice nametag its so poggers!",
-                        "NextIndex": 4,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14390,7 +14491,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You absolute legend! You made this tired mole very happy I really never thought I'd see the day that someone stood up to the boss!",
-                        "NextIndex": 10,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14526,7 +14627,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Magnificent... and to think that my brilliance that irradiates from the surface of my being was ever called into question bluhahugue!",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -14923,7 +15024,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're definitely royal. I don't know where you were born but that was a royal quantity of effort no doubt. I mean I could totally see MYSELF putting in that amount of effort! I-i-if I ever needed to of course!",
-                        "NextIndex": 34,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15171,7 +15272,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can tell you have cultivated a respect for our way of life out here in the Spirited Valley. Go now venture off to wherever your spirit yearns for.",
-                        "NextIndex": 19,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15348,7 +15449,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You better lose the toast not the ice cream the frosting the cherry you better eat it 'till it's gone...? Nah that ain't it either how About...",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15540,7 +15641,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "'The Elder nods his head slowly in acknowledgement of your counting abilities'",
-                        "NextIndex": 16,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15579,7 +15680,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Of course you do! Well that's to bad. Knowing how to interact with them makes me feel special and telling you would diminish that feeling. <br> Come back later to learn the ways of the Summoning Stones",
-                        "NextIndex": 3,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15728,7 +15829,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can't believe you did all that! I'll need to think of more things for later!",
-                        "NextIndex": 11,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15755,7 +15856,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Pls giv crop transfer ticket. I give magic beans you become better farmer grow more crop... give me more next time yeees...",
-                        "NextIndex": 1,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -15799,9 +15900,9 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 5.47,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Orwig",
+                    "birthWeight": 6.86,
+                    "starSign": "Taurus",
+                    "mothersMaidenName": "Weinstein",
                     "notes": " "
                 },
                 "quests": {},

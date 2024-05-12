@@ -1661,7 +1661,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(236, <AchievementModel>{
                 "name": "Hibernating Gamer",
                 "qty": 1,
-                "desc": "Glaim 110,000 hours of AFK time. Jeez, thats like an entire year of all characters idling to the max.",
+                "desc": "Glaim 111,000 hours of AFK time. Jeez, thats like an entire year of all characters idling to the max.",
                 "rewards": "*STEAM EXCLUSIVE &*100 gems &*1 '72hr time candy'",
                 "world": "Hyperion Nebula"
             }),

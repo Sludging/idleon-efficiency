@@ -6141,7 +6141,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA5", <EnemyDetailsModel>{
-                "Name": "NYI Bronze Chest",
+                "Name": "Molten Bronze Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6162,7 +6162,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB5", <EnemyDetailsModel>{
-                "Name": "NYI Silver Chest",
+                "Name": "Molten Silver Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6183,7 +6183,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC5", <EnemyDetailsModel>{
-                "Name": "NYI Golden Chest",
+                "Name": "Molten Golden Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6204,7 +6204,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestD5", <EnemyDetailsModel>{
-                "Name": "NYI Legendary Chest",
+                "Name": "Molten Legendary Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6225,7 +6225,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA6", <EnemyDetailsModel>{
-                "Name": "NYI Bronze Chest",
+                "Name": "Whimsical Bronze Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6246,7 +6246,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB6", <EnemyDetailsModel>{
-                "Name": "NYI Silver Chest",
+                "Name": "Whimsical Silver Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6267,7 +6267,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC6", <EnemyDetailsModel>{
-                "Name": "NYI Golden Chest",
+                "Name": "Whimsical Golden Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6288,7 +6288,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestD6", <EnemyDetailsModel>{
-                "Name": "NYI Legendary Chest",
+                "Name": "Whimsical Legendary Chest",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,

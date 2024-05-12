@@ -1090,8 +1090,8 @@ export const initTaskDescriptionRepo = () => {
                 ]
             }),
         new TaskDescriptionBase(57, <TaskDescriptionModel>{
-                "name": "I'll Get to Fighting Later",
-                "description": "Mine some Plat Ore in the Colosseum",
+                "name": "Take a Breather",
+                "description": "No Daily Task today, have a rest day!",
                 "extraStr": "Blank420q",
                 "number1": 5,
                 "descLine2": "0",
