@@ -10,13 +10,14 @@ import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { AppContext } from '../../data/appContext';
-import { ConstructionMastery, Rift, SkillMastery } from '../../data/domain/rift';
+import { ConstructionMastery, KillroyPrime, Rift, RiftBonus, SkillMastery } from '../../data/domain/rift';
 import { SkillsIndex } from '../../data/domain/SkillsIndex';
 import { Skilling } from '../../data/domain/skilling';
 import { ImageData } from '../../data/domain/imageData';
 import { Player } from '../../data/domain/player';
-import TipDisplay from '../../components/base/TipDisplay';
+import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { Construction } from '../../data/domain/construction';
+import { nFormatter } from '../../data/utility';
 
 
 function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string, text: string, icon?: ImageData, textSize?: string }) {
@@ -46,8 +47,8 @@ function ConstructMasteryDisplay() {
     const construction = theData.get("construction") as Construction;
 
     const leastBuildRate = construction.buildings.slice()
-    .filter(building => building.level != building.maxLvl) // ignore max level
-    .sort((building1, building2) => building1.getBuildCost() > building2.getBuildCost() ? 1 : -1) // sort by build cost
+        .filter(building => building.level != building.maxLvl) // ignore max level
+        .sort((building1, building2) => building1.getBuildCost() > building2.getBuildCost() ? 1 : -1) // sort by build cost
     [0];
 
     const nextMilestone = skillMilestones.find(milestone => milestone > constMastery.buildingLevels);
@@ -156,6 +157,17 @@ function SkillMasteryDisplay() {
     </Box >)
 }
 
+const isKillroyPrime = (x: RiftBonus): x is KillroyPrime => "KRBest" in x;
+
+const KillroyPrimeTooltip = ({ bonus }: { bonus: KillroyPrime }) => {
+    return (
+        <Box direction="row" gap="medium">
+            <TextAndLabel label='Total Kills' text={nFormatter(bonus.totalKills)}/>
+            <TextAndLabel label='Bonus' text={bonus.getBonusText()} />
+        </Box>
+    )
+}
+
 function RiftBonusDisplay() {
     const appContext = useContext(AppContext);
 
@@ -175,24 +187,29 @@ function RiftBonusDisplay() {
             {
                 rift.bonuses.map((bonus, index) => (
                     <ShadowBox width={{ min: '300px', max: '300px' }} style={{ opacity: bonus.active ? 1 : 0.5 }} key={index} background="dark-1" margin={{ bottom: 'medium', right: 'small' }} pad="small">
-                        <Box direction="row" gap="small" align="center" justify="between">
-                            <Box direction="row" gap="small" align="center">
-                                <IconImage data={bonus.getImageData()} scale={0.7} />
-                                <Text>{bonus.name}</Text>
+                        <TipDisplay
+                            heading={isKillroyPrime(bonus) ? 'Killroy Prime' : ''}
+                            visibility={isKillroyPrime(bonus) ? '' : 'none'}
+                            body={isKillroyPrime(bonus) ? <KillroyPrimeTooltip bonus={bonus} /> : undefined}
+                        >
+                            <Box direction="row" gap="small" align="center" justify="between">
+                                <Box direction="row" gap="small" align="center">
+                                    <IconImage data={bonus.getImageData()} scale={0.7} />
+                                    <Text>{bonus.name}</Text>
+                                </Box>
+                                {
+                                    !bonus.active && <Text size="xsmall">{`Unlock at ${bonus.unlockAt}`}</Text>
+                                }
                             </Box>
-                            {
-                                !bonus.active && <Text size="xsmall">{`Unlock at ${bonus.unlockAt}`}</Text>
-                            }
-                        </Box>
-
-                        <Box margin={{ top: 'xsmall' }}>
-                            <TextAndLabel textSize='xsmall' label="Bonus" text={bonus.description} />
-                        </Box>
+                            <Box margin={{ top: 'xsmall' }}>
+                                <TextAndLabel textSize='xsmall' label="Bonus" text={bonus.getDescription()} />
+                            </Box>
+                        </TipDisplay>
                     </ShadowBox>
                 ))
             }
         </Box>
-    </Box>)
+    </Box >)
 }
 
 

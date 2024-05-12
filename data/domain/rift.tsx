@@ -43,6 +43,10 @@ export class RiftBonus {
         return 0;
     }
 
+    getDescription = () => {
+        return this.description;
+    }
+
     getImageData = (): ImageData => {
         return {
             location: `RiftBonus${this.index}`,
@@ -236,6 +240,50 @@ export class ConstructionMastery extends RiftBonus {
     }
 }
 
+export class KillroyPrime extends RiftBonus {
+    totalKills: number = 0;
+    KRBest: Record<string, number> = {}
+
+    override getBonus = () => {
+        return Math.floor(Math.pow(this.totalKills, 0.4));
+    }
+
+    getBonusText = () => {
+        return `1.${this.getBonus()}x`
+    }
+}
+
+export class SneakMastery extends RiftBonus {
+    masteryBonuses = [
+        "Gemstone Ninja Knowledge & +30% DROP RARITY",
+        "New Gold Charms added & +10% ALL STAT",
+        "Bargain Ninja Knowledge & +5 All Talent LV",
+        "+30 Max LV for Sneaking Items & 1.10x DMG MULTI",
+        "Haha yea there's no bonus here yet",
+        // Mo idea why we there are more then 5 but .. guess for now I'll ignore it.
+        // "Haha yea there's no bonus here yet.",
+        // "Haha yea there's no bonus here yet.",
+        // "Haha yea there's no bonus here yet.",
+    ]
+    currentMastery: number = 0;
+    highestMastery: number = 0;
+
+    getBonusByIndex = (bonusIndex: number) => {
+        if (!this.active) {
+            return 0;
+        }
+
+        // Can be less duplicated/smarter but I prefer it readable.
+        switch (true) {
+            case bonusIndex == 0: return this.currentMastery >= 1 ? 30 : 0; // Drop Rate
+            case bonusIndex == 1: return this.currentMastery >= 2 ? 10 : 0; // All stat %
+            case bonusIndex == 2: return this.currentMastery >= 3 ? 5 : 0; // All Talent Levels
+            case bonusIndex == 3: return this.currentMastery >= 4 ? 10 : 0; // DMG Multi
+            case bonusIndex == 4: return this.currentMastery >= 5 ? 0 : 0; // Nothing
+            default: return 0;
+        }
+    }
+}
 
 export class Rift extends Domain {
     level: number = 0;
@@ -247,6 +295,7 @@ export class Rift extends Domain {
         return [
             { key: "Rift", perPlayer: false, default: [] },
             { key: "Tower", perPlayer: false, default: [] },
+            { key: "KRbest", perPlayer: false, default: [] },
             { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
@@ -262,6 +311,8 @@ export class Rift extends Domain {
         this.bonuses.push(new RiftBonus(6, "Vial Mastery", 36, "Each Gold Crown Vial you have, which is the 13th and final vial you upgrade to for 1 Billion Resource, now gives you a 1.02x boost to ALL Vial Bonuses!"))
         this.bonuses.push(new ConstructionMastery(7, "Construct Mastery", 41, "Lava didn't bother with a description for this one. Get bonuses based on total level of your buildings in construction."))
         this.bonuses.push(new RiftBonus(8, "Ruby Cards", 46, "You can now level up your cards to Lv 6. Yea, you'd think it would be Lv 5 but remember, 0 stars is actually Lv 1. So yea, Ruby Cards are 5 star cards, which means they are technically lv 6!"))
+        this.bonuses.push(new KillroyPrime(9, "Killroy Prime", 51, "The most kills you have on each monster type in Killroy's Slaughterhouse is added up, resulting in your TOTAL KILLS score. The higher this is, the higher your Damage Multiplier bonus is, which applies to all characters all the time!"))
+        this.bonuses.push(new SneakMastery(10, "Sneak Mastery", 56, "Once you reach the top floor of the Ninja Castle, you can restart from the bottom on a higher difficulty for increased Jade and Sneaking EXP gain, as well as a new Mastery Bonus tier! You can change which Mastery Difficulty you're on whenever you want with no penalty, don't worry."))
 
         return this;
     }
@@ -278,14 +329,18 @@ export class Rift extends Domain {
         const riftData = data.get("Rift") as number[];
         const playerSkillLevels = range(0, charCount).map((_, i) => { return data.get(`Lv0_${i}`) }) as number[][];
         const towerData = data.get("Tower") as number[];
+        const killroyData = data.get("KRbest") as Record<string, number>;
+        const optionList = data.get("OptLacc") as number[];
 
         rift.level = riftData[0];
         rift.taskProgress = riftData[1];
 
+        // General
         rift.bonuses.forEach(bonus => {
             bonus.active = rift.level >= (bonus.unlockAt - 1);
         })
 
+        // Skill mastery
         const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
         playerSkillLevels.forEach(playerSkills => {
@@ -297,8 +352,26 @@ export class Rift extends Domain {
             })
         });
 
+        // Construction Mastery
         const allBuildings = initBuildingRepo();
         const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
         constMastery.buildingLevels = towerData.slice(0, allBuildings.length).reduce((sum, building) => sum += building, 0);
+
+        // Killroy Prime
+        if (killroyData) {
+            const killroyPrime = rift.bonuses.find(bonus => bonus.name == "Killroy Prime") as KillroyPrime;
+            killroyPrime.KRBest = killroyData;
+            killroyPrime.totalKills = Object.values(killroyData).reduce((sum, killCount) => sum += killCount, 0);
+        }
+
+        // Sneak Mastery
+        const sneakMastery = rift.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
+        sneakMastery.currentMastery = optionList[231];
+        sneakMastery.highestMastery = optionList[232];
     }
 }
+
+// Need this in sneaking
+//   "{}%_Stealth_@_for_all_Ninjas {}%_Jade_@_Gain {}%_Damage_@_to_Doors +}%_Gold_@_Charm_Bonus {}%_Sneak_@_EXP_Gain {}%_Bonuses_@_from_Gemstones Hi Hi".split(
+//     " "
+// NjGem0 - new mastery gem images
