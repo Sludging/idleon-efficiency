@@ -190,6 +190,7 @@ function RiftBonusDisplay() {
                         <TipDisplay
                             heading={isKillroyPrime(bonus) ? 'Killroy Prime' : ''}
                             visibility={isKillroyPrime(bonus) ? '' : 'none'}
+                            direction={TipDirection.Up}
                             body={isKillroyPrime(bonus) ? <KillroyPrimeTooltip bonus={bonus} /> : undefined}
                         >
                             <Box direction="row" gap="small" align="center" justify="between">
