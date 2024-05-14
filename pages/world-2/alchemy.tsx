@@ -139,7 +139,6 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
             <Box>
                 {
                     cauldron.bubbles
-                    .filter(bubble => bubble.bubbleIndex > 24 ? bubble.level > 0 : true)
                     .map((bubble, index) => {
                         return (
                             <Box key={`cauldron_${index}_${bubble.name}`}>
