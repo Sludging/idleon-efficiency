@@ -365,9 +365,11 @@ export class Rift extends Domain {
         }
 
         // Sneak Mastery
-        const sneakMastery = rift.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
-        sneakMastery.currentMastery = optionList[231];
-        sneakMastery.highestMastery = optionList[232];
+        if (optionList.length > 232) {
+            const sneakMastery = rift.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
+            sneakMastery.currentMastery = optionList[231];
+            sneakMastery.highestMastery = optionList[232];
+        }
     }
 }
 
