@@ -775,6 +775,14 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         bubble.rawRequirements.forEach(req => {
             switch (true) {
+                case isLiquidComponent(req): {
+                    const liquid = req as LiquidComponentModel;
+                    const itemName = `Liquid${liquid.liquidNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = liquid.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
                 // Jade upgrades only have quantity field which isn't distinct so can't use a type guard, hardcoded for now
                 case (["Quickdraw Quiver", "Essence Chapter"].includes(bubble.name)): {
                     const itemName = `W6item0_x1`;
@@ -788,14 +796,6 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
                     const itemName = comp.item;
                     const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
                     reqItem.count = comp.quantity;
-                    bubble.requirements.push(reqItem);
-                    return;
-                }
-                case isLiquidComponent(req): {
-                    const liquid = req as LiquidComponentModel;
-                    const itemName = `Liquid${liquid.liquidNo}`;
-                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                    reqItem.count = liquid.quantity;
                     bubble.requirements.push(reqItem);
                     return;
                 }

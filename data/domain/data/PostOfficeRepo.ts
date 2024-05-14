@@ -250,7 +250,7 @@ export const initPostOfficeRepo = () => {
                     <PartModel>{"item": "FoodG7", "base": 1, "increment": 0},
                     <PartModel>{"item": "Ladle", "base": 3, "increment": 0},
                     <PartModel>{"item": "ExpBalloon2", "base": 1, "increment": 1},
-                    <PartModel>{"item": "TixCol", "base": 1, "increment": 1},
+                    <PartModel>{"item": "TixCol", "base": 1, "increment": 3},
                     <PartModel>{"item": "StoneA3b", "base": 1, "increment": 2},
                     <PartModel>{"item": "StoneW3b", "base": 1, "increment": 2}
                 ]

@@ -330,6 +330,9 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Sussy Gene3", <QuestNameModel>{"name": "Goofin' Around", "difficulty": 3}),
         new QuestNameBase("Sussy Gene6", <QuestNameModel>{"name": "Messin' Around", "difficulty": 5}),
         new QuestNameBase("Sussy Gene9", <QuestNameModel>{"name": "Loiterin' Around", "difficulty": 8}),
-        new QuestNameBase("Spirit Sungmin2", <QuestNameModel>{"name": "Mind, Body, Soul, Tasks", "difficulty": 5})    
+        new QuestNameBase("Spirit Sungmin2", <QuestNameModel>{"name": "Mind, Body, Soul, Tasks", "difficulty": 5}),
+        new QuestNameBase("Centurion25", <QuestNameModel>{"name": "Centurio Rank", "difficulty": 6}),
+        new QuestNameBase("Centurion28", <QuestNameModel>{"name": "Legatus Rank", "difficulty": 7}),
+        new QuestNameBase("Centurion31", <QuestNameModel>{"name": "Glorious Gladiator", "difficulty": 9})    
 ]
 }

@@ -6360,6 +6360,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentPendant31", <ArmourItemModel>{
+                "internalName": "EquipmentPendant31",
+                "displayName": "Deathbloom Flower Pendant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "30% Damage Multi",
+                "miscUp2": "20% Mob Respawn",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRings1", <ArmourItemModel>{
                 "internalName": "EquipmentRings1",
                 "displayName": "Gold Ring",
@@ -13451,78 +13472,6 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Item",
                 "description": "Huh... that vertebrae is lookin' kinda sus... "
             }),
-        new BaseItemBase("KeyFrag", <DescItemModel>{
-                "internalName": "KeyFrag",
-                "displayName": "Keychain Fragment",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Key Fragment",
-                "description": "Hold down on these to add them to your account. You'll be spending these in the next update to buy keychains at the Keychain Pile, which will be in the next update! "
-            }),
-        new BaseItemBase("DungCredits1", <DescItemModel>{
-                "internalName": "DungCredits1",
-                "displayName": "Dungeon Credits",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Currency",
-                "description": "Hold down to add these to your account. You can spend dungeon credits in any Dungeon Hub! "
-            }),
-        new BaseItemBase("LootDice", <DescItemModel>{
-                "internalName": "LootDice",
-                "displayName": "Loot Dice",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Currency",
-                "description": "You shouldn't be reading this... "
-            }),
-        new BaseItemBase("Tree7D", <DescItemModel>{
-                "internalName": "Tree7D",
-                "displayName": "Wispy Tree Log",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("PlatD", <DescItemModel>{
-                "internalName": "PlatD",
-                "displayName": "Platinum Ore",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Fish1D", <DescItemModel>{
-                "internalName": "Fish1D",
-                "displayName": "Goldfish",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Fish3D", <DescItemModel>{
-                "internalName": "Fish3D",
-                "displayName": "Jellyfish",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Cashb", <DescItemModel>{
-                "internalName": "Cashb",
-                "displayName": "Ice Dollar",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Item",
-                "description": "Cool! "
-            }),
-        new BaseItemBase("Dung3Ice", <DescItemModel>{
-                "internalName": "Dung3Ice",
-                "displayName": "Basement Cube",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "Cool! "
-            }),
         new BaseItemBase("Grasslands1", <DescItemModel>{
                 "internalName": "Grasslands1",
                 "displayName": "Spore Cap",
@@ -17884,6 +17833,198 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down, and a resource stack will drop on the floor! YOU MUST MANUALLY PICK UP THE RESOURCE ON THE GROUND "
             }),
+        new BaseItemBase("Quest14", <DescItemModel>{
+                "internalName": "Quest14",
+                "displayName": "Employment Statistics",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Wait a minute, these stats have misleading Y-axes and invalid sampling methods! Even then, they show no clear evidence for rats stealing jobs! How could anyone possibly believe this data? "
+            }),
+        new BaseItemBase("Quest15", <DescItemModel>{
+                "internalName": "Quest15",
+                "displayName": "Red Frisbee",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Sprout's red frisbee! I hope you didn't get shrunken down by a magic apple on your way up, or your stetchy dog brother might laugh at you! "
+            }),
+        new BaseItemBase("Quest16", <DescItemModel>{
+                "internalName": "Quest16",
+                "displayName": "Broken Mic",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "The guy who carelessly dropped this microphone is a moron, and that's a fact. Boom, mic drop... ah crap. "
+            }),
+        new BaseItemBase("Quest18", <DescItemModel>{
+                "internalName": "Quest18",
+                "displayName": "Loomi's Room Key",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "A key to a door, but there are still more! Why so many? They were on sale for a penny! "
+            }),
+        new BaseItemBase("Quest19", <DescItemModel>{
+                "internalName": "Quest19",
+                "displayName": "Golden Dubloon",
+                "sellPrice": 3500,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Avast, land lubber! This coin be property of the YumYum Sea Pirates! Ye best be returning it, lest ye want an underwater funeral, arg! "
+            }),
+        new BaseItemBase("Quest20", <DescItemModel>{
+                "internalName": "Quest20",
+                "displayName": "Signed Arrest Warrant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "That's weird, Bandit Bob's signature looks an awful lot like yours... "
+            }),
+        new BaseItemBase("Quest21", <DescItemModel>{
+                "internalName": "Quest21",
+                "displayName": "Time Thingy",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Yea yea I know, this quest doesn't really make sense. Although, if you reeeaaally think about it, you'll realize that it still makes no sense... so it's best not to think about it! "
+            }),
+        new BaseItemBase("Quest22", <DescItemModel>{
+                "internalName": "Quest22",
+                "displayName": "Corporatube Sub",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single subscriber on the Corporatube Video Platform. It You'sed to be called something else, but no one around here remembers. "
+            }),
+        new BaseItemBase("Quest23", <DescItemModel>{
+                "internalName": "Quest23",
+                "displayName": "Instablab Follower",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single follower on Instablab, who probably sound like this: 'Oh mah gawd Becky, you would not Buh Leeeeve how lame this game I'm playing is. They have a joke about Insta that tooootally isn't funnay, like seriouslayy! "
+            }),
+        new BaseItemBase("Quest24", <DescItemModel>{
+                "internalName": "Quest24",
+                "displayName": "Cloudsound Follower",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single follower on Cloudsound. This isn't a website, it's literally a giant cloud that emits sound that people enjoy following around. Why, what were YOU thinking this was? "
+            }),
+        new BaseItemBase("Quest25", <DescItemModel>{
+                "internalName": "Quest25",
+                "displayName": "Birthday Card",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Hold down to read the card! There's a 1 in 75 chance it contains a Birthday Hat recipe, and a 74 in 75 chance it contains a few dollars from grandma. "
+            }),
+        new BaseItemBase("Quest26", <DescItemModel>{
+                "internalName": "Quest26",
+                "displayName": "Pre Crime Box",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "The traditional gift given to those about to be victimized. A favorite amongst criminals! "
+            }),
+        new BaseItemBase("Quest27", <DescItemModel>{
+                "internalName": "Quest27",
+                "displayName": "Bag o Nuts",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Mmmmm, these nuts are so yuuuummy! "
+            }),
+        new BaseItemBase("Quest28", <DescItemModel>{
+                "internalName": "Quest28",
+                "displayName": "IOU one Sky Crystal",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Mere mortal, your meager intellect doesn't leave you with enough patience! Wait until powers even greater than myself allow me to drop the crystal to World 6. The time will come, I assure you. "
+            }),
+        new BaseItemBase("GoldricP1", <DescItemModel>{
+                "internalName": "GoldricP1",
+                "displayName": "Casual Confidante",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "It's a painting of a strangely out of place gold bar fellow. They look nervous underneath their outward bravado. "
+            }),
+        new BaseItemBase("KeyFrag", <DescItemModel>{
+                "internalName": "KeyFrag",
+                "displayName": "Keychain Fragment",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Key Fragment",
+                "description": "Hold down on these to add them to your account. You'll be spending these in the next update to buy keychains at the Keychain Pile, which will be in the next update! "
+            }),
+        new BaseItemBase("DungCredits1", <DescItemModel>{
+                "internalName": "DungCredits1",
+                "displayName": "Dungeon Credits",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "Hold down to add these to your account. You can spend dungeon credits in any Dungeon Hub! "
+            }),
+        new BaseItemBase("LootDice", <DescItemModel>{
+                "internalName": "LootDice",
+                "displayName": "Loot Dice",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldn't be reading this... "
+            }),
+        new BaseItemBase("Tree7D", <DescItemModel>{
+                "internalName": "Tree7D",
+                "displayName": "Wispy Tree Log",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("PlatD", <DescItemModel>{
+                "internalName": "PlatD",
+                "displayName": "Platinum Ore",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Fish1D", <DescItemModel>{
+                "internalName": "Fish1D",
+                "displayName": "Goldfish",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Fish3D", <DescItemModel>{
+                "internalName": "Fish3D",
+                "displayName": "Jellyfish",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Cashb", <DescItemModel>{
+                "internalName": "Cashb",
+                "displayName": "Ice Dollar",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Item",
+                "description": "Cool! "
+            }),
+        new BaseItemBase("Dung3Ice", <DescItemModel>{
+                "internalName": "Dung3Ice",
+                "displayName": "Basement Cube",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Cool! "
+            }),
         new BaseItemBase("EquipmentNametag1", <ArmourItemModel>{
                 "internalName": "EquipmentNametag1",
                 "displayName": "Riftwalker Nametag",
@@ -19080,6 +19221,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "50% Drop Chance",
                 "miscUp2": "5% Luk",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("Trophy21", <ArmourItemModel>{
+                "internalName": "Trophy21",
+                "displayName": "Baller",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 3,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "3% All Afk Gain",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("Trophy22", <ArmourItemModel>{
+                "internalName": "Trophy22",
+                "displayName": "Gladiator",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "10% Damage Multi",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -21830,126 +22013,6 @@ export const initSpecificItemRepo = () => {
                 "Type": "Quest Item",
                 "description": "An empty box, the perfect place to put all your Hermit Cans, Megalodon teeth, and pure water... that you don't have anymore haha! "
             }),
-        new BaseItemBase("Quest14", <DescItemModel>{
-                "internalName": "Quest14",
-                "displayName": "Employment Statistics",
-                "sellPrice": 50,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Wait a minute, these stats have misleading Y-axes and invalid sampling methods! Even then, they show no clear evidence for rats stealing jobs! How could anyone possibly believe this data? "
-            }),
-        new BaseItemBase("Quest15", <DescItemModel>{
-                "internalName": "Quest15",
-                "displayName": "Red Frisbee",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Sprout's red frisbee! I hope you didn't get shrunken down by a magic apple on your way up, or your stetchy dog brother might laugh at you! "
-            }),
-        new BaseItemBase("Quest16", <DescItemModel>{
-                "internalName": "Quest16",
-                "displayName": "Broken Mic",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "The guy who carelessly dropped this microphone is a moron, and that's a fact. Boom, mic drop... ah crap. "
-            }),
-        new BaseItemBase("Quest18", <DescItemModel>{
-                "internalName": "Quest18",
-                "displayName": "Loomi's Room Key",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "A key to a door, but there are still more! Why so many? They were on sale for a penny! "
-            }),
-        new BaseItemBase("Quest19", <DescItemModel>{
-                "internalName": "Quest19",
-                "displayName": "Golden Dubloon",
-                "sellPrice": 3500,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Avast, land lubber! This coin be property of the YumYum Sea Pirates! Ye best be returning it, lest ye want an underwater funeral, arg! "
-            }),
-        new BaseItemBase("Quest20", <DescItemModel>{
-                "internalName": "Quest20",
-                "displayName": "Signed Arrest Warrant",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "That's weird, Bandit Bob's signature looks an awful lot like yours... "
-            }),
-        new BaseItemBase("Quest21", <DescItemModel>{
-                "internalName": "Quest21",
-                "displayName": "Time Thingy",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Yea yea I know, this quest doesn't really make sense. Although, if you reeeaaally think about it, you'll realize that it still makes no sense... so it's best not to think about it! "
-            }),
-        new BaseItemBase("Quest22", <DescItemModel>{
-                "internalName": "Quest22",
-                "displayName": "Corporatube Sub",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single subscriber on the Corporatube Video Platform. It You'sed to be called something else, but no one around here remembers. "
-            }),
-        new BaseItemBase("Quest23", <DescItemModel>{
-                "internalName": "Quest23",
-                "displayName": "Instablab Follower",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single follower on Instablab, who probably sound like this: 'Oh mah gawd Becky, you would not Buh Leeeeve how lame this game I'm playing is. They have a joke about Insta that tooootally isn't funnay, like seriouslayy! "
-            }),
-        new BaseItemBase("Quest24", <DescItemModel>{
-                "internalName": "Quest24",
-                "displayName": "Cloudsound Follower",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single follower on Cloudsound. This isn't a website, it's literally a giant cloud that emits sound that people enjoy following around. Why, what were YOU thinking this was? "
-            }),
-        new BaseItemBase("Quest25", <DescItemModel>{
-                "internalName": "Quest25",
-                "displayName": "Birthday Card",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Hold down to read the card! There's a 1 in 75 chance it contains a Birthday Hat recipe, and a 74 in 75 chance it contains a few dollars from grandma. "
-            }),
-        new BaseItemBase("Quest26", <DescItemModel>{
-                "internalName": "Quest26",
-                "displayName": "Pre Crime Box",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "The traditional gift given to those about to be victimized. A favorite amongst criminals! "
-            }),
-        new BaseItemBase("Quest27", <DescItemModel>{
-                "internalName": "Quest27",
-                "displayName": "Bag o Nuts",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Mmmmm, these nuts are so yuuuummy! "
-            }),
-        new BaseItemBase("Quest28", <DescItemModel>{
-                "internalName": "Quest28",
-                "displayName": "IOU one Sky Crystal",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Mere mortal, your meager intellect doesn't leave you with enough patience! Wait until powers even greater than myself allow me to drop the crystal to World 6. The time will come, I assure you. "
-            }),
-        new BaseItemBase("GoldricP1", <DescItemModel>{
-                "internalName": "GoldricP1",
-                "displayName": "Casual Confidante",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "It's a painting of a strangely out of place gold bar fellow. They look nervous underneath their outward bravado. "
-            }),
         new BaseItemBase("GoldricP2", <DescItemModel>{
                 "internalName": "GoldricP2",
                 "displayName": "Triumphant Treason",
@@ -22461,6 +22524,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Box",
                 "description": "IdleOn is 3 years old! Hold down to open this box and celebrate! Contains a random Anniversary goodie, from event cards to foods! ALSO, if you open a total of 500 Boxes, you'll get a limited edition Anniversary event NAMETAG! "
+            }),
+        new BaseItemBase("Quest86", <DescItemModel>{
+                "internalName": "Quest86",
+                "displayName": "Basketball",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Summons the Hoopulyte who will challenge you to a game of Hoops, as long as you haven't already seen them today. "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",

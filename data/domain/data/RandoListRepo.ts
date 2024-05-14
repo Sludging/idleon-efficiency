@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "World_6_Tasks_v2.06;NEW_UPDATE_PATCH_NOTES_@_*Unlock_the_World_6_Taskboard_by_talking_to_Spirit_Sungmin_in_World_6_Town!_Find_them_in_the_top_left_corner,_next_to_the_crop_scientist!_@_*Complete_the_World_6_tasks_for_merits_to_spend_on_the_5_new_merit_upgrades!_@_*Complete_35_new_World_6_Achievements,_each_one_giving_a_reward!_@_*Unlock_the_4_backgrounds_of_the_Spirited_Valley_to_use_on_the_Main_Menu,_earned_by_completing_certain_Achievements._@_*The_3rd_Anniversary_Event_is_still_going,_collect_those_boxes_daily_for_free_rewards!;*Le",
+                    "Colosseum's_End_v2.08;NEW_UPDATE_PATCH_NOTES_@_*Molten_Colosseum_added_to_World_5_@_*Whimsical_Colosseum_added_to_World_6_@_*Centurion_NPC's_full_questline_has_been_added,_with_3_new_quests_to_complete._@_*New_Trophy_added:Glorious_Gladiator._Obtained_by_completing_Centurion's_final_quest._@_*New_Party_Killbar_system_added._Join_a_party_with_other_players_and_defeat_monsters_to_spawn_Party_Mobs_that_you_fight_together!_@_*Remember,_Hoops_Trophy_is_rewarded_at_40_Daily_Trials_Score!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2538,7 +2538,23 @@ export const initRandoListRepo = () => {
                     "xSpaceC4"
                 ]
             }),
-        new RandoListBase(72, <RandoListModel>{"elements": ["_"]}),
+        new RandoListBase(72, <RandoListModel>{
+                "elements": [
+                    "wLavaA1",
+                    "wLavaA2",
+                    "wLavaA3",
+                    "wLavaA4",
+                    "wLavaA5",
+                    "wLavaB1",
+                    "wLavaB2",
+                    "wLavaB3",
+                    "wLavaB4",
+                    "wLavaB5",
+                    "wLavaB6",
+                    "wLavaC1",
+                    "wLavaC2"
+                ]
+            }),
         new RandoListBase(73, <RandoListModel>{
                 "elements": [
                     "Oh_hi_again_cutie..._how_you_doing?",
@@ -3094,6 +3110,66 @@ export const initRandoListRepo = () => {
                     "w6d1",
                     "w6d2",
                     "w6a2"
+                ]
+            }),
+        new RandoListBase(99, <RandoListModel>{
+                "elements": [
+                    "vSpiritA1",
+                    "vSpiritA2",
+                    "vSpiritA3",
+                    "vSpiritA4",
+                    "vSpiritA5",
+                    "vSpiritB1",
+                    "vSpiritB2",
+                    "vSpiritB3",
+                    "vSpiritB4",
+                    "vSpiritC1",
+                    "vSpiritC2",
+                    "vSpiritD1",
+                    "vSpiritD2",
+                    "vSpiritD3"
+                ]
+            }),
+        new RandoListBase(100, <RandoListModel>{
+                "elements": [
+                    "Â",
+                    "â",
+                    "œ",
+                    "Ÿ",
+                    "Ô",
+                    "Ö",
+                    "ô",
+                    "É",
+                    "È",
+                    "Ç",
+                    "Œ",
+                    "Œâ",
+                    "Œœ",
+                    "ŒŸ"
+                ]
+            }),
+        new RandoListBase(101, <RandoListModel>{
+                "elements": [
+                    "Gemstone_Ninja_Knowledge_{_+30%_DROP_RARITY",
+                    "New_Gold_Charms_added_{_+10%_ALL_STAT",
+                    "Bargain_Ninja_Knowledge_{_+5_All_Talent_LV",
+                    "+30_Max_LV_for_Sneaking_Items_{_1.10#_DMG_MULTI",
+                    "Haha_yea_there's_no_bonus_here_yet",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet."
+                ]
+            }),
+        new RandoListBase(102, <RandoListModel>{
+                "elements": [
+                    "{}%_Stealth_@_for_all_Ninjas",
+                    "{}%_Jade_@_Gain",
+                    "{}%_Damage_@_to_Doors",
+                    "+}%_Gold_@_Charm_Bonus",
+                    "{}%_Sneak_@_EXP_Gain",
+                    "{}%_Bonuses_@_from_Gemstones",
+                    "Hi",
+                    "Hi"
                 ]
             })    
 ]

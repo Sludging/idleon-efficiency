@@ -463,7 +463,117 @@ export const initNinjaItemRepo = () => {
                 "bonus": "+{% Sneaking EXP and Jade coins. If there are no other ninjas on floor, this bonus is tripled.",
                 "x3": 400
             }),
-        new BaseNinjaItemBase(48, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(48, <NinjaTrinketModel>{
+                "internalId": "NjTr20",
+                "itemTypeId": 2,
+                "itemType": NinjaItemTypeEnum.Trinket,
+                "itemId": 20,
+                "name": "Gold Beads",
+                "x1": 25,
+                "bonus": "If in Inventory, all ninjas get +{% Total Stealth. Doesn't stack with other Gold Beads",
+                "x3": 500
+            }),
+        new BaseNinjaItemBase(49, <NinjaTrinketModel>{
+                "internalId": "NjTr21",
+                "itemTypeId": 2,
+                "itemType": NinjaItemTypeEnum.Trinket,
+                "itemId": 21,
+                "name": "Gold Star",
+                "x1": 2,
+                "bonus": "If in Inventory, charms found have a +{ higher Max LV. Doesn't stack with other Gold Stars",
+                "x3": 25
+            }),
+        new BaseNinjaItemBase(50, <NinjaTrinketModel>{
+                "internalId": "NjTr22",
+                "itemTypeId": 2,
+                "itemType": NinjaItemTypeEnum.Trinket,
+                "itemId": 22,
+                "name": "Gold Sai",
+                "x1": 4,
+                "bonus": "If in Inventory, all ninjas get +{% Nunchaku Dmg Per 10 Sneak LV. Doesn't stack with other Gold Sais",
+                "x3": 25
+            }),
+        new BaseNinjaItemBase(51, <NinjaTrinketModel>{
+                "internalId": "NjTr23",
+                "itemTypeId": 2,
+                "itemType": NinjaItemTypeEnum.Trinket,
+                "itemId": 23,
+                "name": "Gold Envelope",
+                "x1": 5,
+                "bonus": "If in Inventory, all ninjas find +{% Jade Per 10 Sneak LV. Doesn't stack with other Gold Envelope",
+                "x3": 50
+            }),
+        new BaseNinjaItemBase(52, <NinjaTrinketModel>{
+                "internalId": "NjTr24",
+                "itemTypeId": 2,
+                "itemType": NinjaItemTypeEnum.Trinket,
+                "itemId": 24,
+                "name": "Gold Q Mark",
+                "x1": 3,
+                "bonus": "If in Inventory, all ninjas perform actions +{% faster. Doesn't stack with other Gold Q Marks",
+                "x3": 30
+            }),
+        new BaseNinjaItemBase(53, <NinjaTrinketModel>{
+                "internalId": "NjGem0",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": 130,
+                "name": "Aquamarine",
+                "x1": 40,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 10000
+            }),
+        new BaseNinjaItemBase(54, <NinjaTrinketModel>{
+                "internalId": "NjGem1",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": 70,
+                "name": "Emerald",
+                "x1": 15,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 5000
+            }),
+        new BaseNinjaItemBase(55, <NinjaTrinketModel>{
+                "internalId": "NjGem2",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": 285,
+                "name": "Garnet",
+                "x1": 12,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 2500
+            }),
+        new BaseNinjaItemBase(56, <NinjaTrinketModel>{
+                "internalId": "NjGem3",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": 0,
+                "name": "Starite",
+                "x1": 5,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 200
+            }),
+        new BaseNinjaItemBase(57, <NinjaTrinketModel>{
+                "internalId": "NjGem4",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": -35,
+                "name": "Topaz",
+                "x1": 10,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 1000
+            }),
+        new BaseNinjaItemBase(58, <NinjaTrinketModel>{
+                "internalId": "NjGem5",
+                "itemTypeId": 4,
+                "itemType": NinjaItemTypeEnum.Gemstone,
+                "itemId": 230,
+                "name": "Moissanite",
+                "x1": 3,
+                "bonus": "Hold down to add this Gemstone to your collection. View collection and bonuses in Ninja Knowledge.",
+                "x3": 300
+            }),
+        new BaseNinjaItemBase(59, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP0",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -473,7 +583,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Total DMG"
             }),
-        new BaseNinjaItemBase(49, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(60, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP1",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -483,7 +593,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% AGI"
             }),
-        new BaseNinjaItemBase(50, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(61, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP2",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -493,7 +603,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Artifact Find Chance"
             }),
-        new BaseNinjaItemBase(51, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(62, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP3",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -503,7 +613,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Drop Rate"
             }),
-        new BaseNinjaItemBase(52, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(63, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP4",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -513,7 +623,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% STR"
             }),
-        new BaseNinjaItemBase(53, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(64, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP5",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -523,7 +633,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% LUK"
             }),
-        new BaseNinjaItemBase(54, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(65, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP6",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -533,7 +643,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Kill per Kill"
             }),
-        new BaseNinjaItemBase(55, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(66, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP7",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -543,7 +653,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% Sneaking EXP gain"
             }),
-        new BaseNinjaItemBase(56, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(67, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP8",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -553,7 +663,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Bigger Summoning Winner Bonuses"
             }),
-        new BaseNinjaItemBase(57, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(68, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP9",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -563,7 +673,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% Farming EXP gain"
             }),
-        new BaseNinjaItemBase(58, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(69, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP10",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -573,7 +683,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% WIS"
             }),
-        new BaseNinjaItemBase(59, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(70, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP11",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -583,7 +693,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Higher Overgrowth Chance"
             }),
-        new BaseNinjaItemBase(60, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(71, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP12",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -593,7 +703,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x All Essence Generation"
             }),
-        new BaseNinjaItemBase(61, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(72, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP13",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -603,7 +713,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Jade Coin gain"
             }),
-        new BaseNinjaItemBase(62, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(73, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP14",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -613,7 +723,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% Golden Food bonus"
             }),
-        new BaseNinjaItemBase(63, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(74, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP15",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -623,7 +733,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "+{% Printer Output"
             }),
-        new BaseNinjaItemBase(64, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(75, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP16",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,
@@ -633,7 +743,7 @@ export const initNinjaItemRepo = () => {
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
                 "bonus": "}x Money from Monsters"
             }),
-        new BaseNinjaItemBase(65, <NinjaPristineCharmModel>{
+        new BaseNinjaItemBase(76, <NinjaPristineCharmModel>{
                 "internalId": "NjTrP17",
                 "itemTypeId": 3,
                 "itemType": NinjaItemTypeEnum.PristineCharm,

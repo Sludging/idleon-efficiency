@@ -11296,7 +11296,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "StoneW4", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
                         <ItemDropModel>{"item": "GalaxyA2b", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneA4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul1", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul3", "quantity": 250, "chance": 0.6, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Critter6", "quantity": 200, "chance": 0.6, "questLink": "N/A"},
                         <ItemDropModel>{"item": "VoidBar", "quantity": 100, "chance": 0.35, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.006, "questLink": "N/A"},
@@ -11417,7 +11417,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
+                    "Name": "Molten Bronze Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11437,14 +11437,26 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneW5", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "LavaA1b", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneA5", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 4, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG9", "quantity": 15, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul4", "quantity": 450, "chance": 0.6, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestB5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
+                    "Name": "Molten Silver Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11464,14 +11476,27 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneW5", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneA5", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Bug9", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 9, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG2", "quantity": 40, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Starfire", "quantity": 5000, "chance": 0.6, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Tree9", "quantity": 2500, "chance": 0.5, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestC5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
+                    "Name": "Molten Golden Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11491,14 +11516,26 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "DreadloBar", "quantity": 300, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Dreadlo", "quantity": 3000, "chance": 0.03, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Bug10", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 12, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG6", "quantity": 100, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG2", "quantity": 40, "chance": 0.25, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestD5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Legendary Chest",
+                    "Name": "Molten Legendary Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11518,14 +11555,16 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestA6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
+                    "Name": "Whimsical Bronze Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11545,14 +11584,27 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneW8", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA2b", "quantity": 3, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneA7", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 15, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG11", "quantity": 60, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul5", "quantity": 1450, "chance": 0.6, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Soul6", "quantity": 1450, "chance": 0.6, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestB6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
+                    "Name": "Whimsical Silver Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11572,14 +11624,26 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneW8", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StoneA7", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Bug12", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 30, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG2", "quantity": 200, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Tree12", "quantity": 12500, "chance": 0.5, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestC6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
+                    "Name": "Whimsical Golden Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11599,14 +11663,26 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "GodshardBar", "quantity": 1000, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Godshard", "quantity": 30000, "chance": 0.03, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Bug13", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 50, "chance": 0.99, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG1", "quantity": 320, "chance": 0.25, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "FoodG2", "quantity": 150, "chance": 0.25, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("ChestD6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Legendary Chest",
+                    "Name": "Whimsical Legendary Chest",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11626,7 +11702,9 @@ export const initEnemyRepo = () => {
                     "Damages": [0, 1],
                     "DefFor0": 0.22
                 },
-                "drops": undefined,
+                "drops": <EnemyTableModel>{
+                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
+                },
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
