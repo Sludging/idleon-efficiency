@@ -271,7 +271,7 @@ export class SneakingUpgrade {
     }
 
     static fromBase = (data: NinjaUpgradeBase[]): SneakingUpgrade[] => {
-       return data.map((value) => new SneakingUpgrade(value.index, value.data));
+       return data.filter(value => value.data.name != "").map((value) => new SneakingUpgrade(value.index, value.data));
     }
 }
 
