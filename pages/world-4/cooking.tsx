@@ -128,7 +128,7 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
     )
 }
 
-function KitchensDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
+function KitchensDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
     const [cooking, setCooking] = useState<CookingDomain>();
     const appContext = useContext(AppContext);
 
@@ -221,10 +221,21 @@ function Cooking() {
         return false;
     }, [appContext, cooking])
 
+    const sortByIndex = (meal1: Meal, meal2: Meal) => {
+        if (meal1.level == 0 && meal2.level > 0) {
+            return -1
+        }
+        if (meal2.level == 0 && meal1.level > 0) {
+            return 1
+        }
+
+        return meal1.mealIndex - meal2.mealIndex
+    }
+
     const mealsToShow = useMemo(() => {
         return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
-                const indexSort = meal1.mealIndex > meal2.mealIndex ? 1 : -1;
+                const indexSort = sortByIndex(meal1, meal2);
 
                 //undiscovered meals get pushed to bottom
                 if (meal1.level == 0) return meal2.level == 0 ? indexSort : 1;
@@ -249,7 +260,7 @@ function Cooking() {
                     }
                     return meal1.getTimeTill(meal1.getMealLevelCost(), starSignEquipped, silkRodeChip, false) > meal2.getTimeTill(meal2.getMealLevelCost(), starSignEquipped, silkRodeChip, false) ? 1 : -1;
                 }
-                
+
                 switch (sort) {
                     case "Level":
                         return meal1.level > meal2.level ? -1 : 1;
@@ -348,7 +359,7 @@ function Cooking() {
                                 label="Gordonius Major Equipped"
                                 onChange={(event) => {
                                     setStarSignEquipped(event.target.checked);
-                                    if(!event.target.checked) {
+                                    if (!event.target.checked) {
                                         setSilkrode(false);
                                     }
                                 }}
@@ -363,9 +374,9 @@ function Cooking() {
                                         <Text size='small'>Looks like you unlocked the Gordonius Major star sign</Text>
                                         {
                                             starSignInfinity ?
-                                            <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
-                                            :
-                                            <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                                <Text margin={{ top: 'xsmall' }} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                                :
+                                                <Text margin={{ top: 'xsmall' }} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
                                         }
                                     </Box>
                                 }
@@ -471,7 +482,7 @@ function Cooking() {
                                                                     <Box direction="row">
                                                                         {
                                                                             meal.chanceOptimalSpices.map((spice, index) => (
-                                                                                <IconImage key={index} data={{
+                                                                                <IconImage style={{ opacity: cooking.spices[spice] > 0 ? 1 : 0.4 }} key={index} data={{
                                                                                     location: `CookingSpice${spice}`,
                                                                                     width: 36,
                                                                                     height: 36
@@ -489,16 +500,16 @@ function Cooking() {
                                                 direction={TipDirection.Down}
                                                 size='small'
                                             >
-                                                <Box direction="row" align="center"  justify="between">
+                                                <Box direction="row" align="center" justify="between">
                                                     <Box direction="row" width="100%" justify="between" pad={!meal.noMealLeftBehindAffected ? { top: 'small' } : undefined}>
-                                                        <Text style={{opacity: meal.level == 0 ? 0.3 : 1}} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
+                                                        <Text style={{ opacity: meal.level == 0 ? 0.3 : 1 }} margin={{ right: 'small' }} size="xsmall">{meal.getBonusText()}</Text>
                                                         {meal.level > 0 ?
                                                             <Text color={meal.level == meal.maxLevel ? '' : meal.count > meal.getMealLevelCost() ? 'green-1' : 'accent-1'} margin={{ right: 'small' }} size="xsmall">{`${nFormatter(Math.floor(meal.count))}/${nFormatter(Math.ceil(meal.getMealLevelCost()))}`}</Text>
                                                             :
                                                             <Box direction="row" gap="xsmall">
                                                                 {
                                                                     meal.timeOptimalSpices.map((spice, index) => (
-                                                                        <IconImage key={index} data={{
+                                                                        <IconImage key={index} style={{ opacity: cooking.spices[spice] > 0 ? 1 : 0.4 }} data={{
                                                                             location: `CookingSpice${spice}`,
                                                                             width: 36,
                                                                             height: 36
@@ -506,7 +517,7 @@ function Cooking() {
                                                                     ))
                                                                 }
                                                             </Box>
-                                                        }                                                
+                                                        }
                                                     </Box>
                                                     {
                                                         meal.noMealLeftBehindAffected && <Ascending color="Legendary" size="40px" />
