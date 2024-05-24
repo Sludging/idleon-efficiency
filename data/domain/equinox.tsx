@@ -263,7 +263,11 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const equinox = data.get("equinox") as Equinox;
     const alchemy = data.get("alchemy") as Alchemy
     const rawData = data.get("rawData") as Record<string, any>;
-    const bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
+    let bundleInfo = undefined;
+    // Make sure we have bundle info, this usually is missing for public profiles.
+    if (rawData["BundlesReceived"] !== undefined) {
+        bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
+    }
     const lastUpdated = data.get("lastUpdated") as Date;
 
     const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
