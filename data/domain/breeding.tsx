@@ -389,7 +389,6 @@ export class Breeding extends Domain {
 
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
-        console.log("Pet POWHA!", this.petPowerFromTalent, Math.min(2.1, Math.max(1, this.petPowerFromTalent)))
         baseMath *= Math.min(2.1, Math.max(1, this.petPowerFromTalent)) * (1 + eggRarity / 8);
 
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
