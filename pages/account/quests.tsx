@@ -185,7 +185,7 @@ function Quests() {
     const [activeWorld, setActiveWorld] = useState<string>("Blunder Hills");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
     const appContext = useContext(AppContext);
-    const size = useContext(ResponsiveContext)
+    const size = useContext(ResponsiveContext);
 
     const npcsToShow = useMemo(() => {
         const badNPCNames = [
@@ -206,7 +206,7 @@ function Quests() {
         }
 
         return filtered.sort(([name1], [name2]) => name1 > name2 ? 1 : -1);
-    }, [questsData, activeWorld])
+    }, [questsData, activeWorld]);
 
     useEffect(() => {
         if (appContext) {
@@ -214,7 +214,8 @@ function Quests() {
             setPlayerData(theData.get("players"));
             setQuestData(theData.get("quests"));
         }
-    }, [appContext])
+    }, [appContext]);
+    
     return (
         <Box>
             <NextSeo title="Quests" />

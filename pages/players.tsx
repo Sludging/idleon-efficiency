@@ -468,7 +468,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         player.labInfo.chips.length > 0 &&
                         <Box gap="small">
                             <Text>Chips:</Text>
-                            <Box direction="row">
+                            <Box direction="row" wrap>
                                 {
                                     player.labInfo.chips.map((slot, index) => (
                                         <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
