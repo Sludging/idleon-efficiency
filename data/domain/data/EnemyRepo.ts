@@ -2149,8 +2149,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1,
                     "MoveSPEED": 4,
-                    "Damages": [3, 1],
-                    "DefFor0": 1
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2199,8 +2199,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 2,
                     "MoveSPEED": 4,
-                    "Damages": [6, 1],
-                    "DefFor0": 2.67
+                    "Damages": [8, 1],
+                    "DefFor0": 3.93
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2446,7 +2446,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "Forest2", "quantity": 1, "chance": 0.15, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsA8", "quantity": 1, "chance": 8e-05, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes1", "quantity": 48, "chance": 3e-05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest12", "quantity": 1, "chance": 0.1, "questLink": "Dog_Bone1"},
+                        <ItemDropModel>{"item": "Quest12", "quantity": 1, "chance": 0.3, "questLink": "Dog_Bone1"},
                         <ItemDropModel>{"item": "EquipmentShirts19", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable3", "quantity": 1, "chance": 0.0045, "questLink": "N/A"}
                     ]

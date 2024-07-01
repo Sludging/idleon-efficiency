@@ -5186,7 +5186,7 @@ export const initDetDropsRepo = () => {
         new DetDropsBase("StoneHelm1", <DetDropsModel>{"sources": [<DetDropModel>{"source": "goblinG", "quantity": 1, "chance": 0.00015}]}),
         new DetDropsBase("Forest2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 0.15}]}),
         new DetDropsBase("CardsA8", <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 8e-05}]}),
-        new DetDropsBase("Quest12", <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 0.1}]}),
+        new DetDropsBase("Quest12", <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 0.3}]}),
         new DetDropsBase("EquipmentShirts19", <DetDropsModel>{"sources": [<DetDropModel>{"source": "plank", "quantity": 1, "chance": 1e-05}]}),
         new DetDropsBase("Forest3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 0.14}]}),
         new DetDropsBase("CardsA9", <DetDropsModel>{"sources": [<DetDropModel>{"source": "frogBIG", "quantity": 1, "chance": 7e-05}]}),

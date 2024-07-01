@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Colosseum's_End_v2.08;NEW_UPDATE_PATCH_NOTES_@_*Molten_Colosseum_added_to_World_5_@_*Whimsical_Colosseum_added_to_World_6_@_*Centurion_NPC's_full_questline_has_been_added,_with_3_new_quests_to_complete._@_*New_Trophy_added:Glorious_Gladiator._Obtained_by_completing_Centurion's_final_quest._@_*New_Party_Killbar_system_added._Join_a_party_with_other_players_and_defeat_monsters_to_spawn_Party_Mobs_that_you_fight_together!_@_*Remember,_Hoops_Trophy_is_rewarded_at_40_Daily_Trials_Score!;*Le",
+                    "Poppy's_Fisheroo_v2.1;NEW_UPDATE_PATCH_NOTES_@_*Poppy_the_Kangaroo_Mouse_and_her_Fisheroo_Pool_has_been_added!_Find_her_in_World_2_using_the_new_map,_buy_it_in_the_Town_Shop!_@_*Catch_fish_and_spend_them_on_upgrades_to_help_catch_even_more_fish_for_Poppy,_and_bonuses_outside_of_fish_like_Fish_EXP,_Fish_Efficiency,_AFK_Gains,_Cash_from_Mobs,_and_more!_@_*New_Limited_Time_Gemshop_items_added,_go_check_them_out!_One_of_them_is_FREE,_which_is_like_honestly_crazy_is_this_the_first_time_there's_been_a_freebie_in_the_gemshop?!_@_*MEGAFISH_@_*Next_update_will_not_be_another_idler_type_game._Cry_tear_of_sadness_or_joy,_or_don't_cry_at_all,_big_girls_don't_cry.;*Le",
                     "Monde",
                     "6",
                     "est",

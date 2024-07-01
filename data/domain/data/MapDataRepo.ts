@@ -260,9 +260,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(42, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "Nothing",
                 "world": "Blunder Hills",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 42},
+                "map": <MapNameModel>{"intName": "GrasslandsG", "name": "Grand Owl Perch", "id": 42},
                 "portalRequirements": [0]
             }),
         new MapDataBase(43, <MapDataModel>{
@@ -446,25 +446,25 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(73, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 73},
+                "map": <MapNameModel>{"intName": "zDesertCalmD", "name": "The Oasis", "id": 73},
                 "portalRequirements": [0]
             }),
         new MapDataBase(74, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 74},
                 "portalRequirements": [0]
             }),
         new MapDataBase(75, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 75},
                 "portalRequirements": [0]
             }),
         new MapDataBase(76, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 76},
                 "portalRequirements": [0]
