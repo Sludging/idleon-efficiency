@@ -15,54 +15,8 @@ import { Chip, Lab as LabDomain } from '../../data/domain/lab';
 import { Player } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { CharacterBox } from '../../components/base/CharacterBox';
-
-function CharacterBoxOld({ player, lineWidth, supped = false }: { player: Player, lineWidth: string, supped?: boolean }) {
-    const theBox = (
-        <Box background="dark-2" align="center" pad={{ top: "xsmall", bottom: "xsmall", left: "small", right: "small" }} gap="xsmall" direction="row" border={{ size: '1px', color: supped ? 'green-1' : 'grey-1' }}>
-            <IconImage data={player.getClassImageData()} scale={0.6} />
-            <Box margin={{ right: 'small' }} align="center">
-                <Text size="small" truncate={true}>{player.playerName}</Text>
-            </Box>
-            <Box direction="row">
-                <Box pad={{ right: 'small' }} margin={{ right: 'small' }} direction="row" border={{ side: 'right', color: 'grey-1' }} align="center">
-                    <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
-                        <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
-                    </Box>
-                    <Text size="small" truncate={true}>{player.skills.get(SkillsIndex.Intellect)?.level}</Text>
-                </Box>
-                <Box>
-                    <Text size="small" truncate={true}>{lineWidth}px</Text>
-                </Box>
-            </Box>
-        </Box>
-    )
-
-    if (player.labInfo.chips.filter(slot => slot.chip != undefined).length > 0) {
-        return (
-            <TipDisplay
-                body={
-                    <Box gap="small">
-                        {
-                            player.labInfo.chips.filter(slot => slot.chip != undefined).map((slot, index) => (
-                                <Box key={index} direction="row" gap="small">
-                                    <IconImage data={(slot.chip as Chip).getImageData()} />
-                                    <Text>{slot.chip?.data.description}</Text>
-                                </Box>
-                            ))
-                        }
-                    </Box>
-                }
-                direction={TipDirection.Down}
-                heading='Chips'
-                size='small'
-            >
-                {theBox}
-            </TipDisplay>
-        )
-    }
-
-    return theBox;
-}
+import { ComponentAndLabel } from '../../components/base/TextAndLabel';
+import { Rift, SkillMastery } from '../../data/domain/rift';
 
 function MainframeDisplay() {
     const [lab, setLab] = useState<LabDomain>();
@@ -267,15 +221,33 @@ function ChipDisplay() {
 function Lab() {
     const [activeTab, setActiveTab] = useState<string>("Mainframe");
 
+    const appContext = useContext(AppContext);
+    const theData = appContext.data.getData();
+    const rift = theData.get("rift") as Rift;
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
     return (
         <Box>
             <NextSeo title="Lab" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Lab</Heading>
-            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
+            <Box pad="small">
+                <ComponentAndLabel
+                    label="Total Lab LV"
+                    component={
+                        <Box direction="row" gap="small" align="center">
+                            <Box width={{ max: '15px' }} margin={{ right: 'xsmall' }}>
+                                <IconImage data={{ location: 'ClassIcons53', height: 36, width: 38 }} scale={0.4} />
+                            </Box>
+                            <Text size="small" truncate={true}>{skillMastery.skillLevels[SkillsIndex.Intellect]}</Text>
+                        </Box>
+                    }
+                />
+            </Box>
             <Box align="center" direction="row" justify="center" gap="small">
-                {["Mainframe", "Console"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
+                {
+                    ["Mainframe", "Console"].map((tabName, index) => (
+                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
+                    ))
                 }
             </Box>
             {activeTab == "Mainframe" && <MainframeDisplay />}
