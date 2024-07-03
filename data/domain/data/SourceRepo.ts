@@ -9817,10 +9817,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
                         "txtName": "Blunder Hills Vendor"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Glumlee#Learning to Smelt|Learning to Smelt]]",
-                        "txtName": "Glumlee: Learning to Smelt"
                     }
                 ],
                 "recipeFrom": [],
@@ -10247,6 +10243,16 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("StampC11", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#YumYum Grotto|YumYum Grotto Vendors]]",
+                        "txtName": "YumYum Grotto Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest87", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Vendors#YumYum Grotto|YumYum Grotto Vendors]]",
@@ -11896,6 +11902,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("MaxCapBagM3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Scripticus#Warrior, Archer or Mage?|Warrior, Archer or Mage?]]",
+                        "txtName": "Scripticus: Warrior, Archer or Mage?"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest5", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -11912,16 +11928,6 @@ export const initSourceRepo = () => {
                 ]
             }),
         new SourcesBase("InvBag3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Scripticus#Stiltzcho, the Leaf Scout|Stiltzcho, the Leaf Scout]]",
-                        "txtName": "Scripticus: Stiltzcho, the Leaf Scout"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("MaxCapBagM3", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Scripticus#Stiltzcho, the Leaf Scout|Stiltzcho, the Leaf Scout]]",
@@ -14143,17 +14149,22 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentPendant31", <SourcesModel>{
+        new SourcesBase("GemP36", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentCape0", <SourcesModel>{
+        new SourcesBase("EquipmentHats82", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings32", <SourcesModel>{
+        new SourcesBase("Quest77", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ClassSwapB", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

@@ -113,28 +113,28 @@ export const initVendorRepo = () => {
                         "item": "SmithingHammerChisel",
                         "quantity": 4,
                         "no": 15,
-                        "purchasePrice": 3200
+                        "purchasePrice": 1600
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StampA5",
                         "quantity": 1,
                         "no": 16,
-                        "purchasePrice": 1000
+                        "purchasePrice": 400
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StampA6",
                         "quantity": 1,
                         "no": 17,
-                        "purchasePrice": 3200
+                        "purchasePrice": 1600
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "StampA3",
                         "quantity": 1,
                         "no": 18,
-                        "purchasePrice": 10000
+                        "purchasePrice": 6000
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
@@ -432,6 +432,13 @@ export const initVendorRepo = () => {
                         "quantity": 2,
                         "no": 20,
                         "purchasePrice": 800
+                    },
+                    <VendorModel>{
+                        "vendor": "YumYum Grotto",
+                        "item": "Quest87",
+                        "quantity": 1,
+                        "no": 21,
+                        "purchasePrice": 40000
                     }
                 ]
             }),

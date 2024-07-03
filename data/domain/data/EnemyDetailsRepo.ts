@@ -1307,8 +1307,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1,
                 "MoveSPEED": 4,
-                "Damages": [3, 1],
-                "DefFor0": 1
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("beanG", <EnemyDetailsModel>{
                 "Name": "Bored Bean",
@@ -1328,8 +1328,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 2,
                 "MoveSPEED": 4,
-                "Damages": [6, 1],
-                "DefFor0": 2.67
+                "Damages": [8, 1],
+                "DefFor0": 3.93
             }),
         new EnemyDetailsBase("slimeG", <EnemyDetailsModel>{
                 "Name": "Slime",

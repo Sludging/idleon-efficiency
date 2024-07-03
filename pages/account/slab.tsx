@@ -65,7 +65,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => !item.obtained).filter(item => !customHandCraftedListOfUnobtainableItems.includes(item.internalName));
-    }, [slabInfo]);
+    }, [slabInfo, appContext]);
 
     const obtainedItems = useMemo(() => {
         if (!slabInfo) {
@@ -73,7 +73,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => item.obtained);
-    }, [slabInfo]);
+    }, [slabInfo, appContext]);
 
     useEffect(() => {
         setSlabInfo(appContext.data.getData().get("slab"));
@@ -120,11 +120,13 @@ function Slab() {
                 <CheckBox
                     checked={onlyMissing}
                     label="Show only missing"
+                    disabled={slabInfo.rawObtainedCount == 0}
                     onChange={(event) => { setOnlyMissing(event.target.checked); setOnlyLooted(false); }}
                 />
                 <CheckBox
                     checked={onlyLooted}
                     label="Show only looted"
+                    disabled={slabInfo.rawObtainedCount == 0}
                     onChange={(event) => { setOnlyLooted(event.target.checked); setOnlyMissing(false); }}
                 />
             </Box>
