@@ -36,6 +36,7 @@ export enum AlertType {
     EquinoxFull = "Equinox Full",
     CanCraftLuckierLad = "Can craft Luckier Lad",
     CanBuyFamiliar = "Can buy a familiar for Summoning",
+    PassiveCardEquipped = "Cards that are passive are equipped"
 }
 
 export abstract class Alert {
@@ -149,6 +150,18 @@ export class SneakingLevelReady extends PlayerAlert {
         // Override default size
         this.icon.height = 36;
         this.icon.width = 36;
+    }
+}
+
+export class PassiveCardEquipped extends PlayerAlert {
+    constructor(player: Player) {
+        super(player, AlertType.PassiveCardEquipped);
+        this.title = "Some passive cards are equipped (you always get their bonus so you shouldn't equip them)"
+        this.icon = {
+            location: 'ClassIconsQmark',
+            height: 36,
+            width: 36,
+        }
     }
 }
 
@@ -271,6 +284,11 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
         case Activity.Unknown:
             alerts.push(new DoingNothingAlert(player));
             break;
+    }
+
+    // Passive cards equipped
+    if (player.cardInfo?.equippedCards.some(card => card.passive)) {
+        alerts.push(new PassiveCardEquipped(player));
     }
 
     // Anvil Alerts
