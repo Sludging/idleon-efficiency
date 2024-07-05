@@ -75,6 +75,41 @@ export const initSkullShopRepo = () => {
                 "costInc": 1,
                 "rewardId": "Ladle",
                 "qty": 3
+            }),
+        new SkullShopBase(10, <SkullShopModel>{
+                "description": "1% Chance to permanently unlock the 3rd Killroy Weekly Fight!",
+                "baseCost": 4,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 1
+            }),
+        new SkullShopBase(11, <SkullShopModel>{
+                "description": "Permanently boosts Artifact Find Chance! Current bonus is x",
+                "baseCost": 9,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 2
+            }),
+        new SkullShopBase(12, <SkullShopModel>{
+                "description": "Adds 1 nugget to your Shovel in Gaming, go dig it up!",
+                "baseCost": 5,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 1
+            }),
+        new SkullShopBase(13, <SkullShopModel>{
+                "description": "Permanently boosts Crop Evolution Chance! Current bonus is x",
+                "baseCost": 6,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 2
+            }),
+        new SkullShopBase(14, <SkullShopModel>{
+                "description": "Permanently boosts Jade Gain! Current bonus is x",
+                "baseCost": 7,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 3
             })    
 ]
 }

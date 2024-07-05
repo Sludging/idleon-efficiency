@@ -133,7 +133,6 @@ export const initColosseumRepo = () => {
                     <ColWaveModel>{
                         "enemies": [
                             <ColEnemyModel>{"enemy": "jarSand", "qty": 15, "platform": 3, "baseScore": 250},
-                            <ColEnemyModel>{"enemy": "FishSmall", "qty": 1, "platform": 5, "baseScore": 630},
                             <ColEnemyModel>{"enemy": "jarSand", "qty": 4, "platform": 0, "baseScore": 250}
                         ]
                     },
@@ -144,10 +143,7 @@ export const initColosseumRepo = () => {
                         ]
                     },
                     <ColWaveModel>{
-                        "enemies": [
-                            <ColEnemyModel>{"enemy": "coconut", "qty": 12, "platform": 3, "baseScore": 250},
-                            <ColEnemyModel>{"enemy": "PalmTree", "qty": 1, "platform": 4, "baseScore": 790}
-                        ]
+                        "enemies": [<ColEnemyModel>{"enemy": "coconut", "qty": 12, "platform": 3, "baseScore": 250}]
                     },
                     <ColWaveModel>{
                         "enemies": [
@@ -156,10 +152,7 @@ export const initColosseumRepo = () => {
                         ]
                     },
                     <ColWaveModel>{
-                        "enemies": [
-                            <ColEnemyModel>{"enemy": "shovelR", "qty": 17, "platform": 3, "baseScore": 200},
-                            <ColEnemyModel>{"enemy": "Plat", "qty": 1, "platform": 2, "baseScore": 95}
-                        ]
+                        "enemies": [<ColEnemyModel>{"enemy": "shovelR", "qty": 17, "platform": 3, "baseScore": 200}]
                     },
                     <ColWaveModel>{
                         "enemies": [<ColEnemyModel>{"enemy": "pincermin", "qty": 18, "platform": 3, "baseScore": 175}]
@@ -172,10 +165,7 @@ export const initColosseumRepo = () => {
                         ]
                     },
                     <ColWaveModel>{
-                        "enemies": [
-                            <ColEnemyModel>{"enemy": "steak", "qty": 14, "platform": 3, "baseScore": 250},
-                            <ColEnemyModel>{"enemy": "FishSmall", "qty": 1, "platform": 5, "baseScore": 630}
-                        ]
+                        "enemies": [<ColEnemyModel>{"enemy": "steak", "qty": 14, "platform": 3, "baseScore": 250}]
                     },
                     <ColWaveModel>{
                         "enemies": [
@@ -189,7 +179,6 @@ export const initColosseumRepo = () => {
                     <ColWaveModel>{
                         "enemies": [
                             <ColEnemyModel>{"enemy": "snailZ", "qty": 18, "platform": 3, "baseScore": 175},
-                            <ColEnemyModel>{"enemy": "Void", "qty": 1, "platform": 2, "baseScore": 95},
                             <ColEnemyModel>{"enemy": "moonman", "qty": 6, "platform": 3, "baseScore": 200}
                         ]
                     },
@@ -397,6 +386,395 @@ export const initColosseumRepo = () => {
                             <ColEnemyModel>{"enemy": "w4c2", "qty": 6, "platform": 0, "baseScore": 865},
                             <ColEnemyModel>{"enemy": "w4c4", "qty": 20, "platform": 0, "baseScore": 665},
                             <ColEnemyModel>{"enemy": "mini4a", "qty": 1, "platform": 0, "baseScore": 700}
+                        ]
+                    }
+                ]
+            }),
+        new ColosseumBase(4, <ColosseumModel>{
+                "name": "Molten",
+                "map": 202,
+                "node": 10,
+                "colMap": 215,
+                "keyCost": 10,
+                "infoX": 103,
+                "infoY": 10,
+                "bronzeScore": 800000,
+                "silverScore": 3000000,
+                "goldScore": 7000000,
+                "bronzeNode": 1,
+                "silverNode": 1,
+                "goldNode": 2,
+                "bronzeX": 900,
+                "silverX": 1020,
+                "goldX": 400,
+                "waves": [
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 14, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a1", "qty": 13, "platform": 0, "baseScore": 1245}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 10, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 15, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a1", "qty": 20, "platform": 2, "baseScore": 592}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 5, "platform": 0, "baseScore": 1245},
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 8, "platform": 3, "baseScore": 261}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 14, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a2", "qty": 20, "platform": 2, "baseScore": 592}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a2", "qty": 13, "platform": 0, "baseScore": 1245}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 10, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 15, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 5, "platform": 0, "baseScore": 1245},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 8, "platform": 3, "baseScore": 261}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 14, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a3", "qty": 13, "platform": 0, "baseScore": 1245}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 10, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 15, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a3", "qty": 20, "platform": 2, "baseScore": 592}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 5, "platform": 0, "baseScore": 1245},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 8, "platform": 3, "baseScore": 261}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 14, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a4", "qty": 13, "platform": 0, "baseScore": 1245}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 10, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 15, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a4", "qty": 20, "platform": 2, "baseScore": 592}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 5, "platform": 0, "baseScore": 1245},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 8, "platform": 3, "baseScore": 261}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a5", "qty": 13, "platform": 0, "baseScore": 1245}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a5", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a5", "qty": 14, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a5", "qty": 10, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "w5a5", "qty": 15, "platform": 2, "baseScore": 592}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w5a5", "qty": 20, "platform": 2, "baseScore": 592}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w5a1", "qty": 5, "platform": 0, "baseScore": 1245},
+                            <ColEnemyModel>{"enemy": "w5a2", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 8, "platform": 1, "baseScore": 973},
+                            <ColEnemyModel>{"enemy": "w5a3", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a5", "qty": 10, "platform": 2, "baseScore": 592},
+                            <ColEnemyModel>{"enemy": "w5a4", "qty": 8, "platform": 3, "baseScore": 261},
+                            <ColEnemyModel>{"enemy": "mini5a", "qty": 1, "platform": 2, "baseScore": 592}
+                        ]
+                    }
+                ]
+            }),
+        new ColosseumBase(5, <ColosseumModel>{
+                "name": "Whimsical",
+                "map": 252,
+                "node": 9,
+                "colMap": 265,
+                "keyCost": 30,
+                "infoX": 139,
+                "infoY": 536,
+                "bronzeScore": 5000000,
+                "silverScore": 20000000,
+                "goldScore": 40000000,
+                "bronzeNode": 0,
+                "silverNode": 1,
+                "goldNode": 2,
+                "bronzeX": 590,
+                "silverX": 470,
+                "goldX": 400,
+                "waves": [
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 14, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 13, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 5, "platform": 0, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 10, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 14, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 13, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 5, "platform": 0, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 10, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 13, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 10, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 15, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 13, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 10, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 15, "platform": 0, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 20, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a1", "qty": 15, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 15, "platform": 1, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 13, "platform": 1, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 10, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 20, "platform": 1, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 20, "platform": 1, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 13, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 10, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 14, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a4", "qty": 13, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a4", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 5, "platform": 0, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 10, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 14, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 13, "platform": 0, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 5, "platform": 0, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a2", "qty": 10, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 13, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 10, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 15, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a3", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a5", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a4", "qty": 14, "platform": 2, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a2", "qty": 13, "platform": 1, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a5", "qty": 15, "platform": 1, "baseScore": 600}
+                        ]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [<ColEnemyModel>{"enemy": "w6a4", "qty": 20, "platform": 2, "baseScore": 600}]
+                    },
+                    <ColWaveModel>{
+                        "enemies": [
+                            <ColEnemyModel>{"enemy": "mini6a", "qty": 1, "platform": 0, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a1", "qty": 8, "platform": 1, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a3", "qty": 10, "platform": 2, "baseScore": 600},
+                            <ColEnemyModel>{"enemy": "w6a5", "qty": 10, "platform": 2, "baseScore": 600}
                         ]
                     }
                 ]

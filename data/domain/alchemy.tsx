@@ -1,4 +1,4 @@
-import { lavaFunc, nFormatter, round } from '../utility'
+import { lavaFunc, nFormatter, range, round } from '../utility'
 import { Cooking } from './cooking';
 import { CauldronBase, initBubbleRepo } from './data/BubbleRepo';
 import { ImageData } from './imageData';
@@ -18,6 +18,10 @@ import { Rift } from './rift';
 import { Domain, RawData } from './base/domain';
 import { MapInfo } from './maps';
 import { Slab } from './slab';
+import { JadeComponentModel } from './model/jadeComponentModel';
+import { CropComponentModel } from './model/cropComponentModel';
+import { SummonComponentModel } from './model/summonComponentModel';
+import { SailTreasureComponentModel } from './model/sailTreasureComponentModel';
 
 export enum CauldronIndex {
     Power = 0,
@@ -64,6 +68,15 @@ const cauldronIndex: Record<string, number> = {
 }
 
 export const VialIndex = 4;
+
+// P2W Consts
+export const P2W_CAULDRON_SPEED_MAX = 150;
+export const P2W_CAULDRON_NEWBUBBLE_MAX = 125;
+export const P2W_CAULDRON_BOOST_MAX = 100;
+export const P2W_LIQUIDS_REGEN_MAX = 100;
+export const P2W_LIQUIDS_CAPACITY_MAX = 80;
+export const P2W_VIALS_ATTEMPTS_MAX = 15;
+export const P2W_VIALS_RNG_MAX = 45;
 
 const vialPercentages = "99 90 80 70 60 60 40 50 40 35 30 25 17 16 13 9 13 10 7 11 1 25 25 20 20 15 14 13 5 12 10 9 7 5 4 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1".split(" ").map((value) => parseInt(value));
 const vialCostPerLevel = [0, 100, 1000, 2500, 10000, 50000, 100000, 500000, 1000001, 5000000, 25000000, 100000000, 1000000000, 50000000000];
@@ -178,7 +191,7 @@ export class ImpactedBySlabBubble extends Bubble {
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         super(id, data, iconPrefix, bubbleIndex);
     }
-    
+
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
         return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
@@ -280,7 +293,7 @@ export class CropiusMapperBubble extends Bubble {
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        return this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString()).replace(/\$/g, this.totalW6PortalsOpened+" portals = "+bonus.toString()+"%");
+        return this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString()).replace(/\$/g, this.totalW6PortalsOpened + " portals = " + bonus.toString() + "%");
     }
 }
 
@@ -398,9 +411,139 @@ export class Vial {
     }
 }
 
+export class P2W {
+    cauldronLevels: Record<string, { speed: number, newBubble: number, boostReq: number }> = {
+        "Power": { speed: 0, newBubble: 0, boostReq: 0 },
+        "Quicc": { speed: 0, newBubble: 0, boostReq: 0 },
+        "High-IQ": { speed: 0, newBubble: 0, boostReq: 0 },
+        "Kazam": { speed: 0, newBubble: 0, boostReq: 0 },
+    }
+    liquidLevels: Record<string, { regen: number, capacity: number }> = {
+        "Water Drops": { regen: 0, capacity: 0 },
+        "Liquid N₂": { regen: 0, capacity: 0 },
+        "Trench H₂O": { regen: 0, capacity: 0 },
+        "Toxic HG": { regen: 0, capacity: 0 },
+    }
+    vialAttempts: number = 0;
+    vialsRng: number = 0;
+
+    getCauldronCost = (
+        type: "Speed" | "NewBubble" | "BoostReq",
+        level: number
+    ): number => {
+        switch (type) {
+            case "Speed":
+                return Math.round(2500 * Math.pow(1.15 - (0.117 * level) / (100 + level), level))
+            case "NewBubble":
+                return Math.round(3200 * Math.pow(1.18 - (0.145 * level) / (100 + level), level))
+            case "BoostReq":
+                return Math.round(3750 * Math.pow(1.2 - (0.14 * level) / (100 + level), level));
+        }
+    }
+
+    getCauldronCostToMax = (
+        type: "Speed" | "NewBubble" | "BoostReq",
+        cauldron: "Power" | "Quicc" | "High-IQ" | "Kazam"
+    ) => {
+        let max = 0;
+        let currentLevel = 0;
+        switch (type) {
+            case "Speed": {
+                max = P2W_CAULDRON_SPEED_MAX;
+                currentLevel = this.cauldronLevels[cauldron].speed;
+                break;
+            }
+            case "NewBubble": {
+                max = P2W_CAULDRON_NEWBUBBLE_MAX;
+                currentLevel = this.cauldronLevels[cauldron].newBubble;
+                break;
+            }
+            case "BoostReq": {
+                max = P2W_CAULDRON_BOOST_MAX;
+                currentLevel = this.cauldronLevels[cauldron].boostReq;
+                break;
+            }
+        }
+        if (max == currentLevel) {
+            return 0;
+        }
+        return range(currentLevel, max).reduce((sum, level) => sum += this.getCauldronCost(type, level), 0)
+
+    }
+
+    getLiquidCost = (type: "Regen" | "Capacity", level: number): number => {
+        switch (type) {
+            case "Regen":
+                return Math.round(2500 * Math.pow(1.19 - (0.135 * level) / (100 + level), level))
+            case "Capacity":
+                return Math.round(3500 * Math.pow(1.2 - (0.13 * level) / (100 + level), level));
+        }
+    }
+
+    getLiquidCostToMax = (
+        type: "Regen" | "Capacity",
+        liquid: "Water Drops" | "Liquid N₂" | "Trench H₂O" | "Toxic HG"
+    ) => {
+        let max = 0;
+        let currentLevel = 0;
+
+        switch (type) {
+            case "Regen": {
+                max = P2W_LIQUIDS_REGEN_MAX;
+                currentLevel = this.liquidLevels[liquid].regen;
+                break;
+            }
+            case "Capacity": {
+                max = P2W_LIQUIDS_CAPACITY_MAX;
+                currentLevel = this.liquidLevels[liquid].capacity;
+                break;
+            }
+        }
+
+        if (max == currentLevel) {
+            return 0;
+        }
+        return range(currentLevel, max).reduce((sum, level) => sum += this.getLiquidCost(type, level), 0)
+
+    }
+
+    getVialsCost = (type: "Attempts" | "RNG", level: number): number => {
+        switch (type) {
+            case "Attempts":
+                return Math.round(1e4 * Math.pow(2, level))
+            case "RNG":
+                return Math.round(5e3 * Math.pow(1.25, level))
+        }
+    }
+
+    getVialsCostToMax = (type: "Attempts" | "RNG"): number => {
+        let max = 0;
+        let currentLevel = 0;
+
+        switch (type) {
+            case "Attempts": {
+                max = P2W_VIALS_ATTEMPTS_MAX;
+                currentLevel = this.vialAttempts;
+                break;
+            }
+            case "RNG": {
+                max = P2W_VIALS_RNG_MAX;
+                currentLevel = this.vialsRng;
+                break;
+            }
+        }
+
+        if (max == currentLevel) {
+            return 0;
+        }
+        return range(currentLevel, max).reduce((sum, level) => sum += this.getVialsCost(type, level), 0)
+    }
+}
+
 export class Alchemy extends Domain {
     cauldrons: Array<Cauldron> = [];
     vials: Array<Vial> = [];
+    p2w: P2W = new P2W();
 
     getUndevelopedCostsBubbleLevel = (): number => {
         if (this.cauldrons.length > 0) {
@@ -517,6 +660,7 @@ export class Alchemy extends Domain {
         return [
             { key: "CauldronInfo", default: {}, perPlayer: false },
             { key: "CauldUpgLVs", default: [], perPlayer: false },
+            { key: "CauldronP2W", default: [], perPlayer: false },
         ];
     }
 
@@ -547,6 +691,7 @@ export class Alchemy extends Domain {
         // Must stay as raw
         const alchemyData = data.get("CauldronInfo") as Map<string, number>[];
         const boostLevels = data.get("CauldUpgLVs") as number[];
+        const cauldronP2w = data.get("CauldronP2W") as number[][];
 
         alchemyData.forEach((indexData, index) => {
             // Handle cauldrons if the first 4 arrays of data
@@ -558,6 +703,29 @@ export class Alchemy extends Domain {
                 handleVial(indexData, alchemy);
             }
         })
+
+        // It should never be less but you know, better safe.
+        if (cauldronP2w.length > 2) {
+            Object.values(alchemy.p2w.cauldronLevels).forEach((value, index) => {
+                const startIndex = index * 3
+                // It should never be less but you know, better safe.
+                if (startIndex < cauldronP2w[0].length) {
+                    value.speed = cauldronP2w[0][startIndex];
+                    value.newBubble = cauldronP2w[0][startIndex + 1];
+                    value.boostReq = cauldronP2w[0][startIndex + 2];
+                }
+            })
+            Object.values(alchemy.p2w.liquidLevels).forEach((value, index) => {
+                const startIndex = index * 2
+                // It should never be less but you know, better safe.
+                if (startIndex < cauldronP2w[1].length) {
+                    value.regen = Math.max(cauldronP2w[1][startIndex], 0);
+                    value.capacity = Math.max(cauldronP2w[1][startIndex + 1], 0);
+                }
+            })
+            alchemy.p2w.vialAttempts = cauldronP2w[2][0];
+            alchemy.p2w.vialsRng = cauldronP2w[2][1];
+        }
     }
 }
 
@@ -599,29 +767,70 @@ const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
 const isLiquidComponent = (x: ComponentBaseModel): x is LiquidComponentModel => "liquidNo" in x
 const isComponent = (x: ComponentBaseModel): x is ComponentModel => "item" in x
 const isSpiceComponent = (x: ComponentBaseModel): x is SpiceComponentModel => "spiceNo" in x
+const isCropComponent = (x: ComponentBaseModel): x is CropComponentModel => "cropId" in x
+const isSummonComponent = (x: ComponentBaseModel): x is SummonComponentModel => "summonId" in x
+const isSailingTreasureComponent = (x: ComponentBaseModel): x is SailTreasureComponentModel => "sailTreasureNo" in x
 
 const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         bubble.rawRequirements.forEach(req => {
-            if (isLiquidComponent(req)) {
-                const itemName = `Liquid${req.liquidNo}`;
-                const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
-                bubble.requirements.push(reqItem);
-            }
-
-            if (isComponent(req)) {
-                const itemName = req.item;
-                const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
-                bubble.requirements.push(reqItem);
-            }
-
-            if (isSpiceComponent(req)) {
-                const itemName = `CookingSpice${req.spiceNo}`;
-                const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
-                bubble.requirements.push(reqItem);
+            switch (true) {
+                case isLiquidComponent(req): {
+                    const liquid = req as LiquidComponentModel;
+                    const itemName = `Liquid${liquid.liquidNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = liquid.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                // Jade upgrades only have quantity field which isn't distinct so can't use a type guard, hardcoded for now
+                case (["Quickdraw Quiver", "Essence Chapter"].includes(bubble.name)): {
+                    const itemName = `W6item0_x1`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = (req as JadeComponentModel).quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isComponent(req): {
+                    const comp = req as ComponentModel;
+                    const itemName = comp.item;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = comp.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSpiceComponent(req): {
+                    const spice = req as SpiceComponentModel;
+                    const itemName = `CookingSpice${spice.spiceNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = spice.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isCropComponent(req): {
+                    const crop = req as CropComponentModel;
+                    const itemName = `FarmCrop${crop.cropId}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = crop.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSummonComponent(req): {
+                    const summon = req as SummonComponentModel;
+                    const itemName = `W6item${parseInt(summon.summonId) + 6}_x1`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = summon.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
+                case isSailingTreasureComponent(req): {
+                    const treasure = req as SailTreasureComponentModel;
+                    const itemName = `SailTr${treasure.sailTreasureNo}`;
+                    const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
+                    reqItem.count = treasure.quantity;
+                    bubble.requirements.push(reqItem);
+                    return;
+                }
             }
         })
     })
@@ -629,16 +838,18 @@ const convertToItemClass = (alchemy: Alchemy, allItems: Item[]) => {
     alchemy.vials.forEach(vial => {
         vial.rawRequirements.forEach(req => {
             if (isLiquidComponent(req)) {
-                const itemName = `Liquid${req.liquidNo}`;
+                const liquid = req as LiquidComponentModel;
+                const itemName = `Liquid${liquid.liquidNo}`;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
+                reqItem.count = liquid.quantity;
                 vial.requirements.push(reqItem);
             }
 
             if (isComponent(req)) {
-                const itemName = req.item;
+                const comp = req as ComponentModel;
+                const itemName = comp.item;
                 const reqItem = allItems.find(item => item.internalName == itemName)?.duplicate() ?? Item.emptyItem(itemName);
-                reqItem.count = req.quantity;
+                reqItem.count = comp.quantity;
                 vial.requirements.push(reqItem);
             }
         })
@@ -664,7 +875,7 @@ export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
         .forEach(bubble => {
             (bubble as ImpactedByTheTomeBubble).theTomeTotalScore = tomeScore;
-    })
+        })
 
     return alchemy;
 }
@@ -723,8 +934,8 @@ export function updateAlchemy(data: Map<string, any>) {
     let totalW6portalsOpened = 0;
     players.forEach(player => {
         for (let i = 0; 13 > i; i++) {
-            const mapId = 251+i;
-            if (mapId < player.killInfo.size || mapId < MapInfo.length) {               
+            const mapId = 251 + i;
+            if (mapId < player.killInfo.size || mapId < MapInfo.length) {
                 MapInfo[mapId].data.portalRequirements.forEach(req => {
                     totalW6portalsOpened += (player.killInfo.get(mapId) ?? 0) > req ? 1 : 0;
                 });

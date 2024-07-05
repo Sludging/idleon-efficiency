@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Secret_Minibosses_v2.05;NEW_UPDATE_PATCH_NOTES_@_*Domeo_Magmus_Miniboss_can_be_summoned_from_within_World_5._I'll_give_you_a_hint,_look_in_the_first_5_maps_for_something_out_of_place..._@_*Demented_Spirilord_Miniboss_can_be_summoned_from_within_World_6._Need_another_hint?_There's_a_new_burial_marker_in_the_Mama_Troll_map..._@_*New_Obol_found_from_World_5_Miniboss_@_*New_Keychain_found_from_World_6_Miniboss_@_*5_New_Smithing_recipes_added_to_the_new_Miniboss_Drop_Tables._@_*New_Golden_Food_added,_found_primarily_in_the_new_Miniboss_Drop_Tables._@_*Stamps_now_display_their_LV!_Also,_little_arrows_were_added_to_help_show_which_stamps_need_what_to_update._Green_and_Black_mean_money,_Blue_and_Invisible_mean_materials!;*Le",
+                    "Poppy's_Fisheroo_v2.1;NEW_UPDATE_PATCH_NOTES_@_*Poppy_the_Kangaroo_Mouse_and_her_Fisheroo_Pool_has_been_added!_Find_her_in_World_2_using_the_new_map,_buy_it_in_the_Town_Shop!_@_*Catch_fish_and_spend_them_on_upgrades_to_help_catch_even_more_fish_for_Poppy,_and_bonuses_outside_of_fish_like_Fish_EXP,_Fish_Efficiency,_AFK_Gains,_Cash_from_Mobs,_and_more!_@_*New_Limited_Time_Gemshop_items_added,_go_check_them_out!_One_of_them_is_FREE,_which_is_like_honestly_crazy_is_this_the_first_time_there's_been_a_freebie_in_the_gemshop?!_@_*MEGAFISH_@_*Next_update_will_not_be_another_idler_type_game._Cry_tear_of_sadness_or_joy,_or_don't_cry_at_all,_big_girls_don't_cry.;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2538,7 +2538,23 @@ export const initRandoListRepo = () => {
                     "xSpaceC4"
                 ]
             }),
-        new RandoListBase(72, <RandoListModel>{"elements": ["_"]}),
+        new RandoListBase(72, <RandoListModel>{
+                "elements": [
+                    "wLavaA1",
+                    "wLavaA2",
+                    "wLavaA3",
+                    "wLavaA4",
+                    "wLavaA5",
+                    "wLavaB1",
+                    "wLavaB2",
+                    "wLavaB3",
+                    "wLavaB4",
+                    "wLavaB5",
+                    "wLavaB6",
+                    "wLavaC1",
+                    "wLavaC2"
+                ]
+            }),
         new RandoListBase(73, <RandoListModel>{
                 "elements": [
                     "Oh_hi_again_cutie..._how_you_doing?",
@@ -2644,7 +2660,8 @@ export const initRandoListRepo = () => {
                     "Tribal_Shaman",
                     "Legumulyte",
                     "Potti",
-                    "Sussy_Gene"
+                    "Sussy_Gene",
+                    "Spirit_Sungmin"
                 ]
             }),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
@@ -3093,6 +3110,66 @@ export const initRandoListRepo = () => {
                     "w6d1",
                     "w6d2",
                     "w6a2"
+                ]
+            }),
+        new RandoListBase(99, <RandoListModel>{
+                "elements": [
+                    "vSpiritA1",
+                    "vSpiritA2",
+                    "vSpiritA3",
+                    "vSpiritA4",
+                    "vSpiritA5",
+                    "vSpiritB1",
+                    "vSpiritB2",
+                    "vSpiritB3",
+                    "vSpiritB4",
+                    "vSpiritC1",
+                    "vSpiritC2",
+                    "vSpiritD1",
+                    "vSpiritD2",
+                    "vSpiritD3"
+                ]
+            }),
+        new RandoListBase(100, <RandoListModel>{
+                "elements": [
+                    "Â",
+                    "â",
+                    "œ",
+                    "Ÿ",
+                    "Ô",
+                    "Ö",
+                    "ô",
+                    "É",
+                    "È",
+                    "Ç",
+                    "Œ",
+                    "Œâ",
+                    "Œœ",
+                    "ŒŸ"
+                ]
+            }),
+        new RandoListBase(101, <RandoListModel>{
+                "elements": [
+                    "Gemstone_Ninja_Knowledge_{_+30%_DROP_RARITY",
+                    "New_Gold_Charms_added_{_+10%_ALL_STAT",
+                    "Bargain_Ninja_Knowledge_{_+5_All_Talent_LV",
+                    "+30_Max_LV_for_Sneaking_Items_{_1.10#_DMG_MULTI",
+                    "Haha_yea_there's_no_bonus_here_yet",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet."
+                ]
+            }),
+        new RandoListBase(102, <RandoListModel>{
+                "elements": [
+                    "{}%_Stealth_@_for_all_Ninjas",
+                    "{}%_Jade_@_Gain",
+                    "{}%_Damage_@_to_Doors",
+                    "+}%_Gold_@_Charm_Bonus",
+                    "{}%_Sneak_@_EXP_Gain",
+                    "{}%_Bonuses_@_from_Gemstones",
+                    "Hi",
+                    "Hi"
                 ]
             })    
 ]

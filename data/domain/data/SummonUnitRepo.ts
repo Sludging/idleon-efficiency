@@ -19,14 +19,14 @@ export const initSummonUnitRepo = () => {
             }),
         new SummonUnitBase(1, <SummonUnitModel>{
                 "height": 41,
-                "speed": 5.3,
+                "speed": 8,
                 "colRadius": 16,
                 "qtyText": 0,
                 "minQty": 1,
                 "maxQty": 3,
-                "baseCost": 15,
-                "baseHp": 2,
-                "baseDamage": 4
+                "baseCost": 10,
+                "baseHp": 1,
+                "baseDamage": 3
             }),
         new SummonUnitBase(2, <SummonUnitModel>{
                 "height": 38,

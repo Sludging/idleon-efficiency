@@ -260,9 +260,9 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(42, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "Nothing",
                 "world": "Blunder Hills",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 42},
+                "map": <MapNameModel>{"intName": "GrasslandsG", "name": "Grand Owl Perch", "id": 42},
                 "portalRequirements": [0]
             }),
         new MapDataBase(43, <MapDataModel>{
@@ -446,25 +446,25 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(73, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 73},
+                "map": <MapNameModel>{"intName": "zDesertCalmD", "name": "The Oasis", "id": 73},
                 "portalRequirements": [0]
             }),
         new MapDataBase(74, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 74},
                 "portalRequirements": [0]
             }),
         new MapDataBase(75, <MapDataModel>{
-                "enemy": "mimicA",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 75},
                 "portalRequirements": [0]
             }),
         new MapDataBase(76, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "Nothing",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 76},
                 "portalRequirements": [0]
@@ -1294,13 +1294,13 @@ export const initMapDataRepo = () => {
         new MapDataBase(214, <MapDataModel>{
                 "enemy": "w5b6",
                 "world": "Smolderin' Plateau",
-                "map": <MapNameModel>{"intName": "wLavaCBOSS", "name": "KattleKruk's Colosseum", "id": 214},
+                "map": <MapNameModel>{"intName": "wLavaCBOSS", "name": "KattleKruk's Volcano", "id": 214},
                 "portalRequirements": [100]
             }),
         new MapDataBase(215, <MapDataModel>{
-                "enemy": "w5b6",
+                "enemy": "w5a2",
                 "world": "Smolderin' Plateau",
-                "map": <MapNameModel>{"intName": "ColosseumE", "name": "Z", "id": 215},
+                "map": <MapNameModel>{"intName": "ColosseumE", "name": "Molten Colosseum", "id": 215},
                 "portalRequirements": [0]
             }),
         new MapDataBase(216, <MapDataModel>{
@@ -1598,15 +1598,15 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [100]
             }),
         new MapDataBase(265, <MapDataModel>{
-                "enemy": "w6d3",
+                "enemy": "w6a2",
                 "world": "Spirited Valley",
-                "map": <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Castle Interior", "id": 265},
+                "map": <MapNameModel>{"intName": "ColosseumF", "name": "Whimsical Colosseum", "id": 265},
                 "portalRequirements": [0]
             }),
         new MapDataBase(266, <MapDataModel>{
                 "enemy": "w6d3",
                 "world": "Spirited Valley",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 266},
+                "map": <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Castle Interior", "id": 266},
                 "portalRequirements": [0]
             }),
         new MapDataBase(267, <MapDataModel>{

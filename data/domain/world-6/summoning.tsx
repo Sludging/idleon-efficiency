@@ -1,8 +1,7 @@
 import { Domain, RawData } from "../base/domain";
 import { SummonUpgradeBase, initSummonUpgradeRepo } from "../data/SummonUpgradeRepo";
-import { SummonEnemyBase, initSummonEnemyRepo } from "../data/SummonEnemyRepo";
-import { SummonUnitBase, initSummonUnitRepo } from "../data/SummonUnitRepo";
-import { SummonEnemyBonusBase, initSummonEnemyBonusRepo } from "../data/SummonEnemyBonusRepo";
+import { initSummonEnemyRepo } from "../data/SummonEnemyRepo";
+import { initSummonEnemyBonusRepo } from "../data/SummonEnemyBonusRepo";
 import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { SummonUpgradeModel } from "../model/summonUpgradeModel";
@@ -11,9 +10,11 @@ import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
 import { nFormatter } from "../../utility";
-import { Deathnote, deathNoteMobOrder } from '../deathnote';
+import { deathNoteMobOrder } from '../deathnote';
 import { SummonEnemyModel } from "../model/summonEnemyModel";
 import { Sailing } from "../sailing";
+import { TaskBoard } from "../tasks";
+import { Achievement } from "../achievements";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -96,14 +97,16 @@ export class SummonUpgrade {
 export class SummonBonus {
     bonusValue: number = 0;
     pristineCharmBonus: number = 1;
-    artifactBonus: number = 1;
+    artifactBonus: number = 0;
+    taskBoardBonus: number = 0;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
     }
 
     getBonus = (): number => {
-        return 3.5 * this.bonusValue * this.pristineCharmBonus * this.artifactBonus;
+        return 3.5 * this.bonusValue * this.pristineCharmBonus * 
+            (1 + ((this.artifactBonus + this.taskBoardBonus) / 100));
     }
 
     getBonusText = (): string => {
@@ -407,12 +410,20 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
     const sailing = data.get("sailing") as Sailing;
+    const taskboard = data.get("taskboard") as TaskBoard;
+    const achievements = data.get("achievements") as Achievement[];
 
     const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
     const charmBonus = (crystalComb && crystalComb.unlocked) ? (1 + crystalComb.data.x1 / 100) : 1;
-    const sailingArtifactBonus = 1 + sailing.artifacts[32].getBonus() / 100;
+    const sailingArtifactBonus = sailing.artifacts[32].getBonus();
+
+    const achiev379 = achievements[379].completed ? 1 : 0; // x1.01
+    const achiev373 = achievements[373].completed ? 1 : 0; // x1.01
+    const taskBonus = taskboard.merits[44].getBonus();
+
     summoning.summonBonuses.forEach(bonus => {
         bonus.pristineCharmBonus = charmBonus;
         bonus.artifactBonus = sailingArtifactBonus;
+        bonus.taskBoardBonus = Math.min(10, taskBonus) + achiev373 + achiev379
     });
 }

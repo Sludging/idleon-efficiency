@@ -64,7 +64,8 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
         // And all players are linked to all gods.
         divinity.playerInfo.forEach(player => {
             // Doot is activated only for characters that are level 2 or above in divinity
-            if (players.find(playerFind => playerFind.playerID == player.playerIndex)?.skills.get(SkillsIndex.Divinity) ?? 0 >= 2) {
+            const divLevel = players.find(playerFind => playerFind.playerID == player.playerIndex)?.skills.get(SkillsIndex.Divinity)?.level ?? 0;
+            if (divLevel >= 2) {
                 player.gods = divinity.gods;
             }
         })

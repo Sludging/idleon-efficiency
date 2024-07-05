@@ -37,13 +37,16 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
             if (worldIndex == 4) {
                 setWorldLetter('E');
             }
+            if (worldIndex == 5) {
+                setWorldLetter('F');
+            }
         }
     }, [appContext, worldIndex])
 
     return (
         <ShadowBox background="dark-1" pad="medium">
             <Grid columns={{
-                count: ['D', 'E'].includes(worldLetter) ? 8 : worldLetter == 'C' ? 10 : 11,
+                count: ['D', 'E', 'F'].includes(worldLetter) ? 8 : worldLetter == 'C' ? 10 : 11,
                 size: 'auto',
             }} fill>
                 {

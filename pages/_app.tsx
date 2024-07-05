@@ -20,6 +20,7 @@ import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 import useSWR from 'swr';
 import { fetcher } from '../data/fetchers/getProfile';
+import Ramp from '../lib/ramp';
 
 const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 
@@ -123,7 +124,26 @@ const customTheme = deepMerge(dark, {
 declare const window: Window &
   typeof globalThis & {
     gtag: any
+    _pwGA4PageviewId: string
+    dataLayer: any
   }
+
+// Ad related things
+var pwUnits = [
+  // Disabled for now, I don't like it.
+  // {
+  //   type: 'bottom_rail'
+  // },
+  {
+    type: 'corner_ad_video'
+  },
+  {
+    type: 'left_rail'
+  },
+  {
+    type: 'right_rail'
+  }
+]
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [domain, setDomain] = useState<string>("");
@@ -185,15 +205,23 @@ function MyApp({ Component, pageProps }: AppProps) {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-RDM3GQEGMB', {
-                page_path: window.location.pathname,
-              });
-            `,
-        }}
+            window._pwGA4PageviewId = ''.concat(Date.now().toString());
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function () {
+              window.dataLayer.push(arguments);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-RDM3GQEGMB', {
+              'send_page_view': false,
+              page_path: window.location.pathname
+            });
+            window.gtag('event', 'ramp_js', {
+              'send_to': 'G-RDM3GQEGMB',
+              'pageview_id': window._pwGA4PageviewId
+            });
+        `}}
       />
+      <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
       <Grommet theme={customTheme} full>
         <AuthProvider appLoading={loading} data={publicData} domain={domain}>
           <AppProvider appLoading={loading} data={publicData} domain={domain} accountData={accountData}>
@@ -201,10 +229,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             {
               router.pathname.includes("leaderboards") ?
                 <Component {...pageProps} />
-              :
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+                :
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
             }
           </AppProvider>
         </AuthProvider>

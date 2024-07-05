@@ -38,7 +38,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Star Player": <TalentModel>{
                         "name": "Star Player",
-                        "description": "Gives { Star Talent Points. Star Talents are found throughout the game!",
+                        "description": "Gives { Star Talent Points. Star Talents are found later in the game",
                         "x1": 1,
                         "x2": 0,
                         "funcX": "add",
@@ -943,7 +943,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Star Player": <TalentModel>{
                         "name": "Star Player",
-                        "description": "Gives { Star Talent Points. Star Talents are found throughout the game!",
+                        "description": "Gives { Star Talent Points. Star Talents are found later in the game",
                         "x1": 1,
                         "x2": 0,
                         "funcX": "add",
@@ -2392,7 +2392,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Star Player": <TalentModel>{
                         "name": "Star Player",
-                        "description": "Gives { Star Talent Points. Star Talents are found throughout the game!",
+                        "description": "Gives { Star Talent Points. Star Talents are found later in the game",
                         "x1": 1,
                         "x2": 0,
                         "funcX": "add",
@@ -3828,7 +3828,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Star Player": <TalentModel>{
                         "name": "Star Player",
-                        "description": "Gives { Star Talent Points. Star Talents are found throughout the game!",
+                        "description": "Gives { Star Talent Points. Star Talents are found later in the game",
                         "x1": 1,
                         "x2": 0,
                         "funcX": "add",
