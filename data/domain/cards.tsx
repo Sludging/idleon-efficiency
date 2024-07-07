@@ -5,7 +5,7 @@ import { CardDataBase, initCardRepo } from "./data/CardRepo";
 import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
-import { IDforCardSETbonus } from "./cardSets";
+import { IDforCardSETbonus, cardSetMap } from "./cardSets";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
@@ -150,6 +150,7 @@ export class Card {
 }
 
 export interface CardSet {
+    id: number
     text: string
     bonus: number
 }
@@ -157,13 +158,14 @@ export interface CardSet {
 export class CardInfo {
     cards: Card[];
     equippedCards: Card[] = [];
-    cardSet: CardSet = { text: 'You don\'t have one equipped!', bonus: 0 };
+    cardSet: CardSet = { id: -1, text: 'You don\'t have one equipped!', bonus: 0};
 
     constructor(cardData: Record<string, number>, cardSetData: Map<string, number>, equippedCardsData: string[]) {
         this.cards = Card.fromBase(initCardRepo());
         const cardSetInfo = Object.entries(cardSetData)[0];
         if (cardSetInfo) {
             this.cardSet = {
+                id: IDforCardSETbonus.find(set => set.data.bonus == cardSetInfo[0])?.index ?? -1,
                 text: cardSetInfo[0],
                 bonus: cardSetInfo[1]
             };
@@ -187,6 +189,10 @@ export class CardInfo {
 
     getCardSetText = (): string => {
         return this.cardSet.text.replace(/_/g, " ").replace("{", this.cardSet.bonus.toString());
+    }
+
+    getCardSetIcon = (): string => {
+        return cardSetMap[this.cardSet.id]?.image ?? '';
     }
 
     getBonusForId = (id: number) => {
