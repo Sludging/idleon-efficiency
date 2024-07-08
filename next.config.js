@@ -9,7 +9,11 @@ const nextBuildId = require('next-build-id')
 const useCDN = ["production", "preview"].includes(process.env.VERCEL_ENV)
 // I use this to prefix the next.js files uploaded to the S3 bucket. 
 // This will allow me to clean it up periodically without fear of deleting latest code.
-const currentPatch = "2.0.5"
+let currentPatch = "2.0.11"
+
+if (process.env.VERCEL_ENV == "preview") {
+  currentPatch += "-preview";
+}
 
 const moduleExports = {
   reactStrictMode: true,
