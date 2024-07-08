@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Box,
     Grid,
@@ -13,22 +15,23 @@ import {
     ThemeContext
 } from "grommet"
 
-import { Stamp } from '../../data/domain/stamps';
-import { useEffect, useState, useContext, useMemo } from 'react';
-import { getCoinsArray, nFormatter } from '../../data/utility'
-import CoinsDisplay from "../../components/coinsDisplay";
+import { Stamp } from '../../../data/domain/stamps';
+import { useState, useContext, useMemo } from 'react';
+import { getCoinsArray, nFormatter } from '../../../data/utility'
+import CoinsDisplay from "../../../components/coinsDisplay";
 import styled from 'styled-components'
 import { NextSeo } from 'next-seo';
-import { Item } from "../../data/domain/items";
-import ItemSourcesDisplay from "../../components/base/ItemSourceDisplay";
-import TipDisplay, { TipDirection } from "../../components/base/TipDisplay";
-import IconImage from "../../components/base/IconImage";
-import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLabel";
-import { AtomCollider } from "../../data/domain/atomCollider";
-import { Storage } from "../../data/domain/storage";
+import { Item } from "../../../data/domain/items";
+import ItemSourcesDisplay from "../../../components/base/ItemSourceDisplay";
+import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
+import IconImage from "../../../components/base/IconImage";
+import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
+import { AtomCollider } from "../../../data/domain/atomCollider";
+import { Storage } from "../../../data/domain/storage";
 import { CircleInformation } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
-import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 const ShadowBox = styled(Box)`
     box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
@@ -36,7 +39,7 @@ const ShadowBox = styled(Box)`
 
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
-    const theData = useAppDataStore((state) => state.data.getData());
+    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
 
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
@@ -190,12 +193,9 @@ const HoverBox = styled(Box)`
 `
 
 function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
-    const [storage, setStorage] = useState<Storage>();
-    const theData = useAppDataStore((state) => state.data.getData());
-
-    useEffect(() => {
-        setStorage(theData.get("storage"));
-    }, [theData])
+    
+    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
+    const storage = theData.get("storage") as Storage;
 
     const tabLevel = tab.reduce((sum, stamp) => sum += stamp.level, 0);
     return (
@@ -225,7 +225,7 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 function Stamps() {
     const theme = useContext(ThemeContext);
     const [highlight, sethighlight] = useState(false);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
 
     const stampData = theData.get("stamps") as Stamp[][];
 
@@ -244,14 +244,6 @@ function Stamps() {
     const totalLevels = useMemo(() => {
         return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0) ?? 0;
     }, [theData, stampData])
-
-    if (!stampData) {
-        return (
-            <Box align="center" pad="medium">
-                <Heading level='3'>Loading or something is wrong!</Heading>
-            </Box>
-        )
-    }
 
     return (
         <Box>
