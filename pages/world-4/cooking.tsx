@@ -20,6 +20,7 @@ import { getCoinsArray, nFormatter, toTime } from '../../data/utility';
 import TextAndLabel from '../../components/base/TextAndLabel';
 import { AtomCollider } from '../../data/domain/atomCollider';
 import { Ascending, CircleInformation } from 'grommet-icons';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
@@ -128,12 +129,8 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
 }
 
 function KitchensDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
-    const [cooking, setCooking] = useState<CookingDomain>();
     const theData = useAppDataStore((state) => state.data.getData());
-
-    useEffect(() => {
-        setCooking(theData.get("cooking"));
-    }, [theData]);
+    const cooking = theData.get("cooking") as CookingDomain;
 
     return (
         <Box margin={{ bottom: 'medium' }} gap="small">
@@ -161,7 +158,6 @@ function Cooking() {
     const [sort, setSort] = useState<string>('');
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEquipped, setStarSignEquipped] = useState(false);
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
     const theData = useAppDataStore((state) => state.data.getData());
@@ -200,7 +196,7 @@ function Cooking() {
         }
 
         return false;
-    }, [appContext, cooking])
+    }, [theData, cooking])
 
     const starSignInfinity = useMemo(() => {
         if (cooking) {
@@ -211,7 +207,7 @@ function Cooking() {
         }
 
         return false;
-    }, [appContext, cooking])
+    }, [theData, cooking])
 
     const sortByIndex = (meal1: Meal, meal2: Meal) => {
         if (meal1.level == 0 && meal2.level > 0) {

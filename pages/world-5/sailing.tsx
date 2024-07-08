@@ -450,14 +450,12 @@ function IslandDisplay() {
 
 function Sailing() {
     const [activeTab, setActiveTab] = useState<string>("Overview");
-    const [sailing, setSailing] = useState<SailingDomain>();
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEquipped, setStarSignEquipped] = useState(false);
-    const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        setSailing(theData.get("sailing"));
-    }, [theData]);
+    const theData = useAppDataStore((state) => state.data.getData());
+    const sailing = theData.get("sailing") as SailingDomain;
+
 
     const starSignUnlocked = useMemo(() => {
         if (sailing) {
@@ -468,7 +466,7 @@ function Sailing() {
         }
 
         return false;
-    }, [appContext, sailing])
+    }, [theData, sailing])
 
     const starSignInfinity = useMemo(() => {
         if (sailing) {
@@ -479,7 +477,7 @@ function Sailing() {
         }
 
         return false;
-    }, [appContext, sailing])
+    }, [theData, sailing])
 
     if (!sailing) {
         return <Box>Loading</Box>

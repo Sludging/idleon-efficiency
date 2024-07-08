@@ -20,8 +20,7 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
     }, [worldLetter, achievementData])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
+        if (theData.size > 0) {
             setAchievementData(theData.get("achievements"));
             if (worldIndex == 0) {
                 setWorldLetter('A');

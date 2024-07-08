@@ -15,6 +15,7 @@ import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLa
 import { NoteModel } from '../../data/domain/model/noteModel';
 import ShadowBox from '../../components/base/ShadowBox';
 import { nFormatter } from '../../data/utility';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 
@@ -53,18 +54,19 @@ function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: 
 }
 
 function Slab() {
-    const [slabInfo, setSlabInfo] = useState<SlabDomain>();
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
     const theData = useAppDataStore((state) => state.data.getData()); 
     
+    const slabInfo = theData.get("slab") as SlabDomain;
+
     const missingItems = useMemo(() => {
         if (!slabInfo) {
             return [];
         }
 
         return slabInfo.obtainableItems.filter(item => !item.obtained).filter(item => !customHandCraftedListOfUnobtainableItems.includes(item.internalName));
-    }, [slabInfo, appContext]);
+    }, [slabInfo, theData]);
 
     const obtainedItems = useMemo(() => {
         if (!slabInfo) {
@@ -72,11 +74,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => item.obtained);
-    }, [slabInfo, appContext]);
-
-    useEffect(() => {
-        setSlabInfo(theData.get("slab"));
-    }, [theData]);
+    }, [slabInfo, theData]);
 
     if (!slabInfo) {
         return <Box>Loading</Box>

@@ -6,8 +6,7 @@ import {
 } from 'grommet'
 import { NextSeo } from 'next-seo';
 import { Crop, Farming as FarmingDomain, CropScientist } from '../../data/domain/world-6/farming';
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { AppContext } from '../../data/appContext';
+import { useMemo, useState } from 'react';
 import ShadowBox from '../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import IconImage from '../../components/base/IconImage';
@@ -18,21 +17,16 @@ import { CropDepotDisplay } from '../../components/world-6/farming/cropDepot';
 import { PlotsDisplay } from '../../components/world-6/farming/plots';
 import TipDisplay from '../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function Farming() {
     const [activeTab, setActiveTab] = useState<string>("Plots");
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEvoEquipped, setStarSignEvoEquipped] = useState(false);
     const [starSignOGEquipped, setStarSignOGEquipped] = useState(false);
-    const [farming, setFarming] = useState<FarmingDomain>();
-    const appContext = useContext(AppContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setFarming(theData.get("farming"));
-        }
-    }, [appContext]);
+    const theData = useAppDataStore((state) => state.data.getData());
+    const farming = theData.get("farming") as FarmingDomain;
 
     const starSignOGUnlocked = useMemo(() => {
         if (farming) {
@@ -43,7 +37,7 @@ function Farming() {
         }
 
         return false;
-    }, [appContext, farming])
+    }, [theData, farming])
 
     const starSignOGInfinity = useMemo(() => {
         if (farming) {
@@ -54,7 +48,7 @@ function Farming() {
         }
 
         return false;
-    }, [appContext, farming])
+    }, [theData, farming])
 
     const starSignEvoUnlocked = useMemo(() => {
         if (farming) {
@@ -65,7 +59,7 @@ function Farming() {
         }
 
         return false;
-    }, [appContext, farming])
+    }, [theData, farming])
 
     const starSignEvoInfinity = useMemo(() => {
         if (farming) {
@@ -76,7 +70,7 @@ function Farming() {
         }
 
         return false;
-    }, [appContext, farming])
+    }, [theData, farming])
 
     if (!farming) {
         return <>Loading...</>

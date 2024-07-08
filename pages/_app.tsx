@@ -18,6 +18,7 @@ import SEO from '../next-seo.config';
 import { useEffect } from 'react';
 import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
 import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
+import Ramp from '../lib/ramp';
 
 const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display: "swap" })
 

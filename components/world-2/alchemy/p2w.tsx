@@ -1,16 +1,14 @@
-import { useContext, useMemo } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useMemo } from "react";
 import { Alchemy, P2W_CAULDRON_BOOST_MAX, P2W_CAULDRON_NEWBUBBLE_MAX, P2W_CAULDRON_SPEED_MAX, P2W_LIQUIDS_CAPACITY_MAX, P2W_LIQUIDS_REGEN_MAX, P2W_VIALS_ATTEMPTS_MAX, P2W_VIALS_RNG_MAX } from "../../../data/domain/alchemy";
-import { Box, Stack, Text } from "grommet";
+import { Box, Text } from "grommet";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { getCoinsArray } from "../../../data/utility";
 import CoinsDisplay from "../../coinsDisplay";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 function P2WDisplay() {
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
-
+    const theData = useAppDataStore((state) => state.data.getData());
     const alchemyData = theData.get("alchemy") as Alchemy;
 
     const costToMaxVials = useMemo(() => {

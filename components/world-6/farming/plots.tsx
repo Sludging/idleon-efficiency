@@ -1,26 +1,20 @@
-import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
+import { Box, Grid, ResponsiveContext, Text } from "grommet";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { Crop, Plot, PlotGrowthStage, Farming, CropQuantity } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
-import { nFormatter, toTime } from "../../../data/utility";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { nFormatter } from "../../../data/utility";
+import { useContext, useMemo, useState } from "react";
 import { ComponentAndLabel } from "../../base/TextAndLabel";
 import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
-import { StaticTime, TimeDisplaySize, TimeDown, TimeDownWithCallback } from "../../base/TimeDisplay";
-import { AppContext } from "../../../data/appContext";
+import { TimeDisplaySize, TimeDownWithCallback } from "../../base/TimeDisplay";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquipped} : {silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean}) => {
-    const [farming, setFarming] = useState<Farming>();
     const size = useContext(ResponsiveContext);
-    const appContext = useContext(AppContext);
-
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setFarming(theData.get("farming"));
-        }
-    }, [appContext]);
+    
+    const theData = useAppDataStore((state) => state.data.getData());
+    const farming = theData.get("farming") as Farming;
     
     if (!farming) {
         return null;

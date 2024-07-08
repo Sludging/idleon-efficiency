@@ -26,6 +26,7 @@ import TextAndLabel, { ComponentAndLabel } from "../../components/base/TextAndLa
 import { TimeDown } from "../../components/base/TimeDisplay";
 import { AtomCollider } from "../../data/domain/atomCollider";
 import P2WDisplay from "../../components/world-2/alchemy/p2w";
+import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -136,7 +137,7 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                 <CapitalizedH3>{cauldron.name}</CapitalizedH3>
             </Box>
             <Box>
-                {
+            {
                     cauldron.bubbles
                     .map((bubble, index) => {
                         return (
@@ -158,23 +159,11 @@ function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVial
                                         {
                                             bubble.labUpgrade && <Ascending color="Legendary" size="large" />
                                         }
-                                        dropProps={{ align: size == "small" ? { top: 'bottom' } : cauldron.short_name == "Y" ? { right: 'left' } : { left: 'right' } }}
-                                    >
-                                        <Box direction="row" fill align="center">
-                                            <Box style={{ opacity: bubble.level > 0 ? 1 : 0.2 }}>
-                                                <IconImage data={bubble.getImageData()} scale={0.8} />
-                                            </Box>
-                                            <Box direction="row" gap="xsmall" align="center">
-                                                <Text size="small">{bubble.level}</Text>
-                                            </Box>
-                                            {
-                                                bubble.labUpgrade && <Ascending color="Legendary" size="large" />
-                                            }
-                                        </Box>
-                                    </Tip>
-                                </Box>
-                            )
-                        })
+                                    </Box>
+                                </Tip>
+                            </Box>
+                        )
+                    })
                 }
             </Box>
         </Box>

@@ -239,11 +239,11 @@ function Stamps() {
             return stampData[0][0].gildedCount;
         }
         return 0;
-    }, [appContext, stampData]);
+    }, [theData, stampData]);
 
     const totalLevels = useMemo(() => {
         return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0) ?? 0;
-    }, [appContext, stampData])
+    }, [theData, stampData])
 
     if (!stampData) {
         return (

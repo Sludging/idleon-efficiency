@@ -16,14 +16,11 @@ import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { CharacterBox } from '../../components/base/CharacterBox';
 import { ComponentAndLabel } from '../../components/base/TextAndLabel';
 import { Rift, SkillMastery } from '../../data/domain/rift';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 function MainframeDisplay() {
-    const [lab, setLab] = useState<LabDomain>();
     const theData = useAppDataStore((state) => state.data.getData());
-
-    useEffect(() => {
-        setLab(theData.get("lab"));
-    }, [theData]);
+    const lab = theData.get("lab") as LabDomain;
 
     if (!lab) {
         return <Box>Loading</Box>;
@@ -115,14 +112,9 @@ function MainframeDisplay() {
 }
 
 function ChipDisplay() {
-    const [lab, setLab] = useState<LabDomain>();
-    const [playersData, setPlayersData] = useState<Player[]>([]);
     const theData = useAppDataStore((state) => state.data.getData());
-
-    useEffect(() => {
-        setLab(theData.get("lab"));
-        setPlayersData(theData.get("players"));
-    }, [theData]);
+    const lab = theData.get("lab") as LabDomain;
+    const playersData = theData.get("players") as Player[];
 
     if (!lab) {
         return <Box>Loading</Box>;
@@ -214,8 +206,7 @@ function ChipDisplay() {
 function Lab() {
     const [activeTab, setActiveTab] = useState<string>("Mainframe");
 
-    const appContext = useContext(AppContext);
-    const theData = appContext.data.getData();
+    const theData = useAppDataStore((state) => state.data.getData());
     const rift = theData.get("rift") as Rift;
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 

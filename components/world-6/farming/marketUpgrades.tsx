@@ -1,25 +1,18 @@
-import { Box, Grid, ResponsiveContext, Stack, Text } from "grommet";
-import { useContext, useEffect, useState } from "react";
-import TabButton from "../../base/TabButton";
-import { Crop, Farming, MarketUpgrade, MarketUpgradeCost } from "../../../data/domain/world-6/farming";
+import { Box, Grid, ResponsiveContext, Text } from "grommet";
+import { useContext } from "react";
+import { Crop, Farming } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
-import { AppContext } from "../../../data/appContext";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 
 export const MarketUpgradesDisplay = () => {
-    const [farming, setFarming] = useState<Farming>();
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setFarming(theData.get("farming"));
-        }
-    }, [appContext]);
+    const theData = useAppDataStore((state) => state.data.getData());
+    const farming = theData.get("farming") as Farming;
     
     if (!farming) {
         return null;

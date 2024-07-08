@@ -53,11 +53,11 @@ function Forge() {
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;
         return [...(forge?.slots ?? [])].sort((slot1, slot2) => slot1.getTimeTillEmpty(forgeSpeed) < slot2.getTimeTillEmpty(forgeSpeed) ? -1 : 1)[0];
-    }, [appContext, forge])
+    }, [theData, forge])
 
     const totalCost = useMemo(() => {
         return forge?.upgrades.reduce((sum, upgrade) => sum += upgrade.getMaxCost(), 0) ?? 0;
-    }, [appContext, forge])
+    }, [theData, forge])
 
     useEffect(() => {
         setForge(theData.get("forge"));

@@ -18,13 +18,13 @@ import TabButton from '../../components/base/TabButton';
 import { PristineCharmSection } from '../../components/world-6/sneaking/pristineCharmsSection';
 import { SneakingInventory } from '../../components/world-6/sneaking/sneakingInventory';
 import { BeanstalkingDisplay } from '../../components/world-6/sneaking/beanstacking';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 function Sneaking() {
-    const appContext = useContext(AppContext);
-    const data = appContext.data.getData();
     const [activeTab, setActiveTab] = useState<string>("The Jade Emporium");
 
+    const theData = useAppDataStore((state) => state.data.getData());
     const sneaking = theData.get("sneaking") as SneakingDomain;
     const players = theData.get("players") as Player[];
 

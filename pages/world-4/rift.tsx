@@ -4,12 +4,11 @@ import {
     Text,
 } from 'grommet'
 import { NextSeo } from 'next-seo';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import IconImage from '../../components/base/IconImage';
 import ShadowBox from '../../components/base/ShadowBox';
 import TabButton from '../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../components/base/TextAndLabel';
-import { AppContext } from '../../data/appContext';
 import { ConstructionMastery, KillroyPrime, Rift, RiftBonus, SkillMastery } from '../../data/domain/rift';
 import { SkillsIndex } from '../../data/domain/SkillsIndex';
 import { Skilling } from '../../data/domain/skilling';
@@ -18,6 +17,7 @@ import { Player } from '../../data/domain/player';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
 import { Construction } from '../../data/domain/construction';
 import { nFormatter } from '../../data/utility';
+import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 
 
 function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string, text: string, icon?: ImageData, textSize?: string }) {
