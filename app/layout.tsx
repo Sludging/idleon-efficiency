@@ -9,6 +9,26 @@ import ContentWrapper from '../components/contentWrapper';
 import { FooterComponent } from '../components/footer/footer';
 import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
 import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
+import Ramp from '../lib/ramp';
+import { WebVitals } from '../components/web-vitals';
+import { RouterTracker } from '../components/routerTracker';
+
+// Ad related things
+var pwUnits = [
+    // Disabled for now, I don't like it.
+    // {
+    //   type: 'bottom_rail'
+    // },
+    {
+      type: 'corner_ad_video'
+    },
+    {
+      type: 'left_rail'
+    },
+    {
+      type: 'right_rail'
+    }
+  ]
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -20,6 +40,8 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <WebVitals />
+                <RouterTracker />
                 <StyledComponentsRegistry>
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
@@ -47,6 +69,28 @@ export default function RootLayout({
                     strategy="afterInteractive"
                     src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
                 />
+                <Script
+                    id="gtag-init"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window._pwGA4PageviewId = ''.concat(Date.now().toString());
+                            window.dataLayer = window.dataLayer || [];
+                            window.gtag = window.gtag || function () {
+                            window.dataLayer.push(arguments);
+                            };
+                            window.gtag('js', new Date());
+                            window.gtag('config', 'G-RDM3GQEGMB', {
+                            'send_page_view': false,
+                            page_path: window.location.pathname
+                            });
+                            window.gtag('event', 'ramp_js', {
+                            'send_to': 'G-RDM3GQEGMB',
+                            'pageview_id': window._pwGA4PageviewId
+                            });
+                        `}}
+                />
+                <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
             </body>
         </html>
     )

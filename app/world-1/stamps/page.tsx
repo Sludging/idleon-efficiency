@@ -16,7 +16,7 @@ import {
 } from "grommet"
 
 import { Stamp } from '../../../data/domain/stamps';
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext } from 'react';
 import { getCoinsArray, nFormatter } from '../../../data/utility'
 import CoinsDisplay from "../../../components/coinsDisplay";
 import styled from 'styled-components'
@@ -228,29 +228,18 @@ function Stamps() {
     const theData = useAppDataStore(useShallow((state) => state.data.getData()));
 
     const stampData = theData.get("stamps") as Stamp[][];
+    const collider = theData.get("collider") as AtomCollider;
 
-    const hydrogen = useMemo(() => {
-        const collider = theData.get("collider") as AtomCollider;
-        return collider.atoms[0];
-    }, [theData])
-
-    const gildedCount = useMemo(() => {
-        if (stampData) {
-            return stampData[0][0].gildedCount;
-        }
-        return 0;
-    }, [theData, stampData]);
-
-    const totalLevels = useMemo(() => {
-        return stampData?.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0) ?? 0;
-    }, [theData, stampData])
+    const hydrogen = collider.atoms[0];
+    const gildedCount = stampData[0][0].gildedCount
+    const totalLevels = stampData.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0);
 
     return (
         <Box>
             <NextSeo title="Stamps" />
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
             <Box direction="row" gap="medium">
-                <TextAndLabel label="Total Levels" text={totalLevels?.toString()} margin={{ bottom: 'small' }} />
+                <TextAndLabel label="Total Levels" text={totalLevels.toString()} margin={{ bottom: 'small' }} />
                 {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
                 {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} margin={{ bottom: 'small' }} />}
                 <Box direction="row" align="center" style={{ justifyContent: "left" }} gap="xsmall">

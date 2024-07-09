@@ -4,7 +4,7 @@ import { Box } from 'grommet';
 import type { NextPage } from 'next'
 import React from 'react'
 import Welcome from '../components/welcome';
-import Dashboard from '../pages/dashboard/dashboard';
+import Dashboard from './dashboard/dashboard';
 import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
 import { AppStatus, DataStatus } from '../lib/stores/appDataStore';
 import { useShallow } from 'zustand/react/shallow'
