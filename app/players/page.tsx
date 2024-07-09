@@ -1293,21 +1293,13 @@ const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolea
 );
 
 function Players() {
-    const [playerData, setPlayerData] = useState<Player[]>();
     const [index, setIndex] = useState<number>(0);
-    const [activePlayer, setActivePlayer] = useState<string>('');
-    const size = useContext(ResponsiveContext);
+    
     const theData = useAppDataStore((state) => state.data.getData());
-
+    const playerData = theData.get("players") as Player[];
+    
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
-    useEffect(() => {
-        setPlayerData(theData.get("players"));
-        if (playerData && playerData.length > 0 && activePlayer === '') {
-            const firstPlayer = playerData[0];
-            setActivePlayer(firstPlayer.playerID.toString() ?? '');
-        }
-    }, [theData, activePlayer, playerData]);
 
     if (!playerData || playerData.length == 0) {
         return <Box>Nothing to see here.</Box>

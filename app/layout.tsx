@@ -12,6 +12,7 @@ import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
 import Ramp from '../lib/ramp';
 import { WebVitals } from '../components/web-vitals';
 import { RouterTracker } from '../components/routerTracker';
+import { Suspense } from 'react';
 
 // Ad related things
 var pwUnits = [
@@ -20,15 +21,15 @@ var pwUnits = [
     //   type: 'bottom_rail'
     // },
     {
-      type: 'corner_ad_video'
+        type: 'corner_ad_video'
     },
     {
-      type: 'left_rail'
+        type: 'left_rail'
     },
     {
-      type: 'right_rail'
+        type: 'right_rail'
     }
-  ]
+]
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -40,8 +41,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <WebVitals />
-                <RouterTracker />
+                <Suspense>
+                    <WebVitals />
+                    <RouterTracker />
+                </Suspense>
                 <StyledComponentsRegistry>
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
