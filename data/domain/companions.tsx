@@ -61,7 +61,7 @@ export class Companions extends Domain {
 
     getRawKeys(): RawData[] {
         // We have special handling for adding the "ownedCompanions" data in idleonData.tsx, so no need to declare it here.
-        return []ף
+        return [];
     }
 }
 
