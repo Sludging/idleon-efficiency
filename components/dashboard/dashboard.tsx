@@ -3,7 +3,6 @@
 import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
 import { EmptyCircle, Tools, UserSettings, BarChart, CircleInformation } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
-import { NextSeo } from "next-seo";
 import { useContext, useEffect, useMemo, useState } from "react";
 import IconImage from "../base/IconImage";
 import ShadowBox from "../base/ShadowBox";
@@ -20,6 +19,11 @@ import { Arcade } from "../../data/domain/arcade";
 import { AFKTypeEnum } from "../../data/domain/enum/aFKTypeEnum";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { DataStatus } from "../../lib/stores/appDataStore";
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+    title: "Dashboard",
+}
 
 const isPlayerAlert = (x: Alert): x is PlayerAlert => "player" in x
 
@@ -185,7 +189,6 @@ function Dashboard() {
 
     return (
         <Box width={{ max: '1440px' }} pad={{ left: "large", right: 'large', bottom: 'medium' }} fill margin={{ left: 'auto', right: 'auto' }}>
-            <NextSeo title="Dashboard" />
             <Grid columns={mainColumns}>
                 <Box pad={{ right: '24px' }}>
                     <Box direction="row" align="center">

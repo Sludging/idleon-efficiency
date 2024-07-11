@@ -13,6 +13,31 @@ import Ramp from '../lib/ramp';
 import { WebVitals } from '../components/web-vitals';
 import { RouterTracker } from '../components/routerTracker';
 import { Suspense } from 'react';
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: { default: "Idleon Efficiency", template: "Idleon Efficiency | %s" },
+    description: "A website dedicated to helping players become more efficient in the idle MMO Legends of Idleon.",
+    openGraph: {
+        type: 'website',
+        locale: 'en_us',
+        url: 'https://idleonefficiency.com/',
+        siteName: 'Idleon Efficiency',
+        images: [
+            {
+                url: "https://idleonefficiency.com/title-image.png",
+                width: 1200,
+                height: 627,
+                alt: 'Idleon Efficiency',
+                type: 'image/png'
+            }
+        ]
+    },
+    keywords: ["Idleon", "Idle On", "Idle MMO", "Idle Games"],
+    other: {
+        propeller: "212136656dc025f7fb532bc66fd47bf8",
+    },
+}
 
 // Ad related things
 var pwUnits = [

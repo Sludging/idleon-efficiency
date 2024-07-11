@@ -1,15 +1,16 @@
-"use client"
-
 import {
     Box
 } from 'grommet'
-import { NextSeo } from 'next-seo';
+import type { Metadata } from 'next'
+ 
+export const metadata: Metadata = {
+    title: "Privacy Policy",
+}
 
 function PrivacyPolicy() {
 
     return (
         <Box align="left" pad="medium">
-            <NextSeo title="Privacy Policy" />
             {/* This is copy pasted from a generator, hence raw HTML */}
             <h1>Privacy Policy</h1>
             <p>Last updated: February 17, 2024</p>

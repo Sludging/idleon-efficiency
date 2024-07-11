@@ -16,7 +16,6 @@ import styled from 'styled-components'
 import { useContext, useState, MouseEventHandler } from 'react';
 import { AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
-import { NextSeo } from 'next-seo';
 import GoogleLogin from './login/googleLogin';
 import { useAuthStore } from '../lib/providers/authStoreProvider';
 import { DataStatus } from '../lib/stores/appDataStore';
@@ -103,7 +102,6 @@ export default function Welcome() {
 
     return (
         <Box>
-            <NextSeo title="Boost your efficiency in Legends of Idleon!" />
             <Box fill align="center" gap="medium" height={{ min: '571px', max: '571px' }} background="brand">
                 <Box margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns="1/2" fill pad="xlarge">
