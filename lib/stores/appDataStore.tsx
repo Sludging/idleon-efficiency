@@ -71,7 +71,7 @@ const handleStaticData = async (profile: string, currentData: IdleonData, data: 
 };
 
 const handleLiveData = async (userUid: string, currentData: IdleonData, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
-    const idleonData = await updateIdleonData(currentData.getData(), cloudsave, charNames, [], {}, true);
+    const idleonData = await updateIdleonData(currentData.getData(), cloudsave, charNames, companions, serverVars, true);
     sendEvent({
         action: "handle_snapshot",
         category: "engagement",

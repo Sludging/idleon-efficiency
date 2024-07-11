@@ -1,5 +1,6 @@
 import { SkillsIndex } from "./SkillsIndex";
 import { Alchemy } from "./alchemy";
+import { Domain, RawData } from "./base/domain";
 import { CompanionBase, initCompanionRepo } from "./data/CompanionRepo";
 import { Divinity } from "./divinity";
 import { EnemyInfo } from "./enemies";
@@ -26,26 +27,42 @@ export class Companion {
     }
 }
 
-export default function parseCompanions(ownedCompanions: number[]) {
-    const companions = Companion.fromBase(initCompanionRepo());
-
-    const localCompaniosn = localStorage.getItem("companions");
-    const editedCompanions: Companion[] = [];
-    if (localCompaniosn) {
-        editedCompanions.push(...JSON.parse(localCompaniosn) as Companion[]);
+export class Companions extends Domain {
+    constructor(public dataKey: string) {
+        super(dataKey);
     }
 
-    companions.forEach(companion => {
-        const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-        // Check if user edited it before, else default to false.
-        const editState =  editedCompanion ? editedCompanion.owned : false;
-        // We might have an old edit state, so priority for source of truth is currently owned companions
-        // if that one is false, use the edited value.
-        companion.owned = ownedCompanions.includes(companion.id) || editState;
-        companion.real = ownedCompanions.includes(companion.id);
-    })
+    init = () => {
+        const companions = Companion.fromBase(initCompanionRepo());
+        return companions;
+    }
 
-    return companions;
+    parse = (data: Map<string, any>) => {
+        const companions = data.get(this.getDataKey()) as Companion[];
+        const ownedCompanions = data.get("ownedCompanions") as number[]
+
+        console.log("Owned Companions: ", ownedCompanions);
+        const localCompanions = localStorage.getItem("companions");
+        const editedCompanions: Companion[] = [];
+        if (localCompanions) {
+            editedCompanions.push(...JSON.parse(localCompanions) as Companion[]);
+        }
+
+        companions.forEach(companion => {
+            const editedCompanion = editedCompanions.find(c => c.id === companion.id);
+            // Check if user edited it before, else default to false.
+            const editState = editedCompanion ? editedCompanion.owned : false;
+            // We might have an old edit state, so priority for source of truth is currently owned companions
+            // if that one is false, use the edited value.
+            companion.owned = ownedCompanions.includes(companion.id) || editState;
+            companion.real = ownedCompanions.includes(companion.id);
+        })
+    }
+
+    getRawKeys(): RawData[] {
+        // We have special handling for adding the "ownedCompanions" data in idleonData.tsx, so no need to declare it here.
+        return []ף
+    }
 }
 
 export const updateCompanionImpact = (data: Map<string, any>) => {

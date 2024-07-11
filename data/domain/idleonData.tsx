@@ -41,7 +41,7 @@ import { Constellations } from './constellations';
 import { Slab, updateSlabBonusDisplay } from './slab';
 import { Capacity, updateCapacity } from './capacity';
 import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './deathnote';
-import parseCompanions, { updateCompanionImpact } from './companions';
+import { Companions, updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from './rift';
@@ -125,6 +125,7 @@ const domainList: Domain[] = [
     new Farming("farming"),
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
+    new Companions("companions"),
 ]
 
 export class IdleonData {
@@ -257,9 +258,6 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
     accountData.set("rawData", data.toJSON())
     accountData.set("timeAway", JSON.parse(data.get('TimeAway')));
 
-    // Handle Companions
-    accountData.set("companions", parseCompanions(companions));
-
     // Do some time math, useful for adjusting AFK timers if needed.
     const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
     const lastUpdated = isStatic ? new Date(saveGlobalTime * 1000) : new Date()
@@ -292,7 +290,10 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
 
-
+        // Companions is unique as it needs data that doesn't come from cloudsave but from a different source, so jam it in.
+        if (dataDomain.dataKey == "companions") {
+            parseData.set("ownedCompanions", companions);
+        }
         // Execute the parse function.
         dataDomain.parse(parseData);
     });
