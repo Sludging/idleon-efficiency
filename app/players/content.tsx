@@ -198,7 +198,7 @@ function ShowSkills(props: SkillProps) {
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
     const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date | undefined, realLastUpdated: state.lastUpdated })
     ));
     const size = useContext(ResponsiveContext)
 
