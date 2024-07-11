@@ -10,11 +10,14 @@ import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { BorderType } from "grommet/utils";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export function BuildingsDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
     const [onlyCurrentlyBuilding, setOnlyCurrentlyBuilding] = useState(false);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const itemData = theData.get("itemsData") as Item[];
     const storage = theData.get("storage") as Storage;

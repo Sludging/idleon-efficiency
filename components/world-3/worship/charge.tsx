@@ -12,9 +12,12 @@ import { Player } from '../../../data/domain/player';
 import { TimeDisplaySize, TimeDown } from '../../base/TimeDisplay';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export function ChargeDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     
     const playerData = theData.get("players") as Player[];
     const worship = theData.get("worship") as WorshipDomain;

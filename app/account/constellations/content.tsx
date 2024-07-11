@@ -19,12 +19,15 @@ import { CharacterBox } from "../../../components/base/CharacterBox";
 import TextAndLabel from "../../../components/base/TextAndLabel";
 import { Document, Fireball, Map } from "grommet-icons";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function Constellations() {
     const [playerData, setPlayerData] = useState<Player[]>();
     const [constellations, setConstellations] = useState<Constellation[]>();
     const [index, setIndex] = useState<number>(0);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const size = useContext(ResponsiveContext)
 

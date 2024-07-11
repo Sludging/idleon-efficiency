@@ -24,12 +24,14 @@ import { ClassIndex, Talent } from '../../../data/domain/talents';
 import { nFormatter, uniqueFilter } from '../../../data/utility';
 import { BorderType } from 'grommet/utils';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function TerritoryDisplay() {
     const size = useContext(ResponsiveContext);
 
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {
@@ -93,8 +95,9 @@ function TerritoryDisplay() {
 
 function PetUpgradeDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const upgradeCosts = useMemo(() => {
         const cooking = theData.get("cooking") as Cooking;
         if (cooking && breeding) {
@@ -170,8 +173,9 @@ function PetUpgradeDisplay() {
 function ArenaBonusDisplay() {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const [playerData, setPlayerData] = useState<Player[]>();
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const beastMasters = useMemo(() => {
         return playerData?.filter(player => (player.classId == ClassIndex.Beast_Master)) ?? [];
     }, [playerData])
@@ -242,8 +246,9 @@ function ShinyDisplay() {
     const [filter, setFilter] = useState<string[]>([]);
     const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
     const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
     // Get breeding data, if it's not available yet just show placeholder loading.
@@ -392,8 +397,9 @@ function ShinyDisplay() {
 function EggDisplay() {
     const size = useContext(ResponsiveContext);
 
-    const theData = useAppDataStore((state) => state.data.getData());
-    
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));    
     const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {

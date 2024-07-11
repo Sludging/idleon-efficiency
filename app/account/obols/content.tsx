@@ -19,10 +19,13 @@ import { ItemStat } from "../../../data/domain/items";
 import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import type { Metadata } from 'next'
+import { useShallow } from "zustand/react/shallow";
 
 function ObolInventory() {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
         if (description) {
@@ -92,7 +95,9 @@ function ObolInventory() {
 
 function Obols() {
     const [playerData, setPlayerData] = useState<Player[]>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const [index, setIndex] = useState<number>(-1);
     const onActive = (nextIndex: number) => setIndex(nextIndex);

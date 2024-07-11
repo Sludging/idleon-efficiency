@@ -22,6 +22,7 @@ import TextAndLabel from '../../../components/base/TextAndLabel';
 import { AtomCollider } from '../../../data/domain/atomCollider';
 import { Ascending, CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function KitchenUpgrade({ title, level, spiceIndex, cost, costColor }: { title: string, level: number, spiceIndex: number, cost: number, costColor: string }) {
     return (
@@ -129,7 +130,9 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
 }
 
 function KitchensDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));    
     const cooking = theData.get("cooking") as CookingDomain;
 
     return (
@@ -160,8 +163,9 @@ function Cooking() {
     const [starSignEquipped, setStarSignEquipped] = useState(false);
     const size = useContext(ResponsiveContext);
 
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const cooking = theData.get("cooking") as CookingDomain;
 
     const hasColliderBonus = useMemo(() => {

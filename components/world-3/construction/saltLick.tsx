@@ -9,10 +9,13 @@ import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 import { Construction } from "../../../data/domain/construction";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export function SaltLickDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const saltLickData = theData.get("saltLick") as SaltLick;
     const refineryData = theData.get("refinery") as Refinery;

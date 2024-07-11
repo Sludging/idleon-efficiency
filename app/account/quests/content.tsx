@@ -22,6 +22,7 @@ import { QuestTypeEnum } from "../../../data/domain/enum/questTypeEnum";
 import { ImageData } from "../../../data/domain/imageData";
 import { CharacterBox } from "../../../components/base/CharacterBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 enum CharacterBoxStatus {
     Complete,
@@ -185,7 +186,9 @@ function Quests() {
     const [index, setIndex] = useState<number>(1);
     const [activeWorld, setActiveWorld] = useState<string>("Blunder Hills");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext)
 
     const npcsToShow = useMemo(() => {

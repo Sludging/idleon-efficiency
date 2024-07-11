@@ -6,10 +6,13 @@ import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: string, level: number }) {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
 
     const statsDisplay = (stats: ItemStat[], description: string) => {

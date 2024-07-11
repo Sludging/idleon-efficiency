@@ -12,6 +12,7 @@ import { TimeDown } from '../../../components/base/TimeDisplay';
 import { Gaming as GamingDomain } from '../../../data/domain/gaming';
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 // Gaming[0] = current bits
 // Gaming[6] = Unlocked imports?
@@ -19,7 +20,9 @@ import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 
 function Gaming() {
     const [gaming, setGaming] = useState<GamingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setGaming(theData.get("gaming"));

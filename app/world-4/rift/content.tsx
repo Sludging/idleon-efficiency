@@ -19,6 +19,7 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import { Construction } from '../../../data/domain/construction';
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string, text: string, icon?: ImageData, textSize?: string }) {
     return (
@@ -37,7 +38,9 @@ function BonusBlock({ label, text, icon, textSize = 'xlarge' }: { label: string,
 }
 
 function ConstructMasteryDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const skillMilestones = [250, 500, 750, 1000, 1250, 1500, 2500];
 
@@ -88,7 +91,9 @@ function ConstructMasteryDisplay() {
 }
 
 function SkillMasteryDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const skillMilestones = [150, 200, 300, 400, 500, 750, 1000];
 
@@ -167,7 +172,9 @@ const KillroyPrimeTooltip = ({ bonus }: { bonus: KillroyPrime }) => {
 }
 
 function RiftBonusDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     
     const rift = theData.get("rift") as Rift;
 

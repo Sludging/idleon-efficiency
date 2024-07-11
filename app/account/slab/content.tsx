@@ -16,6 +16,7 @@ import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAn
 import { NoteModel } from '../../../data/domain/model/noteModel';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: NoteModel | undefined }) {
 
@@ -54,7 +55,9 @@ function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: 
 function Slab() {
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const theData = useAppDataStore((state) => state.data.getData()); 
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     
     const slabInfo = theData.get("slab") as SlabDomain;
 

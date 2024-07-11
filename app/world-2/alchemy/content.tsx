@@ -28,6 +28,7 @@ import { TimeDown } from "../../../components/base/TimeDisplay";
 import { AtomCollider } from "../../../data/domain/atomCollider";
 import P2WDisplay from "../../../components/world-2/alchemy/p2w";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
@@ -197,7 +198,9 @@ function VialTipInfo({ vial }: { vial: Vial }) {
 }
 
 function VialsDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const alchemyData = theData.get("alchemy") as AlchemyData;
 
@@ -232,7 +235,9 @@ function VialsDisplay() {
 
 function SigilsDisplay() {
     const [sigilData, setSigilData] = useState<Sigils>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSigilData(theData.get("sigils"));
@@ -283,7 +288,9 @@ function BubblesDisplay() {
     const [discountLevel, setDiscountLevel] = useState<string>('0');
     const [classMulti, setClassMulti] = useState(false);
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     
     const alchemyData = theData.get("alchemy") as AlchemyData;
     const achievementsInfo = theData.get("achievements") as Achievement[];

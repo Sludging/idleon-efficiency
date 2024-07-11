@@ -5,10 +5,13 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function Merits({ worldIndex }: { worldIndex: number }) {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const meritsToShow = useMemo(() => {
         if (taskboardData) {

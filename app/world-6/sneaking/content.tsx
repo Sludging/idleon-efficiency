@@ -20,11 +20,14 @@ import { PristineCharmSection } from '../../../components/world-6/sneaking/prist
 import { SneakingInventory } from '../../../components/world-6/sneaking/sneakingInventory';
 import { BeanstalkingDisplay } from '../../../components/world-6/sneaking/beanstacking';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function Sneaking() {
     const [activeTab, setActiveTab] = useState<string>("The Jade Emporium");
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const sneaking = theData.get("sneaking") as SneakingDomain;
     const players = theData.get("players") as Player[];
 

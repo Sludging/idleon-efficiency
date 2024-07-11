@@ -18,6 +18,7 @@ import { Item } from '../../../data/domain/items';
 import { TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function ForgeItem({ item, title }: { item: Item, title: string }) {
     if (item.displayName == "Blank") {
@@ -49,7 +50,9 @@ function ForgeItem({ item, title }: { item: Item, title: string }) {
 function Forge() {
     const [forge, setForge] = useState<ForgeDomain | undefined>(undefined);
     const [activeTab, setActiveTab] = useState<string>("Slots");
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const firstSlotToEmpty = useMemo(() => {
         const forgeSpeed = forge?.upgrades[2].getStat() ?? 0;

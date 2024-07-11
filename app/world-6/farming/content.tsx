@@ -19,6 +19,7 @@ import { PlotsDisplay } from '../../../components/world-6/farming/plots';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function Farming() {
     const [activeTab, setActiveTab] = useState<string>("Plots");
@@ -26,7 +27,9 @@ function Farming() {
     const [starSignEvoEquipped, setStarSignEvoEquipped] = useState(false);
     const [starSignOGEquipped, setStarSignOGEquipped] = useState(false);
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const farming = theData.get("farming") as FarmingDomain;
 
     const starSignOGUnlocked = useMemo(() => {

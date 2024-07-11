@@ -15,6 +15,7 @@ import { Companion } from "../../../data/domain/companions";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { CircleInformation } from "grommet-icons";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 const CompanionBox = ({ companion, editable = false }: { companion: Companion, editable: boolean }) => {
     const [checked, setChecked] = useState<boolean>(companion.owned);
@@ -46,7 +47,9 @@ const CompanionBox = ({ companion, editable = false }: { companion: Companion, e
 
 function CompanionDisplay() {
     const [allowEditing, setAllowEditing] = useState<boolean>(false);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const companions = theData.get("companions") as Companion[];
 

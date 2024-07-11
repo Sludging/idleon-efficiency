@@ -5,11 +5,14 @@ import {
 } from 'grommet'
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const copyToClipboard = () => {
         if (navigator && navigator.clipboard) {

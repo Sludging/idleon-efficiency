@@ -15,6 +15,7 @@ import { CardSet } from '../../../data/domain/cardSets';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { initCardSetRepo } from '../../../data/domain/data/CardSetRepo';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 
 const shouldHideCard = ({ card }: { card: Card }) => {
@@ -152,7 +153,9 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
 function CardsDisplay() {
     const [cards, setCardsData] = useState<Card[]>();
     const cardSets = CardSet.fromBase(initCardSetRepo(), cards) as CardSet[];
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setCardsData(theData.get("cards"));

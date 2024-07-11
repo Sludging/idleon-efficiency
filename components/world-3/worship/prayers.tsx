@@ -10,9 +10,12 @@ import { Prayer } from '../../../data/domain/prayers';
 import { GroupByFunction, nFormatter } from '../../../data/utility';
 import { PrayerBase } from '../../../data/domain/data/PrayerRepo';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export function PrayerDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const prayers = theData.get("prayers") as Prayer[];
     const storage = theData.get("storage") as Storage;

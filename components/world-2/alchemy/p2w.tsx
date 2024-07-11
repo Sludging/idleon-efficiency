@@ -6,9 +6,12 @@ import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { getCoinsArray } from "../../../data/utility";
 import CoinsDisplay from "../../coinsDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function P2WDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const alchemyData = theData.get("alchemy") as Alchemy;
 
     const costToMaxVials = useMemo(() => {

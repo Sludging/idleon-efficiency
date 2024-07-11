@@ -30,6 +30,9 @@ export type AppDataState = {
     dataStatus: DataStatus,
     profile: string
 
+    // Trying this as means to force re-render
+    lastUpdated: Date
+
     // This shouldn't be used by anything but I need it in the state .. I think
     firestore: FirestoreData | undefined
 }
@@ -51,6 +54,8 @@ export const initAppDataStore = (initData: Map<string, any>): AppDataState => {
         status: AppStatus.Init,
         dataStatus: DataStatus.Init,
         profile: "",
+
+        lastUpdated: new Date(),
 
         firestore: undefined
     }
@@ -89,6 +94,8 @@ export const defaultInitState: AppDataState = {
     status: AppStatus.Init,
     dataStatus: DataStatus.Init,
     profile: "",
+
+    lastUpdated: new Date(),
 
     firestore: undefined
 }
@@ -137,7 +144,7 @@ export const createAppDataStore = (
         handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
             set((state) => ({ dataStatus: DataStatus.Loading }));
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
-            set((state) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready }));
+            set((state) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));
         },
     }))
 }

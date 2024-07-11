@@ -38,7 +38,9 @@ const ShadowBox = styled(Box)`
 
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
-    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const allItems = theData.get("itemsData") as Item[];
     const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
@@ -193,7 +195,9 @@ const HoverBox = styled(Box)`
 
 function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
     
-    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const storage = theData.get("storage") as Storage;
 
     const tabLevel = tab.reduce((sum, stamp) => sum += stamp.level, 0);
@@ -224,7 +228,9 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 function Stamps() {
     const theme = useContext(ThemeContext);
     const [highlight, sethighlight] = useState(false);
-    const theData = useAppDataStore(useShallow((state) => state.data.getData()));
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const stampData = theData.get("stamps") as Stamp[][];
     const collider = theData.get("collider") as AtomCollider;

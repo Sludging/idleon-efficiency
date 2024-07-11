@@ -7,11 +7,14 @@ import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export const MarketUpgradesDisplay = () => {
     const size = useContext(ResponsiveContext);
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const farming = theData.get("farming") as Farming;
     
     if (!farming) {

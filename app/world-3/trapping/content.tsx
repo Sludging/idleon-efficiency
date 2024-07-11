@@ -21,6 +21,7 @@ import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -94,7 +95,9 @@ function PlayerTraps(props: PlayerTrapProps) {
 }
 
 function Traps() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const playerTraps = theData.get("traps") as Trap[][];
     const playerNames = theData.get("playerNames") as string[];

@@ -16,10 +16,13 @@ import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAn
 import { dateToText } from "../../../data/utility";
 import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function DungeonItems() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setDungeonData(theData.get("dungeons") as Dungeons);
@@ -67,7 +70,9 @@ function DungeonItems() {
 
 function DungeonPassives() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setDungeonData(theData.get("dungeons") as Dungeons);
@@ -145,8 +150,10 @@ function DungeonPassives() {
 
 function DungeonTraits() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
-    const theData = useAppDataStore((state) => state.data.getData());
-
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+    
     useEffect(() => {
         setDungeonData(theData.get("dungeons") as Dungeons);
     }, [theData]);
@@ -197,7 +204,9 @@ function DungeonsDisplay() {
     const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const [subTab, setSubTab] = useState<string>("Items");
     const [serverVars, setServerVars] = useState<Record<string, any>>({})
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const nextHappyHour = useMemo(() => {
         if (serverVars && Object.keys(serverVars).includes("HappyHours")) {

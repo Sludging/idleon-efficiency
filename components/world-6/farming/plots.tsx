@@ -9,11 +9,14 @@ import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
 import { TimeDisplaySize, TimeDownWithCallback } from "../../base/TimeDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquipped} : {silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean}) => {
     const size = useContext(ResponsiveContext);
     
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const farming = theData.get("farming") as Farming;
     
     if (!farming) {

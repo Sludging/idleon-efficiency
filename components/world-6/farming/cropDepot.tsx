@@ -5,9 +5,12 @@ import { nFormatter, toTime } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export const CropDepotDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const farming = theData.get("farming") as Farming;
     
     if (!farming) {

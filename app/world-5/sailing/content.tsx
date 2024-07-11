@@ -21,6 +21,7 @@ import { ArtifactStatus } from '../../../data/domain/sailing/artifacts';
 import { nFormatter, range } from '../../../data/utility';
 import styled from 'styled-components';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 const BlankBox = styled.div`
 height: 10px;
@@ -37,7 +38,9 @@ background-color: black;
 
 function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSailing(theData.get("sailing"));
@@ -144,7 +147,9 @@ function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
 
 function CaptainsDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSailing(theData.get("sailing"));
@@ -213,7 +218,9 @@ function CaptainsDisplay() {
 function ArtifactDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
     const [hideUnobtained, setHideUnobtained] = useState(false);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSailing(theData.get("sailing"));
@@ -303,7 +310,9 @@ function ArtifactDisplay() {
 
 function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSailing(theData.get("sailing"));
@@ -402,7 +411,9 @@ function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boole
 
 function IslandDisplay() {
     const [sailing, setSailing] = useState<SailingDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setSailing(theData.get("sailing"));
@@ -454,7 +465,9 @@ function Sailing() {
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEquipped, setStarSignEquipped] = useState(false);
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const sailing = theData.get("sailing") as SailingDomain;
 
 

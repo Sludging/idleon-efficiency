@@ -50,7 +50,7 @@ function RefineryDisplay() {
 
     const { theData, lastUpdated } = useAppDataStore(
         useShallow((state) => (
-            { theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date }
+            { theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date, realLastUpdate: state.lastUpdated }
         )));
     const refineryData = theData.get("refinery") as Refinery;
     const itemData = theData.get("itemsData") as Item[];
@@ -374,7 +374,9 @@ function SampleBox({ sample, itemData, printing = false, slotUnlocked = false }:
 }
 
 function PrinterDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const itemData = theData.get("itemsData") as Item[];
     const printerData = theData.get("printer") as Printer;
@@ -523,7 +525,9 @@ function PrinterDisplay() {
 
 function DeathnoteDisplay() {
     const [deathnoteData, setDeathnoteData] = useState<Deathnote>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
     const monsterInfo = EnemyInfo;
@@ -642,7 +646,9 @@ function DeathnoteDisplay() {
 }
 
 function ShrinesDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const shrineData = theData.get("shrines") as Shrine[];
 

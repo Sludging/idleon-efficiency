@@ -197,8 +197,8 @@ function ShowSkills(props: SkillProps) {
 }
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
-    const { theData, lastUpdated } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date | undefined })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const size = useContext(ResponsiveContext)
 
@@ -574,7 +574,9 @@ function ItemDisplay({ item, size = "50px", goldFoodMulti }: { item: Item | unde
 
 
 function EquipmentDisplay({ player }: { player: Player }) {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const family = theData.get("family") as Family;
     const stampData = theData.get("stamps") as Stamp[][];
     const achievementsInfo = theData.get("achievements") as Achievement[];
@@ -679,7 +681,9 @@ function StatuesDisplay({ playerStatues, player }: { playerStatues: PlayerStatue
 }
 
 function AnvilDisplay({ player }: { player: Player }) {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const anvils = theData.get("anvil") as AnvilWrapper;
     const storage = theData.get("storage") as Storage;
@@ -787,7 +791,9 @@ function AnvilDisplay({ player }: { player: Player }) {
 }
 
 function CarryCapacityDisplay({ player }: { player: Player }) {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
     const playerCapacity = useMemo(() => {
@@ -969,7 +975,9 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }
 function InventoryDisplay({ player }: { player: Player }) {
     const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
     const size = useContext(ResponsiveContext);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const allItems = theData.get("itemsData") as Item[];
 
     useEffect(() => {
@@ -1189,7 +1197,9 @@ function PlayerTab({ player }: PlayerTabProps) {
     const [index, setIndex] = useState<number>(1);
     const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const poExtra = theData.get("POExtra");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
@@ -1294,7 +1304,9 @@ const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolea
 function Players() {
     const [index, setIndex] = useState<number>(0);
     
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const playerData = theData.get("players") as Player[];
     
     const onActive = (nextIndex: number) => setIndex(nextIndex);

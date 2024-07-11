@@ -31,6 +31,7 @@ function UploadProfile() {
         useShallow((state) => ({
             theData: state.data.getData(),
             data: state.data,
+            lastUpdated: state.lastUpdated,
         })));
 
     const [uploadSensitiveData, setUploadSensitiveData] = useState<boolean>(false);

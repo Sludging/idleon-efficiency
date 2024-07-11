@@ -16,11 +16,14 @@ import { Player } from '../../../data/domain/player';
 import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function AlignmentDisplay() {
     const [divinity, setDivinity] = useState<DivinityDomain>();
     const [playerData, setPlayers] = useState<Player[]>([]);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setDivinity(theData.get("divinity"));
@@ -87,7 +90,9 @@ function AlignmentDisplay() {
 
 function GodDisplay() {
     const [divinity, setDivinity] = useState<DivinityDomain>();
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setDivinity(theData.get("divinity"));

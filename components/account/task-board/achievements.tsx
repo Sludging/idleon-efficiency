@@ -4,13 +4,16 @@ import { Achievement } from "../../../data/domain/achievements";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function Achivements({ worldIndex }: { worldIndex: number }) {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
     const [worldLetter, setWorldLetter] = useState<string>('A');
     const size = useContext(ResponsiveContext)
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const achievementsToShow = useMemo(() => {
         if (achievementData) {

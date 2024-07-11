@@ -20,6 +20,7 @@ import CoinsDisplay from '../../../components/coinsDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { CharacterBox } from '../../../components/base/CharacterBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player, playerAnvil: AnvilModel, anvilItem: AnvilProduct }) {
     return (
@@ -65,7 +66,9 @@ function ProductionProgress({ player, playerAnvil, anvilItem }: { player: Player
 }
 
 function PointsDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const anvilWrapper = theData.get("anvil") as AnvilWrapper;
     const players = theData.get("players") as Player[];
@@ -166,7 +169,9 @@ function PointsDisplay() {
 }
 
 function AnvilProductionDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const anvilWrapper = theData.get("anvil") as AnvilWrapper;
     const players = theData.get("players") as Player[];

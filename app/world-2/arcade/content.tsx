@@ -13,12 +13,15 @@ import { Stamp } from '../../../data/domain/stamps';
 import { StaticTime, TimeDisplaySize } from '../../../components/base/TimeDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function Arcade() {
     const [arcadeData, setArcadeData] = useState<ArcadeData>();
     const [stampData, setStampData] = useState<Stamp[][]>([]);
     const [serverVars, setServerVars] = useState<Record<string, any>>({})
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     useEffect(() => {
         setArcadeData(theData.get("arcade"));

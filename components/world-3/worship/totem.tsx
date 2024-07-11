@@ -10,11 +10,14 @@ import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAn
 import { Worship as WorshipDomain } from '../../../data/domain/worship';
 import ShadowBox from "../../base/ShadowBox";
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export function TotemDisplay() {
     const [efficiency, setEfficiency] = useState<number>(0);
     const [effFoodBonus, setEffFoodBonus] = useState<number>(0);
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
     const worship = theData.get("worship") as WorshipDomain;

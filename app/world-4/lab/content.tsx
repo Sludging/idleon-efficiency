@@ -18,9 +18,12 @@ import { CharacterBox } from '../../../components/base/CharacterBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Rift, SkillMastery } from '../../../data/domain/rift';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function MainframeDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const lab = theData.get("lab") as LabDomain;
 
     if (!lab) {
@@ -113,7 +116,9 @@ function MainframeDisplay() {
 }
 
 function ChipDisplay() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const lab = theData.get("lab") as LabDomain;
     const playersData = theData.get("players") as Player[];
 
@@ -207,7 +212,9 @@ function ChipDisplay() {
 function Lab() {
     const [activeTab, setActiveTab] = useState<string>("Mainframe");
 
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const rift = theData.get("rift") as Rift;
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 

@@ -41,7 +41,6 @@ export class Companions extends Domain {
         const companions = data.get(this.getDataKey()) as Companion[];
         const ownedCompanions = data.get("ownedCompanions") as number[]
 
-        console.log("Owned Companions: ", ownedCompanions);
         const localCompanions = localStorage.getItem("companions");
         const editedCompanions: Companion[] = [];
         if (localCompanions) {

@@ -16,9 +16,12 @@ import { SummoningBonuses } from '../../../components/world-6/summoning/summonin
 import { SummoningUpgrades } from '../../../components/world-6/summoning/summoningUpgrades';
 import { SummoningBattles } from '../../../components/world-6/summoning/summoningBattles';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 function Summoning() {
-    const theData = useAppDataStore((state) => state.data.getData());
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const [activeTab, setActiveTab] = useState<string>("Winner bonuses");
 
