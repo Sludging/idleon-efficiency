@@ -210,7 +210,7 @@ function Quests() {
         }
 
         return filtered.sort(([name1], [name2]) => name1 > name2 ? 1 : -1);
-    }, [questsData, activeWorld])
+    }, [questsData, activeWorld]);
 
     useEffect(() => {
         setPlayerData(theData.get("players"));

@@ -468,7 +468,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         player.labInfo.chips.length > 0 &&
                         <Box gap="small">
                             <Text>Chips:</Text>
-                            <Box direction="row">
+                            <Box direction="row" wrap>
                                 {
                                     player.labInfo.chips.map((slot, index) => (
                                         <Box key={index} direction="row" gap="small" border={{ color: 'grey-1', side: 'all', size: '2px' }}>
@@ -1064,9 +1064,11 @@ function ZowInfo({ player }: { player: Player }) {
             "Spike Surprise", "YumYum Grotto", "Salty Shores", "Faraway Piers", "Filler", "Deepwater Docks", "Bandit Bob's Hideout", "Frostbite Towndra",
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "Enclave a la Troll",
-            "Magma Rivertown", "YumYum Islands", "Chizoar's Cavern", "Tunnel Closed",
+            "Magma Rivertown", "YumYum Islands", "Chizoar's Cavern", "Tunnel Closed", "KattleKruk's Volcano",
             // world 6
-            "Motherlode Pit", "Companion Park", "Spirit Village", "Castle Interior"
+            "Motherlode Pit", "Companion Park", "Spirit Village", "Castle Interior",
+            // minigame Howl and Poppy
+            "Grand Owl Perch", "The Oasis"
         ].includes(area)) {
             return true;
         }

@@ -36,6 +36,7 @@ export enum AlertType {
     EquinoxFull = "Equinox Full",
     CanCraftLuckierLad = "Can craft Luckier Lad",
     CanBuyFamiliar = "Can buy a familiar for Summoning",
+    PassiveCardEquipped = "Cards that are passive are equipped"
 }
 
 export abstract class Alert {
@@ -60,12 +61,12 @@ export class PlayerAlert extends Alert {
 }
 
 export class CardSetAlert extends PlayerAlert {
-    constructor(player: Player, text: string) {
+    constructor(player: Player, text: string, icon: string) {
         super(player, AlertType.CardSet);
         this.title = "Bad card set";
         this.text = text;
         this.icon = {
-            location: 'CardSet26',
+            location: icon,
             height: 36,
             width: 36,
         }
@@ -149,6 +150,18 @@ export class SneakingLevelReady extends PlayerAlert {
         // Override default size
         this.icon.height = 36;
         this.icon.width = 36;
+    }
+}
+
+export class PassiveCardEquipped extends PlayerAlert {
+    constructor(player: Player) {
+        super(player, AlertType.PassiveCardEquipped);
+        this.title = "Some passive cards are equipped (you always get their bonus so you shouldn't equip them)"
+        this.icon = {
+            location: 'ClassIconsQmark',
+            height: 36,
+            width: 36,
+        }
     }
 }
 
@@ -254,23 +267,28 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
-            if (![0, 1, 4, 5, 6, 9, 10].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`));
+            if (![0, 1, 4, 5, 6, 9, 10, 11].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Lab:
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Skilling:
             if (![1, 2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Unknown:
             alerts.push(new DoingNothingAlert(player));
             break;
+    }
+
+    // Passive cards equipped
+    if (player.cardInfo?.equippedCards.some(card => card.passive)) {
+        alerts.push(new PassiveCardEquipped(player));
     }
 
     // Anvil Alerts
