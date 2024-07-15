@@ -1,15 +1,18 @@
 import { Box, Grid, Text } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useEffect, useMemo, useState } from "react";
 import { TaskBoard } from "../../../data/domain/tasks";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function Tasks({ worldIndex }: { worldIndex: number }) {
     const [taskboardData, setTaskboardData] = useState<TaskBoard>();
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const tasksToShow = useMemo(() => {
         if (taskboardData) {
@@ -19,11 +22,8 @@ function Tasks({ worldIndex }: { worldIndex: number }) {
     }, [taskboardData, worldIndex])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setTaskboardData(theData.get("taskboard"));
-        }
-    }, [appContext])
+        setTaskboardData(theData.get("taskboard"));
+    }, [theData])
 
     return (
         <Grid columns={{ count: 3, size: 'auto' }} pad="small" gap="small">

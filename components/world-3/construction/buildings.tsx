@@ -1,6 +1,5 @@
 import { Box, CheckBox, Meter, Text, Stack } from "grommet";
-import { useContext, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useMemo, useState } from "react";
 import { Building } from "../../../data/domain/buildings";
 import { Construction } from "../../../data/domain/construction";
 import { Item } from "../../../data/domain/items";
@@ -10,13 +9,16 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { BorderType } from "grommet/utils";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export function BuildingsDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
     const [onlyCurrentlyBuilding, setOnlyCurrentlyBuilding] = useState(false);
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    const theData = appContext.data.getData();
     const itemData = theData.get("itemsData") as Item[];
     const storage = theData.get("storage") as Storage;
     const constructionData = theData.get("construction") as Construction;

@@ -1,11 +1,13 @@
+'use client'
+
 import React, { useCallback, useEffect, useState } from "react";
-import { getAuth, getRedirectResult, signInWithRedirect, User } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
 import app from "./config";
-import { GoogleAuthProvider, signInWithPopup, signInWithCredential, signOut, EmailAuthProvider, OAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithCredential, signOut, EmailAuthProvider, OAuthProvider } from "firebase/auth";
 
 import { sendEvent, loginEvent } from '../../lib/gtag';
-import { useRouter } from "next/dist/client/router";
 import { AppleLogin } from "../domain/login/appleLogin";
+import { isSubDomain } from "../utility";
 
 export enum AuthStatus {
     Loading,
@@ -32,10 +34,9 @@ export const getAuthData = (): AuthData => {
     return contextState;
 };
 
-export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<string, any>, charNames: string[] } | undefined, domain: string, children?: React.ReactNode }> = ({ appLoading, data, domain, children }) => {
+export const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [authStatus, setAuthStatus] = useState(AuthStatus.Loading);
-    const router = useRouter();
 
     const loginThroughToken = useCallback((id_token: string, callback?: Function) => {
         const auth = getAuth(app);
@@ -45,7 +46,6 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
                 setUser(result.user);
                 loginEvent("TOKEN");
                 setAuthStatus(AuthStatus.Valid);
-                router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -64,7 +64,6 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
                 setUser(result.user);
                 loginEvent("EMAIL");
                 setAuthStatus(AuthStatus.Valid);
-                router.push("/world-1/stamps");
             }).catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -84,19 +83,18 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
             const idToken = await AppleLogin.signIn();
             const credential = provider.credential({ idToken: idToken });
             signInWithCredential(auth, credential)
-            .then((result) => {
-                setUser(result.user);
-                loginEvent("APPLE");
-                setAuthStatus(AuthStatus.Valid);
-                router.push("/world-1/stamps");
-            }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (callback) {
-                    callback(errorCode);
-                }
-                console.debug(errorCode, errorMessage);
-            });
+                .then((result) => {
+                    setUser(result.user);
+                    loginEvent("APPLE");
+                    setAuthStatus(AuthStatus.Valid);
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    if (callback) {
+                        callback(errorCode);
+                    }
+                    console.debug(errorCode, errorMessage);
+                });
         } catch (e) {
             console.log("Something went wrong, contact me")
             if (callback) {
@@ -107,6 +105,7 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
 
     const logout = useCallback(() => {
         const auth = getAuth(app);
+
         if (user) {
             signOut(auth)
                 .then((result) => {
@@ -117,8 +116,6 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
                     });
                     setUser(null);
                     setAuthStatus(AuthStatus.NoUser);
-                    router.push('/');
-                    router.reload()
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
@@ -128,25 +125,27 @@ export const AuthProvider: React.FC<{ appLoading: boolean, data: { data: Map<str
     }, [user])
 
     useEffect(() => {
-        if (!appLoading && domain == "") {
-            setAuthStatus(AuthStatus.Loading);
-            const auth = getAuth(app);
-            auth.onAuthStateChanged(res => {
-                if (res) {
-                    setUser(res);
-                    setAuthStatus(AuthStatus.Valid);
-                }
-                else {
-                    setUser(null);
-                    setAuthStatus(AuthStatus.NoUser);
+        // If we are on a subdomain, no need to configure user auth.
+        if (authStatus == AuthStatus.Loading) {
+            if (isSubDomain()) {
+                setAuthStatus(AuthStatus.NoUser);
 
-                }
-            });
+            } else {
+                const auth = getAuth(app);
+                auth.onAuthStateChanged(res => {
+                    if (res) {
+                        setUser(res);
+                        setAuthStatus(AuthStatus.Valid);
+                    }
+                    else {
+                        setUser(null);
+                        setAuthStatus(AuthStatus.NoUser);
+
+                    }
+                })
+            }
         }
-        else if (domain != "") {
-            setAuthStatus(AuthStatus.NoUser);
-        }
-    }, [user, appLoading, domain]);
+    }, [authStatus])
 
     return (
         <AuthContext.Provider value={{

@@ -6,18 +6,20 @@ import {
     TextInput,
 } from 'grommet'
 import { useContext, useState } from 'react';
-import { AppContext } from '../../../data/appContext'
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Worship as WorshipDomain } from '../../../data/domain/worship';
 import ShadowBox from "../../base/ShadowBox";
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export function TotemDisplay() {
     const [efficiency, setEfficiency] = useState<number>(0);
     const [effFoodBonus, setEffFoodBonus] = useState<number>(0);
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
     const worship = theData.get("worship") as WorshipDomain;
 
     return (

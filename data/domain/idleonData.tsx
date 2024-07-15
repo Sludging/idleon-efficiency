@@ -41,7 +41,7 @@ import { Constellations } from './constellations';
 import { Slab, updateSlabBonusDisplay } from './slab';
 import { Capacity, updateCapacity } from './capacity';
 import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './deathnote';
-import parseCompanions, { updateCompanionImpact } from './companions';
+import { Companions, updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from './rift';
@@ -125,11 +125,14 @@ const domainList: Domain[] = [
     new Farming("farming"),
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
+    new Companions("companions"),
 ]
 
 export class IdleonData {
     private data: Map<string, any>
     private lastUpdated: Date
+
+    public initialized: boolean = false;
 
     constructor(data: Map<string, any>, lastUpdated: Date) {
         this.data = data;
@@ -157,9 +160,14 @@ export class IdleonData {
 
         return "";
     }
+
+    public setLastUpdated = (lastUpdated: Date) => {
+        this.lastUpdated = lastUpdated;
+    }
 }
 
-export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Item[]) => {
+export const initAccountDataKeys = (allItems: Item[]) => {
+    const accountData: Map<string, any> = new Map();
     accountData.set("itemsData", allItems);
     domainList.forEach(dataDomain => {
         if (!dataDomain.initialized) {
@@ -171,7 +179,6 @@ export const initAccountDataKeys = (accountData: Map<string, any>, allItems: Ite
             }
             else {
                 accountData.set(key, domainData);
-                dataDomain.markInitialized();
             }
         }
     })
@@ -244,15 +251,12 @@ const postPostProcessingMap: Record<string, Function> = {
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
 }
 
-export const updateIdleonData = async (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], allItems: Item[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
     accountData.set("rawData", data.toJSON())
     accountData.set("timeAway", JSON.parse(data.get('TimeAway')));
-
-    // Handle Companions
-    accountData.set("companions", parseCompanions(companions));
 
     // Do some time math, useful for adjusting AFK timers if needed.
     const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
@@ -280,13 +284,16 @@ export const updateIdleonData = async (accountData: Map<string, any>, data: Clou
         parseData.set("charCount", validCharCount);
         parseData.set("OptLacc", accountData.get("OptLacc"));
         parseData.set("lastUpdated", accountData.get("lastUpdated"));
-        parseData.set("itemsData", allItems);
+        parseData.set("itemsData", accountData.get("itemsData"));
         parseData.set("playerNames", charNames);
         parseData.set("servervars", serverVars);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
 
-
+        // Companions is unique as it needs data that doesn't come from cloudsave but from a different source, so jam it in.
+        if (dataDomain.dataKey == "companions") {
+            parseData.set("ownedCompanions", companions);
+        }
         // Execute the parse function.
         dataDomain.parse(parseData);
     });

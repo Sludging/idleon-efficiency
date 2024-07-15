@@ -116,7 +116,6 @@ export class Achievements extends Domain {
 
             achievement.baseName = `TaskAch${achievement.worldLetter}${achievement.arrayIndex - (70 * reminder)}`
         })
-
         return achievements
     }
     parse(data: Map<string, any>): void {

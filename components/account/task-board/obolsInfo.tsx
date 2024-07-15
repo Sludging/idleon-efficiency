@@ -1,15 +1,18 @@
 import { Box, Text } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useEffect, useMemo, useState } from "react";
 import { ItemStat } from "../../../data/domain/items";
 import { ObolsData, ObolType } from "../../../data/domain/obols";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: string, level: number }) {
     const [obolsData, setObolsData] = useState<ObolsData>();
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
 
     const statsDisplay = (stats: ItemStat[], description: string) => {
@@ -84,9 +87,8 @@ function ObolsInfo({ playerIndex, title, level }: { playerIndex: number, title: 
     }, [playerIndex, obolsData]);
 
     useEffect(() => {
-        const theData = appContext.data.getData();
         setObolsData(theData.get("obols"));
-    }, [playerIndex, appContext])
+    }, [theData])
 
     if (!obolsData || obolsData.playerObols.length == 0) {
         return (

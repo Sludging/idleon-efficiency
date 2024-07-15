@@ -1,6 +1,5 @@
 import { Box, CheckBox, Grid, Text } from "grommet";
-import React, { useContext, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import React, { useMemo, useState } from "react";
 import { Item } from "../../../data/domain/items";
 import { Refinery } from "../../../data/domain/refinery";
 import { SaltLick } from "../../../data/domain/saltLick";
@@ -9,12 +8,15 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
 import { Construction } from "../../../data/domain/construction";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export function SaltLickDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    const theData = appContext.data.getData();
     const saltLickData = theData.get("saltLick") as SaltLick;
     const refineryData = theData.get("refinery") as Refinery;
     const itemData = theData.get("itemsData") as Item[];

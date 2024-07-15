@@ -62,8 +62,8 @@ export class Printer extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Print", perPlayer: false, default: []},
-            {key: "PrinterXtra", perPlayer: false, default: []},
+            { key: "Print", perPlayer: false, default: [] },
+            { key: "PrinterXtra", perPlayer: false, default: [] },
         ]
     }
 

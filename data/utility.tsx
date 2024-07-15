@@ -343,3 +343,25 @@ export const letterToNumber = (char: string) => {
 export const uniqueFilter = (value: any, index: number, self: any) => {
     return self.indexOf(value) === index;
 }
+
+export const getSubDomain = () => {
+    const allowedTopDomains = ["idleonefficiency", "localhost:3000"];
+    const windowLocation = typeof window !== "undefined" ? window.location.host : ""
+    const locationSplit = windowLocation.split('.');
+
+    // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
+    // This is currently only for when testing with vercel (it ends up being 'vercel.app') to avoid invalid profile issues.
+    if (locationSplit.length > 1 && !allowedTopDomains.includes(locationSplit[1])) {
+        return "www";
+    }
+    let urlDomain = windowLocation != "" ? locationSplit[0] : "";
+
+    return urlDomain;
+}
+
+// Check if 
+export const isSubDomain = () => {
+   const urlDomain = getSubDomain();
+
+    return !["localhost:3000", "www", "preview"].includes(urlDomain);
+}

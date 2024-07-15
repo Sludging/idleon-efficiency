@@ -3,19 +3,20 @@ import {
     Grid,
     Text,
 } from 'grommet'
-import { useContext } from 'react';
-import { AppContext } from '../../../data/appContext'
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from '../../base/IconImage';
 import { Prayer } from '../../../data/domain/prayers';
 import { GroupByFunction, nFormatter } from '../../../data/utility';
 import { PrayerBase } from '../../../data/domain/data/PrayerRepo';
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export function PrayerDisplay() {
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    const theData = appContext.data.getData();
     const prayers = theData.get("prayers") as Prayer[];
     const storage = theData.get("storage") as Storage;
 
