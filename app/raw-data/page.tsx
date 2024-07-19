@@ -8,6 +8,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <Box></Box>
+        <Box>
+            <RawData />
+        </Box>
     )
 }
