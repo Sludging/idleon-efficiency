@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     },
 }
 
+export const revalidate = 604800;
+
 // Ad related things
 var pwUnits = [
     // Disabled for now, I don't like it.
