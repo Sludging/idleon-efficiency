@@ -3,6 +3,8 @@ import {
 } from 'grommet'
 import type { Metadata } from 'next'
  
+export const revalidate = 604800;
+
 export const metadata: Metadata = {
     title: "Privacy Policy",
 }
