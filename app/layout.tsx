@@ -12,8 +12,8 @@ import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
 import Ramp from '../lib/ramp';
 import { WebVitals } from '../components/web-vitals';
 import { RouterTracker } from '../components/routerTracker';
-import { Suspense } from 'react';
 import type { Metadata } from 'next'
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
     title: { default: "Idleon Efficiency", template: "Idleon Efficiency | %s" },
@@ -67,8 +67,8 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <WebVitals />
                 <Suspense>
-                    <WebVitals />
                     <RouterTracker />
                 </Suspense>
                 <StyledComponentsRegistry>
