@@ -66,6 +66,56 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
+                <WebVitals />
+                <StyledComponentsRegistry>
+                    <Grommet theme={customTheme} full>
+                        <AuthStoreProvider>
+                            <AppDataStoreProvider>
+                                <Box flex margin={{ horizontal: "auto" }} height={{ min: "100%" }}>
+                                    <HeaderComponent />
+                                    <Navigation />
+                                    <Main>
+                                        <ContentWrapper>
+                                            {children}
+                                        </ContentWrapper>
+                                    </Main>
+                                    <FooterComponent />
+                                </Box>
+                            </AppDataStoreProvider>
+                        </AuthStoreProvider>
+                    </Grommet>
+                </StyledComponentsRegistry>
+                <GoogleAnalytics gaId="G-RDM3GQEGMB" />
+                <Script
+                    strategy="afterInteractive"
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-RDM3GQEGMB`}
+                />
+                <Script
+                    strategy="afterInteractive"
+                    src={`https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js`}
+                />
+                <Script
+                    id="gtag-init"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window._pwGA4PageviewId = ''.concat(Date.now().toString());
+                            window.dataLayer = window.dataLayer || [];
+                            window.gtag = window.gtag || function () {
+                            window.dataLayer.push(arguments);
+                            };
+                            window.gtag('js', new Date());
+                            window.gtag('config', 'G-RDM3GQEGMB', {
+                            'send_page_view': false,
+                            page_path: window.location.pathname
+                            });
+                            window.gtag('event', 'ramp_js', {
+                            'send_to': 'G-RDM3GQEGMB',
+                            'pageview_id': window._pwGA4PageviewId
+                            });
+                        `}}
+                />
+                <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
             </body>
         </html>
     )

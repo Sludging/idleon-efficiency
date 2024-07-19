@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <Box>
-            <Players />
-        </Box>
+        <Box></Box>
     )
 }
