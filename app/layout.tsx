@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     },
 }
 
-export const revalidate = 604800;
+export const dynamic = 'force-dynamic';
 
 // Ad related things
 var pwUnits = [
