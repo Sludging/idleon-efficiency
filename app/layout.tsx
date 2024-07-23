@@ -38,7 +38,6 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = 'force-static';
-export const revalidate = false;
 
 // Ad related things
 var pwUnits = [
