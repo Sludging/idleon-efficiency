@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     title: "Privacy Policy",
 }
 
+export const dynamic = 'force-static';
+
 function PrivacyPolicy() {
 
     return (
