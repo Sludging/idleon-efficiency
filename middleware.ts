@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
+    console.log("I ran!", request.url);
     // No custom logic, do this for EVERYTHING.
     response.headers.set('Cache-Control', 'public, max-age=604800, immutable');
 
@@ -11,6 +12,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    // Match literally every path.
-    matcher: ['/*'],
-};
+    // Match everything except next static files, the favicon and API calls.
+    // Also explicitly match on root.
+    matcher: [
+      '/((?!api|_next/static|favicon.ico).*)',
+      '/', // explicit matcher for root route
+    ],
+  };
