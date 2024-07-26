@@ -1,3 +1,5 @@
+"use client"
+
 export interface CodeReqResponse {
     user_code: string
     verification_url: string

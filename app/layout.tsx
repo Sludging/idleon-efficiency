@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     },
 }
 
-export const revalidate = 604800;
 
 // Ad related things
 var pwUnits = [
