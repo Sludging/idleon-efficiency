@@ -1,4 +1,5 @@
 import { Box } from "grommet";
+import { Suspense } from "react";
 import { Metadata } from "next";
 import Farming from "./content";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <Box>
-            <Farming />
+            <Suspense><Farming /></Suspense>
         </Box>
     )
 }
