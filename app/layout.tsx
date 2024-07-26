@@ -11,6 +11,8 @@ import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
 import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
 import Ramp from '../lib/ramp';
 import { WebVitals } from '../components/web-vitals';
+import { RouterTracker } from '../components/routerTracker';
+import { Suspense } from 'react';
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -66,7 +68,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <WebVitals />
+                <Suspense>
+                    <WebVitals />
+                    <RouterTracker />
+                </Suspense>
                 <StyledComponentsRegistry>
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
