@@ -4,7 +4,6 @@ import type { NextRequest } from 'next/server';
 export function middleware(request: NextRequest) {
     const response = NextResponse.next();
 
-    console.log("I ran!", request.url);
     // No custom logic, do this for EVERYTHING.
     response.headers.set('Cache-Control', 'public, max-age=604800, immutable');
 
