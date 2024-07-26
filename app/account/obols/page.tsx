@@ -1,4 +1,5 @@
 import { Box } from "grommet";
+import { Suspense } from "react";
 import Obols from "./content";
 import { Metadata } from "next";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <Box>
-            <Obols />
+            <Suspense><Obols /></Suspense>
         </Box>
     )
 }
