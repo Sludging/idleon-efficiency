@@ -39,8 +39,6 @@ export const metadata: Metadata = {
     },
 }
 
-export const dynamic = 'force-dynamic';
-
 // Ad related things
 var pwUnits = [
     // Disabled for now, I don't like it.
