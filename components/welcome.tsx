@@ -21,6 +21,7 @@ import { useAuthStore } from '../lib/providers/authStoreProvider';
 import { DataStatus } from '../lib/stores/appDataStore';
 import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow'
+import IconImage from './base/IconImage';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -193,7 +194,7 @@ export default function Welcome() {
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>
                     <Grid columns={["2/3", "1/3"]} fill>
                         <Box>
-                            <Image alt="feature1" src={'/feature1.png'} />
+                            <IconImage data={{ location: 'feature1', width: 993, height: 671 }} />
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
@@ -210,12 +211,12 @@ export default function Welcome() {
                             </Box>
                         </Box>
                         <Box>
-                            <Image alt="feature2" src={'/feature2.png'} />
+                            <IconImage data={{ location: 'feature2', width: 993, height: 671 }} />
                         </Box>
                     </Grid>
                     <Grid columns={["2/3", "1/3"]} fill>
                         <Box>
-                            <Image alt="feature3" src={'/feature3.png'} />
+                            <IconImage data={{ location: 'feature3', width: 993, height: 671 }} />
                         </Box>
                         <Box direction="row" gap="medium" pad="large" align="center">
                             <Box gap="small">
