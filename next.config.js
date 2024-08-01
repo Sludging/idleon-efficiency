@@ -16,6 +16,7 @@ if (process.env.VERCEL_ENV == "preview") {
 }
 
 const moduleExports = {
+  output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
