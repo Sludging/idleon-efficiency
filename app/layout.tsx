@@ -16,6 +16,7 @@ import { Suspense } from 'react';
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
+    metadataBase: new URL(`https://www.idleonefficiency.com`),
     title: { default: "Idleon Efficiency", template: "Idleon Efficiency | %s" },
     description: "A website dedicated to helping players become more efficient in the idle MMO Legends of Idleon.",
     openGraph: {
@@ -34,8 +35,26 @@ export const metadata: Metadata = {
         ]
     },
     keywords: ["Idleon", "Idle On", "Idle MMO", "Idle Games"],
+    category: "gaming",
+    bookmarks: ['https://idleonefficiency.com/'],
     other: {
         propeller: "212136656dc025f7fb532bc66fd47bf8",
+    },
+    alternates: {
+        canonical: './',
+    },
+    robots: {
+        index: false,
+        follow: true,
+        nocache: true,
+        googleBot: {
+            index: true,
+            follow: false,
+            noimageindex: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
     },
 }
 
