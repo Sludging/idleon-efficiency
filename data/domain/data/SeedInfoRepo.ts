@@ -55,7 +55,7 @@ export const initSeedInfoRepo = () => {
                 "name": "GLASSY",
                 "seedId": 5,
                 "cropIdMin": 107,
-                "cropIdMax": 119,
+                "cropIdMax": 159,
                 "lvlReq": 120,
                 "nextCropChance": 0.0005,
                 "nextCropDecay": 0.05

@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Poppy's_Fisheroo_v2.1;NEW_UPDATE_PATCH_NOTES_@_*Poppy_the_Kangaroo_Mouse_and_her_Fisheroo_Pool_has_been_added!_Find_her_in_World_2_using_the_new_map,_buy_it_in_the_Town_Shop!_@_*Catch_fish_and_spend_them_on_upgrades_to_help_catch_even_more_fish_for_Poppy,_and_bonuses_outside_of_fish_like_Fish_EXP,_Fish_Efficiency,_AFK_Gains,_Cash_from_Mobs,_and_more!_@_*New_Limited_Time_Gemshop_items_added,_go_check_them_out!_One_of_them_is_FREE,_which_is_like_honestly_crazy_is_this_the_first_time_there's_been_a_freebie_in_the_gemshop?!_@_*MEGAFISH_@_*Next_update_will_not_be_another_idler_type_game._Cry_tear_of_sadness_or_joy,_or_don't_cry_at_all,_big_girls_don't_cry.;*Le",
+                    "Farming_Ranks_v2.11;NEW_UPDATE_PATCH_NOTES_@_*Land_Ranks_added_to_Farming_in_World_6!_Unlock_these_by_purchasing_the_LAND_RANK_bonus_from_the_Night_Market_using_magic_beans._@_*Note_that_you_must_find_61_crops_for_the_LAND_RANK_bonus_to_be_available_in_the_Night_Market._@_*Every_time_a_land_plot_ranks_up,_you_get_1_Rank_Point_to_spend_on_20_new_upgrades!_Check_them_out_in_the_Handyman_Tools_section_of_Farming!_@_*You_can_reset_your_Rank_Upgrades_once_a_week._Don't_worry,_doing_so_will_NOT_reset_your_actual_farm_ranks,_just_the_upgrades!_@_*40_new_crops_added,_all_of_them_grown_with_the_GLASSY_Seed_type!_@_*Have_fun_ranking_up_your_land,_fellow_farmers!;*Le",
                     "Monde",
                     "6",
                     "est",
