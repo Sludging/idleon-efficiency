@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_us',
-        url: 'https://idleonefficiency.com/',
+        url: 'https://www.idleonefficiency.com/',
         siteName: 'Idleon Efficiency',
         images: [
             {
-                url: "https://idleonefficiency.com/title-image.png",
+                url: "https://www.idleonefficiency.com/title-image.png",
                 width: 1200,
                 height: 627,
                 alt: 'Idleon Efficiency',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     },
     keywords: ["Idleon", "Idle On", "Idle MMO", "Idle Games"],
     category: "gaming",
-    bookmarks: ['https://idleonefficiency.com/'],
+    bookmarks: ['https://www.idleonefficiency.com/'],
     other: {
         propeller: "212136656dc025f7fb532bc66fd47bf8",
     },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         canonical: './',
     },
     robots: {
-        index: false,
+        index: true,
         follow: true,
         nocache: true,
         googleBot: {
