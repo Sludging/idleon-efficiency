@@ -79,20 +79,20 @@ export const initMarketInfoRepo = () => {
                 "cropIdIncrement": 0.11,
                 "cost": 25,
                 "costExponent": 1.15,
-                "cropReq": 59,
+                "cropReq": 53,
                 "maxLvl": 500,
                 "bonusPerLvl": 2
             }),
         new MarketInfoBase(7, <MarketInfoModel>{
-                "name": "ENHANCED DEEDS",
-                "bonus": "Nothing yet. A weekly update will change this, some day...",
+                "name": "RANK BOOST",
+                "bonus": "Plots earn +{% more Rank XP when a crop is collected",
                 "cropId": 84,
-                "cropIdIncrement": 0.07,
-                "cost": 40,
-                "costExponent": 1.5,
+                "cropIdIncrement": 0.11,
+                "cost": 30,
+                "costExponent": 1.2,
                 "cropReq": 80,
                 "maxLvl": 500,
-                "bonusPerLvl": 1
+                "bonusPerLvl": 3
             }),
         new MarketInfoBase(8, <MarketInfoModel>{
                 "name": "OVERGROWTH",
@@ -134,7 +134,7 @@ export const initMarketInfoRepo = () => {
                 "cropIdIncrement": 0.1,
                 "cost": 40,
                 "costExponent": 1.06,
-                "cropReq": 50,
+                "cropReq": 48,
                 "maxLvl": 500,
                 "bonusPerLvl": 1
             }),
@@ -143,21 +143,21 @@ export const initMarketInfoRepo = () => {
                 "bonus": "+{% farming EXP gain crop you have 2500 of",
                 "cropId": 2,
                 "cropIdIncrement": 0.1,
-                "cost": 70,
+                "cost": 60,
                 "costExponent": 1.095,
-                "cropReq": 65,
+                "cropReq": 57,
                 "maxLvl": 100,
                 "bonusPerLvl": 1
             }),
         new MarketInfoBase(13, <MarketInfoModel>{
                 "name": "LAND RANK",
-                "bonus": "Nothing yet. These nuts, so true.",
+                "bonus": "Each plot now gets Rank XP when a crop is collected.",
                 "cropId": 2,
                 "cropIdIncrement": 0.1,
-                "cost": 100,
+                "cost": 80,
                 "costExponent": 1.05,
-                "cropReq": 71,
-                "maxLvl": 500,
+                "cropReq": 61,
+                "maxLvl": 1,
                 "bonusPerLvl": 1
             }),
         new MarketInfoBase(14, <MarketInfoModel>{
