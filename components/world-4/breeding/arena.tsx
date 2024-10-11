@@ -13,6 +13,7 @@ import TextAndLabel from '../../base/TextAndLabel';
 import { TimeDisplaySize, TimeDown } from '../../base/TimeDisplay';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { TalentConst } from '../../../data/domain/talents';
 
 export const ArenaBonusDisplay = () => {
     const [breeding, setBreeding] = useState<BreedingDomain>();
@@ -41,7 +42,7 @@ export const ArenaBonusDisplay = () => {
         <Box gap="small">
             <Box direction="row" wrap justify="center" margin={{ top: 'small' }}>
                 {beastMasters && beastMasters.map((bm, index) => {
-                    const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent]) => talent.skillIndex == 370)?.pop() as [Talent, number];
+                    const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent]) => talent.skillIndex == TalentConst.ArenaSpiritIndex)?.pop() as [Talent, number];
                     const realCD = cooldown - bm.afkFor;
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
