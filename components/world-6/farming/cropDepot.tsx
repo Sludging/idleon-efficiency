@@ -4,19 +4,14 @@ import ShadowBox from "../../base/ShadowBox";
 import { nFormatter, toTime } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../data/appContext";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 export const CropDepotDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
-    const [farming, setFarming] = useState<Farming>();
-    const appContext = useContext(AppContext);
-
-    useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setFarming(theData.get("farming"));
-        }
-    }, [appContext]);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+    const farming = theData.get("farming") as Farming;
     
     if (!farming) {
         return null;

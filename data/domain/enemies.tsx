@@ -23,7 +23,7 @@ export class EnemyData {
     }
 
     getImageData = (): ImageData => {
-        if (this.id == "mini3a" || this.id == "mini4a") {
+        if (this.id == "mini3a" || this.id == "mini4a" || this.id == "mini5a" || this.id == "mini6a") {
             return {
                 location: this.id,
                 height: 68,

@@ -157,7 +157,7 @@ export const initJadeUpgradeRepo = () => {
                 "imageId": 16,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Every 24 hours, your lowest level Meal gets +1 Lv. This only works on Meals Lv 5 or higher, and doesn't trigger on days you don't play."
+                "bonus": "Every 24 hours, your lowest level Meal gets +1 Lv. This only works on Meals Lv 2 or higher, and doesn't trigger on days you don't play."
             }),
         new JadeUpgradeBase(17, <JadeUpgradeModel>{
                 "name": "Jade Coin Magnetism",

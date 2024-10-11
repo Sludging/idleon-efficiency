@@ -1,3 +1,5 @@
+"use client"
+
 import { User } from "firebase/auth";
 import { IdleonData } from "../domain/idleonData";
 

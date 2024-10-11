@@ -404,6 +404,7 @@ export class Breeding extends Domain {
     speciesUnlocks: number[] = [];
     skillLevel: number = 0;
     deadCells: number = 0;
+
     worldGenes: number[] = [];
 
     starSignUnlocked: boolean = false;
@@ -416,6 +417,9 @@ export class Breeding extends Domain {
     breedingSpeedMulti: number = 0;
     breedingSpeedMultiWithSilkrode: number = 0;
     breedingSpeedMultiWithoutStarSign: number = 0;
+
+    // Calculated
+    petPowerFromTalent: number = 1;
 
     hasBonus = (bonusNumber: number) => {
         if (bonusNumber > waveReqs.length) {
@@ -443,9 +447,11 @@ export class Breeding extends Domain {
 
         let baseMath = Math.pow(4 * this.skillLevel + Math.pow(this.skillLevel / 2, 3), 0.85);
         const eggRarity = Math.min(1, Math.max(...this.eggs.map(egg => egg.rarity)));
-        const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
-        baseMath *= (1 + eggRarity / 8);
+        baseMath *= Math.min(2.1, Math.max(1, this.petPowerFromTalent)) * (1 + eggRarity / 8);
+
         const maxStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * 0) + 1);
+
+        const maxRange = Math.max(0.1, 1 - ((eggRarity + 4) / 12) * 0.9);
         const minStat = baseMath * (Math.min(1.2 + this.skillLevel / 12, 4) * Math.pow(2.71828, -10 * maxRange) + 1);
         return [minStat, maxStat];
     }
@@ -734,4 +740,15 @@ export const updateBreedingDisplayData = (data: Map<string, any>) => {
     breeding.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "Breedabilli") != undefined);
 
     return breeding;
+}
+
+// This is UI only so sticking it in the end in case we get more crazy level impacts in the future.
+export const updateBeastMasterImpact = (data: Map<string, any>) => {
+    const breeding = data.get("breeding") as Breeding;
+    const players = data.get("players") as Player[];
+
+    const bestBeastmaster = players.reduce((final, player) => final = (player.talents.find(talent => talent.skillIndex == 373)?.level ?? 0) > 0 && player.playerID > final.playerID ? player : final, players[0]);
+    const curvitureTalent = bestBeastmaster.talents.find(talent => talent.skillIndex == 373)?.getBonus() ?? 0;
+
+    breeding.petPowerFromTalent = curvitureTalent;
 }

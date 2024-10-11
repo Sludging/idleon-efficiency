@@ -1,8 +1,8 @@
-import { Anchor, Box, Text } from "grommet";
-import { useContext, useEffect, useState } from "react";
+import { Anchor, Text } from "grommet";
+import { useEffect, useState } from "react";
 import { GoogleDeviceLogin } from "../../data/domain/login/googleDeviceLogin";
-import { AuthContext } from "../../data/firebase/authContext";
 import ShadowBox from "../base/ShadowBox";
+import { useAuthStore } from "../../lib/providers/authStoreProvider";
 
 export default function GoogleLogin () {
     const [code, setCode] = useState<string | undefined>(undefined);
@@ -10,7 +10,10 @@ export default function GoogleLogin () {
     const [deviceCode, setDeviceCode] = useState<string | undefined>(undefined);
     const [retryCounter, setRetryCounter] = useState<number>(0);
     const [error, setError] = useState<string | undefined>(undefined);
-    const auth = useContext(AuthContext);
+    
+    const { googleLogin } = useAuthStore(
+        (state) => state,
+    )
 
     const getCode = async () => {
         const getCodeRes = await GoogleDeviceLogin.getCode();
@@ -31,7 +34,7 @@ export default function GoogleLogin () {
             if (pollResult.error) {
                 return false;
             }
-            auth?.tokenFunction(pollResult.id_token)
+            googleLogin(pollResult.id_token!)
             return true;
         }
     }

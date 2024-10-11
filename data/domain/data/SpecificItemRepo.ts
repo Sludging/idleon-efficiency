@@ -872,7 +872,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 1,
                 "WIS": 1,
                 "LUK": 0,
-                "Defence": 2,
+                "Defence": 3,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 1,
@@ -956,7 +956,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 2,
                 "WIS": 2,
                 "LUK": 0,
-                "Defence": 4,
+                "Defence": 5,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
@@ -1250,7 +1250,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 3,
                 "WIS": 3,
                 "LUK": 0,
-                "Defence": 5,
+                "Defence": 7,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
@@ -1271,7 +1271,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 5,
                 "WIS": 5,
                 "LUK": 0,
-                "Defence": 9,
+                "Defence": 10,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
@@ -1677,6 +1677,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats107", <ArmourItemModel>{
+                "internalName": "EquipmentHats107",
+                "displayName": "Shiny Bored Beanie",
+                "sellPrice": 500,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 9,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 20,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 100,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 2,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats2", <ArmourItemModel>{
                 "internalName": "EquipmentHats2",
                 "displayName": "Royal Turban",
@@ -1863,6 +1884,27 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "3% Xp From Monsters",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats108", <ArmourItemModel>{
+                "internalName": "EquipmentHats108",
+                "displayName": "3rd Anniversary Ice Cream Topper",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 5,
+                "miscUp1": "4% Xp From Monsters",
+                "miscUp2": "3% Drop Chance",
+                "Upgrade_Slots_Left": 3,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -3911,7 +3953,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Shirt",
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 40,
-                "Class": ClassTypeEnum.Archer,
+                "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
                 "STR": 2,
                 "AGI": 12,
@@ -5520,6 +5562,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentShoes39", <ArmourItemModel>{
+                "internalName": "EquipmentShoes39",
+                "displayName": "Divvy Slippers",
+                "sellPrice": 3000,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 200,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 5,
+                "WIS": 12,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "42% Divinity Exp",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentShoes24", <ArmourItemModel>{
                 "internalName": "EquipmentShoes24",
                 "displayName": "Lustre Shieldshoe",
@@ -6297,6 +6360,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentPendant31", <ArmourItemModel>{
+                "internalName": "EquipmentPendant31",
+                "displayName": "Deathbloom Flower Pendant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "30% Damage Multi",
+                "miscUp2": "20% Mob Respawn",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRings1", <ArmourItemModel>{
                 "internalName": "EquipmentRings1",
                 "displayName": "Gold Ring",
@@ -7053,6 +7137,48 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentRings35", <ArmourItemModel>{
+                "internalName": "EquipmentRings35",
+                "displayName": "Zero Point Stopwatch",
+                "sellPrice": 5000,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 250,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 5,
+                "miscUp1": "4% All Afk Gain",
+                "miscUp2": "5% Skill Efficiency",
+                "Upgrade_Slots_Left": 4,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings36", <ArmourItemModel>{
+                "internalName": "EquipmentRings36",
+                "displayName": "Demented Emperor Opal",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 500,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 12,
+                "STR": 50,
+                "AGI": 50,
+                "WIS": 50,
+                "LUK": 50,
+                "Defence": 15,
+                "miscUp1": "10% All Stats",
+                "miscUp2": "1% Damage Multi",
+                "Upgrade_Slots_Left": 1,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentRingsChat1", <ArmourItemModel>{
                 "internalName": "EquipmentRingsChat1",
                 "displayName": "Love Ring",
@@ -7578,6 +7704,48 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentCape15", <ArmourItemModel>{
+                "internalName": "EquipmentCape15",
+                "displayName": "Giant Nightshade",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 2,
+                "AGI": 2,
+                "WIS": 2,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "15% Xp From Monsters",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape16", <ArmourItemModel>{
+                "internalName": "EquipmentCape16",
+                "displayName": "Timeless Watch",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 20,
+                "STR": 50,
+                "AGI": 50,
+                "WIS": 50,
+                "LUK": 50,
+                "Defence": 0,
+                "miscUp1": "40% All Afk Gain",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("StampA1", <StampItemModel>{
                 "internalName": "StampA1",
                 "displayName": "Sword Stamp",
@@ -7594,7 +7762,7 @@ export const initSpecificItemRepo = () => {
                     "x2": 0,
                     "upgradeInterval": 5,
                     "material": <QtylessComponentModel>{"item": "Grasslands1"},
-                    "startV": 20,
+                    "startV": 4,
                     "mCostExp": 5,
                     "startingCost": 50,
                     "cCostExp": 1.3,
@@ -7619,7 +7787,7 @@ export const initSpecificItemRepo = () => {
                     "x2": 0,
                     "upgradeInterval": 5,
                     "material": <QtylessComponentModel>{"item": "OakTree"},
-                    "startV": 25,
+                    "startV": 10,
                     "mCostExp": 7,
                     "startingCost": 50,
                     "cCostExp": 1.3,
@@ -7631,7 +7799,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("StampA3", <StampItemModel>{
                 "internalName": "StampA3",
                 "displayName": "Mana Stamp",
-                "sellPrice": 2500,
+                "sellPrice": 1500,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
                 "description": "",
@@ -7644,7 +7812,7 @@ export const initSpecificItemRepo = () => {
                     "x2": 0,
                     "upgradeInterval": 5,
                     "material": <QtylessComponentModel>{"item": "Copper"},
-                    "startV": 25,
+                    "startV": 12,
                     "mCostExp": 7,
                     "startingCost": 50,
                     "cCostExp": 1.3,
@@ -7681,7 +7849,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("StampA5", <StampItemModel>{
                 "internalName": "StampA5",
                 "displayName": "Target Stamp",
-                "sellPrice": 250,
+                "sellPrice": 100,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
                 "description": "",
@@ -7706,7 +7874,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("StampA6", <StampItemModel>{
                 "internalName": "StampA6",
                 "displayName": "Shield Stamp",
-                "sellPrice": 800,
+                "sellPrice": 400,
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Combat Stamp",
                 "description": "",
@@ -7719,7 +7887,7 @@ export const initSpecificItemRepo = () => {
                     "x2": 0,
                     "upgradeInterval": 5,
                     "material": <QtylessComponentModel>{"item": "Iron"},
-                    "startV": 50,
+                    "startV": 15,
                     "mCostExp": 7,
                     "startingCost": 50,
                     "cCostExp": 1.3,
@@ -7744,7 +7912,7 @@ export const initSpecificItemRepo = () => {
                     "x2": 0,
                     "upgradeInterval": 4,
                     "material": <QtylessComponentModel>{"item": "Grasslands3"},
-                    "startV": 50,
+                    "startV": 15,
                     "mCostExp": 6,
                     "startingCost": 50,
                     "cCostExp": 1.3,
@@ -10694,7 +10862,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 850,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Armor to apply. +2 Defence, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Armor to apply. +3 Defence, +2 Random Stat. Success Chance; 80% Uses up 1 slots only if Successful ",
                 "tier": "II"
             }),
         new BaseItemBase("StoneA2b", <StoneItemModel>{
@@ -10712,7 +10880,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 15000,
                 "typeGen": TypeGenEnum.dStone,
                 "Type": "Upgrade",
-                "description": "Drag onto any Armor to apply. +3 Defence, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
+                "description": "Drag onto any Armor to apply. +4 Defence, +4 Random Stat. Success Chance; 50% Uses up 1 slots only if Successful ",
                 "tier": "III"
             }),
         new BaseItemBase("StoneA3b", <StoneItemModel>{
@@ -11278,7 +11446,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Inventory",
                 "description": "Hold down to permanently add +4 Slots to your Inventory. Can only be used once.",
                 "order": 104,
-                "level": 20
+                "level": 1
             }),
         new BaseItemBase("InvBag104", <InvBagItemModel>{
                 "internalName": "InvBag104",
@@ -11338,7 +11506,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Inventory",
                 "description": "Hold down to permanently add +3 Slots to your Inventory. Can only be used once.",
                 "order": 110,
-                "level": 65
+                "level": 1
             }),
         new BaseItemBase("InvBag110", <InvBagItemModel>{
                 "internalName": "InvBag110",
@@ -13345,78 +13513,6 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Dungeon Item",
                 "description": "Huh... that vertebrae is lookin' kinda sus... "
-            }),
-        new BaseItemBase("KeyFrag", <DescItemModel>{
-                "internalName": "KeyFrag",
-                "displayName": "Keychain Fragment",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Key Fragment",
-                "description": "Hold down on these to add them to your account. You'll be spending these in the next update to buy keychains at the Keychain Pile, which will be in the next update! "
-            }),
-        new BaseItemBase("DungCredits1", <DescItemModel>{
-                "internalName": "DungCredits1",
-                "displayName": "Dungeon Credits",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Currency",
-                "description": "Hold down to add these to your account. You can spend dungeon credits in any Dungeon Hub! "
-            }),
-        new BaseItemBase("LootDice", <DescItemModel>{
-                "internalName": "LootDice",
-                "displayName": "Loot Dice",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Currency",
-                "description": "You shouldn't be reading this... "
-            }),
-        new BaseItemBase("Tree7D", <DescItemModel>{
-                "internalName": "Tree7D",
-                "displayName": "Wispy Tree Log",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("PlatD", <DescItemModel>{
-                "internalName": "PlatD",
-                "displayName": "Platinum Ore",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Fish1D", <DescItemModel>{
-                "internalName": "Fish1D",
-                "displayName": "Goldfish",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Fish3D", <DescItemModel>{
-                "internalName": "Fish3D",
-                "displayName": "Jellyfish",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "You shouldnt be seeing this... "
-            }),
-        new BaseItemBase("Cashb", <DescItemModel>{
-                "internalName": "Cashb",
-                "displayName": "Ice Dollar",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Item",
-                "description": "Cool! "
-            }),
-        new BaseItemBase("Dung3Ice", <DescItemModel>{
-                "internalName": "Dung3Ice",
-                "displayName": "Basement Cube",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Dungeon Evaporate",
-                "description": "Cool! "
             }),
         new BaseItemBase("Grasslands1", <DescItemModel>{
                 "internalName": "Grasslands1",
@@ -16658,6 +16754,29 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("ObolLava", <ObolItemModel>{
+                "internalName": "ObolLava",
+                "displayName": "Magma Obol of Big Time Domeo",
+                "sellPrice": 20,
+                "typeGen": TypeGenEnum.aObolHexagon,
+                "Type": "Hexagon Obol",
+                "lvReqToCraft": 0,
+                "lvReqToEquip": 0,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "14% Drop Chance",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "family": "Lava",
+                "rarity": "Magma",
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("ObolTroll", <ObolItemModel>{
                 "internalName": "ObolTroll",
                 "displayName": "Jagged Obol of Massive Trolling",
@@ -17099,7 +17218,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aCarryBag,
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Monster Parts, Smithing Production Items",
-                "level": 20
+                "level": 13
             }),
         new BaseItemBase("MaxCapBagM4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM4",
@@ -17756,6 +17875,198 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down, and a resource stack will drop on the floor! YOU MUST MANUALLY PICK UP THE RESOURCE ON THE GROUND "
             }),
+        new BaseItemBase("Quest14", <DescItemModel>{
+                "internalName": "Quest14",
+                "displayName": "Employment Statistics",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Wait a minute, these stats have misleading Y-axes and invalid sampling methods! Even then, they show no clear evidence for rats stealing jobs! How could anyone possibly believe this data? "
+            }),
+        new BaseItemBase("Quest15", <DescItemModel>{
+                "internalName": "Quest15",
+                "displayName": "Red Frisbee",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Sprout's red frisbee! I hope you didn't get shrunken down by a magic apple on your way up, or your stetchy dog brother might laugh at you! "
+            }),
+        new BaseItemBase("Quest16", <DescItemModel>{
+                "internalName": "Quest16",
+                "displayName": "Broken Mic",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "The guy who carelessly dropped this microphone is a moron, and that's a fact. Boom, mic drop... ah crap. "
+            }),
+        new BaseItemBase("Quest18", <DescItemModel>{
+                "internalName": "Quest18",
+                "displayName": "Loomi's Room Key",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "A key to a door, but there are still more! Why so many? They were on sale for a penny! "
+            }),
+        new BaseItemBase("Quest19", <DescItemModel>{
+                "internalName": "Quest19",
+                "displayName": "Golden Dubloon",
+                "sellPrice": 3500,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Avast, land lubber! This coin be property of the YumYum Sea Pirates! Ye best be returning it, lest ye want an underwater funeral, arg! "
+            }),
+        new BaseItemBase("Quest20", <DescItemModel>{
+                "internalName": "Quest20",
+                "displayName": "Signed Arrest Warrant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "That's weird, Bandit Bob's signature looks an awful lot like yours... "
+            }),
+        new BaseItemBase("Quest21", <DescItemModel>{
+                "internalName": "Quest21",
+                "displayName": "Time Thingy",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Yea yea I know, this quest doesn't really make sense. Although, if you reeeaaally think about it, you'll realize that it still makes no sense... so it's best not to think about it! "
+            }),
+        new BaseItemBase("Quest22", <DescItemModel>{
+                "internalName": "Quest22",
+                "displayName": "Corporatube Sub",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single subscriber on the Corporatube Video Platform. It You'sed to be called something else, but no one around here remembers. "
+            }),
+        new BaseItemBase("Quest23", <DescItemModel>{
+                "internalName": "Quest23",
+                "displayName": "Instablab Follower",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single follower on Instablab, who probably sound like this: 'Oh mah gawd Becky, you would not Buh Leeeeve how lame this game I'm playing is. They have a joke about Insta that tooootally isn't funnay, like seriouslayy! "
+            }),
+        new BaseItemBase("Quest24", <DescItemModel>{
+                "internalName": "Quest24",
+                "displayName": "Cloudsound Follower",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Represents a single follower on Cloudsound. This isn't a website, it's literally a giant cloud that emits sound that people enjoy following around. Why, what were YOU thinking this was? "
+            }),
+        new BaseItemBase("Quest25", <DescItemModel>{
+                "internalName": "Quest25",
+                "displayName": "Birthday Card",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Hold down to read the card! There's a 1 in 75 chance it contains a Birthday Hat recipe, and a 74 in 75 chance it contains a few dollars from grandma. "
+            }),
+        new BaseItemBase("Quest26", <DescItemModel>{
+                "internalName": "Quest26",
+                "displayName": "Pre Crime Box",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "The traditional gift given to those about to be victimized. A favorite amongst criminals! "
+            }),
+        new BaseItemBase("Quest27", <DescItemModel>{
+                "internalName": "Quest27",
+                "displayName": "Bag o Nuts",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Mmmmm, these nuts are so yuuuummy! "
+            }),
+        new BaseItemBase("Quest28", <DescItemModel>{
+                "internalName": "Quest28",
+                "displayName": "IOU one Sky Crystal",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Mere mortal, your meager intellect doesn't leave you with enough patience! Wait until powers even greater than myself allow me to drop the crystal to World 6. The time will come, I assure you. "
+            }),
+        new BaseItemBase("GoldricP1", <DescItemModel>{
+                "internalName": "GoldricP1",
+                "displayName": "Casual Confidante",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "It's a painting of a strangely out of place gold bar fellow. They look nervous underneath their outward bravado. "
+            }),
+        new BaseItemBase("KeyFrag", <DescItemModel>{
+                "internalName": "KeyFrag",
+                "displayName": "Keychain Fragment",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Key Fragment",
+                "description": "Hold down on these to add them to your account. You'll be spending these in the next update to buy keychains at the Keychain Pile, which will be in the next update! "
+            }),
+        new BaseItemBase("DungCredits1", <DescItemModel>{
+                "internalName": "DungCredits1",
+                "displayName": "Dungeon Credits",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "Hold down to add these to your account. You can spend dungeon credits in any Dungeon Hub! "
+            }),
+        new BaseItemBase("LootDice", <DescItemModel>{
+                "internalName": "LootDice",
+                "displayName": "Loot Dice",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldn't be reading this... "
+            }),
+        new BaseItemBase("Tree7D", <DescItemModel>{
+                "internalName": "Tree7D",
+                "displayName": "Wispy Tree Log",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("PlatD", <DescItemModel>{
+                "internalName": "PlatD",
+                "displayName": "Platinum Ore",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Fish1D", <DescItemModel>{
+                "internalName": "Fish1D",
+                "displayName": "Goldfish",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Fish3D", <DescItemModel>{
+                "internalName": "Fish3D",
+                "displayName": "Jellyfish",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Cashb", <DescItemModel>{
+                "internalName": "Cashb",
+                "displayName": "Ice Dollar",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Item",
+                "description": "Cool! "
+            }),
+        new BaseItemBase("Dung3Ice", <DescItemModel>{
+                "internalName": "Dung3Ice",
+                "displayName": "Basement Cube",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Cool! "
+            }),
         new BaseItemBase("EquipmentNametag1", <ArmourItemModel>{
                 "internalName": "EquipmentNametag1",
                 "displayName": "Riftwalker Nametag",
@@ -17941,6 +18252,90 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "25% Mining Xp Gain",
                 "miscUp2": "3% Skill Afk Gain",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag10", <ArmourItemModel>{
+                "internalName": "EquipmentNametag10",
+                "displayName": "3rd Anniversary IdleOn Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 3,
+                "miscUp1": "3% All Afk Gain",
+                "miscUp2": "3% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag11", <ArmourItemModel>{
+                "internalName": "EquipmentNametag11",
+                "displayName": "Nightshade Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 1,
+                "miscUp1": "4% All Afk Gain",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag12", <ArmourItemModel>{
+                "internalName": "EquipmentNametag12",
+                "displayName": "Megafeather Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "20% Damage Multi",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag13", <ArmourItemModel>{
+                "internalName": "EquipmentNametag13",
+                "displayName": "Timeless Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "40% Damage Multi",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -18496,6 +18891,25 @@ export const initSpecificItemRepo = () => {
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
+        new BaseItemBase("EquipmentKeychain29", <KeychainItemModel>{
+                "internalName": "EquipmentKeychain29",
+                "displayName": "Spiritlord Horn Chain",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aKeychain,
+                "Type": "Keychain",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 400,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 25,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 5,
+                "miscUp1": "",
+                "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                "Upgrade_Slots_Left": 0
+            }),
         new BaseItemBase("Trophy1", <ArmourItemModel>{
                 "internalName": "Trophy1",
                 "displayName": "King of Food",
@@ -18912,6 +19326,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "50% Drop Chance",
                 "miscUp2": "5% Luk",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("Trophy21", <ArmourItemModel>{
+                "internalName": "Trophy21",
+                "displayName": "Baller",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 3,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 3,
+                "miscUp1": "3% All Stats",
+                "miscUp2": "3% All Afk Gain",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("Trophy22", <ArmourItemModel>{
+                "internalName": "Trophy22",
+                "displayName": "Gladiator",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "10% Damage Multi",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -21316,6 +21772,15 @@ export const initSpecificItemRepo = () => {
                 "description": "Increases all AFK Gains rate. Golden foods are never consumed.",
                 "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases all AFK Gains rate by [%.", "amount": 4}
             }),
+        new BaseItemBase("FoodG13", <GoldenFoodItemModel>{
+                "internalName": "FoodG13",
+                "displayName": "Golden Cake",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.cFood,
+                "Type": "Golden Food",
+                "description": "Increases Drop Rarity. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Drop Rarity by [%.", "amount": 8}
+            }),
         new BaseItemBase("ButterBar", <GoldenFoodItemModel>{
                 "internalName": "ButterBar",
                 "displayName": "Butter Bar",
@@ -21440,7 +21905,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("SmithingHammerChisel", <DescItemModel>{
                 "internalName": "SmithingHammerChisel",
                 "displayName": "Sculpting Tools",
-                "sellPrice": 800,
+                "sellPrice": 400,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
                 "description": "You gotta embrace the marble! You gotta sniff the marble! You gotta lick the marble! You gotta wash the marble! You gotta BE THE MARBLE! "
@@ -21652,126 +22117,6 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
                 "description": "An empty box, the perfect place to put all your Hermit Cans, Megalodon teeth, and pure water... that you don't have anymore haha! "
-            }),
-        new BaseItemBase("Quest14", <DescItemModel>{
-                "internalName": "Quest14",
-                "displayName": "Employment Statistics",
-                "sellPrice": 50,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Wait a minute, these stats have misleading Y-axes and invalid sampling methods! Even then, they show no clear evidence for rats stealing jobs! How could anyone possibly believe this data? "
-            }),
-        new BaseItemBase("Quest15", <DescItemModel>{
-                "internalName": "Quest15",
-                "displayName": "Red Frisbee",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Sprout's red frisbee! I hope you didn't get shrunken down by a magic apple on your way up, or your stetchy dog brother might laugh at you! "
-            }),
-        new BaseItemBase("Quest16", <DescItemModel>{
-                "internalName": "Quest16",
-                "displayName": "Broken Mic",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "The guy who carelessly dropped this microphone is a moron, and that's a fact. Boom, mic drop... ah crap. "
-            }),
-        new BaseItemBase("Quest18", <DescItemModel>{
-                "internalName": "Quest18",
-                "displayName": "Loomi's Room Key",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "A key to a door, but there are still more! Why so many? They were on sale for a penny! "
-            }),
-        new BaseItemBase("Quest19", <DescItemModel>{
-                "internalName": "Quest19",
-                "displayName": "Golden Dubloon",
-                "sellPrice": 3500,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Avast, land lubber! This coin be property of the YumYum Sea Pirates! Ye best be returning it, lest ye want an underwater funeral, arg! "
-            }),
-        new BaseItemBase("Quest20", <DescItemModel>{
-                "internalName": "Quest20",
-                "displayName": "Signed Arrest Warrant",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "That's weird, Bandit Bob's signature looks an awful lot like yours... "
-            }),
-        new BaseItemBase("Quest21", <DescItemModel>{
-                "internalName": "Quest21",
-                "displayName": "Time Thingy",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Yea yea I know, this quest doesn't really make sense. Although, if you reeeaaally think about it, you'll realize that it still makes no sense... so it's best not to think about it! "
-            }),
-        new BaseItemBase("Quest22", <DescItemModel>{
-                "internalName": "Quest22",
-                "displayName": "Corporatube Sub",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single subscriber on the Corporatube Video Platform. It You'sed to be called something else, but no one around here remembers. "
-            }),
-        new BaseItemBase("Quest23", <DescItemModel>{
-                "internalName": "Quest23",
-                "displayName": "Instablab Follower",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single follower on Instablab, who probably sound like this: 'Oh mah gawd Becky, you would not Buh Leeeeve how lame this game I'm playing is. They have a joke about Insta that tooootally isn't funnay, like seriouslayy! "
-            }),
-        new BaseItemBase("Quest24", <DescItemModel>{
-                "internalName": "Quest24",
-                "displayName": "Cloudsound Follower",
-                "sellPrice": 1,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Represents a single follower on Cloudsound. This isn't a website, it's literally a giant cloud that emits sound that people enjoy following around. Why, what were YOU thinking this was? "
-            }),
-        new BaseItemBase("Quest25", <DescItemModel>{
-                "internalName": "Quest25",
-                "displayName": "Birthday Card",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Hold down to read the card! There's a 1 in 75 chance it contains a Birthday Hat recipe, and a 74 in 75 chance it contains a few dollars from grandma. "
-            }),
-        new BaseItemBase("Quest26", <DescItemModel>{
-                "internalName": "Quest26",
-                "displayName": "Pre Crime Box",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "The traditional gift given to those about to be victimized. A favorite amongst criminals! "
-            }),
-        new BaseItemBase("Quest27", <DescItemModel>{
-                "internalName": "Quest27",
-                "displayName": "Bag o Nuts",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Mmmmm, these nuts are so yuuuummy! "
-            }),
-        new BaseItemBase("Quest28", <DescItemModel>{
-                "internalName": "Quest28",
-                "displayName": "IOU one Sky Crystal",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "Mere mortal, your meager intellect doesn't leave you with enough patience! Wait until powers even greater than myself allow me to drop the crystal to World 6. The time will come, I assure you. "
-            }),
-        new BaseItemBase("GoldricP1", <DescItemModel>{
-                "internalName": "GoldricP1",
-                "displayName": "Casual Confidante",
-                "sellPrice": 100,
-                "typeGen": TypeGenEnum.dQuest,
-                "Type": "Quest Item",
-                "description": "It's a painting of a strangely out of place gold bar fellow. They look nervous underneath their outward bravado. "
             }),
         new BaseItemBase("GoldricP2", <DescItemModel>{
                 "internalName": "GoldricP2",
@@ -22276,6 +22621,30 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Droppable",
                 "description": "Drop a stack of 7 of these on the Tome to permanently add a new Bonus Type! "
+            }),
+        new BaseItemBase("Quest85", <DescItemModel>{
+                "internalName": "Quest85",
+                "displayName": "Anniversary Box",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "IdleOn is 3 years old! Hold down to open this box and celebrate! Contains a random Anniversary goodie, from event cards to foods! ALSO, if you open a total of 500 Boxes, you'll get a limited edition Anniversary event NAMETAG! "
+            }),
+        new BaseItemBase("Quest86", <DescItemModel>{
+                "internalName": "Quest86",
+                "displayName": "Basketball",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Summons the Hoopulyte who will challenge you to a game of Hoops, as long as you haven't already seen them today. "
+            }),
+        new BaseItemBase("Quest87", <DescItemModel>{
+                "internalName": "Quest87",
+                "displayName": "Secret Map",
+                "sellPrice": 10000,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down on this item while standing in the secret location to teleport to The Oasis... "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -26403,6 +26772,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats109", <ArmourItemModel>{
+                "internalName": "EquipmentHats109",
+                "displayName": "Husky Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats81", <ArmourItemModel>{
                 "internalName": "EquipmentHats81",
                 "displayName": "Siege Captain Cap",
@@ -30419,7 +30809,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{% Sailing Speed (Passive)",
                     "bonus": 6,
-                    "order": 20
+                    "order": 21
                 },
                 "dropChance": 0.0008
             }),
@@ -30435,7 +30825,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% EXP from monsters",
                     "bonus": 8,
-                    "order": 21
+                    "order": 22
                 },
                 "dropChance": 0.0008
             }),
@@ -30451,7 +30841,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Money from Monsters",
                     "bonus": 18,
-                    "order": 22
+                    "order": 23
                 },
                 "dropChance": 0.0008
             }),
@@ -30467,7 +30857,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 6,
                     "effect": "+{% Total Drop Rate",
                     "bonus": 12,
-                    "order": 23
+                    "order": 25
                 },
                 "dropChance": 1
             }),
@@ -30483,7 +30873,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 9,
                     "effect": "+{% Total Damage Multi",
                     "bonus": 8,
-                    "order": 24
+                    "order": 26
                 },
                 "dropChance": 1
             }),
@@ -30499,9 +30889,41 @@ export const initSpecificItemRepo = () => {
                     "perTier": 13,
                     "effect": "+{% Multikill per tier",
                     "bonus": 20,
-                    "order": 25
+                    "order": 27
                 },
                 "dropChance": 1
+            }),
+        new BaseItemBase("CardsZ24", <CardItemModel>{
+                "internalName": "CardsZ24",
+                "displayName": "Domeo Magmus Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z24",
+                    "category": "Bosses",
+                    "perTier": 4,
+                    "effect": "+{% Total Drop Rate (Passive)",
+                    "bonus": 1.5,
+                    "order": 20
+                },
+                "dropChance": 0.001
+            }),
+        new BaseItemBase("CardsZ25", <CardItemModel>{
+                "internalName": "CardsZ25",
+                "displayName": "Demented Spiritlord Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z25",
+                    "category": "Bosses",
+                    "perTier": 5,
+                    "effect": "+{% Fighting AFK gain rate",
+                    "bonus": 2.5,
+                    "order": 24
+                },
+                "dropChance": 0.001
             })    
 ]
 }

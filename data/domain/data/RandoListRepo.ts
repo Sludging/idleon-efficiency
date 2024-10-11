@@ -1875,7 +1875,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "The_Tome_v2.04;NEW_UPDATE_PATCH_NOTES_@_*The_Tome_has_been_added,_find_it_in_World_4_town!_@_*The_Tome_keeps_track_of_your_total_account_progression,_by_scoring_you_on_81_different_metrics_within_the_game._@_*Compare_your_Tome_Score_to_EVERYONE_who_plays_IdleOn_by_looking_at_your_Tome_Rank_displayed_above_the_Tome._This_only_shows_up_if_you're_in_the_top_50%_of_players._@_*Add_new_bonus_types_to_the_Tome_by_buying_new_Tome_Pages_from_Town_Shops_in_World_4_and_5!_@_*World_6_bubbles_related_to_Tome_now_do_the_thing_they_say_they_do!_@_*The_Tome_Rank_displayed_above_the_Tome_is_indeed_based_on_every_IdleOn_player,_but_importantly,_only_players_who_have_reached_the_Tome._@_*Patch_notes_readers!!!_Whats_good,_I_aint_got_anything_else_to_say_here,_hope_you_have_a_great_day_though_fr;*Le",
+                    "Farming_Ranks_v2.11;NEW_UPDATE_PATCH_NOTES_@_*Land_Ranks_added_to_Farming_in_World_6!_Unlock_these_by_purchasing_the_LAND_RANK_bonus_from_the_Night_Market_using_magic_beans._@_*Note_that_you_must_find_61_crops_for_the_LAND_RANK_bonus_to_be_available_in_the_Night_Market._@_*Every_time_a_land_plot_ranks_up,_you_get_1_Rank_Point_to_spend_on_20_new_upgrades!_Check_them_out_in_the_Handyman_Tools_section_of_Farming!_@_*You_can_reset_your_Rank_Upgrades_once_a_week._Don't_worry,_doing_so_will_NOT_reset_your_actual_farm_ranks,_just_the_upgrades!_@_*40_new_crops_added,_all_of_them_grown_with_the_GLASSY_Seed_type!_@_*Have_fun_ranking_up_your_land,_fellow_farmers!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2368,6 +2368,10 @@ export const initRandoListRepo = () => {
                 "elements": [
                     "TestObj16",
                     "TestObj5",
+                    "TestObj8",
+                    "TestObj14",
+                    "TestObj15",
+                    "EquipmentWeapons1",
                     "Trophy4",
                     "EquipmentCape1",
                     "EquipmentWeapons2",
@@ -2534,7 +2538,23 @@ export const initRandoListRepo = () => {
                     "xSpaceC4"
                 ]
             }),
-        new RandoListBase(72, <RandoListModel>{"elements": ["_"]}),
+        new RandoListBase(72, <RandoListModel>{
+                "elements": [
+                    "wLavaA1",
+                    "wLavaA2",
+                    "wLavaA3",
+                    "wLavaA4",
+                    "wLavaA5",
+                    "wLavaB1",
+                    "wLavaB2",
+                    "wLavaB3",
+                    "wLavaB4",
+                    "wLavaB5",
+                    "wLavaB6",
+                    "wLavaC1",
+                    "wLavaC2"
+                ]
+            }),
         new RandoListBase(73, <RandoListModel>{
                 "elements": [
                     "Oh_hi_again_cutie..._how_you_doing?",
@@ -2640,7 +2660,8 @@ export const initRandoListRepo = () => {
                     "Tribal_Shaman",
                     "Legumulyte",
                     "Potti",
-                    "Sussy_Gene"
+                    "Sussy_Gene",
+                    "Spirit_Sungmin"
                 ]
             }),
         new RandoListBase(81, <RandoListModel>{"elements": ["Meteor", "rocky", "iceknight", "snakeZ", "frogGR"]}),
@@ -3089,6 +3110,66 @@ export const initRandoListRepo = () => {
                     "w6d1",
                     "w6d2",
                     "w6a2"
+                ]
+            }),
+        new RandoListBase(99, <RandoListModel>{
+                "elements": [
+                    "vSpiritA1",
+                    "vSpiritA2",
+                    "vSpiritA3",
+                    "vSpiritA4",
+                    "vSpiritA5",
+                    "vSpiritB1",
+                    "vSpiritB2",
+                    "vSpiritB3",
+                    "vSpiritB4",
+                    "vSpiritC1",
+                    "vSpiritC2",
+                    "vSpiritD1",
+                    "vSpiritD2",
+                    "vSpiritD3"
+                ]
+            }),
+        new RandoListBase(100, <RandoListModel>{
+                "elements": [
+                    "Â",
+                    "â",
+                    "œ",
+                    "Ÿ",
+                    "Ô",
+                    "Ö",
+                    "ô",
+                    "É",
+                    "È",
+                    "Ç",
+                    "Œ",
+                    "Œâ",
+                    "Œœ",
+                    "ŒŸ"
+                ]
+            }),
+        new RandoListBase(101, <RandoListModel>{
+                "elements": [
+                    "Gemstone_Ninja_Knowledge_{_+30%_DROP_RARITY",
+                    "New_Gold_Charms_added_{_+10%_ALL_STAT",
+                    "Bargain_Ninja_Knowledge_{_+5_All_Talent_LV",
+                    "+30_Max_LV_for_Sneaking_Items_{_1.10#_DMG_MULTI",
+                    "Haha_yea_there's_no_bonus_here_yet",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet.",
+                    "Haha_yea_there's_no_bonus_here_yet."
+                ]
+            }),
+        new RandoListBase(102, <RandoListModel>{
+                "elements": [
+                    "{}%_Stealth_@_for_all_Ninjas",
+                    "{}%_Jade_@_Gain",
+                    "{}%_Damage_@_to_Doors",
+                    "+}%_Gold_@_Charm_Bonus",
+                    "{}%_Sneak_@_EXP_Gain",
+                    "{}%_Bonuses_@_from_Gemstones",
+                    "Hi",
+                    "Hi"
                 ]
             })    
 ]

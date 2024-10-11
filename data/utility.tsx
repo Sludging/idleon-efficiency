@@ -51,11 +51,11 @@ export enum Coins {
     Starfire = 8,
     Dreadlo = 9,
     Godshard = 10,
-    W6One = 11,
-    W6Two = 12,
-    W6Three = 13,
-    W6Four = 14,
-    W6Five = 15,
+    Sunder = 11,
+    Tydal = 12,
+    Marbiglass = 13,
+    Orberal = 14,
+    Eclipse = 15,
 }
 
 export const dateToText = (date: Date): string => {
@@ -168,26 +168,49 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
     }
 }
 
-// I don't remember where this code is from and it doesn't look like the game.
-// I'm totally guessing numbers here so need to fix it one day to look like the game
-// or add many commments about WHY this is correct.
+// Stole this code/concept from the wiki, god bless their soul.
 export const getCoinsArray = (coins: number): Map<Coins, number> => {
-    var n = coins;
-    var ret = new Map<Coins, number>();
-    var i = 26;
-    do {
-        var expo = Math.pow(10, i);
-        if (n > expo) {
-            var num = Math.floor(n / expo);
-            ret.set(Math.round(i / 2) + 1, num);
-            n = n % expo;
-        }
-        i -= 2;
-    } while (i >= 0);
+    // 1. We floor the coins since sometimes it's fractions, and we don't care about that.
+    // 2. We convert to BigInt so when we convert to string we have the full number instead of something like '1.2+e22'
+    // 3. We convert to string so we can splice it easier, more on why we splice later.
+    var n = BigInt(Math.floor(coins)).toString();
 
+    // Init an empty set of coins
+    var ret = new Map<Coins, number>();
+    // Start from copper
+    var i = 1;
+    // While we haven't processed the full string and we aren't at the max coin yet
+    while (n.length > 0 && i < Coins.Eclipse) {
+        // If we have less than 2 digits left, we are done.
+        if (n.length < 2) {
+            ret.set(i, Number(n)); // Add the single digit
+            n = ""; // Empty out the string
+            break; // Break the while
+        }
+        // We have 2 or more, convert the LAST two digits to a number
+        const quantity = Number(n.slice(-2));
+        // Add that number to the coin array
+        ret.set(i, quantity);
+
+        // Modify the string to remove the 2 digits we just procesed.
+        n = n.slice(0, -2);
+        // Move to the next coin.
+        i += 1
+    }
+
+    // If string isn't empty, it means we are at max coin (Eclipse for now). Simply add the full string as number to the array.
+    if (n.length > 0) {
+        ret.set(Coins.Eclipse, Number(n));
+    }
+
+    // Can probably move this to the top but basically handling someone with 0 coins.
     if (ret.size == 0) {
         ret.set(1, 0);
     }
+
+    // We want to sort the array by the highest coin first, so we sort and then reverse.
+    ret = new Map([...ret].sort((a, b) => a[0] - b[0]).reverse())
+
     return ret;
 }
 
@@ -319,4 +342,26 @@ export const letterToNumber = (char: string) => {
 
 export const uniqueFilter = (value: any, index: number, self: any) => {
     return self.indexOf(value) === index;
+}
+
+export const getSubDomain = () => {
+    const allowedTopDomains = ["idleonefficiency", "localhost:3000"];
+    const windowLocation = typeof window !== "undefined" ? window.location.host : ""
+    const locationSplit = windowLocation.split('.');
+
+    // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
+    // This is currently only for when testing with vercel (it ends up being 'vercel.app') to avoid invalid profile issues.
+    if (locationSplit.length > 1 && !allowedTopDomains.includes(locationSplit[1])) {
+        return "www";
+    }
+    let urlDomain = windowLocation != "" ? locationSplit[0] : "";
+
+    return urlDomain;
+}
+
+// Check if 
+export const isSubDomain = () => {
+   const urlDomain = getSubDomain();
+
+    return !["localhost:3000", "www", "preview"].includes(urlDomain);
 }

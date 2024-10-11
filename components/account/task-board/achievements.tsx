@@ -1,26 +1,29 @@
 import { Box, Grid, ResponsiveContext, Stack, Text, Tip } from "grommet";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Achievement } from "../../../data/domain/achievements";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
+import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
+import { useShallow } from "zustand/react/shallow";
 
 function Achivements({ worldIndex }: { worldIndex: number }) {
     const [achievementData, setAchievementData] = useState<Achievement[]>();
     const [worldLetter, setWorldLetter] = useState<string>('A');
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext)
+
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const achievementsToShow = useMemo(() => {
         if (achievementData) {
             return achievementData.filter(x => x.data.name != "FILLERZZZ ACH" && x.worldLetter == worldLetter && x.visualIndex != -1).sort((a, b) => a.visualIndex - b.visualIndex);
         }
         return [];
-    }, [achievementData, worldLetter])
+    }, [worldLetter, achievementData])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
+        if (theData.size > 0) {
             setAchievementData(theData.get("achievements"));
             if (worldIndex == 0) {
                 setWorldLetter('A');
@@ -37,13 +40,16 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
             if (worldIndex == 4) {
                 setWorldLetter('E');
             }
+            if (worldIndex == 5) {
+                setWorldLetter('F');
+            }
         }
-    }, [appContext, worldIndex])
+    }, [theData, worldIndex])
 
     return (
         <ShadowBox background="dark-1" pad="medium">
             <Grid columns={{
-                count: ['D', 'E'].includes(worldLetter) ? 8 : worldLetter == 'C' ? 10 : 11,
+                count: ['D', 'E', 'F'].includes(worldLetter) ? 8 : worldLetter == 'C' ? 10 : 11,
                 size: 'auto',
             }} fill>
                 {

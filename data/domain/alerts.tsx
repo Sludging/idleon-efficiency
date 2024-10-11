@@ -16,6 +16,7 @@ import { Trap } from "./traps";
 import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
 import { Storage } from "./storage";
+import { SummonEssenceColor, Summoning } from "./world-6/summoning";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -33,7 +34,9 @@ export enum AlertType {
     Farming = "Farming",
     Sneaking = "Sneaking",
     EquinoxFull = "Equinox Full",
-    CanCraftLuckierLad = "Can craft Luckier Lad"
+    CanCraftLuckierLad = "Can craft Luckier Lad",
+    CanBuyFamiliar = "Can buy a familiar for Summoning",
+    PassiveCardEquipped = "Cards that are passive are equipped"
 }
 
 export abstract class Alert {
@@ -58,12 +61,12 @@ export class PlayerAlert extends Alert {
 }
 
 export class CardSetAlert extends PlayerAlert {
-    constructor(player: Player, text: string) {
+    constructor(player: Player, text: string, icon: string) {
         super(player, AlertType.CardSet);
         this.title = "Bad card set";
         this.text = text;
         this.icon = {
-            location: 'CardSet26',
+            location: icon,
             height: 36,
             width: 36,
         }
@@ -150,6 +153,18 @@ export class SneakingLevelReady extends PlayerAlert {
     }
 }
 
+export class PassiveCardEquipped extends PlayerAlert {
+    constructor(player: Player) {
+        super(player, AlertType.PassiveCardEquipped);
+        this.title = "Some passive cards are equipped (you always get their bonus so you shouldn't equip them)"
+        this.icon = {
+            location: 'ClassIconsQmark',
+            height: 36,
+            width: 36,
+        }
+    }
+}
+
 export class TrapAlerts extends GlobalAlert {
     constructor(public count: number) {
         super(`${count} Traps ready to be collected`, AlertType.Traps, Item.getImageData("TrapBoxSet1"));
@@ -208,10 +223,21 @@ export class EquinoxBarFull extends GlobalAlert {
 
 export class CanCraftLuckierLad extends GlobalAlert {
     constructor() {
-        super(`You have enough Lucky Lads accross your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
+        super(`You have enough Lucky Lads across your account to craft a Luckier Lad`, AlertType.CanCraftLuckierLad, Item.getImageData("Trophy20"));
 
         (this.icon as ImageData).width = 50;
         (this.icon as ImageData).height = 50;
+    }
+}
+
+export class CanBuySummoningFamiliar extends GlobalAlert {
+    constructor() {
+        super(`You have enough white essence to buy a familiar, go get it`, AlertType.CanBuyFamiliar, 
+            {
+                location: 'SumUpgIc2',
+                height: 50,
+                width: 50,
+            });
     }
 }
 
@@ -241,23 +267,28 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
-            if (![0, 1, 4, 5, 6, 9, 10].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`));
+            if (![0, 1, 4, 5, 6, 9, 10, 11].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Lab:
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Skilling:
             if (![1, 2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
-                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`));
+                alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
         case Activity.Unknown:
             alerts.push(new DoingNothingAlert(player));
             break;
+    }
+
+    // Passive cards equipped
+    if (player.cardInfo?.equippedCards.some(card => card.passive)) {
+        alerts.push(new PassiveCardEquipped(player));
     }
 
     // Anvil Alerts
@@ -305,7 +336,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -371,6 +402,16 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     if (recipeUnlocked && luckyLadOwned >= 75) {
         globalAlerts.push(new CanCraftLuckierLad());
     }
+    
+    // Can buy a familiar for Summoning (in case cost reset for example)
+    const familiarUpgrade = summoning.summonUpgrades.find(bonus => bonus.index == 2)!;
+    const familiarUpgradeUnlocked = familiarUpgrade.unlocked;
+    const canBuyFamiliar = familiarUpgrade.nextLevelCost() < (summoning.summonEssences.find(essence => essence.color == SummonEssenceColor.White)?.quantity ?? 0);
+    const maxedFamiliarUpgrade = familiarUpgrade.level == familiarUpgrade.data.maxLvl;
+    // If the upgrade is unlocked, can afford a level, and not already maxed, display the alert
+    if (familiarUpgradeUnlocked && canBuyFamiliar && !maxedFamiliarUpgrade) {
+        globalAlerts.push(new CanBuySummoningFamiliar());
+    }
 
     return globalAlerts;
 }
@@ -389,6 +430,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const farming = data.get("farming") as Farming;
     const storage = data.get("storage") as Storage;
+    const summoning = data.get("summoning") as Summoning;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -396,6 +438,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage, summoning);
     return alerts;
 }

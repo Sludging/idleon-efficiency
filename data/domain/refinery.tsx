@@ -179,7 +179,7 @@ export class Refinery extends Domain {
 
             [...Array(unlockedSalts)].forEach((_, i) => {
                 const saltIndex = i + 3;
-                if (i > Object.keys(refinery.salts).length) {
+                if (i >= Object.keys(refinery.salts).length) {
                     return;
                 }
                 refinery.salts[`Refinery${i + 1}`].rank = refineryData[saltIndex][1];
