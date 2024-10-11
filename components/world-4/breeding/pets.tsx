@@ -336,32 +336,37 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                     petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
                         const petInFenceyard: number = breeding.fenceyardPets.filter(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 5).length;
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
-                        const timeToNextLevel = (pet.getNextShinyGoal() - pet.shinyProgress) * 84600 / breeding.getShinySpeed(starSignEquipped, silkRodeChip);
+                        const shinySpeed = breeding.getShinySpeed(starSignEquipped, silkRodeChip);
+                        const timeToNextLevel = (pet.getNextShinyGoal() - pet.shinyProgress) * 84600 / shinySpeed;
 
                         return (
                             petInFenceyard > 0 ?
                                 <ShadowBox background="dark-1" border={{ size: '2px', style: 'solid', color: 'green' }} key={pIndex} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.shinyLevel > 0 ? 1 : .5 }}>
-                                    <TipDisplay
-                                        size='medium'
-                                        maxWidth='medium'
-                                        heading={enemy?.data.details.Name ?? "Unknown"}
-                                        body={
-                                            <Box>
-                                                <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
-                                                <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * breeding.getShinySpeed(starSignEquipped, silkRodeChip))}</Text>
-                                                {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
-                                            </Box>
-                                        }
-                                        direction={TipDirection.Down} 
-                                    >
-                                        <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
-                                    </TipDisplay>
-                                    <Grid columns={["50%", "50%"]} fill align="center">
+                                    <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                    <Grid columns={["45%", "45%", "10%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.shinyLevel}</Text>
-                                            <Text size="16px">{Math.floor(pet.shinyProgress)}/{pet.getNextShinyGoal()} days</Text>
+                                            <Text size="16px">{nFormatter(Math.floor(pet.shinyProgress))}/{nFormatter(pet.getNextShinyGoal())} days</Text>
                                         </Box>
-                                        <Text size="16px">{pet.getShinyText()}</Text>
+                                        <Text size="15px">{pet.getShinyText()}</Text>
+                                        <Box align='center'>
+                                            <TipDisplay
+                                                
+                                                size='medium'
+                                                maxWidth='medium'
+                                                heading={enemy?.data.details.Name ?? "Unknown"}
+                                                body={
+                                                    <Box>
+                                                        <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
+                                                        <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * shinySpeed)}</Text>
+                                                        {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
+                                                    </Box>
+                                                }
+                                                direction={TipDirection.Down} 
+                                            >
+                                                <CircleInformation size="small" />
+                                            </TipDisplay>
+                                        </Box>                                        
                                     </Grid>
                                 </ShadowBox>
                                 :
@@ -370,7 +375,7 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                                     <Grid columns={["50%", "50%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.shinyLevel}</Text>
-                                            <Text size="16px">{Math.floor(pet.shinyProgress)}/{pet.getNextShinyGoal()} days</Text>
+                                            <Text size="16px">{nFormatter(Math.floor(pet.shinyProgress))}/{nFormatter(pet.getNextShinyGoal())} days</Text>
                                         </Box>
                                         <Text size="16px">{pet.getShinyText()}</Text>
                                     </Grid>
@@ -475,32 +480,36 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                     petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
                         const petInFenceyard: number = breeding.fenceyardPets.filter(fenceyardPet => fenceyardPet.data.petId == pet.data.petId && fenceyardPet.gene.index == 4).length;
                         const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
-                        const timeToNextLevel = (pet.getNextBreedingGoal() - pet.breedingProgress) * 84600 / breeding.getBreedingSpeed(starSignEquipped, silkRodeChip);
+                        const breedingSpeed = breeding.getBreedingSpeed(starSignEquipped, silkRodeChip);
+                        const timeToNextLevel = (pet.getNextBreedingGoal() - pet.breedingProgress) * 84600 / breedingSpeed;
 
                         return (
                             petInFenceyard > 0 ?
                                 <ShadowBox background="dark-1" key={pIndex} border={{ size: '2px', style: 'solid', color: 'green' }} direction="row" gap="medium" margin={{ bottom: 'medium', right: 'small' }} align="center" pad="small" style={{ opacity: pet.getBreedabilityBonus() >= 1.01 ? 1 : .5 }}>
-                                    <TipDisplay
-                                        size='medium'
-                                        maxWidth='medium'
-                                        heading={enemy?.data.details.Name ?? "Unknown"}
-                                        body={
-                                            <Box>
-                                                <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
-                                                <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * breeding.getBreedingSpeed(starSignEquipped, silkRodeChip))}</Text>
-                                                {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
-                                            </Box>
-                                        }
-                                        direction={TipDirection.Down}
-                                    >
-                                        <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
-                                    </TipDisplay>
-                                    <Grid columns={["50%", "50%"]} fill align="center">
+                                    <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                    <Grid columns={["45%", "45%", "10%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
                                             <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                         </Box>
-                                        <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
+                                        <Text size="16px">{nFormatter(pet.getBreedabilityBonus())}x</Text>
+                                        <Box align='center'>
+                                            <TipDisplay
+                                                size='medium'
+                                                maxWidth='medium'
+                                                heading={enemy?.data.details.Name ?? "Unknown"}
+                                                body={
+                                                    <Box>
+                                                        <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
+                                                        <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * breedingSpeed)}</Text>
+                                                        {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
+                                                    </Box>
+                                                }
+                                                direction={TipDirection.Down}
+                                            >
+                                                <CircleInformation size="small" />
+                                            </TipDisplay>
+                                        </Box>
                                     </Grid>
                                 </ShadowBox>
                                 :
@@ -511,7 +520,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
                                             <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                         </Box>
-                                        <Text size="16px">x{nFormatter(pet.getBreedabilityBonus())}</Text>
+                                        <Text size="16px">{nFormatter(pet.getBreedabilityBonus())}x</Text>
                                     </Grid>
                                 </ShadowBox>
                         )
