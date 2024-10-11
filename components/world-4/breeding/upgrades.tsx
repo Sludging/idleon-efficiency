@@ -4,20 +4,23 @@ import {
     Text,
 } from 'grommet'
 import { useState, useContext, useMemo, useEffect } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Breeding as BreedingDomain } from "../../../data/domain/breeding";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import { Cooking } from '../../../data/domain/cooking';
 import TextAndLabel from '../../base/TextAndLabel';
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export const PetUpgradeDisplay = () => {
     const [breeding, setBreeding] = useState<BreedingDomain>();
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const upgradeCosts = useMemo(() => {
-        const cooking = appContext.data.getData().get("cooking") as Cooking;
+        const cooking = theData.get("cooking") as Cooking;
         if (cooking && breeding) {
             return breeding.upgrade.map(upgrade => {
                 const meal = upgrade.data.cost != -1 ? cooking.meals[upgrade.data.cost] : undefined
@@ -42,14 +45,11 @@ export const PetUpgradeDisplay = () => {
             });
         }
         return [];
-    }, [appContext, breeding])
+    }, [theData, breeding])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-        }
-    }, [appContext]);
+        setBreeding(theData.get("breeding"));
+    }, [theData]);
 
     if (!breeding) {
         return (

@@ -4,7 +4,6 @@ import {
     Text,
 } from 'grommet'
 import { useState, useContext, useMemo, useEffect } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from "../../../data/domain/breeding";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
@@ -12,23 +11,24 @@ import { Player } from '../../../data/domain/player';
 import { ClassIndex, Talent } from '../../../data/domain/talents';
 import TextAndLabel from '../../base/TextAndLabel';
 import { TimeDisplaySize, TimeDown } from '../../base/TimeDisplay';
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export const ArenaBonusDisplay = () => {
     const [breeding, setBreeding] = useState<BreedingDomain>();
     const [playerData, setPlayerData] = useState<Player[]>();
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     const beastMasters = useMemo(() => {
         return playerData?.filter(player => (player.classId == ClassIndex.Beast_Master)) ?? [];
     }, [playerData])
 
     useEffect(() => {
-        if (appContext) {
-            const theData = appContext.data.getData();
-            setBreeding(theData.get("breeding"));
-            setPlayerData(theData.get("players"));
-        }
-    }, [appContext]);
+        setBreeding(theData.get("breeding"));
+        setPlayerData(theData.get("players"));
+    }, [theData]);
 
     if (!breeding) {
         return (

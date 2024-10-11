@@ -9,7 +9,6 @@ import {
 } from 'grommet'
 import { BorderType } from "grommet/utils";
 import { useState, useContext, useMemo, useEffect } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Breeding as BreedingDomain, Pet } from "../../../data/domain/breeding";
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter, toTime, uniqueFilter } from "../../../data/utility";
@@ -18,16 +17,19 @@ import ShadowBox from "../../base/ShadowBox";
 import TabButton from "../../base/TabButton";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { CircleInformation } from 'grommet-icons';
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export const PetsDisplay = () => {
     const [activeTab, setActiveTab] = useState<string>("All");
     const [silkRodeChip, setSilkrode] = useState(false);
     const [starSignEquipped, setStarSignEquipped] = useState(false);
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    const breeding = useMemo(() => {
-        return appContext.data.getData().get("breeding") as BreedingDomain;
-    }, [appContext])
+    // Get breeding data, if it's not available yet just show placeholder loading.
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     const starSignUnlocked = useMemo(() => {
         if (breeding) {
@@ -38,7 +40,7 @@ export const PetsDisplay = () => {
         }
 
         return false;
-    }, [appContext, breeding])
+    }, [theData, breeding])
 
     const starSignInfinity = useMemo(() => {
         if (breeding) {
@@ -49,7 +51,7 @@ export const PetsDisplay = () => {
         }
 
         return false;
-    }, [appContext, breeding])
+    }, [theData, breeding])
 
     return (
         <Box margin={{top: "small"}}>
@@ -126,11 +128,12 @@ export const PetsDisplay = () => {
 }
 
 function AllPetDisplay() {
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    const breeding = useMemo(() => {
-        return appContext.data.getData().get("breeding") as BreedingDomain;
-    }, [appContext])
+    // Get breeding data, if it's not available yet just show placeholder loading.
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {
         return (
@@ -204,13 +207,13 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
     const [filter, setFilter] = useState<string[]>([]);
     const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
     const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
-    const appContext = useContext(AppContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const size = useContext(ResponsiveContext);
 
     // Get breeding data, if it's not available yet just show placeholder loading.
-    const breeding = useMemo(() => {
-        return appContext.data.getData().get("breeding") as BreedingDomain;
-    }, [appContext]);
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
@@ -229,7 +232,7 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
         // The reason for the 2nd one is to allow the search to remove filters based on user typing.
         setAllFilterOptions(filterOptions);
         setCurrentFilterOptions(filterOptions);
-    }, [appContext, breeding]);
+    }, [theData, breeding]);
 
     const petsToShow = useMemo(() => {
         // If we are still loading, do nothing.
@@ -384,13 +387,13 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
 
 const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
     const [sort, setSort] = useState<string>('');
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
     // Get breeding data, if it's not available yet just show placeholder loading.
-    const breeding = useMemo(() => {
-        return appContext.data.getData().get("breeding") as BreedingDomain;
-    }, [appContext]);
+    const breeding = theData.get("breeding") as BreedingDomain;
 
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];

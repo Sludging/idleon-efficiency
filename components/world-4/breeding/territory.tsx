@@ -6,19 +6,21 @@ import {
     Text,
 } from 'grommet'
 import { useContext } from "react";
-import { AppContext } from "../../../data/appContext";
 import { Breeding as BreedingDomain, territoryNiceNames } from "../../../data/domain/breeding";
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
+import { useShallow } from 'zustand/react/shallow';
 
 export const TerritoryDisplay = () => {
-    const appContext = useContext(AppContext);
     const size = useContext(ResponsiveContext);
 
-    const theData = appContext.data.getData();
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
     const breeding = theData.get("breeding") as BreedingDomain;
 
     if (!breeding) {
