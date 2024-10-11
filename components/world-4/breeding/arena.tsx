@@ -3,7 +3,7 @@ import {
     Grid,
     Text,
 } from 'grommet'
-import { useState, useContext, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from "../../../data/domain/breeding";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
@@ -41,7 +41,7 @@ export const ArenaBonusDisplay = () => {
         <Box gap="small">
             <Box direction="row" wrap justify="center" margin={{ top: 'small' }}>
                 {beastMasters && beastMasters.map((bm, index) => {
-                    const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 370)?.pop() as [Talent, number];
+                    const [arenaTalent, cooldown] = [...bm.cooldown.entries()].filter(([talent]) => talent.skillIndex == 370)?.pop() as [Talent, number];
                     const realCD = cooldown - bm.afkFor;
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
