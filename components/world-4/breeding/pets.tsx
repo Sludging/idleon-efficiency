@@ -330,7 +330,7 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                     onClose={() => setCurrentFilterOptions(allFilterOptions)}
                 />
             </Box>
-            <Text size='medium'>Shiny speed multiplier : {nFormatter(breeding.getShinySpeed(starSignEquipped, silkRodeChip))}</Text>
+            <TextAndLabel label='Shiny speed multiplier :' text={`${round(breeding.getShinySpeed(starSignEquipped, silkRodeChip))}x`}/>
             <Grid columns={size == "small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
                     petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
@@ -469,7 +469,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                     onChange={({ value: nextValue }) => { setSort(nextValue); }}
                 />
             </Box>
-            <Text size='medium'>Breedability speed multiplier : {nFormatter(breeding.getBreedingSpeed(starSignEquipped, silkRodeChip))}</Text>
+            <TextAndLabel label='Breedability speed multiplier :' text={`${round(breeding.getBreedingSpeed(starSignEquipped, silkRodeChip))}x`}/>
             <Grid columns={size == "small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
                     petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
