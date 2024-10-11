@@ -155,7 +155,7 @@ export class Pet {
 
     geneUpgradeCostReduction: number = 0;
 
-    // Correspond the index of the pet within his own world specifically (it's not stored anywhere else)
+    // The index of the pet within their own world (it's not stored anywhere else)
     indexInWorld: number = 0;
 
     shinySpeed: number = 0;
