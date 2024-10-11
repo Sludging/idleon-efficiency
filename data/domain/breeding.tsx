@@ -23,6 +23,9 @@ import { GemStore } from "./gemPurchases";
 import { TaskBoard } from "./tasks";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
+import { StarSigns } from "./starsigns";
+import { CropScientistBonusText, Farming } from "./world-6/farming";
+import { Summoning } from "./world-6/summoning";
 
 export const waveReqs = "2 5 8 12 15 20 25 35 50 65 80 100 125 150 175 200".split(" ").map(value => parseInt(value));
 
@@ -146,6 +149,17 @@ interface ShinyBonusData {
 export class Pet {
     shinyProgress: number = 0;
     shinyLevel: number = 0;
+    geneLevel: number = 0;
+    breedingProgress: number = 0;
+    breedingLevel: number = 0;
+
+    geneUpgradeCostReduction: number = 0;
+
+    // The index of the pet within their own world (it's not stored anywhere else)
+    indexInWorld: number = 0;
+
+    shinySpeed: number = 0;
+    breedingSpeed: number = 0;
 
     constructor(public index: number, public data: PetStatModel, public gene: PetGene, public shinyBonus: ShinyBonusData, public power: number = 0) { }
 
@@ -189,6 +203,10 @@ export class Pet {
         return 0;
     }
 
+    getGeneNextLevelCost = (currentLevel: number = this.geneLevel) => {
+        return (10 + (5 + this.indexInWorld + currentLevel) + Math.pow(Math.max(this.indexInWorld - 3, 1), 1.7)) * Math.pow(Math.max(this.indexInWorld + 1 - 6, 1), 1.12) * Math.pow(1.052 + .01 * Math.floor(currentLevel / 10), currentLevel) * Math.max(0.01, 1 - this.geneUpgradeCostReduction / 100);
+    }
+
     getBackgroundImageData = (): ImageData => {
         let cardNumber: number = 4;
         switch (this.gene.data.abilityType) {
@@ -226,6 +244,20 @@ export class Pet {
         return 20;
     }
 
+    calculateBreedingLevel = () => {
+        return 1 + Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
+    }
+
+    getBreedabilityBonus = () => {
+        return 1 + Math.log(Math.max(1, Math.pow(this.breedingProgress + 1, .725))); 
+    }
+
+    getNextBreedingGoal = () => {
+        // Breeding can't exceed lv.10 for now
+        if (this.breedingLevel >= 10) return 0;
+        return Math.pow(Math.pow(Math.E, Math.pow(this.breedingLevel, 1.25)), 1/0.725) - 1;
+    }
+
     getShinyBonus = () => {
         return this.shinyBonus.bonusPerLevel * this.shinyLevel;
     }
@@ -241,7 +273,7 @@ export class Pet {
 
     static fromBase(data: PetStatBase[], genes: PetGene[]): Pet[] {
         const randoList = initRandoListRepo();
-        return data.map(pet => {
+        const allPets = data.map(pet => {
             const petGeneIndex = parseInt(randoList[55].data.elements[pet.data.unlockOrder - 1]);
             const shinyIndex = parseInt(randoList[90].data.elements[pet.data.unlockOrder]);
             return new Pet(pet.index, pet.data, genes[petGeneIndex], {
@@ -250,6 +282,11 @@ export class Pet {
                 text: randoList[91].data.elements[shinyIndex].replace(/_/g, " ")
             }, 0);
         });
+        allPets.forEach(pet => {
+            const sameWorldPets = allPets.filter(findPet => findPet.data.world == pet.data.world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
+            pet.indexInWorld = sameWorldPets.findIndex(findPet => findPet.index == pet.index);
+        });
+        return allPets;
     }
 }
 
@@ -367,7 +404,20 @@ export class Breeding extends Domain {
     speciesUnlocks: number[] = [];
     skillLevel: number = 0;
     deadCells: number = 0;
+
+    worldGenes: number[] = [];
+
+    starSignUnlocked: boolean = false;
+    starSignInfinity: boolean = false;
+
+    shinySpeedMulti: number = 0;
+    shinySpeedMultiWithSilkrode: number = 0;
+    shinySpeedMultiWithoutStarSign: number = 0;
     
+    breedingSpeedMulti: number = 0;
+    breedingSpeedMultiWithSilkrode: number = 0;
+    breedingSpeedMultiWithoutStarSign: number = 0;
+
     // Calculated
     petPowerFromTalent: number = 1;
 
@@ -380,6 +430,14 @@ export class Breeding extends Domain {
 
     setTimeForEgg = (labBonus: number, mealBonus: number, alchemyBonus: number, achivementBonus: number, skillMasteryBonus: number) => {
         this.totalEggTime = 7200 / (1 + (labBonus + (mealBonus + alchemyBonus + achivementBonus + skillMasteryBonus)) / 100);
+    }
+
+    getShinySpeed = (starSignEquipped: boolean, silkrodeEquipped: boolean) => {
+        return starSignEquipped ? (silkrodeEquipped ? this.shinySpeedMultiWithSilkrode : this.shinySpeedMulti) : this.shinySpeedMultiWithoutStarSign;
+    }
+
+    getBreedingSpeed = (starSignEquipped: boolean, silkrodeEquipped: boolean) => {
+        return starSignEquipped ? (silkrodeEquipped ? this.breedingSpeedMultiWithSilkrode : this.breedingSpeedMulti) : this.breedingSpeedMultiWithoutStarSign;
     }
 
     getStatRange = () => {
@@ -498,13 +556,19 @@ export class Breeding extends Domain {
             }
         })
 
-        breeding.deadCells = breedingData[3][8];
+        breeding.worldGenes = breedingData[3];
+        breeding.deadCells = breeding.worldGenes[breeding.worldGenes.length-1];
 
-        // Calculate pet shiny levels.
+        // Calculate pet shiny levels, breeding level, and gene level
         GroupByFunction(breeding.basePets, (pet: Pet) => pet.data.world).forEach((worldPets, _) => {
             worldPets.forEach((pet, pIndex) => {
-                pet.shinyProgress = breedingData[22 + pet.data.world][pIndex]
+                pet.shinyProgress = breedingData[22 + pet.data.world][pIndex];
                 pet.shinyLevel = pet.calculateShinyLevel();
+                pet.breedingProgress = breedingData[13 + pet.data.world][pIndex];
+                pet.breedingLevel = pet.calculateBreedingLevel();
+                pet.geneLevel = breedingData[4 + pet.data.world][pIndex];
+
+                pet.geneUpgradeCostReduction = breeding.upgrade[1].getBonus();
             })
         });
 
@@ -641,6 +705,41 @@ export const updateAllShinyEffects = (data: Map<string, any>) => {
     cooking.meals.forEach(meal => {
         meal.shinyBonus = breeding.shinyBonuses.find(bonus => bonus.data.index == 20)?.getBonus() ?? 0;;
     });
+}
+
+export const updateBreedingDisplayData = (data: Map<string, any>) => {
+    const breeding = data.get("breeding") as Breeding;
+    const starSigns = data.get("starsigns") as StarSigns;
+    const mainframe = data.get("lab") as Lab;
+    const farming = data.get("farming") as Farming;
+    const summoning = data.get("summoning") as Summoning;
+    const cooking = data.get("cooking") as Cooking;
+    const achievements = data.get("achievements") as Achievement[];
+
+    // Calculate Shiny speed multiplier
+    const labEmeraldUlthuriteBonus = mainframe.jewels[16].active ? mainframe.jewels[16].getBonus() : 0;
+    const shinyBonusSpeedFromShiny = breeding.shinyBonuses.find(bonus => bonus.data.index == 16)?.getBonus() ?? 0;
+    const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.ShinyPetLvlUpRate);
+    const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 18)?.getBonus() ?? 0;
+    const starsign57b = starSigns.unlockedStarSigns.find(sign => sign.name == "Breedabilli")?.getBonus("Shiny Pet LV spd") ?? 0;
+    breeding.shinySpeedMulti = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + starsign57b))) / 100) * (1 + winnerBonus / 100);
+    breeding.shinySpeedMultiWithSilkrode = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + (starsign57b * 2)))) / 100) * (1 + winnerBonus / 100);
+    breeding.shinySpeedMultiWithoutStarSign = (1 + (labEmeraldUlthuriteBonus + (shinyBonusSpeedFromShiny + (cropScientistBonus + 0))) / 100) * (1 + winnerBonus / 100);
+    
+    // Calculate Breeding speed multiplier
+    const starsign57a = starSigns.unlockedStarSigns.find(sign => sign.name == "Breedabilli")?.getBonus("Breedable Spd") ?? 0;
+    const breedingUpgradeBonus = breeding.upgrade[3].getBonus();
+    const mealBreedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Breed").reduce((sum, meal) => sum += meal.getBonus(), 0);
+    const achievement218 = achievements[218].completed ? 20 : 0;
+    breeding.breedingSpeedMulti = (1 + (breedingUpgradeBonus + (mealBreedBonus + (achievement218 + starsign57a))) / 100) * (1 + cropScientistBonus / 100);
+    breeding.breedingSpeedMultiWithSilkrode = (1 + (breedingUpgradeBonus + (mealBreedBonus + (achievement218 + (starsign57a * 2)))) / 100) * (1 + cropScientistBonus / 100);
+    breeding.breedingSpeedMultiWithoutStarSign = (1 + (breedingUpgradeBonus + (mealBreedBonus + (achievement218 + 0))) / 100) * (1 + cropScientistBonus / 100);
+
+    // Nice info to have for the UI
+    breeding.starSignUnlocked = starSigns.isStarSignUnlocked("Breedabilli");
+    breeding.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "Breedabilli") != undefined);
+
+    return breeding;
 }
 
 // This is UI only so sticking it in the end in case we get more crazy level impacts in the future.

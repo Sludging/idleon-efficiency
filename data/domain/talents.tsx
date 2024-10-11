@@ -7,7 +7,8 @@ export const TalentConst = {
     NearbyOutletIndex: 478,
     ChargeSiphonIndex: 475,
     CrystalSpawnIndex: 26,
-    CrystalForDaysIndex: 619
+    CrystalForDaysIndex: 619,
+    ArenaSpiritIndex: 370
 }
 
 export class Talent {
