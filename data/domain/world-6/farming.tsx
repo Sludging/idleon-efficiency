@@ -18,6 +18,38 @@ import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
 
+export class LandRankDataBase {
+    unlocked: boolean = false;
+    upgrades: LandRankUpgrade[] = [];
+    totalLandRanks: number = 0;
+    spentLandRanksPoints: number = 0;
+
+    constructor() {}
+
+    /*
+    0 == b ? (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 3, 0) / 100) * (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 10, 0) / 100) * (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 15, 0) / 100)
+    1 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 8, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 17, 0)
+    2 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 6, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 13, 0)
+    3 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 7, 0) + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 11, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 18, 0))
+    4 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 5, 0) + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 12, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 16, 0))
+    1;
+    */
+    getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType) => {
+        switch(bonusType) {
+
+            default: return 1;
+        }
+    }
+
+    getUpgradeBonusFromIndex = (index: number) => {
+        const upgrade = this.upgrades.find(upgrade => upgrade.index == index);
+        if (upgrade) {
+            return upgrade.getUpgradeLandRankUpgradeBonus();
+        }
+        return 0;
+    }
+}
+
 export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
@@ -120,6 +152,7 @@ export class Crop {
     }
 
     getEvolutionChance = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+        // return 2 > c.asNumber(a.engine.getGameAttribute("Lv0")[16]) ? 0 : 99 == b ? (1 + q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 4) / 100) * (1 + q._customBlock_Summoning("WinBonus", 10, 0) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W10AllCharz) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.Y6) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmEvo"]) / 100) * (1 + r._customBlock_MealBonus("zCropEvo") / 100) * (1 + k._customBlock_StampBonusOfTypeX("CropEvo") / 100) * (1 + r._customBlock_MealBonus("zCropEvoSumm") * Math.ceil((c.asNumber(a.engine.getGameAttribute("Lv0")[18]) + 1) / 50) / 100) * (1 + 5 * n._customBlock_AchieveStatus(355) / 100) * Math.max(1, q._customBlock_RandomEvent("KillroyBonuses", 1, 0)) * Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1)) * (1 + 15 * q._customBlock_RiftStuff("RiftSkillBonus,15", 1) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h["65"]) * c.asNumber(a.engine.getGameAttribute("Lv0")[16]) / 100) * Math.max(1, q._customBlock_FarmingStuffs("LandRankUpgBonusTOTAL", 0, 0)) * (1 + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 0, 0) * c.asNumber(a.engine.getGameAttribute("FarmRank")[0][0]) + q._customBlock_Summoning("VotingBonusz", 29, 0)) / 100) : q._customBlock_FarmingStuffs("CropType", b, 0) == c.asNumber(a.engine.getGameAttribute("CustomLists").h.SeedInfo[c.asNumber(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0][3]) ? 0 : (1 + q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 4) / 100) * (1 + q._customBlock_Summoning("WinBonus", 10, 0) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W10AllCharz) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.Y6) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmEvo"]) / 100) * (1 + r._customBlock_MealBonus("zCropEvo") / 100) * (1 + k._customBlock_StampBonusOfTypeX("CropEvo") / 100) * (1 + r._customBlock_MealBonus("zCropEvoSumm") * Math.ceil((c.asNumber(a.engine.getGameAttribute("Lv0")[18]) + 1) / 50) / 100) * (1 + 5 * n._customBlock_AchieveStatus(355) / 100) * Math.max(1, q._customBlock_RandomEvent("KillroyBonuses", 1, 0)) * Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 1)) * (1 + 15 * q._customBlock_RiftStuff("RiftSkillBonus,15", 1) / 100) * (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h["65"]) * c.asNumber(a.engine.getGameAttribute("Lv0")[16]) / 100) * Math.max(1, q._customBlock_FarmingStuffs("LandRankUpgBonusTOTAL", 0, 0)) * (1 + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 0, 0) * c.asNumber(a.engine.getGameAttribute("FarmRank")[0][b | 0]) + q._customBlock_Summoning("VotingBonusz", 29, 0)) / 100) * c.asNumber(m.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), Ea)._GenINFO[68][c.asNumber(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0]) * Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SeedInfo[c.asNumber(a.engine.getGameAttribute("FarmPlot")[b | 0][0]) | 0][6]), c.asNumber(a.engine.getGameAttribute("FarmPlot")[b | 0][2]));
         if (this.farmingLevel < 2 || this.index == this.seed.data.cropIdMax) {
             return 0;            
         } else {                
@@ -251,6 +284,7 @@ export class Plot {
     }
 
     getPlotNextOGChance = (starSignEquipped: boolean, silkrodeBonus: boolean, currentOGlevel: number = this.OGlevel) => {
+        //return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * this.getStarSignBonus(starSignEquipped, silkrodeBonus) * (1 + 2 * c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][2]) / 100) * (1 + 15 * n._customBlock_AchieveStatus(365) / 100) * (1 + q._customBlock_FarmingStuffs("LandRankUpgBonusTOTAL", 3, 0) / 100);
         return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * this.getStarSignBonus(starSignEquipped, silkrodeBonus);
     }
 
@@ -551,6 +585,7 @@ export class Farming extends Domain {
     }
     
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
+        // return Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 2)) * (1 + (q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 2) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmSpd"])) / 100) * (1 + q._customBlock_Summoning("WinBonus", 2, 0) / 100);
         const growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
         
         this.growthRate = growthRate;
@@ -822,4 +857,14 @@ export enum PlotGrowthStage {
     GrowStage3 = 4,
     GrowStage4 = 5,
     Grown = 6,
+}
+
+// It's the same number as in-game function 
+// q._customBlock_FarmingStuffs("LandRankUpgBonusTOTAL",1,0) will be used in-game code to retrieve the sum of all bonuses from land rank upgrades that grant increased amount harvested
+export enum LandRankBonusType {
+    NextCropChance = 0,
+    AmountHarvested = 1,
+    LandRankEXP = 2,
+    OGChance = 3,
+    FarmingSkillExp = 4
 }
