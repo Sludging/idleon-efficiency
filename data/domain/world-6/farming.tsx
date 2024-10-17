@@ -504,8 +504,10 @@ export class Farming extends Domain {
 
         farming.landRankPointsTotal = landRankData[0].reduce((sum, rank) => sum + rank, 0);
         farming.landRankPointsSpent = landRankData[2].reduce((sum, rank) => sum + rank, 0);
-        farming.landRankUpgrades = []; // remove this once the init function exists
-        farming.updateUnlockedLandRankUpgrades()
+        // For now there'll be no unlocked upgrades as they aren't initizalied yet
+        farming.updateUnlockedLandRankUpgrades();
+        // Remove this once the init function exists and use farming.landRankUpgrades.forEach to update it like it's done for marketUpgrades
+        farming.landRankUpgrades = []; 
         landRankData[2].forEach((level, index) => {
             farming.landRankUpgrades.push(new LandRankUpgrade(index, level));
         });
