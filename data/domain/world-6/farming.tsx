@@ -45,7 +45,7 @@ export class MarketUpgrade {
         let cropId = 0;
         if (this.index > 7) {
             // Means it's night market so no crop cost, only magic beans
-            let cropId = -1;
+            cropId = -1;
         } else {
             if (this.index == 0) {
                 // Special calcul for the first upgrade
@@ -372,7 +372,7 @@ export class Farming extends Domain {
     starSignEvoInfinity: boolean = false;
     starSignOGUnlocked: boolean = false;
     starSignOGInfinity: boolean = false;
-;
+
     cropDepot: Crop[] = [];
     cropsToCollect: CropQuantity[] = [];
     cropScientist: CropScientist = new CropScientist();
@@ -551,9 +551,6 @@ export class Farming extends Domain {
 
         if (upgrade) {
             switch (upgradeId) {
-                case 7:
-                    // No bonus there yet
-                    return 0;
                 case 9: // GMO
                     return this.getMarketUpgradeBonusValue(15) * Math.pow(1 + upgrade.level * upgrade.data.bonusPerLvl / 100, this.getCropsWithStockEqualOrGreaterThan(200));
                 case 11:
@@ -562,9 +559,6 @@ export class Farming extends Domain {
                     return this.getMarketUpgradeBonusValue(15) * (1 + upgrade.level * upgrade.data.bonusPerLvl * this.getCropsWithStockEqualOrGreaterThan(1000) / 100);
                 case 12: //GMO
                     return this.getMarketUpgradeBonusValue(15) * (1 + upgrade.level * upgrade.data.bonusPerLvl * this.getCropsWithStockEqualOrGreaterThan(2500) / 100);
-                case 13:
-                    // No bonus there yet
-                    return 0;
                 case 14: //GMO
                     return this.getMarketUpgradeBonusValue(15) * (1 + (upgrade.level * upgrade.data.bonusPerLvl * this.getCropsWithStockEqualOrGreaterThan(10000)) / 100);
                 case 15: //GMO
@@ -582,21 +576,16 @@ export class Farming extends Domain {
 
         if (upgrade) {
             switch (upgradeId) {
-                case 7:
-                    // No bonus there yet
-                    return upgrade.data.bonus;
                 case 9: // GMO
                     return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ nFormatter(this.getMarketUpgradeBonusValue(upgradeId))+")";
                 case 11:
                     return upgrade.data.bonus.replace(/}/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
-                case 13:
-                    // No bonus there yet
-                    return upgrade.data.bonus;
                 case 10: //GMO
                 case 12: //GMO
-                case 14: //GMO
                 case 15: //GMO
                     return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
+                case 14: //GMO
+                    return "*This bonus doesn't grant anything atm " + upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
                 default:    
                     return upgrade.data.bonus.replace(/{/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
             }
