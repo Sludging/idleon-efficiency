@@ -18,6 +18,45 @@ import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
 
+export class LandRankUpgrade {
+    level: number = 0;
+    unlocked: boolean = false;
+    bonus: number = 0;
+    unlockThreshold: number = 0;
+    bonusText: string = "";
+    name: string = "";
+    uniqueLevelBonus: boolean = false;
+
+    constructor(public index: number, level = 0) {
+        this.level = level;
+        switch (index) {
+            case 4:
+            case 9:
+            case 14:
+            case 19:
+                this.uniqueLevelBonus = true;
+            default: 
+                this.uniqueLevelBonus = false;
+        }
+    }
+
+    getUpgradeLandRankUpgradeBonus = () => {
+        if (!this.unlocked) {
+            return 0;
+        }
+
+        switch(this.index) {
+            case 4:
+            case 9:
+            case 14:
+            case 19:
+                return Math.min(this.bonus, this.bonus * this.level);
+            default: 
+                return 1.7 * this.bonus * this.level / (this.level + 80);
+        }
+    }
+}
+
 export class MarketUpgrade {
     level: number = 0;
     unlocked: boolean = false;
@@ -156,6 +195,9 @@ export class Plot {
     bonusOGChanceFromPristine11: number = 0;
     bonusOGChanceFromStarSign67: number = 0;
 
+    landRank: number = 0;
+    landExp: number = 0;
+
     overgrowthCycleCompletedSinceLastLoggin: number = 0;
     saveTime: number = 0;
     lastRefresh: number = 0;
@@ -229,6 +271,10 @@ export class Plot {
             case this.growthTime >= 0: return PlotGrowthStage.Planted;
             default: return PlotGrowthStage.Empty;
         }
+    }
+
+    getExpToNextRank = () => {
+        return (10 + (7 * this.landRank + 25 * Math.floor(this.landRank / 5))) * Math.pow(1.11, this.landRank);
     }
 
     getQuantityToCollect(baseQuantity: number = this.quantityToCollect): number {
@@ -366,6 +412,7 @@ export class CropScientist {
 
 export class Farming extends Domain {
     farmPlots: Plot[] = [];
+    landRankUpgrades: LandRankUpgrade[] = []; // Should init here like marketUpgrades and seeds when available from wiki bot
     marketUpgrades: MarketUpgrade[] = initMarketInfoRepo().map((upgrade) => { return new MarketUpgrade(upgrade.index, upgrade.data) });
     seeds: Seed[] = initSeedInfoRepo().map((seed) => { return new Seed(seed.index, seed.data) });
     starSignEvoUnlocked: boolean = false;
@@ -378,7 +425,10 @@ export class Farming extends Domain {
     cropScientist: CropScientist = new CropScientist();
 
     canOvergrow: boolean = false;
+    canLevelLandRank: boolean = false;
     magicBeansOwned: number = 0;
+    landRankPointsTotal: number = 0;
+    landRankPointsSpent: number = 0;
     instaGrowToolLeft: number = 0;    
     farmingLevel: number = 0;
     growthRate: number = 0;
@@ -401,6 +451,7 @@ export class Farming extends Domain {
             { key: "FarmPlot", perPlayer: false, default: []},
             { key: "FarmCrop", perPlayer: false, default: []},
             { key: "FarmUpg", perPlayer: false, default: []},
+            { key: "FarmRank", perPlayer: false, default: []},
         ]
     }
 
@@ -412,10 +463,11 @@ export class Farming extends Domain {
         const farming = data.get(this.dataKey) as Farming;
         const cropsData = data.get("FarmCrop") as Object;
         const plotsData = data.get("FarmPlot") as number[][];
+        const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
         
         // Old accounts won't have this data, exit early.
-        if (!cropsData || !plotsData || !upgradesData) {
+        if (!cropsData || !plotsData || !upgradesData|| !landRankData) {
             return;
         }
         
@@ -448,6 +500,15 @@ export class Farming extends Domain {
             }
         });
         farming.canOvergrow = (farming.getMarketUpgradeBonusValue(8) > 0);
+        farming.canLevelLandRank = (farming.getMarketUpgradeBonusValue(13) > 0);
+
+        farming.landRankPointsTotal = landRankData[0].reduce((sum, rank) => sum + rank, 0);
+        farming.landRankPointsSpent = landRankData[2].reduce((sum, rank) => sum + rank, 0);
+        farming.landRankUpgrades = []; // remove this once the init function exists
+        farming.updateUnlockedLandRankUpgrades()
+        landRankData[2].forEach((level, index) => {
+            farming.landRankUpgrades.push(new LandRankUpgrade(index, level));
+        });
 
         farming.farmPlots = [];
         plotsData.forEach((plotInfo, index) => {
@@ -462,6 +523,13 @@ export class Farming extends Domain {
                 plot.OGlevel = plotInfo[5];
                 plot.overgrowthTime = plotInfo[6];
 
+                if (index < landRankData[0].length) {
+                    plot.landRank = landRankData[0][index] ?? 0;
+                }
+                if (index < landRankData[1].length) {
+                    plot.landExp = landRankData[1][index] ?? 0;
+                }
+
                 plot.readyToCollect = (plot.quantityToCollect > 0)
             }
             farming.farmPlots.push(plot);
@@ -471,6 +539,12 @@ export class Farming extends Domain {
     updateUnlockedMarketBonuses = () => {
         this.marketUpgrades.forEach(upgrade => {
             upgrade.unlocked = (upgrade.data.cropReq <= this.discoveredCrops);
+        });
+    }
+
+    updateUnlockedLandRankUpgrades = () => {
+        this.landRankUpgrades.forEach(upgrade => {
+            upgrade.unlocked = this.canLevelLandRank ? (this.landRankPointsTotal >= upgrade.unlockThreshold) : false;
         });
     }
     
