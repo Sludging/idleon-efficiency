@@ -390,7 +390,11 @@ export class Farming extends Domain {
         "Daisy", "Flour", "Stargazer Lily", "Rose", "Sunflower", "Blue Daisy", "Pansy", "Tulip", "???", "Cauliflower", "???", "???", "Muffin", "???", "Golden Tulip",
         "Sake Maki", "Salmon Nigiri", "Temaki", "Hamaguri", "Onigiri", "Ama-ebi", "Cup Ramen", "Daikon Maki", "???", "???", "Ikura", "???", "Miso Soup", "???", "Avocado Maki", "Ebi Nigiri", "Instant Noodles", "Blue Ikura", "Tako Nigiri", "Soy Sauce", "???", "Neko Rice", "Shrimp Tempura",
         "Mushroom 1", "Mushroom 2", "Mushroom 3", "Mushroom 4", "Mushroom 5", "Mushroom 6", "Mushroom 7", "Mushroom 8", "Mushroom 9", "Mushroom 10", "Mushroom 11", "Mushroom 12", "Mushroom 13", "Mushroom 14", "Mushroom 15", "Mushroom 16", "Mushroom 17", "Mushroom 18", "Mushroom 19", "Mushroom 20", "Mushroom 21", "Mushroom 22", "Mushroom 23",
-        "Glassy Bananas", "Glassy Mango", "Glassy Mushroom 1", "Glassy Maki", "Glassy Broccoli", "Glassy Carrot", "Glassy Sliced Tomato", "Glassy Watermellon", "Glassy Shrimp Tempura", "Glassy Rose", "Glassy Corn", "Glassy Lettuce", "Glassy Onigiri"];
+        "Glassy Bananas", "Glassy Mango", "Glassy Mushroom 21", "Glassy Maki", "Glassy Broccoli", "Glassy Carrot", "Glassy Sliced Tomato", "Glassy Watermellon", "Glassy Shrimp Tempura", "Glassy Rose", "Glassy Lettuce", "Glassy Onigiri", "Glassy Corn",
+        "Red Glassy Bananas", "Red Glassy Mango", "Red Glassy Broccoli", "Red Glassy Carrot", "Red Glassy Sliced Tomato", "Red Glassy Watermellon", "Red Glassy Shrimp Tempura", "Red Glassy Rose", "Red Glassy Onigiri", "Red Glassy Corn",
+        "Green Glassy Bananas", "Green Glassy Mango", "Green Glassy Broccoli", "Green Glassy Carrot", "Green Glassy Sliced Tomato", "Green Glassy Watermellon", "Green Glassy Shrimp Tempura", "Green Glassy Rose", "Green Glassy Onigiri", "Green Glassy Corn",
+        "Pale Green Glassy Bananas", "Pale Green Glassy Mango", "Pale Green Glassy Broccoli", "Pale Green Glassy Carrot", "Pale Green Glassy Sliced Tomato", "Pale Green Glassy Watermellon", "Pale Green Glassy Shrimp Tempura", "Pale Green Glassy Rose", "Pale Green Glassy Onigiri", "Pale Green Glassy Corn",
+        "Purple Glassy Bananas", "Purple Glassy Mango", "Purple Glassy Broccoli", "Purple Glassy Carrot", "Purple Glassy Sliced Tomato", "Purple Glassy Watermellon", "Purple Glassy Shrimp Tempura", "Purple Glassy Rose", "Purple Glassy Onigiri", "Purple Glassy Corn"];
 
     getRawKeys(): RawData[] {
         return [
