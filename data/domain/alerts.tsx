@@ -4,7 +4,7 @@ import { Domain, RawData } from "./base/domain";
 import { Construction } from "./construction";
 import { Equinox, FoodLust } from "./equinox";
 import { ImageData } from "./imageData";
-import { Item, Equipment } from './items';
+import { Item } from './items';
 import { ObolsData, Obol } from "./obols";
 import { Activity, Player } from "./player";
 import { Prayer } from "./prayers";
@@ -322,12 +322,12 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Anvil Alerts
     anvil.playerAnvils[player.playerID].production.forEach(anvilProduct => {
         if (anvilProduct.timeTillCap <= 0) {
-            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`, Item.getImageData(anvilProduct.data.item)))
+            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`, Item.getImageData(anvilProduct.data.item)));
         }
     })
 
     if (anvil.playerAnvils[player.playerID].currentlySelect.indexOf(-1) > -1) {
-        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!", { location: 'UIquickref1', height: 36, width: 36 }))
+        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!", { location: 'UIquickref1', height: 36, width: 36 }));
     }
 
     // Obol Alerts
@@ -358,7 +358,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
 
     // Unending Energy Issue (Prayer Index = 2)
     if (player.activePrayers.includes(2) && player.afkFor > 10 * 60 * 60) {
-        alerts.push(new PrayerAlert(player, prayers[2]))
+        alerts.push(new PrayerAlert(player, prayers[2]));
     }
 
     return alerts;
