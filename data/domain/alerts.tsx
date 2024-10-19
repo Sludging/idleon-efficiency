@@ -316,6 +316,25 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
+        case Activity.Divinity:
+            if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 80 && (playerDivinityData.style.name ?? '') != 'Mindful') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Mindful style"));
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 60 && (playerDivinityData.style.name ?? '') != 'Zen') {
+                // If using Mantra on 8 or more players it'll be better than using Zen for EXP
+                if (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 8 && (playerDivinityData.style.name ?? '') == 'Mantra')) {
+                    alerts.push(new DivinityStyleAlert(player, "You should use Zen style"));
+                }
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 25) {
+                // If using Mantra on 7 or more players it'll be better than using Vitalic for EXP
+                if (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 7 && (playerDivinityData.style.name ?? '') == 'Mantra')) {
+                    alerts.push(new DivinityStyleAlert(player, "You should use Vitalic style"));
+                }
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 10 && (playerDivinityData.style.name ?? '') == 'Kinesis') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Focus style"));
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 5 && (playerDivinityData.style.name ?? '') == 'Kinesis') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Chakra style"));
+            }            
+            break;
         case Activity.Unknown:
             alerts.push(new DoingNothingAlert(player));
             break;
@@ -325,6 +344,10 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     if (player.getActivityType() != Activity.Lab && (playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[1].data.name == 'Goharut') {
         alerts.push(new DivinityLinkedAlert(player, "Goharut god is useless while you're not in lab"));
     }
+    if (player.getActivityType() != Activity.Divinity && (playerDivinityData.style.name ?? '') != 'TranQi' && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 40) {
+        alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
+    }
+
     // Passive cards equipped
     if (player.cardInfo?.equippedCards.some(card => card.passive)) {
         alerts.push(new PassiveCardEquipped(player));
