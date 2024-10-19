@@ -17,6 +17,7 @@ import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
 import { Storage } from "./storage";
 import { SummonEssenceColor, Summoning } from "./world-6/summoning";
+import { Divinity } from "./divinity";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -65,8 +66,8 @@ export class PlayerAlert extends Alert {
 export class DivinityStyleAlert extends PlayerAlert {
     constructor(player: Player, public text: string) {
         super(player, AlertType.EmptyObolSlot);
-        this.title = "You should change divinity style";
-        this.text = `${text}`;
+        this.title = "Change meditation style";
+        this.text = text;
         this.icon = {
             location: 'GemP22',
             height: 36,
@@ -78,8 +79,8 @@ export class DivinityStyleAlert extends PlayerAlert {
 export class DivinityLinkedAlert extends PlayerAlert {
     constructor(player: Player, public text: string) {
         super(player, AlertType.EmptyObolSlot);
-        this.title = "You should change linked divinity";
-        this.text = `${text}`;
+        this.title = "Change linked God";
+        this.text = text;
         this.icon = {
             location: Skilling.getSkillImageData(SkillsIndex.Divinity).location,
             height: 36,
@@ -290,8 +291,11 @@ export class Alerts extends Domain {
     }
 }
 
-const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship, prayers: Prayer[]): Alert[] => {
+const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship, prayers: Prayer[], divinityData: Divinity): Alert[] => {
     const alerts: Alert[] = [];
+    // use a new variable to shorten conditions in later uses
+    const playerDivinityData = divinityData.playerInfo[player.playerID];
+    console.log(player.playerID+" : "+playerDivinityData.gods.length);
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
@@ -459,10 +463,11 @@ export const updateAlerts = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const storage = data.get("storage") as Storage;
     const summoning = data.get("summoning") as Summoning;
+    const divinity = data.get("divinity") as Divinity;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
-        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship, prayers))
+        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship, prayers, divinity))
     })
 
     // Global Alerts
