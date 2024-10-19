@@ -36,7 +36,8 @@ export enum AlertType {
     EquinoxFull = "Equinox Full",
     CanCraftLuckierLad = "Can craft Luckier Lad",
     CanBuyFamiliar = "Can buy a familiar for Summoning",
-    PassiveCardEquipped = "Cards that are passive are equipped"
+    PassiveCardEquipped = "Cards that are passive are equipped",
+    DivinityStyleBad = "Divinity style should be changed",
 }
 
 export abstract class Alert {
@@ -57,6 +58,19 @@ export class GlobalAlert extends Alert {
 export class PlayerAlert extends Alert {
     constructor(public player: Player, type: AlertType) {
         super(type);
+    }
+}
+
+export class DivinityStyleAlert extends PlayerAlert {
+    constructor(player: Player, public text: string) {
+        super(player, AlertType.EmptyObolSlot);
+        this.title = "You should change divinity style";
+        this.text = `${text}`;
+        this.icon = {
+            location: Skilling.getSkillImageData(SkillsIndex.Divinity).location,
+            height: 36,
+            width: 36,
+        }
     }
 }
 
