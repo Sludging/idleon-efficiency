@@ -38,6 +38,7 @@ export enum AlertType {
     CanBuyFamiliar = "Can buy a familiar for Summoning",
     PassiveCardEquipped = "Cards that are passive are equipped",
     DivinityStyleBad = "Divinity style should be changed",
+    DivinityGodBad = "Divinity linked should be changed"
 }
 
 export abstract class Alert {
@@ -65,6 +66,19 @@ export class DivinityStyleAlert extends PlayerAlert {
     constructor(player: Player, public text: string) {
         super(player, AlertType.EmptyObolSlot);
         this.title = "You should change divinity style";
+        this.text = `${text}`;
+        this.icon = {
+            location: 'GemP22',
+            height: 36,
+            width: 36,
+        }
+    }
+}
+
+export class DivinityLinkedAlert extends PlayerAlert {
+    constructor(player: Player, public text: string) {
+        super(player, AlertType.EmptyObolSlot);
+        this.title = "You should change linked divinity";
         this.text = `${text}`;
         this.icon = {
             location: Skilling.getSkillImageData(SkillsIndex.Divinity).location,
