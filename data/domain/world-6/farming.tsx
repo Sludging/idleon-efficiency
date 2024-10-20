@@ -846,8 +846,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.data.itemId == 11);
     const starSignBonus67 = starSigns.unlockedStarSigns.find(sign => sign.name == "O.G. Signalais")?.getBonus("OG Chance") ?? 0;
-    const taskBoardOGChanceBonus = 0;
-    console.log(taskBoard);
+    const taskBoardOGChanceBonus = (taskBoard.merits.find(merit => merit.index == 44)?.level ?? 0) * 2;
     const achievementBonus365 = achievements[365].completed ? 15 : 0; // x1.15;
     farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67, taskBoardOGChanceBonus, achievementBonus365);
 
