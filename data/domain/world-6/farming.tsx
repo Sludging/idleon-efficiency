@@ -19,6 +19,7 @@ import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
 import { Achievement } from "../achievements";
 import { KillRoy } from "../world-2/killroy";
+import { Votes } from "../world-2/votes";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -812,6 +813,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const starSigns = data.get("starsigns") as StarSigns;    
     const achievements = data.get("achievements") as Achievement[];
     const killroy = data.get("killroy") as KillRoy;
+    const votes = data.get("votes") as Votes;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -828,7 +830,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
     farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
     
-    // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
+    // Upgrade each Crops Evolution chance in plots
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
     const bubbleBonusCropChapter = alchemy.getBubbleBonusForKey("W10AllCharz");
     const bubbleBonusCropiusMapper = alchemy.getBubbleBonusForKey("Y6");
@@ -840,8 +842,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     const achievementBonus355 = achievements[355].completed ? 5 : 0; // x1.05
     const killroyBonus1 = killroy.farmingNextEvoChanceBonus;
-    // Need to retrieve this
-    const votingBonus29 = 0;
+    const votingBonus29 = votes.getBonusBasedOnCurrentActive(29);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
     
     // Update OG chances for all plots
