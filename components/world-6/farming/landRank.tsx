@@ -25,7 +25,7 @@ export const LandRankDisplay = () => {
                 component={
                     <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 5) }} fill>
                         {
-                            farming.landRankUpgrades.map((upgrade, index) => {
+                            farming.landrankDatabase.upgrades.map((upgrade, index) => {
                                 let label = "";
                                 if (!upgrade.unlocked) {
                                     label = `Get ${upgrade.unlockThreshold - farming.landRankPointsTotal} more land ranks to unlock this`;
@@ -34,7 +34,7 @@ export const LandRankDisplay = () => {
                                 return (
                                     <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                         <Box gap="small" justify="between" fill>
-                                            <TextAndLabel textSize='xsmall' text={upgrade.bonusText} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                            <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
                                             {
                                                 upgrade.unlocked ?
                                                     <ComponentAndLabel
