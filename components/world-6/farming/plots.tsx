@@ -210,7 +210,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
                             resetToSeconds={plot.seed.getFullCycleGrowthTime() / plot.growthRate} 
                             size={TimeDisplaySize.XSmall}
                             callBack={
-                                () => { setCompletedOGCycles(plot.overgrowthCycleCompletedSinceLastLoggin++); }
+                                () => { setCompletedOGCycles(plot.overgrowthCycleCompletedSinceLastLoggin+1); }
                             }
                         />
                     }
