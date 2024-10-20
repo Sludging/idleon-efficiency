@@ -24,27 +24,50 @@ export class LandRankDataBase {
     totalLandRanks: number = 0;
     spentLandRanksPoints: number = 0;
 
-    constructor() {}
+    constructor() {
+        // Do this until the wiki bot can send us those data
+        this.upgrades.push(new LandRankUpgrade(0,"Evolution Boost","Increases next crop chance by +{% per rank of the land plot",250,1));
+        this.upgrades.push(new LandRankUpgrade(1,"Production Boost","Boosts value of crops harvested by +{% per rank of the land plot",5,5));
+        this.upgrades.push(new LandRankUpgrade(2,"Soil Exp Boost","Each land gains +{% extra Rank EXP per rank of the previous land",25,20));
+        this.upgrades.push(new LandRankUpgrade(3,"Evolution Megaboost","Increases next crop chance by +{% multiplicatively!",600,30));
+        this.upgrades.push(new LandRankUpgrade(4,"Seed of Stealth","Increases the Stealth of all Ninja Twins by +{% per Farming LV",2,60));
+        this.upgrades.push(new LandRankUpgrade(5,"Farmtastic Boost","Increases Farming Skill EXP gained by +{%",90,80));
+        this.upgrades.push(new LandRankUpgrade(6,"Soil Exp Megaboost","All plots of land gain +{% more Rank EXP",200,125));
+        this.upgrades.push(new LandRankUpgrade(7,"Overgrowth Boost","Increases chance for Overgrowth by +{%",120,180));
+        this.upgrades.push(new LandRankUpgrade(8,"Production Megaboost","Increases the amount of crops harvested by +{%",100,250));
+        this.upgrades.push(new LandRankUpgrade(9,"Seed of Loot","Increases the Drop Rarity of all characters by +{%",10,400));
+        this.upgrades.push(new LandRankUpgrade(10,"Evolution Superboost","Increases next crop chance by +{% multiplicatively!",3000,500));
+        this.upgrades.push(new LandRankUpgrade(11,"Overgrowth Megaboost","Increases chance for Overgrowth by +{%",340,600));
+        this.upgrades.push(new LandRankUpgrade(12,"Farmtastic Megaboost","Increases Farming Skill EXP gained by +{%",110,700));
+        this.upgrades.push(new LandRankUpgrade(13,"Soil Exp Superboost","All plots of land gain +{% more Rank EXP",520,900));
+        this.upgrades.push(new LandRankUpgrade(14,"Seed of Damage","Gives a +{% Total Damage bonus to all characters",20,1200));
+        this.upgrades.push(new LandRankUpgrade(15,"Evolution Ultraboost","Increases next crop chance by +{% multiplicatively!",40000,1300));
+        this.upgrades.push(new LandRankUpgrade(16,"Farmtastic Superboost","Increases Farming Skill EXP gained by +{%",220,1500));
+        this.upgrades.push(new LandRankUpgrade(17,"Production Superboost","Increases the amount of crops harvested by +{%",600,1750));
+        this.upgrades.push(new LandRankUpgrade(18,"Overgrowth Superboost","Increases chance for Overgrowth by +{%",1500,2000));
+        this.upgrades.push(new LandRankUpgrade(19,"Seed of Stats","Gives a +{% All Stat bonus to your characters",5,3500));
+    }
 
-    /*
-    0 == b ? (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 3, 0) / 100) * (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 10, 0) / 100) * (1 + q._customBlock_FarmingStuffs("LankRankUpgBonus", 15, 0) / 100)
-    1 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 8, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 17, 0)
-    2 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 6, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 13, 0)
-    3 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 7, 0) + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 11, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 18, 0))
-    4 == b ? q._customBlock_FarmingStuffs("LankRankUpgBonus", 5, 0) + (q._customBlock_FarmingStuffs("LankRankUpgBonus", 12, 0) + q._customBlock_FarmingStuffs("LankRankUpgBonus", 16, 0))
-    1;
-    */
-    getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType) => {
+    getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType): number => {
         switch(bonusType) {
-
+            case LandRankBonusType.NextCropChance:
+                return (1 + this.getUpgradeBonusFromIndex(3) / 100) * (1 + this.getUpgradeBonusFromIndex(10) / 100) * (1 + this.getUpgradeBonusFromIndex(15) / 100);
+            case LandRankBonusType.AmountHarvested:
+                return this.getUpgradeBonusFromIndex(8) + this.getUpgradeBonusFromIndex(17);
+            case LandRankBonusType.LandRankEXP:
+                return this.getUpgradeBonusFromIndex(6) + this.getUpgradeBonusFromIndex(13);
+            case LandRankBonusType.OGChance:
+                return this.getUpgradeBonusFromIndex(7) + (this.getUpgradeBonusFromIndex(11) + this.getUpgradeBonusFromIndex(18));
+            case LandRankBonusType.FarmingSkillExp:
+                return this.getUpgradeBonusFromIndex(5) + (this.getUpgradeBonusFromIndex(12) + this.getUpgradeBonusFromIndex(16));
             default: return 1;
         }
     }
 
-    getUpgradeBonusFromIndex = (index: number) => {
+    getUpgradeBonusFromIndex = (index: number): number => {
         const upgrade = this.upgrades.find(upgrade => upgrade.index == index);
         if (upgrade) {
-            return upgrade.getUpgradeLandRankUpgradeBonus();
+            return upgrade.getUpgradeBonus();
         }
         return 0;
     }
@@ -53,14 +76,9 @@ export class LandRankDataBase {
 export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
-    bonus: number = 0;
-    unlockThreshold: number = 0;
-    bonusText: string = "";
-    name: string = "";
     uniqueLevelBonus: boolean = false;
 
-    constructor(public index: number, level = 0) {
-        this.level = level;
+    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number) {
         switch (index) {
             case 4:
             case 9:
@@ -72,7 +90,7 @@ export class LandRankUpgrade {
         }
     }
 
-    getUpgradeLandRankUpgradeBonus = () => {
+    getUpgradeBonus = () => {
         if (!this.unlocked) {
             return 0;
         }
@@ -86,6 +104,10 @@ export class LandRankUpgrade {
             default: 
                 return 1.7 * this.bonus * this.level / (this.level + 80);
         }
+    }
+
+    getUpgradeBonusText = () => {
+        return this.bonusText.replace(/{/, this.getUpgradeBonus().toFixed(2));
     }
 }
 
@@ -446,7 +468,7 @@ export class CropScientist {
 
 export class Farming extends Domain {
     farmPlots: Plot[] = [];
-    landRankUpgrades: LandRankUpgrade[] = []; // Should init here like marketUpgrades and seeds when available from wiki bot
+    landrankDatabase: LandRankDataBase = new LandRankDataBase(); // Should init here like marketUpgrades and seeds when available from wiki bot
     marketUpgrades: MarketUpgrade[] = initMarketInfoRepo().map((upgrade) => { return new MarketUpgrade(upgrade.index, upgrade.data) });
     seeds: Seed[] = initSeedInfoRepo().map((seed) => { return new Seed(seed.index, seed.data) });
     starSignEvoUnlocked: boolean = false;
@@ -536,14 +558,15 @@ export class Farming extends Domain {
         farming.canOvergrow = (farming.getMarketUpgradeBonusValue(8) > 0);
         farming.canLevelLandRank = (farming.getMarketUpgradeBonusValue(13) > 0);
 
+        // landRankData[0] contains all land rank levels
         farming.landRankPointsTotal = landRankData[0].reduce((sum, rank) => sum + rank, 0);
+        // landRankData[2] contains all upgrades levels
         farming.landRankPointsSpent = landRankData[2].reduce((sum, rank) => sum + rank, 0);
-        // For now there'll be no unlocked upgrades as they aren't initizalied yet
         farming.updateUnlockedLandRankUpgrades();
-        // Remove this once the init function exists and use farming.landRankUpgrades.forEach to update it like it's done for marketUpgrades
-        farming.landRankUpgrades = []; 
-        landRankData[2].forEach((level, index) => {
-            farming.landRankUpgrades.push(new LandRankUpgrade(index, level));
+        farming.landrankDatabase.upgrades.forEach((upgrade) => {
+            if (upgrade.index < landRankData[2].length) {
+                upgrade.level = landRankData[2][upgrade.index];
+            }
         });
 
         farming.farmPlots = [];
@@ -579,7 +602,7 @@ export class Farming extends Domain {
     }
 
     updateUnlockedLandRankUpgrades = () => {
-        this.landRankUpgrades.forEach(upgrade => {
+        this.landrankDatabase.upgrades.forEach(upgrade => {
             upgrade.unlocked = this.canLevelLandRank ? (this.landRankPointsTotal >= upgrade.unlockThreshold) : false;
         });
     }
