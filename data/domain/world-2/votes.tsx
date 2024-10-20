@@ -5,9 +5,18 @@ import { Item } from "../items";
 export class Votes extends Domain {
     multiFromEquinox: number = 0;
     bonuses: VoteBonus[] = [];
+    currentBonusIndex: number = 0;
+    ongoingVoteTopOptionIndex: number = 0;
+    ongoingVoteMiddleOptionIndex: number = 0;
+    ongoingVoteBottomOptionIndex: number = 0;
+
+    ongoingVoteTopOptionPercent: number = 0;
+    ongoingVoteMiddleOptionPercent: number = 0;
+    ongoingVoteBottomOptionPercent: number = 0;
 
     getRawKeys(): RawData[] {
         return [
+            { key: "servervars", perPlayer: false, default: [] },
         ]
     }
 
@@ -17,6 +26,17 @@ export class Votes extends Domain {
 
     parse(data: Map<string, any>): void {
         const votes = data.get(this.getDataKey()) as Votes;
+        const serverVars = data.get("servervars") as Record<string, any>;
+        
+        votes.currentBonusIndex = (serverVars.voteCategories[0] ?? 0);
+
+        votes.ongoingVoteTopOptionIndex = (serverVars.voteCategories[1] ?? 0);
+        votes.ongoingVoteMiddleOptionIndex = (serverVars.voteCategories[2] ?? 0);
+        votes.ongoingVoteBottomOptionIndex = (serverVars.voteCategories[3] ?? 0);
+
+        votes.ongoingVoteTopOptionPercent = (serverVars.votePercent[0] ?? 0);
+        votes.ongoingVoteMiddleOptionPercent = (serverVars.votePercent[1] ?? 0);
+        votes.ongoingVoteBottomOptionPercent = (serverVars.votePercent[2] ?? 0);
 
         votes.bonuses.push(new VoteBonus(0,"All your characters deal }x more damage to enemies",25,0));
         votes.bonuses.push(new VoteBonus(1,"All your characters deal }x more damage to enemies",25,0));
@@ -55,8 +75,13 @@ export class Votes extends Domain {
         votes.bonuses.push(new VoteBonus(34,"Increases cash earned from monsters by +{%",52,0));
     }
 
+    // This one should be only used for display purpose, as it'll always return it's value even if bonus isn't active
     getBonus = (index: number) => {
         return (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox();
+    }
+
+    getBonusBasedOnCurrentActive = (index: number) => {
+        return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox() : 0;
     }
 
     getBonusFromEquinox = () => {
@@ -74,16 +99,3 @@ export const updateVotesBonusFromEquinox = (data: Map<string, any>) => {
 export class VoteBonus {
     constructor(public index: number, public text: string, public bonus: number, public value: number) {}
 }
-
-/*
-Need to use this to know which bonus is active right now
-1 == b ? 
-    1 == m.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), ih)._GenINFO[36] || c.asNumber(m.__cast(a.engine.getGameAttribute("PixelHelperActor")[3].behaviors.getBehavior("ActorEvents_201"), Hb)._GenINFO[58]) < c.asNumber(a.engine.getGameAttribute("CustomLists").h.NinjaInfo[38][Math.round(2 + 3 * Math.max(1, c.asNumber(m.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), ih)._GenINFO[36])))]) ? 
-        c.asNumber(a.engine.getGameAttribute("CustomLists").h.NinjaInfo[38][Math.round(1 + 3 * b)]) * q._customBlock_Summoning("VotingBonuszMulti", 0, 0) 
-        : 
-        0 
-    : 
-    b == m.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), ih)._GenINFO[36] ? 
-        c.asNumber(a.engine.getGameAttribute("CustomLists").h.NinjaInfo[38][Math.round(1 + 3 * b)]) * q._customBlock_Summoning("VotingBonuszMulti", 0, 0) 
-        : 
-        0;*/
