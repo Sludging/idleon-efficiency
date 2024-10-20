@@ -839,8 +839,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const starSignBonus65 = starSigns.unlockedStarSigns.find(sign => sign.name == "Cropiovo Minor")?.getBonus("Crop Evo chance per Farming LV") ?? 0;
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     const achievementBonus355 = achievements[355].completed ? 5 : 0; // x1.05
-    // Need to retrieve those 2
     const killroyBonus1 = killroy.farmingNextEvoChanceBonus;
+    // Need to retrieve this
     const votingBonus29 = 0;
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
     

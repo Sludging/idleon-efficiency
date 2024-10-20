@@ -59,7 +59,6 @@ class Upgrade {
                 break;
             }
             case 9: {
-
                 this.maxLevel = Math.round(this.data.x1 + 4 * challanges[25].getValue());
                 break;
             }
@@ -257,6 +256,7 @@ export class Equinox extends Domain {
         equinox.activeChallenges = equinox.challenges.filter(challenge => !challenge.complete).slice(0, this.numberOfActiveChallenges);
 
         (equinox.upgrades[9] as FoodLust).bossesKilled = optionList[193];
+        (equinox.upgrades[9] as FoodLust).challange33completed = equinox.challenges[30].complete;
         (equinox.upgrades[7] as MetalDetector).nuggetsDugSinceBestNugget = optionList[192];
     }
 
