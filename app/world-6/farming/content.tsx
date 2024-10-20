@@ -246,7 +246,7 @@ function Farming() {
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
                     {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}
-                    {activeTab == "Crop Depot" && <CropDepotDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEvoEquipped} />}
+                    {activeTab == "Crop Depot" && <CropDepotDisplay/>}
                     {activeTab == "Land Rank" && <LandRankDisplay/>}
                 </Box>
             </Box>
