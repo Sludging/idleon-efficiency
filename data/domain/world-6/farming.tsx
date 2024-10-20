@@ -17,6 +17,7 @@ import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
+import { Achievement } from "../achievements";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -243,9 +244,9 @@ export class Plot {
     constructor(public index: number) { }
 
     updateNextCropChance = (farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number, bonusFromAchievement355: number, bonusFromKillRoy1: number, bonusFromLandRankTotalEvoChance: number, bonusFromLandRankEvoChanceFromCurrentRank: number, bonusFromVoting29: number) => {
-        this.allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + 5 * bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
-        this.allBonusesEffectWithoutStarSign = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + 5 * bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + 0 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
-        this.allBonusesEffectWithSilkrode = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + 5 * bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + (bonusFromStarSign65 * 2) * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
+        this.allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
+        this.allBonusesEffectWithoutStarSign = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + 0 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
+        this.allBonusesEffectWithSilkrode = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + (bonusFromStarSign65 * 2) * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
         this.farmingLevel = farmingLevel;
     }
 
@@ -654,9 +655,11 @@ export class Farming extends Domain {
         });
     }
     
-    updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number) => {
-        this.cropDepot.forEach(crop => {
-            crop.updateNextCropChance(this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1);
+    updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number, bonusFromAchievement355: number, bonusFromKillRoy1: number, bonusFromVoting29: number) => {
+        const landRankBonusTotal = this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.NextCropChance);
+        const landRankBonusCurrentRank = this.landrankDatabase.getUpgradeBonusFromIndex(0);
+        this.farmPlots.forEach(plot => {
+            plot.updateNextCropChance(this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1, bonusFromAchievement355, bonusFromKillRoy1, landRankBonusTotal, landRankBonusCurrentRank, bonusFromVoting29);
         });
     }
 
@@ -805,7 +808,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
-    const starSigns = data.get("starsigns") as StarSigns;
+    const starSigns = data.get("starsigns") as StarSigns;    
+    const achievements = data.get("achievements") as Achievement[];
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -824,7 +828,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     
     // Upgrade each Crops Evolution chance (don't depend on plot so stored in crop)
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
-    const bubbleBonusCropChapter = alchemy.getVialBonusForKey("W10AllCharz");
+    const bubbleBonusCropChapter = alchemy.getBubbleBonusForKey("W10AllCharz");
     const bubbleBonusCropiusMapper = alchemy.getBubbleBonusForKey("Y6");
     const vialEvolutionChanceBonus = alchemy.getVialBonusForKey("6FarmEvo");
     const mealBonusZCropEvo = cooking.getMealBonusForKey("zCropEvo");
@@ -832,7 +836,11 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const stampCropEvolutionChance = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "CropEvo" ? stamp.getBonus() : 0, 0);
     const starSignBonus65 = starSigns.unlockedStarSigns.find(sign => sign.name == "Cropiovo Minor")?.getBonus("Crop Evo chance per Farming LV") ?? 0;
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
-    farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance);
+    const achievementBonus355 = achievements[355].completed ? 5 : 0; // x1.05
+    // Need to retrieve those 2
+    const killroyBonus1 = 0;
+    const votingBonus29 = 0;
+    farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
     
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
