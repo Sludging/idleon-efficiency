@@ -105,9 +105,9 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
     plot.updatePlotGrowthSinceLastRefresh();
 
     // To get it to %
-    const nextCropChance = baseCrop.getEvolutionChance(starSignEvoEquipped, silkRodeChip) * 100;
-    const currentCropIsUndiscovered = (baseCrop.discovered == false ?? false);
-    const nextCropIsUndiscovered = (nextCrop?.discovered == false ?? false);
+    const nextCropChance = plot.getEvolutionChance(starSignEvoEquipped, silkRodeChip) * 100;
+    const currentCropIsUndiscovered = (baseCrop.discovered == false);
+    const nextCropIsUndiscovered = (nextCrop?.discovered == false);
 
     const quantityToDisplay: string = plot.quantityToCollect > 0 ? nFormatter(plot.getQuantityToCollect()) : `${plot.getQuantityToCollect(plot.possibleQtyToCollectMin)} ~ ${plot.getQuantityToCollect(plot.possibleQtyToCollectMax)}`;
     // If quantityToCollect is set then it means growth is done from server side, so no more changes possible for crop
