@@ -53,6 +53,7 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
 import { KillRoy } from './world-2/killroy';
+import { updateVotesBonusFromEquinox, Votes } from './world-2/votes';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -127,7 +128,8 @@ const domainList: Domain[] = [
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
-    new KillRoy("killroy")
+    new KillRoy("killroy"),
+    new Votes("votes"),
 ]
 
 export class IdleonData {
@@ -237,6 +239,7 @@ const postProcessingMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
+    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonusFromEquinox(accountData),
 }
 
 // I really really hate this.
