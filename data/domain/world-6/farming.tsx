@@ -20,6 +20,7 @@ import { StarSigns } from "../starsigns";
 import { Achievement } from "../achievements";
 import { KillRoy } from "../world-2/killroy";
 import { Votes } from "../world-2/votes";
+import { TaskBoard } from "../tasks";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -219,12 +220,10 @@ export class Plot {
 
     growthRate: number = 0;
 
-    cropEvolutionChance: number = 0;
     possibleQtyToCollectMin: number = 0;
     possibleQtyToCollectMax: number = 0;
 
-    bonusOGChanceFromMarket11: number = 0;
-    bonusOGChanceFromPristine11: number = 0;
+    nextOGChanceAllBonusEffect: number = 0;
     bonusOGChanceFromStarSign67: number = 0;
 
     landRank: number = 0;
@@ -265,10 +264,9 @@ export class Plot {
         return starSignEquipped ? (silkrodeBonus ? this.allBonusesEffectWithSilkrode : this.allBonusesEffect) : this.allBonusesEffectWithoutStarSign;
     }
 
-    updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
-        this.bonusOGChanceFromMarket11 = bonusFromMarketUpgrade11;
-        this.bonusOGChanceFromPristine11 = bonusFromPristineCharm11;
-        this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;        
+    updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number, bonusOGChanceFromLandRankTotal: number) => {
+        this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;
+        this.nextOGChanceAllBonusEffect = Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromTaskBoard / 100) * (1 + bonusFromAchievement365 / 100) * (1 + bonusOGChanceFromLandRankTotal / 100);     
     }
 
     updatePlotGrowthSinceLastRefresh = () => {
@@ -310,8 +308,7 @@ export class Plot {
     }
 
     getPlotNextOGChance = (starSignEquipped: boolean, silkrodeBonus: boolean, currentOGlevel: number = this.OGlevel) => {
-        //return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * this.getStarSignBonus(starSignEquipped, silkrodeBonus) * (1 + 2 * c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][2]) / 100) * (1 + 15 * n._customBlock_AchieveStatus(365) / 100) * (1 + q._customBlock_FarmingStuffs("LandRankUpgBonusTOTAL", 3, 0) / 100);
-        return Math.pow(0.4, currentOGlevel + 1) * Math.max(1, this.bonusOGChanceFromMarket11) * (1 + this.bonusOGChanceFromPristine11 / 100) * this.getStarSignBonus(starSignEquipped, silkrodeBonus);
+        return Math.pow(0.4, currentOGlevel + 1) * this.nextOGChanceAllBonusEffect * this.getStarSignBonus(starSignEquipped, silkrodeBonus);
     }
 
     getStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
@@ -612,7 +609,6 @@ export class Farming extends Domain {
     }
     
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
-        // return Math.max(1, q._customBlock_FarmingStuffs("BasketUpgQTY", 99, 2)) * (1 + (q._customBlock_FarmingStuffs("BasketUpgQTY", 0, 2) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6FarmSpd"])) / 100) * (1 + q._customBlock_Summoning("WinBonus", 2, 0) / 100);
         const growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
         
         this.growthRate = growthRate;
@@ -651,9 +647,9 @@ export class Farming extends Domain {
         this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * ( 1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
     }
 
-    updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number) => {
+    updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number) => {
         this.farmPlots.forEach(plot => {
-            plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67);
+            plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67, bonusFromTaskBoard, bonusFromAchievement365, this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.OGChance));
         });
     }
     
@@ -814,6 +810,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const killroy = data.get("killroy") as KillRoy;
     const votes = data.get("votes") as Votes;
+    const taskBoard = data.get("taskboard") as TaskBoard;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -849,7 +846,10 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.data.itemId == 11);
     const starSignBonus67 = starSigns.unlockedStarSigns.find(sign => sign.name == "O.G. Signalais")?.getBonus("OG Chance") ?? 0;
-    farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67);
+    const taskBoardOGChanceBonus = 0;
+    console.log(taskBoard);
+    const achievementBonus365 = achievements[365].completed ? 15 : 0; // x1.15;
+    farming.updatePlotsOGChance(marketBonus11, (pristineCharm11 && pristineCharm11.unlocked) ? pristineCharm11.data.x1 : 0, starSignBonus67, taskBoardOGChanceBonus, achievementBonus365);
 
     farming.updateCropsToCollect();
 
