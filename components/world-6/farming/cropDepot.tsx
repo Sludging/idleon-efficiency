@@ -38,14 +38,13 @@ const SeedSection = ({ seed, farming, silkRodeChip, starSignEquipped }: { seed: 
             <Box gap="xxsmall" direction="row" wrap>
                 {
                     farming.cropDepot.filter(crop => crop.seed.index == seed.index).map((crop, index) => {
-                        const nextCropChance = crop.getEvolutionChance(starSignEquipped, silkRodeChip) * 100;
                         return (
                             <Box key={index} style={{ opacity: crop.discovered ? 1 : 0.5 }} border={{ color: 'grey-1' }} margin={{ bottom: 'xxsmall' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
                                 <TipDisplay
                                     size='medium'
                                     heading={farming.getCropName(crop.index)}
                                     body={
-                                        <Text>Next Crop chance : {nFormatter(Math.min(100, nextCropChance))}%</Text>
+                                        <Box></Box>
                                     }
                                     direction={TipDirection.Down}
                                 >
