@@ -47,11 +47,11 @@ class Upgrade {
                 break;
             }
             case 4: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * challanges[34].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * (challanges[34]?.getValue() ?? 0));
                 break;
             }
             case 5: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[32].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 5 * (challanges[32]?.getValue() ?? 0));
                 break;
             }
             case 8: {
@@ -63,11 +63,11 @@ class Upgrade {
                 break;
             }
             case 10: {
-                this.maxLevel = Math.round(this.data.x1 + 4 * challanges[30].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 4 * (challanges[30]?.getValue() ?? 0));
                 break;
             }
             case 11: {
-                this.maxLevel = Math.round(this.data.x1 + 15 * challanges[35].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 15 * (challanges[35]?.getValue() ?? 0));
                 break;
             }
             default: {
@@ -238,7 +238,7 @@ export class Equinox extends Domain {
         })
 
         const upgradesUnlocked = [0, 2, 5, 7, 10, 13, 17, 20, 23, 28, 31].reduce((sum, challengeIndex) => {
-            return sum += equinox.challenges[challengeIndex].complete ? 1 : 0
+            return sum += (equinox.challenges[challengeIndex]?.complete ?? false) ? 1 : 0
         }, 1);
 
         equinox.upgrades.forEach(upgrade => {
@@ -256,7 +256,7 @@ export class Equinox extends Domain {
         equinox.activeChallenges = equinox.challenges.filter(challenge => !challenge.complete).slice(0, this.numberOfActiveChallenges);
 
         (equinox.upgrades[9] as FoodLust).bossesKilled = optionList[193];
-        (equinox.upgrades[9] as FoodLust).challange33completed = equinox.challenges[30].complete;
+        (equinox.upgrades[9] as FoodLust).challange33completed = (equinox.challenges[30]?.complete ?? false);
         (equinox.upgrades[7] as MetalDetector).nuggetsDugSinceBestNugget = optionList[192];
     }
 
