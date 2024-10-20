@@ -52,6 +52,7 @@ import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerB
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
+import { KillRoy } from './world-2/killroy';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -126,6 +127,7 @@ const domainList: Domain[] = [
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
+    new KillRoy("killroy")
 ]
 
 export class IdleonData {

@@ -18,6 +18,7 @@ import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
 import { Achievement } from "../achievements";
+import { KillRoy } from "../world-2/killroy";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -810,6 +811,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
     const starSigns = data.get("starsigns") as StarSigns;    
     const achievements = data.get("achievements") as Achievement[];
+    const killroy = data.get("killroy") as KillRoy;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -838,7 +840,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     const achievementBonus355 = achievements[355].completed ? 5 : 0; // x1.05
     // Need to retrieve those 2
-    const killroyBonus1 = 0;
+    const killroyBonus1 = killroy.farmingNextEvoChanceBonus;
     const votingBonus29 = 0;
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
     
