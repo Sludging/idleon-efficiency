@@ -1,9 +1,8 @@
-import { Box, Text } from "grommet";
+import { Box, Text, Tip } from "grommet";
 import { Crop, Farming, Seed } from "../../../data/domain/world-6/farming";
 import ShadowBox from "../../base/ShadowBox";
 import { nFormatter, toTime } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
-import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
@@ -40,19 +39,19 @@ const SeedSection = ({ seed, farming}: { seed: Seed, farming: Farming}) => {
                     farming.cropDepot.filter(crop => crop.seed.index == seed.index).map((crop, index) => {
                         return (
                             <Box key={index} style={{ opacity: crop.discovered ? 1 : 0.5 }} border={{ color: 'grey-1' }} margin={{ bottom: 'xxsmall' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
-                                <TipDisplay
-                                    size='medium'
-                                    heading={farming.getCropName(crop.index)}
-                                    body={
-                                        <Box></Box>
+                                <Tip
+                                    plain
+                                    content={
+                                        <Box pad="small" gap="small" background="white" style={{ display: 'inherit' }}>
+                                            <Text size= "small" weight="bold">{farming.getCropName(crop.index)}</Text>
+                                        </Box>
                                     }
-                                    direction={TipDirection.Down}
                                 >
                                     <Box direction="row" pad={{ vertical: 'xsmall' }} align="center" gap='xsmall'>
                                         <IconImage data={Crop.getCropIconData(crop.index)} />
                                         <Text size="xsmall">{nFormatter(Math.floor(crop.quantityOwned))}</Text>
                                     </Box>
-                                </TipDisplay>
+                                </Tip>
                             </Box>
                         )
                     })
