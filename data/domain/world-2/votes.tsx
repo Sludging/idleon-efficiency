@@ -75,13 +75,19 @@ export class Votes extends Domain {
         votes.bonuses.push(new VoteBonus(34,"Increases cash earned from monsters by +{%",52,0));
     }
 
-    // This one should be only used for display purpose, as it'll always return it's value even if bonus isn't active
-    getBonus = (index: number) => {
-        return (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox();
+    getCurrentBonus = (index: number) => {
+        return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox() : 0;
     }
 
-    getBonusBasedOnCurrentActive = (index: number) => {
-        return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox() : 0;
+    getBonusText = (index: number) => {
+        const bonus = this.bonuses.find(bonus => bonus.index == index);
+
+        if (bonus) {
+            const bonusValue = bonus.value * this.getBonusFromEquinox();
+            return bonus.text.replace('{', bonusValue.toString()).replace('}', (1 + bonusValue/100).toString());
+        }
+
+        return "";
     }
 
     getBonusFromEquinox = () => {

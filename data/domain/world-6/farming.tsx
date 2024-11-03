@@ -839,7 +839,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const riftBonusCropEvolutionChance = skillMastery.getSkillBonus(SkillsIndex.Farming, 1);
     const achievementBonus355 = achievements[355].completed ? 5 : 0; // x1.05
     const killroyBonus1 = killroy.farmingNextEvoChanceBonus;
-    const votingBonus29 = votes.getBonusBasedOnCurrentActive(29);
+    const votingBonus29 = votes.getCurrentBonus(29);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
     
     // Update OG chances for all plots
