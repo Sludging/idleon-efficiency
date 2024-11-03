@@ -344,7 +344,7 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                                     <Grid columns={["45%", "45%", "10%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.shinyLevel}</Text>
-                                            <Text size="16px">{nFormatter(Math.floor(pet.shinyProgress))}/{nFormatter(pet.getNextShinyGoal())} days</Text>
+                                            <Text size="16px">{timeToNextLevel > 0 ? `Time to next level: ${toTime(timeToNextLevel)}` : `${nFormatter(Math.floor(pet.shinyProgress))}/${nFormatter(pet.getNextShinyGoal())} days`}</Text>
                                         </Box>
                                         <Text size="15px">{pet.getShinyText()}</Text>
                                         <Box align='center'>
@@ -357,7 +357,7 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                                                     <Box>
                                                         <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
                                                         <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * shinySpeed)}</Text>
-                                                        {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
+                                                        <Text size="medium">Requirement : {nFormatter(Math.floor(pet.shinyProgress))}/{nFormatter(pet.getNextShinyGoal())} days</Text>
                                                     </Box>
                                                 }
                                                 direction={TipDirection.Down} 
@@ -488,7 +488,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                     <Grid columns={["45%", "45%", "10%"]} fill align="center">
                                         <Box>
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
-                                            <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
+                                            <Text size="16px">{timeToNextLevel > 0 ? `Time to next level: ${toTime(timeToNextLevel)}` : `${nFormatter(Math.floor(pet.breedingProgress))}/${nFormatter(pet.getNextBreedingGoal())} days`}</Text>
                                         </Box>
                                         <Text size="16px">{nFormatter(pet.getBreedabilityBonus())}x</Text>
                                         <Box align='center'>
@@ -500,7 +500,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                                     <Box>
                                                         <Text size="medium">Currently in fenceyard : {petInFenceyard}</Text>
                                                         <Text size="medium">Total contribution per day : {nFormatter(petInFenceyard * breedingSpeed)}</Text>
-                                                        {timeToNextLevel > 0 && <Text>Time to next level: {toTime(timeToNextLevel)}</Text>}
+                                                        <Text size="medium">Requirement : {nFormatter(Math.floor(pet.breedingProgress))}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                                     </Box>
                                                 }
                                                 direction={TipDirection.Down}
