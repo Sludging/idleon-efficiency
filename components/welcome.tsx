@@ -61,7 +61,7 @@ export default function Welcome() {
 
     const size = useContext(ResponsiveContext);
 
-    const isLoading = authStatus == AuthStatus.Loading;
+    const isLoading = authStatus == AuthStatus.Loading ?? true;
 
 
     const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
