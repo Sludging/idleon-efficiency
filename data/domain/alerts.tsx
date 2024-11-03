@@ -307,7 +307,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
-            if ((playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[1].data.name == 'Arctis') {
+            if ((playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[0].data.name == 'Arctis') {
                 alerts.push(new DivinityLinkedAlert(player, "Arctis god is useless while you're in lab"));
             }
             break;
@@ -341,7 +341,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     }
 
     // Separate those two from above to avoid having it in multiple case
-    if (player.getActivityType() != Activity.Lab && (playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[1].data.name == 'Goharut') {
+    if (player.getActivityType() != Activity.Lab && (playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[0].data.name == 'Goharut') {
         alerts.push(new DivinityLinkedAlert(player, "Goharut god is useless while you're not in lab"));
     }
     if (player.getActivityType() != Activity.Divinity && (playerDivinityData.style.name ?? '') != 'TranQi' && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 40) {
