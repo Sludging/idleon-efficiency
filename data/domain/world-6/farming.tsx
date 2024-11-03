@@ -524,7 +524,7 @@ export class Farming extends Domain {
         const upgradesData = data.get("FarmUpg") as number[];
         
         // Old accounts won't have this data, exit early.
-        if (!cropsData || !plotsData || !upgradesData|| !landRankData) {
+        if (!cropsData || (!plotsData || plotsData.length == 0) || (!upgradesData || upgradesData.length == 0) || (!landRankData || landRankData.length == 0)) {
             return;
         }
         
