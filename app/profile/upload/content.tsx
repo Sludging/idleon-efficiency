@@ -90,7 +90,7 @@ function UploadProfile() {
                 setLastUpload(new Date(localDate));
             }
         }
-    }, [user])
+    }, [user, lastUpload])
 
     if (!user) {
         <Box align="center" pad="medium">
