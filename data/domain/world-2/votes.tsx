@@ -16,7 +16,7 @@ export class Votes extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "servervars", perPlayer: false, default: [] },
+            { key: "servervars", perPlayer: false, default: {} },
         ]
     }
 
