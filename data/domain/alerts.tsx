@@ -295,7 +295,6 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     const alerts: Alert[] = [];
     // use a new variable to shorten conditions in later uses
     const playerDivinityData = divinityData.playerInfo[player.playerID];
-    console.log(player.playerID+" : "+playerDivinityData.gods.length);
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
