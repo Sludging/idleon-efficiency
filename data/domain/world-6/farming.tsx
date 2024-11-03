@@ -56,20 +56,20 @@ export class LandRankDataBase {
     getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType): number => {
         switch(bonusType) {
             case LandRankBonusType.NextCropChance:
-                return (1 + this.getUpgradeBonusFromIndex(3) / 100) * (1 + this.getUpgradeBonusFromIndex(10) / 100) * (1 + this.getUpgradeBonusFromIndex(15) / 100);
+                return (1 + this.getUpgradeBonusByIndex(3) / 100) * (1 + this.getUpgradeBonusByIndex(10) / 100) * (1 + this.getUpgradeBonusByIndex(15) / 100);
             case LandRankBonusType.AmountHarvested:
-                return this.getUpgradeBonusFromIndex(8) + this.getUpgradeBonusFromIndex(17);
+                return this.getUpgradeBonusByIndex(8) + this.getUpgradeBonusByIndex(17);
             case LandRankBonusType.LandRankEXP:
-                return this.getUpgradeBonusFromIndex(6) + this.getUpgradeBonusFromIndex(13);
+                return this.getUpgradeBonusByIndex(6) + this.getUpgradeBonusByIndex(13);
             case LandRankBonusType.OGChance:
-                return this.getUpgradeBonusFromIndex(7) + (this.getUpgradeBonusFromIndex(11) + this.getUpgradeBonusFromIndex(18));
+                return this.getUpgradeBonusByIndex(7) + (this.getUpgradeBonusByIndex(11) + this.getUpgradeBonusByIndex(18));
             case LandRankBonusType.FarmingSkillExp:
-                return this.getUpgradeBonusFromIndex(5) + (this.getUpgradeBonusFromIndex(12) + this.getUpgradeBonusFromIndex(16));
+                return this.getUpgradeBonusByIndex(5) + (this.getUpgradeBonusByIndex(12) + this.getUpgradeBonusByIndex(16));
             default: return 1;
         }
     }
 
-    getUpgradeBonusFromIndex = (index: number): number => {
+    getUpgradeBonusByIndex = (index: number): number => {
         const upgrade = this.upgrades.find(upgrade => upgrade.index == index);
         if (upgrade) {
             return upgrade.getUpgradeBonus();
@@ -655,7 +655,7 @@ export class Farming extends Domain {
     
     updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number, bonusFromAchievement355: number, bonusFromKillRoy1: number, bonusFromVoting29: number) => {
         const landRankBonusTotal = this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.NextCropChance);
-        const landRankBonusCurrentRank = this.landrankDatabase.getUpgradeBonusFromIndex(0);
+        const landRankBonusCurrentRank = this.landrankDatabase.getUpgradeBonusByIndex(0);
         this.farmPlots.forEach(plot => {
             plot.updateNextCropChance(this.farmingLevel, summoningLevel, bonusFromMarketUpgrade4, bonusFromMarketUpgrade9, bonusFromWinningBonus10, bonusFromAlchemyBubbleCropChapter, bonusFromAlchemyBubbleCropiusMapper, bonusFromVial66, bonusFromMeal62, bonusFromMeal66, bonusFromStampCropEvo, bonusFromStarSign65, bonusFromRiftFarming1, bonusFromAchievement355, bonusFromKillRoy1, landRankBonusTotal, landRankBonusCurrentRank, bonusFromVoting29);
         });
