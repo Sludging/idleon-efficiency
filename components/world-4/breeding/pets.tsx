@@ -32,8 +32,7 @@ export const PetsDisplay = () => {
 
     const starSignUnlocked = useMemo(() => {
         if (breeding && breeding.starSignInfinity) {
-                setStarSignEquipped(true);
-            }
+            setStarSignEquipped(true);
             return breeding.starSignUnlocked;
         }
 
