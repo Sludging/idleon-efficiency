@@ -36,7 +36,7 @@ export class ProfileUploader {
             // This helps AutoReview, reason for doing it here is because I'm lazy to change the backend
             // and backend only expects rawData and playerName fields. 
             // It functionally is the same so I'm cheating by just adding to raw data keys.
-            toClean.set("ownedCompanions", Array.from(new Set(theData.get("ownedCompanions")))); // can probably remove duplicates earlier on, but :shrug:
+            toClean.set("companions", Array.from(new Set(theData.get("ownedCompanions")))); // can probably remove duplicates earlier on, but :shrug:
             toClean.set("servervars", theData.get("servervars"));
 
             const uploadData = JSON.stringify({
