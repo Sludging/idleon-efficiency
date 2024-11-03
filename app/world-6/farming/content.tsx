@@ -77,7 +77,10 @@ function Farming() {
         return false;
     }, [theData, farming])
 
-    const tabsToShow = farming.canLevelLandRank ? ["Plots", "Market Upgrades", "Crop Depot", "Land Rank"] : ["Plots", "Market Upgrades", "Crop Depot"];
+    let tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
+    if (farming.canLevelLandRank) {
+        tabsToShow.push("Land Rank");
+    }
 
     if (!farming) {
         return <>Loading...</>
