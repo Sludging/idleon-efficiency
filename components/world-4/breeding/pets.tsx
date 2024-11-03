@@ -31,8 +31,7 @@ export const PetsDisplay = () => {
     const breeding = theData.get("breeding") as BreedingDomain;
 
     const starSignUnlocked = useMemo(() => {
-        if (breeding) {
-            if (breeding.starSignInfinity) {
+        if (breeding && breeding.starSignInfinity) {
                 setStarSignEquipped(true);
             }
             return breeding.starSignUnlocked;
