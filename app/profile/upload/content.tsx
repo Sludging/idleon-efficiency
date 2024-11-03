@@ -47,7 +47,7 @@ function UploadProfile() {
             return playerNames[0];
         }
         return undefined;
-    }, [theData]);
+    }, [theData, data]);
 
     const secondsSinceLastUpload = useMemo(() => {
         if (!lastUpload) {
