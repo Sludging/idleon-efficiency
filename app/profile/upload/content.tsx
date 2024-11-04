@@ -47,7 +47,7 @@ function UploadProfile() {
             return playerNames[0];
         }
         return undefined;
-    }, [theData]);
+    }, [theData, data]);
 
     const secondsSinceLastUpload = useMemo(() => {
         if (!lastUpload) {
@@ -90,7 +90,7 @@ function UploadProfile() {
                 setLastUpload(new Date(localDate));
             }
         }
-    }, [user])
+    }, [user, lastUpload])
 
     if (!user) {
         <Box align="center" pad="medium">

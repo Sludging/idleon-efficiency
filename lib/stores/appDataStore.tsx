@@ -64,7 +64,16 @@ export const initAppDataStore = (initData: Map<string, any>): AppDataState => {
 // Maybe this needs to be controlled somewhere else? for now it's here.
 const handleStaticData = async (profile: string, currentData: IdleonData, data: { data: Map<string, any>, charNames: string[] }) => {
     const cloudsave = Cloudsave.fromJSON(data.data)
-    const idleonData = await updateIdleonData(currentData.getData(), cloudsave, data.charNames, [], {}, true);
+    // Fetch companion and servervar data from cloudsave if available.
+    let companions: number[] = [];
+    let serverVars: Record<string, any> = {}
+    if (cloudsave.fields.has("companions")) {
+        companions = cloudsave.get("companions") as number[];
+    }
+    if (cloudsave.fields.has("servervars")) {
+        serverVars = cloudsave.get("servervars") as Record<string, any>;
+    }
+    const idleonData = await updateIdleonData(currentData.getData(), cloudsave, data.charNames, companions, serverVars, true);
     sendEvent({
         action: "handle_static",
         category: "engagement",

@@ -257,6 +257,7 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
     accountData.set("OptLacc", data.get("OptLacc"));
     accountData.set("rawData", data.toJSON())
     accountData.set("timeAway", JSON.parse(data.get('TimeAway')));
+    accountData.set("ownedCompanions", companions);
 
     // Do some time math, useful for adjusting AFK timers if needed.
     const saveGlobalTime = JSON.parse(data.get("TimeAway"))["GlobalTime"] as number;
