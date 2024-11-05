@@ -4,7 +4,7 @@ import { Domain, RawData } from "./base/domain";
 import { Construction } from "./construction";
 import { Equinox, FoodLust } from "./equinox";
 import { ImageData } from "./imageData";
-import { Item, Equipment } from './items';
+import { Item } from './items';
 import { ObolsData, Obol } from "./obols";
 import { Activity, Player } from "./player";
 import { Prayer } from "./prayers";
@@ -17,6 +17,7 @@ import { Farming } from "./world-6/farming";
 import { Worship } from "./worship";
 import { Storage } from "./storage";
 import { SummonEssenceColor, Summoning } from "./world-6/summoning";
+import { Divinity } from "./divinity";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -36,7 +37,9 @@ export enum AlertType {
     EquinoxFull = "Equinox Full",
     CanCraftLuckierLad = "Can craft Luckier Lad",
     CanBuyFamiliar = "Can buy a familiar for Summoning",
-    PassiveCardEquipped = "Cards that are passive are equipped"
+    PassiveCardEquipped = "Cards that are passive are equipped",
+    DivinityStyleBad = "Divinity style should be changed",
+    DivinityGodBad = "Divinity linked should be changed"
 }
 
 export abstract class Alert {
@@ -57,6 +60,32 @@ export class GlobalAlert extends Alert {
 export class PlayerAlert extends Alert {
     constructor(public player: Player, type: AlertType) {
         super(type);
+    }
+}
+
+export class DivinityStyleAlert extends PlayerAlert {
+    constructor(player: Player, public text: string) {
+        super(player, AlertType.EmptyObolSlot);
+        this.title = "Change meditation style";
+        this.text = text;
+        this.icon = {
+            location: 'GemP22',
+            height: 36,
+            width: 36,
+        }
+    }
+}
+
+export class DivinityLinkedAlert extends PlayerAlert {
+    constructor(player: Player, public text: string) {
+        super(player, AlertType.EmptyObolSlot);
+        this.title = "Change linked God";
+        this.text = text;
+        this.icon = {
+            location: Skilling.getSkillImageData(SkillsIndex.Divinity).location,
+            height: 36,
+            width: 36,
+        }
     }
 }
 
@@ -262,8 +291,10 @@ export class Alerts extends Domain {
     }
 }
 
-const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship, prayers: Prayer[]): Alert[] => {
+const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[], worshipData: Worship, prayers: Prayer[], divinityData: Divinity): Alert[] => {
     const alerts: Alert[] = [];
+    // use a new variable to shorten conditions in later uses
+    const playerDivinityData = divinityData.playerInfo[player.playerID];
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
@@ -275,15 +306,45 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
+            if ((playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[0].data.name == 'Arctis') {
+                alerts.push(new DivinityLinkedAlert(player, "Arctis god is useless while you're in lab"));
+            }
             break;
         case Activity.Skilling:
             if (![1, 2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal skilling`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
+        case Activity.Divinity:
+            if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 80 && (playerDivinityData.style.name ?? '') != 'Mindful') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Mindful style"));
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 60 && (playerDivinityData.style.name ?? '') != 'Zen') {
+                // If using Mantra on 8 or more players it'll be better than using Zen for EXP
+                if (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 8 && (playerDivinityData.style.name ?? '') == 'Mantra')) {
+                    alerts.push(new DivinityStyleAlert(player, "You should use Zen style"));
+                }
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 25) {
+                // If using Mantra on 7 or more players it'll be better than using Vitalic for EXP
+                if (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 7 && (playerDivinityData.style.name ?? '') == 'Mantra')) {
+                    alerts.push(new DivinityStyleAlert(player, "You should use Vitalic style"));
+                }
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 10 && (playerDivinityData.style.name ?? '') == 'Kinesis') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Focus style"));
+            } else if ((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 5 && (playerDivinityData.style.name ?? '') == 'Kinesis') {
+                alerts.push(new DivinityStyleAlert(player, "You should use Chakra style"));
+            }            
+            break;
         case Activity.Unknown:
             alerts.push(new DoingNothingAlert(player));
             break;
+    }
+
+    // Separate those two from above to avoid having it in multiple case
+    if (player.getActivityType() != Activity.Lab && (playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[0].data.name == 'Goharut') {
+        alerts.push(new DivinityLinkedAlert(player, "Goharut god is useless while you're not in lab"));
+    }
+    if (player.getActivityType() != Activity.Divinity && (playerDivinityData.style.name ?? '') != 'TranQi' && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 40) {
+        alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
     }
 
     // Passive cards equipped
@@ -294,12 +355,12 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Anvil Alerts
     anvil.playerAnvils[player.playerID].production.forEach(anvilProduct => {
         if (anvilProduct.timeTillCap <= 0) {
-            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`, Item.getImageData(anvilProduct.data.item)))
+            alerts.push(new AnvilAlert(player, `${anvilProduct.displayName} production is at capacity, go collect!`, Item.getImageData(anvilProduct.data.item)));
         }
     })
 
     if (anvil.playerAnvils[player.playerID].currentlySelect.indexOf(-1) > -1) {
-        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!", { location: 'UIquickref1', height: 36, width: 36 }))
+        alerts.push(new AnvilAlert(player, "Unused hammer, losing out on production!", { location: 'UIquickref1', height: 36, width: 36 }));
     }
 
     // Obol Alerts
@@ -330,7 +391,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
 
     // Unending Energy Issue (Prayer Index = 2)
     if (player.activePrayers.includes(2) && player.afkFor > 10 * 60 * 60) {
-        alerts.push(new PrayerAlert(player, prayers[2]))
+        alerts.push(new PrayerAlert(player, prayers[2]));
     }
 
     return alerts;
@@ -431,10 +492,11 @@ export const updateAlerts = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const storage = data.get("storage") as Storage;
     const summoning = data.get("summoning") as Summoning;
+    const divinity = data.get("divinity") as Divinity;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
-        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship, prayers))
+        alerts.playerAlerts[player.playerID].push(...getPlayerAlerts(player, anvil, obols.playerObols[player.playerID], worship, prayers, divinity))
     })
 
     // Global Alerts
