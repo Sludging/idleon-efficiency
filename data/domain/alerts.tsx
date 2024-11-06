@@ -343,7 +343,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     if (player.getActivityType() != Activity.Lab && (playerDivinityData.gods.length ?? 0) == 1 && playerDivinityData.gods[0].data.name == 'Goharut') {
         alerts.push(new DivinityLinkedAlert(player, "Goharut god is useless while you're not in lab"));
     }
-    if (player.getActivityType() != Activity.Divinity && (playerDivinityData.style.name ?? '') != 'TranQi' && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 40) {
+    if (player.getActivityType() != Activity.Divinity && (playerDivinityData.style.name ?? '') != 'TranQi' && !playerDivinityData.gods.some(god => god.data.name == 'Goharut') && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 40) {
         alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
     }
 
