@@ -111,6 +111,7 @@ export class Player {
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
+    meditating: boolean = false;
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
     labInfo: LabInfo = {
@@ -728,6 +729,16 @@ export const updatePlayerStarSigns = (data: Map<string, any>) => {
     })
 }
 
+export const updatePlayerMeditating = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const divinityData = data.get("divinity") as Divinity;
+
+    players.forEach(player => {
+        const playerDivinityData = divinityData.playerInfo[player.playerID];
+        player.meditating = (player.getActivityType() == Activity.Divinity || player.getActivityType() == Activity.Lab && playerDivinityData.gods.some(god => god.data.name == 'Goharut'));
+    });
+}
+
 export const updatePlayerDeathnote = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const deathnote = data.get("deathnote") as Deathnote;
@@ -735,7 +746,7 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     // Track player deathnote data on the player object as well.
     players.forEach(player => {
         player.killInfo = deathnote.playerKillsByMap.get(player.playerID)!;
-    })
+    });
 }
 
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
