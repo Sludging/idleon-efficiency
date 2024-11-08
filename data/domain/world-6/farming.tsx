@@ -256,7 +256,7 @@ export class Plot {
             return 0;            
         } else {                
             const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.index - this.seed.data.cropIdMin));
+            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.cropIndex - this.seed.data.cropIdMin));
         }
     }
 
