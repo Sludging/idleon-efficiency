@@ -236,32 +236,17 @@ export class Plot {
 
     // used to calculate Next Crop Chance
     farmingLevel: number = 0;
-    allBonusesEffect: number = 0;
-    allBonusesEffectWithoutStarSign: number = 0;
-    allBonusesEffectWithSilkrode: number = 0;
+    nextCropChanceAllBonusEffect: number = 0;
+    bonusCropChanceFromStarSign65: number = 0;
 
     readyToCollect: boolean = false;
 
     constructor(public index: number) { }
 
     updateNextCropChance = (farmingLevel: number, summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number, bonusFromAchievement355: number, bonusFromKillRoy1: number, bonusFromLandRankTotalEvoChance: number, bonusFromLandRankEvoChanceFromCurrentRank: number, bonusFromVoting29: number) => {
-        this.allBonusesEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + bonusFromStarSign65 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
-        this.allBonusesEffectWithoutStarSign = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + 0 * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
-        this.allBonusesEffectWithSilkrode = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * (1 + (bonusFromStarSign65 * 2) * farmingLevel / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
+        this.bonusCropChanceFromStarSign65 = bonusFromStarSign65;
         this.farmingLevel = farmingLevel;
-    }
-
-    getEvolutionChance = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
-        if (this.farmingLevel < 2 || !this.seed || this.index == this.seed.data.cropIdMax) {
-            return 0;            
-        } else {                
-            const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
-            return this.getAllBonusEffect(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.cropIndex - this.seed.data.cropIdMin));
-        }
-    }
-
-    getAllBonusEffect = (starSignEquipped: boolean, silkrodeBonus: boolean): number => {
-        return starSignEquipped ? (silkrodeBonus ? this.allBonusesEffectWithSilkrode : this.allBonusesEffect) : this.allBonusesEffectWithoutStarSign;
+        this.nextCropChanceAllBonusEffect = (1 + bonusFromMarketUpgrade4 / 100) * (1 + bonusFromWinningBonus10 / 100) * (1 + bonusFromAlchemyBubbleCropChapter / 100) * (1 + bonusFromAlchemyBubbleCropiusMapper / 100) * (1 + bonusFromVial66 / 100) * (1 + bonusFromMeal62 / 100) * (1 + bonusFromStampCropEvo / 100) * (1 + bonusFromMeal66 * Math.ceil((summoningLevel + 1) / 50) / 100) * (1 + bonusFromAchievement355 / 100) * Math.max(1, bonusFromKillRoy1) * Math.max(1, bonusFromMarketUpgrade9) * (1 + bonusFromRiftFarming1 / 100) * Math.max(1, bonusFromLandRankTotalEvoChance) * (1 + (bonusFromLandRankEvoChanceFromCurrentRank * this.landRank + bonusFromVoting29) / 100);
     }
 
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number, bonusOGChanceFromLandRankTotal: number) => {
@@ -307,11 +292,24 @@ export class Plot {
         }
     }
 
-    getPlotNextOGChance = (starSignEquipped: boolean, silkrodeBonus: boolean, currentOGlevel: number = this.OGlevel) => {
-        return Math.pow(0.4, currentOGlevel + 1) * this.nextOGChanceAllBonusEffect * this.getStarSignBonus(starSignEquipped, silkrodeBonus);
+    getEvolutionChance = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+        if (this.farmingLevel < 2 || !this.seed || this.index == this.seed.data.cropIdMax) {
+            return 0;            
+        } else {                
+            const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
+            return this.nextCropChanceAllBonusEffect * this.getNextCropChanceStarSignBonus(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.cropIndex - this.seed.data.cropIdMin));
+        }
     }
 
-    getStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+    getPlotNextOGChance = (starSignEquipped: boolean, silkrodeBonus: boolean, currentOGlevel: number = this.OGlevel) => {
+        return Math.pow(0.4, currentOGlevel + 1) * this.nextOGChanceAllBonusEffect * this.getOGChanceStarSignBonus(starSignEquipped, silkrodeBonus);
+    }
+
+    getNextCropChanceStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
+        return starSignEquipped ? (silkrodeBonus ? (1 + ((this.bonusCropChanceFromStarSign65 * 2) * this.farmingLevel) / 100) : (1 + (this.bonusCropChanceFromStarSign65 * this.farmingLevel) / 100)) : 1;
+    }
+
+    getOGChanceStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
         return starSignEquipped ? (silkrodeBonus ? (1 + (this.bonusOGChanceFromStarSign67*2) / 100) : (1 + this.bonusOGChanceFromStarSign67 / 100)) : 1;
     }
 
