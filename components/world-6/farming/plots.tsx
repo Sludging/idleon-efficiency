@@ -25,7 +25,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
 
     return (
         <Box width="100%">
-            <CropToCollectDisplay cropsToCollect={farming.cropsToCollect} marketBonus5={farming.getMarketUpgradeBonusValue(5)} />
+            <CropToCollectDisplay cropsToCollect={farming.cropsToCollect} />
             <Text size="xsmall">* There could be a difference of a few seconds between IE and in-game</Text>
             <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 9) }} gap={"small"} fill>
                 {
@@ -33,7 +33,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
                         return (
                             <ShadowBox key={index} background="dark-1">
                                 <Box align="center">
-                                    <PlotDisplay farmingPlot={plot} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />
+                                    <PlotDisplay farmingPlot={plot} cropDepot={farming.cropDepot} canOvergrow={farming.canOvergrow} canLevelLandRank={farming.canLevelLandRank} silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />
                                 </Box>
                             </ShadowBox>
                         )
@@ -44,7 +44,7 @@ export const PlotsDisplay = ({silkRodeChip, starSignEvoEquipped, starSignOGEquip
     )
 }
 
-const CropToCollectDisplay = ({ cropsToCollect, marketBonus5 }: { cropsToCollect: CropQuantity[], marketBonus5: number }) => {
+const CropToCollectDisplay = ({ cropsToCollect}: { cropsToCollect: CropQuantity[]}) => {
     if (!cropsToCollect || cropsToCollect.length == 0) {
         return null;
     }
@@ -78,7 +78,7 @@ const CropToCollectDisplay = ({ cropsToCollect, marketBonus5 }: { cropsToCollect
     )
 }
 
-const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSignEvoEquipped, starSignOGEquipped }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean, silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean }) => {
+const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, silkRodeChip, starSignEvoEquipped, starSignOGEquipped }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean, canLevelLandRank: boolean, silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean }) => {
     const [readyToCollect, setReadyToCollect] = useState<boolean>(farmingPlot.readyToCollect);
     const [plotCanOvergrow, setCanOvergrow] = useState<boolean>(readyToCollect && canOvergrow);
     const [completedOGcycles, setCompletedOGCycles] = useState<number>(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
@@ -235,6 +235,13 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
                     labelSize="11px"
                     component={
                         <Text size="xsmall">{nFormatter(Math.min(100, plot.getPlotNextOGChance(starSignOGEquipped, silkRodeChip) * 100))}%</Text>
+                    }
+                />}
+                {canLevelLandRank && <ComponentAndLabel
+                    label="Land rank :"
+                    labelSize="11px"
+                    component={
+                        <Text size="xsmall">Lv.{plot.landRank} ({nFormatter(plot.landExp)} / {nFormatter(plot.getExpToNextRank())} exp)</Text>
                     }
                 />}
             </Box>
