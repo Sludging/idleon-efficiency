@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerMeditating } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -194,6 +194,7 @@ const postProcessingMap: Record<string, Function> = {
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
+    "updatePlayerMeditating": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerMeditating(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
