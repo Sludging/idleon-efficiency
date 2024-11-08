@@ -54,7 +54,6 @@ const CropToCollectDisplay = ({ cropsToCollect, marketBonus5 }: { cropsToCollect
             <ShadowBox style={{ opacity: cropsToCollect.length > 0 ? 1 : 0.5 }} background="dark-1" gap="xsmall" pad="small" align="left">
                 <Box align="center" direction="row" gap="xsmall">
                     <Text size="medium">Crops to collect</Text>
-                    {marketBonus5 > 0 && <Text size="small" color="accent-2">(doesn't include your {marketBonus5}% chance to double the quantity collected)</Text>}
                 </Box>
                 <Box gap="xxsmall" direction="row" wrap>
                     {
@@ -62,7 +61,11 @@ const CropToCollectDisplay = ({ cropsToCollect, marketBonus5 }: { cropsToCollect
                             return (
                                 <Box key={index} border={{ color: 'grey-1' }} margin={{ bottom: 'xxsmall' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center">
                                     <Box direction="row" pad={{ vertical: 'xsmall' }} align="center" gap='xsmall'>
-                                        <Text size="xsmall">{nFormatter(Math.floor(collect.quantity))}</Text>
+                                        {(collect.minQuantity == collect.maxQuantity ?
+                                            <Text size="xsmall">{nFormatter(Math.floor(collect.minQuantity))}</Text>
+                                            :
+                                            <Text size="xsmall">{nFormatter(Math.floor(collect.minQuantity))}~{nFormatter(Math.floor(collect.maxQuantity))}</Text>
+                                        )}
                                         <IconImage data={Crop.getCropIconData(collect.crop.index)} />
                                     </Box>
                                 </Box>
@@ -109,7 +112,19 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
     const currentCropIsUndiscovered = (baseCrop.discovered == false);
     const nextCropIsUndiscovered = (nextCrop?.discovered == false);
 
-    const quantityToDisplay: string = plot.quantityToCollect > 0 ? nFormatter(plot.getQuantityToCollect()) : `${plot.getQuantityToCollect(plot.possibleQtyToCollectMin)} ~ ${plot.getQuantityToCollect(plot.possibleQtyToCollectMax)}`;
+    const minPossibleCollect = plot.quantityToCollect > 0 ? plot.getMinQuantityToCollect() : 0;
+    const maxPossibleCollect = plot.quantityToCollect > 0 ? plot.getMaxQuantityToCollect() : 0;
+
+    const quantityToDisplay: string =   plot.quantityToCollect > 0 ? 
+                                            minPossibleCollect == maxPossibleCollect ?
+                                                nFormatter(minPossibleCollect)
+                                                :
+                                            `${nFormatter(minPossibleCollect)} ~ ${nFormatter(maxPossibleCollect)}`
+                                        : 
+                                            plot.possibleBaseQtyToCollectMin == plot.possibleBaseQtyToCollectMax ?
+                                                plot.possibleBaseQtyToCollectMin.toString()
+                                            :
+                                                `${plot.possibleBaseQtyToCollectMin} ~ ${plot.possibleBaseQtyToCollectMax}`;
     // If quantityToCollect is set then it means growth is done from server side, so no more changes possible for crop
     // If locked, can't evolve
     // if nextCropChance == 0 then mean it's last crop for his seed type, so can't evolve
@@ -150,7 +165,7 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, silkRodeChip, starSi
                         </Box>
                         :
                         <Box direction="row" gap="xsmall" justify="start" align="center">
-                            <Text size="small">{plot.possibleQtyToCollectMin} ~ {plot.possibleQtyToCollectMax}</Text>
+                            <Text size="small">{quantityToDisplay}</Text>
                             <Box>
                                 {!forcedToEvolve && < Box direction="row" gap="xxsmall">
                                     <IconImage data={Crop.getCropIconData(plot.cropIndex)} />
