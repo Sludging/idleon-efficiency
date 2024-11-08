@@ -217,11 +217,15 @@ export class Plot {
     // seconds since last cycle have ended, reset to 0 once an overgrow cycle end
     // Only start incrementing when plant is fully grown
     overgrowthTime: number = 0;
+    
+    // Multiplyer from multiples sources
+    minimumQuantityMultiplyer: number = 0;
+    maximumQuantityMultiplyer: number = 0;
 
     growthRate: number = 0;
 
-    possibleQtyToCollectMin: number = 0;
-    possibleQtyToCollectMax: number = 0;
+    possibleBaseQtyToCollectMin: number = 0;
+    possibleBaseQtyToCollectMax: number = 0;
 
     nextOGChanceAllBonusEffect: number = 0;
     bonusOGChanceFromStarSign67: number = 0;
@@ -252,6 +256,11 @@ export class Plot {
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number, bonusOGChanceFromLandRankTotal: number) => {
         this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;
         this.nextOGChanceAllBonusEffect = Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromTaskBoard / 100) * (1 + bonusFromAchievement365 / 100) * (1 + bonusOGChanceFromLandRankTotal / 100);     
+    }
+
+    updatePlotCropQuantityMultiplyer = (bonusFromMarket5: number, bonusFromLandRankTotal: number, bonusFromLandRankCurrent: number, bonusFromVoting: number) => {
+        this.minimumQuantityMultiplyer = Math.min(100, Math.round(Math.max(1, Math.floor(1 + (0 + bonusFromMarket5 / 100))) * (1 + bonusFromLandRankTotal / 100) * (1 + (bonusFromLandRankCurrent * this.landRank + bonusFromVoting) / 100)));
+        this.maximumQuantityMultiplyer = Math.min(100, Math.round(Math.max(1, Math.floor(1 + (0.9999 + bonusFromMarket5 / 100))) * (1 + bonusFromLandRankTotal / 100) * (1 + (bonusFromLandRankCurrent * this.landRank + bonusFromVoting) / 100)));
     }
 
     updatePlotGrowthSinceLastRefresh = () => {
@@ -332,8 +341,12 @@ export class Plot {
         return (10 + (7 * this.landRank + 25 * Math.floor(this.landRank / 5))) * Math.pow(1.11, this.landRank);
     }
 
-    getQuantityToCollect(baseQuantity: number = this.quantityToCollect): number {
-        return baseQuantity * Math.max(1, this.getOGmultiplyer());
+    getMinQuantityToCollect(baseQuantity: number = this.quantityToCollect): number {
+        return baseQuantity * Math.max(1, this.getOGmultiplyer()) * this.minimumQuantityMultiplyer;
+    }
+
+    getMaxQuantityToCollect(baseQuantity: number = this.quantityToCollect): number {
+        return baseQuantity * Math.max(1, this.getOGmultiplyer()) * this.maximumQuantityMultiplyer;
     }
 
     getOGmultiplyer = (): number => {
@@ -622,11 +635,12 @@ export class Farming extends Domain {
             if (plot.quantityToCollect > 0) {
                 const collect = this.cropsToCollect.find(collect => collect.crop.index == plot.cropIndex);
                 if (collect) {
-                    collect.quantity += plot.getQuantityToCollect();
+                    collect.minQuantity += plot.getMinQuantityToCollect();
+                    collect.maxQuantity += plot.getMaxQuantityToCollect();
                 } else {
                     const crop = this.cropDepot.find(crop => crop.index == plot.cropIndex);
                     if (crop) {
-                        this.cropsToCollect.push({ crop: crop, quantity: plot.getQuantityToCollect() });
+                        this.cropsToCollect.push({ crop: crop, minQuantity: plot.getMinQuantityToCollect(), maxQuantity: plot.getMaxQuantityToCollect() });
                     }
                 }
             }
@@ -664,8 +678,8 @@ export class Farming extends Domain {
         const max = Math.floor(1 + (0.9999 + (bonusFromMarketUpgrade1 + 20 * purchasesFromGemShopBonus139) / 100));
 
         this.farmPlots.forEach(plot => {
-            plot.possibleQtyToCollectMin = min;
-            plot.possibleQtyToCollectMax = max;
+            plot.possibleBaseQtyToCollectMin = min;
+            plot.possibleBaseQtyToCollectMax = max;
         });
     }
 
@@ -868,7 +882,8 @@ export interface MarketUpgradeCost {
 
 export interface CropQuantity {
     crop: Crop,
-    quantity: number
+    minQuantity: number,
+    maxQuantity: number
 }
 
 export enum CropScientistBonusText {
