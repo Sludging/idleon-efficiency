@@ -687,7 +687,15 @@ export class Farming extends Domain {
         this.farmPlots.forEach(plot => {
             plot.lastRefresh = saveTime;
             plot.updatePlotGrowthSinceLastRefresh();
-        })
+        });
+    }
+
+    updatePlotQuantityMultiplyer = (bonusFromMarketUpgrade5: number, bonusFromVoting29: number) => {
+        const landRankBonusTotal = this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.AmountHarvested);
+        const landRankBonusCurrentRank = this.landrankDatabase.getUpgradeBonusByIndex(1);
+        this.farmPlots.forEach(plot => {
+            plot.updatePlotCropQuantityMultiplyer(bonusFromMarketUpgrade5, landRankBonusTotal, landRankBonusCurrentRank, bonusFromVoting29);
+        });
     }
     
     getCropsWithStockEqualOrGreaterThan = (stockLimit: number): number => {
@@ -839,7 +847,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
     farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
     
-    // Upgrade each Crops Evolution chance in plots
+    // Update each Crops Evolution chance in plots
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
     const bubbleBonusCropChapter = alchemy.getBubbleBonusForKey("W10AllCharz");
     const bubbleBonusCropiusMapper = alchemy.getBubbleBonusForKey("Y6");
@@ -853,7 +861,9 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const killroyBonus1 = killroy.farmingNextEvoChanceBonus;
     const votingBonus29 = votes.getCurrentBonus(29);
     farming.updateCropsEvolutionChance(summoning.summoningLevel, farming.getMarketUpgradeBonusValue(4), farming.getMarketUpgradeBonusValue(9), summoningWinnerBonus10, bubbleBonusCropChapter, bubbleBonusCropiusMapper, vialEvolutionChanceBonus, mealBonusZCropEvo, mealBonusZCropEvoSumm, stampCropEvolutionChance, starSignBonus65, riftBonusCropEvolutionChance, achievementBonus355, killroyBonus1, votingBonus29);
-    
+    // Update each Crops multiplyer when collecting for each plot
+    farming.updatePlotQuantityMultiplyer(farming.getMarketUpgradeBonusValue(5), votingBonus29);
+
     // Update OG chances for all plots
     const marketBonus11 = farming.getMarketUpgradeBonusValue(11);
     const pristineCharm11 = sneaking.pristineCharms.find(charm => charm.data.itemId == 11);
