@@ -735,7 +735,7 @@ export const updatePlayerMeditating = (data: Map<string, any>) => {
 
     players.forEach(player => {
         const playerDivinityData = divinityData.playerInfo[player.playerID];
-        player.meditating = (player.getActivityType() == Activity.Divinity || player.getActivityType() == Activity.Lab && playerDivinityData.gods.some(god => god.data.name == 'Goharut'));
+        player.meditating = (player.getActivityType() == Activity.Divinity || player.getActivityType() == Activity.Lab && (playerDivinityData.gods.some(god => god.data.name == 'Goharut') || (playerDivinityData.esGod?.data.name ?? '') == 'Goharut'));
     });
 }
 
