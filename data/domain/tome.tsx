@@ -7,7 +7,7 @@ import { SlabInfluencedArtifact } from './sailing/artifacts';
 import { Sneaking } from './world-6/sneaking';
 import { ImageData } from "./imageData";
 
-export class TheTome extends Domain {
+export class Tome extends Domain {
     getRawKeys(): RawData[] {
         return [
             {key: "Cards1", perPlayer: false, default: []}
@@ -37,6 +37,6 @@ export class TheTome extends Domain {
     }
 
     parse(data: Map<string, any>): void {
-        
+        const tome = data.get(this.dataKey) as Tome;
     }
 }
