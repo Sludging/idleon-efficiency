@@ -37,25 +37,8 @@ export const LandRankDisplay = () => {
                                     <Box gap="small" justify="between" fill>
                                         <Box style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }}>
                                             <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
-                                        </Box>
-                                        {
-                                            upgrade.unlocked ?
-                                                <ComponentAndLabel
-                                                    label={label}
-                                                    component={
-                                                        <Box gap="xsmall" direction="row" align="center">
-                                                            <Text size="small">{upgrade.uniqueLevelBonus && upgrade.level > 0 ? "MAXED" : ""}</Text>
-                                                        </Box>                                                                       
-                                                    }
-                                                />                                                        
-                                            :
-                                            <ComponentAndLabel
-                                                label={label}
-                                                component={
-                                                    <Box/>
-                                                }
-                                            /> 
-                                        }                                            
+                                        </Box>                                       
+                                        <Text color="accent-2" size="small">{upgrade.uniqueLevelBonus && upgrade.level > 0 ? "MAXED" : label}</Text>
                                     </Box>
                                 </ShadowBox>
                             )
