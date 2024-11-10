@@ -33,9 +33,11 @@ export const LandRankDisplay = () => {
                             }
 
                             return (
-                                <ShadowBox style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                                <ShadowBox key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                     <Box gap="small" justify="between" fill>
-                                        <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                        <Box style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }}>
+                                            <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                        </Box>
                                         {
                                             upgrade.unlocked ?
                                                 <ComponentAndLabel
