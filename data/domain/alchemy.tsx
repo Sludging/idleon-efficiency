@@ -22,6 +22,7 @@ import { JadeComponentModel } from './model/jadeComponentModel';
 import { CropComponentModel } from './model/cropComponentModel';
 import { SummonComponentModel } from './model/summonComponentModel';
 import { SailTreasureComponentModel } from './model/sailTreasureComponentModel';
+import { Tome } from './tome';
 
 export enum CauldronIndex {
     Power = 0,
@@ -872,7 +873,8 @@ export function updateAlchemySlabBubbles(data: Map<string, any>) {
 
 export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
-    const tomeScore = 0; // TODO : Once The Tome is implemented, need to update with the actual value
+    const tome = data.get("tome") as Tome;
+    const tomeScore = tome.totalScore;
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
         .forEach(bubble => {
