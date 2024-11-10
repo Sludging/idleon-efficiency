@@ -40,7 +40,7 @@ function TomeDisplay() {
             </Box>
             <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
                 {
-                    tome.lines?.map((line, index) => <LineDisplay line={line} />)
+                    tome.lines?.map((line, index) => <LineDisplay key={index} line={line} />)
                 }
             </Grid>
         </Box>
