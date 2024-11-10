@@ -338,13 +338,13 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
                 break;
             case (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 60:
                 // If using Mantra on 8 or more players it'll be better than using Zen for EXP
-                if ((playerDivinityData.style.name ?? '') != 'Zen' && (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 8 && (playerDivinityData.style.name ?? '') == 'Mantra'))) {
+                if ((playerDivinityData.style.name ?? '') != 'Zen' && (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra' && info.active).length >= 8 && (playerDivinityData.style.name ?? '') == 'Mantra'))) {
                     alerts.push(new DivinityStyleAlert(player, "You should use Zen style"));
                 }
                 break;
             case (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 25:
                 // If using Mantra on 7 or more players it'll be better than using Vitalic for EXP
-                if (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra').length >= 7 && (playerDivinityData.style.name ?? '') == 'Mantra')) {
+                if ((playerDivinityData.style.name ?? '') != 'Vitalic' && (!(divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra' && info.active).length >= 7 && (playerDivinityData.style.name ?? '') == 'Mantra'))) {
                     alerts.push(new DivinityStyleAlert(player, "You should use Vitalic style"));
                 }
                 break;
