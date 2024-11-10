@@ -30,26 +30,26 @@ export class LandRankDataBase {
 
     constructor() {
         // Do this until the wiki bot can send us those data
-        this.upgrades.push(new LandRankUpgrade(0,"Evolution Boost","Increases next crop chance by +{% per rank of the land plot",250,1));
-        this.upgrades.push(new LandRankUpgrade(1,"Production Boost","Boosts value of crops harvested by +{% per rank of the land plot",5,5));
-        this.upgrades.push(new LandRankUpgrade(2,"Soil Exp Boost","Each land gains +{% extra Rank EXP per rank of the previous land",25,20));
-        this.upgrades.push(new LandRankUpgrade(3,"Evolution Megaboost","Increases next crop chance by +{% multiplicatively!",600,30));
-        this.upgrades.push(new LandRankUpgrade(4,"Seed of Stealth","Increases the Stealth of all Ninja Twins by +{% per Farming LV",2,60));
-        this.upgrades.push(new LandRankUpgrade(5,"Farmtastic Boost","Increases Farming Skill EXP gained by +{%",90,80));
-        this.upgrades.push(new LandRankUpgrade(6,"Soil Exp Megaboost","All plots of land gain +{% more Rank EXP",200,125));
-        this.upgrades.push(new LandRankUpgrade(7,"Overgrowth Boost","Increases chance for Overgrowth by +{%",120,180));
-        this.upgrades.push(new LandRankUpgrade(8,"Production Megaboost","Increases the amount of crops harvested by +{%",100,250));
-        this.upgrades.push(new LandRankUpgrade(9,"Seed of Loot","Increases the Drop Rarity of all characters by +{%",10,400));
-        this.upgrades.push(new LandRankUpgrade(10,"Evolution Superboost","Increases next crop chance by +{% multiplicatively!",3000,500));
-        this.upgrades.push(new LandRankUpgrade(11,"Overgrowth Megaboost","Increases chance for Overgrowth by +{%",340,600));
-        this.upgrades.push(new LandRankUpgrade(12,"Farmtastic Megaboost","Increases Farming Skill EXP gained by +{%",110,700));
-        this.upgrades.push(new LandRankUpgrade(13,"Soil Exp Superboost","All plots of land gain +{% more Rank EXP",520,900));
-        this.upgrades.push(new LandRankUpgrade(14,"Seed of Damage","Gives a +{% Total Damage bonus to all characters",20,1200));
-        this.upgrades.push(new LandRankUpgrade(15,"Evolution Ultraboost","Increases next crop chance by +{% multiplicatively!",40000,1300));
-        this.upgrades.push(new LandRankUpgrade(16,"Farmtastic Superboost","Increases Farming Skill EXP gained by +{%",220,1500));
-        this.upgrades.push(new LandRankUpgrade(17,"Production Superboost","Increases the amount of crops harvested by +{%",600,1750));
-        this.upgrades.push(new LandRankUpgrade(18,"Overgrowth Superboost","Increases chance for Overgrowth by +{%",1500,2000));
-        this.upgrades.push(new LandRankUpgrade(19,"Seed of Stats","Gives a +{% All Stat bonus to your characters",5,3500));
+        this.upgrades.push(new LandRankUpgrade(0,"Evolution Boost","Increases next crop chance by +{% per rank of the land plot",250,1,false));
+        this.upgrades.push(new LandRankUpgrade(1,"Production Boost","Boosts value of crops harvested by +{% per rank of the land plot",5,5,false));
+        this.upgrades.push(new LandRankUpgrade(2,"Soil Exp Boost","Each land gains +{% extra Rank EXP per rank of the previous land",25,20,false));
+        this.upgrades.push(new LandRankUpgrade(3,"Evolution Megaboost","Increases next crop chance by +{% multiplicatively!",600,30,false));
+        this.upgrades.push(new LandRankUpgrade(4,"Seed of Stealth","Increases the Stealth of all Ninja Twins by +{% per Farming LV",2,60,true));
+        this.upgrades.push(new LandRankUpgrade(5,"Farmtastic Boost","Increases Farming Skill EXP gained by +{%",90,80,false));
+        this.upgrades.push(new LandRankUpgrade(6,"Soil Exp Megaboost","All plots of land gain +{% more Rank EXP",200,125,false));
+        this.upgrades.push(new LandRankUpgrade(7,"Overgrowth Boost","Increases chance for Overgrowth by +{%",120,180,false));
+        this.upgrades.push(new LandRankUpgrade(8,"Production Megaboost","Increases the amount of crops harvested by +{%",100,250,false));
+        this.upgrades.push(new LandRankUpgrade(9,"Seed of Loot","Increases the Drop Rarity of all characters by +{%",10,400,true));
+        this.upgrades.push(new LandRankUpgrade(10,"Evolution Superboost","Increases next crop chance by +{% multiplicatively!",3000,500,false));
+        this.upgrades.push(new LandRankUpgrade(11,"Overgrowth Megaboost","Increases chance for Overgrowth by +{%",340,600,false));
+        this.upgrades.push(new LandRankUpgrade(12,"Farmtastic Megaboost","Increases Farming Skill EXP gained by +{%",110,700,false));
+        this.upgrades.push(new LandRankUpgrade(13,"Soil Exp Superboost","All plots of land gain +{% more Rank EXP",520,900,false));
+        this.upgrades.push(new LandRankUpgrade(14,"Seed of Damage","Gives a +{% Total Damage bonus to all characters",20,1200,true));
+        this.upgrades.push(new LandRankUpgrade(15,"Evolution Ultraboost","Increases next crop chance by +{% multiplicatively!",40000,1300,false));
+        this.upgrades.push(new LandRankUpgrade(16,"Farmtastic Superboost","Increases Farming Skill EXP gained by +{%",220,1500,false));
+        this.upgrades.push(new LandRankUpgrade(17,"Production Superboost","Increases the amount of crops harvested by +{%",600,1750,false));
+        this.upgrades.push(new LandRankUpgrade(18,"Overgrowth Superboost","Increases chance for Overgrowth by +{%",1500,2000,false));
+        this.upgrades.push(new LandRankUpgrade(19,"Seed of Stats","Gives a +{% All Stat bonus to your characters",5,3500,true));
     }
 
     // This function send the sum of all bonus from a same type, Lava use this in his code so having it here helps to "translate" his code into IE code
@@ -81,19 +81,8 @@ export class LandRankDataBase {
 export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
-    uniqueLevelBonus: boolean = false;
 
-    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number) {
-        switch (index) {
-            case 4:
-            case 9:
-            case 14:
-            case 19:
-                this.uniqueLevelBonus = true;
-            default: 
-                this.uniqueLevelBonus = false;
-        }
-    }
+    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public uniqueLevelBonus: boolean) {}
 
     getUpgradeBonus = () => {
         if (!this.unlocked) {
