@@ -13,6 +13,7 @@ export class TomeLine {
     // To know how, check game code searching for "_customEvent_TomeQTY: function() {"
     // It's where engine.getGameAttribute("DNSM").h.TomeQTY array is populated with each line current value which is then used to calculate each line points
     currentValue: number = 0;
+    lineScore: number = 0;
 
     constructor(public index: number, public title: string, public maxValue: number, public calcMethod: number, public maxPoint: number, public text: string, public description: string) {}
 
@@ -41,6 +42,10 @@ export class TomeLine {
 
     getLineScore = (): number => {
         return Math.ceil(this.getLineMultiplyer() * this.maxPoint);
+    }
+
+    updateLineScore = () => {
+        this.lineScore = this.getLineScore();
     }
 }
 
@@ -81,7 +86,7 @@ export class Tome extends Domain {
             const calcMethod: number = parseInt(lineInfo[2], 10); // Index of method used to calculate the score of the line, for now either 0, 1, 2 or 3
             const maxPoints: number = parseInt(lineInfo[3], 10); // Max possible points to get from the line
             const text: string = ((lineInfo[4] ?? "") == "filler") ? "" : (lineInfo[4] ?? ""); // Don't know what it's used for
-            const description: string = lineInfo[5]?.replaceAll('_', ' ') ?? ""; // Text that is displayed in-game when clicking on the info icon
+            const description: string = ((lineInfo[5] ?? "") == "filler") ? "" : (lineInfo[5] ?? "").replaceAll('_', ' '); // Text that is displayed in-game when clicking on the info icon
 
             tome.lines.push(new TomeLine(index,title,maxValue,calcMethod,maxPoints,text,description));
             index++;
@@ -89,7 +94,7 @@ export class Tome extends Domain {
     }
 
     updateTotalScore = () => {
-        this.totalScore = this.lines.reduce((sum, line) => sum+line.getLineScore(), 0);
+        this.totalScore = this.lines.reduce((sum, line) => sum+line.lineScore, 0);
     }
 }
 
@@ -105,6 +110,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.currentValue = 0;
                 break;
         }
+
+        line.updateLineScore();
     });
 
     tome.updateTotalScore();
