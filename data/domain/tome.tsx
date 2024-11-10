@@ -1,12 +1,14 @@
 import { Domain, RawData } from './base/domain';
-import { initSlabItemSortRepo } from './data/SlabItemSortRepo';
 import { Item } from './items'
-import { Lab, SlabSovereigntyBonus } from './lab';
-import { Sailing } from './sailing';
-import { SlabInfluencedArtifact } from './sailing/artifacts';
-import { Sneaking } from './world-6/sneaking';
-import { ImageData } from "./imageData";
 import { lavaLog } from '../utility';
+import { Stamp } from './stamps';
+import { PlayerStatues } from './statues';
+import { Card } from './cards';
+import { Quests } from './quests';
+import { Player } from './player';
+import { TaskBoard } from './tasks';
+import { Achievement } from './achievements';
+import { initTalentTreeRepo } from './data/TalentTreeRepo';
 
 export class TomeLine {
     // Needs this to be updated
@@ -76,7 +78,8 @@ export class Tome extends Domain {
 
     parse(data: Map<string, any>): void {
         const tome = data.get(this.dataKey) as Tome;
-        const optionList = data.get("OptLacc") as number[];
+
+        console.log(data);
 
         var index: number = 0;
         
@@ -100,10 +103,335 @@ export class Tome extends Domain {
 
 export const updateTomeScores = (data: Map<string, any>) => {
     const tome = data.get("tome") as Tome;
+    const stamps = data.get("stamps") as Stamp[][];
+    const statues = data.get("statues") as PlayerStatues[];
+    const cards = data.get("cards") as Card[];
+    const players = data.get("players") as Player[];
+    const questsData = data.get("quests") as Quests;
+    const taskBoard = data.get("taskboard") as TaskBoard;
+    const achievements = data.get("achievements") as Achievement[];
+    const optionListAccount = data.get("OptLacc") as number[];
 
     tome.lines.forEach(line => {
         switch(line.index) {
             case 0:
+                line.currentValue = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.level, 0);
+                break;
+            case 1:
+                var statueLevels: number[] = [];
+                statues.forEach(playerStatue => {
+                    statueLevels.push(playerStatue.statues.reduce((sum, statue) => sum+statue.level,0));
+                })
+                // Get the highest sum of statues for a single char in case the account don't have all statues golden
+                line.currentValue = Math.max(...statueLevels);
+                break;
+            case 2:
+                line.currentValue = cards.reduce((sum, card) => sum+(card.count > 0 ? card.getStars()+1 : 0), 0);
+                break;
+            case 3:
+                // Needs to be fixed, not getting the good value even if starting to get close
+                var talentsTotalMaxLevel: number = 0;
+                const allTalents = initTalentTreeRepo();
+                allTalents.flatMap(page => page).filter(page => !page.id.startsWith("Special Talent ")).forEach(page => {
+                    Object.entries(page.data.talents).forEach(([_, info], index) => {
+                        talentsTotalMaxLevel += Math.max(...players.map((player, index) => (![149, 374, 539, 505].includes(info.skillIndex) && info.skillIndex <= 614 && !(49 <= info.skillIndex && 59 >= info.skillIndex)) ? Math.max(100, player.getTalentMaxLevel(info.skillIndex) - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES - player.extraLevelsFromAchievements - player.extraLevelsFromSlug - player.extraLevelsFromEquinox) : player.getTalentMaxLevel(info.skillIndex)));
+                    });                    
+                });
+                line.currentValue = talentsTotalMaxLevel;
+                break;
+            case 4:
+                const badNPCNames = [
+                    "Secretkeeper",
+                    "Game Message",
+                    "Unmade Character",
+                    "FillerNPC"
+                ]
+                // remove NPCs that should be ignored
+                var filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
+                var completedQuests: number = 0;
+                const playerQuestData = questsData?.playerData ?? {};
+                filteredNPCs.forEach(([_, npc], npcIndex) => {
+                    Object.entries(npc.data.quests).forEach(([_, info], index) => {
+                        if (Object.entries(playerQuestData).some(playerData => playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
+                            completedQuests++;
+                        }
+                    });
+                });
+                line.currentValue = completedQuests;
+                break;
+            case 5:
+                line.currentValue = players.reduce((sum, player) => sum+player.level,0);
+                break;
+            case 6:
+                line.currentValue = taskBoard.tasks.reduce((sum, task) => sum+(task.isDaily() ? 0 : task.level),0);
+                break;
+            case 7:
+                line.currentValue = achievements.filter(achievement => achievement.completed).length;
+                break;
+            case 8:
+                line.currentValue = optionListAccount[198];
+                break;
+            case 9:
+                line.currentValue = optionListAccount[208];
+                break;
+            case 10:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 11:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 12:
+                line.currentValue = optionListAccount[201];
+                break;
+            case 13:
+                line.currentValue = taskBoard.tasks.find(task => task.index == 2)?.count ?? 0;
+                break;
+            case 14:
+                line.currentValue = optionListAccount[172];
+                break;
+            case 15:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 16:
+                line.currentValue = 1 / optionListAccount[202];
+                break;
+            case 17:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 18:
+                line.currentValue = optionListAccount[200];
+                break;
+            case 19:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 20:
+                line.currentValue = optionListAccount[203];
+                break;
+            case 21:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 22:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 23:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 24:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 25:
+                line.currentValue = optionListAccount[199];
+                break;
+            case 26:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 27:
+                line.currentValue = optionListAccount[204];
+                break;
+            case 28:
+                line.currentValue = optionListAccount[205];
+                break;
+            case 29:
+                line.currentValue = optionListAccount[206];
+                break;
+            case 30:
+                line.currentValue = 1E3 - optionListAccount[207];
+                break;
+            case 31:
+                line.currentValue = optionListAccount[211];
+                break;
+            case 32:
+                line.currentValue = optionListAccount[212];
+                break;
+            case 33:
+                line.currentValue = optionListAccount[213];
+                break;
+            case 34:
+                line.currentValue = optionListAccount[214];
+                break;
+            case 35:
+                line.currentValue = optionListAccount[215];
+                break;
+            case 36:
+                line.currentValue = optionListAccount[209];
+                break;
+            case 37:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 38:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 39:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 40:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 41:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 42:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 43:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 44:
+                line.currentValue = optionListAccount[224];
+                break;
+            case 45:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 46:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 47:
+                line.currentValue = 1E3 - optionListAccount[220];
+                break;
+            case 48:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 49:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 50:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 51:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 52:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 53:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 54:
+                line.currentValue = optionListAccount[217];
+                break;
+            case 55:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 56:
+                line.currentValue = 1E3 - optionListAccount[218];
+                break;
+            case 57:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 58:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 59:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 60:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 61:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 62:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 63:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 64:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 65:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 66:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 67:
+                line.currentValue = Math.pow(2, optionListAccount[219]);
+                break;
+            case 68:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 69:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 70:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 71:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 72:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 73:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 74:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 75:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 76:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 77:
+                // TODO
+                line.currentValue = 0;
+                break;
+            case 78:
+                line.currentValue = optionListAccount[221];
+                break;
+            case 79:
+                line.currentValue = optionListAccount[222];
+                break;
+            case 80:
+                // TODO
                 line.currentValue = 0;
                 break;
             default:
