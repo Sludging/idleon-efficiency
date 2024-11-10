@@ -79,8 +79,6 @@ export class Tome extends Domain {
     parse(data: Map<string, any>): void {
         const tome = data.get(this.dataKey) as Tome;
 
-        console.log(data);
-
         var index: number = 0;
         
         TomeLinesInfo.forEach(lineInfo => {
