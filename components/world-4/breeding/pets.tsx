@@ -146,7 +146,7 @@ function AllPetDisplay() {
         worldsToDisplay.map(world => {
             return breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
         })
-     ), [breeding]);
+     ), [theData, breeding]);
 
     return (
         petsOfWorlds.map((pets, world) => {
