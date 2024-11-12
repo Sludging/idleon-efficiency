@@ -131,14 +131,6 @@ function AllPetDisplay() {
     // Get breeding data, if it's not available yet just show placeholder loading.
     const breeding = theData.get("breeding") as BreedingDomain;
 
-    if (!breeding) {
-        return (
-            <Box>
-                Still loading...
-            </Box>
-        )
-    }
-
     // Will need to update this once new pets from world 5 are implemented into the game
     const worldsToDisplay: number[] = [0,1,2,3];
     // Get all the pets for each world, and sort them in the unlock order
@@ -146,7 +138,15 @@ function AllPetDisplay() {
         worldsToDisplay.map(world => {
             return breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
         })
-     ), [theData, breeding]);
+    ), [theData, breeding]);
+
+    if (!breeding) {
+        return (
+            <Box>
+                Still loading...
+            </Box>
+        )
+    }
 
     return (
         petsOfWorlds.map((pets, world) => {
