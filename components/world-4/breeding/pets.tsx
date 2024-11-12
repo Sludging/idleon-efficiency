@@ -140,12 +140,16 @@ function AllPetDisplay() {
     }
 
     // Will need to update this once new pets from world 5 are implemented into the game
-    const worldsToDisplay = [0,1,2,3];
+    const worldsToDisplay: number[] = [0,1,2,3];
+    // Get all the pets for each world, and sort them in the unlock order
+    const petsOfWorlds: Pet[][] = useMemo(() => (
+        worldsToDisplay.map(world => {
+            return breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
+        })
+     ), [breeding]);
 
     return (
-        worldsToDisplay.map(world => {
-            // Get all the pets for this world, and sort them in the unlock order
-            const petsOfWorld = breeding.basePets.filter(pet => pet.data.world == world).slice().sort((pet1, pet2) => pet1.data.unlockOrder > pet2.data.unlockOrder ? 1 : -1);
+        petsOfWorlds.map((pets, world) => {
             return (                
                 <ShadowBox key={world} style={{ opacity: breeding.speciesUnlocks[world] > 0 ? 1 : 0.5 }} margin={{ bottom: 'small' }} background="dark-1" gap="xsmall" pad="small" align="left">
                     <Box gap="small" direction="row" pad="xsmall" align='center'>
@@ -154,7 +158,7 @@ function AllPetDisplay() {
                     </Box>
                     <Box gap="small" direction="row" pad="xsmall" wrap>
                         {
-                            petsOfWorld.map((pet, index) => {
+                            pets.map((pet, index) => {
                                 const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
                                 const nextLevelcost = pet.getGeneNextLevelCost();
                                 return (
