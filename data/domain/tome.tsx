@@ -1014,12 +1014,12 @@ const TomeLinesInfo = [
         "filler"
     ],
     [
-        "Best_Endless_Summoning_Round_膛",
-        "100",
+        "Total_Career_Summoning_Wins_膛",
+        "160",
         "0",
-        "200",
+        "500",
         "filler",
-        "No,_this_isn't_out_yet._It's_on_the_Weekly_Update_Roadmap_though!"
+        "Rack_up_those_wins!_Endless_Summoning_wins_count_for_this_too,_of_course!"
     ],
     [
         "Ninja_Floors_Unlocked",
