@@ -9,6 +9,10 @@ import { Player } from './player';
 import { TaskBoard } from './tasks';
 import { Achievement } from './achievements';
 import { initTalentTreeRepo } from './data/TalentTreeRepo';
+import { Slab } from './slab';
+import { Constellation } from './constellations';
+import { Alchemy } from './alchemy';
+import { Sigils } from './sigils';
 
 export class TomeLine {
     // Needs this to be updated
@@ -57,7 +61,7 @@ export class Tome extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "OptLacc", perPlayer: false, default: []}
+            { key: "OptLacc", perPlayer: false, default: [] }
         ]
     }
 
@@ -109,6 +113,23 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const taskBoard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
     const optionListAccount = data.get("OptLacc") as number[];
+    const constellations = data.get("constellations") as Constellation[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const sigils = data.get("sigils") as Sigils;
+
+    // Calculate how many trophy and obols have been found
+    const slab = data.get("slab") as Slab;
+    var trophyCount: number = 0;
+    var obolCount: number = 0;
+    slab.obtainableItems.forEach((item) => {
+        if (item.obtained) {
+            if (item.internalName.indexOf("Trophy") == 0) {
+                trophyCount++;
+            } else if (item.internalName.indexOf("Obol") == 0) {
+                obolCount++;
+            }
+        }
+    });
 
     tome.lines.forEach(line => {
         switch(line.index) {
@@ -173,12 +194,16 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.currentValue = optionListAccount[208];
                 break;
             case 10:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = trophyCount;
                 break;
             case 11:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = players.reduce((sum, player) => {
+                    var skillTotalLv: number = 0;
+                    player.skills.forEach((skill) => {
+                        skillTotalLv += skill.level;
+                    });
+                    return sum+skillTotalLv;
+                },0);
                 break;
             case 12:
                 line.currentValue = optionListAccount[201];
@@ -191,6 +216,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 15:
                 // TODO
+                // Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 1 + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[0]) + k._customBlock_GetTalentNumber(1, 8) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[5]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h["64"]) + (k._customBlock_GetTalentNumber(1, 622) + (k._customBlock_StampBonusOfTypeX("TalentS") + (k._customBlock_GetTalentNumber(1, 17) + (Math.floor(q._customBlock_GuildBonuses(11)) + (q._customBlock_FlurboShop(1) + (Math.min(5 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "w4b2"), 50) + (Math.min(15 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss2C"), 100) + Math.min(4 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "fallEvent1"), 100)) + (q._customBlock_Labb("SigilBonus", "Blank", 9, 0) + (10 * q._customBlock_AchieveStatus(212) + (20 * q._customBlock_AchieveStatus(289) + (20 * q._customBlock_AchieveStatus(305) + (q._customBlock_Breeding("ShinyBonusS", "Nah", 14, -1) + (r._customBlock_GetBribeBonus("32") + 100 * n._customBlock_RandomEvent("FractalIslandBonus", 5, 999))))))))))))))) - c.asNumber(d[5]))
                 line.currentValue = 0;
                 break;
             case 16:
@@ -198,33 +224,33 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 17:
                 // TODO
+                // m.__cast(a.engine.getGameAttribute("PixelHelperActor")[9].behaviors.getBehavior("ActorEvents_498"), da)._GenINFO[12];
                 line.currentValue = 0;
                 break;
             case 18:
                 line.currentValue = optionListAccount[200];
                 break;
             case 19:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = constellations.reduce((sum, constellation) => sum+(constellation.isComplete ? 1 : 0),0);
                 break;
             case 20:
                 line.currentValue = optionListAccount[203];
                 break;
             case 21:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = obolCount;
                 break;
             case 22:
-                // TODO
-                line.currentValue = 0;
+                var totalBubblesLevel = 0;
+                alchemy.cauldrons.forEach(cauldron => {
+                    totalBubblesLevel += cauldron.bubbles.reduce((sum, bubble) => sum+bubble.level,0);
+                });
+                line.currentValue = totalBubblesLevel;
                 break;
             case 23:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = alchemy.vials.reduce((sum, vial) => sum+vial.level,0);
                 break;
             case 24:
-                // TODO
-                line.currentValue = 0;
+                line.currentValue = sigils.sigils.reduce((sum, sigil) => sum+(sigil.boostLevel+1),0);
                 break;
             case 25:
                 line.currentValue = optionListAccount[199];
