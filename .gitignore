@@ -75,3 +75,6 @@ base.apk
 ## Temporary 
 codex.tsx
 certificates
+
+## Yarn
+install-state.gz

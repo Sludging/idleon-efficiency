@@ -53,7 +53,7 @@ export const initPetUpgradeRepo = () => {
                 "filler": "Filler",
                 "material": "PetDeadCell",
                 "cost": 6,
-                "baseMatCost": 25,
+                "baseMatCost": 5,
                 "costMatScale": 1.25,
                 "baseCost": 10,
                 "costScale": 7,
@@ -175,18 +175,18 @@ export const initPetUpgradeRepo = () => {
                 "bonusQty": 8
             }),
         new PetUpgradeBase(12, <PetUpgradeModel>{
-                "upgradeName": "Filler",
+                "upgradeName": "Grand Martial of Shinytown",
                 "filler": "Filler",
                 "material": "PetDeadCell",
-                "cost": 50,
-                "baseMatCost": 70,
-                "costMatScale": 1.6,
-                "baseCost": 10,
-                "costScale": 50,
-                "maxLevel": 10,
-                "description": "Filler",
-                "boostEffect": "}% Cost Reduction",
-                "bonusQty": 0
+                "cost": 62,
+                "baseMatCost": 3,
+                "costMatScale": 1.01,
+                "baseCost": 1000,
+                "costScale": 2.85,
+                "maxLevel": 300,
+                "description": "Boosts the rate at which shiny pets level up from being in the fenceyard. This will help you rack up those 100+ Day requirements!",
+                "boostEffect": "+}% Shiny Pet LV Up Rate",
+                "bonusQty": 5
             })    
 ]
 }

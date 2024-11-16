@@ -3,8 +3,8 @@ import { Domain, RawData } from "./base/domain";
 import { GemStore } from "./gemPurchases";
 import { Item } from "./items";
 
-const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g; };
-const getOilRegex = () => { return /Increases (?<effect>.*) by (?<amount>\d+)% for (.*) it's in. (?<chance>\d+)% chance to be consumed when a bar is forged./g; };
+const getDescRegex = () => { return /Smelt down (\d+) Ores into 1 Bar at the Forge. Smelting will take (\d+) Seconds per Bar using Forge Slot 1./g; };
+const getOilRegex = () => { return /Increases (.*) by (\d+)% for (.*) it's in. (\d+)% chance to be consumed when a bar is forged./g; };
 
 export class ForgeSlot {
     brimestone: boolean = false
@@ -13,8 +13,8 @@ export class ForgeSlot {
 
     getOreInterval = () => {
         const match = getDescRegex().exec(this.ores.description);
-        if (match && match.groups) {
-            return parseInt(match.groups["cooldown"]);
+        if (match && match.length > 2) {
+            return parseInt(match[2]);
         }
         return 0;
     }
@@ -25,17 +25,17 @@ export class ForgeSlot {
 
     getOrePerInterval = () => {
         const match = getDescRegex().exec(this.ores.description);
-        if (match && match.groups) {
-            return parseInt(match.groups["ores"]);
+        if (match && match.length > 2) {
+            return parseInt(match[1]);
         }
         return 0;
     }
 
     getOilSpeed = () => {
         const match = getOilRegex().exec(this.oils.description);
-        if (match && match.groups) {
-            if (match.groups["effect"] === "Forging Speed") {
-                return parseInt(match.groups["amount"])
+        if (match && match.length > 4) {
+            if (match[1] === "Forging Speed") {
+                return parseInt(match[2])
             }
         }
         return 1;

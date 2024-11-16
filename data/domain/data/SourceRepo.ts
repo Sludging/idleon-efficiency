@@ -3554,6 +3554,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
                     <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
                     <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
+                    <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
+                    <SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"},
+                    <SourceModel>{"wikiName": "[[Guardian Golem]]", "txtName": "Guardian Golem"},
+                    <SourceModel>{"wikiName": "[[Curious Crystal Slime]]", "txtName": "Curious Crystal Slime"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
                         "txtName": "Colosseum: Dewdrop Bronze Chest"
@@ -3675,6 +3679,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Dreadlo]]", "txtName": "Dreadlo"},
                     <SourceModel>{"wikiName": "[[Marble]]", "txtName": "Marble"},
                     <SourceModel>{"wikiName": "[[Godshard]]", "txtName": "Godshard"},
+                    <SourceModel>{"wikiName": "[[Motherlode]]", "txtName": "Motherlode"},
+                    <SourceModel>{"wikiName": "[[Fractalfly]]", "txtName": "Fractalfly"},
+                    <SourceModel>{"wikiName": "[[Evertree]]", "txtName": "Evertree"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"},
                     <SourceModel>{"wikiName": "[[Oak Tree]]", "txtName": "Oak Tree"},
                     <SourceModel>{"wikiName": "[[Birch Tree]]", "txtName": "Birch Tree"},
                     <SourceModel>{"wikiName": "[[Jungle Tree]]", "txtName": "Jungle Tree"},
@@ -3708,6 +3716,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Jumbo Shrimp]]", "txtName": "Jumbo Shrimp"},
                     <SourceModel>{"wikiName": "[[Caulifish]]", "txtName": "Caulifish"},
                     <SourceModel>{"wikiName": "[[Equinox Fish]]", "txtName": "Equinox Fish"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"},
                     <SourceModel>{"wikiName": "[[Fly Nest]]", "txtName": "Fly Nest"},
                     <SourceModel>{"wikiName": "[[Butterfly Bar]]", "txtName": "Butterfly Bar"},
                     <SourceModel>{"wikiName": "[[Sentient Bowl]]", "txtName": "Sentient Bowl"},
@@ -3721,6 +3730,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Equinox Nest]]", "txtName": "Equinox Nest"},
                     <SourceModel>{"wikiName": "[[Ladybug Nest]]", "txtName": "Ladybug Nest"},
                     <SourceModel>{"wikiName": "[[Firefly Nest]]", "txtName": "Firefly Nest"},
+                    <SourceModel>{"wikiName": "[[Fractal Nest]]", "txtName": "Fractal Nest"},
                     <SourceModel>{"wikiName": "[[Flies]]", "txtName": "Flies"},
                     <SourceModel>{"wikiName": "[[Butterflies]]", "txtName": "Butterflies"},
                     <SourceModel>{"wikiName": "[[Sentient Cereal]]", "txtName": "Sentient Cereal"},
@@ -3978,7 +3988,11 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Starfire]]", "txtName": "Starfire"},
                     <SourceModel>{"wikiName": "[[Dreadlo]]", "txtName": "Dreadlo"},
                     <SourceModel>{"wikiName": "[[Marble]]", "txtName": "Marble"},
-                    <SourceModel>{"wikiName": "[[Godshard]]", "txtName": "Godshard"}
+                    <SourceModel>{"wikiName": "[[Godshard]]", "txtName": "Godshard"},
+                    <SourceModel>{"wikiName": "[[Motherlode]]", "txtName": "Motherlode"},
+                    <SourceModel>{"wikiName": "[[Fractalfly]]", "txtName": "Fractalfly"},
+                    <SourceModel>{"wikiName": "[[Evertree]]", "txtName": "Evertree"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4082,7 +4096,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Shellfish]]", "txtName": "Shellfish"},
                     <SourceModel>{"wikiName": "[[Jumbo Shrimp]]", "txtName": "Jumbo Shrimp"},
                     <SourceModel>{"wikiName": "[[Caulifish]]", "txtName": "Caulifish"},
-                    <SourceModel>{"wikiName": "[[Equinox Fish]]", "txtName": "Equinox Fish"}
+                    <SourceModel>{"wikiName": "[[Equinox Fish]]", "txtName": "Equinox Fish"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4518,6 +4533,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Equinox Nest]]", "txtName": "Equinox Nest"},
                     <SourceModel>{"wikiName": "[[Ladybug Nest]]", "txtName": "Ladybug Nest"},
                     <SourceModel>{"wikiName": "[[Firefly Nest]]", "txtName": "Firefly Nest"},
+                    <SourceModel>{"wikiName": "[[Fractal Nest]]", "txtName": "Fractal Nest"},
                     <SourceModel>{
                         "wikiName": "[[Omar Da Ogar#Helping Omar|Helping Omar]]",
                         "txtName": "Omar Da Ogar: Helping Omar"
@@ -7138,7 +7154,12 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("SpiD3", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"},
+                    <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
+                    <SourceModel>{"wikiName": "[[Guardian Golem]]", "txtName": "Guardian Golem"},
+                    <SourceModel>{"wikiName": "[[Curious Crystal Slime]]", "txtName": "Curious Crystal Slime"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -7149,6 +7170,16 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Line14", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsH15", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentStatues29", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -8838,10 +8869,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats38", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -8986,7 +9014,13 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsF39", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Godshard]]", "txtName": "Godshard"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Godshard]]", "txtName": "Godshard"},
+                    <SourceModel>{"wikiName": "[[Motherlode]]", "txtName": "Motherlode"},
+                    <SourceModel>{"wikiName": "[[Fractalfly]]", "txtName": "Fractalfly"},
+                    <SourceModel>{"wikiName": "[[Evertree]]", "txtName": "Evertree"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11363,7 +11397,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -12934,7 +12969,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Royal Bidding|Royal Bidding]]",
                         "txtName": "Royal Worm: Royal Bidding"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13342,8 +13378,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13978,37 +14013,12 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats46", <SourcesModel>{
+        new SourcesBase("Quest90", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats47", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats48", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Ht", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats49", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats50", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats35", <SourcesModel>{
+        new SourcesBase("Blank", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14044,11 +14054,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentRingsChat9", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Blank", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14149,17 +14154,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("GemP36", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats82", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest77", <SourcesModel>{
+        new SourcesBase("GemP25", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14169,7 +14164,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("GemP25", <SourcesModel>{
+        new SourcesBase("EquipmentPendant31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14194,6 +14189,11 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                     <SourceModel>{"wikiName": "[[Guild Giftbox]]", "txtName": "Guild Giftbox"}
                 ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Ht", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),

@@ -150,6 +150,42 @@ export const initFishPoolRepo = () => {
                 "cardDrop": "CardsC8",
                 "cardChance": 1e-08,
                 "pool": PoolTypeEnum.FishEquinox
+            }),
+        new FishPoolBase(16, <FishPoolModel>{
+                "fish": "Fish14",
+                "expGiven": 500,
+                "damageDelt": 1,
+                "efficiency": 0,
+                "cardDrop": "CardsC8",
+                "cardChance": 1e-08,
+                "pool": PoolTypeEnum.MotherlodeFISH
+            }),
+        new FishPoolBase(17, <FishPoolModel>{
+                "fish": "Fish14",
+                "expGiven": 501,
+                "damageDelt": 1,
+                "efficiency": 10000,
+                "cardDrop": "CardsC8",
+                "cardChance": 1e-08,
+                "pool": PoolTypeEnum.MotherlodeFISH
+            }),
+        new FishPoolBase(18, <FishPoolModel>{
+                "fish": "Fish14",
+                "expGiven": 502,
+                "damageDelt": 1,
+                "efficiency": 11000,
+                "cardDrop": "CardsC8",
+                "cardChance": 1e-08,
+                "pool": PoolTypeEnum.MotherlodeFISH
+            }),
+        new FishPoolBase(19, <FishPoolModel>{
+                "fish": "Fish14",
+                "expGiven": 503,
+                "damageDelt": 1,
+                "efficiency": 12000,
+                "cardDrop": "CardsC8",
+                "cardChance": 1e-08,
+                "pool": PoolTypeEnum.MotherlodeFISH
             })    
 ]
 }

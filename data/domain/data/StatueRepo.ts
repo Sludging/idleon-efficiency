@@ -30,9 +30,10 @@ export const initStatueRepo = () => {
         new StatueDataBase(21, <StatueDataModel>{"name": "Egg", "effect": "%@Breeding Exp", "dk": 25, "bonus": 0.4}),
         new StatueDataBase(22, <StatueDataModel>{"name": "Battleaxe", "effect": "%@Damage", "dk": 300, "bonus": 0.2}),
         new StatueDataBase(23, <StatueDataModel>{"name": "Spiral", "effect": "%@Divinity Exp", "dk": 70, "bonus": 1}),
-        new StatueDataBase(24, <StatueDataModel>{"name": "Boat", "effect": "%@Sailing Spd", "dk": 160, "bonus": 0.5}),
+        new StatueDataBase(24, <StatueDataModel>{"name": "Boat", "effect": "%@Sailing Spd", "dk": 210, "bonus": 0.5}),
         new StatueDataBase(25, <StatueDataModel>{"name": "Compost", "effect": "%@Farming Exp", "dk": 75, "bonus": 0.4}),
         new StatueDataBase(26, <StatueDataModel>{"name": "Stealth", "effect": "%@Stealth", "dk": 185, "bonus": 0.3}),
-        new StatueDataBase(27, <StatueDataModel>{"name": "Essence", "effect": "%@White Ess", "dk": 160, "bonus": 0.6})    
+        new StatueDataBase(27, <StatueDataModel>{"name": "Essence", "effect": "%@White Ess", "dk": 160, "bonus": 0.6}),
+        new StatueDataBase(28, <StatueDataModel>{"name": "Dragon", "effect": "%@Statues Bonus", "dk": 270, "bonus": 0.2})    
 ]
 }

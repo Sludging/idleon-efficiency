@@ -1528,6 +1528,31 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.0004, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("caveA", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("caveB", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsH15", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("caveC", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("caveD", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("ChestA1", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 100, "chance": 1, "questLink": "N/A"},
@@ -2080,7 +2105,7 @@ export const initEnemyTableRepo = () => {
         new EnemyTableBase("Marble", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                    <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.014, "questLink": "N/A"}
                 ]
             }),
@@ -2089,6 +2114,34 @@ export const initEnemyTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 2e-06, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.015, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("Motherlode", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("Bug14", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("MotherlodeTREE", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("MotherlodeFISH", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("OakTree", <EnemyTableModel>{
@@ -2317,6 +2370,12 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("Fish14", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("BugNest1", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
@@ -2390,6 +2449,12 @@ export const initEnemyTableRepo = () => {
                 ]
             }),
         new EnemyTableBase("BugNest13", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("BugNest14", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}

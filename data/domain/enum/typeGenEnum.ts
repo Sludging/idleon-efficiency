@@ -50,5 +50,6 @@ export enum TypeGenEnum {
     aKeychain = "aKeychain",
     aCape = "aCape",
     aDNAgun = "aDNAgun",
-    aNametag = "aNametag"
+    aNametag = "aNametag",
+    aGown = "aGown"
 }
