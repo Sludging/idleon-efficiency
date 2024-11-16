@@ -10,8 +10,8 @@ import TipDisplay from "../../base/TipDisplay";
 export const SneakingInventory = ({ inventory }: { inventory: (SneakingItem | undefined)[] }) => {
     return (
         <Box>
-            <Box direction="row" wrap margin={{ top: 'large' }}>
-                <Grid columns={{ size: 'xsmall', count: 'fill' }} gap="medium" pad="xsmall" fill>
+            <Box direction="row" wrap margin={{ top: 'large', bottom: 'large' }}>
+                <Grid columns={{ size: 'auto', count: 13 }} gap="medium" pad="xsmall" fill>
                     {
                         inventory
                             .map((item, index) => {

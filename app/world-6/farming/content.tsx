@@ -20,6 +20,7 @@ import TipDisplay from '../../../components/base/TipDisplay';
 import { CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { LandRankDisplay } from '../../../components/world-6/farming/landRank';
 
 function Farming() {
     const [activeTab, setActiveTab] = useState<string>("Plots");
@@ -75,6 +76,11 @@ function Farming() {
 
         return false;
     }, [theData, farming])
+
+    let tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
+    if (farming.canLevelLandRank) {
+        tabsToShow.push("Land Rank");
+    }
 
     if (!farming) {
         return <>Loading...</>
@@ -235,7 +241,7 @@ function Farming() {
                 }
                 </Box>
                 <Box align="center" direction="row" justify="center" gap="small">
-                    {["Plots", "Market Upgrades", "Crop Depot"].map((tabName, index) => (
+                    {tabsToShow.map((tabName, index) => (
                         <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
                     ))
                     }
@@ -243,7 +249,8 @@ function Farming() {
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
                     {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}
-                    {activeTab == "Crop Depot" && <CropDepotDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEvoEquipped} />}
+                    {activeTab == "Crop Depot" && <CropDepotDisplay/>}
+                    {activeTab == "Land Rank" && <LandRankDisplay/>}
                 </Box>
             </Box>
         )
