@@ -72,7 +72,12 @@ export const initDreamUpgradeRepo = () => {
                 "x1": 5,
                 "x2": 1
             }),
-        new DreamUpgradeBase(11, <DreamUpgradeModel>{"name": "Hmm...", "upgrade": "Huh...", "x1": 2, "x2": -1}),
+        new DreamUpgradeBase(11, <DreamUpgradeModel>{
+                "name": "Voter Rights",
+                "upgrade": "1% higher Ballot Bonus from the voter slime in World 2 town. This boosts the bonus that players vote for each week!",
+                "x1": 15,
+                "x2": 1
+            }),
         new DreamUpgradeBase(12, <DreamUpgradeModel>{"name": "Hmm...", "upgrade": "Huh...", "x1": 2, "x2": -1}),
         new DreamUpgradeBase(13, <DreamUpgradeModel>{"name": "Hmm...", "upgrade": "Huh...", "x1": 2, "x2": -1})    
 ]

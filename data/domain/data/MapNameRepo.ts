@@ -222,7 +222,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(213, <MapNameModel>{"intName": "wLavaC2", "name": "The Worm Nest", "id": 213}),
         new MapNameBase(214, <MapNameModel>{"intName": "wLavaCBOSS", "name": "KattleKruk's Volcano", "id": 214}),
         new MapNameBase(215, <MapNameModel>{"intName": "ColosseumE", "name": "Molten Colosseum", "id": 215}),
-        new MapNameBase(216, <MapNameModel>{"intName": "Z", "name": "Z", "id": 216}),
+        new MapNameBase(216, <MapNameModel>{"intName": "wLavaAhole", "name": "The Hole", "id": 216}),
         new MapNameBase(217, <MapNameModel>{"intName": "Z", "name": "Z", "id": 217}),
         new MapNameBase(218, <MapNameModel>{"intName": "Z", "name": "Z", "id": 218}),
         new MapNameBase(219, <MapNameModel>{"intName": "Z", "name": "Z", "id": 219}),

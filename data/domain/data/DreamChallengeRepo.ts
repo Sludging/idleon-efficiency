@@ -191,6 +191,36 @@ export const initDreamChallengeRepo = () => {
                 "req": 100,
                 "reward": "+4 Max LV for 'Equinox Symbols' Equinox Upgrade",
                 "filler": "Filler"
+            }),
+        new DreamChallengeBase(31, <DreamChallengeModel>{
+                "challenge": "Acquire all 10 Megafeathers from Orion the Great Owl, and all 12 Megafish from Poppy the Kangaroo Mouse",
+                "req": 22,
+                "reward": "Unlock next Equinox upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(32, <DreamChallengeModel>{
+                "challenge": "Unlock 75 or more Portals on a single Voidwalker Speedrun",
+                "req": 75,
+                "reward": "+6 Max LV for 'Slow Roast Wiz' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(33, <DreamChallengeModel>{
+                "challenge": "Reach a total Cooking Meal Upgrade Lv of 4242 across all meals",
+                "req": 4242,
+                "reward": "'Food Lust' Equinox Upg now reduces cost by -42% per stack",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(34, <DreamChallengeModel>{
+                "challenge": "Find every type of hat in Sneaking, including the Funky Hat, which is a SUPER rare drop from the lobby floor...",
+                "req": 15,
+                "reward": "+10 Max LV for 'Matching Scims' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(35, <DreamChallengeModel>{
+                "challenge": "Get at least 100 Killroy kills on all monsters in World 1, 2, 3, 4, 5 and 6, as shown in Killroy Prime in Rift",
+                "req": 80,
+                "reward": "+15 Max LV for 'Voter Rights' Equinox Upgrade",
+                "filler": "Filler"
             })    
 ]
 }

@@ -2029,7 +2029,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "w5c2",
+                    "prev": "caveB",
                     "next": "Blank",
                     "hasCrystal": false,
                     "crystalName": "Crystal4",
@@ -5242,7 +5242,7 @@ export const initEnemyRepo = () => {
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5c1",
-                    "next": "Crystal4",
+                    "next": "caveB",
                     "hasCrystal": true,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -5896,6 +5896,141 @@ export const initEnemyRepo = () => {
                     "crystalName": "Crystal5",
                     "hasCard": true
                 },
+                "bossData": undefined
+            }),
+        new EnemyBase("caveA", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Demon Hound",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 52,
+                    "HeightOfMonster": 75,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 45,
+                    "DeathFrame": 16,
+                    "MonsterHPTotal": 25000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 10000,
+                    "ExpType": 0,
+                    "Defence": 10,
+                    "MoveSPEED": 6,
+                    "Damages": [100000, 1],
+                    "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("caveB", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Gloomie Mushroom",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 90,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 107,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 50,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 2500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2800000,
+                    "ExpType": 0,
+                    "Defence": 10,
+                    "MoveSPEED": 3,
+                    "Damages": [10000, 1],
+                    "DefFor0": 10638.1
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsH15", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "w5c2",
+                    "next": "Crystal4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("caveC", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Guardian Golem",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 95,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 1e+13,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 10000,
+                    "ExpType": 0,
+                    "Defence": 10,
+                    "MoveSPEED": 2,
+                    "Damages": [100000, 1],
+                    "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("caveD", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Curious Crystal Slime",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 10000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 10000,
+                    "ExpType": 0,
+                    "Defence": 10,
+                    "MoveSPEED": 3,
+                    "Damages": [100000, 1],
+                    "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
                 "bossData": undefined
             }),
         new EnemyBase("mushR", <EnemyModel>{
@@ -8870,8 +9005,41 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF29", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 0.014, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Motherlode", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Motherlode",
+                    "AFKtype": AFKTypeEnum.Mining,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 194,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 600,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 150,
+                    "ExpType": 1,
+                    "Defence": 30000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -9406,6 +9574,39 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("MotherlodeTREE", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Evertree",
+                    "AFKtype": AFKTypeEnum.Choppin,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 0,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 6,
+                    "RespawnTime": 0,
+                    "DeathFrame": 16,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.treeType,
+                    "SpecialType": "",
+                    "ExpGiven": 32000,
+                    "ExpType": 3,
+                    "Defence": 30000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("FishSmall", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Small Fish",
@@ -9538,6 +9739,39 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("MotherlodeFISH", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Trench Fish",
+                    "AFKtype": AFKTypeEnum.Fishing,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 2,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.fishType,
+                    "SpecialType": "",
+                    "ExpGiven": 1750,
+                    "ExpType": 4,
+                    "Defence": 30000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -9960,6 +10194,38 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("Fish14", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Trench Fish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 48,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 11,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.fishType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.012, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("BugNest1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Fly Nest",
@@ -10347,6 +10613,38 @@ export const initEnemyRepo = () => {
         new EnemyBase("BugNest13", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Firefly Nest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 30,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 207,
+                    "RespawnTime": 8640000,
+                    "DeathFrame": 11,
+                    "MonsterHPTotal": 999999999,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2,
+                    "ExpType": 6,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Grasslands2", "quantity": 2, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("BugNest14", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Fractal Nest",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 32,
@@ -10805,6 +11103,39 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF38", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bug14", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Fractalfly",
+                    "AFKtype": AFKTypeEnum.Catching,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 32,
+                    "MonsterOffsetY": 50,
+                    "HeightOfMonster": 150,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 1,
+                    "RespawnTime": 0,
+                    "DeathFrame": 10,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.bugType,
+                    "SpecialType": "",
+                    "ExpGiven": 150,
+                    "ExpType": 6,
+                    "Defence": 30000,
+                    "MoveSPEED": 0,
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF39", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -11954,6 +12285,87 @@ export const initEnemyRepo = () => {
                     "map": <MapNameModel>{"intName": "GrasslandaTown", "name": "Blunder Hills", "id": 0},
                     "portalRequirements": [1, 0]
                 },
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Bravery_Monument", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bravery",
+                    "AFKtype": AFKTypeEnum.PayingRespect,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 180,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 1,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 42,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 69,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 0],
+                    "DefFor0": 0.22
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Justice_Monument", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Justice",
+                    "AFKtype": AFKTypeEnum.PayingRespect,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 180,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 1,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 42,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 69,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 0],
+                    "DefFor0": 0.22
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Wisdom_Monument", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Wisdom",
+                    "AFKtype": AFKTypeEnum.PayingRespect,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 180,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 1,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 42,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 69,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 0],
+                    "DefFor0": 0.22
+                },
+                "drops": undefined,
+                "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined
             })    
