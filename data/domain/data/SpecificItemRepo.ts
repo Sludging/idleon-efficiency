@@ -123,6 +123,38 @@ export const initSpecificItemRepo = () => {
                 "Type": "Ore",
                 "description": "Smelt down 15000 Ores into 1 Bar at the Forge. Smelting will take 50000 Seconds per Bar using Forge Slot 1. "
             }),
+        new BaseItemBase("Motherlode", <DescItemModel>{
+                "internalName": "Motherlode",
+                "displayName": "Motherlode Ore",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Bug14", <DescItemModel>{
+                "internalName": "Bug14",
+                "displayName": "Fractal Fly",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("MotherlodeTREE", <DescItemModel>{
+                "internalName": "MotherlodeTREE",
+                "displayName": "Everlog",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldnt be seeing this... "
+            }),
+        new BaseItemBase("Fish14", <DescItemModel>{
+                "internalName": "Fish14",
+                "displayName": "Trench fish",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "You shouldnt be seeing this... "
+            }),
         new BaseItemBase("CopperBar", <BaseItemModel>{
                 "internalName": "CopperBar",
                 "displayName": "Copper Bar",
@@ -22310,6 +22342,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Box",
                 "description": "Hold down to summon a bunch of Summer Monsters, and get a random Pearl! "
             }),
+        new BaseItemBase("Quest88", <DescItemModel>{
+                "internalName": "Quest88",
+                "displayName": "Golden Oyster",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Hold down to get a random special reward! Event Points do not expire, you keep all unspent Event Points for next event! "
+            }),
         new BaseItemBase("Quest51", <DescItemModel>{
                 "internalName": "Quest51",
                 "displayName": "Skull Coin",
@@ -22646,6 +22686,22 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down on this item while standing in the secret location to teleport to The Oasis... "
             }),
+        new BaseItemBase("Quest89", <DescItemModel>{
+                "internalName": "Quest89",
+                "displayName": "Event Point",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down on this item to get 1 Event Point! Spend these at the Event NPC in town for permanent bonuses, and don't worry, unspent points are saved for next event! "
+            }),
+        new BaseItemBase("Quest90", <DescItemModel>{
+                "internalName": "Quest90",
+                "displayName": "Blinding Lantern",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down instantly gain 2 Hours of all Cavern progress and Villager exp gain! "
+            }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
@@ -22942,7 +22998,7 @@ export const initSpecificItemRepo = () => {
                 "Type": "Statue",
                 "description": "This statue does not actually function as a boat, and will sink immediately, as youd expect a large piece of stone would. ",
                 "bonus": "%Sailing Spd",
-                "statueData": <StatueDataModel>{"name": "Boat", "effect": "%@Sailing Spd", "dk": 160, "bonus": 0.5}
+                "statueData": <StatueDataModel>{"name": "Boat", "effect": "%@Sailing Spd", "dk": 210, "bonus": 0.5}
             }),
         new BaseItemBase("EquipmentStatues26", <StatueItemModel>{
                 "internalName": "EquipmentStatues26",
@@ -22973,6 +23029,16 @@ export const initSpecificItemRepo = () => {
                 "description": "This statue, despite being a grey brownish colour, actually helps generate white essence. It's weird and quirkly like that... ",
                 "bonus": "%White Ess",
                 "statueData": <StatueDataModel>{"name": "Essence", "effect": "%@White Ess", "dk": 160, "bonus": 0.6}
+            }),
+        new BaseItemBase("EquipmentStatues29", <StatueItemModel>{
+                "internalName": "EquipmentStatues29",
+                "displayName": "Dragon Warrior Statue",
+                "sellPrice": 10,
+                "typeGen": TypeGenEnum.dStatueStone,
+                "Type": "Statue",
+                "description": "It somehow boosts the bonuses given by all other statues!!! You don't understand what that means? It's ok, I didn't get it the first time either... ",
+                "bonus": "%Statues Bonus",
+                "statueData": <StatueDataModel>{"name": "Dragon", "effect": "%@Statues Bonus", "dk": 270, "bonus": 0.2}
             }),
         new BaseItemBase("PureWater", <DescItemModel>{
                 "internalName": "PureWater",
@@ -27255,6 +27321,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats110", <ArmourItemModel>{
+                "internalName": "EquipmentHats110",
+                "displayName": "Yellow Beanie",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("CardsA0", <CardItemModel>{
                 "internalName": "CardsA0",
                 "displayName": "Green Mushroom Card",
@@ -28987,7 +29074,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 3
                 },
-                "dropChance": 1e-08
+                "dropChance": 0
             }),
         new BaseItemBase("CardsF30", <CardItemModel>{
                 "internalName": "CardsF30",
@@ -29147,7 +29234,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 30,
                     "order": 4
                 },
-                "dropChance": 2e-06
+                "dropChance": 0
             }),
         new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",
@@ -29593,9 +29680,25 @@ export const initSpecificItemRepo = () => {
                     "perTier": 15,
                     "effect": "+{% Skill Efficncy (Passive)",
                     "bonus": 3,
-                    "order": 14
+                    "order": 15
                 },
                 "dropChance": 0.006
+            }),
+        new BaseItemBase("CardsH15", <CardItemModel>{
+                "internalName": "CardsH15",
+                "displayName": "Gloomie Mushroom Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "H15",
+                    "category": "Smolderin' Plateau",
+                    "perTier": 5000,
+                    "effect": "+{% Villager EXP (Passive)",
+                    "bonus": 4,
+                    "order": 14
+                },
+                "dropChance": 5e-05
             }),
         new BaseItemBase("CardsI1", <CardItemModel>{
                 "internalName": "CardsI1",

@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerMeditating } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -26,7 +26,7 @@ import { Dungeons } from './dungeons';
 import { Forge, updateForge } from './forge';
 import { Cooking, updateCooking } from './cooking';
 import { Lab, updateLab } from './lab';
-import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding } from './breeding';
+import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData } from './breeding';
 import { notUndefined } from '../utility';
 import { Sigils, updateSigils, updateSigilsChargeSpeed } from './sigils';
 import { AnvilWrapper, updateAnvil } from './anvil';
@@ -53,6 +53,8 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
 import { Tome, updateTomeScores } from './tome';
+import { KillRoy } from './world-2/killroy';
+import { updateVotesBonusFromEquinox, Votes } from './world-2/votes';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -128,6 +130,8 @@ const domainList: Domain[] = [
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
     new Tome("tome"),
+    new KillRoy("killroy"),
+    new Votes("votes"),
 ]
 
 export class IdleonData {
@@ -196,7 +200,6 @@ const postProcessingMap: Record<string, Function> = {
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
-    "updatePlayerMeditating": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerMeditating(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
@@ -239,6 +242,7 @@ const postProcessingMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
+    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonusFromEquinox(accountData),
 }
 
 // I really really hate this.
@@ -252,6 +256,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
+    "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
 }
 

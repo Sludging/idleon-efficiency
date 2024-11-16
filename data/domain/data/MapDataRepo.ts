@@ -1304,13 +1304,13 @@ export const initMapDataRepo = () => {
                 "portalRequirements": [0]
             }),
         new MapDataBase(216, <MapDataModel>{
-                "enemy": "w5b6",
+                "enemy": "Nothing",
                 "world": "Smolderin' Plateau",
-                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 216},
+                "map": <MapNameModel>{"intName": "wLavaAhole", "name": "The Hole", "id": 216},
                 "portalRequirements": [0]
             }),
         new MapDataBase(217, <MapDataModel>{
-                "enemy": "Z",
+                "enemy": "Nothing",
                 "world": "Smolderin' Plateau",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 217},
                 "portalRequirements": [0]

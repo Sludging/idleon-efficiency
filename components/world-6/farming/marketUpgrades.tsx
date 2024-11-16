@@ -34,7 +34,7 @@ export const MarketUpgradesDisplay = () => {
                             farming.marketUpgrades.slice(0, 8).map((upgrade, index) => {
                                 const nextLevelCost = upgrade.getNextLevelCost();
                                 const canAfford = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) > nextLevelCost.cropQuantity;
-                                const canAffordWithCollect = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) + (farming.cropsToCollect.find(collect => collect.crop.index == nextLevelCost.cropId)?.quantity ?? 0) > nextLevelCost.cropQuantity;
+                                const canAffordWithCollect = (farming.cropDepot.find(crop => crop.index == nextLevelCost.cropId)?.quantityOwned ?? 0) + (farming.cropsToCollect.find(collect => collect.crop.index == nextLevelCost.cropId)?.minQuantity ?? 0) > nextLevelCost.cropQuantity;
 
                                 // Cost for 5 more levels
                                 const futureLevelsCost = [upgrade.getNextLevelCost(upgrade.level + 1), upgrade.getNextLevelCost(upgrade.level + 2), upgrade.getNextLevelCost(upgrade.level + 3), upgrade.getNextLevelCost(upgrade.level + 4), upgrade.getNextLevelCost(upgrade.level + 5)];
@@ -43,7 +43,7 @@ export const MarketUpgradesDisplay = () => {
                                 futureLevelsCost.forEach((cost, index) => {
                                     if (cost.cropQuantity > 0) {
                                         let currencyLeft = (farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0);
-                                        let currencyLeftWithCollect = currencyLeft + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.quantity ?? 0);
+                                        let currencyLeftWithCollect = currencyLeft + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.minQuantity ?? 0);
                                         if (nextLevelCost.cropId == cost.cropId) {
                                             currencyLeft -= nextLevelCost.cropQuantity;
                                             currencyLeftWithCollect -= nextLevelCost.cropQuantity;
@@ -105,7 +105,7 @@ export const MarketUpgradesDisplay = () => {
                                                                                 {
                                                                                     costToMax.map((cost, index) => {
                                                                                         const quantityAvailable = (farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0);
-                                                                                        const quantityWithCollect = quantityAvailable + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.quantity ?? 0);
+                                                                                        const quantityWithCollect = quantityAvailable + (farming.cropsToCollect.find(collect => collect.crop.index == cost.cropId)?.minQuantity ?? 0);
                                                                                         return (
                                                                                             (cost.cropQuantity > 0) &&
                                                                                             <Box gap="xsmall" direction="row" align="center" key={index}>

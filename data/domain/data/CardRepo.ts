@@ -1142,13 +1142,21 @@ export const initCardRepo = () => {
                 "bonus": 1,
                 "order": 13
             }),
+        new CardDataBase("caveB", <CardDataModel>{
+                "cardID": "H15",
+                "category": "Smolderin' Plateau",
+                "perTier": 5000,
+                "effect": "+{% Villager EXP (Passive)",
+                "bonus": 4,
+                "order": 14
+            }),
         new CardDataBase("Crystal4", <CardDataModel>{
                 "cardID": "H14",
                 "category": "Smolderin' Plateau",
                 "perTier": 15,
                 "effect": "+{% Skill Efficncy (Passive)",
                 "bonus": 3,
-                "order": 14
+                "order": 15
             }),
         new CardDataBase("w6a1", <CardDataModel>{
                 "cardID": "I1",

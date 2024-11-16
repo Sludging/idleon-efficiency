@@ -11795,7 +11795,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 3,
-                        "Rewards": [<ComponentModel>{"item": "Quest49", "quantity": 1}, <ComponentModel>{"item": "Quest50", "quantity": 10}],
+                        "Rewards": [<ComponentModel>{"item": "Quest49", "quantity": 1}, <ComponentModel>{"item": "Quest50", "quantity": 1}],
                         "QuestName": "Coastiolyte1",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
@@ -11810,7 +11810,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 6,
-                        "Rewards": [<ComponentModel>{"item": "Quest49", "quantity": 1}, <ComponentModel>{"item": "Quest50", "quantity": 10}],
+                        "Rewards": [<ComponentModel>{"item": "Quest49", "quantity": 1}, <ComponentModel>{"item": "Quest50", "quantity": 1}],
                         "QuestName": "Coastiolyte2",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
@@ -11825,13 +11825,13 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Yoooo summer break bro! Whats up!!",
-                        "NextIndex": 1,
+                        "NextIndex": 7,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Two whole weeks of hangin' around and getting sick-as rewards! This is the LIFE!",
-                        "NextIndex": 2,
+                        "NextIndex": 7,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -11849,7 +11849,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Man leave some coolers for the rest of us haha! Thats was totally tops dude.",
-                        "NextIndex": 5,
+                        "NextIndex": 7,
                         "Name": ""
                     },
                     <DialogueLineModel>{

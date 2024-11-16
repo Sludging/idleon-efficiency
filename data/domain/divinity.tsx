@@ -7,7 +7,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
-import { Player } from "./player";
+import { Activity, Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Sneaking } from "./world-6/sneaking";
 
@@ -198,11 +198,14 @@ export const updateDivinity = (data: Map<string, any>) => {
             if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
                 god.linkedPlayers.push(players[player.playerIndex]);
             }
-        })
+        });
 
         if (player.esGod && !player.esGod.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
             player.esGod.linkedPlayers.push(players[player.playerIndex]);
-        }
+        };
+
+        // Update being active or not based on linked god(s) (could have changed since parse due to owning Doot or other bonuses like that) and ES secondary god
+        player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && (player.gods.some(god => god.index == 4) || player.esGod?.index == 4));
     })
 
     return divinity;
