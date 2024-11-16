@@ -3,8 +3,8 @@ import { Domain, RawData } from "./base/domain";
 import { GemStore } from "./gemPurchases";
 import { Item } from "./items";
 
-const getDescRegex = () => { return /Smelt down (?<ores>\d+) Ores into 1 Bar at the Forge. Smelting will take (?<cooldown>\d+) Seconds per Bar using Forge Slot 1./g; };
-const getOilRegex = () => { return /Increases (?<effect>.*) by (?<amount>\d+)% for (.*) it's in. (?<chance>\d+)% chance to be consumed when a bar is forged./g; };
+const getDescRegex = () => { return /Smelt down (\d+) Ores into 1 Bar at the Forge. Smelting will take (\d+) Seconds per Bar using Forge Slot 1./g; };
+const getOilRegex = () => { return /Increases (.*) by (\d+)% for (.*) it's in. (\d+)% chance to be consumed when a bar is forged./g; };
 
 export class ForgeSlot {
     brimestone: boolean = false
