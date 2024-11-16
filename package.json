@@ -20,7 +20,7 @@
     "firebaseui": "^6.1.0",
     "grommet": "^2.34.1",
     "grommet-icons": "^4.11.0",
-    "next": "14.1.1",
+    "next": "14.2.18",
     "next-build-id": "^3.0.0",
     "polished": "^4.2.2",
     "react": "^18.3.1",
