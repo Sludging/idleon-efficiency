@@ -13,8 +13,8 @@ export class ForgeSlot {
 
     getOreInterval = () => {
         const match = getDescRegex().exec(this.ores.description);
-        if (match && match.groups) {
-            return parseInt(match.groups["cooldown"]);
+        if (match && match.length > 2) {
+            return parseInt(match[2]);
         }
         return 0;
     }
@@ -25,17 +25,17 @@ export class ForgeSlot {
 
     getOrePerInterval = () => {
         const match = getDescRegex().exec(this.ores.description);
-        if (match && match.groups) {
-            return parseInt(match.groups["ores"]);
+        if (match && match.length > 2) {
+            return parseInt(match[1]);
         }
         return 0;
     }
 
     getOilSpeed = () => {
         const match = getOilRegex().exec(this.oils.description);
-        if (match && match.groups) {
-            if (match.groups["effect"] === "Forging Speed") {
-                return parseInt(match.groups["amount"])
+        if (match && match.length > 4) {
+            if (match[1] === "Forging Speed") {
+                return parseInt(match[2])
             }
         }
         return 1;
