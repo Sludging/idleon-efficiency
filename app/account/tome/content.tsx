@@ -15,8 +15,8 @@ const LineDisplay = ({ line }: { line: TomeLine }) => {
     return (
         <ShadowBox background='dark-1' style={{ opacity: line.lineScore > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
             <Box>
-                <Text>{line.currentValue} - {line.getLineName()} ({line.index})</Text>
-                <Text>Score : {line.getLineScoreDisplay()}/{line.data.totalVal}</Text>
+                <Text>{line.getCurrentValueDisplay()} - {line.getLineName()} ({line.index})</Text>
+                <Text>Score : {line.lineScore}/{line.data.totalVal}</Text>
                 {lineDescription != "" && <Text size='xsmall'>{lineDescription}</Text>}
             </Box>
         </ShadowBox>
