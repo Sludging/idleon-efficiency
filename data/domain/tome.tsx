@@ -18,6 +18,14 @@ import { POExtra } from './postoffice';
 import { initTomeRepo } from './data/TomeRepo';
 import { TomeModel } from './model/tomeModel';
 import { TomeScalingEnum } from './enum/tomeScalingEnum';
+import { Worship } from './worship';
+import { Equinox } from './equinox';
+import { Refinery } from './refinery';
+import { AtomCollider } from './atomCollider';
+import { Deathnote } from './deathnote';
+import { Construction } from './construction';
+import { Rift } from './rift';
+import { Breeding } from './breeding';
 
 export class TomeLine {
     // Needs this to be updated
@@ -160,6 +168,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const sigils = data.get("sigils") as Sigils;
     const dungeonsData = data.get("dungeons") as Dungeons;
     const postOfficeData = data.get("POExtra") as POExtra;
+    const worshipData = data.get("worship") as Worship;
+    const equinoxData = data.get("equinox") as Equinox;
+    const refineryData = data.get("refinery") as Refinery;
+    const atomCollider = data.get("collider") as AtomCollider;
+    const deathnote = data.get("deathnote") as Deathnote;
+    const construction = data.get("construction") as Construction;
+    const rift = data.get("rift") as Rift;
+    const storage = data.get("storage") as Storage;
+    const breeding = data.get("breeding") as Breeding;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -195,6 +212,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateCurrentValue(cards.reduce((sum, card) => sum+(card.count > 0 ? card.getStars()+1 : 0), 0));
                 break;
             case 3:
+                // TODO
                 // Sum of highest level of each talent (if multiple classes share a same talent, can be counted only once)
                 // Needs to be fixed, not getting the good value even if starting to get close
                 var talentsTotalMaxLevel: number = 0;
@@ -368,53 +386,56 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateCurrentValue(optionListAccount[209]);
                 break;
             case 37:
-                // TODO
                 // Sum of best waves for worship
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(worshipData.totemInfo.reduce((sum, totem) => sum+totem.maxWave, 0));
                 break;
             case 38:
-                // TODO
                 // Total digits of all Deathnote kills
-                line.updateCurrentValue(0);
+                var totalDigits = 0;
+                const killsMap = deathnote.getKillsMap();
+                [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
+                    totalDigits += [...deathnoteMobs.values()].reduce((sum, killCount) => sum+Math.ceil(lavaLog(killCount)), 0);
+                });
+                line.updateCurrentValue(totalDigits);
                 break;
             case 39:
-                // TODO
                 // Number of equinox cloud completed
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(equinoxData.challenges.filter(challenge => challenge.complete).length);
                 break;
             case 40:
-                // TODO
                 // Sum of Refinery rank
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(Object.entries(refineryData.salts).reduce((sum, [_, refinery]) => sum+refinery.rank, 0));
                 break;
             case 41:
-                // TODO
                 // Sum of Atom upgrade levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(atomCollider.atoms.reduce((sum, atom) => sum+atom.level, 0));
                 break;
             case 42:
-                // TODO
-                // Sum of construction levels
-                line.updateCurrentValue(0);
+                // Sum of construction buildings levels
+                line.updateCurrentValue(construction.buildings.reduce((sum, building) => sum+building.level, 0));
                 break;
             case 43:
-                // TODO
                 // Most Tottoise in storage
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(storage.amountInStorage("Critter11A"));
                 break;
             case 44:
                 // Most Greenstacks in storage
                 line.updateCurrentValue(optionListAccount[224]);
                 break;
             case 45:
-                // TODO
                 // Number of Rift levels completed
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(rift.level);
                 break;
             case 46:
-                // TODO
                 // Highest pet power
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(
+                    Math.max(
+                        0, // default value if there's no pets
+                        ...breeding.fenceyardPets.map(pet => pet.power), 
+                        ...breeding.storedPets.map(pet => pet.power), 
+                        ...breeding.territory.flatMap(territory => territory.pets.map(pet => pet.power))
+                    )
+                );
                 break;
             case 47:
                 // Fastest time to reach Round 100 in Arena
