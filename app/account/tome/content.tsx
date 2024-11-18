@@ -11,12 +11,13 @@ import { useShallow } from 'zustand/react/shallow';
 import { TomeLine, Tome as TomeDomain } from '../../../data/domain/tome';
 
 const LineDisplay = ({ line }: { line: TomeLine }) => {
+    const lineDescription = line.getLineDescription();
     return (
         <ShadowBox background='dark-1' style={{ opacity: line.lineScore > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
             <Box>
-                <Text>{line.currentValue} - {line.title} ({line.index})</Text>
-                <Text>Score : {line.getLineScore()}/{line.maxPoint}</Text>
-                {line.description != "" && <Text size='xsmall'>{line.description}</Text>}
+                <Text>{line.currentValue} - {line.getLineName()} ({line.index})</Text>
+                <Text>Score : {line.getLineScoreDisplay()}/{line.data.totalVal}</Text>
+                {lineDescription != "" && <Text size='xsmall'>{lineDescription}</Text>}
             </Box>
         </ShadowBox>
     )
