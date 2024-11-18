@@ -13,6 +13,8 @@ import { Slab } from './slab';
 import { Constellation } from './constellations';
 import { Alchemy } from './alchemy';
 import { Sigils } from './sigils';
+import { Dungeons } from './dungeons';
+import { POExtra } from './postoffice';
 
 export class TomeLine {
     // Needs this to be updated
@@ -117,6 +119,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const constellations = data.get("constellations") as Constellation[];
     const alchemy = data.get("alchemy") as Alchemy;
     const sigils = data.get("sigils") as Sigils;
+    const dungeonsData = data.get("dungeons") as Dungeons;
+    const postOfficeData = data.get("POExtra") as POExtra;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -241,10 +245,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.currentValue = 1 / optionListAccount[202];
                 break;
             case 17:
-                // TODO
                 // Dungeon rank
-                // m.__cast(a.engine.getGameAttribute("PixelHelperActor")[9].behaviors.getBehavior("ActorEvents_498"), da)._GenINFO[12];
-                line.currentValue = 0;
+                line.currentValue = dungeonsData.rank;
                 break;
             case 18:
                 // Highest drop multi
@@ -283,9 +285,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.currentValue = optionListAccount[199];
                 break;
             case 26:
-                // TODO
-                // Number of office box earned
-                line.currentValue = 0;
+                // Sum of all post office boxes found
+                line.currentValue = postOfficeData.complete + postOfficeData.misc + postOfficeData.streak;
                 break;
             case 27:
                 // Highest Killroy score on a Warrior
