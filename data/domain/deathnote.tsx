@@ -1,7 +1,6 @@
 import { range } from "../utility";
 import { Domain, RawData } from "./base/domain";
-import { Cloudsave } from "./cloudsave";
-import { IParser } from "./idleonData";
+import { EnemyInfo } from './enemies';
 import { ImageData } from './imageData';
 import { Item } from "./items";
 import { MapInfo } from "./maps";
@@ -95,6 +94,33 @@ export class Deathnote extends Domain {
             height: 25,
             width: 20
         };
+    }
+
+    getKillsMap = (): Map<string, Map<string, number>> => {
+        const toReturn = new Map<string, Map<string, number>>();
+        const monsterInfo = EnemyInfo;
+
+        this.mobKillCount.forEach((killArray, mobName) => {
+            const monsterData = monsterInfo.find((monster) => monster.id == mobName);
+            const killCount = killArray.reduce((sum, killCount) => sum += Math.round(killCount), 0);
+            if (monsterData?.mapData?.world) {
+                if (!toReturn.has(monsterData.mapData.world)) {
+                    toReturn.set(monsterData.mapData.world, new Map<string, number>());
+                }
+
+                toReturn.get(monsterData.mapData.world)?.set(monsterData.details.Name, killCount);
+            } else if (monsterData && this.hasMinibosses && deathNoteMinibossesOrder.includes(monsterData?.id ?? "")) {
+                // Need the monster to be loaded, the Jade upgrade purchased and the monster to be part of the miniboss list
+                // If all that then mean it should be displayed on the Minibosses section
+                if (!toReturn.has("Minibosses")) {
+                    toReturn.set("Minibosses", new Map<string, number>());
+                }
+
+                toReturn.get("Minibosses")?.set(monsterData.details.Name, killCount);
+            }
+        });
+
+        return toReturn;
     }
 
     getRawKeys(): RawData[] {

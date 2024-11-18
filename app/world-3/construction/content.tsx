@@ -25,10 +25,9 @@ import { lavaLog, nFormatter, range, toTime } from '../../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import { Printer, Sample } from '../../../data/domain/printer';
 import { Player } from '../../../data/domain/player';
-import { CircleInformation, Info, Star, StatusWarning, Trash } from 'grommet-icons';
+import { CircleInformation, Star, StatusWarning } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
-import { Deathnote, deathNoteMinibossesOrder } from '../../../data/domain/deathnote';
-import { EnemyInfo } from '../../../data/domain/enemies';
+import { Deathnote } from '../../../data/domain/deathnote';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { ClassIndex, Talent } from '../../../data/domain/talents';
 import { TaskBoard } from '../../../data/domain/tasks';
@@ -530,35 +529,14 @@ function DeathnoteDisplay() {
     ));
     const size = useContext(ResponsiveContext);
 
-    const monsterInfo = EnemyInfo;
-
     const deathNoteByWorld = useMemo(() => {
         const toReturn = new Map<string, Map<string, number>>();
         if (!deathnoteData) {
             return toReturn;
         }
 
-        deathnoteData.mobKillCount.forEach((killArray, mobName) => {
-            const monsterData = monsterInfo.find((monster) => monster.id == mobName);
-            const killCount = killArray.reduce((sum, killCount) => sum += Math.round(killCount), 0);
-            if (monsterData?.mapData?.world) {
-                if (!toReturn.has(monsterData.mapData.world)) {
-                    toReturn.set(monsterData.mapData.world, new Map<string, number>());
-                }
-
-                toReturn.get(monsterData.mapData.world)?.set(monsterData.details.Name, killCount);
-            } else if (monsterData && deathnoteData.hasMinibosses && deathNoteMinibossesOrder.includes(monsterData?.id ?? "")) {
-                // Need the monster to be loaded, the Jade upgrade purchased and the monster to be part of the miniboss list
-                // If all that then mean it should be displayed on the Minibosses section
-                if (!toReturn.has("Minibosses")) {
-                    toReturn.set("Minibosses", new Map<string, number>());
-                }
-
-                toReturn.get("Minibosses")?.set(monsterData.details.Name, killCount);
-            }
-        });
-        return toReturn;
-    }, [theData, deathnoteData, monsterInfo])
+        return deathnoteData.getKillsMap();
+    }, [theData, deathnoteData])
 
     const worldTierInfo = useMemo(() => {
         const toReturn: number[] = [];
