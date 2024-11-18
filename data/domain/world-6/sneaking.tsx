@@ -505,6 +505,8 @@ export class Sneaking extends Domain {
         });
         sneaking.beanstalking.unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 1)?.purchased ?? false;
         sneaking.beanstalking.supersizedUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 2)?.purchased ?? false;
+        
+        sneaking.updatePlayersActivity();
     }
 
     updatePlayersActivity = () => {
@@ -540,6 +542,4 @@ export const updateSneaking = (data: Map<string, any>) => {
     if (currencyConduitUpgrade) {
         currencyConduitUpgrade.bubbleDiscount = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade);
     }
-
-    sneaking.updatePlayersActivity();
 }
