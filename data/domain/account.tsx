@@ -118,6 +118,8 @@ export class Miniboss {
 export class Account extends Domain {
     keys: Key[] = [];
     coloTickets: Item = Item.emptyItem("Colo Tickets");
+    coloHighscores: number[] = [];
+    minigameHighscores: number[] = [];
     library: Library = new Library();
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
@@ -144,6 +146,8 @@ export class Account extends Domain {
         return [
             {key: "CYKeysAll", perPlayer: false, default: []},
             {key: "CYColosseumTickets", perPlayer: false, default: 0},
+            {key: "FamValColosseumHighscores", perPlayer: false, default: []},
+            {key: "FamValMinigameHiscores", perPlayer: false, default: []},
         ]
     }
 
@@ -168,6 +172,10 @@ export class Account extends Domain {
         const account = data.get(this.getDataKey()) as Account;
         const optionList = data.get("OptLacc") as number[];
         const keyData = data.get("CYKeysAll") as number[];
+        const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
+        const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
+
+        console.log(data);
 
         keyData.forEach((keyCount, keyIndex) => {
             const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
@@ -195,7 +203,10 @@ export class Account extends Domain {
             if (boss.bossInternalName == "mini6a") {
                 boss.setDaysSinceLastKill(optionList[226] as number || 0);
             }
-        })
+        });
+
+        account.coloHighscores = colosseumHighscores;
+        account.minigameHighscores = minigamesHighscores;
     }
 }
 
