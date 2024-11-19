@@ -189,6 +189,7 @@ export class ImpactedBySlabBubble extends Bubble {
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
         return new ImpactedBySlabBubble(id, data, iconPrefix, bubbleIndex);
     }
+    
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         super(id, data, iconPrefix, bubbleIndex);
     }
