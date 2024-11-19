@@ -105,6 +105,7 @@ export class Divinity extends Domain {
     currentDivinity: number = 0;
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
+    godRank: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -137,7 +138,7 @@ export class Divinity extends Domain {
         const numberOfUnlockedGods = divinityData[25];
 
         // Index 26 = ? 
-        // Index 27 = ?
+        divinity.godRank = divinityData[27];
         // Next 10 indexes = god levels
         divinity.gods.forEach((god, godIndex) => {
             // The index of the god doesn't match up the bonus, yay Lava.
