@@ -26,6 +26,7 @@ import { Deathnote } from './deathnote';
 import { Construction } from './construction';
 import { Rift } from './rift';
 import { Breeding } from './breeding';
+const tomeLineDisplayOrder: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 53, 10, 11, 12, 75, 13, 14, 80, 15, 16, 17, 18, 19, 21, 22, 23, 24, 79, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 76, 38, 54, 40, 41, 42, 39, 44, 46, 47, 48, 49, 50, 51, 52, 45, 55, 57, 58, 59, 60, 61, 62, 63, 64, 56, 65, 66, 67, 68, 69, 20, 70, 71, 43, 72, 73, 74, 77, 78];
 
 export class TomeLine {
     // Needs this to be updated
@@ -34,7 +35,7 @@ export class TomeLine {
     private currentValue: number = 0;
     lineScore: number = 0;
 
-    constructor(public index: number, public data: TomeModel) {
+    constructor(public index: number, public data: TomeModel, public displayOrder: number = 0) {
         if (data.scalingType == TomeScalingEnum.inverseDecay) {
             // Default value for lines that are supposed to be "the lowest the better"
             this.currentValue = 1000
@@ -89,12 +90,15 @@ export class TomeLine {
             case 34:
             case 35:
             case 46:
+            case 53:
             case 61:
+            case 64:
+            case 66:
+            case 78:
                 return nFormatter(this.currentValue);
             // Not so big values but with lots of decimals and wanna keep a bit of it
             case 16:
             case 18:
-            case 78:
                 return (Math.round(100 * this.currentValue) / 100).toString();
             default:
                 return this.currentValue.toString();
@@ -144,7 +148,7 @@ export class Tome extends Domain {
         tome.lines = [];
         const tomeLinesBase = initTomeRepo();
         tomeLinesBase.forEach(lineInfo => {
-            tome.lines.push(new TomeLine(lineInfo.index,lineInfo.data));
+            tome.lines.push(new TomeLine(lineInfo.index,lineInfo.data,tomeLineDisplayOrder.indexOf(lineInfo.index)));
         });
     }
 

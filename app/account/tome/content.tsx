@@ -9,6 +9,7 @@ import ShadowBox from '../../../components/base/ShadowBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { TomeLine, Tome as TomeDomain } from '../../../data/domain/tome';
+import { useMemo } from 'react';
 
 const LineDisplay = ({ line }: { line: TomeLine }) => {
     const lineDescription = line.getLineDescription();
@@ -41,7 +42,7 @@ function TomeDisplay() {
             </Box>
             <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
                 {
-                    tome.lines?.map((line, index) => <LineDisplay key={index} line={line} />)
+                    tome.lines?.slice().sort((line1, line2) => line1.displayOrder > line2.displayOrder ? 1 : -1).map((line, index) => <LineDisplay key={index} line={line} />)
                 }
             </Grid>
         </Box>
