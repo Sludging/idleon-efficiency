@@ -444,9 +444,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
                     player.talents
                     totalStarPoints.push(Math.floor(playerStarPoints));
                 });
-
-                console.log(totalStarPoints);
-
                 line.updateCurrentValue(Math.max(...totalStarPoints));
                 break;
             case 16:
