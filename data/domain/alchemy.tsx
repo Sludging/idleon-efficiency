@@ -224,7 +224,7 @@ export class ImpactedByTheTomeBubble extends Bubble {
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
         let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
-        bonusText += ` (${this.theTomeTotalScore} total score = ${bonus.toString()} total bonus)`;
+        bonusText += ` (${this.theTomeTotalScore} total score = +${bonus.toString()}% total bonus)`;
         return bonusText;
     }
 }
