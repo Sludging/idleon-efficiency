@@ -15,6 +15,7 @@ export const FractIslandBonusesThresholds = [
 export class IslandExpeditions extends Domain {
     bonusToShovelSpeed: number = 0;
     reductionToKitchenCosts: number = 0;
+    bonusStarTalentPoints: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -32,5 +33,6 @@ export class IslandExpeditions extends Domain {
 
         expeditions.bonusToShovelSpeed = optionList[184] >= FractIslandBonusesThresholds[4] ? 25 : 0;
         expeditions.reductionToKitchenCosts = optionList[184] >= FractIslandBonusesThresholds[2] ? 30 : 0;
+        expeditions.bonusStarTalentPoints = optionList[184] >= FractIslandBonusesThresholds[5] ? 100 : 0;
     }
 }
