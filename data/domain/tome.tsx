@@ -2,13 +2,12 @@ import { Domain, RawData } from './base/domain';
 import { Item } from './items'
 import { lavaLog, nFormatter } from '../utility';
 import { Stamp } from './stamps';
-import { PlayerStatues } from './statues';
+import { PlayerStatues, StatusType } from './statues';
 import { Card } from './cards';
 import { Quests } from './quests';
 import { Player } from './player';
 import { TaskBoard } from './tasks';
 import { Achievement } from './achievements';
-import { initTalentTreeRepo } from './data/TalentTreeRepo';
 import { Slab } from './slab';
 import { Constellation } from './constellations';
 import { Alchemy } from './alchemy';
@@ -26,6 +25,20 @@ import { Deathnote } from './deathnote';
 import { Construction } from './construction';
 import { Rift } from './rift';
 import { Breeding } from './breeding';
+import { Cooking } from './cooking';
+import { Lab } from './lab';
+import { Sailing } from './sailing';
+import { Divinity } from './divinity';
+import { ElegantSeashell, Gaming, ImmortalSnail } from './gaming';
+import { ArtifactStatus } from './sailing/artifacts';
+import { Account } from './account';
+import { Farming } from './world-6/farming';
+import { Sneaking } from './world-6/sneaking';
+import { Summoning } from './world-6/summoning';
+import { Arcade } from './arcade';
+import { Prayer } from './prayers';
+import { initTalentNameRepo } from './data/TalentNameRepo';
+
 const tomeLineDisplayOrder: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 53, 10, 11, 12, 75, 13, 14, 80, 15, 16, 17, 18, 19, 21, 22, 23, 24, 79, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 76, 38, 54, 40, 41, 42, 39, 44, 46, 47, 48, 49, 50, 51, 52, 45, 55, 57, 58, 59, 60, 61, 62, 63, 64, 56, 65, 66, 67, 68, 69, 20, 70, 71, 43, 72, 73, 74, 77, 78];
 
 export class TomeLine {
@@ -181,6 +194,17 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const storage = data.get("storage") as Storage;
     const breeding = data.get("breeding") as Breeding;
+    const cooking = data.get("cooking") as Cooking;
+    const lab = data.get("lab") as Lab;
+    const sailing = data.get("sailing") as Sailing;
+    const divinity = data.get("divinity") as Divinity;
+    const gaming = data.get("gaming") as Gaming;
+    const account = data.get("account") as Account;
+    const farming = data.get("farming") as Farming;
+    const sneaking = data.get("sneaking") as Sneaking;
+    const summoning = data.get("summoning") as Summoning;
+    const arcade = data.get("arcade") as Arcade;
+    const prayers = data.get("prayers") as Prayer[];
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -209,7 +233,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                     statueLevels.push(playerStatue.statues.reduce((sum, statue) => sum+statue.level,0));
                 })
                 // Get the highest sum of statues for a single char in case the account don't have all statues golden
-                line.updateCurrentValue(Math.max(...statueLevels));
+                line.updateCurrentValue(Math.max(0, ...statueLevels));
                 break;
             case 2:
                 // Sum of cards levels
@@ -220,11 +244,9 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 // Sum of highest level of each talent (if multiple classes share a same talent, can be counted only once)
                 // Needs to be fixed, not getting the good value even if starting to get close
                 var talentsTotalMaxLevel: number = 0;
-                const allTalents = initTalentTreeRepo();
-                allTalents.flatMap(page => page).filter(page => !page.id.startsWith("Special Talent ")).forEach(page => {
-                    Object.entries(page.data.talents).forEach(([_, info], index) => {
-                        talentsTotalMaxLevel += Math.max(...players.map((player, index) => (![149, 374, 539, 505].includes(info.skillIndex) && info.skillIndex <= 614 && !(49 <= info.skillIndex && 59 >= info.skillIndex)) ? Math.max(100, player.getTalentMaxLevel(info.skillIndex) - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES - player.extraLevelsFromAchievements - player.extraLevelsFromSlug - player.extraLevelsFromEquinox) : player.getTalentMaxLevel(info.skillIndex)));
-                    });                    
+                const allTalents = initTalentNameRepo();
+                allTalents.forEach(talent => {
+                        talentsTotalMaxLevel += Math.max(...players.map((player, _) => player.talents.find(playerTalent => playerTalent.data.skillIndex == talent.data.id)?.bookMaxLevel ?? 0));
                 });
                 line.updateCurrentValue(talentsTotalMaxLevel);
                 break;
@@ -263,18 +285,18 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 8:
                 // Most money held in Storage
-                line.updateCurrentValue(optionListAccount[198]);
+                line.updateCurrentValue(optionListAccount[198] ?? 0);
                 break;
             case 9:
                 // Most Spore caps held in Storage
-                line.updateCurrentValue(optionListAccount[208]);
+                line.updateCurrentValue(optionListAccount[208] ?? 0);
                 break;
             case 10:
                 // Number of different trophies found
                 line.updateCurrentValue(trophyCount);
                 break;
             case 11:
-                // Sum of all skills lmevels of all players
+                // Sum of all skills levels of all players
                 line.updateCurrentValue(players.reduce((sum, player) => {
                     var skillTotalLv: number = 0;
                     player.skills.forEach((skill) => {
@@ -285,7 +307,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 12:
                 // Best spike trap round reached
-                line.updateCurrentValue(optionListAccount[201]);
+                line.updateCurrentValue(optionListAccount[201] ?? 0);
                 break;
             case 13:
                 // Total afk hours claimed
@@ -293,7 +315,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 14:
                 // DPS record on Shimmer Island on dummy in W2
-                line.updateCurrentValue(optionListAccount[172]);
+                line.updateCurrentValue(optionListAccount[172] ?? 0);
                 break;
             case 15:
                 // TODO
@@ -303,7 +325,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 16:
                 // Lowest average kill for crystal spawn
-                line.updateCurrentValue(1 / optionListAccount[202]);
+                line.updateCurrentValue(1 / (optionListAccount[202] ?? 1));
                 break;
             case 17:
                 // Dungeon rank
@@ -311,7 +333,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 18:
                 // Highest drop multi
-                line.updateCurrentValue(optionListAccount[200]);
+                line.updateCurrentValue(optionListAccount[200] ?? 0);
                 break;
             case 19:
                 // Number of constellations completed
@@ -319,7 +341,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 20:
                 // Highest damage dealt to gravestone (weekly battle in W2 town)
-                line.updateCurrentValue(optionListAccount[203]);
+                line.updateCurrentValue(optionListAccount[203] ?? 0);
                 break;
             case 21:
                 // Number of different Obols found
@@ -343,7 +365,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 25:
                 // Number of times Jackpot is hit in arcade
-                line.updateCurrentValue(optionListAccount[199]);
+                line.updateCurrentValue(optionListAccount[199] ?? 0);
                 break;
             case 26:
                 // Sum of all post office boxes found
@@ -351,43 +373,43 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 27:
                 // Highest Killroy score on a Warrior
-                line.updateCurrentValue(optionListAccount[204]);
+                line.updateCurrentValue(optionListAccount[204] ?? 0);
                 break;
             case 28:
                 // Highest Killroy score on an Archer
-                line.updateCurrentValue(optionListAccount[205]);
+                line.updateCurrentValue(optionListAccount[205] ?? 0);
                 break;
             case 29:
                 // Highest Killroy score on a Mage
-                line.updateCurrentValue(optionListAccount[206]);
+                line.updateCurrentValue(optionListAccount[206] ?? 0);
                 break;
             case 30:
                 // Fastest time to kill Efaunt
-                line.updateCurrentValue(1E3 - optionListAccount[207]);
+                line.updateCurrentValue(1E3 - (optionListAccount[207] ?? 0));
                 break;
             case 31:
                 // Largest Oak Log sample
-                line.updateCurrentValue(optionListAccount[211]);
+                line.updateCurrentValue(optionListAccount[211] ?? 0);
                 break;
             case 32:
                 // Largest Copper Ore sample
-                line.updateCurrentValue(optionListAccount[212]);
+                line.updateCurrentValue(optionListAccount[212] ?? 0);
                 break;
             case 33:
                 // Largest Spore Cap sample
-                line.updateCurrentValue(optionListAccount[213]);
+                line.updateCurrentValue(optionListAccount[213] ?? 0);
                 break;
             case 34:
                 // Largest Goldfish sample
-                line.updateCurrentValue(optionListAccount[214]);
+                line.updateCurrentValue(optionListAccount[214] ?? 0);
                 break;
             case 35:
                 // Largest Fly sample
-                line.updateCurrentValue(optionListAccount[215]);
+                line.updateCurrentValue(optionListAccount[215] ?? 0);
                 break;
             case 36:
                 // Best non duplicate Goblin Gorefest wave (worship)
-                line.updateCurrentValue(optionListAccount[209]);
+                line.updateCurrentValue(optionListAccount[209] ?? 0);
                 break;
             case 37:
                 // Sum of best waves for worship
@@ -424,7 +446,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 44:
                 // Most Greenstacks in storage
-                line.updateCurrentValue(optionListAccount[224]);
+                line.updateCurrentValue(optionListAccount[224] ?? 0);
                 break;
             case 45:
                 // Number of Rift levels completed
@@ -443,167 +465,165 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 47:
                 // Fastest time to reach Round 100 in Arena
-                line.updateCurrentValue(1E3 - optionListAccount[220]);
+                line.updateCurrentValue(1E3 - (optionListAccount[220] ?? 0));
                 break;
             case 48:
-                // TODO
                 // Sum of all kitchen levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(cooking.kitchens.reduce((sum, kitchen) => sum+kitchen.luckLevels+kitchen.recipeLevels+kitchen.mealLevels, 0));
                 break;
             case 49:
-                // TODO
                 // Sum of all shiny pets levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(breeding.shinyBonuses.reduce((sum, bonus) => sum+bonus.totalLevels, 0));
                 break;
             case 50:
-                // TODO
                 // Sum of all meals levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(cooking.meals.reduce((sum, meal) => sum+meal.level, 0));
                 break;
             case 51:
-                // TODO
                 // Sum of all pet breedability levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(breeding.basePets.filter(pet => pet.data.petId != "_").reduce((sum, pet) => sum+pet.breedingLevel, 0));
                 break;
             case 52:
-                // TODO
                 // Number of lab chips owned
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(
+                    lab.chips.reduce((sum, chip) => sum+chip.count, 0)+
+                    Object.entries(lab.playerChips).reduce((sum, [_, chips]) => sum+chips.filter(chip => chip && chip.data).length, 0)
+                );
                 break;
             case 53:
-                // TODO
                 // Total colosseum score
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(account.coloHighscores.reduce((sum, score) => sum+score, 0));
                 break;
             case 54:
                 // Most Giants killed in a single week
-                line.updateCurrentValue(optionListAccount[217]);
+                line.updateCurrentValue(optionListAccount[217] ?? 0);
                 break;
             case 55:
-                // TODO
                 // Number of Onyx statues
-                line.updateCurrentValue(0);
+                var firstPlayerStatues: PlayerStatues | undefined = statues.find(statues => statues.playerID == 0);
+                if (firstPlayerStatues) {
+                    line.updateCurrentValue(firstPlayerStatues.statues.filter(statue => statue && statue.type == StatusType.Onyx).length);
+                }
                 break;
             case 56:
                 // Fastest time to kill 200 Tremor wurms
-                line.updateCurrentValue(1E3 - optionListAccount[218]);
+                line.updateCurrentValue(1E3 - (optionListAccount[218] ?? 0));
                 break;
             case 57:
-                // TODO
                 // Sum of all sailing boats levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(sailing.boats.reduce((sum, boat) => sum+boat.lootUpgrades+boat.speedUpgrades, 0));
                 break;
             case 58:
-                // TODO
                 // God ranks in divinity
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(divinity.godRank);
                 break;
             case 59:
-                // TODO
                 // Total gaming plants evolved
-                line.updateCurrentValue(0);
+                line.updateCurrentValue((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0);
                 break;
             case 60:
-                // TODO
                 // Number of artifacts found
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(sailing.artifacts.reduce((sum, artifact) => 
+                    artifact.status == ArtifactStatus.Obtained ? sum+1
+                    : artifact.status == ArtifactStatus.Ancient ? sum+2
+                    : artifact.status == ArtifactStatus.Eldritch ? sum+3
+                    : artifact.status == ArtifactStatus.Sovereign ? sum+4 
+                    : 0
+                , 0));
                 break;
             case 61:
-                // TODO
                 // Sailing gold bars owned
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(sailing.loot[0] ?? 0);
                 break;
             case 62:
-                // TODO
                 // Highest sailing capitain level
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(Math.max(0, ...sailing.captains.map(captain => captain.level)));
                 break;
             case 63:
-                // TODO
                 // Highest immortal snail level
-                line.updateCurrentValue(0);
+                line.updateCurrentValue((gaming.importBoxes.find(box => box.index == 7) as ImmortalSnail).highestSnailLevel ?? 0);
                 break;
             case 64:
-                // TODO
                 // Best gold nugget
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(gaming.biggestGoldNugget);
                 break;
             case 65:
-                // TODO
                 // Number of items found
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(slab.rawObtainedCount);
                 break;
             case 66:
-                // TODO
-                // Most gaming bits owned
-                line.updateCurrentValue(0);
+                // Gaming bits owned
+                line.updateCurrentValue(gaming.currenBitsOwned);
                 break;
             case 67:
                 // Highest Crop OG
-                line.updateCurrentValue(Math.pow(2, optionListAccount[219]));
+                line.updateCurrentValue(Math.pow(2, optionListAccount[219] ?? 0));
                 break;
             case 68:
-                // TODO
                 // Number of crops discovered
-                line.updateCurrentValue(0);
+                // Use this instead of the value in CropScientist as it's not loaded yet when updating the Tome
+                line.updateCurrentValue(farming.cropDepot.filter(crop => crop.discovered).length);
                 break;
             case 69:
-                // TODO
                 // Number of golden food goldstack
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(sneaking.beanstalking.bonuses.reduce((sum, bonus) => sum+bonus.level, 0));
                 break;
             case 70:
-                // TODO
                 // Sum of all summoning upgrade levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(summoning.summonUpgrades.reduce((sum, upgrade) => sum+upgrade.level, 0));
                 break;
             case 71:
-                // TODO
                 // Number of summoning wins
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(summoning.summonBattles.allVictories.reduce((sum, victories) => sum+victories, 0));
                 break;
             case 72:
-                // TODO
                 // Number of ninja floors unlocked
-                line.updateCurrentValue(0);
+                var floorsUnlocked = 0;
+                if (0 < (optionListAccount[232] ?? 0)) {
+                    floorsUnlocked = 12 * optionListAccount[232];
+                } else {
+                    floorsUnlocked = Math.min(12, sneaking.getUnlockedFloors());
+                }
+                line.updateCurrentValue(floorsUnlocked);
                 break;
             case 73:
-                // TODO
                 // Familiars owned in Summoning
-                line.updateCurrentValue(0);
+                var totalFamiliarsOwned = 0;
+                var multiplyer = 1;
+                var i = 0;
+                for (i = 0; i < 9; i++) {
+                    totalFamiliarsOwned += multiplyer * summoning.summonFamiliarRaw[i];
+                    multiplyer *= i + 3;
+                }
+                line.updateCurrentValue(totalFamiliarsOwned);
                 break;
             case 74:
-                // TODO
                 // Number of Jade Emporium upgrades bought
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(sneaking.jadeUpgrades.filter(upgrade => upgrade.display && upgrade.purchased).length);
                 break;
             case 75:
-                // TODO
-                // Sum of all highest minigame highscore
-                line.updateCurrentValue(0);
+                // Sum of all highest minigame highscore (also includes catching hoop from optionListAccount)
+                line.updateCurrentValue(account.minigameHighscores.reduce((sum, score) => sum+score, 0) + (optionListAccount[99] ?? 0));
                 break;
             case 76:
-                // TODO
                 // Sum of all prayer upgrade levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(prayers.reduce((sum, prayer) => sum+prayer.level, 0));
                 break;
             case 77:
-                // TODO
                 // Sum of all plot land rank levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(farming.farmPlots.reduce((sum, plot) => sum+plot.landRank, 0));
                 break;
             case 78:
                 // Largest Magic Bean trade
-                line.updateCurrentValue(optionListAccount[221]);
+                line.updateCurrentValue(optionListAccount[221] ?? 0);
                 break;
             case 79:
                 // Most balls earned from LBoFaF (bonus balls from arcade)
-                line.updateCurrentValue(optionListAccount[222]);
+                line.updateCurrentValue(optionListAccount[222] ?? 0);
                 break;
             case 80:
-                // TODO
                 // Sum of all Gold Ball shop upgrades levels
-                line.updateCurrentValue(0);
+                line.updateCurrentValue(arcade.bonuses.reduce((sum, bonus) => bonus.level, 0));
                 break;
             default:
                 line.updateCurrentValue(0);
