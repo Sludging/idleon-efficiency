@@ -245,7 +245,7 @@ export class Pet {
     }
 
     calculateBreedingLevel = () => {
-        return 1 + Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
+        return Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)) + 1);
     }
 
     getBreedabilityBonus = () => {
