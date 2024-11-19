@@ -505,6 +505,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+        talent.bookMaxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
     })
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;

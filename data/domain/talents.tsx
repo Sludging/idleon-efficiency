@@ -24,6 +24,7 @@ export class Talent {
 
     level: number = 0;
     maxLevel: number = 0;
+    bookMaxLevel: number = 0;
 
     constructor(public name: string, public data: TalentModel) {
         this.description = data.description;
