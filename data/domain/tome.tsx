@@ -43,7 +43,14 @@ import { Bribe } from './bribes';
 import { IslandExpeditions } from './islandExpedition';
 import { Family } from './family';
 import { ClassIndex } from './talents';
-import { SkillsIndex } from './SkillsIndex';
+
+export enum TomeScoreColors {
+    Platinum = "#6EE3FF",
+    Gold = "#FAC95D",
+    Silver = "#CDE3E6",
+    Bronze = "#F1A461",
+    Background = "#3C2C26"
+}
 
 const tomeLineDisplayOrder: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 53, 10, 11, 12, 75, 13, 14, 80, 15, 16, 17, 18, 19, 21, 22, 23, 24, 79, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 76, 38, 54, 40, 41, 42, 39, 44, 46, 47, 48, 49, 50, 51, 52, 45, 55, 57, 58, 59, 60, 61, 62, 63, 64, 56, 65, 66, 67, 68, 69, 20, 70, 71, 43, 72, 73, 74, 77, 78];
 
@@ -124,6 +131,19 @@ export class TomeLine {
         }
     }
 
+    getLineDisplayColor = (): string => {
+        switch(true) {
+            case this.lineScore >= this.data.totalVal:
+                return TomeScoreColors.Platinum;
+            case this.lineScore >= this.data.totalVal*0.75:
+                return TomeScoreColors.Gold;
+            case this.lineScore >= this.data.totalVal*0.5:
+                return TomeScoreColors.Silver;
+            default:
+                return TomeScoreColors.Bronze;
+        }
+    }
+
     updateCurrentValue = (value: number) => {
         if (this.currentValue != value) {
             this.currentValue = value;
@@ -139,6 +159,7 @@ export class TomeLine {
 export class Tome extends Domain {
     lines: TomeLine[] = [];
     totalScore: number = 0;
+    scoreThresholds: number[] = [];
 
     getRawKeys(): RawData[] {
         return [
@@ -163,6 +184,12 @@ export class Tome extends Domain {
 
     parse(data: Map<string, any>): void {
         const tome = data.get(this.dataKey) as Tome;
+        const serverVars = data.get("servervars") as Record<string, any>;
+
+        tome.scoreThresholds = [];
+        if (serverVars && Object.keys(serverVars).includes("TomePct")) {
+            tome.scoreThresholds = serverVars["TomePct"] as number[];
+        }
         
         tome.lines = [];
         const tomeLinesBase = initTomeRepo();
@@ -173,6 +200,27 @@ export class Tome extends Domain {
 
     updateTotalScore = () => {
         this.totalScore = this.lines.reduce((sum, line) => sum+line.lineScore, 0);
+    }
+
+    getScoreRankingDisplay = (): string => {
+        switch (true) {
+            case (this.scoreThresholds.length >= 7 && this.totalScore >= this.scoreThresholds[6]):
+                return 'Top 0.1%';
+            case (this.scoreThresholds.length >= 6 && this.totalScore >= this.scoreThresholds[5]):
+                return 'Top 0.5%';
+            case (this.scoreThresholds.length >= 5 && this.totalScore >= this.scoreThresholds[4]):
+                return 'Top 1%';
+            case (this.scoreThresholds.length >= 4 && this.totalScore >= this.scoreThresholds[3]):
+                return 'Top 5%';
+            case (this.scoreThresholds.length >= 3 && this.totalScore >= this.scoreThresholds[2]):
+                return 'Top 10%';
+            case (this.scoreThresholds.length >= 2 && this.totalScore >= this.scoreThresholds[1]):
+                return 'Top 25%';
+            case (this.scoreThresholds.length >= 1 && this.totalScore >= this.scoreThresholds[0]):
+                return 'Top 50%';
+            default:
+                return '';
+        }
     }
 }
 
