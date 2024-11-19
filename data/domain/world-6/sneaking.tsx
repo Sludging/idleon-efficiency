@@ -509,6 +509,18 @@ export class Sneaking extends Domain {
         sneaking.updatePlayersActivity();
     }
 
+    getUnlockedFloors = (): number => {
+        var floorUnlocked: number = 0;
+        var i: number = 0;
+        for (i = 0; i < this.doors.length; i++) {
+            if (0 >= this.doors[i].maxHP - this.doors[i].damageDone) {
+                floorUnlocked = Math.min(12, i+2);
+            }
+        }
+
+        return floorUnlocked;
+    }
+
     updatePlayersActivity = () => {
         this.players.forEach((player, index) => {
             const currentFloorDoor = (player.floor < this.doors.length) ? this.doors[player.floor] : undefined;
