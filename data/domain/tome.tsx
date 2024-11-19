@@ -12,7 +12,7 @@ import { Slab } from './slab';
 import { Constellation } from './constellations';
 import { Alchemy } from './alchemy';
 import { Sigils } from './sigils';
-import { Dungeons } from './dungeons';
+import { Dungeons, PassiveType } from './dungeons';
 import { POExtra } from './postoffice';
 import { initTomeRepo } from './data/TomeRepo';
 import { TomeModel } from './model/tomeModel';
@@ -38,6 +38,12 @@ import { Summoning } from './world-6/summoning';
 import { Arcade } from './arcade';
 import { Prayer } from './prayers';
 import { initTalentNameRepo } from './data/TalentNameRepo';
+import { Guild } from './guild';
+import { Bribe } from './bribes';
+import { IslandExpeditions } from './islandExpedition';
+import { Family } from './family';
+import { ClassIndex } from './talents';
+import { SkillsIndex } from './SkillsIndex';
 
 const tomeLineDisplayOrder: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 53, 10, 11, 12, 75, 13, 14, 80, 15, 16, 17, 18, 19, 21, 22, 23, 24, 79, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 76, 38, 54, 40, 41, 42, 39, 44, 46, 47, 48, 49, 50, 51, 52, 45, 55, 57, 58, 59, 60, 61, 62, 63, 64, 56, 65, 66, 67, 68, 69, 20, 70, 71, 43, 72, 73, 74, 77, 78];
 
@@ -205,6 +211,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
+    const family = data.get("family") as Family;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -243,6 +253,23 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 // TODO
                 // Sum of highest level of each talent (if multiple classes share a same talent, can be counted only once)
                 // Needs to be fixed, not getting the good value even if starting to get close
+                // In-game whole code :
+                /* 
+                    e = this._DummyNumber = 0;
+                    for (f = a.engine.getGameAttribute("SkillLevelsMAX").length; e < f; ) {
+                        this._DummyNumber3 = g = e++;
+                        g = this._DummyNumber2 = 0;
+                        for (var v = a.engine.getGameAttribute("GetPlayersUsernames").length; g < v; )
+                            b = g++,
+                            d = a.engine.getGameAttribute("PlayerDATABASE"),
+                            p = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[b]),
+                            c.asNumber(d.h[p].h.SkillLevelsMAX[this._DummyNumber3 | 0]) > this._DummyNumber2 && (d = a.engine.getGameAttribute("PlayerDATABASE"),
+                            b = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[b]),
+                            this._DummyNumber2 = c.asNumber(d.h[b].h.SkillLevelsMAX[this._DummyNumber3 | 0]));
+                        this._DummyNumber += this._DummyNumber2
+                    }
+                    a.engine.getGameAttribute("DNSM").h.TomeQTY[3] = this._DummyNumber;
+                */
                 var talentsTotalMaxLevel: number = 0;
                 const allTalents = initTalentNameRepo();
                 allTalents.forEach(talent => {
@@ -320,8 +347,107 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 15:
                 // TODO
                 // Sum of star talent points owned
-                // Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 1 + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[0]) + k._customBlock_GetTalentNumber(1, 8) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[5]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h["64"]) + (k._customBlock_GetTalentNumber(1, 622) + (k._customBlock_StampBonusOfTypeX("TalentS") + (k._customBlock_GetTalentNumber(1, 17) + (Math.floor(q._customBlock_GuildBonuses(11)) + (q._customBlock_FlurboShop(1) + (Math.min(5 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "w4b2"), 50) + (Math.min(15 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss2C"), 100) + Math.min(4 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "fallEvent1"), 100)) + (q._customBlock_Labb("SigilBonus", "Blank", 9, 0) + (10 * q._customBlock_AchieveStatus(212) + (20 * q._customBlock_AchieveStatus(289) + (20 * q._customBlock_AchieveStatus(305) + (q._customBlock_Breeding("ShinyBonusS", "Nah", 14, -1) + (r._customBlock_GetBribeBonus("32") + 100 * n._customBlock_RandomEvent("FractalIslandBonus", 5, 999))))))))))))))) - c.asNumber(d[5]))
-                line.updateCurrentValue(0);
+                // in-game code :
+                /*
+                    a.engine.getGameAttribute("DNSM").h.TomeQTY[15] = k._customBlock_TotalTalentPoints(a.engine.getGameAttribute("DummyList2"))[5];
+                */
+                // in-game code for _customBlock_TotalTalentPoints :
+                /*
+                    k._customBlock_TotalTalentPoints = function(d) {
+                        a.engine.getGameAttribute("SkillLevelsMAX")[10] = 100 + (k._customBlock_GetTalentNumber(1, 81) + (k._customBlock_GetTalentNumber(2, 143) + q._customBlock_getbonus2(1, 51, -1)));
+                        5 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[11]) && (a.engine.getGameAttribute("SkillLevelsMAX")[11] = 100 + (k._customBlock_GetTalentNumber(1, 293) + (k._customBlock_GetTalentNumber(2, 368) + q._customBlock_getbonus2(1, 52, -1))));
+                        5 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[12]) && (a.engine.getGameAttribute("SkillLevelsMAX")[12] = 100 + (k._customBlock_GetTalentNumber(1, 488) + (k._customBlock_GetTalentNumber(2, 533) + q._customBlock_getbonus2(1, 53, -1))));
+                        10 < c.asNumber(a.engine.getGameAttribute("Lv0")[0]) && (a.engine.getGameAttribute("SkillLevelsMAX")[75] = 100 + k._customBlock_GetTalentNumber(1, 38));
+                        5 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[23]) && (a.engine.getGameAttribute("SkillLevelsMAX")[23] = 100 + (k._customBlock_GetTalentNumber(2, 38) + q._customBlock_getbonus2(1, 54, -1)));
+                        1 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[87]) && (a.engine.getGameAttribute("SkillLevelsMAX")[87] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 114), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[0][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[87])),
+                        a.engine.getGameAttribute("SkillLevelsMAX")[86] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 129), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[0][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[86])));
+                        1 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[266]) && (a.engine.getGameAttribute("SkillLevelsMAX")[266] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 294), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[1][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[266])),
+                        a.engine.getGameAttribute("SkillLevelsMAX")[267] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 309), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[1][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[267])));
+                        1 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[446]) && (a.engine.getGameAttribute("SkillLevelsMAX")[446] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 474), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[2][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[446])),
+                        a.engine.getGameAttribute("SkillLevelsMAX")[447] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 489), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[2][1])), c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[447])));
+                        1 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[79]) && (a.engine.getGameAttribute("SkillLevelsMAX")[79] = Math.max(100 + Math.min(k._customBlock_GetTalentNumber(1, 39), c.asNumber(a.engine.getGameAttribute("CauldronInfo")[3][0])), 100));
+                        -.5 < c.asNumber(a.engine.getGameAttribute("SkillLevelsMAX")[625]) && (a.engine.getGameAttribute("SkillLevelsMAX")[625] = Math.floor(Math.max(1, c.asNumber(a.engine.getGameAttribute("CauldronInfo")[3][5]) + r._customBlock_MealBonus("TPpete"))));
+                        var b = a.engine.getGameAttribute("DNSM")
+                        , e = [];
+                        b.h.TalentDL = e;
+                        b = a.engine.getGameAttribute("DNSM");
+                        e = [];
+                        b.h.TalentDLbonus = e;
+                        a.engine.getGameAttribute("DNSM").h.TalentDN4 = -3;
+                        for (var f = 0; 9 > f; )
+                            e = f++,
+                            b = a.engine.getGameAttribute("DNSM"),
+                            e = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDN4) + c.asNumber(a.engine.getGameAttribute("Lv0")[e + 1]),
+                            b.h.TalentDN4 = e;
+                        b = a.engine.getGameAttribute("DNSM");
+                        e = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDN4) + Math.round(k._customBlock_GetTalentNumber(1, 275));
+                        b.h.TalentDN4 = e;
+                        a.engine.getGameAttribute("DNSM").h.TalentDL.push(a.engine.getGameAttribute("DNSM").h.TalentDN4);
+                        for (f = a.engine.getGameAttribute("DNSM").h.TalentDN4 = 0; 9 > f; )
+                            e = f++,
+                            b = a.engine.getGameAttribute("DNSM"),
+                            e = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDN4) + Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[e + 1]) / 2),
+                            b.h.TalentDN4 = e;
+                        a.engine.getGameAttribute("DNSM").h.TalentDL.push(a.engine.getGameAttribute("DNSM").h.TalentDN4);
+                        for (f = a.engine.getGameAttribute("DNSM").h.TalentDN4 = 0; 9 > f; )
+                            e = f++,
+                            b = a.engine.getGameAttribute("DNSM"),
+                            e = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDN4) + Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[e + 1]) / 5),
+                            b.h.TalentDN4 = e;
+                        a.engine.getGameAttribute("DNSM").h.TalentDL.push(a.engine.getGameAttribute("DNSM").h.TalentDN4);
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[0]));
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[1]));
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[2]));
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[3]));
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[4]));
+                        a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[5]));
+                        for (f = 0; 4 > f; )
+                            e = f++,
+                            7 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : 19 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWarrior) : 31 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWiz);
+                        b = a.engine.getGameAttribute("DNSM");
+                        e = [];
+                        b.h.TalentDL2 = e;
+                        a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(3 * (c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 1) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[0]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[0]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.Tab1Pts) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h.TalPts1) + (k._customBlock_StampBonusOfTypeX("Talent1") + (5 * q._customBlock_AchieveStatus(54) + (q._customBlock_FlurboShop(1) + (q._customBlock_ArcadeBonus(16) + (6 * q._customBlock_AchieveStatus(216) + q._customBlock_Breeding("ShinyBonusS", "Nah", 10, -1)))))))))) - c.asNumber(d[0])));
+                        a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(3 * (c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 9) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[1]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[1]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.Tab2Pts) + (k._customBlock_GetTalentNumber(1, 119) + (k._customBlock_GetTalentNumber(1, 299) + (k._customBlock_GetTalentNumber(1, 494) + (k._customBlock_StampBonusOfTypeX("Talent2") + (k._customBlock_GetTalentNumber(1, 44) + (2 * q._customBlock_AchieveStatus(76) + 3 * q._customBlock_AchieveStatus(78) + (q._customBlock_FlurboShop(1) + (8 * q._customBlock_AchieveStatus(230) + q._customBlock_Breeding("ShinyBonusS", "Nah", 11, -1))))))))))) - c.asNumber(d[1])));
+                        a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(3 * (c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 29) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[1]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[2]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.Tab3Pts) + (k._customBlock_StampBonusOfTypeX("Talent3") + (5 * q._customBlock_AchieveStatus(166) + 10 * q._customBlock_AchieveStatus(170) + (q._customBlock_FlurboShop(1) + (8 * q._customBlock_AchieveStatus(219) + q._customBlock_Breeding("ShinyBonusS", "Nah", 12, -1))))))) - c.asNumber(d[2])));
+                        4 == a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(Math.max(0, 1 + k._customBlock_GetTalentNumber(1, 34) + k._customBlock_GetTalentNumber(2, 45) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[158]) - c.asNumber(d[3])))) : a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(Math.max(0, 3 * Math.min(c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 89, 100) + Math.max(0, 2 * (c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 189)) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[2]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[3]) + (k._customBlock_StampBonusOfTypeX("Talent4") + (q._customBlock_FlurboShop(1) + (Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[14]) / 2) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.Tab4Pts) + (3 * c.asNumber(a.engine.getGameAttribute("Tasks")[2][4][0]) + (10 * q._customBlock_AchieveStatus(292) + (10 * q._customBlock_AchieveStatus(295) + (10 * q._customBlock_AchieveStatus(239) + (15 * q._customBlock_AchieveStatus(240) + (12 * q._customBlock_AchieveStatus(241) + q._customBlock_Breeding("ShinyBonusS", "Nah", 13, -1))))))))))))) - c.asNumber(d[3]))));
+                        a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(Math.max(0, 3 * (c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 149) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[2]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[4]) + (k._customBlock_StampBonusOfTypeX("Talent5") + (q._customBlock_FlurboShop(1) + 2 * c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][0]))))) - c.asNumber(d[4]))));
+                        a.engine.getGameAttribute("DNSM").h.TalentDL2.push(Math.floor(c.asNumber(a.engine.getGameAttribute("Lv0")[0]) - 1 + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDL[0]) + k._customBlock_GetTalentNumber(1, 8) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[5]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h["64"]) + (k._customBlock_GetTalentNumber(1, 622) + (k._customBlock_StampBonusOfTypeX("TalentS") + (k._customBlock_GetTalentNumber(1, 17) + (Math.floor(q._customBlock_GuildBonuses(11)) + (q._customBlock_FlurboShop(1) + (Math.min(5 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "w4b2"), 50) + (Math.min(15 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss2C"), 100) + Math.min(4 * u._customBlock_RunCodeOfTypeXforThingY("CardLv", "fallEvent1"), 100)) + (q._customBlock_Labb("SigilBonus", "Blank", 9, 0) + (10 * q._customBlock_AchieveStatus(212) + (20 * q._customBlock_AchieveStatus(289) + (20 * q._customBlock_AchieveStatus(305) + (q._customBlock_Breeding("ShinyBonusS", "Nah", 14, -1) + (r._customBlock_GetBribeBonus("32") + 100 * n._customBlock_RandomEvent("FractalIslandBonus", 5, 999))))))))))))))) - c.asNumber(d[5])));
+                        return a.engine.getGameAttribute("DNSM").h.TalentDL2
+                    }
+                */
+                const totalStarPoints: number [] = [];
+                players.forEach(player => {
+                    var playerSkillsLevelsToUse = -3;
+                    var i = 0;
+                    for (i = 0; i < 9; i++) {
+                        playerSkillsLevelsToUse += player.skills.get(i)?.level ?? 0;
+                    }
+                    playerSkillsLevelsToUse += Math.floor(player.getTalentBonus(275));
+
+                    var playerStarPoints = player.level - 1 + 
+                        (playerSkillsLevelsToUse + player.getTalentBonus(8) + 
+                        ((account.talentPointsOwned[5] ?? 0) + Math.floor(family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) + 
+                        (player.getTalentBonus(622) + 
+                        (stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.data.effect == "TalentS" ? stamp.getBonus() : 0, 0) + 
+                        (player.getTalentBonus(17) + 
+                        (Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) + 
+                        (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0 + 
+                        (Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) + 
+                        (Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) + Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100)) + 
+                        (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0 + 
+                        (achievements[212].completed ? 10 : 0 + 
+                        (achievements[289].completed ? 20 : 0 + 
+                        (achievements[305].completed ? 20 : 0 + 
+                        (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0 + 
+                        ((bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + islandExpeditions.bonusStarTalentPoints))))))))))))));
+                    player.talents
+                    totalStarPoints.push(Math.floor(playerStarPoints));
+                });
+
+                console.log(totalStarPoints);
+
+                line.updateCurrentValue(Math.max(...totalStarPoints));
                 break;
             case 16:
                 // Lowest average kill for crystal spawn
