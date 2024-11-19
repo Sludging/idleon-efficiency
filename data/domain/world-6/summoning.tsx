@@ -171,6 +171,7 @@ export class Summoning extends Domain {
     summonEssences: SummonEssence[] = [];
     summoningLevel: number = 0;
     summonBattles: BattlesInfo = new BattlesInfo();
+    summonFamiliarRaw: number[] = [];
 
     updateUnlockedUpgrades = () => {
         this.summonUpgrades.forEach(upgrade => {
@@ -370,6 +371,8 @@ export class Summoning extends Domain {
 
         summoning.summonBattles.currentHealth = summoningData[3][0] ?? 0;
         summoning.summonBattles.maxHealth = summoningData[3][2] ?? 0;
+
+        summoning.summonFamiliarRaw = summoningData[4];
     }
 
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
