@@ -124,6 +124,9 @@ export class Account extends Domain {
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
 
+    // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
+    talentPointsOwned: number[] = [];
+
     // Arcade
     arcadeMaxBalls: number = 0;
     arcadeBallsToClaim: number = 0;
@@ -148,6 +151,7 @@ export class Account extends Domain {
             {key: "CYColosseumTickets", perPlayer: false, default: 0},
             {key: "FamValColosseumHighscores", perPlayer: false, default: []},
             {key: "FamValMinigameHiscores", perPlayer: false, default: []},
+            {key: "CYTalentPoints", perPlayer: false, default: []},
         ]
     }
 
@@ -174,8 +178,9 @@ export class Account extends Domain {
         const keyData = data.get("CYKeysAll") as number[];
         const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
         const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
+        const talentPointsOwned = data.get("CYTalentPoints") as number[];
 
-        console.log(data);
+        account.talentPointsOwned = talentPointsOwned;
 
         keyData.forEach((keyCount, keyIndex) => {
             const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
