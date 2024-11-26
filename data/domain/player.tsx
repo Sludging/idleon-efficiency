@@ -191,6 +191,67 @@ export class Player {
         }
     }
 
+    getSubClass = (): ClassIndex => {
+        switch (this.classId) {
+            case ClassIndex.Maestro:
+            case ClassIndex.Voidwalker:
+            case ClassIndex.Infinilyte:
+                return ClassIndex.Maestro;
+            case ClassIndex.Barbarian:
+            case ClassIndex.Blood_Berserker:
+            case ClassIndex.Death_Bringer:
+                return ClassIndex.Barbarian;
+            case ClassIndex.Squire:
+            case ClassIndex.Divine_Knight:
+            case ClassIndex.Royal_Guardian:
+                return ClassIndex.Squire;
+            case ClassIndex.Bowman:
+            case ClassIndex.Siege_Breaker:
+            case ClassIndex.Mayheim:
+                return ClassIndex.Bowman;
+            case ClassIndex.Hunter:
+            case ClassIndex.Beast_Master:
+            case ClassIndex.Wind_Walker:
+                return ClassIndex.Hunter;
+            case ClassIndex.Wizard:
+            case ClassIndex.Elemental_Sorcerer:
+            case ClassIndex.Spiritual_Monk:
+                return ClassIndex.Wizard;
+            case ClassIndex.Shaman:
+            case ClassIndex.Bubonic_Conjuror:
+            case ClassIndex.Arcane_Cultist:
+                return ClassIndex.Shaman;
+            default: return ClassIndex.None;
+        }
+    }
+
+    getEliteClass = (): ClassIndex => {
+        switch (this.classId) {
+            case ClassIndex.Voidwalker:
+            case ClassIndex.Infinilyte:
+                return ClassIndex.Voidwalker;
+            case ClassIndex.Blood_Berserker:
+            case ClassIndex.Death_Bringer:
+                return ClassIndex.Blood_Berserker;
+            case ClassIndex.Divine_Knight:
+            case ClassIndex.Royal_Guardian:
+                return ClassIndex.Divine_Knight;
+            case ClassIndex.Siege_Breaker:
+            case ClassIndex.Mayheim:
+                return ClassIndex.Siege_Breaker;
+            case ClassIndex.Beast_Master:
+            case ClassIndex.Wind_Walker:
+                return ClassIndex.Beast_Master;
+            case ClassIndex.Elemental_Sorcerer:
+            case ClassIndex.Spiritual_Monk:
+                return ClassIndex.Elemental_Sorcerer;
+            case ClassIndex.Bubonic_Conjuror:
+            case ClassIndex.Arcane_Cultist:
+                return ClassIndex.Bubonic_Conjuror;
+            default: return ClassIndex.None;
+        }
+    }
+
     getPlayerLetter = () => {
         switch (this.playerID) {
             case 0: return "_";
