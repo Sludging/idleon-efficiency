@@ -5,7 +5,7 @@ import { Stamp } from './stamps';
 import { PlayerStatues, StatusType } from './statues';
 import { Card } from './cards';
 import { Quests } from './quests';
-import { Player } from './player';
+import { Player, TalentTab } from './player';
 import { TaskBoard } from './tasks';
 import { Achievement } from './achievements';
 import { Slab } from './slab';
@@ -427,7 +427,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
                         a.engine.getGameAttribute("DNSM").h.TalentDLbonus.push(c.asNumber(a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints[5]));
                         for (f = 0; 4 > f; )
                             e = f++,
-                            7 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : 19 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWarrior) : 31 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWiz);
+                            7 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : 
+                            19 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWarrior) : 
+                            31 > a.engine.getGameAttribute("CharacterClass") ? a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalArchers) : 
+                            a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e] = c.asNumber(a.engine.getGameAttribute("DNSM").h.TalentDLbonus[e]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.TalWiz);
                         b = a.engine.getGameAttribute("DNSM");
                         e = [];
                         b.h.TalentDL2 = e;
@@ -440,8 +443,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                         return a.engine.getGameAttribute("DNSM").h.TalentDL2
                     }
                 */
-                const totalStarPoints: number [] = [];
-                players.forEach(player => {
+                /*players.forEach(player => {
                     var playerSkillsLevelsToUse = -3;
                     var i = 0;
                     for (i = 0; i < 9; i++) {
@@ -467,8 +469,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                         ((bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + islandExpeditions.bonusStarTalentPoints))))))))))))));
                     player.talents
                     totalStarPoints.push(Math.floor(playerStarPoints));
-                });
-                line.updateCurrentValue(Math.max(...totalStarPoints));
+                });*/
+                line.updateCurrentValue(Math.max(0, ...players.map(player => player.talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0)));
                 break;
             case 16:
                 // Lowest average kill for crystal spawn
