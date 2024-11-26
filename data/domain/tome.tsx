@@ -298,32 +298,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateCurrentValue(cards.reduce((sum, card) => sum+(card.count > 0 ? card.getStars()+1 : 0), 0));
                 break;
             case 3:
-                // TODO
                 // Sum of highest level of each talent (if multiple classes share a same talent, can be counted only once)
-                // Needs to be fixed, not getting the good value even if starting to get close
-                // In-game whole code :
-                /* 
-                    e = this._DummyNumber = 0;
-                    for (f = a.engine.getGameAttribute("SkillLevelsMAX").length; e < f; ) {
-                        this._DummyNumber3 = g = e++;
-                        g = this._DummyNumber2 = 0;
-                        for (var v = a.engine.getGameAttribute("GetPlayersUsernames").length; g < v; )
-                            b = g++,
-                            d = a.engine.getGameAttribute("PlayerDATABASE"),
-                            p = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[b]),
-                            c.asNumber(d.h[p].h.SkillLevelsMAX[this._DummyNumber3 | 0]) > this._DummyNumber2 && (d = a.engine.getGameAttribute("PlayerDATABASE"),
-                            b = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[b]),
-                            this._DummyNumber2 = c.asNumber(d.h[b].h.SkillLevelsMAX[this._DummyNumber3 | 0]));
-                        this._DummyNumber += this._DummyNumber2
-                    }
-                    a.engine.getGameAttribute("DNSM").h.TomeQTY[3] = this._DummyNumber;
-                */
-                var talentsTotalMaxLevel: number = 0;
-                const allTalents = initTalentNameRepo();
-                allTalents.forEach(talent => {
-                        talentsTotalMaxLevel += Math.max(...players.map((player, _) => player.talents.find(playerTalent => playerTalent.data.skillIndex == talent.data.id)?.bookMaxLevel ?? 0));
-                });
-                line.updateCurrentValue(talentsTotalMaxLevel);
+                line.updateCurrentValue(account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum+talentMaxLevel, 0));
                 break;
             case 4:
                 // Number of quests completed (by account, not by player)
