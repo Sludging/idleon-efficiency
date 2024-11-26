@@ -62,7 +62,6 @@ export class PlayerEquipment {
     }
 }
 
-
 export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) { }
 }
@@ -85,6 +84,21 @@ interface LabInfo {
     chips: ChipSlot[]
 }
 
+export enum TalentTab {
+    FirstTab = "Basics",
+    SecondTab = "Class",
+    ThirdTab = "Subclass",
+    FourthTab = "Elite Class",
+    FifthTab = "",
+    SpecialTab = "Star Talents"
+}
+
+interface TalentPoints {
+    tab: TalentTab
+    spent: number
+    totalOwned: number
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -103,6 +117,7 @@ export class Player {
     skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
     talents: Talent[] = [];
+    talentPoints: TalentPoints[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
     activeBubbles: Bubble[] = [];
@@ -703,6 +718,14 @@ export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
     })
 
     return activeIndex;
+}
+
+export const updatePlayerTalentPoints = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+
+    players.forEach(player => {
+        player.talentPoints = [];
+    });
 }
 
 export const updatePlayerStarSigns = (data: Map<string, any>) => {

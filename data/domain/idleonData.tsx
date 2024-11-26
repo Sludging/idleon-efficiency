@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -220,6 +220,7 @@ const postProcessingMap: Record<string, Function> = {
     "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
     "alchemySlabBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemySlabBubbles(accountData),
     "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
+    "playerTalentPoints": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPoints(accountData),
     "tomeScore": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeScores(accountData),
     "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
