@@ -22,8 +22,13 @@ export class Talent {
     public lvlUpText: string;
     public skillIndex: number
 
+    // Represent the level of talent, including all boost possibles
     level: number = 0;
+    // Represent how many talent points have been spent in this talent, so not changed by bonuses affecting talent levels
+    pointsSpent: number = 0;
+    // Represent the max level that can be reached, including all boost possibles
     maxLevel: number = 0;
+    // Represent the max level of a talent as it is displayed in-game, so not including any bonus that could affect talent levels
     bookMaxLevel: number = 0;
 
     constructor(public name: string, public data: TalentModel) {
