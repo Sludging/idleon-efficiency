@@ -37,7 +37,10 @@ export class StarSign {
             bonuses = bonuses.filter(bonus => bonus.bonus > 0);
         }
 
-        return new StarSign(this.name, bonuses);
+        let duplicateSign = new StarSign(this.name, bonuses);
+        duplicateSign.seraphCosmosBonus = this.seraphCosmosBonus;
+
+        return duplicateSign;
     }
 }
 
