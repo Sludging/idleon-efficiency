@@ -90,6 +90,7 @@ export class Talent {
 }
 
 export enum ClassIndex {
+    None = -1,
     Beginner = 1,
     Journeyman = 2,
     Maestro = 3,
@@ -119,6 +120,7 @@ export enum ClassIndex {
 }
 
 export const ClassTalentMap: Record<ClassIndex, string[]> = {
+    [ClassIndex.None]: [],
     [ClassIndex.Beginner]: ["Beginner"],
     [ClassIndex.Journeyman]: ["Beginner", "Journeyman"],
     [ClassIndex.Maestro]: ["Beginner", "Journeyman", "Maestro"],
