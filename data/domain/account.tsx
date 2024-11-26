@@ -2,6 +2,7 @@ import { GroupByFunction, range } from "../utility";
 import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
 import { Construction, Library } from "./construction";
+import { initTalentNameRepo } from "./data/TalentNameRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 import { safeJsonParse } from "./idleonData";
 import { Item } from "./items";
@@ -123,6 +124,7 @@ export class Account extends Domain {
     library: Library = new Library();
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
+    talentsMaxLevels: number[] = [];
 
     // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
     talentPointsOwned: number[] = [];
@@ -152,6 +154,7 @@ export class Account extends Domain {
             {key: "FamValColosseumHighscores", perPlayer: false, default: []},
             {key: "FamValMinigameHiscores", perPlayer: false, default: []},
             {key: "CYTalentPoints", perPlayer: false, default: []},
+            {key: "SM_", perPlayer: true, default: {}},
         ]
     }
 
@@ -179,6 +182,7 @@ export class Account extends Domain {
         const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
         const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
         const talentPointsOwned = data.get("CYTalentPoints") as number[];
+        const charCount = data.get("charCount") as number;
 
         account.talentPointsOwned = talentPointsOwned;
 
@@ -212,6 +216,20 @@ export class Account extends Domain {
 
         account.coloHighscores = colosseumHighscores;
         account.minigameHighscores = minigamesHighscores;
+
+        account.talentsMaxLevels = [];
+        const allTalents = initTalentNameRepo();
+        const playerMaxLevelTalents = [...Array(charCount)].map((_, i) => data.get(`SM_${i}`));
+        allTalents.forEach(talent => {
+            let talentMaxlevel = 0;
+            playerMaxLevelTalents.forEach(playerTalentsMaxLevels => {
+                const playerTalentMaxLevel = playerTalentsMaxLevels[talent.index] ?? 0;
+                if (talentMaxlevel < playerTalentMaxLevel) {
+                    talentMaxlevel = playerTalentMaxLevel;
+                }
+            });
+            account.talentsMaxLevels.push(talentMaxlevel);
+        });
     }
 }
 
