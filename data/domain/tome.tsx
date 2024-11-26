@@ -12,7 +12,7 @@ import { Slab } from './slab';
 import { Constellation } from './constellations';
 import { Alchemy } from './alchemy';
 import { Sigils } from './sigils';
-import { Dungeons, PassiveType } from './dungeons';
+import { Dungeons } from './dungeons';
 import { POExtra } from './postoffice';
 import { initTomeRepo } from './data/TomeRepo';
 import { TomeModel } from './model/tomeModel';
@@ -37,12 +37,6 @@ import { Sneaking } from './world-6/sneaking';
 import { Summoning } from './world-6/summoning';
 import { Arcade } from './arcade';
 import { Prayer } from './prayers';
-import { initTalentNameRepo } from './data/TalentNameRepo';
-import { Guild } from './guild';
-import { Bribe } from './bribes';
-import { IslandExpeditions } from './islandExpedition';
-import { Family } from './family';
-import { ClassIndex } from './talents';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -259,10 +253,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
-    const guild = data.get("guild") as Guild;
-    const bribes = data.get("bribes") as Bribe[];
-    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
-    const family = data.get("family") as Family;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
