@@ -770,7 +770,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 80:
                 // Sum of all Gold Ball shop upgrades levels
-                line.updateCurrentValue(arcade.bonuses.reduce((sum, bonus) => bonus.level, 0));
+                line.updateCurrentValue(arcade.bonuses.reduce((sum, bonus) => sum+bonus.level, 0));
                 break;
             default:
                 line.updateCurrentValue(0);
