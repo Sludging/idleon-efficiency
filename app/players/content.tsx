@@ -1234,7 +1234,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                     {
-                        (player.classId == ClassIndex.Barbarian || player.classId == ClassIndex.Blood_Berserker) &&
+                        (player.getSubClass() == ClassIndex.Barbarian) &&
                         <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow"} />
                     }
                 </Box>
