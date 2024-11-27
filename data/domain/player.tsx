@@ -832,9 +832,9 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         talentDLbonus.push(account.talentPointsOwned[4] ?? 0);
         talentDLbonus.push(account.talentPointsOwned[5] ?? 0);
 
-        const bubbleArcherIndex = alchemy.cauldrons[1].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalArchers");
-        const bubbleWarriorIndex = alchemy.cauldrons[0].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
-        const bubbleMageIndex = alchemy.cauldrons[2].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
+        const bubbleArcherIndex = alchemy.cauldrons[CauldronIndex.Quicc].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalArchers");
+        const bubbleWarriorIndex = alchemy.cauldrons[CauldronIndex.Power].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
+        const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
 
         for (f = 0; 4 > f; f++) {
             switch (true) {
