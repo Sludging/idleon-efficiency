@@ -12,6 +12,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { TomeLine, Tome as TomeDomain, TomeScoreColors } from '../../../data/domain/tome';
 import { CircleInformation } from 'grommet-icons';
 import TipDisplay from '../../../components/base/TipDisplay';
+import { Player } from '../../../data/domain/player';
 
 const LineDisplay = ({ line }: { line: TomeLine }) => {
     const lineDescription = line.getLineDescription();
@@ -58,8 +59,9 @@ function TomeDisplay() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const tome = theData.get("tome") as TomeDomain;
+    const players = theData.get("players") as Player[];
 
-    if (!tome) {
+    if (!tome || !players || players.length == 0) {
         return null;
     }
 
@@ -67,15 +69,29 @@ function TomeDisplay() {
 
     return (
         <Box gap='medium'>
-            <Heading level='2' size='medium' style={{ fontWeight: 'normal' }}>The Tome</Heading>
             <Box>
-                <Text>Total score : {tome.totalScore}{rank != '' ? ` (${rank})` : ''}</Text>
+                <Heading level='2' size='medium' style={{ fontWeight: 'normal' }}>The Tome</Heading>
+                <Text size="xsmall">* Score displayed (and used across the site for calculations based on The Tome) is the highest score across all your characters for simplicity's sake as some values are calculated per character</Text>
             </Box>
-            <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
-                {
-                    tome.lines?.slice().sort((line1, line2) => line1.displayOrder > line2.displayOrder ? 1 : -1).map((line, index) => <LineDisplay key={index} line={line} />)
-                }
-            </Grid>
+            {
+            tome.unlocked ?
+                <Box>
+                    <Box>
+                        <Text>Total score (using {players[tome.highestScoreIndex].playerName}) : {tome.getHighestScore()}{rank != '' ? ` (${rank})` : ''}</Text>
+                    </Box>
+                    <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
+                        {
+                            tome.lines[tome.highestScoreIndex]?.slice().sort((line1, line2) => line1.displayOrder > line2.displayOrder ? 1 : -1).map((line, index) => <LineDisplay key={index} line={line} />)
+                        }
+                    </Grid>
+                </Box>
+                :
+                <Box>
+                    <Box>
+                        <Text>The Tome isn't unlocked yet</Text>
+                    </Box>
+                </Box>
+            }
         </Box>
     )
 }
