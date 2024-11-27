@@ -54,6 +54,8 @@ export class TomeLine {
     // It's where engine.getGameAttribute("DNSM").h.TomeQTY array is populated with each line current value which is then used to calculate each line points
     private currentValue: number = 0;
     lineScore: number = 0;
+    accountTotalLevel: number = 0;
+    unlocked: boolean = false;
 
     constructor(public index: number, public data: TomeModel, public displayOrder: number = 0) {
         if (data.scalingType == TomeScalingEnum.inverseDecay) {
@@ -93,7 +95,7 @@ export class TomeLine {
         return this.data.name?.replace('(Tap for more info)', '').replace('膛', '').trim() ?? '';
     }
 
-    getLineScore = (): number => {
+    private getLineScore = (): number => {
         return Math.ceil(this.getLineMultiplyer() * this.data.totalVal);
     }
 
@@ -138,15 +140,25 @@ export class TomeLine {
         }
     }
 
-    updateCurrentValue = (value: number) => {
+    getIsLineUnlocked = (): boolean => {
+        return this.accountTotalLevel >= (500 + (50 * TomeLineUnlockLevel[this.index] + (10 * Math.max(0, TomeLineUnlockLevel[this.index] - 30) + 10 * Math.max(0, TomeLineUnlockLevel[this.index] - 50))));
+    }
+
+    updateCurrentValue = (value: number, totalAccountLevel: number) => {
         if (this.currentValue != value) {
             this.currentValue = value;
+        }
+        if (this.accountTotalLevel != totalAccountLevel) {
+            this.accountTotalLevel = totalAccountLevel;
+            this.unlocked = this.getIsLineUnlocked();
+        }
+        if (this.currentValue != value || this.accountTotalLevel != totalAccountLevel) {
             this.updateLineScore();
         }
     }
 
-    updateLineScore = () => {
-        this.lineScore = this.getLineScore();
+    private updateLineScore = () => {
+        this.lineScore = this.unlocked ? this.getLineScore() : 0;
     }
 }
 
@@ -462,335 +474,421 @@ export const updateTomeScores = (data: Map<string, any>) => {
             switch(line.index) {
                 case 0:
                     // Total Level of all stamps
-                    line.updateCurrentValue(stampsTotalLevels);
+                    line.updateCurrentValue(stampsTotalLevels, totalPlayersLevels);
                     break;
                 case 1:
                     // Sum of statues levels
-                    line.updateCurrentValue(statues[p].statues.reduce((sum, statue) => sum+statue.level,0));
+                    line.updateCurrentValue(statues[p].statues.reduce((sum, statue) => sum+statue.level,0), totalPlayersLevels);
                     break;
                 case 2:
                     // Sum of cards levels
-                    line.updateCurrentValue(cardsTotalLevels);
+                    line.updateCurrentValue(cardsTotalLevels, totalPlayersLevels);
                     break;
                 case 3:
                     // Sum of highest level of each talent (if multiple classes share a same talent, can be counted only once)
-                    line.updateCurrentValue(talentsSumHighestLevel);
+                    line.updateCurrentValue(talentsSumHighestLevel, totalPlayersLevels);
                     break;
                 case 4:
                     // Number of quests completed (by account, not by player)
-                    line.updateCurrentValue(completedQuests);
+                    line.updateCurrentValue(completedQuests, totalPlayersLevels);
                     break;
                 case 5:
                     // Sum of players levels
-                    line.updateCurrentValue(totalPlayersLevels);
+                    line.updateCurrentValue(totalPlayersLevels, totalPlayersLevels);
                     break;
                 case 6:
                     // Number of tasks completed (except dailies)
-                    line.updateCurrentValue(tasksCompleted);
+                    line.updateCurrentValue(tasksCompleted, totalPlayersLevels);
                     break;
                 case 7:
                     // Number of achievements completed
-                    line.updateCurrentValue(achievementsCompleted);
+                    line.updateCurrentValue(achievementsCompleted, totalPlayersLevels);
                     break;
                 case 8:
                     // Most money held in Storage
-                    line.updateCurrentValue(optionListAccount[198] ?? 0);
+                    line.updateCurrentValue((optionListAccount[198] ?? 0), totalPlayersLevels);
                     break;
                 case 9:
                     // Most Spore caps held in Storage
-                    line.updateCurrentValue(optionListAccount[208] ?? 0);
+                    line.updateCurrentValue((optionListAccount[208] ?? 0), totalPlayersLevels);
                     break;
                 case 10:
                     // Number of different trophies found
-                    line.updateCurrentValue(trophyCount);
+                    line.updateCurrentValue(trophyCount, totalPlayersLevels);
                     break;
                 case 11:
                     // Sum of all skills levels of all players
-                    line.updateCurrentValue(sumOfSkillsLevels);
+                    line.updateCurrentValue(sumOfSkillsLevels, totalPlayersLevels);
                     break;
                 case 12:
                     // Best spike trap round reached
-                    line.updateCurrentValue(optionListAccount[201] ?? 0);
+                    line.updateCurrentValue((optionListAccount[201] ?? 0), totalPlayersLevels);
                     break;
                 case 13:
                     // Total afk hours claimed
-                    line.updateCurrentValue(totalAFKTime);
+                    line.updateCurrentValue(totalAFKTime, totalPlayersLevels);
                     break;
                 case 14:
                     // DPS record on Shimmer Island on dummy in W2
-                    line.updateCurrentValue(optionListAccount[172] ?? 0);
+                    line.updateCurrentValue((optionListAccount[172] ?? 0), totalPlayersLevels);
                     break;
                 case 15:
                     // Sum of star talent points owned
-                    line.updateCurrentValue(players[p].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0);
+                    line.updateCurrentValue((players[p].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0), totalPlayersLevels);
                     break;
                 case 16:
                     // Lowest average kill for crystal spawn
-                    line.updateCurrentValue(1 / (optionListAccount[202] ?? 1));
+                    line.updateCurrentValue((1 / (optionListAccount[202] ?? 1)), totalPlayersLevels);
                     break;
                 case 17:
                     // Dungeon rank
-                    line.updateCurrentValue(dungeonsData.rank);
+                    line.updateCurrentValue(dungeonsData.rank, totalPlayersLevels);
                     break;
                 case 18:
                     // Highest drop multi
-                    line.updateCurrentValue(optionListAccount[200] ?? 0);
+                    line.updateCurrentValue((optionListAccount[200] ?? 0), totalPlayersLevels);
                     break;
                 case 19:
                     // Number of constellations completed
-                    line.updateCurrentValue(constellationCompleted);
+                    line.updateCurrentValue(constellationCompleted, totalPlayersLevels);
                     break;
                 case 20:
                     // Highest damage dealt to gravestone (weekly battle in W2 town)
-                    line.updateCurrentValue(optionListAccount[203] ?? 0);
+                    line.updateCurrentValue((optionListAccount[203] ?? 0), totalPlayersLevels);
                     break;
                 case 21:
                     // Number of different Obols found
-                    line.updateCurrentValue(obolCount);
+                    line.updateCurrentValue(obolCount, totalPlayersLevels);
                     break;
                 case 22:
                     // Sum of all alchemy bubbles levels
-                    line.updateCurrentValue(totalBubblesLevel);
+                    line.updateCurrentValue(totalBubblesLevel, totalPlayersLevels);
                     break;
                 case 23:
                     // Sum of all vials levels
-                    line.updateCurrentValue(totalVialsLevels);
+                    line.updateCurrentValue(totalVialsLevels, totalPlayersLevels);
                     break;
                 case 24:
                     // Sum of sigils level in alchemy
-                    line.updateCurrentValue(totalSigilsLevels);
+                    line.updateCurrentValue(totalSigilsLevels, totalPlayersLevels);
                     break;
                 case 25:
                     // Number of times Jackpot is hit in arcade
-                    line.updateCurrentValue(optionListAccount[199] ?? 0);
+                    line.updateCurrentValue((optionListAccount[199] ?? 0), totalPlayersLevels);
                     break;
                 case 26:
                     // Sum of all post office boxes found
-                    line.updateCurrentValue(postOfficeData.complete + postOfficeData.misc + postOfficeData.streak);
+                    line.updateCurrentValue(postOfficeData.complete + postOfficeData.misc + postOfficeData.streak, totalPlayersLevels);
                     break;
                 case 27:
                     // Highest Killroy score on a Warrior
-                    line.updateCurrentValue(optionListAccount[204] ?? 0);
+                    line.updateCurrentValue((optionListAccount[204] ?? 0), totalPlayersLevels);
                     break;
                 case 28:
                     // Highest Killroy score on an Archer
-                    line.updateCurrentValue(optionListAccount[205] ?? 0);
+                    line.updateCurrentValue((optionListAccount[205] ?? 0), totalPlayersLevels);
                     break;
                 case 29:
                     // Highest Killroy score on a Mage
-                    line.updateCurrentValue(optionListAccount[206] ?? 0);
+                    line.updateCurrentValue((optionListAccount[206] ?? 0), totalPlayersLevels);
                     break;
                 case 30:
                     // Fastest time to kill Efaunt
-                    line.updateCurrentValue(1E3 - (optionListAccount[207] ?? 0));
+                    line.updateCurrentValue(1E3 - (optionListAccount[207] ?? 0), totalPlayersLevels);
                     break;
                 case 31:
                     // Largest Oak Log sample
-                    line.updateCurrentValue(optionListAccount[211] ?? 0);
+                    line.updateCurrentValue((optionListAccount[211] ?? 0), totalPlayersLevels);
                     break;
                 case 32:
                     // Largest Copper Ore sample
-                    line.updateCurrentValue(optionListAccount[212] ?? 0);
+                    line.updateCurrentValue((optionListAccount[212] ?? 0), totalPlayersLevels);
                     break;
                 case 33:
                     // Largest Spore Cap sample
-                    line.updateCurrentValue(optionListAccount[213] ?? 0);
+                    line.updateCurrentValue((optionListAccount[213] ?? 0), totalPlayersLevels);
                     break;
                 case 34:
                     // Largest Goldfish sample
-                    line.updateCurrentValue(optionListAccount[214] ?? 0);
+                    line.updateCurrentValue((optionListAccount[214] ?? 0), totalPlayersLevels);
                     break;
                 case 35:
                     // Largest Fly sample
-                    line.updateCurrentValue(optionListAccount[215] ?? 0);
+                    line.updateCurrentValue((optionListAccount[215] ?? 0), totalPlayersLevels);
                     break;
                 case 36:
                     // Best non duplicate Goblin Gorefest wave (worship)
-                    line.updateCurrentValue(optionListAccount[209] ?? 0);
+                    line.updateCurrentValue((optionListAccount[209] ?? 0), totalPlayersLevels);
                     break;
                 case 37:
                     // Sum of best waves for worship
-                    line.updateCurrentValue(totalBestWorshipWaves);
+                    line.updateCurrentValue(totalBestWorshipWaves, totalPlayersLevels);
                     break;
                 case 38:
                     // Total digits of all Deathnote kills                    
-                    line.updateCurrentValue(totalDeathnoteDigits);
+                    line.updateCurrentValue(totalDeathnoteDigits, totalPlayersLevels);
                     break;
                 case 39:
                     // Number of equinox cloud completed
-                    line.updateCurrentValue(completedEquinoxCloud);
+                    line.updateCurrentValue(completedEquinoxCloud, totalPlayersLevels);
                     break;
                 case 40:
                     // Sum of Refinery rank
-                    line.updateCurrentValue(totalRefineryRanks);
+                    line.updateCurrentValue(totalRefineryRanks, totalPlayersLevels);
                     break;
                 case 41:
                     // Sum of Atom upgrade levels
-                    line.updateCurrentValue(totalAtomUpgradeLevels);
+                    line.updateCurrentValue(totalAtomUpgradeLevels, totalPlayersLevels);
                     break;
                 case 42:
                     // Sum of construction buildings levels
-                    line.updateCurrentValue(totalBuildingsLevel);
+                    line.updateCurrentValue(totalBuildingsLevel, totalPlayersLevels);
                     break;
                 case 43:
                     // Most Tottoise in storage (actually it says Most but it's current)
-                    line.updateCurrentValue(tottoiseInStorage);
+                    line.updateCurrentValue(tottoiseInStorage, totalPlayersLevels);
                     break;
                 case 44:
                     // Most Greenstacks in storage
-                    line.updateCurrentValue(optionListAccount[224] ?? 0);
+                    line.updateCurrentValue((optionListAccount[224] ?? 0), totalPlayersLevels);
                     break;
                 case 45:
                     // Number of Rift levels completed
-                    line.updateCurrentValue(rift.level);
+                    line.updateCurrentValue(rift.level, totalPlayersLevels);
                     break;
                 case 46:
                     // Highest pet power
-                    line.updateCurrentValue(highestPowerPet);
+                    line.updateCurrentValue(highestPowerPet, totalPlayersLevels);
                     break;
                 case 47:
                     // Fastest time to reach Round 100 in Arena
-                    line.updateCurrentValue(1E3 - (optionListAccount[220] ?? 0));
+                    line.updateCurrentValue(1E3 - (optionListAccount[220] ?? 0), totalPlayersLevels);
                     break;
                 case 48:
                     // Sum of all kitchen levels
-                    line.updateCurrentValue(totalKitchenLevels);
+                    line.updateCurrentValue(totalKitchenLevels, totalPlayersLevels);
                     break;
                 case 49:
                     // Sum of all shiny pets levels
-                    line.updateCurrentValue(totalShinyLevels);
+                    line.updateCurrentValue(totalShinyLevels, totalPlayersLevels);
                     break;
                 case 50:
                     // Sum of all meals levels
-                    line.updateCurrentValue(totalMealLevels);
+                    line.updateCurrentValue(totalMealLevels, totalPlayersLevels);
                     break;
                 case 51:
                     // Sum of all pet breedability levels
-                    line.updateCurrentValue(totalPetBreedingLevels);
+                    line.updateCurrentValue(totalPetBreedingLevels, totalPlayersLevels);
                     break;
                 case 52:
                     // Number of lab chips owned
-                    line.updateCurrentValue(labChipsOwned);
+                    line.updateCurrentValue(labChipsOwned, totalPlayersLevels);
                     break;
                 case 53:
                     // Total colosseum score
-                    line.updateCurrentValue(totalColoHighscore);
+                    line.updateCurrentValue(totalColoHighscore, totalPlayersLevels);
                     break;
                 case 54:
                     // Most Giants killed in a single week
-                    line.updateCurrentValue(optionListAccount[217] ?? 0);
+                    line.updateCurrentValue((optionListAccount[217] ?? 0), totalPlayersLevels);
                     break;
                 case 55:
                     // Number of Onyx statues
-                    line.updateCurrentValue((statues[p].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0));
+                    line.updateCurrentValue((statues[p].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0), totalPlayersLevels);
                     break;
                 case 56:
                     // Fastest time to kill 200 Tremor wurms
-                    line.updateCurrentValue(1E3 - (optionListAccount[218] ?? 0));
+                    line.updateCurrentValue(1E3 - (optionListAccount[218] ?? 0), totalPlayersLevels);
                     break;
                 case 57:
                     // Sum of all sailing boats levels
-                    line.updateCurrentValue(totalBoatLevels);
+                    line.updateCurrentValue(totalBoatLevels, totalPlayersLevels);
                     break;
                 case 58:
                     // God ranks in divinity
-                    line.updateCurrentValue(divinity.godRank);
+                    line.updateCurrentValue(divinity.godRank, totalPlayersLevels);
                     break;
                 case 59:
                     // Total gaming plants evolved
-                    line.updateCurrentValue((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0);
+                    line.updateCurrentValue(((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0), totalPlayersLevels);
                     break;
                 case 60:
                     // Number of artifacts found
-                    line.updateCurrentValue(totalArtifactFound);
+                    line.updateCurrentValue(totalArtifactFound, totalPlayersLevels);
                     break;
                 case 61:
                     // Sailing gold bars owned
-                    line.updateCurrentValue(sailing.loot[0] ?? 0);
+                    line.updateCurrentValue((sailing.loot[0] ?? 0), totalPlayersLevels);
                     break;
                 case 62:
                     // Highest sailing capitain level
-                    line.updateCurrentValue(highestLevelCaptain);
+                    line.updateCurrentValue(highestLevelCaptain, totalPlayersLevels);
                     break;
                 case 63:
                     // Highest immortal snail level
-                    line.updateCurrentValue((gaming.importBoxes.find(box => box.index == 7) as ImmortalSnail).highestSnailLevel ?? 0);
+                    line.updateCurrentValue(((gaming.importBoxes.find(box => box.index == 7) as ImmortalSnail).highestSnailLevel ?? 0), totalPlayersLevels);
                     break;
                 case 64:
                     // Best gold nugget
-                    line.updateCurrentValue(gaming.biggestGoldNugget);
+                    line.updateCurrentValue(gaming.biggestGoldNugget, totalPlayersLevels);
                     break;
                 case 65:
                     // Number of items found
-                    line.updateCurrentValue(slab.rawObtainedCount);
+                    line.updateCurrentValue(slab.rawObtainedCount, totalPlayersLevels);
                     break;
                 case 66:
                     // Gaming bits owned
-                    line.updateCurrentValue(gaming.currenBitsOwned);
+                    line.updateCurrentValue(gaming.currenBitsOwned, totalPlayersLevels);
                     break;
                 case 67:
                     // Highest Crop OG
-                    line.updateCurrentValue(highestCropOG);
+                    line.updateCurrentValue(highestCropOG, totalPlayersLevels);
                     break;
                 case 68:
                     // Number of crops discovered
-                    line.updateCurrentValue(cropsDiscovered);
+                    line.updateCurrentValue(cropsDiscovered, totalPlayersLevels);
                     break;
                 case 69:
                     // Number of golden food goldstack
-                    line.updateCurrentValue(beanStacks);
+                    line.updateCurrentValue(beanStacks, totalPlayersLevels);
                     break;
                 case 70:
                     // Sum of all summoning upgrade levels
-                    line.updateCurrentValue(totalSummoningUpgradeLevels);
+                    line.updateCurrentValue(totalSummoningUpgradeLevels, totalPlayersLevels);
                     break;
                 case 71:
                     // Number of summoning wins
-                    line.updateCurrentValue(summoningVictories);
+                    line.updateCurrentValue(summoningVictories, totalPlayersLevels);
                     break;
                 case 72:
                     // Number of ninja floors unlocked
-                    line.updateCurrentValue(ninjaFloorsUnlocked);
+                    line.updateCurrentValue(ninjaFloorsUnlocked, totalPlayersLevels);
                     break;
                 case 73:
                     // Familiars owned in Summoning
-                    line.updateCurrentValue(totalFamiliarsOwned);
+                    line.updateCurrentValue(totalFamiliarsOwned, totalPlayersLevels);
                     break;
                 case 74:
                     // Number of Jade Emporium upgrades bought
-                    line.updateCurrentValue(jadeEmporiumUpgradesBought);
+                    line.updateCurrentValue(jadeEmporiumUpgradesBought, totalPlayersLevels);
                     break;
                 case 75:
                     // Sum of all highest minigame highscore (also includes catching hoop from optionListAccount)
-                    line.updateCurrentValue(totalMinigamesScores);
+                    line.updateCurrentValue(totalMinigamesScores, totalPlayersLevels);
                     break;
                 case 76:
                     // Sum of all prayer upgrade levels
-                    line.updateCurrentValue(totalPrayersLevels);
+                    line.updateCurrentValue(totalPrayersLevels, totalPlayersLevels);
                     break;
                 case 77:
                     // Sum of all plot land rank levels
-                    line.updateCurrentValue(totalPlotRank);
+                    line.updateCurrentValue(totalPlotRank, totalPlayersLevels);
                     break;
                 case 78:
                     // Largest Magic Bean trade
-                    line.updateCurrentValue(optionListAccount[221] ?? 0);
+                    line.updateCurrentValue((optionListAccount[221] ?? 0), totalPlayersLevels);
                     break;
                 case 79:
                     // Most balls earned from LBoFaF (bonus balls from arcade)
-                    line.updateCurrentValue(optionListAccount[222] ?? 0);
+                    line.updateCurrentValue((optionListAccount[222] ?? 0), totalPlayersLevels);
                     break;
                 case 80:
                     // Sum of all Gold Ball shop upgrades levels
-                    line.updateCurrentValue(totalArcadeUpgradeLevel);
+                    line.updateCurrentValue(totalArcadeUpgradeLevel, totalPlayersLevels);
                     break;
                 default:
-                    line.updateCurrentValue(0);
+                    line.updateCurrentValue(0, totalPlayersLevels);
                     break;
             }
-            line.updateLineScore();
         };
     }
 
     tome.updateHighestScore();
+    // If at least one line of the higesht score player is unlocked, Tome is considered unlocked
+    tome.unlocked = tome.lines[tome.highestScoreIndex].some(line => line.unlocked);
 }
+
+// engine.getGameAttribute("CustomLists").h.NinjaInfo[32]
+const TomeLineUnlockLevel = [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    53,
+    10,
+    11,
+    12,
+    75,
+    13,
+    14,
+    80,
+    15,
+    16,
+    17,
+    18,
+    19,
+    21,
+    22,
+    23,
+    24,
+    79,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    76,
+    38,
+    54,
+    40,
+    41,
+    42,
+    39,
+    44,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    45,
+    55,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    56,
+    65,
+    66,
+    67,
+    68,
+    69,
+    20,
+    70,
+    71,
+    43,
+    72,
+    73,
+    74,
+    77,
+    78
+]
