@@ -881,7 +881,7 @@ export function updateAlchemySlabBubbles(data: Map<string, any>) {
 export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const tome = data.get("tome") as Tome;
-    const tomeScore = tome.totalScore;
+    const tomeScore = tome.getHighestScore();
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
         .forEach(bubble => {
