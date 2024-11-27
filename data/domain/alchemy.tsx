@@ -304,6 +304,7 @@ export class Cauldron {
     short_name: string;
     bubbles: Array<Bubble> = [];
     boostLevels: Array<number> = [0, 0, 0, 0];
+    hiddenBubbleLevels: number = 0;
 
     constructor(name: string, short_name: string) {
         this.name = name;
@@ -735,12 +736,17 @@ export class Alchemy extends Domain {
 
 const handleCauldron = (cauldronData: Map<string, number>, index: number, alchemy: Alchemy, boostLevels: Array<number>) => {
     Object.entries(cauldronData).forEach(([bubble_number, level], _) => {
-        if (bubble_number !== "length" && parseInt(bubble_number) < alchemy.cauldrons[index].bubbles.length) {
-            try {
-                alchemy.cauldrons[index].bubbles[parseInt(bubble_number)].level = level;
-            }
-            catch (e) {
-                console.log(`Failed on ${bubble_number} / ${index}`, e)
+        if (bubble_number !== "length") {
+            if (parseInt(bubble_number) < alchemy.cauldrons[index].bubbles.length) {
+                try {
+                    alchemy.cauldrons[index].bubbles[parseInt(bubble_number)].level = level;
+                }
+                catch (e) {
+                    console.log(`Failed on ${bubble_number} / ${index}`, e)
+                }
+            } else {
+                // Those can be for example bubbles for future worlds for which bubble aren't displayed already but we need to know they're discovered (The Tome for example)
+                alchemy.cauldrons[index].hiddenBubbleLevels += level;
             }
         }
     });
