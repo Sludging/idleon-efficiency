@@ -140,8 +140,12 @@ export class TomeLine {
         }
     }
 
-    getIsLineUnlocked = (): boolean => {
-        return this.accountTotalLevel >= (500 + (50 * TomeLineUnlockLevel[this.index] + (10 * Math.max(0, TomeLineUnlockLevel[this.index] - 30) + 10 * Math.max(0, TomeLineUnlockLevel[this.index] - 50))));
+    getLineUnlockLevel = (): number => {
+        return (500 + (50 * TomeLineUnlockLevel[this.index] + (10 * Math.max(0, TomeLineUnlockLevel[this.index] - 30) + 10 * Math.max(0, TomeLineUnlockLevel[this.index] - 50))));
+    }
+
+    private updateIsLineUnlocked = () => {
+        this.unlocked = this.accountTotalLevel >= this.getLineUnlockLevel();
     }
 
     updateCurrentValue = (value: number, totalAccountLevel: number) => {
@@ -150,11 +154,9 @@ export class TomeLine {
         }
         if (this.accountTotalLevel != totalAccountLevel) {
             this.accountTotalLevel = totalAccountLevel;
-            this.unlocked = this.getIsLineUnlocked();
+            this.updateIsLineUnlocked();
         }
-        if (this.currentValue != value || this.accountTotalLevel != totalAccountLevel) {
-            this.updateLineScore();
-        }
+        this.updateLineScore();
     }
 
     private updateLineScore = () => {
