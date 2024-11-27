@@ -37,6 +37,8 @@ const LineDisplay = ({ line }: { line: TomeLine }) => {
                     </Box>
                     <Text color={line.getLineDisplayColor()}>{line.lineScore}</Text>
                 </Box>
+                {
+                line.unlocked ?    
                 <Box>
                     <Meter
                         size="full"
@@ -49,6 +51,11 @@ const LineDisplay = ({ line }: { line: TomeLine }) => {
                         value = {line.lineScore}
                         max={line.data.totalVal} />
                 </Box>
+                :
+                <Box>
+                    <Text>Line is locked until you reach {line.getLineUnlockLevel()} account level ({line.getLineUnlockLevel() - line.accountTotalLevel} left)</Text>
+                </Box>
+                }
             </Box>
         </ShadowBox>
     )
