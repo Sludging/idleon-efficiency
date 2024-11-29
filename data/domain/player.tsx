@@ -807,21 +807,26 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         var talentDLbonus: number[] = [];
         var talentDN4 = -3
 
+        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping, 
+                                            SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching, 
+                                            SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
+
+
         // Base talent points
-        for (var f = 0; 9 > f; f++) {
-            talentDN4 += player.skills.get(f+1)?.level ?? 0;
-        }
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += player.skills.get(skillIndex)?.level ?? 0;
+        });
         talentDN4 += Math.round(player.getTalentBonus(275));
         talentDL.push(talentDN4);
 
-        for (f = talentDN4 = 0; 9 > f; f++) {
-            talentDN4 += Math.floor((player.skills.get(f+1)?.level ?? 0) / 2);
-        }
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 2);
+        });
         talentDL.push(talentDN4);
 
-        for (f = talentDN4 = 0; 9 > f; f++) {
-            talentDN4 += Math.floor((player.skills.get(f+1)?.level ?? 0) / 5);
-        }
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 5);
+        });
         talentDL.push(talentDN4);
 
         // Bonus talent points
@@ -836,7 +841,7 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         const bubbleWarriorIndex = alchemy.cauldrons[CauldronIndex.Power].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
         const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
 
-        for (f = 0; 4 > f; f++) {
+        for (var f = 0; 4 > f; f++) {
             switch (true) {
                 case player.getBaseClass() == ClassIndex.Archer:
                     if (bubbleArcherIndex > -1) {
@@ -915,7 +920,7 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
                 Math.max(0, 2 * (player.level - 189)) + talentDL[2] + talentDLbonus[3] +
                 stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent4" ? stamp.getBonus() : 0), 0) +
                 (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-                Math.floor((player.skills.get(14)?.level ?? 0) / 2) + 
+                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) + 
                 alchemy.getVialBonusForKey("Tab4Pts") +
                 (taskBoard.merits.find(merit => merit.index == 32)?.getBonus() ?? 0) +
                 (achievements[292].completed ? 10 : 0) + 
