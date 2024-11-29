@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import TomeDisplay from "./content";
 
 export const metadata: Metadata = {
-    title: "Cards",
+    title: "Tome",
 }
 
 export default function Page() {
