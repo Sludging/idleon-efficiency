@@ -184,7 +184,11 @@ export class Account extends Domain {
         const talentPointsOwned = data.get("CYTalentPoints") as number[];
         const charCount = data.get("charCount") as number;
 
-        account.talentPointsOwned = talentPointsOwned;
+        account.talentPointsOwned = [];
+        talentPointsOwned.forEach((points) => {
+            // Some values high enough can be stored as string
+            account.talentPointsOwned.push(parseInt(points.toString(), 10));
+        });
 
         keyData.forEach((keyCount, keyIndex) => {
             const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
@@ -214,8 +218,16 @@ export class Account extends Domain {
             }
         });
 
-        account.coloHighscores = colosseumHighscores;
-        account.minigameHighscores = minigamesHighscores;
+        account.coloHighscores = [];
+        colosseumHighscores.forEach((score) => {
+            // Some values high enough can be stored as string
+            account.coloHighscores.push(parseInt(score.toString(), 10));
+        });
+        account.minigameHighscores = [];
+        minigamesHighscores.forEach((score) => {
+            // Some values high enough can be stored as string
+            account.minigameHighscores.push(parseInt(score.toString(), 10));
+        });
 
         account.talentsMaxLevels = [];
         const allTalents = initTalentNameRepo();
