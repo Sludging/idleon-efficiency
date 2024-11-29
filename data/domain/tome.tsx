@@ -356,7 +356,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Sum of all sigils levels
     const totalSigilsLevels = sigils.sigils.reduce((sum, sigil) => sum+(sigil.boostLevel+1),0);
 
-    // Sum fo best worship waves
+    // Sum of best worship waves
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum+totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
