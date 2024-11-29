@@ -14,14 +14,17 @@ import { CircleInformation } from 'grommet-icons';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { Player } from '../../../data/domain/player';
 
-const LineDisplay = ({ line }: { line: TomeLine }) => {
+const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine, playerIndex: number, totalAccountLevel: number }) => {
     const lineDescription = line.getLineDescription();
+    const playerScore = line.getPlayerScore(playerIndex);
+    const lineColor = line.getPlayerLineDisplayColor(playerIndex);
+
     return (
-        <ShadowBox background='dark-1' style={{ opacity: line.lineScore > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
+        <ShadowBox background='dark-1' style={{ opacity: playerScore > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
             <Box direction='column' justify='center' gap="small">
                 <Box direction='row' justify='between'>
                     <Box direction='row' gap="small" wrap>
-                        <Text>{line.getCurrentValueDisplay()} - {line.getLineName()}</Text>
+                        <Text>{line.getPlayerCurrentValueDisplay(playerIndex)} - {line.getLineName()}</Text>
                         {lineDescription != "" && <TipDisplay
                             heading={line.getLineName()}
                             size='medium'
@@ -35,7 +38,7 @@ const LineDisplay = ({ line }: { line: TomeLine }) => {
                             <CircleInformation size="small" />
                         </TipDisplay>}
                     </Box>
-                    <Text color={line.getLineDisplayColor()}>{line.lineScore}</Text>
+                    <Text color={lineColor}>{playerScore}</Text>
                 </Box>
                 {
                 line.unlocked ?    
@@ -47,13 +50,13 @@ const LineDisplay = ({ line }: { line: TomeLine }) => {
                         thickness='xsmall'
                         round
                         background={TomeScoreColors.Background}
-                        color={line.getLineDisplayColor()}
-                        value = {line.lineScore}
+                        color={lineColor}
+                        value = {playerScore}
                         max={line.data.totalVal} />
                 </Box>
                 :
                 <Box>
-                    <Text>Line is locked until you reach {line.getLineUnlockLevel()} account level ({line.getLineUnlockLevel() - line.accountTotalLevel} left)</Text>
+                    <Text>Line is locked until you reach {line.getLineUnlockLevel()} account level ({line.getLineUnlockLevel() - totalAccountLevel} left)</Text>
                 </Box>
                 }
             </Box>
@@ -88,7 +91,7 @@ function TomeDisplay() {
                     </Box>
                     <Grid columns={{ size: 'auto', count: 2 }} gap='small'>
                         {
-                            tome.lines[tome.highestScoreIndex]?.slice().sort((line1, line2) => line1.displayOrder > line2.displayOrder ? 1 : -1).map((line, index) => <LineDisplay key={index} line={line} />)
+                            tome.lines.slice().sort((line1, line2) => line1.displayOrder > line2.displayOrder ? 1 : -1).map((line, index) => <LineDisplay key={index} line={line} playerIndex={tome.highestScoreIndex} totalAccountLevel={tome.totalAccountLevel} />)
                         }
                     </Grid>
                 </Box>
