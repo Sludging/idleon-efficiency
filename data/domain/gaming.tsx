@@ -181,17 +181,16 @@ export class Gaming extends Domain {
 
         gaming.importBoxes.forEach(box => {
             const dataIndex = 25+box.index;
+            box.level = gamingSproutData[dataIndex][0] ?? 0;
             switch (box.index) {
                 case 3:
                     (box as ElegantSeashell).plantsEvolved = gamingSproutData[dataIndex][1] ?? 0;
+                    break;
                 case 7:
                     (box as ImmortalSnail).currentSnailLevel = gamingSproutData[dataIndex][1] ?? 0;
                     (box as ImmortalSnail).highestSnailLevel = Math.max(gamingSproutData[dataIndex][1] ?? 0, optionList[210] ?? 0);
                     (box as ImmortalSnail).lettersAvailable = 0;
                     (box as ImmortalSnail).lettersSpentEncourage = gamingSproutData[dataIndex][2] ?? 0;
-                    // No break above before we want in all cases to get the level
-                default:
-                    box.level = gamingSproutData[dataIndex][0] ?? 0;
                     break;
             }
         });
