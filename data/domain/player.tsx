@@ -839,33 +839,31 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         talentDLbonus.push(account.talentPointsOwned[4] ?? 0);
         talentDLbonus.push(account.talentPointsOwned[5] ?? 0);
 
-        const bubbleArcherIndex = alchemy.cauldrons[CauldronIndex.Quicc].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalArchers");
-        const bubbleWarriorIndex = alchemy.cauldrons[CauldronIndex.Power].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
-        const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
+        var bubbleBonus = 0;
+        switch (true) {
+            case player.getBaseClass() == ClassIndex.Archer:
+            case player.getBaseClass() == ClassIndex.Beginner:
+                const bubbleArcherIndex = alchemy.cauldrons[CauldronIndex.Quicc].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalArchers");
+                if (bubbleArcherIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 1, bubbleArcherIndex);
+                }
+                break;
+            case player.getBaseClass() == ClassIndex.Warrior:
+                const bubbleWarriorIndex = alchemy.cauldrons[CauldronIndex.Power].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
+                if (bubbleWarriorIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 0, bubbleWarriorIndex);
+                }
+                break;
+            case player.getBaseClass() == ClassIndex.Mage:
+                const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
+                if (bubbleMageIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 2, bubbleMageIndex);
+                }                    
+                break;
+        }  
 
         for (var f = 0; 4 > f; f++) {
-            switch (true) {
-                case player.getBaseClass() == ClassIndex.Archer:
-                    if (bubbleArcherIndex > -1) {
-                        talentDLbonus[f] += alchemy.getBonusForPlayer(player, 1, bubbleArcherIndex);
-                    }
-                    break;
-                case player.getBaseClass() == ClassIndex.Warrior:
-                    if (bubbleWarriorIndex > -1) {
-                        talentDLbonus[f] += alchemy.getBonusForPlayer(player, 0, bubbleWarriorIndex);
-                    }
-                    break;
-                case player.getBaseClass() == ClassIndex.Mage:
-                    if (bubbleMageIndex > -1) {
-                        talentDLbonus[f] += alchemy.getBonusForPlayer(player, 2, bubbleMageIndex);
-                    }                    
-                    break;
-                case player.getBaseClass() == ClassIndex.Beginner:
-                    if (bubbleArcherIndex > -1) {
-                        talentDLbonus[f] += alchemy.getBonusForPlayer(player, 1, bubbleArcherIndex);
-                    }
-                    break;
-            }                
+                talentDLbonus[f] += bubbleBonus;       
         }
 
         // Sum of all sources for talent points
