@@ -819,11 +819,13 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         talentDN4 += Math.round(player.getTalentBonus(275));
         talentDL.push(talentDN4);
 
+        talentDN4 = 0;
         skillsToUseForTalentPoints.forEach(skillIndex => {
             talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 2);
         });
         talentDL.push(talentDN4);
 
+        talentDN4 = 0;
         skillsToUseForTalentPoints.forEach(skillIndex => {
             talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 5);
         });
