@@ -280,7 +280,7 @@ export const updateAccount = (data: Map<string, any>) => {
             else {
                 account.activity[AFKTypeEnum.Error] += players.length;
             }
-        })
+        });
 
     // Copy library (or well, reference)
     account.library = construction.library;
