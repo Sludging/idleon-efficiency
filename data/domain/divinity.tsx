@@ -138,7 +138,7 @@ export class Divinity extends Domain {
         const numberOfUnlockedGods = divinityData[25];
 
         // Index 26 = ? 
-        divinity.godRank = numberOfUnlockedGods - 10;
+        divinity.godRank = Math.max(0, numberOfUnlockedGods - 10);
         // Next 10 indexes = god levels
         divinity.gods.forEach((god, godIndex) => {
             // The index of the god doesn't match up the bonus, yay Lava.
