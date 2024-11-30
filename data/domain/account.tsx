@@ -187,7 +187,7 @@ export class Account extends Domain {
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {
             // Some values high enough can be stored as string
-            account.talentPointsOwned.push(parseInt(points.toString(), 10));
+            account.talentPointsOwned.push(parseFloat(points.toString()));
         });
 
         keyData.forEach((keyCount, keyIndex) => {
@@ -221,12 +221,12 @@ export class Account extends Domain {
         account.coloHighscores = [];
         colosseumHighscores.forEach((score) => {
             // Some values high enough can be stored as string
-            account.coloHighscores.push(parseInt(score.toString(), 10));
+            account.coloHighscores.push(parseFloat(score.toString()));
         });
         account.minigameHighscores = [];
         minigamesHighscores.forEach((score) => {
             // Some values high enough can be stored as string
-            account.minigameHighscores.push(parseInt(score.toString(), 10));
+            account.minigameHighscores.push(parseFloat(score.toString()));
         });
 
         account.talentsMaxLevels = [];
