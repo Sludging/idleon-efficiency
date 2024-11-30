@@ -482,6 +482,9 @@ export class Player {
             case AFKTypeEnum.Nothing:
                 imageLocation = "ClassIconsNA1";
                 break;
+            case AFKTypeEnum.PayingRespect:
+                imageLocation = "ClassIconsFc";
+                break;
             default:
                 imageLocation = "ClassIconsNA2";
                 break;
