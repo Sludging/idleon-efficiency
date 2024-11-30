@@ -441,7 +441,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
         : artifact.status == ArtifactStatus.Ancient ? sum+2
         : artifact.status == ArtifactStatus.Eldritch ? sum+3
         : artifact.status == ArtifactStatus.Sovereign ? sum+4 
-        : 0
+        : sum + 0
     , 0);
 
     // Highest level captain
