@@ -20,11 +20,11 @@ const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine,
     const lineColor = line.getPlayerLineDisplayColor(playerIndex);
 
     return (
-        <ShadowBox background='dark-1' style={{ opacity: playerScore > 0 ? 1 : 0.5 }} gap='small' pad='medium' align='left'>
+        <ShadowBox background='dark-1' style={{ opacity: playerScore > 0 ? 1 : 0.5 }} gap='small' pad='small' align='left'>
             <Box direction='column' justify='center' gap="small">
                 <Box direction='row' justify='between'>
                     <Box direction='row' gap="small" wrap>
-                        <Text>{line.getPlayerCurrentValueDisplay(playerIndex)} - {line.getLineName()}</Text>
+                        <Text size="small">{line.getPlayerCurrentValueDisplay(playerIndex)} - {line.getLineName()}</Text>
                         {lineDescription != "" && <TipDisplay
                             heading={line.getLineName()}
                             size='medium'
@@ -38,7 +38,7 @@ const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine,
                             <CircleInformation size="small" />
                         </TipDisplay>}
                     </Box>
-                    <Text color={lineColor}>{playerScore}</Text>
+                    <Text size="small" color={lineColor}>{playerScore}</Text>
                 </Box>
                 {
                 line.unlocked ?    
@@ -47,7 +47,7 @@ const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine,
                         size="full"
                         type="bar"
                         alignSelf='center'
-                        thickness='xsmall'
+                        thickness='xxsmall'
                         round
                         background={TomeScoreColors.Background}
                         color={lineColor}
