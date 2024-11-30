@@ -2,6 +2,7 @@ import { GroupByFunction, range } from "../utility";
 import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
 import { Construction, Library } from "./construction";
+import { initTalentNameRepo } from "./data/TalentNameRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 import { safeJsonParse } from "./idleonData";
 import { Item } from "./items";
@@ -118,9 +119,15 @@ export class Miniboss {
 export class Account extends Domain {
     keys: Key[] = [];
     coloTickets: Item = Item.emptyItem("Colo Tickets");
+    coloHighscores: number[] = [];
+    minigameHighscores: number[] = [];
     library: Library = new Library();
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
+    talentsMaxLevels: number[] = [];
+
+    // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
+    talentPointsOwned: number[] = [];
 
     // Arcade
     arcadeMaxBalls: number = 0;
@@ -144,6 +151,10 @@ export class Account extends Domain {
         return [
             {key: "CYKeysAll", perPlayer: false, default: []},
             {key: "CYColosseumTickets", perPlayer: false, default: 0},
+            {key: "FamValColosseumHighscores", perPlayer: false, default: []},
+            {key: "FamValMinigameHiscores", perPlayer: false, default: []},
+            {key: "CYTalentPoints", perPlayer: false, default: []},
+            {key: "SM_", perPlayer: true, default: {}},
         ]
     }
 
@@ -168,6 +179,16 @@ export class Account extends Domain {
         const account = data.get(this.getDataKey()) as Account;
         const optionList = data.get("OptLacc") as number[];
         const keyData = data.get("CYKeysAll") as number[];
+        const colosseumHighscores = data.get("FamValColosseumHighscores") as number[];
+        const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
+        const talentPointsOwned = data.get("CYTalentPoints") as number[];
+        const charCount = data.get("charCount") as number;
+
+        account.talentPointsOwned = [];
+        talentPointsOwned.forEach((points) => {
+            // Some values high enough can be stored as string
+            account.talentPointsOwned.push(parseFloat(points.toString()));
+        });
 
         keyData.forEach((keyCount, keyIndex) => {
             const keyItem = account.keys.find(key => key.item.internalName == `Key${keyIndex + 1}`)
@@ -195,7 +216,32 @@ export class Account extends Domain {
             if (boss.bossInternalName == "mini6a") {
                 boss.setDaysSinceLastKill(optionList[226] as number || 0);
             }
-        })
+        });
+
+        account.coloHighscores = [];
+        colosseumHighscores.forEach((score) => {
+            // Some values high enough can be stored as string
+            account.coloHighscores.push(parseFloat(score.toString()));
+        });
+        account.minigameHighscores = [];
+        minigamesHighscores.forEach((score) => {
+            // Some values high enough can be stored as string
+            account.minigameHighscores.push(parseFloat(score.toString()));
+        });
+
+        account.talentsMaxLevels = [];
+        const allTalents = initTalentNameRepo();
+        const playerMaxLevelTalents = [...Array(charCount)].map((_, i) => data.get(`SM_${i}`));
+        allTalents.forEach(talent => {
+            let talentMaxlevel = 0;
+            playerMaxLevelTalents.forEach(playerTalentsMaxLevels => {
+                const playerTalentMaxLevel = playerTalentsMaxLevels[talent.index] ?? 0;
+                if (talentMaxlevel < playerTalentMaxLevel) {
+                    talentMaxlevel = playerTalentMaxLevel;
+                }
+            });
+            account.talentsMaxLevels.push(talentMaxlevel);
+        });
     }
 }
 
@@ -234,7 +280,7 @@ export const updateAccount = (data: Map<string, any>) => {
             else {
                 account.activity[AFKTypeEnum.Error] += players.length;
             }
-        })
+        });
 
     // Copy library (or well, reference)
     account.library = construction.library;

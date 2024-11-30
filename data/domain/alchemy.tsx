@@ -22,6 +22,7 @@ import { JadeComponentModel } from './model/jadeComponentModel';
 import { CropComponentModel } from './model/cropComponentModel';
 import { SummonComponentModel } from './model/summonComponentModel';
 import { SailTreasureComponentModel } from './model/sailTreasureComponentModel';
+import { Tome } from './tome';
 
 export enum CauldronIndex {
     Power = 0,
@@ -188,6 +189,7 @@ export class ImpactedBySlabBubble extends Bubble {
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
         return new ImpactedBySlabBubble(id, data, iconPrefix, bubbleIndex);
     }
+    
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         super(id, data, iconPrefix, bubbleIndex);
     }
@@ -222,7 +224,7 @@ export class ImpactedByTheTomeBubble extends Bubble {
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
         let bonusText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
-        bonusText += ` (${this.theTomeTotalScore} total score = ${bonus.toString()} total bonus)`;
+        bonusText += ` (${this.theTomeTotalScore} total score = +${bonus.toString()}% total bonus)`;
         return bonusText;
     }
 }
@@ -302,6 +304,7 @@ export class Cauldron {
     short_name: string;
     bubbles: Array<Bubble> = [];
     boostLevels: Array<number> = [0, 0, 0, 0];
+    hiddenBubbleLevels: number = 0;
 
     constructor(name: string, short_name: string) {
         this.name = name;
@@ -733,12 +736,17 @@ export class Alchemy extends Domain {
 
 const handleCauldron = (cauldronData: Map<string, number>, index: number, alchemy: Alchemy, boostLevels: Array<number>) => {
     Object.entries(cauldronData).forEach(([bubble_number, level], _) => {
-        if (bubble_number !== "length" && parseInt(bubble_number) < alchemy.cauldrons[index].bubbles.length) {
-            try {
-                alchemy.cauldrons[index].bubbles[parseInt(bubble_number)].level = level;
-            }
-            catch (e) {
-                console.log(`Failed on ${bubble_number} / ${index}`, e)
+        if (bubble_number !== "length") {
+            if (parseInt(bubble_number) < alchemy.cauldrons[index].bubbles.length) {
+                try {
+                    alchemy.cauldrons[index].bubbles[parseInt(bubble_number)].level = level;
+                }
+                catch (e) {
+                    console.log(`Failed on ${bubble_number} / ${index}`, e)
+                }
+            } else {
+                // Those can be for example bubbles for future worlds for which bubble aren't displayed already but we need to know they're discovered (The Tome for example)
+                alchemy.cauldrons[index].hiddenBubbleLevels += level;
             }
         }
     });
@@ -872,7 +880,8 @@ export function updateAlchemySlabBubbles(data: Map<string, any>) {
 
 export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
-    const tomeScore = 0; // TODO : Once The Tome is implemented, need to update with the actual value
+    const tome = data.get("tome") as Tome;
+    const tomeScore = tome.getHighestScore();
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
         .forEach(bubble => {

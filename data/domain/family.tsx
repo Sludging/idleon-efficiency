@@ -97,6 +97,7 @@ export const classAccountBonus = [
 ];
 
 export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
+    [ClassIndex.None]: [],
     [ClassIndex.Beginner]: [],
     [ClassIndex.Journeyman]: [],
     [ClassIndex.Maestro]: [ClassIndex.Journeyman],

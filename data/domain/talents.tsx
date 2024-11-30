@@ -22,8 +22,14 @@ export class Talent {
     public lvlUpText: string;
     public skillIndex: number
 
+    // Represent the level of talent, including all boost possibles
     level: number = 0;
+    // Represent how many talent points have been spent in this talent, so not changed by bonuses affecting talent levels
+    pointsSpent: number = 0;
+    // Represent the max level that can be reached, including all boost possibles
     maxLevel: number = 0;
+    // Represent the max level of a talent as it is displayed in-game, so not including any bonus that could affect talent levels
+    bookMaxLevel: number = 0;
 
     constructor(public name: string, public data: TalentModel) {
         this.description = data.description;
@@ -84,6 +90,7 @@ export class Talent {
 }
 
 export enum ClassIndex {
+    None = -1,
     Beginner = 1,
     Journeyman = 2,
     Maestro = 3,
@@ -113,6 +120,7 @@ export enum ClassIndex {
 }
 
 export const ClassTalentMap: Record<ClassIndex, string[]> = {
+    [ClassIndex.None]: [],
     [ClassIndex.Beginner]: ["Beginner"],
     [ClassIndex.Journeyman]: ["Beginner", "Journeyman"],
     [ClassIndex.Maestro]: ["Beginner", "Journeyman", "Maestro"],

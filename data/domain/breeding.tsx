@@ -245,7 +245,7 @@ export class Pet {
     }
 
     calculateBreedingLevel = () => {
-        return 1 + Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)));
+        return Math.min(9, Math.floor(Math.pow(this.getBreedabilityBonus() - 1, .8)) + 1);
     }
 
     getBreedabilityBonus = () => {
@@ -399,6 +399,7 @@ export class Breeding extends Domain {
 
     basePets: Pet[] = [];
     fenceyardPets: Pet[] = [];
+    storedPets: Pet[] = [];
     shinyBonuses: ShinyBonus[] = [];
 
     speciesUnlocks: number[] = [];
@@ -491,6 +492,7 @@ export class Breeding extends Domain {
         breeding.eggs = [];
         breeding.territory.forEach(territory => territory.pets = []);
         breeding.fenceyardPets = [];
+        breeding.storedPets = [];
         breeding.shinyBonuses = [];
 
         breeding.timeTillEgg = optionList[87];
@@ -504,7 +506,7 @@ export class Breeding extends Domain {
 
         breedingData[2].forEach((upgrade, index) => {
             breeding.upgrade[index].level = upgrade;
-        })
+        });
 
         const fencePets = pets.slice(0, 27);
 
@@ -520,7 +522,21 @@ export class Breeding extends Domain {
             } else {
                 console.log("Failed to find base pet", pet[0] as string)
             }
-        })
+        });
+
+        petsStored.forEach(pet => {
+            if (pet[0] == "none") {
+                return;
+            }
+            // If getting unknown gene, just default to the first gene as a fallback.
+            const petGene = breeding.genes[pet[1] as number] ?? breeding.genes[0];
+            const basePet = breeding.basePets.find(basePet => basePet.data.petId == pet[0] as string);
+            if (basePet) {
+                breeding.storedPets.push(new Pet(basePet.index, basePet.data, petGene, basePet.shinyBonus, pet[2] as number));
+            } else {
+                console.log("Failed to find base pet", pet[0] as string)
+            }
+        });
 
         const territoryFightsWon = optionList[85];
 
@@ -552,9 +568,9 @@ export class Breeding extends Domain {
                     } else {
                         console.log("Failed to find base pet", pet[0] as string)
                     }
-                })
+                });
             }
-        })
+        });
 
         breeding.worldGenes = breedingData[3];
         breeding.deadCells = breeding.worldGenes[breeding.worldGenes.length-1];
@@ -569,14 +585,14 @@ export class Breeding extends Domain {
                 pet.geneLevel = breedingData[4 + pet.data.world][pIndex];
 
                 pet.geneUpgradeCostReduction = breeding.upgrade[1].getBonus();
-            })
+            });
         });
 
         // Calculate shiny total bonuses.
         GroupByFunction(breeding.basePets, (pet: Pet) => pet.shinyBonus.index).forEach((shinyPets, _) => {
             const totalLevels = shinyPets.reduce((sum, pet) => sum += pet.shinyLevel, 0);
             breeding.shinyBonuses.push(new ShinyBonus(shinyPets[0].shinyBonus, totalLevels, shinyPets));
-        })
+        });
     }
 }
 

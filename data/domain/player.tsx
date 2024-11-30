@@ -29,10 +29,12 @@ import { AFKTypeEnum } from './enum/aFKTypeEnum';
 import { Shrine, ShrineConstants } from './shrines';
 import { Divinity } from './divinity';
 import { Deathnote } from './deathnote';
-import { InfiniteStarsBonus, Rift } from './rift';
 import { Domain, RawData } from './base/domain';
 import { Equinox } from './equinox';
-import { BeanstalkingBonusType, PristineCharm, Sneaking } from './world-6/sneaking';
+import { BeanstalkingBonusType, Sneaking } from './world-6/sneaking';
+import { Account } from './account';
+import { IslandExpeditions } from './islandExpedition';
+import { TaskBoard } from './tasks';
 
 export class PlayerStats {
     strength: number = 0;
@@ -62,7 +64,6 @@ export class PlayerEquipment {
     }
 }
 
-
 export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) { }
 }
@@ -85,6 +86,21 @@ interface LabInfo {
     chips: ChipSlot[]
 }
 
+export enum TalentTab {
+    FirstTab = "Basics",
+    SecondTab = "Class",
+    ThirdTab = "Subclass",
+    FourthTab = "Elite Class",
+    FifthTab = "",
+    SpecialTab = "Star Talents"
+}
+
+interface TalentPoints {
+    tab: TalentTab
+    spent: number
+    totalOwned: number
+}
+
 export class Player {
     playerID: number;
     playerName: string;
@@ -103,6 +119,7 @@ export class Player {
     skills: Map<SkillsIndex, SkillData>;
     skillsRank: Map<SkillsIndex, number>;
     talents: Talent[] = [];
+    talentPoints: TalentPoints[] = [];
     postOffice: Box[] = initPostOffice();
     activeBubblesString: string[] = [];
     activeBubbles: Bubble[] = [];
@@ -173,6 +190,67 @@ export class Player {
             case ClassIndex.Arcane_Cultist:
                 return ClassIndex.Mage;
             default: return ClassIndex.Beginner; // Is this really the best default?
+        }
+    }
+
+    getSubClass = (): ClassIndex => {
+        switch (this.classId) {
+            case ClassIndex.Maestro:
+            case ClassIndex.Voidwalker:
+            case ClassIndex.Infinilyte:
+                return ClassIndex.Maestro;
+            case ClassIndex.Barbarian:
+            case ClassIndex.Blood_Berserker:
+            case ClassIndex.Death_Bringer:
+                return ClassIndex.Barbarian;
+            case ClassIndex.Squire:
+            case ClassIndex.Divine_Knight:
+            case ClassIndex.Royal_Guardian:
+                return ClassIndex.Squire;
+            case ClassIndex.Bowman:
+            case ClassIndex.Siege_Breaker:
+            case ClassIndex.Mayheim:
+                return ClassIndex.Bowman;
+            case ClassIndex.Hunter:
+            case ClassIndex.Beast_Master:
+            case ClassIndex.Wind_Walker:
+                return ClassIndex.Hunter;
+            case ClassIndex.Wizard:
+            case ClassIndex.Elemental_Sorcerer:
+            case ClassIndex.Spiritual_Monk:
+                return ClassIndex.Wizard;
+            case ClassIndex.Shaman:
+            case ClassIndex.Bubonic_Conjuror:
+            case ClassIndex.Arcane_Cultist:
+                return ClassIndex.Shaman;
+            default: return ClassIndex.None;
+        }
+    }
+
+    getEliteClass = (): ClassIndex => {
+        switch (this.classId) {
+            case ClassIndex.Voidwalker:
+            case ClassIndex.Infinilyte:
+                return ClassIndex.Voidwalker;
+            case ClassIndex.Blood_Berserker:
+            case ClassIndex.Death_Bringer:
+                return ClassIndex.Blood_Berserker;
+            case ClassIndex.Divine_Knight:
+            case ClassIndex.Royal_Guardian:
+                return ClassIndex.Divine_Knight;
+            case ClassIndex.Siege_Breaker:
+            case ClassIndex.Mayheim:
+                return ClassIndex.Siege_Breaker;
+            case ClassIndex.Beast_Master:
+            case ClassIndex.Wind_Walker:
+                return ClassIndex.Beast_Master;
+            case ClassIndex.Elemental_Sorcerer:
+            case ClassIndex.Spiritual_Monk:
+                return ClassIndex.Elemental_Sorcerer;
+            case ClassIndex.Bubonic_Conjuror:
+            case ClassIndex.Arcane_Cultist:
+                return ClassIndex.Bubonic_Conjuror;
+            default: return ClassIndex.None;
         }
     }
 
@@ -504,7 +582,9 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
 
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
+        talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+        talent.bookMaxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
     })
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;
@@ -703,6 +783,199 @@ export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
     return activeIndex;
 }
 
+export const updatePlayerTalentPoints = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    const account = data.get("account") as Account;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const guild = data.get("guild") as Guild;
+    const bribes = data.get("bribes") as Bribe[];
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
+    const family = data.get("family") as Family;
+    const stamps = data.get("stamps") as Stamp[][];
+    const cards = data.get("cards") as Card[];
+    const taskBoard = data.get("taskboard") as TaskBoard;
+    const achievements = data.get("achievements") as Achievement[];
+    const optionListAccount = data.get("OptLacc") as number[];
+    const sigils = data.get("sigils") as Sigils;
+    const dungeonsData = data.get("dungeons") as Dungeons;
+    const breeding = data.get("breeding") as Breeding;
+    const arcade = data.get("arcade") as Arcade;
+    
+    players.forEach(player => {
+        player.talentPoints = [];
+        var talentDL: number[] = [];
+        var talentDLbonus: number[] = [];
+        var talentDN4 = -3
+
+        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping, 
+                                            SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching, 
+                                            SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
+
+
+        // Base talent points
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += player.skills.get(skillIndex)?.level ?? 0;
+        });
+        talentDN4 += Math.round(player.getTalentBonus(275));
+        talentDL.push(talentDN4);
+
+        talentDN4 = 0;
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 2);
+        });
+        talentDL.push(talentDN4);
+
+        talentDN4 = 0;
+        skillsToUseForTalentPoints.forEach(skillIndex => {
+            talentDN4 += Math.floor((player.skills.get(skillIndex)?.level ?? 0) / 5);
+        });
+        talentDL.push(talentDN4);
+
+        // Bonus talent points
+        talentDLbonus.push(account.talentPointsOwned[0] ?? 0);
+        talentDLbonus.push(account.talentPointsOwned[1] ?? 0);
+        talentDLbonus.push(account.talentPointsOwned[2] ?? 0);
+        talentDLbonus.push(account.talentPointsOwned[3] ?? 0);
+        talentDLbonus.push(account.talentPointsOwned[4] ?? 0);
+        talentDLbonus.push(account.talentPointsOwned[5] ?? 0);
+
+        var bubbleBonus = 0;
+        switch (true) {
+            case player.getBaseClass() == ClassIndex.Archer:
+            case player.getBaseClass() == ClassIndex.Beginner:
+                const bubbleArcherIndex = alchemy.cauldrons[CauldronIndex.Quicc].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalArchers");
+                if (bubbleArcherIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 1, bubbleArcherIndex);
+                }
+                break;
+            case player.getBaseClass() == ClassIndex.Warrior:
+                const bubbleWarriorIndex = alchemy.cauldrons[CauldronIndex.Power].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWarrior");
+                if (bubbleWarriorIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 0, bubbleWarriorIndex);
+                }
+                break;
+            case player.getBaseClass() == ClassIndex.Mage:
+                const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
+                if (bubbleMageIndex > -1) {
+                    bubbleBonus = alchemy.getBonusForPlayer(player, 2, bubbleMageIndex);
+                }                    
+                break;
+        }  
+
+        for (var f = 0; 4 > f; f++) {
+                talentDLbonus[f] += bubbleBonus;       
+        }
+
+        // Sum of all sources for talent points
+        // First tab
+        let firstTabPoints = 0;
+        firstTabPoints = Math.floor((3 * (player.level - 1)) + talentDL[0] + talentDLbonus[0] +
+            alchemy.getVialBonusForKey("Tab1Pts") +
+            player.starSigns.reduce((sum, sign) => sum + sign.getBonus("Talent Points"), 0) +
+            stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent1" ? stamp.getBonus() : 0), 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (arcade.bonuses.find(bonus => bonus.index == 16)?.getBonus() ?? 0) + 
+            (achievements[54].completed ? 5 : 0) + 
+            (achievements[216].completed ? 6 : 0) +
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 10)?.getBonus() ?? 0));
+        player.talentPoints.push({tab: TalentTab.FirstTab, spent: 0, totalOwned: firstTabPoints});
+
+        // Second tab
+        let secondTabPoints = 0;
+        secondTabPoints = Math.floor((3 * (player.level - 9)) + talentDL[1] + talentDLbonus[1] + 
+            alchemy.getVialBonusForKey("Tab2Pts") + 
+            player.getTalentBonus(119) +
+            player.getTalentBonus(299) +
+            player.getTalentBonus(494) +
+            player.getTalentBonus(44) +
+            stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent2" ? stamp.getBonus() : 0), 0) +
+            (achievements[76].completed ? 2 : 0) + 
+            (achievements[78].completed ? 3 : 0) +
+            (achievements[230].completed ? 8 : 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 11)?.getBonus() ?? 0));
+        player.talentPoints.push({tab: TalentTab.SecondTab, spent: 0, totalOwned: secondTabPoints});
+
+        // Third tab
+        let thirdTabPoints = 0;
+        thirdTabPoints = Math.floor((3 * (player.level - 29)) + talentDL[1] + talentDLbonus[2] + 
+            alchemy.getVialBonusForKey("Tab3Pts") + 
+            stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent3" ? stamp.getBonus() : 0), 0) +
+            (achievements[166].completed ? 5 : 0) + 
+            (achievements[170].completed ? 10 : 0) +
+            (achievements[219].completed ? 8 : 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 12)?.getBonus() ?? 0));
+        player.talentPoints.push({tab: TalentTab.ThirdTab, spent: 0, totalOwned: thirdTabPoints});
+
+        // Fourth tab
+        let fourthTabPoints = 0;
+        if (player.getEliteClass() == ClassIndex.Maestro) {
+            fourthTabPoints = Math.floor(Math.max(0, 1 + 
+                player.getTalentBonus(34) + 
+                player.getTalentBonus(45) * optionListAccount[158])); 
+        } else {
+            fourthTabPoints = Math.floor(Math.max(0, 
+                3 * Math.min(player.level - 89, 100) + 
+                Math.max(0, 2 * (player.level - 189)) + talentDL[2] + talentDLbonus[3] +
+                stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent4" ? stamp.getBonus() : 0), 0) +
+                (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) + 
+                alchemy.getVialBonusForKey("Tab4Pts") +
+                (taskBoard.merits.find(merit => merit.index == 32)?.getBonus() ?? 0) +
+                (achievements[292].completed ? 10 : 0) + 
+                (achievements[295].completed ? 10 : 0) +
+                (achievements[239].completed ? 10 : 0) +
+                (achievements[240].completed ? 15 : 0) +
+                (achievements[241].completed ? 12 : 0) +
+                (breeding.shinyBonuses.find(bonus => bonus.data.index == 13)?.getBonus() ?? 0)));
+        }
+        player.talentPoints.push({tab: TalentTab.FourthTab, spent: 0, totalOwned: fourthTabPoints});
+
+        // Fifth tab
+        let fifthTabPoints = 0;
+        fifthTabPoints = Math.floor(Math.max(0, 3 * (player.level - 149) + talentDL[2] + talentDLbonus[4] + 
+            stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent5" ? stamp.getBonus() : 0), 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (taskBoard.merits.find(merit => merit.index == 40)?.getBonus() ?? 0)));
+        player.talentPoints.push({tab: TalentTab.FifthTab, spent: 0, totalOwned: fifthTabPoints});
+
+        // Star talents
+        let specialTabPoints = 0;
+        specialTabPoints = Math.floor(player.level - 1 + talentDL[0] + talentDLbonus[5] +
+            player.getTalentBonus(8) +
+            player.getTalentBonus(622) +
+            player.getTalentBonus(17) +
+            (family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) + 
+            stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "TalentS" ? stamp.getBonus() : 0), 0) +
+            Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) + 
+            Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) + 
+            Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100) + 
+            (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0) + 
+            (achievements[212].completed ? 10 : 0) + 
+            (achievements[289].completed ? 20 : 0) + 
+            (achievements[305].completed ? 20 : 0) +
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) + 
+            (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + 
+            islandExpeditions.bonusStarTalentPoints);
+        player.talentPoints.push({tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints});
+
+        // Calculate the points spent for each tab
+        ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).forEach((talentPage, pageIndex) => {
+            // special talents all share the same points value
+            const pointsArrayIndex = talentPage.indexOf("Special Talent") == -1 ? pageIndex : player.talentPoints.length - 1;
+            GetTalentArray(talentPage).forEach((originalTalent, _) => {
+                const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
+                if (talent && pointsArrayIndex < player.talentPoints.length) {
+                    player.talentPoints[pointsArrayIndex].spent += talent.pointsSpent;
+                }
+            });
+        });
+    });
+}
+
 export const updatePlayerStarSigns = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const starSigns = data.get("starsigns") as StarSigns;
@@ -817,7 +1090,6 @@ export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const obols = data.get("obols") as ObolsData;
     const alchemy = data.get("alchemy") as Alchemy;
-    const deathnote = data.get("deathnote") as Deathnote;
 
     // Set player active bubble array, easier to work with.
     players.forEach(player => {

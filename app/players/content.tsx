@@ -863,7 +863,7 @@ function TalentDisplay({ player }: { player: Player }) {
                                     GetTalentArray(talentPage).map((originalTalent, index) => {
                                         const talent = player.talents.find(x => x.skillIndex == originalTalent.skillIndex);
                                         if (talent) {
-                                            const maxLeveLToShow = bookMaxLevel && (![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex)) ? Math.max(100, talent.maxLevel - player.extraLevelsFromBear - player.extraLevelsFromTalent - player.extraLevelsFromES - player.extraLevelsFromAchievements - player.extraLevelsFromSlug - player.extraLevelsFromEquinox) : talent.maxLevel;
+                                            const maxLeveLToShow = bookMaxLevel ? talent.bookMaxLevel : talent.maxLevel;
                                             return (
                                                 <Box key={index}>
                                                     <Tip
@@ -1234,7 +1234,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                     {
-                        (player.classId == ClassIndex.Barbarian || player.classId == ClassIndex.Blood_Berserker) &&
+                        (player.getSubClass() == ClassIndex.Barbarian) &&
                         <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow"} />
                     }
                 </Box>

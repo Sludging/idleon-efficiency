@@ -55,7 +55,42 @@ export class ImportBox {
     }
 
     static fromBase = (data: GamingBoxBase[]): ImportBox[] => {
-        return data.map(box => new ImportBox(box.index, box.data))
+        const toReturn: ImportBox[] = [];
+
+        data.forEach(box => {
+            switch(box.index) {
+                case 3:
+                    toReturn.push(new ElegantSeashell(box.index, box.data));
+                    break;
+                case 7:
+                    toReturn.push(new ImmortalSnail(box.index, box.data));
+                    break;
+                default:
+                    toReturn.push(new ImportBox(box.index, box.data));
+                    break;
+            }
+        });
+
+        return toReturn;
+    }
+}
+
+export class ElegantSeashell extends ImportBox {
+    plantsEvolved: number = 0;
+
+    constructor(public index: number, public data: GamingBoxModel) {
+        super(index, data)
+    }
+}
+
+export class ImmortalSnail extends ImportBox {
+    currentSnailLevel: number = 0;
+    highestSnailLevel: number = 0;
+    lettersAvailable: number = 0;
+    lettersSpentEncourage: number = 0;
+
+    constructor(public index: number, public data: GamingBoxModel) {
+        super(index, data)
     }
 }
 
@@ -67,6 +102,10 @@ export class Gaming extends Domain {
     superbits: Superbits[] = Superbits.fromBase(initGamingSuperbitsRepo());
     rawGamingData: any[] = [];
     rawSproutData: number[][] = [];
+
+    biggestGoldNugget: number = 0;
+
+    currenBitsOwned: number = 0;
 
     equinoxBonusToNuggets: number = 1;
 
@@ -125,6 +164,7 @@ export class Gaming extends Domain {
         const gamingData = data.get("Gaming") as any[] || [];
         const gamingSproutData = data.get("GamingSprout") as number[][];
         const playerSkillLevels = range(0, charCount).map((_, i) => { return data.get(`Lv0_${i}`) }) as number[][];
+        const optionList = data.get("OptLacc") as number[];
 
         if (gamingData.length == 0) {
             return;
@@ -133,10 +173,27 @@ export class Gaming extends Domain {
         gaming.rawGamingData = gamingData;
         gaming.rawSproutData = gamingSproutData;
 
+        gaming.biggestGoldNugget = gamingData[8] ?? 0;
+
+        gaming.currenBitsOwned = gamingData[0] ?? 0;
+
         gaming.level = playerSkillLevels.reduce((max, player) => max = Math.max(max, player[SkillsIndex.Gaming]), 0);
 
-        gaming.importBoxes[0].level = gamingSproutData[25][0];
-        gaming.importBoxes[1].level = gamingSproutData[26][0];
+        gaming.importBoxes.forEach(box => {
+            const dataIndex = 25+box.index;
+            box.level = gamingSproutData[dataIndex][0] ?? 0;
+            switch (box.index) {
+                case 3:
+                    (box as ElegantSeashell).plantsEvolved = gamingSproutData[dataIndex][1] ?? 0;
+                    break;
+                case 7:
+                    (box as ImmortalSnail).currentSnailLevel = gamingSproutData[dataIndex][1] ?? 0;
+                    (box as ImmortalSnail).highestSnailLevel = Math.max(gamingSproutData[dataIndex][1] ?? 0, optionList[210] ?? 0);
+                    (box as ImmortalSnail).lettersAvailable = 0;
+                    (box as ImmortalSnail).lettersSpentEncourage = gamingSproutData[dataIndex][2] ?? 0;
+                    break;
+            }
+        });
 
         if (gamingData[12] != undefined && gamingData[12] != null && (gamingData[12] as string) != "") {
             [...(gamingData[12] as string)].forEach(char => {

@@ -505,6 +505,20 @@ export class Sneaking extends Domain {
         });
         sneaking.beanstalking.unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 1)?.purchased ?? false;
         sneaking.beanstalking.supersizedUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 2)?.purchased ?? false;
+        
+        sneaking.updatePlayersActivity();
+    }
+
+    getUnlockedFloors = (): number => {
+        var floorUnlocked: number = 0;
+        var i: number = 0;
+        for (i = 0; i < this.doors.length; i++) {
+            if (0 >= this.doors[i].maxHP - this.doors[i].damageDone) {
+                floorUnlocked = Math.min(12, i+2);
+            }
+        }
+
+        return floorUnlocked;
     }
 
     updatePlayersActivity = () => {
@@ -540,6 +554,4 @@ export const updateSneaking = (data: Map<string, any>) => {
     if (currencyConduitUpgrade) {
         currencyConduitUpgrade.bubbleDiscount = alchemy.getBonusForBubble(CauldronIndex.Kazam, AlchemyConst.LoCostMoJade);
     }
-
-    sneaking.updatePlayersActivity();
 }

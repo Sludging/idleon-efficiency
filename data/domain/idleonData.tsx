@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -52,6 +52,7 @@ import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerB
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
+import { Tome, updateTomeScores } from './tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonusFromEquinox, Votes } from './world-2/votes';
 
@@ -128,6 +129,7 @@ const domainList: Domain[] = [
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
+    new Tome("tome"),
     new KillRoy("killroy"),
     new Votes("votes"),
 ]
@@ -217,10 +219,12 @@ const postProcessingMap: Record<string, Function> = {
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
     "alchemySlabBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemySlabBubbles(accountData),
-    "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
-    "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
-    "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
+    "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
+    "playerTalentPoints": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPoints(accountData),
+    "tomeScore": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeScores(accountData),
+    "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
+    "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
