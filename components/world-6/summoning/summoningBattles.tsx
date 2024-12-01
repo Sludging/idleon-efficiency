@@ -6,7 +6,7 @@ import { nFormatter } from "../../../data/utility";
 import { Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../../data/domain/world-6/summoning';
 
 export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: BattlesInfo, essences: SummonEssence[] }) => {
-    const allVictories: number = battlesInfos.allVictories.reduce((allVictories, colorVictories) => allVictories + colorVictories, 0);
+    const allVictories: number = battlesInfos.getTotalVictories();
 
     const maxHealth = 3; // Should be battlesInfos.maxHealth but seems like it increase by buyting hearths in gem shop, which don't really increase max health
 

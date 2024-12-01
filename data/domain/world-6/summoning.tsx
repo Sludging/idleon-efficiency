@@ -139,14 +139,26 @@ export interface SummonEssence {
 }
 
 export class BattlesInfo {
-    allVictories: number[] = [];
+    private allVictories: number[] = [];
     allBattles: SummonEnemyModel[][] = [];
+    // Can't mix them as it's not managed in the same way, also in case some more colors appears later
+    endlessVictories: number = 0;
     currentHealth: number = 0;
     maxHealth: number = 0;
     playerUnitsHP: number = 0;
     playerUnitsAtk: number = 0;
 
     constructor() {}
+
+    // This should now be used anywhere this value is needed
+    getTotalVictories = (): number => {
+        return this.allVictories.reduce((sum, victories) => sum + victories, 0) + this.endlessVictories;
+    }
+
+    // Use this to set value of the victories array as it is now private to force using the above function
+    updateAllVictories = (victoryArray: number[]) => {
+        this.allVictories = victoryArray;
+    }
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
         if (battle) {
@@ -201,7 +213,7 @@ export class Summoning extends Domain {
             switch (upgrade.index) {
                 case 0:
                     // Multiply bonus by all color victories
-                    const allVictories: number = this.summonEssences.reduce((sum, essence) => sum + essence.victories, 0);
+                    const allVictories: number = this.summonBattles.getTotalVictories();
                     upgrade.bonusMultiplyer = allVictories;
                     break;
                 case 11:
@@ -237,7 +249,8 @@ export class Summoning extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "Summon", perPlayer: false, default: [] }
+            { key: "Summon", perPlayer: false, default: [] },
+            { key: "OptLacc", perPlayer: false, default: [] }
         ]
     }
 
@@ -248,6 +261,7 @@ export class Summoning extends Domain {
     parse(data: Map<string, any>): void {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
+        const optionList = data.get("OptLacc") as number[];
 
         // Defend against old accounts and people without any summoning data.
         if (summoningData.length == 0) {
@@ -266,7 +280,8 @@ export class Summoning extends Domain {
         );
         
         // Already add values for next essences even if shouldn't use all indexes
-        summoning.summonBattles.allVictories = [0,0,0,0,0,0,0,0];
+        const victoryArray = [0,0,0,0,0,0,0,0];
+        summoning.summonBattles.updateAllVictories(victoryArray);
         const enemyRepo = initSummonEnemyRepo();
 
         // Create an array of array that contains all summoning battles in the right order using WhiteBattleOrder then DeathNoteOrder for other colors
@@ -285,6 +300,7 @@ export class Summoning extends Domain {
                 }
             })            
         }
+        summoning.summonBattles.endlessVictories = optionList[319] ?? 0;
 
         const wonBattles = summoningData[1] as string[];
         wonBattles.forEach((battle) => {
@@ -300,12 +316,13 @@ export class Summoning extends Domain {
                 // Add a victory to the corresponding color
                 for (let i = 0; i < summoning.summonBattles.allBattles.length; i++) {
                     if (summoning.summonBattles.allBattles[i].includes(enemyData.data)) {
-                        summoning.summonBattles.allVictories[i]++;
+                        victoryArray[i]++;
                         return;
                     }
                 }
             }
         });
+        summoning.summonBattles.updateAllVictories(victoryArray);
 
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
@@ -333,12 +350,14 @@ export class Summoning extends Domain {
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
                     display = true;
                     break;
-                // For now you can't get red or later essences, but we already know which upgrade will unlock red essence, but for others will need to do it when available
                 case SummonEssenceColor.Red:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
                     display = true;
                     break;
                 case SummonEssenceColor.Cyan:
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 53)?.level ?? 0) > 0;
+                    display = true;
+                    break;
                 case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
@@ -348,15 +367,8 @@ export class Summoning extends Domain {
             }
 
             let colorVictories: number = 0;
-            if (index < summoning.summonBattles.allVictories.length) {
-                colorVictories = summoning.summonBattles.allVictories[index];
-            }
-
-            let colorMaxBattles: number = 0;
-            if (index == 0) {
-                colorMaxBattles = WhiteBattleOrder.length;
-            } else if (index-1 < deathNoteMobOrder.length) {
-                colorMaxBattles = deathNoteMobOrder[index-1].length;
+            if (index < victoryArray.length) {
+                colorVictories = victoryArray[index];
             }
 
             let colorBattles: SummonEnemyModel[] = [];
