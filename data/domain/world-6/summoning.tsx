@@ -268,6 +268,26 @@ export class Summoning extends Domain {
         });
     }
 
+    updatePlayersUnitStats = () => {
+        const healthFlatBonus = [1,10,35,37];
+        const healthFlat = (1 + this.summonUpgrades.filter(upgrade => healthFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
+        this.summonBattles.playerUnitsHP = healthFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 20)?.getFullBonus() ?? 0) / 100 ) 
+                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 50)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 59)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 63)?.getFullBonus() ?? 0)) / 100 )
+                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 61)?.getFullBonus() ?? 0) / 100);
+
+        const attackFlatBonus = [3,12,21,31];
+        const attackFlat = (1 + this.summonUpgrades.filter(upgrade => attackFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
+        this.summonBattles.playerUnitsAtk = attackFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 43)?.getFullBonus() ?? 0) / 100 ) 
+                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 51)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 56)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 64)?.getFullBonus() ?? 0)) / 100 )
+                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 60)?.getFullBonus() ?? 0) / 100);
+
+        // This bonus is based on attack damage of units, so can't update it before
+        const sharpenedSpikeUpgrade = this.summonUpgrades.find(upgrade => upgrade.index == 68);
+        if (sharpenedSpikeUpgrade) {
+            sharpenedSpikeUpgrade.bonusMultiplyer = this.summonBattles.playerUnitsAtk;
+        }
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "Summon", perPlayer: false, default: [] },
@@ -400,10 +420,6 @@ export class Summoning extends Domain {
             summoning.summonEssences.push({ color: index, quantity: value, unlocked: unlocked, display: display, victories: colorVictories, battles: colorBattles });
         });
 
-        summoning.summonBattles.playerUnitsHP = 1 * (1 + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 1)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 10)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 35)?.getBonus() ?? 0) + (summoning.summonUpgrades.find(upgrade => upgrade.index == 37)?.getBonus() ?? 0))))) * (1 + (summoning.summonUpgrades.find(upgrade => upgrade.index == 20)?.getBonus() ?? 0) / 100)
-
-        summoning.summonBattles.playerUnitsAtk =  1 * (1 + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 3)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() ?? 0) + ((summoning.summonUpgrades.find(upgrade => upgrade.index == 21)?.getBonus() ?? 0) + (summoning.summonUpgrades.find(upgrade => upgrade.index == 31)?.getBonus() ?? 0))))) * (1 + (summoning.summonUpgrades.find(upgrade => upgrade.index == 43)?.getBonus() ?? 0) / 100)
-
         summoning.updateUnlockedUpgrades();
 
         summoning.summonBattles.currentHealth = summoningData[3][0] ?? 0;
@@ -444,6 +460,7 @@ export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => 
     summoning.summoningLevel = Math.max(...levels);
 
     summoning.updateSecondaryBonus();
+    summoning.updatePlayersUnitStats();
 }
 
 export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
