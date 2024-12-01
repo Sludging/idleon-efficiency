@@ -36,7 +36,7 @@ export class SummonUpgrade {
     unlocked: boolean = false;
     level: number = 0;
     shouldBeDisplayed: boolean = true;
-    secondaryBonus: string = "";
+    bonusMultiplyer: number = 1;
 
     constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
         this.shouldBeDisplayed = (data.name != "Name");
@@ -47,8 +47,12 @@ export class SummonUpgrade {
         return this.data.cost * Math.pow(this.data.costExponent, this.level);
     }
 
-    getBonus = (level: number = this.level): number => {
+    getBaseBonus = (level: number = this.level): number => {
         return level * this.data.bonusQty
+    }
+
+    getFullBonus = (level: number = this.level): number => {
+        return this.getBaseBonus(level) * this.bonusMultiplyer;
     }
 
     getImageData = (): ImageData => {
@@ -84,7 +88,7 @@ export class SummonUpgrade {
         if (this.index == 2) {
             return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset by cycle of 4 days (but you keep summoned familiars)";
         } else {
-            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBonus(level).toString()).replace(/}/, this.secondaryBonus);
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBaseBonus(level).toString()).replace(/}/, this.getFullBonus(level).toString());
         }
     }
 
@@ -198,23 +202,23 @@ export class Summoning extends Domain {
                 case 0:
                     // Multiply bonus by all color victories
                     const allVictories: number = this.summonEssences.reduce((sum, essence) => sum + essence.victories, 0);
-                    upgrade.secondaryBonus = (upgrade.getBonus() * allVictories).toString();
+                    upgrade.bonusMultiplyer = allVictories;
                     break;
                 case 11:
                     // Multiply bonus by green victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Green)?.victories ?? 0)).toString();
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Green)?.victories ?? 0);
                     break;
                 case 18:
                     // Multiply bonus by yellow victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Yellow)?.victories ?? 0)).toString();
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Yellow)?.victories ?? 0);
                     break;
                 case 27:
                     // Multiply bonus by blue victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Blue)?.victories ?? 0)).toString();
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Blue)?.victories ?? 0);
                     break;
                 case 38:
                     // Multiply bonus by purple victory
-                    upgrade.secondaryBonus = (upgrade.getBonus() * (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Purple)?.victories ?? 0)).toString();
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Purple)?.victories ?? 0);
                     break;
                 case 30:
                 case 40:
@@ -222,10 +226,10 @@ export class Summoning extends Domain {
                 case 66:
                 case 67:
                     // Multiply bonus by summoning level
-                    upgrade.secondaryBonus = (upgrade.getBonus() * this.summoningLevel).toString();
+                    upgrade.bonusMultiplyer = this.summoningLevel;
                     break;
                 default:
-                    upgrade.secondaryBonus = "";
+                    upgrade.bonusMultiplyer = 1;
                     break;
             }
         });
