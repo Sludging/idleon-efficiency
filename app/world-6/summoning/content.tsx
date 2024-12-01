@@ -37,7 +37,7 @@ function Summoning() {
                 <Text>Summoning Lv: {summoning.summoningLevel}</Text>
                 <Box justify="start" direction='row' gap="small">
                     {
-                        summoning.summonEssences.filter(essence => essence.unlocked == true).map((essence) => (
+                        summoning.summonEssences.filter(essence => essence.displayEssence == true).map((essence) => (
                             <ShadowBox width={"xsmall"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
                                 <ComponentAndLabel
                                     label={SummoningDomain.getEssenceColorName(essence.color)}

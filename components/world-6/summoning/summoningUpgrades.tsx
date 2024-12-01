@@ -78,7 +78,7 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
 export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
     const [activeTab, setActiveTab] = useState<string>("White");
     const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true);
-    const tabsName = essences.filter(essence => essence.display == true).map(essence => {
+    const tabsName = essences.filter(essence => essence.displayEssence == true).map(essence => {
         if(upgradesToDisplay.filter(upgrade => upgrade.data.colour == essence.color).length > 0){
             return SummoningDomain.getEssenceColorName(essence.color);
         } else {

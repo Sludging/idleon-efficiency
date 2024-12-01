@@ -38,7 +38,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                     </Box>
                     <Box wrap direction="row" justify="center">
                         {
-                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length && essence.display).map((essence, index) => {
+                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length && essence.displayBattles).map((essence, index) => {
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">

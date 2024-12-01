@@ -29,7 +29,8 @@ export enum SummonEssenceColor {
     Red = 5,
     Cyan = 6,
     FutureContent3 = 7,
-    FutureContent4 = 8
+    FutureContent4 = 8,
+    Endless = 9
 }
 
 export class SummonUpgrade {
@@ -132,17 +133,16 @@ export class SummonBonus {
 export interface SummonEssence {
     color: SummonEssenceColor,
     quantity: number,
-    display: boolean,
+    displayBattles: boolean,
+    displayEssence: boolean,
     unlocked: boolean,
     victories: number,
     battles: SummonEnemyModel[]
 }
 
 export class BattlesInfo {
-    private allVictories: number[] = [];
+    allVictories: number[] = [];
     allBattles: SummonEnemyModel[][] = [];
-    // Can't mix them as it's not managed in the same way, also in case some more colors appears later
-    endlessVictories: number = 0;
     currentHealth: number = 0;
     maxHealth: number = 0;
     playerUnitsHP: number = 0;
@@ -152,12 +152,7 @@ export class BattlesInfo {
 
     // This should now be used anywhere this value is needed
     getTotalVictories = (): number => {
-        return this.allVictories.reduce((sum, victories) => sum + victories, 0) + this.endlessVictories;
-    }
-
-    // Use this to set value of the victories array as it is now private to force using the above function
-    updateAllVictories = (victoryArray: number[]) => {
-        this.allVictories = victoryArray;
+        return this.allVictories.reduce((sum, victories) => sum + victories, 0);
     }
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
@@ -244,7 +239,7 @@ export class Summoning extends Domain {
                 case 63:
                 case 64:
                     // Multiply bonus by endless summoning victory
-                    upgrade.bonusMultiplyer = this.summonBattles.endlessVictories;
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Endless)?.victories ?? 0);
                     break;
                 case 30:
                 case 40:
@@ -320,13 +315,16 @@ export class Summoning extends Domain {
             base => new SummonBonus(base.index, base.data)
         );
         
-        // Already add values for next essences even if shouldn't use all indexes
-        const victoryArray = [0,0,0,0,0,0,0,0];
-        summoning.summonBattles.updateAllVictories(victoryArray);
+        // Reset and add "blank" values into arrays
+        summoning.summonBattles.allVictories = [];
+        summoning.summonBattles.allBattles = [];
+        for (var i = 0; i < Object.keys(SummonEssenceColor).filter(key => isNaN(Number(key))).length; i++) {
+            summoning.summonBattles.allVictories.push(0);
+            summoning.summonBattles.allBattles.push([]);
+        }
+        
         const enemyRepo = initSummonEnemyRepo();
-
         // Create an array of array that contains all summoning battles in the right order using WhiteBattleOrder then DeathNoteOrder for other colors
-        summoning.summonBattles.allBattles = [[], [], [], [], [], [], [], []];
         WhiteBattleOrder.forEach(battle => {
             const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
             if (enemyData) {
@@ -341,7 +339,6 @@ export class Summoning extends Domain {
                 }
             })            
         }
-        summoning.summonBattles.endlessVictories = optionList[319] ?? 0;
 
         const wonBattles = summoningData[1] as string[];
         wonBattles.forEach((battle) => {
@@ -357,59 +354,86 @@ export class Summoning extends Domain {
                 // Add a victory to the corresponding color
                 for (let i = 0; i < summoning.summonBattles.allBattles.length; i++) {
                     if (summoning.summonBattles.allBattles[i].includes(enemyData.data)) {
-                        victoryArray[i]++;
+                        summoning.summonBattles.allVictories[i]++;
                         return;
                     }
                 }
             }
         });
-        summoning.summonBattles.updateAllVictories(victoryArray);
+        for (var i = 0; i < (optionList[319] ?? 0); i++) {
+            // TODO : finish to translate this to IE code once we get the data from wiki bot
+            /*
+            const relevantBonus = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[9][i - 40 * Math.floor(i / 40)]) - 1) as SummonBonus | undefined;
+            if (relevantBonus) {
+                // Some bonusQty are stored in string, so need to cast it to avoid concatening strings instead of making a sum of bonuses
+                relevantBonus.bonusValue += c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[10][f - 40 * Math.floor(f / 40)]);
+            }
+            */
+            summoning.summonBattles.allVictories[SummonEssenceColor.Endless]++;
+        }
 
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
-        essences.forEach((value, index) => {
+        for (var index = 0; index < summoning.summonBattles.allVictories.length; index++) {
             let unlocked: boolean = false;
-            let display: boolean = false;
+            let displayBattle: boolean = false;
+            let displayEssence: boolean = false;
+            let essenceOwned: number = index < essences.length ? essences[index] : 0;
             switch(index) {
                 case SummonEssenceColor.White:
                     unlocked = true;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Green:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 4)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Yellow:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 13)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Blue:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 23)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Purple:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 33)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Red:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 44)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
                     break;
                 case SummonEssenceColor.Cyan:
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 53)?.level ?? 0) > 0;
-                    display = true;
+                    displayBattle = true;
+                    displayEssence = true;
+                    break;
+                case SummonEssenceColor.Endless:
+                    // Need to update this once we know which upgrade unlock this
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 53)?.level ?? 0) > 0;
+                    displayBattle = true;
+                    // There's no real Endless essence, so never display it
+                    displayEssence = false;
                     break;
                 case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
                     unlocked = false;
-                    display = false;
+                    displayBattle = false;
+                    displayEssence = false;
                     break;
             }
 
             let colorVictories: number = 0;
-            if (index < victoryArray.length) {
-                colorVictories = victoryArray[index];
+            if (index < summoning.summonBattles.allVictories.length) {
+                colorVictories = summoning.summonBattles.allVictories[index];
             }
 
             let colorBattles: SummonEnemyModel[] = [];
@@ -417,8 +441,8 @@ export class Summoning extends Domain {
                 colorBattles = summoning.summonBattles.allBattles[index];
             }
 
-            summoning.summonEssences.push({ color: index, quantity: value, unlocked: unlocked, display: display, victories: colorVictories, battles: colorBattles });
-        });
+            summoning.summonEssences.push({ color: index, quantity: essenceOwned, unlocked: unlocked, displayBattles: displayBattle, displayEssence: displayEssence, victories: colorVictories, battles: colorBattles });
+        }
 
         summoning.updateUnlockedUpgrades();
 
