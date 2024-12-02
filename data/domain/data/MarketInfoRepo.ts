@@ -169,7 +169,7 @@ export const initMarketInfoRepo = () => {
                 "costExponent": 1.125,
                 "cropReq": 95,
                 "maxLvl": 500,
-                "bonusPerLvl": 1
+                "bonusPerLvl": 0.02
             }),
         new MarketInfoBase(15, <MarketInfoModel>{
                 "name": "SUPER GMO",

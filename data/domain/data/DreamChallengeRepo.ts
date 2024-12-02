@@ -55,7 +55,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(8, <DreamChallengeModel>{
-                "challenge": "Defeat the Vengeful Grandfrogger, 4th difficulty, in a party of just yourself.",
+                "challenge": "Defeat the Vengeful Grandfrogger, 4th difficulty, in a party with others or alone.",
                 "req": 1,
                 "reward": "Tick Tock book from alchemy can now go up to Lv.200",
                 "filler": "Filler"
@@ -91,7 +91,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(14, <DreamChallengeModel>{
-                "challenge": "Defeat the Inevitable Snakenhotep in a party by yourself. That's the 3rd and final W2 Dungeon boss",
+                "challenge": "Defeat the Inevitable Snakenhotep in a party with others or alone. That's the 3rd and final W2 Dungeon boss",
                 "req": 1,
                 "reward": "+20% Equinox Bar fill rate",
                 "filler": "Filler"
@@ -121,7 +121,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(19, <DreamChallengeModel>{
-                "challenge": "Defeat the Caustic Glaciaxus in a party of just yourself. That's the 3rd and final W3 Dungeon boss",
+                "challenge": "Defeat the Caustic Glaciaxus in a party with others or alone. That's the 3rd and final W3 Dungeon boss",
                 "req": 1,
                 "reward": "+25% Equinox Bar fill rate",
                 "filler": "Filler"

@@ -7211,6 +7211,10 @@ export const initSourceRepo = () => {
                     },
                     <SourceModel>{"wikiName": "[[DropTable5]]", "txtName": "DropTable5"},
                     <SourceModel>{
+                        "wikiName": "[[Promotheus#Three Right Answers|Three Right Answers]]",
+                        "txtName": "Promotheus: Three Right Answers"
+                    },
+                    <SourceModel>{
                         "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
                         "txtName": "Alchemy: Weak UPG Stone"
                     }
@@ -9345,10 +9349,6 @@ export const initSourceRepo = () => {
                         "txtName": "Sprout: Justice Wears No Clothes"
                     },
                     <SourceModel>{
-                        "wikiName": "[[Scripticus#What Lies at the Heart of the Forest|What Lies at the Heart of the Forest]]",
-                        "txtName": "Scripticus: What Lies at the Heart of the Forest"
-                    },
-                    <SourceModel>{
                         "wikiName": "[[Picnic Stowaway#Brunchin' with the Blobs|Brunchin' with the Blobs]]",
                         "txtName": "Picnic Stowaway: Brunchin' with the Blobs"
                     },
@@ -10032,10 +10032,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"},
                     <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"},
                     <SourceModel>{"wikiName": "[[SuperDropTable5]]", "txtName": "SuperDropTable5"},
-                    <SourceModel>{
-                        "wikiName": "[[Promotheus#Three Right Answers|Three Right Answers]]",
-                        "txtName": "Promotheus: Three Right Answers"
-                    },
                     <SourceModel>{
                         "wikiName": "[[Speccius#More like 'Sleepius' lmao|More like 'Sleepius' lmao]]",
                         "txtName": "Speccius: More like 'Sleepius' lmao"
@@ -11397,8 +11393,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11872,16 +11867,6 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats7", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Scripticus#Gear Up, Gamer!|Gear Up, Gamer!]]",
-                        "txtName": "Scripticus: Gear Up, Gamer!"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
         new SourcesBase("InvBag1", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -11967,6 +11952,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Scripticus#Stiltzcho, the Leaf Scout|Stiltzcho, the Leaf Scout]]",
                         "txtName": "Scripticus: Stiltzcho, the Leaf Scout"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Scripticus#What Lies at the Heart of the Forest|What Lies at the Heart of the Forest]]",
+                        "txtName": "Scripticus: What Lies at the Heart of the Forest"
                     }
                 ],
                 "recipeFrom": [],
@@ -12969,8 +12958,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Royal Bidding|Royal Bidding]]",
                         "txtName": "Royal Worm: Royal Bidding"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13378,7 +13366,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -14154,18 +14143,30 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("GemP25", <SourcesModel>{
+        new SourcesBase("EquipmentHats82", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("ClassSwapB", <SourcesModel>{
+        new SourcesBase("EquipmentPendant28", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentPendant31", <SourcesModel>{
+        new SourcesBase("EquipmentHats81", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
+                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
+                    <SourceModel>{
+                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
+                        "txtName": "Dungeons: Flurbo Shop"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -14796,17 +14797,6 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain10", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
-                    <SourceModel>{
-                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
-                        "txtName": "Dungeons: Flurbo Shop"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                     <SourceModel>{

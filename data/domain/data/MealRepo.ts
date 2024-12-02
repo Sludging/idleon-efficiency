@@ -114,8 +114,8 @@ export const initMealRepo = () => {
                 "name": "Cabbage",
                 "cookingReq": 1400,
                 "bonusQty": 5,
-                "bonusText": "+{% All Cooking Spd per 10 upgrade Lvs",
-                "description": "This is a MONUMENTALLY IMPORTANT vegetable, as well as upgrade.",
+                "bonusText": "+{% Cooking Spd per 10 Kitchen LVs",
+                "description": "More speed every 10 total kitchen upgrade LVs! That's one IMPORTANT vegetable!",
                 "bonusKey": "KitchenEff"
             }),
         new MealBase(14, <MealModel>{
@@ -194,7 +194,7 @@ export const initMealRepo = () => {
                 "name": "Eggplant",
                 "cookingReq": 75000,
                 "bonusQty": 5,
-                "bonusText": "+{% Pet Breedability Speed in Fenceyard",
+                "bonusText": "+{% Pet Breedability Speed",
                 "description": "Idk what you Zoomers are up to with those eggplant emojis, but I don't like it...",
                 "bonusKey": "Breed"
             }),
