@@ -135,6 +135,9 @@ export class SummonBonus {
     pristineCharmBonus: number = 1;
     artifactBonus: number = 0;
     taskBoardBonus: number = 0;
+    achievement379Bonus: number = 0;
+    achievement373Bonus: number = 0;
+    summoning32Bonus: number = 0;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
