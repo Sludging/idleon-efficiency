@@ -399,7 +399,7 @@ export class Summoning extends Domain {
         });
         for (var i = 0; i < (optionList[319] ?? 0); i++) {
             const index = (i - 40 * Math.floor(i / 40));
-            const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == Math.round(index));
+            const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == EndlessModeBonusIndexes[Math.round(index)]);
             if (relevantBonus) {
                 relevantBonus.bonusValue += EndlessModeBonusIncrease[index];
             }
