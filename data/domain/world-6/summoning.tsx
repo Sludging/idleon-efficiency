@@ -451,7 +451,7 @@ export class Summoning extends Domain {
                     break;
                 case SummonEssenceColor.Endless:
                     // Need to update this once we know which upgrade unlock this
-                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 53)?.level ?? 0) > 0;
+                    unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 70)?.level ?? 0) > 0;
                     displayBattle = true;
                     // There's no real Endless essence, so never display it
                     displayEssence = false;
