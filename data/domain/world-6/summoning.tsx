@@ -30,14 +30,13 @@ const EndlessModeBonusIncrease = [
     1,3,1,12,1,7,2,4,15,10,1,4,18,2,4,3,20,25,2,20,5,30,24,4,1,2,2,35,9,26,5,5,40,1,45,50,2,6,30,3
 ]
 
-// Not sure for now if I'll use it, but just in case while I'm at it
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[11]
 const EndlessModeModifierID = [
     4,5,1,6,4,0,5,6,7,8,3,10,2,9,7,1,6,5,2,8,3,4,10,6,1,7,2,0,6,3,5,8,9,4,6,2,1,5,10,8
 ]
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[12]
-const EndlessModeEnnemyEffect = [
+const EndlessModeEnnemyModifier = [
     "Slow Motion : All units, both yours and my own, move at 60% speed.",
     "Fast Forward : All of our units, yours and mine, move at 170% speed.",
     "Glass Cannon : You have but a single health point, as do I.",
@@ -210,6 +209,18 @@ export class BattlesInfo {
         } else {
             return "";
         }
+    }
+
+    static getEndlessBattleFightIndex = (endlessFightIndex: number): number => {
+        return Math.round(endlessFightIndex - 40 * Math.floor(endlessFightIndex / 40));
+    }
+
+    static getEndlessBattleFightModifier = (endlessFightIndex: number): string => {
+        return EndlessModeEnnemyModifier[EndlessModeModifierID[this.getEndlessBattleFightIndex(endlessFightIndex)]];
+    }
+
+    static getEndlessBattleFightBonusIndex = (endlessFightIndex: number): number => {
+        return EndlessModeBonusIndexes[this.getEndlessBattleFightIndex(endlessFightIndex)];
     }
 }
 
@@ -398,8 +409,8 @@ export class Summoning extends Domain {
             }
         });
         for (var i = 0; i < (optionList[319] ?? 0); i++) {
-            const index = (i - 40 * Math.floor(i / 40));
-            const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == EndlessModeBonusIndexes[Math.round(index)]);
+            const index = BattlesInfo.getEndlessBattleFightIndex(i);
+            const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == BattlesInfo.getEndlessBattleFightBonusIndex(i));
             if (relevantBonus) {
                 relevantBonus.bonusValue += EndlessModeBonusIncrease[index];
             }
