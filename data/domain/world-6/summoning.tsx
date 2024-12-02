@@ -408,14 +408,11 @@ export class Summoning extends Domain {
             }
         });
         for (var i = 0; i < (optionList[319] ?? 0); i++) {
-            // TODO : finish to translate this to IE code once we get the data from wiki bot
-            /*
-            const relevantBonus = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[9][i - 40 * Math.floor(i / 40)]) - 1) as SummonBonus | undefined;
+            const index = (i - 40 * Math.floor(i / 40));
+            const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == Math.round(index));
             if (relevantBonus) {
-                // Some bonusQty are stored in string, so need to cast it to avoid concatening strings instead of making a sum of bonuses
-                relevantBonus.bonusValue += c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[10][f - 40 * Math.floor(f / 40)]);
+                relevantBonus.bonusValue += EndlessModeBonusIncrease[index];
             }
-            */
             summoning.summonBattles.allVictories[SummonEssenceColor.Endless]++;
         }
 
