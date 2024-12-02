@@ -20,6 +20,37 @@ const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
 ]
 
+// engine.GameAttribute.h.CustomList.h.SummonEnemies[9]
+const EndlessModeBonusIndexes = [
+    21,22,23,24,25,27,23,22,24,29,25,26,24,23,22,32,30,31,25,24,26,29,24,22,21,23,31,28,27,24,26,22,30,25,29,28,23,26,24,32
+]
+
+// engine.GameAttribute.h.CustomList.h.SummonEnemies[10]
+const EndlessModeBonusIncrease = [
+    1,3,1,12,1,7,2,4,15,10,1,4,18,2,4,3,20,25,2,20,5,30,24,4,1,2,2,35,9,26,5,5,40,1,45,50,2,6,30,3
+]
+
+// Not sure for now if I'll use it, but just in case while I'm at it
+// engine.GameAttribute.h.CustomList.h.SummonEnemies[11]
+const EndlessModeModifierID = [
+    4,5,1,6,4,0,5,6,7,8,3,10,2,9,7,1,6,5,2,8,3,4,10,6,1,7,2,0,6,3,5,8,9,4,6,2,1,5,10,8
+]
+
+// engine.GameAttribute.h.CustomList.h.SummonEnemies[12]
+const EndlessModeEnnemyEffect = [
+    "Slow Motion : All units, both yours and my own, move at 60% speed.",
+    "Fast Forward : All of our units, yours and mine, move at 170% speed.",
+    "Glass Cannon : You have but a single health point, as do I.",
+    "Zerg Surprise : You best be ready, I'm playing all my minions on turn 1!",
+    "Extra Time : I've doubled our health points so we can play longer.",
+    "Fair Play : No lane stacking! When you hurt me, all your units in that lane take damage.",
+    "Invincibility : Just let me play my units, I will forfeit one health each time, but you must deal the final blow.",
+    "Offsides Rule : When you hurt me, all your minions beyond the midfield perish.",
+    "Triple Overtime : Ten times the health points. I wanna see your deck's lategame viability.",
+    "Truce : No mods, no effects, no tricks. I want a proper match this time.",
+    "Uno Draw 7 : You're playing with a 7 card hand. It's more fun this way, trust me you'll love it!"
+]
+
 export enum SummonEssenceColor {
     White = 0,
     Green = 1,
