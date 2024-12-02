@@ -750,7 +750,7 @@ export const initTaskDescriptionRepo = () => {
         new TaskDescriptionBase(39, <TaskDescriptionModel>{
                 "name": "Maximum Efficiency",
                 "description": "Have at least } Skill efficiency in { different skills across your account.",
-                "extraStr": "500|1500|3000|5000|10000|25000|50000|100000|250000|750000|1000000",
+                "extraStr": "500|1500|3000|5000|10000|25000|50000|250000|1000000|5000000|10000000",
                 "number1": 11,
                 "descLine2": "2|1|YouresoefficientIbetspacebars wouldbeunnecessaryforyou!",
                 "numbers": [
@@ -759,11 +759,11 @@ export const initTaskDescriptionRepo = () => {
                     3,
                     3,
                     4,
+                    4,
+                    5,
                     5,
                     6,
-                    8,
-                    10,
-                    12
+                    6
                 ]
             }),
         new TaskDescriptionBase(40, <TaskDescriptionModel>{

@@ -1328,8 +1328,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 2,
                 "MoveSPEED": 4,
-                "Damages": [8, 1],
-                "DefFor0": 3.93
+                "Damages": [6, 1],
+                "DefFor0": 2.67
             }),
         new EnemyDetailsBase("slimeG", <EnemyDetailsModel>{
                 "Name": "Slime",
@@ -1347,10 +1347,10 @@ export const initEnemyDetailsRepo = () => {
                 "SpecialType": "",
                 "ExpGiven": 26,
                 "ExpType": 0,
-                "Defence": 4,
+                "Defence": 2,
                 "MoveSPEED": 4,
-                "Damages": [10, 1],
-                "DefFor0": 5.27
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("snakeG", <EnemyDetailsModel>{
                 "Name": "Baby Boa",
@@ -1368,10 +1368,10 @@ export const initEnemyDetailsRepo = () => {
                 "SpecialType": "",
                 "ExpGiven": 36,
                 "ExpType": 0,
-                "Defence": 8,
+                "Defence": 3,
                 "MoveSPEED": 8,
-                "Damages": [13, 1],
-                "DefFor0": 7.4
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("carrotO", <EnemyDetailsModel>{
                 "Name": "Carrotman",
@@ -1389,10 +1389,10 @@ export const initEnemyDetailsRepo = () => {
                 "SpecialType": "",
                 "ExpGiven": 46,
                 "ExpType": 0,
-                "Defence": 10,
+                "Defence": 4,
                 "MoveSPEED": 6,
-                "Damages": [16, 1],
-                "DefFor0": 9.66
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("goblinG", <EnemyDetailsModel>{
                 "Name": "Glublin",
@@ -1405,15 +1405,15 @@ export const initEnemyDetailsRepo = () => {
                 "MovingFrame": 6,
                 "RespawnTime": 52,
                 "DeathFrame": 15,
-                "MonsterHPTotal": 1100,
+                "MonsterHPTotal": 800,
                 "Type": EnemyTypeEnum.monsterType,
                 "SpecialType": "",
                 "ExpGiven": 60,
                 "ExpType": 0,
-                "Defence": 15,
+                "Defence": 5,
                 "MoveSPEED": 4,
-                "Damages": [20, 1],
-                "DefFor0": 12.82
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("plank", <EnemyDetailsModel>{
                 "Name": "Wode Board",
@@ -1426,15 +1426,15 @@ export const initEnemyDetailsRepo = () => {
                 "MovingFrame": 5,
                 "RespawnTime": 45,
                 "DeathFrame": 19,
-                "MonsterHPTotal": 1800,
+                "MonsterHPTotal": 1000,
                 "Type": EnemyTypeEnum.monsterType,
                 "SpecialType": "",
                 "ExpGiven": 75,
                 "ExpType": 0,
-                "Defence": 25,
+                "Defence": 6,
                 "MoveSPEED": 3,
-                "Damages": [35, 1],
-                "DefFor0": 26.12
+                "Damages": [5, 1],
+                "DefFor0": 2
             }),
         new EnemyDetailsBase("frogBIG", <EnemyDetailsModel>{
                 "Name": "Gigafrog",
@@ -1664,8 +1664,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 60,
                 "MoveSPEED": 5,
-                "Damages": [30, 1],
-                "DefFor0": 21.54
+                "Damages": [15, 1],
+                "DefFor0": 8.9
             }),
         new EnemyDetailsBase("mimicA", <EnemyDetailsModel>{
                 "Name": "Mimic",
@@ -1685,8 +1685,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 80,
                 "MoveSPEED": 4,
-                "Damages": [45, 1],
-                "DefFor0": 35.69
+                "Damages": [20, 1],
+                "DefFor0": 12.82
             }),
         new EnemyDetailsBase("crabcake", <EnemyDetailsModel>{
                 "Name": "Crabcake",
@@ -1706,8 +1706,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 120,
                 "MoveSPEED": 4,
-                "Damages": [60, 1],
-                "DefFor0": 50.87
+                "Damages": [25, 1],
+                "DefFor0": 17.12
             }),
         new EnemyDetailsBase("coconut", <EnemyDetailsModel>{
                 "Name": "Mafioso",
@@ -1727,8 +1727,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 145,
                 "MoveSPEED": 4,
-                "Damages": [80, 1],
-                "DefFor0": 72.24
+                "Damages": [35, 1],
+                "DefFor0": 26.12
             }),
         new EnemyDetailsBase("sandcastle", <EnemyDetailsModel>{
                 "Name": "Sand Castle",
@@ -1748,8 +1748,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 170,
                 "MoveSPEED": 3,
-                "Damages": [95, 1],
-                "DefFor0": 88.89
+                "Damages": [45, 1],
+                "DefFor0": 35.69
             }),
         new EnemyDetailsBase("pincermin", <EnemyDetailsModel>{
                 "Name": "Pincermin",
@@ -1769,8 +1769,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 225,
                 "MoveSPEED": 5,
-                "Damages": [112, 1],
-                "DefFor0": 108.27
+                "Damages": [55, 1],
+                "DefFor0": 45.72
             }),
         new EnemyDetailsBase("potato", <EnemyDetailsModel>{
                 "Name": "Mashed Potato",
@@ -1790,8 +1790,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 260,
                 "MoveSPEED": 6,
-                "Damages": [125, 1],
-                "DefFor0": 123.37
+                "Damages": [70, 1],
+                "DefFor0": 61.42
             }),
         new EnemyDetailsBase("steak", <EnemyDetailsModel>{
                 "Name": "Tyson",
@@ -1811,8 +1811,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 300,
                 "MoveSPEED": 5,
-                "Damages": [150, 1],
-                "DefFor0": 152.99
+                "Damages": [80, 1],
+                "DefFor0": 72.24
             }),
         new EnemyDetailsBase("moonman", <EnemyDetailsModel>{
                 "Name": "Moonmoon",
@@ -1832,8 +1832,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 330,
                 "MoveSPEED": 4,
-                "Damages": [170, 1],
-                "DefFor0": 177.1
+                "Damages": [90, 1],
+                "DefFor0": 83.29
             }),
         new EnemyDetailsBase("sandgiant", <EnemyDetailsModel>{
                 "Name": "Sand Giant",
@@ -1853,8 +1853,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 365,
                 "MoveSPEED": 3,
-                "Damages": [195, 1],
-                "DefFor0": 207.65
+                "Damages": [110, 1],
+                "DefFor0": 105.96
             }),
         new EnemyDetailsBase("snailZ", <EnemyDetailsModel>{
                 "Name": "Snelbie",
@@ -1874,8 +1874,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 400,
                 "MoveSPEED": 4,
-                "Damages": [225, 1],
-                "DefFor0": 244.76
+                "Damages": [125, 1],
+                "DefFor0": 123.37
             }),
         new EnemyDetailsBase("sheep", <EnemyDetailsModel>{
                 "Name": "Sheepie",
@@ -1895,8 +1895,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 550,
                 "MoveSPEED": 4,
-                "Damages": [300, 1],
-                "DefFor0": 338.94
+                "Damages": [135, 1],
+                "DefFor0": 135.14
             }),
         new EnemyDetailsBase("flake", <EnemyDetailsModel>{
                 "Name": "Frost Flake",
@@ -1916,8 +1916,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 650,
                 "MoveSPEED": 4,
-                "Damages": [360, 1],
-                "DefFor0": 415.1
+                "Damages": [160, 1],
+                "DefFor0": 165
             }),
         new EnemyDetailsBase("stache", <EnemyDetailsModel>{
                 "Name": "Sir Stache",
@@ -1937,8 +1937,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 775,
                 "MoveSPEED": 4,
-                "Damages": [420, 1],
-                "DefFor0": 491.48
+                "Damages": [190, 1],
+                "DefFor0": 201.51
             }),
         new EnemyDetailsBase("ram", <EnemyDetailsModel>{
                 "Name": "Dedotated Ram",
@@ -1958,8 +1958,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1500,
                 "MoveSPEED": 6,
-                "Damages": [3000, 1],
-                "DefFor0": 3563.92
+                "Damages": [2500, 1],
+                "DefFor0": 3001.06
             }),
         new EnemyDetailsBase("bloque", <EnemyDetailsModel>{
                 "Name": "Bloque",
@@ -1979,8 +1979,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 900,
                 "MoveSPEED": 4,
-                "Damages": [500, 1],
-                "DefFor0": 593.5
+                "Damages": [220, 1],
+                "DefFor0": 238.55
             }),
         new EnemyDetailsBase("mamoth", <EnemyDetailsModel>{
                 "Name": "Mamooth",
@@ -2000,8 +2000,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1050,
                 "MoveSPEED": 3,
-                "Damages": [580, 1],
-                "DefFor0": 695.37
+                "Damages": [260, 1],
+                "DefFor0": 288.51
             }),
         new EnemyDetailsBase("snowball", <EnemyDetailsModel>{
                 "Name": "Snowman",
@@ -2021,8 +2021,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1200,
                 "MoveSPEED": 6,
-                "Damages": [690, 1],
-                "DefFor0": 834.89
+                "Damages": [300, 1],
+                "DefFor0": 338.94
             }),
         new EnemyDetailsBase("penguin", <EnemyDetailsModel>{
                 "Name": "Penguin",
@@ -2042,8 +2042,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1350,
                 "MoveSPEED": 4,
-                "Damages": [800, 1],
-                "DefFor0": 973.57
+                "Damages": [340, 1],
+                "DefFor0": 389.66
             }),
         new EnemyDetailsBase("thermostat", <EnemyDetailsModel>{
                 "Name": "Thermister",
@@ -2063,8 +2063,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1500,
                 "MoveSPEED": 4,
-                "Damages": [950, 1],
-                "DefFor0": 1161.15
+                "Damages": [380, 1],
+                "DefFor0": 440.57
             }),
         new EnemyDetailsBase("glass", <EnemyDetailsModel>{
                 "Name": "Quenchie",
@@ -2084,8 +2084,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1700,
                 "MoveSPEED": 4,
-                "Damages": [1150, 1],
-                "DefFor0": 1408.37
+                "Damages": [450, 1],
+                "DefFor0": 529.74
             }),
         new EnemyDetailsBase("snakeB", <EnemyDetailsModel>{
                 "Name": "Cryosnake",
@@ -2105,8 +2105,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1900,
                 "MoveSPEED": 6,
-                "Damages": [1425, 1],
-                "DefFor0": 1743.06
+                "Damages": [550, 1],
+                "DefFor0": 657.19
             }),
         new EnemyDetailsBase("speaker", <EnemyDetailsModel>{
                 "Name": "Bop Box",
@@ -2126,8 +2126,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 2150,
                 "MoveSPEED": 4,
-                "Damages": [1700, 1],
-                "DefFor0": 2072.08
+                "Damages": [650, 1],
+                "DefFor0": 784.24
             }),
         new EnemyDetailsBase("eye", <EnemyDetailsModel>{
                 "Name": "Neyeptune",
@@ -2147,8 +2147,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 2400,
                 "MoveSPEED": 4,
-                "Damages": [2000, 1],
-                "DefFor0": 2424.95
+                "Damages": [800, 1],
+                "DefFor0": 973.57
             }),
         new EnemyDetailsBase("Iceball", <EnemyDetailsModel>{
                 "Name": "Ice Ball",
@@ -2189,8 +2189,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 2800,
                 "MoveSPEED": 4,
-                "Damages": [2100, 1],
-                "DefFor0": 2541.34
+                "Damages": [1250, 1],
+                "DefFor0": 1530.76
             }),
         new EnemyDetailsBase("w4a2", <EnemyDetailsModel>{
                 "Name": "TV",
@@ -2210,8 +2210,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 3300,
                 "MoveSPEED": 4,
-                "Damages": [2300, 1],
-                "DefFor0": 2772.33
+                "Damages": [1500, 1],
+                "DefFor0": 1833.33
             }),
         new EnemyDetailsBase("w4a3", <EnemyDetailsModel>{
                 "Name": "Donut",
@@ -2231,8 +2231,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 3800,
                 "MoveSPEED": 4,
-                "Damages": [2550, 1],
-                "DefFor0": 3057.91
+                "Damages": [1750, 1],
+                "DefFor0": 2131.33
             }),
         new EnemyDetailsBase("demonP", <EnemyDetailsModel>{
                 "Name": "Demon Genie",
@@ -2252,8 +2252,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 4325,
                 "MoveSPEED": 3,
-                "Damages": [2750, 1],
-                "DefFor0": 3284.02
+                "Damages": [2200, 1],
+                "DefFor0": 2657.12
             }),
         new EnemyDetailsBase("w4b2", <EnemyDetailsModel>{
                 "Name": "Soda Can",
@@ -2273,8 +2273,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 5150,
                 "MoveSPEED": 6,
-                "Damages": [3000, 1],
-                "DefFor0": 3563.92
+                "Damages": [2600, 1],
+                "DefFor0": 3114.63
             }),
         new EnemyDetailsBase("w4b1", <EnemyDetailsModel>{
                 "Name": "Flying Worm",
@@ -2294,8 +2294,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 5650,
                 "MoveSPEED": 7,
-                "Damages": [3400, 1],
-                "DefFor0": 4005.88
+                "Damages": [3000, 1],
+                "DefFor0": 3563.92
             }),
         new EnemyDetailsBase("w4b3", <EnemyDetailsModel>{
                 "Name": "Gelatinous Cuboid",
@@ -2315,8 +2315,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 6200,
                 "MoveSPEED": 4,
-                "Damages": [3900, 1],
-                "DefFor0": 4549.15
+                "Damages": [3500, 1],
+                "DefFor0": 4115.32
             }),
         new EnemyDetailsBase("w4b4", <EnemyDetailsModel>{
                 "Name": "Choccie",
@@ -2336,8 +2336,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 6900,
                 "MoveSPEED": 4,
-                "Damages": [4500, 1],
-                "DefFor0": 5189.1
+                "Damages": [4300, 1],
+                "DefFor0": 4977.14
             }),
         new EnemyDetailsBase("w4b5", <EnemyDetailsModel>{
                 "Name": "Biggole Wurm",
@@ -2357,8 +2357,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 7700,
                 "MoveSPEED": 6,
-                "Damages": [5200, 1],
-                "DefFor0": 5921.21
+                "Damages": [5000, 1],
+                "DefFor0": 5713.51
             }),
         new EnemyDetailsBase("w4c1", <EnemyDetailsModel>{
                 "Name": "Clammie",
@@ -2378,8 +2378,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 8700,
                 "MoveSPEED": 4,
-                "Damages": [6000, 1],
-                "DefFor0": 6741.2
+                "Damages": [5800, 1],
+                "DefFor0": 6537.75
             }),
         new EnemyDetailsBase("w4c2", <EnemyDetailsModel>{
                 "Name": "Octodar",
@@ -2399,8 +2399,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 9600,
                 "MoveSPEED": 4,
-                "Damages": [7000, 1],
-                "DefFor0": 7744.43
+                "Damages": [6700, 1],
+                "DefFor0": 7445.8
             }),
         new EnemyDetailsBase("w4c3", <EnemyDetailsModel>{
                 "Name": "Flombeige",
@@ -2420,8 +2420,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 10500,
                 "MoveSPEED": 4,
-                "Damages": [8200, 1],
-                "DefFor0": 8920.83
+                "Damages": [7500, 1],
+                "DefFor0": 8237.99
             }),
         new EnemyDetailsBase("w4c4", <EnemyDetailsModel>{
                 "Name": "Stilted Seeker",
@@ -2441,8 +2441,8 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 11000,
                 "MoveSPEED": 6,
-                "Damages": [10000, 1],
-                "DefFor0": 10638.1
+                "Damages": [8000, 1],
+                "DefFor0": 8726.66
             }),
         new EnemyDetailsBase("w5a1", <EnemyDetailsModel>{
                 "Name": "Suggma",

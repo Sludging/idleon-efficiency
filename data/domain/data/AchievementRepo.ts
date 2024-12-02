@@ -2627,7 +2627,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(374, <AchievementModel>{
                 "name": "This, is, Summoning!",
                 "qty": 1,
-                "desc": "Survive for 200 seconds in the Endless Summoning Mode, which isn't out yet.",
+                "desc": "Survive for 200 seconds in The Gambit cavern, which isn't out yet.",
                 "rewards": "*1.05x All Essence &Gain",
                 "world": "Spirited Valley"
             }),

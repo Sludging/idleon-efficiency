@@ -1232,7 +1232,7 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Kazam Cauldron",
                         "name": "Ninja Looter",
-                        "x1": 0.5,
+                        "x1": 0.3,
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "{x Item Find chance for your ninja twin while sneaking!",
