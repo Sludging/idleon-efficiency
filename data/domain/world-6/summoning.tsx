@@ -20,6 +20,10 @@ const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
 ]
 
+const EndlessModeBattleOrder = [
+    "rift1", "rift2", "rift3", "rift4", "rift5"
+]
+
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[9]
 const EndlessModeBonusIndexes = [
     21,22,23,24,25,27,23,22,24,29,25,26,24,23,22,32,30,31,25,24,26,29,24,22,21,23,31,28,27,24,26,22,30,25,29,28,23,26,24,32
@@ -145,7 +149,7 @@ export class SummonBonus {
     getBonus = (): number => {
         switch (true)
         {
-            // +1 from in-game indexes as it starts from 1
+            // +1 from in-game indexes as it starts from 1 instead of 0
             case this.data.bonusId == 21:
             case this.data.bonusId == 23:
             case this.data.bonusId == 25:
@@ -399,6 +403,12 @@ export class Summoning extends Domain {
                 }
             })            
         }
+        EndlessModeBattleOrder.forEach(battle => {
+            const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
+            if (enemyData) {
+                summoning.summonBattles.allBattles[SummonEssenceColor.Endless].push(enemyData.data);
+            }
+        });
 
         const wonBattles = summoningData[1] as string[];
         wonBattles.forEach((battle) => {
