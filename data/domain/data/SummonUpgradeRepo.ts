@@ -526,7 +526,7 @@ export const initSummonUpgradeRepo = () => {
             }),
         new SummonUpgradeBase(37, <SummonUpgradeModel>{
                 "screenX": 588,
-                "screenY": 268,
+                "screenY": 238,
                 "colour": 4,
                 "name": "Unit Hitpoints",
                 "cost": 100,
@@ -540,7 +540,7 @@ export const initSummonUpgradeRepo = () => {
             }),
         new SummonUpgradeBase(38, <SummonUpgradeModel>{
                 "screenX": 644,
-                "screenY": 248,
+                "screenY": 228,
                 "colour": 4,
                 "name": "Purp Essence Pumpin'",
                 "cost": 250,
@@ -553,8 +553,8 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "+{% Purple Essence generated per hour for each Purple circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(39, <SummonUpgradeModel>{
-                "screenX": 694,
-                "screenY": 293,
+                "screenX": 693,
+                "screenY": 256,
                 "colour": 4,
                 "name": "Familiar Skipping",
                 "cost": 600,
@@ -567,8 +567,8 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "When summoning a Slime Familiar, there's a 1 in 8 to get a Vrumbi instead of Slime, and 1 in 50 to get a Bloomy. Upgrading this boosts this chance by +{%"
             }),
         new SummonUpgradeBase(40, <SummonUpgradeModel>{
-                "screenX": 751,
-                "screenY": 285,
+                "screenX": 747,
+                "screenY": 262,
                 "colour": 4,
                 "name": "Purple Knowledge",
                 "cost": 1000,
@@ -581,8 +581,8 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "+{% Purple Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(41, <SummonUpgradeModel>{
-                "screenX": 698,
-                "screenY": 211,
+                "screenX": 705,
+                "screenY": 207,
                 "colour": 4,
                 "name": "Final Card",
                 "cost": 2000,
@@ -624,7 +624,7 @@ export const initSummonUpgradeRepo = () => {
             }),
         new SummonUpgradeBase(44, <SummonUpgradeModel>{
                 "screenX": 875,
-                "screenY": 206,
+                "screenY": 186,
                 "colour": 4,
                 "name": "Red Summoning",
                 "cost": 1000000,
@@ -642,7 +642,7 @@ export const initSummonUpgradeRepo = () => {
                 "colour": 5,
                 "name": "Sparkie",
                 "cost": 75,
-                "costExponent": 1.7,
+                "costExponent": 1.75,
                 "bonusQty": 5,
                 "summonLvlReq": 0,
                 "maxLvl": 30,
@@ -763,22 +763,22 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "Unlocks the Cyan Summoning Stone, and begins generating Cyan Essence. @ Also, +{% Cyan Essence per hour"
             }),
         new SummonUpgradeBase(54, <SummonUpgradeModel>{
-                "screenX": 514,
-                "screenY": 327,
+                "screenX": 477,
+                "screenY": 374,
                 "colour": 6,
                 "name": "Cyan Essence King",
-                "cost": 100,
+                "cost": 150,
                 "costExponent": 1.15,
                 "bonusQty": 5,
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
-                "idReq": 53,
+                "idReq": 69,
                 "filler": "filler",
                 "bonus": "+{% Cyan Essence generated per hour for each Cyan circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(55, <SummonUpgradeModel>{
-                "screenX": 481,
-                "screenY": 379,
+                "screenX": 534,
+                "screenY": 384,
                 "colour": 6,
                 "name": "I Frames",
                 "cost": 400,
@@ -791,8 +791,8 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "All your units get a +{% chance to dodge damage when colliding with an enemy"
             }),
         new SummonUpgradeBase(56, <SummonUpgradeModel>{
-                "screenX": 539,
-                "screenY": 387,
+                "screenX": 598,
+                "screenY": 390,
                 "colour": 6,
                 "name": "Units of Destruction",
                 "cost": 2000,
@@ -814,7 +814,7 @@ export const initSummonUpgradeRepo = () => {
                 "bonusQty": 2,
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
-                "idReq": 54,
+                "idReq": 69,
                 "filler": "filler",
                 "bonus": "All Summoning upgrades cost }% less Essence."
             }),
@@ -834,7 +834,7 @@ export const initSummonUpgradeRepo = () => {
             }),
         new SummonUpgradeBase(59, <SummonUpgradeModel>{
                 "screenX": 683,
-                "screenY": 364,
+                "screenY": 373,
                 "colour": 6,
                 "name": "Undying Units",
                 "cost": 10000,
@@ -875,46 +875,46 @@ export const initSummonUpgradeRepo = () => {
                 "bonus": "Boosts the HP of all summoned units by +{% for every 100 total summoning upgrades purchased. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(62, <SummonUpgradeModel>{
-                "screenX": 853,
-                "screenY": 377,
+                "screenX": 736,
+                "screenY": 320,
                 "colour": 6,
-                "name": "Timely Essence",
+                "name": "Infinite Essence",
                 "cost": 100000,
                 "costExponent": 1.35,
                 "bonusQty": 5,
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
-                "idReq": 61,
+                "idReq": 70,
                 "filler": "filler",
-                "bonus": "The generation of all essence colours is increased by +{% for every 10 seconds of your longest Endless Summoning time. @ Total bonus: +}%"
+                "bonus": "The generation of all essence colours is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(63, <SummonUpgradeModel>{
-                "screenX": 816,
-                "screenY": 319,
+                "screenX": 792,
+                "screenY": 312,
                 "colour": 6,
-                "name": "Timely Health",
-                "cost": 500000,
+                "name": "Infinite Health",
+                "cost": 300000,
                 "costExponent": 1.38,
                 "bonusQty": 2,
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 62,
                 "filler": "filler",
-                "bonus": "The HP of all summoned units is increased by +{% for every 10 seconds of your longest Endless Summoning time. @ Total bonus: +}%"
+                "bonus": "The HP of all summoned units is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(64, <SummonUpgradeModel>{
                 "screenX": 834,
                 "screenY": 266,
                 "colour": 6,
-                "name": "Timely Damage",
-                "cost": 2000000,
+                "name": "Infinite Damage",
+                "cost": 600000,
                 "costExponent": 1.41,
                 "bonusQty": 2,
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 63,
                 "filler": "filler",
-                "bonus": "The DMG of all summoned units is increased by +{% for every 10 seconds of your longest Endless Summoning time. @ Total bonus: +}%"
+                "bonus": "The DMG of all summoned units is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(65, <SummonUpgradeModel>{
                 "screenX": 340,
@@ -971,6 +971,34 @@ export const initSummonUpgradeRepo = () => {
                 "idReq": 25,
                 "filler": "filler",
                 "bonus": "Spike damage is increased by {% of your base unit damage. @ Total Bonus Spike DMG: +}"
+            }),
+        new SummonUpgradeBase(69, <SummonUpgradeModel>{
+                "screenX": 514,
+                "screenY": 327,
+                "colour": 6,
+                "name": "Guardio",
+                "cost": 100,
+                "costExponent": 3.5,
+                "bonusQty": 8,
+                "summonLvlReq": 0,
+                "maxLvl": 30,
+                "idReq": 53,
+                "filler": "filler",
+                "bonus": "4% chance to draw a Guardio! They sit in midfield, do 0 DMG, have 12x HP, and aren't knocked back. Your upgrades here boost its HP by a further +{%."
+            }),
+        new SummonUpgradeBase(70, <SummonUpgradeModel>{
+                "screenX": 680,
+                "screenY": 315,
+                "colour": 6,
+                "name": "Endless Summoning",
+                "cost": 2500,
+                "costExponent": 1.55,
+                "bonusQty": 1,
+                "summonLvlReq": 0,
+                "maxLvl": 1,
+                "idReq": 58,
+                "filler": "filler",
+                "bonus": "Unlocks the Endless Summoning feature, accessed in the Top Right when selecting an opponent! Go to the Summoner's Table, you can't miss it!"
             })    
 ]
 }

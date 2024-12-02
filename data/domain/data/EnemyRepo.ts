@@ -2199,8 +2199,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 2,
                     "MoveSPEED": 4,
-                    "Damages": [8, 1],
-                    "DefFor0": 3.93
+                    "Damages": [6, 1],
+                    "DefFor0": 2.67
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2244,10 +2244,10 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 26,
                     "ExpType": 0,
-                    "Defence": 4,
+                    "Defence": 2,
                     "MoveSPEED": 4,
-                    "Damages": [10, 1],
-                    "DefFor0": 5.27
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2292,10 +2292,10 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 36,
                     "ExpType": 0,
-                    "Defence": 8,
+                    "Defence": 3,
                     "MoveSPEED": 8,
-                    "Damages": [13, 1],
-                    "DefFor0": 7.4
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2341,10 +2341,10 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 46,
                     "ExpType": 0,
-                    "Defence": 10,
+                    "Defence": 4,
                     "MoveSPEED": 6,
-                    "Damages": [16, 1],
-                    "DefFor0": 9.66
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2383,15 +2383,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 52,
                     "DeathFrame": 15,
-                    "MonsterHPTotal": 1100,
+                    "MonsterHPTotal": 800,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 60,
                     "ExpType": 0,
-                    "Defence": 15,
+                    "Defence": 5,
                     "MoveSPEED": 4,
-                    "Damages": [20, 1],
-                    "DefFor0": 12.82
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2430,15 +2430,15 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 5,
                     "RespawnTime": 45,
                     "DeathFrame": 19,
-                    "MonsterHPTotal": 1800,
+                    "MonsterHPTotal": 1000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 75,
                     "ExpType": 0,
-                    "Defence": 25,
+                    "Defence": 6,
                     "MoveSPEED": 3,
-                    "Damages": [35, 1],
-                    "DefFor0": 26.12
+                    "Damages": [5, 1],
+                    "DefFor0": 2
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2902,8 +2902,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 60,
                     "MoveSPEED": 5,
-                    "Damages": [30, 1],
-                    "DefFor0": 21.54
+                    "Damages": [15, 1],
+                    "DefFor0": 8.9
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2949,8 +2949,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 80,
                     "MoveSPEED": 4,
-                    "Damages": [45, 1],
-                    "DefFor0": 35.69
+                    "Damages": [20, 1],
+                    "DefFor0": 12.82
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -2997,8 +2997,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 120,
                     "MoveSPEED": 4,
-                    "Damages": [60, 1],
-                    "DefFor0": 50.87
+                    "Damages": [25, 1],
+                    "DefFor0": 17.12
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3044,8 +3044,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 145,
                     "MoveSPEED": 4,
-                    "Damages": [80, 1],
-                    "DefFor0": 72.24
+                    "Damages": [35, 1],
+                    "DefFor0": 26.12
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3091,8 +3091,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 170,
                     "MoveSPEED": 3,
-                    "Damages": [95, 1],
-                    "DefFor0": 88.89
+                    "Damages": [45, 1],
+                    "DefFor0": 35.69
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3137,8 +3137,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 225,
                     "MoveSPEED": 5,
-                    "Damages": [112, 1],
-                    "DefFor0": 108.27
+                    "Damages": [55, 1],
+                    "DefFor0": 45.72
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3188,8 +3188,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 260,
                     "MoveSPEED": 6,
-                    "Damages": [125, 1],
-                    "DefFor0": 123.37
+                    "Damages": [70, 1],
+                    "DefFor0": 61.42
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3233,8 +3233,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 300,
                     "MoveSPEED": 5,
-                    "Damages": [150, 1],
-                    "DefFor0": 152.99
+                    "Damages": [80, 1],
+                    "DefFor0": 72.24
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3278,8 +3278,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 330,
                     "MoveSPEED": 4,
-                    "Damages": [170, 1],
-                    "DefFor0": 177.1
+                    "Damages": [90, 1],
+                    "DefFor0": 83.29
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3326,8 +3326,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 365,
                     "MoveSPEED": 3,
-                    "Damages": [195, 1],
-                    "DefFor0": 207.65
+                    "Damages": [110, 1],
+                    "DefFor0": 105.96
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3372,8 +3372,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 400,
                     "MoveSPEED": 4,
-                    "Damages": [225, 1],
-                    "DefFor0": 244.76
+                    "Damages": [125, 1],
+                    "DefFor0": 123.37
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3418,8 +3418,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 550,
                     "MoveSPEED": 4,
-                    "Damages": [300, 1],
-                    "DefFor0": 338.94
+                    "Damages": [135, 1],
+                    "DefFor0": 135.14
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3465,8 +3465,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 650,
                     "MoveSPEED": 4,
-                    "Damages": [360, 1],
-                    "DefFor0": 415.1
+                    "Damages": [160, 1],
+                    "DefFor0": 165
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3512,8 +3512,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 775,
                     "MoveSPEED": 4,
-                    "Damages": [420, 1],
-                    "DefFor0": 491.48
+                    "Damages": [190, 1],
+                    "DefFor0": 201.51
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3559,8 +3559,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1500,
                     "MoveSPEED": 6,
-                    "Damages": [3000, 1],
-                    "DefFor0": 3563.92
+                    "Damages": [2500, 1],
+                    "DefFor0": 3001.06
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3606,8 +3606,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 900,
                     "MoveSPEED": 4,
-                    "Damages": [500, 1],
-                    "DefFor0": 593.5
+                    "Damages": [220, 1],
+                    "DefFor0": 238.55
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3653,8 +3653,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1050,
                     "MoveSPEED": 3,
-                    "Damages": [580, 1],
-                    "DefFor0": 695.37
+                    "Damages": [260, 1],
+                    "DefFor0": 288.51
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3701,8 +3701,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1200,
                     "MoveSPEED": 6,
-                    "Damages": [690, 1],
-                    "DefFor0": 834.89
+                    "Damages": [300, 1],
+                    "DefFor0": 338.94
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3749,8 +3749,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1350,
                     "MoveSPEED": 4,
-                    "Damages": [800, 1],
-                    "DefFor0": 973.57
+                    "Damages": [340, 1],
+                    "DefFor0": 389.66
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3795,8 +3795,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1500,
                     "MoveSPEED": 4,
-                    "Damages": [950, 1],
-                    "DefFor0": 1161.15
+                    "Damages": [380, 1],
+                    "DefFor0": 440.57
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3848,8 +3848,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1700,
                     "MoveSPEED": 4,
-                    "Damages": [1150, 1],
-                    "DefFor0": 1408.37
+                    "Damages": [450, 1],
+                    "DefFor0": 529.74
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3894,8 +3894,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1900,
                     "MoveSPEED": 6,
-                    "Damages": [1425, 1],
-                    "DefFor0": 1743.06
+                    "Damages": [550, 1],
+                    "DefFor0": 657.19
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3940,8 +3940,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 2150,
                     "MoveSPEED": 4,
-                    "Damages": [1700, 1],
-                    "DefFor0": 2072.08
+                    "Damages": [650, 1],
+                    "DefFor0": 784.24
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -3986,8 +3986,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 2400,
                     "MoveSPEED": 4,
-                    "Damages": [2000, 1],
-                    "DefFor0": 2424.95
+                    "Damages": [800, 1],
+                    "DefFor0": 973.57
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4061,8 +4061,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 2800,
                     "MoveSPEED": 4,
-                    "Damages": [2100, 1],
-                    "DefFor0": 2541.34
+                    "Damages": [1250, 1],
+                    "DefFor0": 1530.76
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4107,8 +4107,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 3300,
                     "MoveSPEED": 4,
-                    "Damages": [2300, 1],
-                    "DefFor0": 2772.33
+                    "Damages": [1500, 1],
+                    "DefFor0": 1833.33
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4155,8 +4155,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 3800,
                     "MoveSPEED": 4,
-                    "Damages": [2550, 1],
-                    "DefFor0": 3057.91
+                    "Damages": [1750, 1],
+                    "DefFor0": 2131.33
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4201,8 +4201,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 4325,
                     "MoveSPEED": 3,
-                    "Damages": [2750, 1],
-                    "DefFor0": 3284.02
+                    "Damages": [2200, 1],
+                    "DefFor0": 2657.12
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4247,8 +4247,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 5150,
                     "MoveSPEED": 6,
-                    "Damages": [3000, 1],
-                    "DefFor0": 3563.92
+                    "Damages": [2600, 1],
+                    "DefFor0": 3114.63
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4293,8 +4293,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 5650,
                     "MoveSPEED": 7,
-                    "Damages": [3400, 1],
-                    "DefFor0": 4005.88
+                    "Damages": [3000, 1],
+                    "DefFor0": 3563.92
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4339,8 +4339,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 6200,
                     "MoveSPEED": 4,
-                    "Damages": [3900, 1],
-                    "DefFor0": 4549.15
+                    "Damages": [3500, 1],
+                    "DefFor0": 4115.32
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4386,8 +4386,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 6900,
                     "MoveSPEED": 4,
-                    "Damages": [4500, 1],
-                    "DefFor0": 5189.1
+                    "Damages": [4300, 1],
+                    "DefFor0": 4977.14
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4432,8 +4432,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 7700,
                     "MoveSPEED": 6,
-                    "Damages": [5200, 1],
-                    "DefFor0": 5921.21
+                    "Damages": [5000, 1],
+                    "DefFor0": 5713.51
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4478,8 +4478,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 8700,
                     "MoveSPEED": 4,
-                    "Damages": [6000, 1],
-                    "DefFor0": 6741.2
+                    "Damages": [5800, 1],
+                    "DefFor0": 6537.75
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4524,8 +4524,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 9600,
                     "MoveSPEED": 4,
-                    "Damages": [7000, 1],
-                    "DefFor0": 7744.43
+                    "Damages": [6700, 1],
+                    "DefFor0": 7445.8
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4570,8 +4570,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 10500,
                     "MoveSPEED": 4,
-                    "Damages": [8200, 1],
-                    "DefFor0": 8920.83
+                    "Damages": [7500, 1],
+                    "DefFor0": 8237.99
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -4616,8 +4616,8 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 11000,
                     "MoveSPEED": 6,
-                    "Damages": [10000, 1],
-                    "DefFor0": 10638.1
+                    "Damages": [8000, 1],
+                    "DefFor0": 8726.66
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -6247,17 +6247,17 @@ export const initEnemyRepo = () => {
                     "hasCard": true
                 },
                 "bossData": <BossDetailsModel>{
-                    "health": 25000,
-                    "defence": 10,
+                    "health": 20000,
+                    "defence": 5,
                     "exp": 10000,
                     "keys": 1,
                     "attacks": [
-                        <BossAttackModel>{"name": "Fireball", "damage": 40},
-                        <BossAttackModel>{"name": "Stomp", "damage": 120},
-                        <BossAttackModel>{"name": "Rock Spikes", "damage": 50},
-                        <BossAttackModel>{"name": "Spike Traps", "damage": 48},
-                        <BossAttackModel>{"name": "Sword Swing", "damage": 100},
-                        <BossAttackModel>{"name": "Uppercut", "damage": 200},
+                        <BossAttackModel>{"name": "Fireball", "damage": 20},
+                        <BossAttackModel>{"name": "Stomp", "damage": 40},
+                        <BossAttackModel>{"name": "Rock Spikes", "damage": 30},
+                        <BossAttackModel>{"name": "Spike Traps", "damage": 28},
+                        <BossAttackModel>{"name": "Sword Swing", "damage": 30},
+                        <BossAttackModel>{"name": "Uppercut", "damage": 100},
                         <BossAttackModel>{"name": "Rocketfist", "damage": 100}
                     ]
                 }

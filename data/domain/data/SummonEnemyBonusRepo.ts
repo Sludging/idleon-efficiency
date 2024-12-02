@@ -25,6 +25,18 @@ export const initSummonEnemyBonusRepo = () => {
         new SummonEnemyBonusBase(16, <SummonEnemyBonusModel>{"bonusId": 17, "bonus": "<x Gaming Bits"}),
         new SummonEnemyBonusBase(17, <SummonEnemyBonusModel>{"bonusId": 18, "bonus": "<x Shiny EXP"}),
         new SummonEnemyBonusBase(18, <SummonEnemyBonusModel>{"bonusId": 19, "bonus": "+{% All Stat"}),
-        new SummonEnemyBonusBase(19, <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"})    
+        new SummonEnemyBonusBase(19, <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"}),
+        new SummonEnemyBonusBase(20, <SummonEnemyBonusModel>{"bonusId": 21, "bonus": "+{ Stamp LV/day"}),
+        new SummonEnemyBonusBase(21, <SummonEnemyBonusModel>{"bonusId": 22, "bonus": "+{% Villager EXP"}),
+        new SummonEnemyBonusBase(22, <SummonEnemyBonusModel>{"bonusId": 23, "bonus": "+{% Ballot Bonus"}),
+        new SummonEnemyBonusBase(23, <SummonEnemyBonusModel>{"bonusId": 24, "bonus": "+{% Class EXP"}),
+        new SummonEnemyBonusBase(24, <SummonEnemyBonusModel>{"bonusId": 25, "bonus": "+{ Equinox Max LV"}),
+        new SummonEnemyBonusBase(25, <SummonEnemyBonusModel>{"bonusId": 26, "bonus": "+{% Monument AFK"}),
+        new SummonEnemyBonusBase(26, <SummonEnemyBonusModel>{"bonusId": 27, "bonus": "<x Meal Bonuses"}),
+        new SummonEnemyBonusBase(27, <SummonEnemyBonusModel>{"bonusId": 28, "bonus": "+{% for World 7"}),
+        new SummonEnemyBonusBase(28, <SummonEnemyBonusModel>{"bonusId": 29, "bonus": "+{% for World 7"}),
+        new SummonEnemyBonusBase(29, <SummonEnemyBonusModel>{"bonusId": 30, "bonus": "+{% for World 7"}),
+        new SummonEnemyBonusBase(30, <SummonEnemyBonusModel>{"bonusId": 31, "bonus": "+{% for World 7"}),
+        new SummonEnemyBonusBase(31, <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"})    
 ]
 }
