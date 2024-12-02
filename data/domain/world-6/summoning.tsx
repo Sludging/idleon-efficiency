@@ -545,10 +545,16 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achiev379 = achievements[379].completed ? 1 : 0; // x1.01
     const achiev373 = achievements[373].completed ? 1 : 0; // x1.01
     const taskBonus = taskboard.merits[44].getBonus();
+    
+    // this bonus isn't affected by any boost, so we can already calculate it here
+    const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 2)?.getBonus() ?? 0);
 
     summoning.summonBonuses.forEach(bonus => {
         bonus.pristineCharmBonus = charmBonus;
         bonus.artifactBonus = sailingArtifactBonus;
-        bonus.taskBoardBonus = Math.min(10, taskBonus) + achiev373 + achiev379
+        bonus.taskBoardBonus = taskBonus;
+        bonus.achievement373Bonus = achiev373;
+        bonus.achievement379Bonus = achiev379;
+        bonus.summoning32Bonus = summonBonus;
     });
 }
