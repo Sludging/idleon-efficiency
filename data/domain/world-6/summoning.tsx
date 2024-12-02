@@ -144,8 +144,21 @@ export class SummonBonus {
     }
 
     getBonus = (): number => {
-        return 3.5 * this.bonusValue * this.pristineCharmBonus * 
-            (1 + ((this.artifactBonus + this.taskBoardBonus) / 100));
+        switch (true)
+        {
+            // +1 from in-game indexes as it starts from 1
+            case this.data.bonusId == 21:
+            case this.data.bonusId == 23:
+            case this.data.bonusId == 25:
+            case this.data.bonusId == 32:
+                return this.bonusValue;
+            case this.data.bonusId == 20:
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus) / 100);
+            case 21 <= this.data.bonusId && 34 >= this.data.bonusId:
+                return this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus) / 100); 
+            default:
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus) / 100);
+        }
     }
 
     getBonusText = (): string => {
