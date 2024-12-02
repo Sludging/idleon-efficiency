@@ -537,7 +537,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const taskBonus = taskboard.merits[44].getBonus();
     
     // this bonus isn't affected by any boost, so we can already calculate it here
-    const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 2)?.getBonus() ?? 0);
+    const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 32)?.getBonus() ?? 0);
 
     summoning.summonBonuses.forEach(bonus => {
         bonus.pristineCharmBonus = charmBonus;
