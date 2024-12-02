@@ -176,6 +176,13 @@ export interface SummonEssence {
     battles: SummonEnemyModel[]
 }
 
+export interface EndlessFight {
+    ennemy: SummonEnemyModel,
+    hp: number,
+    atk: number,
+    bonus: string
+}
+
 export class BattlesInfo {
     allVictories: number[] = [];
     allBattles: SummonEnemyModel[][] = [];
