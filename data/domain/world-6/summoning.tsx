@@ -193,19 +193,24 @@ export class BattlesInfo {
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
         if (battle) {
-            const bonus = 3.5 * bonusValue;
-            switch (battle.bonusId) {
-                // Only those bonuses have a '{' to be replaced by the bonus value, others use a '<'
-                case 5:
-                case 10:
-                case 12:
-                case 13:
-                case 19:
-                case 20:
-                    return battle.bonus.replace(/{/, nFormatter(bonus));
+            var bonus = 0;
+            switch (true)
+            {
+                // +1 from in-game indexes as it starts from 1
+                case battle.bonusId == 21:
+                case battle.bonusId == 23:
+                case battle.bonusId == 25:
+                case battle.bonusId == 32:
+                    bonus = bonusValue;
+                case battle.bonusId == 20:
+                    bonus = 3.5 * bonusValue;
+                case 21 <= battle.bonusId && 34 >= battle.bonusId:
+                    bonus = bonusValue;
                 default:
-                    return battle.bonus.replace(/</, nFormatter(1 + bonus / 100));
+                    bonus = 3.5 * bonusValue;
             }
+
+            return battle.bonus.replace(/{/, nFormatter(bonus)).replace(/</, nFormatter(1 + bonus / 100));
         } else {
             return "";
         }
