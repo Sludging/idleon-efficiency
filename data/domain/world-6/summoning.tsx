@@ -199,10 +199,11 @@ export interface SummonEssence {
 }
 
 export interface EndlessFight {
-    ennemy: SummonEnemyModel,
+    enemy: SummonEnemyModel,
     hp: number,
     atk: number,
-    bonus: string
+    bonus: string,
+    modifier: string
 }
 
 export class BattlesInfo {
@@ -218,6 +219,23 @@ export class BattlesInfo {
     // This should now be used anywhere this value is needed
     getTotalVictories = (): number => {
         return this.allVictories.reduce((sum, victories) => sum + victories, 0);
+    }
+
+    // Get info to display for the next 10 fights
+    getTenNextEndlessFights = (): EndlessFight[] => {
+        const fights: EndlessFight[] = [];
+        const bonuses = initSummonEnemyBonusRepo();
+
+        for (var i = 0; i < 10; i++) {
+            const battlenumber = this.allVictories[SummonEssenceColor.Endless]+i;
+            // to avoid to modify the original info if updating some values inside the fight
+            const battle: SummonEnemyModel = JSON.parse(JSON.stringify(this.allBattles[SummonEssenceColor.Endless][0 + Math.min(4, Math.floor(battlenumber / 20))]));
+            fights.push({enemy: battle, hp: 0, atk: 0, 
+                    modifier: BattlesInfo.getEndlessBattleFightModifier(battlenumber), 
+                    bonus: BattlesInfo.getBattleBonusText(bonuses.find(bonus => bonus.data.bonusId == BattlesInfo.getEndlessBattleFightBonusIndex(battlenumber))?.data, EndlessModeBonusIncrease[BattlesInfo.getEndlessBattleFightIndex(battlenumber)])});
+        }
+
+        return fights;
     }
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
