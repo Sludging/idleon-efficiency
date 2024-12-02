@@ -162,18 +162,8 @@ export class SummonBonus {
     }
 
     getBonusText = (): string => {
-        switch (this.data.bonusId) {
-            // Only those bonuses have a '{' to be replaced by the bonus value, others use a '<'
-            case 5:
-            case 10:
-            case 12:
-            case 13:
-            case 19:
-            case 20:
-                return this.data.bonus.replace(/{/, nFormatter(this.getBonus()));
-            default:
-                return this.data.bonus.replace(/</, nFormatter(1 + this.getBonus() / 100));
-        }
+        // Can't have the two at the same time, so no worries with displaying two times the bonus
+        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100));
     }
 }
 
