@@ -164,6 +164,24 @@ export class SummonBonus {
         }
     }
 
+    static getBonusValueForDisplay = (bonusId: number, bonusValue: number): number => {
+        switch (true)
+        {
+            // +1 from in-game indexes as it starts from 1
+            case bonusId == 21:
+            case bonusId == 23:
+            case bonusId == 25:
+            case bonusId == 32:
+                return bonusValue;
+            case bonusId == 20:
+                return 3.5 * bonusValue;
+            case 21 <= bonusId && 34 >= bonusId:
+                return bonusValue;
+            default:
+                return 3.5 * bonusValue;
+        }
+    }
+
     getBonusText = (): string => {
         // Can't have the two at the same time, so no worries with displaying two times the bonus
         return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100));
@@ -204,22 +222,7 @@ export class BattlesInfo {
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
         if (battle) {
-            var bonus = 0;
-            switch (true)
-            {
-                // +1 from in-game indexes as it starts from 1
-                case battle.bonusId == 21:
-                case battle.bonusId == 23:
-                case battle.bonusId == 25:
-                case battle.bonusId == 32:
-                    bonus = bonusValue;
-                case battle.bonusId == 20:
-                    bonus = 3.5 * bonusValue;
-                case 21 <= battle.bonusId && 34 >= battle.bonusId:
-                    bonus = bonusValue;
-                default:
-                    bonus = 3.5 * bonusValue;
-            }
+            var bonus = SummonBonus.getBonusValueForDisplay(battle.bonusId, bonusValue);
 
             return battle.bonus.replace(/{/, nFormatter(bonus)).replace(/</, nFormatter(1 + bonus / 100));
         } else {
