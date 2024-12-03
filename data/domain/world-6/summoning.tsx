@@ -433,6 +433,11 @@ export class Summoning extends Domain {
 
         const wonBattles = summoningData[1] as string[];
         wonBattles.forEach((battle) => {
+            // ignore if endless mode enemy
+            if (EndlessModeBattleOrder.indexOf(battle) >= 0) {
+                return;
+            }
+
             // For each win we increment the relevant bonus value and add a victory to the associated color
             const enemyData = enemyRepo.find((enemy) => enemy.data.enemyId == battle);
             if (enemyData) {
