@@ -40,7 +40,7 @@ const EndlessModeModifierID = [
 ]
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[12]
-const EndlessModeEnnemyModifier = [
+const EndlessModeEnemyModifier = [
     ["Slow Motion", "All units, both yours and my own, move at 60% speed."],
     ["Fast Forward", "All of our units, yours and mine, move at 170% speed."],
     ["Glass Cannon", "You have but a single health point, as do I."],
