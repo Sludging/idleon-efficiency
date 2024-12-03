@@ -54,7 +54,7 @@ import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './s
 import { IslandExpeditions } from './islandExpedition';
 import { Tome, updateTomeScores } from './tome';
 import { KillRoy } from './world-2/killroy';
-import { updateVotesBonusFromEquinox, Votes } from './world-2/votes';
+import { updateVotesBonus, Votes } from './world-2/votes';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -243,7 +243,7 @@ const postProcessingMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
-    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonusFromEquinox(accountData),
+    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
 }
 
 // I really really hate this.

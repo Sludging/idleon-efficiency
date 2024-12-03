@@ -1,9 +1,12 @@
 import { Domain, RawData } from "../base/domain";
 import { Equinox } from "../equinox";
 import { Item } from "../items";
+import { Summoning } from "../world-6/summoning";
 
 export class Votes extends Domain {
     multiFromEquinox: number = 0;
+    multiFromSummoning: number = 0;
+    multiFromHole: number = 0;
     bonuses: VoteBonus[] = [];
     currentBonusIndex: number = 0;
     ongoingVoteTopOptionIndex: number = 0;
@@ -76,30 +79,33 @@ export class Votes extends Domain {
     }
 
     getCurrentBonus = (index: number) => {
-        return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusFromEquinox() : 0;
+        return this.currentBonusIndex == index ? (this.bonuses.find(bonus => bonus.index == index)?.bonus ?? 0) * this.getBonusMultiplier() : 0;
     }
 
     getBonusText = (index: number) => {
         const bonus = this.bonuses.find(bonus => bonus.index == index);
 
         if (bonus) {
-            const bonusValue = bonus.value * this.getBonusFromEquinox();
+            const bonusValue = bonus.value * this.getBonusMultiplier();
             return bonus.text.replace('{', bonusValue.toString()).replace('}', (1 + bonusValue/100).toString());
         }
 
         return "";
     }
 
-    getBonusFromEquinox = () => {
-        return 1 + this.multiFromEquinox / 100;
+    getBonusMultiplier = () => {
+        return 1 + (this.multiFromEquinox + this.multiFromSummoning + this.multiFromHole) / 100;
     }
 }
 
-export const updateVotesBonusFromEquinox = (data: Map<string, any>) => {
+export const updateVotesBonus = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const votes = data.get("votes") as Votes;
+    const summoning = data.get("summoning") as Summoning;
 
     votes.multiFromEquinox = (equinox.upgrades[11]?.getBonus() ?? 0);
+    votes.multiFromSummoning = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 23)?.getBonus() ?? 0);
+    votes.multiFromHole = 0; // TODO : Need to update this once Hole have been implemanted
 }
 
 export class VoteBonus {
