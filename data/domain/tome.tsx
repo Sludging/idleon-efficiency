@@ -162,7 +162,7 @@ export class TomeLine {
     }
 
     getLineUnlockLevel = (): number => {
-        return (500 + (50 * TomeLineUnlockLevel[this.index] + (10 * Math.max(0, TomeLineUnlockLevel[this.index] - 30) + 10 * Math.max(0, TomeLineUnlockLevel[this.index] - 50))));
+        return (500 + (50 * this.displayOrder + (10 * Math.max(0, this.displayOrder - 30) + 10 * Math.max(0, this.displayOrder - 50))));
     }
 
     updateIsLineUnlocked = (accountTotalLevel: number) => {
