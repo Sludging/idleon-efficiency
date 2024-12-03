@@ -68,8 +68,10 @@ export class Meal {
     chanceDiscoveryTime: number = 0;
     chanceDiscoveryChance: number = 0;
 
+    // Meal effect bonus
     mainframeBonus: number = 0;
     shinyBonus: number = 0;
+    winnerBonus: number = 0;
 
     // Active cooking values
     cookingContribution: number = 0;
@@ -116,7 +118,7 @@ export class Meal {
             return roundResult ? round(finalMath) : finalMath;
         }
 
-        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * level * this.bonusQty;
+        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * (1 + this.winnerBonus / 100) * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
@@ -562,7 +564,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const voidPlateAchiev = achievements[233].completed;
     const foodLust = (equinox.upgrades[9] as FoodLust);
     cooking.meals.forEach(meal => {
-        meal.mainframeBonus = jewelMealBonus
+        meal.mainframeBonus = jewelMealBonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
 
