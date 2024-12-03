@@ -45,7 +45,7 @@ import { Companions, updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from './rift';
-import { Equinox, updateEquinoxBar, updateEquinoxMaxLevel } from './equinox';
+import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost } from './world-6/summoning';
@@ -248,7 +248,6 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
-    "equinoxMaxLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxMaxLevel(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),

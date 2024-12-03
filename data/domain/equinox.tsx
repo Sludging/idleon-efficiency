@@ -275,22 +275,6 @@ export class Equinox extends Domain {
     }
 }
 
-// We only care about the max level for display and alerts (current level is set in parse and won't be affected by that) so can do it in post post processing
-export function updateEquinoxMaxLevel(data: Map<string, any>) {
-    const equinox = data.get("equinox") as Equinox;
-    const summoning = data.get("summoning") as Summoning;
-
-    const bonusLevelFromSummoning = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 25)?.getBonus() ?? 0);
-
-    // Don't bother if == 0
-    if (bonusLevelFromSummoning > 0) {
-        equinox.upgrades.forEach((upgrade) => {
-            upgrade.bonusLevelFromSummoning = bonusLevelFromSummoning;
-            upgrade.setMaxLevel(equinox.challenges);
-        });
-    }
-}
-
 export function updateEquinoxBar(data: Map<string, any>) {
     const equinox = data.get("equinox") as Equinox;
     const alchemy = data.get("alchemy") as Alchemy
