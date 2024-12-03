@@ -101,10 +101,8 @@ export class Votes extends Domain {
 export const updateVotesBonus = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const votes = data.get("votes") as Votes;
-    const summoning = data.get("summoning") as Summoning;
 
     votes.multiFromEquinox = (equinox.upgrades[11]?.getBonus() ?? 0);
-    votes.multiFromSummoning = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 23)?.getBonus() ?? 0);
     votes.multiFromHole = 0; // TODO : Need to update this once Hole have been implemanted
 }
 
