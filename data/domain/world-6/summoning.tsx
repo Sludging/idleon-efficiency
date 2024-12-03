@@ -253,7 +253,7 @@ export class BattlesInfo {
     }
 
     static getEndlessBattleFightModifier = (endlessFightIndex: number): string[] => {
-        return EndlessModeEnnemyModifier[EndlessModeModifierID[this.getEndlessBattleFightIndex(endlessFightIndex)]];
+        return EndlessModeEnemyModifier[EndlessModeModifierID[this.getEndlessBattleFightIndex(endlessFightIndex)]];
     }
 
     static getEndlessBattleFightBonusIndex = (endlessFightIndex: number): number => {
