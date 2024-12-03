@@ -3,7 +3,8 @@ import ShadowBox from "../../base/ShadowBox";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
-import { Summoning as SummoningDomain, SummonEssence, BattlesInfo } from '../../../data/domain/world-6/summoning';
+import { Summoning as SummoningDomain, SummonEssence, BattlesInfo, SummonEssenceColor } from '../../../data/domain/world-6/summoning';
+import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 
 export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: BattlesInfo, essences: SummonEssence[] }) => {
     const allVictories: number = battlesInfos.getTotalVictories();
@@ -38,7 +39,7 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                     </Box>
                     <Box wrap direction="row" justify="center">
                         {
-                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length && essence.displayBattles).map((essence, index) => {
+                            essences.filter(essence => essence.battles.length > 0 && essence.victories < essence.battles.length && essence.displayBattles && essence.color != SummonEssenceColor.Endless).map((essence, index) => {
                                 return (
                                     <ShadowBox width={{ max: '250px' }} background="dark-1" key={index} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
                                         <Box direction="row" gap="small" pad="small">
@@ -65,7 +66,41 @@ export const SummoningBattles = ({ battlesInfos, essences }: { battlesInfos: Bat
                                         }
                                     </ShadowBox>
                                 )
-                            })}
+                            })
+                        }
+                        {
+                            (essences.find(essence => essence.color == SummonEssenceColor.Endless)?.unlocked ?? false)
+                            &&
+                            <ShadowBox width={{ max: '250px' }} background="dark-1" key={SummonEssenceColor.Endless} pad="medium" margin={{ right: 'small', bottom: 'medium' }}>
+                                <Box direction="row" gap="small" pad="small">
+                                    <IconImage data={SummoningDomain.getSummoningStoneIcon(SummonEssenceColor.Endless)} />
+                                    <Text>Endless Battles ({battlesInfos.allVictories[SummonEssenceColor.Endless]} victories)</Text>
+                                </Box>
+                                {
+                                    battlesInfos.getTenNextEndlessFights().map((battle, index) => {
+                                        const isNextBattle: boolean = (index == 0);
+                                        return (
+                                            <Box key={index} style={{ opacity: isNextBattle == true ? 1 : 0.6 }} pad={{ vertical: 'small' }} margin={{ bottom: 'xsmall' }} border={{ side: 'top', color: "grey-1" }}>
+                                                <Box direction="row" align="center" gap="small">
+                                                    <Box gap="small" margin={{ bottom: '2px' }}>
+                                                        <TextAndLabel textSize="small" label="Name" text={battle.enemy.territoryName} />
+                                                        <TipDisplay
+                                                            size='small'
+                                                            heading={battle.modifier[0]}
+                                                            body={battle.modifier[1]}
+                                                            direction={TipDirection.Down}                                
+                                                        >
+                                                            <TextAndLabel textSize="small" label="Modifier" text={battle.modifier[0]} />
+                                                        </TipDisplay>                                                        
+                                                        <TextAndLabel textSize="small" label="Bonus" text={battle.bonus} />
+                                                    </Box>
+                                                </Box>
+                                            </Box>
+                                        )
+                                    })
+                                }
+                            </ShadowBox>
+                        }
                     </Box>
                 </Box>
             </Box>
