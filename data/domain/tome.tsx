@@ -46,8 +46,6 @@ export enum TomeScoreColors {
     Background = "#3C2C26"
 }
 
-const tomeLineDisplayOrder: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 53, 10, 11, 12, 75, 13, 14, 80, 15, 16, 17, 18, 19, 21, 22, 23, 24, 79, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 76, 38, 54, 40, 41, 42, 39, 44, 46, 47, 48, 49, 50, 51, 52, 45, 55, 57, 58, 59, 60, 61, 62, 63, 64, 56, 65, 66, 67, 68, 69, 20, 70, 71, 43, 72, 73, 74, 77, 78];
-
 export class TomeLine {
     // Needs this to be updated
     // To know how, check game code searching for "_customEvent_TomeQTY: function() {"
@@ -842,7 +840,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
 }
 
 // engine.getGameAttribute("CustomLists").h.NinjaInfo[32]
-const TomeLineUnlockLevel = [
+const tomeLineDisplayOrder = [
     0,
     1,
     2,
