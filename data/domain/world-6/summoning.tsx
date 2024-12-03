@@ -546,6 +546,14 @@ export class Summoning extends Domain {
     }
 
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
+        if (color == SummonEssenceColor.Endless) {
+            return {
+                location: `SumUpgIc70`,
+                height: 25,
+                width: 25
+            }
+        }
+
         return {
             location: `SummC${color+1}`,
             height: 25,
