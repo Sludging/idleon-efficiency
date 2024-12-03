@@ -15,6 +15,9 @@ import { SummonEnemyModel } from "../model/summonEnemyModel";
 import { Sailing } from "../sailing";
 import { TaskBoard } from "../tasks";
 import { Achievement } from "../achievements";
+import { Votes } from "../world-2/votes";
+import { Equinox } from "../equinox";
+import { Cooking } from "../cooking";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -613,5 +616,32 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.achievement373Bonus = achiev373;
         bonus.achievement379Bonus = achiev379;
         bonus.summoning32Bonus = summonBonus;
+    });
+}
+
+// Kinda like what have been done for breeding Shiny with updateAllShinyEffects(), easier to manage this way
+export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
+    const summoning = data.get("summoning") as Summoning;
+    const equinox = data.get("equinox") as Equinox;
+    const votes = data.get("votes") as Votes;
+    const cooking = data.get("cooking") as Cooking;
+
+    // Votes bonus
+    votes.multiFromSummoning = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 23)?.getBonus() ?? 0);
+
+    // Equinox Max Level
+    const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 25)?.getBonus() ?? 0);
+    // Don't bother if == 0
+    if (bonusEquinoxLevel > 0) {
+        equinox.upgrades.forEach((upgrade) => {
+            upgrade.bonusLevelFromSummoning = bonusEquinoxLevel;
+            upgrade.setMaxLevel(equinox.challenges);
+        });
+    }
+
+    // Meal Bonus
+    const mealBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 27)?.getBonus() ?? 0);
+    cooking.meals.forEach(meal => {
+        meal.winnerBonus = mealBonus;
     });
 }
