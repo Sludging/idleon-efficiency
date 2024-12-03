@@ -41,17 +41,17 @@ const EndlessModeModifierID = [
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[12]
 const EndlessModeEnnemyModifier = [
-    "Slow Motion : All units, both yours and my own, move at 60% speed.",
-    "Fast Forward : All of our units, yours and mine, move at 170% speed.",
-    "Glass Cannon : You have but a single health point, as do I.",
-    "Zerg Surprise : You best be ready, I'm playing all my minions on turn 1!",
-    "Extra Time : I've doubled our health points so we can play longer.",
-    "Fair Play : No lane stacking! When you hurt me, all your units in that lane take damage.",
-    "Invincibility : Just let me play my units, I will forfeit one health each time, but you must deal the final blow.",
-    "Offsides Rule : When you hurt me, all your minions beyond the midfield perish.",
-    "Triple Overtime : Ten times the health points. I wanna see your deck's lategame viability.",
-    "Truce : No mods, no effects, no tricks. I want a proper match this time.",
-    "Uno Draw 7 : You're playing with a 7 card hand. It's more fun this way, trust me you'll love it!"
+    ["Slow Motion", "All units, both yours and my own, move at 60% speed."],
+    ["Fast Forward", "All of our units, yours and mine, move at 170% speed."],
+    ["Glass Cannon", "You have but a single health point, as do I."],
+    ["Zerg Surprise", "You best be ready, I'm playing all my minions on turn 1!"],
+    ["Extra Time", "I've doubled our health points so we can play longer."],
+    ["Fair Play", "No lane stacking! When you hurt me, all your units in that lane take damage."],
+    ["Invincibility", "Just let me play my units, I will forfeit one health each time, but you must deal the final blow."],
+    ["Offsides Rule", "When you hurt me, all your minions beyond the midfield perish."],
+    ["Triple Overtime", "Ten times the health points. I wanna see your deck's lategame viability."],
+    ["Truce", "No mods, no effects, no tricks. I want a proper match this time."],
+    ["Uno Draw 7", "You're playing with a 7 card hand. It's more fun this way, trust me you'll love it!"]
 ]
 
 export enum SummonEssenceColor {
@@ -203,7 +203,7 @@ export interface EndlessFight {
     hp: number,
     atk: number,
     bonus: string,
-    modifier: string
+    modifier: string[],
 }
 
 export class BattlesInfo {
@@ -252,7 +252,7 @@ export class BattlesInfo {
         return Math.round(endlessFightIndex - 40 * Math.floor(endlessFightIndex / 40));
     }
 
-    static getEndlessBattleFightModifier = (endlessFightIndex: number): string => {
+    static getEndlessBattleFightModifier = (endlessFightIndex: number): string[] => {
         return EndlessModeEnnemyModifier[EndlessModeModifierID[this.getEndlessBattleFightIndex(endlessFightIndex)]];
     }
 
