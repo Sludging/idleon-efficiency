@@ -565,8 +565,20 @@ export class Summoning extends Domain {
     }
 
     static getEssenceIcon(color: SummonEssenceColor): ImageData {
+        let location = "";
+        switch(color) {
+            case SummonEssenceColor.Red:
+                location = "red_custom";
+                break;
+            case SummonEssenceColor.Cyan:
+                location = "cyan_custom";
+                break;
+            default:
+                location = `W6item${color + 6}_x1`;
+                break;
+        }
         return {
-            location: `W6item${color + 6}_x1`,
+            location: location,
             height: 25,
             width: 25
         }
