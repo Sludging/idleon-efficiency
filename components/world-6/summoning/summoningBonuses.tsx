@@ -11,7 +11,7 @@ export const SummoningBonuses = ({ bonuses }: { bonuses: SummonBonus[] }) => {
                 {
                     bonuses.map((bonus, index) => {
                         return (
-                            <ShadowBox style={{ opacity: bonus.bonusValue > 0 ? 1 : 0.6 }} key={index} background={bonus.data.bonusId >= 21 ? "#050417" : "dark-1"} margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
+                            <ShadowBox style={{ opacity: bonus.bonusValue > 0 ? 1 : 0.6 }} key={index} background={bonus.data.bonusId >= 21 ? "blue-2" : "dark-1"} margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                 <Text size="small">{bonus.getBonusText()}</Text>
                             </ShadowBox>
                         )
