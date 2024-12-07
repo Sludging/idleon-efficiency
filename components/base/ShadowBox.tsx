@@ -14,4 +14,10 @@ export const ShadowHoverBox = styled(ShadowBox)`
 }
 `
 
+export const HoverBox = styled(Box)`
+    &:hover {
+        background: #4C4F54;
+    }
+`
+
 export default ShadowBox;
