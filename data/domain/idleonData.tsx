@@ -48,13 +48,13 @@ import { Rift } from './rift';
 import { Equinox, updateEquinoxBar } from './equinox';
 import { POExtra } from './postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
-import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost } from './world-6/summoning';
+import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './islandExpedition';
 import { Tome, updateTomeScores } from './tome';
 import { KillRoy } from './world-2/killroy';
-import { updateVotesBonusFromEquinox, Votes } from './world-2/votes';
+import { updateVotesBonus, Votes } from './world-2/votes';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -197,6 +197,8 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),
+    "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
+    "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
@@ -215,7 +217,6 @@ const postProcessingMap: Record<string, Function> = {
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
-    "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
     "alchemySlabBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemySlabBubbles(accountData),
@@ -243,7 +244,7 @@ const postProcessingMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
-    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonusFromEquinox(accountData),
+    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
 }
 
 // I really really hate this.

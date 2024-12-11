@@ -19,6 +19,7 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
                     colorUpgrades
                         .map((upgrade, index) => {
                             const canAfford = essence.quantity > upgrade.nextLevelCost();
+                            const maxed = upgrade.level >= upgrade.data.maxLvl;
                             let label: string = "";
                             if (upgrade.unlocked) {
                                 label = (upgrade.level > 0 ? "Next level cost" : "Unlock Cost");
@@ -45,23 +46,25 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
                                             </Box>
                                             <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                         </Box>
-                                        <ComponentAndLabel
-                                            label={label}
-                                            component={
-                                                upgrade.unlocked ?
-                                                    upgrade.level < upgrade.data.maxLvl ?
-                                                        <Box gap="xsmall" direction="row" align="center">
-                                                            <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
-                                                            <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
-                                                        </Box>
+                                        <Box style={{ opacity: !maxed ? 1 : 0.6 }}>
+                                            <ComponentAndLabel
+                                                label={label}
+                                                component={
+                                                    upgrade.unlocked ?
+                                                        !maxed ?
+                                                            <Box gap="xsmall" direction="row" align="center">
+                                                                <IconImage data={SummoningDomain.getEssenceIcon(essence.color)} />
+                                                                <Text color={canAfford ? 'green-1' : ''} size="small">{nFormatter(upgrade.nextLevelCost())}</Text>
+                                                            </Box>
+                                                            :
+                                                            <Box gap="xsmall" direction="row" align="center">
+                                                                <Text size="small">MAXED</Text>
+                                                            </Box>
                                                         :
-                                                        <Box gap="xsmall" direction="row" align="center">
-                                                            <Text size="small">MAXED</Text>
-                                                        </Box>
-                                                    :
-                                                    <Box></Box>
-                                            }
-                                        />
+                                                        <Box></Box>
+                                                }
+                                            />
+                                        </Box>
                                     </Box>
                                 </ShadowBox>
                             )
@@ -75,7 +78,7 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
 export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgrade[], essences: SummonEssence[] }) => {
     const [activeTab, setActiveTab] = useState<string>("White");
     const upgradesToDisplay = upgrades.filter(upgrade => upgrade.shouldBeDisplayed == true);
-    const tabsName = essences.filter(essence => essence.display == true).map(essence => {
+    const tabsName = essences.filter(essence => essence.displayEssence == true).map(essence => {
         if(upgradesToDisplay.filter(upgrade => upgrade.data.colour == essence.color).length > 0){
             return SummoningDomain.getEssenceColorName(essence.color);
         } else {

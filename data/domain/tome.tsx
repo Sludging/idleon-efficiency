@@ -459,7 +459,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalSummoningUpgradeLevels = summoning.summonUpgrades.reduce((sum, upgrade) => sum+upgrade.level, 0);
 
     // Sum of summoning victories
-    const summoningVictories = summoning.summonBattles.allVictories.reduce((sum, victories) => sum+victories, 0);
+    const summoningVictories = summoning.summonBattles.getTotalVictories();
 
     // Number of Ninja floors unlocked
     var ninjaFloorsUnlocked = 0;

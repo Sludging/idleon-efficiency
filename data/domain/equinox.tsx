@@ -7,6 +7,7 @@ import { Item } from "./items";
 import { DreamChallengeModel } from "./model/dreamChallengeModel";
 import { DreamUpgradeModel } from "./model/dreamUpgradeModel";
 import { ImageData } from './imageData';
+import { Summoning } from "./world-6/summoning";
 
 class Challenge {
     complete: boolean = false;
@@ -38,6 +39,7 @@ class Upgrade {
     unlocked: boolean = false;
     level: number = 0;
     maxLevel: number = 0;
+    bonusLevelFromSummoning: number = 0;
     constructor(public index: number, public data: DreamUpgradeModel) { }
 
     setMaxLevel = (challanges: Challenge[]): void => {
@@ -47,31 +49,35 @@ class Upgrade {
                 break;
             }
             case 4: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * (challanges[34]?.getValue() ?? 0));
+                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * (challanges[34]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
                 break;
             }
             case 5: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * (challanges[32]?.getValue() ?? 0));
+                this.maxLevel = Math.round(this.data.x1 + 5 * (challanges[32]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
+                break;
+            }
+            case 7: {
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoning);
                 break;
             }
             case 8: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[21].getValue() + 10 * challanges[26].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[21].getValue() + 10 * challanges[26].getValue() + this.bonusLevelFromSummoning);
                 break;
             }
             case 9: {
-                this.maxLevel = Math.round(this.data.x1 + 4 * challanges[25].getValue());
+                this.maxLevel = Math.round(this.data.x1 + 4 * challanges[25].getValue() + this.bonusLevelFromSummoning);
                 break;
             }
             case 10: {
-                this.maxLevel = Math.round(this.data.x1 + 4 * (challanges[30]?.getValue() ?? 0));
+                this.maxLevel = Math.round(this.data.x1 + 4 * (challanges[30]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
                 break;
             }
             case 11: {
-                this.maxLevel = Math.round(this.data.x1 + 15 * (challanges[35]?.getValue() ?? 0));
+                this.maxLevel = Math.round(this.data.x1 + 15 * (challanges[35]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
                 break;
             }
             default: {
-                this.maxLevel = Math.round(this.data.x1)
+                this.maxLevel = Math.round(this.data.x1);
                 break;
             }
         }

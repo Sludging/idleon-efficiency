@@ -31,10 +31,7 @@ import { CircleInformation } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
-
-const ShadowBox = styled(Box)`
-    box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
-`
+import ShadowBox, { HoverBox } from "../../../components/base/ShadowBox";
 
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
@@ -186,12 +183,6 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
         </Box>
     );
 }
-
-const HoverBox = styled(Box)`
-    &:hover {
-        background: #4C4F54;
-    }
-`
 
 function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
     

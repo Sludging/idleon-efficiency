@@ -29,13 +29,10 @@ import { AtomCollider } from "../../../data/domain/atomCollider";
 import P2WDisplay from "../../../components/world-2/alchemy/p2w";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
+import ShadowBox from "../../../components/base/ShadowBox";
 
 const CapitalizedH3 = styled.h3`
     text-transform: capitalize
-`
-
-const ShadowBox = styled(Box)`
-    box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17)
 `
 
 interface DisplayProps {
