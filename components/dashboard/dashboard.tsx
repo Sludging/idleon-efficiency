@@ -20,6 +20,7 @@ import { AFKTypeEnum } from "../../data/domain/enum/aFKTypeEnum";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { DataStatus } from "../../lib/stores/appDataStore";
 import type { Metadata } from 'next'
+import { useShallow } from "zustand/react/shallow";
  
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -153,10 +154,12 @@ function DashboardWidget({ children, direction = "row", wrap, heading, gridArea 
 function Dashboard() {
     const size = useContext(ResponsiveContext);
 
-    const { theData, dataStatus } = useAppDataStore((state) => ({
-        theData: state.data.getData(),
-        dataStatus: state.dataStatus,
-    }));
+    const { theData, dataStatus } = useAppDataStore(
+        useShallow((state) => ({
+            theData: state.data.getData(),
+            dataStatus: state.dataStatus,
+            lastUpdated: state.lastUpdated,
+    })));
 
     const accountData = theData.get("account") as Account;
     const alertData = theData.get("alerts") as Alerts;
