@@ -66,4 +66,7 @@ const moduleExports = {
 module.exports = withSentryConfig(moduleExports, {
   silent: true,
   disableServerWebpackPlugin: true,
+  sourcemaps: {
+    disable: true,
+  }
 });
