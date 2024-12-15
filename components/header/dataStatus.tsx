@@ -27,5 +27,13 @@ export const DataStatusDisplay = () => {
         )
     }
 
+    if ([DataStatus.MissingData].includes(dataStatus)) {
+        return (
+            <Box align="center" justify="center">
+                <Text size="small" color="accent-1">No data available for this account. Sign out and try again.</Text>
+            </Box>
+        )
+    }
+
     return null;
 }
