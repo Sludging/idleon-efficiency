@@ -1,4 +1,4 @@
-import { Anchor, Text } from "grommet";
+import { Anchor, Box, Button, Text } from "grommet";
 import { useEffect, useState } from "react";
 import { GoogleDeviceLogin } from "../../data/domain/login/googleDeviceLogin";
 import ShadowBox from "../base/ShadowBox";
@@ -39,7 +39,17 @@ export default function GoogleLogin () {
         }
     }
 
-    
+    const copyToClipboard = () => {
+        if (navigator && navigator.clipboard && code) {
+            return navigator.clipboard.writeText(code);
+        }
+        return Promise.reject('The Clipboard API is not available.');
+    }
+
+    const onButtonClick = () => {
+        copyToClipboard();
+        window.open(verificationUrl,'_newtab');
+    }
 
     useEffect(() => {
         if (!deviceCode) {
@@ -59,7 +69,14 @@ export default function GoogleLogin () {
     return (
         <ShadowBox background="dark-1" pad="large" gap="small">
             { !code ? <Text>Getting code from google, please wait.</Text>
-            : <Text>Please go to <Anchor href={verificationUrl} target="_blank" title={verificationUrl}>{verificationUrl}</Anchor> and use the code {code}</Text>}
+            : 
+            <Box pad="small" gap="medium">
+                <Text>Please go to <Anchor href={verificationUrl} target="_blank" title={verificationUrl}>{verificationUrl}</Anchor> and use the code {code}</Text>
+                <Box width="50%" align="center" fill>
+                    <Button style={{ color: "white" }} primary color="brand" label="Copy code and open URL" onClick={() => onButtonClick()} />
+                </Box>
+            </Box>
+            }
             { !error && deviceCode && <Text>Waiting for authentication to complete, retried: {retryCounter} times.</Text>}
             { error && <Text>{error}</Text>}
         </ShadowBox>

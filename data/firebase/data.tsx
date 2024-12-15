@@ -22,11 +22,14 @@ export class FirestoreData {
         this.userUid = uid;
         this.db = initializeFirestore(app, {});
         this.realDB = getDatabase(app);
-        this.getServerVars();
-        this.getCharNames();
-        this.getCompanions();
-        this.subscribeToAccountData();
         this.onUpdateFunction = onUpdate;
+    }
+
+    fetchData = async () => {
+        await this.getServerVars();
+        await this.getCharNames();
+        await this.getCompanions();
+        await this.subscribeToAccountData();
     }
 
     getCompanions = async () => {
@@ -56,12 +59,15 @@ export class FirestoreData {
             const charSnapshot = await get(child(dbRef, `_uid/${this.uid}`))
             if (charSnapshot && charSnapshot.exists()) {
                 this.charNames = charSnapshot.val() as string[];
-            } else {
-                console.log("No character name data available, wrong account?");
             }
         }
         catch (error) {
             console.log(error);
+        }
+
+        if (this.charNames.length == 0) {
+            console.log("No character name data available, wrong account?");
+            throw new Error("No character name data, invalid account");
         }
     }
 

@@ -122,7 +122,14 @@ export const createAppDataStore = (
             // Regular usage, and firestore hasn't been initialised yet.
             if (!subDomain && userUid) {
                 const fireStore = new FirestoreData(userUid, app, get().handleLiveData)
-                set((state) => ({ firestore: fireStore }));
+                fireStore.fetchData().then(() => {
+                    set((state) => ({ firestore: fireStore }));
+                })
+                .catch(() => {
+                    set((state) => ({
+                        dataStatus: DataStatus.MissingData,
+                    }))
+                })
             }
             // Domain has been provided, it's valid and the profile data hasn't been parsed yet.
             // TODO: Handling of domain change, maybe?
