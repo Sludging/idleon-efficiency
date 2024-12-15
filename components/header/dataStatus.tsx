@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react";
-import { Box, Text, ThemeContext, ThemeType } from "grommet";
+import { Box, Notification, Text, ThemeContext, ThemeType } from "grommet";
 import TextAndLabel from "../base/TextAndLabel";
 import { ArrowsClockwise } from "@phosphor-icons/react";
 import { normalizeColor } from "grommet/utils";
@@ -30,6 +30,12 @@ export const DataStatusDisplay = () => {
     if ([DataStatus.MissingData].includes(dataStatus)) {
         return (
             <Box align="center" justify="center">
+                <Notification
+                        toast
+                        title="No data"
+                        message="No data available for this account, did you use the wrong account?"
+                        status="critical"
+                    />
                 <Text size="small" color="accent-1">No data available for this account. Sign out and try again.</Text>
             </Box>
         )
