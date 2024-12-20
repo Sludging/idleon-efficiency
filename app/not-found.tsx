@@ -8,7 +8,7 @@ import {
     return (
       <Box pad="large" align="center" fill>
         <Heading level='1'>404 - Page Not Found</Heading>
-        <Link href="/">
+        <Link href="https://www.idleonefficiency.com/">
           Home Page
         </Link>
       </Box>
