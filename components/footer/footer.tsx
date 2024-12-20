@@ -34,7 +34,7 @@ export const FooterComponent = () => {
                     <Box align="center" pad="small">
                         <Text size="12px" color="grey-2">|</Text>
                     </Box>
-                    <IconLink icon={Icon} href="/privacy-policy" text="Privacy Policy" target="_self" />
+                    <IconLink icon={Icon} href="https://www.idleonefficiency.com/privacy-policy" text="Privacy Policy" target="_self" />
                     <Box align="center" pad="small">
                         <Text size="12px" color="grey-2">|</Text>
                     </Box>
