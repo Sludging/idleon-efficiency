@@ -1214,7 +1214,7 @@ function PlayerTab({ player }: PlayerTabProps) {
         if (player.activeBubbles.length > 0) {
             setActiveBubbles(player.activeBubbles);
         }
-        if ((player.classId != ClassIndex.Barbarian && player.classId != ClassIndex.Blood_Berserker) && index == 11) {
+        if (player.getSubClass() != ClassIndex.Barbarian) {
             setIndex(1);
         }
     }, [theData, player]);
