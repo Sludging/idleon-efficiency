@@ -152,7 +152,7 @@ export const initBubbleRepo = () => {
                         "x1": 5,
                         "x2": 1,
                         "func": "bigBase",
-                        "description": "+{ Talent Points for EACH tab! Yea, it's amazing right? But it's just for warriors, don't tell the other classes!!",
+                        "description": "+{ Talent Points for EACH tab! But it's just for warriors, don't tell the other classes!! NOTE: Doesn't affect Master Class",
                         "requirements": [<ComponentModel>{"item": "Critter4", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}],
                         "bonusKey": "TalWarrior"
                     },
@@ -462,7 +462,7 @@ export const initBubbleRepo = () => {
                         "x1": 5,
                         "x2": 1,
                         "func": "bigBase",
-                        "description": "+{ Talent Points for EACH tab, but just for Archers! Well, and 'that' class, you know who you are!",
+                        "description": "+{ Talent Points for EACH tab, but just for Archers! NOTE: Doesn't affect Master Class",
                         "requirements": [<ComponentModel>{"item": "Bug6", "quantity": 120}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}],
                         "bonusKey": "TalArchers"
                     },
@@ -512,7 +512,7 @@ export const initBubbleRepo = () => {
                         "x1": 70,
                         "x2": 40,
                         "func": "decay",
-                        "description": "+{% extra Kills for Deathnote and opening portals to new maps. Shoutout to my I.S. players who fondly remember 'Kill Per Kill'!",
+                        "description": "+{% extra Kills for Deathnote and opening portals to new maps. Shoutout to my Idle Skilling players who remember 'Kill Per Kill'!",
                         "requirements": [<ComponentModel>{"item": "Refinery4", "quantity": 6}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 4}],
                         "bonusKey": "kpkACTIVE"
                     },
@@ -772,7 +772,7 @@ export const initBubbleRepo = () => {
                         "x1": 5,
                         "x2": 1,
                         "func": "bigBase",
-                        "description": "Sorry, mages don't get anything because you're lame.... Ok fine, you can have +{ Talent Points for each tab, but I'm not happy about it.",
+                        "description": "Sorry, mages don't get anything... Ok fine, you can have +{ Talent Points for each tab. NOTE: Doesn't affect Master Class",
                         "requirements": [<ComponentModel>{"item": "SnowC1", "quantity": 150}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 2}],
                         "bonusKey": "TalWiz"
                     },

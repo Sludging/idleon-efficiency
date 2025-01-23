@@ -223,26 +223,26 @@ export const initRecipeRepo = () => {
         new RecipeBase("MaxCapBag8", <RecipeModel>{
                 "intID": "MaxCapBag8",
                 "recipe": [
-                    <ComponentModel>{"item": "FoodHealth1", "quantity": 75},
-                    <ComponentModel>{"item": "FoodHealth3", "quantity": 25},
-                    <ComponentModel>{"item": "CopperBar", "quantity": 15}
+                    <ComponentModel>{"item": "FoodHealth1", "quantity": 30},
+                    <ComponentModel>{"item": "FoodHealth3", "quantity": 20},
+                    <ComponentModel>{"item": "CopperBar", "quantity": 5}
                 ],
                 "levelReqToCraft": 5,
                 "expGiven": 22,
                 "no": 15,
                 "tab": 1,
-                "sellPrice": 430,
+                "sellPrice": 235,
                 "recipeFrom": [],
                 "detailedRecipe": <DetailedRecipeModel>{
                     "detRecipe": [
-                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth1", "quantity": 75},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth3", "quantity": 25},
-                        <DetRecipeComponentModel>{"indent": 0, "item": "CopperBar", "quantity": 15}
+                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth1", "quantity": 30},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "FoodHealth3", "quantity": 20},
+                        <DetRecipeComponentModel>{"indent": 0, "item": "CopperBar", "quantity": 5}
                     ],
                     "detRecipeTotals": [
-                        <ComponentModel>{"item": "FoodHealth1", "quantity": 75},
-                        <ComponentModel>{"item": "FoodHealth3", "quantity": 25},
-                        <ComponentModel>{"item": "CopperBar", "quantity": 15}
+                        <ComponentModel>{"item": "FoodHealth1", "quantity": 30},
+                        <ComponentModel>{"item": "FoodHealth3", "quantity": 20},
+                        <ComponentModel>{"item": "CopperBar", "quantity": 5}
                     ]
                 }
             }),

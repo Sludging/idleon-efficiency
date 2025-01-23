@@ -64,7 +64,7 @@ export const initShrineRepo = () => {
             }),
         new ShrineBase(8, <ShrineModel>{
                 "name": "Primordial Shrine",
-                "desc": "Boosts AFK Gain Rate on this map by +%, up to 150% tot. @ AFK Time to next Lv: @",
+                "desc": "Boosts AFK Gain Rate on this map by +%. @ AFK Time to next Lv: @",
                 "baseBonus": 1,
                 "increment": 0.1,
                 "misc": 0

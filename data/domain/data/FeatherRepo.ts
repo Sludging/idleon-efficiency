@@ -178,7 +178,7 @@ export const initFeatherRepo = () => {
                 "x4": 1
             }),
         new FeatherBase(19, <FeatherModel>{
-                "name": "Mutlihook Fishing",
+                "name": "Multihook Fishing",
                 "x1": 2e+10,
                 "x2": 1.12,
                 "x3": 8e+10,
