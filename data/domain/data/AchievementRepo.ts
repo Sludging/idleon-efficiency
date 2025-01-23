@@ -1101,14 +1101,14 @@ export const initAchievementRepo = () => {
         new AchievementBase(156, <AchievementModel>{
                 "name": "Hairy Ice Comb",
                 "qty": 3000,
-                "desc": "Manually loot 1000 floof poofs, melty cubes, and moustache comb stacks -- AFK claiming doesn't count.",
+                "desc": "Manually loot 1000 floof poofs, then 1000 melty cubes, then 1000 moustache combs. So 3000 in total!",
                 "rewards": "*Frosty Peaks BG &for Title Screen",
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(157, <AchievementModel>{
                 "name": "Giant Slayer",
                 "qty": 25,
-                "desc": "Defeat 5 Giant Mobs of each type Bloque, Mamooth, Snowman, Penguin, Thermister. Do it in that monster order.",
+                "desc": "Defeat 5 Giant Mobs of each type Bloque, Mamooth, Snowman, Penguin, then Thermister, IN THAT ORDER. So 25 in total!.",
                 "rewards": "*Tundra Outback BG &for Title Screen",
                 "world": "Frostbite Tundra"
             }),

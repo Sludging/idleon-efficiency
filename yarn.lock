@@ -4764,7 +4764,7 @@ __metadata:
     grommet-icons: "npm:^4.12.1"
     next: "npm:15.1.0"
     next-build-id: "npm:^3.0.0"
-    pixelmatch: "npm:^6.0.0"
+    pixelmatch: "npm:^5.3.0"
     polished: "npm:^4.3.1"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
@@ -6140,21 +6140,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixelmatch@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "pixelmatch@npm:6.0.0"
+"pixelmatch@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "pixelmatch@npm:5.3.0"
   dependencies:
-    pngjs: "npm:^7.0.0"
+    pngjs: "npm:^6.0.0"
   bin:
     pixelmatch: bin/pixelmatch
-  checksum: 10c0/036b2ce0e5a2824d8da1a7f726d36f53fa7619d3e5bca662c955182f8dedafd69b8c7deb986f8d01143518bacef7d599f9154a9163f1e7af882fea5cf7182359
+  checksum: 10c0/30850661db29b57cefbe6cf36e930b7517aea4e0ed129e85fcc8ec04a7e6e7648a822a972f8e01d2d3db268ca3c735555caf6b8099a164d8b64d105986d682d2
   languageName: node
   linkType: hard
 
-"pngjs@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "pngjs@npm:7.0.0"
-  checksum: 10c0/0d4c7a0fd476a9c33df7d0a2a73e1d56537628a668841f6995c2bca070cf30819f9254a64363266bc14ef2fee47659dd3b4f2b18eec7ab65143015139f497b38
+"pngjs@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "pngjs@npm:6.0.0"
+  checksum: 10c0/ac23ea329b1881d1a10575aff58116dc27b894ec3f5b84ba15c7f527d21e609fbce7ba16d48f8ccb86c7ce45ceed622472765476ab2875949d4bec55e153f87a
   languageName: node
   linkType: hard
 

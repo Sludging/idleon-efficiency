@@ -1856,6 +1856,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats111", <ArmourItemModel>{
+                "internalName": "EquipmentHats111",
+                "displayName": "Epic Santa Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
+                "LUK": 3,
+                "Defence": 15,
+                "miscUp1": "10% Xp From Monsters",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 3,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats44", <ArmourItemModel>{
                 "internalName": "EquipmentHats44",
                 "displayName": "Jar",
@@ -3546,9 +3567,9 @@ export const initSpecificItemRepo = () => {
                 "lvReqToEquip": 2,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
-                "STR": 2,
+                "STR": 1,
                 "AGI": 1,
-                "WIS": 0,
+                "WIS": 1,
                 "LUK": 0,
                 "Defence": 3,
                 "miscUp1": "",
@@ -3669,15 +3690,15 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aShirt,
                 "Type": "Shirt",
                 "lvReqToCraft": 4,
-                "lvReqToEquip": 4,
+                "lvReqToEquip": 5,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
                 "STR": 0,
-                "AGI": 3,
-                "WIS": 4,
+                "AGI": 5,
+                "WIS": 5,
                 "LUK": 0,
-                "Defence": 4,
-                "miscUp1": "2% Xp From Monsters",
+                "Defence": 7,
+                "miscUp1": "15% Xp From Monsters",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
                 "Skill": "",
@@ -3861,11 +3882,11 @@ export const initSpecificItemRepo = () => {
                 "lvReqToEquip": 8,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
-                "STR": 2,
-                "AGI": 2,
-                "WIS": 2,
+                "STR": 3,
+                "AGI": 3,
+                "WIS": 3,
                 "LUK": 0,
-                "Defence": 7,
+                "Defence": 10,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
@@ -3882,11 +3903,11 @@ export const initSpecificItemRepo = () => {
                 "lvReqToEquip": 15,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
-                "STR": 3,
-                "AGI": 3,
-                "WIS": 3,
+                "STR": 4,
+                "AGI": 4,
+                "WIS": 4,
                 "LUK": 0,
-                "Defence": 12,
+                "Defence": 16,
                 "miscUp1": "50",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 2,
@@ -3907,7 +3928,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 5,
                 "WIS": 5,
                 "LUK": 0,
-                "Defence": 18,
+                "Defence": 20,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
@@ -3923,12 +3944,12 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 55,
                 "lvReqToEquip": 35,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 0,
-                "STR": 3,
-                "AGI": 3,
-                "WIS": 3,
+                "Weapon_Power": 3,
+                "STR": 7,
+                "AGI": 7,
+                "WIS": 7,
                 "LUK": 0,
-                "Defence": 22,
+                "Defence": 25,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
@@ -3949,7 +3970,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 8,
                 "WIS": 8,
                 "LUK": 0,
-                "Defence": 25,
+                "Defence": 30,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
@@ -3970,7 +3991,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 0,
                 "WIS": 4,
                 "LUK": 0,
-                "Defence": 22,
+                "Defence": 25,
                 "miscUp1": "10% Fishin Efficincy",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
@@ -3991,7 +4012,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 12,
                 "WIS": 0,
                 "LUK": 0,
-                "Defence": 18,
+                "Defence": 19,
                 "miscUp1": "10% Catch Efficincy",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
@@ -4012,8 +4033,8 @@ export const initSpecificItemRepo = () => {
                 "AGI": 1,
                 "WIS": 13,
                 "LUK": 0,
-                "Defence": 14,
-                "miscUp1": "10% Chop Efficiency",
+                "Defence": 15,
+                "miscUp1": "20% Chop Efficiency",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "",
@@ -4033,7 +4054,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 10,
                 "WIS": 10,
                 "LUK": 0,
-                "Defence": 35,
+                "Defence": 40,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 4,
@@ -4054,7 +4075,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 5,
                 "WIS": 5,
                 "LUK": 0,
-                "Defence": 30,
+                "Defence": 50,
                 "miscUp1": "4% Mastery",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 6,
@@ -4075,7 +4096,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 13,
                 "WIS": 13,
                 "LUK": 0,
-                "Defence": 45,
+                "Defence": 55,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 4,
@@ -4117,7 +4138,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 0,
                 "WIS": 5,
                 "LUK": 0,
-                "Defence": 52,
+                "Defence": 60,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
@@ -4138,7 +4159,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 19,
                 "WIS": 0,
                 "LUK": 0,
-                "Defence": 49,
+                "Defence": 53,
                 "miscUp1": "",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
@@ -4180,7 +4201,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 15,
                 "WIS": 15,
                 "LUK": 0,
-                "Defence": 55,
+                "Defence": 70,
                 "miscUp1": "7% Mastery",
                 "miscUp2": "3% Total Damage",
                 "Upgrade_Slots_Left": 6,
@@ -4201,7 +4222,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 16,
                 "WIS": 16,
                 "LUK": 16,
-                "Defence": 60,
+                "Defence": 80,
                 "miscUp1": "6% Defence",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 6,
@@ -4222,7 +4243,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 20,
                 "WIS": 20,
                 "LUK": 20,
-                "Defence": 75,
+                "Defence": 90,
                 "miscUp1": "11% Defence",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 7,
@@ -4243,7 +4264,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 24,
                 "WIS": 24,
                 "LUK": 24,
-                "Defence": 80,
+                "Defence": 100,
                 "miscUp1": "3% All Stats",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 8,
@@ -4264,7 +4285,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 30,
                 "WIS": 30,
                 "LUK": 30,
-                "Defence": 100,
+                "Defence": 115,
                 "miscUp1": "4% All Stats",
                 "miscUp2": "4% Total Damage",
                 "Upgrade_Slots_Left": 8,
@@ -4285,7 +4306,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 40,
                 "WIS": 40,
                 "LUK": 40,
-                "Defence": 120,
+                "Defence": 135,
                 "miscUp1": "8% Mob Respawn",
                 "miscUp2": "6% Total Damage",
                 "Upgrade_Slots_Left": 9,
@@ -4306,7 +4327,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 45,
                 "WIS": 45,
                 "LUK": 45,
-                "Defence": 150,
+                "Defence": 170,
                 "miscUp1": "8% All Stats",
                 "miscUp2": "26% Money",
                 "Upgrade_Slots_Left": 9,
@@ -11573,7 +11594,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("InvStorage2", <ChestItemModel>{
                 "internalName": "InvStorage2",
                 "displayName": "Storage Chest 2",
-                "sellPrice": 1000,
+                "sellPrice": 200,
                 "typeGen": TypeGenEnum.aStorageChest,
                 "Type": "Storage",
                 "description": "Hold down to permanently add +3 Slots to your Storage Chest. Can only be used once.",
@@ -11613,7 +11634,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("InvStorage6", <ChestItemModel>{
                 "internalName": "InvStorage6",
                 "displayName": "Storage Chest 6",
-                "sellPrice": 2500,
+                "sellPrice": 800,
                 "typeGen": TypeGenEnum.aStorageChest,
                 "Type": "Storage",
                 "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
@@ -11623,7 +11644,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("InvStorage7", <ChestItemModel>{
                 "internalName": "InvStorage7",
                 "displayName": "Storage Chest 7",
-                "sellPrice": 5500,
+                "sellPrice": 3500,
                 "typeGen": TypeGenEnum.aStorageChest,
                 "Type": "Storage",
                 "description": "Hold down to permanently add +4 Slots to your Storage Chest. Can only be used once.",
@@ -12008,6 +12029,16 @@ export const initSpecificItemRepo = () => {
                 "Type": "Storage",
                 "description": "Hold down to permanently add +3 Slots to your Storage Chest. Can only be used once.",
                 "order": 105,
+                "level": 1
+            }),
+        new BaseItemBase("InvStorageH", <ChestItemModel>{
+                "internalName": "InvStorageH",
+                "displayName": "Holiday Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +16 Slots to your Storage Chest. Can only be used once.",
+                "order": 106,
                 "level": 1
             }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
@@ -18372,6 +18403,48 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag14", <ArmourItemModel>{
+                "internalName": "EquipmentNametag14",
+                "displayName": "Snowflake Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 2,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 5,
+                "miscUp1": "3% All Afk Gain",
+                "miscUp2": "3% Damage Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag15", <ArmourItemModel>{
+                "internalName": "EquipmentNametag15",
+                "displayName": "Frostyman Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 6,
+                "AGI": 6,
+                "WIS": 6,
+                "LUK": 6,
+                "Defence": 25,
+                "miscUp1": "25% All Afk Gain",
+                "miscUp2": "15% Damage Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -21365,7 +21438,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 5,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base Dmg by 10. 15% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base Dmg by 50. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotOr2", <ACItemModel>{
                 "internalName": "FoodPotOr2",
@@ -21373,7 +21446,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base Dmg by 30. 13% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base Dmg by 150. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotOr3", <ACItemModel>{
                 "internalName": "FoodPotOr3",
@@ -21381,7 +21454,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 150,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base Dmg by 100. 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base Dmg by 400. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotOr4", <ACItemModel>{
                 "internalName": "FoodPotOr4",
@@ -21389,7 +21462,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 2700,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base Dmg by 250. 8% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base Dmg by 1000. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotRe1", <ACItemModel>{
                 "internalName": "FoodPotRe1",
@@ -21397,7 +21470,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base HP by 30. 5% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base HP by 75. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotRe2", <ACItemModel>{
                 "internalName": "FoodPotRe2",
@@ -21405,7 +21478,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 30,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base HP by 120. 4% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base HP by 200. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotRe3", <ACItemModel>{
                 "internalName": "FoodPotRe3",
@@ -21413,7 +21486,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base HP by 250. 3% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base HP by 400. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotRe4", <ACItemModel>{
                 "internalName": "FoodPotRe4",
@@ -21421,7 +21494,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4000,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Base HP by 700. 2% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Base HP by 800. 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotGr1", <ACItemModel>{
                 "internalName": "FoodPotGr1",
@@ -21429,7 +21502,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 7,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Move Spd by 5%. 15% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Move Spd by 10%. 1% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotGr2", <ACItemModel>{
                 "internalName": "FoodPotGr2",
@@ -21437,7 +21510,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 60,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Move Spd by 10%. 13% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Move Spd by 15%. 1% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotGr3", <ACItemModel>{
                 "internalName": "FoodPotGr3",
@@ -21445,7 +21518,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 400,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Move Spd by 15%. 10% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Move Spd by 17%. 1% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotGr4", <ACItemModel>{
                 "internalName": "FoodPotGr4",
@@ -21453,7 +21526,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 8000,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Move Spd by 20%. 7% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Move Spd by 20%. 1% chance to be consumed every 10 meters walked. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodEvent7", <ACItemModel>{
                 "internalName": "FoodEvent7",
@@ -21469,7 +21542,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 5,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Boosts Mana Regen Rate by 10% 40% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Boosts Mana Regen Rate by 20% 2% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotMana2", <ACItemModel>{
                 "internalName": "FoodPotMana2",
@@ -21477,7 +21550,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Boosts Mana Regen Rate by 17% 35% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Boosts Mana Regen Rate by 30% 2% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotMana3", <ACItemModel>{
                 "internalName": "FoodPotMana3",
@@ -21485,7 +21558,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 175,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Boosts Mana Regen Rate by 25% 30% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Boosts Mana Regen Rate by 40% 1% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotMana4", <ACItemModel>{
                 "internalName": "FoodPotMana4",
@@ -21493,7 +21566,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 4500,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Boosts Mana Regen Rate by 40% 30% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Boosts Mana Regen Rate by 50% 1% chance to be consumed every 100% Mana Regenerated. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotYe1", <ACItemModel>{
                 "internalName": "FoodPotYe1",
@@ -21501,7 +21574,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 25,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 5% 10% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 30% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotYe2", <ACItemModel>{
                 "internalName": "FoodPotYe2",
@@ -21509,7 +21582,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 250,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 10% 8% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 45% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotYe3", <ACItemModel>{
                 "internalName": "FoodPotYe3",
@@ -21517,7 +21590,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1500,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 15% 6% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 60% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotYe4", <ACItemModel>{
                 "internalName": "FoodPotYe4",
@@ -21525,7 +21598,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 30000,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 20% 3% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 75% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodPotYe5", <ACItemModel>{
                 "internalName": "FoodPotYe5",
@@ -21533,7 +21606,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 150000,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Boost Food",
-                "description": "Increases Exp Gain by 25% 2% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
+                "description": "Increases Exp Gain by 90% 1% chance to be consumed every time you defeat a monster. Must be equipped in a Food Slot to give its bonus. "
             }),
         new BaseItemBase("FoodEvent6", <ACItemModel>{
                 "internalName": "FoodEvent6",
@@ -21996,7 +22069,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Restores power to the Desert Portal in the Grasslands Town. "
+                "description": "Give this to the bird in town to unlock the portal to World 2! You can come back to World 1 whenever you want, don't worry. "
             }),
         new BaseItemBase("Crystal2", <DescItemModel>{
                 "internalName": "Crystal2",
@@ -22702,6 +22775,30 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down instantly gain 2 Hours of all Cavern progress and Villager exp gain! "
             }),
+        new BaseItemBase("Quest91", <DescItemModel>{
+                "internalName": "Quest91",
+                "displayName": "Golden Gift",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Hold down to get a random special reward! Event Points do not expire, you keep all unspent Event Points for next event! "
+            }),
+        new BaseItemBase("Quest92", <DescItemModel>{
+                "internalName": "Quest92",
+                "displayName": "Giftmas Present",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Contains a random Giftmas goodie, from event cards to foods and maybe even a GOLDEN GIFT! "
+            }),
+        new BaseItemBase("Quest93", <DescItemModel>{
+                "internalName": "Quest93",
+                "displayName": "Worship Floppy Disc",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Collect 1000 or more of these, then HOLD DOWN on them to unlock the Saveload Feature for ALL Worship runs! "
+            }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
@@ -23067,6 +23164,38 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Island1", <DescItemModel>{
                 "internalName": "Island1",
                 "displayName": "Bottle",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Bone0", <DescItemModel>{
+                "internalName": "Bone0",
+                "displayName": "Femur",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Bone1", <DescItemModel>{
+                "internalName": "Bone1",
+                "displayName": "Ribcage",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Bone2", <DescItemModel>{
+                "internalName": "Bone2",
+                "displayName": "Cranium",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Bone3", <DescItemModel>{
+                "internalName": "Bone3",
+                "displayName": "Bovinae",
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Dungeon Evaporate",
@@ -27337,6 +27466,27 @@ export const initSpecificItemRepo = () => {
                 "LUK": 1,
                 "Defence": 0,
                 "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats112", <ArmourItemModel>{
+                "internalName": "EquipmentHats112",
+                "displayName": "Deathbringer Hood of Death",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Extra Bones",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",

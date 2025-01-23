@@ -3878,6 +3878,11 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crystal Crabal]]", "txtName": "Crystal Crabal"},
                     <SourceModel>{"wikiName": "[[Crystal Cattle]]", "txtName": "Crystal Cattle"},
                     <SourceModel>{"wikiName": "[[Crystal Custard]]", "txtName": "Crystal Custard"},
+                    <SourceModel>{"wikiName": "[[Green Mushroom]]", "txtName": "Green Mushroom"},
+                    <SourceModel>{"wikiName": "[[Frog]]", "txtName": "Frog"},
+                    <SourceModel>{"wikiName": "[[Bored Bean]]", "txtName": "Bored Bean"},
+                    <SourceModel>{"wikiName": "[[Slime]]", "txtName": "Slime"},
+                    <SourceModel>{"wikiName": "[[Baby Boa]]", "txtName": "Baby Boa"},
                     <SourceModel>{"wikiName": "[[SuperDropTable1]]", "txtName": "SuperDropTable1"},
                     <SourceModel>{"wikiName": "[[SuperDropTable1]]", "txtName": "SuperDropTable1"},
                     <SourceModel>{
@@ -13366,8 +13371,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -14143,30 +14147,23 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats82", <SourcesModel>{
+        new SourcesBase("EquipmentHats112", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentPendant28", <SourcesModel>{
+        new SourcesBase("EquipmentPendant31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats81", <SourcesModel>{
+        new SourcesBase("EquipmentRings34", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
-                    <SourceModel>{
-                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
-                        "txtName": "Dungeons: Flurbo Shop"
-                    }
-                ],
+        new SourcesBase("GemP35", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -14797,6 +14794,17 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentKeychain10", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
+                    <SourceModel>{
+                        "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
+                        "txtName": "Dungeons: Flurbo Shop"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentKeychain11", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                     <SourceModel>{

@@ -148,21 +148,21 @@ export const initVendorRepo = () => {
                         "item": "InvStorage2",
                         "quantity": 1,
                         "no": 20,
-                        "purchasePrice": 4000
+                        "purchasePrice": 800
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "InvStorage6",
                         "quantity": 1,
                         "no": 21,
-                        "purchasePrice": 10000
+                        "purchasePrice": 3200
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "InvStorage7",
                         "quantity": 1,
                         "no": 22,
-                        "purchasePrice": 22000
+                        "purchasePrice": 14000
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",

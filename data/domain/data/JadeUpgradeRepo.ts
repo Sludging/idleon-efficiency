@@ -349,13 +349,13 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Adds 3 new Jewels to unlock at the Jewel Spinner in W4 Town. Or, get one for free every 700 total Lab LV as shown in Rift Skill Mastery."
             }),
         new JadeUpgradeBase(38, <JadeUpgradeModel>{
-                "name": "IDK YET",
+                "name": "Science Highlighter",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 38,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Idk yet"
+                "bonus": "Adds a new bonus type to your crop scientist! Specifically '+1% Drop Rate' per Crop after 100! So having 105 crops would only give +5%"
             }),
         new JadeUpgradeBase(39, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",

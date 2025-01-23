@@ -269,7 +269,7 @@ export const initBuildingRepo = () => {
             }),
         new BuildingBase(26, <BuildingModel>{
                 "name": "Primordial Shrine",
-                "description": "This shrine increases the AFK Gain Rate of all characters on the same map, but only if you have less than 150%. ",
+                "description": "This shrine increases the AFK Gain Rate of all characters on the same map. ",
                 "bonus": " +{% Level Up Rate",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery6", "quantity": 10}, <ComponentModel>{"item": "SnowC4a", "quantity": 1}],
                 "maxLvl": 100,

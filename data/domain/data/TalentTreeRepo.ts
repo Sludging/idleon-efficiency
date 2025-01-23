@@ -1367,8 +1367,8 @@ export const initTalentTreeRepo = () => {
                         "x1": 3,
                         "x2": 30,
                         "funcX": "intervalAdd",
-                        "y1": 108,
-                        "y2": 2,
+                        "y1": 160,
+                        "y2": 1,
                         "funcY": "bigBase",
                         "lvlUpText": "+}% Dmg",
                         "skillIndex": 105,
@@ -1389,8 +1389,8 @@ export const initTalentTreeRepo = () => {
                     "Axe Hurl": <TalentModel>{
                         "name": "Axe Hurl",
                         "description": "Throws axe in a downward arc, which deals {% dmg to up to } monsters.",
-                        "x1": 200,
-                        "x2": 3,
+                        "x1": 150,
+                        "x2": 1,
                         "funcX": "bigBase",
                         "y1": 2,
                         "y2": 50,
@@ -1463,7 +1463,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Monster Decimator": <TalentModel>{
                         "name": "Monster Decimator",
-                        "description": "There is a {% chance for a monster kill to be counted for double.",
+                        "description": "There is a {% chance for a monster kill to be counted as double for opening portals and killcount.",
                         "x1": 100,
                         "x2": 50,
                         "funcX": "decay",
@@ -1881,9 +1881,9 @@ export const initTalentTreeRepo = () => {
                 "talents": {
                     "Fired Up": <TalentModel>{
                         "name": "Fired Up",
-                        "description": "Inflame yourself, boosting attack spd. Basic attacks refresh time you are inflamed.",
-                        "x1": 5,
-                        "x2": 25,
+                        "description": "Inflame yourself for {s, boosting attack spd. Basic attacks refresh time you are inflamed.",
+                        "x1": 7,
+                        "x2": 15,
                         "funcX": "intervalAdd",
                         "y1": 0,
                         "y2": 0,
@@ -1906,7 +1906,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Combustion": <TalentModel>{
                         "name": "Combustion",
-                        "description": "If inflamed, releases your fire and deals {% dmg to up to } mobs near you",
+                        "description": "If inflamed, set off a combustion explosion which deals {% dmg to up to } mobs near you",
                         "x1": 300,
                         "x2": 1.5,
                         "funcX": "bigBase",
@@ -1956,7 +1956,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Ember Bear": <TalentModel>{
                         "name": "Ember Bear",
-                        "description": "Ignites the bear claw, boosting max mobs hit to 10 and multihit by {%",
+                        "description": "Ignites the bear claw, boosting max mobs hit to 12 and multihit by {%",
                         "x1": 250,
                         "x2": 100,
                         "funcX": "decay",
@@ -1995,7 +1995,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Charred Skulls": <TalentModel>{
                         "name": "Charred Skulls",
-                        "description": "+{% Kill per Kill per 1000 STR. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 STR. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -2124,7 +2124,7 @@ export const initTalentTreeRepo = () => {
                     }
                 }
             }),
-        new TalentTreeBase("Death Bringer", <TalentTreeModel>{"talents": {}}),
+        new TalentTreeBase("Nope", <TalentTreeModel>{"talents": {}}),
         new TalentTreeBase("Divine Knight", <TalentTreeModel>{
                 "talents": {
                     "Knightly Disciple": <TalentModel>{
@@ -2243,7 +2243,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Charred Skulls": <TalentModel>{
                         "name": "Charred Skulls",
-                        "description": "+{% Kill per Kill per 1000 STR. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 STR. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -2360,8 +2360,243 @@ export const initTalentTreeRepo = () => {
                     }
                 }
             }),
-        new TalentTreeBase("Royal Guardian", <TalentTreeModel>{"talents": {}}),
+        new TalentTreeBase("Death Bringer", <TalentTreeModel>{
+                "talents": {
+                    "Wraith Form": <TalentModel>{
+                        "name": "Wraith Form",
+                        "description": "Enter/Exit Wraith Form to collect Bones from mobs, while coping with new combat stats. Also gives +{% Wraith DMG",
+                        "x1": 250,
+                        "x2": 250,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Wraith Form Dmg",
+                        "skillIndex": 195,
+                        "activeData": <ActiveTalentModel>{
+                            "name": "Wraith Form",
+                            "K": 1,
+                            "D": 1,
+                            "s": 1,
+                            "cooldown": 5,
+                            "castTime": 1,
+                            "manaCost": 1,
+                            "inputReq": 0,
+                            "AFKrange": 230,
+                            "AFKtype": "buff",
+                            "AFKactivity": -2
+                        }
+                    },
+                    "Grimoire": <TalentModel>{
+                        "name": "Grimoire",
+                        "description": "Opens the Grimoire, which upgrades Wraith Form and much more. Also gives a passive +{% boost to Bones found.",
+                        "x1": 150,
+                        "x2": 300,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Bones Found",
+                        "skillIndex": 196,
+                        "activeData": <ActiveTalentModel>{
+                            "name": "Grimoire",
+                            "K": 1,
+                            "D": 1,
+                            "s": 1,
+                            "cooldown": 3,
+                            "castTime": 1,
+                            "manaCost": 1,
+                            "inputReq": 0,
+                            "AFKrange": 230,
+                            "AFKtype": "buff",
+                            "AFKactivity": -2
+                        }
+                    },
+                    "Sentinel Axes": <TalentModel>{
+                        "name": "Sentinel Axes",
+                        "description": "All axes are now +{% bigger and hits } more mobs. You also throw axes every basic attack.",
+                        "x1": 30,
+                        "x2": 0.4,
+                        "funcX": "bigBase",
+                        "y1": 1,
+                        "y2": 50,
+                        "funcY": "intervalAdd",
+                        "lvlUpText": "+{% Size & +} Mobs",
+                        "skillIndex": 197,
+                        "activeData": undefined
+                    },
+                    "Graveyard Shift": <TalentModel>{
+                        "name": "Graveyard Shift",
+                        "description": "Spawns a Horde. When killed, respawns and boosts Bones found by +{%. Also normal mobs respawn +}% faster.",
+                        "x1": 3,
+                        "x2": 200,
+                        "funcX": "decay",
+                        "y1": 600,
+                        "y2": 120,
+                        "funcY": "decay",
+                        "lvlUpText": "+{% Bones +}% Respawn",
+                        "skillIndex": 198,
+                        "activeData": <ActiveTalentModel>{
+                            "name": "Graveyard Shift",
+                            "K": 1,
+                            "D": 1,
+                            "s": 1,
+                            "cooldown": 305,
+                            "castTime": 1,
+                            "manaCost": 1,
+                            "inputReq": 0,
+                            "AFKrange": 230,
+                            "AFKtype": "buff",
+                            "AFKactivity": 0
+                        }
+                    },
+                    "Detonation": <TalentModel>{
+                        "name": "Detonation",
+                        "description": "{% chance to trigger a combustion explosion when defeating a horde. Also, +}% larger combustion range",
+                        "x1": 200,
+                        "x2": 300,
+                        "funcX": "decay",
+                        "y1": 200,
+                        "y2": 200,
+                        "funcY": "decay",
+                        "lvlUpText": "+{% Chance % +}% Range",
+                        "skillIndex": 199,
+                        "activeData": undefined
+                    },
+                    "Marauder Style": <TalentModel>{
+                        "name": "Marauder Style",
+                        "description": "+{% Wraith DMG and Accuracy per 100 Grimoire Upgrades total",
+                        "x1": 50,
+                        "x2": 250,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Dmg & Acc",
+                        "skillIndex": 200,
+                        "activeData": undefined
+                    },
+                    "Bulwark Style": <TalentModel>{
+                        "name": "Bulwark Style",
+                        "description": "+{% Wraith Defence and HP per 100 Grimoire Upgrades total",
+                        "x1": 50,
+                        "x2": 250,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Defence And Hp",
+                        "skillIndex": 201,
+                        "activeData": undefined
+                    },
+                    "Famine O' Fish": <TalentModel>{
+                        "name": "Famine O' Fish",
+                        "description": "+{% Wraith Crit Chance, and +}% Wraith Crit DMG, per POW 10 Fishing Efficiency",
+                        "x1": 4,
+                        "x2": 200,
+                        "funcX": "decay",
+                        "y1": 14,
+                        "y2": 170,
+                        "funcY": "decay",
+                        "lvlUpText": "+{% Crit, +}% Dmg",
+                        "skillIndex": 202,
+                        "activeData": undefined
+                    },
+                    "Built Different": <TalentModel>{
+                        "name": "Built Different",
+                        "description": "+{ base STR",
+                        "x1": 5,
+                        "x2": 0,
+                        "funcX": "add",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{ Str",
+                        "skillIndex": 203,
+                        "activeData": undefined
+                    },
+                    "Ribbon Winning": <TalentModel>{
+                        "name": "Ribbon Winning",
+                        "description": "There's a {% chance to get an extra ribbon every day! Works for all players of course.",
+                        "x1": 300,
+                        "x2": 300,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Xtra Ribbon Chance",
+                        "skillIndex": 204,
+                        "activeData": undefined
+                    },
+                    "Mass Irrigation": <TalentModel>{
+                        "name": "Mass Irrigation",
+                        "description": "{x Crop Evo chance. Also, instagrows give 2x more growth for selected crop, and also grow all crops above and below!",
+                        "x1": 50,
+                        "x2": 300,
+                        "funcX": "decayMulti",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{X Crop Evo Chance",
+                        "skillIndex": 205,
+                        "activeData": undefined
+                    },
+                    "Agricultural 'preciation": <TalentModel>{
+                        "name": "Agricultural 'preciation",
+                        "description": "+{% Farming EXP and +{% Land Rank EXP gain. Works on all characters!",
+                        "x1": 2,
+                        "x2": 0,
+                        "funcX": "add",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Farming & Rank Exp",
+                        "skillIndex": 206,
+                        "activeData": undefined
+                    },
+                    "Dank Ranks": <TalentModel>{
+                        "name": "Dank Ranks",
+                        "description": "All bonuses in Land Rank Database gives a {x higher bonus!",
+                        "x1": 2,
+                        "x2": 200,
+                        "funcX": "decayMulti",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{X Bonus",
+                        "skillIndex": 207,
+                        "activeData": undefined
+                    },
+                    "Wraith Overlord": <TalentModel>{
+                        "name": "Wraith Overlord",
+                        "description": "+{% DMG MULTI for all characters per POW 10 wraith bones ever collected.",
+                        "x1": 2,
+                        "x2": 200,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Dmg Per Pow 10",
+                        "skillIndex": 208,
+                        "activeData": undefined
+                    },
+                    "Apocalypse Wow": <TalentModel>{
+                        "name": "Apocalypse Wow",
+                        "description": "+{% Gold Food Effect for every monster you kill 1 billion times on this class. Bonus works for all players!",
+                        "x1": 2,
+                        "x2": 200,
+                        "funcX": "decay",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "+{% Gold Food Effect",
+                        "skillIndex": 209,
+                        "activeData": undefined
+                    }
+                }
+            }),
         new TalentTreeBase("Filler", <TalentTreeModel>{"talents": {}}),
+        new TalentTreeBase("Royal Guardian", <TalentTreeModel>{"talents": {}}),
         new TalentTreeBase("Calm Basics", <TalentTreeModel>{
                 "talents": {
                     "Health Booster": <TalentModel>{
@@ -3420,7 +3655,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Stacked Skulls": <TalentModel>{
                         "name": "Stacked Skulls",
-                        "description": "+{% Kill per Kill per 1000 AGI. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 AGI. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -3537,8 +3772,6 @@ export const initTalentTreeRepo = () => {
                     }
                 }
             }),
-        new TalentTreeBase("Mayheim", <TalentTreeModel>{"talents": {}}),
-        new TalentTreeBase("Wind Walker", <TalentTreeModel>{"talents": {}}),
         new TalentTreeBase("Beast Master", <TalentTreeModel>{
                 "talents": {
                     "Ballista": <TalentModel>{
@@ -3669,7 +3902,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Stacked Skulls": <TalentModel>{
                         "name": "Stacked Skulls",
-                        "description": "+{% Kill per Kill per 1000 AGI. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 AGI. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -3798,6 +4031,7 @@ export const initTalentTreeRepo = () => {
                     }
                 }
             }),
+        new TalentTreeBase("Wind Walker", <TalentTreeModel>{"talents": {}}),
         new TalentTreeBase("Savvy Basics", <TalentTreeModel>{
                 "talents": {
                     "Health Booster": <TalentModel>{
@@ -4841,7 +5075,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Dimensional Wormhole": <TalentModel>{
                         "name": "Dimensional Wormhole",
-                        "description": "Spawns Wormhole Mobs which give +{% XP & Drop per Wormhole kill and spawn more.",
+                        "description": "Spawns Wormhole Mobs which give +{% XP & Drop per Wormhole kill. Also makes normal mobs respawn faster.",
                         "x1": 17,
                         "x2": 70,
                         "funcX": "decay",
@@ -4892,7 +5126,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Memorial Skulls": <TalentModel>{
                         "name": "Memorial Skulls",
-                        "description": "+{% Kill per Kill per 1000 WIS. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 WIS. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -5140,7 +5374,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Memorial Skulls": <TalentModel>{
                         "name": "Memorial Skulls",
-                        "description": "+{% Kill per Kill per 1000 WIS. Each kill is worth more kills!",
+                        "description": "+{% Kill per Kill per 1000 WIS. Each kill is worth more for opening portals and Deathnote!",
                         "x1": 40,
                         "x2": 100,
                         "funcX": "decay",
@@ -5260,17 +5494,17 @@ export const initTalentTreeRepo = () => {
         new TalentTreeBase("Arcane Cultist", <TalentTreeModel>{"talents": {}}),
         new TalentTreeBase("Special Talent 1", <TalentTreeModel>{
                 "talents": {
-                    "Bored To Death": <TalentModel>{
-                        "name": "Bored To Death",
-                        "description": "Reduces the Respawn Timer to { sec. This will boost AFK Survival Percent!",
-                        "x1": 600,
-                        "x2": 2,
-                        "funcX": "reduce",
+                    "Cash Money": <TalentModel>{
+                        "name": "Cash Money",
+                        "description": "All monsters drop +{% more coins. Use these coins to buy all sorts of things!",
+                        "x1": 70,
+                        "x2": 50,
+                        "funcX": "decay",
                         "y1": 0,
                         "y2": 0,
                         "funcY": "txt",
-                        "lvlUpText": "{ Sec Respawn",
-                        "skillIndex": 615,
+                        "lvlUpText": "+{% Coins",
+                        "skillIndex": 657,
                         "activeData": undefined
                     },
                     "Beginner Best Class": <TalentModel>{
@@ -5460,7 +5694,7 @@ export const initTalentTreeRepo = () => {
                     "Just Exp": <TalentModel>{
                         "name": "Just Exp",
                         "description": "+{% Class EXP",
-                        "x1": 10,
+                        "x1": 30,
                         "x2": 50,
                         "funcX": "decay",
                         "y1": 0,
@@ -5837,6 +6071,19 @@ export const initTalentTreeRepo = () => {
                         "funcY": "txt",
                         "lvlUpText": "+{% Dmg Per Dream Complete",
                         "skillIndex": 656,
+                        "activeData": undefined
+                    },
+                    "Bored To Death": <TalentModel>{
+                        "name": "Bored To Death",
+                        "description": "Reduces the Respawn Timer to { sec. This will boost AFK Survival Percent!",
+                        "x1": 600,
+                        "x2": 2,
+                        "funcX": "reduce",
+                        "y1": 0,
+                        "y2": 0,
+                        "funcY": "txt",
+                        "lvlUpText": "{ Sec Respawn",
+                        "skillIndex": 615,
                         "activeData": undefined
                     }
                 }

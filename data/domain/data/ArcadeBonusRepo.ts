@@ -140,7 +140,7 @@ export const initArcadeBonusRepo = () => {
                 "x2": 10,
                 "func": "intervalAdd",
                 "type": "",
-                "lvlUpText": "+{ Talent Pt"
+                "lvlUpText": "+1 Pt per 10 LVs"
             }),
         new ArcadeBonusBase(17, <ArcadeBonusModel>{
                 "effect": "+{ Weapon Power",
@@ -309,6 +309,22 @@ export const initArcadeBonusRepo = () => {
                 "func": "decay",
                 "type": "%",
                 "lvlUpText": "+{% EXP"
+            }),
+        new ArcadeBonusBase(38, <ArcadeBonusModel>{
+                "effect": "+{% Villager XP multi",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP multi"
+            }),
+        new ArcadeBonusBase(39, <ArcadeBonusModel>{
+                "effect": "+{% Gold Ball Gain",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Balls"
             })    
 ]
 }

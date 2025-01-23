@@ -578,7 +578,7 @@ export const initTaskShopDescRepo = () => {
                 "text2": "BonusPerLv",
                 "extraStr": "Blank420q",
                 "icon": "TalentPoint5",
-                "bonusPerLevel": 2
+                "bonusPerLevel": 5
             }),
         new TaskShopDescBase(41, <TaskShopDescModel>{
                 "descLine1": "All Spirited Valley Mobs respawn +{%",
