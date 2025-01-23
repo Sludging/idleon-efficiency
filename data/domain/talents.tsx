@@ -130,7 +130,7 @@ export const ClassTalentMap: Record<ClassIndex, string[]> = {
     [ClassIndex.Barbarian]: ["Rage Basics", "Warrior", "Barbarian"],
     [ClassIndex.Squire]: ["Rage Basics", "Warrior", "Squire"],
     [ClassIndex.Blood_Berserker]: ["Rage Basics", "Warrior", "Barbarian", "Blood Berserker"],
-    [ClassIndex.Death_Bringer]: [],
+    [ClassIndex.Death_Bringer]: ["Rage Basics", "Warrior", "Barbarian", "Blood Berserker", "Death Bringer"],
     [ClassIndex.Divine_Knight]: ["Rage Basics", "Warrior", "Squire", "Divine Knight"],
     [ClassIndex.Royal_Guardian]: [],
     [ClassIndex.Archer]: ["Calm Basics", "Archer"],
