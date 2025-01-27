@@ -55,6 +55,7 @@ import { IslandExpeditions } from './islandExpedition';
 import { Tome, updateTomeScores } from './tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
+import { Hole, updateHole } from './world-5/hole/hole';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -132,6 +133,7 @@ const domainList: Domain[] = [
     new Tome("tome"),
     new KillRoy("killroy"),
     new Votes("votes"),
+    new Hole("hole"),
 ]
 
 export class IdleonData {
@@ -202,6 +204,7 @@ const postProcessingMap: Record<string, Function> = {
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
+    //"hole": (doc: Cloudsave, accountData: Map<string, any>) => updateHole(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
