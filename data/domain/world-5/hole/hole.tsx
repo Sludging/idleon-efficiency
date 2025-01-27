@@ -108,6 +108,11 @@ export class Hole extends Domain {
         const hole = data.get(this.getDataKey()) as Hole;
         const holeData = data.get("Holes") as number[][];
 
+        // Old accounts won't have data, so exit early.
+        if (!holeData || holeData.length == 0) {
+            return;
+        }
+
         hole.playerLocationData = holeData[0];
         hole.villagers.forEach(villager => {
             villager.level = holeData[1][villager.index];
