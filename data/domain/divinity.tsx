@@ -9,6 +9,7 @@ import { DivinityStyleModel } from "./model/divinityStyleModel";
 import { GodInfoModel } from "./model/godInfoModel";
 import { Activity, Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
+import { Hole, PocketDivinityUpgrade } from "./world-5/hole/hole";
 import { Sneaking } from "./world-6/sneaking";
 
 export class DivinityGod {
@@ -181,6 +182,7 @@ export const updateDivinity = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const players = data.get("players") as Player[];
     const sneaking = data.get("sneaking") as Sneaking;
+    const hole = data.get("hole") as Hole;
 
     // God related math values;
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
@@ -200,6 +202,24 @@ export const updateDivinity = (data: Map<string, any>) => {
                 god.linkedPlayers.push(players[player.playerIndex]);
             }
         });
+
+        // Get Pocket Divinity linked gods
+        const pocketDivinity = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.data.name == "Pocket_Divinity") as PocketDivinityUpgrade;
+        if (pocketDivinity) {
+            // Each linked god in the pocket divinity upgrade applies to all players.
+            pocketDivinity.linkedGods.forEach(godIndex => {
+                // Make sure this is reflected in the divinity gods linked players.
+                if (!divinity.gods[godIndex].linkedPlayers.find(p => p.playerID == player.playerIndex)) {
+                    divinity.gods[godIndex].linkedPlayers.push(players[player.playerIndex]);
+                }
+                // And also add it to the player's gods.
+                if (!player.gods.find(g => g.index == godIndex)) {
+                    player.gods.push(divinity.gods[godIndex]);
+                }
+            });
+
+
+        }
 
         if (player.esGod && !player.esGod.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
             player.esGod.linkedPlayers.push(players[player.playerIndex]);
