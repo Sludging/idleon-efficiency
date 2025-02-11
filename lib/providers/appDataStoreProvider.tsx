@@ -40,8 +40,8 @@ export const useAppDataStore = <T,>(
   selector: (store: AppDataStore) => T,
 ): T => {
   const appDataStoreContext = useContext(AppDataStoreContext)
-  const { user, authStatus } = useAuthStore(
-    useShallow((state) => ({ user: state.user, authStatus: state.authStatus })),
+  const { user, authStatus, errorCode } = useAuthStore(
+    useShallow((state) => ({ user: state.user, authStatus: state.authStatus, errorCode: state.errorCode })),
   )
 
   if (!appDataStoreContext) {
@@ -55,7 +55,7 @@ export const useAppDataStore = <T,>(
     currentState.initialize(user?.uid ?? "");
   }
 
-  if (authStatus == AuthStatus.NoUser && !subDomain) {
+  if (authStatus == AuthStatus.NoUser && !subDomain && !errorCode) {
     currentState.dataStatus = DataStatus.NoData;
   }
 

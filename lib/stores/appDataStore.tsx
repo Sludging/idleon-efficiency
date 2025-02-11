@@ -39,7 +39,8 @@ export type AppDataState = {
 
 export type AppDataActions = {
     handleLiveData: (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => void,
-    initialize: (userUid: string) => void
+    initialize: (userUid: string) => void,
+    setDataStatus: (dataStatus: DataStatus) => void
 }
 
 export type AppDataStore = AppDataState & AppDataActions
@@ -162,5 +163,8 @@ export const createAppDataStore = (
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
             set((state) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));
         },
+        setDataStatus: (dataStatus: DataStatus) => {
+            set((state) => ({ dataStatus: dataStatus }));
+        }
     }))
 }

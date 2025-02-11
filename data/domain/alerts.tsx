@@ -324,10 +324,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
 
     const playerDivinityLevel: number = (player.skills.get(SkillsIndex.Divinity)?.level ?? 0);
     const playerMeditationStyle: string = (playerDivinityData.style.name ?? '');
-    // Separate those three blocks from above to avoid having it in multiple case
-    if (player.getActivityType() != Activity.Lab && (!dootOwned && playerDivinityData.gods.some(god => god.data.name == 'Goharut'))) {
-        alerts.push(new DivinityLinkedAlert(player, "Goharut god is useless while you're not in lab"));
-    }
+    // Separate these two blocks from above to avoid having it in multiple case
     if (!playerDivinityData.active && playerMeditationStyle != 'TranQi' && playerDivinityLevel >= 40) {
         alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
     }

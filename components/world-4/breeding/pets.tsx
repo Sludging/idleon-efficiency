@@ -476,7 +476,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                     onChange={({ value: nextValue }) => { setSort(nextValue); }}
                 />
             </Box>
-            <TextAndLabel label='Breedability speed multiplier :' text={`${round(breeding.getBreedingSpeed(starSignEquipped, silkRodeChip))}x`}/>
+            <TextAndLabel label='Breedability speed multiplier :' text={`${breeding.getBreedingSpeed(starSignEquipped, silkRodeChip).toFixed(2)}x`}/>
             <Grid columns={size == "small" ? ["1"] : ["1/3", "1/3", "1/3"]} fill>
                 {
                     petsToShow?.filter(pet => pet.data.petId != "_").map((pet, pIndex) => {
@@ -494,7 +494,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
                                             <Text size="16px">{timeToNextLevel > 0 ? `Time to next level: ${toTime(timeToNextLevel)}` : `${nFormatter(Math.floor(pet.breedingProgress))}/${nFormatter(pet.getNextBreedingGoal())} days`}</Text>
                                         </Box>
-                                        <Text size="16px">{nFormatter(pet.getBreedabilityBonus())}x</Text>
+                                        <Text size="16px">{pet.getBreedabilityBonus().toFixed(2)}x</Text>
                                         <Box align='center'>
                                             <TipDisplay
                                                 size='medium'
@@ -522,7 +522,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
                                             <Text size="16px">Lvl: {pet.breedingLevel}</Text>
                                             <Text size="16px">{nFormatter(pet.breedingProgress)}/{nFormatter(pet.getNextBreedingGoal())} days</Text>
                                         </Box>
-                                        <Text size="16px">{nFormatter(pet.getBreedabilityBonus())}x</Text>
+                                        <Text size="16px">{pet.getBreedabilityBonus().toFixed(2)}x</Text>
                                     </Grid>
                                 </ShadowBox>
                         )

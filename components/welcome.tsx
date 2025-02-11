@@ -43,16 +43,17 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 }
 
 export default function Welcome() {
-    const { user, authStatus, emailLogin, appleLogin } = useAuthStore(
+    const { user, authStatus, emailLogin, appleLogin, errorCode } = useAuthStore(
         useShallow((state) => ({
             user: state.user,
             authStatus: state.authStatus,
             emailLogin: state.emailLogin,
             appleLogin: state.appleLogin,
+            errorCode: state.errorCode,
         })),
     )
-    const { profile, dataStatus } = useAppDataStore(
-        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus }))
+    const { profile, dataStatus, setDataStatus } = useAppDataStore(
+        useShallow((state) => ({ profile: state.profile, dataStatus: state.dataStatus, setDataStatus: state.setDataStatus }))
     )
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -64,24 +65,27 @@ export default function Welcome() {
     const isLoading = authStatus == AuthStatus.Loading;
 
 
-    const onButtonClick = (toCall: Function | undefined, value?: string, value2?: string) => {
+    const onButtonClick = async (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
             if (toCall) {
                 if (value2) {
-                    toCall(value, value2);
+                    await toCall(value, value2);
                 }
                 else if (value) {
-                    toCall(value);
+                    await toCall(value);
                 }
                 else {
-                    toCall();
+                    await toCall();
                 }
             }
         }
-        catch (e) {
-            console.log(e);
+        catch (e: any) {
+            console.log("Unexpected error: ", e);
         }
         finally {
+            if (errorCode) {
+                handleError(errorCode);
+            }
             setShowLayer(false);
         }
     }
@@ -89,13 +93,17 @@ export default function Welcome() {
     const handleError = (code: string) => {
         switch (code) {
             case "auth/invalid-credential":
-                setError("The inputed token is invalid, please try again");
+                setError("The inputed token is invalid, please try again.");
                 break;
             case "auth/invalid-email":
-                setError("Invalid username and email, please try again");
+                setError("Invalid username and email, please try again.");
+                break;
+            case "auth/user-not-found":
+                setError("User not found.");
+                setDataStatus(DataStatus.MissingData);
                 break;
             default:
-                setError("Something went wrong, please try again");
+                setError("Something went wrong, please try again.");
                 console.error(code);
                 break;
         }
