@@ -1101,6 +1101,15 @@ function ZowInfo({ player }: { player: Player }) {
         return [mapId, count]
     });
 
+    const wowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;
+    const toWow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
+        const mapData = MapInfo[mapId];
+        if (mapData.data.enemy === undefined || count >= 1000000000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
+            return null;
+        }
+        return [mapId, count]
+    });
+
     return (
         <Box pad="medium" fill>
             <Heading level="4">Kills Summary</Heading>
@@ -1108,6 +1117,7 @@ function ZowInfo({ player }: { player: Player }) {
                 <Text size='small'>Current zow count: {zowCount}</Text>
                 <Text size='small'>Current chow count: {chowCount}</Text>
                 <Text size='small'>Current superchow count: {superchowCount}</Text>
+                <Text size='small'>Current wow count: {wowCount}</Text>
             </Box>
 
             <Heading level="4">Zows Remaining (Needs 100k)</Heading>
@@ -1153,6 +1163,7 @@ function ZowInfo({ player }: { player: Player }) {
                     })
                 }
             </Box>
+
             <Heading level="4">Super Chows Remaining (Needs 100m)</Heading>
             <Box direction="row" wrap>
                 {
@@ -1174,6 +1185,29 @@ function ZowInfo({ player }: { player: Player }) {
                     })
                 }
             </Box>
+
+            <Heading level="4">Wows Remaining (Needs 1b)</Heading>
+            <Box direction="row" wrap>
+                {
+                    toWow.map((data, index) => {
+                        if (data) {
+                            const mapData = MapInfo[data[0]];
+                            const enemyData = EnemyInfo.find(enemy => enemy.id == mapData.data.enemy);
+                            return (
+                                <Box key={index} border={{ color: 'grey-1' }} background="accent-4" width={{ max: '75px', min: '75px' }} align="center" pad="small">
+                                    {enemyData &&
+                                        <Box title={mapData.data.map.name}>
+                                            <IconImage data={enemyData.getImageData()} />
+                                        </Box>
+                                    }
+                                    <Text>{nFormatter(data[1])}</Text>
+                                </Box>
+                            )
+                        }
+                    })
+                }
+            </Box>
+
         </Box>
     )
 }
@@ -1235,7 +1269,7 @@ function PlayerTab({ player }: PlayerTabProps) {
                     <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                     {
                         (player.getSubClass() == ClassIndex.Barbarian) &&
-                        <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow"} />
+                        <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow/Wow"} />
                     }
                 </Box>
                 <Box fill background="dark-1">
