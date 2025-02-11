@@ -30,6 +30,11 @@ export class Votes extends Domain {
     parse(data: Map<string, any>): void {
         const votes = data.get(this.getDataKey()) as Votes;
         const serverVars = data.get("servervars") as Record<string, any>;
+
+        // If we are missing the vote categories, we can't do anything.
+        if (!serverVars.voteCategories || serverVars.voteCategories.length == 0) {
+            return;
+        }
         
         votes.currentBonusIndex = (serverVars.voteCategories[0] ?? 0);
 
