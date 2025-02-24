@@ -664,7 +664,7 @@ export const initTalentNameRepo = () => {
         new TalentNameBase(655, <TalentNameModel>{"name": "Boss Battle Spillover", "id": 655}),
         new TalentNameBase(656, <TalentNameModel>{"name": "Dreamer Damage", "id": 656}),
         new TalentNameBase(657, <TalentNameModel>{"name": "Cash Money", "id": 657}),
-        new TalentNameBase(658, <TalentNameModel>{"name": "", "id": 658}),
+        new TalentNameBase(658, <TalentNameModel>{"name": "Quest Kapow!", "id": 658}),
         new TalentNameBase(659, <TalentNameModel>{"name": "", "id": 659}),
         new TalentNameBase(660, <TalentNameModel>{"name": "", "id": 660}),
         new TalentNameBase(661, <TalentNameModel>{"name": "", "id": 661}),

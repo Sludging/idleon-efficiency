@@ -41,7 +41,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 3,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 2 Ores into 1 Bar at the Forge. Smelting will take 50 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 2 Ores into 1 Bar at the Forge. Smelting will take 15 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Iron", <OreItemModel>{
                 "internalName": "Iron",
@@ -49,7 +49,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 7,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 4 Ores into 1 Bar at the Forge. Smelting will take 150 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 4 Ores into 1 Bar at the Forge. Smelting will take 30 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Gold", <OreItemModel>{
                 "internalName": "Gold",
@@ -57,7 +57,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 13,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 7 Ores into 1 Bar at the Forge. Smelting will take 350 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 7 Ores into 1 Bar at the Forge. Smelting will take 60 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Plat", <OreItemModel>{
                 "internalName": "Plat",
@@ -65,7 +65,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 20,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 16 Ores into 1 Bar at the Forge. Smelting will take 1000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 16 Ores into 1 Bar at the Forge. Smelting will take 200 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Dementia", <OreItemModel>{
                 "internalName": "Dementia",
@@ -73,7 +73,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 35,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 40 Ores into 1 Bar at the Forge. Smelting will take 1500 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 40 Ores into 1 Bar at the Forge. Smelting will take 400 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Void", <OreItemModel>{
                 "internalName": "Void",
@@ -81,7 +81,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 48,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 100 Ores into 1 Bar at the Forge. Smelting will take 2500 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 100 Ores into 1 Bar at the Forge. Smelting will take 750 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Lustre", <OreItemModel>{
                 "internalName": "Lustre",
@@ -89,7 +89,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 60,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 250 Ores into 1 Bar at the Forge. Smelting will take 5000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 250 Ores into 1 Bar at the Forge. Smelting will take 1300 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Starfire", <OreItemModel>{
                 "internalName": "Starfire",
@@ -97,7 +97,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 500 Ores into 1 Bar at the Forge. Smelting will take 10000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 500 Ores into 1 Bar at the Forge. Smelting will take 2000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Dreadlo", <OreItemModel>{
                 "internalName": "Dreadlo",
@@ -105,7 +105,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 130,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 20000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 1000 Ores into 1 Bar at the Forge. Smelting will take 3100 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Marble", <OreItemModel>{
                 "internalName": "Marble",
@@ -113,7 +113,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 500,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 4000 Ores into 1 Bar at the Forge. Smelting will take 30000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 4000 Ores into 1 Bar at the Forge. Smelting will take 6000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Godshard", <OreItemModel>{
                 "internalName": "Godshard",
@@ -121,7 +121,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 250,
                 "typeGen": TypeGenEnum.bOre,
                 "Type": "Ore",
-                "description": "Smelt down 15000 Ores into 1 Bar at the Forge. Smelting will take 50000 Seconds per Bar using Forge Slot 1. "
+                "description": "Smelt down 15000 Ores into 1 Bar at the Forge. Smelting will take 15000 Seconds per Bar using Forge Slot 1. "
             }),
         new BaseItemBase("Motherlode", <DescItemModel>{
                 "internalName": "Motherlode",
@@ -934,20 +934,20 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("EquipmentHatsBeg1", <ArmourItemModel>{
                 "internalName": "EquipmentHatsBeg1",
-                "displayName": "Ice Cream Sunday",
+                "displayName": "Ice Cream Sundae",
                 "sellPrice": 200,
-                "typeGen": TypeGenEnum.aHelmet,
-                "Type": "Helmet",
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
                 "lvReqToCraft": 25,
                 "lvReqToEquip": 30,
-                "Class": ClassTypeEnum.Beginner,
+                "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
                 "STR": 0,
                 "AGI": 0,
-                "WIS": 6,
-                "LUK": 0,
-                "Defence": 5,
-                "miscUp1": "10% Gold Food Effect",
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 2,
+                "miscUp1": "25% Money",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -5247,12 +5247,12 @@ export const initSpecificItemRepo = () => {
                 "lvReqToEquip": 10,
                 "Class": ClassTypeEnum.All,
                 "Weapon_Power": 0,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
+                "STR": 2,
+                "AGI": 2,
+                "WIS": 2,
                 "LUK": 2,
                 "Defence": 0,
-                "miscUp1": "5% Money",
+                "miscUp1": "15% Money",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "",
@@ -6134,8 +6134,8 @@ export const initSpecificItemRepo = () => {
                 "WIS": 12,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "",
-                "miscUp2": "00",
+                "miscUp1": "20% Total Damage",
+                "miscUp2": "5% Drop Chance",
                 "Upgrade_Slots_Left": 4,
                 "Skill": "",
                 "Skill_Power": 0
@@ -6281,7 +6281,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "15% Total Damage",
+                "miscUp1": "27% Total Damage",
                 "miscUp2": "3% Mob Respawn",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "",
@@ -6296,13 +6296,13 @@ export const initSpecificItemRepo = () => {
                 "lvReqToCraft": 17,
                 "lvReqToEquip": 120,
                 "Class": ClassTypeEnum.All,
-                "Weapon_Power": 7,
+                "Weapon_Power": 8,
                 "STR": 0,
                 "AGI": 0,
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "20% Total Damage",
+                "miscUp1": "40% Total Damage",
                 "miscUp2": "5% Mob Respawn",
                 "Upgrade_Slots_Left": 4,
                 "Skill": "",
@@ -6430,6 +6430,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "30% Damage Multi",
                 "miscUp2": "20% Mob Respawn",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentPendant32", <ArmourItemModel>{
+                "internalName": "EquipmentPendant32",
+                "displayName": "Slimy Necklace",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 5,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 1,
+                "STR": 2,
+                "AGI": 2,
+                "WIS": 2,
+                "LUK": 0,
+                "Defence": 1,
+                "miscUp1": "15% Total Damage",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 2,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentPendant33", <ArmourItemModel>{
+                "internalName": "EquipmentPendant33",
+                "displayName": "Emerald Bling Pendant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 0,
+                "miscUp1": "200% Bonus Money",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -12041,6 +12083,16 @@ export const initSpecificItemRepo = () => {
                 "order": 106,
                 "level": 1
             }),
+        new BaseItemBase("InvStorageL", <ChestItemModel>{
+                "internalName": "InvStorageL",
+                "displayName": "Valenslime Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +16 Slots to your Storage Chest. Can only be used once.",
+                "order": -1,
+                "level": 1
+            }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
                 "internalName": "Line1",
                 "displayName": "Copper Twine",
@@ -12831,7 +12883,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 3,
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Material",
-                "description": "It's basically string cheese, but without the cheese. CRAFT THESE IN THE 'PRODUCE' TAB IN ANVIL! "
+                "description": "It's like string cheese, but without cheese. GET THESE FROM THE 'PRODUCE' TAB HERE IN THE ANVIL! "
             }),
         new BaseItemBase("CraftMat2", <DescItemModel>{
                 "internalName": "CraftMat2",
@@ -17272,7 +17324,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aCarryBag,
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 50: Monster Parts, Smithing Production Items",
-                "level": 10
+                "level": 5
             }),
         new BaseItemBase("MaxCapBagM3", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM3",
@@ -17281,7 +17333,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aCarryBag,
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 100: Monster Parts, Smithing Production Items",
-                "level": 13
+                "level": 7
             }),
         new BaseItemBase("MaxCapBagM4", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM4",
@@ -17290,7 +17342,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aCarryBag,
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 250: Monster Parts, Smithing Production Items",
-                "level": 30
+                "level": 20
             }),
         new BaseItemBase("MaxCapBagM5", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM5",
@@ -17299,7 +17351,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aCarryBag,
                 "Type": "Carry Bag",
                 "description": "Hold down on this bag to increase the Carry Capacity of the following items to 500: Monster Parts, Smithing Production Items",
-                "level": 40
+                "level": 35
             }),
         new BaseItemBase("MaxCapBagM6", <CarryBagItemModel>{
                 "internalName": "MaxCapBagM6",
@@ -18130,6 +18182,69 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "Cool! "
             }),
+        new BaseItemBase("EquipmentGown0", <ArmourItemModel>{
+                "internalName": "EquipmentGown0",
+                "displayName": "Pyromancer Robes",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 999,
+                "STR": 1200,
+                "AGI": 1200,
+                "WIS": 1200,
+                "LUK": 1200,
+                "Defence": 3,
+                "miscUp1": "163Frames",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentGown1", <ArmourItemModel>{
+                "internalName": "EquipmentGown1",
+                "displayName": "Cobalt Robe",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 30,
+                "miscUp1": "100% Damage Bonus",
+                "miscUp2": "60% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentGown2", <ArmourItemModel>{
+                "internalName": "EquipmentGown2",
+                "displayName": "Abyssal Robe",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 10,
+                "STR": 7,
+                "AGI": 7,
+                "WIS": 7,
+                "LUK": 7,
+                "Defence": 40,
+                "miscUp1": "60% All Afk Gain",
+                "miscUp2": "50% Damage Bonus",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentNametag1", <ArmourItemModel>{
                 "internalName": "EquipmentNametag1",
                 "displayName": "Riftwalker Nametag",
@@ -18441,6 +18556,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 25,
                 "miscUp1": "25% All Afk Gain",
                 "miscUp2": "15% Damage Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag16", <ArmourItemModel>{
+                "internalName": "EquipmentNametag16",
+                "displayName": "Lovely Day Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 10,
+                "STR": 8,
+                "AGI": 8,
+                "WIS": 8,
+                "LUK": 0,
+                "Defence": 25,
+                "miscUp1": "60% Damage Bonus",
+                "miscUp2": "200% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -22034,7 +22170,7 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("BobJoePickle", <DescItemModel>{
                 "internalName": "BobJoePickle",
                 "displayName": "BobJoePickle",
-                "sellPrice": 40000,
+                "sellPrice": 10000,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
                 "description": "He was one of the good ones... Alas he is now just a pickle. Good for scaring a cat though! "
@@ -22325,7 +22461,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Item",
-                "description": "Hold down on a letter to spawn a Valentslime, or turn these in each day to the Loveulyte for a reward! "
+                "description": "Hold down on a letter to spawn a Valenslime! "
             }),
         new BaseItemBase("Quest40", <DescItemModel>{
                 "internalName": "Quest40",
@@ -22333,7 +22469,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Hold down to open a random reward like Gems and Cards! There's a 1 in 700 chance for a special ROSE CAPE, and there are 3 different roses! Also if you're unlucky, you're GUARANTEED to get a rose every 650 boxes! "
+                "description": "Hold down to open a random reward! Possibilites include Gems, exclusive hats, event food, event cards, and more! "
             }),
         new BaseItemBase("Quest41", <DescItemModel>{
                 "internalName": "Quest41",
@@ -27492,6 +27628,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats113", <ArmourItemModel>{
+                "internalName": "EquipmentHats113",
+                "displayName": "Pink Beanie",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "5% Xp From Monsters",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("CardsA0", <CardItemModel>{
                 "internalName": "CardsA0",
                 "displayName": "Green Mushroom Card",
@@ -27506,7 +27663,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 12,
                     "order": 1
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsA1", <CardItemModel>{
                 "internalName": "CardsA1",
@@ -27522,7 +27679,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 2
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsA2", <CardItemModel>{
                 "internalName": "CardsA2",
@@ -27554,7 +27711,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 7,
                     "order": 4
                 },
-                "dropChance": 9.7e-05
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsA4", <CardItemModel>{
                 "internalName": "CardsA4",
@@ -27570,7 +27727,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 5
                 },
-                "dropChance": 9.5e-05
+                "dropChance": 0.0395
             }),
         new BaseItemBase("CardsA5", <CardItemModel>{
                 "internalName": "CardsA5",
@@ -27586,7 +27743,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 1,
                     "order": 6
                 },
-                "dropChance": 9.4e-05
+                "dropChance": 0.0294
             }),
         new BaseItemBase("CardsA6", <CardItemModel>{
                 "internalName": "CardsA6",
@@ -27602,7 +27759,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 7
                 },
-                "dropChance": 9e-05
+                "dropChance": 0.019
             }),
         new BaseItemBase("CardsA7", <CardItemModel>{
                 "internalName": "CardsA7",
@@ -27618,7 +27775,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 8
                 },
-                "dropChance": 8.6e-05
+                "dropChance": 0.0186
             }),
         new BaseItemBase("CardsA8", <CardItemModel>{
                 "internalName": "CardsA8",
@@ -27634,7 +27791,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 9
                 },
-                "dropChance": 8e-05
+                "dropChance": 0.018
             }),
         new BaseItemBase("CardsA9", <CardItemModel>{
                 "internalName": "CardsA9",
@@ -27744,7 +27901,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1,
                     "effect": "+{% Fighting AFK gain rate",
                     "bonus": 1,
-                    "order": 3
+                    "order": 4
                 },
                 "dropChance": 0.0015
             }),
@@ -30774,7 +30931,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Money from Monsters",
                     "bonus": 10,
-                    "order": 1
+                    "order": 2
                 },
                 "dropChance": 0.03
             }),
@@ -30790,7 +30947,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Total Damage",
                     "bonus": 5,
-                    "order": 2
+                    "order": 3
                 },
                 "dropChance": 0.03
             }),
@@ -30806,9 +30963,9 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Skill AFK gain rate",
                     "bonus": 2.5,
-                    "order": 4
+                    "order": 5
                 },
-                "dropChance": 0.04
+                "dropChance": 0.045
             }),
         new BaseItemBase("CardsZ3", <CardItemModel>{
                 "internalName": "CardsZ3",
@@ -30822,7 +30979,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% EXP from monsters",
                     "bonus": 5,
-                    "order": 9
+                    "order": 10
                 },
                 "dropChance": 5e-07
             }),
@@ -30838,7 +30995,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Fighting AFK gain rate",
                     "bonus": 2.5,
-                    "order": 5
+                    "order": 6
                 },
                 "dropChance": 0.02
             }),
@@ -30854,7 +31011,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Double AFK claim chance",
                     "bonus": 3,
-                    "order": 7
+                    "order": 8
                 },
                 "dropChance": 0
             }),
@@ -30870,7 +31027,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Total Drop Rate",
                     "bonus": 6,
-                    "order": 8
+                    "order": 9
                 },
                 "dropChance": 0
             }),
@@ -30886,7 +31043,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Skill EXP",
                     "bonus": 3.75,
-                    "order": 10
+                    "order": 11
                 },
                 "dropChance": 0.016
             }),
@@ -30902,7 +31059,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Cog Build Spd (Passive)",
                     "bonus": 8,
-                    "order": 13
+                    "order": 14
                 },
                 "dropChance": 0.007
             }),
@@ -30918,7 +31075,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 1.5,
                     "effect": "+{% Shrine Effects (Passive)",
                     "bonus": 5,
-                    "order": 14
+                    "order": 15
                 },
                 "dropChance": 0.004
             }),
@@ -30934,7 +31091,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 2,
                     "effect": "+{% Kitchen Speed (Passive)",
                     "bonus": 6,
-                    "order": 17
+                    "order": 18
                 },
                 "dropChance": 0.004
             }),
@@ -30950,7 +31107,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 2,
                     "effect": "+{% All Skill Efficiency",
                     "bonus": 10,
-                    "order": 18
+                    "order": 19
                 },
                 "dropChance": 0.002
             }),
@@ -30966,7 +31123,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Money from Monsters",
                     "bonus": 12,
-                    "order": 12
+                    "order": 13
                 },
                 "dropChance": 0.2
             }),
@@ -30982,7 +31139,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Cooking EXP gain",
                     "bonus": 6,
-                    "order": 16
+                    "order": 17
                 },
                 "dropChance": 0.2
             }),
@@ -30998,7 +31155,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 10,
                     "effect": "+{ Weapon Power",
                     "bonus": 3,
-                    "order": 6
+                    "order": 7
                 },
                 "dropChance": 0.02
             }),
@@ -31014,7 +31171,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 11,
                     "effect": "+{ Star Talent Pts (Passive)",
                     "bonus": 15,
-                    "order": 11
+                    "order": 12
                 },
                 "dropChance": 0.02
             }),
@@ -31030,7 +31187,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 12,
                     "effect": "+{% All Stat",
                     "bonus": 1.5,
-                    "order": 15
+                    "order": 16
                 },
                 "dropChance": 0.002
             }),
@@ -31046,7 +31203,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% Total Damage",
                     "bonus": 7,
-                    "order": 19
+                    "order": 20
                 },
                 "dropChance": 0.003
             }),
@@ -31062,7 +31219,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 3,
                     "effect": "+{% Sailing Speed (Passive)",
                     "bonus": 6,
-                    "order": 21
+                    "order": 22
                 },
                 "dropChance": 0.0008
             }),
@@ -31078,7 +31235,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% EXP from monsters",
                     "bonus": 8,
-                    "order": 22
+                    "order": 23
                 },
                 "dropChance": 0.0008
             }),
@@ -31094,7 +31251,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Money from Monsters",
                     "bonus": 18,
-                    "order": 23
+                    "order": 24
                 },
                 "dropChance": 0.0008
             }),
@@ -31110,7 +31267,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 6,
                     "effect": "+{% Total Drop Rate",
                     "bonus": 12,
-                    "order": 25
+                    "order": 26
                 },
                 "dropChance": 1
             }),
@@ -31126,7 +31283,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 9,
                     "effect": "+{% Total Damage Multi",
                     "bonus": 8,
-                    "order": 26
+                    "order": 27
                 },
                 "dropChance": 1
             }),
@@ -31142,7 +31299,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 13,
                     "effect": "+{% Multikill per tier",
                     "bonus": 20,
-                    "order": 27
+                    "order": 28
                 },
                 "dropChance": 1
             }),
@@ -31158,7 +31315,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 4,
                     "effect": "+{% Total Drop Rate (Passive)",
                     "bonus": 1.5,
-                    "order": 20
+                    "order": 21
                 },
                 "dropChance": 0.001
             }),
@@ -31174,9 +31331,25 @@ export const initSpecificItemRepo = () => {
                     "perTier": 5,
                     "effect": "+{% Fighting AFK gain rate",
                     "bonus": 2.5,
-                    "order": 24
+                    "order": 25
                 },
                 "dropChance": 0.001
+            }),
+        new BaseItemBase("CardsZ26", <CardItemModel>{
+                "internalName": "CardsZ26",
+                "displayName": "Glunko The Massive Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z26",
+                    "category": "Bosses",
+                    "perTier": 2,
+                    "effect": "+{ Weapon Power",
+                    "bonus": 2,
+                    "order": 1
+                },
+                "dropChance": 0.99
             })    
 ]
 }

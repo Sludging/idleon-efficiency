@@ -1462,13 +1462,21 @@ export const initCardRepo = () => {
                 "bonus": 8,
                 "order": 23
             }),
+        new CardDataBase("slimeB", <CardDataModel>{
+                "cardID": "Z26",
+                "category": "Bosses",
+                "perTier": 2,
+                "effect": "+{ Weapon Power",
+                "bonus": 2,
+                "order": 1
+            }),
         new CardDataBase("babayaga", <CardDataModel>{
                 "cardID": "Z0",
                 "category": "Bosses",
                 "perTier": 1.5,
                 "effect": "+{% Money from Monsters",
                 "bonus": 10,
-                "order": 1
+                "order": 2
             }),
         new CardDataBase("poopBig", <CardDataModel>{
                 "cardID": "Z1",
@@ -1476,7 +1484,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Total Damage",
                 "bonus": 5,
-                "order": 2
+                "order": 3
             }),
         new CardDataBase("poopD", <CardDataModel>{
                 "cardID": "A15",
@@ -1484,7 +1492,7 @@ export const initCardRepo = () => {
                 "perTier": 1,
                 "effect": "+{% Fighting AFK gain rate",
                 "bonus": 1,
-                "order": 3
+                "order": 4
             }),
         new CardDataBase("wolfA", <CardDataModel>{
                 "cardID": "Z2",
@@ -1492,7 +1500,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Skill AFK gain rate",
                 "bonus": 2.5,
-                "order": 4
+                "order": 5
             }),
         new CardDataBase("wolfB", <CardDataModel>{
                 "cardID": "Z4",
@@ -1500,7 +1508,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Fighting AFK gain rate",
                 "bonus": 2.5,
-                "order": 5
+                "order": 6
             }),
         new CardDataBase("wolfC", <CardDataModel>{
                 "cardID": "Z14",
@@ -1508,7 +1516,7 @@ export const initCardRepo = () => {
                 "perTier": 10,
                 "effect": "+{ Weapon Power",
                 "bonus": 3,
-                "order": 6
+                "order": 7
             }),
         new CardDataBase("babaHour", <CardDataModel>{
                 "cardID": "Z5",
@@ -1516,7 +1524,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Double AFK claim chance",
                 "bonus": 3,
-                "order": 7
+                "order": 8
             }),
         new CardDataBase("babaMummy", <CardDataModel>{
                 "cardID": "Z6",
@@ -1524,7 +1532,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Total Drop Rate",
                 "bonus": 6,
-                "order": 8
+                "order": 9
             }),
         new CardDataBase("Boss2A", <CardDataModel>{
                 "cardID": "Z3",
@@ -1532,7 +1540,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% EXP from monsters",
                 "bonus": 5,
-                "order": 9
+                "order": 10
             }),
         new CardDataBase("Boss2B", <CardDataModel>{
                 "cardID": "Z7",
@@ -1540,7 +1548,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Skill EXP",
                 "bonus": 3.75,
-                "order": 10
+                "order": 11
             }),
         new CardDataBase("Boss2C", <CardDataModel>{
                 "cardID": "Z15",
@@ -1548,7 +1556,7 @@ export const initCardRepo = () => {
                 "perTier": 11,
                 "effect": "+{ Star Talent Pts (Passive)",
                 "bonus": 15,
-                "order": 11
+                "order": 12
             }),
         new CardDataBase("mini3a", <CardDataModel>{
                 "cardID": "Z12",
@@ -1556,7 +1564,7 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Money from Monsters",
                 "bonus": 12,
-                "order": 12
+                "order": 13
             }),
         new CardDataBase("Boss3A", <CardDataModel>{
                 "cardID": "Z8",
@@ -1564,7 +1572,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Cog Build Spd (Passive)",
                 "bonus": 8,
-                "order": 13
+                "order": 14
             }),
         new CardDataBase("Boss3B", <CardDataModel>{
                 "cardID": "Z9",
@@ -1572,7 +1580,7 @@ export const initCardRepo = () => {
                 "perTier": 1.5,
                 "effect": "+{% Shrine Effects (Passive)",
                 "bonus": 5,
-                "order": 14
+                "order": 15
             }),
         new CardDataBase("Boss3C", <CardDataModel>{
                 "cardID": "Z16",
@@ -1580,7 +1588,7 @@ export const initCardRepo = () => {
                 "perTier": 12,
                 "effect": "+{% All Stat",
                 "bonus": 1.5,
-                "order": 15
+                "order": 16
             }),
         new CardDataBase("mini4a", <CardDataModel>{
                 "cardID": "Z13",
@@ -1588,7 +1596,7 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Cooking EXP gain",
                 "bonus": 6,
-                "order": 16
+                "order": 17
             }),
         new CardDataBase("Boss4A", <CardDataModel>{
                 "cardID": "Z10",
@@ -1596,7 +1604,7 @@ export const initCardRepo = () => {
                 "perTier": 2,
                 "effect": "+{% Kitchen Speed (Passive)",
                 "bonus": 6,
-                "order": 17
+                "order": 18
             }),
         new CardDataBase("Boss4B", <CardDataModel>{
                 "cardID": "Z11",
@@ -1604,7 +1612,7 @@ export const initCardRepo = () => {
                 "perTier": 2,
                 "effect": "+{% All Skill Efficiency",
                 "bonus": 10,
-                "order": 18
+                "order": 19
             }),
         new CardDataBase("Boss4C", <CardDataModel>{
                 "cardID": "Z17",
@@ -1612,7 +1620,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% Total Damage",
                 "bonus": 7,
-                "order": 19
+                "order": 20
             }),
         new CardDataBase("mini5a", <CardDataModel>{
                 "cardID": "Z24",
@@ -1620,7 +1628,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% Total Drop Rate (Passive)",
                 "bonus": 1.5,
-                "order": 20
+                "order": 21
             }),
         new CardDataBase("Boss5A", <CardDataModel>{
                 "cardID": "Z18",
@@ -1628,7 +1636,7 @@ export const initCardRepo = () => {
                 "perTier": 3,
                 "effect": "+{% Sailing Speed (Passive)",
                 "bonus": 6,
-                "order": 21
+                "order": 22
             }),
         new CardDataBase("Boss5B", <CardDataModel>{
                 "cardID": "Z19",
@@ -1636,7 +1644,7 @@ export const initCardRepo = () => {
                 "perTier": 4,
                 "effect": "+{% EXP from monsters",
                 "bonus": 8,
-                "order": 22
+                "order": 23
             }),
         new CardDataBase("Boss5C", <CardDataModel>{
                 "cardID": "Z20",
@@ -1644,7 +1652,7 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Money from Monsters",
                 "bonus": 18,
-                "order": 23
+                "order": 24
             }),
         new CardDataBase("mini6a", <CardDataModel>{
                 "cardID": "Z25",
@@ -1652,7 +1660,7 @@ export const initCardRepo = () => {
                 "perTier": 5,
                 "effect": "+{% Fighting AFK gain rate",
                 "bonus": 2.5,
-                "order": 24
+                "order": 25
             }),
         new CardDataBase("Boss6A", <CardDataModel>{
                 "cardID": "Z21",
@@ -1660,7 +1668,7 @@ export const initCardRepo = () => {
                 "perTier": 6,
                 "effect": "+{% Total Drop Rate",
                 "bonus": 12,
-                "order": 25
+                "order": 26
             }),
         new CardDataBase("Boss6B", <CardDataModel>{
                 "cardID": "Z22",
@@ -1668,7 +1676,7 @@ export const initCardRepo = () => {
                 "perTier": 9,
                 "effect": "+{% Total Damage Multi",
                 "bonus": 8,
-                "order": 26
+                "order": 27
             }),
         new CardDataBase("Boss6C", <CardDataModel>{
                 "cardID": "Z23",
@@ -1676,7 +1684,7 @@ export const initCardRepo = () => {
                 "perTier": 13,
                 "effect": "+{% Multikill per tier",
                 "bonus": 20,
-                "order": 27
+                "order": 28
             }),
         new CardDataBase("ghost", <CardDataModel>{
                 "cardID": "Y0",

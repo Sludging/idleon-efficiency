@@ -607,7 +607,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Bad Kitty, get off that altar!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "... meow... Zzz... <br> QUEST:Find something to scare the cat off the Obol Altar",
+                        "DialogueText": "... meow... Zzz... <br> QUEST:Find something to scare the cat off the Obol Altar. Maybe from the Town Shop?",
                         "NextIndex": 2,
                         "Name": "Bad Kitty, get off that altar!",
                         "ConsumeItems": true,
@@ -629,7 +629,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "... meow... Zzz... <br> QUEST:Find something to scare the cat off the Obol Altar",
+                        "DialogueText": "... meow... Zzz... <br> QUEST:Find something to scare the cat off the Obol Altar. Maybe from the Town Shop?",
                         "NextIndex": 2,
                         "Name": "Bad Kitty, get off that altar!"
                     },
@@ -655,7 +655,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "A noob's first swing": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Care to give it a try? I'd do it myself but I wouldn't want to embarass a beginner like you! <br> QUEST:Collect 10 Oak Logs!",
+                        "DialogueText": "Care to give it a try? I'd do it myself but I wouldn't want to embarass a beginner like you! <br> QUEST:Collect 3 Oak Logs!",
                         "NextIndex": 4,
                         "Name": "A noob's first swing",
                         "ConsumeItems": true,
@@ -669,11 +669,11 @@ export const initNpcRepo = () => {
                         "QuestName": "Woodsman1",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "OakTree", "quantity": 10}]
+                        "ItemReq": [<ComponentModel>{"item": "OakTree", "quantity": 3}]
                     },
                     "A noob's 2nd first swing": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "See how your tree over there is a tree and mine here is... well not a tree anymore? Please make yours a bit more like mine. <br> QUEST:Collect 100 Oak Logs.",
+                        "DialogueText": "See how your tree over there is a tree and mine here is... well not a tree anymore? Please make yours a bit more like mine. <br> QUEST:Collect 30 Oak Logs.",
                         "NextIndex": 7,
                         "Name": "A noob's 2nd first swing",
                         "ConsumeItems": false,
@@ -683,7 +683,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Woodsman2",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "OakTree", "quantity": 100}]
+                        "ItemReq": [<ComponentModel>{"item": "OakTree", "quantity": 30}]
                     },
                     "It's Just a Plank, Bro!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
@@ -704,7 +704,7 @@ export const initNpcRepo = () => {
                     },
                     "Exotic Pranks... I mean Logs!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Actually before you take off can ya get me some exotic logs? There's a 1 in a billion chance of getting one from this tree! <br> QUEST: Get a Forest Log from a different tree found at the end of the world.",
+                        "DialogueText": "Actually before you take off can ya get me some exotic logs? There's a 1 in a billion chance of getting one from this tree! <br> QUEST: I think he might be trolling the log he wants is found somewhere else...",
                         "NextIndex": 14,
                         "Name": "Exotic Pranks... I mean Logs!",
                         "ConsumeItems": false,
@@ -732,7 +732,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Care to give it a try? I'd do it myself but I wouldn't want to embarass a beginner like you! <br> QUEST:Collect 10 Oak Logs!",
+                        "DialogueText": "Care to give it a try? I'd do it myself but I wouldn't want to embarass a beginner like you! <br> QUEST:Collect 3 Oak Logs!",
                         "NextIndex": 4,
                         "Name": "A noob's first swing"
                     },
@@ -750,7 +750,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "See how your tree over there is a tree and mine here is... well not a tree anymore? Please make yours a bit more like mine. <br> QUEST:Collect 100 Oak Logs.",
+                        "DialogueText": "See how your tree over there is a tree and mine here is... well not a tree anymore? Please make yours a bit more like mine. <br> QUEST:Collect 30 Oak Logs.",
                         "NextIndex": 7,
                         "Name": "A noob's 2nd first swing"
                     },
@@ -792,7 +792,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Actually before you take off can ya get me some exotic logs? There's a 1 in a billion chance of getting one from this tree! <br> QUEST: Get a Forest Log from a different tree found at the end of the world.",
+                        "DialogueText": "Actually before you take off can ya get me some exotic logs? There's a 1 in a billion chance of getting one from this tree! <br> QUEST: I think he might be trolling the log he wants is found somewhere else...",
                         "NextIndex": 14,
                         "Name": "Exotic Pranks... I mean Logs!"
                     },
@@ -849,7 +849,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 10,
-                        "Rewards": [<CoinRewardModel>{"item": "", "quantity": 150}, <ComponentModel>{"item": "rtt0", "quantity": 3}],
+                        "Rewards": [<CoinRewardModel>{"item": "", "quantity": 30}, <ExpRewardModel>{"item": "Experience0", "quantity": 20}],
                         "QuestName": "Scripticus3",
                         "Difficulty": 1,
                         "note": <NoteModel>{
@@ -863,13 +863,13 @@ export const initNpcRepo = () => {
                     },
                     "Mr. Worldwide": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map!",
+                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map! Teleport back here using the MAP button after!",
                         "NextIndex": 15,
                         "Name": "Mr. Worldwide",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 14,
-                        "Rewards": [<ComponentModel>{"item": "InvBag1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 15}],
+                        "Rewards": [<ComponentModel>{"item": "InvBag1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 125}],
                         "QuestName": "Scripticus4",
                         "Difficulty": 3,
                         "note": <NoteModel>{
@@ -884,13 +884,13 @@ export const initNpcRepo = () => {
                     },
                     "The Choice is Yours!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "I'll add a Hint to your codex if you want more info. Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
+                        "DialogueText": "You get 3 talent points every time you level up... Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
                         "NextIndex": 19,
                         "Name": "The Choice is Yours!",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 0,
                         "NoSpaceIndex": 18,
-                        "Rewards": [<ComponentModel>{"item": "Timecandy1", "quantity": 1}, <CoinRewardModel>{"item": "", "quantity": 480}],
+                        "Rewards": [<ComponentModel>{"item": "MaxCapBagM1", "quantity": 1}, <CoinRewardModel>{"item": "", "quantity": 50}],
                         "QuestName": "Scripticus5",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": ""},
@@ -939,23 +939,28 @@ export const initNpcRepo = () => {
                             <CustomReqModel>{"desc": "Orange Tee Crafted:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
-                    "Warrior, Archer or Mage?": <ItemQuestModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Wait forget the errands... you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map after Frogs!",
+                    "Warrior, Archer or Mage?": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Wait... you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map after Frogs!",
                         "NextIndex": 27,
                         "Name": "Warrior, Archer or Mage?",
-                        "ConsumeItems": true,
+                        "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 50,
                         "Rewards": [
                             <ComponentModel>{"item": "InvBag2", "quantity": 1},
                             <ComponentModel>{"item": "MaxCapBagM3", "quantity": 1},
-                            <CoinRewardModel>{"item": "", "quantity": 500}
+                            <CoinRewardModel>{"item": "", "quantity": 100}
                         ],
                         "QuestName": "Scripticus8",
                         "Difficulty": 4,
                         "note": <NoteModel>{"note": " "},
-                        "ItemReq": [<ComponentModel>{"item": "Quest5", "quantity": 1}]
+                        "CustomType": "Scripticus8",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Reach Map 3:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Get a Class:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Buy Upgrades:", "finalV": 25, "type": "GreaterEqual", "startV": 0}
+                        ]
                     },
                     "Stiltzcho, the Leaf Scout": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
@@ -973,7 +978,7 @@ export const initNpcRepo = () => {
                     },
                     "What Lies at the Heart of the Forest": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Boss Room located in the Forest Camp past the Carrotmen and Glublin maps!",
+                        "DialogueText": "You've come a long way since that epic fall from grace. I think it's time you FIGHT THE WORLD BOSS! MAIN QUEST:Reach the Boss Room. It's a long way from home...",
                         "NextIndex": 41,
                         "Name": "What Lies at the Heart of the Forest",
                         "ConsumeItems": false,
@@ -1141,7 +1146,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map!",
+                        "DialogueText": "Now lets find you some tougher monsters! <br> MAIN QUEST:Defeat Green Mushrooms and reach the next map! Teleport back here using the MAP button after!",
                         "NextIndex": 15,
                         "Name": "Mr. Worldwide"
                     },
@@ -1154,7 +1159,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You seem a bit beat up! Try spending some Talent Points if you haven't already!",
-                        "NextIndex": 16,
+                        "NextIndex": 17,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -1165,7 +1170,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "I'll add a Hint to your codex if you want more info. Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
+                        "DialogueText": "You get 3 talent points every time you level up... Now go spend those points! <br> MAIN QUEST:Spend 5 Talent Points",
                         "NextIndex": 19,
                         "Name": "The Choice is Yours!"
                     },
@@ -1178,7 +1183,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh... wow. Those were uhh interesting choices. I think you're gonna need some more power to have a fighting chance against those froggies.",
-                        "NextIndex": 20,
+                        "NextIndex": 25,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -1212,8 +1217,8 @@ export const initNpcRepo = () => {
                         "Name": ""
                     },
                     <DialogueLineModel>{
-                        "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Wait forget the errands... you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map after Frogs!",
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Wait... you're still a BEGINNER??? <br> MAIN QUEST:Select a new class from Promotheus. He's in the Bean map after Frogs!",
                         "NextIndex": 27,
                         "Name": "Warrior, Archer or Mage?"
                     },
@@ -1297,7 +1302,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "But you've come a long way since that epic fall from gamer grace so why don't you go check it out for yourself? Come back when you know more about the place! <br> MAIN QUEST:Reach the Boss Room located in the Forest Camp past the Carrotmen and Glublin maps!",
+                        "DialogueText": "You've come a long way since that epic fall from grace. I think it's time you FIGHT THE WORLD BOSS! MAIN QUEST:Reach the Boss Room. It's a long way from home...",
                         "NextIndex": 41,
                         "Name": "What Lies at the Heart of the Forest"
                     },
@@ -1332,14 +1337,14 @@ export const initNpcRepo = () => {
                         "Name": ""
                     },
                     <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Of course there's still plenty for you to do around here in Blunder Hills if you get bored! So many NPCs to help cards to collect tasks to complete...",
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Talk to the Builder Bird go to World 2! You can come back here any time you like! In fact there are a few more things here in Blunder Hills left to do... <br> Return at Lv. 50",
                         "NextIndex": 46,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "In fact there are so many things left to do that I'm willing to put my most prized posession on the line that you'll never be able to do everything!",
+                        "DialogueText": "In fact there are so many things left to do that I'm willing to bet you a TROPHY that you'll never be able to do everything!",
                         "NextIndex": 47,
                         "Name": ""
                     },
@@ -1623,7 +1628,7 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 10,
                         "Rewards": [
-                            <ComponentModel>{"item": "Quest1", "quantity": 1},
+                            <ComponentModel>{"item": "EquipmentTools1", "quantity": 1},
                             <ComponentModel>{"item": "MaxCapBagT2", "quantity": 1},
                             <ExpRewardModel>{"item": "Experience1", "quantity": 15}
                         ],
@@ -1844,25 +1849,25 @@ export const initNpcRepo = () => {
                 "quests": {
                     "The Hungry Stowaway": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Bring a Nomwich buy them from the Shop in town.",
+                        "DialogueText": "Besides you don't even have any clothes... weirdo... <br> QUEST:Craft the Orange Shirt at the Anvil and bring it here unequipped. You can equip it after",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway",
-                        "ConsumeItems": true,
+                        "ConsumeItems": false,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 6,
                         "Rewards": [
                             <ComponentModel>{"item": "MaxCapBag6", "quantity": 1},
                             <CoinRewardModel>{"item": "", "quantity": 300},
-                            <ComponentModel>{"item": "Timecandy1", "quantity": 1}
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 750}
                         ],
                         "QuestName": "Picnic Stowaway1",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "FoodHealth1", "quantity": 1}]
+                        "ItemReq": [<ComponentModel>{"item": "EquipmentShirts1", "quantity": 1}]
                     },
                     "Beating Up Frogs for some Sauce": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments? Those FISTS of yours seem persuasive hehe!! <br> QUEST:Kill frogs for condiments! USE your blue time candy to speed it up!",
+                        "DialogueText": "Why don't you go 'ask' the frogs around here if they've seen my condiments. <br> QUEST:Kill frogs for condiments!",
                         "NextIndex": 10,
                         "Name": "Beating Up Frogs for some Sauce",
                         "ConsumeItems": true,
@@ -1870,7 +1875,7 @@ export const initNpcRepo = () => {
                         "NoSpaceIndex": 9,
                         "Rewards": [
                             <ComponentModel>{"item": "EquipmentPendant9", "quantity": 1},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 200}
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 600}
                         ],
                         "QuestName": "Picnic Stowaway2",
                         "Difficulty": 3,
@@ -1879,13 +1884,13 @@ export const initNpcRepo = () => {
                     },
                     "Live-Action Entertainment": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "One... two... THREE!!! Oh and these monsters have Increased Damage watch out! <br> QUEST:Kill the green mushrooms! If you fail forfeit the quest using the Codex and retry!",
+                        "DialogueText": "One... two... THREE!!! <br> QUEST:Kill the mushrooms! If you fail forfeit the quest using the Codex and retry!",
                         "NextIndex": 14,
                         "Name": "Live-Action Entertainment",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 13,
-                        "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 1}, <ExpRewardModel>{"item": "Experience0", "quantity": 150}],
+                        "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 5}, <ExpRewardModel>{"item": "Experience0", "quantity": 1000}],
                         "QuestName": "Picnic Stowaway3",
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": " "},
@@ -1900,7 +1905,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 22,
-                        "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 1}, <ComponentModel>{"item": "FoodPotRe2", "quantity": 25}],
+                        "Rewards": [<ComponentModel>{"item": "FoodG1", "quantity": 3}, <ComponentModel>{"item": "FoodPotRe2", "quantity": 25}],
                         "QuestName": "Picnic Stowaway4",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": ""},
@@ -1915,7 +1920,7 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 25,
                         "Rewards": [
-                            <ComponentModel>{"item": "FoodG1", "quantity": 3},
+                            <ComponentModel>{"item": "FoodG1", "quantity": 5},
                             <ComponentModel>{"item": "FoodPotGr2", "quantity": 50},
                             <ComponentModel>{"item": "ExpBalloon1", "quantity": 1}
                         ],
@@ -1937,8 +1942,8 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 28,
                         "Rewards": [
-                            <ComponentModel>{"item": "FoodG2", "quantity": 1},
-                            <ComponentModel>{"item": "FoodG1", "quantity": 5},
+                            <ComponentModel>{"item": "FoodG2", "quantity": 2},
+                            <ComponentModel>{"item": "FoodG1", "quantity": 8},
                             <ComponentModel>{"item": "EquipmentStatues6", "quantity": 3}
                         ],
                         "QuestName": "Picnic Stowaway6",
@@ -1959,8 +1964,8 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 31,
                         "Rewards": [
-                            <ComponentModel>{"item": "FoodG2", "quantity": 3},
-                            <ComponentModel>{"item": "FoodG1", "quantity": 10},
+                            <ComponentModel>{"item": "FoodG2", "quantity": 5},
+                            <ComponentModel>{"item": "FoodG1", "quantity": 13},
                             <ComponentModel>{"item": "ExpBalloon1", "quantity": 1}
                         ],
                         "QuestName": "Picnic Stowaway7",
@@ -2075,19 +2080,19 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Well don't just stand there ya goof you'll blow my cover! Now get lost this ain't your picnic and anyway there's not enough room in here for both of us!",
-                        "NextIndex": 4,
+                        "DialogueText": "Well don't just stand there ya goof you'll blow my cover! Now get lost!",
+                        "NextIndex": 5,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "What? The owner just wants their jam back and won't mind me staying here? Great! How about I don't give you the jam back and I still stay here!",
+                        "DialogueText": "Well don't just stand there ya goof you'll blow my cover! Now get lost!",
                         "NextIndex": 5,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Well come on now I aint gonna give you part of my stash here for nothin'. This is a picnic basket not a charity house! Bring me something and maybe we can fix up a deal... <br> QUEST:Bring a Nomwich buy them from the Shop in town.",
+                        "DialogueText": "Besides you don't even have any clothes... weirdo... <br> QUEST:Craft the Orange Shirt at the Anvil and bring it here unequipped. You can equip it after",
                         "NextIndex": 7,
                         "Name": "The Hungry Stowaway"
                     },
@@ -2099,13 +2104,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Well well well these don't look too bad! I think we can work out a trade right here right n--- wait where's the ketchup... or the mustard??",
+                        "DialogueText": "Wow thats... actually a great picnic outfit. Look maybe we can just share a quick bite--- wait where's my ketchup... where's my MUSTARD?!??",
                         "NextIndex": 8,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Why don't you go 'ask' the frogs around here for some Condiments? Those FISTS of yours seem persuasive hehe!! <br> QUEST:Kill frogs for condiments! USE your blue time candy to speed it up!",
+                        "DialogueText": "Why don't you go 'ask' the frogs around here if they've seen my condiments. <br> QUEST:Kill frogs for condiments!",
                         "NextIndex": 10,
                         "Name": "Beating Up Frogs for some Sauce"
                     },
@@ -2117,7 +2122,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Great these will do. Now all I need is something to watch while I'm eating! What were you expecting me to just look at the grass grow while I eat? I don't even think grass grows in this universe.",
+                        "DialogueText": "Great these will do. Now all I need is something to watch while I'm eating!",
                         "NextIndex": 11,
                         "Name": ""
                     },
@@ -2129,7 +2134,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "One... two... THREE!!! Oh and these monsters have Increased Damage watch out! <br> QUEST:Kill the green mushrooms! If you fail forfeit the quest using the Codex and retry!",
+                        "DialogueText": "One... two... THREE!!! <br> QUEST:Kill the mushrooms! If you fail forfeit the quest using the Codex and retry!",
                         "NextIndex": 14,
                         "Name": "Live-Action Entertainment"
                     },
@@ -2141,8 +2146,8 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "That was amazing! Best meal I've had in ages. You can have this golden jam but I dont want ya just givin' it to some fool you're the one who helped me after all.",
-                        "NextIndex": 15,
+                        "DialogueText": "That was amazing! Best meal I've had in ages! Ah um yea I didn't save any food for you while you were doing all that...",
+                        "NextIndex": 16,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -2693,8 +2698,8 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 24,
                         "Rewards": [
-                            <ComponentModel>{"item": "Quest5", "quantity": 1},
-                            <ComponentModel>{"item": "ResetCompleted", "quantity": 3},
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 10},
+                            <ComponentModel>{"item": "ResetCompleted", "quantity": 2},
                             <ComponentModel>{"item": "StoneW1", "quantity": 1}
                         ],
                         "QuestName": "Promotheus2",
@@ -2752,7 +2757,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I am the mighty Promotheus Giver of Class Promotions! I was initially going to fill in for Atlas but after I saw what Kratos did to him I decided to lay low in a more obscure game for a while!",
-                        "NextIndex": 2,
+                        "NextIndex": 4,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -3739,7 +3744,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Mushroom Munchies": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "But uh you gooootta hook us up with some food bro it's common mushroom manners! Bring it here and we'll carry it to the party with this novelty food bag I bought online when I was... hehehe well never mind! <br> QUEST:Be the food hookup",
+                        "DialogueText": "Get some food and I'll increase your food carry capacity! <br> QUEST:Get nomwiches pizza and that GLIZZY bro!",
                         "NextIndex": 4,
                         "Name": "Mushroom Munchies",
                         "ConsumeItems": true,
@@ -3754,14 +3759,14 @@ export const initNpcRepo = () => {
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": "The [[Peanut]] recipe comes from [[Picnic Stowaway]]."},
                         "ItemReq": [
-                            <ComponentModel>{"item": "Peanut", "quantity": 100},
-                            <ComponentModel>{"item": "FoodHealth2", "quantity": 25},
-                            <ComponentModel>{"item": "FoodPotOr2", "quantity": 100}
+                            <ComponentModel>{"item": "FoodHealth1", "quantity": 10},
+                            <ComponentModel>{"item": "FoodHealth2", "quantity": 5},
+                            <ComponentModel>{"item": "FoodHealth3", "quantity": 1}
                         ]
                     },
                     "Videogame Highscores are COOL!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 35 in the Choppin Minigame.",
+                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 20 in the Choppin Minigame.",
                         "NextIndex": 8,
                         "Name": "Videogame Highscores are COOL!",
                         "ConsumeItems": false,
@@ -3776,11 +3781,11 @@ export const initNpcRepo = () => {
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": ""},
                         "CustomType": "Funguy2",
-                        "CustomArray": [<CustomReqModel>{"desc": "Choppin Score:", "finalV": 35, "type": "GreaterEqual", "startV": 0}]
+                        "CustomArray": [<CustomReqModel>{"desc": "Choppin Score:", "finalV": 20, "type": "GreaterEqual", "startV": 0}]
                     },
                     "Partycrastination": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Buuuuut it's still not time to go yet. Trust me you do NOT wanna be the first one to this party... but a kiiiiiller like you already knew that for sure! <br> QUEST:Wait until the party starts.",
+                        "DialogueText": "We gotta waiiit for the party to start! <br> QUEST:Collect clocks by defeating jungle monsters!",
                         "NextIndex": 11,
                         "Name": "Partycrastination",
                         "ConsumeItems": true,
@@ -3793,7 +3798,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Funguy3",
                         "Difficulty": 6,
                         "note": <NoteModel>{"note": ""},
-                        "ItemReq": [<ComponentModel>{"item": "Quest21", "quantity": 250}]
+                        "ItemReq": [<ComponentModel>{"item": "Quest21", "quantity": 50}]
                     },
                     "Party Crashin'": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
@@ -3831,7 +3836,7 @@ export const initNpcRepo = () => {
                         "QuestName": "Funguy5",
                         "Difficulty": 5,
                         "note": <NoteModel>{"note": " "},
-                        "ItemReq": [<ComponentModel>{"item": "ToiletTree", "quantity": 10000}]
+                        "ItemReq": [<ComponentModel>{"item": "ToiletTree", "quantity": 100}]
                     }
                 },
                 "dialogue": [
@@ -3849,7 +3854,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "But uh you gooootta hook us up with some food bro it's common mushroom manners! Bring it here and we'll carry it to the party with this novelty food bag I bought online when I was... hehehe well never mind! <br> QUEST:Be the food hookup",
+                        "DialogueText": "Get some food and I'll increase your food carry capacity! <br> QUEST:Get nomwiches pizza and that GLIZZY bro!",
                         "NextIndex": 4,
                         "Name": "Mushroom Munchies"
                     },
@@ -3873,7 +3878,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 35 in the Choppin Minigame.",
+                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 20 in the Choppin Minigame.",
                         "NextIndex": 8,
                         "Name": "Videogame Highscores are COOL!"
                     },
@@ -3891,7 +3896,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Buuuuut it's still not time to go yet. Trust me you do NOT wanna be the first one to this party... but a kiiiiiller like you already knew that for sure! <br> QUEST:Wait until the party starts.",
+                        "DialogueText": "We gotta waiiit for the party to start! <br> QUEST:Collect clocks by defeating jungle monsters!",
                         "NextIndex": 11,
                         "Name": "Partycrastination"
                     },
@@ -3959,11 +3964,11 @@ export const initNpcRepo = () => {
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 6,
-                        "Rewards": [<ComponentModel>{"item": "EquipmentStatues6", "quantity": 5}, <ComponentModel>{"item": "FoodG1", "quantity": 3}],
+                        "Rewards": [<ComponentModel>{"item": "EquipmentStatues6", "quantity": 50}, <ComponentModel>{"item": "FoodG1", "quantity": 30}],
                         "QuestName": "Tiki Chief1",
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": " "},
-                        "ItemReq": [<ComponentModel>{"item": "Forest2", "quantity": 500}, <ComponentModel>{"item": "CraftMat5", "quantity": 1000}]
+                        "ItemReq": [<ComponentModel>{"item": "Forest2", "quantity": 10}, <ComponentModel>{"item": "CraftMat5", "quantity": 25}]
                     },
                     "Three Strikes, you're Out!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
@@ -4040,8 +4045,8 @@ export const initNpcRepo = () => {
                         "Name": ""
                     },
                     <DialogueLineModel>{
-                        "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Wabbaflabba ga--- CoughCoughCough... wow that was uhh not a good first impression sorry about that! Had something in my throat.",
+                        "Type": QuestTypeEnum.LevelReq,
+                        "DialogueText": "Wabbaflabba ga--- CoughCoughCough... wow that was not a good first impression! Anyway please speak to me when you're stronger. <br> Return at Lv. 60",
                         "NextIndex": 2,
                         "Name": ""
                     },
@@ -4157,13 +4162,13 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Why he Die???": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
+                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! <br> QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
                         "NextIndex": 5,
                         "Name": "Why he Die???",
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 4,
-                        "Rewards": [<ComponentModel>{"item": "Key1", "quantity": 3}],
+                        "Rewards": [<ComponentModel>{"item": "Key1", "quantity": 6}],
                         "QuestName": "Dog Bone1",
                         "Difficulty": 2,
                         "note": <NoteModel>{"note": " "},
@@ -4205,7 +4210,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
+                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! <br> QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
                         "NextIndex": 5,
                         "Name": "Why he Die???"
                     },
@@ -13285,9 +13290,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.35,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Moody",
+                    "birthWeight": 3.67,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Jenson",
                     "notes": " "
                 },
                 "quests": {
