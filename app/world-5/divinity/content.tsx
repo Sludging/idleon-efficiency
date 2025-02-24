@@ -66,7 +66,7 @@ function AlignmentDisplay() {
                                     />
                                 }
                                 {
-                                    divinity.playerInfo[player.playerID].gods.length == 1 &&
+                                    divinity.playerInfo[player.playerID].gods.length >= 1 &&
                                     <ComponentAndLabel
                                         label="God"
                                         component={
@@ -138,7 +138,6 @@ function Divinity() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
-            <Text size="xsmall">* This is a work in progress, there could some bugs and minor inaccuracies.</Text>
             <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
                 {["Gods", "Alignment"].map((tabName, index) => (
                     <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
