@@ -37,6 +37,7 @@ import { Sneaking } from './world-6/sneaking';
 import { Summoning } from './world-6/summoning';
 import { Arcade } from './arcade';
 import { Prayer } from './prayers';
+import { UpgradeVault } from './upgradeVault';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -303,6 +304,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
+    const upgVault = data.get("upgradeVault") as UpgradeVault;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -827,6 +829,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 80:
                 // Sum of all Gold Ball shop upgrades levels
                 line.updateAllPlayersCurrentValue(totalArcadeUpgradeLevel);
+                break;
+            case 81:
+                // Bonus from Teh TOM, index 57 in upgrade vault.
+                line.updateAllPlayersCurrentValue(upgVault.bonuses.find(bonus => bonus.id == 57)?.getBonus(upgVault.bonuses) ?? 0);
                 break;
             default:
                 line.updateAllPlayersCurrentValue(0);
