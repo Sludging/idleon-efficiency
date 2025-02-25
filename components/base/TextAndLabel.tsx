@@ -6,7 +6,7 @@ import TipDisplay from "./TipDisplay";
 import { CircleInformation } from "grommet-icons";
 
 export default function TextAndLabel({ label, text, textSize = "medium", labelSize = "small", labelColor = "accent-2", center = false, right = false, textColor, margin, tooltip }:
-    { label: string, text: string, textSize?: string, labelSize?: string, labelColor?: string, center?: boolean, right?: boolean, textColor?: string, margin?: MarginType, tooltip?: ReactNode }) {
+    { label: ReactNode, text: string, textSize?: string, labelSize?: string, labelColor?: string, center?: boolean, right?: boolean, textColor?: string, margin?: MarginType, tooltip?: ReactNode }) {
 
     const size = useContext(ResponsiveContext)
     return (
@@ -14,16 +14,24 @@ export default function TextAndLabel({ label, text, textSize = "medium", labelSi
             {
                 tooltip ?
                     <Box gap="xxsmall" direction="row">
-                        <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+                        {typeof label === 'string' ? (
+                            <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+                        ) : (
+                            label
+                        )}
                         <TipDisplay
                             maxWidth="250px"
-                            heading={label}
+                            heading={typeof label === 'string' ? label : ''}
                             body={tooltip}
                         >
                             <CircleInformation size="small" />
                         </TipDisplay>
                     </Box>
-                    : <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+                    : typeof label === 'string' ? (
+                        <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+                    ) : (
+                        label
+                    )
             }
             <Text color={textColor} size={size == "small" ? 'xsmall' : textSize}>{text}</Text>
         </Box>
@@ -31,12 +39,16 @@ export default function TextAndLabel({ label, text, textSize = "medium", labelSi
 }
 
 export function ComponentAndLabel({ label, component, labelSize = "small", labelColor = "accent-2", center = false, margin }:
-    { label: string, component: ReactNode, labelSize?: string, labelColor?: string, center?: boolean, margin?: MarginType }) {
+    { label: ReactNode, component: ReactNode, labelSize?: string, labelColor?: string, center?: boolean, margin?: MarginType }) {
 
     const size = useContext(ResponsiveContext)
     return (
         <Box align={center ? "center" : ""} gap="xxsmall" margin={margin ? margin : undefined}>
-            <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+            {typeof label === 'string' ? (
+                <Text color={labelColor} size={size == "small" ? 'xsmall' : labelSize}>{label}</Text>
+            ) : (
+                label
+            )}
             {component}
         </Box>
     )

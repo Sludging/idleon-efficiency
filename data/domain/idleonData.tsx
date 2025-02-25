@@ -57,6 +57,7 @@ import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
+import { Grimoire } from './grimoire';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -136,6 +137,7 @@ const domainList: Domain[] = [
     new Votes("votes"),
     new Hole("hole"),
     new UpgradeVault("upgradeVault"),
+    new Grimoire("grimoire"),
 ]
 
 export class IdleonData {
