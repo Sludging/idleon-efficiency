@@ -358,8 +358,9 @@ export function GrimoireDisplay() {
                             labelKey="label"
                             valueKey={{ key: 'value', reduce: true }}
                             onChange={({ value }) => setBoneTypeFilter(value)}
-                            children={renderBoneOption}
-                        />
+                        >
+                            {renderBoneOption}
+                        </Select>
                     </Box>
                     <Box direction="row" align="center" gap="small">
                         <Select
@@ -369,8 +370,9 @@ export function GrimoireDisplay() {
                             labelKey="label"
                             valueKey={{ key: 'value', reduce: true }}
                             onChange={({ value }) => setSortBy(value)}
-                            children={renderSortOption}
-                        />
+                        >
+                            {renderSortOption}
+                        </Select>
                         <TipDisplay
                             heading="Sorting Options"
                             body={
