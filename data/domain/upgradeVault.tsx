@@ -1,6 +1,7 @@
 import { nFormatter } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { UpgradeVaultBase, initUpgradeVaultRepo } from "./data/UpgradeVaultRepo";
+import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { UpgradeVaultModel } from "./model/upgradeVaultModel";
 
@@ -21,6 +22,14 @@ export class VaultUpgBonus {
             index,
             upgrade.data
         ));
+    }
+
+    getImageData = (): ImageData => {
+        return {
+            location: `VaultUpg${this.id}`,
+            height: 56,
+            width: 51,
+        }
     }
 
     getBonus = (allUpgrades: VaultUpgBonus[]): number => {
