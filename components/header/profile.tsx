@@ -70,7 +70,12 @@ export const Profile = () => {
                                 </Button>
                             </Link>
                             }
-                            < Box border={{ color: 'grey-1' }} fill />
+                            <Link href="/changelog" legacyBehavior>
+                                <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                    <Box align="center" pad="small">Changelog</Box>
+                                </Button>
+                            </Link>
+                            <Box border={{ color: 'grey-1' }} fill />
                             <Button hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2" onClick={() => { onButtonClick(logout); setProfileDropDownOpen(false) }}>
                                 <Box pad="small">Sign Out</Box>
                             </Button>
@@ -83,7 +88,39 @@ export const Profile = () => {
 
     if (dataStatus == DataStatus.StaticData) {
         return (
-            <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={profile} />
+            <Box direction="row" gap="small">
+                <TextAndLabel textColor='accent-3' textSize='xsmall' labelSize='xsmall' label="Public Profile" text={profile} />
+                <DropButton
+                    plain={true}
+                    label={
+                        <Avatar direction='row'>
+                            <User color={normalizeColor("accent-3", theme)} size={"24px"} />
+                            <CaretDownFill size="small" />
+                        </Avatar>
+                    }
+                    open={profileDropDownOpen}
+                    title='Menu'
+                    dropAlign={{ top: 'bottom', right: 'right' }}
+                    dropProps={{
+                        plain: true,
+                        elevation: 'navigation',
+                        background: 'dark-2',
+                        round: "small",
+                        onClickOutside: () => setProfileDropDownOpen(false),
+                        onEsc: () => setProfileDropDownOpen(false),
+                    }}
+                    onClick={() => setProfileDropDownOpen(true)}
+                    dropContent={
+                        <Box width="small" border={{ color: 'grey-1' }} round="small">
+                            <Link href="/changelog" legacyBehavior>
+                                <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                    <Box align="center" pad="small">Changelog</Box>
+                                </Button>
+                            </Link>
+                        </Box>
+                    }
+                />
+            </Box>
         )
     }
 }
