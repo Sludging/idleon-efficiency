@@ -3,15 +3,13 @@
 import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
 import { useMemo, useState } from "react";
 import { Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
-import { getCoinsArray, nFormatter } from "../../data/utility";
+import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
-import CoinsDisplay from "../coinsDisplay";
 import IconImage from "../base/IconImage";
-import { CircleInformation, Sort, Money, Mastercard } from "grommet-icons";
-import { ReactNode } from "react";
+import { CircleInformation } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
 
@@ -20,9 +18,17 @@ function BoneDisplay({ cost, canAfford, boneImageData }: { cost: number, canAffo
     return (
         <Box direction="row" gap="small" align="center">
             <IconImage data={boneImageData} />
-            <Text color={canAfford ? "green-1" : undefined}>
-                {nFormatter(cost)}
-            </Text>
+            <TipDisplay
+                heading="Exact Bone Count"
+                body={
+                    <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
+                }
+                direction={TipDirection.Down}
+            >
+                <Text color={canAfford ? "green-1" : undefined}>
+                    {nFormatter(cost)}
+                </Text>
+            </TipDisplay>
         </Box>
     );
 }
@@ -304,7 +310,7 @@ export function GrimoireDisplay() {
                         label={totalLevelLabel}
                         component={
                             <Box direction="row" gap="small">
-                                <Text size="large">{nFormatter(grimoire?.totalGrimoireLevel || 0)}</Text>
+                                <Text size="large">{(grimoire?.totalGrimoireLevel || 0).toLocaleString()}</Text>
                             </Box>
                         }
                     />

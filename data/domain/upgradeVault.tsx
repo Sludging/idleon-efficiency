@@ -15,7 +15,14 @@ export class VaultUpgBonus {
     constructor(
         public id: number,
         public data: UpgradeVaultModel,
-    ) { }
+    ) { 
+        // Remove the "製" from the name if it exists, they are used in-game to indicate tooltips.
+        if (data.name.indexOf("製") > -1) {
+            this.data.name = this.data.name.split("製")[0].trim();
+        }
+        // $ is used as placeholder for additional text (depending on other game mechanics), remove it.
+        this.data.name = data.name.replace("$", "");
+    }
 
     static fromBase = (data: UpgradeVaultBase[]): VaultUpgBonus[] => {
         return data.map((upgrade, index) => new VaultUpgBonus(
