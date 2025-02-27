@@ -1,22 +1,17 @@
 "use client"
 
 import { ProfileDownloader } from "../storage/profiles";
+import data from '../../profiles/sludger.json';
 
 export const fetcher = async (profileName: string): Promise<{ data: Map<string, any> | undefined, charNames: string[] | undefined, domain: string }> => {
     if (profileName != "") {
         if (process.env.NEXT_PUBLIC_APP_STAGE == "local") {
             try {
-                const res = await fetch(`/api/publicProfile?profile=${profileName}`);
-                if (res.ok) {
-                    const jsonData = await res.json();
-                    return {
-                        data: jsonData as Map<string, any>,
-                        charNames: [...Array(10)].map((number, index) => `Player_${index}`),
-                        domain: profileName
-                    }
-                }
-                else {
-                    return { data: new Map(), charNames: undefined, domain: "" };
+                const jsonData = JSON.parse(JSON.stringify(data));
+                return {
+                    data: jsonData as Map<string, any>,
+                    charNames: [...Array(10)].map((number, index) => `Player_${index}`),
+                    domain: profileName
                 }
             }
             catch (e) {
