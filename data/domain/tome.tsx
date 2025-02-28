@@ -37,6 +37,7 @@ import { Sneaking } from './world-6/sneaking';
 import { Summoning } from './world-6/summoning';
 import { Arcade } from './arcade';
 import { Prayer } from './prayers';
+import { UpgradeVault } from './upgradeVault';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -68,12 +69,12 @@ export class TomeLine {
             return 0;
         }
 
-        switch(this.data.scalingType) {
+        switch (this.data.scalingType) {
             case TomeScalingEnum.decay:
                 if (0 > this.currentValues[playerIndex]) {
                     return 0;
                 } else {
-                    return Math.pow(1.7 * this.currentValues[playerIndex] / (this.currentValues[playerIndex] + this.data.keyQty), .7) ;
+                    return Math.pow(1.7 * this.currentValues[playerIndex] / (this.currentValues[playerIndex] + this.data.keyQty), .7);
                 }
             case TomeScalingEnum.decayLog:
                 return 2.4 * lavaLog(this.currentValues[playerIndex]) / (2 * lavaLog(this.currentValues[playerIndex]) + this.data.keyQty);
@@ -116,7 +117,7 @@ export class TomeLine {
             return '';
         }
 
-        switch(this.index) {
+        switch (this.index) {
             // Big values
             case 8:
             case 9:
@@ -149,12 +150,12 @@ export class TomeLine {
             return TomeScoreColors.Bronze;
         }
 
-        switch(true) {
+        switch (true) {
             case this.lineScores[playerIndex] >= this.data.totalVal:
                 return TomeScoreColors.Platinum;
-            case this.lineScores[playerIndex] >= this.data.totalVal*0.75:
+            case this.lineScores[playerIndex] >= this.data.totalVal * 0.75:
                 return TomeScoreColors.Gold;
-            case this.lineScores[playerIndex] >= this.data.totalVal*0.5:
+            case this.lineScores[playerIndex] >= this.data.totalVal * 0.5:
                 return TomeScoreColors.Silver;
             default:
                 return TomeScoreColors.Bronze;
@@ -221,20 +222,20 @@ export class Tome extends Domain {
         if (serverVars && Object.keys(serverVars).includes("TomePct")) {
             tome.scoreThresholds = serverVars["TomePct"] as number[];
         }
-        
+
         tome.lines = [];
         const tomeLinesBase = initTomeRepo();
         tomeLinesBase.forEach(lineInfo => {
-            tome.lines.push(new TomeLine(lineInfo.index,lineInfo.data,tomeLineDisplayOrder.indexOf(lineInfo.index),tome.charCount));
+            tome.lines.push(new TomeLine(lineInfo.index, lineInfo.data, tomeLineDisplayOrder.indexOf(lineInfo.index), tome.charCount));
         });
     }
 
     updateHighestScore = () => {
         this.highestScore = 0;
         this.highestScoreIndex = 0;
-        
+
         for (var i = 0; i < this.charCount; i++) {
-            const playerScore = this.lines.reduce((sum, line) => sum+line.getPlayerScore(i), 0);
+            const playerScore = this.lines.reduce((sum, line) => sum + line.getPlayerScore(i), 0);
             if (this.highestScore < playerScore) {
                 this.highestScore = playerScore;
                 this.highestScoreIndex = i;
@@ -303,6 +304,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
+    const upgVault = data.get("upgradeVault") as UpgradeVault;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -350,7 +352,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
 
     // Total level of all cards
-    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getStars()+1 : 0), 0);
+    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getStars() + 1 : 0), 0);
 
     // Sum of highest level for each talent
     const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + talentMaxLevel, 0);
@@ -371,35 +373,35 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const constellationCompleted = constellations.reduce((sum, constellation) => sum + (constellation.isComplete ? 1 : 0), 0);
 
     // Sum of all bubbles levels
-    const totalBubblesLevel = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).reduce((sum, bubble) => sum + bubble.level, 0)+alchemy.cauldrons.reduce((sum, cauldron) => sum + cauldron.hiddenBubbleLevels, 0);
+    const totalBubblesLevel = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).reduce((sum, bubble) => sum + bubble.level, 0) + alchemy.cauldrons.reduce((sum, cauldron) => sum + cauldron.hiddenBubbleLevels, 0);
 
     // Sum of all vials levels
-    const totalVialsLevels = alchemy.vials.reduce((sum, vial) => sum+vial.level,0);
+    const totalVialsLevels = alchemy.vials.reduce((sum, vial) => sum + vial.level, 0);
 
     // Sum of all sigils levels
-    const totalSigilsLevels = sigils.sigils.reduce((sum, sigil) => sum+(sigil.boostLevel+1),0);
+    const totalSigilsLevels = sigils.sigils.reduce((sum, sigil) => sum + (sigil.boostLevel + 1), 0);
 
     // Sum of best worship waves
-    const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum+totem.maxWave, 0);
+    const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
     var totalDeathnoteDigits = 0;
     const killsMap = deathnote.getKillsMap();
     [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
-        totalDeathnoteDigits += [...deathnoteMobs.values()].reduce((sum, killCount) => sum+Math.ceil(lavaLog(killCount)), 0);
+        totalDeathnoteDigits += [...deathnoteMobs.values()].reduce((sum, killCount) => sum + Math.ceil(lavaLog(killCount)), 0);
     });
 
     // Number of completed equinox challenges/cloud
     const completedEquinoxCloud = equinoxData.challenges.filter(challenge => challenge.complete).length;
 
     // Sum of all refinery ranks
-    const totalRefineryRanks = Object.entries(refineryData.salts).reduce((sum, [_, refinery]) => sum+refinery.rank, 0);
+    const totalRefineryRanks = Object.entries(refineryData.salts).reduce((sum, [_, refinery]) => sum + refinery.rank, 0);
 
     // Sum of Atoms upgrades levels
-    const totalAtomUpgradeLevels = atomCollider.atoms.reduce((sum, atom) => sum+atom.level, 0);
+    const totalAtomUpgradeLevels = atomCollider.atoms.reduce((sum, atom) => sum + atom.level, 0);
 
     // Sum of construction buildings levels 
-    const totalBuildingsLevel = construction.buildings.reduce((sum, building) => sum+building.level, 0);
+    const totalBuildingsLevel = construction.buildings.reduce((sum, building) => sum + building.level, 0);
 
     // Number of Tottoise in storage
     const tottoiseInStorage = storage.amountInStorage("Critter11A");
@@ -407,40 +409,40 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Highest power pet
     const highestPowerPet = Math.max(
         0, // default value if there's no pets
-        ...breeding.fenceyardPets.map(pet => pet.power), 
-        ...breeding.storedPets.map(pet => pet.power), 
+        ...breeding.fenceyardPets.map(pet => pet.power),
+        ...breeding.storedPets.map(pet => pet.power),
         ...breeding.territory.flatMap(territory => territory.pets.map(pet => pet.power))
     );
 
     // Sum of kitchens levels
-    const totalKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum+kitchen.luckLevels+kitchen.recipeLevels+kitchen.mealLevels, 0);
+    const totalKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum + kitchen.luckLevels + kitchen.recipeLevels + kitchen.mealLevels, 0);
 
     // Sum of shiny pet bonuses levels
-    const totalShinyLevels = breeding.shinyBonuses.reduce((sum, bonus) => sum+bonus.totalLevels, 0);
+    const totalShinyLevels = breeding.shinyBonuses.reduce((sum, bonus) => sum + bonus.totalLevels, 0);
 
     // Sum of all meals levels
-    const totalMealLevels = cooking.meals.reduce((sum, meal) => sum+meal.level, 0);
+    const totalMealLevels = cooking.meals.reduce((sum, meal) => sum + meal.level, 0);
 
     // Sum of all pet breeding level
-    const totalPetBreedingLevels = breeding.basePets.filter(pet => pet.data.petId != "_").reduce((sum, pet) => sum+pet.breedingLevel, 0);
+    const totalPetBreedingLevels = breeding.basePets.filter(pet => pet.data.petId != "_").reduce((sum, pet) => sum + pet.breedingLevel, 0);
 
     // Number of lab chips owned
-    const labChipsOwned = lab.chips.reduce((sum, chip) => sum+chip.count, 0)+Object.entries(lab.playerChips).reduce((sum, [_, chips]) => sum+chips.filter(chip => chip && chip.data).length, 0);
+    const labChipsOwned = lab.chips.reduce((sum, chip) => sum + chip.count, 0) + Object.entries(lab.playerChips).reduce((sum, [_, chips]) => sum + chips.filter(chip => chip && chip.data).length, 0);
 
     // Sum of all colosseum highscores
-    const totalColoHighscore = account.coloHighscores.reduce((sum, score) => sum+score, 0);
+    const totalColoHighscore = account.coloHighscores.reduce((sum, score) => sum + score, 0);
 
     // Sum of all boats levels
-    const totalBoatLevels = sailing.boats.reduce((sum, boat) => sum+boat.lootUpgrades+boat.speedUpgrades, 0);
+    const totalBoatLevels = sailing.boats.reduce((sum, boat) => sum + boat.lootUpgrades + boat.speedUpgrades, 0);
 
     // Number of artifact found
-    const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) => 
-        artifact.status == ArtifactStatus.Obtained ? sum+1
-        : artifact.status == ArtifactStatus.Ancient ? sum+2
-        : artifact.status == ArtifactStatus.Eldritch ? sum+3
-        : artifact.status == ArtifactStatus.Sovereign ? sum+4 
-        : sum + 0
-    , 0);
+    const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) =>
+        artifact.status == ArtifactStatus.Obtained ? sum + 1
+            : artifact.status == ArtifactStatus.Ancient ? sum + 2
+                : artifact.status == ArtifactStatus.Eldritch ? sum + 3
+                    : artifact.status == ArtifactStatus.Sovereign ? sum + 4
+                        : sum + 0
+        , 0);
 
     // Highest level captain
     const highestLevelCaptain = Math.max(0, ...sailing.captains.map(captain => captain.level));
@@ -453,10 +455,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const cropsDiscovered = farming.cropDepot.filter(crop => crop.discovered).length;
 
     // Number of beanstack
-    const beanStacks = sneaking.beanstalking.bonuses.reduce((sum, bonus) => sum+bonus.level, 0);
+    const beanStacks = sneaking.beanstalking.bonuses.reduce((sum, bonus) => sum + bonus.level, 0);
 
     // Sum of all summoning upgrades levels
-    const totalSummoningUpgradeLevels = summoning.summonUpgrades.reduce((sum, upgrade) => sum+upgrade.level, 0);
+    const totalSummoningUpgradeLevels = summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
     // Sum of summoning victories
     const summoningVictories = summoning.summonBattles.getTotalVictories();
@@ -482,30 +484,30 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const jadeEmporiumUpgradesBought = sneaking.jadeUpgrades.filter(upgrade => upgrade.display && upgrade.purchased).length;
 
     // Sum of all minigame scores, including basket
-    const totalMinigamesScores = account.minigameHighscores.reduce((sum, score) => sum+score, 0) + (optionListAccount[99] ?? 0);
+    const totalMinigamesScores = account.minigameHighscores.reduce((sum, score) => sum + score, 0) + (optionListAccount[99] ?? 0);
 
     // Sum of all prayers levels
-    const totalPrayersLevels = prayers.reduce((sum, prayer) => sum+prayer.level, 0);
+    const totalPrayersLevels = prayers.reduce((sum, prayer) => sum + prayer.level, 0);
 
     // Sum of all farming plots land rank
-    const totalPlotRank = farming.farmPlots.reduce((sum, plot) => sum+plot.landRank, 0);
+    const totalPlotRank = farming.farmPlots.reduce((sum, plot) => sum + plot.landRank, 0);
 
     // SUm of all gold ball upgrade levels in arcade
-    const totalArcadeUpgradeLevel = arcade.bonuses.reduce((sum, bonus) => sum+bonus.level, 0);
+    const totalArcadeUpgradeLevel = arcade.bonuses.reduce((sum, bonus) => sum + bonus.level, 0);
 
     tome.totalAccountLevel = totalPlayersLevels;
     tome.lines.forEach(line => {
         line.updateIsLineUnlocked(tome.totalAccountLevel);
 
-        switch(line.index) {
+        switch (line.index) {
             case 0:
                 // Total Level of all stamps
                 line.updateAllPlayersCurrentValue(stampsTotalLevels);
                 break;
             case 1:
                 // Sum of statues levels
-                for(var i = 0; i < statues.length; i++) {
-                    line.updatePlayerCurrentValue(statues[i].statues.reduce((sum, statue) => sum+statue.level,0), i);
+                for (var i = 0; i < statues.length; i++) {
+                    line.updatePlayerCurrentValue(statues[i].statues.reduce((sum, statue) => sum + statue.level, 0), i);
                 }
                 break;
             case 2:
@@ -828,6 +830,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 // Sum of all Gold Ball shop upgrades levels
                 line.updateAllPlayersCurrentValue(totalArcadeUpgradeLevel);
                 break;
+            case 81:
+                // Bonus from Teh TOM, index 57 in upgrade vault.
+                line.updateAllPlayersCurrentValue(upgVault.bonuses.find(bonus => bonus.id == 57)?.getBonus(upgVault.bonuses) ?? 0);
+                break;
             default:
                 line.updateAllPlayersCurrentValue(0);
                 break;
@@ -849,6 +855,7 @@ const tomeLineDisplayOrder = [
     5,
     6,
     7,
+    81,
     8,
     9,
     53,

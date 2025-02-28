@@ -125,9 +125,9 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
             }
             case "MultiplierInfo": {
                 switch (true) {
-                    case 0 == (10 * num) % 10: return `${Math.round(num)}.00#`
-                    case 0 == (100 * num) % 10: return `${Math.round(10 * num) / 10}0#`
-                    default: return `${Math.round(100 * num) / 100}#`
+                    case 0 == (10 * num) % 10: return `${Math.round(num)}.00`
+                    case 0 == (100 * num) % 10: return `${Math.round(10 * num) / 10}0`
+                    default: return `${Math.round(100 * num) / 100}`
                 }
             }
             case "Micro": {

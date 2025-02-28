@@ -42,7 +42,7 @@ export const initColosseumRepo = () => {
                         "enemies": [
                             <ColEnemyModel>{"enemy": "frogG", "qty": 5, "platform": 2, "baseScore": 250},
                             <ColEnemyModel>{"enemy": "beanG", "qty": 6, "platform": 4, "baseScore": 250},
-                            <ColEnemyModel>{"enemy": "mushR", "qty": 10, "platform": 4, "baseScore": 250}
+                            <ColEnemyModel>{"enemy": "slimeG", "qty": 10, "platform": 4, "baseScore": 250}
                         ]
                     },
                     <ColWaveModel>{

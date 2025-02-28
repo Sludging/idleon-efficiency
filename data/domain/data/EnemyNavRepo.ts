@@ -636,8 +636,15 @@ export const initEnemyNavRepo = () => {
                 "crystalName": "Crystal5",
                 "hasCard": true
             }),
-        new EnemyNavBase("babayaga", <EnemyNavModel>{
+        new EnemyNavBase("slimeB", <EnemyNavModel>{
                 "prev": undefined,
+                "next": "babayaga",
+                "hasCrystal": true,
+                "crystalName": undefined,
+                "hasCard": true
+            }),
+        new EnemyNavBase("babayaga", <EnemyNavModel>{
+                "prev": "slimeB",
                 "next": "poopBig",
                 "hasCrystal": true,
                 "crystalName": undefined,

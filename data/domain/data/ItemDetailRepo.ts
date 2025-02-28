@@ -151,7 +151,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 2,
-                "Cooldown": 50
+                "Cooldown": 15
             }),
         new CommonItemBase("Iron", <ConsumableItemModel>{
                 "internalID": "Iron",
@@ -172,7 +172,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 4,
-                "Cooldown": 150
+                "Cooldown": 30
             }),
         new CommonItemBase("Gold", <ConsumableItemModel>{
                 "internalID": "Gold",
@@ -193,7 +193,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 7,
-                "Cooldown": 350
+                "Cooldown": 60
             }),
         new CommonItemBase("Plat", <ConsumableItemModel>{
                 "internalID": "Plat",
@@ -214,7 +214,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 16,
-                "Cooldown": 1000
+                "Cooldown": 200
             }),
         new CommonItemBase("Dementia", <ConsumableItemModel>{
                 "internalID": "Dementia",
@@ -235,7 +235,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 40,
-                "Cooldown": 1500
+                "Cooldown": 400
             }),
         new CommonItemBase("Void", <ConsumableItemModel>{
                 "internalID": "Void",
@@ -256,7 +256,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 100,
-                "Cooldown": 2500
+                "Cooldown": 750
             }),
         new CommonItemBase("Lustre", <ConsumableItemModel>{
                 "internalID": "Lustre",
@@ -277,7 +277,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 250,
-                "Cooldown": 5000
+                "Cooldown": 1300
             }),
         new CommonItemBase("Starfire", <ConsumableItemModel>{
                 "internalID": "Starfire",
@@ -298,7 +298,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 500,
-                "Cooldown": 10000
+                "Cooldown": 2000
             }),
         new CommonItemBase("Dreadlo", <ConsumableItemModel>{
                 "internalID": "Dreadlo",
@@ -319,7 +319,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 1000,
-                "Cooldown": 20000
+                "Cooldown": 3100
             }),
         new CommonItemBase("Marble", <ConsumableItemModel>{
                 "internalID": "Marble",
@@ -340,7 +340,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 4000,
-                "Cooldown": 30000
+                "Cooldown": 6000
             }),
         new CommonItemBase("Godshard", <ConsumableItemModel>{
                 "internalID": "Godshard",
@@ -361,7 +361,7 @@ export const initItemDetailRepo = () => {
                 "Effect": "Ore",
                 "Trigger": "0",
                 "Amount": 15000,
-                "Cooldown": 50000
+                "Cooldown": 15000
             }),
         new CommonItemBase("Motherlode", <QuestItemModel>{
                 "internalID": "Motherlode",
@@ -2101,24 +2101,24 @@ export const initItemDetailRepo = () => {
             }),
         new CommonItemBase("EquipmentHatsBeg1", <EquipItemModel>{
                 "internalID": "EquipmentHatsBeg1",
-                "displayName": "Ice Cream Sunday",
+                "displayName": "Ice Cream Sundae",
                 "sellPrice": 200,
-                "typeGen": TypeGenEnum.aHelmet,
+                "typeGen": TypeGenEnum.aHelmetMTX,
                 "ID": 24,
-                "Type": "Helmet",
+                "Type": "Premium Helmet",
                 "lvReqToCraft": 25,
                 "lvReqToEquip": 30,
-                "Class": ClassTypeEnum.Beginner,
+                "Class": ClassTypeEnum.All,
                 "Speed": 0,
                 "Reach": 0,
                 "Weapon_Power": 0,
                 "STR": 0,
                 "AGI": 0,
-                "WIS": 6,
-                "LUK": 0,
-                "Defence": 5,
-                "UQ1txt": "% GOLD FOOD EFFECT",
-                "UQ1val": 10,
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 2,
+                "UQ1txt": "% MONEY",
+                "UQ1val": 25,
                 "UQ2txt": "0",
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
@@ -7032,13 +7032,13 @@ export const initItemDetailRepo = () => {
                 "Speed": 0,
                 "Reach": 0,
                 "Weapon_Power": 0,
-                "STR": 1,
-                "AGI": 1,
-                "WIS": 1,
+                "STR": 2,
+                "AGI": 2,
+                "WIS": 2,
                 "LUK": 2,
                 "Defence": 0,
                 "UQ1txt": "% MONEY",
-                "UQ1val": 5,
+                "UQ1val": 15,
                 "UQ2txt": "0",
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 3
@@ -8045,10 +8045,10 @@ export const initItemDetailRepo = () => {
                 "WIS": 12,
                 "LUK": 0,
                 "Defence": 0,
-                "UQ1txt": "0",
-                "UQ1val": 0,
-                "UQ2txt": "0",
-                "UQ2val": 0,
+                "UQ1txt": "% TOTAL DAMAGE",
+                "UQ1val": 20,
+                "UQ2txt": "% DROP CHANCE",
+                "UQ2val": 5,
                 "Upgrade_Slots_Left": 4
             }),
         new CommonItemBase("EquipmentPendant18", <EquipItemModel>{
@@ -8214,7 +8214,7 @@ export const initItemDetailRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "UQ1txt": "% TOTAL DAMAGE",
-                "UQ1val": 15,
+                "UQ1val": 27,
                 "UQ2txt": "% MOB RESPAWN",
                 "UQ2val": 3,
                 "Upgrade_Slots_Left": 3
@@ -8231,14 +8231,14 @@ export const initItemDetailRepo = () => {
                 "Class": ClassTypeEnum.All,
                 "Speed": 0,
                 "Reach": 0,
-                "Weapon_Power": 7,
+                "Weapon_Power": 8,
                 "STR": 0,
                 "AGI": 0,
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
                 "UQ1txt": "% TOTAL DAMAGE",
-                "UQ1val": 20,
+                "UQ1val": 40,
                 "UQ2txt": "% MOB RESPAWN",
                 "UQ2val": 5,
                 "Upgrade_Slots_Left": 4
@@ -8385,6 +8385,54 @@ export const initItemDetailRepo = () => {
                 "UQ1val": 30,
                 "UQ2txt": "% MOB RESPAWN",
                 "UQ2val": 20,
+                "Upgrade_Slots_Left": 0
+            }),
+        new CommonItemBase("EquipmentPendant32", <EquipItemModel>{
+                "internalID": "EquipmentPendant32",
+                "displayName": "Slimy Necklace",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "ID": 3,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 5,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 1,
+                "STR": 2,
+                "AGI": 2,
+                "WIS": 2,
+                "LUK": 0,
+                "Defence": 1,
+                "UQ1txt": "% TOTAL DAMAGE",
+                "UQ1val": 15,
+                "UQ2txt": "0",
+                "UQ2val": 0,
+                "Upgrade_Slots_Left": 2
+            }),
+        new CommonItemBase("EquipmentPendant33", <EquipItemModel>{
+                "internalID": "EquipmentPendant33",
+                "displayName": "Emerald Bling Pendant",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aPendant,
+                "ID": 3,
+                "Type": "Pendant",
+                "lvReqToCraft": 17,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 0,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 0,
+                "UQ1txt": "% BONUS MONEY",
+                "UQ1val": 200,
+                "UQ2txt": "0",
+                "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
         new CommonItemBase("EquipmentRings1", <EquipItemModel>{
@@ -14925,6 +14973,30 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 0
             }),
+        new CommonItemBase("InvStorageL", <EquipItemModel>{
+                "internalID": "InvStorageL",
+                "displayName": "Valenslime Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "ID": 106,
+                "Type": "Storage",
+                "lvReqToCraft": 16,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 10,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "UQ1txt": "0",
+                "UQ1val": 0,
+                "UQ2txt": "0",
+                "UQ2val": 0,
+                "Upgrade_Slots_Left": 0
+            }),
         new CommonItemBase("Line1", <QuestItemModel>{
                 "internalID": "Line1",
                 "displayName": "Copper Twine",
@@ -16004,10 +16076,10 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Material",
                 "lvReqToCraft": 0,
-                "desc_line1": "It's basically string cheese, but without the cheese. CRAFT THESE IN THE 'PRODUCE' TAB IN ANVIL!",
-                "desc_line2": "Filler",
-                "desc_line3": "Filler",
-                "desc_line4": "Filler",
+                "desc_line1": "It's like string cheese, but without",
+                "desc_line2": "cheese.",
+                "desc_line3": "GET THESE FROM THE 'PRODUCE' TAB",
+                "desc_line4": "HERE IN THE ANVIL!",
                 "desc_line5": "Filler",
                 "desc_line6": "Filler",
                 "desc_line7": "Filler",
@@ -22905,7 +22977,7 @@ export const initItemDetailRepo = () => {
                 "displayName": "Cramped Material Pouch",
                 "sellPrice": 4200,
                 "typeGen": TypeGenEnum.aCarryBag,
-                "ID": 10,
+                "ID": 5,
                 "Type": "Carry Bag",
                 "lvReqToCraft": 1,
                 "lvReqToEquip": 50,
@@ -22929,7 +23001,7 @@ export const initItemDetailRepo = () => {
                 "displayName": "Small Material Pouch",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aCarryBag,
-                "ID": 13,
+                "ID": 7,
                 "Type": "Carry Bag",
                 "lvReqToCraft": 1,
                 "lvReqToEquip": 100,
@@ -22953,7 +23025,7 @@ export const initItemDetailRepo = () => {
                 "displayName": "Average Material Pouch",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aCarryBag,
-                "ID": 30,
+                "ID": 20,
                 "Type": "Carry Bag",
                 "lvReqToCraft": 1,
                 "lvReqToEquip": 250,
@@ -22977,7 +23049,7 @@ export const initItemDetailRepo = () => {
                 "displayName": "Sizable Materials Pouch",
                 "sellPrice": 200,
                 "typeGen": TypeGenEnum.aCarryBag,
-                "ID": 40,
+                "ID": 35,
                 "Type": "Carry Bag",
                 "lvReqToCraft": 1,
                 "lvReqToEquip": 500,
@@ -25446,6 +25518,30 @@ export const initItemDetailRepo = () => {
                 "UQ1val": 25,
                 "UQ2txt": "% DAMAGE MULTI",
                 "UQ2val": 15,
+                "Upgrade_Slots_Left": 0
+            }),
+        new CommonItemBase("EquipmentNametag16", <EquipItemModel>{
+                "internalID": "EquipmentNametag16",
+                "displayName": "Lovely Day Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "ID": 16,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 10,
+                "STR": 8,
+                "AGI": 8,
+                "WIS": 8,
+                "LUK": 0,
+                "Defence": 25,
+                "UQ1txt": "% DAMAGE BONUS",
+                "UQ1val": 60,
+                "UQ2txt": "% MONEY",
+                "UQ2val": 200,
                 "Upgrade_Slots_Left": 0
             }),
         new CommonItemBase("EquipmentKeychain0", <EquipItemModel>{
@@ -30432,7 +30528,7 @@ export const initItemDetailRepo = () => {
         new CommonItemBase("BobJoePickle", <QuestItemModel>{
                 "internalID": "BobJoePickle",
                 "displayName": "BobJoePickle",
-                "sellPrice": 40000,
+                "sellPrice": 10000,
                 "typeGen": TypeGenEnum.dQuest,
                 "ID": 0,
                 "Type": "Quest Item",
@@ -31049,7 +31145,7 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Event Item",
                 "lvReqToCraft": 15,
-                "desc_line1": "Hold down on a letter to spawn a Valentslime, or turn these in each day to the Loveulyte for a reward!",
+                "desc_line1": "Hold down on a letter to spawn a Valenslime!",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",
@@ -31066,7 +31162,7 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Quest Item",
                 "lvReqToCraft": 15,
-                "desc_line1": "Hold down to open a random reward like Gems and Cards! There's a 1 in 700 chance for a special ROSE CAPE, and there are 3 different roses! Also if you're unlucky, you're GUARANTEED to get a rose every 650 boxes!",
+                "desc_line1": "Hold down to open a random reward! Possibilites include Gems, exclusive hats, event food, event cards, and more!",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",
@@ -38675,6 +38771,30 @@ export const initItemDetailRepo = () => {
                 "UQ2val": 0,
                 "Upgrade_Slots_Left": 5
             }),
+        new CommonItemBase("EquipmentHats113", <EquipItemModel>{
+                "internalID": "EquipmentHats113",
+                "displayName": "Pink Beanie",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "ID": 120,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Speed": 0,
+                "Reach": 0,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "UQ1txt": "% XP FROM MONSTERS",
+                "UQ1val": 5,
+                "UQ2txt": "0",
+                "UQ2val": 0,
+                "Upgrade_Slots_Left": 5
+            }),
         new CommonItemBase("CardsA0", <QuestItemModel>{
                 "internalID": "CardsA0",
                 "displayName": "CardsA0",
@@ -42628,6 +42748,23 @@ export const initItemDetailRepo = () => {
                 "Type": "Card",
                 "lvReqToCraft": 2,
                 "desc_line1": "mini6a",
+                "desc_line2": "Filler",
+                "desc_line3": "Filler",
+                "desc_line4": "Filler",
+                "desc_line5": "Filler",
+                "desc_line6": "Filler",
+                "desc_line7": "Filler",
+                "desc_line8": "Filler"
+            }),
+        new CommonItemBase("CardsZ26", <QuestItemModel>{
+                "internalID": "CardsZ26",
+                "displayName": "DONTFILL",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "ID": 0,
+                "Type": "Card",
+                "lvReqToCraft": 2,
+                "desc_line1": "slimeB",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",

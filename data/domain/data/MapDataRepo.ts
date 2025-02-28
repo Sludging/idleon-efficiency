@@ -95,7 +95,7 @@ export const initMapDataRepo = () => {
                 "enemy": "beanG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                "portalRequirements": [40, 1500]
+                "portalRequirements": [40, 500]
             }),
         new MapDataBase(15, <MapDataModel>{
                 "enemy": "ratB",

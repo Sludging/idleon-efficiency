@@ -12,7 +12,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.1,
                 "x3": 100,
                 "bonus1": "{/sec",
-                "bonus2": "Generates +1 feather per second",
+                "bonus2": "Generates } feather per second",
                 "x4": 0
             }),
         new FeatherBase(1, <FeatherModel>{
@@ -30,7 +30,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.11,
                 "x3": 2500,
                 "bonus1": "+{ Base DMG",
-                "bonus2": "Boosts feather generation by +5%",
+                "bonus2": "Boosts feather generation by +}%",
                 "x4": 0
             }),
         new FeatherBase(3, <FeatherModel>{
@@ -39,7 +39,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.16,
                 "x3": 30000,
                 "bonus1": "+{% Total DMG",
-                "bonus2": "All feather upgrades are 10% cheaper",
+                "bonus2": "All feather upgrades are @% cheaper",
                 "x4": 0
             }),
         new FeatherBase(4, <FeatherModel>{
@@ -57,7 +57,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.12,
                 "x3": 1e+07,
                 "bonus1": "+{% Drop Rate",
-                "bonus2": "Generates +5 feathers per second",
+                "bonus2": "Generates +} more feathers per second",
                 "x4": 0
             }),
         new FeatherBase(6, <FeatherModel>{
@@ -66,7 +66,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.4,
                 "x3": 2.5e+08,
                 "bonus1": "+{ All Stat",
-                "bonus2": "Rare chance for a Shiny Feather, each one gives +1% feather generation",
+                "bonus2": "Rare chance for a Shiny Feather, each one gives +}% feather generation",
                 "x4": 0
             }),
         new FeatherBase(7, <FeatherModel>{
@@ -75,7 +75,7 @@ export const initFeatherRepo = () => {
                 "x2": 1.27,
                 "x3": 5e+09,
                 "bonus1": "{",
-                "bonus2": "All feather upgrades are 20% cheaper",
+                "bonus2": "All feather upgrades are }% cheaper",
                 "x4": 0
             }),
         new FeatherBase(8, <FeatherModel>{

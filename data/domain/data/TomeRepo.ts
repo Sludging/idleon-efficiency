@@ -654,6 +654,14 @@ export const initTomeRepo = () => {
                 "totalVal": 300,
                 "decimalDisplay": undefined,
                 "desc": undefined
+            }),
+        new TomeBase(81, <TomeModel>{
+                "name": "Vault Upgrade bonus LV",
+                "keyQty": 500,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 500,
+                "decimalDisplay": undefined,
+                "desc": undefined
             })    
 ]
 }

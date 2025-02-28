@@ -84,7 +84,7 @@ export class PlayerDivinityInfo {
         return 0;
     }
 
-    isLinkedToGod = (godIndex: number) => {
+    isLinkedToGod = (godIndex: number): boolean => {
         if (!this.esGod && this.gods.length == 0) {
             return false;
         }
@@ -93,7 +93,7 @@ export class PlayerDivinityInfo {
             return true;
         }
 
-        return this.esGod && this.esGod.index == godIndex;
+        return this.esGod?.index == godIndex;
     }
 }
 
@@ -226,7 +226,7 @@ export const updateDivinity = (data: Map<string, any>) => {
         };
 
         // Update being active or not based on linked god(s) (could have changed since parse due to owning Doot or other bonuses like that) and ES secondary god
-        player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && (player.gods.some(god => god.index == 4) || player.esGod?.index == 4));
+        player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && player.isLinkedToGod(4));
     })
 
     return divinity;
