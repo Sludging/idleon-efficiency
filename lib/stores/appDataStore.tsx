@@ -33,6 +33,10 @@ export type AppDataState = {
     // Trying this as means to force re-render
     lastUpdated: Date
 
+    // Changelog tracking
+    lastSeenChangelogVersion: string | null
+    hasUnseenChangelogs: boolean
+
     // This shouldn't be used by anything but I need it in the state .. I think
     firestore: FirestoreData | undefined
 }
@@ -40,7 +44,9 @@ export type AppDataState = {
 export type AppDataActions = {
     handleLiveData: (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => void,
     initialize: (userUid: string) => void,
-    setDataStatus: (dataStatus: DataStatus) => void
+    setDataStatus: (dataStatus: DataStatus) => void,
+    markChangelogsSeen: () => void,
+    checkForUnseenChangelogs: () => void
 }
 
 export type AppDataStore = AppDataState & AppDataActions
@@ -48,6 +54,13 @@ export type AppDataStore = AppDataState & AppDataActions
 export const initAppDataStore = (initData: Map<string, any>): AppDataState => {
     const idleonData = new IdleonData(initData, new Date());
     idleonData.initialized = true;
+    
+    // Get the last seen changelog version from localStorage (client-side only)
+    let lastSeenChangelogVersion = null;
+    if (typeof window !== "undefined") {
+        lastSeenChangelogVersion = localStorage.getItem("idleon_efficiency_changelog_seen");
+    }
+    
     return {
         initialized: false,
 
@@ -57,6 +70,10 @@ export const initAppDataStore = (initData: Map<string, any>): AppDataState => {
         profile: "",
 
         lastUpdated: new Date(),
+        
+        // Changelog tracking
+        lastSeenChangelogVersion,
+        hasUnseenChangelogs: checkHasUnseenChangelogs(lastSeenChangelogVersion),
 
         firestore: undefined
     }
@@ -106,8 +123,38 @@ export const defaultInitState: AppDataState = {
     profile: "",
 
     lastUpdated: new Date(),
+    
+    // Changelog tracking
+    lastSeenChangelogVersion: null,
+    hasUnseenChangelogs: true,
 
     firestore: undefined
+}
+
+// Helper function to check for unseen changelogs
+function checkHasUnseenChangelogs(lastSeenVersion: string | null): boolean {
+    if (typeof window === "undefined") return false;
+    
+    // Import here to avoid circular dependencies
+    const { changelogData } = require('../../data/changelog');
+    
+    // If no version has been seen yet, there are unseen changelogs
+    if (!lastSeenVersion) return true;
+    
+    // Get the latest version
+    const latestVersion = changelogData.length > 0 ? changelogData[0].version : "";
+    
+    // If the latest version is different from the last seen version, there are unseen changelogs
+    return lastSeenVersion !== latestVersion;
+}
+
+// Helper function to get the latest changelog version
+function getLatestChangelogVersion(): string {
+    // Import here to avoid circular dependencies
+    const { changelogData } = require('../../data/changelog');
+    
+    if (changelogData.length === 0) return "";
+    return changelogData[0].version;
 }
 
 export const createAppDataStore = (
@@ -165,6 +212,24 @@ export const createAppDataStore = (
         },
         setDataStatus: (dataStatus: DataStatus) => {
             set((state) => ({ dataStatus: dataStatus }));
+        },
+        markChangelogsSeen: () => {
+            if (typeof window === "undefined") return;
+            
+            const latestVersion = getLatestChangelogVersion();
+            if (latestVersion) {
+                localStorage.setItem("idleon_efficiency_changelog_seen", latestVersion);
+                set({ 
+                    lastSeenChangelogVersion: latestVersion,
+                    hasUnseenChangelogs: false
+                });
+            }
+        },
+        checkForUnseenChangelogs: () => {
+            const { lastSeenChangelogVersion } = get();
+            set({ 
+                hasUnseenChangelogs: checkHasUnseenChangelogs(lastSeenChangelogVersion)
+            });
         }
     }))
 }

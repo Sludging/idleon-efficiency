@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import ContentWrapper from "../../components/contentWrapper";
 import { Box, Heading, Paragraph, Text } from "grommet";
 import { ChangelogEntry } from "../../components/changelog/changelogEntry";
 import { changelogData } from "../../data/changelog";
+import ChangelogTracker from "./changelogTracker";
 
 export const metadata: Metadata = {
     title: "Change log",
@@ -12,6 +12,9 @@ export const metadata: Metadata = {
 export default function ChangelogPage() {
     return (
         <Box pad={{ vertical: "medium" }}>
+            {/* Client component to track changelog views */}
+            <ChangelogTracker />
+            
             <Box margin={{ bottom: "medium" }}>
                 <Heading level={1} margin={{ top: "none", bottom: "small" }}>
                     Change log
