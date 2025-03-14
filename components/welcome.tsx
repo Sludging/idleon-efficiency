@@ -22,6 +22,7 @@ import { DataStatus } from '../lib/stores/appDataStore';
 import { useAppDataStore } from '../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow'
 import IconImage from './base/IconImage';
+import SteamLogin from './login/steamLogin';
 
 const VerticalLine = styled.hr`
     border: 0;
@@ -43,12 +44,13 @@ function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boole
 }
 
 export default function Welcome() {
-    const { user, authStatus, emailLogin, appleLogin, errorCode } = useAuthStore(
+    const { user, authStatus, emailLogin, appleLogin, uglySteamLogin, errorCode } = useAuthStore(
         useShallow((state) => ({
             user: state.user,
             authStatus: state.authStatus,
             emailLogin: state.emailLogin,
             appleLogin: state.appleLogin,
+            uglySteamLogin: state.uglySteamLogin,
             errorCode: state.errorCode,
         })),
     )
@@ -58,12 +60,26 @@ export default function Welcome() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLayer, setShowLayer] = useState(false);
+    const [layerType, setLayerType] = useState<'google' | 'steam'>('google');
     const [error, setError] = useState<string>('');
 
     const size = useContext(ResponsiveContext);
 
     const isLoading = authStatus == AuthStatus.Loading;
 
+    const steamLogin = () => {
+        window.open("https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select&openid.return_to=https://www.legendsofidleon.com/steamsso/&openid.realm=https://www.legendsofidleon.com/steamsso/&openid.mode=checkid_setup");
+    }
+
+    const googleLayer = () => {
+        setLayerType('google');
+        setShowLayer(true);
+    }
+
+    const steamLayer = () => {
+        setLayerType('steam');
+        setShowLayer(true);
+    }
 
     const onButtonClick = async (toCall: Function | undefined, value?: string, value2?: string) => {
         try {
@@ -129,8 +145,9 @@ export default function Welcome() {
                                     <Box gap="medium" alignSelf="center" pad={{ left: 'medium', right: 'medium', bottom: size == "small" ? 'xlarge' : undefined }} border={size == "small" ? { size: '2px', color: 'grey-1', side: 'bottom' } : undefined}>
                                         <Text size="24px">Sign in with social</Text>
                                         <Text size="xsmall">Use this if you signed into Legends of Idleon using Google or Apple</Text>
-                                        <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={() => setShowLayer(true)} />
+                                        <Button style={{ color: "white" }} primary color="accent-1" label="Google Login" onClick={googleLayer} />
                                         <Button style={{ color: "white" }} primary color="brand" label="Apple Login" onClick={() => onButtonClick(appleLogin)} />
+                                        <Button style={{ color: "white" }} primary color="accent-3" label="Steam Login" onClick={steamLayer} />
                                     </Box>
                                     {size != "small" && <Box align="center">
                                         <VerticalLine />
@@ -193,7 +210,8 @@ export default function Welcome() {
                         modal={true}
                         position="center"
                     >
-                        <GoogleLogin />
+                        {layerType == 'google' && <GoogleLogin /> }
+                        {layerType == 'steam' && <SteamLogin />}
                     </Layer>
                 }
                 <Box width={{ max: '1440px' }} align="center" pad="small" fill margin={{ left: 'auto', right: 'auto' }}>

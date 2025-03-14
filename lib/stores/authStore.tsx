@@ -1,4 +1,4 @@
-import { EmailAuthProvider, GoogleAuthProvider, OAuthProvider, User, getAuth, signInWithCredential, signOut } from 'firebase/auth'
+import { EmailAuthProvider, GoogleAuthProvider, OAuthProvider, User, getAuth, signInWithCredential, signInWithCustomToken, signOut } from 'firebase/auth'
 import { createStore } from 'zustand/vanilla'
 import { AuthStatus } from '../../data/firebase/authContext'
 import app from '../../data/firebase/config'
@@ -18,6 +18,7 @@ export type AuthActions = {
     logout: () => void
     googleLogin: (id_token: string) => void
     emailLogin: (email: string, password: string) => void
+    uglySteamLogin: (redirectUrl: string) => void
     appleLogin: () => void
     initialize: () => void
 }
@@ -71,6 +72,65 @@ const loginThroughToken = async (id_token: string, callback?: Function): Promise
         }
     }
 };
+
+
+const getFirebaseToken = async (openIdParams: Record<string, string>) => {
+    // No point in running without steamData
+    if (!openIdParams) {
+        return;
+    }
+
+    const target_function = "https://us-central1-idlemmo.cloudfunctions.net/asil"
+    
+    const requestData = {
+        data: {
+            claimedId: openIdParams.steamId,
+            nonce: openIdParams["openid.response_nonce"],
+            assocHandle: openIdParams["openid.assoc_handle"],
+            sig: openIdParams["openid.sig"],
+            signed: openIdParams["openid.signed"]
+        }
+    };
+    
+
+    try {
+        const response = await fetch(target_function, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestData),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.result;
+    } catch (error) {
+        console.error("Error fetching Firebase token:", error);
+        return null;
+    }
+}
+
+const loginThroughCustomToken = async (customToken: string): Promise<Partial<AuthState>> => {
+    const auth = getAuth(app);
+    try {
+    const result = await signInWithCustomToken(auth, customToken)
+    loginEvent("CUSTOM_TOKEN");
+    return {
+            user: result.user,
+            authStatus: AuthStatus.Valid
+        }
+    } catch (error: any) {
+        console.debug(error.code, error.message);
+        return {
+            authStatus: AuthStatus.NoUser,
+            errorCode: error.code
+        }
+    }
+}
 
 const loginThroughEmailPassword = async (email: string, password: string): Promise<Partial<AuthState>> => {
     const auth = getAuth(app);
@@ -154,6 +214,36 @@ export const createAuthStore = (
         googleLogin: async (id_token: string) => {
             const result = await loginThroughToken(id_token);
             set((state) => result)
+        },
+        uglySteamLogin: async (redirectUrl: string) => {
+            const params = new URLSearchParams(redirectUrl);
+            const openIdParams: Record<string, string> = {};
+            
+            // Extract all openid parameters
+            params.forEach((value, key) => {
+                if (key.startsWith('openid.')) {
+                    openIdParams[key] = value;
+                }
+            });
+
+            // Extract Steam ID from claimed_id
+            const claimedId = openIdParams['openid.claimed_id'] || '';
+            const steamId = claimedId.match(/\/id\/(\d+)$/)?.[1];
+            // Add Steam ID to the openIdParams
+            openIdParams["steamId"] = steamId || '';
+            
+            // Get the custom token from the server
+            const customToken = await getFirebaseToken(openIdParams);
+            if (customToken == null) {
+                set((state) => ({
+                    authStatus: AuthStatus.NoUser,
+                    errorCode: "INVALID_OPENID_PARAMS"
+                }))
+                return;
+            }
+            // Login using custom token
+            const result = await loginThroughCustomToken(customToken);
+            set((state) => result);
         },
         initialize: async () => {
             set((state) => ({ initialized: true }));
