@@ -17,22 +17,23 @@ export default function SteamLogin() {
     ))
 
     return (
-        <ShadowBox background="dark-1" pad="large" gap="small">
-            <Box pad="small" gap="medium">
-                <Text>Click the 'Login through Steam' button below to open a new tab that will ask you to login to Steam.</Text>
-                <Text>Once you are logged in, you will be redirect to a Legend of Idleon page.</Text>
+        <ShadowBox background="dark-1" pad="large" gap="medium">
+            <Box pad="small" gap="small">
+                <Text>The <Text color='accent-3' weight='bold'>Login through Steam</Text> button below will open a new tab that will ask you to login to Steam.</Text>
+                <Text>Once you are logged in, you will be redirected to a Legend of Idleon page. <Text color='accent-1' weight='bold'>You don't need to do any action on this page.</Text></Text>
                 <Text>Copy the URL of that page and come back here and paste it in the box below and click Login.</Text>
-                <Box>
-                    <Button primary color="brand" label="Login through Steam" onClick={() => window.open(FIXED_STEAM_URL, "_blank")} />
-                </Box>
-                <Box gap="small">
-                    <TextInput
-                        placeholder="Enter URL"
-                        value={redirectUrl}
-                        onChange={event => setRedirectUrl(event.target.value)}
-                    />
-                    <Button primary color="brand" label="Login" onClick={() => uglySteamLogin(redirectUrl)} />
-                </Box>
+                <Text>If you hit a page that says <Text color='accent-1'>"Unknown Error Occured"</Text>, you can ignore it and copy the URL and come back to this page.</Text>
+            </Box>
+            <Box align="center" gap="small" fill>
+                <Button primary color="accent-3" label="Login through Steam" onClick={() => window.open(FIXED_STEAM_URL, "_blank")} />
+            </Box>
+            <Box gap="small" fill>
+                <TextInput
+                    placeholder="Enter URL"
+                    value={redirectUrl}
+                    onChange={event => setRedirectUrl(event.target.value)}
+                />
+                <Button primary color="brand" label="Login" onClick={() => uglySteamLogin(redirectUrl)} />
             </Box>
         </ShadowBox>
     )
