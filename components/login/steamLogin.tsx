@@ -17,23 +17,41 @@ export default function SteamLogin() {
     ))
 
     return (
-        <ShadowBox background="dark-1" pad="large" gap="medium">
-            <Box pad="small" gap="small">
-                <Text>The <Text color='accent-3' weight='bold'>Login through Steam</Text> button below will open a new tab that will ask you to login to Steam.</Text>
-                <Text>Once you are logged in, you will be redirected to a Legend of Idleon page. <Text color='accent-1' weight='bold'>You don't need to do any action on this page.</Text></Text>
-                <Text>Copy the URL of that page and come back here and paste it in the box below and click Login.</Text>
-                <Text>If you hit a page that says <Text color='accent-1'>"Unknown Error Occured"</Text>, you can ignore it and copy the URL and come back to this page.</Text>
+        <ShadowBox background="dark-1" pad="large" gap="medium" width="500px">
+            <Box border={{ color: 'accent-3', side: 'bottom' }} pad={{ bottom: 'medium' }} fill>
+                <Text size="24px">How to login with Steam</Text>
             </Box>
-            <Box align="center" gap="small" fill>
-                <Button primary color="accent-3" label="Login through Steam" onClick={() => window.open(FIXED_STEAM_URL, "_blank")} />
+            <Box direction="row" gap="small" border={{ color: 'accent-3', side: 'bottom' }} pad={{ bottom: 'small' }} fill>
+                <Box round="full" background="brand" width="24px" height="24px" align="center" justify="center">1</Box>
+
+                <Box gap="small" align="start">
+                    <Text size="xsmall">Click the steam login button below. A new tab will open. Log into your Steam account.</Text>
+                    <Button onClick={() => window.open(FIXED_STEAM_URL, "_blank")}>
+                        <img src="https://community.fastly.steamstatic.com/public/images/signinthroughsteam/sits_01.png" />
+                    </Button>
+                </Box>
+            </Box>
+            <Box direction="row" gap="small" pad={{ bottom: 'small' }} fill>
+                <Box round="full" background="brand" width="24px" height="24px" align="center" justify="center">2</Box>
+                <Box fill>
+                    <Text size="xsmall">After logging in, you’ll see a Legend of Idleon page. Do nothing. Just copy the URL.
+                        Come back here, paste the URL in the box, and click Login.</Text>
+                </Box>
             </Box>
             <Box gap="small" fill>
-                <TextInput
-                    placeholder="Enter URL"
-                    value={redirectUrl}
-                    onChange={event => setRedirectUrl(event.target.value)}
-                />
-                <Button primary color="brand" label="Login" onClick={() => uglySteamLogin(redirectUrl)} />
+                <Box width="medium" gap="small">
+                    <TextInput
+                        placeholder="Enter URL"
+                        value={redirectUrl}
+                        onChange={event => setRedirectUrl(event.target.value)}
+                    />
+                    <Button primary color="brand" label="Login" onClick={() => uglySteamLogin(redirectUrl)} />
+                </Box>
+            </Box>
+            <Box pad={{ top: 'small' }}>
+                <Box background='grey-1' pad='medium' round='xsmall'>
+                    <Text size="xsmall">Tip: If you see "Unknown Error Occurred," ignore it. Just copy the URL and return here.</Text>
+                </Box>
             </Box>
         </ShadowBox>
     )
