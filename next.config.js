@@ -43,6 +43,10 @@ const moduleExports = {
         protocol: 'https',
         hostname: 'cdn.buymeacoffee.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'community.fastly.steamstatic.com',
+      },
     ],
   },
   async redirects() {
