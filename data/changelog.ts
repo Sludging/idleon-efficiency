@@ -16,4 +16,12 @@ export const changelogData: ChangelogEntryData[] = [
       "Added change log page to track site updates",
     ]
   },
+  {
+    version: "1.2.29",
+    title: "Steam Login",
+    date: "March 13, 2025",
+    changes: [
+      "Added Steam login button to the login page.",
+    ]
+  },
 ];
