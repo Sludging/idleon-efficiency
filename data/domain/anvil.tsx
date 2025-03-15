@@ -6,7 +6,7 @@ import { AnvilProduceBase, initAnvilRepo } from './data/AnvilRepo';
 import { AnvilProduceModel } from './model/anvilProduceModel';
 import { Item } from './items';
 import { Alchemy, AlchemyConst, CauldronIndex } from './alchemy';
-import { Stamp, getStampBonusForKey } from './stamps';
+import { Stamp, getStampBonusForKey } from './world-1/stamps';
 import { SkillsIndex } from './SkillsIndex';
 import { PlayerStatues, StatueConst } from './statues';
 import { Shrine } from './shrines';

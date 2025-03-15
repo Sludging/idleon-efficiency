@@ -15,7 +15,7 @@ import {
     ThemeContext
 } from "grommet"
 
-import { Stamp } from '../../../data/domain/stamps';
+import { Stamp } from '../../../data/domain/world-1/stamps';
 import { useState, useContext } from 'react';
 import { getCoinsArray, nFormatter } from '../../../data/utility'
 import CoinsDisplay from "../../../components/coinsDisplay";

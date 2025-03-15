@@ -17,7 +17,7 @@ import { Prayer } from "./prayers";
 import { Cooking } from "./cooking";
 import { Breeding } from "./breeding";
 import { Dungeons, PassiveType } from "./dungeons";
-import { Stamp, StampConsts, StampTab } from "./stamps";
+import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { Achievement, AchievementConst } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./arcade";

@@ -10,7 +10,7 @@ import { Sigils } from "./sigils";
 import { Divinity } from "./divinity";
 import { Card } from "./cards";
 import { Alchemy } from "./alchemy";
-import { Stamp } from "./stamps";
+import { Stamp } from "./world-1/stamps";
 import { PlayerStatues } from "./statues";
 import { GemStore } from "./gemPurchases";
 import { Player } from "./player";

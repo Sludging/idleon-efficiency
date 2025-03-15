@@ -13,7 +13,7 @@ import { MealModel } from "./model/mealModel";
 import { Player } from "./player";
 import { Sailing } from "./sailing";
 import { Sigils } from "./sigils";
-import { Stamp } from "./stamps";
+import { Stamp } from "./world-1/stamps";
 import { ClassIndex } from "./talents";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";

@@ -1,21 +1,22 @@
-import { lavaFunc, range } from '../utility'
-import { Account } from './account';
-import { Alchemy } from './alchemy';
-import { AtomCollider } from './atomCollider';
-import { Domain, RawData } from './base/domain';
-import { Bribe, BribeConst, BribeStatus } from './bribes';
-import { Capacity } from './capacity';
-import { ImageData } from './imageData';
-import { Item } from './items';
-import { Lab } from './lab';
-import { BaseItemModel } from './model/baseItemModel';
-import { StampDataModel } from './model/stampDataModel';
-import { StampItemModel } from './model/stampItemModel';
-import { Player } from './player';
-import { Rift } from './rift';
-import { Sigils } from './sigils';
-import { Storage } from './storage';
-import { Sneaking } from './world-6/sneaking';
+import { lavaFunc, range } from '../../utility'
+import { Account } from '../account';
+import { Alchemy } from '../alchemy';
+import { AtomCollider } from '../atomCollider';
+import { Domain, RawData } from '../base/domain';
+import { Bribe, BribeConst, BribeStatus } from '../bribes';
+import { Capacity } from '../capacity';
+import { ImageData } from '../imageData';
+import { Item } from '../items';
+import { Lab } from '../lab';
+import { BaseItemModel } from '../model/baseItemModel';
+import { StampDataModel } from '../model/stampDataModel';
+import { StampItemModel } from '../model/stampItemModel';
+import { StampUpgradeCalculator } from './stampUpgradeCalculator';
+import { Player } from '../player';
+import { Rift } from '../rift';
+import { Sigils } from '../sigils';
+import { Storage } from '../storage';
+import { Sneaking } from '../world-6/sneaking';
 
 export enum StampTab {
     Combat = 0,
@@ -66,6 +67,9 @@ export class Stamp {
     }> = {}
     maxCarryAmount: number = 0;
     maxCarryPlayer: Player | undefined;
+    
+    // Upgrade calculator for different discount scenarios
+    upgradeCalculator: StampUpgradeCalculator | undefined;
 
     constructor(name: string, raw_name: string, type: string, bonus: string, data: StampDataModel) {
         this.raw_name = raw_name;
@@ -351,26 +355,41 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         }
         else {
             stamp.maxCarryAmount = ["dStone", "dQuest"].includes((stamp.materialItem as Item).typeGen) ? 999999 : 80;
-
         }
+        
+        // Initialize the upgrade calculator
+        stamp.upgradeCalculator = new StampUpgradeCalculator(stamp);
+        
+        // For backward compatibility, still calculate these values using the old methods
         stamp.setMaxLevelForCarryCap(collider.atoms[0].level > 0);
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
+        
+        // Calculate all common upgrade scenarios
+        stamp.upgradeCalculator.calculateAllScenarios();
 
         if (stamp.level > 0 && stampMatBagType != undefined) { // if stamp is actually unlocked and material used fits the carry cap maths.
             // If max level, we need to upgrade with mats
             if (stamp.isMaxLevel()) {
-                const nextTier = stamp.maxCarryInfo[stamp.maxLevel + stamp.data.upgradeInterval];
+                const nextTierLevel = stamp.maxLevel + stamp.data.upgradeInterval;
+                const nextTierInfo = stamp.maxCarryInfo[nextTierLevel];
                 const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
-                switch (true) {
-                    case stamp.maxCarryAmount >= nextTier.costToLevel && matInStorage >= nextTier.costToLevel && nextTier.colliderDiscount == stamp.atomDiscount:
-                        stamp.canUpgradeWithMats = true;
-                        break;
-                    case stamp.maxCarryAmount < nextTier.costToLevel:
-                        stamp.cantCarry = true;
-                        break;
-                    case matInStorage < nextTier.costToLevel:
-                        stamp.lowOnResources = true;
-                        break;
+                
+                // Use the calculator to determine upgrade possibilities
+                const canUpgradeWithoutDiscounts = stamp.upgradeCalculator.canUpgradeWithoutDiscounts();
+                const canUpgradeWithGildedOnly = stamp.upgradeCalculator.canUpgradeWithGildedOnly();
+                const minAtomDiscount = stamp.upgradeCalculator.getMinimumAtomDiscount(true);
+                
+                // Set flags based on calculator results
+                if (canUpgradeWithoutDiscounts && matInStorage >= nextTierInfo.costToLevel) {
+                    stamp.canUpgradeWithMats = true;
+                } else if (canUpgradeWithGildedOnly && stamp.gildedAvailable && matInStorage >= nextTierInfo.costToLevel ) {
+                    stamp.canUpgradeWithMats = true;
+                } else if (minAtomDiscount >= 0 && minAtomDiscount <= stamp.atomDiscount && matInStorage >= nextTierInfo.costToLevel) {
+                    stamp.canUpgradeWithMats = true;
+                } else if (stamp.maxCarryAmount < nextTierInfo.costToLevel) {
+                    stamp.cantCarry = true;
+                } else if (matInStorage < nextTierInfo.costToLevel) {
+                    stamp.lowOnResources = true;
                 }
             }
             // else we need to use coins to max it out first.
@@ -382,11 +401,41 @@ export function updateStampMaxCarry(data: Map<string, any>) {
                 else {
                     stamp.lowOnResources = true;
                 }
-                
-
             }
         }
     })
 
     return stamps;
+}
+
+// Example function to demonstrate how to use the new filtering capabilities
+export function getUpgradableStampsByDiscountType(data: Map<string, any>) {
+    const stamps = data.get("stamps") as Stamp[][];
+    
+    // Make sure stamps have their upgrade calculators initialized
+    if (!stamps.flatMap(tab => tab)[0]?.upgradeCalculator) {
+        updateStampMaxCarry(data);
+    }
+    
+    // 1. All stamps that can be upgraded without atom or gilded discount
+    const noDiscountStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
+        requireNoDiscounts: true
+    });
+    
+    // 2. Stamps that can be upgraded with just gilded discount
+    const gildedOnlyStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
+        requireGildedOnly: true
+    });
+    
+    // 3. Stamps that require gilded discount AND atom discount with a selectable discount %
+    const atomWithGildedStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
+        requireAtomDiscount: 30, // Example: 30% atom discount
+        includeGildedWithAtom: true
+    });
+    
+    return {
+        noDiscountStamps,
+        gildedOnlyStamps,
+        atomWithGildedStamps,
+    };
 }

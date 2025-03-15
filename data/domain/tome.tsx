@@ -1,7 +1,7 @@
 import { Domain, RawData } from './base/domain';
 import { Item } from './items'
 import { lavaLog, nFormatter } from '../utility';
-import { Stamp } from './stamps';
+import { Stamp } from './world-1/stamps';
 import { PlayerStatues, StatusType } from './statues';
 import { Card } from './cards';
 import { Quests } from './quests';

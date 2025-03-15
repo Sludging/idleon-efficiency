@@ -6,7 +6,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { SigilModel } from "./model/sigilModel";
 import { Sailing } from "./sailing";
-import { Stamp } from "./stamps";
+import { Stamp } from "./world-1/stamps";
 import { Alchemy as AlchemyData } from '../../data/domain/alchemy';
 import { Summoning } from "./world-6/summoning";
 import { Sneaking } from "./world-6/sneaking";

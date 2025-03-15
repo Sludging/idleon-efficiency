@@ -7,7 +7,7 @@ import { initArcadeBonusRepo } from "./data/ArcadeBonusRepo";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ArcadeBonusModel } from "./model/arcadeBonusModel";
-import { Stamp, getStampBonusForKey } from "./stamps";
+import { Stamp, getStampBonusForKey } from "./world-1/stamps";
 import { TaskBoard } from "./tasks";
 
 export const ARCADE_MAX_LEVEL: number = 100

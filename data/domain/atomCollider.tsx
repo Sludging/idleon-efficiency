@@ -8,7 +8,7 @@ import { nFormatter, range } from '../utility';
 import { TaskBoard } from './tasks';
 import { Domain, RawData } from './base/domain';
 import { Item } from './items';
-import { getStampBonusForKey, Stamp } from './stamps';
+import { getStampBonusForKey, Stamp } from './world-1/stamps';
 
 export class Atom {
     level: number = 0;

@@ -109,7 +109,7 @@ import { Player } from "./player";
 import { Prayer } from "./prayers";
 import { Shrine, ShrineConstants } from "./shrines";
 import { SkillsIndex } from "./SkillsIndex";
-import { Stamp } from "./stamps";
+import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";
 
 

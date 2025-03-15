@@ -8,7 +8,7 @@ import { ComponentModel } from "./model/componentModel";
 import { ConstructionMastery, Rift } from "./rift";
 import { SaltLick } from "./saltLick";
 import { Sigils } from "./sigils";
-import { getStampBonusForKey, Stamp } from "./stamps";
+import { getStampBonusForKey, Stamp } from "./world-1/stamps";
 import { ClassIndex } from "./talents";
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
