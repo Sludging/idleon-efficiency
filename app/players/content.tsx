@@ -1065,6 +1065,8 @@ function ZowInfo({ player }: { player: Player }) {
             "Tunnels Entrance", "Trappers Folley", "Freefall Caverns", "The Ol' Straightaway", "Slip Slidy Ledges", "Echoing Egress",
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "Enclave a la Troll",
             "Magma Rivertown", "YumYum Islands", "Chizoar's Cavern", "Tunnel Closed", "KattleKruk's Volcano",
+            // The Hole (each mob from it will have this area name, and no mobs count for chow)
+            "The Hole",
             // world 6
             "Motherlode Pit", "Companion Park", "Spirit Village", "Castle Interior",
             // minigame Howl and Poppy
