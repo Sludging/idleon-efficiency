@@ -200,7 +200,10 @@ export class Stamp {
     }
 
     getBonusText = (skillLevel: number = 0): string => {
-        return this.bonus.replace(/{/, this.getBonus(skillLevel, true).toString());
+        const bonus = this.getBonus(skillLevel, true);
+        // Only show decimals if they exist
+        const formattedBonus = Number.isInteger(bonus) ? bonus.toString() : bonus.toFixed(2);
+        return this.bonus.replace(/{/, formattedBonus);
     }
 
     getBonus = (skillLevel: number = 0, round = false): number => {
@@ -365,7 +368,7 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
         
         // Calculate all common upgrade scenarios
-        stamp.upgradeCalculator.calculateAllScenarios();
+        stamp.upgradeCalculator.calculateAllScenarios(dailyAtomDiscountIncrease);
 
         if (stamp.level > 0 && stampMatBagType != undefined) { // if stamp is actually unlocked and material used fits the carry cap maths.
             // If max level, we need to upgrade with mats

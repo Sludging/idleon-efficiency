@@ -47,9 +47,17 @@ export class StampUpgradeCalculator {
     /**
      * Calculate all common upgrade scenarios at once
      */
-    calculateAllScenarios() {
-        // Common atom discount levels (0%, 30%, 60%, 90%)
-        const atomDiscounts = [0, 30, 60, 90];
+    calculateAllScenarios(discountIncrement: number) {
+        // Generate array of discounts from 0 to 90 with proper increments
+        const atomDiscounts: number[] = [];
+        for (let discount = 0; discount <= 90; discount += discountIncrement) {
+            atomDiscounts.push(discount);
+        }
+        // Ensure 90 is always included if it's not already (in case of non-divisible increments)
+        if (!atomDiscounts.includes(90)) {
+            atomDiscounts.push(90);
+        }
+
         // With and without gilded
         const gildedOptions = [false, true];
         
@@ -84,7 +92,7 @@ export class StampUpgradeCalculator {
             maxLevel -= this.stamp.data.upgradeInterval; // Adjust back to last valid level
             
             // Calculate number of tiers that can be upgraded
-            const upgradableTiers = Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval);
+            const upgradableTiers = Math.max(0, Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval));
             
             // Calculate costs
             const nextTierLevel = this.stamp.maxLevel + this.stamp.data.upgradeInterval;

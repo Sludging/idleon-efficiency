@@ -426,6 +426,7 @@ interface BestCapacityPlayer {
     maxCapacity: number
     inventorySlots: number
     player?: Player
+    bag?: Bag
 }
 
 export class Capacity extends Domain {
@@ -530,6 +531,7 @@ export function updateCapacity(data: Map<string, any>) {
                     capacity.maxCapacityByType[carryType].maxCapacity = playerBag.maxCarry;
                     capacity.maxCapacityByType[carryType].player = player;
                     capacity.maxCapacityByType[carryType].inventorySlots = currentPlayerInfo.totalInventorySlots;
+                    capacity.maxCapacityByType[carryType].bag = playerBag;
                 }
             })
         }
