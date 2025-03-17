@@ -92,7 +92,7 @@ export class StampUpgradeCalculator {
             maxLevel -= this.stamp.data.upgradeInterval; // Adjust back to last valid level
             
             // Calculate number of tiers that can be upgraded
-            const upgradableTiers = Math.max(0, Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval));
+            const upgradableTiers = Math.max(0, Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval) + 1);
             
             // Calculate costs
             const nextTierLevel = this.stamp.maxLevel + this.stamp.data.upgradeInterval;
