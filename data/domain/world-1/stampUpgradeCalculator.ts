@@ -89,13 +89,11 @@ export class StampUpgradeCalculator {
             while (this.stamp.getMaterialCost(maxLevel) <= this.stamp.maxCarryAmount && maxLevel < 9999) {
                 maxLevel += this.stamp.data.upgradeInterval;
             }
-            maxLevel -= this.stamp.data.upgradeInterval; // Adjust back to last valid level
             
             // Calculate number of tiers that can be upgraded
             const upgradableTiers = Math.max(0, Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval) + 1);
             
             // Calculate costs
-            const nextTierLevel = this.stamp.maxLevel + this.stamp.data.upgradeInterval;
             const materialCost = this.stamp.getMaterialCost(this.stamp.maxLevel); // Cost to upgrade from current max level
             
             // Calculate total gold cost to reach max level from current level

@@ -1,4 +1,15 @@
-import { Data, DataFilter, DataFilters, DataSearch, DataSummary, DataTable, Toolbar, Select, CheckBox } from "grommet";
+import {
+    Data,
+    DataFilter,
+    DataFilters, 
+    DataSearch, 
+    DataSummary, 
+    DataTable, 
+    Toolbar, 
+    Select, 
+    CheckBox, 
+    DataSort
+} from "grommet";
 
 import IconImage from "../base/IconImage";
 
@@ -16,18 +27,20 @@ import CoinsDisplay from "../coinsDisplay";
 import { Item } from "../../data/domain/items";
 import { Storage } from "../../data/domain/storage";
 import { AtomCollider } from "../../data/domain/atomCollider";
-import ItemSourcesDisplay from "../base/ItemSourceDisplay";
 
 enum StampStatus {
-    // The text is currently used for the filters
-    Unobtainable = 'Unobtainable',
-    HasSources = 'Has sources',
     NoCalculator = 'Unknown',
     NotEnoughCarryCap = 'Not enough carry cap',
     WastingDiscounts = 'Wasting discounts',
     CanUpgrade = 'Can upgrade',
     UniqueScenario = 'Unique scenario',
     CannotUpgrade = 'Cannot upgrade'
+}
+
+enum StampObtainability {
+    Acquired = 'Acquired',
+    HasSources = 'Has sources',
+    Unobtainable = 'Unobtainable'
 }
 
 interface StampTableData {
@@ -38,6 +51,7 @@ interface StampTableData {
     bonus: string;
     nextCost: string | React.ReactNode;
     status: StampStatus;
+    obtainability: StampObtainability;
     stamp: Stamp;
     upgradableTiers: number;
     minAtomDiscount: number;
@@ -152,50 +166,45 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
             property: 'status',
             header: 'Status',
             render: (data: StampTableData) => {
-                if (data.stamp.level === 0) {
-                    const stampItem = allItems.find(item => item.internalName == data.stamp.raw_name);
-                    const sources = stampItem?.sources;
-                    if (sources && sources.sources && sources.sources.length > 0) {
-                        return <Box>
-                            <ItemSourcesDisplay titleTextSize="small" sources={sources} />
-                        </Box>
-                    }
+                if (data.obtainability != StampObtainability.Acquired) {
+                    return <Text size="small" color={data.obtainability}>{data.obtainability}</Text>;
                 }
 
                 let statusText = '';
-                let statusColor = undefined;
+                let statusColor = '';
 
                 switch (data.status) {
-                    case StampStatus.Unobtainable:
-                        statusText = 'Unobtainable';
-                        break;
-                    case StampStatus.HasSources:
-                        statusText = 'Has sources';
-                        break;
                     case StampStatus.NoCalculator:
                         statusText = 'No calculator';
+                        statusColor = 'status-unknown';
                         break;
                     case StampStatus.NotEnoughCarryCap:
                         statusText = 'Not enough carry cap';
+                        statusColor = 'status-negative';
                         break;
                     case StampStatus.WastingDiscounts:
                         statusText = 'Wasting discounts';
-                        statusColor = 'accent-1';
+                        statusColor = 'status-negative';
                         break;
                     case StampStatus.CanUpgrade:
                         statusText = 'Can upgrade';
-                        statusColor = 'green-3';
+                        statusColor = 'status-positive';
                         break;
                     case StampStatus.UniqueScenario:
-                        statusText = 'Unique Scenario';
-                        statusColor = 'accent-2';
+                        statusText = 'Unique scenario';
+                        statusColor = 'status-positive';
                         break;
                     case StampStatus.CannotUpgrade:
                         statusText = 'Cannot upgrade';
+                        statusColor = 'status-negative';
                         break;
                 }
 
-                return <Text size="small" color={statusColor}>{statusText}</Text>;
+                return (
+                    <Box direction="row" gap="small">
+                        <Text size="small" color={statusColor}>{statusText}</Text>
+                    </Box>
+                );
             }
         }
     ];
@@ -203,26 +212,28 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
     const data: StampTableData[] = stamps.map(stamp => {
         const scenario = stamp.upgradeCalculator?.getScenario(selectedAtomDiscount, useGilded);
 
-        let nextCost: string | React.ReactNode = <></>;
+        let nextCost: number = 0;
         let status: StampStatus;
+        let obtainability: StampObtainability = StampObtainability.Acquired;
 
         if (stamp.level == 0) {
             const stampItem = allItems.find(item => item.internalName == stamp.raw_name);
-            status = stampItem && stampItem.sources && 
-                    stampItem.sources.sources && 
-                    stampItem.sources.sources.length > 0
-                ? StampStatus.HasSources 
-                : StampStatus.Unobtainable;
+            obtainability = stampItem && stampItem.sources &&
+                stampItem.sources.sources &&
+                stampItem.sources.sources.length > 0
+                ? StampObtainability.HasSources
+                : StampObtainability.Unobtainable;
+            status = StampStatus.NoCalculator;
         } else if (!stamp.upgradeCalculator) {
             status = StampStatus.NoCalculator;
         } else {
             const currentScenario = stamp.upgradeCalculator.getScenario(selectedAtomDiscount, useGilded);
             const canUpgradeWithCurrent = currentScenario.isAchievable;
-            
+
             if (canUpgradeWithCurrent) {
                 // Check if we have enough carry capacity for the material cost
                 const hasEnoughCarryCapacity = currentScenario.materialCost <= stamp.maxCarryAmount;
-                
+
                 if (!hasEnoughCarryCapacity) {
                     status = StampStatus.NotEnoughCarryCap;
                 } else {
@@ -230,17 +241,17 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                     const canUpgradeWithoutDiscounts = stamp.upgradeCalculator.canUpgradeWithoutDiscounts();
                     const canUpgradeWithGildedOnly = stamp.upgradeCalculator.canUpgradeWithGildedOnly();
                     const minAtomDiscount = stamp.upgradeCalculator.getMinimumAtomDiscount(true);
-                    
+
                     // If it can be upgraded without any discounts, we're wasting our current discounts
                     if (canUpgradeWithoutDiscounts) {
-                        status = useGilded || selectedAtomDiscount > 0 
-                            ? StampStatus.WastingDiscounts 
+                        status = useGilded || selectedAtomDiscount > 0
+                            ? StampStatus.WastingDiscounts
                             : StampStatus.CanUpgrade;
                     }
                     // If it can be upgraded with just gilded, and we're using atom discount too, we're wasting it
                     else if (canUpgradeWithGildedOnly) {
-                        status = useGilded && selectedAtomDiscount > 0 
-                            ? StampStatus.WastingDiscounts 
+                        status = useGilded && selectedAtomDiscount > 0
+                            ? StampStatus.WastingDiscounts
                             : StampStatus.CanUpgrade;
                     }
                     // If it can be upgraded with a lower atom discount, we're using more than needed
@@ -259,14 +270,9 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
 
         if (stamp.level > 0) {
             if (!stamp.isMaxLevel()) {
-                nextCost = nFormatter(stamp.getGoldCost());
+                nextCost = stamp.getGoldCost();
             } else if (scenario) {
-                nextCost = (
-                    <Box direction="row" gap="xsmall" align="center">
-                        <Text size="small">{nFormatter(scenario.materialCost)}</Text>
-                        <IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} />
-                    </Box>
-                );
+                nextCost = scenario.materialCost;
             }
         }
 
@@ -278,6 +284,7 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
             bonus: stamp.getBonusText(),
             nextCost,
             status,
+            obtainability,
             stamp,
             upgradableTiers: scenario?.upgradableTiers ?? 0,
             minAtomDiscount: stamp.upgradeCalculator?.getMinimumAtomDiscount(false) ?? -1,
@@ -292,13 +299,24 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                 data={data}
                 properties={{
                     type: {
-                        label: 'Type'
+                        label: 'Type',
+                        sort: false,
                     },
                     status: {
-                        label: 'Status'
+                        label: 'Status',
+                        sort: false,
                     },
                     bonus: {
                         search: true,
+                        sort: false,
+                    },
+                    name: {
+                        search: true,
+                        sort: false,
+                    },
+                    nextCost: {
+                        sort: true,
+                        label: 'Next Cost'
                     }
                 }}
             >
@@ -330,7 +348,9 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                     <DataFilters layer>
                         <DataFilter property="type" />
                         <DataFilter property="status" />
+                        <DataFilter property="obtainability"  />
                     </DataFilters>
+                    <DataSort drop />
                 </Toolbar>
                 <DataSummary />
                 <DataTable
