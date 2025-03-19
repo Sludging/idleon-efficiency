@@ -1248,7 +1248,7 @@ function PlayerTab({ player }: PlayerTabProps) {
         if (player.activeBubbles.length > 0) {
             setActiveBubbles(player.activeBubbles);
         }
-        if (player.getSubClass() != ClassIndex.Barbarian) {
+        if (player.getSubClass() != ClassIndex.Barbarian && index == 11) {
             setIndex(1);
         }
     }, [theData, player]);
