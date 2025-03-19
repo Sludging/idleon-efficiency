@@ -138,7 +138,7 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
             render: (data: StampTableData) => {
                 if (data.stamp.level == 0) return <></>;
 
-                if (data.stamp.canUpgradeWithCoins) {
+                if (!data.stamp.isMaxLevel()) {
                     return (
                         <CoinsDisplay coinMap={getCoinsArray(data.stamp.getGoldCost())} maxCoins={3} />
                     )
@@ -300,7 +300,7 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                 properties={{
                     type: {
                         label: 'Type',
-                        sort: false,
+                        sort: true,
                     },
                     status: {
                         label: 'Status',
@@ -317,6 +317,11 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                     nextCost: {
                         sort: true,
                         label: 'Next Cost'
+                    }
+                }}
+                defaultView={{
+                    properties: {
+                        obtainability: ['Acquired'],
                     }
                 }}
             >
@@ -348,7 +353,7 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                     <DataFilters layer>
                         <DataFilter property="type" />
                         <DataFilter property="status" />
-                        <DataFilter property="obtainability"  />
+                        <DataFilter property="obtainability" />
                     </DataFilters>
                     <DataSort drop />
                 </Toolbar>
