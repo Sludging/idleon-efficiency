@@ -9,7 +9,7 @@ import { initBuildingRepo } from "./data/BuildingRepo";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { ConstructionMastery, Rift } from "./rift";
-import { Stamp } from "./stamps";
+import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;

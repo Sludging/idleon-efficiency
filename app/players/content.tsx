@@ -23,7 +23,7 @@ import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
 import { Capacity, playerInventoryBagMapping } from '../../data/domain/capacity';
 import { Alchemy, Bubble, CauldronIndex } from "../../data/domain/alchemy";
-import { Stamp } from '../../data/domain/stamps';
+import { Stamp } from '../../data/domain/world-1/stamps';
 import { Shrine } from '../../data/domain/shrines';
 import { PlayerStatues } from '../../data/domain/statues';
 
@@ -1248,7 +1248,7 @@ function PlayerTab({ player }: PlayerTabProps) {
         if (player.activeBubbles.length > 0) {
             setActiveBubbles(player.activeBubbles);
         }
-        if (player.getSubClass() != ClassIndex.Barbarian) {
+        if (player.getSubClass() != ClassIndex.Barbarian && index == 11) {
             setIndex(1);
         }
     }, [theData, player]);

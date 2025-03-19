@@ -12,14 +12,13 @@ import {
     TableBody,
     TableRow,
     CheckBox,
-    ThemeContext
+    ThemeContext,
 } from "grommet"
 
-import { Stamp } from '../../../data/domain/stamps';
+import { Stamp } from '../../../data/domain/world-1/stamps';
 import { useState, useContext } from 'react';
 import { getCoinsArray, nFormatter } from '../../../data/utility'
 import CoinsDisplay from "../../../components/coinsDisplay";
-import styled from 'styled-components'
 import { Item } from "../../../data/domain/items";
 import ItemSourcesDisplay from "../../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
@@ -27,11 +26,43 @@ import IconImage from "../../../components/base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
 import { AtomCollider } from "../../../data/domain/atomCollider";
 import { Storage } from "../../../data/domain/storage";
-import { CircleInformation } from "grommet-icons";
+import { CircleInformation, List, Grid as GridIcon } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import ShadowBox, { HoverBox } from "../../../components/base/ShadowBox";
+import StampsTableView from "../../../components/world-1/stampTableView";
+import { Capacity } from "../../../data/domain/capacity";
+
+function CarryCapacitySummary() {
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData() })
+    ));
+
+    const capacity = theData.get("capacity") as Capacity;
+
+    return (
+        <ShadowBox background="dark-1" pad="medium" margin={{ bottom: 'medium' }}>
+            <Box gap="small">
+                <Text size="small" weight="bold">Carry Capacity Leaders</Text>
+                <Grid columns={{ count: 'fit', size: 'small' }} gap="medium">
+                    {Object.entries(capacity.maxCapacityByType).map(([type, info]) => (
+                        <Box key={type} direction="row" gap="small" align="center">
+                            {
+                                info.bag &&
+                                <Box title={info.bag?.name == "bCraft" ? "Materials" : info.bag?.name}>
+                                    <IconImage data={info.bag?.getImageData()} scale={0.7} key={info.bag?.name} />
+                                </Box>
+                            }
+                            <Text size="xsmall">{info.player?.playerName ?? "N/A"}</Text>
+                            <Text size="xsmall">({nFormatter(info.maxCapacity * info.inventorySlots)})</Text>
+                        </Box>
+                    ))}
+                </Grid>
+            </Box>
+        </ShadowBox>
+    );
+}
 
 function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: Stamp, index: number, highlight: boolean, storageAmount?: number }) {
     const size = useContext(ResponsiveContext)
@@ -185,7 +216,7 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
 }
 
 function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, highlight: boolean }) {
-    
+
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -218,7 +249,8 @@ function StampTab({ tab, index, highlight }: { tab: Stamp[], index: number, high
 
 function Stamps() {
     const theme = useContext(ThemeContext);
-    const [highlight, sethighlight] = useState(false);
+    const [highlight, setHighlight] = useState(false);
+    const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -233,43 +265,77 @@ function Stamps() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Stamps</Heading>
-            <Box direction="row" gap="medium">
-                <TextAndLabel label="Total Levels" text={totalLevels.toString()} margin={{ bottom: 'small' }} />
-                {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} margin={{ bottom: 'small' }} />}
-                {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} margin={{ bottom: 'small' }} />}
-                <Box direction="row" align="center" style={{ justifyContent: "left" }} gap="xsmall">
-                    <CheckBox
-                        checked={highlight}
-                        label="Highlight Stamps"
-                        onChange={(event) => sethighlight(event.target.checked)}
-                    />
-                    <TipDisplay
-                        heading="Highlight Stamps"
-                        body={
-                            <Box gap="xsmall">
-                                <Text size="small">Enable this check to highlight stamps based on certain conditions:</Text>
-                                <Text><span style={{ color: normalizeColor("stamp-positive-1", theme) }}>⬤</span> Can be upgraded with materials.</Text>
-                                <Text><span style={{ color: normalizeColor("stamp-positive-2", theme) }}>⬤</span> Can be upgraded with coins.</Text>
-                                <Text><span style={{ color: normalizeColor("stamp-negative-1", theme) }}>⬤</span> Missing materials or money.</Text>
-                                <Text><span style={{ color: normalizeColor("stamp-negative-2", theme) }}>⬤</span> Not enough carry cap.</Text>
-                            </Box>
-                        }
-                    >
-                        <CircleInformation color='accent-3' size="16px" />
-                    </TipDisplay>
+            <Box direction="row" margin={{ bottom: 'medium' }} justify="between" fill>
+                <Box direction="row" align="center" gap="medium">
+                    <Box direction="row" gap="medium">
+                        <TextAndLabel label="Total Levels" text={totalLevels.toString()} />
+                        {hydrogen && hydrogen.level > 0 && <TextAndLabel label="Atom Discount" text={`${stampData[0][0].atomDiscount}% (+${hydrogen.level * hydrogen.data.bonusPerLv}%/day)`} />}
+                        {stampData[0][0].gildedAvailable && <TextAndLabel label="Gilded Stamps" text={`${gildedCount}`} />}
+                    </Box>
+                    <Box direction="row" gap="medium">
+                        <Box direction="row" align="center" gap="xsmall">
+                            <CheckBox
+                                checked={highlight}
+                                label="Highlight Stamps"
+                                onChange={(event) => setHighlight(event.target.checked)}
+                            />
+                            <TipDisplay
+                                heading="Highlight Stamps"
+                                body={
+                                    <Box gap="xsmall">
+                                        <Text size="small">Enable this check to highlight stamps based on certain conditions:</Text>
+                                        <Text><span style={{ color: normalizeColor("stamp-positive-1", theme) }}>⬤</span> Can be upgraded with materials.</Text>
+                                        <Text><span style={{ color: normalizeColor("stamp-positive-2", theme) }}>⬤</span> Can be upgraded with coins.</Text>
+                                        <Text><span style={{ color: normalizeColor("stamp-negative-1", theme) }}>⬤</span> Missing materials or money.</Text>
+                                        <Text><span style={{ color: normalizeColor("stamp-negative-2", theme) }}>⬤</span> Not enough carry cap.</Text>
+                                    </Box>
+                                }
+                            >
+                                <CircleInformation color='accent-3' size="16px" />
+                            </TipDisplay>
+                        </Box>
+                    </Box>
+                </Box>
+                <Box direction="row" align="center" gap="small">
+                    <Text size="small">View:</Text>
+                    <Box direction="row" align="center" background="dark-2" round="small" pad="xsmall" gap="xsmall">
+                        <Box
+                            pad="xsmall"
+                            round="xsmall"
+                            background={viewMode === 'grid' ? 'brand' : 'transparent'}
+                            onClick={() => setViewMode('grid')}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <GridIcon size="small" />
+                        </Box>
+                        <Box
+                            pad="xsmall"
+                            round="xsmall"
+                            background={viewMode === 'table' ? 'brand' : 'transparent'}
+                            onClick={() => setViewMode('table')}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <List size="small" />
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
-            <ShadowBox flex={false} background="dark-1" pad="small">
-                <Grid columns={{ size: '300px' }} gap="none">
-                    {
-                        stampData && stampData.map((tab, index) => {
-                            return (<StampTab key={`tab_${index}`} tab={tab} index={index} highlight={highlight} />)
-                        })
-                    }
-                </Grid>
-            </ShadowBox>
-        </Box >
-    )
+            <CarryCapacitySummary />
+            {viewMode === 'grid' ? (
+                <ShadowBox flex={false} background="dark-1" pad="small">
+                    <Grid columns={{ size: '300px' }} gap="none">
+                        {
+                            stampData && stampData.map((tab, index) => {
+                                return (<StampTab key={`tab_${index}`} tab={tab} index={index} highlight={highlight} />)
+                            })
+                        }
+                    </Grid>
+                </ShadowBox>
+            ) : (
+                <StampsTableView stamps={stampData.flat()} />
+            )}
+        </Box>
+    );
 }
 
 export default Stamps;

@@ -11,7 +11,7 @@ import { nFormatter, toTime } from '../../utility';
 import { GemStore } from '../gemPurchases';
 import { Lab } from '../lab';
 import { Summoning } from './summoning';
-import { Stamp } from '../stamps';
+import { Stamp } from '../world-1/stamps';
 import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
 import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";

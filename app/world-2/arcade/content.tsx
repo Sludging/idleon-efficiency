@@ -9,7 +9,7 @@ import { useEffect, useState, useMemo } from 'react';
 import ShadowBox from '../../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Arcade as ArcadeData } from '../../../data/domain/arcade';
-import { Stamp } from '../../../data/domain/stamps';
+import { Stamp } from '../../../data/domain/world-1/stamps';
 import { StaticTime, TimeDisplaySize } from '../../../components/base/TimeDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';

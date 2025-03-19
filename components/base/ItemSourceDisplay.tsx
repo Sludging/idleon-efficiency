@@ -2,7 +2,7 @@ import { Text, Box } from "grommet";
 import { useMemo } from "react";
 import { SourcesModel } from "../../data/domain/model/sourcesModel";
 
-export default function ItemSourcesDisplay({ sources }: { sources: SourcesModel}) {
+export default function ItemSourcesDisplay({ sources, titleTextSize = "small" }: { sources: SourcesModel, titleTextSize?: "medium" | "small"}) {
 
     const possibleSources = useMemo(() => { 
         if (!sources) {
@@ -18,14 +18,14 @@ export default function ItemSourcesDisplay({ sources }: { sources: SourcesModel}
 
     return (
         <Box>
-            <Text size="medium">Obtain From:</Text>
+            <Text size={titleTextSize}>Obtain From:</Text>
             {
                 possibleSources.length > 0 ? 
                 <Box>
                     
                     {
                         possibleSources.map((source, index) => (
-                            <Text size="small" key={index}>{source}</Text>
+                            <Text size="xsmall" key={index}>{source}</Text>
                         ))
                     }
                 </Box> :

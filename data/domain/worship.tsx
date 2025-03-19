@@ -9,7 +9,7 @@ import { MapInfo } from "./maps";
 import { SkullItemModel } from "./model/skullItemModel";
 import { Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
-import { Stamp, StampConsts, StampTab } from "./stamps";
+import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { ClassIndex, TalentConst } from "./talents";
 import { Sneaking } from "./world-6/sneaking";
 

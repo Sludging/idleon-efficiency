@@ -182,4 +182,13 @@ export class UpgradeVault extends Domain {
             bonus.costToMax = bonus.getCostToMax(upgradeVault.bonuses);
         });
     }
+
+    getBonusForId = (id: number): number => {
+        const upgrade = this.bonuses.find(bonus => bonus.id === id);
+        if (!upgrade) {
+            return 0;
+        }
+
+        return upgrade.getBonus(this.bonuses);
+    }
 } 
