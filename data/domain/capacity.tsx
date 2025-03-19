@@ -111,6 +111,7 @@ import { Shrine, ShrineConstants } from "./shrines";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";
+import { UpgradeVault } from "./upgradeVault";
 
 
 export const playerInventoryBagMapping = [
@@ -313,7 +314,8 @@ interface CapacityProps {
     gemsCapacityBought: number,
     stampAllCapBonus: number,
     extraBagsLevel: number,
-    starSignExtraCap: number
+    starSignExtraCap: number,
+    vaultBonus: number
 }
 
 interface CarryData {
@@ -394,17 +396,17 @@ class Bag {
 
     setCapacity = (props: CapacityProps) => {
         if (this.name == "bCraft") {
-            this.maxCarry = this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap);
+            this.maxCarry = this.getMaterialCapacity(props.allCapBonuses, props.stampMatCapBonus, props.gemsCapacityBought, props.stampAllCapBonus, props.extraBagsLevel, props.starSignExtraCap, props.vaultBonus);
         }
         else if (this.skill != undefined || this.name == "Foods") {
-            this.maxCarry = this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap)
+            this.maxCarry = this.getSkillCapacity(props.allCapBonuses, props.gemsCapacityBought, props.stampMatCapBonus, props.stampAllCapBonus, props.starSignExtraCap, props.vaultBonus)
         }
     }
 
 
-    private getSkillCapacity = (allCapBonuses: number, gemCarryCap: number, skillCapstamp: number, allCapStamp: number, starSign: number) => {
+    private getSkillCapacity = (allCapBonuses: number, gemCarryCap: number, skillCapstamp: number, allCapStamp: number, starSign: number, vaultBonus: number) => {
         return Math.floor(
-            this.capacity *
+            (this.capacity + vaultBonus) *
             (1 + (25 * gemCarryCap) / 100) *
             (1 + skillCapstamp / 100) *
             (1 + (allCapStamp + starSign) / 100) *
@@ -412,12 +414,12 @@ class Bag {
         );
     }
 
-    private getMaterialCapacity = (allCapBonuses: number, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number) => {
+    private getMaterialCapacity = (allCapBonuses: number, stampMatCapBonus: number, gemsCapacityBought: number, stampAllCapBonus: number, extraBagsLevel: number, starSignExtraCap: number, vaultBonus: number) => {
         const stampMatCapMath = (1 + stampMatCapBonus / 100);
         const gemPurchaseMath = (1 + (25 * gemsCapacityBought) / 100);
         const additionalCapMath = (1 + (stampAllCapBonus + starSignExtraCap) / 100);
         const talentBonusMath = (1 + extraBagsLevel / 100);
-        const bCraftCap = this.capacity;
+        const bCraftCap = (this.capacity + vaultBonus);
         return Math.floor(bCraftCap * stampMatCapMath * gemPurchaseMath * additionalCapMath * talentBonusMath * allCapBonuses);
     }
 }
@@ -475,6 +477,7 @@ export function updateCapacity(data: Map<string, any>) {
     const stamps = (data.get("stamps") as Stamp[][]).flatMap(tab => tab);
     const prayers = data.get("prayers") as Prayer[];
     const gemStore = data.get("gems") as GemStore;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
 
     // Inventory slots
     const storage = data.get("storage") as Storage;
@@ -485,6 +488,7 @@ export function updateCapacity(data: Map<string, any>) {
     const ruckSackPrayer = prayers[12];
     const allCapStampBonus = stamps.find((stamp) => stamp.raw_name == CapacityConst.AllCarryStamp)?.getBonus() ?? 0;
     const gemCapacityBonus = gemStore.purchases[58].pucrhased;
+    const vaultBonus = upgradeVault.getBonusForId(17);
 
     players.forEach(player => {
         // All Cap Math
@@ -523,7 +527,8 @@ export function updateCapacity(data: Map<string, any>) {
                     gemsCapacityBought: gemCapacityBonus,
                     stampAllCapBonus: allCapStampBonus,
                     extraBagsLevel: extraBagsTalentBonus,
-                    starSignExtraCap: starSignExtraCap
+                    starSignExtraCap: starSignExtraCap,
+                    vaultBonus: vaultBonus
                 })
 
                 // Keep track of highest carry cap player per type.
