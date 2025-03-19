@@ -7,6 +7,16 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.30",
+    title: "Stamp Grid and Filters",
+    date: "March 19, 2025",
+    changes: [
+      "Added stamp grid and filters to the stamp page.",
+      "Fixed bug with carry capacity math.",
+      "Fixed bug with navigation between players resetting the current sub-tab."
+    ]
+  },
+  {
     version: "1.2.29",
     title: "Steam Login",
     date: "March 13, 2025",
