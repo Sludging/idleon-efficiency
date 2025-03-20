@@ -27,9 +27,9 @@ export interface StampUpgradeScenario {
 export class StampUpgradeCalculator {
     // Cache of calculated scenarios
     private scenarios: Map<string, StampUpgradeScenario> = new Map();
-    
-    constructor(private stamp: Stamp) {}
-    
+
+    constructor(private stamp: Stamp) { }
+
     /**
      * Get a specific upgrade scenario for given discount settings
      * @param atomDiscount The atom discount percentage (0-90)
@@ -43,31 +43,37 @@ export class StampUpgradeCalculator {
         }
         return this.scenarios.get(key)!;
     }
-    
+
     /**
      * Calculate all common upgrade scenarios at once
      */
-    calculateAllScenarios(discountIncrement: number) {
+    calculateAllScenarios(discountIncrement: number, gildedAvailable: boolean) {
         // Generate array of discounts from 0 to 90 with proper increments
         const atomDiscounts: number[] = [];
-        for (let discount = 0; discount <= 90; discount += discountIncrement) {
-            atomDiscounts.push(discount);
-        }
-        // Ensure 90 is always included if it's not already (in case of non-divisible increments)
-        if (!atomDiscounts.includes(90)) {
-            atomDiscounts.push(90);
+        // Only calculate scenarios if there is an atom discount increment,
+        // otherwise we'll end up in an infinite loop.
+        if (discountIncrement > 0) {
+            for (let discount = 0; discount <= 90; discount += discountIncrement) {
+                atomDiscounts.push(discount);
+            }
+            // Ensure 90 is always included if it's not already (in case of non-divisible increments)
+            if (!atomDiscounts.includes(90)) {
+                atomDiscounts.push(90);
+            }
+        } else {
+            atomDiscounts.push(0);
         }
 
         // With and without gilded
-        const gildedOptions = [false, true];
-        
+        const gildedOptions = gildedAvailable ? [false, true] : [false];
+
         for (const atomDiscount of atomDiscounts) {
             for (const gildedOption of gildedOptions) {
                 this.getScenario(atomDiscount, gildedOption);
             }
         }
     }
-    
+
     /**
      * Calculate a specific upgrade scenario
      * @private
@@ -77,30 +83,30 @@ export class StampUpgradeCalculator {
         const originalAtomDiscount = this.stamp.atomDiscount;
         const originalGildedAvailable = this.stamp.gildedAvailable;
         const originalGildedCount = this.stamp.gildedCount;
-        
+
         try {
             // Apply specified discounts
             this.stamp.atomDiscount = atomDiscount;
             this.stamp.gildedAvailable = gildedDiscount;
             this.stamp.gildedCount = gildedDiscount ? 1 : 0;
-            
+
             // Calculate maximum level achievable
             let maxLevel = this.stamp.maxLevel;
             while (this.stamp.getMaterialCost(maxLevel) <= this.stamp.maxCarryAmount && maxLevel < 9999) {
                 maxLevel += this.stamp.data.upgradeInterval;
             }
-            
+
             // Calculate number of tiers that can be upgraded
             const upgradableTiers = Math.max(0, Math.floor((maxLevel - this.stamp.maxLevel) / this.stamp.data.upgradeInterval) + 1);
-            
+
             // Calculate costs
             const materialCost = this.stamp.getMaterialCost(this.stamp.maxLevel); // Cost to upgrade from current max level
-            
+
             // Calculate total gold cost to reach max level from current level
             const goldCost = range(this.stamp.level, this.stamp.maxLevel).reduce(
                 (sum, level) => sum + this.stamp.getGoldCost(level), 0
             );
-            
+
             return {
                 atomDiscount,
                 gildedDiscount,
@@ -117,21 +123,21 @@ export class StampUpgradeCalculator {
             this.stamp.gildedCount = originalGildedCount;
         }
     }
-    
+
     /**
      * Check if the stamp can be upgraded without any discounts
      */
     canUpgradeWithoutDiscounts(): boolean {
         return this.getScenario(0, false).isAchievable;
     }
-    
+
     /**
      * Check if the stamp can be upgraded with gilded discount only
      */
     canUpgradeWithGildedOnly(): boolean {
         return !this.canUpgradeWithoutDiscounts() && this.getScenario(0, true).isAchievable;
     }
-    
+
     /**
      * Find the minimum atom discount needed to upgrade this stamp
      * @param withGilded Whether to include gilded discount in the calculation
@@ -142,7 +148,7 @@ export class StampUpgradeCalculator {
         let low = 0;
         let high = 90;
         let result = -1;
-        
+
         while (low <= high) {
             const mid = Math.floor((low + high) / 2);
             if (this.getScenario(mid, withGilded).isAchievable) {
@@ -152,10 +158,10 @@ export class StampUpgradeCalculator {
                 low = mid + 1; // Need higher discount
             }
         }
-        
+
         return result;
     }
-    
+
     /**
      * Get the maximum level achievable with current carrying capacity
      * @param atomDiscount The atom discount percentage to apply
@@ -164,7 +170,7 @@ export class StampUpgradeCalculator {
     getMaxAchievableLevel(atomDiscount: number, withGilded: boolean): number {
         return this.getScenario(atomDiscount, withGilded).maxUpgradeLevel;
     }
-    
+
     /**
      * Get the number of tiers that can be upgraded with specific discounts
      * @param atomDiscount The atom discount percentage to apply
@@ -174,7 +180,7 @@ export class StampUpgradeCalculator {
     getUpgradableTiers(atomDiscount: number, withGilded: boolean): number {
         return this.getScenario(atomDiscount, withGilded).upgradableTiers;
     }
-    
+
     /**
      * Check if the stamp can be upgraded to a specific level with given discounts
      * @param targetLevel The level to check
@@ -185,7 +191,7 @@ export class StampUpgradeCalculator {
         const scenario = this.getScenario(atomDiscount, withGilded);
         return scenario.isAchievable && scenario.maxUpgradeLevel >= targetLevel;
     }
-    
+
     /**
      * Filter stamps based on upgrade possibilities with specific discount settings
      * @param stamps All stamps to filter
@@ -193,7 +199,7 @@ export class StampUpgradeCalculator {
      * @returns Filtered stamps
      */
     static filterUpgradableStamps(
-        stamps: Stamp[][], 
+        stamps: Stamp[][],
         options: {
             requireNoDiscounts?: boolean,
             requireGildedOnly?: boolean,
@@ -202,38 +208,38 @@ export class StampUpgradeCalculator {
         }
     ): Stamp[] {
         const allStamps = stamps.flatMap(tab => tab);
-        
+
         return allStamps.filter(stamp => {
             // Skip stamps without an upgrade calculator
             if (!stamp.upgradeCalculator) return false;
-            
+
             // Filter for stamps that can be upgraded without any discounts
             if (options.requireNoDiscounts) {
                 return stamp.upgradeCalculator.canUpgradeWithoutDiscounts();
             }
-            
+
             // Filter for stamps that can be upgraded with gilded discount only
             if (options.requireGildedOnly) {
                 return stamp.upgradeCalculator.canUpgradeWithGildedOnly();
             }
-            
+
             // Filter for stamps that require atom discount (with or without gilded)
             if (options.requireAtomDiscount !== undefined) {
                 const withGilded = options.includeGildedWithAtom ?? false;
-                
+
                 // If we're looking for stamps that need exactly this discount
                 const minDiscount = stamp.upgradeCalculator.getMinimumAtomDiscount(withGilded);
-                
+
                 // Skip stamps that can be upgraded without atom discount
                 if (stamp.upgradeCalculator.canUpgradeWithoutDiscounts()) return false;
-                
+
                 // Skip stamps that can be upgraded with gilded only (if we're not including gilded)
                 if (!withGilded && stamp.upgradeCalculator.canUpgradeWithGildedOnly()) return false;
-                
+
                 // Check if this stamp requires at most the specified atom discount
                 return minDiscount >= 0 && minDiscount <= options.requireAtomDiscount;
             }
-            
+
             return false;
         });
     }

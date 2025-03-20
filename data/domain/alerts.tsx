@@ -480,13 +480,15 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     }
     
     // Can buy a familiar for Summoning (in case cost reset for example)
-    const familiarUpgrade = summoning.summonUpgrades.find(bonus => bonus.index == 2)!;
-    const familiarUpgradeUnlocked = familiarUpgrade.unlocked;
-    const canBuyFamiliar = familiarUpgrade.nextLevelCost() < (summoning.summonEssences.find(essence => essence.color == SummonEssenceColor.White)?.quantity ?? 0);
-    const maxedFamiliarUpgrade = familiarUpgrade.level == familiarUpgrade.data.maxLvl;
-    // If the upgrade is unlocked, can afford a level, and not already maxed, display the alert
-    if (familiarUpgradeUnlocked && canBuyFamiliar && !maxedFamiliarUpgrade) {
-        globalAlerts.push(new CanBuySummoningFamiliar());
+    const familiarUpgrade = summoning.summonUpgrades.find(bonus => bonus.index == 2);
+    if (familiarUpgrade) {
+        const familiarUpgradeUnlocked = familiarUpgrade.unlocked;
+        const canBuyFamiliar = familiarUpgrade.nextLevelCost() < (summoning.summonEssences.find(essence => essence.color == SummonEssenceColor.White)?.quantity ?? 0);
+        const maxedFamiliarUpgrade = familiarUpgrade.level == familiarUpgrade.data.maxLvl;
+        // If the upgrade is unlocked, can afford a level, and not already maxed, display the alert
+        if (familiarUpgradeUnlocked && canBuyFamiliar && !maxedFamiliarUpgrade) {
+            globalAlerts.push(new CanBuySummoningFamiliar());
+        }
     }
 
     return globalAlerts;

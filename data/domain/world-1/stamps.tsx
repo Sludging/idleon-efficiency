@@ -368,7 +368,7 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
         
         // Calculate all common upgrade scenarios
-        stamp.upgradeCalculator.calculateAllScenarios(dailyAtomDiscountIncrease);
+        stamp.upgradeCalculator.calculateAllScenarios(dailyAtomDiscountIncrease, stamp.gildedAvailable ?? false);
 
         if (stamp.level > 0 && stampMatBagType != undefined) { // if stamp is actually unlocked and material used fits the carry cap maths.
             // If max level, we need to upgrade with mats
