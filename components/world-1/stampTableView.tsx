@@ -1,13 +1,13 @@
 import {
     Data,
     DataFilter,
-    DataFilters, 
-    DataSearch, 
-    DataSummary, 
-    DataTable, 
-    Toolbar, 
-    Select, 
-    CheckBox, 
+    DataFilters,
+    DataSearch,
+    DataSummary,
+    DataTable,
+    Toolbar,
+    Select,
+    CheckBox,
     DataSort
 } from "grommet";
 
@@ -68,19 +68,23 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
     const collider = theData.get("collider") as AtomCollider;
     const allItems = theData.get("itemsData") as Item[];
 
+    const gildedUnlocked = stamps[0]?.gildedAvailable ?? false;
     // Initialize state with current values from the first stamp
     const [selectedAtomDiscount, setSelectedAtomDiscount] = useState<number>(collider.atoms[0].getBonus());
-    const [useGilded, setUseGilded] = useState<boolean>(stamps[0]?.gildedAvailable && stamps[0]?.gildedCount > 0);
+    const [useGilded, setUseGilded] = useState<boolean>(gildedUnlocked && stamps[0]?.gildedCount > 0);
 
     // Generate atom discount options
     const discountIncrement = collider.atoms[0].level * collider.atoms[0].data.bonusPerLv;
     const atomDiscountOptions: number[] = [];
-    for (let discount = 0; discount <= 90; discount += discountIncrement) {
-        atomDiscountOptions.push(discount);
-    }
-    // Ensure 90 is always included if it's not already (in case of non-divisible increments)
-    if (!atomDiscountOptions.includes(90)) {
-        atomDiscountOptions.push(90);
+    // We only have options if increment > 0, i.e. hydrogen is unlocked.
+    if (discountIncrement > 0) {
+        for (let discount = 0; discount <= 90; discount += discountIncrement) {
+            atomDiscountOptions.push(discount);
+        }
+        // Ensure 90 is always included if it's not already (in case of non-divisible increments)
+        if (!atomDiscountOptions.includes(90)) {
+            atomDiscountOptions.push(90);
+        }
     }
 
     const columns = [
@@ -328,27 +332,31 @@ function StampsTableView({ stamps }: { stamps: Stamp[] }) {
                 <Toolbar>
                     <DataSearch responsive />
                     <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center">
-                        <Box direction="row" gap="small" align="center">
-                            <Text size="small">Atom Discount:</Text>
-                            <Select
-                                options={atomDiscountOptions.map(value => ({
-                                    label: `${value}%`,
-                                    value: value
-                                }))}
-                                labelKey="label"
-                                valueKey={{ key: "value", reduce: true }}
-                                value={selectedAtomDiscount}
-                                onChange={({ value }) => setSelectedAtomDiscount(value)}
-                                inert={false}
-                            />
-                        </Box>
-                        <Box direction="row" gap="small" align="center">
-                            <CheckBox
-                                checked={useGilded}
+                        {atomDiscountOptions.length > 0 &&
+                            <Box direction="row" gap="small" align="center">
+                                <Text size="small">Atom Discount:</Text>
+                                <Select
+                                    options={atomDiscountOptions.map(value => ({
+                                        label: `${value}%`,
+                                        value: value
+                                    }))}
+                                    labelKey="label"
+                                    valueKey={{ key: "value", reduce: true }}
+                                    value={selectedAtomDiscount}
+                                    onChange={({ value }) => setSelectedAtomDiscount(value)}
+                                    inert={false}
+                                />
+                            </Box>
+                        }
+                        {gildedUnlocked &&
+                            <Box direction="row" gap="small" align="center">
+                                <CheckBox
+                                    checked={useGilded}
                                 label={<Text size="small">Use Gilded</Text>}
                                 onChange={(event) => setUseGilded(event.target.checked)}
-                            />
-                        </Box>
+                                />
+                            </Box>
+                        }
                     </Box>
                     <DataFilters layer>
                         <DataFilter property="type" />
