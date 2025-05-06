@@ -88,13 +88,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats17", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -219,24 +213,12 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats18", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("EquipmentShirts12", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -764,13 +746,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats28", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -780,13 +756,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentPants4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -964,13 +934,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentPants5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -3553,109 +3517,14 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Royal Egg]]", "txtName": "Royal Egg"},
                     <SourceModel>{"wikiName": "[[Minichief Spirit]]", "txtName": "Minichief Spirit"},
                     <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"},
+                    <SourceModel>{"wikiName": "[[Spirit Reindeer]]", "txtName": "Spirit Reindeer"},
                     <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
                     <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
                     <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
                     <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
                     <SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"},
-                    <SourceModel>{"wikiName": "[[Guardian Golem]]", "txtName": "Guardian Golem"},
-                    <SourceModel>{"wikiName": "[[Curious Crystal Slime]]", "txtName": "Curious Crystal Slime"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Legendary Chest|Dewdrop Legendary Chest]]",
-                        "txtName": "Colosseum: Dewdrop Legendary Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Legendary Chest|Sandstone Legendary Chest]]",
-                        "txtName": "Colosseum: Sandstone Legendary Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Legendary Chest|Chillsnap Legendary Chest]]",
-                        "txtName": "Colosseum: Chillsnap Legendary Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Legendary Chest|Astro Legendary Chest]]",
-                        "txtName": "Colosseum: Astro Legendary Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Legendary Chest|Molten Legendary Chest]]",
-                        "txtName": "Colosseum: Molten Legendary Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Legendary Chest|Whimsical Legendary Chest]]",
-                        "txtName": "Colosseum: Whimsical Legendary Chest"
-                    },
+                    <SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"},
+                    <SourceModel>{"wikiName": "[[Shimmer Glunko]]", "txtName": "Shimmer Glunko"},
                     <SourceModel>{"wikiName": "[[Ghost (Event)]]", "txtName": "Ghost (Event)"},
                     <SourceModel>{"wikiName": "[[Giftmas Blobulyte]]", "txtName": "Giftmas Blobulyte"},
                     <SourceModel>{"wikiName": "[[Valentslime]]", "txtName": "Valentslime"},
@@ -3670,6 +3539,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
+                    <SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"},
                     <SourceModel>{"wikiName": "[[Copper]]", "txtName": "Copper"},
                     <SourceModel>{"wikiName": "[[Iron]]", "txtName": "Iron"},
                     <SourceModel>{"wikiName": "[[Gold]]", "txtName": "Gold"},
@@ -3937,11 +3807,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bored Bean]]", "txtName": "Bored Bean"},
                     <SourceModel>{"wikiName": "[[Baba Yaga]]", "txtName": "Baba Yaga"},
                     <SourceModel>{"wikiName": "[[Amarok]]", "txtName": "Amarok"},
-                    <SourceModel>{"wikiName": "[[Chaotic Amarok]]", "txtName": "Chaotic Amarok"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chaotic Amarok]]", "txtName": "Chaotic Amarok"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -3954,11 +3820,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Carrotman]]", "txtName": "Carrotman"},
                     <SourceModel>{"wikiName": "[[Baba Yaga]]", "txtName": "Baba Yaga"},
                     <SourceModel>{"wikiName": "[[Amarok]]", "txtName": "Amarok"},
-                    <SourceModel>{"wikiName": "[[Chaotic Amarok]]", "txtName": "Chaotic Amarok"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chaotic Amarok]]", "txtName": "Chaotic Amarok"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -3974,11 +3836,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Glunko The Massive]]", "txtName": "Glunko The Massive"},
                     <SourceModel>{"wikiName": "[[Amarok]]", "txtName": "Amarok"},
                     <SourceModel>{"wikiName": "[[Chaotic Amarok]]", "txtName": "Chaotic Amarok"},
-                    <SourceModel>{"wikiName": "[[Radiant Amarok]]", "txtName": "Radiant Amarok"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Radiant Amarok]]", "txtName": "Radiant Amarok"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4040,11 +3898,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Mimic]]", "txtName": "Mimic"},
                     <SourceModel>{"wikiName": "[[Crabcake]]", "txtName": "Crabcake"},
                     <SourceModel>{"wikiName": "[[Biggie Hours]]", "txtName": "Biggie Hours"},
-                    <SourceModel>{"wikiName": "[[Efaunt]]", "txtName": "Efaunt"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Efaunt]]", "txtName": "Efaunt"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4058,11 +3912,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Pincermin]]", "txtName": "Pincermin"},
                     <SourceModel>{"wikiName": "[[Mashed Potato]]", "txtName": "Mashed Potato"},
                     <SourceModel>{"wikiName": "[[Efaunt]]", "txtName": "Efaunt"},
-                    <SourceModel>{"wikiName": "[[Chaotic Efaunt]]", "txtName": "Chaotic Efaunt"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chaotic Efaunt]]", "txtName": "Chaotic Efaunt"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4076,11 +3926,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Snelbie]]", "txtName": "Snelbie"},
                     <SourceModel>{"wikiName": "[[Efaunt]]", "txtName": "Efaunt"},
                     <SourceModel>{"wikiName": "[[Chaotic Efaunt]]", "txtName": "Chaotic Efaunt"},
-                    <SourceModel>{"wikiName": "[[Gilded Efaunt]]", "txtName": "Gilded Efaunt"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Gilded Efaunt]]", "txtName": "Gilded Efaunt"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4130,11 +3976,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Frost Flake]]", "txtName": "Frost Flake"},
                     <SourceModel>{"wikiName": "[[Sir Stache]]", "txtName": "Sir Stache"},
                     <SourceModel>{"wikiName": "[[Xylobone]]", "txtName": "Xylobone"},
-                    <SourceModel>{"wikiName": "[[Chizoar]]", "txtName": "Chizoar"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chizoar]]", "txtName": "Chizoar"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4148,11 +3990,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Penguin]]", "txtName": "Penguin"},
                     <SourceModel>{"wikiName": "[[Thermister]]", "txtName": "Thermister"},
                     <SourceModel>{"wikiName": "[[Chizoar]]", "txtName": "Chizoar"},
-                    <SourceModel>{"wikiName": "[[Chaotic Chizoar]]", "txtName": "Chaotic Chizoar"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chaotic Chizoar]]", "txtName": "Chaotic Chizoar"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4168,11 +4006,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bloodbone]]", "txtName": "Bloodbone"},
                     <SourceModel>{"wikiName": "[[Chizoar]]", "txtName": "Chizoar"},
                     <SourceModel>{"wikiName": "[[Chaotic Chizoar]]", "txtName": "Chaotic Chizoar"},
-                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Blighted Chizoar]]", "txtName": "Blighted Chizoar"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4209,11 +4043,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Purp Mushroom]]", "txtName": "Purp Mushroom"},
                     <SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"},
                     <SourceModel>{"wikiName": "[[Donut]]", "txtName": "Donut"},
-                    <SourceModel>{"wikiName": "[[Demon Genie]]", "txtName": "Demon Genie"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Demon Genie]]", "txtName": "Demon Genie"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4228,11 +4058,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Flying Worm]]", "txtName": "Flying Worm"},
                     <SourceModel>{"wikiName": "[[Gelatinous Cuboid]]", "txtName": "Gelatinous Cuboid"},
                     <SourceModel>{"wikiName": "[[Choccie]]", "txtName": "Choccie"},
-                    <SourceModel>{"wikiName": "[[Biggole Wurm]]", "txtName": "Biggole Wurm"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Biggole Wurm]]", "txtName": "Biggole Wurm"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4246,11 +4072,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Clammie]]", "txtName": "Clammie"},
                     <SourceModel>{"wikiName": "[[Octodar]]", "txtName": "Octodar"},
                     <SourceModel>{"wikiName": "[[Flombeige]]", "txtName": "Flombeige"},
-                    <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4280,10 +4102,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
                     <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
                     <SourceModel>{"wikiName": "[[Sacrilegious Kattlekruk]]", "txtName": "Sacrilegious Kattlekruk"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
                     <SourceModel>{"wikiName": "[[Scarab]]", "txtName": "Scarab"}
                 ],
                 "recipeFrom": [],
@@ -4300,10 +4118,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Biggole Mole]]", "txtName": "Biggole Mole"},
                     <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
                     <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
                     <SourceModel>{"wikiName": "[[Dust Mote]]", "txtName": "Dust Mote"},
                     <SourceModel>{"wikiName": "[[Dream Particulate]]", "txtName": "Dream Particulate"}
                 ],
@@ -4316,11 +4130,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crawler]]", "txtName": "Crawler"},
                     <SourceModel>{"wikiName": "[[Tremor Wurm]]", "txtName": "Tremor Wurm"},
                     <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Chaotic Kattlekruk]]", "txtName": "Chaotic Kattlekruk"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4347,18 +4157,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[River Spirit]]", "txtName": "River Spirit"},
                     <SourceModel>{"wikiName": "[[Baby Troll]]", "txtName": "Baby Troll"},
                     <SourceModel>{"wikiName": "[[Woodlin Spirit]]", "txtName": "Woodlin Spirit"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
                     <SourceModel>{"wikiName": "[[Ladybug]]", "txtName": "Ladybug"}
                 ],
                 "recipeFrom": [],
@@ -4440,14 +4238,6 @@ export const initSourceRepo = () => {
         new SourcesBase("StoneW2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Green Mushroom]]", "txtName": "Green Mushroom"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
                     <SourceModel>{
                         "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
                         "txtName": "Post Office: Plan-it Express"
@@ -4618,14 +4408,6 @@ export const initSourceRepo = () => {
         new SourcesBase("StoneA2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Bored Bean]]", "txtName": "Bored Bean"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
                     <SourceModel>{
                         "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
                         "txtName": "Post Office: Plan-it Express"
@@ -5446,18 +5228,6 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[King Doot]]", "txtName": "King Doot"},
                     <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
                         "txtName": "Post Office: Simple Shippin"
                     },
@@ -5478,6 +5248,10 @@ export const initSourceRepo = () => {
                         "txtName": "Post Office: Alpine Suppliers"
                     },
                     <SourceModel>{
+                        "wikiName": "[[Djonnut#Genie Dieting|Genie Dieting]]",
+                        "txtName": "Djonnut: Genie Dieting"
+                    },
+                    <SourceModel>{
                         "wikiName": "[[Djonnut#I'm Blue Dabadedada|I'm Blue Dabadedada]]",
                         "txtName": "Djonnut: I'm Blue Dabadedada"
                     },
@@ -5492,85 +5266,10 @@ export const initSourceRepo = () => {
         new SourcesBase("PremiumGem", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[King Doot]]", "txtName": "King Doot"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
                     <SourceModel>{"wikiName": "[[Egg Capsule]]", "txtName": "Egg Capsule"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
+                    <SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"},
                     <SourceModel>{
                         "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
                         "txtName": "Post Office: Simple Shippin"
@@ -5911,13 +5610,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("SnowA2a", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Frost Flake]]", "txtName": "Frost Flake"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Frost Flake]]", "txtName": "Frost Flake"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -6257,18 +5950,6 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Dilapidated Slush]]", "txtName": "Dilapidated Slush"},
                     <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{
                         "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
                         "txtName": "Post Office: Alpine Suppliers"
                     },
@@ -6331,19 +6012,7 @@ export const initSourceRepo = () => {
         new SourcesBase("Key4", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Mutated Mush]]", "txtName": "Mutated Mush"},
-                    <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    }
+                    <SourceModel>{"wikiName": "[[Stilted Seeker]]", "txtName": "Stilted Seeker"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6530,13 +6199,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("GalaxyA2b", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[TV]]", "txtName": "TV"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -6736,13 +6399,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("LavaA1b", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Suggma]]", "txtName": "Suggma"},
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    }
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Suggma]]", "txtName": "Suggma"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -7013,10 +6670,6 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Ricecake]]", "txtName": "Ricecake"},
                     <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
                         "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
                         "txtName": "Sussy Gene: Loiterin' Around"
                     }
@@ -7179,9 +6832,9 @@ export const initSourceRepo = () => {
         new SourcesBase("SpiD3", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"},
+                    <SourceModel>{"wikiName": "[[Spirit Reindeer]]", "txtName": "Spirit Reindeer"},
                     <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
-                    <SourceModel>{"wikiName": "[[Guardian Golem]]", "txtName": "Guardian Golem"},
-                    <SourceModel>{"wikiName": "[[Curious Crystal Slime]]", "txtName": "Curious Crystal Slime"}
+                    <SourceModel>{"wikiName": "[[Shimmer Glunko]]", "txtName": "Shimmer Glunko"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -7196,6 +6849,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Quest95", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardsH15", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"}],
                 "recipeFrom": [],
@@ -7206,1203 +6864,28 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("StoneW1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
-                        "txtName": "Post Office: Simple Shippin"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
-                        "txtName": "Post Office: Plan-it Express"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
-                        "txtName": "Post Office: Dudes Next Door"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
-                        "txtName": "Post Office: Alpine Suppliers"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
-                        "txtName": "Blunder Hills Vendor"
-                    },
-                    <SourceModel>{"wikiName": "[[DropTable5]]", "txtName": "DropTable5"},
-                    <SourceModel>{
-                        "wikiName": "[[Promotheus#Three Right Answers|Three Right Answers]]",
-                        "txtName": "Promotheus: Three Right Answers"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
-                        "txtName": "Alchemy: Weak UPG Stone"
-                    }
-                ],
+        new SourcesBase("CardsH16", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("StoneA1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
-                        "txtName": "Post Office: Simple Shippin"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
-                        "txtName": "Post Office: Plan-it Express"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
-                        "txtName": "Post Office: Dudes Next Door"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
-                        "txtName": "Post Office: Alpine Suppliers"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
-                        "txtName": "Blunder Hills Vendor"
-                    },
-                    <SourceModel>{"wikiName": "[[DropTable4]]", "txtName": "DropTable4"},
-                    <SourceModel>{
-                        "wikiName": "[[Scripticus#Can't somebody else do it?|Can't somebody else do it?]]",
-                        "txtName": "Scripticus: Can't somebody else do it?"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
-                        "txtName": "Alchemy: Weak UPG Stone"
-                    }
-                ],
+        new SourcesBase("EquipmentStatues30", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("OakTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
+        new SourcesBase("StampC24", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Copper", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
+        new SourcesBase("Quest94", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("CopperBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Key1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Bronze Chest|Dewdrop Bronze Chest]]",
-                        "txtName": "Colosseum: Dewdrop Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
-                        "txtName": "Post Office: Simple Shippin"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
-                        "txtName": "Post Office: Plan-it Express"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
-                        "txtName": "Post Office: Down Undelivery"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Dog Bone (NPC)#Why he Die???|Why he Die???]]",
-                        "txtName": "Dog Bone (NPC): Why he Die???"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Dog Bone (NPC)#Bow Wow going Dow..n!|Bow Wow going Dow..n!]]",
-                        "txtName": "Dog Bone (NPC): Bow Wow going Dow..n!"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
-                        "txtName": "Post Office: Plan-it Express"
-                    },
-                    <SourceModel>{"wikiName": "[[SuperDropTable1]]", "txtName": "SuperDropTable1"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Iron", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("JungleTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("BirchTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Silver Chest|Dewdrop Silver Chest]]",
-                        "txtName": "Colosseum: Dewdrop Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
-                        "txtName": "Post Office: Simple Shippin"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Live-Action Entertainment|Live-Action Entertainment]]",
-                        "txtName": "Picnic Stowaway: Live-Action Entertainment"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#The Most Important Meal of the Day|The Most Important Meal of the Day]]",
-                        "txtName": "Picnic Stowaway: The Most Important Meal of the Day"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Brunchin' with the Blobs|Brunchin' with the Blobs]]",
-                        "txtName": "Picnic Stowaway: Brunchin' with the Blobs"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Luncheon with the Inlaws|Luncheon with the Inlaws]]",
-                        "txtName": "Picnic Stowaway: Luncheon with the Inlaws"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Afternoon Tea in a Jiffy|Afternoon Tea in a Jiffy]]",
-                        "txtName": "Picnic Stowaway: Afternoon Tea in a Jiffy"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Early Evening Eating Endeavor|Early Evening Eating Endeavor]]",
-                        "txtName": "Picnic Stowaway: Early Evening Eating Endeavor"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Tiki Chief#Brochure Building|Brochure Building]]",
-                        "txtName": "Tiki Chief: Brochure Building"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("IronBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Gold", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("ToiletTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StumpTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Dewdrop#Golden Chest|Dewdrop Golden Chest]]",
-                        "txtName": "Colosseum: Dewdrop Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Fish1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Fish2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GoldBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Bronze Chest|Sandstone Bronze Chest]]",
-                        "txtName": "Colosseum: Sandstone Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneW3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
-                        "txtName": "Post Office: Dudes Next Door"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
-                        "txtName": "Post Office: Down Undelivery"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
-                        "txtName": "Post Office: Alpine Suppliers"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Frostbite Towndra|Frostbite Towndra Vendors]]",
-                        "txtName": "Frostbite Towndra Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneA3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
-                        "txtName": "Post Office: Alpine Suppliers"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Frostbite Towndra|Frostbite Towndra Vendors]]",
-                        "txtName": "Frostbite Towndra Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Fish3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Shuvelle#Mayoral Skill|Mayoral Skill]]",
-                        "txtName": "Shuvelle: Mayoral Skill"
-                    },
-                    <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Shuvelle#Mayoral Skill|Mayoral Skill]]",
-                        "txtName": "Shuvelle: Mayoral Skill"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
-                        "txtName": "Post Office: Dudes Next Door"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Luncheon with the Inlaws|Luncheon with the Inlaws]]",
-                        "txtName": "Picnic Stowaway: Luncheon with the Inlaws"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Afternoon Tea in a Jiffy|Afternoon Tea in a Jiffy]]",
-                        "txtName": "Picnic Stowaway: Afternoon Tea in a Jiffy"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Early Evening Eating Endeavor|Early Evening Eating Endeavor]]",
-                        "txtName": "Picnic Stowaway: Early Evening Eating Endeavor"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#The Last Supper, at Least for Today!|The Last Supper, at Least for Today!]]",
-                        "txtName": "Picnic Stowaway: The Last Supper, at Least for Today!"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Plat", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("PalmTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Silver Chest|Sandstone Silver Chest]]",
-                        "txtName": "Colosseum: Sandstone Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[SuperDropTable2]]", "txtName": "SuperDropTable2"},
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#The Last Supper, at Least for Today!|The Last Supper, at Least for Today!]]",
-                        "txtName": "Picnic Stowaway: The Last Supper, at Least for Today!"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#Don't Desert the Dessert|Don't Desert the Dessert]]",
-                        "txtName": "Picnic Stowaway: Don't Desert the Dessert"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Picnic Stowaway#A Midnight Snack|A Midnight Snack]]",
-                        "txtName": "Picnic Stowaway: A Midnight Snack"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("PlatBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Dementia", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Fish4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Sandstone#Golden Chest|Sandstone Golden Chest]]",
-                        "txtName": "Colosseum: Sandstone Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Critter1", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Bronze Chest|Chillsnap Bronze Chest]]",
-                        "txtName": "Colosseum: Chillsnap Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Critter2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
-                        "txtName": "Post Office: Down Undelivery"
-                    },
-                    <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("SaharanFoal", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Silver Chest|Chillsnap Silver Chest]]",
-                        "txtName": "Colosseum: Chillsnap Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("DementiaBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul2", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Void", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug6", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG6", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Chillsnap#Golden Chest|Chillsnap Golden Chest]]",
-                        "txtName": "Colosseum: Chillsnap Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
-                        "txtName": "Post Office: Alpine Suppliers"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneW4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
-                        "txtName": "Post Office: Cosmic Carrier"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
-                        "txtName": "Outer World Town Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneA4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
-                        "txtName": "Post Office: Cosmic Carrier"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
-                        "txtName": "Outer World Town Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul3", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Critter6", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("VoidBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Bronze Chest|Astro Bronze Chest]]",
-                        "txtName": "Colosseum: Astro Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Critter8", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug7", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG7", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
-                        "txtName": "Post Office: Cosmic Carrier"
-                    },
-                    <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Lustre", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("AlienTree", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Silver Chest|Astro Silver Chest]]",
-                        "txtName": "Colosseum: Astro Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("LustreBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Starfire", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug8", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Astro#Golden Chest|Astro Golden Chest]]",
-                        "txtName": "Colosseum: Astro Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneW5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
-                        "txtName": "Magma Rivertown Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneA5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
-                        "txtName": "Magma Rivertown Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Gfoodcoupon", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Royal Worm#Royal Bidding|Royal Bidding]]",
-                        "txtName": "Royal Worm: Royal Bidding"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Hoov#Stealth Check 1 2 3|Stealth Check 1 2 3]]",
-                        "txtName": "Hoov: Stealth Check 1 2 3"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
-                        "txtName": "Hoov: Sneak Registration"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Hoov#Sneak Graduate|Sneak Graduate]]",
-                        "txtName": "Hoov: Sneak Graduate"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Woodlin Elder#Portal Issues|Portal Issues]]",
-                        "txtName": "Woodlin Elder: Portal Issues"
-                    },
-                    <SourceModel>{"wikiName": "[[Woodlin Elder#Fiddy|Fiddy]]", "txtName": "Woodlin Elder: Fiddy"},
-                    <SourceModel>{
-                        "wikiName": "[[Woodlin Elder#Hunned Fiddy|Hunned Fiddy]]",
-                        "txtName": "Woodlin Elder: Hunned Fiddy"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Woodlin Elder#Triple Tre|Triple Tre]]",
-                        "txtName": "Woodlin Elder: Triple Tre"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Sussy Gene#Goofin' Around|Goofin' Around]]",
-                        "txtName": "Sussy Gene: Goofin' Around"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Sussy Gene#Messin' Around|Messin' Around]]",
-                        "txtName": "Sussy Gene: Messin' Around"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
-                        "txtName": "Sussy Gene: Loiterin' Around"
-                    },
-                    <SourceModel>{"wikiName": "[[Arcade]]", "txtName": "Arcade"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG9", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[DropTable26]]", "txtName": "DropTable26"},
-                    <SourceModel>{"wikiName": "[[DropTable27]]", "txtName": "DropTable27"},
-                    <SourceModel>{"wikiName": "[[SuperDropTable5]]", "txtName": "SuperDropTable5"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul4", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Bronze Chest|Molten Bronze Chest]]",
-                        "txtName": "Colosseum: Molten Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug9", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Tree9", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Silver Chest|Molten Silver Chest]]",
-                        "txtName": "Colosseum: Molten Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("DreadloBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Dreadlo", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug10", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Molten#Golden Chest|Molten Golden Chest]]",
-                        "txtName": "Colosseum: Molten Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneW8", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
-                        "txtName": "Spirit Village Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("StoneA7", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
-                        "txtName": "Spirit Village Vendor"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("FoodG11", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[DropTable30]]", "txtName": "DropTable30"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul5", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Soul6", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Bronze Chest|Whimsical Bronze Chest]]",
-                        "txtName": "Colosseum: Whimsical Bronze Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug12", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Tree12", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Silver Chest|Whimsical Silver Chest]]",
-                        "txtName": "Colosseum: Whimsical Silver Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GodshardBar", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Godshard", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Bug13", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Colosseum/Whimsical#Golden Chest|Whimsical Golden Chest]]",
-                        "txtName": "Colosseum: Whimsical Golden Chest"
-                    },
-                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
-                ],
+        new SourcesBase("StampC25", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -8539,18 +7022,12 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentCape9", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"},
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("EquipmentCape10", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"},
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Giant Rose]]", "txtName": "Giant Rose"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -8580,10 +7057,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Fishpaste97#'Accidental' Exploit|'Accidental' Exploit]]",
                         "txtName": "Fishpaste97: 'Accidental' Exploit"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Djonnut#Genie Dieting|Genie Dieting]]",
-                        "txtName": "Djonnut: Genie Dieting"
                     },
                     <SourceModel>{
                         "wikiName": "[[Snake Jar#A Noob, served Medium Rare!|A Noob, served Medium Rare!]]",
@@ -8852,6 +7325,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Bubbulyte]]", "txtName": "Bubbulyte"},
                     <SourceModel>{"wikiName": "[[Spring Splendor]]", "txtName": "Spring Splendor"},
                     <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
+                    <SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"},
                     <SourceModel>{"wikiName": "[[2021 Giftmas Box]]", "txtName": "2021 Giftmas Box"},
                     <SourceModel>{"wikiName": "[[Choco Box]]", "txtName": "Choco Box"}
                 ],
@@ -8938,6 +7412,7 @@ export const initSourceRepo = () => {
         new SourcesBase("Timecandy8", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
+                    <SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"},
                     <SourceModel>{
                         "wikiName": "[[Falloween Pumpkin#The Spookyness|The Spookyness]]",
                         "txtName": "Falloween Pumpkin: The Spookyness"
@@ -8987,6 +7462,36 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
                     <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats108", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats116", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats115", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats24", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats117", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats47", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[IdleOn 4th Anniversary]]", "txtName": "IdleOn 4th Anniversary"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -9276,6 +7781,76 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneA1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
+                        "txtName": "Post Office: Simple Shippin"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
+                        "txtName": "Post Office: Plan-it Express"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
+                        "txtName": "Post Office: Dudes Next Door"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
+                        "txtName": "Post Office: Alpine Suppliers"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
+                        "txtName": "Blunder Hills Vendor"
+                    },
+                    <SourceModel>{"wikiName": "[[DropTable4]]", "txtName": "DropTable4"},
+                    <SourceModel>{
+                        "wikiName": "[[Scripticus#Can't somebody else do it?|Can't somebody else do it?]]",
+                        "txtName": "Scripticus: Can't somebody else do it?"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
+                        "txtName": "Alchemy: Weak UPG Stone"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StoneW1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
+                        "txtName": "Post Office: Simple Shippin"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
+                        "txtName": "Post Office: Plan-it Express"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
+                        "txtName": "Post Office: Dudes Next Door"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
+                        "txtName": "Post Office: Alpine Suppliers"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Blunder Hills|Blunder Hills Vendors]]",
+                        "txtName": "Blunder Hills Vendor"
+                    },
+                    <SourceModel>{"wikiName": "[[DropTable5]]", "txtName": "DropTable5"},
+                    <SourceModel>{
+                        "wikiName": "[[Promotheus#Three Right Answers|Three Right Answers]]",
+                        "txtName": "Promotheus: Three Right Answers"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
+                        "txtName": "Alchemy: Weak UPG Stone"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StoneT1", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9298,6 +7873,44 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Alchemy#Liquid Shop|Weak UPG Stone]]",
                         "txtName": "Alchemy: Weak UPG Stone"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
+                        "txtName": "Post Office: Simple Shippin"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Live-Action Entertainment|Live-Action Entertainment]]",
+                        "txtName": "Picnic Stowaway: Live-Action Entertainment"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#The Most Important Meal of the Day|The Most Important Meal of the Day]]",
+                        "txtName": "Picnic Stowaway: The Most Important Meal of the Day"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Brunchin' with the Blobs|Brunchin' with the Blobs]]",
+                        "txtName": "Picnic Stowaway: Brunchin' with the Blobs"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Luncheon with the Inlaws|Luncheon with the Inlaws]]",
+                        "txtName": "Picnic Stowaway: Luncheon with the Inlaws"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Afternoon Tea in a Jiffy|Afternoon Tea in a Jiffy]]",
+                        "txtName": "Picnic Stowaway: Afternoon Tea in a Jiffy"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Early Evening Eating Endeavor|Early Evening Eating Endeavor]]",
+                        "txtName": "Picnic Stowaway: Early Evening Eating Endeavor"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Tiki Chief#Brochure Building|Brochure Building]]",
+                        "txtName": "Tiki Chief: Brochure Building"
                     }
                 ],
                 "recipeFrom": [],
@@ -9447,6 +8060,43 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Key1", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Simple Shippin|Simple Shippin]]",
+                        "txtName": "Post Office: Simple Shippin"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
+                        "txtName": "Post Office: Plan-it Express"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
+                        "txtName": "Post Office: Down Undelivery"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Dog Bone (NPC)#Why he Die???|Why he Die???]]",
+                        "txtName": "Dog Bone (NPC): Why he Die???"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Dog Bone (NPC)#Bow Wow going Dow..n!|Bow Wow going Dow..n!]]",
+                        "txtName": "Dog Bone (NPC): Bow Wow going Dow..n!"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Plan-it Express|Plan-it Express]]",
+                        "txtName": "Post Office: Plan-it Express"
+                    },
+                    <SourceModel>{"wikiName": "[[SuperDropTable1]]", "txtName": "SuperDropTable1"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("FoodPotGr2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9558,6 +8208,32 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("FoodG2", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
+                        "txtName": "Post Office: Dudes Next Door"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Luncheon with the Inlaws|Luncheon with the Inlaws]]",
+                        "txtName": "Picnic Stowaway: Luncheon with the Inlaws"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Afternoon Tea in a Jiffy|Afternoon Tea in a Jiffy]]",
+                        "txtName": "Picnic Stowaway: Afternoon Tea in a Jiffy"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Early Evening Eating Endeavor|Early Evening Eating Endeavor]]",
+                        "txtName": "Picnic Stowaway: Early Evening Eating Endeavor"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#The Last Supper, at Least for Today!|The Last Supper, at Least for Today!]]",
+                        "txtName": "Picnic Stowaway: The Last Supper, at Least for Today!"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("FoodPotYe2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9604,6 +8280,39 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneW3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Dudes Next Door|Dudes Next Door]]",
+                        "txtName": "Post Office: Dudes Next Door"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
+                        "txtName": "Post Office: Down Undelivery"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
+                        "txtName": "Post Office: Alpine Suppliers"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Frostbite Towndra|Frostbite Towndra Vendors]]",
+                        "txtName": "Frostbite Towndra Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Down Undelivery|Down Undelivery]]",
+                        "txtName": "Post Office: Down Undelivery"
+                    },
+                    <SourceModel>{"wikiName": "[[SuperDropTable3]]", "txtName": "SuperDropTable3"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentStatues13", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9637,6 +8346,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("FoodG6", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
+                        "txtName": "Post Office: Alpine Suppliers"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentStatues18", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9648,6 +8367,20 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Monolith#A Lack of Modesty|A Lack of Modesty]]",
                         "txtName": "Monolith: A Lack of Modesty"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StoneA3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Alpine Suppliers|Alpine Suppliers]]",
+                        "txtName": "Post Office: Alpine Suppliers"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Frostbite Towndra|Frostbite Towndra Vendors]]",
+                        "txtName": "Frostbite Towndra Vendor"
                     }
                 ],
                 "recipeFrom": [],
@@ -9695,6 +8428,34 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneA4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
+                        "txtName": "Post Office: Cosmic Carrier"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
+                        "txtName": "Outer World Town Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StoneW4", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
+                        "txtName": "Post Office: Cosmic Carrier"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
+                        "txtName": "Outer World Town Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StoneT4", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -9705,6 +8466,17 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Vendors#Outer World Town|Outer World Town Vendors]]",
                         "txtName": "Outer World Town Vendor"
                     }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG7", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Post Office#Cosmic Carrier|Cosmic Carrier]]",
+                        "txtName": "Post Office: Cosmic Carrier"
+                    },
+                    <SourceModel>{"wikiName": "[[SuperDropTable4]]", "txtName": "SuperDropTable4"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -10726,6 +9498,26 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneW5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
+                        "txtName": "Magma Rivertown Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StoneA5", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
+                        "txtName": "Magma Rivertown Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StoneT5", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -10737,6 +9529,16 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("StampC22", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
+                        "txtName": "Magma Rivertown Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("InvBag113", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Vendors#Magma Rivertown|Magma Rivertown Vendors]]",
@@ -10796,6 +9598,26 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("StoneW8", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
+                        "txtName": "Spirit Village Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StoneA7", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
+                        "txtName": "Spirit Village Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StoneT7", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -10807,6 +9629,16 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("StampC10", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
+                        "txtName": "Spirit Village Vendor"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("InvBag114", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Vendors#Spirit Village|Spirit Village Vendors]]",
@@ -11410,8 +10242,26 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[SuperDropTable2]]", "txtName": "SuperDropTable2"},
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#The Last Supper, at Least for Today!|The Last Supper, at Least for Today!]]",
+                        "txtName": "Picnic Stowaway: The Last Supper, at Least for Today!"
                     },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#Don't Desert the Dessert|Don't Desert the Dessert]]",
+                        "txtName": "Picnic Stowaway: Don't Desert the Dessert"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Picnic Stowaway#A Midnight Snack|A Midnight Snack]]",
+                        "txtName": "Picnic Stowaway: A Midnight Snack"
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -11672,6 +10522,15 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("FoodG9", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable26]]", "txtName": "DropTable26"},
+                    <SourceModel>{"wikiName": "[[DropTable27]]", "txtName": "DropTable27"},
+                    <SourceModel>{"wikiName": "[[SuperDropTable5]]", "txtName": "SuperDropTable5"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("InvStorage25", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[DropTable26]]", "txtName": "DropTable26"}],
                 "recipeFrom": [],
@@ -11732,6 +10591,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentStatues27", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable30]]", "txtName": "DropTable30"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("FoodG11", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[DropTable30]]", "txtName": "DropTable30"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -11933,7 +10797,7 @@ export const initSourceRepo = () => {
                     }
                 ]
             }),
-        new SourcesBase("InvBag2", <SourcesModel>{
+        new SourcesBase("MaxCapBagM3", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Scripticus#Warrior, Archer or Mage?|Warrior, Archer or Mage?]]",
@@ -11943,7 +10807,7 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("MaxCapBagM3", <SourcesModel>{
+        new SourcesBase("InvBag2", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
                         "wikiName": "[[Scripticus#Warrior, Archer or Mage?|Warrior, Archer or Mage?]]",
@@ -13335,6 +12199,28 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Bug3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Shuvelle#Mayoral Skill|Mayoral Skill]]",
+                        "txtName": "Shuvelle: Mayoral Skill"
+                    },
+                    <SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish3", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Shuvelle#Mayoral Skill|Mayoral Skill]]",
+                        "txtName": "Shuvelle: Mayoral Skill"
+                    },
+                    <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("NPCtoken35", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -13372,7 +12258,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -13939,6 +12826,54 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Gfoodcoupon", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Royal Worm#Royal Bidding|Royal Bidding]]",
+                        "txtName": "Royal Worm: Royal Bidding"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Stealth Check 1 2 3|Stealth Check 1 2 3]]",
+                        "txtName": "Hoov: Stealth Check 1 2 3"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Registration|Sneak Registration]]",
+                        "txtName": "Hoov: Sneak Registration"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Hoov#Sneak Graduate|Sneak Graduate]]",
+                        "txtName": "Hoov: Sneak Graduate"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Portal Issues|Portal Issues]]",
+                        "txtName": "Woodlin Elder: Portal Issues"
+                    },
+                    <SourceModel>{"wikiName": "[[Woodlin Elder#Fiddy|Fiddy]]", "txtName": "Woodlin Elder: Fiddy"},
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Hunned Fiddy|Hunned Fiddy]]",
+                        "txtName": "Woodlin Elder: Hunned Fiddy"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Woodlin Elder#Triple Tre|Triple Tre]]",
+                        "txtName": "Woodlin Elder: Triple Tre"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Goofin' Around|Goofin' Around]]",
+                        "txtName": "Sussy Gene: Goofin' Around"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Messin' Around|Messin' Around]]",
+                        "txtName": "Sussy Gene: Messin' Around"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
+                        "txtName": "Sussy Gene: Loiterin' Around"
+                    },
+                    <SourceModel>{"wikiName": "[[Arcade]]", "txtName": "Arcade"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest82", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -14148,12 +13083,22 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentPendant33", <SourcesModel>{
+        new SourcesBase("EquipmentHats118", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("ClassSwapB", <SourcesModel>{
+        new SourcesBase("Quest96", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings34", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentRings32", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14311,12 +13256,107 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Copper", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Iron", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Gold", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Plat", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Dementia", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Void", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Lustre", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Starfire", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Dreadlo", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Marble", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Godshard", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mining]]", "txtName": "Mining"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CopperBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("IronBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("GoldBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("PlatBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("DementiaBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("VoidBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("LustreBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("StarfireBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("DreadloBar", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("GodshardBar", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Forging]]", "txtName": "Forging"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14326,7 +13366,42 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("OakTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("BirchTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("JungleTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("ForestTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ToiletTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("PalmTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("StumpTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("SaharanFoal", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14336,7 +13411,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("AlienTree", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Tree8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Tree9", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14351,8 +13436,28 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Tree12", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Tree13", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Choppin]]", "txtName": "Choppin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Fish4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -14401,7 +13506,47 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Bug1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Bug2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug7", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug9", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug10", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14411,7 +13556,27 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Bug12", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Bug13", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Catching]]", "txtName": "Catching"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Critter1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Critter1A", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Critter2", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14451,6 +13616,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Critter6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Critter6A", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
                 "recipeFrom": [],
@@ -14462,6 +13632,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Critter7A", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Critter8", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14493,6 +13668,36 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Critter11A", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Trapping]]", "txtName": "Trapping"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul3", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Soul6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Worship]]", "txtName": "Worship"}],
                 "recipeFrom": [],
                 "questAss": []
             }),

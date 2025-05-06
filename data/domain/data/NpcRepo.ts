@@ -948,8 +948,8 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 50,
                         "Rewards": [
-                            <ComponentModel>{"item": "InvBag2", "quantity": 1},
                             <ComponentModel>{"item": "MaxCapBagM3", "quantity": 1},
+                            <ComponentModel>{"item": "InvBag2", "quantity": 1},
                             <CoinRewardModel>{"item": "", "quantity": 100}
                         ],
                         "QuestName": "Scripticus8",
@@ -3109,7 +3109,7 @@ export const initNpcRepo = () => {
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 9,
-                        "Rewards": [<TalentRewardModel>{"item": "TalentBook1", "quantity": 361650}, <ComponentModel>{"item": "Trophy3", "quantity": 1}],
+                        "Rewards": [<TalentRewardModel>{"item": "TalentBook1", "quantity": 362550}, <ComponentModel>{"item": "Trophy3", "quantity": 1}],
                         "QuestName": "Rocklyte3",
                         "Difficulty": 1,
                         "note": <NoteModel>{"note": "This quest can only be completed by a beginner (no class chosen)"},
@@ -4162,7 +4162,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Why he Die???": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! <br> QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
+                        "DialogueText": "DoOoo this and I will give yOooo a boOOooss Key!! <br> QUEST:Defeat Wooden Boards below and collect 3 Bones then return here!",
                         "NextIndex": 5,
                         "Name": "Why he Die???",
                         "ConsumeItems": true,
@@ -4176,7 +4176,7 @@ export const initNpcRepo = () => {
                     },
                     "Bow Wow going Dow..n!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I know they're just a pile of rocks somehow bound together by mystic world 8 energy but... could you just rough 'em up a bit? <br> QUEST:Bring some stones back from Amarok to show to Dog Bone as a token of his revenge.",
+                        "DialogueText": "I know they're just a pile of rocks somehow bound together by mystic world 8 energy but... could you just rough 'em up a bit? <br> QUEST:Bring back 25 amarok stones from defeating amarok.",
                         "NextIndex": 16,
                         "Name": "Bow Wow going Dow..n!",
                         "ConsumeItems": false,
@@ -4210,7 +4210,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Figure oOOoout hoOOow I died and I'll give yoOOOoou a key sOooo yoOooo can gooOooo behind that doooOOOor! <br> QUEST:Defeat Board Monsters below until you find the 3 Bones then return",
+                        "DialogueText": "DoOoo this and I will give yOooo a boOOooss Key!! <br> QUEST:Defeat Wooden Boards below and collect 3 Bones then return here!",
                         "NextIndex": 5,
                         "Name": "Why he Die???"
                     },
@@ -4276,7 +4276,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I know they're just a pile of rocks somehow bound together by mystic world 8 energy but... could you just rough 'em up a bit? <br> QUEST:Bring some stones back from Amarok to show to Dog Bone as a token of his revenge.",
+                        "DialogueText": "I know they're just a pile of rocks somehow bound together by mystic world 8 energy but... could you just rough 'em up a bit? <br> QUEST:Bring back 25 amarok stones from defeating amarok.",
                         "NextIndex": 16,
                         "Name": "Bow Wow going Dow..n!"
                     },
@@ -5983,39 +5983,39 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Genie Dieting": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Get for me all the most very blue items! I will use to regain my wishing powers! <br> QUEST:Collect some very blue thingies for this very blue dude",
+                        "DialogueText": "I will give you boss keys just do this first! <br> QUEST:Collect 100 Snelbie shells 5 Sand Giant Monocles and 5 Cherries from Moonmoons!",
                         "NextIndex": 4,
                         "Name": "Genie Dieting",
                         "ConsumeItems": true,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 3,
-                        "Rewards": [<ComponentModel>{"item": "Timecandy1", "quantity": 8}],
+                        "Rewards": [<ComponentModel>{"item": "Key2", "quantity": 5}],
                         "QuestName": "Djonnut1",
                         "Difficulty": 4,
                         "note": <NoteModel>{
                             "note": "The recipe for Icing Ironbite comes from [[Tasks]]. Average Mana Potions are dropped by Forest monsters and [[Amarok]]."
                         },
                         "ItemReq": [
-                            <ComponentModel>{"item": "FoodPotMana2", "quantity": 200},
-                            <ComponentModel>{"item": "FoodMining1", "quantity": 600},
-                            <ComponentModel>{"item": "Fish3", "quantity": 150}
+                            <ComponentModel>{"item": "DesertC4", "quantity": 100},
+                            <ComponentModel>{"item": "DesertC3", "quantity": 5},
+                            <ComponentModel>{"item": "DesertC2", "quantity": 5}
                         ]
                     },
                     "I'm Blue Dabadedada": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Ok pls why yu hef to be mad is only videogame! I make it up to you just get me mor blue stuffs and I wish for door open for you! <br> QUEST:Defeat Moonmen and retrieve some ghosts",
+                        "DialogueText": "Do this for me and I will giv you keys EVERY DAY! <br> QUEST:Defeat 4000 Moonmen and get one of their rare ghost drop! It's a 1 in 2000 chance per kill!",
                         "NextIndex": 7,
                         "Name": "I'm Blue Dabadedada",
                         "ConsumeItems": false,
                         "InventorySpacesNeeded": 1,
                         "NoSpaceIndex": 6,
-                        "Rewards": [<ComponentModel>{"item": "Key2", "quantity": 2}],
+                        "Rewards": [<ComponentModel>{"item": "Key2", "quantity": 5}],
                         "QuestName": "Djonnut2",
                         "Difficulty": 4,
                         "note": <NoteModel>{"note": " "},
                         "CustomType": "Djonnut2",
                         "CustomArray": [
-                            <CustomReqModel>{"desc": "Moonmen Defeated:", "finalV": 3000, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Moonmen Defeated:", "finalV": 4000, "type": "GreaterEqual", "startV": 0},
                             <CustomReqModel>{"desc": "Ghosts Collected:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
                         ]
                     },
@@ -6041,8 +6041,8 @@ export const initNpcRepo = () => {
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Hallo you want me grant wish to open pyramid? Weeeell you are not of luck today. I wish for big donut and got small donut instead so my powers work are not work.",
-                        "NextIndex": 1,
+                        "DialogueText": "Hallo you want pyramid boss keys???",
+                        "NextIndex": 2,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -6053,7 +6053,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Get for me all the most very blue items! I will use to regain my wishing powers! <br> QUEST:Collect some very blue thingies for this very blue dude",
+                        "DialogueText": "I will give you boss keys just do this first! <br> QUEST:Collect 100 Snelbie shells 5 Sand Giant Monocles and 5 Cherries from Moonmoons!",
                         "NextIndex": 4,
                         "Name": "Genie Dieting"
                     },
@@ -6065,13 +6065,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Oooo very naiiice! I feel like I hav the wishyness to open up that pyra-- <br> I WISH FOR A BUNCH OF CANDY! <br> ...ehe whooopses! It kinda just slipped out. Here u can hav some of my candy!",
+                        "DialogueText": "Oooo very naiiice! I giv you 5 keys but if you want keys every day you must do one more thing for me...",
                         "NextIndex": 5,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "Ok pls why yu hef to be mad is only videogame! I make it up to you just get me mor blue stuffs and I wish for door open for you! <br> QUEST:Defeat Moonmen and retrieve some ghosts",
+                        "DialogueText": "Do this for me and I will giv you keys EVERY DAY! <br> QUEST:Defeat 4000 Moonmen and get one of their rare ghost drop! It's a 1 in 2000 chance per kill!",
                         "NextIndex": 7,
                         "Name": "I'm Blue Dabadedada"
                     },
@@ -6083,13 +6083,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You only hav two measly blue items? This won't work at all it is hopeless!! Boy am I feeling blue... <br> AHA! I WISH FOR BIG DONUT!!! <br> Haha I am of joking! I never lost my power I only wanted to make a funny lololol!",
+                        "DialogueText": "Here are ur keys to the pyramid and if you return tomorrow more keys I will wish for you! I even wait up to 3 days and will give u keys as if you were here every day!",
                         "NextIndex": 8,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Here are ur keys to the pyramid and if you return tomorrow more keys I will wish for you! And to say sorry for joke earlier I even wait up to 3 days and will give u keys as if you were here every day!",
+                        "DialogueText": "Here are ur keys to the pyramid and if you return tomorrow more keys I will wish for you! I even wait up to 3 days and will give u keys as if you were here every day!",
                         "NextIndex": 11,
                         "Name": ""
                     },
@@ -13290,9 +13290,9 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3.67,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Jenson",
+                    "birthWeight": 4.1,
+                    "starSign": "Scorpio",
+                    "mothersMaidenName": "Thompson",
                     "notes": " "
                 },
                 "quests": {

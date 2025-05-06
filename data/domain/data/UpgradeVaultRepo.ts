@@ -280,8 +280,8 @@ export const initUpgradeVaultRepo = () => {
                 "unlock_req": 350,
                 "value": 2,
                 "max_level": 100,
-                "description_line1": "+{% Dog Happiness",
-                "description_line2": "",
+                "description_line1": "+{% Dog",
+                "description_line2": "Happiness",
                 "has_tooltip": true,
                 "x2": "0",
                 "tooltip_text": "He a happy boi!"

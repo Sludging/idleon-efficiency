@@ -519,14 +519,21 @@ export const initEnemyNavRepo = () => {
             }),
         new EnemyNavBase("caveB", <EnemyNavModel>{
                 "prev": "w5c2",
+                "next": "caveC",
+                "hasCrystal": true,
+                "crystalName": "Crystal4",
+                "hasCard": true
+            }),
+        new EnemyNavBase("caveC", <EnemyNavModel>{
+                "prev": "caveB",
                 "next": "Crystal4",
                 "hasCrystal": true,
                 "crystalName": "Crystal4",
                 "hasCard": true
             }),
         new EnemyNavBase("Crystal4", <EnemyNavModel>{
-                "prev": "caveB",
-                "next": "Blank",
+                "prev": "caveC",
+                "next": undefined,
                 "hasCrystal": false,
                 "crystalName": "Crystal4",
                 "hasCard": true

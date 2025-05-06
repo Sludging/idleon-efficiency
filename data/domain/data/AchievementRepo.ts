@@ -345,8 +345,8 @@ export const initAchievementRepo = () => {
         new AchievementBase(48, <AchievementModel>{
                 "name": "Cavernous Nook",
                 "qty": 1,
-                "desc": "-",
-                "rewards": "*Knowledge of the &Cavern Secret Location",
+                "desc": "SECRET ACHIEVEMENT ------------------------ Find the SECRET mining area!",
+                "rewards": "*Nothing!",
                 "world": "Blunder Hills"
             }),
         new AchievementBase(49, <AchievementModel>{
@@ -1004,7 +1004,7 @@ export const initAchievementRepo = () => {
                 "name": "A Family of Me!",
                 "qty": 1,
                 "desc": "Create your 8th character, who will never get the love you gave to your earlier characters when making new ones was still special.",
-                "rewards": "*STEAM EXCLUSIVE &*25 gems",
+                "rewards": "*STEAM EXCLUSIVE &*20 gems",
                 "world": "Frostbite Tundra"
             }),
         new AchievementBase(143, <AchievementModel>{
@@ -1661,7 +1661,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(236, <AchievementModel>{
                 "name": "Hibernating Gamer",
                 "qty": 1,
-                "desc": "Glaim 111,000 hours of AFK time. Jeez, thats like an entire year of all characters idling to the max.",
+                "desc": "Claim 111,000 hours of AFK time. Jeez, thats like an entire year of all characters idling to the max.",
                 "rewards": "*STEAM EXCLUSIVE &*100 gems &*1 '72hr time candy'",
                 "world": "Hyperion Nebula"
             }),
@@ -2184,10 +2184,10 @@ export const initAchievementRepo = () => {
                 "world": "Smolderin' Plateau"
             }),
         new AchievementBase(311, <AchievementModel>{
-                "name": "FILLERZZZ ACH",
-                "qty": 20,
-                "desc": "-",
-                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "name": "Hug from Timmy",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ The lil' fella REALLY likes icecream!",
+                "rewards": "10% Monument AFK",
                 "world": "Smolderin' Plateau"
             }),
         new AchievementBase(312, <AchievementModel>{
@@ -2627,7 +2627,7 @@ export const initAchievementRepo = () => {
         new AchievementBase(374, <AchievementModel>{
                 "name": "This, is, Summoning!",
                 "qty": 1,
-                "desc": "Survive for 200 seconds in The Gambit cavern, which isn't out yet.",
+                "desc": "Survive for 5 minutes in The King's Gambit. Find this feature in Cavern 14 of the Hole in world 5.",
                 "rewards": "*1.05x All Essence &Gain",
                 "world": "Spirited Valley"
             }),

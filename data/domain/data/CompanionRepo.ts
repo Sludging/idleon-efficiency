@@ -13,7 +13,7 @@ export const initCompanionRepo = () => {
                 "x1": -53,
                 "x2": -22,
                 "x3": -14,
-                "x4": -1
+                "x4": 2000
             }),
         new CompanionBase(1, <CompanionModel>{
                 "id": "rift2",
@@ -22,7 +22,7 @@ export const initCompanionRepo = () => {
                 "x1": -31,
                 "x2": 6,
                 "x3": -14,
-                "x4": -1
+                "x4": 450
             }),
         new CompanionBase(2, <CompanionModel>{
                 "id": "ram",
@@ -31,7 +31,7 @@ export const initCompanionRepo = () => {
                 "x1": -26,
                 "x2": 16,
                 "x3": -19,
-                "x4": -1
+                "x4": 150
             }),
         new CompanionBase(3, <CompanionModel>{
                 "id": "Crystal3",
@@ -40,7 +40,7 @@ export const initCompanionRepo = () => {
                 "x1": -19,
                 "x2": 20,
                 "x3": -8,
-                "x4": -1
+                "x4": 150
             }),
         new CompanionBase(4, <CompanionModel>{
                 "id": "sheep",
@@ -49,7 +49,7 @@ export const initCompanionRepo = () => {
                 "x1": -6,
                 "x2": 0,
                 "x3": -11,
-                "x4": -1
+                "x4": 10
             }),
         new CompanionBase(5, <CompanionModel>{
                 "id": "w5b1",
@@ -58,7 +58,7 @@ export const initCompanionRepo = () => {
                 "x1": 0,
                 "x2": 0,
                 "x3": -5,
-                "x4": -1
+                "x4": 10
             }),
         new CompanionBase(6, <CompanionModel>{
                 "id": "beanG",
@@ -67,7 +67,7 @@ export const initCompanionRepo = () => {
                 "x1": -9,
                 "x2": 0,
                 "x3": -22,
-                "x4": -1
+                "x4": 10
             }),
         new CompanionBase(7, <CompanionModel>{
                 "id": "slimeG",
@@ -76,7 +76,7 @@ export const initCompanionRepo = () => {
                 "x1": 17,
                 "x2": 0,
                 "x3": -1,
-                "x4": -1
+                "x4": 5
             }),
         new CompanionBase(8, <CompanionModel>{
                 "id": "jarSand",
@@ -85,7 +85,7 @@ export const initCompanionRepo = () => {
                 "x1": 5,
                 "x2": 0,
                 "x3": -3,
-                "x4": -1
+                "x4": 5
             }),
         new CompanionBase(9, <CompanionModel>{
                 "id": "bloque",
@@ -94,7 +94,7 @@ export const initCompanionRepo = () => {
                 "x1": 1,
                 "x2": 0,
                 "x3": -17,
-                "x4": -1
+                "x4": 5
             }),
         new CompanionBase(10, <CompanionModel>{
                 "id": "frogG",
@@ -103,7 +103,160 @@ export const initCompanionRepo = () => {
                 "x1": 12,
                 "x2": 0,
                 "x3": -5,
-                "x4": -1
+                "x4": 5
+            }),
+        new CompanionBase(11, <CompanionModel>{
+                "id": "slimeBz",
+                "desc": "You really have one of only 92 in the game...",
+                "bonus": 10,
+                "x1": -48,
+                "x2": 0,
+                "x3": -30,
+                "x4": 1
+            }),
+        new CompanionBase(12, <CompanionModel>{
+                "id": "caveC",
+                "desc": "10x Total Damage",
+                "bonus": 9,
+                "x1": -44,
+                "x2": 0,
+                "x3": -35,
+                "x4": 1000
+            }),
+        new CompanionBase(13, <CompanionModel>{
+                "id": "w6d3",
+                "desc": "3x Villager EXP and +25 Opals",
+                "bonus": 1,
+                "x1": -29,
+                "x2": 0,
+                "x3": -19,
+                "x4": 250
+            }),
+        new CompanionBase(14, <CompanionModel>{
+                "id": "rift3",
+                "desc": "2x Kills for Opening Portals and Deathnote",
+                "bonus": 1,
+                "x1": -21,
+                "x2": 0,
+                "x3": -16,
+                "x4": 250
+            }),
+        new CompanionBase(15, <CompanionModel>{
+                "id": "w6b4",
+                "desc": "3.50x faster Equinox Bar Fill Rate",
+                "bonus": 2.5,
+                "x1": -23,
+                "x2": 0,
+                "x3": -19,
+                "x4": 100
+            }),
+        new CompanionBase(16, <CompanionModel>{
+                "id": "Crystal4",
+                "desc": "1.75x Lab EXP and Divinity EXP Gain",
+                "bonus": 0.75,
+                "x1": -21,
+                "x2": 0,
+                "x3": -5,
+                "x4": 100
+            }),
+        new CompanionBase(17, <CompanionModel>{
+                "id": "w5b6",
+                "desc": "3d Printer samples grow {1%/day for 100 days",
+                "bonus": 1,
+                "x1": -17,
+                "x2": 0,
+                "x3": -15,
+                "x4": 100
+            }),
+        new CompanionBase(18, <CompanionModel>{
+                "id": "frogBIG",
+                "desc": "{25% Carry Capacity for all item types",
+                "bonus": 25,
+                "x1": -13,
+                "x2": 0,
+                "x3": -29,
+                "x4": 10
+            }),
+        new CompanionBase(19, <CompanionModel>{
+                "id": "potato",
+                "desc": "{5% Ballot Bonus Multi",
+                "bonus": 5,
+                "x1": -46,
+                "x2": 0,
+                "x3": -25,
+                "x4": 10
+            }),
+        new CompanionBase(20, <CompanionModel>{
+                "id": "w4b1",
+                "desc": "{30 Talent Points for all classes",
+                "bonus": 30,
+                "x1": -1,
+                "x2": 0,
+                "x3": -5,
+                "x4": 10
+            }),
+        new CompanionBase(21, <CompanionModel>{
+                "id": "frogP",
+                "desc": "+15% Defence",
+                "bonus": 15,
+                "x1": 10,
+                "x2": 0,
+                "x3": -5,
+                "x4": 5
+            }),
+        new CompanionBase(22, <CompanionModel>{
+                "id": "glass",
+                "desc": "+15% Drop Rate",
+                "bonus": 15,
+                "x1": -2,
+                "x2": 0,
+                "x3": -5,
+                "x4": 5
+            }),
+        new CompanionBase(23, <CompanionModel>{
+                "id": "mushG",
+                "desc": "+15% Accuracy",
+                "bonus": 15,
+                "x1": -8,
+                "x2": 0,
+                "x3": -5,
+                "x4": 5
+            }),
+        new CompanionBase(24, <CompanionModel>{
+                "id": "Pet10",
+                "desc": "4x Coins from Mobs",
+                "bonus": 3,
+                "x1": -10,
+                "x2": 0,
+                "x3": -13,
+                "x4": 500
+            }),
+        new CompanionBase(25, <CompanionModel>{
+                "id": "Pet12",
+                "desc": "{50% AFK Gains",
+                "bonus": 50,
+                "x1": 3,
+                "x2": 0,
+                "x3": -20,
+                "x4": 500
+            }),
+        new CompanionBase(26, <CompanionModel>{
+                "id": "Pet3",
+                "desc": "1.30x Drop Rate",
+                "bonus": 0.3,
+                "x1": -1,
+                "x2": 0,
+                "x3": 0,
+                "x4": 500
+            }),
+        new CompanionBase(27, <CompanionModel>{
+                "id": "reindeer",
+                "desc": "2.00x Gold Ball Shop Bonuses",
+                "bonus": 1,
+                "x1": -40,
+                "x2": 0,
+                "x3": -33,
+                "x4": 500
             })    
 ]
 }

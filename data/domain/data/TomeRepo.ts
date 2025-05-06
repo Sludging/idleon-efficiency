@@ -662,6 +662,110 @@ export const initTomeRepo = () => {
                 "totalVal": 500,
                 "decimalDisplay": undefined,
                 "desc": undefined
+            }),
+        new TomeBase(82, <TomeModel>{
+                "name": "Total Gambit Time (in Seconds) 膛",
+                "keyQty": 3600,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": "Gambit is the 14th Cavern in The Hole."
+            }),
+        new TomeBase(83, <TomeModel>{
+                "name": "Total Digits of all Cavern Resources 膛",
+                "keyQty": 500,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 750,
+                "decimalDisplay": undefined,
+                "desc": "For example, if you had 1273 gravel and 422 gold dust, thats 7 Digits. If you then got 23 quaver notes from harp, thats another 2 digits, making your total 9 Digits."
+            }),
+        new TomeBase(84, <TomeModel>{
+                "name": "Total LV of Cavern Villagers",
+                "keyQty": 200,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 350,
+                "decimalDisplay": undefined,
+                "desc": undefined
+            }),
+        new TomeBase(85, <TomeModel>{
+                "name": "Megafeathers Earned from Orion",
+                "keyQty": 12,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 100,
+                "decimalDisplay": undefined,
+                "desc": undefined
+            }),
+        new TomeBase(86, <TomeModel>{
+                "name": "Megafish Earned from Poppy",
+                "keyQty": 12,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 100,
+                "decimalDisplay": undefined,
+                "desc": undefined
+            }),
+        new TomeBase(87, <TomeModel>{
+                "name": "Best Bravery Monument Round 膛",
+                "keyQty": 50,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 250,
+                "decimalDisplay": undefined,
+                "desc": "Bravery Monument is the 4th Cavern in The Hole. The Hole is found in World 5."
+            }),
+        new TomeBase(88, <TomeModel>{
+                "name": "Best Justice Monument Round 膛",
+                "keyQty": 200,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 250,
+                "decimalDisplay": undefined,
+                "desc": "Justice Monument is the 10th Cavern in The Hole. 'Best Round' here means your highest Court Case reached in a run."
+            }),
+        new TomeBase(89, <TomeModel>{
+                "name": "Best Wisdom Monument Round 膛",
+                "keyQty": 18,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 250,
+                "decimalDisplay": undefined,
+                "desc": "Wisdom Monument is the 13th Cavern in The Hole."
+            }),
+        new TomeBase(90, <TomeModel>{
+                "name": "Best Deathbringer Max Damage in Wraith Mode 膛",
+                "keyQty": 9,
+                "scalingType": TomeScalingEnum.decayLog,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": "Deathbringer is the Blood Berserker's Master Class, given by Masterius NPC in World 6. You need to open your grimoire btw."
+            }),
+        new TomeBase(91, <TomeModel>{
+                "name": "Best Dawg Den score 膛",
+                "keyQty": 7,
+                "scalingType": TomeScalingEnum.decayLog,
+                "totalVal": 250,
+                "decimalDisplay": undefined,
+                "desc": "The Dawg Den is the 3rd Cavern in The Hole. The Hole is found in World 5."
+            }),
+        new TomeBase(92, <TomeModel>{
+                "name": "Total Resource Layers Destroyed 膛",
+                "keyQty": 150,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 350,
+                "decimalDisplay": undefined,
+                "desc": "Destroying Layers includes the following caverns... Motherlode, Eternal Hive, and Evertree Cavern, with more added later!"
+            }),
+        new TomeBase(93, <TomeModel>{
+                "name": "Total Opals Found",
+                "keyQty": 500,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": undefined
+            }),
+        new TomeBase(94, <TomeModel>{
+                "name": "Best Pure Memory Round Reached 膛",
+                "keyQty": 13,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 50,
+                "decimalDisplay": undefined,
+                "desc": "Yea nah, I aint snitchin'. This is a SECRET mode."
             })    
 ]
 }

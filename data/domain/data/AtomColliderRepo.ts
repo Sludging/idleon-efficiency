@@ -64,7 +64,7 @@ export const initAtomColliderRepo = () => {
             }),
         new AtomColliderBase(7, <AtomColliderModel>{
                 "name": "Oxygen - Library Booker",
-                "growthFactor": 2000,
+                "growthFactor": 1000,
                 "baseExponent": 1.24,
                 "baseCost": 3250,
                 "bonusPerLv": 2,
@@ -72,27 +72,43 @@ export const initAtomColliderRepo = () => {
             }),
         new AtomColliderBase(8, <AtomColliderModel>{
                 "name": "Fluoride - Void Plate Chef",
-                "growthFactor": 12000,
+                "growthFactor": 2500,
                 "baseExponent": 1.23,
-                "baseCost": 10000,
+                "baseCost": 2500,
                 "bonusPerLv": 1,
                 "desc": "Multiplies your cooking speed by +{% for every meal at Lv 30+. In other words, every plate with a studded black void plate. Total bonus: >% cooking speed"
             }),
         new AtomColliderBase(9, <AtomColliderModel>{
                 "name": "Neon - Damage N' Cheapener",
-                "growthFactor": 40000,
+                "growthFactor": 5000,
                 "baseExponent": 1.22,
-                "baseCost": 40000,
+                "baseCost": 5000,
                 "bonusPerLv": 1,
                 "desc": "Increases your total damage by +{%. Also, reduces the cost of all atom upgrades by {% too."
             }),
         new AtomColliderBase(10, <AtomColliderModel>{
                 "name": "Sodium - Snail Kryptonite",
-                "growthFactor": 50000,
+                "growthFactor": 12000,
                 "baseExponent": 2,
-                "baseCost": 50000,
+                "baseCost": 12000,
                 "bonusPerLv": 5,
                 "desc": "When you fail a snail upgrade, it's LV gets reset to the nearest 5 (Up to Lv {) instead of back to 0, like failing at Lv 7 will reset to Lv 5."
+            }),
+        new AtomColliderBase(11, <AtomColliderModel>{
+                "name": "Magnesium - Trap Compounder",
+                "growthFactor": 30000,
+                "baseExponent": 1.6,
+                "baseCost": 30000,
+                "bonusPerLv": 1,
+                "desc": "Every day, critters gained from traps increases by +{%. This bonus is capped at 60 days, and resets back to +0% when a new trap is placed."
+            }),
+        new AtomColliderBase(12, <AtomColliderModel>{
+                "name": "Aluminium - Stamp Supercharger",
+                "growthFactor": 200000,
+                "baseExponent": 1.3,
+                "baseCost": 200000,
+                "bonusPerLv": 2,
+                "desc": "Stamp Doublers give an extra +{% MORE bonus than the normal +100% they give!"
             })    
 ]
 }

@@ -2035,8 +2035,8 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "caveB",
-                    "next": "Blank",
+                    "prev": "caveC",
+                    "next": undefined,
                     "hasCrystal": false,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -5891,6 +5891,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsI14", "quantity": 1, "chance": 4e-07, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Line14", "quantity": 1, "chance": 3.3e-09, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest95", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
                     ]
                 },
@@ -5967,13 +5968,13 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsH15", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 0.0001, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "w5c2",
-                    "next": "Crystal4",
+                    "next": "caveC",
                     "hasCrystal": true,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -5982,39 +5983,49 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("caveC", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Guardian Golem",
+                    "Name": "Ancient Golem",
                     "AFKtype": AFKTypeEnum.Fighting,
-                    "MonsterFace": 89,
+                    "MonsterFace": 91,
                     "MonsterOffsetX": 34,
                     "MonsterOffsetY": 49,
                     "HeightOfMonster": 95,
                     "MonsterMoving": 1,
                     "MovingFrame": 10,
-                    "RespawnTime": 45,
+                    "RespawnTime": 90,
                     "DeathFrame": 22,
-                    "MonsterHPTotal": 1e+13,
+                    "MonsterHPTotal": 3e+13,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 10000,
+                    "ExpGiven": 40000000,
                     "ExpType": 0,
-                    "Defence": 10,
-                    "MoveSPEED": 2,
-                    "Damages": [100000, 1],
-                    "DefFor0": 76109.7
+                    "Defence": 1000000000,
+                    "MoveSPEED": 4,
+                    "Damages": [500000, 1],
+                    "DefFor0": 287155
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsH16", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentStatues30", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC24", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest94", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC25", "quantity": 1, "chance": 5e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "caveB",
+                    "next": "Crystal4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("caveD", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Curious Crystal Slime",
+                    "Name": "Shimmer Glunko",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 89,
                     "MonsterOffsetX": 34,
@@ -6033,6 +6044,38 @@ export const initEnemyRepo = () => {
                     "MoveSPEED": 3,
                     "Damages": [100000, 1],
                     "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("reindeer", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Spirit Reindeer",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 5,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -6174,7 +6217,7 @@ export const initEnemyRepo = () => {
                     "MonsterFace": 48,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 56,
+                    "HeightOfMonster": 68,
                     "MonsterMoving": 1,
                     "MovingFrame": 8,
                     "RespawnTime": 60,
@@ -6193,7 +6236,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 2500, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "SnowC5", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest78", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest78", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsE13", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable16", "quantity": 1, "chance": 0.005, "questLink": "N/A"}
                     ]
@@ -7328,6 +7371,33 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": undefined
             }),
+        new EnemyBase("slimeBz", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Glunko Supreme",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 24,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 1200,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 10000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 1000,
+                    "ExpType": 0,
+                    "Defence": 5,
+                    "MoveSPEED": 3,
+                    "Damages": [100, 1],
+                    "DefFor0": 94.54
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("babaHour", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Biggie Hours",
@@ -7352,7 +7422,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 7000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 3000, "chance": 1, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Hgg", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneZ1", "quantity": 2, "chance": 0.4, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes2", "quantity": 66, "chance": 0.06, "questLink": "N/A"},
@@ -7397,7 +7467,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 7500, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ6", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.8, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes2", "quantity": 65, "chance": 0.06, "questLink": "N/A"},
@@ -7443,7 +7513,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 13000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ12", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
                         <ItemDropModel>{"item": "WorshipSkull8", "quantity": 1, "chance": 0.009, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolSlush", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
@@ -7533,7 +7603,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 250000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 20000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 33, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolLava", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
@@ -7578,7 +7648,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 2500000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 100000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ25", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 22, "chance": 0.0008, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentKeychain29", "quantity": 1, "chance": 0.0004, "questLink": "N/A"},
@@ -8073,6 +8143,46 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "EquipmentHats88", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats31", "quantity": 1, "chance": 0.0007, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats32", "quantity": 1, "chance": 0.0007, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("anni4Event1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "IdleOn 4th Anniversary",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Timecandy8", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats108", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats116", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats115", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats117", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats47", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -8667,6 +8777,33 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1,
                     "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Pet12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Axolotl",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 23,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 40,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 40,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 14000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 420,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 3,
                     "Damages": [2, 1],
                     "DefFor0": 0.5
                 },
@@ -11193,1120 +11330,6 @@ export const initEnemyRepo = () => {
                         <SubTableDropModel>{"item": "DropTable4", "quantity": 2, "chance": 1e-08, "questLink": "N/A"}
                     ]
                 },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA1", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 100, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW1", "quantity": 1, "chance": 0.025, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA1", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "OakTree", "quantity": 40, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Copper", "quantity": 30, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "CopperBar", "quantity": 20, "chance": 0.2, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable1", "quantity": 1, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key1", "quantity": 1, "chance": 0.04, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB1", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 400, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentHats17", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW2", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA2", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG4", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Iron", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "CopperBar", "quantity": 50, "chance": 0.35, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key1", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "JungleTree", "quantity": 15, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "BirchTree", "quantity": 25, "chance": 0.1, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable2", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC1", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1250, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.8, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG1", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "IronBar", "quantity": 15, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gold", "quantity": 20, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "ToiletTree", "quantity": 50, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key1", "quantity": 1, "chance": 0.18, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StumpTree", "quantity": 50, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentShirts12", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable3", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD1", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA2", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW2", "quantity": 1, "chance": 0.025, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA2", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Fish1", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Fish2", "quantity": 50, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug1", "quantity": 65, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gold", "quantity": 75, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "GoldBar", "quantity": 20, "chance": 0.2, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable6", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB2", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 4000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentHats18", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW3", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA3", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Fish3", "quantity": 100, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug3", "quantity": 125, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG2", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Plat", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "GoldBar", "quantity": 60, "chance": 0.35, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PalmTree", "quantity": 100, "chance": 0.5, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable7", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC2", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 10000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG3", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PlatBar", "quantity": 20, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Dementia", "quantity": 80, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Fish4", "quantity": 150, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug4", "quantity": 169, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentPants4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.18, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable8", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD2", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA3", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 10000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW3", "quantity": 1, "chance": 0.025, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SnowA2a", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA3", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul1", "quantity": 50, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Critter1", "quantity": 65, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PlatBar", "quantity": 60, "chance": 0.35, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key3", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PlatBar", "quantity": 20, "chance": 0.2, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable14", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB3", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 40000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentHats28", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW3", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA3", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Critter2", "quantity": 350, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug5", "quantity": 150, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key3", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG5", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Dementia", "quantity": 100, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SaharanFoal", "quantity": 100, "chance": 0.5, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable15", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC3", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 100000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "DementiaBar", "quantity": 80, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul2", "quantity": 400, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Void", "quantity": 120, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug6", "quantity": 150, "chance": 0.2, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentPants5", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key3", "quantity": 1, "chance": 0.18, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG6", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable16", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD3", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA4", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Astro Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 800000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW4", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "GalaxyA2b", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul3", "quantity": 250, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Critter6", "quantity": 200, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "VoidBar", "quantity": 100, "chance": 0.35, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.006, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable19", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB4", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Astro Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1500000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA4", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Critter8", "quantity": 600, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug7", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.012, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG7", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Lustre", "quantity": 1000, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "AlienTree", "quantity": 750, "chance": 0.5, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable20", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC4", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Astro Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 4000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "LustreBar", "quantity": 150, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Starfire", "quantity": 2000, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug8", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Key4", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG7", "quantity": 2, "chance": 0.025, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable21", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD4", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Astro Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA5", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Molten Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW5", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "LavaA1b", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA5", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 4, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG9", "quantity": 15, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul4", "quantity": 450, "chance": 0.6, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB5", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Molten Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW5", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA5", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug9", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 9, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG2", "quantity": 40, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Starfire", "quantity": 5000, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Tree9", "quantity": 2500, "chance": 0.5, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC5", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Molten Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "DreadloBar", "quantity": 300, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Dreadlo", "quantity": 3000, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug10", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 12, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG6", "quantity": 100, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG2", "quantity": 40, "chance": 0.25, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable27", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD5", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Molten Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA6", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.12, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW8", "quantity": 1, "chance": 0.015, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SpiA2b", "quantity": 3, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA7", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 15, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG11", "quantity": 60, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul5", "quantity": 1450, "chance": 0.6, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Soul6", "quantity": 1450, "chance": 0.6, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB6", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.23, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneW8", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneA7", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug12", "quantity": 1500, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 30, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG2", "quantity": 200, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Tree12", "quantity": 12500, "chance": 0.5, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC6", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 8000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.45, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "GodshardBar", "quantity": 1000, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Godshard", "quantity": 30000, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Bug13", "quantity": 1500, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 50, "chance": 0.99, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG1", "quantity": 320, "chance": 0.25, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FoodG2", "quantity": 150, "chance": 0.25, "questLink": "N/A"},
-                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 1, "questLink": "N/A"}
-                    ]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD6", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": <EnemyTableModel>{
-                    "drops": [<CoinDropModel>{"item": "COIN", "quantity": 5000, "chance": 1, "questLink": "N/A"}]
-                },
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA7", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB7", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC7", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD7", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestA8", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 18000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 10,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestB8", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 36000,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 500,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestC8", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 86400,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 20000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
-                "mapData": undefined,
-                "navigation": undefined,
-                "bossData": undefined
-            }),
-        new EnemyBase("ChestD8", <EnemyModel>{
-                "details": <EnemyDetailsModel>{
-                    "Name": "NYI Legendary Chest",
-                    "AFKtype": AFKTypeEnum.Error,
-                    "MonsterFace": 0,
-                    "MonsterOffsetX": 34,
-                    "MonsterOffsetY": 25,
-                    "HeightOfMonster": 40,
-                    "MonsterMoving": 0,
-                    "MovingFrame": 0,
-                    "RespawnTime": 345600,
-                    "DeathFrame": 1,
-                    "MonsterHPTotal": 100000,
-                    "Type": EnemyTypeEnum.monsterType,
-                    "SpecialType": "",
-                    "ExpGiven": 0,
-                    "ExpType": 0,
-                    "Defence": 1,
-                    "MoveSPEED": 0,
-                    "Damages": [0, 1],
-                    "DefFor0": 0.22
-                },
-                "drops": undefined,
                 "mapData": undefined,
                 "navigation": undefined,
                 "bossData": undefined

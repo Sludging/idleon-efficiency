@@ -1150,13 +1150,21 @@ export const initCardRepo = () => {
                 "bonus": 4,
                 "order": 14
             }),
+        new CardDataBase("caveC", <CardDataModel>{
+                "cardID": "H16",
+                "category": "Smolderin' Plateau",
+                "perTier": 10000,
+                "effect": "+{% Total Drop Rate (Passive)",
+                "bonus": 4,
+                "order": 15
+            }),
         new CardDataBase("Crystal4", <CardDataModel>{
                 "cardID": "H14",
                 "category": "Smolderin' Plateau",
                 "perTier": 15,
                 "effect": "+{% Skill Efficncy (Passive)",
                 "bonus": 3,
-                "order": 15
+                "order": 16
             }),
         new CardDataBase("w6a1", <CardDataModel>{
                 "cardID": "I1",
@@ -1837,6 +1845,14 @@ export const initCardRepo = () => {
                 "effect": "+{ Star Talent Pts (Passive)",
                 "bonus": 4,
                 "order": 19
+            }),
+        new CardDataBase("anni4Event1", <CardDataModel>{
+                "cardID": "Y19",
+                "category": "Event",
+                "perTier": 4,
+                "effect": "+{% Drop Rate (Passive)",
+                "bonus": 2,
+                "order": 20
             })    
 ]
 }

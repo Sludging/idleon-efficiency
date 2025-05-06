@@ -518,7 +518,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 10,
                 "costCalcType": false,
                 "desc": "Gives you a multiplicative 1.30x Cooking Speed bonus for every Power of 10 Redstone you have. @ Total Bonus: {x Cooking Speed",
-                "order": 51
+                "order": 62
             }),
         new HoleBuildingBase(57, <HoleBuildingModel>{
                 "name": "True Golden Edge",
@@ -527,7 +527,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 10,
                 "costCalcType": false,
                 "desc": "Gives all your players +20% Damage for every Power of 10 Golddust you have. @ Total Bonus: +{% Damage",
-                "order": 36
+                "order": 71
             }),
         new HoleBuildingBase(58, <HoleBuildingModel>{
                 "name": "Loadin' some 'Lode",
@@ -536,7 +536,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 12,
                 "costCalcType": true,
                 "desc": "Gives +5 Bucket Fill Rate per Power of 10 Motherlode Ore mined. You have mined # so far! @ Total Bonus: +{/hr Bucket Fill Rate",
-                "order": 22
+                "order": 80
             }),
         new HoleBuildingBase(59, <HoleBuildingModel>{
                 "name": "Hiring the Hounds from Beyond",
@@ -545,7 +545,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 30,
                 "costCalcType": true,
                 "desc": "Gives +10 B.F.R. per 100 hounds defeated in best runs of each class. 尬  Beginner:!, Warrior:#, Archer:$, Mage:% @ Total Bonus: +{/hr Bucket Fill Rate",
-                "order": 10
+                "order": 69
             }),
         new HoleBuildingBase(60, <HoleBuildingModel>{
                 "name": "Triple Tap Tinkle",
@@ -554,7 +554,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 10,
                 "costCalcType": false,
                 "desc": "Ringing the Bell now has another +30% chance of giving +2 LV to a bonus instead of just +1 LV. Also, there's a new +20% chance of giving +3 LV instead of +2 or +1!",
-                "order": 31
+                "order": 79
             }),
         new HoleBuildingBase(61, <HoleBuildingModel>{
                 "name": "Compound Interest",
@@ -563,7 +563,295 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 600,
                 "costCalcType": false,
                 "desc": "You start with +1 more Court Coins every Power of 2 HRs of AFK time at the Justice Monument! So 2Hrs you get +1 coin, 4Hrs you get +2 coins, 8Hrs you get +3 coins, and so on!",
+                "order": 63
+            }),
+        new HoleBuildingBase(62, <HoleBuildingModel>{
+                "name": "Big Jar Mach II",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": true,
+                "desc": "Upgrades the main jar, doubling the base value of every rupie you find. So if you see 2 red rupies, you actually got 4!",
+                "order": 85
+            }),
+        new HoleBuildingBase(63, <HoleBuildingModel>{
+                "name": "Big Jar Mach III",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, allowing you to produce 2 jar types at once!",
+                "order": 74
+            }),
+        new HoleBuildingBase(64, <HoleBuildingModel>{
+                "name": "Big Jar Mach IV",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, increasing the chance for multiple rupies in a jar by +50%",
+                "order": 81
+            }),
+        new HoleBuildingBase(65, <HoleBuildingModel>{
+                "name": "Big Jar Mach V",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, doubling the base value of every rupie you find AGAIN! If 2 red rupies gave you 4 before, now it's 8!!!",
+                "order": 36
+            }),
+        new HoleBuildingBase(66, <HoleBuildingModel>{
+                "name": "Big Jar Mach VI",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, allowing you to produce 3 jar types at once!",
+                "order": 89
+            }),
+        new HoleBuildingBase(67, <HoleBuildingModel>{
+                "name": "Big Jar Mach VII",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, reducing the production amount required to make jars by 30% so you can make them faster!",
+                "order": 64
+            }),
+        new HoleBuildingBase(68, <HoleBuildingModel>{
+                "name": "Big Jar Mach VIII",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Upgrades the main jar, doubling the base value of every rupie you find! This does not stack with the other ones... just kidding it totally does! ANOTHER 2x RUPIES!!!",
+                "order": 90
+            }),
+        new HoleBuildingBase(69, <HoleBuildingModel>{
+                "name": "Break All Button",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 200,
+                "costCalcType": true,
+                "desc": "Adds a new button to the top left of the Jar, allowing you to break all jars at once!",
+                "order": 76
+            }),
+        new HoleBuildingBase(70, <HoleBuildingModel>{
+                "name": "Max Monument Rewards",
+                "squareImageType": 1,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Monument Reward Multi now increases at the normal rate of +100% daily for 4 full days! Before this upgrade, it was only 2 days...",
+                "order": 70
+            }),
+        new HoleBuildingBase(71, <HoleBuildingModel>{
+                "name": "Supergiant Jars",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 25,
+                "costCalcType": true,
+                "desc": "Jars now COMBINE to save space! 10 Jars becomes 1 large jar, which gives 10x rewards. 10 large jars become 1 giant jar, which gives 100x rewards. This continues forever!",
+                "order": 87
+            }),
+        new HoleBuildingBase(72, <HoleBuildingModel>{
+                "name": "Light Speed",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Every POW 10 white rupies you own increases the production rate of jars by +10% @ Total Bonus: +{% Jar Producton Rate",
+                "order": 91
+            }),
+        new HoleBuildingBase(73, <HoleBuildingModel>{
+                "name": "Dark Luck",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Every POW 10 dark rupies you own increases the chance of enchanting collectibles from the Enchanted Jar by 1.10x @ Total Bonus: {x Enchantment",
+                "order": 65
+            }),
+        new HoleBuildingBase(74, <HoleBuildingModel>{
+                "name": "Jar Production Line",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "The requirement to make a jar is 5% lower per POW 10 jars made of the previous type. For example, making 100 Simple Jars would mean Tall jars are 10% quicker to make!",
+                "order": 78
+            }),
+        new HoleBuildingBase(75, <HoleBuildingModel>{
+                "name": "Advanced Collection",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "You can now find new collectible types from jars, found in the new 2nd page of your collection! Go collect 'em all!",
+                "order": 72
+            }),
+        new HoleBuildingBase(76, <HoleBuildingModel>{
+                "name": "Collect 'Em All",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Gives a 1.02x chance to find a new collectible for every digit of all the rupies you own. @ Total Bonus: {x Collectible Chance",
+                "order": 86
+            }),
+        new HoleBuildingBase(77, <HoleBuildingModel>{
+                "name": "Roaring Flame",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "+25% chance to get DOUBLE the Torches from Ancient Golems when picking them up!",
+                "order": 66
+            }),
+        new HoleBuildingBase(78, <HoleBuildingModel>{
+                "name": "The Sicilian",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "+10% Total Gambit Score",
+                "order": 92
+            }),
+        new HoleBuildingBase(79, <HoleBuildingModel>{
+                "name": "Evertree Trickledown",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 400,
+                "costCalcType": true,
+                "desc": "+15% All Skill Efficiency, and +10% All Skill EXP gain per Evertree Trunk you've whittled!",
+                "order": 22
+            }),
+        new HoleBuildingBase(80, <HoleBuildingModel>{
+                "name": "Evertree ~ Rupie Synergy",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 100,
+                "costCalcType": true,
+                "desc": "Boosts overall Rupie value by 1.10x per Evertree Trunk you've whittled! @ Total Bonus: {x",
+                "order": 73
+            }),
+        new HoleBuildingBase(81, <HoleBuildingModel>{
+                "name": "Rock Smart",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "After much thought, this schematic has decided to give +20% Monument AFK gain, and +2 Starting Attempts for the Wisdom Story per POW 10 Wisdom Monument Hours.",
+                "order": 82
+            }),
+        new HoleBuildingBase(82, <HoleBuildingModel>{
+                "name": "Sanctum of LOOT",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "+20% Drop Rate for each Sanctum of Ancient Golems you've cleared! @ Total Bonus: +{%",
+                "order": 67
+            }),
+        new HoleBuildingBase(83, <HoleBuildingModel>{
+                "name": "Sanctum of EXP",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "+40% Class EXP for each Sanctum of Ancient Golems you've cleared! @ Total Bonus: +{%",
+                "order": 10
+            }),
+        new HoleBuildingBase(84, <HoleBuildingModel>{
+                "name": "Sanctum of DMG",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "+100% Total Damage for each Sanctum of Ancient Golems you've cleared! @ Total Bonus: +{%",
+                "order": 75
+            }),
+        new HoleBuildingBase(85, <HoleBuildingModel>{
+                "name": "Peer Reviewed Books",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Bolaia now get +7% Study Rate per LV, instead of the previous +5% per LV!",
+                "order": 77
+            }),
+        new HoleBuildingBase(86, <HoleBuildingModel>{
+                "name": "All This Ringing in my Ears",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "When Ringing the Bell, there is now a 25% chance to get 2x more LVs than you otherwise would have gotten!",
+                "order": 83
+            }),
+        new HoleBuildingBase(87, <HoleBuildingModel>{
+                "name": "Cutting Edge Research",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Bolaia now get a massive +10% Study Rate per LV, instead of the previous +7% per LV!",
+                "order": 93
+            }),
+        new HoleBuildingBase(88, <HoleBuildingModel>{
+                "name": "Billion Dollar Grant",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 1000000000,
+                "costCalcType": true,
+                "desc": "Bolaia now get a sumptuous +15% Study Rate per LV, instead of the previous +10% per LV!",
                 "order": 11
+            }),
+        new HoleBuildingBase(89, <HoleBuildingModel>{
+                "name": "Horsey Gambit",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Unlocks the Horsey challenge in the Gambit cavern.",
+                "order": 68
+            }),
+        new HoleBuildingBase(90, <HoleBuildingModel>{
+                "name": "Bishop Gambit",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Unlocks the Bishop challenge in the Gambit cavern.",
+                "order": 88
+            }),
+        new HoleBuildingBase(91, <HoleBuildingModel>{
+                "name": "Queen Gambit",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Unlocks the Queen challenge in the Gambit cavern.",
+                "order": 84
+            }),
+        new HoleBuildingBase(92, <HoleBuildingModel>{
+                "name": "Castle Gambit",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Unlocks the Castle challenge in the Gambit cavern.",
+                "order": 51
+            }),
+        new HoleBuildingBase(93, <HoleBuildingModel>{
+                "name": "Noob Gambit",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Unlocks the Noob challenge in the Gambit cavern.",
+                "order": 31
             })    
 ]
 }
