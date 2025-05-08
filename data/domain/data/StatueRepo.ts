@@ -34,6 +34,7 @@ export const initStatueRepo = () => {
         new StatueDataBase(25, <StatueDataModel>{"name": "Compost", "effect": "%@Farming Exp", "dk": 75, "bonus": 0.4}),
         new StatueDataBase(26, <StatueDataModel>{"name": "Stealth", "effect": "%@Stealth", "dk": 185, "bonus": 0.3}),
         new StatueDataBase(27, <StatueDataModel>{"name": "Essence", "effect": "%@White Ess", "dk": 160, "bonus": 0.6}),
-        new StatueDataBase(28, <StatueDataModel>{"name": "Dragon", "effect": "%@Statues Bonus", "dk": 270, "bonus": 0.2})    
+        new StatueDataBase(28, <StatueDataModel>{"name": "Villager", "effect": "%@Villager Exp", "dk": 120, "bonus": 0.3}),
+        new StatueDataBase(29, <StatueDataModel>{"name": "Dragon", "effect": "%@Statues Bonus", "dk": 270, "bonus": 0.2})    
 ]
 }

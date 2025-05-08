@@ -196,7 +196,7 @@ export class ObolsData extends Domain {
                     return;
                 }
                 let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
-                if (!obol.includes("Locked") && obol != "Blank" && Object.keys(tabModifications).includes(obolIndex.toString())) {
+                if (!obol.includes("Locked") && obol != "Blank" && (tabModifications && Object.keys(tabModifications).includes(obolIndex.toString()))) {
                     itemInfo.addStone(tabModifications[obolIndex]);
                 }
                 obols.inventory.get(index)?.push(new Obol(itemInfo, -1, false, index as ObolType));

@@ -17,7 +17,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": -1,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% White Essence generated per hour for each win across all colours. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(1, <SummonUpgradeModel>{
@@ -31,7 +31,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 0,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(2, <SummonUpgradeModel>{
@@ -45,7 +45,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 10,
                 "idReq": 0,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "Summons a slime familiar to chill in your sanctuary, generating 10 Summoning EXP every hour. @ Cost resets in"
             }),
         new SummonUpgradeBase(3, <SummonUpgradeModel>{
@@ -59,7 +59,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 1,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(4, <SummonUpgradeModel>{
@@ -73,7 +73,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 3,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Green Summoning Stone, and begins generating Green Essence. @ Also, +{% Green Essence per hour"
             }),
         new SummonUpgradeBase(5, <SummonUpgradeModel>{
@@ -87,7 +87,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 3,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "During competition, mana generation is +{% higher than normal."
             }),
         new SummonUpgradeBase(6, <SummonUpgradeModel>{
@@ -101,7 +101,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 9,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "3 Slime Familiars merge into a Vrumbi Familiar which gives 4x Summoning Exp. 4 Vrumbies then merge and give 5x exp. This repeats many times."
             }),
         new SummonUpgradeBase(7, <SummonUpgradeModel>{
@@ -115,7 +115,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 5,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "All your units get a +{% chance to dodge damage when colliding with an enemy"
             }),
         new SummonUpgradeBase(8, <SummonUpgradeModel>{
@@ -129,7 +129,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 7,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "There's a chance cards can played multiple times, indicated by the number in the top-left corner. These cards also come with a smaller cost!"
             }),
         new SummonUpgradeBase(9, <SummonUpgradeModel>{
@@ -143,7 +143,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 10,
                 "idReq": 4,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "7% chance to draw a Vrumbi during competition. They have 1.5x SPD, 2.0x DMG, and +{% Dodge Chance"
             }),
         new SummonUpgradeBase(10, <SummonUpgradeModel>{
@@ -157,7 +157,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 9,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(11, <SummonUpgradeModel>{
@@ -171,7 +171,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 10,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Green Essence generated per hour for each Green circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(12, <SummonUpgradeModel>{
@@ -185,7 +185,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 11,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(13, <SummonUpgradeModel>{
@@ -199,7 +199,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 12,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Yellow Summoning Stone, and begins generating Yellow Essence. @ Also, +{% Yellow Essence per hour"
             }),
         new SummonUpgradeBase(14, <SummonUpgradeModel>{
@@ -213,7 +213,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 12,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "During competition, when your mana pool is full, expand max mana by 1.5x and boost mana generation by +15%"
             }),
         new SummonUpgradeBase(15, <SummonUpgradeModel>{
@@ -227,7 +227,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 12,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "When summoning any unit, deal { damage to all enemies within 100 pixels of where you click... You don't have to click in your spawn!"
             }),
         new SummonUpgradeBase(16, <SummonUpgradeModel>{
@@ -241,7 +241,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 15,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Start each competition with +{ more mana"
             }),
         new SummonUpgradeBase(17, <SummonUpgradeModel>{
@@ -255,7 +255,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 10,
                 "idReq": 13,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "4% chance to draw a Bloomy during competition. They sit in the backline and give +{% Mana Generation while alive."
             }),
         new SummonUpgradeBase(18, <SummonUpgradeModel>{
@@ -269,7 +269,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 17,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Yellow Essence generated per hour for each Yellow circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(19, <SummonUpgradeModel>{
@@ -283,7 +283,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 10,
                 "idReq": 18,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "All special units are >x more likely to be drawn instead of slime."
             }),
         new SummonUpgradeBase(20, <SummonUpgradeModel>{
@@ -297,7 +297,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 19,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{%"
             }),
         new SummonUpgradeBase(21, <SummonUpgradeModel>{
@@ -311,7 +311,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 20,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(22, <SummonUpgradeModel>{
@@ -325,7 +325,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 21,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "When spawning any unit during competition, +{% chance to also spawn an exact duplicate, free of charge!"
             }),
         new SummonUpgradeBase(23, <SummonUpgradeModel>{
@@ -339,7 +339,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 22,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Blue Summoning Stone, and begins generating Blue Essence. @ Also, +{% Blue Essence per hour"
             }),
         new SummonUpgradeBase(24, <SummonUpgradeModel>{
@@ -353,7 +353,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 3,
                 "idReq": 22,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Re-Draw button, allowing you to instantly redraw all your cards for a cost... but you get the first { for free!"
             }),
         new SummonUpgradeBase(25, <SummonUpgradeModel>{
@@ -367,7 +367,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 24,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "Adds +1 Card Slot, letting you hold more cards at once!"
             }),
         new SummonUpgradeBase(26, <SummonUpgradeModel>{
@@ -381,7 +381,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 20,
                 "idReq": 23,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "5% chance to draw a Tonka during competition. They have 0.75x SPD, 0.75x DMG, and 8.0x HP. Your upgrades here boost its HP by a further +{%."
             }),
         new SummonUpgradeBase(27, <SummonUpgradeModel>{
@@ -395,7 +395,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 26,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Blue Essence generated per hour for each Blue circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(28, <SummonUpgradeModel>{
@@ -409,7 +409,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 27,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "When spawning any unit during competition, +{% chance to also spawn an exact duplicate, free of charge!"
             }),
         new SummonUpgradeBase(29, <SummonUpgradeModel>{
@@ -423,7 +423,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 28,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "During competition, mana generation is +{% higher than normal."
             }),
         new SummonUpgradeBase(30, <SummonUpgradeModel>{
@@ -437,7 +437,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 29,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Blue Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(31, <SummonUpgradeModel>{
@@ -451,7 +451,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 30,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(32, <SummonUpgradeModel>{
@@ -465,7 +465,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 3,
                 "idReq": 31,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "{% chance to draw a Jeweled variant of any card, which costs 2x Mana but spawns 4x Units!"
             }),
         new SummonUpgradeBase(33, <SummonUpgradeModel>{
@@ -479,7 +479,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 32,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Purple Summoning Stone, and begins generating Purple Essence. @ Also, +{% Purple Essence per hour"
             }),
         new SummonUpgradeBase(34, <SummonUpgradeModel>{
@@ -493,7 +493,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 32,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "Adds +1 Card Slot! Or as an AI might say, this upgrade further substantiates the incremental improvement to the quantity of cards you hold by 1"
             }),
         new SummonUpgradeBase(35, <SummonUpgradeModel>{
@@ -507,7 +507,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 34,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(36, <SummonUpgradeModel>{
@@ -521,7 +521,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 33,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "3% chance to draw a Regalis during competition. They spawn a Slime Unit every 1 sec. Upgrading this boosts slime unit spawn rate by +{%"
             }),
         new SummonUpgradeBase(37, <SummonUpgradeModel>{
@@ -535,7 +535,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 36,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{"
             }),
         new SummonUpgradeBase(38, <SummonUpgradeModel>{
@@ -549,7 +549,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 37,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Purple Essence generated per hour for each Purple circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(39, <SummonUpgradeModel>{
@@ -563,7 +563,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 100,
                 "idReq": 38,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "When summoning a Slime Familiar, there's a 1 in 8 to get a Vrumbi instead of Slime, and 1 in 50 to get a Bloomy. Upgrading this boosts this chance by +{%"
             }),
         new SummonUpgradeBase(40, <SummonUpgradeModel>{
@@ -577,7 +577,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 39,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Purple Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(41, <SummonUpgradeModel>{
@@ -591,7 +591,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 3,
                 "idReq": 38,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "If you play every card in your hand, get +{% Mana Regen per card played. Playing Multi-Number cards counts multiple times for this!"
             }),
         new SummonUpgradeBase(42, <SummonUpgradeModel>{
@@ -605,7 +605,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 41,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "During competition, mana generation is +{% higher than normal."
             }),
         new SummonUpgradeBase(43, <SummonUpgradeModel>{
@@ -619,7 +619,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 42,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{%"
             }),
         new SummonUpgradeBase(44, <SummonUpgradeModel>{
@@ -633,7 +633,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 43,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Red Summoning Stone, and begins generating Red Essence. @ Also, +{% Red Essence per hour"
             }),
         new SummonUpgradeBase(45, <SummonUpgradeModel>{
@@ -647,7 +647,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 44,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "5% chance to draw a Sparkie during competition. They have 3.0X DMG and explode on death. Your upgrades here boost it's DMG by a further +{%."
             }),
         new SummonUpgradeBase(46, <SummonUpgradeModel>{
@@ -661,7 +661,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 45,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Red Essence generated per hour for each Red circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(47, <SummonUpgradeModel>{
@@ -675,7 +675,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 10,
                 "idReq": 46,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "When an enemy crosses your line and damages you, all units get {% DMG for the rest of the fight. This stacks every time an enemy crosses your line."
             }),
         new SummonUpgradeBase(48, <SummonUpgradeModel>{
@@ -689,7 +689,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 40,
                 "idReq": 47,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "When spawning any unit during competition, +{% chance to also spawn an exact duplicate, free of charge!"
             }),
         new SummonUpgradeBase(49, <SummonUpgradeModel>{
@@ -703,7 +703,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 48,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "All Summoning upgrades cost }% less Essence."
             }),
         new SummonUpgradeBase(50, <SummonUpgradeModel>{
@@ -717,7 +717,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 49,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by a brand new multiplier of +{%"
             }),
         new SummonUpgradeBase(51, <SummonUpgradeModel>{
@@ -731,7 +731,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 50,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by a brand new multiplier of +{%"
             }),
         new SummonUpgradeBase(52, <SummonUpgradeModel>{
@@ -745,7 +745,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 51,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Red Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(53, <SummonUpgradeModel>{
@@ -759,7 +759,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 49,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Unlocks the Cyan Summoning Stone, and begins generating Cyan Essence. @ Also, +{% Cyan Essence per hour"
             }),
         new SummonUpgradeBase(54, <SummonUpgradeModel>{
@@ -773,7 +773,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 69,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Cyan Essence generated per hour for each Cyan circuit win. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(55, <SummonUpgradeModel>{
@@ -787,7 +787,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 54,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "All your units get a +{% chance to dodge damage when colliding with an enemy"
             }),
         new SummonUpgradeBase(56, <SummonUpgradeModel>{
@@ -801,7 +801,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 55,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the DMG of all summoned units in competition by +{%"
             }),
         new SummonUpgradeBase(57, <SummonUpgradeModel>{
@@ -815,7 +815,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 69,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "All Summoning upgrades cost }% less Essence."
             }),
         new SummonUpgradeBase(58, <SummonUpgradeModel>{
@@ -829,7 +829,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 57,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Cyan Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(59, <SummonUpgradeModel>{
@@ -843,7 +843,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 58,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Increases the HP of all summoned units in competition by +{%"
             }),
         new SummonUpgradeBase(60, <SummonUpgradeModel>{
@@ -857,7 +857,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 59,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Boosts the DMG of all summoned units by +{% for every 100 total summoning upgrades purchased. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(61, <SummonUpgradeModel>{
@@ -871,7 +871,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 60,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Boosts the HP of all summoned units by +{% for every 100 total summoning upgrades purchased. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(62, <SummonUpgradeModel>{
@@ -885,7 +885,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 70,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "The generation of all essence colours is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(63, <SummonUpgradeModel>{
@@ -899,7 +899,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 62,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "The HP of all summoned units is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(64, <SummonUpgradeModel>{
@@ -913,7 +913,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 63,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "The DMG of all summoned units is increased by +{% for every Endless Summoning victory you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(65, <SummonUpgradeModel>{
@@ -927,7 +927,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 4,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% White Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(66, <SummonUpgradeModel>{
@@ -941,7 +941,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 16,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Green Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(67, <SummonUpgradeModel>{
@@ -955,7 +955,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 9999,
                 "idReq": 19,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "+{% Yellow Essence generation per Summoning LV you have. @ Total bonus: +}%"
             }),
         new SummonUpgradeBase(68, <SummonUpgradeModel>{
@@ -969,7 +969,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 20,
                 "idReq": 25,
-                "filler": "filler",
+                "filler": "1",
                 "bonus": "Spike damage is increased by {% of your base unit damage. @ Total Bonus Spike DMG: +}"
             }),
         new SummonUpgradeBase(69, <SummonUpgradeModel>{
@@ -983,7 +983,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 30,
                 "idReq": 53,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "4% chance to draw a Guardio! They sit in midfield, do 0 DMG, have 12x HP, and aren't knocked back. Your upgrades here boost its HP by a further +{%."
             }),
         new SummonUpgradeBase(70, <SummonUpgradeModel>{
@@ -997,7 +997,7 @@ export const initSummonUpgradeRepo = () => {
                 "summonLvlReq": 0,
                 "maxLvl": 1,
                 "idReq": 58,
-                "filler": "filler",
+                "filler": "0",
                 "bonus": "Unlocks the Endless Summoning feature, accessed in the Top Right when selecting an opponent! Go to the Summoner's Table, you can't miss it!"
             })    
 ]

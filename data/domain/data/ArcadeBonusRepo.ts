@@ -325,6 +325,86 @@ export const initArcadeBonusRepo = () => {
                 "func": "add",
                 "type": "%",
                 "lvlUpText": "+{% Balls"
+            }),
+        new ArcadeBonusBase(40, <ArcadeBonusModel>{
+                "effect": "+{% Deathbringer Bones",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Bones"
+            }),
+        new ArcadeBonusBase(41, <ArcadeBonusModel>{
+                "effect": "+{% Equinox Fill Rate",
+                "x1": 0.75,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Fill Rate"
+            }),
+        new ArcadeBonusBase(42, <ArcadeBonusModel>{
+                "effect": "+{% Monument AFK",
+                "x1": 0.5,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% AFK"
+            }),
+        new ArcadeBonusBase(43, <ArcadeBonusModel>{
+                "effect": "+{% Sigil Speed",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Speed"
+            }),
+        new ArcadeBonusBase(44, <ArcadeBonusModel>{
+                "effect": "+{% Construction Build",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Build Rate"
+            }),
+        new ArcadeBonusBase(45, <ArcadeBonusModel>{
+                "effect": "+{% Burger",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Burger"
+            }),
+        new ArcadeBonusBase(46, <ArcadeBonusModel>{
+                "effect": "+{% Total Damage",
+                "x1": 2,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Damage"
+            }),
+        new ArcadeBonusBase(47, <ArcadeBonusModel>{
+                "effect": "+{% Windwalker Dust",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Dust"
+            }),
+        new ArcadeBonusBase(48, <ArcadeBonusModel>{
+                "effect": "+{% Medallion Chance",
+                "x1": 0.5,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Chance"
+            }),
+        new ArcadeBonusBase(49, <ArcadeBonusModel>{
+                "effect": "+{% Breedability Rate",
+                "x1": 100,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Breed Rate"
             })    
 ]
 }

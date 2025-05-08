@@ -355,7 +355,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getStars() + 1 : 0), 0);
 
     // Sum of highest level for each talent
-    const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + talentMaxLevel, 0);
+    // TODO: Rethink if rounding is correct, need to look at game code.
+    const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + Math.round(talentMaxLevel), 0);
 
     // Sum of players Levels
     const totalPlayersLevels = players.reduce((sum, player) => sum + player.level, 0);
@@ -880,6 +881,8 @@ const tomeLineDisplayOrder = [
     26,
     27,
     28,
+    85,
+    86,
     29,
     30,
     31,
@@ -917,6 +920,16 @@ const tomeLineDisplayOrder = [
     56,
     65,
     66,
+    93,
+    84,
+    83,
+    92,
+    91,
+    87,
+    88,
+    89,
+    82,
+    94,
     67,
     68,
     69,
@@ -926,6 +939,7 @@ const tomeLineDisplayOrder = [
     43,
     72,
     73,
+    90,
     74,
     77,
     78

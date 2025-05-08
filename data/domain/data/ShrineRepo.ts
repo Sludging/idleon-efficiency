@@ -52,7 +52,7 @@ export const initShrineRepo = () => {
                 "name": "Crescent Shrine",
                 "desc": "Boosts Crystal and Giant Spawn chance on this map by +%. @ AFK Time to next Lv: @",
                 "baseBonus": 50,
-                "increment": 10,
+                "increment": 7.5,
                 "misc": 0
             }),
         new ShrineBase(7, <ShrineModel>{

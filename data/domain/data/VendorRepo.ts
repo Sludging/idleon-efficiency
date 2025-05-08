@@ -882,9 +882,16 @@ export const initVendorRepo = () => {
                     },
                     <VendorModel>{
                         "vendor": "Magma Rivertown",
-                        "item": "Quest84",
+                        "item": "InvBag113",
                         "quantity": 1,
                         "no": 8,
+                        "purchasePrice": 1000000000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Magma Rivertown",
+                        "item": "Quest84",
+                        "quantity": 1,
+                        "no": 9,
                         "purchasePrice": 4000000000000000
                     }
                 ]
@@ -957,23 +964,30 @@ export const initVendorRepo = () => {
                     },
                     <VendorModel>{
                         "vendor": "Spirit Village",
-                        "item": "InvStorage26",
+                        "item": "InvBag114",
                         "quantity": 1,
                         "no": 10,
+                        "purchasePrice": 100000000000000004764729344
+                    },
+                    <VendorModel>{
+                        "vendor": "Spirit Village",
+                        "item": "InvStorage26",
+                        "quantity": 1,
+                        "no": 11,
                         "purchasePrice": 400000000000000000
                     },
                     <VendorModel>{
                         "vendor": "Spirit Village",
                         "item": "InvStorage27",
                         "quantity": 1,
-                        "no": 11,
+                        "no": 12,
                         "purchasePrice": 10000000000000000000
                     },
                     <VendorModel>{
                         "vendor": "Spirit Village",
                         "item": "InvStorage28",
                         "quantity": 1,
-                        "no": 12,
+                        "no": 13,
                         "purchasePrice": 28000000000000000000000
                     }
                 ]

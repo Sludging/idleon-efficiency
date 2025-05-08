@@ -1058,10 +1058,10 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 37,
                 "width": 24,
                 "territoryName": "ENIGMA INFINITE and their Rift Spookers",
-                "bonusId": 0,
-                "bonus": undefined,
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(96, <SummonEnemyModel>{
                 "enemyId": "rift2",
@@ -1069,10 +1069,10 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 59,
                 "width": 18,
                 "territoryName": "ENIGMA INFINITE and their Rift Slugs",
-                "bonusId": 0,
-                "bonus": undefined,
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(97, <SummonEnemyModel>{
                 "enemyId": "rift3",
@@ -1080,10 +1080,10 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 34,
                 "width": 28,
                 "territoryName": "ENIGMA INFINITE and their Rift Jocunds",
-                "bonusId": 0,
-                "bonus": undefined,
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(98, <SummonEnemyModel>{
                 "enemyId": "rift4",
@@ -1091,10 +1091,10 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 37,
                 "width": 22,
                 "territoryName": "ENIGMA INFINITE and their Rift Hiveminds",
-                "bonusId": 0,
-                "bonus": undefined,
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(99, <SummonEnemyModel>{
                 "enemyId": "rift5",
@@ -1102,6 +1102,72 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 39,
                 "width": 32,
                 "territoryName": "ENIGMA INFINITE and their Rift Stalkers",
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(100, <SummonEnemyModel>{
+                "enemyId": "Crystal1",
+                "xOff": 35,
+                "yOff": 42,
+                "width": 20,
+                "territoryName": "King's Gambit",
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(101, <SummonEnemyModel>{
+                "enemyId": "Crystal2",
+                "xOff": 35,
+                "yOff": 35,
+                "width": 15,
+                "territoryName": "Horsey's Gambit",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(102, <SummonEnemyModel>{
+                "enemyId": "Crystal3",
+                "xOff": 36,
+                "yOff": 38,
+                "width": 20,
+                "territoryName": "Bishop's Gambit",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(103, <SummonEnemyModel>{
+                "enemyId": "Crystal4",
+                "xOff": 35,
+                "yOff": 35,
+                "width": 30,
+                "territoryName": "Queen's Gambit",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(104, <SummonEnemyModel>{
+                "enemyId": "Crystal0",
+                "xOff": 44,
+                "yOff": 44,
+                "width": 22,
+                "territoryName": "Castle's Gambit",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(105, <SummonEnemyModel>{
+                "enemyId": "Crystal5",
+                "xOff": 30,
+                "yOff": 30,
+                "width": 23,
+                "territoryName": "Noob's Gambit",
                 "bonusId": 0,
                 "bonus": undefined,
                 "bonusQty": 0,

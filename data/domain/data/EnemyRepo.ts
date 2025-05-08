@@ -2035,8 +2035,8 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "caveB",
-                    "next": "Blank",
+                    "prev": "caveC",
+                    "next": undefined,
                     "hasCrystal": false,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -5891,6 +5891,7 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsI14", "quantity": 1, "chance": 4e-07, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Line14", "quantity": 1, "chance": 3.3e-09, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest95", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable32", "quantity": 1, "chance": 0.0035, "questLink": "N/A"}
                     ]
                 },
@@ -5967,13 +5968,13 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsH15", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "EquipmentStatues29", "quantity": 1, "chance": 0.0001, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "w5c2",
-                    "next": "Crystal4",
+                    "next": "caveC",
                     "hasCrystal": true,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -5982,39 +5983,49 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("caveC", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Guardian Golem",
+                    "Name": "Ancient Golem",
                     "AFKtype": AFKTypeEnum.Fighting,
-                    "MonsterFace": 89,
+                    "MonsterFace": 91,
                     "MonsterOffsetX": 34,
                     "MonsterOffsetY": 49,
                     "HeightOfMonster": 95,
                     "MonsterMoving": 1,
                     "MovingFrame": 10,
-                    "RespawnTime": 45,
+                    "RespawnTime": 90,
                     "DeathFrame": 22,
-                    "MonsterHPTotal": 1e+13,
+                    "MonsterHPTotal": 3e+13,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 10000,
+                    "ExpGiven": 40000000,
                     "ExpType": 0,
-                    "Defence": 10,
-                    "MoveSPEED": 2,
-                    "Damages": [100000, 1],
-                    "DefFor0": 76109.7
+                    "Defence": 1000000000,
+                    "MoveSPEED": 4,
+                    "Damages": [500000, 1],
+                    "DefFor0": 287155
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsH16", "quantity": 1, "chance": 5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentStatues30", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC24", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest94", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "StampC25", "quantity": 1, "chance": 5e-08, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "caveB",
+                    "next": "Crystal4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("caveD", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Curious Crystal Slime",
+                    "Name": "Shimmer Glunko",
                     "AFKtype": AFKTypeEnum.Fighting,
                     "MonsterFace": 89,
                     "MonsterOffsetX": 34,
@@ -6033,6 +6044,38 @@ export const initEnemyRepo = () => {
                     "MoveSPEED": 3,
                     "Damages": [100000, 1],
                     "DefFor0": 76109.7
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("reindeer", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Spirit Reindeer",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 500000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 5,
+                    "Damages": [1, 1],
+                    "DefFor0": 0
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
@@ -6174,7 +6217,7 @@ export const initEnemyRepo = () => {
                     "MonsterFace": 48,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 56,
+                    "HeightOfMonster": 68,
                     "MonsterMoving": 1,
                     "MovingFrame": 8,
                     "RespawnTime": 60,
@@ -6193,7 +6236,7 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 2500, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "SnowC5", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest78", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Quest78", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsE13", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable16", "quantity": 1, "chance": 0.005, "questLink": "N/A"}
                     ]
@@ -7328,6 +7371,33 @@ export const initEnemyRepo = () => {
                 },
                 "bossData": undefined
             }),
+        new EnemyBase("slimeBz", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Glunko Supreme",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 24,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 1200,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 10000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 1000,
+                    "ExpType": 0,
+                    "Defence": 5,
+                    "MoveSPEED": 3,
+                    "Damages": [100, 1],
+                    "DefFor0": 94.54
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("babaHour", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Biggie Hours",
@@ -7352,7 +7422,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 7000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 3000, "chance": 1, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Hgg", "quantity": 1, "chance": 0.3, "questLink": "N/A"},
                         <ItemDropModel>{"item": "StoneZ1", "quantity": 2, "chance": 0.4, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes2", "quantity": 66, "chance": 0.06, "questLink": "N/A"},
@@ -7397,7 +7467,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 7500, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ6", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Key2", "quantity": 1, "chance": 0.8, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes2", "quantity": 65, "chance": 0.06, "questLink": "N/A"},
@@ -7443,7 +7513,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 25000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 13000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ12", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
                         <ItemDropModel>{"item": "WorshipSkull8", "quantity": 1, "chance": 0.009, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolSlush", "quantity": 1, "chance": 0.004, "questLink": "N/A"},
@@ -7533,7 +7603,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 250000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 20000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes5", "quantity": 33, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "ObolLava", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
@@ -7578,7 +7648,7 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 2500000, "chance": 1, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 100000, "chance": 1, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsZ25", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 22, "chance": 0.0008, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentKeychain29", "quantity": 1, "chance": 0.0004, "questLink": "N/A"},
@@ -8073,6 +8143,46 @@ export const initEnemyRepo = () => {
                         <ItemDropModel>{"item": "EquipmentHats88", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats31", "quantity": 1, "chance": 0.0007, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats32", "quantity": 1, "chance": 0.0007, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("anni4Event1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "IdleOn 4th Anniversary",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 750000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Timecandy8", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats108", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats116", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats115", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats117", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats47", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -8667,6 +8777,33 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 1,
                     "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Pet12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Axolotl",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 23,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 40,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 40,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 14000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 420,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 3,
                     "Damages": [2, 1],
                     "DefFor0": 0.5
                 },
@@ -11199,7 +11336,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Bronze Chest",
+                    "Name": "Dewdrop Bronze Chest(W1)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11238,7 +11375,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Silver Chest",
+                    "Name": "Dewdrop Silver Chest(W1)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11280,7 +11417,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC1", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Dewdrop Golden Chest",
+                    "Name": "Dewdrop Golden Chest(W1)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11350,7 +11487,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA2", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Bronze Chest",
+                    "Name": "Sandstone Bronze Chest(W2)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11391,7 +11528,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB2", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Silver Chest",
+                    "Name": "Sandstone Silver Chest(W2)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11434,7 +11571,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC2", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Sandstone Golden Chest",
+                    "Name": "Sandstone Golden Chest(W2)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11503,7 +11640,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA3", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Bronze Chest",
+                    "Name": "Chillsnap Bronze Chest(W3)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11544,7 +11681,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB3", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Silver Chest",
+                    "Name": "Chillsnap Silver Chest(W3)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11586,7 +11723,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC3", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Chillsnap Golden Chest",
+                    "Name": "Chillsnap Golden Chest(W3)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11655,7 +11792,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA4", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Astro Bronze Chest",
+                    "Name": "Astro Bronze Chest(W4)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11695,7 +11832,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB4", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Astro Silver Chest",
+                    "Name": "Astro Silver Chest(W4)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11736,7 +11873,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC4", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Astro Golden Chest",
+                    "Name": "Astro Golden Chest(W4)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11803,7 +11940,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Molten Bronze Chest",
+                    "Name": "Molten Bronze Chest(W5)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11842,7 +11979,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Molten Silver Chest",
+                    "Name": "Molten Silver Chest(W5)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11882,7 +12019,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC5", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Molten Golden Chest",
+                    "Name": "Molten Golden Chest(W5)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11950,7 +12087,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Bronze Chest",
+                    "Name": "Whimsical Bronze Chest(W6)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -11990,7 +12127,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Silver Chest",
+                    "Name": "Whimsical Silver Chest(W6)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12029,7 +12166,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC6", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Whimsical Golden Chest",
+                    "Name": "Whimsical Golden Chest(W6)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12097,7 +12234,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA7", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
+                    "Name": "NYI Bronze Chest(W7)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12124,7 +12261,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB7", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
+                    "Name": "NYI Silver Chest(W7)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12151,7 +12288,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC7", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
+                    "Name": "NYI Golden Chest(W7)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12205,7 +12342,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestA8", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Bronze Chest",
+                    "Name": "NYI Bronze Chest(W8)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12232,7 +12369,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestB8", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Silver Chest",
+                    "Name": "NYI Silver Chest(W8)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,
@@ -12259,7 +12396,7 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("ChestC8", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "NYI Golden Chest",
+                    "Name": "NYI Golden Chest(W8)",
                     "AFKtype": AFKTypeEnum.Error,
                     "MonsterFace": 0,
                     "MonsterOffsetX": 34,

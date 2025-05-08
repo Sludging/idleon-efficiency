@@ -3054,28 +3054,28 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 10638.1
             }),
         new EnemyDetailsBase("caveC", <EnemyDetailsModel>{
-                "Name": "Guardian Golem",
+                "Name": "Ancient Golem",
                 "AFKtype": AFKTypeEnum.Fighting,
-                "MonsterFace": 89,
+                "MonsterFace": 91,
                 "MonsterOffsetX": 34,
                 "MonsterOffsetY": 49,
                 "HeightOfMonster": 95,
                 "MonsterMoving": 1,
                 "MovingFrame": 10,
-                "RespawnTime": 45,
+                "RespawnTime": 90,
                 "DeathFrame": 22,
-                "MonsterHPTotal": 1e+13,
+                "MonsterHPTotal": 3e+13,
                 "Type": EnemyTypeEnum.monsterType,
                 "SpecialType": "",
-                "ExpGiven": 10000,
+                "ExpGiven": 40000000,
                 "ExpType": 0,
-                "Defence": 10,
-                "MoveSPEED": 2,
-                "Damages": [100000, 1],
-                "DefFor0": 76109.7
+                "Defence": 1000000000,
+                "MoveSPEED": 4,
+                "Damages": [500000, 1],
+                "DefFor0": 287155
             }),
         new EnemyDetailsBase("caveD", <EnemyDetailsModel>{
-                "Name": "Curious Crystal Slime",
+                "Name": "Shimmer Glunko",
                 "AFKtype": AFKTypeEnum.Fighting,
                 "MonsterFace": 89,
                 "MonsterOffsetX": 34,
@@ -3094,6 +3094,27 @@ export const initEnemyDetailsRepo = () => {
                 "MoveSPEED": 3,
                 "Damages": [100000, 1],
                 "DefFor0": 76109.7
+            }),
+        new EnemyDetailsBase("reindeer", <EnemyDetailsModel>{
+                "Name": "Spirit Reindeer",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 89,
+                "MonsterOffsetX": 34,
+                "MonsterOffsetY": 49,
+                "HeightOfMonster": 85,
+                "MonsterMoving": 1,
+                "MovingFrame": 6,
+                "RespawnTime": 45,
+                "DeathFrame": 18,
+                "MonsterHPTotal": 500000000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "a",
+                "ExpGiven": 1,
+                "ExpType": 0,
+                "Defence": 1,
+                "MoveSPEED": 5,
+                "Damages": [1, 1],
+                "DefFor0": 0
             }),
         new EnemyDetailsBase("mushR", <EnemyDetailsModel>{
                 "Name": "Red Mushroom",
@@ -3164,7 +3185,7 @@ export const initEnemyDetailsRepo = () => {
                 "MonsterFace": 48,
                 "MonsterOffsetX": 38,
                 "MonsterOffsetY": 47,
-                "HeightOfMonster": 56,
+                "HeightOfMonster": 68,
                 "MonsterMoving": 1,
                 "MovingFrame": 8,
                 "RespawnTime": 60,
@@ -3620,6 +3641,27 @@ export const initEnemyDetailsRepo = () => {
                 "Damages": [100, 1],
                 "DefFor0": 94.54
             }),
+        new EnemyDetailsBase("slimeBz", <EnemyDetailsModel>{
+                "Name": "Glunko Supreme",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 24,
+                "MonsterOffsetX": 22,
+                "MonsterOffsetY": 38,
+                "HeightOfMonster": 90,
+                "MonsterMoving": 1,
+                "MovingFrame": 10,
+                "RespawnTime": 1200,
+                "DeathFrame": 22,
+                "MonsterHPTotal": 10000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "a",
+                "ExpGiven": 1000,
+                "ExpType": 0,
+                "Defence": 5,
+                "MoveSPEED": 3,
+                "Damages": [100, 1],
+                "DefFor0": 94.54
+            }),
         new EnemyDetailsBase("babaHour", <EnemyDetailsModel>{
                 "Name": "Biggie Hours",
                 "AFKtype": AFKTypeEnum.Fighting,
@@ -4000,6 +4042,27 @@ export const initEnemyDetailsRepo = () => {
             }),
         new EnemyDetailsBase("fallEvent1", <EnemyDetailsModel>{
                 "Name": "Falloween Pumpkin",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 4,
+                "MonsterOffsetX": 42,
+                "MonsterOffsetY": 28,
+                "HeightOfMonster": 85,
+                "MonsterMoving": 1,
+                "MovingFrame": 4,
+                "RespawnTime": 86400,
+                "DeathFrame": 13,
+                "MonsterHPTotal": 750000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "a",
+                "ExpGiven": 12000,
+                "ExpType": 0,
+                "Defence": 600,
+                "MoveSPEED": 3,
+                "Damages": [1000, 1],
+                "DefFor0": 1223.26
+            }),
+        new EnemyDetailsBase("anni4Event1", <EnemyDetailsModel>{
+                "Name": "IdleOn 4th Anniversary",
                 "AFKtype": AFKTypeEnum.Fighting,
                 "MonsterFace": 4,
                 "MonsterOffsetX": 42,
@@ -4436,6 +4499,27 @@ export const initEnemyDetailsRepo = () => {
                 "ExpType": 0,
                 "Defence": 1,
                 "MoveSPEED": 4,
+                "Damages": [2, 1],
+                "DefFor0": 0.5
+            }),
+        new EnemyDetailsBase("Pet12", <EnemyDetailsModel>{
+                "Name": "Axolotl",
+                "AFKtype": AFKTypeEnum.Fighting,
+                "MonsterFace": 23,
+                "MonsterOffsetX": 38,
+                "MonsterOffsetY": 47,
+                "HeightOfMonster": 40,
+                "MonsterMoving": 1,
+                "MovingFrame": 10,
+                "RespawnTime": 40,
+                "DeathFrame": 21,
+                "MonsterHPTotal": 14000,
+                "Type": EnemyTypeEnum.monsterType,
+                "SpecialType": "",
+                "ExpGiven": 420,
+                "ExpType": 0,
+                "Defence": 1,
+                "MoveSPEED": 3,
                 "Damages": [2, 1],
                 "DefFor0": 0.5
             }),
@@ -6036,7 +6120,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 2.67
             }),
         new EnemyDetailsBase("ChestA1", <EnemyDetailsModel>{
-                "Name": "Dewdrop Bronze Chest",
+                "Name": "Dewdrop Bronze Chest(W1)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6057,7 +6141,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB1", <EnemyDetailsModel>{
-                "Name": "Dewdrop Silver Chest",
+                "Name": "Dewdrop Silver Chest(W1)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6078,7 +6162,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC1", <EnemyDetailsModel>{
-                "Name": "Dewdrop Golden Chest",
+                "Name": "Dewdrop Golden Chest(W1)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6120,7 +6204,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA2", <EnemyDetailsModel>{
-                "Name": "Sandstone Bronze Chest",
+                "Name": "Sandstone Bronze Chest(W2)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6141,7 +6225,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB2", <EnemyDetailsModel>{
-                "Name": "Sandstone Silver Chest",
+                "Name": "Sandstone Silver Chest(W2)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6162,7 +6246,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC2", <EnemyDetailsModel>{
-                "Name": "Sandstone Golden Chest",
+                "Name": "Sandstone Golden Chest(W2)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6204,7 +6288,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA3", <EnemyDetailsModel>{
-                "Name": "Chillsnap Bronze Chest",
+                "Name": "Chillsnap Bronze Chest(W3)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6225,7 +6309,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB3", <EnemyDetailsModel>{
-                "Name": "Chillsnap Silver Chest",
+                "Name": "Chillsnap Silver Chest(W3)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6246,7 +6330,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC3", <EnemyDetailsModel>{
-                "Name": "Chillsnap Golden Chest",
+                "Name": "Chillsnap Golden Chest(W3)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6288,7 +6372,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA4", <EnemyDetailsModel>{
-                "Name": "Astro Bronze Chest",
+                "Name": "Astro Bronze Chest(W4)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6309,7 +6393,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB4", <EnemyDetailsModel>{
-                "Name": "Astro Silver Chest",
+                "Name": "Astro Silver Chest(W4)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6330,7 +6414,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC4", <EnemyDetailsModel>{
-                "Name": "Astro Golden Chest",
+                "Name": "Astro Golden Chest(W4)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6372,7 +6456,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA5", <EnemyDetailsModel>{
-                "Name": "Molten Bronze Chest",
+                "Name": "Molten Bronze Chest(W5)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6393,7 +6477,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB5", <EnemyDetailsModel>{
-                "Name": "Molten Silver Chest",
+                "Name": "Molten Silver Chest(W5)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6414,7 +6498,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC5", <EnemyDetailsModel>{
-                "Name": "Molten Golden Chest",
+                "Name": "Molten Golden Chest(W5)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6456,7 +6540,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA6", <EnemyDetailsModel>{
-                "Name": "Whimsical Bronze Chest",
+                "Name": "Whimsical Bronze Chest(W6)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6477,7 +6561,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB6", <EnemyDetailsModel>{
-                "Name": "Whimsical Silver Chest",
+                "Name": "Whimsical Silver Chest(W6)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6498,7 +6582,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC6", <EnemyDetailsModel>{
-                "Name": "Whimsical Golden Chest",
+                "Name": "Whimsical Golden Chest(W6)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6540,7 +6624,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA7", <EnemyDetailsModel>{
-                "Name": "NYI Bronze Chest",
+                "Name": "NYI Bronze Chest(W7)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6561,7 +6645,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB7", <EnemyDetailsModel>{
-                "Name": "NYI Silver Chest",
+                "Name": "NYI Silver Chest(W7)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6582,7 +6666,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC7", <EnemyDetailsModel>{
-                "Name": "NYI Golden Chest",
+                "Name": "NYI Golden Chest(W7)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6624,7 +6708,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestA8", <EnemyDetailsModel>{
-                "Name": "NYI Bronze Chest",
+                "Name": "NYI Bronze Chest(W8)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6645,7 +6729,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestB8", <EnemyDetailsModel>{
-                "Name": "NYI Silver Chest",
+                "Name": "NYI Silver Chest(W8)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,
@@ -6666,7 +6750,7 @@ export const initEnemyDetailsRepo = () => {
                 "DefFor0": 0.22
             }),
         new EnemyDetailsBase("ChestC8", <EnemyDetailsModel>{
-                "Name": "NYI Golden Chest",
+                "Name": "NYI Golden Chest(W8)",
                 "AFKtype": AFKTypeEnum.Error,
                 "MonsterFace": 0,
                 "MonsterOffsetX": 34,

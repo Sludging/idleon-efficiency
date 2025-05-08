@@ -61,6 +61,8 @@ export class Slab extends Domain {
 
         // Clean up items that shouldn't be here, happens on older profiles.
         const lootedInfo = rawItems.filter(item =>
+            item &&
+            item != "null" &&
             item.indexOf("Cards") == -1 &&
             item.indexOf("SailTr") == -1 &&
             item != "Bits" &&

@@ -134,7 +134,9 @@ export const initStampDescriptionRepo = () => {
                     "+{% Talent Book Library Refresh Speed",
                     "+{% DNA gained from Splicing",
                     "+{% Faster refinery cycles",
-                    "+{% Lower Atom Upgrade Costs"
+                    "+{% Lower Atom Upgrade Costs",
+                    "+{% more Resources from all Caverns",
+                    "+{% Study rate for Bolaia"
                 ]
             })    
 ]

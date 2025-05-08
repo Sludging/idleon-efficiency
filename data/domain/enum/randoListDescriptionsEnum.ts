@@ -107,5 +107,9 @@ export enum RandoListDescriptionsEnum {
     dk26 = "dk26",
     dk27 = "dk27",
     dk28 = "dk28",
-    dk29 = "dk29"
+    dk29 = "dk29",
+    dk30 = "dk30",
+    dk31 = "dk31",
+    dk32 = "dk32",
+    dk33 = "dk33"
 }
