@@ -58,6 +58,7 @@ import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire } from './grimoire';
+import { Compass } from './compass';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -138,6 +139,7 @@ const domainList: Domain[] = [
     new Hole("hole"),
     new UpgradeVault("upgradeVault"),
     new Grimoire("grimoire"),
+    new Compass("compass"),
 ]
 
 export class IdleonData {

@@ -70,6 +70,7 @@ const navItems = [
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
             { subLink: "/grimoire", label: "Grimoire" },
+            { subLink: "/compass", label: "Compass" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },
