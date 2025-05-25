@@ -153,12 +153,7 @@ class EfficiencyEngine {
                     continue; // Skip locked or maxed upgrades
                 }
 
-                // Check if we can afford this upgrade
-                const dustType = upgrade.data.dustType;
-                const dustTypeKey = dustType as unknown as DustType;
-                if (simulatedAvailableDust[dustTypeKey] < upgrade.cost) {
-                    continue; // Skip unaffordable upgrades
-                }
+                // Note: Removed affordability check to show most efficient upgrades regardless of cost
 
                 // Calculate value with this upgrade at +1 level
                 const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId, players, serverVars, optionsList);
@@ -191,11 +186,7 @@ class EfficiencyEngine {
                 bestUpgrade.level += 1;
                 simulatedValue = bestNewValue;
 
-                // Deduct the dust cost
-                const dustType = bestUpgrade.data.dustType;
-                const dustTypeKey = dustType as unknown as DustType;
-                simulatedAvailableDust[dustTypeKey] -= bestUpgrade.cost;
-
+                // Note: No longer deducting dust cost since we're ignoring affordability
                 // Recalculate costs and bonuses for all upgrades after this purchase
                 compass.recalculateUpgrades(simulatedUpgrades);
             } else {

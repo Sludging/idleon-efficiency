@@ -207,14 +207,15 @@ function EfficiencySection() {
     const compass = theData.get("compass") as Compass;
     const [selectedAttribute, setSelectedAttribute] = useState<'damage' | 'dust'>('damage');
 
-    if (!compass || compass.currentTempestDamage === 0) {
-        return null; // No Wind Walker or damage calculation failed
-    }
-
     const isDamageMode = selectedAttribute === 'damage';
-    const topEfficiencyUpgrades = isDamageMode 
-        ? compass.getTopDamageEfficiencyUpgrades(10)
-        : compass.getTopDustEfficiencyUpgrades(10);
+    const topEfficiencyUpgrades = useMemo(() => {
+        if (!compass || compass.currentTempestDamage === 0) {
+            return [];
+        }
+        return isDamageMode 
+            ? compass.getTopDamageEfficiencyUpgrades(10)
+            : compass.getTopDustEfficiencyUpgrades(10);
+    }, [compass, isDamageMode, lastUpdated]);
 
     const attributeConfig = {
         damage: {
@@ -253,11 +254,17 @@ function EfficiencySection() {
 
     // Check if player can afford all upgrades
     const canAffordAll = useMemo(() => {
+        if (!compass) return false;
         return Object.entries(totalDustCosts).every(([dustType, cost]) => {
             const dustTypeKey = parseInt(dustType) as DustType;
             return compass.availableDust[dustTypeKey] >= cost;
         });
-    }, [totalDustCosts, compass.availableDust]);
+    }, [totalDustCosts, compass]);
+
+    // Early return after all hooks
+    if (!compass || compass.currentTempestDamage === 0) {
+        return null; // No Wind Walker or damage calculation failed
+    }
 
     return (
         <ShadowBox background="dark-1" pad="medium">
