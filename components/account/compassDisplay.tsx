@@ -1,6 +1,14 @@
 "use client"
 
-import { Box, CheckBox, Grid, Text, Select, Tabs, Tab } from "grommet";
+import {
+    Box,
+    Text,
+    DataTable,
+    Grid,
+    CheckBox,
+    Select,
+    TextInput
+} from "grommet";
 import { useMemo, useState } from "react";
 import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
@@ -9,13 +17,32 @@ import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
-import { ImageData } from "../../data/domain/imageData";
 import { Compass, CompassUpgrade, DustType } from "../../data/domain/compass";
-import { ThemeContext } from "grommet";
-import { customTabsTheme, CustomTabTitle } from "../base/CustomTabs";
+import React from "react";
+
+interface CompassTableData {
+    name: string;
+    dustType: string;
+    level: number;
+    maxLevel: number;
+    bonus: string;
+    nextCost: number;
+    costToMax: number;
+    type: string;
+    maxed: boolean;
+    locked: boolean;
+    id: number;
+    pathIndex: number;
+    upgrade: CompassUpgrade;
+}
 
 // Simple dust display without tooltip
-function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall" }: { cost: number, canAfford?: boolean, dustImageData: ImageData, textSize?: string }) {
+function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall" }: {
+    cost: number,
+    canAfford?: boolean,
+    dustImageData: any,
+    textSize?: string
+}) {
     return (
         <Box direction="row" gap="small" align="end">
             <IconImage data={dustImageData} scale={0.7} />
@@ -34,267 +61,82 @@ function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall" }: { 
     );
 }
 
-// Custom hook for managing compass filters
-function useCompassFilters(compass: Compass, lastUpdated: Date) {
-    const [hideMaxed, setHideMaxed] = useState(true);
-    const [hideLocked, setHideLocked] = useState(false);
-    const [dustTypeFilter, setDustTypeFilter] = useState<string>('All');
-    const [sortBy, setSortBy] = useState<string>('default');
-    const [groupBy, setGroupBy] = useState<string>('path');
-    const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+// Path Upgrades Section
+function PathUpgradesSection() {
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-    // Calculate counts for each dust type
-    const dustTypeCounts = useMemo(() => {
-        if (!compass) {
-            return { all: 0, stardust: 0, moondust: 0, solardust: 0, cooldust: 0, novadust: 0 };
-        }
+    const compass = theData.get("compass") as Compass;
 
-        const counts = {
-            all: compass.upgrades.length,
-            stardust: compass.upgrades.filter(u => u.data.dustType === DustType.Stardust).length,
-            moondust: compass.upgrades.filter(u => u.data.dustType === DustType.Moondust).length,
-            solardust: compass.upgrades.filter(u => u.data.dustType === DustType.Solardust).length,
-            cooldust: compass.upgrades.filter(u => u.data.dustType === DustType.Cooldust).length,
-            novadust: compass.upgrades.filter(u => u.data.dustType === DustType.Novadust).length,
-        };
+    // Extract path-unlocking upgrades (special treatment)
+    const pathUpgrades = useMemo(() => {
+        if (!compass) return [];
 
-        return counts;
-    }, [compass]);
-
-    const upgradesToShow = useMemo(() => {
-        if (!compass) {
-            return {};
-        }
-
-        let filteredUpgrades = compass.upgrades;
-
-        if (hideMaxed) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.level < upgrade.data.maxLevel
-            );
-        }
-
-        if (hideLocked) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.unlocked
-            );
-        }
-
-        if (dustTypeFilter !== 'All') {
-            const dustTypeIndex = parseInt(dustTypeFilter);
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.data.dustType === dustTypeIndex
-            );
-        }
-
-        // Group the upgrades first
-        let groupedUpgrades: Record<string, CompassUpgrade[]>;
-        if (groupBy === 'dust') {
-            groupedUpgrades = filteredUpgrades.reduce((acc, upgrade) => {
-                const dustType = DustType[upgrade.data.dustType];
-                if (!acc[dustType]) {
-                    acc[dustType] = [];
-                }
-                acc[dustType].push(upgrade);
-                return acc;
-            }, {} as Record<string, CompassUpgrade[]>);
-        } else {
-            // Default to path grouping
-            groupedUpgrades = filteredUpgrades.reduce((acc, upgrade) => {
-                const path = upgrade.data.upgradeType;
-                if (!acc[path]) {
-                    acc[path] = [];
-                }
-                acc[path].push(upgrade);
-                return acc;
-            }, {} as Record<string, CompassUpgrade[]>);
-        }
-
-        // Apply sorting within each group
-        Object.keys(groupedUpgrades).forEach(group => {
-            if (sortBy === 'cheapest') {
-                groupedUpgrades[group] = [...groupedUpgrades[group]].sort((a, b) => {
-                    // First sort by locked status (unlocked first)
-                    if (a.unlocked !== b.unlocked) {
-                        return a.unlocked ? -1 : 1;
-                    }
-
-                    // If both are locked, maintain original order
-                    if (!a.unlocked && !b.unlocked) {
-                        return a.indexInPath - b.indexInPath;
-                    }
-
-                    // Handle maxed upgrades (they have cost 0)
-                    if (a.level >= a.data.maxLevel) return 1;
-                    if (b.level >= b.data.maxLevel) return -1;
-
-                    return a.cost - b.cost;
-                });
-            } else if (sortBy === 'affordable') {
-                groupedUpgrades[group] = [...groupedUpgrades[group]].sort((a, b) => {
-                    // First sort by locked status (unlocked first)
-                    if (a.unlocked !== b.unlocked) {
-                        return a.unlocked ? -1 : 1;
-                    }
-
-                    // If both are locked, maintain original order
-                    if (!a.unlocked && !b.unlocked) {
-                        return a.indexInPath - b.indexInPath;
-                    }
-
-                    // Handle maxed upgrades (they have cost 0)
-                    if (a.level >= a.data.maxLevel) return 1;
-                    if (b.level >= b.data.maxLevel) return -1;
-
-                    const aAffordable = compass.canAffordUpgrade(a) ? 1 : 0;
-                    const bAffordable = compass.canAffordUpgrade(b) ? 1 : 0;
-
-                    // First sort by affordability (affordable first)
-                    if (aAffordable !== bAffordable) {
-                        return bAffordable - aAffordable;
-                    }
-
-                    // Then sort by cost (cheapest first)
-                    return a.cost - b.cost;
-                });
-            } else {
-                // Default order, but with locked upgrades at the bottom
-                groupedUpgrades[group] = [...groupedUpgrades[group]].sort((a, b) => {
-                    return a.indexInPath - b.indexInPath;
-                });
-            }
-        });
-
-        return groupedUpgrades;
-    }, [compass, hideMaxed, hideLocked, dustTypeFilter, sortBy, groupBy, lastUpdated]);
-
-    // Filter out path upgrades from regular grouping and remove empty groups
-    const filteredUpgradesToShow = useMemo(() => {
+        // Path-unlocking upgrade IDs: Elemental(1), Fighter(13), Survival(27), Nomadic(40)
         const pathUpgradeIds = [1, 13, 27, 40];
-        const filtered: Record<string, CompassUpgrade[]> = {};
+        const pathNames = ['Elemental', 'Fighter', 'Survival', 'Nomadic'];
 
-        Object.entries(upgradesToShow).forEach(([group, upgrades]) => {
-            const nonPathUpgrades = upgrades.filter(upgrade => !pathUpgradeIds.includes(upgrade.id));
-            if (nonPathUpgrades.length > 0) {
-                filtered[group] = nonPathUpgrades;
+        return pathUpgradeIds.map((id, index) => {
+            const upgrade = compass.upgrades.find(u => u.id === id);
+            if (!upgrade) return null;
+
+            const pathName = pathNames[index];
+            const pathMetadata = compass.upgradeMetadata[pathName];
+
+            // Find the next locked upgrade in this path
+            let nextLockedUpgrade = null;
+            if (pathMetadata && pathMetadata.pathUpgrades) {
+                const nextLockedId = pathMetadata.pathUpgrades.find(upgradeId => {
+                    const pathUpgrade = compass.upgrades.find(u => u.id === upgradeId);
+                    return pathUpgrade && !pathUpgrade.unlocked;
+                });
+                if (nextLockedId !== undefined) {
+                    nextLockedUpgrade = compass.upgrades.find(u => u.id === nextLockedId);
+                }
             }
-        });
 
-        return filtered;
-    }, [upgradesToShow]);
+            return {
+                upgrade,
+                pathName,
+                nextLockedUpgrade,
+                pathLevel: pathMetadata?.pathLevel || 0
+            };
+        }).filter(Boolean);
+    }, [compass, lastUpdated]);
 
-    // Filters component with internal state
-    const FiltersComponent = () => {
-        // Custom renderer for dust type options
-        const renderDustTypeOption = (option: any) => {
-            if (option.value === 'All') {
-                return <Text>{option.label}</Text>;
-            }
-
-            const dustType = parseInt(option.value);
-            return (
-                <Box direction="row" gap="small" align="center">
-                    <IconImage data={compass?.getDustImageData(dustType)} />
-                    <Text>{option.label}</Text>
-                </Box>
-            );
-        };
-
-        // Sorting options
-        const sortOptions = [
-            { label: 'Default Order', value: 'default' },
-            { label: 'Cheapest First', value: 'cheapest' },
-            { label: 'Affordable First', value: 'affordable' }
-        ];
-
-        // Custom renderer for sort options
-        const renderSortOption = (option: any) => {
-            return (
-                <Box direction="row" gap="small" align="center">
-                    <Text>{option.label}</Text>
-                </Box>
-            );
-        };
-
-        return (
-            <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
-                <Box direction="row" align="center" gap="small">
-                    <Select
-                        placeholder="Sort by"
-                        value={sortBy}
-                        options={sortOptions}
-                        labelKey="label"
-                        valueKey={{ key: 'value', reduce: true }}
-                        onChange={({ value }) => setSortBy(value)}
-                    >
-                        {renderSortOption}
-                    </Select>
-                </Box>
-                <Box direction="row" align="center" gap="small">
-                    <Select
-                        placeholder="Group by"
-                        value={groupBy}
-                        options={[
-                            { label: 'Dust Type', value: 'dust' },
-                            { label: 'Upgrade Path', value: 'path' }
-                        ]}
-                        labelKey="label"
-                        valueKey={{ key: 'value', reduce: true }}
-                        onChange={({ value }) => setGroupBy(value)}
+    return (
+        <Box gap="small">
+            <Box justify="between" direction="row">
+                <Text size="medium" weight="bold" margin={{ bottom: 'xsmall' }}>Path Upgrades</Text>
+                <Box direction="row" gap="small">
+                    <DustDisplay
+                        cost={compass.availableDust[DustType.Stardust] || 0}
+                        dustImageData={compass.getDustImageData(DustType.Stardust)}
+                        textSize="small"
+                    />
+                    <DustDisplay
+                        cost={compass.availableDust[DustType.Moondust] || 0}
+                        dustImageData={compass.getDustImageData(DustType.Moondust)}
+                        textSize="small"
+                    />
+                    <DustDisplay
+                        cost={compass.availableDust[DustType.Solardust] || 0}
+                        dustImageData={compass.getDustImageData(DustType.Solardust)}
+                        textSize="small"
+                    />
+                    <DustDisplay
+                        cost={compass.availableDust[DustType.Cooldust] || 0}
+                        dustImageData={compass.getDustImageData(DustType.Cooldust)}
+                        textSize="small"
+                    />
+                    <DustDisplay
+                        cost={compass.availableDust[DustType.Novadust] || 0}
+                        dustImageData={compass.getDustImageData(DustType.Novadust)}
+                        textSize="small"
                     />
                 </Box>
-                <CheckBox
-                    checked={hideMaxed}
-                    label="Hide maxed"
-                    onChange={(event) => setHideMaxed(event.target.checked)}
-                />
-                <CheckBox
-                    checked={hideLocked}
-                    label="Hide locked"
-                    onChange={(event) => setHideLocked(event.target.checked)}
-                />
             </Box>
-        );
-    };
-
-    return {
-        filteredUpgradesToShow,
-        activeTabIndex,
-        setActiveTabIndex,
-        FiltersComponent
-    };
-}
-
-// Compass Summary Section
-function CompassSummary({ compass }: { compass: Compass }) {
-    return (
-        <ShadowBox background="dark-2" pad="medium">
-            <Box direction="row" gap="medium" wrap justify="between">
-                {/* Display current dust counts */}
-                <ComponentAndLabel
-                    label={"Available Dust"}
-                    component={
-                        <Box direction="row" gap="medium" wrap>
-                            <DustDisplay cost={compass.availableDust[DustType.Stardust] || 0} dustImageData={compass.getDustImageData(DustType.Stardust)} textSize="small" />
-                            <DustDisplay cost={compass.availableDust[DustType.Moondust] || 0} dustImageData={compass.getDustImageData(DustType.Moondust)} textSize="small" />
-                            <DustDisplay cost={compass.availableDust[DustType.Solardust] || 0} dustImageData={compass.getDustImageData(DustType.Solardust)} textSize="small" />
-                            <DustDisplay cost={compass.availableDust[DustType.Cooldust] || 0} dustImageData={compass.getDustImageData(DustType.Cooldust)} textSize="small" />
-                            <DustDisplay cost={compass.availableDust[DustType.Novadust] || 0} dustImageData={compass.getDustImageData(DustType.Novadust)} textSize="small" />
-                        </Box>
-                    }
-                />
-            </Box>
-        </ShadowBox>
-    );
-}
-
-// Path Upgrades Section
-function PathUpgradesSection({ pathUpgrades, compass }: { pathUpgrades: any[], compass: Compass }) {
-    if (pathUpgrades.length === 0) return null;
-
-    return (
-        <Box>
-            <Text size="medium" weight="bold" margin={{ bottom: 'xsmall' }}>Path Upgrades</Text>
             <Grid
                 columns={['repeat(auto-fill, minmax(300px, 1fr))']}
                 gap="small"
@@ -356,101 +198,419 @@ function PathUpgradesSection({ pathUpgrades, compass }: { pathUpgrades: any[], c
     );
 }
 
-// Main Tabs Section
-function CompassTabs({ filteredUpgradesToShow, activeTabIndex, setActiveTabIndex, compass }: {
-    filteredUpgradesToShow: Record<string, CompassUpgrade[]>;
-    activeTabIndex: number;
-    setActiveTabIndex: (index: number) => void;
-    compass: Compass;
-}) {
-    if (Object.keys(filteredUpgradesToShow).length === 0) {
-        return (
-            <ShadowBox background="dark-1" pad="medium" align="center">
-                <Text>No upgrades to display with current filters</Text>
-            </ShadowBox>
-        );
+// Efficiency Section with toggle between attributes
+function EfficiencySection() {
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+
+    const compass = theData.get("compass") as Compass;
+    const [selectedAttribute, setSelectedAttribute] = useState<'damage' | 'dust'>('damage');
+
+    if (!compass || compass.currentTempestDamage === 0) {
+        return null; // No Wind Walker or damage calculation failed
     }
 
-    return (
-        <ThemeContext.Extend value={customTabsTheme}>
-            <Tabs activeIndex={activeTabIndex} onActive={setActiveTabIndex}>
-                {Object.entries(filteredUpgradesToShow).filter(([group, _]) => group !== "Unknown").map(([group, upgrades], index) => (
-                    <Tab key={index} title={<CustomTabTitle isActive={activeTabIndex === index} label={group} />}>
-                        <Box pad="small">
-                            <Grid
-                                columns={['repeat(auto-fill, minmax(300px, 1fr))']}
-                                gap="small"
-                            >
-                                {upgrades.map((upgrade, upgradeIndex) => (
-                                    <UpgradeCard key={upgradeIndex} upgrade={upgrade} compass={compass} />
-                                ))}
-                            </Grid>
-                        </Box>
-                    </Tab>
-                ))}
-            </Tabs>
-        </ThemeContext.Extend>
-    );
-}
+    const isDamageMode = selectedAttribute === 'damage';
+    const topEfficiencyUpgrades = isDamageMode 
+        ? compass.getTopDamageEfficiencyUpgrades(10)
+        : compass.getTopDustEfficiencyUpgrades(10);
 
-// Upgrade Card Component
-function UpgradeCard({ upgrade, compass }: { upgrade: CompassUpgrade, compass: Compass }) {
-    const isLocked = !upgrade.unlocked;
+    const attributeConfig = {
+        damage: {
+            valueHeader: "Damage +",
+            valueColor: "accent-1",
+            noResultsText: "No efficient damage upgrades available (insufficient dust, all upgrades maxed, or all locked)",
+            formatValue: (value: number) => `+${value.toFixed(2)}`
+        },
+        dust: {
+            valueHeader: "Multiplier +",
+            valueColor: "accent-2",
+            noResultsText: "No efficient dust upgrades available (insufficient dust, all upgrades maxed, or all locked)",
+            formatValue: (value: number) => `+${value.toFixed(4)}x`
+        }
+    };
+
+    const config = attributeConfig[selectedAttribute];
+
+    // Calculate total dust costs for all 10 upgrades
+    const totalDustCosts = useMemo(() => {
+        const costs: Record<DustType, number> = {
+            [DustType.Stardust]: 0,
+            [DustType.Moondust]: 0,
+            [DustType.Solardust]: 0,
+            [DustType.Cooldust]: 0,
+            [DustType.Novadust]: 0
+        };
+
+        topEfficiencyUpgrades.forEach(upgrade => {
+            const dustType = upgrade.upgrade.data.dustType as DustType;
+            costs[dustType] += upgrade.dustCost;
+        });
+
+        return costs;
+    }, [topEfficiencyUpgrades]);
+
+    // Check if player can afford all upgrades
+    const canAffordAll = useMemo(() => {
+        return Object.entries(totalDustCosts).every(([dustType, cost]) => {
+            const dustTypeKey = parseInt(dustType) as DustType;
+            return compass.availableDust[dustTypeKey] >= cost;
+        });
+    }, [totalDustCosts, compass.availableDust]);
+
     return (
-        <ShadowBox
-            style={{ opacity: isLocked ? 0.6 : 1 }}
-            background={isLocked ? "dark-3" : "dark-1"}
-            pad="small"
-            height="100%"
-        >
-            <Box gap="small" fill justify="between">
+        <ShadowBox background="dark-1" pad="medium">
+            <Box gap="medium">
                 <Box direction="row" justify="between" align="center">
-                    <Box direction="row" gap="small" align="center">
-                        <IconImage data={upgrade.getImageData()} scale={0.5} />
-                        <Text size="xsmall" weight="bold">{upgrade.data.name}</Text>
+                    <Box direction="row" gap="medium" align="center">
+                        <Text size="medium" weight="bold">Upgrade Efficiency Analysis</Text>
+                        <Box direction="row" gap="small" align="center">
+                            <Text size="small">Optimize for:</Text>
+                            <Select
+                                value={selectedAttribute}
+                                options={[
+                                    { label: 'Tempest Damage', value: 'damage' },
+                                    { label: 'Dust Multiplier', value: 'dust' }
+                                ]}
+                                labelKey="label"
+                                valueKey={{ key: 'value', reduce: true }}
+                                onChange={({ value }) => setSelectedAttribute(value)}
+                            />
+                        </Box>
                     </Box>
-                    <Box direction="row" gap="small">
-                        <Text size="xsmall">{upgrade.level} / {upgrade.data.maxLevel}</Text>
+                    <Box direction="row" gap="medium" align="center">
+                        <TextAndLabel
+                            label="Current Tempest Damage"
+                            text={nFormatter(compass.currentTempestDamage)}
+                            labelSize="small"
+                            textSize="medium"
+                        />
+                        <TextAndLabel
+                            label="Current Dust Multiplier"
+                            text={`${compass.currentDustMultiplier.toFixed(2)}x`}
+                            labelSize="small"
+                            textSize="medium"
+                        />
                     </Box>
                 </Box>
-                <Box>
-                    <TextAndLabel
-                        label="Bonus"
-                        text={upgrade.getDescription()}
-                        labelSize="small"
-                        textSize="xsmall"
-                    />
-                </Box>
-                {upgrade.unlocked && (
-                    <Box direction="row" gap="small" justify="between">
-                        <ComponentAndLabel
-                            label="Next level:"
-                            component={
-                                <DustDisplay
-                                    cost={upgrade.cost}
-                                    canAfford={compass.canAffordUpgrade(upgrade)}
-                                    dustImageData={compass.getDustImageData(upgrade.data.dustType)}
-                                />
-                            }
+
+                {topEfficiencyUpgrades.length > 0 ? (
+                    <Box gap="small">
+                        <Text size="small" weight="bold">Optimal Purchase Sequence (Next 10 Upgrades)</Text>
+                        <DataTable
+                            columns={[
+                                {
+                                    property: 'name',
+                                    header: 'Upgrade',
+                                    render: (data: any) => (
+                                        <Box direction="row" gap="small" align="center">
+                                            <IconImage data={data.upgrade.getImageData()} scale={0.4} />
+                                            <Text size="xsmall">{data.upgrade.data.name}</Text>
+                                        </Box>
+                                    )
+                                },
+                                {
+                                    property: 'level',
+                                    header: 'Level',
+                                    render: (data: any) => (
+                                        <Text size="xsmall">{`${data.upgrade.level}${data.upgrade.data.maxLevel >= 999999 ? '' : `/${data.upgrade.data.maxLevel}`}`}</Text>
+                                    )
+                                },
+                                {
+                                    property: 'valueIncrease',
+                                    header: config.valueHeader,
+                                    render: (data: any) => (
+                                        <Text size="xsmall" color={config.valueColor}>
+                                            {config.formatValue(data.valueIncrease)}
+                                        </Text>
+                                    )
+                                },
+                                {
+                                    property: 'cost',
+                                    header: 'Cost',
+                                    render: (data: any) => (
+                                        <DustDisplay
+                                            cost={data.dustCost}
+                                            canAfford={compass.canAffordUpgrade(data.upgrade)}
+                                            dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                                        />
+                                    )
+                                }
+                            ]}
+                            data={topEfficiencyUpgrades}
                         />
-                        <ComponentAndLabel
-                            label={upgrade.data.maxLevel >= 999999 ? "10 levels:" : "To max:"}
-                            component={
-                                <DustDisplay
-                                    cost={upgrade.data.maxLevel >= 999999
-                                        ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata)
-                                        : upgrade.costToMax}
-                                    canAfford={compass.canAffordUpgrade(upgrade,
-                                        upgrade.data.maxLevel >= 999999
-                                            ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata)
-                                            : upgrade.costToMax)}
-                                    dustImageData={compass.getDustImageData(upgrade.data.dustType)}
-                                />
-                            }
-                        />
+                        <Box direction="row" justify="between" align="center" pad={{ horizontal: 'small' }}>
+                            <Box direction="row" gap="medium" align="center" justify="end" fill>
+                                <Text size="small" weight="bold">Total Cost:</Text>
+                                <Box direction="row" gap="small">
+                                    {Object.entries(totalDustCosts).map(([dustType, cost]) => {
+                                        if (cost === 0) return null;
+                                        const dustTypeKey = parseInt(dustType) as DustType;
+                                        const canAffordThis = compass.availableDust[dustTypeKey] >= cost;
+                                        return (
+                                            <DustDisplay
+                                                key={dustType}
+                                                cost={cost}
+                                                canAfford={canAffordThis}
+                                                dustImageData={compass.getDustImageData(dustTypeKey)}
+                                                textSize="small"
+                                            />
+                                        );
+                                    })}
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                ) : (
+                    <Box align="center" pad="medium">
+                        <Text size="small" color="grey-2">
+                            {config.noResultsText}
+                        </Text>
                     </Box>
                 )}
             </Box>
+        </ShadowBox>
+    );
+}
+
+// Main Compass Table View
+function CompassTableView() {
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+
+    const compass = theData.get("compass") as Compass;
+
+    // Filter and sort state
+    const [hideLocked, setHideLocked] = useState(true);
+    const [hideMaxed, setHideMaxed] = useState(true);
+    const [pathFilter, setPathFilter] = useState<string>('All');
+    const [dustFilter, setDustFilter] = useState<string>('All');
+    const [sortBy, setSortBy] = useState<'cost' | 'path'>('cost');
+    const [searchText, setSearchText] = useState<string>('');
+
+    const columns = [
+        {
+            property: 'name',
+            header: 'Name',
+            render: (data: CompassTableData) => (
+                <Box direction="row" gap="small" align="center" style={{ opacity: data.locked ? 0.5 : 1 }}>
+                    <IconImage data={data.upgrade.getImageData()} scale={0.4} />
+                    <Text size="xsmall">{data.name}</Text>
+                </Box>
+            )
+        },
+        {
+            property: 'dustType',
+            header: 'Dust',
+            render: (data: CompassTableData) => (
+                <Box direction="row" gap="small" align="center" title={data.dustType}>
+                    <IconImage data={compass.getDustImageData(data.upgrade.data.dustType)} scale={0.6} />
+                </Box>
+            )
+        },
+        {
+            property: 'level',
+            header: 'Level',
+            render: (data: CompassTableData) => (
+                <Text size="xsmall">{`${data.level}${data.maxLevel >= 999999 ? '' : `/${data.maxLevel}`}`}</Text>
+            )
+        },
+        {
+            property: 'bonus',
+            header: 'Bonus',
+            render: (data: CompassTableData) => (
+                <Text size="xsmall">{data.bonus}</Text>
+            )
+        },
+        {
+            property: 'nextCost',
+            header: 'Next Level',
+            render: (data: CompassTableData) => {
+                if (!data.upgrade.unlocked || data.upgrade.level >= data.upgrade.data.maxLevel) {
+                    return <Text size="xsmall">-</Text>;
+                }
+
+                return (
+                    <DustDisplay
+                        cost={data.nextCost}
+                        canAfford={compass.canAffordUpgrade(data.upgrade)}
+                        dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                    />
+                );
+            }
+        },
+        {
+            property: 'costToMax',
+            header: 'Cost to Max/10',
+            render: (data: CompassTableData) => {
+                if (!data.upgrade.unlocked || data.upgrade.level >= data.upgrade.data.maxLevel) {
+                    return <Text size="small">-</Text>;
+                }
+
+                return (
+                    <DustDisplay
+                        cost={data.costToMax}
+                        canAfford={compass.canAffordUpgrade(data.upgrade, data.costToMax)}
+                        dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                    />
+                );
+            }
+        }
+    ];
+
+    const filteredAndSortedData = useMemo(() => {
+        if (!compass) return [];
+
+        let data = compass.upgrades
+            .filter(upgrade => upgrade.data.upgradeType !== "Unknown")
+            .map(upgrade => {
+                // Calculate cost to max or 10 levels
+                const costToMax = upgrade.data.maxLevel >= 999999
+                    ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata)
+                    : upgrade.costToMax;
+
+                return {
+                    name: upgrade.data.name,
+                    dustType: DustType[upgrade.data.dustType],
+                    level: upgrade.level,
+                    maxLevel: upgrade.data.maxLevel,
+                    bonus: upgrade.getDescription(),
+                    nextCost: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : upgrade.cost,
+                    costToMax: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : costToMax,
+                    type: upgrade.data.upgradeType,
+                    maxed: upgrade.level >= upgrade.data.maxLevel,
+                    locked: !upgrade.unlocked,
+                    id: upgrade.id,
+                    pathIndex: upgrade.indexInPath,
+                    upgrade
+                };
+            });
+
+        // Apply filters
+        if (hideLocked) {
+            data = data.filter(item => !item.locked);
+        }
+        if (hideMaxed) {
+            data = data.filter(item => !item.maxed);
+        }
+        if (pathFilter !== 'All') {
+            data = data.filter(item => item.type === pathFilter);
+        }
+        if (dustFilter !== 'All') {
+            data = data.filter(item => item.dustType === dustFilter);
+        }
+        if (searchText.trim() !== '') {
+            const searchLower = searchText.toLowerCase().trim();
+            data = data.filter(item =>
+                item.name.toLowerCase().includes(searchLower) ||
+                item.bonus.toLowerCase().includes(searchLower)
+            );
+        }
+
+        // Apply sorting
+        data.sort((a, b) => {
+            // Always put locked and maxed items at the bottom
+            if ((a.locked || a.maxed) && !(b.locked || b.maxed)) return 1;
+            if (!(a.locked || a.maxed) && (b.locked || b.maxed)) return -1;
+
+            if (sortBy === 'path') {
+                // Sort by path first, then by path index
+                if (a.type !== b.type) {
+                    return a.type.localeCompare(b.type);
+                }
+                return a.pathIndex - b.pathIndex;
+            } else {
+                // Sort by cost (ascending)
+                return a.nextCost - b.nextCost;
+            }
+        });
+
+        return data;
+    }, [compass, lastUpdated, hideLocked, hideMaxed, pathFilter, dustFilter, sortBy, searchText]);
+
+    // Get unique values for filters
+    const uniquePaths = useMemo(() => {
+        if (!compass) return [];
+        const paths = [...new Set(compass.upgrades
+            .filter(upgrade => upgrade.data.upgradeType !== "Unknown")
+            .map(upgrade => upgrade.data.upgradeType))];
+        return paths.sort();
+    }, [compass]);
+
+    const uniqueDustTypes = useMemo(() => {
+        if (!compass) return [];
+        const dustTypes = [...new Set(compass.upgrades
+            .map(upgrade => DustType[upgrade.data.dustType]))];
+        return dustTypes.sort();
+    }, [compass]);
+
+    return (
+        <ShadowBox background="dark-1" pad="medium">
+            {/* Custom filters and controls */}
+            <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} wrap align="center">
+                <CheckBox
+                    checked={hideLocked}
+                    label="Hide locked"
+                    onChange={(event) => setHideLocked(event.target.checked)}
+                />
+                <CheckBox
+                    checked={hideMaxed}
+                    label="Hide maxed"
+                    onChange={(event) => setHideMaxed(event.target.checked)}
+                />
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Path:</Text>
+                    <Select
+                        value={pathFilter}
+                        options={['All', ...uniquePaths]}
+                        onChange={({ option }) => setPathFilter(option)}
+                    />
+                </Box>
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Dust:</Text>
+                    <Select
+                        value={dustFilter}
+                        options={['All', ...uniqueDustTypes]}
+                        onChange={({ option }) => setDustFilter(option)}
+                    />
+                </Box>
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Sort by:</Text>
+                    <Select
+                        value={sortBy}
+                        options={[
+                            { label: 'Cost (ascending)', value: 'cost' },
+                            { label: 'Path', value: 'path' }
+                        ]}
+                        labelKey="label"
+                        valueKey={{ key: 'value', reduce: true }}
+                        onChange={({ value }) => setSortBy(value)}
+                    />
+                </Box>
+            </Box>
+            <Box>
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Search:</Text>
+                    <TextInput
+                        placeholder="Search name or bonus..."
+                        value={searchText}
+                        onChange={(event) => setSearchText(event.target.value)}
+                        size="small"
+                        style={{ width: '200px' }}
+                    />
+                </Box>
+            </Box>
+
+            <DataTable
+                fill
+                columns={columns}
+                data={filteredAndSortedData}
+            />
         </ShadowBox>
     );
 }
@@ -461,61 +621,11 @@ function CompassDisplay() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    const compass = theData.get("compass") as Compass;
-
-    // Use the custom hook for filters
-    const { filteredUpgradesToShow, activeTabIndex, setActiveTabIndex, FiltersComponent } = useCompassFilters(compass, lastUpdated);
-
-    // Extract path-unlocking upgrades (special treatment)
-    const pathUpgrades = useMemo(() => {
-        if (!compass) return [];
-
-        // Path-unlocking upgrade IDs: Elemental(1), Fighter(13), Survival(27), Nomadic(40)
-        const pathUpgradeIds = [1, 13, 27, 40];
-        const pathNames = ['Elemental', 'Fighter', 'Survival', 'Nomadic'];
-
-        return pathUpgradeIds.map((id, index) => {
-            const upgrade = compass.upgrades.find(u => u.id === id);
-            if (!upgrade) return null;
-
-            const pathName = pathNames[index];
-            const pathMetadata = compass.upgradeMetadata[pathName];
-
-            // Find the next locked upgrade in this path
-            let nextLockedUpgrade = null;
-            if (pathMetadata && pathMetadata.pathUpgrades) {
-                const nextLockedId = pathMetadata.pathUpgrades.find(upgradeId => {
-                    const pathUpgrade = compass.upgrades.find(u => u.id === upgradeId);
-                    return pathUpgrade && !pathUpgrade.unlocked;
-                });
-                if (nextLockedId !== undefined) {
-                    nextLockedUpgrade = compass.upgrades.find(u => u.id === nextLockedId);
-                }
-            }
-
-            return {
-                upgrade,
-                pathName,
-                nextLockedUpgrade,
-                pathLevel: pathMetadata?.pathLevel || 0
-            };
-        }).filter(Boolean);
-    }, [compass, lastUpdated]);
-
     return (
         <Box gap="medium">
-            <CompassSummary compass={compass} />
-
-            <PathUpgradesSection pathUpgrades={pathUpgrades} compass={compass} />
-
-            <FiltersComponent />
-
-            <CompassTabs
-                filteredUpgradesToShow={filteredUpgradesToShow}
-                activeTabIndex={activeTabIndex}
-                setActiveTabIndex={setActiveTabIndex}
-                compass={compass}
-            />
+            <PathUpgradesSection />
+            <EfficiencySection />
+            <CompassTableView />
         </Box>
     );
 }

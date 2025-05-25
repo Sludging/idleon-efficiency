@@ -58,7 +58,7 @@ import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire } from './grimoire';
-import { Compass } from './compass';
+import { Compass, updateCompassDamageEfficiency } from './compass';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -269,6 +269,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
     "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
+    "compassDamageEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateCompassDamageEfficiency(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
