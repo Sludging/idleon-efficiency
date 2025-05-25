@@ -7,6 +7,15 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.37",
+    title: "Compass",
+    date: "May 25, 2025",
+    changes: [
+      "Added first pass at compass page. Find it under the Account navigation.",
+      "Tracking damage, dust, and efficiency of compass upgrades.",
+    ]
+  },
+  {
     version: "1.2.30",
     title: "Stamp Grid",
     date: "March 19, 2025",
