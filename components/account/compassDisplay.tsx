@@ -37,11 +37,12 @@ interface CompassTableData {
 }
 
 // Simple dust display without tooltip
-function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall" }: {
+function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall", showTooltip = false }: {
     cost: number,
     canAfford?: boolean,
     dustImageData: any,
-    textSize?: string
+    textSize?: string,
+    showTooltip?: boolean
 }) {
     return (
         <Box direction="row" gap="small" align="end">
@@ -52,6 +53,7 @@ function DustDisplay({ cost, canAfford, dustImageData, textSize = "xsmall" }: {
                     <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
                 }
                 direction={TipDirection.Down}
+                visibility={showTooltip ? undefined : 'none'}
             >
                 <Text size={textSize} color={canAfford ? "green-1" : undefined}>
                     {nFormatter(cost)}
@@ -114,26 +116,31 @@ function PathUpgradesSection() {
                         cost={compass.availableDust[DustType.Stardust] || 0}
                         dustImageData={compass.getDustImageData(DustType.Stardust)}
                         textSize="small"
+                        showTooltip={true}
                     />
                     <DustDisplay
                         cost={compass.availableDust[DustType.Moondust] || 0}
                         dustImageData={compass.getDustImageData(DustType.Moondust)}
                         textSize="small"
+                        showTooltip={true}
                     />
                     <DustDisplay
                         cost={compass.availableDust[DustType.Solardust] || 0}
                         dustImageData={compass.getDustImageData(DustType.Solardust)}
                         textSize="small"
+                        showTooltip={true}
                     />
                     <DustDisplay
                         cost={compass.availableDust[DustType.Cooldust] || 0}
                         dustImageData={compass.getDustImageData(DustType.Cooldust)}
                         textSize="small"
+                        showTooltip={true}
                     />
                     <DustDisplay
                         cost={compass.availableDust[DustType.Novadust] || 0}
                         dustImageData={compass.getDustImageData(DustType.Novadust)}
                         textSize="small"
+                        showTooltip={true}
                     />
                 </Box>
             </Box>
@@ -212,9 +219,45 @@ function EfficiencySection() {
         if (!compass || compass.currentTempestDamage === 0) {
             return [];
         }
-        return isDamageMode 
+        const rawUpgrades = isDamageMode 
             ? compass.getTopDamageEfficiencyUpgrades(10)
             : compass.getTopDustEfficiencyUpgrades(10);
+
+        // Combine duplicate upgrades into single entries with target levels
+        const combinedUpgrades = new Map();
+        
+        rawUpgrades.forEach(effUpgrade => {
+            const upgradeId = effUpgrade.upgrade.id;
+            
+            if (combinedUpgrades.has(upgradeId)) {
+                const existing = combinedUpgrades.get(upgradeId);
+                existing.targetLevel = effUpgrade.upgrade.level;
+                existing.totalValueIncrease += effUpgrade.valueIncrease;
+                existing.totalDustCost += effUpgrade.dustCost;
+                existing.individualCosts.push({
+                    fromLevel: effUpgrade.upgrade.level - 1,
+                    toLevel: effUpgrade.upgrade.level,
+                    cost: effUpgrade.dustCost,
+                    valueIncrease: effUpgrade.valueIncrease
+                });
+            } else {
+                combinedUpgrades.set(upgradeId, {
+                    upgrade: effUpgrade.upgrade,
+                    currentLevel: compass.upgrades.find(u => u.id === upgradeId)?.level || 0,
+                    targetLevel: effUpgrade.upgrade.level,
+                    totalValueIncrease: effUpgrade.valueIncrease,
+                    totalDustCost: effUpgrade.dustCost,
+                    individualCosts: [{
+                        fromLevel: effUpgrade.upgrade.level - 1,
+                        toLevel: effUpgrade.upgrade.level,
+                        cost: effUpgrade.dustCost,
+                        valueIncrease: effUpgrade.valueIncrease
+                    }]
+                });
+            }
+        });
+
+        return Array.from(combinedUpgrades.values());
     }, [compass, isDamageMode, lastUpdated]);
 
     const attributeConfig = {
@@ -234,7 +277,7 @@ function EfficiencySection() {
 
     const config = attributeConfig[selectedAttribute];
 
-    // Calculate total dust costs for all 10 upgrades
+    // Calculate total dust costs for all combined upgrades
     const totalDustCosts = useMemo(() => {
         const costs: Record<DustType, number> = {
             [DustType.Stardust]: 0,
@@ -244,22 +287,13 @@ function EfficiencySection() {
             [DustType.Novadust]: 0
         };
 
-        topEfficiencyUpgrades.forEach(upgrade => {
-            const dustType = upgrade.upgrade.data.dustType as DustType;
-            costs[dustType] += upgrade.dustCost;
+        topEfficiencyUpgrades.forEach(combinedUpgrade => {
+            const dustType = combinedUpgrade.upgrade.data.dustType as DustType;
+            costs[dustType] += combinedUpgrade.totalDustCost;
         });
 
         return costs;
     }, [topEfficiencyUpgrades]);
-
-    // Check if player can afford all upgrades
-    const canAffordAll = useMemo(() => {
-        if (!compass) return false;
-        return Object.entries(totalDustCosts).every(([dustType, cost]) => {
-            const dustTypeKey = parseInt(dustType) as DustType;
-            return compass.availableDust[dustTypeKey] >= cost;
-        });
-    }, [totalDustCosts, compass]);
 
     // Early return after all hooks
     if (!compass || compass.currentTempestDamage === 0) {
@@ -304,7 +338,7 @@ function EfficiencySection() {
 
                 {topEfficiencyUpgrades.length > 0 ? (
                     <Box gap="small">
-                        <Text size="small" weight="bold">Optimal Purchase Sequence (Next 10 Upgrades)</Text>
+                        <Text size="small" weight="bold">Most Efficient Upgrades</Text>
                         <DataTable
                             columns={[
                                 {
@@ -318,30 +352,54 @@ function EfficiencySection() {
                                     )
                                 },
                                 {
-                                    property: 'level',
-                                    header: 'Level',
+                                    property: 'targetLevel',
+                                    header: 'Target Level',
                                     render: (data: any) => (
-                                        <Text size="xsmall">{`${data.upgrade.level}${data.upgrade.data.maxLevel >= 999999 ? '' : `/${data.upgrade.data.maxLevel}`}`}</Text>
+                                        <Text size="xsmall">{`${data.currentLevel} → ${data.targetLevel}`}</Text>
                                     )
                                 },
                                 {
-                                    property: 'valueIncrease',
+                                    property: 'totalValueIncrease',
                                     header: config.valueHeader,
                                     render: (data: any) => (
                                         <Text size="xsmall" color={config.valueColor}>
-                                            {config.formatValue(data.valueIncrease)}
+                                            {config.formatValue(data.totalValueIncrease)}
                                         </Text>
                                     )
                                 },
                                 {
-                                    property: 'cost',
-                                    header: 'Cost',
+                                    property: 'totalCost',
+                                    header: 'Total Cost',
                                     render: (data: any) => (
-                                        <DustDisplay
-                                            cost={data.dustCost}
-                                            canAfford={compass.canAffordUpgrade(data.upgrade)}
-                                            dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
-                                        />
+                                        <TipDisplay
+                                            heading="Individual Level Costs"
+                                            body={
+                                                <Box gap="xsmall">
+                                                    {data.individualCosts.map((cost: any, index: number) => (
+                                                        <Box key={index} direction="row" justify="between" gap="medium" align="end">
+                                                            <Text size="xsmall">{`Level ${cost.fromLevel} → ${cost.toLevel}:`}</Text>
+                                                            <Box direction="row" gap="small" align="center">
+                                                                <DustDisplay
+                                                                    cost={cost.cost}
+                                                                    dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                                                                    textSize="xsmall"
+                                                                />
+                                                                <Text size="xsmall" color={config.valueColor}>
+                                                                    ({config.formatValue(cost.valueIncrease)})
+                                                                </Text>
+                                                            </Box>
+                                                        </Box>
+                                                    ))}
+                                                </Box>
+                                            }
+                                            direction={TipDirection.Down}
+                                        >
+                                            <DustDisplay
+                                                cost={data.totalDustCost}
+                                                canAfford={compass.availableDust[data.upgrade.data.dustType as DustType] >= data.totalDustCost}
+                                                dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                                            />
+                                        </TipDisplay>
                                     )
                                 }
                             ]}
