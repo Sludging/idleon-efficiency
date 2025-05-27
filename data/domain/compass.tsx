@@ -223,8 +223,18 @@ export class CompassUpgrade {
     }
 
     getImageData = (): ImageData => {
+        // We default to upgrade 0 for the image.
+        let location = `CompassUpg0`;
+        // If index is less than 106, it's a normal upgrade.
+        if (this.id < 106) {
+            location = `CompassUpg${this.id}`;
+        } else if (Object.keys(CompassIconz).includes(this.id.toString())) {
+            // If index is greater than 106, and it's in the CompassIconz object, it's a special upgrade.
+            location = `CompassUpg${parseInt(CompassIconz[this.id]) + 106}`;
+        }
+
         return {
-            location: `CompassUpg${this.id}`,
+            location: location,
             height: 57,
             width: 57,
         }
@@ -992,3 +1002,72 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
 
     return compass;
 } 
+
+
+const CompassIconz: Record<number, string> = {
+    139: "0",
+    142: "0",
+    145: "0",
+    148: "0",
+    150: "0",
+    137: "1",
+    138: "1",
+    141: "1",
+    143: "1",
+    144: "1",
+    149: "1",
+    106: "2",
+    107: "2",
+    108: "2",
+    109: "2",
+    110: "2",
+    111: "2",
+    112: "2",
+    113: "2",
+    114: "2",
+    115: "2",
+    116: "2",
+    117: "2",
+    118: "2",
+    119: "3",
+    121: "3",
+    122: "3",
+    123: "3",
+    126: "3",
+    127: "3",
+    129: "3",
+    130: "3",
+    132: "3",
+    135: "3",
+    120: "4",
+    124: "4",
+    125: "4",
+    128: "4",
+    131: "4",
+    133: "4",
+    134: "4",
+    136: "4",
+    147: "4",
+    140: "5",
+    146: "5",
+    151: "6",
+    152: "6",
+    153: "6",
+    154: "7",
+    156: "7",
+    162: "8",
+    163: "8",
+    164: "8",
+    166: "8",
+    167: "8",
+    155: "9",
+    157: "9",
+    158: "9",
+    159: "10",
+    160: "10",
+    161: "10",
+    165: "10",
+    168: "10",
+    169: "10",
+    170: "11"
+};
