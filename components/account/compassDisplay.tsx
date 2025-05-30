@@ -19,6 +19,7 @@ import IconImage from "../base/IconImage";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { Compass, CompassUpgrade, DustType } from "../../data/domain/compass";
 import React from "react";
+import { CircleInformation } from "grommet-icons";
 
 interface CompassTableData {
     name: string;
@@ -27,7 +28,8 @@ interface CompassTableData {
     maxLevel: number;
     bonus: string;
     nextCost: number;
-    costToMax: number;
+    goalCost: number;
+    firstLevelCost: number;
     type: string;
     maxed: boolean;
     locked: boolean;
@@ -213,22 +215,42 @@ function EfficiencySection() {
 
     const compass = theData.get("compass") as Compass;
     const [selectedAttribute, setSelectedAttribute] = useState<'damage' | 'dust'>('damage');
+    const [upgradeCount, setUpgradeCount] = useState<number>(50);
+    const [consolidateUpgrades, setConsolidateUpgrades] = useState<boolean>(true);
 
     const isDamageMode = selectedAttribute === 'damage';
     const topEfficiencyUpgrades = useMemo(() => {
         if (!compass || compass.currentTempestDamage === 0) {
             return [];
         }
-        const rawUpgrades = isDamageMode 
-            ? compass.getTopDamageEfficiencyUpgrades(10)
-            : compass.getTopDustEfficiencyUpgrades(10);
+        const rawUpgrades = isDamageMode
+            ? compass.getTopDamageEfficiencyUpgrades(upgradeCount)
+            : compass.getTopDustEfficiencyUpgrades(upgradeCount);
+
+        if (!consolidateUpgrades) {
+            // Return individual upgrades with efficiency calculation
+            return rawUpgrades.map(effUpgrade => ({
+                upgrade: effUpgrade.upgrade,
+                currentLevel: compass.upgrades.find(u => u.id === effUpgrade.upgrade.id)?.level || 0,
+                targetLevel: effUpgrade.upgrade.level,
+                totalValueIncrease: effUpgrade.valueIncrease,
+                totalDustCost: effUpgrade.dustCost,
+                efficiency: effUpgrade.valueIncrease / effUpgrade.dustCost,
+                individualCosts: [{
+                    fromLevel: effUpgrade.upgrade.level - 1,
+                    toLevel: effUpgrade.upgrade.level,
+                    cost: effUpgrade.dustCost,
+                    valueIncrease: effUpgrade.valueIncrease
+                }]
+            }));
+        }
 
         // Combine duplicate upgrades into single entries with target levels
         const combinedUpgrades = new Map();
-        
+
         rawUpgrades.forEach(effUpgrade => {
             const upgradeId = effUpgrade.upgrade.id;
-            
+
             if (combinedUpgrades.has(upgradeId)) {
                 const existing = combinedUpgrades.get(upgradeId);
                 existing.targetLevel = effUpgrade.upgrade.level;
@@ -257,8 +279,17 @@ function EfficiencySection() {
             }
         });
 
-        return Array.from(combinedUpgrades.values());
-    }, [compass, isDamageMode, lastUpdated]);
+        // Calculate average efficiency for each consolidated upgrade and sort
+        const consolidatedArray = Array.from(combinedUpgrades.values()).map(combined => ({
+            ...combined,
+            efficiency: combined.totalValueIncrease / combined.totalDustCost
+        }));
+
+        // Sort by efficiency (highest first)
+        consolidatedArray.sort((a, b) => b.efficiency - a.efficiency);
+
+        return consolidatedArray;
+    }, [compass, isDamageMode, lastUpdated, upgradeCount, consolidateUpgrades]);
 
     const attributeConfig = {
         damage: {
@@ -303,9 +334,25 @@ function EfficiencySection() {
     return (
         <ShadowBox background="dark-1" pad="medium">
             <Box gap="medium">
-                <Box direction="row" justify="between" align="center">
-                    <Box direction="row" gap="medium" align="center">
+                <Box>
+                    <Box direction="row" gap="medium" justify="between"  align="center">
                         <Text size="medium" weight="bold">Upgrade Efficiency Analysis</Text>
+                        <Box direction="row" gap="medium" align="center">
+                        <TextAndLabel
+                            label="Current Tempest Damage"
+                            text={nFormatter(compass.currentTempestDamage)}
+                            labelSize="small"
+                            textSize="medium"
+                        />
+                        <TextAndLabel
+                            label="Current Dust Multiplier"
+                            text={`${compass.currentDustMultiplier.toFixed(2)}x`}
+                            labelSize="small"
+                            textSize="medium"
+                        />
+                        </Box>
+                    </Box>
+                    <Box direction="row" gap="medium" align="center">
                         <Box direction="row" gap="small" align="center">
                             <Text size="small">Optimize for:</Text>
                             <Select
@@ -319,20 +366,35 @@ function EfficiencySection() {
                                 onChange={({ value }) => setSelectedAttribute(value)}
                             />
                         </Box>
-                    </Box>
-                    <Box direction="row" gap="medium" align="center">
-                        <TextAndLabel
-                            label="Current Tempest Damage"
-                            text={nFormatter(compass.currentTempestDamage)}
-                            labelSize="small"
-                            textSize="medium"
-                        />
-                        <TextAndLabel
-                            label="Current Dust Multiplier"
-                            text={`${compass.currentDustMultiplier.toFixed(2)}x`}
-                            labelSize="small"
-                            textSize="medium"
-                        />
+                        <Box direction="row" gap="small" align="center">
+                            <Text size="small">Show top:</Text>
+                            <Select
+                                value={upgradeCount}
+                                options={[10, 25, 50, 100]}
+                                onChange={({ option }) => setUpgradeCount(option)}
+                            />
+                        </Box>
+                        <Box direction="row" gap="xsmall" align="center">
+                            <CheckBox
+                                checked={consolidateUpgrades}
+                                label="Consolidate upgrades"
+                                onChange={(event) => setConsolidateUpgrades(event.target.checked)}
+                            />
+                            <TipDisplay
+                                heading="Consolidation Mode"
+                                body={
+                                    <Box gap="small">
+                                        <Text size="small" weight="bold">Consolidated (Checked):</Text>
+                                        <Text size="small">Groups multiple levels of the same upgrade together, sorted by average efficiency. Better for bulk upgrading and seeing total costs.</Text>
+                                        <Text size="small" weight="bold">Individual (Unchecked):</Text>
+                                        <Text size="small">Shows each upgrade level separately in exact efficiency order. Better for precise optimization and upgrading one level at a time.</Text>
+                                    </Box>
+                                }
+                                direction={TipDirection.Down}
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>
                     </Box>
                 </Box>
 
@@ -353,9 +415,14 @@ function EfficiencySection() {
                                 },
                                 {
                                     property: 'targetLevel',
-                                    header: 'Target Level',
+                                    header: consolidateUpgrades ? 'Target Level' : 'Level',
                                     render: (data: any) => (
-                                        <Text size="xsmall">{`${data.currentLevel} → ${data.targetLevel}`}</Text>
+                                        <Text size="xsmall">
+                                            {consolidateUpgrades 
+                                                ? `${data.currentLevel} → ${data.targetLevel}`
+                                                : `${data.currentLevel} → ${data.targetLevel}`
+                                            }
+                                        </Text>
                                     )
                                 },
                                 {
@@ -369,37 +436,45 @@ function EfficiencySection() {
                                 },
                                 {
                                     property: 'totalCost',
-                                    header: 'Total Cost',
+                                    header: consolidateUpgrades ? 'Total Cost' : 'Cost',
                                     render: (data: any) => (
-                                        <TipDisplay
-                                            heading="Individual Level Costs"
-                                            body={
-                                                <Box gap="xsmall">
-                                                    {data.individualCosts.map((cost: any, index: number) => (
-                                                        <Box key={index} direction="row" justify="between" gap="medium" align="end">
-                                                            <Text size="xsmall">{`Level ${cost.fromLevel} → ${cost.toLevel}:`}</Text>
-                                                            <Box direction="row" gap="small" align="center">
-                                                                <DustDisplay
-                                                                    cost={cost.cost}
-                                                                    dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
-                                                                    textSize="xsmall"
-                                                                />
-                                                                <Text size="xsmall" color={config.valueColor}>
-                                                                    ({config.formatValue(cost.valueIncrease)})
-                                                                </Text>
+                                        consolidateUpgrades ? (
+                                            <TipDisplay
+                                                heading="Individual Level Costs"
+                                                body={
+                                                    <Box gap="xsmall">
+                                                        {data.individualCosts.map((cost: any, index: number) => (
+                                                            <Box key={index} direction="row" justify="between" gap="medium" align="end">
+                                                                <Text size="xsmall">{`Level ${cost.fromLevel} → ${cost.toLevel}:`}</Text>
+                                                                <Box direction="row" gap="small" align="center">
+                                                                    <DustDisplay
+                                                                        cost={cost.cost}
+                                                                        dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                                                                        textSize="xsmall"
+                                                                    />
+                                                                    <Text size="xsmall" color={config.valueColor}>
+                                                                        ({config.formatValue(cost.valueIncrease)})
+                                                                    </Text>
+                                                                </Box>
                                                             </Box>
-                                                        </Box>
-                                                    ))}
-                                                </Box>
-                                            }
-                                            direction={TipDirection.Down}
-                                        >
+                                                        ))}
+                                                    </Box>
+                                                }
+                                                direction={TipDirection.Down}
+                                            >
+                                                <DustDisplay
+                                                    cost={data.totalDustCost}
+                                                    canAfford={compass.availableDust[data.upgrade.data.dustType as DustType] >= data.totalDustCost}
+                                                    dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                                                />
+                                            </TipDisplay>
+                                        ) : (
                                             <DustDisplay
                                                 cost={data.totalDustCost}
                                                 canAfford={compass.availableDust[data.upgrade.data.dustType as DustType] >= data.totalDustCost}
                                                 dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
                                             />
-                                        </TipDisplay>
+                                        )
                                     )
                                 }
                             ]}
@@ -491,10 +566,29 @@ function CompassTableView() {
         },
         {
             property: 'nextCost',
-            header: 'Next Level',
+            header: 'Next Cost',
             render: (data: CompassTableData) => {
-                if (!data.upgrade.unlocked || data.upgrade.level >= data.upgrade.data.maxLevel) {
+                if (data.upgrade.level >= data.upgrade.data.maxLevel) {
                     return <Text size="xsmall">-</Text>;
+                }
+
+                // For locked upgrades, show the first level cost
+                if (!data.upgrade.unlocked) {
+                    return (
+                        <TipDisplay
+                            heading="First Level Cost"
+                            body={
+                                <Text size="small">Cost for the first level of this upgrade after unlocking</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <DustDisplay
+                                cost={data.firstLevelCost}
+                                canAfford={false} // Always show as unaffordable since it's locked
+                                dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                            />
+                        </TipDisplay>
+                    );
                 }
 
                 return (
@@ -507,19 +601,58 @@ function CompassTableView() {
             }
         },
         {
-            property: 'costToMax',
-            header: 'Cost to Max/10',
+            property: 'goalCost',
+            header: 'Goal Cost',
             render: (data: CompassTableData) => {
-                if (!data.upgrade.unlocked || data.upgrade.level >= data.upgrade.data.maxLevel) {
+                if (data.upgrade.level >= data.upgrade.data.maxLevel) {
                     return <Text size="small">-</Text>;
                 }
 
+                // For locked upgrades, show the cost to unlock
+                if (!data.upgrade.unlocked) {
+                    if (data.upgrade.costToUnlock === 0) {
+                        return <Text size="xsmall">Kill Abom</Text>;
+                    }
+
+                    // All path upgrades use stardust to unlock
+                    let unlockDustType = DustType.Stardust
+
+                    return (
+                        <TipDisplay
+                            heading="Cost to Unlock"
+                            body={
+                                <Text size="small">Cost to level up the path upgrade to unlock this upgrade</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <DustDisplay
+                                cost={data.goalCost}
+                                canAfford={compass.canAffordUpgrade(data.upgrade, data.goalCost)}
+                                dustImageData={compass.getDustImageData(unlockDustType)}
+                            />
+                        </TipDisplay>
+                    );
+                }
+
+                // For unlocked upgrades, show cost to max or 10 levels
+                const tooltipText = data.upgrade.data.maxLevel >= 999999
+                    ? "Cost for the next 10 levels"
+                    : "Cost to reach maximum level";
+
                 return (
-                    <DustDisplay
-                        cost={data.costToMax}
-                        canAfford={compass.canAffordUpgrade(data.upgrade, data.costToMax)}
-                        dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
-                    />
+                    <TipDisplay
+                        heading={data.upgrade.data.maxLevel >= 999999 ? "Cost for 10 Levels" : "Cost to Max"}
+                        body={
+                            <Text size="small">{tooltipText}</Text>
+                        }
+                        direction={TipDirection.Down}
+                    >
+                        <DustDisplay
+                            cost={data.goalCost}
+                            canAfford={compass.canAffordUpgrade(data.upgrade, data.goalCost)}
+                            dustImageData={compass.getDustImageData(data.upgrade.data.dustType)}
+                        />
+                    </TipDisplay>
                 );
             }
         }
@@ -536,6 +669,20 @@ function CompassTableView() {
                     ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata)
                     : upgrade.costToMax;
 
+                // Calculate goal cost (unlock cost for locked, cost to max/10 for unlocked)
+                const goalCost = !upgrade.unlocked
+                    ? upgrade.costToUnlock
+                    : costToMax;
+
+                // Calculate first level cost for locked upgrades
+                let firstLevelCost = 0;
+                if (!upgrade.unlocked) {
+                    const tempUpgrade = compass.copyUpgrade(upgrade);
+                    tempUpgrade.unlocked = true;
+                    tempUpgrade.level = 0;
+                    firstLevelCost = tempUpgrade.getCost(compass.upgrades, compass.upgradeMetadata);
+                }
+
                 return {
                     name: upgrade.data.name,
                     dustType: DustType[upgrade.data.dustType],
@@ -543,7 +690,8 @@ function CompassTableView() {
                     maxLevel: upgrade.data.maxLevel,
                     bonus: upgrade.getDescription(),
                     nextCost: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : upgrade.cost,
-                    costToMax: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : costToMax,
+                    goalCost: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : goalCost,
+                    firstLevelCost: upgrade.level === upgrade.data.maxLevel ? Number.MAX_SAFE_INTEGER : firstLevelCost,
                     type: upgrade.data.upgradeType,
                     maxed: upgrade.level >= upgrade.data.maxLevel,
                     locked: !upgrade.unlocked,

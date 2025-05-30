@@ -123,7 +123,7 @@ class EfficiencyEngine {
     calculateEfficiency(
         compass: Compass, 
         calculator: EfficiencyCalculator, 
-        maxUpgrades: number = 10
+        maxUpgrades: number = 100
     ): EfficiencyUpgrade[] {
         const currentValue = calculator.calculateCurrentValue(compass);
         const results: EfficiencyUpgrade[] = [];
@@ -202,6 +202,7 @@ export class CompassUpgrade {
     public bonus: number = 0;
     public cost: number = 0;
     public costToMax: number = 0;
+    public costToUnlock: number = 0; // Cost to unlock this upgrade if it's locked
 
     public indexInPath: number = 0;
 
@@ -383,6 +384,61 @@ export class CompassUpgrade {
         return totalCost;
     }
 
+    getCostToUnlock = (allUpgrades: CompassUpgrade[], upgradeMetadata: Record<string, { pathLevel: number, pathUpgrades: number[] }>): number => {
+        // If already unlocked, no cost to unlock
+        if (this.unlocked) {
+            return 0;
+        }
+
+        // If not part of a path, should be unlocked by default
+        if (!this.data.upgradeType || !Object.keys(upgradeMetadata).includes(this.data.upgradeType)) {
+            return 0;
+        }
+
+        const pathData = upgradeMetadata[this.data.upgradeType];
+        const currentPathLevel = pathData.pathLevel;
+        const requiredPathLevel = this.indexInPath + 1; // Need to reach this level to unlock
+
+        // If already at or past required level, no cost
+        if (currentPathLevel >= requiredPathLevel) {
+            return 0;
+        }
+
+        // Special case for Abomination path - can't be leveled up with dust
+        if (this.data.upgradeType === "Abomination") {
+            return 0; // Cannot calculate cost as it depends on killing abominations
+        }
+
+        // Find the path level upgrade that controls this path
+        let pathLevelUpgradeId: number;
+        switch (this.data.upgradeType) {
+            case "Elemental":
+                pathLevelUpgradeId = 1;
+                break;
+            case "Fighter":
+                pathLevelUpgradeId = 13;
+                break;
+            case "Survival":
+                pathLevelUpgradeId = 27;
+                break;
+            case "Nomadic":
+                pathLevelUpgradeId = 40;
+                break;
+            default:
+                return 0; // Unknown path type
+        }
+
+        // Find the path level upgrade
+        const pathLevelUpgrade = allUpgrades.find(u => u.id === pathLevelUpgradeId);
+        if (!pathLevelUpgrade) {
+            return 0;
+        }
+
+        // Calculate cost to level up the path level upgrade from current level to required level
+        const levelsNeeded = requiredPathLevel - currentPathLevel;
+        return pathLevelUpgrade.getCostForNextNLevels(allUpgrades, levelsNeeded, upgradeMetadata);
+    }
+
     getDescription = (): string => {
         let description = this.data.description;
 
@@ -537,6 +593,9 @@ export class Compass extends Domain {
             } else {
                 upgrade.costToMax = upgrade.getCostToMax(this.upgrades, this.upgradeMetadata);
             }
+
+            // Calculate cost to unlock for locked upgrades
+            upgrade.costToUnlock = upgrade.getCostToUnlock(this.upgrades, this.upgradeMetadata);
         });
     }
 
@@ -624,16 +683,8 @@ export class Compass extends Domain {
         let etcBonusMultiplier = 1;
         if (includeEquipment && this.bestWindWalker.gear?.equipment) {
             const equipment = this.bestWindWalker.gear.equipment;
-            // Check ring slots (indices 5 and 7) for "Tempest Damage" misc bonus
-            [5, 7].forEach(ringSlot => {
-                const ring = equipment[ringSlot];
-                if (ring) {
-                    const tempestDamageBonus = ring.getMiscBonus("Tempest Damage");
-                    if (tempestDamageBonus > 0) {
-                        etcBonusMultiplier += tempestDamageBonus / 100;
-                    }
-                }
-            });
+            // Check for "Tempest Damage" misc bonus (currently just rings)
+            etcBonusMultiplier += equipment.reduce((sum, item) => sum += item?.getMiscBonus("Tempest Damage") ?? 0, 0);
         }
         damage *= etcBonusMultiplier;
 
@@ -699,6 +750,7 @@ export class Compass extends Domain {
         copy.unlocked = upgrade.unlocked;
         copy.cost = upgrade.cost;
         copy.costToMax = upgrade.costToMax;
+        copy.costToUnlock = upgrade.costToUnlock;
         copy.indexInPath = upgrade.indexInPath;
         copy.dustServerVarMultiplier = upgrade.dustServerVarMultiplier;
         copy.bonus = upgrade.bonus;
@@ -922,7 +974,7 @@ export class Compass extends Domain {
  */
 export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => {
     const compass = accountData.get("compass") as Compass;
-    const players = accountData.get("players") as any[];
+    const players = accountData.get("players") as Player[];
     const sneaking = accountData.get("sneaking");
     const arcade = accountData.get("arcade");
 
@@ -933,6 +985,11 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
             const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
             if (windWalker) {
                 compass.bestWindWalker = windWalker;
+
+                // Set ETC bonuses from Wind Walker equipment
+                const windWalkerEquipment = windWalker.gear.equipment;
+                compass.etcBonus85 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Dust Multi") ?? 0, 0);
+                compass.etcBonus79 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Extra Dust") ?? 0, 0);
             }
 
             // Set pristine bonus 19 from sneaking
@@ -944,26 +1001,6 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
                 }
             }
 
-            // Set ETC bonuses from Wind Walker equipment
-            compass.etcBonus85 = 0; // "Dust Multi"
-            compass.etcBonus79 = 0; // "Extra Dust"
-            if (windWalker?.gear?.equipment) {
-                // Check weapon slot (index 1)
-                const weapon = windWalker.gear.equipment[1];
-                if (weapon) {
-                    compass.etcBonus85 += weapon.getMiscBonus("Dust Multi") || 0;
-                    compass.etcBonus79 += weapon.getMiscBonus("Extra Dust") || 0;
-                }
-
-                // Check ring slots (indices 5 and 7)
-                [5, 7].forEach((ringSlot: number) => {
-                    const ring = windWalker.gear.equipment[ringSlot];
-                    if (ring) {
-                        compass.etcBonus85 += ring.getMiscBonus("Dust Multi") || 0;
-                        compass.etcBonus79 += ring.getMiscBonus("Extra Dust") || 0;
-                    }
-                });
-            }
 
             // Set talent 421 from Wind Walker
             compass.talent421 = 0;
