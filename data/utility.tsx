@@ -109,6 +109,51 @@ export const bitsFormatter = (num: number) => {
     }
 }
 
+export const commaNotation = (num: number): string => {
+    let baseNumber = Math.round(num);
+    let suffix = "";
+    
+    // Handle large numbers by converting to M or T
+    if (num > 1e15) {
+        baseNumber = Math.round(num / 1e12);
+        suffix = "T";
+    } else if (num > 1e9) {
+        baseNumber = Math.round(num / 1e6);
+        suffix = "M";
+    }
+    
+    // Convert to string for comma processing
+    const numStr = baseNumber.toString();
+    
+    // Calculate how many groups of 3 digits we have
+    const numGroups = Math.floor((numStr.length - 1) / 3) + 1;
+    
+    // Calculate the length of the first group (can be 1, 2, or 3 digits)
+    const firstGroupLength = numStr.length - 3 * Math.floor((numStr.length - 1) / 3);
+    
+    let result = "";
+    
+    // Build the comma-separated string
+    for (let i = 0; i < numGroups; i++) {
+        if (i === 0) {
+            // First group - take the first 1-3 digits
+            result = numStr.substring(0, firstGroupLength);
+        } else {
+            // Subsequent groups - take 3 digits each and add comma
+            const startIndex = firstGroupLength + 3 * (i - 1);
+            const endIndex = firstGroupLength + 3 * i;
+            result += "," + numStr.substring(startIndex, endIndex);
+        }
+    }
+    
+    // Add suffix if we have one
+    if (suffix !== "") {
+        result += suffix;
+    }
+    
+    return result;
+}
+
 export const nFormatter = (num: number, type: string = "Smaller") => {
     if (type) {
         switch(type) {
@@ -140,6 +185,9 @@ export const nFormatter = (num: number, type: string = "Smaller") => {
             }
             case "Bits": {
                 return bitsFormatter(num);
+            }
+            case "CommaNotation": {
+                return commaNotation(num);
             }       
         }
     }

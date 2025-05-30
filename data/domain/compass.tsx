@@ -1,5 +1,6 @@
 import { nFormatter } from "../utility";
 import { lavaLog } from "../utility";
+import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
 import { CompassUpgradeBase, initCompassUpgradeRepo } from "./data/CompassUpgradeRepo";
 import { initRandoListRepo } from "./data/RandoListRepo";
@@ -7,6 +8,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
+import { Sneaking } from "./world-6/sneaking";
 
 export enum WeaknessType {
     Fire = 0,
@@ -975,8 +977,8 @@ export class Compass extends Domain {
 export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => {
     const compass = accountData.get("compass") as Compass;
     const players = accountData.get("players") as Player[];
-    const sneaking = accountData.get("sneaking");
-    const arcade = accountData.get("arcade");
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const arcade = accountData.get("arcade") as Arcade;
 
     if (compass && players) {
         try {
@@ -997,7 +999,7 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
             if (sneaking?.pristineCharms) {
                 const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
                 if (charm19?.unlocked) {
-                    compass.pristineBonus19 = charm19.data.x1 || 0;
+                    compass.pristineBonus19 = charm19.getBonus();
                 }
             }
 

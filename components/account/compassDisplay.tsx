@@ -340,7 +340,7 @@ function EfficiencySection() {
                         <Box direction="row" gap="medium" align="center">
                         <TextAndLabel
                             label="Current Tempest Damage"
-                            text={nFormatter(compass.currentTempestDamage)}
+                            text={nFormatter(compass.currentTempestDamage, "CommaNotation")}
                             labelSize="small"
                             textSize="medium"
                         />

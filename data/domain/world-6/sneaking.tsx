@@ -290,12 +290,20 @@ export class PristineCharm {
         }
     }
 
+    getBonus = (): number => {
+        if (this.data.bonus.indexOf('{') > -1) {
+            return this.data.x1;
+        } else {
+            return 1 + this.data.x1 / 100;
+        }
+    }
+
     getBonusText = (): string => {
         return this.data.bonus
             // { Means that the bonus is "flat", we don't need to manipulate it
-            .replace(/{/, this.data.x1.toString())
+            .replace(/{/, this.getBonus().toString())
             // } Means that to display it we need to calculate the bonus value
-            .replace(/}/, (1 + this.data.x1 / 100).toString());
+            .replace(/}/, (this.getBonus()).toString());
     }
 }
 
