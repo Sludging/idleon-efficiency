@@ -29,8 +29,8 @@ export enum DustType {
 interface EfficiencyCalculator {
     name: string;
     calculateCurrentValue(compass: Compass): number;
-    getRelevantUpgradeIds(): number[];
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number): number;
+    getRelevantUpgradeIds(compass: Compass): number[];
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number;
 }
 
 // Efficiency result structure
@@ -42,12 +42,35 @@ interface EfficiencyUpgrade {
     calculatorName: string;
 }
 
+// Helper function to add meta-upgrades that boost circle-shaped upgrades
+function addMetaUpgradesIfRelevant(baseIds: number[], compass: Compass): number[] {
+    const result = [...baseIds];
+    
+    // Check if any of the base upgrades are circle-shaped (x5 = 1)
+    const hasCircleUpgrades = baseIds.some(id => {
+        const upgrade = compass.upgrades.find(u => u.id === id);
+        return upgrade?.data.x5 === 1;
+    });
+    
+    if (hasCircleUpgrades) {
+        // Add Circle Supremacy (39) and Abomination Slayer XXI (80) if not already included
+        if (!result.includes(39)) result.push(39);
+        if (!result.includes(80)) result.push(80);
+    }
+    
+    // Always include general cost reduction upgrades since they affect all upgrades
+    if (!result.includes(36)) result.push(36); // Knockoff Compass - all compass upgrades cheaper
+    if (!result.includes(77)) result.push(77); // Abomination Slayer XVIII - cheaper compass upgrade costs
+    
+    return result;
+}
+
 // Damage efficiency calculator implementation
 class DamageEfficiencyCalculator implements EfficiencyCalculator {
     name = "Tempest Damage";
     
-    getRelevantUpgradeIds(): number[] {
-        return [
+    getRelevantUpgradeIds(compass: Compass): number[] {
+        const baseIds = [
             // Flat damage bonuses
             14, 15, 24, 60, 81,
             // Percentage damage bonuses
@@ -57,13 +80,16 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
             26, // Mastery completion  
             6   // Medallion bonus
         ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, compass);
     }
     
     calculateCurrentValue(compass: Compass): number {
         return compass.calculateTempestDamage();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number): number {
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
         const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
@@ -74,7 +100,7 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
         compass.recalculateUpgrades(tempUpgrades);
         
         // Calculate damage with temporary upgrades
-        return compass.calculateDamageWithUpgrades(tempUpgrades, compass.availableDust);
+        return compass.calculateDamageWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
@@ -82,8 +108,8 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
 class DustEfficiencyCalculator implements EfficiencyCalculator {
     name = "Dust Multiplier";
     
-    getRelevantUpgradeIds(): number[] {
-        return [
+    getRelevantUpgradeIds(compass: Compass): number[] {
+        const baseIds = [
             // Direct dust multiplier bonuses
             31,  // Mountains of Dust
             34,  // Solardust Hoarding
@@ -98,6 +124,9 @@ class DustEfficiencyCalculator implements EfficiencyCalculator {
             93,  // Abomination Slayer XXXIV
             89   // Abomination Slayer XXX
         ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, compass);
     }
     
     calculateCurrentValue(compass: Compass): number {
@@ -105,7 +134,7 @@ class DustEfficiencyCalculator implements EfficiencyCalculator {
         return compass.calculateDustMultiplier();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number): number {
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
         const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
@@ -116,7 +145,7 @@ class DustEfficiencyCalculator implements EfficiencyCalculator {
         compass.recalculateUpgrades(tempUpgrades);
         
         // Calculate dust multiplier with temporary upgrades
-        return compass.calculateDustWithUpgrades(tempUpgrades, compass.availableDust);
+        return compass.calculateDustWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
@@ -131,7 +160,7 @@ class EfficiencyEngine {
         const results: EfficiencyUpgrade[] = [];
         
         // Get relevant upgrade IDs for this calculator
-        const relevantUpgradeIds = calculator.getRelevantUpgradeIds();
+        const relevantUpgradeIds = calculator.getRelevantUpgradeIds(compass);
 
         // Create a working copy of the current state for simulation
         let simulatedUpgrades = compass.upgrades.map(u => compass.copyUpgrade(u));
@@ -152,10 +181,8 @@ class EfficiencyEngine {
                     continue; // Skip locked or maxed upgrades
                 }
 
-                // Note: Removed affordability check to show most efficient upgrades regardless of cost
-
-                // Calculate value with this upgrade at +1 level
-                const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId);
+                // Calculate value with this upgrade at +1 level using current simulated dust amounts
+                const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId, simulatedAvailableDust);
                 const valueIncrease = newValue - simulatedValue;
                 const efficiency = valueIncrease / upgrade.cost;
 
@@ -185,11 +212,14 @@ class EfficiencyEngine {
                 bestUpgrade.level += 1;
                 simulatedValue = bestNewValue;
 
-                // Note: No longer deducting dust cost since we're ignoring affordability
+                // Deduct dust cost from simulated available dust
+                const dustType = bestUpgrade.data.dustType as DustType;
+                simulatedAvailableDust[dustType] = Math.max(0, simulatedAvailableDust[dustType] - bestUpgrade.cost);
+
                 // Recalculate costs and bonuses for all upgrades after this purchase
                 compass.recalculateUpgrades(simulatedUpgrades);
             } else {
-                // No more efficient upgrades available (either all maxed, locked, or unaffordable)
+                // No more efficient upgrades available (either all maxed, locked, or no positive efficiency)
                 break;
             }
         }
