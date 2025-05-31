@@ -7,6 +7,16 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.37-v2",
+    title: "Compass",
+    date: "May 31, 2025",
+    changes: [
+      "Enhance efficiency calculator on compass page.",
+      "Fix bug with not handling the premium hat for extra dust.",
+      "Handle arcade blue balls and reindeer pet. As this impacted bonus dust."
+    ]
+  },
+  {
     version: "1.2.37",
     title: "Compass",
     date: "May 25, 2025",
