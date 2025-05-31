@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <Box pad={{ horizontal: "medium" }}>
-            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Compass Upgrades</Heading>
+            <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Compass</Heading>
             <Suspense fallback={<Box pad="large">Loading Compass data...</Box>}>
                 <CompassDisplay />
             </Suspense>

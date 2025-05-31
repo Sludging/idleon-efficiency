@@ -1,5 +1,6 @@
 import { nFormatter } from "../utility";
 import { lavaLog } from "../utility";
+import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
 import { CompassUpgradeBase, initCompassUpgradeRepo } from "./data/CompassUpgradeRepo";
 import { initRandoListRepo } from "./data/RandoListRepo";
@@ -7,6 +8,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
+import { Sneaking } from "./world-6/sneaking";
 
 export enum WeaknessType {
     Fire = 0,
@@ -26,9 +28,9 @@ export enum DustType {
 // Base interface for all efficiency calculators
 interface EfficiencyCalculator {
     name: string;
-    calculateCurrentValue(compass: Compass, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number;
-    getRelevantUpgradeIds(): number[];
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number;
+    calculateCurrentValue(compass: Compass): number;
+    getRelevantUpgradeIds(compass: Compass): number[];
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number;
 }
 
 // Efficiency result structure
@@ -40,12 +42,35 @@ interface EfficiencyUpgrade {
     calculatorName: string;
 }
 
+// Helper function to add meta-upgrades that boost circle-shaped upgrades
+function addMetaUpgradesIfRelevant(baseIds: number[], compass: Compass): number[] {
+    const result = [...baseIds];
+    
+    // Check if any of the base upgrades are circle-shaped (x5 = 1)
+    const hasCircleUpgrades = baseIds.some(id => {
+        const upgrade = compass.upgrades.find(u => u.id === id);
+        return upgrade?.data.x5 === 1;
+    });
+    
+    if (hasCircleUpgrades) {
+        // Add Circle Supremacy (39) and Abomination Slayer XXI (80) if not already included
+        if (!result.includes(39)) result.push(39);
+        if (!result.includes(80)) result.push(80);
+    }
+    
+    // Always include general cost reduction upgrades since they affect all upgrades
+    if (!result.includes(36)) result.push(36); // Knockoff Compass - all compass upgrades cheaper
+    if (!result.includes(77)) result.push(77); // Abomination Slayer XVIII - cheaper compass upgrade costs
+    
+    return result;
+}
+
 // Damage efficiency calculator implementation
 class DamageEfficiencyCalculator implements EfficiencyCalculator {
     name = "Tempest Damage";
     
-    getRelevantUpgradeIds(): number[] {
-        return [
+    getRelevantUpgradeIds(compass: Compass): number[] {
+        const baseIds = [
             // Flat damage bonuses
             14, 15, 24, 60, 81,
             // Percentage damage bonuses
@@ -55,24 +80,27 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
             26, // Mastery completion  
             6   // Medallion bonus
         ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, compass);
     }
     
-    calculateCurrentValue(compass: Compass, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number {
-        return compass.calculateTempestDamage(players, serverVars, optionsList);
+    calculateCurrentValue(compass: Compass): number {
+        return compass.calculateTempestDamage();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number {
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
         const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
         
-        if (!targetUpgrade) return this.calculateCurrentValue(compass, players, serverVars, optionsList);
+        if (!targetUpgrade) return this.calculateCurrentValue(compass);
         
         targetUpgrade.level += 1;
         compass.recalculateUpgrades(tempUpgrades);
         
         // Calculate damage with temporary upgrades
-        return compass.calculateDamageWithUpgrades(tempUpgrades, compass.availableDust, players, serverVars, optionsList);
+        return compass.calculateDamageWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
@@ -80,8 +108,8 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
 class DustEfficiencyCalculator implements EfficiencyCalculator {
     name = "Dust Multiplier";
     
-    getRelevantUpgradeIds(): number[] {
-        return [
+    getRelevantUpgradeIds(compass: Compass): number[] {
+        const baseIds = [
             // Direct dust multiplier bonuses
             31,  // Mountains of Dust
             34,  // Solardust Hoarding
@@ -96,25 +124,28 @@ class DustEfficiencyCalculator implements EfficiencyCalculator {
             93,  // Abomination Slayer XXXIV
             89   // Abomination Slayer XXX
         ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, compass);
     }
     
-    calculateCurrentValue(compass: Compass, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number {
+    calculateCurrentValue(compass: Compass): number {
         // Use default values for external bonuses since they don't change with compass upgrades
-        return compass.calculateDustMultiplier(players, serverVars, optionsList);
+        return compass.calculateDustMultiplier();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, players: Player[], serverVars: Record<string, any>, optionsList: number[]): number {
+    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
         const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
         
-        if (!targetUpgrade) return this.calculateCurrentValue(compass, players, serverVars, optionsList);
+        if (!targetUpgrade) return this.calculateCurrentValue(compass);
         
         targetUpgrade.level += 1;
         compass.recalculateUpgrades(tempUpgrades);
         
         // Calculate dust multiplier with temporary upgrades
-        return compass.calculateDustWithUpgrades(tempUpgrades, compass.availableDust, players, serverVars, optionsList);
+        return compass.calculateDustWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
@@ -123,16 +154,13 @@ class EfficiencyEngine {
     calculateEfficiency(
         compass: Compass, 
         calculator: EfficiencyCalculator, 
-        players: Player[], 
-        serverVars: Record<string, any>, 
-        optionsList: number[],
-        maxUpgrades: number = 10
+        maxUpgrades: number = 100
     ): EfficiencyUpgrade[] {
-        const currentValue = calculator.calculateCurrentValue(compass, players, serverVars, optionsList);
+        const currentValue = calculator.calculateCurrentValue(compass);
         const results: EfficiencyUpgrade[] = [];
         
         // Get relevant upgrade IDs for this calculator
-        const relevantUpgradeIds = calculator.getRelevantUpgradeIds();
+        const relevantUpgradeIds = calculator.getRelevantUpgradeIds(compass);
 
         // Create a working copy of the current state for simulation
         let simulatedUpgrades = compass.upgrades.map(u => compass.copyUpgrade(u));
@@ -153,10 +181,8 @@ class EfficiencyEngine {
                     continue; // Skip locked or maxed upgrades
                 }
 
-                // Note: Removed affordability check to show most efficient upgrades regardless of cost
-
-                // Calculate value with this upgrade at +1 level
-                const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId, players, serverVars, optionsList);
+                // Calculate value with this upgrade at +1 level using current simulated dust amounts
+                const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId, simulatedAvailableDust);
                 const valueIncrease = newValue - simulatedValue;
                 const efficiency = valueIncrease / upgrade.cost;
 
@@ -186,11 +212,14 @@ class EfficiencyEngine {
                 bestUpgrade.level += 1;
                 simulatedValue = bestNewValue;
 
-                // Note: No longer deducting dust cost since we're ignoring affordability
+                // Deduct dust cost from simulated available dust
+                const dustType = bestUpgrade.data.dustType as DustType;
+                simulatedAvailableDust[dustType] = Math.max(0, simulatedAvailableDust[dustType] - bestUpgrade.cost);
+
                 // Recalculate costs and bonuses for all upgrades after this purchase
                 compass.recalculateUpgrades(simulatedUpgrades);
             } else {
-                // No more efficient upgrades available (either all maxed, locked, or unaffordable)
+                // No more efficient upgrades available (either all maxed, locked, or no positive efficiency)
                 break;
             }
         }
@@ -205,6 +234,7 @@ export class CompassUpgrade {
     public bonus: number = 0;
     public cost: number = 0;
     public costToMax: number = 0;
+    public costToUnlock: number = 0; // Cost to unlock this upgrade if it's locked
 
     public indexInPath: number = 0;
 
@@ -223,8 +253,18 @@ export class CompassUpgrade {
     }
 
     getImageData = (): ImageData => {
+        // We default to upgrade 0 for the image.
+        let location = `CompassUpg0`;
+        // If index is less than 106, it's a normal upgrade.
+        if (this.id < 106) {
+            location = `CompassUpg${this.id}`;
+        } else if (Object.keys(CompassIconz).includes(this.id.toString())) {
+            // If index is greater than 106, and it's in the CompassIconz object, it's a special upgrade.
+            location = `CompassUpg${parseInt(CompassIconz[this.id]) + 106}`;
+        }
+
         return {
-            location: `CompassUpg${this.id}`,
+            location: location,
             height: 57,
             width: 57,
         }
@@ -376,6 +416,61 @@ export class CompassUpgrade {
         return totalCost;
     }
 
+    getCostToUnlock = (allUpgrades: CompassUpgrade[], upgradeMetadata: Record<string, { pathLevel: number, pathUpgrades: number[] }>): number => {
+        // If already unlocked, no cost to unlock
+        if (this.unlocked) {
+            return 0;
+        }
+
+        // If not part of a path, should be unlocked by default
+        if (!this.data.upgradeType || !Object.keys(upgradeMetadata).includes(this.data.upgradeType)) {
+            return 0;
+        }
+
+        const pathData = upgradeMetadata[this.data.upgradeType];
+        const currentPathLevel = pathData.pathLevel;
+        const requiredPathLevel = this.indexInPath + 1; // Need to reach this level to unlock
+
+        // If already at or past required level, no cost
+        if (currentPathLevel >= requiredPathLevel) {
+            return 0;
+        }
+
+        // Special case for Abomination path - can't be leveled up with dust
+        if (this.data.upgradeType === "Abomination") {
+            return 0; // Cannot calculate cost as it depends on killing abominations
+        }
+
+        // Find the path level upgrade that controls this path
+        let pathLevelUpgradeId: number;
+        switch (this.data.upgradeType) {
+            case "Elemental":
+                pathLevelUpgradeId = 1;
+                break;
+            case "Fighter":
+                pathLevelUpgradeId = 13;
+                break;
+            case "Survival":
+                pathLevelUpgradeId = 27;
+                break;
+            case "Nomadic":
+                pathLevelUpgradeId = 40;
+                break;
+            default:
+                return 0; // Unknown path type
+        }
+
+        // Find the path level upgrade
+        const pathLevelUpgrade = allUpgrades.find(u => u.id === pathLevelUpgradeId);
+        if (!pathLevelUpgrade) {
+            return 0;
+        }
+
+        // Calculate cost to level up the path level upgrade from current level to required level
+        const levelsNeeded = requiredPathLevel - currentPathLevel;
+        return pathLevelUpgrade.getCostForNextNLevels(allUpgrades, levelsNeeded, upgradeMetadata);
+    }
+
     getDescription = (): string => {
         let description = this.data.description;
 
@@ -418,6 +513,15 @@ export class Compass extends Domain {
     titansKilled: any[] = [];
     portalsCompleted: any[] = [];
 
+    // Collected data for calculations
+    bestWindWalker: Player | null = null;
+    pristineBonus19: number = 0;
+    etcBonus85: number = 0; // "Dust Multi" from equipment
+    etcBonus79: number = 0; // "Extra Dust" from equipment
+    talent421: number = 0;
+    arcadeBonus47: number = 0;
+    completedMasteries: number = 0;
+
     getRawKeys(): RawData[] {   
         return [
             { key: "Compass", perPlayer: false, default: [] }
@@ -451,6 +555,9 @@ export class Compass extends Domain {
         compass.availableDust[DustType.Cooldust] = optionList[360];
         compass.availableDust[DustType.Novadust] = optionList[361];
         compass.totalDustsCollected = optionList[362];
+
+        // Game state
+        compass.completedMasteries = optionList[232] || 0; // Number of completed masteries
 
         // Store raw compass data for calculations
         compass.medallionsCollected = medallionsRaw || [];
@@ -518,6 +625,9 @@ export class Compass extends Domain {
             } else {
                 upgrade.costToMax = upgrade.getCostToMax(this.upgrades, this.upgradeMetadata);
             }
+
+            // Calculate cost to unlock for locked upgrades
+            upgrade.costToUnlock = upgrade.getCostToUnlock(this.upgrades, this.upgradeMetadata);
         });
     }
 
@@ -541,24 +651,21 @@ export class Compass extends Domain {
 
     /**
      * Calculate current tempest damage based on the Compass_DMG formula
-     * @param players Array of players to find the Wind Walker
-     * @param serverVars Server variables for additional calculations
-     * @param optionsList Option list for dust amounts and other factors
      * @param includeEquipment Whether to include equipment bonuses (default true)
      * @returns Current tempest damage
      */
-    calculateTempestDamage(players: Player[], serverVars: Record<string, any>, optionsList: number[], includeEquipment: boolean = true): number {
+    calculateTempestDamage(includeEquipment: boolean = true): number {
         // Find Wind Walker player
-        const windWalker = players.find(player => player.classId === 29); // Wind_Walker = 29
-        if (!windWalker) {
+        if (!this.bestWindWalker) {
             return 0; // No Wind Walker found
         }
 
         // Equipment bonus calculation (WWzWepAtk in source code)
         let equipmentBonus = 0;
-        if (includeEquipment && windWalker.gear?.equipment) {
+        if (includeEquipment && this.bestWindWalker.gear?.equipment) {
+            const equipment = this.bestWindWalker.gear.equipment;
             // Check weapon slot (index 1) for Tempest weapon
-            const weapon = windWalker.gear.equipment[1];
+            const weapon = equipment[1];
             if (weapon && weapon.internalName.includes("Tempest")) {
                 const weaponPowerStat = weapon.itemStats.find((stat: any) => stat.displayName === "Weapon Power");
                 if (weaponPowerStat) {
@@ -568,7 +675,7 @@ export class Compass extends Domain {
 
             // Check ring slots (indices 5 and 7) for Tempest rings
             [5, 7].forEach(ringSlot => {
-                const ring = windWalker.gear.equipment[ringSlot];
+                const ring = equipment[ringSlot];
                 if (ring && ring.internalName.includes("Tempest")) {
                     // Check for "Power" stat in itemStats (for upgraded rings)
                     const powerStat = ring.itemStats.find((stat: any) => stat.displayName === "Power" || stat.displayName === " Power");
@@ -606,22 +713,15 @@ export class Compass extends Domain {
 
         // Step 3: ETC bonus multiplier - specifically for ETC bonus 86 "Tempest Damage"
         let etcBonusMultiplier = 1;
-        if (includeEquipment && windWalker.gear?.equipment) {
-            // Check ring slots (indices 5 and 7) for "Tempest Damage" misc bonus
-            [5, 7].forEach(ringSlot => {
-                const ring = windWalker.gear.equipment[ringSlot];
-                if (ring) {
-                    const tempestDamageBonus = ring.getMiscBonus("Tempest Damage");
-                    if (tempestDamageBonus > 0) {
-                        etcBonusMultiplier += tempestDamageBonus / 100;
-                    }
-                }
-            });
+        if (includeEquipment && this.bestWindWalker.gear?.equipment) {
+            const equipment = this.bestWindWalker.gear.equipment;
+            // Check for "Tempest Damage" misc bonus (currently just rings)
+            etcBonusMultiplier += equipment.reduce((sum, item) => sum += item?.getMiscBonus("Tempest Damage") ?? 0, 0);
         }
         damage *= etcBonusMultiplier;
 
         // Step 4: Cooldust hoarding multiplier (1 + CompassBonus(23) * LOG(cooldust) / 100)
-        const cooldust = optionsList[360] || 0;
+        const cooldust = this.availableDust[DustType.Cooldust];
         const coolddustHoardingBonus = this.getUpgradeBonus(23);
         const coolddustMultiplier = cooldust > 0 ? 
             1 + (coolddustHoardingBonus * this.getLogValue(cooldust)) / 100 : 1;
@@ -629,8 +729,7 @@ export class Compass extends Domain {
 
         // Step 5: Mastery completion multiplier (Math.pow(1 + CompassBonus(26) / 100, completedMasteries))
         const masteryBonus = this.getUpgradeBonus(26);
-        const completedMasteries = optionsList[232] || 0; // Number of completed masteries
-        const masteryMultiplier = Math.pow(1 + masteryBonus / 100, completedMasteries);
+        const masteryMultiplier = Math.pow(1 + masteryBonus / 100, this.completedMasteries);
         damage *= masteryMultiplier;
 
         // Step 6: Medallion multiplier (1 + CompassBonus(6) * medallionCount / 100)
@@ -659,13 +758,13 @@ export class Compass extends Domain {
         percentageBonuses += this.getUpgradeBonus(94);  // Abomination Slayer XXXV
 
         // HP-based bonus (CompassBonus(78) * LOG(Compass_HP))
-        const compassHP = this.calculateCompassHP(players);
+        const compassHP = this.calculateCompassHP();
         const bonus78 = this.getUpgradeBonus(78);
         const hpBasedBonus = bonus78 * this.getLogValue(compassHP);
         percentageBonuses += hpBasedBonus;
 
         // Talent 420 bonus (GetTalentNumber(1, 420))
-        const talentBonus420 = this.getTalentBonus(windWalker, 420);
+        const talentBonus420 = this.getTalentBonus(this.bestWindWalker, 420);
         percentageBonuses += talentBonus420;
 
         // Step 8: Apply all percentage bonuses as single multiplier (1 + percentageBonuses / 100)
@@ -683,6 +782,7 @@ export class Compass extends Domain {
         copy.unlocked = upgrade.unlocked;
         copy.cost = upgrade.cost;
         copy.costToMax = upgrade.costToMax;
+        copy.costToUnlock = upgrade.costToUnlock;
         copy.indexInPath = upgrade.indexInPath;
         copy.dustServerVarMultiplier = upgrade.dustServerVarMultiplier;
         copy.bonus = upgrade.bonus;
@@ -712,7 +812,7 @@ export class Compass extends Domain {
     /**
      * Helper function to calculate damage with a temporary compass state
      */
-    public calculateDamageWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>, players: any[], serverVars: Record<string, any>, optionsList: number[]): number {
+    public calculateDamageWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
         const tempCompass = new Compass("compass");
         tempCompass.upgrades = upgrades;
         tempCompass.upgradeMetadata = this.upgradeMetadata;
@@ -720,14 +820,18 @@ export class Compass extends Domain {
         tempCompass.medallionsCollected = this.medallionsCollected;
         tempCompass.titansKilled = this.titansKilled;
         tempCompass.portalsCompleted = this.portalsCompleted;
+        tempCompass.bestWindWalker = this.bestWindWalker;
         
-        return tempCompass.calculateTempestDamage(players, serverVars, optionsList);
+        // Copy game state attributes
+        tempCompass.completedMasteries = this.completedMasteries;
+        
+        return tempCompass.calculateTempestDamage();
     }
 
     /**
      * Helper function to calculate dust multiplier with a temporary compass state
      */
-    public calculateDustWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>, players: any[], serverVars: Record<string, any>, optionsList: number[]): number {
+    public calculateDustWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
         const tempCompass = new Compass("compass");
         tempCompass.upgrades = upgrades;
         tempCompass.upgradeMetadata = this.upgradeMetadata;
@@ -736,39 +840,28 @@ export class Compass extends Domain {
         tempCompass.titansKilled = this.titansKilled;
         tempCompass.portalsCompleted = this.portalsCompleted;
         
-        // Use default values for external bonuses since they don't change with compass upgrades
-        return tempCompass.calculateDustMultiplier(players, serverVars, optionsList);
+        // Copy external bonus attributes
+        tempCompass.pristineBonus19 = this.pristineBonus19;
+        tempCompass.etcBonus85 = this.etcBonus85;
+        tempCompass.etcBonus79 = this.etcBonus79;
+        tempCompass.talent421 = this.talent421;
+        tempCompass.arcadeBonus47 = this.arcadeBonus47;
+        
+        return tempCompass.calculateDustMultiplier();
     }
 
     /**
      * Calculate dust multiplier based on the ExtraDust formula from source code
-     * @param players Array of players to find the Wind Walker
-     * @param serverVars Server variables for additional calculations
-     * @param optionsList Option list for dust amounts and other factors
-     * @param pristineBonus19 Pristine bonus 19 value from sneaking
-     * @param etcBonus85 ETC bonus 85 "Dust Multi" from equipment
-     * @param etcBonus79 ETC bonus 79 "Extra Dust" from equipment
-     * @param talent421 Talent 421 bonus from Wind Walker
-     * @param arcadeBonus47 Arcade bonus 47 value
      * @returns Current dust multiplier
      */
-    calculateDustMultiplier(
-        players: Player[], 
-        serverVars: Record<string, any>, 
-        optionsList: number[],
-        pristineBonus19: number = 0,
-        etcBonus85: number = 0,
-        etcBonus79: number = 0,
-        talent421: number = 0,
-        arcadeBonus47: number = 0
-    ): number {
+    calculateDustMultiplier(): number {
         // Base multiplier starts at 1
         let multiplier = 1;
 
         // Step 1: (1 + (CompassBonus(31) + CompassBonus(34) * LOG(Solardust)) / 100)
         const bonus31 = this.getUpgradeBonus(31); // Mountains of Dust
         const bonus34 = this.getUpgradeBonus(34); // Solardust Hoarding
-        const solardust = optionsList[359] || 0; // Solardust amount
+        const solardust = this.availableDust[DustType.Solardust];
         const solardustMultiplier = 1 + (bonus31 + bonus34 * this.getLogValue(solardust)) / 100;
         multiplier *= solardustMultiplier;
 
@@ -777,10 +870,10 @@ export class Compass extends Domain {
         multiplier *= (1 + bonus38 / 100);
 
         // Step 3: (1 + PristineBon(19) / 100)
-        multiplier *= (1 + pristineBonus19 / 100);
+        multiplier *= (1 + this.pristineBonus19 / 100);
 
         // Step 4: (1 + (EtcBonuses(85) + EtcBonuses(79)) / 100)
-        multiplier *= (1 + (etcBonus85 + etcBonus79) / 100);
+        multiplier *= (1 + (this.etcBonus85 + this.etcBonus79) / 100);
 
         // Step 5: Skip talent 423 calculation as requested
 
@@ -796,8 +889,8 @@ export class Compass extends Domain {
         additiveBonus += this.getUpgradeBonus(89);  // Abomination Slayer XXX
 
         // Add talent and arcade bonuses
-        additiveBonus += talent421;
-        additiveBonus += arcadeBonus47;
+        additiveBonus += this.talent421;
+        additiveBonus += this.arcadeBonus47;
 
         multiplier *= (1 + additiveBonus / 100);
 
@@ -806,29 +899,12 @@ export class Compass extends Domain {
 
     /**
      * Calculate efficiency for all supported attributes using the new efficiency system
-     * @param players Array of players to find the Wind Walker
-     * @param serverVars Server variables
-     * @param optionsList Option list for various game state
-     * @param pristineBonus19 Pristine bonus 19 value from sneaking
-     * @param etcBonus85 ETC bonus 85 "Dust Multi" from equipment
-     * @param etcBonus79 ETC bonus 79 "Extra Dust" from equipment
-     * @param talent421 Talent 421 bonus from Wind Walker
-     * @param arcadeBonus47 Arcade bonus 47 value
      */
-    calculateAllEfficiencies(
-        players: any[], 
-        serverVars: Record<string, any>, 
-        optionsList: number[],
-        pristineBonus19: number = 0,
-        etcBonus85: number = 0,
-        etcBonus79: number = 0,
-        talent421: number = 0,
-        arcadeBonus47: number = 0
-    ): void {
-        const currentDamage = this.calculateTempestDamage(players, serverVars, optionsList);
+    calculateAllEfficiencies(): void {
+        const currentDamage = this.calculateTempestDamage();
         this.currentTempestDamage = currentDamage;
         
-        const currentDustMultiplier = this.calculateDustMultiplier(players, serverVars, optionsList, pristineBonus19, etcBonus85, etcBonus79, talent421, arcadeBonus47);
+        const currentDustMultiplier = this.calculateDustMultiplier();
         this.currentDustMultiplier = currentDustMultiplier;
         
         const engine = new EfficiencyEngine();
@@ -839,7 +915,7 @@ export class Compass extends Domain {
         ];
         
         calculators.forEach(calculator => {
-            const results = engine.calculateEfficiency(this, calculator, players, serverVars, optionsList);
+            const results = engine.calculateEfficiency(this, calculator);
             this.efficiencyResults.set(calculator.name, results);
         });
     }
@@ -882,7 +958,7 @@ export class Compass extends Domain {
     /**
      * Calculate compass HP for damage calculations
      */
-    private calculateCompassHP(players: any[]): number {
+    private calculateCompassHP(): number {
         // Base HP: 10
         let hp = 10;
 
@@ -930,65 +1006,123 @@ export class Compass extends Domain {
  */
 export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => {
     const compass = accountData.get("compass") as Compass;
-    const players = accountData.get("players") as any[];
-    const serverVars = accountData.get("servervars") as Record<string, any>;
-    const optionsList = accountData.get("OptLacc") as number[];
-    const sneaking = accountData.get("sneaking");
-    const arcade = accountData.get("arcade");
+    const players = accountData.get("players") as Player[];
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const arcade = accountData.get("arcade") as Arcade;
 
-    if (compass && players && serverVars && optionsList) {
+    if (compass && players) {
         try {
-            // Extract pristine bonus 19 from sneaking
-            let pristineBonus19 = 0;
+
+            // Find Wind Walker player
+            const windWalker = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === 29);
+            if (windWalker) {
+                compass.bestWindWalker = windWalker;
+
+                // Set ETC bonuses from Wind Walker equipment
+                const windWalkerEquipment = windWalker.gear.equipment;
+                compass.etcBonus85 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Dust Multi") ?? 0, 0);
+                compass.etcBonus79 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Extra Dust") ?? 0, 0);
+            }
+
+            // Set pristine bonus 19 from sneaking
+            compass.pristineBonus19 = 0;
             if (sneaking?.pristineCharms) {
                 const charm19 = sneaking.pristineCharms.find((charm: any) => charm.index === 19);
                 if (charm19?.unlocked) {
-                    pristineBonus19 = charm19.data.x1 || 0;
+                    compass.pristineBonus19 = charm19.getBonus();
                 }
             }
 
-            // Extract ETC bonuses from Wind Walker equipment
-            let etcBonus85 = 0; // "Dust Multi"
-            let etcBonus79 = 0; // "Extra Dust"
-            const windWalker = players.find((player: any) => player.classId === 29);
-            if (windWalker?.gear?.equipment) {
-                // Check weapon slot (index 1)
-                const weapon = windWalker.gear.equipment[1];
-                if (weapon) {
-                    etcBonus85 += weapon.getMiscBonus("Dust Multi") || 0;
-                    etcBonus79 += weapon.getMiscBonus("Extra Dust") || 0;
-                }
 
-                // Check ring slots (indices 5 and 7)
-                [5, 7].forEach((ringSlot: number) => {
-                    const ring = windWalker.gear.equipment[ringSlot];
-                    if (ring) {
-                        etcBonus85 += ring.getMiscBonus("Dust Multi") || 0;
-                        etcBonus79 += ring.getMiscBonus("Extra Dust") || 0;
-                    }
-                });
-            }
-
-            // Extract talent 421 from Wind Walker
-            let talent421 = 0;
+            // Set talent 421 from Wind Walker
+            compass.talent421 = 0;
             if (windWalker?.talents) {
                 const talent = windWalker.talents.find((t: any) => t.skillIndex === 421);
-                talent421 = talent?.getBonus() || 0;
+                compass.talent421 = talent?.getBonus() || 0;
             }
 
-            // Extract arcade bonus 47
-            let arcadeBonus47 = 0;
+            // Set arcade bonus 47
+            compass.arcadeBonus47 = 0;
             if (arcade?.bonuses && arcade.bonuses.length > 47) {
-                arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
+                compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
             }
 
-            compass.calculateAllEfficiencies(players, serverVars, optionsList, pristineBonus19, etcBonus85, etcBonus79, talent421, arcadeBonus47);
+            compass.calculateAllEfficiencies();
         } catch (error) {
             console.error("Failed to calculate compass efficiency:", error);
         }
     } else {
-        console.error("Failed to calculate compass efficiency: compass, players, serverVars, or optionsList is undefined");
+        console.error("Failed to calculate compass efficiency: compass or players is undefined");
     }
 
     return compass;
 } 
+
+
+const CompassIconz: Record<number, string> = {
+    139: "0",
+    142: "0",
+    145: "0",
+    148: "0",
+    150: "0",
+    137: "1",
+    138: "1",
+    141: "1",
+    143: "1",
+    144: "1",
+    149: "1",
+    106: "2",
+    107: "2",
+    108: "2",
+    109: "2",
+    110: "2",
+    111: "2",
+    112: "2",
+    113: "2",
+    114: "2",
+    115: "2",
+    116: "2",
+    117: "2",
+    118: "2",
+    119: "3",
+    121: "3",
+    122: "3",
+    123: "3",
+    126: "3",
+    127: "3",
+    129: "3",
+    130: "3",
+    132: "3",
+    135: "3",
+    120: "4",
+    124: "4",
+    125: "4",
+    128: "4",
+    131: "4",
+    133: "4",
+    134: "4",
+    136: "4",
+    147: "4",
+    140: "5",
+    146: "5",
+    151: "6",
+    152: "6",
+    153: "6",
+    154: "7",
+    156: "7",
+    162: "8",
+    163: "8",
+    164: "8",
+    166: "8",
+    167: "8",
+    155: "9",
+    157: "9",
+    158: "9",
+    159: "10",
+    160: "10",
+    161: "10",
+    165: "10",
+    168: "10",
+    169: "10",
+    170: "11"
+};

@@ -47,6 +47,7 @@ export class ArcadeBonus {
     lvlUpText: string
 
     level: number = 0;
+    hasCompanion27: boolean = false;
 
     constructor(public index: number, data: ArcadeBonusModel) {
         this.effect = data.effect;
@@ -58,11 +59,28 @@ export class ArcadeBonus {
     }
 
     getBonus = (round: boolean = false, level: number = this.level) => {
-        return lavaFunc(this.func, level, this.x1, this.x2, round);
+        // Calculate base bonus using lava function
+        const baseBonus = lavaFunc(this.func, level, this.x1, this.x2, round);
+        
+        // Apply multipliers as per game source code
+        let multiplier = 1;
+        
+        // If at max level (101), double the multiplier
+        if (level >= 101) {
+            multiplier *= 2;
+        }
+        
+        // If companion 27 (reindeer) is active, double the multiplier again
+        if (this.hasCompanion27) {
+            multiplier *= 2;
+        }
+        
+        const finalBonus = baseBonus * multiplier;
+        return round ? Math.round(finalBonus) : finalBonus;
     }
 
     getBonusText = (round: boolean = true) => {
-        return this.effect.replace(/{/, this.getBonus(true).toString());
+        return this.effect.replace(/{/, this.getBonus(true, this.level).toString());
     }
 
     getImageData = (): ImageData => {
@@ -166,6 +184,12 @@ export const updateArcade = (data: Map<string, any>) => {
     const achievementData = data.get("achievements") as Achievement[];
     const taskboardData = data.get("taskboard") as TaskBoard;
     const bribeData = data.get("bribes") as Bribe[];
+
+    // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
+    const companionsData = data.get("companions") as any[];
+    arcade.bonuses.forEach(bonus => {
+        bonus.hasCompanion27 = companionsData?.find((c: any) => c.id === 27)?.owned ?? false;
+    });
 
     // Balls per Second
     const ballVialBonus = alchemyData?.vials.find(vial => vial.name == "Ball Pickle Jar")?.getBonus() ?? 0;
