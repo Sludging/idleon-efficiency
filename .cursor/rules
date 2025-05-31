@@ -1,0 +1,49 @@
+# IdleOn Efficiency Cursor Rules
+
+## Primary Context
+ALWAYS reference `docs/CODEBASE_OVERVIEW.md` when working on this codebase. This document contains critical information about:
+- Technical architecture and constraints
+- Development workflow and testing procedures
+- File structure and immutable directories
+- External dependencies and data sources
+
+## Critical Constraints
+
+### DO NOT MODIFY These Directories (Auto-Generated from WikBot):
+- `data/domain/data/` - Game data repositories
+- `data/domain/enum/` - Game enumerations  
+- `data/domain/model/` - TypeScript models
+
+### Technology Requirements:
+- Always use TypeScript for new code
+- Use NextJS App Router architecture for new pages
+- Use Yarn (never npm) for package management
+- We are forced to use Grommet UI elements for the time being
+- Follow the domain-driven design pattern in `data/domain/`
+
+### Development Process:
+- This is a reverse-engineering project for the idle MMO "Legends of Idleon"
+- Game mechanics must be visually verified against the actual running game
+- Never guess or assume game calculations - always verify
+- Data sync from external WikBot project using: `cp -r ../IdleonWikiBot/exported/ts/* data/domain/`
+
+### Architecture Understanding:
+- Each game system has its own domain class
+- Data flow: Game save → Parse → Calculate cross-impacts → Display  
+- Real-time Firebase integration for user data
+- Complex post-processing pipeline for interdependent calculations
+
+## When Working on Features:
+1. Check if it involves any auto-generated files (don't modify them)
+2. Understand which game system/world the feature belongs to
+3. Follow the established domain pattern
+4. Plan for visual verification against the game
+5. Consider cross-system impacts in calculations
+
+## Questions to Ask Before Changes:
+- Does this modify any auto-generated WikBot files?
+- How will this be tested against the actual game?
+- Are there cross-system dependencies to consider?
+- Does this follow the established domain architecture?
+
+Always reference the full technical overview in `docs/CODEBASE_OVERVIEW.md` for comprehensive context. 
