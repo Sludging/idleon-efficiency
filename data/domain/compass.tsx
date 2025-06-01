@@ -539,6 +539,11 @@ export class Compass extends Domain {
         const optionList = data.get("OptLacc") as number[];
         const serverVars = data.get("servervars") as Record<string, any>;
 
+        // Exit early for older accounts that don't have a compass data array.
+        if (!compassData || compassData.length == 0) {
+            return;
+        }
+
         // I really should only do this once and pass it in, instead of reinitializing it every time.
         const randoList = initRandoListRepo();
 
