@@ -1,0 +1,260 @@
+{
+  "saveName": "sludger-20250601",
+  "generatedAt": "2025-06-01T03:15:10.162Z",
+  "compassUpgradeBonuses": [
+    {
+      "id": 0,
+      "name": "Pathfinder",
+      "level": 1,
+      "bonus": 1,
+      "description": "Pathfinder (ID 0) level 1"
+    },
+    {
+      "id": 1,
+      "name": "Elemental Path",
+      "level": 17,
+      "bonus": 17,
+      "description": "Elemental Path (ID 1) level 17"
+    },
+    {
+      "id": 2,
+      "name": "Elemental Vision",
+      "level": 1,
+      "bonus": 1,
+      "description": "Elemental Vision (ID 2) level 1"
+    },
+    {
+      "id": 3,
+      "name": "Weapon Drop",
+      "level": 1,
+      "bonus": 1,
+      "description": "Weapon Drop (ID 3) level 1"
+    },
+    {
+      "id": 4,
+      "name": "Stone Drop",
+      "level": 1,
+      "bonus": 1,
+      "description": "Stone Drop (ID 4) level 1"
+    },
+    {
+      "id": 5,
+      "name": "Medallion Collection",
+      "level": 1,
+      "bonus": 1,
+      "description": "Medallion Collection (ID 5) level 1"
+    },
+    {
+      "id": 6,
+      "name": "Medallion Magnate",
+      "level": 5,
+      "bonus": 10,
+      "description": "Medallion Magnate (ID 6) level 5"
+    },
+    {
+      "id": 7,
+      "name": "The Luck Factor",
+      "level": 6,
+      "bonus": 6,
+      "description": "The Luck Factor (ID 7) level 6"
+    },
+    {
+      "id": 8,
+      "name": "Elemental Destruction",
+      "level": 26,
+      "bonus": 52,
+      "description": "Elemental Destruction (ID 8) level 26"
+    },
+    {
+      "id": 9,
+      "name": "Top of the Mornin'",
+      "level": 1,
+      "bonus": 10,
+      "description": "Top of the Mornin' (ID 9) level 1"
+    },
+    {
+      "id": 10,
+      "name": "Weapon Improvement",
+      "level": 76,
+      "bonus": 152,
+      "description": "Weapon Improvement (ID 10) level 76"
+    },
+    {
+      "id": 11,
+      "name": "Stone Failsafe",
+      "level": 25,
+      "bonus": 50,
+      "description": "Stone Failsafe (ID 11) level 25"
+    },
+    {
+      "id": 12,
+      "name": "Ring Drop",
+      "level": 1,
+      "bonus": 1,
+      "description": "Ring Drop (ID 12) level 1"
+    },
+    {
+      "id": 13,
+      "name": "Fighter Path",
+      "level": 18,
+      "bonus": 18,
+      "description": "Fighter Path (ID 13) level 18"
+    },
+    {
+      "id": 14,
+      "name": "Tempest Damage",
+      "level": 160,
+      "bonus": 160,
+      "description": "Tempest Damage (ID 14) level 160"
+    }
+  ],
+  "compassUpgradeCosts": [
+    {
+      "id": 1,
+      "name": "Elemental Path",
+      "level": 17,
+      "cost": 3191054260.494729,
+      "dustType": 0,
+      "description": "Elemental Path (ID 1) level 17 -> 18"
+    },
+    {
+      "id": 8,
+      "name": "Elemental Destruction",
+      "level": 26,
+      "cost": 131723672.90776604,
+      "dustType": 0,
+      "description": "Elemental Destruction (ID 8) level 26 -> 27"
+    },
+    {
+      "id": 9,
+      "name": "Top of the Mornin'",
+      "level": 1,
+      "cost": 7557171.011808945,
+      "dustType": 2,
+      "description": "Top of the Mornin' (ID 9) level 1 -> 2"
+    },
+    {
+      "id": 10,
+      "name": "Weapon Improvement",
+      "level": 76,
+      "cost": 108567012.64270104,
+      "dustType": 1,
+      "description": "Weapon Improvement (ID 10) level 76 -> 77"
+    },
+    {
+      "id": 13,
+      "name": "Fighter Path",
+      "level": 18,
+      "cost": 198544607.8916717,
+      "dustType": 0,
+      "description": "Fighter Path (ID 13) level 18 -> 19"
+    },
+    {
+      "id": 14,
+      "name": "Tempest Damage",
+      "level": 160,
+      "cost": 141451565.27238518,
+      "dustType": 0,
+      "description": "Tempest Damage (ID 14) level 160 -> 161"
+    },
+    {
+      "id": 15,
+      "name": "Tempest Mega Damage",
+      "level": 92,
+      "cost": 540758298.0277426,
+      "dustType": 1,
+      "description": "Tempest Mega Damage (ID 15) level 92 -> 93"
+    },
+    {
+      "id": 17,
+      "name": "Tempest Accuracy",
+      "level": 171,
+      "cost": 669783.9760255096,
+      "dustType": 0,
+      "description": "Tempest Accuracy (ID 17) level 171 -> 172"
+    },
+    {
+      "id": 18,
+      "name": "Multishot",
+      "level": 43,
+      "cost": 1071293.7281389735,
+      "dustType": 0,
+      "description": "Multishot (ID 18) level 43 -> 44"
+    },
+    {
+      "id": 19,
+      "name": "Tempest Bullseye",
+      "level": 30,
+      "cost": 844097.3330030835,
+      "dustType": 1,
+      "description": "Tempest Bullseye (ID 19) level 30 -> 31"
+    }
+  ],
+  "compassUpgradeCostsToUnlock": [
+    {
+      "id": 114,
+      "name": "Wind Weapon Drops",
+      "costToUnlock": 3191054260.494729,
+      "dustType": 2,
+      "description": "Wind Weapon Drops (ID 114) next upgrade to unlock in path"
+    },
+    {
+      "id": 134,
+      "name": "Tempest Accuracy IV",
+      "costToUnlock": 198544607.8916717,
+      "dustType": 1,
+      "description": "Tempest Accuracy IV (ID 134) next upgrade to unlock in path"
+    },
+    {
+      "id": 144,
+      "name": "Tempest Defence IV",
+      "costToUnlock": 730982054.716981,
+      "dustType": 2,
+      "description": "Tempest Defence IV (ID 144) next upgrade to unlock in path"
+    },
+    {
+      "id": 158,
+      "name": "Damage Sale III",
+      "costToUnlock": 150813652.77384505,
+      "dustType": 2,
+      "description": "Damage Sale III (ID 158) next upgrade to unlock in path"
+    }
+  ],
+  "dustAmounts": [
+    {
+      "dustType": 0,
+      "dustName": "Stardust",
+      "amount": 20668016492.73339,
+      "description": "Stardust amount"
+    },
+    {
+      "dustType": 1,
+      "dustName": "Moondust",
+      "amount": 8291027507.928518,
+      "description": "Moondust amount"
+    },
+    {
+      "dustType": 2,
+      "dustName": "Solardust",
+      "amount": 537131304.7651498,
+      "description": "Solardust amount"
+    },
+    {
+      "dustType": 3,
+      "dustName": "Cooldust",
+      "amount": 11325534068,
+      "description": "Cooldust amount"
+    }
+  ],
+  "tempestDamage": 13400319.460009035,
+  "dustMultiplier": 182.61253665160285,
+  "compassState": {
+    "totalCompassLevel": 4903,
+    "totalDustsCollected": 315296372889,
+    "completedMasteries": 3,
+    "medallionCount": 58,
+    "titanCount": 35,
+    "portalCount": 61,
+    "hasWindWalker": true
+  }
+}
