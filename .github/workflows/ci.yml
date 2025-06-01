@@ -24,6 +24,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
 
+    - name: Enable Corepack
+      run: corepack enable
+
+    - name: Ensure Correct Yarn Version
+      run: corepack prepare yarn@4.5.1 --activate
+
     - name: Install dependencies
       run: yarn install --frozen-lockfile
 
