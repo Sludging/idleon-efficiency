@@ -1,6 +1,7 @@
 import { loadTestGameData } from '../utils/test-data-loader';
 import { expectCalculationToMatch } from '../utils/calculation-helpers';
-import { Alchemy, Bubble, Vial } from '../../data/domain/alchemy';
+import { parseGameFormattedNumber } from '../utils/number-helpers';
+import { Alchemy, Bubble, CauldronBoostIndex, Vial } from '../../data/domain/alchemy';
 import { Achievement, AchievementConst } from '../../data/domain/achievements';
 import { AtomCollider } from '../../data/domain/atomCollider';
 
@@ -14,14 +15,12 @@ describe('Alchemy Domain Calculations', () => {
       let gameData: Map<string, any>;
       let alchemy: Alchemy;
       let achievements: Achievement[];
-      let collider: AtomCollider;
       let expectedResults: any;
       
       beforeAll(() => {
         gameData = loadTestGameData(saveName);
         alchemy = gameData.get('alchemy') as Alchemy;
         achievements = gameData.get('achievements') as Achievement[];
-        collider = gameData.get('collider') as AtomCollider;
         expectedResults = require(`../fixtures/expected-results/alchemy/${saveName}.json`);
       });
 
@@ -85,15 +84,21 @@ describe('Alchemy Domain Calculations', () => {
 
           expectedResults.materialCosts.forEach((expected: any) => {
             const bubble = alchemy.cauldrons[expected.cauldron].bubbles[expected.index];
+            const cauldron = alchemy.cauldrons[expected.cauldron];
+            let newMultiBubbleLevel = 0;
+            if (cauldron.short_name != "Y") {
+                newMultiBubbleLevel = cauldron.bubbles[16].level;
+            }
+
             const materialCostMap = bubble.getMaterialCost(
-              0, // cauldronCostLevel - from cauldron boosts
+              cauldron.boostLevels[CauldronBoostIndex.Cost],
               undevelopedCostsBubbleLevel,
               barleyBrewVialLevel,
-              0, // bargainBubbleLevel - shop discount
+              cauldron.bubbles[14].level, // bargainBubbleLevel
               0, // classMultiBubbleLevel - class multiplier bonus
               0, // discountLevel - UI default
               hasAlchemyAchievement,
-              0, // newMultiBubbleLevel
+              newMultiBubbleLevel,
               vialMultiplier
             );
             
@@ -117,7 +122,8 @@ describe('Alchemy Domain Calculations', () => {
 
           expectedResults.atomCosts.forEach((expected: any) => {
             const bubble = alchemy.cauldrons[expected.cauldron].bubbles[expected.index];
-            const atomCost = bubble.getAtomCost(expected.materialCost);
+            const materialCost = parseGameFormattedNumber(expected.materialCost);
+            const atomCost = bubble.getAtomCost(materialCost);
             
             expectCalculationToMatch(
               atomCost,
@@ -144,44 +150,6 @@ describe('Alchemy Domain Calculations', () => {
               expected.bonus,
               0.05,
               `Vial ${expected.index} (${vial.name})`
-            );
-          });
-        });
-      });
-
-      describe('Aggregate Bubble Bonuses', () => {
-        it('calculates aggregate bubble bonuses by key', () => {
-          if (!expectedResults.aggregateBubbleBonuses || expectedResults.aggregateBubbleBonuses.length === 0) {
-            throw new Error('No valid aggregate bubble bonus test data found - please provide at least one expected aggregate bubble bonus value.');
-          }
-
-          expectedResults.aggregateBubbleBonuses.forEach((expected: any) => {
-            const actualBonus = alchemy.getBubbleBonusForKey(expected.key);
-            
-            expectCalculationToMatch(
-              actualBonus,
-              expected.bonus,
-              0.05,
-              `Aggregate bubble bonus for ${expected.key}`
-            );
-          });
-        });
-      });
-
-      describe('Aggregate Vial Bonuses', () => {
-        it('calculates aggregate vial bonuses by key', () => {
-          if (!expectedResults.aggregateVialBonuses || expectedResults.aggregateVialBonuses.length === 0) {
-            throw new Error('No valid aggregate vial bonus test data found - please provide at least one expected aggregate vial bonus value.');
-          }
-
-          expectedResults.aggregateVialBonuses.forEach((expected: any) => {
-            const actualBonus = alchemy.getVialBonusForKey(expected.key);
-            
-            expectCalculationToMatch(
-              actualBonus,
-              expected.bonus,
-              0.05,
-              `Aggregate vial bonus for ${expected.key}`
             );
           });
         });

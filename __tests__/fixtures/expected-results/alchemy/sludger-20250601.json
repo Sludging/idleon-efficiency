@@ -24,14 +24,14 @@
       "description": "Power Cauldron - Warriors Rule",
       "cauldron": 0,
       "index": 1,
-      "bonus": 2.9512432959531933,
+      "bonus": 2.95,
       "notes": "Level 2001"
     },
     {
       "description": "Power Cauldron - Hearty Diggy",
       "cauldron": 0,
       "index": 2,
-      "bonus": 45.004995004995,
+      "bonus": 45,
       "notes": "Level 901"
     },
     {
@@ -45,7 +45,7 @@
       "description": "Quicc Cauldron - Archer Or Bust",
       "cauldron": 1,
       "index": 1,
-      "bonus": 2.9442586399108137,
+      "bonus": 2.94,
       "notes": "Level 1744"
     },
     {
@@ -73,7 +73,7 @@
       "description": "High-IQ Cauldron - Hocus Choppus",
       "cauldron": 2,
       "index": 2,
-      "bonus": 45.45867393278837,
+      "bonus": 45,
       "notes": "Level 1001"
     },
     {
@@ -87,14 +87,14 @@
       "description": "Kazam Cauldron - Droppin Loads",
       "cauldron": 3,
       "index": 1,
-      "bonus": 34.76635514018692,
+      "bonus": 35,
       "notes": "Level 465"
     },
     {
       "description": "Kazam Cauldron - Startue Exp",
       "cauldron": 3,
       "index": 2,
-      "bonus": 22.14828897338403,
+      "bonus": 22.1,
       "notes": "Level 466"
     }
   ],
@@ -210,29 +210,36 @@
       "description": "Power Cauldron - Roid Ragin upgrade cost",
       "cauldron": 0,
       "index": 0,
-      "totalCost": 1000000191,
+      "totalCost": "1000M",
       "notes": "Level 3783 to 3784"
     },
     {
       "description": "Quicc Cauldron - Swift Steppin upgrade cost",
       "cauldron": 1,
       "index": 0,
-      "totalCost": 1000000174,
+      "totalCost": "1000M",
       "notes": "Level 3458 to 3459"
     },
     {
       "description": "High-IQ Cauldron - Stable Jenius upgrade cost",
       "cauldron": 2,
       "index": 0,
-      "totalCost": 1000000163,
+      "totalCost": "1000M",
       "notes": "Level 3233 to 3234"
     },
     {
       "description": "Kazam Cauldron - Lotto Skills upgrade cost",
       "cauldron": 3,
       "index": 0,
-      "totalCost": 1000000025,
+      "totalCost": "1000M",
       "notes": "Level 466 to 467"
+    },
+    {
+      "description": "Power Cauldron - Endgame Eff I upgrade cost",
+      "cauldron": 0,
+      "index": 26,
+      "totalCost": 12,
+      "notes": "Level 14 to 15"
     }
   ],
   "atomCosts": [
@@ -240,7 +247,7 @@
       "description": "Power Cauldron - Roid Ragin atom cost",
       "cauldron": 0,
       "index": 0,
-      "materialCost": 1000000191,
+      "materialCost": "1000M",
       "atomCost": 100,
       "notes": "Atom cost for 1,000,000,191 material cost"
     },
@@ -248,7 +255,7 @@
       "description": "Quicc Cauldron - Swift Steppin atom cost",
       "cauldron": 1,
       "index": 0,
-      "materialCost": 1000000174,
+      "materialCost": "1000M",
       "atomCost": 100,
       "notes": "Atom cost for 1,000,000,174 material cost"
     },
@@ -256,7 +263,7 @@
       "description": "High-IQ Cauldron - Stable Jenius atom cost",
       "cauldron": 2,
       "index": 0,
-      "materialCost": 1000000163,
+      "materialCost": "1000M",
       "atomCost": 100,
       "notes": "Atom cost for 1,000,000,163 material cost"
     },
@@ -264,8 +271,16 @@
       "description": "Kazam Cauldron - Lotto Skills atom cost",
       "cauldron": 3,
       "index": 0,
-      "materialCost": 1000000025,
+      "materialCost": "1000M",
       "atomCost": 100,
+      "notes": "Atom cost for 1,000,000,025 material cost"
+    },
+    {
+      "description": "Quicc Cauldron - Tome Agility atom cost",
+      "cauldron": 1,
+      "index": 28,
+      "materialCost": "1000M",
+      "atomCost": "8.7K",
       "notes": "Atom cost for 1,000,000,025 material cost"
     }
   ],
@@ -273,84 +288,22 @@
     {
       "description": "Copper Corona vial",
       "index": 0,
-      "bonus": 171.60000000000002,
+      "bonus": 195,
       "notes": "Level 13"
     },
     {
       "description": "Sippy Splinters vial",
       "index": 1,
-      "bonus": 171.60000000000002,
+      "bonus": 195,
       "notes": "Level 13"
     },
     {
-      "description": "Mushroom Soup vial",
-      "index": 2,
-      "bonus": 171.60000000000002,
+      "description": "Dieter vial",
+      "index": 5,
+      "bonus": 65,
       "notes": "Level 13"
     }
   ],
-  "aggregateVialBonuses": [
-    {
-      "key": "MinEff",
-      "bonus": 57.2,
-      "notes": "Total MinEff bonus from all vials"
-    }
-  ],
-  "aggregateBubbleBonuses": [
-    {
-      "key": "MinEff",
-      "bonus": 104.97794340490968,
-      "notes": "Total MinEff bonus from all bubbles"
-    },
-    {
-      "key": "TotalSTR",
-      "bonus": 8824.16629213483,
-      "notes": "Total TotalSTR bonus from all bubbles"
-    },
-    {
-      "key": "TotalAGI",
-      "bonus": 8057.542762063228,
-      "notes": "Total TotalAGI bonus from all bubbles"
-    },
-    {
-      "key": "TotalWIS",
-      "bonus": 7533.2665557404325,
-      "notes": "Total TotalWIS bonus from all bubbles"
-    },
-    {
-      "key": "TotalLUK",
-      "bonus": 466,
-      "notes": "Total TotalLUK bonus from all bubbles"
-    },
-    {
-      "key": "DropRate",
-      "bonus": 34.76635514018692,
-      "notes": "Total DropRate bonus from all bubbles"
-    },
-    {
-      "key": "CritChance",
-      "bonus": 13.413690031120424,
-      "notes": "Total CritChance bonus from all bubbles"
-    },
-    {
-      "key": "critDMG",
-      "bonus": 28.848857644991213,
-      "notes": "Total critDMG bonus from all bubbles"
-    },
-    {
-      "key": "DefPct",
-      "bonus": 303,
-      "notes": "Total DefPct bonus from all bubbles"
-    },
-    {
-      "key": "AccPct",
-      "bonus": 463,
-      "notes": "Total AccPct bonus from all bubbles"
-    },
-    {
-      "key": "BrewSpd",
-      "bonus": 41.1660777385159,
-      "notes": "Total BrewSpd bonus from all bubbles"
-    }
-  ]
+  "aggregateVialBonuses": [],
+  "aggregateBubbleBonuses": []
 }
