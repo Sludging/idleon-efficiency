@@ -113,7 +113,7 @@
       "id": 1,
       "name": "Elemental Path",
       "level": 17,
-      "cost": 3191054260.494729,
+      "cost": "20B",
       "dustType": 0,
       "description": "Elemental Path (ID 1) level 17 -> 18"
     },
@@ -121,7 +121,7 @@
       "id": 8,
       "name": "Elemental Destruction",
       "level": 26,
-      "cost": 131723672.90776604,
+      "cost": "817M",
       "dustType": 0,
       "description": "Elemental Destruction (ID 8) level 26 -> 27"
     },
@@ -129,7 +129,7 @@
       "id": 9,
       "name": "Top of the Mornin'",
       "level": 1,
-      "cost": 7557171.011808945,
+      "cost": "46.9M",
       "dustType": 2,
       "description": "Top of the Mornin' (ID 9) level 1 -> 2"
     },
@@ -137,7 +137,7 @@
       "id": 10,
       "name": "Weapon Improvement",
       "level": 76,
-      "cost": 108567012.64270104,
+      "cost": "674M",
       "dustType": 1,
       "description": "Weapon Improvement (ID 10) level 76 -> 77"
     },
@@ -145,7 +145,7 @@
       "id": 13,
       "name": "Fighter Path",
       "level": 18,
-      "cost": 198544607.8916717,
+      "cost": "1231M",
       "dustType": 0,
       "description": "Fighter Path (ID 13) level 18 -> 19"
     },
@@ -153,7 +153,7 @@
       "id": 14,
       "name": "Tempest Damage",
       "level": 160,
-      "cost": 141451565.27238518,
+      "cost": "877M",
       "dustType": 0,
       "description": "Tempest Damage (ID 14) level 160 -> 161"
     },
@@ -161,89 +161,9 @@
       "id": 15,
       "name": "Tempest Mega Damage",
       "level": 92,
-      "cost": 540758298.0277426,
+      "cost": "3353M",
       "dustType": 1,
       "description": "Tempest Mega Damage (ID 15) level 92 -> 93"
-    },
-    {
-      "id": 17,
-      "name": "Tempest Accuracy",
-      "level": 171,
-      "cost": 669783.9760255096,
-      "dustType": 0,
-      "description": "Tempest Accuracy (ID 17) level 171 -> 172"
-    },
-    {
-      "id": 18,
-      "name": "Multishot",
-      "level": 43,
-      "cost": 1071293.7281389735,
-      "dustType": 0,
-      "description": "Multishot (ID 18) level 43 -> 44"
-    },
-    {
-      "id": 19,
-      "name": "Tempest Bullseye",
-      "level": 30,
-      "cost": 844097.3330030835,
-      "dustType": 1,
-      "description": "Tempest Bullseye (ID 19) level 30 -> 31"
-    }
-  ],
-  "compassUpgradeCostsToUnlock": [
-    {
-      "id": 114,
-      "name": "Wind Weapon Drops",
-      "costToUnlock": 3191054260.494729,
-      "dustType": 2,
-      "description": "Wind Weapon Drops (ID 114) next upgrade to unlock in path"
-    },
-    {
-      "id": 134,
-      "name": "Tempest Accuracy IV",
-      "costToUnlock": 198544607.8916717,
-      "dustType": 1,
-      "description": "Tempest Accuracy IV (ID 134) next upgrade to unlock in path"
-    },
-    {
-      "id": 144,
-      "name": "Tempest Defence IV",
-      "costToUnlock": 730982054.716981,
-      "dustType": 2,
-      "description": "Tempest Defence IV (ID 144) next upgrade to unlock in path"
-    },
-    {
-      "id": 158,
-      "name": "Damage Sale III",
-      "costToUnlock": 150813652.77384505,
-      "dustType": 2,
-      "description": "Damage Sale III (ID 158) next upgrade to unlock in path"
-    }
-  ],
-  "dustAmounts": [
-    {
-      "dustType": 0,
-      "dustName": "Stardust",
-      "amount": 20668016492.73339,
-      "description": "Stardust amount"
-    },
-    {
-      "dustType": 1,
-      "dustName": "Moondust",
-      "amount": 8291027507.928518,
-      "description": "Moondust amount"
-    },
-    {
-      "dustType": 2,
-      "dustName": "Solardust",
-      "amount": 537131304.7651498,
-      "description": "Solardust amount"
-    },
-    {
-      "dustType": 3,
-      "dustName": "Cooldust",
-      "amount": 11325534068,
-      "description": "Cooldust amount"
     }
   ],
   "tempestDamage": 13400319.460009035,

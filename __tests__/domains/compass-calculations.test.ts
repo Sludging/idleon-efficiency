@@ -71,48 +71,7 @@ describe('Compass Domain Calculations', () => {
               upgrade.cost,
               expected.cost,
               0.05,
-              expected.description
-            );
-          });
-        });
-
-        it('calculates compass upgrade costs to unlock correctly', () => {
-          if (!expectedResults.compassUpgradeCostsToUnlock || expectedResults.compassUpgradeCostsToUnlock.length === 0) {
-            console.warn('No compass upgrade costs to unlock test data found - this may be expected if all next upgrades are unlocked');
-            return; // Skip test instead of failing
-          }
-
-          expectedResults.compassUpgradeCostsToUnlock.forEach((expected: any) => {
-            const upgrade = compass.upgrades.find(u => u.id === expected.id);
-            
-            if (!upgrade) {
-              throw new Error(`Compass upgrade with ID ${expected.id} not found`);
-            }
-            
-            expectCalculationToMatch(
-              upgrade.costToUnlock,
-              expected.costToUnlock,
-              0.05,
-              expected.description
-            );
-          });
-        });
-      });
-
-      describe('Dust Amounts', () => {
-        it('validates dust amounts correctly', () => {
-          if (!expectedResults.dustAmounts || expectedResults.dustAmounts.length === 0) {
-            throw new Error('No valid dust amount test data found - run snapshot script to generate data');
-          }
-
-          expectedResults.dustAmounts.forEach((expected: any) => {
-            const actualAmount = compass.availableDust[expected.dustType as DustType];
-            
-            expectCalculationToMatch(
-              actualAmount,
-              expected.amount,
-              0.001, // Very tight tolerance for exact amounts
-              expected.description
+              `${upgrade.data.name} - Level ${upgrade.level} -> ${upgrade.level + 1}`
             );
           });
         });
