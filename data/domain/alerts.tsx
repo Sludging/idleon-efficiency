@@ -323,43 +323,45 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     }
 
     const playerDivinityLevel: number = (player.skills.get(SkillsIndex.Divinity)?.level ?? 0);
-    const playerMeditationStyle: string = (playerDivinityData.style.name ?? '');
-    // Separate these two blocks from above to avoid having it in multiple case
-    if (!playerDivinityData.active && playerMeditationStyle != 'TranQi' && playerDivinityLevel >= 40) {
-        alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
-    }
+    if (playerDivinityLevel > 0 && playerDivinityData) {
+        const playerMeditationStyle: string = (playerDivinityData.style?.name ?? '');
+        // Separate these two blocks from above to avoid having it in multiple case
+        if (!playerDivinityData.active && playerMeditationStyle != 'TranQi' && playerDivinityLevel >= 40) {
+            alerts.push(new DivinityStyleAlert(player, "You should use TranQi style while not meditating"));
+        }
 
-    if (playerDivinityData.active) {
-        const mantraUsers = divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra' && info.active).length;
-        switch(true) {
-            case playerDivinityLevel >= 80:
-                if (playerMeditationStyle != 'Mindful') {
-                    alerts.push(new DivinityStyleAlert(player, "You should use Mindful style"));
-                }
-                break;
-            case playerDivinityLevel >= 60:
-                // If using Mantra on 8 or more players it'll be better than using Zen for EXP
-                if (playerMeditationStyle != 'Zen' && !(playerMeditationStyle == 'Mantra' && mantraUsers >= 8)) {
-                    alerts.push(new DivinityStyleAlert(player, "You should use Zen style"));
-                }
-                break;
-            case playerDivinityLevel >= 25:
-                // If using Mantra on 7 or more players it'll be better than using Vitalic for EXP
-                if (playerMeditationStyle != 'Vitalic' && !(playerMeditationStyle == 'Mantra' && mantraUsers >= 7)) {
-                    alerts.push(new DivinityStyleAlert(player, "You should use Vitalic style"));
-                }
-                break;
-            case playerDivinityLevel >= 10:
-                if (playerMeditationStyle == 'Kinesis') {
-                    alerts.push(new DivinityStyleAlert(player, "You should use Focus style"));
-                }
-                break;
-            case playerDivinityLevel >= 5:
-                if (playerMeditationStyle == 'Kinesis') {
-                    alerts.push(new DivinityStyleAlert(player, "You should use Chakra style"));
-                }
-                break;
-        } 
+        if (playerDivinityData.active) {
+            const mantraUsers = divinityData.playerInfo.filter(info => (info.style.name ?? '') == 'Mantra' && info.active).length;
+            switch(true) {
+                case playerDivinityLevel >= 80:
+                    if (playerMeditationStyle != 'Mindful') {
+                        alerts.push(new DivinityStyleAlert(player, "You should use Mindful style"));
+                    }
+                    break;
+                case playerDivinityLevel >= 60:
+                    // If using Mantra on 8 or more players it'll be better than using Zen for EXP
+                    if (playerMeditationStyle != 'Zen' && !(playerMeditationStyle == 'Mantra' && mantraUsers >= 8)) {
+                        alerts.push(new DivinityStyleAlert(player, "You should use Zen style"));
+                    }
+                    break;
+                case playerDivinityLevel >= 25:
+                    // If using Mantra on 7 or more players it'll be better than using Vitalic for EXP
+                    if (playerMeditationStyle != 'Vitalic' && !(playerMeditationStyle == 'Mantra' && mantraUsers >= 7)) {
+                        alerts.push(new DivinityStyleAlert(player, "You should use Vitalic style"));
+                    }
+                    break;
+                case playerDivinityLevel >= 10:
+                    if (playerMeditationStyle == 'Kinesis') {
+                        alerts.push(new DivinityStyleAlert(player, "You should use Focus style"));
+                    }
+                    break;
+                case playerDivinityLevel >= 5:
+                    if (playerMeditationStyle == 'Kinesis') {
+                        alerts.push(new DivinityStyleAlert(player, "You should use Chakra style"));
+                    }
+                    break;
+            } 
+        }
     }
 
     // Passive cards equipped

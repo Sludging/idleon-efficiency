@@ -32,6 +32,8 @@ function RawData() {
             const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
             if (cleanRaw) {
                 cleanRaw["playerNames"] = theData.get("playerNames");
+                cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
+                cleanRaw["servervars"] = theData.get("servervars");
             }
             setRawData(cleanRaw);
         }

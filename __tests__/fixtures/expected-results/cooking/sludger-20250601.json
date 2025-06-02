@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "saveName": "sludger-20250601",
+    "generatedAt": "2025-06-01T02:30:15.554Z",
+    "version": "1.0.0",
+    "domain": "cooking"
+  },
+  "summary": {
+    "mealsCount": 67,
+    "activeMealsCount": 67,
+    "kitchensCount": 10,
+    "activeKitchensCount": 10,
+    "mealsDiscovered": 67
+  },
+  "mealBonuses": [
+    {
+      "description": "Turkey a la Thank bonus",
+      "index": 0,
+      "bonus": 380,
+      "level": 92,
+      "notes": "Current level, bonus key: TotDmg"
+    },
+    {
+      "description": "Egg bonus",
+      "index": 1,
+      "bonus": 1593,
+      "level": 93,
+      "notes": "Current level, bonus key: Mcook"
+    },
+    {
+      "description": "Salad bonus",
+      "index": 2,
+      "bonus": 576,
+      "level": 93,
+      "notes": "Current level, bonus key: Cash"
+    },
+    {
+      "description": "Pie bonus",
+      "index": 3,
+      "bonus": 960,
+      "level": 93,
+      "notes": "Current level, bonus key: Rcook"
+    },
+    {
+      "description": "Frenk Fries bonus",
+      "index": 4,
+      "bonus": 949,
+      "level": 92,
+      "notes": "Current level, bonus key: Npet"
+    },
+    {
+      "description": "Spaghetti bonus",
+      "index": 5,
+      "bonus": 759,
+      "level": 92,
+      "notes": "Current level, bonus key: BrExp"
+    },
+    {
+      "description": "Corn bonus",
+      "index": 6,
+      "bonus": 371,
+      "level": 90,
+      "notes": "Current level, bonus key: Seff"
+    },
+    {
+      "description": "Garlic Bread bonus",
+      "index": 7,
+      "bonus": 776,
+      "level": 94,
+      "notes": "Current level, bonus key: VIP"
+    }
+  ],
+  "mealLevelCosts": [],
+  "kitchenUpgradeCosts": [
+    {
+      "description": "Kitchen 0 speed upgrade",
+      "kitchenIndex": 0,
+      "upgradeType": "speed",
+      "cost": "10.4K",
+      "currentLevel": 428,
+      "notes": "Speed upgrade from level 428"
+    },
+    {
+      "description": "Kitchen 0 fire upgrade",
+      "kitchenIndex": 0,
+      "upgradeType": "fire",
+      "cost": "9.87K",
+      "currentLevel": 426,
+      "notes": "Fire upgrade from level 426"
+    },
+    {
+      "description": "Kitchen 0 luck upgrade",
+      "kitchenIndex": 0,
+      "upgradeType": "luck",
+      "cost": "4.07K",
+      "currentLevel": 387,
+      "notes": "Luck upgrade from level 387"
+    },
+    {
+      "description": "Kitchen 1 speed upgrade",
+      "kitchenIndex": 1,
+      "upgradeType": "speed",
+      "cost": "4.46K",
+      "currentLevel": 391,
+      "notes": "Speed upgrade from level 391"
+    },
+    {
+      "description": "Kitchen 1 fire upgrade",
+      "kitchenIndex": 1,
+      "upgradeType": "fire",
+      "cost": "7.87K",
+      "currentLevel": 416,
+      "notes": "Fire upgrade from level 416"
+    },
+    {
+      "description": "Kitchen 1 luck upgrade",
+      "kitchenIndex": 1,
+      "upgradeType": "luck",
+      "cost": "2.04K",
+      "currentLevel": 357,
+      "notes": "Luck upgrade from level 357"
+    }
+  ],
+  "kitchenSpeeds": [
+    {
+      "description": "Kitchen 0 meal speeds",
+      "kitchenIndex": 0,
+      "mealSpeed": "7.99E79",
+      "notes": "Speed calculations"
+    },
+    {
+      "description": "Kitchen 1 meal speeds",
+      "kitchenIndex": 1,
+      "mealSpeed": "6.84E79",
+      "notes": "Speed calculations"
+    },
+    {
+      "description": "Kitchen 2 meal speeds",
+      "kitchenIndex": 2,
+      "mealSpeed": "6.66E79",
+      "notes": "Speed calculations"
+    }
+  ],
+  "milestoneCosts": []
+}

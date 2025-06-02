@@ -1,0 +1,237 @@
+{
+  "_metadata": {
+    "saveName": "sludger-20250601",
+    "domain": "atomCollider",
+    "capturedAt": "2025-06-01",
+    "notes": "Auto-generated calculation snapshot - verify values match the game!",
+    "snapshotParameters": {
+      "colliderBuildingLevel": 50,
+      "nenoBonus": 32,
+      "bubbleBonusY5": 12.431372549019608,
+      "meritBonus": 28,
+      "particles": 724136105.0113869,
+      "hydrogenDaysSinceUpgrade": 19,
+      "carbonWizardTowersOver50": 415,
+      "fluorideVoidMeals": 67
+    }
+  },
+  "atomBonuses": [
+    {
+      "description": "Hydrogen - Stamp Decreaser bonus",
+      "index": 0,
+      "level": 32,
+      "bonus": 90,
+      "bonusText": "Every day you log in, the resource cost to upgrade a stamp's max lv decreases by 32% up to a max of 90%. This reduction resets back to 0% when upgrading any stamp max lv.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Helium - Talent Power Stacker bonus",
+      "index": 1,
+      "level": 9,
+      "bonus": 9,
+      "bonusText": "All talents that give more bonus per 'Power of 10 resources you own' will count +9 more powers of 10 than you actually own when giving the bonus.",
+      "notes": "Level 9 atom"
+    },
+    {
+      "description": "Lithium - Bubble Insta Expander bonus",
+      "index": 2,
+      "level": 32,
+      "bonus": 32,
+      "bonusText": "No Bubble Left Behind bonus now has a 15% chance to level up the lowest bubble out of ALL bubbles, not just the first 15 of each colour. Also, +32% chance to give +1 additional Lv.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Beryllium - Post Office Penner bonus",
+      "index": 3,
+      "level": 32,
+      "bonus": 224,
+      "bonusText": "Every day, 1 silver pen from your Post Office will instantly convert into 1 PO Box for all characters. This conversion happens 224 times per day.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Boron - Particle Upgrader bonus",
+      "index": 4,
+      "level": 32,
+      "bonus": 64,
+      "bonusText": "When a bubble has a cost of 100M or more to upgrade, you can instead spend particles. However, you can only do this 64 times a day, after which the cost will return to resources.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Carbon - Wizard Maximizer bonus",
+      "index": 5,
+      "level": 32,
+      "bonus": 830,
+      "bonusText": "All wizard towers in construction get +64 max levels. Also, all wizards get a +2% damage bonus for each wizard tower level above 50 in construction. Total bonus: 830% wizard dmg.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Nitrogen - Construction Trimmer bonus",
+      "index": 6,
+      "level": 32,
+      "bonus": 480,
+      "bonusText": "Gold trimmed construction slots give +480% more build rate than before. Also, you now have 1 additional trimmed slot.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Oxygen - Library Booker bonus",
+      "index": 7,
+      "level": 32,
+      "bonus": 64,
+      "bonusText": "Increases the Checkout Refresh Speed of the Talent Library by +64%. Also, the Minimum Talent LV is increased by +32, and the Maximum Talent LV is increased by +10.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Neon - Damage N' Cheapener bonus",
+      "index": 9,
+      "level": 32,
+      "bonus": 32,
+      "bonusText": "Increases your total damage by +32%. Also, reduces the cost of all atom upgrades by 32% too.",
+      "notes": "Level 32 atom"
+    },
+    {
+      "description": "Aluminium - Stamp Supercharger bonus",
+      "index": 12,
+      "level": 0,
+      "bonus": 0,
+      "bonusText": "Stamp Doublers give an extra +0% MORE bonus than the normal +100% they give!",
+      "notes": "Level 0 atom"
+    }
+  ],
+  "specialAtomBonuses": [
+    {
+      "description": "HydrogenAtom - Hydrogen - Stamp Decreaser",
+      "index": 0,
+      "level": 32,
+      "bonus": 90,
+      "bonusText": "Every day you log in, the resource cost to upgrade a stamp's max lv decreases by 32% up to a max of 90%. This reduction resets back to 0% when upgrading any stamp max lv.",
+      "atomType": "HydrogenAtom",
+      "notes": "Special atom calculation: HydrogenAtom"
+    },
+    {
+      "description": "CarbonAtom - Carbon - Wizard Maximizer",
+      "index": 5,
+      "level": 32,
+      "bonus": 830,
+      "bonusText": "All wizard towers in construction get +64 max levels. Also, all wizards get a +2% damage bonus for each wizard tower level above 50 in construction. Total bonus: 830% wizard dmg.",
+      "atomType": "CarbonAtom",
+      "notes": "Special atom calculation: CarbonAtom",
+      "extraLevels": 64
+    },
+    {
+      "description": "OxygenAtom - Oxygen - Library Booker",
+      "index": 7,
+      "level": 32,
+      "bonus": 64,
+      "bonusText": "Increases the Checkout Refresh Speed of the Talent Library by +64%. Also, the Minimum Talent LV is increased by +32, and the Maximum Talent LV is increased by +10.",
+      "atomType": "OxygenAtom",
+      "notes": "Special atom calculation: OxygenAtom"
+    }
+  ],
+  "fluorideAtomBonus": {
+    "description": "Fluoride - Void Plate Chef",
+    "index": 8,
+    "level": 32,
+    "bonus": "12B",
+    "bonusText": "Multiplies your cooking speed by +32% for every meal at Lv 30+. In other words, every plate with a studded black void plate. Total bonus: 12B% cooking speed"
+  },
+  "atomCosts": [
+    {
+      "description": "Hydrogen - Stamp Decreaser upgrade cost",
+      "index": 0,
+      "level": 32,
+      "cost": 253949,
+      "notes": "Level 32 to 33"
+    },
+    {
+      "description": "Helium - Talent Power Stacker upgrade cost",
+      "index": 1,
+      "level": 9,
+      "cost": "4992M",
+      "notes": "Level 9 to 10"
+    },
+    {
+      "description": "Lithium - Bubble Insta Expander upgrade cost",
+      "index": 2,
+      "level": 32,
+      "cost": 219547,
+      "notes": "Level 32 to 33"
+    },
+    {
+      "description": "Beryllium - Post Office Penner upgrade cost",
+      "index": 3,
+      "level": 32,
+      "cost": 587154,
+      "notes": "Level 32 to 33"
+    },
+    {
+      "description": "Boron - Particle Upgrader upgrade cost",
+      "index": 4,
+      "level": 32,
+      "cost": 28877790,
+      "notes": "Level 32 to 33"
+    }
+  ],
+  "atomMaxLevels": [
+    {
+      "description": "Hydrogen - Stamp Decreaser max level",
+      "index": 0,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Helium - Talent Power Stacker max level",
+      "index": 1,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Lithium - Bubble Insta Expander max level",
+      "index": 2,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Beryllium - Post Office Penner max level",
+      "index": 3,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Boron - Particle Upgrader max level",
+      "index": 4,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Carbon - Wizard Maximizer max level",
+      "index": 5,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Nitrogen - Construction Trimmer max level",
+      "index": 6,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Oxygen - Library Booker max level",
+      "index": 7,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Fluoride - Void Plate Chef max level",
+      "index": 8,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    },
+    {
+      "description": "Neon - Damage N' Cheapener max level",
+      "index": 9,
+      "maxLevel": 30,
+      "notes": "Base 20 + gaming boost 10"
+    }
+  ],
+  "particles": 724136105.0113869
+}
