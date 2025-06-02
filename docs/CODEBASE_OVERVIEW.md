@@ -22,19 +22,9 @@ The website provides comprehensive tracking and optimization tools for virtually
 - Character statistics, equipment, talents, and skill progression
 - Class specializations and talent builds
 
-### **Game Systems Covered (World 1-6)**
-- **Combat**: Enemy tracking, damage calculations, monster farming
-- **Skills**: Mining, Smithing, Alchemy, Fishing, Woodcutting, Cooking, etc.
-- **World 1**: Stamps, Statues, Anvil upgrades, Refinery
-- **World 2**: Alchemy, Cards, Lab chips, Post Office
-- **World 3**: Construction, Worship, Printer, Task Board, Traps, Quests
-- **World 4**: Breeding, Lab research, Cooking recipes
-- **World 5**: Sailing, Divinity, Gaming (arcade), Atom Collider
-- **World 6**: Summoning, Farming, Sneaking
-
 ### **Key Features**
 - Real-time cloud save parsing and data synchronization
-- Efficiency calculators for all game systems
+- Efficiency calculators for all several systems
 - Progress tracking and optimization recommendations
 - Public profile sharing system
 - Cross-character impact calculations (family bonuses, account-wide upgrades)
