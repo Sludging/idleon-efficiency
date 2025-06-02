@@ -25,11 +25,9 @@ export const loadTestGameData = (saveName: string): Map<string, any> => {
   const accountData = initAccountDataKeys(allItems);
   
   // Parse fake player names for testing
-  const charNames = cloudSave.fakePlayerNames();
-  
-  // Mock companions and server vars for testing
-  const companions: number[] = [];
-  const serverVars: Record<string, any> = {};
+  const charNames = cloudSave.get("playerNames");
+  const serverVars = cloudSave.get("servervars");
+  const companions = cloudSave.get("companions");
   
   // Update account data with parsed cloudsave
   const idleonData = updateIdleonData(accountData, cloudSave, charNames, companions, serverVars, true);
