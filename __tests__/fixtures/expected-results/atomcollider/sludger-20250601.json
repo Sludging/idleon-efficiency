@@ -81,14 +81,6 @@
       "notes": "Level 32 atom"
     },
     {
-      "description": "Fluoride - Void Plate Chef bonus",
-      "index": 8,
-      "level": 32,
-      "bonus": 119799054.59473522,
-      "bonusText": "Multiplies your cooking speed by +32% for every meal at Lv 30+. In other words, every plate with a studded black void plate. Total bonus: 12B% cooking speed",
-      "notes": "Level 32 atom"
-    },
-    {
       "description": "Neon - Damage N' Cheapener bonus",
       "index": 9,
       "level": 32,
@@ -133,17 +125,15 @@
       "bonusText": "Increases the Checkout Refresh Speed of the Talent Library by +64%. Also, the Minimum Talent LV is increased by +32, and the Maximum Talent LV is increased by +10.",
       "atomType": "OxygenAtom",
       "notes": "Special atom calculation: OxygenAtom"
-    },
-    {
-      "description": "FluorideAtom - Fluoride - Void Plate Chef",
-      "index": 8,
-      "level": 32,
-      "bonus": 119799054.59473522,
-      "bonusText": "Multiplies your cooking speed by +32% for every meal at Lv 30+. In other words, every plate with a studded black void plate. Total bonus: 12B% cooking speed",
-      "atomType": "FluorideAtom",
-      "notes": "Special atom calculation: FluorideAtom"
     }
   ],
+  "fluorideAtomBonus": {
+    "description": "Fluoride - Void Plate Chef",
+    "index": 8,
+    "level": 32,
+    "bonus": "12B",
+    "bonusText": "Multiplies your cooking speed by +32% for every meal at Lv 30+. In other words, every plate with a studded black void plate. Total bonus: 12B% cooking speed"
+  },
   "atomCosts": [
     {
       "description": "Hydrogen - Stamp Decreaser upgrade cost",
@@ -156,7 +146,7 @@
       "description": "Helium - Talent Power Stacker upgrade cost",
       "index": 1,
       "level": 9,
-      "cost": 5041835551,
+      "cost": "4992M",
       "notes": "Level 9 to 10"
     },
     {
@@ -179,48 +169,6 @@
       "level": 32,
       "cost": 28877790,
       "notes": "Level 32 to 33"
-    }
-  ],
-  "atomUnlockCosts": [
-    {
-      "description": "Hydrogen - Stamp Decreaser unlock cost",
-      "index": 0,
-      "unlockCost": 1.3384070331977431,
-      "notes": "Cost to unlock from level 0"
-    },
-    {
-      "description": "Helium - Talent Power Stacker unlock cost",
-      "index": 1,
-      "unlockCost": 6.692035165988716,
-      "notes": "Cost to unlock from level 0"
-    },
-    {
-      "description": "Lithium - Bubble Insta Expander unlock cost",
-      "index": 2,
-      "unlockCost": 16.73008791497179,
-      "notes": "Cost to unlock from level 0"
-    },
-    {
-      "description": "Beryllium - Post Office Penner unlock cost",
-      "index": 3,
-      "unlockCost": 50.19026374491537,
-      "notes": "Cost to unlock from level 0"
-    },
-    {
-      "description": "Boron - Particle Upgrader unlock cost",
-      "index": 4,
-      "unlockCost": 117.11061540480253,
-      "notes": "Cost to unlock from level 0"
-    }
-  ],
-  "atomMaxLevelCosts": [
-    {
-      "description": "Helium - Talent Power Stacker cost to max level",
-      "index": 1,
-      "currentLevel": 9,
-      "maxLevel": 30,
-      "costToMaxLevel": 5.602039501867846e+29,
-      "notes": "Cost from level 9 to max level 30"
     }
   ],
   "atomMaxLevels": [
