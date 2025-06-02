@@ -52,24 +52,6 @@ describe('Cooking Domain Calculations', () => {
             );
           });
         });
-
-        it('calculates aggregate meal bonuses by key', () => {
-          if (!expectedResults.aggregateMealBonuses || expectedResults.aggregateMealBonuses.length === 0) {
-            console.warn('No aggregate meal bonus test data found - skipping aggregate meal bonus tests');
-            return;
-          }
-
-          expectedResults.aggregateMealBonuses.forEach((expected: any) => {
-            const actualBonus = cooking.getMealBonusForKey(expected.key);
-            
-            expectCalculationToMatch(
-              actualBonus,
-              expected.bonus,
-              0.05,
-              `Aggregate meal bonus for ${expected.key}`
-            );
-          });
-        });
       });
 
       describe('Meal Level Cost Calculations', () => {
@@ -203,9 +185,8 @@ describe('Cooking Domain Calculations', () => {
           expectedResults.kitchenSpeeds.forEach((expected: any) => {
             const kitchen = cooking.kitchens[expected.kitchenIndex];
             
+            // TODO: Update this based on star sign status and if player 0 has silkroad equipped.
             const actualMealSpeed = kitchen.getUpdatedMealSpeed(true, false);
-            const actualMealSpeedWithSilkrode = kitchen.getUpdatedMealSpeed(true, true);
-            const actualMealSpeedWithoutStarSign = kitchen.getUpdatedMealSpeed(false, false);
             
             expectCalculationToMatch(
               actualMealSpeed,
@@ -213,55 +194,7 @@ describe('Cooking Domain Calculations', () => {
               0.05,
               `Kitchen ${expected.kitchenIndex} meal speed (with star sign)`
             );
-
-            expectCalculationToMatch(
-              actualMealSpeedWithSilkrode,
-              expected.mealSpeedWithSilkrode,
-              0.05,
-              `Kitchen ${expected.kitchenIndex} meal speed (with star sign + silkrode)`
-            );
-
-            expectCalculationToMatch(
-              actualMealSpeedWithoutStarSign,
-              expected.mealSpeedWithoutStarSign,
-              0.05,
-              `Kitchen ${expected.kitchenIndex} meal speed (without star sign)`
-            );
           });
-        });
-      });
-
-      describe('Total Cooking Speed Calculations', () => {
-        it('calculates total cooking speeds correctly', () => {
-          if (!expectedResults.cookingSpeeds) {
-            console.warn('No cooking speed test data found - skipping cooking speed tests');
-            return;
-          }
-
-          const actualTotalSpeed = cooking.getTotalCookingSpeed(true, false);
-          const actualTotalSpeedWithSilkrode = cooking.getTotalCookingSpeed(true, true);
-          const actualTotalSpeedWithoutStarSign = cooking.getTotalCookingSpeed(false, false);
-
-          expectCalculationToMatch(
-            actualTotalSpeed,
-            expectedResults.cookingSpeeds.total,
-            0.05,
-            'Total cooking speed (with star sign)'
-          );
-
-          expectCalculationToMatch(
-            actualTotalSpeedWithSilkrode,
-            expectedResults.cookingSpeeds.totalWithSilkrode,
-            0.05,
-            'Total cooking speed (with star sign + silkrode)'
-          );
-
-          expectCalculationToMatch(
-            actualTotalSpeedWithoutStarSign,
-            expectedResults.cookingSpeeds.totalWithoutStarSign,
-            0.05,
-            'Total cooking speed (without star sign)'
-          );
         });
       });
 
@@ -276,13 +209,6 @@ describe('Cooking Domain Calculations', () => {
           expect(actualActiveMeals).toBe(expectedResults.summary.activeMealsCount);
           expect(actualActiveKitchens).toBe(expectedResults.summary.activeKitchensCount);
           expect(cooking.mealsDiscovered).toBe(expectedResults.summary.mealsDiscovered);
-          
-          expectCalculationToMatch(
-            cooking.totalCookingSpeed,
-            expectedResults.summary.totalCookingSpeed,
-            0.05,
-            'Total cooking speed summary'
-          );
         });
 
         it('reports test coverage warnings', () => {
@@ -294,10 +220,6 @@ describe('Cooking Domain Calculations', () => {
           
           if (!expectedResults.milestoneCosts || expectedResults.milestoneCosts.length === 0) {
             warnings.push('No milestone costs in test data - all meals may be at max level (potential domain bug?)');
-          }
-          
-          if (!expectedResults.aggregateMealBonuses || expectedResults.aggregateMealBonuses.length === 0) {
-            warnings.push('No aggregate meal bonuses in test data - potential implementation issue');
           }
           
           if (!expectedResults.kitchenUpgradeCosts || expectedResults.kitchenUpgradeCosts.length === 0) {

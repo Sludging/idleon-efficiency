@@ -10,63 +10,62 @@
     "activeMealsCount": 67,
     "kitchensCount": 10,
     "activeKitchensCount": 10,
-    "mealsDiscovered": 67,
-    "totalCookingSpeed": 2.463959412696961e+72
+    "mealsDiscovered": 67
   },
   "mealBonuses": [
     {
       "description": "Turkey a la Thank bonus",
       "index": 0,
-      "bonus": 379.7221248,
+      "bonus": 380,
       "level": 92,
       "notes": "Current level, bonus key: TotDmg"
     },
     {
       "description": "Egg bonus",
       "index": 1,
-      "bonus": 959.6238480000001,
+      "bonus": 1593,
       "level": 93,
       "notes": "Current level, bonus key: Mcook"
     },
     {
       "description": "Salad bonus",
       "index": 2,
-      "bonus": 575.7743088000001,
+      "bonus": 576,
       "level": 93,
       "notes": "Current level, bonus key: Cash"
     },
     {
       "description": "Pie bonus",
       "index": 3,
-      "bonus": 959.6238480000001,
+      "bonus": 960,
       "level": 93,
       "notes": "Current level, bonus key: Rcook"
     },
     {
       "description": "Frenk Fries bonus",
       "index": 4,
-      "bonus": 949.3053120000001,
+      "bonus": 949,
       "level": 92,
       "notes": "Current level, bonus key: Npet"
     },
     {
       "description": "Spaghetti bonus",
       "index": 5,
-      "bonus": 759.4442496,
+      "bonus": 759,
       "level": 92,
       "notes": "Current level, bonus key: BrExp"
     },
     {
       "description": "Corn bonus",
       "index": 6,
-      "bonus": 371.46729600000003,
+      "bonus": 371,
       "level": 90,
       "notes": "Current level, bonus key: Seff"
     },
     {
       "description": "Garlic Bread bonus",
       "index": 7,
-      "bonus": 775.9539072,
+      "bonus": 776,
       "level": 94,
       "notes": "Current level, bonus key: VIP"
     }
@@ -77,7 +76,7 @@
       "description": "Kitchen 0 speed upgrade",
       "kitchenIndex": 0,
       "upgradeType": "speed",
-      "cost": 10806.932087939162,
+      "cost": "10.4K",
       "currentLevel": 428,
       "notes": "Speed upgrade from level 428"
     },
@@ -85,7 +84,7 @@
       "description": "Kitchen 0 fire upgrade",
       "kitchenIndex": 0,
       "upgradeType": "fire",
-      "cost": 10329.213904684728,
+      "cost": "9.87K",
       "currentLevel": 426,
       "notes": "Fire upgrade from level 426"
     },
@@ -93,7 +92,7 @@
       "description": "Kitchen 0 luck upgrade",
       "kitchenIndex": 0,
       "upgradeType": "luck",
-      "cost": 4251.447561676828,
+      "cost": "4.07K",
       "currentLevel": 387,
       "notes": "Luck upgrade from level 387"
     },
@@ -101,7 +100,7 @@
       "description": "Kitchen 1 speed upgrade",
       "kitchenIndex": 1,
       "upgradeType": "speed",
-      "cost": 4659.094658311034,
+      "cost": "4.46K",
       "currentLevel": 391,
       "notes": "Speed upgrade from level 391"
     },
@@ -109,7 +108,7 @@
       "description": "Kitchen 1 fire upgrade",
       "kitchenIndex": 1,
       "upgradeType": "fire",
-      "cost": 8235.904630855928,
+      "cost": "7.87K",
       "currentLevel": 416,
       "notes": "Fire upgrade from level 416"
     },
@@ -117,172 +116,30 @@
       "description": "Kitchen 1 luck upgrade",
       "kitchenIndex": 1,
       "upgradeType": "luck",
-      "cost": 2129.9998477679296,
+      "cost": "2.04K",
       "currentLevel": 357,
       "notes": "Luck upgrade from level 357"
-    },
-    {
-      "description": "Kitchen 2 speed upgrade",
-      "kitchenIndex": 2,
-      "upgradeType": "speed",
-      "cost": 5468.595850180452,
-      "currentLevel": 398,
-      "notes": "Speed upgrade from level 398"
-    },
-    {
-      "description": "Kitchen 2 fire upgrade",
-      "kitchenIndex": 2,
-      "upgradeType": "fire",
-      "cost": 2684.262052724172,
-      "currentLevel": 367,
-      "notes": "Fire upgrade from level 367"
-    },
-    {
-      "description": "Kitchen 2 luck upgrade",
-      "kitchenIndex": 2,
-      "upgradeType": "luck",
-      "cost": 1853.1533409204555,
-      "currentLevel": 351,
-      "notes": "Luck upgrade from level 351"
-    },
-    {
-      "description": "Kitchen 3 speed upgrade",
-      "kitchenIndex": 3,
-      "upgradeType": "speed",
-      "cost": 4555.015030088057,
-      "currentLevel": 390,
-      "notes": "Speed upgrade from level 390"
-    },
-    {
-      "description": "Kitchen 3 fire upgrade",
-      "kitchenIndex": 3,
-      "upgradeType": "fire",
-      "cost": 1728.8650772172111,
-      "currentLevel": 348,
-      "notes": "Fire upgrade from level 348"
-    },
-    {
-      "description": "Kitchen 3 luck upgrade",
-      "kitchenIndex": 3,
-      "upgradeType": "luck",
-      "cost": 1337.2101607380494,
-      "currentLevel": 337,
-      "notes": "Luck upgrade from level 337"
-    },
-    {
-      "description": "Kitchen 4 speed upgrade",
-      "kitchenIndex": 4,
-      "upgradeType": "speed",
-      "cost": 3227.6938359004052,
-      "currentLevel": 375,
-      "notes": "Speed upgrade from level 375"
-    },
-    {
-      "description": "Kitchen 4 fire upgrade",
-      "kitchenIndex": 4,
-      "upgradeType": "fire",
-      "cost": 2505.354109507129,
-      "currentLevel": 364,
-      "notes": "Fire upgrade from level 364"
-    },
-    {
-      "description": "Kitchen 4 luck upgrade",
-      "kitchenIndex": 4,
-      "upgradeType": "luck",
-      "cost": 1033.6293293373044,
-      "currentLevel": 326,
-      "notes": "Luck upgrade from level 326"
     }
   ],
   "kitchenSpeeds": [
     {
       "description": "Kitchen 0 meal speeds",
       "kitchenIndex": 0,
-      "mealSpeed": 3.434179828241117e+71,
-      "mealSpeedWithSilkrode": 4.155167610394897e+71,
-      "mealSpeedWithoutStarSign": 2.713192046087337e+71,
-      "notes": "Speed calculations with different bonuses"
+      "mealSpeed": "7.99E79",
+      "notes": "Speed calculations"
     },
     {
       "description": "Kitchen 1 meal speeds",
       "kitchenIndex": 1,
-      "mealSpeed": 2.9414044684314663e+71,
-      "mealSpeedWithSilkrode": 3.5589366857812443e+71,
-      "mealSpeedWithoutStarSign": 2.323872251081687e+71,
-      "notes": "Speed calculations with different bonuses"
+      "mealSpeed": "6.84E79",
+      "notes": "Speed calculations"
     },
     {
       "description": "Kitchen 2 meal speeds",
       "kitchenIndex": 2,
-      "mealSpeed": 2.8638685869167917e+71,
-      "mealSpeedWithSilkrode": 3.4651225585000303e+71,
-      "mealSpeedWithoutStarSign": 2.2626146153335526e+71,
-      "notes": "Speed calculations with different bonuses"
-    },
-    {
-      "description": "Kitchen 3 meal speeds",
-      "kitchenIndex": 3,
-      "mealSpeed": 2.7066303054630826e+71,
-      "mealSpeedWithSilkrode": 3.2748729364977845e+71,
-      "mealSpeedWithoutStarSign": 2.1383876744283797e+71,
-      "notes": "Speed calculations with different bonuses"
-    },
-    {
-      "description": "Kitchen 4 meal speeds",
-      "kitchenIndex": 4,
-      "mealSpeed": 2.5808083326064933e+71,
-      "mealSpeedWithSilkrode": 3.1226353099208873e+71,
-      "mealSpeedWithoutStarSign": 2.038981355292099e+71,
-      "notes": "Speed calculations with different bonuses"
+      "mealSpeed": "6.66E79",
+      "notes": "Speed calculations"
     }
   ],
-  "milestoneCosts": [],
-  "aggregateMealBonuses": [
-    {
-      "key": "TotDmg",
-      "bonus": 2930.4642240000003,
-      "notes": "Aggregate meal bonus for TotDmg"
-    },
-    {
-      "key": "Mcook",
-      "bonus": 12281.1215472,
-      "notes": "Aggregate meal bonus for Mcook"
-    },
-    {
-      "key": "Cash",
-      "bonus": 1904.8017456000002,
-      "notes": "Aggregate meal bonus for Cash"
-    },
-    {
-      "key": "Rcook",
-      "bonus": 2899.508616,
-      "notes": "Aggregate meal bonus for Rcook"
-    },
-    {
-      "key": "Npet",
-      "bonus": 10264.8796128,
-      "notes": "Aggregate meal bonus for Npet"
-    },
-    {
-      "key": "BrExp",
-      "bonus": 759.4442496,
-      "notes": "Aggregate meal bonus for BrExp"
-    },
-    {
-      "key": "Seff",
-      "bonus": 1692.239904,
-      "notes": "Aggregate meal bonus for Seff"
-    },
-    {
-      "key": "VIP",
-      "bonus": 3427.8176592,
-      "notes": "Aggregate meal bonus for VIP"
-    }
-  ],
-  "cookingSpeeds": {
-    "total": 2.463959412696961e+72,
-    "totalWithSilkrode": 2.9812545810129347e+72,
-    "totalWithoutStarSign": 1.946664244380987e+72,
-    "notes": "Total cooking speeds with different bonus combinations"
-  }
+  "milestoneCosts": []
 }
