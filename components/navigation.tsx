@@ -2,9 +2,12 @@
 
 import { Box, Button, ButtonExtendedProps, ButtonProps, ButtonProps, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
 import { FormDown, Menu as MenuIcon } from "grommet-icons";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { NextRouter } from "next/router";
+import React from "react";
+import { MouseEventHandler, useContext } from "react";
 import styled from "styled-components";
 
 interface NavItem {
@@ -143,13 +146,31 @@ const customNavDrop = {
     }
 }
 
+function handleMouseDown(e: React.MouseEvent, href: string, router: AppRouterInstance) {
+    // Middle mouse button (button 1) opens in new tab
+    if (e.button === 1) {
+        window.open(href, '_blank');
+        e.preventDefault();
+    } else {
+        router.push(href);
+    }
+}
+
 function OnHoverNav({ link, label, subLinks }: NavItem) {
     const pathname = usePathname();
     const router = useRouter();
 
     if (!subLinks) {
         return (
-            <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+            <NavButton 
+                key={`link_${label}`}
+                className={pathname == link ? 'active' : ''} 
+                color="accent-2"
+                onMouseDown={(e) => handleMouseDown(e, link, router)}
+                href={link} // Keep href for SEO and right-click menu
+            >
+                {label}
+            </NavButton>
         )
     }
 
@@ -161,10 +182,9 @@ function OnHoverNav({ link, label, subLinks }: NavItem) {
             items={subLinks.map(({ subLink, label }) => (
                 {
                     label: <Text size="small">{label}</Text>,
-                    onClick: () => { router.push(`${link}${subLink}`) },
+                    onMouseDown: (e: React.MouseEvent) => handleMouseDown(e, `${link}${subLink}`, router),
                 }
-
-            ))}
+            )) as ButtonExtendedProps[]}
             icon={<FormDown size="medium" color="accent-3" />}
             label={label}
             className={pathname?.includes(link) ? 'active' : ''} color="accent-2" />
@@ -176,10 +196,6 @@ export const Navigation = () => {
     const pathname = usePathname();
     const router = useRouter();
 
-    const onMobileClick = (href: string) => {
-        router.push(href);
-    }
-
     if (size === "small") {
         return (
             <Box justify="end">
@@ -190,10 +206,10 @@ export const Navigation = () => {
                     dropBackground="dark-1"
                     margin="small"
                     items={navItems.flatMap(({ link, label, subLinks }, index) => {
-                        const getButtonProps = (href: string, label: string) => ({
+                        const getButtonProps = (href: string, label: string): ButtonExtendedProps => ({
                             fill: true,
                             pad: 'large',
-                            onClick: () => onMobileClick(href),
+                            onMouseDown: (e: React.MouseEvent) => handleMouseDown(e, href, router),
                             label: <Box key={index} className={pathname == href ? 'active' : ''} color="accent-2">{label}</Box>
                         });
 
