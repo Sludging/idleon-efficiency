@@ -162,15 +162,7 @@ function OnHoverNav({ link, label, subLinks }: NavItem) {
 
     if (!subLinks) {
         return (
-            <NavButton 
-                key={`link_${label}`}
-                className={pathname == link ? 'active' : ''} 
-                color="accent-2"
-                onMouseDown={(e) => handleMouseDown(e, link, router)}
-                href={link} // Keep href for SEO and right-click menu
-            >
-                {label}
-            </NavButton>
+            <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
         )
     }
 
