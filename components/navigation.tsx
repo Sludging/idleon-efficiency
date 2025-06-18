@@ -1,13 +1,11 @@
 "use client"
 
-import { Box, Button, ButtonExtendedProps, ButtonProps, ButtonProps, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
+import { Box, Button, ButtonExtendedProps, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
 import { FormDown, Menu as MenuIcon } from "grommet-icons";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { NextRouter } from "next/router";
-import React from "react";
-import { MouseEventHandler, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 
 interface NavItem {
