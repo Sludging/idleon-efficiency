@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Button, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
+import { Box, Button, ButtonExtendedProps, ButtonProps, ButtonProps, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
 import { FormDown, Menu as MenuIcon } from "grommet-icons";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -143,30 +143,32 @@ const customNavDrop = {
     }
 }
 
-function OnHoverNav({ link, label, subLinks }: { link: string, label: string, subLinks: { subLink: string, label: string }[] | undefined }) {
+function OnHoverNav({ link, label, subLinks }: NavItem) {
     const pathname = usePathname();
     const router = useRouter();
 
-    if (subLinks) {
+    if (!subLinks) {
         return (
-            <NavMenu
-                key={`link_${label}`}
-                dropBackground="dark-1"
-                dropProps={{ align: { top: 'bottom', left: 'left' }, elevation: 'navigation' }}
-                items={subLinks.map(({ subLink, label }) => (
-                    {
-                        label: <Text size="small">{label}</Text>,
-                        onClick: () => { router.push(`${link}${subLink}`) },
-                    }
-
-                ))}
-                icon={<FormDown size="medium" color="accent-3" />}
-                label={label}
-                className={pathname?.includes(link) ? 'active' : ''} color="accent-2" />
+            <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
         )
     }
 
-    return <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>;
+    return (
+        <NavMenu
+            key={`link_${label}`}
+            dropBackground="dark-1"
+            dropProps={{ align: { top: 'bottom', left: 'left' }, elevation: 'navigation' }}
+            items={subLinks.map(({ subLink, label }) => (
+                {
+                    label: <Text size="small">{label}</Text>,
+                    onClick: () => { router.push(`${link}${subLink}`) },
+                }
+
+            ))}
+            icon={<FormDown size="medium" color="accent-3" />}
+            label={label}
+            className={pathname?.includes(link) ? 'active' : ''} color="accent-2" />
+    )
 }
 
 export const Navigation = () => {
@@ -188,12 +190,18 @@ export const Navigation = () => {
                     dropBackground="dark-1"
                     margin="small"
                     items={navItems.flatMap(({ link, label, subLinks }, index) => {
+                        const getButtonProps = (href: string, label: string) => ({
+                            fill: true,
+                            pad: 'large',
+                            onClick: () => onMobileClick(href),
+                            label: <Box key={index} className={pathname == href ? 'active' : ''} color="accent-2">{label}</Box>
+                        });
+
                         if (subLinks) {
-                            return subLinks.map(({ subLink, label }) => {
-                                return { fill: true, pad: 'large', onClick: () => onMobileClick(`${link}${subLink}`), label: <Box key={index} className={pathname == `${link}${subLink}` ? 'active' : ''} color="accent-2">{label}</Box> }
-                            })
+                            return subLinks.map(({ subLink, label }) => getButtonProps(`${link}${subLink}`, label));
                         }
-                        return { fill: true, pad: 'large', onClick: () => onMobileClick(link), label: <Box key={index} className={pathname == link ? 'active' : ''} color="accent-2">{label}</Box> }
+
+                        return getButtonProps(link, label);
                     })}
                 />
             </Box>
@@ -205,9 +213,7 @@ export const Navigation = () => {
             <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
                 <ThemeContext.Extend value={customNavDrop}>
                     <Nav direction="row">
-                        {
-                            navItems.map(({ link, label, subLinks }, index) => (<OnHoverNav key={index} link={link} label={label} subLinks={subLinks} />))
-                        }
+                        {navItems.map((navItem, index) => (<OnHoverNav key={index} {...navItem} />))}
                     </Nav>
                 </ThemeContext.Extend>
             </Box>
