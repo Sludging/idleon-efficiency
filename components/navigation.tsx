@@ -7,7 +7,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import styled from "styled-components";
 
-const navItems = [
+interface NavItem {
+    link: string;
+    label: string;
+    subLinks?: { subLink: string; label: string }[];
+}
+
+const navItems: NavItem[] = [
     {
         link: "/", label: "Dashboard"
     },
@@ -150,7 +156,7 @@ function OnHoverNav({ link, label, subLinks }: { link: string, label: string, su
                 items={subLinks.map(({ subLink, label }) => (
                     {
                         label: <Text size="small">{label}</Text>,
-                        onClick: () => { router.push(link + subLink) },
+                        onClick: () => { router.push(`${link}${subLink}`) },
                     }
 
                 ))}
@@ -184,7 +190,7 @@ export const Navigation = () => {
                     items={navItems.flatMap(({ link, label, subLinks }, index) => {
                         if (subLinks) {
                             return subLinks.map(({ subLink, label }) => {
-                                return { fill: true, pad: 'large', onClick: () => onMobileClick(link + subLink), label: <Box key={index} className={pathname == link + subLink ? 'active' : ''} color="accent-2">{label}</Box> }
+                                return { fill: true, pad: 'large', onClick: () => onMobileClick(`${link}${subLink}`), label: <Box key={index} className={pathname == `${link}${subLink}` ? 'active' : ''} color="accent-2">{label}</Box> }
                             })
                         }
                         return { fill: true, pad: 'large', onClick: () => onMobileClick(link), label: <Box key={index} className={pathname == link ? 'active' : ''} color="accent-2">{label}</Box> }
