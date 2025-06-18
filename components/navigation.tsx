@@ -147,11 +147,13 @@ const customNavDrop = {
 }
 
 function handleMouseDown(e: React.MouseEvent, href: string, router: AppRouterInstance) {
-    // Middle mouse button (button 1) opens in new tab
-    if (e.button === 1) {
+    const leftClick = e.button === 0;
+    const middleClick = e.button === 1;
+
+    if (middleClick) {
         window.open(href, '_blank');
         e.preventDefault();
-    } else {
+    } else if (leftClick) {
         router.push(href);
     }
 }
