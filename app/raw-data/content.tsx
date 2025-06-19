@@ -17,14 +17,19 @@ function RawData() {
     ));
 
     const copyToClipboard = () => {
-        if (navigator && navigator.clipboard) {
-            setCopyMessage("Copied!");
-            setTimeout(() => {
-                setCopyMessage("");
-            }, 3000);
-            return navigator.clipboard.writeText(JSON.stringify(rawData, null, 2));
+        if (!navigator || !navigator.clipboard) {
+            return Promise.reject('The Clipboard API is not available.');
         }
-        return Promise.reject('The Clipboard API is not available.');
+
+        if (copyMessage !== "") {
+            return Promise.resolve();
+        }
+
+        setCopyMessage("Copied!");
+        setTimeout(() => {
+            setCopyMessage("");
+        }, 1500);
+        return navigator.clipboard.writeText(JSON.stringify(rawData, null, 2));        
     }
 
     useEffect(() => {
@@ -66,14 +71,13 @@ function RawData() {
             )}
             <Box direction="row" gap="medium" align="center" margin={{ bottom: "medium" }}>
                 <Button 
-                    style={{ color: "white" }} 
+                    style={{ color: "white" }}
                     primary 
-                    color="brand" 
-                    label="Copy Raw JSON" 
+                    color={copyMessage !== "" ? "status-ok" : "brand"} 
+                    label={copyMessage !== "" ? copyMessage : "Copy Raw JSON"} 
                     onClick={() => copyToClipboard()} 
                     disabled={isLoading || !rawData}
                 />
-                {copyMessage !== "" && <Text>{copyMessage}</Text>}
             </Box>
             
             {!isLoading && (
