@@ -6,12 +6,13 @@ import {
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    const { dataStatus, theData } = useAppDataStore(useShallow(
+        (state) => ({ dataStatus: state.dataStatus, theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const copyToClipboard = () => {
@@ -26,18 +27,32 @@ function RawData() {
     }
 
     useEffect(() => {
+        if ([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus)) {
+            return;
+        }
+
+        if (!theData) {
+            return;
+        }
+
         // This is very ugly but I don't really want to overthink this.
         const rawData = theData.get("rawData");
-        if (rawData) {
-            const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
-            if (cleanRaw) {
-                cleanRaw["playerNames"] = theData.get("playerNames");
-                cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
-                cleanRaw["servervars"] = theData.get("servervars");
-            }
-            setRawData(cleanRaw);
+
+        if (!rawData) {
+            return;
         }
-    }, [theData]);
+
+        const cleanRaw = JSON.parse(JSON.stringify(rawData));
+
+        if (!cleanRaw) {
+            return;
+        }
+
+        cleanRaw["playerNames"] = theData.get("playerNames");
+        cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
+        cleanRaw["servervars"] = theData.get("servervars");
+        setRawData(cleanRaw);
+    }, [theData, dataStatus]);
     return (
         <Box align="center" pad="medium">
             <Box direction="row" gap="medium" align="center">
