@@ -1,7 +1,7 @@
 "use client"
 
 import {
-    Box, Button, Text,
+    Box, Button, Text, Spinner
 } from 'grommet'
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
@@ -11,6 +11,7 @@ import { DataStatus } from '../../lib/stores/appDataStore';
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const { dataStatus, theData } = useAppDataStore(useShallow(
         (state) => ({ dataStatus: state.dataStatus, theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -27,6 +28,9 @@ function RawData() {
     }
 
     useEffect(() => {
+        // Set loading state based on dataStatus
+        setIsLoading([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus));
+
         if ([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus)) {
             return;
         }
@@ -55,11 +59,32 @@ function RawData() {
     }, [theData, dataStatus]);
     return (
         <Box align="center" pad="medium">
-            <Box direction="row" gap="medium" align="center">
-                <Button style={{ color: "white" }} primary color="brand" label="Copy Raw JSON" onClick={() => copyToClipboard()} />
-                {copyMessage != "" && <Text>{copyMessage}</Text>}
+            {isLoading && (
+                <Box direction="row" gap="small" align="center" margin={{ bottom: "medium" }}>
+                    <Spinner size="small" /><Text>Loading data...</Text>
+                </Box>
+            )}
+            <Box direction="row" gap="medium" align="center" margin={{ bottom: "medium" }}>
+                <Button 
+                    style={{ color: "white" }} 
+                    primary 
+                    color="brand" 
+                    label="Copy Raw JSON" 
+                    onClick={() => copyToClipboard()} 
+                    disabled={isLoading || !rawData}
+                />
+                {copyMessage !== "" && <Text>{copyMessage}</Text>}
             </Box>
-            <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
+            
+            {!isLoading && (
+                !rawData ? (
+                    <Box direction="row" gap="small" align="center">
+                        <Text>No data available</Text>
+                    </Box>
+                ) : (
+                    <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
+                )
+            )}
         </Box>
     )
 }
