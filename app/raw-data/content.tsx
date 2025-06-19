@@ -33,7 +33,6 @@ function RawData() {
     }
 
     useEffect(() => {
-        // Set loading state based on dataStatus
         setIsLoading([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus));
 
         if ([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus)) {
