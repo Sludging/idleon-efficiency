@@ -33,24 +33,20 @@ function RawData() {
     }
 
     useEffect(() => {
-        setIsLoading([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus));
-
-        if ([DataStatus.Init, DataStatus.Loading, DataStatus.MissingData].includes(dataStatus)) {
-            return;
-        }
+        setIsLoading(!rawData);
 
         if (!theData) {
             return;
         }
 
         // This is very ugly but I don't really want to overthink this.
-        const rawData = theData.get("rawData");
+        const rawDataElement = theData.get("rawData");
 
-        if (!rawData) {
+        if (!rawDataElement) {
             return;
         }
 
-        const cleanRaw = JSON.parse(JSON.stringify(rawData));
+        const cleanRaw = JSON.parse(JSON.stringify(rawDataElement));
 
         if (!cleanRaw) {
             return;
