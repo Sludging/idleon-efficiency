@@ -6,14 +6,13 @@ import {
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
-import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const { dataStatus, theData } = useAppDataStore(useShallow(
-        (state) => ({ dataStatus: state.dataStatus, theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const copyToClipboard = () => {
@@ -33,21 +32,17 @@ function RawData() {
     }
 
     useEffect(() => {
-        setIsLoading(!rawData);
-
         if (!theData) {
             return;
         }
 
         // This is very ugly but I don't really want to overthink this.
         const rawDataElement = theData.get("rawData");
-
         if (!rawDataElement) {
             return;
         }
 
         const cleanRaw = JSON.parse(JSON.stringify(rawDataElement));
-
         if (!cleanRaw) {
             return;
         }
@@ -55,8 +50,10 @@ function RawData() {
         cleanRaw["playerNames"] = theData.get("playerNames");
         cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
         cleanRaw["servervars"] = theData.get("servervars");
+
+        setIsLoading(false);
         setRawData(cleanRaw);
-    }, [theData, dataStatus]);
+    }, [theData, lastUpdated]);
     return (
         <Box align="center" pad="medium">
             {isLoading && (
