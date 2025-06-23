@@ -6,13 +6,14 @@ import {
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const { theData, lastUpdated } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    const { theData, lastUpdated, dataStatus } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })
     ));
 
     const copyToClipboard = () => {
@@ -32,6 +33,8 @@ function RawData() {
     }
 
     useEffect(() => {
+        setIsLoading([DataStatus.Init, DataStatus.Loading].includes(dataStatus));
+
         if (!theData) {
             return;
         }
@@ -51,7 +54,6 @@ function RawData() {
         cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
         cleanRaw["servervars"] = theData.get("servervars");
 
-        setIsLoading(false);
         setRawData(cleanRaw);
     }, [theData, lastUpdated]);
     return (
