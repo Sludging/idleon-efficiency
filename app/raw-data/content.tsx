@@ -1,50 +1,88 @@
 "use client"
 
 import {
-    Box, Button, Text,
+    Box, Button, Text, Spinner
 } from 'grommet'
 import { useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
     const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const { theData } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const { theData, lastUpdated, dataStatus } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })
     ));
 
     const copyToClipboard = () => {
-        if (navigator && navigator.clipboard) {
-            setCopyMessage("Copied!");
-            setTimeout(() => {
-                setCopyMessage("");
-            }, 3000);
-            return navigator.clipboard.writeText(JSON.stringify(rawData, null, 2));
+        if (!navigator || !navigator.clipboard) {
+            return Promise.reject('The Clipboard API is not available.');
         }
-        return Promise.reject('The Clipboard API is not available.');
+
+        if (copyMessage !== "") {
+            return Promise.resolve();
+        }
+
+        setCopyMessage("Copied!");
+        setTimeout(() => {
+            setCopyMessage("");
+        }, 1500);
+        return navigator.clipboard.writeText(JSON.stringify(rawData, null, 2));        
     }
 
     useEffect(() => {
-        // This is very ugly but I don't really want to overthink this.
-        const rawData = theData.get("rawData");
-        if (rawData) {
-            const cleanRaw = JSON.parse(JSON.stringify(theData.get("rawData")));
-            if (cleanRaw) {
-                cleanRaw["playerNames"] = theData.get("playerNames");
-                cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
-                cleanRaw["servervars"] = theData.get("servervars");
-            }
-            setRawData(cleanRaw);
+        setIsLoading([DataStatus.Init, DataStatus.Loading].includes(dataStatus));
+
+        if (!theData) {
+            return;
         }
-    }, [theData]);
+
+        // This is very ugly but I don't really want to overthink this.
+        const rawDataElement = theData.get("rawData");
+        if (!rawDataElement) {
+            return;
+        }
+
+        const cleanRaw = JSON.parse(JSON.stringify(rawDataElement));
+        if (!cleanRaw) {
+            return;
+        }
+
+        cleanRaw["playerNames"] = theData.get("playerNames");
+        cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
+        cleanRaw["servervars"] = theData.get("servervars");
+
+        setRawData(cleanRaw);
+    }, [theData, lastUpdated]);
     return (
         <Box align="center" pad="medium">
-            <Box direction="row" gap="medium" align="center">
-                <Button style={{ color: "white" }} primary color="brand" label="Copy Raw JSON" onClick={() => copyToClipboard()} />
-                {copyMessage != "" && <Text>{copyMessage}</Text>}
+            {isLoading && (
+                <Box direction="row" gap="small" align="center" margin={{ bottom: "medium" }}>
+                    <Spinner size="small" /><Text>Loading data...</Text>
+                </Box>
+            )}
+            <Box direction="row" gap="medium" align="center" margin={{ bottom: "medium" }}>
+                <Button 
+                    style={{ color: "white" }}
+                    primary 
+                    color={copyMessage !== "" ? "status-ok" : "brand"} 
+                    label={copyMessage !== "" ? copyMessage : "Copy Raw JSON"} 
+                    onClick={() => copyToClipboard()} 
+                    disabled={isLoading || !rawData}
+                />
             </Box>
-            <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
+            
+            {!isLoading && (
+                !rawData ? (
+                    <Box direction="row" gap="small" align="center">
+                        <Text>No data available</Text>
+                    </Box>
+                ) : (
+                    <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
+                )
+            )}
         </Box>
     )
 }
