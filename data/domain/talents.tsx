@@ -116,7 +116,7 @@ export enum ClassIndex {
     Elemental_Sorcerer = 34,
     Spiritual_Monk = 35,
     Bubonic_Conjuror = 36,
-    Arcane_Cultist = 37
+    Arcane_Cultist = 40
 }
 
 export const ClassTalentMap: Record<ClassIndex, string[]> = {
@@ -146,7 +146,7 @@ export const ClassTalentMap: Record<ClassIndex, string[]> = {
     [ClassIndex.Elemental_Sorcerer]: ["Savvy Basics", "Mage", "Wizard", "Elemental Sorcerer"],
     [ClassIndex.Spiritual_Monk]: [],
     [ClassIndex.Bubonic_Conjuror]: ["Savvy Basics", "Mage", "Shaman", "Bubonic Conjuror"],
-    [ClassIndex.Arcane_Cultist]: [],
+    [ClassIndex.Arcane_Cultist]: ["Savvy Basics", "Mage", "Shaman", "Bubonic Conjuror", "Arcane Cultist"],
 }
 
 const allTalents = initTalentTreeRepo();
