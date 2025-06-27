@@ -381,7 +381,7 @@ export class Lab extends Domain {
         }
 
         labData[14].forEach((value, index) => {
-            if (value == 1) {
+            if (value == 1 && lab.jewels.length > index) {
                 lab.jewels[index].available = true;
             }
         })
