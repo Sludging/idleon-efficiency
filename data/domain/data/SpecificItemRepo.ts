@@ -1604,6 +1604,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats119", <ArmourItemModel>{
+                "internalName": "EquipmentHats119",
+                "displayName": "Emperor Kabuto",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmet,
+                "Type": "Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 650,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 25,
+                "STR": 80,
+                "AGI": 80,
+                "WIS": 80,
+                "LUK": 80,
+                "Defence": 270,
+                "miscUp1": "25% Drop Chance",
+                "miscUp2": "30% Multikill Per Tier",
+                "Upgrade_Slots_Left": 12,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats84", <ArmourItemModel>{
                 "internalName": "EquipmentHats84",
                 "displayName": "The Crow Perch",
@@ -4355,6 +4376,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentShirts39", <ArmourItemModel>{
+                "internalName": "EquipmentShirts39",
+                "displayName": "Emperor Sokutai Ho",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShirt,
+                "Type": "Shirt",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 600,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 20,
+                "STR": 75,
+                "AGI": 75,
+                "WIS": 75,
+                "LUK": 75,
+                "Defence": 300,
+                "miscUp1": "40% Drop Chance",
+                "miscUp2": "25% Multikill Per Tier",
+                "Upgrade_Slots_Left": 11,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentPants1", <ArmourItemModel>{
                 "internalName": "EquipmentPants1",
                 "displayName": "Torn Jeans",
@@ -4961,6 +5003,27 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "25% Drop Chance",
                 "miscUp2": "14% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentPants31", <ArmourItemModel>{
+                "internalName": "EquipmentPants31",
+                "displayName": "Emperor Zubon",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aPants,
+                "Type": "Pants",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 600,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 13,
+                "STR": 65,
+                "AGI": 65,
+                "WIS": 65,
+                "LUK": 65,
+                "Defence": 250,
+                "miscUp1": "35% Drop Chance",
+                "miscUp2": "20% Multikill Per Tier",
+                "Upgrade_Slots_Left": 11,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -5755,7 +5818,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 43,
                 "WIS": 43,
                 "LUK": 43,
-                "Defence": 100,
+                "Defence": 110,
                 "miscUp1": "7% All Stats",
                 "miscUp2": "25% Money",
                 "Upgrade_Slots_Left": 8,
@@ -5776,10 +5839,31 @@ export const initSpecificItemRepo = () => {
                 "AGI": 57,
                 "WIS": 57,
                 "LUK": 57,
-                "Defence": 100,
+                "Defence": 120,
                 "miscUp1": "30% Drop Chance",
                 "miscUp2": "12% Multikill Per Tier",
                 "Upgrade_Slots_Left": 9,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentShoes40", <ArmourItemModel>{
+                "internalName": "EquipmentShoes40",
+                "displayName": "Emperor Geta",
+                "sellPrice": 200,
+                "typeGen": TypeGenEnum.aShoes,
+                "Type": "Shoes",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 600,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 70,
+                "AGI": 70,
+                "WIS": 70,
+                "LUK": 70,
+                "Defence": 150,
+                "miscUp1": "40% Drop Chance",
+                "miscUp2": "20% Multikill Per Tier",
+                "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -7225,7 +7309,7 @@ export const initSpecificItemRepo = () => {
                 "AGI": 0,
                 "WIS": 0,
                 "LUK": 0,
-                "Defence": 3,
+                "Defence": 5,
                 "miscUp1": "30% Kills In World 5",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
@@ -7271,6 +7355,27 @@ export const initSpecificItemRepo = () => {
                 "miscUp1": "10% All Stats",
                 "miscUp2": "1% Damage Multi",
                 "Upgrade_Slots_Left": 1,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRings37", <ArmourItemModel>{
+                "internalName": "EquipmentRings37",
+                "displayName": "Spirit Killer Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 6,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 6,
+                "miscUp1": "30% Kills In World 6",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
             }),
@@ -7837,6 +7942,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "40% All Afk Gain",
                 "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape17", <ArmourItemModel>{
+                "internalName": "EquipmentCape17",
+                "displayName": "Gilded Emperor Wings",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 8,
+                "STR": 15,
+                "AGI": 15,
+                "WIS": 15,
+                "LUK": 15,
+                "Defence": 0,
+                "miscUp1": "25% Class Exp Multi",
+                "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape18", <ArmourItemModel>{
+                "internalName": "EquipmentCape18",
+                "displayName": "Chains of the Gilded Vaultguard",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 30,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 30,
+                "Defence": 25,
+                "miscUp1": "100% Class Exp Multi",
+                "miscUp2": "40% Drop Rate Multi",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -12173,6 +12320,16 @@ export const initSpecificItemRepo = () => {
                 "order": -1,
                 "level": 1
             }),
+        new BaseItemBase("InvStorageZ", <ChestItemModel>{
+                "internalName": "InvStorageZ",
+                "displayName": "Buried Treasure Chest",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.aStorageChest,
+                "Type": "Storage",
+                "description": "Hold down to permanently add +16 Slots to your Storage Chest. Can only be used once.",
+                "order": -1,
+                "level": 1
+            }),
         new BaseItemBase("Line1", <FishingTKItemModel>{
                 "internalName": "Line1",
                 "displayName": "Copper Twine",
@@ -14292,6 +14449,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Monster Drop",
                 "description": "I guess proper dental hygiene isn't one of the requirements to becoming a Divinity. "
+            }),
+        new BaseItemBase("EmpPart", <DescItemModel>{
+                "internalName": "EmpPart",
+                "displayName": "Emperor Ribbon",
+                "sellPrice": 1000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "So, instead of taking his equipment directly, you take his ribbon... so that you can... make his equipment? Huh? "
             }),
         new BaseItemBase("LavaA1", <DescItemModel>{
                 "internalName": "LavaA1",
@@ -17064,6 +17229,29 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("ObolEmp", <ObolItemModel>{
+                "internalName": "ObolEmp",
+                "displayName": "Gilded Obol of the Emperor",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.aObolSparkle,
+                "Type": "Sparkle Obol",
+                "lvReqToCraft": 0,
+                "lvReqToEquip": 0,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 30,
+                "STR": 100,
+                "AGI": 100,
+                "WIS": 100,
+                "LUK": 100,
+                "Defence": 50,
+                "miscUp1": "10% All Stats",
+                "miscUp2": "10% Skill Efficiency",
+                "Upgrade_Slots_Left": 0,
+                "family": "Emp",
+                "rarity": "Gilded",
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("MaxCapBagT2", <CarryBagItemModel>{
                 "internalName": "MaxCapBagT2",
                 "displayName": "Miniature Mining Pouch",
@@ -18176,11 +18364,11 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Quest28", <DescItemModel>{
                 "internalName": "Quest28",
-                "displayName": "IOU one Sky Crystal",
+                "displayName": "IOU one W7 Crystal",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "Mere mortal, your meager intellect doesn't leave you with enough patience! Wait until powers even greater than myself allow me to drop the crystal to World 6. The time will come, I assure you. "
+                "description": "Victorious as you are, I cannot give you the crystal to unlock World 7 at this time. Come fight me later, and I will give to you the W7 crystal. "
             }),
         new BaseItemBase("GoldricP1", <DescItemModel>{
                 "internalName": "GoldricP1",
@@ -18342,6 +18530,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 40,
                 "miscUp1": "100% Bonus Class Exp",
                 "miscUp2": "75% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentGown4", <ArmourItemModel>{
+                "internalName": "EquipmentGown4",
+                "displayName": "Silkshard Robe",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 15,
+                "STR": 5,
+                "AGI": 5,
+                "WIS": 5,
+                "LUK": 5,
+                "Defence": 10,
+                "miscUp1": "100% Bonus Kills",
+                "miscUp2": "25% Afk Gains Multi",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -18741,6 +18950,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 30,
                 "miscUp1": "80% All Afk Gain",
                 "miscUp2": "10% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag20", <ArmourItemModel>{
+                "internalName": "EquipmentNametag20",
+                "displayName": "Deadbones Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 4,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 7,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 15,
+                "miscUp1": "25% Drop Rate Multi",
+                "miscUp2": "35% Drop Chance",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag21", <ArmourItemModel>{
+                "internalName": "EquipmentNametag21",
+                "displayName": "Treasure Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 4,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 7,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 10,
+                "Defence": 15,
+                "miscUp1": "25% Drop Chance",
+                "miscUp2": "25% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -22243,6 +22494,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Hold down on this item to change elite class within your class. Divine Knight to Blood Berserker, Beast Master to Siege Breaker, etc. "
             }),
+        new BaseItemBase("ClassSwapC", <DescItemModel>{
+                "internalName": "ClassSwapC",
+                "displayName": "Complete Class Redo Token",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "YOU MUST TAKE OFF EQUIPMENT TO USE THIS. Hold down on this item to become a Lv 1 beginner again. You can then redo the promotion quests to choose a new class! "
+            }),
         new BaseItemBase("ResetBox", <DescItemModel>{
                 "internalName": "ResetBox",
                 "displayName": "Post Office Box Reseto Magnifico",
@@ -22402,6 +22661,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
                 "description": "Restores power to the Spirit Portal in the magma rivertown, allowing travel to World 6! "
+            }),
+        new BaseItemBase("Crystal6", <DescItemModel>{
+                "internalName": "Crystal6",
+                "displayName": "Gem to W7",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Quest Item",
+                "description": "Restores power to the W7 Portal in the spirit village, allowing travel to World 7! "
             }),
         new BaseItemBase("PeanutS", <DescItemModel>{
                 "internalName": "PeanutS",
@@ -23139,6 +23406,30 @@ export const initSpecificItemRepo = () => {
                 "Type": "Usable",
                 "description": "Collect 1000 of these to unlock AFK Bones for Deathbringer! Once you have 1000, hold down on this item. You will then earn 1 Charred Bone per 1hr AFK claimed on your Deathbringer. "
             }),
+        new BaseItemBase("Quest99", <DescItemModel>{
+                "internalName": "Quest99",
+                "displayName": "Prisma Bubble",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldn't be reading this... "
+            }),
+        new BaseItemBase("Quest100", <DescItemModel>{
+                "internalName": "Quest100",
+                "displayName": "Aether Fragment",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Collect 1000 of these to unlock AFK Dust for Windwalker! Once you have 1000, hold down on this item. You will then earn 1 Aethermoon per 2hr AFK claimed on your Windwalker. "
+            }),
+        new BaseItemBase("Quest101", <DescItemModel>{
+                "internalName": "Quest101",
+                "displayName": "Arcane Rock",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down to instantly get 1 Hours of Tachyons added to the Tesseract! The amount is based on the current hourly rate shown in AFK info. You must be on your Arcane Cultist to use this. "
+            }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
                 "displayName": "Anvil Tab 2",
@@ -23599,6 +23890,54 @@ export const initSpecificItemRepo = () => {
                 "Type": "Dungeon Evaporate",
                 "description": "You shouldnt be reading this... "
             }),
+        new BaseItemBase("Tach0", <DescItemModel>{
+                "internalName": "Tach0",
+                "displayName": "Singulon",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Tach1", <DescItemModel>{
+                "internalName": "Tach1",
+                "displayName": "Doubulon",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Tach2", <DescItemModel>{
+                "internalName": "Tach2",
+                "displayName": "Verdon",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Tach3", <DescItemModel>{
+                "internalName": "Tach3",
+                "displayName": "Bludon",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Tach4", <DescItemModel>{
+                "internalName": "Tach4",
+                "displayName": "Massivon",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
+        new BaseItemBase("Tach5", <DescItemModel>{
+                "internalName": "Tach5",
+                "displayName": "Aurion",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "You shouldnt be reading this... "
+            }),
         new BaseItemBase("FoodHealth1d", <ACItemModel>{
                 "internalName": "FoodHealth1d",
                 "displayName": "Nomwich",
@@ -23622,6 +23961,48 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Dungeon Food",
                 "description": "Auto-Used when your health goes below 50%. Restores 20 HP. Has a 30 second Cooldown. "
+            }),
+        new BaseItemBase("EquipmentWandsArc0", <WeaponItemModel>{
+                "internalName": "EquipmentWandsArc0",
+                "displayName": "Arcanist Staff",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aWeapon,
+                "Type": "Wand",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.Mage,
+                "Weapon_Power": 20,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "10% Arcanist Dmg",
+                "miscUp2": "1% Extra Tachyons",
+                "Upgrade_Slots_Left": 0,
+                "Speed": 5,
+                "Reach": 80
+            }),
+        new BaseItemBase("EquipmentRingsArc0", <ArmourItemModel>{
+                "internalName": "EquipmentRingsArc0",
+                "displayName": "Cultist Ring",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aRing,
+                "Type": "Ring",
+                "lvReqToCraft": 22,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.Mage,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "5% Arcanist Acc",
+                "miscUp2": "1% Extra Tachyons",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
             }),
         new BaseItemBase("EquipmentBowsTempest0", <WeaponItemModel>{
                 "internalName": "EquipmentBowsTempest0",
@@ -27184,6 +27565,14 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("GemP36", <DescItemModel>{
+                "internalName": "GemP36",
+                "displayName": "Funny 2hr Fishy",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down to gain 2 hours of fish gains at Poppy The Kangaroo Mouse's Fish Pond! You should wait until you know what that is before using this... "
+            }),
         new BaseItemBase("GemP9", <DescItemModel>{
                 "internalName": "GemP9",
                 "displayName": "Quality Obol Stack",
@@ -28359,6 +28748,69 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "25% Dust Multi",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats120", <ArmourItemModel>{
+                "internalName": "EquipmentHats120",
+                "displayName": "Umbrella Brim",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "10% Bonus Money",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats121", <ArmourItemModel>{
+                "internalName": "EquipmentHats121",
+                "displayName": "Bloo Creamer",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "15% Skill Exp",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats122", <ArmourItemModel>{
+                "internalName": "EquipmentHats122",
+                "displayName": "Arcanist Crown",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Extra Tachyons",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -32016,7 +32468,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 12,
                     "order": 26
                 },
-                "dropChance": 1
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsZ22", <CardItemModel>{
                 "internalName": "CardsZ22",
@@ -32032,7 +32484,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 8,
                     "order": 27
                 },
-                "dropChance": 1
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsZ23", <CardItemModel>{
                 "internalName": "CardsZ23",
@@ -32048,7 +32500,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 20,
                     "order": 28
                 },
-                "dropChance": 1
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsZ24", <CardItemModel>{
                 "internalName": "CardsZ24",

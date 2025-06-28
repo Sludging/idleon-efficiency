@@ -1606,7 +1606,7 @@ export const initMapDataRepo = () => {
         new MapDataBase(266, <MapDataModel>{
                 "enemy": "w6d3",
                 "world": "Spirited Valley",
-                "map": <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Castle Interior", "id": 266},
+                "map": <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Emperor's Castle", "id": 266},
                 "portalRequirements": [0]
             }),
         new MapDataBase(267, <MapDataModel>{

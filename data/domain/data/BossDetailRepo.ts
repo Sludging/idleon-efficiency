@@ -202,6 +202,48 @@ export const initBossDetailRepo = () => {
                     <BossAttackModel>{"name": "Attack6", "damage": 50000},
                     <BossAttackModel>{"name": "Attack7", "damage": 33000}
                 ]
+            }),
+        new BossDetailsBase("Boss6A", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 2500,
+                "exp": 20000000,
+                "keys": 1,
+                "attacks": [
+                    <BossAttackModel>{"name": "Spinning Blades!", "damage": 1000},
+                    <BossAttackModel>{"name": "Toxic Deluge!", "damage": 1500},
+                    <BossAttackModel>{"name": "Guards, sieze him!", "damage": 800},
+                    <BossAttackModel>{"name": "Mudslide!", "damage": 450},
+                    <BossAttackModel>{"name": "Energy Surge!", "damage": 5000},
+                    <BossAttackModel>{"name": "filler", "damage": 400}
+                ]
+            }),
+        new BossDetailsBase("Boss6B", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 5,
+                "exp": 700000000,
+                "keys": 5,
+                "attacks": [
+                    <BossAttackModel>{"name": "Spinning Blades!", "damage": 1800},
+                    <BossAttackModel>{"name": "Toxic Deluge!", "damage": 4000},
+                    <BossAttackModel>{"name": "Guards, sieze him!", "damage": 2000},
+                    <BossAttackModel>{"name": "Mudslide!", "damage": 1500},
+                    <BossAttackModel>{"name": "Energy Surge!", "damage": 2500},
+                    <BossAttackModel>{"name": "filler", "damage": 3300}
+                ]
+            }),
+        new BossDetailsBase("Boss6C", <BossDetailsModel>{
+                "health": 1000000000,
+                "defence": 25,
+                "exp": 2000000000,
+                "keys": 70,
+                "attacks": [
+                    <BossAttackModel>{"name": "Spinning Blades!", "damage": 18000},
+                    <BossAttackModel>{"name": "Toxic Deluge!", "damage": 40000},
+                    <BossAttackModel>{"name": "Guards, sieze him!", "damage": 20000},
+                    <BossAttackModel>{"name": "Mudslide!", "damage": 15000},
+                    <BossAttackModel>{"name": "Energy Surge!", "damage": 25000},
+                    <BossAttackModel>{"name": "filler", "damage": 33000}
+                ]
             })    
 ]
 }

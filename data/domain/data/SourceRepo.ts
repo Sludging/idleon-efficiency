@@ -632,14 +632,6 @@ export const initSourceRepo = () => {
         new SourcesBase("FillerMaterial", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
-                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
-                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
                     <SourceModel>{"wikiName": "[[Fishing]]", "txtName": "Fishing"}
                 ],
                 "recipeFrom": [],
@@ -3137,9 +3129,13 @@ export const initSourceRepo = () => {
         new SourcesBase("EquipmentPunching10", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"},
-                    <SourceModel>{"wikiName": "[[Sprout Spirit|Recipe from Sprout Spirit]]", "txtName": "Sprout Spirit"}
+                    <SourceModel>{"wikiName": "[[Sprout Spirit|Recipe from Sprout Spirit]]", "txtName": "Sprout Spirit"},
+                    <SourceModel>{"wikiName": "[[RIP Tide|Recipe from RIP Tide]]", "txtName": "RIP Tide"}
                 ],
-                "recipeFrom": [<SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"}],
+                "recipeFrom": [
+                    <SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"},
+                    <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"}
+                ],
                 "questAss": []
             }),
         new SourcesBase("EquipmentSword8", <SourcesModel>{
@@ -3417,6 +3413,26 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("EquipmentHats119", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentShirts39", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentPants31", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentShoes40", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Smithing]]", "txtName": "Smithing"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("COIN", <SourcesModel>{
                 "sources": [
                     <SourceModel>{"wikiName": "[[Eldritch Croaker]]", "txtName": "Eldritch Croaker"},
@@ -3561,6 +3577,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"},
                     <SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"},
                     <SourceModel>{"wikiName": "[[Shimmer Glunko]]", "txtName": "Shimmer Glunko"},
+                    <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest(W1)|Dewdrop Bronze Chest(W1)]]",
                         "txtName": "Colosseum: Dewdrop Bronze Chest(W1)"
@@ -4349,6 +4366,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[River Spirit]]", "txtName": "River Spirit"},
                     <SourceModel>{"wikiName": "[[Baby Troll]]", "txtName": "Baby Troll"},
                     <SourceModel>{"wikiName": "[[Woodlin Spirit]]", "txtName": "Woodlin Spirit"},
+                    <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Whimsical#Bronze Chest(W6)|Whimsical Bronze Chest(W6)]]",
                         "txtName": "Colosseum: Whimsical Bronze Chest(W6)"
@@ -4373,6 +4391,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Lantern Spirit]]", "txtName": "Lantern Spirit"},
                     <SourceModel>{"wikiName": "[[Mama Troll]]", "txtName": "Mama Troll"},
                     <SourceModel>{"wikiName": "[[Leek Spirit]]", "txtName": "Leek Spirit"},
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"},
                     <SourceModel>{"wikiName": "[[Firefly]]", "txtName": "Firefly"}
                 ],
                 "recipeFrom": [],
@@ -4382,7 +4403,10 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Ceramic Spirit]]", "txtName": "Ceramic Spirit"},
-                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"}
+                    <SourceModel>{"wikiName": "[[Skydoggie Spirit]]", "txtName": "Skydoggie Spirit"},
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4392,7 +4416,10 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Crystal Candalight]]", "txtName": "Crystal Candalight"},
                     <SourceModel>{"wikiName": "[[Royal Egg]]", "txtName": "Royal Egg"},
                     <SourceModel>{"wikiName": "[[Minichief Spirit]]", "txtName": "Minichief Spirit"},
-                    <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}
+                    <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"},
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -6921,10 +6948,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("CardsZ18", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"},
-                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"}
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Kattlekruk]]", "txtName": "Kattlekruk"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -7002,12 +7026,18 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("SpiA1", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"},
+                    <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
         new SourcesBase("CardsI1", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Sprout Spirit]]", "txtName": "Sprout Spirit"},
+                    <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -7205,6 +7235,60 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Quest95", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EmpPart", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsZ21", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsZ22", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsZ23", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentCape17", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("ObolEmp", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{"wikiName": "[[Emperor]]", "txtName": "Emperor"},
+                    <SourceModel>{"wikiName": "[[Chaotic Emperor]]", "txtName": "Chaotic Emperor"},
+                    <SourceModel>{"wikiName": "[[Sovereign Emperor]]", "txtName": "Sovereign Emperor"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -14151,6 +14235,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("ClassSwapC", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardPack2", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -14227,22 +14316,27 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats118", <SourcesModel>{
+        new SourcesBase("EquipmentHats122", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest96", <SourcesModel>{
+        new SourcesBase("Quest101", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings34", <SourcesModel>{
+        new SourcesBase("ClassSwapB", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentRings32", <SourcesModel>{
+        new SourcesBase("GemP35", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("GemP25", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

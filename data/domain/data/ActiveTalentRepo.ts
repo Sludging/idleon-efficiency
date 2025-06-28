@@ -1047,6 +1047,45 @@ export const initActiveTalentRepo = () => {
                 "AFKactivity": 0
             }),
         new ActiveTalentBase(80, <ActiveTalentModel>{
+                "name": "Arcanist Form",
+                "K": 1,
+                "D": 1,
+                "s": 1,
+                "cooldown": 5,
+                "castTime": 1,
+                "manaCost": 1,
+                "inputReq": 0,
+                "AFKrange": 230,
+                "AFKtype": "buff",
+                "AFKactivity": -2
+            }),
+        new ActiveTalentBase(81, <ActiveTalentModel>{
+                "name": "Tesseract",
+                "K": 1,
+                "D": 1,
+                "s": 1,
+                "cooldown": 3,
+                "castTime": 1,
+                "manaCost": 1,
+                "inputReq": 0,
+                "AFKrange": 230,
+                "AFKtype": "buff",
+                "AFKactivity": -2
+            }),
+        new ActiveTalentBase(82, <ActiveTalentModel>{
+                "name": "Arcane Crystals",
+                "K": 1,
+                "D": 1,
+                "s": 1,
+                "cooldown": 2,
+                "castTime": 1,
+                "manaCost": 1,
+                "inputReq": 0,
+                "AFKrange": 230,
+                "AFKtype": "buff",
+                "AFKactivity": -2
+            }),
+        new ActiveTalentBase(83, <ActiveTalentModel>{
                 "name": "Roll Da Dice",
                 "K": 1,
                 "D": 1,
@@ -1059,7 +1098,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -1
             }),
-        new ActiveTalentBase(81, <ActiveTalentModel>{
+        new ActiveTalentBase(84, <ActiveTalentModel>{
                 "name": "Exp Converter",
                 "K": 1,
                 "D": 1,
@@ -1072,7 +1111,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(82, <ActiveTalentModel>{
+        new ActiveTalentBase(85, <ActiveTalentModel>{
                 "name": "Telekinetic Storage",
                 "K": 1,
                 "D": 1,
@@ -1085,7 +1124,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(83, <ActiveTalentModel>{
+        new ActiveTalentBase(86, <ActiveTalentModel>{
                 "name": "Printer Sampling",
                 "K": 1,
                 "D": 1,
@@ -1098,7 +1137,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(84, <ActiveTalentModel>{
+        new ActiveTalentBase(87, <ActiveTalentModel>{
                 "name": "Shrine Architect",
                 "K": 1,
                 "D": 1,
@@ -1111,7 +1150,7 @@ export const initActiveTalentRepo = () => {
                 "AFKtype": "buff",
                 "AFKactivity": -2
             }),
-        new ActiveTalentBase(85, <ActiveTalentModel>{
+        new ActiveTalentBase(88, <ActiveTalentModel>{
                 "name": "From Downtown",
                 "K": 1,
                 "D": 1.3,

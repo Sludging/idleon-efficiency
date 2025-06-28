@@ -821,7 +821,7 @@ export const initNinjaItemRepo = () => {
                 "name": "Mystery Fizz",
                 "x1": 30,
                 "desc": "Hold down to add this Pristine Charm to your collection in the Lobby. Click it there to see its bonus.",
-                "bonus": "}x 3rd Masterclass Resources"
+                "bonus": "}x Extra Arcane Cultist Tachyons"
             })    
 ]
 }

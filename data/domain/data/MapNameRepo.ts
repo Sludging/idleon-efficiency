@@ -272,7 +272,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(263, <MapNameModel>{"intName": "vSpiritD2", "name": "Chieftain Stairway", "id": 263}),
         new MapNameBase(264, <MapNameModel>{"intName": "vSpiritD3", "name": "Emperor's Castle Doorstep", "id": 264}),
         new MapNameBase(265, <MapNameModel>{"intName": "ColosseumF", "name": "Whimsical Colosseum", "id": 265}),
-        new MapNameBase(266, <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Castle Interior", "id": 266}),
+        new MapNameBase(266, <MapNameModel>{"intName": "vSpiritCBOSS", "name": "Emperor's Castle", "id": 266}),
         new MapNameBase(267, <MapNameModel>{"intName": "Z", "name": "Z", "id": 267}),
         new MapNameBase(268, <MapNameModel>{"intName": "Z", "name": "Z", "id": 268}),
         new MapNameBase(269, <MapNameModel>{"intName": "Z", "name": "Z", "id": 269}),

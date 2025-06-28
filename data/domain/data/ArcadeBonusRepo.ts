@@ -12,7 +12,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ Dmg"
+                "lvlUpText": "+{ Dmg",
+                "barType": -1
             }),
         new ArcadeBonusBase(1, <ArcadeBonusModel>{
                 "effect": "+{ Base Defence",
@@ -20,7 +21,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ Def"
+                "lvlUpText": "+{ Def",
+                "barType": -1
             }),
         new ArcadeBonusBase(2, <ArcadeBonusModel>{
                 "effect": "+{% Total Accuracy",
@@ -28,7 +30,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "",
-                "lvlUpText": "+{% Acc"
+                "lvlUpText": "+{% Acc",
+                "barType": -1
             }),
         new ArcadeBonusBase(3, <ArcadeBonusModel>{
                 "effect": "+{% Mining EXP gain",
@@ -36,7 +39,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Min EXP"
+                "lvlUpText": "+{% Min EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(4, <ArcadeBonusModel>{
                 "effect": "+{% Fishing EXP gain",
@@ -44,7 +48,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Fish EXP"
+                "lvlUpText": "+{% Fish EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(5, <ArcadeBonusModel>{
                 "effect": "+{% Sample Size",
@@ -52,7 +57,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Size"
+                "lvlUpText": "+{% Size",
+                "barType": -1
             }),
         new ArcadeBonusBase(6, <ArcadeBonusModel>{
                 "effect": "+{% AFK Gains Rate",
@@ -60,7 +66,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Rate"
+                "lvlUpText": "+{% Rate",
+                "barType": -1
             }),
         new ArcadeBonusBase(7, <ArcadeBonusModel>{
                 "effect": "+{ Cap for all Liquids",
@@ -68,7 +75,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{ Cap"
+                "lvlUpText": "+{ Cap",
+                "barType": -1
             }),
         new ArcadeBonusBase(8, <ArcadeBonusModel>{
                 "effect": "+{% Multikill per Tier",
@@ -76,7 +84,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Multikill"
+                "lvlUpText": "+{% Multikill",
+                "barType": -1
             }),
         new ArcadeBonusBase(9, <ArcadeBonusModel>{
                 "effect": "+{% Catching EXP gain",
@@ -84,7 +93,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Catch EXP"
+                "lvlUpText": "+{% Catch EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(10, <ArcadeBonusModel>{
                 "effect": "+{% Cash from Mobs",
@@ -92,7 +102,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Cash"
+                "lvlUpText": "+{% Cash",
+                "barType": -1
             }),
         new ArcadeBonusBase(11, <ArcadeBonusModel>{
                 "effect": "+{% Cash from Mobs",
@@ -100,7 +111,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Cash"
+                "lvlUpText": "+{% Cash",
+                "barType": -1
             }),
         new ArcadeBonusBase(12, <ArcadeBonusModel>{
                 "effect": "+{% Class EXP gain",
@@ -108,7 +120,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% EXP"
+                "lvlUpText": "+{% EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(13, <ArcadeBonusModel>{
                 "effect": "+{% Shiny Chance",
@@ -116,7 +129,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Chance"
+                "lvlUpText": "+{% Chance",
+                "barType": -1
             }),
         new ArcadeBonusBase(14, <ArcadeBonusModel>{
                 "effect": "+{% Trapping EXP",
@@ -124,7 +138,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Trap EXP"
+                "lvlUpText": "+{% Trap EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(15, <ArcadeBonusModel>{
                 "effect": "+{ Starting TD Pts",
@@ -132,7 +147,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ Worship Pts"
+                "lvlUpText": "+{ Worship Pts",
+                "barType": -1
             }),
         new ArcadeBonusBase(16, <ArcadeBonusModel>{
                 "effect": "+{ Tab 1 Talent Pt",
@@ -140,7 +156,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 10,
                 "func": "intervalAdd",
                 "type": "",
-                "lvlUpText": "+1 Pt per 10 LVs"
+                "lvlUpText": "+1 Pt per 10 LVs",
+                "barType": -1
             }),
         new ArcadeBonusBase(17, <ArcadeBonusModel>{
                 "effect": "+{ Weapon Power",
@@ -148,7 +165,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ Wep POW"
+                "lvlUpText": "+{ Wep POW",
+                "barType": -1
             }),
         new ArcadeBonusBase(18, <ArcadeBonusModel>{
                 "effect": "+{% Skill EXP gain",
@@ -156,7 +174,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% EXP"
+                "lvlUpText": "+{% EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(19, <ArcadeBonusModel>{
                 "effect": "+{ Base STR",
@@ -164,7 +183,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ STR"
+                "lvlUpText": "+{ STR",
+                "barType": -1
             }),
         new ArcadeBonusBase(20, <ArcadeBonusModel>{
                 "effect": "+{ Base AGI",
@@ -172,7 +192,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ AGI"
+                "lvlUpText": "+{ AGI",
+                "barType": -1
             }),
         new ArcadeBonusBase(21, <ArcadeBonusModel>{
                 "effect": "+{ Base WIS",
@@ -180,7 +201,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ WIS"
+                "lvlUpText": "+{ WIS",
+                "barType": -1
             }),
         new ArcadeBonusBase(22, <ArcadeBonusModel>{
                 "effect": "+{ Base LUK",
@@ -188,7 +210,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "",
-                "lvlUpText": "+{ LUK"
+                "lvlUpText": "+{ LUK",
+                "barType": -1
             }),
         new ArcadeBonusBase(23, <ArcadeBonusModel>{
                 "effect": "+{% Trapping Critters",
@@ -196,7 +219,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Critters"
+                "lvlUpText": "+{% Critters",
+                "barType": -1
             }),
         new ArcadeBonusBase(24, <ArcadeBonusModel>{
                 "effect": "+{% Worship Souls",
@@ -204,7 +228,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Souls"
+                "lvlUpText": "+{% Souls",
+                "barType": -1
             }),
         new ArcadeBonusBase(25, <ArcadeBonusModel>{
                 "effect": "+{% Refinery Speed",
@@ -212,7 +237,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Speed"
+                "lvlUpText": "+{% Speed",
+                "barType": -1
             }),
         new ArcadeBonusBase(26, <ArcadeBonusModel>{
                 "effect": "+{% Forge Capacity",
@@ -220,7 +246,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Cap"
+                "lvlUpText": "+{% Cap",
+                "barType": -1
             }),
         new ArcadeBonusBase(27, <ArcadeBonusModel>{
                 "effect": "+{% Drop Rate",
@@ -228,7 +255,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Drop"
+                "lvlUpText": "+{% Drop",
+                "barType": -1
             }),
         new ArcadeBonusBase(28, <ArcadeBonusModel>{
                 "effect": "+{% Cook SPD multi",
@@ -236,7 +264,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% SPD"
+                "lvlUpText": "+{% SPD",
+                "barType": -1
             }),
         new ArcadeBonusBase(29, <ArcadeBonusModel>{
                 "effect": "+{% Lab EXP gain",
@@ -244,7 +273,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% EXP"
+                "lvlUpText": "+{% EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(30, <ArcadeBonusModel>{
                 "effect": "+{% Breed Pet DMG",
@@ -252,7 +282,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% DMG"
+                "lvlUpText": "+{% DMG",
+                "barType": -1
             }),
         new ArcadeBonusBase(31, <ArcadeBonusModel>{
                 "effect": "+{% Nugget Regen",
@@ -260,7 +291,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Regen"
+                "lvlUpText": "+{% Regen",
+                "barType": -1
             }),
         new ArcadeBonusBase(32, <ArcadeBonusModel>{
                 "effect": "+{% Arti Find",
@@ -268,7 +300,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Chance"
+                "lvlUpText": "+{% Chance",
+                "barType": -1
             }),
         new ArcadeBonusBase(33, <ArcadeBonusModel>{
                 "effect": "+{% Sailing Loot",
@@ -276,7 +309,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Loot"
+                "lvlUpText": "+{% Loot",
+                "barType": -1
             }),
         new ArcadeBonusBase(34, <ArcadeBonusModel>{
                 "effect": "+{% W Ess gain",
@@ -284,7 +318,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% W Ess"
+                "lvlUpText": "+{% W Ess",
+                "barType": -1
             }),
         new ArcadeBonusBase(35, <ArcadeBonusModel>{
                 "effect": "+{% Jade gain",
@@ -292,7 +327,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Jade"
+                "lvlUpText": "+{% Jade",
+                "barType": -1
             }),
         new ArcadeBonusBase(36, <ArcadeBonusModel>{
                 "effect": "+{% Farming EXP",
@@ -300,7 +336,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% EXP"
+                "lvlUpText": "+{% EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(37, <ArcadeBonusModel>{
                 "effect": "+{% Divinity EXP",
@@ -308,7 +345,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% EXP"
+                "lvlUpText": "+{% EXP",
+                "barType": -1
             }),
         new ArcadeBonusBase(38, <ArcadeBonusModel>{
                 "effect": "+{% Villager XP multi",
@@ -316,7 +354,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% XP multi"
+                "lvlUpText": "+{% XP multi",
+                "barType": -1
             }),
         new ArcadeBonusBase(39, <ArcadeBonusModel>{
                 "effect": "+{% Gold Ball Gain",
@@ -324,7 +363,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Balls"
+                "lvlUpText": "+{% Balls",
+                "barType": -1
             }),
         new ArcadeBonusBase(40, <ArcadeBonusModel>{
                 "effect": "+{% Deathbringer Bones",
@@ -332,7 +372,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Bones"
+                "lvlUpText": "+{% Bones",
+                "barType": -1
             }),
         new ArcadeBonusBase(41, <ArcadeBonusModel>{
                 "effect": "+{% Equinox Fill Rate",
@@ -340,7 +381,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Fill Rate"
+                "lvlUpText": "+{% Fill Rate",
+                "barType": -1
             }),
         new ArcadeBonusBase(42, <ArcadeBonusModel>{
                 "effect": "+{% Monument AFK",
@@ -348,7 +390,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% AFK"
+                "lvlUpText": "+{% AFK",
+                "barType": -1
             }),
         new ArcadeBonusBase(43, <ArcadeBonusModel>{
                 "effect": "+{% Sigil Speed",
@@ -356,7 +399,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Speed"
+                "lvlUpText": "+{% Speed",
+                "barType": -1
             }),
         new ArcadeBonusBase(44, <ArcadeBonusModel>{
                 "effect": "+{% Construction Build",
@@ -364,7 +408,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Build Rate"
+                "lvlUpText": "+{% Build Rate",
+                "barType": -1
             }),
         new ArcadeBonusBase(45, <ArcadeBonusModel>{
                 "effect": "+{% Burger",
@@ -372,7 +417,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Burger"
+                "lvlUpText": "+{% Burger",
+                "barType": -1
             }),
         new ArcadeBonusBase(46, <ArcadeBonusModel>{
                 "effect": "+{% Total Damage",
@@ -380,7 +426,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Damage"
+                "lvlUpText": "+{% Damage",
+                "barType": -1
             }),
         new ArcadeBonusBase(47, <ArcadeBonusModel>{
                 "effect": "+{% Windwalker Dust",
@@ -388,7 +435,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Dust"
+                "lvlUpText": "+{% Dust",
+                "barType": -1
             }),
         new ArcadeBonusBase(48, <ArcadeBonusModel>{
                 "effect": "+{% Medallion Chance",
@@ -396,7 +444,8 @@ export const initArcadeBonusRepo = () => {
                 "x2": 0,
                 "func": "add",
                 "type": "%",
-                "lvlUpText": "+{% Chance"
+                "lvlUpText": "+{% Chance",
+                "barType": -1
             }),
         new ArcadeBonusBase(49, <ArcadeBonusModel>{
                 "effect": "+{% Breedability Rate",
@@ -404,7 +453,53 @@ export const initArcadeBonusRepo = () => {
                 "x2": 100,
                 "func": "decay",
                 "type": "%",
-                "lvlUpText": "+{% Breed Rate"
+                "lvlUpText": "+{% Breed Rate",
+                "barType": -1
+            }),
+        new ArcadeBonusBase(50, <ArcadeBonusModel>{
+                "effect": "+{% Arcane Tachyons",
+                "x1": 1,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Tachyons",
+                "barType": 17
+            }),
+        new ArcadeBonusBase(51, <ArcadeBonusModel>{
+                "effect": "+{% Emperor Bonuses",
+                "x1": 0.2,
+                "x2": 0,
+                "func": "add",
+                "type": "%",
+                "lvlUpText": "+{% Bonus",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(52, <ArcadeBonusModel>{
+                "effect": "+{% Sneaking XP multi",
+                "x1": 100,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP multi",
+                "barType": 29
+            }),
+        new ArcadeBonusBase(53, <ArcadeBonusModel>{
+                "effect": "+{% Summon XP multi",
+                "x1": 100,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP multi",
+                "barType": 23
+            }),
+        new ArcadeBonusBase(54, <ArcadeBonusModel>{
+                "effect": "+{% Prisma Bonuses",
+                "x1": 10,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Bonus",
+                "barType": 21
             })    
 ]
 }

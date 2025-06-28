@@ -107,7 +107,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(11, <CompanionModel>{
                 "id": "slimeBz",
-                "desc": "You really have one of only 92 in the game...",
+                "desc": "Only 100 of these exist in IdleOn...",
                 "bonus": 10,
                 "x1": -48,
                 "x2": 0,
@@ -257,6 +257,87 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -33,
                 "x4": 500
+            }),
+        new CompanionBase(28, <CompanionModel>{
+                "id": "w7d1",
+                "desc": "Bababooey!",
+                "bonus": 1,
+                "x1": -30,
+                "x2": 0,
+                "x3": -48,
+                "x4": 500
+            }),
+        new CompanionBase(29, <CompanionModel>{
+                "id": "Pet0",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": 6,
+                "x2": 0,
+                "x3": -8,
+                "x4": 100
+            }),
+        new CompanionBase(30, <CompanionModel>{
+                "id": "Pet1",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": 4,
+                "x2": 0,
+                "x3": -5,
+                "x4": 100
+            }),
+        new CompanionBase(31, <CompanionModel>{
+                "id": "Pet2",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": 2,
+                "x2": 0,
+                "x3": -8,
+                "x4": 100
+            }),
+        new CompanionBase(32, <CompanionModel>{
+                "id": "Pet4",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": -2,
+                "x2": 0,
+                "x3": -13,
+                "x4": 100
+            }),
+        new CompanionBase(33, <CompanionModel>{
+                "id": "Pet5",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": -2,
+                "x2": 0,
+                "x3": -10,
+                "x4": 100
+            }),
+        new CompanionBase(34, <CompanionModel>{
+                "id": "Pet6",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": 2,
+                "x2": 0,
+                "x3": -9,
+                "x4": 100
+            }),
+        new CompanionBase(35, <CompanionModel>{
+                "id": "Pet8",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": -5,
+                "x2": 0,
+                "x3": -13,
+                "x4": 100
+            }),
+        new CompanionBase(36, <CompanionModel>{
+                "id": "Pet11",
+                "desc": "Bababooey!",
+                "bonus": 3,
+                "x1": -4,
+                "x2": 0,
+                "x3": -11,
+                "x4": 100
             })    
 ]
 }

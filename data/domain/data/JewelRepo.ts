@@ -302,6 +302,48 @@ export const initJewelRepo = () => {
                 ],
                 "name": "Pure Opal Rhombol",
                 "bonusGiven": 10
+            }),
+        new JewelBase(21, <JewelModel>{
+                "x": 1815,
+                "y": 96,
+                "range": 100,
+                "effect": "+}% extra Deathbringer Bones. @ This bonus always has a 100px connection range no matter what!",
+                "description": "Boosts entire Lab",
+                "requirements": [
+                    <ComponentModel>{"item": "SpiB2b", "quantity": 1000},
+                    <MealComponentModel>{"mealNo": "58", "quantity": 10000000},
+                    <SpiceComponentModel>{"spiceNo": "21", "quantity": 10000}
+                ],
+                "name": "Deadly Wrath Jewel",
+                "bonusGiven": 50
+            }),
+        new JewelBase(22, <JewelModel>{
+                "x": 1728,
+                "y": 421,
+                "range": 100,
+                "effect": "+}% extra Windwalker Dust. @ This bonus always has a 100px connection range no matter what!",
+                "description": "Boosts entire Lab",
+                "requirements": [
+                    <ComponentModel>{"item": "SpiB2b", "quantity": 1000},
+                    <MealComponentModel>{"mealNo": "58", "quantity": 10000000},
+                    <SpiceComponentModel>{"spiceNo": "21", "quantity": 10000}
+                ],
+                "name": "North Winds Jewel",
+                "bonusGiven": 50
+            }),
+        new JewelBase(23, <JewelModel>{
+                "x": 2042,
+                "y": 410,
+                "range": 100,
+                "effect": "+}% extra Arcane Cultist Tachyons. @ This bonus always has a 100px connection range no matter what!",
+                "description": "Boosts entire Lab",
+                "requirements": [
+                    <ComponentModel>{"item": "SpiB2b", "quantity": 1000},
+                    <MealComponentModel>{"mealNo": "58", "quantity": 10000000},
+                    <SpiceComponentModel>{"spiceNo": "21", "quantity": 10000}
+                ],
+                "name": "Eternal Energy Jewel",
+                "bonusGiven": 50
             })    
 ]
 }

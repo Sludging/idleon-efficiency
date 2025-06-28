@@ -2137,20 +2137,20 @@ export const initTaskDescriptionRepo = () => {
         new TaskDescriptionBase(112, <TaskDescriptionModel>{
                 "name": "Pillaging The Emperor!",
                 "description": "}",
-                "extraStr": "The Emperor's Castle has not yet been discovered...|Defeat Kattlekruk without letting moles heal him more than 5 times|Defeat Kattlekruk on 6 players, in order, starting with the 1st|Kill Chaotic Kattlekruk.|Kill Chaotic Kattlekruk without letting moles heal more than 3 times.|Defeat Chaotic Kattlekruk within 30 seconds of entering.|Defeat Chaotic Kattlekruk on 7 players, in order from the 1st|Defeat Nightmare Kattlekruk, the scariest boss of all time.|Defeat Nightmare Kattlekruk before he heals even once from moles|Defeat Nightmare Kattlekruk on 10 players, in order from the 1st",
+                "extraStr": "Defeat the Emperor on his own sacred Castle Grounds|Reach Showdown 3 by defeating the Emperor twice|Defeat the Emperor on 3 players, in order, starting with the 1st|Reach Showdown 5 by defeating the Emperor twice.|Reach Showdown 10 by defeating the Emperor nine times.|Reach Showdown 15 by defeating the Emperor fourteen times.|Reach Showdown 21 by defeating the Emperor twenty times|Reach Showdown 50 by defeating the Emperor fourty nine times|Reach Showdown 75 by defeating the Emperor seventy four times|Reach Showdown 100 by defeating the Emperor ninety nine times",
                 "number1": 10,
                 "descLine2": "2|1|Kattlekruk's demeanor gives you the feeling there are powers greater than the Gods",
                 "numbers": [
                     1,
                     1,
-                    6,
+                    3,
                     1,
                     1,
                     1,
-                    7,
                     1,
                     1,
-                    10
+                    1,
+                    1
                 ]
             }),
         new TaskDescriptionBase(113, <TaskDescriptionModel>{
