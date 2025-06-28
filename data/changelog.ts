@@ -12,6 +12,7 @@ export const changelogData: ChangelogEntryData[] = [
     date: "June 28, 2025",
     changes: [
       "Add tesseract page to track tesseract upgrades.",
+      "Add long overdue display of new player inventory bags."
     ]
   },
   {
