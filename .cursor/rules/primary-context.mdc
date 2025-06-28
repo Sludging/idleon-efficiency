@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Primary Context
+
+ALWAYS reference these key documentation files when working on this codebase:
+
+- **`docs/CODEBASE_OVERVIEW.md`** - Technical architecture, constraints, development workflow, file structure, and external dependencies
+- **`docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md`** - Step-by-step guide for implementing new game features, including prerequisites, tasks, and testing requirements
+
+# Additional Info
+- This is a reverse-engineering project for the idle MMO "Legends of Idleon"
+- Game mechanics must be visually verified against the actual running game
+- Never guess or assume game calculations - always verify
+- Data sync from external WikBot project using: `cp -r ../IdleonWikiBot/exported/ts/* data/domain/`
+
+@docs/CODEBASE_OVERVIEW.md
+@docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md
