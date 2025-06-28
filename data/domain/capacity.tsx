@@ -152,7 +152,10 @@ export const playerInventoryBagMapping = [
     ["105", "1", "InvBag105"],
     ["106", "1", "InvBag106"],
     ["107", "1", "InvBag107"],
-    ["108", "1", "InvBag108"]
+    ["108", "1", "InvBag108"],
+    ["113", "1", "InvBag113"],
+    ["114", "1", "InvBag114"],
+    ["112", "1", "InvBag112"],
 ];
 
 export const CapacityConst = {
