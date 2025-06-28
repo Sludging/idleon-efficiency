@@ -7,6 +7,14 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.40",
+    title: "Update 2.40",
+    date: "June 28, 2025",
+    changes: [
+      "Add data and assets for update 2.40.",
+    ]
+  },
+  {
     version: "1.2.37-v2",
     title: "Compass",
     date: "May 31, 2025",
