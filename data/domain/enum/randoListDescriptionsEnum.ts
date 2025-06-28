@@ -111,5 +111,6 @@ export enum RandoListDescriptionsEnum {
     CompassAbominationUpgrades = "CompassAbominationUpgrades",
     dk31 = "dk31",
     dk32 = "dk32",
-    dk33 = "dk33"
+    dk33 = "dk33",
+    dk34 = "dk34"
 }

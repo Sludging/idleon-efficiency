@@ -2710,7 +2710,7 @@ export const initNpcRepo = () => {
                     },
                     "Slovakian Scare": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "It was a giant house with... legs or something. I think it only shows up at the top of each hour but I know it exists! Please go prove I'm not crazy. <br> QUEST:Find the house monster in the Birch Grove.",
+                        "DialogueText": "It was a giant house with... legs or something. I think it only shows up at the birch grove below the Owl... <br> QUEST:Find the house monster in the Birch Grove.",
                         "NextIndex": 19,
                         "Name": "Slovakian Scare",
                         "ConsumeItems": false,
@@ -2852,7 +2852,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "It was a giant house with... legs or something. I think it only shows up at the top of each hour but I know it exists! Please go prove I'm not crazy. <br> QUEST:Find the house monster in the Birch Grove.",
+                        "DialogueText": "It was a giant house with... legs or something. I think it only shows up at the birch grove below the Owl... <br> QUEST:Find the house monster in the Birch Grove.",
                         "NextIndex": 19,
                         "Name": "Slovakian Scare"
                     },
@@ -4866,7 +4866,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "More like 'Sleepius' lmao": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "mmm... Kebaaaabs crabby cakes... <br> mmmmmmm... yummmmmmy... <br> zzzzZZzzzzZZZZzz... <br> QUEST:Wake up the Special-Class giver.",
+                        "DialogueText": "mmm... Kebaaaabs crabby cakes... <br> mmmmmmm... yummmmmmy... <br> zzzzZZzzzzZZZZzz... <br> QUEST:Bring 100 kebabs from the Town Shop and 50 Crabby Cakey from defeating crabcakes.",
                         "NextIndex": 3,
                         "Name": "More like 'Sleepius' lmao",
                         "ConsumeItems": false,
@@ -4907,7 +4907,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "mmm... Kebaaaabs crabby cakes... <br> mmmmmmm... yummmmmmy... <br> zzzzZZzzzzZZZZzz... <br> QUEST:Wake up the Special-Class giver.",
+                        "DialogueText": "mmm... Kebaaaabs crabby cakes... <br> mmmmmmm... yummmmmmy... <br> zzzzZZzzzzZZZZzz... <br> QUEST:Bring 100 kebabs from the Town Shop and 50 Crabby Cakey from defeating crabcakes.",
                         "NextIndex": 3,
                         "Name": "More like 'Sleepius' lmao"
                     },

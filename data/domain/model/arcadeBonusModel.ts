@@ -6,5 +6,6 @@ export interface ArcadeBonusModel {
     x2: number,
     func: string,
     type: string,
-    lvlUpText: string
+    lvlUpText: string,
+    barType: number
 }

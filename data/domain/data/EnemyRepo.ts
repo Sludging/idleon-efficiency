@@ -3568,7 +3568,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 3500,
                     "ExpType": 0,
-                    "Defence": 1500,
+                    "Defence": 2500,
                     "MoveSPEED": 6,
                     "Damages": [2500, 1],
                     "DefFor0": 3001.06
@@ -6087,6 +6087,41 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("w7d1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "RIP Tide",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 89,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 88,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 45,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1e+13,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 250000000,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 3,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 65000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "SpiA1", "quantity": 1, "chance": 0.16, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsI1", "quantity": 1, "chance": 2.5e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes6", "quantity": 4, "chance": 2e-08, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.0025, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("mushR", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Red Mushroom",
@@ -6217,7 +6252,7 @@ export const initEnemyRepo = () => {
                     "MonsterFace": 48,
                     "MonsterOffsetX": 38,
                     "MonsterOffsetY": 47,
-                    "HeightOfMonster": 68,
+                    "HeightOfMonster": 56,
                     "MonsterMoving": 1,
                     "MovingFrame": 8,
                     "RespawnTime": 60,
@@ -6227,7 +6262,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 6000,
                     "ExpType": 0,
-                    "Defence": 100,
+                    "Defence": 2600,
                     "MoveSPEED": 4,
                     "Damages": [3000, 1],
                     "DefFor0": 3563.92
@@ -7138,9 +7173,15 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsZ18", "quantity": 1, "chance": 0.0008, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 1e-05, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "EmpPart", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ21", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ22", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ23", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape17", "quantity": 1, "chance": 2.5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolEmp", "quantity": 1, "chance": 4e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -7151,7 +7192,20 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 2500,
+                    "exp": 20000000,
+                    "keys": 1,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Spinning Blades!", "damage": 1000},
+                        <BossAttackModel>{"name": "Toxic Deluge!", "damage": 1500},
+                        <BossAttackModel>{"name": "Guards, sieze him!", "damage": 800},
+                        <BossAttackModel>{"name": "Mudslide!", "damage": 450},
+                        <BossAttackModel>{"name": "Energy Surge!", "damage": 5000},
+                        <BossAttackModel>{"name": "filler", "damage": 400}
+                    ]
+                }
             }),
         new EnemyBase("Boss6B", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -7177,10 +7231,16 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 5000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 3.5e-05, "questLink": "N/A"}
+                        <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EmpPart", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ21", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ22", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ23", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape17", "quantity": 1, "chance": 2.5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolEmp", "quantity": 1, "chance": 4e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -7191,7 +7251,20 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 5,
+                    "exp": 700000000,
+                    "keys": 5,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Spinning Blades!", "damage": 1800},
+                        <BossAttackModel>{"name": "Toxic Deluge!", "damage": 4000},
+                        <BossAttackModel>{"name": "Guards, sieze him!", "damage": 2000},
+                        <BossAttackModel>{"name": "Mudslide!", "damage": 1500},
+                        <BossAttackModel>{"name": "Energy Surge!", "damage": 2500},
+                        <BossAttackModel>{"name": "filler", "damage": 3300}
+                    ]
+                }
             }),
         new EnemyBase("Boss6C", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
@@ -7217,10 +7290,16 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 20000000, "chance": 1, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 2, "chance": 0.4, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.08, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "FillerMaterial", "quantity": 1, "chance": 0.0004, "questLink": "N/A"}
+                        <CoinDropModel>{"item": "COIN", "quantity": 1000000, "chance": 1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EmpPart", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ21", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ22", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ23", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentCape17", "quantity": 1, "chance": 2.5e-05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "ObolEmp", "quantity": 1, "chance": 4e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable30", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable31", "quantity": 2, "chance": 1, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable32", "quantity": 2, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -7231,7 +7310,20 @@ export const initEnemyRepo = () => {
                     "crystalName": undefined,
                     "hasCard": true
                 },
-                "bossData": undefined
+                "bossData": <BossDetailsModel>{
+                    "health": 1000000000,
+                    "defence": 25,
+                    "exp": 2000000000,
+                    "keys": 70,
+                    "attacks": [
+                        <BossAttackModel>{"name": "Spinning Blades!", "damage": 18000},
+                        <BossAttackModel>{"name": "Toxic Deluge!", "damage": 40000},
+                        <BossAttackModel>{"name": "Guards, sieze him!", "damage": 20000},
+                        <BossAttackModel>{"name": "Mudslide!", "damage": 15000},
+                        <BossAttackModel>{"name": "Energy Surge!", "damage": 25000},
+                        <BossAttackModel>{"name": "filler", "damage": 33000}
+                    ]
+                }
             }),
         new EnemyBase("poopBig", <EnemyModel>{
                 "details": <EnemyDetailsModel>{

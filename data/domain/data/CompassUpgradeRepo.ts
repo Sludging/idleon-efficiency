@@ -2570,6 +2570,36 @@ export const initCompassUpgradeRepo = () => {
                 "x6": 0,
                 "description": "You can open portals to the next world by defeating enough Abominations. The amount is shown above each town portal!",
                 "upgradeType": "Unknown"
+            }),
+        new CompassUpgradeBase(171, <CompassUpgradeModel>{
+                "name": "Stop Drop and Roll",
+                "baseCost": 5000,
+                "costMult": 1.1,
+                "dustType": 0,
+                "maxLevel": 1,
+                "bonusValue": 1,
+                "x2": 0,
+                "x3": 637,
+                "x4": 368,
+                "x5": 0,
+                "x6": 0,
+                "description": "You can now toggle Tempest drops. Just click off the TOGGLE button found in the compass upgrade description!",
+                "upgradeType": "Unknown"
+            }),
+        new CompassUpgradeBase(172, <CompassUpgradeModel>{
+                "name": "Grumblo's Guarantee",
+                "baseCost": 20000,
+                "costMult": 1.1,
+                "dustType": 0,
+                "maxLevel": 1,
+                "bonusValue": 1,
+                "x2": 0,
+                "x3": 666,
+                "x4": 286,
+                "x5": 0,
+                "x6": 0,
+                "description": "You can now GUARANTEE a Tempest stone to succeed by dragging a stack of 500 at once. This will use up 500 stones.",
+                "upgradeType": "Unknown"
             })    
 ]
 }

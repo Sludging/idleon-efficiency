@@ -722,8 +722,8 @@ export const initTomeRepo = () => {
         new TomeBase(89, <TomeModel>{
                 "name": "Best Wisdom Monument Round 膛",
                 "keyQty": 18,
-                "scalingType": TomeScalingEnum.decay,
-                "totalVal": 250,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 350,
                 "decimalDisplay": undefined,
                 "desc": "Wisdom Monument is the 13th Cavern in The Hole."
             }),
@@ -766,6 +766,14 @@ export const initTomeRepo = () => {
                 "totalVal": 50,
                 "decimalDisplay": undefined,
                 "desc": "Yea nah, I aint snitchin'. This is a SECRET mode."
+            }),
+        new TomeBase(95, <TomeModel>{
+                "name": "Spirited Valley Emperor Boss Kills 膛",
+                "keyQty": 100,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": "This counts your current Showdown for the Emperor boss in World 6, not the total amount of kills."
             })    
 ]
 }

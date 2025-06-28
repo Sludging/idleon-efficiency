@@ -358,49 +358,49 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Adds a new bonus type to your crop scientist! Specifically '+1% Drop Rate' per Crop after 100! So having 105 crops would only give +5%"
             }),
         new JadeUpgradeBase(39, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Emperor Season Pass",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 39,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates there'll be more floors to sneak up to as well!"
+                "bonus": "There is now a 50% chance to get +2 visits to the Emperor every day, and your maximum visits goes up from 6 to 11"
             }),
         new JadeUpgradeBase(40, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 39,
+                "imageId": 40,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, specifically the sneaking related updates!"
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates there'll be more floors to sneak up to as well!"
             }),
         new JadeUpgradeBase(41, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 39,
+                "imageId": 40,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, specifically the sneaking related updates!"
             }),
         new JadeUpgradeBase(42, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 39,
+                "imageId": 40,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+            }),
+        new JadeUpgradeBase(43, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 40,
                 "filler1": "filler",
                 "filler2": "filler",
                 "bonus": "This bonus isn't out yet. 'nuff said."
-            }),
-        new JadeUpgradeBase(43, <JadeUpgradeModel>{
-                "name": "IDK YET",
-                "costA": 500,
-                "costB": 1,
-                "imageId": 39,
-                "filler1": "filler",
-                "filler2": "filler",
-                "bonus": "Idk yet"
             }),
         new JadeUpgradeBase(44, <JadeUpgradeModel>{
                 "name": "IDK YET",
