@@ -1,0 +1,3561 @@
+{
+  "metadata": {
+    "saveName": "sludger-20250628",
+    "generatedAt": "2025-06-28T08:59:33.520Z",
+    "version": "1.0.0",
+    "domain": "tesseract"
+  },
+  "summary": {
+    "upgradesCount": 63,
+    "activeUpgradesCount": 12,
+    "unlockedUpgradesCount": 12,
+    "maxedUpgradesCount": 2,
+    "totalTesseractLevel": 182
+  },
+  "upgradeBonuses": [
+    {
+      "id": 0,
+      "name": "Arcanist Damage",
+      "level": 44,
+      "unlocked": true,
+      "bonus": 44,
+      "description": "+44 Base Damage in Arcanist Form"
+    },
+    {
+      "id": 1,
+      "name": "Arcanist Accuracy",
+      "level": 26,
+      "unlocked": true,
+      "bonus": 26,
+      "description": "+26 Base Accuracy in Arcanist Form"
+    },
+    {
+      "id": 2,
+      "name": "Arcanist Defence",
+      "level": 21,
+      "unlocked": true,
+      "bonus": 21,
+      "description": "+21 Base Defence in Arcanist Form"
+    },
+    {
+      "id": 3,
+      "name": "The Prisma Bubble is Real",
+      "level": 1,
+      "unlocked": true,
+      "bonus": 1,
+      "description": "While in Arcanist Form, 1 in 3921 mobs drop Prisma Bubbles"
+    },
+    {
+      "id": 4,
+      "name": "Arcanist Cataclysm",
+      "level": 6,
+      "unlocked": true,
+      "bonus": 6,
+      "description": "+6% Total Damage in Arcanist Form"
+    },
+    {
+      "id": 5,
+      "name": "Wand Drops",
+      "level": 17,
+      "unlocked": true,
+      "bonus": 85,
+      "description": "Mobs can drop Arcanist Weapons up to 85% Quality"
+    },
+    {
+      "id": 6,
+      "name": "Arcanist Damage II",
+      "level": 32,
+      "unlocked": true,
+      "bonus": 96,
+      "description": "+96 Base Damage in Arcanist Form"
+    },
+    {
+      "id": 7,
+      "name": "Tenteyecle Nostalgia",
+      "level": 21,
+      "unlocked": true,
+      "bonus": 42,
+      "description": "Tenteyecle now works again, but only has a 42% chance"
+    },
+    {
+      "id": 8,
+      "name": "Arcanist Crits",
+      "level": 4,
+      "unlocked": true,
+      "bonus": 4,
+      "description": "+4% Critical Hit chance in Arcanist Form"
+    },
+    {
+      "id": 9,
+      "name": "Arcanist Accuracy II",
+      "level": 7,
+      "unlocked": true,
+      "bonus": 14,
+      "description": "+14 Base Accuracy in Arcanist Form"
+    },
+    {
+      "id": 10,
+      "name": "World Ender",
+      "level": 1,
+      "unlocked": true,
+      "bonus": 1,
+      "description": "Defeating the World Boss now unlocks the next world"
+    },
+    {
+      "id": 11,
+      "name": "Arcanist Defence II",
+      "level": 2,
+      "unlocked": true,
+      "bonus": 4,
+      "description": "+4 Base Defence in Arcanist Form"
+    },
+    {
+      "id": 12,
+      "name": "Singulon Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Arcanist Damage per POW 10 Purple Tachyon owned"
+    },
+    {
+      "id": 13,
+      "name": "Arcane Charging",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Arcane Crystals take 0 kills to charge instead of 200"
+    },
+    {
+      "id": 14,
+      "name": "Arcanist Supercharge",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Critical Damage in Arcanist Form"
+    },
+    {
+      "id": 15,
+      "name": "Arcanist Damage III",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Damage in Arcanist Form"
+    },
+    {
+      "id": 16,
+      "name": "Spheres of Gold",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% extra Gold Balls earned in the Arcade"
+    },
+    {
+      "id": 17,
+      "name": "Ripple in Spacetime",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Extra Tachyons"
+    },
+    {
+      "id": 18,
+      "name": "Parallel Statues",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "0% chance for Statues to drop with 2x Quantity"
+    },
+    {
+      "id": 19,
+      "name": "Arcanist Accuracy III",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Accuracy in Arcanist Form"
+    },
+    {
+      "id": 20,
+      "name": "Arcane Basics",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Basic attacks now do Arcane damage"
+    },
+    {
+      "id": 21,
+      "name": "Fastcasting",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% faster Attack Speed while in Arcanist Form"
+    },
+    {
+      "id": 22,
+      "name": "Arcanist of All Trades",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Defence and Accuracy in Arcanist Form"
+    },
+    {
+      "id": 23,
+      "name": "Ring Drops",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Mobs can drop Arcanist Rings up to 0% Quality"
+    },
+    {
+      "id": 24,
+      "name": "Arcanist Cataclysm II",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Total Damage in Arcanist Form"
+    },
+    {
+      "id": 25,
+      "name": "Ethereal Opals",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Opals to give to villagers"
+    },
+    {
+      "id": 26,
+      "name": "Inviting a Plus One",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% chance for crystals to spawn +1 more Arcane Mob"
+    },
+    {
+      "id": 27,
+      "name": "Doubulon Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Arcanist Accuracy per POW 10 Brown Tachyons owned"
+    },
+    {
+      "id": 28,
+      "name": "Jewel of Deadly Wrath",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Permanently unlocks a new Jewel in the Lab"
+    },
+    {
+      "id": 29,
+      "name": "Arcanist Defence III",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Defence in Arcanist Form"
+    },
+    {
+      "id": 30,
+      "name": "Parallel Golden Food",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "0% chance for Golden Food to drop with 2x Quantity"
+    },
+    {
+      "id": 31,
+      "name": "Arcanist Cataclysm III",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Total Damage in Arcanist Form"
+    },
+    {
+      "id": 32,
+      "name": "Villager Indoctrination",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "1.00x Villager EXP gain in World 5"
+    },
+    {
+      "id": 33,
+      "name": "My Talents, and Mine Alone",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Talent PTS for the Arcane Cultist class only"
+    },
+    {
+      "id": 34,
+      "name": "Verdon Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Extra Tachyon per POW 10 Green Tachyons owned"
+    },
+    {
+      "id": 35,
+      "name": "Jewel of the North Winds",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Permanently unlocks a new Jewel in the Lab"
+    },
+    {
+      "id": 36,
+      "name": "Arcanist Damage IV",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Damage in Arcanist Form"
+    },
+    {
+      "id": 37,
+      "name": "Eternal Stream",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "1.00x higher Equinox Bar Fill Rate"
+    },
+    {
+      "id": 38,
+      "name": "Arcanist Accuracy IV",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Accuracy in Arcanist Form"
+    },
+    {
+      "id": 39,
+      "name": "Fractal Tesseract",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "1.00x higher bonuses from most Tesseract upgrades"
+    },
+    {
+      "id": 40,
+      "name": "Astrology Cultism",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Seraph Cosmos's multiplier is now 0x instead of 1.10x"
+    },
+    {
+      "id": 41,
+      "name": "Bludon Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Arcanist DEF per POW 10 Red Tachyons owned"
+    },
+    {
+      "id": 42,
+      "name": "Arcanist Cataclysm IV",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Total Damage in Arcanist Form"
+    },
+    {
+      "id": 43,
+      "name": "Jewel of Eternal Energy",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Permanently unlocks a new Jewel in the Lab"
+    },
+    {
+      "id": 44,
+      "name": "Arcanist of All Trades II",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Defence and Accuracy in Arcanist Form"
+    },
+    {
+      "id": 45,
+      "name": "Pinnacle of Prisma",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "Prisma Bubbles give 0x higher bonuses instead of 2.00x"
+    },
+    {
+      "id": 46,
+      "name": "Arcanist Defence IV",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Defence in Arcanist Form"
+    },
+    {
+      "id": 47,
+      "name": "Gambit Grandmaster",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "1.00x higher total PTS in the Gambit Cavern"
+    },
+    {
+      "id": 48,
+      "name": "Vicar of the Emperor",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "All bonuses from defeating The Emperor are 1.00x higher"
+    },
+    {
+      "id": 49,
+      "name": "Massivon Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% cheaper upgrades per POW 10 Silver Tachyons owned"
+    },
+    {
+      "id": 50,
+      "name": "Arcanist Damage V",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Damage in Arcanist Form"
+    },
+    {
+      "id": 51,
+      "name": "Drop Rate Crossfire",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "0% of your Drop Rate affects Prisma Bubble drop chance"
+    },
+    {
+      "id": 52,
+      "name": "Arcanist Accuracy V",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Base Accuracy in Arcanist Form"
+    },
+    {
+      "id": 53,
+      "name": "Arcanist Cataclysm V",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Total Damage in Arcanist Form"
+    },
+    {
+      "id": 54,
+      "name": "Endless Reductions",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% cheaper Summoning upgrades per Endless Mode Victory"
+    },
+    {
+      "id": 55,
+      "name": "Arcanist of All Trades III",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Defence and Accuracy in Arcanist Form"
+    },
+    {
+      "id": 56,
+      "name": "Aurion Hoarding",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0% Extra Tachyons per POW 10 Gold Tachyons owned"
+    },
+    {
+      "id": 57,
+      "name": "Universe Talent",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "+0 Talent LVs for all characters, always!"
+    },
+    {
+      "id": 58,
+      "name": "Beyond All Limits",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "The max Arcane Crystal bonus is +0x higher"
+    },
+    {
+      "id": 59,
+      "name": "Boundless Energy",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "These pages are missing..."
+    },
+    {
+      "id": 60,
+      "name": "Boundless Energy",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "These pages are missing..."
+    },
+    {
+      "id": 61,
+      "name": "Boundless Energy",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "These pages are missing..."
+    },
+    {
+      "id": 62,
+      "name": "Boundless Energy",
+      "level": 0,
+      "unlocked": false,
+      "bonus": 0,
+      "description": "These pages are missing..."
+    }
+  ],
+  "upgradeCosts": [
+    {
+      "id": 0,
+      "name": "Arcanist Damage",
+      "level": 44,
+      "nextLevelCost": 7048.565717720349,
+      "costToMax": null
+    },
+    {
+      "id": 1,
+      "name": "Arcanist Accuracy",
+      "level": 26,
+      "nextLevelCost": 1680.7920602362362,
+      "costToMax": null
+    },
+    {
+      "id": 2,
+      "name": "Arcanist Defence",
+      "level": 21,
+      "nextLevelCost": 1335.6657045672353,
+      "costToMax": null
+    },
+    {
+      "id": 4,
+      "name": "Arcanist Cataclysm",
+      "level": 6,
+      "nextLevelCost": 8623.079039164839,
+      "costToMax": null
+    },
+    {
+      "id": 5,
+      "name": "Wand Drops",
+      "level": 17,
+      "nextLevelCost": 6309.661282111239,
+      "costToMax": null
+    },
+    {
+      "id": 6,
+      "name": "Arcanist Damage II",
+      "level": 32,
+      "nextLevelCost": 8253.011916645,
+      "costToMax": null
+    },
+    {
+      "id": 7,
+      "name": "Tenteyecle Nostalgia",
+      "level": 21,
+      "nextLevelCost": 50088.92956188023,
+      "costToMax": 308420983.3973935
+    },
+    {
+      "id": 8,
+      "name": "Arcanist Crits",
+      "level": 4,
+      "nextLevelCost": 1217.2932267753404,
+      "costToMax": 38130158373902.98
+    },
+    {
+      "id": 9,
+      "name": "Arcanist Accuracy II",
+      "level": 7,
+      "nextLevelCost": 1104.7552137237503,
+      "costToMax": null
+    },
+    {
+      "id": 11,
+      "name": "Arcanist Defence II",
+      "level": 2,
+      "nextLevelCost": 953.835880786862,
+      "costToMax": null
+    },
+    {
+      "id": 12,
+      "name": "Singulon Hoarding",
+      "level": 0,
+      "nextLevelCost": 960.619331140609,
+      "costToMax": null
+    },
+    {
+      "id": 13,
+      "name": "Arcane Charging",
+      "level": 0,
+      "nextLevelCost": 1748.3271826759083,
+      "costToMax": 139860216620636670
+    },
+    {
+      "id": 14,
+      "name": "Arcanist Supercharge",
+      "level": 0,
+      "nextLevelCost": 2597.514671404206,
+      "costToMax": null
+    },
+    {
+      "id": 15,
+      "name": "Arcanist Damage III",
+      "level": 0,
+      "nextLevelCost": 4322.2644132166,
+      "costToMax": null
+    },
+    {
+      "id": 16,
+      "name": "Spheres of Gold",
+      "level": 0,
+      "nextLevelCost": 6742.732484617895,
+      "costToMax": null
+    },
+    {
+      "id": 17,
+      "name": "Ripple in Spacetime",
+      "level": 0,
+      "nextLevelCost": 9057.737304336708,
+      "costToMax": null
+    },
+    {
+      "id": 18,
+      "name": "Parallel Statues",
+      "level": 0,
+      "nextLevelCost": 12154.899092271195,
+      "costToMax": 1173691544776.5232
+    },
+    {
+      "id": 19,
+      "name": "Arcanist Accuracy III",
+      "level": 0,
+      "nextLevelCost": 22121.916347933577,
+      "costToMax": null
+    },
+    {
+      "id": 20,
+      "name": "Arcane Basics",
+      "level": 0,
+      "nextLevelCost": 65733.69429100263,
+      "costToMax": 65733.69429100263
+    },
+    {
+      "id": 21,
+      "name": "Fastcasting",
+      "level": 0,
+      "nextLevelCost": 39650.56439633278,
+      "costToMax": null
+    },
+    {
+      "id": 22,
+      "name": "Arcanist of All Trades",
+      "level": 0,
+      "nextLevelCost": 44435.97734071778,
+      "costToMax": null
+    },
+    {
+      "id": 23,
+      "name": "Ring Drops",
+      "level": 0,
+      "nextLevelCost": 55456.09972121579,
+      "costToMax": null
+    },
+    {
+      "id": 24,
+      "name": "Arcanist Cataclysm II",
+      "level": 0,
+      "nextLevelCost": 61519.29995740206,
+      "costToMax": null
+    },
+    {
+      "id": 25,
+      "name": "Ethereal Opals",
+      "level": 0,
+      "nextLevelCost": 67978.82645292926,
+      "costToMax": 232816884728.39368
+    },
+    {
+      "id": 26,
+      "name": "Inviting a Plus One",
+      "level": 0,
+      "nextLevelCost": 41587.046771203786,
+      "costToMax": 6.717886820850069e+271
+    },
+    {
+      "id": 27,
+      "name": "Doubulon Hoarding",
+      "level": 0,
+      "nextLevelCost": 95151.16301251427,
+      "costToMax": null
+    },
+    {
+      "id": 28,
+      "name": "Jewel of Deadly Wrath",
+      "level": 0,
+      "nextLevelCost": 449805.4978773402,
+      "costToMax": 449805.4978773402
+    },
+    {
+      "id": 29,
+      "name": "Arcanist Defence III",
+      "level": 0,
+      "nextLevelCost": 130047.76554629662,
+      "costToMax": null
+    },
+    {
+      "id": 30,
+      "name": "Parallel Golden Food",
+      "level": 0,
+      "nextLevelCost": 68111.34771057837,
+      "costToMax": 6491097146510.024
+    },
+    {
+      "id": 31,
+      "name": "Arcanist Cataclysm III",
+      "level": 0,
+      "nextLevelCost": 146731.30335364598,
+      "costToMax": null
+    },
+    {
+      "id": 32,
+      "name": "Villager Indoctrination",
+      "level": 0,
+      "nextLevelCost": 173648.90796886655,
+      "costToMax": null
+    },
+    {
+      "id": 33,
+      "name": "My Talents, and Mine Alone",
+      "level": 0,
+      "nextLevelCost": 98506.28961142976,
+      "costToMax": 5847789816150841
+    },
+    {
+      "id": 34,
+      "name": "Verdon Hoarding",
+      "level": 0,
+      "nextLevelCost": 224813.24317986303,
+      "costToMax": null
+    },
+    {
+      "id": 35,
+      "name": "Jewel of the North Winds",
+      "level": 0,
+      "nextLevelCost": 2367653.396527165,
+      "costToMax": 2367653.396527165
+    },
+    {
+      "id": 36,
+      "name": "Arcanist Damage IV",
+      "level": 0,
+      "nextLevelCost": 172365.16726717763,
+      "costToMax": null
+    },
+    {
+      "id": 37,
+      "name": "Eternal Stream",
+      "level": 0,
+      "nextLevelCost": 256085.39136837824,
+      "costToMax": null
+    },
+    {
+      "id": 38,
+      "name": "Arcanist Accuracy IV",
+      "level": 0,
+      "nextLevelCost": 399493.21053467,
+      "costToMax": null
+    },
+    {
+      "id": 39,
+      "name": "Fractal Tesseract",
+      "level": 0,
+      "nextLevelCost": 553963.9186080758,
+      "costToMax": 1.8032935542076021e+24
+    },
+    {
+      "id": 40,
+      "name": "Astrology Cultism",
+      "level": 0,
+      "nextLevelCost": 720153.0941904985,
+      "costToMax": 2.7892640832234532e+25
+    },
+    {
+      "id": 41,
+      "name": "Bludon Hoarding",
+      "level": 0,
+      "nextLevelCost": 853813.5084722551,
+      "costToMax": null
+    },
+    {
+      "id": 42,
+      "name": "Arcanist Cataclysm IV",
+      "level": 0,
+      "nextLevelCost": 981436.1592123185,
+      "costToMax": null
+    },
+    {
+      "id": 43,
+      "name": "Jewel of Eternal Energy",
+      "level": 0,
+      "nextLevelCost": 24302228.704305027,
+      "costToMax": 24302228.704305027
+    },
+    {
+      "id": 44,
+      "name": "Arcanist of All Trades II",
+      "level": 0,
+      "nextLevelCost": 1432211.3449737097,
+      "costToMax": null
+    },
+    {
+      "id": 45,
+      "name": "Pinnacle of Prisma",
+      "level": 0,
+      "nextLevelCost": 175235.27044384216,
+      "costToMax": 4.973245128085125e+35
+    },
+    {
+      "id": 46,
+      "name": "Arcanist Defence IV",
+      "level": 0,
+      "nextLevelCost": 2186936.17513915,
+      "costToMax": null
+    },
+    {
+      "id": 47,
+      "name": "Gambit Grandmaster",
+      "level": 0,
+      "nextLevelCost": 2843017.0276808953,
+      "costToMax": 1.2986131532012342e+27
+    },
+    {
+      "id": 48,
+      "name": "Vicar of the Emperor",
+      "level": 0,
+      "nextLevelCost": 985579.2362627103,
+      "costToMax": 1.4375880393567708e+38
+    },
+    {
+      "id": 49,
+      "name": "Massivon Hoarding",
+      "level": 0,
+      "nextLevelCost": 6150014.434279313,
+      "costToMax": null
+    },
+    {
+      "id": 50,
+      "name": "Arcanist Damage V",
+      "level": 0,
+      "nextLevelCost": 10660025.019417476,
+      "costToMax": null
+    },
+    {
+      "id": 51,
+      "name": "Drop Rate Crossfire",
+      "level": 0,
+      "nextLevelCost": 13303711.224233013,
+      "costToMax": 2.06142527314163e+25
+    },
+    {
+      "id": 52,
+      "name": "Arcanist Accuracy V",
+      "level": 0,
+      "nextLevelCost": 17294824.591502916,
+      "costToMax": null
+    },
+    {
+      "id": 53,
+      "name": "Arcanist Cataclysm V",
+      "level": 0,
+      "nextLevelCost": 22783048.92853984,
+      "costToMax": null
+    },
+    {
+      "id": 54,
+      "name": "Endless Reductions",
+      "level": 0,
+      "nextLevelCost": 29929731.645071287,
+      "costToMax": null
+    },
+    {
+      "id": 55,
+      "name": "Arcanist of All Trades III",
+      "level": 0,
+      "nextLevelCost": 38908651.13859267,
+      "costToMax": null
+    },
+    {
+      "id": 56,
+      "name": "Aurion Hoarding",
+      "level": 0,
+      "nextLevelCost": 53953329.57884851,
+      "costToMax": null
+    },
+    {
+      "id": 57,
+      "name": "Universe Talent",
+      "level": 0,
+      "nextLevelCost": 84167194.14300367,
+      "costToMax": 5271420122906520000
+    },
+    {
+      "id": 58,
+      "name": "Beyond All Limits",
+      "level": 0,
+      "nextLevelCost": 145889803.18120638,
+      "costToMax": 7.51048388190988e+28
+    },
+    {
+      "id": 59,
+      "name": "Boundless Energy",
+      "level": 0,
+      "nextLevelCost": 60690158093.03677,
+      "costToMax": 60690158093.03677
+    },
+    {
+      "id": 60,
+      "name": "Boundless Energy",
+      "level": 0,
+      "nextLevelCost": 63117764416.75825,
+      "costToMax": 63117764416.75825
+    },
+    {
+      "id": 61,
+      "name": "Boundless Energy",
+      "level": 0,
+      "nextLevelCost": 65642474993.42857,
+      "costToMax": 65642474993.42857
+    },
+    {
+      "id": 62,
+      "name": "Boundless Energy",
+      "level": 0,
+      "nextLevelCost": 68268173993.16572,
+      "costToMax": 68268173993.16572
+    }
+  ],
+  "upgradeLevelCosts": [
+    {
+      "id": 0,
+      "name": "Arcanist Damage",
+      "currentLevel": 44,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 7048.565717720349
+        },
+        {
+          "levels": 2,
+          "cost": 14867.604208349283
+        },
+        {
+          "levels": 3,
+          "cost": 23539.236388696812
+        },
+        {
+          "levels": 4,
+          "cost": 33154.14841113819
+        },
+        {
+          "levels": 5,
+          "cost": 43812.468226589495
+        },
+        {
+          "levels": 6,
+          "cost": 55624.730550410735
+        },
+        {
+          "levels": 7,
+          "cost": 68712.93904360336
+        },
+        {
+          "levels": 8,
+          "cost": 83211.73539183124
+        },
+        {
+          "levels": 9,
+          "cost": 99269.68592020588
+        },
+        {
+          "levels": 10,
+          "cost": 117050.69743073304
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Arcanist Accuracy",
+      "currentLevel": 26,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1680.7920602362362
+        },
+        {
+          "levels": 2,
+          "cost": 3592.8926349473477
+        },
+        {
+          "levels": 3,
+          "cost": 5767.1471653889475
+        },
+        {
+          "levels": 4,
+          "cost": 8238.42600886774
+        },
+        {
+          "levels": 5,
+          "cost": 11046.136690433563
+        },
+        {
+          "levels": 6,
+          "cost": 14234.800148459472
+        },
+        {
+          "levels": 7,
+          "cost": 17854.69885451974
+        },
+        {
+          "levels": 8,
+          "cost": 21962.605647339806
+        },
+        {
+          "levels": 9,
+          "cost": 26622.6031956635
+        },
+        {
+          "levels": 10,
+          "cost": 31907.005209508505
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Arcanist Defence",
+      "currentLevel": 21,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1335.6657045672353
+        },
+        {
+          "levels": 2,
+          "cost": 2887.097884800244
+        },
+        {
+          "levels": 3,
+          "cost": 4688.131005484941
+        },
+        {
+          "levels": 4,
+          "cost": 6777.804875932827
+        },
+        {
+          "levels": 5,
+          "cost": 9201.14623710276
+        },
+        {
+          "levels": 6,
+          "cost": 12010.065591051902
+        },
+        {
+          "levels": 7,
+          "cost": 15264.386026899077
+        },
+        {
+          "levels": 8,
+          "cost": 19033.023205976035
+        },
+        {
+          "levels": 9,
+          "cost": 23395.338420396696
+        },
+        {
+          "levels": 10,
+          "cost": 28442.689782384026
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Arcanist Cataclysm",
+      "currentLevel": 6,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 8623.079039164839
+        },
+        {
+          "levels": 2,
+          "cost": 18635.909939669673
+        },
+        {
+          "levels": 3,
+          "cost": 30261.878480347525
+        },
+        {
+          "levels": 4,
+          "cost": 43760.366086745096
+        },
+        {
+          "levels": 5,
+          "cost": 59432.54976213301
+        },
+        {
+          "levels": 6,
+          "cost": 77628.13650788346
+        },
+        {
+          "levels": 7,
+          "cost": 98753.18279157902
+        },
+        {
+          "levels": 8,
+          "cost": 123279.1738769648
+        },
+        {
+          "levels": 9,
+          "cost": 151753.56599315035
+        },
+        {
+          "levels": 10,
+          "cost": 184812.02702077443
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Wand Drops",
+      "currentLevel": 17,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 6309.661282111239
+        },
+        {
+          "levels": 2,
+          "cost": 14047.801047062178
+        },
+        {
+          "levels": 3,
+          "cost": 23537.327586490148
+        },
+        {
+          "levels": 4,
+          "cost": 35173.93573660591
+        },
+        {
+          "levels": 5,
+          "cost": 49442.43697125332
+        },
+        {
+          "levels": 6,
+          "cost": 66936.73824743828
+        },
+        {
+          "levels": 7,
+          "cost": 88384.28192226031
+        },
+        {
+          "levels": 8,
+          "cost": 114675.93932414797
+        },
+        {
+          "levels": 9,
+          "cost": 146902.57071286882
+        },
+        {
+          "levels": 10,
+          "cost": 186399.73320510823
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Arcanist Damage II",
+      "currentLevel": 32,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 8253.011916645
+        },
+        {
+          "levels": 2,
+          "cost": 17645.382398684444
+        },
+        {
+          "levels": 3,
+          "cost": 28332.552277531155
+        },
+        {
+          "levels": 4,
+          "cost": 40490.916082576965
+        },
+        {
+          "levels": 5,
+          "cost": 54320.61258073532
+        },
+        {
+          "levels": 6,
+          "cost": 70048.6833122232
+        },
+        {
+          "levels": 7,
+          "cost": 87932.64725791049
+        },
+        {
+          "levels": 8,
+          "cost": 108264.54602689744
+        },
+        {
+          "levels": 9,
+          "cost": 131375.52101396554
+        },
+        {
+          "levels": 10,
+          "cost": 157640.9919489699
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Tenteyecle Nostalgia",
+      "currentLevel": 21,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 50088.92956188023
+        },
+        {
+          "levels": 2,
+          "cost": 115085.01124576185
+        },
+        {
+          "levels": 3,
+          "cost": 199413.56704716914
+        },
+        {
+          "levels": 4,
+          "cost": 308809.6880599095
+        },
+        {
+          "levels": 5,
+          "cost": 450704.7599266629
+        },
+        {
+          "levels": 6,
+          "cost": 634726.7566445962
+        },
+        {
+          "levels": 7,
+          "cost": 873347.7094094895
+        },
+        {
+          "levels": 8,
+          "cost": 1182721.5454855817
+        },
+        {
+          "levels": 9,
+          "cost": 1583768.142758158
+        },
+        {
+          "levels": 10,
+          "cost": 2103575.7941838205
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Arcanist Crits",
+      "currentLevel": 4,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1217.2932267753404
+        },
+        {
+          "levels": 2,
+          "cost": 2953.930473430446
+        },
+        {
+          "levels": 3,
+          "cost": 5430.54084247027
+        },
+        {
+          "levels": 4,
+          "cost": 8962.057740084158
+        },
+        {
+          "levels": 5,
+          "cost": 13997.960653035967
+        },
+        {
+          "levels": 6,
+          "cost": 21179.662629154736
+        },
+        {
+          "levels": 7,
+          "cost": 31422.338295683134
+        },
+        {
+          "levels": 8,
+          "cost": 46031.58682105657
+        },
+        {
+          "levels": 9,
+          "cost": 66869.73918384174
+        },
+        {
+          "levels": 10,
+          "cost": 96592.90703683031
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Arcanist Accuracy II",
+      "currentLevel": 7,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1104.7552137237503
+        },
+        {
+          "levels": 2,
+          "cost": 2364.8642844882233
+        },
+        {
+          "levels": 3,
+          "cost": 3801.443802160615
+        },
+        {
+          "levels": 4,
+          "cost": 5438.547351698494
+        },
+        {
+          "levels": 5,
+          "cost": 7303.572261504542
+        },
+        {
+          "levels": 6,
+          "cost": 9427.722471136505
+        },
+        {
+          "levels": 7,
+          "cost": 11846.535235357493
+        },
+        {
+          "levels": 8,
+          "cost": 14600.480439510862
+        },
+        {
+          "levels": 9,
+          "cost": 17735.642503865576
+        },
+        {
+          "levels": 10,
+          "cost": 21304.49622163456
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Arcanist Defence II",
+      "currentLevel": 2,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 953.835880786862
+        },
+        {
+          "levels": 2,
+          "cost": 2070.6347718105626
+        },
+        {
+          "levels": 3,
+          "cost": 3376.885222047734
+        },
+        {
+          "levels": 4,
+          "cost": 4903.4984931569925
+        },
+        {
+          "levels": 5,
+          "cost": 6686.545720683372
+        },
+        {
+          "levels": 6,
+          "cost": 8768.117745403517
+        },
+        {
+          "levels": 7,
+          "cost": 11197.327997929844
+        },
+        {
+          "levels": 8,
+          "cost": 14031.482201934108
+        },
+        {
+          "levels": 9,
+          "cost": 17337.44260410271
+        },
+        {
+          "levels": 10,
+          "cost": 21193.2190349754
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Singulon Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 960.619331140609
+        },
+        {
+          "levels": 2,
+          "cost": 2094.966668317997
+        },
+        {
+          "levels": 3,
+          "cost": 3432.7145820517662
+        },
+        {
+          "levels": 4,
+          "cost": 5008.74238695707
+        },
+        {
+          "levels": 5,
+          "cost": 6864.048897449087
+        },
+        {
+          "levels": 6,
+          "cost": 9046.825045482645
+        },
+        {
+          "levels": 7,
+          "cost": 11613.714334779108
+        },
+        {
+          "levels": 8,
+          "cost": 14631.293997293506
+        },
+        {
+          "levels": 9,
+          "cost": 18177.815463556428
+        },
+        {
+          "levels": 10,
+          "cost": 22345.249508186214
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Arcane Charging",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1748.3271826759083
+        },
+        {
+          "levels": 2,
+          "cost": 4137.840871546901
+        },
+        {
+          "levels": 3,
+          "cost": 7400.015589422852
+        },
+        {
+          "levels": 4,
+          "cost": 11850.5371249135
+        },
+        {
+          "levels": 5,
+          "cost": 17919.9355456482
+        },
+        {
+          "levels": 6,
+          "cost": 26195.360200966217
+        },
+        {
+          "levels": 7,
+          "cost": 37477.5489079831
+        },
+        {
+          "levels": 8,
+          "cost": 52858.51709271524
+        },
+        {
+          "levels": 9,
+          "cost": 73827.5020473903
+        },
+        {
+          "levels": 10,
+          "cost": 102415.4374749076
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Arcanist Supercharge",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 2597.514671404206
+        },
+        {
+          "levels": 2,
+          "cost": 5882.123923688253
+        },
+        {
+          "levels": 3,
+          "cost": 10032.823531864473
+        },
+        {
+          "levels": 4,
+          "cost": 15275.590664267707
+        },
+        {
+          "levels": 5,
+          "cost": 21895.71409269218
+        },
+        {
+          "levels": 6,
+          "cost": 30253.360169610933
+        },
+        {
+          "levels": 7,
+          "cost": 40803.22364915554
+        },
+        {
+          "levels": 8,
+          "cost": 54119.33521055134
+        },
+        {
+          "levels": 9,
+          "cost": 70926.37877378693
+        },
+        {
+          "levels": 10,
+          "cost": 92139.2267108954
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Arcanist Damage III",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 4322.2644132166
+        },
+        {
+          "levels": 2,
+          "cost": 9174.654556714217
+        },
+        {
+          "levels": 3,
+          "cost": 14620.863318886008
+        },
+        {
+          "levels": 4,
+          "cost": 20732.313871582886
+        },
+        {
+          "levels": 5,
+          "cost": 27589.09776055051
+        },
+        {
+          "levels": 6,
+          "cost": 35281.026821489366
+        },
+        {
+          "levels": 7,
+          "cost": 43908.81273138521
+        },
+        {
+          "levels": 8,
+          "cost": 53585.38967998342
+        },
+        {
+          "levels": 9,
+          "cost": 64437.39752470273
+        },
+        {
+          "levels": 10,
+          "cost": 76606.84489854448
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Spheres of Gold",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 6742.732484617895
+        },
+        {
+          "levels": 2,
+          "cost": 40557.59208441401
+        },
+        {
+          "levels": 3,
+          "cost": 210094.16170844127
+        },
+        {
+          "levels": 4,
+          "cost": 1060139.521148768
+        },
+        {
+          "levels": 5,
+          "cost": 5322344.813946399
+        },
+        {
+          "levels": 6,
+          "cost": 26693644.316893306
+        },
+        {
+          "levels": 7,
+          "cost": 133852602.61545151
+        },
+        {
+          "levels": 8,
+          "cost": 671164016.8150442
+        },
+        {
+          "levels": 9,
+          "cost": 3365324314.960456
+        },
+        {
+          "levels": 10,
+          "cost": 16874240862.234596
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Ripple in Spacetime",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 9057.737304336708
+        },
+        {
+          "levels": 2,
+          "cost": 20302.421453044364
+        },
+        {
+          "levels": 3,
+          "cost": 34259.25628597762
+        },
+        {
+          "levels": 4,
+          "cost": 51579.911945091255
+        },
+        {
+          "levels": 5,
+          "cost": 73072.97695827254
+        },
+        {
+          "levels": 6,
+          "cost": 99741.74286441231
+        },
+        {
+          "levels": 7,
+          "cost": 132831.0869594803
+        },
+        {
+          "levels": 8,
+          "cost": 173885.643867283
+        },
+        {
+          "levels": 9,
+          "cost": 224821.9841245773
+        },
+        {
+          "levels": 10,
+          "cost": 288018.1724649556
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Parallel Statues",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 12154.899092271195
+        },
+        {
+          "levels": 2,
+          "cost": 31132.099947052367
+        },
+        {
+          "levels": 3,
+          "cost": 60753.99743952678
+        },
+        {
+          "levels": 4,
+          "cost": 106986.50076053746
+        },
+        {
+          "levels": 5,
+          "cost": 179141.0664172687
+        },
+        {
+          "levels": 6,
+          "cost": 291750.8021053
+        },
+        {
+          "levels": 7,
+          "cost": 467498.6432789555
+        },
+        {
+          "levels": 8,
+          "cost": 741787.5776677642
+        },
+        {
+          "levels": 9,
+          "cost": 1169873.7352662138
+        },
+        {
+          "levels": 10,
+          "cost": 1837999.5307185235
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Arcanist Accuracy III",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 22121.916347933577
+        },
+        {
+          "levels": 2,
+          "cost": 47354.42695628773
+        },
+        {
+          "levels": 3,
+          "cost": 76133.13890425289
+        },
+        {
+          "levels": 4,
+          "cost": 108954.78548842011
+        },
+        {
+          "levels": 5,
+          "cost": 146385.80366490112
+        },
+        {
+          "levels": 6,
+          "cost": 189072.1151013809
+        },
+        {
+          "levels": 7,
+          "cost": 237750.27973201848
+        },
+        {
+          "levels": 8,
+          "cost": 293260.21440737287
+        },
+        {
+          "levels": 9,
+          "cost": 356559.69625628577
+        },
+        {
+          "levels": 10,
+          "cost": 428740.9011935296
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Arcane Basics",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 65733.69429100263
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Fastcasting",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 39650.56439633278
+        },
+        {
+          "levels": 2,
+          "cost": 85659.98551316434
+        },
+        {
+          "levels": 3,
+          "cost": 139045.85543516217
+        },
+        {
+          "levels": 4,
+          "cost": 200988.78399143025
+        },
+        {
+          "levels": 5,
+          "cost": 272858.51407636126
+        },
+        {
+          "levels": 6,
+          "cost": 356244.22061890387
+        },
+        {
+          "levels": 7,
+          "cost": 452989.6634155244
+        },
+        {
+          "levels": 8,
+          "cost": 565233.971409631
+        },
+        {
+          "levels": 9,
+          "cost": 695458.9605678058
+        },
+        {
+          "levels": 10,
+          "cost": 846544.0320262694
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Arcanist of All Trades",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 44435.97734071778
+        },
+        {
+          "levels": 2,
+          "cost": 97330.36074263213
+        },
+        {
+          "levels": 3,
+          "cost": 160290.50401957548
+        },
+        {
+          "levels": 4,
+          "cost": 235229.4636380326
+        },
+        {
+          "levels": 5,
+          "cost": 324424.140252469
+        },
+        {
+          "levels": 6,
+          "cost": 430584.47815832344
+        },
+        {
+          "levels": 7,
+          "cost": 556935.825761952
+        },
+        {
+          "levels": 8,
+          "cost": 707316.9601537106
+        },
+        {
+          "levels": 9,
+          "cost": 886296.754930406
+        },
+        {
+          "levels": 10,
+          "cost": 1099313.0370147855
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Ring Drops",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 55456.09972121579
+        },
+        {
+          "levels": 2,
+          "cost": 122574.32144793807
+        },
+        {
+          "levels": 3,
+          "cost": 203804.03688318958
+        },
+        {
+          "levels": 4,
+          "cost": 302109.3803466861
+        },
+        {
+          "levels": 5,
+          "cost": 421077.4317817443
+        },
+        {
+          "levels": 6,
+          "cost": 565049.1355936945
+        },
+        {
+          "levels": 7,
+          "cost": 739277.7334984265
+        },
+        {
+          "levels": 8,
+          "cost": 950120.4937445489
+        },
+        {
+          "levels": 9,
+          "cost": 1205270.7342974609
+        },
+        {
+          "levels": 10,
+          "cost": 1514038.60819064
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Arcanist Cataclysm II",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 61519.29995740206
+        },
+        {
+          "levels": 2,
+          "cost": 136589.91751117073
+        },
+        {
+          "levels": 3,
+          "cost": 228193.51472427143
+        },
+        {
+          "levels": 4,
+          "cost": 339968.17338747496
+        },
+        {
+          "levels": 5,
+          "cost": 476352.90725574427
+        },
+        {
+          "levels": 6,
+          "cost": 642763.9889538059
+        },
+        {
+          "levels": 7,
+          "cost": 845810.0956131053
+        },
+        {
+          "levels": 8,
+          "cost": 1093554.8192597274
+        },
+        {
+          "levels": 9,
+          "cost": 1395836.9693948743
+        },
+        {
+          "levels": 10,
+          "cost": 1764661.3908298565
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Ethereal Opals",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 67978.82645292926
+        },
+        {
+          "levels": 2,
+          "cost": 191042.97533300568
+        },
+        {
+          "levels": 3,
+          "cost": 413816.8049718697
+        },
+        {
+          "levels": 4,
+          "cost": 817079.9013196193
+        },
+        {
+          "levels": 5,
+          "cost": 1547060.505185322
+        },
+        {
+          "levels": 6,
+          "cost": 2868462.846766686
+        },
+        {
+          "levels": 7,
+          "cost": 5260457.8996648295
+        },
+        {
+          "levels": 8,
+          "cost": 9590447.05976509
+        },
+        {
+          "levels": 9,
+          "cost": 17428611.353557754
+        },
+        {
+          "levels": 10,
+          "cost": 31617312.383877724
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Inviting a Plus One",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 41587.046771203786
+        },
+        {
+          "levels": 2,
+          "cost": 20839693.408101372
+        },
+        {
+          "levels": 3,
+          "cost": 10422176148.497255
+        },
+        {
+          "levels": 4,
+          "cost": 5212234147316.099
+        },
+        {
+          "levels": 5,
+          "cost": 2606690117511320
+        },
+        {
+          "levels": 6,
+          "cost": 1303631591613594400
+        },
+        {
+          "levels": 7,
+          "cost": 651959067705752200000
+        },
+        {
+          "levels": 8,
+          "cost": 3.2605117253742855e+23
+        },
+        {
+          "levels": 9,
+          "cost": 1.6306140697856827e+26
+        },
+        {
+          "levels": 10,
+          "cost": 8.15486145280202e+28
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Doubulon Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 95151.16301251427
+        },
+        {
+          "levels": 2,
+          "cost": 217915.97204077576
+        },
+        {
+          "levels": 3,
+          "cost": 376303.1119032429
+        },
+        {
+          "levels": 4,
+          "cost": 580644.7244570474
+        },
+        {
+          "levels": 5,
+          "cost": 844270.4832871926
+        },
+        {
+          "levels": 6,
+          "cost": 1184377.228978534
+        },
+        {
+          "levels": 7,
+          "cost": 1623150.9004271943
+        },
+        {
+          "levels": 8,
+          "cost": 2189213.9575679135
+        },
+        {
+          "levels": 9,
+          "cost": 2919492.7261152817
+        },
+        {
+          "levels": 10,
+          "cost": 3861626.49083554
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Jewel of Deadly Wrath",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 449805.4978773402
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Arcanist Defence III",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 130047.76554629662
+        },
+        {
+          "levels": 2,
+          "cost": 282223.95365641586
+        },
+        {
+          "levels": 3,
+          "cost": 460290.6665532884
+        },
+        {
+          "levels": 4,
+          "cost": 668649.8801906279
+        },
+        {
+          "levels": 5,
+          "cost": 912452.2765671542
+        },
+        {
+          "levels": 6,
+          "cost": 1197724.5866768335
+        },
+        {
+          "levels": 7,
+          "cost": 1531518.5924574984
+        },
+        {
+          "levels": 8,
+          "cost": 1922085.4715860381
+        },
+        {
+          "levels": 9,
+          "cost": 2379079.7955316734
+        },
+        {
+          "levels": 10,
+          "cost": 2913798.2244104864
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Parallel Golden Food",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 68111.34771057837
+        },
+        {
+          "levels": 2,
+          "cost": 174389.95943195763
+        },
+        {
+          "levels": 3,
+          "cost": 340212.55439856375
+        },
+        {
+          "levels": 4,
+          "cost": 598931.57478197
+        },
+        {
+          "levels": 5,
+          "cost": 1002584.256228586
+        },
+        {
+          "levels": 6,
+          "cost": 1632360.270686469
+        },
+        {
+          "levels": 7,
+          "cost": 2614933.5779644554
+        },
+        {
+          "levels": 8,
+          "cost": 4147943.747013322
+        },
+        {
+          "levels": 9,
+          "cost": 6539752.48436871
+        },
+        {
+          "levels": 10,
+          "cost": 10271472.659423206
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Arcanist Cataclysm III",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 146731.30335364598
+        },
+        {
+          "levels": 2,
+          "cost": 316961.47314837493
+        },
+        {
+          "levels": 3,
+          "cost": 514450.58707140596
+        },
+        {
+          "levels": 4,
+          "cost": 743560.6357456226
+        },
+        {
+          "levels": 5,
+          "cost": 1009351.8768801924
+        },
+        {
+          "levels": 6,
+          "cost": 1317694.6137782324
+        },
+        {
+          "levels": 7,
+          "cost": 1675398.8673295176
+        },
+        {
+          "levels": 8,
+          "cost": 2090364.8058736525
+        },
+        {
+          "levels": 9,
+          "cost": 2571757.255849237
+        },
+        {
+          "levels": 10,
+          "cost": 3130208.1480760532
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Villager Indoctrination",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 173648.90796886655
+        },
+        {
+          "levels": 2,
+          "cost": 376840.96775488235
+        },
+        {
+          "levels": 3,
+          "cost": 614598.8193156562
+        },
+        {
+          "levels": 4,
+          "cost": 892799.3072555615
+        },
+        {
+          "levels": 5,
+          "cost": 1218318.7561108614
+        },
+        {
+          "levels": 6,
+          "cost": 1599202.9527174851
+        },
+        {
+          "levels": 7,
+          "cost": 2044866.0376138163
+        },
+        {
+          "levels": 8,
+          "cost": 2566323.222059969
+        },
+        {
+          "levels": 9,
+          "cost": 3176463.083421617
+        },
+        {
+          "levels": 10,
+          "cost": 3890366.170040466
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "My Talents, and Mine Alone",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 98506.28961142976
+        },
+        {
+          "levels": 2,
+          "cost": 208856.53768000624
+        },
+        {
+          "levels": 3,
+          "cost": 332472.1768306504
+        },
+        {
+          "levels": 4,
+          "cost": 470945.38812654477
+        },
+        {
+          "levels": 5,
+          "cost": 626059.6120645172
+        },
+        {
+          "levels": 6,
+          "cost": 799812.5234318061
+        },
+        {
+          "levels": 7,
+          "cost": 994441.7659926044
+        },
+        {
+          "levels": 8,
+          "cost": 1212453.7785255928
+        },
+        {
+          "levels": 9,
+          "cost": 1456656.0835572118
+        },
+        {
+          "levels": 10,
+          "cost": 1730193.454742712
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Verdon Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 224813.24317986303
+        },
+        {
+          "levels": 2,
+          "cost": 510351.9013125685
+        },
+        {
+          "levels": 3,
+          "cost": 873012.6662523675
+        },
+        {
+          "levels": 4,
+          "cost": 1333620.3905217284
+        },
+        {
+          "levels": 5,
+          "cost": 1918623.9752359986
+        },
+        {
+          "levels": 6,
+          "cost": 2661615.224594672
+        },
+        {
+          "levels": 7,
+          "cost": 3605257.88865552
+        },
+        {
+          "levels": 8,
+          "cost": 4803737.671571915
+        },
+        {
+          "levels": 9,
+          "cost": 6325873.899425248
+        },
+        {
+          "levels": 10,
+          "cost": 8259071.538233273
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Jewel of the North Winds",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 2367653.396527165
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Arcanist Damage IV",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 172365.16726717763
+        },
+        {
+          "levels": 2,
+          "cost": 353373.8320829212
+        },
+        {
+          "levels": 3,
+          "cost": 543458.200104153
+        },
+        {
+          "levels": 4,
+          "cost": 743072.1195891106
+        },
+        {
+          "levels": 5,
+          "cost": 952692.1651433356
+        },
+        {
+          "levels": 6,
+          "cost": 1172818.7757337585
+        },
+        {
+          "levels": 7,
+          "cost": 1403977.449688324
+        },
+        {
+          "levels": 8,
+          "cost": 1646719.999534675
+        },
+        {
+          "levels": 9,
+          "cost": 1901625.8696743022
+        },
+        {
+          "levels": 10,
+          "cost": 2169303.5200386103
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Eternal Stream",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 256085.39136837824
+        },
+        {
+          "levels": 2,
+          "cost": 604391.7417055541
+        },
+        {
+          "levels": 3,
+          "cost": 1078120.2556736309
+        },
+        {
+          "levels": 4,
+          "cost": 1722426.828442406
+        },
+        {
+          "levels": 5,
+          "cost": 2598726.5467307023
+        },
+        {
+          "levels": 6,
+          "cost": 3790548.1027076608
+        },
+        {
+          "levels": 7,
+          "cost": 5411496.19467821
+        },
+        {
+          "levels": 8,
+          "cost": 7616080.932995712
+        },
+        {
+          "levels": 9,
+          "cost": 10614446.56783652
+        },
+        {
+          "levels": 10,
+          "cost": 14692403.559570724
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "Arcanist Accuracy IV",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 399493.21053467
+        },
+        {
+          "levels": 2,
+          "cost": 834968.6413777943
+        },
+        {
+          "levels": 3,
+          "cost": 1309664.8002203004
+        },
+        {
+          "levels": 4,
+          "cost": 1827111.7780161519
+        },
+        {
+          "levels": 5,
+          "cost": 2391157.5020573963
+        },
+        {
+          "levels": 6,
+          "cost": 3005996.352778296
+        },
+        {
+          "levels": 7,
+          "cost": 3676200.3571098587
+        },
+        {
+          "levels": 8,
+          "cost": 4406753.190367736
+        },
+        {
+          "levels": 9,
+          "cost": 5203087.239543316
+        },
+        {
+          "levels": 10,
+          "cost": 6071124.003635301
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "name": "Fractal Tesseract",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 553963.9186080758
+        },
+        {
+          "levels": 2,
+          "cost": 1861365.2994922977
+        },
+        {
+          "levels": 3,
+          "cost": 4946904.706639821
+        },
+        {
+          "levels": 4,
+          "cost": 12228935.923148498
+        },
+        {
+          "levels": 5,
+          "cost": 29414916.54405734
+        },
+        {
+          "levels": 6,
+          "cost": 69974783.18760866
+        },
+        {
+          "levels": 7,
+          "cost": 165698380.87057698
+        },
+        {
+          "levels": 8,
+          "cost": 391611619.08317536
+        },
+        {
+          "levels": 9,
+          "cost": 924780069.8137827
+        },
+        {
+          "levels": 10,
+          "cost": 2183088927.350856
+        }
+      ]
+    },
+    {
+      "id": 40,
+      "name": "Astrology Cultism",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 720153.0941904985
+        },
+        {
+          "levels": 2,
+          "cost": 108752493.76008224
+        },
+        {
+          "levels": 3,
+          "cost": 16315005897.356323
+        },
+        {
+          "levels": 4,
+          "cost": 2447463694749.404
+        },
+        {
+          "levels": 5,
+          "cost": 367151371997707.25
+        },
+        {
+          "levels": 6,
+          "cost": 55077478753653770
+        },
+        {
+          "levels": 7,
+          "cost": 8262337814787528000
+        },
+        {
+          "levels": 8,
+          "cost": 1.239458081291233e+21
+        },
+        {
+          "levels": 9,
+          "cost": 1.859348248765981e+23
+        },
+        {
+          "levels": 10,
+          "cost": 2.7892640832234532e+25
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "name": "Bludon Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 853813.5084722551
+        },
+        {
+          "levels": 2,
+          "cost": 1929652.382103948
+        },
+        {
+          "levels": 3,
+          "cost": 3285244.2284293957
+        },
+        {
+          "levels": 4,
+          "cost": 4993327.108808843
+        },
+        {
+          "levels": 5,
+          "cost": 7145552.58814863
+        },
+        {
+          "levels": 6,
+          "cost": 9857403.663797203
+        },
+        {
+          "levels": 7,
+          "cost": 13274391.464627346
+        },
+        {
+          "levels": 8,
+          "cost": 17579863.228808075
+        },
+        {
+          "levels": 9,
+          "cost": 23004840.52832689
+        },
+        {
+          "levels": 10,
+          "cost": 29840415.64927515
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "name": "Arcanist Cataclysm IV",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 981436.1592123185
+        },
+        {
+          "levels": 2,
+          "cost": 2139564.7878896333
+        },
+        {
+          "levels": 3,
+          "cost": 3506191.03527424
+        },
+        {
+          "levels": 4,
+          "cost": 5118845.5730635915
+        },
+        {
+          "levels": 5,
+          "cost": 7021815.296658701
+        },
+        {
+          "levels": 6,
+          "cost": 9267359.571934432
+        },
+        {
+          "levels": 7,
+          "cost": 11917145.429199088
+        },
+        {
+          "levels": 8,
+          "cost": 15043941.118936103
+        },
+        {
+          "levels": 9,
+          "cost": 18733614.53928511
+        },
+        {
+          "levels": 10,
+          "cost": 23087491.417882487
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "name": "Jewel of Eternal Energy",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 24302228.704305027
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "name": "Arcanist of All Trades II",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 1432211.3449737097
+        },
+        {
+          "levels": 2,
+          "cost": 3193868.8737772466
+        },
+        {
+          "levels": 3,
+          "cost": 5360746.100032413
+        },
+        {
+          "levels": 4,
+          "cost": 8026045.541843388
+        },
+        {
+          "levels": 5,
+          "cost": 11304407.644988023
+        },
+        {
+          "levels": 6,
+          "cost": 15336841.81644002
+        },
+        {
+          "levels": 7,
+          "cost": 20296791.66693738
+        },
+        {
+          "levels": 8,
+          "cost": 26397595.347085066
+        },
+        {
+          "levels": 9,
+          "cost": 33901661.86868576
+        },
+        {
+          "levels": 10,
+          "cost": 43131758.112723835
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "name": "Pinnacle of Prisma",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 175235.27044384216
+        },
+        {
+          "levels": 2,
+          "cost": 7187117.0807460565
+        },
+        {
+          "levels": 3,
+          "cost": 287759893.9055197
+        },
+        {
+          "levels": 4,
+          "cost": 11514597692.073097
+        },
+        {
+          "levels": 5,
+          "cost": 460745281069.7913
+        },
+        {
+          "levels": 6,
+          "cost": 18436261573598.043
+        },
+        {
+          "levels": 7,
+          "cost": 737708552532889.5
+        },
+        {
+          "levels": 8,
+          "cost": 29518668996596510
+        },
+        {
+          "levels": 9,
+          "cost": 1181159968435863300
+        },
+        {
+          "levels": 10,
+          "cost": 47262932392613090000
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "name": "Arcanist Defence IV",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 2186936.17513915
+        },
+        {
+          "levels": 2,
+          "cost": 4723821.503151717
+        },
+        {
+          "levels": 3,
+          "cost": 7666648.315043831
+        },
+        {
+          "levels": 4,
+          "cost": 11080368.255976409
+        },
+        {
+          "levels": 5,
+          "cost": 15040325.862120928
+        },
+        {
+          "levels": 6,
+          "cost": 19633921.523666687
+        },
+        {
+          "levels": 7,
+          "cost": 24962540.537980523
+        },
+        {
+          "levels": 8,
+          "cost": 31143790.829914764
+        },
+        {
+          "levels": 9,
+          "cost": 38314098.72899001
+        },
+        {
+          "levels": 10,
+          "cost": 46631720.096012756
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "name": "Gambit Grandmaster",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 2843017.0276808953
+        },
+        {
+          "levels": 2,
+          "cost": 6425261.3173487075
+        },
+        {
+          "levels": 3,
+          "cost": 10938933.238373041
+        },
+        {
+          "levels": 4,
+          "cost": 16626206.870538387
+        },
+        {
+          "levels": 5,
+          "cost": 23792223.588490482
+        },
+        {
+          "levels": 6,
+          "cost": 32821464.087270714
+        },
+        {
+          "levels": 7,
+          "cost": 44198377.27199582
+        },
+        {
+          "levels": 8,
+          "cost": 58533372.83211227
+        },
+        {
+          "levels": 9,
+          "cost": 76595572.1032618
+        },
+        {
+          "levels": 10,
+          "cost": 99354074.42829646
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "name": "Vicar of the Emperor",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 985579.2362627103
+        },
+        {
+          "levels": 2,
+          "cost": 5430650.202639369
+        },
+        {
+          "levels": 3,
+          "cost": 25478271.720524915
+        },
+        {
+          "levels": 4,
+          "cost": 115894734.32202482
+        },
+        {
+          "levels": 5,
+          "cost": 523680947.87367547
+        },
+        {
+          "levels": 6,
+          "cost": 2362833293.3195558
+        },
+        {
+          "levels": 7,
+          "cost": 10657575919.998922
+        },
+        {
+          "levels": 8,
+          "cost": 48067612866.91122
+        },
+        {
+          "levels": 9,
+          "cost": 216790252945.85596
+        },
+        {
+          "levels": 10,
+          "cost": 977744575515.6123
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "name": "Massivon Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 6150014.434279313
+        },
+        {
+          "levels": 2,
+          "cost": 14514082.44501273
+        },
+        {
+          "levels": 3,
+          "cost": 25889265.976529963
+        },
+        {
+          "levels": 4,
+          "cost": 41359572.886375904
+        },
+        {
+          "levels": 5,
+          "cost": 62399258.774840415
+        },
+        {
+          "levels": 6,
+          "cost": 91013317.94139689
+        },
+        {
+          "levels": 7,
+          "cost": 129928551.72231686
+        },
+        {
+          "levels": 8,
+          "cost": 182853422.29595286
+        },
+        {
+          "levels": 9,
+          "cost": 254831455.03585595
+        },
+        {
+          "levels": 10,
+          "cost": 352721867.31300426
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "name": "Arcanist Damage V",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 10660025.019417476
+        },
+        {
+          "levels": 2,
+          "cost": 22919099.629855156
+        },
+        {
+          "levels": 3,
+          "cost": 37017081.7496672
+        },
+        {
+          "levels": 4,
+          "cost": 53229808.536617175
+        },
+        {
+          "levels": 5,
+          "cost": 71874493.35653794
+        },
+        {
+          "levels": 6,
+          "cost": 93315932.30970271
+        },
+        {
+          "levels": 7,
+          "cost": 117973641.75042596
+        },
+        {
+          "levels": 8,
+          "cost": 146330066.45101967
+        },
+        {
+          "levels": 9,
+          "cost": 178940019.00922042
+        },
+        {
+          "levels": 10,
+          "cost": 216441535.18843985
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "name": "Drop Rate Crossfire",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 13303711.224233013
+        },
+        {
+          "levels": 2,
+          "cost": 33392370.82668348
+        },
+        {
+          "levels": 3,
+          "cost": 63726308.247401126
+        },
+        {
+          "levels": 4,
+          "cost": 109530629.64927083
+        },
+        {
+          "levels": 5,
+          "cost": 178695258.48794758
+        },
+        {
+          "levels": 6,
+          "cost": 283133999.03751564
+        },
+        {
+          "levels": 7,
+          "cost": 440836725.73447055
+        },
+        {
+          "levels": 8,
+          "cost": 678968194.2516892
+        },
+        {
+          "levels": 9,
+          "cost": 1038547254.0186062
+        },
+        {
+          "levels": 10,
+          "cost": 1581512470.9023883
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "name": "Arcanist Accuracy V",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 17294824.591502916
+        },
+        {
+          "levels": 2,
+          "cost": 37356870.92674112
+        },
+        {
+          "levels": 3,
+          "cost": 60628895.07504228
+        },
+        {
+          "levels": 4,
+          "cost": 87624494.76160927
+        },
+        {
+          "levels": 5,
+          "cost": 118939444.14202553
+        },
+        {
+          "levels": 6,
+          "cost": 155264842.1582116
+        },
+        {
+          "levels": 7,
+          "cost": 197402364.65167004
+        },
+        {
+          "levels": 8,
+          "cost": 246281956.83843857
+        },
+        {
+          "levels": 9,
+          "cost": 302982356.6073988
+        },
+        {
+          "levels": 10,
+          "cost": 368754901.57805574
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "name": "Arcanist Cataclysm V",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 22783048.92853984
+        },
+        {
+          "levels": 2,
+          "cost": 49667098.9453186
+        },
+        {
+          "levels": 3,
+          "cost": 81390331.02324116
+        },
+        {
+          "levels": 4,
+          "cost": 118823799.62722112
+        },
+        {
+          "levels": 5,
+          "cost": 162995350.10778177
+        },
+        {
+          "levels": 6,
+          "cost": 215117841.2552124
+        },
+        {
+          "levels": 7,
+          "cost": 276622447.9485271
+        },
+        {
+          "levels": 8,
+          "cost": 349197958.32260036
+        },
+        {
+          "levels": 9,
+          "cost": 434837144.4741967
+        },
+        {
+          "levels": 10,
+          "cost": 535891479.9526811
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "name": "Endless Reductions",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 29929731.645071287
+        },
+        {
+          "levels": 2,
+          "cost": 84102616.00810525
+        },
+        {
+          "levels": 3,
+          "cost": 182155623.15473244
+        },
+        {
+          "levels": 4,
+          "cost": 359631698.52273035
+        },
+        {
+          "levels": 5,
+          "cost": 680863626.9648414
+        },
+        {
+          "levels": 6,
+          "cost": 1262293846.09929
+        },
+        {
+          "levels": 7,
+          "cost": 2314683343.6479783
+        },
+        {
+          "levels": 8,
+          "cost": 4219509825.2831306
+        },
+        {
+          "levels": 9,
+          "cost": 7667248513.662472
+        },
+        {
+          "levels": 10,
+          "cost": 13907660603.254189
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "name": "Arcanist of All Trades III",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 38908651.13859267
+        },
+        {
+          "levels": 2,
+          "cost": 91824477.90335649
+        },
+        {
+          "levels": 3,
+          "cost": 163790066.88142055
+        },
+        {
+          "levels": 4,
+          "cost": 261663340.40320253
+        },
+        {
+          "levels": 5,
+          "cost": 394771079.0558846
+        },
+        {
+          "levels": 6,
+          "cost": 575797712.8942617
+        },
+        {
+          "levels": 7,
+          "cost": 821994078.293324
+        },
+        {
+          "levels": 8,
+          "cost": 1156821328.3636959
+        },
+        {
+          "levels": 9,
+          "cost": 1612186652.6070938
+        },
+        {
+          "levels": 10,
+          "cost": 2231483857.674776
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Aurion Hoarding",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 53953329.57884851
+        },
+        {
+          "levels": 2,
+          "cost": 151608931.92099237
+        },
+        {
+          "levels": 3,
+          "cost": 328365665.6640906
+        },
+        {
+          "levels": 4,
+          "cost": 648295496.9782014
+        },
+        {
+          "levels": 5,
+          "cost": 1227368742.6161013
+        },
+        {
+          "levels": 6,
+          "cost": 2275491780.853112
+        },
+        {
+          "levels": 7,
+          "cost": 4172595346.3321304
+        },
+        {
+          "levels": 8,
+          "cost": 7606354412.592659
+        },
+        {
+          "levels": 9,
+          "cost": 13821461304.084099
+        },
+        {
+          "levels": 10,
+          "cost": 25070810254.50052
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Universe Talent",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 84167194.14300367
+        },
+        {
+          "levels": 2,
+          "cost": 42168619993.788246
+        },
+        {
+          "levels": 3,
+          "cost": 21084822864585.78
+        },
+        {
+          "levels": 4,
+          "cost": 10542625878851898
+        },
+        {
+          "levels": 5,
+          "cost": 5271420122906520000
+        }
+      ]
+    },
+    {
+      "id": 58,
+      "name": "Beyond All Limits",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 145889803.18120638
+        },
+        {
+          "levels": 2,
+          "cost": 29325315202.51616
+        },
+        {
+          "levels": 3,
+          "cost": 5865503350781.112
+        },
+        {
+          "levels": 4,
+          "cost": 1173159705693972
+        },
+        {
+          "levels": 5,
+          "cost": 234643719810412860
+        },
+        {
+          "levels": 6,
+          "cost": 46931099785637085000
+        },
+        {
+          "levels": 7,
+          "cost": 9.386691145461397e+21
+        },
+        {
+          "levels": 8,
+          "cost": 1.8774324714897036e+24
+        },
+        {
+          "levels": 9,
+          "cost": 3.755053437236041e+26
+        },
+        {
+          "levels": 10,
+          "cost": 7.51048388190988e+28
+        }
+      ]
+    },
+    {
+      "id": 59,
+      "name": "Boundless Energy",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 60690158093.03677
+        }
+      ]
+    },
+    {
+      "id": 60,
+      "name": "Boundless Energy",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 63117764416.75825
+        }
+      ]
+    },
+    {
+      "id": 61,
+      "name": "Boundless Energy",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 65642474993.42857
+        }
+      ]
+    },
+    {
+      "id": 62,
+      "name": "Boundless Energy",
+      "currentLevel": 0,
+      "levelCosts": [
+        {
+          "levels": 1,
+          "cost": 68268173993.16572
+        }
+      ]
+    }
+  ],
+  "tachyonCounts": [
+    {
+      "type": "Purple",
+      "count": 29327.674030872564
+    },
+    {
+      "type": "Brown",
+      "count": 1327.6749949768223
+    },
+    {
+      "type": "Green",
+      "count": 0
+    },
+    {
+      "type": "Red",
+      "count": 0
+    },
+    {
+      "type": "Silver",
+      "count": 0
+    },
+    {
+      "type": "Gold",
+      "count": 0
+    }
+  ],
+  "unlockPathInfo": {
+    "hasNextUnlock": true,
+    "nextUnlockName": "Singulon Hoarding",
+    "levelsNeeded": 8,
+    "totalCost": 7630.6870462948955,
+    "pathUpgrades": [
+      {
+        "id": 11,
+        "name": "Arcanist Defence II",
+        "levels": 8,
+        "cost": 7630.6870462948955,
+        "tachyonType": 5
+      }
+    ],
+    "tachyonCosts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      7630.6870462948955
+    ],
+    "remainingLevels": 0
+  }
+}
