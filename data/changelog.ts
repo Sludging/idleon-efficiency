@@ -7,6 +7,15 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.40-v2",
+    title: "Tesseract - First pass",
+    date: "June 28, 2025",
+    changes: [
+      "Add tesseract page to track tesseract upgrades.",
+      "Add long overdue display of new player inventory bags."
+    ]
+  },
+  {
     version: "1.2.40",
     title: "Update 2.40",
     date: "June 28, 2025",

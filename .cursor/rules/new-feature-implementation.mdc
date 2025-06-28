@@ -1,0 +1,36 @@
+---
+description: 
+globs: domain/**
+alwaysApply: false
+---
+# New Feature Implementation
+
+**When implementing any new game feature, ALWAYS follow the comprehensive guide in `docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md`.**
+
+## Required Prerequisites Before Starting:
+- Gather all game data requirements (save file keys, resource storage locations)
+- Confirm WikBot data availability or timeline  
+- Identify similar existing features to model after
+- Determine navigation placement and routing structure
+- Get asset names and image locations from developer
+
+## Implementation Process:
+1. **Prerequisites verification** - Ensure all required information is available
+2. **Domain implementation** - Follow similar feature patterns  
+3. **Data pipeline integration** - Add to idleonData.tsx processing
+4. **UI development** - Create components following existing patterns
+5. **Navigation integration** - Update routing and navigation
+6. **Testing implementation** - Add automated snapshot-based tests
+7. **Visual validation** - Verify against actual game client
+
+## When Working on Features:
+1. Check if it involves any auto-generated files (don't modify them)
+2. Understand which game system/world the feature belongs to
+3. Follow the established domain pattern
+4. **ALWAYS add appropriate tests (see Testing Requirements)**
+5. Plan for visual verification against the game
+6. Consider cross-system impacts in calculations
+
+**Refer to the complete implementation guide for detailed steps, templates, and examples.**
+
+@docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md

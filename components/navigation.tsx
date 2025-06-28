@@ -77,6 +77,7 @@ const navItems: NavItem[] = [
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
             { subLink: "/grimoire", label: "Grimoire" },
+            { subLink: "/tesseract", label: "Tesseract" },
             { subLink: "/compass", label: "Compass" },
         ]
     },

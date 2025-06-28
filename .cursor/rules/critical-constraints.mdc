@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Critical Constraints
+
+## DO NOT MODIFY These Directories (Auto-Generated from WikBot):
+- `data/domain/data/` - Game data repositories
+- `data/domain/enum/` - Game enumerations  
+- `data/domain/model/` - TypeScript models
+
+## Technology Requirements:
+- Always use TypeScript for new code
+- Use NextJS App Router architecture for new pages
+- Use Yarn (never npm) for package management
+- We are forced to use Grommet UI elements for the time being
+- Follow the domain-driven design pattern in `data/domain/`
+
+## Architecture Understanding:
+- Each game system has its own domain class
+- Data flow: Game save → Parse → Calculate cross-impacts → Display  
+- Real-time Firebase integration for user data
+- Complex post-processing pipeline for interdependent calculations
