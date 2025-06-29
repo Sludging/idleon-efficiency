@@ -12,6 +12,7 @@ import IconImage from "../base/IconImage";
 import { CircleInformation, Tooltip } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
+import { UnlockPathDisplay } from "./shared/UnlockPathDisplay";
 
 // Simple tachyon display without tooltip
 function TachyonDisplay({ cost, canAfford, tachyonImageData, scale = 0.7 }: { cost: number, canAfford?: boolean, tachyonImageData: ImageData, scale?: number }) {
@@ -264,7 +265,7 @@ export function TesseractDisplay() {
         pathUpgrades: [],
         levelsNeeded: 0,
         totalCost: 0,
-        tachyonTypes: [0, 0, 0, 0, 0, 0],
+        resourceCosts: [0, 0, 0, 0, 0, 0],
         remainingLevels: 0
     };
 
@@ -387,81 +388,14 @@ export function TesseractDisplay() {
             </ShadowBox>
 
             {/* Display the unlock path if enabled */}
-            {showUnlockPath && unlockPathInfo.nextUnlock && unlockPathInfo.levelsNeeded > 0 && (
-                <ShadowBox background="dark-2" pad="medium" margin={{ bottom: 'small' }}>
-                    <Box gap="small">
-                        <Text size="medium" weight="bold">Cheapest Path to Next Upgrade</Text>
-
-                        <Box direction="row" gap="medium" wrap>
-                            <ComponentAndLabel
-                                label="Next Unlock"
-                                component={
-                                    <Box direction="row" gap="small" align="center">
-                                        <IconImage data={unlockPathInfo.nextUnlock.getImageData()} scale={0.7} />
-                                        <Text>{unlockPathInfo.nextUnlock.data.name}</Text>
-                                    </Box>
-                                }
-                            />
-                            <TextAndLabel
-                                label="Levels Needed"
-                                text={`${unlockPathInfo.levelsNeeded} more levels to reach ${unlockPathInfo.nextUnlock.data.unlock_req}`}
-                            />
-                        </Box>
-
-                        <Box margin={{ top: 'small' }} direction="row" gap="medium" align="center">
-                            <Text size="small" weight="bold">Total Cost:</Text>
-                            {unlockPathInfo.tachyonTypes.map((cost, index) =>
-                                cost > 0 ? (
-                                    <Box key={index} direction="row" gap="xsmall" align="center">
-                                        <IconImage data={tesseract.getTachyonImageData(index)} />
-                                        <Text size="small">{nFormatter(cost)}</Text>
-                                    </Box>
-                                ) : null
-                            )}
-                        </Box>
-
-                        <Box margin={{ top: 'small' }}>
-                            <Text size="small" weight="bold">Recommended Upgrades:</Text>
-
-                            {unlockPathInfo.pathUpgrades.length > 0 ? (
-                                <Box margin={{ top: 'xsmall' }}>
-                                    {unlockPathInfo.pathUpgrades.map((path, index) => (
-                                        <Box key={index} direction="row" gap="medium" margin={{ vertical: 'xsmall' }} align="center">
-                                            <Box direction="row" gap="small" align="center" basis="40%">
-                                                <IconImage data={path.imageData} scale={0.6} />
-                                                <Text size="small">{path.name}</Text>
-                                            </Box>
-                                            <Text size="small">+{path.levels} levels</Text>
-                                            <Box direction="row" gap="xsmall" align="center">
-                                                <IconImage data={tesseract.getTachyonImageData(path.tachyonType)} />
-                                                <Text size="small">{nFormatter(path.cost)}</Text>
-                                            </Box>
-                                        </Box>
-                                    ))}
-
-                                    {unlockPathInfo.remainingLevels > 0 && unlockPathInfo.levelsNeeded > 0 && (
-                                        <Box margin={{ top: 'small' }} background="status-warning" pad="small" round="small">
-                                            <Text size="small">
-                                                Note: Could only find upgrades for {unlockPathInfo.levelsNeeded - (unlockPathInfo.remainingLevels || 0)} of the {unlockPathInfo.levelsNeeded} levels needed.
-                                                You may need to unlock more upgrades first.
-                                            </Text>
-                                        </Box>
-                                    )}
-                                </Box>
-                            ) : (
-                                <Text size="small">No upgradeable options available. You may need to unlock more upgrades first.</Text>
-                            )}
-                        </Box>
-
-                        <Box margin={{ top: 'small' }} background="dark-3" pad="small" round="small">
-                            <Text size="small">
-                                <strong>How this works:</strong> This calculator finds the cheapest sequence of upgrades to reach the next unlock threshold.
-                                It simulates adding one level at a time to the upgrade with the lowest cost, accounting for cost increases with each level.
-                            </Text>
-                        </Box>
-                    </Box>
-                </ShadowBox>
-            )}
+            <UnlockPathDisplay
+                unlockPathInfo={unlockPathInfo}
+                resourceName="Tachyons"
+                getResourceImageData={(resourceType) => tesseract.getTachyonImageData(resourceType)}
+                showUnlockPath={showUnlockPath}
+                title="Cheapest Path to Next Upgrade"
+                targetLabel="Next Unlock"
+            />
 
             {upgradesToShow.length === 0 && (
                 <ShadowBox background="dark-1" pad="medium" align="center">

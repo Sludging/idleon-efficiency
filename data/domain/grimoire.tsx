@@ -4,8 +4,15 @@ import { GrimoireUpgradeBase, initGrimoireUpgradeRepo } from "./data/GrimoireUpg
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { GrimoireUpgradeModel } from "./model/grimoireUpgradeModel";
+import { 
+    UnlockableUpgrade, 
+    UnlockableDomain, 
+    UnlockEfficiencyEngine, 
+    StandardUnlockEfficiencyCalculator,
+    UnlockPathInfo
+} from "./base/unlockEfficiencyEngine";
 
-export class GrimoireUpgrade {
+export class GrimoireUpgrade implements UnlockableUpgrade {
     public level: number = 0;
     public unlocked: boolean = false;
     public bonus: number = 0;
@@ -54,7 +61,7 @@ export class GrimoireUpgrade {
         return this.level * this.data.value * writingGrimoireBonus;
     }
 
-    getCost = (allUpgrades: GrimoireUpgrade[]): number => {
+    getCost = (allUpgrades: UnlockableUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
             return 0;
         }
@@ -117,9 +124,19 @@ export class GrimoireUpgrade {
 
         return description;
     }
+
+    copyUpgrade = (): UnlockableUpgrade => {
+        const copy = new GrimoireUpgrade(this.id, this.data);
+        copy.level = copy.level;
+        copy.unlocked = copy.unlocked;
+        copy.bonus = copy.bonus;
+        copy.cost = copy.cost;
+        copy.costToMax = copy.costToMax;
+        return copy;
+    }
 }
 
-export class Grimoire extends Domain {
+export class Grimoire extends Domain implements UnlockableDomain {
     upgrades: GrimoireUpgrade[] = [];
     totalGrimoireLevel: number = 0;
     
@@ -129,29 +146,23 @@ export class Grimoire extends Domain {
     craniumBones: number = 0;
     bovinaeBones: number = 0;
 
-    // Unlock path information
-    unlockPathInfo: {
-        nextUnlock: GrimoireUpgrade | null;
-        pathUpgrades: Array<{
-            id: number;
-            name: string;
-            levels: number;
-            cost: number;
-            boneType: number;
-            imageData: ImageData;
-        }>;
-        levelsNeeded: number;
-        totalCost: number;
-        boneTypes: number[];
-        remainingLevels: number;
-    } = {
+    // Unlock path information - using new generalized system
+    unlockPathInfo: UnlockPathInfo = {
         nextUnlock: null,
         pathUpgrades: [],
         levelsNeeded: 0,
         totalCost: 0,
-        boneTypes: [0, 0, 0, 0],
+        resourceCosts: [0, 0, 0, 0],
         remainingLevels: 0
     };
+
+    // Unlock efficiency engine
+    private unlockEngine = new UnlockEfficiencyEngine<Grimoire>();
+    private unlockCalculator = new StandardUnlockEfficiencyCalculator<Grimoire>();
+
+    get totalLevel(): number {
+        return this.totalGrimoireLevel;
+    }
 
     getRawKeys(): RawData[] {   
         return [
@@ -162,6 +173,66 @@ export class Grimoire extends Domain {
     init(allItems: Item[], charCount: number) {
         this.upgrades = GrimoireUpgrade.fromBase(initGrimoireUpgradeRepo());
         return this;
+    }
+
+    // UnlockableDomain interface methods
+    copyUpgrade(upgrade: UnlockableUpgrade): UnlockableUpgrade {
+        return upgrade.copyUpgrade();
+    }
+
+    recalculateUpgrades(upgrades: UnlockableUpgrade[]): void {
+        const grimoireUpgrades = upgrades as GrimoireUpgrade[];
+        
+        // First calculate special bonuses that affect other upgrades (Writhing Grimoire)
+        const writingGrimoireUpgrade = grimoireUpgrades[36];
+        if (writingGrimoireUpgrade) {
+            writingGrimoireUpgrade.bonus = writingGrimoireUpgrade.getBonus(grimoireUpgrades);
+        }
+
+        // Then calculate all bonuses and costs
+        grimoireUpgrades.forEach(upgrade => {
+            upgrade.bonus = upgrade.getBonus(grimoireUpgrades);
+            upgrade.cost = upgrade.getCost(grimoireUpgrades);
+        });
+    }
+
+    getUpgradeResourceType(upgrade: UnlockableUpgrade): number {
+        return (upgrade as GrimoireUpgrade).data.x1; // Bone type
+    }
+
+    // ResourceTracker interface methods
+    getResourceCount(resourceType: number): number {
+        switch(resourceType) {
+            case 0: return this.femurBones;
+            case 1: return this.ribcageBones;
+            case 2: return this.craniumBones;
+            case 3: return this.bovinaeBones;
+            default: return 0;
+        }
+    }
+
+    getResourceImageData(resourceType: number): ImageData {
+        return {
+            location: `GrimBone${resourceType}`,
+            height: 20,
+            width: 20,
+        }
+    }
+
+    canAffordUpgrade(upgrade: UnlockableUpgrade, cost: number = upgrade.cost): boolean {
+        if (upgrade.level >= upgrade.data.max_level) return false;
+        
+        const resourceType = this.getUpgradeResourceType(upgrade);
+        return this.getResourceCount(resourceType) >= cost;
+    }
+
+    // Legacy methods for backward compatibility
+    getBoneCount(boneType: number): number {
+        return this.getResourceCount(boneType);
+    }
+
+    getBoneImageData(boneType: number): ImageData {
+        return this.getResourceImageData(boneType);
     }
 
     parse(data: Map<string, any>): void {
@@ -214,170 +285,15 @@ export class Grimoire extends Domain {
             }
         });
 
-        // Calculate the next locked upgrade and the cheapest path to unlock it
-        this.calculateUnlockPath(grimoire);
-    }
-
-    // Helper method to get total bones of a specific type
-    getBoneCount(boneType: number): number {
-        switch(boneType) {
-            case 0: return this.femurBones;
-            case 1: return this.ribcageBones;
-            case 2: return this.craniumBones;
-            case 3: return this.bovinaeBones;
-            default: return 0;
-        }
-    }
-
-    // Helper method to determine if player can afford an upgrade
-    canAffordUpgrade(upgrade: GrimoireUpgrade, cost: number = upgrade.cost): boolean {
-        if (upgrade.level >= upgrade.data.max_level) return false;
+        // Calculate unlock path using the new generalized system
+        // Pass the exact levels needed to ensure we calculate the complete path
+        const nextUnlock = grimoire.unlockCalculator.findNextUnlock(grimoire);
+        const levelsNeeded = nextUnlock ? Math.max(0, nextUnlock.data.unlock_req - grimoire.totalGrimoireLevel) : 0;
         
-        let boneType = upgrade.data.x1;
-        
-        return this.getBoneCount(boneType) >= cost;
-    }
-
-    getBoneImageData(boneType: number): ImageData {
-        return {
-            location: `GrimBone${boneType}`,
-            height: 20,
-            width: 20,
-        }
-    }
-
-    // Calculate the next locked upgrade and the cheapest path to unlock it
-    private calculateUnlockPath(grimoire: Grimoire): void {
-        // Find the next locked upgrade with the lowest unlock requirement
-        const nextUnlock = [...grimoire.upgrades]
-            .filter(u => !u.unlocked)
-            .sort((a, b) => a.data.unlock_req - b.data.unlock_req)[0];
-
-        if (!nextUnlock) {
-            grimoire.unlockPathInfo = { 
-                nextUnlock: null, 
-                pathUpgrades: [], 
-                levelsNeeded: 0, 
-                totalCost: 0, 
-                boneTypes: [0, 0, 0, 0],
-                remainingLevels: 0
-            };
-            return;
-        }
-
-        // Calculate how many more levels we need
-        const levelsNeeded = nextUnlock.data.unlock_req - grimoire.totalGrimoireLevel;
-        
-        if (levelsNeeded <= 0) {
-            grimoire.unlockPathInfo = { 
-                nextUnlock, 
-                pathUpgrades: [], 
-                levelsNeeded: 0, 
-                totalCost: 0,
-                boneTypes: [0, 0, 0, 0],
-                remainingLevels: 0
-            };
-            return;
-        }
-
-        // Get all unlocked upgrades that aren't maxed
-        const availableUpgrades = grimoire.upgrades
-            .filter(u => u.unlocked && u.level < u.data.max_level);
-
-        // Create a simulation of the current state
-        const simulationUpgrades = availableUpgrades.map(upgrade => ({
-            id: upgrade.id,
-            name: upgrade.data.name,
-            currentLevel: upgrade.level,
-            maxLevel: upgrade.data.max_level,
-            boneType: upgrade.data.x1,
-            baseCost: upgrade.data.base_cost,
-            scalingFactor: upgrade.data.scaling_factor,
-            imageData: upgrade.getImageData(),
-            // Clone the upgrade for cost calculations
-            upgrade: new GrimoireUpgrade(upgrade.id, upgrade.data)
-        }));
-
-        // Function to calculate the cost of the next level for a specific upgrade
-        const calculateNextLevelCost = (upgrade: typeof simulationUpgrades[0]) => {
-            // Set the level to the current simulation level
-            upgrade.upgrade.level = upgrade.currentLevel;
-            // Get the cost for the next level
-            return upgrade.upgrade.getCost([]);
-        };
-
-        // Greedy algorithm to find the cheapest path
-        let remainingLevels = levelsNeeded;
-        const pathUpgrades: Array<{
-            id: number,
-            name: string,
-            levels: number,
-            cost: number,
-            boneType: number,
-            imageData: ImageData
-        }> = [];
-        
-        const boneTypeCosts = [0, 0, 0, 0]; // Track cost by bone type
-        let totalCost = 0;
-
-        while (remainingLevels > 0) {
-            // Find the upgrade with the cheapest next level
-            let cheapestUpgrade = null;
-            let cheapestCost = Infinity;
-
-            for (const upgrade of simulationUpgrades) {
-                // Skip if already at max level
-                if (upgrade.currentLevel >= upgrade.maxLevel) continue;
-                
-                const cost = calculateNextLevelCost(upgrade);
-                if (cost < cheapestCost) {
-                    cheapestCost = cost;
-                    cheapestUpgrade = upgrade;
-                }
-            }
-
-            // If we couldn't find any more upgrades, break
-            if (!cheapestUpgrade) break;
-
-            // Add one level to the cheapest upgrade
-            cheapestUpgrade.currentLevel++;
-            totalCost += cheapestCost;
-            boneTypeCosts[cheapestUpgrade.boneType] += cheapestCost;
-            remainingLevels--;
-
-            // Find or create an entry in pathUpgrades
-            let pathUpgrade = pathUpgrades.find(p => p.id === cheapestUpgrade.id);
-            if (!pathUpgrade) {
-                pathUpgrade = {
-                    id: cheapestUpgrade.id,
-                    name: cheapestUpgrade.name,
-                    levels: 1,
-                    cost: cheapestCost,
-                    boneType: cheapestUpgrade.boneType,
-                    imageData: cheapestUpgrade.imageData
-                };
-                pathUpgrades.push(pathUpgrade);
-            } else {
-                pathUpgrade.levels++;
-                pathUpgrade.cost += cheapestCost;
-            }
-        }
-
-        // Sort path upgrades by bone type and then by id for a cleaner display
-        pathUpgrades.sort((a, b) => {
-            if (a.boneType !== b.boneType) {
-                return a.boneType - b.boneType;
-            }
-            return a.id - b.id;
-        });
-
-        grimoire.unlockPathInfo = {
-            nextUnlock,
-            pathUpgrades,
-            levelsNeeded,
-            totalCost,
-            boneTypes: boneTypeCosts,
-            remainingLevels // This will be > 0 if we couldn't find enough upgrades
-        };
+        grimoire.unlockPathInfo = grimoire.unlockEngine.calculateUnlockPath(
+            grimoire, 
+            grimoire.unlockCalculator,
+            levelsNeeded || 1 // Use at least 1 to avoid issues if no unlock needed
+        );
     }
 } 
