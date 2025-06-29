@@ -308,7 +308,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
             if (![2, 3, 7].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal lab`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
-            if (!dootOwned && playerDivinityData.gods.some(god => god.data.name == 'Arctis')) {
+            if (!dootOwned && playerDivinityData && playerDivinityData.gods.some(god => god.data.name == 'Arctis')) {
                 alerts.push(new DivinityLinkedAlert(player, "Arctis god is useless while you're in lab"));
             }
             break;
