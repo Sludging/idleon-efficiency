@@ -13,6 +13,7 @@ export interface UnlockableUpgrade {
     };
     getImageData(): ImageData;
     getCost(allUpgrades: UnlockableUpgrade[], ...args: any[]): number;
+    copyUpgrade(): UnlockableUpgrade;
 }
 
 // Base interface for resource tracking

@@ -124,6 +124,16 @@ export class GrimoireUpgrade implements UnlockableUpgrade {
 
         return description;
     }
+
+    copyUpgrade = (): UnlockableUpgrade => {
+        const copy = new GrimoireUpgrade(this.id, this.data);
+        copy.level = copy.level;
+        copy.unlocked = copy.unlocked;
+        copy.bonus = copy.bonus;
+        copy.cost = copy.cost;
+        copy.costToMax = copy.costToMax;
+        return copy;
+    }
 }
 
 export class Grimoire extends Domain implements UnlockableDomain {
@@ -167,14 +177,7 @@ export class Grimoire extends Domain implements UnlockableDomain {
 
     // UnlockableDomain interface methods
     copyUpgrade(upgrade: UnlockableUpgrade): UnlockableUpgrade {
-        const grimoireUpgrade = upgrade as GrimoireUpgrade;
-        const copy = new GrimoireUpgrade(grimoireUpgrade.id, grimoireUpgrade.data);
-        copy.level = grimoireUpgrade.level;
-        copy.unlocked = grimoireUpgrade.unlocked;
-        copy.bonus = grimoireUpgrade.bonus;
-        copy.cost = grimoireUpgrade.cost;
-        copy.costToMax = grimoireUpgrade.costToMax;
-        return copy;
+        return upgrade.copyUpgrade();
     }
 
     recalculateUpgrades(upgrades: UnlockableUpgrade[]): void {

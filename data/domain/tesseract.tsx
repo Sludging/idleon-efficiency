@@ -128,6 +128,17 @@ export class TesseractUpgrade implements UnlockableUpgrade {
 
         return description;
     }
+
+    copyUpgrade = (): UnlockableUpgrade => {
+        const copy = new TesseractUpgrade(this.id, this.data);
+        copy.level = this.level;
+        copy.unlocked = this.unlocked;
+        copy.bonus = this.bonus;
+        copy.cost = this.cost;
+        copy.costToMax = this.costToMax;
+        copy.costReductionFactor = this.costReductionFactor;
+        return copy;
+    }
 }
 
 export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
@@ -159,6 +170,22 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
         let description = this.data.description;
         description = description.replace('$', (1 / this.getPrismaChance()).toFixed(0));
         return description;
+    }
+
+    override copyUpgrade = (): UnlockableUpgrade => {
+        const copy = new PrismaBubbleTesseractUpgrade(this.id, this.data);
+        copy.prismaBubblesFound = this.prismaBubblesFound;
+        copy.tesseractUpgrade51Bonus = this.tesseractUpgrade51Bonus;
+        copy.dropRarity = this.dropRarity;
+        copy.currentMap = this.currentMap;
+        copy.talent594Value = this.talent594Value;
+        copy.level = this.level;
+        copy.unlocked = this.unlocked;
+        copy.bonus = this.bonus;
+        copy.cost = this.cost;
+        copy.costToMax = this.costToMax;
+        copy.costReductionFactor = this.costReductionFactor;
+        return copy;
     }
 
     constructor(id: number, data: TesseractUpgradeModel) {
@@ -211,33 +238,7 @@ export class Tesseract extends Domain implements UnlockableDomain {
 
     // UnlockableDomain interface methods
     copyUpgrade(upgrade: UnlockableUpgrade): UnlockableUpgrade {
-        const tesseractUpgrade = upgrade as TesseractUpgrade;
-        
-        // Handle special upgrade types
-        if (tesseractUpgrade instanceof PrismaBubbleTesseractUpgrade) {
-            const copy = new PrismaBubbleTesseractUpgrade(tesseractUpgrade.id, tesseractUpgrade.data);
-            copy.prismaBubblesFound = tesseractUpgrade.prismaBubblesFound;
-            copy.tesseractUpgrade51Bonus = tesseractUpgrade.tesseractUpgrade51Bonus;
-            copy.dropRarity = tesseractUpgrade.dropRarity;
-            copy.currentMap = tesseractUpgrade.currentMap;
-            copy.talent594Value = tesseractUpgrade.talent594Value;
-            copy.level = tesseractUpgrade.level;
-            copy.unlocked = tesseractUpgrade.unlocked;
-            copy.bonus = tesseractUpgrade.bonus;
-            copy.cost = tesseractUpgrade.cost;
-            copy.costToMax = tesseractUpgrade.costToMax;
-            copy.costReductionFactor = tesseractUpgrade.costReductionFactor;
-            return copy;
-        }
-        
-        const copy = new TesseractUpgrade(tesseractUpgrade.id, tesseractUpgrade.data);
-        copy.level = tesseractUpgrade.level;
-        copy.unlocked = tesseractUpgrade.unlocked;
-        copy.bonus = tesseractUpgrade.bonus;
-        copy.cost = tesseractUpgrade.cost;
-        copy.costToMax = tesseractUpgrade.costToMax;
-        copy.costReductionFactor = tesseractUpgrade.costReductionFactor;
-        return copy;
+        return upgrade.copyUpgrade();
     }
 
     recalculateUpgrades(upgrades: UnlockableUpgrade[]): void {
