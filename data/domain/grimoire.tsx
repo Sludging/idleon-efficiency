@@ -127,11 +127,11 @@ export class GrimoireUpgrade implements UnlockableUpgrade {
 
     copyUpgrade = (): UnlockableUpgrade => {
         const copy = new GrimoireUpgrade(this.id, this.data);
-        copy.level = copy.level;
-        copy.unlocked = copy.unlocked;
-        copy.bonus = copy.bonus;
-        copy.cost = copy.cost;
-        copy.costToMax = copy.costToMax;
+        copy.level = this.level;
+        copy.unlocked = this.unlocked;
+        copy.bonus = this.bonus;
+        copy.cost = this.cost;
+        copy.costToMax = this.costToMax;
         return copy;
     }
 }
