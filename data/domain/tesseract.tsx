@@ -7,14 +7,14 @@ import { TesseractUpgradeModel } from "./model/tesseractUpgradeModel";
 import { Player } from "./player";
 import { ClassIndex } from "./talents";
 import { 
-    UnlockableUpgrade, 
-    UnlockableDomain, 
-    UnlockEfficiencyEngine, 
-    StandardUnlockEfficiencyCalculator,
-    UnlockPathInfo
-} from "./base/unlockEfficiencyEngine";
+    EfficiencyUpgrade, 
+    EfficiencyDomain, 
+    EfficiencyEngine, 
+    EfficiencyPathInfo
+} from "../../lib/efficiencyEngine/efficiencyEngine";
+import { CheapestPathCalculator } from "../../lib/efficiencyEngine/calculators";
 
-export class TesseractUpgrade implements UnlockableUpgrade {
+export class TesseractUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
     public unlocked: boolean = false;
     public bonus: number = 0;
@@ -65,7 +65,7 @@ export class TesseractUpgrade implements UnlockableUpgrade {
         return this.level * this.data.value * (1 + upgrade39Bonus / 100);
     }
 
-    getCost = (allUpgrades: UnlockableUpgrade[]): number => {
+    getCost = (allUpgrades: EfficiencyUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
             return 0;
         }
@@ -78,6 +78,10 @@ export class TesseractUpgrade implements UnlockableUpgrade {
             Math.pow(this.data.scaling_factor + 0.01, this.level));
 
         return baseCost;
+    }
+
+    getCostType(): number {
+        return this.data.x1;
     }
 
     getCostToMax = (allUpgrades: TesseractUpgrade[]): number => {
@@ -129,7 +133,7 @@ export class TesseractUpgrade implements UnlockableUpgrade {
         return description;
     }
 
-    copyUpgrade = (): UnlockableUpgrade => {
+    copyUpgrade = (): EfficiencyUpgrade => {
         const copy = new TesseractUpgrade(this.id, this.data);
         copy.level = this.level;
         copy.unlocked = this.unlocked;
@@ -138,6 +142,35 @@ export class TesseractUpgrade implements UnlockableUpgrade {
         copy.costToMax = this.costToMax;
         copy.costReductionFactor = this.costReductionFactor;
         return copy;
+    }
+
+    // EfficiencyUpgrade interface methods
+    getId(): number {
+        return this.id;
+    }
+
+    getLevel(): number {
+        return this.level;
+    }
+
+    setLevel(level: number): void {
+        this.level = level;
+    }
+
+    isUnlocked(): boolean {
+        return this.unlocked;
+    }
+
+    getName(): string {
+        return this.data.name;
+    }
+
+    getMaxLevel(): number {
+        return this.data.max_level;
+    }
+
+    getUnlockRequirement(): number | undefined {
+        return this.data.unlock_req;
     }
 }
 
@@ -172,7 +205,7 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
         return description;
     }
 
-    override copyUpgrade = (): UnlockableUpgrade => {
+    override copyUpgrade = (): EfficiencyUpgrade => {
         const copy = new PrismaBubbleTesseractUpgrade(this.id, this.data);
         copy.prismaBubblesFound = this.prismaBubblesFound;
         copy.tesseractUpgrade51Bonus = this.tesseractUpgrade51Bonus;
@@ -193,31 +226,48 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
     }
 }
 
-export class Tesseract extends Domain implements UnlockableDomain {
+export enum TesseractType {
+    Purple = 0,
+    Brown = 1,
+    Green = 2,
+    Red = 3,
+    Silver = 4,
+    Gold = 5,
+}
+
+export class Tesseract extends Domain implements EfficiencyDomain {
     upgrades: TesseractUpgrade[] = [];
     totalTesseractLevel: number = 0;
     
     // Tachyon counts - 6 types instead of 4 bones
-    purpleTachyons: number = 0;
-    brownTachyons: number = 0;
-    greenTachyons: number = 0;
-    redTachyons: number = 0;
-    silverTachyons: number = 0;
-    goldTachyons: number = 0;
+    resources: Record<TesseractType, number> = {
+        [TesseractType.Purple]: 0,
+        [TesseractType.Brown]: 0,
+        [TesseractType.Green]: 0,
+        [TesseractType.Red]: 0,
+        [TesseractType.Silver]: 0,
+        [TesseractType.Gold]: 0,
+    }
 
-    // Unlock path information - using new generalized system
-    unlockPathInfo: UnlockPathInfo = {
-        nextUnlock: null,
+    // Default path information
+    // TODO: Think if I need this as a placeholder or not.
+    unlockPathInfo: EfficiencyPathInfo = {
+        goal: "Next Unlock Path",
         pathUpgrades: [],
-        levelsNeeded: 0,
-        totalCost: 0,
-        resourceCosts: [0, 0, 0, 0, 0, 0],
-        remainingLevels: 0
+        totalValue: 0,
+        resourceCosts: {
+            [TesseractType.Purple]: 0,
+            [TesseractType.Brown]: 0,
+            [TesseractType.Green]: 0,
+            [TesseractType.Red]: 0,
+            [TesseractType.Silver]: 0,
+            [TesseractType.Gold]: 0,
+        },
     };
 
     // Unlock efficiency engine
-    private unlockEngine = new UnlockEfficiencyEngine<Tesseract>();
-    private unlockCalculator = new StandardUnlockEfficiencyCalculator<Tesseract>();
+    private unlockEngine = new EfficiencyEngine<Tesseract>();
+    private unlockCalculator = new CheapestPathCalculator<Tesseract>();
 
     get totalLevel(): number {
         return this.totalTesseractLevel;
@@ -236,12 +286,12 @@ export class Tesseract extends Domain implements UnlockableDomain {
         return this;
     }
 
-    // UnlockableDomain interface methods
-    copyUpgrade(upgrade: UnlockableUpgrade): UnlockableUpgrade {
+    // EfficiencyDomain interface methods
+    copyUpgrade(upgrade: EfficiencyUpgrade): EfficiencyUpgrade {
         return upgrade.copyUpgrade();
     }
 
-    recalculateUpgrades(upgrades: UnlockableUpgrade[]): void {
+    recalculateUpgrades(upgrades: EfficiencyUpgrade[]): void {
         const tesseractUpgrades = upgrades as TesseractUpgrade[];
         
         // First calculate special bonuses that affect other upgrades (upgrade 39)
@@ -254,7 +304,7 @@ export class Tesseract extends Domain implements UnlockableDomain {
         let costReductionFactor = 1;
         if (tesseractUpgrades[49]?.level > 0) {
             const upgrade49Bonus = tesseractUpgrades[49].level * tesseractUpgrades[49].data.value;
-            const logValue = Math.log10(this.silverTachyons);
+            const logValue = Math.log10(this.resources[TesseractType.Silver]);
             costReductionFactor = 1 / (1 + (upgrade49Bonus * logValue) / 100);
         }
 
@@ -266,19 +316,24 @@ export class Tesseract extends Domain implements UnlockableDomain {
         });
     }
 
-    getUpgradeResourceType(upgrade: UnlockableUpgrade): number {
-        return (upgrade as TesseractUpgrade).data.x1; // Tachyon type
+    // Provide additional cost arguments for tesseract upgrades (none needed)
+    getAdditionalCostArgs(): any[] {
+        return [];
+    }
+
+    getResources(): Record<number, number> {
+        return this.resources;
     }
 
     // ResourceTracker interface methods
     getResourceCount(resourceType: number): number {
         switch (resourceType) {
-            case 0: return this.purpleTachyons;
-            case 1: return this.brownTachyons;
-            case 2: return this.greenTachyons;
-            case 3: return this.redTachyons;
-            case 4: return this.silverTachyons;
-            case 5: return this.goldTachyons;
+            case TesseractType.Purple: return this.resources[TesseractType.Purple];
+            case TesseractType.Brown: return this.resources[TesseractType.Brown];
+            case TesseractType.Green: return this.resources[TesseractType.Green];
+            case TesseractType.Red: return this.resources[TesseractType.Red];
+            case TesseractType.Silver: return this.resources[TesseractType.Silver];
+            case TesseractType.Gold: return this.resources[TesseractType.Gold];
             default: return 0;
         }
     }
@@ -291,7 +346,7 @@ export class Tesseract extends Domain implements UnlockableDomain {
         }
     }
 
-    canAffordUpgrade(upgrade: UnlockableUpgrade, cost: number = upgrade.cost): boolean {
+    canAffordUpgrade(upgrade: EfficiencyUpgrade, cost: number = upgrade.getCost([])): boolean {
         // TODO: Implement tachyon cost checking - need to understand which tachyon types are used for which upgrades
         // For now, returning true as placeholder
         return true;
@@ -314,6 +369,12 @@ export class Tesseract extends Domain implements UnlockableDomain {
         }
     }
 
+    getNextLockedUpgrade(): EfficiencyUpgrade | null {
+        return this.upgrades
+        .filter(u => !u.isUnlocked() && u.getUnlockRequirement?.() != null)
+        .sort((a, b) => (a.getUnlockRequirement?.() || 0) - (b.getUnlockRequirement?.() || 0))[0] || null;
+    }
+
     parse(data: Map<string, any>): void {
         const tesseract = data.get(this.getDataKey()) as Tesseract;
         const upgradesData = data.get("Arcane") as number[];
@@ -328,25 +389,26 @@ export class Tesseract extends Domain implements UnlockableDomain {
                 upgrade.level = level;
                 
                 // Set unlocked status based on total tesseract level
-                upgrade.unlocked = tesseract.totalTesseractLevel >= upgrade.data.unlock_req;
+                const unlockReq = upgrade.getUnlockRequirement();
+                upgrade.unlocked = tesseract.totalTesseractLevel >= (unlockReq || 0);
             }
         });
 
         // Parse tachyon counts from OptLacc data (indices 388-393)
         if (optionList && optionList.length > 393) {
-            tesseract.purpleTachyons = optionList[388] || 0;
-            tesseract.brownTachyons = optionList[389] || 0;
-            tesseract.greenTachyons = optionList[390] || 0;
-            tesseract.redTachyons = optionList[391] || 0;
-            tesseract.silverTachyons = optionList[392] || 0;
-            tesseract.goldTachyons = optionList[393] || 0;
+            tesseract.resources[TesseractType.Purple] = optionList[388] || 0;
+            tesseract.resources[TesseractType.Brown] = optionList[389] || 0;
+            tesseract.resources[TesseractType.Green] = optionList[390] || 0;
+            tesseract.resources[TesseractType.Red] = optionList[391] || 0;
+            tesseract.resources[TesseractType.Silver] = optionList[392] || 0;
+            tesseract.resources[TesseractType.Gold] = optionList[393] || 0;
         }
 
         // Calculate cost reduction factor from upgrade 49 and Silver Tachyons 
         let costReductionFactor = 1;
         if (tesseract.upgrades[49]?.level > 0) {
             const upgrade49Bonus = tesseract.upgrades[49].level * tesseract.upgrades[49].data.value;
-            const logValue = Math.log10(tesseract.silverTachyons);
+            const logValue = Math.log10(tesseract.resources[TesseractType.Silver]);
             costReductionFactor = 1 / (1 + (upgrade49Bonus * logValue) / 100);
         }
 
@@ -358,16 +420,18 @@ export class Tesseract extends Domain implements UnlockableDomain {
             upgrade.costToMax = upgrade.getCostToMax(tesseract.upgrades);
         });
 
-        // Calculate unlock path using the new generalized system
-        // Pass the exact levels needed to ensure we calculate the complete path
-        const nextUnlock = tesseract.unlockCalculator.findNextUnlock(tesseract);
-        const levelsNeeded = nextUnlock ? Math.max(0, nextUnlock.data.unlock_req - tesseract.totalTesseractLevel) : 0;
+        // Find the next locked item with the lowest requirement
+        const nextUnlock = this.getNextLockedUpgrade();
+
+        const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - tesseract.totalTesseractLevel) : 0;
         
-        tesseract.unlockPathInfo = tesseract.unlockEngine.calculateUnlockPath(
-            tesseract, 
-            tesseract.unlockCalculator,
-            levelsNeeded || 1 // Use at least 1 to avoid issues if no unlock needed
-        );
+        if (levelsNeeded > 0) {
+            tesseract.unlockPathInfo = tesseract.unlockEngine.calculateEfficiency(
+                tesseract, 
+                tesseract.unlockCalculator,
+                levelsNeeded
+            );
+        }
 
         // Parse Prisma Bubble data
         tesseract.prismaBubblesFound = optionList[395] || 0;
@@ -393,6 +457,4 @@ export const updateArcaneCultistImpact = (accountData: Map<string, any>) => {
         prismaBubbleUpgrade.currentMap = arcaneCultist.currentMapId;
         prismaBubbleUpgrade.talent594Value = arcaneCultist.talents.find((talent: any) => talent.skillIndex === 594)?.getBonus() || 0;
     }
-
-    console.log("Updated Arcane Cultist Impact", prismaBubbleUpgrade);
 }
