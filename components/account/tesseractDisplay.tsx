@@ -2,7 +2,7 @@
 
 import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
 import { useMemo, useState } from "react";
-import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractUpgrade } from "../../data/domain/tesseract";
+import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractType, TesseractUpgrade } from "../../data/domain/tesseract";
 import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
@@ -12,7 +12,7 @@ import IconImage from "../base/IconImage";
 import { CircleInformation, Tooltip } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
-import { UnlockPathDisplay } from "./shared/UnlockPathDisplay";
+import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 
 // Simple tachyon display without tooltip
 function TachyonDisplay({ cost, canAfford, tachyonImageData, scale = 0.7 }: { cost: number, canAfford?: boolean, tachyonImageData: ImageData, scale?: number }) {
@@ -259,15 +259,34 @@ export function TesseractDisplay() {
     // Prism Bubble Upgrade
     const prismBubbleUpgrade = tesseract.upgrades[3] as PrismaBubbleTesseractUpgrade;
 
-    // Calculate unlock path info
-    const unlockPathInfo = tesseract.unlockPathInfo || {
-        nextUnlock: null,
-        pathUpgrades: [],
-        levelsNeeded: 0,
-        totalCost: 0,
-        resourceCosts: [0, 0, 0, 0, 0, 0],
-        remainingLevels: 0
+    // Get the next unlock and levels needed
+    const nextUnlock = tesseract?.getNextLockedUpgrade();
+    const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - (tesseract?.totalTesseractLevel || 0)) : 0;
+
+    // Define optimization types for efficiency analysis
+    const optimizationTypes = [
+        {
+            id: 'unlock_path',
+            label: 'Unlock Path',
+            showCountSelector: false,
+            showConsolidation: true
+        }
+    ];
+
+    // Configuration for value display
+    const valueConfigs = {
+        unlock_path: {
+            valueHeader: '',
+            valueColor: 'accent-1',
+            formatValue: (value: number) => ``,
+            noResultsText: 'No efficient upgrades available'
+        }
     };
+
+    // Create efficiency results map
+    const efficiencyResults = new Map([
+        ['unlock_path', tesseract?.unlockPathInfo || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
+    ]);
 
     return (
         <Box gap="small">
@@ -315,12 +334,12 @@ export function TesseractDisplay() {
                         label={availableTachyonsLabel}
                         component={
                             <Box direction="row" gap="medium" wrap>
-                                <TachyonDisplay cost={tesseract?.purpleTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(0)} />
-                                <TachyonDisplay cost={tesseract?.brownTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(1)} />
-                                <TachyonDisplay cost={tesseract?.greenTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(2)} />
-                                <TachyonDisplay cost={tesseract?.redTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(3)} />
-                                <TachyonDisplay cost={tesseract?.silverTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(4)} />
-                                <TachyonDisplay cost={tesseract?.goldTachyons || 0} tachyonImageData={tesseract.getTachyonImageData(5)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Purple] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Purple)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Brown] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Brown)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Green] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Green)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Red] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Red)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Silver] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Silver)} />
+                                <TachyonDisplay cost={tesseract?.resources[TesseractType.Gold] || 0} tachyonImageData={tesseract.getTachyonImageData(TesseractType.Gold)} />
                             </Box>
                         }
                     />
@@ -388,14 +407,31 @@ export function TesseractDisplay() {
             </ShadowBox>
 
             {/* Display the unlock path if enabled */}
-            <UnlockPathDisplay
-                unlockPathInfo={unlockPathInfo}
-                resourceName="Tachyons"
-                getResourceImageData={(resourceType) => tesseract.getTachyonImageData(resourceType)}
-                showUnlockPath={showUnlockPath}
-                title="Cheapest Path to Next Upgrade"
-                targetLabel="Next Unlock"
-            />
+            {showUnlockPath && nextUnlock && levelsNeeded > 0 && (
+                <EfficiencyAnalysis
+                    efficiencyResults={efficiencyResults}
+                    optimizationTypes={optimizationTypes}
+                    getResourceImageData={(resourceType: number) => tesseract?.getTachyonImageData(resourceType) || { location: "", height: 36, width: 36 }}
+                    canAffordResource={(resourceType: number, cost: number) => tesseract?.getResourceCount(resourceType) >= cost || false}
+                    valueConfigs={valueConfigs}
+                    title="Cheapest Path to Next Upgrade"
+                    currentValues={{
+                        nextUnlock: {
+                            label: "Next Unlock",
+                            value: (
+                                <Box direction="row" gap="small" align="center">
+                                    <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                                    <Text size="small">{nextUnlock.getName()}</Text>
+                                </Box>
+                            )
+                        },
+                        levelsNeeded: {
+                            label: "Levels Needed",
+                            value: `${levelsNeeded} more levels to reach ${nextUnlock.getUnlockRequirement?.() ?? 0}`
+                        }
+                    }}
+                />
+            )}
 
             {upgradesToShow.length === 0 && (
                 <ShadowBox background="dark-1" pad="medium" align="center">

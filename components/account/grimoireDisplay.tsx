@@ -2,7 +2,7 @@
 
 import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
 import { useMemo, useState } from "react";
-import { Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
+import { BoneType, Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
 import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
@@ -12,7 +12,7 @@ import IconImage from "../base/IconImage";
 import { CircleInformation } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
-import { UnlockPathDisplay } from "./shared/UnlockPathDisplay";
+import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 
 // Simple bone display without tooltip
 function BoneDisplay({ cost, canAfford, boneImageData }: { cost: number, canAfford?: boolean, boneImageData: ImageData }) {
@@ -293,15 +293,34 @@ export function GrimoireDisplay() {
         );
     };
 
-    // Use the pre-calculated unlock path info from the domain object
-    const unlockPathInfo = grimoire?.unlockPathInfo || {
-        nextUnlock: null,
-        pathUpgrades: [],
-        levelsNeeded: 0,
-        totalCost: 0,
-        resourceCosts: [0, 0, 0, 0],
-        remainingLevels: 0
+    // Get the next unlock and levels needed
+    const nextUnlock = grimoire?.getNextLockedUpgrade();
+    const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - (grimoire?.totalGrimoireLevel || 0)) : 0;
+
+    // Define optimization types for efficiency analysis
+    const optimizationTypes = [
+        {
+            id: 'unlock_path',
+            label: 'Unlock Path',
+            showCountSelector: false,
+            showConsolidation: true
+        }
+    ];
+
+    // Configuration for value display
+    const valueConfigs = {
+        unlock_path: {
+            valueHeader: '',
+            valueColor: 'accent-1',
+            formatValue: (value: number) => ``,
+            noResultsText: 'No efficient upgrades available'
+        }
     };
+
+    // Create efficiency results map
+    const efficiencyResults = new Map([
+        ['unlock_path', grimoire?.unlockPathInfo || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
+    ]);
 
     return (
         <Box gap="small">
@@ -332,10 +351,10 @@ export function GrimoireDisplay() {
                         label={availableBonesLabel}
                         component={
                             <Box direction="row" gap="medium" wrap>
-                                <BoneDisplay cost={grimoire?.femurBones || 0} boneImageData={grimoire.getBoneImageData(0)} />
-                                <BoneDisplay cost={grimoire?.ribcageBones || 0} boneImageData={grimoire.getBoneImageData(1)} />
-                                <BoneDisplay cost={grimoire?.craniumBones || 0} boneImageData={grimoire.getBoneImageData(2)} />
-                                <BoneDisplay cost={grimoire?.bovinaeBones || 0} boneImageData={grimoire.getBoneImageData(3)} />
+                                <BoneDisplay cost={grimoire?.resources[BoneType.Femur] || 0} boneImageData={grimoire.getBoneImageData(BoneType.Femur)} />
+                                <BoneDisplay cost={grimoire?.resources[BoneType.Ribcage] || 0} boneImageData={grimoire.getBoneImageData(BoneType.Ribcage)} />
+                                <BoneDisplay cost={grimoire?.resources[BoneType.Cranium] || 0} boneImageData={grimoire.getBoneImageData(BoneType.Cranium)} />
+                                <BoneDisplay cost={grimoire?.resources[BoneType.Bovinae] || 0} boneImageData={grimoire.getBoneImageData(BoneType.Bovinae)} />
                             </Box>
                         }
                     />
@@ -403,14 +422,31 @@ export function GrimoireDisplay() {
             </ShadowBox>
 
             {/* Display the unlock path if enabled */}
-            <UnlockPathDisplay
-                unlockPathInfo={unlockPathInfo}
-                resourceName="Bones"
-                getResourceImageData={(resourceType) => grimoire.getBoneImageData(resourceType)}
-                showUnlockPath={showUnlockPath}
-                title="Cheapest Path to Next Upgrade"
-                targetLabel="Next Unlock"
-            />
+            {showUnlockPath && nextUnlock && levelsNeeded > 0 && (
+                <EfficiencyAnalysis
+                    efficiencyResults={efficiencyResults}
+                    optimizationTypes={optimizationTypes}
+                    getResourceImageData={(resourceType: number) => grimoire?.getBoneImageData(resourceType) || { location: "", height: 20, width: 20 }}
+                    canAffordResource={(resourceType: number, cost: number) => grimoire?.getResourceCount(resourceType) >= cost || false}
+                    valueConfigs={valueConfigs}
+                    title="Cheapest Path to Next Upgrade"
+                    currentValues={{
+                        nextUnlock: {
+                            label: "Next Unlock",
+                            value: (
+                                <Box direction="row" gap="small" align="center">
+                                    <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                                    <Text size="small">{nextUnlock.getName()}</Text>
+                                </Box>
+                            )
+                        },
+                        levelsNeeded: {
+                            label: "Levels Needed",
+                            value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
+                        }
+                    }}
+                />
+            )}
 
             {upgradesToShow.length === 0 && (
                 <ShadowBox background="dark-1" pad="medium" align="center">
