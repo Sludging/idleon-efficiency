@@ -347,9 +347,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     }
 
     canAffordUpgrade(upgrade: EfficiencyUpgrade, cost: number = upgrade.getCost([])): boolean {
-        // TODO: Implement tachyon cost checking - need to understand which tachyon types are used for which upgrades
-        // For now, returning true as placeholder
-        return true;
+        return this.resources[upgrade.getCostType() as TesseractType] >= cost;
     }
 
     // Legacy methods for backward compatibility

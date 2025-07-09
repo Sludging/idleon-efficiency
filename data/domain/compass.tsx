@@ -6,7 +6,8 @@ import {
     EfficiencyUpgrade, 
     EfficiencyDomain, 
     EfficiencyEngine, 
-    EfficiencyCalculator
+    EfficiencyCalculator,
+    EfficiencyPathInfo
 } from "../../lib/efficiencyEngine/efficiencyEngine";
 import { CompassUpgradeBase, initCompassUpgradeRepo } from "./data/CompassUpgradeRepo";
 import { initRandoListRepo } from "./data/RandoListRepo";
@@ -30,14 +31,6 @@ export enum DustType {
     Cooldust = 3,
     Novadust = 4
   }
-
-// Compass efficiency result structure (for backward compatibility)
-interface CompassEfficiencyResult {
-    upgrade: CompassUpgrade;
-    valueIncrease: number;
-    dustCost: number;
-    efficiency: number;
-}
 
 // Helper function to add meta-upgrades that boost circle-shaped upgrades
 function addMetaUpgradesIfRelevant(baseIds: number[], compass: Compass): number[] {
@@ -484,7 +477,7 @@ export class Compass extends Domain implements EfficiencyDomain {
     // Efficiency calculation fields
     currentTempestDamage: number = 0;
     currentDustMultiplier: number = 0;
-    efficiencyResults: Map<string, CompassEfficiencyResult[]> = new Map();
+    efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
 
     // Compass raw data for calculations
     medallionsCollected: any[] = [];
@@ -915,35 +908,8 @@ export class Compass extends Domain implements EfficiencyDomain {
         
         calculators.forEach(calculator => {
             const pathInfo = engine.calculateEfficiency(this, calculator);
-            // Convert EfficiencyPathInfo to CompassEfficiencyResult[] for backward compatibility
-            const results: CompassEfficiencyResult[] = pathInfo.pathUpgrades.map(pathUpgrade => ({
-                upgrade: pathUpgrade.upgrade as CompassUpgrade,
-                valueIncrease: pathUpgrade.valueIncrease,
-                dustCost: pathUpgrade.resourceCost,
-                efficiency: pathUpgrade.efficiency,
-            }));
-            this.efficiencyResults.set(calculator.name, results);
+            this.efficiencyResults.set(calculator.name, pathInfo);
         });
-    }
-
-    /**
-     * Get the top N most efficient damage upgrades
-     * @param n Number of upgrades to return (default 10)
-     * @returns Array of most efficient upgrades
-     */
-    getTopDamageEfficiencyUpgrades(n: number = 10): CompassEfficiencyResult[] {
-        const damageResults = this.efficiencyResults.get("Tempest Damage") || [];
-        return damageResults.slice(0, n);
-    }
-
-    /**
-     * Get the top N most efficient dust upgrades
-     * @param n Number of upgrades to return (default 10)
-     * @returns Array of most efficient upgrades
-     */
-    getTopDustEfficiencyUpgrades(n: number = 10): CompassEfficiencyResult[] {
-        const dustResults = this.efficiencyResults.get("Dust Multiplier") || [];
-        return dustResults.slice(0, n);
     }
 
     /**
