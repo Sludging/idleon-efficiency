@@ -1,32 +1,53 @@
 "use client"
 
-import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
+import { Box, CheckBox, Text, Select, DataTable, TextInput } from "grommet";
 import { useMemo, useState } from "react";
 import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractType, TesseractUpgrade } from "../../data/domain/tesseract";
 import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
+import { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
-import { CircleInformation, Tooltip } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 
+interface TesseractTableData {
+    name: string;
+    tachyonType: string;
+    level: number;
+    maxLevel: number;
+    bonus: string;
+    nextCost: number;
+    goalCost: number;
+    type: string;
+    maxed: boolean;
+    locked: boolean;
+    id: number;
+    upgrade: TesseractUpgrade;
+}
+
 // Simple tachyon display without tooltip
-function TachyonDisplay({ cost, canAfford, tachyonImageData, scale = 0.7 }: { cost: number, canAfford?: boolean, tachyonImageData: ImageData, scale?: number }) {
+function TachyonDisplay({ cost, canAfford, tachyonImageData, textSize = "xsmall", showTooltip = false }: {
+    cost: number,
+    canAfford?: boolean,
+    tachyonImageData: ImageData,
+    textSize?: string,
+    showTooltip?: boolean
+}) {
     return (
-        <Box direction="row" gap="small" align="center">
-            <IconImage data={tachyonImageData} scale={scale} />
+        <Box direction="row" gap="small" align="end">
+            <IconImage data={tachyonImageData} scale={0.7} />
             <TipDisplay
                 heading="Exact Tachyon Count"
                 body={
                     <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
                 }
                 direction={TipDirection.Down}
+                visibility={showTooltip ? undefined : 'none'}
             >
-                <Text color={canAfford ? "green-1" : undefined}>
+                <Text size={textSize} color={canAfford ? "green-1" : undefined}>
                     {nFormatter(cost)}
                 </Text>
             </TipDisplay>
@@ -34,182 +55,273 @@ function TachyonDisplay({ cost, canAfford, tachyonImageData, scale = 0.7 }: { co
     );
 }
 
-function UpgradeCostColumns(props: {
-    upgrade: TesseractUpgrade,
-    tesseract: Tesseract
-}) {
-    const { upgrade, tesseract } = props;
-    const isMaxLevel = upgrade.level >= upgrade.data.max_level;
-    const isVeryHighMaxLevel = upgrade.data.max_level >= 999999;
-
-    // If the upgrade is maxed, we don't need to show the cost columns
-    if (isMaxLevel) {
-        return (
-            <Box fill justify="center" align="center">
-                <Text size="large" color="status-ok">Maxed</Text>
-            </Box>
-        )
-    }
-
-    // Recalculate costs with current cost reduction factor for accurate display
-    const nextLevelCost = upgrade.getCost(tesseract.upgrades);
-    const costToMax = upgrade.getCostToMax(tesseract.upgrades);
-    const costForNext10Levels = isVeryHighMaxLevel ? upgrade.getCostForNextNLevels(tesseract.upgrades, 10) : 0;
-
-    // Check if player can afford the upgrade
-    const canAffordNextLevel = tesseract.canAffordUpgrade(upgrade, nextLevelCost);
-    const canAffordCostToMax = tesseract.canAffordUpgrade(upgrade, isVeryHighMaxLevel ? costForNext10Levels : costToMax);
-
-    // Get tachyon type from the upgrade's x1 property
-    const tachyonType = upgrade.data.x1;
-
-    // Otherwise, we show the cost and cost to max columns
-    return (
-        <>
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label="Next level cost"
-                component={
-                    <TachyonDisplay
-                        cost={nextLevelCost}
-                        canAfford={canAffordNextLevel}
-                        tachyonImageData={tesseract.getTachyonImageData(tachyonType)}
-                    />
-                }
-            />
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label={isVeryHighMaxLevel ? "Cost for 10 levels" : "Cost to max"}
-                component={
-                    <TachyonDisplay
-                        cost={isVeryHighMaxLevel ? costForNext10Levels : costToMax}
-                        canAfford={canAffordCostToMax}
-                        tachyonImageData={tesseract.getTachyonImageData(tachyonType)}
-                    />
-                }
-            />
-        </>
-    )
-}
-
-export function TesseractDisplay() {
-    const [hideMaxed, setHideMaxed] = useState(true);
-    const [hideLocked, setHideLocked] = useState(false);
-    const [tachyonTypeFilter, setTachyonTypeFilter] = useState<string>('All');
-    const [sortBy, setSortBy] = useState<string>('default');
-    const [showUnlockPath, setShowUnlockPath] = useState(false);
+// Main Tesseract Table View
+function TesseractTableView() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const tesseract = theData.get("tesseract") as Tesseract;
 
-    // Calculate counts for each tachyon type
-    const tachyonTypeCounts = useMemo(() => {
-        if (!tesseract) {
-            return { all: 0, purple: 0, brown: 0, green: 0, red: 0, silver: 0, gold: 0 };
+    // Filter and sort state
+    const [hideLocked, setHideLocked] = useState(true);
+    const [hideMaxed, setHideMaxed] = useState(true);
+    const [tachyonTypeFilter, setTachyonTypeFilter] = useState<string>('All');
+    const [sortBy, setSortBy] = useState<'cost' | 'default'>('cost');
+    const [searchText, setSearchText] = useState<string>('');
+
+    const columns = [
+        {
+            property: 'name',
+            header: 'Name',
+            render: (data: TesseractTableData) => (
+                <Box direction="row" gap="small" align="center" style={{ opacity: data.locked ? 0.5 : 1 }}>
+                    <IconImage data={data.upgrade.getImageData()} scale={0.4} />
+                    <Text size="xsmall">{data.name}</Text>
+                </Box>
+            )
+        },
+        {
+            property: 'tachyonType',
+            header: 'Tachyon',
+            render: (data: TesseractTableData) => (
+                <Box direction="row" gap="small" align="center" title={data.tachyonType}>
+                    <IconImage data={tesseract.getTachyonImageData(data.upgrade.data.x1)} scale={0.6} />
+                </Box>
+            )
+        },
+        {
+            property: 'level',
+            header: 'Level',
+            render: (data: TesseractTableData) => (
+                <Text size="xsmall">{`${data.level}${data.maxLevel >= 999999 ? '' : `/${data.maxLevel}`}`}</Text>
+            )
+        },
+        {
+            property: 'bonus',
+            header: 'Bonus',
+            render: (data: TesseractTableData) => (
+                <Text size="xsmall">{data.bonus}</Text>
+            )
+        },
+        {
+            property: 'nextCost',
+            header: 'Next Cost',
+            render: (data: TesseractTableData) => {
+                if (data.upgrade.level >= data.upgrade.data.max_level) {
+                    return <Text size="xsmall">-</Text>;
+                }
+
+                // For locked upgrades, show unlock requirement
+                if (!data.upgrade.unlocked) {
+                    return (
+                        <TipDisplay
+                            heading="Unlock Requirement"
+                            body={
+                                <Text size="small">Unlock at {data.upgrade.data.unlock_req} total level</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <Text size="xsmall" color="grey-2">
+                                Unlock at {data.upgrade.data.unlock_req}
+                            </Text>
+                        </TipDisplay>
+                    );
+                }
+
+                return (
+                    <TachyonDisplay
+                        cost={data.nextCost}
+                        canAfford={tesseract.canAffordUpgrade(data.upgrade)}
+                        tachyonImageData={tesseract.getTachyonImageData(data.upgrade.data.x1)}
+                    />
+                );
+            }
+        },
+        {
+            property: 'goalCost',
+            header: 'Goal Cost',
+            render: (data: TesseractTableData) => {
+                if (data.upgrade.level >= data.upgrade.data.max_level) {
+                    return <Text size="small">-</Text>;
+                }
+
+                // For locked upgrades, show the cost to unlock
+                if (!data.upgrade.unlocked) {
+                    return (
+                        <TipDisplay
+                            heading="Cost to Unlock"
+                            body={
+                                <Text size="small">Cost to reach total level {data.upgrade.data.unlock_req}</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <Text size="xsmall" color="grey-2">
+                                Level {data.upgrade.data.unlock_req}
+                            </Text>
+                        </TipDisplay>
+                    );
+                }
+
+                // For unlocked upgrades, show cost to max or 10 levels
+                const tooltipText = data.upgrade.data.max_level >= 999999
+                    ? "Cost for the next 10 levels"
+                    : "Cost to reach maximum level";
+
+                return (
+                    <TipDisplay
+                        heading={data.upgrade.data.max_level >= 999999 ? "Cost for 10 Levels" : "Cost to Max"}
+                        body={
+                            <Text size="small">{tooltipText}</Text>
+                        }
+                        direction={TipDirection.Down}
+                    >
+                        <TachyonDisplay
+                            cost={data.goalCost}
+                            canAfford={tesseract.canAffordUpgrade(data.upgrade, data.goalCost)}
+                            tachyonImageData={tesseract.getTachyonImageData(data.upgrade.data.x1)}
+                        />
+                    </TipDisplay>
+                );
+            }
         }
+    ];
 
-        const counts = {
-            all: tesseract.upgrades.length,
-            purple: tesseract.upgrades.filter(u => u.data.x1 === 0).length,
-            brown: tesseract.upgrades.filter(u => u.data.x1 === 1).length,
-            green: tesseract.upgrades.filter(u => u.data.x1 === 2).length,
-            red: tesseract.upgrades.filter(u => u.data.x1 === 3).length,
-            silver: tesseract.upgrades.filter(u => u.data.x1 === 4).length,
-            gold: tesseract.upgrades.filter(u => u.data.x1 === 5).length
-        };
+    const filteredAndSortedData = useMemo(() => {
+        if (!tesseract) return [];
 
-        return counts;
-    }, [tesseract]);
+        let data = tesseract.upgrades.map(upgrade => {
+            // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
+            const goalCost = !upgrade.unlocked
+                ? 0 // Locked upgrades don't have a direct cost, they need level requirements
+                : (upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels(tesseract.upgrades, 10) : upgrade.costToMax);
 
-    const upgradesToShow = useMemo(() => {
-        if (!tesseract) {
-            return [];
-        }
+            return {
+                name: upgrade.data.name,
+                tachyonType: TesseractType[upgrade.data.x1],
+                level: upgrade.level,
+                maxLevel: upgrade.data.max_level,
+                bonus: upgrade.getDescription(),
+                nextCost: upgrade.level === upgrade.data.max_level ? Number.MAX_SAFE_INTEGER : upgrade.cost,
+                goalCost: upgrade.level === upgrade.data.max_level ? Number.MAX_SAFE_INTEGER : goalCost,
+                type: 'Tesseract',
+                maxed: upgrade.level >= upgrade.data.max_level,
+                locked: !upgrade.unlocked,
+                id: upgrade.id,
+                upgrade
+            };
+        });
 
-        let filteredUpgrades = tesseract.upgrades;
-
-        if (hideMaxed) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.level < upgrade.data.max_level
-            );
-        }
-
+        // Apply filters
         if (hideLocked) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.unlocked
-            );
+            data = data.filter(item => !item.locked);
         }
-
+        if (hideMaxed) {
+            data = data.filter(item => !item.maxed);
+        }
         if (tachyonTypeFilter !== 'All') {
-            const tachyonTypeIndex = parseInt(tachyonTypeFilter);
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.data.x1 === tachyonTypeIndex
+            data = data.filter(item => item.tachyonType === tachyonTypeFilter);
+        }
+        if (searchText.trim() !== '') {
+            const searchLower = searchText.toLowerCase().trim();
+            data = data.filter(item =>
+                item.name.toLowerCase().includes(searchLower) ||
+                item.bonus.toLowerCase().includes(searchLower)
             );
         }
 
         // Apply sorting
-        if (sortBy === 'cheapest') {
-            // Sort by cost to next level (cheapest first)
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
+        data.sort((a, b) => {
+            // Always put locked and maxed items at the bottom
+            if ((a.locked || a.maxed) && !(b.locked || b.maxed)) return 1;
+            if (!(a.locked || a.maxed) && (b.locked || b.maxed)) return -1;
 
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                return a.cost - b.cost;
-            });
-        } else if (sortBy === 'affordable') {
-            // Sort by affordability first, then by cost
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                const aAffordable = tesseract.canAffordUpgrade(a) ? 1 : 0;
-                const bAffordable = tesseract.canAffordUpgrade(b) ? 1 : 0;
-
-                // First sort by affordability (affordable first)
-                if (aAffordable !== bAffordable) {
-                    return bAffordable - aAffordable;
-                }
-
-                // Then sort by cost (cheapest first)
-                return a.cost - b.cost;
-            });
-        } else {
-            // Default order, but with locked upgrades at the bottom
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // Sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
+            if (sortBy === 'default') {
+                // Default order by ID
                 return a.id - b.id;
-            });
-        }
+            } else {
+                // Sort by cost (ascending)
+                return a.nextCost - b.nextCost;
+            }
+        });
 
-        return filteredUpgrades;
-    }, [tesseract, hideMaxed, hideLocked, tachyonTypeFilter, sortBy]);
+        return data;
+    }, [tesseract, lastUpdated, hideLocked, hideMaxed, tachyonTypeFilter, sortBy, searchText]);
+
+    // Get unique values for filters
+    const uniqueTachyonTypes = useMemo(() => {
+        if (!tesseract) return [];
+        const tachyonTypes = [...new Set(tesseract.upgrades.map(upgrade => upgrade.data.x1))];
+        return tachyonTypes.sort().map(tachyonType => TesseractType[tachyonType]);
+    }, [tesseract]);
+
+    return (
+        <ShadowBox background="dark-1" pad="medium">
+            {/* Custom filters and controls */}
+            <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} wrap align="center">
+                <CheckBox
+                    checked={hideLocked}
+                    label="Hide locked"
+                    onChange={(event) => setHideLocked(event.target.checked)}
+                />
+                <CheckBox
+                    checked={hideMaxed}
+                    label="Hide maxed"
+                    onChange={(event) => setHideMaxed(event.target.checked)}
+                />
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Tachyon:</Text>
+                    <Select
+                        value={tachyonTypeFilter}
+                        options={['All', ...uniqueTachyonTypes]}
+                        onChange={({ option }) => setTachyonTypeFilter(option)}
+                    />
+                </Box>
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Sort by:</Text>
+                    <Select
+                        value={sortBy}
+                        options={[
+                            { label: 'Cost (ascending)', value: 'cost' },
+                            { label: 'Default Order', value: 'default' }
+                        ]}
+                        labelKey="label"
+                        valueKey={{ key: 'value', reduce: true }}
+                        onChange={({ value }) => setSortBy(value)}
+                    />
+                </Box>
+            </Box>
+            <Box>
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Search:</Text>
+                    <TextInput
+                        placeholder="Search name or bonus..."
+                        value={searchText}
+                        onChange={(event) => setSearchText(event.target.value)}
+                        size="small"
+                        style={{ width: '200px' }}
+                    />
+                </Box>
+            </Box>
+
+            <DataTable
+                fill
+                columns={columns}
+                data={filteredAndSortedData}
+            />
+        </ShadowBox>
+    );
+}
+
+export function TesseractDisplay() {
+    const [showUnlockPath, setShowUnlockPath] = useState(false);
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+
+    const tesseract = theData.get("tesseract") as Tesseract;
 
     if (!tesseract) {
         return <Text>Loading Tesseract data...</Text>;
@@ -222,39 +334,6 @@ export function TesseractDisplay() {
 
     const totalLevelLabel = "Total Tesseract Level";
     const availableTachyonsLabel = "Available Tachyons";
-
-    // Filter options for tachyon types
-    const tachyonTypeOptions = [
-        { label: `All (${tachyonTypeCounts.all})`, value: 'All' },
-        { label: `Purple (${tachyonTypeCounts.purple})`, value: '0' },
-        { label: `Brown (${tachyonTypeCounts.brown})`, value: '1' },
-        { label: `Green (${tachyonTypeCounts.green})`, value: '2' },
-        { label: `Red (${tachyonTypeCounts.red})`, value: '3' },
-        { label: `Silver (${tachyonTypeCounts.silver})`, value: '4' },
-        { label: `Gold (${tachyonTypeCounts.gold})`, value: '5' },
-    ];
-
-    const sortOptions = [
-        { label: 'Default Order', value: 'default' },
-        { label: 'Cheapest First', value: 'cheapest' },
-        { label: 'Affordable First', value: 'affordable' }
-    ];
-
-    const renderTachyonOption = (option: any) => {
-        return (
-            <Box direction="row" gap="small" align="center">
-                <Text size="small">{option.label}</Text>
-            </Box>
-        );
-    };
-
-    const renderSortOption = (option: any) => {
-        return (
-            <Box direction="row" gap="small" align="center">
-                <Text size="small">{option.label}</Text>
-            </Box>
-        );
-    };
 
     // Prism Bubble Upgrade
     const prismBubbleUpgrade = tesseract.upgrades[3] as PrismaBubbleTesseractUpgrade;
@@ -347,57 +426,10 @@ export function TesseractDisplay() {
 
                 <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
                     <CheckBox
-                        checked={hideMaxed}
-                        label="Hide maxed upgrades"
-                        onChange={(event) => setHideMaxed(event.target.checked)}
-                    />
-                    <CheckBox
-                        checked={hideLocked}
-                        label="Hide locked upgrades"
-                        onChange={(event) => setHideLocked(event.target.checked)}
-                    />
-                    <CheckBox
                         checked={showUnlockPath}
                         label="Show unlock path"
                         onChange={(event) => setShowUnlockPath(event.target.checked)}
                     />
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Filter by Tachyon Type"
-                            value={tachyonTypeFilter}
-                            options={tachyonTypeOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setTachyonTypeFilter(value)}
-                        >
-                            {renderTachyonOption}
-                        </Select>
-                    </Box>
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Sort by"
-                            value={sortBy}
-                            options={sortOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setSortBy(value)}
-                        >
-                            {renderSortOption}
-                        </Select>
-                        <TipDisplay
-                            heading="Sorting Options"
-                            body={
-                                <Box>
-                                    <Text size="small">• Default Order: Original game order</Text>
-                                    <Text size="small">• Cheapest First: Sorts by lowest cost to next level</Text>
-                                    <Text size="small">• Affordable First: Shows upgrades you can afford first</Text>
-                                </Box>
-                            }
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>
                 </Box>
                 <Box margin={{ top: 'medium' }}>
                     <Text size="small">
@@ -433,63 +465,7 @@ export function TesseractDisplay() {
                 />
             )}
 
-            {upgradesToShow.length === 0 && (
-                <ShadowBox background="dark-1" pad="medium" align="center">
-                    <Text>No upgrades to display with current filters</Text>
-                </ShadowBox>
-            )}
-
-            {upgradesToShow.map((upgrade, index) => {
-                const isLocked = !upgrade.unlocked;
-                return (
-                    <ShadowBox
-                        style={{ opacity: isLocked ? 0.6 : 1 }}
-                        key={index}
-                        background={isLocked ? "dark-3" : "dark-1"}
-                        pad="small"
-                        direction="row"
-                        align="center"
-                        justify="between"
-                        margin={{ bottom: 'xxsmall' }}
-                    >
-                        <Grid columns={["25%", "30%", "10%", "15%", "15%"]} gap="small" align="center" fill>
-                            <ComponentAndLabel
-                                labelSize="xsmall"
-                                label="Name"
-                                component={
-                                    <Box direction="row" gap="small" align="center">
-                                        <IconImage data={upgrade.getImageData()} scale={0.7} />
-                                        <Text size="xsmall">{upgrade.data.name}</Text>
-                                    </Box>
-                                }
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='xsmall'
-                                text={upgrade.getDescription()}
-                                label="Bonus"
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='small'
-                                text={`${upgrade.level} / ${upgrade.data.max_level}`}
-                                label="Level"
-                            />
-                            {upgrade.unlocked && <UpgradeCostColumns upgrade={upgrade} tesseract={tesseract} />}
-                            {!upgrade.unlocked && (
-                                <Box fill>
-                                    <TextAndLabel
-                                        labelSize="xsmall"
-                                        textSize='xsmall'
-                                        text={`Unlock at ${upgrade.data.unlock_req} total level (${upgrade.data.unlock_req - tesseract.totalTesseractLevel} more)`}
-                                        label="Locked"
-                                    />
-                                </Box>
-                            )}
-                        </Grid>
-                    </ShadowBox>
-                )
-            })}
+            <TesseractTableView />
         </Box>
     )
 } 

@@ -1,11 +1,11 @@
 "use client"
 
-import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
+import { Box, CheckBox, Text, Select, DataTable, TextInput } from "grommet";
 import { useMemo, useState } from "react";
 import { BoneType, Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
 import { nFormatter } from "../../data/utility";
 import ShadowBox from "../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
+import { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
@@ -14,19 +14,41 @@ import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { ImageData } from "../../data/domain/imageData";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 
+interface GrimoireTableData {
+    name: string;
+    boneType: string;
+    level: number;
+    maxLevel: number;
+    bonus: string;
+    nextCost: number;
+    goalCost: number;
+    type: string;
+    maxed: boolean;
+    locked: boolean;
+    id: number;
+    upgrade: GrimoireUpgrade;
+}
+
 // Simple bone display without tooltip
-function BoneDisplay({ cost, canAfford, boneImageData }: { cost: number, canAfford?: boolean, boneImageData: ImageData }) {
+function BoneDisplay({ cost, canAfford, boneImageData, textSize = "xsmall", showTooltip = false }: { 
+    cost: number, 
+    canAfford?: boolean, 
+    boneImageData: ImageData, 
+    textSize?: string,
+    showTooltip?: boolean 
+}) {
     return (
-        <Box direction="row" gap="small" align="center">
-            <IconImage data={boneImageData} />
+        <Box direction="row" gap="small" align="end">
+            <IconImage data={boneImageData} scale={0.7} />
             <TipDisplay
                 heading="Exact Bone Count"
                 body={
                     <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
                 }
                 direction={TipDirection.Down}
+                visibility={showTooltip ? undefined : 'none'}
             >
-                <Text color={canAfford ? "green-1" : undefined}>
+                <Text size={textSize} color={canAfford ? "green-1" : undefined}>
                     {nFormatter(cost)}
                 </Text>
             </TipDisplay>
@@ -34,180 +56,276 @@ function BoneDisplay({ cost, canAfford, boneImageData }: { cost: number, canAffo
     );
 }
 
-function UpgradeCostColumns(props: {
-    upgrade: GrimoireUpgrade,
-    grimoire: Grimoire
-}) {
-    const { upgrade, grimoire } = props;
-    const isMaxLevel = upgrade.level >= upgrade.data.max_level;
-    const isVeryHighMaxLevel = upgrade.data.max_level >= 999999;
-
-    // If the upgrade is maxed, we don't need to show the cost columns
-    if (isMaxLevel) {
-        return (
-            <Box fill justify="center" align="center">
-                <Text size="large" color="status-ok">Maxed</Text>
-            </Box>
-        )
-    }
-
-    // Calculate cost for next 10 levels if max level is very high
-    const costForNext10Levels = isVeryHighMaxLevel ? upgrade.getCostForNextNLevels([], 10) : 0;
-
-    // Check if player can afford the upgrade
-    const canAffordNextLevel = grimoire.canAffordUpgrade(upgrade);
-    const canAffordCostToMax = grimoire.canAffordUpgrade(upgrade, isVeryHighMaxLevel ? costForNext10Levels : upgrade.costToMax);
-
-    // Get bone type from the upgrade's x1 property
-    const boneType = upgrade.data.x1;
-
-    // Otherwise, we show the cost and cost to max columns
-    return (
-        <>
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label="Next level cost"
-                component={
-                    <BoneDisplay
-                        cost={upgrade.cost}
-                        canAfford={canAffordNextLevel}
-                        boneImageData={grimoire.getBoneImageData(boneType)}
-                    />
-                }
-            />
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label={isVeryHighMaxLevel ? "Cost for 10 levels" : "Cost to max"}
-                component={
-                    <BoneDisplay
-                        cost={isVeryHighMaxLevel ? costForNext10Levels : upgrade.costToMax}
-                        canAfford={canAffordCostToMax}
-                        boneImageData={grimoire.getBoneImageData(boneType)}
-                    />
-                }
-            />
-        </>
-    )
-}
-
-export function GrimoireDisplay() {
-    const [hideMaxed, setHideMaxed] = useState(true);
-    const [hideLocked, setHideLocked] = useState(false);
-    const [boneTypeFilter, setBoneTypeFilter] = useState<string>('All');
-    const [sortBy, setSortBy] = useState<string>('default');
-    const [showUnlockPath, setShowUnlockPath] = useState(false);
+// Main Grimoire Table View
+function GrimoireTableView() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const grimoire = theData.get("grimoire") as Grimoire;
 
-    // Calculate counts for each bone type
-    const boneTypeCounts = useMemo(() => {
-        if (!grimoire) {
-            return { all: 0, femur: 0, ribcage: 0, cranium: 0, bovinae: 0 };
+    // Filter and sort state
+    const [hideLocked, setHideLocked] = useState(true);
+    const [hideMaxed, setHideMaxed] = useState(true);
+    const [boneTypeFilter, setBoneTypeFilter] = useState<string>('All');
+    const [sortBy, setSortBy] = useState<'cost' | 'default'>('cost');
+    const [searchText, setSearchText] = useState<string>('');
+
+    const columns = [
+        {
+            property: 'name',
+            header: 'Name',
+            render: (data: GrimoireTableData) => (
+                <Box direction="row" gap="small" align="center" style={{ opacity: data.locked ? 0.5 : 1 }}>
+                    <IconImage data={data.upgrade.getImageData()} scale={0.4} />
+                    <Text size="xsmall">{data.name}</Text>
+                </Box>
+            )
+        },
+        {
+            property: 'boneType',
+            header: 'Bone',
+            render: (data: GrimoireTableData) => (
+                <Box direction="row" gap="small" align="center" title={data.boneType}>
+                    <IconImage data={grimoire.getBoneImageData(data.upgrade.data.x1)} scale={0.6} />
+                </Box>
+            )
+        },
+        {
+            property: 'level',
+            header: 'Level',
+            render: (data: GrimoireTableData) => (
+                <Text size="xsmall">{`${data.level}${data.maxLevel >= 999999 ? '' : `/${data.maxLevel}`}`}</Text>
+            )
+        },
+        {
+            property: 'bonus',
+            header: 'Bonus',
+            render: (data: GrimoireTableData) => (
+                <Text size="xsmall">{data.bonus}</Text>
+            )
+        },
+        {
+            property: 'nextCost',
+            header: 'Next Cost',
+            render: (data: GrimoireTableData) => {
+                if (data.upgrade.level >= data.upgrade.data.max_level) {
+                    return <Text size="xsmall">-</Text>;
+                }
+
+                // For locked upgrades, show unlock requirement
+                if (!data.upgrade.unlocked) {
+                    return (
+                        <TipDisplay
+                            heading="Unlock Requirement"
+                            body={
+                                <Text size="small">Unlock at {data.upgrade.data.unlock_req} total level</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <Text size="xsmall" color="grey-2">
+                                Unlock at {data.upgrade.data.unlock_req}
+                            </Text>
+                        </TipDisplay>
+                    );
+                }
+
+                return (
+                    <BoneDisplay
+                        cost={data.nextCost}
+                        canAfford={grimoire.canAffordUpgrade(data.upgrade)}
+                        boneImageData={grimoire.getBoneImageData(data.upgrade.data.x1)}
+                    />
+                );
+            }
+        },
+        {
+            property: 'goalCost',
+            header: 'Goal Cost',
+            render: (data: GrimoireTableData) => {
+                if (data.upgrade.level >= data.upgrade.data.max_level) {
+                    return <Text size="small">-</Text>;
+                }
+
+                // For locked upgrades, show the cost to unlock
+                if (!data.upgrade.unlocked) {
+                    return (
+                        <TipDisplay
+                            heading="Cost to Unlock"
+                            body={
+                                <Text size="small">Cost to reach total level {data.upgrade.data.unlock_req}</Text>
+                            }
+                            direction={TipDirection.Down}
+                        >
+                            <Text size="xsmall" color="grey-2">
+                                Level {data.upgrade.data.unlock_req}
+                            </Text>
+                        </TipDisplay>
+                    );
+                }
+
+                // For unlocked upgrades, show cost to max or 10 levels
+                const tooltipText = data.upgrade.data.max_level >= 999999
+                    ? "Cost for the next 10 levels"
+                    : "Cost to reach maximum level";
+
+                return (
+                    <TipDisplay
+                        heading={data.upgrade.data.max_level >= 999999 ? "Cost for 10 Levels" : "Cost to Max"}
+                        body={
+                            <Text size="small">{tooltipText}</Text>
+                        }
+                        direction={TipDirection.Down}
+                    >
+                        <BoneDisplay
+                            cost={data.goalCost}
+                            canAfford={grimoire.canAffordUpgrade(data.upgrade, data.goalCost)}
+                            boneImageData={grimoire.getBoneImageData(data.upgrade.data.x1)}
+                        />
+                    </TipDisplay>
+                );
+            }
         }
+    ];
 
-        const counts = {
-            all: grimoire.upgrades.length,
-            femur: grimoire.upgrades.filter(u => u.data.x1 === 0).length,
-            ribcage: grimoire.upgrades.filter(u => u.data.x1 === 1).length,
-            cranium: grimoire.upgrades.filter(u => u.data.x1 === 2).length,
-            bovinae: grimoire.upgrades.filter(u => u.data.x1 === 3).length
-        };
+    const filteredAndSortedData = useMemo(() => {
+        if (!grimoire) return [];
 
-        return counts;
-    }, [grimoire]);
+        let data = grimoire.upgrades.map(upgrade => {
+            // Calculate cost for next 10 levels if max level is very high
+            const costForNext10Levels = upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels([], 10) : 0;
+            
+            // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
+            const goalCost = !upgrade.unlocked
+                ? 0 // Locked upgrades don't have a direct cost, they need level requirements
+                : (upgrade.data.max_level >= 999999 ? costForNext10Levels : upgrade.costToMax);
 
-    const upgradesToShow = useMemo(() => {
-        if (!grimoire) {
-            return [];
-        }
+            return {
+                name: upgrade.data.name,
+                boneType: BoneType[upgrade.data.x1],
+                level: upgrade.level,
+                maxLevel: upgrade.data.max_level,
+                bonus: upgrade.getDescription(),
+                nextCost: upgrade.level === upgrade.data.max_level ? Number.MAX_SAFE_INTEGER : upgrade.cost,
+                goalCost: upgrade.level === upgrade.data.max_level ? Number.MAX_SAFE_INTEGER : goalCost,
+                type: 'Grimoire',
+                maxed: upgrade.level >= upgrade.data.max_level,
+                locked: !upgrade.unlocked,
+                id: upgrade.id,
+                upgrade
+            };
+        });
 
-        let filteredUpgrades = grimoire.upgrades;
-
-        if (hideMaxed) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.level < upgrade.data.max_level
-            );
-        }
-
+        // Apply filters
         if (hideLocked) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.unlocked
-            );
+            data = data.filter(item => !item.locked);
         }
-
+        if (hideMaxed) {
+            data = data.filter(item => !item.maxed);
+        }
         if (boneTypeFilter !== 'All') {
-            const boneTypeIndex = parseInt(boneTypeFilter);
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.data.x1 === boneTypeIndex
+            data = data.filter(item => item.boneType === boneTypeFilter);
+        }
+        if (searchText.trim() !== '') {
+            const searchLower = searchText.toLowerCase().trim();
+            data = data.filter(item =>
+                item.name.toLowerCase().includes(searchLower) ||
+                item.bonus.toLowerCase().includes(searchLower)
             );
         }
 
         // Apply sorting
-        if (sortBy === 'cheapest') {
-            // Sort by cost to next level (cheapest first)
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
+        data.sort((a, b) => {
+            // Always put locked and maxed items at the bottom
+            if ((a.locked || a.maxed) && !(b.locked || b.maxed)) return 1;
+            if (!(a.locked || a.maxed) && (b.locked || b.maxed)) return -1;
 
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                return a.cost - b.cost;
-            });
-        } else if (sortBy === 'affordable') {
-            // Sort by affordability first, then by cost
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                const aAffordable = grimoire.canAffordUpgrade(a) ? 1 : 0;
-                const bAffordable = grimoire.canAffordUpgrade(b) ? 1 : 0;
-
-                // First sort by affordability (affordable first)
-                if (aAffordable !== bAffordable) {
-                    return bAffordable - aAffordable;
-                }
-
-                // Then sort by cost (cheapest first)
-                return a.cost - b.cost;
-            });
-        } else {
-            // Default order, but with locked upgrades at the bottom
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // Sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // Maintain original order within each group
+            if (sortBy === 'default') {
+                // Default order by ID
                 return a.id - b.id;
-            });
-        }
+            } else {
+                // Sort by cost (ascending)
+                return a.nextCost - b.nextCost;
+            }
+        });
 
-        return filteredUpgrades;
-    }, [grimoire, hideMaxed, hideLocked, boneTypeFilter, sortBy, lastUpdated]);
+        return data;
+    }, [grimoire, lastUpdated, hideLocked, hideMaxed, boneTypeFilter, sortBy, searchText]);
+
+    // Get unique values for filters
+    const uniqueBoneTypes = useMemo(() => {
+        if (!grimoire) return [];
+        const boneTypes = [...new Set(grimoire.upgrades.map(upgrade => upgrade.data.x1))];
+        return boneTypes.sort().map(boneType => BoneType[boneType]);
+    }, [grimoire]);
+
+    return (
+        <ShadowBox background="dark-1" pad="medium">
+            {/* Custom filters and controls */}
+            <Box direction="row" gap="medium" margin={{ bottom: 'medium' }} wrap align="center">
+                <CheckBox
+                    checked={hideLocked}
+                    label="Hide locked"
+                    onChange={(event) => setHideLocked(event.target.checked)}
+                />
+                <CheckBox
+                    checked={hideMaxed}
+                    label="Hide maxed"
+                    onChange={(event) => setHideMaxed(event.target.checked)}
+                />
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Bone:</Text>
+                    <Select
+                        value={boneTypeFilter}
+                        options={['All', ...uniqueBoneTypes]}
+                        onChange={({ option }) => setBoneTypeFilter(option)}
+                    />
+                </Box>
+
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Sort by:</Text>
+                    <Select
+                        value={sortBy}
+                        options={[
+                            { label: 'Cost (ascending)', value: 'cost' },
+                            { label: 'Default Order', value: 'default' }
+                        ]}
+                        labelKey="label"
+                        valueKey={{ key: 'value', reduce: true }}
+                        onChange={({ value }) => setSortBy(value)}
+                    />
+                </Box>
+            </Box>
+            <Box>
+                <Box direction="row" gap="small" align="center">
+                    <Text size="small">Search:</Text>
+                    <TextInput
+                        placeholder="Search name or bonus..."
+                        value={searchText}
+                        onChange={(event) => setSearchText(event.target.value)}
+                        size="small"
+                        style={{ width: '200px' }}
+                    />
+                </Box>
+            </Box>
+
+            <DataTable
+                fill
+                columns={columns}
+                data={filteredAndSortedData}
+            />
+        </ShadowBox>
+    );
+}
+
+export function GrimoireDisplay() {
+    const [showUnlockPath, setShowUnlockPath] = useState(false);
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
+
+    const grimoire = theData.get("grimoire") as Grimoire;
 
     // Calculate stats for summary
     const totalUpgrades = grimoire?.upgrades.length || 0;
@@ -252,46 +370,6 @@ export function GrimoireDisplay() {
             </TipDisplay>
         </Box>
     );
-
-    // Bone type options for the filter
-    const boneTypeOptions = [
-        { label: `All Bones (${boneTypeCounts.all})`, value: 'All' },
-        { label: `Femur (${boneTypeCounts.femur})`, value: '0' },
-        { label: `Ribcage (${boneTypeCounts.ribcage})`, value: '1' },
-        { label: `Cranium (${boneTypeCounts.cranium})`, value: '2' },
-        { label: `Bovinae (${boneTypeCounts.bovinae})`, value: '3' }
-    ];
-
-    // Custom renderer for bone type options
-    const renderBoneOption = (option: any) => {
-        if (option.value === 'All') {
-            return <Text>{option.label}</Text>;
-        }
-
-        const boneType = parseInt(option.value);
-        return (
-            <Box direction="row" gap="small" align="center">
-                <IconImage data={grimoire?.getBoneImageData(boneType)} />
-                <Text>{option.label}</Text>
-            </Box>
-        );
-    };
-
-    // Sorting options
-    const sortOptions = [
-        { label: 'Default Order', value: 'default' },
-        { label: 'Cheapest First', value: 'cheapest' },
-        { label: 'Affordable First', value: 'affordable' }
-    ];
-
-    // Custom renderer for sort options
-    const renderSortOption = (option: any) => {
-        return (
-            <Box direction="row" gap="small" align="center">
-                <Text>{option.label}</Text>
-            </Box>
-        );
-    };
 
     // Get the next unlock and levels needed
     const nextUnlock = grimoire?.getNextLockedUpgrade();
@@ -362,57 +440,10 @@ export function GrimoireDisplay() {
 
                 <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
                     <CheckBox
-                        checked={hideMaxed}
-                        label="Hide maxed upgrades"
-                        onChange={(event) => setHideMaxed(event.target.checked)}
-                    />
-                    <CheckBox
-                        checked={hideLocked}
-                        label="Hide locked upgrades"
-                        onChange={(event) => setHideLocked(event.target.checked)}
-                    />
-                    <CheckBox
                         checked={showUnlockPath}
                         label="Show unlock path"
                         onChange={(event) => setShowUnlockPath(event.target.checked)}
                     />
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Filter by Bone Type"
-                            value={boneTypeFilter}
-                            options={boneTypeOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setBoneTypeFilter(value)}
-                        >
-                            {renderBoneOption}
-                        </Select>
-                    </Box>
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Sort by"
-                            value={sortBy}
-                            options={sortOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setSortBy(value)}
-                        >
-                            {renderSortOption}
-                        </Select>
-                        <TipDisplay
-                            heading="Sorting Options"
-                            body={
-                                <Box>
-                                    <Text size="small">• Default Order: Original game order</Text>
-                                    <Text size="small">• Cheapest First: Sorts by lowest cost to next level</Text>
-                                    <Text size="small">• Affordable First: Shows upgrades you can afford first</Text>
-                                </Box>
-                            }
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>
                 </Box>
                 <Box margin={{ top: 'medium' }}>
                     <Text size="small">
@@ -448,63 +479,7 @@ export function GrimoireDisplay() {
                 />
             )}
 
-            {upgradesToShow.length === 0 && (
-                <ShadowBox background="dark-1" pad="medium" align="center">
-                    <Text>No upgrades to display with current filters</Text>
-                </ShadowBox>
-            )}
-
-            {upgradesToShow.map((upgrade, index) => {
-                const isLocked = !upgrade.unlocked;
-                return (
-                    <ShadowBox
-                        style={{ opacity: isLocked ? 0.6 : 1 }}
-                        key={index}
-                        background={isLocked ? "dark-3" : "dark-1"}
-                        pad="small"
-                        direction="row"
-                        align="center"
-                        justify="between"
-                        margin={{ bottom: 'xxsmall' }}
-                    >
-                        <Grid columns={["25%", "30%", "10%", "15%", "15%"]} gap="small" align="center" fill>
-                            <ComponentAndLabel
-                                labelSize="xsmall"
-                                label="Name"
-                                component={
-                                    <Box direction="row" gap="small" align="center">
-                                        <IconImage data={upgrade.getImageData()} scale={0.7} />
-                                        <Text size="xsmall">{upgrade.data.name}</Text>
-                                    </Box>
-                                }
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='xsmall'
-                                text={upgrade.getDescription()}
-                                label="Bonus"
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='small'
-                                text={`${upgrade.level} / ${upgrade.data.max_level}`}
-                                label="Level"
-                            />
-                            {upgrade.unlocked && <UpgradeCostColumns upgrade={upgrade} grimoire={grimoire} />}
-                            {!upgrade.unlocked && (
-                                <Box fill>
-                                    <TextAndLabel
-                                        labelSize="xsmall"
-                                        textSize='xsmall'
-                                        text={`Unlock at ${upgrade.data.unlock_req} total level (${upgrade.data.unlock_req - grimoire.totalGrimoireLevel} more)`}
-                                        label="Locked"
-                                    />
-                                </Box>
-                            )}
-                        </Grid>
-                    </ShadowBox>
-                )
-            })}
+            <GrimoireTableView />
         </Box>
     )
 } 
