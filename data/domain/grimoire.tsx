@@ -1,11 +1,98 @@
 import { CheapestPathCalculator } from "../../lib/efficiencyEngine/calculators";
-import { EfficiencyDomain, EfficiencyEngine, EfficiencyPathInfo, EfficiencyUpgrade } from "../../lib/efficiencyEngine/efficiencyEngine";
-import { nFormatter } from "../utility";
+import { EfficiencyDomain, EfficiencyEngine, EfficiencyPathInfo, EfficiencyUpgrade, EfficiencyCalculator } from "../../lib/efficiencyEngine/efficiencyEngine";
+import { nFormatter, lavaLog } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { GrimoireUpgradeBase, initGrimoireUpgradeRepo } from "./data/GrimoireUpgradeRepo";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { GrimoireUpgradeModel } from "./model/grimoireUpgradeModel";
+import { Player } from "./player";
+import { Sneaking } from "./world-6/sneaking";
+import { Arcade } from "./arcade";
+import { Lab } from "./lab";
+import { Emperor } from "./emperor";
+import { ClassIndex } from "./talents";
+
+// Damage efficiency calculator implementation
+class DamageEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
+    name = "Wraith Damage";
+    
+    getRelevantUpgradeIds(domain: Grimoire): number[] {
+        return [
+            // Flat damage bonuses
+            0, 6, 16, 33, 46,
+            // Percentage damage bonuses
+            8, 28, 43, 50,
+            // Target-based bonuses
+            13, // Knockout!
+            21, // Elimination!
+            31, // Annihilation!
+            // Bone-based bonuses
+            18, // Femur hoarding
+            27, // Ribcage hoarding
+            41, // Cranium hoarding
+            // Writhing Grimoire affects other upgrades
+            36
+        ];
+    }
+    
+    calculateCurrentValue(domain: Grimoire): number {
+        return domain.calculateWraithDamage();
+    }
+    
+    calculateValueWithUpgrade(domain: Grimoire, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as GrimoireUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+        
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+        
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to BoneType format
+        const simulatedAvailableBones = simulatedResources as Record<BoneType, number>;
+        
+        // Calculate damage with temporary upgrades
+        return domain.calculateDamageWithUpgrades(tempUpgrades, simulatedAvailableBones);
+    }
+}
+
+// Bone gain efficiency calculator implementation
+class BoneGainEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
+    name = "Bone Drop Rate";
+    
+    getRelevantUpgradeIds(domain: Grimoire): number[] {
+        return [
+            // Direct bone drop bonuses
+            23, // Bones o' Plenty
+            48, // Bovinae Hoarding
+            // Writhing Grimoire affects other upgrades
+            36
+        ];
+    }
+    
+    calculateCurrentValue(domain: Grimoire): number {
+        return domain.calculateBoneDropRate();
+    }
+    
+    calculateValueWithUpgrade(domain: Grimoire, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as GrimoireUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+        
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+        
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to BoneType format
+        const simulatedAvailableBones = simulatedResources as Record<BoneType, number>;
+        
+        // Calculate bone drop rate with temporary upgrades
+        return domain.calculateBoneDropWithUpgrades(tempUpgrades, simulatedAvailableBones);
+    }
+}
 
 export class GrimoireUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
@@ -183,6 +270,13 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         [BoneType.Bovinae]: 0,
     }
 
+    // Target counts for KO/Elimination/Annihilation bonuses
+    targetCounts: Record<number, number> = {
+        334: 0, // KO target count
+        335: 0, // Elimination target count  
+        336: 0, // Annihilation target count
+    }
+
     // Unlock path information - using new generalized system
     unlockPathInfo: EfficiencyPathInfo = {
         goal: "Next Unlock Path",
@@ -199,6 +293,21 @@ export class Grimoire extends Domain implements EfficiencyDomain {
     // Unlock efficiency engine
     private unlockEngine = new EfficiencyEngine<Grimoire>();
     private unlockCalculator = new CheapestPathCalculator<Grimoire>();
+
+    // Efficiency calculation fields
+    currentWraithDamage: number = 0;
+    currentBoneDropRate: number = 0;
+    efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
+
+    // External bonuses for calculations
+    bestDeathBringer: Player | null = null;
+    pristineBonus18: number = 0;
+    arcadeBonus40: number = 0;
+    // PLACEHOLDERS - need to implement later
+    gambitBonus12: number = 0; // From holes system
+    emperorBonus1: number = 0; // From thingies system
+    mainframeBonus121: number = 0; // From lab domain
+    etcBonus76: number = 0; // Equipment bonus
 
     get totalLevel(): number {
         return this.totalGrimoireLevel;
@@ -290,6 +399,189 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         .sort((a, b) => (a.getUnlockRequirement?.() || 0) - (b.getUnlockRequirement?.() || 0))[0] || null;
     }
 
+    /**
+     * Calculate current wraith damage based on the Grimoire_DMG formula
+     * @returns Current wraith damage
+     */
+    calculateWraithDamage(): number {
+        // Base damage: 5 + flat bonuses from upgrades 0, 6, 16, 33, 46
+        const flatDamageBonus = this.getUpgradeBonus(0) + // Wraith Damage
+                               this.getUpgradeBonus(6) + // Wraith Damage II
+                               this.getUpgradeBonus(16) + // Wraith Damage III
+                               this.getUpgradeBonus(33) + // Wraith Damage IV
+                               this.getUpgradeBonus(46);  // Wraith Damage V
+
+        let damage = 5 + flatDamageBonus;
+
+        // Talent 195 multiplier
+        const talent195Bonus = this.getTalentBonus(this.bestDeathBringer, 195);
+        damage *= (1 + talent195Bonus / 100);
+
+        // Percentage damage bonuses from upgrades 8, 28, 43, 50
+        let percentageBonuses = 0;
+        percentageBonuses += this.getUpgradeBonus(8);  // Wraith Destruction
+        percentageBonuses += this.getUpgradeBonus(28); // Wraith Destruction II
+        percentageBonuses += this.getUpgradeBonus(43); // Wraith Destruction III
+        percentageBonuses += this.getUpgradeBonus(50); // Wraith Destruction IV
+        damage *= (1 + percentageBonuses / 100);
+
+        // Target-based bonuses (using OptLacc indices 334, 335, 336 for target counts)
+        const knockoutBonus = this.getUpgradeBonus(13) * this.getTargetCount(334); // Knockout! bonus * KO target count
+        const eliminationBonus = this.getUpgradeBonus(21) * this.getTargetCount(335); // Elimination! bonus * elimination target count
+        const annihilationBonus = this.getUpgradeBonus(31) * this.getTargetCount(336); // Annihilation! bonus * annihilation target count
+        damage *= (1 + (knockoutBonus + eliminationBonus + annihilationBonus) / 100);
+
+        // Femur hoarding bonus (upgrade 18 * log(femur count))
+        const femurHoardingBonus = this.getUpgradeBonus(18);
+        const femurLogBonus = this.resources[BoneType.Femur] > 0 ? 
+            femurHoardingBonus * this.getLogValue(this.resources[BoneType.Femur]) : 0;
+        damage *= (1 + femurLogBonus / 100);
+
+        // Talent 200 bonus with total grimoire level multiplier
+        const talent200Bonus = this.getTalentBonus(this.bestDeathBringer, 200);
+        const totalGrimoireMultiplier = this.totalGrimoireLevel / 100;
+        damage *= (1 + (talent200Bonus * totalGrimoireMultiplier) / 100);
+
+        return damage;
+    }
+
+    /**
+     * Create a copy of this domain for simulation purposes
+     */
+    public copyDomain(upgrades: GrimoireUpgrade[], availableBones: Record<BoneType, number>): Grimoire {
+        const tempGrimoire = new Grimoire("grimoire");
+        tempGrimoire.upgrades = upgrades;
+        tempGrimoire.resources = availableBones;
+        tempGrimoire.targetCounts = { ...this.targetCounts };
+        tempGrimoire.bestDeathBringer = this.bestDeathBringer;
+        tempGrimoire.pristineBonus18 = this.pristineBonus18;
+        tempGrimoire.arcadeBonus40 = this.arcadeBonus40;
+        tempGrimoire.gambitBonus12 = this.gambitBonus12;
+        tempGrimoire.emperorBonus1 = this.emperorBonus1;
+        tempGrimoire.mainframeBonus121 = this.mainframeBonus121;
+        tempGrimoire.etcBonus76 = this.etcBonus76;
+        
+        // Calculate total grimoire level for the temporary grimoire
+        tempGrimoire.totalGrimoireLevel = upgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
+        
+        return tempGrimoire;
+    }
+
+    /**
+     * Helper function to calculate damage with a temporary grimoire state
+     */
+    public calculateDamageWithUpgrades(upgrades: GrimoireUpgrade[], availableBones: Record<BoneType, number>): number {
+        const tempGrimoire = this.copyDomain(upgrades, availableBones);
+        return tempGrimoire.calculateWraithDamage();
+    }
+
+    /**
+     * Calculate bone drop rate based on the GrimoireBonesDropDEC formula
+     * @returns Current bone drop rate multiplier
+     */
+    calculateBoneDropRate(): number {
+        // Base multiplier starts at 1
+        let multiplier = 1;
+
+        // Pristine bonus 18
+        multiplier *= (1 + this.pristineBonus18 / 100);
+
+        // Talent 196 bonus
+        const talent196Bonus = this.getTalentBonus(this.bestDeathBringer, 196);
+        multiplier *= (1 + talent196Bonus / 100);
+
+        // Gambit bonus 12 (capped at 2x) - PLACEHOLDER
+        multiplier *= Math.min(2, 1 + this.gambitBonus12);
+
+        // ETC bonus 76 (capped at 1.5x) - PLACEHOLDER
+        multiplier *= Math.min(1.5, 1 + this.etcBonus76 / 100);
+
+        // Emperor bonus 1 - PLACEHOLDER
+        multiplier *= (1 + this.emperorBonus1 / 100);
+
+        // Grimoire upgrades 23, 48 (with bovinae log bonus)
+        const bonesPlentyBonus = this.getUpgradeBonus(23);
+        const bovinaeHoardingBonus = this.getUpgradeBonus(48);
+        const bovinaeLogBonus = this.resources[BoneType.Bovinae] > 0 ? 
+            bovinaeHoardingBonus * this.getLogValue(this.resources[BoneType.Bovinae]) : 0;
+        
+        // Arcade bonus 40
+        const arcadeBonus = this.arcadeBonus40;
+        
+        // Mainframe bonus 121 - PLACEHOLDER
+        const mainframeBonus = this.mainframeBonus121;
+        
+        multiplier *= (1 + (bonesPlentyBonus + bovinaeLogBonus + arcadeBonus + mainframeBonus) / 100);
+
+        return multiplier;
+    }
+
+    /**
+     * Helper function to calculate bone drop rate with a temporary grimoire state
+     */
+    public calculateBoneDropWithUpgrades(upgrades: GrimoireUpgrade[], availableBones: Record<BoneType, number>): number {
+        const tempGrimoire = this.copyDomain(upgrades, availableBones);
+        return tempGrimoire.calculateBoneDropRate();
+    }
+
+    /**
+     * Calculate efficiency for all supported attributes using the efficiency system
+     */
+    calculateAllEfficiencies(): void {
+        const currentDamage = this.calculateWraithDamage();
+        this.currentWraithDamage = currentDamage;
+        
+        const currentBoneDropRate = this.calculateBoneDropRate();
+        this.currentBoneDropRate = currentBoneDropRate;
+        
+        const engine = new EfficiencyEngine<Grimoire>();
+        const calculators = [
+            new DamageEfficiencyCalculator(),
+            new BoneGainEfficiencyCalculator(),
+            // Easy to add more calculators here in the future
+        ];
+        
+        calculators.forEach(calculator => {
+            const pathInfo = engine.calculateEfficiency(this, calculator);
+            this.efficiencyResults.set(calculator.name, pathInfo);
+        });
+    }
+
+    /**
+     * Get the bonus value for a specific grimoire upgrade ID
+     */
+    private getUpgradeBonus(upgradeId: number): number {
+        const upgrade = this.upgrades.find(u => u.id === upgradeId);
+        return upgrade?.bonus || 0;
+    }
+
+    /**
+     * Calculate logarithm value (using lavaLog function from utility)
+     */
+    private getLogValue(value: number): number {
+        // Using lavaLog for base-10 logarithm like in compass
+        return lavaLog(value);
+    }
+
+    /**
+     * Get talent bonus from a player's talent
+     */
+    private getTalentBonus(player: any, skillIndex: number): number {
+        if (!player?.talents) return 0;
+        
+        const talent = player.talents.find((t: any) => t.skillIndex === skillIndex);
+        if (!talent?.getBonus) return 0;
+
+        return talent.getBonus(); // Use default parameters
+    }
+
+    /**
+     * Get target count for KO/Elimination/Annihilation bonuses
+     */
+    private getTargetCount(index: number): number {
+        return this.targetCounts[index] || 0;
+    }
+
     parse(data: Map<string, any>): void {
         const grimoire = data.get(this.getDataKey()) as Grimoire;
         const upgradesData = data.get("Grimoire") as number[];
@@ -309,13 +601,17 @@ export class Grimoire extends Domain implements EfficiencyDomain {
             }
         });
 
-        // Parse bone counts from OptLacc data
-        // Based on the example from gaming.tsx, OptLacc contains game data at specific indices
-        if (optionList && optionList.length > 333) {
+        // Parse bone counts and target counts from OptLacc data
+        // Based on the game code, bone counts are at indices 330-333, target counts at 334-336
+        if (optionList && optionList.length > 336) {
             grimoire.resources[BoneType.Femur] = optionList[330] || 0;
             grimoire.resources[BoneType.Ribcage] = optionList[331] || 0;
             grimoire.resources[BoneType.Cranium] = optionList[332] || 0;
             grimoire.resources[BoneType.Bovinae] = optionList[333] || 0;
+            
+            grimoire.targetCounts[334] = optionList[334] || 0; // KO target count
+            grimoire.targetCounts[335] = optionList[335] || 0; // Elimination target count
+            grimoire.targetCounts[336] = optionList[336] || 0; // Annihilation target count
         }
 
         // Pre-calculate bonus, cost and cost to max for each upgrade
@@ -355,4 +651,70 @@ export class Grimoire extends Domain implements EfficiencyDomain {
             );
         }
     }
+} 
+
+/**
+ * Update function for grimoire efficiency calculations
+ * This should be called in post-processing after players data is available
+ */
+export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
+    const grimoire = accountData.get("grimoire") as Grimoire;
+    const players = accountData.get("players") as Player[];
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const arcade = accountData.get("arcade") as Arcade;
+    const lab = accountData.get("lab") as Lab;
+    const emperor = accountData.get("emperor") as Emperor;
+
+    if (grimoire && players) {
+        try {
+            // Find Death Bringer player (classId 11)
+            const deathBringer = players.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1).find((player: any) => player.classId === ClassIndex.Death_Bringer);
+            if (deathBringer) {
+                grimoire.bestDeathBringer = deathBringer;
+
+                // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
+                const deathBringerEquipment = deathBringer.gear.equipment;
+                grimoire.etcBonus76 = deathBringerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Extra Bones") ?? 0, 0);
+            }
+
+            // Set pristine bonus 18 from sneaking
+            grimoire.pristineBonus18 = 0;
+            if (sneaking?.pristineCharms) {
+                const charm18 = sneaking.pristineCharms.find((charm: any) => charm.index === 18);
+                if (charm18?.unlocked) {
+                    grimoire.pristineBonus18 = charm18.getBonus();
+                }
+            }
+
+            // Set arcade bonus 40
+            grimoire.arcadeBonus40 = 0;
+            if (arcade?.bonuses && arcade.bonuses.length > 40) {
+                grimoire.arcadeBonus40 = arcade.bonuses[40]?.getBonus() || 0;
+            }
+
+            // Set mainframe bonus 121 from lab domain (Jewel 21 - Deadly Wrath Jewel)
+            grimoire.mainframeBonus121 = 0;
+            if (lab?.jewels && lab.jewels[21]) {
+                grimoire.mainframeBonus121 = lab.jewels[21].getBonus();
+            }
+
+            // Set emperor bonus 1 from emperor domain (Death Bringer Extra Bones)
+            grimoire.emperorBonus1 = 0;
+            if (emperor) {
+                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 1)?.getBonus() ?? 0;
+                grimoire.emperorBonus1 = emperorDustBonus;
+            }
+
+            // PLACEHOLDER - need to implement later
+            grimoire.gambitBonus12 = 0; // From holes system
+
+            grimoire.calculateAllEfficiencies();
+        } catch (error) {
+            console.error("Failed to calculate grimoire efficiency:", error);
+        }
+    } else {
+        console.error("Failed to calculate grimoire efficiency: grimoire or players is undefined");
+    }
+
+    return grimoire;
 } 
