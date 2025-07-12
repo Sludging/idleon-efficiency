@@ -124,8 +124,6 @@ export function EfficiencyDisplay({
         // Sort by efficiency (highest first)
         consolidatedArray.sort((a, b) => b.efficiency - a.efficiency);
 
-        console.log("consolidatedArray", consolidatedArray);
-
         return consolidatedArray;
     }, [efficiencyData, consolidateUpgrades]);
 

@@ -493,10 +493,10 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         // Gambit bonus 12 (capped at 2x) - PLACEHOLDER
         multiplier *= Math.min(2, 1 + this.gambitBonus12);
 
-        // ETC bonus 76 (capped at 1.5x) - PLACEHOLDER
+        // ETC bonus 76 (capped at 1.5x)
         multiplier *= Math.min(1.5, 1 + this.etcBonus76 / 100);
 
-        // Emperor bonus 1 - PLACEHOLDER
+        // Emperor bonus 1
         multiplier *= (1 + this.emperorBonus1 / 100);
 
         // Grimoire upgrades 23, 48 (with bovinae log bonus)
@@ -508,7 +508,7 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         // Arcade bonus 40
         const arcadeBonus = this.arcadeBonus40;
         
-        // Mainframe bonus 121 - PLACEHOLDER
+        // Mainframe bonus 121
         const mainframeBonus = this.mainframeBonus121;
         
         multiplier *= (1 + (bonesPlentyBonus + bovinaeLogBonus + arcadeBonus + mainframeBonus) / 100);

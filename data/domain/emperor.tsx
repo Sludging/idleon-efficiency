@@ -42,12 +42,18 @@ export class Emperor extends Domain {
 
     init(allItems: Item[], charCount: number) {
         this.emperorBonuses = EmperorBonus.fromBase(initEmperorBonusRepo());
+        return this;
     }
 
     parse(data: Map<string, any>): void {
         const optionList = data.get("OptLacc") as number[];
         const emperor = data.get("emperor") as Emperor;
         // Parse emperor kills from OptionsListAccount[369]
+
+        // Exit early when we don't have the data we need.
+        if (optionList.length < 382) {
+            return;
+        }
         emperor.emperorKills = optionList?.[369] || 0;
         
         // Parse max attempts from OptionsListAccount[382]
@@ -95,7 +101,8 @@ export class Emperor extends Domain {
         this.emperorBonuses = EmperorBonus.fromBase(initEmperorBonusRepo());
         
         // Calculate bonuses based on emperor kills
-        for (let kill = 0; kill <= this.emperorKills; kill++) {
+        // Game code loops from 0 to emperorKills-1 (exclusive)
+        for (let kill = 0; kill < this.emperorKills; kill++) {
             const stuff6q = kill - 48 * Math.floor(kill / 48);
             
             // Find which bonus this kill unlocks
