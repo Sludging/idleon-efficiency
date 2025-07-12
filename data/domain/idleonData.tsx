@@ -57,9 +57,10 @@ import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
-import { Grimoire } from './grimoire';
+import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
+import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -142,6 +143,7 @@ const domainList: Domain[] = [
     new Grimoire("grimoire"),
     new Tesseract("tesseract"),
     new Compass("compass"),
+    new Emperor("emperor"),
 ]
 
 export class IdleonData {
@@ -217,6 +219,8 @@ const postProcessingMap: Record<string, Function> = {
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "updatePlayerTalentLevelESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelESBonus(accountData),
+    "arcaneCultistImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateArcaneCultistImpact(accountData),
+    "emperorBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorBonuses(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
     "updateInfinityStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updateInfinityStarSigns(accountData),
@@ -272,7 +276,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
     "compassDamageEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateCompassDamageEfficiency(accountData),
-    "arcaneCultistImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateArcaneCultistImpact(accountData),
+    "grimoireEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateGrimoireEfficiency(accountData),
+    "emperorMaxAttempts": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorMaxAttempts(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {

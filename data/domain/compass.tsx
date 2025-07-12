@@ -16,6 +16,8 @@ import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
 import { Sneaking } from "./world-6/sneaking";
+import { Emperor } from "./emperor";
+import { Lab } from "./lab";
 
 export enum WeaknessType {
     Fire = 0,
@@ -492,6 +494,8 @@ export class Compass extends Domain implements EfficiencyDomain {
     talent421: number = 0;
     arcadeBonus47: number = 0;
     completedMasteries: number = 0;
+    emperorBonus4: number = 0; // From emperor domain (Windwalker Extra Dust)
+    mainframeBonus122: number = 0; // From lab domain (Jewel 22)
 
     getRawKeys(): RawData[] {   
         return [
@@ -838,6 +842,8 @@ export class Compass extends Domain implements EfficiencyDomain {
         tempCompass.etcBonus79 = this.etcBonus79;
         tempCompass.talent421 = this.talent421;
         tempCompass.arcadeBonus47 = this.arcadeBonus47;
+        tempCompass.emperorBonus4 = this.emperorBonus4;
+        tempCompass.mainframeBonus122 = this.mainframeBonus122;
         
         return tempCompass.calculateDustMultiplier();
     }
@@ -867,9 +873,12 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 4: (1 + (EtcBonuses(85) + EtcBonuses(79)) / 100)
         multiplier *= (1 + (this.etcBonus85 + this.etcBonus79) / 100);
 
-        // Step 5: Skip talent 423 calculation as requested
+        // Step 5: Emperor bonus 4 (Windwalker Extra Dust)
+        multiplier *= (1 + this.emperorBonus4 / 100);
 
-        // Step 6: All the additive compass bonuses
+        // Step 6: Skip talent 423 calculation as requested
+
+        // Step 7: All the additive compass bonuses
         let additiveBonus = 0;
         additiveBonus += this.getUpgradeBonus(139); // De Dust I
         additiveBonus += this.getUpgradeBonus(142); // De Dust II
@@ -880,9 +889,10 @@ export class Compass extends Domain implements EfficiencyDomain {
         additiveBonus += this.getUpgradeBonus(93);  // Abomination Slayer XXXIV
         additiveBonus += this.getUpgradeBonus(89);  // Abomination Slayer XXX
 
-        // Add talent and arcade bonuses
+        // Add talent, arcade, and mainframe bonuses
         additiveBonus += this.talent421;
         additiveBonus += this.arcadeBonus47;
+        additiveBonus += this.mainframeBonus122;
 
         multiplier *= (1 + additiveBonus / 100);
 
@@ -981,6 +991,8 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
     const players = accountData.get("players") as Player[];
     const sneaking = accountData.get("sneaking") as Sneaking;
     const arcade = accountData.get("arcade") as Arcade;
+    const emperor = accountData.get("emperor") as Emperor;
+    const lab = accountData.get("lab") as Lab;
 
     if (compass && players) {
         try {
@@ -1017,6 +1029,19 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
             compass.arcadeBonus47 = 0;
             if (arcade?.bonuses && arcade.bonuses.length > 47) {
                 compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
+            }
+
+            // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
+            compass.emperorBonus4 = 0;
+            if (emperor) {
+                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
+                compass.emperorBonus4 = emperorDustBonus;
+            }
+
+            // Set mainframe bonus 122 from lab domain (Jewel 22)
+            compass.mainframeBonus122 = 0;
+            if (lab?.jewels && lab.jewels[22]) {
+                compass.mainframeBonus122 = lab.jewels[22].getBonus();
             }
 
             compass.calculateAllEfficiencies();
