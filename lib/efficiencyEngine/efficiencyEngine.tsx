@@ -72,7 +72,8 @@ export class EfficiencyEngine<T extends EfficiencyDomain> {
     calculateEfficiency(
         domain: T, 
         calculator: EfficiencyCalculator<T>, 
-        maxUpgrades: number = 100
+        maxUpgrades: number = 100,
+        resourceWeights?: Record<number, number>
     ): EfficiencyPathInfo {
         const currentValue = calculator.calculateCurrentValue(domain);
         const result: EfficiencyPathInfo = {
@@ -110,13 +111,35 @@ export class EfficiencyEngine<T extends EfficiencyDomain> {
                 }
 
                 // Calculate value with this upgrade at +1 level using current simulated dust amounts
+                const resourceCost = upgrade.getCost(simulatedUpgrades, ...domain.getAdditionalCostArgs());
+                
+                // Apply resource weight if available
+                const resourceType = upgrade.getCostType();
+                const weight = resourceWeights?.[resourceType] ?? 1.0;
+                
+                // Skip upgrades that cost resources with weight 0 (user can't farm them)
+                if (weight === 0) {
+                    continue;
+                }
+                
+                // Temporarily deduct resource cost to account for opportunity cost
+                const originalResources = simulatedResources[resourceType] || 0;
+                simulatedResources[resourceType] = Math.max(0, originalResources - resourceCost);
+                
+                // Calculate value with this upgrade at +1 level using reduced resources
                 const newValue = calculator.calculateValueWithUpgrade(domain, simulatedUpgrades, upgradeId, simulatedResources);
                 const valueIncrease = newValue - simulatedValue;
-                const resourceCost = upgrade.getCost(simulatedUpgrades, ...domain.getAdditionalCostArgs());
-                const efficiency = valueIncrease / resourceCost;
+                
+                // Restore original resources
+                simulatedResources[resourceType] = originalResources;
+                
+                // Higher weight = faster farming = cheaper resource = higher efficiency
+                // Lower weight = slower farming = more expensive resource = lower efficiency
+                const weightedCost = resourceCost / weight;
+                const efficiency = valueIncrease / weightedCost;
 
-                if (efficiency > bestEfficiency) {
-                    bestUpgrade = upgrade;
+                if (bestUpgrade === null || efficiency > bestEfficiency) {
+                    bestUpgrade = upgrade!;
                     bestEfficiency = efficiency;
                     bestValueIncrease = valueIncrease;
                     bestNewValue = newValue;
@@ -125,7 +148,7 @@ export class EfficiencyEngine<T extends EfficiencyDomain> {
             }
 
             // If we found a best upgrade, add it to our results and simulate purchasing it
-            if (bestUpgrade && bestEfficiency > 0) {
+            if (bestUpgrade) {
                 // Create a snapshot of the upgrade state for display (showing the level it will be after purchase)
                 const upgradeSnapshot = bestUpgrade.copyUpgrade();
                 upgradeSnapshot.setLevel(upgradeSnapshot.getLevel() + 1); // Show the level after purchase

@@ -29,8 +29,6 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
             31, // Annihilation!
             // Bone-based bonuses
             18, // Femur hoarding
-            27, // Ribcage hoarding
-            41, // Cranium hoarding
             // Writhing Grimoire affects other upgrades
             36
         ];
@@ -292,8 +290,6 @@ export class Grimoire extends Domain implements EfficiencyDomain {
 
     // Unlock efficiency engine
     private unlockEngine = new EfficiencyEngine<Grimoire>();
-    private unlockCalculator = new CheapestPathCalculator<Grimoire>();
-
     // Efficiency calculation fields
     currentWraithDamage: number = 0;
     currentBoneDropRate: number = 0;
@@ -352,6 +348,37 @@ export class Grimoire extends Domain implements EfficiencyDomain {
     // Provide additional cost arguments for grimoire upgrades (none needed)
     getAdditionalCostArgs(): any[] {
         return [];
+    }
+
+    getLocalStorageKey(): string {
+        return "idleon_efficiency_grimoire_resource_weights";
+    }
+
+    loadResourceWeights(): Record<number, number> {
+        if (typeof window === 'undefined') {
+            return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0 }; // Default weights
+        }
+
+        try {
+            const stored = localStorage.getItem(this.getLocalStorageKey());
+            if (stored) {
+                return JSON.parse(stored);
+            }
+        } catch (error) {
+            console.warn('Failed to load grimoire resource weights:', error);
+        }
+
+        return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0 }; // Default weights
+    }
+
+    saveResourceWeights(weights: Record<number, number>): void {
+        if (typeof window === 'undefined') return;
+        
+        try {
+            localStorage.setItem(this.getLocalStorageKey(), JSON.stringify(weights));
+        } catch (error) {
+            console.warn('Failed to save grimoire resource weights:', error);
+        }
     }
 
     getUpgradeResourceType(upgrade: EfficiencyUpgrade): number {
@@ -464,6 +491,9 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         // Calculate total grimoire level for the temporary grimoire
         tempGrimoire.totalGrimoireLevel = upgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
         
+        // Recalculate bonuses for the temporary grimoire's upgrades
+        tempGrimoire.recalculateUpgrades(upgrades);
+        
         return tempGrimoire;
     }
 
@@ -472,7 +502,9 @@ export class Grimoire extends Domain implements EfficiencyDomain {
      */
     public calculateDamageWithUpgrades(upgrades: GrimoireUpgrade[], availableBones: Record<BoneType, number>): number {
         const tempGrimoire = this.copyDomain(upgrades, availableBones);
-        return tempGrimoire.calculateWraithDamage();
+        const damage = tempGrimoire.calculateWraithDamage();
+        
+        return damage;
     }
 
     /**
@@ -538,12 +570,31 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         const calculators = [
             new DamageEfficiencyCalculator(),
             new BoneGainEfficiencyCalculator(),
-            // Easy to add more calculators here in the future
+            new CheapestPathCalculator<Grimoire>(),
         ];
         
+        // Load resource weights
+        const resourceWeights = this.loadResourceWeights();
+        
         calculators.forEach(calculator => {
-            const pathInfo = engine.calculateEfficiency(this, calculator);
+            let maxUpgrades = 100;
+            // If we're using the cheapest path calculator, we need to calculate the number of levels needed to reach the next unlock
+            if (calculator instanceof CheapestPathCalculator) {
+                // Find the next locked item with the lowest requirement
+                const nextUnlock = this.getNextLockedUpgrade();
+
+                // Calculate the number of levels needed to reach the next unlock
+                maxUpgrades = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - this.totalGrimoireLevel) : 100;
+            }
+
+            const pathInfo = engine.calculateEfficiency(
+                this, 
+                calculator, 
+                maxUpgrades,
+                resourceWeights
+            );
             this.efficiencyResults.set(calculator.name, pathInfo);
+            console.log("Efficiency results for " + calculator.name + ": " + JSON.stringify(pathInfo));
         });
     }
 
@@ -636,20 +687,6 @@ export class Grimoire extends Domain implements EfficiencyDomain {
                 upgrade.costToMax = upgrade.getCostToMax(grimoire.upgrades);
             }
         });
-
-        // Find the next locked item with the lowest requirement
-        const nextUnlock = this.getNextLockedUpgrade();
-
-        // Calculate the number of levels needed to reach the next unlock
-        const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - grimoire.totalGrimoireLevel) : 0;
-        // Calculate the unlock path
-        if (levelsNeeded > 0) {
-            grimoire.unlockPathInfo = grimoire.unlockEngine.calculateEfficiency(
-                grimoire,
-                grimoire.unlockCalculator,
-                levelsNeeded
-            );
-        }
     }
 } 
 
