@@ -313,6 +313,19 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         return this.resources;
     }
 
+    getResourceTypes(): Record<string, number> {
+        return {
+            "Femur": BoneType.Femur,
+            "Ribcage": BoneType.Ribcage,
+            "Cranium": BoneType.Cranium,
+            "Bovinae": BoneType.Bovinae,
+        };
+    }
+
+    getResourceGeneralName(): string {
+        return "Bone";
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "Grimoire", perPlayer: false, default: [] }
@@ -594,7 +607,6 @@ export class Grimoire extends Domain implements EfficiencyDomain {
                 resourceWeights
             );
             this.efficiencyResults.set(calculator.name, pathInfo);
-            console.log("Efficiency results for " + calculator.name + ": " + JSON.stringify(pathInfo));
         });
     }
 

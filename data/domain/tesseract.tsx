@@ -441,6 +441,21 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         return this.resources;
     }
 
+    getResourceTypes(): Record<string, number> {
+        return {
+            "Purple": TesseractType.Purple,
+            "Brown": TesseractType.Brown,
+            "Green": TesseractType.Green,
+            "Red": TesseractType.Red,
+            "Silver": TesseractType.Silver,
+            "Gold": TesseractType.Gold,
+        };
+    }
+
+    getResourceGeneralName(): string {
+        return "Tachyon";
+    }
+
     // ResourceTracker interface methods
     getResourceCount(resourceType: number): number {
         switch (resourceType) {

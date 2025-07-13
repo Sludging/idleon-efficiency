@@ -40,6 +40,13 @@ export interface EfficiencyDomain extends ResourceTracker {
     // Method to get the current resources of the domain (dust, tachyons, bones, etc.)
     getResources(): Record<number, number>;
 
+    // Method to get the types of resources used by the domain (dust, tachyons, bones, etc.)
+    // Key is the resource name, value is the type/value used in resources costs.
+    getResourceTypes(): Record<string, number>;
+
+    // Method to get the general name of the resource (e.g. "Dust", "Tachyons", "Bones", etc.)
+    getResourceGeneralName(): string;
+
     // Method to provide additional arguments for upgrade cost calculations
     getAdditionalCostArgs(): any[];
 }

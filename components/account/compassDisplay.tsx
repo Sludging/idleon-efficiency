@@ -285,11 +285,10 @@ function CompassDisplay() {
         return paths.sort();
     }, [compass]);
 
+    // Get unique values for filters
     const uniqueDustTypes = useMemo(() => {
-        if (!compass) return [];
-        const dustTypes = [...new Set(compass.upgrades
-            .map(upgrade => upgrade.data.dustType))];
-        return dustTypes.sort().map(dustType => DustType[dustType]);
+        const resourceTypes = compass.getResourceTypes();
+        return Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
     }, [compass]);
 
     return (
@@ -298,7 +297,7 @@ function CompassDisplay() {
             <EfficiencySection />
             <EfficiencyUpgradeTable
                 upgradeData={upgradeData}
-                resourceFilterLabel="Dust"
+                resourceFilterLabel={compass.getResourceGeneralName()}
                 resourceFilterOptions={uniqueDustTypes}
                 pathFilterLabel="Path"
                 pathFilterOptions={uniquePaths}

@@ -634,6 +634,20 @@ export class Compass extends Domain implements EfficiencyDomain {
         return this.availableDust;
     }
 
+    getResourceTypes(): Record<string, number> {
+        return {
+            "Stardust": DustType.Stardust,
+            "Moondust": DustType.Moondust,
+            "Solardust": DustType.Solardust,
+            "Cooldust": DustType.Cooldust,
+            "Novadust": DustType.Novadust,
+        };
+    }
+
+    getResourceGeneralName(): string {
+        return "Dust";
+    }
+
     getResourceCount(resourceType: number): number {
         return this.availableDust[resourceType as DustType] || 0;
     }

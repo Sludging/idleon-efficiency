@@ -96,9 +96,8 @@ export function TesseractDisplay() {
 
     // Get unique values for filters
     const uniqueTachyonTypes = useMemo(() => {
-        if (!tesseract) return [];
-        const tachyonTypes = [...new Set(tesseract.upgrades.map(upgrade => upgrade.data.x1))];
-        return tachyonTypes.sort().map(tachyonType => TesseractType[tachyonType]);
+        const resourceTypes = tesseract.getResourceTypes();
+        return Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
     }, [tesseract]);
 
     return (
@@ -202,7 +201,7 @@ export function TesseractDisplay() {
 
             <EfficiencyUpgradeTable
                 upgradeData={upgradeData}
-                resourceFilterLabel="Tachyon"
+                resourceFilterLabel={tesseract.getResourceGeneralName()}
                 resourceFilterOptions={uniqueTachyonTypes}
                 resourceFilterKey="tachyonType"
                 getResourceImageData={(upgrade: TesseractUpgrade) => tesseract.getTachyonImageData(upgrade.data.x1)}
