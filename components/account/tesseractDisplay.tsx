@@ -24,10 +24,6 @@ export function TesseractDisplay() {
     const tesseract = theData.get("tesseract") as Tesseract;
     const [isWeightModalOpen, setIsWeightModalOpen] = useState(false);
 
-    if (!tesseract) {
-        return <Text>Loading Tesseract data...</Text>;
-    }
-
     // Calculate summary stats
     const totalUpgrades = tesseract.upgrades.length;
     const unlockedUpgrades = tesseract.upgrades.filter(u => u.unlocked).length;
@@ -102,6 +98,10 @@ export function TesseractDisplay() {
         const resourceTypes = tesseract.getResourceTypes();
         return Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
     }, [tesseract]);
+
+    if (!tesseract) {
+        return <Text>Loading Tesseract data...</Text>;
+    }
 
     return (
         <Box gap="small">

@@ -7,6 +7,17 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.41",
+    title: "Update 2.41",
+    date: "July 13, 2025",
+    changes: [
+      "Add data and assets for update 2.41.",
+      "Elite class pages now have their own sub-navigation.",
+      "Elite classes now have better feature parity across them.",
+      "Resource weights are now configurable for elite classes.",
+    ]
+  },
+  {
     version: "1.2.40-v2",
     title: "Tesseract - First pass",
     date: "June 28, 2025",

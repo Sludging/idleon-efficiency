@@ -62,7 +62,12 @@ const navItems: NavItem[] = [
         ]
     },
     { link: "/players", label: "Players" },
-    // { link: "/bribes", label: "Bribes - WIP"},
+    { link: "/elite-classes", label: "Elite Classes", subLinks: [
+        { subLink: "/grimoire", label: "Grimoire" },
+        { subLink: "/tesseract", label: "Tesseract" },
+        { subLink: "/compass", label: "Compass" },
+        ]
+    },
     {
         link: "/account", label: "Account Wide", subLinks: [
             { subLink: "/task-board", label: "Task Board" },
@@ -76,9 +81,6 @@ const navItems: NavItem[] = [
             { subLink: "/cards", label: "Cards" },
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
-            { subLink: "/grimoire", label: "Grimoire" },
-            { subLink: "/tesseract", label: "Tesseract" },
-            { subLink: "/compass", label: "Compass" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },
@@ -86,9 +88,9 @@ const navItems: NavItem[] = [
 
 const NavButton = styled(Button)`
     color: ${props => props.color};
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
-    height: 56px;
+    height: 48px;
     margin-top: auto;
     margin-bottom: auto;
 
@@ -107,7 +109,7 @@ const NavMenu = styled(Menu)`
     color: ${props => props.color};
 
     span {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
     }
 
@@ -115,7 +117,7 @@ const NavMenu = styled(Menu)`
         padding: 0px;
     }
 
-    height: 56px;
+    height: 48px;
     margin-top: auto;
     margin-bottom: auto;
 
@@ -218,7 +220,7 @@ export const Navigation = () => {
     }
 
     return (
-        <Box height={{ min: "56px", max: "56px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} elevation='navigation'>
+        <Box height={{ min: "48px", max: "48px" }} background="dark-1" border={{ side: 'bottom', color: 'white-1' }} elevation='navigation'>
             <Box width={{ max: '1440px' }} align="center" margin={{ left: 'auto', right: 'auto' }} >
                 <ThemeContext.Extend value={customNavDrop}>
                     <Nav direction="row">
