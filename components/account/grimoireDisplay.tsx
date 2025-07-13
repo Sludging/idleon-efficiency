@@ -15,6 +15,7 @@ import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
 import ResourceWeightModal from "./shared/ResourceWeightModal";
+import SmallButton from "../base/SmallButton";
 
 // Efficiency Section with consolidated component
 function EfficiencySection() {
@@ -97,7 +98,7 @@ function EfficiencySection() {
                     value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
                 },
                 boneDropRate: {
-                    label: "Current Bone Drop Rate", 
+                    label: "Current Bone Drop Rate",
                     value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
                 },
                 ...(nextUnlock && levelsNeeded > 0 ? {
@@ -179,7 +180,7 @@ export function GrimoireDisplay() {
         return grimoire.upgrades.map(upgrade => {
             // Calculate cost for next 10 levels if max level is very high
             const costForNext10Levels = upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels([], 10) : 0;
-            
+
             // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
             const goalCost = !upgrade.unlocked
                 ? 0 // Locked upgrades don't have a direct cost, they need level requirements
@@ -232,7 +233,7 @@ export function GrimoireDisplay() {
                 </Box>
 
                 {/* Display current bone counts */}
-                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
+                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap align="center">
                     <ComponentAndLabel
                         label={availableBonesLabel}
                         component={
@@ -244,17 +245,21 @@ export function GrimoireDisplay() {
                             </Box>
                         }
                     />
+                    <Box pad={{ top: 'small' }}>
+                    <SmallButton
+                        label="Configure Resource Weights"
+                        secondary
+                        size="small"
+                        color="accent-3"
+                        onClick={() => setIsWeightModalOpen(true)}
+                    />
+                    </Box>
                 </Box>
 
                 <Box margin={{ top: 'medium' }} direction="row" justify="between" align="center">
                     <Text size="small">
                         <strong>Note:</strong> Grimoire upgrades are purchased with bones collected while in Wraith Form using the Death Bringer class.
                     </Text>
-                    <Button 
-                        label="Configure Resource Weights" 
-                        size="small"
-                        onClick={() => setIsWeightModalOpen(true)}
-                    />
                 </Box>
             </ShadowBox>
 

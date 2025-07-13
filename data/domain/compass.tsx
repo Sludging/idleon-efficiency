@@ -652,6 +652,41 @@ export class Compass extends Domain implements EfficiencyDomain {
         return this.availableDust[resourceType as DustType] || 0;
     }
 
+    getUpgradeResourceType(upgrade: EfficiencyUpgrade): number {
+        return (upgrade as CompassUpgrade).data.dustType; // Dust type
+    }
+
+    getLocalStorageKey(): string {
+        return "idleon_efficiency_compass_resource_weights";
+    }
+
+    loadResourceWeights(): Record<number, number> {
+        if (typeof window === 'undefined') {
+            return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0 }; // Default weights
+        }
+
+        try {
+            const stored = localStorage.getItem(this.getLocalStorageKey());
+            if (stored) {
+                return JSON.parse(stored);
+            }
+        } catch (error) {
+            console.warn('Failed to load compass resource weights:', error);
+        }
+
+        return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0 }; // Default weights
+    }
+
+    saveResourceWeights(weights: Record<number, number>): void {
+        if (typeof window === 'undefined') return;
+        
+        try {
+            localStorage.setItem(this.getLocalStorageKey(), JSON.stringify(weights));
+        } catch (error) {
+            console.warn('Failed to save compass resource weights:', error);
+        }
+    }
+
     getResourceImageData(resourceType: number): ImageData {
         return this.getDustImageData(resourceType as DustType);
     }
@@ -930,8 +965,16 @@ export class Compass extends Domain implements EfficiencyDomain {
             // Easy to add more calculators here in the future
         ];
         
+        // Load resource weights
+        const resourceWeights = this.loadResourceWeights();
+        
         calculators.forEach(calculator => {
-            const pathInfo = engine.calculateEfficiency(this, calculator);
+            const pathInfo = engine.calculateEfficiency(
+                this, 
+                calculator, 
+                100,
+                resourceWeights
+            );
             this.efficiencyResults.set(calculator.name, pathInfo);
         });
     }

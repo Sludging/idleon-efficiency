@@ -4,8 +4,9 @@ import {
     Box,
     Text,
     Grid,
+    Button,
 } from "grommet";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import ShadowBox from "../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
@@ -14,13 +15,15 @@ import IconImage from "../base/IconImage";
 import { Compass, CompassUpgrade, DustType } from "../../data/domain/compass";
 import React from "react";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
-import { UpgradeTableData } from "./shared/useUpgradeTableData";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
+import ResourceWeightModal from "./shared/ResourceWeightModal";
+import styled from "styled-components";
+import SmallButton from "../base/SmallButton";
 
 // Path Upgrades Section
-function PathUpgradesSection() {
+function PathUpgradesSection({ onOpenWeightModal }: { onOpenWeightModal: () => void }) {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -67,7 +70,7 @@ function PathUpgradesSection() {
         <Box gap="small">
             <Box justify="between" direction="row">
                 <Text size="medium" weight="bold" margin={{ bottom: 'xsmall' }}>Path Upgrades</Text>
-                <Box direction="row" gap="small">
+                <Box direction="row" gap="small" align="center">
                     <ResourceDisplay
                         cost={compass.availableDust[DustType.Stardust] || 0}
                         resourceImageData={compass.getDustImageData(DustType.Stardust)}
@@ -102,6 +105,13 @@ function PathUpgradesSection() {
                         textSize="small"
                         showTooltip={true}
                         tooltipHeading="Exact Dust Count"
+                    />
+                    <SmallButton 
+                        label="Configure Resource Weights" 
+                        secondary
+                        size="small"
+                        color="accent-3"
+                        onClick={onOpenWeightModal}
                     />
                 </Box>
             </Box>
@@ -201,7 +211,7 @@ function EfficiencySection() {
         'Tempest Damage': {
             valueHeader: "Damage +",
             valueColor: "accent-1",
-            formatValue: (value: number) => `+${value.toFixed(2)}`,
+            formatValue: (value: number) => `${value.toFixed(2)}`,
             noResultsText: "No efficient damage upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         },
         'Dust Multiplier': {
@@ -240,6 +250,7 @@ function CompassDisplay() {
     ));
 
     const compass = theData.get("compass") as Compass;
+    const [isWeightModalOpen, setIsWeightModalOpen] = useState(false);
 
     // Prepare data for filtering
     const upgradeData = useMemo(() => {
@@ -293,7 +304,7 @@ function CompassDisplay() {
 
     return (
         <Box gap="medium">
-            <PathUpgradesSection />
+            <PathUpgradesSection onOpenWeightModal={() => setIsWeightModalOpen(true)} />
             <EfficiencySection />
             <EfficiencyUpgradeTable
                 upgradeData={upgradeData}
@@ -311,6 +322,17 @@ function CompassDisplay() {
                 canAffordUpgrade={(upgrade: CompassUpgrade, cost?: number) => compass.canAffordUpgrade(upgrade, cost)}
                 getDescription={(upgrade: CompassUpgrade) => upgrade.getDescription()}
                 tooltipHeading="Exact Dust Count"
+            />
+
+            <ResourceWeightModal
+                isOpen={isWeightModalOpen}
+                onClose={() => setIsWeightModalOpen(false)}
+                onRecalculate={(weights) => {
+                    compass.saveResourceWeights(weights);
+                    compass.calculateAllEfficiencies();
+                }}
+                currentWeights={compass?.loadResourceWeights() || { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0 }}
+                domain={compass}
             />
         </Box>
     );

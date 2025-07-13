@@ -14,6 +14,7 @@ import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
 import ResourceWeightModal from "./shared/ResourceWeightModal";
+import SmallButton from "../base/SmallButton";
 
 export function TesseractDisplay() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
@@ -143,7 +144,7 @@ export function TesseractDisplay() {
                 </Box>
 
                 {/* Display current tachyon counts */}
-                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
+                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap align="center">
                     <ComponentAndLabel
                         label={availableTachyonsLabel}
                         component={
@@ -157,17 +158,21 @@ export function TesseractDisplay() {
                             </Box>
                         }
                     />
+                    <Box pad={{ top: 'small' }}>
+                    <SmallButton
+                        label="Configure Resource Weights"
+                        secondary
+                        size="small"
+                        color="accent-3"
+                        onClick={() => setIsWeightModalOpen(true)}
+                    />
+                    </Box>
                 </Box>
 
                 <Box margin={{ top: 'medium' }} direction="row" justify="between" align="center">
                     <Text size="small">
                         <strong>Note:</strong> Tesseract upgrades are purchased with Tachyons collected while in Arcanist Form using the Arcane Cultist class.
                     </Text>
-                    <Button 
-                        label="Configure Resource Weights" 
-                        size="small"
-                        onClick={() => setIsWeightModalOpen(true)}
-                    />
                 </Box>
             </ShadowBox>
 
