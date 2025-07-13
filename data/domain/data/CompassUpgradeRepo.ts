@@ -2583,7 +2583,7 @@ export const initCompassUpgradeRepo = () => {
                 "x4": 368,
                 "x5": 0,
                 "x6": 0,
-                "description": "You can now toggle Tempest drops. Just click off the TOGGLE button found in the compass upgrade description!",
+                "description": "You can now toggle Tempest drops. Just click off the TOGGLE button found in the description of the 'tempest drop' upgrades!",
                 "upgradeType": "Unknown"
             }),
         new CompassUpgradeBase(172, <CompassUpgradeModel>{

@@ -1625,12 +1625,12 @@ export const initNpcRepo = () => {
                         "NextIndex": 11,
                         "Name": "Literally Burning your Money",
                         "ConsumeItems": false,
-                        "InventorySpacesNeeded": 2,
+                        "InventorySpacesNeeded": 3,
                         "NoSpaceIndex": 10,
                         "Rewards": [
+                            <ComponentModel>{"item": "Quest1", "quantity": 1},
                             <ComponentModel>{"item": "EquipmentTools1", "quantity": 1},
-                            <ComponentModel>{"item": "MaxCapBagT2", "quantity": 1},
-                            <ExpRewardModel>{"item": "Experience1", "quantity": 15}
+                            <ComponentModel>{"item": "MaxCapBagT2", "quantity": 1}
                         ],
                         "QuestName": "Glumlee3",
                         "Difficulty": 1,
@@ -13912,7 +13912,7 @@ export const initNpcRepo = () => {
                     },
                     "Learn the Language of the Universe": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "So DIVINITY... ok basically you need to meditate on the altar to get Divinity Points which you spend and unlock new divinities! You can only be linked to 1 divinity at once but can change weekly! <br> QUEST:Learn Divinity from Muhmuguh!",
+                        "DialogueText": "For DIVINITY you need to meditate on the altar to get Divinity Points! Spend these Points on offerings to unlock new divinities! <br> QUEST:Unlock the 1st divinity by meditating at the Divinity alter on characters you don't play!",
                         "NextIndex": 12,
                         "Name": "Learn the Language of the Universe",
                         "ConsumeItems": false,
@@ -13989,7 +13989,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "So DIVINITY... ok basically you need to meditate on the altar to get Divinity Points which you spend and unlock new divinities! You can only be linked to 1 divinity at once but can change weekly! <br> QUEST:Learn Divinity from Muhmuguh!",
+                        "DialogueText": "For DIVINITY you need to meditate on the altar to get Divinity Points! Spend these Points on offerings to unlock new divinities! <br> QUEST:Unlock the 1st divinity by meditating at the Divinity alter on characters you don't play!",
                         "NextIndex": 12,
                         "Name": "Learn the Language of the Universe"
                     },
@@ -15779,7 +15779,13 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Of course you do! Well that's to bad. Knowing how to interact with them makes me feel special and telling you would diminish that feeling. <br> Come back later to learn the ways of the Summoning Stones",
+                        "DialogueText": "Of course you do!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Go ahead click the Summoning Stones! You have my full permission! <br> There are currently 7 stones I think I put a few in World 3 World 4 and maybe World 5...? Can't remember...",
                         "NextIndex": -1,
                         "Name": ""
                     }
@@ -15972,7 +15978,131 @@ export const initNpcRepo = () => {
                     "mothersMaidenName": "Dugelman",
                     "notes": ""
                 },
-                "quests": {},
+                "quests": {
+                    "First Showdown...": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Pain eminates from her ceramic skin. A greater power presides over her every move. <br> QUEST:Defeat The Emperor boss found at the end of World 6",
+                        "NextIndex": 5,
+                        "Name": "First Showdown...",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 4,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues26", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 2000}
+                        ],
+                        "QuestName": "Potti1",
+                        "Difficulty": 5,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Emperor Defeated:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Castle Cleanup": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Her hollow eyes have seen horrors. The once sacred Ninja Castle has been overrun. <br> QUEST:Make your way up to the Top Floor of the Ninja Castle",
+                        "NextIndex": 8,
+                        "Name": "Castle Cleanup",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 7,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues27", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 3000}
+                        ],
+                        "QuestName": "Potti2",
+                        "Difficulty": 6,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Floor reached:", "finalV": 12, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Glory to the Crop Depot": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Once full of the finest goods and crops she now sits empty. <br> QUEST:Collect 180 different Crops shown by the Crop Scientist",
+                        "NextIndex": 11,
+                        "Name": "Glory to the Crop Depot",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 10,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues28", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 4000}
+                        ],
+                        "QuestName": "Potti3",
+                        "Difficulty": 6,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Crops Found:", "finalV": 180, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Star Master": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Forced to forever look straight forward she no longer gazes up at the stars. <br> QUEST:Complete all 9 Constellations found in World 6 maps.",
+                        "NextIndex": 14,
+                        "Name": "Star Master",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 13,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues26", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 5000}
+                        ],
+                        "QuestName": "Potti4",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti4",
+                        "CustomArray": [<CustomReqModel>{"desc": "W6 Constellations:", "finalV": 9, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "15 Time Champion": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "How could she sit still with those terrible Summoning Bosses looming large? <br> QUEST:Defeat Summoning stone Bosses 15 times.",
+                        "NextIndex": 17,
+                        "Name": "15 Time Champion",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 16,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues27", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 6000}
+                        ],
+                        "QuestName": "Potti5",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti5",
+                        "CustomArray": [<CustomReqModel>{"desc": "Summoning Boss Wins:", "finalV": 15, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Armor of the Gods": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You feel close to your true potential as the true hero she needs but a hero must look the part. <br> QUEST:Complete the Godshard set",
+                        "NextIndex": 20,
+                        "Name": "Armor of the Gods",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 2,
+                        "NoSpaceIndex": 19,
+                        "Rewards": [
+                            <ComponentModel>{"item": "EquipmentStatues28", "quantity": 2500},
+                            <ComponentModel>{"item": "Gfoodcoupon", "quantity": 8000}
+                        ],
+                        "QuestName": "Potti6",
+                        "Difficulty": 9,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti6",
+                        "CustomArray": [<CustomReqModel>{"desc": "Godshard Set Complete:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Spirit of the Hero": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "She may be stuck like this but you can still inspire and lift her spirit. Don't give up your fight against The Emperor! <br> QUEST:Defeat The Emperor on 'Showdown L' which is the 50th showdown.",
+                        "NextIndex": 23,
+                        "Name": "Spirit of the Hero",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 22,
+                        "Rewards": [<ComponentModel>{"item": "Trophy23", "quantity": 1}],
+                        "QuestName": "Potti7",
+                        "Difficulty": 8,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Potti7",
+                        "CustomArray": [<CustomReqModel>{"desc": "Showdown Defeated:", "finalV": 50, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
                 "dialogue": [
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
@@ -15988,8 +16118,134 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Her forced expression is one of true happiness. She would scream if only she knew how. <br> This is not a good time to talk to her... maybe later?",
-                        "NextIndex": 2,
+                        "DialogueText": "Her forced expression is one of true happiness. She would scream if only she knew how.",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Pain eminates from her ceramic skin. A greater power presides over her every move. <br> QUEST:Defeat The Emperor boss found at the end of World 6",
+                        "NextIndex": 5,
+                        "Name": "First Showdown..."
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but somehow feels more real...",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Her hollow eyes have seen horrors. The once sacred Ninja Castle has been overrun. <br> QUEST:Make your way up to the Top Floor of the Ninja Castle",
+                        "NextIndex": 8,
+                        "Name": "Castle Cleanup"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but somehow feels more real...",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Once full of the finest goods and crops she now sits empty. <br> QUEST:Collect 180 different Crops shown by the Crop Scientist",
+                        "NextIndex": 11,
+                        "Name": "Glory to the Crop Depot"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 9,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but somehow feels more real...",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Forced to forever look straight forward she no longer gazes up at the stars. <br> QUEST:Complete all 9 Constellations found in World 6 maps.",
+                        "NextIndex": 14,
+                        "Name": "Star Master"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 12,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but somehow feels more real...",
+                        "NextIndex": 15,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "How could she sit still with those terrible Summoning Bosses looming large? <br> QUEST:Defeat Summoning stone Bosses 15 times.",
+                        "NextIndex": 17,
+                        "Name": "15 Time Champion"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 15,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but somehow feels more real...",
+                        "NextIndex": 18,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You feel close to your true potential as the true hero she needs but a hero must look the part. <br> QUEST:Complete the Godshard set",
+                        "NextIndex": 20,
+                        "Name": "Armor of the Gods"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 18,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Her fake smile remains but you know that's about to change...",
+                        "NextIndex": 21,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "She may be stuck like this but you can still inspire and lift her spirit. Don't give up your fight against The Emperor! <br> QUEST:Defeat The Emperor on 'Showdown L' which is the 50th showdown.",
+                        "NextIndex": 23,
+                        "Name": "Spirit of the Hero"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 21,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Potti stares at you with a smile across her face.",
+                        "NextIndex": 23,
                         "Name": ""
                     }
                 ]
