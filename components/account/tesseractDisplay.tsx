@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Text, CheckBox } from "grommet";
+import { Box, Text, CheckBox, Button } from "grommet";
 import { useMemo, useState } from "react";
 import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractType, TesseractUpgrade } from "../../data/domain/tesseract";
 import ShadowBox from "../base/ShadowBox";
@@ -13,6 +13,7 @@ import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
+import ResourceWeightModal from "./shared/ResourceWeightModal";
 
 export function TesseractDisplay() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
@@ -20,6 +21,7 @@ export function TesseractDisplay() {
     ));
 
     const tesseract = theData.get("tesseract") as Tesseract;
+    const [isWeightModalOpen, setIsWeightModalOpen] = useState(false);
 
     if (!tesseract) {
         return <Text>Loading Tesseract data...</Text>;
@@ -42,29 +44,29 @@ export function TesseractDisplay() {
 
     // Define optimization types for efficiency analysis
     const optimizationTypes = [
-        { id: 'unlock_path', label: 'Unlock Path', showCountSelector: false, showConsolidation: true },
+        { id: 'Cheapest Path', label: 'Cheapest Path', showCountSelector: false, showConsolidation: true },
         { id: 'Arcane Damage', label: 'Arcane Damage', showCountSelector: true, showConsolidation: true },
-        { id: 'Tachyon Multiplier', label: 'Tachyon Multiplier', showCountSelector: true, showConsolidation: true }
+        { id: 'Tachyon Drop Rate', label: 'Tachyon Drop Rate', showCountSelector: true, showConsolidation: true }
     ];
 
     // Configuration for value display
     const valueConfigs = {
-        unlock_path: {
+        "Cheapest Path": {
             valueHeader: '',
-            valueColor: 'accent-1',
+            valueColor: 'accent-2',
             formatValue: (value: number) => ``,
             noResultsText: 'No efficient upgrades available'
         },
-        'Arcane Damage': { valueHeader: 'Damage Increase', valueColor: 'accent-1', formatValue: (value: number) => `+${nFormatter(value)}`, noResultsText: 'No upgrades available' },
-        'Tachyon Multiplier': { valueHeader: 'Multi Increase', valueColor: 'accent-2', formatValue: (value: number) => `x${nFormatter(value, "MultiplierInfo")}`, noResultsText: 'No upgrades available' }
+        'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value)}`, noResultsText: 'No efficient damage upgrades available' },
+        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' }
     };
 
     // Create efficiency results map
     const defaultPathInfo = { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} };
     const efficiencyResults = new Map([
-        ['unlock_path', tesseract.unlockPathInfo || defaultPathInfo],
+        ['Cheapest Path', tesseract.efficiencyResults.get('Cheapest Path') || defaultPathInfo],
         ['Arcane Damage', tesseract.efficiencyResults.get('Arcane Damage') || defaultPathInfo],
-        ['Tachyon Multiplier', tesseract.efficiencyResults.get('Tachyon Multiplier') || defaultPathInfo]
+        ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo]
     ]);
 
     // Prepare data for filtering
@@ -157,10 +159,15 @@ export function TesseractDisplay() {
                     />
                 </Box>
 
-                <Box margin={{ top: 'medium' }}>
+                <Box margin={{ top: 'medium' }} direction="row" justify="between" align="center">
                     <Text size="small">
                         <strong>Note:</strong> Tesseract upgrades are purchased with Tachyons collected while in Arcanist Form using the Arcane Cultist class.
                     </Text>
+                    <Button 
+                        label="Configure Resource Weights" 
+                        size="small"
+                        onClick={() => setIsWeightModalOpen(true)}
+                    />
                 </Box>
             </ShadowBox>
 
@@ -208,6 +215,17 @@ export function TesseractDisplay() {
                 canAffordUpgrade={(upgrade: TesseractUpgrade, cost?: number) => tesseract.canAffordUpgrade(upgrade, cost)}
                 getDescription={(upgrade: TesseractUpgrade) => upgrade.getDescription()}
                 tooltipHeading="Exact Tachyon Count"
+            />
+
+            <ResourceWeightModal
+                isOpen={isWeightModalOpen}
+                onClose={() => setIsWeightModalOpen(false)}
+                onRecalculate={(weights) => {
+                    tesseract.saveResourceWeights(weights);
+                    tesseract.calculateAllEfficiencies();
+                }}
+                currentWeights={tesseract?.loadResourceWeights() || { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0 }}
+                domain={tesseract}
             />
         </Box>
     )

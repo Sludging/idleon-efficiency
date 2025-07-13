@@ -288,8 +288,6 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         },
     };
 
-    // Unlock efficiency engine
-    private unlockEngine = new EfficiencyEngine<Grimoire>();
     // Efficiency calculation fields
     currentWraithDamage: number = 0;
     currentBoneDropRate: number = 0;

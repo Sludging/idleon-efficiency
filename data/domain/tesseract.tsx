@@ -351,10 +351,6 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         },
     };
 
-    // Unlock efficiency engine
-    private unlockEngine = new EfficiencyEngine<Tesseract>();
-    private unlockCalculator = new CheapestPathCalculator<Tesseract>();
-
     /** Current arcane damage value */
     currentArcaneDamage: number = 0;
     currentTachyonDropRate: number = 1;
@@ -382,6 +378,10 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         temp.etcBonus93 = this.etcBonus93;
         temp.etcBonus95 = this.etcBonus95;
         temp.emperorBonus6 = this.emperorBonus6;
+        
+        // Recalculate bonuses for the temporary tesseract's upgrades
+        temp.recalculateUpgrades(upgrades);
+        
         return temp;
     }
 
@@ -498,6 +498,41 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         }
     }
 
+    getUpgradeResourceType(upgrade: EfficiencyUpgrade): number {
+        return (upgrade as TesseractUpgrade).data.x1; // Tachyon type
+    }
+
+    getLocalStorageKey(): string {
+        return "idleon_efficiency_tesseract_resource_weights";
+    }
+
+    loadResourceWeights(): Record<number, number> {
+        if (typeof window === 'undefined') {
+            return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0 }; // Default weights
+        }
+
+        try {
+            const stored = localStorage.getItem(this.getLocalStorageKey());
+            if (stored) {
+                return JSON.parse(stored);
+            }
+        } catch (error) {
+            console.warn('Failed to load tesseract resource weights:', error);
+        }
+
+        return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0 }; // Default weights
+    }
+
+    saveResourceWeights(weights: Record<number, number>): void {
+        if (typeof window === 'undefined') return;
+        
+        try {
+            localStorage.setItem(this.getLocalStorageKey(), JSON.stringify(weights));
+        } catch (error) {
+            console.warn('Failed to save tesseract resource weights:', error);
+        }
+    }
+
     getNextLockedUpgrade(): EfficiencyUpgrade | null {
         return this.upgrades
             .filter(u => !u.isUnlocked() && u.getUnlockRequirement?.() != null)
@@ -558,18 +593,6 @@ export class Tesseract extends Domain implements EfficiencyDomain {
             upgrade.costToMax = upgrade.getCostToMax(tesseract.upgrades);
         });
 
-        // Find the next locked item with the lowest requirement
-        const nextUnlock = this.getNextLockedUpgrade();
-
-        const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - tesseract.totalTesseractLevel) : 0;
-
-        if (levelsNeeded > 0) {
-            tesseract.unlockPathInfo = tesseract.unlockEngine.calculateEfficiency(
-                tesseract,
-                tesseract.unlockCalculator,
-                levelsNeeded
-            );
-        }
 
         // Parse Prisma Bubble data
         tesseract.prismaBubblesFound = optionList[395] || 0;
@@ -656,10 +679,29 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         const calculators = [
             new DamageEfficiencyCalculator(),
             new TachyonGainEfficiencyCalculator(),
+            new CheapestPathCalculator<Tesseract>(),
         ];
-
+        
+        // Load resource weights
+        const resourceWeights = this.loadResourceWeights();
+        
         calculators.forEach(calculator => {
-            const pathInfo = engine.calculateEfficiency(this, calculator);
+            let maxUpgrades = 100;
+            // If we're using the cheapest path calculator, we need to calculate the number of levels needed to reach the next unlock
+            if (calculator instanceof CheapestPathCalculator) {
+                // Find the next locked item with the lowest requirement
+                const nextUnlock = this.getNextLockedUpgrade();
+
+                // Calculate the number of levels needed to reach the next unlock
+                maxUpgrades = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - this.totalTesseractLevel) : 100;
+            }
+
+            const pathInfo = engine.calculateEfficiency(
+                this, 
+                calculator, 
+                maxUpgrades,
+                resourceWeights
+            );
             this.efficiencyResults.set(calculator.name, pathInfo);
         });
     }
