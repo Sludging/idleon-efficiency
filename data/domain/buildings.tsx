@@ -1,11 +1,9 @@
 import { range } from "../utility";
 import { BuildingBase } from "./data/BuildingRepo";
+import { initRandoListRepo } from "./data/RandoListRepo";
 import { ImageData } from "./imageData";
 import { BuildingModel } from "./model/buildingModel";
 import { ComponentModel } from "./model/componentModel";
-
-// Randolist[13]
-const buildMultiplier = "15 200 2250 12000 25000 60000 100000 150000 50000000 25 700 4500 20000 40000 125000 400000 1000000 3500000 60 1250 6000 27500 70000 200000 2000000 7000000 60000000".split(" ");
 
 export class Building {
     description: string
@@ -26,7 +24,10 @@ export class Building {
     buildPercentage: number = 0;
     upgradable: boolean = false;
 
-    constructor(public index: number, data: BuildingModel) {
+    buildingMultiplier: number = 0;
+    
+
+    constructor(public index: number, data: BuildingModel, multiplier: number = 0) {
         this.description = data.description;
         this.bonus = data.bonus;
         this.lvlUpReq = data.lvlUpReq as ComponentModel[];
@@ -35,6 +36,8 @@ export class Building {
         this.bonusInc = data.bonusInc;
         this.misc = data.misc;
         this.name = data.name;
+
+        this.buildingMultiplier = multiplier;
     }
 
     getImageData = (): ImageData => {
@@ -49,14 +52,13 @@ export class Building {
         if (level == this.maxLvl) {
             return 0;
         }
-        
+
         if (this.index == 0) {
             const math1 = Math.pow(level + 1, 2);
-            return 20 * math1 * Math.pow(1.6, level + 1);
+            return 2 * math1 * Math.pow(1.3, level + 1);
         }
         else {
-            const multiplier = Number(buildMultiplier[this.index]);
-            return multiplier * Math.pow(this.costIncrement, level);
+            return this.buildingMultiplier * Math.pow(this.costIncrement, level);
         }
     }
 
@@ -169,6 +171,9 @@ export class Building {
     // }
 
     static fromBase = (data: BuildingBase[]) => {
-        return data.map(building => new Building(building.index, building.data));
+        const randoListRepo = initRandoListRepo();
+        const buildingMultipliers = randoListRepo[13].data.elements;
+
+        return data.map((building) => new Building(building.index, building.data, Number(buildingMultipliers[building.index])));
     }
 }
