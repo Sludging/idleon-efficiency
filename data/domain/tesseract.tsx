@@ -6,13 +6,18 @@ import { Item } from "./items";
 import { TesseractUpgradeModel } from "./model/tesseractUpgradeModel";
 import { Player } from "./player";
 import { ClassIndex } from "./talents";
-import { 
-    EfficiencyUpgrade, 
-    EfficiencyDomain, 
-    EfficiencyEngine, 
+import {
+    EfficiencyUpgrade,
+    EfficiencyDomain,
+    EfficiencyEngine,
     EfficiencyPathInfo
 } from "../../lib/efficiencyEngine/efficiencyEngine";
 import { CheapestPathCalculator } from "../../lib/efficiencyEngine/calculators";
+import { EfficiencyCalculator } from "../../lib/efficiencyEngine/efficiencyEngine";
+import { Sneaking } from "./world-6/sneaking";
+import { Arcade } from "./arcade";
+import { Lab } from "./lab";
+import { Emperor } from "./emperor";
 
 export class TesseractUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
@@ -58,7 +63,7 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
         }
 
         // Apply the bonus from upgrade 39 to other upgrades
-        const upgrade39Bonus = allUpgrades[39]?.level > 0 ? 
+        const upgrade39Bonus = allUpgrades[39]?.level > 0 ?
             (allUpgrades[39].level * allUpgrades[39].data.value) : 0;
 
         // Apply the bonus based on level and value with upgrade 39 multiplier
@@ -71,11 +76,11 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
         }
 
         // Base cost calculation from game formula with cost reduction factor
-        const baseCost = this.costReductionFactor * 
-            3 * 
-            Math.pow(1.04, this.id) * 
-            (this.level + (this.data.base_cost + this.level) * 
-            Math.pow(this.data.scaling_factor + 0.01, this.level));
+        const baseCost = this.costReductionFactor *
+            3 *
+            Math.pow(1.04, this.id) *
+            (this.level + (this.data.base_cost + this.level) *
+                Math.pow(this.data.scaling_factor + 0.01, this.level));
 
         return baseCost;
     }
@@ -106,7 +111,7 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
 
         // Only calculate up to max level or the specified number of levels, whichever is smaller
         const levelsToCalculate = Math.min(levels, this.data.max_level - this.level);
-        
+
         for (let i = 0; i < levelsToCalculate; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades);
             tempUpgrade.level++;
@@ -187,7 +192,7 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
         const baseChance = 1 / baseDenominator;
 
         // Second part: Drop rarity multiplier with tesseract upgrade 51 bonus
-        const dropRarityMultiplier = Math.max(1, 
+        const dropRarityMultiplier = Math.max(1,
             (this.dropRarity - 1) * (this.tesseractUpgrade51Bonus / 100)
         );
 
@@ -235,10 +240,91 @@ export enum TesseractType {
     Gold = 5,
 }
 
+// Damage efficiency calculator implementation
+class DamageEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
+    name = "Arcane Damage";
+
+    getRelevantUpgradeIds(domain: Tesseract): number[] {
+        return [
+            // Flat damage bonuses
+            0,  // Arcanist Damage
+            6,  // Arcanist Damage II
+            15, // Arcanist Damage III
+            36, // Arcanist Damage IV
+            50, // Arcanist Damage V
+            // Percentage damage bonuses
+            4,  // Arcanist Cataclysm
+            24, // Arcanist Cataclysm II
+            31, // Arcanist Cataclysm III
+            42, // Arcanist Cataclysm IV
+            53, // Arcanist Cataclysm V
+            // Log-based bonuses
+            12  // Singulon Hoarding
+        ];
+    }
+
+    calculateCurrentValue(domain: Tesseract): number {
+        return domain.calculateArcaneDamage();
+    }
+
+    calculateValueWithUpgrade(domain: Tesseract, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as TesseractUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+
+        // Convert simulatedResources to TesseractType format
+        const simulatedTachyons = simulatedResources as Record<TesseractType, number>;
+
+        // Calculate damage with temporary upgrades
+        return domain.calculateDamageWithUpgrades(tempUpgrades, simulatedTachyons);
+    }
+}
+
+// Tachyon gain efficiency calculator implementation
+class TachyonGainEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
+    name = "Tachyon Drop Rate";
+
+    getRelevantUpgradeIds(domain: Tesseract): number[] {
+        return [
+            // Direct tachyon bonuses
+            17, // Ripple in Spacetime
+            // Log-based bonuses
+            34, // Verdon Hoarding
+            56  // Aurion Hoarding
+        ];
+    }
+
+    calculateCurrentValue(domain: Tesseract): number {
+        return domain.calculateTachyonDropRate();
+    }
+
+    calculateValueWithUpgrade(domain: Tesseract, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as TesseractUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+
+        // Convert simulatedResources to TesseractType format
+        const simulatedTachyons = simulatedResources as Record<TesseractType, number>;
+
+        // Calculate tachyon drop rate with temporary upgrades
+        return domain.calculateTachyonDropWithUpgrades(tempUpgrades, simulatedTachyons);
+    }
+}
+
 export class Tesseract extends Domain implements EfficiencyDomain {
     upgrades: TesseractUpgrade[] = [];
     totalTesseractLevel: number = 0;
-    
+
     // Tachyon counts - 6 types instead of 4 bones
     resources: Record<TesseractType, number> = {
         [TesseractType.Purple]: 0,
@@ -269,13 +355,43 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     private unlockEngine = new EfficiencyEngine<Tesseract>();
     private unlockCalculator = new CheapestPathCalculator<Tesseract>();
 
+    /** Current arcane damage value */
+    currentArcaneDamage: number = 0;
+    currentTachyonDropRate: number = 1;
+    efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
+    bestArcaneCultist: Player | null = null;
+    pristineBonus22: number = 0;
+    arcadeBonus50: number = 0;
+    labBonus123: number = 0;
+    hasTachyonBundle: boolean = false;
+    // Add missing bonuses
+    etcBonus93: number = 0; // Total Damage equipment bonus
+    etcBonus95: number = 0; // Drop Chance equipment bonus
+    emperorBonus6: number = 0; // Arcane Cultist Extra Tachyons
+
+    public copyDomain(upgrades: TesseractUpgrade[], resources: Record<TesseractType, number>): Tesseract {
+        const temp = new Tesseract("temp");
+        temp.upgrades = upgrades;
+        temp.resources = resources;
+        temp.totalTesseractLevel = upgrades.reduce((sum, u) => sum + u.level, 0);
+        temp.bestArcaneCultist = this.bestArcaneCultist;
+        temp.pristineBonus22 = this.pristineBonus22;
+        temp.arcadeBonus50 = this.arcadeBonus50;
+        temp.labBonus123 = this.labBonus123;
+        temp.hasTachyonBundle = this.hasTachyonBundle;
+        temp.etcBonus93 = this.etcBonus93;
+        temp.etcBonus95 = this.etcBonus95;
+        temp.emperorBonus6 = this.emperorBonus6;
+        return temp;
+    }
+
     get totalLevel(): number {
         return this.totalTesseractLevel;
     }
 
     prismaBubblesFound: number = 0;
 
-    getRawKeys(): RawData[] {   
+    getRawKeys(): RawData[] {
         return [
             { key: "Arcane", perPlayer: false, default: [] }
         ]
@@ -293,7 +409,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
 
     recalculateUpgrades(upgrades: EfficiencyUpgrade[]): void {
         const tesseractUpgrades = upgrades as TesseractUpgrade[];
-        
+
         // First calculate special bonuses that affect other upgrades (upgrade 39)
         const upgrade39 = tesseractUpgrades[39];
         if (upgrade39) {
@@ -369,23 +485,24 @@ export class Tesseract extends Domain implements EfficiencyDomain {
 
     getNextLockedUpgrade(): EfficiencyUpgrade | null {
         return this.upgrades
-        .filter(u => !u.isUnlocked() && u.getUnlockRequirement?.() != null)
-        .sort((a, b) => (a.getUnlockRequirement?.() || 0) - (b.getUnlockRequirement?.() || 0))[0] || null;
+            .filter(u => !u.isUnlocked() && u.getUnlockRequirement?.() != null)
+            .sort((a, b) => (a.getUnlockRequirement?.() || 0) - (b.getUnlockRequirement?.() || 0))[0] || null;
     }
 
     parse(data: Map<string, any>): void {
         const tesseract = data.get(this.getDataKey()) as Tesseract;
         const upgradesData = data.get("Arcane") as number[];
         const optionList = data.get("OptLacc") as number[];
-        
+        const rawData = data.get("rawData") as Record<string, any>;
+
         // Calculate total tesseract level first
         tesseract.totalTesseractLevel = upgradesData.reduce((sum, level) => sum + level, 0);
-    
+
         upgradesData.forEach((level, index) => {
             if (index < tesseract.upgrades.length) {
                 const upgrade = tesseract.upgrades[index];
                 upgrade.level = level;
-                
+
                 // Set unlocked status based on total tesseract level
                 const unlockReq = upgrade.getUnlockRequirement();
                 upgrade.unlocked = tesseract.totalTesseractLevel >= (unlockReq || 0);
@@ -401,6 +518,14 @@ export class Tesseract extends Domain implements EfficiencyDomain {
             tesseract.resources[TesseractType.Silver] = optionList[392] || 0;
             tesseract.resources[TesseractType.Gold] = optionList[393] || 0;
         }
+
+        // Parse bundle info for tachyon multiplier
+        let bundleInfo = undefined;
+        // Make sure we have bundle info, this usually is missing for public profiles.
+        if (rawData["BundlesReceived"] !== undefined) {
+            bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
+        }
+        tesseract.hasTachyonBundle = bundleInfo == undefined ? false : bundleInfo.bun_x == 1;
 
         // Calculate cost reduction factor from upgrade 49 and Silver Tachyons 
         let costReductionFactor = 1;
@@ -422,10 +547,10 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         const nextUnlock = this.getNextLockedUpgrade();
 
         const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - tesseract.totalTesseractLevel) : 0;
-        
+
         if (levelsNeeded > 0) {
             tesseract.unlockPathInfo = tesseract.unlockEngine.calculateEfficiency(
-                tesseract, 
+                tesseract,
                 tesseract.unlockCalculator,
                 levelsNeeded
             );
@@ -441,7 +566,99 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         // prismaBubbleUpgrade.currentMap = 0;
         // prismaBubbleUpgrade.talent594Value = 0;
     }
-} 
+
+    /** Calculate current arcane damage based on the Arcane_DMG formula */
+    calculateArcaneDamage(): number {
+        if (!this.bestArcaneCultist) return 0;
+
+        // Equipment bonus calculation
+        let weaponPower = 0;
+        const equipment = this.bestArcaneCultist.gear.equipment;
+        const weapon = equipment[1];
+        if (weapon && weapon.internalName.includes("EquipmentWandsArc")) {
+            const weaponPowerStat = weapon.itemStats.find((stat: any) => stat.displayName === "Weapon Power");
+            if (weaponPowerStat) {
+                weaponPower += weaponPowerStat.getValue();
+            }
+        }
+
+        // Step 1: Base + flat bonuses
+        const flatBonus = this.getUpgradeBonus(0) + this.getUpgradeBonus(6) + this.getUpgradeBonus(15) + this.getUpgradeBonus(36) + this.getUpgradeBonus(50);
+        let damage = 5 + flatBonus;
+
+        // Step 2: Talent 590 multiplier
+        damage *= (1 + (this.getTalentBonus(this.bestArcaneCultist, 590) * (this.totalTesseractLevel / 100)) / 100);
+
+        // Step 3: Weapon power exponent
+        damage *= Math.pow(1.04, Math.max(0, weaponPower));
+        damage *= (1 + this.getTalentBonus(this.bestArcaneCultist, 585) / 100);
+        const percentBonus = this.getUpgradeBonus(4) + this.getUpgradeBonus(24) + this.getUpgradeBonus(31) + this.getUpgradeBonus(42) + this.getUpgradeBonus(53) +
+            (this.getUpgradeBonus(12) * Math.log10(this.resources[TesseractType.Purple] || 1));
+        damage *= (1 + percentBonus / 100);
+        
+        // Step 4: ETC bonus 93 (Total Damage)
+        damage *= (1 + this.etcBonus93 / 100);
+        
+        return damage;
+    }
+
+    /** Helper function to calculate damage with temporary tesseract state */
+    calculateDamageWithUpgrades(upgrades: TesseractUpgrade[], simulatedResources: Record<TesseractType, number>): number {
+        const temp = this.copyDomain(upgrades, simulatedResources);
+        return temp.calculateArcaneDamage();
+    }
+
+    calculateTachyonDropRate(): number {
+        let dropRate = 1 + (this.getUpgradeBonus(17) + this.getTalentBonus(this.bestArcaneCultist, 586) +
+            (this.getUpgradeBonus(34) * Math.log10(this.resources[TesseractType.Green] || 1)) / 100 +
+            (this.getUpgradeBonus(56) * Math.log10(this.resources[TesseractType.Gold] || 1)) / 100 +
+            this.labBonus123 + this.arcadeBonus50 + this.etcBonus95) / 100;
+
+        // Pristine bonus 22
+        dropRate *= (1 + this.pristineBonus22 / 100);
+
+        // Emperor bonus 6 (Arcane Cultist Extra Tachyons)
+        dropRate *= (1 + this.emperorBonus6 / 100);
+
+        // Talent 599 multiplier
+        dropRate *= Math.max(1, this.getTalentBonus(this.bestArcaneCultist, 599));
+
+        // Bundle multiplier for extra tachyon drops
+        dropRate *= this.hasTachyonBundle ? 1.2 : 1;
+        return dropRate;
+    }
+
+    calculateTachyonDropWithUpgrades(upgrades: TesseractUpgrade[], simulatedResources: Record<TesseractType, number>): number {
+        const temp = this.copyDomain(upgrades, simulatedResources);
+        return temp.calculateTachyonDropRate();
+    }
+
+    calculateAllEfficiencies(): void {
+        this.currentArcaneDamage = this.calculateArcaneDamage();
+        this.currentTachyonDropRate = this.calculateTachyonDropRate();
+
+        const engine = new EfficiencyEngine<Tesseract>();
+        const calculators = [
+            new DamageEfficiencyCalculator(),
+            new TachyonGainEfficiencyCalculator(),
+        ];
+
+        calculators.forEach(calculator => {
+            const pathInfo = engine.calculateEfficiency(this, calculator);
+            this.efficiencyResults.set(calculator.name, pathInfo);
+        });
+    }
+
+    private getUpgradeBonus(upgradeId: number): number {
+        const upgrade = this.upgrades.find(u => u.id === upgradeId);
+        return upgrade ? upgrade.bonus : 0;
+    }
+
+    private getTalentBonus(player: Player | null, skillIndex: number): number {
+        if (!player) return 0;
+        return player.getTalentBonus(skillIndex);
+    }
+}
 
 export const updateArcaneCultistImpact = (accountData: Map<string, any>) => {
     const tesseract = accountData.get("tesseract") as Tesseract;
@@ -455,4 +672,45 @@ export const updateArcaneCultistImpact = (accountData: Map<string, any>) => {
         prismaBubbleUpgrade.currentMap = arcaneCultist.currentMapId;
         prismaBubbleUpgrade.talent594Value = arcaneCultist.talents.find((talent: any) => talent.skillIndex === 594)?.getBonus() || 0;
     }
+}
+
+/** Update function for tesseract efficiency calculations */
+export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
+    const tesseract = accountData.get("tesseract") as Tesseract;
+    const players = accountData.get("players") as Player[];
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const arcade = accountData.get("arcade") as Arcade;
+    const lab = accountData.get("lab") as Lab;
+    const emperor = accountData.get("emperor") as Emperor;
+
+    if (tesseract && players) {
+        try {
+            // Find best Arcane Cultist
+            const arcaneCultist = players.sort((a, b) => b.level - a.level).find(p => p.classId === 40);
+            if (arcaneCultist) {
+                tesseract.bestArcaneCultist = arcaneCultist;
+                
+                // Set ETC bonuses from Arcane Cultist equipment
+                tesseract.etcBonus93 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Arcanist Dmg") ?? 0), 0);
+                tesseract.etcBonus95 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Extra Tachyons") ?? 0), 0);
+            }
+
+            // Set pristine bonus 22 from sneaking
+            tesseract.pristineBonus22 = sneaking.pristineCharms?.find(c => c.index === 22)?.unlocked ? sneaking.pristineCharms.find(c => c.index === 22)?.getBonus() ?? 0 : 0;
+            // Set arcade bonus 50
+            tesseract.arcadeBonus50 = arcade.bonuses[50]?.getBonus() ?? 0;
+            // Set lab bonus 123
+            tesseract.labBonus123 = lab.bonuses?.find(b => b.index === 123)?.getBonus() ?? 0;
+            
+            // Set emperor bonus 6 (Arcane Cultist Extra Tachyons)
+            tesseract.emperorBonus6 = emperor?.emperorBonuses?.find((b: any) => b.index === 6)?.getBonus() ?? 0;
+
+            tesseract.calculateAllEfficiencies();
+        } catch (error) {
+            console.error("Failed to calculate tesseract efficiency:", error);
+        }
+    } else {
+        console.error("Failed to calculate tesseract efficiency: tesseract or players is undefined");
+    }
+    return tesseract;
 }

@@ -58,7 +58,7 @@ import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency } from './grimoire';
-import { Tesseract, updateArcaneCultistImpact } from './tesseract';
+import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 
@@ -278,6 +278,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "compassDamageEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateCompassDamageEfficiency(accountData),
     "grimoireEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateGrimoireEfficiency(accountData),
     "emperorMaxAttempts": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorMaxAttempts(accountData),
+    "tesseractEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateTesseractEfficiency(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {

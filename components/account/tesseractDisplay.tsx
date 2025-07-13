@@ -12,9 +12,9 @@ import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
+import { nFormatter } from "../../data/utility";
 
 export function TesseractDisplay() {
-    const [showUnlockPath, setShowUnlockPath] = useState(false);
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -42,12 +42,9 @@ export function TesseractDisplay() {
 
     // Define optimization types for efficiency analysis
     const optimizationTypes = [
-        {
-            id: 'unlock_path',
-            label: 'Unlock Path',
-            showCountSelector: false,
-            showConsolidation: true
-        }
+        { id: 'unlock_path', label: 'Unlock Path', showCountSelector: false, showConsolidation: true },
+        { id: 'Arcane Damage', label: 'Arcane Damage', showCountSelector: true, showConsolidation: true },
+        { id: 'Tachyon Multiplier', label: 'Tachyon Multiplier', showCountSelector: true, showConsolidation: true }
     ];
 
     // Configuration for value display
@@ -57,12 +54,17 @@ export function TesseractDisplay() {
             valueColor: 'accent-1',
             formatValue: (value: number) => ``,
             noResultsText: 'No efficient upgrades available'
-        }
+        },
+        'Arcane Damage': { valueHeader: 'Damage Increase', valueColor: 'accent-1', formatValue: (value: number) => `+${nFormatter(value)}`, noResultsText: 'No upgrades available' },
+        'Tachyon Multiplier': { valueHeader: 'Multi Increase', valueColor: 'accent-2', formatValue: (value: number) => `x${nFormatter(value, "MultiplierInfo")}`, noResultsText: 'No upgrades available' }
     };
 
     // Create efficiency results map
+    const defaultPathInfo = { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} };
     const efficiencyResults = new Map([
-        ['unlock_path', tesseract?.unlockPathInfo || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
+        ['unlock_path', tesseract.unlockPathInfo || defaultPathInfo],
+        ['Arcane Damage', tesseract.efficiencyResults.get('Arcane Damage') || defaultPathInfo],
+        ['Tachyon Multiplier', tesseract.efficiencyResults.get('Tachyon Multiplier') || defaultPathInfo]
     ]);
 
     // Prepare data for filtering
@@ -156,13 +158,6 @@ export function TesseractDisplay() {
                     />
                 </Box>
 
-                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
-                    <CheckBox
-                        checked={showUnlockPath}
-                        label="Show unlock path"
-                        onChange={(event) => setShowUnlockPath(event.target.checked)}
-                    />
-                </Box>
                 <Box margin={{ top: 'medium' }}>
                     <Text size="small">
                         <strong>Note:</strong> Tesseract upgrades are purchased with Tachyons collected while in Arcanist Form using the Arcane Cultist class.
@@ -171,15 +166,23 @@ export function TesseractDisplay() {
             </ShadowBox>
 
             {/* Display the unlock path if enabled */}
-            {showUnlockPath && nextUnlock && levelsNeeded > 0 && (
-                <EfficiencyAnalysis
-                    efficiencyResults={efficiencyResults}
-                    optimizationTypes={optimizationTypes}
-                    getResourceImageData={(resourceType: number) => tesseract?.getTachyonImageData(resourceType) || { location: "", height: 36, width: 36 }}
-                    canAffordResource={(resourceType: number, cost: number) => tesseract?.getResourceCount(resourceType) >= cost || false}
-                    valueConfigs={valueConfigs}
-                    title="Cheapest Path to Next Upgrade"
-                    currentValues={{
+            <EfficiencyAnalysis
+                efficiencyResults={efficiencyResults}
+                optimizationTypes={optimizationTypes}
+                getResourceImageData={(resourceType: number) => tesseract.getTachyonImageData(resourceType)}
+                canAffordResource={(resourceType: number, cost: number) => tesseract.getResourceCount(resourceType) >= cost}
+                valueConfigs={valueConfigs}
+                title="Tesseract Efficiency Analysis"
+                currentValues={{
+                    arcaneDamage: {
+                        label: "Current Arcane Damage",
+                        value: nFormatter(tesseract.currentArcaneDamage, "CommaNotation")
+                    },
+                    tachyonDropRate: {
+                        label: "Current Tachyon Drop Rate",
+                        value: `${tesseract.currentTachyonDropRate.toFixed(2)}x`
+                    },
+                    ...(nextUnlock && levelsNeeded > 0 ? {
                         nextUnlock: {
                             label: "Next Unlock",
                             value: (
@@ -191,11 +194,11 @@ export function TesseractDisplay() {
                         },
                         levelsNeeded: {
                             label: "Levels Needed",
-                            value: `${levelsNeeded} more levels to reach ${nextUnlock.getUnlockRequirement?.() ?? 0}`
+                            value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
                         }
-                    }}
-                />
-            )}
+                    } : {})
+                }}
+            />
 
             <EfficiencyUpgradeTable
                 upgradeData={upgradeData}
