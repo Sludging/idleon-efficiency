@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Layer, Text, TextInput } from "grommet";
 import { useState } from "react";
 import IconImage from "../../base/IconImage";
-import { nFormatter } from "../../../data/utility";
+import { nFormatter, parseFormattedNumber, FORMATTED_NUMBER_PATTERN } from "../../../data/utility";
 import { EfficiencyDomain } from "../../../lib/efficiencyEngine/efficiencyEngine";
 
 // Resource Weight Modal Component
@@ -38,53 +38,7 @@ function ResourceWeightModal<T extends EfficiencyDomain>({
 
     const resourceName = domain.getResourceGeneralName();
 
-    const parseResourceRate = (input: string): { value: number; error?: string } => {
-        if (!input || input.trim() === '') return { value: 0 };
-        
-        const cleanInput = input.trim().toLowerCase();
-        
-        if (cleanInput === '0') return { value: 0 };
-        
-        // Define supported suffixes and their multipliers
-        const suffixMap: Record<string, number> = {
-            'k': 1000,
-            'm': 1000000,
-            'b': 1000000000,
-            't': 1000000000000
-        };
-        
-        // Check if input ends with a supported suffix
-        for (const [suffix, multiplier] of Object.entries(suffixMap)) {
-            if (cleanInput.endsWith(suffix)) {
-                const numberPart = cleanInput.slice(0, -1);
-                const parsed = parseFloat(numberPart);
-                
-                // Check if the entire number part is valid (no extra characters)
-                if (!isNaN(parsed) && isFinite(parsed) && numberPart === parsed.toString()) {
-                    return { value: parsed * multiplier };
-                } else {
-                    return { 
-                        value: 0, 
-                        error: `Invalid number before "${suffix.toUpperCase()}"` 
-                    };
-                }
-            }
-        }
-        
-        // If no suffix, try parsing as a plain number
-        const parsed = parseFloat(cleanInput);
-        
-        // Check if the entire input is a valid number (no extra characters)
-        if (!isNaN(parsed) && isFinite(parsed) && cleanInput === parsed.toString()) {
-            return { value: parsed };
-        }
-        
-        // If we get here, the input couldn't be parsed
-        return { 
-            value: 0, 
-            error: "Invalid format. Use numbers like: 100, 1.5, 10K, 100M" 
-        };
-    };
+    // Remove parseResourceRate, use parseFormattedNumber instead
 
     const handleInputChange = (boneTypeId: number, value: string) => {       
         // Always update the input value to reflect what user typed
@@ -93,13 +47,28 @@ function ResourceWeightModal<T extends EfficiencyDomain>({
             [boneTypeId]: value
         });
         
-        // Validate the input in real-time
-        const result = parseResourceRate(value);
+        // Validate the input in real-time using parseFormattedNumber
+        const cleanInput = value.trim();
+        let parsedValue = parseFormattedNumber(cleanInput.toUpperCase());
+        let error: string | undefined = undefined;
         
-        if (result.error) {
+        if (cleanInput === "") {
+            parsedValue = 0;
+        } else if (isNaN(parsedValue) || !isFinite(parsedValue)) {
+            error = "Invalid format. Use numbers like: 100, 1.5, 10K, 100M, 1E6";
+            parsedValue = 0;
+        } else {
+            // Check if the input matches the expected format using the shared pattern
+            if (!FORMATTED_NUMBER_PATTERN.test(cleanInput.toUpperCase())) {
+                error = "Invalid format. Use numbers like: 100, 1.5, 10K, 100M, 1E6";
+                parsedValue = 0;
+            }
+        }
+
+        if (error) {
             setErrors({
                 ...errors,
-                [boneTypeId]: result.error
+                [boneTypeId]: error
             });
             // Don't update weights when there's an error
         } else {
@@ -109,11 +78,10 @@ function ResourceWeightModal<T extends EfficiencyDomain>({
                 delete newErrors[boneTypeId];
                 setErrors(newErrors);
             }
-            
             // Only update weights when there's no error
             setWeights({
                 ...weights,
-                [boneTypeId]: result.value
+                [boneTypeId]: parsedValue
             });
         }
     };
