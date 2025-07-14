@@ -249,6 +249,9 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                 fill
                 columns={columns}
                 data={filteredAndSortedData}
+                background={{
+                    body: ["dark-1", "grey-4"]
+                }}
             />
         </ShadowBox>
     );
