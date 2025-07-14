@@ -16,12 +16,12 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 0,
                 "costScale": 1.15,
                 "maxLevel": 100,
-                "description": "TAP AN UPGRADE ABOVE! Also, as a reward for reading this, I'll let you know that upgrading this 'nothing' bonus actually boosts breeding exp gain!!",
+                "description": "TAP AN UPGRADE ABOVE! Also, as a reward for reading this, I'll let you know that upgrading this 'nothing' bonus actually boosts breeding exp gain 1% per LV lmao",
                 "boostEffect": "",
                 "bonusQty": 0
             }),
         new PetUpgradeBase(1, <PetUpgradeModel>{
-                "upgradeName": "Genetic Splicing",
+                "upgradeName": "Gene Splicing } Helps unlock next pet type",
                 "filler": "Filler",
                 "material": "PetDeadCell",
                 "cost": 0,
@@ -30,7 +30,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 3,
                 "costScale": 2.5,
                 "maxLevel": 20,
-                "description": "Unlocks the 1st Breeding Multiplier, Gene Boosting. Genes are found while fighting with the DNA Splicer tool purchased at the Town Shop.",
+                "description": "Unlocks Gene Boosting, which increases chance to breed new pets. Use the DNA Splicer tool from the Town Shop to get Genes.",
                 "boostEffect": "-}% Gene Boost Cost",
                 "bonusQty": 4
             }),
@@ -49,7 +49,7 @@ export const initPetUpgradeRepo = () => {
                 "bonusQty": 1
             }),
         new PetUpgradeBase(3, <PetUpgradeModel>{
-                "upgradeName": "Breedability Pulse",
+                "upgradeName": "Breedability Pets",
                 "filler": "Filler",
                 "material": "PetDeadCell",
                 "cost": 6,
@@ -58,7 +58,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 7,
                 "maxLevel": 10,
-                "description": "Unlocks the 2nd Breeding Multiplier, Breedability. Pets placed in the Fenceyard with the Breedable Gene increase this multi over time.",
+                "description": "Unlocks Breedability, which increases chance to breed new pets. Put a 'pink' pets in the Fenceyard to increase their multiplier.",
                 "boostEffect": "+}% Breedability Spd",
                 "bonusQty": 25
             }),
@@ -86,7 +86,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 9,
                 "maxLevel": 10,
-                "description": "Unlocks the 3rd Breeding Multi, Rarity. When the egg incubator is full, theres a chance to increase the rarity of another egg!",
+                "description": "Unlocks the 3rd Multi, Egg Rarity. When the egg incubator is full, theres a chance to increase the rarity of another egg!",
                 "boostEffect": "}x Chance",
                 "bonusQty": 1
             }),
@@ -100,8 +100,8 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 10,
                 "maxLevel": 10,
-                "description": "Forage pets contribute a fraction of their forage speed toward Fight Power. Now you no longer need at least 1 fighting pet!",
-                "boostEffect": "}% Fight Contribution",
+                "description": "All pets do more damage in battle!",
+                "boostEffect": "+}% Pet Damage",
                 "bonusQty": 6
             }),
         new PetUpgradeBase(7, <PetUpgradeModel>{
@@ -114,7 +114,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 130,
                 "maxLevel": 5,
-                "description": "Unlocks the 4th Breeding Multiplier, Pastpres. This increases based on the number of different pets discovered from the previous world.",
+                "description": "Unlocks the 4th Breeding Multi, Pastpres. This increases based on the number of different pets discovered from the previous world.",
                 "boostEffect": "}x Bigger Multi",
                 "bonusQty": 0.15
             }),

@@ -14724,7 +14724,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyper0", <ObolItemModel>{
                 "internalName": "ObolHyper0",
-                "displayName": "Hyper Six Obol",
+                "displayName": "Hyper Obol of Lucky Rolls",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolCircle,
                 "Type": "Circle Obol",
@@ -14747,7 +14747,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyper1", <ObolItemModel>{
                 "internalName": "ObolHyper1",
-                "displayName": "Hyper Pyre Obol",
+                "displayName": "Hyper Obol of Stragiwisluk",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolCircle,
                 "Type": "Circle Obol",
@@ -14770,7 +14770,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyper2", <ObolItemModel>{
                 "internalName": "ObolHyper2",
-                "displayName": "Hyper DMG Obol",
+                "displayName": "Hyper Obol of Supa Damagio",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolCircle,
                 "Type": "Circle Obol",
@@ -14793,7 +14793,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyper3", <ObolItemModel>{
                 "internalName": "ObolHyper3",
-                "displayName": "Hyper Skull Obol",
+                "displayName": "Hyper Obol of Destruction",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolCircle,
                 "Type": "Circle Obol",
@@ -14816,7 +14816,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyperB0", <ObolItemModel>{
                 "internalName": "ObolHyperB0",
-                "displayName": "Hyper Six Obol",
+                "displayName": "Hyper Obol of Rare Drops",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolSquare,
                 "Type": "Square Obol",
@@ -14839,7 +14839,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyperB1", <ObolItemModel>{
                 "internalName": "ObolHyperB1",
-                "displayName": "Hyper Pyre Obol",
+                "displayName": "Hyper Obol of All Statisticals",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolSquare,
                 "Type": "Square Obol",
@@ -14862,7 +14862,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyperB2", <ObolItemModel>{
                 "internalName": "ObolHyperB2",
-                "displayName": "Hyper DMG Obol",
+                "displayName": "Hyper Obol of Mega Damagio",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolSquare,
                 "Type": "Square Obol",
@@ -14885,7 +14885,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("ObolHyperB3", <ObolItemModel>{
                 "internalName": "ObolHyperB3",
-                "displayName": "Hyper Skull Obol",
+                "displayName": "Hyper Obol of Decimation",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.aObolSquare,
                 "Type": "Square Obol",
@@ -20028,6 +20028,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("Trophy23", <ArmourItemModel>{
+                "internalName": "Trophy23",
+                "displayName": "Heroic Spirit",
+                "sellPrice": 777,
+                "typeGen": TypeGenEnum.aTrophy,
+                "Type": "Trophy",
+                "lvReqToCraft": 1,
+                "lvReqToEquip": 600,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 5,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 50,
+                "miscUp1": "10% Afk Gains Multi",
+                "miscUp2": "20% Damage Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentTools1", <ToolItemModel>{
                 "internalName": "EquipmentTools1",
                 "displayName": "Junk Pickaxe",
@@ -22620,7 +22641,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Quest Item",
-                "description": "It's proof that you can mine, and it's even signed by Glumlee himself! It says; 'You passed. Good for you. Ugh' "
+                "description": "Proof that you passed Glumlee's tutorial quests. It's worthless. "
             }),
         new BaseItemBase("Crystal1", <DescItemModel>{
                 "internalName": "Crystal1",

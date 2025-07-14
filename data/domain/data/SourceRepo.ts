@@ -8319,6 +8319,27 @@ export const initSourceRepo = () => {
                         "wikiName": "[[Sussy Gene#Loiterin' Around|Loiterin' Around]]",
                         "txtName": "Sussy Gene: Loiterin' Around"
                     },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#First Showdown...|First Showdown...]]",
+                        "txtName": "Potti: First Showdown..."
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Castle Cleanup|Castle Cleanup]]",
+                        "txtName": "Potti: Castle Cleanup"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Glory to the Crop Depot|Glory to the Crop Depot]]",
+                        "txtName": "Potti: Glory to the Crop Depot"
+                    },
+                    <SourceModel>{"wikiName": "[[Potti#Star Master|Star Master]]", "txtName": "Potti: Star Master"},
+                    <SourceModel>{
+                        "wikiName": "[[Potti#15 Time Champion|15 Time Champion]]",
+                        "txtName": "Potti: 15 Time Champion"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Armor of the Gods|Armor of the Gods]]",
+                        "txtName": "Potti: Armor of the Gods"
+                    },
                     <SourceModel>{"wikiName": "[[Arcade]]", "txtName": "Arcade"}
                 ],
                 "recipeFrom": [],
@@ -11873,7 +11894,14 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentStatues26", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[DropTable29]]", "txtName": "DropTable29"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable29]]", "txtName": "DropTable29"},
+                    <SourceModel>{
+                        "wikiName": "[[Potti#First Showdown...|First Showdown...]]",
+                        "txtName": "Potti: First Showdown..."
+                    },
+                    <SourceModel>{"wikiName": "[[Potti#Star Master|Star Master]]", "txtName": "Potti: Star Master"}
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11894,7 +11922,17 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentStatues27", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[DropTable30]]", "txtName": "DropTable30"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable30]]", "txtName": "DropTable30"},
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Castle Cleanup|Castle Cleanup]]",
+                        "txtName": "Potti: Castle Cleanup"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#15 Time Champion|15 Time Champion]]",
+                        "txtName": "Potti: 15 Time Champion"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -11904,7 +11942,17 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentStatues28", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[DropTable31]]", "txtName": "DropTable31"}],
+                "sources": [
+                    <SourceModel>{"wikiName": "[[DropTable31]]", "txtName": "DropTable31"},
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Glory to the Crop Depot|Glory to the Crop Depot]]",
+                        "txtName": "Potti: Glory to the Crop Depot"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Armor of the Gods|Armor of the Gods]]",
+                        "txtName": "Potti: Armor of the Gods"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -12086,7 +12134,12 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Quest1", <SourcesModel>{
-                "sources": [],
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Glumlee#Literally Burning your Money|Literally Burning your Money]]",
+                        "txtName": "Glumlee: Literally Burning your Money"
+                    }
+                ],
                 "recipeFrom": [],
                 "questAss": [
                     <SourceModel>{
@@ -13534,8 +13587,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -14170,6 +14222,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Trophy23", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Potti#Spirit of the Hero|Spirit of the Hero]]",
+                        "txtName": "Potti: Spirit of the Hero"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest90", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
@@ -14316,27 +14378,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats122", <SourcesModel>{
+        new SourcesBase("EquipmentPendant33", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("Quest101", <SourcesModel>{
+        new SourcesBase("EquipmentHats112", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("ClassSwapB", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GemP35", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("GemP25", <SourcesModel>{
+        new SourcesBase("EquipmentHats118", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
