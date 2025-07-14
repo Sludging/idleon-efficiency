@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Text, CheckBox, Button } from "grommet";
+import { Box, Text } from "grommet";
 import { useMemo, useState } from "react";
 import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractType, TesseractUpgrade } from "../../data/domain/tesseract";
 import ShadowBox from "../base/ShadowBox";
@@ -15,6 +15,7 @@ import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
 import ResourceWeightModal from "./shared/ResourceWeightModal";
 import SmallButton from "../base/SmallButton";
+import { Configure } from "grommet-icons";
 
 export function TesseractDisplay() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
@@ -160,7 +161,8 @@ export function TesseractDisplay() {
                     />
                     <Box pad={{ top: 'small' }}>
                     <SmallButton
-                        label="Configure Resource Weights"
+                        icon={<Configure size="small" />}
+                        label="Resource Weights" 
                         secondary
                         size="small"
                         color="accent-3"

@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Text, Button, Layer, TextInput, Grid } from "grommet";
+import { Box, Text } from "grommet";
 import { useMemo, useState } from "react";
 import { BoneType, Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
 import ShadowBox from "../base/ShadowBox";
@@ -8,7 +8,7 @@ import { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
-import { CircleInformation } from "grommet-icons";
+import { CircleInformation, Configure } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
@@ -247,7 +247,8 @@ export function GrimoireDisplay() {
                     />
                     <Box pad={{ top: 'small' }}>
                     <SmallButton
-                        label="Configure Resource Weights"
+                        icon={<Configure size="small" />}
+                        label="Resource Weights" 
                         secondary
                         size="small"
                         color="accent-3"

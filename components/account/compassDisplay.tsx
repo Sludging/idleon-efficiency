@@ -19,8 +19,8 @@ import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
 import { nFormatter } from "../../data/utility";
 import ResourceWeightModal from "./shared/ResourceWeightModal";
-import styled from "styled-components";
 import SmallButton from "../base/SmallButton";
+import { Configure } from "grommet-icons";
 
 // Path Upgrades Section
 function PathUpgradesSection({ onOpenWeightModal }: { onOpenWeightModal: () => void }) {
@@ -107,7 +107,8 @@ function PathUpgradesSection({ onOpenWeightModal }: { onOpenWeightModal: () => v
                         tooltipHeading="Exact Dust Count"
                     />
                     <SmallButton 
-                        label="Configure Resource Weights" 
+                        icon={<Configure size="small" />}
+                        label="Resource Weights" 
                         secondary
                         size="small"
                         color="accent-3"
