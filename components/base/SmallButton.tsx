@@ -2,8 +2,8 @@ import { Button } from "grommet";
 import styled from "styled-components";
 
 export const SmallButton = styled(Button)`
-    font-size: 10px;
-    padding: 4px 6px;
+    font-size: 12px;
+    padding: 4px 8px;
     height: 24px;
     min-height: 24px;
     display: flex;

@@ -139,8 +139,8 @@ function ResourceWeightModal<T extends EfficiencyDomain>({
                 </Box>
                 
                 <Box direction="row" gap="small" justify="end">
-                    <Button label="Cancel" onClick={onClose} />
-                    <Button label="Re-calculate" primary onClick={handleRecalculate} />
+                    <Button size="small" label="Cancel" onClick={onClose} />
+                    <Button size="small" label="Recalculate" primary onClick={handleRecalculate} />
                 </Box>
             </Box>
         </Layer>
