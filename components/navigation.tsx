@@ -62,10 +62,11 @@ const navItems: NavItem[] = [
         ]
     },
     { link: "/players", label: "Players" },
-    { link: "/elite-classes", label: "Elite Classes", subLinks: [
-        { subLink: "/grimoire", label: "Grimoire" },
-        { subLink: "/tesseract", label: "Tesseract" },
-        { subLink: "/compass", label: "Compass" },
+    {
+        link: "/master-classes", label: "Master Classes", subLinks: [
+            { subLink: "/compass", label: "Compass" },
+            { subLink: "/grimoire", label: "Grimoire" },
+            { subLink: "/tesseract", label: "Tesseract" },
         ]
     },
     {
