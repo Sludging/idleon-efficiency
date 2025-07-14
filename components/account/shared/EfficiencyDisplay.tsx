@@ -233,6 +233,9 @@ export function EfficiencyDisplay({
                     }
                 ]}
                 data={processedData}
+                background={{
+                    body: ["dark-1", "grey-4"]
+                }}
             />
             <Box direction="row" justify="between" align="center" pad={{ horizontal: 'small' }}>
                 <Box direction="row" gap="medium" align="center" justify="end" fill>
