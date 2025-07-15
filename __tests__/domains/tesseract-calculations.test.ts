@@ -1,6 +1,6 @@
 import { loadTestGameData } from '../utils/test-data-loader';
 import { expectCalculationToMatch } from '../utils/calculation-helpers';
-import { Tesseract } from '../../data/domain/tesseract';
+import { Tesseract, TesseractType } from '../../data/domain/tesseract';
 
 describe('Tesseract Domain Calculations', () => {
     const testCases = [
@@ -41,12 +41,12 @@ describe('Tesseract Domain Calculations', () => {
                 });
 
                 it('should have tachyon counts', () => {
-                    expect(tesseract.purpleTachyons).toBeDefined();
-                    expect(tesseract.brownTachyons).toBeDefined();
-                    expect(tesseract.greenTachyons).toBeDefined();
-                    expect(tesseract.redTachyons).toBeDefined();
-                    expect(tesseract.silverTachyons).toBeDefined();
-                    expect(tesseract.goldTachyons).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Purple]).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Brown]).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Green]).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Red]).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Silver]).toBeDefined();
+                    expect(tesseract.resources[TesseractType.Gold]).toBeDefined();
                 });
 
                 it('should calculate total tesseract level', () => {

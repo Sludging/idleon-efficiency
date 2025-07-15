@@ -1125,9 +1125,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 15,
                 "territoryName": "Horsey's Gambit",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(102, <SummonEnemyModel>{
                 "enemyId": "Crystal3",
@@ -1136,9 +1136,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 20,
                 "territoryName": "Bishop's Gambit",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(103, <SummonEnemyModel>{
                 "enemyId": "Crystal4",
@@ -1147,9 +1147,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 30,
                 "territoryName": "Queen's Gambit",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(104, <SummonEnemyModel>{
                 "enemyId": "Crystal0",
@@ -1158,9 +1158,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 22,
                 "territoryName": "Castle's Gambit",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(105, <SummonEnemyModel>{
                 "enemyId": "Crystal5",
@@ -1168,6 +1168,105 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 30,
                 "width": 23,
                 "territoryName": "Noob's Gambit",
+                "bonusId": 0,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(106, <SummonEnemyModel>{
+                "enemyId": "babaMummy",
+                "xOff": 83,
+                "yOff": 0,
+                "width": 90,
+                "territoryName": "The Aetherdoot",
+                "bonusId": 0,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(107, <SummonEnemyModel>{
+                "enemyId": "slimeB",
+                "xOff": 50,
+                "yOff": 7,
+                "width": 90,
+                "territoryName": "The Grover Glunko",
+                "bonusId": 0,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(108, <SummonEnemyModel>{
+                "enemyId": "mini6a",
+                "xOff": 61,
+                "yOff": -12,
+                "width": 90,
+                "territoryName": "The Shimmerlord",
+                "bonusId": 0,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(109, <SummonEnemyModel>{
+                "enemyId": "mini3a",
+                "xOff": 42,
+                "yOff": -30,
+                "width": 90,
+                "territoryName": "The Freezerslush",
+                "bonusId": 0,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusQty": 0,
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(110, <SummonEnemyModel>{
+                "enemyId": "mini4a",
+                "xOff": 84,
+                "yOff": 3,
+                "width": 90,
+                "territoryName": "The Hexermush",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(111, <SummonEnemyModel>{
+                "enemyId": "mini5a",
+                "xOff": 30,
+                "yOff": 10,
+                "width": 90,
+                "territoryName": "The Cinderdomeo",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(112, <SummonEnemyModel>{
+                "enemyId": "Boss6",
+                "xOff": 61,
+                "yOff": 45,
+                "width": 90,
+                "territoryName": "The Zephyeror",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(113, <SummonEnemyModel>{
+                "enemyId": "babayaga",
+                "xOff": 0,
+                "yOff": 0,
+                "width": 90,
+                "territoryName": "W7 boss",
+                "bonusId": 0,
+                "bonus": undefined,
+                "bonusQty": 0,
+                "difficulty": 0
+            }),
+        new SummonEnemyBase(114, <SummonEnemyModel>{
+                "enemyId": "babayaga",
+                "xOff": 0,
+                "yOff": 0,
+                "width": 90,
+                "territoryName": "W8 boss",
                 "bonusId": 0,
                 "bonus": undefined,
                 "bonusQty": 0,

@@ -413,3 +413,40 @@ export const isSubDomain = () => {
 
     return !["localhost:3000", "www", "preview"].includes(urlDomain);
 }
+
+// Consolidated regex pattern for formatted numbers
+export const FORMATTED_NUMBER_PATTERN = /^([\d.]+)([KMBTQ]+|E\d+)?$/;
+
+export const parseFormattedNumber = (formattedNumber: string | number): number => {
+  // If it's already a number, return it
+  if (typeof formattedNumber === 'number') {
+    return formattedNumber;
+  }
+
+  const multipliers: Record<string, number> = {
+    'K': 1e3,
+    'M': 1e6, 
+    'B': 1e9,
+    'T': 1e12,
+    'Q': 1e15,
+    'QQ': 1e18,
+    'QQQ': 1e21
+  };
+  
+  const match = formattedNumber.match(FORMATTED_NUMBER_PATTERN);
+  if (!match) {
+    return parseFloat(formattedNumber);
+  }
+  
+  const [, number, suffix] = match;
+  
+  // Handle scientific notation (E suffix)
+  if (suffix?.startsWith('E')) {
+    const exponent = parseInt(suffix.slice(1));
+    return parseFloat(number) * Math.pow(10, exponent);
+  }
+  
+  // Handle regular suffixes
+  const multiplier = multipliers[suffix || ''] || 1;
+  return parseFloat(number) * multiplier;
+};

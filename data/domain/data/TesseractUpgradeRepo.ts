@@ -347,9 +347,9 @@ export const initTesseractUpgradeRepo = () => {
         new TesseractUpgradeBase(26, <TesseractUpgradeModel>{
                 "name": "Inviting a Plus One",
                 "base_cost": 5000,
-                "scaling_factor": 500,
+                "scaling_factor": 1.15,
                 "x1": 3,
-                "max_level": 100,
+                "max_level": 300,
                 "value": 1,
                 "unlock_req": 890,
                 "x2": 0,

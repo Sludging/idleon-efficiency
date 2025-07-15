@@ -2,6 +2,13 @@ import { nFormatter } from "../utility";
 import { lavaLog } from "../utility";
 import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
+import { 
+    EfficiencyUpgrade, 
+    EfficiencyDomain, 
+    EfficiencyEngine, 
+    EfficiencyCalculator,
+    EfficiencyPathInfo
+} from "../../lib/efficiencyEngine/efficiencyEngine";
 import { CompassUpgradeBase, initCompassUpgradeRepo } from "./data/CompassUpgradeRepo";
 import { initRandoListRepo } from "./data/RandoListRepo";
 import { ImageData } from "./imageData";
@@ -9,6 +16,8 @@ import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
 import { Sneaking } from "./world-6/sneaking";
+import { Emperor } from "./emperor";
+import { Lab } from "./lab";
 
 export enum WeaknessType {
     Fire = 0,
@@ -24,23 +33,6 @@ export enum DustType {
     Cooldust = 3,
     Novadust = 4
   }
-
-// Base interface for all efficiency calculators
-interface EfficiencyCalculator {
-    name: string;
-    calculateCurrentValue(compass: Compass): number;
-    getRelevantUpgradeIds(compass: Compass): number[];
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number;
-}
-
-// Efficiency result structure
-interface EfficiencyUpgrade {
-    upgrade: CompassUpgrade;
-    valueIncrease: number;
-    dustCost: number;
-    efficiency: number;
-    calculatorName: string;
-}
 
 // Helper function to add meta-upgrades that boost circle-shaped upgrades
 function addMetaUpgradesIfRelevant(baseIds: number[], compass: Compass): number[] {
@@ -66,10 +58,10 @@ function addMetaUpgradesIfRelevant(baseIds: number[], compass: Compass): number[
 }
 
 // Damage efficiency calculator implementation
-class DamageEfficiencyCalculator implements EfficiencyCalculator {
+class DamageEfficiencyCalculator implements EfficiencyCalculator<Compass> {
     name = "Tempest Damage";
     
-    getRelevantUpgradeIds(compass: Compass): number[] {
+    getRelevantUpgradeIds(domain: Compass): number[] {
         const baseIds = [
             // Flat damage bonuses
             14, 15, 24, 60, 81,
@@ -82,33 +74,36 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator {
         ];
         
         // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
-        return addMetaUpgradesIfRelevant(baseIds, compass);
+        return addMetaUpgradesIfRelevant(baseIds, domain);
     }
     
-    calculateCurrentValue(compass: Compass): number {
-        return compass.calculateTempestDamage();
+    calculateCurrentValue(domain: Compass): number {
+        return domain.calculateTempestDamage();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
+    calculateValueWithUpgrade(domain: Compass, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
-        const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as CompassUpgrade[];
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
         
-        if (!targetUpgrade) return this.calculateCurrentValue(compass);
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
         
         targetUpgrade.level += 1;
-        compass.recalculateUpgrades(tempUpgrades);
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to DustType format
+        const simulatedAvailableDust = simulatedResources as Record<DustType, number>;
         
         // Calculate damage with temporary upgrades
-        return compass.calculateDamageWithUpgrades(tempUpgrades, simulatedAvailableDust);
+        return domain.calculateDamageWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
 // Dust efficiency calculator implementation
-class DustEfficiencyCalculator implements EfficiencyCalculator {
+class DustEfficiencyCalculator implements EfficiencyCalculator<Compass> {
     name = "Dust Multiplier";
     
-    getRelevantUpgradeIds(compass: Compass): number[] {
+    getRelevantUpgradeIds(domain: Compass): number[] {
         const baseIds = [
             // Direct dust multiplier bonuses
             31,  // Mountains of Dust
@@ -126,109 +121,35 @@ class DustEfficiencyCalculator implements EfficiencyCalculator {
         ];
         
         // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
-        return addMetaUpgradesIfRelevant(baseIds, compass);
+        return addMetaUpgradesIfRelevant(baseIds, domain);
     }
     
-    calculateCurrentValue(compass: Compass): number {
+    calculateCurrentValue(domain: Compass): number {
         // Use default values for external bonuses since they don't change with compass upgrades
-        return compass.calculateDustMultiplier();
+        return domain.calculateDustMultiplier();
     }
     
-    calculateValueWithUpgrade(compass: Compass, simulatedUpgrades: CompassUpgrade[], upgradeId: number, simulatedAvailableDust: Record<DustType, number>): number {
+    calculateValueWithUpgrade(domain: Compass, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
         // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
-        const tempUpgrades = simulatedUpgrades.map(u => compass.copyUpgrade(u));
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as CompassUpgrade[];
         const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
         
-        if (!targetUpgrade) return this.calculateCurrentValue(compass);
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
         
         targetUpgrade.level += 1;
-        compass.recalculateUpgrades(tempUpgrades);
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to DustType format
+        const simulatedAvailableDust = simulatedResources as Record<DustType, number>;
         
         // Calculate dust multiplier with temporary upgrades
-        return compass.calculateDustWithUpgrades(tempUpgrades, simulatedAvailableDust);
+        return domain.calculateDustWithUpgrades(tempUpgrades, simulatedAvailableDust);
     }
 }
 
-// Generic efficiency calculation engine
-class EfficiencyEngine {
-    calculateEfficiency(
-        compass: Compass, 
-        calculator: EfficiencyCalculator, 
-        maxUpgrades: number = 100
-    ): EfficiencyUpgrade[] {
-        const currentValue = calculator.calculateCurrentValue(compass);
-        const results: EfficiencyUpgrade[] = [];
-        
-        // Get relevant upgrade IDs for this calculator
-        const relevantUpgradeIds = calculator.getRelevantUpgradeIds(compass);
 
-        // Create a working copy of the current state for simulation
-        let simulatedUpgrades = compass.upgrades.map(u => compass.copyUpgrade(u));
-        let simulatedAvailableDust = { ...compass.availableDust };
-        let simulatedValue = currentValue;
 
-        // Find the next maxUpgrades most efficient upgrades to purchase in sequence
-        for (let purchaseStep = 0; purchaseStep < maxUpgrades; purchaseStep++) {
-            let bestUpgrade: CompassUpgrade | null = null;
-            let bestEfficiency = 0;
-            let bestValueIncrease = 0;
-            let bestNewValue = 0;
-
-            // Check each relevant upgrade to find the most efficient one at this step
-            for (const upgradeId of relevantUpgradeIds) {
-                const upgrade = simulatedUpgrades.find(u => u.id === upgradeId);
-                if (!upgrade || !upgrade.unlocked || upgrade.level >= upgrade.data.maxLevel) {
-                    continue; // Skip locked or maxed upgrades
-                }
-
-                // Calculate value with this upgrade at +1 level using current simulated dust amounts
-                const newValue = calculator.calculateValueWithUpgrade(compass, simulatedUpgrades, upgradeId, simulatedAvailableDust);
-                const valueIncrease = newValue - simulatedValue;
-                const efficiency = valueIncrease / upgrade.cost;
-
-                if (efficiency > bestEfficiency) {
-                    bestUpgrade = upgrade;
-                    bestEfficiency = efficiency;
-                    bestValueIncrease = valueIncrease;
-                    bestNewValue = newValue;
-                }
-            }
-
-            // If we found a best upgrade, add it to our results and simulate purchasing it
-            if (bestUpgrade && bestEfficiency > 0) {
-                // Create a snapshot of the upgrade state for display (showing the level it will be after purchase)
-                const upgradeSnapshot = compass.copyUpgrade(bestUpgrade);
-                upgradeSnapshot.level += 1; // Show the level after purchase
-
-                results.push({
-                    upgrade: upgradeSnapshot,
-                    valueIncrease: bestValueIncrease,
-                    dustCost: bestUpgrade.cost,
-                    efficiency: bestEfficiency,
-                    calculatorName: calculator.name
-                });
-
-                // Simulate purchasing this upgrade
-                bestUpgrade.level += 1;
-                simulatedValue = bestNewValue;
-
-                // Deduct dust cost from simulated available dust
-                const dustType = bestUpgrade.data.dustType as DustType;
-                simulatedAvailableDust[dustType] = Math.max(0, simulatedAvailableDust[dustType] - bestUpgrade.cost);
-
-                // Recalculate costs and bonuses for all upgrades after this purchase
-                compass.recalculateUpgrades(simulatedUpgrades);
-            } else {
-                // No more efficient upgrades available (either all maxed, locked, or no positive efficiency)
-                break;
-            }
-        }
-
-        return results;
-    }
-}
-
-export class CompassUpgrade {
+export class CompassUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
     public unlocked: boolean = false;
     public bonus: number = 0;
@@ -292,10 +213,15 @@ export class CompassUpgrade {
         return bonus;
     }
 
-    getCost = (allUpgrades: CompassUpgrade[], upgradeMetadata: Record<string, { pathLevel: number, pathUpgrades: number[] }>): number => {
+    getCost = (allUpgrades: EfficiencyUpgrade[], ...args: any[]): number => {
+        const compassUpgrades = allUpgrades as unknown as CompassUpgrade[];
+        const upgradeMetadata = args[0] as Record<string, { pathLevel: number, pathUpgrades: number[] }>;
+        
         if (this.level >= this.data.maxLevel) {
             return 0;
         }
+
+
 
         // Base dust cost from server variable
         const baseDustCost = Math.max(this.dustServerVarMultiplier, 1);
@@ -305,52 +231,52 @@ export class CompassUpgrade {
         switch (this.id) {
             case 45:
                 // Uses bonuses from upgrades 151, 152, 153
-                const bonus151 = allUpgrades.find(u => u.id === 151)?.getBonus(allUpgrades) || 0;
-                const bonus152 = allUpgrades.find(u => u.id === 152)?.getBonus(allUpgrades) || 0;
-                const bonus153 = allUpgrades.find(u => u.id === 153)?.getBonus(allUpgrades) || 0;
+                const bonus151 = compassUpgrades.find(u => u.id === 151)?.getBonus(compassUpgrades) || 0;
+                const bonus152 = compassUpgrades.find(u => u.id === 152)?.getBonus(compassUpgrades) || 0;
+                const bonus153 = compassUpgrades.find(u => u.id === 153)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus151 + (bonus152 + bonus153)) / 100;
                 break;
             case 43:
                 // Uses bonuses from upgrades 154, 156
-                const bonus154 = allUpgrades.find(u => u.id === 154)?.getBonus(allUpgrades) || 0;
-                const bonus156 = allUpgrades.find(u => u.id === 156)?.getBonus(allUpgrades) || 0;
+                const bonus154 = compassUpgrades.find(u => u.id === 154)?.getBonus(compassUpgrades) || 0;
+                const bonus156 = compassUpgrades.find(u => u.id === 156)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus154 + bonus156) / 100;
                 break;
             case 48:
                 // Uses bonuses from upgrades 155, 157, 158
-                const bonus155 = allUpgrades.find(u => u.id === 155)?.getBonus(allUpgrades) || 0;
-                const bonus157 = allUpgrades.find(u => u.id === 157)?.getBonus(allUpgrades) || 0;
-                const bonus158 = allUpgrades.find(u => u.id === 158)?.getBonus(allUpgrades) || 0;
+                const bonus155 = compassUpgrades.find(u => u.id === 155)?.getBonus(compassUpgrades) || 0;
+                const bonus157 = compassUpgrades.find(u => u.id === 157)?.getBonus(compassUpgrades) || 0;
+                const bonus158 = compassUpgrades.find(u => u.id === 158)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus155 + (bonus157 + bonus158)) / 100;
                 break;
             case 57:
                 // Uses bonuses from upgrades 159, 160, 161, 168
-                const bonus159 = allUpgrades.find(u => u.id === 159)?.getBonus(allUpgrades) || 0;
-                const bonus160 = allUpgrades.find(u => u.id === 160)?.getBonus(allUpgrades) || 0;
-                const bonus161 = allUpgrades.find(u => u.id === 161)?.getBonus(allUpgrades) || 0;
-                const bonus168 = allUpgrades.find(u => u.id === 168)?.getBonus(allUpgrades) || 0;
+                const bonus159 = compassUpgrades.find(u => u.id === 159)?.getBonus(compassUpgrades) || 0;
+                const bonus160 = compassUpgrades.find(u => u.id === 160)?.getBonus(compassUpgrades) || 0;
+                const bonus161 = compassUpgrades.find(u => u.id === 161)?.getBonus(compassUpgrades) || 0;
+                const bonus168 = compassUpgrades.find(u => u.id === 168)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus159 + (bonus160 + (bonus161 + bonus168))) / 100;
                 break;
             case 51:
                 // Uses bonuses from upgrades 162, 163, 164, 166, 167
-                const bonus162 = allUpgrades.find(u => u.id === 162)?.getBonus(allUpgrades) || 0;
-                const bonus163 = allUpgrades.find(u => u.id === 163)?.getBonus(allUpgrades) || 0;
-                const bonus164 = allUpgrades.find(u => u.id === 164)?.getBonus(allUpgrades) || 0;
-                const bonus166 = allUpgrades.find(u => u.id === 166)?.getBonus(allUpgrades) || 0;
-                const bonus167 = allUpgrades.find(u => u.id === 167)?.getBonus(allUpgrades) || 0;
+                const bonus162 = compassUpgrades.find(u => u.id === 162)?.getBonus(compassUpgrades) || 0;
+                const bonus163 = compassUpgrades.find(u => u.id === 163)?.getBonus(compassUpgrades) || 0;
+                const bonus164 = compassUpgrades.find(u => u.id === 164)?.getBonus(compassUpgrades) || 0;
+                const bonus166 = compassUpgrades.find(u => u.id === 166)?.getBonus(compassUpgrades) || 0;
+                const bonus167 = compassUpgrades.find(u => u.id === 167)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus162 + (bonus163 + (bonus164 + (bonus166 + bonus167)))) / 100;
                 break;
             case 54:
                 // Uses bonuses from upgrades 165, 169
-                const bonus165 = allUpgrades.find(u => u.id === 165)?.getBonus(allUpgrades) || 0;
-                const bonus169 = allUpgrades.find(u => u.id === 169)?.getBonus(allUpgrades) || 0;
+                const bonus165 = compassUpgrades.find(u => u.id === 165)?.getBonus(compassUpgrades) || 0;
+                const bonus169 = compassUpgrades.find(u => u.id === 169)?.getBonus(compassUpgrades) || 0;
                 costReduction = 1 + (bonus165 + bonus169) / 100;
                 break;
         }
 
         // General cost reduction from CompassBonus upgrades 36 and 77
-        const bonus36 = allUpgrades.find(u => u.id === 36)?.getBonus(allUpgrades) || 0;
-        const bonus77 = allUpgrades.find(u => u.id === 77)?.getBonus(allUpgrades) || 0;
+        const bonus36 = compassUpgrades.find(u => u.id === 36)?.getBonus(compassUpgrades) || 0;
+        const bonus77 = compassUpgrades.find(u => u.id === 77)?.getBonus(compassUpgrades) || 0;
         const generalCostReduction = 1 / (1 + (bonus36 + bonus77) / 100);
 
         // Base cost from upgrade data
@@ -374,6 +300,10 @@ export class CompassUpgrade {
             Math.pow(this.data.costMult, this.level);
 
         return cost;
+    }
+
+    getCostType(): number {
+        return this.data.dustType;
     }
 
     getCostToMax = (allUpgrades: CompassUpgrade[], upgradeMetadata: Record<string, { pathLevel: number, pathUpgrades: number[] }>): number => {
@@ -484,9 +414,52 @@ export class CompassUpgrade {
 
         return description;
     }
+
+    // EfficiencyUpgrade interface methods
+    getId(): number {
+        return this.id;
+    }
+
+    getLevel(): number {
+        return this.level;
+    }
+
+    setLevel(level: number): void {
+        this.level = level;
+    }
+
+    isUnlocked(): boolean {
+        return this.unlocked;
+    }
+
+    getName(): string {
+        return this.data.name;
+    }
+
+    getMaxLevel(): number {
+        return this.data.maxLevel;
+    }
+
+    // Compass doesn't use unlock requirements like Grimoire/Tesseract
+    getUnlockRequirement(): number | undefined {
+        return undefined;
+    }
+
+    copyUpgrade(): EfficiencyUpgrade {
+        const copy = new CompassUpgrade(this.id, this.data);
+        copy.level = this.level;
+        copy.unlocked = this.unlocked;
+        copy.bonus = this.bonus;
+        copy.cost = this.cost;
+        copy.costToMax = this.costToMax;
+        copy.costToUnlock = this.costToUnlock;
+        copy.indexInPath = this.indexInPath;
+        copy.dustServerVarMultiplier = this.dustServerVarMultiplier;
+        return copy;
+    }
 }
 
-export class Compass extends Domain {
+export class Compass extends Domain implements EfficiencyDomain {
     upgrades: CompassUpgrade[] = [];
 
     totalCompassLevel: number = 0;
@@ -506,7 +479,7 @@ export class Compass extends Domain {
     // Efficiency calculation fields
     currentTempestDamage: number = 0;
     currentDustMultiplier: number = 0;
-    efficiencyResults: Map<string, EfficiencyUpgrade[]> = new Map();
+    efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
 
     // Compass raw data for calculations
     medallionsCollected: any[] = [];
@@ -521,6 +494,8 @@ export class Compass extends Domain {
     talent421: number = 0;
     arcadeBonus47: number = 0;
     completedMasteries: number = 0;
+    emperorBonus4: number = 0; // From emperor domain (Windwalker Extra Dust)
+    mainframeBonus122: number = 0; // From lab domain (Jewel 22)
 
     getRawKeys(): RawData[] {   
         return [
@@ -654,6 +629,106 @@ export class Compass extends Domain {
         }
     }
 
+    // EfficiencyDomain interface methods
+    getResources(): Record<number, number> {
+        return this.availableDust;
+    }
+
+    getResourceTypes(): Record<string, number> {
+        return {
+            "Stardust": DustType.Stardust,
+            "Moondust": DustType.Moondust,
+            "Solardust": DustType.Solardust,
+            "Cooldust": DustType.Cooldust,
+            "Novadust": DustType.Novadust,
+        };
+    }
+
+    getResourceGeneralName(): string {
+        return "Dust";
+    }
+
+    getResourceCount(resourceType: number): number {
+        return this.availableDust[resourceType as DustType] || 0;
+    }
+
+    getUpgradeResourceType(upgrade: EfficiencyUpgrade): number {
+        return (upgrade as CompassUpgrade).data.dustType; // Dust type
+    }
+
+    getLocalStorageKey(): string {
+        return "idleon_efficiency_compass_resource_weights";
+    }
+
+    loadResourceWeights(): Record<number, number> {
+        if (typeof window === 'undefined') {
+            return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0 }; // Default weights
+        }
+
+        try {
+            const stored = localStorage.getItem(this.getLocalStorageKey());
+            if (stored) {
+                return JSON.parse(stored);
+            }
+        } catch (error) {
+            console.warn('Failed to load compass resource weights:', error);
+        }
+
+        return { 0: 1.0, 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0 }; // Default weights
+    }
+
+    saveResourceWeights(weights: Record<number, number>): void {
+        if (typeof window === 'undefined') return;
+        
+        try {
+            localStorage.setItem(this.getLocalStorageKey(), JSON.stringify(weights));
+        } catch (error) {
+            console.warn('Failed to save compass resource weights:', error);
+        }
+    }
+
+    getResourceImageData(resourceType: number): ImageData {
+        return this.getDustImageData(resourceType as DustType);
+    }
+
+    copyUpgrade(upgrade: EfficiencyUpgrade): EfficiencyUpgrade {
+        const compassUpgrade = upgrade as CompassUpgrade;
+        const copy = new CompassUpgrade(compassUpgrade.id, compassUpgrade.data);
+        copy.level = compassUpgrade.level;
+        copy.unlocked = compassUpgrade.unlocked;
+        copy.cost = compassUpgrade.cost;
+        copy.costToMax = compassUpgrade.costToMax;
+        copy.costToUnlock = compassUpgrade.costToUnlock;
+        copy.indexInPath = compassUpgrade.indexInPath;
+        copy.dustServerVarMultiplier = compassUpgrade.dustServerVarMultiplier;
+        copy.bonus = compassUpgrade.bonus;
+        return copy;
+    }
+
+    recalculateUpgrades(upgrades: EfficiencyUpgrade[]): void {
+        const compassUpgrades = upgrades as CompassUpgrade[];
+        
+        // First handle special bonuses that affect other upgrades
+        const specialBonuses = [36, 80];
+        specialBonuses.forEach(bonusId => {
+            const specialUpgrade = compassUpgrades.find(u => u.id === bonusId);
+            if (specialUpgrade) {
+                specialUpgrade.bonus = specialUpgrade.getBonus(compassUpgrades);
+            }
+        });
+
+        // Then recalculate all bonuses and costs
+        compassUpgrades.forEach(upgrade => {
+            upgrade.bonus = upgrade.getBonus(compassUpgrades);
+            upgrade.cost = upgrade.getCost(upgrades, this.upgradeMetadata);
+        });
+    }
+
+    // Provide additional cost arguments for compass upgrades (upgradeMetadata)
+    getAdditionalCostArgs(): any[] {
+        return [this.upgradeMetadata];
+    }
+
     /**
      * Calculate current tempest damage based on the Compass_DMG formula
      * @param includeEquipment Whether to include equipment bonuses (default true)
@@ -778,41 +853,6 @@ export class Compass extends Domain {
         return damage;
     }
 
-    /**
-     * Helper function to create a deep copy of a CompassUpgrade
-     */
-    public copyUpgrade(upgrade: CompassUpgrade): CompassUpgrade {
-        const copy = new CompassUpgrade(upgrade.id, upgrade.data);
-        copy.level = upgrade.level;
-        copy.unlocked = upgrade.unlocked;
-        copy.cost = upgrade.cost;
-        copy.costToMax = upgrade.costToMax;
-        copy.costToUnlock = upgrade.costToUnlock;
-        copy.indexInPath = upgrade.indexInPath;
-        copy.dustServerVarMultiplier = upgrade.dustServerVarMultiplier;
-        copy.bonus = upgrade.bonus;
-        return copy;
-    }
-
-    /**
-     * Helper function to recalculate all upgrade bonuses and costs
-     */
-    public recalculateUpgrades(upgrades: CompassUpgrade[]): void {
-        // First handle special bonuses that affect other upgrades
-        const specialBonuses = [36, 80];
-        specialBonuses.forEach(bonusId => {
-            const specialUpgrade = upgrades.find(u => u.id === bonusId);
-            if (specialUpgrade) {
-                specialUpgrade.bonus = specialUpgrade.getBonus(upgrades);
-            }
-        });
-
-        // Then recalculate all bonuses and costs
-        upgrades.forEach(upgrade => {
-            upgrade.bonus = upgrade.getBonus(upgrades);
-            upgrade.cost = upgrade.getCost(upgrades, this.upgradeMetadata);
-        });
-    }
 
     /**
      * Helper function to calculate damage with a temporary compass state
@@ -851,6 +891,8 @@ export class Compass extends Domain {
         tempCompass.etcBonus79 = this.etcBonus79;
         tempCompass.talent421 = this.talent421;
         tempCompass.arcadeBonus47 = this.arcadeBonus47;
+        tempCompass.emperorBonus4 = this.emperorBonus4;
+        tempCompass.mainframeBonus122 = this.mainframeBonus122;
         
         return tempCompass.calculateDustMultiplier();
     }
@@ -880,9 +922,12 @@ export class Compass extends Domain {
         // Step 4: (1 + (EtcBonuses(85) + EtcBonuses(79)) / 100)
         multiplier *= (1 + (this.etcBonus85 + this.etcBonus79) / 100);
 
-        // Step 5: Skip talent 423 calculation as requested
+        // Step 5: Emperor bonus 4 (Windwalker Extra Dust)
+        multiplier *= (1 + this.emperorBonus4 / 100);
 
-        // Step 6: All the additive compass bonuses
+        // Step 6: Skip talent 423 calculation as requested
+
+        // Step 7: All the additive compass bonuses
         let additiveBonus = 0;
         additiveBonus += this.getUpgradeBonus(139); // De Dust I
         additiveBonus += this.getUpgradeBonus(142); // De Dust II
@@ -893,9 +938,10 @@ export class Compass extends Domain {
         additiveBonus += this.getUpgradeBonus(93);  // Abomination Slayer XXXIV
         additiveBonus += this.getUpgradeBonus(89);  // Abomination Slayer XXX
 
-        // Add talent and arcade bonuses
+        // Add talent, arcade, and mainframe bonuses
         additiveBonus += this.talent421;
         additiveBonus += this.arcadeBonus47;
+        additiveBonus += this.mainframeBonus122;
 
         multiplier *= (1 + additiveBonus / 100);
 
@@ -903,7 +949,7 @@ export class Compass extends Domain {
     }
 
     /**
-     * Calculate efficiency for all supported attributes using the new efficiency system
+     * Calculate efficiency for all supported attributes using the efficiency system
      */
     calculateAllEfficiencies(): void {
         const currentDamage = this.calculateTempestDamage();
@@ -912,37 +958,25 @@ export class Compass extends Domain {
         const currentDustMultiplier = this.calculateDustMultiplier();
         this.currentDustMultiplier = currentDustMultiplier;
         
-        const engine = new EfficiencyEngine();
+        const engine = new EfficiencyEngine<Compass>();
         const calculators = [
             new DamageEfficiencyCalculator(),
             new DustEfficiencyCalculator(),
             // Easy to add more calculators here in the future
         ];
         
+        // Load resource weights
+        const resourceWeights = this.loadResourceWeights();
+        
         calculators.forEach(calculator => {
-            const results = engine.calculateEfficiency(this, calculator);
-            this.efficiencyResults.set(calculator.name, results);
+            const pathInfo = engine.calculateEfficiency(
+                this, 
+                calculator, 
+                100,
+                resourceWeights
+            );
+            this.efficiencyResults.set(calculator.name, pathInfo);
         });
-    }
-
-    /**
-     * Get the top N most efficient damage upgrades
-     * @param n Number of upgrades to return (default 10)
-     * @returns Array of most efficient upgrades
-     */
-    getTopDamageEfficiencyUpgrades(n: number = 10): EfficiencyUpgrade[] {
-        const damageResults = this.efficiencyResults.get("Tempest Damage") || [];
-        return damageResults.slice(0, n);
-    }
-
-    /**
-     * Get the top N most efficient dust upgrades
-     * @param n Number of upgrades to return (default 10)
-     * @returns Array of most efficient upgrades
-     */
-    getTopDustEfficiencyUpgrades(n: number = 10): EfficiencyUpgrade[] {
-        const dustResults = this.efficiencyResults.get("Dust Multiplier") || [];
-        return dustResults.slice(0, n);
     }
 
     /**
@@ -1014,6 +1048,8 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
     const players = accountData.get("players") as Player[];
     const sneaking = accountData.get("sneaking") as Sneaking;
     const arcade = accountData.get("arcade") as Arcade;
+    const emperor = accountData.get("emperor") as Emperor;
+    const lab = accountData.get("lab") as Lab;
 
     if (compass && players) {
         try {
@@ -1050,6 +1086,19 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
             compass.arcadeBonus47 = 0;
             if (arcade?.bonuses && arcade.bonuses.length > 47) {
                 compass.arcadeBonus47 = arcade.bonuses[47]?.getBonus() || 0;
+            }
+
+            // Set emperor bonus 4 from emperor domain (Windwalker Extra Dust)
+            compass.emperorBonus4 = 0;
+            if (emperor) {
+                const emperorDustBonus = emperor.emperorBonuses.find(bonus => bonus.index == 4)?.getBonus() ?? 0;
+                compass.emperorBonus4 = emperorDustBonus;
+            }
+
+            // Set mainframe bonus 122 from lab domain (Jewel 22)
+            compass.mainframeBonus122 = 0;
+            if (lab?.jewels && lab.jewels[22]) {
+                compass.mainframeBonus122 = lab.jewels[22].getBonus();
             }
 
             compass.calculateAllEfficiencies();

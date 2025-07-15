@@ -1,213 +1,133 @@
 "use client"
 
-import { Box, CheckBox, Grid, Text, Tip, Select } from "grommet";
+import { Box, Text } from "grommet";
 import { useMemo, useState } from "react";
-import { Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
-import { nFormatter } from "../../data/utility";
+import { BoneType, Grimoire, GrimoireUpgrade } from "../../data/domain/grimoire";
 import ShadowBox from "../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
+import { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
-import { CircleInformation } from "grommet-icons";
+import { CircleInformation, Configure } from "grommet-icons";
 import TipDisplay, { TipDirection } from "../base/TipDisplay";
-import { ImageData } from "../../data/domain/imageData";
-import { UnlockPathDisplay } from "./shared/UnlockPathDisplay";
+import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
+import { ResourceDisplay } from "./shared/ResourceDisplay";
+import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";
+import { nFormatter } from "../../data/utility";
+import ResourceWeightModal from "./shared/ResourceWeightModal";
+import SmallButton from "../base/SmallButton";
 
-// Simple bone display without tooltip
-function BoneDisplay({ cost, canAfford, boneImageData }: { cost: number, canAfford?: boolean, boneImageData: ImageData }) {
-    return (
-        <Box direction="row" gap="small" align="center">
-            <IconImage data={boneImageData} />
-            <TipDisplay
-                heading="Exact Bone Count"
-                body={
-                    <Text size="small">{cost.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
-                }
-                direction={TipDirection.Down}
-            >
-                <Text color={canAfford ? "green-1" : undefined}>
-                    {nFormatter(cost)}
-                </Text>
-            </TipDisplay>
-        </Box>
-    );
-}
-
-function UpgradeCostColumns(props: {
-    upgrade: GrimoireUpgrade,
-    grimoire: Grimoire
-}) {
-    const { upgrade, grimoire } = props;
-    const isMaxLevel = upgrade.level >= upgrade.data.max_level;
-    const isVeryHighMaxLevel = upgrade.data.max_level >= 999999;
-
-    // If the upgrade is maxed, we don't need to show the cost columns
-    if (isMaxLevel) {
-        return (
-            <Box fill justify="center" align="center">
-                <Text size="large" color="status-ok">Maxed</Text>
-            </Box>
-        )
-    }
-
-    // Calculate cost for next 10 levels if max level is very high
-    const costForNext10Levels = isVeryHighMaxLevel ? upgrade.getCostForNextNLevels([], 10) : 0;
-
-    // Check if player can afford the upgrade
-    const canAffordNextLevel = grimoire.canAffordUpgrade(upgrade);
-    const canAffordCostToMax = grimoire.canAffordUpgrade(upgrade, isVeryHighMaxLevel ? costForNext10Levels : upgrade.costToMax);
-
-    // Get bone type from the upgrade's x1 property
-    const boneType = upgrade.data.x1;
-
-    // Otherwise, we show the cost and cost to max columns
-    return (
-        <>
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label="Next level cost"
-                component={
-                    <BoneDisplay
-                        cost={upgrade.cost}
-                        canAfford={canAffordNextLevel}
-                        boneImageData={grimoire.getBoneImageData(boneType)}
-                    />
-                }
-            />
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label={isVeryHighMaxLevel ? "Cost for 10 levels" : "Cost to max"}
-                component={
-                    <BoneDisplay
-                        cost={isVeryHighMaxLevel ? costForNext10Levels : upgrade.costToMax}
-                        canAfford={canAffordCostToMax}
-                        boneImageData={grimoire.getBoneImageData(boneType)}
-                    />
-                }
-            />
-        </>
-    )
-}
-
-export function GrimoireDisplay() {
-    const [hideMaxed, setHideMaxed] = useState(true);
-    const [hideLocked, setHideLocked] = useState(false);
-    const [boneTypeFilter, setBoneTypeFilter] = useState<string>('All');
-    const [sortBy, setSortBy] = useState<string>('default');
-    const [showUnlockPath, setShowUnlockPath] = useState(false);
+// Efficiency Section with consolidated component
+function EfficiencySection() {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const grimoire = theData.get("grimoire") as Grimoire;
 
-    // Calculate counts for each bone type
-    const boneTypeCounts = useMemo(() => {
-        if (!grimoire) {
-            return { all: 0, femur: 0, ribcage: 0, cranium: 0, bovinae: 0 };
+    // Early return if no grimoire data or no Death Bringer
+    if (!grimoire || grimoire.currentWraithDamage === 0) {
+        return null; // No Death Bringer or damage calculation failed
+    }
+
+    // Get the next unlock and levels needed
+    const nextUnlock = grimoire?.getNextLockedUpgrade();
+    const levelsNeeded = nextUnlock ? Math.max(0, (nextUnlock.getUnlockRequirement?.() || 0) - (grimoire?.totalGrimoireLevel || 0)) : 0;
+
+    // Define optimization types
+    const optimizationTypes = [
+        {
+            id: 'Wraith Damage',
+            label: 'Wraith Damage',
+            showCountSelector: true,
+            showConsolidation: true
+        },
+        {
+            id: 'Bone Drop Rate',
+            label: 'Bone Drop Rate',
+            showCountSelector: true,
+            showConsolidation: true
+        },
+        {
+            id: 'Cheapest Path',
+            label: 'Unlock Path',
+            showCountSelector: false,
+            showConsolidation: true
         }
+    ];
 
-        const counts = {
-            all: grimoire.upgrades.length,
-            femur: grimoire.upgrades.filter(u => u.data.x1 === 0).length,
-            ribcage: grimoire.upgrades.filter(u => u.data.x1 === 1).length,
-            cranium: grimoire.upgrades.filter(u => u.data.x1 === 2).length,
-            bovinae: grimoire.upgrades.filter(u => u.data.x1 === 3).length
-        };
-
-        return counts;
-    }, [grimoire]);
-
-    const upgradesToShow = useMemo(() => {
-        if (!grimoire) {
-            return [];
+    // Configuration for value display
+    const valueConfigs = {
+        'Wraith Damage': {
+            valueHeader: "Damage +",
+            valueColor: "accent-2",
+            formatValue: (value: number) => `${value.toFixed(2)}`,
+            noResultsText: "No efficient damage upgrades available (insufficient bones, all upgrades maxed, or all locked)"
+        },
+        'Bone Drop Rate': {
+            valueHeader: "Multiplier +",
+            valueColor: "accent-2",
+            formatValue: (value: number) => `${value.toFixed(4)}x`,
+            noResultsText: "No efficient bone drop upgrades available (insufficient bones, all upgrades maxed, or all locked)"
+        },
+        "Cheapest Path": {
+            valueHeader: '',
+            valueColor: 'accent-2',
+            formatValue: (value: number) => ``,
+            noResultsText: 'No efficient upgrades available'
         }
+    };
 
-        let filteredUpgrades = grimoire.upgrades;
+    // Create efficiency results map including unlock path
+    const efficiencyResults = new Map([
+        ['Wraith Damage', grimoire.efficiencyResults.get('Wraith Damage') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
+        ['Bone Drop Rate', grimoire.efficiencyResults.get('Bone Drop Rate') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
+        ['Cheapest Path', grimoire.efficiencyResults.get('Cheapest Path') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
+    ]);
 
-        if (hideMaxed) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.level < upgrade.data.max_level
-            );
-        }
+    return (
+        <EfficiencyAnalysis
+            efficiencyResults={efficiencyResults}
+            optimizationTypes={optimizationTypes}
+            getResourceImageData={(resourceType) => grimoire.getBoneImageData(resourceType as BoneType)}
+            canAffordResource={(resourceType, cost) => grimoire.getResourceCount(resourceType) >= cost}
+            valueConfigs={valueConfigs}
+            currentValues={{
+                wraithDamage: {
+                    label: "Current Wraith Damage",
+                    value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
+                },
+                boneDropRate: {
+                    label: "Current Bone Drop Rate",
+                    value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
+                },
+                ...(nextUnlock && levelsNeeded > 0 ? {
+                    nextUnlock: {
+                        label: "Next Unlock",
+                        value: (
+                            <Box direction="row" gap="small" align="center">
+                                <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                                <Text size="small">{nextUnlock.getName()}</Text>
+                            </Box>
+                        )
+                    },
+                    levelsNeeded: {
+                        label: "Levels Needed",
+                        value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
+                    }
+                } : {})
+            }}
+        />
+    );
+}
 
-        if (hideLocked) {
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.unlocked
-            );
-        }
+export function GrimoireDisplay() {
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
+    ));
 
-        if (boneTypeFilter !== 'All') {
-            const boneTypeIndex = parseInt(boneTypeFilter);
-            filteredUpgrades = filteredUpgrades.filter(upgrade =>
-                upgrade.data.x1 === boneTypeIndex
-            );
-        }
-
-        // Apply sorting
-        if (sortBy === 'cheapest') {
-            // Sort by cost to next level (cheapest first)
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                return a.cost - b.cost;
-            });
-        } else if (sortBy === 'affordable') {
-            // Sort by affordability first, then by cost
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // First sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // If both are locked, maintain original order
-                if (!a.unlocked && !b.unlocked) {
-                    return a.id - b.id;
-                }
-
-                // Handle maxed upgrades (they have cost 0)
-                if (a.level >= a.data.max_level) return 1;
-                if (b.level >= b.data.max_level) return -1;
-
-                const aAffordable = grimoire.canAffordUpgrade(a) ? 1 : 0;
-                const bAffordable = grimoire.canAffordUpgrade(b) ? 1 : 0;
-
-                // First sort by affordability (affordable first)
-                if (aAffordable !== bAffordable) {
-                    return bAffordable - aAffordable;
-                }
-
-                // Then sort by cost (cheapest first)
-                return a.cost - b.cost;
-            });
-        } else {
-            // Default order, but with locked upgrades at the bottom
-            filteredUpgrades = [...filteredUpgrades].sort((a, b) => {
-                // Sort by locked status (unlocked first)
-                if (a.unlocked !== b.unlocked) {
-                    return a.unlocked ? -1 : 1;
-                }
-
-                // Maintain original order within each group
-                return a.id - b.id;
-            });
-        }
-
-        return filteredUpgrades;
-    }, [grimoire, hideMaxed, hideLocked, boneTypeFilter, sortBy, lastUpdated]);
+    const grimoire = theData.get("grimoire") as Grimoire;
+    const [isWeightModalOpen, setIsWeightModalOpen] = useState(false);
 
     // Calculate stats for summary
     const totalUpgrades = grimoire?.upgrades.length || 0;
@@ -253,55 +173,41 @@ export function GrimoireDisplay() {
         </Box>
     );
 
-    // Bone type options for the filter
-    const boneTypeOptions = [
-        { label: `All Bones (${boneTypeCounts.all})`, value: 'All' },
-        { label: `Femur (${boneTypeCounts.femur})`, value: '0' },
-        { label: `Ribcage (${boneTypeCounts.ribcage})`, value: '1' },
-        { label: `Cranium (${boneTypeCounts.cranium})`, value: '2' },
-        { label: `Bovinae (${boneTypeCounts.bovinae})`, value: '3' }
-    ];
+    // Prepare data for filtering
+    const upgradeData = useMemo(() => {
+        if (!grimoire) return [];
 
-    // Custom renderer for bone type options
-    const renderBoneOption = (option: any) => {
-        if (option.value === 'All') {
-            return <Text>{option.label}</Text>;
-        }
+        return grimoire.upgrades.map(upgrade => {
+            // Calculate cost for next 10 levels if max level is very high
+            const costForNext10Levels = upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels([], 10) : 0;
 
-        const boneType = parseInt(option.value);
-        return (
-            <Box direction="row" gap="small" align="center">
-                <IconImage data={grimoire?.getBoneImageData(boneType)} />
-                <Text>{option.label}</Text>
-            </Box>
-        );
-    };
+            // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
+            const goalCost = !upgrade.unlocked
+                ? 0 // Locked upgrades don't have a direct cost, they need level requirements
+                : (upgrade.data.max_level >= 999999 ? costForNext10Levels : upgrade.costToMax);
 
-    // Sorting options
-    const sortOptions = [
-        { label: 'Default Order', value: 'default' },
-        { label: 'Cheapest First', value: 'cheapest' },
-        { label: 'Affordable First', value: 'affordable' }
-    ];
+            return {
+                name: upgrade.getName(),
+                boneType: BoneType[upgrade.data.x1],
+                level: upgrade.getLevel(),
+                maxLevel: upgrade.getMaxLevel(),
+                bonus: upgrade.getDescription(),
+                nextCost: upgrade.getLevel() === upgrade.getMaxLevel() ? Number.MAX_SAFE_INTEGER : upgrade.cost,
+                goalCost: upgrade.getLevel() === upgrade.getMaxLevel() ? Number.MAX_SAFE_INTEGER : goalCost,
+                type: 'Grimoire',
+                maxed: upgrade.getLevel() >= upgrade.getMaxLevel(),
+                locked: !upgrade.isUnlocked(),
+                id: upgrade.getId(),
+                upgrade
+            };
+        });
+    }, [grimoire, lastUpdated]);
 
-    // Custom renderer for sort options
-    const renderSortOption = (option: any) => {
-        return (
-            <Box direction="row" gap="small" align="center">
-                <Text>{option.label}</Text>
-            </Box>
-        );
-    };
-
-    // Use the pre-calculated unlock path info from the domain object
-    const unlockPathInfo = grimoire?.unlockPathInfo || {
-        nextUnlock: null,
-        pathUpgrades: [],
-        levelsNeeded: 0,
-        totalCost: 0,
-        resourceCosts: [0, 0, 0, 0],
-        remainingLevels: 0
-    };
+    // Get unique values for filters
+    const uniqueBoneTypes = useMemo(() => {
+        const resourceTypes = grimoire.getResourceTypes();
+        return Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
+    }, [grimoire]);
 
     return (
         <Box gap="small">
@@ -327,148 +233,60 @@ export function GrimoireDisplay() {
                 </Box>
 
                 {/* Display current bone counts */}
-                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
+                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap align="center">
                     <ComponentAndLabel
                         label={availableBonesLabel}
                         component={
                             <Box direction="row" gap="medium" wrap>
-                                <BoneDisplay cost={grimoire?.femurBones || 0} boneImageData={grimoire.getBoneImageData(0)} />
-                                <BoneDisplay cost={grimoire?.ribcageBones || 0} boneImageData={grimoire.getBoneImageData(1)} />
-                                <BoneDisplay cost={grimoire?.craniumBones || 0} boneImageData={grimoire.getBoneImageData(2)} />
-                                <BoneDisplay cost={grimoire?.bovinaeBones || 0} boneImageData={grimoire.getBoneImageData(3)} />
+                                <ResourceDisplay resourceImageScale={1} showTooltip={true} cost={grimoire?.resources[BoneType.Femur] || 0} resourceImageData={grimoire.getBoneImageData(BoneType.Femur)} tooltipHeading="Exact Bone Count" />
+                                <ResourceDisplay resourceImageScale={1} showTooltip={true} cost={grimoire?.resources[BoneType.Ribcage] || 0} resourceImageData={grimoire.getBoneImageData(BoneType.Ribcage)} tooltipHeading="Exact Bone Count" />
+                                <ResourceDisplay resourceImageScale={1} showTooltip={true} cost={grimoire?.resources[BoneType.Cranium] || 0} resourceImageData={grimoire.getBoneImageData(BoneType.Cranium)} tooltipHeading="Exact Bone Count" />
+                                <ResourceDisplay resourceImageScale={1} showTooltip={true} cost={grimoire?.resources[BoneType.Bovinae] || 0} resourceImageData={grimoire.getBoneImageData(BoneType.Bovinae)} tooltipHeading="Exact Bone Count" />
                             </Box>
                         }
                     />
+                    <Box pad={{ top: 'small' }}>
+                    <SmallButton
+                        icon={<Configure size="small" />}
+                        label="Resource Weights" 
+                        secondary
+                        size="small"
+                        color="accent-3"
+                        onClick={() => setIsWeightModalOpen(true)}
+                    />
+                    </Box>
                 </Box>
 
-                <Box direction="row" gap="medium" margin={{ top: 'medium' }} wrap>
-                    <CheckBox
-                        checked={hideMaxed}
-                        label="Hide maxed upgrades"
-                        onChange={(event) => setHideMaxed(event.target.checked)}
-                    />
-                    <CheckBox
-                        checked={hideLocked}
-                        label="Hide locked upgrades"
-                        onChange={(event) => setHideLocked(event.target.checked)}
-                    />
-                    <CheckBox
-                        checked={showUnlockPath}
-                        label="Show unlock path"
-                        onChange={(event) => setShowUnlockPath(event.target.checked)}
-                    />
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Filter by Bone Type"
-                            value={boneTypeFilter}
-                            options={boneTypeOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setBoneTypeFilter(value)}
-                        >
-                            {renderBoneOption}
-                        </Select>
-                    </Box>
-                    <Box direction="row" align="center" gap="small">
-                        <Select
-                            placeholder="Sort by"
-                            value={sortBy}
-                            options={sortOptions}
-                            labelKey="label"
-                            valueKey={{ key: 'value', reduce: true }}
-                            onChange={({ value }) => setSortBy(value)}
-                        >
-                            {renderSortOption}
-                        </Select>
-                        <TipDisplay
-                            heading="Sorting Options"
-                            body={
-                                <Box>
-                                    <Text size="small">• Default Order: Original game order</Text>
-                                    <Text size="small">• Cheapest First: Sorts by lowest cost to next level</Text>
-                                    <Text size="small">• Affordable First: Shows upgrades you can afford first</Text>
-                                </Box>
-                            }
-                            direction={TipDirection.Down}
-                        >
-                            <CircleInformation size="small" />
-                        </TipDisplay>
-                    </Box>
-                </Box>
-                <Box margin={{ top: 'medium' }}>
+                <Box margin={{ top: 'medium' }} direction="row" justify="between" align="center">
                     <Text size="small">
                         <strong>Note:</strong> Grimoire upgrades are purchased with bones collected while in Wraith Form using the Death Bringer class.
                     </Text>
                 </Box>
             </ShadowBox>
 
-            {/* Display the unlock path if enabled */}
-            <UnlockPathDisplay
-                unlockPathInfo={unlockPathInfo}
-                resourceName="Bones"
-                getResourceImageData={(resourceType) => grimoire.getBoneImageData(resourceType)}
-                showUnlockPath={showUnlockPath}
-                title="Cheapest Path to Next Upgrade"
-                targetLabel="Next Unlock"
+            <EfficiencySection />
+
+            <EfficiencyUpgradeTable
+                upgradeData={upgradeData}
+                resourceFilterLabel={grimoire.getResourceGeneralName()}
+                resourceFilterOptions={uniqueBoneTypes}
+                resourceFilterKey="boneType"
+                getResourceImageData={(upgrade: GrimoireUpgrade) => grimoire.getBoneImageData(upgrade.data.x1)}
+                canAffordUpgrade={(upgrade: GrimoireUpgrade, cost?: number) => grimoire.canAffordUpgrade(upgrade, cost)}
+                getDescription={(upgrade: GrimoireUpgrade) => upgrade.getDescription()}
+                tooltipHeading="Exact Bone Count"
             />
 
-            {upgradesToShow.length === 0 && (
-                <ShadowBox background="dark-1" pad="medium" align="center">
-                    <Text>No upgrades to display with current filters</Text>
-                </ShadowBox>
-            )}
-
-            {upgradesToShow.map((upgrade, index) => {
-                const isLocked = !upgrade.unlocked;
-                return (
-                    <ShadowBox
-                        style={{ opacity: isLocked ? 0.6 : 1 }}
-                        key={index}
-                        background={isLocked ? "dark-3" : "dark-1"}
-                        pad="small"
-                        direction="row"
-                        align="center"
-                        justify="between"
-                        margin={{ bottom: 'xxsmall' }}
-                    >
-                        <Grid columns={["25%", "30%", "10%", "15%", "15%"]} gap="small" align="center" fill>
-                            <ComponentAndLabel
-                                labelSize="xsmall"
-                                label="Name"
-                                component={
-                                    <Box direction="row" gap="small" align="center">
-                                        <IconImage data={upgrade.getImageData()} scale={0.7} />
-                                        <Text size="xsmall">{upgrade.data.name}</Text>
-                                    </Box>
-                                }
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='xsmall'
-                                text={upgrade.getDescription()}
-                                label="Bonus"
-                            />
-                            <TextAndLabel
-                                labelSize="xsmall"
-                                textSize='small'
-                                text={`${upgrade.level} / ${upgrade.data.max_level}`}
-                                label="Level"
-                            />
-                            {upgrade.unlocked && <UpgradeCostColumns upgrade={upgrade} grimoire={grimoire} />}
-                            {!upgrade.unlocked && (
-                                <Box fill>
-                                    <TextAndLabel
-                                        labelSize="xsmall"
-                                        textSize='xsmall'
-                                        text={`Unlock at ${upgrade.data.unlock_req} total level (${upgrade.data.unlock_req - grimoire.totalGrimoireLevel} more)`}
-                                        label="Locked"
-                                    />
-                                </Box>
-                            )}
-                        </Grid>
-                    </ShadowBox>
-                )
-            })}
+            <ResourceWeightModal<Grimoire>
+                isOpen={isWeightModalOpen}
+                onClose={() => setIsWeightModalOpen(false)}
+                onRecalculate={(weights) => {
+                    grimoire.saveResourceWeights(weights);
+                    grimoire.calculateAllEfficiencies();
+                }}
+                currentWeights={grimoire.loadResourceWeights()}
+                domain={grimoire}
+            />
         </Box>
     )
 } 
