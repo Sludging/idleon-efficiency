@@ -335,6 +335,13 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Centurion28", <QuestNameModel>{"name": "Legatus Rank", "difficulty": 7}),
         new QuestNameBase("Centurion31", <QuestNameModel>{"name": "Glorious Gladiator", "difficulty": 9}),
         new QuestNameBase("Masterius2", <QuestNameModel>{"name": "Mastering the Vibe Check", "difficulty": 5}),
-        new QuestNameBase("Masterius4", <QuestNameModel>{"name": "Mastering the Class", "difficulty": 5})    
+        new QuestNameBase("Masterius4", <QuestNameModel>{"name": "Mastering the Class", "difficulty": 5}),
+        new QuestNameBase("Potti3", <QuestNameModel>{"name": "First Showdown...", "difficulty": 5}),
+        new QuestNameBase("Potti6", <QuestNameModel>{"name": "Castle Cleanup", "difficulty": 6}),
+        new QuestNameBase("Potti9", <QuestNameModel>{"name": "Glory to the Crop Depot", "difficulty": 6}),
+        new QuestNameBase("Potti12", <QuestNameModel>{"name": "Star Master", "difficulty": 7}),
+        new QuestNameBase("Potti15", <QuestNameModel>{"name": "15 Time Champion", "difficulty": 8}),
+        new QuestNameBase("Potti18", <QuestNameModel>{"name": "Armor of the Gods", "difficulty": 9}),
+        new QuestNameBase("Potti21", <QuestNameModel>{"name": "Spirit of the Hero", "difficulty": 8})    
 ]
 }

@@ -27,7 +27,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(1, <TerritoryFightModel>{
                 "img": "5bg.png",
                 "trekReq": 20,
-                "fightPower": 5,
+                "fightPower": 0,
                 "enemyAttack": 3,
                 "battleName": "The Carrot Crew",
                 "filler1": "Filler",
@@ -44,7 +44,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(2, <TerritoryFightModel>{
                 "img": "10bg.png",
                 "trekReq": 100,
-                "fightPower": 20,
+                "fightPower": 0,
                 "enemyAttack": 12,
                 "battleName": "Big Boy Plank and the Gs",
                 "filler1": "Filler",
@@ -61,7 +61,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(3, <TerritoryFightModel>{
                 "img": "4bg.png",
                 "trekReq": 250,
-                "fightPower": 50,
+                "fightPower": 0,
                 "enemyAttack": 20,
                 "battleName": "Branchial Heirarchy",
                 "filler1": "Filler",
@@ -78,7 +78,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(4, <TerritoryFightModel>{
                 "img": "1bg.png",
                 "trekReq": 1000,
-                "fightPower": 100,
+                "fightPower": 0,
                 "enemyAttack": 35,
                 "battleName": "Dr. Def, phD MD",
                 "filler1": "Filler",
@@ -95,7 +95,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(5, <TerritoryFightModel>{
                 "img": "9bg.png",
                 "trekReq": 2000,
-                "fightPower": 250,
+                "fightPower": 0,
                 "enemyAttack": 70,
                 "battleName": "Confetti Cake Brigade",
                 "filler1": "Filler",
@@ -112,7 +112,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(6, <TerritoryFightModel>{
                 "img": "PetFightBG4.png",
                 "trekReq": 5000,
-                "fightPower": 600,
+                "fightPower": 0,
                 "enemyAttack": 150,
                 "battleName": "The Giant Grumblo",
                 "filler1": "Filler",
@@ -129,7 +129,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(7, <TerritoryFightModel>{
                 "img": "14bg.png",
                 "trekReq": 10000,
-                "fightPower": 900,
+                "fightPower": 0,
                 "enemyAttack": 300,
                 "battleName": "The Beach Boys",
                 "filler1": "Filler",
@@ -146,7 +146,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(8, <TerritoryFightModel>{
                 "img": "PetFightBG1.png",
                 "trekReq": 20000,
-                "fightPower": 1250,
+                "fightPower": 0,
                 "enemyAttack": 600,
                 "battleName": "The Sands of Time",
                 "filler1": "Filler",
@@ -163,7 +163,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(9, <TerritoryFightModel>{
                 "img": "20bg.png",
                 "trekReq": 30000,
-                "fightPower": 2000,
+                "fightPower": 0,
                 "enemyAttack": 1500,
                 "battleName": "The Dungeoneering Duo",
                 "filler1": "Filler",
@@ -180,7 +180,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(10, <TerritoryFightModel>{
                 "img": "PetFightBG2.png",
                 "trekReq": 50000,
-                "fightPower": 3000,
+                "fightPower": 0,
                 "enemyAttack": 5000,
                 "battleName": "The Stray Flock",
                 "filler1": "Filler",
@@ -197,7 +197,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(11, <TerritoryFightModel>{
                 "img": "PetFightBG3.png",
                 "trekReq": 100000,
-                "fightPower": 4500,
+                "fightPower": 0,
                 "enemyAttack": 15000,
                 "battleName": "The Permafrost Brothers",
                 "filler1": "Filler",
@@ -214,7 +214,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(12, <TerritoryFightModel>{
                 "img": "18bg.png",
                 "trekReq": 250000,
-                "fightPower": 6500,
+                "fightPower": 0,
                 "enemyAttack": 25000,
                 "battleName": "The Coolest Beats",
                 "filler1": "Filler",
@@ -231,7 +231,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(13, <TerritoryFightModel>{
                 "img": "17bg.png",
                 "trekReq": 500000,
-                "fightPower": 9000,
+                "fightPower": 0,
                 "enemyAttack": 40000,
                 "battleName": "The Cursed Shepherd Boy",
                 "filler1": "Filler",
@@ -265,7 +265,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(15, <TerritoryFightModel>{
                 "img": "8bg.png",
                 "trekReq": 1250000,
-                "fightPower": 13250,
+                "fightPower": 0,
                 "enemyAttack": 75000,
                 "battleName": "The Blue Jeans Group",
                 "filler1": "Filler",
@@ -282,7 +282,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(16, <TerritoryFightModel>{
                 "img": "21bg.png",
                 "trekReq": 1500000,
-                "fightPower": 17000,
+                "fightPower": 0,
                 "enemyAttack": 110000,
                 "battleName": "The Big Fissure Wurm",
                 "filler1": "Filler",
@@ -299,7 +299,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(17, <TerritoryFightModel>{
                 "img": "22bg.png",
                 "trekReq": 3000000,
-                "fightPower": 25000,
+                "fightPower": 0,
                 "enemyAttack": 150000,
                 "battleName": "Calamity Clammies",
                 "filler1": "Filler",
@@ -316,7 +316,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(18, <TerritoryFightModel>{
                 "img": "24bg.png",
                 "trekReq": 5000000,
-                "fightPower": 45000,
+                "fightPower": 0,
                 "enemyAttack": 200000,
                 "battleName": "The Suggma Ballers",
                 "filler1": "Filler",
@@ -333,7 +333,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(19, <TerritoryFightModel>{
                 "img": "25bg.png",
                 "trekReq": 10000000,
-                "fightPower": 75000,
+                "fightPower": 0,
                 "enemyAttack": 300000,
                 "battleName": "The Juicer Gang",
                 "filler1": "Filler",
@@ -350,7 +350,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(20, <TerritoryFightModel>{
                 "img": "3bg.png",
                 "trekReq": 15000000,
-                "fightPower": 110000,
+                "fightPower": 0,
                 "enemyAttack": 450000,
                 "battleName": "The Ultrawurm et All",
                 "filler1": "Filler",
@@ -367,7 +367,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(21, <TerritoryFightModel>{
                 "img": "27bg.png",
                 "trekReq": 50000000,
-                "fightPower": 200000,
+                "fightPower": 0,
                 "enemyAttack": 900000,
                 "battleName": "The Dihydrogen Monoxiders",
                 "filler1": "Filler",
@@ -384,7 +384,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(22, <TerritoryFightModel>{
                 "img": "28bg.png",
                 "trekReq": 100000000,
-                "fightPower": 400000,
+                "fightPower": 0,
                 "enemyAttack": 1500000,
                 "battleName": "Mama Mia and the Babbies",
                 "filler1": "Filler",
@@ -401,7 +401,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(23, <TerritoryFightModel>{
                 "img": "29bg.png",
                 "trekReq": 300000000,
-                "fightPower": 850000,
+                "fightPower": 0,
                 "enemyAttack": 4000000,
                 "battleName": "Mr Johnson's Pottery Class",
                 "filler1": "Filler",
@@ -418,7 +418,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(24, <TerritoryFightModel>{
                 "img": "29bg.png",
                 "trekReq": 1000000000,
-                "fightPower": 1500000,
+                "fightPower": 0,
                 "enemyAttack": 10000000,
                 "battleName": "Green Eggs and BLAM",
                 "filler1": "Filler",
@@ -435,7 +435,7 @@ export const initTerritoryFightRepo = () => {
         new TerritoryFightBase(25, <TerritoryFightModel>{
                 "img": "3bg.png",
                 "trekReq": 300000000,
-                "fightPower": 2500000,
+                "fightPower": 0,
                 "enemyAttack": 450000,
                 "battleName": "Filler Filler",
                 "filler1": "Filler",

@@ -774,6 +774,14 @@ export const initTomeRepo = () => {
                 "totalVal": 400,
                 "decimalDisplay": undefined,
                 "desc": "This counts your current Showdown for the Emperor boss in World 6, not the total amount of kills."
+            }),
+        new TomeBase(96, <TomeModel>{
+                "name": "Total Summoning Boss Stone victories 膛",
+                "keyQty": 28,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 300,
+                "decimalDisplay": undefined,
+                "desc": "This is the TOTAL wins you have against all Summoning Bosses combined. These are the bossfights from the stones, like the one next to Tribal Shaman NPC!"
             })    
 ]
 }

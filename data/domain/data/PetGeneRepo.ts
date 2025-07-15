@@ -68,7 +68,7 @@ export const initPetGeneRepo = () => {
                 "lowerLetter": "g",
                 "upperLetter": "G",
                 "description": "Throws 2-3 small daggers which deal 150% Damage",
-                "combatDescription": "When foraging, this pet contributes 2x Fight Power"
+                "combatDescription": "No bonus."
             }),
         new PetGeneBase(7, <PetGeneModel>{
                 "name": "Boomer",
@@ -104,7 +104,7 @@ export const initPetGeneRepo = () => {
                 "lowerLetter": "k",
                 "upperLetter": "K",
                 "description": "Drop da bomba...",
-                "combatDescription": "When foraging, the pets in the territory above and below contribute 1.50x Fight Power"
+                "combatDescription": "No bonus, only boom."
             }),
         new PetGeneBase(11, <PetGeneModel>{
                 "name": "Rattler",

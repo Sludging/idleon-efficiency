@@ -22,7 +22,7 @@ export const initBubbleRepo = () => {
                         "x1": 1,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{ Total STR for all players",
+                        "description": "+{ Total STR for all players, always.",
                         "requirements": [<ComponentModel>{"item": "OakTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalSTR"
                     },
@@ -52,7 +52,7 @@ export const initBubbleRepo = () => {
                         "x1": 23.5,
                         "x2": 1.5,
                         "func": "bigBase",
-                        "description": "Multi-Ore mining chance is increased by +{%, and your max Multi-Ore chance is 300% instead of 100%.",
+                        "description": "+{% chance for Multiple Ores while Mining, and the max is now 300%, not 100%. Big bubbles like this must be equipped to give bonus.",
                         "requirements": [<ComponentModel>{"item": "Bug1", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "MiningACTIVE"
                     },
@@ -332,7 +332,7 @@ export const initBubbleRepo = () => {
                         "x1": 1,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{ Total AGI for all players",
+                        "description": "+{ Total AGI for all players, always.",
                         "requirements": [<ComponentModel>{"item": "Copper", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalAGI"
                     },
@@ -352,7 +352,7 @@ export const initBubbleRepo = () => {
                         "x1": 23,
                         "x2": 2,
                         "func": "bigBase",
-                        "description": "You can now produce +1 more items at once in the anvil, and your production speed is increased by {%.",
+                        "description": "Lets you produce two items at once in the anvil, and gives +{% production speed. Big bubbles like this must be equipped to give bonus.",
                         "requirements": [<ComponentModel>{"item": "Iron", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "AnvilACTIVE"
                     },
@@ -642,7 +642,7 @@ export const initBubbleRepo = () => {
                         "x1": 1,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{ Total WIS for all players",
+                        "description": "+{ Total WIS for all players, always.",
                         "requirements": [<ComponentModel>{"item": "BirchTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalWIS"
                     },
@@ -672,7 +672,7 @@ export const initBubbleRepo = () => {
                         "x1": 23.5,
                         "x2": 1.5,
                         "func": "bigBase",
-                        "description": "Multi-Log chop chance is increased by +{%, and your max Multi-Log chance is now 300% instead of 100%.",
+                        "description": "+{% chance for Multiple Logs while Choppin, and the max is now 300%, not 100%. Big bubbles like this must be equipped to give bonus.",
                         "requirements": [<ComponentModel>{"item": "IronBar", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "MultiLogACTIVE"
                     },
@@ -952,7 +952,7 @@ export const initBubbleRepo = () => {
                         "x1": 1,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{ LUK. Also, this will increase your chances of winning the lottery in REAL LIFE from 0.0% to 0.000%! I'm not even joking!!",
+                        "description": "+{ LUK for all players, always.",
                         "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalLUK"
                     },
@@ -982,7 +982,7 @@ export const initBubbleRepo = () => {
                         "x1": 100,
                         "x2": 30,
                         "func": "decay",
-                        "description": "Whenever you level up anything, {% chance to drop a gift! It could be an EXP balloon, a Gem for the gem shop, or something crazy weird!",
+                        "description": "{% chance for a gift to drop when leveling up, like a gem or an EXP Balloon! Big bubbles like this must be equipped to give bonus.",
                         "requirements": [<ComponentModel>{"item": "DesertA3", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "LevelUpACTIVE"
                     },

@@ -5829,7 +5829,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Overwhelming Energy": <TalentModel>{
                         "name": "Overwhelming Energy",
-                        "description": "During Arcanist Form, defeating arcane mobs perma-buffs EXP, DR, or AFK for the current map up to {x, shown in AFK Info",
+                        "description": "During Arcanist Form, defeating arcane mobs perma-buffs DR, XP, or AFK for the current map up to {x, shown in AFK Info",
                         "x1": 1,
                         "x2": 500,
                         "funcX": "decayMulti",
