@@ -4,7 +4,7 @@ import { nFormatter } from '../../../data/utility';
 import ShadowBox from '../../base/ShadowBox';
 import IconImage from '../../base/IconImage';
 import TipDisplay, { TipDirection } from '../../base/TipDisplay';
-import { EfficiencyPathInfo } from '../../../lib/efficiencyEngine/efficiencyEngine';
+import { EfficiencyPathInfo, EfficiencyUpgrade } from '../../../lib/efficiencyEngine/efficiencyEngine';
 import { ImageData } from '../../../data/domain/imageData';
 
 // Simple resource display component
@@ -49,6 +49,22 @@ interface EfficiencyDisplayProps {
     formatValue: (value: number) => string;
     noResultsText: string;
     consolidateUpgrades?: boolean;
+    sortByResource: boolean;
+}
+
+interface DataTableUpgradeData {
+    upgrade: EfficiencyUpgrade;
+    currentLevel: number;
+    targetLevel: number;
+    totalValueIncrease: number;
+    totalResourceCost: number;
+    individualCosts: {
+        fromLevel: number;
+        toLevel: number;
+        cost: number;
+        valueIncrease: number;
+    }[];
+    efficiency?: number;
 }
 
 export function EfficiencyDisplay({
@@ -59,7 +75,8 @@ export function EfficiencyDisplay({
     valueColor,
     formatValue,
     noResultsText,
-    consolidateUpgrades = true
+    consolidateUpgrades = true,
+    sortByResource = false
 }: EfficiencyDisplayProps) {
     // Process the efficiency data based on consolidation setting
     const processedData = React.useMemo(() => {
@@ -82,13 +99,16 @@ export function EfficiencyDisplay({
         }
 
         // Combine duplicate upgrades into single entries with target levels
-        const combinedUpgrades = new Map();
+        const combinedUpgrades = new Map<number, DataTableUpgradeData>();
 
         efficiencyData.pathUpgrades.forEach(effUpgrade => {
             const upgradeId = effUpgrade.upgrade.getId();
 
             if (combinedUpgrades.has(upgradeId)) {
                 const existing = combinedUpgrades.get(upgradeId);
+                if (!existing) {
+                    return;
+                }
                 existing.targetLevel = effUpgrade.upgrade.getLevel() + 1;
                 existing.totalValueIncrease += effUpgrade.valueIncrease;
                 existing.totalResourceCost += effUpgrade.resourceCost;
@@ -121,8 +141,12 @@ export function EfficiencyDisplay({
             efficiency: combined.totalValueIncrease / combined.totalResourceCost
         }));
 
-        // Sort by efficiency (highest first)
-        consolidatedArray.sort((a, b) => b.efficiency - a.efficiency);
+        // Sort by resource type or efficiency
+        if (sortByResource) {
+            consolidatedArray.sort((a, b) => a.upgrade.getCostType() - b.upgrade.getCostType());
+        } else {
+            consolidatedArray.sort((a, b) => b.efficiency - a.efficiency);
+        }
 
         return consolidatedArray;
     }, [efficiencyData, consolidateUpgrades]);
@@ -169,9 +193,15 @@ export function EfficiencyDisplay({
                         header: consolidateUpgrades ? 'Target Level' : 'Level',
                         render: (data: any) => (
                             <Text size="xsmall">
-                                {consolidateUpgrades 
-                                    ? `${data.currentLevel} → ${data.targetLevel}`
-                                    : `${data.currentLevel} → ${data.targetLevel}`
+                                {
+                                    consolidateUpgrades ? (
+                                        <Box direction="row" gap="xsmall">
+                                            <Text size="xsmall">+{data.targetLevel - data.currentLevel}</Text>
+                                            <Text size="xsmall">({data.currentLevel} → {data.targetLevel})</Text>
+                                        </Box>
+                                    ) : (
+                                        <Text size="xsmall">{data.currentLevel} → {data.targetLevel}</Text>
+                                    )
                                 }
                             </Text>
                         )

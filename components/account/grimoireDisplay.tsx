@@ -49,7 +49,7 @@ function EfficiencySection() {
             showConsolidation: true
         },
         {
-            id: 'Cheapest Path',
+            id: 'Unlock Path',
             label: 'Unlock Path',
             showCountSelector: false,
             showConsolidation: true
@@ -61,7 +61,7 @@ function EfficiencySection() {
         'Wraith Damage': {
             valueHeader: "Damage +",
             valueColor: "accent-2",
-            formatValue: (value: number) => `${value.toFixed(2)}`,
+            formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`,
             noResultsText: "No efficient damage upgrades available (insufficient bones, all upgrades maxed, or all locked)"
         },
         'Bone Drop Rate': {
@@ -70,7 +70,7 @@ function EfficiencySection() {
             formatValue: (value: number) => `${value.toFixed(4)}x`,
             noResultsText: "No efficient bone drop upgrades available (insufficient bones, all upgrades maxed, or all locked)"
         },
-        "Cheapest Path": {
+        "Unlock Path": {
             valueHeader: '',
             valueColor: 'accent-2',
             formatValue: (value: number) => ``,
@@ -82,7 +82,7 @@ function EfficiencySection() {
     const efficiencyResults = new Map([
         ['Wraith Damage', grimoire.efficiencyResults.get('Wraith Damage') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
         ['Bone Drop Rate', grimoire.efficiencyResults.get('Bone Drop Rate') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
-        ['Cheapest Path', grimoire.efficiencyResults.get('Cheapest Path') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
+        ['Unlock Path', grimoire.efficiencyResults.get('Cheapest Path') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
     ]);
 
     return (

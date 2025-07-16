@@ -42,27 +42,27 @@ export function TesseractDisplay() {
 
     // Define optimization types for efficiency analysis
     const optimizationTypes = [
-        { id: 'Cheapest Path', label: 'Cheapest Path', showCountSelector: false, showConsolidation: true },
+        { id: 'Unlock Path', label: 'Unlock Path', showCountSelector: false, showConsolidation: true },
         { id: 'Arcane Damage', label: 'Arcane Damage', showCountSelector: true, showConsolidation: true },
         { id: 'Tachyon Drop Rate', label: 'Tachyon Drop Rate', showCountSelector: true, showConsolidation: true }
     ];
 
     // Configuration for value display
     const valueConfigs = {
-        "Cheapest Path": {
+        "Unlock Path": {
             valueHeader: '',
             valueColor: 'accent-2',
             formatValue: (value: number) => ``,
             noResultsText: 'No efficient upgrades available'
         },
-        'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value)}`, noResultsText: 'No efficient damage upgrades available' },
+        'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient damage upgrades available' },
         'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' }
     };
 
     // Create efficiency results map
     const defaultPathInfo = { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} };
     const efficiencyResults = new Map([
-        ['Cheapest Path', tesseract.efficiencyResults.get('Cheapest Path') || defaultPathInfo],
+        ['Unlock Path', tesseract.efficiencyResults.get('Cheapest Path') || defaultPathInfo],
         ['Arcane Damage', tesseract.efficiencyResults.get('Arcane Damage') || defaultPathInfo],
         ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo]
     ]);

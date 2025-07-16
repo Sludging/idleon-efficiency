@@ -158,7 +158,6 @@ export class EfficiencyEngine<T extends EfficiencyDomain> {
             if (bestUpgrade) {
                 // Create a snapshot of the upgrade state for display (showing the level it will be after purchase)
                 const upgradeSnapshot = bestUpgrade.copyUpgrade();
-                upgradeSnapshot.setLevel(upgradeSnapshot.getLevel() + 1); // Show the level after purchase
 
                 result.pathUpgrades.push({
                     upgrade: upgradeSnapshot,
