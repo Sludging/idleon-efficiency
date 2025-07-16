@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState, ReactNode, useMemo } from 'react';
 import { Box, Text } from 'grommet';
 import { EfficiencyControls, OptimizationType } from './EfficiencyControls';
 import { EfficiencyDisplay } from './EfficiencyDisplay';
@@ -39,6 +39,10 @@ export function EfficiencyAnalysis({
     const currentEfficiencyData = efficiencyResults.get(selectedOptimization);
     const currentValueConfig = valueConfigs[selectedOptimization];
     const currentOptimization = optimizationTypes.find(opt => opt.id === selectedOptimization);
+    
+    const sortByResource = useMemo(() => {
+        return selectedOptimization === "Unlock Path";
+    }, [selectedOptimization]);
 
     // Early return if no efficiency data
     if (!currentEfficiencyData || !currentValueConfig) {
@@ -94,6 +98,7 @@ export function EfficiencyAnalysis({
                     formatValue={currentValueConfig.formatValue}
                     noResultsText={currentValueConfig.noResultsText}
                     consolidateUpgrades={consolidateUpgrades}
+                    sortByResource={sortByResource}
                 />
             </Box>
         </ShadowBox>
