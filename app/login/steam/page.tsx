@@ -32,9 +32,6 @@ function SteamLogin() {
             }
         }
         
-        console.log('OpenID Parameters:', openIdParams)
-        console.log('Steam ID:', steamId)
-        
         setSteamData(openIdParams)
         setLoading(false)
         getFirebaseToken(openIdParams)
@@ -60,7 +57,6 @@ function SteamLogin() {
             }
         };
         
-        console.log("Request payload:", requestData);
 
         try {
             const response = await fetch(target_function, {
@@ -76,7 +72,6 @@ function SteamLogin() {
             }
 
             const data = await response.json();
-            console.log("Response data:", data);
             return data;
         } catch (error) {
             console.error("Error fetching Firebase token:", error);
