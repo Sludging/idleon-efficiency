@@ -212,6 +212,26 @@ function EfficiencySection() {
                 label: "Current Dust Multiplier",
                 value: `${compass.currentDustMultiplier.toFixed(2)}x`
             }]
+        },
+        {
+            id: 'Tempest Accuracy',
+            label: 'Tempest Accuracy',
+            showCountSelector: true,
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Tempest Accuracy",
+                value: `${compass.currentTempestAccuracy.toFixed(2)}`
+            }]
+        },
+        {
+            id: 'Tempest Defense',
+            label: 'Tempest Defense',
+            showCountSelector: true,
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Tempest Defense",
+                value: `${compass.currentTempestDefense.toFixed(2)}`
+            }]
         }
     ];
 
@@ -228,6 +248,18 @@ function EfficiencySection() {
             valueColor: "accent-2",
             formatValue: (value: number) => `+${value.toFixed(4)}x`,
             noResultsText: "No efficient dust upgrades available (insufficient dust, all upgrades maxed, or all locked)"
+        },
+        'Tempest Accuracy': {
+            valueHeader: "Accuracy +",
+            valueColor: "accent-3",
+            formatValue: (value: number) => `+${value.toFixed(2)}`,
+            noResultsText: "No efficient accuracy upgrades available (insufficient dust, all upgrades maxed, or all locked)"
+        },
+        'Tempest Defense': {
+            valueHeader: "Defense +",
+            valueColor: "accent-4",
+            formatValue: (value: number) => `+${value.toFixed(2)}`,
+            noResultsText: "No efficient defense upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         }
     };
 

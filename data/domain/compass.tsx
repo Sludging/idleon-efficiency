@@ -147,6 +147,92 @@ class DustEfficiencyCalculator implements EfficiencyCalculator<Compass> {
     }
 }
 
+// Accuracy efficiency calculator implementation
+class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Compass> {
+    name = "Tempest Accuracy";
+    
+    getRelevantUpgradeIds(domain: Compass): number[] {
+        const baseIds = [
+            // Flat accuracy bonuses
+            17, 19, 25, 61,
+            // Percentage accuracy bonuses
+            120, 124, 125, 128, 131, 133, 134, 136, 147,
+            // Special multiplier bonuses
+            22, // Stardust hoarding
+            6,  // Medallion bonus
+            84, // HP-based bonus
+            79, // HP-based bonus
+            90  // HP-based bonus
+        ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, domain);
+    }
+    
+    calculateCurrentValue(domain: Compass): number {
+        return domain.calculateTempestAccuracy();
+    }
+    
+    calculateValueWithUpgrade(domain: Compass, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as CompassUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+        
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+        
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to DustType format
+        const simulatedAvailableDust = simulatedResources as Record<DustType, number>;
+        
+        // Calculate accuracy with temporary upgrades
+        return domain.calculateAccuracyWithUpgrades(tempUpgrades, simulatedAvailableDust);
+    }
+}
+
+// Defense efficiency calculator implementation
+class DefenseEfficiencyCalculator implements EfficiencyCalculator<Compass> {
+    name = "Tempest Defense";
+    
+    getRelevantUpgradeIds(domain: Compass): number[] {
+        const baseIds = [
+            // Flat defense bonuses
+            29, 63,
+            // Percentage defense bonuses
+            137, 138, 141, 143, 144, 149, 83, 91,
+            // Special multiplier bonuses
+            30, // Moondust hoarding
+            6,  // Medallion bonus (shared with accuracy)
+            // ETC bonus 87 is handled in the calculation method
+        ];
+        
+        // Add meta-upgrades that boost circle-shaped upgrades if any of our base upgrades are circle-shaped
+        return addMetaUpgradesIfRelevant(baseIds, domain);
+    }
+    
+    calculateCurrentValue(domain: Compass): number {
+        return domain.calculateTempestDefense();
+    }
+    
+    calculateValueWithUpgrade(domain: Compass, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as CompassUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+        
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+        
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to DustType format
+        const simulatedAvailableDust = simulatedResources as Record<DustType, number>;
+        
+        // Calculate defense with temporary upgrades
+        return domain.calculateDefenseWithUpgrades(tempUpgrades, simulatedAvailableDust);
+    }
+}
+
 
 
 export class CompassUpgrade implements EfficiencyUpgrade {
@@ -479,6 +565,8 @@ export class Compass extends Domain implements EfficiencyDomain {
     // Efficiency calculation fields
     currentTempestDamage: number = 0;
     currentDustMultiplier: number = 0;
+    currentTempestAccuracy: number = 0;
+    currentTempestDefense: number = 0;
     efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
 
     // Compass raw data for calculations
@@ -855,35 +943,27 @@ export class Compass extends Domain implements EfficiencyDomain {
 
 
     /**
-     * Helper function to calculate damage with a temporary compass state
+     * Create a copy of the compass domain with new upgrades and dust resources
+     * This is used for efficiency calculations with simulated states
      */
-    public calculateDamageWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
+    public copyDomain(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): Compass {
         const tempCompass = new Compass("compass");
+        
+        // Copy upgrades and recalculate
         tempCompass.upgrades = upgrades;
         tempCompass.upgradeMetadata = this.upgradeMetadata;
+        
+        // Copy resources
         tempCompass.availableDust = availableDust;
+        
+        // Copy raw compass data for calculations
         tempCompass.medallionsCollected = this.medallionsCollected;
         tempCompass.titansKilled = this.titansKilled;
         tempCompass.portalsCompleted = this.portalsCompleted;
+        
+        // Copy player and game state
         tempCompass.bestWindWalker = this.bestWindWalker;
-        
-        // Copy game state attributes
         tempCompass.completedMasteries = this.completedMasteries;
-        
-        return tempCompass.calculateTempestDamage();
-    }
-
-    /**
-     * Helper function to calculate dust multiplier with a temporary compass state
-     */
-    public calculateDustWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
-        const tempCompass = new Compass("compass");
-        tempCompass.upgrades = upgrades;
-        tempCompass.upgradeMetadata = this.upgradeMetadata;
-        tempCompass.availableDust = availableDust;
-        tempCompass.medallionsCollected = this.medallionsCollected;
-        tempCompass.titansKilled = this.titansKilled;
-        tempCompass.portalsCompleted = this.portalsCompleted;
         
         // Copy external bonus attributes
         tempCompass.pristineBonus19 = this.pristineBonus19;
@@ -894,7 +974,34 @@ export class Compass extends Domain implements EfficiencyDomain {
         tempCompass.emperorBonus4 = this.emperorBonus4;
         tempCompass.mainframeBonus122 = this.mainframeBonus122;
         
+        // Recalculate upgrades for the temporary compass
+        tempCompass.recalculateUpgrades(upgrades);
+        
+        return tempCompass;
+    }
+
+    /**
+     * Helper function to calculate damage with a temporary compass state
+     */
+    public calculateDamageWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
+        const tempCompass = this.copyDomain(upgrades, availableDust);
+        return tempCompass.calculateTempestDamage();
+    }
+
+    /**
+     * Helper function to calculate dust multiplier with a temporary compass state
+     */
+    public calculateDustWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
+        const tempCompass = this.copyDomain(upgrades, availableDust);
         return tempCompass.calculateDustMultiplier();
+    }
+
+    /**
+     * Helper function to calculate accuracy with a temporary compass state
+     */
+    public calculateAccuracyWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
+        const tempCompass = this.copyDomain(upgrades, availableDust);
+        return tempCompass.calculateTempestAccuracy();
     }
 
     /**
@@ -949,6 +1056,133 @@ export class Compass extends Domain implements EfficiencyDomain {
     }
 
     /**
+     * Calculate current tempest accuracy based on the Compass_ACC formula
+     * @returns Current tempest accuracy
+     */
+    calculateTempestAccuracy(): number {
+        // Find Wind Walker player
+        if (!this.bestWindWalker) {
+            return 0; // No Wind Walker found
+        }
+
+        // Step 1: Base accuracy + flat accuracy bonuses (3 + CompassBonus(17) + CompassBonus(19) + CompassBonus(25) + CompassBonus(61))
+        const flatAccuracyBonus = this.getUpgradeBonus(17) + // Tempest Accuracy
+                                 this.getUpgradeBonus(19) + // Tempest Accuracy II
+                                 this.getUpgradeBonus(25) + // Tempest Accuracy III
+                                 this.getUpgradeBonus(61);  // Abomination Slayer III
+
+        let accuracy = 3 + flatAccuracyBonus;
+
+        // Step 2: Talent 425 bonus with total compass level multiplier (1 + (GetTalentNumber(1, 425) * (CompassUpgTotal / 100)) / 100)
+        const talent425Bonus = this.getTalentBonus(this.bestWindWalker, 425);
+        const totalCompassMultiplier = this.totalCompassLevel / 100;
+        accuracy *= (1 + (talent425Bonus * totalCompassMultiplier) / 100);
+
+        // Step 3: Stardust hoarding multiplier (1 + (CompassBonus(22) * LOG(stardust)) / 100)
+        const stardust = this.availableDust[DustType.Stardust];
+        const stardustHoardingBonus = this.getUpgradeBonus(22);
+        const stardustMultiplier = stardust > 0 ? 
+            1 + (stardustHoardingBonus * this.getLogValue(stardust)) / 100 : 1;
+        accuracy *= stardustMultiplier;
+
+        // Step 4: Medallion multiplier (1 + (CompassBonus(6) * medallionCount) / 100)
+        const medallionBonus = this.getUpgradeBonus(6);
+        const medallionCount = this.getMedallionCount();
+        const medallionMultiplier = 1 + (medallionBonus * medallionCount) / 100;
+        accuracy *= medallionMultiplier;
+
+        // Step 5: All percentage accuracy bonuses (added together, then applied as single multiplier)
+        let percentageBonuses = 0;
+        
+        // Compass upgrade percentage bonuses
+        percentageBonuses += this.getUpgradeBonus(120); // Tempest Accuracy I
+        percentageBonuses += this.getUpgradeBonus(124); // Tempest Accuracy II
+        percentageBonuses += this.getUpgradeBonus(125); // Tempest Accuracy III
+        percentageBonuses += this.getUpgradeBonus(128); // Tempest Accuracy IV
+        percentageBonuses += this.getUpgradeBonus(131); // Tempest Accuracy V
+        percentageBonuses += this.getUpgradeBonus(133); // Tempest Accuracy VI
+        percentageBonuses += this.getUpgradeBonus(134); // Tempest Accuracy VII
+        percentageBonuses += this.getUpgradeBonus(136); // Tempest Accuracy VIII
+        percentageBonuses += this.getUpgradeBonus(147); // Tempest Accuracy IX
+
+        // HP-based bonuses (CompassBonus(84) * LOG(Compass_HP) + CompassBonus(79) + CompassBonus(90))
+        const compassHP = this.calculateCompassHP();
+        const bonus84 = this.getUpgradeBonus(84);
+        const bonus79 = this.getUpgradeBonus(79);
+        const bonus90 = this.getUpgradeBonus(90);
+        const hpBasedBonus = bonus84 * this.getLogValue(compassHP) + bonus79 + bonus90;
+        percentageBonuses += hpBasedBonus;
+
+        // Step 6: Apply all percentage bonuses as single multiplier (1 + percentageBonuses / 100)
+        accuracy *= (1 + percentageBonuses / 100);
+
+        return accuracy;
+    }
+
+    /**
+     * Calculate current tempest defense based on the Compass_DEF formula
+     * @returns Current tempest defense
+     */
+    calculateTempestDefense(): number {
+        // Find Wind Walker player
+        if (!this.bestWindWalker) {
+            return 0; // No Wind Walker found
+        }
+
+        // Step 1: Base defense + flat defense bonuses (1 + CompassBonus(29) + CompassBonus(63))
+        const flatDefenseBonus = this.getUpgradeBonus(29) + // Tempest Defense
+                                this.getUpgradeBonus(63);  // Abomination Slayer IV
+
+        let defense = 1 + flatDefenseBonus;
+
+        // Step 2: Talent 425 bonus with total compass level multiplier (1 + (GetTalentNumber(1, 425) * (CompassUpgTotal / 100)) / 100)
+        const talent425Bonus = this.getTalentBonus(this.bestWindWalker, 425);
+        const totalCompassMultiplier = this.totalCompassLevel / 100;
+        defense *= (1 + (talent425Bonus * totalCompassMultiplier) / 100);
+
+        // Step 3: Moondust hoarding multiplier (1 + (CompassBonus(30) * LOG(moondust)) / 100)
+        const moondust = this.availableDust[DustType.Moondust];
+        const moondustHoardingBonus = this.getUpgradeBonus(30);
+        const moondustMultiplier = moondust > 0 ? 
+            1 + (moondustHoardingBonus * this.getLogValue(moondust)) / 100 : 1;
+        defense *= moondustMultiplier;
+
+        // Step 4: ETC bonus 87 multiplier (1 + EtcBonuses(87) / 100)
+        let etcBonus87 = 0;
+        if (this.bestWindWalker.gear?.equipment) {
+            const equipment = this.bestWindWalker.gear.equipment;
+            etcBonus87 = equipment.reduce((sum, item) => sum += item?.getMiscBonus("Tempest Defence") ?? 0, 0);
+        }
+        defense *= (1 + etcBonus87 / 100);
+
+        // Step 5: All percentage defense bonuses (added together, then applied as single multiplier)
+        let percentageBonuses = 0;
+        
+        // Compass upgrade percentage bonuses
+        percentageBonuses += this.getUpgradeBonus(137); // Tempest Defense I
+        percentageBonuses += this.getUpgradeBonus(138); // Tempest Defense II
+        percentageBonuses += this.getUpgradeBonus(141); // Tempest Defense III
+        percentageBonuses += this.getUpgradeBonus(143); // Tempest Defense IV
+        percentageBonuses += this.getUpgradeBonus(144); // Tempest Defense V
+        percentageBonuses += this.getUpgradeBonus(149); // Tempest Defense VI
+        percentageBonuses += this.getUpgradeBonus(83);  // Abomination Slayer XXV
+        percentageBonuses += this.getUpgradeBonus(91);  // Abomination Slayer XXXII
+
+        // Step 6: Apply all percentage bonuses as single multiplier (1 + percentageBonuses / 100)
+        defense *= (1 + percentageBonuses / 100);
+
+        return defense;
+    }
+
+    /**
+     * Helper function to calculate defense with a temporary compass state
+     */
+    public calculateDefenseWithUpgrades(upgrades: CompassUpgrade[], availableDust: Record<DustType, number>): number {
+        const tempCompass = this.copyDomain(upgrades, availableDust);
+        return tempCompass.calculateTempestDefense();
+    }
+
+    /**
      * Calculate efficiency for all supported attributes using the efficiency system
      */
     calculateAllEfficiencies(): void {
@@ -958,10 +1192,18 @@ export class Compass extends Domain implements EfficiencyDomain {
         const currentDustMultiplier = this.calculateDustMultiplier();
         this.currentDustMultiplier = currentDustMultiplier;
         
+        const currentAccuracy = this.calculateTempestAccuracy();
+        this.currentTempestAccuracy = currentAccuracy;
+        
+        const currentDefense = this.calculateTempestDefense();
+        this.currentTempestDefense = currentDefense;
+        
         const engine = new EfficiencyEngine<Compass>();
         const calculators = [
             new DamageEfficiencyCalculator(),
             new DustEfficiencyCalculator(),
+            new AccuracyEfficiencyCalculator(),
+            new DefenseEfficiencyCalculator(),
             // Easy to add more calculators here in the future
         ];
         
