@@ -49,6 +49,12 @@ function EfficiencySection() {
             showConsolidation: true
         },
         {
+            id: 'Wraith Accuracy',
+            label: 'Wraith Accuracy',
+            showCountSelector: true,
+            showConsolidation: true
+        },
+        {
             id: 'Unlock Path',
             label: 'Unlock Path',
             showCountSelector: false,
@@ -70,6 +76,12 @@ function EfficiencySection() {
             formatValue: (value: number) => `${value.toFixed(4)}x`,
             noResultsText: "No efficient bone drop upgrades available (insufficient bones, all upgrades maxed, or all locked)"
         },
+        'Wraith Accuracy': {
+            valueHeader: "Accuracy +",
+            valueColor: "accent-2",
+            formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`,
+            noResultsText: "No efficient accuracy upgrades available (insufficient bones, all upgrades maxed, or all locked)"
+        },
         "Unlock Path": {
             valueHeader: '',
             valueColor: 'accent-2',
@@ -82,6 +94,7 @@ function EfficiencySection() {
     const efficiencyResults = new Map([
         ['Wraith Damage', grimoire.efficiencyResults.get('Wraith Damage') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
         ['Bone Drop Rate', grimoire.efficiencyResults.get('Bone Drop Rate') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
+        ['Wraith Accuracy', grimoire.efficiencyResults.get('Wraith Accuracy') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
         ['Unlock Path', grimoire.efficiencyResults.get('Cheapest Path') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
     ]);
 
@@ -100,6 +113,10 @@ function EfficiencySection() {
                 boneDropRate: {
                     label: "Current Bone Drop Rate",
                     value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
+                },
+                wraithAccuracy: {
+                    label: "Current Wraith Accuracy",
+                    value: nFormatter(grimoire.currentWraithAccuracy, "CommaNotation")
                 },
                 ...(nextUnlock && levelsNeeded > 0 ? {
                     nextUnlock: {

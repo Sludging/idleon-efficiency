@@ -92,6 +92,45 @@ class BoneGainEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
     }
 }
 
+// Accuracy efficiency calculator implementation
+class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
+    name = "Wraith Accuracy";
+    
+    getRelevantUpgradeIds(domain: Grimoire): number[] {
+        return [
+            // Flat accuracy bonuses
+            1, 12, 25, 37, 47,
+            // Percentage accuracy bonuses
+            7, 38,
+            // Cranium-based bonus
+            41,
+            // Writhing Grimoire affects other upgrades
+            36
+        ];
+    }
+    
+    calculateCurrentValue(domain: Grimoire): number {
+        return domain.calculateWraithAccuracy();
+    }
+    
+    calculateValueWithUpgrade(domain: Grimoire, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as GrimoireUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+        
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+        
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+        
+        // Convert simulatedResources to BoneType format
+        const simulatedAvailableBones = simulatedResources as Record<BoneType, number>;
+        
+        // Calculate accuracy with temporary upgrades
+        return domain.calculateAccuracyWithUpgrades(tempUpgrades, simulatedAvailableBones);
+    }
+}
+
 export class GrimoireUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
     public unlocked: boolean = false;
@@ -291,6 +330,7 @@ export class Grimoire extends Domain implements EfficiencyDomain {
     // Efficiency calculation fields
     currentWraithDamage: number = 0;
     currentBoneDropRate: number = 0;
+    currentWraithAccuracy: number = 0;
     efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
 
     // External bonuses for calculations
@@ -568,6 +608,50 @@ export class Grimoire extends Domain implements EfficiencyDomain {
     }
 
     /**
+     * Calculate current wraith accuracy based on the Grimoire_ACC formula
+     * @returns Current wraith accuracy
+     */
+    calculateWraithAccuracy(): number {
+        // Base accuracy: 2 + flat bonuses from upgrades 1, 12, 25, 37, 47
+        const flatAccuracyBonus = this.getUpgradeBonus(1) + // Wraith Accuracy
+                                 this.getUpgradeBonus(12) + // Wraith Accuracy II
+                                 this.getUpgradeBonus(25) + // Wraith Accuracy III
+                                 this.getUpgradeBonus(37) + // Wraith Accuracy IV
+                                 this.getUpgradeBonus(47);  // Wraith Accuracy V
+
+        let accuracy = 2 + flatAccuracyBonus;
+
+        // Percentage accuracy bonuses from upgrades 7, 38
+        let percentageBonuses = 0;
+        percentageBonuses += this.getUpgradeBonus(7);  // Wraith Precision
+        percentageBonuses += this.getUpgradeBonus(38); // Wraith Precision II
+        accuracy *= (1 + percentageBonuses / 100);
+
+        // Cranium hoarding bonus (upgrade 41 * log(cranium count))
+        const craniumHoardingBonus = this.getUpgradeBonus(41);
+        const craniumLogBonus = this.resources[BoneType.Cranium] > 0 ? 
+            craniumHoardingBonus * this.getLogValue(this.resources[BoneType.Cranium]) : 0;
+        accuracy *= (1 + craniumLogBonus / 100);
+
+        // Talent 200 bonus with total grimoire level multiplier
+        const talent200Bonus = this.getTalentBonus(this.bestDeathBringer, 200);
+        const totalGrimoireMultiplier = this.totalGrimoireLevel / 100;
+        accuracy *= (1 + (talent200Bonus * totalGrimoireMultiplier) / 100);
+
+        return accuracy;
+    }
+
+    /**
+     * Helper function to calculate accuracy with a temporary grimoire state
+     */
+    public calculateAccuracyWithUpgrades(upgrades: GrimoireUpgrade[], availableBones: Record<BoneType, number>): number {
+        const tempGrimoire = this.copyDomain(upgrades, availableBones);
+        const accuracy = tempGrimoire.calculateWraithAccuracy();
+        
+        return accuracy;
+    }
+
+    /**
      * Calculate efficiency for all supported attributes using the efficiency system
      */
     calculateAllEfficiencies(): void {
@@ -577,10 +661,14 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         const currentBoneDropRate = this.calculateBoneDropRate();
         this.currentBoneDropRate = currentBoneDropRate;
         
+        const currentAccuracy = this.calculateWraithAccuracy();
+        this.currentWraithAccuracy = currentAccuracy;
+        
         const engine = new EfficiencyEngine<Grimoire>();
         const calculators = [
             new DamageEfficiencyCalculator(),
             new BoneGainEfficiencyCalculator(),
+            new AccuracyEfficiencyCalculator(),
             new CheapestPathCalculator<Grimoire>(),
         ];
         
