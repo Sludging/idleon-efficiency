@@ -40,31 +40,62 @@ function EfficiencySection() {
             id: 'Wraith Damage',
             label: 'Wraith Damage',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Damage",
+                value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
+            }]
         },
         {
             id: 'Bone Drop Rate',
             label: 'Bone Drop Rate',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Bone Drop Rate",
+                value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
+            }]
         },
         {
             id: 'Wraith Accuracy',
             label: 'Wraith Accuracy',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Accuracy",
+                value: nFormatter(grimoire.currentWraithAccuracy, "CommaNotation")
+            }]
         },
         {
             id: 'Wraith Defense',
             label: 'Wraith Defense',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Defense",
+                value: nFormatter(grimoire.currentWraithDefense, "CommaNotation")
+            }]
         },
         {
             id: 'Unlock Path',
             label: 'Unlock Path',
             showCountSelector: false,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: nextUnlock && levelsNeeded > 0 ? [
+                {
+                    label: "Next Unlock",
+                    value: (
+                        <Box direction="row" gap="small" align="center">
+                            <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                            <Text size="small">{nextUnlock.getName()}</Text>
+                        </Box>
+                    )
+                },
+                {
+                    label: "Levels Needed",
+                    value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
+                }
+            ] : undefined
         }
     ];
 
@@ -118,39 +149,6 @@ function EfficiencySection() {
             getResourceImageData={(resourceType) => grimoire.getBoneImageData(resourceType as BoneType)}
             canAffordResource={(resourceType, cost) => grimoire.getResourceCount(resourceType) >= cost}
             valueConfigs={valueConfigs}
-            currentValues={{
-                wraithDamage: {
-                    label: "Current Wraith Damage",
-                    value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
-                },
-                boneDropRate: {
-                    label: "Current Bone Drop Rate",
-                    value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
-                },
-                wraithAccuracy: {
-                    label: "Current Wraith Accuracy",
-                    value: nFormatter(grimoire.currentWraithAccuracy, "CommaNotation")
-                },
-                wraithDefense: {
-                    label: "Current Wraith Defense",
-                    value: nFormatter(grimoire.currentWraithDefense, "CommaNotation")
-                },
-                ...(nextUnlock && levelsNeeded > 0 ? {
-                    nextUnlock: {
-                        label: "Next Unlock",
-                        value: (
-                            <Box direction="row" gap="small" align="center">
-                                <IconImage data={nextUnlock.getImageData()} scale={0.4} />
-                                <Text size="small">{nextUnlock.getName()}</Text>
-                            </Box>
-                        )
-                    },
-                    levelsNeeded: {
-                        label: "Levels Needed",
-                        value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
-                    }
-                } : {})
-            }}
         />
     );
 }

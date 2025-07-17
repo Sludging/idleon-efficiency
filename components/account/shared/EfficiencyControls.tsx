@@ -8,6 +8,10 @@ export interface OptimizationType {
     label: string;
     showCountSelector: boolean;
     showConsolidation: boolean;
+    currentValues?: {
+        label: string;
+        value: React.ReactNode;
+    }[];
 }
 
 interface EfficiencyControlsProps {

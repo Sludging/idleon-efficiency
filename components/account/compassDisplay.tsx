@@ -197,13 +197,21 @@ function EfficiencySection() {
             id: 'Tempest Damage',
             label: 'Tempest Damage',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Tempest Damage",
+                value: nFormatter(compass.currentTempestDamage, "CommaNotation")
+            }]
         },
         {
             id: 'Dust Multiplier',
             label: 'Dust Multiplier',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Dust Multiplier",
+                value: `${compass.currentDustMultiplier.toFixed(2)}x`
+            }]
         }
     ];
 
@@ -230,16 +238,6 @@ function EfficiencySection() {
             getResourceImageData={(resourceType) => compass.getDustImageData(resourceType as DustType)}
             canAffordResource={(resourceType, cost) => compass.availableDust[resourceType as DustType] >= cost}
             valueConfigs={valueConfigs}
-            currentValues={{
-                tempestDamage: {
-                    label: "Current Tempest Damage",
-                    value: nFormatter(compass.currentTempestDamage, "CommaNotation")
-                },
-                dustMultiplier: {
-                    label: "Current Dust Multiplier", 
-                    value: `${compass.currentDustMultiplier.toFixed(2)}x`
-                }
-            }}
         />
     );
 }
