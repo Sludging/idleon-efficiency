@@ -213,7 +213,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         5000: "MaxCapBagMi7",
         10000: "MaxCapBagMi8",
         20000: "MaxCapBagMi9",
-        25000: "MaxCapBagMi110",
+        25000: "MaxCapBagMi10",
         30000: "MaxCapBagMi11",
         250000: "MaxCapBag",
         500000: "MaxCapBag",

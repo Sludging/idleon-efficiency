@@ -743,7 +743,7 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
     if (tesseract && players) {
         try {
             // Find best Arcane Cultist
-            const arcaneCultist = players.sort((a, b) => b.level - a.level).find(p => p.classId === 40);
+            const arcaneCultist = players.slice().sort((a, b) => b.level - a.level).find(p => p.classId === 40);
             if (arcaneCultist) {
                 tesseract.bestArcaneCultist = arcaneCultist;
                 
