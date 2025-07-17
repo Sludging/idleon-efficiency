@@ -321,6 +321,84 @@ class TachyonGainEfficiencyCalculator implements EfficiencyCalculator<Tesseract>
     }
 }
 
+// Accuracy efficiency calculator implementation
+class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
+    name = "Arcane Accuracy";
+
+    getRelevantUpgradeIds(domain: Tesseract): number[] {
+        return [
+            // Flat accuracy bonuses
+            1, 9, 19, 38, 52,
+            // Percentage accuracy bonuses
+            22, 44, 55,
+            // Brown-based bonus
+            27,
+            // Upgrade 39 affects other upgrades
+            39
+        ];
+    }
+
+    calculateCurrentValue(domain: Tesseract): number {
+        return domain.calculateArcaneAccuracy();
+    }
+
+    calculateValueWithUpgrade(domain: Tesseract, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as TesseractUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+
+        // Convert simulatedResources to TesseractType format
+        const simulatedTachyons = simulatedResources as Record<TesseractType, number>;
+
+        // Calculate accuracy with temporary upgrades
+        return domain.calculateAccuracyWithUpgrades(tempUpgrades, simulatedTachyons);
+    }
+}
+
+// Defense efficiency calculator implementation
+class DefenseEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
+    name = "Arcane Defense";
+
+    getRelevantUpgradeIds(domain: Tesseract): number[] {
+        return [
+            // Flat defense bonuses
+            2, 11, 29, 46,
+            // Percentage defense bonuses (shared with accuracy)
+            22, 44, 55,
+            // Red-based bonus
+            41,
+            // Upgrade 39 affects other upgrades
+            39
+        ];
+    }
+
+    calculateCurrentValue(domain: Tesseract): number {
+        return domain.calculateArcaneDefense();
+    }
+
+    calculateValueWithUpgrade(domain: Tesseract, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+        // Create a working copy of the simulated upgrades with the specified upgrade at +1 level
+        const tempUpgrades = simulatedUpgrades.map(u => domain.copyUpgrade(u)) as TesseractUpgrade[];
+        const targetUpgrade = tempUpgrades.find(u => u.id === upgradeId);
+
+        if (!targetUpgrade) return this.calculateCurrentValue(domain);
+
+        targetUpgrade.level += 1;
+        domain.recalculateUpgrades(tempUpgrades);
+
+        // Convert simulatedResources to TesseractType format
+        const simulatedTachyons = simulatedResources as Record<TesseractType, number>;
+
+        // Calculate defense with temporary upgrades
+        return domain.calculateDefenseWithUpgrades(tempUpgrades, simulatedTachyons);
+    }
+}
+
 export class Tesseract extends Domain implements EfficiencyDomain {
     upgrades: TesseractUpgrade[] = [];
     totalTesseractLevel: number = 0;
@@ -354,6 +432,8 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     /** Current arcane damage value */
     currentArcaneDamage: number = 0;
     currentTachyonDropRate: number = 1;
+    currentArcaneAccuracy: number = 0;
+    currentArcaneDefense: number = 0;
     efficiencyResults: Map<string, EfficiencyPathInfo> = new Map();
     bestArcaneCultist: Player | null = null;
     pristineBonus22: number = 0;
@@ -362,6 +442,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     hasTachyonBundle: boolean = false;
     // Add missing bonuses
     etcBonus93: number = 0; // Total Damage equipment bonus
+    etcBonus94: number = 0; // Accuracy equipment bonus
     etcBonus95: number = 0; // Drop Chance equipment bonus
     emperorBonus6: number = 0; // Arcane Cultist Extra Tachyons
 
@@ -376,6 +457,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         temp.labBonus123 = this.labBonus123;
         temp.hasTachyonBundle = this.hasTachyonBundle;
         temp.etcBonus93 = this.etcBonus93;
+        temp.etcBonus94 = this.etcBonus94;
         temp.etcBonus95 = this.etcBonus95;
         temp.emperorBonus6 = this.emperorBonus6;
         
@@ -671,14 +753,114 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         return temp.calculateTachyonDropRate();
     }
 
+    /**
+     * Calculate current arcane accuracy based on the Arcane_ACC formula
+     * @returns Current arcane accuracy
+     */
+    calculateArcaneAccuracy(): number {
+        if (!this.bestArcaneCultist) return 0;
+
+        // Base accuracy: 2 + flat bonuses from upgrades 1, 9, 19, 38, 52
+        const flatAccuracyBonus = this.getUpgradeBonus(1) + // Arcanist Accuracy
+                                 this.getUpgradeBonus(9) + // Arcanist Accuracy II
+                                 this.getUpgradeBonus(19) + // Arcanist Accuracy III
+                                 this.getUpgradeBonus(38) + // Arcanist Accuracy IV
+                                 this.getUpgradeBonus(52);  // Arcanist Accuracy V
+
+        let accuracy = 2 + flatAccuracyBonus;
+
+        // Talent 591 bonus with total tesseract level multiplier
+        const talent591Bonus = this.getTalentBonus(this.bestArcaneCultist, 591);
+        const totalTesseractMultiplier = this.totalTesseractLevel / 100;
+        accuracy *= (1 + (talent591Bonus * totalTesseractMultiplier) / 100);
+
+        // Percentage accuracy bonuses from upgrades 22, 44, 55
+        let percentageBonuses = 0;
+        percentageBonuses += this.getUpgradeBonus(22); // Arcanist Precision
+        percentageBonuses += this.getUpgradeBonus(44); // Arcanist Precision II
+        percentageBonuses += this.getUpgradeBonus(55); // Arcanist Precision III
+        accuracy *= (1 + percentageBonuses / 100);
+
+        // Brown hoarding bonus (upgrade 27 * log(brown count))
+        const brownHoardingBonus = this.getUpgradeBonus(27);
+        const brownLogBonus = this.resources[TesseractType.Brown] > 0 ? 
+            brownHoardingBonus * Math.log10(this.resources[TesseractType.Brown]) : 0;
+        accuracy *= (1 + brownLogBonus / 100);
+
+        // ETC bonus 94 (Accuracy equipment bonus)
+        accuracy *= (1 + this.etcBonus94 / 100);
+
+        return accuracy;
+    }
+
+    /**
+     * Helper function to calculate accuracy with a temporary tesseract state
+     */
+    calculateAccuracyWithUpgrades(upgrades: TesseractUpgrade[], simulatedResources: Record<TesseractType, number>): number {
+        const temp = this.copyDomain(upgrades, simulatedResources);
+        const accuracy = temp.calculateArcaneAccuracy();
+        
+        return accuracy;
+    }
+
+    /**
+     * Calculate current arcane defense based on the Arcane_DEF formula
+     * @returns Current arcane defense
+     */
+    calculateArcaneDefense(): number {
+        if (!this.bestArcaneCultist) return 0;
+
+        // Base defense: flat bonuses from upgrades 2, 11, 29, 46
+        const flatDefenseBonus = this.getUpgradeBonus(2) + // Arcanist Defense
+                                this.getUpgradeBonus(11) + // Arcanist Defense II
+                                this.getUpgradeBonus(29) + // Arcanist Defense III
+                                this.getUpgradeBonus(46);  // Arcanist Defense IV
+
+        let defense = flatDefenseBonus;
+
+        // Talent 591 bonus with total tesseract level multiplier (shared with accuracy)
+        const talent591Bonus = this.getTalentBonus(this.bestArcaneCultist, 591);
+        const totalTesseractMultiplier = this.totalTesseractLevel / 100;
+        defense *= (1 + (talent591Bonus * totalTesseractMultiplier) / 100);
+
+        // Percentage defense bonuses from upgrades 22, 44, 55 (shared with accuracy)
+        let percentageBonuses = 0;
+        percentageBonuses += this.getUpgradeBonus(22); // Arcanist Precision (shared with accuracy)
+        percentageBonuses += this.getUpgradeBonus(44); // Arcanist Precision II (shared with accuracy)
+        percentageBonuses += this.getUpgradeBonus(55); // Arcanist Precision III (shared with accuracy)
+        defense *= (1 + percentageBonuses / 100);
+
+        // Red hoarding bonus (upgrade 41 * log(red count))
+        const redHoardingBonus = this.getUpgradeBonus(41);
+        const redLogBonus = this.resources[TesseractType.Red] > 0 ? 
+            redHoardingBonus * Math.log10(this.resources[TesseractType.Red]) : 0;
+        defense *= (1 + redLogBonus / 100);
+
+        return defense;
+    }
+
+    /**
+     * Helper function to calculate defense with a temporary tesseract state
+     */
+    calculateDefenseWithUpgrades(upgrades: TesseractUpgrade[], simulatedResources: Record<TesseractType, number>): number {
+        const temp = this.copyDomain(upgrades, simulatedResources);
+        const defense = temp.calculateArcaneDefense();
+        
+        return defense;
+    }
+
     calculateAllEfficiencies(): void {
         this.currentArcaneDamage = this.calculateArcaneDamage();
         this.currentTachyonDropRate = this.calculateTachyonDropRate();
+        this.currentArcaneAccuracy = this.calculateArcaneAccuracy();
+        this.currentArcaneDefense = this.calculateArcaneDefense();
 
         const engine = new EfficiencyEngine<Tesseract>();
         const calculators = [
             new DamageEfficiencyCalculator(),
             new TachyonGainEfficiencyCalculator(),
+            new AccuracyEfficiencyCalculator(),
+            new DefenseEfficiencyCalculator(),
             new CheapestPathCalculator<Tesseract>(),
         ];
         
@@ -749,6 +931,7 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
                 
                 // Set ETC bonuses from Arcane Cultist equipment
                 tesseract.etcBonus93 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Arcanist Dmg") ?? 0), 0);
+                tesseract.etcBonus94 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Arcanist Acc") ?? 0), 0);
                 tesseract.etcBonus95 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Extra Tachyons") ?? 0), 0);
             }
 

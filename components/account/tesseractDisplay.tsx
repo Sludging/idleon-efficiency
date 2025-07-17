@@ -82,6 +82,26 @@ export function TesseractDisplay() {
                 label: "Current Tachyon Drop Rate",
                 value: `${tesseract.currentTachyonDropRate.toFixed(2)}x`
             }]
+        },
+        { 
+            id: 'Arcane Accuracy', 
+            label: 'Arcane Accuracy', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Arcane Accuracy",
+                value: nFormatter(tesseract.currentArcaneAccuracy, "CommaNotation")
+            }]
+        },
+        { 
+            id: 'Arcane Defense', 
+            label: 'Arcane Defense', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Arcane Defense",
+                value: nFormatter(tesseract.currentArcaneDefense, "CommaNotation")
+            }]
         }
     ];
 
@@ -94,7 +114,9 @@ export function TesseractDisplay() {
             noResultsText: 'No efficient upgrades available'
         },
         'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient damage upgrades available' },
-        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' }
+        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' },
+        'Arcane Accuracy': { valueHeader: 'Accuracy +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient accuracy upgrades available' },
+        'Arcane Defense': { valueHeader: 'Defense +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient defense upgrades available' }
     };
 
     // Create efficiency results map
@@ -102,7 +124,9 @@ export function TesseractDisplay() {
     const efficiencyResults = new Map([
         ['Unlock Path', tesseract.efficiencyResults.get('Cheapest Path') || defaultPathInfo],
         ['Arcane Damage', tesseract.efficiencyResults.get('Arcane Damage') || defaultPathInfo],
-        ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo]
+        ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo],
+        ['Arcane Accuracy', tesseract.efficiencyResults.get('Arcane Accuracy') || defaultPathInfo],
+        ['Arcane Defense', tesseract.efficiencyResults.get('Arcane Defense') || defaultPathInfo]
     ]);
 
     // Prepare data for filtering
