@@ -42,9 +42,67 @@ export function TesseractDisplay() {
 
     // Define optimization types for efficiency analysis
     const optimizationTypes = [
-        { id: 'Unlock Path', label: 'Unlock Path', showCountSelector: false, showConsolidation: true },
-        { id: 'Arcane Damage', label: 'Arcane Damage', showCountSelector: true, showConsolidation: true },
-        { id: 'Tachyon Drop Rate', label: 'Tachyon Drop Rate', showCountSelector: true, showConsolidation: true }
+        { 
+            id: 'Unlock Path', 
+            label: 'Unlock Path', 
+            showCountSelector: false, 
+            showConsolidation: true,
+            currentValues: nextUnlock && levelsNeeded > 0 ? [
+                {
+                    label: "Next Unlock",
+                    value: (
+                        <Box direction="row" gap="small" align="center">
+                            <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                            <Text size="small">{nextUnlock.getName()}</Text>
+                        </Box>
+                    )
+                },
+                {
+                    label: "Levels Needed",
+                    value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
+                }
+            ] : undefined
+        },
+        { 
+            id: 'Arcane Damage', 
+            label: 'Arcane Damage', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Arcane Damage",
+                value: nFormatter(tesseract.currentArcaneDamage, "CommaNotation")
+            }]
+        },
+        { 
+            id: 'Tachyon Drop Rate', 
+            label: 'Tachyon Drop Rate', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Tachyon Drop Rate",
+                value: `${tesseract.currentTachyonDropRate.toFixed(2)}x`
+            }]
+        },
+        { 
+            id: 'Arcane Accuracy', 
+            label: 'Arcane Accuracy', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Arcane Accuracy",
+                value: nFormatter(tesseract.currentArcaneAccuracy, "CommaNotation")
+            }]
+        },
+        { 
+            id: 'Arcane Defense', 
+            label: 'Arcane Defense', 
+            showCountSelector: true, 
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Arcane Defense",
+                value: nFormatter(tesseract.currentArcaneDefense, "CommaNotation")
+            }]
+        }
     ];
 
     // Configuration for value display
@@ -56,7 +114,9 @@ export function TesseractDisplay() {
             noResultsText: 'No efficient upgrades available'
         },
         'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient damage upgrades available' },
-        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' }
+        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' },
+        'Arcane Accuracy': { valueHeader: 'Accuracy +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient accuracy upgrades available' },
+        'Arcane Defense': { valueHeader: 'Defense +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient defense upgrades available' }
     };
 
     // Create efficiency results map
@@ -64,7 +124,9 @@ export function TesseractDisplay() {
     const efficiencyResults = new Map([
         ['Unlock Path', tesseract.efficiencyResults.get('Cheapest Path') || defaultPathInfo],
         ['Arcane Damage', tesseract.efficiencyResults.get('Arcane Damage') || defaultPathInfo],
-        ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo]
+        ['Tachyon Drop Rate', tesseract.efficiencyResults.get('Tachyon Drop Rate') || defaultPathInfo],
+        ['Arcane Accuracy', tesseract.efficiencyResults.get('Arcane Accuracy') || defaultPathInfo],
+        ['Arcane Defense', tesseract.efficiencyResults.get('Arcane Defense') || defaultPathInfo]
     ]);
 
     // Prepare data for filtering
@@ -186,31 +248,6 @@ export function TesseractDisplay() {
                 canAffordResource={(resourceType: number, cost: number) => tesseract.getResourceCount(resourceType) >= cost}
                 valueConfigs={valueConfigs}
                 title="Tesseract Efficiency Analysis"
-                currentValues={{
-                    arcaneDamage: {
-                        label: "Current Arcane Damage",
-                        value: nFormatter(tesseract.currentArcaneDamage, "CommaNotation")
-                    },
-                    tachyonDropRate: {
-                        label: "Current Tachyon Drop Rate",
-                        value: `${tesseract.currentTachyonDropRate.toFixed(2)}x`
-                    },
-                    ...(nextUnlock && levelsNeeded > 0 ? {
-                        nextUnlock: {
-                            label: "Next Unlock",
-                            value: (
-                                <Box direction="row" gap="small" align="center">
-                                    <IconImage data={nextUnlock.getImageData()} scale={0.4} />
-                                    <Text size="small">{nextUnlock.getName()}</Text>
-                                </Box>
-                            )
-                        },
-                        levelsNeeded: {
-                            label: "Levels Needed",
-                            value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
-                        }
-                    } : {})
-                }}
             />
 
             <EfficiencyUpgradeTable

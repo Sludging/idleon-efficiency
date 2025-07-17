@@ -20,7 +20,6 @@ interface EfficiencyAnalysisProps {
         noResultsText: string;
     }>;
     title?: string;
-    currentValues?: Record<string, { label: string; value: ReactNode }>;
 }
 
 export function EfficiencyAnalysis({
@@ -29,8 +28,7 @@ export function EfficiencyAnalysis({
     getResourceImageData,
     canAffordResource,
     valueConfigs,
-    title = "Upgrade Efficiency Analysis",
-    currentValues
+    title = "Upgrade Efficiency Analysis"
 }: EfficiencyAnalysisProps) {
     const [selectedOptimization, setSelectedOptimization] = useState(optimizationTypes[0].id);
     const [upgradeCount, setUpgradeCount] = useState(50);
@@ -62,14 +60,14 @@ export function EfficiencyAnalysis({
                 <Box>
                     <Box direction="row" gap="medium" justify="between" align="center">
                         <Text size="medium" weight="bold">{title}</Text>
-                        {currentValues && (
+                        {currentOptimization?.currentValues && (
                             <Box direction="row" gap="medium" align="start">
-                                {Object.entries(currentValues).map(([key, { label, value }]) => (
+                                {currentOptimization.currentValues.map((currentValue, index) => (
                                     <ComponentAndLabel
-                                        key={key}
-                                        label={label}
+                                        key={index}
+                                        label={currentValue.label}
                                         labelSize="small"
-                                        component={value}
+                                        component={currentValue.value}
                                     />
                                 ))}
                             </Box>

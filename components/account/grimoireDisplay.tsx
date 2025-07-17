@@ -40,19 +40,62 @@ function EfficiencySection() {
             id: 'Wraith Damage',
             label: 'Wraith Damage',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Damage",
+                value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
+            }]
         },
         {
             id: 'Bone Drop Rate',
             label: 'Bone Drop Rate',
             showCountSelector: true,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Bone Drop Rate",
+                value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
+            }]
+        },
+        {
+            id: 'Wraith Accuracy',
+            label: 'Wraith Accuracy',
+            showCountSelector: true,
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Accuracy",
+                value: nFormatter(grimoire.currentWraithAccuracy, "CommaNotation")
+            }]
+        },
+        {
+            id: 'Wraith Defense',
+            label: 'Wraith Defense',
+            showCountSelector: true,
+            showConsolidation: true,
+            currentValues: [{
+                label: "Current Wraith Defense",
+                value: nFormatter(grimoire.currentWraithDefense, "CommaNotation")
+            }]
         },
         {
             id: 'Unlock Path',
             label: 'Unlock Path',
             showCountSelector: false,
-            showConsolidation: true
+            showConsolidation: true,
+            currentValues: nextUnlock && levelsNeeded > 0 ? [
+                {
+                    label: "Next Unlock",
+                    value: (
+                        <Box direction="row" gap="small" align="center">
+                            <IconImage data={nextUnlock.getImageData()} scale={0.4} />
+                            <Text size="small">{nextUnlock.getName()}</Text>
+                        </Box>
+                    )
+                },
+                {
+                    label: "Levels Needed",
+                    value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
+                }
+            ] : undefined
         }
     ];
 
@@ -70,6 +113,18 @@ function EfficiencySection() {
             formatValue: (value: number) => `${value.toFixed(4)}x`,
             noResultsText: "No efficient bone drop upgrades available (insufficient bones, all upgrades maxed, or all locked)"
         },
+        'Wraith Accuracy': {
+            valueHeader: "Accuracy +",
+            valueColor: "accent-2",
+            formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`,
+            noResultsText: "No efficient accuracy upgrades available (insufficient bones, all upgrades maxed, or all locked)"
+        },
+        'Wraith Defense': {
+            valueHeader: "Defense +",
+            valueColor: "accent-2",
+            formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`,
+            noResultsText: "No efficient defense upgrades available (insufficient bones, all upgrades maxed, or all locked)"
+        },
         "Unlock Path": {
             valueHeader: '',
             valueColor: 'accent-2',
@@ -82,6 +137,8 @@ function EfficiencySection() {
     const efficiencyResults = new Map([
         ['Wraith Damage', grimoire.efficiencyResults.get('Wraith Damage') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
         ['Bone Drop Rate', grimoire.efficiencyResults.get('Bone Drop Rate') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
+        ['Wraith Accuracy', grimoire.efficiencyResults.get('Wraith Accuracy') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
+        ['Wraith Defense', grimoire.efficiencyResults.get('Wraith Defense') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }],
         ['Unlock Path', grimoire.efficiencyResults.get('Cheapest Path') || { goal: "", pathUpgrades: [], totalValue: 0, resourceCosts: {} }]
     ]);
 
@@ -92,31 +149,6 @@ function EfficiencySection() {
             getResourceImageData={(resourceType) => grimoire.getBoneImageData(resourceType as BoneType)}
             canAffordResource={(resourceType, cost) => grimoire.getResourceCount(resourceType) >= cost}
             valueConfigs={valueConfigs}
-            currentValues={{
-                wraithDamage: {
-                    label: "Current Wraith Damage",
-                    value: nFormatter(grimoire.currentWraithDamage, "CommaNotation")
-                },
-                boneDropRate: {
-                    label: "Current Bone Drop Rate",
-                    value: `${grimoire.currentBoneDropRate.toFixed(2)}x`
-                },
-                ...(nextUnlock && levelsNeeded > 0 ? {
-                    nextUnlock: {
-                        label: "Next Unlock",
-                        value: (
-                            <Box direction="row" gap="small" align="center">
-                                <IconImage data={nextUnlock.getImageData()} scale={0.4} />
-                                <Text size="small">{nextUnlock.getName()}</Text>
-                            </Box>
-                        )
-                    },
-                    levelsNeeded: {
-                        label: "Levels Needed",
-                        value: `${levelsNeeded} more levels to reach ${(nextUnlock.getUnlockRequirement?.() ?? 0)}`
-                    }
-                } : {})
-            }}
         />
     );
 }

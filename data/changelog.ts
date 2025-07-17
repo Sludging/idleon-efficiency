@@ -7,6 +7,15 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.41-v2",
+    title: "Extend Efficiency Calculators",
+    date: "July 17, 2025",
+    changes: [
+      "Add accuracy and defense efficiency calculators to all elite classes.",
+      "Fix a bug with efficiency calculators being off by one.",
+    ]
+  },
+  {
     version: "1.2.41",
     title: "Update 2.41",
     date: "July 13, 2025",
