@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -354,8 +354,9 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
     })
 
     // I sometimes forget that sorting has implication, fix sorting in the end incase I screwed something up in the post processing functions.
-    // const players = accountData.get("players") as Player[];
-    // players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
+    // TODO: Need to think of a safe way to handle this longer term.
+    const players = accountData.get("players") as Player[];
+    players.sort((playera, playerb) => playera.playerID > playerb.playerID ? 1 : -1);
 
     const newData = new IdleonData(accountData, lastUpdated);
 
