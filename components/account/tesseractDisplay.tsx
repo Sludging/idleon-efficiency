@@ -114,7 +114,7 @@ export function TesseractDisplay() {
             noResultsText: 'No efficient upgrades available'
         },
         'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient damage upgrades available' },
-        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(4)}x`, noResultsText: 'No efficient tachyon drop upgrades available' },
+        'Tachyon Drop Rate': { valueHeader: 'Multiplier +', valueColor: 'accent-2', formatValue: (value: number) => `${(value).toFixed(2)}x`, noResultsText: 'No efficient tachyon drop upgrades available' },
         'Arcane Accuracy': { valueHeader: 'Accuracy +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient accuracy upgrades available' },
         'Arcane Defense': { valueHeader: 'Defense +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient defense upgrades available' }
     };
