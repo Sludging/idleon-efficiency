@@ -19,9 +19,9 @@ const adUnits: Record<string, any> = {
         "rail": "left",
         "railOffsetTop": 0,
         "railOffsetBottom": 0,
-        "railSpacing": 50,
+        "railSpacing": 20,
         "railCollisionWhitelist": ["*"],
-        "mediaQuery": "(min-width: 1800px)",
+        "mediaQuery": "(min-width: 1750px)",
         "sizes": [
             [
                 "160",
@@ -41,9 +41,9 @@ const adUnits: Record<string, any> = {
         "rail": "right",
         "railOffsetTop": 0,
         "railOffsetBottom": 100,
-        "railSpacing": 50,
+        "railSpacing": 20,
         "railCollisionWhitelist": ["*"],
-        "mediaQuery": "(min-width: 1800px)",
+        "mediaQuery": "(min-width: 1750px)",
         "sizes": [
             [
                 "160",
