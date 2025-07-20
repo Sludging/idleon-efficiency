@@ -110,7 +110,7 @@ function EfficiencySection() {
         'Bone Drop Rate': {
             valueHeader: "Multiplier +",
             valueColor: "accent-2",
-            formatValue: (value: number) => `${value.toFixed(4)}x`,
+            formatValue: (value: number) => `${value.toFixed(2)}x`,
             noResultsText: "No efficient bone drop upgrades available (insufficient bones, all upgrades maxed, or all locked)"
         },
         'Wraith Accuracy': {

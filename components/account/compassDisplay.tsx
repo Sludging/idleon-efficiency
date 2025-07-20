@@ -220,7 +220,7 @@ function EfficiencySection() {
             showConsolidation: true,
             currentValues: [{
                 label: "Current Tempest Accuracy",
-                value: `${compass.currentTempestAccuracy.toFixed(2)}`
+                value: nFormatter(compass.currentTempestAccuracy, "CommaNotation")
             }]
         },
         {
@@ -230,7 +230,7 @@ function EfficiencySection() {
             showConsolidation: true,
             currentValues: [{
                 label: "Current Tempest Defense",
-                value: `${compass.currentTempestDefense.toFixed(2)}`
+                value: nFormatter(compass.currentTempestDefense, "CommaNotation")
             }]
         }
     ];
@@ -240,25 +240,25 @@ function EfficiencySection() {
         'Tempest Damage': {
             valueHeader: "Damage +",
             valueColor: "accent-1",
-            formatValue: (value: number) => `${value.toFixed(2)}`,
+            formatValue: (value: number) => nFormatter(value, "CommaNotation"),
             noResultsText: "No efficient damage upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         },
         'Dust Multiplier': {
             valueHeader: "Multiplier +",
             valueColor: "accent-2",
-            formatValue: (value: number) => `+${value.toFixed(4)}x`,
+            formatValue: (value: number) => `+${value.toFixed(2)}x`,
             noResultsText: "No efficient dust upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         },
         'Tempest Accuracy': {
             valueHeader: "Accuracy +",
             valueColor: "accent-3",
-            formatValue: (value: number) => `+${value.toFixed(2)}`,
+            formatValue: (value: number) => `+${nFormatter(value, "CommaNotation")}`,
             noResultsText: "No efficient accuracy upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         },
         'Tempest Defense': {
             valueHeader: "Defense +",
             valueColor: "accent-4",
-            formatValue: (value: number) => `+${value.toFixed(2)}`,
+            formatValue: (value: number) => `+${nFormatter(value, "CommaNotation")}`,
             noResultsText: "No efficient defense upgrades available (insufficient dust, all upgrades maxed, or all locked)"
         }
     };
