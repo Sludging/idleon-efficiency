@@ -29,6 +29,9 @@ export const FooterComponent = () => {
                     <Box align="center" pad="small">
                         <span className="ccpa-link" data-ccpa-link="1"></span>
                     </Box>
+                    <Box align="center" pad="small">
+                        <div id="ncmp-consent-link" className="gdpr-button"></div>
+                    </Box>
                 </Box>
                 <Box justify="end" direction="row" gap="medium">
                     <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
