@@ -19,12 +19,42 @@ const adUnits: Record<string, any> = {
         "rail": "left",
         "railOffsetTop": 0,
         "railOffsetBottom": 0,
-        "railCollisionWhitelist": [],
+        "railSpacing": 50,
+        "railCollisionWhitelist": ["*"],
+        "mediaQuery": "(min-width: 1800px)",
+        "sizes": [
+            [
+                "160",
+                "600"
+            ]
+        ],
         "report": {
             "enabled": true,
             "icon": true,
             "wording": "Report Ad",
-            "position": "top-left"
+            "position": "bottom-right"
+        }
+    },
+    "right-side-rail": {
+        "refreshTime": 30,
+        "format": "rail",
+        "rail": "right",
+        "railOffsetTop": 0,
+        "railOffsetBottom": 100,
+        "railSpacing": 50,
+        "railCollisionWhitelist": ["*"],
+        "mediaQuery": "(min-width: 1800px)",
+        "sizes": [
+            [
+                "160",
+                "600"
+            ]
+        ],
+        "report": {
+            "enabled": true,
+            "icon": true,
+            "wording": "Report Ad",
+            "position": "bottom-right"
         }
     },
     "floating-video-player": {
