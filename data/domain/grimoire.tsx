@@ -874,6 +874,12 @@ export class Grimoire extends Domain implements EfficiencyDomain {
             }
         });
     }
+
+    // Get the current level of a Grimoire upgrade by its id.
+    getUpgradeLevel(upgradeId: number): number {
+        const upgrade = this.upgrades.find(u => u.id === upgradeId);
+        return upgrade?.level ?? 0;
+    }
 } 
 
 /**
@@ -940,4 +946,4 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
     }
 
     return grimoire;
-} 
+}

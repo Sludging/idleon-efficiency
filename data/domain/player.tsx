@@ -35,6 +35,8 @@ import { BeanstalkingBonusType, Sneaking } from './world-6/sneaking';
 import { Account } from './account';
 import { IslandExpeditions } from './islandExpedition';
 import { TaskBoard } from './tasks';
+import { Grimoire } from './grimoire';
+import { Tesseract } from './tesseract';
 
 export class PlayerStats {
     strength: number = 0;
@@ -149,6 +151,8 @@ export class Player {
     extraLevelsFromSlug: number = 0;
     extraLevelsFromEquinox: number = 0;
     extraLevelsFromAchievements: number = 0;
+    extraLevelsFromGrimoire: number = 0;
+    extraLevelsFromTesseract: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -1087,6 +1091,44 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
                 player.extraLevelsFromAchievements = totalTalentFromAchievments;
             }
         })
+    }
+
+    // --- Skull of Major Talent (Grimoire 39) bonus ---
+    const grimoire = data.get("grimoire") as Grimoire | undefined;
+    const skullOfMajorTalentLevel = grimoire?.getUpgradeLevel?.(39) ?? 0;
+    if (skullOfMajorTalentLevel > 0) {
+        players.forEach(player => {
+            player.talents
+                .filter(talent =>
+                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                    talent.skillIndex <= 614 &&
+                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+                )
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? skullOfMajorTalentLevel : 0;
+                    talent.maxLevel += skullOfMajorTalentLevel;
+                });
+            player.extraLevelsFromGrimoire = skullOfMajorTalentLevel;
+        });
+    }
+
+    // --- Universe Talent (Tesseract 57) bonus ---
+    const tesseract = data.get("tesseract") as Tesseract | undefined;
+    const universeTalentLevel = tesseract?.getUpgradeLevel?.(57) ?? 0;
+    if (universeTalentLevel > 0) {
+        players.forEach(player => {
+            player.talents
+                .filter(talent =>
+                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                    talent.skillIndex <= 614 &&
+                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+                )
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? universeTalentLevel : 0;
+                    talent.maxLevel += universeTalentLevel;
+                });
+            player.extraLevelsFromTesseract = universeTalentLevel;
+        });
     }
 
     return players;

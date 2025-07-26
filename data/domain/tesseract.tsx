@@ -897,6 +897,13 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         if (!player) return 0;
         return player.getTalentBonus(skillIndex);
     }
+
+    // Get the current level of a Tesseract upgrade by its id.
+
+    getUpgradeLevel(upgradeId: number): number {
+        const upgrade = this.upgrades.find(u => u.id === upgradeId);
+        return upgrade?.level ?? 0;
+    }
 }
 
 export const updateArcaneCultistImpact = (accountData: Map<string, any>) => {

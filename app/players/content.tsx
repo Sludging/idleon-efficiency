@@ -832,7 +832,9 @@ function TalentDisplay({ player }: { player: Player }) {
                 {player.extraLevelsFromAchievements > 0 && <TextAndLabel label="Achievements" text={`+${player.extraLevelsFromAchievements}`} />}
                 {player.extraLevelsFromEquinox > 0 && <TextAndLabel label="Equinox" text={`+${player.extraLevelsFromEquinox}`} />}
                 {player.extraLevelsFromSlug > 0 && <TextAndLabel label="Slug companion" text={`+${player.extraLevelsFromSlug}`} />}
-                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0) && 
+                {player.extraLevelsFromGrimoire > 0 && <TextAndLabel label="Grimoire" text={`+${player.extraLevelsFromGrimoire}`} />}
+                {player.extraLevelsFromTesseract > 0 && <TextAndLabel label="Tesseract" text={`+${player.extraLevelsFromTesseract}`} />}
+                {(player.extraLevelsFromBear > 0 || player.extraLevelsFromTalent > 0 || player.extraLevelsFromES > 0 || player.extraLevelsFromSlug > 0 || player.extraLevelsFromEquinox > 0 || player.extraLevelsFromAchievements > 0 || player.extraLevelsFromGrimoire > 0 || player.extraLevelsFromTesseract > 0) &&
                     <CheckBox
                         checked={bookMaxLevel}
                         label={<Box direction="row" align="center">
