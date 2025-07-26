@@ -1,0 +1,23 @@
+.ccpa-link {
+    a {
+        color: rgb(130, 141, 153);
+    }
+}
+
+.gdpr-button {
+   button {
+    font-family: Rubik, "Rubik Fallback";
+    color: rgb(255, 141, 153);
+    background-color: rgb(3, 118, 227);
+    background-origin: padding-box;
+    background-size: auto;
+    box-sizing: border-box;
+    box-shadow: none;;
+    display: block;
+    padding-bottom: 4px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: 4px;
+    border: 0;
+   } 
+}
