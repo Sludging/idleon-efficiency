@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-
 
 declare const window: Window &
     typeof globalThis & {
@@ -18,7 +16,7 @@ const adUnits: Record<string, any> = {
         "format": "rail",
         "rail": "left",
         "railOffsetTop": 0,
-        "railOffsetBottom": 0,
+        "railOffsetBottom": 50,
         "railSpacing": 20,
         "railCollisionWhitelist": ["*"],
         "mediaQuery": "(min-width: 1750px)",
@@ -40,7 +38,7 @@ const adUnits: Record<string, any> = {
         "format": "rail",
         "rail": "right",
         "railOffsetTop": 0,
-        "railOffsetBottom": 100,
+        "railOffsetBottom": 50,
         "railSpacing": 20,
         "railCollisionWhitelist": ["*"],
         "mediaQuery": "(min-width: 1750px)",
@@ -71,17 +69,6 @@ const adUnits: Record<string, any> = {
 
 const Nitro = ({ demo = false }: { demo: boolean }) => {
     const [nitroComponentLoaded, setNitroComponentLoaded] = useState(false);
-    const [currentPath, setCurrentPath] = useState("/");
-    const pathname = usePathname();
-
-    useEffect(() => {
-        if (pathname !== currentPath) {
-            setCurrentPath(pathname);
-            if (window.nitroAds) {
-                window.nitroAds.navigate();
-            }
-        }
-    }, [pathname]);
 
     // Function to add ad units
     const addUnits = () => {
@@ -110,6 +97,7 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
             const configScript = document.createElement("script");
             configScript.src = `https://s.nitropay.com/ads-2146.js`;
             configScript.setAttribute("data-cfasync", "false");
+            configScript.setAttribute("data-spa", "auto");
             document.head.appendChild(configScript);
 
             configScript.onload = addUnits;
