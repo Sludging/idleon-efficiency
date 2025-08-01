@@ -28,7 +28,7 @@ const ContentWrapper = ({
 
     return (
         <Box width={{ max: !isSpecialRoute ? '1440px' : '' }} margin={{ left: 'auto', right: 'auto' }} fill="horizontal">
-            <Box pad={{ right: !isSpecialRoute ? 'large' : '', left: !isSpecialRoute ? 'large' : '', bottom: 'medium' }}>
+            <Box pad={{ right: !isSpecialRoute ? 'large' : '', left: !isSpecialRoute ? 'large' : '', bottom: 'xlarge' }}>
                 {children}
             </Box>
         </Box>

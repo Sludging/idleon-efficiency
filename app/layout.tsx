@@ -9,11 +9,11 @@ import ContentWrapper from '../components/contentWrapper';
 import { FooterComponent } from '../components/footer/footer';
 import { AuthStoreProvider } from '../lib/providers/authStoreProvider';
 import { AppDataStoreProvider } from '../lib/providers/appDataStoreProvider';
-import Ramp from '../lib/ramp';
 import { WebVitals } from '../components/web-vitals';
 import { RouterTracker } from '../components/routerTracker';
 import { Suspense } from 'react';
 import type { Metadata } from 'next'
+import Nitro from '../lib/nitro';
 
 export const metadata: Metadata = {
     metadataBase: new URL(`https://www.idleonefficiency.com`),
@@ -58,23 +58,6 @@ export const metadata: Metadata = {
     },
 }
 
-// Ad related things
-var pwUnits = [
-    // Disabled for now, I don't like it.
-    // {
-    //   type: 'bottom_rail'
-    // },
-    {
-        type: 'corner_ad_video'
-    },
-    {
-        type: 'left_rail'
-    },
-    {
-        type: 'right_rail'
-    }
-]
-
 export default function RootLayout({
     // Layouts must accept a children prop.
     // This will be populated with nested layouts or pages
@@ -82,6 +65,9 @@ export default function RootLayout({
 }: {
     children: React.ReactNode
 }) {
+    
+    const demoAds = process.env.NEXT_PUBLIC_DEMO_ADS === "true";
+    
     return (
         <html lang="en">
             <body>
@@ -137,7 +123,7 @@ export default function RootLayout({
                             });
                         `}}
                 />
-                <Ramp PUB_ID='1025192' WEBSITE_ID='74808' pwUnits={pwUnits} />
+                <Nitro demo={demoAds} />
             </body>
         </html>
     )

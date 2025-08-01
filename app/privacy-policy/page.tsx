@@ -13,7 +13,7 @@ function PrivacyPolicy() {
         <Box align="left" pad="medium">
             {/* This is copy pasted from a generator, hence raw HTML */}
             <h1>Privacy Policy</h1>
-            <p>Last updated: February 17, 2024</p>
+            <p>Last updated: July 20, 2025</p>
             <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
             <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
             <h2>Interpretation and Definitions</h2>
@@ -79,6 +79,7 @@ function PrivacyPolicy() {
             <ul>
                 <li>Google</li>
                 <li>Apple</li>
+                <li>Steam</li>
             </ul>
             <p>If You decide to register through or otherwise grant us access to a Third-Party Social Media Service, We may collect Personal data that is already associated with Your Third-Party Social Media Service's account, such as Your name, Your email address, Your activities or Your contact list associated with that account.</p>
             <p>You may also have the option of sharing additional information with the Company through Your Third-Party Social Media Service's account. If You choose to provide such information and Personal Data, during registration or otherwise, You are giving the Company permission to use, share, and store it in a manner consistent with this Privacy Policy.</p>
@@ -169,11 +170,12 @@ function PrivacyPolicy() {
             <h2>Children's Privacy</h2>
             <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.</p>
             <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
+            <h2>Additional notice to California residents</h2>
+            <p>This section applies only to California residents. Pursuant to the California Consumer Privacy Act of 2018 (“CCPA”) effective November 2020, and as amended by the CPRA, effective January 1, 2023.</p>
+            <p>Please see the CCPA Privacy Notice which discloses the categories of personal information collected, purpose of processing, source, categories of recipients with whom the personal information is shared for a business purpose, whether the personal information is sole or shared, the retention period, and how to exercise your rights as a California resident.</p>
             <h2>Links to Other Websites</h2>
             <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
             <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-            <h2>Advertising</h2>
-            <p>All or partial advertising on this Website or App is managed by Playwire LLC. If Playwire publisher advertising services are used, Playwire LLC may collect and use certain aggregated and anonymized data for advertising purposes. To learn more about the types of data collected, how data is used and your choices as a user, please visit <a href="https://www.playwire.com/privacy-policy">https://www.playwire.com/privacy-policy</a>.</p>
             <h2>Changes to this Privacy Policy</h2>
             <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
             <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the &quot;Last updated&quot; date at the top of this Privacy Policy.</p>

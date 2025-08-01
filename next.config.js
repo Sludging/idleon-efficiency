@@ -53,7 +53,7 @@ const moduleExports = {
     return [
       {
         source: '/ads.txt',
-        destination: 'https://config.playwire.com/dyn_ads/1025192/74808/ads.txt',
+        destination: 'https://api.nitropay.com/v1/ads-2146.txt',
         permanent: true,
       },
     ]
