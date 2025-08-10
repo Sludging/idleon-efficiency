@@ -2,5 +2,6 @@
 
 export interface MonumentBonusModel {
     index: number,
-    description: string
+    description: string,
+    multiplier: number
 }

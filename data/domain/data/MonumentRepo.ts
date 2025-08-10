@@ -26,16 +26,16 @@ export const initMonumentRepo = () => {
                     <MonumentUnlockModel>{"index": 7, "description": "+1 additional Sword", "hours_required": 24000}
                 ],
                 "bonuses": [
-                    <MonumentBonusModel>{"index": 0, "description": "+{% Mining Efficiency"},
-                    <MonumentBonusModel>{"index": 1, "description": "}x Bucket Fill Rate"},
-                    <MonumentBonusModel>{"index": 2, "description": "}x Cooking Speed"},
-                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers"},
-                    <MonumentBonusModel>{"index": 4, "description": "}x Gaming Bits Gain"},
-                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Bravery Opals"},
-                    <MonumentBonusModel>{"index": 6, "description": "+{% DMG for all Characters"},
-                    <MonumentBonusModel>{"index": 7, "description": "}x Bell Ring & Ping Rate"},
-                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain"},
-                    <MonumentBonusModel>{"index": 9, "description": "}x Bravery Bonuses Multi"}
+                    <MonumentBonusModel>{"index": 0, "description": "+{% Mining Efficiency", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 1, "description": "}x Bucket Fill Rate", "multiplier": 4},
+                    <MonumentBonusModel>{"index": 2, "description": "}x Cooking Speed", "multiplier": 10},
+                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 4, "description": "}x Gaming Bits Gain", "multiplier": 8},
+                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Bravery Opals", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 6, "description": "+{% DMG for all Characters", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 7, "description": "}x Bell Ring & Ping Rate", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain", "multiplier": 50},
+                    <MonumentBonusModel>{"index": 9, "description": "}x Bravery Bonuses Multi", "multiplier": 250}
                 ]
             }),
         new MonumentBase(1, <MonumentModel>{
@@ -56,16 +56,16 @@ export const initMonumentRepo = () => {
                     }
                 ],
                 "bonuses": [
-                    <MonumentBonusModel>{"index": 0, "description": "+{% Catching Efficiency"},
-                    <MonumentBonusModel>{"index": 1, "description": "}x Harp Note Gain"},
-                    <MonumentBonusModel>{"index": 2, "description": "}x Artifact Find Chance"},
-                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers"},
-                    <MonumentBonusModel>{"index": 4, "description": "}x All Summoning Essence Gain"},
-                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Justice Opals"},
-                    <MonumentBonusModel>{"index": 6, "description": "+{% Class EXP Gain"},
-                    <MonumentBonusModel>{"index": 7, "description": "+{% more daily Lamp Wishes"},
-                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain"},
-                    <MonumentBonusModel>{"index": 9, "description": "}x Justice Bonuses Multi"}
+                    <MonumentBonusModel>{"index": 0, "description": "+{% Catching Efficiency", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 1, "description": "}x Harp Note Gain", "multiplier": 4},
+                    <MonumentBonusModel>{"index": 2, "description": "}x Artifact Find Chance", "multiplier": 500},
+                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 4, "description": "}x All Summoning Essence Gain", "multiplier": 5},
+                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Justice Opals", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 6, "description": "+{% Class EXP Gain", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 7, "description": "+{% more daily Lamp Wishes", "multiplier": 300},
+                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain", "multiplier": 50},
+                    <MonumentBonusModel>{"index": 9, "description": "}x Justice Bonuses Multi", "multiplier": 250}
                 ]
             }),
         new MonumentBase(2, <MonumentModel>{
@@ -98,16 +98,16 @@ export const initMonumentRepo = () => {
                     <MonumentUnlockModel>{"index": 7, "description": "+5 additional Insta Matches", "hours_required": 24000}
                 ],
                 "bonuses": [
-                    <MonumentBonusModel>{"index": 0, "description": "+{% Choppin Efficiency"},
-                    <MonumentBonusModel>{"index": 1, "description": "}x Jar Rupie Value"},
-                    <MonumentBonusModel>{"index": 2, "description": "}x Jade Coin Gain"},
-                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers"},
-                    <MonumentBonusModel>{"index": 4, "description": "}x Farming Crop Evo Chance"},
-                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Wisdom Opals"},
-                    <MonumentBonusModel>{"index": 6, "description": "+{% Player Drop Rate"},
-                    <MonumentBonusModel>{"index": 7, "description": "+{% Gambit Points"},
-                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain"},
-                    <MonumentBonusModel>{"index": 9, "description": "}x Wisdom Bonuses Multi"}
+                    <MonumentBonusModel>{"index": 0, "description": "+{% Choppin Efficiency", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 1, "description": "}x Jar Rupie Value", "multiplier": 3},
+                    <MonumentBonusModel>{"index": 2, "description": "}x Jade Coin Gain", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 3, "description": "+{% EXP Gain for Villagers", "multiplier": 1},
+                    <MonumentBonusModel>{"index": 4, "description": "}x Farming Crop Evo Chance", "multiplier": 4},
+                    <MonumentBonusModel>{"index": 5, "description": "+{% Chance for Wisdom Opals", "multiplier": 2},
+                    <MonumentBonusModel>{"index": 6, "description": "+{% Player Drop Rate", "multiplier": 100},
+                    <MonumentBonusModel>{"index": 7, "description": "+{% Gambit Points", "multiplier": 35},
+                    <MonumentBonusModel>{"index": 8, "description": "+{% All Monument AFK Gain", "multiplier": 50},
+                    <MonumentBonusModel>{"index": 9, "description": "}x Wisdom Bonuses Multi", "multiplier": 250}
                 ]
             })    
 ]
