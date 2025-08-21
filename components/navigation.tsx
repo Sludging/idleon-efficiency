@@ -52,6 +52,7 @@ const navItems: NavItem[] = [
             { subLink: "/divinity", label: "Divinity" },
             { subLink: "/sailing", label: "Sailing" },
             { subLink: "/gaming", label: "Gaming" },
+            { subLink: "/hole", label: "Hole" },
         ]
     },
     {

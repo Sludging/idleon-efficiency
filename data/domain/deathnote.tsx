@@ -123,6 +123,16 @@ export class Deathnote extends Domain {
         return toReturn;
     }
 
+    getTotalRank = (): number => {
+        const killsMap = this.getKillsMap();
+        let totalRank = 0;
+        [...killsMap.entries()].forEach(([worldName, deathnoteMobs]) => {
+            totalRank += [...deathnoteMobs.values()].reduce((sum, killCount) => sum + (worldName == "Minibosses" ? this.getDeathnoteMinibossRank(killCount) : this.getDeathnoteRank(killCount)), 0);
+        });
+
+        return totalRank;
+    }
+
     getRawKeys(): RawData[] {
         return [
             {key: "KLA_", perPlayer: true, default: []}

@@ -4,10 +4,32 @@ import { initLampWishRepo, LampWishBase } from "../../data/LampWishRepo";
 import { Item } from "../../items";
 import { CosmoUpgradeModel } from "../../model/cosmoUpgradeModel";
 import { LampWishModel } from "../../model/lampWishModel";
-import { Villagers } from "./villager";
+import { VillagerIndex, Villagers } from "./villager";
 import { CosmoTypeEnum } from "../../enum/cosmoTypeEnum";
 import { HoleBuildingBase, initHoleBuildingRepo } from "../../data/HoleBuildingRepo";
 import { HoleBuildingModel } from "../../model/holeBuildingModel";
+import { initStudyRepo, StudyBase } from "../../data/StudyRepo";
+import { StudyModel } from "../../model/studyModel";
+import { MeasurementModel } from "../../model/measurementModel";
+import { initMeasurementRepo, MeasurementBase } from "../../data/MeasurementRepo";
+import { initMonumentRepo } from "../../data/MonumentRepo";
+import { MonumentBonusModel } from "../../model/monumentBonusModel";
+import { MonumentUnlockModel } from "../../model/monumentUnlockModel";
+import { BellImprovementModel } from "../../model/bellImprovementModel";
+import { initBellImprovementRepo } from "../../data/BellImprovementRepo";
+import { Well } from "./well";
+import { lavaLog } from "../../../utility";
+import { Card } from "../../cards";
+import { TaskBoard } from "../../tasks";
+import { Tome } from "../../tome";
+import { Farming } from "../../world-6/farming";
+import { Slab } from "../../slab";
+import { Deathnote } from "../../deathnote";
+import { BellBonusModel } from "../../model/bellBonusModel";
+import { initBellBonusRepo } from "../../data/BellBonusRepo";
+import { initHarpNotesRepo } from "../../data/HarpNotesRepo";
+import { HarpStringModel } from "../../model/harpStringModel";
+import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 
 export class Villager {
     level: number = 0;
@@ -28,18 +50,49 @@ export class Wish {
 }
 
 export class CosmoUpgrade {
+    unlocked: boolean = false;
     level: number = 0;
 
-    constructor(public index: number, public data: CosmoUpgradeModel) { }
+    constructor(public index: number, public data: CosmoUpgradeModel) { 
+        this.data.name = this.data.name.replace(/_/g, " ");
+        this.data.desc = this.data.desc.replace(/_/g, " ");
+    }
 
     static fromBase(data: CosmoUpgradeBase[]) {
-        return data.map(d => {
+        return data.filter(d => d.data.name != "Confused_Bonus").map(d => {
             // Special handling for Pocket Divinity upgrade
             if (d.data.name === "Pocket_Divinity") {
                 return new PocketDivinityUpgrade(d.index, d.data);
             }
             return new CosmoUpgrade(d.index, d.data);
         });
+    }
+
+    getBonus(): number {
+        // Special case: Forge upgrade.
+        if (this.index === 22 ) {
+            return Math.floor(Math.max(1, Math.pow(3, this.level)));
+        }
+        // Default: perLvl * level
+        return Math.floor((this.data.perLvl ?? 1) * this.level);
+    }
+
+    // This is pretty messy but meh.
+    getDescription(): string {
+        // If we have a multiplier
+        if (this.data.desc.includes(" x")) {
+            // Special case for Beeg Beeg Forge
+            if (this.data.name == "Beeg Beeg Forge") {
+                return this.data.desc.replace(/ x/g, ` ${(this.getBonus())}x`);
+            }
+            return this.data.desc.replace(/ x/g, ` ${(1 + (this.getBonus() / 100)).toFixed(0)}x`);
+        }
+        // If we have a percentage
+        if (this.data.desc.includes("+%")) {
+            return this.data.desc.replace(/\+%/g, `+${this.getBonus().toFixed(0)}%`);
+        }
+        // Everything else.
+        return this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(0));
     }
 }
 
@@ -67,13 +120,534 @@ export class Majiks {
 
 export class Schematic {
     unlocked: boolean = false;
+    
+    // Data references populated during parsing
+    sedimentMulti: number[] = [];
+    wellSediment: number[] = [];
+    extraCalculations: number[] = [];
+    bellImprovementMethods: number[] = [];
+    
+    // Study bonus value
+    studyBolaiaBonuses: number = 0;
+    
+    
+    // Cached calculations for performance
+    private sedimentSum?: number;
+    private bellSum?: number;
 
     constructor(public index: number, public data: HoleBuildingModel) { }
 
     static fromBase(data: HoleBuildingBase[]) {
         return data.map(d => new Schematic(d.index, d.data));
     }
+
+    // TODO: Investigate what baseMultiplier should be - appears to be variable 'i' in original code
+    // TODO: This seems to be in-accurate, needs a second pass.
+    getBonus(baseMultiplier: number = 1): number {
+        // Return 0 if not unlocked
+        if (!this.unlocked) {
+            return 0;
+        }
+
+        // TODO: Provide more context for some of the bonuses / extra calculations instead of just the index
+        switch (this.index) {
+            case 14: // Sediment-based bonus
+                return this.getSedimentBonus();
+                
+            case 45: // Bell improvement bonus
+                return this.getBellBonus();
+                
+            case 46: // 5x extraCalculations[26]
+                return 5 * (this.extraCalculations[26] || 0);
+                
+            case 47: // 25x extraCalculations[26]
+                return 25 * (this.extraCalculations[26] || 0);
+                
+            case 48: // 10x extraCalculations[26]
+                return 10 * (this.extraCalculations[26] || 0);
+                
+            case 49: // Complex formula with recursive schematic calls
+                return this.resourceLayersBonus(baseMultiplier);
+                
+            case 52: // 60 * LOG(wellSediment[0])
+                return 60 * Math.floor(lavaLog(this.wellSediment[0] || 0));
+                
+            case 53: // 4 * LOG(wellSediment[13])
+                return 4 * Math.floor(lavaLog(this.wellSediment[13] || 0));
+                
+            case 54: // 1.2^LOG(wellSediment[15])
+                return Math.pow(1.2, Math.floor(lavaLog(this.wellSediment[15] || 0)));
+                
+            case 55: // 10 * LOG(wellSediment[11])
+                return 10 * Math.floor(lavaLog(this.wellSediment[11] || 0));
+                
+            case 56: // 1.3^LOG(wellSediment[2])
+                return Math.pow(1.3, Math.floor(lavaLog(this.wellSediment[2] || 0)));
+                
+            case 57: // 20 * LOG(wellSediment[1])
+                return 20 * Math.floor(lavaLog(this.wellSediment[1] || 0));
+                
+            case 58: // 5 * LOG(extraCalculations[32])
+                return 5 * lavaLog(this.extraCalculations[32] || 0);
+                
+            case 59: // Sum of extraCalculations[33-36] / 100 * 10
+                const sum = (this.extraCalculations[33] || 0) + 
+                           (this.extraCalculations[34] || 0) + 
+                           (this.extraCalculations[35] || 0) + 
+                           (this.extraCalculations[36] || 0);
+                return (sum / 100) * 10;
+                
+            case 82:
+            case 83:
+            case 84: // All use extraCalculations[55] with base multiplier
+                return baseMultiplier * (this.extraCalculations[55] || 0);
+                
+            default:
+                return baseMultiplier; // Base multiplier for unknown schematics
+        }
+    }
+
+    private getSedimentBonus(): number {
+        if (this.sedimentSum === undefined) {
+            this.sedimentSum = this.sedimentMulti.slice(0, 10).reduce((sum, val) => sum + (val || 0), 0);
+            this.sedimentSum *= (20 + this.studyBolaiaBonuses);
+        }
+        return this.sedimentSum;
+    }
+
+    private getBellBonus(): number {
+        if (this.bellSum === undefined) {
+            this.bellSum = this.bellImprovementMethods.reduce((sum, val) => sum + (val || 0), 0);
+        }
+        return Math.max(1, Math.pow(1.1, Math.floor(this.bellSum / 25)));
+    }
+
+    private resourceLayersBonus(baseMultiplier: number = 1): number {
+        // This bonus is based on the total of the layers you broke through in resource cavrens.
+        // +15% All Skill Efficiency, and +10% All Skill EXP gain per resource layer.
+        const totalResourceLayers = this.extraCalculations[1] + 
+            (this.extraCalculations[3] || 0) +
+            (this.extraCalculations[5] || 0);
+        
+        return baseMultiplier * (totalResourceLayers);
+    }
+
+    getDescription(): string {
+        let description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
+        
+        // Special dynamic placeholders would need additional logic
+        // For now we have placeholder N/A for all dynamic placeholders
+/*         if (description.includes("!")) {
+            description = description.replace(/!/g, "N/A");
+        } 
+        if (description.includes("#")) {
+            description = description.replace(/\#/g, "N/A");
+        }
+        if (description.includes("$")) {
+            description = description.replace(/\$/g, "N/A");
+        }
+        if (description.includes("%")) {
+            description = description.replace(/\%/g, "N/A");
+        }*/
+
+        return description;
+    }
 }
+
+export class Study {
+    level: number = 0;
+    unlocked: boolean = false;
+
+    constructor(public index: number, public data: StudyModel) { }
+
+    static fromBase(data: StudyBase[]) {
+        return data.map(d => new Study(d.index, d.data));
+    }
+
+    // Calculate study bonus
+    getBonus(): number {
+        // Must have at least level 1 to get bonuses
+        if (!this.unlocked) {
+            return 0;
+        }
+
+        // Special cases for specific studies
+        if (this.index === 9) {
+            // Study 9 (JUSTICE): 50 + (level × multiplier)
+            return 50 + this.level * this.data.multiplier;
+        } else if (this.index === 3) {
+            // Study 3 (BRAVERY): min(32, 12 + (level × multiplier))
+            return Math.min(32, 12 + this.level * this.data.multiplier);
+        } else {
+            // Default: level × multiplier
+            return this.level * this.data.multiplier;
+        }
+    }
+
+    getDescription(): string {
+        if (this.data.description.includes("}x")) {
+            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+        }
+        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+    }
+}
+
+export class Measurement {
+    unlocked: boolean = false;
+    level: number = 0;
+    cosmosBonus: number = 0; // CosmoBonusQTY from cosmos upgrades [TODO]
+    
+    // Variables for MeasurementQTYfound calculations by measurement type
+    gloomieKills: number = 0; // Type 0: Gloomie Kills [DONE]
+    cropsCount: number = 0; // Type 1: Crops [DONE]
+    accountLevel: number = 0; // Type 2: Account lv [DONE]
+    tomeScore: number = 0; // Type 3: Tome score [DONE]
+    allSkillLevel: number = 0; // Type 4: All skill lv [DONE]
+    // Type 5: Always returns 0
+    deathnotePts: number = 0; // Type 6: Deathnote pts [DONE]
+    highestDmg: number = 0; // Type 7: Highest DMG [DONE]
+    slabItems: number = 0; // Type 8: Slab Items [DONE]
+    studiesDone: number = 0; // Type 9: Studies done [DONE]
+    golemKills: number = 0; // Type 10: Golem kills [DONE]
+
+    constructor(public index: number, public data: MeasurementModel) { }
+
+    static fromBase(data: MeasurementBase[]) {
+        return data.map(d => new Measurement(d.index, d.data));
+    }
+
+    /**
+     * Calculate the measurement quantity found based on measurement type
+     * This determines the multiplier strength for the measurement bonus
+     * @param isForMultiplier - If true (99), applies scaling for multiplier calculation
+     */
+    getMeasurementQTYfound(isForMultiplier: boolean = false): number {
+        const measurementType = parseInt(this.data.measurementType.type);
+        
+        // Calculation logic verified against game source code
+        switch (measurementType) {
+            case 0: // Gloomie Kills
+                return isForMultiplier ? lavaLog(this.gloomieKills) : this.gloomieKills;
+                
+            case 1: // Crops
+                return isForMultiplier ? this.cropsCount / 14 : this.cropsCount;
+                
+            case 2: // Account lv
+                return isForMultiplier ? this.accountLevel / 500 : this.accountLevel;
+                
+            case 3: // Tome score  
+                return isForMultiplier ? this.tomeScore / 2500 : this.tomeScore;
+                
+            case 4: // All skill lv
+                if (isForMultiplier) {
+                    return this.allSkillLevel / 5000 + Math.max(0, this.allSkillLevel - 18000) / 1500;
+                }
+                return this.allSkillLevel;
+                
+            case 5: // Always 0
+                return 0;
+                
+            case 6: // Deathnote pts
+                return isForMultiplier ? this.deathnotePts / 125 : this.deathnotePts;
+                
+            case 7: // Highest DMG
+                return isForMultiplier ? lavaLog(this.highestDmg) / 2 : this.highestDmg;
+                
+            case 8: // Slab Items
+                return isForMultiplier ? this.slabItems / 150 : this.slabItems;
+                
+            case 9: // Studies done
+                return isForMultiplier ? this.studiesDone / 6 : this.studiesDone;
+                
+            case 10: // Golem kills
+                return isForMultiplier ? Math.max(0, lavaLog(this.golemKills) - 2) : this.golemKills;
+                
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * Calculate the measurement multiplier based on quantity found
+     * Uses a progressive scaling system with different rates above/below 5
+     */
+    getMeasurementMulti(): number {
+        const qtyFound = this.getMeasurementQTYfound(true); // Use multiplier scaling
+        
+        if (qtyFound < 5) {
+            // Below 5: 1 + (18% * qtyFound)
+            return 1 + (18 * qtyFound) / 100;
+        } else {
+            // Above 5: 1 + (18% * qtyFound) + (8% * (qtyFound - 5))
+            return 1 + (18 * qtyFound + 8 * (qtyFound - 5)) / 100;
+        }
+    }
+
+    /**
+     * Calculate the base bonus for this measurement
+     * Based on the measurement's formula and current buff level
+     */
+    getMeasurementBaseBonus(): number {
+        const formula = this.data.formula;
+        const formulaType = this.data.formulaType;
+        const cosmosMultiplier = 1 + this.cosmosBonus / 100;
+
+        // Check if this is a TOT (total) type measurement
+        if (formulaType === "TOT") {
+            // Extract the base value from formula (e.g., "45TOT" -> 45)
+            const baseValue = parseFloat(formula.replace("TOT", ""));
+            
+            // For TOT measurements, use the diminishing returns formula
+            return cosmosMultiplier * ((baseValue * this.level) / (100 + this.level));
+        } else {
+            // For regular measurements, use simple multiplication
+            const baseValue = parseFloat(formula);
+            return cosmosMultiplier * baseValue * this.level;
+        }
+    }
+
+    getBonus(): number {
+        // Calculate the total measurement bonus (base * multiplier)
+        return this.getMeasurementBaseBonus() * this.getMeasurementMulti();
+    }
+
+    getCost(): number {
+        // Formula: (250 + 50 * level) * 1.6^(index - 6 * floor(index / 10)) * 1.1^level
+        return (
+            (250 + 50 * this.level) *
+            Math.pow(1.6, this.index - 6 * Math.floor(this.index / 10)) *
+            Math.pow(1.1, this.level)
+        );
+    }
+
+    getDescription(): string {
+        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+    }
+}
+
+export class MonumentBonus {
+    level: number = 0;
+    monumentSelfBoost: number = 0;
+    cosmoBonus: number = 0;
+
+    constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
+
+    getBonus(): number {
+        // Placeholder variables for required data, to be replaced with actual data sources
+        let bonusMultiplier = 1;
+
+        // Apply ROG and Cosmo bonuses if i != 9
+        if (this.index !== 9) {
+            bonusMultiplier = 1 + this.monumentSelfBoost / 100;
+            bonusMultiplier += this.cosmoBonus / 100;
+        }
+
+        if (this.data.multiplier < 30) {
+            return this.level * this.data.multiplier * Math.max(1, bonusMultiplier);
+        } else {
+            return (
+                0.1 *
+                Math.ceil(
+                    (this.level / (250 + this.level)) *
+                        10 *
+                        this.data.multiplier *
+                        Math.max(1, bonusMultiplier)
+                )
+            );
+        }
+    }
+
+    getDescription(): string {
+        if (this.data.description.includes("}x")) {
+            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+        }
+        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+    }
+}
+
+export class MonumentUnlock {
+    unlocked: boolean = false;
+    constructor(public index: number, public data: MonumentUnlockModel) { }
+}
+
+export class Monument {
+    hours: number = 0;
+    bonuses: MonumentBonus[] = [];  
+    unlocks: MonumentUnlock[] = [];
+
+    constructor(
+        public index: number,
+        public name: string,
+        public bonusesData: MonumentBonusModel[],
+        public unlocksData: MonumentUnlockModel[],
+    ) { 
+        this.bonusesData.forEach(bonus => {
+            this.bonuses.push(new MonumentBonus(bonus.index, bonus, this.index));
+        })
+        this.unlocksData.forEach(unlock => {
+            this.unlocks.push(new MonumentUnlock(unlock.index, unlock));
+        })
+    }
+}
+
+export class Monuments {
+    monuments: Record<string, Monument> = {}
+    constructor() {
+        const data = initMonumentRepo();
+        data.forEach(monument => {
+            this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+        })
+    }
+}
+
+export class BellImprovement {
+    level: number = 0;
+
+    constructor(public index: number, public data: BellImprovementModel) { }
+}
+
+export class BellBonus {
+    level: number = 0;
+
+    constructor(public index: number, public data: BellBonusModel) { }
+
+ /*    if ("BellUpgAfford" == e)
+        return (
+            0 == t
+                ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Money")), (e.h.HoleozDN = s))
+                : 1 == t
+                  ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][3]), (e.h.HoleozDN = s))
+                  : 2 == t
+                    ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Gaming")[0]), (e.h.HoleozDN = s))
+                    : 3 == t
+                      ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][14]), (e.h.HoleozDN = s))
+                      : 4 == t
+                        ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Divinity")[39]), (e.h.HoleozDN = s))
+                        : 5 == t && ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][25]), (e.h.HoleozDN = s)),
+            c.asNumber(a.engine.getGameAttribute("DNSM").h.HoleozDN) >= n._customBlock_Holes("BellCosts", t, 0) ? 1 : 0
+        );
+    if ("BellCosts" == e)
+        return 0 == t
+            ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.25, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
+            : 2 == t
+              ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.5, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
+              : c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.1, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]));
+    if ("BellBonuss" == e) return c.asNumber(a.engine.getGameAttribute("Holes")[17][0 | t]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[59][Math.round(2 * t + 1)]); */
+
+    getBonus(): number {
+        return this.level * parseFloat(this.data.value);
+    }
+
+    getDescription(): string {
+        if (this.data.description.includes("}x")) {
+            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+        }
+        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+    }
+}
+
+
+
+
+export class Bell {
+    // TODO: Improvement logic / costs / speed / exp per hour etc not done.
+    improvements: BellImprovement[] = [];
+    bonuses: BellBonus[] = [];
+    // TODO: Think if we need bell actions.
+    
+    constructor() { 
+        const improvementData = initBellImprovementRepo();
+        improvementData.forEach(improvement => {
+            this.improvements.push(new BellImprovement(improvement.index, improvement.data));
+        })
+        const bonusData = initBellBonusRepo();
+        bonusData.forEach(bonus => {
+            this.bonuses.push(new BellBonus(bonus.index, bonus.data));
+        })
+    }
+}
+
+export class ResourceCavren {
+    layer: number = 0;
+    resourceExtracted: number = 0;
+    efficiencyType: string = "";
+
+    constructor(public index: number, public name: string, public resource: string) {
+        switch(resource) {
+            case "Ores":
+                this.efficiencyType = "Mining";
+                break;
+            case "Bugs":
+                this.efficiencyType = "Catching";
+                break;
+            case "Logs":
+                this.efficiencyType = "Chopping";
+                break;
+            default:
+                this.efficiencyType = "";
+                break;
+        }
+     }
+}
+
+export class ResourceCavrens {
+    cavrens: Record<string, ResourceCavren> = {
+        "Motherload": new ResourceCavren(0, "Motherload", "Ores"),
+        "The Hive": new ResourceCavren(1, "The Hive", "Bugs"),
+        "Evertree": new ResourceCavren(2, "Evertree", "Logs"),
+
+    }
+}
+
+export class HarpString {
+    level: number = 0;
+    unlocked: boolean = false;
+    constructor(public index: number, public data: HarpStringModel) { }
+
+    getBonus(): number {
+        return 0;
+    }
+
+    getDescription(): string {
+        if (this.data.description.includes("}x")) {
+            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+        }
+        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+    }
+}
+
+export class Harp {
+    notes: { name: string, index: number, current: number }[] = [];
+    strings: HarpString[] = [];
+    stringCount = 0;
+
+    constructor() { 
+        const harpNotes = initHarpNotesRepo();
+        harpNotes.forEach(note => {
+            this.notes.push({ name: note.data.noteName, index: note.index, current: 0 });
+        })
+        const harpStrings = initHarpStringsRepo();
+        harpStrings.forEach(string => {
+            this.strings.push(new HarpString(string.index, string.data));
+        })
+    }
+
+    parse(holeData: number[][]): void {
+        const noteData = holeData[9].slice(10, 20);
+        this.notes.forEach((note, index) => {
+            note.current = noteData[index];
+        })
+
+        const stringData = holeData[19];
+        this.strings.forEach((string, index) => {
+            string.level = stringData[2 * index];
+            // TODO: Verify this.
+            string.unlocked = string.level > 0;
+        })
+    }
+}
+
+
 
 export class Hole extends Domain {
     // Raw
@@ -84,8 +658,15 @@ export class Hole extends Domain {
     wishes: Wish[] = Wish.fromBase(initLampWishRepo());
     majiks = new Majiks();
     schematics: Schematic[] = Schematic.fromBase(initHoleBuildingRepo());
+    studies: Study[] = Study.fromBase(initStudyRepo());
+    measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
+    monuments: Monuments = new Monuments();
+    bell: Bell = new Bell();
+    well: Well = new Well();
+    resourceCavrens = new ResourceCavrens();
+    harp: Harp = new Harp();
     // TODO: 
-    // Well
+    // Well - DONE?
     // Caverns
     // Engineer - DONE?
     // Bravery
@@ -93,6 +674,21 @@ export class Hole extends Domain {
     // Wishes - DONE?
     // Harp?
     // Measurement?
+
+    // Get the bonus for a specific schematic by index
+    getSchematicBonus(schematicIndex: number, baseMultiplier: number = 1): number {
+        const schematic = this.schematics.find(s => s.index === schematicIndex);
+        return schematic?.getBonus(baseMultiplier) || 0;
+    }
+
+    /**
+     * Get study bonus
+     * @param studyIndex - Index of the study to get bonus for
+     */
+    getStudyBolaiaBonuses(studyIndex: number): number {
+        const study = this.studies.find(s => s.index === studyIndex);
+        return study?.getBonus() || 0;
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -124,14 +720,17 @@ export class Hole extends Domain {
         // Parse cosmo upgrades based on their type
         hole.majiks.HoleUpgrades.forEach((upgrade, index) => {
             upgrade.level = holeData[4][index];
+            upgrade.unlocked = upgrade.level > 0;
         });
 
         hole.majiks.VillageUpgrades.forEach((upgrade, index) => {
             upgrade.level = holeData[5][index];
+            upgrade.unlocked = upgrade.level > 0;
         }); 
 
         hole.majiks.IdleonUpgrades.forEach((upgrade, index) => {
             upgrade.level = holeData[6][index];
+            upgrade.unlocked = upgrade.level > 0;
 
             if (upgrade.data.name == "Pocket_Divinity") {
                 const pocketUpgrade = upgrade as PocketDivinityUpgrade;
@@ -148,76 +747,97 @@ export class Hole extends Domain {
             wish.wishCount = holeData[21][wish.index];
         });
 
+        
+        hole.studies.forEach(study => {
+            study.level = holeData[26] ? holeData[26][study.index] || 0 : 0;
+            study.unlocked = hole.villagers[VillagerIndex.Bolai].level > study.index;
+        });
+
         hole.schematics.forEach(schematic => {
             schematic.unlocked = holeData[13][schematic.index] == 1;
+            
+            // Populate data references for bonus calculations
+            schematic.sedimentMulti = holeData[8] || [];
+            schematic.wellSediment = holeData[9] || [];
+            schematic.extraCalculations = holeData[11] || [];
+            schematic.bellImprovementMethods = holeData[16] || [];
+            
+            // Populate study bonus for sediment calculation
+            schematic.studyBolaiaBonuses = hole.getStudyBolaiaBonuses(0);
         });
+
+        hole.measurements.forEach(measurement => {
+            measurement.level = holeData[22] ? holeData[22][measurement.index] || 0 : 0;
+            measurement.unlocked = hole.villagers[VillagerIndex.Minau].level > measurement.index;
+            
+            measurement.gloomieKills = holeData[11][28] || 0;
+            measurement.golemKills = holeData[11][63] || 0;            
+            // Sum all studies for studiesDone
+            measurement.studiesDone = hole.studies.reduce((sum, value) => sum + (value.level || 0), 0);
+            // Cosmo Bonus
+            measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.data.name == "Lengthmeister")?.getBonus() || 0;
+        });
+
+        // Monument Jazz
+        const braveryMonument = hole.monuments.monuments["Bravery"];
+        braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
+
+        const justiceMonument = hole.monuments.monuments["Justice"];
+        justiceMonument.hours = holeData[14][2 * justiceMonument.index] || 0;
+            
+        const wisdomMonument = hole.monuments.monuments["Wisdom"];
+        wisdomMonument.hours = holeData[14][2 * wisdomMonument.index] || 0;
+
+        [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
+            monument.unlocks.forEach(unlock => {
+                unlock.unlocked = monument.hours > unlock.data.hours_required;
+            });
+            monument.bonuses.forEach(bonus => {
+                bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
+                bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.data.name == "Monumental Vibes")?.getBonus() || 0;
+                bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
+            });
+        });
+
+        // Bell 
+        hole.bell.improvements.forEach(improvement => {
+            improvement.level = holeData[16][improvement.index] || 0;
+        });
+        hole.bell.bonuses.forEach(bonus => {
+            bonus.level = holeData[17][bonus.index] || 0;
+        });
+
+        // Resource Cavrens
+        // TODO: Calculate required efficiency, and required resource for next layer.
+        Object.entries(hole.resourceCavrens.cavrens).forEach(([_, cavren]) => {
+            cavren.layer = holeData[11][cavren.index * 2 + 1] || 0;
+            cavren.resourceExtracted = holeData[11][cavren.index * 2] || 0;
+        });
+
+        hole.well.parse(hole, holeData);
+        hole.harp.parse(holeData);
     }
 }
 
 export const updateHole = (data: Map<string, any>) => {
+    const hole = data.get("hole") as Hole;
+    const slab = data.get("slab") as Slab;
+    const taskboard = data.get("taskboard") as TaskBoard;
+    const tome = data.get("tome") as Tome;
+    const farming = data.get("farming") as Farming;
+    const deathnote = data.get("deathnote") as Deathnote;
+
+    // Update measurements with various cross domain data
+    hole.measurements.forEach(measurement => {
+        measurement.slabItems = slab.rawObtainedCount;
+        measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
+        // TODO: Tome score isn't correct right now, need to update it.
+        measurement.tomeScore = tome.getHighestScore();
+        measurement.cropsCount = farming.discoveredCrops;
+        measurement.accountLevel = tome.totalAccountLevel;
+        // TODO: Make this less messy one day, for now should be fine.
+        measurement.allSkillLevel = parseInt(tome.lines[11].getPlayerCurrentValueDisplay(0));
+        // TODO: This doesn't work on load, investigate why.
+        measurement.deathnotePts = deathnote.getTotalRank();
+    });
 }
-
-
-// 0	Cavern number each character is currently in	All of the Caverns are within a single Map. This subnumber is used to track which Cavern their AFK time should apply to. In this example, CavernIndex of -1 means Camp. CavernIndex of 0 means The Well, etc. 	List of ints	12	[3,8,8,3,8,8,3,3,8,9,-1,-1	[3,-1,3,3,3,3,3,3,3,3,-1,-1],			
-// 1	Villager levels	"The completed levels of the Villagers, with placeholders for future Villagers. The order matches the UI for the first 4 villagers at least.
-// 0 = Explorer, 1 = Engineer, 2 = Bonuses, 3 = Measure"	List of ints	8	[10,17,17,9,0,0,0,0	[5,5,2,0,0,0,0,0],			
-// 2	Villagers current exp	Each level starts from 0. Levels are NOT redeemed until you visit Camp and open the Campfire menu. This has potential for a dashboard alert, current exp >= required exp. Values are floats but may eventually turn into strings if large enough.	List of floats, maybe strings	8	[2225588.2996061645,47114766.27550666,3267048.2266837177,39232233.31780148,0,0,0,0,0,0,0,0	"[34684.61688211596,
-// 33983.523391658644,
-// 246.07954861113993,
-// 0,0,0,0,0,0,0,0,0]"			
-// 3	Opals invested per Villager	Same order as above, but weirdly this is 12 long instead of 8?	List of ints	12	[1,8,40,80,0,0,0,0,0,0,0,0	[12,10,1,0,0,0,0,0,0,0,0,0],			
-// 4	Hole Majiks		List of ints	9	[4,5,3,0,0,0,0,0,0	[1,0,0,0,0,0,0,0,0],			
-// 5	Village Majiks	Total levels, including Enhancements	List of ints	12	[5,4,1,4,0,0,0,0,0,0,0,0	[5,4,1,0,0,0,0,0,0,0,0,0],			
-// 6	IdleOn Majiks		List of ints	12	[1,1,1,0,0,0,0,0,0,0,0,0	[0,0,0,0,0,0,0,0,0,0,0,0],			
-// 7	Opals found per cavern	No placeholder for camp	List of ints	30	[12,21,12,8,19,5,3,18,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	[4,5,10,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 8	Well Bar expansions	"Number of times each sediment bar has been expanded
-// 14 = max width on the screen"	List of ints	10	[48,47,43,36,29,24,16,12,8,5	[8,8,5,0,0,0,0,0,0,0],			
-// 9	Well Sediment owned	Positive = owned, negative = locked / rock layer	List of ints and floats	9	[16869814234.047375,11258225901.222668,19279089806.195732,1500914595.8708072,3463180631.2884607,2340218817.137407,1865184294.8938458,9465508536.724354,4944961417.633785,5428214084.536194,86898274396.69736,1034411498317.0394,60012137960.20055,1034649865950.0394,18864892308.489395,1410554820218.0398,123522752026.00372,255710655971.1084,1701590889829.1335,1035313547608.0394	"[329.5831455332012,
-// 680.8759802643383,
-// 852.4456753647637,
-// -9000,
-// -125000,
-// -1500000,
-// -20000000,
-// -100000000,
-// -500000000,
-// -2000000000],"			
-// 10	Well Bucket Targets	"Might be a combined use list. First ~10 should be Well Bucket targets
-// 0 = not collecting, 1 = gravel, 2 = goldust, etc."	List of ints	60	[0,1,2,3,4,5,6,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	[3,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 11	Well's Opal cost, Motherlode's OreREQ and Efficiency	"0 = ores mined on current Motherlode layer
-// 1 = ore layers destroyed
-// 2, 3 for bugs
-// 4, 5 for logs
-// 6, 7 for fish
-// 8 = ???
-// 9 = used in calc for WellOpal_cost formula, but it is just the number of completed opal trades duplicated from Holes[7][0]"			[6328,21,156,18,0,0,0,0,831307.1845561796,12,1,65783.85399961287,1044908.6029952243,0,0,0,0,0,1000,1,9,7,721.0392389281558,1,4,5,11,774499993.2464428,2435153672.9658065,3,0,1,11029503043,277,442,424,419,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	[4602464437,5,0,0,0,0,0,0,282490.9266846729,4,1,15793.200000008595,0,0,0,0,0,0,1000,1,0,0,0,0,0,7,0,0,0,0,0,0,4661798426,277,442,424,419,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 12	Dawg Den Amplifier levels	These can be reset any time of course, but this tracks current levels	List of ints	8	[100,60,7,100,30,0,0,0	[69,0,0,0,0,0,0,0],			
-// 13	Engineer Schematics	0 = unpurchased, 1 = purchased			[1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	[1,1,1,1,1,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 14	Bravery Monument	"0 = Bravery Hours, 1 = Bravery layers broken
-// I assume this will repeat, 2 indexes per future Monument
-// 12/2 = probably 6 monuments"	List of ints	12	[2224,5,0,0,0,0,0,0,0,0,0,0	"[90,2,
-// 0,0,
-// 0,0,
-// 0,0,
-// 0,0,
-// 0,0],"			
-// 15	Bravery Bonuses / Rewards	"Like the above, I assume this huge list will contain future Monument upgrades too.
-// 60/6 = 10 upgrades per Monument"	List of ints	60	[426,159,12,642,105,120,11,84,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	"[0,5,0,5,0,0,0,0,0,0,
-// 0,0,0,0,0,0,0,0,0,0,
-// 0,0,0,0,0,0,0,0,0,0,
-// 0,0,0,0,0,0,0,0,0,0,
-// 0,0,0,0,0,0,0,0,0,0,
-// 0,0,0,0,0,0,0,0,0,0],"			
-// 16	Bell Improvement Methods	These are unlocked by Cleaning the Bell	List of ints	12	[186,174,277,192,143,0,0,0,0,0,0,0	[173,0,0,0,0,0,0,0,0,0,0,0],			
-// 17	Bell Ring levels	"First 4 are Bell Upgrades from Ringing
-// 0 = Bucket Rate, 1 = Villager EXP,
-// 2 =  Harp Notes, 3 = Daily Lamp Wishes"	List of ints	12	[96,114,116,76,0,0,0,0,0,0,0,0	[0,1,0,1,0,0,0,0,0,0,0,0],			
-// 18	Bell charges	"0 = Ring Charge, 1 = Ring Uses
-// 2 = Ping Charge, 3 = Ping Uses 
-// 4 = Clean Charge, 5 = Clean Uses
-// 6 = Renew Charge, 7 = Renew Uses"	List of ints and floats		[2422265.7800254133,218,61152156.407799155,19,20321.91255491933,5,134.88639999504113,1	[1.6094111111109624,2,35.0450000000012,1,0.005,0,0.006111111111111111,0],			
-// 19			List of ints		[94,33202180.450669177,90,16467382.601412607,89,13106125.654141566,90,11910340.52459144,88,14278822.883559888,92,432625.51712662727,0,0,0,0,0,0,0,0	[1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 20			List of ints		[1,3,4,4,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 21	Wishes Used	Numbers of times each wish has been used. This value can essentially be used as a level, but is used in the code to track the cost of the next Wish	List of ints		[4,2,3,0,1,0,0,0,0,0,0,0,0,0,0	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 22	Measurement buff levels	Levels from resources invested into Measurements	List of ints		[136,166,132,157,150,122,148,106,153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],			
-// 23	Parallel Villagers in Gem Shop	Tracks which Villager was purchased in Gem Shop for Parallel Villagers	List of ints		[1,1,1,1,0,0,0,0]	[1,1,1,1,0,0,0,0],			

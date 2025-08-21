@@ -5,5 +5,6 @@ export interface CosmoUpgradeModel {
     zero: number,
     name: string,
     desc: string,
-    cosmoType: CosmoTypeEnum
+    cosmoType: CosmoTypeEnum,
+    maxEnhance: number
 }
