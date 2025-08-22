@@ -47,6 +47,11 @@ export class Wish {
     static fromBase(data: LampWishBase[]) {
         return data.map(d => new Wish(d.index, d.data));
     }
+
+    getBonus(): number {
+        // TODO: Do the real one, this is just a placeholder.
+        return this.data.x1 * this.wishCount;
+    }
 }
 
 export class CosmoUpgrade {
@@ -690,6 +695,21 @@ export class Hole extends Domain {
         return study?.getBonus() || 0;
     }
 
+    getMonumentBonus(monumentName: string, bonusIndex: number): number {
+        const monument = this.monuments.monuments[monumentName];
+        return monument.bonuses.find(bonus => bonus.index == bonusIndex)?.getBonus() ?? 0;
+    }
+
+    getMonumentBonusByText(text: string): number {
+        const allBonuses = Object.values(this.monuments.monuments).flatMap(monument => monument.bonuses);
+        return allBonuses.reduce((sum, bonus) => {
+            if (bonus.data.description.includes(text)) {
+                return sum + bonus.getBonus();
+            }
+            return sum;
+        }, 0);
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "Holes", perPlayer: false, default: [] }
@@ -815,6 +835,7 @@ export class Hole extends Domain {
         });
 
         hole.well.parse(hole, holeData);
+        // TODO: Finish this, missing information
         hole.harp.parse(holeData);
     }
 }

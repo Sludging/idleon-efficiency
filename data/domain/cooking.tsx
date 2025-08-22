@@ -24,6 +24,9 @@ import { Arcade } from "./arcade";
 import { Sneaking } from "./world-6/sneaking";
 import { StarSigns } from "./starsigns";
 import { IslandExpeditions } from './islandExpedition';
+import { UpgradeVault } from "./upgradeVault";
+import { Hole } from "./world-5/hole/hole";
+import { Votes } from "./world-2/votes";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -550,6 +553,9 @@ export const updateCooking = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const starSigns = data.get("starsigns") as StarSigns;
     const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const hole = data.get("hole") as Hole;
+    const votes = data.get("votes") as Votes;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -602,6 +608,8 @@ export const updateCooking = (data: Map<string, any>) => {
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
 
     const bestbloodMarrowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 59)?.getBonus() ?? 0)));
+    // TODO: Talent 146 (Apocalypse Chow) can be boosted by voidwalker, we aren't handling that yet.
+    const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 146)?.getBonus() ?? 0)));
     const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
     const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
 
@@ -613,6 +621,14 @@ export const updateCooking = (data: Map<string, any>) => {
         const killsOver100M = Array.from(lastIndexBloodBerserker.killInfo.entries()).reduce((sum, [_, value]) => sum += value >= 1e8 ? 1 : 0, 0);
         superChowBonus = Math.pow(1.1, killsOver100M);
     }
+
+    const upgradeVaultBonus = upgradeVault.getBonusForId(54);
+    const holeSchematic56 = hole.getSchematicBonus(56);
+    // TODO: Fix lamp bonus to be correct.
+    const holeLampBonus = hole.wishes.find(wish => wish.index == 0)?.getBonus() ?? 0;
+    const holeBravey2Bonus = hole.getMonumentBonus("Bravery", 2);
+    const votingBonus13 = votes.getCurrentBonus(13);
+    // TODO: Include currently unused bonuses into the math.
 
     // Fire speed
     const fireVialBonus = alchemy.getVialBonusForKey("RecCook");
