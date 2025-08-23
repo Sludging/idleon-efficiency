@@ -106,20 +106,48 @@ class IdleonDebugServer {
         console.log('[Server] Starting injection process...');
         
         // Connect to CDP
+        console.log(`[DEBUG] Connecting to CDP on port ${this.debugPort}...`);
         const targets = await CDP.List({ port: this.debugPort });
+        console.log(`[DEBUG] Found ${targets.length} CDP targets`);
         if (targets.length === 0) {
             throw new Error(`No targets found on debug port ${this.debugPort}. Make sure game is running with --remote-debugging-port=${this.debugPort}`);
         }
 
+        console.log(`[DEBUG] Connecting to target: ${targets[0].title || targets[0].url}`);
         this.cdpClient = await CDP({ target: targets[0], port: this.debugPort });
         const { Network, Runtime, Page } = this.cdpClient;
         
+        console.log('[DEBUG] Enabling CDP domains...');
         await Network.enable();
         await Runtime.enable();
         await Page.enable();
         await Page.setBypassCSP({ enabled: true });
+        
+        // Enable console API to catch JavaScript errors
+        await Runtime.enable();
+        
+        // Listen for JavaScript console messages
+        Runtime.consoleAPICalled((params) => {
+            const message = params.args.map(arg => arg.value || arg.description || '[object]').join(' ');
+            if (params.type === 'error') {
+                console.log(`[DEBUG] JavaScript Console Error: ${message}`);
+            } else if (message.includes('[INJECTION]')) {
+                console.log(`[DEBUG] ${message}`);
+            }
+        });
+        
+        // Listen for JavaScript exceptions
+        Runtime.exceptionThrown((params) => {
+            console.log(`[DEBUG] JavaScript Exception: ${params.exceptionDetails.text}`);
+            if (params.exceptionDetails.exception) {
+                console.log(`[DEBUG] Exception details: ${JSON.stringify(params.exceptionDetails, null, 2)}`);
+            }
+        });
+        
+        console.log('[DEBUG] CDP domains enabled successfully with error monitoring');
 
         // Set up request interception
+        console.log('[DEBUG] Setting up request interception for *N.js*...');
         await Network.setRequestInterception({
             patterns: [{
                 urlPattern: '*N.js*',
@@ -127,67 +155,53 @@ class IdleonDebugServer {
                 interceptionStage: 'HeadersReceived'
             }]
         });
+        console.log('[DEBUG] Request interception configured');
 
         // Set up injection handler
+        console.log('[DEBUG] Setting up injection promise with 30s timeout...');
         const injectionPromise = new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
+                console.log('[DEBUG] Injection timeout reached!');
                 reject(new Error('Injection timeout after 30 seconds'));
             }, 30000);
 
             Network.requestIntercepted(async ({ interceptionId, request }) => {
+                console.log(`[DEBUG] Intercepted request: ${request.url}`);
                 try {
                     if (!this.injected && request.url.includes('N.js')) {
+                        console.log('[DEBUG] Found N.js request, starting injection...');
                         this.injected = true;
                         clearTimeout(timeout);
                         
+                        console.log('[DEBUG] Getting response body...');
                         const response = await Network.getResponseBodyForInterception({ interceptionId });
+                        console.log(`[DEBUG] Response body base64 encoded: ${response.base64Encoded}`);
                         const originalBody = Buffer.from(response.body, 'base64').toString();
+                        console.log(`[DEBUG] Original body length: ${originalBody.length} characters`);
                         
+                        console.log('[DEBUG] Searching for ApplicationMain pattern...');
                         const injectionRegex = /(\w+)\.ApplicationMain\s*?=/;
                         const match = injectionRegex.exec(originalBody);
+                        console.log(`[DEBUG] ApplicationMain pattern found: ${match ? 'YES' : 'NO'}`);
                         
                         if (!match) {
+                            console.log('[DEBUG] ApplicationMain pattern not found, aborting injection');
                             await Network.continueInterceptedRequest({ interceptionId });
                             reject(new Error('ApplicationMain pattern not found'));
                             return;
                         }
                         
                         const varName = match[1];
+                        console.log(`[DEBUG] Found ApplicationMain variable: ${varName}`);
                         
-                        // Create convenience helpers for easy access
-                        const convenienceHelpers = `
-                            window.__idleon_cheats__=${varName};
-                            window.idleon = {
-                                engine: ${varName}["com.stencyl.Engine"].engine,
-                                scripts: ${varName}["scripts.ActorEvents_124"],
-                                getAttr: function(name) { return this.engine.getGameAttribute(name); },
-                                getDNSM: function(path) { 
-                                    const dnsm = this.getAttr("DNSM").h;
-                                    return path ? path.split('.').reduce((obj, key) => obj && obj[key], dnsm) : dnsm;
-                                },
-                                getTalent: function(char, talentId) { return this.scripts._customBlock_GetTalentNumber(char, talentId); },
-                                getPlayer: function() { return this.getAttr("Player"); },
-                                getHP: function() { return this.getAttr("PlayerHP"); },
-                                getClass: function() { return this.getAttr("CharacterClass"); },
-                                getMap: function() { return this.getAttr("CurrentMap"); },
-                                help: function() { 
-                                    return {
-                                        engine: "Main game engine object",
-                                        scripts: "Script object with _customBlock_ functions",
-                                        getAttr: "Get any game attribute: getAttr('PlayerHP')",
-                                        getDNSM: "Get DNSM data: getDNSM() or getDNSM('BoxRewards.cooldown')",
-                                        getTalent: "Get talent level: getTalent(characterIndex, talentId)",
-                                        getPlayer: "Get player data",
-                                        getHP: "Get player HP",
-                                        getClass: "Get character class",
-                                        getMap: "Get current map",
-                                        raw: "Access raw game object: window.__idleon_cheats__"
-                                    };
-                                }
-                            };
-                        `;
+                        // Just inject the basic object exposure - helpers come later
+                        console.log('[DEBUG] Creating basic object exposure...');
+                        const basicInjection = `window.__idleon_cheats__=${varName};console.log("[INJECTION] Object exposed:", typeof window.__idleon_cheats__);`;
                         
-                        const injectedBody = originalBody.replace(match[0], `${convenienceHelpers}${match[0]}`);
+                        console.log('[DEBUG] Performing basic code injection...');
+                        const injectedBody = originalBody.replace(match[0], `${basicInjection}${match[0]}`);
+                        console.log(`[DEBUG] Injected body length: ${injectedBody.length} characters`);
+                        console.log(`[DEBUG] Length difference: ${injectedBody.length - originalBody.length} characters`);
                         
                         const contentLength = Buffer.byteLength(injectedBody, 'utf-8');
                         const headers = [
@@ -223,13 +237,24 @@ class IdleonDebugServer {
         });
 
         // Trigger page reload to catch N.js
+        console.log('[DEBUG] Reloading page to trigger N.js interception...');
         await Page.reload({ ignoreCache: true });
+        console.log('[DEBUG] Page reload completed');
         
         // Wait for injection
+        console.log('[DEBUG] Waiting for injection promise to resolve...');
         await injectionPromise;
+        console.log('[DEBUG] Injection promise resolved');
         
         // Wait for game context to be ready
+        console.log('[DEBUG] Waiting for game context to be ready...');
         await this.waitForGameContext();
+        console.log('[DEBUG] Game context ready');
+        
+        // Now add convenience helpers after the game is loaded
+        console.log('[DEBUG] Adding convenience helpers after game load...');
+        await this.addConvenienceHelpers();
+        console.log('[DEBUG] Convenience helpers added');
         
         this.gameReady = true;
     }
@@ -237,20 +262,78 @@ class IdleonDebugServer {
     async waitForGameContext(timeout = 30000) {
         const { Runtime } = this.cdpClient;
         const start = Date.now();
+        console.log(`[DEBUG] Waiting for game context (${timeout}ms timeout)...`);
         
+        let attempts = 0;
         while (Date.now() - start < timeout) {
+            attempts++;
             try {
+                console.log(`[DEBUG] Checking game context (attempt ${attempts})...`);
+                
+                // Test basic window object first
+                const windowTest = await Runtime.evaluate({
+                    expression: 'typeof window',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] typeof window: ${windowTest.result ? windowTest.result.value : 'undefined'}`);
+                
+                // Test frames
+                const framesTest = await Runtime.evaluate({
+                    expression: 'typeof window.frames',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] typeof window.frames: ${framesTest.result ? framesTest.result.value : 'undefined'}`);
+                
+                // Test frames[0]
+                const frames0Test = await Runtime.evaluate({
+                    expression: 'typeof window.frames[0]',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] typeof window.frames[0]: ${frames0Test.result ? frames0Test.result.value : 'undefined'}`);
+                
+                // Test our injected object in both contexts
+                const cheatsMainTest = await Runtime.evaluate({
+                    expression: 'typeof window.__idleon_cheats__',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] typeof window.__idleon_cheats__ (main): ${cheatsMainTest.result ? cheatsMainTest.result.value : 'undefined'}`);
+                
+                const cheatsFrameTest = await Runtime.evaluate({
+                    expression: 'window.frames[0] ? typeof window.frames[0].__idleon_cheats__ : "no-frame"',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] typeof window.frames[0].__idleon_cheats__ (frame): ${cheatsFrameTest.result ? cheatsFrameTest.result.value : 'undefined'}`);
+                
+                // Test if game engine exists in either context
+                const engineMainTest = await Runtime.evaluate({
+                    expression: 'window.__idleon_cheats__ && window.__idleon_cheats__["com.stencyl.Engine"] ? "main-exists" : "main-missing"',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] Stencyl Engine (main): ${engineMainTest.result ? engineMainTest.result.value : 'undefined'}`);
+                
+                const engineFrameTest = await Runtime.evaluate({
+                    expression: 'window.frames[0] && window.frames[0].__idleon_cheats__ && window.frames[0].__idleon_cheats__["com.stencyl.Engine"] ? "frame-exists" : "frame-missing"',
+                    returnByValue: true
+                });
+                console.log(`[DEBUG] Stencyl Engine (frame): ${engineFrameTest.result ? engineFrameTest.result.value : 'undefined'}`);
+                
+                // Check both contexts for readiness
                 const result = await Runtime.evaluate({
-                    expression: 'window.frames && window.frames[0] && typeof window.frames[0].__idleon_cheats__ === "object"',
+                    expression: '(window.__idleon_cheats__ && window.__idleon_cheats__["com.stencyl.Engine"] && window.__idleon_cheats__["com.stencyl.Engine"].engine) || (window.frames[0] && window.frames[0].__idleon_cheats__ && window.frames[0].__idleon_cheats__["com.stencyl.Engine"] && window.frames[0].__idleon_cheats__["com.stencyl.Engine"].engine)',
                     returnByValue: true
                 });
                 
+                console.log(`[DEBUG] Game context check result: ${result.result ? result.result.value : 'undefined'}`);
+                
                 if (result.result && result.result.value) {
+                    console.log('[DEBUG] Game context is ready!');
                     return;
                 }
                 
+                console.log('[DEBUG] Game context not ready, waiting 1s...');
                 await new Promise(r => setTimeout(r, 1000));
             } catch (error) {
+                console.log(`[DEBUG] Error checking game context: ${error.message}`);
                 await new Promise(r => setTimeout(r, 1000));
             }
         }
@@ -309,7 +392,17 @@ class IdleonDebugServer {
         const helpersCode = `
             window.frames[0].idleon = {
                 engine: window.frames[0].__idleon_cheats__["com.stencyl.Engine"].engine,
-                scripts: window.frames[0].__idleon_cheats__["scripts.ActorEvents_124"],
+                scripts: window.frames[0].__idleon_cheats__["scripts.ActorEvents_124"], // Legacy access to main script
+                allScripts: {
+                    // Direct access to all ActorEvents objects
+                    get ActorEvents_12() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_12"]; },
+                    get ActorEvents_124() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_124"]; },
+                    get ActorEvents_148() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_148"]; },
+                    get ActorEvents_189() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_189"]; },
+                    get ActorEvents_266() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_266"]; },
+                    get ActorEvents_345() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_345"]; },
+                    get ActorEvents_579() { return window.frames[0].__idleon_cheats__["scripts.ActorEvents_579"]; }
+                },
                 getAttr: function(name) { return this.engine.getGameAttribute(name); },
                 getDNSM: function(path) { 
                     try {
@@ -319,6 +412,43 @@ class IdleonDebugServer {
                     } catch(e) { return "DNSM error: " + e.message; }
                 },
                 getTalent: function(char, talentId) { return this.scripts._customBlock_GetTalentNumber(char, talentId); },
+                // Smart function caller - automatically finds the right ActorEvents object
+                callFunction: function(functionName, ...args) {
+                    try {
+                        // Remove _customBlock_ prefix if provided
+                        const cleanName = functionName.startsWith('_customBlock_') ? functionName : '_customBlock_' + functionName;
+                        
+                        // Search through all ActorEvents objects
+                        for (const actorKey of Object.keys(this.allScripts)) {
+                            const actor = this.allScripts[actorKey];
+                            if (actor && typeof actor[cleanName] === 'function') {
+                                return actor[cleanName](...args);
+                            }
+                        }
+                        
+                        return "Function not found: " + cleanName;
+                    } catch(e) { 
+                        return "Function call error: " + e.message; 
+                    }
+                },
+                // Get function location info
+                findFunction: function(functionName) {
+                    try {
+                        const cleanName = functionName.startsWith('_customBlock_') ? functionName : '_customBlock_' + functionName;
+                        const locations = [];
+                        
+                        for (const actorKey of Object.keys(this.allScripts)) {
+                            const actor = this.allScripts[actorKey];
+                            if (actor && typeof actor[cleanName] === 'function') {
+                                locations.push(actorKey);
+                            }
+                        }
+                        
+                        return locations.length > 0 ? locations : "Function not found: " + cleanName;
+                    } catch(e) { 
+                        return "Search error: " + e.message; 
+                    }
+                },
                 getPlayer: function() { 
                     try {
                         const player = this.getAttr("Player");
@@ -468,8 +598,16 @@ class IdleonDebugServer {
                 },
                 help: function() { 
                     return {
+                        // Core access
                         engine: "Main game engine object",
-                        scripts: "Script object with _customBlock_ functions",
+                        scripts: "Legacy script object (ActorEvents_124 only - 42 functions)",
+                        allScripts: "All ActorEvents objects: allScripts.ActorEvents_266._customBlock_Breeding(...)",
+                        
+                        // Smart function access
+                        callFunction: "Call any function by name: callFunction('GetTalentNumber', char, id)",
+                        findFunction: "Find which ActorEvents contains a function: findFunction('Breeding')",
+                        
+                        // Game data
                         getAttr: "Get any game attribute: getAttr('PlayerHP')",
                         getDNSM: "Get DNSM data keys: getDNSM() or getDNSM('BoxRewards')",
                         safeGetDNSM: "Safer DNSM access: safeGetDNSM('AlchBubbles')",
@@ -478,7 +616,9 @@ class IdleonDebugServer {
                         getPlayerData: "Safe player access: getPlayerData(0) or getPlayerData(0, 'StatueLevels')",
                         getHP: "Get player HP",
                         getClass: "Get character class",
-                        getMap: "Get current map", 
+                        getMap: "Get current map",
+                        
+                        // Discovery tools
                         listScripts: "List ALL _customBlock_ functions (220 total) from all ActorEvents",
                         findScriptObjects: "Find all script-related objects in the game",
                         exploreObject: "Explore object: exploreObject('Player', 1)",

@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-08-23T09:26:16.846Z",
+  "extractions": {
+    "final_cooking_speed": {
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "2.033960867763364e+107",
+        "original": 2.033960867763364e+107
+      },
+      "description": "Final cooking speed result for kitchen 0",
+      "extractedAt": "2025-08-23T09:26:16.897Z"
+    },
+    "starsign_58_bonus": {
+      "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
+      "result": 26.57341500000001,
+      "description": "Star sign 58 (Gordonius Major) cooking speed bonus",
+      "extractedAt": "2025-08-23T09:26:16.901Z"
+    },
+    "meal_cook_vial_bonus": {
+      "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
+      "result": 483.84000000000003,
+      "description": "Alchemy vial bonus for meal cooking",
+      "extractedAt": "2025-08-23T09:26:16.904Z"
+    },
+    "kitchen_0_meal_levels": {
+      "expression": "idleon.getAttr(\"Cooking\")[0][6]",
+      "result": 428,
+      "description": "Kitchen 0 meal levels (this.mealLevels)",
+      "extractedAt": "2025-08-23T09:26:16.913Z"
+    },
+    "kitchen_0_recipe_levels": {
+      "expression": "idleon.getAttr(\"Cooking\")[0][7]",
+      "result": 426,
+      "description": "Kitchen 0 recipe levels (this.recipeLevels)",
+      "extractedAt": "2025-08-23T09:26:16.916Z"
+    },
+    "kitchen_0_luck_levels": {
+      "expression": "idleon.getAttr(\"Cooking\")[0][8]",
+      "result": 387,
+      "description": "Kitchen 0 luck levels (this.luckLevels)",
+      "extractedAt": "2025-08-23T09:26:16.919Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

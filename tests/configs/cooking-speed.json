@@ -1,0 +1,36 @@
+{
+  "description": "Extract cooking speed data for testing getMealSpeed function",
+  "target": "Kitchen 0 meal speed calculation",
+  "extractions": [
+    {
+      "label": "final_cooking_speed",
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
+      "description": "Final cooking speed result for kitchen 0"
+    },
+    {
+      "label": "starsign_58_bonus", 
+      "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
+      "description": "Star sign 58 (Gordonius Major) cooking speed bonus"
+    },
+    {
+      "label": "meal_cook_vial_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
+      "description": "Alchemy vial bonus for meal cooking"
+    },
+    {
+      "label": "kitchen_0_meal_levels",
+      "expression": "idleon.getAttr(\"Cooking\")[0][6]",
+      "description": "Kitchen 0 meal levels (this.mealLevels)"
+    },
+    {
+      "label": "kitchen_0_recipe_levels", 
+      "expression": "idleon.getAttr(\"Cooking\")[0][7]",
+      "description": "Kitchen 0 recipe levels (this.recipeLevels)"
+    },
+    {
+      "label": "kitchen_0_luck_levels",
+      "expression": "idleon.getAttr(\"Cooking\")[0][8]", 
+      "description": "Kitchen 0 luck levels (this.luckLevels)"
+    }
+  ]
+}
