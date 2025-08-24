@@ -23,6 +23,7 @@ import { CropComponentModel } from './model/cropComponentModel';
 import { SummonComponentModel } from './model/summonComponentModel';
 import { SailTreasureComponentModel } from './model/sailTreasureComponentModel';
 import { Tome } from './tome';
+import { UpgradeVault } from './upgradeVault';
 
 export enum CauldronIndex {
     Power = 0,
@@ -350,6 +351,7 @@ export class Vial {
 
     level: number = 0;
     bonusMulitplier: number = 1;
+    vaultBonus: number = 0;
     maxedVials: number = 0;
 
     constructor(id: string, public data: BubbleModel, public vialIndex: number) {
@@ -366,9 +368,11 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
+        const base = (2 * this.maxedVials) + this.vaultBonus;
+        
         return lavaFunc(this.func, this.level, this.x1, this.x2, round)
             * this.bonusMulitplier
-            * (1 + (2 * this.maxedVials) / 100);
+            * (1 + base / 100);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -899,16 +903,25 @@ export function updateAlchemy(data: Map<string, any>) {
     const sailing = data.get("sailing") as Sailing;
     const taskboard = data.get("taskboard") as TaskBoard;
     const rift = data.get("rift") as Rift;
+    const vault = data.get("upgradeVault") as UpgradeVault;
 
-    if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
-        alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
-    }
-
+    const vaultBonus42 = vault.getBonusForId(42);
+    const labBonusActive = lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false;
     const riftVialMastery = rift.bonuses.find(bonus => bonus.name == "Vial Mastery");
-    if (riftVialMastery?.active ?? false) {
-        const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
-        alchemy.vials.forEach(vial => vial.maxedVials = maxVials);
-    }
+    const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
+
+    alchemy.vials.forEach(vial => {
+        // If lab bonus is active, all vials are doubled.
+        if (labBonusActive) {
+            vial.bonusMulitplier = 2;
+        }
+        // If rift mastery is active, all vials are buffed by number of maxed vials.
+        if (riftVialMastery?.active ?? false) {
+            vial.maxedVials = maxVials;
+        }
+        // Vault Bonus 42 buffs vials as well.
+        vial.vaultBonus = vaultBonus42
+    });
 
     if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
         let bubblesToUpgrade = 3;
