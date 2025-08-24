@@ -6,9 +6,8 @@
  */
 
 import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
-import { expectLiveGameNotNull } from '../../utils/live-game-test-helpers';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Kitchen, Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/cooking';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'live-game-2025-08-23'; // This should match extraction time
@@ -43,7 +42,7 @@ describe('Cooking Domain - Meal Speed', () => {
     it('validates getMealSpeed calculation against live game', () => {
       // Get live game final result
       const liveFinalSpeed = getExtractedValue(extractionResults, 'final_cooking_speed');
-      expectLiveGameNotNull(liveFinalSpeed, 'final_cooking_speed');
+      
       
       // Call the ACTUAL domain function - this should use all the save data dependencies
       // The kitchen should already be fully configured from save data

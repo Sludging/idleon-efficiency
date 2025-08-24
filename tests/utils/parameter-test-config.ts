@@ -5,6 +5,8 @@
  * used in domain calculations against live game data.
  */
 
+import { ExtractionResults, getExtractedValue } from "./live-game-data-loader";
+
 export interface ParameterTestSpec {
   /** Unique identifier for the parameter */
   id: string;
@@ -38,7 +40,7 @@ export const validateParameter = (
     domainValue
   };
     // Value equality check
-    expect(liveValue).toMatchLiveGame(domainValue, tolerance)
+    expect(domainValue).toMatchLiveGame(liveValue, tolerance)
 
     result.passed = true;
     result.notes = `✅ ${spec.description}: ${liveValue}`;
@@ -47,7 +49,7 @@ export const validateParameter = (
 
 export const runParameterValidationSuite = (
   specs: Record<string, ParameterTestSpec>,
-  extractionResults: any,
+  extractionResults: ExtractionResults,
   gameData: Map<string, any>,
   tolerance: number = 0.05
 ): ParameterTestResult[] => {
@@ -55,7 +57,7 @@ export const runParameterValidationSuite = (
 
   for (const [key, spec] of Object.entries(specs)) {
     try {
-      const liveValue = extractionResults.extractions[spec.extractionKey]?.result;
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
       const domainValue = spec.domainExtractor(gameData);
       
       const result = validateParameter(spec, liveValue, domainValue, tolerance);
@@ -69,7 +71,7 @@ export const runParameterValidationSuite = (
         passed: false,
         liveValue: 'extraction_failed',
         domainValue: 'extraction_failed',
-        error: `Failed to extract values: ${error instanceof Error ? error.message : String(error)}`
+        error: `${error instanceof Error ? error.message : String(error)}`
       });
     }
   }
