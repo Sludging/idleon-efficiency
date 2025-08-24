@@ -196,7 +196,8 @@ class IdleonDebugServer {
                         
                         // Just inject the basic object exposure - helpers come later
                         console.log('[DEBUG] Creating basic object exposure...');
-                        const basicInjection = `window.__idleon_cheats__=${varName};console.log("[INJECTION] Object exposed:", typeof window.__idleon_cheats__);`;
+                        console.log('[DEBUG] Match: ', match[0]);
+                        const basicInjection = `window.__idleon_cheats__=${varName},`;
                         
                         console.log('[DEBUG] Performing basic code injection...');
                         const injectedBody = originalBody.replace(match[0], `${basicInjection}${match[0]}`);
