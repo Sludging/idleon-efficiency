@@ -227,6 +227,38 @@ export enum KitchenStatus {
     Recipe = 3,
 }
 
+type KitchenSpeedParameters = {
+    starsign58bonus: number,
+    mealCookVialBonus: number,
+    fireflyVialBonus: number,
+    turtleVialBonus: number,
+    summoningWinnerBonus: number,
+    stampBonus: number,
+    meal63Bonus: number,
+    mealCookBonus: number,
+    jewel0Bonus: number,
+    trollCardBonus: number,
+    ceramicCardBonus: number,
+    kitchenEffBonus: number,
+    jewel14Bonus: number,
+    diamonChef: number,
+    achieve225: boolean,
+    achieve224: boolean,
+    atom8Bonus: number,
+    artifact13Bonus: number,
+    totalizerBonus: number,
+    bloodMarrowBonus: number,
+    superChowBonus: number,
+    cropScientistBonus: number,
+    farmingLevel: number,
+    arcadeBonus: number,
+    votingBonus13: number,
+    vaultBonus54: number,
+    holeBravey2Bonus: number,
+    holeSchematic56: number,
+    lampBonus00: number
+}
+
 export class Kitchen {
     mealLevels: number = 0;
     recipeLevels: number = 0;
@@ -252,12 +284,46 @@ export class Kitchen {
     constructor(public index: number) { }
 
     // "CookingSPEED" == d
-    getMealSpeed = (starsign58bonus: number, mealCookVialBonus: number, fireflyVialBonus: number, turtleVialBonus: number, summoningWinnerBonus: number, stampBonus: number, meal63Bonus: number, mealCookBonus: number, jewel0Bonus: number, trollCardBonus: number, ceramicCardBonus: number, kitchenEffBonus: number, jewel14Bonus: number, diamonChef: number, achieve225: boolean, achieve224: boolean, atom8Bonus: number, artifact13Bonus: number, totalizerBonus: number, bloodMarrowBonus: number, superChowBonus: number, cropScientistBonus: number, farmingLevel: number, arcadeBonus: number) => {
+    getMealSpeed = (params: KitchenSpeedParameters) => {
+        const { 
+            bloodMarrowBonus,
+            cropScientistBonus,
+            superChowBonus,
+            meal63Bonus,
+            farmingLevel,
+            diamonChef,
+            atom8Bonus,
+            totalizerBonus,
+            artifact13Bonus,
+            arcadeBonus,
+            turtleVialBonus,
+            mealCookVialBonus,
+            stampBonus,
+            mealCookBonus,
+            starsign58bonus,
+            summoningWinnerBonus,
+            ceramicCardBonus,
+            fireflyVialBonus,
+            jewel0Bonus,
+            trollCardBonus,
+            achieve225,
+            achieve224,
+            kitchenEffBonus,
+            jewel14Bonus,
+            votingBonus13,
+            vaultBonus54,
+            holeBravey2Bonus,
+            holeSchematic56,
+            lampBonus00
+        } = params;
+
         return 10 *
             (1 + bloodMarrowBonus / 100) * 
             Math.max(1, cropScientistBonus) * 
             Math.max(1, superChowBonus) * 
             (1 + (this.richelin ? 2 : 0)) * 
+            (1 + votingBonus13 / 100) *
+            (1 + vaultBonus54 / 100) *
             (1 + meal63Bonus * Math.ceil((farmingLevel + 1) / 50) / 100) *
             Math.max(1, diamonChef) * 
             Math.max(1, atom8Bonus) * 
@@ -271,7 +337,10 @@ export class Kitchen {
             (1 + mealCookBonus / 100) * 
             (1 + starsign58bonus / 100) * 
             (1 + summoningWinnerBonus / 100) * 
+            (1 + holeBravey2Bonus / 100) *
+            Math.max(1 , holeSchematic56) *
             (1 + ceramicCardBonus / 100) * 
+            (1 + lampBonus00 / 100) *
             (1 + fireflyVialBonus / 100) * 
             Math.max(1, jewel0Bonus) * 
             (1 + Math.min(trollCardBonus + (20 * (achieve225 ? 1 : 0) + 10 * (achieve224 ? 1 : 0)), 100) / 100) * 
@@ -641,13 +710,45 @@ export const updateCooking = (data: Map<string, any>) => {
     const arenaBonusActive = breeding.hasBonus(7);
     const islandExpeditionReduction = islandExpeditions.reductionToKitchenCosts;
 
+    const cookingSpeedParameters: KitchenSpeedParameters = {
+        starsign58bonus: starsign58,
+        mealCookVialBonus: mealCookVialBonus,
+        fireflyVialBonus: fireflyVialBonus,
+        turtleVialBonus: turtleVialBonus,
+        summoningWinnerBonus: winnerBonus,
+        stampBonus: stampBonus,
+        meal63Bonus: meal63Bonus,
+        mealCookBonus: mealSpeedBonus,
+        jewel0Bonus: jewel0Bonus,
+        trollCardBonus: trollCardBonus,
+        ceramicCardBonus: ceramicCardBonus,
+        kitchenEffBonus: kitchenEfficientBonus,
+        jewel14Bonus: jewel14Bonus,
+        diamonChef: diamonChef,
+        achieve225: achievements[225].completed,
+        achieve224: achievements[224].completed,
+        atom8Bonus: atomBonus,
+        artifact13Bonus: artifactBonus,
+        totalizerBonus: worshipBonus,
+        bloodMarrowBonus: bestbloodMarrowBonus,
+        superChowBonus: bestapocalypseChowBonus,
+        cropScientistBonus: cropScientistBonus,
+        farmingLevel: farming.farmingLevel,
+        arcadeBonus: arcadeBonus,
+        votingBonus13: votingBonus13,
+        vaultBonus54: upgradeVaultBonus,
+        holeBravey2Bonus: holeBravey2Bonus,
+        holeSchematic56: holeSchematic56,
+        lampBonus00: holeLampBonus
+    }
+
     let totalCookingSpeed = 0;
     let totalCookingSpeedWithoutStarSign = 0;
     let totalCookingSpeedWithSilkrode = 0;
     cooking.kitchens.forEach((kitchen, index) => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
-        kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed(0, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
-        kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed(starsign58*2, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeed = kitchen.getMealSpeed(cookingSpeedParameters);
+        kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed({ ...cookingSpeedParameters, starsign58bonus: 0 });
+        kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed({ ...cookingSpeedParameters, starsign58bonus: cookingSpeedParameters.starsign58bonus * 2 });
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, trollCardBonus, kitchenEfficientBonus, diamonChef, atomBonus, worshipBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 

@@ -115,7 +115,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'talent_enh_146_bonus',
     domainExtractor: (gameData) => {
       const players = gameData.get('players') as Player[];
-      const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 146)?.getBonus() ?? 0)));
+      const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
       return bestapocalypseChowBonus;
     },
   },
@@ -316,7 +316,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'lamp_bonuses_0',
     domainExtractor: (gameData) => {
       const hole = gameData.get("hole") as Hole;
-      const holeLampBonus0 = hole.wishes.find(wish => wish.index == 0)?.getBonus() ?? 0;
+      const holeLampBonus0 = hole.lamp.getBonus(false, 0, 0);
       return holeLampBonus0;
     }
   },
@@ -380,7 +380,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
 describe('Cooking Domain - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
-  let cooking: Cooking;
   
   beforeAll(() => {
     // Load live game extraction results
@@ -390,13 +389,6 @@ describe('Cooking Domain - Parameters', () => {
     // Load matching save data - MUST correspond to the same game state as extraction
     try {
       gameData = loadGameDataFromSave(saveName);
-      
-      // Get fully configured cooking domain
-      cooking = gameData.get('cooking') as Cooking;
-      if (!cooking) {
-        throw new Error('Cooking domain not found in save data');
-      }
-      
     } catch (error: any) {
       throw new Error(`❌ Failed to load save data: ${error.message}`);
     }
@@ -409,7 +401,8 @@ describe('Cooking Domain - Parameters', () => {
       const parameterResults = runParameterValidationSuite(
         cookingParameterSpecs,
         extractionResults,
-        gameData
+        gameData,
+        0.01
       );
       // Ensure we validated at least some parameters
       expect(parameterResults.length).toBeGreaterThan(0);

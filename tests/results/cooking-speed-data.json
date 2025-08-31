@@ -1,45 +1,45 @@
 {
-  "timestamp": "2025-08-24T04:26:25.712Z",
+  "timestamp": "2025-08-30T05:11:44.730Z",
   "extractions": {
     "final_cooking_speed": {
       "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
       "result": {
         "type": "large_number",
-        "value": "2.033960867763364e+107",
-        "original": 2.033960867763364e+107
+        "value": "2.237356954539701e+107",
+        "original": 2.237356954539701e+107
       },
       "description": "Final cooking speed result for kitchen 0",
-      "extractedAt": "2025-08-24T04:26:25.903Z"
+      "extractedAt": "2025-08-30T05:11:44.790Z"
     },
     "starsign_58_bonus": {
       "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
       "result": 26.57341500000001,
       "description": "Star sign 58 (Gordonius Major) cooking speed bonus",
-      "extractedAt": "2025-08-24T04:26:26.307Z"
+      "extractedAt": "2025-08-30T05:11:44.795Z"
     },
     "meal_cook_vial_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
       "result": 483.84000000000003,
       "description": "Alchemy vial bonus for meal cooking",
-      "extractedAt": "2025-08-24T04:26:26.703Z"
+      "extractedAt": "2025-08-30T05:11:44.798Z"
     },
     "kitchen_0_meal_levels": {
       "expression": "idleon.getAttr(\"Cooking\")[0][6]",
       "result": 428,
       "description": "Kitchen 0 meal levels (this.mealLevels)",
-      "extractedAt": "2025-08-24T04:26:27.133Z"
+      "extractedAt": "2025-08-30T05:11:44.801Z"
     },
     "kitchen_0_recipe_levels": {
       "expression": "idleon.getAttr(\"Cooking\")[0][7]",
       "result": 426,
       "description": "Kitchen 0 recipe levels (this.recipeLevels)",
-      "extractedAt": "2025-08-24T04:26:27.557Z"
+      "extractedAt": "2025-08-30T05:11:44.811Z"
     },
     "kitchen_0_luck_levels": {
       "expression": "idleon.getAttr(\"Cooking\")[0][8]",
       "result": 387,
       "description": "Kitchen 0 luck levels (this.luckLevels)",
-      "extractedAt": "2025-08-24T04:26:27.972Z"
+      "extractedAt": "2025-08-30T05:11:44.814Z"
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
@@ -49,37 +49,37 @@
         "original": 1.51487623611994e+38
       },
       "description": "Talent 59 bonus",
-      "extractedAt": "2025-08-24T04:26:28.377Z"
+      "extractedAt": "2025-08-30T05:11:44.817Z"
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
       "result": 19382973.248267714,
       "description": "Crop SC 3 bonus",
-      "extractedAt": "2025-08-24T04:26:28.808Z"
+      "extractedAt": "2025-08-30T05:11:44.828Z"
     },
     "talent_enh_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "result": 106.7189571633598,
+      "result": 117.39085287969579,
       "description": "Enhanced Talent 146 bonus",
-      "extractedAt": "2025-08-24T04:26:29.233Z"
+      "extractedAt": "2025-08-30T05:11:44.831Z"
     },
     "voting_13_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 13, 0)",
       "result": 0,
       "description": "Voting 13 bonus",
-      "extractedAt": "2025-08-24T04:26:29.634Z"
+      "extractedAt": "2025-08-30T05:11:44.834Z"
     },
     "vault_upg_54_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 54, 0)",
       "result": 2016,
       "description": "Vault upgrade 54 bonus",
-      "extractedAt": "2025-08-24T04:26:30.056Z"
+      "extractedAt": "2025-08-30T05:11:44.844Z"
     },
     "meal_bonus_zmealfarm": {
       "expression": "idleon.callFunction(\"MealBonus\", \"zMealFarm\", 0, 0)",
       "result": 21338.732448000006,
       "description": "Z meal farm bonus",
-      "extractedAt": "2025-08-24T04:26:30.474Z"
+      "extractedAt": "2025-08-30T05:11:44.847Z"
     },
     "alch_bubbles_meal_spdz_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
@@ -89,121 +89,121 @@
         "original": 4.5732783649712787e+27
       },
       "description": "Alchemy bubbles MealSpdz bonus",
-      "extractedAt": "2025-08-24T04:26:30.884Z"
+      "extractedAt": "2025-08-30T05:11:44.849Z"
     },
     "atom_bonuses_8_bonus": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 8, 0)",
       "result": 119799054.59473522,
       "description": "Atom bonuses 8 bonus",
-      "extractedAt": "2025-08-24T04:26:31.328Z"
+      "extractedAt": "2025-08-30T05:11:44.855Z"
     },
     "msa_1_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 1, 0)",
       "result": 810,
       "description": "MSA 1 bonus",
-      "extractedAt": "2025-08-24T04:26:31.758Z"
+      "extractedAt": "2025-08-30T05:11:44.859Z"
     },
     "artifact_13_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 13, 0)",
       "result": 5859.77064379004,
       "description": "Artifact 13 bonus",
-      "extractedAt": "2025-08-24T04:26:32.182Z"
+      "extractedAt": "2025-08-30T05:11:44.862Z"
     },
     "arcade_28_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
       "result": 0,
       "description": "Arcade 28 bonus",
-      "extractedAt": "2025-08-24T04:26:32.604Z"
+      "extractedAt": "2025-08-30T05:11:44.864Z"
     },
     "alch_vials_6turtle_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
       "result": 262.08,
       "description": "Alchemy vial bonus for 6turtle",
-      "extractedAt": "2025-08-24T04:26:33.029Z"
+      "extractedAt": "2025-08-30T05:11:44.867Z"
     },
     "alch_vials_MealCook_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
       "result": 483.84000000000003,
       "description": "Alchemy vial bonus for MealCook",
-      "extractedAt": "2025-08-24T04:26:33.458Z"
+      "extractedAt": "2025-08-30T05:11:44.869Z"
     },
     "stamp_bonus_MealCook": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"MealCook\")",
       "result": 1800,
       "description": "Stamp bonus for MealCook",
-      "extractedAt": "2025-08-24T04:26:33.879Z"
+      "extractedAt": "2025-08-30T05:11:44.876Z"
     },
     "mainframe_114_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
       "result": 668.8000000000001,
       "description": "Mainframe 114 bonus",
-      "extractedAt": "2025-08-24T04:26:34.304Z"
+      "extractedAt": "2025-08-30T05:11:44.879Z"
     },
     "meal_bonus_Mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
       "result": 28380.514155840006,
       "description": "Meal bonus for Mcook",
-      "extractedAt": "2025-08-24T04:26:35.119Z"
+      "extractedAt": "2025-08-30T05:11:44.882Z"
     },
     "summoning_win_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
       "result": 2543.45,
       "description": "Summoning win bonus 15",
-      "extractedAt": "2025-08-24T04:26:35.535Z"
+      "extractedAt": "2025-08-30T05:11:44.885Z"
     },
     "holes_monument_rog_bonuses_0_2": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 2)",
       "result": 12400,
       "description": "Holes monument ROG bonuses 0 2",
-      "extractedAt": "2025-08-24T04:26:35.914Z"
+      "extractedAt": "2025-08-30T05:11:44.887Z"
     },
     "holes_b_upg_56_bonus": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
       "result": 13.785849184900005,
       "description": "Holes Schematics 56 bonus",
-      "extractedAt": "2025-08-24T04:26:36.302Z"
+      "extractedAt": "2025-08-30T05:11:44.894Z"
     },
     "card_w6c1_bonus": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w6c1\")",
       "result": 3,
       "description": "Card w6c1 bonus",
-      "extractedAt": "2025-08-24T04:26:36.678Z"
+      "extractedAt": "2025-08-30T05:11:44.897Z"
     },
     "lamp_bonuses_0": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 0, 0)",
       "result": 400,
       "description": "Holes lamp bonuses 0 0",
-      "extractedAt": "2025-08-24T04:26:37.112Z"
+      "extractedAt": "2025-08-30T05:11:44.899Z"
     },
     "alch_vials_6cookspd_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6CookSpd\"]",
       "result": 327.6,
       "description": "Alchemy vial bonus for 6CookSpd",
-      "extractedAt": "2025-08-24T04:26:37.526Z"
+      "extractedAt": "2025-08-30T05:11:44.901Z"
     },
     "card_boss4a_bonus": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
       "result": 6,
       "description": "Card Boss4A bonus",
-      "extractedAt": "2025-08-24T04:26:37.928Z"
+      "extractedAt": "2025-08-30T05:11:44.910Z"
     },
     "achieve_status_225_bonus": {
       "expression": "idleon.callFunction(\"AchieveStatus\", 225)",
       "result": 1,
       "description": "Achieve status 225 bonus",
-      "extractedAt": "2025-08-24T04:26:38.345Z"
+      "extractedAt": "2025-08-30T05:11:44.913Z"
     },
     "achieve_status_224_bonus": {
       "expression": "idleon.callFunction(\"AchieveStatus\", 224)",
       "result": 1,
       "description": "Achieve status 224 bonus",
-      "extractedAt": "2025-08-24T04:26:38.740Z"
+      "extractedAt": "2025-08-30T05:11:44.915Z"
     },
     "meal_bonus_KitchenEff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 2122.5228552000003,
       "description": "Meal bonus for KitchenEff",
-      "extractedAt": "2025-08-24T04:26:39.156Z"
+      "extractedAt": "2025-08-30T05:11:44.917Z"
     }
   },
   "errors": {},
