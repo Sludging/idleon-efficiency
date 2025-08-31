@@ -46,10 +46,7 @@ export class DivinityGod {
             return 0;
         }
         const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
-        const hasActiveBubble = player.activeBubbles.filter(bubble => bubble.data.bonusKey == "Y2ACTIVE").length > 0;
-
-        const alchemyBoost = Math.max(1, hasActiveBubble ? this.activeBubblePassiveBonus : 0);
-        return divinityLevel / (60 + divinityLevel) * alchemyBoost * this.data.passiveMax;
+        return divinityLevel / (60 + divinityLevel) * this.activeBubblePassiveBonus * this.data.passiveMax;
     }
 
     getBlessingBonusText = () => {
@@ -188,7 +185,7 @@ export const updateDivinity = (data: Map<string, any>) => {
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
     const jadeUpgradeBlessingBoost = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "True Godly Blessings")?.purchased ?? false) ? 5 : 0;
     divinity.gods.forEach(god => {
-        god.activeBubblePassiveBonus = activeBubblePassiveDivinityBonus;
+        god.activeBubblePassiveBonus = Math.max(1, activeBubblePassiveDivinityBonus);
         god.jadeUpgradeBlessingBonus = jadeUpgradeBlessingBoost;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
