@@ -27,6 +27,7 @@ import { IslandExpeditions } from './islandExpedition';
 import { UpgradeVault } from "./upgradeVault";
 import { Hole } from "./world-5/hole/hole";
 import { Votes } from "./world-2/votes";
+import { EquipmentSets } from "./misc/equipmentSets";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -62,6 +63,7 @@ export class Meal {
 
     count: number = 0;
     level: number = 0;
+    ribbonLevel: number = 0;
 
     // Discover values
     timeOptimalSpices: number[] = [];
@@ -75,6 +77,7 @@ export class Meal {
     mainframeBonus: number = 0;
     shinyBonus: number = 0;
     winnerBonus: number = 0;
+    armorSetBonus: number = 0;
 
     // Active cooking values
     cookingContribution: number = 0;
@@ -114,14 +117,18 @@ export class Meal {
         }
     }
 
+    getRibbonBonus = (ribbonLevel: number = this.ribbonLevel) => {
+        return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4)) / 100;
+    }
+
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
         // Jewel doesn't impact the line width meals.
-        if (this.bonusKey == "PxLine" || this.bonusKey == "LinePct") {
+        if (this.bonusKey == "PxLine") {  // This used to be the case but no more? -> || this.bonusKey == "LinePct") {
             const finalMath = level * this.bonusQty;
             return roundResult ? round(finalMath) : finalMath;
         }
 
-        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * (1 + this.winnerBonus / 100) * level * this.bonusQty;
+        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * (1 + this.winnerBonus / 100) * this.getRibbonBonus() * level * this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
@@ -440,6 +447,7 @@ export class Cooking extends Domain {
         return [
             { key: "Cooking", perPlayer: false, default: [] },
             { key: "Meals", perPlayer: false, default: [] },
+            { key: "Ribbon", perPlayer: false, default: [] },
         ]
     }
 
@@ -455,6 +463,7 @@ export class Cooking extends Domain {
         const cooking = data.get(this.getDataKey()) as Cooking;
         const cookingData = data.get("Cooking") as number[][];
         const mealsData = data.get("Meals") as number[][];
+        const ribbonData = data.get("Ribbon") as number[];
 
         if (cookingData.length == 0 || mealsData.length == 0) {
             return;
@@ -466,6 +475,7 @@ export class Cooking extends Domain {
                 if (index < cooking.meals.length) {
                     cooking.meals[index].level = mealLevel;
                     cooking.meals[index].count = mealsData[2][index];
+                    cooking.meals[index].ribbonLevel = ribbonData[28 + index];
                 }
             })
         }
@@ -556,6 +566,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
     const hole = data.get("hole") as Hole;
     const votes = data.get("votes") as Votes;
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -573,6 +584,7 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.mainframeBonus = jewelMealBonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
+        meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET");
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
@@ -608,24 +620,12 @@ export const updateCooking = (data: Map<string, any>) => {
     const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
 
     const bestbloodMarrowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 59)?.getBonus() ?? 0)));
-    // TODO: Talent 146 (Apocalypse Chow) can be boosted by voidwalker, we aren't handling that yet.
-    const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 146)?.getBonus() ?? 0)));
-    const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
-    const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
-
-    const lastIndexBloodBerserker = players.filter(player => player.classId == ClassIndex.Blood_Berserker).sort((player1, player2) => player2.playerID - player1.playerID)[0] ?? undefined;
-    const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
-    let superChowBonus = 0;
-    // If we have a blood berserker and the voidwalker enhancement level is at least 125, we get a super chow bonus
-    if (lastIndexBloodBerserker && enhancementLevel >= 125) {
-        const killsOver100M = Array.from(lastIndexBloodBerserker.killInfo.entries()).reduce((sum, [_, value]) => sum += value >= 1e8 ? 1 : 0, 0);
-        superChowBonus = Math.pow(1.1, killsOver100M);
-    }
+    const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
 
     const upgradeVaultBonus = upgradeVault.getBonusForId(54);
     const holeSchematic56 = hole.getSchematicBonus(56);
     // TODO: Fix lamp bonus to be correct.
-    const holeLampBonus = hole.wishes.find(wish => wish.index == 0)?.getBonus() ?? 0;
+    const holeLampBonus = hole.lamp.getBonus(false, 0, 0);
     const holeBravey2Bonus = hole.getMonumentBonus("Bravery", 2);
     const votingBonus13 = votes.getCurrentBonus(13);
     // TODO: Include currently unused bonuses into the math.
@@ -645,9 +645,9 @@ export const updateCooking = (data: Map<string, any>) => {
     let totalCookingSpeedWithoutStarSign = 0;
     let totalCookingSpeedWithSilkrode = 0;
     cooking.kitchens.forEach((kitchen, index) => {
-        kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
-        kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed(0, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
-        kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed(starsign58*2, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bloodMarrowBonus, superChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeed = kitchen.getMealSpeed(starsign58, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed(0, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
+        kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed(starsign58*2, mealCookVialBonus, fireflyVialBonus, turtleVialBonus, winnerBonus, stampBonus, meal63Bonus, mealSpeedBonus, jewel0Bonus, trollCardBonus, ceramicCardBonus, kitchenEfficientBonus, jewel14Bonus, diamonChef, achievements[225].completed, achievements[224].completed, atomBonus, artifactBonus, worshipBonus, bestbloodMarrowBonus, bestapocalypseChowBonus, cropScientistBonus, farming.farmingLevel, arcadeBonus);
         kitchen.fireSpeed = kitchen.getFireSpeed(fireVialBonus, fireStampBonus, fireSpeedMealBonus, trollCardBonus, kitchenEfficientBonus, diamonChef, atomBonus, worshipBonus);
         kitchen.recipeLuck = kitchen.getLuck();
 

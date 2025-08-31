@@ -1,6 +1,6 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent } from './talents';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
 import { notUndefined, range } from '../utility';
@@ -1162,8 +1162,12 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     return players;
 }
 
-export const updatePlayerTalentEnhanced = (data: Map<string, any>) => {
+// Handles enhanced talents and talents such as blood marrow.
+// This is not the same as "Special Talents" page.
+export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
+    const cooking = data.get("cooking") as Cooking;
+
     // Find the highest level of the voidwalker "Enhancement Eclipse" talent.
     const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
     switch(true) {
@@ -1212,6 +1216,13 @@ export const updatePlayerTalentEnhanced = (data: Map<string, any>) => {
             });
             break;
     }
+
+    // Update blood marrow talent total meals.
+    const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
+    players.flatMap(player => player.talents).filter(talent => talent.skillIndex == 59).forEach(talent => {
+        const bloodMarrow = talent as BloodMarrowTalent;
+        bloodMarrow.totalMeals = totalMeals;
+    });
 }
 
 

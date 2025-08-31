@@ -90,11 +90,31 @@ export class Talent {
 
     static fromBase = (talentName: string, talentInfo: TalentModel) => {
         switch(talentInfo.skillIndex) {
+            case 59:
+                return new BloodMarrowTalent(talentName, talentInfo);
             case 146:
                 return new ApocalypseChowTalent(talentName, talentInfo);
             default:
                 return new Talent(talentName, talentInfo);
         }
+    }
+}
+
+export class BloodMarrowTalent extends Talent {
+    totalMeals: number = 0;
+
+    getBonus = (round: boolean = false, yBonus: boolean = false, maxBonus: boolean = false) => {
+        // TODO: I don't like duplicating code, but this is a special case so I'm leaving it for now.
+        let baselineBonus = 0;
+        const level = maxBonus ? this.maxLevel : this.level
+        if (yBonus) {
+            baselineBonus = lavaFunc(this.funcY, level, this.y1, this.y2, round);
+        } else {
+            baselineBonus = lavaFunc(this.funcX, level, this.x1, this.x2, round);
+        }
+        
+        // Actual special calculation for Blood Marrow.
+        return Math.pow(Math.min(1.012, 1 + (baselineBonus / 100)), this.totalMeals);
     }
 }
 
