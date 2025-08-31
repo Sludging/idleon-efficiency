@@ -533,7 +533,7 @@ class IdleonDebugServer {
                             if (depth >= maxDepth || !o || typeof o !== "object") return typeof o;
                             
                             const result = {};
-                            const keys = Object.keys(o).slice(0, 8); // Limit to first 8 keys
+                            const keys = Object.keys(o)
                             for (const key of keys) {
                                 try {
                                     result[key] = explore(o[key], depth + 1);
@@ -649,6 +649,10 @@ class IdleonDebugServer {
         } else if (expression.startsWith('this.')) {
             // Replace 'this' with the game object
             fullExpression = expression.replace(/^this\./, 'window.frames[0].__idleon_cheats__.');
+        } else if (expression.includes('idleon.') || expression.includes('idleon[')) {
+            // Contains idleon reference but wrapped in other functions - replace idleon references
+            fullExpression = expression.replace(/idleon\./g, 'window.frames[0].idleon.');
+            fullExpression = fullExpression.replace(/idleon\[/g, 'window.frames[0].idleon[');
         } else {
             // Assume it's a property/method of the game object
             fullExpression = `window.frames[0].__idleon_cheats__.${expression}`;
