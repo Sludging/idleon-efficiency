@@ -450,3 +450,16 @@ export const parseFormattedNumber = (formattedNumber: string | number): number =
   const multiplier = multipliers[suffix || ''] || 1;
   return parseFloat(number) * multiplier;
 };
+
+const number2letterArray = ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's',
+    't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+export const number2letter = (number: number) => {
+    if (number < number2letterArray.length) {
+        return number2letterArray[number];
+    }
+    
+    throw new Error(`Number ${number} is too large to convert to a letter`);
+}

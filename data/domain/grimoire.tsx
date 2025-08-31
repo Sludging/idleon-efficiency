@@ -787,7 +787,7 @@ export class Grimoire extends Domain implements EfficiencyDomain {
     /**
      * Get the bonus value for a specific grimoire upgrade ID
      */
-    private getUpgradeBonus(upgradeId: number): number {
+    public getUpgradeBonus(upgradeId: number): number {
         const upgrade = this.upgrades.find(u => u.id === upgradeId);
         return upgrade?.bonus || 0;
     }

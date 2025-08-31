@@ -1,6 +1,6 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
-import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst } from './talents';
+import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
 import { notUndefined, range } from '../utility';
@@ -35,6 +35,9 @@ import { BeanstalkingBonusType, Sneaking } from './world-6/sneaking';
 import { Account } from './account';
 import { IslandExpeditions } from './islandExpedition';
 import { TaskBoard } from './tasks';
+import { Grimoire } from './grimoire';
+import { Tesseract } from './tesseract';
+import { EquipmentSets } from './misc/equipmentSets';
 
 export class PlayerStats {
     strength: number = 0;
@@ -148,7 +151,11 @@ export class Player {
     extraLevelsFromES: number = 0;
     extraLevelsFromSlug: number = 0;
     extraLevelsFromEquinox: number = 0;
+    extraLevelsFromNinjaMastery: number = 0;
     extraLevelsFromAchievements: number = 0;
+    extraLevelsFromKattlekrukSet: number = 0;
+    extraLevelsFromGrimoire: number = 0;
+    extraLevelsFromTesseract: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -280,6 +287,21 @@ export class Player {
 
     getTalentBonus = (skillIndex: number) => {
         return this.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0;
+    }
+
+    getTalent = (skillIndex: number) => {
+        return this.talents.find(talent => talent.skillIndex == skillIndex);
+    }
+    
+    markTalentAsEnhanced = (skillIndex: number) => {
+        const talent = this.talents.find(talent => talent.skillIndex == skillIndex);
+        if (talent && talent instanceof EnhancedTalent) {
+            talent.isEnhanced = true;
+        }
+    }
+
+    getTalentEnhancedBonus = (skillIndex: number) => {
+        return this.talents.find(talent => talent.skillIndex == skillIndex)?.getEnhancedBonus() ?? 0;
     }
 
     getTalentMaxLevel = (skillIndex: number) => {
@@ -775,20 +797,6 @@ export class Players extends Domain {
     }
 }
 
-export const getActivePlayerIndexDefaultFirst = (players: Player[]): number => {
-    let activeIndex = 0;
-    let lowestActiveTime = 101;
-
-    players.forEach((player, index) => {
-        if (player.afkFor < 100 && lowestActiveTime > player.afkFor) {
-            lowestActiveTime = player.afkFor;
-            activeIndex = index;
-        }
-    })
-
-    return activeIndex;
-}
-
 export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const account = data.get("account") as Account;
@@ -1043,6 +1051,10 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const divinity = data.get("divinity") as Divinity;
     const equinox = data.get("equinox") as Equinox;
     const achievementsInfo = data.get("achievements") as Achievement[];
+    const grimoire = data.get("grimoire") as Grimoire;
+    const tesseract = data.get("tesseract") as Tesseract;
+    const optLacc = data.get("OptLacc") as (number | string)[];
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
 
     // Update max talent level due to bear.
     const bearGod = divinity.gods[1];
@@ -1061,6 +1073,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
 
     // Max talent level from Equinox
     players.forEach(player => {
+        // TODO: Double check Equinox code, in-game says 12 but we get 10 here.
         const equinoxBonus = equinox.upgrades[10].getBonus();
         // Only update if different.
         if (player.extraLevelsFromEquinox == 0 || player.extraLevelsFromEquinox != equinoxBonus) {
@@ -1089,8 +1102,118 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
         })
     }
 
+    const skullOfMajorTalentLevel = grimoire.getUpgradeBonus(39);
+    if (skullOfMajorTalentLevel > 0) {
+        players.forEach(player => {
+            player.talents
+                .filter(talent =>
+                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                    talent.skillIndex <= 614 &&
+                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+                )
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? skullOfMajorTalentLevel : 0;
+                    talent.maxLevel += skullOfMajorTalentLevel;
+                });
+            player.extraLevelsFromGrimoire = skullOfMajorTalentLevel;
+        });
+    }
+
+    const universeTalentLevel = tesseract?.getUpgradeBonus(57) ?? 0;
+    if (universeTalentLevel > 0) {
+        players.forEach(player => {
+            player.talents
+                .filter(talent =>
+                    ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                    talent.skillIndex <= 614 &&
+                    !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+                )
+                .forEach(talent => {
+                    talent.level += talent.level > 0 ? universeTalentLevel : 0;
+                    talent.maxLevel += universeTalentLevel;
+                });
+            player.extraLevelsFromTesseract = universeTalentLevel;
+        });
+    }
+
+    const sneakingMasteryLevel = optLacc[232] as number;
+    if (sneakingMasteryLevel > 0) {
+        const sneakyingMasteryBonus = 5 * Math.floor((97 + sneakingMasteryLevel) / 100);
+        players.forEach(player => {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.maxLevel += sneakyingMasteryBonus
+                });
+            player.extraLevelsFromNinjaMastery = sneakyingMasteryBonus;
+        });
+    }
+
+    const kattlekrukSetBonus = equipmentSets.getSetBonus("KATTLEKRUK_SET");
+    if (kattlekrukSetBonus > 0) {
+        players.forEach(player => {
+            player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
+                .forEach(talent => {
+                    talent.maxLevel += kattlekrukSetBonus;
+                });
+            player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;
+        })
+    }
+
     return players;
 }
+
+export const updatePlayerTalentEnhanced = (data: Map<string, any>) => {
+    const players = data.get("players") as Player[];
+    // Find the highest level of the voidwalker "Enhancement Eclipse" talent.
+    const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
+    switch(true) {
+        case enhancementLevel >= 25:
+            // Left Hand of Learning - Enhanced bonus is double xp for mman only.
+            players.forEach(player => {
+                player.markTalentAsEnhanced(42);
+            });
+        case enhancementLevel >= 50:
+            // Pirate Flag - Gameplay only, I don't care.
+        case enhancementLevel >= 75:
+            // Radiant Chainbolt - Gameplay only, I don't care.
+        case enhancementLevel >= 100:
+            // Sleepin' On The Job - Enhanced bonus is skilling afk for mman.
+            players.forEach(player => {
+                player.markTalentAsEnhanced(79);
+            });
+        case enhancementLevel >= 125:
+            // Apocalypse Chow
+            players.forEach(player => {
+                const apocalypseChow = player.getTalent(146) as ApocalypseChowTalent;
+                if (apocalypseChow) {
+                    apocalypseChow.killsOver100M = Array.from(player.killInfo.entries()).reduce((sum, [_, value]) => sum += value >= 1e8 ? 1 : 0, 0);
+                    apocalypseChow.killsOver1M = Array.from(player.killInfo.entries()).reduce((sum, [_, value]) => sum += value >= 1e6 ? 1 : 0, 0);
+                    player.markTalentAsEnhanced(146);
+                }
+            });
+        case enhancementLevel >= 150:
+            // Whale Wallop - Gameplay only, I don't care.
+        case enhancementLevel >= 175:
+            // Right hand of action - Enhanced Bonus is double skill eff for mman only. 
+            players.forEach(player => {
+                player.markTalentAsEnhanced(43);
+            });
+        case enhancementLevel >= 200:
+            // Green Tube - All Skill Exp for everyone.
+            players.forEach(player => {
+                player.markTalentAsEnhanced(536);
+            });
+        case enhancementLevel >= 225:
+            // Knightly Disciple - Gameplay only, I don't care.
+        case enhancementLevel >= 250:
+            // Lucky Charm - Skill exp on top of class exp.
+            players.forEach(player => {
+                player.markTalentAsEnhanced(35);
+            });
+            break;
+    }
+}
+
 
 export const updatePlayers = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];

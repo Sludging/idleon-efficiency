@@ -84,8 +84,33 @@ export class Talent {
             79].includes(this.skillIndex);
     }
 
+    getEnhancedBonus = (): number => {
+        return 0;
+    }
+
     static fromBase = (talentName: string, talentInfo: TalentModel) => {
-        return new Talent(talentName, talentInfo);
+        switch(talentInfo.skillIndex) {
+            case 146:
+                return new ApocalypseChowTalent(talentName, talentInfo);
+            default:
+                return new Talent(talentName, talentInfo);
+        }
+    }
+}
+
+export class EnhancedTalent extends Talent {
+    isEnhanced: boolean = false;
+}
+
+export class ApocalypseChowTalent extends EnhancedTalent {
+    killsOver1M: number = 0;
+    killsOver100M: number = 0;
+    getEnhancedBonus = (): number => {
+        if (!this.isEnhanced) {
+            return 0;
+        }
+
+        return Math.pow(1.1, this.killsOver100M);
     }
 }
 
