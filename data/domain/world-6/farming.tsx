@@ -21,6 +21,7 @@ import { Achievement } from "../achievements";
 import { KillRoy } from "../world-2/killroy";
 import { Votes } from "../world-2/votes";
 import { TaskBoard } from "../tasks";
+import { Grimoire } from "../grimoire";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -383,14 +384,15 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.BaseCritterPerTrap, 0.1, 29));
     }
 
-    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number) => {
+    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number, bonusFromGrimoireBonus22: number) => {
         this.discoveredCrops = cropsFound;
+        const multiplier = (1 + bonusFromLabBonus17 / 100) * (1 + bonusFromGrimoireBonus22 / 100);
 
         this.bonuses.forEach(bonus => {
             switch (bonus.bonusText) {
                 case CropScientistBonusText.CookingSpeed:
                 case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * (1 + bonusFromLabBonus17 / 100);
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * multiplier;
                     break;
                 case CropScientistBonusText.ShinyPetLvlUpRate:
                 case CropScientistBonusText.CashBonus:
@@ -398,7 +400,7 @@ export class CropScientist {
                 case CropScientistBonusText.TotalDamage:
                 case CropScientistBonusText.BaseCritterPerTrap:
                 default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * (1 + bonusFromLabBonus17 / 100);
+                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * multiplier;
                     break;
             }
         })
@@ -797,13 +799,15 @@ export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const mainframe = data.get("lab") as Lab;
     const sneaking = data.get("sneaking") as Sneaking;
+    const grimoire = data.get("grimoire") as Grimoire;
 
     // Set bonus to unlocked if the corresponding Jade Upgrade have been purchased
     farming.cropScientist.updateUnlockedCropScientist(sneaking.jadeUpgrades);
 
     // Update all CropScientist bonuses so we can use those values in other pages (cooking for example)
     const labBonusCropScientist = mainframe.bonuses.find(bonus => bonus.index == 17)?.getBonus() ?? 0;
-    farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist);
+    const grimoire22Bonus = grimoire.getUpgradeBonus(22);
+    farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist, grimoire22Bonus);
 }
 
 export const updateFarmingDisplayData = (data: Map<string, any>) => {
