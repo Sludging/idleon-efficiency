@@ -19,7 +19,6 @@ import { BellImprovementModel } from "../../model/bellImprovementModel";
 import { initBellImprovementRepo } from "../../data/BellImprovementRepo";
 import { Well } from "./well";
 import { lavaLog } from "../../../utility";
-import { Card } from "../../cards";
 import { TaskBoard } from "../../tasks";
 import { Tome } from "../../tome";
 import { Farming } from "../../world-6/farming";
@@ -42,15 +41,10 @@ export class Villager {
 export class Wish {
     wishCount: number = 0;
 
-    constructor(public index: number, public data: LampWishModel) { }
+    constructor(public index: number, public data: LampWishModel) {}
 
     static fromBase(data: LampWishBase[]) {
         return data.map(d => new Wish(d.index, d.data));
-    }
-
-    getBonus(): number {
-        // TODO: Do the real one, this is just a placeholder.
-        return this.data.x1 * this.wishCount;
     }
 }
 
@@ -652,6 +646,33 @@ export class Harp {
     }
 }
 
+export class Lamp {
+    wishes: Wish[] = [];
+    // This is hard-coded in the game, can move to the repo maybe.
+    specialBonusArray = "25,10,8;15,40,10;20,35,12;1,1,1;2,2,2".split(";");
+
+    constructor() {
+        this.wishes = Wish.fromBase(initLampWishRepo());
+    }
+
+    getBonus(holeBonus: boolean = false, specialIndex?: number, inlineIndex?: number): number {
+        // This implementation is pretty odd so writing some notes.
+        // 1. Wish 7 gives bonus of 25 * wishCount for hold related resources.
+        // 2. Everything else comes from a weird string which is indexed on 2 indexes.
+
+        // TODO: Wonder if we should make this code nicer at some point.
+        if (holeBonus) {
+            return 25 * this.wishes[7].wishCount;
+        }
+
+        if (specialIndex != undefined && inlineIndex != undefined) {
+            const wishIndex = Math.min(11, Math.round(4 + 2 * specialIndex));
+            return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount;
+        }
+
+        return 0;
+    }
+}
 
 
 export class Hole extends Domain {
@@ -660,7 +681,6 @@ export class Hole extends Domain {
 
     // Processed
     villagers: Villager[] = Villagers.getVillagers();
-    wishes: Wish[] = Wish.fromBase(initLampWishRepo());
     majiks = new Majiks();
     schematics: Schematic[] = Schematic.fromBase(initHoleBuildingRepo());
     studies: Study[] = Study.fromBase(initStudyRepo());
@@ -670,6 +690,7 @@ export class Hole extends Domain {
     well: Well = new Well();
     resourceCavrens = new ResourceCavrens();
     harp: Harp = new Harp();
+    lamp: Lamp = new Lamp();
     // TODO: 
     // Well - DONE?
     // Caverns
@@ -763,7 +784,7 @@ export class Hole extends Domain {
             }
         });
 
-        hole.wishes.forEach(wish => {
+        hole.lamp.wishes.forEach(wish => {
             wish.wishCount = holeData[21][wish.index];
         });
 
