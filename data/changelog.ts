@@ -7,6 +7,17 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.41-v3",
+    title: "General fixes!",
+    date: "September 6, 2025",
+    changes: [
+      "It's time to catch-up on broken things!",
+      "Cooking speed calculation should be accurate or very close now.",
+      "To do that many things across the site were updated, such as bubbles, max level talents, and more.",
+      "This change was done purely for the calculations and the visuals are lagging behind, they will be next to be updated."
+    ]
+  },
+  {
     version: "1.2.41-v2",
     title: "Extend Efficiency Calculators",
     date: "July 17, 2025",
