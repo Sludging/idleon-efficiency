@@ -13,11 +13,6 @@
       "description": "Star sign 58 (Gordonius Major) cooking speed bonus"
     },
     {
-      "label": "meal_cook_vial_bonus",
-      "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
-      "description": "Alchemy vial bonus for meal cooking"
-    },
-    {
       "label": "kitchen_0_meal_levels",
       "expression": "idleon.getAttr(\"Cooking\")[0][6]",
       "description": "Kitchen 0 meal levels (this.mealLevels)"
@@ -146,6 +141,11 @@
       "label": "card_boss4a_bonus",
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
       "description": "Card Boss4A bonus"
+    },
+    {
+      "label": "mainframe_100_bonus",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
+      "description": "Mainframe 100 bonus"
     },
     {
       "label": "achieve_status_225_bonus",
