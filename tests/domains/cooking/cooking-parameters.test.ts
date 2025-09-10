@@ -75,27 +75,14 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
 
-  mealCookVialBonus: {
-    id: 'meal_cook_vial_bonus',
-    description: 'Meal cooking vial bonus',
-    extractionKey: 'meal_cook_vial_bonus',
-    domainExtractor: (gameData) => {
-      const alchemy = gameData.get('alchemy') as Alchemy;
-      return alchemy?.getVialBonusForKey("MealCook") ?? 0;
-    },
-  },
-
   talent59Bonus: {
     id: 'talent_59_bonus',
     description: 'Talent 59 bonus',
     extractionKey: 'talent_59_bonus',
     domainExtractor: (gameData) => {
       const players = gameData.get('players') as Player[];
-      const cooking = gameData.get('cooking') as Cooking;
       const bestbloodMarrowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 59)?.getBonus() ?? 0)));
-      const totalMeals = cooking.meals.reduce((sum, meal) => sum += meal.level, 0)
-      const bloodMarrowBonus = Math.pow(Math.min(1.012, 1 + (bestbloodMarrowBonus / 100)), totalMeals);
-      return bloodMarrowBonus;
+      return bestbloodMarrowBonus;
     },
   },
 
@@ -148,7 +135,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'meal_bonus_zmealfarm',
     domainExtractor: (gameData) => {
       const cooking = gameData.get('cooking') as Cooking;
-      const zMealFarmBonus = cooking?.meals.filter(meal => meal.bonusKey == "zMealFarm").reduce((sum, meal) => sum += meal.getBonus(), 0);
+      const zMealFarmBonus = cooking.getMealBonusForKey("zMealFarm");
       return zMealFarmBonus;
     },
   },
@@ -258,7 +245,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'meal_bonus_Mcook',
     domainExtractor: (gameData) => {
       const cooking = gameData.get("cooking") as Cooking;
-      const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
+      const mealSpeedBonus = cooking.getMealBonusForKey("Mcook");
       return mealSpeedBonus;
     }
   },
@@ -332,6 +319,17 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
 
+  mainframe100Bonus: {
+    id: 'mainframe_100_bonus',
+    description: 'Mainframe 100 bonus',
+    extractionKey: 'mainframe_100_bonus',
+    domainExtractor: (gameData) => {
+      const mainframe = gameData.get("lab") as Lab;
+      const jewel0Bonus = mainframe.jewels[0].getBonus();
+      return jewel0Bonus;
+    }
+  },
+
   cardBoss4aBonus: {
     id: 'card_boss4a_bonus',
     description: 'Card boss4a bonus',
@@ -371,7 +369,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'meal_bonus_KitchenEff',
     domainExtractor: (gameData) => {
       const cooking = gameData.get("cooking") as Cooking;
-      const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
+      const kitchenEfficientBonus = cooking.getMealBonusForKey("KitchenEff");
       return kitchenEfficientBonus;
     }
   }
