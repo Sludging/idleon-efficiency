@@ -16,8 +16,8 @@ export class EquipmentSet {
         return this.data.description.replace("{", this.getBonus().toFixed(2));
     }
 
-    getBonus = () => {
-        if (this.data.description.includes("x ")) {
+    getBonus = (raw: boolean = false) => {
+        if (this.data.description.includes("x ") && !raw) {
             return 1 + this.data.bonusValue / 100;
         }
         return this.data.bonusValue;
@@ -71,7 +71,7 @@ export class EquipmentSets extends Domain {
         });
     }
 
-    getSetBonus = (setName: string, player?: Player) => {
+    getSetBonus = (setName: string, player?: Player, raw: boolean = false) => {
         const set = this.equipmentSets.find(set => set.data.name == setName);
 
         if (!set) {
@@ -86,7 +86,7 @@ export class EquipmentSets extends Domain {
         }
 
         if (active) {
-            return set.getBonus();
+            return set.getBonus(raw);
         }
         
         return 0;
