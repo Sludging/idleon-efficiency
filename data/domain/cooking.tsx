@@ -14,7 +14,6 @@ import { Player } from "./player";
 import { Sailing } from "./sailing";
 import { Sigils } from "./sigils";
 import { Stamp } from "./world-1/stamps";
-import { ClassIndex } from "./talents";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Equinox, FoodLust } from "./equinox";
@@ -324,7 +323,7 @@ export class Kitchen {
             (1 + (this.richelin ? 2 : 0)) * 
             (1 + votingBonus13 / 100) *
             (1 + vaultBonus54 / 100) *
-            (1 + meal63Bonus * Math.ceil((farmingLevel + 1) / 50) / 100) *
+            (1 + (meal63Bonus * Math.ceil((farmingLevel + 1) / 50)) / 100) *
             Math.max(1, diamonChef) * 
             Math.max(1, atom8Bonus) * 
             (1 + totalizerBonus / 100) * 
@@ -653,7 +652,7 @@ export const updateCooking = (data: Map<string, any>) => {
         meal.mainframeBonus = jewelMealBonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
-        meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET");
+        meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", undefined, true);
 
         // Reset any previously calculated info, the next section should re-populate this.
         meal.cookingContribution = 0;
@@ -673,9 +672,9 @@ export const updateCooking = (data: Map<string, any>) => {
     const turtleVialBonus = alchemy.getVialBonusForKey("6turtle");
     const diamonChef = alchemy.getBubbleBonusForKey("MealSpdz");
     const stampBonus = stamps.flatMap(tab => tab).filter(stamp => stamp.bonus.includes("Meal Cooking Speed")).reduce((sum, stamp) => sum += stamp.getBonus(), 0);
-    const mealSpeedBonus = cooking?.meals.filter(meal => meal.bonusKey == "Mcook").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const meal63Bonus = cooking?.meals.filter(meal => meal.bonusKey == "zMealFarm").reduce((sum, meal) => sum += meal.getBonus(), 0);
-    const kitchenEfficientBonus = cooking?.meals.filter(meal => meal.bonusKey == "KitchenEff").reduce((sum, meal) => sum += meal.getBonus(), 0);
+    const mealSpeedBonus = cooking.getMealBonusForKey("Mcook");
+    const meal63Bonus = cooking.getMealBonusForKey("zMealFarm");
+    const kitchenEfficientBonus = cooking.getMealBonusForKey("KitchenEff");
     const jewel0Bonus = mainframe.jewels[0].getBonus();
     const jewel14Bonus = mainframe.jewels[14].getBonus();
     const trollCardBonus = cards.find(card => card.id == "Boss4A")?.getBonus() ?? 0;
