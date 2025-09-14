@@ -1,4 +1,4 @@
-import { nFormatter, notUndefined, round } from "../utility"
+import { commaNotation, round } from "../utility"
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { AtomCollider } from "./atomCollider";
@@ -27,6 +27,7 @@ import { UpgradeVault } from "./upgradeVault";
 import { Hole } from "./world-5/hole/hole";
 import { Votes } from "./world-2/votes";
 import { EquipmentSets } from "./misc/equipmentSets";
+import { Stat } from "./base/stat";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -132,7 +133,7 @@ export class Meal {
     }
 
     getBonusText = (level: number = this.level) => {
-        return this.bonusText.replace(/{/g, nFormatter(this.getBonus(true, this.mainframeBonus, level)));
+        return this.bonusText.replace(/{/g, commaNotation(this.getBonus(true, this.mainframeBonus, level)));
     }
 
     getMealLevelCost = (level: number = this.level) => {
@@ -279,7 +280,7 @@ export class Kitchen {
 
     fireSpeed: number = 1;
     recipeLuck: number = 1;
-    
+
     constructor(public index: number) { }
 
     // "CookingSPEED" == d
@@ -403,9 +404,9 @@ export class Cooking extends Domain {
     kitchens: Kitchen[] = [...Array(10)].map((_, index) => { return new Kitchen(index) });
 
     bestBerserker: Player | undefined;
-    totalCookingSpeed: number = 0;
-    totalCookingSpeedWithoutStarSign: number = 0;
-    totalCookingSpeedWithSilkrode: number = 0;
+    totalCookingSpeed: Stat = new Stat("Total Cooking Speed");
+    totalCookingSpeedWithoutStarSign: Stat = new Stat("Total Cooking Speed Without Star Sign");
+    totalCookingSpeedWithSilkrode: Stat = new Stat("Total Cooking Speed With Silkrode");
 
     mealsDiscovered: number = 0;
     mealsAtVoid: number = 0;
@@ -421,7 +422,7 @@ export class Cooking extends Domain {
     }
 
     getTotalCookingSpeed = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
-        return starSignEquipped ? (silkrodeBonus ? this.totalCookingSpeedWithSilkrode : this.totalCookingSpeed) : this.totalCookingSpeedWithoutStarSign;
+        return starSignEquipped ? (silkrodeBonus ? this.totalCookingSpeedWithSilkrode.value : this.totalCookingSpeed.value) : this.totalCookingSpeedWithoutStarSign.value;
     }
 
     getZerkerBonus = () => {
@@ -685,16 +686,28 @@ export const updateCooking = (data: Map<string, any>) => {
     const starsign58 = starSigns.unlockedStarSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0;
     const cropScientistBonus = farming.cropScientist.getBonus(CropScientistBonusText.CookingSpeed);
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
-    const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
+    const summonBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16);
+    const winnerBonus = summonBonus?.getBonus() ?? 0;
 
-    const bestbloodMarrowBonus = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 59)?.getBonus() ?? 0)));
-    const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
+    const bestBloodMarrowTalent = players
+        .map(player => player.talents.find(talent => talent.skillIndex === 59))
+        .filter(talent => talent !== undefined)
+        .sort((a, b) => (b?.getBonus() ?? 0) - (a?.getBonus() ?? 0))[0];
+    const bestbloodMarrowBonus = bestBloodMarrowTalent?.getBonus() ?? 0;
 
-    const upgradeVaultBonus = upgradeVault.getBonusForId(54);
+    const bestApocalypseChowTalent = players
+        .map(player => player.talents.find(talent => talent.skillIndex === 146))
+        .filter(talent => talent !== undefined)
+        .sort((a, b) => (b?.getEnhancedBonus() ?? 0) - (a?.getEnhancedBonus() ?? 0))[0];
+    const bestapocalypseChowBonus = bestApocalypseChowTalent?.getEnhancedBonus() ?? 0;
+
+    const vaultUpgrade54 = upgradeVault.bonuses.find(bonus => bonus.id === 54);
+    const upgradeVaultBonus = vaultUpgrade54?.getBonus(upgradeVault.bonuses) ?? 0;
     const holeSchematic56 = hole.getSchematicBonus(56);
     // TODO: Fix lamp bonus to be correct.
     const holeLampBonus = hole.lamp.getBonus(false, 0, 0);
-    const holeBravey2Bonus = hole.getMonumentBonus("Bravery", 2);
+    const holeBraveyCookingSpeedBonus = hole.monuments.monuments["Bravery"].bonuses.find(bonus => bonus.index == 2);
+    const holeBravey2Bonus = holeBraveyCookingSpeedBonus?.getBonus() ?? 0;
     const votingBonus13 = votes.getCurrentBonus(13);
     // TODO: Include currently unused bonuses into the math.
 
@@ -788,9 +801,47 @@ export const updateCooking = (data: Map<string, any>) => {
     populateDiscovery(cooking);
 
     // Nice to have maths
-    cooking.totalCookingSpeed = totalCookingSpeed;
-    cooking.totalCookingSpeedWithoutStarSign = totalCookingSpeedWithoutStarSign;
-    cooking.totalCookingSpeedWithSilkrode = totalCookingSpeedWithSilkrode;
+    cooking.totalCookingSpeed.value = totalCookingSpeed;
+    cooking.totalCookingSpeed.sources.push(
+        { name: `Blood Marrow - (Level ${bestBloodMarrowTalent?.level}) Talent`, value: bestBloodMarrowTalent.getBonus() },
+        { name: "Crop Scientist", value: Math.max(1, cookingSpeedParameters.cropScientistBonus) },
+        { name: `Super Chow (Level ${bestApocalypseChowTalent.level}) - Talent`, value: bestApocalypseChowTalent.getEnhancedBonus() },
+        { name: "Voting Bonus", value: cookingSpeedParameters.votingBonus13 },
+        { name: "Kitchen Dream-mare - Vault", value: (1 + upgradeVaultBonus / 100).toFixed(2) },
+        { name: `Burned Marshmallow (Farming Level ${cookingSpeedParameters.farmingLevel}) - Meal`, value: cookingSpeedParameters.meal63Bonus * Math.ceil((cookingSpeedParameters.farmingLevel + 1) / 50) },
+        { name: "Diamon Chef - Bubble", value: Math.max(1, cookingSpeedParameters.diamonChef) },
+        { name: "Fluoride - Atom", value: Math.max(1, cookingSpeedParameters.atom8Bonus) },
+        { name: "Totalizer", value: cookingSpeedParameters.totalizerBonus },
+        { name: "Triagulon - Artifact", value: cookingSpeedParameters.artifact13Bonus },
+        { name: "Arcade", value: cookingSpeedParameters.arcadeBonus },
+        { name: "Turtle - Vial", value: cookingSpeedParameters.turtleVialBonus },
+        { name: "Dreadnog - Vial", value: alchemy.vials.find(vial => vial.data.name === "Dreadnog")?.getBonus() ?? 0 },
+        { name: "Long Island Tea - Vial", value: alchemy.vials.find(vial => vial.data.name === "Long Island Tea")?.getBonus() ?? 0 },
+        { name: "Cooked Meal Stamp", value: cookingSpeedParameters.stampBonus },
+        { name: "Emerald Pyramite Jewel", value: Math.max(0, cookingSpeedParameters.jewel14Bonus) }
+    );
+    
+    cooking.totalCookingSpeed.sources.push(...
+        cooking.meals.filter(meal => meal.bonusKey == "Mcook").map(meal => (
+            { name: meal.name, value: meal.getBonusText() }
+        ))
+    );
+
+    cooking.totalCookingSpeed.sources.push(
+        { name: "Gordonius Major - Star Sign", value: cookingSpeedParameters.starsign58bonus },
+        { name: "Summoning Winner Bonus", value: summonBonus?.getBonusText() ?? "N/A" },
+        { name: "Bravery - Monument", value: holeBraveyCookingSpeedBonus?.getDescription() ?? "N/A" },
+        { name: "Heavy Redstone Seasoning - Hole Schematic", value: Math.max(1, cookingSpeedParameters.holeSchematic56) },
+        { name: "Ceramic - Card", value: cookingSpeedParameters.ceramicCardBonus },
+        { name: "Lamp Bonus", value: cookingSpeedParameters.lampBonus00 },
+        { name: "Firefly - Vial", value: cookingSpeedParameters.fireflyVialBonus },
+        { name: "Amethyst Rhinestone - Jewel", value: Math.max(1, cookingSpeedParameters.jewel0Bonus) },
+        { name: "Troll Card + Achievements", value: Math.min(cookingSpeedParameters.trollCardBonus + (20 * (cookingSpeedParameters.achieve225 ? 1 : 0) + 10 * (cookingSpeedParameters.achieve224 ? 1 : 0)), 100) },
+        { name: "Cabbage - Meal (Kitchen 0)", value: cookingSpeedParameters.kitchenEffBonus * Math.floor((cooking.kitchens[0].mealLevels + (cooking.kitchens[0].recipeLevels + cooking.kitchens[0].luckLevels)) / 10) }
+    );
+
+    cooking.totalCookingSpeedWithoutStarSign.value = totalCookingSpeedWithoutStarSign;
+    cooking.totalCookingSpeedWithSilkrode.value = totalCookingSpeedWithSilkrode;
     cooking.mealsDiscovered = cooking.meals.filter(meal => meal.level > 0).length;
     cooking.mealsAtVoid = cooking.meals.reduce((count, meal) => count += meal.level >= 30 ? 1 : 0, 0);
     cooking.mealsAtDiamond = cooking.meals.reduce((sum, meal) => sum += meal.level >= 11 ? 1 : 0, 0);

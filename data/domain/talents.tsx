@@ -116,6 +116,10 @@ export class BloodMarrowTalent extends Talent {
         // Actual special calculation for Blood Marrow.
         return Math.pow(Math.min(1.012, 1 + (baselineBonus / 100)), this.totalMeals);
     }
+
+    override getBonusText = (): string => {
+        return `${this.getBonus()}% - ${this.totalMeals} Meals`;
+    }
 }
 
 export class EnhancedTalent extends Talent {
@@ -131,6 +135,11 @@ export class ApocalypseChowTalent extends EnhancedTalent {
         }
 
         return Math.pow(1.1, this.killsOver100M);
+    }
+
+    
+    override getBonusText = (): string => {
+        return `Enhanced: ${Math.floor(this.getEnhancedBonus())}x - ${this.killsOver100M} Apocalypses Chowed`;
     }
 }
 
