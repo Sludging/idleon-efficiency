@@ -339,7 +339,7 @@ function Cooking() {
                                         {cooking.totalCookingSpeed.sources.map(source => {
                                             if (typeof source.value === 'number') {
                                                 return (
-                                                    <Text size="small" key={source.name}>{source.name}: {nFormatter(source.value, "Smaller")}</Text>
+                                                    <Text size="small" key={source.name}>{source.name}: {nFormatter(source.value as number, "Smaller")}</Text>
                                                 )
                                             }
                                             return (
