@@ -4,6 +4,7 @@ export class Stat {
     sources: {
         name: string,
         value: number | string
+        format?: string
     }[] = []
 
     constructor(public name: string, public suffix?: string, public prefix?: string) {}

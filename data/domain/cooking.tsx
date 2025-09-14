@@ -810,13 +810,13 @@ export const updateCooking = (data: Map<string, any>) => {
         { name: "Kitchen Dream-mare - Vault", value: (1 + upgradeVaultBonus / 100).toFixed(2) },
         { name: `Burned Marshmallow (Farming Level ${cookingSpeedParameters.farmingLevel}) - Meal`, value: cookingSpeedParameters.meal63Bonus * Math.ceil((cookingSpeedParameters.farmingLevel + 1) / 50) },
         { name: "Diamon Chef - Bubble", value: Math.max(1, cookingSpeedParameters.diamonChef) },
-        { name: "Fluoride - Atom", value: Math.max(1, cookingSpeedParameters.atom8Bonus) },
+        { name: "Fluoride - Atom", value: Math.max(0, 100 * (cookingSpeedParameters.atom8Bonus - 1)), format: "Big" },
         { name: "Totalizer", value: cookingSpeedParameters.totalizerBonus },
-        { name: "Triagulon - Artifact", value: cookingSpeedParameters.artifact13Bonus },
+        { name: "Triagulon - Artifact", value: cookingSpeedParameters.artifact13Bonus, format: "None" },
         { name: "Arcade", value: cookingSpeedParameters.arcadeBonus },
-        { name: "Turtle - Vial", value: cookingSpeedParameters.turtleVialBonus },
-        { name: "Dreadnog - Vial", value: alchemy.vials.find(vial => vial.data.name === "Dreadnog")?.getBonus() ?? 0 },
-        { name: "Long Island Tea - Vial", value: alchemy.vials.find(vial => vial.data.name === "Long Island Tea")?.getBonus() ?? 0 },
+        { name: "Turtle - Vial", value: cookingSpeedParameters.turtleVialBonus, format: "None" },
+        { name: "Dreadnog - Vial", value: alchemy.vials.find(vial => vial.data.name === "Dreadnog")?.getBonus() ?? 0, format: "None" },
+        { name: "Long Island Tea - Vial", value: alchemy.vials.find(vial => vial.data.name === "Long Island Tea")?.getBonus() ?? 0, format: "None" },
         { name: "Cooked Meal Stamp", value: cookingSpeedParameters.stampBonus },
         { name: "Emerald Pyramite Jewel", value: Math.max(0, cookingSpeedParameters.jewel14Bonus) }
     );

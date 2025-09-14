@@ -465,7 +465,7 @@ export const number2letter = (number: number) => {
 }
 
 // Stolen from IdleonToolbox
-export const notateNumber = (e: number, s: string): string => {
+export const notateNumber = (e: number, s: string = "Smaller"): string => {
     if (s === 'bits') {
       let bits = e, t = 0;
       for (let i = 0; i < 4; i++) {

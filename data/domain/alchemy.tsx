@@ -263,7 +263,9 @@ export class DiamonChefBubble extends Bubble {
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        const theBonus = lavaFunc(this.func, this.level, this.x1, this.x2, true) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
+        let titleText = this.description.replace(/{/g, theBonus.toString());
         titleText += ` (${this.diamonMeals} diamond plates = ${bonus.toString()}x faster)`;
         return handleToolBubbles(titleText, this.name);
     }

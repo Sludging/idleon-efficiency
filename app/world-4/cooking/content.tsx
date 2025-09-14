@@ -17,7 +17,7 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { territoryNiceNames } from '../../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../../data/domain/cooking';
-import { getCoinsArray, nFormatter, toTime } from '../../../data/utility';
+import { getCoinsArray, nFormatter, notateNumber, toTime } from '../../../data/utility';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { AtomCollider } from '../../../data/domain/atomCollider';
 import { Ascending, CircleInformation } from 'grommet-icons';
@@ -330,7 +330,7 @@ function Cooking() {
                     label="Total Cooking Speed"
                     component={
                         <Box direction="row" gap="xsmall" align="center">
-                            <Text>{nFormatter(cooking ? cooking.getTotalCookingSpeed(starSignEquipped, silkRodeChip) : 0)}</Text>
+                            <Text>{notateNumber(cooking ? cooking.getTotalCookingSpeed(starSignEquipped, silkRodeChip) : 0)}</Text>
                             <TipDisplay
                                 heading="Speed sources"
                                 size='medium'
@@ -338,8 +338,15 @@ function Cooking() {
                                     <Box>
                                         {cooking.totalCookingSpeed.sources.map(source => {
                                             if (typeof source.value === 'number') {
+                                                // This is ugly, fix this later.
+                                                let formattedValue = "";
+                                                if (source.format && source.format == "None") {
+                                                    formattedValue = source.value.toString();
+                                                } else {
+                                                    formattedValue = source.format ? notateNumber(source.value as number, source.format) : notateNumber(source.value as number, "Smaller");
+                                                }
                                                 return (
-                                                    <Text size="small" key={source.name}>{source.name}: {nFormatter(source.value as number, "Smaller")}</Text>
+                                                    <Text size="small" key={source.name}>{source.name}: {formattedValue}</Text>
                                                 )
                                             }
                                             return (

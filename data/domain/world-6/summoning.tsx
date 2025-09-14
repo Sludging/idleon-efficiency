@@ -9,7 +9,7 @@ import { SkillsIndex } from "../SkillsIndex";
 import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
-import { nFormatter } from "../../utility";
+import { nFormatter, notateNumber } from "../../utility";
 import { deathNoteMobOrder } from '../deathnote';
 import { SummonEnemyModel } from "../model/summonEnemyModel";
 import { Sailing } from "../sailing";
@@ -193,7 +193,7 @@ export class SummonBonus {
 
     getBonusText = (): string => {
         // Can't have the two at the same time, so no worries with displaying two times the bonus
-        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100));
+        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, notateNumber(1 + this.getBonus() / 100));
     }
 }
 
