@@ -936,6 +936,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const vault = data.get("upgradeVault") as UpgradeVault;
     const tesseract = data.get("tesseract") as Tesseract;
     const arcade = data.get("arcade") as Arcade;
+    const slab = data.get("slab") as Slab;
 
     const vaultBonus42 = vault.getBonusForId(42);
     const labBonusActive = lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false;
@@ -1004,12 +1005,14 @@ export function updateAlchemy(data: Map<string, any>) {
     }
 
     // Update prismatic multiplier
-    const arcaneBonus45 = tesseract.upgrades[45] ? tesseract.upgrades[45].getBonus(tesseract.upgrades) : 0;
-    const arcadeBonus54  = arcade.bonuses[54] ? arcade.bonuses[54].getBonus() : 0;
+    const world6Trophy = slab.obtainableItems.find(item => item.internalName == "Trophy23");
+    const arcaneBonus45 = tesseract.getUpgradeBonus(45);
+    const arcadeBonus54 = arcade.bonuses[54] ? arcade.bonuses[54].getBonus() : 0;
+    const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
 
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         if (bubble.prismatic) {
-            bubble.prismaticMultiplier = Math.min(3, 2 + ((arcaneBonus45 + arcadeBonus54) / 100));
+            bubble.prismaticMultiplier = Math.min(3, 2 + ((arcaneBonus45 + (arcadeBonus54 + world6TrophyBonus)) / 100));
         }
     })
 }

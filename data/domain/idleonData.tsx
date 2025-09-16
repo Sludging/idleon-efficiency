@@ -321,13 +321,10 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
         parseData.set("itemsData", accountData.get("itemsData"));
         parseData.set("playerNames", charNames);
         parseData.set("servervars", serverVars);
+        parseData.set("ownedCompanions", companions);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
-
-        // Companions is unique as it needs data that doesn't come from cloudsave but from a different source, so jam it in.
-        if (dataDomain.dataKey == "companions") {
-            parseData.set("ownedCompanions", companions);
-        }
+        
         // Execute the parse function.
         dataDomain.parse(parseData);
     });
