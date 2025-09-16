@@ -177,9 +177,11 @@ export class Arcade extends Domain {
         arcade.goldBalls = optionList[75] as number || 0;    
 
         // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
-        arcade.bonuses.forEach(bonus => {
-            bonus.hasCompanion27 = ownedCompanions.includes(27);
-        });
+        if (ownedCompanions && ownedCompanions.length > 0) {
+            arcade.bonuses.forEach(bonus => {
+                bonus.hasCompanion27 = ownedCompanions.includes(27);
+            });
+        };
     }
 }
 

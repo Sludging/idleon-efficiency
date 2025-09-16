@@ -66,9 +66,12 @@ export class EquipmentSets extends Domain {
         equipmentSets.unlocked = smithyUnlocked == 1;
         equipmentSets.permanentlyActive = isSmithyUnlocked;
         equipmentSets.daysPassed = days;
-        equipmentSets.equipmentSets.forEach(set => {
-            set.unlocked = unlockedSets.includes(set.data.name);
-        });
+        // If user unlocked sets, set the unlocked status for each set
+        if (unlockedSets && unlockedSets.length > 0) {
+            equipmentSets.equipmentSets.forEach(set => {
+                set.unlocked = unlockedSets.includes(set.data.name);
+            });
+        }
     }
 
     getSetBonus = (setName: string, player?: Player, raw: boolean = false) => {

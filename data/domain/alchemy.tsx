@@ -758,13 +758,15 @@ export class Alchemy extends Domain {
 
         // Mark bubbles that are prismatic
         const prismaticBubbles = optionList[384] as string;
+        if (prismaticBubbles && prismaticBubbles.length > 0) {
         alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
             // I don't think the comma in the end really matters, but it's here
             // to match the game code.
             if (prismaticBubbles.includes(`${bubble.getBubbleIdentifier()},`)) {
                 bubble.prismatic = true;
-            }
-        })
+                }
+            })
+        }
     }
 }
 
