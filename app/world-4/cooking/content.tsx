@@ -55,9 +55,9 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
             <Box>
                 <Grid columns={["60%", "40%"]} gap="small">
                     <Text size="small" color="grey-2">Cooking Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip), "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${notateNumber(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip), "Big")}/hr`}</Text>
                     <Text size="small" color="grey-2">Recipe Fire Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${notateNumber(kitchen.fireSpeed, "Big")}/hr`}</Text>
                     <Text size="small" color="grey-2">New Recipe Luck:</Text>
                     <Text size="small">{`${kitchen.recipeLuck.toPrecision(3)}x`}</Text>
                 </Grid>
