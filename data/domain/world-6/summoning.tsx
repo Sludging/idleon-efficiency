@@ -9,7 +9,7 @@ import { SkillsIndex } from "../SkillsIndex";
 import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
-import { nFormatter } from "../../utility";
+import { nFormatter, notateNumber } from "../../utility";
 import { deathNoteMobOrder } from '../deathnote';
 import { SummonEnemyModel } from "../model/summonEnemyModel";
 import { Sailing } from "../sailing";
@@ -18,6 +18,8 @@ import { Achievement } from "../achievements";
 import { Votes } from "../world-2/votes";
 import { Equinox } from "../equinox";
 import { Cooking } from "../cooking";
+import { Emperor } from "../emperor";
+import { EquipmentSets } from "../misc/equipmentSets";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -145,6 +147,10 @@ export class SummonBonus {
     achievement373Bonus: number = 0;
     summoning32Bonus: number = 0;
 
+    // More bonuses
+    godshardSetBonus: number = 0;
+    emperorBonus: number = 0;
+
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
     }
@@ -159,11 +165,11 @@ export class SummonBonus {
             case this.data.bonusId == 32:
                 return this.bonusValue;
             case this.data.bonusId == 20:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
             case 21 <= this.data.bonusId && 34 >= this.data.bonusId:
-                return this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus) / 100); 
+                return this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100); 
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
 
@@ -187,7 +193,7 @@ export class SummonBonus {
 
     getBonusText = (): string => {
         // Can't have the two at the same time, so no worries with displaying two times the bonus
-        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100));
+        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, notateNumber(1 + this.getBonus() / 100));
     }
 }
 
@@ -609,6 +615,8 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
+    const emperor = data.get("emperor") as Emperor;
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
 
     const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
     const charmBonus = (crystalComb && crystalComb.unlocked) ? (1 + crystalComb.data.x1 / 100) : 1;
@@ -617,6 +625,8 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achiev379 = achievements[379].completed ? 1 : 0; // x1.01
     const achiev373 = achievements[373].completed ? 1 : 0; // x1.01
     const taskBonus = taskboard.merits[44].getBonus();
+    const emperorBonus = emperor.emperorBonuses[8].getBonus();
+    const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", undefined, true);
     
     // this bonus isn't affected by any boost, so we can already calculate it here
     const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 32)?.getBonus() ?? 0);
@@ -628,6 +638,8 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.achievement373Bonus = achiev373;
         bonus.achievement379Bonus = achiev379;
         bonus.summoning32Bonus = summonBonus;
+        bonus.godshardSetBonus = godshardSetBonus;
+        bonus.emperorBonus = emperorBonus;
     });
 }
 
@@ -653,6 +665,7 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
 
     // Meal Bonus
     const mealBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 27)?.getBonus() ?? 0);
+
     cooking.meals.forEach(meal => {
         meal.winnerBonus = mealBonus;
     });

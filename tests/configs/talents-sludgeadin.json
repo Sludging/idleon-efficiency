@@ -1,0 +1,96 @@
+{
+  "description": "Extract talent data to test max level, bonus levels, and special talents - Currently doesn't account for different players having different bonuses",
+  "target": "Talent data - Extracted as first character",
+  "extractions": [
+    {
+      "label": "talent_42_enhanced",
+      "expression": "idleon.callFunction(\"TalentEnh\", 42)",
+      "description": "Talent 42 enhanced"
+    },
+    {
+      "label": "talent_497_enhanced",
+      "expression": "idleon.callFunction(\"TalentEnh\", 497)",
+      "description": "Talent 497 enhanced"
+    },
+    {
+      "label": "talent_79_bonus",
+      "expression": "idleon.callFunction(\"TalentEnh\", 79)",
+      "description": "Talent 79 bonus"
+    },
+    {
+      "label": "talent_146_bonus",
+      "expression": "idleon.callFunction(\"TalentEnh\", 146)",
+      "description": "Talent 146 bonus - Apocalypse Chow"
+    },
+    {
+      "label": "talent_536_bonus",
+      "expression": "idleon.callFunction(\"TalentEnh\", 536)",
+      "description": "Talent 536 bonus"
+    },
+    {
+      "label": "talent_35_bonus",
+      "expression": "idleon.callFunction(\"TalentEnh\", 35)",
+      "description": "Talent 35 bonus"
+    },
+    {
+      "label": "all_talent_level_49",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"49\")",
+      "description": "All talent level 49 - Should be 0"
+    },
+    {
+      "label": "all_talent_level_146",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"146\")",
+      "description": "All talent level 146 - Should be >0"
+    },
+    {
+      "label": "talent_59_bonus",
+      "expression": "idleon.callFunction(\"TalentCalc\", 59)",
+      "description": "Talent 59 bonus - Blood Marrow"
+    },
+    {
+      "label": "talent_max_level_149_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
+      "description": "Talent level bonus from talent 149"
+    },
+    {
+      "label": "talent_max_family_bonus_68",
+      "expression": "Math.floor(idleon.getDNSM(\"FamBonusQTYs\").h[68])",
+      "description": "Talent level bonus from family bonus 68 - Elemental Sorcerer"
+    },
+    {
+      "label": "talent_max_level_companion_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 1 )",
+      "description": "Talent level bonus from companion 1 - Rift Slug"
+    },
+    {
+      "label": "talent_max_level_divinity_bonus",
+      "expression": "Math.ceil(idleon.callFunction(\"Divinity\", \"Bonus_Minor\", 0, 2))",
+      "description": "Talent level bonus from divinity - Bear"
+    },
+    {
+      "label": "talent_max_level_equinox_12_bonus",
+      "expression": "idleon.getAttr(\"Dream\")[12]",
+      "description": "Talent level bonus from equinox 12"
+    },
+    {
+      "label": "talent_max_level_ninja_mastery_bonus",
+      "expression": "5 * Math.floor((97 + idleon.getAttr(\"OptionsListAccount\")[232]) / 100)",
+      "description": "Talent level bonus from ninja mastery"
+    },
+    {
+      "label": "talent_max_level_grimoire_39_bonus",
+      "expression": "idleon.callFunction(\"Summoning\",\"GrimoireUpgBonus\", 39, 0)",
+      "description": "Talent level bonus from grimoire 39"
+    },
+    {
+      "label": "talent_max_level_set_kattlekruk_bonus",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"KATTLEKRUK_SET\", \"Bonus\", 0, 0)",
+      "description": "Talent level bonus from kattlekruk set"
+    },
+    {
+      "label": "talent_max_level_tesseract_57_bonus",
+      "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
+      "description": "Talent level bonus from tesseract 57"
+    }
+  ]
+}

@@ -84,8 +84,62 @@ export class Talent {
             79].includes(this.skillIndex);
     }
 
+    getEnhancedBonus = (): number => {
+        return 0;
+    }
+
     static fromBase = (talentName: string, talentInfo: TalentModel) => {
-        return new Talent(talentName, talentInfo);
+        switch(talentInfo.skillIndex) {
+            case 59:
+                return new BloodMarrowTalent(talentName, talentInfo);
+            case 146:
+                return new ApocalypseChowTalent(talentName, talentInfo);
+            default:
+                return new Talent(talentName, talentInfo);
+        }
+    }
+}
+
+export class BloodMarrowTalent extends Talent {
+    totalMeals: number = 0;
+
+    getBonus = (round: boolean = false, yBonus: boolean = false, maxBonus: boolean = false) => {
+        // TODO: I don't like duplicating code, but this is a special case so I'm leaving it for now.
+        let baselineBonus = 0;
+        const level = maxBonus ? this.maxLevel : this.level
+        if (yBonus) {
+            baselineBonus = lavaFunc(this.funcY, level, this.y1, this.y2, round);
+        } else {
+            baselineBonus = lavaFunc(this.funcX, level, this.x1, this.x2, round);
+        }
+        
+        // Actual special calculation for Blood Marrow.
+        return Math.pow(Math.min(1.012, 1 + (baselineBonus / 100)), this.totalMeals);
+    }
+
+    override getBonusText = (): string => {
+        return `${this.getBonus()}% - ${this.totalMeals} Meals`;
+    }
+}
+
+export class EnhancedTalent extends Talent {
+    isEnhanced: boolean = false;
+}
+
+export class ApocalypseChowTalent extends EnhancedTalent {
+    killsOver1M: number = 0;
+    killsOver100M: number = 0;
+    getEnhancedBonus = (): number => {
+        if (!this.isEnhanced) {
+            return 0;
+        }
+
+        return Math.pow(1.1, this.killsOver100M);
+    }
+
+    
+    override getBonusText = (): string => {
+        return `Enhanced: ${Math.floor(this.getEnhancedBonus())}x - ${this.killsOver100M} Apocalypses Chowed`;
     }
 }
 

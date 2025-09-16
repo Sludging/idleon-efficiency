@@ -17,8 +17,8 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { territoryNiceNames } from '../../../data/domain/breeding';
 import { Cooking as CookingDomain, Kitchen, KitchenStatus, Meal, UpgradeType } from '../../../data/domain/cooking';
-import { getCoinsArray, nFormatter, toTime } from '../../../data/utility';
-import TextAndLabel from '../../../components/base/TextAndLabel';
+import { getCoinsArray, nFormatter, notateNumber, toTime } from '../../../data/utility';
+import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { AtomCollider } from '../../../data/domain/atomCollider';
 import { Ascending, CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -55,9 +55,9 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
             <Box>
                 <Grid columns={["60%", "40%"]} gap="small">
                     <Text size="small" color="grey-2">Cooking Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip), "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${notateNumber(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip), "Big")}/hr`}</Text>
                     <Text size="small" color="grey-2">Recipe Fire Speed:</Text>
-                    <Text size="small">{`${nFormatter(kitchen.fireSpeed, "Smaller")}/hr`}</Text>
+                    <Text size="small">{`${notateNumber(kitchen.fireSpeed, "Big")}/hr`}</Text>
                     <Text size="small" color="grey-2">New Recipe Luck:</Text>
                     <Text size="small">{`${kitchen.recipeLuck.toPrecision(3)}x`}</Text>
                 </Grid>
@@ -163,7 +163,7 @@ function Cooking() {
     const [starSignEquipped, setStarSignEquipped] = useState(false);
     const size = useContext(ResponsiveContext);
 
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const cooking = theData.get("cooking") as CookingDomain;
@@ -171,7 +171,7 @@ function Cooking() {
     const hasColliderBonus = useMemo(() => {
         const collider = theData.get("collider") as AtomCollider;
         return collider.atoms[8].level > 0;
-    }, [theData]);
+    }, [lastUpdated]);
 
     // equinox discount
     const mealCostAfterFoodLust = useMemo(() => {
@@ -180,7 +180,7 @@ function Cooking() {
         }
 
         return 1;
-    }, [cooking])
+    }, [lastUpdated])
 
     // meal max level
     const mealMaxlevel = useMemo(() => {
@@ -189,7 +189,7 @@ function Cooking() {
         }
 
         return 1;
-    }, [cooking])
+    }, [lastUpdated])
 
     const starSignUnlocked = useMemo(() => {
         if (cooking) {
@@ -200,7 +200,7 @@ function Cooking() {
         }
 
         return false;
-    }, [theData, cooking])
+    }, [lastUpdated, cooking])
 
     const starSignInfinity = useMemo(() => {
         if (cooking) {
@@ -211,7 +211,7 @@ function Cooking() {
         }
 
         return false;
-    }, [theData, cooking])
+    }, [lastUpdated, cooking])
 
     const sortByIndex = (meal1: Meal, meal2: Meal) => {
         if (meal1.level == 0 && meal2.level > 0) {
@@ -272,7 +272,7 @@ function Cooking() {
                         return indexSort;
                 }
             })
-    }, [theData, cooking, sort])
+    }, [lastUpdated, cooking, sort])
 
     function getMealExtraText(meal: Meal) {
         if (meal.level == 0) return "" //undiscovered meals
@@ -326,7 +326,42 @@ function Cooking() {
                 </Box>
             </Box>
             <Box direction="row" margin={{ top: 'small', bottom: 'small' }}>
-                <TextAndLabel label="Total Cooking Speed" text={nFormatter(cooking ? cooking.getTotalCookingSpeed(starSignEquipped, silkRodeChip) : 0)} margin={{ right: 'medium' }} />
+                <ComponentAndLabel
+                    label="Total Cooking Speed"
+                    component={
+                        <Box direction="row" gap="xsmall" align="center">
+                            <Text>{notateNumber(cooking ? cooking.getTotalCookingSpeed(starSignEquipped, silkRodeChip) : 0)}</Text>
+                            <TipDisplay
+                                heading="Speed sources"
+                                size='medium'
+                                body={
+                                    <Box>
+                                        {cooking.totalCookingSpeed.sources.map(source => {
+                                            if (typeof source.value === 'number') {
+                                                // This is ugly, fix this later.
+                                                let formattedValue = "";
+                                                if (source.format && source.format == "None") {
+                                                    formattedValue = source.value.toString();
+                                                } else {
+                                                    formattedValue = source.format ? notateNumber(source.value as number, source.format) : notateNumber(source.value as number, "Smaller");
+                                                }
+                                                return (
+                                                    <Text size="small" key={source.name}>{source.name}: {formattedValue}</Text>
+                                                )
+                                            }
+                                            return (
+                                                <Text size="small" key={source.name}>{source.name}: {source.value}</Text>
+                                            )
+                                        })}
+                                    </Box>
+                                }
+                            >
+                                <CircleInformation size="small" />
+                            </TipDisplay>
+                        </Box>
+                    }
+                    margin={{ right: 'medium' }}
+                />
                 {cooking.mealsDiscovered < cooking.getMaxMeals() && <TextAndLabel label="Meals Discovered" text={`${cooking.mealsDiscovered}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {cooking.mealsAtDiamond > 0 && cooking.mealsAtDiamond < cooking.getMaxMeals() && <TextAndLabel label="Lv 11+ Meals" text={`${cooking.mealsAtDiamond}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}
                 {hasColliderBonus && cooking.mealsAtVoid > 0 && <TextAndLabel label="Lv 30+ Meals" text={`${cooking.mealsAtVoid}/${cooking.getMaxMeals()}`} margin={{ right: 'medium' }} />}

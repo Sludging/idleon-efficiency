@@ -1,4 +1,4 @@
-import { lavaFunc, nFormatter, range, round } from '../utility'
+import { lavaFunc, letterToNumber, nFormatter, number2letter, range, round } from '../utility'
 import { Cooking } from './cooking';
 import { CauldronBase, initBubbleRepo } from './data/BubbleRepo';
 import { ImageData } from './imageData';
@@ -23,6 +23,9 @@ import { CropComponentModel } from './model/cropComponentModel';
 import { SummonComponentModel } from './model/summonComponentModel';
 import { SailTreasureComponentModel } from './model/sailTreasureComponentModel';
 import { Tome } from './tome';
+import { UpgradeVault } from './upgradeVault';
+import { Tesseract } from './tesseract';
+import { Arcade } from './arcade';
 
 export enum CauldronIndex {
     Power = 0,
@@ -135,6 +138,9 @@ export class Bubble {
 
     iconPrefix: string
 
+    prismatic: boolean = false;
+    prismaticMultiplier: number = 2;
+
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
         return new Bubble(id, data, iconPrefix, bubbleIndex);
     }
@@ -173,12 +179,19 @@ export class Bubble {
     }
 
     getBonus = (roundResult: boolean = false): number => {
-        return lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        return lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
+            (this.prismatic ? this.prismaticMultiplier : 1);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
         let titleText = this.description.replace(/{/g, nFormatter(bonus));
         return handleToolBubbles(titleText, this.name);
+    }
+
+    // This is currently only used for prismatic bubbles, but I added it here
+    // in case it's used anywhere else in the future.
+    getBubbleIdentifier = (): string => {
+        return `${number2letter(this.cauldronIndex)}${this.bubbleIndex}`;
     }
 
 }
@@ -195,7 +208,8 @@ export class ImpactedBySlabBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
     }
 
@@ -218,7 +232,8 @@ export class ImpactedByTheTomeBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus) : Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
     }
 
@@ -242,12 +257,15 @@ export class DiamonChefBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.pow(bonus, this.diamonMeals)) : Math.pow(bonus, this.diamonMeals);
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, lavaFunc(this.func, this.level, this.x1, this.x2, true).toString());
+        const theBonus = lavaFunc(this.func, this.level, this.x1, this.x2, true) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
+        let titleText = this.description.replace(/{/g, theBonus.toString());
         titleText += ` (${this.diamonMeals} diamond plates = ${bonus.toString()}x faster)`;
         return handleToolBubbles(titleText, this.name);
     }
@@ -266,7 +284,8 @@ export class DailyDripBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
         const alchemyBonus = bonus * Math.max(Math.pow(this.totalAlchemyLevel / 25, .3), 0);
         return roundResult ? round(alchemyBonus) : alchemyBonus;
     }
@@ -289,7 +308,8 @@ export class CropiusMapperBubble extends Bubble {
     }
 
     override getBonus = (roundResult: boolean = false): number => {
-        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult);
+        const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
+        (this.prismatic ? this.prismaticMultiplier : 1);
         const cropEvoBonus = bonus * this.totalW6PortalsOpened;
         return roundResult ? round(cropEvoBonus) : cropEvoBonus;
     }
@@ -350,6 +370,7 @@ export class Vial {
 
     level: number = 0;
     bonusMulitplier: number = 1;
+    vaultBonus: number = 0;
     maxedVials: number = 0;
 
     constructor(id: string, public data: BubbleModel, public vialIndex: number) {
@@ -366,9 +387,11 @@ export class Vial {
     }
 
     getBonus = (round: boolean = false): number => {
+        const base = (2 * this.maxedVials) + this.vaultBonus;
+        
         return lavaFunc(this.func, this.level, this.x1, this.x2, round)
             * this.bonusMulitplier
-            * (1 + (2 * this.maxedVials) / 100);
+            * (1 + base / 100);
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -697,6 +720,7 @@ export class Alchemy extends Domain {
         const alchemyData = data.get("CauldronInfo") as Map<string, number>[];
         const boostLevels = data.get("CauldUpgLVs") as number[];
         const cauldronP2w = data.get("CauldronP2W") as number[][];
+        const optionList = data.get("OptLacc") as (number | string)[];
 
         alchemyData.forEach((indexData, index) => {
             // Handle cauldrons if the first 4 arrays of data
@@ -731,6 +755,16 @@ export class Alchemy extends Domain {
             alchemy.p2w.vialAttempts = cauldronP2w[2][0];
             alchemy.p2w.vialsRng = cauldronP2w[2][1];
         }
+
+        // Mark bubbles that are prismatic
+        const prismaticBubbles = optionList[384] as string;
+        alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
+            // I don't think the comma in the end really matters, but it's here
+            // to match the game code.
+            if (prismaticBubbles.includes(`${bubble.getBubbleIdentifier()},`)) {
+                bubble.prismatic = true;
+            }
+        })
     }
 }
 
@@ -899,16 +933,28 @@ export function updateAlchemy(data: Map<string, any>) {
     const sailing = data.get("sailing") as Sailing;
     const taskboard = data.get("taskboard") as TaskBoard;
     const rift = data.get("rift") as Rift;
+    const vault = data.get("upgradeVault") as UpgradeVault;
+    const tesseract = data.get("tesseract") as Tesseract;
+    const arcade = data.get("arcade") as Arcade;
+    const slab = data.get("slab") as Slab;
 
-    if (lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false) {
-        alchemy.vials.forEach(vial => vial.bonusMulitplier = 2)
-    }
-
+    const vaultBonus42 = vault.getBonusForId(42);
+    const labBonusActive = lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false;
     const riftVialMastery = rift.bonuses.find(bonus => bonus.name == "Vial Mastery");
-    if (riftVialMastery?.active ?? false) {
-        const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
-        alchemy.vials.forEach(vial => vial.maxedVials = maxVials);
-    }
+    const maxVials = alchemy.vials.reduce((sum, vial) => sum += vial.level == 13 ? 1 : 0, 0);
+
+    alchemy.vials.forEach(vial => {
+        // If lab bonus is active, all vials are doubled.
+        if (labBonusActive) {
+            vial.bonusMulitplier = 2;
+        }
+        // If rift mastery is active, all vials are buffed by number of maxed vials.
+        if (riftVialMastery?.active ?? false) {
+            vial.maxedVials = maxVials;
+        }
+        // Vault Bonus 42 buffs vials as well.
+        vial.vaultBonus = vaultBonus42
+    });
 
     if (lab.bonuses.find(bonus => bonus.name == "No Bubble Left Behind")?.active) {
         let bubblesToUpgrade = 3;
@@ -957,4 +1003,16 @@ export function updateAlchemy(data: Map<string, any>) {
     if (cropiusMapperBubble) {
         cropiusMapperBubble.totalW6PortalsOpened = totalW6portalsOpened;
     }
+
+    // Update prismatic multiplier
+    const world6Trophy = slab.obtainableItems.find(item => item.internalName == "Trophy23");
+    const arcaneBonus45 = tesseract.getUpgradeBonus(45);
+    const arcadeBonus54 = arcade.bonuses[54] ? arcade.bonuses[54].getBonus() : 0;
+    const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
+
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
+        if (bubble.prismatic) {
+            bubble.prismaticMultiplier = Math.min(3, 2 + ((arcaneBonus45 + (arcadeBonus54 + world6TrophyBonus)) / 100));
+        }
+    })
 }

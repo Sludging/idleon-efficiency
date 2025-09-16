@@ -35,7 +35,7 @@
     "assets",
     "model_generation",
     "scripts",
-    "__tests__",
+    "tests",
     "*.js",
     "*.lua"
   ]

@@ -165,6 +165,7 @@ export class Arcade extends Domain {
         const arcade = data.get(this.getDataKey()) as Arcade;
         const bonusArray = data.get("ArcadeUpg") as number[];
         const optionList = data.get("OptLacc") as number[];
+        const ownedCompanions = data.get("ownedCompanions") as number[]
     
         bonusArray.forEach((level, index) => {
             if (index < arcade.bonuses.length) {
@@ -173,7 +174,13 @@ export class Arcade extends Domain {
         });
     
         arcade.balls = optionList[74] as number || 0;
-        arcade.goldBalls = optionList[75] as number || 0;    }
+        arcade.goldBalls = optionList[75] as number || 0;    
+
+        // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
+        arcade.bonuses.forEach(bonus => {
+            bonus.hasCompanion27 = ownedCompanions.includes(27);
+        });
+    }
 }
 
 export const updateArcade = (data: Map<string, any>) => {
@@ -184,12 +191,6 @@ export const updateArcade = (data: Map<string, any>) => {
     const achievementData = data.get("achievements") as Achievement[];
     const taskboardData = data.get("taskboard") as TaskBoard;
     const bribeData = data.get("bribes") as Bribe[];
-
-    // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
-    const companionsData = data.get("companions") as any[];
-    arcade.bonuses.forEach(bonus => {
-        bonus.hasCompanion27 = companionsData?.find((c: any) => c.id === 27)?.owned ?? false;
-    });
 
     // Balls per Second
     const ballVialBonus = alchemyData?.vials.find(vial => vial.name == "Ball Pickle Jar")?.getBonus() ?? 0;

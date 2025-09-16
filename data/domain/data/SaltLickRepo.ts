@@ -27,8 +27,8 @@ export const initSaltLickRepo = () => {
                 "desc": "+{% Refinery Speed for all cycle types. In other words, cycles take less time.",
                 "baseCost": 5,
                 "baseBonus": 2,
-                "maxLevel": 10,
-                "costInc": 2.2
+                "maxLevel": 100,
+                "costInc": 1.15
             }),
         new SaltLickBase(3, <SaltLickModel>{
                 "item": "Soul2",

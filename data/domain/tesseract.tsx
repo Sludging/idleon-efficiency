@@ -888,7 +888,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         });
     }
 
-    private getUpgradeBonus(upgradeId: number): number {
+    public getUpgradeBonus(upgradeId: number): number {
         const upgrade = this.upgrades.find(u => u.id === upgradeId);
         return upgrade ? upgrade.bonus : 0;
     }

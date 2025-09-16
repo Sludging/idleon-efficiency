@@ -6,6 +6,8 @@ import { Item } from "./items";
 import { MapInfo } from "./maps";
 import { Rift } from "./rift";
 import { Sneaking } from "./world-6/sneaking";
+import { initEnemyRepo } from "./data/EnemyRepo";
+import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 
 export const deathNoteMobOrder = [
     "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
@@ -123,6 +125,16 @@ export class Deathnote extends Domain {
         return toReturn;
     }
 
+    getTotalRank = (): number => {
+        const killsMap = this.getKillsMap();
+        let totalRank = 0;
+        [...killsMap.entries()].forEach(([worldName, deathnoteMobs]) => {
+            totalRank += [...deathnoteMobs.values()].reduce((sum, killCount) => sum + (worldName == "Minibosses" ? this.getDeathnoteMinibossRank(killCount) : this.getDeathnoteRank(killCount)), 0);
+        });
+
+        return totalRank;
+    }
+
     getRawKeys(): RawData[] {
         return [
             {key: "KLA_", perPlayer: true, default: []}
@@ -148,6 +160,8 @@ export class Deathnote extends Domain {
         // init again to reset the data set;
         // TODO: This is very ugly, need to do better.
         deathNote.init([], 0);
+
+        const enemyRepo = initEnemyRepo();
         
         const charCount = data.get("charCount") as number;
         const klaData = range(0, charCount).map((_, i) => { return data.get(`KLA_${i}`) }) as number[][][];
@@ -157,8 +171,15 @@ export class Deathnote extends Domain {
             deathNote.playerKillsByMap.set(pIndex, new Map());
             playerKillData.forEach((mapInfo, mapIndex) => {
                 if (mapIndex < MapInfo.length) {
+                    // Rework this whole section to not use MapInfo
                     const mapData = MapInfo[mapIndex];
                     const killCount = mapData.data.portalRequirements[0] - mapInfo[0];
+                    const enemy = enemyRepo.find(enemy => enemy.id == mapData.data.enemy);
+                    // Seems like you can kill Nothing and undefined enemies.
+                    // TODO: Will be easier to do if we based everything the enemyRepo instead of the old data.
+                    if (enemy?.data.details.AFKtype != AFKTypeEnum.Fighting) {
+                        return;
+                    }
 
                     deathNote.playerKillsByMap.get(pIndex)?.set(mapIndex, killCount);
                 }

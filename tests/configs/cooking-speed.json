@@ -1,0 +1,166 @@
+{
+  "description": "Extract cooking speed data for testing getMealSpeed function",
+  "target": "Kitchen 0 meal speed calculation",
+  "extractions": [
+    {
+      "label": "final_cooking_speed",
+      "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
+      "description": "Final cooking speed result for kitchen 0"
+    },
+    {
+      "label": "starsign_58_bonus",
+      "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
+      "description": "Star sign 58 (Gordonius Major) cooking speed bonus"
+    },
+    {
+      "label": "kitchen_0_meal_levels",
+      "expression": "idleon.getAttr(\"Cooking\")[0][6]",
+      "description": "Kitchen 0 meal levels (this.mealLevels)"
+    },
+    {
+      "label": "kitchen_0_recipe_levels",
+      "expression": "idleon.getAttr(\"Cooking\")[0][7]",
+      "description": "Kitchen 0 recipe levels (this.recipeLevels)"
+    },
+    {
+      "label": "kitchen_0_luck_levels",
+      "expression": "idleon.getAttr(\"Cooking\")[0][8]",
+      "description": "Kitchen 0 luck levels (this.luckLevels)"
+    },
+    {
+      "label": "talent_59_bonus",
+      "expression": "idleon.callFunction(\"TalentCalc\", 59)",
+      "description": "Talent 59 bonus"
+    },
+    {
+      "label": "crop_sc_3_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
+      "description": "Crop SC 3 bonus"
+    },
+    {
+      "label": "talent_enh_146_bonus",
+      "expression": "idleon.callFunction(\"TalentEnh\", 146)",
+      "description": "Enhanced Talent 146 bonus"
+    },
+    {
+      "label": "voting_13_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 13, 0)",
+      "description": "Voting 13 bonus"
+    },
+    {
+      "label": "vault_upg_54_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 54, 0)",
+      "description": "Vault upgrade 54 bonus"
+    },
+    {
+      "label": "meal_bonus_zmealfarm",
+      "expression": "idleon.callFunction(\"MealBonus\", \"zMealFarm\", 0, 0)",
+      "description": "Z meal farm bonus"
+    },
+    {
+      "label": "alch_bubbles_meal_spdz_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
+      "description": "Alchemy bubbles MealSpdz bonus"
+    },
+    {
+      "label": "atom_bonuses_8_bonus",
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 8, 0)",
+      "description": "Atom bonuses 8 bonus"
+    },
+    {
+      "label": "msa_1_bonus",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 1, 0)",
+      "description": "MSA 1 bonus"
+    },
+    {
+      "label": "artifact_13_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 13, 0)",
+      "description": "Artifact 13 bonus"
+    },
+    {
+      "label": "arcade_28_bonus",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
+      "description": "Arcade 28 bonus"
+    },
+    {
+      "label": "alch_vials_6turtle_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
+      "description": "Alchemy vial bonus for 6turtle"
+    },
+    {
+      "label": "alch_vials_MealCook_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
+      "description": "Alchemy vial bonus for MealCook"
+    },
+    {
+      "label": "stamp_bonus_MealCook",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"MealCook\")",
+      "description": "Stamp bonus for MealCook"
+    },
+    {
+      "label": "mainframe_114_bonus",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
+      "description": "Mainframe 114 bonus"
+    },
+    {
+      "label": "meal_bonus_Mcook",
+      "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
+      "description": "Meal bonus for Mcook"
+    },
+    {
+      "label": "summoning_win_bonus_15",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
+      "description": "Summoning win bonus 15"
+    },
+    {
+      "label": "holes_monument_rog_bonuses_0_2",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 2)",
+      "description": "Holes monument ROG bonuses 0 2"
+    },
+    {
+      "label": "holes_b_upg_56_bonus",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
+      "description": "Holes Schematics 56 bonus"
+    },
+    {
+      "label": "card_w6c1_bonus",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w6c1\")",
+      "description": "Card w6c1 bonus"
+    },
+    {
+      "label": "lamp_bonuses_0",
+      "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 0, 0)",
+      "description": "Holes lamp bonuses 0 0"
+    },
+    {
+      "label": "alch_vials_6cookspd_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6CookSpd\"]",
+      "description": "Alchemy vial bonus for 6CookSpd"
+    },
+    {
+      "label": "card_boss4a_bonus",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss4A\")",
+      "description": "Card Boss4A bonus"
+    },
+    {
+      "label": "mainframe_100_bonus",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
+      "description": "Mainframe 100 bonus"
+    },
+    {
+      "label": "achieve_status_225_bonus",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 225)",
+      "description": "Achieve status 225 bonus"
+    },
+    {
+      "label": "achieve_status_224_bonus",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 224)",
+      "description": "Achieve status 224 bonus"
+    },
+    {
+      "label": "meal_bonus_KitchenEff",
+      "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
+      "description": "Meal bonus for KitchenEff"
+    }
+  ]
+}

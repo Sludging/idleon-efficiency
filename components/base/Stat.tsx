@@ -10,9 +10,17 @@ export default function Stat({ stat }: { stat: StatDomain }) {
             heading={`${stat.name}${stat.max ? `(Max value: ${stat.max})` : ""}`}
             body={
                 <Box>
-                    {stat.sources.map((source, index) => (
-                        <Text size="small" key={index}>{source.name}: {nFormatter(source.value, "Smaller")}</Text>
-                    ))}
+                    {stat.sources.map((source, index) => {
+                        if (typeof source.value === 'number') {
+                            return (
+                                <Text size="small" key={source.name}>{source.name}: {nFormatter(source.value as number, "Smaller")}</Text>
+                            )
+                        }
+                        return (
+                            <Text size="small" key={source.name}>{source.name}: {source.value}</Text>
+                        )
+
+                    })}
                 </Box>
             }
             direction={TipDirection.Down}

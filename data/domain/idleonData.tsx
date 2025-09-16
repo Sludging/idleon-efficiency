@@ -1,7 +1,7 @@
 import { Traps } from './traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './statues';
-import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player } from './player';
+import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
 import { Bribes } from './bribes';
 import { GemStore } from './gemPurchases';
@@ -61,6 +61,7 @@ import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
+import { EquipmentSets } from './misc/equipmentSets';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -144,6 +145,7 @@ const domainList: Domain[] = [
     new Tesseract("tesseract"),
     new Compass("compass"),
     new Emperor("emperor"),
+    new EquipmentSets("equipmentSets"),
 ]
 
 export class IdleonData {
@@ -208,20 +210,20 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
+    "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),
     "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),
     "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
-    //"hole": (doc: Cloudsave, accountData: Map<string, any>) => updateHole(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "updatePlayerTalentLevelESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelESBonus(accountData),
     "arcaneCultistImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateArcaneCultistImpact(accountData),
     "emperorBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorBonuses(accountData),
-    "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
     "updateInfinityStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updateInfinityStarSigns(accountData),
     "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
@@ -239,12 +241,14 @@ const postProcessingMap: Record<string, Function> = {
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "playerTalentPoints": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPoints(accountData),
     "tomeScore": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeScores(accountData),
+    "hole": (doc: Cloudsave, accountData: Map<string, any>) => updateHole(accountData),
     "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
+    "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "cooking": (doc: Cloudsave, accountData: Map<string, any>) => updateCooking(accountData),
     "statueBuffs": (doc: Cloudsave, accountData: Map<string, any>) => updateStatueBonuses(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
@@ -254,7 +258,6 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
-    "arcade": (doc: Cloudsave, accountData: Map<string, any>) => updateArcade(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
@@ -318,13 +321,10 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
         parseData.set("itemsData", accountData.get("itemsData"));
         parseData.set("playerNames", charNames);
         parseData.set("servervars", serverVars);
+        parseData.set("ownedCompanions", companions);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
-
-        // Companions is unique as it needs data that doesn't come from cloudsave but from a different source, so jam it in.
-        if (dataDomain.dataKey == "companions") {
-            parseData.set("ownedCompanions", companions);
-        }
+        
         // Execute the parse function.
         dataDomain.parse(parseData);
     });
