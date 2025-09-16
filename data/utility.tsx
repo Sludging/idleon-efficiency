@@ -3,7 +3,7 @@ export const round = (num: number) => {
 }
 
 export const lavaLog = (num: number) => {
-    return Math.log(Math.max(num, 1)) / 2.303;
+    return Math.log(Math.max(num, 1)) / 2.30259;
 }
 
 export const lavaFunc = (func: string, level: number, x1: number, x2: number, roundResult: boolean = false) => {
@@ -504,8 +504,8 @@ export const notateNumber = (e: number, s: string = "Smaller"): string => {
                                   ? Math.floor(bits / 1e14) / 10 + 'Q'
                                   : 1e18 > bits
                                     ? Math.floor(bits / 1e15) + 'Q'
-                                    : Math.floor(bits /
-                                      Math.pow(10, Math.floor(lavaLog(bits))) * 100)
+                                    : Math.floor((bits /
+                                      Math.pow(10, Math.floor(lavaLog(bits)))) * 100)
                                     / 100 + 'E' + Math.floor(lavaLog(bits))
     }
     return 'Whole' === s ? (1e4 > e ? '' + Math.floor(e)
@@ -542,6 +542,6 @@ export const notateNumber = (e: number, s: string = "Smaller"): string => {
                                 : 1e22 > e ? Math.ceil(e / 1e18) + 'QQ'
                                   : 1e24 > e ? Math.ceil(e / 1e21) + 'QQQ'
                                     : 'TinyE' === s
-                                      ? '' + Math.floor(e / Math.pow(10, Math.floor(lavaLog(e))) * 10) / 10 + ('e' + Math.floor(lavaLog(e)))
-                                      : '' + Math.floor(e / Math.pow(10, Math.floor(lavaLog(e))) * 100) / 100 + ('E' + Math.floor(lavaLog(e)))
+                                      ? '' + Math.floor((e / Math.pow(10, Math.floor(lavaLog(e)))) * 10) / 10 + ('e' + Math.floor(lavaLog(e)))
+                                      : '' + Math.floor((e / Math.pow(10, Math.floor(lavaLog(e)))) * 100) / 100 + ('E' + Math.floor(lavaLog(e)))
 }
