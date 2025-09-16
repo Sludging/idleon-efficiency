@@ -7,7 +7,7 @@ import { Player } from "../player";
 
 export class EquipmentSet {
     unlocked: boolean = false;
-    constructor(public index: number, public data: EquipmentSetsModel) {    }
+    constructor(public index: number, public data: EquipmentSetsModel) { }
 
     getDescription = () => {
         if (this.data.description.includes("x ")) {
@@ -91,7 +91,7 @@ export class EquipmentSets extends Domain {
         if (active) {
             return set.getBonus(raw);
         }
-        
+
         return 0;
     }
 }

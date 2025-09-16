@@ -202,14 +202,14 @@ export class ImpactedBySlabBubble extends Bubble {
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
         return new ImpactedBySlabBubble(id, data, iconPrefix, bubbleIndex);
     }
-    
+
     constructor(id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) {
         super(id, data, iconPrefix, bubbleIndex);
     }
 
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.floor(this.lootyCount / 100) * bonus) : Math.floor(this.lootyCount / 100) * bonus;
     }
 
@@ -233,7 +233,7 @@ export class ImpactedByTheTomeBubble extends Bubble {
 
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus) : Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
     }
 
@@ -258,13 +258,13 @@ export class DiamonChefBubble extends Bubble {
 
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         return roundResult ? round(Math.pow(bonus, this.diamonMeals)) : Math.pow(bonus, this.diamonMeals);
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
         const theBonus = lavaFunc(this.func, this.level, this.x1, this.x2, true) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         let titleText = this.description.replace(/{/g, theBonus.toString());
         titleText += ` (${this.diamonMeals} diamond plates = ${bonus.toString()}x faster)`;
         return handleToolBubbles(titleText, this.name);
@@ -285,7 +285,7 @@ export class DailyDripBubble extends Bubble {
 
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         const alchemyBonus = bonus * Math.max(Math.pow(this.totalAlchemyLevel / 25, .3), 0);
         return roundResult ? round(alchemyBonus) : alchemyBonus;
     }
@@ -309,7 +309,7 @@ export class CropiusMapperBubble extends Bubble {
 
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, roundResult) *
-        (this.prismatic ? this.prismaticMultiplier : 1);
+            (this.prismatic ? this.prismaticMultiplier : 1);
         const cropEvoBonus = bonus * this.totalW6PortalsOpened;
         return roundResult ? round(cropEvoBonus) : cropEvoBonus;
     }
@@ -388,7 +388,7 @@ export class Vial {
 
     getBonus = (round: boolean = false): number => {
         const base = (2 * this.maxedVials) + this.vaultBonus;
-        
+
         return lavaFunc(this.func, this.level, this.x1, this.x2, round)
             * this.bonusMulitplier
             * (1 + base / 100);
@@ -759,11 +759,11 @@ export class Alchemy extends Domain {
         // Mark bubbles that are prismatic
         const prismaticBubbles = optionList[384] as string;
         if (prismaticBubbles && prismaticBubbles.length > 0) {
-        alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
-            // I don't think the comma in the end really matters, but it's here
-            // to match the game code.
-            if (prismaticBubbles.includes(`${bubble.getBubbleIdentifier()},`)) {
-                bubble.prismatic = true;
+            alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
+                // I don't think the comma in the end really matters, but it's here
+                // to match the game code.
+                if (prismaticBubbles.includes(`${bubble.getBubbleIdentifier()},`)) {
+                    bubble.prismatic = true;
                 }
             })
         }

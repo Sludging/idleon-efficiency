@@ -61,20 +61,20 @@ export class ArcadeBonus {
     getBonus = (round: boolean = false, level: number = this.level) => {
         // Calculate base bonus using lava function
         const baseBonus = lavaFunc(this.func, level, this.x1, this.x2, round);
-        
+
         // Apply multipliers as per game source code
         let multiplier = 1;
-        
+
         // If at max level (101), double the multiplier
         if (level >= 101) {
             multiplier *= 2;
         }
-        
+
         // If companion 27 (reindeer) is active, double the multiplier again
         if (this.hasCompanion27) {
             multiplier *= 2;
         }
-        
+
         const finalBonus = baseBonus * multiplier;
         return round ? Math.round(finalBonus) : finalBonus;
     }
@@ -151,7 +151,7 @@ export class Arcade extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "ArcadeUpg", perPlayer: false, default: []}
+            { key: "ArcadeUpg", perPlayer: false, default: [] }
         ]
     }
 
@@ -166,15 +166,15 @@ export class Arcade extends Domain {
         const bonusArray = data.get("ArcadeUpg") as number[];
         const optionList = data.get("OptLacc") as number[];
         const ownedCompanions = data.get("ownedCompanions") as number[]
-    
+
         bonusArray.forEach((level, index) => {
             if (index < arcade.bonuses.length) {
                 arcade.bonuses[index].level = level;
             }
         });
-    
+
         arcade.balls = optionList[74] as number || 0;
-        arcade.goldBalls = optionList[75] as number || 0;    
+        arcade.goldBalls = optionList[75] as number || 0;
 
         // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
         if (ownedCompanions && ownedCompanions.length > 0) {
