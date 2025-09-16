@@ -7,7 +7,7 @@ import { Player } from "../player";
 
 export class EquipmentSet {
     unlocked: boolean = false;
-    constructor(public index: number, public data: EquipmentSetsModel) {    }
+    constructor(public index: number, public data: EquipmentSetsModel) { }
 
     getDescription = () => {
         if (this.data.description.includes("x ")) {
@@ -66,9 +66,12 @@ export class EquipmentSets extends Domain {
         equipmentSets.unlocked = smithyUnlocked == 1;
         equipmentSets.permanentlyActive = isSmithyUnlocked;
         equipmentSets.daysPassed = days;
-        equipmentSets.equipmentSets.forEach(set => {
-            set.unlocked = unlockedSets.includes(set.data.name);
-        });
+        // If user unlocked sets, set the unlocked status for each set
+        if (unlockedSets && unlockedSets.length > 0) {
+            equipmentSets.equipmentSets.forEach(set => {
+                set.unlocked = unlockedSets.includes(set.data.name);
+            });
+        }
     }
 
     getSetBonus = (setName: string, player?: Player, raw: boolean = false) => {
@@ -88,7 +91,7 @@ export class EquipmentSets extends Domain {
         if (active) {
             return set.getBonus(raw);
         }
-        
+
         return 0;
     }
 }
