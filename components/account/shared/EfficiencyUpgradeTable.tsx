@@ -16,7 +16,7 @@ const isCompassUpgrade = (x: EfficiencyUpgrade): x is CompassUpgrade => "indexIn
 interface EfficiencyUpgradeTableProps<T extends UpgradeTableData> {
     // Data and configuration
     upgradeData: T[];
-    
+
     // Filter configuration
     resourceFilterLabel?: string;
     resourceFilterOptions?: string[];
@@ -24,11 +24,11 @@ interface EfficiencyUpgradeTableProps<T extends UpgradeTableData> {
     pathFilterOptions?: string[];
     sortOptions?: Array<{ label: string; value: string }>;
     searchPlaceholder?: string;
-    
+
     // Data filtering keys
     resourceFilterKey?: keyof T;
     pathFilterKey?: keyof T;
-    
+
     // Domain-specific functions
     getResourceImageData: (upgrade: any) => any;
     canAffordUpgrade: (upgrade: any, cost?: number) => boolean;
@@ -54,7 +54,7 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
     getDescription,
     tooltipHeading = "Exact Resource Count"
 }: EfficiencyUpgradeTableProps<T>) {
-    
+
     // Manage filter state internally
     const [filters, setFilters] = useState<FilterOptions>({
         hideLocked: true,
@@ -63,7 +63,7 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
         sortBy: 'cost',
         resourceFilter: 'All'
     });
-    
+
     // Apply filters and sorting
     const filteredAndSortedData = useUpgradeTableData(upgradeData, filters, resourceFilterKey, pathFilterKey);
 
@@ -105,28 +105,10 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                     return <Text size="xsmall">-</Text>;
                 }
 
-                // For locked upgrades, show unlock requirement
+                // For locked compass upgrades, show the first level cost
                 if (!data.upgrade.isUnlocked()) {
-                    if (data.upgrade.getUnlockRequirement()) {
-                        const unlockReq = data.upgrade.getUnlockRequirement();
-                        return (
-                            <TipDisplay
-                                heading="Unlock Requirement"
-                                body={
-                                    <Text size="small">Unlock at {unlockReq} total level</Text>
-                                }
-                                direction={TipDirection.Down}
-                            >
-                                <Text size="xsmall" color="grey-2">
-                                    Unlock at {unlockReq}
-                                </Text>
-                            </TipDisplay>
-                        );
-                    }
-
-                    // For locked compass upgrades, show the first level cost
-                    if (isCompassUpgrade(data.upgrade)) {
-                        return (
+                    return (
+                        <Box style={{ opacity: 0.7 }}>
                             <TipDisplay
                                 heading="First Level Cost"
                                 body={
@@ -140,8 +122,8 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                                     resourceImageData={getResourceImageData(data.upgrade)}
                                 />
                             </TipDisplay>
-                        );
-                    }
+                        </Box>
+                    );
                 }
 
                 return (
@@ -168,27 +150,19 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                     if (data.upgrade.getUnlockRequirement()) {
                         const unlockReq = data.upgrade.getUnlockRequirement();
                         return (
-                            <TipDisplay
-                                heading="Cost to Unlock"
-                                body={
-                                    <Text size="small">Cost to reach total level {unlockReq}</Text>
-                                }
-                                direction={TipDirection.Down}
-                            >
-                                <Text size="xsmall" color="grey-2">
-                                    Level {unlockReq}
-                                </Text>
-                            </TipDisplay>
+                            <Text size="xsmall" color="grey-2">
+                                Unlock at {unlockReq}
+                            </Text>
                         );
                     }
-                    
+
                     // If the upgrade is a compass upgrade, show the cost to unlock
                     if (isCompassUpgrade(data.upgrade)) {
                         const compassUpgrade = data.upgrade as CompassUpgrade;
                         if (compassUpgrade.costToUnlock === 0) {
                             return <Text size="xsmall">Kill Abom</Text>;
                         }
-    
+
                         return (
                             <TipDisplay
                                 heading="Cost to Unlock"
@@ -249,6 +223,7 @@ export function EfficiencyUpgradeTable<T extends UpgradeTableData>({
                 fill
                 columns={columns}
                 data={filteredAndSortedData}
+                primaryKey="id"
                 background={{
                     body: ["dark-1", "grey-4"]
                 }}
