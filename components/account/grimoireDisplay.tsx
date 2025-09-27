@@ -209,14 +209,14 @@ export function GrimoireDisplay() {
     const upgradeData = useMemo(() => {
         if (!grimoire) return [];
 
-        return grimoire.upgrades.map(upgrade => {
-            // Calculate cost for next 10 levels if max level is very high
-            const costForNext10Levels = upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels([], 10) : 0;
-
+        return grimoire.upgrades
+            // Ripped Page are filler upgrades, ignore them.
+            .filter(upgrade => upgrade.data.name !== "Ripped Page")
+            .map(upgrade => {
             // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
             const goalCost = !upgrade.unlocked
                 ? 0 // Locked upgrades don't have a direct cost, they need level requirements
-                : (upgrade.data.max_level >= 999999 ? costForNext10Levels : upgrade.costToMax);
+                : (upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels(grimoire.upgrades, 10) : upgrade.costToMax);
 
             return {
                 name: upgrade.getName(),

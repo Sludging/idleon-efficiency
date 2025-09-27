@@ -290,15 +290,10 @@ function CompassDisplay() {
         return compass.upgrades
             .filter(upgrade => upgrade.data.upgradeType !== "Unknown" && upgrade.data.description != "Titan doesnt exist")
             .map(upgrade => {
-                // Calculate cost to max or 10 levels
-                const costToMax = upgrade.data.maxLevel >= 999999
-                    ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata)
-                    : upgrade.costToMax;
-
-                // Calculate goal cost (unlock cost for locked, cost to max/10 for unlocked)
+                // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
                 const goalCost = !upgrade.unlocked
-                    ? upgrade.costToUnlock
-                    : costToMax;
+                ? 0 // Locked upgrades don't have a direct cost, they need level requirements
+                : (upgrade.data.maxLevel >= 999999 ? upgrade.getCostForNextNLevels(compass.upgrades, 10, compass.upgradeMetadata) : upgrade.costToMax);
 
                 return {
                     name: upgrade.getName(),

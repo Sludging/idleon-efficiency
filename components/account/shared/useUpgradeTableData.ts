@@ -55,24 +55,29 @@ export function useUpgradeTableData<T extends UpgradeTableData>(
         // Apply sorting
         data.sort((a, b) => {
             // Always put locked and maxed items at the bottom
-            if ((a.locked || a.maxed) && !(b.locked || b.maxed)) return 1;
-            if (!(a.locked || a.maxed) && (b.locked || b.maxed)) return -1;
-
-            if (filters.sortBy === 'default') {
-                // Default order by ID
-                return a.id - b.id;
-            } else if (filters.sortBy === 'cost') {
-                // Sort by cost (ascending)
-                return a.nextCost - b.nextCost;
+            const aIsDisabled = a.locked || a.maxed;
+            const bIsDisabled = b.locked || b.maxed;
+            
+            if (aIsDisabled && !bIsDisabled) return 1;
+            if (!aIsDisabled && bIsDisabled) return -1;
+            
+            // If both have the same disabled status, apply the selected sort criteria
+            let sortResult = 0;
+            
+            if (filters.sortBy === 'cost' && !aIsDisabled) {
+                // Only sort by cost for enabled items
+                sortResult = a.nextCost - b.nextCost;
             } else if (filters.sortBy === 'path' && 'pathIndex' in a && 'pathIndex' in b) {
                 // Sort by path first, then by path index
                 if (a.type !== b.type) {
-                    return a.type.localeCompare(b.type);
+                    sortResult = a.type.localeCompare(b.type);
+                } else {
+                    sortResult = (a as any).pathIndex - (b as any).pathIndex;
                 }
-                return (a as any).pathIndex - (b as any).pathIndex;
             }
-
-            return a.id - b.id;
+            
+            // Fall back to ID sorting if primary sort is equal or for default/disabled items
+            return sortResult !== 0 ? sortResult : a.id - b.id;
         });
 
         return data;

@@ -399,8 +399,7 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         }
 
         let totalCost = 0;
-        const tempUpgrade = new CompassUpgrade(this.id, this.data);
-        tempUpgrade.level = this.level;
+        const tempUpgrade = this.copyUpgrade() as CompassUpgrade;
 
         for (let i = this.level; i < this.data.maxLevel; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades, upgradeMetadata);
@@ -412,12 +411,7 @@ export class CompassUpgrade implements EfficiencyUpgrade {
 
     getCostForNextNLevels = (allUpgrades: CompassUpgrade[], levels: number, upgradeMetadata: Record<string, { pathLevel: number, pathUpgrades: number[] }>): number => {
         let totalCost = 0;
-        const tempUpgrade = new CompassUpgrade(this.id, this.data);
-        // Preserve all necessary fields from the original upgrade
-        tempUpgrade.level = this.level;
-        tempUpgrade.indexInPath = this.indexInPath;
-        tempUpgrade.dustServerVarMultiplier = this.dustServerVarMultiplier;
-        tempUpgrade.unlocked = this.unlocked;
+        const tempUpgrade = this.copyUpgrade() as CompassUpgrade;
 
         // Only calculate up to max level or the specified number of levels, whichever is smaller
         const levelsToCalculate = Math.min(levels, this.data.maxLevel - this.level);
@@ -780,17 +774,7 @@ export class Compass extends Domain implements EfficiencyDomain {
     }
 
     copyUpgrade(upgrade: EfficiencyUpgrade): EfficiencyUpgrade {
-        const compassUpgrade = upgrade as CompassUpgrade;
-        const copy = new CompassUpgrade(compassUpgrade.id, compassUpgrade.data);
-        copy.level = compassUpgrade.level;
-        copy.unlocked = compassUpgrade.unlocked;
-        copy.cost = compassUpgrade.cost;
-        copy.costToMax = compassUpgrade.costToMax;
-        copy.costToUnlock = compassUpgrade.costToUnlock;
-        copy.indexInPath = compassUpgrade.indexInPath;
-        copy.dustServerVarMultiplier = compassUpgrade.dustServerVarMultiplier;
-        copy.bonus = compassUpgrade.bonus;
-        return copy;
+        return upgrade.copyUpgrade() as CompassUpgrade;
     }
 
     recalculateUpgrades(upgrades: EfficiencyUpgrade[]): void {

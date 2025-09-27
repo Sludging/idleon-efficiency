@@ -91,9 +91,7 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
 
     getCostToMax = (allUpgrades: TesseractUpgrade[]): number => {
         let totalCost = 0;
-        const tempUpgrade = new TesseractUpgrade(this.id, this.data);
-        tempUpgrade.level = this.level;
-        tempUpgrade.costReductionFactor = this.costReductionFactor;
+        const tempUpgrade = this.copyUpgrade() as TesseractUpgrade;
 
         for (let i = this.level; i < this.data.max_level; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades);
@@ -105,9 +103,7 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
 
     getCostForNextNLevels = (allUpgrades: TesseractUpgrade[], levels: number): number => {
         let totalCost = 0;
-        const tempUpgrade = new TesseractUpgrade(this.id, this.data);
-        tempUpgrade.level = this.level;
-        tempUpgrade.costReductionFactor = this.costReductionFactor;
+        const tempUpgrade = this.copyUpgrade() as TesseractUpgrade;
 
         // Only calculate up to max level or the specified number of levels, whichever is smaller
         const levelsToCalculate = Math.min(levels, this.data.max_level - this.level);
