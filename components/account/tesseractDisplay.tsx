@@ -133,7 +133,10 @@ export function TesseractDisplay() {
     const upgradeData = useMemo(() => {
         if (!tesseract) return [];
 
-        return tesseract.upgrades.map(upgrade => {
+        return tesseract.upgrades
+            // Boundless Energy are filler upgrades, ignore them.
+            .filter(upgrade => upgrade.data.name !== "Boundless Energy")
+            .map(upgrade => {
             // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
             const goalCost = !upgrade.unlocked
                 ? 0 // Locked upgrades don't have a direct cost, they need level requirements

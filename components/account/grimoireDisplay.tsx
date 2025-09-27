@@ -209,7 +209,10 @@ export function GrimoireDisplay() {
     const upgradeData = useMemo(() => {
         if (!grimoire) return [];
 
-        return grimoire.upgrades.map(upgrade => {
+        return grimoire.upgrades
+            // Ripped Page are filler upgrades, ignore them.
+            .filter(upgrade => upgrade.data.name !== "Ripped Page")
+            .map(upgrade => {
             // Calculate cost for next 10 levels if max level is very high
             const costForNext10Levels = upgrade.data.max_level >= 999999 ? upgrade.getCostForNextNLevels([], 10) : 0;
 
