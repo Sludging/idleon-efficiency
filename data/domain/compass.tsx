@@ -404,9 +404,6 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         for (let i = this.level; i < this.data.maxLevel; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades, upgradeMetadata);
             tempUpgrade.level++;
-            if (tempUpgrade.data.name == "Atomic Potential") {
-                console.log("Atomic Potential - Max Math", tempUpgrade.level,  tempUpgrade.getCost(allUpgrades, upgradeMetadata), totalCost, this.data.maxLevel)
-            }
         }
 
         return totalCost;
