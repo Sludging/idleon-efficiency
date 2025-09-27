@@ -17,6 +17,7 @@ import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { CharacterBox } from '../../../components/base/CharacterBox';
 
 function AlignmentDisplay() {
     const [divinity, setDivinity] = useState<DivinityDomain>();
@@ -103,27 +104,48 @@ function GodDisplay() {
             {
                 divinity && divinity.gods.map((god, index) => {
                     return (
-                        <ShadowBox style={{ opacity: god.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" direction="row" wrap margin={{ bottom: 'small', right: 'small' }} justify="between">
+                        <ShadowBox style={{ opacity: god.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" margin={{ bottom: 'small', right: 'small' }} justify="between" gap="small">
                             <Grid columns={{ count: 5, size: 'auto' }} fill>
                                 <Box margin={{ bottom: 'small', right: 'small' }} direction="row" gap="xsmall" align="center">
                                     <IconImage data={god.getImageData()} scale={0.5} />
-                                    <TextAndLabel textSize='small' text={god.data.name} label="Name" />
+                                    <TextAndLabel textSize='xsmall' text={god.data.name} label="Name" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={god.data.majorBonus} label="Link Bonus" />
+                                    <TextAndLabel textSize='xsmall' text={god.data.majorBonus} label="Link Bonus" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={god.getMaxMinorLinkBonusText()} label="Minor Link Bonus" tooltip={
+                                    <TextAndLabel textSize='xsmall' text={god.getMaxMinorLinkBonusText()} label="Minor Link Bonus" tooltip={
                                         <Text>This is the max possible bonus, each character gets a reduced amount based on their divinity level.</Text>
                                     } />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={`${god.blessLevel}/100`} label="Blessing Level" />
+                                    <TextAndLabel textSize='xsmall' text={`${god.blessLevel}/100`} label="Blessing Level" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='small' text={god.getBlessingBonusText()} label="Blessing Bonus" />
+                                    <TextAndLabel textSize='xsmall' text={god.getBlessingBonusText()} label="Blessing Bonus" />
                                 </Box>
                             </Grid>
+                            {
+                                god.linkedPlayers.length > 0 && (
+                                    <Box margin={{ bottom: 'small', right: 'small' }}>
+                                        <ComponentAndLabel
+                                            label="Linked Characters"
+                                            component={
+                                                <Box direction="row" wrap gap="xsmall" pad="small">
+                                                    {god.linkedPlayers.map((player, index) => {
+                                                        return (
+                                                            <CharacterBox
+                                                                key={index}
+                                                                player={player}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Box>
+                                            }
+                                        />
+                                    </Box>
+                                )
+                            }
                         </ShadowBox>
                     )
                 })
