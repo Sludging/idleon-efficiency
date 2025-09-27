@@ -7,6 +7,17 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.41-v4",
+    title: "Minor bug fixes",
+    date: "September 27, 2025",
+    changes: [
+      "Fix filtering on elite class upgrades sometimes showing invalid upgrades.",
+      "Fix max level costs calculations for elite class upgrades.",
+      "Fix bug with pocket divinity.",
+      "Add 'Linked Players' display to the gods display in Divinity.",
+    ]
+  },
+  {
     version: "1.2.41-v3",
     title: "General fixes!",
     date: "September 16, 2025",
