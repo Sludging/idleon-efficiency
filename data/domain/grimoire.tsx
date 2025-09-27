@@ -239,8 +239,7 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
 
     getCostToMax = (allUpgrades: GrimoireUpgrade[]): number => {
         let totalCost = 0;
-        const tempUpgrade = new GrimoireUpgrade(this.id, this.data);
-        tempUpgrade.level = this.level;
+        const tempUpgrade = this.copyUpgrade() as GrimoireUpgrade; 
 
         for (let i = this.level; i < this.data.max_level; i++) {
             totalCost += tempUpgrade.getCost(allUpgrades);
@@ -252,8 +251,7 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
 
     getCostForNextNLevels = (allUpgrades: GrimoireUpgrade[], levels: number): number => {
         let totalCost = 0;
-        const tempUpgrade = new GrimoireUpgrade(this.id, this.data);
-        tempUpgrade.level = this.level;
+        const tempUpgrade = this.copyUpgrade() as GrimoireUpgrade;
 
         // Only calculate up to max level or the specified number of levels, whichever is smaller
         const levelsToCalculate = Math.min(levels, this.data.max_level - this.level);
