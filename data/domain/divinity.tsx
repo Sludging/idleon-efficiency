@@ -201,7 +201,7 @@ export const updateDivinity = (data: Map<string, any>) => {
         });
 
         // Get Pocket Divinity linked gods
-        const pocketDivinity = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.data.name == "Pocket_Divinity") as PocketDivinityUpgrade;
+        const pocketDivinity = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 21) as PocketDivinityUpgrade;
         if (pocketDivinity) {
             // Each linked god in the pocket divinity upgrade applies to all players.
             pocketDivinity.linkedGods.forEach(godIndex => {

@@ -60,7 +60,7 @@ export class CosmoUpgrade {
     static fromBase(data: CosmoUpgradeBase[]) {
         return data.filter(d => d.data.name != "Confused_Bonus").map(d => {
             // Special handling for Pocket Divinity upgrade
-            if (d.data.name === "Pocket_Divinity") {
+            if (d.index == 21) {
                 return new PocketDivinityUpgrade(d.index, d.data);
             }
             return new CosmoUpgrade(d.index, d.data);
@@ -773,7 +773,7 @@ export class Hole extends Domain {
             upgrade.level = holeData[6][index];
             upgrade.unlocked = upgrade.level > 0;
 
-            if (upgrade.data.name == "Pocket_Divinity") {
+            if (upgrade.index == 21) {
                 const pocketUpgrade = upgrade as PocketDivinityUpgrade;
                 if (pocketUpgrade.level >= 1) {
                     pocketUpgrade.linkedGods.push(holeData[11][29]);
@@ -815,8 +815,8 @@ export class Hole extends Domain {
             measurement.golemKills = holeData[11][63] || 0;            
             // Sum all studies for studiesDone
             measurement.studiesDone = hole.studies.reduce((sum, value) => sum + (value.level || 0), 0);
-            // Cosmo Bonus
-            measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.data.name == "Lengthmeister")?.getBonus() || 0;
+            // Cosmo Bonus - Lengthmeister
+            measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() || 0;
         });
 
         // Monument Jazz
@@ -835,7 +835,8 @@ export class Hole extends Domain {
             });
             monument.bonuses.forEach(bonus => {
                 bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
-                bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.data.name == "Monumental Vibes")?.getBonus() || 0;
+                // Monumental Vibes
+                bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() || 0;
                 bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
             });
         });
