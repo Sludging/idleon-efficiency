@@ -12,7 +12,7 @@ import { Player } from '../../../data/domain/player';
 import { ClassIndex } from '../../../data/domain/talents';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-08-23'; // This should match extraction time
+const saveName = 'live-game-2025-10-26'; // This should match extraction time
 const extractionResultsName = 'talents-sludgeadin.json';
 
 

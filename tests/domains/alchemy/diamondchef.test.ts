@@ -13,8 +13,8 @@ import { Alchemy, Bubble, CauldronIndex, DiamonChefBubble } from '../../../data/
 import { lavaFunc } from '../../../data/utility';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'listix-11092025'; // This should match extraction time
-const extractionResultsName = 'diamond-chef-listix.json';
+const saveName = 'live-game-2025-10-26'; // This should match extraction time
+const extractionResultsName = 'diamond-chef.json';
 
 
 export const alchemyParameterSpecs: Record<string, ParameterTestSpec> = {
