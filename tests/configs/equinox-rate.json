@@ -1,0 +1,96 @@
+{
+  "description": "Extract data for equinox bar fill rate",
+  "target": "Equinox bar fill rate",
+  "extractions": [
+    {
+      "label": "has_bun_q",
+      "expression": "idleon.getAttr(\"BundlesReceived\").h.bun_q",
+      "description": "Has bun_q bundle"
+    },
+    {
+      "label": "voting_bonus_32",
+      "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\", 32, 0)",
+      "description": "Voting bonus 32"
+    },
+    {
+      "label": "companion_15_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 15)",
+      "description": "Companion 15 bonus"
+    },
+    {
+      "label": "cosmo_bonus_2_5",
+      "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\", 2, 5)",
+      "description": "Cosmo bonus 2 - 5"
+    },
+    {
+      "label": "event_shop_owned_3",
+      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\", 3, 0)",
+      "description": "Event shop owned 3"
+    },
+    {
+      "label": "option_320_bonus",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[320]",
+      "description": "Option 320 bonus"
+    },
+    {
+      "label": "alch_vials_eq_bar_bonus",
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h.EqBar",
+      "description": "Alch vials eq bar bonus"
+    },
+    {
+      "label": "cloud_bonus_3",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 3)",
+      "description": "Cloud bonus 3"
+    },
+    {
+      "label": "cloud_bonus_9",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 9)",
+      "description": "Cloud bonus 9"
+    },
+    {
+      "label": "cloud_bonus_14",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 14)",
+      "description": "Cloud bonus 14"
+    },
+    {
+      "label": "cloud_bonus_19",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 19)",
+      "description": "Cloud bonus 19"
+    },
+    {
+      "label": "cloud_bonus_22",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 22)",
+      "description": "Cloud bonus 22"
+    },
+    {
+      "label": "cloud_bonus_24",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 24)",
+      "description": "Cloud bonus 24"
+    },
+    {
+      "label": "cloud_bonus_29",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 29)",
+      "description": "Cloud bonus 29"
+    },
+    {
+      "label": "arcade_bonus_41",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 41)",
+      "description": "Arcade bonus 41"
+    },
+    {
+      "label": "emperor_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\",\"EmperorBon\", 5, 0)",
+      "description": "Emperor bonus 5"
+    },
+    {
+      "label": "tesseract_bonus_37",
+      "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
+      "description": "Tesseract bonus 37"
+    },
+    {
+      "label": "equinox_bar_rate",
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
+      "description": "Equinox bar rate"
+    }
+  ]
+}

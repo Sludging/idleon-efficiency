@@ -8,48 +8,67 @@
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
-import { Player } from '../../../data/domain/player';
-import { ClassIndex } from '../../../data/domain/talents';
+import { Achievement } from '../../../data/domain/achievements';
+import { Alchemy, Bubble, CauldronIndex, DiamonChefBubble } from '../../../data/domain/alchemy';
+import { lavaFunc } from '../../../data/utility';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'live-game-2025-10-26'; // This should match extraction time
-const extractionResultsName = 'talents-sludgeadin.json';
+const extractionResultsName = 'diamond-chef.json';
 
 
-export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
-  talent_146_bonus: {
-    id: 'talent_146_enhanced_bonus',
-    description: 'Apocalypse Chow - Talent 146 Enhanced bonus',
-    extractionKey: 'talent_146_bonus',
+export const alchemyParameterSpecs: Record<string, ParameterTestSpec> = {
+  diamondChefIsBubbleSuper: {
+    id: 'diamond_chef_is_bubble_super',
+    description: 'Diamond Chef - Is Bubble Super',
+    extractionKey: 'diamond_chef_is_bubble_super',
     domainExtractor: (gameData) => {
-      const players = gameData.get("players") as Player[];
-      const lastIndexBloodBerserker = players.filter(player => player.getEliteClass() == ClassIndex.Blood_Berserker).sort((player1, player2) => player2.playerID - player1.playerID)[0] ?? undefined;
-      return lastIndexBloodBerserker.getTalentEnhancedBonus(146);
+      const alchemy = gameData.get("alchemy") as Alchemy;
+      return (alchemy.cauldrons[CauldronIndex.Kazam].bubbles.find(bubble => bubble.name == "Diamond Chef")?.prismatic ?? false) ? 1 : 0;
     }
   },
-  all_talent_level_146: {
-    id: 'all_talent_level_146',
-    description: 'All talent level 146',
-    extractionKey: 'all_talent_level_146',
+
+  alchemyPrismaticBonus: {
+    id: 'alchemy_prismatic_bonus',
+    description: 'Alchemy Prismatic Bonus',
+    extractionKey: 'alchemy_prismatic_bonus',
     domainExtractor: (gameData) => {
-        const players = gameData.get("players") as Player[];
-        const talent146 = players.flatMap(player => player.talents).find(talent => talent.skillIndex == 146);
-        return talent146 ? talent146.maxLevel - talent146.bookMaxLevel : 0;
+      const alchemy = gameData.get("alchemy") as Alchemy;
+      return alchemy.cauldrons[CauldronIndex.Kazam].bubbles.find(bubble => bubble.name == "Diamond Chef")?.prismaticMultiplier ?? 2;
     }
   },
-  all_talent_level_49: {
-    id: 'all_talent_level_49',
-    description: 'All talent level - 49',
-    extractionKey: 'all_talent_level_49',
+  diamondChefBaseBonus: {
+    id: 'diamond_chef_base_bonus',
+    description: 'Diamond Chef - Base Bonus',
+    extractionKey: 'diamond_chef_base_bonus',
     domainExtractor: (gameData) => {
-      const players = gameData.get("players") as Player[];
-      const talent49 = players.flatMap(player => player.talents).find(talent => talent.skillIndex == 49);
-      return talent49 ? talent49.maxLevel - talent49.bookMaxLevel : 0;
+      const alchemy = gameData.get("alchemy") as Alchemy;
+      const diamondChef = alchemy.cauldrons[CauldronIndex.Kazam].bubbles.find(bubble => bubble.name == "Diamond Chef") as DiamonChefBubble;
+      const baseMath = lavaFunc(diamondChef.data.func, diamondChef.level, diamondChef.data.x1, diamondChef.data.x2, false)
+      return baseMath;
+    }
+  },
+
+  diamondChefFinalBonus: {
+    id: 'diamond_chef_final_bonus',
+    description: 'Diamond Chef - Final Bonus',
+    extractionKey: 'diamond_chef_final_bonus',
+    domainExtractor: (gameData) => {
+      const alchemy = gameData.get("alchemy") as Alchemy;
+      const diamonChef = alchemy.cauldrons[CauldronIndex.Kazam].bubbles.find(bubble => bubble.name == "Diamond Chef")?.getBonus() ?? 0;
+      return diamonChef
     }
   },
 };
 
-describe('Talent Domain - General - Parameters', () => {
+// Reenable this when it works
+/* {
+  "label": "diamond_chef_base_bonus",
+  "expression": "Math.abs(idleon.callFunction(\"ArbitraryCode5Inputs\", idleon.getAttr(\"CustomLists\").h.AlchemyDescription[3][17][3], idleon.getAttr(\"CustomLists\").h.AlchemyDescription[3][17][1], idleon.getAttr(\"CustomLists\").h.AlchemyDescription[3][17][2], idleon.getAttr(\"CauldronInfo\")[3][17], 0, 0))",
+  "description": "Diamond Chef - Base Bonus"
+} */
+
+describe('Alchemy Domain - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
   
@@ -68,12 +87,13 @@ describe('Talent Domain - General - Parameters', () => {
     
 
   describe('Parameter Validation', () => {
-    it('validates all general talent parameters against extracted results', () => {
+    it('validates diamond chef parameters against extracted results', () => {
       // Run table-driven parameter validation
       const parameterResults = runParameterValidationSuite(
-        generalTalentParameterSpecs,
+        alchemyParameterSpecs,
         extractionResults,
-        gameData
+        gameData,
+        0.01
       );
       // Ensure we validated at least some parameters
       expect(parameterResults.length).toBeGreaterThan(0);

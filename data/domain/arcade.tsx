@@ -165,7 +165,6 @@ export class Arcade extends Domain {
         const arcade = data.get(this.getDataKey()) as Arcade;
         const bonusArray = data.get("ArcadeUpg") as number[];
         const optionList = data.get("OptLacc") as number[];
-        const ownedCompanions = data.get("ownedCompanions") as number[]
 
         bonusArray.forEach((level, index) => {
             if (index < arcade.bonuses.length) {
@@ -175,13 +174,6 @@ export class Arcade extends Domain {
 
         arcade.balls = optionList[74] as number || 0;
         arcade.goldBalls = optionList[75] as number || 0;
-
-        // Check for companion 27 (reindeer) - "2.00x Gold Ball Shop Bonuses"
-        if (ownedCompanions && ownedCompanions.length > 0) {
-            arcade.bonuses.forEach(bonus => {
-                bonus.hasCompanion27 = ownedCompanions.includes(27);
-            });
-        };
     }
 }
 

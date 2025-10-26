@@ -1,0 +1,122 @@
+{
+  "timestamp": "2025-10-26T07:40:59.459Z",
+  "extractions": {
+    "has_bun_q": {
+      "expression": "idleon.getAttr(\"BundlesReceived\").h.bun_q",
+      "result": 1,
+      "description": "Has bun_q bundle",
+      "extractedAt": "2025-10-26T07:40:59.523Z"
+    },
+    "voting_bonus_32": {
+      "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\", 32, 0)",
+      "result": 0,
+      "description": "Voting bonus 32",
+      "extractedAt": "2025-10-26T07:40:59.550Z"
+    },
+    "companion_15_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 15)",
+      "result": 2.5,
+      "description": "Companion 15 bonus",
+      "extractedAt": "2025-10-26T07:40:59.554Z"
+    },
+    "cosmo_bonus_2_5": {
+      "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\", 2, 5)",
+      "result": 12,
+      "description": "Cosmo bonus 2 - 5",
+      "extractedAt": "2025-10-26T07:40:59.582Z"
+    },
+    "event_shop_owned_3": {
+      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\", 3, 0)",
+      "result": 0,
+      "description": "Event shop owned 3",
+      "extractedAt": "2025-10-26T07:40:59.585Z"
+    },
+    "option_320_bonus": {
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[320]",
+      "result": 0,
+      "description": "Option 320 bonus",
+      "extractedAt": "2025-10-26T07:40:59.588Z"
+    },
+    "alch_vials_eq_bar_bonus": {
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h.EqBar",
+      "result": 332.8,
+      "description": "Alch vials eq bar bonus",
+      "extractedAt": "2025-10-26T07:40:59.591Z"
+    },
+    "cloud_bonus_3": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 3)",
+      "result": 1,
+      "description": "Cloud bonus 3",
+      "extractedAt": "2025-10-26T07:40:59.594Z"
+    },
+    "cloud_bonus_9": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 9)",
+      "result": 1,
+      "description": "Cloud bonus 9",
+      "extractedAt": "2025-10-26T07:40:59.597Z"
+    },
+    "cloud_bonus_14": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 14)",
+      "result": 1,
+      "description": "Cloud bonus 14",
+      "extractedAt": "2025-10-26T07:40:59.601Z"
+    },
+    "cloud_bonus_19": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 19)",
+      "result": 1,
+      "description": "Cloud bonus 19",
+      "extractedAt": "2025-10-26T07:40:59.603Z"
+    },
+    "cloud_bonus_22": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 22)",
+      "result": 1,
+      "description": "Cloud bonus 22",
+      "extractedAt": "2025-10-26T07:40:59.631Z"
+    },
+    "cloud_bonus_24": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 24)",
+      "result": 0,
+      "description": "Cloud bonus 24",
+      "extractedAt": "2025-10-26T07:40:59.654Z"
+    },
+    "cloud_bonus_29": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 29)",
+      "result": 0,
+      "description": "Cloud bonus 29",
+      "extractedAt": "2025-10-26T07:40:59.671Z"
+    },
+    "arcade_bonus_41": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 41)",
+      "result": 39,
+      "description": "Arcade bonus 41",
+      "extractedAt": "2025-10-26T07:40:59.690Z"
+    },
+    "emperor_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\",\"EmperorBon\", 5, 0)",
+      "result": 60,
+      "description": "Emperor bonus 5",
+      "extractedAt": "2025-10-26T07:40:59.708Z"
+    },
+    "tesseract_bonus_37": {
+      "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
+      "result": 0,
+      "description": "Tesseract bonus 37",
+      "extractedAt": "2025-10-26T07:40:59.729Z"
+    },
+    "equinox_bar_rate": {
+      "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
+      "result": 2229,
+      "description": "Equinox bar rate",
+      "extractedAt": "2025-10-26T07:40:59.745Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

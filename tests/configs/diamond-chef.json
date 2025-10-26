@@ -1,0 +1,26 @@
+{
+  "description": "Extract diamond chef data for testing diamond chef bubble",
+  "target": "Diamond Chef - Final Bonus",
+  "extractions": [
+    {
+      "label": "diamond_chef_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
+      "description": "Diamond Chef - Final Bonus"
+    },
+    {
+      "label": "diamond_chef_is_bubble_super",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
+      "description": "Diamond Chef - Is Bubble Super"
+    },
+    {
+      "label": "alchemy_prismatic_bonus",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "description": "Alchemy Prismatic Bonus"
+    },
+    {
+      "label": "diamond_chef_base_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 0.3, 13, 1562, 0, 0)",
+      "description": "Diamond Chef - Base Bonus"
+    }
+  ]
+}

@@ -508,7 +508,7 @@ function Cooking() {
                                                                     <Box direction="row">
                                                                         {
                                                                             meal.chanceOptimalSpices.map((spice, index) => (
-                                                                                <IconImage style={{ opacity: cooking.spices[spice] > 0 ? 1 : 0.4 }} key={index} data={{
+                                                                                <IconImage style={{ opacity: cooking.spices[spice] != -1 ? 1 : 0.4 }} key={index} data={{
                                                                                     location: `CookingSpice${spice}`,
                                                                                     width: 36,
                                                                                     height: 36
