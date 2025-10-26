@@ -8,23 +8,7 @@
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
-import { Cooking } from '../../../data/domain/cooking';
-import { StarSigns } from '../../../data/domain/starsigns';
-import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
 import { Player } from '../../../data/domain/player';
-import { Votes } from '../../../data/domain/world-2/votes';
-import { Alchemy } from '../../../data/domain/alchemy';
-import { UpgradeVault } from '../../../data/domain/upgradeVault';
-import { AtomCollider } from '../../../data/domain/atomCollider';
-import { TotalizerBonus, Worship } from '../../../data/domain/worship';
-import { Sailing } from '../../../data/domain/sailing';
-import { Arcade } from '../../../data/domain/arcade';
-import { Stamp } from '../../../data/domain/world-1/stamps';
-import { Lab } from '../../../data/domain/lab';
-import { Summoning } from '../../../data/domain/world-6/summoning';
-import { Hole } from '../../../data/domain/world-5/hole/hole';
-import { Card } from '../../../data/domain/cards';
-import { Achievement } from '../../../data/domain/achievements';
 import { ClassIndex } from '../../../data/domain/talents';
 
 // TODO: Make it possible to test multiple save / extraction results.
