@@ -1,5 +1,6 @@
 import { SkillsIndex } from "./SkillsIndex";
 import { Alchemy } from "./alchemy";
+import { Arcade } from "./arcade";
 import { Domain, RawData } from "./base/domain";
 import { CompanionBase, initCompanionRepo } from "./data/CompanionRepo";
 import { Divinity } from "./divinity";
@@ -69,6 +70,7 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     const divinity = data.get("divinity") as Divinity;
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
+    const arcade = data.get("arcade") as Arcade;
     // Doot
     if (companions.find(c => c.id === 0)?.owned) {
 
@@ -109,5 +111,12 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
         players.forEach(player => {
             player.activeBubbles = allBigBubbles;
         })
+    }
+
+    // Reindeer
+    if (companions.find(c => c.id === 27)?.owned) {
+        arcade.bonuses.forEach(bonus => {
+            bonus.hasCompanion27 = true;
+        });
     }
 }
