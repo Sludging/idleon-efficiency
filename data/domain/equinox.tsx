@@ -1,4 +1,4 @@
-import { nFormatter } from "../utility";
+import { nFormatter, number2letter } from "../utility";
 import { Alchemy } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
 import { initDreamChallengeRepo } from "./data/DreamChallengeRepo";
@@ -7,7 +7,12 @@ import { Item } from "./items";
 import { DreamChallengeModel } from "./model/dreamChallengeModel";
 import { DreamUpgradeModel } from "./model/dreamUpgradeModel";
 import { ImageData } from './imageData';
-import { Summoning } from "./world-6/summoning";
+import { Votes } from "./world-2/votes";
+import { Companion } from "./companions";
+import { Hole } from "./world-5/hole/hole";
+import { Arcade } from "./arcade";
+import { Emperor } from "./emperor";
+import { Tesseract } from "./tesseract";
 
 class Challenge {
     complete: boolean = false;
@@ -278,7 +283,15 @@ export class Equinox extends Domain {
 export function updateEquinoxBar(data: Map<string, any>) {
     const equinox = data.get("equinox") as Equinox;
     const alchemy = data.get("alchemy") as Alchemy
+    const votes = data.get("votes") as Votes;
+    const companions = data.get("companions") as Companion[];
+    const hole = data.get("hole") as Hole;
+    const optionList = data.get("OptLacc") as number[];
+    const arcade = data.get("arcade") as Arcade;
+    const emperor = data.get("emperor") as Emperor;
+    const tesseract = data.get("tesseract") as Tesseract;
     const rawData = data.get("rawData") as Record<string, any>;
+
     let bundleInfo = undefined;
     // Make sure we have bundle info, this usually is missing for public profiles.
     if (rawData["BundlesReceived"] !== undefined) {
@@ -289,9 +302,34 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
     const baseMultiplier = hasBundle ? 90 : 60;
 
-    const marbleMocha = alchemy.vials.find(vial => vial.name == "Marble Mocha")?.getBonus() ?? 0;
+    const vialBonus = alchemy.getVialBonusForKey("EqBar");
+    const vote32Bonus = votes.getCurrentBonus(32);
+    const companion15 = companions.find(c => c.id === 15);
+    let companion15Bonus = 0;
+    if (companion15 && companion15.owned) {
+        companion15Bonus = companion15.data.bonus;
+    }
+    const cosmo26Bonus = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 26)?.getBonus() ?? 0;
+    let eventShop3Bonus = 0;
+    if (optionList.length > 311) {
+        eventShop3Bonus = optionList[311].toString().includes(number2letter(3)) ? 1 : 0;
+    }
+    let option320Bonus = 0;
+    if (optionList.length > 320) {
+        option320Bonus = optionList[320] / 10;
+    }
+    const arcade41Bonus = arcade.bonuses.find(bonus => bonus.index == 41)?.getBonus() ?? 0;
+    const emperor5Bonus = emperor.emperorBonuses.find(bonus => bonus.index == 5)?.getBonus() ?? 0;
+    const tesseract37Bonus = tesseract.getUpgradeBonus(37) ?? 0;
     const fillRateFromChallenges = equinox.challenges.reduce((sum, challenge) => sum += challenge.getFillRateBonus(), 0);
-    equinox.bar.rate = Math.round(baseMultiplier * (1 + ((marbleMocha + fillRateFromChallenges) / 100)));
+    equinox.bar.rate = Math.round(
+        baseMultiplier * 
+        (1 + (vote32Bonus / 100)) *
+        (1 + companion15Bonus) *
+        (1 + (cosmo26Bonus / 100)) *
+        (1 + 0.5 * eventShop3Bonus) *
+        (1 + option320Bonus) *
+        (1 + ((vialBonus + fillRateFromChallenges + arcade41Bonus + emperor5Bonus + tesseract37Bonus) / 100)));
 
     const hoursSinceUpdate = ((new Date().getTime() - lastUpdated.getTime()) / 1000) / 3600;
     // calculate how much bar would have filled based on last updated time.
