@@ -638,6 +638,12 @@ function ShrinesDisplay() {
             />
             <Box>
                 {shrineData.map((shrine, index) => {
+                    // Get map name while protecting against new maps.
+                    let mapName = "Unknown";
+                    if (MapInfo.length > shrine.currentMap) {
+                        mapName = MapInfo[shrine.currentMap].data.map.name;
+                    }
+
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }} style={{ opacity: shrine.level == 0 ? 0.5 : 1 }}>
                             <Box gap="small">
@@ -657,7 +663,7 @@ function ShrinesDisplay() {
                                     <TextAndLabel
                                         label="Current Map"
                                         textSize='small'
-                                        text={MapInfo[shrine.currentMap].data.map.name}
+                                        text={mapName}
                                         margin={{ right: 'medium', bottom: 'small' }}
                                     />
                                     <TextAndLabel
