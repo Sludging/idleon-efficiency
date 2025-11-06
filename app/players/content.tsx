@@ -289,7 +289,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         }
                     />
                     {
-                        player.killInfo.has(player.currentMapId) &&
+                        player.killInfo.has(player.currentMapId) && player.currentMapId < MapInfo.length &&
                         (MapInfo[player.currentMapId].data.portalRequirements ?? []).reduce((sum, req) => sum += req, 0) > 0 &&
                         <Text size="small">
                             Portal Requirement: {nFormatter(player.killInfo.get(player.currentMapId) ?? 0)} / [{MapInfo[player.currentMapId].data.portalRequirements.map(req => nFormatter(req)).join(' | ')}]
@@ -1077,7 +1077,7 @@ function ZowInfo({ player }: { player: Player }) {
     const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];
-        if (mapData.data.enemy === undefined || count >= 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z") {
+        if (mapData && (mapData.data.enemy === undefined || count >= 100000 || ignoreArea(mapData.data.map.name) || mapData.data.enemy == "Nothing" || mapData.data.map.name == "Z")) {
             return null;
         }
         return [mapId, count]
