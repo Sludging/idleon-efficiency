@@ -78,12 +78,16 @@ function KitchenDisplay({ kitchen, cooking, silkRodeChip, starSignEquipped }: { 
             </Box>
             <Box align='center'>
                 {
-                    kitchen.status == KitchenStatus.Meal &&
+                    kitchen.status == KitchenStatus.Meal && kitchen.activeMeal < cooking.meals.length ?
                     <Box direction="row" gap="small" align="end">
                         <Box>
                             <IconImage data={cooking.meals[kitchen.activeMeal].getImageData()} />
                         </Box>
                         <Text size="small">{nFormatter(kitchen.getUpdatedMealSpeed(starSignEquipped, silkRodeChip) / cooking.meals[kitchen.activeMeal].cookReq, "Smaller")} per hour.</Text>
+                    </Box>
+                    :
+                    <Box direction="row" gap="small" align="end">
+                        <Text size="small">Unknown Meal</Text>
                     </Box>
                 }
                 {
