@@ -29,7 +29,7 @@ import { Votes } from "./world-2/votes";
 import { EquipmentSets } from "./misc/equipmentSets";
 import { Stat } from "./base/stat";
 
-const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66".split(" ").map(value => parseInt(value));
+const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66 70".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
 
 

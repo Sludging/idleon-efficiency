@@ -229,7 +229,9 @@ function Cooking() {
     }
 
     const mealsToShow = useMemo(() => {
-        return cooking.meals.filter(meal => meal.timeOptimalSpices.length > 0)
+        return cooking.meals
+            // TODO: Removing this filter for now until I remember why it here in the first place
+            // .filter(meal => meal.timeOptimalSpices.length > 0)
             .sort((meal1, meal2) => {
                 const indexSort = sortByIndex(meal1, meal2);
 
