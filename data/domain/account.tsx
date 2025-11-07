@@ -145,6 +145,7 @@ export class Account extends Domain {
         [AFKTypeEnum.Divinity]: 0,
         [AFKTypeEnum.Nothing]: 0,
         [AFKTypeEnum.PayingRespect]: 0,
+        [AFKTypeEnum.Spelunking]: 0,
     };
 
     getRawKeys(): RawData[] {
