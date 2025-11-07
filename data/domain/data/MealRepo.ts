@@ -368,7 +368,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(45, <MealModel>{
                 "name": "Buncha Banana",
-                "cookingReq": 1250000000,
+                "cookingReq": 1.25e+09,
                 "bonusQty": 4,
                 "bonusText": "+{ Max LVs for TP Pete Star Talent",
                 "description": "Straight from the island of Karjama! Or something like that, starts with a K at least.",
@@ -376,7 +376,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(46, <MealModel>{
                 "name": "Pumpkin",
-                "cookingReq": 1700000000,
+                "cookingReq": 1.7e+09,
                 "bonusQty": 2,
                 "bonusText": "+{% Liquid Cap for liquids 1 and 2",
                 "description": "According to the author of the Iliad, its value should peak right around January...",
@@ -384,7 +384,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(47, <MealModel>{
                 "name": "Cotton Candy",
-                "cookingReq": 4000000000,
+                "cookingReq": 4e+09,
                 "bonusQty": 2,
                 "bonusText": "+{% Divinity EXP",
                 "description": "The most exquisite of fairground cuisine!",
@@ -392,7 +392,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(48, <MealModel>{
                 "name": "Massive Fig",
-                "cookingReq": 7000000000,
+                "cookingReq": 7e+09,
                 "bonusQty": 3,
                 "bonusText": "+{% Total Damage",
                 "description": "This thing has gotta weigh at least 30!",
@@ -400,7 +400,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(49, <MealModel>{
                 "name": "Head Chef Geustloaf",
-                "cookingReq": 10000000000,
+                "cookingReq": 1e+10,
                 "bonusQty": 4,
                 "bonusText": "+{% Bits Gained in Gaming",
                 "description": "How DARE you question the honorable Chef Geustloaf's cooking abilities!",
@@ -408,7 +408,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(50, <MealModel>{
                 "name": "Kiwi Fruit",
-                "cookingReq": 14000000000,
+                "cookingReq": 1.4e+10,
                 "bonusQty": 2,
                 "bonusText": "+{% Liquid Cap for liquids 3 and 4",
                 "description": "Is there a reason these are so hard to cook? Aren't you just like... cutting it in half?",
@@ -416,7 +416,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(51, <MealModel>{
                 "name": "Popped Corn",
-                "cookingReq": 20000000000,
+                "cookingReq": 2e+10,
                 "bonusQty": 2,
                 "bonusText": "+{% Sailing Speed",
                 "description": "Effectively no different than a normal bowl of popcorn, but it's still impressive!",
@@ -424,7 +424,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(52, <MealModel>{
                 "name": "Double Cherry",
-                "cookingReq": 32000000000,
+                "cookingReq": 3.2e+10,
                 "bonusQty": 30,
                 "bonusText": "+{% Meal Cooking Speed",
                 "description": "So like... why did the yellow circle want these again? This bonus is pretty bad.",
@@ -432,7 +432,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(53, <MealModel>{
                 "name": "Ratatouey",
-                "cookingReq": 52000000000,
+                "cookingReq": 5.2e+10,
                 "bonusQty": 8,
                 "bonusText": "+{% Lower Kitchen Upgrade costs",
                 "description": "Hey cmon man how should I know how to spell Ratatouille, there's no France remember?",
@@ -440,7 +440,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(54, <MealModel>{
                 "name": "Giant Tomato",
-                "cookingReq": 90000000000,
+                "cookingReq": 9e+10,
                 "bonusQty": 5,
                 "bonusText": "+{% Gaming EXP",
                 "description": "It's big, it's large, it's round, it's red, and it'll fill you up thats for sure!",
@@ -448,7 +448,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(55, <MealModel>{
                 "name": "Wrath Grapes",
-                "cookingReq": 130000000000,
+                "cookingReq": 1.3e+11,
                 "bonusQty": 4,
                 "bonusText": "+{% Divinity EXP",
                 "description": "I'd be angry too if I were a grape.",
@@ -456,7 +456,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(56, <MealModel>{
                 "name": "Sausy Sausage",
-                "cookingReq": 225000000000,
+                "cookingReq": 2.25e+11,
                 "bonusQty": 6,
                 "bonusText": "+{% Bits Gained in Gaming",
                 "description": "Plump innit! Would go great with some momey milk!",
@@ -464,7 +464,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(57, <MealModel>{
                 "name": "Seasoned Marrow",
-                "cookingReq": 350000000000,
+                "cookingReq": 3.5e+11,
                 "bonusQty": 3,
                 "bonusText": "+{% Farming EXP",
                 "description": "You ate all the edible stuff around the bone? Why not try the stuff inside the bone!",
@@ -472,7 +472,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(58, <MealModel>{
                 "name": "Sticky Bun",
-                "cookingReq": 700000000000,
+                "cookingReq": 7e+11,
                 "bonusQty": 5,
                 "bonusText": "+{% All Summoning Essence Gain",
                 "description": "This frosting better be made of superglue or I'm suing for false advertising.",
@@ -480,7 +480,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(59, <MealModel>{
                 "name": "Frazzleberry",
-                "cookingReq": 1000000000000,
+                "cookingReq": 1e+12,
                 "bonusQty": 2,
                 "bonusText": "+{% Sneaking EXP",
                 "description": "Big. Blue. Beautiful. Boing. Boat. Broom. Balls. Backgammon. Bort.",
@@ -488,7 +488,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(60, <MealModel>{
                 "name": "Misterloin Steak",
-                "cookingReq": 1700000000000,
+                "cookingReq": 1.7e+12,
                 "bonusQty": 6,
                 "bonusText": "+{% Jade gain from Sneaking",
                 "description": "Make sure to paint on the grill marks to really give it that extra taste!",
@@ -496,7 +496,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(61, <MealModel>{
                 "name": "Large Pohayoh",
-                "cookingReq": 6000000000000,
+                "cookingReq": 6e+12,
                 "bonusQty": 2,
                 "bonusText": "+{% Summoning EXP",
                 "description": "Aye lad if thah ain't tha larjes' fookin' poh'ay'oh eyev evah seen wih me own eyes!",
@@ -504,7 +504,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(62, <MealModel>{
                 "name": "Bill Jack Pepper",
-                "cookingReq": 35000000000000,
+                "cookingReq": 3.5e+13,
                 "bonusQty": 5,
                 "bonusText": "+{% Crop Evolution Chance",
                 "description": "It's Him.",
@@ -512,7 +512,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(63, <MealModel>{
                 "name": "Burned Marshmallow",
-                "cookingReq": 90000000000000,
+                "cookingReq": 9e+13,
                 "bonusQty": 40,
                 "bonusText": "+{% Meal Cooking Speed",
                 "description": "IMPORTANT, this bonus DOUBLES at Farming Lv 50. Triples at Farming Lv 100, and so on!",
@@ -520,7 +520,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(64, <MealModel>{
                 "name": "Yumi Peachring",
-                "cookingReq": 800000000000000,
+                "cookingReq": 8e+14,
                 "bonusQty": 2,
                 "bonusText": "+{% All Golden Food bonus",
                 "description": "Don't disrespect the ring. All hail the ring.",
@@ -528,7 +528,7 @@ export const initMealRepo = () => {
             }),
         new MealBase(65, <MealModel>{
                 "name": "Plumpcakes",
-                "cookingReq": 6000000000000000,
+                "cookingReq": 6e+15,
                 "bonusQty": 6,
                 "bonusText": "+{% Total Damage",
                 "description": "Ohhh, they're called 'plump'cakes because they're dummy thicc can I get an amen!",
@@ -536,11 +536,43 @@ export const initMealRepo = () => {
             }),
         new MealBase(66, <MealModel>{
                 "name": "Nyanborgir",
-                "cookingReq": 50000000000000000,
+                "cookingReq": 5e+16,
                 "bonusQty": 9,
                 "bonusText": "+{% Crop Evolution Chance",
                 "description": "It's the greatest meal ever! Bonus DOUBLES at Summoning Lv 50, Triples at 100, etc",
                 "bonusKey": "zCropEvoSumm"
+            }),
+        new MealBase(67, <MealModel>{
+                "name": "Tempura Shrimp",
+                "cookingReq": 2.5e+43,
+                "bonusQty": 0.07,
+                "bonusText": "+{% Spelunking EXP",
+                "description": "Ah yes, the Chicken Wings of the sea... Shrimply delicious.",
+                "bonusKey": "SplkExp"
+            }),
+        new MealBase(68, <MealModel>{
+                "name": "Woahtermelon",
+                "cookingReq": 5e+48,
+                "bonusQty": 0.03,
+                "bonusText": "+{% cheaper Spelunking Upgrades",
+                "description": "IMPORTANT, this bonus DOUBLES once your first character reaches Lv 50 Spelunking!",
+                "bonusKey": "SplkUpg"
+            }),
+        new MealBase(69, <MealModel>{
+                "name": "Cookies",
+                "cookingReq": 8.8888e+53,
+                "bonusQty": 0.3,
+                "bonusText": "+{% Total Spelunking POW",
+                "description": "They're pipin' hot, fresh outta the oven... wait, what oven?",
+                "bonusKey": "SplkPOW"
+            }),
+        new MealBase(70, <MealModel>{
+                "name": "Singing Seed",
+                "cookingReq": 1e+59,
+                "bonusQty": 0.2,
+                "bonusText": "+{% Amber gain from Spelunking",
+                "description": "You're asking me will my love grow? Pistachioooooh ohhh, Pishaaaaaaachio!!!",
+                "bonusKey": "SplkAmb"
             })    
 ]
 }

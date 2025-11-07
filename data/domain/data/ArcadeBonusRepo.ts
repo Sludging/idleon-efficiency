@@ -295,7 +295,7 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(32, <ArcadeBonusModel>{
-                "effect": "+{% Arti Find",
+                "effect": "+{% Artifact Find",
                 "x1": 50,
                 "x2": 100,
                 "func": "decay",
@@ -500,6 +500,69 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% Bonus",
                 "barType": 21
+            }),
+        new ArcadeBonusBase(55, <ArcadeBonusModel>{
+                "effect": "+{% Spelunking Amber",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Amber",
+                "barType": 28
+            }),
+        new ArcadeBonusBase(56, <ArcadeBonusModel>{
+                "effect": "+{% Spelunk XP multi",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP multi",
+                "barType": 39
+            }),
+        new ArcadeBonusBase(57, <ArcadeBonusModel>{
+                "effect": "+{% Daily Coral",
+                "x1": 10,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Coral",
+                "barType": 41
+            }),
+        new ArcadeBonusBase(58, <ArcadeBonusModel>{
+                "effect": "+{% Palette Luck",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Luck",
+                "barType": 42
+            }),
+        new ArcadeBonusBase(59, <ArcadeBonusModel>{
+                "effect": "+{% Meritocracy Bonus",
+                "x1": 10,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Bonus",
+                "barType": 31
+            }),
+        new ArcadeBonusBase(60, <ArcadeBonusModel>{
+                "effect": "+{% Class XP multi",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP multi",
+                "barType": 31
+            }),
+        new ArcadeBonusBase(61, <ArcadeBonusModel>{
+                "effect": "+{% Kruk Bubble LVs",
+                "x1": 40,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Bubble LV",
+                "barType": 22
             })    
 ]
 }

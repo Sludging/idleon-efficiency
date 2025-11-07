@@ -17,7 +17,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "All shrines level up +200% faster!",
                 "eldritchBonusQty": 200,
                 "sovereignBonus": "All shrines level up +300% faster!",
-                "sovereignBonusQty": 300
+                "sovereignBonusQty": 300,
+                "omnipotentBonus": "All shrines level up +400% faster!",
+                "omnipotentBonusQty": 400
             }),
         new ArtifactBase(1, <ArtifactModel>{
                 "name": "Maneki Kat",
@@ -30,7 +32,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(2, <ArtifactModel>{
                 "name": "Ruble Cuble",
@@ -43,7 +47,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(3, <ArtifactModel>{
                 "name": "Fauxory Tusk",
@@ -56,7 +62,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(4, <ArtifactModel>{
                 "name": "Gold Relic",
@@ -68,8 +76,10 @@ export const initArtifactRepo = () => {
                 "ancientBonusQty": 0.5,
                 "eldritchBonus": "Samples grow by 3% for 80 days instead!",
                 "eldritchBonusQty": 1,
-                "sovereignBonus": "Samples grow by 5% for 80 days instead!",
-                "sovereignBonusQty": 3
+                "sovereignBonus": "Samples grow by 5% for 100 days instead!",
+                "sovereignBonusQty": 3,
+                "omnipotentBonus": "Samples grow by 6% for 120 days instead!",
+                "omnipotentBonusQty": 4
             }),
         new ArtifactBase(5, <ArtifactModel>{
                 "name": "Genie Lamp",
@@ -82,7 +92,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(6, <ArtifactModel>{
                 "name": "Silver Ankh",
@@ -95,7 +107,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "50% chance for +1 box when completing post office orders!",
                 "eldritchBonusQty": 50,
                 "sovereignBonus": "75% chance for +1 box when completing post office orders!",
-                "sovereignBonusQty": 75
+                "sovereignBonusQty": 75,
+                "omnipotentBonus": "90% chance for +1 box when completing post office orders!",
+                "omnipotentBonusQty": 90
             }),
         new ArtifactBase(7, <ArtifactModel>{
                 "name": "Emerald Relic",
@@ -108,7 +122,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "Get 1.60x more gold bars from converting!",
                 "eldritchBonusQty": 80,
                 "sovereignBonus": "Get 1.90x more gold bars from converting!",
-                "sovereignBonusQty": 110
+                "sovereignBonusQty": 110,
+                "omnipotentBonus": "Get 2.50x more gold bars from converting!",
+                "omnipotentBonusQty": 170
             }),
         new ArtifactBase(8, <ArtifactModel>{
                 "name": "Fun Hippoete",
@@ -121,7 +137,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(9, <ArtifactModel>{
                 "name": "Arrowhead",
@@ -134,7 +152,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "1.50x higher chance to get rare chests!",
                 "eldritchBonusQty": 50,
                 "sovereignBonus": "1.70x higher chance to get rare chests!",
-                "sovereignBonusQty": 70
+                "sovereignBonusQty": 70,
+                "omnipotentBonus": "1.90x higher chance to get rare chests!",
+                "omnipotentBonusQty": 90
             }),
         new ArtifactBase(10, <ArtifactModel>{
                 "name": "10 AD Tablet",
@@ -147,7 +167,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(11, <ArtifactModel>{
                 "name": "Ashen Urn",
@@ -160,7 +182,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "Applies up to character level 600 instead!",
                 "eldritchBonusQty": 400,
                 "sovereignBonus": "Applies up to character level 800 instead!",
-                "sovereignBonusQty": 600
+                "sovereignBonusQty": 600,
+                "omnipotentBonus": "Applies up to character level 1000 instead!",
+                "omnipotentBonusQty": 800
             }),
         new ArtifactBase(12, <ArtifactModel>{
                 "name": "Amberite",
@@ -173,7 +197,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "Affects +2 additional bubbles per day!",
                 "eldritchBonusQty": 2,
                 "sovereignBonus": "Affects +3 additional bubbles per day!",
-                "sovereignBonusQty": 3
+                "sovereignBonusQty": 3,
+                "omnipotentBonus": "Affects +4 additional bubbles per day!",
+                "omnipotentBonusQty": 4
             }),
         new ArtifactBase(13, <ArtifactModel>{
                 "name": "Triagulon",
@@ -186,7 +212,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(14, <ArtifactModel>{
                 "name": "Billcye Tri",
@@ -199,7 +227,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "50% chance for +1 box when completing post office orders!",
                 "eldritchBonusQty": 50,
                 "sovereignBonus": "75% chance for +1 box when completing post office orders!",
-                "sovereignBonusQty": 75
+                "sovereignBonusQty": 75,
+                "omnipotentBonus": "90% chance for +1 box when completing post office orders!",
+                "omnipotentBonusQty": 90
             }),
         new ArtifactBase(15, <ArtifactModel>{
                 "name": "Frost Relic",
@@ -212,7 +242,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(16, <ArtifactModel>{
                 "name": "Chilled Yarn",
@@ -225,7 +257,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(17, <ArtifactModel>{
                 "name": "Causticolumn",
@@ -238,7 +272,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(18, <ArtifactModel>{
                 "name": "Jade Rock",
@@ -251,7 +287,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(19, <ArtifactModel>{
                 "name": "Dreamcatcher",
@@ -264,7 +302,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(20, <ArtifactModel>{
                 "name": "Gummy Orb",
@@ -277,7 +317,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(21, <ArtifactModel>{
                 "name": "Fury Relic",
@@ -290,7 +332,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(22, <ArtifactModel>{
                 "name": "Cloud Urn",
@@ -303,7 +347,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "50% chance for +1 box when completing post office orders!",
                 "eldritchBonusQty": 50,
                 "sovereignBonus": "80% chance for +1 box when completing post office orders!",
-                "sovereignBonusQty": 80
+                "sovereignBonusQty": 80,
+                "omnipotentBonus": "95% chance for +1 box when completing post office orders!",
+                "omnipotentBonusQty": 95
             }),
         new ArtifactBase(23, <ArtifactModel>{
                 "name": "Weatherbook",
@@ -316,7 +362,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(24, <ArtifactModel>{
                 "name": "Giants Eye",
@@ -329,7 +377,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(25, <ArtifactModel>{
                 "name": "Crystal Steak",
@@ -342,7 +392,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(26, <ArtifactModel>{
                 "name": "Trilobite Rock",
@@ -355,7 +407,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(27, <ArtifactModel>{
                 "name": "Opera Mask",
@@ -368,7 +422,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(28, <ArtifactModel>{
                 "name": "Socrates",
@@ -381,7 +437,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(29, <ArtifactModel>{
                 "name": "The True Lantern",
@@ -394,7 +452,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(30, <ArtifactModel>{
                 "name": "The Onyx Lantern",
@@ -407,7 +467,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(31, <ArtifactModel>{
                 "name": "The Shim Lantern",
@@ -420,7 +482,9 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             }),
         new ArtifactBase(32, <ArtifactModel>{
                 "name": "The Winz Lantern",
@@ -433,7 +497,69 @@ export const initArtifactRepo = () => {
                 "eldritchBonus": "The artifact's main bonus is tripled!",
                 "eldritchBonusQty": 1,
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
-                "sovereignBonusQty": 1
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
+            }),
+        new ArtifactBase(33, <ArtifactModel>{
+                "name": "Deathskull",
+                "baseBonus": 10,
+                "baseFindChance": 3000000,
+                "qtyBonus": 1,
+                "bonus": "$",
+                "ancientBonus": "The artifact gives +2 Gallery Slots instead of just 1!",
+                "ancientBonusQty": 1,
+                "eldritchBonus": "The artifact also gives +1 Grade to a Gallery Slot!",
+                "eldritchBonusQty": 1,
+                "sovereignBonus": "The artifact also gives +1 Grade to 1 more Gallery Slots!",
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact also gives +2 Grades to a Gallery Slot!",
+                "omnipotentBonusQty": 1
+            }),
+        new ArtifactBase(34, <ArtifactModel>{
+                "name": "Obsidian",
+                "baseBonus": 10,
+                "baseFindChance": 25000000,
+                "qtyBonus": 1,
+                "bonus": "+1 Legend Talent PTS to spend at Whallamus in World 7!",
+                "ancientBonus": "The artifact's main bonus is doubled!",
+                "ancientBonusQty": 1,
+                "eldritchBonus": "The artifact's main bonus is tripled!",
+                "eldritchBonusQty": 1,
+                "sovereignBonus": "The artifact's main bonus is quadrupled!",
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
+            }),
+        new ArtifactBase(35, <ArtifactModel>{
+                "name": "Pointagon",
+                "baseBonus": 10,
+                "baseFindChance": 5000000,
+                "qtyBonus": 30,
+                "bonus": "All Chapter Lore bonuses in Spelunking are 1.30x Bigger!",
+                "ancientBonus": "The artifact's main bonus is doubled!",
+                "ancientBonusQty": 1,
+                "eldritchBonus": "The artifact's main bonus is tripled!",
+                "eldritchBonusQty": 1,
+                "sovereignBonus": "The artifact's main bonus is quadrupled!",
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
+            }),
+        new ArtifactBase(36, <ArtifactModel>{
+                "name": "Ender Pearl",
+                "baseBonus": 10,
+                "baseFindChance": 100000000,
+                "qtyBonus": 25,
+                "bonus": "To be revealed in Part 2 of World 7 updates...",
+                "ancientBonus": "The artifact's main bonus is doubled!",
+                "ancientBonusQty": 1,
+                "eldritchBonus": "The artifact's main bonus is tripled!",
+                "eldritchBonusQty": 1,
+                "sovereignBonus": "The artifact's main bonus is quadrupled!",
+                "sovereignBonusQty": 1,
+                "omnipotentBonus": "The artifact's main bonus is quintupled!",
+                "omnipotentBonusQty": 1
             })    
 ]
 }

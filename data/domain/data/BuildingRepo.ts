@@ -249,7 +249,7 @@ export const initBuildingRepo = () => {
             }),
         new BuildingBase(24, <BuildingModel>{
                 "name": "Crescent Shrine",
-                "description": "This shrine increases Crystal and Giant Spawn chance, and Active EXP gain, of all characters on the same map. U know how to lvl it up lol. ",
+                "description": "This shrine increases Crystal and Giant Spawn chance, and Active EXP gain, of all characters on the same map. ",
                 "bonus": " +{% Level Up Rate",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery4", "quantity": 12}, <ComponentModel>{"item": "Void", "quantity": 200}],
                 "maxLvl": 100,

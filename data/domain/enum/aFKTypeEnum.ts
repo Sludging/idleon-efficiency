@@ -9,5 +9,6 @@ export enum AFKTypeEnum {
     Cooking = "Cooking",
     Laboratory = "Laboratory",
     Divinity = "Divinity",
-    PayingRespect = "PayingRespect"
+    PayingRespect = "PayingRespect",
+    Spelunking = "Spelunking"
 }

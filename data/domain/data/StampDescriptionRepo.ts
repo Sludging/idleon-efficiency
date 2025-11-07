@@ -49,7 +49,9 @@ export const initStampDescriptionRepo = () => {
                     "+{ All Stats.",
                     "+{ Base Damage",
                     "+{% Total Damage",
-                    "+{% All Stats"
+                    "+{% All Stats",
+                    "+{% Total Damage",
+                    "+{% Class EXP Multi"
                 ]
             }),
         new StampDescriptionBase("Skills Stamp", <StampDescriptionModel>{
@@ -107,7 +109,10 @@ export const initStampDescriptionRepo = () => {
                     "+{% Summoning EXP Gain",
                     "+{% White Essence Gain",
                     "+{% G, Y, B Essence Gain",
-                    "+{% P, R, C Essence Gain"
+                    "+{% P, R, C Essence Gain",
+                    "+{% Spelunking Amber gain",
+                    "+{% Spelunking Efficiency",
+                    "+{% Spelunking EXP Gain"
                 ]
             }),
         new StampDescriptionBase("Misc Stamp", <StampDescriptionModel>{
@@ -136,7 +141,9 @@ export const initStampDescriptionRepo = () => {
                     "+{% Faster refinery cycles",
                     "+{% Lower Atom Upgrade Costs",
                     "+{% more Resources from all Caverns",
-                    "+{% Study rate for Bolaia"
+                    "+{% Study rate for Bolaia",
+                    "+{ daily Kattlekruk bubble LVs",
+                    "+{% Daily Coral gain for the Coral Reef"
                 ]
             })    
 ]

@@ -1512,7 +1512,8 @@ export const initRandoListRepo = () => {
                     "58",
                     "60",
                     "63",
-                    "66"
+                    "66",
+                    "70"
                 ]
             }),
         new RandoListBase(50, <RandoListModel>{
@@ -1549,7 +1550,10 @@ export const initRandoListRepo = () => {
                     "BarR2.png",
                     "BarB5.png",
                     "BarB2.png",
-                    "BarB4.png"
+                    "BarB4.png",
+                    "BarSpel.png",
+                    "BarSpel.png",
+                    "BarSpel.png"
                 ]
             }),
         new RandoListBase(52, <RandoListModel>{
@@ -1810,8 +1814,9 @@ export const initRandoListRepo = () => {
                     "30",
                     "75",
                     "125",
-                    "9999",
-                    "9999"
+                    "500",
+                    "1000",
+                    "999999"
                 ]
             }),
         new RandoListBase(58, <RandoListModel>{
@@ -1871,79 +1876,17 @@ export const initRandoListRepo = () => {
                     "167",
                     "168",
                     "171",
-                    "174"
+                    "174",
+                    "178",
+                    "179",
+                    "180",
+                    "182",
+                    "183"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "SUMMONING_BOSSES_v2.41;NEW_UPDATE_PATCH_NOTES_@_*Summoning",
-                    "Stones",
-                    "are",
-                    "FINALLY",
-                    "here,",
-                    "with",
-                    "7",
-                    "of",
-                    "them",
-                    "found",
-                    "throughout",
-                    "the",
-                    "IdleOn",
-                    "worlds!",
-                    "These",
-                    "stones",
-                    "are",
-                    "a",
-                    "BOSS",
-                    "mode,",
-                    "where",
-                    "you",
-                    "must",
-                    "defeat",
-                    "a",
-                    "slow-moving",
-                    "GIANT",
-                    "before",
-                    "he",
-                    "reaches",
-                    "your",
-                    "end._@_*If",
-                    "you",
-                    "win,",
-                    "you'll",
-                    "get",
-                    "an",
-                    "amazing",
-                    "new",
-                    "winner's",
-                    "bonus",
-                    "of",
-                    "a",
-                    "new",
-                    "2x",
-                    "multiplier",
-                    "to",
-                    "all*",
-                    "bonuses",
-                    "of",
-                    "that",
-                    "stone",
-                    "type!",
-                    "(NOTE:",
-                    "not",
-                    "quite",
-                    "all.",
-                    "Only",
-                    "bonuses",
-                    "that",
-                    "can",
-                    "be",
-                    "doubled",
-                    "by",
-                    "Summoning",
-                    "Doublers",
-                    "are",
-                    "affects.)_@_*These_Summoning_bosses_can_be_fought_more_than_once..._but_you'll_need_to_be_GOATED_to_win_multiple_times..._@_*Complete_Potti's_new_quests_to_get_a_NEW_TROPHY!_@_*Added_1_new_Tome_challenge,_giving_300_PTS_based_on_total_summoning_bosses_defeated!_@_*22_other_things,_yes_TWENTY_TWO._So_many_things_I_can't_fit_them_here,_click_that_JOIN_DISCORD_button_to_the_left_or_go_to_Discord.gg/idleon_to_see_the_full_list!_@_*Added_the_World_7_Portal_to_World_6_town..._@_*That's_it,_no_more_content_until_World_7!;*Le",
+                    "WORLD_7_v1.00;NEW_UPDATE_PATCH_NOTES_@_*NEW_WORLD:_World_7_is_HERE!_Defeat_The_Emperor_boss_at_the_end_of_World_6_to_unlock!_@_*NEW_MAP:_Explore_through_12_maps_full_of_monsters,_resources,_secrets,_and_new_NPCs!_@_*NEW_SKILL:_Spelunking!_Level_up_by_exploring_caves_found_throughout_World_7,_then_delve_down_tunnels_to_find_amber_and_defeat_Lore_Bosses_to_unlock_new_content_for_the_rest_of_IdleOn!_@_*TOWN_FEATURES:_Rescue_fishies_to_boost_your_Coral_Reef_for_game_changing_bonuses,_and_spend_Legendary_Talent_PTS_earned_by_leveling_up_at_Whallamus!_@_*THE_GALLERY:_Codfrey_will_give_you_bonuses_from_all_the_Trophies_and_Nametags_you've_ever_found!_The_new_Replica_items_in_the_Town_Shop_let_you_mix_and_match_Trophies_and_Nametags_however_you_like!_@_*NEW_CONTENT:_Gaming_Palette,_Exotic_and_Medal_Farming,_Duperbits,_Teal_Summoning,_Ethereal_Sigils,_Mini_Ninja_Knowledge,_Killroy_Upgrades,_and_SO_much_more..._(Many_of_these_are_unlocked_via_Spelunking)_@_*SO_MANY_MORE_THINGS_SERIOUSLY_YOU_GUYS!!!_Click_Discord_button_up_there_for_full_patch_notes!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2446,7 +2389,9 @@ export const initRandoListRepo = () => {
                     "EquipmentRingsChat8",
                     "EquipmentHats72",
                     "EquipmentNametag2",
-                    "EquipmentGown0"
+                    "EquipmentGown0",
+                    "TrophyReplica4",
+                    "EquipmentNametagReplica2"
                 ]
             }),
         new RandoListBase(65, <RandoListModel>{
@@ -2787,7 +2732,19 @@ export const initRandoListRepo = () => {
                     "rift2",
                     "rift3",
                     "rift4",
-                    "rift5"
+                    "rift5",
+                    "w7a1",
+                    "w7a2",
+                    "w7a3",
+                    "w7a4",
+                    "w7a5",
+                    "w7a6",
+                    "w7a7",
+                    "w7a8",
+                    "w7a9",
+                    "w7a10",
+                    "w7a11",
+                    "w7a12"
                 ]
             }),
         new RandoListBase(88, <RandoListModel>{
@@ -3229,7 +3186,7 @@ export const initRandoListRepo = () => {
                     "New_Gold_Charms_added_{_+10%_ALL_STAT",
                     "Bargain_Ninja_Knowledge_{_+5_All_Talent_LV",
                     "+30_Max_LV_for_Sneaking_Items_{_1.10#_DMG_MULTI",
-                    "Haha_yea_there's_no_bonus_here_yet",
+                    "Centurion_Ninja_Knowledge_{_+10%_DAILY_CORAL",
                     "Haha_yea_there's_no_bonus_here_yet.",
                     "Haha_yea_there's_no_bonus_here_yet.",
                     "Haha_yea_there's_no_bonus_here_yet."
@@ -3719,8 +3676,10 @@ export const initRandoListRepo = () => {
                     "KATTLEKRUK_SET",
                     "MARBIGLASS_SET",
                     "GODSHARD_SET",
-                    "EMPEROR_SET"
+                    "EMPEROR_SET",
+                    "PREHISTORIC_SET"
                 ]
-            })    
+            }),
+        new RandoListBase(114, <RandoListModel>{"elements": ["Snootie", "Sad_Urie", "Bloo_Radley", "Toobus_Goobus"]})    
 ]
 }

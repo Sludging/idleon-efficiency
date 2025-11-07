@@ -289,7 +289,7 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w4b5", "health": 100000000, "colour": 0, "size": 500},
+                    <TerritoryEnemyModel>{"id": "w4b5", "health": 10000000, "colour": 0, "size": 500},
                     <TerritoryEnemyModel>{"id": "Mob2", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob3", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
@@ -306,8 +306,8 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w4c1", "health": 250000000, "colour": 120, "size": 400},
-                    <TerritoryEnemyModel>{"id": "w4c1", "health": 250000000, "colour": 240, "size": 500},
+                    <TerritoryEnemyModel>{"id": "w4c1", "health": 25000000, "colour": 120, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w4c1", "health": 25000000, "colour": 240, "size": 500},
                     <TerritoryEnemyModel>{"id": "Mob3", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
@@ -323,10 +323,10 @@ export const initTerritoryFightRepo = () => {
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w5a1", "health": 400000000, "colour": 0, "size": 400},
-                    <TerritoryEnemyModel>{"id": "w5a1", "health": 400000000, "colour": 0, "size": 300},
-                    <TerritoryEnemyModel>{"id": "w5a1", "health": 400000000, "colour": 0, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w5a1", "health": 400000000, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w5a1", "health": 40000000, "colour": 0, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w5a1", "health": 40000000, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w5a1", "health": 40000000, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5a1", "health": 40000000, "colour": 0, "size": 300},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
                 ]
             }),
@@ -334,16 +334,16 @@ export const initTerritoryFightRepo = () => {
                 "img": "25bg.png",
                 "trekReq": 10000000,
                 "fightPower": 0,
-                "enemyAttack": 300000,
+                "enemyAttack": 250000,
                 "battleName": "The Juicer Gang",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w5b3", "health": 5e+09, "colour": 80, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w5b3", "health": 4.8e+09, "colour": 160, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w5b3", "health": 100000000, "colour": 220, "size": 100},
-                    <TerritoryEnemyModel>{"id": "w5b3", "health": 50000000, "colour": 300, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w5b3", "health": 6e+07, "colour": 80, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5b3", "health": 6e+07, "colour": 160, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5b3", "health": 60000000, "colour": 220, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5b3", "health": 60000000, "colour": 300, "size": 200},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
                 ]
             }),
@@ -351,32 +351,32 @@ export const initTerritoryFightRepo = () => {
                 "img": "3bg.png",
                 "trekReq": 15000000,
                 "fightPower": 0,
-                "enemyAttack": 450000,
+                "enemyAttack": 300000,
                 "battleName": "The Ultrawurm et All",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w5c2", "health": 5e+10, "colour": 180, "size": 400},
-                    <TerritoryEnemyModel>{"id": "w5c1", "health": 1e+09, "colour": 0, "size": 100},
-                    <TerritoryEnemyModel>{"id": "w5c1", "health": 2.5e+09, "colour": 330, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w5c1", "health": 4e+09, "colour": 30, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w5c1", "health": 6e+09, "colour": 300, "size": 300}
+                    <TerritoryEnemyModel>{"id": "w5c2", "health": 9e+07, "colour": 180, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w5c1", "health": 9e+07, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5c1", "health": 9e+07, "colour": 330, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5c1", "health": 9e+07, "colour": 30, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w5c1", "health": 9e+07, "colour": 300, "size": 300}
                 ]
             }),
         new TerritoryFightBase(21, <TerritoryFightModel>{
                 "img": "27bg.png",
                 "trekReq": 50000000,
                 "fightPower": 0,
-                "enemyAttack": 900000,
+                "enemyAttack": 500000,
                 "battleName": "The Dihydrogen Monoxiders",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6a1", "health": 1e+11, "colour": 0, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6a1", "health": 5e+10, "colour": 0, "size": 100},
-                    <TerritoryEnemyModel>{"id": "w6a3", "health": 4e+11, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6a1", "health": 2e+08, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a1", "health": 2e+08, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a3", "health": 2e+08, "colour": 0, "size": 300},
                     <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
                 ]
@@ -385,64 +385,81 @@ export const initTerritoryFightRepo = () => {
                 "img": "28bg.png",
                 "trekReq": 100000000,
                 "fightPower": 0,
-                "enemyAttack": 1500000,
+                "enemyAttack": 700000,
                 "battleName": "Mama Mia and the Babbies",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6b3", "health": 5e+11, "colour": 0, "size": 400},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 2e+11, "colour": 0, "size": 300},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+11, "colour": 0, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+11, "colour": 0, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1000, "colour": 0, "size": 100}
+                    <TerritoryEnemyModel>{"id": "w6b3", "health": 7e+08, "colour": 0, "size": 400},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 7e+08, "colour": 0, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 2e+08, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1e+08, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6a4", "health": 1000, "colour": 0, "size": 200}
                 ]
             }),
         new TerritoryFightBase(23, <TerritoryFightModel>{
                 "img": "29bg.png",
                 "trekReq": 300000000,
                 "fightPower": 0,
-                "enemyAttack": 4000000,
+                "enemyAttack": 1000000,
                 "battleName": "Mr Johnson's Pottery Class",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 7.5e+12, "colour": 0, "size": 500},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+12, "colour": 40, "size": 200},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 5e+11, "colour": 230, "size": 100},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 3e+12, "colour": 110, "size": 300},
-                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+12, "colour": 290, "size": 200}
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 1.5e+09, "colour": 0, "size": 500},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 7e+08, "colour": 40, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 5e+08, "colour": 230, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 3e+08, "colour": 110, "size": 300},
+                    <TerritoryEnemyModel>{"id": "w6c1", "health": 2e+08, "colour": 290, "size": 200}
                 ]
             }),
         new TerritoryFightBase(24, <TerritoryFightModel>{
                 "img": "29bg.png",
-                "trekReq": 1000000000,
+                "trekReq": 500000000,
                 "fightPower": 0,
-                "enemyAttack": 10000000,
+                "enemyAttack": 1500000,
                 "battleName": "Green Eggs and BLAM",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+14, "colour": 65, "size": 600},
-                    <TerritoryEnemyModel>{"id": "w6d1", "health": 5e+12, "colour": 85, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 4e+09, "colour": 65, "size": 600},
+                    <TerritoryEnemyModel>{"id": "w6d1", "health": 1e+09, "colour": 85, "size": 200},
                     <TerritoryEnemyModel>{"id": "Mob3", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob4", "health": -1, "colour": -1, "size": -1},
                     <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
                 ]
             }),
         new TerritoryFightBase(25, <TerritoryFightModel>{
-                "img": "3bg.png",
-                "trekReq": 300000000,
+                "img": "32bg.png",
+                "trekReq": 1000000000,
                 "fightPower": 0,
-                "enemyAttack": 450000,
+                "enemyAttack": 2100000,
+                "battleName": "The Doodling School",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w7a2", "health": 2.5e+10, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7a2", "health": 2.5e+10, "colour": 340, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7a2", "health": 2.5e+10, "colour": 330, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7a2", "health": 2.5e+10, "colour": 320, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7a2", "health": 2.5e+10, "colour": 310, "size": 200}
+                ]
+            }),
+        new TerritoryFightBase(26, <TerritoryFightModel>{
+                "img": "3bg.png",
+                "trekReq": 1300000000,
+                "fightPower": 0,
+                "enemyAttack": 2500000,
                 "battleName": "Filler Filler",
                 "filler1": "Filler",
                 "filler2": "Filler",
                 "filler3": "Filler",
                 "enemies": [
-                    <TerritoryEnemyModel>{"id": "w5c1", "health": 1e+09, "colour": 0, "size": 100},
+                    <TerritoryEnemyModel>{"id": "w5c1", "health": 1e+09, "colour": 0, "size": 200},
                     <TerritoryEnemyModel>{"id": "w5c1", "health": 2.5e+09, "colour": 330, "size": 200},
                     <TerritoryEnemyModel>{"id": "w5c1", "health": 4e+09, "colour": 30, "size": 200},
                     <TerritoryEnemyModel>{"id": "w5c1", "health": 6e+09, "colour": 300, "size": 300},

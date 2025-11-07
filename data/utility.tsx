@@ -56,6 +56,11 @@ export enum Coins {
     Marbiglass = 13,
     Orberal = 14,
     Eclipse = 15,
+    Neuro = 16,
+    Isometric = 17,
+    Cyber = 18,
+    Synthesis = 19,
+    Polarity = 20,
 }
 
 export const dateToText = (date: Date): string => {
@@ -228,7 +233,7 @@ export const getCoinsArray = (coins: number): Map<Coins, number> => {
     // Start from copper
     var i = 1;
     // While we haven't processed the full string and we aren't at the max coin yet
-    while (n.length > 0 && i < Coins.Eclipse) {
+    while (n.length > 0 && i < Coins.Polarity) {
         // If we have less than 2 digits left, we are done.
         if (n.length < 2) {
             ret.set(i, Number(n)); // Add the single digit
@@ -246,9 +251,9 @@ export const getCoinsArray = (coins: number): Map<Coins, number> => {
         i += 1
     }
 
-    // If string isn't empty, it means we are at max coin (Eclipse for now). Simply add the full string as number to the array.
+    // If string isn't empty, it means we are at max coin (Polarity for now). Simply add the full string as number to the array.
     if (n.length > 0) {
-        ret.set(Coins.Eclipse, Number(n));
+        ret.set(Coins.Polarity, Number(n));
     }
 
     // Can probably move this to the top but basically handling someone with 0 coins.

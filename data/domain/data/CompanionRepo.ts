@@ -179,7 +179,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(19, <CompanionModel>{
                 "id": "potato",
-                "desc": "{5% Ballot Bonus Multi",
+                "desc": "{5% Ballot Bonus Multi (World 2 feature)",
                 "bonus": 5,
                 "x1": -46,
                 "x2": 0,
@@ -260,8 +260,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(28, <CompanionModel>{
                 "id": "w7d1",
-                "desc": "Bababooey!",
-                "bonus": 1,
+                "desc": "{30% AFK gains for World 7 skills, and +1 World Class Showcase Slot (Grade 4)",
+                "bonus": 30,
                 "x1": -30,
                 "x2": 0,
                 "x3": -48,
@@ -269,8 +269,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(29, <CompanionModel>{
                 "id": "Pet0",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "1.50x Kills for Opening Portals and Deathnote",
+                "bonus": 0.5,
                 "x1": 6,
                 "x2": 0,
                 "x3": -8,
@@ -278,8 +278,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(30, <CompanionModel>{
                 "id": "Pet1",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "2x Friend Bonuses, {2 Friend Bonus Slots, Auto Loot, Storage Quickref Usage, Infinite Teleporting",
+                "bonus": 1,
                 "x1": 4,
                 "x2": 0,
                 "x3": -5,
@@ -296,8 +296,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(32, <CompanionModel>{
                 "id": "Pet4",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "2x Class EXP gain and 2x All Skill EXP gain",
+                "bonus": 1,
                 "x1": -2,
                 "x2": 0,
                 "x3": -13,
@@ -338,6 +338,114 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 100
+            }),
+        new CompanionBase(37, <CompanionModel>{
+                "id": "w7e1",
+                "desc": "10x Class EXP and {10 Legend Talent PTS",
+                "bonus": 1,
+                "x1": -10,
+                "x2": 20,
+                "x3": -33,
+                "x4": 1000
+            }),
+        new CompanionBase(38, <CompanionModel>{
+                "id": "w7a5",
+                "desc": "4x Masterclass drops (Bones/Dust/Tachyon)",
+                "bonus": 3,
+                "x1": -54,
+                "x2": 0,
+                "x3": -15,
+                "x4": 250
+            }),
+        new CompanionBase(39, <CompanionModel>{
+                "id": "w7a8",
+                "desc": "+50% Meritocracy Bonus Multi (World 7 feature)",
+                "bonus": 50,
+                "x1": -15,
+                "x2": 30,
+                "x3": -7,
+                "x4": 100
+            }),
+        new CompanionBase(40, <CompanionModel>{
+                "id": "w7a4",
+                "desc": "1.75x Daily Reef Coral (World 7 feature)",
+                "bonus": 0.75,
+                "x1": -10,
+                "x2": 20,
+                "x3": -19,
+                "x4": 250
+            }),
+        new CompanionBase(41, <CompanionModel>{
+                "id": "Crystal6",
+                "desc": "{40% Ballot Bonus Multi (World 2 feature)",
+                "bonus": 40,
+                "x1": -17,
+                "x2": 0,
+                "x3": -14,
+                "x4": 100
+            }),
+        new CompanionBase(42, <CompanionModel>{
+                "id": "w7a3",
+                "desc": "{1 Grade for 2 Gallery Showcases (World 7 feature)",
+                "bonus": 2,
+                "x1": -9,
+                "x2": 28,
+                "x3": -17,
+                "x4": 100
+            }),
+        new CompanionBase(43, <CompanionModel>{
+                "id": "w7a7",
+                "desc": "1.25x Artifact Find chance (World 5 feature)",
+                "bonus": 0.25,
+                "x1": -4,
+                "x2": 0,
+                "x3": -19,
+                "x4": 10
+            }),
+        new CompanionBase(44, <CompanionModel>{
+                "id": "w7a10",
+                "desc": "{1 Friend Bonus slot",
+                "bonus": 1,
+                "x1": -9,
+                "x2": 0,
+                "x3": -15,
+                "x4": 10
+            }),
+        new CompanionBase(45, <CompanionModel>{
+                "id": "w7a1",
+                "desc": "1.50x Coins from monsters",
+                "bonus": 0.5,
+                "x1": 6,
+                "x2": 0,
+                "x3": -5,
+                "x4": 10
+            }),
+        new CompanionBase(46, <CompanionModel>{
+                "id": "coconut",
+                "desc": "+15% faster Alchemy Brew Speed",
+                "bonus": 15,
+                "x1": -4,
+                "x2": 0,
+                "x3": -24,
+                "x4": 5
+            }),
+        new CompanionBase(47, <CompanionModel>{
+                "id": "snakeG",
+                "desc": "+10% Class EXP",
+                "bonus": 10,
+                "x1": 3,
+                "x2": 0,
+                "x3": -9,
+                "x4": 5
+            }),
+        new CompanionBase(48, <CompanionModel>{
+                "id": "mushP",
+                "desc": "+5% Golden Food bonus",
+                "bonus": 5,
+                "x1": -10,
+                "x2": 0,
+                "x3": -11,
+                "x4": 5
             })    
 ]
 }

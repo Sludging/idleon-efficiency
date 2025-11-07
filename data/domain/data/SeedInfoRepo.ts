@@ -59,6 +59,15 @@ export const initSeedInfoRepo = () => {
                 "lvlReq": 120,
                 "nextCropChance": 0.0005,
                 "nextCropDecay": 0.05
+            }),
+        new SeedInfoBase(6, <SeedInfoModel>{
+                "name": "MEDAL",
+                "seedId": 6,
+                "cropIdMin": 230,
+                "cropIdMax": 279,
+                "lvlReq": 120,
+                "nextCropChance": 6.942e-05,
+                "nextCropDecay": 0.003
             })    
 ]
 }

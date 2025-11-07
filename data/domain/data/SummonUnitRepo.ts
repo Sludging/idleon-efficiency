@@ -80,8 +80,19 @@ export const initSummonUnitRepo = () => {
                 "minQty": 1,
                 "maxQty": 5,
                 "baseCost": 13,
-                "baseHp": 12,
+                "baseHp": 14,
                 "baseDamage": 0
+            }),
+        new SummonUnitBase(7, <SummonUnitModel>{
+                "height": 68,
+                "speed": 2.8,
+                "colRadius": 35,
+                "qtyText": 3,
+                "minQty": 1,
+                "maxQty": 2,
+                "baseCost": 150,
+                "baseHp": 25,
+                "baseDamage": 5
             })    
 ]
 }

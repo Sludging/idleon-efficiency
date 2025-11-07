@@ -455,6 +455,7 @@ export class Player {
                 case AFKTypeEnum.Cooking:
                 case AFKTypeEnum.Fishing:
                 case AFKTypeEnum.Mining:
+                case AFKTypeEnum.Spelunking:
                     return Activity.Skilling;
                 case AFKTypeEnum.Divinity:
                     return Activity.Divinity;
@@ -506,6 +507,9 @@ export class Player {
                 break;
             case AFKTypeEnum.PayingRespect:
                 imageLocation = "ClassIconsFc";
+                break;
+            case AFKTypeEnum.Spelunking:
+                imageLocation = "ClassIcons60";
                 break;
             default:
                 imageLocation = "ClassIconsNA2";

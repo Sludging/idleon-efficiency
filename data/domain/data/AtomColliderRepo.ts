@@ -105,9 +105,9 @@ export const initAtomColliderRepo = () => {
         new AtomColliderBase(12, <AtomColliderModel>{
                 "name": "Aluminium - Stamp Supercharger",
                 "growthFactor": 200000,
-                "baseExponent": 1.3,
+                "baseExponent": 1.45,
                 "baseCost": 200000,
-                "bonusPerLv": 2,
+                "bonusPerLv": 1,
                 "desc": "Stamp Doublers give an extra +{% MORE bonus than the normal +100% they give!"
             })    
 ]

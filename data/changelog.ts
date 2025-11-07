@@ -7,6 +7,16 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.2.50",
+    title: "World 7",
+    date: "November 7, 2025",
+    changes: [
+      "Initial pass for new data from World 7.",
+      "No new features added, just data like bubbles, stamps, cards etc.",
+      "Expected some math to be off for a while.",
+    ]
+  },
+  {
     version: "1.2.41-v4",
     title: "Minor bug fixes",
     date: "September 27, 2025",

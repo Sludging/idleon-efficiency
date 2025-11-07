@@ -367,67 +367,67 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "There is now a 50% chance to get +2 visits to the Emperor every day, and your maximum visits goes up from 6 to 11"
             }),
         new JadeUpgradeBase(40, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Science Fancy Pen",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 40,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates there'll be more floors to sneak up to as well!"
+                "bonus": "Adds the 'Spelunky' bonus to your scientist, which boosts both POW and Amber gain by 5% per Crop after 200! So having 210 crops only gives +50%"
             }),
         new JadeUpgradeBase(41, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Palette Slot",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 40,
+                "imageId": 41,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, specifically the sneaking related updates!"
+                "bonus": "Unlocks +1 Palette Slot in Gaming! This would be kinda pointless on it's own... so it comes with +100% Palette Luck!"
             }),
         new JadeUpgradeBase(42, <JadeUpgradeModel>{
+                "name": "Another Gallery Podium",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 42,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Pardon my interruption sir, but I must urge you to buy this upgrade... another podium slot for your Gallery would be most becoming indeed!"
+            }),
+        new JadeUpgradeBase(43, <JadeUpgradeModel>{
+                "name": "Coral Conservationism",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 43,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "Boosts daily coral gain at the Coral Reef in World 7 in Shimmerfin Deep Town in the game IdleOn on the Left side of the map by +20%"
+            }),
+        new JadeUpgradeBase(44, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 40,
+                "imageId": 44,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
+            }),
+        new JadeUpgradeBase(45, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 44,
                 "filler1": "filler",
                 "filler2": "filler",
                 "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
             }),
-        new JadeUpgradeBase(43, <JadeUpgradeModel>{
+        new JadeUpgradeBase(46, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 40,
+                "imageId": 44,
                 "filler1": "filler",
                 "filler2": "filler",
                 "bonus": "This bonus isn't out yet. 'nuff said."
-            }),
-        new JadeUpgradeBase(44, <JadeUpgradeModel>{
-                "name": "IDK YET",
-                "costA": 500,
-                "costB": 1,
-                "imageId": 39,
-                "filler1": "filler",
-                "filler2": "filler",
-                "bonus": "Idk yet"
-            }),
-        new JadeUpgradeBase(45, <JadeUpgradeModel>{
-                "name": "IDK YET",
-                "costA": 500,
-                "costB": 1,
-                "imageId": 39,
-                "filler1": "filler",
-                "filler2": "filler",
-                "bonus": "Idk yet"
-            }),
-        new JadeUpgradeBase(46, <JadeUpgradeModel>{
-                "name": "IDK YET",
-                "costA": 500,
-                "costB": 1,
-                "imageId": 39,
-                "filler1": "filler",
-                "filler2": "filler",
-                "bonus": "Idk yet"
             }),
         new JadeUpgradeBase(47, <JadeUpgradeModel>{
                 "name": "IDK YET",

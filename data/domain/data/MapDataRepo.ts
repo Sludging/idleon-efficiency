@@ -95,7 +95,7 @@ export const initMapDataRepo = () => {
                 "enemy": "beanG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                "portalRequirements": [40, 500]
+                "portalRequirements": [120, 2000]
             }),
         new MapDataBase(15, <MapDataModel>{
                 "enemy": "ratB",
@@ -107,7 +107,7 @@ export const initMapDataRepo = () => {
                 "enemy": "slimeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleA", "name": "Jungle Perimeter", "id": 16},
-                "portalRequirements": [60, 3000]
+                "portalRequirements": [120, 3000]
             }),
         new MapDataBase(17, <MapDataModel>{
                 "enemy": "mushR",
@@ -125,7 +125,7 @@ export const initMapDataRepo = () => {
                 "enemy": "snakeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleB", "name": "Winding Willows", "id": 19},
-                "portalRequirements": [100]
+                "portalRequirements": [130]
             }),
         new MapDataBase(20, <MapDataModel>{
                 "enemy": "Nothing",
@@ -155,7 +155,7 @@ export const initMapDataRepo = () => {
                 "enemy": "carrotO",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleC", "name": "Vegetable Patch", "id": 24},
-                "portalRequirements": [125, 2000]
+                "portalRequirements": [130, 2000]
             }),
         new MapDataBase(25, <MapDataModel>{
                 "enemy": "Nothing",
@@ -167,7 +167,7 @@ export const initMapDataRepo = () => {
                 "enemy": "goblinG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "ForestA", "name": "Forest Outskirts", "id": 26},
-                "portalRequirements": [150]
+                "portalRequirements": [130]
             }),
         new MapDataBase(27, <MapDataModel>{
                 "enemy": "plank",
@@ -317,19 +317,19 @@ export const initMapDataRepo = () => {
                 "enemy": "jarSand",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmA", "name": "Jar Bridge", "id": 51},
-                "portalRequirements": [250]
+                "portalRequirements": [100]
             }),
         new MapDataBase(52, <MapDataModel>{
                 "enemy": "mimicA",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmB", "name": "The Mimic Hole", "id": 52},
-                "portalRequirements": [600, 1000]
+                "portalRequirements": [120, 1000]
             }),
         new MapDataBase(53, <MapDataModel>{
                 "enemy": "crabcake",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertCalmC", "name": "Dessert Dunes", "id": 53},
-                "portalRequirements": [1000]
+                "portalRequirements": [150]
             }),
         new MapDataBase(54, <MapDataModel>{
                 "enemy": "FishSmall",
@@ -353,25 +353,25 @@ export const initMapDataRepo = () => {
                 "enemy": "coconut",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildA", "name": "The Grandioso Canyon", "id": 57},
-                "portalRequirements": [1200]
+                "portalRequirements": [200]
             }),
         new MapDataBase(58, <MapDataModel>{
                 "enemy": "sandcastle",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildB", "name": "Shifty Sandbox", "id": 58},
-                "portalRequirements": [1600]
+                "portalRequirements": [250]
             }),
         new MapDataBase(59, <MapDataModel>{
                 "enemy": "pincermin",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildC", "name": "Pincer Plateau", "id": 59},
-                "portalRequirements": [2000]
+                "portalRequirements": [300]
             }),
         new MapDataBase(60, <MapDataModel>{
                 "enemy": "potato",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertMildD", "name": "Slamabam Straightaway", "id": 60},
-                "portalRequirements": [2500, 0]
+                "portalRequirements": [500, 0]
             }),
         new MapDataBase(61, <MapDataModel>{
                 "enemy": "FishMed",
@@ -383,19 +383,19 @@ export const initMapDataRepo = () => {
                 "enemy": "steak",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightA", "name": "The Ring", "id": 62},
-                "portalRequirements": [3000]
+                "portalRequirements": [1000]
             }),
         new MapDataBase(63, <MapDataModel>{
                 "enemy": "moonman",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightB", "name": "Up Up Down Down", "id": 63},
-                "portalRequirements": [4000]
+                "portalRequirements": [2000]
             }),
         new MapDataBase(64, <MapDataModel>{
                 "enemy": "sandgiant",
                 "world": "Yum-Yum Desert",
                 "map": <MapNameModel>{"intName": "zDesertNightC", "name": "Sands of Time", "id": 64},
-                "portalRequirements": [5000]
+                "portalRequirements": [3000]
             }),
         new MapDataBase(65, <MapDataModel>{
                 "enemy": "snailZ",
@@ -1793,6 +1793,108 @@ export const initMapDataRepo = () => {
                 "enemy": "Z",
                 "world": "Spirited Valley",
                 "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 297},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(298, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Spirited Valley",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 298},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(299, <MapDataModel>{
+                "enemy": "Z",
+                "world": "Spirited Valley",
+                "map": <MapNameModel>{"intName": "Z", "name": "Z", "id": 299},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(300, <MapDataModel>{
+                "enemy": "Nothing",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaaTown", "name": "Shimmerfin Grove", "id": 300},
+                "portalRequirements": [1, 0]
+            }),
+        new MapDataBase(301, <MapDataModel>{
+                "enemy": "w7a1",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA1", "name": "Refraction Bend", "id": 301},
+                "portalRequirements": [100000]
+            }),
+        new MapDataBase(302, <MapDataModel>{
+                "enemy": "w7a2",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA2", "name": "Doodle Reef", "id": 302},
+                "portalRequirements": [250000]
+            }),
+        new MapDataBase(303, <MapDataModel>{
+                "enemy": "w7a3",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA3", "name": "Seaweed Street", "id": 303},
+                "portalRequirements": [10000000, 1500000]
+            }),
+        new MapDataBase(304, <MapDataModel>{
+                "enemy": "w7a4",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA4", "name": "Barnacle Curb", "id": 304},
+                "portalRequirements": [5000000]
+            }),
+        new MapDataBase(305, <MapDataModel>{
+                "enemy": "w7a5",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA5", "name": "Balloon Bay", "id": 305},
+                "portalRequirements": [20000000, 1000000]
+            }),
+        new MapDataBase(306, <MapDataModel>{
+                "enemy": "w7a6",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA6", "name": "The Clamworks", "id": 306},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(307, <MapDataModel>{
+                "enemy": "w7a7",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA7", "name": "Plastic Basin", "id": 307},
+                "portalRequirements": [250000000, 20000000]
+            }),
+        new MapDataBase(308, <MapDataModel>{
+                "enemy": "w7a8",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA8", "name": "Puffpuff Overpass", "id": 308},
+                "portalRequirements": [60000000]
+            }),
+        new MapDataBase(309, <MapDataModel>{
+                "enemy": "w7a9",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA9", "name": "Pinpoint Summit", "id": 309},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(310, <MapDataModel>{
+                "enemy": "w7a10",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA10", "name": "Middle of Nowhere", "id": 310},
+                "portalRequirements": [500000000, 75000000]
+            }),
+        new MapDataBase(311, <MapDataModel>{
+                "enemy": "w7a11",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA11", "name": "Coralcave Outskirts", "id": 311},
+                "portalRequirements": [1000000000]
+            }),
+        new MapDataBase(312, <MapDataModel>{
+                "enemy": "w7a12",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA12", "name": "Coralcave Perimeter", "id": 312},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(313, <MapDataModel>{
+                "enemy": "Nothing",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA13", "name": "Unused", "id": 313},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(314, <MapDataModel>{
+                "enemy": "Nothing",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaA14", "name": "Unused", "id": 314},
                 "portalRequirements": [0]
             })    
 ]

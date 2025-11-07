@@ -173,16 +173,23 @@ export const initVendorRepo = () => {
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
+                        "item": "Quest104",
+                        "quantity": 1,
+                        "no": 24,
+                        "purchasePrice": 4000
+                    },
+                    <VendorModel>{
+                        "vendor": "Blunder Hills",
                         "item": "rtt0",
                         "quantity": 50,
-                        "no": 24,
+                        "no": 25,
                         "purchasePrice": 200
                     },
                     <VendorModel>{
                         "vendor": "Blunder Hills",
                         "item": "ResetFrag",
                         "quantity": 1,
-                        "no": 25,
+                        "no": 26,
                         "purchasePrice": 800
                     }
                 ]
@@ -989,6 +996,102 @@ export const initVendorRepo = () => {
                         "quantity": 1,
                         "no": 13,
                         "purchasePrice": 28000000000000000000000
+                    }
+                ]
+            }),
+        new VendorsBase("Shimmerfin Grove", <VendorsModel>{
+                "area": "Shimmerfin Grove",
+                "items": [
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "TrophyReplica0",
+                        "quantity": 10,
+                        "no": 1,
+                        "purchasePrice": 40000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "EquipmentNametagReplica0",
+                        "quantity": 10,
+                        "no": 2,
+                        "purchasePrice": 2000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "FoodHealth18",
+                        "quantity": 9000000,
+                        "no": 3,
+                        "purchasePrice": 240000000000000004563402752
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "FoodHealth19",
+                        "quantity": 9000000,
+                        "no": 4,
+                        "purchasePrice": 120000000000000003793529864192
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "Quest103",
+                        "quantity": 1,
+                        "no": 5,
+                        "purchasePrice": 4000000000000000079538499354624
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "StoneW9",
+                        "quantity": 4,
+                        "no": 6,
+                        "purchasePrice": 24000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "StoneA8",
+                        "quantity": 4,
+                        "no": 7,
+                        "purchasePrice": 24000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "StoneT8",
+                        "quantity": 4,
+                        "no": 8,
+                        "purchasePrice": 24000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "StampC26",
+                        "quantity": 1,
+                        "no": 9,
+                        "purchasePrice": 40000000000000000000
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "InvBag115",
+                        "quantity": 1,
+                        "no": 10,
+                        "purchasePrice": 1000000000000000042420637374017961984
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "InvStorage29",
+                        "quantity": 1,
+                        "no": 11,
+                        "purchasePrice": 2799999999999999830496968179712
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "InvStorage30",
+                        "quantity": 1,
+                        "no": 12,
+                        "purchasePrice": 28000000000000000781949476850892800
+                    },
+                    <VendorModel>{
+                        "vendor": "Shimmerfin Grove",
+                        "item": "Quest105",
+                        "quantity": 1,
+                        "no": 13,
+                        "purchasePrice": 400000000000000021464648817573888
                     }
                 ]
             })    
