@@ -2695,12 +2695,12 @@ export const initNpcRepo = () => {
                         "NextIndex": 11,
                         "Name": "Three Right Answers",
                         "ConsumeItems": false,
-                        "InventorySpacesNeeded": 3,
+                        "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 24,
                         "Rewards": [
                             <ExpRewardModel>{"item": "Experience0", "quantity": 10},
                             <ComponentModel>{"item": "ResetCompleted", "quantity": 2},
-                            <ComponentModel>{"item": "StoneW1", "quantity": 1}
+                            <ComponentModel>{"item": "Quest86", "quantity": 1}
                         ],
                         "QuestName": "Promotheus2",
                         "Difficulty": 1,
@@ -2792,8 +2792,8 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Oh one more thing...",
-                        "NextIndex": 8,
+                        "DialogueText": "Don't stress out you'll get to choose the other classes later!",
+                        "NextIndex": 9,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -2804,7 +2804,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "You will create LOTS of characters so you'll get to play EVERY class! Just pick the class which you want to main first.",
+                        "DialogueText": "Just pick the class which you want to main first.",
                         "NextIndex": 10,
                         "Name": ""
                     },
@@ -3406,9 +3406,9 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 6,
                         "Rewards": [
-                            <ComponentModel>{"item": "EquipmentStatues2", "quantity": 3},
-                            <ComponentModel>{"item": "FoodPotGr2", "quantity": 25},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 2000}
+                            <ComponentModel>{"item": "EquipmentStatues2", "quantity": 5},
+                            <ComponentModel>{"item": "PremiumGem", "quantity": 10},
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 3000}
                         ],
                         "QuestName": "Stiltzcho1",
                         "Difficulty": 3,
@@ -3428,8 +3428,8 @@ export const initNpcRepo = () => {
                         "InventorySpacesNeeded": 2,
                         "NoSpaceIndex": 11,
                         "Rewards": [
-                            <ComponentModel>{"item": "EquipmentStatues2", "quantity": 2},
-                            <ComponentModel>{"item": "ExpBalloon1", "quantity": 1},
+                            <ComponentModel>{"item": "EquipmentStatues2", "quantity": 5},
+                            <ComponentModel>{"item": "ExpBalloon1", "quantity": 2},
                             <CoinRewardModel>{"item": "", "quantity": 1000}
                         ],
                         "QuestName": "Stiltzcho2",
@@ -3744,7 +3744,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Mushroom Munchies": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Get some food and I'll increase your food carry capacity! <br> QUEST:Get nomwiches pizza and that GLIZZY bro!",
+                        "DialogueText": "Get the good stuff and I'll increase your food carry capacity! QUEST:Get 15 Snake Skin 5 Slime Sludge and 5 Bean Slices!",
                         "NextIndex": 4,
                         "Name": "Mushroom Munchies",
                         "ConsumeItems": true,
@@ -3752,21 +3752,21 @@ export const initNpcRepo = () => {
                         "NoSpaceIndex": 3,
                         "Rewards": [
                             <ComponentModel>{"item": "MaxCapBag10", "quantity": 1},
-                            <ComponentModel>{"item": "ResetCompleted", "quantity": 1},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 800}
+                            <ComponentModel>{"item": "Quest104", "quantity": 1},
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 6000}
                         ],
                         "QuestName": "Funguy1",
                         "Difficulty": 3,
                         "note": <NoteModel>{"note": "The [[Peanut]] recipe comes from [[Picnic Stowaway]]."},
                         "ItemReq": [
-                            <ComponentModel>{"item": "FoodHealth1", "quantity": 10},
-                            <ComponentModel>{"item": "FoodHealth2", "quantity": 5},
-                            <ComponentModel>{"item": "FoodHealth3", "quantity": 1}
+                            <ComponentModel>{"item": "Jungle2", "quantity": 15},
+                            <ComponentModel>{"item": "Jungle1", "quantity": 5},
+                            <ComponentModel>{"item": "Grasslands3", "quantity": 5}
                         ]
                     },
                     "Videogame Highscores are COOL!": <CustomQuestModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 20 in the Choppin Minigame.",
+                        "DialogueText": "You ever played that choppin' minigame..? <br> QUEST:Get a score of 20 in the Choppin Minigame. Play it by going to any tree in the game like the Oak Tree way back at the 1st map with the mushroom monsters!",
                         "NextIndex": 8,
                         "Name": "Videogame Highscores are COOL!",
                         "ConsumeItems": false,
@@ -3774,8 +3774,8 @@ export const initNpcRepo = () => {
                         "NoSpaceIndex": 7,
                         "Rewards": [
                             <RecipeRewardModel>{"item": "SmithingRecipes1", "quantity": 44},
-                            <ExpRewardModel>{"item": "Experience0", "quantity": 3000},
-                            <CoinRewardModel>{"item": "", "quantity": 1250}
+                            <ExpRewardModel>{"item": "Experience0", "quantity": 10000},
+                            <CoinRewardModel>{"item": "", "quantity": 5000}
                         ],
                         "QuestName": "Funguy2",
                         "Difficulty": 3,
@@ -3854,7 +3854,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "Get some food and I'll increase your food carry capacity! <br> QUEST:Get nomwiches pizza and that GLIZZY bro!",
+                        "DialogueText": "Get the good stuff and I'll increase your food carry capacity! QUEST:Get 15 Snake Skin 5 Slime Sludge and 5 Bean Slices!",
                         "NextIndex": 4,
                         "Name": "Mushroom Munchies"
                     },
@@ -3866,19 +3866,19 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Ahhh you legend you even brought driiiiinks! Hehehe you're quite the party starter I like that! Here's that bag I was talking about earlier all this food should fit riiiiight in hehe!",
+                        "DialogueText": "Ahhh you legend! Hehehe you're quite the party starter I like that!",
                         "NextIndex": 5,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Soooo... you're kiiiiinda my plus one for this shindig my guy so my reps ridin' on you being a toooootally chillin guy. You look heckin' skilled so lets roll with that...",
+                        "DialogueText": "Soooo... you're kiiiiinda my plus one for this party my guy so my reputation be ridin' on you being a toooootally chill guy. You look heckin' skilled so lets roll with that...",
                         "NextIndex": 6,
                         "Name": ""
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.Custom,
-                        "DialogueText": "You ever played that choppin' minigame? Everyone around here loooves that game you'd get mad respect from having a siiiick score to brag about! <br> QUEST:Get a score of 20 in the Choppin Minigame.",
+                        "DialogueText": "You ever played that choppin' minigame..? <br> QUEST:Get a score of 20 in the Choppin Minigame. Play it by going to any tree in the game like the Oak Tree way back at the 1st map with the mushroom monsters!",
                         "NextIndex": 8,
                         "Name": "Videogame Highscores are COOL!"
                     },
@@ -4642,7 +4642,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.LevelReq,
-                        "DialogueText": "Maybe a little too cool even for you why don't yall stop by a bit later when you're cool like me. <br> Return at Lv. 35",
+                        "DialogueText": "I'm too cool for you that's for sure... yall best come back later when you're cool like me. <br> Return at Lv. 50",
                         "NextIndex": 3,
                         "Name": ""
                     },
@@ -5983,7 +5983,7 @@ export const initNpcRepo = () => {
                 "quests": {
                     "Genie Dieting": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I will give you boss keys just do this first! <br> QUEST:Collect 100 Snelbie shells 5 Sand Giant Monocles and 5 Cherries from Moonmoons!",
+                        "DialogueText": "I give you boss keys if you do this first! <br> QUEST:Gather 10 Shrapshell by defeating the Snelbies on this map!! Also bring some food from the Town Store!",
                         "NextIndex": 4,
                         "Name": "Genie Dieting",
                         "ConsumeItems": true,
@@ -5996,9 +5996,9 @@ export const initNpcRepo = () => {
                             "note": "The recipe for Icing Ironbite comes from [[Tasks]]. Average Mana Potions are dropped by Forest monsters and [[Amarok]]."
                         },
                         "ItemReq": [
-                            <ComponentModel>{"item": "DesertC4", "quantity": 100},
-                            <ComponentModel>{"item": "DesertC3", "quantity": 5},
-                            <ComponentModel>{"item": "DesertC2", "quantity": 5}
+                            <ComponentModel>{"item": "DesertC4", "quantity": 10},
+                            <ComponentModel>{"item": "FoodHealth6", "quantity": 1},
+                            <ComponentModel>{"item": "FoodHealth7", "quantity": 1}
                         ]
                     },
                     "I'm Blue Dabadedada": <CustomQuestModel>{
@@ -6053,7 +6053,7 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
-                        "DialogueText": "I will give you boss keys just do this first! <br> QUEST:Collect 100 Snelbie shells 5 Sand Giant Monocles and 5 Cherries from Moonmoons!",
+                        "DialogueText": "I give you boss keys if you do this first! <br> QUEST:Gather 10 Shrapshell by defeating the Snelbies on this map!! Also bring some food from the Town Store!",
                         "NextIndex": 4,
                         "Name": "Genie Dieting"
                     },
@@ -7594,7 +7594,7 @@ export const initNpcRepo = () => {
                         "Difficulty": 4,
                         "note": <NoteModel>{"note": " "},
                         "CustomType": "Cowbo Jones3",
-                        "CustomArray": [<CustomReqModel>{"desc": "Characters Created:", "finalV": 4, "type": "GreaterEqual", "startV": 0}]
+                        "CustomArray": [<CustomReqModel>{"desc": "Characters Created:", "finalV": 3, "type": "GreaterEqual", "startV": 0}]
                     },
                     "Say Goodbye to your Dubloon!": <ItemQuestModel>{
                         "Type": QuestTypeEnum.ItemsAndSpaceRequired,
@@ -7873,7 +7873,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "... he ain't talkin' almost like he done been cursed by an evil power I wonder if... naw Djonnut said that evil Elephant's tomb has been dormant for over a century... it can't be.",
-                        "NextIndex": 12,
+                        "NextIndex": 15,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -7902,8 +7902,8 @@ export const initNpcRepo = () => {
                     },
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
-                        "DialogueText": "Listen up and I'll tell ya how it works: <br> You assign characters to different cauldrons to power them. There are Bubble Cauldrons on the 1st page and Liquid Cauldrons on the 2nd page.",
-                        "NextIndex": 17,
+                        "DialogueText": "Listen up and I'll tell ya how it works: <br> You assign characters to different cauldrons to power them. Then you use the power to unlock bubbles then you upgrade the bubbles for bonuses.",
+                        "NextIndex": 19,
                         "Name": ""
                     },
                     <DialogueLineModel>{
@@ -12660,7 +12660,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Holla holla! You're a winning MACHINE! I'm gonna keep the party going but that's it for the games for now. PartyOn!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -12803,7 +12803,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Now that's what I call non-raw cooking! I can't believe I'm saying this but that's all the cooking I can do for now... I'm all cooked out!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -13022,7 +13022,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Zzzz.... nono lava I wont tell them... zzz... I wont tell them to drop sludge oil onto the purple spores.... zzz... nah lava secrets safe with... zzz... me...",
-                        "NextIndex": -1,
+                        "NextIndex": 18,
                         "Name": ""
                     }
                 ]
@@ -13112,7 +13112,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Blunb Blu ###",
-                        "NextIndex": -1,
+                        "NextIndex": 6,
                         "Name": ""
                     }
                 ]
@@ -13180,7 +13180,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "This is.... acceptable. You may proceed to the Task TV behind me.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -13279,7 +13279,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bruh wait what even ARE you...? Ain't never saw that class you got there where'd you get it?? I sure didn't give it to you...",
-                        "NextIndex": -1,
+                        "NextIndex": 7,
                         "Name": ""
                     }
                 ]
@@ -13373,7 +13373,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bruh wait what even ARE you...? Ain't never saw that class you got there where'd you get it?? I sure didn't give it to you...",
-                        "NextIndex": -1,
+                        "NextIndex": 7,
                         "Name": ""
                     }
                 ]
@@ -13554,7 +13554,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I hate this. I wish things could just fix themself naturally and come to a conclusion but I guess things are never gonna change ^",
-                        "NextIndex": -1,
+                        "NextIndex": 15,
                         "Name": ""
                     }
                 ]
@@ -13730,7 +13730,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well done laddy! I take my cap off to ye that was some fine sailin' ye must have done!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -13863,7 +13863,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ah now I understand you perfectly... yes it is wonderful weather we're having.",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -14002,7 +14002,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Daaang you've got skills!! Now get out there and teach everyone else how it's done! Literally! So I don't have to do it myself anymore! ...no? Eh fine just go have fun then and leave me to it!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -14066,7 +14066,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ayyyy that's how it's done! I'll give you access to my tasks have fun!",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -14130,7 +14130,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You are ready complete my tasks at your own pace.",
-                        "NextIndex": -1,
+                        "NextIndex": 9999,
                         "Name": ""
                     }
                 ]
@@ -14216,7 +14216,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can access the rift from the World Map... <br> <br> I wonder when those Null Nightmares are gonna join me for brunch they're 5 decades late! Eh any year now I'm sure they'll show up...",
-                        "NextIndex": -1,
+                        "NextIndex": 7,
                         "Name": ""
                     }
                 ]
@@ -14390,7 +14390,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "ONE OF US! ONE OF US!",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -14446,7 +14446,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Spring spring spring!! Yippie!! Nice nametag its so poggers!",
-                        "NextIndex": -1,
+                        "NextIndex": 4,
                         "Name": ""
                     }
                 ]
@@ -14591,7 +14591,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You absolute legend! You made this tired mole very happy I really never thought I'd see the day that someone stood up to the boss!",
-                        "NextIndex": -1,
+                        "NextIndex": 10,
                         "Name": ""
                     }
                 ]
@@ -14727,7 +14727,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Magnificent... and to think that my brilliance that irradiates from the surface of my being was ever called into question bluhahugue!",
-                        "NextIndex": -1,
+                        "NextIndex": 9,
                         "Name": ""
                     }
                 ]
@@ -15124,7 +15124,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're definitely royal. I don't know where you were born but that was a royal quantity of effort no doubt. I mean I could totally see MYSELF putting in that amount of effort! I-i-if I ever needed to of course!",
-                        "NextIndex": -1,
+                        "NextIndex": 34,
                         "Name": ""
                     }
                 ]
@@ -15372,7 +15372,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can tell you have cultivated a respect for our way of life out here in the Spirited Valley. Go now venture off to wherever your spirit yearns for.",
-                        "NextIndex": -1,
+                        "NextIndex": 19,
                         "Name": ""
                     }
                 ]
@@ -15549,7 +15549,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You better lose the toast not the ice cream the frosting the cherry you better eat it 'till it's gone...? Nah that ain't it either how About...",
-                        "NextIndex": -1,
+                        "NextIndex": 14,
                         "Name": ""
                     }
                 ]
@@ -15741,7 +15741,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "'The Elder nods his head slowly in acknowledgement of your counting abilities'",
-                        "NextIndex": -1,
+                        "NextIndex": 16,
                         "Name": ""
                     }
                 ]
@@ -15786,7 +15786,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Go ahead click the Summoning Stones! You have my full permission! <br> There are currently 7 stones I think I put a few in World 3 World 4 and maybe World 5...? Can't remember...",
-                        "NextIndex": -1,
+                        "NextIndex": 4,
                         "Name": ""
                     }
                 ]
@@ -15935,7 +15935,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can't believe you did all that! I'll need to think of more things for later!",
-                        "NextIndex": -1,
+                        "NextIndex": 11,
                         "Name": ""
                     }
                 ]
@@ -15962,7 +15962,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Pls giv crop transfer ticket. I give magic beans you become better farmer grow more crop... give me more next time yeees...",
-                        "NextIndex": -1,
+                        "NextIndex": 1,
                         "Name": ""
                     }
                 ]
@@ -16246,6 +16246,493 @@ export const initNpcRepo = () => {
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Potti stares at you with a smile across her face.",
                         "NextIndex": 23,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Humble Hugh", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 9.53,
+                    "starSign": "Aries",
+                    "mothersMaidenName": "Schuster",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "My fishies done gon' a missing!! Please help my Coral Reef aint nothin' without 'em! <br> (Find at least 1 of the 6 Lil' Fishies in order to access the Coral Reef)",
+                        "NextIndex": 0,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Thanks stranger! Click on any of the fishies to access the Coral Reef where you can spend coral on permanent bonuses... and rescue more of me Lil' Fishies to expand the Coral Reef!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well that there's the whole gang back together at last!!! Look at 'em go I've never seen 'em happier!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Coralcave Prince", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 4.91,
+                    "starSign": "Aries",
+                    "mothersMaidenName": "Knutson",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BRING MEEE THE PREEETY!?! GREEEN... BLUEEE... YEEELLOW... REEED!!?",
+                        "NextIndex": 0,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Sad Urie", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 6.69,
+                    "starSign": "Aquarius",
+                    "mothersMaidenName": "Hancock",
+                    "notes": " "
+                },
+                "quests": {
+                    "Urie Wants to be a Millionaire": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Pfft prove it. <br> Get me a MILLION golden food and I'll give you something very special to me... <br> QUEST:Bring a stack of 1 million of any golden food and you'll unlock a new Beanstalk mechanic!",
+                        "NextIndex": 6,
+                        "Name": "Urie Wants to be a Millionaire",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 5,
+                        "Rewards": [<ComponentModel>{"item": "Quest106", "quantity": 1}],
+                        "QuestName": "Sad Urie1",
+                        "Difficulty": 7,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Sad Urie1",
+                        "CustomArray": [<CustomReqModel>{"desc": "1M Gfood stack:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Don't look at me like that!! Everyone always looks at me funny...",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "It's because of my colour isn't it. People always say it's not but I know it is none of the other bags around here get weird looks.",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Yea well who even cares I don't even care... <br> My mom always tells me that I'm not gross I'm GOLD! And gold is for winners!",
+                        "NextIndex": 3,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You... you agree with me? <br> Really????",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Pfft prove it. <br> Get me a MILLION golden food and I'll give you something very special to me... <br> QUEST:Bring a stack of 1 million of any golden food and you'll unlock a new Beanstalk mechanic!",
+                        "NextIndex": 6,
+                        "Name": "Urie Wants to be a Millionaire"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "WOAH! I... I have a million of <br> something... I really AM a winner! <br> Mom was right!",
+                        "NextIndex": 6,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Snootie", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 9.85,
+                    "starSign": "Leo",
+                    "mothersMaidenName": "Trussel",
+                    "notes": " "
+                },
+                "quests": {
+                    "Lost Possum": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Do u think u could you find my pet possum? I named her Pommsie she got lost in that tunnel back in Town. She's just little baby so don't hurt her! <br> QUEST:Find Pommsie in Pebble Cove the 1st Spelunking Cave.",
+                        "NextIndex": 4,
+                        "Name": "Lost Possum",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 3,
+                        "Rewards": [<ComponentModel>{"item": "StampB56", "quantity": 1}],
+                        "QuestName": "Snootie1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Snootie1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Find Pommsie:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Lost Amber": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Oh ohhh wait can u find my lucky amber piece? It was blue I think there's like only one of them in the whole world! <br> QUEST:Find a blue amber and pretend it's one of a kind and that you didn't find 100s of them",
+                        "NextIndex": 7,
+                        "Name": "Lost Amber",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 6,
+                        "Rewards": [<ComponentModel>{"item": "StampB55", "quantity": 1}],
+                        "QuestName": "Snootie2",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Snootie2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Blue Amber Found:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "Lost Doll": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You're so good at seeking... so good... do you think you could find my long lost doll? It's the only thing my mom gave me growing up... <br> QUEST:Find Mister Jazzie in Bizarro the 7th Spelunking Cave",
+                        "NextIndex": 10,
+                        "Name": "Lost Doll",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 9,
+                        "Rewards": [<ComponentModel>{"item": "StampA44", "quantity": 1}],
+                        "QuestName": "Snootie3",
+                        "Difficulty": 9,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Snootie3",
+                        "CustomArray": [<CustomReqModel>{"desc": "Find Mister Jazzie:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You found me!",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Lets play again let me hide... <br> ... <br> ... <br> Ok come find me... <br> ... <br> ... <br> You found me AGAIN! You're good at this!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Do u think u could you find my pet possum? I named her Pommsie she got lost in that tunnel back in Town. She's just little baby so don't hurt her! <br> QUEST:Find Pommsie in Pebble Cove the 1st Spelunking Cave.",
+                        "NextIndex": 4,
+                        "Name": "Lost Possum"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Giant? The size of a crocodile??? No that couldn't have been her... <br> Oh well she'll come back some day right?",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "Oh ohhh wait can u find my lucky amber piece? It was blue I think there's like only one of them in the whole world! <br> QUEST:Find a blue amber and pretend it's one of a kind and that you didn't find 100s of them",
+                        "NextIndex": 7,
+                        "Name": "Lost Amber"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 5,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "NO WAY! That's it that's the exact piece! I'm certain of it! Thanks so much!!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "You're so good at seeking... so good... do you think you could find my long lost doll? It's the only thing my mom gave me growing up... <br> QUEST:Find Mister Jazzie in Bizarro the 7th Spelunking Cave",
+                        "NextIndex": 10,
+                        "Name": "Lost Doll"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Clear some inventory Space!",
+                        "NextIndex": 8,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "YOU FOUND HIM! He's just as big as I remember I missed you Mr. Jazzie!!! <br> Thank you you're the bestest seeker ever!",
+                        "NextIndex": 10,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Bloo Radley", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 6.25,
+                    "starSign": "Gemini",
+                    "mothersMaidenName": "Kaskel",
+                    "notes": " "
+                },
+                "quests": {
+                    "To Guide a Shypig": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "... <br> 'The pig keeps glancing up as if he wants to go higher but is too scared...' <br> QUEST:Set a good example and reach the map above this one I'm sure our friend Bloo will follow us!",
+                        "NextIndex": 3,
+                        "Name": "To Guide a Shypig",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 2,
+                        "Rewards": [<ComponentModel>{"item": "StampB57", "quantity": 1}],
+                        "QuestName": "Bloo Radley1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Bloo Radley1",
+                        "CustomArray": [<CustomReqModel>{"desc": "Reach Pinpoint Summit:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "The Hero's Journey": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "... <br> 'The pig keeps glancing at the summit but is still too scared...' <br> QUEST:Clear the path for Bloo by defeating all the Demonblubs before any respawn I'm sure he will make his way to the top!",
+                        "NextIndex": 6,
+                        "Name": "The Hero's Journey",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 5,
+                        "Rewards": [<ComponentModel>{"item": "StampC27", "quantity": 1}],
+                        "QuestName": "Bloo Radley2",
+                        "Difficulty": 4,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Bloo Radley2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Demonblub full clear:", "finalV": 1, "type": "GreaterEqual", "startV": 0}]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... <br> 'The pig gives you a half smile before immediately hiding again...'",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "... <br> 'The pig keeps glancing up as if he wants to go higher but is too scared...' <br> QUEST:Set a good example and reach the map above this one I'm sure our friend Bloo will follow us!",
+                        "NextIndex": 3,
+                        "Name": "To Guide a Shypig"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... <br> 'The pig glances at your full inventory I think he wants to give you a stamp!'",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... <br> 'The pig gives you a 3 quarters smile before immediately hiding again... at least that's an improvement over a half smile!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "... <br> 'The pig keeps glancing at the summit but is still too scared...' <br> QUEST:Clear the path for Bloo by defeating all the Demonblubs before any respawn I'm sure he will make his way to the top!",
+                        "NextIndex": 6,
+                        "Name": "The Hero's Journey"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "... <br> 'The pig glances at your full inventory I think he wants to give you a stamp!'",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You took me home...",
+                        "NextIndex": 6,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Toobus Goobus", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "birthWeight": 6.54,
+                    "starSign": "Libra",
+                    "mothersMaidenName": "Ventotla",
+                    "notes": " "
+                },
+                "quests": {
+                    "TUNNEL EXPLORING": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "SO UHH FIRST OF ALL WE GOT THAT WACK AHH TUNNEL... <br> QUEST:Go visit the Spelunker Tunnel on the left side of town and unlock the first lore bonus by defeating the boss on Depth 7",
+                        "NextIndex": 6,
+                        "Name": "TUNNEL EXPLORING",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 5,
+                        "Rewards": [<ComponentModel>{"item": "Quest108", "quantity": 3}],
+                        "QuestName": "Toobus Goobus1",
+                        "Difficulty": 2,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Toobus Goobus1",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Pommsie Defeated:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "Lore Bonus Earned:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    },
+                    "FEAR HOLE! FEAR HOLE!": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "DUUUDE YOU CHECK OUT THE FEAR HOLE YET? <br> QUEST:Go finish the Spelunker tutorial by AFKing in the Fearful Tunnel until you level up your Spelunking Skill!",
+                        "NextIndex": 9,
+                        "Name": "FEAR HOLE! FEAR HOLE!",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 8,
+                        "Rewards": [<ComponentModel>{"item": "Quest108", "quantity": 4}],
+                        "QuestName": "Toobus Goobus2",
+                        "Difficulty": 1,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Toobus Goobus2",
+                        "CustomArray": [<CustomReqModel>{"desc": "Spelunking LV:", "finalV": 2, "type": "GreaterEqual", "startV": 0}]
+                    },
+                    "READING CHALLENGE": <CustomQuestModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "YOU READ THOSE PAGES?? LIKE IDK MAN I WISH I READ MORE BUT LIKE IT'S SO BORING RIGHT? <br> QUEST:Collect 100 Pages from Spelunking and hold down on them in your inventory to Level Up your Lore Chapter bonuses!",
+                        "NextIndex": 12,
+                        "Name": "READING CHALLENGE",
+                        "ConsumeItems": false,
+                        "InventorySpacesNeeded": 1,
+                        "NoSpaceIndex": 11,
+                        "Rewards": [<ComponentModel>{"item": "Quest108", "quantity": 4}],
+                        "QuestName": "Toobus Goobus3",
+                        "Difficulty": 3,
+                        "note": <NoteModel>{"note": " "},
+                        "CustomType": "Toobus Goobus3",
+                        "CustomArray": [
+                            <CustomReqModel>{"desc": "Read Spelunker Pages:", "finalV": 1, "type": "GreaterEqual", "startV": 0},
+                            <CustomReqModel>{"desc": "View bonuses in Lore:", "finalV": 1, "type": "GreaterEqual", "startV": 0}
+                        ]
+                    }
+                },
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "HOW'S IT GOING MY GUY?!??",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "THAT'S WHATS UPPP I'M VIBIN' TOO JUST VIBIN' YOU KNOW HOW WE DOOO...",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "WORLD 7? I DON'T KNOW WHAT THAT IS BUT I CAN TELL YOU ABOUT MY TOWN I'M LOCAL HERE!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "WORLD 7? I DON'T KNOW WHAT THAT IS BUT I CAN TELL YOU ABOUT MY TOWN I'M LOCAL HERE!",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "SO UHH FIRST OF ALL WE GOT THAT WACK AHH TUNNEL... <br> QUEST:Go visit the Spelunker Tunnel on the left side of town and unlock the first lore bonus by defeating the boss on Depth 7",
+                        "NextIndex": 6,
+                        "Name": "TUNNEL EXPLORING"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BRUHHH FULL INVENTORY YOU'RE KILLIN' ME AHAH...",
+                        "NextIndex": 4,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "GIANT RAT THING? WHOOOOA.... THAT'S CRAZY!!!",
+                        "NextIndex": 7,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "DUUUDE YOU CHECK OUT THE FEAR HOLE YET? <br> QUEST:Go finish the Spelunker tutorial by AFKing in the Fearful Tunnel until you level up your Spelunking Skill!",
+                        "NextIndex": 9,
+                        "Name": "FEAR HOLE! FEAR HOLE!"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BRUHHH FULL INVENTORY YOU'RE KILLIN' ME AHAH...",
+                        "NextIndex": 7,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "RIGHT ONNN DUDE I WISH I COULD GET A SPELUNKER LEVEL OR WHATEVER! BUT ITS COOL I'M GOOD WHERE I'M AT...",
+                        "NextIndex": 10,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.Custom,
+                        "DialogueText": "YOU READ THOSE PAGES?? LIKE IDK MAN I WISH I READ MORE BUT LIKE IT'S SO BORING RIGHT? <br> QUEST:Collect 100 Pages from Spelunking and hold down on them in your inventory to Level Up your Lore Chapter bonuses!",
+                        "NextIndex": 12,
+                        "Name": "READING CHALLENGE"
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "BRUHHH FULL INVENTORY YOU'RE KILLIN' ME AHAH...",
+                        "NextIndex": 10,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "AIGHT THAT'S ALL I GOT FOR YA I'LL SHOW YOU 'ROUND THE NEXT SKILL WHEN IT COMES OUT!",
+                        "NextIndex": 12,
                         "Name": ""
                     }
                 ]

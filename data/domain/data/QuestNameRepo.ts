@@ -342,6 +342,15 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Potti12", <QuestNameModel>{"name": "Star Master", "difficulty": 7}),
         new QuestNameBase("Potti15", <QuestNameModel>{"name": "15 Time Champion", "difficulty": 8}),
         new QuestNameBase("Potti18", <QuestNameModel>{"name": "Armor of the Gods", "difficulty": 9}),
-        new QuestNameBase("Potti21", <QuestNameModel>{"name": "Spirit of the Hero", "difficulty": 8})    
+        new QuestNameBase("Potti21", <QuestNameModel>{"name": "Spirit of the Hero", "difficulty": 8}),
+        new QuestNameBase("Sad Urie4", <QuestNameModel>{"name": "Urie Wants to be a Millionaire", "difficulty": 7}),
+        new QuestNameBase("Snootie2", <QuestNameModel>{"name": "Lost Possum", "difficulty": 2}),
+        new QuestNameBase("Snootie5", <QuestNameModel>{"name": "Lost Amber", "difficulty": 4}),
+        new QuestNameBase("Snootie8", <QuestNameModel>{"name": "Lost Doll", "difficulty": 9}),
+        new QuestNameBase("Bloo Radley1", <QuestNameModel>{"name": "To Guide a Shypig", "difficulty": 2}),
+        new QuestNameBase("Bloo Radley4", <QuestNameModel>{"name": "The Hero's Journey", "difficulty": 4}),
+        new QuestNameBase("Toobus Goobus4", <QuestNameModel>{"name": "TUNNEL EXPLORING", "difficulty": 2}),
+        new QuestNameBase("Toobus Goobus7", <QuestNameModel>{"name": "FEAR HOLE! FEAR HOLE!", "difficulty": 1}),
+        new QuestNameBase("Toobus Goobus10", <QuestNameModel>{"name": "READING CHALLENGE", "difficulty": 3})    
 ]
 }

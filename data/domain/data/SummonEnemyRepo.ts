@@ -1024,7 +1024,7 @@ export const initSummonEnemyRepo = () => {
                 "xOff": 26,
                 "yOff": 29,
                 "width": 14,
-                "territoryName": "MoveFan84 and his Famous Nacho Batallion",
+                "territoryName": "MovieFan84 and his Famous Nacho Batallion",
                 "bonusId": 1,
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
                 "bonusQty": 12,
@@ -1124,8 +1124,8 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 35,
                 "width": 15,
                 "territoryName": "Horsey's Gambit",
-                "bonusId": 0,
-                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
                 "difficulty": 20
             }),
@@ -1135,8 +1135,8 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 38,
                 "width": 20,
                 "territoryName": "Bishop's Gambit",
-                "bonusId": 0,
-                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
                 "difficulty": 20
             }),
@@ -1146,8 +1146,8 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 35,
                 "width": 30,
                 "territoryName": "Queen's Gambit",
-                "bonusId": 0,
-                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
                 "difficulty": 20
             }),
@@ -1157,8 +1157,8 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 44,
                 "width": 22,
                 "territoryName": "Castle's Gambit",
-                "bonusId": 0,
-                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
                 "difficulty": 20
             }),
@@ -1168,8 +1168,8 @@ export const initSummonEnemyRepo = () => {
                 "yOff": 30,
                 "width": 23,
                 "territoryName": "Noob's Gambit",
-                "bonusId": 0,
-                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
                 "bonusQty": 0,
                 "difficulty": 20
             }),
@@ -1224,9 +1224,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 90,
                 "territoryName": "The Hexermush",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(111, <SummonEnemyModel>{
                 "enemyId": "mini5a",
@@ -1235,9 +1235,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 90,
                 "territoryName": "The Cinderdomeo",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(112, <SummonEnemyModel>{
                 "enemyId": "Boss6",
@@ -1246,9 +1246,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 90,
                 "territoryName": "The Zephyeror",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(113, <SummonEnemyModel>{
                 "enemyId": "babayaga",
@@ -1257,9 +1257,9 @@ export const initSummonEnemyRepo = () => {
                 "width": 90,
                 "territoryName": "W7 boss",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
             }),
         new SummonEnemyBase(114, <SummonEnemyModel>{
                 "enemyId": "babayaga",
@@ -1268,9 +1268,141 @@ export const initSummonEnemyRepo = () => {
                 "width": 90,
                 "territoryName": "W8 boss",
                 "bonusId": 0,
-                "bonus": undefined,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"},
                 "bonusQty": 0,
-                "difficulty": 0
+                "difficulty": 20
+            }),
+        new SummonEnemyBase(115, <SummonEnemyModel>{
+                "enemyId": "w7a1",
+                "xOff": 19,
+                "yOff": 17,
+                "width": 14,
+                "territoryName": "Danny and his Shiny Fishies",
+                "bonusId": 1,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
+                "bonusQty": 250,
+                "difficulty": 95
+            }),
+        new SummonEnemyBase(116, <SummonEnemyModel>{
+                "enemyId": "w7a2",
+                "xOff": 31,
+                "yOff": 29,
+                "width": 22,
+                "territoryName": "Monty and his Dastardly Doodlefish",
+                "bonusId": 4,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 4, "bonus": "<x Artifact Find"},
+                "bonusQty": 17,
+                "difficulty": 120
+            }),
+        new SummonEnemyBase(117, <SummonEnemyModel>{
+                "enemyId": "w7a3",
+                "xOff": 39,
+                "yOff": 29,
+                "width": 18,
+                "territoryName": "Rhea and her Eccentric Eels",
+                "bonusId": 10,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 10, "bonus": "+{% Drop Rate"},
+                "bonusQty": 5,
+                "difficulty": 150
+            }),
+        new SummonEnemyBase(118, <SummonEnemyModel>{
+                "enemyId": "w7a4",
+                "xOff": 38,
+                "yOff": 25,
+                "width": 20,
+                "territoryName": "Clarence and his Slug Entourage",
+                "bonusId": 12,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 12, "bonus": "+{% AFK Gains"},
+                "bonusQty": 3,
+                "difficulty": 180
+            }),
+        new SummonEnemyBase(119, <SummonEnemyModel>{
+                "enemyId": "w7a5",
+                "xOff": 50,
+                "yOff": 47,
+                "width": 41,
+                "territoryName": "Nina and her Birthday Balloonfish",
+                "bonusId": 1,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
+                "bonusQty": 350,
+                "difficulty": 220
+            }),
+        new SummonEnemyBase(120, <SummonEnemyModel>{
+                "enemyId": "w7a6",
+                "xOff": 32,
+                "yOff": 31,
+                "width": 20,
+                "territoryName": "Karl and his Downtrodden Clamrades",
+                "bonusId": 17,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 17, "bonus": "<x Gaming Bits"},
+                "bonusQty": 250,
+                "difficulty": 206
+            }),
+        new SummonEnemyBase(121, <SummonEnemyModel>{
+                "enemyId": "w7a7",
+                "xOff": 36,
+                "yOff": 29,
+                "width": 17,
+                "territoryName": "Jojo and his Bizarre Recyclables",
+                "bonusId": 4,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 4, "bonus": "<x Artifact Find"},
+                "bonusQty": 20,
+                "difficulty": 300
+            }),
+        new SummonEnemyBase(122, <SummonEnemyModel>{
+                "enemyId": "w7a8",
+                "xOff": 29,
+                "yOff": 28,
+                "width": 22,
+                "territoryName": "Penny and her Lane of Puffers",
+                "bonusId": 14,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 14, "bonus": "<x Construct SPD"},
+                "bonusQty": 300,
+                "difficulty": 320
+            }),
+        new SummonEnemyBase(123, <SummonEnemyModel>{
+                "enemyId": "w7a9",
+                "xOff": 38,
+                "yOff": 25,
+                "width": 22,
+                "territoryName": "Bill and his Spiky Balls of Pain",
+                "bonusId": 20,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 20, "bonus": "+{ Library Max"},
+                "bonusQty": 1,
+                "difficulty": 350
+            }),
+        new SummonEnemyBase(124, <SummonEnemyModel>{
+                "enemyId": "w7a10",
+                "xOff": 34,
+                "yOff": 37,
+                "width": 15,
+                "territoryName": "Maple and her Nostalgic Spearfish",
+                "bonusId": 1,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
+                "bonusQty": 500,
+                "difficulty": 400
+            }),
+        new SummonEnemyBase(125, <SummonEnemyModel>{
+                "enemyId": "w7a11",
+                "xOff": 31,
+                "yOff": 31,
+                "width": 22,
+                "territoryName": "Mr. K and his Crusty Crabs",
+                "bonusId": 4,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 4, "bonus": "<x Artifact Find"},
+                "bonusQty": 23,
+                "difficulty": 450
+            }),
+        new SummonEnemyBase(126, <SummonEnemyModel>{
+                "enemyId": "w7a12",
+                "xOff": 58,
+                "yOff": 42,
+                "width": 31,
+                "territoryName": "Frankton and his Crab Army of Doom",
+                "bonusId": 11,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 11, "bonus": "<x Crop EVO"},
+                "bonusQty": 90,
+                "difficulty": 500
             })    
 ]
 }

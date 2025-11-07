@@ -21,7 +21,7 @@ export const initFeatherRepo = () => {
                 "x2": 25,
                 "x3": 1000,
                 "bonus1": "+{% Class XP",
-                "bonus2": "Gain a permanent bonus for outside this map! This upgrade never resets...",
+                "bonus2": "Gain a permanent bonus in the real game! This upgrade never resets.",
                 "x4": 0
             }),
         new FeatherBase(2, <FeatherModel>{
@@ -120,7 +120,7 @@ export const initFeatherRepo = () => {
                 "x2": 3,
                 "x3": 30000,
                 "bonus1": "+{% Fishing XP",
-                "bonus2": "Gain a permanent bonus for outside this map!",
+                "bonus2": "Gain a permanent bonus in the real game!",
                 "x4": 10
             }),
         new FeatherBase(13, <FeatherModel>{

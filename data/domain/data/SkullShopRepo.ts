@@ -42,7 +42,7 @@ export const initSkullShopRepo = () => {
                 "qty": 1
             }),
         new SkullShopBase(5, <SkullShopModel>{
-                "description": "Get 6 Balls! They're put right into the arcade!",
+                "description": "Get 10 Balls! They're put right into the arcade!",
                 "baseCost": 4,
                 "costInc": 0,
                 "rewardId": "Timecandy1",
@@ -107,6 +107,41 @@ export const initSkullShopRepo = () => {
         new SkullShopBase(14, <SkullShopModel>{
                 "description": "Permanently boosts Jade Gain! Current bonus is x",
                 "baseCost": 7,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 3
+            }),
+        new SkullShopBase(15, <SkullShopModel>{
+                "description": "5% Chance for +1 Grade for your Gallery in World 7!",
+                "baseCost": 15,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 1
+            }),
+        new SkullShopBase(16, <SkullShopModel>{
+                "description": "Permanently boosts the drops of Masterclasses by x",
+                "baseCost": 7,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 2
+            }),
+        new SkullShopBase(17, <SkullShopModel>{
+                "description": "Permanently boosts EXP gain for all World 7 skills by x",
+                "baseCost": 6,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 1
+            }),
+        new SkullShopBase(18, <SkullShopModel>{
+                "description": "Permanently boosts daily coral gain by +%",
+                "baseCost": 10,
+                "costInc": 0,
+                "rewardId": "Timecandy1",
+                "qty": 2
+            }),
+        new SkullShopBase(19, <SkullShopModel>{
+                "description": "Permanently boosts something... Current bonus is x",
+                "baseCost": 12,
                 "costInc": 0,
                 "rewardId": "Timecandy1",
                 "qty": 3

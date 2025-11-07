@@ -643,6 +643,97 @@ export const initEnemyNavRepo = () => {
                 "crystalName": "Crystal5",
                 "hasCard": true
             }),
+        new EnemyNavBase("w7a1", <EnemyNavModel>{
+                "prev": undefined,
+                "next": "w7a2",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a2", <EnemyNavModel>{
+                "prev": "w7a1",
+                "next": "w7a3",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a3", <EnemyNavModel>{
+                "prev": "w7a2",
+                "next": "w7a4",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a4", <EnemyNavModel>{
+                "prev": "w7a3",
+                "next": "w7a5",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a5", <EnemyNavModel>{
+                "prev": "w7a4",
+                "next": "w7a6",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a6", <EnemyNavModel>{
+                "prev": "w7a5",
+                "next": "w7a7",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a7", <EnemyNavModel>{
+                "prev": "w7a6",
+                "next": "w7a8",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a8", <EnemyNavModel>{
+                "prev": "w7a7",
+                "next": "w7a9",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a9", <EnemyNavModel>{
+                "prev": "w7a8",
+                "next": "w7a10",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a10", <EnemyNavModel>{
+                "prev": "w7a9",
+                "next": "w7a11",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a11", <EnemyNavModel>{
+                "prev": "w7a10",
+                "next": "w7a12",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("w7a12", <EnemyNavModel>{
+                "prev": "w7a11",
+                "next": "Crystal6",
+                "hasCrystal": true,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
+        new EnemyNavBase("Crystal6", <EnemyNavModel>{
+                "prev": "w7a12",
+                "next": "Blank",
+                "hasCrystal": false,
+                "crystalName": "Crystal6",
+                "hasCard": true
+            }),
         new EnemyNavBase("slimeB", <EnemyNavModel>{
                 "prev": undefined,
                 "next": "babayaga",

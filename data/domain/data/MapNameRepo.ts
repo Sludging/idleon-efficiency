@@ -305,6 +305,21 @@ export const initMapNameRepo = () => {
         new MapNameBase(296, <MapNameModel>{"intName": "Z", "name": "Z", "id": 296}),
         new MapNameBase(297, <MapNameModel>{"intName": "Z", "name": "Z", "id": 297}),
         new MapNameBase(298, <MapNameModel>{"intName": "Z", "name": "Z", "id": 298}),
-        new MapNameBase(299, <MapNameModel>{"intName": "Z", "name": "Z", "id": 299})    
+        new MapNameBase(299, <MapNameModel>{"intName": "Z", "name": "Z", "id": 299}),
+        new MapNameBase(300, <MapNameModel>{"intName": "uAquaaTown", "name": "Shimmerfin Grove", "id": 300}),
+        new MapNameBase(301, <MapNameModel>{"intName": "uAquaA1", "name": "Refraction Bend", "id": 301}),
+        new MapNameBase(302, <MapNameModel>{"intName": "uAquaA2", "name": "Doodle Reef", "id": 302}),
+        new MapNameBase(303, <MapNameModel>{"intName": "uAquaA3", "name": "Seaweed Street", "id": 303}),
+        new MapNameBase(304, <MapNameModel>{"intName": "uAquaA4", "name": "Barnacle Curb", "id": 304}),
+        new MapNameBase(305, <MapNameModel>{"intName": "uAquaA5", "name": "Balloon Bay", "id": 305}),
+        new MapNameBase(306, <MapNameModel>{"intName": "uAquaA6", "name": "The Clamworks", "id": 306}),
+        new MapNameBase(307, <MapNameModel>{"intName": "uAquaA7", "name": "Plastic Basin", "id": 307}),
+        new MapNameBase(308, <MapNameModel>{"intName": "uAquaA8", "name": "Puffpuff Overpass", "id": 308}),
+        new MapNameBase(309, <MapNameModel>{"intName": "uAquaA9", "name": "Pinpoint Summit", "id": 309}),
+        new MapNameBase(310, <MapNameModel>{"intName": "uAquaA10", "name": "Middle of Nowhere", "id": 310}),
+        new MapNameBase(311, <MapNameModel>{"intName": "uAquaA11", "name": "Coralcave Outskirts", "id": 311}),
+        new MapNameBase(312, <MapNameModel>{"intName": "uAquaA12", "name": "Coralcave Perimeter", "id": 312}),
+        new MapNameBase(313, <MapNameModel>{"intName": "uAquaA13", "name": "Unused", "id": 313}),
+        new MapNameBase(314, <MapNameModel>{"intName": "uAquaA14", "name": "Unused", "id": 314})    
 ]
 }

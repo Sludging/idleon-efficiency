@@ -11,5 +11,7 @@ export interface ArtifactModel {
     eldritchBonus?: string,
     eldritchBonusQty?: number,
     sovereignBonus?: string,
-    sovereignBonusQty?: number
+    sovereignBonusQty?: number,
+    omnipotentBonus?: string,
+    omnipotentBonusQty?: number
 }

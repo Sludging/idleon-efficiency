@@ -401,7 +401,7 @@ export const initActiveTalentRepo = () => {
                 "K": 1,
                 "D": 1,
                 "s": 1,
-                "cooldown": 150,
+                "cooldown": 160,
                 "castTime": 0.5,
                 "manaCost": 15,
                 "inputReq": 0,

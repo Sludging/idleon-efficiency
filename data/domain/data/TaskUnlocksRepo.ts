@@ -423,6 +423,42 @@ export const initTaskUnlocksRepo = () => {
                         <TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}
                     ]
                 ]
+            }),
+        new TaskUnlocksBase(4, <TaskUnlocksModel>{
+                "unlocks": [
+                    [<TaskUnlockModel>{"item": "Timecandy2", "tabNo": 3, "recipNo": 56}],
+                    [<TaskUnlockModel>{"item": "Timecandy3", "tabNo": 3, "recipNo": 57}],
+                    [<TaskUnlockModel>{"item": "Timecandy4", "tabNo": 3, "recipNo": 58}],
+                    [<TaskUnlockModel>{"item": "Timecandy5", "tabNo": 3, "recipNo": 59}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 10, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 15, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 20, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 25, "recipNo": 0}]
+                ]
+            }),
+        new TaskUnlocksBase(5, <TaskUnlocksModel>{
+                "unlocks": [
+                    [<TaskUnlockModel>{"item": "EquipmentPendant35", "tabNo": 5, "recipNo": 23}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 10, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 15, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 20, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 25, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 30, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 35, "recipNo": 0}]
+                ]
+            }),
+        new TaskUnlocksBase(6, <TaskUnlocksModel>{
+                "unlocks": [
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}],
+                    [<TaskUnlockModel>{"item": "PremiumGem", "tabNo": 5, "recipNo": 0}]
+                ]
             })    
 ]
 }

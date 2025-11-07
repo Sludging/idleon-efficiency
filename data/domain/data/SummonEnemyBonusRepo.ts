@@ -33,8 +33,8 @@ export const initSummonEnemyBonusRepo = () => {
         new SummonEnemyBonusBase(24, <SummonEnemyBonusModel>{"bonusId": 25, "bonus": "+{ Equinox Max LV"}),
         new SummonEnemyBonusBase(25, <SummonEnemyBonusModel>{"bonusId": 26, "bonus": "+{% Monument AFK"}),
         new SummonEnemyBonusBase(26, <SummonEnemyBonusModel>{"bonusId": 27, "bonus": "<x Meal Bonuses"}),
-        new SummonEnemyBonusBase(27, <SummonEnemyBonusModel>{"bonusId": 28, "bonus": "+{% for World 7"}),
-        new SummonEnemyBonusBase(28, <SummonEnemyBonusModel>{"bonusId": 29, "bonus": "+{% for World 7"}),
+        new SummonEnemyBonusBase(27, <SummonEnemyBonusModel>{"bonusId": 28, "bonus": "<x Spelunk POW"}),
+        new SummonEnemyBonusBase(28, <SummonEnemyBonusModel>{"bonusId": 29, "bonus": "<x Amber Gain"}),
         new SummonEnemyBonusBase(29, <SummonEnemyBonusModel>{"bonusId": 30, "bonus": "+{% for World 7"}),
         new SummonEnemyBonusBase(30, <SummonEnemyBonusModel>{"bonusId": 31, "bonus": "+{% for World 7"}),
         new SummonEnemyBonusBase(31, <SummonEnemyBonusModel>{"bonusId": 32, "bonus": "<x Winner Bonuses"})    

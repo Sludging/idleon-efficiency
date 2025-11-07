@@ -185,6 +185,18 @@ export const initIslandInfoRepo = () => {
                 "xYPointer": "764,426",
                 "expPerTrip": 10000,
                 "artifactsPerIsland": 1
+            }),
+        new IslandInfoBase(15, <IslandInfoModel>{
+                "name": "World's End",
+                "distance": 5000000000,
+                "relic1": 0,
+                "relic2": -1,
+                "relic3": -1,
+                "unlockQty": 2000000000,
+                "cloudsUnlocked": 1,
+                "xYPointer": "764,426",
+                "expPerTrip": 100000,
+                "artifactsPerIsland": 4
             })    
 ]
 }

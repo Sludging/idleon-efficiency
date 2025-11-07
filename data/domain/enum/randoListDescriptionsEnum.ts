@@ -112,5 +112,14 @@ export enum RandoListDescriptionsEnum {
     dk31 = "dk31",
     dk32 = "dk32",
     dk33 = "dk33",
-    dk34 = "dk34"
+    EquipmentSetsDisplayOrder = "EquipmentSetsDisplayOrder",
+    dk34 = "dk34",
+    dk35 = "dk35",
+    dk36 = "dk36",
+    dk37 = "dk37",
+    dk38 = "dk38",
+    dk39 = "dk39",
+    dk40 = "dk40",
+    dk41 = "dk41",
+    dk42 = "dk42"
 }

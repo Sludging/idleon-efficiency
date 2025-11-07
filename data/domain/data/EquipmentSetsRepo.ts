@@ -271,6 +271,7 @@ export const initEquipmentSetsRepo = () => {
                     "EquipmentPants31",
                     "EquipmentShoes40",
                     "EquipmentRings36",
+                    "EquipmentPendant35",
                     "EquipmentCape17"
                 ],
                 "tools": ["none"],
@@ -282,6 +283,24 @@ export const initEquipmentSetsRepo = () => {
                 "displayOrder": 17
             }),
         new EquipmentSetsBase(17, <EquipmentSetsModel>{
+                "name": "PREHISTORIC_SET",
+                "armors": ["EquipmentHats123", "EquipmentShirts41", "EquipmentPants32", "EquipmentShoes41"],
+                "tools": [
+                    "EquipmentTools16",
+                    "EquipmentToolsHatchet13",
+                    "FishingRod13",
+                    "CatchingNet13",
+                    "TrapBoxSet11",
+                    "WorshipSkull12"
+                ],
+                "weapons": ["EquipmentPunching12", "EquipmentSword10", "EquipmentBows15", "EquipmentWands14"],
+                "toolsRequired": false,
+                "weaponRequired": true,
+                "bonusValue": 100,
+                "description": "x EXP Gain in all World 7 Skills",
+                "displayOrder": 18
+            }),
+        new EquipmentSetsBase(18, <EquipmentSetsModel>{
                 "name": "SECRET_SET",
                 "armors": [
                     "EquipmentHats61",

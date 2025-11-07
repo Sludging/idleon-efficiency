@@ -8,18 +8,18 @@ export class BossDetailsBase { constructor(public id: string, public data: BossD
 export const initBossDetailRepo = () => {
     return [    
         new BossDetailsBase("wolfA", <BossDetailsModel>{
-                "health": 30000,
+                "health": 60000,
                 "defence": 5,
                 "exp": 15000,
                 "keys": 1,
                 "attacks": [
-                    <BossAttackModel>{"name": "Fireball", "damage": 29},
-                    <BossAttackModel>{"name": "Stomp", "damage": 50},
-                    <BossAttackModel>{"name": "Rock Spikes", "damage": 32},
+                    <BossAttackModel>{"name": "Fireball", "damage": 50},
+                    <BossAttackModel>{"name": "Stomp", "damage": 70},
+                    <BossAttackModel>{"name": "Rock Spikes", "damage": 50},
                     <BossAttackModel>{"name": "Spike Traps", "damage": 35},
-                    <BossAttackModel>{"name": "Sword Swing", "damage": 40},
-                    <BossAttackModel>{"name": "Uppercut", "damage": 100},
-                    <BossAttackModel>{"name": "Rocketfist", "damage": 35}
+                    <BossAttackModel>{"name": "Sword Swing", "damage": 100},
+                    <BossAttackModel>{"name": "Uppercut", "damage": 150},
+                    <BossAttackModel>{"name": "Rocketfist", "damage": 90}
                 ]
             }),
         new BossDetailsBase("wolfB", <BossDetailsModel>{
@@ -53,7 +53,7 @@ export const initBossDetailRepo = () => {
                 ]
             }),
         new BossDetailsBase("Boss2A", <BossDetailsModel>{
-                "health": 1000000,
+                "health": 4000000,
                 "defence": 150,
                 "exp": 100000,
                 "keys": 1,

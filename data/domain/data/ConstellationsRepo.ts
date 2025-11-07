@@ -34,7 +34,7 @@ export const initConstellationsRepo = () => {
                 "name": "A-3",
                 "area": "Valley Of The Beans",
                 "x": 575,
-                "y": 1186,
+                "y": 941,
                 "num1": 0,
                 "num2": 99,
                 "num3": 4,

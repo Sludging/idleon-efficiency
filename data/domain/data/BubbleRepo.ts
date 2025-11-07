@@ -23,7 +23,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{ Total STR for all players, always.",
-                        "requirements": [<ComponentModel>{"item": "OakTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Copper", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalSTR"
                     },
                     <BubbleModel>{
@@ -33,7 +33,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decayMulti",
                         "description": "All Orange Passive Bubbles, which are the smaller sized ones, give a {x higher bonus to your warrior-based classes.",
-                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 7}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 3}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "Opassz"
                     },
                     <BubbleModel>{
@@ -43,7 +43,7 @@ export const initBubbleRepo = () => {
                         "x2": 100,
                         "func": "decay",
                         "description": "+{% mining efficiency per power of 10 max HP that your character has. The perfect bonus for miners with infinite HP!",
-                        "requirements": [<ComponentModel>{"item": "JungleTree", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "JungleTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "MinEff"
                     },
                     <BubbleModel>{
@@ -53,7 +53,7 @@ export const initBubbleRepo = () => {
                         "x2": 1.5,
                         "func": "bigBase",
                         "description": "+{% chance for Multiple Ores while Mining, and the max is now 300%, not 100%. Big bubbles like this must be equipped to give bonus.",
-                        "requirements": [<ComponentModel>{"item": "Bug1", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "Bug1", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "MiningACTIVE"
                     },
                     <BubbleModel>{
@@ -63,7 +63,7 @@ export const initBubbleRepo = () => {
                         "x2": 80,
                         "func": "decay",
                         "description": "+{% Mining and Fishing EXP gain. Y'know what, I'll even DOUBLE that bonus for whichever skill has the lower level!",
-                        "requirements": [<ComponentModel>{"item": "CraftMat6", "quantity": 25}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "CraftMat6", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "MinFishEXP"
                     },
                     <BubbleModel>{
@@ -321,6 +321,56 @@ export const initBubbleRepo = () => {
                         "description": "+{% Crop Evolution chance for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<SummonComponentModel>{"summonId": "4", "quantity": 1500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "W10AllCharz"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Power Cauldron",
+                        "name": "Double Pagey",
+                        "x1": 30,
+                        "x2": 130,
+                        "func": "decay",
+                        "description": "+{% Multi Page chance for active Spelunking! Now you can not read things TWICE as much!! Who am I even talking to!!!",
+                        "requirements": [<ComponentModel>{"item": "w7A1", "quantity": 4000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 7}],
+                        "bonusKey": "W11"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Power Cauldron",
+                        "name": "Dmg Of The Sun",
+                        "x1": 4000,
+                        "x2": 300,
+                        "func": "decay",
+                        "description": "+{% Total Damage. This is additive, so the better you are the less you'll even notice this bonus.",
+                        "requirements": [<ComponentModel>{"item": "W7item0", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 8}],
+                        "bonusKey": "W12"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Power Cauldron",
+                        "name": "Bone Bubble",
+                        "x1": 200,
+                        "x2": 500,
+                        "func": "decay",
+                        "description": "+{% Extra Dust for Deathbringers. Wait I meant Bones, since Dust is for Arcane Cultists. Wait I meant Windwalkers.",
+                        "requirements": [<ComponentModel>{"item": "Bug15", "quantity": 1000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 9}],
+                        "bonusKey": "W13"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Power Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "W14"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Power Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "W15"
                     }
                 ]
             }),
@@ -333,7 +383,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{ Total AGI for all players, always.",
-                        "requirements": [<ComponentModel>{"item": "Copper", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "DesertA1", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalAGI"
                     },
                     <BubbleModel>{
@@ -343,7 +393,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decayMulti",
                         "description": "All Green Passive Bonuses, which are the smaller sized ones, give {x more bonuses to your archer-based characters.",
-                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 7}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 3}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "Gpassz"
                     },
                     <BubbleModel>{
@@ -353,7 +403,7 @@ export const initBubbleRepo = () => {
                         "x2": 2,
                         "func": "bigBase",
                         "description": "Lets you produce two items at once in the anvil, and gives +{% production speed. Big bubbles like this must be equipped to give bonus.",
-                        "requirements": [<ComponentModel>{"item": "Iron", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Iron", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "AnvilACTIVE"
                     },
                     <BubbleModel>{
@@ -363,7 +413,7 @@ export const initBubbleRepo = () => {
                         "x2": 100,
                         "func": "decay",
                         "description": "+{% Mastery. Mastery is your stat that boosts minimum damage. Just like in Maplest... err, just like how I thought it up myself!",
-                        "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "Mastery"
                     },
                     <BubbleModel>{
@@ -373,7 +423,7 @@ export const initBubbleRepo = () => {
                         "x2": 100,
                         "func": "decay",
                         "description": "Costs for buying Anvil Production Points is reduced by {%. This is just like a tax cut, so remember me as a hero!",
-                        "requirements": [<ComponentModel>{"item": "ForestTree", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "ForestTree", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "AnvilProdCost"
                     },
                     <BubbleModel>{
@@ -631,6 +681,56 @@ export const initBubbleRepo = () => {
                         "description": "+{% Stealth (the stat that lowers detection rate in Sneaking) for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<CropComponentModel>{"cropId": "99", "quantity": 250}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "A10AllCharz"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Quicc Cauldron",
+                        "name": "Spapunkie",
+                        "x1": 400,
+                        "x2": 150,
+                        "func": "decay",
+                        "description": "+{% Spelunking Efficiency. You yearn that much more for the tiny gaps in caverns that man was not meant to venture...",
+                        "requirements": [<ComponentModel>{"item": "w7A2", "quantity": 4000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 7}],
+                        "bonusKey": "A11"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Quicc Cauldron",
+                        "name": "Dmg Of The Moon",
+                        "x1": 4000,
+                        "x2": 300,
+                        "func": "decay",
+                        "description": "+{% Total Damage. This is additive, so the better you are the less you'll even notice this bonus.",
+                        "requirements": [<ComponentModel>{"item": "Spelunking1", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 8}],
+                        "bonusKey": "A12"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Quicc Cauldron",
+                        "name": "Dust Bubble",
+                        "x1": 200,
+                        "x2": 500,
+                        "func": "decay",
+                        "description": "+{% Extra Dust for Windwalkers.",
+                        "requirements": [<ComponentModel>{"item": "Soul8", "quantity": 300}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 9}],
+                        "bonusKey": "A13"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Quicc Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "A14"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Quicc Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "A15"
                     }
                 ]
             }),
@@ -643,7 +743,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{ Total WIS for all players, always.",
-                        "requirements": [<ComponentModel>{"item": "BirchTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "OakTree", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalWIS"
                     },
                     <BubbleModel>{
@@ -653,7 +753,7 @@ export const initBubbleRepo = () => {
                         "x2": 50,
                         "func": "decayMulti",
                         "description": "All Purple Passive Bonuses, which are the smaller sized ones, give {x more bonuses to your mage-based characters.",
-                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 7}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Grasslands1", "quantity": 3}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "Ppassz"
                     },
                     <BubbleModel>{
@@ -663,7 +763,7 @@ export const initBubbleRepo = () => {
                         "x2": 100,
                         "func": "decay",
                         "description": "+{% choppin efficiency per power of 10 max MP that your character has. Super diaper! Err, duper.",
-                        "requirements": [<ComponentModel>{"item": "CraftMat5", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "CraftMat5", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "ChopEff"
                     },
                     <BubbleModel>{
@@ -673,7 +773,7 @@ export const initBubbleRepo = () => {
                         "x2": 1.5,
                         "func": "bigBase",
                         "description": "+{% chance for Multiple Logs while Choppin, and the max is now 300%, not 100%. Big bubbles like this must be equipped to give bonus.",
-                        "requirements": [<ComponentModel>{"item": "IronBar", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "IronBar", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "MultiLogACTIVE"
                     },
                     <BubbleModel>{
@@ -941,6 +1041,56 @@ export const initBubbleRepo = () => {
                         "description": "+{% All Essence Gain for every 2000 Tome Completion Points above 5000.",
                         "requirements": [<JadeComponentModel>{"quantity": 250000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "M10AllCharz"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "High-IQ Cauldron",
+                        "name": "Deep Depth",
+                        "x1": 8,
+                        "x2": 200,
+                        "func": "decay",
+                        "description": "+{% chance to find the rope 'n hole to the next Depth in Speluking Delves.",
+                        "requirements": [<ComponentModel>{"item": "Prehistrium", "quantity": 1000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 7}],
+                        "bonusKey": "M11"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "High-IQ Cauldron",
+                        "name": "Dmg Of The Soul",
+                        "x1": 4000,
+                        "x2": 300,
+                        "func": "decay",
+                        "description": "+{% Total Damage. This is additive, so the better you are the less you'll even notice this bonus.",
+                        "requirements": [<ComponentModel>{"item": "w7A4", "quantity": 4000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 8}],
+                        "bonusKey": "M12"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "High-IQ Cauldron",
+                        "name": "Tachyon Bubble",
+                        "x1": 250,
+                        "x2": 500,
+                        "func": "decay",
+                        "description": "+{% Extra Tachyons for Arcane Cultist.",
+                        "requirements": [<ComponentModel>{"item": "w7A8", "quantity": 4000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 9}],
+                        "bonusKey": "M13"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "High-IQ Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "M14"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "High-IQ Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "M14"
                     }
                 ]
             }),
@@ -953,7 +1103,7 @@ export const initBubbleRepo = () => {
                         "x2": 0,
                         "func": "add",
                         "description": "+{ LUK for all players, always.",
-                        "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalLUK"
                     },
                     <BubbleModel>{
@@ -963,7 +1113,7 @@ export const initBubbleRepo = () => {
                         "x2": 70,
                         "func": "decay",
                         "description": "+{% Drop Rate. Thanks to this upgrade, you can get even MORE angry when you keep not getting that rare item you're grinding for!",
-                        "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 7}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "Fish1", "quantity": 3}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "DropRate"
                     },
                     <BubbleModel>{
@@ -973,7 +1123,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decay",
                         "description": "Leveling up a statue resets it's exp bar down to {%, instead of 0%. Staturrific! Yea... the jokes are only gonna go downhill from here lol",
-                        "requirements": [<ComponentModel>{"item": "DesertA1", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "BirchTree", "quantity": 5}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "StatueStartEXP"
                     },
                     <BubbleModel>{
@@ -983,7 +1133,7 @@ export const initBubbleRepo = () => {
                         "x2": 30,
                         "func": "decay",
                         "description": "{% chance for a gift to drop when leveling up, like a gem or an EXP Balloon! Big bubbles like this must be equipped to give bonus.",
-                        "requirements": [<ComponentModel>{"item": "DesertA3", "quantity": 15}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
+                        "requirements": [<ComponentModel>{"item": "DesertA3", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "LevelUpACTIVE"
                     },
                     <BubbleModel>{
@@ -993,7 +1143,7 @@ export const initBubbleRepo = () => {
                         "x2": 60,
                         "func": "decayMulti",
                         "description": "The Prowess Bonus for every skill is multiplied by {. Prowess lowers the Efficiency needed to get multiple QTY per drop from resources.",
-                        "requirements": [<ComponentModel>{"item": "ToiletTree", "quantity": 30}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
+                        "requirements": [<ComponentModel>{"item": "ToiletTree", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 3}],
                         "bonusKey": "ProwessMulti"
                     },
                     <BubbleModel>{
@@ -1248,6 +1398,56 @@ export const initBubbleRepo = () => {
                         "description": "The Jade Cost of 'Currency Conduit' scales {% slower, making it cheaper, allowing you to buy it more and get more JADE!",
                         "requirements": [<ComponentModel>{"item": "SpiD1", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
                         "bonusKey": "Y10"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Kazam Cauldron",
+                        "name": "Faster Nrg",
+                        "x1": 20,
+                        "x2": 100,
+                        "func": "decay",
+                        "description": "+{% faster Stamina Regeneration for Spelunking. Delve fast, delve often.",
+                        "requirements": [<ComponentModel>{"item": "Tree14", "quantity": 1000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 7}],
+                        "bonusKey": "Y11"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Kazam Cauldron",
+                        "name": "Kattle Da Goat",
+                        "x1": 40,
+                        "x2": 300,
+                        "func": "decay",
+                        "description": "Kattlekruk, who took literally 2.5yrs after being released to let you have his bonus, now gives +{% more Bubble LVs per day.",
+                        "requirements": [<ComponentModel>{"item": "W7item1", "quantity": 10}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 8}],
+                        "bonusKey": "Y12"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Kazam Cauldron",
+                        "name": "Codfrey Rulz Ok",
+                        "x1": 5,
+                        "x2": 500,
+                        "func": "decay",
+                        "description": "+{% higher Gallery Bonus Multi. This boosts the bonuses from both Trophies and Nametags, incase you didn't know.",
+                        "requirements": [<ComponentModel>{"item": "W7item2", "quantity": 20}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 9}],
+                        "bonusKey": "Y13"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Kazam Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "Y14"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Kazam Cauldron",
+                        "name": "Bubble",
+                        "x1": 99,
+                        "x2": 40,
+                        "func": "decay",
+                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
+                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "bonusKey": "Y15"
                     }
                 ]
             }),
@@ -1989,7 +2189,7 @@ export const initBubbleRepo = () => {
                         "x1": 3.5,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{% Jade Gain in Sneaking. Congratulations btw on trekking through World 6 like that what a journey!",
+                        "description": "+{% Jade Gain in Sneaking. Congratulations btw on trekking through World 6 like that, what a journey!",
                         "requirements": [<ComponentModel>{"item": "SpiD3", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6Jade"
                     },
@@ -2002,6 +2202,96 @@ export const initBubbleRepo = () => {
                         "description": "+{% Artifact find chance, Sigil SPD, Cooking SPD, and Construction Build rate. All MULTIPLICATIVE! A very special vial indeed...",
                         "requirements": [<ComponentModel>{"item": "Critter11", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "6turtle"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Chapter Chug",
+                        "x1": 1,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Total Damage MULTIPLIER! Yesss multi yeeeesss I know how it is I'm chill with it",
+                        "requirements": [<ComponentModel>{"item": "Spelunking0", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7dmg"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Sippy Seaweed",
+                        "x1": 0.5,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% faster Spelunking Speed... like, for finding chapter pages and leveling up!",
+                        "requirements": [<ComponentModel>{"item": "Tree14", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7spelunkspd"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Wriggle Water",
+                        "x1": 1,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Spelunking Amber gain",
+                        "requirements": [<ComponentModel>{"item": "w7A3", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7amber"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Rocky Boba",
+                        "x1": 10,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Gaming Bits multiplier! Wait, bits? Gaming?? That's not very World 7 of you mister Prehistrium, not very W7 of you at all...",
+                        "requirements": [<ComponentModel>{"item": "Prehistrium", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7bits"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Octosoda",
+                        "x1": 0.4,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% AFK Gains rate for all World 7 skills",
+                        "requirements": [<ComponentModel>{"item": "Soul8", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7skillw7afk"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Paper Pint",
+                        "x1": 1,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% extra Masterclass drops, specifically DB's Bones, WW's Dust, and AC's Tachyons! We love our acronyms don't we!",
+                        "requirements": [<ComponentModel>{"item": "Spelunking2", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7masta"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Scale On Ice",
+                        "x1": 0.1,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% daily Coral for the Coral Reef! I'm a bit of a miserly vial, so you'll be lucky to get even a few percent from me!",
+                        "requirements": [<ComponentModel>{"item": "w7A5", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7corale"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Trash Drank",
+                        "x1": 2,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Spelunking Efficiency, so you can find more chapter pages and help solve the illiteracy problem that plagues our community!",
+                        "requirements": [<ComponentModel>{"item": "Bug15", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7spelunkeff"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Crabomayse",
+                        "x1": 0.5,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Class EXP gain MULTIPLIER! What? No, don't thank Lava, thank ME!!! I'm the one giving you my bonus!",
+                        "requirements": [<ComponentModel>{"item": "w7A12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7classexp"
                     }
                 ]
             }),
