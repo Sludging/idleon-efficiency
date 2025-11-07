@@ -1,7 +1,6 @@
 import {
     Box,
     Text,
-    Grid
 } from 'grommet'
 import { ImageData } from '../data/domain/imageData';
 
@@ -26,8 +25,8 @@ export default function CoinsDisplay(props: CoinProps) {
     }
 
     // Special handling for the most expensive coin, if quantity is greater than 10000
-    if (props.coinMap.has(Coins.Eclipse) && props.coinMap.get(Coins.Eclipse)! > 10000) {
-        const coin = Coins.Eclipse;
+    if (props.coinMap.has(Coins.Polarity) && props.coinMap.get(Coins.Polarity)! > 10000) {
+        const coin = Coins.Polarity;
         const value = props.coinMap.get(coin)!;
         // We return a formatted value of only the most expensive coin.
         return (
@@ -44,7 +43,7 @@ export default function CoinsDisplay(props: CoinProps) {
                 Array.from(props.coinMap).map(([coin, value], index) => {
                     if (!props.maxCoins || index < props.maxCoins) {
                         return (
-                            <Box key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
+                            <Box title={Coins[coin]} key={`coin-${coin.valueOf()}`} direction="row" gap="xsmall">
                                 <IconImage data={getCoinClass(coin)} scale={props.coinScale ? props.coinScale : 1} />
                                 <Text>{value}</Text>
                             </Box>
