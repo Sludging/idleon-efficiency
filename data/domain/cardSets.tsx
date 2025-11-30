@@ -115,6 +115,8 @@ export class CardSet {
 //     8: "{%_more_Dungeon_Credits",
 //     9: "{%_Crit_Chance",
 //     10: "{%_Fight_AFK_Gain_Rate",
+//     11: "{%_Multikill_Per_Tier",
+//     12: "{%_Class_Exp_(Multi)",
 // }
 
 export const IDforCardSETbonus = initCardSetBonusRepo();
@@ -140,4 +142,5 @@ export const cardSetMap: Record<number, cardSetInfo> = {
     9: { displayName: "Hyperion Nebula", cardSetName: "Hyperion Nebula", image: "CardSet6"},
     10: { displayName: "Smolderin' Plateau", cardSetName: "Smolderin' Plateau", image: "CardSet8"},
     11: { displayName: "Spirited Valley", cardSetName: "Spirited Valley", image: "CardSet9"},
+    12: { displayName: "Shimmerfin Deep", cardSetName: "Shimmerfin Deep", image: "CardSet10"}
 };
