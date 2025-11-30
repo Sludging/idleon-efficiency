@@ -308,7 +308,7 @@ export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
 export const IDforCardBonus: NumberMap = {
     1: "+{_Base_HP",
     2: "+{_Base_LUK",
-    ​​​​3: "+{_Base_MP",
+    3: "+{_Base_MP",
     4: "+{_Base_Damage",
     5: "+{_Base_WIS",
     6: "+{_Move_Spd",
@@ -325,7 +325,7 @@ export const IDforCardBonus: NumberMap = {
     17: "+{%_Total_Accuracy",
     18: "+{_Weapon_Power",
     19: "+{%_Critical_Damage",
-    20: "+{%_Monster_EXP_While_Active",   ​​​​​​​​​​​
+    20: "+{%_Monster_EXP_While_Active",
     21: "+{%_Minimum_Damage",
     22: "+{%_EXP_Conversion_from_Talent",
     23: "+{_Base_accuracy",
