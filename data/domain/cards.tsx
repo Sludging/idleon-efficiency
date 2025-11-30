@@ -17,8 +17,10 @@ export class Card {
     displayName: string;
     bonusID: number = 0;
 
-    chipBoost: number = 1
-    fivestar: boolean = false;
+    chipBoost: number = 1;
+    baseMaxCardLevel: number = 4;
+    bonusMaxCardLevelFromSpelunking: number = 0;
+    bonusMaxCardLevelFromRift: number = 0;
     passive: boolean = false;
 
     baseDropChance: number;
@@ -58,7 +60,7 @@ export class Card {
 
     getStars = (): number => {
         switch (true) {
-            case this.fivestar && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
+            case (this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking) >= 5 && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
             case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
             case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
             case this.count >= Math.floor(this.getCardsForStar(2)): return 2;
@@ -72,14 +74,11 @@ export class Card {
     }
 
     getCardsForStar = (star: number): number => {
-        switch (star) {
-            // cchiz is .. special? .. who knows why...
-            case 5: return (this.id == "Boss3B") ? (this.data.perTier * 36)+1 : (this.data.perTier * 484)+1;
-            case 4: return (this.data.perTier * 25)+1;
-            case 3: return (this.data.perTier * 9)+1;
-            case 2: return (this.data.perTier * 4)+1;
-            case 1: return this.data.perTier+1;
-            default: return 1;
+        // cchiz is .. special? .. who knows why...
+        if (this.id == "Boss3B") {
+            return 1.5 * Math.pow(star + 1 + Math.floor(star / 3), 2)
+        } else {
+            return this.data.perTier * Math.pow(star + 1 + (Math.floor(star / 3) + (16 * Math.floor(star / 4) + 100 * Math.floor(star / 5))), 2);
         }
     }
 
@@ -258,11 +257,11 @@ export const updateCards = (data: Map<string, any>) => {
 
     if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
         cards.forEach(card => {
-            card.fivestar = true;
+            card.bonusMaxCardLevelFromRift = 1;
         })
         // I should probably not duplicate cards at some point, but for now ...
         players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-            card.fivestar = true;
+            card.bonusMaxCardLevelFromRift = 1;
         })
     }
     else if (optLacc.length > 155 && optLacc[155] != 0) {
@@ -270,13 +269,13 @@ export const updateCards = (data: Map<string, any>) => {
         cardifiedFiveStarCards.forEach(cardId => {
             cards.forEach(card => {
                 if (card.id == cardId) {
-                    card.fivestar = true;
+                    card.bonusMaxCardLevelFromRift = 1;
                 }
             })
             // I should probably not duplicate cards at some point, but for now ...
             players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
                 if (card.id == cardId) {
-                    card.fivestar = true;
+                    card.bonusMaxCardLevelFromRift = 1;
                 }
             })
         })
