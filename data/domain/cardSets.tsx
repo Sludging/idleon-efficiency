@@ -55,6 +55,7 @@ export class CardSet {
         const cardsTotalStars = this.getCardsTotalStars();
 
         switch (true) {
+            case cardsTotalStars >= this.cards.length * 7: return 7;
             case cardsTotalStars >= this.cards.length * 6: return 6;
             case cardsTotalStars >= this.cards.length * 5: return 5;
             case cardsTotalStars >= this.cards.length * 4: return 4;
