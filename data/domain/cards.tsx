@@ -301,6 +301,7 @@ export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
     [SkillsIndex.Farming]: [],
     [SkillsIndex.Sneaking]: [],
     [SkillsIndex.Summoning]: [],
+    [SkillsIndex.Spelunking]: [96, 97, 98],
 }
 
 export const IDforCardBonus: NumberMap = {
