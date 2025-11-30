@@ -292,7 +292,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
       const cards = gameData.get("cards") as Card[];
       // Sadly the game checks for number of stars, not the actual bonus so we do this.
       // Hopefully this still leads to a good test.
-      const ceramicCardBonus = (cards.find(card => card.id == "w6c1")?.getStars() ?? 0) + 1;
+      const ceramicCardBonus = (cards.find(card => card.id == "w6c1")?.getLevels() ?? 0);
       return ceramicCardBonus;
     }
   },
@@ -338,7 +338,7 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
       const cards = gameData.get("cards") as Card[];
       // Sadly the game checks for number of stars, not the actual bonus so we do this.
       // Hopefully this still leads to a good test.
-      const trollCardBonus = (cards.find(card => card.id == "Boss4A")?.getStars() ?? 0) + 1;
+      const trollCardBonus = (cards.find(card => card.id == "Boss4A")?.getLevels() ?? 0);
       return trollCardBonus;
     }
   },
