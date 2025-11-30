@@ -18,4 +18,5 @@ export enum SkillsIndex {
     Farming = 16,
     Sneaking = 17,
     Summoning = 18,
+    Spelunking = 19,
 }
