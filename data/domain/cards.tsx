@@ -42,6 +42,10 @@ export class Card {
         }
     }
 
+    getMaxCardLevel = (): number => {
+        return this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking;
+    }
+
     getImageData = (): ImageData => {
         return {
             location: `Cards${this.data.cardID}`,
@@ -60,12 +64,13 @@ export class Card {
 
     getStars = (): number => {
         switch (true) {
-            case (this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking) >= 6 && this.count >= Math.floor(this.getCardsForStar(6)): return 6;
-            case (this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking) >= 5 && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
-            case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
-            case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
-            case this.count >= Math.floor(this.getCardsForStar(2)): return 2;
-            case this.count >= Math.floor(this.getCardsForStar(1)): return 1;
+            case this.getMaxCardLevel() >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
+            case this.getMaxCardLevel() >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
+            case this.count >= Math.floor(this.getCardsForLevel(4)): return 5;
+            case this.count >= Math.floor(this.getCardsForLevel(3)): return 4;
+            case this.count >= Math.floor(this.getCardsForLevel(2)): return 3;
+            case this.count >= Math.floor(this.getCardsForLevel(1)): return 2;
+            case this.count >= Math.floor(this.getCardsForLevel(1)): return 1;
             default: return 0;
         }
     }
