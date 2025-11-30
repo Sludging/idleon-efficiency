@@ -52,22 +52,22 @@ export class CardSet {
             return 0;
         }
 
-        const cardsTotalStars = this.getCardsTotalStars();
+        const getCardsTotalLevels = this.getCardsTotalLevels();
 
         switch (true) {
-            case cardsTotalStars >= this.cards.length * 7: return 7;
-            case cardsTotalStars >= this.cards.length * 6: return 6;
-            case cardsTotalStars >= this.cards.length * 5: return 5;
-            case cardsTotalStars >= this.cards.length * 4: return 4;
-            case cardsTotalStars >= this.cards.length * 3: return 3;
-            case cardsTotalStars >= this.cards.length * 2: return 2;
-            case cardsTotalStars >= this.cards.length: return 1;
+            case getCardsTotalLevels >= this.cards.length * 7: return 7;
+            case getCardsTotalLevels >= this.cards.length * 6: return 6;
+            case getCardsTotalLevels >= this.cards.length * 5: return 5;
+            case getCardsTotalLevels >= this.cards.length * 4: return 4;
+            case getCardsTotalLevels >= this.cards.length * 3: return 3;
+            case getCardsTotalLevels >= this.cards.length * 2: return 2;
+            case getCardsTotalLevels >= this.cards.length: return 1;
             default: return 0;
         }
     }
 
-    getCardsTotalStars = (): number => {
-        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getStars()+1 : 0);}, 0)
+    getCardsTotalLevels = (): number => {
+        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getLevels() : 0);}, 0)
     }
 
     getBonus = (level: number = this.getLevel()): number => {

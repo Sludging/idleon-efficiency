@@ -62,7 +62,7 @@ export class Card {
         }
     }
 
-    getStars = (): number => {
+    getLevels = (): number => {
         switch (true) {
             case this.getMaxCardLevel() >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
             case this.getMaxCardLevel() >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
@@ -79,36 +79,40 @@ export class Card {
         return (this.baseDropChance > 0) ? "1 in "+nFormatter(Math.round(1/this.baseDropChance)) : "Not Found";
     }
 
-    getCardsForStar = (star: number): number => {
+    getCardsForLevel = (level: number): number => {
         // cchiz is .. special? .. who knows why...
+        if (level <= 0) {
+            return 1;
+        }
+
         if (this.id == "Boss3B") {
-            return 1.5 * Math.pow(star + 1 + Math.floor(star / 3), 2)
+            return 1.5 * Math.pow(level + 1 + Math.floor(level / 3), 2)
         } else {
-            return this.data.perTier * Math.pow(star + 1 + (Math.floor(star / 3) + (16 * Math.floor(star / 4) + 100 * Math.floor(star / 5))), 2);
+            return this.data.perTier * Math.pow(level + 1 + (Math.floor(level / 3) + (16 * Math.floor(level / 4) + 100 * Math.floor(level / 5))), 2);
         }
     }
 
-    getBonus = (star: number = this.getStars()): number => {
+    getBonus = (level: number = this.getLevels()): number => {
         if (this.count == 0) {
             return 0;
         }
-        return this.data.bonus * (star + 1) * this.chipBoost;
+        return this.data.bonus * (level + 1) * this.chipBoost;
     }
 
-    getBonusText = (star: number = this.getStars()): string => {
-        return this.data.effect.replace(/{/, this.getBonus(star).toString());
+    getBonusText = (level: number = this.getLevels()): string => {
+        return this.data.effect.replace(/{/, this.getBonus(level).toString());
     }
 
     getBorderImageData = (): ImageData => {
         return {
-            location: `CardsBorder${this.getStars() + 1}`,
+            location: `CardsBorder${this.getLevels() + 1}`,
             width: 31,
             height: 43
         }
     }
 
     getLargeBorderImageData = (): ImageData => {
-        const stars = this.getStars();
+        const stars = this.getLevels();
         if (stars <= 0) {
             // There is no big border image for 0 star cards, so aas the small border is just no image we use it here too
             return {
@@ -138,7 +142,7 @@ export class Card {
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
-        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getStars()), 0);
+        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getLevels()), 0);
     }
 
     static getStarImageForLevel = (level: number): ImageData => {
