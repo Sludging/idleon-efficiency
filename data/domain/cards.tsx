@@ -60,6 +60,7 @@ export class Card {
 
     getStars = (): number => {
         switch (true) {
+            case (this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking) >= 6 && this.count >= Math.floor(this.getCardsForStar(6)): return 6;
             case (this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking) >= 5 && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
             case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
             case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
