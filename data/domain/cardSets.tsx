@@ -87,7 +87,7 @@ export class CardSet {
     }
 
     static fromBase = (data: CardSetBase[], cards: Card[] = []): CardSet[] => {
-        return data.map((cardSet, index) => new CardSet(index, cardSet, cards))
+        return data.filter(cardSet => cardSet.data.bonus != '').map((cardSet, index) => new CardSet(index, cardSet, cards))
     }
 
     static getSetID = (bonus: string): number => {
