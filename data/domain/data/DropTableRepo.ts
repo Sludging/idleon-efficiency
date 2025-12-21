@@ -68,8 +68,6 @@ export const initDropTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotRe1", "quantity": 25, "chance": 0.4, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotMana1", "quantity": 25, "chance": 0.4, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues5", "quantity": 1, "chance": 0.09, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues15", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
                     <ItemDropModel>{"item": "Quest24", "quantity": 3, "chance": 0.5, "questLink": "Mutton4"},
                     <SubTableDropModel>{"item": "SuperDropTable1", "quantity": 1, "chance": 0.0055, "questLink": "N/A"}
                 ],
@@ -80,7 +78,6 @@ export const initDropTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneA1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneT1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues7", "quantity": 1, "chance": 0.27, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampB11", "quantity": 1, "chance": 0.0009, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotGr1", "quantity": 5, "chance": 0.2, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampA13", "quantity": 1, "chance": 0.00015, "questLink": "N/A"},
@@ -95,7 +92,6 @@ export const initDropTableRepo = () => {
                     <ItemDropModel>{"item": "Leaf1", "quantity": 5, "chance": 0.5, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneW1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneT1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues3", "quantity": 1, "chance": 0.32, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotOr1", "quantity": 5, "chance": 0.1, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampB9", "quantity": 1, "chance": 0.0015, "questLink": "N/A"},
                     <ItemDropModel>{"item": "ObolSilver0", "quantity": 1, "chance": 0.000735, "questLink": "N/A"},
@@ -124,9 +120,21 @@ export const initDropTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentStatues2", "quantity": 1, "chance": 0.07, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentStatues4", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues14", "quantity": 1, "chance": 0.05, "questLink": "N/A"}
+                    <ItemDropModel>{"item": "EquipmentStatues14", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues3", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues7", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues15", "quantity": 1, "chance": 0.02, "questLink": "N/A"}
                 ],
                 "subTable": "DropTable5b"
+            }),
+        new DropTableBase("DropTable5c", <DropTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues8", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues9", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentStatues10", "quantity": 1, "chance": 0.05, "questLink": "N/A"}
+                ],
+                "subTable": "DropTable5c"
             }),
         new DropTableBase("DropTable6", <DropTableModel>{
                 "drops": [
@@ -189,7 +197,6 @@ export const initDropTableRepo = () => {
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampB23", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues10", "quantity": 1, "chance": 0.102, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats27", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "SuperDropTable2", "quantity": 1, "chance": 0.006, "questLink": "N/A"}
                 ],
@@ -211,7 +218,6 @@ export const initDropTableRepo = () => {
                     <ItemDropModel>{"item": "Leaf2", "quantity": 4, "chance": 0.5, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneW2", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneT1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues8", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotOr1", "quantity": 5, "chance": 0.07, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampB13", "quantity": 1, "chance": 0.0003, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "SuperDropTable2", "quantity": 1, "chance": 0.006, "questLink": "N/A"}
@@ -223,7 +229,6 @@ export const initDropTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneT2", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StoneT1", "quantity": 1, "chance": 0.03, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "EquipmentStatues9", "quantity": 1, "chance": 0.085, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampA11", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotOr1", "quantity": 5, "chance": 0.07, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampB21", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},

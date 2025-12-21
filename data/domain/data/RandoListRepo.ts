@@ -1881,12 +1881,13 @@ export const initRandoListRepo = () => {
                     "179",
                     "180",
                     "182",
-                    "183"
+                    "183",
+                    "186"
                 ]
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "WORLD_7_v1.00;NEW_UPDATE_PATCH_NOTES_@_*NEW_WORLD:_World_7_is_HERE!_Defeat_The_Emperor_boss_at_the_end_of_World_6_to_unlock!_@_*NEW_MAP:_Explore_through_12_maps_full_of_monsters,_resources,_secrets,_and_new_NPCs!_@_*NEW_SKILL:_Spelunking!_Level_up_by_exploring_caves_found_throughout_World_7,_then_delve_down_tunnels_to_find_amber_and_defeat_Lore_Bosses_to_unlock_new_content_for_the_rest_of_IdleOn!_@_*TOWN_FEATURES:_Rescue_fishies_to_boost_your_Coral_Reef_for_game_changing_bonuses,_and_spend_Legendary_Talent_PTS_earned_by_leveling_up_at_Whallamus!_@_*THE_GALLERY:_Codfrey_will_give_you_bonuses_from_all_the_Trophies_and_Nametags_you've_ever_found!_The_new_Replica_items_in_the_Town_Shop_let_you_mix_and_match_Trophies_and_Nametags_however_you_like!_@_*NEW_CONTENT:_Gaming_Palette,_Exotic_and_Medal_Farming,_Duperbits,_Teal_Summoning,_Ethereal_Sigils,_Mini_Ninja_Knowledge,_Killroy_Upgrades,_and_SO_much_more..._(Many_of_these_are_unlocked_via_Spelunking)_@_*SO_MANY_MORE_THINGS_SERIOUSLY_YOU_GUYS!!!_Click_Discord_button_up_there_for_full_patch_notes!;*Le",
+                    "GIFTMAS_EVENT_v1.04;NEW_UPDATE_PATCH_NOTES_@_*Giftmas_has_come_to_IdleOn!_Get_your_goodies_every_day_until_December_31st!_@_*Collect_50_Giftmas_Giftboxes_EVERY_DAY_by_defeating_monsters!_These_contain_new_exclusive_hats,_old_hats,_nametags,_gems,_and_more!_@_*Play_the_new_Starry_Night_Delight_ticket_in_World_1_town!_I_gave_you_+2_tries_for_Free._Collecting_all_50_Giftboxes_from_monsters_give_you_an_additional_+1_try_EVERY_DAY,_and_you_also_get_Extra_tries_for_leaving_IdleOn_open!_@_*The_Daily_Dig_is_BACK!_Just_say_'Dig'_in_game_to_get_started_on_your_hunt_for_treasure,_and_don't_forget_to_do_it_every_day!_@_*Hold_down_on_that_blue_Candle_drop_you_got,_and_you_can_Make_a_Wish_every_day_for_EXCLUSIVE_COMPANIONS!_Note_that_the_Wish_Boost_from_buying_the_green_candle_also_boosts_your_freebie_blue_candle_chance!_@_*Many_more_fixes_and_improvements._@_*Click_that_floating_Discord_button_for_full_patch_notes!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -3234,6 +3235,13 @@ export const initRandoListRepo = () => {
                     "InvStorage40",
                     "InvStorage41",
                     "InvStorage42",
+                    "Ht",
+                    "StonePremRestore",
+                    "StonePremStatswap",
+                    "StonePremSTR",
+                    "StonePremAGI",
+                    "StonePremWIS",
+                    "StonePremLUK",
                     "GemP35",
                     "EquipmentHats43",
                     "Quest31",
@@ -3680,6 +3688,6 @@ export const initRandoListRepo = () => {
                     "PREHISTORIC_SET"
                 ]
             }),
-        new RandoListBase(114, <RandoListModel>{"elements": ["Snootie", "Sad_Urie", "Bloo_Radley", "Toobus_Goobus"]})    
+        new RandoListBase(114, <RandoListModel>{"elements": ["Snootie", "Sad_Urie", "Bloo_Radley", "Toobus_Goobus", "Zenelith"]})    
 ]
 }

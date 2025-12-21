@@ -2029,6 +2029,22 @@ export const initCardRepo = () => {
                 "effect": "+{% Drop Rate (Passive)",
                 "bonus": 2,
                 "order": 20
+            }),
+        new CardDataBase("cropfallEvent1", <CardDataModel>{
+                "cardID": "Y20",
+                "category": "Event",
+                "perTier": 6,
+                "effect": "+{% Gold Food Effect (Passive)",
+                "bonus": 4,
+                "order": 21
+            }),
+        new CardDataBase("xmasEvent4", <CardDataModel>{
+                "cardID": "Y21",
+                "category": "Event",
+                "perTier": 1,
+                "effect": "+{% Catching Away Gains",
+                "bonus": 2,
+                "order": 22
             })    
 ]
 }
