@@ -60,8 +60,7 @@ export class Slab extends Domain {
         const rawItems = data.get("Cards1") as string[];
 
         // Clean up items that shouldn't be here, happens on older profiles.
-        const lootedInfo = rawItems.filter(item =>
-            item &&
+        const lootedInfo = rawItems.filter(item => item && typeof item === 'string').filter(item =>
             item != "null" &&
             item.indexOf("Cards") == -1 &&
             item.indexOf("SailTr") == -1 &&
