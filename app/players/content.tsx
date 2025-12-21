@@ -1066,7 +1066,7 @@ function ZowInfo({ player }: { player: Player }) {
             "Blunder Hills", "JungleZ", "PlayerSelect", "Efaunt's Tomb", "Gravel Tomb", "Heaty Hole", "End Of The Road", "Z", "Eycicles's Nest", "Enclave a la Troll",
             "Magma Rivertown", "YumYum Islands", "Chizoar's Cavern", "Tunnel Closed", "KattleKruk's Volcano",
             // world 6
-            "Motherlode Pit", "Companion Park", "Spirit Village", "Castle Interior",
+            "Motherlode Pit", "Companion Park", "Spirit Village", "Emperor's Castle",
             // minigame Howl and Poppy
             "Grand Owl Perch", "The Oasis"
         ].includes(area)) {

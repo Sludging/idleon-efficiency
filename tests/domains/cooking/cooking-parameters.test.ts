@@ -290,9 +290,9 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'card_w6c1_bonus',
     domainExtractor: (gameData) => {
       const cards = gameData.get("cards") as Card[];
-      // Sadly the game checks for number of stars, not the actual bonus so we do this.
+      // Sadly the game checks for number of levels, not the actual bonus so we do this.
       // Hopefully this still leads to a good test.
-      const ceramicCardBonus = (cards.find(card => card.id == "w6c1")?.getStars() ?? 0) + 1;
+      const ceramicCardBonus = (cards.find(card => card.id == "w6c1")?.getLevels() ?? 0) + 1;
       return ceramicCardBonus;
     }
   },
@@ -336,9 +336,9 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'card_boss4a_bonus',
     domainExtractor: (gameData) => {
       const cards = gameData.get("cards") as Card[];
-      // Sadly the game checks for number of stars, not the actual bonus so we do this.
+      // Sadly the game checks for number of levels, not the actual bonus so we do this.
       // Hopefully this still leads to a good test.
-      const trollCardBonus = (cards.find(card => card.id == "Boss4A")?.getStars() ?? 0) + 1;
+      const trollCardBonus = (cards.find(card => card.id == "Boss4A")?.getLevels() ?? 0) + 1;
       return trollCardBonus;
     }
   },

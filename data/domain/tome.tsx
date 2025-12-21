@@ -352,7 +352,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
 
     // Total level of all cards
-    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getStars() + 1 : 0), 0);
+    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() : 0), 0);
 
     // Sum of highest level for each talent
     // TODO: Rethink if rounding is correct, need to look at game code.

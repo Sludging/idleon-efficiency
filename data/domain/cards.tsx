@@ -17,8 +17,10 @@ export class Card {
     displayName: string;
     bonusID: number = 0;
 
-    chipBoost: number = 1
-    fivestar: boolean = false;
+    chipBoost: number = 1;
+    baseMaxCardLevel: number = 4;
+    bonusMaxCardLevelFromSpelunking: number = 0;
+    bonusMaxCardLevelFromRift: number = 0;
     passive: boolean = false;
 
     baseDropChance: number;
@@ -40,6 +42,10 @@ export class Card {
         }
     }
 
+    getMaxCardLevel = (): number => {
+        return this.baseMaxCardLevel + this.bonusMaxCardLevelFromRift + this.bonusMaxCardLevelFromSpelunking;
+    }
+
     getImageData = (): ImageData => {
         return {
             location: `Cards${this.data.cardID}`,
@@ -56,13 +62,15 @@ export class Card {
         }
     }
 
-    getStars = (): number => {
+    getLevels = (): number => {
         switch (true) {
-            case this.fivestar && this.count >= Math.floor(this.getCardsForStar(5)): return 5;
-            case this.count >= Math.floor(this.getCardsForStar(4)): return 4;
-            case this.count >= Math.floor(this.getCardsForStar(3)): return 3;
-            case this.count >= Math.floor(this.getCardsForStar(2)): return 2;
-            case this.count >= Math.floor(this.getCardsForStar(1)): return 1;
+            case this.getMaxCardLevel() >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
+            case this.getMaxCardLevel() >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
+            case this.count >= Math.floor(this.getCardsForLevel(4)): return 5;
+            case this.count >= Math.floor(this.getCardsForLevel(3)): return 4;
+            case this.count >= Math.floor(this.getCardsForLevel(2)): return 3;
+            case this.count >= Math.floor(this.getCardsForLevel(1)): return 2;
+            case this.count >= Math.floor(this.getCardsForLevel(1)): return 1;
             default: return 0;
         }
     }
@@ -71,39 +79,40 @@ export class Card {
         return (this.baseDropChance > 0) ? "1 in "+nFormatter(Math.round(1/this.baseDropChance)) : "Not Found";
     }
 
-    getCardsForStar = (star: number): number => {
-        switch (star) {
-            // cchiz is .. special? .. who knows why...
-            case 5: return (this.id == "Boss3B") ? (this.data.perTier * 36)+1 : (this.data.perTier * 484)+1;
-            case 4: return (this.data.perTier * 25)+1;
-            case 3: return (this.data.perTier * 9)+1;
-            case 2: return (this.data.perTier * 4)+1;
-            case 1: return this.data.perTier+1;
-            default: return 1;
+    getCardsForLevel = (level: number): number => {
+        if (level <= 0) {
+            return 1;
+        }
+
+        // cchiz is .. special? .. who knows why...
+        if (this.id == "Boss3B") {
+            return 1.5 * Math.pow(level + 1 + Math.floor(level / 3), 2)
+        } else {
+            return this.data.perTier * Math.pow(level + 1 + (Math.floor(level / 3) + (16 * Math.floor(level / 4) + 100 * Math.floor(level / 5))), 2);
         }
     }
 
-    getBonus = (star: number = this.getStars()): number => {
+    getBonus = (level: number = this.getLevels()): number => {
         if (this.count == 0) {
             return 0;
         }
-        return this.data.bonus * (star + 1) * this.chipBoost;
+        return this.data.bonus * (level + 1) * this.chipBoost;
     }
 
-    getBonusText = (star: number = this.getStars()): string => {
-        return this.data.effect.replace(/{/, this.getBonus(star).toString());
+    getBonusText = (level: number = this.getLevels()): string => {
+        return this.data.effect.replace(/{/, this.getBonus(level).toString());
     }
 
     getBorderImageData = (): ImageData => {
         return {
-            location: `CardsBorder${this.getStars() + 1}`,
+            location: `CardsBorder${this.getLevels() + 1}`,
             width: 31,
             height: 43
         }
     }
 
     getLargeBorderImageData = (): ImageData => {
-        const stars = this.getStars();
+        const stars = this.getLevels();
         if (stars <= 0) {
             // There is no big border image for 0 star cards, so aas the small border is just no image we use it here too
             return {
@@ -133,7 +142,7 @@ export class Card {
     }
 
     static GetTotalBonusForId = (cards: Card[], id: number) => {
-        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getStars()), 0);
+        return cards.filter(card => card.data.effect == IDforCardBonus[id].replace(/_/g, ' ')).reduce((sum, card) => sum += card.getBonus(card.getLevels()), 0);
     }
 
     static getStarImageForLevel = (level: number): ImageData => {
@@ -258,11 +267,11 @@ export const updateCards = (data: Map<string, any>) => {
 
     if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
         cards.forEach(card => {
-            card.fivestar = true;
+            card.bonusMaxCardLevelFromRift = 1;
         })
         // I should probably not duplicate cards at some point, but for now ...
         players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-            card.fivestar = true;
+            card.bonusMaxCardLevelFromRift = 1;
         })
     }
     else if (optLacc.length > 155 && optLacc[155] != 0) {
@@ -270,13 +279,13 @@ export const updateCards = (data: Map<string, any>) => {
         cardifiedFiveStarCards.forEach(cardId => {
             cards.forEach(card => {
                 if (card.id == cardId) {
-                    card.fivestar = true;
+                    card.bonusMaxCardLevelFromRift = 1;
                 }
             })
             // I should probably not duplicate cards at some point, but for now ...
             players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
                 if (card.id == cardId) {
-                    card.fivestar = true;
+                    card.bonusMaxCardLevelFromRift = 1;
                 }
             })
         })
@@ -302,6 +311,7 @@ export const SkillsforIDCardPassiveBonus: Record<SkillsIndex, number[]> = {
     [SkillsIndex.Farming]: [],
     [SkillsIndex.Sneaking]: [],
     [SkillsIndex.Summoning]: [],
+    [SkillsIndex.Spelunking]: [96, 97, 98],
 }
 
 export const IDforCardBonus: NumberMap = {
@@ -353,7 +363,7 @@ export const IDforCardBonus: NumberMap = {
     46: "+{%_Skill_AFK_gain_rate",
     47: "+{%_Double_AFK_claim_chance",
     48: "+{%_Boost_Food_Effect",
-    49: "+{%_Smithing_EXP",
+    49: "+{%_Smithing_EXP_(Passive)",
     50: "+{%_Skill_EXP",
     51: "+{%_MP_regen_rate",
     52: "+{%_Max_Charge",
@@ -363,14 +373,14 @@ export const IDforCardBonus: NumberMap = {
     56: "+{%_Base_HP",
     57: "+{%_Trapping_Efficiency",
     58: "+{%_Trapping_EXP",
-    59: "+{%_Shrine_Effects",
+    59: "+{%_Shrine_Effects_(Passive)",
     60: "+{%_Cog_Build_Spd_(Passive)",
     61: "+{_Base_Dungeon_MP",
     62: "+{%_Block_Chance",
     63: "+{_Base_Dungeon_Damage",
     64: "+{%_Dungeon_Card_Chance",
     65: "+{%_Dungeon_Credits",
-    66: "{%_to_start_with_RNG_item",
+    66: "{%_to_start_with_RNG_orb_(Passive)",
     67: "+{%_Dungeon_Flurbos",
     68: "+{_Base_Dungeon_HP",
     69: "+{%_Dungeon_Money",
@@ -399,5 +409,11 @@ export const IDforCardBonus: NumberMap = {
     92: "+{%_Sailing_Speed_(Passive)",
     93: "+{%_Skill_Efficncy_(Passive)",
     94: "+{%_Class_EXP_(Passive)",
-    95: "+{%_All_Skill_EXP_(Passive)"
+    95: "+{%_All_Skill_EXP_(Passive)",
+    96: "+{%_Total_Damage_Multi",
+    97: "+{%_Spelunking_EXP",
+    98: "+{%_Spelunking_Efficiency",
+    99: "+{%_Spelunking_AFK_Gain",
+    100: "+{%_Class_EXP_Multi",
+    101: "+{%_Drop_Rate_Multi",
 }

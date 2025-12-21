@@ -52,21 +52,22 @@ export class CardSet {
             return 0;
         }
 
-        const cardsTotalStars = this.getCardsTotalStars();
+        const getCardsTotalLevels = this.getCardsTotalLevels();
 
         switch (true) {
-            case cardsTotalStars >= this.cards.length * 6: return 6;
-            case cardsTotalStars >= this.cards.length * 5: return 5;
-            case cardsTotalStars >= this.cards.length * 4: return 4;
-            case cardsTotalStars >= this.cards.length * 3: return 3;
-            case cardsTotalStars >= this.cards.length * 2: return 2;
-            case cardsTotalStars >= this.cards.length: return 1;
+            case getCardsTotalLevels >= this.cards.length * 7: return 7;
+            case getCardsTotalLevels >= this.cards.length * 6: return 6;
+            case getCardsTotalLevels >= this.cards.length * 5: return 5;
+            case getCardsTotalLevels >= this.cards.length * 4: return 4;
+            case getCardsTotalLevels >= this.cards.length * 3: return 3;
+            case getCardsTotalLevels >= this.cards.length * 2: return 2;
+            case getCardsTotalLevels >= this.cards.length: return 1;
             default: return 0;
         }
     }
 
-    getCardsTotalStars = (): number => {
-        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getStars()+1 : 0);}, 0)
+    getCardsTotalLevels = (): number => {
+        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getLevels() : 0);}, 0)
     }
 
     getBonus = (level: number = this.getLevel()): number => {
@@ -86,7 +87,7 @@ export class CardSet {
     }
 
     static fromBase = (data: CardSetBase[], cards: Card[] = []): CardSet[] => {
-        return data.map((cardSet, index) => new CardSet(index, cardSet, cards))
+        return data.filter(cardSet => cardSet.data.bonus != '').map((cardSet, index) => new CardSet(index, cardSet, cards))
     }
 
     static getSetID = (bonus: string): number => {
@@ -114,6 +115,8 @@ export class CardSet {
 //     8: "{%_more_Dungeon_Credits",
 //     9: "{%_Crit_Chance",
 //     10: "{%_Fight_AFK_Gain_Rate",
+//     11: "{%_Multikill_Per_Tier",
+//     12: "{%_Class_Exp_(Multi)",
 // }
 
 export const IDforCardSETbonus = initCardSetBonusRepo();
@@ -139,4 +142,5 @@ export const cardSetMap: Record<number, cardSetInfo> = {
     9: { displayName: "Hyperion Nebula", cardSetName: "Hyperion Nebula", image: "CardSet6"},
     10: { displayName: "Smolderin' Plateau", cardSetName: "Smolderin' Plateau", image: "CardSet8"},
     11: { displayName: "Spirited Valley", cardSetName: "Spirited Valley", image: "CardSet9"},
+    12: { displayName: "Shimmerfin Deep", cardSetName: "Shimmerfin Deep", image: "CardSet10"}
 };

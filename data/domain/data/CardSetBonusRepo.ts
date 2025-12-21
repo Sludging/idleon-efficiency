@@ -17,6 +17,7 @@ export const initCardSetBonusRepo = () => {
         new BonusMapBase(8, <BonusMapModel>{"id": 8, "bonus": "{%_more_Dungeon_Credits"}),
         new BonusMapBase(9, <BonusMapModel>{"id": 9, "bonus": "{%_Crit_Chance"}),
         new BonusMapBase(10, <BonusMapModel>{"id": 10, "bonus": "{%_Fight_AFK_Gain_Rate"}),
-        new BonusMapBase(11, <BonusMapModel>{"id": 11, "bonus": "{%_Multikill_Per_Tier"})    
+        new BonusMapBase(11, <BonusMapModel>{"id": 11, "bonus": "{%_Multikill_Per_Tier"}),
+        new BonusMapBase(12, <BonusMapModel>{"id": 12, "bonus": "{%_Class_Exp_(Multi)"})    
 ]
 }

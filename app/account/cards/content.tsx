@@ -23,9 +23,10 @@ const shouldHideCard = ({ card }: { card: Card }) => {
 }
 
 const CardBox = ({ card }: { card: Card }) => {
-    const currentCardLevel = card.getStars();
-    const cardsToNextLevel = card.count > 0 ? (card.getCardsForStar(currentCardLevel + 1) - card.count) : 1;
-    const isMaxed: boolean = (card.fivestar ? currentCardLevel == 5 : currentCardLevel == 4);
+    const currentCardLevel = card.getLevels();
+    const cardsToNextLevel = card.count > 0 ? (card.getCardsForLevel(currentCardLevel + 1) - card.count) : 1;
+    const maxLevelCard = card.getMaxCardLevel();
+    const isMaxed: boolean = (currentCardLevel == maxLevelCard);
 
     // Keeping this for next world release or any other reason there might be to hide a card
     if (shouldHideCard({ card })) {
@@ -49,28 +50,36 @@ const CardBox = ({ card }: { card: Card }) => {
                         <Box direction='column'>
                             <Box direction='row' justify='start' align='center' gap='xxsmall'>
                                 <IconImage data={Card.getStarImageForLevel(0)} />
-                                <Text size="small"> : {card.getBonusText(0)} ({Math.floor(card.getCardsForStar(0))} cards)</Text>
+                                <Text size="small"> : {card.getBonusText(0)} ({Math.floor(card.getCardsForLevel(0))} cards)</Text>
                             </Box>
                             <Box direction='row' justify='start' align='center' gap='xxsmall'>
                                 <IconImage data={Card.getStarImageForLevel(1)} />
-                                <Text size="small"> : {card.getBonusText(1)} ({Math.floor(card.getCardsForStar(1))} cards)</Text>
+                                <Text size="small"> : {card.getBonusText(1)} ({Math.floor(card.getCardsForLevel(1))} cards)</Text>
                             </Box>
                             <Box direction='row' justify='start' align='center' gap='xxsmall'>
                                 <IconImage data={Card.getStarImageForLevel(2)} />
-                                <Text size="small"> : {card.getBonusText(2)} ({Math.floor(card.getCardsForStar(2))} cards)</Text>
+                                <Text size="small"> : {card.getBonusText(2)} ({Math.floor(card.getCardsForLevel(2))} cards)</Text>
                             </Box>
                             <Box direction='row' justify='start' align='center' gap='xxsmall'>
                                 <IconImage data={Card.getStarImageForLevel(3)} />
-                                <Text size="small"> : {card.getBonusText(3)} ({Math.floor(card.getCardsForStar(3))} cards)</Text>
+                                <Text size="small"> : {card.getBonusText(3)} ({Math.floor(card.getCardsForLevel(3))} cards)</Text>
                             </Box>
                             <Box direction='row' justify='start' align='center' gap='xxsmall'>
                                 <IconImage data={Card.getStarImageForLevel(4)} />
-                                <Text size="small"> : {card.getBonusText(4)} ({Math.floor(card.getCardsForStar(4))} cards)</Text>
+                                <Text size="small"> : {card.getBonusText(4)} ({Math.floor(card.getCardsForLevel(4))} cards)</Text>
                             </Box>
-                            <Box direction='row' justify='start' align='center' gap='xxsmall'>
-                                <IconImage data={Card.getStarImageForLevel(5)} />
-                                <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForStar(5))} cards)</Text>
-                            </Box>
+                            {(maxLevelCard >= 5) &&
+                                <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                    <IconImage data={Card.getStarImageForLevel(5)} />
+                                    <Text size="small"> : {card.getBonusText(5)} ({Math.floor(card.getCardsForLevel(5))} cards)</Text>
+                                </Box>
+                            }
+                            {(maxLevelCard >= 6) &&
+                                <Box direction='row' justify='start' align='center' gap='xxsmall'>
+                                    <IconImage data={Card.getStarImageForLevel(6)} />
+                                    <Text size="small"> : {card.getBonusText(6)} ({Math.floor(card.getCardsForLevel(6))} cards)</Text>
+                                </Box>
+                            }
                         </Box>
                         {(!isMaxed) &&
                             <Box>
@@ -95,7 +104,7 @@ const CardBox = ({ card }: { card: Card }) => {
                     <Box direction='column' gap='none' align='left'>
                         <Text size='medium'>{card.displayName}</Text>
                         <Text size='small' color={card.passive ? 'rgb(50,168,121)' : ''}>{card.getBonusText() + ((card.passive && !card.data.effect.endsWith('(Passive)')) ? ' (Passive)' : '')}</Text>
-                        {(!isMaxed) && <Text size="xsmall" color={'grey'}>{card.count} / {(card.getCardsForStar(5))}</Text>}
+                        {(!isMaxed) && <Text size="xsmall" color={'grey'}>{card.count} / {cardsToNextLevel}</Text>}
                     </Box>
                 </Box>
             </TipDisplay>
@@ -106,7 +115,7 @@ const CardBox = ({ card }: { card: Card }) => {
 const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
     const currentLevel = cardSet.getLevel();
     const nextLevel = currentLevel + 1;
-    const totalCardLevels = cardSet.getCardsTotalStars()
+    const totalCardLevels = cardSet.getCardsTotalLevels()
 
     return (
         <Box background='dark-1' style={{ opacity: cardSet.cards?.reduce((sum, card) => { return sum + card.count; }, 0) > 0 ? 1 : 0.5 }} gap='small' pad='medium'>
