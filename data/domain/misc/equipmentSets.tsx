@@ -58,7 +58,7 @@ export class EquipmentSets extends Domain {
             serverGemsReceived = rawData["ServerGemsReceived"];
         }
         const smithyUnlocked = optionList[380] as number;
-        const unlockedSets = optionList[379].toString().split(',');
+        const unlockedSets = (optionList[379] ?? "").toString().split(',');
         const days = optionList[381] as number;
         const bundleValue = bundleInfo?.bun_i == 1 ? 1 : 0;
         const isSmithyUnlocked = 2e3 <= serverGemsReceived + 1500 * bundleValue || 1 > Math.round(30 - days);

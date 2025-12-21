@@ -174,8 +174,9 @@ function OnHoverNav({ link, label, subLinks }: NavItem) {
 
     if (!subLinks) {
         return (
-            <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-        )
+            <Link key={`link_${label}`} href={link}>
+                <NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+        );
     }
 
     return (
