@@ -133,7 +133,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.inverseDecay,
                 "totalVal": 350,
                 "decimalDisplay": undefined,
-                "desc": "In other words, the chance for a crystal mob spawn on kill, so 1 in N."
+                "desc": "This tracks your Crystal Mob spawn chance! While this is capped at 1 in 100, you get BONUS Exp and Drops if your Crystal Spawn is better! For example, if your average kills is 20, you're getting 5x Exp and Drops from Crystals!"
             }),
         new TomeBase(16, <TomeModel>{
                 "name": "Dungeon Rank",
@@ -177,9 +177,9 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(21, <TomeModel>{
                 "name": "Total Bubble LV",
-                "keyQty": 200000,
-                "scalingType": TomeScalingEnum.decay,
-                "totalVal": 1200,
+                "keyQty": 1000000,
+                "scalingType": TomeScalingEnum.boundedDecay,
+                "totalVal": 1750,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
@@ -853,7 +853,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 250,
                 "decimalDisplay": undefined,
-                "desc": "Hey this one's about me! In order to get credit for watching one of my streams, you need to get a gem drop from me while I'm live on twitch at Twitch.tv/lava贫flame2"
+                "desc": "Hey this one's about me! In order to get credit for watching one of my streams, you need to get a gem drop from me while I'm live on twitch at     Twitch.tv/ lava贫flame2"
             }),
         new TomeBase(106, <TomeModel>{
                 "name": "Nametags Found 膛",
@@ -862,6 +862,22 @@ export const initTomeRepo = () => {
                 "totalVal": 700,
                 "decimalDisplay": undefined,
                 "desc": "This only counts the amount of unique nametags you found... but don't throw away your duplicate nametags! You'll need them for The Gallery in World 7!"
+            }),
+        new TomeBase(107, <TomeModel>{
+                "name": "Megaflesh Earned from Bubba",
+                "keyQty": 12,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 250,
+                "decimalDisplay": undefined,
+                "desc": undefined
+            }),
+        new TomeBase(108, <TomeModel>{
+                "name": "Premium Hats Found 膛",
+                "keyQty": 75,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 700,
+                "decimalDisplay": undefined,
+                "desc": "This metric is based on the total hats you've deposited to the Hat Rack in World 3!"
             })    
 ]
 }

@@ -2,5 +2,6 @@ export enum TomeScalingEnum {
     decay = "decay",
     decayLog = "decayLog",
     linearToMax = "linearToMax",
-    inverseDecay = "inverseDecay"
+    inverseDecay = "inverseDecay",
+    boundedDecay = "boundedDecay"
 }

@@ -79,13 +79,13 @@ export const Profile = () => {
                     dropContent={
                         <Box width="small" border={{ color: 'grey-1' }} round="small">
                             {dataStatus == DataStatus.LiveData &&
-                                <Link href={'https://www.idleonefficiency.com/profile/upload'} legacyBehavior>
+                                <Link href={'https://www.idleonefficiency.com/profile/upload'}>
                                     <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                         <Box align="center" pad="small">Public Profile</Box>
                                     </Button>
                                 </Link>
                             }
-                            <Link href={'https://www.idleonefficiency.com/changelog'} legacyBehavior>
+                            <Link href={'https://www.idleonefficiency.com/changelog'}>
                                 <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                     <Box direction="row" justify="center" gap="small" align="center" pad="small">
                                         Change log
@@ -101,7 +101,7 @@ export const Profile = () => {
                     }
                 />
             </Box>
-        )
+        );
     }
 
     if (dataStatus == DataStatus.StaticData) {
@@ -135,7 +135,9 @@ export const Profile = () => {
                     onClick={() => setProfileDropDownOpen(true)}
                     dropContent={
                         <Box width="small" border={{ color: 'grey-1' }} round="small">
-                            <Link href={'https://www.idleonefficiency.com/changelog'} legacyBehavior>
+                            <Link href={'https://www.idleonefficiency.com/changelog'}>
+                                {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+                                }
                                 <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
                                     <Box direction="row" justify="center" gap="small" align="center" pad="small">
                                         Change log
@@ -147,6 +149,6 @@ export const Profile = () => {
                     }
                 />
             </Box>
-        )
+        );
     }
 }

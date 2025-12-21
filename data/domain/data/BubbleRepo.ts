@@ -21,7 +21,7 @@ export const initBubbleRepo = () => {
                         "name": "Roid Ragin",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{ Total STR for all players, always.",
                         "requirements": [<ComponentModel>{"item": "Copper", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalSTR"
@@ -71,7 +71,7 @@ export const initBubbleRepo = () => {
                         "name": "Big Meaty Claws",
                         "x1": 4,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "Increases base damage by +$. This bonus increases based on how much Max HP you have above 250.",
                         "requirements": [<ComponentModel>{"item": "DesertB2", "quantity": 200}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                         "bonusKey": "bdmgHP"
@@ -101,7 +101,7 @@ export const initBubbleRepo = () => {
                         "name": "Fmj",
                         "x1": 0.5,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{% more defence from Equipment. Also, +1 base Def per Class LV, up to +{.",
                         "requirements": [<ComponentModel>{"item": "Bug4", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                         "bonusKey": "DefPct"
@@ -381,7 +381,7 @@ export const initBubbleRepo = () => {
                         "name": "Swift Steppin",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{ Total AGI for all players, always.",
                         "requirements": [<ComponentModel>{"item": "DesertA1", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalAGI"
@@ -431,7 +431,7 @@ export const initBubbleRepo = () => {
                         "name": "Quick Slap",
                         "x1": 4,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "Increases base damage by +$. This bonus increases based on how much Movement Speed you have above 110%.",
                         "requirements": [<ComponentModel>{"item": "DesertB1", "quantity": 90}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                         "bonusKey": "bdmgSPD"
@@ -461,7 +461,7 @@ export const initBubbleRepo = () => {
                         "name": "Shaquracy",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "Your secondary stat (WIS for warrior, STR for archer, AGI for mage) gives +{% more Accuracy than normal.",
                         "requirements": [<ComponentModel>{"item": "Fish4", "quantity": 65}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                         "bonusKey": "AccPct"
@@ -741,7 +741,7 @@ export const initBubbleRepo = () => {
                         "name": "Stable Jenius",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{ Total WIS for all players, always.",
                         "requirements": [<ComponentModel>{"item": "OakTree", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalWIS"
@@ -791,7 +791,7 @@ export const initBubbleRepo = () => {
                         "name": "Name I Guess",
                         "x1": 4,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "Increases base damage by +$. This bonus increases based on how much Max MP you have above 150.",
                         "requirements": [<ComponentModel>{"item": "Gold", "quantity": 40}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                         "bonusKey": "bdmgMP"
@@ -1101,7 +1101,7 @@ export const initBubbleRepo = () => {
                         "name": "Lotto Skills",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{ LUK for all players, always.",
                         "requirements": [<ComponentModel>{"item": "CraftMat1", "quantity": 1}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 2}],
                         "bonusKey": "TotalLUK"
@@ -1151,7 +1151,7 @@ export const initBubbleRepo = () => {
                         "name": "Stamp Tramp",
                         "x1": 1,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "Increases the Max Lv of the 'Toilet Paper Postage' Talent to {. You unlock this talent by typing 'More like Poopy Pete' near Pete.",
                         "requirements": [<ComponentModel>{"item": "Bug2", "quantity": 45}, <LiquidComponentModel>{"liquidNo": "1", "quantity": 4}],
                         "bonusKey": "TPpostage"
@@ -1201,7 +1201,7 @@ export const initBubbleRepo = () => {
                         "name": "Cogs For Hands",
                         "x1": 4,
                         "x2": 0,
-                        "func": "add",
+                        "func": "addDECAY",
                         "description": "+{% Cog Production speed. Cogs are great. I really really like cogs. I guess you could say I think they're pretty Coggers...",
                         "requirements": [<ComponentModel>{"item": "SnowA2", "quantity": 50}, <LiquidComponentModel>{"liquidNo": "2", "quantity": 3}],
                         "bonusKey": "CogMakeSpd"

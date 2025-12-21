@@ -276,7 +276,7 @@ export const initEnemyTableRepo = () => {
                     <SubTableDropModel>{"item": "DropTable8", "quantity": 1, "chance": 0.4, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable9", "quantity": 1, "chance": 0.6, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable11", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable5b", "quantity": 3, "chance": 1, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable5c", "quantity": 3, "chance": 1, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Crystal2", <EnemyTableModel>{
@@ -443,6 +443,7 @@ export const initEnemyTableRepo = () => {
                     <CardDropModel>{"item": "CardsA8", "quantity": 1, "chance": 0.018, "questLink": "N/A"},
                     <RecipeDropModel>{"item": "SmithingRecipes1", "quantity": 48, "chance": 3e-05, "questLink": "N/A"},
                     <ItemDropModel>{"item": "Quest12", "quantity": 1, "chance": 0.3, "questLink": "Dog_Bone1"},
+                    <ItemDropModel>{"item": "FoodHealth3", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentShirts19", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
                     <SubTableDropModel>{"item": "DropTable3", "quantity": 1, "chance": 0.0045, "questLink": "N/A"}
                 ]
@@ -453,6 +454,7 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "Forest3", "quantity": 1, "chance": 0.14, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsA9", "quantity": 1, "chance": 0.007, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampA10", "quantity": 1, "chance": 3e-05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "FoodHealth3", "quantity": 1, "chance": 0.01, "questLink": "N/A"},
                     <ItemDropModel>{"item": "FoodPotRe2", "quantity": 5, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "StampA8", "quantity": 1, "chance": 0.0003, "questLink": "Papua_Piggea1"},
                     <ItemDropModel>{"item": "ObolBronzePop", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
@@ -2065,6 +2067,20 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "FoodEvent4", "quantity": 2, "chance": 0.25, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("xmasEvent4", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsY21", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentNametag11", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentNametag14", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats125", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats126", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats42", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats88", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats85", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats111", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("slimeR", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 10, "chance": 0.5, "questLink": "N/A"},
@@ -2232,13 +2248,25 @@ export const initEnemyTableRepo = () => {
                     <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
                     <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "Timecandy8", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats108", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats116", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats115", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats24", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats117", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                     <ItemDropModel>{"item": "EquipmentHats47", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                ]
+            }),
+        new EnemyTableBase("cropfallEvent1", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats86", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats117", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentNametag12", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentNametag9", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "EquipmentHats73", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Copper", <EnemyTableModel>{
@@ -2745,42 +2773,42 @@ export const initEnemyTableRepo = () => {
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF26", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable25", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Bug10", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 2e-05, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Bug11", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF27", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable26", "quantity": 1, "chance": 1e-08, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 1e-08, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Bug12", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF37", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable29", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Bug13", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF38", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("Bug15", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                     <CardDropModel>{"item": "CardsF46", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
-                    <SubTableDropModel>{"item": "DropTable30", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
+                    <SubTableDropModel>{"item": "DropTable23", "quantity": 1, "chance": 0.015, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("SoulCard1", <EnemyTableModel>{

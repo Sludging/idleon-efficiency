@@ -55,7 +55,7 @@ function ItemSourcesDisplay({ sources, notes }: { sources: SourcesModel, notes: 
 function Slab() {
     const [onlyMissing, setOnlyMissing] = useState<boolean>(false);
     const [onlyLooted, setOnlyLooted] = useState<boolean>(false);
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     
@@ -67,7 +67,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => !item.obtained).filter(item => !customHandCraftedListOfUnobtainableItems.includes(item.internalName));
-    }, [slabInfo, theData]);
+    }, [slabInfo, lastUpdated]);
 
     const obtainedItems = useMemo(() => {
         if (!slabInfo) {
@@ -75,7 +75,7 @@ function Slab() {
         }
 
         return slabInfo.obtainableItems.filter(item => item.obtained);
-    }, [slabInfo, theData]);
+    }, [slabInfo, lastUpdated]);
 
     if (!slabInfo) {
         return <Box>Loading</Box>

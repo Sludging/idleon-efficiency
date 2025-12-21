@@ -13,7 +13,8 @@ export const initCompanionRepo = () => {
                 "x1": -53,
                 "x2": -22,
                 "x3": -14,
-                "x4": 2000
+                "x4": 2000,
+                "x5": 140
             }),
         new CompanionBase(1, <CompanionModel>{
                 "id": "rift2",
@@ -22,7 +23,8 @@ export const initCompanionRepo = () => {
                 "x1": -31,
                 "x2": 6,
                 "x3": -14,
-                "x4": 450
+                "x4": 450,
+                "x5": 130
             }),
         new CompanionBase(2, <CompanionModel>{
                 "id": "ram",
@@ -31,7 +33,8 @@ export const initCompanionRepo = () => {
                 "x1": -26,
                 "x2": 16,
                 "x3": -19,
-                "x4": 150
+                "x4": 150,
+                "x5": 125
             }),
         new CompanionBase(3, <CompanionModel>{
                 "id": "Crystal3",
@@ -40,7 +43,8 @@ export const initCompanionRepo = () => {
                 "x1": -19,
                 "x2": 20,
                 "x3": -8,
-                "x4": 150
+                "x4": 150,
+                "x5": 120
             }),
         new CompanionBase(4, <CompanionModel>{
                 "id": "sheep",
@@ -49,7 +53,8 @@ export const initCompanionRepo = () => {
                 "x1": -6,
                 "x2": 0,
                 "x3": -11,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(5, <CompanionModel>{
                 "id": "w5b1",
@@ -58,7 +63,8 @@ export const initCompanionRepo = () => {
                 "x1": 0,
                 "x2": 0,
                 "x3": -5,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(6, <CompanionModel>{
                 "id": "beanG",
@@ -67,7 +73,8 @@ export const initCompanionRepo = () => {
                 "x1": -9,
                 "x2": 0,
                 "x3": -22,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(7, <CompanionModel>{
                 "id": "slimeG",
@@ -76,7 +83,8 @@ export const initCompanionRepo = () => {
                 "x1": 17,
                 "x2": 0,
                 "x3": -1,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(8, <CompanionModel>{
                 "id": "jarSand",
@@ -85,7 +93,8 @@ export const initCompanionRepo = () => {
                 "x1": 5,
                 "x2": 0,
                 "x3": -3,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(9, <CompanionModel>{
                 "id": "bloque",
@@ -94,7 +103,8 @@ export const initCompanionRepo = () => {
                 "x1": 1,
                 "x2": 0,
                 "x3": -17,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(10, <CompanionModel>{
                 "id": "frogG",
@@ -103,7 +113,8 @@ export const initCompanionRepo = () => {
                 "x1": 12,
                 "x2": 0,
                 "x3": -5,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(11, <CompanionModel>{
                 "id": "slimeBz",
@@ -112,7 +123,8 @@ export const initCompanionRepo = () => {
                 "x1": -48,
                 "x2": 0,
                 "x3": -30,
-                "x4": 1
+                "x4": 1,
+                "x5": 10
             }),
         new CompanionBase(12, <CompanionModel>{
                 "id": "caveC",
@@ -121,7 +133,8 @@ export const initCompanionRepo = () => {
                 "x1": -44,
                 "x2": 0,
                 "x3": -35,
-                "x4": 1000
+                "x4": 1000,
+                "x5": 150
             }),
         new CompanionBase(13, <CompanionModel>{
                 "id": "w6d3",
@@ -130,7 +143,8 @@ export const initCompanionRepo = () => {
                 "x1": -29,
                 "x2": 0,
                 "x3": -19,
-                "x4": 250
+                "x4": 250,
+                "x5": 130
             }),
         new CompanionBase(14, <CompanionModel>{
                 "id": "rift3",
@@ -139,7 +153,8 @@ export const initCompanionRepo = () => {
                 "x1": -21,
                 "x2": 0,
                 "x3": -16,
-                "x4": 250
+                "x4": 250,
+                "x5": 135
             }),
         new CompanionBase(15, <CompanionModel>{
                 "id": "w6b4",
@@ -148,7 +163,8 @@ export const initCompanionRepo = () => {
                 "x1": -23,
                 "x2": 0,
                 "x3": -19,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(16, <CompanionModel>{
                 "id": "Crystal4",
@@ -157,7 +173,8 @@ export const initCompanionRepo = () => {
                 "x1": -21,
                 "x2": 0,
                 "x3": -5,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(17, <CompanionModel>{
                 "id": "w5b6",
@@ -166,7 +183,8 @@ export const initCompanionRepo = () => {
                 "x1": -17,
                 "x2": 0,
                 "x3": -15,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(18, <CompanionModel>{
                 "id": "frogBIG",
@@ -175,7 +193,8 @@ export const initCompanionRepo = () => {
                 "x1": -13,
                 "x2": 0,
                 "x3": -29,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(19, <CompanionModel>{
                 "id": "potato",
@@ -184,7 +203,8 @@ export const initCompanionRepo = () => {
                 "x1": -46,
                 "x2": 0,
                 "x3": -25,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(20, <CompanionModel>{
                 "id": "w4b1",
@@ -193,7 +213,8 @@ export const initCompanionRepo = () => {
                 "x1": -1,
                 "x2": 0,
                 "x3": -5,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(21, <CompanionModel>{
                 "id": "frogP",
@@ -202,7 +223,8 @@ export const initCompanionRepo = () => {
                 "x1": 10,
                 "x2": 0,
                 "x3": -5,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(22, <CompanionModel>{
                 "id": "glass",
@@ -211,7 +233,8 @@ export const initCompanionRepo = () => {
                 "x1": -2,
                 "x2": 0,
                 "x3": -5,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(23, <CompanionModel>{
                 "id": "mushG",
@@ -220,7 +243,8 @@ export const initCompanionRepo = () => {
                 "x1": -8,
                 "x2": 0,
                 "x3": -5,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(24, <CompanionModel>{
                 "id": "Pet10",
@@ -229,7 +253,8 @@ export const initCompanionRepo = () => {
                 "x1": -10,
                 "x2": 0,
                 "x3": -13,
-                "x4": 500
+                "x4": 500,
+                "x5": 100
             }),
         new CompanionBase(25, <CompanionModel>{
                 "id": "Pet12",
@@ -238,7 +263,8 @@ export const initCompanionRepo = () => {
                 "x1": 3,
                 "x2": 0,
                 "x3": -20,
-                "x4": 500
+                "x4": 500,
+                "x5": 100
             }),
         new CompanionBase(26, <CompanionModel>{
                 "id": "Pet3",
@@ -247,7 +273,8 @@ export const initCompanionRepo = () => {
                 "x1": -1,
                 "x2": 0,
                 "x3": 0,
-                "x4": 500
+                "x4": 500,
+                "x5": 100
             }),
         new CompanionBase(27, <CompanionModel>{
                 "id": "reindeer",
@@ -256,16 +283,18 @@ export const initCompanionRepo = () => {
                 "x1": -40,
                 "x2": 0,
                 "x3": -33,
-                "x4": 500
+                "x4": 500,
+                "x5": 135
             }),
         new CompanionBase(28, <CompanionModel>{
                 "id": "w7d1",
-                "desc": "{30% AFK gains for World 7 skills, and +1 World Class Showcase Slot (Grade 4)",
+                "desc": "{30% AFK gains for World 7 skills, and {1 World Class Showcase Slot (Grade 4)",
                 "bonus": 30,
                 "x1": -30,
                 "x2": 0,
                 "x3": -48,
-                "x4": 500
+                "x4": 500,
+                "x5": 200
             }),
         new CompanionBase(29, <CompanionModel>{
                 "id": "Pet0",
@@ -274,7 +303,8 @@ export const initCompanionRepo = () => {
                 "x1": 6,
                 "x2": 0,
                 "x3": -8,
-                "x4": 100
+                "x4": 100,
+                "x5": 80
             }),
         new CompanionBase(30, <CompanionModel>{
                 "id": "Pet1",
@@ -283,7 +313,8 @@ export const initCompanionRepo = () => {
                 "x1": 4,
                 "x2": 0,
                 "x3": -5,
-                "x4": 100
+                "x4": 100,
+                "x5": 100
             }),
         new CompanionBase(31, <CompanionModel>{
                 "id": "Pet2",
@@ -292,7 +323,8 @@ export const initCompanionRepo = () => {
                 "x1": 2,
                 "x2": 0,
                 "x3": -8,
-                "x4": 100
+                "x4": 100,
+                "x5": 15
             }),
         new CompanionBase(32, <CompanionModel>{
                 "id": "Pet4",
@@ -301,43 +333,48 @@ export const initCompanionRepo = () => {
                 "x1": -2,
                 "x2": 0,
                 "x3": -13,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(33, <CompanionModel>{
                 "id": "Pet5",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "2x Total Damage, and 2x Class EXP gain",
+                "bonus": 1,
                 "x1": -2,
                 "x2": 0,
                 "x3": -10,
-                "x4": 100
+                "x4": 100,
+                "x5": 15
             }),
         new CompanionBase(34, <CompanionModel>{
                 "id": "Pet6",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "3x Class EXP gain",
+                "bonus": 2,
                 "x1": 2,
                 "x2": 0,
                 "x3": -9,
-                "x4": 100
+                "x4": 100,
+                "x5": 15
             }),
         new CompanionBase(35, <CompanionModel>{
                 "id": "Pet8",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "2x Refinery Salts produced (affects POW produced in Refinery)",
+                "bonus": 1,
                 "x1": -5,
                 "x2": 0,
                 "x3": -13,
-                "x4": 100
+                "x4": 100,
+                "x5": 15
             }),
         new CompanionBase(36, <CompanionModel>{
                 "id": "Pet11",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "{200% Gold Balls gained from the Arcade,",
+                "bonus": 200,
                 "x1": -4,
                 "x2": 0,
                 "x3": -11,
-                "x4": 100
+                "x4": 100,
+                "x5": 15
             }),
         new CompanionBase(37, <CompanionModel>{
                 "id": "w7e1",
@@ -346,7 +383,8 @@ export const initCompanionRepo = () => {
                 "x1": -10,
                 "x2": 20,
                 "x3": -33,
-                "x4": 1000
+                "x4": 1000,
+                "x5": 150
             }),
         new CompanionBase(38, <CompanionModel>{
                 "id": "w7a5",
@@ -355,7 +393,8 @@ export const initCompanionRepo = () => {
                 "x1": -54,
                 "x2": 0,
                 "x3": -15,
-                "x4": 250
+                "x4": 250,
+                "x5": 140
             }),
         new CompanionBase(39, <CompanionModel>{
                 "id": "w7a8",
@@ -364,7 +403,8 @@ export const initCompanionRepo = () => {
                 "x1": -15,
                 "x2": 30,
                 "x3": -7,
-                "x4": 100
+                "x4": 250,
+                "x5": 130
             }),
         new CompanionBase(40, <CompanionModel>{
                 "id": "w7a4",
@@ -373,7 +413,8 @@ export const initCompanionRepo = () => {
                 "x1": -10,
                 "x2": 20,
                 "x3": -19,
-                "x4": 250
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(41, <CompanionModel>{
                 "id": "Crystal6",
@@ -382,7 +423,8 @@ export const initCompanionRepo = () => {
                 "x1": -17,
                 "x2": 0,
                 "x3": -14,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(42, <CompanionModel>{
                 "id": "w7a3",
@@ -391,7 +433,8 @@ export const initCompanionRepo = () => {
                 "x1": -9,
                 "x2": 28,
                 "x3": -17,
-                "x4": 100
+                "x4": 100,
+                "x5": 120
             }),
         new CompanionBase(43, <CompanionModel>{
                 "id": "w7a7",
@@ -400,7 +443,8 @@ export const initCompanionRepo = () => {
                 "x1": -4,
                 "x2": 0,
                 "x3": -19,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(44, <CompanionModel>{
                 "id": "w7a10",
@@ -409,7 +453,8 @@ export const initCompanionRepo = () => {
                 "x1": -9,
                 "x2": 0,
                 "x3": -15,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(45, <CompanionModel>{
                 "id": "w7a1",
@@ -418,7 +463,8 @@ export const initCompanionRepo = () => {
                 "x1": 6,
                 "x2": 0,
                 "x3": -5,
-                "x4": 10
+                "x4": 10,
+                "x5": 110
             }),
         new CompanionBase(46, <CompanionModel>{
                 "id": "coconut",
@@ -427,7 +473,8 @@ export const initCompanionRepo = () => {
                 "x1": -4,
                 "x2": 0,
                 "x3": -24,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(47, <CompanionModel>{
                 "id": "snakeG",
@@ -436,7 +483,8 @@ export const initCompanionRepo = () => {
                 "x1": 3,
                 "x2": 0,
                 "x3": -9,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
             }),
         new CompanionBase(48, <CompanionModel>{
                 "id": "mushP",
@@ -445,7 +493,18 @@ export const initCompanionRepo = () => {
                 "x1": -10,
                 "x2": 0,
                 "x3": -11,
-                "x4": 5
+                "x4": 5,
+                "x5": 100
+            }),
+        new CompanionBase(49, <CompanionModel>{
+                "id": "bubba",
+                "desc": "{30% Gallery Bonus Multi (World 7 feature)",
+                "bonus": 30,
+                "x1": -29,
+                "x2": 0,
+                "x3": -37,
+                "x4": 5,
+                "x5": 100
             })    
 ]
 }

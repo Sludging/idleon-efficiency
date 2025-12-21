@@ -22,6 +22,9 @@
                         console.log(`Images didn't match for: ${file}`);
                         fs.copyFileSync(`${assetFolder}/${file}`, `icons/assets/data/${file}`)
                     }
+                    /* } else {
+                        console.log(`Images matched for: ${file}`);
+                    } */
                 }
                 catch (e) {
                     if (e.message && e.message.includes("Image sizes do not match")) {
