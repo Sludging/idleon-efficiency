@@ -1,12 +1,13 @@
 "use client"
 
-import { Box, Button, ButtonExtendedProps, Menu, Nav, ResponsiveContext, Text, ThemeContext } from "grommet"
+import { Box, Button, ButtonExtendedProps, Menu, Nav, ResponsiveContext, Text } from "grommet"
 import { FormDown, Menu as MenuIcon } from "grommet-icons";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import styled from "styled-components";
+import { ThemeContext } from "grommet/contexts/ThemeContext"
 
 interface NavItem {
     link: string;
@@ -173,8 +174,9 @@ function OnHoverNav({ link, label, subLinks }: NavItem) {
 
     if (!subLinks) {
         return (
-            <Link key={`link_${label}`} href={link} legacyBehavior><NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
-        )
+            <Link key={`link_${label}`} href={link}>
+                <NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
+        );
     }
 
     return (

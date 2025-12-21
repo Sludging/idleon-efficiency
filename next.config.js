@@ -20,6 +20,8 @@ if (process.env.VERCEL_ENV == "preview") {
 }
 
 const moduleExports = {
+  // New in 16
+  turbopack: {},
   output: 'export',
   reactStrictMode: true,
   compiler: {
@@ -28,6 +30,7 @@ const moduleExports = {
   },
   experimental: {
     optimizePackageImports: ['styled-components', 'grommet', 'grommet-icons', 'firebase'],
+    turbopackFileSystemCacheForDev: true
   },
   images: {
     dangerouslyAllowSVG: true,

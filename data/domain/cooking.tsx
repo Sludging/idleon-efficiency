@@ -803,7 +803,7 @@ export const updateCooking = (data: Map<string, any>) => {
     // Nice to have maths
     cooking.totalCookingSpeed.value = totalCookingSpeed;
     cooking.totalCookingSpeed.sources.push(
-        { name: `Blood Marrow - (Level ${bestBloodMarrowTalent?.level}) Talent`, value: bestBloodMarrowTalent.getBonus() },
+        { name: `Blood Marrow - (Level ${bestBloodMarrowTalent?.level}) Talent`, value: bestBloodMarrowTalent?.getBonus() },
         { name: "Crop Scientist", value: Math.max(1, cookingSpeedParameters.cropScientistBonus) },
         { name: `Super Chow (Level ${bestApocalypseChowTalent.level}) - Talent`, value: bestApocalypseChowTalent.getEnhancedBonus() },
         { name: "Voting Bonus", value: cookingSpeedParameters.votingBonus13 },

@@ -23,7 +23,7 @@ export const initMapDataRepo = () => {
                 "enemy": "frogG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                "portalRequirements": [30]
+                "portalRequirements": [25]
             }),
         new MapDataBase(3, <MapDataModel>{
                 "enemy": "JungleZ",
@@ -95,7 +95,7 @@ export const initMapDataRepo = () => {
                 "enemy": "beanG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                "portalRequirements": [120, 2000]
+                "portalRequirements": [50, 2000]
             }),
         new MapDataBase(15, <MapDataModel>{
                 "enemy": "ratB",
@@ -107,7 +107,7 @@ export const initMapDataRepo = () => {
                 "enemy": "slimeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleA", "name": "Jungle Perimeter", "id": 16},
-                "portalRequirements": [120, 3000]
+                "portalRequirements": [60, 3000]
             }),
         new MapDataBase(17, <MapDataModel>{
                 "enemy": "mushR",
@@ -125,7 +125,7 @@ export const initMapDataRepo = () => {
                 "enemy": "snakeG",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleB", "name": "Winding Willows", "id": 19},
-                "portalRequirements": [130]
+                "portalRequirements": [90]
             }),
         new MapDataBase(20, <MapDataModel>{
                 "enemy": "Nothing",
@@ -155,7 +155,7 @@ export const initMapDataRepo = () => {
                 "enemy": "carrotO",
                 "world": "Blunder Hills",
                 "map": <MapNameModel>{"intName": "JungleC", "name": "Vegetable Patch", "id": 24},
-                "portalRequirements": [130, 2000]
+                "portalRequirements": [120, 2000]
             }),
         new MapDataBase(25, <MapDataModel>{
                 "enemy": "Nothing",
