@@ -22,7 +22,7 @@ export interface AppDataStoreProviderProps {
 export const AppDataStoreProvider = ({
   children,
 }: AppDataStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<AppDataStore>>()
+  const storeRef = useRef<StoreApi<AppDataStore>>(null)
   if (!storeRef.current) {
     const allItems = initAllItems();
     const initData = initAccountDataKeys(allItems)
