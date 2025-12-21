@@ -80,11 +80,11 @@ export class Card {
     }
 
     getCardsForLevel = (level: number): number => {
-        // cchiz is .. special? .. who knows why...
         if (level <= 0) {
             return 1;
         }
 
+        // cchiz is .. special? .. who knows why...
         if (this.id == "Boss3B") {
             return 1.5 * Math.pow(level + 1 + Math.floor(level / 3), 2)
         } else {
