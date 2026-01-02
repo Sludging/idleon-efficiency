@@ -300,7 +300,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     // Activity based alerts
     switch (player.getActivityType()) {
         case Activity.Fighting:
-            if (![0, 1, 4, 5, 6, 9, 10, 11].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
+            if (![0, 1, 4, 5, 6, 9, 10, 11, 12].some(id => (player.cardInfo?.getBonusForId(id) ?? 0) > 0)) {
                 alerts.push(new CardSetAlert(player, `${player.cardInfo?.getCardSetText()} isn't optimal fighting`, player.cardInfo?.getCardSetIcon() ?? 'CardSet26'));
             }
             break;
