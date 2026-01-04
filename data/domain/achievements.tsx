@@ -89,7 +89,7 @@ export class Achievements extends Domain {
             { key: "SteamAchieve", perPlayer: false, default: [] },
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         const achievements = Achievement.fromBase(initAchievementRepo());
 
         achievements.forEach((achievement, index) => {

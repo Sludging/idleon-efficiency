@@ -1,7 +1,6 @@
 import { Domain, RawData } from "../base/domain";
 import { Equinox } from "../equinox";
 import { Item } from "../items";
-import { Summoning } from "../world-6/summoning";
 
 export class Votes extends Domain {
     multiFromEquinox: number = 0;
@@ -23,7 +22,7 @@ export class Votes extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 

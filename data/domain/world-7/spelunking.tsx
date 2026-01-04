@@ -1,6 +1,5 @@
 import { Domain, RawData } from "../base/domain";
 import { initSpelunkingChapterRepo, SpelunkingChapterBase } from "../data/SpelunkingChapterRepo";
-import { SpelunkingDiscoveryBase } from "../data/SpelunkingDiscoveryRepo";
 import { initSpelunkingTunnelRepo, SpelunkingTunnelBase } from "../data/SpelunkingTunnelRepo";
 import { initSpelunkingUpgradeRepo, SpelunkingUpgradeBase } from "../data/SpelunkingUpgradeRepo";
 import { Item } from "../items";
@@ -86,7 +85,7 @@ export class Spelunking extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], charCount: number) {
         this.tunnels = Tunnel.fromBase(initSpelunkingTunnelRepo());
         this.chapters = Chapter.fromBase(initSpelunkingChapterRepo());
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());

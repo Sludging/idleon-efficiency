@@ -7,13 +7,13 @@ import { MarketInfoModel } from "../model/marketInfoModel";
 import { SeedInfoModel } from "../model/seedInfoModel";
 import { Player } from "../player";
 import { ImageData } from "../imageData";
-import { nFormatter, toTime } from '../../utility';
+import { nFormatter } from '../../utility';
 import { GemStore } from '../gemPurchases';
 import { Lab } from '../lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../world-1/stamps';
-import { Alchemy, AlchemyConst, CauldronIndex } from '../alchemy';
-import { JadeUpgrade, PristineCharm, Sneaking } from "./sneaking";
+import { Alchemy } from '../alchemy';
+import { JadeUpgrade, Sneaking } from "./sneaking";
 import { Cooking } from "../cooking";
 import { Rift, SkillMastery } from '../rift';
 import { StarSigns } from "../starsigns";
@@ -515,7 +515,7 @@ export class Farming extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 

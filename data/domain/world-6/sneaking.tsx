@@ -15,7 +15,6 @@ import { NinjaItemModel } from '../model/ninjaItemModel';
 import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { BaseNinjaItemModel } from "../model/baseNinjaItemModel";
-import { itemMap } from "../../maps";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -402,7 +401,7 @@ export class Sneaking extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -459,7 +458,7 @@ export class Sneaking extends Domain {
         sneaking.pristineCharms = [];
         sneaking.baseItems
             .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
-            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, index) => {
+            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, _) => {
             let unlocked: boolean = false;
             if (item.data.itemId < pristineCharmUnlocking.length) {
                 unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
@@ -490,7 +489,7 @@ export class Sneaking extends Domain {
         sneaking.beanstalking = new Beanstalking();
         const beanStalkingData = ninjaData[104] as number[];
         const goldenFoods = initAllItems().filter(item => item.type == "Golden Food") as Food[];
-        Object.values(BeanstalkingBonusType).forEach((key, index) => {
+        Object.values(BeanstalkingBonusType).forEach((_, index) => {
             if (index < beanStalkingData.length) {
                 let item: Food | undefined = undefined;
                 switch(index) {
@@ -530,7 +529,7 @@ export class Sneaking extends Domain {
     }
 
     updatePlayersActivity = () => {
-        this.players.forEach((player, index) => {
+        this.players.forEach((player, _) => {
             const currentFloorDoor = (player.floor < this.doors.length) ? this.doors[player.floor] : undefined;
     
             if (player.tie.damageDone < player.tie.maxHP || player.rawData[1] == 0) {

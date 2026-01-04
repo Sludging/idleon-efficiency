@@ -384,7 +384,7 @@ export class Summoning extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -412,7 +412,7 @@ export class Summoning extends Domain {
         // Reset and add "blank" values into arrays
         summoning.summonBattles.allVictories = [];
         summoning.summonBattles.allBattles = [];
-        for (var i = 0; i < Object.keys(SummonEssenceColor).filter(key => isNaN(Number(key))).length; i++) {
+        for (let i = 0; i < Object.keys(SummonEssenceColor).filter(key => isNaN(Number(key))).length; i++) {
             summoning.summonBattles.allVictories.push(0);
             summoning.summonBattles.allBattles.push([]);
         }
@@ -465,7 +465,7 @@ export class Summoning extends Domain {
                 }
             }
         });
-        for (var i = 0; i < (optionList[319] ?? 0); i++) {
+        for (let i = 0; i < (optionList[319] ?? 0); i++) {
             const index = BattlesInfo.getEndlessBattleFightIndex(i);
             const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == BattlesInfo.getEndlessBattleFightBonusIndex(i));
             if (relevantBonus) {

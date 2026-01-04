@@ -4,7 +4,7 @@ import { Farming } from "../../../data/domain/world-6/farming";
 import ShadowBox from "../../base/ShadowBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
-import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import TextAndLabel from "../../base/TextAndLabel";
 
 export const LandRankDisplay = () => {
     const { theData } = useAppDataStore(useShallow(

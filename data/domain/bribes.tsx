@@ -36,7 +36,7 @@ export class Bribes extends Domain {
             { key: "BribeStatus", perPlayer: false, default: [] }
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return Bribe.fromBase(initBribeRepo());
     }
     parse(data: Map<string, any>): void {

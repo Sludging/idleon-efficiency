@@ -4,7 +4,6 @@ import { Domain, RawData } from "./base/domain";
 import { Construction, Library } from "./construction";
 import { initTalentNameRepo } from "./data/TalentNameRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
-import { safeJsonParse } from "./idleonData";
 import { Item } from "./items";
 import { Player } from "./player";
 import { Quests } from "./quests";
@@ -159,7 +158,7 @@ export class Account extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(allItems: Item[], _charCount: number) {
         this.miniBosses.push(new Miniboss("mini3a", 0));
         this.miniBosses.push(new Miniboss("mini4a", 0));
         this.miniBosses.push(new Miniboss("mini5a", 0));

@@ -17,7 +17,7 @@ export function RouterTracker() {
     useEffect(() => {
         const url = pathname + (searchParams?.toString() ?? "")
         handleRouteChange(url)
-    }, [pathname, searchParams?.toString()])
+    }, [pathname, searchParams])
 
     return <></>
 }

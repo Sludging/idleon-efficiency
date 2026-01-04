@@ -1,4 +1,4 @@
-import { lavaFunc, letterToNumber, nFormatter, number2letter, range, round } from '../utility'
+import { lavaFunc, nFormatter, number2letter, range, round } from '../utility'
 import { Cooking } from './cooking';
 import { CauldronBase, initBubbleRepo } from './data/BubbleRepo';
 import { ImageData } from './imageData';
@@ -690,7 +690,7 @@ export class Alchemy extends Domain {
         ];
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(allItems: Item[], _charCount: number) {
         this.cauldrons = [];
         this.vials = [];
         const data = initBubbleRepo();

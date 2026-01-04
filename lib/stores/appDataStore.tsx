@@ -163,7 +163,7 @@ export const createAppDataStore = (
     return createStore<AppDataStore>()((set, get) => ({
         ...initState,
         initialize: async (userUid?: string) => {
-            set((state) => ({ initialized: true }));
+            set((_) => ({ initialized: true }));
 
             const subDomain = isSubDomain();
             const app = getApp();
@@ -171,10 +171,10 @@ export const createAppDataStore = (
             if (!subDomain && userUid) {
                 const fireStore = new FirestoreData(userUid, app, get().handleLiveData)
                 fireStore.fetchData().then(() => {
-                    set((state) => ({ firestore: fireStore }));
+                    set((_) => ({ firestore: fireStore }));
                 })
                 .catch(() => {
-                    set((state) => ({
+                    set((_) => ({
                         dataStatus: DataStatus.MissingData,
                     }))
                 })
@@ -187,17 +187,17 @@ export const createAppDataStore = (
                 const { data, charNames, domain } = value;
                 // If there's no data, it's an invalid profile
                 if (!data || data.size == 0) {
-                    set((state) => ({ status: AppStatus.InvalidProfile, dataStatus: DataStatus.MissingData }));
+                    set((_) => ({ status: AppStatus.InvalidProfile, dataStatus: DataStatus.MissingData }));
                 }
                 else { // Else, we have data we need to parse.
-                    set((state) => ({ dataStatus: DataStatus.Loading }));
+                    set((_) => ({ dataStatus: DataStatus.Loading }));
                     const newData = await handleStaticData(domain, get().data, { data: data, charNames: charNames as string[] });
-                    set((state) => ({ dataStatus: DataStatus.StaticData, data: newData, profile: domain, status: AppStatus.Ready }));
+                    set((_) => ({ dataStatus: DataStatus.StaticData, data: newData, profile: domain, status: AppStatus.Ready }));
                 }
             }
             // No domain and no logged in user, we have no data.
             if (!subDomain && !userUid) {
-                set((state) => ({ dataStatus: DataStatus.NoData }));
+                set((_) => ({ dataStatus: DataStatus.NoData }));
             }
             // No domain, there's a valid user but we have no actual data. Probably wrong account?
             // Do this somewhere else?
@@ -206,12 +206,12 @@ export const createAppDataStore = (
             // };
         },
         handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
-            set((state) => ({ dataStatus: DataStatus.Loading }));
+            set((_) => ({ dataStatus: DataStatus.Loading }));
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
-            set((state) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));
+            set((_) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));
         },
         setDataStatus: (dataStatus: DataStatus) => {
-            set((state) => ({ dataStatus: dataStatus }));
+            set((_) => ({ dataStatus: dataStatus }));
         },
         markChangelogsSeen: () => {
             if (typeof window === "undefined") return;

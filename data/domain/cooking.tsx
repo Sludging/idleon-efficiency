@@ -520,9 +520,9 @@ export class Cooking extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.meals = Meal.fromBase(initMealRepo());
-        this.spices = [...Array(territoryNiceNames.length - 1)].map(index => 0);
+        this.spices = [...Array(territoryNiceNames.length - 1)].map(_ => 0);
 
         populateDiscovery(this);
         return this;
@@ -570,8 +570,8 @@ const populateDiscovery = (cooking: Cooking) => {
 
     const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
 
-    const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 50000000000000000 * 2 / .004)
-    const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
+    const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, _index) => 50000000000000000 * 2 / .004)
+    const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, _index) => 0)
     for (const len of range(0, 3)) {
         const possibleCombinations = combinations(availableValues, len + 1);
         for (const combination of possibleCombinations) {
@@ -757,7 +757,7 @@ export const updateCooking = (data: Map<string, any>) => {
     let totalCookingSpeed = 0;
     let totalCookingSpeedWithoutStarSign = 0;
     let totalCookingSpeedWithSilkrode = 0;
-    cooking.kitchens.forEach((kitchen, index) => {
+    cooking.kitchens.forEach((kitchen, _) => {
         kitchen.mealSpeed = kitchen.getMealSpeed(cookingSpeedParameters);
         kitchen.mealSpeedWithoutStarSign = kitchen.getMealSpeed({ ...cookingSpeedParameters, starsign58bonus: 0 });
         kitchen.mealSpeedWithSilkrode = kitchen.getMealSpeed({ ...cookingSpeedParameters, starsign58bonus: cookingSpeedParameters.starsign58bonus * 2 });

@@ -87,7 +87,7 @@ export class Shrines extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return Shrine.fromBase(initShrineRepo());
     }
 

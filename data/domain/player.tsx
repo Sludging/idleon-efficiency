@@ -309,7 +309,7 @@ export class Player {
     }
 
     getCurrentCooldown = (skillIndex: number) => {
-        const skillCooldown = [...this.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == skillIndex).pop()
+        const skillCooldown = [...this.cooldown.entries()].filter(([talent, _]) => talent.skillIndex == skillIndex).pop()
         if (skillCooldown) {
             return Math.max(0, skillCooldown[1] - this.afkFor);
         }
@@ -729,7 +729,7 @@ export class Players extends Domain {
         // Update this to cover all the sub-functions.
         return [];
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], charCount: number) {
         return [...Array(charCount)].map((_, pIndex) => new Player(pIndex, `Player_${pIndex}`));
     }
     parse(data: Map<string, any>): void {

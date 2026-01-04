@@ -74,18 +74,6 @@ export const dateToText = (date: Date): string => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
 
-const getBitIndex = (num: number) => {
-    let modifiedValue = num;
-    let bitIndex = 0;
-    for (; bitIndex < 4 ; bitIndex++) {
-        if (modifiedValue > 1e18) {
-            modifiedValue /= 1e18;
-        }
-    }
-
-    return bitIndex;
-}
-
 export const bitsFormatter = (num: number) => {
     let modifiedValue = num;
     let bitIndex = 0;
@@ -472,11 +460,10 @@ export const number2letter = (number: number) => {
 // Stolen from IdleonToolbox
 export const notateNumber = (e: number, s: string = "Smaller"): string => {
     if (s === 'bits') {
-      let bits = e, t = 0;
+      let bits = e;
       for (let i = 0; i < 4; i++) {
         if (bits > 1e18) {
           bits /= 1e18;
-          t++;
         }
       }
       return 1e4 > bits

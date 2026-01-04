@@ -1,7 +1,6 @@
 "use client"
 
 import { Box, CheckBox, Text, Select, TextInput } from "grommet";
-import { useState } from "react";
 
 export interface FilterOptions {
     hideLocked: boolean;

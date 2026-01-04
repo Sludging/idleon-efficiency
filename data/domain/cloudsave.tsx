@@ -38,7 +38,7 @@ export class Cloudsave {
   }
   
 export const cloudsaveConverter = {
-    toFirestore(post: WithFieldValue<Cloudsave>): DocumentData {
+    toFirestore(_: WithFieldValue<Cloudsave>): DocumentData {
       return {}
     },
     fromFirestore(

@@ -70,7 +70,7 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
         return this.level * this.data.value * (1 + upgrade39Bonus / 100);
     }
 
-    getCost = (allUpgrades: EfficiencyUpgrade[]): number => {
+    getCost = (_allUpgrades: EfficiencyUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
             return 0;
         }
@@ -240,7 +240,7 @@ export enum TesseractType {
 class DamageEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
     name = "Arcane Damage";
 
-    getRelevantUpgradeIds(domain: Tesseract): number[] {
+    getRelevantUpgradeIds(_: Tesseract): number[] {
         return [
             // Flat damage bonuses
             0,  // Arcanist Damage
@@ -285,7 +285,7 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
 class TachyonGainEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
     name = "Tachyon Drop Rate";
 
-    getRelevantUpgradeIds(domain: Tesseract): number[] {
+    getRelevantUpgradeIds(_: Tesseract): number[] {
         return [
             // Direct tachyon bonuses
             17, // Ripple in Spacetime
@@ -321,7 +321,7 @@ class TachyonGainEfficiencyCalculator implements EfficiencyCalculator<Tesseract>
 class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
     name = "Arcane Accuracy";
 
-    getRelevantUpgradeIds(domain: Tesseract): number[] {
+    getRelevantUpgradeIds(_: Tesseract): number[] {
         return [
             // Flat accuracy bonuses
             1, 9, 19, 38, 52,
@@ -360,7 +360,7 @@ class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
 class DefenseEfficiencyCalculator implements EfficiencyCalculator<Tesseract> {
     name = "Arcane Defense";
 
-    getRelevantUpgradeIds(domain: Tesseract): number[] {
+    getRelevantUpgradeIds(_: Tesseract): number[] {
         return [
             // Flat defense bonuses
             2, 11, 29, 46,
@@ -475,7 +475,7 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.upgrades = TesseractUpgrade.fromBase(initTesseractUpgradeRepo());
         return this;
     }

@@ -585,7 +585,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.upgrades = CompassUpgrade.fromBase(initCompassUpgradeRepo());
         return this;
     }
@@ -606,7 +606,7 @@ export class Compass extends Domain implements EfficiencyDomain {
 
         const dustCostServerVar = serverVars["DustCost"] || 1;
 
-        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw, exaltedStampsRaw] = compassData;
+        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw,] = compassData;
 
         compass.totalCompassLevel = upgradesLevels?.reduce((sum, level) => sum + level, 0);
     

@@ -15,7 +15,7 @@ import { AbilityTypeEnum } from "./enum/abilityTypeEnum";
 import { initPetStatRepo, PetStatBase } from "./data/PetStatRepo";
 import { PetStatModel } from "./model/petStatModel";
 import { initRandoListRepo } from "./data/RandoListRepo";
-import { GroupByFunction, range } from "../utility";
+import { GroupByFunction } from "../utility";
 import { InfiniteStarsBonus, Rift, SkillMastery } from "./rift";
 import { Refinery } from "./refinery";
 import { Sailing } from "./sailing";
@@ -466,7 +466,7 @@ export class Breeding extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.territory = Territory.fromBase(initTerritoryFightRepo());
         this.upgrade = PetUpgrade.fromBase(initPetUpgradeRepo());
         this.genes = PetGene.fromBase(initPetGeneRepo());

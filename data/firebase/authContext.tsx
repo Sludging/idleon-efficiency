@@ -108,7 +108,7 @@ export const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ childre
 
         if (user) {
             signOut(auth)
-                .then((result) => {
+                .then((_) => {
                     sendEvent({
                         action: "logout",
                         category: "engagement",

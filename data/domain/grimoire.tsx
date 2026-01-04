@@ -17,7 +17,7 @@ import { ClassIndex } from "./talents";
 class DamageEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
     name = "Wraith Damage";
     
-    getRelevantUpgradeIds(domain: Grimoire): number[] {
+    getRelevantUpgradeIds(_domain: Grimoire): number[] {
         return [
             // Flat damage bonuses
             0, 6, 16, 33, 46,
@@ -60,7 +60,7 @@ class DamageEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
 class BoneGainEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
     name = "Bone Drop Rate";
     
-    getRelevantUpgradeIds(domain: Grimoire): number[] {
+    getRelevantUpgradeIds(_domain: Grimoire): number[] {
         return [
             // Direct bone drop bonuses
             23, // Bones o' Plenty
@@ -96,7 +96,7 @@ class BoneGainEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
 class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
     name = "Wraith Accuracy";
     
-    getRelevantUpgradeIds(domain: Grimoire): number[] {
+    getRelevantUpgradeIds(_domain: Grimoire): number[] {
         return [
             // Flat accuracy bonuses
             1, 12, 25, 37, 47,
@@ -135,7 +135,7 @@ class AccuracyEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
 class DefenseEfficiencyCalculator implements EfficiencyCalculator<Grimoire> {
     name = "Wraith Defense";
     
-    getRelevantUpgradeIds(domain: Grimoire): number[] {
+    getRelevantUpgradeIds(_domain: Grimoire): number[] {
         return [
             // Flat defense bonuses
             2, 15, 30, 40, 49,
@@ -219,7 +219,7 @@ export class GrimoireUpgrade implements EfficiencyUpgrade {
         return this.level * this.data.value * writingGrimoireBonus;
     }
 
-    getCost = (allUpgrades: EfficiencyUpgrade[]): number => {
+    getCost = (_allUpgrades: EfficiencyUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
             return 0;
         }
@@ -408,7 +408,7 @@ export class Grimoire extends Domain implements EfficiencyDomain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.upgrades = GrimoireUpgrade.fromBase(initGrimoireUpgradeRepo());
         return this;
     }

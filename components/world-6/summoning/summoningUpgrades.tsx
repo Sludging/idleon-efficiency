@@ -3,7 +3,7 @@ import ShadowBox from "../../base/ShadowBox";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
-import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence, SummonEssenceColor } from '../../../data/domain/world-6/summoning';
+import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence } from '../../../data/domain/world-6/summoning';
 import TabButton from "../../base/TabButton";
 import { useState } from "react";
 

@@ -86,17 +86,17 @@ const adUnits: Record<string, any> = {
 const Nitro = ({ demo = false }: { demo: boolean }) => {
     const [nitroComponentLoaded, setNitroComponentLoaded] = useState(false);
 
-    // Function to add ad units
-    const addUnits = () => {
-        Object.keys(adUnits).forEach(key => {
-            window.nitroAds.createAd(key, {
-                ...adUnits[key],
-                demo: demo
+    useEffect(() => {    
+        // Function to add ad units
+        const addUnits = () => {
+            Object.keys(adUnits).forEach(key => {
+                window.nitroAds.createAd(key, {
+                    ...adUnits[key],
+                    demo: demo
+                });
             });
-        });
-    };
+        };
 
-    useEffect(() => {
         if (!nitroComponentLoaded) {
             setNitroComponentLoaded(true);
             window.nitroAds = window.nitroAds || {};

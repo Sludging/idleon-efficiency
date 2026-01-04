@@ -3,7 +3,7 @@ import {
     Grid,
     Text,
 } from 'grommet'
-import { useState, useContext, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Breeding as BreedingDomain } from "../../../data/domain/breeding";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";

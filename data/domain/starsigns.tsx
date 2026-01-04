@@ -1,4 +1,3 @@
-import { ConstellationBase, initConstellationsRepo } from "./data/ConstellationsRepo";
 import { Domain } from './base/domain';
 import { RawData } from './base/domain';
 import { Item } from "./items";
@@ -56,7 +55,7 @@ export class StarSigns extends Domain  {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 

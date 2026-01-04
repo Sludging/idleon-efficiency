@@ -9,6 +9,17 @@ const eslintConfig = defineConfig([
         files: ['**/*.ts', '**/*.tsx'],
         rules: {
             'react/no-unescaped-entities': 'off',
+            '@typescript-eslint/no-explicit-any': 'off',
+            // Consider undoing this at some point
+            '@typescript-eslint/no-unsafe-function-type': 'off',
+            '@typescript-eslint/no-unused-vars': [
+                'warn',
+                {
+                    argsIgnorePattern: '^_',
+                    varsIgnorePattern: '^_',
+                    caughtErrorsIgnorePattern: '^_',
+                },
+            ],
         },
     },
     // Override default ignores of eslint-config-next.
@@ -23,6 +34,10 @@ const eslintConfig = defineConfig([
         '**/*.js',
         'tests/**',
         'scripts/**',
+        // Imported from WikiBot:
+        'data/domain/model/**',
+        'data/domain/enum/**',
+        'data/domain/data/**',
     ]),
 ])
 

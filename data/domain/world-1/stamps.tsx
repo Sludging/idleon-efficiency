@@ -270,7 +270,7 @@ export class Stamps extends Domain {
                             stamps[index][parseInt(key)].maxLevel = Number(stampMaxLevels[index][key]);
                         }
                         catch (e) {
-                            console.debug("Unable to set level for stamp", key);
+                            console.debug("Unable to set level for stamp", key, e);
                         }
                     }
                 })

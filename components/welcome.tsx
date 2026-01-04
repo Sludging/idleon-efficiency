@@ -8,7 +8,6 @@ import {
     TextInput,
     Button,
     Layer,
-    Image,
     FormField,
     ResponsiveContext,
 } from 'grommet'
@@ -32,25 +31,13 @@ const VerticalLine = styled.hr`
     float: left;
 `
 
-function SpecialButton({ isActive, text, clickHandler, step }: { isActive: boolean, text: string | React.ReactNode, clickHandler: MouseEventHandler, step: number }) {
-    return (
-        <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
-            <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'small', bottom: 'small' }} gap="small">
-                <Text color={isActive ? 'brand' : 'accent-2'} size="14px">Step {step}</Text>
-                <Text color='accent-2' size="18px" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
-            </Box>
-        </Button>
-    )
-}
-
 export default function Welcome() {
-    const { user, authStatus, emailLogin, appleLogin, uglySteamLogin, errorCode } = useAuthStore(
+    const { user, authStatus, emailLogin, appleLogin, errorCode } = useAuthStore(
         useShallow((state) => ({
             user: state.user,
             authStatus: state.authStatus,
             emailLogin: state.emailLogin,
             appleLogin: state.appleLogin,
-            uglySteamLogin: state.uglySteamLogin,
             errorCode: state.errorCode,
         })),
     )
@@ -66,10 +53,6 @@ export default function Welcome() {
     const size = useContext(ResponsiveContext);
 
     const isLoading = authStatus == AuthStatus.Loading;
-
-    const steamLogin = () => {
-        window.open("https://steamcommunity.com/openid/login?openid.ns=http://specs.openid.net/auth/2.0&openid.claimed_id=http://specs.openid.net/auth/2.0/identifier_select&openid.identity=http://specs.openid.net/auth/2.0/identifier_select&openid.return_to=https://www.legendsofidleon.com/steamsso/&openid.realm=https://www.legendsofidleon.com/steamsso/&openid.mode=checkid_setup");
-    }
 
     const googleLayer = () => {
         setLayerType('google');

@@ -143,7 +143,7 @@ export class Refinery extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         const costRepo = initRefineryCostRepo();
 
         costRepo.forEach((salt, index) => {

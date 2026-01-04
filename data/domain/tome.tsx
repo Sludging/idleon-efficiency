@@ -207,7 +207,7 @@ export class Tome extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -234,7 +234,7 @@ export class Tome extends Domain {
         this.highestScore = 0;
         this.highestScoreIndex = 0;
 
-        for (var i = 0; i < this.charCount; i++) {
+        for (let i = 0; i < this.charCount; i++) {
             const playerScore = this.lines.reduce((sum, line) => sum + line.getPlayerScore(i), 0);
             if (this.highestScore < playerScore) {
                 this.highestScore = playerScore;
@@ -331,8 +331,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
     let completedQuests: number = 0;
     const playerQuestData = questsData?.playerData ?? {};
-    filteredNPCs.forEach(([_, npc], npcIndex) => {
-        Object.entries(npc.data.quests).forEach(([_, info], index) => {
+    filteredNPCs.forEach(([_, npc], _npcIndex) => {
+        Object.entries(npc.data.quests).forEach(([_, info], _index) => {
             if (Object.entries(playerQuestData).some(playerData => playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
                 completedQuests++;
             }
@@ -507,7 +507,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 1:
                 // Sum of statues levels
-                for (var i = 0; i < statues.length; i++) {
+                for (let i = 0; i < statues.length; i++) {
                     line.updatePlayerCurrentValue(statues[i].statues.reduce((sum, statue) => sum + statue.level, 0), i);
                 }
                 break;
@@ -565,7 +565,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 15:
                 // Sum of star talent points owned
-                for (var i = 0; i < players.length; i++) {
+                for (let i = 0; i < players.length; i++) {
                     line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0), i);
                 }
                 break;
@@ -727,7 +727,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 55:
                 // Number of Onyx statues
-                for (var i = 0; i < statues.length; i++) {
+                for (let i = 0; i < statues.length; i++) {
                     line.updatePlayerCurrentValue((statues[i].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0), i);
                 }
                 break;

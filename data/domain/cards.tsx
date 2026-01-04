@@ -132,7 +132,7 @@ export class Card {
     getBonusID = (): number => {
         let ID = 0 as number;
         // Find the bonus ID corresponding to the bonus effect of the card
-        Object.entries(IDforCardBonus).some(([bonusID, bonusText], index) => {
+        Object.entries(IDforCardBonus).some(([bonusID, bonusText], _) => {
             if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {
                 ID = parseInt(bonusID, 10);
                 return true;
@@ -220,7 +220,7 @@ export class Cards extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return Card.fromBase(initCardRepo());
     }
 
@@ -247,7 +247,7 @@ export const updateCards = (data: Map<string, any>) => {
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     if (skillMastery?.active) {
-        Object.entries(skillMastery.skillLevels).map(([skillAsString, skillLevel], index) => {
+        Object.entries(skillMastery.skillLevels).map(([skillAsString, _], _index) => {
             const skillName = SkillsIndex[parseInt(skillAsString)];
             const skillIndex = SkillsIndex[skillName as keyof typeof SkillsIndex];
 

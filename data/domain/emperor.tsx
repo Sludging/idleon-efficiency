@@ -40,7 +40,7 @@ export class Emperor extends Domain {
         return [];
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.emperorBonuses = EmperorBonus.fromBase(initEmperorBonusRepo());
         return this;
     }
