@@ -29,6 +29,7 @@ import { initBellBonusRepo } from "../../data/BellBonusRepo";
 import { initHarpNotesRepo } from "../../data/HarpNotesRepo";
 import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
+import { Gambit, GambitBonus, GambitLevel, GambitLevels } from "./gambit";
 
 export class Villager {
     level: number = 0;
@@ -691,6 +692,7 @@ export class Hole extends Domain {
     resourceCavrens = new ResourceCavrens();
     harp: Harp = new Harp();
     lamp: Lamp = new Lamp();
+    gambit: Gambit = new Gambit();
     // TODO: 
     // Well - DONE?
     // Caverns
@@ -883,4 +885,12 @@ export const updateHole = (data: Map<string, any>) => {
         // TODO: This doesn't work on load, investigate why.
         measurement.deathnotePts = deathnote.getTotalRank();
     });
+
+    // Update the gambit multiplier
+    let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
+    gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
+    gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
+    // TODO add this : m._customBlock_Holes("JarCollectibleBonus", 23, 0) + (m._customBlock_Holes("JarCollectibleBonus", 30, 0)
+    hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+    hole.gambit.updateUnlockedBonuses();
 }
