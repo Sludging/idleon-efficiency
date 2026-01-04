@@ -49,7 +49,7 @@ export class GemStore extends Domain {
 
         gemData.forEach((data, index) => {
             if (data > 0) {
-                let purchase = gems.purchases.find(x => x.no == index);
+                const purchase = gems.purchases.find(x => x.no == index);
                 if (purchase) {
                     purchase.pucrhased = data;
                 }

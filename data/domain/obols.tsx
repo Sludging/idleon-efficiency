@@ -160,7 +160,7 @@ export class ObolsData extends Domain {
             const playerObolArray: Obol[] = [];
             const playerStats = new ObolStats();
             playerObols.forEach((obol, obolIndex) => {
-                let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
+                const itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
                 if (!obol.includes("Locked") && obol != "Blank" && Object.keys(playerObolsMods).includes(obolIndex.toString())) {
                     itemInfo.addStone(playerObolsMods[obolIndex]);
                 }
@@ -177,7 +177,7 @@ export class ObolsData extends Domain {
         const familyObols = data.get(`ObolEqO1`) as string[];
         const familyObolsMods = data.get('ObolEqMAPz1') as Record<number, StoneProps>;
         familyObols.forEach((obol, obolIndex) => {
-            let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
+            const itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
             if (!obol.includes("Locked") && obol != "Blank" && Object.keys(familyObolsMods).includes(obolIndex.toString())) {
                 itemInfo.addStone(familyObolsMods[obolIndex]);
             }
@@ -195,7 +195,7 @@ export class ObolsData extends Domain {
                 if (key == "length") {  // ignore the length key, we don't care.
                     return;
                 }
-                let itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
+                const itemInfo = allItems.find(item => item.internalName == obol)?.duplicate() ?? Item.emptyItem(obol);
                 if (!obol.includes("Locked") && obol != "Blank" && (tabModifications && Object.keys(tabModifications).includes(obolIndex.toString()))) {
                     itemInfo.addStone(tabModifications[obolIndex]);
                 }

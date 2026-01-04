@@ -167,7 +167,7 @@ export class Bubble {
     }
 
     getMaterialCost = (cauldCostReduxLvl: number = 0, undevelopedCostsBubbleLevel: number = 0, bubbleCostVialLvl: number = 0, bubbleBargainLvl: number = 0, bubbleMultClassLvl: number = 0, shopBargainBought: number = 0, hasAchievement: boolean = false, bubbleNewMultiLevel: number = 0, vialMultiplier: number = 1): Map<Item, number> => {
-        let toReturn = new Map<Item, number>();
+        const toReturn = new Map<Item, number>();
         this.requirements.forEach((req) => {
             toReturn.set(req, calcBubbleMatCost(this.level, this.bubbleIndex, req.count, req.internalName.includes("Liquid"), cauldCostReduxLvl, undevelopedCostsBubbleLevel, bubbleCostVialLvl, bubbleBargainLvl, bubbleMultClassLvl, shopBargainBought, hasAchievement, bubbleNewMultiLevel, vialMultiplier, req.internalName == "Bits"))
         })
@@ -184,7 +184,7 @@ export class Bubble {
     }
 
     getBonusText = (bonus: number = this.getBonus(true)): string => {
-        let titleText = this.description.replace(/{/g, nFormatter(bonus));
+        const titleText = this.description.replace(/{/g, nFormatter(bonus));
         return handleToolBubbles(titleText, this.name);
     }
 
@@ -424,7 +424,7 @@ export class Vial {
     }
 
     getMaterialCost = (): Map<Item, number> => {
-        let toReturn = new Map<Item, number>();
+        const toReturn = new Map<Item, number>();
         this.requirements.forEach((req) => {
             if (req.internalName.includes("Liquid")) {
                 toReturn.set(req, 3 * this.level)
@@ -787,7 +787,7 @@ const handleCauldron = (cauldronData: Map<string, number>, index: number, alchem
         }
     });
 
-    for (let boost in CauldronBoostIndex) {
+    for (const boost in CauldronBoostIndex) {
         // ignore the keys from the enum
         if (isNaN(parseInt(boost))) {
             continue;
@@ -797,7 +797,7 @@ const handleCauldron = (cauldronData: Map<string, number>, index: number, alchem
 }
 
 const handleVial = (vialData: Map<string, number>, alchemy: Alchemy) => {
-    for (let [vial, level] of Object.entries(vialData)) {
+    for (const [vial, level] of Object.entries(vialData)) {
         if (vial !== "length" && parseInt(vial) < alchemy.vials.length) {
             try {
                 alchemy.vials[parseInt(vial)].level = level;

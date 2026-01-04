@@ -363,7 +363,7 @@ export class Player {
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
         family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number,
         zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, beanstalkingItem: Food | undefined) => {
-        let gearBonus = this.getMiscBonusFromGear("Money");
+        const gearBonus = this.getMiscBonusFromGear("Money");
         const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
@@ -680,11 +680,11 @@ const parseEquipment = (
     player: Player,
     allItems: Item[]
 ) => {
-    let playerEquipment = new PlayerEquipment();
+    const playerEquipment = new PlayerEquipment();
     equipment?.forEach((data, equipIndex) => {
         if (equipIndex == 0) { // armor 
             Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
+                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
                 if (theItem) {
                     theItem.addStone(equipStones[Number(location)])
                 }
@@ -696,7 +696,7 @@ const parseEquipment = (
         }
         if (equipIndex == 1) { // tools
             Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                let theItem = allItems.find((item) => item.internalName == name)?.duplicate();
+                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
                 if (theItem) {
                     theItem.addStone(toolStones[Number(location)])
                 }
@@ -821,9 +821,9 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     
     players.forEach(player => {
         player.talentPoints = [];
-        var talentDL: number[] = [];
-        var talentDLbonus: number[] = [];
-        var talentDN4 = -3
+        const talentDL: number[] = [];
+        const talentDLbonus: number[] = [];
+        let talentDN4 = -3
 
         const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping, 
                                             SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching, 
@@ -857,7 +857,7 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
         talentDLbonus.push(account.talentPointsOwned[4] ?? 0);
         talentDLbonus.push(account.talentPointsOwned[5] ?? 0);
 
-        var bubbleBonus = 0;
+        let bubbleBonus = 0;
         switch (true) {
             case player.getBaseClass() == ClassIndex.Archer:
             case player.getBaseClass() == ClassIndex.Beginner:
@@ -880,7 +880,7 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
                 break;
         }  
 
-        for (var f = 0; 4 > f; f++) {
+        for (let f = 0; 4 > f; f++) {
                 talentDLbonus[f] += bubbleBonus;       
         }
 

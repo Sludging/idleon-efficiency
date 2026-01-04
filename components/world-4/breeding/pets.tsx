@@ -409,7 +409,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
             return [];
         }
         // Start with a base list of all pets
-        let pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
+        const pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
 
         // Now we sort
         return pets?.sort((pet1, pet2) => {

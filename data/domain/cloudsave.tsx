@@ -4,7 +4,7 @@ export class Cloudsave {
     fields: Map<string, any> = new Map();
     constructor() {}
   
-    addField = (key: string, data: Object | undefined) => {
+    addField = (key: string, data: object | undefined) => {
         this.fields.set(key, data);
     }
 

@@ -91,7 +91,7 @@ export class CardSet {
     }
 
     static getSetID = (bonus: string): number => {
-        var ID = 0 as number;
+        let ID = 0 as number;
         // Find the set ID corresponding to the bonus effect of the set
         Object.entries(IDforCardSETbonus).some(([setID, setData], index) => {
             if (ID == 0 && setData.data.bonus == bonus.replaceAll(' ', '_')) {

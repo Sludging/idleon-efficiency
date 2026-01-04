@@ -232,7 +232,7 @@ export class Schematic {
     }
 
     getDescription(): string {
-        let description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
+        const description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
         
         // Special dynamic placeholders would need additional logic
         // For now we have placeholder N/A for all dynamic placeholders

@@ -130,7 +130,7 @@ export class Card {
     }
 
     getBonusID = (): number => {
-        var ID = 0 as number;
+        let ID = 0 as number;
         // Find the bonus ID corresponding to the bonus effect of the card
         Object.entries(IDforCardBonus).some(([bonusID, bonusText], index) => {
             if (ID == 0 && bonusText == this.data.effect.replaceAll(' ', '_')) {

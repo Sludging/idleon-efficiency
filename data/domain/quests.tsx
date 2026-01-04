@@ -62,7 +62,7 @@ export class NPC {
     }
 
     static fromBase(data: NpcBase[]): Record<string, NPC> {
-        var toReturn: Record<string, NPC> = {};
+        const toReturn: Record<string, NPC> = {};
         data.forEach(npc => {
             toReturn[npc.id] = new NPC(npc.id.replace(" (NPC)", ""), npc.data);
         });

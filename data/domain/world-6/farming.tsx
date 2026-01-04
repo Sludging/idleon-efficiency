@@ -113,7 +113,7 @@ export class MarketUpgrade {
     constructor(public index: number, public data: MarketInfoModel) {}
 
     getTotalCostUntilLevel = (currentLevel: number = this.level, targetLevel: number = this.data.maxLvl): MarketUpgradeCost[] => {
-        let costs: MarketUpgradeCost[] = [];
+        const costs: MarketUpgradeCost[] = [];
 
         for (let i = currentLevel; i < targetLevel; i++) {
             const cost = this.getNextLevelCost(i);
@@ -521,7 +521,7 @@ export class Farming extends Domain {
 
     parse(data: Map<string, any>): void {
         const farming = data.get(this.dataKey) as Farming;
-        const cropsData = data.get("FarmCrop") as Object;
+        const cropsData = data.get("FarmCrop") as object;
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
@@ -575,7 +575,7 @@ export class Farming extends Domain {
 
         farming.farmPlots = [];
         plotsData.forEach((plotInfo, index) => {
-            let plot: Plot = new Plot(index);            
+            const plot: Plot = new Plot(index);            
             // If seedIndex = -1 then the plot is empty, so no more information are needed (all other plotInfo should be at 0 anyway in this case)
             plot.seed = farming.seeds.find(seed => seed.index == plotInfo[0]) ?? undefined;
             if (plot.seed) {
@@ -787,7 +787,7 @@ export const updateFarmingLevel = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const players = data.get("players") as Player[];
 
-    let levels: number[] = [];
+    const levels: number[] = [];
     players.forEach(player => {
         levels.push(player.skills.get(SkillsIndex.Farming)?.level ?? 0);
     })

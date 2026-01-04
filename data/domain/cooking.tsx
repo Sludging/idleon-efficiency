@@ -46,11 +46,11 @@ function* numericCombinations(n: number, r: number, loc: number[] = []): Iterabl
         yield loc;
         return;
     }
-    for (let next of range(idx ? last(loc) + 1 : 0, n - r + idx)) { yield* numericCombinations(n, r, loc.concat(next)); }
+    for (const next of range(idx ? last(loc) + 1 : 0, n - r + idx)) { yield* numericCombinations(n, r, loc.concat(next)); }
 }
 
 function* combinations<T>(arr: T[], r: number) {
-    for (let idxs of numericCombinations(arr.length, r)) { yield idxs.map(i => arr[i]); }
+    for (const idxs of numericCombinations(arr.length, r)) { yield idxs.map(i => arr[i]); }
 }
 
 export class Meal {
@@ -144,7 +144,7 @@ export class Meal {
 
     getCostsTillDiamond = () => {
         let totalCost = 0;
-        for (let level of range(this.level, 10)) {
+        for (const level of range(this.level, 10)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -152,7 +152,7 @@ export class Meal {
 
     getCostsTillPurple = () => {
         let totalCost = 0;
-        for (let level of range(this.level, 15)) {
+        for (const level of range(this.level, 15)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -160,7 +160,7 @@ export class Meal {
 
     getCostsTillVoid = () => {
         let totalCost = 0;
-        for (let level of range(this.level, 21)) {
+        for (const level of range(this.level, 21)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -168,7 +168,7 @@ export class Meal {
 
     getCostsTillThirty = () => {
         let totalCost = 0;
-        for (let level of range(this.level, 29)) {
+        for (const level of range(this.level, 29)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -176,7 +176,7 @@ export class Meal {
 
     getCostsTillMaxLevel = () => {
         let totalCost = 0;
-        for (let level of range(this.level, this.maxLevel-1)) {
+        for (const level of range(this.level, this.maxLevel-1)) {
             totalCost += this.getMealLevelCost(level);
         }
         return totalCost;
@@ -430,7 +430,7 @@ export class Cooking extends Domain {
     }
 
     getMealsFromSpiceValues = (valueOfSpices: number[]): number[] => {
-        let possibleMeals: number[] = [];
+        const possibleMeals: number[] = [];
         // Each spice value is also a possible meal.
         valueOfSpices.forEach(value => {
             if (!possibleMeals.includes(value)) {
@@ -499,7 +499,7 @@ export class Cooking extends Domain {
     updateNoMealLeftBehind = (bonusActivated: boolean) => {
         this.meals.forEach(meal => meal.noMealLeftBehindAffected = false);
         if (bonusActivated) {
-            let mealToUpgrade = 1;
+            const mealToUpgrade = 1;
     
             const sortedMeals = this.meals.filter(meal => meal.level > 5 && meal.level < meal.maxLevel).sort((meal1, meal2) => {
                 // If same level, then go with higher meal index.
@@ -568,13 +568,13 @@ export class Cooking extends Domain {
 const populateDiscovery = (cooking: Cooking) => {
     const mealsThatCanBeDiscovered = cooking.meals.length;
 
-    let availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
+    const availableValues = cooking.spicesToValues(cooking.spices.map((spice, index) => spice != -1 ? index : -1).filter(value => value != -1));
 
     const outputlucktime = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 50000000000000000 * 2 / .004)
     const outputLuck = [...Array(mealsThatCanBeDiscovered)].map((_, index) => 0)
-    for (let len of range(0, 3)) {
+    for (const len of range(0, 3)) {
         const possibleCombinations = combinations(availableValues, len + 1);
-        for (let combination of possibleCombinations) {
+        for (const combination of possibleCombinations) {
             const possibleMeals = cooking.getMealsFromSpiceValues(combination);
             const time = cooking.getRecipeTime(possibleMeals);
             const firstKitchenLuck = cooking.kitchens[0].recipeLuck;
@@ -583,7 +583,7 @@ const populateDiscovery = (cooking: Cooking) => {
                 if (meal < mealsThatCanBeDiscovered) {
                     let notOdds = 1;
                     // Get the chance to cook this meal based on it's index in the possible meal array
-                    let mealChance = Math.min(mealLuckValues[index] * firstKitchenLuck, 1);
+                    const mealChance = Math.min(mealLuckValues[index] * firstKitchenLuck, 1);
                     // If we have more then one possible meal, calculate the chance of hitting the other meals.
                     if (possibleMeals.length > 1) {
                         for (let reverseIndex = possibleMeals.length; reverseIndex > index; reverseIndex--) {

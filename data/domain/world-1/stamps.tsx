@@ -157,9 +157,9 @@ export class Stamp {
         const upperLimit = Math.min(maxCarryLevel, nextTier + this.data.upgradeInterval * 2); // Show at most 3 tiers + max carry level
 
         // Calculate the next 2 tiers (using for loop so can break early).
-        for (var tier = nextTier; tier <= upperLimit; tier += this.data.upgradeInterval) {
+        for (let tier = nextTier; tier <= upperLimit; tier += this.data.upgradeInterval) {
             // Start from 0 discount, find the minimum discount required to level this tier
-            for (var atomDiscount = (tier == nextTier ? currentAtomDiscount : 0); atomDiscount <= 90; atomDiscount = Math.min(90, atomDiscount + discountIncrement)) {
+            for (let atomDiscount = (tier == nextTier ? currentAtomDiscount : 0); atomDiscount <= 90; atomDiscount = Math.min(90, atomDiscount + discountIncrement)) {
                 this.atomDiscount = atomDiscount;
                 const tierCost = this.getMaterialCost(tier - this.data.upgradeInterval) // to reach this level, we only need to unlock the previous tier.
                 if (tierCost < this.maxCarryAmount) { // If we can carry this amount, we found the minimum required to reach this tier

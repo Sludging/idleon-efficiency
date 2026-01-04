@@ -56,7 +56,7 @@ export class Storage extends Domain {
         // Player storage data has no "persistence", so we reset the previous data.
         storage.playerStorage = [];
         range(0, charCount).forEach((_, index) => {
-            let playerInventory: Item[] = [];
+            const playerInventory: Item[] = [];
             const inventoryOrder: string[] = data.get(`InventoryOrder_${index}`);
             const inventoryQuantity: number[] = data.get(`ItemQTY_${index}`);
             const stoneData: Record<number, StoneProps> = data.get(`IMm_${index}`);

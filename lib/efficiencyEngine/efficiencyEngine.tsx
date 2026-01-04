@@ -98,8 +98,8 @@ export class EfficiencyEngine<T extends EfficiencyDomain> {
         const relevantUpgradeIds = calculator.getRelevantUpgradeIds(domain);
 
         // Create a working copy of the current state for simulation
-        let simulatedUpgrades = domain.upgrades.map(u => domain.copyUpgrade(u));
-        let simulatedResources = { ...domain.getResources() };
+        const simulatedUpgrades = domain.upgrades.map(u => domain.copyUpgrade(u));
+        const simulatedResources = { ...domain.getResources() };
         let simulatedValue = currentValue;
 
         // Find the next maxUpgrades most efficient upgrades to purchase in sequence

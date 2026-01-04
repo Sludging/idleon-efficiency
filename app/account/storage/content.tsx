@@ -41,7 +41,7 @@ function StorageDisplay() {
     }, [storage, typeFilter, subTypeFilter])
 
     const storageTypes = useMemo(() => {
-        let filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank") ?? [];
+        const filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank") ?? [];
         return Array.from(new Set(filteredItems.map(x => x.getArchType())));
     }, [storage])
 
@@ -50,7 +50,7 @@ function StorageDisplay() {
             return [];
         }
 
-        let filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank" && item.getArchType() == typeFilter) ?? [];
+        const filteredItems = storage?.chest.filter((item) => item.internalName != "LockedInvSpace" && item.internalName != "Blank" && item.getArchType() == typeFilter) ?? [];
         return Array.from(new Set(filteredItems.map(x => x.type)));
     }, [storage, typeFilter])
 

@@ -77,7 +77,7 @@ function Farming() {
         return false;
     }, [theData, farming])
 
-    let tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
+    const tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
     if (farming.canLevelLandRank) {
         tabsToShow.push("Land Rank");
     }

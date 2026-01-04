@@ -46,7 +46,7 @@ export const AdaptativeIconImage = ({ data, scale = 1, style }: { data: ImageDat
                 width={data.width * scale}
                 loading='eager'
                 onLoad={(e: any) => {
-                    let newData = data;
+                    const newData = data;
 
                     if (data.height == 0) {
                         if(data.width > 0) {
