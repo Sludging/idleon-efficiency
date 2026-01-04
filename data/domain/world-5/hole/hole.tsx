@@ -30,6 +30,7 @@ import { initHarpNotesRepo } from "../../data/HarpNotesRepo";
 import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 import { Gambit, GambitBonus, GambitLevel, GambitLevels } from "./gambit";
+import { Tesseract } from "../../tesseract";
 
 export class Villager {
     level: number = 0;
@@ -474,6 +475,7 @@ export class Monument {
     hours: number = 0;
     bonuses: MonumentBonus[] = [];  
     unlocks: MonumentUnlock[] = [];
+    highestRound: number = 0;
 
     constructor(
         public index: number,
@@ -490,12 +492,20 @@ export class Monument {
     }
 }
 
+export class WisdomMonument extends Monument {
+    highestPureMemoryRound: number = 0;
+}
+
 export class Monuments {
     monuments: Record<string, Monument> = {}
     constructor() {
         const data = initMonumentRepo();
         data.forEach(monument => {
-            this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            if (monument.data.name == "Wisdom") {
+                this.monuments[monument.data.name] = new WisdomMonument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            } else {
+                this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            }
         })
     }
 }
@@ -751,6 +761,7 @@ export class Hole extends Domain {
     parse(data: Map<string, any>): void {
         const hole = data.get(this.getDataKey()) as Hole;
         const holeData = data.get("Holes") as number[][];
+        const optionListAccount = data.get("OptLacc") as number[];
 
         // Old accounts won't have data, so exit early.
         if (!holeData || holeData.length == 0) {
@@ -829,12 +840,16 @@ export class Hole extends Domain {
         // Monument Jazz
         const braveryMonument = hole.monuments.monuments["Bravery"];
         braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
+        braveryMonument.highestRound = holeData[11][73] || 0;
 
         const justiceMonument = hole.monuments.monuments["Justice"];
         justiceMonument.hours = holeData[14][2 * justiceMonument.index] || 0;
+        justiceMonument.highestRound = holeData[11][74] || 0;
             
-        const wisdomMonument = hole.monuments.monuments["Wisdom"];
+        const wisdomMonument = hole.monuments.monuments["Wisdom"] as WisdomMonument;
         wisdomMonument.hours = holeData[14][2 * wisdomMonument.index] || 0;
+        wisdomMonument.highestRound = holeData[11][75] || 0;
+        wisdomMonument.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
 
         [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
             monument.unlocks.forEach(unlock => {
@@ -880,12 +895,12 @@ export const updateHole = (data: Map<string, any>) => {
     const tome = data.get("tome") as Tome;
     const farming = data.get("farming") as Farming;
     const deathnote = data.get("deathnote") as Deathnote;
+    const tesseract = data.get("tesseract") as Tesseract;
 
     // Update measurements with various cross domain data
     hole.measurements.forEach(measurement => {
         measurement.slabItems = slab.rawObtainedCount;
         measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
-        // TODO: Tome score isn't correct right now, need to update it.
         measurement.tomeScore = tome.getHighestScore();
         measurement.cropsCount = farming.discoveredCrops;
         measurement.accountLevel = tome.totalAccountLevel;
