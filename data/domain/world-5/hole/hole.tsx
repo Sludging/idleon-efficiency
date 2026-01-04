@@ -675,6 +675,9 @@ export class Lamp {
     }
 }
 
+export class DawgDen {
+    bestScore: number = 0;
+}
 
 export class Hole extends Domain {
     // Raw
@@ -692,7 +695,9 @@ export class Hole extends Domain {
     resourceCavrens = new ResourceCavrens();
     harp: Harp = new Harp();
     lamp: Lamp = new Lamp();
+    dawgDen: DawgDen = new DawgDen();
     gambit: Gambit = new Gambit();
+    ownedOpals: number = 0;
     // TODO: 
     // Well - DONE?
     // Caverns
@@ -861,6 +866,10 @@ export class Hole extends Domain {
         hole.well.parse(hole, holeData);
         // TODO: Finish this, missing information
         hole.harp.parse(holeData);
+
+        hole.dawgDen.bestScore = holeData[11][8] || 0;
+
+        this.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
     }
 }
 
