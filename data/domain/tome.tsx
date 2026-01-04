@@ -119,25 +119,25 @@ export class TomeLine {
 
         switch (this.index) {
             // Big values
-            case 8:
             case 9:
-            case 13:
+            case 10:
             case 14:
-            case 31:
+            case 15:
             case 32:
             case 33:
             case 34:
             case 35:
-            case 46:
-            case 53:
-            case 61:
-            case 64:
-            case 66:
-            case 78:
+            case 36:
+            case 47:
+            case 54:
+            case 62:
+            case 65:
+            case 67:
+            case 79:
                 return nFormatter(this.currentValues[playerIndex]);
             // Not so big values but with lots of decimals and wanna keep a bit of it
-            case 16:
-            case 18:
+            case 17:
+            case 19:
                 return (Math.round(100 * this.currentValues[playerIndex]) / 100).toString();
             default:
                 return this.currentValues[playerIndex].toString();

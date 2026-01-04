@@ -6,7 +6,7 @@ export class TomeBase { constructor(public index: number, public data: TomeModel
 
 
 export const initTomeRepo = () => {
-    return [   
+    return [    
         new TomeBase(0, <TomeModel>{
                 "name": "Stamp Total LV",
                 "keyQty": 10000,
