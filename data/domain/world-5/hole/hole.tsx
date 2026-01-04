@@ -886,13 +886,24 @@ export class Hole extends Domain {
 
         hole.dawgDen.bestScore = holeData[11][8] || 0;
 
-        this.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
+        hole.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
 
-        // TODO get data for gambit
+        // Gambit
+        hole.gambit.challenges.forEach(challenge => {
+            challenge.maxTime = holeData[11][challenge.index + 65] || 0;
+        });
 
-        // TODO get data for jar
-        /*if ("JarTypesOwned" == d)
-                    return Math.round(c.asNumber(a.engine.getGameAttribute("Holes")[11][37]));*/
+        // Jar
+        const ownedJars = holeData[11][37] || 0;
+        hole.jar.jarTypes.forEach(jar => {
+            jar.unlocked = ownedJars >= jar.index;
+        });
+        const jarBonusesLevels = holeData[24] as number[];
+        this.jar.jarBonuses.forEach(bonus => {
+            if (bonus.index < jarBonusesLevels.length) {
+                bonus.level = jarBonusesLevels[bonus.index];
+            }
+        });
     }
 }
 
