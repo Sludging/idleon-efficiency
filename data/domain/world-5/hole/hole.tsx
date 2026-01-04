@@ -29,7 +29,7 @@ import { initBellBonusRepo } from "../../data/BellBonusRepo";
 import { initHarpNotesRepo } from "../../data/HarpNotesRepo";
 import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
-import { Gambit, GambitBonus, GambitLevel, GambitLevels } from "./gambit";
+import { Gambit } from "./gambit";
 import { Tesseract } from "../../tesseract";
 import { Jar } from "./jar";
 

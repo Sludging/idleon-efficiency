@@ -1,5 +1,5 @@
-import { HoleJarBonusBase, initHoleJarBonusRepo } from "../../data/HoleJarBonusRepo";
-import { HoleJarBase, initHoleJarRepo } from "../../data/HoleJarRepo";
+import { initHoleJarBonusRepo } from "../../data/HoleJarBonusRepo";
+import { initHoleJarRepo } from "../../data/HoleJarRepo";
 import { HoleJarBonusModel } from "../../model/holeJarBonusModel";
 import { HoleJarModel } from "../../model/holeJarModel";
 
