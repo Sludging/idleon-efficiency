@@ -31,6 +31,7 @@ import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 import { Gambit, GambitBonus, GambitLevel, GambitLevels } from "./gambit";
 import { Tesseract } from "../../tesseract";
+import { Jar } from "./jar";
 
 export class Villager {
     level: number = 0;
@@ -706,6 +707,7 @@ export class Hole extends Domain {
     harp: Harp = new Harp();
     lamp: Lamp = new Lamp();
     dawgDen: DawgDen = new DawgDen();
+    jar: Jar = new Jar();
     gambit: Gambit = new Gambit();
     ownedOpals: number = 0;
     // TODO: 
@@ -885,6 +887,12 @@ export class Hole extends Domain {
         hole.dawgDen.bestScore = holeData[11][8] || 0;
 
         this.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
+
+        // TODO get data for gambit
+
+        // TODO get data for jar
+        /*if ("JarTypesOwned" == d)
+                    return Math.round(c.asNumber(a.engine.getGameAttribute("Holes")[11][37]));*/
     }
 }
 
@@ -910,11 +918,18 @@ export const updateHole = (data: Map<string, any>) => {
         measurement.deathnotePts = deathnote.getTotalRank();
     });
 
+    // Update jar bonuses from legendary talents
+    // TODO add legens talents bonuses to jar before gambit part
+    const legendTalentBonus = 1//(1 + m._customBlock_Thingies("LegendPTS_bonus", 29, 0) / 100)
+    hole.jar.jarBonuses.forEach(bonus => {
+        bonus.legendTalentBonus = legendTalentBonus;
+    });
+
     // Update the gambit multiplier
     let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
     gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
     gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
-    // TODO add this : m._customBlock_Holes("JarCollectibleBonus", 23, 0) + (m._customBlock_Holes("JarCollectibleBonus", 30, 0)
+    gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
     hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
     hole.gambit.updateUnlockedBonuses();
 }
