@@ -2,7 +2,7 @@ import { lavaLog, lavaLog2 } from "../../../utility";
 import { initGambitBonusRepo } from "../../data/GambitBonusRepo";
 import { GambitBonusModel } from "../../model/gambitBonusModel";
 
-export enum GambitLevelIndex {
+export enum GambitChallengeIndex {
     King = 0,
     Horse = 1,
     Bishop = 2,
@@ -11,34 +11,34 @@ export enum GambitLevelIndex {
     Pawn = 5
 }
 
-const gambitLevelMetadata = {
-    [GambitLevelIndex.King]: {
+const gambitChallengeMetadata = {
+    [GambitChallengeIndex.King]: {
         name: "King's Gambit",
         description: "Survive as long as you can...",
     },
-    [GambitLevelIndex.Horse]: {
+    [GambitChallengeIndex.Horse]: {
         name: "Horsey's Gambit",
         description: "You have but one HP...",
     },
-    [GambitLevelIndex.Bishop]: {
+    [GambitChallengeIndex.Bishop]: {
         name: "Bishop's Gambit",
         description: "Damage done to me is done to thee...",
     },  
-    [GambitLevelIndex.Queen]: {
+    [GambitChallengeIndex.Queen]: {
         name: "Queen's Gambit",
         description: "Jewels everywhere...",
     },
-    [GambitLevelIndex.Tower]: {
+    [GambitChallengeIndex.Tower]: {
         name: "Castle's Gambit",
         description: "One lane, one outcome...",
     },
-    [GambitLevelIndex.Pawn]: {
+    [GambitChallengeIndex.Pawn]: {
         name: "Noobs' Gambit",
         description: "I like the grey ones!!!",
     },
 }
 
-export class GambitLevel {
+export class GambitChallenge {
     maxTime: number = 0; // in seconds, will have decimals
 
     constructor(public index: number, public name: string, public description: string) { }
@@ -57,7 +57,7 @@ export class GambitLevel {
         let points = 100 * (this.maxTime + (3 * Math.floor(this.maxTime / 10) + 10 * Math.floor(this.maxTime / 60)));
         
         if (this.index != 0) {
-            // Levels which are not king get double points
+            // Challenges which are not king get double points
             return points * 2;
         }
 
@@ -65,10 +65,10 @@ export class GambitLevel {
     }
 }
 
-export class GambitLevels {
-    static getLevels(): GambitLevel[] {
-        return Object.entries(gambitLevelMetadata).map(([index, metadata]) => {
-            return new GambitLevel(Number(index), metadata.name, metadata.description);
+export class GambitChallenges {
+    static getChallenges(): GambitChallenge[] {
+        return Object.entries(gambitChallengeMetadata).map(([index, metadata]) => {
+            return new GambitChallenge(Number(index), metadata.name, metadata.description);
         });
     }
 }
@@ -103,7 +103,7 @@ export class GambitBonus {
 
 export class Gambit {
     bonuses: GambitBonus[] = [];
-    levels: GambitLevel[] = GambitLevels.getLevels();
+    challenges: GambitChallenge[] = GambitChallenges.getChallenges();
     gambitPointsMulti: number = 1;
 
     constructor() {
@@ -137,11 +137,11 @@ export class Gambit {
     }
 
     getGambitTotalTime(): number {
-        return this.levels.reduce((sum, level) => sum + level.maxTime, 0);
+        return this.challenges.reduce((sum, challenge) => sum + challenge.maxTime, 0);
     }
 
     getGambitTotalScore(): number {
-        return this.levels.reduce((sum, level) => level.getScoreValue(), 0) * this.gambitPointsMulti;
+        return this.challenges.reduce((sum, challenge) => challenge.getScoreValue(), 0) * this.gambitPointsMulti;
     }
 
     updateUnlockedBonuses() {
