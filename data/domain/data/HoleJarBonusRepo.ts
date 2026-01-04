@@ -3,7 +3,7 @@ import { HoleJarBonusModel } from "../model/holeJarBonusModel";
 export class HoleJarBonusBase { constructor(public index: number, public data: HoleJarBonusModel) { } }
 
 
-export const initHoleBuildingRepo = () => {
+export const initHoleJarBonusRepo = () => {
     return [
         new HoleJarBonusBase(0, <HoleJarBonusModel>{
             name: "ABNORMAL RUPIE",
