@@ -29,6 +29,9 @@ import { initBellBonusRepo } from "../../data/BellBonusRepo";
 import { initHarpNotesRepo } from "../../data/HarpNotesRepo";
 import { HarpStringModel } from "../../model/harpStringModel";
 import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
+import { Gambit } from "./gambit";
+import { Tesseract } from "../../tesseract";
+import { Jar } from "./jar";
 
 export class Villager {
     level: number = 0;
@@ -473,6 +476,7 @@ export class Monument {
     hours: number = 0;
     bonuses: MonumentBonus[] = [];  
     unlocks: MonumentUnlock[] = [];
+    highestRound: number = 0;
 
     constructor(
         public index: number,
@@ -489,12 +493,20 @@ export class Monument {
     }
 }
 
+export class WisdomMonument extends Monument {
+    highestPureMemoryRound: number = 0;
+}
+
 export class Monuments {
     monuments: Record<string, Monument> = {}
     constructor() {
         const data = initMonumentRepo();
         data.forEach(monument => {
-            this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            if (monument.data.name == "Wisdom") {
+                this.monuments[monument.data.name] = new WisdomMonument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            } else {
+                this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+            }
         })
     }
 }
@@ -674,6 +686,9 @@ export class Lamp {
     }
 }
 
+export class DawgDen {
+    bestScore: number = 0;
+}
 
 export class Hole extends Domain {
     // Raw
@@ -691,6 +706,10 @@ export class Hole extends Domain {
     resourceCavrens = new ResourceCavrens();
     harp: Harp = new Harp();
     lamp: Lamp = new Lamp();
+    dawgDen: DawgDen = new DawgDen();
+    jar: Jar = new Jar();
+    gambit: Gambit = new Gambit();
+    ownedOpals: number = 0;
     // TODO: 
     // Well - DONE?
     // Caverns
@@ -744,6 +763,7 @@ export class Hole extends Domain {
     parse(data: Map<string, any>): void {
         const hole = data.get(this.getDataKey()) as Hole;
         const holeData = data.get("Holes") as number[][];
+        const optionListAccount = data.get("OptLacc") as number[];
 
         // Old accounts won't have data, so exit early.
         if (!holeData || holeData.length == 0) {
@@ -822,12 +842,16 @@ export class Hole extends Domain {
         // Monument Jazz
         const braveryMonument = hole.monuments.monuments["Bravery"];
         braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
+        braveryMonument.highestRound = holeData[11][73] || 0;
 
         const justiceMonument = hole.monuments.monuments["Justice"];
         justiceMonument.hours = holeData[14][2 * justiceMonument.index] || 0;
+        justiceMonument.highestRound = holeData[11][74] || 0;
             
-        const wisdomMonument = hole.monuments.monuments["Wisdom"];
+        const wisdomMonument = hole.monuments.monuments["Wisdom"] as WisdomMonument;
         wisdomMonument.hours = holeData[14][2 * wisdomMonument.index] || 0;
+        wisdomMonument.highestRound = holeData[11][75] || 0;
+        wisdomMonument.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
 
         [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
             monument.unlocks.forEach(unlock => {
@@ -859,6 +883,27 @@ export class Hole extends Domain {
         hole.well.parse(hole, holeData);
         // TODO: Finish this, missing information
         hole.harp.parse(holeData);
+
+        hole.dawgDen.bestScore = holeData[11][8] || 0;
+
+        hole.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
+
+        // Gambit
+        hole.gambit.challenges.forEach(challenge => {
+            challenge.maxTime = holeData[11][challenge.index + 65] || 0;
+        });
+
+        // Jar
+        const ownedJars = holeData[11][37] || 0;
+        hole.jar.jarTypes.forEach(jar => {
+            jar.unlocked = ownedJars >= jar.index;
+        });
+        const jarBonusesLevels = holeData[24] as number[];
+        this.jar.jarBonuses.forEach(bonus => {
+            if (bonus.index < jarBonusesLevels.length) {
+                bonus.level = jarBonusesLevels[bonus.index];
+            }
+        });
     }
 }
 
@@ -869,12 +914,12 @@ export const updateHole = (data: Map<string, any>) => {
     const tome = data.get("tome") as Tome;
     const farming = data.get("farming") as Farming;
     const deathnote = data.get("deathnote") as Deathnote;
+    const tesseract = data.get("tesseract") as Tesseract;
 
     // Update measurements with various cross domain data
     hole.measurements.forEach(measurement => {
         measurement.slabItems = slab.rawObtainedCount;
         measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
-        // TODO: Tome score isn't correct right now, need to update it.
         measurement.tomeScore = tome.getHighestScore();
         measurement.cropsCount = farming.discoveredCrops;
         measurement.accountLevel = tome.totalAccountLevel;
@@ -883,4 +928,19 @@ export const updateHole = (data: Map<string, any>) => {
         // TODO: This doesn't work on load, investigate why.
         measurement.deathnotePts = deathnote.getTotalRank();
     });
+
+    // Update jar bonuses from legendary talents
+    // TODO add legens talents bonuses to jar before gambit part
+    const legendTalentBonus = 1//(1 + m._customBlock_Thingies("LegendPTS_bonus", 29, 0) / 100)
+    hole.jar.jarBonuses.forEach(bonus => {
+        bonus.legendTalentBonus = legendTalentBonus;
+    });
+
+    // Update the gambit multiplier
+    let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
+    gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
+    gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
+    gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
+    hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+    hole.gambit.updateUnlockedBonuses();
 }
