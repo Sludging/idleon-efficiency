@@ -6,6 +6,10 @@ export const lavaLog = (num: number) => {
     return Math.log(Math.max(num, 1)) / 2.30259;
 }
 
+export const lavaLog2 = (num: number) => {
+    return Math.log(Math.max(num, 1)) / Math.log(2)
+}
+
 export const lavaFunc = (func: string, level: number, x1: number, x2: number, roundResult: boolean = false) => {
     var result = 0;
     switch (func) {
