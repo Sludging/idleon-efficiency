@@ -74,7 +74,7 @@ export class TomeLine {
                 if (0 > this.currentValues[playerIndex]) {
                     return 0;
                 } else {
-                    return Math.pow(1.7 * this.currentValues[playerIndex] / (this.currentValues[playerIndex] + this.data.keyQty), .7);
+                    return Math.pow(1.7 * this.currentValues[playerIndex] / (Number(this.currentValues[playerIndex]) + this.data.keyQty), .7);
                 }
             case TomeScalingEnum.decayLog:
                 return 2.4 * lavaLog(this.currentValues[playerIndex]) / (2 * lavaLog(this.currentValues[playerIndex]) + this.data.keyQty);
@@ -86,6 +86,8 @@ export class TomeLine {
                 } else {
                     return Math.pow(1.2 * (6 * this.data.keyQty - this.currentValues[playerIndex]) / (7 * this.data.keyQty - this.currentValues[playerIndex]), 5);
                 }
+            case TomeScalingEnum.boundedDecay:
+                return Math.pow(2 * Math.min(this.data.keyQty, this.currentValues[playerIndex]) / (Math.min(this.data.keyQty, this.currentValues[playerIndex]) + this.data.keyQty), .7)
             default:
                 return 0;
         }
@@ -119,28 +121,33 @@ export class TomeLine {
 
         switch (this.index) {
             // Big values
-            case 9:
-            case 10:
+            case 8:
             case 14:
-            case 15:
+            case 31:
             case 32:
             case 33:
             case 34:
             case 35:
-            case 36:
-            case 47:
-            case 54:
-            case 62:
-            case 65:
-            case 67:
-            case 79:
+            case 61:
+            case 64:
+            case 78:
+            case 102:
                 return nFormatter(this.currentValues[playerIndex]);
             // Not so big values but with lots of decimals and wanna keep a bit of it
-            case 17:
-            case 19:
-                return (Math.round(100 * this.currentValues[playerIndex]) / 100).toString();
+            case 18:
+            case 66:
+                return nFormatter(Math.round(100 * this.currentValues[playerIndex]) / 100, "CommaNotation");
+            // Not so big values with lots of decimals and wanna round it to match in-game display
+            case 13:
+            case 16:
+            case 26:
+            case 46:
+            case 47:
+            case 53:
+            case 91:
+                return nFormatter(Math.round(this.currentValues[playerIndex]), "CommaNotation");
             default:
-                return this.currentValues[playerIndex].toString();
+                return nFormatter(this.currentValues[playerIndex], "CommaNotation");
         }
     }
 
@@ -305,17 +312,21 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
     const upgVault = data.get("upgradeVault") as UpgradeVault;
+    const hole = data.get("hole") as Hole;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
     var trophyCount: number = 0;
     var obolCount: number = 0;
+    var nametagCount: number = 0;
     slab.obtainableItems.forEach((item) => {
         if (item.obtained) {
             if (item.internalName.indexOf("Trophy") == 0) {
                 trophyCount++;
             } else if (item.internalName.indexOf("Obol") == 0) {
                 obolCount++;
+            } else if (item.internalName.indexOf("EquipmentNametag") == 0) {
+                nametagCount++;
             }
         }
     });
@@ -355,7 +366,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() : 0), 0);
 
     // Sum of highest level for each talent
-    // TODO: Rethink if rounding is correct, need to look at game code.
     const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + Math.round(talentMaxLevel), 0);
 
     // Sum of players Levels
@@ -383,6 +393,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalSigilsLevels = sigils.sigils.reduce((sum, sigil) => sum + (sigil.boostLevel + 1), 0);
 
     // Sum of best worship waves
+    // TODO : update worship to include the new totem
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
@@ -437,6 +448,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBoatLevels = sailing.boats.reduce((sum, boat) => sum + boat.lootUpgrades + boat.speedUpgrades, 0);
 
     // Number of artifact found
+    // TODO : update this once new status is added, result is 0 right now
     const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) =>
         artifact.status == ArtifactStatus.Obtained ? sum + 1
             : artifact.status == ArtifactStatus.Ancient ? sum + 2
@@ -462,6 +474,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalSummoningUpgradeLevels = summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
     // Sum of summoning victories
+    // TODO : update summoning to include the new color battles and upgrades
     const summoningVictories = summoning.summonBattles.getTotalVictories();
 
     // Number of Ninja floors unlocked
@@ -481,8 +494,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
         multiplyer *= i + 3;
     }
 
+    // Total of all summoning boss victories
+    // TODO once implemented
+    const totalSummoningBossesVictories = 0;
+
     // Number of Jade Emporium upgrades bought
     const jadeEmporiumUpgradesBought = sneaking.jadeUpgrades.filter(upgrade => upgrade.display && upgrade.purchased).length;
+
+    // Sum of all ninja upgrades levels
+    const totalNinjaUpgradeLevels = sneaking.sneakingUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
     // Sum of all minigame scores, including basket
     const totalMinigamesScores = account.minigameHighscores.reduce((sum, score) => sum + score, 0) + (optionListAccount[99] ?? 0);
@@ -493,8 +513,23 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Sum of all farming plots land rank
     const totalPlotRank = farming.farmPlots.reduce((sum, plot) => sum + plot.landRank, 0);
 
-    // SUm of all gold ball upgrade levels in arcade
+    // Sum of all gold ball upgrade levels in arcade
     const totalArcadeUpgradeLevel = arcade.bonuses.reduce((sum, bonus) => sum + bonus.level, 0);
+
+    // Sum of all gambit time from the Hole
+    const totalGambitTime = hole.gambit.getGambitTotalTime();
+
+    // Sum of digits of all ressources owned from the Hole
+    const totalDigitsHoleRessources = Object.entries(hole.resourceCavrens.cavrens).reduce((sum, [_, cavren]) => sum + Math.ceil(lavaLog(cavren.resourceExtracted)), 0);
+
+    // Sum of all villagers levels
+    const totalVillagersLevels = hole.villagers.reduce((sum, villager) => sum + villager.level, 0);
+
+    // Total of Layers Destroyed in The Hole ressources
+    const totalDestroyedRessourcesLayers = Object.entries(hole.resourceCavrens.cavrens).reduce((sum, [_, cavren]) => sum + cavren.layer, 0);
+
+    // Highest leveled Spelunker of the account
+    const highestSpelunkingLevel = Math.max(0, ...players.map(player => player.skills.get(SkillsIndex.Spelunking)?.level ?? 0));
 
     tome.totalAccountLevel = totalPlayersLevels;
     tome.lines.forEach(line => {
@@ -727,6 +762,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 55:
                 // Number of Onyx statues
+                // TODO : add the new statue type and fix this
                 for (var i = 0; i < statues.length; i++) {
                     line.updatePlayerCurrentValue((statues[i].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0), i);
                 }
@@ -834,6 +870,124 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 81:
                 // Bonus from Teh TOM, index 57 in upgrade vault.
                 line.updateAllPlayersCurrentValue(upgVault.bonuses.find(bonus => bonus.id == 57)?.getBonus(upgVault.bonuses) ?? 0);
+                break;
+            case 82:
+                // Total Gambit time (in seconds)
+                line.updateAllPlayersCurrentValue(totalGambitTime);
+                break;
+            case 83:
+                // Total digits of The Hole ressources
+                line.updateAllPlayersCurrentValue(totalDigitsHoleRessources);
+                break;
+            case 84:
+                // Total villagers levels
+                line.updateAllPlayersCurrentValue(totalVillagersLevels);
+                break;
+            case 85:
+                // Megafeathers from the Orion minigame
+                line.updateAllPlayersCurrentValue((optionListAccount[262] ?? 0));
+                break;
+            case 86:
+                // Megafish from the Poppy minigame
+                line.updateAllPlayersCurrentValue((optionListAccount[279] ?? 0));
+                break;
+            case 87:
+                // Best bravery monument round
+                line.updateAllPlayersCurrentValue(hole.monuments.monuments["Bravery"].highestRound);
+                break;
+            case 88:
+                // Best justice monument round
+                line.updateAllPlayersCurrentValue(hole.monuments.monuments["Justice"].highestRound);
+                break;
+            case 89:
+                // Best wisdom monument round
+                line.updateAllPlayersCurrentValue(hole.monuments.monuments["Wisdom"].highestRound);
+                break;
+            case 90:
+                // Best Deathbringer Max Damade in Wraith mode
+                line.updateAllPlayersCurrentValue((optionListAccount[356] ?? 0));
+                break;
+            case 91:
+                // Best Dawg Den score
+                line.updateAllPlayersCurrentValue(hole.dawgDen.bestScore);
+                break;
+            case 92:
+                // Total layers ressources destroyed in The Hole
+                line.updateAllPlayersCurrentValue(totalDestroyedRessourcesLayers);
+                break;
+            case 93:
+                // Total Opals found in The Hole
+                line.updateAllPlayersCurrentValue(hole.ownedOpals);
+                break;
+            case 94:
+                // Best Pure Memory Round Reached
+                line.updateAllPlayersCurrentValue((hole.monuments.monuments["Wisdom"] as WisdomMonument).highestPureMemoryRound);
+                break;
+            case 95:
+                // Current w6 boss kills (reset when you reset the bonuses)
+                line.updateAllPlayersCurrentValue(Math.round(optionListAccount[369] ?? 0));
+                break;
+            case 96:
+                // Total summoning boss victories
+                line.updateAllPlayersCurrentValue(totalSummoningBossesVictories);
+                break;
+            case 97:
+                // Total coral reef upgrades
+                // TODO : get the values once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 98:
+                // Deepest delve depth reach in a single run
+                // TODO : get the values once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 99:
+                // Total ninja knowledge upgrades levels
+                line.updateAllPlayersCurrentValue(totalNinjaUpgradeLevels);
+                break;
+            case 100:
+                // Best Windwalker Max Damage in Tempest Mode
+                line.updateAllPlayersCurrentValue(optionListAccount[445] ?? 0);
+                break;
+            case 101:
+                // Best Arcane Cultist Max Damage in Arcanist Mode
+                line.updateAllPlayersCurrentValue(optionListAccount[446] ?? 0);
+                break;
+            case 102:
+                // Biggest Haul in a single Delve
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 103:
+                // Total Spelunk Shop Upgrades LV
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 104:
+                // Total Spelunk Discoveries made
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 105:
+                // Highest leveled Spelunker
+                line.updateAllPlayersCurrentValue(highestSpelunkingLevel);
+                break;
+            case 106:
+                // Lava Dev Streams watched
+                line.updateAllPlayersCurrentValue(optionListAccount[443] ?? 0);
+                break;
+            case 107:
+                // Nametags found
+                line.updateAllPlayersCurrentValue(nametagCount);
+                break;
+            case 108:
+                // Megaflesh Earned from Bubba
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 109:
+                // Premium Hats Found
+                // TODO : add this once Hat rack from world 3 is implemented
+                line.updateAllPlayersCurrentValue(0);
                 break;
             default:
                 line.updateAllPlayersCurrentValue(0);
