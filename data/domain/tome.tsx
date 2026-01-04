@@ -38,6 +38,8 @@ import { Summoning } from './world-6/summoning';
 import { Arcade } from './arcade';
 import { Prayer } from './prayers';
 import { UpgradeVault } from './upgradeVault';
+import { Hole, WisdomMonument } from './world-5/hole/hole';
+import { SkillsIndex } from './SkillsIndex';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
