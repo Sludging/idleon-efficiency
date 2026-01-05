@@ -127,10 +127,13 @@ export class Gambit {
         const bonus = this.bonuses.find(bonus => bonus.index == index);
         if (bonus)
         {
-            switch(bonus.index) {
-
-            }
-            const value = bonus.getBonus(this.getGambitTotalTime());
+            // Bonuses increasing with Gambit Score
+            if (bonus.data.x1 == 1) {
+                const value = bonus.getBonus(this.getGambitTotalTime());
+                return bonus.data.name.replace('{', value.toString()).replace('}', (1 + value / 100).toString()+"x");
+            } else {
+                return bonus.data.name.replace('{', bonus.data.x0.toString()).replace('}', bonus.data.x0.toString()+"x");
+            }            
         }
 
         return "";
