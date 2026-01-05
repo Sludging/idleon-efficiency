@@ -68,7 +68,7 @@ export function BuildingsDisplay() {
             </Box>
             <Box wrap direction="row">
                 {buildingsToShow.map((building, index) => {
-                    let currentlyBuildingBorderProp: BorderType = building.currentlyBuilding && {size: '2px', style: 'solid', color: 'green'};
+                    const currentlyBuildingBorderProp: BorderType = building.currentlyBuilding && {size: '2px', style: 'solid', color: 'green'};
 
                     return (
                         <ShadowBox style={{ opacity: building.level > 0 ? 1 : 0.5 }} key={index} align="start" background="dark-1" pad="medium" justify="between" margin={{ bottom: 'small', right: 'small' }} direction="row" width="large" border={currentlyBuildingBorderProp}>

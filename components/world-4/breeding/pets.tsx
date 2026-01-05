@@ -7,7 +7,7 @@ import {
     SelectMultiple,
     Text,
 } from 'grommet'
-import { useState, useContext, useMemo, useEffect } from "react";
+import { useState, useContext, useMemo } from "react";
 import { Breeding as BreedingDomain, Pet } from "../../../data/domain/breeding";
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter, toTime, uniqueFilter, round } from "../../../data/utility";
@@ -23,32 +23,16 @@ import TextAndLabel from '../../base/TextAndLabel';
 export const PetsDisplay = () => {
     const [activeTab, setActiveTab] = useState<string>("All");
     const [silkRodeChip, setSilkrode] = useState(false);
-    const [starSignEquipped, setStarSignEquipped] = useState(false);
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
     const breeding = theData.get("breeding") as BreedingDomain;
 
-    const starSignUnlocked = useMemo(() => {
-        if (breeding && breeding.starSignInfinity) {
-            setStarSignEquipped(true);
-            return breeding.starSignUnlocked;
-        }
+    const starSignUnlocked = breeding.starSignUnlocked;
+    const starSignInfinity = breeding.starSignInfinity;
+    const [starSignEquipped, setStarSignEquipped] = useState(breeding.starSignInfinity);
 
-        return false;
-    }, [theData, breeding])
-
-    const starSignInfinity = useMemo(() => {
-        if (breeding) {
-            if (breeding.starSignInfinity) {
-                setStarSignEquipped(true);
-            }
-            return breeding.starSignInfinity;
-        }
-
-        return false;
-    }, [theData, breeding])
 
     return (
         <Box margin={{top: "small"}}>
@@ -205,8 +189,7 @@ function AllPetDisplay() {
 const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) => {
     const [sort, setSort] = useState<string>('');
     const [filter, setFilter] = useState<string[]>([]);
-    const [allFilterOptions, setAllFilterOptions] = useState<string[]>([]);
-    const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>([]);
+ 
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
@@ -218,21 +201,14 @@ const ShinyDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
     // our sort options are fixed, so just statically set them.
     const sortOptions = ["Level", "Least Time to Next Level"];
 
-    // Filter options are a bit more complicated to seem to require client side loading, so wrapped in useEffect.
-    useEffect(() => {
-        // If we are still loading, do nothing.
-        if (!breeding) {
-            return
-        }
-        const filterOptions = breeding.shinyBonuses?.map(bonus => {
-            return bonus.data.text.replaceAll('{', '');
-        }).filter(uniqueFilter);
+    const filterOptions = breeding.shinyBonuses?.map(bonus => {
+        return bonus.data.text.replaceAll('{', '');
+    }).filter(uniqueFilter);
 
-        // We keep two set of state, all available filter options and currently available ones.
-        // The reason for the 2nd one is to allow the search to remove filters based on user typing.
-        setAllFilterOptions(filterOptions);
-        setCurrentFilterOptions(filterOptions);
-    }, [theData, breeding]);
+    // We keep two set of state, all available filter options and currently available ones.
+    // The reason for the 2nd one is to allow the search to remove filters based on user typing.
+    const allFilterOptions = filterOptions;
+    const [currentFilterOptions, setCurrentFilterOptions] = useState<string[]>(filterOptions);
 
     const petsToShow = useMemo(() => {
         // If we are still loading, do nothing.
@@ -409,7 +385,7 @@ const BreedabilityDisplay = ({silkRodeChip, starSignEquipped} : {silkRodeChip: b
             return [];
         }
         // Start with a base list of all pets
-        let pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
+        const pets: Pet[] = breeding.basePets.filter(pet => pet.data.petId != "_");
 
         // Now we sort
         return pets?.sort((pet1, pet2) => {

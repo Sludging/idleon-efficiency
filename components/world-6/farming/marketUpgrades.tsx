@@ -38,8 +38,8 @@ export const MarketUpgradesDisplay = () => {
 
                                 // Cost for 5 more levels
                                 const futureLevelsCost = [upgrade.getNextLevelCost(upgrade.level + 1), upgrade.getNextLevelCost(upgrade.level + 2), upgrade.getNextLevelCost(upgrade.level + 3), upgrade.getNextLevelCost(upgrade.level + 4), upgrade.getNextLevelCost(upgrade.level + 5)];
-                                let canAffortFutureLevels: boolean[] = [];
-                                let canAffortFutureLevelsWithCollect: boolean[] = [];
+                                const canAffortFutureLevels: boolean[] = [];
+                                const canAffortFutureLevelsWithCollect: boolean[] = [];
                                 futureLevelsCost.forEach((cost, index) => {
                                     if (cost.cropQuantity > 0) {
                                         let currencyLeft = (farming.cropDepot.find(crop => crop.index == cost.cropId)?.quantityOwned ?? 0);
@@ -171,8 +171,8 @@ export const MarketUpgradesDisplay = () => {
 
                             // Cost for 5 more levels
                             const futureLevelsCost = [upgrade.getNextLevelCost(upgrade.level + 1), upgrade.getNextLevelCost(upgrade.level + 2), upgrade.getNextLevelCost(upgrade.level + 3), upgrade.getNextLevelCost(upgrade.level + 4), upgrade.getNextLevelCost(upgrade.level + 5)];
-                            let canAffortFutureLevels: boolean[] = [];
-                            let canAffortFutureLevelsWithCollect: boolean[] = [];
+                            const canAffortFutureLevels: boolean[] = [];
+                            const canAffortFutureLevelsWithCollect: boolean[] = [];
                             futureLevelsCost.forEach((cost, index) => {
                                 if (cost.cropQuantity > 0) {
                                     let currencyLeft = farming.magicBeansOwned;

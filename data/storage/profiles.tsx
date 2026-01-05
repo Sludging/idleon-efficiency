@@ -12,7 +12,7 @@ export class ProfileUploader {
     
     private gemKeys: string[] = ["GemsOwned", "ServerGemsReceived", "BundlesReceived", "GemsPacksPurchased", "ServerGems", "CYGems"];
     private cleanGemData = async (data: Map<string, any>) => {
-        let toRemove = this.gemKeys;
+        const toRemove = this.gemKeys;
         if (data.has("BundlesReceived")) {
             toRemove.push(...Object.keys(JSON.parse(data.get("BundlesReceived"))))
         }

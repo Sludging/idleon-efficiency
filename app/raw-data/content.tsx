@@ -3,18 +3,41 @@
 import {
     Box, Button, Text, Spinner
 } from 'grommet'
-import { useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
-    const [rawData, setRawData] = useState<any>();
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(true);
     const { theData, lastUpdated, dataStatus } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })
     ));
+
+    const isLoading = [DataStatus.Init, DataStatus.Loading].includes(dataStatus);
+
+    const rawData = useMemo(() => {
+        if (!theData) {
+            return undefined;
+        }
+
+        // This is very ugly but I don't really want to overthink this.
+        const rawDataElement = theData.get("rawData");
+        if (!rawDataElement) {
+            return undefined;
+        }
+
+        const cleanRaw = JSON.parse(JSON.stringify(rawDataElement));
+        if (!cleanRaw) {
+            return undefined;
+        }
+
+        cleanRaw["playerNames"] = theData.get("playerNames");
+        cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
+        cleanRaw["servervars"] = theData.get("servervars");
+
+        return cleanRaw;
+    }, [theData, lastUpdated]);
 
     const copyToClipboard = () => {
         if (!navigator || !navigator.clipboard) {
@@ -32,30 +55,6 @@ function RawData() {
         return navigator.clipboard.writeText(JSON.stringify(rawData, null, 2));        
     }
 
-    useEffect(() => {
-        setIsLoading([DataStatus.Init, DataStatus.Loading].includes(dataStatus));
-
-        if (!theData) {
-            return;
-        }
-
-        // This is very ugly but I don't really want to overthink this.
-        const rawDataElement = theData.get("rawData");
-        if (!rawDataElement) {
-            return;
-        }
-
-        const cleanRaw = JSON.parse(JSON.stringify(rawDataElement));
-        if (!cleanRaw) {
-            return;
-        }
-
-        cleanRaw["playerNames"] = theData.get("playerNames");
-        cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
-        cleanRaw["servervars"] = theData.get("servervars");
-
-        setRawData(cleanRaw);
-    }, [theData, lastUpdated]);
     return (
         <Box align="center" pad="medium">
             {isLoading && (

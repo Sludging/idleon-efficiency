@@ -18,7 +18,7 @@ import { Worship } from "./worship";
 import { Storage } from "./storage";
 import { SummonEssenceColor, Summoning } from "./world-6/summoning";
 import { Divinity } from "./divinity";
-import { Companion, Companions } from './companions';
+import { Companion } from './companions';
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -172,7 +172,7 @@ export class PrayerAlert extends PlayerAlert {
 }
 
 export class SneakingLevelReady extends PlayerAlert {
-    constructor(player: Player, talent: Talent) {
+    constructor(player: Player, _: Talent) {
         super(player, AlertType.Sneaking);
         this.title = "Connect this player to increase Sneaking level";
         this.icon = Skilling.getSkillImageData(SkillsIndex.Sneaking);
@@ -283,11 +283,11 @@ export class Alerts extends Domain {
         return []
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
-    parse(data: Map<string, any>): void {
+    parse(_: Map<string, any>): void {
         return;
     }
 }

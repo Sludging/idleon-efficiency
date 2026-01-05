@@ -39,7 +39,7 @@ export class Statue {
             }
         }
         catch (e) {
-            console.debug("Failed parsing statue number");
+            console.debug("Failed parsing statue number", e);
         }
     }
 
@@ -141,7 +141,7 @@ export class Statues extends Domain {
             { key: `StuG`, perPlayer: false, default: [] },
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], charCount: number) {
         return [...Array(charCount)].map((_, pIndex) => new PlayerStatues(pIndex));
     }
     parse(data: Map<string, any>): void {

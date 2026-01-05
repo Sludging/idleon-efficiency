@@ -1,4 +1,4 @@
-import { range, secondsSinceUpdate } from "../utility";
+import { range } from "../utility";
 import { Achievement } from "./achievements";
 import { Alchemy } from "./alchemy";
 import { AtomCollider, CarbonAtom } from "./atomCollider";
@@ -64,7 +64,7 @@ export class Construction extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.buildings = Building.fromBase(initBuildingRepo());
         return this;
     }
@@ -176,7 +176,7 @@ export const updateConstruction = (data: Map<string, any>) => {
 
         building.buildPercentage = Math.min(Math.round((building.currentXP * 100) / building.getBuildCost()), 100);
 
-        building.upgradable = building.getLevelCosts(building.level, costCruncher).filter((costData, index) => {
+        building.upgradable = building.getLevelCosts(building.level, costCruncher).filter((costData, _) => {
             const amountInStorage = storage?.amountInStorage(costData.item) ?? 0;
             if (amountInStorage >= costData.quantity) {
                 return true;

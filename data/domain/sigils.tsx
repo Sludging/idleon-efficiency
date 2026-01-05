@@ -64,7 +64,7 @@ export class Sigils extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.sigils = Sigil.fromBase(initSigilRepo());
 
         return this;
@@ -84,7 +84,7 @@ export class Sigils extends Domain {
         sigils.sigils.forEach(sigil => sigil.activePlayers = 0);
         
         const jobsThatMatter = cauldronJobs1.slice(0, 11); // TODO: Change this to 11 when Lava fixes the bug that player 10 isn't helpful.
-        jobsThatMatter.forEach((job, playerIndex) => {
+        jobsThatMatter.forEach((job, _) => {
             const sigilIndex = Math.round(job) - 100;
             if (sigilIndex > 0) {
                 sigils.sigils[sigilIndex].activePlayers += 1;

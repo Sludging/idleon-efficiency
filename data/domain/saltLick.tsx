@@ -27,7 +27,7 @@ export class SaltLick extends Domain {
             {key: "SaltLick", perPlayer: false, default: []}
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.bonuses = SaltLickBonus.fromBase(initSaltLickRepo());
         return this;
     }

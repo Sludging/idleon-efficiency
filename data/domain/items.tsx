@@ -269,7 +269,7 @@ export class Item {
                 return;
             }
 
-            let matchingStat = this.itemStats.find((stat) => stat.stoneName == key);
+            const matchingStat = this.itemStats.find((stat) => stat.stoneName == key);
             if (matchingStat) {
                 matchingStat.stone = asNumber;
             }

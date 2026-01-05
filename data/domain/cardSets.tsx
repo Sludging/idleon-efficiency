@@ -1,5 +1,4 @@
 import { Card } from "./cards";
-import { NumberMap } from "../maps";
 import { ImageData } from "./imageData";
 import { CardSetBase } from "./data/CardSetRepo";
 import { initCardSetBonusRepo } from "./data/CardSetBonusRepo";
@@ -91,9 +90,9 @@ export class CardSet {
     }
 
     static getSetID = (bonus: string): number => {
-        var ID = 0 as number;
+        let ID = 0 as number;
         // Find the set ID corresponding to the bonus effect of the set
-        Object.entries(IDforCardSETbonus).some(([setID, setData], index) => {
+        Object.entries(IDforCardSETbonus).some(([setID, setData], _) => {
             if (ID == 0 && setData.data.bonus == bonus.replaceAll(' ', '_')) {
                 ID = parseInt(setID, 10);
                 return true;

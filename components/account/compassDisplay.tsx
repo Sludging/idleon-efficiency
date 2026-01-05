@@ -4,7 +4,6 @@ import {
     Box,
     Text,
     Grid,
-    Button,
 } from "grommet";
 import { useMemo, useState } from "react";
 import ShadowBox from "../base/ShadowBox";
@@ -13,7 +12,6 @@ import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import IconImage from "../base/IconImage";
 import { Compass, CompassUpgrade, DustType } from "../../data/domain/compass";
-import React from "react";
 import { EfficiencyAnalysis } from "./shared/EfficiencyAnalysis";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
 import { EfficiencyUpgradeTable } from "./shared/EfficiencyUpgradeTable";

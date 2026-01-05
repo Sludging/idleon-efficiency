@@ -5,7 +5,7 @@ import { EfficiencyDomain, EfficiencyCalculator, EfficiencyUpgrade } from "./eff
 export class CheapestPathCalculator<T extends EfficiencyDomain> implements EfficiencyCalculator<T> {
     name = "Cheapest Path";
 
-    calculateValueWithUpgrade(domain: T, simulatedUpgrades: EfficiencyUpgrade[], upgradeId: number, simulatedResources: Record<number, number>): number {
+    calculateValueWithUpgrade(_domain: T, simulatedUpgrades: EfficiencyUpgrade[], _upgradeId: number, _simulatedResources: Record<number, number>): number {
         // When upgrading all we are doing is increasing our total level by 1.
         return simulatedUpgrades.reduce((sum, upgrade) => sum + upgrade.getLevel(), 0) + 1;
     }
@@ -23,10 +23,10 @@ export class CheapestPathCalculator<T extends EfficiencyDomain> implements Effic
     }
     
     calculateValueIncrease(
-        domain: T,
-        simulatedUpgrades: EfficiencyUpgrade[],
-        upgradeId: number,
-        simulatedResources: number[]
+        _domain: T,
+        _simulatedUpgrades: EfficiencyUpgrade[],
+        _upgradeId: number,
+        _simulatedResources: number[]
     ): number {
         // Each upgrade level always contributes exactly 1 level toward unlock
         return 1;

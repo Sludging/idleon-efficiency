@@ -81,5 +81,5 @@ export function useUpgradeTableData<T extends UpgradeTableData>(
         });
 
         return data;
-    }, [upgrades, filters, resourceFilterKey]);
+    }, [upgrades, filters, resourceFilterKey, pathFilterKey]);
 } 

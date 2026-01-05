@@ -70,7 +70,7 @@ export class Prayers extends Domain {
             { key: "PrayOwned", default: [], perPlayer: false},
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return Prayer.fromBase(initPrayerRepo());
     }
     parse(data: Map<string, any>): void {

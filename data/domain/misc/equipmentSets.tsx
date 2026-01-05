@@ -38,7 +38,7 @@ export class EquipmentSets extends Domain {
         return [];
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.equipmentSets = EquipmentSet.fromBase(initEquipmentSetsRepo());
         return this;
     }

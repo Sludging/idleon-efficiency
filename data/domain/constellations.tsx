@@ -31,7 +31,7 @@ export class Constellations extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return Constellation.fromBase(initConstellationsRepo());
     }
 

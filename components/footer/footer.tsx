@@ -27,13 +27,8 @@ export const FooterComponent = () => {
                     </Box>
                     <IconLink icon={Discord} href="https://discord.gg/AfsyBkSd2q" text="Idleon Efficiency" />
                     <Box align="center" pad="small">
-                        <span className="ccpa-link" data-ccpa-link="1"></span>
+                        <Text size="12px" color="grey-2">|</Text>
                     </Box>
-                    <Box align="center" pad="small">
-                        <div id="ncmp-consent-link" className="gdpr-button"></div>
-                    </Box>
-                </Box>
-                <Box justify="end" direction="row" gap="medium">
                     <Anchor href="https://www.buymeacoffee.com/sludger" target="_blank"><Image
                         src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
                         alt="Buy Me A Coffee"
@@ -41,6 +36,15 @@ export const FooterComponent = () => {
                         width={150}
                         unoptimized
                     /></Anchor>
+                    <Box align="center" pad="small">
+                        <span className="ccpa-link" data-ccpa-link="1"></span>
+                    </Box>
+                    <Box align="center" pad="small">
+                        <div id="ncmp-consent-link" className="gdpr-button"></div>
+                    </Box>
+                </Box>
+                <Box justify="end" direction="row" gap="medium">
+
                 </Box>
             </Box>
         </Footer>

@@ -167,7 +167,7 @@ export class TaskBoard extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.tasks = Task.fromBase(initTaskDescriptionRepo());
         this.merits = Merit.fromBase(initTaskShopDescRepo());
         return this;

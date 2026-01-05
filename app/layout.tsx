@@ -79,7 +79,12 @@ export default function RootLayout({
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
                             <AppDataStoreProvider>
-                                <Box flex margin={{ horizontal: "auto" }} height={{ min: "100%" }}>
+                                <Box 
+                                    flex 
+                                    margin={{ horizontal: "auto" }} 
+                                    height={{ min: "100%" }}
+                                    style={{ paddingBottom: 'var(--nitro-ad-height, 0px)' }}
+                                >
                                     <HeaderComponent />
                                     <Navigation />
                                     <Main>

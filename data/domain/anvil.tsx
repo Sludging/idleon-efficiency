@@ -208,7 +208,7 @@ export class AnvilWrapper extends Domain {
             { key: "AnvilPAselect_", perPlayer: true, default: [] },
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], charCount: number) {
         this.production = AnvilProduct.fromBase(initAnvilRepo());
         [...Array(charCount)].forEach((_, pIndex) => {
             const playerAnvil = new Anvil(pIndex);

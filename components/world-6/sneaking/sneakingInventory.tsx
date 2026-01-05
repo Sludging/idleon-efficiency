@@ -1,9 +1,7 @@
 import { Box, Grid, Stack, Text } from "grommet";
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from "../../base/IconImage";
-import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
-import { nFormatter } from "../../../data/utility";
-import { Sneaking, SneakingItem, SneakingTrinket, SneakingWeapon } from "../../../data/domain/world-6/sneaking";
+import { SneakingItem, SneakingTrinket, SneakingWeapon } from "../../../data/domain/world-6/sneaking";
 import { NinjaItemTypeEnum } from "../../../data/domain/enum/ninjaItemTypeEnum";
 import TipDisplay from "../../base/TipDisplay";
 

@@ -235,7 +235,7 @@ export class BattlesInfo {
         const fights: EndlessFight[] = [];
         const bonuses = initSummonEnemyBonusRepo();
 
-        for (var i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             const battlenumber = this.allVictories[SummonEssenceColor.Endless]+i;
             // to avoid to modify the original info if updating some values inside the fight
             const battle: SummonEnemyModel = JSON.parse(JSON.stringify(this.allBattles[SummonEssenceColor.Endless][0 + Math.min(4, Math.floor(battlenumber / 20))]));
@@ -249,7 +249,7 @@ export class BattlesInfo {
 
     static getBattleBonusText = (battle: SummonEnemyBonusModel | undefined, bonusValue: number): string => {
         if (battle) {
-            var bonus = SummonBonus.getBonusValueForDisplay(battle.bonusId, bonusValue);
+            const bonus = SummonBonus.getBonusValueForDisplay(battle.bonusId, bonusValue);
 
             return battle.bonus.replace(/{/, nFormatter(bonus)).replace(/</, nFormatter(1 + bonus / 100));
         } else {
@@ -384,7 +384,7 @@ export class Summoning extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -412,7 +412,7 @@ export class Summoning extends Domain {
         // Reset and add "blank" values into arrays
         summoning.summonBattles.allVictories = [];
         summoning.summonBattles.allBattles = [];
-        for (var i = 0; i < Object.keys(SummonEssenceColor).filter(key => isNaN(Number(key))).length; i++) {
+        for (let i = 0; i < Object.keys(SummonEssenceColor).filter(key => isNaN(Number(key))).length; i++) {
             summoning.summonBattles.allVictories.push(0);
             summoning.summonBattles.allBattles.push([]);
         }
@@ -465,7 +465,7 @@ export class Summoning extends Domain {
                 }
             }
         });
-        for (var i = 0; i < (optionList[319] ?? 0); i++) {
+        for (let i = 0; i < (optionList[319] ?? 0); i++) {
             const index = BattlesInfo.getEndlessBattleFightIndex(i);
             const relevantBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == BattlesInfo.getEndlessBattleFightBonusIndex(i));
             if (relevantBonus) {
@@ -476,11 +476,11 @@ export class Summoning extends Domain {
 
         summoning.summonEssences = [];
         const essences = summoningData[2] as number[];
-        for (var index = 0; index < summoning.summonBattles.allVictories.length; index++) {
+        for (let index = 0; index < summoning.summonBattles.allVictories.length; index++) {
             let unlocked: boolean = false;
             let displayBattle: boolean = false;
             let displayEssence: boolean = false;
-            let essenceOwned: number = index < essences.length ? essences[index] : 0;
+            const essenceOwned: number = index < essences.length ? essences[index] : 0;
             switch(index) {
                 case SummonEssenceColor.White:
                     unlocked = true;
@@ -599,7 +599,7 @@ export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => 
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
 
-    let levels: number[] = [];
+    const levels: number[] = [];
     players.forEach(player => {
         levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
     })

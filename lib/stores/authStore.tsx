@@ -54,7 +54,7 @@ export const defaultInitState: AuthState = {
     initialized: false,
 }
 
-const loginThroughToken = async (id_token: string, callback?: Function): Promise<Partial<AuthState>> => {
+const loginThroughToken = async (id_token: string, _?: Function): Promise<Partial<AuthState>> => {
     const auth = getAuth(app);
     const credential = GoogleAuthProvider.credential(id_token, null);
     try {
@@ -201,19 +201,19 @@ export const createAuthStore = (
         ...initState,
         logout: async () => {
             const result = await logout();
-            set((state) => result)
+            set((_) => result)
         },
         appleLogin: async () => {
             const result = await loginThroughApple();
-            set((state) => result)
+            set((_) => result)
         },
         emailLogin: async (email: string, password: string) => {
             const result = await loginThroughEmailPassword(email, password);
-            set((state) => result);
+            set((_) => result);
         },
         googleLogin: async (id_token: string) => {
             const result = await loginThroughToken(id_token);
-            set((state) => result)
+            set((_) => result)
         },
         uglySteamLogin: async (redirectUrl: string) => {
             const params = new URLSearchParams(redirectUrl);
@@ -235,7 +235,7 @@ export const createAuthStore = (
             // Get the custom token from the server
             const customToken = await getFirebaseToken(openIdParams);
             if (customToken == null) {
-                set((state) => ({
+                set((_) => ({
                     authStatus: AuthStatus.NoUser,
                     errorCode: "INVALID_OPENID_PARAMS"
                 }))
@@ -243,21 +243,21 @@ export const createAuthStore = (
             }
             // Login using custom token
             const result = await loginThroughCustomToken(customToken);
-            set((state) => result);
+            set((_) => result);
         },
         initialize: async () => {
-            set((state) => ({ initialized: true }));
+            set((_) => ({ initialized: true }));
             const auth = getAuth(app);
             await auth.authStateReady()
 
             if (auth.currentUser) {
-                set((state) => ({
+                set((_) => ({
                     user: auth.currentUser!,
                     authStatus: AuthStatus.Valid,
                 }))
             }
             else {
-                set((state) => ({
+                set((_) => ({
                     user: undefined,
                     authStatus: AuthStatus.NoUser,
                 }))

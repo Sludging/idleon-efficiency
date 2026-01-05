@@ -46,28 +46,29 @@ export const AdaptativeIconImage = ({ data, scale = 1, style }: { data: ImageDat
                 width={data.width * scale}
                 loading='eager'
                 onLoad={(e: any) => {
-                    let newData = data;
+                    let newHeight = data.height;
+                    let newWidth = data.width
 
                     if (data.height == 0) {
                         if(data.width > 0) {
                             const ratio = data.width / e.target.naturalWidth;
-                            newData.height = e.target.naturalHeight * ratio;
+                            newHeight = e.target.naturalHeight * ratio;
                         } else {
-                            newData.height = e.target.naturalHeight;
+                            newHeight = e.target.naturalHeight;
                         }
                     }
                 
                     if (data.width == 0) {
                         if(data.height > 0) {
                             const ratio = data.height / e.target.naturalHeight;
-                            newData.width = e.target.naturalWidth * ratio;
+                            newWidth = e.target.naturalWidth * ratio;
                         } else {
-                            newData.width = e.target.naturalWidth;
+                            newWidth = e.target.naturalWidth;
                         }
                     }
 
-                    e.target.width = newData.width;
-                    e.target.height = newData.height;
+                    e.target.width = newWidth;
+                    e.target.height = newHeight;
                 }} />
         </Box>
     );

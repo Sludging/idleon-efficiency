@@ -9,7 +9,7 @@ import IconImage from "../../base/IconImage";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { ResourceDisplay } from "./ResourceDisplay";
 import { EfficiencyUpgrade } from "../../../lib/efficiencyEngine/efficiencyEngine";
-import { CompassUpgrade, DustType } from "../../../data/domain/compass";
+import { CompassUpgrade } from "../../../data/domain/compass";
 
 const isCompassUpgrade = (x: EfficiencyUpgrade): x is CompassUpgrade => "indexInPath" in x
 

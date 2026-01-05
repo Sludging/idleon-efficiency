@@ -39,7 +39,7 @@ export class GemStore extends Domain {
             { key: "GemItemsPurchased", perPlayer: false, default: [] }
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.purchases = GemPurchase.fromBase(initGemShopRepo());
         return this;
     }
@@ -49,7 +49,7 @@ export class GemStore extends Domain {
 
         gemData.forEach((data, index) => {
             if (data > 0) {
-                let purchase = gems.purchases.find(x => x.no == index);
+                const purchase = gems.purchases.find(x => x.no == index);
                 if (purchase) {
                     purchase.pucrhased = data;
                 }

@@ -470,28 +470,9 @@ function Sailing() {
     ));
     const sailing = theData.get("sailing") as SailingDomain;
 
-
-    const starSignUnlocked = useMemo(() => {
-        if (sailing) {
-            if (sailing.starSignInfinity) {
-                setStarSignEquipped(true);
-            }
-            return sailing.starSignUnlocked;
-        }
-
-        return false;
-    }, [theData, sailing])
-
-    const starSignInfinity = useMemo(() => {
-        if (sailing) {
-            if (sailing.starSignInfinity) {
-                setStarSignEquipped(true);
-            }
-            return sailing.starSignInfinity;
-        }
-
-        return false;
-    }, [theData, sailing])
+    const starSignUnlocked = sailing?.starSignUnlocked ?? false;
+    const starSignInfinity = sailing?.starSignInfinity ?? false;
+    const isStarSignActive = starSignInfinity || starSignEquipped;
 
     if (!sailing) {
         return <Box>Loading</Box>
@@ -549,7 +530,7 @@ function Sailing() {
                     starSignUnlocked &&
                     <Box direction='row' gap='xsmall'>
                         <CheckBox
-                            checked={starSignEquipped}
+                            checked={isStarSignActive}
                             label="C. Shanti Minor Equipped"
                             onChange={(event) => {
                                 setStarSignEquipped(event.target.checked);
@@ -586,7 +567,7 @@ function Sailing() {
                             checked={silkRodeChip}
                             label="Silkrode Nanochip Equipped"
                             onChange={(event) => setSilkrode(event.target.checked)}
-                            disabled={!starSignEquipped}
+                            disabled={!isStarSignActive}
                         />
                         <TipDisplay
                             heading="Silkrode Nanochip"
@@ -609,11 +590,11 @@ function Sailing() {
                 ))
                 }
             </Box>
-            {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped}/>}
+            {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive}/>}
             {activeTab == "Islands" && <IslandDisplay />}
             {activeTab == "Artifacts" && <ArtifactDisplay />}
             {activeTab == "Captains" && <CaptainsDisplay />}
-            {activeTab == "Boats" && <ShipsDisplay silkRodeChip={silkRodeChip} starSignEquipped={starSignEquipped}/>}
+            {activeTab == "Boats" && <ShipsDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive}/>}
         </Box>
     )
 }

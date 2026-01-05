@@ -21,7 +21,7 @@ export class BoxBonus {
     constructor(public data: PostOfficeUpgradeModel) { }
 
     getBonus = (level: number, index: number, round = false): number => {
-        let bonusLevel = level - Math.round(this.data.investmentReq);
+        const bonusLevel = level - Math.round(this.data.investmentReq);
 
         // Bonus isn't unlocked yet.
         if (bonusLevel <= 0) {
@@ -66,7 +66,7 @@ export class POExtra extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 

@@ -220,7 +220,7 @@ export class Equinox extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.challenges = initDreamChallengeRepo().map(challenge => new Challenge(challenge.index, challenge.data));
         this.upgrades = initDreamUpgradeRepo().map(upgrade => {
             switch (upgrade.index) {
