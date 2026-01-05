@@ -141,7 +141,7 @@ export class Deathnote extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         deathNoteMinibossesOrder.forEach((monster) => {
             this.mobKillCount.set(monster, []);
         })

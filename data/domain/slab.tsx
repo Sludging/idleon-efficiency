@@ -42,7 +42,7 @@ export class Slab extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(allItems: Item[], _charCount: number) {
         this.obtainableItems = allItems.filter(item => item.data.slabSort != undefined);
 
         // Sort all items based on slab sort to match up the game better.
@@ -86,7 +86,7 @@ export class Slab extends Domain {
         slab.obtainableCount = slabItems.length;
 
         slab.bonuses = [];
-        Object.values(SlabBonusesText).forEach((key, index) => {
+        Object.values(SlabBonusesText).forEach((key, _) => {
             slab.bonuses.push(new SlabBonus(key));
         });
     }

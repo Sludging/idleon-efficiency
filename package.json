@@ -6,7 +6,7 @@
     "dev": "next dev --experimental-https",
     "build": "next build && ./upload-static-assets.sh",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "ssl:setup": "node scripts/create-ssl-certs.js",
     "test": "jest",
     "test:watch": "jest --watch",

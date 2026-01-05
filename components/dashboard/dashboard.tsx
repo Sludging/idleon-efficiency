@@ -3,7 +3,7 @@
 import { Box, Grid, Heading, ResponsiveContext, Text } from "grommet";
 import { EmptyCircle, Tools, UserSettings, BarChart, CircleInformation } from "grommet-icons";
 import { DirectionType } from "grommet/utils";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import IconImage from "../base/IconImage";
 import ShadowBox from "../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
@@ -12,7 +12,7 @@ import { Alerts, AlertType, PlayerAlert, Alert } from "../../data/domain/alerts"
 import { EnemyInfo } from "../../data/domain/enemies";
 import { getCoinsArray, nFormatter } from "../../data/utility";
 import TipDisplay from "../base/TipDisplay";
-import { Activity, Player } from "../../data/domain/player";
+import { Player } from "../../data/domain/player";
 import CoinsDisplay from "../coinsDisplay";
 import { TimeDown } from "../base/TimeDisplay";
 import { Arcade } from "../../data/domain/arcade";
@@ -97,9 +97,7 @@ function AlertDisplay({ alert, iconScale = 1 }: { alert: Alert, iconScale?: numb
             default: return null;
         }
     }
-
-    const alertIcon = getIcon(alert);
-
+    
     return (
         <Box>
             <TipDisplay

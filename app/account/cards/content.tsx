@@ -7,7 +7,7 @@ import {
     Grid,
     Stack
 } from 'grommet'
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import ShadowBox from '../../../components/base/ShadowBox';
 import IconImage, { AdaptativeIconImage } from '../../../components/base/IconImage';
 import { Card } from '../../../data/domain/cards';
@@ -160,16 +160,17 @@ const CardSetBox = ({ cardSet }: { cardSet: CardSet }) => {
 }
 
 function CardsDisplay() {
-    const [cards, setCardsData] = useState<Card[]>();
-    const cardSets = CardSet.fromBase(initCardSetRepo(), cards) as CardSet[];
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setCardsData(theData.get("cards"));
-        cardSets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
-    }, [theData, cardSets, cards])
+    const cards = theData.get("cards") as Card[];
+
+    const cardSets = useMemo(() => {
+        const sets = CardSet.fromBase(initCardSetRepo(), cards) as CardSet[];
+        sets.forEach(cardSet => { cardSet.cards = (cards) ? cards.filter(card => card.data.category == cardSet.cardSetName) : [] });
+        return sets;
+    }, [cards]);
 
     if (!cards || !cardSets) {
         return null;

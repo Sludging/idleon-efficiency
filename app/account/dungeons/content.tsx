@@ -7,7 +7,7 @@ import {
     Text,
 } from "grommet"
 
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import TabButton from "../../../components/base/TabButton";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
@@ -19,14 +19,11 @@ import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
 function DungeonItems() {
-    const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setDungeonData(theData.get("dungeons") as Dungeons);
-    }, [theData]);
+    const dungeonData = theData.get("dungeons") as Dungeons;
 
     if (dungeonData) {
         return (
@@ -69,14 +66,11 @@ function DungeonItems() {
 }
 
 function DungeonPassives() {
-    const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    useEffect(() => {
-        setDungeonData(theData.get("dungeons") as Dungeons);
-    }, [theData]);
+    const dungeonData = theData.get("dungeons") as Dungeons;
 
     if (dungeonData) {
         return (
@@ -149,14 +143,10 @@ function DungeonPassives() {
 }
 
 function DungeonTraits() {
-    const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
-    
-    useEffect(() => {
-        setDungeonData(theData.get("dungeons") as Dungeons);
-    }, [theData]);
+    const dungeonData = theData.get("dungeons") as Dungeons;
 
     if (dungeonData) {
         return (
@@ -200,65 +190,62 @@ function DungeonTraits() {
     return null;
 }
 
+function getNextHappyHour(serverVars: Record<string, any>): Date | undefined {
+    if (serverVars && Object.keys(serverVars).includes("HappyHours")) {
+        const happyHours = serverVars["HappyHours"] as number[];
+        let lastThursday = new Date();
+        while (lastThursday.getDay() != 4) {
+            lastThursday.setSeconds(lastThursday.getSeconds() - 86400);
+        }
+        lastThursday.setHours(0);
+        lastThursday.setMinutes(0);
+        lastThursday.setSeconds(0);
+
+        // Convert from currnet timezone to UTC to do the offset.
+        lastThursday = new Date(lastThursday.getTime() - lastThursday.getTimezoneOffset() * 60 * 1000);
+        for (let index = 0; index < happyHours.length; index++) {
+            const nextHour = happyHours[index];
+            if (nextHour) {
+                const happyHourTime = new Date(lastThursday.getTime() + nextHour * 1000);
+                if (happyHourTime > new Date()) {
+                    return new Date(happyHourTime.getTime() - 3600 * 1000);
+                }
+            }
+        }
+
+        // Nothing this week, show for next week
+        let nextThursday = new Date();
+        while (nextThursday.getDay() != 4) {
+            nextThursday.setSeconds(nextThursday.getSeconds() + 86400);
+        }
+        nextThursday.setHours(0);
+        nextThursday.setMinutes(0);
+        nextThursday.setSeconds(0);
+
+        // Convert from currnet timezone to UTC to do the offset.
+        nextThursday = new Date(nextThursday.getTime() - nextThursday.getTimezoneOffset() * 60 * 1000);
+        for (let index = 0; index < happyHours.length; index++) {
+            const nextHour = happyHours[index];
+            if (nextHour) {
+                const happyHourTime = new Date(nextThursday.getTime() + nextHour * 1000);
+                if (happyHourTime > new Date()) {
+                    return new Date(happyHourTime.getTime() - 3600 * 1000);
+                }
+            }
+        }
+    }
+    return undefined;
+}
+
 function DungeonsDisplay() {
-    const [dungeonData, setDungeonData] = useState<Dungeons | undefined>(undefined);
     const [subTab, setSubTab] = useState<string>("Items");
-    const [serverVars, setServerVars] = useState<Record<string, any>>({})
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    const nextHappyHour = useMemo(() => {
-        if (serverVars && Object.keys(serverVars).includes("HappyHours")) {
-            const happyHours = serverVars["HappyHours"] as number[];
-            let lastThursday = new Date();
-            while (lastThursday.getDay() != 4) {
-                lastThursday.setSeconds(lastThursday.getSeconds() - 86400);
-            }
-            lastThursday.setHours(0);
-            lastThursday.setMinutes(0);
-            lastThursday.setSeconds(0);
-
-            // Convert from currnet timezone to UTC to do the offset.
-            lastThursday = new Date(lastThursday.getTime() - lastThursday.getTimezoneOffset() * 60 * 1000);
-            for (let index = 0; index < happyHours.length; index++) {
-                const nextHour = happyHours[index];
-                if (nextHour) {
-                    const happyHourTime = new Date(lastThursday.getTime() + nextHour * 1000);
-                    if (happyHourTime > new Date()) {
-                        return new Date(happyHourTime.getTime() - 3600 * 1000);
-                    }
-                }
-            }
-
-            // Nothing this week, show for next week
-            let nextThursday = new Date();
-            while (nextThursday.getDay() != 4) {
-                nextThursday.setSeconds(nextThursday.getSeconds() + 86400);
-            }
-            nextThursday.setHours(0);
-            nextThursday.setMinutes(0);
-            nextThursday.setSeconds(0);
-
-            // Convert from currnet timezone to UTC to do the offset.
-            nextThursday = new Date(nextThursday.getTime() - nextThursday.getTimezoneOffset() * 60 * 1000);
-            for (let index = 0; index < happyHours.length; index++) {
-                const nextHour = happyHours[index];
-                if (nextHour) {
-                    const happyHourTime = new Date(nextThursday.getTime() + nextHour * 1000);
-                    if (happyHourTime > new Date()) {
-                        return new Date(happyHourTime.getTime() - 3600 * 1000);
-                    }
-                }
-            }
-        }
-        return undefined;
-    }, [serverVars]);
-
-    useEffect(() => {
-        setDungeonData(theData.get("dungeons") as Dungeons);
-        setServerVars(theData.get("servervars"));
-    }, [theData]);
+    const dungeonData = theData.get("dungeons") as Dungeons;
+    const serverVars = theData.get("servervars") as Record<string, any>;
+    const nextHappyHour = getNextHappyHour(serverVars);
 
     return (
         <Box>

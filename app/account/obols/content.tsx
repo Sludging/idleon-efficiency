@@ -18,7 +18,6 @@ import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { ItemStat } from "../../../data/domain/items";
 import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import type { Metadata } from 'next'
 import { useShallow } from "zustand/react/shallow";
 
 function ObolInventory() {

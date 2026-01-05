@@ -53,7 +53,7 @@ export class Guild extends Domain {
             { key: "Guild", perPlayer: false, default: [] }
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.guildBonuses = GuildBonus.fromBase(initGuildBonusRepo());
         return this;
     }

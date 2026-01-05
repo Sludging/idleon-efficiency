@@ -16,13 +16,13 @@ export const customTabsTheme = {
             bottom: undefined,
             horizontal: 'small',
         },
-        extend: ({ theme }: { theme: any }) => css`
+        extend: ({ _theme }: { _theme: any }) => css`
             height: 56px;
             weight: 'none';
         `
     },
     tabs: {
-        extend: ({ theme }: { theme: any }) => css`
+        extend: ({ _theme }: { _theme: any }) => css`
             max-width: 100%;
             min-width: 100%;
             margin-left: auto;
@@ -30,7 +30,7 @@ export const customTabsTheme = {
         `,
         header: {
             background: 'dark-2',
-            extend: ({ theme }: { theme: any }) => css`
+            extend: ({ _theme }: { _theme: any }) => css`
                 alignItems: "center";
                 box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17);
         `,

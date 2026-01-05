@@ -41,7 +41,7 @@ function PlayerTraps(props: PlayerTrapProps) {
             minutes: 60,
             seconds: 1
         };
-        for (let key in ranges) {
+        for (const key in ranges) {
             if (ranges[key] < Math.abs(input)) {
                 const delta = input / ranges[key];
                 return formatter.format(Math.round(delta), key as Intl.RelativeTimeFormatUnit);

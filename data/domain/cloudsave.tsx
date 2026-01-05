@@ -4,7 +4,7 @@ export class Cloudsave {
     fields: Map<string, any> = new Map();
     constructor() {}
   
-    addField = (key: string, data: Object | undefined) => {
+    addField = (key: string, data: object | undefined) => {
         this.fields.set(key, data);
     }
 
@@ -38,7 +38,7 @@ export class Cloudsave {
   }
   
 export const cloudsaveConverter = {
-    toFirestore(post: WithFieldValue<Cloudsave>): DocumentData {
+    toFirestore(_: WithFieldValue<Cloudsave>): DocumentData {
       return {}
     },
     fromFirestore(

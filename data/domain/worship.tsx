@@ -1,5 +1,5 @@
-import { notUndefined, round } from "../utility";
-import { Alchemy, AlchemyConst, Bubble, CauldronIndex } from "./alchemy";
+import { round } from "../utility";
+import { Alchemy, AlchemyConst, CauldronIndex } from "./alchemy";
 import { Domain, RawData } from "./base/domain";
 import { Card } from "./cards";
 import { MapDataBase } from "./data/MapDataRepo";
@@ -12,16 +12,6 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { ClassIndex, TalentConst } from "./talents";
 import { Sneaking } from "./world-6/sneaking";
-
-
-const getActiveBubbles = (alchemy: Alchemy, activeBubbleString: string[]): Bubble[] => {
-    return activeBubbleString.map((bubbleString, _) => {
-        const activeBubble = alchemy.getActiveBubble(bubbleString);
-        if (activeBubble) {
-            return activeBubble;
-        }
-    }).filter(notUndefined);
-}
 
 const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict Breezy_Battle".split(" ");
 const totemMapIds: number[] = [26, 63, 30, 107, 155, 208, 259];
@@ -184,7 +174,7 @@ export class Worship extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.totemInfo = [];
         [...Array(7)].forEach((_, index) => {
             this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));

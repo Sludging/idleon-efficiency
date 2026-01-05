@@ -15,7 +15,6 @@ import { NinjaItemModel } from '../model/ninjaItemModel';
 import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { BaseNinjaItemModel } from "../model/baseNinjaItemModel";
-import { itemMap } from "../../maps";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -402,7 +401,7 @@ export class Sneaking extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -430,10 +429,10 @@ export class Sneaking extends Domain {
             const startingIndex = 12 + 4 * index;
             // get 4 indexes from the array starting from starting index.
             const playerEquipment = ninjaData.slice(startingIndex, startingIndex + 4);
-            let hat: SneakingHat | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[0][0]), playerEquipment[0][1]) as SneakingHat | undefined;
-            let weapon: SneakingWeapon | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[1][0]), playerEquipment[1][1]) as SneakingWeapon | undefined;
-            let trinket1: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[2][0]), playerEquipment[2][1]) as SneakingTrinket | undefined;
-            let trinket2: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[3][0]), playerEquipment[3][1]) as SneakingTrinket | undefined;
+            const hat: SneakingHat | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[0][0]), playerEquipment[0][1]) as SneakingHat | undefined;
+            const weapon: SneakingWeapon | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[1][0]), playerEquipment[1][1]) as SneakingWeapon | undefined;
+            const trinket1: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[2][0]), playerEquipment[2][1]) as SneakingTrinket | undefined;
+            const trinket2: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[3][0]), playerEquipment[3][1]) as SneakingTrinket | undefined;
 
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, new PlayerEquipment(hat, weapon, trinket1, trinket2)));
         }) 
@@ -459,7 +458,7 @@ export class Sneaking extends Domain {
         sneaking.pristineCharms = [];
         sneaking.baseItems
             .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
-            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, index) => {
+            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, _) => {
             let unlocked: boolean = false;
             if (item.data.itemId < pristineCharmUnlocking.length) {
                 unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
@@ -490,7 +489,7 @@ export class Sneaking extends Domain {
         sneaking.beanstalking = new Beanstalking();
         const beanStalkingData = ninjaData[104] as number[];
         const goldenFoods = initAllItems().filter(item => item.type == "Golden Food") as Food[];
-        Object.values(BeanstalkingBonusType).forEach((key, index) => {
+        Object.values(BeanstalkingBonusType).forEach((_, index) => {
             if (index < beanStalkingData.length) {
                 let item: Food | undefined = undefined;
                 switch(index) {
@@ -518,8 +517,8 @@ export class Sneaking extends Domain {
     }
 
     getUnlockedFloors = (): number => {
-        var floorUnlocked: number = 0;
-        var i: number = 0;
+        let floorUnlocked: number = 0;
+        let i: number = 0;
         for (i = 0; i < this.doors.length; i++) {
             if (0 >= this.doors[i].maxHP - this.doors[i].damageDone) {
                 floorUnlocked = Math.min(12, i+2);
@@ -530,7 +529,7 @@ export class Sneaking extends Domain {
     }
 
     updatePlayersActivity = () => {
-        this.players.forEach((player, index) => {
+        this.players.forEach((player, _) => {
             const currentFloorDoor = (player.floor < this.doors.length) ? this.doors[player.floor] : undefined;
     
             if (player.tie.damageDone < player.tie.maxHP || player.rawData[1] == 0) {

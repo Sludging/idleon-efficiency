@@ -12,11 +12,10 @@ import {
     ThemeContext,
     Button,
     ResponsiveContext,
-    Select,
     Meter,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo, MouseEventHandler } from 'react';
+import { useState, useContext, useMemo, MouseEventHandler } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
@@ -973,17 +972,14 @@ function PostOfficeDisplay({ player, extra }: { player: Player, extra: POExtra }
 }
 
 function InventoryDisplay({ player }: { player: Player }) {
-    const [playerInventory, setPlayerInventory] = useState<Item[]>([]);
     const size = useContext(ResponsiveContext);
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const allItems = theData.get("itemsData") as Item[];
 
-    useEffect(() => {
-        const storage = theData.get("storage") as Storage;
-        setPlayerInventory(storage.playerStorage[player.playerID]);
-    }, [theData, player])
+    const storage = theData.get("storage") as Storage;
+    const playerInventory = storage?.playerStorage[player.playerID] ?? [];
 
     const emptySlots = useMemo(() => {
         return playerInventory?.filter((item) => item.internalName == "Blank").length ?? 0;
@@ -1229,9 +1225,7 @@ function SpecialButton({ isActive, text, clickHandler }: { isActive: boolean, te
 }
 
 function PlayerTab({ player }: PlayerTabProps) {
-    const [playerStatues, setPlayerStatues] = useState<PlayerStatues | undefined>(undefined);
     const [index, setIndex] = useState<number>(1);
-    const [activeBubbles, setActiveBubbles] = useState<Bubble[]>([]);
 
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
@@ -1240,18 +1234,14 @@ function PlayerTab({ player }: PlayerTabProps) {
     const poExtra = theData.get("POExtra");
     const onActive = (nextIndex: number) => setIndex(nextIndex);
 
-    useEffect(() => {
-        const statues = theData.get("statues");
-        if (statues) {
-            setPlayerStatues(statues[player.playerID]);
-        }
-        if (player.activeBubbles.length > 0) {
-            setActiveBubbles(player.activeBubbles);
-        }
-        if (player.getSubClass() != ClassIndex.Barbarian && index == 11) {
-            setIndex(1);
-        }
-    }, [theData, player]);
+    const statues = theData.get("statues");
+    const playerStatues = statues ? statues[player.playerID] : undefined;
+    const activeBubbles = player.activeBubbles;
+
+    // Reset tab index if switching to a non-barbarian player while on the zow tab.
+    if (player.getSubClass() != ClassIndex.Barbarian && index == 11) {
+        setIndex(1);
+    }
 
     return (
         <ShadowBox flex={false}>

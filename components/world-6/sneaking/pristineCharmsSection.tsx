@@ -1,6 +1,5 @@
 import { Box, Grid, Text } from "grommet"
 import { PristineCharm } from "../../../data/domain/world-6/sneaking"
-import TipDisplay, { TipDirection } from "../../base/TipDisplay"
 import IconImage from "../../base/IconImage"
 import ShadowBox from "../../base/ShadowBox"
 import TextAndLabel from "../../base/TextAndLabel"

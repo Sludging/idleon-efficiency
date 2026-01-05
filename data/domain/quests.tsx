@@ -1,4 +1,3 @@
-import { Cloudsave } from "./cloudsave";
 import { initNpcRepo, NpcBase } from "./data/NpcRepo";
 import { Item } from "./items";
 import { ItemQuestModel } from "./model/itemQuestModel";
@@ -8,7 +7,6 @@ import { NpcModel } from "./model/npcModel";
 import { QuestTypeEnum } from "./enum/questTypeEnum";
 import { CustomReqModel } from "./model/customReqModel";
 import { ImageData } from "./imageData";
-import { IParser } from "./idleonData";
 import { range } from "../utility";
 import { Domain, RawData } from "./base/domain";
 
@@ -62,7 +60,7 @@ export class NPC {
     }
 
     static fromBase(data: NpcBase[]): Record<string, NPC> {
-        var toReturn: Record<string, NPC> = {};
+        const toReturn: Record<string, NPC> = {};
         data.forEach(npc => {
             toReturn[npc.id] = new NPC(npc.id.replace(" (NPC)", ""), npc.data);
         });
@@ -81,7 +79,7 @@ export class Quests extends Domain {
             {key: "NPCdialogue_", perPlayer: true, default: {}},
         ]
     }
-    init(allItems: Item[], charCount: number) {
+    init(allItems: Item[], _charCount: number) {
         // Foreach NPC
         Object.entries(this.npcData).forEach(([_, npc]) => {
             // For each quest under this NPC

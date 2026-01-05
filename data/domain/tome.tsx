@@ -56,7 +56,7 @@ export class TomeLine {
     unlocked: boolean = false;
 
     constructor(public index: number, public data: TomeModel, public displayOrder: number = 0, charCount: number) {
-        for (var i = 0; i < charCount; i++) {
+        for (let i = 0; i < charCount; i++) {
             // 1000 is the default value for lines that are supposed to be "the lowest the better"
             this.currentValues.push(data.scalingType == TomeScalingEnum.inverseDecay ? 1000 : 0);
             this.lineScores.push(0);
@@ -180,7 +180,7 @@ export class TomeLine {
     }
 
     updateAllPlayersCurrentValue = (value: number) => {
-        for (var i = 0; i < this.currentValues.length; i++) {
+        for (let i = 0; i < this.currentValues.length; i++) {
             this.updatePlayerCurrentValue(value, i);
         }
     }
@@ -207,7 +207,7 @@ export class Tome extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
@@ -234,7 +234,7 @@ export class Tome extends Domain {
         this.highestScore = 0;
         this.highestScoreIndex = 0;
 
-        for (var i = 0; i < this.charCount; i++) {
+        for (let i = 0; i < this.charCount; i++) {
             const playerScore = this.lines.reduce((sum, line) => sum + line.getPlayerScore(i), 0);
             if (this.highestScore < playerScore) {
                 this.highestScore = playerScore;
@@ -308,8 +308,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
-    var trophyCount: number = 0;
-    var obolCount: number = 0;
+    let trophyCount: number = 0;
+    let obolCount: number = 0;
     slab.obtainableItems.forEach((item) => {
         if (item.obtained) {
             if (item.internalName.indexOf("Trophy") == 0) {
@@ -328,11 +328,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
         "FillerNPC"
     ]
     // remove NPCs that should be ignored
-    var filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
-    var completedQuests: number = 0;
+    const filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
+    let completedQuests: number = 0;
     const playerQuestData = questsData?.playerData ?? {};
-    filteredNPCs.forEach(([_, npc], npcIndex) => {
-        Object.entries(npc.data.quests).forEach(([_, info], index) => {
+    filteredNPCs.forEach(([_, npc], _npcIndex) => {
+        Object.entries(npc.data.quests).forEach(([_, info], _index) => {
             if (Object.entries(playerQuestData).some(playerData => playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
                 completedQuests++;
             }
@@ -341,7 +341,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Sum of all skills levels of all players
     const sumOfSkillsLevels = players.reduce((sum, player) => {
-        var skillTotalLv: number = 0;
+        let skillTotalLv: number = 0;
         player.skills.forEach((skill) => {
             skillTotalLv += skill.level;
         });
@@ -386,7 +386,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
-    var totalDeathnoteDigits = 0;
+    let totalDeathnoteDigits = 0;
     const killsMap = deathnote.getKillsMap();
     [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
         totalDeathnoteDigits += [...deathnoteMobs.values()].reduce((sum, killCount) => sum + Math.ceil(lavaLog(killCount)), 0);
@@ -465,7 +465,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const summoningVictories = summoning.summonBattles.getTotalVictories();
 
     // Number of Ninja floors unlocked
-    var ninjaFloorsUnlocked = 0;
+    let ninjaFloorsUnlocked = 0;
     if (0 < (optionListAccount[232] ?? 0)) {
         ninjaFloorsUnlocked = 12 * optionListAccount[232];
     } else {
@@ -473,9 +473,9 @@ export const updateTomeScores = (data: Map<string, any>) => {
     }
 
     // Number of summoning familiar (with multiplyer for those above slime)
-    var totalFamiliarsOwned = 0;
-    var multiplyer = 1;
-    var i = 0;
+    let totalFamiliarsOwned = 0;
+    let multiplyer = 1;
+    let i = 0;
     for (i = 0; i < 9; i++) {
         totalFamiliarsOwned += multiplyer * summoning.summonFamiliarRaw[i];
         multiplyer *= i + 3;
@@ -507,7 +507,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 1:
                 // Sum of statues levels
-                for (var i = 0; i < statues.length; i++) {
+                for (let i = 0; i < statues.length; i++) {
                     line.updatePlayerCurrentValue(statues[i].statues.reduce((sum, statue) => sum + statue.level, 0), i);
                 }
                 break;
@@ -565,7 +565,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 15:
                 // Sum of star talent points owned
-                for (var i = 0; i < players.length; i++) {
+                for (let i = 0; i < players.length; i++) {
                     line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0), i);
                 }
                 break;
@@ -727,7 +727,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 55:
                 // Number of Onyx statues
-                for (var i = 0; i < statues.length; i++) {
+                for (let i = 0; i < statues.length; i++) {
                     line.updatePlayerCurrentValue((statues[i].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0), i);
                 }
                 break;

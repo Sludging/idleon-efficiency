@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Text, DataTable } from 'grommet';
 import { nFormatter } from '../../../data/utility';
-import ShadowBox from '../../base/ShadowBox';
 import IconImage from '../../base/IconImage';
 import TipDisplay, { TipDirection } from '../../base/TipDisplay';
 import { EfficiencyPathInfo, EfficiencyUpgrade } from '../../../lib/efficiencyEngine/efficiencyEngine';
@@ -149,7 +148,7 @@ export function EfficiencyDisplay({
         }
 
         return consolidatedArray;
-    }, [efficiencyData, consolidateUpgrades]);
+    }, [efficiencyData, consolidateUpgrades, sortByResource]);
 
     // Calculate total resource costs for all combined upgrades
     const totalResourceCosts = React.useMemo(() => {

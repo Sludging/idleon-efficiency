@@ -9,6 +9,12 @@ const rubik = Rubik({ subsets: ['latin'], weight: ["400", "500", "700"], display
 
 export const customTheme = deepMerge(dark, {
     global: {
+        // Initialize CSS variables
+        extend: css`
+            :root {
+                --nitro-ad-height: 0px;
+            }
+        `,
         font: {
             family: rubik.style.fontFamily,
             size: "14px",

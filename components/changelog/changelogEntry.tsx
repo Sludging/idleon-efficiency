@@ -1,6 +1,5 @@
 import { Box, Heading, Text } from "grommet";
 import { FC, ReactNode } from "react";
-import ShadowBox from "../base/ShadowBox";
 
 export interface ChangelogEntryProps {
   version: string;

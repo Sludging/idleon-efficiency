@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, createContext, useRef, useContext, useEffect } from 'react'
+import { type ReactNode, createContext, useState, useContext } from 'react'
 import { type StoreApi, useStore } from 'zustand'
 
 import { AppDataStore, DataStatus, createAppDataStore, initAppDataStore } from '../stores/appDataStore'
@@ -22,15 +22,14 @@ export interface AppDataStoreProviderProps {
 export const AppDataStoreProvider = ({
   children,
 }: AppDataStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<AppDataStore>>(null)
-  if (!storeRef.current) {
+  const [store] = useState(() => {
     const allItems = initAllItems();
     const initData = initAccountDataKeys(allItems)
-    storeRef.current = createAppDataStore(initAppDataStore(initData))
-  }
+    return createAppDataStore(initAppDataStore(initData))
+  })
 
   return (
-    <AppDataStoreContext.Provider value={storeRef.current}>
+    <AppDataStoreContext.Provider value={store}>
       {children}
     </AppDataStoreContext.Provider>
   )

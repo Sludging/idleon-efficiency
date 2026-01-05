@@ -1,5 +1,5 @@
 import { Box, Grid, ResponsiveContext, Stack, Text, Tip } from "grommet";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { Achievement } from "../../../data/domain/achievements";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
@@ -7,13 +7,32 @@ import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
 function Achivements({ worldIndex }: { worldIndex: number }) {
-    const [achievementData, setAchievementData] = useState<Achievement[]>();
-    const [worldLetter, setWorldLetter] = useState<string>('A');
     const size = useContext(ResponsiveContext)
 
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
+
+    const achievementData = theData.get("achievements") as Achievement[] | undefined;
+    let worldLetter = "?";
+    if (worldIndex == 0) {
+        worldLetter = 'A';
+    }
+    if (worldIndex == 1) {
+        worldLetter = 'B';
+    }
+    if (worldIndex == 2) {
+        worldLetter = 'C';
+    }
+    if (worldIndex == 3) {
+        worldLetter = 'D';
+    }
+    if (worldIndex == 4) {
+        worldLetter = 'E';
+    }
+    if (worldIndex == 5) {
+        worldLetter = 'F';
+    }
 
     const achievementsToShow = useMemo(() => {
         if (achievementData) {
@@ -21,30 +40,6 @@ function Achivements({ worldIndex }: { worldIndex: number }) {
         }
         return [];
     }, [worldLetter, achievementData])
-
-    useEffect(() => {
-        if (theData.size > 0) {
-            setAchievementData(theData.get("achievements"));
-            if (worldIndex == 0) {
-                setWorldLetter('A');
-            }
-            if (worldIndex == 1) {
-                setWorldLetter('B');
-            }
-            if (worldIndex == 2) {
-                setWorldLetter('C');
-            }
-            if (worldIndex == 3) {
-                setWorldLetter('D');
-            }
-            if (worldIndex == 4) {
-                setWorldLetter('E');
-            }
-            if (worldIndex == 5) {
-                setWorldLetter('F');
-            }
-        }
-    }, [theData, worldIndex])
 
     return (
         <ShadowBox background="dark-1" pad="medium">

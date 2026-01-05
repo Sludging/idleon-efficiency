@@ -142,7 +142,7 @@ export class UpgradeVault extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.bonuses = VaultUpgBonus.fromBase(initUpgradeVaultRepo());
         return this;
     }

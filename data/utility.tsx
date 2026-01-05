@@ -7,7 +7,7 @@ export const lavaLog = (num: number) => {
 }
 
 export const lavaFunc = (func: string, level: number, x1: number, x2: number, roundResult: boolean = false) => {
-    var result = 0;
+    let result = 0;
     switch (func) {
         case 'add':
             if (x2 != 0) {
@@ -73,18 +73,6 @@ export const dateToText = (date: Date): string => {
     };
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
-
-const getBitIndex = (num: number) => {
-    let modifiedValue = num;
-    let bitIndex = 0;
-    for (; bitIndex < 4 ; bitIndex++) {
-        if (modifiedValue > 1e18) {
-            modifiedValue /= 1e18;
-        }
-    }
-
-    return bitIndex;
-}
 
 export const bitsFormatter = (num: number) => {
     let modifiedValue = num;
@@ -226,12 +214,12 @@ export const getCoinsArray = (coins: number): Map<Coins, number> => {
     // 1. We floor the coins since sometimes it's fractions, and we don't care about that.
     // 2. We convert to BigInt so when we convert to string we have the full number instead of something like '1.2+e22'
     // 3. We convert to string so we can splice it easier, more on why we splice later.
-    var n = BigInt(Math.floor(coins)).toString();
+    let n = BigInt(Math.floor(coins)).toString();
 
     // Init an empty set of coins
-    var ret = new Map<Coins, number>();
+    let ret = new Map<Coins, number>();
     // Start from copper
-    var i = 1;
+    let i = 1;
     // While we haven't processed the full string and we aren't at the max coin yet
     while (n.length > 0 && i < Coins.Polarity) {
         // If we have less than 2 digits left, we are done.
@@ -301,7 +289,7 @@ export const formatTime = (input: number) => {
         minutes: 60,
         seconds: 1
     };
-    for (let key in ranges) {
+    for (const key in ranges) {
         if (ranges[key] < Math.abs(input)) {
             const delta = input / ranges[key];
             return formatter.format(Math.round(delta), key as Intl.RelativeTimeFormatUnit);
@@ -342,9 +330,9 @@ export function notUndefined<T>(x: T | undefined): x is T {
  * @param key Key of `T` to group by
  */
  export function GroupBy<T, K extends keyof T>(array: T[], key: K) {
-	let map = new Map<T[K], T[]>();
+	const map = new Map<T[K], T[]>();
 	array.forEach(item => {
-		let itemKey = item[key];
+		const itemKey = item[key];
 		if (!map.has(itemKey)) {
 			map.set(itemKey, array.filter(i => i[key] === item[key]));
 		}
@@ -370,9 +358,9 @@ export function inclusiveRange(start: number, end: number, increment: number = 1
  * @param func the func to group by
  */
  export function GroupByFunction<T>(array: T[], func: Function) {
-	let map = new Map<T, T[]>();
+	const map = new Map<T, T[]>();
 	array.forEach(item => {
-		let funcOutcome = func(item);
+		const funcOutcome = func(item);
 		if (!map.has(funcOutcome)) {
 			map.set(funcOutcome, array.filter(i => func(i) === func(item)));
 		}
@@ -407,7 +395,7 @@ export const getSubDomain = () => {
     if (locationSplit.length > 1 && !allowedTopDomains.includes(locationSplit[1])) {
         return "www";
     }
-    let urlDomain = windowLocation != "" ? locationSplit[0] : "";
+    const urlDomain = windowLocation != "" ? locationSplit[0] : "";
 
     return urlDomain;
 }
@@ -472,11 +460,10 @@ export const number2letter = (number: number) => {
 // Stolen from IdleonToolbox
 export const notateNumber = (e: number, s: string = "Smaller"): string => {
     if (s === 'bits') {
-      let bits = e, t = 0;
+      let bits = e;
       for (let i = 0; i < 4; i++) {
         if (bits > 1e18) {
           bits /= 1e18;
-          t++;
         }
       }
       return 1e4 > bits

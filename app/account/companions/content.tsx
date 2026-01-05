@@ -17,7 +17,7 @@ import { CircleInformation } from "grommet-icons";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
-const CompanionBox = ({ companion, editable = false }: { companion: Companion, editable: boolean }) => {
+const CompanionBox = ({ companion, editable = false, setOwned }: { companion: Companion, editable: boolean, setOwned: (companion: Companion, owned: boolean) => void }) => {
     const [checked, setChecked] = useState<boolean>(companion.owned);
 
     const handleChecked = useCallback((changeEvent: ChangeEvent<HTMLInputElement>): void => {
@@ -27,8 +27,8 @@ const CompanionBox = ({ companion, editable = false }: { companion: Companion, e
         }
 
         setChecked(changeEvent.target.checked);
-        companion.owned = changeEvent.target.checked;
-    }, []);
+        setOwned(companion, changeEvent.target.checked);
+    }, [companion, setOwned]);
 
     return (
         <ShadowBox background="dark-1" style={{ opacity: companion.owned ? 1 : 0.5 }} gap="small" pad="medium">
@@ -53,6 +53,10 @@ function CompanionDisplay() {
 
     const companions = theData.get("companions") as Companion[];
 
+    const setOwned = (companion: Companion, owned: boolean) => {
+        companion.owned = owned;
+    }
+    
     const editCompanions = () => {
         setAllowEditing(true);
     }
@@ -92,7 +96,7 @@ function CompanionDisplay() {
             </Box>
             <Grid columns={{ size: 'auto', count: 4 }} gap="medium">
                 {
-                    companions.map((companion, index) => <CompanionBox key={index} companion={companion} editable={allowEditing} />)
+                    companions.map((companion, index) => <CompanionBox key={index} companion={companion} editable={allowEditing} setOwned={setOwned} />)
                 }
             </Grid>
         </Box>

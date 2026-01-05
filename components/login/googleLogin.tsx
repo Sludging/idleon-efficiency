@@ -1,5 +1,5 @@
 import { Anchor, Box, Button, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoogleDeviceLogin } from "../../data/domain/login/googleDeviceLogin";
 import ShadowBox from "../base/ShadowBox";
 import { useAuthStore } from "../../lib/providers/authStoreProvider";
@@ -51,20 +51,17 @@ export default function GoogleLogin () {
         window.open(verificationUrl,'_newtab');
     }
 
-    useEffect(() => {
-        if (!deviceCode) {
-            getCode();
-        }
-        else {
-            checkResult(deviceCode)
-            .then((res) => {
-                if (!res) {
-                    setTimeout(() => setRetryCounter(retryCounter + 1), 5000);
-                }
-            });
-        }
-
-    }, [deviceCode, retryCounter]);
+    if (!deviceCode) {
+        getCode();
+    }
+    else {
+        checkResult(deviceCode)
+        .then((res) => {
+            if (!res) {
+                setTimeout(() => setRetryCounter(retryCounter + 1), 5000);
+            }
+        });
+    }
 
     return (
         <ShadowBox background="dark-1" pad="large" gap="small">

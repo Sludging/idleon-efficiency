@@ -151,11 +151,11 @@ export class Family extends Domain {
         return [];
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         return this;
     }
 
-    parse(data: Map<string, any>): void {
+    parse(_data: Map<string, any>): void {
         return;
     }
 }

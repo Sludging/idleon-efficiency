@@ -79,7 +79,7 @@ export class ArcadeBonus {
         return round ? Math.round(finalBonus) : finalBonus;
     }
 
-    getBonusText = (round: boolean = true) => {
+    getBonusText = (_: boolean = true) => {
         return this.effect.replace(/{/, this.getBonus(true, this.level).toString());
     }
 
@@ -155,7 +155,7 @@ export class Arcade extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         const bonusRepo = initArcadeBonusRepo();
         this.bonuses = bonusRepo.map((bonus => new ArcadeBonus(bonus.index, bonus.data)))
         return this;

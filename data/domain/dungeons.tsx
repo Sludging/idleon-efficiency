@@ -133,27 +133,6 @@ export class DungeonPassive {
     }
 }
 
-const initDungeonPassives = () => {
-    return GroupBy([
-        new DungeonPassive(0, "Dungeon", { "effect": "Max HP", "x1": 1, "x2": 0, "func": "add", "type": "", "lvlUpText": "maxHp" }),
-        new DungeonPassive(1, "Dungeon", { "effect": "Max MP", "x1": 1, "x2": 0, "func": "add", "type": "", "lvlUpText": "maxMp" }),
-        new DungeonPassive(2, "Dungeon", { "effect": "Base Damage", "x1": 100, "x2": 100, "func": "decay", "type": "", "lvlUpText": "baseDmg" }),
-        new DungeonPassive(3, "Dungeon", { "effect": "Total Dmg", "x1": 250, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "pctDmg" }),
-        new DungeonPassive(4, "Dungeon", { "effect": "Crit Chance", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "critChance" }),
-        new DungeonPassive(5, "Dungeon", { "effect": "Move Speed", "x1": 70, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "MoveSpeed" }),
-        new DungeonPassive(6, "Dungeon", { "effect": "Block Chance", "x1": 50, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "BlockChance" }),
-        new DungeonPassive(7, "Dungeon", { "effect": "Drop Rarity", "x1": 150, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "DropRarity" }),
-        new DungeonPassive(0, "Flurbo", { "effect": "Weapon Power", "x1": 50, "x2": 80, "func": "decay", "type": "", "lvlUpText": "WepPow" }),
-        new DungeonPassive(1, "Flurbo", { "effect": "Talent Pts", "x1": 1, "x2": 0, "func": "add", "type": "", "lvlUpText": "TalPtAll" }),
-        new DungeonPassive(2, "Flurbo", { "effect": "Class Exp", "x1": 45, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "EXP" }),
-        new DungeonPassive(3, "Flurbo", { "effect": "Skilling Exp", "x1": 90, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "skillEXP" }),
-        new DungeonPassive(4, "Flurbo", { "effect": "Monster Cash", "x1": 75, "x2": 100, "func": "decay", "type": "%", "lvlUpText": "MonsterCash" }),
-        new DungeonPassive(5, "Flurbo", { "effect": "Accuracy", "x1": 1, "x2": 0, "func": "add", "type": "%", "lvlUpText": "Acc" }),
-        new DungeonPassive(6, "Flurbo", { "effect": "Defence", "x1": 1, "x2": 0, "func": "add", "type": "%", "lvlUpText": "Def" }),
-        new DungeonPassive(7, "Flurbo", { "effect": "AFK Gains", "x1": 10, "x2": 50, "func": "decay", "type": "%", "lvlUpText": "AFKgains" }),
-    ], "passiveType");
-}
-
 export const DungeonSetInfo = {
     "Beginner Traits": {
         rankReq: 5,
@@ -248,7 +227,7 @@ export class Dungeons extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.items = DungeonItem.fromBase(initDungItemRepo());
         this.passives = GroupBy(DungeonPassive.fromBase(initDungPassivesRepo()), "passiveType");
         this.traits = DungeonTrait.fromBase(initDungTraitRepo());

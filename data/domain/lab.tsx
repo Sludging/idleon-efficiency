@@ -358,7 +358,7 @@ export class Lab extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         this.bonuses = MainframeBonus.fromBase(initLabBonusRepo());
         this.jewels = Jewel.fromBase(initJewelRepo());
         this.chips = Chip.fromBase(initChipRepo());
@@ -626,6 +626,6 @@ export const updateLab = (data: Map<string, any>) => {
     return lab;
 }
 
-export const connectionRangeFromEquinox = (data: Map<string, any>) => {
+export const connectionRangeFromEquinox = (_data: Map<string, any>) => {
 
 }

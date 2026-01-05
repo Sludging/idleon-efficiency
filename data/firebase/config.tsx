@@ -1,4 +1,4 @@
-import { initializeApp, getApp } from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 
 //2. Initialize app with the config vars
 const app = initializeApp({

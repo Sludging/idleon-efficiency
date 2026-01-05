@@ -24,7 +24,6 @@ import { SkillsIndex } from "./SkillsIndex";
 import { Worship, TotalizerBonus } from "./worship";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
-import { Slab, SlabBonusesText } from "./slab";
 import { StarSigns } from "./starsigns";
 import { Sneaking } from "./world-6/sneaking";
 
@@ -277,7 +276,7 @@ export class Sailing extends Domain {
         ]
     }
 
-    init(allItems: Item[], charCount: number) {
+    init(_allItems: Item[], _charCount: number) {
         // Map artifacts to islands to make display easier.
         let artifactIndex = 0;
         this.islands.forEach(island => {

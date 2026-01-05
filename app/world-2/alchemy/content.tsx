@@ -48,24 +48,11 @@ interface DisplayProps {
 
 function CauldronDisplay({ cauldron, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel, classMultiBonus, vialMultiplier = 1, particles }: DisplayProps) {
     const size = useContext(ResponsiveContext)
-    const [bargainBubbleLevel, setBargainBubbleLevel] = useState(0);
-    const [classMultiBubbleLevel, setClassMultiBubbleLevel] = useState(0);
-    const [cauldronCostLevel, setCauldronCostLevel] = useState(0);
-    const [newMultiBubbleLevel, setNewMultiBubbleLevel] = useState(0);
 
-    useEffect(() => {
-        setBargainBubbleLevel(cauldron.bubbles[14].level);
-        if (cauldron.short_name != "Y") {
-            setNewMultiBubbleLevel(cauldron.bubbles[16].level);
-        }
-        if (classMultiBonus && cauldron.short_name != "Y") {
-            setClassMultiBubbleLevel(cauldron.bubbles[1].level)
-        }
-        else {
-            setClassMultiBubbleLevel(0);
-        }
-        setCauldronCostLevel(cauldron.boostLevels[CauldronBoostIndex.Cost]);
-    }, [cauldron.bubbles, cauldron.short_name, cauldron.boostLevels, classMultiBonus, undevelopedCostsBubbleLevel, barleyBrewVialLevel, hasAchievement, discountLevel])
+    const bargainBubbleLevel = cauldron.bubbles[14].level;
+    const cauldronCostLevel = cauldron.boostLevels[CauldronBoostIndex.Cost];
+    const newMultiBubbleLevel = cauldron.short_name != "Y" ? cauldron.bubbles[16].level : 0;
+    const classMultiBubbleLevel = (classMultiBonus && cauldron.short_name != "Y") ? cauldron.bubbles[1].level : 0;
 
     function TipContent({ bubble, faceLeft }: { bubble: Bubble, faceLeft: boolean }) {
         const materialCosts: Map<Item, number> = bubble.getMaterialCost(cauldronCostLevel, undevelopedCostsBubbleLevel, barleyBrewVialLevel, bargainBubbleLevel, classMultiBubbleLevel, discountLevel, hasAchievement, newMultiBubbleLevel, vialMultiplier);
