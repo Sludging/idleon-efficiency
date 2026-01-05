@@ -25,7 +25,7 @@ import { useShallow } from 'zustand/react/shallow';
 function Sneaking() {
     const [activeTab, setActiveTab] = useState<string>("The Jade Emporium");
 
-    const { theData } = useAppDataStore(useShallow(
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const sneaking = theData.get("sneaking") as SneakingDomain;
@@ -37,7 +37,7 @@ function Sneaking() {
         }
 
         return sneaking.jadeUpgrades?.slice().sort((upgrade1, upgrade2) => upgrade1.displayOrder > upgrade2.displayOrder ? 1 : -1);
-    }, [theData, sneaking])
+    }, [sneaking, lastUpdated])
 
     if (!sneaking) {
         return <>Loading...</>

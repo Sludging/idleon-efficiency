@@ -7,7 +7,7 @@ import {
     Text,
 } from 'grommet'
 import { Crop, Farming as FarmingDomain, CropScientist } from '../../../data/domain/world-6/farming';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import IconImage from '../../../components/base/IconImage';

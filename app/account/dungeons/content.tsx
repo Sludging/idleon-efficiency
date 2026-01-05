@@ -7,7 +7,7 @@ import {
     Text,
 } from "grommet"
 
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import TabButton from "../../../components/base/TabButton";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";

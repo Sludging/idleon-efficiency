@@ -1,5 +1,5 @@
 import { Anchor, Box, Button, Text } from "grommet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoogleDeviceLogin } from "../../data/domain/login/googleDeviceLogin";
 import ShadowBox from "../base/ShadowBox";
 import { useAuthStore } from "../../lib/providers/authStoreProvider";

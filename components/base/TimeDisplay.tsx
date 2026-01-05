@@ -1,5 +1,5 @@
-import { Box, Text, Grid, ResponsiveContext } from "grommet";
-import { useContext, useEffect, useState } from "react";
+import { Box, Text, ResponsiveContext } from "grommet";
+import { useContext, useEffect } from "react";
 import { useTimer, useStopwatch } from 'react-timer-hook';
 
 export enum TimeDisplaySize {

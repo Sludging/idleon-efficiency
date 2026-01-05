@@ -7,7 +7,7 @@ import {
     SelectMultiple,
     Text,
 } from 'grommet'
-import { useState, useContext, useMemo, useEffect } from "react";
+import { useState, useContext, useMemo } from "react";
 import { Breeding as BreedingDomain, Pet } from "../../../data/domain/breeding";
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter, toTime, uniqueFilter, round } from "../../../data/utility";

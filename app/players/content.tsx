@@ -12,11 +12,10 @@ import {
     ThemeContext,
     Button,
     ResponsiveContext,
-    Select,
     Meter,
     CheckBox
 } from 'grommet'
-import { useState, useEffect, useContext, useMemo, MouseEventHandler } from 'react';
+import { useState, useContext, useMemo, MouseEventHandler } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";

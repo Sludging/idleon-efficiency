@@ -12,7 +12,7 @@ import {
     ResponsiveContext,
 } from 'grommet'
 import styled from 'styled-components'
-import { useContext, useState, MouseEventHandler } from 'react';
+import { useContext, useState } from 'react';
 import { AuthStatus } from '../data/firebase/authContext'
 import ShadowBox from './base/ShadowBox';
 import GoogleLogin from './login/googleLogin';

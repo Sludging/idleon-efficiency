@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Text } from "grommet";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { PrismaBubbleTesseractUpgrade, Tesseract, TesseractType, TesseractUpgrade } from "../../data/domain/tesseract";
 import ShadowBox from "../base/ShadowBox";
 import { ComponentAndLabel } from "../base/TextAndLabel";

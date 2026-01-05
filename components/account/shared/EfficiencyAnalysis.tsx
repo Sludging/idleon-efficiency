@@ -1,12 +1,11 @@
-import React, { useState, ReactNode, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Box, Text } from 'grommet';
 import { EfficiencyControls, OptimizationType } from './EfficiencyControls';
 import { EfficiencyDisplay } from './EfficiencyDisplay';
 import { EfficiencyPathInfo } from '../../../lib/efficiencyEngine/efficiencyEngine';
 import { ImageData } from '../../../data/domain/imageData';
 import ShadowBox from '../../base/ShadowBox';
-import TextAndLabel, { ComponentAndLabel } from '../../base/TextAndLabel';
-import IconImage from '../../base/IconImage';
+import { ComponentAndLabel } from '../../base/TextAndLabel';
 
 interface EfficiencyAnalysisProps {
     efficiencyResults: Map<string, EfficiencyPathInfo>;
