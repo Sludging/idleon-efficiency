@@ -54,7 +54,7 @@ export class GambitChallenge {
     }
 
     getScoreValue(): number {
-        let points = 100 * (this.maxTime + (3 * Math.floor(this.maxTime / 10) + 10 * Math.floor(this.maxTime / 60)));
+        const points = 100 * (this.maxTime + (3 * Math.floor(this.maxTime / 10) + 10 * Math.floor(this.maxTime / 60)));
         
         if (this.index != 0) {
             // Challenges which are not king get double points

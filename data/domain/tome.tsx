@@ -318,9 +318,9 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
-    var trophyCount: number = 0;
-    var obolCount: number = 0;
-    var nametagCount: number = 0;
+    let trophyCount: number = 0;
+    let obolCount: number = 0;
+    let nametagCount: number = 0;
     slab.obtainableItems.forEach((item) => {
         if (item.obtained) {
             if (item.internalName.indexOf("Trophy") == 0) {
