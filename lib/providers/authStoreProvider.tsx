@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, createContext, useRef, useContext } from 'react'
+import { type ReactNode, createContext, useState, useContext } from 'react'
 import { type StoreApi, useStore } from 'zustand'
 
 import { type AuthStore, createAuthStore } from '../stores/authStore'
@@ -16,13 +16,10 @@ export interface AuthStoreProviderProps {
 export const AuthStoreProvider = ({
   children,
 }: AuthStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<AuthStore>>(null)
-  if (storeRef.current == null) {
-    storeRef.current = createAuthStore()
-  }
+  const [store] = useState(() => createAuthStore())
 
   return (
-    <AuthStoreContext.Provider value={storeRef.current}>
+    <AuthStoreContext.Provider value={store}>
       {children}
     </AuthStoreContext.Provider>
   )

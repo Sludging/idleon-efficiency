@@ -3,7 +3,7 @@ import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { Crop, Plot, PlotGrowthStage, Farming, CropQuantity } from "../../../data/domain/world-6/farming";
 import IconImage from "../../base/IconImage";
 import { nFormatter } from "../../../data/utility";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ComponentAndLabel } from "../../base/TextAndLabel";
 import ShadowBox from "../../base/ShadowBox";
 import { Lock, Star } from 'grommet-icons';
@@ -80,16 +80,15 @@ const CropToCollectDisplay = ({ cropsToCollect}: { cropsToCollect: CropQuantity[
 
 const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, silkRodeChip, starSignEvoEquipped, starSignOGEquipped }: { farmingPlot: Plot, cropDepot: Crop[], canOvergrow: boolean, canLevelLandRank: boolean, silkRodeChip: boolean, starSignEvoEquipped: boolean, starSignOGEquipped: boolean }) => {
     const [readyToCollect, setReadyToCollect] = useState<boolean>(farmingPlot.readyToCollect);
-    const [plotCanOvergrow, setCanOvergrow] = useState<boolean>(readyToCollect && canOvergrow);
     const [completedOGcycles, setCompletedOGCycles] = useState<number>(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
 
-    const plot = useMemo(() => {
+    useEffect(() => {
         setReadyToCollect(farmingPlot.readyToCollect);
-        setCanOvergrow(readyToCollect && canOvergrow);
         setCompletedOGCycles(farmingPlot.overgrowthCycleCompletedSinceLastLoggin);
+    }, [farmingPlot])
 
-        return farmingPlot;
-    }, [canOvergrow, farmingPlot, readyToCollect])
+    const plot = farmingPlot;
+    const plotCanOvergrow = readyToCollect && canOvergrow;
 
     const growthStage: PlotGrowthStage = plot.getGrowthStage();
     const baseCrop = cropDepot.find(crop => crop.index == plot.cropIndex);
@@ -200,7 +199,6 @@ const PlotDisplay = ({ farmingPlot, cropDepot, canOvergrow, canLevelLandRank, si
                             callBack={
                                 () => {
                                     setReadyToCollect(true);
-                                    setCanOvergrow(readyToCollect && canOvergrow);
                                 }
                             }
                         />

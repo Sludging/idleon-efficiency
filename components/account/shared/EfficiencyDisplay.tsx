@@ -149,7 +149,7 @@ export function EfficiencyDisplay({
         }
 
         return consolidatedArray;
-    }, [efficiencyData, consolidateUpgrades]);
+    }, [efficiencyData, consolidateUpgrades, sortByResource]);
 
     // Calculate total resource costs for all combined upgrades
     const totalResourceCosts = React.useMemo(() => {

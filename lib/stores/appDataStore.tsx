@@ -6,6 +6,7 @@ import { getApp } from 'firebase/app'
 import { FirestoreData } from '../../data/firebase/data'
 import { fetcher } from '../../data/fetchers/getProfile'
 import { sendEvent } from '../gtag'
+import { changelogData } from '../../data/changelog'
 
 export enum AppStatus {
     Init,
@@ -135,9 +136,6 @@ export const defaultInitState: AppDataState = {
 function checkHasUnseenChangelogs(lastSeenVersion: string | null): boolean {
     if (typeof window === "undefined") return false;
     
-    // Import here to avoid circular dependencies
-    const { changelogData } = require('../../data/changelog');
-    
     // If no version has been seen yet, there are unseen changelogs
     if (!lastSeenVersion) return true;
     
@@ -150,9 +148,6 @@ function checkHasUnseenChangelogs(lastSeenVersion: string | null): boolean {
 
 // Helper function to get the latest changelog version
 function getLatestChangelogVersion(): string {
-    // Import here to avoid circular dependencies
-    const { changelogData } = require('../../data/changelog');
-    
     if (changelogData.length === 0) return "";
     return changelogData[0].version;
 }

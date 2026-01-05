@@ -97,6 +97,11 @@ export class Spelunking extends Domain {
         const spelunking = data.get(this.getDataKey()) as Spelunking;
         const spelunkingData = data.get("Spelunk") as any[][];
 
+        // Safe guard for old accounts / missing data.
+        if (!spelunkingData || spelunkingData.length == 0) {
+            return;
+        }
+
         // Get raw discoveries and clean up the underscores so we can match
         // them to the name of discoveries
         const discoveriesMade = spelunkingData[6] as string[];

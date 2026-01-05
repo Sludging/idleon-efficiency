@@ -42,10 +42,10 @@ export function TesseractDisplay() {
 
     // Define optimization types for efficiency analysis
     const optimizationTypes = [
-        { 
-            id: 'Unlock Path', 
-            label: 'Unlock Path', 
-            showCountSelector: false, 
+        {
+            id: 'Unlock Path',
+            label: 'Unlock Path',
+            showCountSelector: false,
             showConsolidation: true,
             currentValues: nextUnlock && levelsNeeded > 0 ? [
                 {
@@ -63,40 +63,40 @@ export function TesseractDisplay() {
                 }
             ] : undefined
         },
-        { 
-            id: 'Arcane Damage', 
-            label: 'Arcane Damage', 
-            showCountSelector: true, 
+        {
+            id: 'Arcane Damage',
+            label: 'Arcane Damage',
+            showCountSelector: true,
             showConsolidation: true,
             currentValues: [{
                 label: "Current Arcane Damage",
                 value: nFormatter(tesseract.currentArcaneDamage, "CommaNotation")
             }]
         },
-        { 
-            id: 'Tachyon Drop Rate', 
-            label: 'Tachyon Drop Rate', 
-            showCountSelector: true, 
+        {
+            id: 'Tachyon Drop Rate',
+            label: 'Tachyon Drop Rate',
+            showCountSelector: true,
             showConsolidation: true,
             currentValues: [{
                 label: "Current Tachyon Drop Rate",
                 value: `${tesseract.currentTachyonDropRate.toFixed(2)}x`
             }]
         },
-        { 
-            id: 'Arcane Accuracy', 
-            label: 'Arcane Accuracy', 
-            showCountSelector: true, 
+        {
+            id: 'Arcane Accuracy',
+            label: 'Arcane Accuracy',
+            showCountSelector: true,
             showConsolidation: true,
             currentValues: [{
                 label: "Current Arcane Accuracy",
                 value: nFormatter(tesseract.currentArcaneAccuracy, "CommaNotation")
             }]
         },
-        { 
-            id: 'Arcane Defense', 
-            label: 'Arcane Defense', 
-            showCountSelector: true, 
+        {
+            id: 'Arcane Defense',
+            label: 'Arcane Defense',
+            showCountSelector: true,
             showConsolidation: true,
             currentValues: [{
                 label: "Current Arcane Defense",
@@ -130,13 +130,10 @@ export function TesseractDisplay() {
     ]);
 
     // Prepare data for filtering
-    const upgradeData = useMemo(() => {
-        if (!tesseract) return [];
-
-        return tesseract.upgrades
-            // Boundless Energy are filler upgrades, ignore them.
-            .filter(upgrade => upgrade.data.name !== "Boundless Energy")
-            .map(upgrade => {
+    const upgradeData = tesseract.upgrades
+        // Boundless Energy are filler upgrades, ignore them.
+        .filter(upgrade => upgrade.data.name !== "Boundless Energy")
+        .map(upgrade => {
             // Calculate goal cost (cost to max or 10 levels for unlocked, unlock requirement for locked)
             const goalCost = !upgrade.unlocked
                 ? 0 // Locked upgrades don't have a direct cost, they need level requirements
@@ -157,13 +154,10 @@ export function TesseractDisplay() {
                 upgrade
             };
         });
-    }, [tesseract, lastUpdated]);
 
     // Get unique values for filters
-    const uniqueTachyonTypes = useMemo(() => {
-        const resourceTypes = tesseract.getResourceTypes();
-        return Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
-    }, [tesseract]);
+    const resourceTypes = tesseract.getResourceTypes();
+    const uniqueTachyonTypes = Object.keys(resourceTypes).sort((a, b) => resourceTypes[a] - resourceTypes[b]);
 
     if (!tesseract) {
         return <Text>Loading Tesseract data...</Text>;
@@ -225,14 +219,14 @@ export function TesseractDisplay() {
                         }
                     />
                     <Box pad={{ top: 'small' }}>
-                    <SmallButton
-                        icon={<Configure size="small" />}
-                        label="Resource Weights" 
-                        secondary
-                        size="small"
-                        color="accent-3"
-                        onClick={() => setIsWeightModalOpen(true)}
-                    />
+                        <SmallButton
+                            icon={<Configure size="small" />}
+                            label="Resource Weights"
+                            secondary
+                            size="small"
+                            color="accent-3"
+                            onClick={() => setIsWeightModalOpen(true)}
+                        />
                     </Box>
                 </Box>
 

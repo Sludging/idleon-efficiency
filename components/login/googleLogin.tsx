@@ -51,20 +51,17 @@ export default function GoogleLogin () {
         window.open(verificationUrl,'_newtab');
     }
 
-    useEffect(() => {
-        if (!deviceCode) {
-            getCode();
-        }
-        else {
-            checkResult(deviceCode)
-            .then((res) => {
-                if (!res) {
-                    setTimeout(() => setRetryCounter(retryCounter + 1), 5000);
-                }
-            });
-        }
-
-    }, [deviceCode, retryCounter]);
+    if (!deviceCode) {
+        getCode();
+    }
+    else {
+        checkResult(deviceCode)
+        .then((res) => {
+            if (!res) {
+                setTimeout(() => setRetryCounter(retryCounter + 1), 5000);
+            }
+        });
+    }
 
     return (
         <ShadowBox background="dark-1" pad="large" gap="small">

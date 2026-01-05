@@ -7,7 +7,7 @@ import {
     Text,
 } from 'grommet'
 import { Crop, Farming as FarmingDomain, CropScientist } from '../../../data/domain/world-6/farming';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import IconImage from '../../../components/base/IconImage';
@@ -33,49 +33,13 @@ function Farming() {
     ));
     const farming = theData.get("farming") as FarmingDomain;
 
-    const starSignOGUnlocked = useMemo(() => {
-        if (farming) {
-            if (farming.starSignOGInfinity) {
-                setStarSignOGEquipped(true);
-            }
-            return farming.starSignOGUnlocked;
-        }
+    const starSignOGUnlocked = farming?.starSignOGUnlocked ?? false;
+    const starSignOGInfinity = farming?.starSignOGInfinity ?? false;
+    const starSignEvoUnlocked = farming?.starSignEvoUnlocked ?? false;
+    const starSignEvoInfinity = farming?.starSignEvoInfinity ?? false;
 
-        return false;
-    }, [theData, farming])
-
-    const starSignOGInfinity = useMemo(() => {
-        if (farming) {
-            if (farming.starSignOGInfinity) {
-                setStarSignOGEquipped(true);
-            }
-            return farming.starSignOGInfinity;
-        }
-
-        return false;
-    }, [theData, farming])
-
-    const starSignEvoUnlocked = useMemo(() => {
-        if (farming) {
-            if (farming.starSignEvoInfinity) {
-                setStarSignEvoEquipped(true);
-            }
-            return farming.starSignEvoUnlocked;
-        }
-
-        return false;
-    }, [theData, farming])
-
-    const starSignEvoInfinity = useMemo(() => {
-        if (farming) {
-            if (farming.starSignEvoInfinity) {
-                setStarSignEvoEquipped(true);
-            }
-            return farming.starSignEvoInfinity;
-        }
-
-        return false;
-    }, [theData, farming])
+    const isStarSignOGActive = starSignOGInfinity || starSignOGEquipped;
+    const isStarSignEvoActive = starSignEvoInfinity || starSignEvoEquipped;
 
     const tabsToShow = ["Plots", "Market Upgrades", "Crop Depot"];
     if (farming.canLevelLandRank) {
@@ -152,11 +116,11 @@ function Farming() {
                     starSignEvoUnlocked &&
                     <Box direction='row' gap='xsmall'>
                         <CheckBox
-                            checked={starSignEvoEquipped}
+                            checked={isStarSignEvoActive}
                             label="Cropiovo Minor Equipped"
                             onChange={(event) => {
                                 setStarSignEvoEquipped(event.target.checked);
-                                if(!event.target.checked && !starSignOGEquipped) {
+                                if(!event.target.checked && !isStarSignOGActive) {
                                     setSilkrode(false);
                                 }
                             }}
@@ -186,11 +150,11 @@ function Farming() {
                     starSignOGUnlocked &&
                     <Box direction='row' gap='xsmall'>
                         <CheckBox
-                            checked={starSignOGEquipped}
+                            checked={isStarSignOGActive}
                             label="O.G. Signalais Equipped"
                             onChange={(event) => {
                                 setStarSignOGEquipped(event.target.checked);
-                                if(!event.target.checked && !starSignEvoEquipped) {
+                                if(!event.target.checked && !isStarSignEvoActive) {
                                     setSilkrode(false);
                                 }
                             }}
@@ -223,7 +187,7 @@ function Farming() {
                             checked={silkRodeChip}
                             label="Silkrode Nanochip Equipped"
                             onChange={(event) => setSilkrode(event.target.checked)}
-                            disabled={!starSignEvoEquipped && !starSignOGEquipped}
+                            disabled={!isStarSignEvoActive && !isStarSignOGActive}
                         />
                         <TipDisplay
                             heading="Silkrode Nanochip"
@@ -247,7 +211,7 @@ function Farming() {
                     }
                 </Box>
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
-                    {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={starSignEvoEquipped} starSignOGEquipped={starSignOGEquipped} />}
+                    {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={isStarSignEvoActive} starSignOGEquipped={isStarSignOGActive} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}
                     {activeTab == "Crop Depot" && <CropDepotDisplay/>}
                     {activeTab == "Land Rank" && <LandRankDisplay/>}

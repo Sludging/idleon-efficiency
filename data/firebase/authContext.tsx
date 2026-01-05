@@ -26,7 +26,7 @@ interface AuthData {
 
 export const AuthContext = React.createContext<AuthData | null>(null);
 
-export const getAuthData = (): AuthData => {
+export const useAuthData = (): AuthData => {
     const contextState = React.useContext(AuthContext);
     if (contextState === null) {
         throw new Error('User information only available within a AuthContext tag');
@@ -124,28 +124,25 @@ export const AuthProvider: React.FC<{ children?: React.ReactNode }> = ({ childre
         }
     }, [user])
 
-    useEffect(() => {
-        // If we are on a subdomain, no need to configure user auth.
-        if (authStatus == AuthStatus.Loading) {
-            if (isSubDomain()) {
-                setAuthStatus(AuthStatus.NoUser);
+    // If we are on a subdomain, no need to configure user auth.
+    if (authStatus == AuthStatus.Loading) {
+        if (isSubDomain()) {
+            setAuthStatus(AuthStatus.NoUser);
+        } else {
+            const auth = getAuth(app);
+            auth.onAuthStateChanged(res => {
+                if (res) {
+                    setUser(res);
+                    setAuthStatus(AuthStatus.Valid);
+                }
+                else {
+                    setUser(null);
+                    setAuthStatus(AuthStatus.NoUser);
 
-            } else {
-                const auth = getAuth(app);
-                auth.onAuthStateChanged(res => {
-                    if (res) {
-                        setUser(res);
-                        setAuthStatus(AuthStatus.Valid);
-                    }
-                    else {
-                        setUser(null);
-                        setAuthStatus(AuthStatus.NoUser);
-
-                    }
-                })
-            }
+                }
+            })
         }
-    }, [authStatus])
+    }
 
     return (
         <AuthContext.Provider value={{

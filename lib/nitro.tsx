@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 declare const window: Window &
     typeof globalThis & {
@@ -84,8 +84,6 @@ const adUnits: Record<string, any> = {
 };
 
 const Nitro = ({ demo = false }: { demo: boolean }) => {
-    const [nitroComponentLoaded, setNitroComponentLoaded] = useState(false);
-
     useEffect(() => {    
         // Function to add ad units
         const addUnits = () => {
@@ -97,16 +95,15 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
             });
         };
 
-        if (!nitroComponentLoaded) {
-            setNitroComponentLoaded(true);
+        if (!window.nitroAds) {
             window.nitroAds = window.nitroAds || {};
-            window.nitroAds.createAd = function () {
+            window.nitroAds.createAd = function (...args: any[]) {
                 return new Promise(e => {
-                    window.nitroAds.queue.push(["createAd", arguments, e])
+                    window.nitroAds.queue.push(["createAd", args, e])
                 })
             };
-            window.nitroAds.addUserToken = function () {
-                window.nitroAds.queue.push(["addUserToken", arguments])
+            window.nitroAds.addUserToken = function (...args: any[]) {
+                window.nitroAds.queue.push(["addUserToken", args])
             };
             window.nitroAds.queue = [];
             // Load the Ramp configuration script
@@ -141,7 +138,7 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
                 }, 100);
             });
         }
-    }, [nitroComponentLoaded]);
+    }, []);
 
     return null;
 };
