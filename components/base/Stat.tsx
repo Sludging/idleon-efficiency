@@ -10,7 +10,7 @@ export default function Stat({ stat }: { stat: StatDomain }) {
             heading={`${stat.name}${stat.max ? `(Max value: ${stat.max})` : ""}`}
             body={
                 <Box>
-                    {stat.sources.map((source, index) => {
+                    {stat.sources.map((source, _) => {
                         if (typeof source.value === 'number') {
                             return (
                                 <Text size="small" key={source.name}>{source.name}: {nFormatter(source.value as number, "Smaller")}</Text>

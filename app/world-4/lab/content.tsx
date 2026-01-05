@@ -131,7 +131,7 @@ function ChipDisplay() {
             <Box pad={{ top: "small", bottom: "small" }}>
                 <Grid columns={{ size: '120px' }}>
                     {
-                        Object.entries(lab.playerChips).map(([playerNumber, chips], index) => {
+                        Object.entries(lab.playerChips).map(([playerNumber, _], index) => {
                             const playerId = parseInt(playerNumber);
                             if (playerId >= playersData.length) {
                                 return null;

@@ -110,7 +110,7 @@ export function TesseractDisplay() {
         "Unlock Path": {
             valueHeader: '',
             valueColor: 'accent-2',
-            formatValue: (value: number) => ``,
+            formatValue: (_: number) => ``,
             noResultsText: 'No efficient upgrades available'
         },
         'Arcane Damage': { valueHeader: 'Damage +', valueColor: 'accent-2', formatValue: (value: number) => `${nFormatter(value, "CommaNotation")}`, noResultsText: 'No efficient damage upgrades available' },
