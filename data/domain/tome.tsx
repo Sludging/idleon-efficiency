@@ -905,7 +905,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(hole.monuments.monuments["Wisdom"].highestRound);
                 break;
             case 90:
-                // Best Deathbringer Max Damade in Wraith mode
+                // Best Deathbringer Max Damage in Wraith mode
                 line.updateAllPlayersCurrentValue((optionListAccount[356] ?? 0));
                 break;
             case 91:
