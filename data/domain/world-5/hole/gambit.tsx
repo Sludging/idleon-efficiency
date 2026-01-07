@@ -1,5 +1,5 @@
 import { lavaLog, lavaLog2, toTime } from "../../../utility";
-import { initGambitBonusRepo } from "../../data/GambitBonusRepo";
+import { initGambitBonusRepo, GambitBonusBase } from "../../data/GambitBonusRepo";
 import { GambitBonusModel } from "../../model/gambitBonusModel";
 
 export enum GambitChallengeIndex {
@@ -72,6 +72,10 @@ export class GambitBonus {
 
     constructor(public index: number, public data: GambitBonusModel) {}
 
+    static fromBase(data: GambitBonusBase[]) {
+        return data.map(d => new GambitBonus(d.index, d.data));
+    }
+
     getBonus(gambitTotalScore: number): number {
         if(!this.unlocked)
         {
@@ -101,10 +105,7 @@ export class Gambit {
     gambitPointsMulti: number = 1;
 
     constructor() {
-        const gambitBonusesData = initGambitBonusRepo();
-        gambitBonusesData.forEach(bonus => {
-            this.bonuses.push(new GambitBonus(bonus.index, bonus.data));
-        });
+        this.bonuses = GambitBonus.fromBase(initGambitBonusRepo());
     }
 
     getBonus(index: number): number {
