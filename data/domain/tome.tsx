@@ -137,7 +137,6 @@ export class TomeLine {
                 return nFormatter(this.currentValues[playerIndex]);
             // Not so big values but with lots of decimals and wanna keep a bit of it
             case 18:
-            case 66:
                 return nFormatter(Math.round(100 * this.currentValues[playerIndex]) / 100, "CommaNotation");
             // Not so big values with lots of decimals and wanna round it to match in-game display
             case 13:
@@ -148,6 +147,8 @@ export class TomeLine {
             case 53:
             case 91:
                 return nFormatter(Math.round(this.currentValues[playerIndex]), "CommaNotation");
+            case 66:
+                return nFormatter(this.currentValues[playerIndex], "Bits");
             default:
                 return nFormatter(this.currentValues[playerIndex], "CommaNotation");
         }
@@ -399,6 +400,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
+    // TODO : check if accurate once Deathnote is updated with w7 mobs
     let totalDeathnoteDigits = 0;
     const killsMap = deathnote.getKillsMap();
     [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
@@ -602,6 +604,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 15:
                 // Sum of star talent points owned
+                // TODO : fix this, difference between this and IE
                 for (let i = 0; i < players.length; i++) {
                     line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0), i);
                 }
