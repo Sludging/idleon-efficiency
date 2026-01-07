@@ -1,4 +1,4 @@
-import { lavaLog, lavaLog2 } from "../../../utility";
+import { lavaLog, lavaLog2, toTime } from "../../../utility";
 import { initGambitBonusRepo } from "../../data/GambitBonusRepo";
 import { GambitBonusModel } from "../../model/gambitBonusModel";
 
@@ -44,13 +44,7 @@ export class GambitChallenge {
     constructor(public index: number, public name: string, public description: string) { }
 
     getDisplayTime(): string {
-        let timeLeft = this.maxTime;
-        const hours = Math.floor(timeLeft / 3600);
-        timeLeft -= (hours * 3600);
-        const minutes = Math.floor(timeLeft / 60);
-        timeLeft -= (minutes * 60);
-
-        return (hours > 0 ? hours+"h " : "") + (minutes > 0 ? minutes+"min " : "") + (timeLeft > 0 ? (Math.trunc(timeLeft * 10) / 10)+"sec" : "");
+        return toTime(this.maxTime, true);
     }
 
     getScoreValue(): number {
