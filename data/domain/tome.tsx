@@ -956,6 +956,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 102:
                 // Biggest Haul in a single Delve
+                // TODO: add this once implemented
                 line.updateAllPlayersCurrentValue(0);
                 break;
             case 103:
