@@ -913,7 +913,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(hole.dawgDen.bestScore);
                 break;
             case 92:
-                // Total layers ressources destroyed in The Hole
+                // Total layers resources destroyed in The Hole
                 line.updateAllPlayersCurrentValue(totalDestroyedRessourcesLayers);
                 break;
             case 93:
