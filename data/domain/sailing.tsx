@@ -292,7 +292,7 @@ export class Sailing extends Domain {
         let artifactIndex = 0;
         this.islands.forEach(island => {
             island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + island.data.artifactsPerIsland);
-            artifactIndex += island.data.artifactsPerIsland;
+            artifactIndex += (island.index == 14 ? 4 : island.data.artifactsPerIsland);
         })
 
         return this;
