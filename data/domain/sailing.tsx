@@ -245,6 +245,7 @@ export class Sailing extends Domain {
 
     maxChests: number = 5;
     captainsUnlocked = 1;
+    shopCaptainUnlocked = 1;
     boatsUnlocked = 1;
 
     shinyMinSpeedBonus: number = 0;
@@ -414,6 +415,19 @@ export const updateSailing = (data: Map<string, any>) => {
     if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
         lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
     }
+
+    // Nice to have to create an alert
+    const sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    switch (true) {
+        case sailingLevel >= 35:
+            sailing.shopCaptainUnlocked = 4;
+        case sailingLevel >= 25:
+            sailing.shopCaptainUnlocked = 3;
+        case sailingLevel >= 15:
+            sailing.shopCaptainUnlocked = 2;
+        default:
+            sailing.shopCaptainUnlocked = 1;
+    };
 
     return sailing;
 }
