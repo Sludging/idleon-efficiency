@@ -438,11 +438,16 @@ export const updateSailing = (data: Map<string, any>) => {
 export const updateMinTravelTime = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const family = data.get("family") as Family;
+    const gemStore = data.get("gems") as GemStore;
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
+    const gemShopPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
+    // TODO : update this value legend talents are implemented
+    const legendPointsBonus = 0;
+    const minTravelTime = Math.max(15, 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus + legendPointsBonus) / 100)) - 4 * gemShopPurchases);
     sailing.boats.forEach(boat => {
-        boat.minTravelTime = 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus) / 100));
+        boat.minTravelTime = minTravelTime;
     });
 
     return sailing;
