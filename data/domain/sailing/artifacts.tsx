@@ -350,7 +350,7 @@ export class DeathskullArtifact extends Artifact {
     }
 
     override getBonusText = () => {
-        return "Gives +1 Gallery Slot";
+        return "+1 Gallery Slot";
     }
 }
 
