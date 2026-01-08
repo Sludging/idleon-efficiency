@@ -659,9 +659,11 @@ export class Harp {
 }
 
 export class Lamp {
+    // TODO : update this once zenith market is added
+    zenithMarketBonus: number = 0;
     wishes: Wish[] = [];
     // This is hard-coded in the game, can move to the repo maybe.
-    specialBonusArray = "25,10,8;15,40,10;20,35,12;1,1,1;2,2,2".split(";");
+    specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
 
     constructor() {
         this.wishes = Wish.fromBase(initLampWishRepo());
@@ -674,12 +676,12 @@ export class Lamp {
 
         // TODO: Wonder if we should make this code nicer at some point.
         if (holeBonus) {
-            return 25 * this.wishes[7].wishCount;
+            return 25 * this.wishes[7].wishCount * (1 + this.zenithMarketBonus / 100);
         }
 
         if (specialIndex != undefined && inlineIndex != undefined) {
             const wishIndex = Math.min(11, Math.round(4 + 2 * specialIndex));
-            return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount;
+            return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount * (1 + this.zenithMarketBonus / 100);
         }
 
         return 0;
