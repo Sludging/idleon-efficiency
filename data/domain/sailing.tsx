@@ -441,6 +441,7 @@ export const updateSailing = (data: Map<string, any>) => {
     if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
         lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
     }
+    // TODO : Update this once spelunking is done to manage the last island locked/unlocked state
 
     // Nice to have to create an alert
     sailing.enderCaptainUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 32)?.purchased ?? false;
