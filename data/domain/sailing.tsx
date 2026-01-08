@@ -373,7 +373,7 @@ export const updateSailing = (data: Map<string, any>) => {
             (achievements[287].completed ? 1 : 0) +
             (achievements[290].completed ? 1 : 0)
         )
-        , 30);
+        , 34);
 
     // Speed base math
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
