@@ -6,6 +6,8 @@ export class Votes extends Domain {
     multiFromEquinox: number = 0;
     multiFromSummoning: number = 0;
     multiFromHole: number = 0;
+
+
     bonuses: VoteBonus[] = [];
     currentBonusIndex: number = 0;
     ongoingVoteTopOptionIndex: number = 0;
@@ -98,6 +100,7 @@ export class Votes extends Domain {
     }
 
     getBonusMultiplier = () => {
+        // TODO : update for this => (1 + m._customBlock_Summoning2("MeritocBonusz", 9, 0) / 100) * (1 + (m._customBlock_Companions(41) + c.asNumber(a.engine.getGameAttribute("Dream")[13]) + (m._customBlock_Holes("CosmoBonusQTY", 2, 3) + (m._customBlock_Summoning("WinBonus", 22, 0) + (17 * m._customBlock_Summoning("EventShopOwned", 7, 0) + 13 * m._customBlock_Summoning("EventShopOwned", 16, 0) + (m._customBlock_Companions(19) + (m._customBlock_GamingStatType("PaletteBonus", 32, 0) + m._customBlock_Thingies("LegendPTS_bonus", 22, 0))))))) / 100)
         return 1 + (this.multiFromEquinox + this.multiFromSummoning + this.multiFromHole) / 100;
     }
 }
