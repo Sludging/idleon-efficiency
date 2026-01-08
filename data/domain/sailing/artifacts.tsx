@@ -80,6 +80,9 @@ export class Artifact {
             case 4:
                 this.status = ArtifactStatus.Sovereign;
                 break;
+            case 5:
+                this.status = ArtifactStatus.Omnipotent;
+                break;
         }
     }
 
@@ -120,6 +123,13 @@ export class Artifact {
         return this.data.sovereignBonusQty;
     }
 
+    getOmnipotentBonus = () => {
+        if (this.data.sovereignBonus == "The artifact's main bonus is quintupled!") {
+            return this.data.qtyBonus;
+        }
+        return this.data.sovereignBonusQty;
+    }
+
     hasCalculatedBonus = () => {
         return this.data.bonus.includes("Total Bonus: ");
     }
@@ -148,6 +158,9 @@ export class Artifact {
         if (this.status == ArtifactStatus.Sovereign) {
             return 4;
         }
+        if (this.status == ArtifactStatus.Omnipotent) {
+            return 5;
+        }
 
         return 1;
     }
@@ -173,6 +186,7 @@ export class GoldRelicArtifact extends Artifact {
                 case ArtifactStatus.Ancient: return this.data.qtyBonus + this.data.ancientBonusQty;
                 case ArtifactStatus.Eldritch: return this.data.qtyBonus + (this.data.eldritchBonusQty ?? 0);
                 case ArtifactStatus.Sovereign: return this.data.qtyBonus + (this.data.sovereignBonusQty ?? 0);
+                case ArtifactStatus.Omnipotent: return this.data.qtyBonus + (this.data.omnipotentBonusQty ?? 0);
             }
         }
 
@@ -224,6 +238,9 @@ export class AshenUrnArtifact extends Artifact {
         }
         if (this.status == ArtifactStatus.Sovereign) { 
             return 800;
+        }
+        if (this.status == ArtifactStatus.Omnipotent) {
+            return 1000;
         }
 
         return 200;
