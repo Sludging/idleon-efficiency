@@ -26,6 +26,8 @@ import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { StarSigns } from "./starsigns";
 import { Sneaking } from "./world-6/sneaking";
+import { Arcade } from "./arcade";
+import { Hole } from "./world-5/hole/hole";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -86,7 +88,7 @@ export class Captain {
     traits: CaptainTrait[] = [];
 
     // bonusValues is array of traits, each array holds another array of [traitIndex, bonusValue].
-    constructor(public index: number, public level: number, public currentXP: number, traitInfo: number[][]) {
+    constructor(public index: number, public level: number, public currentXP: number, traitInfo: number[][], public tier: number) {
         // If base value is 0, there's no trait.
         traitInfo.forEach(([traitIndex, baseValue]) => {
             if (traitIndex > -1) {
@@ -119,14 +121,18 @@ export enum BoatUpgradeType {
 export class Boat {
     sigilBonus: number = 0;
     genieLampBonus: number = 30;
-
+    holeLampBonus: number = 0;
+    unendingSearchBonus: number = 0;
+    daveyJonesBonus: number = 1;
+    arcadeBonus: number = 0;
+    activeEnderCaptains: number = 0;
+    
     speed: number = 0;
 
     // Helper values.
     speedBaseMath = 0;
     speedBaseMathWithoutStarSign = 0;
     speedBaseMathWithSilkrode = 0;
-    unendingSearchBonus = 0;
     minTravelTime = 120;
 
     constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
@@ -180,8 +186,9 @@ export class Boat {
             this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Loot Value")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
             : 0;
 
-        const firstMath = 2 + Math.pow(Math.floor(lootUpgrades / 8), 2);
-        return (5 + firstMath * lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100) * (1 + this.unendingSearchBonus / 100);
+        const firstMath = (5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2) * lootUpgrades));
+        const secondMath = (1 + (this.sigilBonus + (captainBonus + (this.genieLampBonus + (25 * Math.min(30, this.activeEnderCaptains) + this.arcadeBonus)))) / 100);
+        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100);
     }
 
     getSpeedValue = (
@@ -328,9 +335,9 @@ export class Sailing extends Domain {
 
         captainData.forEach((captain, cIndex) => {
             if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
-                sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+                sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             } else if (cIndex >= captainData.length - 3) {
-                sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+                sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             }
         })
 
@@ -363,6 +370,8 @@ export const updateSailing = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
     const starSigns = data.get("starsigns") as StarSigns;
     const sneaking = data.get("sneaking") as Sneaking;
+    const arcade = data.get("arcade") as Arcade;
+    const hole = data.get("hole") as Hole;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -398,6 +407,17 @@ export const updateSailing = (data: Map<string, any>) => {
     //Unending Loot Search
     const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
 
+    // DaveyJonesBonus
+    // TODO : update this once legend talents are added to IE
+    const gemShopDaveyPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
+    const legendTalentBonus  = 0;
+    const daveyJonesBonus = 1 + (50 * gemShopDaveyPurchases + legendTalentBonus) / 100;
+    
+    // Various loot bonuses
+    const holeLampLootBonus = hole.lamp.getBonus(false, 1, 0);
+    const arcadeBonus = arcade.bonuses.find(bonus => bonus.index == 33)?.getBonus() ?? 0;
+    const activeEnderCaptains = sailing.captains.reduce((enderCount, captain) => enderCount += (captain.tier == 6) ? 1 : 0, 0);
+
     // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
@@ -406,6 +426,10 @@ export const updateSailing = (data: Map<string, any>) => {
         boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
         boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
+        boat.daveyJonesBonus = daveyJonesBonus;
+        boat.holeLampBonus = holeLampLootBonus;
+        boat.arcadeBonus = arcadeBonus;
+        boat.activeEnderCaptains = activeEnderCaptains;
     });
 
     // Nice info to have for the UI
