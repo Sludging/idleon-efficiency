@@ -26,8 +26,8 @@ export default class LavaRand {
     constructor(seed: number) {
         this.seed = seed;
         this.seed2 = this.hash(seed);
-        0 == this.seed && (this.seed = 1);
-        0 == this.seed2 && (this.seed2 = 1);
+        if (0 == this.seed) (this.seed = 1);
+        if (0 == this.seed2) (this.seed2 = 1);
     }
 
     random = (a: number) => {

@@ -81,7 +81,7 @@ export const initGambitBonusRepo = () => {
                 "x0": 1,
                 "x1": 0,
                 "description": "no",
-                "name": "2 extra Snail Mail every day"
+                "name": "2x extra Snail Mail every day"
             }),
         new GambitBonusBase(11, <GambitBonusModel>{
                 "index": 11,
@@ -95,14 +95,14 @@ export const initGambitBonusRepo = () => {
                 "x0": 1,
                 "x1": 0,
                 "description": "no",
-                "name": "2 Extra Bones on Deathbringer"
+                "name": "2x Extra Bones on Deathbringer"
             }),
         new GambitBonusBase(13, <GambitBonusModel>{
                 "index": 13,
                 "x0": 1,
                 "x1": 0,
                 "description": "no",
-                "name": "2 daily particle bubble upg"
+                "name": "2x daily particle bubble upg"
             }),
         new GambitBonusBase(14, <GambitBonusModel>{
                 "index": 14,

@@ -6,6 +6,10 @@ export const lavaLog = (num: number) => {
     return Math.log(Math.max(num, 1)) / 2.30259;
 }
 
+export const lavaLog2 = (num: number) => {
+    return Math.log(Math.max(num, 1)) / Math.log(2)
+}
+
 export const lavaFunc = (func: string, level: number, x1: number, x2: number, roundResult: boolean = false) => {
     let result = 0;
     switch (func) {
@@ -308,7 +312,7 @@ export const dateToIntString = (input: Date) => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(input);
 }
 
-export const toTime = (fromSeconds: number) => {
+export const toTime = (fromSeconds: number, preciseTime: boolean = false) => {
     let days = 0;
     let hour = Math.floor(fromSeconds / 3600);
     if (hour > 24) {
@@ -316,8 +320,13 @@ export const toTime = (fromSeconds: number) => {
         hour -= days * 24;
     }
     const minutes = Math.floor(fromSeconds % 3600 / 60);
-    const seconds = Math.floor(fromSeconds % 3600 % 60);
-    return `${days > 0 ? `${days}days` : ''} ${hour}hr ${days == 0 ? `${minutes}min ${seconds}sec` : ""}`;
+    let seconds = fromSeconds % 3600 % 60;
+    if (preciseTime) {
+        seconds = Math.trunc(seconds * 10) / 10;
+    } else {        
+        seconds = Math.floor(seconds);
+    }
+    return `${days > 0 ? `${days}days` : ''} ${(preciseTime && hour > 0) || !preciseTime ? `${hour}hour` : ``} ${days == 0 || preciseTime ? `${(preciseTime && minutes > 0) || !preciseTime ? `${minutes}min` : ``} ${seconds}sec` : ""}`;
 }
 
 export function notUndefined<T>(x: T | undefined): x is T {

@@ -72,9 +72,11 @@ function RefineryDisplay() {
             const toReturn: number[] = [];
             Object.entries(refineryData.salts).forEach(([salt, info], index) => {
                 const currentCooldowns: [Player, number][] = [];
-                squireInfo && squireInfo.forEach(squire => {
-                    currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
-                });
+                if (squireInfo) {
+                    squireInfo.forEach(squire => {
+                        currentCooldowns.push([squire, squire.getCurrentCooldown(130)]);
+                    });
+                }
                 let totalWait = 0;
                 const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
                 let timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime);
@@ -142,7 +144,7 @@ function RefineryDisplay() {
                     })
                 }
                 {squireInfo && squireInfo.map((squire, index) => {
-                    const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 130)?.pop() as [Talent, number];
+                    const [refineryTalent, cooldown] = [...squire.cooldown.entries()].filter(([talent, _]) => talent.skillIndex == 130)?.pop() as [Talent, number];
                     const realCD = cooldown - squire.afkFor;
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>
@@ -412,7 +414,7 @@ function PrinterDisplay() {
         <Box gap="medium">
             <Box direction="row" wrap justify="center">
                 {masteroInfo && masteroInfo.map((mastero, index) => {
-                    const [printerTalent, cooldown] = [...mastero.cooldown.entries()].filter(([talent, cooldown]) => talent.skillIndex == 32)?.pop() as [Talent, number];
+                    const [printerTalent, cooldown] = [...mastero.cooldown.entries()].filter(([talent, _]) => talent.skillIndex == 32)?.pop() as [Talent, number];
                     const realCD = cooldown - mastero.afkFor;
                     return (
                         <ShadowBox key={index} background="dark-1" pad="medium" align="center" margin={{ right: 'large', bottom: 'small' }}>

@@ -105,7 +105,7 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
                         </TableHeader>
                         <TableBody>
                             {
-                                Object.entries(stamp.maxCarryInfo).map(([maxLevel, costInfo], index) => (
+                                Object.entries(stamp.maxCarryInfo).map(([maxLevel, costInfo], _) => (
                                     <TableRow key={`${stamp.name}_${maxLevel}`}>
                                         <TableCell>{maxLevel}</TableCell>
                                         <TableCell>
@@ -136,7 +136,7 @@ function StampDisplay({ stamp, index, highlight, storageAmount = 0 }: { stamp: S
                             </TableHeader>
                             <TableBody>
                                 {
-                                    Object.entries(stamp.maxCarryInfo).slice(0, -1).map(([maxLevel, costInfo], index) => (
+                                    Object.entries(stamp.maxCarryInfo).slice(0, -1).map(([maxLevel, costInfo], _) => (
                                         <TableRow key={`${stamp.name}_${maxLevel}`}>
                                             <TableCell>{maxLevel}</TableCell>
                                             <TableCell>{costInfo.costToLevel > 0 && <Box direction="row" align="center"><Text size="small">{nFormatter(costInfo.costToLevel)}{costInfo.currentDiscount ? " *" : ""}</Text><IconImage data={(stamp.materialItem as Item).getImageData()} scale={0.7} /></Box>}</TableCell>
