@@ -15,7 +15,8 @@ export enum ArtifactStatus {
     Obtained,
     Ancient,
     Eldritch,
-    Sovereign
+    Sovereign,
+    Omnipotent
 }
 
 export class Artifact {
