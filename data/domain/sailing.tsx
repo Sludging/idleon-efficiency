@@ -240,6 +240,7 @@ export class Sailing extends Domain {
     islands: Island[] = Island.fromBase(initIslandInfoRepo());
     boats: Boat[] = [];
     captains: Captain[] = [];
+    shopCaptains: Captain[] = [];
     loot: number[] = [];
 
     maxChests: number = 5;
@@ -325,6 +326,8 @@ export class Sailing extends Domain {
         captainData.forEach((captain, cIndex) => {
             if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
                 sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+            } else if (cIndex >= captainData.length - 3) {
+                sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
             }
         })
 
