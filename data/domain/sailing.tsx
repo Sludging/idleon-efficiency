@@ -253,6 +253,8 @@ export class Sailing extends Domain {
     starSignInfinity: boolean = false;
     starSignUnlocked: boolean = false;
 
+    enderCaptainUnlocked: boolean = false;
+
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
     }
@@ -417,6 +419,7 @@ export const updateSailing = (data: Map<string, any>) => {
     }
 
     // Nice to have to create an alert
+    sailing.enderCaptainUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 32)?.purchased ?? false;
     const sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
     switch (true) {
         case sailingLevel >= 35:
