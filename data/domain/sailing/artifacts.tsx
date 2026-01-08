@@ -135,7 +135,7 @@ export class Artifact {
         if (this.hasCalculatedBonus()) {
             return this.data.bonus.split("Total Bonus: ")[0].replace("@", "").trim().replace("{", this.data.qtyBonus.toString())
         }
-        return this.data.bonus.replace("{", this.data.qtyBonus.toString())
+        return this.data.bonus.replace("{", this.data.qtyBonus.toString());
     }
 
     getBonusMultiplier = (): number => {
@@ -347,6 +347,10 @@ export class DeathskullArtifact extends Artifact {
         }
 
         return 0;
+    }
+
+    override getBonusText = () => {
+        return "Gives +1 Gallery Slot";
     }
 }
 
