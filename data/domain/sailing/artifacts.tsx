@@ -59,6 +59,8 @@ export class Artifact {
                     // Lava didn't update the artifact values properly, so hardcoding values.
                     goldRelic.data.qtyBonus = 2;
                     return goldRelic;
+                case 33:
+                    return new DeathskullArtifact(artifact.index, artifact.data);
                 default: return new Artifact(artifact.index, artifact.data)
             }
         });
@@ -335,6 +337,16 @@ export class FunHippoeteArtifact extends Artifact {
 
     override getCalculatedBonusText = () => {
         return `N/A for now.`;
+    }
+}
+
+export class DeathskullArtifact extends Artifact {
+    override getBonus = (showUnobtained: boolean = false) => {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return 0;
+        }
+
+        return 0;
     }
 }
 
