@@ -28,6 +28,7 @@ import { StarSigns } from "./starsigns";
 import { Sneaking } from "./world-6/sneaking";
 import { Arcade } from "./arcade";
 import { Hole } from "./world-5/hole/hole";
+import { Votes } from "./world-2/votes";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -200,8 +201,8 @@ export class Boat {
             this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
             : 0;
 
-        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
+        const firstMath = (10 + (5 + Math.pow(Math.floor(speedUpgrades / 7), 2)) * speedUpgrades);
+        const boatSpeed = firstMath * this.daveyJonesBonus * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
@@ -355,25 +356,15 @@ export class Sailing extends Domain {
 
 export const updateSailing = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
-    const cooking = data.get("cooking") as Cooking;
     const sigils = data.get("sigils") as Sigils;
-    const divinity = data.get("divinity") as Divinity;
-    const cards = data.get("cards") as Card[];
-    const stamps = data.get("stamps") as Stamp[][];
-    const statues = data.get("statues") as PlayerStatues[];
-    const alchemy = data.get("alchemy") as Alchemy;
     const gemStore = data.get("gems") as GemStore;
     const players = data.get("players") as Player[];
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
-    const rift = data.get("rift") as Rift;
-    const worship = data.get("worship") as Worship;
     const starSigns = data.get("starsigns") as StarSigns;
     const sneaking = data.get("sneaking") as Sneaking;
     const arcade = data.get("arcade") as Arcade;
     const hole = data.get("hole") as Hole;
-
-    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -387,31 +378,14 @@ export const updateSailing = (data: Map<string, any>) => {
         )
         , 34);
 
-    // Speed base math
-    const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
-    const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
-    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
-    const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
-    const mealBonus = cooking.getMealBonusForKey("Sailing");
-    const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
-    const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
-    const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
-    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
-    const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
-    const speedBaseMathWithSilkrode = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
-    const speedBaseMathWithoutStarSign = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-    * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
-
-    //Unending Loot Search
-    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
-
-    // DaveyJonesBonus
+    // DaveyJonesBonus (used for both speed and loot values)
     // TODO : update this once legend talents are added to IE
     const gemShopDaveyPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
     const legendTalentBonus  = 0;
     const daveyJonesBonus = 1 + (50 * gemShopDaveyPurchases + legendTalentBonus) / 100;
+        
+    //Unending Loot Search
+    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
     
     // Various loot bonuses
     const holeLampLootBonus = hole.lamp.getBonus(false, 1, 0);
@@ -422,9 +396,6 @@ export const updateSailing = (data: Map<string, any>) => {
     sailing.boats.forEach(boat => {
         boat.genieLampBonus = sailing.artifacts[5].getBonus()
         boat.sigilBonus = sigils.sigils[21].getBonus();
-        boat.speedBaseMath = speedBaseMath;
-        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
-        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
         boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
         boat.daveyJonesBonus = daveyJonesBonus;
         boat.holeLampBonus = holeLampLootBonus;
@@ -460,10 +431,40 @@ export const updateSailing = (data: Map<string, any>) => {
     return sailing;
 }
 
-export const updateMinTravelTime = (data: Map<string, any>) => {
+export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const family = data.get("family") as Family;
     const gemStore = data.get("gems") as GemStore;
+    const cooking = data.get("cooking") as Cooking;
+    const divinity = data.get("divinity") as Divinity;
+    const cards = data.get("cards") as Card[];
+    const stamps = data.get("stamps") as Stamp[][];
+    const statues = data.get("statues") as PlayerStatues[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const rift = data.get("rift") as Rift;
+    const worship = data.get("worship") as Worship;
+    const votes = data.get("votes") as Votes;
+    const starSigns = data.get("starsigns") as StarSigns;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
+    // Boat Speed
+    const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
+    const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
+    const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
+    const stampBonus = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum += stamp.data.effect == "SailSpd" ? stamp.getBonus() : 0, 0);
+    const mealBonus = cooking.getMealBonusForKey("Sailing");
+    const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
+    const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
+    const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
+    // Doesn't include DaveyJonesBonus as boat already have this value, so we don't calculate it a second time
+    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) 
+        * (1 + divinity.gods[4].getBlessingBonus() / 100) 
+        * (1 + divinity.gods[6].getBlessingBonus() / 100)
+        * (1 + votes.getCurrentBonus(24) / 100);
+    const speedBaseMath = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
+    const speedBaseMathWithSilkrode = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
+    const speedBaseMathWithoutStarSign = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
@@ -471,8 +472,13 @@ export const updateMinTravelTime = (data: Map<string, any>) => {
     // TODO : update this value legend talents are implemented
     const legendPointsBonus = 0;
     const minTravelTime = Math.max(15, 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus + legendPointsBonus) / 100)) - 4 * gemShopPurchases);
+
+    // Update boat impacts
     sailing.boats.forEach(boat => {
         boat.minTravelTime = minTravelTime;
+        boat.speedBaseMath = speedBaseMath;
+        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
+        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
     });
 
     return sailing;
