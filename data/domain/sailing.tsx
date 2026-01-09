@@ -44,7 +44,8 @@ const captainBonuses = initCaptainBonusRepo();
 
 export enum IslandStatus {
     Discoverd,
-    Hidden
+    Hidden,
+    Locked,
 }
 
 export class CaptainTrait {
@@ -229,6 +230,15 @@ export class Island {
     static fromBase = (data: IslandInfoBase[]): Island[] => {
         return data.map(island => new Island(island.index, island.data));
     }
+
+    getUnlockText = (): string => {
+        switch (this.index) {
+            case 15:
+                return "Beat the first Spelunking boss in W7";
+            default:
+                return "Should be unlocked already";
+        }
+    }
 }
 
 export class Ship {
@@ -292,8 +302,12 @@ export class Sailing extends Domain {
         // Map artifacts to islands to make display easier.
         let artifactIndex = 0;
         this.islands.forEach(island => {
-            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + island.data.artifactsPerIsland);
-            artifactIndex += (island.index == 14 ? 4 : island.data.artifactsPerIsland);
+            if(island.index == 15) {
+                island.status = IslandStatus.Locked;
+            }
+            const artifactsNumberForIsland = (island.index == 14 ? 4 : island.data.artifactsPerIsland);
+            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + artifactsNumberForIsland);
+            artifactIndex += artifactsNumberForIsland;
         })
 
         return this;
