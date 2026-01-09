@@ -124,10 +124,10 @@ export class Artifact {
     }
 
     getOmnipotentBonus = () => {
-        if (this.data.sovereignBonus == "The artifact's main bonus is quintupled!") {
+        if (this.data.omnipotentBonus == "The artifact's main bonus is quintupled!") {
             return this.data.qtyBonus;
         }
-        return this.data.sovereignBonusQty;
+        return this.data.omnipotentBonusQty;
     }
 
     hasCalculatedBonus = () => {
