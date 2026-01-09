@@ -8,7 +8,7 @@ import {
     ResponsiveContext,
     Text,
 } from 'grommet'
-import { CircleInformation, FormNext } from 'grommet-icons';
+import { CircleInformation, FormNext, Lock } from 'grommet-icons';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox, { ShadowHoverBox } from '../../../components/base/ShadowBox';
@@ -261,6 +261,16 @@ function ArtifactDisplay() {
                             <Box direction="row" gap="xsmall" align="center" border={{ color: 'grey-1', side: 'bottom', size: '1px' }} pad={{ bottom: '16px' }}>
                                 <IconImage data={artifact.getImageData()} scale={0.9} />
                                 <Text>{artifact.data.name}</Text>
+                                {!artifact.unlocked &&
+                                    <TipDisplay
+                                        size='small'
+                                        heading={artifact.getUnlockText()}
+                                        body=''
+                                        direction={TipDirection.Down}                                
+                                    >
+                                        <Lock color='grey-2' size='16px'/>
+                                    </TipDisplay>
+                                }
                             </Box>
                             {artifact.hasCalculatedBonus() &&
                                 <TextAndLabel
@@ -442,6 +452,16 @@ function IslandDisplay() {
                             <Box direction="row" gap="xsmall">
                                 <IconImage data={island.getImageData()} />
                                 <Text>{island.data.name}</Text>
+                                {!island.unlocked &&
+                                    <TipDisplay
+                                        size='small'
+                                        heading={island.getUnlockText()}
+                                        body=''
+                                        direction={TipDirection.Down}                                
+                                    >
+                                        <Lock color='grey-2' size='16px'/>
+                                    </TipDisplay>
+                                }
                             </Box>
                             <TextAndLabel margin={{ bottom: 'xsmall' }} labelSize='xsmall' textSize='12px' label="Distance" text={nFormatter(island.data.distance)} />
                             {
