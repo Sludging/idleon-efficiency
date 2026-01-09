@@ -339,6 +339,17 @@ export class Sailing extends Domain {
         sailing.islands.forEach(island => {
             if (sailingData[0][island.index] == -1) {
                 island.status = IslandStatus.Discoverd;
+                island.artifacts.forEach(artifact => {
+                    if (![30,31,32].find(number => number == artifact.index))
+                    {
+                        // unlock artifact if not one where you need to buy Jade Emporium upgrade (or maybe something else in the future)
+                        artifact.unlocked = true;
+
+                        // Also set the boolean for the bast artifact to avoid discrepancy
+                        const baseArtifact = sailing.artifacts.find(art => art.index == artifact.index);
+                        if (baseArtifact) baseArtifact.unlocked = true;
+                    }
+                });
             }
             else {
                 island.discoverProgress = sailingData[0][island.index];
@@ -421,10 +432,15 @@ export const updateSailing = (data: Map<string, any>) => {
     sailing.starSignUnlocked = starSigns.isStarSignUnlocked("C. Shanti Minor");
     sailing.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "C. Shanti Minor") != undefined);
 
-    // Update available artifacts from Emporium Upgrades
-    const lastIsland = sailing.islands.find(island => island.index == 14);
-    if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
-        lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
+    // Update unlocked artifacts from Emporium Upgrades
+    const theEdgeIsland = sailing.islands.find(island => island.index == 14);
+    if (theEdgeIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && theEdgeIsland.status == IslandStatus.Discoverd) {
+        theEdgeIsland.artifacts.forEach(artifact => {
+            if ([30,31,32].find(number => number == artifact.index))
+            {
+                artifact.unlocked = true;
+            }
+        })
     }
     // TODO : Update this once spelunking is done to manage the last island locked/unlocked state
 
