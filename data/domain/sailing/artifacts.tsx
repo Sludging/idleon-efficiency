@@ -20,6 +20,7 @@ export enum ArtifactStatus {
 }
 
 export class Artifact {
+    unlocked: boolean = false;
     status: ArtifactStatus = ArtifactStatus.Unobtained;
 
     constructor(public index: number, public data: ArtifactModel) { }
@@ -163,6 +164,17 @@ export class Artifact {
         }
 
         return 1;
+    }
+
+    getUnlockText = (): string => {
+        switch (this.index) {
+            case 30:
+            case 31:
+            case 32:
+                return "Unlocked through Jade Emporium in W6"
+            default:
+                return "First unlock this artifact's island";
+        }
     }
 }
 
