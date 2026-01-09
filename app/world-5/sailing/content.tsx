@@ -5,10 +5,11 @@ import {
     CheckBox,
     Grid,
     Heading,
+    ResponsiveContext,
     Text,
 } from 'grommet'
 import { CircleInformation, FormNext } from 'grommet-icons';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox, { ShadowHoverBox } from '../../../components/base/ShadowBox';
 
@@ -222,6 +223,8 @@ function ArtifactDisplay() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
+    const size = useContext(ResponsiveContext);
+
     useEffect(() => {
         setSailing(theData.get("sailing"));
     }, [theData]);
@@ -251,7 +254,7 @@ function ArtifactDisplay() {
                     onChange={(event) => setHideUnobtained(event.target.checked)}
                 />
             </Box>
-            <Grid columns={{ size: 'small' }}>
+            <Grid columns={{ size: 'auto', count: (size == "small" ? 2 : 6) }}>
                 {
                     artifactsToShow.map((artifact, aIndex) => (
                         <ShadowBox style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.5 : 1 }} background={artifact.status == ArtifactStatus.Unobtained ? "dark-2" : "dark-1"} key={aIndex} pad="medium" margin={{ right: 'small', bottom: 'small' }} gap="medium">
@@ -279,7 +282,7 @@ function ArtifactDisplay() {
                                         label="ANCIENT BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.ancientBonus}
                                         margin={{ bottom: 'small' }}
                                     />
@@ -287,7 +290,7 @@ function ArtifactDisplay() {
                                         label="ELDRITCH BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Eldritch, ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Eldritch, ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.eldritchBonus!}
                                         margin={{ bottom: 'small' }}
                                     />
@@ -295,8 +298,15 @@ function ArtifactDisplay() {
                                         label="SOVEREIGN BONUS"
                                         labelSize='xsmall'
                                         textSize='12px'
-                                        textColor={[ArtifactStatus.Sovereign].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        textColor={[ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
                                         text={artifact.data.sovereignBonus!}
+                                    />
+                                    <TextAndLabel
+                                        label="OMNIPOTENT BONUS"
+                                        labelSize='xsmall'
+                                        textSize='12px'
+                                        textColor={[ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
+                                        text={artifact.data.omnipotentBonus!}
                                     />
                                 </Box>
                             </Box>
