@@ -45,7 +45,6 @@ const captainBonuses = initCaptainBonusRepo();
 export enum IslandStatus {
     Discoverd,
     Hidden,
-    Locked,
 }
 
 export class CaptainTrait {
@@ -216,8 +215,11 @@ export class Island {
     artifacts: Artifact[] = [];
     status: IslandStatus = IslandStatus.Hidden;
     discoverProgress: number = -1;
+    unlocked: boolean = true;
 
-    constructor(public index: number, public data: IslandInfoModel) { }
+    constructor(public index: number, public data: IslandInfoModel) {
+        if (this.index == 15) this.unlocked = false;
+     }
 
     getImageData = (): ImageData => {
         return {
@@ -302,9 +304,6 @@ export class Sailing extends Domain {
         // Map artifacts to islands to make display easier.
         let artifactIndex = 0;
         this.islands.forEach(island => {
-            if(island.index == 15) {
-                island.status = IslandStatus.Locked;
-            }
             const artifactsNumberForIsland = (island.index == 14 ? 4 : island.data.artifactsPerIsland);
             island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + artifactsNumberForIsland);
             artifactIndex += artifactsNumberForIsland;
@@ -345,7 +344,7 @@ export class Sailing extends Domain {
                         // unlock artifact if not one where you need to buy Jade Emporium upgrade (or maybe something else in the future)
                         artifact.unlocked = true;
 
-                        // Also set the boolean for the bast artifact to avoid discrepancy
+                        // Also set the boolean for the base artifact to avoid discrepancy
                         const baseArtifact = sailing.artifacts.find(art => art.index == artifact.index);
                         if (baseArtifact) baseArtifact.unlocked = true;
                     }
@@ -449,7 +448,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const spelunkingFirstBossBeaten = false;
     const worldsEndIsland = sailing.islands.find(island => island.index == 15);
     if (spelunkingFirstBossBeaten && worldsEndIsland && worldsEndIsland.status != IslandStatus.Discoverd) {
-        worldsEndIsland.status = IslandStatus.Hidden;
+        worldsEndIsland.unlocked = true;
     }
 
     // Nice to have to create an alert
