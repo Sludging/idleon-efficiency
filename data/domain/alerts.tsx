@@ -504,9 +504,11 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         }
     }
 
-    const enderCaptainAvailable = sailing.shopCaptains.slice(0,(Math.min(sailing.shopCaptains.length, sailing.shopCaptainUnlocked))).reduce((sum, captain) => sum += (captain.tier == 6 ? 1 : 0), 0);
-    if (enderCaptainAvailable > 0) {
-        globalAlerts.push(new EnderCaptainAvailableForPurchase(enderCaptainAvailable));
+    if (sailing.enderCaptainUnlocked) {
+        const enderCaptainAvailable = sailing.shopCaptains.slice(0,(Math.min(sailing.shopCaptains.length, sailing.shopCaptainUnlocked))).reduce((sum, captain) => sum += (captain.tier == 6 ? 1 : 0), 0);
+        if (enderCaptainAvailable > 0) {
+            globalAlerts.push(new EnderCaptainAvailableForPurchase(enderCaptainAvailable));
+        }
     }
 
     return globalAlerts;
