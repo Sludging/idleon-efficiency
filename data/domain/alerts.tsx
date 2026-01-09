@@ -19,6 +19,7 @@ import { Storage } from "./storage";
 import { SummonEssenceColor, Summoning } from "./world-6/summoning";
 import { Divinity } from "./divinity";
 import { Companion } from './companions';
+import { Sailing } from "./sailing";
 
 export enum AlertType {
     CardSet = "Card Set",
@@ -40,7 +41,8 @@ export enum AlertType {
     CanBuyFamiliar = "Can buy a familiar for Summoning",
     PassiveCardEquipped = "Cards that are passive are equipped",
     DivinityStyleBad = "Divinity style should be changed",
-    DivinityGodBad = "Divinity linked should be changed"
+    DivinityGodBad = "Divinity linked should be changed",
+    EnderCaptain = "Go check sailing captains to buy"
 }
 
 export abstract class Alert {
@@ -271,6 +273,15 @@ export class CanBuySummoningFamiliar extends GlobalAlert {
     }
 }
 
+export class EnderCaptainAvailableForPurchase extends GlobalAlert {
+    constructor(public count: number) {
+        super(`There${count > 1 ? ` are ${count}` : `'s an`} Ender Captain${count > 1 ? `s` : ``} available for purchase in sailing, go check`, AlertType.EnderCaptain, Skilling.getSkillImageData(SkillsIndex.Sailing));
+
+        (this.icon as ImageData).width = 50;
+        (this.icon as ImageData).height = 50;
+    }
+}
+
 export class Alerts extends Domain {
     playerAlerts: Record<number, Alert[]> = {};
     generalAlerts: Alert[] = [];
@@ -414,7 +425,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning, sailing: Sailing): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -493,6 +504,11 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
         }
     }
 
+    const enderCaptainAvailable = sailing.shopCaptains.slice(0,(sailing.shopCaptainUnlocked-1)).reduce((sum, captain) => sum += captain.tier == 6 ? 1 : 0, 0);
+    if (enderCaptainAvailable > 0) {
+        globalAlerts.push(new EnderCaptainAvailableForPurchase(enderCaptainAvailable));
+    }
+
     return globalAlerts;
 }
 
@@ -513,6 +529,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const divinity = data.get("divinity") as Divinity;
     const companions = data.get("companions") as Companion[];
+    const sailing = data.get("sailing") as Sailing;
 
     players.forEach(player => {
         alerts.playerAlerts[player.playerID] = []
@@ -520,6 +537,6 @@ export const updateAlerts = (data: Map<string, any>) => {
     })
 
     // Global Alerts
-    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage, summoning);
+    alerts.generalAlerts = getGlobalAlerts(worship, refinery, traps, arcade, construction, equinox, farming, players, storage, summoning, sailing);
     return alerts;
 }
