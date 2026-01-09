@@ -439,6 +439,9 @@ export const updateSailing = (data: Map<string, any>) => {
             if ([30,31,32].find(number => number == artifact.index))
             {
                 artifact.unlocked = true;
+
+                const baseArtifact = sailing.artifacts.find(art => art.index == artifact.index);
+                if (baseArtifact) baseArtifact.unlocked = true;
             }
         })
     }
