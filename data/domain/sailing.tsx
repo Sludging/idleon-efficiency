@@ -337,7 +337,6 @@ export class Sailing extends Domain {
         captainData.forEach((captain, cIndex) => {
             if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
                 sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
-            } else if (cIndex >= captainData.length - 3) {
             } else if (cIndex >= captainData.length - 4) {
                 sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             }
