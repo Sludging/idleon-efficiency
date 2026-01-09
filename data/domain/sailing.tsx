@@ -338,6 +338,7 @@ export class Sailing extends Domain {
             if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
                 sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             } else if (cIndex >= captainData.length - 3) {
+            } else if (cIndex >= captainData.length - 4) {
                 sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             }
         })
@@ -420,12 +421,16 @@ export const updateSailing = (data: Map<string, any>) => {
     switch (true) {
         case sailingLevel >= 35:
             sailing.shopCaptainUnlocked = 4;
+            break;
         case sailingLevel >= 25:
             sailing.shopCaptainUnlocked = 3;
+            break;
         case sailingLevel >= 15:
             sailing.shopCaptainUnlocked = 2;
+            break;
         default:
             sailing.shopCaptainUnlocked = 1;
+            break;
     };
 
     return sailing;
