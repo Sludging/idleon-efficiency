@@ -443,6 +443,11 @@ export const updateSailing = (data: Map<string, any>) => {
         })
     }
     // TODO : Update this once spelunking is done to manage the last island locked/unlocked state
+    const spelunkingFirstBossBeaten = false;
+    const worldsEndIsland = sailing.islands.find(island => island.index == 15);
+    if (spelunkingFirstBossBeaten && worldsEndIsland && worldsEndIsland.status != IslandStatus.Discoverd) {
+        worldsEndIsland.status = IslandStatus.Hidden;
+    }
 
     // Nice to have to create an alert
     sailing.enderCaptainUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 32)?.purchased ?? false;
