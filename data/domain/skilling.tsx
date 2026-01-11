@@ -18,6 +18,10 @@ import { Guild } from './guild';
 import { BeanstalkingBonusType, Sneaking } from "./world-6/sneaking";
 import { Bribe } from "./bribes";
 import { Cooking } from "./cooking";
+import { EquipmentSets } from "./misc/equipmentSets";
+import { LegendTalents } from "./world-7/legendTalents";
+import { Companion } from "./companions";
+import { Votes } from "./world-2/votes";
 
 export class Skilling {
     static getXPReq = (skill: SkillsIndex, level: number) => {
@@ -39,6 +43,7 @@ export class Skilling {
     // if ("AllSkillxpz" == d) {
     static getAllSkillXP = (
             player: Player, 
+            players: Player[],
             shrines: Shrine[], 
             playerStatues: PlayerStatues, 
             prayers: Prayer[], 
@@ -58,15 +63,35 @@ export class Skilling {
             summoning: Summoning,
             sneaking: Sneaking,
             bribes: Bribe[],
-            cooking: Cooking
+            cooking: Cooking,
+            equipementSets: EquipmentSets,
+            legendTalents: LegendTalents,
+            companions: Companion[],
+            votes: Votes
         ) => {
         const skillingCardBonus = Card.GetTotalBonusForId(player.cardInfo?.equippedCards ?? [], 50);
 
         const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
         const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
         const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
-        const goldFoodAchievement = achievements[AchievementConst.GoldFood].completed;
-        const goldFoodBoost = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0));
+        const goldFoodAchievement37 = achievements[37].completed;
+        const goldFoodAchievement380 = achievements[380].completed;
+        const goldFoodAchievement383 = achievements[383].completed;
+        const equipmentSetBonus = equipementSets.getSetBonus("SECRET_SET", player);
+        const votingBonus26 = votes.getCurrentBonus(26);
+        const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
+        const legenTalent25 = legendTalents.legendTalents.find(talent => talent.index == 25)?.getBonus() ?? 0;
+        const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);
+        
+        let apocalypseWoW = 0;
+        const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
+        const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
+        if (bestDeathBringer && deathBringerForKills) {
+            const deathbringeWoWStacks = Array.from(deathBringerForKills.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;;
+            const skillBonus = bestDeathBringer.getTalentBonus(209);
+            apocalypseWoW = skillBonus * deathbringeWoWStacks;
+        }
+        const goldFoodBoost = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
         const goldenFoodBonus = player.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Skill EXP"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
         const beanstalkBaseBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenHam);
