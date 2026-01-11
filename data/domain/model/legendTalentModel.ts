@@ -1,6 +1,6 @@
 
 
-export interface LegendaryTalentModel {
+export interface LegendTalentModel {
     name: string,
     maxLevel: number,
     bonusValue: number,

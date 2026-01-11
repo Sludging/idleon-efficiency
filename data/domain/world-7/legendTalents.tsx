@@ -1,15 +1,18 @@
 import { Domain, RawData } from "../base/domain";
-import { initLegendaryTalentsRepo, LegendaryTalentBase } from "../data/LegendaryTalentsRepo";
+import { Companion } from "../companions";
+import { initLegendTalentsRepo, LegendTalentBase } from "../data/LegendTalentsRepo";
+import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
-import { LegendaryTalentModel } from "../model/legendaryTalentModel";
+import { LegendTalentModel } from "../model/legendTalentModel";
+import { Player } from "../player";
 
-export class LegendaryTalent {
+export class LegendTalent {
     level: number = 0;
 
-    constructor(public index: number, public data: LegendaryTalentModel, public displayOrder: number = 0) {}
+    constructor(public index: number, public data: LegendTalentModel, public displayOrder: number = 0) {}
 
-    static fromBase(data : LegendaryTalentBase[]) {
-        return data.map(d => new LegendaryTalent(d.index, d.data, legendaryTalentsDisplayOrder.indexOf(d.index)));
+    static fromBase(data : LegendTalentBase[]) {
+        return data.map(d => new LegendTalent(d.index, d.data, legendTalentsDisplayOrder.indexOf(d.index)));
     }
 
     getBonus = (level: number = this.level): number => {
@@ -33,8 +36,11 @@ export class LegendaryTalent {
     }
 }
 
-export class LegendaryTalents extends Domain {
-    legendTalents: LegendaryTalent[] = [];
+export class LegendTalents extends Domain {
+    legendTalents: LegendTalent[] = [];
+    pointsOwned: number = 0;
+    pointsSpent: number = 0;
+    pointsAvaible: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -43,12 +49,12 @@ export class LegendaryTalents extends Domain {
     }
 
     init(_allItems: Item[]) {
-        this.legendTalents = LegendaryTalent.fromBase(initLegendaryTalentsRepo());
+        this.legendTalents = LegendTalent.fromBase(initLegendTalentsRepo());
         return this;
     }
 
     parse(data: Map<string, any>): void {
-        const legendaryTalents = data.get(this.getDataKey()) as LegendaryTalents;
+        const legendTalents = data.get(this.getDataKey()) as LegendTalents;
         const spelunkingData = data.get("Spelunk") as any[][];
 
         // Safe guard for old accounts / missing data.
@@ -56,17 +62,17 @@ export class LegendaryTalents extends Domain {
             return;
         }
 
-        const legendaryTalentsLevels = spelunkingData[18] as number[];
-        legendaryTalents.legendTalents.forEach(talent => {
-            if (talent.index < legendaryTalentsLevels.length) {
-                talent.level = legendaryTalentsLevels[talent.index];
+        const legendTalentsLevels = spelunkingData[18] as number[];
+        legendTalents.legendTalents.forEach(talent => {
+            if (talent.index < legendTalentsLevels.length) {
+                talent.level = legendTalentsLevels[talent.index];
             }
         });
     }
 }
 
 // CustomLists.Spelunky[26]
-export const legendaryTalentsDisplayOrder = [
+export const legendTalentsDisplayOrder = [
     39,
     7,
     38,
