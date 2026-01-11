@@ -22,6 +22,7 @@ import { KillRoy } from "../world-2/killroy";
 import { Votes } from "../world-2/votes";
 import { TaskBoard } from "../tasks";
 import { Grimoire } from "../grimoire";
+import { LegendTalents } from "../world-7/legendTalents";
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -82,8 +83,9 @@ export class LandRankDataBase {
 export class LandRankUpgrade {
     level: number = 0;
     unlocked: boolean = false;
+    maxLevel: number = 1;
 
-    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public uniqueLevelBonus: boolean) {}
+    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public fifthColumnBonus: boolean) {}
 
     getUpgradeBonus = () => {
         if (!this.unlocked) {
@@ -95,7 +97,7 @@ export class LandRankUpgrade {
             case 9:
             case 14:
             case 19:
-                return Math.min(this.bonus, this.bonus * this.level);
+                return this.bonus * this.level;
             default: 
                 return 1.7 * this.bonus * this.level / (this.level + 80);
         }
@@ -733,7 +735,7 @@ export class Farming extends Domain {
                 case 15: //GMO
                     return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
                 case 14: //GMO
-                    return "*This bonus doesn't grant anything atm " + upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
+                    return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
                 default:    
                     return upgrade.data.bonus.replace(/{/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
             }
@@ -825,6 +827,8 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const killroy = data.get("killroy") as KillRoy;
     const votes = data.get("votes") as Votes;
     const taskBoard = data.get("taskboard") as TaskBoard;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const grimoire = data.get("grimoire") as Grimoire;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     
@@ -869,6 +873,15 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     farming.updateCropsToCollect();
 
     farming.updatePlotGrowthSinceSave(timeAway['GlobalTime']);
+
+    // Fifth land ranks column bonuses max level
+    const grimoireBonus = grimoire.getUpgradeBonus(9);
+    // TODO : add the exotic market value here (bonus 15) once implemented
+    const exoticMarketBonus = 0;
+    const legendTalentsBonus = legendTalents.legendTalents.find(talent => talent.index == 3)?.getBonus() ?? 0;
+    farming.landrankDatabase.upgrades.filter(upgrade => upgrade.fifthColumnBonus).forEach(upgrade => {
+        upgrade.maxLevel = Math.round(1 + grimoireBonus + Math.ceil(exoticMarketBonus) + legendTalentsBonus);
+    });
 
     // Nice info to have for the UI
     farming.starSignOGUnlocked = starSigns.isStarSignUnlocked("O.G. Signalais");
