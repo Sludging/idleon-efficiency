@@ -9,7 +9,7 @@ import { PlayerStatues, StatueConst } from "./statues";
 import { ClassIndex } from "./talents";
 import { ImageData } from "./imageData";
 import { Divinity } from "./divinity";
-import { Achievement, AchievementConst } from "./achievements";
+import { Achievement } from "./achievements";
 import { SkillMastery } from "./rift";
 import { Breeding } from "./breeding";
 import { Worship, TotalizerBonus } from "./worship";
@@ -80,7 +80,7 @@ export class Skilling {
         const equipmentSetBonus = equipementSets.getSetBonus("SECRET_SET", player);
         const votingBonus26 = votes.getCurrentBonus(26);
         const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
-        const legenTalent25 = legendTalents.legendTalents.find(talent => talent.index == 25)?.getBonus() ?? 0;
+        const legenTalent25 = legendTalents.getBonusFromIndex(25);
         const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);
         
         let apocalypseWoW = 0;

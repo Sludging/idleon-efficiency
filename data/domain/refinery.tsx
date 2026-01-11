@@ -221,7 +221,7 @@ export function updateRefinery(data: Map<string, any>) {
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.index == 25)?.getBonus() ?? 0;
     const sigilsBonus = sigils.sigils[10].getBonus() ?? 0;
     const votesBonus = votes.getCurrentBonus(33);
-    const legendTalentBonus = legendTalents.legendTalents.find(talent => talent.index == 19)?.getBonus() ?? 0;
+    const legendTalentBonus = legendTalents.getBonusFromIndex(19);
 
     refinery.cycleInfo["Combustion"].cycleTime = Math.ceil(900 * Math.pow(4, 0) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Combustion"].timePast += secondsSinceUpdate;

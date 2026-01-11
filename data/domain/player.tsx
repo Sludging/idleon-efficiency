@@ -1334,7 +1334,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
     const votingBonus26 = votes.getCurrentBonus(26);
     const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
-    const legenTalent25 = legendTalents.legendTalents.find(talent => talent.index == 25)?.getBonus() ?? 0;
+    const legenTalent25 = legendTalents.getBonusFromIndex(25);
     const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);;
     
     let apocalypseWoW = 0;

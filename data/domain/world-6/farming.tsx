@@ -878,7 +878,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const grimoireBonus = grimoire.getUpgradeBonus(9);
     // TODO : add the exotic market value here (bonus 15) once implemented
     const exoticMarketBonus = 0;
-    const legendTalentsBonus = legendTalents.legendTalents.find(talent => talent.index == 3)?.getBonus() ?? 0;
+    const legendTalentsBonus = legendTalents.getBonusFromIndex(3);
     farming.landrankDatabase.upgrades.filter(upgrade => upgrade.fifthColumnBonus).forEach(upgrade => {
         upgrade.maxLevel = Math.round(1 + grimoireBonus + Math.ceil(exoticMarketBonus) + legendTalentsBonus);
     });

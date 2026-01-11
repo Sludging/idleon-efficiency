@@ -7,7 +7,8 @@ import { Summoning } from "../world-6/summoning";
 import { LegendTalents } from "../world-7/legendTalents";
 
 export class Votes extends Domain {
-    multiFromBonuses: number = 0;
+    multiFromAllBonusesExceptSummoning: number = 0;
+    multiFromSummoning: number = 0;
     multiFromMeritocraty: number = 0;
 
     bonuses: VoteBonus[] = [];
@@ -102,7 +103,7 @@ export class Votes extends Domain {
     }
 
     getBonusMultiplier = () => {
-        return (1 + this.multiFromMeritocraty / 100) * (1 + this.multiFromBonuses / 100);
+        return (1 + this.multiFromMeritocraty / 100) * (1 + (this.multiFromAllBonusesExceptSummoning + this.multiFromSummoning) / 100);
     }
 }
 
@@ -126,12 +127,12 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const multiFromEventShop16 = 0;
     // TODO : update this once gaming palette is added
     const multiFromGamingPalette32 = 0;
-    const multiFromLegendTalents22 = legendTalents.legendTalents.find(talent => talent.index == 22)?.getBonus() ?? 0;
+    const multiFromLegendTalents22 = legendTalents.getBonusFromIndex(22);
 
     // TODO : update this once meritocraty is added
     const multiFromMeritocraty = 0;
 
-    votes.multiFromBonuses = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16 
+    votes.multiFromAllBonusesExceptSummoning = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16 
         + multiFromCompanion19 + multiFromGamingPalette32 + multiFromLegendTalents22;
     votes.multiFromMeritocraty = multiFromMeritocraty;
 

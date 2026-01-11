@@ -269,7 +269,7 @@ export const updateCards = (data: Map<string, any>) => {
         })
     }
 
-    const bonusEffectFromLegendTalents = legendTalents.legendTalents.find(talent => talent.index == 21)?.getBonus() ?? 0;
+    const bonusEffectFromLegendTalents = legendTalents.getBonusFromIndex(21);
     const rubyCardsUnlocked = rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active || false;
     const cardifiedFiveStarCards = (optLacc[155] ?? "" as string).split(",") as string[];
 

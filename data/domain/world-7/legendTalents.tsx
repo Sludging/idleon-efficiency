@@ -73,6 +73,16 @@ export class LegendTalents extends Domain {
             }
         });
     }
+
+    getBonusFromIndex = (index: number): number => {
+        const bonus = this.talents.find(talent => talent.index == index);
+
+        if (bonus) {
+            return bonus.getBonus();
+        }
+
+        return 0;
+    }
 }
 
 export const updateLegendTalents = (data: Map<string, any>) => {
@@ -105,8 +115,8 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     legendTalents.pointsAvaible = legendTalents.pointsOwned - legendTalents.pointsSpent;
 
     // Super Talents
-    legendTalents.superTalentUnlocked = (legendTalents.legendTalents.find(talent => talent.index == 39)?.getBonus() || 0) >= 1;
-    const legendTalentBonus7 = legendTalents.legendTalents.find(talent => talent.index == 7)?.getBonus() ?? 0;
+    legendTalents.superTalentUnlocked = legendTalents.getBonusFromIndex(39) >= 1;
+    const legendTalentBonus7 = legendTalents.getBonusFromIndex(7);
     // TODO : add zenith market bonus 5 here once implemented
     const zenithMarketBonus5 = 0;
     legendTalents.superTalentBonusLevels = Math.round(50 + legendTalentBonus7 + zenithMarketBonus5);
