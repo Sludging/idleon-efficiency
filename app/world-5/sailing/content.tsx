@@ -472,9 +472,22 @@ function IslandDisplay() {
                         <Box direction="row">
                             {
                                 island.artifacts.map((artifact, aIndex) => (
-                                    <Box key={aIndex} margin={{ right: 'small' }} border={artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } : artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } : artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } : undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
+                                    <Box 
+                                        key={aIndex}
+                                        margin={{ right: 'small' }}
+                                        border={
+                                            artifact.status == ArtifactStatus.Omnipotent ? { color: '#4ec4ff', side: 'all' } :
+                                            artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } : 
+                                            artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } : 
+                                            artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } : 
+                                            undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
                                         <TipDisplay
-                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" : artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" : artifact.status == ArtifactStatus.Ancient ? " (Ancient)" : ""}`}
+                                            heading={`${artifact.data.name}${
+                                                artifact.status == ArtifactStatus.Omnipotent ? " (Omnipotent)" :
+                                                artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" :
+                                                artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" :
+                                                artifact.status == ArtifactStatus.Ancient ? " (Ancient)" :
+                                                ""}`}
                                             body={<Text>{artifact.getBonusText()}</Text>}
                                         >
                                             <IconImage data={artifact.getImageData()} />
