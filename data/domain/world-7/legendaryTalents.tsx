@@ -1,3 +1,36 @@
+import { LegendaryTalentBase } from "../data/LegendaryTalentsRepo";
+import { LegendaryTalentModel } from "../model/legendaryTalentModel";
+
+export class LegendaryTalent {
+    level: number = 0;
+
+    constructor(public index: number, public data: LegendaryTalentModel, public displayOrder: number = 0) {}
+
+    static fromBase(data : LegendaryTalentBase[]) {
+        return data.map(d => new LegendaryTalent(d.index, d.data, legendaryTalentsDisplayOrder.indexOf(d.index)));
+    }
+
+    getBonus = (level: number = this.level): number => {
+        return level * this.data.bonusValue;
+    }
+
+    getNextLevelDesc = (): string => {
+        if (this.level >= this.data.maxLevel) {
+            return "";
+        }
+
+        const value = this.getBonus(this.level + 1);
+
+        return this.data.nextLevelPreview.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString());
+    }
+
+    getDesc = (): string => {
+        const value = this.getBonus();
+
+        return this.data.desc.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString());
+    }
+}
+
 // CustomLists.Spelunky[26]
 export const legendaryTalentsDisplayOrder = [
     39,
