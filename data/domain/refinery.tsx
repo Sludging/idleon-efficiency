@@ -206,7 +206,7 @@ export function updateRefinery(data: Map<string, any>) {
     const rift = data.get("rift") as Rift;
     const arcade = data.get("arcade") as Arcade;
     const votes = data.get("votes") as Votes;
-    const legendTalents = data.get("legenTalents") as LegendTalents;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
     const lastUpdated = data.get("lastUpdated") as Date;
 
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
