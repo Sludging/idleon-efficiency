@@ -10,6 +10,9 @@ import { SaltLick } from "./saltLick";
 import { Sigils } from "./sigils";
 import { getStampBonusForKey, Stamp } from "./world-1/stamps";
 import { ClassIndex } from "./talents";
+import { Arcade } from "./arcade";
+import { Votes } from "./world-2/votes";
+import { LegendTalents } from "./world-7/legendTalents";
 
 const RankToPowerCap = "50 50 200 800 3000 8000 14000 20000 30000 40000 50000 65000 80000 100000 200000 300000 400000 500000 600000 700000 800000 900000 1000000 1000000 1000000 1000000".split(" ");
 
@@ -201,6 +204,9 @@ export function updateRefinery(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
     const family = data.get("family") as Family;
     const rift = data.get("rift") as Rift;
+    const arcade = data.get("arcade") as Arcade;
+    const votes = data.get("votes") as Votes;
+    const legendTalents = data.get("legenTalents") as LegendTalents;
     const lastUpdated = data.get("lastUpdated") as Date;
 
     const constMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
@@ -212,11 +218,15 @@ export function updateRefinery(data: Map<string, any>) {
     const stampBonus = getStampBonusForKey(stamps, "RefinerySpd");
     const divineKnightBonus = family.classBonus.get(ClassIndex.Divine_Knight)?.getBonus() ?? 0;
     const riftBonus = constMastery.getBonusByIndex(0);
+    const arcadeBonus = arcade.bonuses.find(bonus => bonus.index == 25)?.getBonus() ?? 0;
+    const sigilsBonus = sigils.sigils[10].getBonus() ?? 0;
+    const votesBonus = votes.getCurrentBonus(33);
+    const legendTalentBonus = legendTalents.legendTalents.find(talent => talent.index == 19)?.getBonus() ?? 0;
 
-    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil((900 * Math.pow(4, 0)) / ((1 + (vialBonus + saltLickBonus + divineKnightBonus + sigils.sigils[10].getBonus() + stampBonus + refinery.shinyBonusSpeed + riftBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Combustion"].cycleTime = Math.ceil(900 * Math.pow(4, 0) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Combustion"].timePast += secondsSinceUpdate;
 
-    refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil((900 * Math.pow(4, 1)) / ((1 + (vialBonus + saltLickBonus + divineKnightBonus + sigils.sigils[10].getBonus() + stampBonus + refinery.shinyBonusSpeed + riftBonus) / 100) * labCycleBonus));
+    refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil(900 * Math.pow(4, 1) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
 
     return refinery;
