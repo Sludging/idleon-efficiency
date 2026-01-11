@@ -62,7 +62,7 @@ import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from 
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 import { EquipmentSets } from './misc/equipmentSets';
-import { LegendaryTalents } from './world-7/legendaryTalents';
+import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -147,7 +147,7 @@ const domainList: Domain[] = [
     new Compass("compass"),
     new Emperor("emperor"),
     new EquipmentSets("equipmentSets"),
-    new LegendaryTalents("legendaryTalents"),
+    new LegendTalents("legendTalents"),
 ]
 
 export class IdleonData {
@@ -212,6 +212,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),
     "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),

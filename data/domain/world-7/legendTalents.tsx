@@ -71,6 +71,36 @@ export class LegendTalents extends Domain {
     }
 }
 
+export const updateLegendTalents = (data: Map<string, any>) => {
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const players = data.get("players") as Player[];
+    const companions = data.get("companions") as Companion[];
+    const gemStore = data.get("gems") as GemStore;
+
+    let pointsOwned = 0;
+
+    players.forEach(player => {
+        pointsOwned += Math.max(0, Math.floor((player.level - 400) / 100));
+    });
+
+    // TODO : add ClamBonus 1 and 4 once implemented
+    
+    const companion37 = companions.find(c => c.id === 37);
+    pointsOwned += (companion37 && companion37.owned) ? 10 : 0;
+
+    pointsOwned += gemStore.purchases.find(purchase => purchase.index == 42)?.pucrhased ?? 0;
+
+    // event shop 32
+
+    //sailing artifact
+
+    legendTalents.pointsOwned = pointsOwned;
+    legendTalents.pointsSpent = legendTalents.legendTalents.reduce((sum, talent) => sum += talent.level, 0);
+    legendTalents.pointsAvaible = legendTalents.pointsOwned - legendTalents.pointsSpent;
+
+    return legendTalents;
+}
+
 // CustomLists.Spelunky[26]
 export const legendTalentsDisplayOrder = [
     39,
