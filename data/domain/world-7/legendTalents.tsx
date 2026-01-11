@@ -38,7 +38,7 @@ export class LegendTalent {
 }
 
 export class LegendTalents extends Domain {
-    legendTalents: LegendTalent[] = [];
+    talents: LegendTalent[] = [];
     pointsOwned: number = 0;
     pointsSpent: number = 0;
     pointsAvaible: number = 0;
@@ -53,7 +53,7 @@ export class LegendTalents extends Domain {
     }
 
     init(_allItems: Item[]) {
-        this.legendTalents = LegendTalent.fromBase(initLegendTalentsRepo());
+        this.talents = LegendTalent.fromBase(initLegendTalentsRepo());
         return this;
     }
 
@@ -67,7 +67,7 @@ export class LegendTalents extends Domain {
         }
 
         const legendTalentsLevels = spelunkingData[18] as number[];
-        legendTalents.legendTalents.forEach(talent => {
+        legendTalents.talents.forEach(talent => {
             if (talent.index < legendTalentsLevels.length) {
                 talent.level = legendTalentsLevels[talent.index];
             }
@@ -111,7 +111,7 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     pointsOwned += clamBonus1 + clamBonus4 + companionBonus37 + gemBonus42 + artifactBonus34 + evenShopBonus32;
 
     legendTalents.pointsOwned = pointsOwned;
-    legendTalents.pointsSpent = legendTalents.legendTalents.reduce((sum, talent) => sum += talent.level, 0);
+    legendTalents.pointsSpent = legendTalents.talents.reduce((sum, talent) => sum += talent.level, 0);
     legendTalents.pointsAvaible = legendTalents.pointsOwned - legendTalents.pointsSpent;
 
     // Super Talents

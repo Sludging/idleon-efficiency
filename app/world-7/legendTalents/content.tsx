@@ -13,7 +13,6 @@ import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { CircleInformation } from 'grommet-icons';
 import TipDisplay from '../../../components/base/TipDisplay';
-import { colors } from 'grommet/themes/base';
 
 function LegendaryTalents() {
     const goldenColor = "#FAC95D";
@@ -63,7 +62,7 @@ function LegendaryTalents() {
                 <Text margin={{ bottom: "small" }}>Talents</Text>
                 <Grid columns={{ size: 'auto', count: 5 }} gap="small">
                 {
-                    legendTalents.legendTalents.slice().filter(talent => talent.data.name != "filler").sort((talent1, talent2) => talent1.displayOrder > talent2.displayOrder ? 1 : -1).map((talent, index) => {
+                    legendTalents.talents.slice().filter(talent => talent.data.name != "filler").sort((talent1, talent2) => talent1.displayOrder > talent2.displayOrder ? 1 : -1).map((talent, index) => {
                         const maxed = talent.level >= talent.data.maxLevel;
                         return (
                             <ShadowBox key={index} background='dark-1' style={{ opacity: talent.level > 0 ? 1 : 0.5 }} gap='small' pad='small' align='left'>
