@@ -3,7 +3,7 @@ import { LegendTalentModel } from "../model/legendTalentModel";
 export class LegendTalentBase { constructor(public index: number, public data: LegendTalentModel) { } }
 
 
-export const initLegendaryTalentsRepo = (): LegendTalentBase[] => {
+export const initLegendTalentsRepo = (): LegendTalentBase[] => {
     return [
         new LegendTalentBase(0, {
             name: "Coral Restoration",
@@ -18,7 +18,7 @@ export const initLegendaryTalentsRepo = (): LegendTalentBase[] => {
             maxLevel: 4,
             bonusValue: 500,
             x3: undefined,
-            desc: "+{% Drop Rate for all players! @ This bonus is additive, not a multiplier.",
+            desc: "+{% Drop Rate for all players! This bonus is additive, not a multiplier.",
             nextLevelPreview: "+{% Drop Rate"
         }),
         new LegendTalentBase(2, {
@@ -138,7 +138,7 @@ export const initLegendaryTalentsRepo = (): LegendTalentBase[] => {
             maxLevel: 2,
             bonusValue: 200,
             x3: undefined,
-            desc: "+{% extra kills, for opening portals and Deathnote. @ This bonus is additive, not a multiplier.",
+            desc: "+{% extra kills, for opening portals and Deathnote. This bonus is additive, not a multiplier.",
             nextLevelPreview: "+{% extra kills"
         }),
         new LegendTalentBase(17, {
@@ -210,7 +210,7 @@ export const initLegendaryTalentsRepo = (): LegendTalentBase[] => {
             maxLevel: 3,
             bonusValue: 500,
             x3: undefined,
-            desc: "+{% total Golden Food bonus. @ This bonus is additive, not a multiplier.",
+            desc: "+{% total Golden Food bonus. This bonus is additive, not a multiplier.",
             nextLevelPreview: "+{% Golden Food bonus"
         }),
         new LegendTalentBase(26, {
