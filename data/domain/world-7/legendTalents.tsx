@@ -5,6 +5,7 @@ import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
 import { LegendTalentModel } from "../model/legendTalentModel";
 import { Player } from "../player";
+import { Sailing } from "../sailing";
 
 export class LegendTalent {
     level: number = 0;
@@ -42,6 +43,9 @@ export class LegendTalents extends Domain {
     pointsSpent: number = 0;
     pointsAvaible: number = 0;
 
+    superTalentUnlocked: boolean = false;
+    superTalentBonusLevels: number = 50;
+
     getRawKeys(): RawData[] {
         return [
             { key: "Spelunk", perPlayer: false, default: 0 }
@@ -76,7 +80,9 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const companions = data.get("companions") as Companion[];
     const gemStore = data.get("gems") as GemStore;
+    const sailing = data.get("sailing") as Sailing;
 
+    // Legend Talents Points
     let pointsOwned = 0;
 
     players.forEach(player => {
@@ -84,19 +90,26 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     });
 
     // TODO : add ClamBonus 1 and 4 once implemented
+    const clamBonus1 = 0;
+    const clamBonus4 = 0;
+    const companionBonus37 = companions.find(c => c.id === 37)?.owned || false ? 10 : 0;
+    const gemBonus42 = gemStore.purchases.find(purchase => purchase.no == 42)?.pucrhased ?? 0;
+    const artifactBonus34 = Math.min(5, sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0);
+    // TODO : add event shop 32 onc implemented
+    const evenShopBonus32 = 2 * 0;
     
-    const companion37 = companions.find(c => c.id === 37);
-    pointsOwned += (companion37 && companion37.owned) ? 10 : 0;
-
-    pointsOwned += gemStore.purchases.find(purchase => purchase.index == 42)?.pucrhased ?? 0;
-
-    // event shop 32
-
-    //sailing artifact
+    pointsOwned += clamBonus1 + clamBonus4 + companionBonus37 + gemBonus42 + artifactBonus34 + evenShopBonus32;
 
     legendTalents.pointsOwned = pointsOwned;
     legendTalents.pointsSpent = legendTalents.legendTalents.reduce((sum, talent) => sum += talent.level, 0);
     legendTalents.pointsAvaible = legendTalents.pointsOwned - legendTalents.pointsSpent;
+
+    // Super Talents
+    legendTalents.superTalentUnlocked = (legendTalents.legendTalents.find(talent => talent.index == 39)?.getBonus() || 0) >= 1;
+    const legendTalentBonus7 = legendTalents.legendTalents.find(talent => talent.index == 7)?.getBonus() ?? 0;
+    // TODO : add zenith market bonus 5 here once implemented
+    const zenithMarketBonus5 = 0;
+    legendTalents.superTalentBonusLevels = Math.round(50 + legendTalentBonus7 + zenithMarketBonus5);
 
     return legendTalents;
 }
