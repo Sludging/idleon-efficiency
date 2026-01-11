@@ -1,4 +1,6 @@
-import { LegendaryTalentBase } from "../data/LegendaryTalentsRepo";
+import { Domain, RawData } from "../base/domain";
+import { initLegendaryTalentsRepo, LegendaryTalentBase } from "../data/LegendaryTalentsRepo";
+import { Item } from "../items";
 import { LegendaryTalentModel } from "../model/legendaryTalentModel";
 
 export class LegendaryTalent {
@@ -28,6 +30,38 @@ export class LegendaryTalent {
         const value = this.getBonus();
 
         return this.data.desc.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString());
+    }
+}
+
+export class LegendaryTalents extends Domain {
+    legendTalents: LegendaryTalent[] = [];
+
+    getRawKeys(): RawData[] {
+        return [
+            { key: "Spelunk", perPlayer: false, default: 0 }
+        ]
+    }
+
+    init(_allItems: Item[]) {
+        this.legendTalents = LegendaryTalent.fromBase(initLegendaryTalentsRepo());
+        return this;
+    }
+
+    parse(data: Map<string, any>): void {
+        const legendaryTalents = data.get(this.getDataKey()) as LegendaryTalents;
+        const spelunkingData = data.get("Spelunk") as any[][];
+
+        // Safe guard for old accounts / missing data.
+        if (!spelunkingData || spelunkingData.length == 0) {
+            return;
+        }
+
+        const legendaryTalentsLevels = spelunkingData[18] as number[];
+        legendaryTalents.legendTalents.forEach(talent => {
+            if (talent.index < legendaryTalentsLevels.length) {
+                talent.level = legendaryTalentsLevels[talent.index];
+            }
+        });
     }
 }
 
