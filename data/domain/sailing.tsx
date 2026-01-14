@@ -26,6 +26,9 @@ import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { StarSigns } from "./starsigns";
 import { Sneaking } from "./world-6/sneaking";
+import { Arcade } from "./arcade";
+import { Hole } from "./world-5/hole/hole";
+import { Votes } from "./world-2/votes";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -41,7 +44,7 @@ const captainBonuses = initCaptainBonusRepo();
 
 export enum IslandStatus {
     Discoverd,
-    Hidden
+    Hidden,
 }
 
 export class CaptainTrait {
@@ -86,7 +89,7 @@ export class Captain {
     traits: CaptainTrait[] = [];
 
     // bonusValues is array of traits, each array holds another array of [traitIndex, bonusValue].
-    constructor(public index: number, public level: number, public currentXP: number, traitInfo: number[][]) {
+    constructor(public index: number, public level: number, public currentXP: number, traitInfo: number[][], public tier: number) {
         // If base value is 0, there's no trait.
         traitInfo.forEach(([traitIndex, baseValue]) => {
             if (traitIndex > -1) {
@@ -119,14 +122,18 @@ export enum BoatUpgradeType {
 export class Boat {
     sigilBonus: number = 0;
     genieLampBonus: number = 30;
-
+    holeLampBonus: number = 0;
+    unendingSearchBonus: number = 0;
+    daveyJonesBonus: number = 1;
+    arcadeBonus: number = 0;
+    activeEnderCaptains: number = 0;
+    
     speed: number = 0;
 
     // Helper values.
     speedBaseMath = 0;
     speedBaseMathWithoutStarSign = 0;
     speedBaseMathWithSilkrode = 0;
-    unendingSearchBonus = 0;
     minTravelTime = 120;
 
     constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
@@ -180,8 +187,9 @@ export class Boat {
             this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Loot Value")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
             : 0;
 
-        const firstMath = 2 + Math.pow(Math.floor(lootUpgrades / 8), 2);
-        return (5 + firstMath * lootUpgrades) * (1 + (this.sigilBonus + (captainBonus + this.genieLampBonus)) / 100) * (1 + this.unendingSearchBonus / 100);
+        const firstMath = (5 + (2 + Math.pow(Math.floor(lootUpgrades / 8), 2) * lootUpgrades));
+        const secondMath = (1 + (this.sigilBonus + (captainBonus + (this.genieLampBonus + (25 * Math.min(30, this.activeEnderCaptains) + this.arcadeBonus)))) / 100);
+        return firstMath * secondMath * (1 + this.unendingSearchBonus / 100) * this.daveyJonesBonus * (1 + this.holeLampBonus / 100);
     }
 
     getSpeedValue = (
@@ -193,8 +201,8 @@ export class Boat {
             this.captain?.traits.filter(trait => trait.bonus.bonus.includes("Boat Speed")).reduce((sum, trait) => sum += trait.currentBonus, 0) ?? 0
             : 0;
 
-        const firstMath = 5 + Math.pow(Math.floor(speedUpgrades / 7), 2);
-        const boatSpeed = (10 + firstMath * speedUpgrades) * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
+        const firstMath = (10 + (5 + Math.pow(Math.floor(speedUpgrades / 7), 2)) * speedUpgrades);
+        const boatSpeed = firstMath * this.daveyJonesBonus * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
@@ -207,8 +215,11 @@ export class Island {
     artifacts: Artifact[] = [];
     status: IslandStatus = IslandStatus.Hidden;
     discoverProgress: number = -1;
+    unlocked: boolean = true;
 
-    constructor(public index: number, public data: IslandInfoModel) { }
+    constructor(public index: number, public data: IslandInfoModel) {
+        if (this.index == 15) this.unlocked = false;
+     }
 
     getImageData = (): ImageData => {
         return {
@@ -220,6 +231,15 @@ export class Island {
 
     static fromBase = (data: IslandInfoBase[]): Island[] => {
         return data.map(island => new Island(island.index, island.data));
+    }
+
+    getUnlockText = (): string => {
+        switch (this.index) {
+            case 15:
+                return "Beat the first Spelunking boss in W7";
+            default:
+                return "Should be unlocked already";
+        }
     }
 }
 
@@ -240,16 +260,20 @@ export class Sailing extends Domain {
     islands: Island[] = Island.fromBase(initIslandInfoRepo());
     boats: Boat[] = [];
     captains: Captain[] = [];
+    shopCaptains: Captain[] = [];
     loot: number[] = [];
 
     maxChests: number = 5;
     captainsUnlocked = 1;
+    shopCaptainUnlocked = 1;
     boatsUnlocked = 1;
 
     shinyMinSpeedBonus: number = 0;
 
     starSignInfinity: boolean = false;
     starSignUnlocked: boolean = false;
+
+    enderCaptainUnlocked: boolean = false;
 
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
@@ -280,8 +304,9 @@ export class Sailing extends Domain {
         // Map artifacts to islands to make display easier.
         let artifactIndex = 0;
         this.islands.forEach(island => {
-            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + island.data.artifactsPerIsland);
-            artifactIndex += island.data.artifactsPerIsland;
+            const artifactsNumberForIsland = (island.index == 14 ? 4 : island.data.artifactsPerIsland);
+            island.artifacts = this.artifacts.slice(artifactIndex, artifactIndex + artifactsNumberForIsland);
+            artifactIndex += artifactsNumberForIsland;
         })
 
         return this;
@@ -313,6 +338,17 @@ export class Sailing extends Domain {
         sailing.islands.forEach(island => {
             if (sailingData[0][island.index] == -1) {
                 island.status = IslandStatus.Discoverd;
+                island.artifacts.forEach(artifact => {
+                    if (![30,31,32].find(number => number == artifact.index))
+                    {
+                        // unlock artifact if not one where you need to buy Jade Emporium upgrade (or maybe something else in the future)
+                        artifact.unlocked = true;
+
+                        // Also set the boolean for the base artifact to avoid discrepancy
+                        const baseArtifact = sailing.artifacts.find(art => art.index == artifact.index);
+                        if (baseArtifact) baseArtifact.unlocked = true;
+                    }
+                });
             }
             else {
                 island.discoverProgress = sailingData[0][island.index];
@@ -324,7 +360,9 @@ export class Sailing extends Domain {
 
         captainData.forEach((captain, cIndex) => {
             if (cIndex < sailing.captainsUnlocked && captain[0] != -1) {
-                sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]]));
+                sailing.captains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
+            } else if (cIndex >= captainData.length - 4) {
+                sailing.shopCaptains.push(new Captain(cIndex, captain[3], captain[4], [[captain[1], captain[5]], [captain[2], captain[6]]], captain[0]));
             }
         })
 
@@ -342,23 +380,15 @@ export class Sailing extends Domain {
 
 export const updateSailing = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
-    const cooking = data.get("cooking") as Cooking;
     const sigils = data.get("sigils") as Sigils;
-    const divinity = data.get("divinity") as Divinity;
-    const cards = data.get("cards") as Card[];
-    const stamps = data.get("stamps") as Stamp[][];
-    const statues = data.get("statues") as PlayerStatues[];
-    const alchemy = data.get("alchemy") as Alchemy;
     const gemStore = data.get("gems") as GemStore;
     const players = data.get("players") as Player[];
     const taskboard = data.get("taskboard") as TaskBoard;
     const achievements = data.get("achievements") as Achievement[];
-    const rift = data.get("rift") as Rift;
-    const worship = data.get("worship") as Worship;
     const starSigns = data.get("starsigns") as StarSigns;
     const sneaking = data.get("sneaking") as Sneaking;
-
-    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+    const arcade = data.get("arcade") as Arcade;
+    const hole = data.get("hole") as Hole;
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -370,9 +400,96 @@ export const updateSailing = (data: Map<string, any>) => {
             (achievements[287].completed ? 1 : 0) +
             (achievements[290].completed ? 1 : 0)
         )
-        , 30);
+        , 34);
 
-    // Speed base math
+    // DaveyJonesBonus (used for both speed and loot values)
+    // TODO : update this once legend talents are added to IE
+    const gemShopDaveyPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
+    const legendTalentBonus  = 0;
+    const daveyJonesBonus = 1 + (50 * gemShopDaveyPurchases + legendTalentBonus) / 100;
+        
+    //Unending Loot Search
+    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
+    
+    // Various loot bonuses
+    const holeLampLootBonus = hole.lamp.getBonus(false, 1, 0);
+    const arcadeBonus = arcade.bonuses.find(bonus => bonus.index == 33)?.getBonus() ?? 0;
+    const activeEnderCaptains = sailing.captains.reduce((enderCount, captain) => enderCount += (captain.tier == 6) ? 1 : 0, 0);
+
+    // Update boat impacts
+    sailing.boats.forEach(boat => {
+        boat.genieLampBonus = sailing.artifacts[5].getBonus()
+        boat.sigilBonus = sigils.sigils[21].getBonus();
+        boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
+        boat.daveyJonesBonus = daveyJonesBonus;
+        boat.holeLampBonus = holeLampLootBonus;
+        boat.arcadeBonus = arcadeBonus;
+        boat.activeEnderCaptains = activeEnderCaptains;
+    });
+
+    // Nice info to have for the UI
+    sailing.starSignUnlocked = starSigns.isStarSignUnlocked("C. Shanti Minor");
+    sailing.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "C. Shanti Minor") != undefined);
+
+    // Update unlocked artifacts from Emporium Upgrades
+    const theEdgeIsland = sailing.islands.find(island => island.index == 14);
+    if (theEdgeIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && theEdgeIsland.status == IslandStatus.Discoverd) {
+        theEdgeIsland.artifacts.forEach(artifact => {
+            if ([30,31,32].find(number => number == artifact.index))
+            {
+                artifact.unlocked = true;
+
+                const baseArtifact = sailing.artifacts.find(art => art.index == artifact.index);
+                if (baseArtifact) baseArtifact.unlocked = true;
+            }
+        })
+    }
+    // TODO : Update this once spelunking is done to manage the last island locked/unlocked state
+    const spelunkingFirstBossBeaten = false;
+    const worldsEndIsland = sailing.islands.find(island => island.index == 15);
+    if (spelunkingFirstBossBeaten && worldsEndIsland && worldsEndIsland.status != IslandStatus.Discoverd) {
+        worldsEndIsland.unlocked = true;
+    }
+
+    // Nice to have to create an alert
+    sailing.enderCaptainUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 32)?.purchased ?? false;
+    const sailingLevel = players[0].skills.get(SkillsIndex.Sailing)?.level ?? 0;
+    switch (true) {
+        case sailingLevel >= 35:
+            sailing.shopCaptainUnlocked = 4;
+            break;
+        case sailingLevel >= 25:
+            sailing.shopCaptainUnlocked = 3;
+            break;
+        case sailingLevel >= 15:
+            sailing.shopCaptainUnlocked = 2;
+            break;
+        default:
+            sailing.shopCaptainUnlocked = 1;
+            break;
+    };
+
+    return sailing;
+}
+
+export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing;
+    const family = data.get("family") as Family;
+    const gemStore = data.get("gems") as GemStore;
+    const cooking = data.get("cooking") as Cooking;
+    const divinity = data.get("divinity") as Divinity;
+    const cards = data.get("cards") as Card[];
+    const stamps = data.get("stamps") as Stamp[][];
+    const statues = data.get("statues") as PlayerStatues[];
+    const alchemy = data.get("alchemy") as Alchemy;
+    const rift = data.get("rift") as Rift;
+    const worship = data.get("worship") as Worship;
+    const votes = data.get("votes") as Votes;
+    const starSigns = data.get("starsigns") as StarSigns;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
+    // Boat Speed
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
     const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
     const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
@@ -381,48 +498,28 @@ export const updateSailing = (data: Map<string, any>) => {
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
     const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
-    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) * (1 + divinity.gods[4].getBlessingBonus() / 100);
-    const speedBaseMath = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
-    const speedBaseMathWithSilkrode = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-        * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
-    const speedBaseMathWithoutStarSign = firstMath * (1 + divinity.gods[6].getBlessingBonus() / 100)
-    * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
-
-    //Unending Loot Search
-    const highestLevelUnendingSearch = players.slice().sort((player1, player2) => player1.getTalentBonus(325) > player2.getTalentBonus(325) ? -1 : 1)[0];
-
-    // Update boat impacts
-    sailing.boats.forEach(boat => {
-        boat.genieLampBonus = sailing.artifacts[5].getBonus()
-        boat.sigilBonus = sigils.sigils[21].getBonus();
-        boat.speedBaseMath = speedBaseMath;
-        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
-        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
-        boat.unendingSearchBonus = highestLevelUnendingSearch.getTalentBonus(325);
-    });
-
-    // Nice info to have for the UI
-    sailing.starSignUnlocked = starSigns.isStarSignUnlocked("C. Shanti Minor");
-    sailing.starSignInfinity = (starSigns.infinityStarSigns.find(sign => sign.name == "C. Shanti Minor") != undefined);
-
-    // Update available artifacts from Emporium Upgrades
-    const lastIsland = sailing.islands.find(island => island.index == 14);
-    if (lastIsland && sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "Brighter Lighthouse Bulb")?.purchased && lastIsland.artifacts.length == 1) {
-        lastIsland.artifacts= sailing.artifacts.slice(29, 29 + 4);
-    }
-
-    return sailing;
-}
-
-export const updateMinTravelTime = (data: Map<string, any>) => {
-    const sailing = data.get("sailing") as Sailing;
-    const family = data.get("family") as Family;
+    // Doesn't include DaveyJonesBonus as boat already have this value, so we don't calculate it a second time
+    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125) 
+        * (1 + divinity.gods[4].getBlessingBonus() / 100) 
+        * (1 + divinity.gods[6].getBlessingBonus() / 100)
+        * (1 + votes.getCurrentBonus(24) / 100);
+    const speedBaseMath = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
+    const speedBaseMathWithSilkrode = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
+    const speedBaseMathWithoutStarSign = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
+    const gemShopPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
+    // TODO : update this value legend talents are implemented
+    const legendPointsBonus = 0;
+    const minTravelTime = Math.max(15, 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus + legendPointsBonus) / 100)) - 4 * gemShopPurchases);
+
+    // Update boat impacts
     sailing.boats.forEach(boat => {
-        boat.minTravelTime = 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus) / 100));
+        boat.minTravelTime = minTravelTime;
+        boat.speedBaseMath = speedBaseMath;
+        boat.speedBaseMathWithoutStarSign = speedBaseMathWithoutStarSign;
+        boat.speedBaseMathWithSilkrode = speedBaseMathWithSilkrode;
     });
 
     return sailing;

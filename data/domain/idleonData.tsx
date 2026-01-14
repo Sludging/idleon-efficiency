@@ -33,7 +33,7 @@ import { AnvilWrapper, updateAnvil } from './anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
 import { Divinity, updateDivinity } from './divinity';
-import { Sailing, updateMinTravelTime, updateSailing } from './sailing';
+import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './sailing';
 import { Gaming, updateGaming, updateSuperbitImpacts } from './gaming';
 import { AtomCollider, updateAtomCollider } from './atomCollider';
 import { updateArtifacts, updateSailingArtifactSlabBoost } from './sailing/artifacts';
@@ -272,7 +272,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
-    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTime(accountData),
+    "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),

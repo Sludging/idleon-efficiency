@@ -159,6 +159,7 @@ export class Account extends Domain {
     }
 
     init(allItems: Item[], _charCount: number) {
+        this.miniBosses = [];
         this.miniBosses.push(new Miniboss("mini3a", 0));
         this.miniBosses.push(new Miniboss("mini4a", 0));
         this.miniBosses.push(new Miniboss("mini5a", 0));
