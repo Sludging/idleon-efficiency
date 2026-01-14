@@ -643,16 +643,18 @@ class IdleonDebugServer {
         if (expression.startsWith('window.') || expression.includes('window.frames[0].__idleon_cheats__')) {
             // Direct expressions that already reference window - use as-is
             fullExpression = expression;
-        } else if (expression.startsWith('idleon.') || expression.startsWith('idleon[')) {
-            // Convenience shortcuts - execute in iframe context
-            fullExpression = `window.frames[0].${expression}`;
+        } else if (expression.includes('idleon.') || expression.includes('idleon[')) {
+            // Contains idleon reference - wrap in function context to handle nested calls properly
+            // This allows expressions like: idleon.callFunction("Func", 0, idleon.getAttr("Boats")[0][0])
+            fullExpression = `
+                (function() {
+                    const idleon = window.frames[0].idleon;
+                    return ${expression};
+                })()
+            `;
         } else if (expression.startsWith('this.')) {
             // Replace 'this' with the game object
             fullExpression = expression.replace(/^this\./, 'window.frames[0].__idleon_cheats__.');
-        } else if (expression.includes('idleon.') || expression.includes('idleon[')) {
-            // Contains idleon reference but wrapped in other functions - replace idleon references
-            fullExpression = expression.replace(/idleon\./g, 'window.frames[0].idleon.');
-            fullExpression = fullExpression.replace(/idleon\[/g, 'window.frames[0].idleon[');
         } else {
             // Assume it's a property/method of the game object
             fullExpression = `window.frames[0].__idleon_cheats__.${expression}`;

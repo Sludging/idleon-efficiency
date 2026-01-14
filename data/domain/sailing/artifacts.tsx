@@ -15,10 +15,12 @@ export enum ArtifactStatus {
     Obtained,
     Ancient,
     Eldritch,
-    Sovereign
+    Sovereign,
+    Omnipotent
 }
 
 export class Artifact {
+    unlocked: boolean = false;
     status: ArtifactStatus = ArtifactStatus.Unobtained;
 
     constructor(public index: number, public data: ArtifactModel) { }
@@ -58,6 +60,8 @@ export class Artifact {
                     // Lava didn't update the artifact values properly, so hardcoding values.
                     goldRelic.data.qtyBonus = 2;
                     return goldRelic;
+                case 33:
+                    return new DeathskullArtifact(artifact.index, artifact.data);
                 default: return new Artifact(artifact.index, artifact.data)
             }
         });
@@ -76,6 +80,9 @@ export class Artifact {
                 break;
             case 4:
                 this.status = ArtifactStatus.Sovereign;
+                break;
+            case 5:
+                this.status = ArtifactStatus.Omnipotent;
                 break;
         }
     }
@@ -117,6 +124,13 @@ export class Artifact {
         return this.data.sovereignBonusQty;
     }
 
+    getOmnipotentBonus = () => {
+        if (this.data.omnipotentBonus == "The artifact's main bonus is quintupled!") {
+            return this.data.qtyBonus;
+        }
+        return this.data.omnipotentBonusQty;
+    }
+
     hasCalculatedBonus = () => {
         return this.data.bonus.includes("Total Bonus: ");
     }
@@ -132,7 +146,7 @@ export class Artifact {
         if (this.hasCalculatedBonus()) {
             return this.data.bonus.split("Total Bonus: ")[0].replace("@", "").trim().replace("{", this.data.qtyBonus.toString())
         }
-        return this.data.bonus.replace("{", this.data.qtyBonus.toString())
+        return this.data.bonus.replace("{", this.data.qtyBonus.toString());
     }
 
     getBonusMultiplier = (): number => {
@@ -145,8 +159,22 @@ export class Artifact {
         if (this.status == ArtifactStatus.Sovereign) {
             return 4;
         }
+        if (this.status == ArtifactStatus.Omnipotent) {
+            return 5;
+        }
 
         return 1;
+    }
+
+    getUnlockText = (): string => {
+        switch (this.index) {
+            case 30:
+            case 31:
+            case 32:
+                return "Unlocked through Jade Emporium in W6"
+            default:
+                return "First unlock this artifact's island";
+        }
     }
 }
 
@@ -170,6 +198,7 @@ export class GoldRelicArtifact extends Artifact {
                 case ArtifactStatus.Ancient: return this.data.qtyBonus + this.data.ancientBonusQty;
                 case ArtifactStatus.Eldritch: return this.data.qtyBonus + (this.data.eldritchBonusQty ?? 0);
                 case ArtifactStatus.Sovereign: return this.data.qtyBonus + (this.data.sovereignBonusQty ?? 0);
+                case ArtifactStatus.Omnipotent: return this.data.qtyBonus + (this.data.omnipotentBonusQty ?? 0);
             }
         }
 
@@ -221,6 +250,9 @@ export class AshenUrnArtifact extends Artifact {
         }
         if (this.status == ArtifactStatus.Sovereign) { 
             return 800;
+        }
+        if (this.status == ArtifactStatus.Omnipotent) {
+            return 1000;
         }
 
         return 200;
@@ -334,6 +366,20 @@ export class FunHippoeteArtifact extends Artifact {
 
     override getCalculatedBonusText = () => {
         return `N/A for now.`;
+    }
+}
+
+export class DeathskullArtifact extends Artifact {
+    override getBonus = (showUnobtained: boolean = false) => {
+        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+            return 0;
+        }
+
+        return 0;
+    }
+
+    override getBonusText = () => {
+        return "+1 Gallery Slot";
     }
 }
 
