@@ -62,7 +62,7 @@ import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from 
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 import { EquipmentSets } from './misc/equipmentSets';
-import { EventShop } from './world-7/eventShop';
+import { EventShop } from './eventShop';
 import { ClamWork } from './world-7/clamWork';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {

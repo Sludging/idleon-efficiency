@@ -1,6 +1,6 @@
-import { letterToNumber, number2letter, number2letterArray } from "../../utility";
-import { Domain, RawData } from "../base/domain"
-import { Item } from "../items";
+import { letterToNumber, number2letter, number2letterArray } from "../utility";
+import { Domain, RawData } from "./base/domain"
+import { Item } from "./items";
 
 export class EventShopBonus {
     owned: boolean = false;
