@@ -9,7 +9,7 @@ export class EventShopBonus {
 }
 
 export class EventShop extends Domain {
-    bonuses: EventShopBonus[] = []
+    bonuses: EventShopBonus[] = [];
 
     getRawKeys(): RawData[] {
         return [];
