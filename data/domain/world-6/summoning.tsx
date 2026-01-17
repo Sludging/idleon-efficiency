@@ -658,7 +658,7 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     // Don't bother if == 0
     if (bonusEquinoxLevel > 0) {
         equinox.upgrades.forEach((upgrade) => {
-            upgrade.bonusLevelFromSummoning = bonusEquinoxLevel;
+            upgrade.bonusLevelFromSummoningWinner24 = bonusEquinoxLevel;
             upgrade.setMaxLevel(equinox.challenges);
         });
     }

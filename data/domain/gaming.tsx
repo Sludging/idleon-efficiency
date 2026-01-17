@@ -224,6 +224,7 @@ export const updateGaming = (data: Map<string, any>) => {
 
 export const updateSuperbitImpacts = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;   
+    const equinox = data.get("equinox") as Equinox;
     //TODO: Do obols
 
     //TODO: Do shrine level up speed
@@ -240,5 +241,9 @@ export const updateSuperbitImpacts = (data: Map<string, any>) => {
     }
     if (gaming.superbits[23].unlocked) {
         atomCollider.atoms.forEach(atom => atom.gamingMaxLevelBoost = 10);
+    }
+
+    if (gaming.superbits[35].unlocked) {
+        equinox.upgrades.forEach(upgrade => upgrade.bonusLevelFromSuperBit35 = 10);
     }
 }

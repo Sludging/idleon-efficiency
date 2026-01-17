@@ -13,6 +13,8 @@ import { Hole } from "./world-5/hole/hole";
 import { Arcade } from "./arcade";
 import { Emperor } from "./emperor";
 import { Tesseract } from "./tesseract";
+import { Tome } from "./tome";
+import { EventShop } from "./eventShop";
 
 class Challenge {
     complete: boolean = false;
@@ -44,7 +46,9 @@ class Upgrade {
     unlocked: boolean = false;
     level: number = 0;
     maxLevel: number = 0;
-    bonusLevelFromSummoning: number = 0;
+    bonusLevelFromSummoningWinner24: number = 0;
+    bonusLevelFromSuperBit35: number = 0;
+
     constructor(public index: number, public data: DreamUpgradeModel) { }
 
     setMaxLevel = (challanges: Challenge[]): void => {
@@ -54,31 +58,31 @@ class Upgrade {
                 break;
             }
             case 4: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * (challanges[34]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 5 * challanges[12].getValue() + 10 * challanges[18].getValue() + 10 * (challanges[34]?.getValue() ?? 0));
                 break;
             }
             case 5: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * (challanges[32]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 5 * (challanges[32]?.getValue() ?? 0));
                 break;
             }
             case 7: {
-                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35);
                 break;
             }
             case 8: {
-                this.maxLevel = Math.round(this.data.x1 + 5 * challanges[21].getValue() + 10 * challanges[26].getValue() + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 5 * challanges[21].getValue() + 10 * challanges[26].getValue());
                 break;
             }
             case 9: {
-                this.maxLevel = Math.round(this.data.x1 + 4 * challanges[25].getValue() + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 4 * challanges[25].getValue());
                 break;
             }
             case 10: {
-                this.maxLevel = Math.round(this.data.x1 + 4 * (challanges[30]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 4 * (challanges[30]?.getValue() ?? 0));
                 break;
             }
             case 11: {
-                this.maxLevel = Math.round(this.data.x1 + 15 * (challanges[35]?.getValue() ?? 0) + this.bonusLevelFromSummoning);
+                this.maxLevel = Math.round(this.data.x1 + this.bonusLevelFromSummoningWinner24 + this.bonusLevelFromSuperBit35 + 15 * (challanges[35]?.getValue() ?? 0));
                 break;
             }
             default: {
@@ -198,7 +202,6 @@ export interface Bar {
     timeToFull: number,
 }
 
-
 export class Equinox extends Domain {
     challenges: Challenge[] = [];
     upgrades: Upgrade[] = [];
@@ -291,6 +294,8 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const emperor = data.get("emperor") as Emperor;
     const tesseract = data.get("tesseract") as Tesseract;
     const rawData = data.get("rawData") as Record<string, any>;
+    const tome = data.get("tome") as Tome;
+    const eventShop = data.get("eventshop") as EventShop;
 
     let bundleInfo = undefined;
     // Make sure we have bundle info, this usually is missing for public profiles.
@@ -310,10 +315,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
         companion15Bonus = companion15.data.bonus;
     }
     const cosmo26Bonus = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 26)?.getBonus() ?? 0;
-    let eventShop3Bonus = 0;
-    if (optionList.length > 311) {
-        eventShop3Bonus = optionList[311].toString().includes(number2letter(3)) ? 1 : 0;
-    }
+    const eventShop3Bonus = eventShop.isBonusOwned(3) ? 0.5 : 0;
     let option320Bonus = 0;
     if (optionList.length > 320) {
         option320Bonus = optionList[320] / 10;
@@ -322,14 +324,17 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const emperor5Bonus = emperor.emperorBonuses.find(bonus => bonus.index == 5)?.getBonus() ?? 0;
     const tesseract37Bonus = tesseract.getUpgradeBonus(37) ?? 0;
     const fillRateFromChallenges = equinox.challenges.reduce((sum, challenge) => sum += challenge.getFillRateBonus(), 0);
+    const fillRateFromTome = tome.getEpilogueBonus(8);
     equinox.bar.rate = Math.round(
         baseMultiplier * 
         (1 + (vote32Bonus / 100)) *
+        (1 + fillRateFromTome / 100) *
         (1 + companion15Bonus) *
         (1 + (cosmo26Bonus / 100)) *
-        (1 + 0.5 * eventShop3Bonus) *
+        (1 + eventShop3Bonus) *
         (1 + option320Bonus) *
-        (1 + ((vialBonus + fillRateFromChallenges + arcade41Bonus + emperor5Bonus + tesseract37Bonus) / 100)));
+        (1 + tesseract37Bonus / 100) *
+        (1 + ((vialBonus + fillRateFromChallenges + arcade41Bonus + emperor5Bonus) / 100)));
 
     const hoursSinceUpdate = ((new Date().getTime() - lastUpdated.getTime()) / 1000) / 3600;
     // calculate how much bar would have filled based on last updated time.
