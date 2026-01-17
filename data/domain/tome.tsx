@@ -40,6 +40,10 @@ import { Prayer } from './prayers';
 import { UpgradeVault } from './upgradeVault';
 import { Hole, WisdomMonument } from './world-5/hole/hole';
 import { SkillsIndex } from './SkillsIndex';
+import { TomeEpilogueBonusBase } from './data/TomeEpilogueBonusRepo';
+import { TomeEpilogueBonusModel } from './model/tomeEpilogueBonusModel';
+import { EquipmentSets } from './misc/equipmentSets';
+import { Grimoire } from './grimoire';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -47,6 +51,22 @@ export enum TomeScoreColors {
     Silver = "#CDE3E6",
     Bronze = "#F1A461",
     Background = "#3C2C26"
+}
+
+export class TomeEpilogueBonus {
+    unlocked: boolean = false;
+    boostFromBonuses: number = 0;
+
+    constructor(public index: number, public data: TomeEpilogueBonusModel) {}
+
+    static fromBase(data: TomeEpilogueBonusBase[]) {
+        return data.map(chapter => new TomeEpilogueBonus(chapter.index, chapter.data));
+    }
+
+    getBonus(score: number): number {
+        return (1 + this.boostFromBonuses / 100) * this.data.x0 
+            * Math.max(0, Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7) / (25 + Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7)))
+    }
 }
 
 export class TomeLine {
@@ -207,6 +227,7 @@ export class Tome extends Domain {
     private highestScore: number = 0;
     highestScoreIndex: number = 0;
     scoreThresholds: number[] = [];
+    epilogueBonuses: TomeEpilogueBonus[] = [];
     unlocked: boolean = false;
     charCount: number = 0;
     totalAccountLevel: number = 0;
@@ -245,12 +266,16 @@ export class Tome extends Domain {
         this.highestScoreIndex = 0;
 
         for (let i = 0; i < this.charCount; i++) {
-            const playerScore = this.lines.reduce((sum, line) => sum + line.getPlayerScore(i), 0);
+            const playerScore = this.getPlayerTotalScore(i);
             if (this.highestScore < playerScore) {
                 this.highestScore = playerScore;
                 this.highestScoreIndex = i;
             }
         }
+    }
+
+    getPlayerTotalScore = (charIndex: number) => {
+        return this.lines.reduce((sum, line) => sum + line.getPlayerScore(charIndex), 0);
     }
 
     getScoreRankingDisplay = (): string => {
@@ -276,6 +301,18 @@ export class Tome extends Domain {
 
     getHighestScore = (): number => {
         return this.unlocked ? this.highestScore : 0;
+    }
+
+    getEpilogueBonus = (index: number, playerIndex: number = -1): number => {
+        const bonus = this.epilogueBonuses.find(bonus => bonus.index == index);
+
+        const scoreToUse = playerIndex >= 0 ? this.getPlayerTotalScore(playerIndex) : this.highestScore ;
+
+        if (bonus && bonus.unlocked) {
+            return bonus.getBonus(scoreToUse);
+        }
+
+        return 0;
     }
 }
 
@@ -316,6 +353,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const prayers = data.get("prayers") as Prayer[];
     const upgVault = data.get("upgradeVault") as UpgradeVault;
     const hole = data.get("hole") as Hole;
+    const equipmentSet = data.get("equipmentSets") as EquipmentSets;
+    const grimoire = data.get("grimoire") as Grimoire;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -1003,6 +1042,13 @@ export const updateTomeScores = (data: Map<string, any>) => {
     tome.updateHighestScore();
     // If at least one line of the higesht score player is unlocked, Tome is considered unlocked
     tome.unlocked = tome.lines.some(line => line.unlocked);
+
+    // Update Tome Epilogue bonuses
+    const grimoireBonus = grimoire.getUpgradeBonus(17);
+    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET");
+    tome.epilogueBonuses.forEach(bonus => {
+        bonus.boostFromBonuses = grimoireBonus + equipmentSetBonus;
+    });
 }
 
 // engine.getGameAttribute("CustomLists").h.NinjaInfo[32]
