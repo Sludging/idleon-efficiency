@@ -63,6 +63,7 @@ import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './world-7/eventShop';
+import { ClamWork } from './world-7/clamWork';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -148,6 +149,7 @@ const domainList: Domain[] = [
     new Emperor("emperor"),
     new EquipmentSets("equipmentSets"),
     new EventShop("eventshop"),
+    new ClamWork("clamwork"),
 ]
 
 export class IdleonData {
