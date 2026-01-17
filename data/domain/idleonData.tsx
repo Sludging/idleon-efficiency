@@ -62,6 +62,7 @@ import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from 
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
 import { EquipmentSets } from './misc/equipmentSets';
+import { EventShop } from './world-7/eventShop';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -146,6 +147,7 @@ const domainList: Domain[] = [
     new Compass("compass"),
     new Emperor("emperor"),
     new EquipmentSets("equipmentSets"),
+    new EventShop("eventshop"),
 ]
 
 export class IdleonData {
