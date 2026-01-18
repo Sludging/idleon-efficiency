@@ -148,7 +148,7 @@ const domainList: Domain[] = [
     new Compass("compass"),
     new Emperor("emperor"),
     new EquipmentSets("equipmentSets"),
-    new EventShop("eventshop"),
+    new EventShop("eventShop"),
     new ClamWork("clamwork"),
 ]
 

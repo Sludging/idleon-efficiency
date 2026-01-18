@@ -295,7 +295,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
     const tesseract = data.get("tesseract") as Tesseract;
     const rawData = data.get("rawData") as Record<string, any>;
     const tome = data.get("tome") as Tome;
-    const eventShop = data.get("eventshop") as EventShop;
+    const eventShop = data.get("eventShop") as EventShop;
 
     let bundleInfo = undefined;
     // Make sure we have bundle info, this usually is missing for public profiles.
