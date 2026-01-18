@@ -1,13 +1,19 @@
 import { Domain, RawData } from "../base/domain";
-import { initVotesBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
+import { Companion } from "../companions";
 import { Equinox } from "../equinox";
 import { Item } from "../items";
+import { Hole } from "../world-5/hole/hole";
+import { Summoning } from "../world-6/summoning";
+//import { LegendTalents } from "../world-7/legendTalents"; don't keep this commented once merged
+import { EventShop } from "../eventShop";
+import { initVotesBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
 import { VoteBonusModel } from "../model/voteBonusModel";
+import { Meritocraty } from "../world-7/meritocraty";
 
 export class Votes extends Domain {
-    multiFromEquinox: number = 0;
-    multiFromSummoning: number = 0;
-    multiFromHole: number = 0;
+    multiFromBonuses: number = 0;
+    multiFromMeritocraty: number = 0;
+
     bonuses: VoteBonus[] = [];
     currentBonusIndex: number = 0;
     ongoingVoteTopOptionIndex: number = 0;
@@ -66,16 +72,40 @@ export class Votes extends Domain {
     }
 
     getBonusMultiplier = () => {
-        return 1 + (this.multiFromEquinox + this.multiFromSummoning + this.multiFromHole) / 100;
+        return (1 + this.multiFromMeritocraty / 100) * (1 + this.multiFromBonuses / 100);
     }
 }
 
 export const updateVotesBonus = (data: Map<string, any>) => {
     const equinox = data.get("equinox") as Equinox;
     const votes = data.get("votes") as Votes;
+    const companions = data.get("companions") as Companion[];
+    const hole = data.get("hole") as Hole;
+    const summoning = data.get("summoning") as Summoning;
+    //const legendTalents = data.get("legendTalents") as LegendTalents; don't keep this commented once emerged
+    const eventShop = data.get("eventShop") as EventShop;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
 
-    votes.multiFromEquinox = (equinox.upgrades[11]?.getBonus() ?? 0);
-    votes.multiFromHole = 0; // TODO : Need to update this once Hole have been implemanted
+    const companion41 = companions.find(companion => companion.id == 41);
+    const multiFromCompanion41 = companion41?.owned || false ? companion41.data.bonus : 0;
+    const companion19 = companions.find(companion => companion.id == 19);
+    const multiFromCompanion19 = companion19?.owned || false ? companion19.data.bonus : 0;
+    const multiFromDream13 = (equinox.upgrades[11]?.getBonus() ?? 0);
+    const multiFromHoleCosmo = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 3)?.getBonus() ?? 0;
+    const multiFromSUmmoningWinningBonus22 = summoning.summonBonuses.find(bonus => bonus.index == 22)?.getBonus() ?? 0;
+    const multiFromEventShop7 = eventShop.isBonusOwned(7) ? 17 : 0;
+    const multiFromEventShop16 = eventShop.isBonusOwned(16) ? 13 : 0;
+    // TODO : update this once gaming palette is added
+    const multiFromGamingPalette32 = 0;
+    const multiFromLegendTalents22 = /*legendTalents.legendTalents.find(talent => talent.index == 22)?.getBonus() ?? don't keep this commented once merged*/ 0;
+
+    const multiFromMeritocraty = 0;
+
+    votes.multiFromBonuses = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16 
+        + multiFromCompanion19 + multiFromGamingPalette32 + multiFromLegendTalents22;
+    votes.multiFromMeritocraty = multiFromMeritocraty;
+
+    return votes;
 }
 
 export class VoteBonus {
