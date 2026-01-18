@@ -99,11 +99,11 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const multiFromGamingPalette32 = 0;
     const multiFromLegendTalents22 = /*legendTalents.legendTalents.find(talent => talent.index == 22)?.getBonus() ?? don't keep this commented once merged*/ 0;
 
-    const multiFromMeritocraty = 0;
+    const multiFromMeritocraty9 = meritocraty.getCurrentBonus(9);
 
     votes.multiFromBonuses = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16 
         + multiFromCompanion19 + multiFromGamingPalette32 + multiFromLegendTalents22;
-    votes.multiFromMeritocraty = multiFromMeritocraty;
+    votes.multiFromMeritocraty = multiFromMeritocraty9;
 
     return votes;
 }
