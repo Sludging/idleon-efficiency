@@ -1,7 +1,7 @@
 import { Domain, RawData } from "../base/domain"
-import { ClamWorkBonusBase, initClamWorkBonusRepo } from "../data/ClamWorkBonusRepo";
+import { ClamworksBonusBase, initClamworksBonusRepo } from "../data/ClamworksBonusRepo";
 import { Item } from "../items";
-import { ClamWorkBonusModel } from "../model/clamWorkBonusModel";
+import { ClamworksBonusModel } from "../model/clamworksBonusModel";
 
 export const promoBonuses = [
     "+1 Grade for 2 Gallery Slots",
@@ -15,13 +15,13 @@ export const promoBonuses = [
     "}x Class EXP multi"
 ]
 
-export class ClamWorkBonus {
+export class ClamworksBonus {
     level: number = 0;
 
-    constructor(public index: number, public data: ClamWorkBonusModel) {}
+    constructor(public index: number, public data: ClamworksBonusModel) {}
 
-    static fromBase(data: ClamWorkBonusBase[]) {
-        return data.map(bonus => new ClamWorkBonus(bonus.index, bonus.data));
+    static fromBase(data: ClamworksBonusBase[]) {
+        return data.map(bonus => new ClamworksBonus(bonus.index, bonus.data));
     }
 
     getBonus = (): number => {
@@ -47,9 +47,9 @@ export class ClamPromoBonus {
     }
 }
 
-export class ClamWork extends Domain {
+export class Clamworks extends Domain {
     promoLevel: number = 0;
-    workBonuses: ClamWorkBonus[] = [];
+    workBonuses: ClamworksBonus[] = [];
     promoBonuses: ClamPromoBonus[] = [];
 
     getRawKeys(): RawData[] {
@@ -58,12 +58,12 @@ export class ClamWork extends Domain {
 
     init(_allItems: Item[], _charCount: number) {
         this.promoBonuses = ClamPromoBonus.fromBase();
-        this.workBonuses = ClamWorkBonus.fromBase(initClamWorkBonusRepo());
+        this.workBonuses = ClamworksBonus.fromBase(initClamworksBonusRepo());
         return this;
     }
 
     parse(data: Map<string, any>): void {
-        const clamWork = data.get(this.getDataKey()) as ClamWork;
+        const clamWork = data.get(this.getDataKey()) as Clamworks;
         const optionList = data.get("OptLacc") as number[];
 
         clamWork.promoLevel = optionList[464] || 0;
