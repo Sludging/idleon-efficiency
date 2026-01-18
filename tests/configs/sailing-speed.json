@@ -1,0 +1,191 @@
+{
+  "description": "Extract data for sailing speed calculations",
+  "target": "Sailing speed",
+  "extractions": [
+    {
+      "label": "divinity_minor_bonus_6",
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
+      "description": "Divinity minor bonus for Purrmep (god 6)"
+    },
+    {
+      "label": "card_w5c1_bonus",
+      "expression": "4 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w5c1\")",
+      "description": "Card w5c1 bonus"
+    },
+    {
+      "label": "card_boss5a_bonus",
+      "expression": "6 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss5A\")",
+      "description": "Card Boss5A bonus"
+    },
+    {
+      "label": "alchemy_bubble_y1",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y1",
+      "description": "Alchemy bubble Y1 (yellow bubble 1)"
+    },
+    {
+      "label": "davey_jones_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 0, 0)",
+      "description": "Davey Jones bonus"
+    },
+    {
+      "label": "divinity_blessing_4",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
+      "description": "Divinity blessing bonus for god 4"
+    },
+    {
+      "label": "divinity_blessing_6",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
+      "description": "Divinity blessing bonus for god 6 (Purrmep)"
+    },
+    {
+      "label": "voting_bonus_24",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 24, 0)",
+      "description": "Voting bonus 24"
+    },
+    {
+      "label": "divinity_blessing_9",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
+      "description": "Divinity blessing bonus for god 9"
+    },
+    {
+      "label": "artifact_10_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 10, 0)",
+      "description": "Sailing artifact 10 bonus"
+    },
+    {
+      "label": "stamp_sailspd_bonus",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"SailSpd\")",
+      "description": "Stamp bonus for SailSpd"
+    },
+    {
+      "label": "statue_24_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
+      "description": "Statue 24 bonus"
+    },
+    {
+      "label": "meal_bonus_sailing",
+      "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
+      "description": "Meal bonus for Sailing"
+    },
+    {
+      "label": "alchemy_vial_sailspd",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.SailSpd",
+      "description": "Alchemy vial SailSpd bonus"
+    },
+    {
+      "label": "rift_skill_bonus_sailing",
+      "expression": "17 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,12\", 1)",
+      "description": "Rift skill mastery bonus for sailing (skill index 12)"
+    },
+    {
+      "label": "worship_msa_bonus_2",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 2, 0)",
+      "description": "Worship MSA bonus 2 (boat speed)"
+    },
+    {
+      "label": "starsign_63_bonus",
+      "expression": "idleon.getDNSM(\"StarSigns\").h[63]",
+      "description": "Star sign 63 (C. Shanti Minor) bonus"
+    },
+    {
+      "label": "sailzdn3_calculated",
+      "expression": "idleon.getDNSM(\"SailzDN3\")",
+      "description": "Calculated SailzDN3 base speed multiplier"
+    },
+    {
+      "label": "minimum_travel_time",
+      "expression": "idleon.callFunction(\"Sailing\", \"Minimumtraveltime\", 0, 0)",
+      "description": "Minimum travel time for sailing"
+    },
+    {
+      "label": "boat_0_data",
+      "expression": "idleon.getAttr(\"Boats\")[0]",
+      "description": "Boat 0 full data array"
+    },
+    {
+      "label": "boat_1_data",
+      "expression": "idleon.getAttr(\"Boats\")[1]",
+      "description": "Boat 1 full data array"
+    },
+    {
+      "label": "boat_0_captain_index",
+      "expression": "idleon.getAttr(\"Boats\")[0][0]",
+      "description": "Boat 0 captain index"
+    },
+    {
+      "label": "boat_0_island_index",
+      "expression": "idleon.getAttr(\"Boats\")[0][1]",
+      "description": "Boat 0 island index"
+    },
+    {
+      "label": "boat_0_speed_upgrades",
+      "expression": "idleon.getAttr(\"Boats\")[0][5]",
+      "description": "Boat 0 speed upgrade level"
+    },
+    {
+      "label": "boat_1_captain_index",
+      "expression": "idleon.getAttr(\"Boats\")[1][0]",
+      "description": "Boat 1 captain index"
+    },
+    {
+      "label": "boat_1_island_index",
+      "expression": "idleon.getAttr(\"Boats\")[1][1]",
+      "description": "Boat 1 island index"
+    },
+    {
+      "label": "boat_1_speed_upgrades",
+      "expression": "idleon.getAttr(\"Boats\")[1][5]",
+      "description": "Boat 1 speed upgrade level"
+    },
+    {
+      "label": "boat_0_captain_speed_bonus",
+      "expression": "idleon.callFunction(\"CaptBonusCalc\", 0, idleon.getAttr(\"Boats\")[0][0])",
+      "description": "Boat 0 captain speed bonus"
+    },
+    {
+      "label": "boat_1_captain_speed_bonus",
+      "expression": "idleon.callFunction(\"CaptBonusCalc\", 0, idleon.getAttr(\"Boats\")[1][0])",
+      "description": "Boat 1 captain speed bonus"
+    },
+    {
+      "label": "boat_0_current_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 4)",
+      "description": "Boat 0 current speed (i=4)"
+    },
+    {
+      "label": "boat_0_next_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 6)",
+      "description": "Boat 0 next speed level (i=6)"
+    },
+    {
+      "label": "boat_0_island_bound_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 0)",
+      "description": "Boat 0 island-bound speed (i<=0)"
+    },
+    {
+      "label": "boat_1_current_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 4)",
+      "description": "Boat 1 current speed (i=4)"
+    },
+    {
+      "label": "boat_1_next_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 6)",
+      "description": "Boat 1 next speed level (i=6)"
+    },
+    {
+      "label": "boat_1_island_bound_speed",
+      "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 0)",
+      "description": "Boat 1 island-bound speed (i<=0)"
+    },
+    {
+      "label": "boat_0_island_distance",
+      "expression": "idleon.getAttr(\"CustomLists\").h.IslandInfo[idleon.getAttr(\"Boats\")[0][1]][1]",
+      "description": "Distance of island assigned to boat 0"
+    },
+    {
+      "label": "boat_1_island_distance",
+      "expression": "idleon.getAttr(\"CustomLists\").h.IslandInfo[idleon.getAttr(\"Boats\")[1][1]][1]",
+      "description": "Distance of island assigned to boat 1"
+    }
+  ]
+}

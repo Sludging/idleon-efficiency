@@ -22,7 +22,7 @@ const IconLink = ({ icon, href, text, target = "_blank", rel = "noopener" }: { i
                 "width": '16px',
                 "height": '16px'
             }) }
-            <Link style={{textDecoration: 'none', color: color, fontWeight: 'bold'}} rel={rel} target={target} href={href}>{text}</Link>
+            <Link prefetch={false} style={{ textDecoration: 'none', color: color, fontWeight: 'bold' }} rel={rel} target={target} href={href}>{text}</Link>
         </Box>
     )
 }
