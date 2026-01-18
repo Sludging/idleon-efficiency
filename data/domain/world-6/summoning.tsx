@@ -647,11 +647,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
 export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const equinox = data.get("equinox") as Equinox;
-    const votes = data.get("votes") as Votes;
     const cooking = data.get("cooking") as Cooking;
-
-    // Votes bonus
-    votes.multiFromSummoning = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 23)?.getBonus() ?? 0);
 
     // Equinox Max Level
     const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 25)?.getBonus() ?? 0);
