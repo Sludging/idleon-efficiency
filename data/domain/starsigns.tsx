@@ -3,6 +3,7 @@ import { RawData } from './base/domain';
 import { Item } from "./items";
 import { Summoning } from "./world-6/summoning";
 import { InfiniteStarsBonus, Rift } from "./rift";
+import { Tesseract } from './tesseract';
 
 interface StarBonus {
     text: string,
@@ -13,6 +14,7 @@ interface StarBonus {
 export class StarSign {
     hasChip: boolean = false;
     seraphCosmosBonus: number = 1;
+    meritocratyBonus: number = 0;
     aligned: boolean = false;
     constructor(public name: string, public bonuses: StarBonus[]) { }
 
@@ -25,7 +27,7 @@ export class StarSign {
     getBonus = (bonusType: string) => {
         const bonus = this.bonuses.find((bonus) => bonus.text.toLowerCase().includes(bonusType.toLowerCase()));
         if (bonus) {
-            return this.hasChip ? bonus.bonus * this.seraphCosmosBonus * 2 : bonus.bonus * this.seraphCosmosBonus;
+            return this.hasChip ? bonus.bonus * (1 + this.meritocratyBonus / 100) * this.seraphCosmosBonus * 2 : bonus.bonus * this.seraphCosmosBonus * (1 + this.meritocratyBonus / 100);
         }
         return 0;
     }
@@ -38,6 +40,7 @@ export class StarSign {
 
         const duplicateSign = new StarSign(this.name, bonuses);
         duplicateSign.seraphCosmosBonus = this.seraphCosmosBonus;
+        duplicateSign.meritocratyBonus = this.meritocratyBonus;
 
         return duplicateSign;
     }
@@ -48,6 +51,7 @@ export class StarSigns extends Domain  {
     unlockedStarSigns: StarSign[] = [];
     infinityStarSigns: StarSign[] = [];
     summoningLevel: number = 0;
+    tesseractBonusToSeraph: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -85,7 +89,7 @@ export class StarSigns extends Domain  {
 
     getSeraphCosmosBonus = (): number => {
         if (this.isStarSignUnlocked("Seraph Cosmos")) {
-            return Math.min(3, Math.pow(1.1, Math.ceil((this.summoningLevel + 1) / 20)));
+            return Math.min(3, Math.pow(1.1 + Math.min(this.tesseractBonusToSeraph, 10) / 100, Math.ceil((this.summoningLevel + 1) / 20)));
         } else {
             return 1;
         }
@@ -106,8 +110,10 @@ export class StarSigns extends Domain  {
 export const updateStarSignsUnlocked = (data: Map<string, any>) => {
     const starSigns = data.get("starsigns") as StarSigns;
     const summoning = data.get("summoning") as Summoning;
+    const tesseract = data.get("tesseract") as Tesseract;
 
     starSigns.summoningLevel = summoning.summoningLevel;
+    starSigns.tesseractBonusToSeraph = tesseract.getUpgradeBonus(40);
     const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
     starSigns.unlockedStarSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {
         if (sign.seraphCosmosBonus != seraphCosmosBonus) {
