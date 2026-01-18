@@ -1,11 +1,17 @@
-import { letterToNumber, number2letter, number2letterArray } from "../utility";
+import { number2letter } from "../utility";
 import { Domain, RawData } from "./base/domain"
+import { EventShopBonusBase, initEventShopBonusRepo } from "./data/EventShopBonusRepo";
 import { Item } from "./items";
+import { EventShopBonusModel } from "./model/eventShopBonusModel";
 
 export class EventShopBonus {
     owned: boolean = false;
 
-    constructor(public index: number) {}
+    constructor(public index: number, public data: EventShopBonusModel) {}
+
+    static fromBase(data: EventShopBonusBase[]): EventShopBonus[] {
+        return data.map(bonus => new EventShopBonus(bonus.index, bonus.data));
+    }
 }
 
 export class EventShop extends Domain {
@@ -16,9 +22,7 @@ export class EventShop extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
-        number2letterArray.forEach(char => {
-            this.bonuses.push(new EventShopBonus(letterToNumber(char)));
-        });
+        this.bonuses = EventShopBonus.fromBase(initEventShopBonusRepo());
         return this;
     }
 
@@ -34,7 +38,7 @@ export class EventShop extends Domain {
         });
     }
 
-    isBonusOwned(index: number) {
+    isBonusOwned(index: number): boolean {
         const bonus = this.bonuses.find(bonus => bonus.index == index);
 
         if (bonus) {
