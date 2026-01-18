@@ -3,8 +3,7 @@ import { initAchievementRepo, AchievementBase } from './data/AchievementRepo';
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 export const AchievementConst = {
-    SmartBoiIndex: 108,
-    GoldFood: 37
+    SmartBoiIndex: 108
 }
 
 export class Achievement extends AchievementBase {

@@ -10,12 +10,13 @@ import { initEnemyRepo } from "./data/EnemyRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 
 export const deathNoteMobOrder = [
-    "mushG mushR frogG beanG slimeG snakeG carrotO goblinG plank frogBIG poopSmall ratB branch acorn mushW".split(" "),
-    "jarSand mimicA crabcake coconut sandcastle pincermin potato steak moonman sandgiant snailZ".split(" "),
-    "sheep flake stache bloque mamoth snowball penguin thermostat glass snakeB speaker eye ram skele2".split(" "),
-    "mushP w4a2 w4a3 demonP w4b2 w4b1 w4b3 w4b4 w4b5 w4c1 w4c2 w4c3 w4c4".split(" "),
-    "w5a1 w5a2 w5a3 w5a4 w5a5 w5b1 w5b2 w5b3 w5b4 w5b5 w5b6 w5c1 w5c2".split(" "),
-    "w6a1 w6a2 w6a3 w6a4 w6a5 w6b1 w6b2 w6b3 w6b4 w6c1 w6c2 w6d1 w6d2 w6d3".split(" "),
+    ["mushG", "mushR", "frogG", "beanG", "slimeG", "snakeG", "carrotO", "goblinG", "plank", "frogBIG", "poopSmall", "ratB", "branch", "acorn", "mushW"],
+    ["jarSand", "mimicA", "crabcake", "coconut", "sandcastle", "pincermin", "potato", "steak", "moonman", "sandgiant", "snailZ"],
+    ["sheep", "flake", "stache", "bloque", "mamoth", "snowball", "penguin", "thermostat", "glass", "snakeB", "speaker", "eye", "ram", "skele2"],
+    ["mushP", "w4a2", "w4a3", "demonP", "w4b2", "w4b1", "w4b3", "w4b4", "w4b5", "w4c1", "w4c2", "w4c3", "w4c4"],
+    ["w5a1", "w5a2", "w5a3", "w5a4", "w5a5", "w5b1", "w5b2", "w5b3", "w5b4", "w5b5", "w5b6", "w5c1", "w5c2"],
+    ["w6a1", "w6a2", "w6a3", "w6a4", "w6a5", "w6b1", "w6b2", "w6b3", "w6b4", "w6c1", "w6c2", "w6d1", "w6d2", "w6d3"],
+    ["w7a1", "w7a2", "w7a3", "w7a4", "w7a5", "w7a6", "w7a7", "w7a8", "w7a9", "w7a10", "w7a11", "w7a12"]
 ];
 
 export const deathNoteMinibossesOrder = "poopBig babayaga babaHour babaMummy mini3a mini4a mini5a mini6a".split(" ");

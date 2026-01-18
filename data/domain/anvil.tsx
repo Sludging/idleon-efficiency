@@ -29,6 +29,10 @@ import { Guild } from './guild';
 import { Bribe } from './bribes';
 import { Sneaking } from './world-6/sneaking';
 import { Cooking } from './cooking';
+import { EquipmentSets } from './misc/equipmentSets';
+import { LegendTalents } from './world-7/legendTalents';
+import { Companion } from './companions';
+import { Votes } from './world-2/votes';
 
 
 // if ("Costs2TypeAnvilPA" == t) {}
@@ -290,6 +294,10 @@ export const updateAnvil = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
     const sneaking = data.get("sneaking") as Sneaking;
     const bribes = data.get("bribes") as Bribe[];
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const companions = data.get("companions") as Companion[];
+    const votes = data.get("votes") as Votes;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
     // Cap stuff
@@ -317,7 +325,7 @@ export const updateAnvil = (data: Map<string, any>) => {
         const dungeonBonus = (dungeonsData.passives.get(PassiveType.Flurbo) ?? [])[2]?.getBonus() ?? 0; // Lava is looking at the wrong bonus.
         const goldFoodStampBonus = getStampBonusForKey(stampData, "GFood");
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
-        const allSkillXP = Skilling.getAllSkillXP(player, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning, sneaking, bribes, cooking);
+        const allSkillXP = Skilling.getAllSkillXP(player, players, shrines, statues[player.playerID], prayers, saltLickBonus, dungeonBonus, family, goldFoodStampBonus, sigils.sigils[14].getBonus(), goldFoodBubble, divinity, cards, achievementsInfo, skillMastery, breeding, worship, guild, summoning, sneaking, bribes, cooking, equipmentSets, legendTalents, companions, votes);
         const mmanBonus = players.find(player => [ClassIndex.Maestro, ClassIndex.Voidwalker].includes(player.classId))?.talents.find(talent => talent.skillIndex == 42)?.getBonus() ?? 0;
         const riftBonus = skillMastery.getSkillBonus(SkillsIndex.Smithing, 1);
         const xpMulti = playerAnvil.getXPMulti(player, allSkillXP, mmanBonus, riftBonus);

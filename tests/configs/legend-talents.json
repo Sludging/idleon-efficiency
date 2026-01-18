@@ -1,0 +1,231 @@
+{
+  "description": "Extract data for legend talents calculations and validation",
+  "target": "Legend Talents",
+  "extractions": [
+    {
+      "label": "points_owned",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0)",
+      "description": "Total legend talent points owned from all sources"
+    },
+    {
+      "label": "points_spent",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0)",
+      "description": "Total points spent (sum of all talent levels)"
+    },
+    {
+      "label": "companion_37_owned",
+      "expression": "idleon.callFunction(\"Companions\", 37, 0)",
+      "description": "Companion 37 owned status (contributes 10 points if owned)"
+    },
+    {
+      "label": "gem_shop_42",
+      "expression": "idleon.getAttr(\"GemItemsPurchased\")[42]",
+      "description": "Gem shop item 42 purchase count"
+    },
+    {
+      "label": "sailing_artifact_34_raw",
+      "expression": "idleon.getAttr(\"Sailing\")[3][34]",
+      "description": "Sailing artifact 34 raw bonus (before min/round)"
+    },
+    {
+      "label": "sailing_artifact_34_processed",
+      "expression": "Math.min(5, Math.round(idleon.getAttr(\"Sailing\")[3][34]))",
+      "description": "Sailing artifact 34 processed bonus (min 5, rounded)"
+    },
+    {
+      "label": "clam_work_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 1, 0)",
+      "description": "Clam work bonus 1 (TODO feature - expected to be 0)"
+    },
+    {
+      "label": "clam_work_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 4, 0)",
+      "description": "Clam work bonus 4 (TODO feature - expected to be 0)"
+    },
+    {
+      "label": "event_shop_32",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 32, 0)",
+      "description": "Event shop bonus 32 (TODO feature - expected to be 0)"
+    },
+    {
+      "label": "zenith_market_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
+      "description": "Zenith market bonus 5 (TODO feature - expected to be 0)"
+    },
+    {
+      "label": "spelunk_18_array",
+      "expression": "idleon.getAttr(\"Spelunk\")[18]",
+      "description": "Full talent levels array (50 elements)"
+    },
+    {
+      "label": "talent_7_data",
+      "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[7]",
+      "description": "Talent 7 (Super Duper Talents) definition data - sample validation"
+    },
+    {
+      "label": "talent_19_data",
+      "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[19]",
+      "description": "Talent 19 (More Soot More Salt) definition data - sample validation"
+    },
+    {
+      "label": "talent_0_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][0]",
+      "description": "Talent 0 (Coral Restoration) level"
+    },
+    {
+      "label": "talent_3_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][3]",
+      "description": "Talent 3 (Extended Database) level"
+    },
+    {
+      "label": "talent_5_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][5]",
+      "description": "Talent 5 (Kruk be Bubblin') level"
+    },
+    {
+      "label": "talent_7_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][7]",
+      "description": "Talent 7 (Super Duper Talents) level"
+    },
+    {
+      "label": "talent_11_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][11]",
+      "description": "Talent 11 (Davey Jones Returns) level"
+    },
+    {
+      "label": "talent_15_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][15]",
+      "description": "Talent 15 (Reduced Jail Sentence) level"
+    },
+    {
+      "label": "talent_19_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][19]",
+      "description": "Talent 19 (More Soot More Salt) level"
+    },
+    {
+      "label": "talent_21_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][21]",
+      "description": "Talent 21 (Flopping a Full House) level"
+    },
+    {
+      "label": "talent_22_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][22]",
+      "description": "Talent 22 (Democracy FTW) level"
+    },
+    {
+      "label": "talent_25_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][25]",
+      "description": "Talent 25 (Midusian Appetite) level"
+    },
+    {
+      "label": "talent_30_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][30]",
+      "description": "Talent 30 (Lightning Fast Naps) level"
+    },
+    {
+      "label": "talent_35_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][35]",
+      "description": "Talent 35 (Obsolete No More) level"
+    },
+    {
+      "label": "talent_38_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][38]",
+      "description": "Talent 38 (Shrine World Order Bill) level"
+    },
+    {
+      "label": "talent_39_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][39]",
+      "description": "Talent 39 (Super Talent Points) level"
+    },
+    {
+      "label": "talent_40_level",
+      "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
+      "description": "Talent 40 (filler) level - should be 0"
+    },
+    {
+      "label": "talent_0_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 0, 0)",
+      "description": "Talent 0 (Coral Restoration) bonus calculation"
+    },
+    {
+      "label": "talent_3_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 3, 0)",
+      "description": "Talent 3 (Extended Database) bonus calculation"
+    },
+    {
+      "label": "talent_5_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 5, 0)",
+      "description": "Talent 5 (Kruk be Bubblin') bonus calculation"
+    },
+    {
+      "label": "talent_7_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 7, 0)",
+      "description": "Talent 7 (Super Duper Talents) bonus calculation"
+    },
+    {
+      "label": "talent_11_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 11, 0)",
+      "description": "Talent 11 (Davey Jones Returns) bonus calculation"
+    },
+    {
+      "label": "talent_15_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 15, 0)",
+      "description": "Talent 15 (Reduced Jail Sentence) bonus calculation"
+    },
+    {
+      "label": "talent_19_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 19, 0)",
+      "description": "Talent 19 (More Soot More Salt) bonus calculation"
+    },
+    {
+      "label": "talent_21_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 21, 0)",
+      "description": "Talent 21 (Flopping a Full House) bonus calculation"
+    },
+    {
+      "label": "talent_22_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",
+      "description": "Talent 22 (Democracy FTW) bonus calculation"
+    },
+    {
+      "label": "talent_25_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 25, 0)",
+      "description": "Talent 25 (Midusian Appetite) bonus calculation"
+    },
+    {
+      "label": "talent_30_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 30, 0)",
+      "description": "Talent 30 (Lightning Fast Naps) bonus calculation"
+    },
+    {
+      "label": "talent_35_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 35, 0)",
+      "description": "Talent 35 (Obsolete No More) bonus calculation"
+    },
+    {
+      "label": "talent_38_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 38, 0)",
+      "description": "Talent 38 (Shrine World Order Bill) bonus calculation"
+    },
+    {
+      "label": "talent_39_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 39, 0)",
+      "description": "Talent 39 (Super Talent Points) bonus calculation"
+    },
+    {
+      "label": "talent_40_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
+      "description": "Talent 40 (filler) bonus - should be 0"
+    },
+    {
+      "label": "super_talent_unlocked",
+      "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_unlockedstatus\", 0, 0)",
+      "description": "Super talent system unlock status (1 if unlocked, 0 otherwise)"
+    },
+    {
+      "label": "super_talent_bonus_levels",
+      "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_LVgiven\", 0, 0)",
+      "description": "Super talent bonus levels (50 + talent7 bonus + zenith market bonus)"
+    }
+  ]
+}

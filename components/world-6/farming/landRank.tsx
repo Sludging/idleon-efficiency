@@ -36,9 +36,9 @@ export const LandRankDisplay = () => {
                                 <ShadowBox key={index} background="dark-1" margin={{ right: 'small', bottom: 'small' }} pad="medium" gap="medium">
                                     <Box gap="small" justify="between" fill>
                                         <Box style={{ opacity: upgrade.level > 0 ? 1 : 0.6 }}>
-                                            <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level})` : ``}`} />
+                                            <TextAndLabel textSize='xsmall' text={upgrade.getUpgradeBonusText()} label={`${upgrade.name} ${upgrade.level > 0 ? `(Lv. ${upgrade.level}${upgrade.fifthColumnBonus ? `/${upgrade.maxLevel}` : ``})` : ``}`} />
                                         </Box>                                       
-                                        <Text color="accent-2" size="small">{upgrade.uniqueLevelBonus && upgrade.level > 0 ? "MAXED" : label}</Text>
+                                        <Text color="accent-2" size="small">{upgrade.fifthColumnBonus && upgrade.level >= upgrade.maxLevel ? "MAXED" : label}</Text>
                                     </Box>
                                 </ShadowBox>
                             )
