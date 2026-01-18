@@ -10,6 +10,12 @@ import { Sailing } from "./sailing";
 import { ClassIndex } from "./talents";
 import { Sneaking } from "./world-6/sneaking";
 
+export const INDEX_DAYS_SINCE_SAMPLE_ARTIFACT = 125;
+export const INDEX_DAYS_SINCE_SAMPLE_EVENTSHOP = 323;
+export const INDEX_DAYS_SINCE_SAMPLE_COMPANION = 354;
+export const INDEX_DAYS_SINCE_SAMPLE_COMPASS = 364;
+export const INDEX_DAYS_SINCE_SAMPLE_LEGENDTALENT = 479;
+
 export class Sample {
     inLab: boolean = false;
     harriep: boolean = false;
