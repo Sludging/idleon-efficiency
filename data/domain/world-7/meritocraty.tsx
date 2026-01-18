@@ -106,6 +106,8 @@ export const updateMeritocratyBonus = (data: Map<string, any>) => {
     meritocraty.legendTalentBonus = legendTalentsBonus24;
     meritocraty.arcadeBonus = arcadeBonus59;
     meritocraty.eventShopBonus = eventShopBonus23;
+
+    return meritocraty;
 }
 
 export class MeritocratyBonus {

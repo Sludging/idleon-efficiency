@@ -64,7 +64,7 @@ import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emper
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Clamworks } from './world-7/clamworks';
-import { Meritocraty } from './world-7/meritocraty';
+import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -216,6 +216,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),
     "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),
