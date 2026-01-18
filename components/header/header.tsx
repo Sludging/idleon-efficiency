@@ -12,7 +12,7 @@ export const HeaderComponent = () => {
     return (
         <Header background="dark-1" height="56px" border={{ color: "white-1", side: "bottom" }}>
             <Box width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} direction="row" justify='between' align="center" pad="small" fill>
-                <Link href={"https://www.idleonefficiency.com/"}>
+                <Link prefetch={false} href={"https://www.idleonefficiency.com/"}>
                     <Box>
                         <Image alt="Logo" src="/logo.svg" height={21} width={171} />
                     </Box>

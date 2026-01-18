@@ -174,7 +174,7 @@ function OnHoverNav({ link, label, subLinks }: NavItem) {
 
     if (!subLinks) {
         return (
-            <Link key={`link_${label}`} href={link}>
+            <Link prefetch={false} key={`link_${label}`} href={link}>
                 <NavButton className={pathname == link ? 'active' : ''} color="accent-2">{label}</NavButton></Link>
         );
     }
