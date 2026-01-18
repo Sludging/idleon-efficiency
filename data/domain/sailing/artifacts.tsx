@@ -9,6 +9,7 @@ import { Player } from "../player";
 import { Sailing } from "../sailing";
 import { SkillsIndex } from "../SkillsIndex";
 import { Slab } from "../slab";
+import { Meritocraty } from "../world-7/meritocraty";
 
 export enum ArtifactStatus {
     Unobtained,
@@ -179,10 +180,13 @@ export class GoldRelicArtifact extends Artifact {
 
 export class SlabInfluencedArtifact extends Artifact {
     lootyCount: number = 0;
-    slabSovereignBonus: number = 1;
+    meritocratyBonus: number = 0;
+    legendTalentBonus: number = 0;
+    slabSovereignBonus: number = 0;
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier() * this.slabSovereignBonus;
+            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier() * 
+            (1 + this.slabSovereignBonus / 100) * (1 + this.legendTalentBonus / 100) * (1 + this.meritocratyBonus / 100);
         }
 
         return 0;
@@ -376,11 +380,26 @@ export const updateArtifacts = (data: Map<string, any>) => {
 export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const lab = data.get("lab") as Lab;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    //const legendTalents = data.get("legendTalents") as LegendTalents; don't keep this commented once emerged
 
-    const sovereignBonus = lab.bonuses[15].active ? (1 + (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() / 100) : 1;
+    const sovereignBonus = lab.bonuses[15].active ? (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() : 0;
+    const legendTalentBonus28 = /*legendTalents.legendTalents.find(talent => talent.index == 28)?.getBonus() ?? don't keep this commented once merged*/ 0;
+    const meritocratyBonus23 = meritocraty.getCurrentBonus(23);
 
     (sailing.artifacts[2] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[2] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
+    (sailing.artifacts[2] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
+
     (sailing.artifacts[10] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
+    (sailing.artifacts[10] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
+
     (sailing.artifacts[18] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
+    (sailing.artifacts[18] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
+
     (sailing.artifacts[20] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
+    (sailing.artifacts[20] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
 }
