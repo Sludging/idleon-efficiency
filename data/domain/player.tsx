@@ -1,7 +1,7 @@
 import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
-import { Card, CardInfo } from "./cards";
+import { Card, CardInfo, Cards } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
 import { notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
@@ -38,6 +38,9 @@ import { TaskBoard } from './tasks';
 import { Grimoire } from './grimoire';
 import { Tesseract } from './tesseract';
 import { EquipmentSets } from './misc/equipmentSets';
+import { LegendTalents } from './world-7/legendTalents';
+import { Companion } from './companions';
+import { Votes } from './world-2/votes';
 
 export class PlayerStats {
     strength: number = 0;
@@ -316,10 +319,11 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number) => {
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number , companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
 
-        return Math.max(familyBonus, 1) + (gearBonus + ((this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + (goldFoodStampBonus + (achievement ? 5 : 0))) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14) / 100;
+        const setBonus = (1 + equipmentSetBonus / 100);
+        return setBonus * ((Math.max(familyBonus, 1) + gearBonus + (this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + goldFoodStampBonus + (achievement37 ? 5 : 0) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14 + (achievement380 ? 2 : 0) + (achievement383 ? 3 : 0) + votingBonus26 + apocalypseWoW + companion48 + legendTalentBonus25 + Math.min(cropfallEvent1Card, 50)) / 100);
     }
 
     getMiscBonusFromGear = (bonusType: string) => {
@@ -361,10 +365,11 @@ export class Player {
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement: boolean, prayers: Prayer[], arcadeBonus: number, sigilBonus: number, bubbleBonus: number,
-        zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, beanstalkingItem: Food | undefined) => {
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[], 
+        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, 
+        beanstalkingItem: Food | undefined, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legenTalent25: number, cropFallEventCard: number) => {
         const gearBonus = this.getMiscBonusFromGear("Money");
-        const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14);
+        const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
         const beanstalkingBonus = beanstalkingItem?.goldFoodBonus(beanstalkingStack, goldFoodBoost) ?? 0;
@@ -1295,6 +1300,11 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const family = data.get("family") as Family;
     const prayers = data.get("prayers") as Prayer[];
+    const cards = data.get("cards") as Card[];
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const companions = data.get("companions") as Companion[];
+    const votes = data.get("votes") as Votes;
 
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
@@ -1313,23 +1323,40 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
     const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-    const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+    const goldFoodAchievement37 = achievementsInfo[37].completed;
+    const goldFoodAchievement380 = achievementsInfo[380].completed;
+    const goldFoodAchievement383 = achievementsInfo[383].completed;
     const arcadeBonus = arcade.bonuses.filter(bonus => [10, 11].includes(bonus.index)).reduce((sum, bonus) => sum += bonus.getBonus(), 0);
     const pristineCharm16 = sneaking.pristineCharms.find(charm => charm.data.itemId == 16);
     const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
     const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
     const beanstalkingBonus = sneaking.beanstalking.bonuses.find(bonus => bonus.type == BeanstalkingBonusType.GoldenBread);
+    const votingBonus26 = votes.getCurrentBonus(26);
+    const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
+    const legenTalent25 = legendTalents.getBonusFromIndex(25);
+    const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);;
+    
+    let apocalypseWoW = 0;
+    const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
+    const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
+    if (bestDeathBringer && deathBringerForKills) {
+        const deathbringeWoWStacks = Array.from(deathBringerForKills.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;;
+        const skillBonus = bestDeathBringer.getTalentBonus(209);
+        apocalypseWoW = skillBonus * deathbringeWoWStacks;
+    }
+
     players.forEach(player => {
         const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
         const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
         const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15)
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
+        const equipmentSetBonus = equipmentSets.getSetBonus("SECRET_SET", player);
 
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
-            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item);
+            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
+            zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
     })
 
     // Crystal Spawn Chance

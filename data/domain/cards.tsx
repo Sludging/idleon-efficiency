@@ -11,6 +11,7 @@ import { Player } from "./player";
 import { Rift, SkillMastery } from "./rift";
 import { initCardDropChanceRepo } from './data/CardDropChanceRepo';
 import { nFormatter } from '../utility';
+import { LegendTalents } from "./world-7/legendTalents";
 
 export class Card {
     count: number = 0;
@@ -18,6 +19,7 @@ export class Card {
     bonusID: number = 0;
 
     chipBoost: number = 1;
+    legendTalentBoost: number = 0;
     baseMaxCardLevel: number = 4;
     bonusMaxCardLevelFromSpelunking: number = 0;
     bonusMaxCardLevelFromRift: number = 0;
@@ -63,9 +65,10 @@ export class Card {
     }
 
     getLevels = (): number => {
+        const maxCardLevel = this.getMaxCardLevel();
         switch (true) {
-            case this.getMaxCardLevel() >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
-            case this.getMaxCardLevel() >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
+            case maxCardLevel >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
+            case maxCardLevel >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
             case this.count >= Math.floor(this.getCardsForLevel(4)): return 5;
             case this.count >= Math.floor(this.getCardsForLevel(3)): return 4;
             case this.count >= Math.floor(this.getCardsForLevel(2)): return 3;
@@ -96,7 +99,7 @@ export class Card {
         if (this.count == 0) {
             return 0;
         }
-        return this.data.bonus * (level + 1) * this.chipBoost;
+        return this.data.bonus * (level + 1) * (1 + (this.passive ? 0 :this.legendTalentBoost) / 100) * this.chipBoost;
     }
 
     getBonusText = (level: number = this.getLevels()): string => {
@@ -243,6 +246,7 @@ export const updateCards = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -265,30 +269,21 @@ export const updateCards = (data: Map<string, any>) => {
         })
     }
 
-    if (rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active) {
-        cards.forEach(card => {
+    const bonusEffectFromLegendTalents = legendTalents.getBonusFromIndex(21);
+    const rubyCardsUnlocked = rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active || false;
+    const cardifiedFiveStarCards = (optLacc[155] ?? "" as string).split(",") as string[];
+
+    // Ensure there's a need to parse cards
+    if (bonusEffectFromLegendTalents > 0 || rubyCardsUnlocked || cardifiedFiveStarCards.length > 0) {
+        const cardsToParse = rubyCardsUnlocked ? cards : cards.filter(card => cardifiedFiveStarCards.indexOf(card.id) >= 0);
+        cardsToParse.forEach(card => {          
             card.bonusMaxCardLevelFromRift = 1;
-        })
+        });
         // I should probably not duplicate cards at some point, but for now ...
         players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-            card.bonusMaxCardLevelFromRift = 1;
-        })
-    }
-    else if (optLacc.length > 155 && optLacc[155] != 0) {
-        const cardifiedFiveStarCards = (optLacc[155] as string).split(",");
-        cardifiedFiveStarCards.forEach(cardId => {
-            cards.forEach(card => {
-                if (card.id == cardId) {
-                    card.bonusMaxCardLevelFromRift = 1;
-                }
-            })
-            // I should probably not duplicate cards at some point, but for now ...
-            players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
-                if (card.id == cardId) {
-                    card.bonusMaxCardLevelFromRift = 1;
-                }
-            })
-        })
+            card.bonusMaxCardLevelFromRift = (rubyCardsUnlocked || cardifiedFiveStarCards.indexOf(card.id) >= 0) ? 1 : 0;
+            card.legendTalentBoost = bonusEffectFromLegendTalents;
+        });
     }
 }
 
