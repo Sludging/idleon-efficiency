@@ -7,6 +7,7 @@ import { Clamworks } from "./clamworks";
 import { Companion } from "../companions";
 import { Arcade } from "../arcade";
 import { EventShop } from "../eventShop";
+import { LegendTalents } from "./legendTalents";
 
 export class Meritocraty extends Domain {
     clamWorkBonus: number = 0;
@@ -92,12 +93,11 @@ export const updateMeritocratyBonus = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const arcade = data.get("arcade") as Arcade;
     const eventShop = data.get("eventShop") as EventShop;
-    //const legendTalents = data.get("legendTalents") as LegendTalents;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const clamworksBonus3 = clamworks.haveEnoughLevelForPromoBonus(3) ? 5 : 0;
     const companionBonus39 = companions.find(companion => companion.id == 39)?.owned || false ? companions.find(companion => companion.id == 39)?.data.bonus || 0 : 0;
-    // TODO : uncomment this once merged
-    const legendTalentsBonus24 = /*legendTalents.legendTalents.find(talent => talent.index == 24)?.getBonus() ||*/ 0;
+    const legendTalentsBonus24 = legendTalents.getBonusFromIndex(24);
     const arcadeBonus59 = arcade.bonuses.find(bonus => bonus.index == 59)?.getBonus() || 0;
     const eventShopBonus23 = eventShop.isBonusOwned(23) ? 20 : 0;
 

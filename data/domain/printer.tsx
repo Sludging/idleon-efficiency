@@ -13,6 +13,7 @@ import { Sailing } from "./sailing";
 import { ClassIndex } from "./talents";
 import { Votes } from "./world-2/votes";
 import { Sneaking } from "./world-6/sneaking";
+import { LegendTalents } from "./world-7/legendTalents";
 
 export const INDEX_DAYS_SINCE_SAMPLE_ARTIFACT = 125;
 export const INDEX_DAYS_SINCE_SAMPLE_EVENTSHOP = 323;
@@ -149,7 +150,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const votes = data.get("votes") as Votes;
     const companions = data.get("companions") as Companion[];
     const compass = data.get("compass") as Compass;
-    //const legendTalents = data.get("legendTalents") as LegendTalents;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
@@ -191,8 +192,7 @@ export const updatePrinter = (data: Map<string, any>) => {
     const eventShopBonus = (1 + eventShopDaysSinceLastSample * (eventShop.isBonusOwned(4) ? 2 : 0)  / 100);
     const companionBonus = (1 + companionDaysSinceLastSample * companion17Bonus / 100);
     const compassBonus = (1 + compassDaysSinceLastSample * (compassUpgrade?.bonus || 0) / 100);
-    // TODO : uncomment this once merged (and the const legendTalents declaration + add the needed import)
-    const legendTalentsBonus = (1 /*+ legendTalentDaysSinceLastSample * legendTalents.getBonusFromIndex(17) / 100*/);
+    const legendTalentsBonus = (1 + legendTalentDaysSinceLastSample * legendTalents.getBonusFromIndex(17) / 100);
 
     printer.samples.flatMap(player => player).forEach(sample => {
         // Do not uncomment this yet, in-game show it in the printer UI but doesn't use it in the calculation
