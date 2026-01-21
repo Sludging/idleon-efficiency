@@ -40,10 +40,10 @@ export class ClamworksBonus {
 }
 
 export class ClamPromoBonus {
-    constructor(public levelNeeded: number, public bonus: string) {}
+    constructor(public index: number, public bonus: string) {}
 
     static fromBase() {
-        return promoBonuses.map((bonus, index) => new ClamPromoBonus(index+1, bonus));
+        return promoBonuses.map((bonus, index) => new ClamPromoBonus(index, bonus));
     }
 }
 
@@ -128,19 +128,18 @@ export class Clamworks extends Domain {
         return 1E5 * Math.pow(10, this.promoLevel);
     }
 
-    haveEnoughLevelForPromoBonus = (levelNeeded: number): boolean => {
-        // in-game don't really ask for the index, but for the level needed (1 mean the first bonus, 2 the second one, etc...)
-        const bonus = this.promoBonuses.find(bonus => bonus.levelNeeded == levelNeeded);
+    isBonusUnlocked = (index: number): boolean => {
+        const bonus = this.promoBonuses.find(bonus => bonus.index == index);
         // Still check if there's an existing bonus for this level
         if (bonus) {
-            return this.promoLevel >= levelNeeded ? true : false;
+            return this.promoLevel >= (bonus.index+1) ? true : false;
         }
 
         return false;
     }
 
-    getPromoBonusText = (levelNeeded: number): string => {
-        const bonus = this.promoBonuses.find(bonus => bonus.levelNeeded == levelNeeded);
+    getPromoBonusText = (index: number): string => {
+        const bonus = this.promoBonuses.find(bonus => bonus.index == index);
 
         if (bonus) {
             return bonus.bonus;

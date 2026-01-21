@@ -103,8 +103,8 @@ export const updateLegendTalents = (data: Map<string, any>) => {
         pointsOwned += Math.max(0, Math.floor((player.level - 400) / 100));
     });
 
-    const clamBonus1 = clamworks.haveEnoughLevelForPromoBonus(1) ? 1 : 0;
-    const clamBonus4 = clamworks.haveEnoughLevelForPromoBonus(4) ? 1 : 0;
+    const clamBonus1 = clamworks.isBonusUnlocked(1) ? 1 : 0;
+    const clamBonus4 = clamworks.isBonusUnlocked(4) ? 1 : 0;
     const companionBonus37 = companions.find(c => c.id === 37)?.owned || false ? 10 : 0;
     const gemBonus42 = gemStore.purchases.find(purchase => purchase.no == 42)?.pucrhased ?? 0;
     const artifactBonus34 = Math.min(5, sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0);

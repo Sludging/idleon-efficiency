@@ -95,7 +95,7 @@ export const updateMeritocratyBonus = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
-    const clamworksBonus3 = clamworks.haveEnoughLevelForPromoBonus(3) ? 5 : 0;
+    const clamworksBonus3 = clamworks.isBonusUnlocked(3) ? 5 : 0;
     const companionBonus39 = companions.find(companion => companion.id == 39)?.owned || false ? companions.find(companion => companion.id == 39)?.data.bonus || 0 : 0;
     const legendTalentsBonus24 = legendTalents.getBonusFromIndex(24);
     const arcadeBonus59 = arcade.bonuses.find(bonus => bonus.index == 59)?.getBonus() || 0;
