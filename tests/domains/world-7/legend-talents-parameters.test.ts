@@ -5,6 +5,8 @@ import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { Companion } from '../../../data/domain/companions';
 import { GemStore } from '../../../data/domain/gemPurchases';
 import { Sailing } from '../../../data/domain/sailing';
+import { Clamworks } from '../../../data/domain/world-7/clamworks';
+import { EventShop } from '../../../data/domain/eventShop';
 
 const saveName = 'live-game-2026-01-11';
 const extractionResultsName = 'legend-talents-data.json';
@@ -56,38 +58,37 @@ export const legendTalentsParameterSpecs: Record<string, ParameterTestSpec> = {
       return Math.min(5, Math.round(sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0));
     }
   },
+  clam_work_bonus_1: {
+    id: 'clam_work_bonus_1',
+    description: 'Clam work bonus 1',
+    extractionKey: 'clam_work_bonus_1',
+    domainExtractor: (gameData) => {
+      const clamworks = gameData.get("clamworks") as Clamworks;
+      return clamworks.isBonusUnlocked(1) ? 1 : 0;
+    }
+  },
+  clam_work_bonus_4: {
+    id: 'clam_work_bonus_4',
+    description: 'Clam work bonus 4',
+    extractionKey: 'clam_work_bonus_4',
+    domainExtractor: (gameData) => {
+      const clamworks = gameData.get("clamworks") as Clamworks;
+      return clamworks.isBonusUnlocked(4) ? 1 : 0;
+    }
+  },
+  event_shop_32: {
+    id: 'event_shop_32',
+    description: 'Event shop bonus 32',
+    extractionKey: 'event_shop_32',
+    domainExtractor: (gameData) => {
+      const eventShop = gameData.get("eventShop") as EventShop;
+      return eventShop.isBonusOwned(32) ? 2 : 0;
+    }
+  },
   // NOTE: The following TODO features are NOT tested individually because they don't exist
   // as separate values in the domain. They contribute to pointsOwned, which WILL fail
   // if these bonuses exist in the game but aren't implemented in the domain.
   // Uncomment these tests if/when these systems are implemented in the domain:
-
-  // clam_work_bonus_1: {
-  //   id: 'clam_work_bonus_1',
-  //   description: 'Clam work bonus 1 (TODO feature in domain)',
-  //   extractionKey: 'clam_work_bonus_1',
-  //   domainExtractor: (gameData) => {
-  //     // TODO: Implement clam work system, then extract the bonus here
-  //     throw new Error('Clam work bonus 1 not yet implemented in domain');
-  //   }
-  // },
-  // clam_work_bonus_4: {
-  //   id: 'clam_work_bonus_4',
-  //   description: 'Clam work bonus 4 (TODO feature in domain)',
-  //   extractionKey: 'clam_work_bonus_4',
-  //   domainExtractor: (gameData) => {
-  //     // TODO: Implement clam work system, then extract the bonus here
-  //     throw new Error('Clam work bonus 4 not yet implemented in domain');
-  //   }
-  // },
-  // event_shop_32: {
-  //   id: 'event_shop_32',
-  //   description: 'Event shop bonus 32 (TODO feature in domain)',
-  //   extractionKey: 'event_shop_32',
-  //   domainExtractor: (gameData) => {
-  //     // TODO: Implement event shop 32, then extract the bonus here
-  //     throw new Error('Event shop bonus 32 not yet implemented in domain');
-  //   }
-  // },
   // zenith_market_5: {
   //   id: 'zenith_market_5',
   //   description: 'Zenith market bonus 5 (TODO feature in domain)',
