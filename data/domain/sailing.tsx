@@ -29,6 +29,7 @@ import { Sneaking } from "./world-6/sneaking";
 import { Arcade } from "./arcade";
 import { Hole } from "./world-5/hole/hole";
 import { Votes } from "./world-2/votes";
+import { LegendTalents } from "./world-7/legendTalents";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -389,6 +390,7 @@ export const updateSailing = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const arcade = data.get("arcade") as Arcade;
     const hole = data.get("hole") as Hole;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const chestPurchases = gemStore.purchases.find(upgrade => upgrade.no == 129)?.pucrhased ?? 0;
     const artifactBoost = sailing.artifacts[19].getBonus();
@@ -403,9 +405,8 @@ export const updateSailing = (data: Map<string, any>) => {
         , 34);
 
     // DaveyJonesBonus (used for both speed and loot values)
-    // TODO : update this once legend talents are added to IE
     const gemShopDaveyPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
-    const legendTalentBonus  = 0;
+    const legendTalentBonus = legendTalents.getBonusFromIndex(11);
     const daveyJonesBonus = 1 + (50 * gemShopDaveyPurchases + legendTalentBonus) / 100;
         
     //Unending Loot Search

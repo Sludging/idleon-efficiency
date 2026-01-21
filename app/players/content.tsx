@@ -53,11 +53,16 @@ import { AnvilWrapper } from '../../data/domain/anvil';
 import { Alerts, CardSetAlert } from '../../data/domain/alerts';
 import { POExtra } from '../../data/domain/postoffice';
 import { Cooking } from '../../data/domain/cooking';
-import { Sneaking } from '../../data/domain/world-6/sneaking';
+import { BeanstalkingBonusType, Sneaking } from '../../data/domain/world-6/sneaking';
 
 import { useShallow } from 'zustand/react/shallow'
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { Bribe } from '../../data/domain/bribes';
+import { Card } from '../../data/domain/cards';
+import { EquipmentSets } from '../../data/domain/misc/equipmentSets';
+import { LegendTalents } from '../../data/domain/world-7/legendTalents';
+import { Companion } from '../../data/domain/companions';
+import { Votes } from '../../data/domain/world-2/votes';
 
 function ItemSourcesDisplay({ sources, dropInfo }: { sources: SourcesModel, dropInfo: DropSource[] }) {
 
@@ -577,6 +582,7 @@ function EquipmentDisplay({ player }: { player: Player }) {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const family = theData.get("family") as Family;
+    const players = theData.get("players") as Player[];
     const stampData = theData.get("stamps") as Stamp[][];
     const achievementsInfo = theData.get("achievements") as Achievement[];
     const sigils = theData.get("sigils") as Sigils;
@@ -584,14 +590,36 @@ function EquipmentDisplay({ player }: { player: Player }) {
     const cooking = theData.get("cooking") as Cooking;
     const sneaking = theData.get("sneaking") as Sneaking;
     const bribes = theData.get("bribes") as Bribe[];
+    const cards = theData.get("cards") as Card[];
+    const equipmentSets = theData.get("equipmentSets") as EquipmentSets;
+    const legendTalents = theData.get("legendTalents") as LegendTalents;
+    const companions = theData.get("companions") as Companion[];
+    const votes = theData.get("votes") as Votes;
 
     const pristineCharm14 = sneaking.pristineCharms.find(charm => charm.data.itemId == 14);
     const goldFoodStampBonus = stampData.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
-    const goldFoodAchievement = achievementsInfo[AchievementConst.GoldFood].completed;
+    const goldFoodAchievement37 = achievementsInfo[37].completed;
+    const goldFoodAchievement380 = achievementsInfo[380].completed;
+    const goldFoodAchievement383 = achievementsInfo[383].completed;
     const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
     const zGoldFoodMealBonus = cooking.meals.filter(meal => meal.bonusKey == "zGoldFood").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
     const bribeBonus36 = bribes.find(bribe => bribe.bribeIndex == 36)?.value ?? 0;
-    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement, sigils.sigils[14].getBonus(), goldFoodBubble, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0));
+    const equipmentSetBonus = equipmentSets.getSetBonus("SECRET_SET", player);
+    const votingBonus26 = votes.getCurrentBonus(26);
+    const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
+    const legenTalent25 = legendTalents.getBonusFromIndex(25);
+    const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);
+    
+    let apocalypseWoW = 0;
+    const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
+    const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
+    if (bestDeathBringer && deathBringerForKills) {
+        const deathbringeWoWStacks = Array.from(deathBringerForKills.killInfo.entries()).filter(([_, count]) => count >= 1000000000).length;;
+        const skillBonus = bestDeathBringer.getTalentBonus(209);
+        apocalypseWoW = skillBonus * deathbringeWoWStacks;
+    }
+
+    const goldFoodMulti = player.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(player) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigils.sigils[14].getBonus(), goldFoodBubble, zGoldFoodMealBonus, player.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
 
 
     return (
@@ -1070,6 +1098,7 @@ function ZowInfo({ player }: { player: Player }) {
         }
         return false;
     }
+
     const zowCount = Array.from(player.killInfo.entries()).filter(([_, count]) => count >= 100000).length;
     const toZow = Array.from(player.killInfo.entries()).map(([mapId, count]) => {
         const mapData = MapInfo[mapId];

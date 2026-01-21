@@ -4,7 +4,7 @@ import { Equinox } from "../equinox";
 import { Item } from "../items";
 import { Hole } from "../world-5/hole/hole";
 import { Summoning } from "../world-6/summoning";
-//import { LegendTalents } from "../world-7/legendTalents"; don't keep this commented once merged
+import { LegendTalents } from "../world-7/legendTalents";
 import { EventShop } from "../eventShop";
 import { initVotesBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
 import { VoteBonusModel } from "../model/voteBonusModel";
@@ -82,7 +82,7 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const hole = data.get("hole") as Hole;
     const summoning = data.get("summoning") as Summoning;
-    //const legendTalents = data.get("legendTalents") as LegendTalents; don't keep this commented once emerged
+    const legendTalents = data.get("legendTalents") as LegendTalents;
     const eventShop = data.get("eventShop") as EventShop;
     const meritocraty = data.get("meritocraty") as Meritocraty;
 
@@ -97,7 +97,7 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const multiFromEventShop16 = eventShop.isBonusOwned(16) ? 13 : 0;
     // TODO : update this once gaming palette is added
     const multiFromGamingPalette32 = 0;
-    const multiFromLegendTalents22 = /*legendTalents.legendTalents.find(talent => talent.index == 22)?.getBonus() ?? don't keep this commented once merged*/ 0;
+    const multiFromLegendTalents22 = legendTalents.getBonusFromIndex(22);
 
     const multiFromMeritocraty9 = meritocraty.getCurrentBonus(9);
 
