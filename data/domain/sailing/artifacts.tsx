@@ -9,6 +9,7 @@ import { Player } from "../player";
 import { Sailing } from "../sailing";
 import { SkillsIndex } from "../SkillsIndex";
 import { Slab } from "../slab";
+import { LegendTalents } from "../world-7/legendTalents";
 import { Meritocraty } from "../world-7/meritocraty";
 
 export enum ArtifactStatus {
@@ -427,10 +428,10 @@ export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const lab = data.get("lab") as Lab;
     const meritocraty = data.get("meritocraty") as Meritocraty;
-    //const legendTalents = data.get("legendTalents") as LegendTalents; don't keep this commented once emerged
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const sovereignBonus = lab.bonuses[15].active ? (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() : 0;
-    const legendTalentBonus28 = /*legendTalents.legendTalents.find(talent => talent.index == 28)?.getBonus() ?? don't keep this commented once merged*/ 0;
+    const legendTalentBonus28 = legendTalents.getBonusFromIndex(28);
     const meritocratyBonus23 = meritocraty.getCurrentBonus(23);
 
     (sailing.artifacts[2] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;

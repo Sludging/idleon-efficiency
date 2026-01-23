@@ -64,6 +64,8 @@ export class TomeEpilogueBonus {
     }
 
     getBonus(score: number): number {
+        if (!this.unlocked) return 0;
+
         return (1 + this.boostFromBonuses / 100) * this.data.x0 
             * Math.max(0, Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7) / (25 + Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7)))
     }
@@ -308,7 +310,7 @@ export class Tome extends Domain {
 
         const scoreToUse = playerIndex >= 0 ? this.getPlayerTotalScore(playerIndex) : this.highestScore ;
 
-        if (bonus && bonus.unlocked) {
+        if (bonus) {
             return bonus.getBonus(scoreToUse);
         }
 

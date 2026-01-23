@@ -40,6 +40,8 @@ export class ClamworksBonus {
 }
 
 export class ClamPromoBonus {
+    active: boolean = false;
+
     constructor(public index: number, public bonus: string) {}
 
     static fromBase() {
@@ -71,6 +73,10 @@ export class Clamworks extends Domain {
         clamWork.workBonuses.forEach(bonus => {
             bonus.level = optionList[455 + bonus.index] || 0;
         });
+
+        clamWork.promoBonuses.forEach(bonus => {
+            bonus.active = bonus.index < clamWork.promoLevel;
+        });
     }
 
     getPromoChance = (): number => {
@@ -78,13 +84,7 @@ export class Clamworks extends Domain {
     }
 
     getClamBonus = (index: number): number => {
-        const bonus = this.workBonuses.find(bonus => bonus.index == index);
-
-        if (bonus) {
-            return bonus.getBonus();
-        }
-
-        return 0;
+        return this.workBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
     }
 
     getClamBonusText = (index: number): string => {
@@ -129,22 +129,10 @@ export class Clamworks extends Domain {
     }
 
     isBonusUnlocked = (index: number): boolean => {
-        const bonus = this.promoBonuses.find(bonus => bonus.index == index);
-        // Still check if there's an existing bonus for this level
-        if (bonus) {
-            return this.promoLevel >= (bonus.index+1) ? true : false;
-        }
-
-        return false;
+        return this.promoBonuses.find(bonus => bonus.index == index)?.active || false;
     }
 
     getPromoBonusText = (index: number): string => {
-        const bonus = this.promoBonuses.find(bonus => bonus.index == index);
-
-        if (bonus) {
-            return bonus.bonus;
-        }
-
-        return "";
+        return this.promoBonuses.find(bonus => bonus.index == index)?.bonus || "";
     }
 }
