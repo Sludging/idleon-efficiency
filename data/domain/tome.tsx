@@ -40,7 +40,7 @@ import { Prayer } from './prayers';
 import { UpgradeVault } from './upgradeVault';
 import { Hole, WisdomMonument } from './world-5/hole/hole';
 import { SkillsIndex } from './SkillsIndex';
-import { TomeEpilogueBonusBase } from './data/TomeEpilogueBonusRepo';
+import { initTomeEpilogueBonusRepo, TomeEpilogueBonusBase } from './data/TomeEpilogueBonusRepo';
 import { TomeEpilogueBonusModel } from './model/tomeEpilogueBonusModel';
 import { EquipmentSets } from './misc/equipmentSets';
 import { Grimoire } from './grimoire';
@@ -60,7 +60,7 @@ export class TomeEpilogueBonus {
     constructor(public index: number, public data: TomeEpilogueBonusModel) {}
 
     static fromBase(data: TomeEpilogueBonusBase[]) {
-        return data.map(chapter => new TomeEpilogueBonus(chapter.index, chapter.data));
+        return data.map(bonus => new TomeEpilogueBonus(bonus.index, bonus.data));
     }
 
     getBonus(score: number): number {
@@ -236,11 +236,13 @@ export class Tome extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "OptLacc", perPlayer: false, default: [] }
+            { key: "OptLacc", perPlayer: false, default: [] },
+            { key: "Spelunk", perPlayer: false, default: [] }
         ]
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.epilogueBonuses = TomeEpilogueBonus.fromBase(initTomeEpilogueBonusRepo());
         return this;
     }
 
@@ -248,6 +250,7 @@ export class Tome extends Domain {
         const tome = data.get(this.dataKey) as Tome;
         const serverVars = data.get("servervars") as Record<string, any>;
         const charCount = data.get("charCount") as number;
+        const spelunk = data.get("Spelunk") as any[];
 
         tome.charCount = charCount;
 
@@ -260,6 +263,12 @@ export class Tome extends Domain {
         const tomeLinesBase = initTomeRepo();
         tomeLinesBase.forEach(lineInfo => {
             tome.lines.push(new TomeLine(lineInfo.index, lineInfo.data, tomeLineDisplayOrder.indexOf(lineInfo.index), tome.charCount));
+        });
+
+        // Check how many tome epilog bonuses we unlocked from Spelunking.
+        const spelunkEpilogUnlocks = spelunk[13][2] as number;
+        tome.epilogueBonuses.forEach(bonus => {
+            bonus.unlocked = spelunkEpilogUnlocks > bonus.index;
         });
     }
 
@@ -310,11 +319,7 @@ export class Tome extends Domain {
 
         const scoreToUse = playerIndex >= 0 ? this.getPlayerTotalScore(playerIndex) : this.highestScore ;
 
-        if (bonus) {
-            return bonus.getBonus(scoreToUse);
-        }
-
-        return 0;
+        return bonus?.getBonus(scoreToUse) ?? 0;
     }
 }
 
@@ -1047,7 +1052,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
 
     // Update Tome Epilogue bonuses
     const grimoireBonus = grimoire.getUpgradeBonus(17);
-    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET");
+    const equipmentSetBonus = equipmentSet.getSetBonus("TROLL_SET", undefined, true);
     tome.epilogueBonuses.forEach(bonus => {
         bonus.boostFromBonuses = grimoireBonus + equipmentSetBonus;
     });

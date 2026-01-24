@@ -2,7 +2,7 @@ import { TomeEpilogueBonusModel } from "../model/tomeEpilogueBonusModel";
 
 export class TomeEpilogueBonusBase { constructor(public index: number, public data: TomeEpilogueBonusModel) { } }
 
-export const initTomeRepo = () => {
+export const initTomeEpilogueBonusRepo = () => {
     return [
         new TomeEpilogueBonusBase(0, <TomeEpilogueBonusModel>{
             "bonus": "}x Bones",
