@@ -13,6 +13,11 @@
       "description": "Voting bonus 32"
     },
     {
+      "label": "lore_epic_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
+      "description": "Lore Epic bonus 8"
+    },
+    {
       "label": "companion_15_bonus",
       "expression": "idleon.callFunction(\"Companions\", 15)",
       "description": "Companion 15 bonus"

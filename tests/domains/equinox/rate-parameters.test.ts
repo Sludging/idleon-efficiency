@@ -1,8 +1,6 @@
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
-import { Player } from '../../../data/domain/player';
-import { ClassIndex } from '../../../data/domain/talents';
 import { Votes } from '../../../data/domain/world-2/votes';
 import { Companion } from '../../../data/domain/companions';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
@@ -12,10 +10,11 @@ import { Equinox } from '../../../data/domain/equinox';
 import { Arcade } from '../../../data/domain/arcade';
 import { Emperor } from '../../../data/domain/emperor';
 import { Tesseract } from '../../../data/domain/tesseract';
+import { Tome } from '../../../data/domain/tome';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
-const extractionResultsName = 'equinox-rate.json';
+const saveName = 'latest';
+const extractionResultsName = 'equinox-rate-data.json';
 
 
 export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
@@ -41,6 +40,15 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const votes = gameData.get("votes") as Votes;
       return votes.getCurrentBonus(32);
+    }
+  },
+  lore_epic_bonus_8: {
+    id: 'lore_epic_bonus_8',
+    description: 'Lore Epic bonus 8',
+    extractionKey: 'lore_epic_bonus_8',
+    domainExtractor: (gameData) => {
+      const tome = gameData.get("tome") as Tome;
+      return tome.getEpilogueBonus(8);
     }
   },
   companion_15_bonus: {
@@ -204,7 +212,7 @@ describe('Equinox Domain - Rate - Parameters', () => {
       const parameterResults = runParameterValidationSuite(
         equinoxRateParameterSpecs,
         extractionResults,
-        gameData
+        gameData,
       );
       // Ensure we validated at least some parameters
       expect(parameterResults.length).toBeGreaterThan(0);

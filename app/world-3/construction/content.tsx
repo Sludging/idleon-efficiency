@@ -23,7 +23,7 @@ import { Item } from '../../../data/domain/items';
 import { Storage } from '../../../data/domain/storage';
 import { lavaLog, nFormatter, range, toTime } from '../../../data/utility';
 import { StaticTime, TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
-import { Printer, Sample } from '../../../data/domain/printer';
+import { INDEX_DAYS_SINCE_SAMPLE_ARTIFACT, Printer, Sample } from '../../../data/domain/printer';
 import { Player } from '../../../data/domain/player';
 import { CircleInformation, Star, StatusWarning } from 'grommet-icons';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
@@ -394,7 +394,7 @@ function PrinterDisplay() {
             if (!optLacc) {
                 return 0;
             }
-            return optLacc[125];
+            return optLacc[INDEX_DAYS_SINCE_SAMPLE_ARTIFACT];
         }
         return 0;
     }, [theData, printerArtifact]);

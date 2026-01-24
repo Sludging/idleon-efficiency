@@ -3,8 +3,8 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Equinox } from '../../../data/domain/equinox';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
-const extractionResultsName = 'equinox-rate.json';
+const saveName = 'latest';
+const extractionResultsName = 'equinox-rate-data.json';
 
 describe('Equinox Domain - Rate', () => {
   let extractionResults: any;

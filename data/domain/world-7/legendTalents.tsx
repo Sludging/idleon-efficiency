@@ -1,11 +1,13 @@
 import { Domain, RawData } from "../base/domain";
 import { Companion } from "../companions";
 import { initLegendTalentsRepo, LegendTalentBase } from "../data/LegendTalentsRepo";
+import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
 import { LegendTalentModel } from "../model/legendTalentModel";
 import { Player } from "../player";
 import { Sailing } from "../sailing";
+import { Clamworks } from "./clamworks";
 
 export class LegendTalent {
     level: number = 0;
@@ -91,6 +93,8 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const gemStore = data.get("gems") as GemStore;
     const sailing = data.get("sailing") as Sailing;
+    const clamworks = data.get("clamworks") as Clamworks;
+    const eventShop = data.get("eventShop") as EventShop;
 
     // Legend Talents Points
     let pointsOwned = 0;
@@ -99,14 +103,12 @@ export const updateLegendTalents = (data: Map<string, any>) => {
         pointsOwned += Math.max(0, Math.floor((player.level - 400) / 100));
     });
 
-    // TODO : add ClamBonus 1 and 4 once implemented
-    const clamBonus1 = 0;
-    const clamBonus4 = 0;
+    const clamBonus1 = clamworks.isBonusUnlocked(1) ? 1 : 0;
+    const clamBonus4 = clamworks.isBonusUnlocked(4) ? 1 : 0;
     const companionBonus37 = companions.find(c => c.id === 37)?.owned || false ? 10 : 0;
     const gemBonus42 = gemStore.purchases.find(purchase => purchase.no == 42)?.pucrhased ?? 0;
     const artifactBonus34 = Math.min(5, sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0);
-    // TODO : add event shop 32 onc implemented
-    const evenShopBonus32 = 2 * 0;
+    const evenShopBonus32 = eventShop.isBonusOwned(32) ? 2 : 0;
     
     pointsOwned += clamBonus1 + clamBonus4 + companionBonus37 + gemBonus42 + artifactBonus34 + evenShopBonus32;
 
