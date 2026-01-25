@@ -67,6 +67,7 @@ import { Clamworks } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { CoralKid } from './world-7/coralKid';
+import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -156,6 +157,7 @@ const domainList: Domain[] = [
     new Meritocraty("meritocraty"),
     new LegendTalents("legendTalents"),
     new CoralKid("coralKid"),
+    new BigFish("bigFish"),
 ]
 
 export class IdleonData {
@@ -220,6 +222,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
