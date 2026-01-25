@@ -51,7 +51,7 @@ export const runParameterValidationSuite = (
   specs: Record<string, ParameterTestSpec>,
   extractionResults: ExtractionResults,
   gameData: Map<string, any>,
-  tolerance: number = 0.05
+  tolerance: number = 0
 ): ParameterTestResult[] => {
   const results: ParameterTestResult[] = [];
 
