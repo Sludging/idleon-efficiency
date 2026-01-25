@@ -130,15 +130,14 @@ Choose a complex calculation with cross-domain dependencies:
 
 Create `tests/configs/[optional-grouping]/[feature]-[aspect].json`:
 
-1. **Identify all parameters** that influence the calculation
-2. **Find game expressions** that extract each parameter value
-3. **Add final calculation** extractions with different scenarios
-4. **Document each extraction** with clear descriptions
+1. **Ask developer for game code first** - Do NOT create configs based on existing domain code
+2. **Identify all input parameters** that influence the calculation
+3. **Break down composite calculations** into individual components
+4. **Find game expressions** that extract each parameter value
+5. **Add multiple final calculations** to test different scenarios
+6. **Document each extraction** with clear descriptions
 
-**Tips:**
-- Start by examining game source code for function names
-- Use existing configs as templates
-- Group related extractions logically
+See existing configs for examples: `tests/configs/cooking-meal-bonus.json`, `tests/configs/sailing-speed.json`
 
 #### Step 3: Run Live Extraction
 
@@ -165,6 +164,7 @@ Create `tests/domains/[optional-grouping]/[feature]/[aspect]-parameters.test.ts`
 
 1. **Define parameter specs** for each extracted value
 2. **Map extraction keys** to domain extractors
+3. **Handle missing implementations explicitly**
 
 **Pattern:**
 ```typescript
@@ -193,6 +193,35 @@ describe('Feature - Aspect - Parameters', () => {
 });
 ```
 
+**Handling missing implementations:**
+
+When implementing a parameter extractor:
+
+1. Look for the corresponding domain code
+2. If unsure whether domain exists, ask the developer
+3. If developer confirms it's not implemented, throw an explicit error with context
+4. Include the game function signature in the error for future reference
+
+```typescript
+export const parameterSpecs: Record<string, ParameterTestSpec> = {
+  some_bonus: {
+    id: 'some_bonus',
+    description: 'Some bonus calculation (MISSING IMPLEMENTATION)',
+    extractionKey: 'some_bonus',
+    domainExtractor: (_gameData) => {
+      // MISSING: Confirmed with developer - domain not yet implemented
+      // Game function: SomeFunction(arg1, arg2)
+      throw new Error("some_bonus: NOT IMPLEMENTED - domain missing");
+    }
+  }
+};
+```
+
+This approach:
+- Documents what's missing for future implementation
+- Keeps the test running (fails explicitly rather than silently)
+- Preserves the dependency relationship in the test suite
+
 #### Step 5: Write Calculation Tests
 
 After parameter tests pass, add final calculation tests:
@@ -219,6 +248,33 @@ yarn test tests/domains/[feature]/[aspect]-parameters.test.ts
 
 # Run all domain tests
 yarn test:domains
+```
+
+## Common Mistakes to Avoid
+
+### What to Extract
+
+Base configs on game code (ask developer), not our domain code. Our domain code may be incorrect - that's what we're testing.
+
+Extract individual components, not composites. When `CookingMealBonusMultioo = (1 + (MainframeBonus(116) + ShinyBonus(20)) / 100) * (1 + WinBonus(26) / 100)`, extract MainframeBonus(116), ShinyBonus(20), WinBonus(26) separately. Testing components individually helps pinpoint failures.
+
+### What Inputs to Test
+
+Parameters = all calculation inputs, regardless of domain. Extract same-domain dependencies if they're inputs (e.g., ribbon bonus for cooking calculations).
+
+### How Many Scenarios to Test
+
+Test 3-5 different scenarios when there are many similar calculations (e.g., test meal bonuses for "Sailing", "Mcook", "KitchenEff" rather than just one).
+
+### Handling Missing Implementations
+
+Look for domain code first. If unsure about implementation status, ask developer. Only throw errors after confirming it's missing:
+
+```typescript
+domainExtractor: (_gameData) => {
+  // Confirmed with developer - domain not yet implemented
+  throw new Error("some_bonus: NOT IMPLEMENTED - domain missing");
+}
 ```
 
 ## Test Patterns & Best Practices
