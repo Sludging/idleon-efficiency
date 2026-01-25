@@ -51,6 +51,8 @@ export class ClamPromoBonus {
 
 export class Clamworks extends Domain {
     promoLevel: number = 0;
+    // TODO : find where this is stored
+    pearlsOwned: number = 0;
     workBonuses: ClamworksBonus[] = [];
     promoBonuses: ClamPromoBonus[] = [];
 
