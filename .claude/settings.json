@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yarn:*)",
+      "Bash(yarn *)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(head:*)",
+      "Bash(diff:*)"
+      
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(./certificates/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.crt)",
+      "Read(**/firebase-*.json)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Write(./certificates/**)",
+      "Write(**/*.pem)",
+      "Write(**/*.key)",
+      "Write(**/*.crt)"
+    ]
+  },
+  "model": "sonnet"
+}
