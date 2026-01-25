@@ -16,7 +16,7 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { SlabInfluencedArtifact } from '../../../data/domain/sailing/artifacts';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2026-01-11'; // This should match extraction time
+const saveName = 'latest';
 const extractionResultsName = 'sailing-speed-data.json';
 
 export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {

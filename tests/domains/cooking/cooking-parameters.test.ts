@@ -27,7 +27,7 @@ import { Card } from '../../../data/domain/cards';
 import { Achievement } from '../../../data/domain/achievements';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
+const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 
 

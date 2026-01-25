@@ -12,8 +12,8 @@ import { Player } from '../../../data/domain/player';
 import { ClassIndex } from '../../../data/domain/talents';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
-const extractionResultsName = 'talents-sludgeadin.json';
+const saveName = 'latest';
+const extractionResultsName = 'talents-sludgeadin-data.json';
 
 
 export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {

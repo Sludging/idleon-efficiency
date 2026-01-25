@@ -8,7 +8,7 @@ import { Sailing } from '../../../data/domain/sailing';
 import { Clamworks } from '../../../data/domain/world-7/clamworks';
 import { EventShop } from '../../../data/domain/eventShop';
 
-const saveName = 'live-game-2026-01-11';
+const saveName = 'latest';
 const extractionResultsName = 'legend-talents-data.json';
 
 export const legendTalentsParameterSpecs: Record<string, ParameterTestSpec> = {
