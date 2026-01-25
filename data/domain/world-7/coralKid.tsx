@@ -10,7 +10,6 @@ export const coralKidBonuses = [
     "You now generate {% more Daily Coral for the Coral Reef back in town!"
 ]
 
-
 export class CoralKidBonus {
     level: number = 0;
 

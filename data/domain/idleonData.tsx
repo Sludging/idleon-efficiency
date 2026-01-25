@@ -66,6 +66,7 @@ import { EventShop } from './eventShop';
 import { Clamworks } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
+import { CoralKid } from './world-7/coralKid';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -154,6 +155,7 @@ const domainList: Domain[] = [
     new Clamworks("clamworks"),
     new Meritocraty("meritocraty"),
     new LegendTalents("legendTalents"),
+    new CoralKid("coralKid"),
 ]
 
 export class IdleonData {
