@@ -1,6 +1,6 @@
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
+import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Votes } from '../../../data/domain/world-2/votes';
 import { Companion } from '../../../data/domain/companions';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
@@ -17,9 +17,8 @@ const saveName = 'latest';
 const extractionResultsName = 'equinox-rate-data.json';
 
 
-export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
+const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
   has_bun_q: {
-    id: 'has_bun_q',
     description: 'Has bun_q bundle',
     extractionKey: 'has_bun_q',
     domainExtractor: (gameData) => {
@@ -34,7 +33,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   voting_bonus_32: {
-    id: 'voting_bonus_32',
     description: 'Voting bonus 32',
     extractionKey: 'voting_bonus_32',
     domainExtractor: (gameData) => {
@@ -43,7 +41,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   lore_epic_bonus_8: {
-    id: 'lore_epic_bonus_8',
     description: 'Lore Epic bonus 8',
     extractionKey: 'lore_epic_bonus_8',
     domainExtractor: (gameData) => {
@@ -52,7 +49,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   companion_15_bonus: {
-    id: 'companion_15_bonus',
     description: 'Companion 15 bonus',
     extractionKey: 'companion_15_bonus',
     domainExtractor: (gameData) => {
@@ -61,7 +57,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cosmo_bonus_2_5: {
-    id: 'cosmo_bonus_2_5',
     description: 'Cosmo bonus 2 - 5',
     extractionKey: 'cosmo_bonus_2_5',
     domainExtractor: (gameData) => {
@@ -70,7 +65,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   event_shop_owned_3: {
-    id: 'event_shop_owned_3',
     description: 'Event shop owned 3',
     extractionKey: 'event_shop_owned_3',
     domainExtractor: (gameData) => {
@@ -79,7 +73,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   option_320_bonus: {
-    id: 'option_320_bonus',
     description: 'Option 320 bonus',
     extractionKey: 'option_320_bonus',
     domainExtractor: (gameData) => {
@@ -88,7 +81,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   alch_vials_eq_bar_bonus: {
-    id: 'alch_vials_eq_bar_bonus',
     description: 'Alch vials eq bar bonus',
     extractionKey: 'alch_vials_eq_bar_bonus',
     domainExtractor: (gameData) => {
@@ -97,7 +89,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_3: {
-    id: 'cloud_bonus_3',
     description: 'Cloud bonus 3',
     extractionKey: 'cloud_bonus_3',
     domainExtractor: (gameData) => {
@@ -106,7 +97,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_9: {
-    id: 'cloud_bonus_9',
     description: 'Cloud bonus 9',
     extractionKey: 'cloud_bonus_9',
     domainExtractor: (gameData) => {
@@ -115,7 +105,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_14: {
-    id: 'cloud_bonus_14',
     description: 'Cloud bonus 14',
     extractionKey: 'cloud_bonus_14',
     domainExtractor: (gameData) => {
@@ -124,7 +113,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_19: {
-    id: 'cloud_bonus_19',
     description: 'Cloud bonus 19',
     extractionKey: 'cloud_bonus_19',
     domainExtractor: (gameData) => {
@@ -133,7 +121,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_22: {
-    id: 'cloud_bonus_22',
     description: 'Cloud bonus 22',
     extractionKey: 'cloud_bonus_22',
     domainExtractor: (gameData) => {
@@ -142,7 +129,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_24: {
-    id: 'cloud_bonus_24',
     description: 'Cloud bonus 24',
     extractionKey: 'cloud_bonus_24',
     domainExtractor: (gameData) => {
@@ -151,7 +137,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   cloud_bonus_29: {
-    id: 'cloud_bonus_29',
     description: 'Cloud bonus 29',
     extractionKey: 'cloud_bonus_29',
     domainExtractor: (gameData) => {
@@ -160,7 +145,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   arcade_bonus_41: {
-    id: 'arcade_bonus_41',
     description: 'Arcade bonus 41',
     extractionKey: 'arcade_bonus_41',
     domainExtractor: (gameData) => {
@@ -169,7 +153,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   emperor_bonus_5: {
-    id: 'emperor_bonus_5',
     description: 'Emperor bonus 5',
     extractionKey: 'emperor_bonus_5',
     domainExtractor: (gameData) => {
@@ -178,7 +161,6 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   tesseract_bonus_37: {
-    id: 'tesseract_bonus_37',
     description: 'Tesseract bonus 37',
     extractionKey: 'tesseract_bonus_37',
     domainExtractor: (gameData) => {
@@ -191,58 +173,18 @@ export const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
 describe('Equinox Domain - Rate - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
-  
+
   beforeAll(() => {
-    // Load live game extraction results
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
-    
-    // Load matching save data - MUST correspond to the same game state as extraction
-    try {
-      gameData = loadGameDataFromSave(saveName);
-    } catch (error: any) {
-      throw new Error(`❌ Failed to load save data: ${error.message}`);
-    }
+    gameData = loadGameDataFromSave(saveName);
   });
-    
 
-  describe('Parameter Validation', () => {
-    it('validates all equinox rate parameters against extracted results', () => {
-      // Run table-driven parameter validation
-      const parameterResults = runParameterValidationSuite(
-        equinoxRateParameterSpecs,
-        extractionResults,
-        gameData,
-      );
-      // Ensure we validated at least some parameters
-      expect(parameterResults.length).toBeGreaterThan(0);
-
-      // Log results for each parameter
-      let passedCount = 0;
-      let failures: string[] = [];
-      parameterResults.forEach(result => {
-        if (result.passed) {
-          passedCount++;
-          // Only log successes in verbose mode
-          testLog(result.notes || `✅ ${result.parameterId}: passed`, 'debug');
-        } else {
-          // Log ALL failures for debugging
-          testLog(`❌ ${result.parameterId}: ${result.error}`, 'always');
-          
-          failures.push(result.parameterId);
-        }
-      });
-      testLog(`📊 Parameter Validation: ${passedCount}/${parameterResults.length} passed`, 'always');
-      
-      // FAIL THE TEST IMMEDIATELY if parameters don't match
-      if (failures.length > 0) {
-        const failureDetails = failures.map(paramId => {
-          const result = parameterResults.find(r => r.parameterId === paramId);
-          return `${paramId}: ${result?.error}`;
-        }).join('\n   ');
-        
-        throw new Error(`Parameter validation failed:\n   ${failureDetails}\n\nThis indicates save data doesn't match live game state.`);
-      }
+  Object.entries(equinoxRateParameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
     });
   });
 });

@@ -1,6 +1,6 @@
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
+import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Sailing } from '../../../data/domain/sailing';
 import { Divinity } from '../../../data/domain/divinity';
 import { Card } from '../../../data/domain/cards';
@@ -19,9 +19,8 @@ import { SlabInfluencedArtifact } from '../../../data/domain/sailing/artifacts';
 const saveName = 'latest';
 const extractionResultsName = 'sailing-speed-data.json';
 
-export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
+const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
   divinity_minor_bonus_6: {
-    id: 'divinity_minor_bonus_6',
     description: 'Divinity minor bonus for Purrmep (god 6)',
     extractionKey: 'divinity_minor_bonus_6',
     domainExtractor: (gameData) => {
@@ -31,7 +30,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   card_w5c1_bonus: {
-    id: 'card_w5c1_bonus',
     description: 'Card w5c1 bonus',
     extractionKey: 'card_w5c1_bonus',
     domainExtractor: (gameData) => {
@@ -40,7 +38,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   card_boss5a_bonus: {
-    id: 'card_boss5a_bonus',
     description: 'Card Boss5A bonus',
     extractionKey: 'card_boss5a_bonus',
     domainExtractor: (gameData) => {
@@ -49,7 +46,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   alchemy_bubble_y1: {
-    id: 'alchemy_bubble_y1',
     description: 'Alchemy bubble Y1 (yellow bubble 1)',
     extractionKey: 'alchemy_bubble_y1',
     domainExtractor: (gameData) => {
@@ -58,7 +54,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   davey_jones_bonus: {
-    id: 'davey_jones_bonus',
     description: 'Davey Jones bonus',
     extractionKey: 'davey_jones_bonus',
     domainExtractor: (gameData) => {
@@ -67,7 +62,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   divinity_blessing_4: {
-    id: 'divinity_blessing_4',
     description: 'Divinity blessing bonus for god 4',
     extractionKey: 'divinity_blessing_4',
     domainExtractor: (gameData) => {
@@ -76,7 +70,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   divinity_blessing_6: {
-    id: 'divinity_blessing_6',
     description: 'Divinity blessing bonus for god 6 (Purrmep)',
     extractionKey: 'divinity_blessing_6',
     domainExtractor: (gameData) => {
@@ -85,7 +78,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   voting_bonus_24: {
-    id: 'voting_bonus_24',
     description: 'Voting bonus 24',
     extractionKey: 'voting_bonus_24',
     domainExtractor: (gameData) => {
@@ -94,7 +86,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   divinity_blessing_9: {
-    id: 'divinity_blessing_9',
     description: 'Divinity blessing bonus for god 9',
     extractionKey: 'divinity_blessing_9',
     domainExtractor: (gameData) => {
@@ -103,7 +94,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   artifact_10_bonus: {
-    id: 'artifact_10_bonus',
     description: 'Sailing artifact 10 bonus',
     extractionKey: 'artifact_10_bonus',
     domainExtractor: (gameData) => {
@@ -112,7 +102,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   stamp_sailspd_bonus: {
-    id: 'stamp_sailspd_bonus',
     description: 'Stamp bonus for SailSpd',
     extractionKey: 'stamp_sailspd_bonus',
     domainExtractor: (gameData) => {
@@ -122,7 +111,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   statue_24_bonus: {
-    id: 'statue_24_bonus',
     description: 'Statue 24 bonus',
     extractionKey: 'statue_24_bonus',
     domainExtractor: (gameData) => {
@@ -131,7 +119,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   meal_bonus_sailing: {
-    id: 'meal_bonus_sailing',
     description: 'Meal bonus for Sailing',
     extractionKey: 'meal_bonus_sailing',
     domainExtractor: (gameData) => {
@@ -140,7 +127,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   alchemy_vial_sailspd: {
-    id: 'alchemy_vial_sailspd',
     description: 'Alchemy vial SailSpd bonus',
     extractionKey: 'alchemy_vial_sailspd',
     domainExtractor: (gameData) => {
@@ -149,7 +135,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   rift_skill_bonus_sailing: {
-    id: 'rift_skill_bonus_sailing',
     description: 'Rift skill mastery bonus for sailing (skill index 12)',
     extractionKey: 'rift_skill_bonus_sailing',
     domainExtractor: (gameData) => {
@@ -159,7 +144,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   worship_msa_bonus_2: {
-    id: 'worship_msa_bonus_2',
     description: 'Worship MSA bonus 2 (boat speed)',
     extractionKey: 'worship_msa_bonus_2',
     domainExtractor: (gameData) => {
@@ -168,7 +152,6 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   starsign_63_bonus: {
-    id: 'starsign_63_bonus',
     description: 'Star sign 63 (C. Shanti Minor) bonus',
     extractionKey: 'starsign_63_bonus',
     domainExtractor: (gameData) => {
@@ -181,58 +164,18 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
 describe('Sailing Domain - Speed - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
-  
+
   beforeAll(() => {
-    // Load live game extraction results
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
-    
-    // Load matching save data - MUST correspond to the same game state as extraction
-    try {
-      gameData = loadGameDataFromSave(saveName);
-    } catch (error: any) {
-      throw new Error(`❌ Failed to load save data: ${error.message}`);
-    }
+    gameData = loadGameDataFromSave(saveName);
   });
 
-  describe('Parameter Validation', () => {
-    it('validates all sailing speed parameters against extracted results', () => {
-      // Run table-driven parameter validation
-      const parameterResults = runParameterValidationSuite(
-        sailingSpeedParameterSpecs,
-        extractionResults,
-        gameData
-      );
-      
-      // Ensure we validated at least some parameters
-      expect(parameterResults.length).toBeGreaterThan(0);
-
-      // Log results for each parameter
-      let passedCount = 0;
-      let failures: string[] = [];
-      parameterResults.forEach(result => {
-        if (result.passed) {
-          passedCount++;
-          // Only log successes in verbose mode
-          testLog(result.notes || `✅ ${result.parameterId}: passed`, 'debug');
-        } else {
-          // Log ALL failures for debugging
-          testLog(`❌ ${result.parameterId}: ${result.error}`, 'always');
-          
-          failures.push(result.parameterId);
-        }
-      });
-      testLog(`📊 Parameter Validation: ${passedCount}/${parameterResults.length} passed`, 'always');
-      
-      // FAIL THE TEST IMMEDIATELY if parameters don't match
-      if (failures.length > 0) {
-        const failureDetails = failures.map(paramId => {
-          const result = parameterResults.find(r => r.parameterId === paramId);
-          return `${paramId}: ${result?.error}`;
-        }).join('\n   ');
-        
-        throw new Error(`Parameter validation failed:\n   ${failureDetails}\n\nThis indicates save data doesn't match live game state.`);
-      }
+  Object.entries(sailingSpeedParameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
     });
   });
 });

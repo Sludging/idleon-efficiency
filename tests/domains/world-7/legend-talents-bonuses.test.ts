@@ -11,7 +11,6 @@ describe('Legend Talents Bonus Calculations', () => {
   let legendTalents: LegendTalents;
 
   beforeAll(() => {
-    global.testSetup('Loading extraction results and game data for bonus calculations');
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave(saveName);
