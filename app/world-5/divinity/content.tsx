@@ -119,7 +119,7 @@ function GodDisplay() {
                                     } />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='xsmall' text={`${god.blessLevel}/100`} label="Blessing Level" />
+                                    <TextAndLabel textSize='xsmall' text={`${god.blessLevel}/${god.blessMaxLevel}`} label="Blessing Level" />
                                 </Box>
                                 <Box margin={{ bottom: 'small', right: 'small' }}>
                                     <TextAndLabel textSize='xsmall' text={god.getBlessingBonusText()} label="Blessing Bonus" />

@@ -11,9 +11,11 @@ import { Activity, Player } from "./player";
 import { SkillsIndex } from "./SkillsIndex";
 import { Hole, PocketDivinityUpgrade } from "./world-5/hole/hole";
 import { Sneaking } from "./world-6/sneaking";
+import { CoralKid } from "./world-7/coralKid";
 
 export class DivinityGod {
     blessLevel: number = 0;
+    blessMaxLevel: number = 100;
     unlocked: boolean = false;
     linkedPlayers: Player[] = [];
 
@@ -180,20 +182,24 @@ export const updateDivinity = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const sneaking = data.get("sneaking") as Sneaking;
     const hole = data.get("hole") as Hole;
+    const coralKid = data.get("coralKid") as CoralKid;
 
     // God related math values;
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
     const jadeUpgradeBlessingBoost = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "True Godly Blessings")?.purchased ?? false) ? 5 : 0;
+    const coralKidBonus1 = coralKid.getBonusFromIndex(1);
     divinity.gods.forEach(god => {
         god.activeBubblePassiveBonus = Math.max(1, activeBubblePassiveDivinityBonus);
         god.jadeUpgradeBlessingBonus = jadeUpgradeBlessingBoost;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
+        god.blessMaxLevel = 100 + coralKidBonus1;
     })
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
         player.gods.forEach(god => {
+            god.blessMaxLevel = 100 + coralKidBonus1;
             // Due to Doot double linking can happen, so avoid that.
             if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
                 god.linkedPlayers.push(players[player.playerIndex]);
