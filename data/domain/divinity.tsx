@@ -23,7 +23,6 @@ export class DivinityGod {
     activeBubblePassiveBonus: number = 0;
     jadeUpgradeBlessingBonus: number = 0;
     godRank: number = 0;
-    // TODO: Update this once available.
     coralKidUpgrade3: number = 0;
     constructor(public index: number, public data: GodInfoModel) { }
 
@@ -196,10 +195,12 @@ export const updateDivinity = (data: Map<string, any>) => {
     const activeBubblePassiveDivinityBonus = alchemy.getBubbleBonusForKey("Y2ACTIVE")
     const jadeUpgradeBlessingBoost = (sneaking.jadeUpgrades.find(upgrade => upgrade.data.name == "True Godly Blessings")?.purchased ?? false) ? 5 : 0;
     const coralKidBonus1 = coralKid.getBonusFromIndex(1);
+    const coralKidBonus3 = coralKid.getBonusFromIndex(3);
     divinity.gods.forEach(god => {
         god.activeBubblePassiveBonus = Math.max(1, activeBubblePassiveDivinityBonus);
         god.jadeUpgradeBlessingBonus = jadeUpgradeBlessingBoost;
         god.godRank = divinity.godRank;
+        god.coralKidUpgrade3 = coralKidBonus3;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
         god.blessMaxLevel = 100 + coralKidBonus1;
@@ -208,6 +209,7 @@ export const updateDivinity = (data: Map<string, any>) => {
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
         player.gods.forEach(god => {
+            god.coralKidUpgrade3 = coralKidBonus3;
             god.blessMaxLevel = 100 + coralKidBonus1;
             // Due to Doot double linking can happen, so avoid that.
             if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
