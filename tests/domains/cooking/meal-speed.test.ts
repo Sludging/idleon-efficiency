@@ -10,7 +10,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Cooking } from '../../../data/domain/cooking';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
+const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 
 describe('Cooking Domain - Meal Speed', () => {

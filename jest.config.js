@@ -12,5 +12,8 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1'
-  }
+  },
+  // Our tests have very specific matchers so usually stacktrace is pointless.
+  // Revisit this if we evolve our testing framework further.
+  noStackTrace: true,
 }; 

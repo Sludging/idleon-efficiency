@@ -5,9 +5,9 @@
  * extracted from running game using the debug tool.
  */
 
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
+import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Cooking } from '../../../data/domain/cooking';
 import { StarSigns } from '../../../data/domain/starsigns';
 import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
@@ -27,14 +27,13 @@ import { Card } from '../../../data/domain/cards';
 import { Achievement } from '../../../data/domain/achievements';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
+const saveName = 'latest';
 const extractionResultsName = 'cooking-speed-data.json';
 
 
-export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
+const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   // Kitchen instance values
   mealLevels: {
-    id: 'meal_levels',
     description: 'Kitchen meal levels',
     extractionKey: 'kitchen_0_meal_levels',
     domainExtractor: (gameData) => {
@@ -44,7 +43,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   recipeLevels: {
-    id: 'recipe_levels',
     description: 'Kitchen recipe levels',
     extractionKey: 'kitchen_0_recipe_levels',
     domainExtractor: (gameData) => {
@@ -54,7 +52,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   luckLevels: {
-    id: 'luck_levels',
     description: 'Kitchen luck levels',
     extractionKey: 'kitchen_0_luck_levels',
     domainExtractor: (gameData) => {
@@ -65,7 +62,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
 
   // Bonus parameters
   starsignBonus: {
-    id: 'starsign_bonus',
     description: 'Star sign cooking speed bonus',
     extractionKey: 'starsign_58_bonus',
     domainExtractor: (gameData) => {
@@ -76,7 +72,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   talent59Bonus: {
-    id: 'talent_59_bonus',
     description: 'Talent 59 bonus',
     extractionKey: 'talent_59_bonus',
     domainExtractor: (gameData) => {
@@ -87,7 +82,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   cropSc3Bonus: {
-    id: 'crop_sc_3_bonus',
     description: 'Crop SC 3 bonus',
     extractionKey: 'crop_sc_3_bonus',
     domainExtractor: (gameData) => {
@@ -97,7 +91,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   enhancedTalent146Bonus: {
-    id: 'enhanced_talent_146_bonus',
     description: 'Enhanced Talent 146 bonus',
     extractionKey: 'talent_enh_146_bonus',
     domainExtractor: (gameData) => {
@@ -108,7 +101,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   voting13Bonus: {
-    id: 'voting_13_bonus',
     description: 'Voting 13 bonus',
     extractionKey: 'voting_13_bonus',
     domainExtractor: (gameData) => {
@@ -119,7 +111,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   vault54Bonus: {
-    id: 'vault_54_bonus',
     description: 'Vault 54 bonus',
     extractionKey: 'vault_upg_54_bonus',
     domainExtractor: (gameData) => {
@@ -130,7 +121,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   mealBonusZMealFarm: {
-    id: 'meal_bonus_zmealfarm',
     description: 'Meal bonus for Z meal farm',
     extractionKey: 'meal_bonus_zmealfarm',
     domainExtractor: (gameData) => {
@@ -141,7 +131,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   alchBubblesMealSpdzBonus: {
-    id: 'alch_bubbles_meal_spdz_bonus',
     description: 'Alchemy bubbles MealSpdz bonus',
     extractionKey: 'alch_bubbles_meal_spdz_bonus',
     domainExtractor: (gameData) => {
@@ -152,7 +141,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   atomBonuses8Bonus: {
-    id: 'atom_bonuses_8_bonus',
     description: 'Atom bonuses 8 bonus',
     extractionKey: 'atom_bonuses_8_bonus',
     domainExtractor: (gameData) => {
@@ -163,7 +151,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   msa1Bonus: {
-    id: 'msa_1_bonus',
     description: 'MSA 1 bonus',
     extractionKey: 'msa_1_bonus',
     domainExtractor: (gameData) => {
@@ -174,7 +161,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   artifact13Bonus: {
-    id: 'artifact_13_bonus',
     description: 'Artifact 13 bonus',
     extractionKey: 'artifact_13_bonus',
     domainExtractor: (gameData) => {
@@ -185,7 +171,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   arcade28Bonus: {
-    id: 'arcade_28_bonus',
     description: 'Arcade 28 bonus',
     extractionKey: 'arcade_28_bonus',
     domainExtractor: (gameData) => {
@@ -196,7 +181,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   alchVials6turtleBonus: {
-    id: 'alch_vials_6turtle_bonus',
     description: 'Alchemy vial bonus for 6turtle',
     extractionKey: 'alch_vials_6turtle_bonus',
     domainExtractor: (gameData) => {
@@ -207,7 +191,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   alchVialsMealCookBonus: {
-    id: 'alch_vials_meal_cook_bonus',
     description: 'Alchemy vial bonus for MealCook',
     extractionKey: 'alch_vials_MealCook_bonus',
     domainExtractor: (gameData) => {
@@ -218,7 +201,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   stampBonusMealCook: {
-    id: 'stamp_bonus_meal_cook',
     description: 'Stamp bonus for MealCook',
     extractionKey: 'stamp_bonus_MealCook',
     domainExtractor: (gameData) => {
@@ -229,7 +211,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   mainframe114Bonus: {
-    id: 'mainframe_114_bonus',
     description: 'Mainframe 114 bonus',
     extractionKey: 'mainframe_114_bonus',
     domainExtractor: (gameData) => {
@@ -240,7 +221,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   mealBonusMcook: {
-    id: 'meal_bonus_mcook',
     description: 'Meal bonus for Mcook',
     extractionKey: 'meal_bonus_Mcook',
     domainExtractor: (gameData) => {
@@ -251,7 +231,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   summoningWinBonus15: {
-    id: 'summoning_win_bonus_15',
     description: 'Summoning win bonus 15',
     extractionKey: 'summoning_win_bonus_15',
     domainExtractor: (gameData) => {
@@ -263,7 +242,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   holesMonumentRogBonuses02: {
-    id: 'holes_monument_rog_bonuses_0_2',
     description: 'Holes monument - Bravery bonus 2',
     extractionKey: 'holes_monument_rog_bonuses_0_2',
     domainExtractor: (gameData) => {
@@ -274,7 +252,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   holesBUpg56Bonus: {
-    id: 'holes_b_upg_56_bonus',
     description: 'Holes Schematics 56 bonus',
     extractionKey: 'holes_b_upg_56_bonus',
     domainExtractor: (gameData) => {
@@ -285,7 +262,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   cardW6c1Bonus: {
-    id: 'card_w6c1_bonus',
     description: 'Card w6c1 bonus',
     extractionKey: 'card_w6c1_bonus',
     domainExtractor: (gameData) => {
@@ -298,7 +274,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   lampBonus0: {
-    id: 'lamp_bonus_0',
     description: 'Lamp bonus 0',
     extractionKey: 'lamp_bonuses_0',
     domainExtractor: (gameData) => {
@@ -309,7 +284,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   alchVials6cookspdBonus: {
-    id: 'alch_vials_6cookspd_bonus',
     description: 'Alchemy vial bonus for 6CookSpd',
     extractionKey: 'alch_vials_6cookspd_bonus',
     domainExtractor: (gameData) => {
@@ -320,7 +294,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   mainframe100Bonus: {
-    id: 'mainframe_100_bonus',
     description: 'Mainframe 100 bonus',
     extractionKey: 'mainframe_100_bonus',
     domainExtractor: (gameData) => {
@@ -331,7 +304,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   cardBoss4aBonus: {
-    id: 'card_boss4a_bonus',
     description: 'Card boss4a bonus',
     extractionKey: 'card_boss4a_bonus',
     domainExtractor: (gameData) => {
@@ -344,7 +316,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   achieveStatus225Bonus: {
-    id: 'achieve_status_225_bonus',
     description: 'Achieve status 225 bonus',
     extractionKey: 'achieve_status_225_bonus',
     domainExtractor: (gameData) => {
@@ -354,7 +325,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   achieveStatus224Bonus: {
-    id: 'achieve_status_224_bonus',
     description: 'Achieve status 224 bonus',
     extractionKey: 'achieve_status_224_bonus',
     domainExtractor: (gameData) => {
@@ -364,7 +334,6 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
   },
 
   mealBonusKitchenEff: {  
-    id: 'meal_bonus_kitchen_eff',
     description: 'Meal bonus for KitchenEff',
     extractionKey: 'meal_bonus_KitchenEff',
     domainExtractor: (gameData) => {
@@ -378,59 +347,18 @@ export const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
 describe('Cooking Domain - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
-  
+
   beforeAll(() => {
-    // Load live game extraction results
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
-    
-    // Load matching save data - MUST correspond to the same game state as extraction
-    try {
-      gameData = loadGameDataFromSave(saveName);
-    } catch (error: any) {
-      throw new Error(`❌ Failed to load save data: ${error.message}`);
-    }
+    gameData = loadGameDataFromSave(saveName);
   });
-    
 
-  describe('Parameter Validation', () => {
-    it('validates all cooking parameters against extracted results', () => {
-      // Run table-driven parameter validation
-      const parameterResults = runParameterValidationSuite(
-        cookingParameterSpecs,
-        extractionResults,
-        gameData,
-        0.01
-      );
-      // Ensure we validated at least some parameters
-      expect(parameterResults.length).toBeGreaterThan(0);
-
-      // Log results for each parameter
-      let passedCount = 0;
-      let failures: string[] = [];
-      parameterResults.forEach(result => {
-        if (result.passed) {
-          passedCount++;
-          // Only log successes in verbose mode
-          testLog(result.notes || `✅ ${result.parameterId}: passed`, 'debug');
-        } else {
-          // Log ALL failures for debugging
-          testLog(`❌ ${result.parameterId}: ${result.error}`, 'always');
-          
-          failures.push(result.parameterId);
-        }
-      });
-      testLog(`📊 Parameter Validation: ${passedCount}/${parameterResults.length} passed`, 'always');
-      
-      // FAIL THE TEST IMMEDIATELY if parameters don't match
-      if (failures.length > 0) {
-        const failureDetails = failures.map(paramId => {
-          const result = parameterResults.find(r => r.parameterId === paramId);
-          return `${paramId}: ${result?.error}`;
-        }).join('\n   ');
-        
-        throw new Error(`Parameter validation failed:\n   ${failureDetails}\n\nThis indicates save data doesn't match live game state.`);
-      }
+  Object.entries(cookingParameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0.01);
     });
   });
 });

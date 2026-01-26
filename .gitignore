@@ -78,3 +78,6 @@ certificates
 
 ## Yarn
 install-state.gz
+
+## Reference repositories (competitor codebases for reference only)
+reference-repos/

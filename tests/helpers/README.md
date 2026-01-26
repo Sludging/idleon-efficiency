@@ -2,11 +2,23 @@
 
 Tools for extracting live game data to validate domain code calculations.
 
-## Game Data Extractor
+## Quick Start - Batch Extraction (Recommended)
 
-Generic script that reads configuration files and extracts values from the running game.
+The easiest way to extract all test data from the running game:
 
-### Usage
+```bash
+node tests/helpers/extract-all-game-data.js
+```
+
+This will:
+1. Extract data for all configs in `tests/configs/`
+2. Save results to `tests/results/`
+
+**Note:** This script only extracts data from the game. The save file (`latest.json`) is managed separately - update it manually from idleonefficiency.com raw-data tab when needed.
+
+## Individual Extraction (Advanced)
+
+If you need to extract data for a single config file:
 
 ```bash
 # Run with a config file
@@ -14,17 +26,13 @@ node tests/helpers/game-data-extractor.js <config-file> <output-file>
 
 # Example
 node tests/helpers/game-data-extractor.js \
-  tests/helpers/configs/cooking-speed-example.json \
+  tests/configs/cooking-speed.json \
   tests/results/cooking-speed-data.json
 ```
 
 ### Prerequisites
 
-1. **Game running** with debug port:
-   ```powershell
-   # Windows PowerShell
-   Start-Process -FilePath "path\to\LegendsOfIdleon.exe" -ArgumentList "--remote-debugging-port=9223"
-   ```
+1. **Game running** with debug port (usually port 9223)
 
 2. **Debug server running**:
    ```bash
@@ -34,7 +42,7 @@ node tests/helpers/game-data-extractor.js \
 
 ### Configuration Format
 
-Create JSON config files in `tests/helpers/configs/`:
+Create JSON config files in `tests/configs/`:
 
 ```json
 {
@@ -91,15 +99,13 @@ Results are saved as JSON with timestamps and metadata:
 - **Empty objects**: Converted to `null` for cleaner output
 - **Null/undefined**: Preserved as `null`
 
-## Configuration Examples
-
-- `cooking-speed-example.json` - Template for cooking speed testing
-- Add more configs as needed for different domain functions
-
 ## Integration with Tests
 
-The extracted data files are meant to be consumed by test files that:
-1. Load the extraction results
-2. Map values to domain function parameters  
-3. Compare domain function output to game results
-4. Assert exact equality (or acceptable precision)
+All test files use the `latest.json` save file from `tests/fixtures/saves/`.
+
+The test workflow:
+1. Load extraction results from `tests/results/`
+2. Load game data from `tests/fixtures/saves/latest.json`
+3. Execute domain calculations
+4. Compare domain output to live game values
+5. Assert equality (with configurable tolerance)

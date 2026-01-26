@@ -88,66 +88,6 @@
       "description": "Star sign 63 (C. Shanti Minor) bonus"
     },
     {
-      "label": "sailzdn3_calculated",
-      "expression": "idleon.getDNSM(\"SailzDN3\")",
-      "description": "Calculated SailzDN3 base speed multiplier"
-    },
-    {
-      "label": "minimum_travel_time",
-      "expression": "idleon.callFunction(\"Sailing\", \"Minimumtraveltime\", 0, 0)",
-      "description": "Minimum travel time for sailing"
-    },
-    {
-      "label": "boat_0_data",
-      "expression": "idleon.getAttr(\"Boats\")[0]",
-      "description": "Boat 0 full data array"
-    },
-    {
-      "label": "boat_1_data",
-      "expression": "idleon.getAttr(\"Boats\")[1]",
-      "description": "Boat 1 full data array"
-    },
-    {
-      "label": "boat_0_captain_index",
-      "expression": "idleon.getAttr(\"Boats\")[0][0]",
-      "description": "Boat 0 captain index"
-    },
-    {
-      "label": "boat_0_island_index",
-      "expression": "idleon.getAttr(\"Boats\")[0][1]",
-      "description": "Boat 0 island index"
-    },
-    {
-      "label": "boat_0_speed_upgrades",
-      "expression": "idleon.getAttr(\"Boats\")[0][5]",
-      "description": "Boat 0 speed upgrade level"
-    },
-    {
-      "label": "boat_1_captain_index",
-      "expression": "idleon.getAttr(\"Boats\")[1][0]",
-      "description": "Boat 1 captain index"
-    },
-    {
-      "label": "boat_1_island_index",
-      "expression": "idleon.getAttr(\"Boats\")[1][1]",
-      "description": "Boat 1 island index"
-    },
-    {
-      "label": "boat_1_speed_upgrades",
-      "expression": "idleon.getAttr(\"Boats\")[1][5]",
-      "description": "Boat 1 speed upgrade level"
-    },
-    {
-      "label": "boat_0_captain_speed_bonus",
-      "expression": "idleon.callFunction(\"CaptBonusCalc\", 0, idleon.getAttr(\"Boats\")[0][0])",
-      "description": "Boat 0 captain speed bonus"
-    },
-    {
-      "label": "boat_1_captain_speed_bonus",
-      "expression": "idleon.callFunction(\"CaptBonusCalc\", 0, idleon.getAttr(\"Boats\")[1][0])",
-      "description": "Boat 1 captain speed bonus"
-    },
-    {
       "label": "boat_0_current_speed",
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 4)",
       "description": "Boat 0 current speed (i=4)"
@@ -176,16 +116,6 @@
       "label": "boat_1_island_bound_speed",
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 0)",
       "description": "Boat 1 island-bound speed (i<=0)"
-    },
-    {
-      "label": "boat_0_island_distance",
-      "expression": "idleon.getAttr(\"CustomLists\").h.IslandInfo[idleon.getAttr(\"Boats\")[0][1]][1]",
-      "description": "Distance of island assigned to boat 0"
-    },
-    {
-      "label": "boat_1_island_distance",
-      "expression": "idleon.getAttr(\"CustomLists\").h.IslandInfo[idleon.getAttr(\"Boats\")[1][1]][1]",
-      "description": "Distance of island assigned to boat 1"
     }
   ]
 }
