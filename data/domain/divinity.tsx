@@ -22,6 +22,9 @@ export class DivinityGod {
     // updated values
     activeBubblePassiveBonus: number = 0;
     jadeUpgradeBlessingBonus: number = 0;
+    godRank: number = 0;
+    // TODO: Update this once available.
+    coralKidUpgrade3: number = 0;
     constructor(public index: number, public data: GodInfoModel) { }
 
 
@@ -48,7 +51,10 @@ export class DivinityGod {
             return 0;
         }
         const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
-        return divinityLevel / (60 + divinityLevel) * this.activeBubblePassiveBonus * this.data.passiveMax;
+
+        return Math.max(1, this.activeBubblePassiveBonus)
+            * (1 + this.coralKidUpgrade3 / 100)
+            * divinityLevel / (60 + divinityLevel) * this.data.passiveMax;
     }
 
     getBlessingBonusText = () => {
@@ -61,7 +67,9 @@ export class DivinityGod {
             return 0;
         }
 
-        return this.blessLevel * this.data.blessingPerLevel * (1 + this.jadeUpgradeBlessingBonus / 100);
+        return this.blessLevel *
+            this.data.blessingPerLevel *
+            (1 + (this.jadeUpgradeBlessingBonus / 100) * this.godRank);
     }
 
     getImageData = (): ImageData => {
@@ -109,9 +117,9 @@ export class Divinity extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Divinity", perPlayer: false, default: []},
-            {key: "AFKtarget_", perPlayer: true, default: []},
-            {key: "SL_", perPlayer: true, default: []},
+            { key: "Divinity", perPlayer: false, default: [] },
+            { key: "AFKtarget_", perPlayer: true, default: [] },
+            { key: "SL_", perPlayer: true, default: [] },
         ]
     }
 
@@ -191,6 +199,7 @@ export const updateDivinity = (data: Map<string, any>) => {
     divinity.gods.forEach(god => {
         god.activeBubblePassiveBonus = Math.max(1, activeBubblePassiveDivinityBonus);
         god.jadeUpgradeBlessingBonus = jadeUpgradeBlessingBoost;
+        god.godRank = divinity.godRank;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
         god.blessMaxLevel = 100 + coralKidBonus1;

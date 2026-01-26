@@ -2,7 +2,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
-const saveName = 'live-game-2026-01-11';
+const saveName = 'latest';
 const extractionResultsName = 'legend-talents-data.json';
 
 describe('Legend Talents Bonus Calculations', () => {
@@ -11,7 +11,6 @@ describe('Legend Talents Bonus Calculations', () => {
   let legendTalents: LegendTalents;
 
   beforeAll(() => {
-    global.testSetup('Loading extraction results and game data for bonus calculations');
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave(saveName);

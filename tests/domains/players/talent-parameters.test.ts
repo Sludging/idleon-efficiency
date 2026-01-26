@@ -5,20 +5,19 @@
  * extracted from running game using the debug tool.
  */
 
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { ParameterTestSpec, runParameterValidationSuite } from '../../utils/parameter-test-config';
+import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Player } from '../../../data/domain/player';
 import { ClassIndex } from '../../../data/domain/talents';
 
 // TODO: Make it possible to test multiple save / extraction results.
-const saveName = 'live-game-2025-10-26'; // This should match extraction time
-const extractionResultsName = 'talents-sludgeadin.json';
+const saveName = 'latest';
+const extractionResultsName = 'talents-sludgeadin-data.json';
 
 
-export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
+const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
   talent_146_bonus: {
-    id: 'talent_146_enhanced_bonus',
     description: 'Apocalypse Chow - Talent 146 Enhanced bonus',
     extractionKey: 'talent_146_bonus',
     domainExtractor: (gameData) => {
@@ -28,7 +27,6 @@ export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   all_talent_level_146: {
-    id: 'all_talent_level_146',
     description: 'All talent level 146',
     extractionKey: 'all_talent_level_146',
     domainExtractor: (gameData) => {
@@ -38,7 +36,6 @@ export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   all_talent_level_49: {
-    id: 'all_talent_level_49',
     description: 'All talent level - 49',
     extractionKey: 'all_talent_level_49',
     domainExtractor: (gameData) => {
@@ -52,58 +49,18 @@ export const generalTalentParameterSpecs: Record<string, ParameterTestSpec> = {
 describe('Talent Domain - General - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
-  
+
   beforeAll(() => {
-    // Load live game extraction results
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
-    
-    // Load matching save data - MUST correspond to the same game state as extraction
-    try {
-      gameData = loadGameDataFromSave(saveName);
-    } catch (error: any) {
-      throw new Error(`❌ Failed to load save data: ${error.message}`);
-    }
+    gameData = loadGameDataFromSave(saveName);
   });
-    
 
-  describe('Parameter Validation', () => {
-    it('validates all general talent parameters against extracted results', () => {
-      // Run table-driven parameter validation
-      const parameterResults = runParameterValidationSuite(
-        generalTalentParameterSpecs,
-        extractionResults,
-        gameData
-      );
-      // Ensure we validated at least some parameters
-      expect(parameterResults.length).toBeGreaterThan(0);
-
-      // Log results for each parameter
-      let passedCount = 0;
-      let failures: string[] = [];
-      parameterResults.forEach(result => {
-        if (result.passed) {
-          passedCount++;
-          // Only log successes in verbose mode
-          testLog(result.notes || `✅ ${result.parameterId}: passed`, 'debug');
-        } else {
-          // Log ALL failures for debugging
-          testLog(`❌ ${result.parameterId}: ${result.error}`, 'always');
-          
-          failures.push(result.parameterId);
-        }
-      });
-      testLog(`📊 Parameter Validation: ${passedCount}/${parameterResults.length} passed`, 'always');
-      
-      // FAIL THE TEST IMMEDIATELY if parameters don't match
-      if (failures.length > 0) {
-        const failureDetails = failures.map(paramId => {
-          const result = parameterResults.find(r => r.parameterId === paramId);
-          return `${paramId}: ${result?.error}`;
-        }).join('\n   ');
-        
-        throw new Error(`Parameter validation failed:\n   ${failureDetails}\n\nThis indicates save data doesn't match live game state.`);
-      }
+  Object.entries(generalTalentParameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0.001);
     });
   });
 });

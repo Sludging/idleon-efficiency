@@ -1,0 +1,21 @@
+{
+  "description": "Extract data for divinity minor link bonus calculations",
+  "target": "Divinity minor link bonuses",
+  "extractions": [
+    {
+      "label": "alchemy_bubble_y2active",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
+      "description": "Alchemy bubble Y2ACTIVE for activeBubblePassiveBonus"
+    },
+    {
+      "label": "clamworks_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
+      "description": "CoralKid upgrade bonus 3"
+    },
+    {
+      "label": "divinity_minor_bonus_6",
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
+      "description": "Divinity minor bonus for god 6 (Purrmep)"
+    }
+  ]
+}

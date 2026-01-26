@@ -10,8 +10,7 @@ Before beginning implementation, gather the following information from the devel
 
 ### 1. Game Data Requirements
 - **Raw data keys**: What are the save file keys for this feature's data?
-- **Resource storage**: Where are resource counts stored (OptLacc indices, etc.)?
-- **State persistence**: How are upgrade levels/states stored in save data?
+- **Obfuscated Game Code**: Relevant code pieces we need to reverse engineer. (break down into smaller files / sections.)
 - **Special data**: Any server variables or unique data locations?
 
 ### 2. External Data Source Requirements
@@ -24,6 +23,12 @@ Before beginning implementation, gather the following information from the devel
 - **Navigation placement**: Under which main navigation section should this appear?
 - **Route structure**: What should the page URL/routing structure be?
 
+### 4. Reference Implementation
+- **Check reference repos**: Has this feature been implemented in `reference-repos/IdleonToolbox/`?
+- **Domain logic validation**: Use their parser/domain code to validate reverse-engineering assumptions
+- **Calculation verification**: Cross-reference formulas and game mechanics
+- **Note**: Only domain/parser logic is relevant - ignore their UI implementation
+
 ## Implementation Tasks
 
 ### 1. Create Domain Class (`data/domain/[feature].tsx`)
@@ -35,10 +40,11 @@ Before beginning implementation, gather the following information from the devel
 **Implementation steps:**
 - Create main feature class extending `Domain`
 - Create item/upgrade classes if applicable
+- Update `init` function
+- Update `parse` function to handle parsing phase
 - Implement cost calculation methods (if applicable)
 - Implement bonus calculation methods with cross-feature interactions
-- Add unlock/progression logic (if applicable)
-- Handle resource management (if applicable)
+- Add update (not exact name, see examples in code base) function to handle cross-domain impacts.
 
 ### 2. Integrate with Data Pipeline
 
@@ -46,7 +52,6 @@ Before beginning implementation, gather the following information from the devel
 - Add new domain to `domainList` in `idleonData.tsx`
 - Configure `getRawKeys()` method with provided save file keys
 - Add any necessary post-processing functions to the processing maps
-- Handle resource parsing from provided data locations
 
 ### 3. UI Development
 
@@ -58,13 +63,12 @@ Before beginning implementation, gather the following information from the devel
 **Component hierarchy:**
 - Main feature display component
 - Individual item/upgrade components (if applicable)
-- Resource counter components (if applicable)
 - Interactive elements (level controls, calculators, etc.)
 
 ### 4. Navigation Integration
 
 **Update navigation:**
-- Update navigation components with new route
+- Update navigation components with new route (`navigation.tsx`)
 - Add to appropriate world/section as specified by developer
 - Follow existing navigation patterns
 
@@ -77,46 +81,11 @@ Before beginning implementation, gather the following information from the devel
 
 ## Testing Implementation
 
-### 6. Automated Testing Setup
+### 6. Live Game Extraction Testing
 
-**For new features with available save data:**
-1. **Copy test template**: Use `__tests__/domains/_domain-template.test.ts.template`
-2. **Create snapshot script**: Copy and customize from `scripts/generate-alchemy-snapshot.ts`
-3. **Generate expected results**: Run script to capture current calculations
-4. **Developer verification**: Developer confirms values match in-game behavior
-5. **Regression protection**: Tests catch future calculation changes
-
-**For new features without save data (test-driven development):**
-1. **Start with structure tests**: Basic data loading and method existence
-2. **Add known calculations**: Tests with manually provided expected values
-3. **Build implementation**: Develop domain code to pass the tests
-4. **Generate snapshots**: Once working, use scripts for regression baselines
-
-**Testing commands:**
-```bash
-# Generate snapshot data
-cd scripts
-npx ts-node --project ./tsconfig.json ./generate-[feature]-snapshot.ts [save-name]
-
-# Run feature tests
-yarn test __tests__/domains/[feature]-calculations.test.ts
-```
-
-### 7. Visual Validation
-
-**Primary validation method:**
-- Compare calculated values with actual game client
-- Verify cost calculations match game behavior
-- Test with various save file states
-- Validate all interactive elements work correctly
+**See:** `docs/TESTING_IMPLEMENTATION.md` for complete testing guide
 
 ## Implementation Guidelines
-
-### Code Standards
-- **Never modify** auto-generated files: `data/domain/data/`, `data/domain/enum/`, `data/domain/model/`
-- **Always use TypeScript** for all new code
-- **Follow Next.js App Router** patterns for new pages
-- **Use yarn** instead of npm for package operations
 
 ### Development Workflow
 1. **Confirm prerequisites**: Ensure all required information is available
@@ -124,8 +93,6 @@ yarn test __tests__/domains/[feature]-calculations.test.ts
 3. **Implement domain logic**: Start with core calculations and data parsing
 4. **Create UI components**: Build user interface following existing patterns
 5. **Add automated tests**: Implement snapshot-based testing for regression protection
-6. **Visual validation**: Compare with game client behavior
-7. **Integration testing**: Verify navigation and cross-feature interactions
 
 ### Blocked Dependencies
 
@@ -146,22 +113,10 @@ yarn test __tests__/domains/[feature]-calculations.test.ts
 2. **UI components** display correctly across different save states
 3. **Automated tests** pass with real save data
 4. **Navigation integration** works seamlessly
-5. **Visual validation** confirms accuracy with game client
-6. **Regression protection** in place through snapshot testing
 
 ### Quality Checklist:
 - [ ] TypeScript types are properly defined
 - [ ] Error handling for edge cases
 - [ ] Automated test coverage
-- [ ] Visual validation completed
 - [ ] Navigation integration tested
 - [ ] Cross-feature interactions verified
-
-## Templates and Examples
-
-### Available Templates:
-- **Domain test**: `__tests__/domains/_domain-template.test.ts.template`
-- **Snapshot script**: `scripts/generate-alchemy-snapshot.ts`
-- **Testing patterns**: Any domain in `__tests__/domains/`
-
-This guide ensures consistent, high-quality implementations while maintaining the codebase's architectural patterns and testing standards. 

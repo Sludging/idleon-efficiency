@@ -1,0 +1,71 @@
+{
+  "description": "Extract data for divinity blessing bonus calculations",
+  "target": "Divinity blessing bonuses",
+  "extractions": [
+    {
+      "label": "emporium_bonus_33",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 33, 0)",
+      "description": "Jade Emporium upgrade 33 bonus"
+    },
+    {
+      "label": "gods_unlocked_count",
+      "expression": "idleon.engine.getGameAttribute(\"Divinity\")[25]",
+      "description": "Number of gods unlocked (for god rank calculation)"
+    },
+    {
+      "label": "skill_all_efficiencies",
+      "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
+      "description": "All skill efficiencies stat for BlessyBunDN calculation"
+    },
+    {
+      "label": "alchemy_bubble_mineff",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.MinEff",
+      "description": "Mining efficiency bubble for BlessyBunDN calculation"
+    },
+    {
+      "label": "alchemy_bubble_chopeff",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.ChopEff",
+      "description": "Chopping efficiency bubble for BlessyBunDN calculation"
+    },
+    {
+      "label": "total_stats_str",
+      "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
+      "description": "Total STR stat for BlessyBunDN calculation"
+    },
+    {
+      "label": "total_stats_agi",
+      "expression": "idleon.callFunction(\"TotalStats\", \"AGI\")",
+      "description": "Total AGI stat for BlessyBunDN calculation"
+    },
+    {
+      "label": "total_stats_wis",
+      "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
+      "description": "Total WIS stat for BlessyBunDN calculation"
+    },
+    {
+      "label": "divinity_blessing_2",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
+      "description": "Divinity blessing bonus for god 2 (Nobisect - special formula)"
+    },
+    {
+      "label": "divinity_blessing_4",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
+      "description": "Divinity blessing bonus for god 4"
+    },
+    {
+      "label": "divinity_blessing_6",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
+      "description": "Divinity blessing bonus for god 6 (Purrmep)"
+    },
+    {
+      "label": "divinity_blessing_7",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
+      "description": "Divinity blessing bonus for god 7"
+    },
+    {
+      "label": "divinity_blessing_9",
+      "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
+      "description": "Divinity blessing bonus for god 9"
+    }
+  ]
+}
