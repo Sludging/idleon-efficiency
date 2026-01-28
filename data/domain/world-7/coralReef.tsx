@@ -61,15 +61,17 @@ export class CoralReef extends Domain {
         const coralReef = data.get(this.getDataKey()) as CoralReef;
         const spelunkingData = data.get("Spelunk") as any[][];
         
+        const coralReefUnlocked = (spelunkingData[12] || []) as number[];
         const coralReefLevels = (spelunkingData[13] || []) as number[];
         
         coralReef.upgrades.forEach(upgrade => {
             upgrade.level = coralReefLevels[upgrade.index] || 0;
+            upgrade.unlocked = (coralReefUnlocked[upgrade.index] || 0) == 1;
         });
 
-        // TODO : find where the data to know which one is unlocked is stored
+        const spelunkCurrencies = spelunkingData[4] as number[];
 
-        // TODO : find where the data for owned coral is stored
+        coralReef.ownedCoral = spelunkCurrencies[5];
     }
 
     getBonusTextFromIndex(index: number): string {

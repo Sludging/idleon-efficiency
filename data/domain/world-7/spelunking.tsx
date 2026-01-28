@@ -78,6 +78,7 @@ export class Spelunking extends Domain {
     chapters: Chapter[] = []
     upgrades: Upgrade[] = []
     stamina: number[] = []
+    ownedAmber: number = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -125,5 +126,8 @@ export class Spelunking extends Domain {
             upgrade.unlocked = upgrade.level != -1; // -1 means the upgrade is locked
         });
 
+        const spelunkCurrencies = spelunkingData[4] as number[];
+
+        spelunking.ownedAmber = spelunkCurrencies[0];
     }
 }
