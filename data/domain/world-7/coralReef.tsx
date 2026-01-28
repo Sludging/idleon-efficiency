@@ -14,6 +14,7 @@ import { KillRoy } from "../world-2/killroy";
 import { Sneaking } from "../world-6/sneaking";
 import { Clamworks } from "./clamworks";
 import { CoralKid } from "./coralKid";
+import { DancingCoral } from "./dancingCoral";
 import { LegendTalents } from "./legendTalents";
 
 export class CoralReefUpgrade {
@@ -89,6 +90,7 @@ export const updateCoralReefDailyGain = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const gemStore = data.get("gems") as GemStore;
     const coralKid = data.get("coralKid") as CoralKid;
+    const dancingCoral = data.get("dancingCoral") as DancingCoral;
     const clamworks = data.get("clamworks") as Clamworks;
     const killRoy = data.get("killroy") as KillRoy;
     const stamps = data.get("stamps") as Stamp[][];
@@ -99,13 +101,14 @@ export const updateCoralReefDailyGain = (data: Map<string, any>) => {
     const cards = data.get("cards") as Card[];
     const statues = data.get("statues") as PlayerStatues[];
 
+    // Multiplicative bonuses
     const companionBonus40 = 1 + (companions.find(companion => companion.id == 40)?.owned || false ? companions.find(companion => companion.id == 40)?.data.bonus || 0 : 0);
     const eventShopBonus25 = 1 + (eventShop.isBonusOwned(25) ? .3 : 0);
     const gemShopBonus41 = 1 + 20 * (gemStore.purchases.find(purchase => purchase.no == 41)?.pucrhased ?? 0) /100;
 
+    // Additive bonuses
     const coralKidBonus5 = coralKid.getBonusFromIndex(5);
-    // TODO : update this once dancing coral is done
-    const dancingCoralBonus0 = 0;
+    const dancingCoralBonus0 = dancingCoral.getBonusFromIndex(0);
     const clamworksBonus5 = clamworks.isBonusUnlocked(5) ? 20 : 0;
     const killRoyBonus6 = killRoy.dailyCoralReefGains;
     const stampBonusCorale = getStampBonusForKey(stamps, "corale");
@@ -118,4 +121,6 @@ export const updateCoralReefDailyGain = (data: Map<string, any>) => {
 
     coralReef.dailyCoralGains = 10 * companionBonus40 * eventShopBonus25 * gemShopBonus41 
         * (1 + (coralKidBonus5 + dancingCoralBonus0 + clamworksBonus5 + killRoyBonus6 + stampBonusCorale + vialBonus7corale + legendTalentBonus0 + arcadeBonus57 + sneakingEmporiumBonus43 + demonblubCardBonus + statuesBonus) / 100);
+
+    return coralReef;
 }
