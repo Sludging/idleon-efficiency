@@ -11,6 +11,7 @@ export class VaultUpgBonus {
     public bonus: number = 0;
     public cost: number = 0;
     public costToMax: number = 0;
+    public reductionFromDarts: number = 0;
 
     constructor(
         public id: number,
@@ -99,13 +100,18 @@ export class VaultUpgBonus {
 
         const baseCost = this.level + (this.data.base_cost + this.level) * Math.pow(this.data.scaling_factor, this.level);
         
+        let costReduction = 1;
+
         // First 33 upgrades can have cost reduction from upgrade 13.
         if (this.id < 33) {
             const summoningBonus: number = allUpgrades[13]?.getBonus(allUpgrades) || 0;
-            return Math.max(0.1, 1 - summoningBonus / 100) * baseCost;
+            costReduction = Math.max(0.1, (1 - summoningBonus / 100) * (1 / (1 + this.reductionFromDarts / 100)));
+        }
+        else {
+            costReduction = Math.max(0.1, 1 / (1 + this.reductionFromDarts / 100));
         }
 
-        return baseCost;
+        return baseCost * costReduction;
     }
 
     getCostToMax = (allUpgrades: VaultUpgBonus[]): number => {
@@ -150,14 +156,19 @@ export class UpgradeVault extends Domain {
     parse(data: Map<string, any>): void {
         const upgradeVault = data.get(this.getDataKey()) as UpgradeVault;
         const upgradesData = data.get("UpgVault") as number[];
+        const optionList = data.get("OptLacc") as number[];
     
         // Calculate total vault level first
         upgradeVault.totalVaultLevel = upgradesData.reduce((sum, level) => sum + level, 0);
+
+        // Retrieve it directly without using the domain class to avoid a post parse recalculation
+        const costReductionFromDarts = optionList[437] || 0;
     
         upgradesData.forEach((level, index) => {
             if (index < upgradeVault.bonuses.length) {
                 const upgrade = upgradeVault.bonuses[index];
                 upgrade.level = level;
+                upgrade.reductionFromDarts = costReductionFromDarts;
                 
                 // Set unlocked status based on total vault level
                 upgrade.unlocked = upgradeVault.totalVaultLevel >= upgrade.data.unlock_req;
@@ -191,4 +202,4 @@ export class UpgradeVault extends Domain {
 
         return upgrade.getBonus(this.bonuses);
     }
-} 
+}
