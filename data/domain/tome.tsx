@@ -446,7 +446,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
-    // TODO : check if accurate once Deathnote is updated with w7 mobs
     let totalDeathnoteDigits = 0;
     const killsMap = deathnote.getKillsMap();
     [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
