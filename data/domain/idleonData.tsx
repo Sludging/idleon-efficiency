@@ -70,6 +70,7 @@ import { CoralKid } from './world-7/coralKid';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
 import { CoralReef, updateCoralReefDailyGain } from './world-7/coralReef';
 import { DancingCoral } from './world-7/dancingCoral';
+import { Hoops } from './hoops';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -162,6 +163,7 @@ const domainList: Domain[] = [
     new BigFish("bigFish"),
     new CoralReef("coralReef"),
     new DancingCoral("dancingCoral"),
+    new Hoops("hoops"),
 ]
 
 export class IdleonData {
