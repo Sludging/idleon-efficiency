@@ -2,6 +2,6 @@ export interface DancingCoralBonusModel {
     name: string,
     itemSource: string,
     desc: string,
-    powerReq: number,
+    cost: number,
     bonus: number,
 }
