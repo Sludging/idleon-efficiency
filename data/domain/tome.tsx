@@ -554,7 +554,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Sum of all ninja upgrades levels
     const totalNinjaUpgradeLevels = sneaking.sneakingUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
-    // Sum of all minigame scores, including basket
+    // Sum of all minigame scores, including trapping minigame
     const totalMinigamesScores = account.minigameHighscores.reduce((sum, score) => sum + score, 0) + (optionListAccount[99] ?? 0);
 
     // Sum of all prayers levels
@@ -894,7 +894,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(jadeEmporiumUpgradesBought);
                 break;
             case 75:
-                // Sum of all highest minigame highscore (also includes catching hoop from optionListAccount)
+                // Sum of all highest minigame highscore (also includes trapping minigame from optionListAccount)
                 line.updateAllPlayersCurrentValue(totalMinigamesScores);
                 break;
             case 76:
