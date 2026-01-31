@@ -44,6 +44,7 @@ import { initTomeEpilogueBonusRepo, TomeEpilogueBonusBase } from './data/TomeEpi
 import { TomeEpilogueBonusModel } from './model/tomeEpilogueBonusModel';
 import { EquipmentSets } from './misc/equipmentSets';
 import { Grimoire } from './grimoire';
+import { Bubba } from './world-3/bubba';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -362,6 +363,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const hole = data.get("hole") as Hole;
     const equipmentSet = data.get("equipmentSets") as EquipmentSets;
     const grimoire = data.get("grimoire") as Grimoire;
+    const bubba = data.get("bubba") as Bubba;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -1032,8 +1034,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 108:
                 // Megaflesh Earned from Bubba
-                // TODO : add this once implemented
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(bubba.ownedMegaflesh);
                 break;
             case 109:
                 // Premium Hats Found
