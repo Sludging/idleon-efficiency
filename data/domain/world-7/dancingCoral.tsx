@@ -1,5 +1,3 @@
-// m._customBlock_Thingies("DancingCoralBonus", 3, 0)
-
 import { Domain, RawData } from "../base/domain";
 import { DancingCoralBonusBase, initDancingCoralBonusRepo } from "../data/DancingCoralBonusRepo";
 import { Item } from "../items";
