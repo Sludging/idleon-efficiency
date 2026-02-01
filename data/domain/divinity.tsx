@@ -203,14 +203,14 @@ export const updateDivinity = (data: Map<string, any>) => {
         god.coralKidUpgrade3 = coralKidBonus3;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
-        god.blessMaxLevel = 100 + coralKidBonus1;
+        god.blessMaxLevel += coralKidBonus1;
     })
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
         player.gods.forEach(god => {
             god.coralKidUpgrade3 = coralKidBonus3;
-            god.blessMaxLevel = 100 + coralKidBonus1;
+            god.blessMaxLevel += coralKidBonus1;
             // Due to Doot double linking can happen, so avoid that.
             if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
                 god.linkedPlayers.push(players[player.playerIndex]);
