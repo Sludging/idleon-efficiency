@@ -53,7 +53,6 @@ export class DancingCoral extends Domain {
 
     init(_allItems: Item[], _charCount: number) {
         this.bonuses = DancingCoralBonus.fromBase(initDancingCoralBonusRepo());
-
         return this;
     }
 

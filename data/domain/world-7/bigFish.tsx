@@ -1,5 +1,5 @@
 import { Domain, RawData } from "../base/domain";
-import { BigFishBonusBase } from "../data/BigFishBonusRepo";
+import { BigFishBonusBase, initBigFishBonusRepo } from "../data/BigFishBonusRepo";
 import { Item } from "../items";
 import { BigFishBonusModel } from "../model/bigFishBonusModel";
 import { Player } from "../player";
@@ -45,6 +45,7 @@ export class BigFish extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.bonuses = BigFishBonus.fromBase(initBigFishBonusRepo());
         return this;
     }
 

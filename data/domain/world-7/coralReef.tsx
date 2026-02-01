@@ -3,7 +3,7 @@ import { Arcade } from "../arcade";
 import { Domain, RawData } from "../base/domain";
 import { Card } from "../cards";
 import { Companion } from "../companions";
-import { CoralReefUpgradeBase } from "../data/CoralReefUpgradeRepo";
+import { CoralReefUpgradeBase, initCoralReefUpgradeRepo } from "../data/CoralReefUpgradeRepo";
 import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
@@ -55,6 +55,7 @@ export class CoralReef extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.upgrades = CoralReefUpgrade.fromBase(initCoralReefUpgradeRepo());
         return this;
     }
 
