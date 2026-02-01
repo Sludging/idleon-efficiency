@@ -50,7 +50,7 @@ export class CoralReef extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "Spelunk", perPlayer: false, default: 0 }
+            { key: "Spelunk", perPlayer: false, default: [] }
         ]
     }
 
