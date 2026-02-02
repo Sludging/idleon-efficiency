@@ -10,7 +10,7 @@
  * Each upgrade has a shrine level (Tower[18-26]) that must exceed 200 to provide benefits.
  */
 
-import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { DancingCoral } from '../../../data/domain/world-7/dancingCoral';
 
@@ -44,7 +44,7 @@ describe('Dancing Coral Domain - Calculations', () => {
 
   describe('Bonus Calculations', () => {
     it('validates bonus 0 calculation (Daily Reef Coral)', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_0.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_0');
       const calculatedBonus = dancingCoral.getBonusFromIndex(0);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -54,7 +54,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 1 calculation (Spelunking POW)', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_1.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_1');
       const calculatedBonus = dancingCoral.getBonusFromIndex(1);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -64,7 +64,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 2 calculation (Spelunking Amber gain)', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_2.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_2');
       const calculatedBonus = dancingCoral.getBonusFromIndex(2);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -74,7 +74,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 3 calculation (Class EXP gain)', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_3.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_3');
       const calculatedBonus = dancingCoral.getBonusFromIndex(3);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -84,7 +84,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 4 calculation', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_4.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_4');
       const calculatedBonus = dancingCoral.getBonusFromIndex(4);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -94,7 +94,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 5 calculation', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_5.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_5');
       const calculatedBonus = dancingCoral.getBonusFromIndex(5);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -104,7 +104,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 6 calculation', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_6.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_6');
       const calculatedBonus = dancingCoral.getBonusFromIndex(6);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -114,7 +114,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 7 calculation', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_7.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_7');
       const calculatedBonus = dancingCoral.getBonusFromIndex(7);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -124,7 +124,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates bonus 8 calculation', () => {
-      const extractedBonus = extractionResults.extractions.dancing_coral_bonus_8.result;
+      const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_8');
       const calculatedBonus = dancingCoral.getBonusFromIndex(8);
 
       expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
@@ -136,7 +136,7 @@ describe('Dancing Coral Domain - Calculations', () => {
 
   describe('Cost Calculations', () => {
     it('validates cost calculation for bonus 0', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_0.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_0');
       const calculatedCost = dancingCoral.bonuses[0].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -146,7 +146,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 1', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_1.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_1');
       const calculatedCost = dancingCoral.bonuses[1].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -156,7 +156,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 2', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_2.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_2');
       const calculatedCost = dancingCoral.bonuses[2].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -166,7 +166,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 3', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_3.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_3');
       const calculatedCost = dancingCoral.bonuses[3].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -176,7 +176,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 4', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_4.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_4');
       const calculatedCost = dancingCoral.bonuses[4].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -186,7 +186,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 5', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_5.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_5');
       const calculatedCost = dancingCoral.bonuses[5].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -196,7 +196,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 6', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_6.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_6');
       const calculatedCost = dancingCoral.bonuses[6].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -206,7 +206,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 7', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_7.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_7');
       const calculatedCost = dancingCoral.bonuses[7].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
@@ -216,7 +216,7 @@ describe('Dancing Coral Domain - Calculations', () => {
     });
 
     it('validates cost calculation for bonus 8', () => {
-      const extractedCost = extractionResults.extractions.dancing_coral_cost_8.result;
+      const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_8');
       const calculatedCost = dancingCoral.bonuses[8].getCost();
 
       expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
