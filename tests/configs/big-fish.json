@@ -1,0 +1,96 @@
+{
+  "description": "Extract data for Big Fish bonus, cost, and unlock requirement calculations",
+  "target": "Big Fish bonuses, costs, and unlock requirements",
+  "extractions": [
+    {
+      "label": "big_fish_bonus_0",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 0)",
+      "description": "Big Fish bonus 0: W7 mob respawn rate"
+    },
+    {
+      "label": "big_fish_bonus_1",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 1)",
+      "description": "Big Fish bonus 1: Max Stamina in Spelunking"
+    },
+    {
+      "label": "big_fish_bonus_2",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 2)",
+      "description": "Big Fish bonus 2: Spelunking AFK Gains"
+    },
+    {
+      "label": "big_fish_bonus_3",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 3)",
+      "description": "Big Fish bonus 3: Kill per Kill in W7"
+    },
+    {
+      "label": "big_fish_bonus_4",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 4)",
+      "description": "Big Fish bonus 4: Class EXP Gain"
+    },
+    {
+      "label": "big_fish_bonus_5",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 5)",
+      "description": "Big Fish bonus 5: Double Gold Food drop chance"
+    },
+    {
+      "label": "big_fish_cost_0",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 0)",
+      "description": "Big Fish upgrade cost for bonus 0"
+    },
+    {
+      "label": "big_fish_cost_1",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 1)",
+      "description": "Big Fish upgrade cost for bonus 1"
+    },
+    {
+      "label": "big_fish_cost_2",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 2)",
+      "description": "Big Fish upgrade cost for bonus 2"
+    },
+    {
+      "label": "big_fish_cost_3",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 3)",
+      "description": "Big Fish upgrade cost for bonus 3"
+    },
+    {
+      "label": "big_fish_cost_4",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 4)",
+      "description": "Big Fish upgrade cost for bonus 4"
+    },
+    {
+      "label": "big_fish_cost_5",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 5)",
+      "description": "Big Fish upgrade cost for bonus 5"
+    },
+    {
+      "label": "big_fish_unlock_req_0",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 0)",
+      "description": "Big Fish unlock level requirement for bonus 0"
+    },
+    {
+      "label": "big_fish_unlock_req_1",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 1)",
+      "description": "Big Fish unlock level requirement for bonus 1"
+    },
+    {
+      "label": "big_fish_unlock_req_2",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 2)",
+      "description": "Big Fish unlock level requirement for bonus 2"
+    },
+    {
+      "label": "big_fish_unlock_req_3",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 3)",
+      "description": "Big Fish unlock level requirement for bonus 3"
+    },
+    {
+      "label": "big_fish_unlock_req_4",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 4)",
+      "description": "Big Fish unlock level requirement for bonus 4"
+    },
+    {
+      "label": "big_fish_unlock_req_5",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
+      "description": "Big Fish unlock level requirement for bonus 5"
+    }
+  ]
+}
