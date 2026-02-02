@@ -1,0 +1,66 @@
+{
+  "description": "Extract data for CoralKid bonus and cost calculations",
+  "target": "CoralKid bonuses and costs",
+  "extractions": [
+    {
+      "label": "coral_kid_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 0, 0)",
+      "description": "CoralKid bonus 0: Divinity EXP gain"
+    },
+    {
+      "label": "coral_kid_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 1, 0)",
+      "description": "CoralKid bonus 1: Blessing max level increase"
+    },
+    {
+      "label": "coral_kid_bonus_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 2, 0)",
+      "description": "CoralKid bonus 2: God Rank class EXP multiplier"
+    },
+    {
+      "label": "coral_kid_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
+      "description": "CoralKid bonus 3: Divinity skill level boost to minor links"
+    },
+    {
+      "label": "coral_kid_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 4, 0)",
+      "description": "CoralKid bonus 4: Divinity PTS gain per Coral Reef upgrade"
+    },
+    {
+      "label": "coral_kid_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
+      "description": "CoralKid bonus 5: Daily Coral generation increase"
+    },
+    {
+      "label": "coral_kid_cost_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 0)",
+      "description": "CoralKid upgrade cost for bonus 0"
+    },
+    {
+      "label": "coral_kid_cost_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 1)",
+      "description": "CoralKid upgrade cost for bonus 1"
+    },
+    {
+      "label": "coral_kid_cost_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 2)",
+      "description": "CoralKid upgrade cost for bonus 2"
+    },
+    {
+      "label": "coral_kid_cost_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 3)",
+      "description": "CoralKid upgrade cost for bonus 3"
+    },
+    {
+      "label": "coral_kid_cost_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 4)",
+      "description": "CoralKid upgrade cost for bonus 4"
+    },
+    {
+      "label": "coral_kid_cost_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 5)",
+      "description": "CoralKid upgrade cost for bonus 5"
+    }
+  ]
+}
