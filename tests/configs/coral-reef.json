@@ -1,0 +1,36 @@
+{
+  "description": "Extract data for Coral Reef upgrade cost calculations",
+  "target": "Coral Reef upgrade costs",
+  "extractions": [
+    {
+      "label": "coral_reef_cost_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 0)",
+      "description": "Coral Reef upgrade cost for upgrade 0"
+    },
+    {
+      "label": "coral_reef_cost_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
+      "description": "Coral Reef upgrade cost for upgrade 1"
+    },
+    {
+      "label": "coral_reef_cost_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",
+      "description": "Coral Reef upgrade cost for upgrade 2"
+    },
+    {
+      "label": "coral_reef_cost_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 3)",
+      "description": "Coral Reef upgrade cost for upgrade 3"
+    },
+    {
+      "label": "coral_reef_cost_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 4)",
+      "description": "Coral Reef upgrade cost for upgrade 4"
+    },
+    {
+      "label": "coral_reef_cost_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 5)",
+      "description": "Coral Reef upgrade cost for upgrade 5"
+    }
+  ]
+}
