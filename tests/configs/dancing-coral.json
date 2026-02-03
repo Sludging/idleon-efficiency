@@ -1,0 +1,101 @@
+{
+  "description": "Extract data for Dancing Coral bonus and cost calculations",
+  "target": "Dancing Coral bonuses and costs",
+  "extractions": [
+    {
+      "label": "dancing_coral_unlock_value",
+      "expression": "idleon.engine.getGameAttribute(\"Spelunk\")[4][7]",
+      "description": "Spelunk[4][7] unlock value (used in cost formula)"
+    },
+    {
+      "label": "dancing_coral_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 0, 0)",
+      "description": "Dancing Coral bonus 0: Daily Reef Coral"
+    },
+    {
+      "label": "dancing_coral_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 1, 0)",
+      "description": "Dancing Coral bonus 1: Spelunking POW"
+    },
+    {
+      "label": "dancing_coral_bonus_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 2, 0)",
+      "description": "Dancing Coral bonus 2: Spelunking Amber gain"
+    },
+    {
+      "label": "dancing_coral_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 3, 0)",
+      "description": "Dancing Coral bonus 3: Class EXP gain"
+    },
+    {
+      "label": "dancing_coral_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
+      "description": "Dancing Coral bonus 4: Unknown"
+    },
+    {
+      "label": "dancing_coral_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",
+      "description": "Dancing Coral bonus 5: Unknown"
+    },
+    {
+      "label": "dancing_coral_bonus_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 6, 0)",
+      "description": "Dancing Coral bonus 6: Unknown"
+    },
+    {
+      "label": "dancing_coral_bonus_7",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 7, 0)",
+      "description": "Dancing Coral bonus 7: Unknown"
+    },
+    {
+      "label": "dancing_coral_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 8, 0)",
+      "description": "Dancing Coral bonus 8: Unknown"
+    },
+    {
+      "label": "dancing_coral_cost_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 0)",
+      "description": "Dancing Coral cost for bonus 0"
+    },
+    {
+      "label": "dancing_coral_cost_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 1)",
+      "description": "Dancing Coral cost for bonus 1"
+    },
+    {
+      "label": "dancing_coral_cost_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 2)",
+      "description": "Dancing Coral cost for bonus 2"
+    },
+    {
+      "label": "dancing_coral_cost_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 3)",
+      "description": "Dancing Coral cost for bonus 3"
+    },
+    {
+      "label": "dancing_coral_cost_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 4)",
+      "description": "Dancing Coral cost for bonus 4"
+    },
+    {
+      "label": "dancing_coral_cost_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 5)",
+      "description": "Dancing Coral cost for bonus 5"
+    },
+    {
+      "label": "dancing_coral_cost_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 6)",
+      "description": "Dancing Coral cost for bonus 6"
+    },
+    {
+      "label": "dancing_coral_cost_7",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 7)",
+      "description": "Dancing Coral cost for bonus 7"
+    },
+    {
+      "label": "dancing_coral_cost_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 8)",
+      "description": "Dancing Coral cost for bonus 8"
+    }
+  ]
+}
