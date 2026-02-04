@@ -158,14 +158,24 @@ export class Bubba extends Domain {
         return Math.min(4, lavaLog(Math.pow(Math.max(1, this.happiness / 30 + 1), 1.5)));
     }
 
-    getHappinessBonus(): number {
-        return 1 + 10 * (lavaLog2(this.happiness) + 25 * lavaLog(this.happiness) + Math.pow(this.happiness, .75)) / 100;
+    getHappinessBonus(happiness: number  = this.happiness): number {
+        return 1 + 10 * (lavaLog2(happiness) + 25 * lavaLog(happiness) + Math.pow(happiness, .75)) / 100;
     }
 
-    getMeatSliceRate(): number {
+    getHappinessForRank(rank: number): number {
+        const power = rank / 1.5;
+        const baseTenResult = Math.pow(10, power);
+        const happiness = 30 * (baseTenResult - 1);
+        
+        return Math.max(0, happiness);
+    }
+
+    getMeatSliceRate(happinessRank: number = 1): number {
+        const happiness = this.getHappinessForRank(happinessRank);
+
         return (this.getUpgradeBonus(0) + (this.getUpgradeBonus(7) + this.getUpgradeBonus(23))) *
             (1 + (this.getUpgradeBonus(2) + (this.getUpgradeBonus(11) + (this.getUpgradeBonus(19) + this.getUpgradeBonus(24) * lavaLog(this.someValue)))) / 100) *
-            this.getHappinessBonus() * this.getDicesMulti() * this.getSmokedMeatMulti() * (1 + this.getCharismaBonus(0) / 100) *
+            this.getHappinessBonus(happiness) * this.getDicesMulti() * this.getSmokedMeatMulti() * (1 + this.getCharismaBonus(0) / 100) *
             (1 + this.getMegafleshQuantity(0) * this.getTotalUpgradeLevel() / 100) * (1 + this.getGiftPassiveBonus(0) / 100) * this.getSpareCoinsMulti();
     }
 
