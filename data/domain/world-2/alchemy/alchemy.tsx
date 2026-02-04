@@ -26,6 +26,8 @@ import { Tome } from '../../world-4/tome';
 import { UpgradeVault } from '../../upgradeVault';
 import { Tesseract } from '../../tesseract';
 import { Arcade } from '../arcade';
+import { LegendTalent, LegendTalents } from '../../world-7/legendTalents';
+import { Sigils } from './sigils';
 
 export enum CauldronIndex {
     Power = 0,
@@ -939,6 +941,8 @@ export function updateAlchemy(data: Map<string, any>) {
     const tesseract = data.get("tesseract") as Tesseract;
     const arcade = data.get("arcade") as Arcade;
     const slab = data.get("slab") as Slab;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const sigils = data.get("sigils") as Sigils;
 
     const vaultBonus42 = vault.getBonusForId(42);
     const labBonusActive = lab.bonuses.find(bonus => bonus.name == "My 1st Chemistry Set")?.active ?? false;
@@ -1011,10 +1015,18 @@ export function updateAlchemy(data: Map<string, any>) {
     const arcaneBonus45 = tesseract.getUpgradeBonus(45);
     const arcadeBonus54 = arcade.bonuses[54] ? arcade.bonuses[54].getBonus() : 0;
     const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
+    // TODO : update this once gaming have palette added
+    const paletteBonus28 = 0;
+    const legendBonus36 = legendTalents.getBonusFromIndex(36);
+    const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 4 ? 1: 0), 0);
+    // TODO : add this once farming is updated with exotic market
+    const exoticMarketBonus48 = 0;
 
+    const prismaBonus = Math.min(3, 2 + (arcaneBonus45 + arcadeBonus54 + world6TrophyBonus + paletteBonus28 + .2 * purpleSigilsBonus + exoticMarketBonus48 + legendBonus36) / 100);
+    
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         if (bubble.prismatic) {
-            bubble.prismaticMultiplier = Math.min(3, 2 + ((arcaneBonus45 + (arcadeBonus54 + world6TrophyBonus)) / 100));
+            bubble.prismaticMultiplier = prismaBonus;
         }
     })
 }
