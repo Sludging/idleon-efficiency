@@ -1,90 +1,18 @@
 import { ClickerUpgradeModel } from "../model/clickerUpgradeModel";
 
-export class ClickerUpgradeBase { constructor(public index: number, public type: string, public data: ClickerUpgradeModel) { } }
+export class PoppyUpgradeBase { constructor(public index: number, public data: ClickerUpgradeModel) { } }
 
-export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
+export const initPoppyUpgradeRepo = (): PoppyUpgradeBase[] => {
     return [
-        new ClickerUpgradeBase(0, "Orion", {
-            name: "Feather Generation",
-            x0: 5, 
-            x1: 1.1, 
-            unlock: 100,
-            desc: "Generates } feather per second", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(1, "Orion", {
-            name: "Bonuses of Orion",
-            x0: 350, 
-            x1: 25, 
-            unlock: 1000,
-            desc: "Gain a permanent bonus in the real game! This upgrade never resets.", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(2, "Orion", {
-            name: "Feather Multiplier",
-            x0: 500, 
-            x1: 1.11, 
-            unlock: 2500,
-            desc: "Boosts feather generation by +}%", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(3, "Orion", {
-            name: "Feather Cheapener",
-            x0: 3000, 
-            x1: 1.16, 
-            unlock: 30000,
-            desc: "All feather upgrades are @% cheaper", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(4, "Orion", {
-            name: "Feather Restart",
-            x0: 1000000, 
-            x1: 14, 
-            unlock: 750000,
-            desc: "Reset almost all Upgrades and Feathers. Generate {x Feathers", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(5, "Orion", {
-            name: "Super Feather Production",
-            x0: 2000000, 
-            x1: 1.12, 
-            unlock: 10000000,
-            desc: "Generates +} more feathers per second", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(6, "Orion", {
-            name: "Shiny Feathers",
-            x0: 5000000, 
-            x1: 1.4, 
-            unlock: 250000000,
-            desc: "Rare chance for a Shiny Feather, each one gives +}% feather generation", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(7, "Orion", {
-            name: "Super Feather Cheapener",
-            x0: 50000000, 
-            x1: 1.27, 
-            unlock: 5000000000,
-            desc: "All feather upgrades are }% cheaper", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(8, "Orion", {
-            name: "The Great Mega Reset",
-            x0: 250000000000, 
-            x1: 20, 
-            unlock: 100000000000,
-            desc: "Reset almost everything. Gain a permanent Megafeather", 
-            x2: 0
-        }),
-        new ClickerUpgradeBase(9, "Poppy", {
+        new PoppyUpgradeBase(0, {
             name: "Tasty Fishbait",
             x0: 4, 
             x1: 1.06, 
             unlock: 100,
-            desc: "Catch { Fish every 30 seconds", 
+            desc: "Catch { Fish every 30 seconds",
             x2: 10
         }),
-        new ClickerUpgradeBase(10, "Poppy", {
+        new PoppyUpgradeBase(1, {
             name: "Quick Reeling",
             x0: 150, 
             x1: 1.2, 
@@ -92,7 +20,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Bluefin fishing speed is ]x Faster", 
             x2: 5
         }),
-        new ClickerUpgradeBase(11, "Poppy", {
+        new PoppyUpgradeBase(2, {
             name: "Shiny Lure",
             x0: 500, 
             x1: 3.5, 
@@ -100,7 +28,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Catch Shiny Fish at a rate of {%/hr", 
             x2: 50
         }),
-        new ClickerUpgradeBase(12, "Poppy", {
+        new PoppyUpgradeBase(3, {
             name: "Bonuses from Poppy",
             x0: 10000, 
             x1: 3, 
@@ -108,7 +36,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Gain a permanent bonus in the real game!", 
             x2: 10
         }),
-        new ClickerUpgradeBase(13, "Poppy", {
+        new PoppyUpgradeBase(4, {
             name: "Fishy Discount",
             x0: 30000, 
             x1: 1.13, 
@@ -116,7 +44,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "All fish upgrades are ~% cheaper", 
             x2: 10
         }),
-        new ClickerUpgradeBase(14, "Poppy", {
+        new PoppyUpgradeBase(5, {
             name: "Juicy Worm",
             x0: 150000, 
             x1: 1.07, 
@@ -124,7 +52,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Catch +{ more Bluefin Fish each time", 
             x2: 50
         }),
-        new ClickerUpgradeBase(15, "Poppy", {
+        new PoppyUpgradeBase(6, {
             name: "Fisheroo Reset",
             x0: 40000000, 
             x1: 20, 
@@ -132,7 +60,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Reset all upgrades and fish for bonuses!", 
             x2: 1
         }),
-        new ClickerUpgradeBase(16, "Poppy", {
+        new PoppyUpgradeBase(7, {
             name: "Fishing Buddy",
             x0: 1200000000, 
             x1: 7.5, 
@@ -140,7 +68,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Recruit a new Bluefin fisherman!", 
             x2: 1
         }),
-        new ClickerUpgradeBase(17, "Poppy", {
+        new PoppyUpgradeBase(8, {
             name: "Lightning Quickness",
             x0: 600000000, 
             x1: 1.12, 
@@ -148,7 +76,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Shiny fishing speed is ]x faster", 
             x2: 5
         }),
-        new ClickerUpgradeBase(18, "Poppy", {
+        new PoppyUpgradeBase(9, {
             name: "Fisheroo Investing",
             x0: 7500000000, 
             x1: 1.7, 
@@ -156,7 +84,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Next Fisheroo Reset gives +{ more pts!", 
             x2: 1
         }),
-        new ClickerUpgradeBase(19, "Poppy", {
+        new PoppyUpgradeBase(10, {
             name: "Multihook Fishing",
             x0: 20000000000, 
             x1: 1.12, 
@@ -164,15 +92,20 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Catch +{ more Bluefin Fish each time", 
             x2: 200
         }),
-        new ClickerUpgradeBase(20, "Poppy", {
+        new PoppyUpgradeBase(11, {
             name: "Greatest Catch",
             x0: 1500000000000, 
             x1: 15, 
             unlock: 400000000000,
             desc: "Reset it all. Gain a permanent Megafish", 
             x2: 5
-        }),
-        new ClickerUpgradeBase(21, "Tar Pit", {
+        })
+    ];
+}
+
+export const initPoppyTarpitUpgradeRepo = (): PoppyUpgradeBase[] => {
+    return [
+        new PoppyUpgradeBase(0, {
             name: "Super Yummy bait",
             x0: 1, 
             x1: 1.15, 
@@ -180,7 +113,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Catch +{ more Bluefin Fish each time", 
             x2: 100
         }),
-        new ClickerUpgradeBase(22, "Tar Pit", {
+        new PoppyUpgradeBase(1, {
             name: "Bonus Catching",
             x0: 1, 
             x1: 1.1, 
@@ -188,15 +121,15 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "+?% chance for extra shiny catches", 
             x2: 700
         }),
-        new ClickerUpgradeBase(23, "Tar Pit", {
+        new PoppyUpgradeBase(2, {
             name: "Bluefin Frenzy",
-            x0: 1, 
+            x0: 1,
             x1: 1.2, 
             unlock: 0,
             desc: "Boosts the amount of Bluefin Fish caught by +{%", 
             x2: 8
         }),
-        new ClickerUpgradeBase(24, "Tar Pit", {
+        new PoppyUpgradeBase(3, {
             name: "Fishy Reductions",
             x0: 4, 
             x1: 1.15, 
@@ -204,7 +137,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "All bluefin fish upgrades are ~% cheaper", 
             x2: 15
         }),
-        new ClickerUpgradeBase(25, "Tar Pit", {
+        new PoppyUpgradeBase(4, {
             name: "Super Tarbait",
             x0: 2, 
             x1: 1.15, 
@@ -212,7 +145,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Catch Tartar Fish ]x faster", 
             x2: 5
         }),
-        new ClickerUpgradeBase(26, "Tar Pit", {
+        new PoppyUpgradeBase(5, {
             name: "Tarrific Resets",
             x0: 3, 
             x1: 2, 
@@ -220,7 +153,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Next Fisheroo Reset gives +{ more pts to spend!", 
             x2: 1
         }),
-        new ClickerUpgradeBase(27, "Tar Pit", {
+        new PoppyUpgradeBase(6, {
             name: "Mongo Multipliers",
             x0: 2, 
             x1: 1.1, 
@@ -228,7 +161,7 @@ export const initClickerUpgradeRepo = (): ClickerUpgradeBase[] => {
             desc: "Multipliers in Shiny Fishing show up ?% more often!", 
             x2: 30
         }),
-        new ClickerUpgradeBase(28, "Tar Pit", {
+        new PoppyUpgradeBase(7, {
             name: "King Worm",
             x0: 5, 
             x1: 1.2, 
