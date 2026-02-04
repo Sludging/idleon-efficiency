@@ -62,16 +62,17 @@ export class Orion extends Domain {
     }
 
     parse(data: Map<string, any>): void {
+        const orion = data.get(this.getDataKey()) as Orion;
         const optionList = data.get("OptLacc") as number[];
 
-        this.ownedFeather = optionList[253] || 0;
-        this.ownedMegafeathers = optionList[262] || 0;
-        this.totalProducedFeather = optionList[263] || 0;
-        this.ownedShinyFeather = optionList[264] || 0;
+        orion.ownedFeather = optionList[253] || 0;
+        orion.ownedMegafeathers = optionList[262] || 0;
+        orion.totalProducedFeather = optionList[263] || 0;
+        orion.ownedShinyFeather = optionList[264] || 0;
 
-        this.upgrades.forEach(upgrade => {
+        orion.upgrades.forEach(upgrade => {
             upgrade.level = optionList[254 + upgrade.index] || 0;
-            upgrade.unlocked = this.totalProducedFeather >= upgrade.data.unlock;
+            upgrade.unlocked = orion.totalProducedFeather >= upgrade.data.unlock;
         });
     }
 
