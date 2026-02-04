@@ -282,9 +282,7 @@ export const updateBubba = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const companions = data.get("companions") as Companion[];
 
-    const companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
-
-    bubba.companionBonus51 = companionBonus51;
+    bubba.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
 
     return bubba;
 }
