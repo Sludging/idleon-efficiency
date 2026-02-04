@@ -15,9 +15,9 @@ import {
 import { CheapestPathCalculator } from "../../lib/efficiencyEngine/calculators";
 import { EfficiencyCalculator } from "../../lib/efficiencyEngine/efficiencyEngine";
 import { Sneaking } from "./world-6/sneaking";
-import { Arcade } from "./arcade";
-import { Lab } from "./lab";
-import { Emperor } from "./emperor";
+import { Arcade } from "./world-2/arcade";
+import { Lab } from "./world-4/lab";
+import { Emperor } from "./world-6/emperor";
 
 export class TesseractUpgrade implements EfficiencyUpgrade {
     public level: number = 0;

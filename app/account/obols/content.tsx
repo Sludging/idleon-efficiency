@@ -12,7 +12,7 @@ import ShadowBox from "../../../components/base/ShadowBox";
 import { Player } from "../../../data/domain/player";
 import LeftNavButton from "../../../components/base/LeftNavButton";
 import ObolsInfo from "../../../components/account/task-board/obolsInfo";
-import { ObolsData, ObolType } from "../../../data/domain/obols";
+import { ObolsData, ObolType } from "../../../data/domain/world-2/obols";
 import TextAndLabel from "../../../components/base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { ItemStat } from "../../../data/domain/items";

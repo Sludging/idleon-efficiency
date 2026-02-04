@@ -10,7 +10,7 @@ import {
 } from 'grommet'
 import ShadowBox from '../../../components/base/ShadowBox';
 
-import { Equinox as EquinoxDomain, isFoodLust } from '../../../data/domain/equinox';
+import { Equinox as EquinoxDomain, isFoodLust } from '../../../data/domain/world-3/equinox';
 
 import { TimeDown } from "../../../components/base/TimeDisplay";
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';

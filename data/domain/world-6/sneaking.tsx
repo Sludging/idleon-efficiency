@@ -1,6 +1,6 @@
 import { letterToNumber, nFormatter } from "../../utility";
 import { SkillsIndex } from "../SkillsIndex";
-import { Alchemy, AlchemyConst, CauldronIndex } from "../alchemy";
+import { Alchemy, AlchemyConst, CauldronIndex } from "../world-2/alchemy/alchemy";
 import { Domain, RawData } from "../base/domain";
 import { initJadeUpgradeRepo } from "../data/JadeUpgradeRepo";
 import { BaseNinjaItemBase, initNinjaItemRepo } from "../data/NinjaItemRepo";
@@ -71,7 +71,7 @@ export interface SneakingTie {
 }
 
 export class SneakingItem {
-    constructor(public index: number, public data: BaseNinjaItemModel) {}
+    constructor(public index: number, public data: BaseNinjaItemModel) { }
 
     getImageData = (): ImageData => {
         return {
@@ -165,7 +165,7 @@ export class SneakingPristineCharm extends SneakingItem {
 }
 
 export class PlayerEquipment {
-    constructor(public hat: SneakingItem | undefined, public weapon: SneakingWeapon | undefined, public Trinket1: SneakingTrinket | undefined, public Trinket2: SneakingTrinket | undefined) {}
+    constructor(public hat: SneakingItem | undefined, public weapon: SneakingWeapon | undefined, public Trinket1: SneakingTrinket | undefined, public Trinket2: SneakingTrinket | undefined) { }
 }
 
 export class SneakingPlayer {
@@ -174,7 +174,7 @@ export class SneakingPlayer {
     // The action timer is based on this, action time - time past will tell you how long till next action calculation.
     timePast: number = 0;
 
-    tie: SneakingTie = {damageDone: 0, maxHP: 0};
+    tie: SneakingTie = { damageDone: 0, maxHP: 0 };
 
     floor: number = 9;
     // Temp holding of raw info so it's easier to map.
@@ -203,7 +203,7 @@ export class JadeUpgrade {
     // Setting default value to what it was first time I looked at it :shrug:.
     costExponent: number = 2.52;
 
-    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) {}
+    constructor(public index: number, public data: JadeUpgradeModel, public displayOrder: number = 0) { }
 
     getImageData = (): ImageData => {
         return {
@@ -215,7 +215,7 @@ export class JadeUpgrade {
 
     unlockCost = (): number => {
         return (
-            (300 + 500 * this.displayOrder + Math.pow(this.displayOrder, 3)) 
+            (300 + 500 * this.displayOrder + Math.pow(this.displayOrder, 3))
             * Math.pow(this.costExponent, this.displayOrder)
             * Math.pow(3.07, Math.max(0, this.displayOrder - 28))
         )
@@ -231,16 +231,16 @@ export class SneakingUpgrade {
     itemDiscount: number = 0;
 
     constructor(public index: number, public data: NinjaUpgradeModel) {
-        if(Number.isFinite(data.bonusPerLvl)) {
+        if (Number.isFinite(data.bonusPerLvl)) {
             // If value is a valid number, use it.
             this.bonusPerLvl = data.bonusPerLvl as number;
-        } 
+        }
         this.shouldBeDisplayed = (data.name != "Name");
     }
 
     nextLevelCost = (): number => {
         if (this.index == 8) {
-            return (1 / (1 + this.itemDiscount / 100)) *  (1 / (1 + this.bubbleDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
+            return (1 / (1 + this.itemDiscount / 100)) * (1 / (1 + this.bubbleDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
         } else {
             return (1 / (1 + this.itemDiscount / 100)) * this.data.costBase * Math.pow(this.data.costExponent, this.level);
         }
@@ -261,7 +261,7 @@ export class SneakingUpgrade {
     getBonusText = (level: number = this.level): string => {
         //This bonus is special so need to do a special treatment
         if (this.index == 14) {
-            const bonus = 1 + (this.getBonus(level)/100);
+            const bonus = 1 + (this.getBonus(level) / 100);
 
             return this.data.bonus.replace(/}/, bonus.toString());
         } else {
@@ -270,7 +270,7 @@ export class SneakingUpgrade {
     }
 
     static fromBase = (data: NinjaUpgradeBase[]): SneakingUpgrade[] => {
-       return data.filter(value => value.data.name != "").map((value) => new SneakingUpgrade(value.index, value.data));
+        return data.filter(value => value.data.name != "").map((value) => new SneakingUpgrade(value.index, value.data));
     }
 }
 
@@ -324,7 +324,7 @@ export enum BeanstalkingBonusType {
 }
 
 export class BeanstalkingBonus {
-    constructor(public type: BeanstalkingBonusType, public level: number = 0, public item: Food) {}
+    constructor(public type: BeanstalkingBonusType, public level: number = 0, public item: Food) { }
 
     getStackSize = (): number => {
         return this.level == 2 ? 100000 : this.level == 1 ? 10000 : 0;
@@ -336,7 +336,7 @@ export class Beanstalking {
     unlocked: boolean = false;
     supersizedUnlocked: boolean = false;
 
-    constructor() {}
+    constructor() { }
 
     getBonus = (type: BeanstalkingBonusType): number => {
         const bonus = this.bonuses.find(bonus => bonus.type == type);
@@ -375,9 +375,9 @@ export class Sneaking extends Domain {
     jadeUpgrades: JadeUpgrade[] = initJadeUpgradeRepo()
         .filter(base => !["idk", "Idk yet"].includes(base.data.bonus) && !["UNDER CONSTRUCTION"].includes(base.data.name))
         .map(
-        base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
-    );
-    
+            base => new JadeUpgrade(base.index, base.data, jadeUpgradeDisplayOrder.indexOf(base.index))
+        );
+
     // You have loot: Njloot.png
 
     updateUnlockedUpgrades = () => {
@@ -385,7 +385,7 @@ export class Sneaking extends Domain {
             upgrade.unlocked = upgrade.data.unlockId == 0 ? true : (this.sneakingUpgrades.find(value => value.index == upgrade.data.unlockId)?.level?.valueOf() || 0) > 0 || false;
         });
     }
-    
+
     static getJadeImageData = (): ImageData => {
         return {
             location: "W6item0_x1",
@@ -396,8 +396,8 @@ export class Sneaking extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "Ninja", perPlayer: false, default: []},
-            {key: "Lv0_", perPlayer: true, default: []},
+            { key: "Ninja", perPlayer: false, default: [] },
+            { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
 
@@ -435,10 +435,10 @@ export class Sneaking extends Domain {
             const trinket2: SneakingTrinket | undefined = SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == playerEquipment[3][0]), playerEquipment[3][1]) as SneakingTrinket | undefined;
 
             sneaking.players.push(new SneakingPlayer(index, sneakingLevel, playerInfo, new PlayerEquipment(hat, weapon, trinket1, trinket2)));
-        }) 
+        })
 
         sneaking.inventory = [];
-        ninjaData.slice(60,99).forEach((equipment: [name: string, level: number]) => {
+        ninjaData.slice(60, 99).forEach((equipment: [name: string, level: number]) => {
             if (equipment[0] != "Blank") {
                 sneaking.inventory.push(SneakingItem.fromBase(sneaking.baseItems.find(item => item.data.internalId == equipment[0]), equipment[1]));
             } else {
@@ -448,7 +448,7 @@ export class Sneaking extends Domain {
 
         const sneakingUpgradesLevels: number[] = ninjaData[103];
         sneaking.sneakingUpgrades.forEach(upgrade => {
-            if(upgrade.index < sneakingUpgradesLevels.length) {
+            if (upgrade.index < sneakingUpgradesLevels.length) {
                 upgrade.level = sneakingUpgradesLevels[upgrade.index];
             }
         });
@@ -459,12 +459,12 @@ export class Sneaking extends Domain {
         sneaking.baseItems
             .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
             .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, _) => {
-            let unlocked: boolean = false;
-            if (item.data.itemId < pristineCharmUnlocking.length) {
-                unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
-            }
-            sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
-        })
+                let unlocked: boolean = false;
+                if (item.data.itemId < pristineCharmUnlocking.length) {
+                    unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
+                }
+                sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
+            })
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
         const lettersOfEnabledUpgrades = ninjaData[102][9] ?? "";
@@ -480,7 +480,7 @@ export class Sneaking extends Domain {
         sneaking.doors = [];
         const doorsDamage = ninjaData[100] as number[];
         doorsDamage.forEach((damageDone, index) => {
-            sneaking.doors.push({damageDone: damageDone, maxHP: ((index < DoorsMaxHP.length) ? DoorsMaxHP[index] : 1E9999999999)});
+            sneaking.doors.push({ damageDone: damageDone, maxHP: ((index < DoorsMaxHP.length) ? DoorsMaxHP[index] : 1E9999999999) });
         });
 
         sneaking.minibossKills = [];
@@ -492,7 +492,7 @@ export class Sneaking extends Domain {
         Object.values(BeanstalkingBonusType).forEach((_, index) => {
             if (index < beanStalkingData.length) {
                 let item: Food | undefined = undefined;
-                switch(index) {
+                switch (index) {
                     case BeanstalkingBonusType.GoldenPeanut:
                         item = goldenFoods.find(food => food.internalName == "PeanutG");
                         break;
@@ -500,10 +500,10 @@ export class Sneaking extends Domain {
                         item = goldenFoods.find(food => food.internalName == "ButterBar");
                         break;
                     default:
-                        item = goldenFoods.find(food => food.internalName == `FoodG${index-1}`);
+                        item = goldenFoods.find(food => food.internalName == `FoodG${index - 1}`);
                         break;
                 }
-                if(item) {
+                if (item) {
                     const level = beanStalkingData[index];
 
                     sneaking.beanstalking.bonuses.push(new BeanstalkingBonus(index, level, item));
@@ -512,7 +512,7 @@ export class Sneaking extends Domain {
         });
         sneaking.beanstalking.unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 1)?.purchased ?? false;
         sneaking.beanstalking.supersizedUnlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 2)?.purchased ?? false;
-        
+
         sneaking.updatePlayersActivity();
     }
 
@@ -521,7 +521,7 @@ export class Sneaking extends Domain {
         let i: number = 0;
         for (i = 0; i < this.doors.length; i++) {
             if (0 >= this.doors[i].maxHP - this.doors[i].damageDone) {
-                floorUnlocked = Math.min(12, i+2);
+                floorUnlocked = Math.min(12, i + 2);
             }
         }
 
@@ -531,7 +531,7 @@ export class Sneaking extends Domain {
     updatePlayersActivity = () => {
         this.players.forEach((player, _) => {
             const currentFloorDoor = (player.floor < this.doors.length) ? this.doors[player.floor] : undefined;
-    
+
             if (player.tie.damageDone < player.tie.maxHP || player.rawData[1] == 0) {
                 player.activity = SneakingActivity.Tied
             } else if (player.rawData[1] < 0) {

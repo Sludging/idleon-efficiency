@@ -11,7 +11,7 @@ import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import TabButton from '../../../components/base/TabButton';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
-import { Divinity as DivinityDomain } from '../../../data/domain/divinity';
+import { Divinity as DivinityDomain } from '../../../data/domain/world-5/divinity';
 import { Player } from '../../../data/domain/player';
 import { Skilling } from '../../../data/domain/skilling';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';

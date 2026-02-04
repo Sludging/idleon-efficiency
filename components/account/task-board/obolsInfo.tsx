@@ -1,7 +1,7 @@
 import { Box, Text } from "grommet";
 import { useEffect, useMemo, useState } from "react";
 import { ItemStat } from "../../../data/domain/items";
-import { ObolsData, ObolType } from "../../../data/domain/obols";
+import { ObolsData, ObolType } from "../../../data/domain/world-2/obols";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";

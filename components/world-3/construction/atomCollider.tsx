@@ -1,6 +1,6 @@
 import { Box, CheckBox, Grid, Text } from "grommet";
 import { useMemo, useState } from "react";
-import { AtomCollider } from "../../../data/domain/atomCollider";
+import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";

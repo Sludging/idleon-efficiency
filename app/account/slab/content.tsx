@@ -11,7 +11,7 @@ import { useState, useMemo } from 'react';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { SourcesModel } from '../../../data/domain/model/sourcesModel';
-import { customHandCraftedListOfUnobtainableItems, Slab as SlabDomain } from '../../../data/domain/slab';
+import { customHandCraftedListOfUnobtainableItems, Slab as SlabDomain } from '../../../data/domain/world-5/slab';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { NoteModel } from '../../../data/domain/model/noteModel';
 import ShadowBox from '../../../components/base/ShadowBox';

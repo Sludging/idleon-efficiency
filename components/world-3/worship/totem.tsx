@@ -7,7 +7,7 @@ import {
 } from 'grommet'
 import { useContext, useState } from 'react';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
-import { Worship as WorshipDomain } from '../../../data/domain/worship';
+import { Worship as WorshipDomain } from '../../../data/domain/world-3/worship';
 import ShadowBox from "../../base/ShadowBox";
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';

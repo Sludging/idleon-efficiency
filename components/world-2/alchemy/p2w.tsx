@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Alchemy, P2W_CAULDRON_BOOST_MAX, P2W_CAULDRON_NEWBUBBLE_MAX, P2W_CAULDRON_SPEED_MAX, P2W_LIQUIDS_CAPACITY_MAX, P2W_LIQUIDS_REGEN_MAX, P2W_VIALS_ATTEMPTS_MAX, P2W_VIALS_RNG_MAX } from "../../../data/domain/alchemy";
+import { Alchemy, P2W_CAULDRON_BOOST_MAX, P2W_CAULDRON_NEWBUBBLE_MAX, P2W_CAULDRON_SPEED_MAX, P2W_LIQUIDS_CAPACITY_MAX, P2W_LIQUIDS_REGEN_MAX, P2W_VIALS_ATTEMPTS_MAX, P2W_VIALS_RNG_MAX } from "../../../data/domain/world-2/alchemy/alchemy";
 import { Box, Text } from "grommet";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";

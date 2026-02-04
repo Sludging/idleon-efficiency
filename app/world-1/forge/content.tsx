@@ -9,7 +9,7 @@ import {
 import { useEffect, useState, useMemo } from 'react';
 
 import ShadowBox from '../../../components/base/ShadowBox';
-import { Forge as ForgeDomain } from '../../../data/domain/forge';
+import { Forge as ForgeDomain } from '../../../data/domain/world-1/forge';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { getCoinsArray, nFormatter } from '../../../data/utility';

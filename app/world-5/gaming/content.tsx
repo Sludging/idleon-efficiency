@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { TimeDown } from '../../../components/base/TimeDisplay';
-import { Gaming as GamingDomain } from '../../../data/domain/gaming';
+import { Gaming as GamingDomain } from '../../../data/domain/world-5/gaming';
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';

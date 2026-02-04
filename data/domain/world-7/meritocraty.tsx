@@ -5,7 +5,7 @@ import { Item } from "../items";
 import { VoteBonusModel } from "../model/voteBonusModel";
 import { Clamworks } from "./clamworks";
 import { Companion } from "../companions";
-import { Arcade } from "../arcade";
+import { Arcade } from "../world-2/arcade";
 import { EventShop } from "../eventShop";
 import { LegendTalents } from "./legendTalents";
 

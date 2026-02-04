@@ -158,7 +158,7 @@ export class Bubba extends Domain {
         return Math.min(4, lavaLog(Math.pow(Math.max(1, this.happiness / 30 + 1), 1.5)));
     }
 
-    getHappinessBonus(happiness: number  = this.happiness): number {
+    getHappinessBonus(happiness: number = this.happiness): number {
         return 1 + 10 * (lavaLog2(happiness) + 25 * lavaLog(happiness) + Math.pow(happiness, .75)) / 100;
     }
 

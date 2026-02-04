@@ -11,12 +11,12 @@ import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import TabButton from '../../../components/base/TabButton';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
-import { Chip, Lab as LabDomain } from '../../../data/domain/lab';
+import { Chip, Lab as LabDomain } from '../../../data/domain/world-4/lab';
 import { Player } from '../../../data/domain/player';
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { CharacterBox } from '../../../components/base/CharacterBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
-import { Rift, SkillMastery } from '../../../data/domain/rift';
+import { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 

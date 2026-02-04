@@ -4,11 +4,11 @@ import {
     Text,
 } from 'grommet'
 import { useState, useMemo, useEffect } from "react";
-import { Breeding as BreedingDomain } from "../../../data/domain/breeding";
+import { Breeding as BreedingDomain } from "../../../data/domain/world-4/breeding";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
-import { Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/world-4/cooking';
 import TextAndLabel from '../../base/TextAndLabel';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';

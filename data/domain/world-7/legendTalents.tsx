@@ -6,7 +6,7 @@ import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
 import { LegendTalentModel } from "../model/legendTalentModel";
 import { Player } from "../player";
-import { Sailing } from "../sailing";
+import { Sailing } from "../world-5/sailing/sailing";
 import { Clamworks } from "./clamworks";
 
 export class LegendTalent {

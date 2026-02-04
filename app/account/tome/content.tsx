@@ -9,7 +9,7 @@ import {
 import ShadowBox from '../../../components/base/ShadowBox';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
-import { TomeLine, Tome as TomeDomain, TomeScoreColors } from '../../../data/domain/tome';
+import { TomeLine, Tome as TomeDomain, TomeScoreColors } from '../../../data/domain/world-4/tome';
 import { CircleInformation } from 'grommet-icons';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { Player } from '../../../data/domain/player';

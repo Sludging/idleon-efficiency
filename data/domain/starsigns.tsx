@@ -2,7 +2,7 @@ import { Domain } from './base/domain';
 import { RawData } from './base/domain';
 import { Item } from "./items";
 import { Summoning } from "./world-6/summoning";
-import { InfiniteStarsBonus, Rift } from "./rift";
+import { InfiniteStarsBonus, Rift } from "./world-4/rift";
 import { Tesseract } from './tesseract';
 
 interface StarBonus {

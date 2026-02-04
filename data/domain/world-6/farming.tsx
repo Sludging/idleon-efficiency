@@ -9,13 +9,13 @@ import { Player } from "../player";
 import { ImageData } from "../imageData";
 import { nFormatter } from '../../utility';
 import { GemStore } from '../gemPurchases';
-import { Lab } from '../lab';
+import { Lab } from '../world-4/lab';
 import { Summoning } from './summoning';
 import { Stamp } from '../world-1/stamps';
-import { Alchemy } from '../alchemy';
+import { Alchemy } from '../world-2/alchemy/alchemy';
 import { JadeUpgrade, Sneaking } from "./sneaking";
-import { Cooking } from "../cooking";
-import { Rift, SkillMastery } from '../rift';
+import { Cooking } from "../world-4/cooking";
+import { Rift, SkillMastery } from '../world-4/rift';
 import { StarSigns } from "../starsigns";
 import { Achievement } from "../achievements";
 import { KillRoy } from "../world-2/killroy";
@@ -32,31 +32,32 @@ export class LandRankDataBase {
 
     constructor() {
         // Do this until the wiki bot can send us those data
-        this.upgrades.push(new LandRankUpgrade(0,"Evolution Boost","Increases next crop chance by +{% per rank of the land plot",250,1,false));
-        this.upgrades.push(new LandRankUpgrade(1,"Production Boost","Boosts value of crops harvested by +{% per rank of the land plot",5,5,false));
-        this.upgrades.push(new LandRankUpgrade(2,"Soil Exp Boost","Each land gains +{% extra Rank EXP per rank of the previous land",25,20,false));
-        this.upgrades.push(new LandRankUpgrade(3,"Evolution Megaboost","Increases next crop chance by +{% multiplicatively!",600,30,false));
-        this.upgrades.push(new LandRankUpgrade(4,"Seed of Stealth","Increases the Stealth of all Ninja Twins by +{% per Farming LV",2,60,true));
-        this.upgrades.push(new LandRankUpgrade(5,"Farmtastic Boost","Increases Farming Skill EXP gained by +{%",90,80,false));
-        this.upgrades.push(new LandRankUpgrade(6,"Soil Exp Megaboost","All plots of land gain +{% more Rank EXP",200,125,false));
-        this.upgrades.push(new LandRankUpgrade(7,"Overgrowth Boost","Increases chance for Overgrowth by +{%",120,180,false));
-        this.upgrades.push(new LandRankUpgrade(8,"Production Megaboost","Increases the amount of crops harvested by +{%",100,250,false));
-        this.upgrades.push(new LandRankUpgrade(9,"Seed of Loot","Increases the Drop Rarity of all characters by +{%",10,400,true));
-        this.upgrades.push(new LandRankUpgrade(10,"Evolution Superboost","Increases next crop chance by +{% multiplicatively!",3000,500,false));
-        this.upgrades.push(new LandRankUpgrade(11,"Overgrowth Megaboost","Increases chance for Overgrowth by +{%",340,600,false));
-        this.upgrades.push(new LandRankUpgrade(12,"Farmtastic Megaboost","Increases Farming Skill EXP gained by +{%",110,700,false));
-        this.upgrades.push(new LandRankUpgrade(13,"Soil Exp Superboost","All plots of land gain +{% more Rank EXP",520,900,false));
-        this.upgrades.push(new LandRankUpgrade(14,"Seed of Damage","Gives a +{% Total Damage bonus to all characters",20,1200,true));
-        this.upgrades.push(new LandRankUpgrade(15,"Evolution Ultraboost","Increases next crop chance by +{% multiplicatively!",40000,1300,false));
-        this.upgrades.push(new LandRankUpgrade(16,"Farmtastic Superboost","Increases Farming Skill EXP gained by +{%",220,1500,false));
-        this.upgrades.push(new LandRankUpgrade(17,"Production Superboost","Increases the amount of crops harvested by +{%",600,1750,false));
-        this.upgrades.push(new LandRankUpgrade(18,"Overgrowth Superboost","Increases chance for Overgrowth by +{%",1500,2000,false));
-        this.upgrades.push(new LandRankUpgrade(19,"Seed of Stats","Gives a +{% All Stat bonus to your characters",5,3500,true));
+        // TODO : Create a proper Model + Repo for this
+        this.upgrades.push(new LandRankUpgrade(0, "Evolution Boost", "Increases next crop chance by +{% per rank of the land plot", 250, 1, false));
+        this.upgrades.push(new LandRankUpgrade(1, "Production Boost", "Boosts value of crops harvested by +{% per rank of the land plot", 5, 5, false));
+        this.upgrades.push(new LandRankUpgrade(2, "Soil Exp Boost", "Each land gains +{% extra Rank EXP per rank of the previous land", 25, 20, false));
+        this.upgrades.push(new LandRankUpgrade(3, "Evolution Megaboost", "Increases next crop chance by +{% multiplicatively!", 600, 30, false));
+        this.upgrades.push(new LandRankUpgrade(4, "Seed of Stealth", "Increases the Stealth of all Ninja Twins by +{% per Farming LV", 2, 60, true));
+        this.upgrades.push(new LandRankUpgrade(5, "Farmtastic Boost", "Increases Farming Skill EXP gained by +{%", 90, 80, false));
+        this.upgrades.push(new LandRankUpgrade(6, "Soil Exp Megaboost", "All plots of land gain +{% more Rank EXP", 200, 125, false));
+        this.upgrades.push(new LandRankUpgrade(7, "Overgrowth Boost", "Increases chance for Overgrowth by +{%", 120, 180, false));
+        this.upgrades.push(new LandRankUpgrade(8, "Production Megaboost", "Increases the amount of crops harvested by +{%", 100, 250, false));
+        this.upgrades.push(new LandRankUpgrade(9, "Seed of Loot", "Increases the Drop Rarity of all characters by +{%", 10, 400, true));
+        this.upgrades.push(new LandRankUpgrade(10, "Evolution Superboost", "Increases next crop chance by +{% multiplicatively!", 3000, 500, false));
+        this.upgrades.push(new LandRankUpgrade(11, "Overgrowth Megaboost", "Increases chance for Overgrowth by +{%", 340, 600, false));
+        this.upgrades.push(new LandRankUpgrade(12, "Farmtastic Megaboost", "Increases Farming Skill EXP gained by +{%", 110, 700, false));
+        this.upgrades.push(new LandRankUpgrade(13, "Soil Exp Superboost", "All plots of land gain +{% more Rank EXP", 520, 900, false));
+        this.upgrades.push(new LandRankUpgrade(14, "Seed of Damage", "Gives a +{% Total Damage bonus to all characters", 20, 1200, true));
+        this.upgrades.push(new LandRankUpgrade(15, "Evolution Ultraboost", "Increases next crop chance by +{% multiplicatively!", 40000, 1300, false));
+        this.upgrades.push(new LandRankUpgrade(16, "Farmtastic Superboost", "Increases Farming Skill EXP gained by +{%", 220, 1500, false));
+        this.upgrades.push(new LandRankUpgrade(17, "Production Superboost", "Increases the amount of crops harvested by +{%", 600, 1750, false));
+        this.upgrades.push(new LandRankUpgrade(18, "Overgrowth Superboost", "Increases chance for Overgrowth by +{%", 1500, 2000, false));
+        this.upgrades.push(new LandRankUpgrade(19, "Seed of Stats", "Gives a +{% All Stat bonus to your characters", 5, 3500, true));
     }
 
     // This function send the sum of all bonus from a same type, Lava use this in his code so having it here helps to "translate" his code into IE code
     getTotalUpgradeBonusForBonus = (bonusType: LandRankBonusType): number => {
-        switch(bonusType) {
+        switch (bonusType) {
             case LandRankBonusType.NextCropChance:
                 return (1 + this.getUpgradeBonusByIndex(3) / 100) * (1 + this.getUpgradeBonusByIndex(10) / 100) * (1 + this.getUpgradeBonusByIndex(15) / 100);
             case LandRankBonusType.AmountHarvested:
@@ -85,20 +86,20 @@ export class LandRankUpgrade {
     unlocked: boolean = false;
     maxLevel: number = 1;
 
-    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public fifthColumnBonus: boolean) {}
+    constructor(public index: number, public name: string, public bonusText: string, public bonus: number, public unlockThreshold: number, public fifthColumnBonus: boolean) { }
 
     getUpgradeBonus = () => {
         if (!this.unlocked) {
             return 0;
         }
 
-        switch(this.index) {
+        switch (this.index) {
             case 4:
             case 9:
             case 14:
             case 19:
                 return this.bonus * this.level;
-            default: 
+            default:
                 return 1.7 * this.bonus * this.level / (this.level + 80);
         }
     }
@@ -112,7 +113,7 @@ export class MarketUpgrade {
     level: number = 0;
     unlocked: boolean = false;
 
-    constructor(public index: number, public data: MarketInfoModel) {}
+    constructor(public index: number, public data: MarketInfoModel) { }
 
     getTotalCostUntilLevel = (currentLevel: number = this.level, targetLevel: number = this.data.maxLvl): MarketUpgradeCost[] => {
         const costs: MarketUpgradeCost[] = [];
@@ -126,7 +127,7 @@ export class MarketUpgrade {
             } else {
                 costs.push(cost);
             }
-        }        
+        }
 
         return costs;
     }
@@ -146,15 +147,15 @@ export class MarketUpgrade {
         }
 
         const cropCost = (this.data.maxLvl > currentLevel ? Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel))) : 0);
-        
-        return {cropId: cropId, cropQuantity: cropCost};
+
+        return { cropId: cropId, cropQuantity: cropCost };
     }
 }
 
 export class Crop {
     discovered: boolean = false;
     quantityOwned: number = 0;
-    
+
     constructor(public index: number, public seed: Seed) { }
 
     static getCropIconData = (cropId: number): ImageData => {
@@ -209,7 +210,7 @@ export class Plot {
     // seconds since last cycle have ended, reset to 0 once an overgrow cycle end
     // Only start incrementing when plant is fully grown
     overgrowthTime: number = 0;
-    
+
     // Multiplyer from multiples sources
     minimumQuantityMultiplyer: number = 0;
     maximumQuantityMultiplyer: number = 0;
@@ -248,7 +249,7 @@ export class Plot {
 
     updatePlotNextOGchance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number, bonusOGChanceFromLandRankTotal: number) => {
         this.bonusOGChanceFromStarSign67 = bonusFromStarSign67;
-        this.nextOGChanceAllBonusEffect = Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromTaskBoard / 100) * (1 + bonusFromAchievement365 / 100) * (1 + bonusOGChanceFromLandRankTotal / 100);     
+        this.nextOGChanceAllBonusEffect = Math.max(1, bonusFromMarketUpgrade11) * (1 + bonusFromPristineCharm11 / 100) * (1 + bonusFromTaskBoard / 100) * (1 + bonusFromAchievement365 / 100) * (1 + bonusOGChanceFromLandRankTotal / 100);
     }
 
     updatePlotCropQuantityMultiplyer = (bonusFromMarket5: number, bonusFromLandRankTotal: number, bonusFromLandRankCurrent: number, bonusFromVoting: number) => {
@@ -296,8 +297,8 @@ export class Plot {
 
     getEvolutionChance = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
         if (this.farmingLevel < 2 || !this.seed || this.index == this.seed.data.cropIdMax) {
-            return 0;            
-        } else {                
+            return 0;
+        } else {
             const seedBaseEvolutionChance = 0.3; // should be seed.data.nextCropChance but Lava seems to use 0.3 for every seed
             return this.nextCropChanceAllBonusEffect * this.getNextCropChanceStarSignBonus(starSignEquipped, silkrodeBonus) * (seedBaseEvolutionChance) * Math.pow(this.seed.data.nextCropDecay, (this.cropIndex - this.seed.data.cropIdMin));
         }
@@ -312,7 +313,7 @@ export class Plot {
     }
 
     getOGChanceStarSignBonus = (starSignEquipped: boolean, silkrodeBonus: boolean) => {
-        return starSignEquipped ? (silkrodeBonus ? (1 + (this.bonusOGChanceFromStarSign67*2) / 100) : (1 + this.bonusOGChanceFromStarSign67 / 100)) : 1;
+        return starSignEquipped ? (silkrodeBonus ? (1 + (this.bonusOGChanceFromStarSign67 * 2) / 100) : (1 + this.bonusOGChanceFromStarSign67 / 100)) : 1;
     }
 
     getGrowthStage(): PlotGrowthStage {
@@ -321,10 +322,10 @@ export class Plot {
         switch (true) {
             case this.seed == undefined || this.seed?.index == -1 || cycleTime == 0: return PlotGrowthStage.Empty;
             case this.readyToCollect == true: return PlotGrowthStage.Grown;
-            case this.growthTime >= (cycleTime * 4/5): return PlotGrowthStage.GrowStage4;
-            case this.growthTime >= (cycleTime * 3/5): return PlotGrowthStage.GrowStage3;
-            case this.growthTime >= (cycleTime * 2/5): return PlotGrowthStage.GrowStage2;
-            case this.growthTime >= (cycleTime * 1/5): return PlotGrowthStage.GrowStage1;
+            case this.growthTime >= (cycleTime * 4 / 5): return PlotGrowthStage.GrowStage4;
+            case this.growthTime >= (cycleTime * 3 / 5): return PlotGrowthStage.GrowStage3;
+            case this.growthTime >= (cycleTime * 2 / 5): return PlotGrowthStage.GrowStage2;
+            case this.growthTime >= (cycleTime * 1 / 5): return PlotGrowthStage.GrowStage1;
             case this.growthTime >= 0: return PlotGrowthStage.Planted;
             default: return PlotGrowthStage.Empty;
         }
@@ -367,7 +368,7 @@ export class CropScientistBonus {
     unlocked: boolean = false;
     bonusValue: number = 0;
 
-    constructor(public bonusText: CropScientistBonusText, public bonusPerCrop: number, public jadeUpgradeId: number) {}
+    constructor(public bonusText: CropScientistBonusText, public bonusPerCrop: number, public jadeUpgradeId: number) { }
 }
 
 export class CropScientist {
@@ -491,7 +492,7 @@ export class Farming extends Domain {
     magicBeansOwned: number = 0;
     landRankPointsTotal: number = 0;
     landRankPointsSpent: number = 0;
-    instaGrowToolLeft: number = 0;    
+    instaGrowToolLeft: number = 0;
     farmingLevel: number = 0;
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
@@ -510,10 +511,10 @@ export class Farming extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "FarmPlot", perPlayer: false, default: []},
-            { key: "FarmCrop", perPlayer: false, default: []},
-            { key: "FarmUpg", perPlayer: false, default: []},
-            { key: "FarmRank", perPlayer: false, default: []},
+            { key: "FarmPlot", perPlayer: false, default: [] },
+            { key: "FarmCrop", perPlayer: false, default: [] },
+            { key: "FarmUpg", perPlayer: false, default: [] },
+            { key: "FarmRank", perPlayer: false, default: [] },
         ]
     }
 
@@ -527,12 +528,12 @@ export class Farming extends Domain {
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
-        
+
         // Old accounts won't have this data, exit early.
         if (!cropsData || (!plotsData || plotsData.length == 0) || (!upgradesData || upgradesData.length == 0) || (!landRankData || landRankData.length == 0)) {
             return;
         }
-        
+
         const upgradesLevels = upgradesData.slice(2, -2);
 
         farming.magicBeansOwned = upgradesData[1];
@@ -544,7 +545,7 @@ export class Farming extends Domain {
                 farming.cropDepot.push(new Crop(i, seed));
             }
         })
-        
+
         farming.discoveredCrops = 0;
         for (const [cropId, qty] of Object.entries(cropsData)) {
             const crop = farming.cropDepot.find(crop => crop.index == Number(cropId));
@@ -577,7 +578,7 @@ export class Farming extends Domain {
 
         farming.farmPlots = [];
         plotsData.forEach((plotInfo, index) => {
-            const plot: Plot = new Plot(index);            
+            const plot: Plot = new Plot(index);
             // If seedIndex = -1 then the plot is empty, so no more information are needed (all other plotInfo should be at 0 anyway in this case)
             plot.seed = farming.seeds.find(seed => seed.index == plotInfo[0]) ?? undefined;
             if (plot.seed) {
@@ -600,7 +601,7 @@ export class Farming extends Domain {
             farming.farmPlots.push(plot);
         });
     }
-    
+
     updateUnlockedMarketBonuses = () => {
         this.marketUpgrades.forEach(upgrade => {
             upgrade.unlocked = (upgrade.data.cropReq <= this.discoveredCrops);
@@ -612,10 +613,10 @@ export class Farming extends Domain {
             upgrade.unlocked = this.canLevelLandRank ? (this.landRankPointsTotal >= upgrade.unlockThreshold) : false;
         });
     }
-    
+
     updateGrowthRate = (bonusFromVial64: number, bonusFromWinnerBonus2: number) => {
         const growthRate = Math.max(1, this.getMarketUpgradeBonusValue(10)) * (1 + (this.getMarketUpgradeBonusValue(2) + bonusFromVial64) / 100) * (1 + bonusFromWinnerBonus2 / 100);
-        
+
         this.growthRate = growthRate;
         this.farmPlots.forEach(plot => {
             plot.growthRate = growthRate;
@@ -642,15 +643,15 @@ export class Farming extends Domain {
 
         this.cropsToCollect.sort((collect1, collect2) => { return collect1.crop.index > collect2.crop.index ? 1 : -1 });
     }
-    
+
     updateBeansFromConvertinCurrentDepot = (jadeUpgradeBonus15: number) => {
         let fromCrops = 0;
-        
+
         this.cropDepot.filter(crop => crop.quantityOwned > 0).forEach(crop => {
             fromCrops += (crop.quantityOwned * Math.pow(2.5, crop.seed.index) * Math.pow(1.08, crop.index - crop.seed.data.cropIdMin));
         });
-        
-        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * ( 1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
+
+        this.magicBeansFromDepot = Math.pow(fromCrops, 0.5) * (1 + this.getMarketUpgradeBonusValue(6) / 100) * Math.max(1, jadeUpgradeBonus15);
     }
 
     updatePlotsOGChance = (bonusFromMarketUpgrade11: number, bonusFromPristineCharm11: number, bonusFromStarSign67: number, bonusFromTaskBoard: number, bonusFromAchievement365: number) => {
@@ -658,7 +659,7 @@ export class Farming extends Domain {
             plot.updatePlotNextOGchance(bonusFromMarketUpgrade11, bonusFromPristineCharm11, bonusFromStarSign67, bonusFromTaskBoard, bonusFromAchievement365, this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.OGChance));
         });
     }
-    
+
     updateCropsEvolutionChance = (summoningLevel: number, bonusFromMarketUpgrade4: number, bonusFromMarketUpgrade9: number, bonusFromWinningBonus10: number, bonusFromAlchemyBubbleCropChapter: number, bonusFromAlchemyBubbleCropiusMapper: number, bonusFromVial66: number, bonusFromMeal62: number, bonusFromMeal66: number, bonusFromStampCropEvo: number, bonusFromStarSign65: number, bonusFromRiftFarming1: number, bonusFromAchievement355: number, bonusFromKillRoy1: number, bonusFromVoting29: number) => {
         const landRankBonusTotal = this.landrankDatabase.getTotalUpgradeBonusForBonus(LandRankBonusType.NextCropChance);
         const landRankBonusCurrentRank = this.landrankDatabase.getUpgradeBonusByIndex(0);
@@ -691,12 +692,12 @@ export class Farming extends Domain {
             plot.updatePlotCropQuantityMultiplyer(bonusFromMarketUpgrade5, landRankBonusTotal, landRankBonusCurrentRank, bonusFromVoting29);
         });
     }
-    
+
     getCropsWithStockEqualOrGreaterThan = (stockLimit: number): number => {
         return this.cropDepot.filter(crop => crop.quantityOwned >= stockLimit).length;
     }
 
-    getMarketUpgradeBonusValue = (upgradeId: number): number  => {
+    getMarketUpgradeBonusValue = (upgradeId: number): number => {
         const upgrade = this.marketUpgrades.find(upgrade => upgrade.index == upgradeId);
 
         if (upgrade) {
@@ -713,7 +714,7 @@ export class Farming extends Domain {
                     return this.getMarketUpgradeBonusValue(15) * (1 + (upgrade.level * upgrade.data.bonusPerLvl * this.getCropsWithStockEqualOrGreaterThan(10000)) / 100);
                 case 15: //GMO
                     return 1 + (upgrade.level * upgrade.data.bonusPerLvl * this.getCropsWithStockEqualOrGreaterThan(100000)) / 100;
-                default:    
+                default:
                     return upgrade.level * upgrade.data.bonusPerLvl;
             }
         } else {
@@ -721,22 +722,22 @@ export class Farming extends Domain {
         }
     }
 
-    getMarketUpgradeBonusText = (upgradeId: number): string  => {
+    getMarketUpgradeBonusText = (upgradeId: number): string => {
         const upgrade = this.marketUpgrades.find(upgrade => upgrade.index == upgradeId);
 
         if (upgrade) {
             switch (upgradeId) {
                 case 9: // GMO
-                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x"+ nFormatter(this.getMarketUpgradeBonusValue(upgradeId))+")";
+                    return upgrade.data.bonus.replace(/}/, nFormatter(1 + upgrade.level * upgrade.data.bonusPerLvl / 100)) + " (Total bonus : x" + nFormatter(this.getMarketUpgradeBonusValue(upgradeId)) + ")";
                 case 11:
                     return upgrade.data.bonus.replace(/}/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
                 case 10: //GMO
                 case 12: //GMO
                 case 15: //GMO
-                    return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
+                    return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +" + nFormatter((this.getMarketUpgradeBonusValue(upgradeId) - 1) * 100) + "%)";
                 case 14: //GMO
-                    return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +"+nFormatter((this.getMarketUpgradeBonusValue(upgradeId)-1)*100)+"%)";
-                default:    
+                    return upgrade.data.bonus.replace(/{/, nFormatter(upgrade.level * upgrade.data.bonusPerLvl)) + " (Total bonus : +" + nFormatter((this.getMarketUpgradeBonusValue(upgradeId) - 1) * 100) + "%)";
+                default:
                     return upgrade.data.bonus.replace(/{/, nFormatter(this.getMarketUpgradeBonusValue(upgradeId)));
             }
         } else {
@@ -822,7 +823,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const sneaking = data.get("sneaking") as Sneaking;
     const rift = data.get("rift") as Rift;
     const timeAway = JSON.parse((data.get("rawData") as { [k: string]: any })["TimeAway"]);
-    const starSigns = data.get("starsigns") as StarSigns;    
+    const starSigns = data.get("starsigns") as StarSigns;
     const achievements = data.get("achievements") as Achievement[];
     const killroy = data.get("killroy") as KillRoy;
     const votes = data.get("votes") as Votes;
@@ -831,11 +832,11 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const grimoire = data.get("grimoire") as Grimoire;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-    
+
     // Update Min and Max possible quantity to collect from one fully grown crop 
     const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.index == 140)?.pucrhased ?? 0;
     farming.updatePossibleQuantityToCollect(farming.getMarketUpgradeBonusValue(1), gemInstagrowPurchase);
-    
+
     // Update growth speed for displayng when crops will be ready
     const vialGrowthSpeedBonus = alchemy.getVialBonusForKey("6FarmSpd");
     const summoningWinnerBonus2 = summoning.summonBonuses.find(bonus => bonus.index == 2)?.getBonus() ?? 0;
@@ -844,7 +845,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     // Update Magic beans collected if collecting now
     const jadeUpgrade15 = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 15)?.purchased ? 1.25 : 1;
     farming.updateBeansFromConvertinCurrentDepot(jadeUpgrade15);
-    
+
     // Update each Crops Evolution chance in plots
     const summoningWinnerBonus10 = summoning.summonBonuses.find(bonus => bonus.index == 10)?.getBonus() ?? 0;
     const bubbleBonusCropChapter = alchemy.getBubbleBonusForKey("W10AllCharz");

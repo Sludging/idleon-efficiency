@@ -1,7 +1,7 @@
 import { range } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { Item, StoneProps } from "./items";
-import { Refinery, RefineryStorage } from "./refinery";
+import { Refinery, RefineryStorage } from "./world-3/construction/refinery";
 
 export class Storage extends Domain {
     chest: Item[] = []

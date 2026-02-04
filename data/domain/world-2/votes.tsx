@@ -1,6 +1,6 @@
 import { Domain, RawData } from "../base/domain";
 import { Companion } from "../companions";
-import { Equinox } from "../equinox";
+import { Equinox } from "../world-3/equinox";
 import { Item } from "../items";
 import { Hole } from "../world-5/hole/hole";
 import { Summoning } from "../world-6/summoning";

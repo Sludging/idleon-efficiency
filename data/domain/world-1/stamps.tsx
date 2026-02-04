@@ -1,20 +1,20 @@
 import { lavaFunc, range } from '../../utility'
 import { Account } from '../account';
-import { Alchemy } from '../alchemy';
-import { AtomCollider } from '../atomCollider';
+import { Alchemy } from '../world-2/alchemy/alchemy';
+import { AtomCollider } from '../world-3/construction/atomCollider';
 import { Domain, RawData } from '../base/domain';
-import { Bribe, BribeConst, BribeStatus } from '../bribes';
+import { Bribe, BribeConst, BribeStatus } from './bribes';
 import { Capacity } from '../capacity';
 import { ImageData } from '../imageData';
 import { Item } from '../items';
-import { Lab } from '../lab';
+import { Lab } from '../world-4/lab';
 import { BaseItemModel } from '../model/baseItemModel';
 import { StampDataModel } from '../model/stampDataModel';
 import { StampItemModel } from '../model/stampItemModel';
 import { StampUpgradeCalculator } from './stampUpgradeCalculator';
 import { Player } from '../player';
-import { Rift } from '../rift';
-import { Sigils } from '../sigils';
+import { Rift } from '../world-4/rift';
+import { Sigils } from '../world-2/alchemy/sigils';
 import { Storage } from '../storage';
 import { Sneaking } from '../world-6/sneaking';
 

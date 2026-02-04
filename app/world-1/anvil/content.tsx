@@ -8,7 +8,7 @@ import {
     Text,
 } from 'grommet'
 import { useMemo, useState } from 'react';
-import { Anvil as AnvilModel, AnvilProduct, AnvilWrapper } from '../../../data/domain/anvil';
+import { Anvil as AnvilModel, AnvilProduct, AnvilWrapper } from '../../../data/domain/world-1/anvil';
 import { Player } from '../../../data/domain/player';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';

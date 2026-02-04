@@ -14,7 +14,7 @@ import {
 } from 'grommet'
 import { useContext } from 'react';
 
-import { Trap, TrapSet } from '../../../data/domain/traps';
+import { Trap, TrapSet } from '../../../data/domain/world-3/traps';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { Player } from '../../../data/domain/player';
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
