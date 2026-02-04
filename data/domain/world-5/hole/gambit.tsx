@@ -88,7 +88,7 @@ export class GambitBonus {
         }
 
         if (this.data.x1 == 1) {
-            return this.data.x0 * gambitTotalScore;
+            return this.data.x0 * lavaLog(gambitTotalScore);
         } else {
             return this.data.x0;
         }
@@ -110,6 +110,7 @@ export class Gambit {
 
     getBonus(index: number): number {
         const bonus = this.bonuses.find(bonus => bonus.index == index);
+
         if (bonus)
         {
             return bonus.getBonus(this.getGambitTotalTime());
@@ -139,7 +140,7 @@ export class Gambit {
     }
 
     getGambitTotalScore(): number {
-        return this.challenges.reduce((sum, challenge) => challenge.getScoreValue(), 0) * this.gambitPointsMulti;
+        return this.challenges.reduce((sum, challenge) => sum += challenge.getScoreValue(), 0) * this.gambitPointsMulti;
     }
 
     updateUnlockedBonuses() {

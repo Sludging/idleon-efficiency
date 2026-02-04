@@ -32,6 +32,7 @@ import { initHarpStringsRepo } from "../../data/HarpStringsRepo";
 import { Gambit } from "./gambit";
 import { Tesseract } from "../../tesseract";
 import { Jar } from "./jar";
+import { LegendTalents } from "../../world-7/legendTalents";
 
 export class Villager {
     level: number = 0;
@@ -917,6 +918,7 @@ export const updateHole = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const deathnote = data.get("deathnote") as Deathnote;
     const tesseract = data.get("tesseract") as Tesseract;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     // Update measurements with various cross domain data
     hole.measurements.forEach(measurement => {
@@ -932,8 +934,7 @@ export const updateHole = (data: Map<string, any>) => {
     });
 
     // Update jar bonuses from legendary talents
-    // TODO add legens talents bonuses to jar before gambit part
-    const legendTalentBonus = 1//(1 + m._customBlock_Thingies("LegendPTS_bonus", 29, 0) / 100)
+    const legendTalentBonus = 1 + legendTalents.getBonusFromIndex(29) / 100;
     hole.jar.jarBonuses.forEach(bonus => {
         bonus.legendTalentBonus = legendTalentBonus;
     });
