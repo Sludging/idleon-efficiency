@@ -222,12 +222,3 @@ export const updateConstruction = (data: Map<string, any>) => {
 
     return construction;
 }
-
-export const updateConstructionSpeed = (data: Map<string, any>) => {
-    const construction = data.get("construction") as Construction;
-    const players = data.get("players") as Player[];
-
-    construction.totalBuildSpeed = players.reduce((sum, player) => sum += player.buildSpeed.value, 0);
-
-    return construction;
-}

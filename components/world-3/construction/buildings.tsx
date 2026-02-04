@@ -53,6 +53,11 @@ export function BuildingsDisplay() {
                     text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
                     margin={{ right: 'medium' }}
                 />
+                <TextAndLabel
+                    label="Total Build Rate"
+                    text={nFormatter(constructionData.totalBuildSpeed)}
+                    margin={{ right: 'medium' }}
+                />
                 <Box direction="row" gap="small">
                     <CheckBox
                         checked={hideMaxed}

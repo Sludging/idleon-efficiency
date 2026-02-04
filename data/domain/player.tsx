@@ -47,6 +47,7 @@ import { UpgradeVault } from './upgradeVault';
 import { Bubba } from './world-3/bubba';
 import { AtomCollider } from './world-3/construction/atomCollider';
 import { Summoning } from './world-6/summoning';
+import { Construction } from './world-3/construction/construction';
 
 export class PlayerStats {
     strength: number = 0;
@@ -1415,6 +1416,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const atomCollider = data.get("collider") as AtomCollider;
     const summoning = data.get("summoning") as Summoning;
+    const construction = data.get("construction") as Construction;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
 
@@ -1502,6 +1504,8 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
         player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
             arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
     });
+
+    construction.totalBuildSpeed = players.reduce((sum, player) => sum += player.buildSpeed.value, 0);
 }
 
 
