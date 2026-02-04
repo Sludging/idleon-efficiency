@@ -490,13 +490,6 @@ export class Player {
         this.buildSpeed.value = totalSpeed;
         const totalBonusSpeed = totalSpeed - baseSpeed;
 
-        if (this.playerID == 0) {
-            console.log(`g : ${bubbleBonus} = 1 + ${constructionLevel} * ${constructionBubbleBonus} / 100`);
-            console.log(`l : ${additiveBonuses} = ${stampsBonusBuildProd} + ${postOfficeBonus} + ${guildBonus5} + ${gearBonus} + ${achievement153} + ${constructionMasteryBonus} + ${vialBonusContspd} + ${arcadeBonus44} + ${votingBonus18} + ${vaultBonus} + ${bubbaBonus1}`);
-            console.log(`q : ${winnerBonus * paletteBonus * vialTurtleBonus} = ${winnerBonus} * ${paletteBonus} * ${vialTurtleBonus}`);
-            console.log(`talent : ${talentBonus} = (1 + ${redoxSaltTalent} * (${atomCollider1} + ${lavaLog(redoxSaltInStorage)}) / 100)`);
-        }
-
         // Display values with weight
         this.buildSpeed.sources = [];
 
