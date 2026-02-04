@@ -183,7 +183,7 @@ export class Bubba extends Domain {
         return this.upgrades.reduce((sum, upgrade) => sum += upgrade.getRealLevel(), 0);
     }
 
-    getTotalCharsimaLevel(): number {
+    getTotalCharismaLevel(): number {
         return this.charismaBonuses.reduce((sum, bonus) => sum += bonus.level, 0);
     }
 
