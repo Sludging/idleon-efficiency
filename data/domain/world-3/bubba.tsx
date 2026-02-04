@@ -170,7 +170,7 @@ export class Bubba extends Domain {
         return Math.max(0, happiness);
     }
 
-    getMeatSliceRate(happinessRank: number = 1): number {
+    getMeatSliceRate(happinessRank: number = 0): number {
         const happiness = this.getHappinessForRank(happinessRank);
 
         return (this.getUpgradeBonus(0) + (this.getUpgradeBonus(7) + this.getUpgradeBonus(23))) *
