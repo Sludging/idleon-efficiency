@@ -1,0 +1,81 @@
+{
+  "description": "Extract data for Coral Reef daily gains calculation and parameters",
+  "target": "Coral Reef daily gains and all input parameters",
+  "extractions": [
+    {
+      "label": "reef_daily_gains",
+      "expression": "idleon.callFunction(\"Thingies\", \"ReefDayGains\")",
+      "description": "Final Coral Reef daily gains calculation"
+    },
+    {
+      "label": "param_companion_40_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 40)",
+      "description": "Companion 40 bonus (multiplicative)"
+    },
+    {
+      "label": "param_event_shop_25_owned",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 25, 0)",
+      "description": "Event shop bonus 25 owned"
+    },
+    {
+      "label": "param_gem_purchase_41",
+      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[41]",
+      "description": "Gem purchase 41 count"
+    },
+    {
+      "label": "param_coral_kid_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
+      "description": "Coral Kid bonus 5 (daily coral generation)"
+    },
+    {
+      "label": "param_dancing_coral_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 0, 0)",
+      "description": "Dancing Coral bonus 0 (daily reef coral)"
+    },
+    {
+      "label": "param_clamwork_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 5, 0)",
+      "description": "Clamwork bonus 5"
+    },
+    {
+      "label": "param_killroy_bonus_6",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 6, 0)",
+      "description": "Killroy bonus 6 (daily coral reef gains)"
+    },
+    {
+      "label": "param_stamp_corale",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"corale\")",
+      "description": "Stamp bonus for corale"
+    },
+    {
+      "label": "param_vial_7corale",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7corale\"]",
+      "description": "Alchemy vial 7corale bonus"
+    },
+    {
+      "label": "param_legend_talent_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 0, 0)",
+      "description": "Legend talent bonus 0"
+    },
+    {
+      "label": "param_arcade_bonus_57",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 57)",
+      "description": "Arcade bonus 57"
+    },
+    {
+      "label": "param_emporium_bonus_43",
+      "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 43, 0)",
+      "description": "Sneaking emporium bonus 43"
+    },
+    {
+      "label": "param_card_w7a9_level",
+      "expression": "Math.min(2 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a9\"), 15)",
+      "description": "Card w7a9 (Demonblub) level"
+    },
+    {
+      "label": "param_statue_31_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven31\")",
+      "description": "Statue 31 bonus"
+    }
+  ]
+}

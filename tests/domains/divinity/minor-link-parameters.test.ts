@@ -12,6 +12,7 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Alchemy } from '../../../data/domain/alchemy';
+import { CoralKid } from '../../../data/domain/world-7/coralKid';
 
 const saveName = 'latest';
 const extractionResultsName = 'divinity-minor-link-data.json';
@@ -29,10 +30,9 @@ const parameterSpecs = {
   clamworks_bonus_3: {
     description: 'CoralKid upgrade bonus 3 (MISSING IMPLEMENTATION)',
     extractionKey: 'clamworks_bonus_3',
-    domainExtractor: (_gameData: Map<string, any>) => {
-      // MISSING: CoralKid is a World 7 feature without domain implementation
-      // This is a game function call: CoralKidUpgBonus(3, 0)
-      throw new Error("clamworks_bonus_3: NOT IMPLEMENTED - CoralKid domain missing");
+    domainExtractor: (gameData: Map<string, any>) => {
+      const coralKid = gameData.get("coralKid") as CoralKid;
+      return coralKid.getBonusFromIndex(3);
     }
   },
 };

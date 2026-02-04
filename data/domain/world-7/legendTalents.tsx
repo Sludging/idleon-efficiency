@@ -22,6 +22,15 @@ export class LegendTalent {
         return level * this.data.bonusValue;
     }
 
+    getSecondaryValue = (level: number = this.level): string => {
+        switch(this.index) {
+            case 2:
+                return (2 + this.getBonus(level)).toString();
+            default:
+                return "$";
+        }
+    }
+
     getNextLevelDesc = (): string => {
         if (this.level >= this.data.maxLevel) {
             return "";
@@ -29,13 +38,13 @@ export class LegendTalent {
 
         const value = this.getBonus(this.level + 1);
 
-        return this.data.nextLevelPreview.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString());
+        return this.data.nextLevelPreview.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue(this.level + 1));
     }
 
     getDesc = (): string => {
         const value = this.getBonus();
 
-        return this.data.desc.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString());
+        return this.data.desc.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue());
     }
 }
 

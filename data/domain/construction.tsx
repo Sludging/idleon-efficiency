@@ -11,6 +11,7 @@ import { Item } from "./items";
 import { ConstructionMastery, Rift } from "./rift";
 import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";
+import { DancingCoral } from "./world-7/dancingCoral";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
 
@@ -127,6 +128,7 @@ export const updateConstruction = (data: Map<string, any>) => {
     const collider = data.get("collider") as AtomCollider;
     const rift = data.get("rift") as Rift;
     const storage = data.get("storage") as Storage;
+    const dancingCoral = data.get("dancingCoral") as DancingCoral;
     const costCruncher = construction?.buildings.find(building => building.index == 5) as Building;
 
     // Figure out max building levels
@@ -164,7 +166,7 @@ export const updateConstruction = (data: Map<string, any>) => {
             case 24:
             case 25:
             case 26:
-                building.maxLvl += constMastery.getBonusByIndex(5);
+                building.maxLvl += constMastery.getBonusByIndex(5) + (dancingCoral.isDancingCoralPurchased(building.index - 18) ? 100 : 0);
                 break;
         }
 

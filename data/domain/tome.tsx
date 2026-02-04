@@ -448,7 +448,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
-    // TODO : check if accurate once Deathnote is updated with w7 mobs
     let totalDeathnoteDigits = 0;
     const killsMap = deathnote.getKillsMap();
     [...killsMap.entries()].forEach(([_, deathnoteMobs]) => {
@@ -506,7 +505,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
             : artifact.status == ArtifactStatus.Ancient ? sum + 2
                 : artifact.status == ArtifactStatus.Eldritch ? sum + 3
                     : artifact.status == ArtifactStatus.Sovereign ? sum + 4
-                        : sum + 0
+                        : artifact.status == ArtifactStatus.Omnipotent ? sum + 5
+                            : sum + 0
         , 0);
 
     // Highest level captain
@@ -556,7 +556,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Sum of all ninja upgrades levels
     const totalNinjaUpgradeLevels = sneaking.sneakingUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
-    // Sum of all minigame scores, including basket
+    // Sum of all minigame scores, including trapping minigame
     const totalMinigamesScores = account.minigameHighscores.reduce((sum, score) => sum + score, 0) + (optionListAccount[99] ?? 0);
 
     // Sum of all prayers levels
@@ -896,7 +896,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(jadeEmporiumUpgradesBought);
                 break;
             case 75:
-                // Sum of all highest minigame highscore (also includes catching hoop from optionListAccount)
+                // Sum of all highest minigame highscore (also includes trapping minigame from optionListAccount)
                 line.updateAllPlayersCurrentValue(totalMinigamesScores);
                 break;
             case 76:

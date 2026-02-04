@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-24T04:07:55.781Z",
+  "timestamp": "2026-02-02T11:54:13.909Z",
   "extractions": {
     "diamond_chef_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
@@ -9,25 +9,25 @@
         "original": 2.4841242628294005e+30
       },
       "description": "Diamond Chef - Final Bonus",
-      "extractedAt": "2026-01-24T04:07:55.785Z"
+      "extractedAt": "2026-02-02T11:54:13.916Z"
     },
     "diamond_chef_is_bubble_super": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
       "result": 1,
       "description": "Diamond Chef - Is Bubble Super",
-      "extractedAt": "2026-01-24T04:07:55.787Z"
+      "extractedAt": "2026-02-02T11:54:13.918Z"
     },
     "alchemy_prismatic_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "result": 2.071532779316713,
       "description": "Alchemy Prismatic Bonus",
-      "extractedAt": "2026-01-24T04:07:55.790Z"
+      "extractedAt": "2026-02-02T11:54:13.926Z"
     },
     "diamond_chef_base_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 0.3, 13, 1562, 0, 0)",
       "result": 1.2975238095238095,
       "description": "Diamond Chef - Base Bonus",
-      "extractedAt": "2026-01-24T04:07:55.796Z"
+      "extractedAt": "2026-02-02T11:54:13.928Z"
     }
   },
   "errors": {},

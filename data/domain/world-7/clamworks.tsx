@@ -51,6 +51,7 @@ export class ClamPromoBonus {
 
 export class Clamworks extends Domain {
     promoLevel: number = 0;
+    pearlsOwned: number = 0;
     workBonuses: ClamworksBonus[] = [];
     promoBonuses: ClamPromoBonus[] = [];
 
@@ -69,6 +70,8 @@ export class Clamworks extends Domain {
         const optionList = data.get("OptLacc") as number[];
 
         clamWork.promoLevel = optionList[464] || 0;
+
+        clamWork.pearlsOwned = optionList[454] || 0;
 
         clamWork.workBonuses.forEach(bonus => {
             bonus.level = optionList[455 + bonus.index] || 0;

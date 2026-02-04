@@ -67,6 +67,12 @@ import { Clamworks } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { Bubba, updateBubba } from './world-3/bubba';
+import { CoralKid } from './world-7/coralKid';
+import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
+import { CoralReef, updateCoralReefDailyGain } from './world-7/coralReef';
+import { DancingCoral } from './world-7/dancingCoral';
+import { Hoops } from './hoops';
+import { Darts } from './darts';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -156,6 +162,12 @@ const domainList: Domain[] = [
     new Meritocraty("meritocraty"),
     new LegendTalents("legendTalents"),
     new Bubba("bubba"),
+    new CoralKid("coralKid"),
+    new BigFish("bigFish"),
+    new CoralReef("coralReef"),
+    new DancingCoral("dancingCoral"),
+    new Hoops("hoops"),
+    new Darts("darts"),
 ]
 
 export class IdleonData {
@@ -221,6 +233,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
+    "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
@@ -295,6 +308,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "grimoireEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateGrimoireEfficiency(accountData),
     "emperorMaxAttempts": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorMaxAttempts(accountData),
     "tesseractEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateTesseractEfficiency(accountData),
+    "coralReefDailyGains": (doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefDailyGain(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
