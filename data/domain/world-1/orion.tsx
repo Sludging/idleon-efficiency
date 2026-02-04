@@ -120,4 +120,28 @@ export class Orion extends Domain {
         return this.ownedMegafeathers > index ? 9 == index ? this.ownedMegafeathers - 9 : 1 : 0
     }
 }
+
+export const updateOrionGlobalBonus = (data: Map<string, any>) => {
+    const orion = data.get("orion") as Orion;
+    const companions = data.get("companions") as Companion[];
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+
+    // Global bonus boost
+    orion.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
+    orion.legendTalent26 = legendTalents.getBonusFromIndex(26);
+
+    return orion;
+}
+
+export const updateOrionFeatherRate = (data: Map<string, any>) => {
+    const orion = data.get("orion") as Orion;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const hole = data.get("hole") as Hole;
+
+    orion.vaultUpgrade21 = upgradeVault.getBonusForId(21);
+    orion.meritoBonus12 = meritocraty.getCurrentBonus(12);
+    orion.gambitBonus8 = hole.gambit.getBonus(8);
+
+    return orion;
 }
