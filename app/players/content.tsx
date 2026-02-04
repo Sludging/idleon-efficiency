@@ -316,6 +316,7 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                     <Stat stat={player.crystalChance} />
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
+                    <Stat stat={player.buildSpeed} />
                     {playerWorshipInfo.maxCharge > 0 &&
                         <Box>
                             <Text size="small">Charge Rate = {Math.round(playerWorshipInfo.chargeRate * 24)}% / day</Text>

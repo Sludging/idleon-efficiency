@@ -3,7 +3,7 @@ import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
-import { notUndefined, range } from '../utility';
+import { lavaLog, notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
 import { MapInfo } from "./maps";
@@ -41,6 +41,12 @@ import { EquipmentSets } from './misc/equipmentSets';
 import { LegendTalents } from './world-7/legendTalents';
 import { Companion } from './companions';
 import { Votes } from './world-2/votes';
+import { Storage } from './storage';
+import { ConstructionMastery, Rift, SkillMastery } from './world-4/rift';
+import { UpgradeVault } from './upgradeVault';
+import { Bubba } from './world-3/bubba';
+import { AtomCollider } from './world-3/construction/atomCollider';
+import { Summoning } from './world-6/summoning';
 
 export class PlayerStats {
     strength: number = 0;
@@ -147,6 +153,7 @@ export class Player {
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
     crystalChance: Stat = new Stat("Crystal Spawn Chance", undefined, "1 in ");
+    buildSpeed: Stat = new Stat("Build Speed", "/HR")
 
     // Misc
     extraLevelsFromTalent: number = 0;
@@ -450,6 +457,102 @@ export class Player {
         this.crystalChance.sources.push({ name: "Stamp", value: crystalSpawnStamp });
         this.crystalChance.sources.push({ name: "Talents", value: crystalForDaysTalentBonus + crystalSpawnTalentBonus });
         this.crystalChance.sources.push({ name: "Post Office", value: postOfficeBonus });
+    }
+
+    setBuildSpeed = (stampsBonusBuildProd: number, constructionBubbleBonus: number, guildBonus5: number, achievement153: number, constructionMasteryBonus: number, 
+        vialBonusContspd: number, turtleVialBonus: number, arcadeBonus44: number, votingBonus18: number, vaultUpgrade48: number, sheepiesKilled: number,
+        bubbaBonus1: number, atomCollider1: number, redoxSaltInStorage: number, winnerBonus13: number, paletteBonus25: number) => {
+        const constructionLevel = this.skills.get(SkillsIndex.Construction)?.level || 0;
+        const redoxSaltTalent = this.talents.find(x => x.skillIndex == 131)?.getBonus() ?? 0;
+        const gearBonus = this.getMiscBonusFromGear("Build Spd");
+        let postOfficeBonus = 0;
+        if (this.postOffice) {
+            const constructionBox = this.postOffice.find(box => box.name == "Construction Container");
+            if (constructionBox) {
+                postOfficeBonus = constructionBox.level > 0 ? constructionBox.bonuses[0].getBonus(constructionBox.level, 0) : 0;
+            }
+        }
+
+        const baseSpeed = 3 * Math.pow(constructionLevel / 2 + .7, 1.6);
+        const bubbleBonus = 1 + constructionLevel * constructionBubbleBonus / 100;
+        const talentBonus = (1 + redoxSaltTalent * (atomCollider1 + lavaLog(redoxSaltInStorage)) / 100);
+        const winnerBonus = 1 + winnerBonus13 / 100;
+        const paletteBonus = 1 + paletteBonus25 / 100;
+        const vialTurtleBonus = 1 + turtleVialBonus / 100;
+        const vaultBonus = vaultUpgrade48 * Math.floor(lavaLog(sheepiesKilled));
+        const totalAdditivePoints = stampsBonusBuildProd + postOfficeBonus + guildBonus5 + gearBonus + achievement153 + constructionMasteryBonus + vialBonusContspd + 
+                                    arcadeBonus44 + votingBonus18 + vaultBonus + bubbaBonus1;        
+        const additiveBonuses = 1 + totalAdditivePoints / 100;
+
+        this.buildSpeed.value = baseSpeed * bubbleBonus * additiveBonuses * talentBonus * winnerBonus * paletteBonus * vialTurtleBonus;
+        const totalSpeed = baseSpeed * bubbleBonus * additiveBonuses * talentBonus * winnerBonus * paletteBonus * vialTurtleBonus;
+        this.buildSpeed.value = totalSpeed;
+        const totalBonusSpeed = totalSpeed - baseSpeed;
+
+        if (this.playerID == 0) {
+            console.log(`g : ${bubbleBonus} = 1 + ${constructionLevel} * ${constructionBubbleBonus} / 100`);
+            console.log(`l : ${additiveBonuses} = ${stampsBonusBuildProd} + ${postOfficeBonus} + ${guildBonus5} + ${gearBonus} + ${achievement153} + ${constructionMasteryBonus} + ${vialBonusContspd} + ${arcadeBonus44} + ${votingBonus18} + ${vaultBonus} + ${bubbaBonus1}`);
+            console.log(`q : ${winnerBonus * paletteBonus * vialTurtleBonus} = ${winnerBonus} * ${paletteBonus} * ${vialTurtleBonus}`);
+            console.log(`talent : ${talentBonus} = (1 + ${redoxSaltTalent} * (${atomCollider1} + ${lavaLog(redoxSaltInStorage)}) / 100)`);
+        }
+
+        // Display values with weight
+        this.buildSpeed.sources = [];
+
+        const multipliers = [
+            { name: "Carpenter Bubble", m: bubbleBonus },
+            { name: "Redox Salt Talent", m: talentBonus },
+            { name: "Summoning  Bonus", m: winnerBonus },
+            { name: "Gaming Palette", m: paletteBonus },
+            { name: "Turtle Vial", m: vialTurtleBonus },
+            { name: "Additive Sources (Total)", m: additiveBonuses }
+        ];
+
+        const weights = multipliers.map(f => ({
+            name: f.name,
+            weight: Math.log(f.m)
+        }));
+        const totalWeight = weights.reduce((sum, w) => sum + w.weight, 0);
+
+        this.buildSpeed.sources.push({ name: "Base (construction level)", value: baseSpeed });
+        if (totalWeight > 0) {
+            let additiveShareValue = 0;
+
+            weights.forEach(block => {
+                const contribution = totalBonusSpeed * (block.weight / totalWeight);
+                
+                if (block.name === "Additive Sources (Total)") {
+                    additiveShareValue = contribution;
+                    this.buildSpeed.sources.push({ name: block.name, value: contribution });
+                } else if (contribution > 0.1) {
+                    this.buildSpeed.sources.push({ name: block.name, value: contribution });
+                }
+            });
+
+            // 5. Distribution Linéaire à l'intérieur du bloc additif
+            if (additiveShareValue > 0 && totalAdditivePoints > 0) {
+                const addSources = [
+                    { name: "^ Stamps", p: stampsBonusBuildProd },
+                    { name: "^ Post Office", p: postOfficeBonus },
+                    { name: "^ Guild", p: guildBonus5 },
+                    { name: "^ Gear", p: gearBonus },
+                    { name: "^ Achievements", p: achievement153 },
+                    { name: "^ Construct Mastery", p: constructionMasteryBonus },
+                    { name: "^ Vial (Equinox Fish)", p: vialBonusContspd },
+                    { name: "^ Arcade", p: arcadeBonus44 },
+                    { name: "^ Votes", p: votingBonus18 },
+                    { name: "^ Vault Upgrades", p: vaultBonus },
+                    { name: "^ Bubba", p: bubbaBonus1 }
+                ];
+
+                addSources.forEach(source => {
+                    if (source.p > 0) {
+                        const subContribution = additiveShareValue * (source.p / totalAdditivePoints);
+                        this.buildSpeed.sources.push({ name: source.name, value: subContribution });
+                    }
+                });
+            }
+        }
     }
 
     getActivityType = (): Activity => {
@@ -1305,14 +1408,19 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const legendTalents = data.get("legendTalents") as LegendTalents;
     const companions = data.get("companions") as Companion[];
     const votes = data.get("votes") as Votes;
+    const deathnote = data.get("deathnote") as Deathnote;
+    const storage = data.get("storage") as Storage;
+    const rift = data.get("rift") as Rift;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const bubba = data.get("bubba") as Bubba;
+    const atomCollider = data.get("collider") as AtomCollider;
+    const summoning = data.get("summoning") as Summoning;
+
+    const skillMastery = rift.bonuses.find(bonus => bonus.name == "Construct Mastery") as ConstructionMastery;
 
     // Double claim chance.
     const doubleChanceGuildBonus = guild.guildBonuses.find(bonus => bonus.name == "Anotha One")?.getBonus() ?? 0;
     const doubleChanceBribeBonus = bribes.find(bribe => bribe.bonus == "AfkDoubleEXP")?.value ?? 0;
-    players.forEach(player => {
-        const doubleChanceBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 19)
-        player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
-    })
 
     // Monster Cash.
     const mealBonus = cooking.meals.filter(meal => meal.bonusKey == "Cash").reduce((sum, meal) => sum += meal.getBonus() ?? 0, 0);
@@ -1321,7 +1429,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const labBonus = lab.bonuses.find(bonus => bonus.active && bonus.index == 9)?.getBonus() ?? 0;
     const vialBonus = alchemy.vials.find(vial => vial.name == "Dieter Drink")?.getBonus() ?? 0;
     const dungeonBonus = dungeons.passives.get(PassiveType.Flurbo)?.find(bonus => bonus.effect == "Monster Cash")?.getBonus() ?? 0;
-    const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
+    const guildBonus8 = guild.guildBonuses.find(bonus => bonus.index == 8)?.getBonus() ?? 0;
     const goldFoodStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "StampC7")?.getBonus() ?? 0;
     const goldFoodAchievement37 = achievementsInfo[37].completed;
     const goldFoodAchievement380 = achievementsInfo[380].completed;
@@ -1346,25 +1454,54 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
         apocalypseWoW = skillBonus * deathbringeWoWStacks;
     }
 
+    // Crystal Spawn Chance
+    const crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
+    const crysalShrine = shrines[ShrineConstants.CrystalShrine];
+
+    // Build Speed
+    const buildSpeedStampBonus = stamps.flatMap(stamp => stamp).find(stamp => stamp.raw_name == "BuildProd")?.getBonus() || 0;
+    const guildBonus5 = guild.guildBonuses.find(bonus => bonus.index == 5)?.getBonus() || 0;
+    const achievement153 = achievementsInfo[153].completed ? 5 : 0;
+    const constructionMasteryBonus = skillMastery.getBonusByIndex(4);
+    const vialEquinoxFishBonus = alchemy.vials.find(vial => vial.name == "Shinyfin Stew")?.getBonus() || 0;
+    const vialTurtleBonus = alchemy.vials.find(vial => vial.name == "Turtle Tisane")?.getBonus() || 0;
+    const arcadeBonus44 = arcade.bonuses.find(bonus => bonus.index == 44)?.getBonus() || 0;
+    const votingBonus18 = votes.getCurrentBonus(18);
+    const vaultUpgrade48 = upgradeVault.getBonusForId(48);
+    const sheepiesKilled = deathnote.mobKillCount.get("sheep")?.reduce((sum, killCount) => sum += Math.round(killCount), 0) ?? 0;
+    const bubbaBonus1 = bubba.getGlobalBonus(1);
+    const atomCollider1 = atomCollider.atoms.find(atom => atom.index == 1)?.getBonus() || 0;
+    const redoxSaltsOwned = storage.amountInStorage("Refinery1");
+    const winnerBonus13 = summoning.summonBonuses.find(bonus => bonus.index == 13)?.getBonus() || 0;
+    // TODO : add this once gaming have been updated with palette
+    const paletteBonus25 = 17;
+
+    // Apply everything to players
     players.forEach(player => {
-        const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15)
-        const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15)
-        const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15)
+        // Double claim chance
+        const doubleChanceBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 19);
+        player.setDoubleClaimChance(doubleChanceBubbleBonus, doubleChanceBribeBonus, doubleChanceGuildBonus);
+
+        // monster cash
+        const strBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 15);
+        const wisBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.HighIQ, 15);
+        const agiBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Quicc, 15);
         const goldFoodBubble = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 18);
         const equipmentSetBonus = equipmentSets.getSetBonus("SECRET_SET", player);
 
         player.setMonsterCash(strBubbleBonus, wisBubbleBonus, agiBubbleBonus, mealBonus,
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
-            dungeonBonus, guildBonus, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
+            dungeonBonus, guildBonus8, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
             zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
-    })
-
-    // Crystal Spawn Chance
-    const crystalSpawnStamp = stamps[StampTab.Misc][StampConsts.CrystallinIndex].getBonus();
-    const crysalShrine = shrines[ShrineConstants.CrystalShrine];
-    players.forEach(player => {
+    
+        // Crystal spawn chance
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
-    })
+
+        // Build Speed
+        const constructionBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 12);
+        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
+            arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
+    });
 }
 
 

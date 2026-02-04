@@ -12,6 +12,7 @@ import { ConstructionMastery, Rift } from "../../world-4/rift";
 import { Stamp } from "../../world-1/stamps";
 import { Storage } from "../../storage";
 import { DancingCoral } from "../../world-7/dancingCoral";
+import { Player } from "../../player";
 
 const BOOKS_FOR_MAX_CHECKOUT = 20;
 
@@ -51,6 +52,7 @@ export class Library {
 export class Construction extends Domain {
     buildings: Building[] = [];
     buildingSlots: number[] = [-1, -1, -1, -1, -1, -1, -1, -1];
+    totalBuildSpeed: number = 0;
     cogProgress: { name: string, progress: number }[] = [
         { name: "Nooby", progress: 0 },
         { name: "Decent", progress: 0 },
@@ -217,6 +219,15 @@ export const updateConstruction = (data: Map<string, any>) => {
     }
     construction.library.secondsToNextCheckout = construction.library.getTimeTillNextCheckout() - timeSinceCheck;
     construction.library.secondsToMaxCheckout = construction.library.getTimeTillMaxCheckout() - timeSinceCheck;
+
+    return construction;
+}
+
+export const updateConstructionSpeed = (data: Map<string, any>) => {
+    const construction = data.get("construction") as Construction;
+    const players = data.get("players") as Player[];
+
+    construction.totalBuildSpeed = players.reduce((sum, player) => sum += player.buildSpeed.value, 0);
 
     return construction;
 }
