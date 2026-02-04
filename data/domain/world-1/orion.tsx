@@ -114,7 +114,7 @@ export class Orion extends Domain {
         if (!bonus) return 0;
 
         return bonus.value * (1 + this.legendTalent26 / 100) * (1 + this.companionBonus51) * (1 + this.getGlobalBonusMulti() / 100) 
-            * Math.max(0, Math.ceil((this.getUpgradeLevel(1) - 1) / 6));
+            * Math.max(0, Math.ceil((this.getUpgradeLevel(1) - bonus.index) / 6));
     }
 
     getMegafeatherQuantity(index: number): number {
