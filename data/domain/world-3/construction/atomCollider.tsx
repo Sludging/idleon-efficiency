@@ -9,6 +9,10 @@ import { TaskBoard } from '../../tasks';
 import { Domain, RawData } from '../../base/domain';
 import { Item } from '../../items';
 import { getStampBonusForKey, Stamp } from '../../world-1/stamps';
+import { Grimoire } from '../../grimoire';
+import { Compass } from '../../compass';
+import { Bubba } from '../bubba';
+import { EventShop } from '../../eventShop';
 
 export class Atom {
     level: number = 0;
@@ -18,15 +22,21 @@ export class Atom {
     colliderBuildingLevel: number = 0;
     bubbleBonus: number = 0; // Y5
     meritBonus: number = 0;
+    paletteBonus35: number = 0;
+    grimoireBonus51: number = 0;
+    compassBonus50: number = 0;
+    bubbaBonus7: number = 0;
 
-    gamingMaxLevelBoost: number = 0;
+    superbit23MaxLevelBoost: number = 0;
+    compass53MaxLevelBoost: number = 0;
+    eventShop28MaxLevelBoost: number = 0;
     gamingDiscount: number = 0;
     stampDiscount: number = 0;
 
     constructor(public index: number, public data: AtomColliderModel) { }
 
     getMaxLevel = () => {
-        return 20 + this.gamingMaxLevelBoost;
+        return 20 + this.superbit23MaxLevelBoost + this.compass53MaxLevelBoost + this.eventShop28MaxLevelBoost;
     }
 
     getBonus = (): number => {
@@ -34,7 +44,7 @@ export class Atom {
     }
 
     getCost = (level: number = this.level): number => {
-        const bonusMath = (1 / (1 + (this.stampDiscount + this.nenoBonus + this.gamingDiscount + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus) / 100));
+        const bonusMath = 1 / (1 + (this.paletteBonus35 + this.stampDiscount + this.nenoBonus + this.gamingDiscount + this.grimoireBonus51 + this.compassBonus50 + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus + this.bubbaBonus7) / 100);
         const baseMath = this.data.baseCost + (level * this.data.growthFactor);
         const exponentMath = Math.pow(this.data.baseExponent, level);
         return Math.floor(bonusMath * baseMath * exponentMath);
@@ -173,6 +183,10 @@ export function updateAtomCollider(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const taskBoard = data.get("taskboard") as TaskBoard;
     const stamps = data.get("stamps") as Stamp[][];
+    const grimoire = data.get("grimoire") as Grimoire;
+    const compass = data.get("compass") as Compass;
+    const bubba = data.get("bubba") as Bubba;
+    const eventShop = data.get("eventShop") as EventShop;
 
     (collider.atoms[0] as HydrogenAtom).daysSinceUpgrade = optLacc[134];
     (collider.atoms[5] as CarbonAtom).wizardTowersOver50 = construction.buildings.slice(9, 18).reduce((sum, tower) => sum += Math.max(0, tower.level - 50), 0);
@@ -184,6 +198,13 @@ export function updateAtomCollider(data: Map<string, any>) {
     // Not using getBonus here since Lava says the bonus is 5 but it's really 7.
     const meritBonus = (taskBoard.merits.find(merit => merit.descLine1.includes("reduction in Atom Upgrade Costs"))?.level ?? 0) * 7;
     const stampBonus = getStampBonusForKey(stamps, "AtomCost");
+    // TODO : update this once palette have been added
+    const paletteBonus35 = 0;
+    const grimoireBonus51 = grimoire.getUpgradeBonus(51);
+    const compassBonus50 = compass.getUpgradeBonus(50);
+    const bubbaBonus7 = bubba.getGlobalBonus(7);
+    const compass53MaxLevelBoost = compass.getUpgradeBonus(53);
+    const eventShop28MaxLevelBoost = eventShop.isBonusOwned(28) ? 20 : 0;
 
     collider.atoms.forEach(atom => {
         atom.bubbleBonus = bubbleBonusY5;
@@ -191,6 +212,12 @@ export function updateAtomCollider(data: Map<string, any>) {
         atom.nenoBonus = nenoBonus;
         atom.meritBonus = meritBonus;
         atom.stampDiscount = stampBonus;
+        atom.paletteBonus35 = paletteBonus35;
+        atom.grimoireBonus51 = grimoireBonus51;
+        atom.compassBonus50 = compassBonus50;
+        atom.bubbaBonus7 = bubbaBonus7;
+        atom.compass53MaxLevelBoost = compass53MaxLevelBoost;
+        atom.eventShop28MaxLevelBoost = eventShop28MaxLevelBoost;
     })
 
     return collider;

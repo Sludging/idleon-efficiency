@@ -236,12 +236,10 @@ export const updateSuperbitImpacts = (data: Map<string, any>) => {
     }
 
     const atomCollider = data.get("collider") as AtomCollider;
-    if (gaming.superbits[21].unlocked) {
-        atomCollider.atoms.forEach(atom => atom.gamingDiscount = 10);
-    }
-    if (gaming.superbits[23].unlocked) {
-        atomCollider.atoms.forEach(atom => atom.gamingMaxLevelBoost = 10);
-    }
+    atomCollider.atoms.forEach(atom => {
+        atom.gamingDiscount = (gaming.superbits[21].unlocked || false) ? 10 : 0;
+        atom.superbit23MaxLevelBoost = (gaming.superbits[23].unlocked || false) ? 10 : 0;
+    });
 
     if (gaming.superbits[35].unlocked) {
         equinox.upgrades.forEach(upgrade => upgrade.bonusLevelFromSuperBit35 = 10);
