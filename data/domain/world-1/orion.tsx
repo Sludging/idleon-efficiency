@@ -127,7 +127,6 @@ export const updateOrionGlobalBonus = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
-    // Global bonus boost
     orion.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
     orion.legendTalent26 = legendTalents.getBonusFromIndex(26);
 
