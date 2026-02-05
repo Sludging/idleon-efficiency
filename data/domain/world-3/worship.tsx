@@ -12,20 +12,31 @@ import { SkillsIndex } from "../SkillsIndex";
 import { Stamp, StampConsts, StampTab } from "../world-1/stamps";
 import { ClassIndex, TalentConst } from "../talents";
 import { Sneaking } from "../world-6/sneaking";
+import { UpgradeVault } from "../upgradeVault";
+import { Arcade } from "../world-2/arcade";
+import { EquipmentSets } from "../misc/equipmentSets";
+import { Bubba } from "./bubba";
 
-const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict Breezy_Battle".split(" ");
-const totemMapIds: number[] = [26, 63, 30, 107, 155, 208, 259];
+const totemNames: string[] = "Goblin_Gorefest Wakawaka_War Acorn_Assault Frosty_Firefight Clash_of_Cans Citric_Conflict Breezy_Battle Pufferblob_Brawl".split(" ");
+const totemMapIds: number[] = [26, 63, 30, 107, 155, 208, 259, 308];
 
-const worshipBaseInfo: string[][] = ["3 130 goblinG 0 170 570 25 60 1".split(" "),
-"5 70 moonman 21 42 357 40 250 10".split(" "),
-"9 40 acorn 38 655 200 60 1000 30".split(" "),
-"18 190 snowball 56 42 357 90 3000 40".split(" "),
-"34 300 w4b2 74 2 493 120 8000 50".split(" "),
-"55 45 w5b3 91 158 362 250 25000 60".split(" "),
-"120 65 w6b4 108 53 842 700 250000 80".split(" "),
+const worshipBaseInfo: string[][] = [
+    "3 130 goblinG 0 170 570 25 60 1".split(" "),
+    "5 70 moonman 21 42 357 40 250 10".split(" "),
+    "9 40 acorn 38 655 200 60 1000 30".split(" "),
+    "18 190 snowball 56 42 357 90 3000 40".split(" "),
+    "34 300 w4b2 74 2 493 120 8000 50".split(" "),
+    "55 45 w5b3 91 158 362 250 25000 60".split(" "),
+    "120 65 w6b4 108 53 842 700 250000 80".split(" "),
+    "250 210 w7a8 126 109 508 1000 2500000 100".split(" "),
 ]
 
 export class Totem {
+    bubbaBonus3: number = 0;
+    dementiaSetBonus: number = 0;
+    arcadeBonus24: number = 0;
+    vaultUpgrade50: number = 0;
+
     constructor(public name: string, public map: MapDataBase, public maxWave: number, public index: number) { }
 
     getWaveMultiplier = () => {
@@ -46,19 +57,17 @@ export class Totem {
             return Math.floor(100 * Math.pow(efficiency / (10 * baseInfo), 0.25))
         }
         return 0;
-
     }
 
     getChargeCost = () => {
         return Number(worshipBaseInfo[this.index][6]);
     }
 
-    getSoulRewards = (efficiency: number = 0, foodBonus: number = 0) => {
-        return Math.floor(5 * (1 + (this.getEfficiencyBonus(efficiency) / 100)) * this.getWaveMultiplier() * (1 + (foodBonus / 100)))
+    getSoulRewards = (efficiency: number = 0, foodBonus: number = 0, talent57: number = 0, useDementiaSetBonus: boolean = true) => {
+        return Math.floor(5 * (1 + this.getEfficiencyBonus(efficiency) / 100) * this.getWaveMultiplier() * (1 + (foodBonus + (useDementiaSetBonus ? this.dementiaSetBonus : 0) + this.bubbaBonus3) / 100) 
+            * (1 + talent57 / 100) * (1 + this.arcadeBonus24 / 100) * (1 + this.vaultUpgrade50 / 100));
     }
-
 }
-
 
 export enum TotalizerBonus {
     Damage = 0,
@@ -70,6 +79,9 @@ export enum TotalizerBonus {
     FarmingExp = 6,
     JadeCoin = 7,
     EssenceGain = 8,
+    SpelunkingPow = 9,
+    // TODO : update this once the second part of World 7 releases
+    World7SeconSkill = 10,
 }
 
 export class Totalizer {
@@ -85,14 +97,16 @@ export class Totalizer {
         switch (bonus) {
             case TotalizerBonus.Damage:
             case TotalizerBonus.BoatSpeed:
-            case TotalizerBonus.ExpMulti:
             case TotalizerBonus.SkillExp:
-            case TotalizerBonus.FarmingExp:
-            case TotalizerBonus.JadeCoin:
-            case TotalizerBonus.EssenceGain:
                 return Math.floor(this.totalWaves / 10);
-            case TotalizerBonus.Cooking: return 10 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.EssenceGain: return 1.5 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.FarmingExp: return 1.75 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.JadeCoin: return 2 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.ExpMulti: return 1.12 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.Cooking: return 13 * Math.floor(this.totalWaves / 10);
             case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
+            case TotalizerBonus.SpelunkingPow: return 2.5 * Math.max(0, Math.floor((this.totalWaves - 300) / 10));
+            case TotalizerBonus.World7SeconSkill: return 0;
             default: return 0;
         }
     }
@@ -108,6 +122,8 @@ export class Totalizer {
             case TotalizerBonus.FarmingExp: return "+{% Farming EXP";
             case TotalizerBonus.JadeCoin: return "+{% Jade Coins ";
             case TotalizerBonus.EssenceGain: return "+{% All Essence Gain";
+            case TotalizerBonus.SpelunkingPow: return "+{% Spelunking Power";
+            case TotalizerBonus.World7SeconSkill: return "Nothing for now";
             default: return "";
         }
     }
@@ -145,6 +161,8 @@ export class Worship extends Domain {
 
     totalizer: Totalizer = new Totalizer();
 
+    dementiaSetAlwaysActive: boolean = false;
+
     static getEstimatedCharge = (currentCharge: number, chargeRate: number, maxCharge: number, timeAwayInSeconds: number) => {
         return Math.min(currentCharge + chargeRate * (timeAwayInSeconds / 3600), maxCharge);
     }
@@ -176,7 +194,7 @@ export class Worship extends Domain {
 
     init(_allItems: Item[], _charCount: number) {
         this.totemInfo = [];
-        [...Array(7)].forEach((_, index) => {
+        [...Array(8)].forEach((_, index) => {
             this.totemInfo.push(new Totem(totemNames[index].replace(/_/g, " "), MapInfo[totemMapIds[index]], 0, index));
         });
 
@@ -232,6 +250,12 @@ export const updateWorshipTotalizer = (data: Map<string, any>) => {
     }
     if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 14)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
+    }
+    if (gaming.superbits[27].unlocked || false) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.SpelunkingPow);
+    }
+    if (gaming.superbits[44].unlocked || false) {
+        worship.totalizer.unlockedBonuses.push(TotalizerBonus.World7SeconSkill);
     }
 
     return worship;
@@ -292,6 +316,31 @@ export const updateWorship = (data: Map<string, any>) => {
         worship.totalData.maxCharge = worship.playerData[bestWizard.playerID].maxCharge + (bestWizard.talents.find(talent => talent.skillIndex == 475)?.getBonus(false, true, true) ?? 0);
         worship.totalData.overFlowTime = (worship.totalData.maxCharge - worship.totalData.currentCharge) / (worship.totalData.chargeRate / 60 / 60);
     }
+
+    return worship;
+}
+
+export const updateTotemsBonuses = (data: Map<string, any>) => {
+    const worship = data.get("worship") as Worship;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const arcade = data.get("arcade") as Arcade;
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const bubba = data.get("bubba") as Bubba;
+
+    const bubbaBonus3 = bubba.getGlobalBonus(3);
+    const dementiaSet = equipmentSets.equipmentSets.find(set => set.data.name == "DEMENTIA_SET");
+    const dementiaSetBonus = dementiaSet?.getBonus(true) || 0;
+    const arcadeBonus24 = arcade.bonuses.find(bonus => bonus.index == 24)?.getBonus() || 0;
+    const vaultUpgrade50 = upgradeVault.getBonusForId(50);
+
+    worship.dementiaSetAlwaysActive = dementiaSet?.unlocked || false;
+
+    worship.totemInfo.forEach(totem =>{
+        totem.bubbaBonus3 = bubbaBonus3;
+        totem.dementiaSetBonus = dementiaSetBonus;
+        totem.arcadeBonus24 = arcadeBonus24;
+        totem.vaultUpgrade50 = vaultUpgrade50;
+    });
 
     return worship;
 }

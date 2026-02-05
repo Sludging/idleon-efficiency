@@ -444,7 +444,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalSigilsLevels = sigils.sigils.reduce((sum, sigil) => sum + (sigil.boostLevel + 1), 0);
 
     // Sum of best worship waves
-    // TODO : update worship to include the new totem
     const totalBestWorshipWaves = worshipData.totemInfo.reduce((sum, totem) => sum + totem.maxWave, 0);
 
     // Sum of all deathnote kills digit
@@ -499,7 +498,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalBoatLevels = sailing.boats.reduce((sum, boat) => sum + boat.lootUpgrades + boat.speedUpgrades, 0);
 
     // Number of artifact found
-    // TODO : update this once new status is added, result is 0 right now
     const totalArtifactFound = sailing.artifacts.reduce((sum, artifact) =>
         artifact.status == ArtifactStatus.Obtained ? sum + 1
             : artifact.status == ArtifactStatus.Ancient ? sum + 2

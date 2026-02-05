@@ -16,7 +16,7 @@ import { SaltLick } from './world-3/construction/saltLick';
 import { Printer, updatePrinter } from './world-3/construction/printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
-import { Worship, updateWorship, updateWorshipTotalizer } from './world-3/worship';
+import { Worship, updateTotemsBonuses, updateWorship, updateWorshipTotalizer } from './world-3/worship';
 import { Construction, updateConstruction } from './world-3/construction/construction';
 import { updateCards, Cards } from './cards';
 import { Arcade, updateArcade } from './world-2/arcade';
@@ -299,6 +299,7 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "updateWorshipTotemsSoulGainBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTotemsBonuses(accountData),
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
     "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
