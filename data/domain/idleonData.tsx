@@ -74,6 +74,7 @@ import { DancingCoral } from './world-7/dancingCoral';
 import { Hoops } from './world-1/hoops';
 import { Darts } from './world-1/darts';
 import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
+import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -170,6 +171,7 @@ const domainList: Domain[] = [
     new Hoops("hoops"),
     new Darts("darts"),
     new Orion("orion"),
+    new Poppy("poppy"),
 ]
 
 export class IdleonData {
@@ -235,6 +237,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
+    "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
@@ -297,6 +300,7 @@ const postProcessingMap: Record<string, Function> = {
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
+    "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),

@@ -202,4 +202,27 @@ export class Poppy extends Domain {
         return this.ownedMegafishes > index ? 11 == index ? this.ownedMegafishes - 11 : 1 : 0
     }
 }
+
+export const updatePoppyGlobalBonus = (data: Map<string, any>) => {
+    const poppy = data.get("poppy") as Poppy;
+    const companions = data.get("companions") as Companion[];
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+
+    poppy.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
+    poppy.legendTalent26 = legendTalents.getBonusFromIndex(26);
+
+    return poppy;
+}
+
+export const updatePoppyFishRate = (data: Map<string, any>) => {
+    const poppy = data.get("poppy") as Poppy;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+    const meritocraty = data.get("meritocraty") as Meritocraty;
+    const hole = data.get("hole") as Hole;
+
+    poppy.vaultUpgrade21 = upgradeVault.getBonusForId(21);
+    poppy.meritoBonus12 = meritocraty.getCurrentBonus(12);
+    poppy.gambitBonus8 = hole.gambit.getBonus(8);
+
+    return poppy;
 }
