@@ -31,7 +31,6 @@ export class Superbits {
         return data.map(superbit => new Superbits(superbit.index, superbit.data))
     }
 
-
     getCost = () => {
         return this.data.x1 * Math.pow(10, this.data.x2);
     }
@@ -237,7 +236,7 @@ export const updateSuperbitImpacts = (data: Map<string, any>) => {
 
     const atomCollider = data.get("collider") as AtomCollider;
     atomCollider.atoms.forEach(atom => {
-        atom.gamingDiscount = (gaming.superbits[21].unlocked || false) ? 10 : 0;
+        atom.superbit21Discount = (gaming.superbits[21].unlocked || false) ? 10 : 0;
         atom.superbit23MaxLevelBoost = (gaming.superbits[23].unlocked || false) ? 10 : 0;
     });
 

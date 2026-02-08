@@ -30,7 +30,7 @@ export class Atom {
     superbit23MaxLevelBoost: number = 0;
     compass53MaxLevelBoost: number = 0;
     eventShop28MaxLevelBoost: number = 0;
-    gamingDiscount: number = 0;
+    superbit21Discount: number = 0;
     stampDiscount: number = 0;
 
     constructor(public index: number, public data: AtomColliderModel) { }
@@ -44,10 +44,12 @@ export class Atom {
     }
 
     getCost = (level: number = this.level): number => {
-        const bonusMath = 1 / (1 + (this.paletteBonus35 + this.stampDiscount + this.nenoBonus + this.gamingDiscount + this.grimoireBonus51 + this.compassBonus50 + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus + this.bubbaBonus7) / 100);
+        const bonusMath = 1 / (1 + (this.paletteBonus35 + this.stampDiscount + this.nenoBonus + this.superbit21Discount + this.grimoireBonus51 + this.compassBonus50 + this.bubbleBonus + (this.colliderBuildingLevel / 10) + this.meritBonus + this.bubbaBonus7) / 100);
         const baseMath = this.data.baseCost + (level * this.data.growthFactor);
         const exponentMath = Math.pow(this.data.baseExponent, level);
-        return Math.floor(bonusMath * baseMath * exponentMath);
+        const cost = bonusMath * baseMath * exponentMath;
+        // Game only floors costs < 1 million, keeps decimals for larger costs
+        return cost < 1e6 ? Math.floor(cost) : cost;
     }
 
     getCostToUnlock = () => {
