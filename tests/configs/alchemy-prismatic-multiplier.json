@@ -1,0 +1,46 @@
+{
+  "description": "Extract data for alchemy prismatic bubble multiplier calculation",
+  "target": "Alchemy Prismatic Multiplier",
+  "extractions": [
+    {
+      "label": "arcane_upgrade_45_bonus",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 45, 0)",
+      "description": "Arcane (tesseract) upgrade 45 bonus"
+    },
+    {
+      "label": "arcade_bonus_54",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
+      "description": "Arcade bonus 54"
+    },
+    {
+      "label": "world_6_trophy_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
+      "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)"
+    },
+    {
+      "label": "palette_bonus_28",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
+      "description": "Gaming palette bonus 28"
+    },
+    {
+      "label": "total_purple_sigils",
+      "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
+      "description": "Total purple sigils (boost level >= 4)"
+    },
+    {
+      "label": "exotic_market_bonus_48",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 48, 0)",
+      "description": "Exotic market bonus 48"
+    },
+    {
+      "label": "legend_talent_36_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
+      "description": "Legend talent 36 bonus"
+    },
+    {
+      "label": "prismatic_multiplier",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "description": "Final prismatic multiplier calculation (min 3, base 2)"
+    }
+  ]
+}

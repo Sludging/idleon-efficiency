@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-02-08T06:13:36.875Z",
+  "extractions": {
+    "arcane_upgrade_45_bonus": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 45, 0)",
+      "result": 0,
+      "description": "Arcane (tesseract) upgrade 45 bonus",
+      "extractedAt": "2026-02-08T06:13:36.930Z"
+    },
+    "arcade_bonus_54": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
+      "result": 4,
+      "description": "Arcade bonus 54",
+      "extractedAt": "2026-02-08T06:13:36.938Z"
+    },
+    "world_6_trophy_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
+      "result": 0,
+      "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)",
+      "extractedAt": "2026-02-08T06:13:36.994Z"
+    },
+    "palette_bonus_28": {
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
+      "result": 0,
+      "description": "Gaming palette bonus 28",
+      "extractedAt": "2026-02-08T06:13:37.000Z"
+    },
+    "total_purple_sigils": {
+      "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
+      "result": 0,
+      "description": "Total purple sigils (boost level >= 4)",
+      "extractedAt": "2026-02-08T06:13:37.006Z"
+    },
+    "exotic_market_bonus_48": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 48, 0)",
+      "result": 0.15327793167128348,
+      "description": "Exotic market bonus 48",
+      "extractedAt": "2026-02-08T06:13:37.009Z"
+    },
+    "legend_talent_36_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
+      "result": 3,
+      "description": "Legend talent 36 bonus",
+      "extractedAt": "2026-02-08T06:13:37.015Z"
+    },
+    "prismatic_multiplier": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "result": 2.071532779316713,
+      "description": "Final prismatic multiplier calculation (min 3, base 2)",
+      "extractedAt": "2026-02-08T06:13:37.020Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
