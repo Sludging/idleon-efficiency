@@ -1,47 +1,47 @@
 {
-  "timestamp": "2026-02-02T11:54:13.383Z",
+  "timestamp": "2026-02-08T06:03:47.208Z",
   "extractions": {
     "mainframe_jewel_16": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 116)",
       "result": 25.6,
       "description": "Mainframe jewel 16 bonus (meal bonus)",
-      "extractedAt": "2026-02-02T11:54:13.400Z"
+      "extractedAt": "2026-02-08T06:03:47.218Z"
     },
     "shiny_bonus_20": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 20, -1)",
       "result": 17,
       "description": "Breeding shiny bonus 20 (meal bonus)",
-      "extractedAt": "2026-02-02T11:54:13.409Z"
+      "extractedAt": "2026-02-08T06:03:47.221Z"
     },
     "win_bonus_26": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
       "result": 98.2215,
       "description": "Summoning winner bonus 26 (meal bonus)",
-      "extractedAt": "2026-02-02T11:54:13.417Z"
+      "extractedAt": "2026-02-08T06:03:47.228Z"
     },
     "ribbon_bonus_meal_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"RibbonBonus\", idleon.engine.getGameAttribute(\"Ribbon\")[28 + 11], 0)",
       "result": 1,
       "description": "Ribbon bonus for meal 11",
-      "extractedAt": "2026-02-02T11:54:13.426Z"
+      "extractedAt": "2026-02-08T06:03:47.233Z"
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
-      "result": 621.8604898,
+      "result": 638.82032134,
       "description": "Meal bonus for Sailing",
-      "extractedAt": "2026-02-02T11:54:13.430Z"
+      "extractedAt": "2026-02-08T06:03:47.238Z"
     },
     "meal_bonus_mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
       "result": 41793.9432657066,
       "description": "Meal bonus for Mcook",
-      "extractedAt": "2026-02-02T11:54:13.437Z"
+      "extractedAt": "2026-02-08T06:03:47.241Z"
     },
     "meal_bonus_kitchen_eff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 4188.6543945915,
       "description": "Meal bonus for KitchenEff",
-      "extractedAt": "2026-02-02T11:54:13.446Z"
+      "extractedAt": "2026-02-08T06:03:47.247Z"
     }
   },
   "errors": {},
