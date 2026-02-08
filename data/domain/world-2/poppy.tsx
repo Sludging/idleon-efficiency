@@ -199,7 +199,18 @@ export class Poppy extends Domain {
     }
 
     getMegafishQuantity(index: number): number {
-        return this.ownedMegafishes > index ? 11 == index ? this.ownedMegafishes - 11 : 1 : 0
+        // If we don't own this megafish yet, return 0
+        if (index > this.ownedMegafishes) {
+            return 0;
+        }
+
+        // If this is the last megafish, we can have multiples
+        if (index == 11) {
+            return this.ownedMegafishes - 11;
+        }
+
+        // For everything else, quantity is simply 1.
+        return 1;
     }
 }
 

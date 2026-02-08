@@ -1,24 +1,10 @@
-/**
- * Orion Global Bonus Parameter Validation
- *
- * Tests our Orion global bonus parameter calculations against live game data.
- *
- * Formula for each bonus:
- *   baseValue * (1 + legendTalent26 / 100) * (1 + companion51) * (1 + owlBonusAll / 100)
- *     * Math.max(0, Math.ceil((upgradeLevel1 - index) / 6))
- *
- * Where owlBonusAll (megafeather multiplier):
- *   100*megafeather(1) + 100*megafeather(3) + 100*megafeather(5) + 100*megafeather(7)
- *     + 100*min(1, megafeather(9)) + 50*max(0, megafeather(9) - 1)
- */
-
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Companion } from '../../../data/domain/companions';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
 const saveName = 'latest';
-const extractionResultsName = 'orion-global-bonus-data.json';
+const extractionResultsName = 'poppy-global-bonus-data.json';
 
 const parameterSpecs = {
   legend_talent_26_bonus: {
@@ -41,7 +27,7 @@ const parameterSpecs = {
   },
 };
 
-describe('Orion Domain - Global Bonus - Parameters', () => {
+describe('Poppy Domain - Global Bonus - Parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
 

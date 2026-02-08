@@ -1,0 +1,56 @@
+{
+  "description": "Extract data for Poppy (Roo) global bonus calculations",
+  "target": "Poppy Global Bonuses",
+  "extractions": [
+    {
+      "label": "legend_talent_26_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
+      "description": "Legend talent 26 bonus (Orion/Poppy Overload)"
+    },
+    {
+      "label": "companion_51_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 51, 0)",
+      "description": "Companion 51 bonus (multiplier for Orion/Poppy bonuses)"
+    },
+    {
+      "label": "upgrade_level_3",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[271]",
+      "description": "Poppy upgrade 3 level (controls bonus unlock progression)"
+    },
+    {
+      "label": "global_bonus_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 0, 0)",
+      "description": "Global bonus 0: +{% Fish Efficiency (base 3)"
+    },
+    {
+      "label": "global_bonus_1",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 1, 0)",
+      "description": "Global bonus 1: +{ Defence (base 3)"
+    },
+    {
+      "label": "global_bonus_2",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 2, 0)",
+      "description": "Global bonus 2: +{% Fishing XP (base 5)"
+    },
+    {
+      "label": "global_bonus_3",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 3, 0)",
+      "description": "Global bonus 3: +{% Accuracy (base 2)"
+    },
+    {
+      "label": "global_bonus_4",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 4, 0)",
+      "description": "Global bonus 4: +{% Total DMG (base 2)"
+    },
+    {
+      "label": "global_bonus_5",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 5, 0)",
+      "description": "Global bonus 5: +{% AFK Gains (base 0.5)"
+    },
+    {
+      "label": "global_bonus_6",
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 6, 0)",
+      "description": "Global bonus 6: +{% Cash (base 3)"
+    }
+  ]
+}
