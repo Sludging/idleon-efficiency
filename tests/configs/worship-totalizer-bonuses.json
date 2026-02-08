@@ -1,0 +1,66 @@
+{
+  "description": "Extract data for Worship Totalizer bonus calculations",
+  "target": "Worship Totalizer Bonuses",
+  "extractions": [
+    {
+      "label": "total_waves",
+      "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((sum, val) => sum + val, 0)",
+      "description": "Total waves across all totems"
+    },
+    {
+      "label": "bonus_0_damage",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 0, 0)",
+      "description": "Totalizer bonus 0 - Damage"
+    },
+    {
+      "label": "bonus_1_cooking",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 1, 0)",
+      "description": "Totalizer bonus 1 - Cooking"
+    },
+    {
+      "label": "bonus_2_boat_speed",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 2, 0)",
+      "description": "Totalizer bonus 2 - Boat Speed"
+    },
+    {
+      "label": "bonus_3_bit_value",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 3, 0)",
+      "description": "Totalizer bonus 3 - Bit Value"
+    },
+    {
+      "label": "bonus_4_exp_multi",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 4, 0)",
+      "description": "Totalizer bonus 4 - Exp Multi"
+    },
+    {
+      "label": "bonus_5_skill_exp",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 5, 0)",
+      "description": "Totalizer bonus 5 - Skill Exp"
+    },
+    {
+      "label": "bonus_6_farming_exp",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 6, 0)",
+      "description": "Totalizer bonus 6 - Farming Exp"
+    },
+    {
+      "label": "bonus_7_jade_coin",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 7, 0)",
+      "description": "Totalizer bonus 7 - Jade Coin"
+    },
+    {
+      "label": "bonus_8_essence_gain",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 8, 0)",
+      "description": "Totalizer bonus 8 - Essence Gain"
+    },
+    {
+      "label": "bonus_9_spelunking_pow",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 9, 0)",
+      "description": "Totalizer bonus 9 - Spelunking Power"
+    },
+    {
+      "label": "bonus_10_world7_skill",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
+      "description": "Totalizer bonus 10 - World 7 Second Skill (not yet implemented)"
+    }
+  ]
+}
