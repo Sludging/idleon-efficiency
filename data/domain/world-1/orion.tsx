@@ -118,7 +118,18 @@ export class Orion extends Domain {
     }
 
     getMegafeatherQuantity(index: number): number {
-        return this.ownedMegafeathers > index ? 9 == index ? this.ownedMegafeathers - 9 : 1 : 0
+        // If we don't own this megafeather yet, return 0
+        if (index > this.ownedMegafeathers) {
+            return 0;
+        }
+
+        // If this is the last megafeather, we can have multiples
+        if (index == 9) {
+            return this.ownedMegafeathers - 9;
+        }
+
+        // For everything else, quantity is simply 1.
+        return 1;
     }
 }
 
