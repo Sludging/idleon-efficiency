@@ -17,7 +17,8 @@ export class BubbaGlobalBonus {
 
     static fromBase() {
         return [
-            new BubbaGlobalBonus(0, "{/minute", 1),
+            // This is in the game but obviously not an actual global bonus.
+            //new BubbaGlobalBonus(0, "{/minute", 1),
             new BubbaGlobalBonus(1, "+{% Build Rate", 10),
             new BubbaGlobalBonus(2, "+{% Critter Gain", 5),
             new BubbaGlobalBonus(3, "+{% Soul Gain", 5),

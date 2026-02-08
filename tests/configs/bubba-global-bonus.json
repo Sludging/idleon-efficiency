@@ -1,0 +1,51 @@
+{
+  "description": "Extract data for Bubba global bonus calculations",
+  "target": "Bubba Global Bonuses",
+  "extractions": [
+    {
+      "label": "companion_51_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 51, 0)",
+      "description": "Companion 51 bonus (multiplier for Bubba bonuses)"
+    },
+    {
+      "label": "upgrade_level_3",
+      "expression": "idleon.getAttr(\"Bubba\")[1][3]",
+      "description": "Bubba upgrade 3 level (controls bonus unlock progression)"
+    },
+    {
+      "label": "global_bonus_1",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
+      "description": "Global bonus 1: +{% Build Rate (base 10)"
+    },
+    {
+      "label": "global_bonus_2",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 2, 0)",
+      "description": "Global bonus 2: +{% Critter Gain (base 5)"
+    },
+    {
+      "label": "global_bonus_3",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
+      "description": "Global bonus 3: +{% Soul Gain (base 5)"
+    },
+    {
+      "label": "global_bonus_4",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 4, 0)",
+      "description": "Global bonus 4: +{% Total DMG (base 15)"
+    },
+    {
+      "label": "global_bonus_5",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 5, 0)",
+      "description": "Global bonus 5: +{% All Kills (base 1)"
+    },
+    {
+      "label": "global_bonus_6",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 6, 0)",
+      "description": "Global bonus 6: {% XP Multi (base 4)"
+    },
+    {
+      "label": "global_bonus_7",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
+      "description": "Global bonus 7: -{% Atom Cost (base 3)"
+    }
+  ]
+}
