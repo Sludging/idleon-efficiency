@@ -1,5 +1,5 @@
-import { Alchemy } from "../alchemy";
-import { Arcade } from "../arcade";
+import { Alchemy } from "../world-2/alchemy/alchemy";
+import { Arcade } from "../world-2/arcade";
 import { Domain, RawData } from "../base/domain";
 import { Card } from "../cards";
 import { Companion } from "../companions";
@@ -8,7 +8,7 @@ import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
 import { Item } from "../items";
 import { CoralReefUpgradeModel } from "../model/coralReefUpgradeModel";
-import { PlayerStatues } from "../statues";
+import { PlayerStatues } from "../world-1/statues";
 import { getStampBonusForKey, Stamp } from "../world-1/stamps";
 import { KillRoy } from "../world-2/killroy";
 import { Sneaking } from "../world-6/sneaking";

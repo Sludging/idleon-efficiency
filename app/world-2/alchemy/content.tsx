@@ -13,7 +13,7 @@ import {
 } from "grommet"
 import styled from 'styled-components'
 
-import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../../data/domain/alchemy';
+import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Achievement, AchievementConst } from '../../../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { nFormatter, round } from '../../../data/utility'
@@ -22,10 +22,10 @@ import { Item } from "../../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { Ascending } from "grommet-icons";
 import IconImage from "../../../components/base/IconImage";
-import { Sigils } from "../../../data/domain/sigils";
+import { Sigils } from "../../../data/domain/world-2/alchemy/sigils";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
 import { TimeDown } from "../../../components/base/TimeDisplay";
-import { AtomCollider } from "../../../data/domain/atomCollider";
+import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import P2WDisplay from "../../../components/world-2/alchemy/p2w";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";

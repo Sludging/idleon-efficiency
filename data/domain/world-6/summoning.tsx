@@ -10,15 +10,14 @@ import { Player } from "../player";
 import { SummonEnemyBonusModel } from "../model/summonEnemyBonusModel";
 import { Sneaking } from "./sneaking";
 import { nFormatter, notateNumber } from "../../utility";
-import { deathNoteMobOrder } from '../deathnote';
+import { deathNoteMobOrder } from '../world-3/construction/deathnote';
 import { SummonEnemyModel } from "../model/summonEnemyModel";
-import { Sailing } from "../sailing";
+import { Sailing } from "../world-5/sailing/sailing";
 import { TaskBoard } from "../tasks";
 import { Achievement } from "../achievements";
-import { Votes } from "../world-2/votes";
-import { Equinox } from "../equinox";
-import { Cooking } from "../cooking";
-import { Emperor } from "../emperor";
+import { Equinox } from "../world-3/equinox";
+import { Cooking } from "../world-4/cooking";
+import { Emperor } from "../world-6/emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
 
 const WhiteBattleOrder = [

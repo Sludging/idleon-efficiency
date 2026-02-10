@@ -1,13 +1,13 @@
 import { Box, CheckBox, Grid, Text } from "grommet";
 import React, { useMemo, useState } from "react";
 import { Item } from "../../../data/domain/items";
-import { Refinery } from "../../../data/domain/refinery";
-import { SaltLick } from "../../../data/domain/saltLick";
+import { Refinery } from "../../../data/domain/world-3/construction/refinery";
+import { SaltLick } from "../../../data/domain/world-3/construction/saltLick";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel from "../../base/TextAndLabel";
-import { Construction } from "../../../data/domain/construction";
+import { Construction } from "../../../data/domain/world-3/construction/construction";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 

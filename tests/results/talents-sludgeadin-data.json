@@ -1,117 +1,117 @@
 {
-  "timestamp": "2026-02-02T11:54:14.687Z",
+  "timestamp": "2026-02-08T06:03:48.649Z",
   "extractions": {
     "talent_42_enhanced": {
       "expression": "idleon.callFunction(\"TalentEnh\", 42)",
       "result": 1,
       "description": "Talent 42 enhanced",
-      "extractedAt": "2026-02-02T11:54:14.697Z"
+      "extractedAt": "2026-02-08T06:03:48.658Z"
     },
     "talent_497_enhanced": {
       "expression": "idleon.callFunction(\"TalentEnh\", 497)",
       "result": 1,
       "description": "Talent 497 enhanced",
-      "extractedAt": "2026-02-02T11:54:14.700Z"
+      "extractedAt": "2026-02-08T06:03:48.662Z"
     },
     "talent_79_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 79)",
       "result": 0,
       "description": "Talent 79 bonus",
-      "extractedAt": "2026-02-02T11:54:14.709Z"
+      "extractedAt": "2026-02-08T06:03:48.668Z"
     },
     "talent_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
       "result": 2048.4002145854793,
       "description": "Talent 146 bonus - Apocalypse Chow",
-      "extractedAt": "2026-02-02T11:54:14.717Z"
+      "extractedAt": "2026-02-08T06:03:48.672Z"
     },
     "talent_536_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 536)",
-      "result": 47.82961460446248,
+      "result": 47.85425101214575,
       "description": "Talent 536 bonus",
-      "extractedAt": "2026-02-02T11:54:14.728Z"
+      "extractedAt": "2026-02-08T06:03:48.679Z"
     },
     "talent_35_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 35)",
       "result": 0,
       "description": "Talent 35 bonus",
-      "extractedAt": "2026-02-02T11:54:14.737Z"
+      "extractedAt": "2026-02-08T06:03:48.705Z"
     },
     "all_talent_level_49": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"49\")",
       "result": 0,
       "description": "All talent level 49 - Should be 0",
-      "extractedAt": "2026-02-02T11:54:14.746Z"
+      "extractedAt": "2026-02-08T06:03:48.715Z"
     },
     "all_talent_level_146": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"146\")",
-      "result": 94,
+      "result": 95,
       "description": "All talent level 146 - Should be >0",
-      "extractedAt": "2026-02-02T11:54:14.749Z"
+      "extractedAt": "2026-02-08T06:03:48.723Z"
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "7.309415163134867e+40",
-        "original": 7.309415163134867e+40
+        "value": "8.137804313774709e+40",
+        "original": 8.137804313774709e+40
       },
       "description": "Talent 59 bonus - Blood Marrow",
-      "extractedAt": "2026-02-02T11:54:14.756Z"
+      "extractedAt": "2026-02-08T06:03:48.728Z"
     },
     "talent_max_level_149_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
       "result": 11,
       "description": "Talent level bonus from talent 149",
-      "extractedAt": "2026-02-02T11:54:14.759Z"
+      "extractedAt": "2026-02-08T06:03:48.732Z"
     },
     "talent_max_family_bonus_68": {
       "expression": "Math.floor(idleon.getDNSM(\"FamBonusQTYs\").h[68])",
       "result": 14,
       "description": "Talent level bonus from family bonus 68 - Elemental Sorcerer",
-      "extractedAt": "2026-02-02T11:54:14.766Z"
+      "extractedAt": "2026-02-08T06:03:48.737Z"
     },
     "talent_max_level_companion_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 1 )",
       "result": 25,
       "description": "Talent level bonus from companion 1 - Rift Slug",
-      "extractedAt": "2026-02-02T11:54:14.768Z"
+      "extractedAt": "2026-02-08T06:03:48.740Z"
     },
     "talent_max_level_divinity_bonus": {
       "expression": "Math.ceil(idleon.callFunction(\"Divinity\", \"Bonus_Minor\", 0, 2))",
-      "result": 18,
+      "result": 19,
       "description": "Talent level bonus from divinity - Bear",
-      "extractedAt": "2026-02-02T11:54:14.775Z"
+      "extractedAt": "2026-02-08T06:03:48.746Z"
     },
     "talent_max_level_equinox_12_bonus": {
       "expression": "idleon.getAttr(\"Dream\")[12]",
       "result": 15,
       "description": "Talent level bonus from equinox 12",
-      "extractedAt": "2026-02-02T11:54:14.779Z"
+      "extractedAt": "2026-02-08T06:03:48.748Z"
     },
     "talent_max_level_ninja_mastery_bonus": {
       "expression": "5 * Math.floor((97 + idleon.getAttr(\"OptionsListAccount\")[232]) / 100)",
       "result": 5,
       "description": "Talent level bonus from ninja mastery",
-      "extractedAt": "2026-02-02T11:54:14.786Z"
+      "extractedAt": "2026-02-08T06:03:48.751Z"
     },
     "talent_max_level_grimoire_39_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"GrimoireUpgBonus\", 39, 0)",
       "result": 0,
       "description": "Talent level bonus from grimoire 39",
-      "extractedAt": "2026-02-02T11:54:14.795Z"
+      "extractedAt": "2026-02-08T06:03:48.757Z"
     },
     "talent_max_level_set_kattlekruk_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"KATTLEKRUK_SET\", \"Bonus\", 0, 0)",
       "result": 5,
       "description": "Talent level bonus from kattlekruk set",
-      "extractedAt": "2026-02-02T11:54:14.798Z"
+      "extractedAt": "2026-02-08T06:03:48.760Z"
     },
     "talent_max_level_tesseract_57_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
       "result": 0,
       "description": "Talent level bonus from tesseract 57",
-      "extractedAt": "2026-02-02T11:54:14.806Z"
+      "extractedAt": "2026-02-08T06:03:48.766Z"
     }
   },
   "errors": {},

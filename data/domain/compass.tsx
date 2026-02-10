@@ -1,6 +1,6 @@
 import { nFormatter } from "../utility";
 import { lavaLog } from "../utility";
-import { Arcade } from "./arcade";
+import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
 import { 
     EfficiencyUpgrade, 
@@ -16,8 +16,8 @@ import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
 import { Sneaking } from "./world-6/sneaking";
-import { Emperor } from "./emperor";
-import { Lab } from "./lab";
+import { Emperor } from "./world-6/emperor";
+import { Lab } from "./world-4/lab";
 
 export enum WeaknessType {
     Fire = 0,
@@ -1208,7 +1208,7 @@ export class Compass extends Domain implements EfficiencyDomain {
     /**
      * Get the bonus value for a specific compass upgrade ID
      */
-    private getUpgradeBonus(upgradeId: number): number {
+    public getUpgradeBonus(upgradeId: number): number {
         const upgrade = this.upgrades.find(u => u.id === upgradeId);
         return upgrade?.bonus || 0;
     }

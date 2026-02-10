@@ -1,25 +1,25 @@
-import { AnvilWrapper } from "./anvil";
-import { Arcade } from "./arcade";
+import { AnvilWrapper } from "./world-1/anvil";
+import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
-import { Construction } from "./construction";
-import { Equinox, FoodLust } from "./equinox";
+import { Construction } from "./world-3/construction/construction";
+import { Equinox, FoodLust } from "./world-3/equinox";
 import { ImageData } from "./imageData";
 import { Item } from './items';
-import { ObolsData, Obol } from "./obols";
+import { ObolsData, Obol } from "./world-2/obols";
 import { Activity, Player } from "./player";
-import { Prayer } from "./prayers";
-import { Refinery } from "./refinery";
+import { Prayer } from "./world-3/prayers";
+import { Refinery } from "./world-3/construction/refinery";
 import { Skilling } from "./skilling";
 import { SkillsIndex } from "./SkillsIndex";
 import { Talent } from "./talents";
-import { Trap } from "./traps";
+import { Trap } from "./world-3/traps";
 import { Farming } from "./world-6/farming";
-import { Worship } from "./worship";
+import { Worship } from "./world-3/worship";
 import { Storage } from "./storage";
 import { SummonEssenceColor, Summoning } from "./world-6/summoning";
-import { Divinity } from "./divinity";
+import { Divinity } from "./world-5/divinity";
 import { Companion } from './companions';
-import { Sailing } from "./sailing";
+import { Sailing } from "./world-5/sailing/sailing";
 
 export enum AlertType {
     CardSet = "Card Set",

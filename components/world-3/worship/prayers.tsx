@@ -6,7 +6,7 @@ import {
 import TextAndLabel from '../../../components/base/TextAndLabel';
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from '../../base/IconImage';
-import { Prayer } from '../../../data/domain/prayers';
+import { Prayer } from '../../../data/domain/world-3/prayers';
 import { GroupByFunction, nFormatter } from '../../../data/utility';
 import { PrayerBase } from '../../../data/domain/data/PrayerRepo';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';

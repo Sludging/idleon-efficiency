@@ -6,7 +6,7 @@ import {
     Text,
 } from 'grommet'
 import { useContext } from "react";
-import { Breeding as BreedingDomain, territoryNiceNames } from "../../../data/domain/breeding";
+import { Breeding as BreedingDomain, territoryNiceNames } from "../../../data/domain/world-4/breeding";
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";

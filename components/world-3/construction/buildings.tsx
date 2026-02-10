@@ -1,7 +1,7 @@
 import { Box, CheckBox, Meter, Text, Stack } from "grommet";
 import { useMemo, useState } from "react";
-import { Building } from "../../../data/domain/buildings";
-import { Construction } from "../../../data/domain/construction";
+import { Building } from "../../../data/domain/world-3/construction/buildings";
+import { Construction } from "../../../data/domain/world-3/construction/construction";
 import { Item } from "../../../data/domain/items";
 import { Storage } from "../../../data/domain/storage";
 import { nFormatter } from "../../../data/utility";
@@ -51,6 +51,11 @@ export function BuildingsDisplay() {
                 <TextAndLabel
                     label="Total Levels"
                     text={constructionData.buildings.reduce((sum, building) => sum += building.level, 0).toString()}
+                    margin={{ right: 'medium' }}
+                />
+                <TextAndLabel
+                    label="Total Build Rate"
+                    text={nFormatter(constructionData.totalBuildSpeed)}
                     margin={{ right: 'medium' }}
                 />
                 <Box direction="row" gap="small">

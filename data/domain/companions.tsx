@@ -1,9 +1,9 @@
 import { SkillsIndex } from "./SkillsIndex";
-import { Alchemy } from "./alchemy";
-import { Arcade } from "./arcade";
+import { Alchemy } from "./world-2/alchemy/alchemy";
+import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
 import { CompanionBase, initCompanionRepo } from "./data/CompanionRepo";
-import { Divinity } from "./divinity";
+import { Divinity } from "./world-5/divinity";
 import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { CompanionModel } from "./model/companionModel";

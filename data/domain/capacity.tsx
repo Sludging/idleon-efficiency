@@ -100,14 +100,14 @@
 
 import { range } from "../utility";
 import { Domain, RawData } from "./base/domain";
-import { Bribe, BribeStatus } from "./bribes";
+import { Bribe, BribeStatus } from "./world-1/bribes";
 import { GemStore } from "./gemPurchases";
 import { Guild } from "./guild";
 import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { Player } from "./player";
-import { Prayer } from "./prayers";
-import { Shrine, ShrineConstants } from "./shrines";
+import { Prayer } from "./world-3/prayers";
+import { Shrine, ShrineConstants } from "./world-3/construction/shrines";
 import { SkillsIndex } from "./SkillsIndex";
 import { Stamp } from "./world-1/stamps";
 import { Storage } from "./storage";

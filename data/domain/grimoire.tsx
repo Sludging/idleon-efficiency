@@ -8,9 +8,9 @@ import { Item } from "./items";
 import { GrimoireUpgradeModel } from "./model/grimoireUpgradeModel";
 import { Player } from "./player";
 import { Sneaking } from "./world-6/sneaking";
-import { Arcade } from "./arcade";
-import { Lab } from "./lab";
-import { Emperor } from "./emperor";
+import { Arcade } from "./world-2/arcade";
+import { Lab } from "./world-4/lab";
+import { Emperor } from "./world-6/emperor";
 import { ClassIndex } from "./talents";
 
 // Damage efficiency calculator implementation

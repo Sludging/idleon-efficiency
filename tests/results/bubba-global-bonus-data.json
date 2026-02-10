@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-02-08T07:30:24.717Z",
+  "extractions": {
+    "companion_51_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 51, 0)",
+      "result": 2,
+      "description": "Companion 51 bonus (multiplier for Bubba bonuses)",
+      "extractedAt": "2026-02-08T07:30:24.773Z"
+    },
+    "upgrade_level_3": {
+      "expression": "idleon.getAttr(\"Bubba\")[1][3]",
+      "result": 12,
+      "description": "Bubba upgrade 3 level (controls bonus unlock progression)",
+      "extractedAt": "2026-02-08T07:30:24.782Z"
+    },
+    "global_bonus_1": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
+      "result": 83.99999999999999,
+      "description": "Global bonus 1: +{% Build Rate (base 10)",
+      "extractedAt": "2026-02-08T07:30:24.791Z"
+    },
+    "global_bonus_2": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 2, 0)",
+      "result": 41.99999999999999,
+      "description": "Global bonus 2: +{% Critter Gain (base 5)",
+      "extractedAt": "2026-02-08T07:30:24.794Z"
+    },
+    "global_bonus_3": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
+      "result": 41.99999999999999,
+      "description": "Global bonus 3: +{% Soul Gain (base 5)",
+      "extractedAt": "2026-02-08T07:30:24.802Z"
+    },
+    "global_bonus_4": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 4, 0)",
+      "result": 125.99999999999997,
+      "description": "Global bonus 4: +{% Total DMG (base 15)",
+      "extractedAt": "2026-02-08T07:30:24.805Z"
+    },
+    "global_bonus_5": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 5, 0)",
+      "result": 8.399999999999999,
+      "description": "Global bonus 5: +{% All Kills (base 1)",
+      "extractedAt": "2026-02-08T07:30:24.811Z"
+    },
+    "global_bonus_6": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 6, 0)",
+      "result": 16.799999999999997,
+      "description": "Global bonus 6: {% XP Multi (base 4)",
+      "extractedAt": "2026-02-08T07:30:24.814Z"
+    },
+    "global_bonus_7": {
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
+      "result": 12.599999999999998,
+      "description": "Global bonus 7: -{% Atom Cost (base 3)",
+      "extractedAt": "2026-02-08T07:30:24.822Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

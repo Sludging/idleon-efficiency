@@ -15,7 +15,7 @@ import TipDisplay from "../base/TipDisplay";
 import { Player } from "../../data/domain/player";
 import CoinsDisplay from "../coinsDisplay";
 import { TimeDown } from "../base/TimeDisplay";
-import { Arcade } from "../../data/domain/arcade";
+import { Arcade } from "../../data/domain/world-2/arcade";
 import { AFKTypeEnum } from "../../data/domain/enum/aFKTypeEnum";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { DataStatus } from "../../lib/stores/appDataStore";

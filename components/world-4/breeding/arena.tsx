@@ -4,7 +4,7 @@ import {
     Text,
 } from 'grommet'
 import { useState, useMemo, useEffect } from "react";
-import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from "../../../data/domain/breeding";
+import { Breeding as BreedingDomain, petArenaBonuses, waveReqs } from "../../../data/domain/world-4/breeding";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import { Player } from '../../../data/domain/player';

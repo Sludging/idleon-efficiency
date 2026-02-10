@@ -5,7 +5,7 @@ import {
     Text,
 } from 'grommet'
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
-import { Worship as WorshipDomain } from '../../../data/domain/worship';
+import { Worship as WorshipDomain } from '../../../data/domain/world-3/worship';
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from '../../base/IconImage';
 import { Player } from '../../../data/domain/player';

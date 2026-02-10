@@ -26,7 +26,7 @@ import ShadowBox from "../base/ShadowBox";
 import CoinsDisplay from "../coinsDisplay";
 import { Item } from "../../data/domain/items";
 import { Storage } from "../../data/domain/storage";
-import { AtomCollider } from "../../data/domain/atomCollider";
+import { AtomCollider } from "../../data/domain/world-3/construction/atomCollider";
 
 enum StampStatus {
     NoCalculator = 'Unknown',

@@ -1,7 +1,7 @@
 import { GroupByFunction, range } from "../utility";
-import { Arcade } from "./arcade";
+import { Arcade } from "./world-2/arcade";
 import { Domain, RawData } from "./base/domain";
-import { Construction, Library } from "./construction";
+import { Construction, Library } from "./world-3/construction/construction";
 import { initTalentNameRepo } from "./data/TalentNameRepo";
 import { AFKTypeEnum } from "./enum/aFKTypeEnum";
 import { Item } from "./items";

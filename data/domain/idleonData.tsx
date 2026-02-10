@@ -1,58 +1,58 @@
-import { Traps } from './traps';
+import { Traps } from './world-3/traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
-import { Statues, updateStatueBonuses } from './statues';
+import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
-import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './alchemy';
-import { Bribes } from './bribes';
+import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
-import { Shrines, updateShrines } from './shrines';
+import { Shrines, updateShrines } from './world-3/construction/shrines';
 import { Item } from './items';
 import { Storage, updateStorage } from './storage';
 import { Quests } from './quests';
-import { Prayers } from './prayers';
-import { Refinery, updateRefinery } from './refinery';
-import { SaltLick } from './saltLick';
-import { Printer, updatePrinter } from './printer';
+import { Prayers } from './world-3/prayers';
+import { Refinery, updateRefinery } from './world-3/construction/refinery';
+import { SaltLick } from './world-3/construction/saltLick';
+import { Printer, updatePrinter } from './world-3/construction/printer';
 import { TaskBoard } from './tasks';
 import { Cloudsave } from './cloudsave';
-import { Worship, updateWorship, updateWorshipTotalizer } from './worship';
-import { Construction, updateConstruction } from './construction';
+import { Worship, updateTotemsBonuses, updateWorship, updateWorshipTotalizer } from './world-3/worship';
+import { Construction, updateConstruction } from './world-3/construction/construction';
 import { updateCards, Cards } from './cards';
-import { Arcade, updateArcade } from './arcade';
-import { ObolsData } from './obols';
+import { Arcade, updateArcade } from './world-2/arcade';
+import { ObolsData } from './world-2/obols';
 import { Family, calculateFamily } from './family';
 import { Dungeons } from './dungeons';
-import { Forge, updateForge } from './forge';
-import { Cooking, updateCooking } from './cooking';
-import { Lab, updateLab } from './lab';
-import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData } from './breeding';
+import { Forge, updateForge } from './world-1/forge';
+import { Cooking, updateCooking } from './world-4/cooking';
+import { Lab, updateLab } from './world-4/lab';
+import { Breeding, updateAllShinyEffects, updateBeastMasterImpact, updateBreeding, updateBreedingDisplayData } from './world-4/breeding';
 import { notUndefined } from '../utility';
-import { Sigils, updateSigils, updateSigilsChargeSpeed } from './sigils';
-import { AnvilWrapper, updateAnvil } from './anvil';
+import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy/sigils';
+import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
-import { Divinity, updateDivinity } from './divinity';
-import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './sailing';
-import { Gaming, updateGaming, updateSuperbitImpacts } from './gaming';
-import { AtomCollider, updateAtomCollider } from './atomCollider';
-import { updateArtifacts, updateSailingArtifactSlabBoost } from './sailing/artifacts';
+import { Divinity, updateDivinity } from './world-5/divinity';
+import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
+import { Gaming, updateGaming, updateSuperbitImpacts } from './world-5/gaming';
+import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
+import { updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
 import { Constellations } from './constellations';
-import { Slab, updateSlabBonusDisplay } from './slab';
+import { Slab, updateSlabBonusDisplay } from './world-5/slab';
 import { Capacity, updateCapacity } from './capacity';
-import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './deathnote';
+import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './world-3/construction/deathnote';
 import { Companions, updateCompanionImpact } from './companions';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
-import { Rift } from './rift';
-import { Equinox, updateEquinoxBar } from './equinox';
-import { POExtra } from './postoffice';
+import { Rift } from "./world-4/rift";
+import { Equinox, updateEquinoxBar } from './world-3/equinox';
+import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
-import { IslandExpeditions } from './islandExpedition';
-import { Tome, updateTomeScores } from './tome';
+import { IslandExpeditions } from './world-2/islandExpedition';
+import { Tome, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
@@ -60,18 +60,21 @@ import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
-import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './emperor';
+import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Clamworks } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
+import { Bubba, updateBubba } from './world-3/bubba';
 import { CoralKid } from './world-7/coralKid';
 import { BigFish, updateBigFishUnlocked } from './world-7/bigFish';
 import { CoralReef, updateCoralReefDailyGain } from './world-7/coralReef';
 import { DancingCoral } from './world-7/dancingCoral';
-import { Hoops } from './hoops';
-import { Darts } from './darts';
+import { Hoops } from './world-1/hoops';
+import { Darts } from './world-1/darts';
+import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
+import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -160,12 +163,15 @@ const domainList: Domain[] = [
     new Clamworks("clamworks"),
     new Meritocraty("meritocraty"),
     new LegendTalents("legendTalents"),
+    new Bubba("bubba"),
     new CoralKid("coralKid"),
     new BigFish("bigFish"),
     new CoralReef("coralReef"),
     new DancingCoral("dancingCoral"),
     new Hoops("hoops"),
     new Darts("darts"),
+    new Orion("orion"),
+    new Poppy("poppy"),
 ]
 
 export class IdleonData {
@@ -230,6 +236,9 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
+    "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
+    "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
@@ -290,6 +299,9 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "updateWorshipTotemsSoulGainBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTotemsBonuses(accountData),
+    "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
+    "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
@@ -297,7 +309,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),
     "farming": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingDisplayData(accountData),
-    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "sigilsChargeSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateSigilsChargeSpeed(accountData),
     "breedingShinyAndBreedingSpeed": (doc: Cloudsave, accountData: Map<string, any>) => updateBreedingDisplayData(accountData),
     "petBeastmaster": (doc: Cloudsave, accountData: Map<string, any>) => updateBeastMasterImpact(accountData),
@@ -306,6 +317,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "emperorMaxAttempts": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorMaxAttempts(accountData),
     "tesseractEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateTesseractEfficiency(accountData),
     "coralReefDailyGains": (doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefDailyGain(accountData),
+    "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
@@ -348,7 +360,7 @@ export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave,
         parseData.set("ownedCompanions", companions);
         // TODO: Get rid of this. It's only used for players since it's a very unique one.
         parseData.set("rawData", data.toJSON())
-        
+
         // Execute the parse function.
         dataDomain.parse(parseData);
     });

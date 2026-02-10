@@ -15,7 +15,7 @@ import { ArenaBonusDisplay } from '../../../components/world-4/breeding/arena';
 import { PetsDisplay } from '../../../components/world-4/breeding/pets';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { StaticTime, TimeDown } from '../../../components/base/TimeDisplay';
-import { Breeding as BreedingDomain } from '../../../data/domain/breeding';
+import { Breeding as BreedingDomain } from '../../../data/domain/world-4/breeding';
 import { nFormatter } from '../../../data/utility';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';

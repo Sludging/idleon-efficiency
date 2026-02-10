@@ -24,7 +24,7 @@ import ItemSourcesDisplay from "../../../components/base/ItemSourceDisplay";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import IconImage from "../../../components/base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
-import { AtomCollider } from "../../../data/domain/atomCollider";
+import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import { Storage } from "../../../data/domain/storage";
 import { CircleInformation, List, Grid as GridIcon } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";

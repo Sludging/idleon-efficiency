@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-02-08T06:24:13.391Z",
+  "extractions": {
+    "legend_talent_26_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
+      "result": 400,
+      "description": "Legend talent 26 bonus (Orion/Poppy Overload)",
+      "extractedAt": "2026-02-08T06:24:13.445Z"
+    },
+    "companion_51_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 51, 0)",
+      "result": 2,
+      "description": "Companion 51 bonus (multiplier for Orion/Poppy bonuses)",
+      "extractedAt": "2026-02-08T06:24:13.459Z"
+    },
+    "upgrade_level_3": {
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[271]",
+      "result": 54,
+      "description": "Poppy upgrade 3 level (controls bonus unlock progression)",
+      "extractedAt": "2026-02-08T06:24:13.466Z"
+    },
+    "global_bonus_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 0, 0)",
+      "result": 1530,
+      "description": "Global bonus 0: +{% Fish Efficiency (base 3)",
+      "extractedAt": "2026-02-08T06:24:13.479Z"
+    },
+    "global_bonus_1": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 1, 0)",
+      "result": 1530,
+      "description": "Global bonus 1: +{ Defence (base 3)",
+      "extractedAt": "2026-02-08T06:24:13.486Z"
+    },
+    "global_bonus_2": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 2, 0)",
+      "result": 2550,
+      "description": "Global bonus 2: +{% Fishing XP (base 5)",
+      "extractedAt": "2026-02-08T06:24:13.498Z"
+    },
+    "global_bonus_3": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 3, 0)",
+      "result": 1020,
+      "description": "Global bonus 3: +{% Accuracy (base 2)",
+      "extractedAt": "2026-02-08T06:24:13.505Z"
+    },
+    "global_bonus_4": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 4, 0)",
+      "result": 1020,
+      "description": "Global bonus 4: +{% Total DMG (base 2)",
+      "extractedAt": "2026-02-08T06:24:13.521Z"
+    },
+    "global_bonus_5": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 5, 0)",
+      "result": 223.125,
+      "description": "Global bonus 5: +{% AFK Gains (base 0.5)",
+      "extractedAt": "2026-02-08T06:24:13.528Z"
+    },
+    "global_bonus_6": {
+      "expression": "idleon.callFunction(\"Summoning\", \"RooBonuses\", 6, 0)",
+      "result": 1338.75,
+      "description": "Global bonus 6: +{% Cash (base 3)",
+      "extractedAt": "2026-02-08T06:24:13.534Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

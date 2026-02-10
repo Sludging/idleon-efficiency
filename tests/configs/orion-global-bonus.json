@@ -1,0 +1,46 @@
+{
+  "description": "Extract data for Orion (Owl) global bonus calculations",
+  "target": "Orion Global Bonuses",
+  "extractions": [
+    {
+      "label": "legend_talent_26_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
+      "description": "Legend talent 26 bonus (Orion Overload)"
+    },
+    {
+      "label": "companion_51_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 51, 0)",
+      "description": "Companion 51 bonus (multiplier for Orion bonuses)"
+    },
+    {
+      "label": "global_bonus_0",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
+      "description": "Global bonus 0: +{% Class XP (base 5)"
+    },
+    {
+      "label": "global_bonus_1",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 1, 0)",
+      "description": "Global bonus 1: +{ Base DMG (base 10)"
+    },
+    {
+      "label": "global_bonus_2",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 2, 0)",
+      "description": "Global bonus 2: +{% Total DMG (base 2)"
+    },
+    {
+      "label": "global_bonus_3",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 3, 0)",
+      "description": "Global bonus 3: +{% Skill XP (base 4)"
+    },
+    {
+      "label": "global_bonus_4",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 4, 0)",
+      "description": "Global bonus 4: +{% Drop Rate (base 1)"
+    },
+    {
+      "label": "global_bonus_5",
+      "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 5, 0)",
+      "description": "Global bonus 5: +{ All Stat (base 2)"
+    }
+  ]
+}

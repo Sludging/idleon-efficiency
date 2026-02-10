@@ -8,7 +8,7 @@ import { Item } from "./items";
 import { IDforCardSETbonus, cardSetMap } from "./cardSets";
 import { CardDataModel } from "./model/cardDataModel";
 import { Player } from "./player";
-import { Rift, SkillMastery } from "./rift";
+import { Rift, SkillMastery } from "./world-4/rift";
 import { initCardDropChanceRepo } from './data/CardDropChanceRepo';
 import { nFormatter } from '../utility';
 import { LegendTalents } from "./world-7/legendTalents";

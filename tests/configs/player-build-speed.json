@@ -1,0 +1,136 @@
+{
+  "description": "Extract data for Player Build Speed calculations",
+  "target": "Player Build Speed",
+  "extractions": [
+    {
+      "label": "stamps_bonus_build_prod",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BuildProd\")",
+      "description": "Stamp bonus for Build Prod"
+    },
+    {
+      "label": "guild_bonus_5",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
+      "description": "Guild bonus 5"
+    },
+    {
+      "label": "achievement_153",
+      "expression": "Math.min(5, 5 * idleon.callFunction(\"AchieveStatus\", 153))",
+      "description": "Achievement 153 bonus (5 if completed, 0 otherwise)"
+    },
+    {
+      "label": "construction_mastery_bonus",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
+      "description": "Construction mastery bonus from Rift"
+    },
+    {
+      "label": "vial_equinox_fish_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
+      "description": "Vial bonus - Shinyfin Stew (Contspd)"
+    },
+    {
+      "label": "vial_turtle_bonus",
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
+      "description": "Vial bonus - Turtle Tisane"
+    },
+    {
+      "label": "arcade_bonus_44",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 44)",
+      "description": "Arcade bonus 44"
+    },
+    {
+      "label": "voting_bonus_18",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 18, 0)",
+      "description": "Voting bonus 18"
+    },
+    {
+      "label": "vault_upgrade_48",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
+      "description": "Vault upgrade 48"
+    },
+    {
+      "label": "sheepies_killed",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
+      "description": "Total sheepies killed (vault kills)"
+    },
+    {
+      "label": "bubba_bonus_1",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
+      "description": "Bubba global bonus 1"
+    },
+    {
+      "label": "atom_collider_1",
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
+      "description": "Atom collider atom 1 bonus"
+    },
+    {
+      "label": "redox_salts_in_storage",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h[\"Refinery1\"]",
+      "description": "Redox salts owned in storage"
+    },
+    {
+      "label": "winner_bonus_13",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
+      "description": "Summoning winner bonus 13"
+    },
+    {
+      "label": "palette_bonus_25",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
+      "description": "Gaming palette bonus 25"
+    },
+    {
+      "label": "gear_bonus_etc_bonuses_30",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
+      "description": "Gear bonus from EtcBonuses 30"
+    },
+    {
+      "label": "build_speed_player_0",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
+      "description": "Build speed for player 0"
+    },
+    {
+      "label": "build_speed_player_1",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
+      "description": "Build speed for player 1"
+    },
+    {
+      "label": "build_speed_player_2",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
+      "description": "Build speed for player 2"
+    },
+    {
+      "label": "build_speed_player_3",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
+      "description": "Build speed for player 3"
+    },
+    {
+      "label": "build_speed_player_4",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
+      "description": "Build speed for player 4"
+    },
+    {
+      "label": "build_speed_player_5",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
+      "description": "Build speed for player 5"
+    },
+    {
+      "label": "build_speed_player_6",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
+      "description": "Build speed for player 6"
+    },
+    {
+      "label": "build_speed_player_7",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
+      "description": "Build speed for player 7"
+    },
+    {
+      "label": "build_speed_player_8",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
+      "description": "Build speed for player 8"
+    },
+    {
+      "label": "build_speed_player_9",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
+      "description": "Build speed for player 9"
+    }
+  ]
+}

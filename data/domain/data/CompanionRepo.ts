@@ -505,6 +505,26 @@ export const initCompanionRepo = () => {
                 "x3": -37,
                 "x4": 5,
                 "x5": 100
-            })    
+            }),    
+        new CompanionBase(50, <CompanionModel>{
+            "id": "snakeR",
+            "desc": "{25% Class EXP, {25% Drop Rate, 1.01x Class EXP, and 1.01x Drop Rate",
+            "bonus": 25,
+            "x1": -3,
+            "x2": 0,
+            "x3": -9,
+            "x4": 0,
+            "x5": 100
+        }),   
+        new CompanionBase(51, <CompanionModel>{
+            "id": "w6c2b",
+            "desc": "3x bonuses from Orion, Poppy, and Bubba (and all future Clickers)",
+            "bonus": 2,
+            "x1": -21,
+            "x2": 0,
+            "x3": -11,
+            "x4": 100,
+            "x5": 100
+        }),   
 ]
 }
