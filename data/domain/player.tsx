@@ -522,7 +522,7 @@ export class Player {
                 }
             });
 
-            // 5. Distribution Linéaire à l'intérieur du bloc additif
+            // Calculate distribution within the additive block
             if (additiveShareValue > 0 && totalAdditivePoints > 0) {
                 const addSources = [
                     { name: "^ Stamps", p: stampsBonusBuildProd },
