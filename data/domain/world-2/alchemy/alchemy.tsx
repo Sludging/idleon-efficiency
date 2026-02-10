@@ -604,6 +604,11 @@ export class Alchemy extends Domain {
         }
 
         if (player.getBaseClass() == ClassIndex.Warrior && cauldron == CauldronIndex.Power) {
+            // The carpenter bubble is no longer boosted
+            if (bubble == 12) {
+                return false;
+            }
+
             return true;
         }
 

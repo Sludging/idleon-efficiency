@@ -485,7 +485,6 @@ export class Player {
                                     arcadeBonus44 + votingBonus18 + vaultBonus + bubbaBonus1;        
         const additiveBonuses = 1 + totalAdditivePoints / 100;
 
-        this.buildSpeed.value = baseSpeed * bubbleBonus * additiveBonuses * talentBonus * winnerBonus * paletteBonus * vialTurtleBonus;
         const totalSpeed = baseSpeed * bubbleBonus * additiveBonuses * talentBonus * winnerBonus * paletteBonus * vialTurtleBonus;
         this.buildSpeed.value = totalSpeed;
         const totalBonusSpeed = totalSpeed - baseSpeed;
@@ -1469,7 +1468,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const redoxSaltsOwned = storage.amountInStorage("Refinery1");
     const winnerBonus13 = summoning.summonBonuses.find(bonus => bonus.index == 13)?.getBonus() || 0;
     // TODO : add this once gaming have been updated with palette
-    const paletteBonus25 = 17;
+    const paletteBonus25 = 0;
 
     // Apply everything to players
     players.forEach(player => {
