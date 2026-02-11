@@ -369,16 +369,16 @@ export class Summoning extends Domain {
 
     updatePlayersUnitStats = () => {
         const healthFlatBonus = [1,10,35,37];
-        const healthFlat = (1 + this.summonUpgrades.filter(upgrade => healthFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
-        this.summonBattles.playerUnitsHP = healthFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 20)?.getFullBonus() ?? 0) / 100 ) 
-                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 50)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 59)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 63)?.getFullBonus() ?? 0)) / 100 )
-                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 61)?.getFullBonus() ?? 0) / 100);
+        const healthFlat = 2 + (1 + this.summonUpgrades.filter(upgrade => healthFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
+        this.summonBattles.playerUnitsHP = healthFlat * (1 + (this.getUpgradeBonusFromIndex(20) + this.getUpgradeBonusFromIndex(81)) / 100) 
+                                        * (1 + (this.getUpgradeBonusFromIndex(50) + this.getUpgradeBonusFromIndex(59) + this.getUpgradeBonusFromIndex(63)) / 100)
+                                        * (1 + this.getUpgradeBonusFromIndex(61) / 100);
 
         const attackFlatBonus = [3,12,21,31];
         const attackFlat = (1 + this.summonUpgrades.filter(upgrade => attackFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
-        this.summonBattles.playerUnitsAtk = attackFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 43)?.getFullBonus() ?? 0) / 100 ) 
-                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 51)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 56)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 64)?.getFullBonus() ?? 0)) / 100 )
-                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 60)?.getFullBonus() ?? 0) / 100);
+        this.summonBattles.playerUnitsAtk = attackFlat * (1 + (this.getUpgradeBonusFromIndex(43) + this.getUpgradeBonusFromIndex(74)) / 100) 
+                                        * (1 + (this.getUpgradeBonusFromIndex(51) + this.getUpgradeBonusFromIndex(56) + this.getUpgradeBonusFromIndex(64)) / 100)
+                                        * (1 + this.getUpgradeBonusFromIndex(60) / 100);
 
         // This bonus is based on attack damage of units, so can't update it before
         const sharpenedSpikeUpgrade = this.summonUpgrades.find(upgrade => upgrade.index == 68);
