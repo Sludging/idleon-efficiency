@@ -134,7 +134,7 @@ export class SummonUpgrade {
         if (this.index == 2) {
             return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset by cycle of 4 days (but you keep summoned familiars)";
         } else {
-            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBaseBonus(level).toString()).replace(/}/, this.getFullBonus(level).toString());
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, nFormatter(this.getBaseBonus(level), "CommaNotation")).replace(/}/, nFormatter(this.getFullBonus(level), "CommaNotation"));
         }
     }
 
