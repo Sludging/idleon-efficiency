@@ -1,4 +1,4 @@
-import { lavaFunc, range } from "../../utility"
+import { lavaFunc, nFormatter, range } from "../../utility"
 import { Achievement } from "../achievements";
 import { Alchemy } from "./alchemy/alchemy";
 import { Domain, RawData } from "../base/domain";
@@ -76,7 +76,7 @@ export class ArcadeBonus {
         }
 
         const finalBonus = baseBonus * multiplier;
-        return round ? Math.round(finalBonus) : finalBonus;
+        return round ? parseFloat(nFormatter(finalBonus)) : finalBonus;
     }
 
     getBonusText = (_: boolean = true) => {
