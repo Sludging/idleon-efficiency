@@ -80,6 +80,7 @@ export class SummonUpgrade {
     bonusMultiplyer: number = 1;
     isDoubled: boolean = false;
     doublerBonus: number = 1;
+    stoneBossBonus: number = 1;
     totalCostReduction: number = 1;
 
     constructor(public index: number, public data: SummonUpgradeModel, level: number = 0, doubled: boolean = false) {
@@ -93,7 +94,7 @@ export class SummonUpgrade {
     }
 
     getBaseBonus = (level: number = this.level): number => {
-        return level * this.data.bonusQty
+        return level * this.data.bonusQty * this.stoneBossBonus * this.doublerBonus;
     }
 
     getFullBonus = (level: number = this.level): number => {
@@ -206,6 +207,7 @@ export interface SummonEssence {
     displayEssence: boolean,
     unlocked: boolean,
     victories: number,
+    stoneBossVictories: number,
     battles: SummonEnemyModel[]
 }
 
@@ -390,6 +392,7 @@ export class Summoning extends Domain {
             { key: "Summon", perPlayer: false, default: [] },
             { key: "OptLacc", perPlayer: false, default: [] },
             { key: "Holes", perPlayer: false, default:[] },
+            { key: "KRbest", perPlayer: false, default:[] },
         ]
     }
 
@@ -402,6 +405,7 @@ export class Summoning extends Domain {
         const summoningData = data.get("Summon") as any[];
         const optionList = data.get("OptLacc") as number[];
         const holeData = data.get("Holes") as any[];
+        const killroyKillsData = data.get("KRbest") as Record<string, number>;
 
         // Defend against old accounts and people without any summoning data.
         if (summoningData.length == 0) {
@@ -490,6 +494,7 @@ export class Summoning extends Domain {
             let unlocked: boolean = false;
             let displayBattle: boolean = false;
             let displayEssence: boolean = false;
+            const stoneBossVictories = killroyKillsData[`SummzTrz${index}`] ?? 0;
             const essenceOwned: number = index < essences.length ? essences[index] : 0;
             switch(index) {
                 case SummonEssenceColor.White:
@@ -558,7 +563,7 @@ export class Summoning extends Domain {
                 colorBattles = summoning.summonBattles.allBattles[index];
             }
 
-            summoning.summonEssences.push({ color: index, quantity: essenceOwned, unlocked: unlocked, displayBattles: displayBattle, displayEssence: displayEssence, victories: colorVictories, battles: colorBattles });
+            summoning.summonEssences.push({ color: index, quantity: essenceOwned, unlocked: unlocked, displayBattles: displayBattle, displayEssence: displayEssence, victories: colorVictories, battles: colorBattles, stoneBossVictories: stoneBossVictories });
         }
 
         summoning.updateUnlockedUpgrades();
@@ -616,22 +621,6 @@ export class Summoning extends Domain {
     static getEssenceColorName = (color: SummonEssenceColor): string => {
         return Object.keys(SummonEssenceColor)[Object.values(SummonEssenceColor).indexOf(color as number as SummonEssenceColor)];
     }
-}
-
-export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => {
-    const summoning = data.get("summoning") as Summoning;
-    const players = data.get("players") as Player[];
-
-    const levels: number[] = [];
-    players.forEach(player => {
-        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
-    })
-    summoning.summoningLevel = Math.max(...levels);
-
-    summoning.updateSecondaryBonus();
-    summoning.updatePlayersUnitStats();
-
-    return summoning;
 }
 
 export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
@@ -699,11 +688,37 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     return summoning;
 }
 
-export const updateSummoningCostReduction = (data: Map<string, any>) => {
+export const updateSummoningUpgrades= (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const players = data.get("players") as Player[];
     const tesseract = data.get("tesseract") as Tesseract;
     
+    // Update upgrade bonuses
+    const levels: number[] = [];
+    players.forEach(player => {
+        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
+    })
+    summoning.summoningLevel = Math.max(...levels);
+
+    const talentBonus597 = players.reduce((value, player) => {
+        const talentBonus = player.getTalentBonus(597);
+
+        if (talentBonus > value) {
+            return talentBonus;
+        } else {
+            return value;
+        }
+    }, 0);
+    const doublerBonus = 2 + Math.max(0, talentBonus597 / 100 - 1) + summoning.getUpgradeBonusFromIndex(78) / 100;
+
+    summoning.summonUpgrades.forEach(upgrade => {
+        upgrade.doublerBonus = upgrade.isDoubled ? doublerBonus : 1;
+        upgrade.stoneBossBonus = 1 + (parseInt(upgrade.data.filler) == 1 ? summoning.summonEssences.find(essence => essence.color == upgrade.data.colour)?.stoneBossVictories || 0 : 0);
+    });
+    summoning.updateSecondaryBonus();
+    summoning.updatePlayersUnitStats();
+
+    // Update cost reduction for upgrades
     const talentBonus595 = players.reduce((value, player) => {
         const talentBonus = player.getTalentBonus(595);
 
