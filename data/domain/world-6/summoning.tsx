@@ -17,7 +17,7 @@ import { TaskBoard } from "../tasks";
 import { Achievement } from "../achievements";
 import { Equinox } from "../world-3/equinox";
 import { Cooking } from "../world-4/cooking";
-import { Emperor } from "../world-6/emperor";
+import { Emperor } from "./emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
 import { Tesseract } from "../tesseract";
 import { GemStore } from "../gemPurchases";
@@ -78,11 +78,14 @@ export class SummonUpgrade {
     level: number = 0;
     shouldBeDisplayed: boolean = true;
     bonusMultiplyer: number = 1;
+    isDoubled: boolean = false;
+    doublerBonus: number = 1;
     totalCostReduction: number = 1;
 
-    constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
+    constructor(public index: number, public data: SummonUpgradeModel, level: number = 0, doubled: boolean = false) {
         this.shouldBeDisplayed = (data.name != "Name");
         this.level = level;
+        this.isDoubled = doubled;
     }
 
     nextLevelCost = (): number => {
@@ -138,7 +141,6 @@ export class SummonUpgrade {
         return data.map((value) => new SummonUpgrade(value.index, value.data));
     }
 }
-
 
 export class SummonBonus {
     bonusValue: number = 0;
@@ -386,7 +388,8 @@ export class Summoning extends Domain {
     getRawKeys(): RawData[] {
         return [
             { key: "Summon", perPlayer: false, default: [] },
-            { key: "OptLacc", perPlayer: false, default: [] }
+            { key: "OptLacc", perPlayer: false, default: [] },
+            { key: "Holes", perPlayer: false, default:[] },
         ]
     }
 
@@ -398,20 +401,21 @@ export class Summoning extends Domain {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
         const optionList = data.get("OptLacc") as number[];
+        const holeData = data.get("Holes") as any[];
 
         // Defend against old accounts and people without any summoning data.
         if (summoningData.length == 0) {
             return;
         }
 
+        const doublerData = (holeData[28] || []) as number[];
+
         summoning.summonUpgrades = [];
-        summoning.summonUpgrades = initSummonUpgradeRepo()
-            .map(
-            base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
+        summoning.summonUpgrades = initSummonUpgradeRepo().map(
+            base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0, doublerData.includes(base.index))
         );
 
-        summoning.summonBonuses = initSummonEnemyBonusRepo()
-        .map(
+        summoning.summonBonuses = initSummonEnemyBonusRepo().map(
             base => new SummonBonus(base.index, base.data)
         );
         
