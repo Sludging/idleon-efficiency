@@ -19,6 +19,8 @@ import { Equinox } from "../world-3/equinox";
 import { Cooking } from "../world-4/cooking";
 import { Emperor } from "../world-6/emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
+import { Tesseract } from "../tesseract";
+import { GemStore } from "../gemPurchases";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -35,7 +37,7 @@ const EndlessModeBonusIndexes = [
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[10]
 const EndlessModeBonusIncrease = [
-    1,3,1,12,1,7,2,4,15,10,1,4,18,2,4,3,20,25,2,20,5,30,24,4,1,2,2,35,9,26,5,5,40,1,45,50,2,6,30,3
+    1,3,1,12,1,7,2,4,15,3,1,4,18,2,4,3,2,2,2,20,5,4,24,4,1,2,3,5,9,26,5,5,3,1,5,8,2,6,30,3
 ]
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[11]
@@ -146,10 +148,9 @@ export class SummonBonus {
     achievement379Bonus: number = 0;
     achievement373Bonus: number = 0;
     summoning32Bonus: number = 0;
-
-    // More bonuses
     godshardSetBonus: number = 0;
     emperorBonus: number = 0;
+    gemItemPurchased: number = 0;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
@@ -165,11 +166,11 @@ export class SummonBonus {
             case this.data.bonusId == 32:
                 return this.bonusValue;
             case this.data.bonusId == 20:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
             case 21 <= this.data.bonusId && 34 >= this.data.bonusId:
-                return this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100); 
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
 
@@ -640,6 +641,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const emperor = data.get("emperor") as Emperor;
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
+    const gemStore = data.get("gems") as GemStore;
 
     const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
     const charmBonus = (crystalComb && crystalComb.unlocked) ? (1 + crystalComb.data.x1 / 100) : 1;
@@ -650,6 +652,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const taskBonus = taskboard.merits[44].getBonus();
     const emperorBonus = emperor.emperorBonuses[8].getBonus();
     const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", undefined, true);
+    const gemItemPurchased = gemStore.purchases.find(purchase => purchase.no == 11)?.pucrhased || 0;
     
     // this bonus isn't affected by any boost, so we can already calculate it here
     const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 32)?.getBonus() ?? 0);
@@ -663,6 +666,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.summoning32Bonus = summonBonus;
         bonus.godshardSetBonus = godshardSetBonus;
         bonus.emperorBonus = emperorBonus;
+        bonus.gemItemPurchased = gemItemPurchased;
     });
 
     return summoning;
