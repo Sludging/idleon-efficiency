@@ -48,7 +48,7 @@ import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
-import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
+import { Summoning, updateSummoningCostReduction, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
@@ -299,6 +299,7 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "updateSummoningCostReduction": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningCostReduction(accountData),
     "updateWorshipTotemsSoulGainBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTotemsBonuses(accountData),
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
     "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),

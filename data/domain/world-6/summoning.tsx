@@ -76,6 +76,7 @@ export class SummonUpgrade {
     level: number = 0;
     shouldBeDisplayed: boolean = true;
     bonusMultiplyer: number = 1;
+    totalCostReduction: number = 1;
 
     constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
         this.shouldBeDisplayed = (data.name != "Name");
@@ -83,7 +84,7 @@ export class SummonUpgrade {
     }
 
     nextLevelCost = (): number => {
-        return this.data.cost * Math.pow(this.data.costExponent, this.level);
+        return this.totalCostReduction * this.data.cost * Math.pow(this.data.costExponent, this.level);
     }
 
     getBaseBonus = (level: number = this.level): number => {
@@ -558,6 +559,16 @@ export class Summoning extends Domain {
         summoning.summonFamiliarRaw = summoningData[4];
     }
 
+    getUpgradeBonusFromIndex(index: number): number {
+        const upgrade = this.summonUpgrades.find(upgrade => upgrade.index == index);
+
+        if (!upgrade) {
+            return 0;
+        }
+
+        return upgrade.getFullBonus();
+    }
+
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
         if (color == SummonEssenceColor.Endless) {
             return {
@@ -611,6 +622,8 @@ export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => 
 
     summoning.updateSecondaryBonus();
     summoning.updatePlayersUnitStats();
+
+    return summoning;
 }
 
 export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
@@ -645,6 +658,8 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.godshardSetBonus = godshardSetBonus;
         bonus.emperorBonus = emperorBonus;
     });
+
+    return summoning;
 }
 
 // Kinda like what have been done for breeding Shiny with updateAllShinyEffects(), easier to manage this way
@@ -669,4 +684,38 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     cooking.meals.forEach(meal => {
         meal.winnerBonus = mealBonus;
     });
+
+    return summoning;
+}
+
+export const updateSummoningCostReduction = (data: Map<string, any>) => {
+    const summoning = data.get("summoning") as Summoning;
+    const players = data.get("players") as Player[];
+    const tesseract = data.get("tesseract") as Tesseract;
+    
+    const talentBonus595 = players.reduce((value, player) => {
+        const talentBonus = player.getTalentBonus(595);
+
+        if (talentBonus > value) {
+            return talentBonus;
+        } else {
+            return value;
+        }
+    }, 0);
+
+    const costReductionFromTalent595 = 1 / (1 + Math.max(0, Math.floor(summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100)) * talentBonus595 / 100);
+    const costReductionFromTesseract54 = 1 / (1 + tesseract.getUpgradeBonus(54) * (summoning.summonEssences?.find(essence => essence.color == SummonEssenceColor.Endless)?.victories ?? 0) / 100);
+    const costReductionFromUpgrade49 = 1 / (1 + summoning.getUpgradeBonusFromIndex(49) / 100);
+    const costReductionFromUpgrade57 = 1 / (1 + summoning.getUpgradeBonusFromIndex(57) / 100);
+    const costReductionFromUpgrade72 = 1 / (1 + summoning.getUpgradeBonusFromIndex(72) / 100);
+    const costReductionFromUpgrade75 = 1 / (1 + summoning.getUpgradeBonusFromIndex(75) / 100);
+    
+    const totalCostReduction = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
+        * costReductionFromUpgrade72 * costReductionFromUpgrade75;
+
+    summoning.summonUpgrades.forEach(upgrade => {
+        upgrade.totalCostReduction = totalCostReduction;
+    });
+
+    return summoning;
 }
