@@ -74,8 +74,6 @@ export class Emperor extends Domain {
         return 135e13 * Math.pow(1.7, this.emperorKills);
     }
 
-
-
     /**
      * Calculate daily emperor tries
      */
