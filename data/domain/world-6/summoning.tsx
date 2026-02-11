@@ -196,7 +196,7 @@ export class SummonBonus {
 
     getBonusText = (): string => {
         // Can't have the two at the same time, so no worries with displaying two times the bonus
-        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, notateNumber(1 + this.getBonus() / 100));
+        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100, "MultiplierInfo"));
     }
 }
 
