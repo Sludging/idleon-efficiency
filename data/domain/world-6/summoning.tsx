@@ -329,6 +329,10 @@ export class Summoning extends Domain {
                     // Multiply bonus by cyan victory
                     upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Cyan)?.victories ?? 0);
                     break;
+                case 73:
+                    // Multiply bonus by teal victory
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Teal)?.victories ?? 0);
+                    break;
                 case 62:
                 case 63:
                 case 64:
@@ -342,13 +346,15 @@ export class Summoning extends Domain {
                 case 65:
                 case 66:
                 case 67:
+                case 80:
                     // Multiply bonus by summoning level
                     upgrade.bonusMultiplyer = this.summoningLevel;
                     break;
                 case 60:
                 case 61:
+                case 75:
                     // Multiply bonus for every 100 total summoning upgrades purchased
-                    upgrade.bonusMultiplyer = Math.floor(this.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100);
+                    upgrade.bonusMultiplyer = Math.max(0, Math.floor(this.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100));
                     break;
                 default:
                     upgrade.bonusMultiplyer = 1;
