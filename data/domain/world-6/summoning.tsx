@@ -66,7 +66,7 @@ export enum SummonEssenceColor {
     Purple = 4,
     Red = 5,
     Cyan = 6,
-    FutureContent3 = 7,
+    Teal = 7,
     FutureContent4 = 8,
     Endless = 9
 }
@@ -516,6 +516,12 @@ export class Summoning extends Domain {
                     displayBattle = true;
                     displayEssence = true;
                     break;
+                case SummonEssenceColor.Teal:
+                    // TODO : update this once Spelunking is correctly implemented
+                    unlocked = false;
+                    displayBattle = true;
+                    displayEssence = true;
+                    break;
                 case SummonEssenceColor.Endless:
                     // Need to update this once we know which upgrade unlock this
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 70)?.level ?? 0) > 0;
@@ -523,7 +529,6 @@ export class Summoning extends Domain {
                     // There's no real Endless essence, so never display it
                     displayEssence = false;
                     break;
-                case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
                     unlocked = false;
