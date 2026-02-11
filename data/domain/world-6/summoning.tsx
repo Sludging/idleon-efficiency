@@ -147,7 +147,7 @@ export class SummonBonus {
     taskBoardBonus: number = 0;
     achievement379Bonus: number = 0;
     achievement373Bonus: number = 0;
-    summoning32Bonus: number = 0;
+    summoning31Bonus: number = 0;
     godshardSetBonus: number = 0;
     emperorBonus: number = 0;
     gemItemPurchased: number = 0;
@@ -159,18 +159,17 @@ export class SummonBonus {
     getBonus = (): number => {
         switch (true)
         {
-            // +1 from in-game indexes as it starts from 1 instead of 0
-            case this.data.bonusId == 21:
-            case this.data.bonusId == 23:
-            case this.data.bonusId == 25:
-            case this.data.bonusId == 32:
+            case this.index == 20:
+            case this.index == 22:
+            case this.index == 24:
+            case this.index == 31:
                 return this.bonusValue;
-            case this.data.bonusId == 20:
+            case this.index == 19:
                 return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
-            case 21 <= this.data.bonusId && 34 >= this.data.bonusId:
-                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+            case 20 <= this.index && 33 >= this.index:
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
 
@@ -567,13 +566,11 @@ export class Summoning extends Domain {
     }
 
     getUpgradeBonusFromIndex(index: number): number {
-        const upgrade = this.summonUpgrades.find(upgrade => upgrade.index == index);
+        return this.summonUpgrades.find(upgrade => upgrade.index == index)?.getFullBonus() || 0;
+    }
 
-        if (!upgrade) {
-            return 0;
-        }
-
-        return upgrade.getFullBonus();
+    getSummoningWinnerBonusFromIndex(index: number): number {
+        return this.summonBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
     }
 
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
@@ -655,7 +652,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const gemItemPurchased = gemStore.purchases.find(purchase => purchase.no == 11)?.pucrhased || 0;
     
     // this bonus isn't affected by any boost, so we can already calculate it here
-    const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 32)?.getBonus() ?? 0);
+    const summonBonus = summoning.getSummoningWinnerBonusFromIndex(31);
 
     summoning.summonBonuses.forEach(bonus => {
         bonus.pristineCharmBonus = charmBonus;
@@ -663,7 +660,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.taskBoardBonus = taskBonus;
         bonus.achievement373Bonus = achiev373;
         bonus.achievement379Bonus = achiev379;
-        bonus.summoning32Bonus = summonBonus;
+        bonus.summoning31Bonus = summonBonus;
         bonus.godshardSetBonus = godshardSetBonus;
         bonus.emperorBonus = emperorBonus;
         bonus.gemItemPurchased = gemItemPurchased;
