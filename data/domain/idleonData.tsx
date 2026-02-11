@@ -236,6 +236,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
     "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
@@ -249,7 +250,6 @@ const postProcessingMap: Record<string, Function> = {
     "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
-    "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
