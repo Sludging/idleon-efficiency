@@ -582,6 +582,32 @@ export class Summoning extends Domain {
         return this.summonBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
     }
 
+    getEssenceSummoningStoneBossmap(index: number): string {
+        switch (index) {
+            case SummonEssenceColor.White: return "Bamboo Laboredge (W6)";
+            case SummonEssenceColor.Green: return "Lightway Path (W6)";
+            case SummonEssenceColor.Yellow: return "Yolrock Basin (W6)";
+            case SummonEssenceColor.Blue: return "Equinox Valley (W3)";
+            case SummonEssenceColor.Purple: return "Jelly Cube Bridge (W4)";
+            case SummonEssenceColor.Red: return "Crawly Catacombs (W5)";
+            case SummonEssenceColor.Cyan: return "Emperor's Castle Doorstep (W6)";
+            default: return "We don't know yet";
+        }
+    }
+
+     getEssenceSummoningStoneBossName(index: number): string {
+        switch (index) {
+            case SummonEssenceColor.White: return "The Aetherdoot";
+            case SummonEssenceColor.Green: return "The Grover Glunko";
+            case SummonEssenceColor.Yellow: return "The Shimmerlord";
+            case SummonEssenceColor.Blue: return "The Freezerslush";
+            case SummonEssenceColor.Purple: return "The Hexermush";
+            case SummonEssenceColor.Red: return "The Cinderdomeo";
+            case SummonEssenceColor.Cyan: return "The Zephyeror";
+            default: return "No boss yet";
+        }
+    }
+
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
         if (color == SummonEssenceColor.Endless) {
             return {
