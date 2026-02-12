@@ -7,7 +7,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Alchemy, CauldronIndex, DiamonChefBubble } from '../../../data/domain/alchemy';
+import { Alchemy, CauldronIndex, DiamonChefBubble } from '../../../data/domain/world-2/alchemy/alchemy';
 import { lavaFunc } from '../../../data/utility';
 
 const saveName = 'latest';

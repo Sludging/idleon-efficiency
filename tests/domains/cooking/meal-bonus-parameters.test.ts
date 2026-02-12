@@ -15,10 +15,10 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Lab } from '../../../data/domain/lab';
-import { Breeding } from '../../../data/domain/breeding';
+import { Lab } from '../../../data/domain/world-4/lab';
+import { Breeding } from '../../../data/domain/world-4/breeding';
 import { Summoning } from '../../../data/domain/world-6/summoning';
-import { Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/world-4/cooking';
 
 const saveName = 'latest';
 const extractionResultsName = 'cooking-meal-bonus-data.json';
@@ -47,7 +47,7 @@ const parameterSpecs = {
     extractionKey: 'win_bonus_26',
     domainExtractor: (gameData: Map<string, any>) => {
       const summoning = gameData.get("summoning") as Summoning;
-      return summoning.summonBonuses.find(bonus => bonus.data.bonusId === 26)?.getBonus() ?? 0;
+      return summoning.summonBonuses.find(bonus => bonus.index === 26)?.getBonus() ?? 0;
     }
   },
 
