@@ -1,0 +1,81 @@
+{
+  "description": "Extract data for summoning winner bonus (WinBonus) calculations",
+  "target": "Summoning WinBonus",
+  "extractions": [
+    {
+      "label": "pristine_charm_bonus_8",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 8, 0)",
+      "description": "Pristine charm bonus for summoning (index 8 - Crystal Comb)"
+    },
+    {
+      "label": "gem_item_purchased_11",
+      "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[11]",
+      "description": "Gem shop purchase 11 (Winner Bonuses)"
+    },
+    {
+      "label": "artifact_bonus_32",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 32, 0)",
+      "description": "Sailing artifact 32 bonus (summoning winner bonus)"
+    },
+    {
+      "label": "task_board_bonus_2_5_4",
+      "expression": "idleon.engine.getGameAttribute(\"Tasks\")[2][5][4]",
+      "description": "Task board merit bonus (max 10) for summoning winners"
+    },
+    {
+      "label": "achievement_379_status",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 379)",
+      "description": "Achievement 379 completion status (winner bonus +1%)"
+    },
+    {
+      "label": "achievement_373_status",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 373)",
+      "description": "Achievement 373 completion status (winner bonus +1%)"
+    },
+    {
+      "label": "godshard_set_bonus",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"GODSHARD_SET\", \"Bonus\", 0, 0)",
+      "description": "Godshard equipment set bonus for summoning winners"
+    },
+    {
+      "label": "emperor_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 8, 0)",
+      "description": "Emperor bonus 8 (summoning winner bonus)"
+    },
+    {
+      "label": "win_bonus_19",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 19, 0)",
+      "description": "Winner bonus 19 (uses 3.5x multiplier, no recursive bonus)"
+    },
+    {
+      "label": "win_bonus_20",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 20, 0)",
+      "description": "Winner bonus 20 (raw value only, no multipliers)"
+    },
+    {
+      "label": "win_bonus_22",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 22, 0)",
+      "description": "Winner bonus 22 (raw value only, no multipliers)"
+    },
+    {
+      "label": "win_bonus_24",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 24, 0)",
+      "description": "Winner bonus 24 (raw value only, no multipliers)"
+    },
+    {
+      "label": "win_bonus_26",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
+      "description": "Winner bonus 26 (Meal bonus - uses all multipliers + bonus 31)"
+    },
+    {
+      "label": "win_bonus_31",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 31, 0)",
+      "description": "Winner bonus 31"
+    },
+    {
+      "label": "win_bonus_5",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 5, 0)",
+      "description": "Winner bonus 5 (uses 3.5x multiplier and all bonuses including recursive bonus 31)"
+    }
+  ]
+}
