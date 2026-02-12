@@ -130,9 +130,12 @@ export class SummonUpgrade {
     }
 
     getBonusText = (level: number = this.level): string => {
-        // This bonus is special so we make a special case
         if (this.index == 2) {
+            // This bonus is special so we make a special case
             return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset by cycle of 4 days (but you keep summoned familiars)";
+        } else if ([49, 57, 72, 75].indexOf(this.index) >= 0) {
+            // Those are the cost reduction upgrades, so we need to format the bonus to get the same display as in-game
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, nFormatter(this.getBaseBonus(level), "CommaNotation")).replace(/}/, nFormatter((1 - 1 / (1 + this.getFullBonus(level) / 100)) * 100, "MultiplierInfo"));
         } else {
             return this.data.bonus.replace(/@/, '\r\n').replace(/{/, nFormatter(this.getBaseBonus(level), "CommaNotation")).replace(/}/, nFormatter(this.getFullBonus(level), "CommaNotation"));
         }
