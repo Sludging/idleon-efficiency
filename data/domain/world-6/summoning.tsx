@@ -695,7 +695,7 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
 
     // Equinox Max Level
-    const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 25)?.getBonus() ?? 0);
+    const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.index == 24)?.getBonus() ?? 0);
     // Don't bother if == 0
     if (bonusEquinoxLevel > 0) {
         equinox.upgrades.forEach((upgrade) => {
@@ -705,7 +705,7 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     }
 
     // Meal Bonus
-    const mealBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 27)?.getBonus() ?? 0);
+    const mealBonus = (summoning.summonBonuses.find(bonus => bonus.index == 26)?.getBonus() ?? 0);
 
     cooking.meals.forEach(meal => {
         meal.winnerBonus = mealBonus;
