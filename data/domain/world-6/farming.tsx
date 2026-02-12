@@ -834,7 +834,7 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
 
     // Update Min and Max possible quantity to collect from one fully grown crop 
-    const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.index == 140)?.pucrhased ?? 0;
+    const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.no == 139)?.pucrhased ?? 0;
     farming.updatePossibleQuantityToCollect(farming.getMarketUpgradeBonusValue(1), gemInstagrowPurchase);
 
     // Update growth speed for displayng when crops will be ready

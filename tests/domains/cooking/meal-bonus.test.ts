@@ -7,7 +7,7 @@
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/world-4/cooking';
 
 const saveName = 'latest';
 const extractionResultsName = 'cooking-meal-bonus-data.json';

@@ -1,19 +1,19 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Sailing } from '../../../data/domain/sailing';
-import { Divinity } from '../../../data/domain/divinity';
+import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
+import { Divinity } from '../../../data/domain/world-5/divinity';
 import { Card } from '../../../data/domain/cards';
-import { Alchemy } from '../../../data/domain/alchemy';
+import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Votes } from '../../../data/domain/world-2/votes';
 import { Stamp } from '../../../data/domain/world-1/stamps';
-import { PlayerStatues } from '../../../data/domain/statues';
-import { Cooking } from '../../../data/domain/cooking';
-import { Rift, SkillMastery } from '../../../data/domain/rift';
-import { Worship, TotalizerBonus } from '../../../data/domain/worship';
+import { PlayerStatues } from '../../../data/domain/world-1/statues';
+import { Cooking } from '../../../data/domain/world-4/cooking';
+import { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
+import { Worship, TotalizerBonus } from '../../../data/domain/world-3/worship';
 import { StarSigns } from '../../../data/domain/starsigns';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
-import { SlabInfluencedArtifact } from '../../../data/domain/sailing/artifacts';
+import { SlabInfluencedArtifact } from '../../../data/domain/world-5/sailing/artifacts';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';

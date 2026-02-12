@@ -45,6 +45,7 @@ import { TomeEpilogueBonusModel } from '../model/tomeEpilogueBonusModel';
 import { EquipmentSets } from '../misc/equipmentSets';
 import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
+import { CoralReef } from '../world-7/coralReef';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -364,6 +365,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const equipmentSet = data.get("equipmentSets") as EquipmentSets;
     const grimoire = data.get("grimoire") as Grimoire;
     const bubba = data.get("bubba") as Bubba;
+    const coralReef = data.get("coralReef") as CoralReef;
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -524,7 +526,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalSummoningUpgradeLevels = summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0);
 
     // Sum of summoning victories
-    // TODO : update summoning to include the new color battles and upgrades
     const summoningVictories = summoning.summonBattles.getTotalVictories();
 
     // Number of Ninja floors unlocked
@@ -545,8 +546,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     }
 
     // Total of all summoning boss victories
-    // TODO once implemented
-    const totalSummoningBossesVictories = 0;
+    const totalSummoningBossesVictories = summoning.summonEssences.reduce((sum, essence) => sum += essence.stoneBossVictories, 0);
 
     // Number of Jade Emporium upgrades bought
     const jadeEmporiumUpgradesBought = sneaking.jadeUpgrades.filter(upgrade => upgrade.display && upgrade.purchased).length;
@@ -983,8 +983,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 97:
                 // Total coral reef upgrades
-                // TODO : get the values once implemented
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(coralReef.upgrades.reduce((sum, upgrade) => sum += upgrade.level, 0));
                 break;
             case 98:
                 // Deepest delve depth reach in a single run

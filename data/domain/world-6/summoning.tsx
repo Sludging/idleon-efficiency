@@ -17,8 +17,10 @@ import { TaskBoard } from "../tasks";
 import { Achievement } from "../achievements";
 import { Equinox } from "../world-3/equinox";
 import { Cooking } from "../world-4/cooking";
-import { Emperor } from "../world-6/emperor";
+import { Emperor } from "./emperor";
 import { EquipmentSets } from "../misc/equipmentSets";
+import { Tesseract } from "../tesseract";
+import { GemStore } from "../gemPurchases";
 
 const WhiteBattleOrder = [
     "Pet1", "Pet2", "Pet3", "Pet0", "Pet4", "Pet6", "Pet5", "Pet10", "Pet11"
@@ -35,7 +37,7 @@ const EndlessModeBonusIndexes = [
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[10]
 const EndlessModeBonusIncrease = [
-    1,3,1,12,1,7,2,4,15,10,1,4,18,2,4,3,20,25,2,20,5,30,24,4,1,2,2,35,9,26,5,5,40,1,45,50,2,6,30,3
+    1,3,1,12,1,7,2,4,15,3,1,4,18,2,4,3,2,2,2,20,5,4,24,4,1,2,3,5,9,26,5,5,3,1,5,8,2,6,30,3
 ]
 
 // engine.GameAttribute.h.CustomList.h.SummonEnemies[11]
@@ -66,7 +68,7 @@ export enum SummonEssenceColor {
     Purple = 4,
     Red = 5,
     Cyan = 6,
-    FutureContent3 = 7,
+    Teal = 7,
     FutureContent4 = 8,
     Endless = 9
 }
@@ -76,18 +78,23 @@ export class SummonUpgrade {
     level: number = 0;
     shouldBeDisplayed: boolean = true;
     bonusMultiplyer: number = 1;
+    isDoubled: boolean = false;
+    doublerBonus: number = 1;
+    stoneBossBonus: number = 1;
+    totalCostReduction: number = 1;
 
-    constructor(public index: number, public data: SummonUpgradeModel, level: number = 0) {
+    constructor(public index: number, public data: SummonUpgradeModel, level: number = 0, doubled: boolean = false) {
         this.shouldBeDisplayed = (data.name != "Name");
         this.level = level;
+        this.isDoubled = doubled;
     }
 
     nextLevelCost = (): number => {
-        return this.data.cost * Math.pow(this.data.costExponent, this.level);
+        return this.totalCostReduction * this.data.cost * Math.pow(this.data.costExponent, this.level);
     }
 
     getBaseBonus = (level: number = this.level): number => {
-        return level * this.data.bonusQty
+        return level * this.data.bonusQty * this.stoneBossBonus * this.doublerBonus;
     }
 
     getFullBonus = (level: number = this.level): number => {
@@ -123,11 +130,14 @@ export class SummonUpgrade {
     }
 
     getBonusText = (level: number = this.level): string => {
-        // This bonus is special so we make a special case
         if (this.index == 2) {
+            // This bonus is special so we make a special case
             return this.data.bonus.slice(0, this.data.bonus.indexOf('@')) + "Cost (and level) reset by cycle of 4 days (but you keep summoned familiars)";
+        } else if ([49, 57, 72, 75].indexOf(this.index) >= 0) {
+            // Those are the cost reduction upgrades, so we need to format the bonus to get the same display as in-game
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, nFormatter(this.getBaseBonus(level), "CommaNotation")).replace(/}/, nFormatter((1 - 1 / (1 + this.getFullBonus(level) / 100)) * 100, "MultiplierInfo"));
         } else {
-            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, this.getBaseBonus(level).toString()).replace(/}/, this.getFullBonus(level).toString());
+            return this.data.bonus.replace(/@/, '\r\n').replace(/{/, nFormatter(this.getBaseBonus(level), "CommaNotation")).replace(/}/, nFormatter(this.getFullBonus(level), "CommaNotation"));
         }
     }
 
@@ -136,7 +146,6 @@ export class SummonUpgrade {
     }
 }
 
-
 export class SummonBonus {
     bonusValue: number = 0;
     pristineCharmBonus: number = 1;
@@ -144,11 +153,10 @@ export class SummonBonus {
     taskBoardBonus: number = 0;
     achievement379Bonus: number = 0;
     achievement373Bonus: number = 0;
-    summoning32Bonus: number = 0;
-
-    // More bonuses
+    summoning31Bonus: number = 0;
     godshardSetBonus: number = 0;
     emperorBonus: number = 0;
+    gemItemPurchased: number = 0;
 
     constructor(public index: number, public data: SummonEnemyBonusModel, bonusValue: number = 0) {
         this.bonusValue = bonusValue;
@@ -157,18 +165,17 @@ export class SummonBonus {
     getBonus = (): number => {
         switch (true)
         {
-            // +1 from in-game indexes as it starts from 1 instead of 0
-            case this.data.bonusId == 21:
-            case this.data.bonusId == 23:
-            case this.data.bonusId == 25:
-            case this.data.bonusId == 32:
+            case this.index == 20:
+            case this.index == 22:
+            case this.index == 24:
+            case this.index == 31:
                 return this.bonusValue;
-            case this.data.bonusId == 20:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
-            case 21 <= this.data.bonusId && 34 >= this.data.bonusId:
-                return this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100); 
+            case this.index == 19:
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.godshardSetBonus) / 100);
+            case 20 <= this.index && 33 >= this.index:
+                return this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
             default:
-                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning32Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
+                return 3.5 * this.bonusValue * this.pristineCharmBonus * (1 + 10 * this.gemItemPurchased / 100) * (1 + (this.artifactBonus + Math.min(10, this.taskBoardBonus) + this.achievement379Bonus + this.achievement373Bonus + this.summoning31Bonus + this.godshardSetBonus + this.emperorBonus) / 100);
         }
     }
 
@@ -192,7 +199,7 @@ export class SummonBonus {
 
     getBonusText = (): string => {
         // Can't have the two at the same time, so no worries with displaying two times the bonus
-        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, notateNumber(1 + this.getBonus() / 100));
+        return this.data.bonus.replace(/{/, nFormatter(this.getBonus())).replace(/</, nFormatter(1 + this.getBonus() / 100, "MultiplierInfo"));
     }
 }
 
@@ -203,6 +210,7 @@ export interface SummonEssence {
     displayEssence: boolean,
     unlocked: boolean,
     victories: number,
+    stoneBossVictories: number,
     battles: SummonEnemyModel[]
 }
 
@@ -328,6 +336,10 @@ export class Summoning extends Domain {
                     // Multiply bonus by cyan victory
                     upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Cyan)?.victories ?? 0);
                     break;
+                case 73:
+                    // Multiply bonus by teal victory
+                    upgrade.bonusMultiplyer = (this.summonEssences?.find(essence => essence.color == SummonEssenceColor.Teal)?.victories ?? 0);
+                    break;
                 case 62:
                 case 63:
                 case 64:
@@ -341,13 +353,15 @@ export class Summoning extends Domain {
                 case 65:
                 case 66:
                 case 67:
+                case 80:
                     // Multiply bonus by summoning level
                     upgrade.bonusMultiplyer = this.summoningLevel;
                     break;
                 case 60:
                 case 61:
+                case 75:
                     // Multiply bonus for every 100 total summoning upgrades purchased
-                    upgrade.bonusMultiplyer = Math.floor(this.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100);
+                    upgrade.bonusMultiplyer = Math.max(0, Math.floor(this.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100));
                     break;
                 default:
                     upgrade.bonusMultiplyer = 1;
@@ -358,16 +372,16 @@ export class Summoning extends Domain {
 
     updatePlayersUnitStats = () => {
         const healthFlatBonus = [1,10,35,37];
-        const healthFlat = (1 + this.summonUpgrades.filter(upgrade => healthFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
-        this.summonBattles.playerUnitsHP = healthFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 20)?.getFullBonus() ?? 0) / 100 ) 
-                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 50)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 59)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 63)?.getFullBonus() ?? 0)) / 100 )
-                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 61)?.getFullBonus() ?? 0) / 100);
+        const healthFlat = 2 + (1 + this.summonUpgrades.filter(upgrade => healthFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
+        this.summonBattles.playerUnitsHP = healthFlat * (1 + (this.getUpgradeBonusFromIndex(20) + this.getUpgradeBonusFromIndex(81)) / 100) 
+                                        * (1 + (this.getUpgradeBonusFromIndex(50) + this.getUpgradeBonusFromIndex(59) + this.getUpgradeBonusFromIndex(63)) / 100)
+                                        * (1 + this.getUpgradeBonusFromIndex(61) / 100);
 
         const attackFlatBonus = [3,12,21,31];
         const attackFlat = (1 + this.summonUpgrades.filter(upgrade => attackFlatBonus.indexOf(upgrade.index) > -1)?.reduce((sum, upgrade) => sum + upgrade.getFullBonus(), 0));
-        this.summonBattles.playerUnitsAtk = attackFlat * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 43)?.getFullBonus() ?? 0) / 100 ) 
-                                        * (1 + ((this.summonUpgrades.find(upgrade => upgrade.index == 51)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 56)?.getFullBonus() ?? 0) + (this.summonUpgrades.find(upgrade => upgrade.index == 64)?.getFullBonus() ?? 0)) / 100 )
-                                        * (1 + (this.summonUpgrades.find(upgrade => upgrade.index == 60)?.getFullBonus() ?? 0) / 100);
+        this.summonBattles.playerUnitsAtk = attackFlat * (1 + (this.getUpgradeBonusFromIndex(43) + this.getUpgradeBonusFromIndex(74)) / 100) 
+                                        * (1 + (this.getUpgradeBonusFromIndex(51) + this.getUpgradeBonusFromIndex(56) + this.getUpgradeBonusFromIndex(64)) / 100)
+                                        * (1 + this.getUpgradeBonusFromIndex(60) / 100);
 
         // This bonus is based on attack damage of units, so can't update it before
         const sharpenedSpikeUpgrade = this.summonUpgrades.find(upgrade => upgrade.index == 68);
@@ -379,7 +393,9 @@ export class Summoning extends Domain {
     getRawKeys(): RawData[] {
         return [
             { key: "Summon", perPlayer: false, default: [] },
-            { key: "OptLacc", perPlayer: false, default: [] }
+            { key: "OptLacc", perPlayer: false, default: [] },
+            { key: "Holes", perPlayer: false, default:[] },
+            { key: "KRbest", perPlayer: false, default:[] },
         ]
     }
 
@@ -391,20 +407,22 @@ export class Summoning extends Domain {
         const summoning = data.get(this.dataKey) as Summoning;
         const summoningData = data.get("Summon") as any[];
         const optionList = data.get("OptLacc") as number[];
+        const holeData = data.get("Holes") as any[];
+        const killroyKillsData = data.get("KRbest") as Record<string, number>;
 
         // Defend against old accounts and people without any summoning data.
         if (summoningData.length == 0) {
             return;
         }
 
+        const doublerData = (holeData[28] || []) as number[];
+
         summoning.summonUpgrades = [];
-        summoning.summonUpgrades = initSummonUpgradeRepo()
-            .map(
-            base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0)
+        summoning.summonUpgrades = initSummonUpgradeRepo().map(
+            base => new SummonUpgrade(base.index, base.data, summoningData[0][base.index] ?? 0, doublerData.includes(base.index))
         );
 
-        summoning.summonBonuses = initSummonEnemyBonusRepo()
-        .map(
+        summoning.summonBonuses = initSummonEnemyBonusRepo().map(
             base => new SummonBonus(base.index, base.data)
         );
         
@@ -479,6 +497,7 @@ export class Summoning extends Domain {
             let unlocked: boolean = false;
             let displayBattle: boolean = false;
             let displayEssence: boolean = false;
+            const stoneBossVictories = killroyKillsData[`SummzTrz${index}`] ?? 0;
             const essenceOwned: number = index < essences.length ? essences[index] : 0;
             switch(index) {
                 case SummonEssenceColor.White:
@@ -516,6 +535,12 @@ export class Summoning extends Domain {
                     displayBattle = true;
                     displayEssence = true;
                     break;
+                case SummonEssenceColor.Teal:
+                    // TODO : update this once Spelunking is correctly implemented
+                    unlocked = false;
+                    displayBattle = true;
+                    displayEssence = true;
+                    break;
                 case SummonEssenceColor.Endless:
                     // Need to update this once we know which upgrade unlock this
                     unlocked = (this.summonUpgrades?.find(upgrade => upgrade.index == 70)?.level ?? 0) > 0;
@@ -523,7 +548,6 @@ export class Summoning extends Domain {
                     // There's no real Endless essence, so never display it
                     displayEssence = false;
                     break;
-                case SummonEssenceColor.FutureContent3:
                 case SummonEssenceColor.FutureContent4:
                 default:
                     unlocked = false;
@@ -542,7 +566,7 @@ export class Summoning extends Domain {
                 colorBattles = summoning.summonBattles.allBattles[index];
             }
 
-            summoning.summonEssences.push({ color: index, quantity: essenceOwned, unlocked: unlocked, displayBattles: displayBattle, displayEssence: displayEssence, victories: colorVictories, battles: colorBattles });
+            summoning.summonEssences.push({ color: index, quantity: essenceOwned, unlocked: unlocked, displayBattles: displayBattle, displayEssence: displayEssence, victories: colorVictories, battles: colorBattles, stoneBossVictories: stoneBossVictories });
         }
 
         summoning.updateUnlockedUpgrades();
@@ -551,6 +575,40 @@ export class Summoning extends Domain {
         summoning.summonBattles.maxHealth = summoningData[3][2] ?? 0;
 
         summoning.summonFamiliarRaw = summoningData[4];
+    }
+
+    getUpgradeBonusFromIndex(index: number): number {
+        return this.summonUpgrades.find(upgrade => upgrade.index == index)?.getFullBonus() || 0;
+    }
+
+    getSummoningWinnerBonusFromIndex(index: number): number {
+        return this.summonBonuses.find(bonus => bonus.index == index)?.getBonus() || 0;
+    }
+
+    getEssenceSummoningStoneBossmap(index: number): string {
+        switch (index) {
+            case SummonEssenceColor.White: return "Bamboo Laboredge (W6)";
+            case SummonEssenceColor.Green: return "Lightway Path (W6)";
+            case SummonEssenceColor.Yellow: return "Yolrock Basin (W6)";
+            case SummonEssenceColor.Blue: return "Equinox Valley (W3)";
+            case SummonEssenceColor.Purple: return "Jelly Cube Bridge (W4)";
+            case SummonEssenceColor.Red: return "Crawly Catacombs (W5)";
+            case SummonEssenceColor.Cyan: return "Emperor's Castle Doorstep (W6)";
+            default: return "We don't know yet";
+        }
+    }
+
+     getEssenceSummoningStoneBossName(index: number): string {
+        switch (index) {
+            case SummonEssenceColor.White: return "The Aetherdoot";
+            case SummonEssenceColor.Green: return "The Grover Glunko";
+            case SummonEssenceColor.Yellow: return "The Shimmerlord";
+            case SummonEssenceColor.Blue: return "The Freezerslush";
+            case SummonEssenceColor.Purple: return "The Hexermush";
+            case SummonEssenceColor.Red: return "The Cinderdomeo";
+            case SummonEssenceColor.Cyan: return "The Zephyeror";
+            default: return "No boss yet";
+        }
     }
 
     static getSummoningStoneIcon(color: SummonEssenceColor): ImageData {
@@ -594,20 +652,6 @@ export class Summoning extends Domain {
     }
 }
 
-export const updateSummoningLevelAndBonusesFromIt = (data: Map<string, any>) => {
-    const summoning = data.get("summoning") as Summoning;
-    const players = data.get("players") as Player[];
-
-    const levels: number[] = [];
-    players.forEach(player => {
-        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
-    })
-    summoning.summoningLevel = Math.max(...levels);
-
-    summoning.updateSecondaryBonus();
-    summoning.updatePlayersUnitStats();
-}
-
 export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const summoning = data.get("summoning") as Summoning;
     const sneaking = data.get("sneaking") as Sneaking;
@@ -616,6 +660,7 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const achievements = data.get("achievements") as Achievement[];
     const emperor = data.get("emperor") as Emperor;
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
+    const gemStore = data.get("gems") as GemStore;
 
     const crystalComb = sneaking.pristineCharms?.find(charm => charm.data.itemId == 8);
     const charmBonus = (crystalComb && crystalComb.unlocked) ? (1 + crystalComb.data.x1 / 100) : 1;
@@ -626,9 +671,10 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
     const taskBonus = taskboard.merits[44].getBonus();
     const emperorBonus = emperor.emperorBonuses[8].getBonus();
     const godshardSetBonus = equipmentSets.getSetBonus("GODSHARD_SET", undefined, true);
+    const gemItemPurchased = gemStore.purchases.find(purchase => purchase.no == 11)?.pucrhased || 0;
     
     // this bonus isn't affected by any boost, so we can already calculate it here
-    const summonBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 32)?.getBonus() ?? 0);
+    const summonBonus = summoning.getSummoningWinnerBonusFromIndex(31);
 
     summoning.summonBonuses.forEach(bonus => {
         bonus.pristineCharmBonus = charmBonus;
@@ -636,10 +682,13 @@ export const updateSummoningWinnerBonusBoost = (data: Map<string, any>) => {
         bonus.taskBoardBonus = taskBonus;
         bonus.achievement373Bonus = achiev373;
         bonus.achievement379Bonus = achiev379;
-        bonus.summoning32Bonus = summonBonus;
+        bonus.summoning31Bonus = summonBonus;
         bonus.godshardSetBonus = godshardSetBonus;
         bonus.emperorBonus = emperorBonus;
+        bonus.gemItemPurchased = gemItemPurchased;
     });
+
+    return summoning;
 }
 
 // Kinda like what have been done for breeding Shiny with updateAllShinyEffects(), easier to manage this way
@@ -649,7 +698,7 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     const cooking = data.get("cooking") as Cooking;
 
     // Equinox Max Level
-    const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 25)?.getBonus() ?? 0);
+    const bonusEquinoxLevel = (summoning.summonBonuses.find(bonus => bonus.index == 24)?.getBonus() ?? 0);
     // Don't bother if == 0
     if (bonusEquinoxLevel > 0) {
         equinox.upgrades.forEach((upgrade) => {
@@ -659,9 +708,69 @@ export const updateSummoningWinnerImpact = (data: Map<string, any>) => {
     }
 
     // Meal Bonus
-    const mealBonus = (summoning.summonBonuses.find(bonus => bonus.data.bonusId == 27)?.getBonus() ?? 0);
+    const mealBonus = (summoning.summonBonuses.find(bonus => bonus.index == 26)?.getBonus() ?? 0);
 
     cooking.meals.forEach(meal => {
         meal.winnerBonus = mealBonus;
     });
+
+    return summoning;
+}
+
+export const updateSummoningUpgrades= (data: Map<string, any>) => {
+    const summoning = data.get("summoning") as Summoning;
+    const players = data.get("players") as Player[];
+    const tesseract = data.get("tesseract") as Tesseract;
+    
+    // Update upgrade bonuses
+    const levels: number[] = [];
+    players.forEach(player => {
+        levels.push(player.skills.get(SkillsIndex.Summoning)?.level ?? 0);
+    })
+    summoning.summoningLevel = Math.max(...levels);
+
+    const talentBonus597 = players.reduce((value, player) => {
+        const talentBonus = player.getTalentBonus(597);
+
+        if (talentBonus > value) {
+            return talentBonus;
+        } else {
+            return value;
+        }
+    }, 0);
+    const doublerBonus = 2 + Math.max(0, talentBonus597 / 100 - 1) + summoning.getUpgradeBonusFromIndex(78) / 100;
+
+    summoning.summonUpgrades.forEach(upgrade => {
+        upgrade.doublerBonus = upgrade.isDoubled ? doublerBonus : 1;
+        upgrade.stoneBossBonus = 1 + (parseInt(upgrade.data.filler) == 1 ? summoning.summonEssences.find(essence => essence.color == upgrade.data.colour)?.stoneBossVictories || 0 : 0);
+    });
+    summoning.updateSecondaryBonus();
+    summoning.updatePlayersUnitStats();
+
+    // Update cost reduction for upgrades
+    const talentBonus595 = players.reduce((value, player) => {
+        const talentBonus = player.getTalentBonus(595);
+
+        if (talentBonus > value) {
+            return talentBonus;
+        } else {
+            return value;
+        }
+    }, 0);
+
+    const costReductionFromTalent595 = 1 / (1 + Math.max(0, Math.floor(summoning.summonUpgrades.reduce((sum, upgrade) => sum + upgrade.level, 0)/100)) * talentBonus595 / 100);
+    const costReductionFromTesseract54 = 1 / (1 + tesseract.getUpgradeBonus(54) * (summoning.summonEssences?.find(essence => essence.color == SummonEssenceColor.Endless)?.victories ?? 0) / 100);
+    const costReductionFromUpgrade49 = 1 / (1 + summoning.getUpgradeBonusFromIndex(49) / 100);
+    const costReductionFromUpgrade57 = 1 / (1 + summoning.getUpgradeBonusFromIndex(57) / 100);
+    const costReductionFromUpgrade72 = 1 / (1 + summoning.getUpgradeBonusFromIndex(72) / 100);
+    const costReductionFromUpgrade75 = 1 / (1 + summoning.getUpgradeBonusFromIndex(75) / 100);
+    
+    const totalCostReduction = costReductionFromTalent595 * costReductionFromTesseract54 * costReductionFromUpgrade49 * costReductionFromUpgrade57 
+        * costReductionFromUpgrade72 * costReductionFromUpgrade75;
+
+    summoning.summonUpgrades.forEach(upgrade => {
+        upgrade.totalCostReduction = totalCostReduction;
+    });
+
+    return summoning;
 }

@@ -17,6 +17,8 @@ import { SummoningUpgrades } from '../../../components/world-6/summoning/summoni
 import { SummoningBattles } from '../../../components/world-6/summoning/summoningBattles';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import TipDisplay from '../../../components/base/TipDisplay';
+import { CircleInformation } from 'grommet-icons';
 
 function Summoning() {
     const { theData } = useAppDataStore(useShallow(
@@ -38,7 +40,7 @@ function Summoning() {
                 <Box justify="start" direction='row' gap="small">
                     {
                         summoning.summonEssences.filter(essence => essence.displayEssence == true).map((essence) => (
-                            <ShadowBox width={"xsmall"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
+                            <ShadowBox width={"small"} key={essence.color.toString()} background="dark-1" gap="xsmall" pad="small" align="left">
                                 <ComponentAndLabel
                                     label={SummoningDomain.getEssenceColorName(essence.color)}
                                     component={
@@ -48,6 +50,22 @@ function Summoning() {
                                         </Box>
                                     }
                                 />
+                                <Box direction='row' gap="xsmall">
+                                    {essence.stoneBossVictories} Stone kills
+                                    <TipDisplay
+                                        heading={summoning.getEssenceSummoningStoneBossName(essence.color)}
+                                        size='small'
+                                        maxWidth='medium'
+                                        body={
+                                            <Box>
+                                                <Text size='small'>You can find the stone to start the boss battle here :</Text>
+                                                <Text size='small'>{summoning.getEssenceSummoningStoneBossmap(essence.color)}</Text>
+                                            </Box>
+                                        }
+                                    >
+                                        <CircleInformation size="small" />
+                                    </TipDisplay>
+                                </Box>
                             </ShadowBox>
                         ))
                     }

@@ -48,7 +48,7 @@ import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
-import { Summoning, updateSummoningLevelAndBonusesFromIt, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
+import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
@@ -236,6 +236,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
     "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
@@ -244,18 +245,16 @@ const postProcessingMap: Record<string, Function> = {
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),
-    "summoningLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningLevelAndBonusesFromIt(accountData),
+    "emperorBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorBonuses(accountData),
     "summoningWinnerBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerBonusBoost(accountData),
     "summoningWinnerImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningWinnerImpact(accountData),
     "starSignsUnlocked": (doc: Cloudsave, accountData: Map<string, any>) => updateStarSignsUnlocked(accountData),
     "farmingLevel": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLevel(accountData),
-    "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     "divinity": (doc: Cloudsave, accountData: Map<string, any>) => updateDivinity(accountData),
     "updatePlayerTalentLevelWithoutESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelExceptESBonus(accountData),
     "family": (doc: Cloudsave, accountData: Map<string, any>) => calculateFamily(accountData),
     "updatePlayerTalentLevelESBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentLevelESBonus(accountData),
     "arcaneCultistImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateArcaneCultistImpact(accountData),
-    "emperorBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorBonuses(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
     "updateInfinityStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updateInfinityStarSigns(accountData),
     "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
@@ -299,6 +298,7 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "updateSummoningUpgrades": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningUpgrades(accountData),
     "updateWorshipTotemsSoulGainBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTotemsBonuses(accountData),
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
     "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),

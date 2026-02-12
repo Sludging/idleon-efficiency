@@ -1,4 +1,5 @@
 import { Box, Grid, Stack, Text } from "grommet";
+import { Star } from 'grommet-icons';
 import ShadowBox from "../../base/ShadowBox";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
@@ -6,6 +7,7 @@ import { nFormatter } from "../../../data/utility";
 import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence } from '../../../data/domain/world-6/summoning';
 import TabButton from "../../base/TabButton";
 import { useState } from "react";
+import TipDisplay from "../../base/TipDisplay";
 
 const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: SummonUpgrade[], allUpgrades: SummonUpgrade[], essence: SummonEssence | undefined }) => {
     if (!essence || colorUpgrades.length == 0) {
@@ -43,6 +45,14 @@ const ColorSection = ({ colorUpgrades, allUpgrades, essence }: { colorUpgrades: 
                                                     <Text size="xsmall">{upgrade.data.name}</Text>
                                                     <Text size="xsmall">{upgrade.getLevelDisplay()}</Text>
                                                 </Box>
+                                                {upgrade.isDoubled && 
+                                                    <TipDisplay
+                                                        heading="Summoning doubler"
+                                                        size='small'
+                                                        maxWidth='small'
+                                                    >
+                                                        <Star size="small" color="yellow" />
+                                                    </TipDisplay>}
                                             </Box>
                                             <TextAndLabel textSize='xsmall' text={upgrade.getBonusText()} label={"Bonus"} />
                                         </Box>

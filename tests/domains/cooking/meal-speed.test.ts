@@ -7,7 +7,7 @@
 
 import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/world-4/cooking';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';

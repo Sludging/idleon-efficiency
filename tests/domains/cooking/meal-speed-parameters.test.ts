@@ -8,19 +8,19 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Cooking } from '../../../data/domain/cooking';
+import { Cooking } from '../../../data/domain/world-4/cooking';
 import { StarSigns } from '../../../data/domain/starsigns';
 import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
 import { Player } from '../../../data/domain/player';
 import { Votes } from '../../../data/domain/world-2/votes';
-import { Alchemy } from '../../../data/domain/alchemy';
+import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
-import { AtomCollider } from '../../../data/domain/atomCollider';
-import { TotalizerBonus, Worship } from '../../../data/domain/worship';
-import { Sailing } from '../../../data/domain/sailing';
-import { Arcade } from '../../../data/domain/arcade';
+import { AtomCollider } from '../../../data/domain/world-3/construction/atomCollider';
+import { TotalizerBonus, Worship } from '../../../data/domain/world-3/worship';
+import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
+import { Arcade } from '../../../data/domain/world-2/arcade';
 import { Stamp } from '../../../data/domain/world-1/stamps';
-import { Lab } from '../../../data/domain/lab';
+import { Lab } from '../../../data/domain/world-4/lab';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
 import { Card } from '../../../data/domain/cards';
@@ -235,8 +235,7 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'summoning_win_bonus_15',
     domainExtractor: (gameData) => {
       const summoning = gameData.get("summoning") as Summoning;
-      // Our bonus index starts at 1, so we get 16 instead of 15.
-      const winnerBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16)?.getBonus() ?? 0;
+      const winnerBonus = summoning.summonBonuses.find(bonus => bonus.index == 15)?.getBonus() ?? 0;
       return winnerBonus;
     }
   },
