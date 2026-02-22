@@ -512,7 +512,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                     : artifact.status == ArtifactStatus.Sovereign ? sum + 4
                         : artifact.status == ArtifactStatus.Omnipotent ? sum + 5
                             : artifact.status == ArtifactStatus.Transcendent ? sum + 6
-                            : sum + 0
+                                : sum + 0
         , 0);
 
     // Highest level captain
@@ -1083,6 +1083,7 @@ const tomeLineDisplayOrder = [
     107,
     109,
     12,
+    113,
     106,
     75,
     13,
@@ -1138,6 +1139,7 @@ const tomeLineDisplayOrder = [
     59,
     64,
     63,
+    111,
     58,
     56,
     93,
@@ -1155,6 +1157,7 @@ const tomeLineDisplayOrder = [
     67,
     77,
     78,
+    112,
     72,
     74,
     99,
@@ -1173,5 +1176,8 @@ const tomeLineDisplayOrder = [
     104,
     98,
     102,
-    105
+    105,
+    110,
+    114,
+    115
 ]
