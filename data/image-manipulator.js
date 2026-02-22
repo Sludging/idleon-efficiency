@@ -40,7 +40,7 @@
                     })
                 }
                 else {
-                    console.log("Failed with", e)
+                    console.log(`Failed with ${e.message} for ${file}`)
                 }
             }
         })
