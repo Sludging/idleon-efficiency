@@ -306,13 +306,19 @@ boat.getSpeedValue({withCaptain: false})
 
 ### Precision Handling
 
-Use appropriate precision for floating-point comparisons:
-```typescript
-// For percentages and most calculations
-expect(calculated).toBeCloseTo(extracted, 2);  // 2 decimal places
+99% of cases will use a tolerance of 0.
 
-// For very precise calculations
-expect(calculated).toBeCloseTo(extracted, 5);  // 5 decimal places
+We can use a few percentage of tolerance for very big numbers of 
+unstable calculations.
+
+This will only be done on a case by case basis and very rarely.
+
+```typescript
+// For most calculations
+expect(domainValue).toMatchLiveGame(liveValue, 0);
+
+// For very rare inconsistent calculations
+expect(domainValue).toMatchLiveGame(liveValue, 0.01);
 ```
 
 ## Troubleshooting
