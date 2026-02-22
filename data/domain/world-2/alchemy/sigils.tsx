@@ -33,7 +33,34 @@ export class Sigil {
     }
 
     getBonus = (): number => {
-        const baseBoost = this.boostLevel == 2 ? (this.data.x2 ?? this.data.boostBonus) : this.boostLevel == 1 ? this.data.boostBonus : this.boostLevel == 0 ? this.data.unlockBonus : 0;
+        // If locked, no bonus.
+        if (this.boostLevel < 0) {
+            return 0;
+        }
+
+        let baseBoost = 1;
+        switch (this.boostLevel) {
+            // Unlocked
+            case 0:
+                baseBoost = this.data.unlockBonus;
+                break;
+            // Boosted
+            case 1:
+                baseBoost = this.data.boostBonus;
+                break;
+            // Ionized
+            case 2:
+                baseBoost = this.data.x2!
+                break;
+            // Ethereal
+            case 3:
+                baseBoost = this.data.x4!;
+                break;
+            // Eclectic
+            case 4:
+                baseBoost = this.data.x6!;
+                break;
+        }
         return baseBoost * (1 + this.artifactBoost);
     }
 
