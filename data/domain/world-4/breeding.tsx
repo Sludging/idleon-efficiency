@@ -55,6 +55,7 @@ export const territoryNiceNames = [
     "Bamboo Forest",
     "Lullaby Airways",
     "Dharma Mesa",
+    "Shallow Shoals",
 ]
 
 
