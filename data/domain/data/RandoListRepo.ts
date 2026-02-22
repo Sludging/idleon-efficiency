@@ -1513,7 +1513,8 @@ export const initRandoListRepo = () => {
                     "60",
                     "63",
                     "66",
-                    "70"
+                    "70",
+                    "73"
                 ]
             }),
         new RandoListBase(50, <RandoListModel>{
@@ -1552,7 +1553,7 @@ export const initRandoListRepo = () => {
                     "BarB2.png",
                     "BarB4.png",
                     "BarSpel.png",
-                    "BarSpel.png",
+                    "BarResearch.png",
                     "BarSpel.png"
                 ]
             }),
@@ -1887,7 +1888,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "GIFTMAS_EVENT_v1.04;NEW_UPDATE_PATCH_NOTES_@_*Giftmas_has_come_to_IdleOn!_Get_your_goodies_every_day_until_December_31st!_@_*Collect_50_Giftmas_Giftboxes_EVERY_DAY_by_defeating_monsters!_These_contain_new_exclusive_hats,_old_hats,_nametags,_gems,_and_more!_@_*Play_the_new_Starry_Night_Delight_ticket_in_World_1_town!_I_gave_you_+2_tries_for_Free._Collecting_all_50_Giftboxes_from_monsters_give_you_an_additional_+1_try_EVERY_DAY,_and_you_also_get_Extra_tries_for_leaving_IdleOn_open!_@_*The_Daily_Dig_is_BACK!_Just_say_'Dig'_in_game_to_get_started_on_your_hunt_for_treasure,_and_don't_forget_to_do_it_every_day!_@_*Hold_down_on_that_blue_Candle_drop_you_got,_and_you_can_Make_a_Wish_every_day_for_EXCLUSIVE_COMPANIONS!_Note_that_the_Wish_Boost_from_buying_the_green_candle_also_boosts_your_freebie_blue_candle_chance!_@_*Many_more_fixes_and_improvements._@_*Click_that_floating_Discord_button_for_full_patch_notes!;*Le",
+                    "World_7,_Part_II_v1.05;NEW_UPDATE_PATCH_NOTES_@_*The_MURKY_TRENCH_(aka_W7_Pt.2)_is_HERE!_7_new_maps,_7_new_monsters,_a_BRAND_NEW_SKILL,_and_OH_hohoho_SO_much_more!_@_*New_Skill:RESEARCH!_Find_it_in_World_7_town,_and_help_create_NEW_CONTENT_by_upgrading_your_grid!_New_Artifact_Tier,_new_Farming_gameplay_system,_new_Cog_Board_expansion_just_to_name_a_few..._ALL_unlocked_via_Research!_@_*Mr._Minehead's_Depth_Charge_game_can_be_played_from_the_2nd_map_of_the_new_Murky_Trench_area!_@_*New_content_unrelated_to_Research_is_here_too,_like_new_Meals,_new_Mob_Fighting_(W4_pets_are_called_Mobs_now),_new_Farming_Crops,_more_Summoning_Fights,_and_a_new_Coin_Tier!_@_*THE_GRAND_TOURNAMENT_is_HERE,_found_in_the_Codex!!_It's_a_gamewide_competition_of_who_has_the_best_pet_collection,_with_awesome_COSMETIC_rewards,_like_Champion_Pets_and_end_of_season_COSMETICS!_These_COSMETICS_don't_give_any_bonuses..._you_gotta_want_'em_for_the_glory!_@_*Click_the_Discord_button_for_full_patch_notes!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2654,7 +2655,9 @@ export const initRandoListRepo = () => {
                     "325",
                     "205",
                     "280",
-                    "330"
+                    "330",
+                    "382",
+                    "207"
                 ]
             }),
         new RandoListBase(79, <RandoListModel>{
@@ -2745,7 +2748,19 @@ export const initRandoListRepo = () => {
                     "w7a9",
                     "w7a10",
                     "w7a11",
-                    "w7a12"
+                    "w7a12",
+                    "w7b1",
+                    "w7b2",
+                    "w7b3",
+                    "w7b4",
+                    "w7b5",
+                    "w7b6",
+                    "w7b7",
+                    "w7b8",
+                    "w7b9",
+                    "w7b10",
+                    "w7b11",
+                    "w7b12"
                 ]
             }),
         new RandoListBase(88, <RandoListModel>{
@@ -2996,7 +3011,7 @@ export const initRandoListRepo = () => {
                     "+{_Tab_4_Talent_Pts",
                     "+{_Star_Talent_Pts",
                     "+{%_Faster_Refinery_Speed",
-                    "+{%_Faster_Shiny_Pet_Lv_Up_Rate",
+                    "+{%_Faster_Shiny_Mob_Lv_Up_Rate",
                     "+{%_Sail_Captain_EXP_Gain",
                     "+{%_Lower_Minimum_Travel_Time_for_Sailing",
                     "+{%_Line_Width_in_Lab",

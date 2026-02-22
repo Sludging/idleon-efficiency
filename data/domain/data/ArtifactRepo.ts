@@ -19,7 +19,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "All shrines level up +300% faster!",
                 "sovereignBonusQty": 300,
                 "omnipotentBonus": "All shrines level up +400% faster!",
-                "omnipotentBonusQty": 400
+                "omnipotentBonusQty": 400,
+                "transcendentBonus": "All shrines level up +500% faster!",
+                "transcendentBonusQty": 500
             }),
         new ArtifactBase(1, <ArtifactModel>{
                 "name": "Maneki Kat",
@@ -34,7 +36,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(2, <ArtifactModel>{
                 "name": "Ruble Cuble",
@@ -49,7 +53,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(3, <ArtifactModel>{
                 "name": "Fauxory Tusk",
@@ -64,7 +70,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(4, <ArtifactModel>{
                 "name": "Gold Relic",
@@ -79,7 +87,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "Samples grow by 5% for 100 days instead!",
                 "sovereignBonusQty": 3,
                 "omnipotentBonus": "Samples grow by 6% for 120 days instead!",
-                "omnipotentBonusQty": 4
+                "omnipotentBonusQty": 4,
+                "transcendentBonus": "Samples grow by 7% for 140 days instead!",
+                "transcendentBonusQty": 5
             }),
         new ArtifactBase(5, <ArtifactModel>{
                 "name": "Genie Lamp",
@@ -94,7 +104,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(6, <ArtifactModel>{
                 "name": "Silver Ankh",
@@ -109,7 +121,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "75% chance for +1 box when completing post office orders!",
                 "sovereignBonusQty": 75,
                 "omnipotentBonus": "90% chance for +1 box when completing post office orders!",
-                "omnipotentBonusQty": 90
+                "omnipotentBonusQty": 90,
+                "transcendentBonus": "95% chance for +1 box when completing post office orders!",
+                "transcendentBonusQty": 95
             }),
         new ArtifactBase(7, <ArtifactModel>{
                 "name": "Emerald Relic",
@@ -124,7 +138,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "Get 1.90x more gold bars from converting!",
                 "sovereignBonusQty": 110,
                 "omnipotentBonus": "Get 2.50x more gold bars from converting!",
-                "omnipotentBonusQty": 170
+                "omnipotentBonusQty": 170,
+                "transcendentBonus": "Get 3.20x more gold bars from converting!",
+                "transcendentBonusQty": 240
             }),
         new ArtifactBase(8, <ArtifactModel>{
                 "name": "Fun Hippoete",
@@ -139,7 +155,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(9, <ArtifactModel>{
                 "name": "Arrowhead",
@@ -154,7 +172,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "1.70x higher chance to get rare chests!",
                 "sovereignBonusQty": 70,
                 "omnipotentBonus": "1.90x higher chance to get rare chests!",
-                "omnipotentBonusQty": 90
+                "omnipotentBonusQty": 90,
+                "transcendentBonus": "2.10x higher chance to get rare chests!",
+                "transcendentBonusQty": 110
             }),
         new ArtifactBase(10, <ArtifactModel>{
                 "name": "10 AD Tablet",
@@ -169,7 +189,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(11, <ArtifactModel>{
                 "name": "Ashen Urn",
@@ -184,7 +206,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "Applies up to character level 800 instead!",
                 "sovereignBonusQty": 600,
                 "omnipotentBonus": "Applies up to character level 1000 instead!",
-                "omnipotentBonusQty": 800
+                "omnipotentBonusQty": 800,
+                "transcendentBonus": "Applies up to character level 1200 instead!",
+                "transcendentBonusQty": 1000
             }),
         new ArtifactBase(12, <ArtifactModel>{
                 "name": "Amberite",
@@ -199,7 +223,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "Affects +3 additional bubbles per day!",
                 "sovereignBonusQty": 3,
                 "omnipotentBonus": "Affects +4 additional bubbles per day!",
-                "omnipotentBonusQty": 4
+                "omnipotentBonusQty": 4,
+                "transcendentBonus": "Affects +5 additional bubbles per day!",
+                "transcendentBonusQty": 5
             }),
         new ArtifactBase(13, <ArtifactModel>{
                 "name": "Triagulon",
@@ -214,7 +240,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(14, <ArtifactModel>{
                 "name": "Billcye Tri",
@@ -229,7 +257,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "75% chance for +1 box when completing post office orders!",
                 "sovereignBonusQty": 75,
                 "omnipotentBonus": "90% chance for +1 box when completing post office orders!",
-                "omnipotentBonusQty": 90
+                "omnipotentBonusQty": 90,
+                "transcendentBonus": "95% chance for +1 box when completing post office orders!",
+                "transcendentBonusQty": 95
             }),
         new ArtifactBase(15, <ArtifactModel>{
                 "name": "Frost Relic",
@@ -244,7 +274,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(16, <ArtifactModel>{
                 "name": "Chilled Yarn",
@@ -259,7 +291,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(17, <ArtifactModel>{
                 "name": "Causticolumn",
@@ -274,7 +308,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(18, <ArtifactModel>{
                 "name": "Jade Rock",
@@ -289,7 +325,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(19, <ArtifactModel>{
                 "name": "Dreamcatcher",
@@ -304,7 +342,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(20, <ArtifactModel>{
                 "name": "Gummy Orb",
@@ -319,7 +359,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(21, <ArtifactModel>{
                 "name": "Fury Relic",
@@ -334,7 +376,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(22, <ArtifactModel>{
                 "name": "Cloud Urn",
@@ -349,7 +393,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "80% chance for +1 box when completing post office orders!",
                 "sovereignBonusQty": 80,
                 "omnipotentBonus": "95% chance for +1 box when completing post office orders!",
-                "omnipotentBonusQty": 95
+                "omnipotentBonusQty": 95,
+                "transcendentBonus": "97% chance for +1 box when completing post office orders!",
+                "transcendentBonusQty": 97
             }),
         new ArtifactBase(23, <ArtifactModel>{
                 "name": "Weatherbook",
@@ -364,14 +410,16 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(24, <ArtifactModel>{
                 "name": "Giants Eye",
                 "baseBonus": 10,
                 "baseFindChance": 900,
                 "qtyBonus": 25,
-                "bonus": "+{% shiny pet breed chance per day. Stacks until successfully breeding a shiny!",
+                "bonus": "+{% Shiny Mob breed chance per day. Stacks until successfully breeding a shiny!",
                 "ancientBonus": "The artifact's main bonus is doubled!",
                 "ancientBonusQty": 1,
                 "eldritchBonus": "The artifact's main bonus is tripled!",
@@ -379,7 +427,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(25, <ArtifactModel>{
                 "name": "Crystal Steak",
@@ -394,7 +444,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(26, <ArtifactModel>{
                 "name": "Trilobite Rock",
@@ -409,7 +461,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(27, <ArtifactModel>{
                 "name": "Opera Mask",
@@ -424,7 +478,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(28, <ArtifactModel>{
                 "name": "Socrates",
@@ -439,7 +495,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(29, <ArtifactModel>{
                 "name": "The True Lantern",
@@ -454,7 +512,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(30, <ArtifactModel>{
                 "name": "The Onyx Lantern",
@@ -469,7 +529,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(31, <ArtifactModel>{
                 "name": "The Shim Lantern",
@@ -484,7 +546,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(32, <ArtifactModel>{
                 "name": "The Winz Lantern",
@@ -499,7 +563,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(33, <ArtifactModel>{
                 "name": "Deathskull",
@@ -514,7 +580,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact also gives +1 Grade to 1 more Gallery Slots!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact also gives +2 Grades to a Gallery Slot!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact also gives +3 Grades to a Gallery Slot!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(34, <ArtifactModel>{
                 "name": "Obsidian",
@@ -529,7 +597,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(35, <ArtifactModel>{
                 "name": "Pointagon",
@@ -544,14 +614,16 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             }),
         new ArtifactBase(36, <ArtifactModel>{
                 "name": "Ender Pearl",
                 "baseBonus": 10,
                 "baseFindChance": 100000000,
                 "qtyBonus": 25,
-                "bonus": "To be revealed in Part 2 of World 7 updates...",
+                "bonus": "+1% Research AFK gains rate!",
                 "ancientBonus": "The artifact's main bonus is doubled!",
                 "ancientBonusQty": 1,
                 "eldritchBonus": "The artifact's main bonus is tripled!",
@@ -559,7 +631,9 @@ export const initArtifactRepo = () => {
                 "sovereignBonus": "The artifact's main bonus is quadrupled!",
                 "sovereignBonusQty": 1,
                 "omnipotentBonus": "The artifact's main bonus is quintupled!",
-                "omnipotentBonusQty": 1
+                "omnipotentBonusQty": 1,
+                "transcendentBonus": "The artifact's main bonus is sixtupled!",
+                "transcendentBonusQty": 1
             })    
 ]
 }

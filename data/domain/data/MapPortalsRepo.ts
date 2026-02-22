@@ -320,6 +320,18 @@ export const initMapPortalsRepo = () => {
         new MapInfoBase(311, <MapInfoModel>{"id": 311, "portalRequirements": [1000000000], "maxOnScreen": 20}),
         new MapInfoBase(312, <MapInfoModel>{"id": 312, "portalRequirements": [0], "maxOnScreen": 40}),
         new MapInfoBase(313, <MapInfoModel>{"id": 313, "portalRequirements": [0], "maxOnScreen": 19}),
-        new MapInfoBase(314, <MapInfoModel>{"id": 314, "portalRequirements": [0], "maxOnScreen": 21})    
+        new MapInfoBase(314, <MapInfoModel>{"id": 314, "portalRequirements": [0], "maxOnScreen": 21}),
+        new MapInfoBase(315, <MapInfoModel>{"id": 315, "portalRequirements": [2000000], "maxOnScreen": 17}),
+        new MapInfoBase(316, <MapInfoModel>{"id": 316, "portalRequirements": [6000000], "maxOnScreen": 18}),
+        new MapInfoBase(317, <MapInfoModel>{"id": 317, "portalRequirements": [1000000000, 40000000], "maxOnScreen": 23}),
+        new MapInfoBase(318, <MapInfoModel>{"id": 318, "portalRequirements": [60000000], "maxOnScreen": 16}),
+        new MapInfoBase(319, <MapInfoModel>{"id": 319, "portalRequirements": [125000000], "maxOnScreen": 21}),
+        new MapInfoBase(320, <MapInfoModel>{"id": 320, "portalRequirements": [250000000], "maxOnScreen": 18}),
+        new MapInfoBase(321, <MapInfoModel>{"id": 321, "portalRequirements": [350000000], "maxOnScreen": 19}),
+        new MapInfoBase(322, <MapInfoModel>{"id": 322, "portalRequirements": [500000000], "maxOnScreen": 20}),
+        new MapInfoBase(323, <MapInfoModel>{"id": 323, "portalRequirements": [750000000], "maxOnScreen": 16}),
+        new MapInfoBase(324, <MapInfoModel>{"id": 324, "portalRequirements": [1000000000], "maxOnScreen": 22}),
+        new MapInfoBase(325, <MapInfoModel>{"id": 325, "portalRequirements": [2000000000], "maxOnScreen": 33}),
+        new MapInfoBase(326, <MapInfoModel>{"id": 326, "portalRequirements": [0], "maxOnScreen": 43})    
 ]
 }

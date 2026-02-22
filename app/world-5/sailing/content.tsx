@@ -37,7 +37,7 @@ border: 1px solid black;
 background-color: black;
 `
 
-function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
+function ShipsDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
     const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
@@ -113,10 +113,10 @@ function ShipsDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean,
                                     </Box>
                                     <Box direction="row" gap="xsmall" align='center'>
                                         <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.7} />
-                                        <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip})))}</Text>
+                                        <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip })))}</Text>
                                     </Box>
                                     <FormNext color="grey-2" size="16px" />
-                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, speedUpgrades:(boat.speedUpgrades + 1)})))}</Text>
+                                    <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip, speedUpgrades: (boat.speedUpgrades + 1) })))}</Text>
                                     <Box direction="row" gap="xsmall" align="center" margin={{ left: 'xsmall' }}>
                                         <IconImage data={SailingDomain.getLootImageData(boat.getSpeedUpgradeType())} scale={0.8} />
                                         <Text color={sailing.loot[boat.getSpeedUpgradeType()] > boat.getUpgradeCost(BoatUpgradeType.Speed) ? 'green-1' : 'accent-1'} size="xsmall">{nFormatter(boat.getUpgradeCost(BoatUpgradeType.Speed))}</Text>
@@ -266,9 +266,9 @@ function ArtifactDisplay() {
                                         size='small'
                                         heading={artifact.getUnlockText()}
                                         body=''
-                                        direction={TipDirection.Down}                                
+                                        direction={TipDirection.Down}
                                     >
-                                        <Lock color='grey-2' size='16px'/>
+                                        <Lock color='grey-2' size='16px' />
                                     </TipDisplay>
                                 }
                             </Box>
@@ -288,36 +288,52 @@ function ArtifactDisplay() {
                                     text={artifact.getBonusText()}
                                 />
                                 <Box>
-                                    <TextAndLabel
-                                        label="ANCIENT BONUS"
-                                        labelSize='xsmall'
-                                        textSize='12px'
-                                        textColor={[ArtifactStatus.Ancient, ArtifactStatus.Eldritch, ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
-                                        text={artifact.data.ancientBonus}
-                                        margin={{ bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="ELDRITCH BONUS"
-                                        labelSize='xsmall'
-                                        textSize='12px'
-                                        textColor={[ArtifactStatus.Eldritch, ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
-                                        text={artifact.data.eldritchBonus!}
-                                        margin={{ bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="SOVEREIGN BONUS"
-                                        labelSize='xsmall'
-                                        textSize='12px'
-                                        textColor={[ArtifactStatus.Sovereign, ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
-                                        text={artifact.data.sovereignBonus!}
-                                    />
-                                    <TextAndLabel
-                                        label="OMNIPOTENT BONUS"
-                                        labelSize='xsmall'
-                                        textSize='12px'
-                                        textColor={[ArtifactStatus.Omnipotent].includes(artifact.status) ? 'green-1' : 'grey-3'}
-                                        text={artifact.data.omnipotentBonus!}
-                                    />
+                                    {(() => {
+                                        // We only show the current tier and the next tier, instead of showing all possible tiers.
+                                        const tiers = [
+                                            { status: ArtifactStatus.Ancient, label: "ANCIENT BONUS", getText: () => artifact.data.ancientBonus, labelColor: "#FFD700" },
+                                            { status: ArtifactStatus.Eldritch, label: "ELDRITCH BONUS", getText: () => artifact.data.eldritchBonus!, labelColor: "#FFFFF0", },
+                                            { status: ArtifactStatus.Sovereign, label: "SOVEREIGN BONUS", getText: () => artifact.data.sovereignBonus!, labelColor: "#7FFFD4" },
+                                            { status: ArtifactStatus.Omnipotent, label: "OMNIPOTENT BONUS", getText: () => artifact.data.omnipotentBonus!, labelColor: "#4ec4ff" },
+                                            { status: ArtifactStatus.Transcendent, label: "TRANSCENDENT BONUS", getText: () => artifact.data.transcendentBonus!, labelColor: "#756a6a" },
+                                        ];
+
+                                        const currentTierIndex = tiers.findIndex(tier => tier.status === artifact.status);
+                                        let currentTier, nextTier = undefined;
+                                        if (currentTierIndex === -1) {
+                                            // If not in the tier list, means it's either unobtained or just obtained.
+                                            // Only show the next tier which is Ancient.
+                                            nextTier = tiers[0];
+                                        } else {
+                                            // else, find the information for the current and next tiers.
+                                            currentTier = tiers[currentTierIndex];
+                                            nextTier = tiers[currentTierIndex + 1];
+                                        }
+
+                                        return (
+                                            <>
+                                                {currentTier && <TextAndLabel
+                                                    label={currentTier.label}
+                                                    labelSize='xsmall'
+                                                    labelColor={currentTier.labelColor}
+                                                    textSize='12px'
+                                                    textColor='green-1'
+                                                    text={currentTier.getText()}
+                                                    margin={{ bottom: nextTier ? 'small' : undefined }}
+                                                />}
+                                                {nextTier && (
+                                                    <TextAndLabel
+                                                        label={nextTier.label}
+                                                        labelSize='xsmall'
+                                                        labelColor={nextTier.labelColor}
+                                                        textSize='12px'
+                                                        textColor='grey-3'
+                                                        text={nextTier.getText()}
+                                                    />
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </Box>
                             </Box>
                         </ShadowBox>
@@ -328,7 +344,7 @@ function ArtifactDisplay() {
     )
 }
 
-function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boolean, starSignEquipped: boolean}) {
+function OverviewDisplay({ silkRodeChip, starSignEquipped }: { silkRodeChip: boolean, starSignEquipped: boolean }) {
     const [sailing, setSailing] = useState<SailingDomain>();
     const { theData } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
@@ -364,7 +380,7 @@ function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boole
                                         </Box>
                                         <Box direction="row" gap="xsmall" align='center'>
                                             <IconImage data={CaptainTrait.getSpeedImageData()} scale={0.8} />
-                                            <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, includeCaptain: false })))}</Text>
+                                            <Text size="xsmall">{nFormatter(Math.round(boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip, includeCaptain: false })))}</Text>
                                         </Box>
                                     </Box>
                                 </Box>
@@ -397,8 +413,8 @@ function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boole
                                     right={true}
                                     textSize="small"
                                     label="Ideal dist"
-                                    textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip}) * (boat.minTravelTime / 60) ? 'accent-1' : ''}
-                                    text={nFormatter(boat.getSpeedValue({starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip}) * (boat.minTravelTime / 60))}
+                                    textColor={(boat.assignIsland?.data.distance || 0) > boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip }) * (boat.minTravelTime / 60) ? 'accent-1' : ''}
+                                    text={nFormatter(boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip }) * (boat.minTravelTime / 60))}
                                     tooltip={
                                         <Text>This is how far the ship travels in the Minimum Travel Time, you want to target islands that have less distance than this.</Text>
                                     }
@@ -415,7 +431,7 @@ function OverviewDisplay({silkRodeChip, starSignEquipped} : {silkRodeChip: boole
                                         labelSize='xsmall'
                                         label="Time till arrival"
                                         component={
-                                            <TimeDown size={TimeDisplaySize.XSmall} addSeconds={((boat.assignIsland.data.distance - boat.distanceTravelled) / boat.getSpeedValue({ starSignEquipped:starSignEquipped, silkRodeEquipped:silkRodeChip, islandBound: true })) * 3600} />
+                                            <TimeDown size={TimeDisplaySize.XSmall} addSeconds={((boat.assignIsland.data.distance - boat.distanceTravelled) / boat.getSpeedValue({ starSignEquipped: starSignEquipped, silkRodeEquipped: silkRodeChip, islandBound: true })) * 3600} />
                                         }
                                     />
                                 }
@@ -457,9 +473,9 @@ function IslandDisplay() {
                                         size='small'
                                         heading={island.getUnlockText()}
                                         body=''
-                                        direction={TipDirection.Down}                                
+                                        direction={TipDirection.Down}
                                     >
-                                        <Lock color='grey-2' size='16px'/>
+                                        <Lock color='grey-2' size='16px' />
                                     </TipDisplay>
                                 }
                             </Box>
@@ -472,22 +488,23 @@ function IslandDisplay() {
                         <Box direction="row">
                             {
                                 island.artifacts.map((artifact, aIndex) => (
-                                    <Box 
+                                    <Box
                                         key={aIndex}
                                         margin={{ right: 'small' }}
                                         border={
-                                            artifact.status == ArtifactStatus.Omnipotent ? { color: '#4ec4ff', side: 'all' } :
-                                            artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } : 
-                                            artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } : 
-                                            artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } : 
-                                            undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
+                                            artifact.status == ArtifactStatus.Transcendent ? { color: '#756a6a', side: 'all' } :
+                                                artifact.status == ArtifactStatus.Omnipotent ? { color: '#4ec4ff', side: 'all' } :
+                                                    artifact.status == ArtifactStatus.Sovereign ? { color: '#7FFFD4', side: 'all' } :
+                                                        artifact.status == ArtifactStatus.Eldritch ? { color: '#FFFFF0', side: 'all' } :
+                                                            artifact.status == ArtifactStatus.Ancient ? { color: '#FFD700', side: 'all' } :
+                                                                undefined} style={{ opacity: artifact.status == ArtifactStatus.Unobtained ? 0.2 : 1 }}>
                                         <TipDisplay
-                                            heading={`${artifact.data.name}${
+                                            heading={`${artifact.data.name}${artifact.status == ArtifactStatus.Transcendent ? " (Transcendent)" :
                                                 artifact.status == ArtifactStatus.Omnipotent ? " (Omnipotent)" :
-                                                artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" :
-                                                artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" :
-                                                artifact.status == ArtifactStatus.Ancient ? " (Ancient)" :
-                                                ""}`}
+                                                    artifact.status == ArtifactStatus.Sovereign ? " (Sovereign)" :
+                                                        artifact.status == ArtifactStatus.Eldritch ? " (Eldritch)" :
+                                                            artifact.status == ArtifactStatus.Ancient ? " (Ancient)" :
+                                                                ""}`}
                                             body={<Text>{artifact.getBonusText()}</Text>}
                                         >
                                             <IconImage data={artifact.getImageData()} />
@@ -577,7 +594,7 @@ function Sailing() {
                             label="C. Shanti Minor Equipped"
                             onChange={(event) => {
                                 setStarSignEquipped(event.target.checked);
-                                if(!event.target.checked) {
+                                if (!event.target.checked) {
                                     setSilkrode(false);
                                 }
                             }}
@@ -592,9 +609,9 @@ function Sailing() {
                                     <Text size='small'>Looks like you unlocked the C. Shanti Minor star sign</Text>
                                     {
                                         starSignInfinity ?
-                                        <Text margin={{top:'xsmall'}} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
-                                        :
-                                        <Text margin={{top:'xsmall'}} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
+                                            <Text margin={{ top: 'xsmall' }} size='small'>You always get the star sign bonus thanks to the Infinite Stars Rift bonus</Text>
+                                            :
+                                            <Text margin={{ top: 'xsmall' }} size='small'>To avoid character checking for a global page, use this checkbox to consider it equipped or not</Text>
                                     }
                                 </Box>
                             }
@@ -633,11 +650,11 @@ function Sailing() {
                 ))
                 }
             </Box>
-            {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive}/>}
+            {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive} />}
             {activeTab == "Islands" && <IslandDisplay />}
             {activeTab == "Artifacts" && <ArtifactDisplay />}
             {activeTab == "Captains" && <CaptainsDisplay />}
-            {activeTab == "Boats" && <ShipsDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive}/>}
+            {activeTab == "Boats" && <ShipsDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive} />}
         </Box>
     )
 }

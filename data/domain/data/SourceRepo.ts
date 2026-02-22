@@ -3746,9 +3746,47 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Equinox Broadbass|Recipe from Equinox Broadbass]]",
                         "txtName": "Equinox Broadbass"
+                    },
+                    <SourceModel>{"wikiName": "[[Trench Fish|Recipe from Trench Fish]]", "txtName": "Trench Fish"},
+                    <SourceModel>{"wikiName": "[[Boomy Mine|Recipe from Boomy Mine]]", "txtName": "Boomy Mine"},
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Underling|Recipe from Pirate Underling]]",
+                        "txtName": "Pirate Underling"
+                    },
+                    <SourceModel>{"wikiName": "[[Eggroll|Recipe from Eggroll]]", "txtName": "Eggroll"},
+                    <SourceModel>{"wikiName": "[[Jellofish|Recipe from Jellofish]]", "txtName": "Jellofish"},
+                    <SourceModel>{"wikiName": "[[Kelpfish|Recipe from Kelpfish]]", "txtName": "Kelpfish"},
+                    <SourceModel>{"wikiName": "[[Mantaray|Recipe from Mantaray]]", "txtName": "Mantaray"},
+                    <SourceModel>{"wikiName": "[[Glowfish|Recipe from Glowfish]]", "txtName": "Glowfish"},
+                    <SourceModel>{"wikiName": "[[Ancientfish|Recipe from Ancientfish]]", "txtName": "Ancientfish"},
+                    <SourceModel>{
+                        "wikiName": "[[Magni Pufferfin|Recipe from Magni Pufferfin]]",
+                        "txtName": "Magni Pufferfin"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Pirate Deckhand|Recipe from Pirate Deckhand]]",
+                        "txtName": "Pirate Deckhand"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Dreadnaught Captain|Recipe from Dreadnaught Captain]]",
+                        "txtName": "Dreadnaught Captain"
                     }
                 ],
-                "recipeFrom": [<SourceModel>{"wikiName": "[[Equinox Broadbass]]", "txtName": "Equinox Broadbass"}],
+                "recipeFrom": [
+                    <SourceModel>{"wikiName": "[[Equinox Broadbass]]", "txtName": "Equinox Broadbass"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"},
+                    <SourceModel>{"wikiName": "[[Boomy Mine]]", "txtName": "Boomy Mine"},
+                    <SourceModel>{"wikiName": "[[Pirate Underling]]", "txtName": "Pirate Underling"},
+                    <SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"},
+                    <SourceModel>{"wikiName": "[[Jellofish]]", "txtName": "Jellofish"},
+                    <SourceModel>{"wikiName": "[[Kelpfish]]", "txtName": "Kelpfish"},
+                    <SourceModel>{"wikiName": "[[Mantaray]]", "txtName": "Mantaray"},
+                    <SourceModel>{"wikiName": "[[Glowfish]]", "txtName": "Glowfish"},
+                    <SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"},
+                    <SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"},
+                    <SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"},
+                    <SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"}
+                ],
                 "questAss": []
             }),
         new SourcesBase("EquipmentShirts41", <SourcesModel>{
@@ -4040,6 +4078,18 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Spearfish]]", "txtName": "Spearfish"},
                     <SourceModel>{"wikiName": "[[Coralcave Crab]]", "txtName": "Coralcave Crab"},
                     <SourceModel>{"wikiName": "[[Coralcave Guardian]]", "txtName": "Coralcave Guardian"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"},
+                    <SourceModel>{"wikiName": "[[Boomy Mine]]", "txtName": "Boomy Mine"},
+                    <SourceModel>{"wikiName": "[[Pirate Underling]]", "txtName": "Pirate Underling"},
+                    <SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"},
+                    <SourceModel>{"wikiName": "[[Jellofish]]", "txtName": "Jellofish"},
+                    <SourceModel>{"wikiName": "[[Kelpfish]]", "txtName": "Kelpfish"},
+                    <SourceModel>{"wikiName": "[[Mantaray]]", "txtName": "Mantaray"},
+                    <SourceModel>{"wikiName": "[[Glowfish]]", "txtName": "Glowfish"},
+                    <SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"},
+                    <SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"},
+                    <SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"},
+                    <SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"},
                     <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"},
                     <SourceModel>{
                         "wikiName": "[[Colosseum/Dewdrop#Bronze Chest(W1)|Dewdrop Bronze Chest(W1)]]",
@@ -4242,10 +4292,14 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Decaying Crevasse]]", "txtName": "Decaying Crevasse"},
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
+                    <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
                     <SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"},
                     <SourceModel>{"wikiName": "[[Decaying Crevasse]]", "txtName": "Decaying Crevasse"},
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
                     <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
+                    <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"},
                     <SourceModel>{"wikiName": "[[DropTable1]]", "txtName": "DropTable1"},
                     <SourceModel>{"wikiName": "[[DropTable2]]", "txtName": "DropTable2"},
                     <SourceModel>{"wikiName": "[[DropTable3]]", "txtName": "DropTable3"},
@@ -4511,7 +4565,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"},
                     <SourceModel>{"wikiName": "[[Decaying Crevasse]]", "txtName": "Decaying Crevasse"},
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
-                    <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"}
+                    <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
+                    <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -4943,6 +4999,18 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Spearfish]]", "txtName": "Spearfish"},
                     <SourceModel>{"wikiName": "[[Coralcave Crab]]", "txtName": "Coralcave Crab"},
                     <SourceModel>{"wikiName": "[[Coralcave Guardian]]", "txtName": "Coralcave Guardian"},
+                    <SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"},
+                    <SourceModel>{"wikiName": "[[Boomy Mine]]", "txtName": "Boomy Mine"},
+                    <SourceModel>{"wikiName": "[[Pirate Underling]]", "txtName": "Pirate Underling"},
+                    <SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"},
+                    <SourceModel>{"wikiName": "[[Jellofish]]", "txtName": "Jellofish"},
+                    <SourceModel>{"wikiName": "[[Kelpfish]]", "txtName": "Kelpfish"},
+                    <SourceModel>{"wikiName": "[[Mantaray]]", "txtName": "Mantaray"},
+                    <SourceModel>{"wikiName": "[[Glowfish]]", "txtName": "Glowfish"},
+                    <SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"},
+                    <SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"},
+                    <SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"},
+                    <SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"},
                     <SourceModel>{"wikiName": "[[RIP Tide]]", "txtName": "RIP Tide"}
                 ],
                 "recipeFrom": [],
@@ -6931,12 +6999,12 @@ export const initSourceRepo = () => {
                         "txtName": "Gobo: Breeding in Outer Space"
                     },
                     <SourceModel>{
-                        "wikiName": "[[Gobo#Intense Pet Fighting|Intense Pet Fighting]]",
-                        "txtName": "Gobo: Intense Pet Fighting"
+                        "wikiName": "[[Gobo#Intense Mob Fighting|Intense Mob Fighting]]",
+                        "txtName": "Gobo: Intense Mob Fighting"
                     },
                     <SourceModel>{
-                        "wikiName": "[[Gobo#Intense Pet Fighting|Intense Pet Fighting]]",
-                        "txtName": "Gobo: Intense Pet Fighting"
+                        "wikiName": "[[Gobo#Intense Mob Fighting|Intense Mob Fighting]]",
+                        "txtName": "Gobo: Intense Mob Fighting"
                     },
                     <SourceModel>{
                         "wikiName": "[[Gobo#Squirrel Tactics|Squirrel Tactics]]",
@@ -7988,6 +8056,136 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("CardsJ12", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Coralcave Guardian]]", "txtName": "Coralcave Guardian"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B1b", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ13", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Trench Fish]]", "txtName": "Trench Fish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Boomy Mine]]", "txtName": "Boomy Mine"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ14", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Boomy Mine]]", "txtName": "Boomy Mine"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B3", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Pirate Underling]]", "txtName": "Pirate Underling"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ15", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Pirate Underling]]", "txtName": "Pirate Underling"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ16", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Coral4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Eggroll]]", "txtName": "Eggroll"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Jellofish]]", "txtName": "Jellofish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ17", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Jellofish]]", "txtName": "Jellofish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Kelpfish]]", "txtName": "Kelpfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ18", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Kelpfish]]", "txtName": "Kelpfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B7", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mantaray]]", "txtName": "Mantaray"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ19", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Mantaray]]", "txtName": "Mantaray"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Glowfish]]", "txtName": "Glowfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ20", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Glowfish]]", "txtName": "Glowfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B9", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ21", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B10", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ22", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B11", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ23", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Pirate Deckhand]]", "txtName": "Pirate Deckhand"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("w7B12", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsJ24", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -9952,7 +10150,9 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"},
                     <SourceModel>{"wikiName": "[[Decaying Crevasse]]", "txtName": "Decaying Crevasse"},
                     <SourceModel>{"wikiName": "[[Buried Church]]", "txtName": "Buried Church"},
-                    <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"}
+                    <SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"},
+                    <SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"},
+                    <SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -10086,6 +10286,16 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("CardsF49", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsF50", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Spelunking0", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Fearful Tunnel]]", "txtName": "Fearful Tunnel"}],
                 "recipeFrom": [],
@@ -10103,6 +10313,16 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("Spelunking3", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[One Way Opening]]", "txtName": "One Way Opening"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Spelunking4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Plunder Cranny]]", "txtName": "Plunder Cranny"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Spelunking5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Kelp Forest]]", "txtName": "Kelp Forest"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -10132,6 +10352,21 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("Refinery6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Construction#Refinery|Refinery]]", "txtName": "Construction: Refinery"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Refinery7", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Construction#Refinery|Refinery]]", "txtName": "Construction: Refinery"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Refinery8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Construction#Refinery|Refinery]]", "txtName": "Construction: Refinery"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Refinery9", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Construction#Refinery|Refinery]]", "txtName": "Construction: Refinery"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -14313,7 +14548,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                         "txtName": "Royal Worm: Bossin' the Boss"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -15021,6 +15257,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Quest115", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
+                        "txtName": "Toobus Goobus: RESEARCH STUDIES"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("SmithingHammerChisel4", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -15215,48 +15462,22 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats40", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats55", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
-                    <SourceModel>{"wikiName": "Steam Launch Event", "txtName": "Steam Launch Event"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats75", <SourcesModel>{
+        new SourcesBase("GemP25", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats81", <SourcesModel>{
+        new SourcesBase("EquipmentRings37", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats82", <SourcesModel>{
+        new SourcesBase("EquipmentPendant31", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentHats112", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats118", <SourcesModel>{
-                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("EquipmentHats122", <SourcesModel>{
+        new SourcesBase("EquipmentNametag3", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
@@ -17257,6 +17478,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("EquipmentHats55", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "Steam Launch Event", "txtName": "Steam Launch Event"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentHats63", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "Summer Break Event", "txtName": "Summer Break Event"}],
                 "recipeFrom": [],
@@ -17413,6 +17639,11 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats36", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats40", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []

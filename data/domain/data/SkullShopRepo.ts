@@ -63,7 +63,7 @@ export const initSkullShopRepo = () => {
                 "qty": 1
             }),
         new SkullShopBase(8, <SkullShopModel>{
-                "description": "Get 2 Pet Eggs! Pick them up off the floor.",
+                "description": "Get 2 Mob Eggs! Pick them up off the floor.",
                 "baseCost": 8,
                 "costInc": 1,
                 "rewardId": "PetEgg",

@@ -993,10 +993,26 @@ export const initCardRepo = () => {
         new CardDataBase("SpelunkingCard3", <CardDataModel>{
                 "cardID": "F48",
                 "category": "Hard Resources",
-                "perTier": 50000,
+                "perTier": 40000,
                 "effect": "+{% Spelunking EXP",
                 "bonus": 8,
                 "order": 33
+            }),
+        new CardDataBase("SpelunkingCard4", <CardDataModel>{
+                "cardID": "F49",
+                "category": "Hard Resources",
+                "perTier": 150000,
+                "effect": "+{% Spelunking AFK Gain",
+                "bonus": 2,
+                "order": 34
+            }),
+        new CardDataBase("SpelunkingCard5", <CardDataModel>{
+                "cardID": "F50",
+                "category": "Hard Resources",
+                "perTier": 2.5e+06,
+                "effect": "+{% Spelunking EXP",
+                "bonus": 15,
+                "order": 35
             }),
         new CardDataBase("mushP", <CardDataModel>{
                 "cardID": "G1",
@@ -1454,13 +1470,109 @@ export const initCardRepo = () => {
                 "bonus": 1,
                 "order": 12
             }),
+        new CardDataBase("w7b1", <CardDataModel>{
+                "cardID": "J13",
+                "category": "Shimmerfin Deep",
+                "perTier": 100000,
+                "effect": "+{% Research EXP (Passive)",
+                "bonus": 1,
+                "order": 13
+            }),
+        new CardDataBase("w7b2", <CardDataModel>{
+                "cardID": "J14",
+                "category": "Shimmerfin Deep",
+                "perTier": 300000,
+                "effect": "+{% Gaming Bit Multi (Passive)",
+                "bonus": 20,
+                "order": 14
+            }),
+        new CardDataBase("w7b3", <CardDataModel>{
+                "cardID": "J15",
+                "category": "Shimmerfin Deep",
+                "perTier": 500000,
+                "effect": "+{% Flaggy Rate Multi (Passive)",
+                "bonus": 10,
+                "order": 15
+            }),
+        new CardDataBase("w7b4", <CardDataModel>{
+                "cardID": "J16",
+                "category": "Shimmerfin Deep",
+                "perTier": 900000,
+                "effect": "+{% Research EXP (Passive)",
+                "bonus": 2,
+                "order": 16
+            }),
+        new CardDataBase("w7b5", <CardDataModel>{
+                "cardID": "J17",
+                "category": "Shimmerfin Deep",
+                "perTier": 1.5e+06,
+                "effect": "+{% Farming EVO Multi (Passive)",
+                "bonus": 50,
+                "order": 17
+            }),
+        new CardDataBase("w7b6", <CardDataModel>{
+                "cardID": "J18",
+                "category": "Shimmerfin Deep",
+                "perTier": 3.5e+06,
+                "effect": "+{% Class EXP Multi",
+                "bonus": 5,
+                "order": 18
+            }),
+        new CardDataBase("w7b7", <CardDataModel>{
+                "cardID": "J19",
+                "category": "Shimmerfin Deep",
+                "perTier": 6e+06,
+                "effect": "+{% Drop Rate Multi",
+                "bonus": 1,
+                "order": 19
+            }),
+        new CardDataBase("w7b8", <CardDataModel>{
+                "cardID": "J20",
+                "category": "Shimmerfin Deep",
+                "perTier": 1e+07,
+                "effect": "+{% Drop Rate Multi",
+                "bonus": 1,
+                "order": 20
+            }),
+        new CardDataBase("w7b9", <CardDataModel>{
+                "cardID": "J21",
+                "category": "Shimmerfin Deep",
+                "perTier": 2e+07,
+                "effect": "+{% Drop Rate Multi",
+                "bonus": 1,
+                "order": 21
+            }),
+        new CardDataBase("w7b10", <CardDataModel>{
+                "cardID": "J22",
+                "category": "Shimmerfin Deep",
+                "perTier": 3e+07,
+                "effect": "+{% Drop Rate Multi",
+                "bonus": 1,
+                "order": 22
+            }),
+        new CardDataBase("w7b11", <CardDataModel>{
+                "cardID": "J23",
+                "category": "Shimmerfin Deep",
+                "perTier": 2e+07,
+                "effect": "+{% Research AFK gain (Passive)",
+                "bonus": 1,
+                "order": 23
+            }),
+        new CardDataBase("w7b12", <CardDataModel>{
+                "cardID": "J24",
+                "category": "Shimmerfin Deep",
+                "perTier": 1e+08,
+                "effect": "+{% Drop Rate Multi",
+                "bonus": 1,
+                "order": 24
+            }),
         new CardDataBase("Crystal6", <CardDataModel>{
                 "cardID": "J99",
                 "category": "Shimmerfin Deep",
                 "perTier": 2.5e+06,
                 "effect": "+{% Damage Multi (Passive)",
                 "bonus": 1.5,
-                "order": 13
+                "order": 25
             }),
         new CardDataBase("frogP", <CardDataModel>{
                 "cardID": "X0",

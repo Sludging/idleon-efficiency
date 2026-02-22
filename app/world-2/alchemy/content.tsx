@@ -241,9 +241,25 @@ function SigilsDisplay() {
                         const reqLimit = (sigil.boostLevel == 1 && sigil.canBeIonized) ? (sigil.data.x1 ?? 0) : sigil.boostLevel == 0 ? sigil.data.boostCost : sigil.boostLevel == -1 ? sigil.data.unlockCost : 0;
                         const chargeSpeed = sigil.activePlayers * sigilData.chargeSpeed;
                         const timeToNext = ((reqLimit - sigil.progress) / chargeSpeed) * 3600;
+                        let filter = undefined;
+                        switch (sigil.boostLevel) {
+                            case 1:
+                                filter = "hue-rotate(202deg)"
+                                break;
+                            case 2:
+                                filter = "hue-rotate(150deg)"
+                                break;
+                            case 3:
+                                filter = "hue-rotate(80deg)"
+                                break;
+                            case 4:
+                                filter = "hue-rotate(260deg)"
+                                break;
+                        }
+
                         return (
                             <ShadowBox background="dark-1" key={index} margin={{ right: 'small', bottom: 'small' }} gap="medium" align="start" pad="small" border={sigil.activePlayers > 0 ? { color: 'green-1', size: '1px' } : undefined}>
-                                <IconImage style={sigil.boostLevel == 2 ? { filter: 'hue-rotate(130deg)' } : sigil.boostLevel == 1 ? { filter: 'hue-rotate(200deg)' } : sigil.boostLevel == -1 ? { opacity: 0.2 } : undefined} data={sigil.getImageData()} />
+                                <IconImage style={{ filter: filter, opacity: sigil.boostLevel > 0 ? 1 : 0.2 }} data={sigil.getImageData()} />
                                 <Box direction="row" gap="medium">
                                     <TextAndLabel textSize="xsmall" label="Name" text={sigil.data.name} />
                                     <TextAndLabel textSize="xsmall" label="Description" text={sigil.getBonusText()} />

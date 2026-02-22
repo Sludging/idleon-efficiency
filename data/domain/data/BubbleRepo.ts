@@ -1262,7 +1262,7 @@ export const initBubbleRepo = () => {
                         "x1": 40,
                         "x2": 40,
                         "func": "decay",
-                        "description": "+{% faster Egg Incubation Time in the Pet Nest. This will be an absolutely VITAL upgrade once you unlock pet egg rarity!",
+                        "description": "+{% faster Egg Incubation Time in the Mob Nest. This will be an absolutely VITAL upgrade once you unlock mob egg rarity!",
                         "requirements": [<SpiceComponentModel>{"spiceNo": "0", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 4}],
                         "bonusKey": "EggInc"
                     },
@@ -1292,7 +1292,7 @@ export const initBubbleRepo = () => {
                         "x1": 15,
                         "x2": 50,
                         "func": "decay",
-                        "description": "+{% Shiny Pet Chance for every new Rift level you reach. Go find the Rift Ripper, above the Octodars in World 4.",
+                        "description": "+{% Shiny Mob Chance for every new Rift level you reach. Go find the Rift Ripper, above the Octodars in World 4.",
                         "requirements": [<ComponentModel>{"item": "Critter10", "quantity": 100}, <LiquidComponentModel>{"liquidNo": "3", "quantity": 5}],
                         "bonusKey": "NewPetRift"
                     },
@@ -1969,7 +1969,7 @@ export const initBubbleRepo = () => {
                         "x1": 2,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{% Pet Team Damage",
+                        "description": "+{% Mob Team Damage",
                         "requirements": [<ComponentModel>{"item": "GalaxyC4", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "3", "quantity": -1}],
                         "bonusKey": "PetDmg"
                     },
@@ -2246,10 +2246,10 @@ export const initBubbleRepo = () => {
                     <BubbleModel>{
                         "cauldron": "Vials",
                         "name": "Octosoda",
-                        "x1": 0.4,
+                        "x1": 0.2,
                         "x2": 0,
                         "func": "add",
-                        "description": "+{% AFK Gains rate for all World 7 skills",
+                        "description": "+{% AFK Gains rate for Spelunking",
                         "requirements": [<ComponentModel>{"item": "Soul8", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "7skillw7afk"
                     },
@@ -2305,6 +2305,16 @@ export const initBubbleRepo = () => {
                         "func": "0",
                         "description": "1 random low-quality Obol. Sure, it'll probably be a crappy bronze Obol, but that's not bad considering youre paying with water!",
                         "requirements": [<LiquidComponentModel>{"liquidNo": "1", "quantity": 10}],
+                        "bonusKey": "1"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Liquid Shop",
+                        "name": "Weak Upg Stone",
+                        "x1": 1,
+                        "x2": 1,
+                        "func": "0",
+                        "description": "`Slaps roof of car` This bad boy can upgrade so many equipm... wait, how'd a car get in here? Gives 1 random low-quality Upgrade Stone.",
+                        "requirements": [<LiquidComponentModel>{"liquidNo": "1", "quantity": 5}],
                         "bonusKey": "1"
                     },
                     <BubbleModel>{

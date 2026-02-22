@@ -255,7 +255,7 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Giftmas Blobulyte11", <QuestNameModel>{"name": "Giftmas Time!", "difficulty": 2}),
         new QuestNameBase("Carpenter Cardinal1", <QuestNameModel>{"name": "Restoring Power, once again, to a Portal", "difficulty": 8}),
         new QuestNameBase("Gobo3", <QuestNameModel>{"name": "Breeding in Outer Space", "difficulty": 1}),
-        new QuestNameBase("Gobo6", <QuestNameModel>{"name": "Intense Pet Fighting", "difficulty": 1}),
+        new QuestNameBase("Gobo6", <QuestNameModel>{"name": "Intense Mob Fighting", "difficulty": 1}),
         new QuestNameBase("Gobo9", <QuestNameModel>{"name": "Squirrel Tactics", "difficulty": 1}),
         new QuestNameBase("Gobo12", <QuestNameModel>{"name": "Spicy Cooking", "difficulty": 1}),
         new QuestNameBase("Gobo16", <QuestNameModel>{"name": "Lab Experimentation, Ft. You", "difficulty": 1}),
@@ -352,6 +352,7 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Toobus Goobus4", <QuestNameModel>{"name": "TUNNEL EXPLORING", "difficulty": 2}),
         new QuestNameBase("Toobus Goobus7", <QuestNameModel>{"name": "FEAR HOLE! FEAR HOLE!", "difficulty": 1}),
         new QuestNameBase("Toobus Goobus10", <QuestNameModel>{"name": "READING CHALLENGE", "difficulty": 3}),
-        new QuestNameBase("Zenelith1", <QuestNameModel>{"name": "1 Million Statues", "difficulty": 9})    
+        new QuestNameBase("Zenelith1", <QuestNameModel>{"name": "1 Million Statues", "difficulty": 9}),
+        new QuestNameBase("Toobus Goobus13", <QuestNameModel>{"name": "RESEARCH STUDIES", "difficulty": 1})    
 ]
 }

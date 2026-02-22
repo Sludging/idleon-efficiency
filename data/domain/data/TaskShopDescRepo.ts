@@ -371,7 +371,7 @@ export const initTaskShopDescRepo = () => {
                 "bonusPerLevel": 2
             }),
         new TaskShopDescBase(26, <TaskShopDescModel>{
-                "descLine1": "+{ egg capacity in the Nest. Those pets",
+                "descLine1": "+{ egg capacity in the Nest. Those Mobs",
                 "descLine2": "wont hatch themselves after all!",
                 "number1": 0,
                 "number2": 0,

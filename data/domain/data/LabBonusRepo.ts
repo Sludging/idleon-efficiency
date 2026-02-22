@@ -14,7 +14,7 @@ export const initLabBonusRepo = () => {
                 "bonusOn": 0,
                 "bonusOff": 1,
                 "name": "Animal Farm",
-                "description": "+1% Total Damage for every different species you have bred within Pet Breeding. You just need to breed the pet type one time for it to count! @ - @ Total Bonus: {%"
+                "description": "+1% Total Damage for every different species you have bred within Mob Breeding. You just need to breed the Mob type one time for it to count! @ - @ Total Bonus: {%"
             }),
         new LabBonusBase(1, <LabBonusModel>{
                 "no": 1,

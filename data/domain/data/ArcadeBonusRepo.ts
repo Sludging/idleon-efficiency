@@ -277,7 +277,7 @@ export const initArcadeBonusRepo = () => {
                 "barType": -1
             }),
         new ArcadeBonusBase(30, <ArcadeBonusModel>{
-                "effect": "+{% Breed Pet DMG",
+                "effect": "+{% Breed Mob DMG",
                 "x1": 40,
                 "x2": 100,
                 "func": "decay",
@@ -563,6 +563,51 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% Bubble LV",
                 "barType": 22
+            }),
+        new ArcadeBonusBase(62, <ArcadeBonusModel>{
+                "effect": "+{% Minehead Currency",
+                "x1": 25,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Currency",
+                "barType": 9
+            }),
+        new ArcadeBonusBase(63, <ArcadeBonusModel>{
+                "effect": "+{% Research XP",
+                "x1": 20,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% XP",
+                "barType": 37
+            }),
+        new ArcadeBonusBase(64, <ArcadeBonusModel>{
+                "effect": "+{% Megacrop Chance",
+                "x1": 50,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Chance",
+                "barType": 4
+            }),
+        new ArcadeBonusBase(65, <ArcadeBonusModel>{
+                "effect": "+{% New Crown Chance",
+                "x1": 15,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Chance",
+                "barType": 21
+            }),
+        new ArcadeBonusBase(66, <ArcadeBonusModel>{
+                "effect": "+{% Artifact Find",
+                "x1": 60,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Chance",
+                "barType": 31
             })    
 ]
 }

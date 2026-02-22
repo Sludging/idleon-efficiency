@@ -59,7 +59,7 @@ export class TomeEpilogueBonus {
     unlocked: boolean = false;
     boostFromBonuses: number = 0;
 
-    constructor(public index: number, public data: TomeEpilogueBonusModel) {}
+    constructor(public index: number, public data: TomeEpilogueBonusModel) { }
 
     static fromBase(data: TomeEpilogueBonusBase[]) {
         return data.map(bonus => new TomeEpilogueBonus(bonus.index, bonus.data));
@@ -68,7 +68,7 @@ export class TomeEpilogueBonus {
     getBonus(score: number): number {
         if (!this.unlocked) return 0;
 
-        return (1 + this.boostFromBonuses / 100) * this.data.x0 
+        return (1 + this.boostFromBonuses / 100) * this.data.x0
             * Math.max(0, Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7) / (25 + Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7)))
     }
 }
@@ -267,6 +267,11 @@ export class Tome extends Domain {
             tome.lines.push(new TomeLine(lineInfo.index, lineInfo.data, tomeLineDisplayOrder.indexOf(lineInfo.index), tome.charCount));
         });
 
+        // Protect against old accounts.
+        if (!spelunk || spelunk.length == 0) {
+            return
+        }
+
         // Check how many tome epilog bonuses we unlocked from Spelunking.
         const spelunkEpilogUnlocks = spelunk[13][2] as number;
         tome.epilogueBonuses.forEach(bonus => {
@@ -319,7 +324,7 @@ export class Tome extends Domain {
     getEpilogueBonus = (index: number, playerIndex: number = -1): number => {
         const bonus = this.epilogueBonuses.find(bonus => bonus.index == index);
 
-        const scoreToUse = playerIndex >= 0 ? this.getPlayerTotalScore(playerIndex) : this.highestScore ;
+        const scoreToUse = playerIndex >= 0 ? this.getPlayerTotalScore(playerIndex) : this.highestScore;
 
         return bonus?.getBonus(scoreToUse) ?? 0;
     }
@@ -506,7 +511,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 : artifact.status == ArtifactStatus.Eldritch ? sum + 3
                     : artifact.status == ArtifactStatus.Sovereign ? sum + 4
                         : artifact.status == ArtifactStatus.Omnipotent ? sum + 5
-                            : sum + 0
+                            : artifact.status == ArtifactStatus.Transcendent ? sum + 6
+                                : sum + 0
         , 0);
 
     // Highest level captain
@@ -1077,6 +1083,7 @@ const tomeLineDisplayOrder = [
     107,
     109,
     12,
+    113,
     106,
     75,
     13,
@@ -1132,6 +1139,7 @@ const tomeLineDisplayOrder = [
     59,
     64,
     63,
+    111,
     58,
     56,
     93,
@@ -1149,6 +1157,7 @@ const tomeLineDisplayOrder = [
     67,
     77,
     78,
+    112,
     72,
     74,
     99,
@@ -1167,5 +1176,8 @@ const tomeLineDisplayOrder = [
     104,
     98,
     102,
-    105
+    105,
+    110,
+    114,
+    115
 ]

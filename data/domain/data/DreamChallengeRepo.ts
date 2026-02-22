@@ -127,7 +127,7 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(20, <DreamChallengeModel>{
-                "challenge": "Reach round 115 in the Pet Arena, but only using a team of 4 Pets or less",
+                "challenge": "Reach round 115 in the Mob Arena, but only using a team of 4 Mobs or less",
                 "req": 115,
                 "reward": "Unlock next Equinox upgrade",
                 "filler": "Filler"

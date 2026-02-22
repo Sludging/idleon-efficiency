@@ -7,6 +7,17 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.3.0",
+    title: "World 7 - Part 2",
+    date: "February 22, 2026",
+    changes: [
+      "New data from world 7 - part 2 incorporated into the site.",
+      "Some systems updated (like sailing, and refinery), but mostly untouched.",
+      "Expect some lead time until I catch up to world 7 systems and impacts.",
+      "Sorry for the delay!"
+    ]
+  },
+  {
     version: "1.2.50",
     title: "World 7",
     date: "November 7, 2025",

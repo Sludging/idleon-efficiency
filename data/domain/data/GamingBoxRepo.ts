@@ -26,14 +26,14 @@ export const initGamingBoxRepo = () => {
                 "name": "Spaded Box",
                 "costA": 3,
                 "costB": 6,
-                "drawX": 293,
+                "drawX": 247,
                 "drawY": 273,
                 "clickWidth": 204,
                 "clickHeight": 53,
-                "clipboardWidth": 257,
+                "clipboardWidth": 211,
                 "clipboardHeight": 122,
                 "desc": "Contains an item capable of creating absolutely nothing",
-                "itemX": 328,
+                "itemX": 282,
                 "itemY": 254,
                 "backgroundX": 49,
                 "backgroundY": 70
@@ -48,7 +48,7 @@ export const initGamingBoxRepo = () => {
                 "clickHeight": 56,
                 "clipboardWidth": 212,
                 "clipboardHeight": 225,
-                "desc": "Contains the only animal who will be attending Saw Con 2025",
+                "desc": "Contains the only animal who will be attending Saw Con 2027",
                 "itemX": 524,
                 "itemY": 305,
                 "backgroundX": 355,
@@ -135,8 +135,8 @@ export const initGamingBoxRepo = () => {
                 "backgroundY": 174
             }),
         new GamingBoxBase(8, <GamingBoxModel>{
-                "name": "Empty Box",
-                "costA": 99,
+                "name": "Royalty Box",
+                "costA": 1,
                 "costB": 50,
                 "drawX": 409,
                 "drawY": 328,
@@ -144,11 +144,11 @@ export const initGamingBoxRepo = () => {
                 "clickHeight": 58,
                 "clipboardWidth": 114,
                 "clipboardHeight": 243,
-                "desc": "Contains something invisible with no weight... Yea there's nothing in here.",
-                "itemX": 416,
-                "itemY": 325,
+                "desc": "Contains the one and only rodent to rule them all.",
+                "itemX": 409,
+                "itemY": 290,
                 "backgroundX": 280,
-                "backgroundY": 80
+                "backgroundY": 70
             }),
         new GamingBoxBase(9, <GamingBoxModel>{
                 "name": "Empty Box",

@@ -265,7 +265,7 @@ export const initJadeUpgradeRepo = () => {
                 "imageId": 28,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+7% Shiny Pet Lv Up Rate and Pet Breeding Rate' per Crop!"
+                "bonus": "Adds a new bonus type to your crop scientist's Data Sheet! Specifically '+7% Shiny Mob Lv Up Rate and Mob Breeding Rate' per Crop!"
             }),
         new JadeUpgradeBase(29, <JadeUpgradeModel>{
                 "name": "Science Paintbrush",
@@ -403,40 +403,40 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Boosts daily coral gain at the Coral Reef in World 7 in Shimmerfin Deep Town in the game IdleOn on the Left side of the map by +20%"
             }),
         new JadeUpgradeBase(44, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Science Chalk",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 44,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
+                "bonus": "Adds a new bonus type to your crop scientist! Specifically '+1% Research EXP' per 10 Crops after 200! So 240 crops would only give +4%"
             }),
         new JadeUpgradeBase(45, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 44,
+                "imageId": 45,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
             }),
         new JadeUpgradeBase(46, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 44,
+                "imageId": 46,
+                "filler1": "filler",
+                "filler2": "filler",
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+            }),
+        new JadeUpgradeBase(47, <JadeUpgradeModel>{
+                "name": "UNDER CONSTRUCTION",
+                "costA": 500,
+                "costB": 1,
+                "imageId": 47,
                 "filler1": "filler",
                 "filler2": "filler",
                 "bonus": "This bonus isn't out yet. 'nuff said."
-            }),
-        new JadeUpgradeBase(47, <JadeUpgradeModel>{
-                "name": "IDK YET",
-                "costA": 500,
-                "costB": 1,
-                "imageId": 39,
-                "filler1": "filler",
-                "filler2": "filler",
-                "bonus": "Idk yet"
             }),
         new JadeUpgradeBase(48, <JadeUpgradeModel>{
                 "name": "IDK YET",

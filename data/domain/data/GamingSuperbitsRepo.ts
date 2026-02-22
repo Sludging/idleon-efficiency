@@ -169,7 +169,7 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Artifacto Discoveries"
             }),
         new GamingSuperbitBase(27, <GamingSuperbitModel>{
-                "description": "MSA now gives +1% Spelunking POW per 10 total Waves",
+                "description": "MSA now gives +2.5% Spelunking POW per 10 Waves over 300",
                 "x1": 6,
                 "x2": 58,
                 "name": "MSA Spelunking"
@@ -211,10 +211,10 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Jewel Cogs"
             }),
         new GamingSuperbitBase(34, <GamingSuperbitModel>{
-                "description": "Adds a new bonus to slab when W7 Skill 2 comes out",
+                "description": "Adds a new bonus to The Slab: +% Research EXP gain",
                 "x1": 3,
                 "x2": 67,
-                "name": "Slabby Something"
+                "name": "Slabby Research"
             }),
         new GamingSuperbitBase(35, <GamingSuperbitModel>{
                 "description": "+10 Max LV for Equinox upgrades",
@@ -235,7 +235,7 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Squirrel Triad"
             }),
         new GamingSuperbitBase(38, <GamingSuperbitModel>{
-                "description": "+1% Palette Luck per Total Colour LVs.          Total Bonus: +{% Luck",
+                "description": "+1% Palette Luck per Total Colour LVs.        Total Bonus: +{% Luck",
                 "x1": 6,
                 "x2": 64,
                 "name": "Colourful Luck"
@@ -271,10 +271,10 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Peripheral Vision"
             }),
         new GamingSuperbitBase(44, <GamingSuperbitModel>{
-                "description": "MSA will give a bonus for W7 skill 2 when released...",
+                "description": "MSA now gives +0.3% Research EXP per 10 Waves over 300",
                 "x1": 1,
                 "x2": 68,
-                "name": "MSA Something"
+                "name": "MSA Research"
             }),
         new GamingSuperbitBase(45, <GamingSuperbitModel>{
                 "description": "+3% Palette Luck per Gaming LV over 200.       Total Bonus: +{% Luck",
@@ -293,6 +293,145 @@ export const initGamingSuperbitsRepo = () => {
                 "x1": 8,
                 "x2": 78,
                 "name": "Timmy Talented"
-            })    
+            }),
+        new GamingSuperbitBase(48, <GamingSuperbitModel>{
+                "description": "+1 Max Evolution for all plants. This is 250Kx rarer than normal evolutions",
+                "x1": 1,
+                "x2": 70,
+                "name": "Plant evo"
+            }),
+        new GamingSuperbitBase(49, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Peachy Pink' is 2x bigger now",
+                "x1": 3,
+                "x2": 73,
+                "name": "Peachier Peach"
+            }),
+        new GamingSuperbitBase(50, <GamingSuperbitModel>{
+                "description": "Earn 1.50x more King Tokens to spend on King Rat's upgrades",
+                "x1": 5,
+                "x2": 76,
+                "name": "A Kings Ransom"
+            }),
+        new GamingSuperbitBase(51, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Ocean Blue' is 2x bigger now",
+                "x1": 6,
+                "x2": 79,
+                "name": "Bluer Ocean"
+            }),
+        new GamingSuperbitBase(52, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Red Orange' is 2x bigger now",
+                "x1": 8,
+                "x2": 83,
+                "name": "Redder Orange"
+            }),
+        new GamingSuperbitBase(53, <GamingSuperbitModel>{
+                "description": "If no Prayers equipped, get 3/5th bonus of all prayers, and no curses",
+                "x1": 4,
+                "x2": 87,
+                "name": "Prayers Aint Meta"
+            }),
+        new GamingSuperbitBase(54, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Offwhite' is 2x bigger now",
+                "x1": 2,
+                "x2": 72,
+                "name": "Further Offcolour"
+            }),
+        new GamingSuperbitBase(55, <GamingSuperbitModel>{
+                "description": "+2% Megacrop chance per Farming LV over 300  Total Bonus: x Chance",
+                "x1": 6,
+                "x2": 77,
+                "name": "Mo Stickers Mo Bonusers"
+            }),
+        new GamingSuperbitBase(56, <GamingSuperbitModel>{
+                "description": "Adds a new Bits Gain multi based on best Log Minigame highscore",
+                "x1": 1,
+                "x2": 84,
+                "name": "Pro Log Flipper"
+            }),
+        new GamingSuperbitBase(57, <GamingSuperbitModel>{
+                "description": "+1 Max Evolution for all plants. This is 10Mx rarer than normal evolutions",
+                "x1": 8,
+                "x2": 86,
+                "name": "Plant evo"
+            }),
+        new GamingSuperbitBase(58, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Neon Tree' is 2x bigger now",
+                "x1": 5,
+                "x2": 90,
+                "name": "Everybody Talks"
+            }),
+        new GamingSuperbitBase(59, <GamingSuperbitModel>{
+                "description": "All the '2x Palette bonus from specific colours' upgrades now give 2.5x",
+                "x1": 4,
+                "x2": 93,
+                "name": "Colourier Colours"
+            }),
+        new GamingSuperbitBase(60, <GamingSuperbitModel>{
+                "description": "Boosts odds of finding one of King Rat's Crowns by 1.50x",
+                "x1": 9,
+                "x2": 75,
+                "name": "Royal Flora"
+            }),
+        new GamingSuperbitBase(61, <GamingSuperbitModel>{
+                "description": "The Palette bonus from 'Babby Blue' is 2x bigger now",
+                "x1": 1,
+                "x2": 86,
+                "name": "Babbiest Blue"
+            }),
+        new GamingSuperbitBase(62, <GamingSuperbitModel>{
+                "description": "All Farming Stickers give 1.20x higher bonuses now and forever",
+                "x1": 1,
+                "x2": 92,
+                "name": "Bettah Stickahs"
+            }),
+        new GamingSuperbitBase(63, <GamingSuperbitModel>{
+                "description": "1.10x Class EXP for all players",
+                "x1": 3,
+                "x2": 96,
+                "name": "Experienced Gamer"
+            }),
+        new GamingSuperbitBase(64, <GamingSuperbitModel>{
+                "description": "1.10x Damage Multi for all players, unaffected by DMG scaling",
+                "x1": 7,
+                "x2": 98,
+                "name": "Destructive Gamer"
+            }),
+        new GamingSuperbitBase(65, <GamingSuperbitModel>{
+                "description": "1.30x Palette Luck, straight up multiplier for your colouring needs",
+                "x1": 1,
+                "x2": 100,
+                "name": "Artistic Gamer"
+            }),
+        new GamingSuperbitBase(66, <GamingSuperbitModel>{
+                "description": "Dont buy this. Not like you can afford it regardless.",
+                "x1": 2,
+                "x2": 150,
+                "name": "Not Yet"
+            }),
+        new GamingSuperbitBase(67, <GamingSuperbitModel>{
+                "description": "You can't buy this. At least not with so few bits.",
+                "x1": 2,
+                "x2": 150,
+                "name": "Nuh Uh"
+            }),
+        new GamingSuperbitBase(68, <GamingSuperbitModel>{
+                "description": "You can't buy this today, or tomorrow, or the next day.",
+                "x1": 2,
+                "x2": 150,
+                "name": "Not Today"
+            }),
+        new GamingSuperbitBase(69, <GamingSuperbitModel>{
+                "description": "You? Buying THIS?? YOU'RE BROOOOKE!!!",
+                "x1": 2,
+                "x2": 150,
+                "name": "Not Happening"
+            }),
+        new GamingSuperbitBase(70, <GamingSuperbitModel>{
+                "description": "Aint no way I'm lettin' ya buy this here upgrade, no way no how.",
+                "x1": 2,
+                "x2": 150,
+                "name": "No Way"
+            }),
+        new GamingSuperbitBase(71, <GamingSuperbitModel>{"description": "Yea, what he said.", "x1": 2, "x2": 150, "name": "No How"})    
 ]
 }

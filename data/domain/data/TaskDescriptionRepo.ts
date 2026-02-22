@@ -520,8 +520,8 @@ export const initTaskDescriptionRepo = () => {
                 ]
             }),
         new TaskDescriptionBase(27, <TaskDescriptionModel>{
-                "name": "Hello Friend!",
-                "description": "Send a private message to a friend! Easily done through the Friends Tab in the Codex!",
+                "name": "Here Friend!",
+                "description": "Send a bonus to a friend! Easily done through the Friends Tab in the Codex!",
                 "extraStr": "Blank420q",
                 "number1": 2,
                 "descLine2": "0",
@@ -1680,7 +1680,7 @@ export const initTaskDescriptionRepo = () => {
             }),
         new TaskDescriptionBase(88, <TaskDescriptionModel>{
                 "name": "Cracking Eggs",
-                "description": "Breed a } pet { times.",
+                "description": "Breed a } Mob { times.",
                 "extraStr": "Squirrel|Piggo|Mallay|Wild Boar|Mecho Mouse|Choccie|Cool Bird|Chippy|Panda|Hedgehog",
                 "number1": 10,
                 "descLine2": "1|1|I tell u hwat that right thers quite the animal farm ya got pardner!",
@@ -1698,8 +1698,8 @@ export const initTaskDescriptionRepo = () => {
                 ]
             }),
         new TaskDescriptionBase(89, <TaskDescriptionModel>{
-                "name": "Pet Bullet Bursting",
-                "description": "Deal { dmg in a Pet Battle within a 5sec timeframe.",
+                "name": "Mob Bullet Bursting",
+                "description": "Deal { dmg in a Mob Battle within a 5sec timeframe.",
                 "extraStr": "Blank420q",
                 "number1": 10,
                 "descLine2": "2|1|Wow that was a KILLER team you used just now!",

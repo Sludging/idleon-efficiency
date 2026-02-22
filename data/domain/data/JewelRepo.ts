@@ -223,8 +223,8 @@ export const initJewelRepo = () => {
                 "x": 1300,
                 "y": 208,
                 "range": 90,
-                "effect": "Special Pets in the Fenceyard level up their Passive Bonuses +}% faster",
-                "description": "Boosts Pet Passive level up rate",
+                "effect": "Shiny Mobs in the Fenceyard level up their Passive Bonuses +}% faster",
+                "description": "Boosts Shiny Mob level up rate",
                 "requirements": [
                     <ComponentModel>{"item": "GalaxyA2b", "quantity": 200},
                     <MealComponentModel>{"mealNo": "31", "quantity": 25000},

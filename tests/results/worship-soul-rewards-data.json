@@ -1,71 +1,71 @@
 {
-  "timestamp": "2026-02-08T08:31:42.952Z",
+  "timestamp": "2026-02-22T07:26:29.926Z",
   "extractions": {
     "worship_efficiency": {
       "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
-      "result": 2333331771.6053963,
+      "result": 2354793994.1910553,
       "description": "Worship efficiency",
-      "extractedAt": "2026-02-08T08:31:43.008Z"
+      "extractedAt": "2026-02-22T07:26:29.930Z"
     },
     "food_bonus_worship_soul_boosts": {
       "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\")",
       "result": 0,
       "description": "Food bonus for worship soul boosts",
-      "extractedAt": "2026-02-08T08:31:43.015Z"
+      "extractedAt": "2026-02-22T07:26:29.932Z"
     },
     "talent_57": {
       "expression": "idleon.callFunction(\"TalentCalc\", 57)",
       "result": 925,
       "description": "Talent 57 bonus",
-      "extractedAt": "2026-02-08T08:31:43.027Z"
+      "extractedAt": "2026-02-22T07:26:29.934Z"
     },
     "bubba_bonus_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
       "result": 41.99999999999999,
       "description": "Bubba global bonus 3 (Soul Gain)",
-      "extractedAt": "2026-02-08T08:31:43.036Z"
+      "extractedAt": "2026-02-22T07:26:29.941Z"
     },
     "dementia_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0)",
       "result": 50,
       "description": "Dementia equipment set bonus",
-      "extractedAt": "2026-02-08T08:31:43.045Z"
+      "extractedAt": "2026-02-22T07:26:29.944Z"
     },
     "arcade_bonus_24": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 24)",
       "result": 14.545454545454545,
       "description": "Arcade bonus 24",
-      "extractedAt": "2026-02-08T08:31:43.056Z"
+      "extractedAt": "2026-02-22T07:26:29.946Z"
     },
     "vault_upgrade_50": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0)",
       "result": 450,
       "description": "Vault upgrade 50 bonus",
-      "extractedAt": "2026-02-08T08:31:43.066Z"
+      "extractedAt": "2026-02-22T07:26:29.948Z"
     },
     "totem_0_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 60 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 600, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][0]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 63603569,
+      "result": 63743665,
       "description": "Soul rewards for totem 0 (Goblin Gorefest)",
-      "extractedAt": "2026-02-08T08:31:43.076Z"
+      "extractedAt": "2026-02-22T07:26:29.951Z"
     },
     "totem_2_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 1000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 10000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][2]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 20842744,
+      "result": 20888113,
       "description": "Soul rewards for totem 2 (Acorn Assault)",
-      "extractedAt": "2026-02-08T08:31:43.088Z"
+      "extractedAt": "2026-02-22T07:26:29.953Z"
     },
     "totem_5_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 25000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 250000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][5]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 7016486,
+      "result": 7035941,
       "description": "Soul rewards for totem 5 (Citric Conflict)",
-      "extractedAt": "2026-02-08T08:31:43.095Z"
+      "extractedAt": "2026-02-22T07:26:29.956Z"
     },
     "totem_7_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 2500000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 25000000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][7]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 2207940,
+      "result": 2213325,
       "description": "Soul rewards for totem 7 (Pufferblob Brawl)",
-      "extractedAt": "2026-02-08T08:31:43.105Z"
+      "extractedAt": "2026-02-22T07:26:29.963Z"
     }
   },
   "errors": {},

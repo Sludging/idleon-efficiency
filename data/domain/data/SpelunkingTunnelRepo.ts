@@ -557,7 +557,7 @@ export const initSpelunkingTunnelRepo = () => {
                         "x4": 0,
                         "x5": 1,
                         "x6": 0,
-                        "x7": 6e+12
+                        "x7": 6e+11
                     },
                     <SpelunkingDiscoveryModel>{
                         "tunnelIndex": 5,
@@ -697,7 +697,7 @@ export const initSpelunkingTunnelRepo = () => {
                         "x4": 0,
                         "x5": 1,
                         "x6": 0,
-                        "x7": 2e+16
+                        "x7": 2e+14
                     },
                     <SpelunkingDiscoveryModel>{
                         "tunnelIndex": 6,
@@ -836,7 +836,7 @@ export const initSpelunkingTunnelRepo = () => {
         new SpelunkingTunnelBase(7, <SpelunkingTunnelModel>{
                 "index": 7,
                 "name": "Glitter End",
-                "loreBonus": "This lore bonus has yet to be fully understood...",
+                "loreBonus": "Get a brand new Shape for your Research Grid!",
                 "bossDepth": 100,
                 "discoveries": [
                     <SpelunkingDiscoveryModel>{
@@ -848,7 +848,7 @@ export const initSpelunkingTunnelRepo = () => {
                         "x4": 0,
                         "x5": 1,
                         "x6": 0,
-                        "x7": 5e+21
+                        "x7": 5e+18
                     },
                     <SpelunkingDiscoveryModel>{
                         "tunnelIndex": 7,
@@ -966,7 +966,7 @@ export const initSpelunkingTunnelRepo = () => {
                         "x1": 2000000,
                         "x2": 12,
                         "x3": 600000,
-                        "x4": 1,
+                        "x4": 0,
                         "x5": 1,
                         "x6": 120,
                         "x7": -1
@@ -998,9 +998,175 @@ export const initSpelunkingTunnelRepo = () => {
         new SpelunkingTunnelBase(8, <SpelunkingTunnelModel>{
                 "index": 8,
                 "name": "Name9",
-                "loreBonus": "8",
+                "loreBonus": "Palette Colours now give 1.50x bonuses, and Palette Luck is +4% higher per Gaming LV",
                 "bossDepth": 55,
-                "discoveries": []
+                "discoveries": [
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Snow",
+                        "x1": 1,
+                        "x2": 2,
+                        "x3": 15000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 0,
+                        "x7": 8e+21
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Keep Out",
+                        "x1": 2,
+                        "x2": 3,
+                        "x3": 20000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 5,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Radi Ooze",
+                        "x1": 10,
+                        "x2": 5,
+                        "x3": 32000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 12,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Smolman",
+                        "x1": 20,
+                        "x2": 8,
+                        "x3": 45000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 24,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Dead Tree",
+                        "x1": 100,
+                        "x2": 10,
+                        "x3": 65000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 33,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Barbed Wire",
+                        "x1": 200,
+                        "x2": 15,
+                        "x3": 80000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 42,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Small Sonar",
+                        "x1": 500,
+                        "x2": 25,
+                        "x3": 110000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 54,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Cherno Bile",
+                        "x1": 1000,
+                        "x2": 35,
+                        "x3": 140000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 68,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Incognisnow",
+                        "x1": 5000,
+                        "x2": 40,
+                        "x3": 190000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 80,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Labeled Waste",
+                        "x1": 25000,
+                        "x2": 50,
+                        "x3": 250000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 91,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Artificial Tree",
+                        "x1": 150000,
+                        "x2": 60,
+                        "x3": 350000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 105,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Contained Impurity",
+                        "x1": 2000000,
+                        "x2": 80,
+                        "x3": 600000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 120,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "Legrange Sonar",
+                        "x1": 10000000,
+                        "x2": 100,
+                        "x3": 1000000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 130,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "DMK Snowgoon",
+                        "x1": 30000000,
+                        "x2": 120,
+                        "x3": 1000000,
+                        "x4": 1,
+                        "x5": 1.32,
+                        "x6": 140,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 8,
+                        "name": "SCP 4745",
+                        "x1": 3000000,
+                        "x2": 2500,
+                        "x3": 250000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 115,
+                        "x7": -1
+                    }
+                ]
             }),
         new SpelunkingTunnelBase(9, <SpelunkingTunnelModel>{
                 "index": 9,

@@ -51,6 +51,33 @@ export const initRefineryCostRepo = () => {
                     <ComponentModel>{"item": "Soul4", "quantity": 5},
                     <ComponentModel>{"item": "Refinery5", "quantity": 2}
                 ]
+            }),
+        new RefineryCostBase("Refinery7", <RefineryCostModel>{
+                "cost": [
+                    <ComponentModel>{"item": "SpiB2", "quantity": 10},
+                    <ComponentModel>{"item": "Soul7", "quantity": 2},
+                    <ComponentModel>{"item": "Critter11", "quantity": 1},
+                    <ComponentModel>{"item": "Refinery6", "quantity": 1}
+                ]
+            }),
+        new RefineryCostBase("Refinery8", <RefineryCostModel>{
+                "cost": [
+                    <ComponentModel>{"item": "w7A1", "quantity": 25},
+                    <ComponentModel>{"item": "Fish12", "quantity": 5},
+                    <ComponentModel>{"item": "Bug15", "quantity": 5},
+                    <ComponentModel>{"item": "PrehistriumBar", "quantity": 5},
+                    <ComponentModel>{"item": "Refinery7", "quantity": 2}
+                ]
+            }),
+        new RefineryCostBase("Refinery9", <RefineryCostModel>{
+                "cost": [
+                    <ComponentModel>{"item": "w7B10", "quantity": 50},
+                    <ComponentModel>{"item": "FillerMaterial", "quantity": 5},
+                    <ComponentModel>{"item": "FillerMaterial", "quantity": 5},
+                    <ComponentModel>{"item": "FillerMaterial", "quantity": 5},
+                    <ComponentModel>{"item": "Soul8", "quantity": 5},
+                    <ComponentModel>{"item": "Refinery8", "quantity": 2}
+                ]
             })    
 ]
 }

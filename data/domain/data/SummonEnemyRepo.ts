@@ -1403,6 +1403,72 @@ export const initSummonEnemyRepo = () => {
                 "bonus": <SummonEnemyBonusModel>{"bonusId": 11, "bonus": "<x Crop EVO"},
                 "bonusQty": 90,
                 "difficulty": 500
+            }),
+        new SummonEnemyBase(127, <SummonEnemyModel>{
+                "enemyId": "w7b1",
+                "xOff": 31,
+                "yOff": 34,
+                "width": 15,
+                "territoryName": "Kai and his Bluesteel Koi",
+                "bonusId": 1,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
+                "bonusQty": 400,
+                "difficulty": 525
+            }),
+        new SummonEnemyBase(128, <SummonEnemyModel>{
+                "enemyId": "w7b2",
+                "xOff": 39,
+                "yOff": 36,
+                "width": 22,
+                "territoryName": "Minnie and her Merciless Mines",
+                "bonusId": 9,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 9, "bonus": "<x Farming EXP"},
+                "bonusQty": 80,
+                "difficulty": 550
+            }),
+        new SummonEnemyBase(129, <SummonEnemyModel>{
+                "enemyId": "w7b3",
+                "xOff": 34,
+                "yOff": 38,
+                "width": 21,
+                "territoryName": "Crusty and his Smol Crew",
+                "bonusId": 16,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 16, "bonus": "<x Cooking SPD"},
+                "bonusQty": 150,
+                "difficulty": 575
+            }),
+        new SummonEnemyBase(130, <SummonEnemyModel>{
+                "enemyId": "w7b4",
+                "xOff": 30,
+                "yOff": 34,
+                "width": 17,
+                "territoryName": "Ozeki and his Roll Tide",
+                "bonusId": 11,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 11, "bonus": "<x Crop EVO"},
+                "bonusQty": 70,
+                "difficulty": 600
+            }),
+        new SummonEnemyBase(131, <SummonEnemyModel>{
+                "enemyId": "w7b5",
+                "xOff": 49,
+                "yOff": 45,
+                "width": 25,
+                "territoryName": "Jeremiah and his Juiced Up Jellies",
+                "bonusId": 17,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 17, "bonus": "<x Gaming Bits"},
+                "bonusQty": 200,
+                "difficulty": 625
+            }),
+        new SummonEnemyBase(132, <SummonEnemyModel>{
+                "enemyId": "w7b6",
+                "xOff": 46,
+                "yOff": 41,
+                "width": 28,
+                "territoryName": "Lazlo and his Killer Kelpos",
+                "bonusId": 1,
+                "bonus": <SummonEnemyBonusModel>{"bonusId": 1, "bonus": "<x Total DMG"},
+                "bonusQty": 500,
+                "difficulty": 650
             })    
 ]
 }

@@ -78,7 +78,13 @@ function RefineryDisplay() {
                     });
                 }
                 let totalWait = 0;
-                const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
+                let refineryCycle = refineryData.cycleInfo["Combustion"];
+                if (Math.floor(index / 3) == 1) {
+                    refineryCycle = refineryData.cycleInfo["Synthesis"];
+                }
+                if (Math.floor(index / 3) == 2) {
+                    refineryCycle = refineryData.cycleInfo["Polymerization"]
+                }
                 let timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime);
                 while (timeToNextRank > 0) {
                     const nextCDTime = Math.min(...currentCooldowns.map(cooldowns => cooldowns[1]));
@@ -197,7 +203,13 @@ function RefineryDisplay() {
                         const inChestStorage = storage?.chest.find((item) => item.internalName == storageItem.internalName)
                         storageItem.count = (inSaltStorage?.quantity ?? 0) + (inChestStorage?.count ?? 0);
                     });
-                    const refineryCycle = Math.floor(index / 3) == 0 ? refineryData.cycleInfo["Combustion"] : refineryData.cycleInfo["Synthesis"];
+                    let refineryCycle = refineryData.cycleInfo["Combustion"];
+                    if (Math.floor(index / 3) == 1) {
+                        refineryCycle = refineryData.cycleInfo["Synthesis"];
+                    }
+                    if (Math.floor(index / 3) == 2) {
+                        refineryCycle = refineryData.cycleInfo["Polymerization"]
+                    }
                     const secondsSinceUpdate = (new Date().getTime() - (lastUpdated?.getTime() ?? 0)) / 1000;
                     const fuelTime = Math.max(0, info.getFuelTime(storageItems, [], index <= saltMeritLevel) * refineryCycle.cycleTime - secondsSinceUpdate);
                     const timeToNextRank = info.getTimeToNextRank(refineryCycle.cycleTime) - secondsSinceUpdate;

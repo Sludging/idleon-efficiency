@@ -13,7 +13,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.decay,
                 "totalVal": 1000,
                 "decimalDisplay": undefined,
-                "desc": undefined
+                "desc": "Your Tome Score of # PTS is in the Top $ of all players in IdleOn! @   @ If you can reach ~ PTS, you'll be in the Top ` of all players!"
             }),
         new TomeBase(1, <TomeModel>{
                 "name": "Statue Total LV",
@@ -195,15 +195,15 @@ export const initTomeRepo = () => {
                 "name": "Total Vial LV",
                 "keyQty": 962,
                 "scalingType": TomeScalingEnum.linearToMax,
-                "totalVal": 500,
+                "totalVal": 600,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
         new TomeBase(24, <TomeModel>{
                 "name": "Total Sigil LV",
-                "keyQty": 72,
+                "keyQty": 120,
                 "scalingType": TomeScalingEnum.linearToMax,
-                "totalVal": 250,
+                "totalVal": 500,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
@@ -376,7 +376,7 @@ export const initTomeRepo = () => {
                 "desc": undefined
             }),
         new TomeBase(46, <TomeModel>{
-                "name": "Highest Power Pet",
+                "name": "Highest Power Mob",
                 "keyQty": 5,
                 "scalingType": TomeScalingEnum.decayLog,
                 "totalVal": 150,
@@ -400,7 +400,7 @@ export const initTomeRepo = () => {
                 "desc": undefined
             }),
         new TomeBase(49, <TomeModel>{
-                "name": "Total Shiny Pet LV",
+                "name": "Total Shiny Mob LV",
                 "keyQty": 750,
                 "scalingType": TomeScalingEnum.decay,
                 "totalVal": 250,
@@ -416,7 +416,7 @@ export const initTomeRepo = () => {
                 "desc": undefined
             }),
         new TomeBase(51, <TomeModel>{
-                "name": "Total Pet Breedability LV",
+                "name": "Total Mob Breedability LV",
                 "keyQty": 500,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 200,
@@ -493,7 +493,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 1000,
                 "decimalDisplay": undefined,
-                "desc": "Rarer versions of an artifact count for more, so Ancient would count as 2 Artifacts."
+                "desc": "Rarer versions of an artifact count for more, so an Ancient Form Artifact counts as +2, Eldritch Form counts as +3, and so on..."
             }),
         new TomeBase(61, <TomeModel>{
                 "name": "Gold Bar Sailing Treasure Owned",
@@ -657,9 +657,9 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(81, <TomeModel>{
                 "name": "Vault Upgrade bonus LV",
-                "keyQty": 500,
+                "keyQty": 1200,
                 "scalingType": TomeScalingEnum.linearToMax,
-                "totalVal": 500,
+                "totalVal": 1200,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
@@ -841,7 +841,7 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(104, <TomeModel>{
                 "name": "Total Spelunk Discoveries made 膛",
-                "keyQty": 76,
+                "keyQty": 90,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 300,
                 "decimalDisplay": undefined,
@@ -857,7 +857,7 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(106, <TomeModel>{
                 "name": "Lava Dev Streams watched 膛",
-                "keyQty": 10,
+                "keyQty": 20,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 250,
                 "decimalDisplay": undefined,
@@ -886,6 +886,54 @@ export const initTomeRepo = () => {
                 "totalVal": 700,
                 "decimalDisplay": undefined,
                 "desc": "This metric is based on the total hats you've deposited to the Hat Rack in World 3!"
+            }),
+        new TomeBase(110, <TomeModel>{
+                "name": "Minehead Opponents Defeated 膛",
+                "keyQty": 40,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 600,
+                "decimalDisplay": undefined,
+                "desc": "Haven't heard of Mr Minehead's Depth Charge game yet? It's great, you'll find it deep in World 7!"
+            }),
+        new TomeBase(111, <TomeModel>{
+                "name": "Rat King Crowns Reclaimed 膛",
+                "keyQty": 100,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": "The Rat King is one of the last Import Items you buy in Gaming, and he unlocks the ROYALE sprout mutation, which, when harvested, has a chance to reclaim Crowns!"
+            }),
+        new TomeBase(112, <TomeModel>{
+                "name": "Farming Stickers Found 膛",
+                "keyQty": 150,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 300,
+                "decimalDisplay": undefined,
+                "desc": "You need to unlock the Sticker Depot from Research in World 7, and grow some Megacrops to find Stickers!"
+            }),
+        new TomeBase(113, <TomeModel>{
+                "name": "Tournaments Registrations 膛",
+                "keyQty": 365,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 365,
+                "decimalDisplay": undefined,
+                "desc": "This metric tracks how many days you've registered for a Tournament! It currently caps at 365, so you aren't permanently behind if you miss a day!"
+            }),
+        new TomeBase(114, <TomeModel>{
+                "name": "Total Research Grid Upgrades 膛",
+                "keyQty": 109,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 750,
+                "decimalDisplay": undefined,
+                "desc": "Research is a World 7 skill, you need to progress past the Ballonfish Map to unlock it!"
+            }),
+        new TomeBase(115, <TomeModel>{
+                "name": "Total Glimbo Trades 膛",
+                "keyQty": 1500,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 400,
+                "decimalDisplay": undefined,
+                "desc": "Glimbo can be found deep in World 7, he increases your Upgrade Vault max LV's in exchange for valuable items!"
             })    
-    ]
+]
 }

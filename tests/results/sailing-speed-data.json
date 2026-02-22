@@ -1,143 +1,143 @@
 {
-  "timestamp": "2026-02-08T06:03:48.327Z",
+  "timestamp": "2026-02-22T07:26:29.751Z",
   "extractions": {
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 60.181967637798415,
+      "result": 60.58159888170992,
       "description": "Divinity minor bonus for Purrmep (god 6)",
-      "extractedAt": "2026-02-08T06:03:48.331Z"
+      "extractedAt": "2026-02-22T07:26:29.759Z"
     },
     "card_w5c1_bonus": {
       "expression": "4 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w5c1\")",
       "result": 24,
       "description": "Card w5c1 bonus",
-      "extractedAt": "2026-02-08T06:03:48.338Z"
+      "extractedAt": "2026-02-22T07:26:29.761Z"
     },
     "card_boss5a_bonus": {
       "expression": "6 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss5A\")",
       "result": 24,
       "description": "Card Boss5A bonus",
-      "extractedAt": "2026-02-08T06:03:48.340Z"
+      "extractedAt": "2026-02-22T07:26:29.763Z"
     },
     "alchemy_bubble_y1": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y1",
       "result": 115.27139874739039,
       "description": "Alchemy bubble Y1 (yellow bubble 1)",
-      "extractedAt": "2026-02-08T06:03:48.347Z"
+      "extractedAt": "2026-02-22T07:26:29.764Z"
     },
     "davey_jones_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"DaveyJonesBonus\", 0, 0)",
       "result": 5.6,
       "description": "Davey Jones bonus",
-      "extractedAt": "2026-02-08T06:03:48.349Z"
+      "extractedAt": "2026-02-22T07:26:29.767Z"
     },
     "divinity_blessing_4": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
       "result": 528,
       "description": "Divinity blessing bonus for god 4",
-      "extractedAt": "2026-02-08T06:03:48.357Z"
+      "extractedAt": "2026-02-22T07:26:29.774Z"
     },
     "divinity_blessing_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
       "result": 396,
       "description": "Divinity blessing bonus for god 6 (Purrmep)",
-      "extractedAt": "2026-02-08T06:03:48.359Z"
+      "extractedAt": "2026-02-22T07:26:29.776Z"
     },
     "voting_bonus_24": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 24, 0)",
       "result": 0,
       "description": "Voting bonus 24",
-      "extractedAt": "2026-02-08T06:03:48.362Z"
+      "extractedAt": "2026-02-22T07:26:29.778Z"
     },
     "divinity_blessing_9": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
       "result": 660,
       "description": "Divinity blessing bonus for god 9",
-      "extractedAt": "2026-02-08T06:03:48.368Z"
+      "extractedAt": "2026-02-22T07:26:29.780Z"
     },
     "artifact_10_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 10, 0)",
-      "result": 4286.099999999999,
+      "result": 4326.92,
       "description": "Sailing artifact 10 bonus",
-      "extractedAt": "2026-02-08T06:03:48.370Z"
+      "extractedAt": "2026-02-22T07:26:29.783Z"
     },
     "stamp_sailspd_bonus": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"SailSpd\")",
       "result": 250,
       "description": "Stamp bonus for SailSpd",
-      "extractedAt": "2026-02-08T06:03:48.376Z"
+      "extractedAt": "2026-02-22T07:26:29.785Z"
     },
     "statue_24_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
       "result": 2255.8925106880333,
       "description": "Statue 24 bonus",
-      "extractedAt": "2026-02-08T06:03:48.378Z"
+      "extractedAt": "2026-02-22T07:26:29.787Z"
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
       "result": 638.82032134,
       "description": "Meal bonus for Sailing",
-      "extractedAt": "2026-02-08T06:03:48.381Z"
+      "extractedAt": "2026-02-22T07:26:29.793Z"
     },
     "alchemy_vial_sailspd": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.SailSpd",
       "result": 133.12,
       "description": "Alchemy vial SailSpd bonus",
-      "extractedAt": "2026-02-08T06:03:48.560Z"
+      "extractedAt": "2026-02-22T07:26:29.796Z"
     },
     "rift_skill_bonus_sailing": {
       "expression": "17 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,12\", 1)",
       "result": 17,
       "description": "Rift skill mastery bonus for sailing (skill index 12)",
-      "extractedAt": "2026-02-08T06:03:48.588Z"
+      "extractedAt": "2026-02-22T07:26:29.798Z"
     },
     "worship_msa_bonus_2": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 2, 0)",
       "result": 117,
       "description": "Worship MSA bonus 2 (boat speed)",
-      "extractedAt": "2026-02-08T06:03:48.600Z"
+      "extractedAt": "2026-02-22T07:26:29.800Z"
     },
     "starsign_63_bonus": {
       "expression": "idleon.getDNSM(\"StarSigns\").h[63]",
       "result": 85.74355240000006,
       "description": "Star sign 63 (C. Shanti Minor) bonus",
-      "extractedAt": "2026-02-08T06:03:48.606Z"
+      "extractedAt": "2026-02-22T07:26:29.802Z"
     },
     "boat_0_current_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 4)",
-      "result": 15234966802.433401,
+      "result": 15325099882.853354,
       "description": "Boat 0 current speed (i=4)",
-      "extractedAt": "2026-02-08T06:03:48.612Z"
+      "extractedAt": "2026-02-22T07:26:29.804Z"
     },
     "boat_0_next_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 6)",
-      "result": 15324051208.912943,
+      "result": 15414711330.322056,
       "description": "Boat 0 next speed level (i=6)",
-      "extractedAt": "2026-02-08T06:03:48.619Z"
+      "extractedAt": "2026-02-22T07:26:29.806Z"
     },
     "boat_0_island_bound_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 0)",
       "result": 10000000,
       "description": "Boat 0 island-bound speed (i<=0)",
-      "extractedAt": "2026-02-08T06:03:48.629Z"
+      "extractedAt": "2026-02-22T07:26:29.813Z"
     },
     "boat_1_current_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 4)",
-      "result": 5693295553.695489,
+      "result": 5726978217.573289,
       "description": "Boat 1 current speed (i=4)",
-      "extractedAt": "2026-02-08T06:03:48.633Z"
+      "extractedAt": "2026-02-22T07:26:29.815Z"
     },
     "boat_1_next_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 6)",
-      "result": 5740334360.259857,
+      "result": 5774295315.031881,
       "description": "Boat 1 next speed level (i=6)",
-      "extractedAt": "2026-02-08T06:03:48.639Z"
+      "extractedAt": "2026-02-22T07:26:29.817Z"
     },
     "boat_1_island_bound_speed": {
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 1, 0)",
       "result": 10000000,
       "description": "Boat 1 island-bound speed (i<=0)",
-      "extractedAt": "2026-02-08T06:03:48.648Z"
+      "extractedAt": "2026-02-22T07:26:29.819Z"
     }
   },
   "errors": {},
