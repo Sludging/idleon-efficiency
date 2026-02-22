@@ -134,7 +134,16 @@ export class VaultUpgBonus {
             this.data.description_line1; */
 
         const fullDescription = this.data.description_line1;
-        return fullDescription.replace('{', this.bonus.toFixed(2)).replace('}', nFormatter(1 + this.bonus / 100, "MultiplierInfo"));
+
+        // Lava decided that upgrade 13 (Major Discount) deserves it's own special handling
+        if (this.id == 13) {
+            return fullDescription.replace('$',
+                (Math.round(1e4 * (1 - 1 / (1 + this.bonus / 100))) / 100).toFixed(2)
+            )
+        }
+        return fullDescription.replace('{', this.bonus.toFixed(2))
+            .replace('}', nFormatter(1 + this.bonus / 100, "MultiplierInfo"))
+            .replace('$', this.bonus.toFixed(2));
     }
 }
 
