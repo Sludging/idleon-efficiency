@@ -636,6 +636,9 @@ export class Summoning extends Domain {
             case SummonEssenceColor.Cyan:
                 location = "cyan_custom";
                 break;
+            case SummonEssenceColor.Teal:
+                location = "teal_custom";
+                break;
             default:
                 location = `W6item${color + 6}_x1`;
                 break;
