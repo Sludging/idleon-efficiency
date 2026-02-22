@@ -18,7 +18,8 @@ export enum ArtifactStatus {
     Ancient,
     Eldritch,
     Sovereign,
-    Omnipotent
+    Omnipotent,
+    Transcendent,
 }
 
 export class Artifact {
@@ -85,6 +86,9 @@ export class Artifact {
                 break;
             case 5:
                 this.status = ArtifactStatus.Omnipotent;
+                break;
+            case 6:
+                this.status = ArtifactStatus.Transcendent;
                 break;
         }
     }
@@ -164,6 +168,9 @@ export class Artifact {
         if (this.status == ArtifactStatus.Omnipotent) {
             return 5;
         }
+        if (this.status == ArtifactStatus.Transcendent) {
+            return 6;
+        }
 
         return 1;
     }
@@ -201,6 +208,7 @@ export class GoldRelicArtifact extends Artifact {
                 case ArtifactStatus.Eldritch: return this.data.qtyBonus + (this.data.eldritchBonusQty ?? 0);
                 case ArtifactStatus.Sovereign: return this.data.qtyBonus + (this.data.sovereignBonusQty ?? 0);
                 case ArtifactStatus.Omnipotent: return this.data.qtyBonus + (this.data.omnipotentBonusQty ?? 0);
+                case ArtifactStatus.Transcendent: return this.data.qtyBonus + (this.data.transcendentBonusQty ?? 0);
             }
         }
 
@@ -258,6 +266,9 @@ export class AshenUrnArtifact extends Artifact {
         }
         if (this.status == ArtifactStatus.Omnipotent) {
             return 1000;
+        }
+        if (this.status == ArtifactStatus.Transcendent) {
+            return 1200;
         }
 
         return 200;
