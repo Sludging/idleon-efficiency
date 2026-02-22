@@ -481,7 +481,7 @@ export const initHoleBuildingRepo = () => {
                 "costType": SedimentTypeEnum.Gravel,
                 "baseCost": 10,
                 "costCalcType": false,
-                "desc": "Gives you a +60% chance to get an additional Grey Gene when trashing a pet for every Power of 10 Gravel you have. @ Total Bonus: +{% Chance for extra Gene",
+                "desc": "Gives you a +60% chance to get an additional Grey Gene when trashing a Mob for every Power of 10 Gravel you have. @ Total Bonus: +{% Chance for extra Gene",
                 "order": 8
             }),
         new HoleBuildingBase(53, <HoleBuildingModel>{

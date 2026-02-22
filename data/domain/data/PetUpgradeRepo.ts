@@ -21,7 +21,7 @@ export const initPetUpgradeRepo = () => {
                 "bonusQty": 0
             }),
         new PetUpgradeBase(1, <PetUpgradeModel>{
-                "upgradeName": "Gene Splicing } Helps unlock next pet type",
+                "upgradeName": "Gene Splicing } Helps unlock next Mob type",
                 "filler": "Filler",
                 "material": "PetDeadCell",
                 "cost": 0,
@@ -30,7 +30,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 3,
                 "costScale": 2.5,
                 "maxLevel": 20,
-                "description": "Unlocks Gene Boosting, which increases chance to breed new pets. Use the DNA Splicer tool from the Town Shop to get Genes.",
+                "description": "Unlocks Gene Boosting, which increases chance to breed new Mobs. Use the DNA Splicer tool from the Town Shop to get Genes.",
                 "boostEffect": "-}% Gene Boost Cost",
                 "bonusQty": 4
             }),
@@ -49,7 +49,7 @@ export const initPetUpgradeRepo = () => {
                 "bonusQty": 1
             }),
         new PetUpgradeBase(3, <PetUpgradeModel>{
-                "upgradeName": "Breedability Pets",
+                "upgradeName": "Breedability Mobs",
                 "filler": "Filler",
                 "material": "PetDeadCell",
                 "cost": 6,
@@ -58,7 +58,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 7,
                 "maxLevel": 10,
-                "description": "Unlocks Breedability, which increases chance to breed new pets. Put a 'pink' pets in the Fenceyard to increase their multiplier.",
+                "description": "Unlocks Breedability, which increases chance to breed new Mobs. Put a 'pink' Mobs in the Fenceyard to increase their multiplier.",
                 "boostEffect": "+}% Breedability Spd",
                 "bonusQty": 25
             }),
@@ -72,7 +72,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 4,
                 "maxLevel": 10,
-                "description": "Increases the number of slots in your Fence Yard, allowing for more pets to roam around, free range style!",
+                "description": "Increases the number of slots in your Fence Yard, allowing for more Mobs to roam around, free range style!",
                 "boostEffect": "+} Fenceyard Slots",
                 "bonusQty": 1
             }),
@@ -96,12 +96,12 @@ export const initPetUpgradeRepo = () => {
                 "material": "PetDeadCell",
                 "cost": 20,
                 "baseMatCost": 40,
-                "costMatScale": 1.25,
+                "costMatScale": 1.1,
                 "baseCost": 10,
                 "costScale": 10,
                 "maxLevel": 10,
-                "description": "All pets do more damage in battle!",
-                "boostEffect": "+}% Pet Damage",
+                "description": "All Mobs do more damage in battle!",
+                "boostEffect": "+}% Mob Damage",
                 "bonusQty": 6
             }),
         new PetUpgradeBase(7, <PetUpgradeModel>{
@@ -114,7 +114,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 130,
                 "maxLevel": 5,
-                "description": "Unlocks the 4th Breeding Multi, Pastpres. This increases based on the number of different pets discovered from the previous world.",
+                "description": "Unlocks the 4th Breeding Multi, Pastpres. This increases based on the number of different Mobs discovered from the previous world.",
                 "boostEffect": "}x Bigger Multi",
                 "bonusQty": 0.15
             }),
@@ -128,7 +128,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 1.35,
                 "maxLevel": 100,
-                "description": "Unlocks Shiny Pet Breeding. Shiny Pets come in 1 of 5 colours, and boost their Special Passive bonus when in the Fenceyard.",
+                "description": "Unlocks Shiny Mob Breeding. Shiny Mobs come in 1 of 5 colours, and boost their Special Passive bonus when in the Fenceyard.",
                 "boostEffect": "+}% Base Shiny Chance",
                 "bonusQty": 2
             }),
@@ -142,7 +142,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 5,
                 "maxLevel": 20,
-                "description": "Your New Pet Chance is multiplied for every 100 kitchen upgrade levels across all kitchens! So 200 Lvs would apply it twice!!",
+                "description": "Your New Mob Chance is multiplied for every 100 kitchen upgrade levels across all kitchens! So 200 Lvs would apply it twice!!",
                 "boostEffect": "}x Multiplier every 100 Upg",
                 "bonusQty": 0.02
             }),
@@ -156,7 +156,7 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 10,
                 "costScale": 3.88,
                 "maxLevel": 25,
-                "description": "Unlocks the 5th Breeding Multiplier, Failure. This increases every time you fail to get a new/shiny pet, up to a max, and depletes when you succeed.",
+                "description": "Unlocks the 5th Breeding Multiplier, Failure. This increases every time you fail to get a new/shiny Mob, up to a max, and depletes when you succeed.",
                 "boostEffect": "} Maximum Times",
                 "bonusQty": 10
             }),
@@ -184,8 +184,8 @@ export const initPetUpgradeRepo = () => {
                 "baseCost": 1000,
                 "costScale": 2.85,
                 "maxLevel": 300,
-                "description": "Boosts the rate at which shiny pets level up from being in the fenceyard. This will help you rack up those 100+ Day requirements!",
-                "boostEffect": "+}% Shiny Pet LV Up Rate",
+                "description": "Boosts the rate at which Shiny Mobs level up from being in the fenceyard. This will help you rack up those 100+ Day requirements!",
+                "boostEffect": "+}% Shiny Mob LV Up Rate",
                 "bonusQty": 5
             })    
 ]

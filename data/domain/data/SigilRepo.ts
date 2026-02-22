@@ -17,7 +17,9 @@ export const initSigilRepo = () => {
                 "x1": 50000,
                 "x2": 40,
                 "x3": 250000,
-                "x4": 100
+                "x4": 100,
+                "x5": 10000000,
+                "x6": 200
             }),
         new SigilBase(1, <SigilModel>{
                 "name": "Pumped Kicks",
@@ -30,7 +32,9 @@ export const initSigilRepo = () => {
                 "x1": 60000,
                 "x2": 40,
                 "x3": 300000,
-                "x4": 100
+                "x4": 100,
+                "x5": 20000000,
+                "x6": 200
             }),
         new SigilBase(2, <SigilModel>{
                 "name": "Odd Litearture",
@@ -43,7 +47,9 @@ export const initSigilRepo = () => {
                 "x1": 70000,
                 "x2": 40,
                 "x3": 400000,
-                "x4": 100
+                "x4": 100,
+                "x5": 30000000,
+                "x6": 200
             }),
         new SigilBase(3, <SigilModel>{
                 "name": "Good Fortune",
@@ -56,7 +62,9 @@ export const initSigilRepo = () => {
                 "x1": 90000,
                 "x2": 40,
                 "x3": 500000,
-                "x4": 100
+                "x4": 100,
+                "x5": 50000000,
+                "x6": 200
             }),
         new SigilBase(4, <SigilModel>{
                 "name": "Plunging Sword",
@@ -69,7 +77,9 @@ export const initSigilRepo = () => {
                 "x1": 100000,
                 "x2": 1000,
                 "x3": 600000,
-                "x4": 5000
+                "x4": 5000,
+                "x5": 60000000,
+                "x6": 10000
             }),
         new SigilBase(5, <SigilModel>{
                 "name": "Wizardly Hat",
@@ -82,7 +92,9 @@ export const initSigilRepo = () => {
                 "x1": 130000,
                 "x2": 30,
                 "x3": 700000,
-                "x4": 50
+                "x4": 50,
+                "x5": 100000000,
+                "x6": 60
             }),
         new SigilBase(6, <SigilModel>{
                 "name": "Envelope Pile",
@@ -95,7 +107,9 @@ export const initSigilRepo = () => {
                 "x1": 160000,
                 "x2": 40,
                 "x3": 1000000,
-                "x4": 65
+                "x4": 65,
+                "x5": 250000000,
+                "x6": 75
             }),
         new SigilBase(7, <SigilModel>{
                 "name": "Shiny Beacon",
@@ -108,7 +122,9 @@ export const initSigilRepo = () => {
                 "x1": 200000,
                 "x2": 5,
                 "x3": 1400000,
-                "x4": 10
+                "x4": 10,
+                "x5": 70000000,
+                "x6": 12
             }),
         new SigilBase(8, <SigilModel>{
                 "name": "Metal Exterior",
@@ -121,7 +137,9 @@ export const initSigilRepo = () => {
                 "x1": 240000,
                 "x2": 20,
                 "x3": 1700000,
-                "x4": 50
+                "x4": 50,
+                "x5": 200000000,
+                "x6": 70
             }),
         new SigilBase(9, <SigilModel>{
                 "name": "Two Starz",
@@ -134,7 +152,9 @@ export const initSigilRepo = () => {
                 "x1": 280000,
                 "x2": 45,
                 "x3": 2200000,
-                "x4": 100
+                "x4": 100,
+                "x5": 300000000,
+                "x6": 125
             }),
         new SigilBase(10, <SigilModel>{
                 "name": "Pipe Gauge",
@@ -147,7 +167,9 @@ export const initSigilRepo = () => {
                 "x1": 320000,
                 "x2": 30,
                 "x3": 2600000,
-                "x4": 60
+                "x4": 60,
+                "x5": 600000000,
+                "x6": 75
             }),
         new SigilBase(11, <SigilModel>{
                 "name": "Trove",
@@ -160,7 +182,9 @@ export const initSigilRepo = () => {
                 "x1": 400000,
                 "x2": 30,
                 "x3": 3000000,
-                "x4": 100
+                "x4": 100,
+                "x5": 1250000000,
+                "x6": 150
             }),
         new SigilBase(12, <SigilModel>{
                 "name": "Pea Pod",
@@ -173,7 +197,9 @@ export const initSigilRepo = () => {
                 "x1": 420000,
                 "x2": 100,
                 "x3": 3500000,
-                "x4": 450
+                "x4": 450,
+                "x5": 2.5e+09,
+                "x6": 600
             }),
         new SigilBase(13, <SigilModel>{
                 "name": "Tuft Of Hair",
@@ -186,7 +212,9 @@ export const initSigilRepo = () => {
                 "x1": 450000,
                 "x2": 10,
                 "x3": 4300000,
-                "x4": 15
+                "x4": 15,
+                "x5": 6e+09,
+                "x6": 20
             }),
         new SigilBase(14, <SigilModel>{
                 "name": "Emoji Veggie",
@@ -199,7 +227,9 @@ export const initSigilRepo = () => {
                 "x1": 480000,
                 "x2": 40,
                 "x3": 5500000,
-                "x4": 60
+                "x4": 60,
+                "x5": 1.2e+10,
+                "x6": 80
             }),
         new SigilBase(15, <SigilModel>{
                 "name": "Vip Parchment",
@@ -212,7 +242,9 @@ export const initSigilRepo = () => {
                 "x1": 520000,
                 "x2": 50,
                 "x3": 6700000,
-                "x4": 100
+                "x4": 100,
+                "x5": 2.5e+10,
+                "x6": 150
             }),
         new SigilBase(16, <SigilModel>{
                 "name": "Dream Catcher",
@@ -225,7 +257,9 @@ export const initSigilRepo = () => {
                 "x1": 560000,
                 "x2": 4,
                 "x3": 8200000,
-                "x4": 10
+                "x4": 10,
+                "x5": 4e+10,
+                "x6": 15
             }),
         new SigilBase(17, <SigilModel>{
                 "name": "Duster Studs",
@@ -238,7 +272,9 @@ export const initSigilRepo = () => {
                 "x1": 600000,
                 "x2": 15,
                 "x3": 10000000,
-                "x4": 25
+                "x4": 25,
+                "x5": 6e+10,
+                "x6": 40
             }),
         new SigilBase(18, <SigilModel>{
                 "name": "Garlic Glove",
@@ -251,7 +287,9 @@ export const initSigilRepo = () => {
                 "x1": 650000,
                 "x2": 60,
                 "x3": 12000000,
-                "x4": 90
+                "x4": 90,
+                "x5": 1e+11,
+                "x6": 95
             }),
         new SigilBase(19, <SigilModel>{
                 "name": "Lab Tesstube",
@@ -264,7 +302,9 @@ export const initSigilRepo = () => {
                 "x1": 700000,
                 "x2": 35,
                 "x3": 14000000,
-                "x4": 70
+                "x4": 70,
+                "x5": 2e+11,
+                "x6": 100
             }),
         new SigilBase(20, <SigilModel>{
                 "name": "Peculiar Vial",
@@ -277,7 +317,9 @@ export const initSigilRepo = () => {
                 "x1": 750000,
                 "x2": 35,
                 "x3": 15000000,
-                "x4": 50
+                "x4": 50,
+                "x5": 3.5e+11,
+                "x6": 65
             }),
         new SigilBase(21, <SigilModel>{
                 "name": "Loot Pile",
@@ -290,7 +332,9 @@ export const initSigilRepo = () => {
                 "x1": 900000,
                 "x2": 30,
                 "x3": 16000000,
-                "x4": 60
+                "x4": 60,
+                "x5": 5e+11,
+                "x6": 100
             }),
         new SigilBase(22, <SigilModel>{
                 "name": "Div Spiral",
@@ -303,7 +347,9 @@ export const initSigilRepo = () => {
                 "x1": 1200000,
                 "x2": 50,
                 "x3": 17000000,
-                "x4": 100
+                "x4": 100,
+                "x5": 7e+11,
+                "x6": 150
             }),
         new SigilBase(23, <SigilModel>{
                 "name": "Cool Coin",
@@ -316,7 +362,9 @@ export const initSigilRepo = () => {
                 "x1": 2000000,
                 "x2": 100,
                 "x3": 20000000,
-                "x4": 250
+                "x4": 250,
+                "x5": 1e+12,
+                "x6": 400
             })    
 ]
 }

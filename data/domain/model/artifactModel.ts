@@ -13,5 +13,7 @@ export interface ArtifactModel {
     sovereignBonus?: string,
     sovereignBonusQty?: number,
     omnipotentBonus?: string,
-    omnipotentBonusQty?: number
+    omnipotentBonusQty?: number,
+    transcendentBonus?: string,
+    transcendentBonusQty?: number
 }

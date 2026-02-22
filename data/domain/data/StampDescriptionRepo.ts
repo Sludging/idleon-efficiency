@@ -96,7 +96,7 @@ export const initStampDescriptionRepo = () => {
                     "+{% New Recipe Cooking Speed",
                     "+{ Cooking Efficiency",
                     "+{% Breeding EXP Gain",
-                    "+{% New Pet Chance",
+                    "+{% New Mob Chance",
                     "+{% Lab Exp Gain",
                     "+{% Sailing Speed",
                     "+{% Gaming EXP Gain",

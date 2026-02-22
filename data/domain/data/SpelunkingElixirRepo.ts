@@ -45,7 +45,7 @@ export const initSpelunkingElixirRepo = () => {
             }),
         new SpelunkingElixirBase(10, <SpelunkingElixirModel>{
                 "index": 10,
-                "description": "This elixir doesn't have a label on it. At least, that's what the label says..."
+                "description": "Increases Stamina Costs by 4x, boosts POW by 100x. @ Each use adds a stack of this effect, so 8x and 200x on the 2nd use. @ (Effect persists for the entire Delve)"
             }),
         new SpelunkingElixirBase(11, <SpelunkingElixirModel>{
                 "index": 11,

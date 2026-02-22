@@ -64,7 +64,7 @@ export const initSeedInfoRepo = () => {
                 "name": "MEDAL",
                 "seedId": 6,
                 "cropIdMin": 230,
-                "cropIdMax": 279,
+                "cropIdMax": 299,
                 "lvlReq": 120,
                 "nextCropChance": 6.942e-05,
                 "nextCropDecay": 0.003

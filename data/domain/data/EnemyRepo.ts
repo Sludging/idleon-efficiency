@@ -2188,7 +2188,7 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "w7a12",
+                    "prev": "w7b12",
                     "next": "Blank",
                     "hasCrystal": false,
                     "crystalName": "Crystal6",
@@ -6669,7 +6669,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 8,
                     "RespawnTime": 45,
                     "DeathFrame": 18,
-                    "MonsterHPTotal": 8e+24,
+                    "MonsterHPTotal": 3e+24,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 1.3e+11,
@@ -6716,7 +6716,7 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 8,
                     "RespawnTime": 45,
                     "DeathFrame": 19,
-                    "MonsterHPTotal": 2e+26,
+                    "MonsterHPTotal": 1e+26,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 3e+11,
@@ -6743,6 +6743,560 @@ export const initEnemyRepo = () => {
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a11",
+                    "next": "w7b1",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b1", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Trench Fish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 104,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 55,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 45,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 5e+21,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3e+10,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 12500000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B1", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B1b", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ13", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b1",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB1", "name": "Deep End of the Koipond", "id": 315},
+                    "portalRequirements": [2000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7a12",
+                    "next": "w7b2",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b2", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Boomy Mine",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 105,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 45,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 4e+23,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 6e+10,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 35000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B2", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ14", "quantity": 1, "chance": 7e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b2",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB2", "name": "Minefield", "id": 316},
+                    "portalRequirements": [6000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b1",
+                    "next": "w7b3",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b3", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Pirate Underling",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 106,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 55,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 45,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 2e+25,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1.5e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 50000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B3", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ15", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b3",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB3", "name": "Pirate Upper Deck", "id": 317},
+                    "portalRequirements": [1000000000, 40000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b2",
+                    "next": "w7b4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Eggroll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 107,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 50,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 17,
+                    "MonsterHPTotal": 4e+26,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 4e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 70000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B4", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ16", "quantity": 1, "chance": 3e-06, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Coral4", "quantity": 1, "chance": 4e-08, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b4",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB4", "name": "Sushi Perimeter", "id": 318},
+                    "portalRequirements": [60000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b3",
+                    "next": "w7b5",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Jellofish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 108,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 45,
+                    "DeathFrame": 17,
+                    "MonsterHPTotal": 6e+27,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1.5e+12,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 150000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B5", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ17", "quantity": 1, "chance": 1.5e-06, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b5",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB5", "name": "Jellofish Fields", "id": 319},
+                    "portalRequirements": [125000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b4",
+                    "next": "w7b6",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b6", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Kelpfish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 109,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 14,
+                    "RespawnTime": 45,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 1e+29,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 2.5e+12,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 250000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B6", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ18", "quantity": 1, "chance": 7e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b6",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB6", "name": "Where the Kelp Meets Trench", "id": 320},
+                    "portalRequirements": [250000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b5",
+                    "next": "w7b7",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b7", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Mantaray",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 110,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 80,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 12,
+                    "RespawnTime": 45,
+                    "DeathFrame": 28,
+                    "MonsterHPTotal": 7.5e+29,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B7", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ19", "quantity": 1, "chance": 5e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b7",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB7", "name": "fillername", "id": 321},
+                    "portalRequirements": [350000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b6",
+                    "next": "w7b8",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b8", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Glowfish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 111,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 75,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 11,
+                    "RespawnTime": 45,
+                    "DeathFrame": 24,
+                    "MonsterHPTotal": 3e+31,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B8", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ20", "quantity": 1, "chance": 3e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b8",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB8", "name": "fillername", "id": 322},
+                    "portalRequirements": [500000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b7",
+                    "next": "w7b9",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b9", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Ancientfish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 112,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 75,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 14,
+                    "MonsterHPTotal": 2e+33,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B9", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ21", "quantity": 1, "chance": 2e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b9",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323},
+                    "portalRequirements": [750000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b8",
+                    "next": "w7b10",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b10", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Magni Pufferfin",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 113,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 23,
+                    "MonsterHPTotal": 2.5e+35,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 3,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B10", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ22", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b10",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324},
+                    "portalRequirements": [1000000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b9",
+                    "next": "w7b11",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b11", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Pirate Deckhand",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 114,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 5e+30,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 6e+12,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 500000000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B11", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ23", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b11",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB11", "name": "Pirate Mess Hall", "id": 325},
+                    "portalRequirements": [2000000000]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b10",
+                    "next": "w7b12",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal6",
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b12", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Dreadnaught Captain",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 115,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 80,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 45,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 1e+37,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B12", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ24", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": <MapDataModel>{
+                    "enemy": "w7b12",
+                    "world": "Shimmerfin Deep",
+                    "map": <MapNameModel>{"intName": "uAquaB12", "name": "fillername", "id": 326},
+                    "portalRequirements": [0]
+                },
+                "navigation": <EnemyNavModel>{
+                    "prev": "w7b11",
                     "next": "Crystal6",
                     "hasCrystal": true,
                     "crystalName": "Crystal6",
@@ -9221,6 +9775,141 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("snakeR", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Santa Snake",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 25,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 36,
+                    "HeightOfMonster": 32,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 45,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 170,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 34,
+                    "ExpType": 0,
+                    "Defence": 18,
+                    "MoveSPEED": 5,
+                    "Damages": [22, 1],
+                    "DefFor0": 14.57
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("w6c2b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Santas Little Helper",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 86,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 64,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 10,
+                    "RespawnTime": 49,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1.6e+12,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 75000000,
+                    "ExpType": 0,
+                    "Defence": 800000,
+                    "MoveSPEED": 4,
+                    "Damages": [300000, 1],
+                    "DefFor0": 188882
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b1b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Koi Fish",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 104,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 55,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 7,
+                    "RespawnTime": 45,
+                    "DeathFrame": 15,
+                    "MonsterHPTotal": 5e+21,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 4,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b6b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Neonscale",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 109,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 14,
+                    "RespawnTime": 45,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 1e+29,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 3,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("w7b3b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Glimbo",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 106,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 55,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 45,
+                    "DeathFrame": 19,
+                    "MonsterHPTotal": 1e+25,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3e+11,
+                    "ExpType": 0,
+                    "Defence": 2500000,
+                    "MoveSPEED": 5,
+                    "Damages": [600000, 1],
+                    "DefFor0": 333313
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("crabcakeB", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Mr Blueberry",
@@ -9690,6 +10379,114 @@ export const initEnemyRepo = () => {
                     "MoveSPEED": 4,
                     "Damages": [2, 1],
                     "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("bubbab", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bubba Supreme",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 23,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 12,
+                    "RespawnTime": 40,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 14000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 420,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T1a", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bronze Champion Ram",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 46,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 35,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 2000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3500,
+                    "ExpType": 0,
+                    "Defence": 2500,
+                    "MoveSPEED": 6,
+                    "Damages": [2500, 1],
+                    "DefFor0": 3001.06
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T1b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Silver Champion Ram",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 46,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 35,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 2000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3500,
+                    "ExpType": 0,
+                    "Defence": 2500,
+                    "MoveSPEED": 6,
+                    "Damages": [2500, 1],
+                    "DefFor0": 3001.06
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T1c", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Gold Champion Ram",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 46,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 32,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 6,
+                    "RespawnTime": 35,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 2000000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 3500,
+                    "ExpType": 0,
+                    "Defence": 2500,
+                    "MoveSPEED": 6,
+                    "Damages": [2500, 1],
+                    "DefFor0": 3001.06
                 },
                 "drops": undefined,
                 "mapData": undefined,
@@ -12467,7 +13264,7 @@ export const initEnemyRepo = () => {
                     "SpecialType": "",
                     "ExpGiven": 500,
                     "ExpType": 19,
-                    "Defence": 5000000,
+                    "Defence": 2000000,
                     "MoveSPEED": 0,
                     "Damages": [0, 1],
                     "DefFor0": 0.22
@@ -12476,6 +13273,72 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsF48", "quantity": 1, "chance": 5e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Spelunking4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Plunder Cranny",
+                    "AFKtype": AFKTypeEnum.Spelunking,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 30,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 120,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 1000,
+                    "ExpType": 19,
+                    "Defence": 15000000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF49", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable4", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("Spelunking5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Kelp Forest",
+                    "AFKtype": AFKTypeEnum.Spelunking,
+                    "MonsterFace": 0,
+                    "MonsterOffsetX": 22,
+                    "MonsterOffsetY": 38,
+                    "HeightOfMonster": 30,
+                    "MonsterMoving": 0,
+                    "MovingFrame": 0,
+                    "RespawnTime": 120,
+                    "DeathFrame": 1,
+                    "MonsterHPTotal": 5,
+                    "Type": EnemyTypeEnum.oreType,
+                    "SpecialType": "",
+                    "ExpGiven": 5000,
+                    "ExpType": 19,
+                    "Defence": 500000000,
+                    "MoveSPEED": 0,
+                    "Damages": [0, 1],
+                    "DefFor0": 0.22
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsF50", "quantity": 1, "chance": 3e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable4", "quantity": 1, "chance": 0, "questLink": "N/A"}
                     ]
                 },
@@ -12609,6 +13472,72 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsD10", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Spelunking3", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("SpelunkingCard4", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Plunder Cranny",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 420,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsD10", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Spelunking4", "quantity": 1, "chance": 1, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("SpelunkingCard5", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Kelp Forest",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 4,
+                    "MonsterOffsetX": 42,
+                    "MonsterOffsetY": 28,
+                    "HeightOfMonster": 85,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 4,
+                    "RespawnTime": 86400,
+                    "DeathFrame": 13,
+                    "MonsterHPTotal": 420,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "a",
+                    "ExpGiven": 12000,
+                    "ExpType": 0,
+                    "Defence": 600,
+                    "MoveSPEED": 3,
+                    "Damages": [1000, 1],
+                    "DefFor0": 1223.26
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 0, "chance": 0, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsD10", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Spelunking5", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,

@@ -256,7 +256,7 @@ export const initMapDataRepo = () => {
         new MapDataBase(41, <MapDataModel>{
                 "enemy": "Nothing",
                 "world": "Blunder Hills",
-                "map": <MapNameModel>{"intName": "GrasslandsF", "name": "Companion Park", "id": 41},
+                "map": <MapNameModel>{"intName": "GrasslandsF", "name": "Pet Park", "id": 41},
                 "portalRequirements": [0]
             }),
         new MapDataBase(42, <MapDataModel>{
@@ -1895,6 +1895,78 @@ export const initMapDataRepo = () => {
                 "enemy": "Nothing",
                 "world": "Shimmerfin Deep",
                 "map": <MapNameModel>{"intName": "uAquaA14", "name": "Unused", "id": 314},
+                "portalRequirements": [0]
+            }),
+        new MapDataBase(315, <MapDataModel>{
+                "enemy": "w7b1",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB1", "name": "Deep End of the Koipond", "id": 315},
+                "portalRequirements": [2000000]
+            }),
+        new MapDataBase(316, <MapDataModel>{
+                "enemy": "w7b2",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB2", "name": "Minefield", "id": 316},
+                "portalRequirements": [6000000]
+            }),
+        new MapDataBase(317, <MapDataModel>{
+                "enemy": "w7b3",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB3", "name": "Pirate Upper Deck", "id": 317},
+                "portalRequirements": [1000000000, 40000000]
+            }),
+        new MapDataBase(318, <MapDataModel>{
+                "enemy": "w7b4",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB4", "name": "Sushi Perimeter", "id": 318},
+                "portalRequirements": [60000000]
+            }),
+        new MapDataBase(319, <MapDataModel>{
+                "enemy": "w7b5",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB5", "name": "Jellofish Fields", "id": 319},
+                "portalRequirements": [125000000]
+            }),
+        new MapDataBase(320, <MapDataModel>{
+                "enemy": "w7b6",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB6", "name": "Where the Kelp Meets Trench", "id": 320},
+                "portalRequirements": [250000000]
+            }),
+        new MapDataBase(321, <MapDataModel>{
+                "enemy": "w7b7",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB7", "name": "fillername", "id": 321},
+                "portalRequirements": [350000000]
+            }),
+        new MapDataBase(322, <MapDataModel>{
+                "enemy": "w7b8",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB8", "name": "fillername", "id": 322},
+                "portalRequirements": [500000000]
+            }),
+        new MapDataBase(323, <MapDataModel>{
+                "enemy": "w7b9",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323},
+                "portalRequirements": [750000000]
+            }),
+        new MapDataBase(324, <MapDataModel>{
+                "enemy": "w7b10",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324},
+                "portalRequirements": [1000000000]
+            }),
+        new MapDataBase(325, <MapDataModel>{
+                "enemy": "w7b11",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB11", "name": "Pirate Mess Hall", "id": 325},
+                "portalRequirements": [2000000000]
+            }),
+        new MapDataBase(326, <MapDataModel>{
+                "enemy": "w7b12",
+                "world": "Shimmerfin Deep",
+                "map": <MapNameModel>{"intName": "uAquaB12", "name": "fillername", "id": 326},
                 "portalRequirements": [0]
             })    
 ]

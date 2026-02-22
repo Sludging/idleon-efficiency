@@ -76,7 +76,7 @@ export const initGodInfoRepo = () => {
             }),
         new GodInfoBase(4, <GodInfoModel>{
                 "name": "Goharut",
-                "majorBonus": "When claiming non-candy AFK gains, also progress one of the following by the AFK time! (Refinery, 3D Printer, Cooking, Pet Breeding, Sailing, or Gaming)",
+                "majorBonus": "When claiming non-candy AFK gains, also progress one of the following by the AFK time! (Refinery, 3D Printer, Cooking, Mob Breeding, Sailing, or Gaming)",
                 "passiveBonus": "+{% Class EXP",
                 "passiveMax": 100,
                 "blessingBaseCost": 1000000,

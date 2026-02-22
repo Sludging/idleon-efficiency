@@ -450,6 +450,23 @@ export const initTerritoryFightRepo = () => {
                 ]
             }),
         new TerritoryFightBase(26, <TerritoryFightModel>{
+                "img": "33bg.png",
+                "trekReq": 1500000000,
+                "fightPower": 0,
+                "enemyAttack": 3000000,
+                "battleName": "The Koi Gee Biv Crew",
+                "filler1": "Filler",
+                "filler2": "Filler",
+                "filler3": "Filler",
+                "enemies": [
+                    <TerritoryEnemyModel>{"id": "w7b1", "health": 5e+10, "colour": 0, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7b1", "health": 6e+10, "colour": 90, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7b1", "health": 1.2e+11, "colour": 150, "size": 200},
+                    <TerritoryEnemyModel>{"id": "w7b1", "health": 1.7e+11, "colour": 210, "size": 200},
+                    <TerritoryEnemyModel>{"id": "Mob5", "health": -1, "colour": -1, "size": -1}
+                ]
+            }),
+        new TerritoryFightBase(27, <TerritoryFightModel>{
                 "img": "3bg.png",
                 "trekReq": 1300000000,
                 "fightPower": 0,

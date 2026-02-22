@@ -166,6 +166,111 @@ export const initSpelunkingChapterRepo = () => {
                         "x5": 0
                     }
                 ]
+            }),
+        new SpelunkingChapterBase(4, <SpelunkingChapterModel>{
+                "name": "Sunken Plunder",
+                "bonuses": [
+                    <ChapterBonusModel>{
+                        "bonus": "+{% Grand Discovery Chance",
+                        "x1": 25,
+                        "x2": 1000,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 100,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "x Total Amber Found",
+                        "x1": 3,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 80000,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "x Total Spelunking POW",
+                        "x1": 3,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 5000000,
+                        "x4": 0,
+                        "x5": 0
+                    }
+                ]
+            }),
+        new SpelunkingChapterBase(5, <SpelunkingChapterModel>{
+                "name": "Kelp Primeval",
+                "bonuses": [
+                    <ChapterBonusModel>{
+                        "bonus": "x Total Spelunking POW",
+                        "x1": 10,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 5000,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "x Total Amber Found",
+                        "x1": 10,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 80000,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "+{% Faster Stamina Regeneration",
+                        "x1": 60,
+                        "x2": 6000,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 1000000,
+                        "x4": 0,
+                        "x5": 0
+                    }
+                ]
+            }),
+        new SpelunkingChapterBase(6, <SpelunkingChapterModel>{
+                "name": "FILLER",
+                "bonuses": [
+                    <ChapterBonusModel>{
+                        "bonus": "+{% Filler",
+                        "x1": 25,
+                        "x2": 1000,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 100,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "x Filler",
+                        "x1": 3,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 80000,
+                        "x4": 0,
+                        "x5": 0
+                    },
+                    <ChapterBonusModel>{
+                        "bonus": "x Filler",
+                        "x1": 3,
+                        "x2": 3500,
+                        "func": "decay",
+                        "x3": 1,
+                        "requiredPages": 5000000,
+                        "x4": 0,
+                        "x5": 0
+                    }
+                ]
             })    
 ]
 }

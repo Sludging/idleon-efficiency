@@ -1533,16 +1533,16 @@ export const initAchievementRepo = () => {
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(218, <AchievementModel>{
-                "name": "I Like This Pet",
+                "name": "I Like This Mob",
                 "qty": 1,
-                "desc": "Get a Breedability III heart on at least 2 Pets within the nest.",
-                "rewards": "Pet Breedability &multiplier goes up &1.20x faster",
+                "desc": "Get a Breedability III heart on at least 2 Mobs within the nest.",
+                "rewards": "Mob Breedability &multiplier goes up &1.20x faster",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(219, <AchievementModel>{
-                "name": "I LOVE These Pets",
+                "name": "I LOVE These Mobs",
                 "qty": 1,
-                "desc": "Get a Breedability VII heart on at least 15 pets within the nest.",
+                "desc": "Get a Breedability VII heart on at least 15 Mobs within the nest.",
                 "rewards": "10 Tab 3 &Talent Pts",
                 "world": "Hyperion Nebula"
             }),
@@ -1563,14 +1563,14 @@ export const initAchievementRepo = () => {
         new AchievementBase(222, <AchievementModel>{
                 "name": "Barley Lost",
                 "qty": 1,
-                "desc": "Fail a pet battle with the enemy team having only 5% HP or less. Wait, it's spelled HOW???",
-                "rewards": "5% Pet Fight &Damage",
+                "desc": "Fail a Mob battle with the enemy team having only 5% HP or less. Wait, it's spelled HOW???",
+                "rewards": "5% Mob Fight &Damage",
                 "world": "Hyperion Nebula"
             }),
         new AchievementBase(223, <AchievementModel>{
-                "name": "Petless",
+                "name": "Mobless",
                 "qty": 1,
-                "desc": "Trash a total of 2500 pets. How could you be so heartless, so cold...",
+                "desc": "Trash a total of 2500 Mobs. How could you be so heartless, so cold...",
                 "rewards": "*STEAM EXCLUSIVE &*50 gems &*1 '72hr time candy'",
                 "world": "Hyperion Nebula"
             }),

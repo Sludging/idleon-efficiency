@@ -960,6 +960,30 @@ export const initSpecificItemRepo = () => {
                 "Type": "Spelunky Page",
                 "description": "Hold down to boost a random Lore Bonus. The more pages you use, the better the boost! @ @ @ @ @ @ @ @ @ You can view Lore Bonuses through the CHAPTERS button found in the corner of the LORE section of Spelunking! "
             }),
+        new BaseItemBase("Spelunking4", <DescItemModel>{
+                "internalName": "Spelunking4",
+                "displayName": "Chapter Five 'Sunken Plunder'",
+                "sellPrice": 70,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Spelunky Page",
+                "description": "Hold down to boost a random Lore Bonus. The more pages you use, the better the boost! @ @ @ @ @ @ @ @ @ You can view Lore Bonuses through the CHAPTERS button found in the corner of the LORE section of Spelunking! "
+            }),
+        new BaseItemBase("Spelunking5", <DescItemModel>{
+                "internalName": "Spelunking5",
+                "displayName": "Chapter Six 'Kelp Primeval'",
+                "sellPrice": 70,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Spelunky Page",
+                "description": "Hold down to boost a random Lore Bonus. The more pages you use, the better the boost! @ @ @ @ @ @ @ @ @ You can view Lore Bonuses through the CHAPTERS button found in the corner of the LORE section of Spelunking! "
+            }),
+        new BaseItemBase("Spelunking6", <DescItemModel>{
+                "internalName": "Spelunking6",
+                "displayName": "Chapter Seven 'FILLER'",
+                "sellPrice": 70,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Spelunky Page",
+                "description": "Hold down to boost a random Lore Bonus. The more pages you use, the better the boost! @ @ @ @ @ @ @ @ @ You can view Lore Bonuses through the CHAPTERS button found in the corner of the LORE section of Spelunking! "
+            }),
         new BaseItemBase("EquipmentHats1", <ArmourItemModel>{
                 "internalName": "EquipmentHats1",
                 "displayName": "Farmer Brim",
@@ -10438,7 +10462,7 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.aStamp,
                 "Type": "Skills Stamp",
                 "description": "",
-                "bonus": "+{% New Pet Chance",
+                "bonus": "+{% New Mob Chance",
                 "ID": 41,
                 "stampData": <StampDataModel>{
                     "effect": "NewPet",
@@ -10452,7 +10476,7 @@ export const initSpecificItemRepo = () => {
                     "startingCost": 1000000,
                     "cCostExp": 1.4,
                     "i10": 0,
-                    "upgradeText": "{}% New Pet Chance",
+                    "upgradeText": "{}% New Mob Chance",
                     "i12": 0
                 }
             }),
@@ -13643,10 +13667,10 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("PetEgg", <DescItemModel>{
                 "internalName": "PetEgg",
-                "displayName": "Pet Egg",
+                "displayName": "Mob Egg",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dQuest,
-                "Type": "Pet Egg",
+                "Type": "Mob Egg",
                 "description": "Hold down to instantly incubate eggs for your nest in World 4. It'll only use up eggs that you have space to carry, dont worry about wasting these! "
             }),
         new BaseItemBase("Genetic0", <DescItemModel>{
@@ -13724,6 +13748,30 @@ export const initSpecificItemRepo = () => {
         new BaseItemBase("Refinery6", <DescItemModel>{
                 "internalName": "Refinery6",
                 "displayName": "Nullo Salt",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Refinery Salts",
+                "description": "It's grey, and doesn't exist. "
+            }),
+        new BaseItemBase("Refinery7", <DescItemModel>{
+                "internalName": "Refinery7",
+                "displayName": "Crosslink Salt",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Refinery Salts",
+                "description": "It's grey, and doesn't exist. "
+            }),
+        new BaseItemBase("Refinery8", <DescItemModel>{
+                "internalName": "Refinery8",
+                "displayName": "Propagated Salt",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Refinery Salts",
+                "description": "It's grey, and doesn't exist. "
+            }),
+        new BaseItemBase("Refinery9", <DescItemModel>{
+                "internalName": "Refinery9",
+                "displayName": "Anionic Salt",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Refinery Salts",
@@ -15424,6 +15472,110 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.bCraft,
                 "Type": "Monster Drop",
                 "description": "Very well made, considering it's made by Crabkind. "
+            }),
+        new BaseItemBase("w7B1", <DescItemModel>{
+                "internalName": "w7B1",
+                "displayName": "Eye of Koi",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It's a glass eye, which means you're violently decimating a population of blind defensle... oh wait no, it's a real eyeball. "
+            }),
+        new BaseItemBase("w7B1b", <DescItemModel>{
+                "internalName": "w7B1b",
+                "displayName": "Immaculate Eye",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Woah... I bet someone out there would value such a thing quite highly! "
+            }),
+        new BaseItemBase("w7B2", <DescItemModel>{
+                "internalName": "w7B2",
+                "displayName": "Bubble N Chains",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Take awayyyyyyy... take away this bubble and chain! "
+            }),
+        new BaseItemBase("w7B3", <DescItemModel>{
+                "internalName": "w7B3",
+                "displayName": "Pirate Emblem I",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "The very first emblem given to new pirates, signifying their alliance to the pirate crew. "
+            }),
+        new BaseItemBase("w7B4", <DescItemModel>{
+                "internalName": "w7B4",
+                "displayName": "Caviar",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Ooooohhhohoh, unborn fish in circular form, how sumptuous! "
+            }),
+        new BaseItemBase("w7B5", <DescItemModel>{
+                "internalName": "w7B5",
+                "displayName": "Jelly Cube",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Wibble wobble wibble wobble wibble wobble wibble wobble wibble wobble wibble wobble wibble wobble "
+            }),
+        new BaseItemBase("w7B6", <DescItemModel>{
+                "internalName": "w7B6",
+                "displayName": "Tuft of Kelp",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Kelpfish as you know them are actually female... as for the male fish, well, you're looking at a group of them. Confused? Look up male anglerfish... "
+            }),
+        new BaseItemBase("w7B7", <DescItemModel>{
+                "internalName": "w7B7",
+                "displayName": "Mantacakes",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "I don't care what message of tastiness and goodness you send me, I will not endorse this food. "
+            }),
+        new BaseItemBase("w7B8", <DescItemModel>{
+                "internalName": "w7B8",
+                "displayName": "Glowfish Tail",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It'll keep glowing so long as it believes in itself. "
+            }),
+        new BaseItemBase("w7B9", <DescItemModel>{
+                "internalName": "w7B9",
+                "displayName": "Ancient Scales",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "It's a writhing pile of scales, gems, and extremities. "
+            }),
+        new BaseItemBase("w7B10", <DescItemModel>{
+                "internalName": "w7B10",
+                "displayName": "Magmaspike",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "What would hurt more, the stab wound or the burn wound? "
+            }),
+        new BaseItemBase("w7B11", <DescItemModel>{
+                "internalName": "w7B11",
+                "displayName": "Pirate Mark II",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "The second emblem given to veteran pirates, signifying their loyalty to the pirate crew. "
+            }),
+        new BaseItemBase("w7B12", <DescItemModel>{
+                "internalName": "w7B12",
+                "displayName": "Pirate Mark III",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "The penultimate emblem given to legendary pirates, signifying their leadership of the pirate crew. "
             }),
         new BaseItemBase("GemP35", <DescItemModel>{
                 "internalName": "GemP35",
@@ -19363,6 +19515,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 25,
                 "miscUp1": "50% Drop Rarity",
                 "miscUp2": "300% Extra Money",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentGown6", <ArmourItemModel>{
+                "internalName": "EquipmentGown6",
+                "displayName": "Bulwark Armor",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 25,
+                "STR": 10,
+                "AGI": 10,
+                "WIS": 10,
+                "LUK": 10,
+                "Defence": 50,
+                "miscUp1": "200% Damage Bonus",
+                "miscUp2": "150% Bonus Kills",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -23482,7 +23655,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",
-                "description": "Hold down to instantly get 2 Hours of Dust added to the Compass! The amount is based on the current hourly rate shown in AFK info. You must be on your Windwalker to use this. "
+                "description": "Hold down to instantly get 1 Hour of Dust added to the Compass! The amount is based on the current hourly rate shown in AFK info. You must be on your Windwalker to use this. "
             }),
         new BaseItemBase("Quest97", <DescItemModel>{
                 "internalName": "Quest97",
@@ -23514,7 +23687,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",
-                "description": "Collect 1000 of these to unlock AFK Dust for Windwalker! Once you have 1000, hold down on this item. You will then earn 1 Aethermoon per 2hr AFK claimed on your Windwalker. "
+                "description": "Collect 1000 of these to unlock AFK Dust for Windwalker! Once you have 1000, hold down on this item. You will then earn 1 Aethermoon per 1hr AFK claimed on your Windwalker. "
             }),
         new BaseItemBase("Quest101", <DescItemModel>{
                 "internalName": "Quest101",
@@ -23574,7 +23747,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Quest107", <DescItemModel>{
                 "internalName": "Quest107",
-                "displayName": "Aether Fragment",
+                "displayName": "Arcane Fragment",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",
@@ -23619,6 +23792,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Box",
                 "description": "Hold down to make a wish. If it comes true, you will get a Top 0.1% Tome Nametag, just like you've always wanted! "
+            }),
+        new BaseItemBase("Quest115", <DescItemModel>{
+                "internalName": "Quest115",
+                "displayName": "Half Finished Research Papers",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Usable",
+                "description": "Hold down to instantly gain 2 Hours of Research progress! That includes Minehead currency too! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -23884,7 +24065,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 10,
                 "typeGen": TypeGenEnum.dStatueStone,
                 "Type": "Statue",
-                "description": "This statue somehow boosts the effectiveness of pets getting it on... ",
+                "description": "This statue somehow boosts the effectiveness of Mobs getting it on... ",
                 "bonus": "%Breeding Exp",
                 "statueData": <StatueDataModel>{"name": "Egg", "effect": "%@Breeding Exp", "dk": 25, "bonus": 0.4}
             }),
@@ -24054,7 +24235,47 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Coral3", <DescItemModel>{
                 "internalName": "Coral3",
+                "displayName": "Char Coral",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Coral",
+                "description": "Give these to the Dancing Coral to unlock a new synergy bonus for construction! "
+            }),
+        new BaseItemBase("Coral4", <DescItemModel>{
+                "internalName": "Coral4",
                 "displayName": "Neon Coral",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Coral",
+                "description": "Give these to the Dancing Coral to unlock a new synergy bonus for construction! "
+            }),
+        new BaseItemBase("Coral5", <DescItemModel>{
+                "internalName": "Coral5",
+                "displayName": "Aegean Coral",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Coral",
+                "description": "Give these to the Dancing Coral to unlock a new synergy bonus for construction! "
+            }),
+        new BaseItemBase("Coral6", <DescItemModel>{
+                "internalName": "Coral6",
+                "displayName": "Gilded Coral",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Coral",
+                "description": "Give these to the Dancing Coral to unlock a new synergy bonus for construction! "
+            }),
+        new BaseItemBase("Coral7", <DescItemModel>{
+                "internalName": "Coral7",
+                "displayName": "Twisted Coral",
+                "sellPrice": 50,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Coral",
+                "description": "Give these to the Dancing Coral to unlock a new synergy bonus for construction! "
+            }),
+        new BaseItemBase("Coral8", <DescItemModel>{
+                "internalName": "Coral8",
+                "displayName": "Eternal Coral",
                 "sellPrice": 50,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Coral",
@@ -33591,12 +33812,53 @@ export const initSpecificItemRepo = () => {
                 "cardData": <CardDataModel>{
                     "cardID": "F48",
                     "category": "Hard Resources",
-                    "perTier": 50000,
+                    "perTier": 40000,
                     "effect": "+{% Spelunking EXP",
                     "bonus": 8,
                     "order": 33
                 },
                 "dropChance": 5e-06
+            }),
+        new BaseItemBase("CardsF49", <CardItemModel>{
+                "internalName": "CardsF49",
+                "displayName": "Plunder Cranny Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F49",
+                    "category": "Hard Resources",
+                    "perTier": 150000,
+                    "effect": "+{% Spelunking AFK Gain",
+                    "bonus": 2,
+                    "order": 34
+                },
+                "dropChance": 1e-06
+            }),
+        new BaseItemBase("CardsF50", <CardItemModel>{
+                "internalName": "CardsF50",
+                "displayName": "Kelp Forest Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "F50",
+                    "category": "Hard Resources",
+                    "perTier": 2.5e+06,
+                    "effect": "+{% Spelunking EXP",
+                    "bonus": 15,
+                    "order": 35
+                },
+                "dropChance": 3e-07
+            }),
+        new BaseItemBase("CardsF51", <CardItemModel>{
+                "internalName": "CardsF51",
+                "displayName": "FILLER",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": undefined,
+                "dropChance": 1
             }),
         new BaseItemBase("CardsG1", <CardItemModel>{
                 "internalName": "CardsG1",
@@ -34510,6 +34772,198 @@ export const initSpecificItemRepo = () => {
                 },
                 "dropChance": 1e-07
             }),
+        new BaseItemBase("CardsJ13", <CardItemModel>{
+                "internalName": "CardsJ13",
+                "displayName": "Trench Fish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J13",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 100000,
+                    "effect": "+{% Research EXP (Passive)",
+                    "bonus": 1,
+                    "order": 13
+                },
+                "dropChance": 1e-05
+            }),
+        new BaseItemBase("CardsJ14", <CardItemModel>{
+                "internalName": "CardsJ14",
+                "displayName": "Boomy Mine Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J14",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 300000,
+                    "effect": "+{% Gaming Bit Multi (Passive)",
+                    "bonus": 20,
+                    "order": 14
+                },
+                "dropChance": 7e-06
+            }),
+        new BaseItemBase("CardsJ15", <CardItemModel>{
+                "internalName": "CardsJ15",
+                "displayName": "Pirate Underling Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J15",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 500000,
+                    "effect": "+{% Flaggy Rate Multi (Passive)",
+                    "bonus": 10,
+                    "order": 15
+                },
+                "dropChance": 5e-06
+            }),
+        new BaseItemBase("CardsJ16", <CardItemModel>{
+                "internalName": "CardsJ16",
+                "displayName": "Eggroll Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J16",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 900000,
+                    "effect": "+{% Research EXP (Passive)",
+                    "bonus": 2,
+                    "order": 16
+                },
+                "dropChance": 3e-06
+            }),
+        new BaseItemBase("CardsJ17", <CardItemModel>{
+                "internalName": "CardsJ17",
+                "displayName": "Jellofish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J17",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 1.5e+06,
+                    "effect": "+{% Farming EVO Multi (Passive)",
+                    "bonus": 50,
+                    "order": 17
+                },
+                "dropChance": 1.5e-06
+            }),
+        new BaseItemBase("CardsJ18", <CardItemModel>{
+                "internalName": "CardsJ18",
+                "displayName": "Kelpfish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J18",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 3.5e+06,
+                    "effect": "+{% Class EXP Multi",
+                    "bonus": 5,
+                    "order": 18
+                },
+                "dropChance": 7e-07
+            }),
+        new BaseItemBase("CardsJ19", <CardItemModel>{
+                "internalName": "CardsJ19",
+                "displayName": "Mantaray Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J19",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 6e+06,
+                    "effect": "+{% Drop Rate Multi",
+                    "bonus": 1,
+                    "order": 19
+                },
+                "dropChance": 5e-07
+            }),
+        new BaseItemBase("CardsJ20", <CardItemModel>{
+                "internalName": "CardsJ20",
+                "displayName": "Glowfish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J20",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 1e+07,
+                    "effect": "+{% Drop Rate Multi",
+                    "bonus": 1,
+                    "order": 20
+                },
+                "dropChance": 3e-07
+            }),
+        new BaseItemBase("CardsJ21", <CardItemModel>{
+                "internalName": "CardsJ21",
+                "displayName": "Ancientfish Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J21",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 2e+07,
+                    "effect": "+{% Drop Rate Multi",
+                    "bonus": 1,
+                    "order": 21
+                },
+                "dropChance": 2e-07
+            }),
+        new BaseItemBase("CardsJ22", <CardItemModel>{
+                "internalName": "CardsJ22",
+                "displayName": "Magni Pufferfin Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J22",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 3e+07,
+                    "effect": "+{% Drop Rate Multi",
+                    "bonus": 1,
+                    "order": 22
+                },
+                "dropChance": 1e-07
+            }),
+        new BaseItemBase("CardsJ23", <CardItemModel>{
+                "internalName": "CardsJ23",
+                "displayName": "Pirate Deckhand Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J23",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 2e+07,
+                    "effect": "+{% Research AFK gain (Passive)",
+                    "bonus": 1,
+                    "order": 23
+                },
+                "dropChance": 1e-07
+            }),
+        new BaseItemBase("CardsJ24", <CardItemModel>{
+                "internalName": "CardsJ24",
+                "displayName": "Dreadnaught Captain Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "J24",
+                    "category": "Shimmerfin Deep",
+                    "perTier": 1e+08,
+                    "effect": "+{% Drop Rate Multi",
+                    "bonus": 1,
+                    "order": 24
+                },
+                "dropChance": 1e-07
+            }),
         new BaseItemBase("CardsJ99", <CardItemModel>{
                 "internalName": "CardsJ99",
                 "displayName": "Gem to W7 Card",
@@ -34522,7 +34976,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 2.5e+06,
                     "effect": "+{% Damage Multi (Passive)",
                     "bonus": 1.5,
-                    "order": 13
+                    "order": 25
                 },
                 "dropChance": 1e-06
             }),

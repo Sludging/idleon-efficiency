@@ -42,8 +42,8 @@ export const initMealRepo = () => {
                 "name": "Frenk Fries",
                 "cookingReq": 60,
                 "bonusQty": 5,
-                "bonusText": "+{% New Pet Breeding Odds",
-                "description": "You're breeding pets in outer space, don't be shocked that there's no France!",
+                "bonusText": "+{% New Mob Breeding Odds",
+                "description": "You're breeding Mobs in outer space, don't be shocked that there's no France!",
                 "bonusKey": "Npet"
             }),
         new MealBase(5, <MealModel>{
@@ -82,7 +82,7 @@ export const initMealRepo = () => {
                 "name": "Pizza",
                 "cookingReq": 350,
                 "bonusQty": 9,
-                "bonusText": "+{% New Pet Breeding Odds",
+                "bonusText": "+{% New Mob Breeding Odds",
                 "description": "Mama mia mahhh piiiiiiiizzza!!! Wait I already did that joke, replace this one",
                 "bonusKey": "Npet"
             }),
@@ -154,7 +154,7 @@ export const initMealRepo = () => {
                 "name": "Croissant",
                 "cookingReq": 8000,
                 "bonusQty": 1,
-                "bonusText": "+{% Pet Fighting Damage",
+                "bonusText": "+{% Mob Fighting Damage",
                 "description": "Carl loves these!",
                 "bonusKey": "PetDmg"
             }),
@@ -194,7 +194,7 @@ export const initMealRepo = () => {
                 "name": "Eggplant",
                 "cookingReq": 75000,
                 "bonusQty": 5,
-                "bonusText": "+{% Pet Breedability Speed",
+                "bonusText": "+{% Mob Breedability Speed",
                 "description": "Idk what you Zoomers are up to with those eggplant emojis, but I don't like it...",
                 "bonusKey": "Breed"
             }),
@@ -218,7 +218,7 @@ export const initMealRepo = () => {
                 "name": "Donut",
                 "cookingReq": 300000,
                 "bonusQty": 15,
-                "bonusText": "+{% New Pet Breeding Odds",
+                "bonusText": "+{% New Mob Breeding Odds",
                 "description": "Mmmmm... doooooooonut...",
                 "bonusKey": "Npet"
             }),
@@ -266,7 +266,7 @@ export const initMealRepo = () => {
                 "name": "Chocolate Truffle",
                 "cookingReq": 5000000,
                 "bonusQty": 25,
-                "bonusText": "+{% New Pet Breeding Odds",
+                "bonusText": "+{% New Mob Breeding Odds",
                 "description": "I mean it's got a bite taken out of it, pretty gross.",
                 "bonusKey": "Npet"
             }),
@@ -322,7 +322,7 @@ export const initMealRepo = () => {
                 "name": "Wedding Cake",
                 "cookingReq": 135000000,
                 "bonusQty": 2,
-                "bonusText": "+{% Pet Fighting Damage",
+                "bonusText": "+{% Mob Fighting Damage",
                 "description": "Imagine getting married lol so cringe haha am I right??!?! High-five, fellow kids!",
                 "bonusKey": "PetDmg"
             }),
@@ -573,6 +573,30 @@ export const initMealRepo = () => {
                 "bonusText": "+{% Amber gain from Spelunking",
                 "description": "You're asking me will my love grow? Pistachioooooh ohhh, Pishaaaaaaachio!!!",
                 "bonusKey": "SplkAmb"
+            }),
+        new MealBase(71, <MealModel>{
+                "name": "Tasty Treat",
+                "cookingReq": 1e+61,
+                "bonusQty": 0.01,
+                "bonusText": "+{% Polymer Refinery Speed",
+                "description": "Hey look! It's... wait, where's this from? I know I recognize it from somewhere...",
+                "bonusKey": "PolyRefSpd"
+            }),
+        new MealBase(72, <MealModel>{
+                "name": "Giga Chip",
+                "cookingReq": 1e+64,
+                "bonusQty": 0.01,
+                "bonusText": "+{% Research EXP gains",
+                "description": "People always say 'That's Not Yo chip' for some reason... This is YES yo chip!",
+                "bonusKey": "ResearchXP"
+            }),
+        new MealBase(73, <MealModel>{
+                "name": "Wedding Cake",
+                "cookingReq": 1e+66,
+                "bonusQty": 0.01,
+                "bonusText": "+{% Minehead Mine Currency gain",
+                "description": "Congrats on getting married last year! I hope it lasts because I don't have a 2nd cake!",
+                "bonusKey": "MineCurr"
             })    
 ]
 }

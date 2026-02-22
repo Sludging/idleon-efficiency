@@ -47,7 +47,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(38, <MapNameModel>{"intName": "SewerD", "name": "Meel's Crypt", "id": 38}),
         new MapNameBase(39, <MapNameModel>{"intName": "GrasslandsE", "name": "Grandfrog's Backyard", "id": 39}),
         new MapNameBase(40, <MapNameModel>{"intName": "Dungeon1", "name": "Grandfrog's Gazebo", "id": 40}),
-        new MapNameBase(41, <MapNameModel>{"intName": "GrasslandsF", "name": "Companion Park", "id": 41}),
+        new MapNameBase(41, <MapNameModel>{"intName": "GrasslandsF", "name": "Pet Park", "id": 41}),
         new MapNameBase(42, <MapNameModel>{"intName": "GrasslandsG", "name": "Grand Owl Perch", "id": 42}),
         new MapNameBase(43, <MapNameModel>{"intName": "Z", "name": "Z", "id": 43}),
         new MapNameBase(44, <MapNameModel>{"intName": "Z", "name": "Z", "id": 44}),
@@ -320,6 +320,18 @@ export const initMapNameRepo = () => {
         new MapNameBase(311, <MapNameModel>{"intName": "uAquaA11", "name": "Coralcave Outskirts", "id": 311}),
         new MapNameBase(312, <MapNameModel>{"intName": "uAquaA12", "name": "Coralcave Perimeter", "id": 312}),
         new MapNameBase(313, <MapNameModel>{"intName": "uAquaA13", "name": "Unused", "id": 313}),
-        new MapNameBase(314, <MapNameModel>{"intName": "uAquaA14", "name": "Unused", "id": 314})    
+        new MapNameBase(314, <MapNameModel>{"intName": "uAquaA14", "name": "Unused", "id": 314}),
+        new MapNameBase(315, <MapNameModel>{"intName": "uAquaB1", "name": "Deep End of the Koipond", "id": 315}),
+        new MapNameBase(316, <MapNameModel>{"intName": "uAquaB2", "name": "Minefield", "id": 316}),
+        new MapNameBase(317, <MapNameModel>{"intName": "uAquaB3", "name": "Pirate Upper Deck", "id": 317}),
+        new MapNameBase(318, <MapNameModel>{"intName": "uAquaB4", "name": "Sushi Perimeter", "id": 318}),
+        new MapNameBase(319, <MapNameModel>{"intName": "uAquaB5", "name": "Jellofish Fields", "id": 319}),
+        new MapNameBase(320, <MapNameModel>{"intName": "uAquaB6", "name": "Where the Kelp Meets Trench", "id": 320}),
+        new MapNameBase(321, <MapNameModel>{"intName": "uAquaB7", "name": "fillername", "id": 321}),
+        new MapNameBase(322, <MapNameModel>{"intName": "uAquaB8", "name": "fillername", "id": 322}),
+        new MapNameBase(323, <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323}),
+        new MapNameBase(324, <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324}),
+        new MapNameBase(325, <MapNameModel>{"intName": "uAquaB11", "name": "Pirate Mess Hall", "id": 325}),
+        new MapNameBase(326, <MapNameModel>{"intName": "uAquaB12", "name": "fillername", "id": 326})    
 ]
 }
