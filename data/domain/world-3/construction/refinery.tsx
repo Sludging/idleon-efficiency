@@ -153,6 +153,7 @@ export class Refinery extends Domain {
             // Init cycle time as max time (900), will be updated in post processing to match reduced values.
             this.cycleInfo["Combustion"] = new CycleInfo("Combustion", 900, 0);
             this.cycleInfo["Synthesis"] = new CycleInfo("Synthesis", 900, 0);
+            this.cycleInfo["Polymerization"] = new CycleInfo("Polymerization", 900, 0);
 
             const newSaltStatus = new SaltStatus()
             newSaltStatus.baseCost = salt.data.cost.map(component => component as ComponentModel);
@@ -174,6 +175,7 @@ export class Refinery extends Domain {
 
             refinery.cycleInfo["Combustion"].timePast = refineryData[0][1];
             refinery.cycleInfo["Synthesis"].timePast = refineryData[0][2];
+            refinery.cycleInfo["Polymerization"].timePast = refineryData[0][3]
             refineryData[1].forEach((salt, index) => {
                 if (salt != "Blank") {
                     refinery.storage.push(new RefineryStorage(salt, refineryData[2][index]));
@@ -228,6 +230,10 @@ export function updateRefinery(data: Map<string, any>) {
 
     refinery.cycleInfo["Synthesis"].cycleTime = Math.ceil(900 * Math.pow(4, 1) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
     refinery.cycleInfo["Synthesis"].timePast += secondsSinceUpdate;
+
+    refinery.cycleInfo["Polymerization"].cycleTime = Math.ceil(900 * Math.pow(4, 2) / ((1 + (vialBonus + (saltLickBonus + divineKnightBonus + (sigilsBonus + (stampBonus + (refinery.shinyBonusSpeed + (riftBonus + (arcadeBonus + votesBonus))))))) / 100) * Math.max(1, labCycleBonus) * (1 + legendTalentBonus / 100)));
+    refinery.cycleInfo["Polymerization"].timePast += secondsSinceUpdate;
+
 
     return refinery;
 }
