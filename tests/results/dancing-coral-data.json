@@ -1,119 +1,119 @@
 {
-  "timestamp": "2026-02-08T06:03:47.810Z",
+  "timestamp": "2026-02-22T07:26:29.299Z",
   "extractions": {
     "dancing_coral_unlock_value": {
       "expression": "idleon.engine.getGameAttribute(\"Spelunk\")[4][7]",
       "result": 0,
       "description": "Spelunk[4][7] unlock value (used in cost formula)",
-      "extractedAt": "2026-02-08T06:03:47.817Z"
+      "extractedAt": "2026-02-22T07:26:29.304Z"
     },
     "dancing_coral_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 0, 0)",
-      "result": 70,
+      "result": 72,
       "description": "Dancing Coral bonus 0: Daily Reef Coral",
-      "extractedAt": "2026-02-08T06:03:47.821Z"
+      "extractedAt": "2026-02-22T07:26:29.306Z"
     },
     "dancing_coral_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 1, 0)",
-      "result": 100,
+      "result": 105,
       "description": "Dancing Coral bonus 1: Spelunking POW",
-      "extractedAt": "2026-02-08T06:03:47.828Z"
+      "extractedAt": "2026-02-22T07:26:29.308Z"
     },
     "dancing_coral_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 2, 0)",
-      "result": 66,
+      "result": 69,
       "description": "Dancing Coral bonus 2: Spelunking Amber gain",
-      "extractedAt": "2026-02-08T06:03:47.831Z"
+      "extractedAt": "2026-02-22T07:26:29.309Z"
     },
     "dancing_coral_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 3, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 3: Class EXP gain",
-      "extractedAt": "2026-02-08T06:03:47.838Z"
+      "extractedAt": "2026-02-22T07:26:29.311Z"
     },
     "dancing_coral_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 4: Unknown",
-      "extractedAt": "2026-02-08T06:03:47.840Z"
+      "extractedAt": "2026-02-22T07:26:29.314Z"
     },
     "dancing_coral_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 5: Unknown",
-      "extractedAt": "2026-02-08T06:03:47.846Z"
+      "extractedAt": "2026-02-22T07:26:29.315Z"
     },
     "dancing_coral_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 6, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 6: Unknown",
-      "extractedAt": "2026-02-08T06:03:47.849Z"
+      "extractedAt": "2026-02-22T07:26:29.322Z"
     },
     "dancing_coral_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 7, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 7: Unknown",
-      "extractedAt": "2026-02-08T06:03:47.858Z"
+      "extractedAt": "2026-02-22T07:26:29.325Z"
     },
     "dancing_coral_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 8, 0)",
       "result": 0,
       "description": "Dancing Coral bonus 8: Unknown",
-      "extractedAt": "2026-02-08T06:03:47.862Z"
+      "extractedAt": "2026-02-22T07:26:29.327Z"
     },
     "dancing_coral_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 0)",
       "result": 19.801980198019802,
       "description": "Dancing Coral cost for bonus 0",
-      "extractedAt": "2026-02-08T06:03:47.867Z"
+      "extractedAt": "2026-02-22T07:26:29.328Z"
     },
     "dancing_coral_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 1)",
       "result": 99.00990099009901,
       "description": "Dancing Coral cost for bonus 1",
-      "extractedAt": "2026-02-08T06:03:47.869Z"
+      "extractedAt": "2026-02-22T07:26:29.330Z"
     },
     "dancing_coral_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 2)",
       "result": 247.5247524752475,
       "description": "Dancing Coral cost for bonus 2",
-      "extractedAt": "2026-02-08T06:03:47.878Z"
+      "extractedAt": "2026-02-22T07:26:29.332Z"
     },
     "dancing_coral_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 3)",
       "result": 990.09900990099,
       "description": "Dancing Coral cost for bonus 3",
-      "extractedAt": "2026-02-08T06:03:47.880Z"
+      "extractedAt": "2026-02-22T07:26:29.334Z"
     },
     "dancing_coral_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 4)",
       "result": 2970.29702970297,
       "description": "Dancing Coral cost for bonus 4",
-      "extractedAt": "2026-02-08T06:03:47.887Z"
+      "extractedAt": "2026-02-22T07:26:29.336Z"
     },
     "dancing_coral_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 5)",
       "result": 9900.990099009901,
       "description": "Dancing Coral cost for bonus 5",
-      "extractedAt": "2026-02-08T06:03:47.890Z"
+      "extractedAt": "2026-02-22T07:26:29.342Z"
     },
     "dancing_coral_cost_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 6)",
       "result": 24752.47524752475,
       "description": "Dancing Coral cost for bonus 6",
-      "extractedAt": "2026-02-08T06:03:47.897Z"
+      "extractedAt": "2026-02-22T07:26:29.345Z"
     },
     "dancing_coral_cost_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 7)",
       "result": 99009.900990099,
       "description": "Dancing Coral cost for bonus 7",
-      "extractedAt": "2026-02-08T06:03:47.899Z"
+      "extractedAt": "2026-02-22T07:26:29.346Z"
     },
     "dancing_coral_cost_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 8)",
       "result": 495049.50495049503,
       "description": "Dancing Coral cost for bonus 8",
-      "extractedAt": "2026-02-08T06:03:47.902Z"
+      "extractedAt": "2026-02-22T07:26:29.348Z"
     }
   },
   "errors": {},
