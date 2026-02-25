@@ -8,6 +8,7 @@ import { LegendTalentModel } from "../model/legendTalentModel";
 import { Player } from "../player";
 import { Sailing } from "../world-5/sailing/sailing";
 import { Clamworks } from "./clamworks";
+import { ZenithMarket } from "./zenithShop";
 
 export class LegendTalent {
     level: number = 0;
@@ -104,6 +105,7 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const clamworks = data.get("clamworks") as Clamworks;
     const eventShop = data.get("eventShop") as EventShop;
+    const zenithMarket = data.get("zenithMarket") as ZenithMarket;
 
     // Legend Talents Points
     let pointsOwned = 0;
@@ -128,8 +130,7 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     // Super Talents
     legendTalents.superTalentUnlocked = legendTalents.getBonusFromIndex(39) >= 1;
     const legendTalentBonus7 = legendTalents.getBonusFromIndex(7);
-    // TODO : add zenith market bonus 5 here once implemented
-    const zenithMarketBonus5 = 0;
+    const zenithMarketBonus5 = zenithMarket.getBonusForId(5);
     legendTalents.superTalentBonusLevels = Math.round(50 + legendTalentBonus7 + zenithMarketBonus5);
 
     return legendTalents;
