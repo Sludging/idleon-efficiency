@@ -820,7 +820,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 55:
                 // Number of Onyx statues
                 for (let i = 0; i < statues.length; i++) {
-                    line.updatePlayerCurrentValue((statues[i].statues.filter(statue => statue && statue.type == StatusType.Onyx).length ?? 0), i);
+                    line.updatePlayerCurrentValue((statues[i].statues.filter(statue => statue && statue.type >= StatusType.Onyx).length ?? 0), i);
                 }
                 break;
             case 56:
