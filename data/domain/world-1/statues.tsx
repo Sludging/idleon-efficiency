@@ -17,7 +17,8 @@ export const StatueConst = {
 export enum StatusType {
     Basic,
     Gold,
-    Onyx
+    Onyx,
+    Zenith
 }
 
 export class Statue {
@@ -113,6 +114,10 @@ export class Statue {
                 extraChar = "O";
                 break;
             }
+            case StatusType.Zenith: {
+                extraChar = "Z";
+                break;
+            }
         }
         return {
             location: `Statue${extraChar}${this.statueNumber}`,
@@ -165,11 +170,15 @@ export class Statues extends Domain {
                     if (goldStatues.length > statueIndex) {
                         switch (goldStatues[statueIndex]) {
                             case 1: {
-                                statue.type = StatusType.Gold
+                                statue.type = StatusType.Gold;
                                 break;
                             }
                             case 2: {
-                                statue.type = StatusType.Onyx
+                                statue.type = StatusType.Onyx;
+                                break;
+                            }
+                            case 3: {
+                                statue.type = StatusType.Zenith;
                                 break;
                             }
                         }
