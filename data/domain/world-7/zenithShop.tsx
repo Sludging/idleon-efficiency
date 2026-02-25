@@ -2,6 +2,8 @@ import { Domain, RawData } from "../base/domain";
 import { initZenithMarketBonusRepo, ZenithMarketBonusBase } from "../data/ZenithMarketBonusRepo";
 import { Item } from "../items";
 import { ZenithMarketBonusModel } from "../model/zenithMarketBonusModel";
+import { Player } from "../player";
+import { Storage } from "../storage";
 
 export interface NonDepositedCluster {
     source: string,
@@ -71,4 +73,34 @@ export class ZenithMarket extends Domain {
     getBonusForId(index: number): number {
         return this.bonuses.find(bonus => bonus.index == index)?.getBonus() ?? 0;
     }
+}
+
+export const updateNonDepositedZenithClusters = (data: Map<string, any>) => {
+    const zenithMarket = data.get("zenithMarket") as ZenithMarket;
+    const players = data.get("players") as Player[];
+    const storage = data.get("storage") as Storage;
+
+    zenithMarket.nonDepositedClusters = [];
+
+    const clusterItemInternalName = "Quest110";
+
+    const quantityInChest = storage.chest.reduce((sum, item) => sum += item.internalName == clusterItemInternalName ? item.count : 0, 0);
+    if (quantityInChest > 0) {
+        zenithMarket.nonDepositedClusters.push({
+            source: "Chest",
+            quantity: quantityInChest
+        });
+    }
+
+    storage.playerStorage.forEach((inventory, playerIndex) => {
+        const quantityInPlayerInventory = inventory.reduce((sum, item) => sum += item.internalName == clusterItemInternalName ? item.count : 0, 0);
+        if (quantityInPlayerInventory > 0) {
+            zenithMarket.nonDepositedClusters.push({
+                source: `${players[playerIndex].playerName ?? ""}`,
+                quantity: quantityInPlayerInventory
+            });
+        }
+    });
+
+    return zenithMarket;
 }
