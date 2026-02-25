@@ -75,6 +75,7 @@ import { Hoops } from './world-1/hoops';
 import { Darts } from './world-1/darts';
 import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
 import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
+import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -172,6 +173,7 @@ const domainList: Domain[] = [
     new Darts("darts"),
     new Orion("orion"),
     new Poppy("poppy"),
+    new ZenithMarket("zenithMarket"),
 ]
 
 export class IdleonData {
@@ -317,6 +319,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "emperorMaxAttempts": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorMaxAttempts(accountData),
     "tesseractEfficiency": (doc: Cloudsave, accountData: Map<string, any>) => updateTesseractEfficiency(accountData),
     "coralReefDailyGains": (doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefDailyGain(accountData),
+    "nonDepositedZenithClusters": (doc: Cloudsave, accountData: Map<string, any>) => updateNonDepositedZenithClusters(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
