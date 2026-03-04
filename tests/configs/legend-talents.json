@@ -50,7 +50,7 @@
     {
       "label": "zenith_market_5",
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
-      "description": "Zenith market bonus 5 (TODO feature - expected to be 0)"
+      "description": "Zenith market bonus 5 (Super Dupers) - now implemented via ZenithMarket domain; feeds into superTalentBonusLevels"
     },
     {
       "label": "spelunk_18_array",

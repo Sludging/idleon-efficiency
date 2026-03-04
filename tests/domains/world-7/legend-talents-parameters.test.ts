@@ -2,6 +2,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
+import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
 import { Companion } from '../../../data/domain/companions';
 import { GemStore } from '../../../data/domain/gemPurchases';
 import { Sailing } from '../../../data/domain/sailing';
@@ -77,19 +78,14 @@ const legendTalentsParameterSpecs: Record<string, ParameterTestSpec> = {
       return eventShop.isBonusOwned(32) ? 2 : 0;
     }
   },
-  // NOTE: The following TODO features are NOT tested individually because they don't exist
-  // as separate values in the domain. They contribute to pointsOwned, which WILL fail
-  // if these bonuses exist in the game but aren't implemented in the domain.
-  // Uncomment these tests if/when these systems are implemented in the domain:
-  // zenith_market_5: {
-  //   id: 'zenith_market_5',
-  //   description: 'Zenith market bonus 5 (TODO feature in domain)',
-  //   extractionKey: 'zenith_market_5',
-  //   domainExtractor: (gameData) => {
-  //     // TODO: Implement zenith market bonus 5, then extract the bonus here
-  //     throw new Error('Zenith market bonus 5 not yet implemented in domain');
-  //   }
-  // },
+  zenith_market_5: {
+    description: 'ZenithMarket bonus 5 (Super Dupers) - feeds into superTalentBonusLevels',
+    extractionKey: 'zenith_market_5',
+    domainExtractor: (gameData) => {
+      const zenithMarket = gameData.get("zenithMarket") as ZenithMarket;
+      return zenithMarket.getBonusForId(5);
+    }
+  },
 
   // ===== INDIVIDUAL TALENT LEVELS =====
   talent_0_level: {
