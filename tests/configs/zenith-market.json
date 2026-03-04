@@ -1,0 +1,26 @@
+{
+  "description": "Extract data for ZenithMarket domain - bonus calculations",
+  "target": "ZenithMarket",
+  "extractions": [
+    {
+      "label": "zenith_market_0_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
+      "description": "ZenithMarket bonus 0 (True Zen) computed bonus - used in zenith statue multiplier calculation"
+    },
+    {
+      "label": "zenith_market_2_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 2, 0)",
+      "description": "ZenithMarket bonus 2 (Lamp Boost) computed bonus"
+    },
+    {
+      "label": "zenith_market_5_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
+      "description": "ZenithMarket bonus 5 (Super Dupers) computed bonus - feeds into legend talent superTalentBonusLevels"
+    },
+    {
+      "label": "zenith_market_9_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 9, 0)",
+      "description": "ZenithMarket bonus 9 (Classy Gogo) computed bonus - sample upper index"
+    }
+  ]
+}
