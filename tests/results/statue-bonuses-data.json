@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-03-04T07:11:32.988Z",
+  "extractions": {
+    "artifact_30_bonus": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 30, 0)",
+      "result": 120,
+      "description": "Sailing artifact 30 (Onyx Lantern) bonus - added to the base onyxStatueBonus of 2",
+      "extractedAt": "2026-03-04T07:11:32.997Z"
+    },
+    "zenith_market_0_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
+      "result": 18,
+      "description": "ZenithMarket bonus 0 (True Zen) - added to the base 50 in zenithStatueBonus calculation",
+      "extractedAt": "2026-03-04T07:11:33.000Z"
+    },
+    "event_shop_19_owned": {
+      "expression": "0.3 * 100 * idleon.callFunction(\"Summoning\", \"EventShopOwned\", 19, 0)",
+      "result": 0,
+      "description": "Event shop bonus 19 (0 or 30) - game returns 0/1, multiplied by 0.3*100 to match domain's hardcoded 30",
+      "extractedAt": "2026-03-04T07:11:33.003Z"
+    },
+    "meritocracy_26_bonus": {
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 26, 0)",
+      "result": 0,
+      "description": "Meritocracy bonus 26 (statue bonus) - part of otherBonuses multiplier",
+      "extractedAt": "2026-03-04T07:11:33.005Z"
+    },
+    "upgrade_vault_25_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 25, 0)",
+      "result": 150,
+      "description": "UpgradeVault upgrade 25 computed bonus (%) - applied to statues at indices [0, 1, 2, 6] only",
+      "extractedAt": "2026-03-04T07:11:33.015Z"
+    },
+    "voodoo_statufication_bonus": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 56, -1)",
+      "result": 119.35483870967742,
+      "description": "Voodoo Statufication talent bonus (skillIndex 56, -1 = best across all players)",
+      "extractedAt": "2026-03-04T07:11:33.018Z"
+    },
+    "statue_0_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
+      "result": 119346.87627007415,
+      "description": "Statue index 0 bonus (upgrade vault bonus applies, index is in [0,1,2,6])",
+      "extractedAt": "2026-03-04T07:11:33.021Z"
+    },
+    "statue_1_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven1\")",
+      "result": 3840.6103900969824,
+      "description": "Statue index 1 bonus (upgrade vault bonus applies, index is in [0,1,2,6])",
+      "extractedAt": "2026-03-04T07:11:33.025Z"
+    },
+    "statue_5_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven5\")",
+      "result": 905.553073947971,
+      "description": "Statue index 5 bonus (upgrade vault bonus does NOT apply - not in [0,1,2,6])",
+      "extractedAt": "2026-03-04T07:11:33.032Z"
+    },
+    "statue_24_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
+      "result": 2255.8925106880333,
+      "description": "Statue index 24 bonus (upgrade vault bonus does NOT apply)",
+      "extractedAt": "2026-03-04T07:11:33.035Z"
+    },
+    "statue_29_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven29\")",
+      "result": 216.19612903225806,
+      "description": "Dragon statue (index 29) bonus - used as dragonStatueBonus input; dragon does NOT apply dragonStatueBonus to itself",
+      "extractedAt": "2026-03-04T07:11:33.038Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
