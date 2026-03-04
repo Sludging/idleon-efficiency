@@ -98,8 +98,8 @@ export class Statue {
                 default: talentBonus = 1;
             }
         }
-        return this.level * this.statueData.bonus * talentBonus * (this.type >= StatusType.Onyx ? this.onyxStatueBonus : 1) 
-            * (this.type >= StatusType.Zenith ? this.zenithStatueBonus : 1) * this.otherBonuses * this.dragonStatueBonus;
+        return this.level * this.statueData.bonus * talentBonus * (this.type >= StatusType.Onyx ? this.onyxStatueBonus : 1)
+            * (this.type >= StatusType.Zenith ? this.zenithStatueBonus : 1) * this.dragonStatueBonus * this.otherBonuses;
     }
 
     getBonusText = (player: Player | undefined = undefined) => {
