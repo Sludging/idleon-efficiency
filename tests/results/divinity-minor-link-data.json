@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-02-22T07:26:29.415Z",
+  "timestamp": "2026-03-04T07:11:32.484Z",
   "extractions": {
     "alchemy_bubble_y2active": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
       "result": 1.493423936869794,
       "description": "Alchemy bubble Y2ACTIVE for activeBubblePassiveBonus",
-      "extractedAt": "2026-02-22T07:26:29.419Z"
+      "extractedAt": "2026-03-04T07:11:32.489Z"
     },
     "clamworks_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
       "result": 1,
       "description": "CoralKid upgrade bonus 3",
-      "extractedAt": "2026-02-22T07:26:29.421Z"
+      "extractedAt": "2026-03-04T07:11:32.496Z"
     },
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 60.58159888170992,
+      "result": 61.00684343384983,
       "description": "Divinity minor bonus for god 6 (Purrmep)",
-      "extractedAt": "2026-02-22T07:26:29.423Z"
+      "extractedAt": "2026-03-04T07:11:32.499Z"
     }
   },
   "errors": {},

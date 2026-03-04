@@ -1,0 +1,61 @@
+{
+  "description": "Extract data for updated statue bonus calculations including Zenith statue support",
+  "target": "Statue Bonuses",
+  "extractions": [
+    {
+      "label": "artifact_30_bonus",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 30, 0)",
+      "description": "Sailing artifact 30 (Onyx Lantern) bonus - added to the base onyxStatueBonus of 2"
+    },
+    {
+      "label": "zenith_market_0_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
+      "description": "ZenithMarket bonus 0 (True Zen) - added to the base 50 in zenithStatueBonus calculation"
+    },
+    {
+      "label": "event_shop_19_owned",
+      "expression": "0.3 * 100 * idleon.callFunction(\"Summoning\", \"EventShopOwned\", 19, 0)",
+      "description": "Event shop bonus 19 (0 or 30) - game returns 0/1, multiplied by 0.3*100 to match domain's hardcoded 30"
+    },
+    {
+      "label": "meritocracy_26_bonus",
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 26, 0)",
+      "description": "Meritocracy bonus 26 (statue bonus) - part of otherBonuses multiplier"
+    },
+    {
+      "label": "upgrade_vault_25_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 25, 0)",
+      "description": "UpgradeVault upgrade 25 computed bonus (%) - applied to statues at indices [0, 1, 2, 6] only"
+    },
+    {
+      "label": "voodoo_statufication_bonus",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 56, -1)",
+      "description": "Voodoo Statufication talent bonus (skillIndex 56, -1 = best across all players)"
+    },
+    {
+      "label": "statue_0_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
+      "description": "Statue index 0 bonus (upgrade vault bonus applies, index is in [0,1,2,6])"
+    },
+    {
+      "label": "statue_1_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven1\")",
+      "description": "Statue index 1 bonus (upgrade vault bonus applies, index is in [0,1,2,6])"
+    },
+    {
+      "label": "statue_5_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven5\")",
+      "description": "Statue index 5 bonus (upgrade vault bonus does NOT apply - not in [0,1,2,6])"
+    },
+    {
+      "label": "statue_24_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
+      "description": "Statue index 24 bonus (upgrade vault bonus does NOT apply)"
+    },
+    {
+      "label": "statue_29_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven29\")",
+      "description": "Dragon statue (index 29) bonus - used as dragonStatueBonus input; dragon does NOT apply dragonStatueBonus to itself"
+    }
+  ]
+}

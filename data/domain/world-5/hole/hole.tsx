@@ -33,6 +33,7 @@ import { Gambit } from "./gambit";
 import { Tesseract } from "../../tesseract";
 import { Jar } from "./jar";
 import { LegendTalents } from "../../world-7/legendTalents";
+import { ZenithMarket } from "../../world-7/zenithShop";
 
 export class Villager {
     level: number = 0;
@@ -660,7 +661,6 @@ export class Harp {
 }
 
 export class Lamp {
-    // TODO : update this once zenith market is added
     zenithMarketBonus: number = 0;
     wishes: Wish[] = [];
     // This is hard-coded in the game, can move to the repo maybe.
@@ -919,6 +919,7 @@ export const updateHole = (data: Map<string, any>) => {
     const deathnote = data.get("deathnote") as Deathnote;
     const tesseract = data.get("tesseract") as Tesseract;
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const zenithMarket = data.get("zenithMarket") as ZenithMarket;
 
     // Update measurements with various cross domain data
     hole.measurements.forEach(measurement => {
@@ -938,6 +939,9 @@ export const updateHole = (data: Map<string, any>) => {
     hole.jar.jarBonuses.forEach(bonus => {
         bonus.legendTalentBonus = legendTalentBonus;
     });
+
+    // Update the lamp bonuses from zenith market
+    hole.lamp.zenithMarketBonus = zenithMarket.getBonusForId(2);
 
     // Update the gambit multiplier
     let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
