@@ -258,9 +258,28 @@ Base configs on game code (ask developer), not our domain code. Our domain code 
 
 Extract individual components, not composites. When `CookingMealBonusMultioo = (1 + (MainframeBonus(116) + ShinyBonus(20)) / 100) * (1 + WinBonus(26) / 100)`, extract MainframeBonus(116), ShinyBonus(20), WinBonus(26) separately. Testing components individually helps pinpoint failures.
 
+### Normalizing Extraction Expressions
+
+Game functions may return raw values that the domain transforms with hardcoded constants. When this happens, add arithmetic to the extraction expression so it matches the domain's output format.
+
+For example, if the game returns 0/1 for `EventShopOwned(19)` but the domain uses `isBonusOwned(19) ? 30 : 0`, write the extraction as:
+```json
+"expression": "0.3 * 100 * idleon.callFunction(\"Summoning\", \"EventShopOwned\", 19, 0)"
+```
+
+### What NOT to Test
+
+Do not write tests that simply validate parsed save data matches model fields (e.g., "level from Spelunk[45][0] equals bonus.level in the domain"). Parsing correctness is assumed — if parsing is broken, every calculation test will fail anyway. Only test actual calculations and formulas.
+
 ### What Inputs to Test
 
 Parameters = all calculation inputs, regardless of domain. Extract same-domain dependencies if they're inputs (e.g., ribbon bonus for cooking calculations).
+
+### When to Split Parameter vs Calculation Files
+
+Split into separate `-parameters.test.ts` and calculation test files when the calculation has multiple cross-domain inputs worth validating individually (e.g., statues depend on artifacts, event shop, meritocracy, vault, and talents — if the final bonus is wrong, parameter tests pinpoint which input is the culprit).
+
+Use a single calculation test file when the formula is trivially simple (e.g., `bonus * level`) with no meaningful cross-domain inputs to isolate. Adding a parameters file in this case just duplicates the calculation test with extra noise.
 
 ### How Many Scenarios to Test
 
@@ -306,20 +325,24 @@ boat.getSpeedValue({withCaptain: false})
 
 ### Precision Handling
 
-99% of cases will use a tolerance of 0.
-
-We can use a few percentage of tolerance for very big numbers of 
-unstable calculations.
-
-This will only be done on a case by case basis and very rarely.
+Always use tolerance 0. If a test fails, investigate the root cause rather than adding tolerance.
 
 ```typescript
-// For most calculations
 expect(domainValue).toMatchLiveGame(liveValue, 0);
-
-// For very rare inconsistent calculations
-expect(domainValue).toMatchLiveGame(liveValue, 0.01);
 ```
+
+The only exception is floating point ordering artifacts — where the domain and game compute the same formula in a different multiplication order, producing differences at the last 1-2 binary digits (~10⁻¹³ relative). In this case, fix the domain's multiplication order to match the game rather than adding tolerance.
+
+### Never Skip or Suppress Failing Tests
+
+**Failing tests are intentional signals, not problems to hide.**
+
+- Do NOT use `it.skip()`, `it.todo()`, `xit()`, or any other suppression mechanism
+- Do NOT add tolerances to make a failing test pass — tolerances mask real discrepancies
+- Do NOT remove tests because they're inconvenient or hard to fix
+- A failing test is the correct way to document a known gap (e.g., a missing domain feature like AllTalentLV support)
+
+If a test fails because of an unimplemented feature, leave it failing. The failure is valuable: it tells you exactly what is broken and by how much.
 
 ## Troubleshooting
 
