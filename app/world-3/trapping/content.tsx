@@ -68,14 +68,11 @@ function PlayerTraps(props: PlayerTrapProps) {
                                             <Box>
                                                 <Text>Trap Type: {TrapSet[trap.trapType]}</Text>
                                                 <Text>Original Duration: {formatTime(trap.trapDuration)?.replace("in ", "") ?? ""}</Text>
-                                                {
-                                                    trap.getBenefits().map((bonus, index) => (
-                                                        <Box key={`bonus_${index}`}>
-                                                            <Text>{bonus}</Text>
-                                                        </Box>
-                                                    ))
-                                                }
-
+                                                <Box direction="row">
+                                                    <Text>
+                                                        Bonuses: {trap.getBenefits().join(" | ")}    
+                                                    </Text>
+                                                </Box>
                                             </Box>
                                         }
                                         size='medium'
@@ -102,6 +99,8 @@ function Traps() {
     const playerTraps = theData.get("traps") as Trap[][];
     const playerNames = theData.get("playerNames") as string[];
     const playerData = theData.get("players") as Player[];
+    const alchemy = theData.get("alchemy");
+    const hasAlchemyExtraTrap = (alchemy?.cauldrons?.[1]?.bubbles?.[11]?.level ?? 0) > 0.5;
 
     return (
         <Box>
@@ -120,7 +119,7 @@ function Traps() {
                             playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
                                 const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
-                                const maxTraps = Trap.getMaxTraps(boxSet);
+                                const maxTraps = Trap.getMaxTraps(boxSet, hasAlchemyExtraTrap);
                                 return (
                                     <TableRow key={`traps_${index}`}>
                                         <TableCell>
@@ -137,7 +136,7 @@ function Traps() {
                                             }
                                         </TableCell>
                                         <TableCell>
-                                            <PlayerTraps traps={trapsData} maxTraps={maxTraps + 1} />
+                                            <PlayerTraps traps={trapsData} maxTraps={maxTraps} />
                                         </TableCell>
                                     </TableRow>
                                 )
