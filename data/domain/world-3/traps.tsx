@@ -109,6 +109,9 @@ export class Trap {
                 case "TrapBoxSet6": return 6;
                 case "TrapBoxSet7": return 7;
                 case "TrapBoxSet8": return 7;
+                case "TrapBoxSet9": return 7;
+                case "TrapBoxSet10": return 7;
+                case "TrapBoxSet11": return 7;
                 default: return 1;
             }
         })();
