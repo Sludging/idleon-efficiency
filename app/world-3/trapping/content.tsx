@@ -10,10 +10,7 @@ import {
     Heading,
     Text,
     Grid,
-    ResponsiveContext
 } from 'grommet'
-import { useContext } from 'react';
-
 import { Trap, TrapSet } from '../../../data/domain/world-3/traps';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { Player } from '../../../data/domain/player';
@@ -22,14 +19,70 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { Storage } from '../../../data/domain/storage';
+import { initCritterRepo } from '../../../data/domain/data/CritterRepo';
+import { Item } from '../../../data/domain/items';
+import ResourceCountTile from '../../../components/base/ResourceCountTile';
+
 
 interface PlayerTrapProps {
     traps: Array<Trap>
     maxTraps: number
 }
 
+interface OwnedCrittersProps {
+    id: string;
+    count: number;
+    location: string
+}
+
+interface TrapRewardsProps {
+    name: string;
+    count: number;
+}
+
+function TrapRewardsSummary({ entries }: { entries: TrapRewardsProps[] }) {
+    if (entries.length === 0) {
+        return <Text size="small" color="dark-4">No placed traps</Text>;
+    }
+
+    return (
+        <Box margin={{ bottom: 'small' }} gap="small">
+            <Box direction="row" wrap>
+                {
+                    entries.map((entry) => (
+                        <ResourceCountTile key={entry.name}
+                        imageData={{ location: `${entry.name}_x1`, width: 36, height: 36 }}
+                        count={entry.count}
+                        iconScale={0.75}
+                        />
+                    ))
+                }
+            </Box>
+        </Box>
+    );
+}
+
+function OwnedCrittersSummary({ entries }: { entries: OwnedCrittersProps[] }) {
+    return (
+        <Box margin={{ bottom: 'small' }} gap="small">
+            <Box direction="row" wrap>
+                {
+                    entries.map((entry) => (
+                        <ResourceCountTile key={entry.id}
+                        imageData={Item.getImageData(entry.id)}
+                        count={entry.count}
+                        iconScale={0.75}
+                        tooltipHeading={entry.location}
+                        />
+                    ))
+                }
+            </Box>
+        </Box>
+    );
+}
+
 function PlayerTraps(props: PlayerTrapProps) {
-    const size = useContext(ResponsiveContext)
     const formatTime = (input: number) => {
         const formatter = new Intl.RelativeTimeFormat('en');
         const ranges: Record<string, number> = {
@@ -50,7 +103,7 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Grid columns={{ count: 9, size: ["50px", "12.5%"] }} gap="small" justify="start">
+        <Box direction="row" wrap gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
                     if (!trap.placed && index >= props.maxTraps) {
@@ -73,6 +126,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                                                         Bonuses: {trap.getBenefits().join(" | ")}    
                                                     </Text>
                                                 </Box>
+                                                <Text>Critters: {trap.critters}</Text>
                                             </Box>
                                         }
                                         size='medium'
@@ -87,7 +141,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                     )
                 })
             }
-        </Grid>
+        </Box>
     )
 }
 
@@ -101,11 +155,42 @@ function Traps() {
     const playerData = theData.get("players") as Player[];
     const alchemy = theData.get("alchemy");
     const hasAlchemyExtraTrap = (alchemy?.cauldrons?.[1]?.bubbles?.[11]?.level ?? 0) > 0.5;
+    const storage = theData.get("storage") as Storage;
+
+    const critters = initCritterRepo();
+    const critterCounts = {
+        regular: critters.map(c => ({
+            id: c.id,
+            count: storage?.amountInStorage(c.id) ?? 0,
+            location: c.data.location,
+        })),
+        shiny: critters.map(c => ({
+            id: c.data.shiny,
+            count: storage?.amountInStorage(c.data.shiny) ?? 0,
+            location: c.data.location,
+        })),
+    };
+
+    const totalRewards = new Map<string, number>();
+    playerTraps
+        .flat()
+        .filter((trap) => trap?.placed)
+        .forEach((trap) => {
+            const current = totalRewards.get(trap.critterName) ?? 0;
+            totalRewards.set(trap.critterName, current + (trap.critters ?? 0));
+        });
+
+    const trapRewards = Array.from(totalRewards.entries())
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Traps</Heading>
             <ShadowBox background="dark-1" pad="large">
+                <Text margin={{ bottom: "small" }}>Owned Critters</Text>
+                <OwnedCrittersSummary entries={critterCounts.regular} />
+                <OwnedCrittersSummary entries={critterCounts.shiny} />
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -144,6 +229,15 @@ function Traps() {
                         }
                     </TableBody>
                 </Table>
+                <Box 
+                    border={{ side: 'top', color: 'grey-1', size: '1px' }}
+                    margin={{ top: 'small' }}
+                    pad={{ top: 'small' }}
+                    align="end"
+                >
+                    <Text margin={{ bottom: "small" }}>Trap Rewards</Text>
+                    <TrapRewardsSummary entries={trapRewards} />
+                </Box>
             </ShadowBox>
         </Box>
     )
