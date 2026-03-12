@@ -178,7 +178,8 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         10000: "MaxCapBagM9",
         20000: "MaxCapBagM10",
         25000: "MaxCapBagM11",
-        50000: "MaxCapBagM12",
+        30000: "MaxCapBagM12",
+        35000: "MaxCapBagM13",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -197,6 +198,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagF9",
         25000: "MaxCapBagF10",
         30000: "MaxCapBagF11",
+        35000: "MaxCapBagF12",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -215,6 +217,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagMi9",
         25000: "MaxCapBagMi10",
         30000: "MaxCapBagMi11",
+        35000: "MaxCapBagMi12",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -233,6 +236,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagT9",
         25000: "MaxCapBagT10",
         30000: "MaxCapBagT11",
+        35000: "MaxCapBagT12",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -251,6 +255,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagFi9",
         25000: "MaxCapBagFi10",
         30000: "MaxCapBagFi11",
+        35000: "MaxCapBagFi12",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -269,6 +274,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagB9",
         25000: "MaxCapBagB10",
         30000: "MaxCapBagB11",
+        35000: "MaxCapBagB12",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -287,6 +293,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagTr8",
         25000: "MaxCapBagTr9",
         30000: "MaxCapBagTr10",
+        35000: "MaxCapBagTr11",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -305,6 +312,7 @@ const capacityToBagMapping: Record<string, Record<number, string>> = {
         20000: "MaxCapBagS8",
         25000: "MaxCapBagS9",
         30000: "MaxCapBagS10",
+        35000: "MaxCapBagS11",
         250000: "MaxCapBag",
         500000: "MaxCapBag",
         1000000: "MaxCapBag",
@@ -377,7 +385,7 @@ class Bag {
     getImageData = (): ImageData => {
         if (Object.keys(capacityToBagMapping).includes(this.name)) {
             const bagName = capacityToBagMapping[this.name][this.capacity];
-            if (bagName == "Blank" || bagName == this.name) {
+            if (!bagName || bagName == "Blank" || bagName == this.name) {
                 return {
                     location: 'MaxCapBagNone',
                     width: 36,
