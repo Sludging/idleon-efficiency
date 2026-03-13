@@ -9,9 +9,8 @@ import {
     TableCell,
     Heading,
     Text,
-    Grid,
 } from 'grommet'
-import { Trap, TrapSet } from '../../../data/domain/world-3/traps';
+import { Trap, Traps as TrapsDomain, TrapSet, OwnedCritters, TrapRewards } from '../../../data/domain/world-3/traps';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { Player } from '../../../data/domain/player';
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
@@ -19,65 +18,65 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
-import { Storage } from '../../../data/domain/storage';
-import { initCritterRepo } from '../../../data/domain/data/CritterRepo';
 import { Item } from '../../../data/domain/items';
-import ResourceCountTile from '../../../components/base/ResourceCountTile';
-
+import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
     maxTraps: number
 }
 
-interface OwnedCrittersProps {
-    id: string;
-    count: number;
-    location: string
-}
-
-interface TrapRewardsProps {
-    name: string;
-    count: number;
-}
-
-function TrapRewardsSummary({ entries }: { entries: TrapRewardsProps[] }) {
-    if (entries.length === 0) {
+function TrapRewardsSummary({ rewards }: { rewards: TrapRewards[] }) {
+    if (rewards.length === 0) {
         return <Text size="small" color="dark-4">No placed traps</Text>;
     }
 
     return (
-        <Box margin={{ bottom: 'small' }} gap="small">
-            <Box direction="row" wrap>
-                {
-                    entries.map((entry) => (
-                        <ResourceCountTile key={entry.name}
-                        imageData={{ location: `${entry.name}_x1`, width: 36, height: 36 }}
-                        count={entry.count}
-                        iconScale={0.75}
-                        />
-                    ))
-                }
-            </Box>
+        <Box direction="row" wrap>
+            {rewards.map((entry) => (
+                <Box
+                    key={entry.name}
+                    border={{ color: 'grey-1' }}
+                    background="accent-4"
+                    width={{ min: '100px', max: '100px' }}
+                    align="center"
+                    justify="center"
+                    pad={{ vertical: 'small' }}
+                >
+                    <ResourceDisplay
+                        resourceImageData={{ location: `${entry.name}_x1`, width: 36, height: 36 }}
+                        cost={entry.count}
+                        resourceImageScale={0.75}
+                        textSize="small"
+                    />
+                </Box>
+            ))}
         </Box>
     );
 }
 
-function OwnedCrittersSummary({ entries }: { entries: OwnedCrittersProps[] }) {
+function OwnedCrittersSummary({ critters }: { critters: OwnedCritters[] }) {
     return (
-        <Box margin={{ bottom: 'small' }} gap="small">
-            <Box direction="row" wrap>
-                {
-                    entries.map((entry) => (
-                        <ResourceCountTile key={entry.id}
-                        imageData={Item.getImageData(entry.id)}
-                        count={entry.count}
-                        iconScale={0.75}
+        <Box direction="row" wrap>
+            {critters.map((entry) => (
+                <Box
+                    key={entry.id}
+                    border={{ color: 'grey-1' }}
+                    background="accent-4"
+                    width={{ min: '100px', max: '100px' }}
+                    align="center"
+                    justify="center"
+                    pad={{ vertical: 'small' }}
+                >
+                    <ResourceDisplay
+                        resourceImageData={Item.getImageData(entry.id)}
+                        cost={entry.count}
+                        resourceImageScale={0.75}
+                        showTooltip={true}
                         tooltipHeading={entry.location}
                         />
-                    ))
-                }
-            </Box>
+                </Box>
+            ))}
         </Box>
     );
 }
@@ -150,47 +149,27 @@ function Traps() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    const playerTraps = theData.get("traps") as Trap[][];
+    const traps = theData.get("traps") as TrapsDomain;
     const playerNames = theData.get("playerNames") as string[];
     const playerData = theData.get("players") as Player[];
     const alchemy = theData.get("alchemy");
+    
     const hasAlchemyExtraTrap = (alchemy?.cauldrons?.[1]?.bubbles?.[11]?.level ?? 0) > 0.5;
-    const storage = theData.get("storage") as Storage;
-
-    const critters = initCritterRepo();
-    const critterCounts = {
-        regular: critters.map(c => ({
-            id: c.id,
-            count: storage?.amountInStorage(c.id) ?? 0,
-            location: c.data.location,
-        })),
-        shiny: critters.map(c => ({
-            id: c.data.shiny,
-            count: storage?.amountInStorage(c.data.shiny) ?? 0,
-            location: c.data.location,
-        })),
-    };
-
-    const totalRewards = new Map<string, number>();
-    playerTraps
-        .flat()
-        .filter((trap) => trap?.placed)
-        .forEach((trap) => {
-            const current = totalRewards.get(trap.critterName) ?? 0;
-            totalRewards.set(trap.critterName, current + (trap.critters ?? 0));
-        });
-
-    const trapRewards = Array.from(totalRewards.entries())
-        .map(([name, count]) => ({ name, count }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+    const regularCritterCount = traps.regularCritterCounts;
+    const shinyCritterCount = traps.shinyCritterCounts;
+    const trapRewards = traps.trapRewards;
 
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Traps</Heading>
             <ShadowBox background="dark-1" pad="large">
                 <Text margin={{ bottom: "small" }}>Owned Critters</Text>
-                <OwnedCrittersSummary entries={critterCounts.regular} />
-                <OwnedCrittersSummary entries={critterCounts.shiny} />
+                <OwnedCrittersSummary critters={regularCritterCount} />
+                <OwnedCrittersSummary critters={shinyCritterCount} />
+                <Box margin={{ top: 'small' }} pad={{ top: 'small' }}>
+                    <Text margin={{ bottom: "small" }}>Trap Rewards</Text>
+                    <TrapRewardsSummary rewards={trapRewards} />
+                </Box>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -201,7 +180,7 @@ function Traps() {
                     </TableHeader>
                     <TableBody>
                         {
-                            playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
+                            traps.playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
                                 const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
                                 const maxTraps = Trap.getMaxTraps(boxSet, hasAlchemyExtraTrap);
@@ -229,15 +208,6 @@ function Traps() {
                         }
                     </TableBody>
                 </Table>
-                <Box 
-                    border={{ side: 'top', color: 'grey-1', size: '1px' }}
-                    margin={{ top: 'small' }}
-                    pad={{ top: 'small' }}
-                    align="end"
-                >
-                    <Text margin={{ bottom: "small" }}>Trap Rewards</Text>
-                    <TrapRewardsSummary entries={trapRewards} />
-                </Box>
             </ShadowBox>
         </Box>
     )

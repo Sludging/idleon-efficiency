@@ -6,6 +6,20 @@ import { initItemDetailRepo } from "../data/ItemDetailRepo";
 import { TypeGenEnum } from "../enum/typeGenEnum";
 import { initTrapBoxRepo } from "../data/TrapBoxRepo";
 import { TrapBoxTimeModel } from "../model/trapBoxTimeModel";
+import { initCritterRepo } from "../data/CritterRepo";
+import { Storage } from "../storage";
+
+
+export interface OwnedCritters {
+    id: string;
+    count: number;
+    location: string;
+}
+
+export interface TrapRewards {
+    name: string;
+    count: number;
+}
 
 export enum TrapSet {
     Cardboard = 0,
@@ -17,14 +31,18 @@ export enum TrapSet {
     Royal = 6,
 }
 
+const critterRepo = initCritterRepo();
+const itemDetailRepo = initItemDetailRepo()
+const trapBoxRepo = initTrapBoxRepo()
+
 const trapIdByName = Object.fromEntries(
-    initItemDetailRepo()
+    itemDetailRepo
     .filter(item => item.data.typeGen === TypeGenEnum.aTrap)
     .map(item => [item.id, item.data.ID ?? 0])
 ) as Record<string, number>;
 
 const trapBoxBySetIndex = Object.fromEntries(
-    initTrapBoxRepo()
+    trapBoxRepo
     .map(trapBox => [trapBox.index, trapBox.data.times])
 ) as Record<number, TrapBoxTimeModel[]>;
 
@@ -85,6 +103,11 @@ export class Trap {
 }
 
 export class Traps extends Domain {
+    playerTraps: Trap[][] = [];
+    regularCritterCounts: OwnedCritters[] = [];
+    shinyCritterCounts: OwnedCritters[] = [];
+    trapRewards: TrapRewards[] = [];
+
     getRawKeys(): RawData[] {
         return [
             { key: "PldTraps_", default: [], perPlayer: true }
@@ -92,22 +115,53 @@ export class Traps extends Domain {
     }
 
     init(_: Item[], charCount: number) {
-        // Empty init for now.
-        return Array(charCount) as Trap[][];
+        this.playerTraps = [];
+        this.regularCritterCounts = [];
+        this.shinyCritterCounts = [];
+        this.trapRewards = [];
+        return this;
     }
 
     parse(data: Map<string, any>): void {
-        const traps = data.get(this.getDataKey()) as Trap[][];
+        const traps = data.get(this.getDataKey()) as Traps;
         const charCount = data.get("charCount") as number;
+
+        traps.playerTraps = [];
         range(0, charCount).forEach((_, playerIndex) => {
-            // If this is the first time handling this player, init.
-            if (traps.length <= playerIndex) {
-                traps.push([]);
-            }
             const playerTraps = data.get(`PldTraps_${playerIndex}`) as any[];
-            traps[playerIndex] = playerTraps.map(trapData => {
-                return new Trap(playerIndex, trapData)
-            });
+            traps.playerTraps.push(playerTraps.map(trapData => new Trap(playerIndex, trapData)));
         })
     }
 }
+
+export const updateTrapDisplayData = (data: Map<string, any>): Traps => {
+    const traps = data.get("traps") as Traps;
+    const storage = data.get("storage") as Storage;
+
+    traps.regularCritterCounts = critterRepo.map(critter => ({
+        id: critter.id,
+        count: storage?.amountInStorage(critter.id) ?? 0,
+        location: critter.data.location,
+    }));
+
+    traps.shinyCritterCounts = critterRepo.map(critter => ({
+        id: critter.data.shiny,
+        count: storage?.amountInStorage(critter.data.shiny) ?? 0,
+        location: critter.data.location,
+    }));
+
+    const rewardsByCritterName = new Map<string, number>();
+    traps.playerTraps
+        .flat()
+        .filter(trap => trap?.placed)
+        .forEach(trap => {
+            const current = rewardsByCritterName.get(trap.critterName) ?? 0;
+            rewardsByCritterName.set(trap.critterName, current + (trap.critters ?? 0));
+        });
+
+    traps.trapRewards = Array.from(rewardsByCritterName.entries())
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+    return traps;
+};
