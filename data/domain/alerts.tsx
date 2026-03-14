@@ -12,7 +12,7 @@ import { Refinery } from "./world-3/construction/refinery";
 import { Skilling } from "./skilling";
 import { SkillsIndex } from "./SkillsIndex";
 import { Talent } from "./talents";
-import { Trap } from "./world-3/traps";
+import { Traps } from "./world-3/traps";
 import { Farming } from "./world-6/farming";
 import { Worship } from "./world-3/worship";
 import { Storage } from "./storage";
@@ -425,7 +425,7 @@ const getPlayerAlerts = (player: Player, anvil: AnvilWrapper, playerObols: Obol[
     return alerts;
 }
 
-const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning, sailing: Sailing): Alert[] => {
+const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Traps, arcade: Arcade, construction: Construction, equinox: Equinox, farming: Farming, players: Player[], storage: Storage, summoning: Summoning, sailing: Sailing): Alert[] => {
     const globalAlerts: Alert[] = [];
 
     // Worship
@@ -443,7 +443,7 @@ const getGlobalAlerts = (worship: Worship, refinery: Refinery, traps: Trap[][], 
     })
 
     // Traps
-    const readyTraps = traps.flatMap(playerTraps => playerTraps).reduce((sum, trap) => sum += trap.placed && trap.isReady() ? 1 : 0, 0);
+    const readyTraps = traps.playerTraps.flatMap(playerTraps => playerTraps).reduce((sum, trap) => sum += trap.placed && trap.isReady() ? 1 : 0, 0);
     if (readyTraps > 0) {
         globalAlerts.push(new TrapAlerts(readyTraps));
     }
@@ -521,7 +521,7 @@ export const updateAlerts = (data: Map<string, any>) => {
     const obols = data.get("obols") as ObolsData;
     const worship = data.get("worship") as Worship;
     const refinery = data.get("refinery") as Refinery;
-    const traps = data.get("traps") as Trap[][];
+    const traps = data.get("traps") as Traps;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
     const construction = data.get("construction") as Construction;

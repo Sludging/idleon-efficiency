@@ -2,6 +2,24 @@ import { range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { ImageData } from "../imageData";
 import { Item } from "../items";
+import { initItemDetailRepo } from "../data/ItemDetailRepo";
+import { TypeGenEnum } from "../enum/typeGenEnum";
+import { initTrapBoxRepo } from "../data/TrapBoxRepo";
+import { TrapBoxTimeModel } from "../model/trapBoxTimeModel";
+import { initCritterRepo } from "../data/CritterRepo";
+import { Storage } from "../storage";
+
+
+export interface OwnedCritters {
+    id: string;
+    count: number;
+    location: string;
+}
+
+export interface TrapRewards {
+    name: string;
+    count: number;
+}
 
 export enum TrapSet {
     Cardboard = 0,
@@ -13,58 +31,20 @@ export enum TrapSet {
     Royal = 6,
 }
 
-type TrapBoxInfo = 
-    | { duration: number; qty: number; exp: number}
-    | { duration: number; qty: number; shiny: number}
+const critterRepo = initCritterRepo();
+const itemDetailRepo = initItemDetailRepo()
+const trapBoxRepo = initTrapBoxRepo()
 
-const trapBoxInfo: TrapBoxInfo[][] = [
-    [
-        {duration: 1200, qty: 1, exp: 1},
-        {duration: 3600, qty: 2, exp: 2},
-        {duration: 28800, qty: 10, exp: 8},
-        {duration: 72e3, qty: 20, exp: 15}
-    ],
-    [
-        {duration: 1200, qty: 1, shiny: 2},
-        {duration: 3600, qty: 2, shiny: 4},
-        {duration: 28800, qty: 10, shiny: 16},
-        {duration: 72e3, qty: 20, shiny: 30},
-        {duration: 144e3, qty: 35, shiny: 50}
-    ],
-    [
-        {duration: 10800, qty: 5, exp: 5},
-        {duration: 216e3, qty: 50, exp: 40},
-        {duration: 432e3, qty: 100, exp: 80},
-        {duration: 432e3, qty: 200, exp: 0},
-        {duration: 432e3, qty: 0, exp: 200}
-    ],
-    [
-        {duration: 28800, qty: 0, exp: 40},
-        {duration: 72e3, qty: 0, exp: 75},
-        {duration: 158e3, qty: 0, exp: 120},
-        {duration: 518e3, qty: 0, exp: 350}
-    ],
-    [
-        {duration: 10800, qty: 5, shiny: 10},
-        {duration: 216e3, qty: 50, shiny: 80},
-        {duration: 432e3, qty: 100, shiny: 160},
-        {duration: 72e3, qty: 1, shiny: 60}
-    ],
-    [
-        {duration: 3600, qty: 3, exp: 3},
-        {duration: 36e3, qty: 15, exp: 12},
-        {duration: 108e3, qty: 40, exp: 30},
-        {duration: 72e4, qty: 220, exp: 200}
-    ],
-    [
-        {duration: 1200, qty: 2, shiny: 4},
-        {duration: 3600, qty: 4, shiny: 8},
-        {duration: 36e3, qty: 21, shiny: 38},
-        {duration: 144e3, qty: 70, shiny: 125},
-        {duration: 576e3, qty: 250, shiny: 375},
-        {duration: 2419e3, qty: 550, shiny: 1150}
-    ],
-];
+const trapIdByName = Object.fromEntries(
+    itemDetailRepo
+    .filter(item => item.data.typeGen === TypeGenEnum.aTrap)
+    .map(item => [item.id, item.data.ID ?? 0])
+) as Record<string, number>;
+
+const trapBoxBySetIndex = Object.fromEntries(
+    trapBoxRepo
+    .map(trapBox => [trapBox.index, trapBox.data.times])
+) as Record<number, TrapBoxTimeModel[]>;
 
 export class Trap {
     playerID: number;
@@ -73,6 +53,7 @@ export class Trap {
     trapDuration: number;
     trapType: TrapSet;
     placed: boolean;
+    critters: number
 
     constructor(playerID: number, trapArray: Array<any>) {
         this.playerID = playerID;
@@ -81,8 +62,9 @@ export class Trap {
         this.timeSincePut = trapArray[2];
         this.trapDuration = trapArray[6];
         this.trapType = trapArray[5];
+        this.critters = trapArray[4]
     }
-
+    
     isReady = () => {
         return this.timeSincePut >= this.trapDuration;
     }
@@ -96,66 +78,90 @@ export class Trap {
     }
 
     static getMaxTraps = (trap: Item | undefined, hasAlchemyExtraTrap: boolean) => {
-        const baseTraps = (() => {
-            if (trap == undefined) {
-                return 0;
-            }
-            switch (trap.internalName) {
-                case "TrapBoxSet1": return 1;
-                case "TrapBoxSet2": return 2;
-                case "TrapBoxSet3": return 3;
-                case "TrapBoxSet4": return 4;
-                case "TrapBoxSet5": return 5;
-                case "TrapBoxSet6": return 6;
-                case "TrapBoxSet7": return 7;
-                case "TrapBoxSet8": return 7;
-                case "TrapBoxSet9": return 7;
-                case "TrapBoxSet10": return 7;
-                case "TrapBoxSet11": return 7;
-                default: return 1;
-            }
-        })();
-        return baseTraps + (hasAlchemyExtraTrap ? 1 : 0);
+        const alchemyExtraTrap = hasAlchemyExtraTrap ? 1 : 0;
+        if (trap == undefined) return alchemyExtraTrap;
+        const baseTraps = trapIdByName[trap.internalName] ?? 1;
+        return baseTraps + alchemyExtraTrap;
     }
 
     getBenefits = () => {
-        const boxData = trapBoxInfo[this.trapType].find(trap => trap.duration == this.trapDuration);
+        const boxData = trapBoxBySetIndex[this.trapType]?.find(trap => trap.time == this.trapDuration);
         if (!boxData) return [];
 
-        const benefits = [`x${boxData.qty} Qty`]
-        if ("exp" in boxData) {
-            benefits.push(`x${boxData.exp} Exp`)
+        const benefits: string[] = [];
+        if (boxData.qtyX > 0) {
+            benefits.push(`x${boxData.qtyX} Qty`)
         }
-        if ("shiny" in boxData) {
-            benefits.push(`x${boxData.shiny} Shiny`)
+        if (boxData.expX > 0) {
+            benefits.push(`x${boxData.expX} Exp`)
+        }
+        if (boxData.shinyX > 0) {
+            benefits.push(`x${boxData.shinyX} Shiny`)
         }
         return benefits;
     }
 }
 
 export class Traps extends Domain {
+    playerTraps: Trap[][] = [];
+    regularCritterCounts: OwnedCritters[] = [];
+    shinyCritterCounts: OwnedCritters[] = [];
+    trapRewards: TrapRewards[] = [];
+
     getRawKeys(): RawData[] {
         return [
             { key: "PldTraps_", default: [], perPlayer: true }
         ]
     }
+
     init(_: Item[], charCount: number) {
-        // Empty init for now.
-        return Array(charCount) as Trap[][];
-    }
-    parse(data: Map<string, any>): void {
-        const traps = data.get(this.getDataKey()) as Trap[][];
-        const charCount = data.get("charCount") as number;
-        range(0, charCount).forEach((_, playerIndex) => {
-            // If this is the first time handling this player, init.
-            if (traps.length <= playerIndex) {
-                traps.push([]);
-            }
-            const playerTraps = data.get(`PldTraps_${playerIndex}`) as any[];
-            traps[playerIndex] = playerTraps.map(trapData => {
-                return new Trap(playerIndex, trapData)
-            });
-        })
+        this.playerTraps = [];
+        this.regularCritterCounts = [];
+        this.shinyCritterCounts = [];
+        this.trapRewards = [];
+        return this;
     }
 
+    parse(data: Map<string, any>): void {
+        const traps = data.get(this.getDataKey()) as Traps;
+        const charCount = data.get("charCount") as number;
+
+        traps.playerTraps = [];
+        range(0, charCount).forEach((_, playerIndex) => {
+            const playerTraps = data.get(`PldTraps_${playerIndex}`) as any[];
+            traps.playerTraps.push(playerTraps.map(trapData => new Trap(playerIndex, trapData)));
+        })
+    }
 }
+
+export const updateTrapDisplayData = (data: Map<string, any>): Traps => {
+    const traps = data.get("traps") as Traps;
+    const storage = data.get("storage") as Storage;
+
+    traps.regularCritterCounts = critterRepo.map(critter => ({
+        id: critter.id,
+        count: storage?.amountInStorage(critter.id) ?? 0,
+        location: critter.data.location,
+    }));
+
+    traps.shinyCritterCounts = critterRepo.map(critter => ({
+        id: critter.data.shiny,
+        count: storage?.amountInStorage(critter.data.shiny) ?? 0,
+        location: critter.data.location,
+    }));
+
+    const rewardsByCritterName = new Map<string, number>();
+    traps.playerTraps
+        .flat()
+        .filter(trap => trap?.placed)
+        .forEach(trap => {
+            const current = rewardsByCritterName.get(trap.critterName) ?? 0;
+            rewardsByCritterName.set(trap.critterName, current + (trap.critters ?? 0));
+        });
+
+    traps.trapRewards = Array.from(rewardsByCritterName.entries())
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+    return traps;
+};

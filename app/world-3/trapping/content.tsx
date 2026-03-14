@@ -9,12 +9,8 @@ import {
     TableCell,
     Heading,
     Text,
-    Grid,
-    ResponsiveContext
 } from 'grommet'
-import { useContext } from 'react';
-
-import { Trap, TrapSet } from '../../../data/domain/world-3/traps';
+import { Trap, Traps as TrapsDomain, TrapSet, OwnedCritters, TrapRewards } from '../../../data/domain/world-3/traps';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { Player } from '../../../data/domain/player';
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
@@ -22,14 +18,70 @@ import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import { Item } from '../../../data/domain/items';
+import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
 
 interface PlayerTrapProps {
     traps: Array<Trap>
     maxTraps: number
 }
 
+function TrapRewardsSummary({ rewards }: { rewards: TrapRewards[] }) {
+    if (rewards.length === 0) {
+        return <Text size="small" color="dark-4">No placed traps</Text>;
+    }
+
+    return (
+        <Box direction="row" wrap>
+            {rewards.map((entry) => (
+                <Box
+                    key={entry.name}
+                    border={{ color: 'grey-1' }}
+                    background="accent-4"
+                    width={{ min: '100px', max: '100px' }}
+                    align="center"
+                    justify="center"
+                    pad={{ vertical: 'small' }}
+                >
+                    <ResourceDisplay
+                        resourceImageData={{ location: `${entry.name}_x1`, width: 36, height: 36 }}
+                        cost={entry.count}
+                        resourceImageScale={0.75}
+                        textSize="small"
+                    />
+                </Box>
+            ))}
+        </Box>
+    );
+}
+
+function OwnedCrittersSummary({ critters }: { critters: OwnedCritters[] }) {
+    return (
+        <Box direction="row" wrap>
+            {critters.map((entry) => (
+                <Box
+                    key={entry.id}
+                    border={{ color: 'grey-1' }}
+                    background="accent-4"
+                    width={{ min: '100px', max: '100px' }}
+                    align="center"
+                    justify="center"
+                    pad={{ vertical: 'small' }}
+                >
+                    <ResourceDisplay
+                        resourceImageData={Item.getImageData(entry.id)}
+                        cost={entry.count}
+                        resourceImageScale={0.75}
+                        showTooltip={true}
+                        tooltipHeading={entry.location}
+                        />
+                </Box>
+            ))}
+        </Box>
+    );
+}
+
 function PlayerTraps(props: PlayerTrapProps) {
-    const size = useContext(ResponsiveContext)
     const formatTime = (input: number) => {
         const formatter = new Intl.RelativeTimeFormat('en');
         const ranges: Record<string, number> = {
@@ -50,7 +102,7 @@ function PlayerTraps(props: PlayerTrapProps) {
     }
 
     return (
-        <Grid columns={{ count: 9, size: ["50px", "12.5%"] }} gap="small" justify="start">
+        <Box direction="row" wrap gap="small" justify="start">
             {
                 props.traps.map((trap, index) => {
                     if (!trap.placed && index >= props.maxTraps) {
@@ -73,6 +125,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                                                         Bonuses: {trap.getBenefits().join(" | ")}    
                                                     </Text>
                                                 </Box>
+                                                <Text>Critters: {trap.critters}</Text>
                                             </Box>
                                         }
                                         size='medium'
@@ -87,7 +140,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                     )
                 })
             }
-        </Grid>
+        </Box>
     )
 }
 
@@ -96,16 +149,27 @@ function Traps() {
         (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
 
-    const playerTraps = theData.get("traps") as Trap[][];
+    const traps = theData.get("traps") as TrapsDomain;
     const playerNames = theData.get("playerNames") as string[];
     const playerData = theData.get("players") as Player[];
     const alchemy = theData.get("alchemy");
+    
     const hasAlchemyExtraTrap = (alchemy?.cauldrons?.[1]?.bubbles?.[11]?.level ?? 0) > 0.5;
+    const regularCritterCount = traps.regularCritterCounts;
+    const shinyCritterCount = traps.shinyCritterCounts;
+    const trapRewards = traps.trapRewards;
 
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Traps</Heading>
             <ShadowBox background="dark-1" pad="large">
+                <Text margin={{ bottom: "small" }}>Owned Critters</Text>
+                <OwnedCrittersSummary critters={regularCritterCount} />
+                <OwnedCrittersSummary critters={shinyCritterCount} />
+                <Box margin={{ top: 'small' }} pad={{ top: 'small' }}>
+                    <Text margin={{ bottom: "small" }}>Trap Rewards</Text>
+                    <TrapRewardsSummary rewards={trapRewards} />
+                </Box>
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -116,7 +180,7 @@ function Traps() {
                     </TableHeader>
                     <TableBody>
                         {
-                            playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
+                            traps.playerTraps.filter(x => playerNames[x[0]?.playerID] != undefined).map((trapsData, index) => {
                                 const boxSet = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.gear.tools.find((tool) => tool?.type == "Trap Box Set");
                                 const skillLevel = playerData?.find((player) => player.playerID == trapsData[0]?.playerID)?.skills.get(SkillsIndex.Trapping)?.level;
                                 const maxTraps = Trap.getMaxTraps(boxSet, hasAlchemyExtraTrap);

@@ -1,4 +1,4 @@
-import { Traps } from './world-3/traps';
+import { Traps, updateTrapDisplayData } from './world-3/traps';
 import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
@@ -305,6 +305,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),
     "updatePoppyFishRate": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyFishRate(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStampMaxCarry(accountData),
+    "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
