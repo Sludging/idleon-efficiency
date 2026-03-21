@@ -997,7 +997,7 @@ export const initSpelunkingTunnelRepo = () => {
             }),
         new SpelunkingTunnelBase(8, <SpelunkingTunnelModel>{
                 "index": 8,
-                "name": "Name9",
+                "name": "Scoutpost",
                 "loreBonus": "Palette Colours now give 1.50x bonuses, and Palette Luck is +4% higher per Gaming LV",
                 "bossDepth": 55,
                 "discoveries": [

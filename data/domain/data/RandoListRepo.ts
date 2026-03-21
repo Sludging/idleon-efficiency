@@ -1888,7 +1888,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "World_7,_Part_II_v1.05;NEW_UPDATE_PATCH_NOTES_@_*The_MURKY_TRENCH_(aka_W7_Pt.2)_is_HERE!_7_new_maps,_7_new_monsters,_a_BRAND_NEW_SKILL,_and_OH_hohoho_SO_much_more!_@_*New_Skill:RESEARCH!_Find_it_in_World_7_town,_and_help_create_NEW_CONTENT_by_upgrading_your_grid!_New_Artifact_Tier,_new_Farming_gameplay_system,_new_Cog_Board_expansion_just_to_name_a_few..._ALL_unlocked_via_Research!_@_*Mr._Minehead's_Depth_Charge_game_can_be_played_from_the_2nd_map_of_the_new_Murky_Trench_area!_@_*New_content_unrelated_to_Research_is_here_too,_like_new_Meals,_new_Mob_Fighting_(W4_pets_are_called_Mobs_now),_new_Farming_Crops,_more_Summoning_Fights,_and_a_new_Coin_Tier!_@_*THE_GRAND_TOURNAMENT_is_HERE,_found_in_the_Codex!!_It's_a_gamewide_competition_of_who_has_the_best_pet_collection,_with_awesome_COSMETIC_rewards,_like_Champion_Pets_and_end_of_season_COSMETICS!_These_COSMETICS_don't_give_any_bonuses..._you_gotta_want_'em_for_the_glory!_@_*Click_the_Discord_button_for_full_patch_notes!;*Le",
+                    "Goldrush_Event_v1.09;NEW_UPDATE_PATCH_NOTES_@_*The_new_Goldrush_Event_is_live!_The_first_St._Patricks_Day_themed_event_in_IdleOn_HISTORY!_@_*New_Event_Feature:_GOLDRUSH_LUCKY_PET_WINNERS!_Ever_hour,_1_lucky_player_with_IdleOn_open_and_running_will_win_a_random_EXCLUSIVE_pet!_You_can_see_a_list_of_winners_by_using_the_new_green_candle_dropped_by_mobs._@_*Collect_edible_coins_from_monsters,_and_open_them_for_exclusive_hats,_nametags,_and_new_Event_Cards!_@_*Play_the_Pots_o'_Gold_in_town,_and_win_2_new_Nametags_and_TONS_of_Event_Points!_@_*Brand_new_Event_Shop_Rotation,_with_4_never_before_seen_collectibles!_@_*Got_too_many_Pet_Crystals?_Try_your_luck_at_getting_the_new_Glunko_Pet!_@_*IMPORTANT:_Your_progress_toward_the_'Guaranteed_Glunko'_carries_over_to_next_event,_although_the_exclusive_will_be_a_different_pet._@_*New_Research_Grid_upgrade:_G4_@_*Fixed_the_Relic_Keychains_not_giving_DR,_iykyk._@_*Click_the_Discord_button_for_full_patch_notes!;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -3198,7 +3198,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(101, <RandoListModel>{
                 "elements": [
-                    "Gemstone_Ninja_Knowledge_{_+30%_DROP_RARITY",
+                    "Gemstone_Ninja_Knowledge_{_+30%_DROP_RATE",
                     "New_Gold_Charms_added_{_+10%_ALL_STAT",
                     "Bargain_Ninja_Knowledge_{_+5_All_Talent_LV",
                     "+30_Max_LV_for_Sneaking_Items_{_1.10#_DMG_MULTI",

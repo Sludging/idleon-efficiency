@@ -123,7 +123,7 @@ export const initCompassUpgradeRepo = () => {
                 "x4": 349,
                 "x5": 0,
                 "x6": 0,
-                "description": "Boosts the drop chance of ALL Tempest items, including medallions, by {% of your normal Drop Rarity. @ Total Bonus: +$% Tempest Drop Rate",
+                "description": "Boosts the drop chance of ALL Tempest items, including medallions, by {% of your normal Drop Rate. @ Total Bonus: +$% Tempest Drop Rate",
                 "upgradeType": "Elemental"
             }),
         new CompassUpgradeBase(8, <CompassUpgradeModel>{

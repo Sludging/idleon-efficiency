@@ -152,7 +152,7 @@ export const initTomeRepo = () => {
                 "desc": undefined
             }),
         new TomeBase(18, <TomeModel>{
-                "name": "Highest Drop Rarity Multi",
+                "name": "Highest Drop Rate Multi",
                 "keyQty": 40,
                 "scalingType": TomeScalingEnum.decay,
                 "totalVal": 350,
@@ -209,9 +209,9 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(25, <TomeModel>{
                 "name": "Jackpots Hit in Arcade",
-                "keyQty": 1,
-                "scalingType": TomeScalingEnum.decay,
-                "totalVal": 50,
+                "keyQty": 4,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 80,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
@@ -861,7 +861,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 250,
                 "decimalDisplay": undefined,
-                "desc": "Hey this one's about me! In order to get credit for watching one of my streams, you need to get a gem drop from me while I'm live on twitch at     Twitch.tv/ lava贫flame2"
+                "desc": "To get +1 Stream Watched, you need to tune in at Twitch.tv/ Lava贫Flame2 and keep an eye out for when I enable +1 TOME mode! It'll happen multiple times per stream."
             }),
         new TomeBase(107, <TomeModel>{
                 "name": "Nametags Found 膛",

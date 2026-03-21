@@ -41,7 +41,7 @@ export const initKeychainBonusRepo = () => {
                 "bonuses": [<KeychainBonusModel>{"bonus": "% Total Damage", "lvl1": 1.5, "lvl2": 2.5, "lvl3": 3}]
             }),
         new KeychainBonusesBase("EquipmentKeychain11", <KeychainBonusesModel>{
-                "bonuses": [<KeychainBonusModel>{"bonus": "% Drop Chance", "lvl1": 3, "lvl2": 5, "lvl3": 8}]
+                "bonuses": [<KeychainBonusModel>{"bonus": "% Drop Rate", "lvl1": 3, "lvl2": 5, "lvl3": 8}]
             }),
         new KeychainBonusesBase("EquipmentKeychain12", <KeychainBonusesModel>{
                 "bonuses": [<KeychainBonusModel>{"bonus": "% Basic Atk Speed", "lvl1": 3, "lvl2": 4, "lvl3": 6}]

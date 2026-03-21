@@ -288,7 +288,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(28, <CompanionModel>{
                 "id": "w7d1",
-                "desc": "{30% AFK gains for World 7 skills, and {1 World Class Showcase Slot (Grade 4)",
+                "desc": "{30% AFK gains for World 7 skills, and {1 Worldclass Showcase Slot in Gallery",
                 "bonus": 30,
                 "x1": -30,
                 "x2": 0,
@@ -510,7 +510,7 @@ export const initCompanionRepo = () => {
                 "id": "snakeR",
                 "desc": "{25% Class EXP, {25% Drop Rate, 1.01x Class EXP, and 1.01x Drop Rate",
                 "bonus": 25,
-                "x1": -3,
+                "x1": 2,
                 "x2": 0,
                 "x3": -9,
                 "x4": 0,
@@ -548,7 +548,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(54, <CompanionModel>{
                 "id": "w7b6b",
-                "desc": "+1 new Research Shape, shows up after you get Research LV. 20",
+                "desc": "{1 new Research Shape, shows up after you get Research LV. 20",
                 "bonus": 1,
                 "x1": -24,
                 "x2": 0,
@@ -558,8 +558,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(55, <CompanionModel>{
                 "id": "w7b11",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "Multiplies ALL Research Grid bonuses by 1.15x (World 7 feature)",
+                "bonus": 15,
                 "x1": -26,
                 "x2": 0,
                 "x3": -28,
@@ -888,16 +888,16 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(88, <CompanionModel>{
                 "id": "rift4",
-                "desc": "Not officially in the game and may never be",
+                "desc": "{50% Prisma Bubble bonus multi and {5 Prisma Bubbles",
                 "bonus": 1,
-                "x1": 0,
+                "x1": -23,
                 "x2": 0,
-                "x3": 0,
+                "x3": -11,
                 "x4": 1,
-                "x5": 100
+                "x5": 170
             }),
         new CompanionBase(89, <CompanionModel>{
-                "id": "rift5",
+                "id": "sheepB",
                 "desc": "Not officially in the game and may never be",
                 "bonus": 1,
                 "x1": 0,
@@ -998,11 +998,11 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(99, <CompanionModel>{
                 "id": "snakeB",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "All Upgrade Vault upgrades are 50% cheaper!",
+                "bonus": 50,
+                "x1": 5,
                 "x2": 0,
-                "x3": 0,
+                "x3": -5,
                 "x4": 1,
                 "x5": 100
             }),
@@ -1118,8 +1118,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(111, <CompanionModel>{
                 "id": "w4c1",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "{100% Class EXP and Drop Rate",
+                "bonus": 100,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
@@ -1538,13 +1538,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(153, <CompanionModel>{
                 "id": "rift5",
-                "desc": "Not officially in the game and may never be",
+                "desc": "{10 Research PTS, {20% Research AFK Gains, 2x Research EXP Gain, and {1 Magnifier",
                 "bonus": 1,
-                "x1": 0,
+                "x1": -35,
                 "x2": 0,
-                "x3": 0,
+                "x3": -20,
                 "x4": 1,
-                "x5": 170
+                "x5": 225
             }),
         new CompanionBase(154, <CompanionModel>{
                 "id": "w7b3b",
@@ -1555,6 +1555,66 @@ export const initCompanionRepo = () => {
                 "x3": -22,
                 "x4": 1,
                 "x5": 160
+            }),
+        new CompanionBase(155, <CompanionModel>{
+                "id": "w4b4b",
+                "desc": "{2500% additive Gold Food bonus effect",
+                "bonus": 2500,
+                "x1": -19,
+                "x2": 0,
+                "x3": -9,
+                "x4": 1,
+                "x5": 175
+            }),
+        new CompanionBase(156, <CompanionModel>{
+                "id": "slimeR",
+                "desc": "{15% Total Damage",
+                "bonus": 15,
+                "x1": 8,
+                "x2": 0,
+                "x3": -2,
+                "x4": 1,
+                "x5": 60
+            }),
+        new CompanionBase(157, <CompanionModel>{
+                "id": "Pet7",
+                "desc": "2x Construction Build Speed",
+                "bonus": 100,
+                "x1": 0,
+                "x2": 0,
+                "x3": -10,
+                "x4": 1,
+                "x5": 110
+            }),
+        new CompanionBase(158, <CompanionModel>{
+                "id": "slugG",
+                "desc": "{15% Drop Rate",
+                "bonus": 15,
+                "x1": 11,
+                "x2": 0,
+                "x3": 5,
+                "x4": 1,
+                "x5": 65
+            }),
+        new CompanionBase(159, <CompanionModel>{
+                "id": "PotG",
+                "desc": "2.5x Coins from Mobs",
+                "bonus": 1.5,
+                "x1": -18,
+                "x2": 0,
+                "x3": -5,
+                "x4": 1,
+                "x5": 110
+            }),
+        new CompanionBase(160, <CompanionModel>{
+                "id": "slimeB",
+                "desc": "3x Total Damage, 5x Class EXP gain, 1.5x Drop Rate",
+                "bonus": 1,
+                "x1": -49,
+                "x2": 0,
+                "x3": -34,
+                "x4": 1,
+                "x5": 230
             })    
 ]
 }
