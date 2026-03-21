@@ -778,7 +778,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("Critter6A", <DescItemModel>{
                 "internalName": "Critter6A",
-                "displayName": "Eternal Lord of  The Undying Ember",
+                "displayName": "Eternal Lord of The Undying Ember",
                 "sellPrice": 3,
                 "typeGen": TypeGenEnum.dCritters,
                 "Type": "Critter",
@@ -1503,7 +1503,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 8,
                 "LUK": 8,
                 "Defence": 38,
-                "miscUp1": "5% Drop Chance",
+                "miscUp1": "5% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "",
@@ -1651,7 +1651,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 50,
                 "Defence": 160,
                 "miscUp1": "30% Total Damage",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
                 "Skill_Power": 0
@@ -1692,7 +1692,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 65,
                 "LUK": 65,
                 "Defence": 210,
-                "miscUp1": "15% Drop Chance",
+                "miscUp1": "15% Drop Rate",
                 "miscUp2": "22% Multikill Per Tier",
                 "Upgrade_Slots_Left": 11,
                 "Skill": "",
@@ -1713,7 +1713,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 80,
                 "LUK": 80,
                 "Defence": 270,
-                "miscUp1": "25% Drop Chance",
+                "miscUp1": "25% Drop Rate",
                 "miscUp2": "30% Multikill Per Tier",
                 "Upgrade_Slots_Left": 12,
                 "Skill": "",
@@ -2092,7 +2092,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 5,
                 "miscUp1": "4% Xp From Monsters",
-                "miscUp2": "3% Drop Chance",
+                "miscUp2": "3% Drop Rate",
                 "Upgrade_Slots_Left": 3,
                 "Skill": "",
                 "Skill_Power": 0
@@ -2743,7 +2743,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 82,
                 "Defence": 0,
                 "miscUp1": "120% Total Damage",
-                "miscUp2": "40% Drop Chance",
+                "miscUp2": "40% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 10,
                 "Reach": 96
@@ -3016,7 +3016,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "60% Total Damage",
-                "miscUp2": "20% Drop Chance",
+                "miscUp2": "20% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 9,
                 "Reach": 132
@@ -3457,7 +3457,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "60% Total Damage",
-                "miscUp2": "20% Drop Chance",
+                "miscUp2": "20% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 10,
                 "Reach": 370
@@ -3730,7 +3730,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "60% Total Damage",
-                "miscUp2": "20% Drop Chance",
+                "miscUp2": "20% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Speed": 9,
                 "Reach": 80
@@ -4590,7 +4590,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 60,
                 "LUK": 60,
                 "Defence": 220,
-                "miscUp1": "30% Drop Chance",
+                "miscUp1": "30% Drop Rate",
                 "miscUp2": "16% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
@@ -4611,7 +4611,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 75,
                 "LUK": 75,
                 "Defence": 300,
-                "miscUp1": "40% Drop Chance",
+                "miscUp1": "40% Drop Rate",
                 "miscUp2": "25% Multikill Per Tier",
                 "Upgrade_Slots_Left": 11,
                 "Skill": "",
@@ -5241,7 +5241,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 55,
                 "LUK": 55,
                 "Defence": 190,
-                "miscUp1": "25% Drop Chance",
+                "miscUp1": "25% Drop Rate",
                 "miscUp2": "14% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
@@ -5262,7 +5262,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 65,
                 "LUK": 65,
                 "Defence": 250,
-                "miscUp1": "35% Drop Chance",
+                "miscUp1": "35% Drop Rate",
                 "miscUp2": "20% Multikill Per Tier",
                 "Upgrade_Slots_Left": 11,
                 "Skill": "",
@@ -6060,7 +6060,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 38,
                 "LUK": 38,
                 "Defence": 100,
-                "miscUp1": "15% Drop Chance",
+                "miscUp1": "15% Drop Rate",
                 "miscUp2": "8% Total Damage",
                 "Upgrade_Slots_Left": 8,
                 "Skill": "",
@@ -6102,7 +6102,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 57,
                 "LUK": 57,
                 "Defence": 120,
-                "miscUp1": "30% Drop Chance",
+                "miscUp1": "30% Drop Rate",
                 "miscUp2": "12% Multikill Per Tier",
                 "Upgrade_Slots_Left": 9,
                 "Skill": "",
@@ -6123,7 +6123,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 70,
                 "LUK": 70,
                 "Defence": 150,
-                "miscUp1": "40% Drop Chance",
+                "miscUp1": "40% Drop Rate",
                 "miscUp2": "20% Multikill Per Tier",
                 "Upgrade_Slots_Left": 10,
                 "Skill": "",
@@ -6502,7 +6502,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "20% Total Damage",
-                "miscUp2": "5% Drop Chance",
+                "miscUp2": "5% Drop Rate",
                 "Upgrade_Slots_Left": 4,
                 "Skill": "",
                 "Skill_Power": 0
@@ -6522,7 +6522,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 3,
                 "Defence": 0,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -7956,6 +7956,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentRingsChat12", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat12",
+                "displayName": "Tournament Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentCape0", <ArmourItemModel>{
                 "internalName": "EquipmentCape0",
                 "displayName": "Angel Wings",
@@ -8118,7 +8139,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 5,
-                "miscUp1": "30% Drop Chance",
+                "miscUp1": "30% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -8329,7 +8350,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 15,
                 "Defence": 0,
                 "miscUp1": "25% Class Exp Multi",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -15569,6 +15590,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Monster Drop",
                 "description": "The second emblem given to veteran pirates, signifying their loyalty to the pirate crew. "
             }),
+        new BaseItemBase("w7B11b", <DescItemModel>{
+                "internalName": "w7B11b",
+                "displayName": "Pirate Anchor",
+                "sellPrice": 150000,
+                "typeGen": TypeGenEnum.bCraft,
+                "Type": "Monster Drop",
+                "description": "Things would get even messier in the Mess Hall without these bad boys tying them down! "
+            }),
         new BaseItemBase("w7B12", <DescItemModel>{
                 "internalName": "w7B12",
                 "displayName": "Pirate Mark III",
@@ -15600,7 +15629,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "4% Drop Chance",
+                "miscUp1": "4% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "STR",
@@ -15692,7 +15721,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "10% Drop Chance",
+                "miscUp1": "10% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "STR",
@@ -16888,7 +16917,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 2,
                 "Defence": 0,
-                "miscUp1": "5% Drop Chance",
+                "miscUp1": "5% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Sixes",
@@ -16911,7 +16940,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 3,
                 "Defence": 0,
-                "miscUp1": "7% Drop Chance",
+                "miscUp1": "7% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Sixes",
@@ -16934,7 +16963,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 5,
                 "Defence": 0,
-                "miscUp1": "10% Drop Chance",
+                "miscUp1": "10% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Sixes",
@@ -16957,7 +16986,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 7,
                 "Defence": 0,
-                "miscUp1": "15% Drop Chance",
+                "miscUp1": "15% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Sixes",
@@ -16980,7 +17009,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 1,
                 "Defence": 1,
-                "miscUp1": "2% Drop Chance",
+                "miscUp1": "2% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Pop",
@@ -17003,7 +17032,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 3,
                 "Defence": 2,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Pop",
@@ -17026,7 +17055,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 6,
                 "Defence": 3,
-                "miscUp1": "4% Drop Chance",
+                "miscUp1": "4% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Pop",
@@ -17049,7 +17078,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 9,
                 "Defence": 4,
-                "miscUp1": "6% Drop Chance",
+                "miscUp1": "6% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Pop",
@@ -17072,7 +17101,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 12,
                 "Defence": 5,
-                "miscUp1": "9% Drop Chance",
+                "miscUp1": "9% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Pop",
@@ -17992,7 +18021,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 10,
                 "Defence": 0,
-                "miscUp1": "14% Drop Chance",
+                "miscUp1": "14% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Lava",
@@ -18039,7 +18068,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 2,
                 "miscUp1": "12% Money",
-                "miscUp2": "1% Drop Chance",
+                "miscUp2": "1% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "family": "Frog",
                 "rarity": "Grumpy",
@@ -18061,7 +18090,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 3,
                 "LUK": 3,
                 "Defence": 5,
-                "miscUp1": "8% Drop Chance",
+                "miscUp1": "8% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "family": "Knight",
@@ -19430,7 +19459,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 10,
                 "Defence": 30,
                 "miscUp1": "100% Damage Bonus",
-                "miscUp2": "60% Drop Chance",
+                "miscUp2": "60% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -19472,7 +19501,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 8,
                 "Defence": 40,
                 "miscUp1": "100% Bonus Class Exp",
-                "miscUp2": "75% Drop Chance",
+                "miscUp2": "75% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -19513,7 +19542,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 6,
                 "LUK": 6,
                 "Defence": 25,
-                "miscUp1": "50% Drop Rarity",
+                "miscUp1": "50% Bonus Drop Rate",
                 "miscUp2": "300% Extra Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -19764,7 +19793,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 3,
-                "miscUp1": "+ [3,5,8] % Drop Chance",
+                "miscUp1": "+ [3,5,8] % Drop Rate",
                 "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
                 "Upgrade_Slots_Left": 0
             }),
@@ -20368,7 +20397,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 35,
                 "miscUp1": "35% Mining Efficincy",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Skill": "Mining",
                 "Skill_Power": 62,
@@ -20720,7 +20749,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 8,
                 "Defence": 0,
                 "miscUp1": "12% Chop Efficiency",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Skill": "Choppin",
                 "Skill_Power": 62,
@@ -21028,7 +21057,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "12% Fishin Efficincy",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Skill": "Fishing",
                 "Skill_Power": 85,
@@ -21314,7 +21343,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "12% Catch Efficincy",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 7,
                 "Skill": "Catching",
                 "Skill_Power": 92,
@@ -21322,7 +21351,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CatchingNet13", <ToolItemModel>{
                 "internalName": "CatchingNet13",
-                "displayName": "Wrangler of the Qoxzul",
+                "displayName": "Prehistoric Netting",
                 "sellPrice": 17000,
                 "typeGen": TypeGenEnum.aBugNet,
                 "Type": "Bug Catching Net",
@@ -21636,7 +21665,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "4% All Afk Gain",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Trapping",
                 "Skill_Power": 80,
@@ -21930,7 +21959,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 0,
                 "miscUp1": "4% All Afk Gain",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 6,
                 "Skill": "Worship",
                 "Skill_Power": 70,
@@ -21939,7 +21968,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("WorshipSkull12", <SkullItemModel>{
                 "internalName": "WorshipSkull12",
-                "displayName": "Crystal Skull of Esquire Vnoze",
+                "displayName": "Prehistoric Skull",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.aSkull,
                 "Type": "Worship Skull",
@@ -22675,8 +22704,8 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.cFood,
                 "Type": "Golden Food",
-                "description": "Increases Drop Rarity. Golden foods are never consumed.",
-                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Drop Rarity by [%.", "amount": 8}
+                "description": "Increases Drop Rate. Golden foods are never consumed.",
+                "goldenFoodData": <GoldenFoodDataModel>{"effect": "Increases Drop Rate by [%.", "amount": 8}
             }),
         new BaseItemBase("FoodG14", <GoldenFoodItemModel>{
                 "internalName": "FoodG14",
@@ -23649,6 +23678,14 @@ export const initSpecificItemRepo = () => {
                 "Type": "Event Wish",
                 "description": "Hold down on this candle to make a wish for new pets! Who knows, maybe they'll come true! "
             }),
+        new BaseItemBase("Quest111", <DescItemModel>{
+                "internalName": "Quest111",
+                "displayName": "Lucky Candle",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Wish",
+                "description": "Hold down on this candle to see the Goldrush Lucky Pet winners list! There's a new winner every hour! "
+            }),
         new BaseItemBase("Quest96", <DescItemModel>{
                 "internalName": "Quest96",
                 "displayName": "Aethermoon",
@@ -23800,6 +23837,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Usable",
                 "description": "Hold down to instantly gain 2 Hours of Research progress! That includes Minehead currency too! "
+            }),
+        new BaseItemBase("Quest117", <DescItemModel>{
+                "internalName": "Quest117",
+                "displayName": "Edible Coin",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Hold down to open! Contains a random Goldrush goodie, from gems to limited time Hats and Nametags! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -28184,7 +28229,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 7,
                 "Defence": 0,
-                "miscUp1": "7% Drop Chance",
+                "miscUp1": "7% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28331,7 +28376,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 3,
                 "LUK": 3,
                 "Defence": 3,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28499,7 +28544,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 30,
                 "LUK": 30,
                 "Defence": 0,
-                "miscUp1": "42% Drop Chance",
+                "miscUp1": "42% Drop Rate",
                 "miscUp2": "35% Total Damage",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28562,7 +28607,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 50,
                 "Defence": 0,
-                "miscUp1": "50% Drop Chance",
+                "miscUp1": "50% Drop Rate",
                 "miscUp2": "5% Luk",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28667,7 +28712,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 50,
-                "miscUp1": "777% Drop Chance",
+                "miscUp1": "777% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28730,7 +28775,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 7,
                 "Defence": 0,
-                "miscUp1": "7% Drop Chance",
+                "miscUp1": "7% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -28877,7 +28922,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 3,
                 "LUK": 3,
                 "Defence": 3,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29045,7 +29090,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 30,
                 "LUK": 30,
                 "Defence": 0,
-                "miscUp1": "42% Drop Chance",
+                "miscUp1": "42% Drop Rate",
                 "miscUp2": "35% Total Damage",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29108,7 +29153,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 50,
                 "Defence": 0,
-                "miscUp1": "50% Drop Chance",
+                "miscUp1": "50% Drop Rate",
                 "miscUp2": "5% Luk",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29213,7 +29258,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "777% Drop Chance",
+                "miscUp1": "777% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29276,7 +29321,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 5,
                 "LUK": 40,
                 "Defence": 20,
-                "miscUp1": "40% Drop Chance",
+                "miscUp1": "40% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29424,7 +29469,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 3,
                 "Defence": 3,
                 "miscUp1": "3% All Afk Gain",
-                "miscUp2": "3% Drop Chance",
+                "miscUp2": "3% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -29613,7 +29658,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 30,
                 "miscUp1": "80% All Afk Gain",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -29634,7 +29679,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 10,
                 "Defence": 15,
                 "miscUp1": "25% Drop Rate Multi",
-                "miscUp2": "35% Drop Chance",
+                "miscUp2": "35% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -29654,7 +29699,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 10,
                 "Defence": 15,
-                "miscUp1": "25% Drop Chance",
+                "miscUp1": "25% Drop Rate",
                 "miscUp2": "25% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29675,7 +29720,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "5% Drop Chance",
+                "miscUp1": "5% Drop Rate",
                 "miscUp2": "5% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -29870,6 +29915,69 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag32", <ArmourItemModel>{
+                "internalName": "EquipmentNametag32",
+                "displayName": "Sweet Chocolate Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Xp From Monsters",
+                "miscUp2": "10% Drop Rate",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag33", <ArmourItemModel>{
+                "internalName": "EquipmentNametag33",
+                "displayName": "Pot of Gold Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "30% Drop Rate Multi",
+                "miscUp2": "100% Money",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametag34", <ArmourItemModel>{
+                "internalName": "EquipmentNametag34",
+                "displayName": "Emerald Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Kills In World 6",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentNametagReplica0", <ArmourItemModel>{
                 "internalName": "EquipmentNametagReplica0",
                 "displayName": "Replica Nametag",
@@ -29948,7 +30056,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 5,
                 "LUK": 40,
                 "Defence": 20,
-                "miscUp1": "40% Drop Chance",
+                "miscUp1": "40% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -30096,7 +30204,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 3,
                 "Defence": 3,
                 "miscUp1": "3% All Afk Gain",
-                "miscUp2": "3% Drop Chance",
+                "miscUp2": "3% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -30285,7 +30393,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 0,
                 "Defence": 30,
                 "miscUp1": "80% All Afk Gain",
-                "miscUp2": "10% Drop Chance",
+                "miscUp2": "10% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -30306,7 +30414,7 @@ export const initSpecificItemRepo = () => {
                 "LUK": 10,
                 "Defence": 15,
                 "miscUp1": "25% Drop Rate Multi",
-                "miscUp2": "35% Drop Chance",
+                "miscUp2": "35% Drop Rate",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -30326,7 +30434,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 10,
                 "Defence": 15,
-                "miscUp1": "25% Drop Chance",
+                "miscUp1": "25% Drop Rate",
                 "miscUp2": "25% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -30347,7 +30455,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 0,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "5% Drop Chance",
+                "miscUp1": "5% Drop Rate",
                 "miscUp2": "5% Money",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
@@ -30542,6 +30650,69 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametagReplica32", <ArmourItemModel>{
+                "internalName": "EquipmentNametagReplica32",
+                "displayName": "Sweet Chocolate Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Replica Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Xp From Monsters",
+                "miscUp2": "10% Drop Rate",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametagReplica33", <ArmourItemModel>{
+                "internalName": "EquipmentNametagReplica33",
+                "displayName": "Pot of Gold Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Replica Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "30% Drop Rate Multi",
+                "miscUp2": "100% Money",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametagReplica34", <ArmourItemModel>{
+                "internalName": "EquipmentNametagReplica34",
+                "displayName": "Emerald Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Replica Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "25% Kills In World 6",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentHats31", <ArmourItemModel>{
                 "internalName": "EquipmentHats31",
                 "displayName": "Smitty's Bubble Blowing Hat",
@@ -30578,7 +30749,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 1,
                 "Defence": 0,
-                "miscUp1": "2% Drop Chance",
+                "miscUp1": "2% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -30620,7 +30791,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 1,
                 "Defence": 0,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -30683,7 +30854,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 1,
                 "Defence": 0,
-                "miscUp1": "2% Drop Chance",
+                "miscUp1": "2% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -30746,7 +30917,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 1,
                 "Defence": 0,
-                "miscUp1": "4% Drop Chance",
+                "miscUp1": "4% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -30830,7 +31001,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 1,
                 "Defence": 0,
-                "miscUp1": "3% Drop Chance",
+                "miscUp1": "3% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -31019,7 +31190,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "10% Drop Chance",
+                "miscUp1": "10% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -31166,7 +31337,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "5% Drop Chance",
+                "miscUp1": "5% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -31586,7 +31757,7 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "10% Drop Chance",
+                "miscUp1": "10% Drop Rate",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -31775,7 +31946,91 @@ export const initSpecificItemRepo = () => {
                 "WIS": 1,
                 "LUK": 0,
                 "Defence": 0,
-                "miscUp1": "100% Drop Chance",
+                "miscUp1": "100% Drop Rate",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats128", <ArmourItemModel>{
+                "internalName": "EquipmentHats128",
+                "displayName": "Lovely Top Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "1% Damage Multi",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats129", <ArmourItemModel>{
+                "internalName": "EquipmentHats129",
+                "displayName": "Polkadot Beanie",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 1,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "1% Drop Rate",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats130", <ArmourItemModel>{
+                "internalName": "EquipmentHats130",
+                "displayName": "Leprechaun Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "2% Drop Rate",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats131", <ArmourItemModel>{
+                "internalName": "EquipmentHats131",
+                "displayName": "Lucky Ducky Brim",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 1,
+                "Defence": 0,
+                "miscUp1": "1% Damage Multi",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -31795,7 +32050,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 12,
                     "order": 1
                 },
-                "dropChance": 0.001
+                "dropChance": 0.005
             }),
         new BaseItemBase("CardsA1", <CardItemModel>{
                 "internalName": "CardsA1",
@@ -31811,7 +32066,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 2
                 },
-                "dropChance": 0.001
+                "dropChance": 0.1
             }),
         new BaseItemBase("CardsA2", <CardItemModel>{
                 "internalName": "CardsA2",
@@ -31843,7 +32098,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 7,
                     "order": 4
                 },
-                "dropChance": 0.001
+                "dropChance": 0.03
             }),
         new BaseItemBase("CardsA4", <CardItemModel>{
                 "internalName": "CardsA4",
@@ -31859,7 +32114,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 5
                 },
-                "dropChance": 0.0395
+                "dropChance": 0.025
             }),
         new BaseItemBase("CardsA5", <CardItemModel>{
                 "internalName": "CardsA5",
@@ -31875,7 +32130,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 1,
                     "order": 6
                 },
-                "dropChance": 0.0294
+                "dropChance": 0.023
             }),
         new BaseItemBase("CardsA6", <CardItemModel>{
                 "internalName": "CardsA6",
@@ -31891,7 +32146,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 7
                 },
-                "dropChance": 0.019
+                "dropChance": 0.02
             }),
         new BaseItemBase("CardsA7", <CardItemModel>{
                 "internalName": "CardsA7",
@@ -31907,7 +32162,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 8
                 },
-                "dropChance": 0.0186
+                "dropChance": 0.018
             }),
         new BaseItemBase("CardsA8", <CardItemModel>{
                 "internalName": "CardsA8",
@@ -31923,7 +32178,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 9
                 },
-                "dropChance": 0.018
+                "dropChance": 0.02
             }),
         new BaseItemBase("CardsA9", <CardItemModel>{
                 "internalName": "CardsA9",
@@ -32147,7 +32402,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 1,
                     "order": 6
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.005
             }),
         new BaseItemBase("CardsB7", <CardItemModel>{
                 "internalName": "CardsB7",
@@ -32163,7 +32418,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 7
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.004
             }),
         new BaseItemBase("CardsB8", <CardItemModel>{
                 "internalName": "CardsB8",
@@ -32195,7 +32450,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 8,
                     "order": 9
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsB10", <CardItemModel>{
                 "internalName": "CardsB10",
@@ -32211,7 +32466,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 2,
                     "order": 10
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsB11", <CardItemModel>{
                 "internalName": "CardsB11",
@@ -32227,7 +32482,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 8,
                     "order": 11
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.001
             }),
         new BaseItemBase("CardsB12", <CardItemModel>{
                 "internalName": "CardsB12",
@@ -32848,7 +33103,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 9,
                     "order": 3
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.004
             }),
         new BaseItemBase("CardsE3", <CardItemModel>{
                 "internalName": "CardsE3",
@@ -32864,7 +33119,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 7,
                     "order": 4
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.002
             }),
         new BaseItemBase("CardsE4", <CardItemModel>{
                 "internalName": "CardsE4",
@@ -32912,7 +33167,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 7,
                     "order": 7
                 },
-                "dropChance": 0.0001
+                "dropChance": 0.0003
             }),
         new BaseItemBase("CardsE7", <CardItemModel>{
                 "internalName": "CardsE7",
@@ -35398,7 +35653,7 @@ export const initSpecificItemRepo = () => {
             }),
         new BaseItemBase("CardsY3", <CardItemModel>{
                 "internalName": "CardsY3",
-                "displayName": "Valentslime Card",
+                "displayName": "Valenslime Card",
                 "sellPrice": 1,
                 "typeGen": TypeGenEnum.dCard,
                 "Type": "Card",
@@ -35699,6 +35954,38 @@ export const initSpecificItemRepo = () => {
                     "order": 22
                 },
                 "dropChance": 0
+            }),
+        new BaseItemBase("CardsY22", <CardItemModel>{
+                "internalName": "CardsY22",
+                "displayName": "Luckulyte Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Y22",
+                    "category": "Event",
+                    "perTier": 5,
+                    "effect": "+{% Drop Rate (Passive)",
+                    "bonus": 3,
+                    "order": 23
+                },
+                "dropChance": 1
+            }),
+        new BaseItemBase("CardsY23", <CardItemModel>{
+                "internalName": "CardsY23",
+                "displayName": "Potluck Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Y23",
+                    "category": "Event",
+                    "perTier": 5,
+                    "effect": "+{% Money from Monsters",
+                    "bonus": 4,
+                    "order": 24
+                },
+                "dropChance": 1
             }),
         new BaseItemBase("CardsZ0", <CardItemModel>{
                 "internalName": "CardsZ0",

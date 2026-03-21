@@ -20,7 +20,7 @@ export const initSpelunkingElixirRepo = () => {
             }),
         new SpelunkingElixirBase(3, <SpelunkingElixirModel>{
                 "index": 3,
-                "description": "Boosts your amber gain by +{% per stamina used during the delve @ at the time this elixir was used. @ (Effect persists for the entire Delve)"
+                "description": "Boosts your amber gain by +{% per 10 stamina used during the delve @ at the time this elixir was used. @ (Effect persists for the entire Delve)"
             }),
         new SpelunkingElixirBase(4, <SpelunkingElixirModel>{
                 "index": 4,

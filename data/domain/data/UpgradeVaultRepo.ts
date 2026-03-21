@@ -53,7 +53,7 @@ export const initUpgradeVaultRepo = () => {
                 "base_cost": 15,
                 "scaling_factor": 1.2,
                 "x1": 0,
-                "unlock_req": 49,
+                "unlock_req": 42,
                 "value": 2,
                 "max_level": 500,
                 "description_line1": "+{% Class EXP Gain.",
@@ -67,7 +67,7 @@ export const initUpgradeVaultRepo = () => {
                 "base_cost": 25,
                 "scaling_factor": 1.15,
                 "x1": 0,
-                "unlock_req": 69,
+                "unlock_req": 49,
                 "value": 1,
                 "max_level": 500,
                 "description_line1": "+{ Accuracy. Useful when you start missing!",
@@ -172,7 +172,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "Craft Bags at the anvil to boost this way more!",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": "This bonus INCREASES for every ore you mine! It also counts ores mined from any player, so go make a 2nd player!"
+                "tooltip_text": "Seriously, craft the Max Carry Bags at the anvil whenever you can! Being able to carry 1000s of items in each slot is baller!"
             }),
         new UpgradeVaultBase(12, <UpgradeVaultModel>{
                 "name": "Baby on Board 製",
@@ -256,7 +256,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "Go do the mining on your 2nd player!",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "This bonus INCREASES for every ore you mine! It also counts ores mined from any player, so go make a 2nd player!"
             }),
         new UpgradeVaultBase(18, <UpgradeVaultModel>{
                 "name": "Drops for Days",
@@ -266,8 +266,8 @@ export const initUpgradeVaultRepo = () => {
                 "unlock_req": 450,
                 "value": 1,
                 "max_level": 50,
-                "description_line1": "+{% Drop Rarity, also known by the",
-                "description_line2": "IdleOn community as Drop Rate, or DR",
+                "description_line1": "+{% Drop Rate, also known by the",
+                "description_line2": "IdleOn community as DR",
                 "has_tooltip": false,
                 "x2": "0",
                 "tooltip_text": undefined
@@ -494,7 +494,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "Total bonus:+$% Coins",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "Talk to Grasslands Gary in World 1 town, then UNLOCKS in the top right. Spend trophies from completing tasks to get new Anvil Recipes!"
             }),
         new UpgradeVaultBase(35, <UpgradeVaultModel>{
                 "name": "Schoolin' the Fish$ 製",
@@ -508,7 +508,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "Total Bonus:+$% Class EXP",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "You don't know how to fish? World 2 my friend, left of town can't miss it!"
             }),
         new UpgradeVaultBase(36, <UpgradeVaultModel>{
                 "name": "Straight to Storage",
@@ -536,7 +536,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "an Alchemy Bubble. Total Bonus:+$% Coins",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "This bonus only counts the first 100 Levels of each bubble. Sorry endgamers, those big ahh bubbles you got dont count!"
             }),
         new UpgradeVaultBase(38, <UpgradeVaultModel>{
                 "name": "Drip Drip Drip",
@@ -606,7 +606,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "Find vials in the 3rd tab at the top of ALCHEMY!"
             }),
         new UpgradeVaultBase(43, <UpgradeVaultModel>{
                 "name": "Active Murdering",
@@ -634,7 +634,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "PASSIVE, so you never need to equip them again!",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "These are the first of MANY cards you will turn passive! You'll find more ways in the RIFT in World 4!"
             }),
         new UpgradeVaultBase(45, <UpgradeVaultModel>{
                 "name": "Go Go Secret Kangaroo Mouse 製",
@@ -648,7 +648,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "Poppy the Kangaroo Mouse is over at the SECRET oasis, buy the Map from the bottom of the World 2 town shop to go find them!!!"
             }),
         new UpgradeVaultBase(46, <UpgradeVaultModel>{
                 "name": "All Armoured Up",
@@ -690,7 +690,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "$% Build SPD",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "Construction is a World 3 feature. Sheepies are also World 3. Just tellin' ya incase you're still in World 2!"
             }),
         new UpgradeVaultBase(49, <UpgradeVaultModel>{
                 "name": "Quest KAPOW! 製",
@@ -704,7 +704,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "You'll see this star talent on Page 1.",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "This star talent tracks how many different quests you've done on ANY player. No need to do the same quest twice!!!"
             }),
         new UpgradeVaultBase(50, <UpgradeVaultModel>{
                 "name": "Critters 'n Souls 製",
@@ -718,7 +718,7 @@ export const initUpgradeVaultRepo = () => {
                 "description_line2": "",
                 "has_tooltip": true,
                 "x2": "0",
-                "tooltip_text": undefined
+                "tooltip_text": "These will become a LOT easier to collect after building the Automation Arm in Construction! A LOT less running around!"
             }),
         new UpgradeVaultBase(51, <UpgradeVaultModel>{
                 "name": "Slight Do-Over",
@@ -865,11 +865,403 @@ export const initUpgradeVaultRepo = () => {
                 "base_cost": 1.5e+09,
                 "scaling_factor": 2,
                 "x1": 0,
-                "unlock_req": 3500,
+                "unlock_req": 3400,
                 "value": 1,
                 "max_level": 50,
                 "description_line1": "}x higher bonuses from all the Vault Upgrades",
                 "description_line2": "above with the Green Highlight!!!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(62, <UpgradeVaultModel>{
+                "name": "Speedy Sailing",
+                "base_cost": 1e+10,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 3800,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Faster Sailing speed for all boats!",
+                "description_line2": "Faster trips mean more CHESTS!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(63, <UpgradeVaultModel>{
+                "name": "Artifact Find Chance",
+                "base_cost": 2.5e+10,
+                "scaling_factor": 1.2,
+                "x1": 0,
+                "unlock_req": 3900,
+                "value": 1,
+                "max_level": 250,
+                "description_line1": "+{% higher chance of finding Artifacts, which",
+                "description_line2": "is the entire point of Sailing!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(64, <UpgradeVaultModel>{
+                "name": "Skulltrick",
+                "base_cost": 4.5e+10,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 4050,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "All monster kills count for +{% more for",
+                "description_line2": "opening Portals to the next map!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(65, <UpgradeVaultModel>{
+                "name": "Go Go Bubba the Seal",
+                "base_cost": 9e+10,
+                "scaling_factor": 1.23,
+                "x1": 0,
+                "unlock_req": 4100,
+                "value": 10,
+                "max_level": 500,
+                "description_line1": "}x Meat Slices for Bubba the Seal!",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(66, <UpgradeVaultModel>{
+                "name": "Ocean Knowledge",
+                "base_cost": 1.5e+11,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 4300,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Sailing EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(67, <UpgradeVaultModel>{
+                "name": "Sailing Loot",
+                "base_cost": 3e+11,
+                "scaling_factor": 1.25,
+                "x1": 0,
+                "unlock_req": 4400,
+                "value": 2,
+                "max_level": 200,
+                "description_line1": "Find +{% more treasure when opening Chests!",
+                "description_line2": "This loot is spent upgrading Sailing Boats.",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(68, <UpgradeVaultModel>{
+                "name": "Mega Bits",
+                "base_cost": 5.5e+11,
+                "scaling_factor": 1.22,
+                "x1": 0,
+                "unlock_req": 4500,
+                "value": 5,
+                "max_level": 300,
+                "description_line1": "Gain }x more Bits! This is the currency you",
+                "description_line2": "use for all upgrades within Gaming.",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(69, <UpgradeVaultModel>{
+                "name": "Gamer Knowledge",
+                "base_cost": 8.5e+11,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 4650,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Gaming EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(70, <UpgradeVaultModel>{
+                "name": "Collection Cashout",
+                "base_cost": 1.2e+12,
+                "scaling_factor": 4,
+                "x1": 0,
+                "unlock_req": 4750,
+                "value": 1,
+                "max_level": 20,
+                "description_line1": "Monsters drop +{% more coins for every card",
+                "description_line2": "You've found. Total Bonus:+$% Coins",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(71, <UpgradeVaultModel>{
+                "name": "Divinity Points",
+                "base_cost": 4.6e+12,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 4800,
+                "value": 2,
+                "max_level": 100,
+                "description_line1": "Gain +{% more Points in Divinity, used to",
+                "description_line2": "unlock new Divine gods to link to!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(72, <UpgradeVaultModel>{
+                "name": "Divine Knowledge",
+                "base_cost": 7.5e+12,
+                "scaling_factor": 1.35,
+                "x1": 0,
+                "unlock_req": 4900,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Divinity EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(73, <UpgradeVaultModel>{
+                "name": "Smarter Villagers",
+                "base_cost": 9e+12,
+                "scaling_factor": 3.15,
+                "x1": 0,
+                "unlock_req": 5000,
+                "value": 1,
+                "max_level": 50,
+                "description_line1": "+{% EXP gain for",
+                "description_line2": "all Villagers!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(74, <UpgradeVaultModel>{
+                "name": "Super Slab",
+                "base_cost": 1.5e+13,
+                "scaling_factor": 15,
+                "x1": 0,
+                "unlock_req": 5100,
+                "value": 1,
+                "max_level": 20,
+                "description_line1": "All Slab bonuses are }x larger. You can see",
+                "description_line2": "these at the top of your Slab in W5 town.",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(75, <UpgradeVaultModel>{
+                "name": "Better Captains 製",
+                "base_cost": 2.5e+13,
+                "scaling_factor": 1.35,
+                "x1": 0,
+                "unlock_req": 5200,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "You Sailing Captains gain +{% more EXP from",
+                "description_line2": "each trip they make!",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "Captains gain EXP at the end of each sailing voyage, based on how far the trip was. Leveling them up increases their bonuses, as shown in the CREW tab."
+            }),
+        new UpgradeVaultBase(76, <UpgradeVaultModel>{
+                "name": "Big Blessings 製",
+                "base_cost": 4.5e+13,
+                "scaling_factor": 3.5,
+                "x1": 0,
+                "unlock_req": 5300,
+                "value": 1,
+                "max_level": 30,
+                "description_line1": "All Divinity Blessings have a +{ higher",
+                "description_line2": "Max LV!",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "Divinity Blessings are the passive, permanent upgrades that each Divinity has. You'll see them underneath the MINOR bonus description of each Divinity."
+            }),
+        new UpgradeVaultBase(77, <UpgradeVaultModel>{
+                "name": "Farming Knowledge",
+                "base_cost": 1e+14,
+                "scaling_factor": 1.33,
+                "x1": 0,
+                "unlock_req": 5700,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Farming EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(78, <UpgradeVaultModel>{
+                "name": "Croppius Evolvius 製",
+                "base_cost": 2.2e+14,
+                "scaling_factor": 1.23,
+                "x1": 0,
+                "unlock_req": 5800,
+                "value": 8,
+                "max_level": 250,
+                "description_line1": "}x higher Evo Chance for all Farming crops!",
+                "description_line2": "",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "Crop Evo chance is the chance that a crop evolves to the next type. You want this to happen so you can collect more and more crop types, for bigger bonuses!"
+            }),
+        new UpgradeVaultBase(79, <UpgradeVaultModel>{
+                "name": "Properly Funded Research 製",
+                "base_cost": 4.5e+14,
+                "scaling_factor": 40,
+                "x1": 0,
+                "unlock_req": 5900,
+                "value": 1,
+                "max_level": 10,
+                "description_line1": "All Crop Depot bonuses are +{% higher!",
+                "description_line2": "",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "The Crop Depot bonuses can be found by clicking on the Scientist Blobulyte. He's the one with the giant pencil, left of the Farmer's Market!"
+            }),
+        new UpgradeVaultBase(80, <UpgradeVaultModel>{
+                "name": "Raw Damage",
+                "base_cost": 2e+15,
+                "scaling_factor": 1.5,
+                "x1": 0,
+                "unlock_req": 6000,
+                "value": 2,
+                "max_level": 500,
+                "description_line1": "+{% Damage for all players.",
+                "description_line2": "This is indeed additive, don't get too excited.",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(81, <UpgradeVaultModel>{
+                "name": "Finders Keepers",
+                "base_cost": 6.5e+15,
+                "scaling_factor": 1.22,
+                "x1": 0,
+                "unlock_req": 6200,
+                "value": 1,
+                "max_level": 250,
+                "description_line1": "+{% more Jade gained from Sneaking!",
+                "description_line2": "Use these to upgrade your Ninja Twins!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(82, <UpgradeVaultModel>{
+                "name": "Sneaking Knowledge",
+                "base_cost": 1.5e+16,
+                "scaling_factor": 1.3,
+                "x1": 0,
+                "unlock_req": 6400,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Seanking EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(83, <UpgradeVaultModel>{
+                "name": "White Essentials 製",
+                "base_cost": 6.5e+16,
+                "scaling_factor": 1.2,
+                "x1": 0,
+                "unlock_req": 6500,
+                "value": 1,
+                "max_level": 200,
+                "description_line1": "Generate +{% more White Essence per hour",
+                "description_line2": "to spend on Summoning upgrades!",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "You can find the Summoning Upgrades by clicking on the floating White Stone. It's on the left side of the World 6 town map!"
+            }),
+        new UpgradeVaultBase(84, <UpgradeVaultModel>{
+                "name": "Summoning Knowledge",
+                "base_cost": 3e+17,
+                "scaling_factor": 1.3,
+                "x1": 0,
+                "unlock_req": 6750,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "+{% Summoning EXP Gain",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(85, <UpgradeVaultModel>{
+                "name": "Bigger Better Beans 製",
+                "base_cost": 2.5e+18,
+                "scaling_factor": 2.5,
+                "x1": 0,
+                "unlock_req": 6900,
+                "value": 2,
+                "max_level": 50,
+                "description_line1": "Get +{% more Magic Beans to spend at the",
+                "description_line2": "Night Market!",
+                "has_tooltip": true,
+                "x2": "0",
+                "tooltip_text": "Get Magic Beans by buying the 'Crop Transfer Ticket' from W6 Town Shop, and dropping it on Legumulyte found in the Mama Troll map deep in the Bamboo Forest of World 6!"
+            }),
+        new UpgradeVaultBase(86, <UpgradeVaultModel>{
+                "name": "24 Karat Foods",
+                "base_cost": 4e+19,
+                "scaling_factor": 4,
+                "x1": 0,
+                "unlock_req": 7000,
+                "value": 1,
+                "max_level": 50,
+                "description_line1": "Golden Food bonuses are +{% bigger. This is",
+                "description_line2": "extra powerful thanks to the Beanstalk!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(87, <UpgradeVaultModel>{
+                "name": "Rest of the Essentials",
+                "base_cost": 2e+20,
+                "scaling_factor": 1.2,
+                "x1": 0,
+                "unlock_req": 7100,
+                "value": 1,
+                "max_level": 200,
+                "description_line1": "Generate +{% more of the other Essence!",
+                "description_line2": "",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(88, <UpgradeVaultModel>{
+                "name": "Topheavy Charms",
+                "base_cost": 5e+21,
+                "scaling_factor": 1.3,
+                "x1": 0,
+                "unlock_req": 7300,
+                "value": 1,
+                "max_level": 100,
+                "description_line1": "Boost the max possible LV by +{ for all",
+                "description_line2": "Sneaking Charms you find!",
+                "has_tooltip": false,
+                "x2": "0",
+                "tooltip_text": undefined
+            }),
+        new UpgradeVaultBase(89, <UpgradeVaultModel>{
+                "name": "Vault Mastery III",
+                "base_cost": 1.5e+22,
+                "scaling_factor": 3.25,
+                "x1": 0,
+                "unlock_req": 7500,
+                "value": 1,
+                "max_level": 50,
+                "description_line1": "}x higher bonuses from all the Vault Upgrades",
+                "description_line2": "above with the Red Highlight!!!",
                 "has_tooltip": false,
                 "x2": "0",
                 "tooltip_text": undefined

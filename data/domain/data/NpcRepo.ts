@@ -24,9 +24,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 1.31,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Perez",
                     "notes": "[[TP Pete]] is found in [[Worlds#S2 - Rats Nest|Rat's Nest]], the second zone of the sewers$$NEWLINE$$$$NEWLINE$$You must complete all three of his quests and talk to him after reaching Class Level 60 in order to receive the {{CraftReq|TP Pete Token}}, which falls on the ground.{{Sources/datarow|Item=TP Pete Token}}$$NEWLINE$$$$NEWLINE$$Type 'More like Poopy Pete' while standing next to him to receive {{Talentbook|Toilet Paper Postage}}."
                 },
                 "quests": {
@@ -178,7 +175,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Well catch you later when you're higher level! <br> What? Oh did I say level 60 before? I meant 160... thousand. Yea come back at Lv. 160000 and I'll probably have a new quest by then. <br> Return at Class Lv. 160000",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -189,9 +186,6 @@ export const initNpcRepo = () => {
                     "world": "Tutorial",
                     "noQuest": 1,
                     "type": "Secret",
-                    "birthWeight": 1.57,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Rodriguez",
                     "notes": "The [[Secretkeeper]] is a [[Secrets|Secret]] character, only found in the tutorial area."
                 },
                 "quests": {
@@ -255,9 +249,6 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.01,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Vanderpoel",
                     "notes": " "
                 },
                 "quests": {},
@@ -265,7 +256,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Wut wuuuut!",
-                        "NextIndex": 0,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -276,9 +267,6 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.37,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Reardon",
                     "notes": " "
                 },
                 "quests": {},
@@ -346,7 +334,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "So is that a deal? Type a name in and create me if you agree!",
-                        "NextIndex": 11,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -357,9 +345,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 4.51,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Gonzalez",
                     "notes": "[[Sprout]] is found in [[Worlds#T1 - The Base Of The Bark|The Base of the Bark]], the first zone of the tree, located at the top right of the area.$$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Sproutinald Token}}."
                 },
                 "quests": {
@@ -534,7 +519,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hahaha I sure do love bobbin' up and down!! It's a flower thing you wouldn't get it!!",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -545,9 +530,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 7.1,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "ilson",
                     "notes": "[[Town Marble]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top section of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player is awarded with the ability to deposit [[File:Power_Statue.png|36px]] [[Statues]] for character-specific upgrades."
                 },
                 "quests": {
@@ -588,7 +570,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Aha! Now all shall bear witness to ultimate perfection! Please do return with any other statues you may come across on your journey so that they too may bask in my greatness!",
-                        "NextIndex": 4,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -596,12 +578,9 @@ export const initNpcRepo = () => {
         new NpcBase("Obol Altar", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Encroaching Forest Villas, YumYum Grotto",
-                    "world": "Blunder Hills, Yum-Yum Desert",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 9.07,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "ee",
                     "notes": "The [[Obol Altar]] appears in both [[Worlds#F2 - Encroaching Forest Villas|Encroaching Forest Villas]] and [[Worlds#D0 - YumYum Grotto|YumYum Grotto]]."
                 },
                 "quests": {
@@ -636,7 +615,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "MROWW! 'The cat jumps off in fear of the pickle. What a silly cat getting scared of a little pickl-- OH MY GOD THE PICKLE HAS EYEBALLS AAAAAH KILL IT KILL IT!!!'",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -647,9 +626,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 9.32,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Thompson",
                     "notes": "'''Requires Lv. 5 [[Choppin]] on your first character for the NPC to appear.'''. The [[Woodsman]] is found in [[Worlds#G2 - Spore Meadows|Spore Meadows]], the first zone to the right of the starting town, located next to an oak tree with a stump next to him.$$NEWLINE$$$$NEWLINE$$His quests focus on improving the player's capabilities in the [[File:Choppin Skill Icon.png]] [[Choppin]] Skill. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Woodsman Token}}."
                 },
                 "quests": {
@@ -805,7 +781,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hahahaha did I getcha again my boy? Ah don't take it too hard you don't need to pretend that I didn't fool ya we all know I did #",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -816,9 +792,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 12,
                     "type": "",
-                    "birthWeight": 1.54,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Garcia",
                     "notes": "[[Scripticus]] is the first NPC you interact with after the tutorial, located to the right in the [[Worlds#G1 - Blunder Hills|starting town]].$$NEWLINE$$$$NEWLINE$$He introduces the player to the basics of completing quests, fighting monsters, [[Smithing]], equipping gear, and creating multiple characters. His questline guides the player through most of World 1 leading to the [[Amarok]] boss fight."
                 },
                 "quests": {
@@ -1399,7 +1372,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Wow I never thought someone would care enough about the first world to do everything! It feels like just yesterday I found you unconscious at 1 hp and took some of your money... to think I'm now giving you the highest honor in the land! You're one heckin' sick gamer wear this trophy with pride!",
-                        "NextIndex": 55,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -1410,9 +1383,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 9.31,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Thomas",
                     "notes": "[[Krunk]] is found in [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], the second zone of the mines, located at the bottom of the area.$$NEWLINE$$$$NEWLINE$$Finishing his questline will unlock a shortcut to the gold ore within [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], but only for characters that have completed the questline.$$NEWLINE$$$$NEWLINE$$You must complete all three of his quests and talk to him after reaching [[Mining]] Level 25 in order to receive the {{CraftReq|Krunk Token}}, which falls on the ground. He does say Level 33 at first but then changes his mind and gives it to you early.{{Sources/datarow|Item=Krunk Token}}"
                 },
                 "quests": {
@@ -1574,7 +1544,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You can have my token early if it means you'll get off my back for a while but do return when I am prepared for my final plan!",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -1585,9 +1555,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 6.45,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Thomas",
                     "notes": "[[Glumlee]] is located in the [[Worlds#M1 - Tunnels Entrance|Tunnels Entrance]] to the left of the [[Worlds#G1 - Blunder Hills|starting town]].$$NEWLINE$$$$NEWLINE$$His quests focus on introducing players to the [[File:Mining Skill Icon.png]] [[Mining]] Skill and smelting ores in the [[Forge]] to earn the [[Mining Certificate]] needed to complete the quest 'Get Glumlee's Certification' given by [[Scripticus]].$$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Glumlee Token}}."
                 },
                 "quests": {
@@ -1830,7 +1797,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Uh thanks... anyway I'll have quests later on that increase that Talent's max level above just 40 but those will be added in later.",
-                        "NextIndex": 26,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -1841,9 +1808,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 12,
                     "type": "",
-                    "birthWeight": 3.7,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Jones",
                     "notes": "The [[Picnic Stowaway]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom left of the area.$$NEWLINE$$$$NEWLINE$$After completing his first 3 quests, his following quests will be part of a quest chain that is limited by a daily reset. You can do the full daily questline once per character per reset, but whether you complete the full questline or not it will start over at the first quest in the chain (The Most Important Meal of the Day) after your daily reset.$$NEWLINE$$$$NEWLINE$$The Picnic Stowaway daily questline is the source of the [[Peanut]] Recipe, and completing the third quest in the chain is a possible daily [[Tasks#Blunder Hills|Task]]. $$NEWLINE$$$$NEWLINE$$Completing the full daily questline in a single day awards you one {{CraftReq|Picnic Token}}. In order to obtain the [[King of Food]] trophy, you must complete the full daily questline 30 times."
                 },
                 "quests": {
@@ -2357,7 +2321,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "King of food! King of food! And coming from a blobulyte like myself that means something! But hey that shouldn't stop you from doin' stuff for me eh? Hahaha I'll be here tomorrow if you wanna help out again.",
-                        "NextIndex": 49,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -2368,9 +2332,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 6.82,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Johnson",
                     "notes": "[[Hamish]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the bottom of the area.$$NEWLINE$$$$NEWLINE$$He primarily focuses on account-wide items only one character has to unlock for all to benefit from, the only exception is a {{CraftReq|Talent Point Reset Potion}}."
                 },
                 "quests": {
@@ -2503,7 +2464,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Idk what to do with all this sludge! It's very cool looking at least.",
-                        "NextIndex": 13,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -2514,9 +2475,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "",
-                    "birthWeight": 1.56,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "oo",
                     "notes": "[[Grasslands Gary]] is the [[Tasks|Taskmaster]] of Blunder Hills. You can find him in [[Worlds#G1 - Blunder Hills|Blunder Hills town]].$$NEWLINE$$$$NEWLINE$$Once you've reached level 20, talk to him to unlock [[Tasks/Blunder Hills|World 1 Tasks]]."
                 },
                 "quests": {},
@@ -2554,7 +2512,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I'll go ahead and open up the first set of Tasks. You're gonna have to see my friends to get the other sets. They're located in the other towns.",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -2565,9 +2523,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 1.09,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Jackson",
                     "notes": "[[Mr Pigibank]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located at the top section of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player is awarded with the ability to deposit and upgrade [[File:Longsword_Stamp.png|36px]] [[Stamps]], as well as purchase  [[File:Bribes_Icon.png|36px]] [[Stamps#Bribes|Bribes]] for account-wide bonuses.{{Sources/datarow|Item=Sword Stamp}}{{Sources/datarow|Item=Heart Stamp}}{{Sources/datarow|Item=Pickaxe Stamp}}{{Sources/datarow|Item=Hatchet Stamp}}"
                 },
                 "quests": {
@@ -2657,7 +2612,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Come on over I'll give you access to your stamps! No need for that prequest nonsense OINK!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -2668,9 +2623,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 2.29,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "opez",
                     "notes": "[[Promotheus]] is found in [[Worlds#G4 - Valley Of The Beans|Valley of the Beans]], the third zone of Grasslands, located in the middle left side of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his first quest the player is given a quest allowing them to choose [[Classes#Warrior|one of three main classes: Warrior, Archer or Mage]].$$NEWLINE$$$$NEWLINE$$He also gives hints on how to find [[Baba Yaga]]."
                 },
                 "quests": {
@@ -2895,7 +2847,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Please clear up 2 spaces in your item bag!",
-                        "NextIndex": 10,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -2906,9 +2858,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 3,
                     "type": "Secret",
-                    "birthWeight": 6.97,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Rodriguez",
                     "notes": "[[Bushlyte]] is hidden within the [[Worlds#J3 - Vegetable Patch|Vegetable Patch]]. See [[Secrets]] for more details."
                 },
                 "quests": {
@@ -3051,7 +3000,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "DROP STONE PEANUT AT MARKED ROCK IN GRASSY LANDS.... YUMMY OFFERING FOR ROCKLYTE FRIEND! HE WILL LET U JOIN SECRET GROUP AND BECOME BEST BEGINNER!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -3062,9 +3011,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 3,
                     "type": "Secret",
-                    "birthWeight": 3.32,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Ramirez",
                     "notes": "[[Rocklyte]] is hidden within [[Worlds#G3 - Froggy Fields|Froggy Fields]]. In order to find him, you must complete [[Bushlyte|Bushlyte's]] quests. See [[Secrets]] for more details."
                 },
                 "quests": {
@@ -3181,7 +3127,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "WELCOME TO CLUB! BEGINNER FOR LIFE!!! BUT U CAN STILL BE MORE BEGINNEREST LONG WAY TO GO! DESERT MEMBER KNOW MORE THAN ME GO FIND THEM!",
-                        "NextIndex": 10,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -3192,9 +3138,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "Secret",
-                    "birthWeight": 2.88,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Hancock",
                     "notes": "[[Cactolyte]] is hidden within Djonnuttown. See [[Secrets]] for more details."
                 },
                 "quests": {
@@ -3380,7 +3323,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "OH WELL AT LEAST PETE WAS TASTY! OH HEY YOURE A MAESTRO NOW COOL!!!",
-                        "NextIndex": 17,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -3391,9 +3334,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 6,
                     "type": "",
-                    "birthWeight": 2.73,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "ilson",
                     "notes": "[[Stiltzcho]] is found in [[Worlds#J1 - Jungle Perimeter|Jungle Perimeter]], the first zone of the Jungle, located to the left of the area. His quests can be considered a DPS and skill check for progressing [[Scripticus]]' questline. Dropping a [[Grass Leaf]] on him is a possible daily [[Tasks#Blunder Hills|Task]]."
                 },
                 "quests": {
@@ -3725,7 +3665,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I think I will take some time alone having rest when it is needed is NEVER a waste of time even for a leaf like me!",
-                        "NextIndex": 35,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -3736,9 +3676,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 5,
                     "type": "",
-                    "birthWeight": 7.6,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Taylor",
                     "notes": "[[Funguy]] is found in [[Worlds#J2 - Winding Willows|Winding Willows]], the second zone of the Jungle, located in the bottom left of the area. Saying 'hi' to him is a possible daily [[Tasks#Blunder Hills|Task]].$$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Funguy Token}}."
                 },
                 "quests": {
@@ -3939,7 +3876,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hey thanks good stuff back there eh? I'll see you on your next character party never truly ends hahaha!",
-                        "NextIndex": 16,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -3950,9 +3887,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 6.35,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Taylor",
                     "notes": "[[Tiki Chief]] is found in [[Worlds#F2 - Encroaching Forest Villas|Encroaching Forest Villas]], the second zone of the Forest, located at the top right of the area. One of the only sources for the [[File:Kachow_Statue.png|36px]] [[Kachow Statue]]. $$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Tiki Chief Token}}."
                 },
                 "quests": {
@@ -4143,7 +4077,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I'm still thinking of other schemes to bring in more visitors come back later and I may have something for you to do.",
-                        "NextIndex": 17,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4154,9 +4088,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 4.83,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Hernandez",
                     "notes": "[[Dog Bone (NPC)|Dog Bone]] is found in [[Worlds#F2 - Encroaching Forest Villas|Encroaching Forest Villas]], the second zone of the Forest, located at the top right of the area.$$NEWLINE$$$$NEWLINE$$Upon completing his first quest the player is awarded with the ability to talk to him once every day to obtain a {{CraftReq|Forest Villa Key}}. He will hold keys for you for up to 3 days. Having more characters complete his first quest provides more daily keys, and one character can collect all of your daily keys at once.$$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Dog Bone Token}}."
                 },
                 "quests": {
@@ -4295,7 +4226,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Keys... I think I gooOOooot some oooOOooon me somewhere lemme check.",
-                        "NextIndex": 16,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4306,9 +4237,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 8.43,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "ilson",
                     "notes": "[[Builder Bird]] is found in the [[Worlds#G1 - Blunder Hills|starting town]], located in the top right section of the area. $$NEWLINE$$$$NEWLINE$$Upon completing his quest the player gains access to the portal to [[Worlds#D0 - YumYum Grotto|World 2 - Yum Yum Desert]].$$NEWLINE$$$$NEWLINE$$This little guy also (for a limited time only) gave us the [[Real Civil Engineer Helmet]].$$NEWLINE$$$$NEWLINE$$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
                 },
                 "quests": {
@@ -4347,7 +4275,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Kacaw! Kacaw! <br> 'The bird looks very happy with itself after successfully restoring the portal.'",
-                        "NextIndex": 2,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4358,9 +4286,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": -1,
-                    "starSign": "",
-                    "mothersMaidenName": "",
                     "notes": "[[Constructor Crow]] is found in the top left of [[Worlds#D0 - YumYum Grotto|YumYum Grotto]], next to the portal to World 3.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player gains access to the portal to World 3 - Frostbite Tundra.$$NEWLINE$$$$NEWLINE$$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
                 },
                 "quests": {
@@ -4401,7 +4326,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Kacaw! Kacaw! <br> 'The bird looks very happy with itself after successfully restoring the portal.'",
-                        "NextIndex": 3,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4412,9 +4337,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 3.74,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "ee",
                     "notes": "[[Papua Piggea]] is found in [[Worlds#F3 - Tucked Away|Tucked Away]], the third zone of the Forest, located at the bottom left of the area.$$NEWLINE$$$$NEWLINE$$His first two quests involve collecting Stamps that only drop while the relevant quests are active.$$NEWLINE$$$$NEWLINE$$His final quest awards the {{CraftReq|Papua Piggea Token}}."
                 },
                 "quests": {
@@ -4592,7 +4514,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Snagglu wingo bada chango reagg eEECHH-- thank you noble adventurer. I eagerly await the next time that our paths mi-- ouggo blarf wulanu! 'The pig points to his throat showing embarassment for reusing his opening joke and for choking.",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4603,9 +4525,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 9.09,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Harris",
                     "notes": "[[Desert Davey]] is the [[Tasks|Taskmaster]] of Yum-Yum Desert. You can find him in [[Worlds#D0 - YumYum Grotto|YumYum Grotto]].$$NEWLINE$$$$NEWLINE$$Once you've reached level 35, you can complete his quest to unlock [[Tasks/Yum Yum Desert|World 2 Tasks]]."
                 },
                 "quests": {
@@ -4667,7 +4586,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Huh these are definitely the coolest items. You sure are one cool gamer ",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4678,9 +4597,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 7.84,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Martinez",
                     "notes": "[[Mutton]] is found in [[Worlds#M2 - Freefall Caverns|Freefall Caverns]], the second zone of the mines, located in the middle of the area.$$NEWLINE$$$$NEWLINE$$His quests award stamps and other account-wide items only one character has to unlock for all to benefit from."
                 },
                 "quests": {
@@ -4847,7 +4763,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh well you'll probably help me get a following again on another character. Cya then!",
-                        "NextIndex": 15,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -4858,9 +4774,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 5.14,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "illiams",
                     "notes": "[[Speccius]] is found in [[Worlds#D4 - Dessert Dunes|Dessert Dunes]].$$NEWLINE$$$$NEWLINE$$Complete his quests to choose a [[Classes|subclass]] for your Mage, Archer or Warrior. After completing his quests, he drops down the rope to access the [[Choppin|Palm Tree]] and the portal to [[Worlds#D5 - The Grandioso Canyon|The Grandioso Canyon]]."
                 },
                 "quests": {
@@ -5004,7 +4917,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "If youre reading this I made an oopsie haha",
-                        "NextIndex": 11,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5015,9 +4928,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 6.75,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "ee",
                     "notes": "[[Fishpaste97]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$$NEWLINE$$$$NEWLINE$$Like other piggy NPCs, his quests award stamps. Although he's found in a Fishing zone, his first quest requires you to work on your [[File:Catching Skill Icon.png|35px]] [[Catching]] Skill."
                 },
                 "quests": {
@@ -5125,7 +5035,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Shh I'm playing the minigame!!! Triple whale here I come!",
-                        "NextIndex": 11,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5136,9 +5046,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 1.67,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Taylor",
                     "notes": "[[Scubidew]] is found in [[Worlds#F2- Faraway Piers|Faraway Piers]].$$NEWLINE$$$$NEWLINE$$Use the Fishing Rack to equip the accessories you earn from Scubidew's quests."
                 },
                 "quests": {
@@ -5287,7 +5194,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Thank you so much for the fish it's perfect! A perfect fish from a perfect ocean caught by a perfect player! Have a wonderful day friend I'll see you later! <br> Return at Lv. 200",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5298,9 +5205,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 8.71,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Gonzalez",
                     "notes": "[[Whattso]] is found in [[Worlds#F1 - Salty Shores|Salty Shores]], to the left of town.$$NEWLINE$$$$NEWLINE$$He gives you some starter quests, to introduce you to the basics of [[File:Fishing Skill Icon.png]] [[Fishing]] and the fishing minigame. Use the Fishing Rack to equip the accessories you earn from Whattso's quests."
                 },
                 "quests": {
@@ -5438,7 +5342,7 @@ export const initNpcRepo = () => {
                         "NextIndex": 10,
                         "Name": ""
                     },
-                    <DialogueLineModel>{"Type": QuestTypeEnum.NoQuest, "DialogueText": "D:", "NextIndex": 12, "Name": ""}
+                    <DialogueLineModel>{"Type": QuestTypeEnum.NoQuest, "DialogueText": "D:", "NextIndex": -1, "Name": ""}
                 ]
             }),
         new NpcBase("Postboy Pablob", <NpcModel>{
@@ -5447,9 +5351,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 1.2,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Clark",
                     "notes": "[[Postboy Pablob]] is found in [[Worlds#D0 - YumYum Grotto|YumYum Grotto]].$$NEWLINE$$$$NEWLINE$$Complete his quest to unlock the [[Post Office]]."
                 },
                 "quests": {
@@ -5518,7 +5419,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "...get it? Post? Since I'm the postboy...?     <br> Ah come on now don't try to hide your laughter I can tell by the look on your face you found it funny! Anyway then get to filling those orders!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5529,9 +5430,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 5.09,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Sanchez",
                     "notes": "[[Bandit Bob]] is found in [[Worlds#D3 - Bandit Bob's Hideout|Bandit Bob's Hideout]]. His quests require you to open up the 2nd [[Smithing]] tab, unlock recipes from [[Tasks]], and open the [[Post Office]].{{Sources/datarow|Item=Bandit Bob Card|SpecialText=Survive first contact.}}"
                 },
                 "quests": {
@@ -5749,7 +5647,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I still can't believe I don't got my own dungeon no more... man if I ever get my hands on that darn dev...",
-                        "NextIndex": 23,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5760,9 +5658,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 1.2,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Ramirez",
                     "notes": "[[Carpetiem]] is found in the [[Worlds#D8 - Slamabam Straightaway|Slamabam Straightaway]]."
                 },
                 "quests": {
@@ -5964,7 +5859,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Thanks a million ya did it! Me and them Zoomer generation are great friends now they even include me in their Ticky Tocky shenanigans it's great fun! <br> Now get off my lawn ya darn millenial!",
-                        "NextIndex": 19,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -5975,9 +5870,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 2.62,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Perez",
                     "notes": "<p>[[Djonnut]] is found in [[Worlds#D12 - Djonnuttown|Djonnuttown]], by the door to the [[Efaunt]] boss fight.</p>$$NEWLINE$$$$NEWLINE$$Upon completing his second quest the player is awarded with the ability to talk to him once every day to obtain an {{CraftReq|Efaunt's Tomb Key}}.$$NEWLINE$$$$NEWLINE$$<p>He will hold keys for you for up to 3 days. Having more characters complete his second quest provides more daily keys, and one character can collect all of your daily keys at once.</p>"
                 },
                 "quests": {
@@ -6144,7 +6036,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Here are ur keys to the pyramid and if you return tomorrow more keys I will wish for you! And to say sorry for joke earlier I even wait up to 3 days and will give u keys as if you were here every day!",
-                        "NextIndex": 16,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -6155,9 +6047,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 5,
                     "type": "",
-                    "birthWeight": 3.11,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Anderson",
                     "notes": "[[Goldric]] is found in [[Worlds#D6 - Shifty Sandbox|Shifty Sandbox]]. In order to get any quests from Goldric, you must have gotten far enough in the [[Cowbo Jones]] questline by completing three quests for [[Bandit Bob]]. Until you've completed the requisite quests, Goldric refuses to talk to you."
                 },
                 "quests": {
@@ -6436,7 +6325,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Bwahahaha!!! What a hoot! <br> Ok I'm bored. Ta-ta! <br> That means get lost in rich-speak.",
-                        "NextIndex": 26,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -6447,9 +6336,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 6,
                     "type": "",
-                    "birthWeight": 7.66,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Duffman",
                     "notes": "[[Omar Da Ogar]] is found in [[Worlds#F3_-_Deepwater_Docks|Deepwater Docks]]. He gives quests which upon completing increases {{Icons|Message Bottle|text=Message Bottle}}s Gain Rate for [[Island Expeditions]]."
                 },
                 "quests": {
@@ -6677,7 +6563,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ok you help me all you can! Me need no more me hope you sail far and good!",
-                        "NextIndex": 19,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -6688,9 +6574,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "Secret",
-                    "birthWeight": 7.2,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Rodriguez",
                     "notes": "[[Meel]] is found in The Crypt, a hidden area past [[Worlds#S3 - The Office|The Office]] in the Sewers. See [[Secrets#The_Crypt|Secrets]] for more details."
                 },
                 "quests": {
@@ -6776,7 +6659,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh hey gamer! Ooo yea!!! You found a secret! Mmm yea to the left to the right!",
-                        "NextIndex": 8,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -6787,9 +6670,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 0,
                     "type": "PC",
-                    "birthWeight": 9.36,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Fletcher",
                     "notes": "The Clown is located beside [[Desert Davey]] to his right."
                 },
                 "quests": {},
@@ -6809,7 +6689,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh you ARE over Lv. 8 nice! I run the Arcade the greatest game in town! Search around there isn't a more thrilling game to be found!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -6820,9 +6700,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 4.16,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Jones",
                     "notes": "[[Snake Jar]] sits at the bottom of [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], near the portal to [[Bandit Bob]]."
                 },
                 "quests": {
@@ -7003,7 +6880,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "MMMMmmmm what a juicy noob that was! The dumb ones are alwayssss the most ssssucculent!",
-                        "NextIndex": 18,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -7014,9 +6891,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 3.03,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Thomas",
                     "notes": "[[Loominadi]] is found in [[Worlds#D10 - Up Up Down Down|Up Up Down Down]]."
                 },
                 "quests": {
@@ -7207,7 +7081,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Vanquished at last boy that was fast! That iconoclast mummy has passed I forecast that my status will now go unsurpassed! Thank you player this was really great... an absolute blast!",
-                        "NextIndex": 17,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -7218,9 +7092,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 1.69,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Brown",
                     "notes": "[[Wellington]] is found in [[Worlds#D11 - Sands of Time|Sands of Time]].$$NEWLINE$$$$NEWLINE$$Like other piggy NPCs, his quests award stamps. For help completing his quests, see [[Secrets]]."
                 },
                 "quests": {
@@ -7410,7 +7281,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Top stuff my man! Brilliantly solved! I must be getting back to my adventure now as you to yours... cheerio!",
-                        "NextIndex": 17,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -7421,9 +7292,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 12,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Constantinople",
                     "notes": "[[Dazey]] is found in [[Worlds#T2 - Hollowed Trunk|Hollowed Trunk]], the second zone of the tree, located at the top right of the area.$$NEWLINE$$$$NEWLINE$$Her final quest awards the {{CraftReq|Dazey Token}}."
                 },
                 "quests": {
@@ -7530,7 +7398,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "NICE! FINALLY!!! Now I can make my costume and pretend to be Sprout! No one will ever bother me again!! Just gotta take this off and... <br> Hey can I get some privacy you creep? Please leave the map and come back...",
-                        "NextIndex": 11,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -7541,9 +7409,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 13,
                     "type": "",
-                    "birthWeight": 7.79,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "ee",
                     "notes": "[[Cowbo Jones]] is on the righthand side of [[Worlds#D0 - YumYum Grotto|YumYum Grotto]], near the portal to [[Worlds#D2 - Jar Bridge|Jar Bridge]]. He facilitates the main questline in Yum-Yum Desert much the same way [[Scripticus]] does in Blunder Hills.$$NEWLINE$$$$NEWLINE$$His quests introduce [[Alchemy]] and guide the player through the Desert, leading up to [[Efaunt]]. His final quest awards the [[YumYum Sheriff]] Trophy."
                 },
                 "quests": {
@@ -8173,7 +8038,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Go git 'er dun new Sheriff! YeeeeHAW!!!",
-                        "NextIndex": 61,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -8184,9 +8049,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 5.01,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "illiams",
                     "notes": "[[Typhoon]] is found in [[Worlds#G3 - Froggy Fields|Froggy Fields]], the second zone of Grasslands, located in the top right of the area next to the [[Colosseum/Dewdrop|Dewdrop Colosseum]].$$NEWLINE$$$$NEWLINE$$Completing his quest gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. He will hold tickets for you for up to 3 days. Having more characters complete his quest does not provide more daily tickets."
                 },
                 "quests": {
@@ -8240,7 +8102,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Come tap on me every day to get another ticket given you're a registered combatant now. <br> And don't think I won't recognize you on your other characters! You only get 1 ticket every day!",
-                        "NextIndex": 5,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -8251,9 +8113,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 5,
                     "type": "",
-                    "birthWeight": 3.06,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Garcia",
                     "notes": "[[Centurion]] is located in [[Worlds#D2 - The Mimic Hole|The Mimic Hole]], next to the [[Colosseum/Sandstone|Sandstone Colosseum]].$$NEWLINE$$$$NEWLINE$$Completing his first quest (Down The Mimic Hole!) gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. This is the second daily source of tickets after [[Typhoon]]. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets."
                 },
                 "quests": {
@@ -8605,7 +8464,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I am in awe of your accomplishment he who has achieved the rank of Glorious Gladiator! You are amongst the most legendary combatants to ever grace the colosseums.",
-                        "NextIndex": 33,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -8616,9 +8475,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 5.3,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Johnson",
                     "notes": "[[XxX Cattleprod XxX]] is found in [[Worlds#D5 - The Grandioso Canyon|The Grandioso Canyon]].$$NEWLINE$$$$NEWLINE$$Like other piggy NPCs, his quests award stamps. His final quest requires you to interact with other players."
                 },
                 "quests": {
@@ -8771,7 +8627,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Woah nice Lucky Lad trophy! Kinda weird how it's under me and not you... oh right thats because it's MINE hahaha! <br> Hiyaa! Take that air!",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -8782,9 +8638,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "Event",
-                    "birthWeight": 2.4,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Taylor",
                     "notes": "'''Every day during Giftmas, you'll get to give ME gifts!! Hey dont gimme dat look! Not every event needs to be centered around you, ya know!'''$$NEWLINE$$$$NEWLINE$$The [[Giftmas Blobulyte]] was a blobulyte available during the [[Events#Christmas_Event|Christmas Event]] (December 29th 2020 to January 22nd 2021). Its daily quests awarded players {{CraftReq|Giftmas Box}} in exchange for [[Ghost (Event)|Ghost]] kills and rare/expensive items."
                 },
                 "quests": {
@@ -8919,7 +8772,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Here you go! Cmon open them open them!! Oh and I've got more left so come back tomorrow!!! ##",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -8930,9 +8783,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 8.82,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Harris",
                     "notes": "The [[Telescope]] is found in [[Worlds#T3 - Where the Branches End|Where the Branches End]], the third zone of the tree, located at the top left of the area.$$NEWLINE$$$$NEWLINE$$Reaching and using the Telescope allows the players character to change [[Star Signs]] and unlock new Star Signs if they have enough Star Chart Points."
                 },
                 "quests": {
@@ -8996,7 +8846,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh no there's still more engravi- <br> 'Anyway as I was saying before I got interrupted there are constellations all over the game so always look out for them wherever you go! There's also a trophy if you can light up them all!' <br> The engraving pops out of the telescope and falls down the tree.",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -9007,9 +8857,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "Event",
-                    "birthWeight": 9.37,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "illiams",
                     "notes": "'''Roses are red, blobulytes are cute, go run my errands and I'll give you some loot!'''$$NEWLINE$$$$NEWLINE$$The [[Loveulyte]] is blobulyte available during the [[Events#Valenslimes_Day|Valentines Event]] (February 14th 2023 to February 24th 2023). Its daily quests awarded players {{CraftReq|Choco Box}} in exchange for {{CraftReq|Lovey Dovey Letter}} and [[Valentslime]] kills."
                 },
                 "quests": {
@@ -9097,7 +8944,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Alas I must admit. The loneliness I feel up here has broken my spirit. Neither cards from lovers nor destruction of others can bring to me what we all hold dearest. Please return tomorrow so we may try one more to ease my sorrow.",
-                        "NextIndex": 8,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -9108,9 +8955,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "Event",
-                    "birthWeight": 5.65,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Sanchez",
                     "notes": "'''Im Eg,' 'I'm Egg,' 'I'm... wait which one am I again?'''$$NEWLINE$$$$NEWLINE$$The [[Egggulyte]] are a trio of blobulytes available during the [[Events/Easter|Easter Event]]. Their daily quests award players {{CraftReq|Egg Capsule}}s, {{CraftReq|Gummy Bunny}}s, and {{CraftReq|Gem}}s for finding {{CraftReq|Egg Capsule}} and {{CraftReq|Goldegg Capsule}}."
                 },
                 "quests": {
@@ -9211,7 +9055,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You found one! Thats <br> . <br> very impressive! Come <br> . <br> back tomorrow to find more capsules! <br> . <br> Good job Eggy! <br> . <br> Yea nice! <br> . <br> Haha thx guys #",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -9222,9 +9066,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 3.35,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Cast",
                     "notes": "[[Iceland Irwin]] is the [[Tasks|Taskmaster]] of Frostbite Tundra. You can find him in [[Worlds#Frostbite Towndra|Frostbite Towndra]].$$NEWLINE$$$$NEWLINE$$You can complete his quest to unlock [[Tasks/Frostbite Tundra|World 3 Tasks]]."
                 },
                 "quests": {
@@ -9275,7 +9116,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Right-o then mate! Go get those tasks!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -9286,9 +9127,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 10,
                     "type": "",
-                    "birthWeight": 3.42,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Jenson",
                     "notes": "[[Hoggindaz]] is found in [[Worlds#Frostbite Towndra|Frostbite Towndra]], at the bottom right of town. $$NEWLINE$$$$NEWLINE$$His quests introduce the basics of [[Construction]], [[Trapping]] and [[Worship]] to the player. His quests award special talents that allow the sampling resources for the 3D Printer and moving shrines."
                 },
                 "quests": {
@@ -9736,7 +9574,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You got it?? Oh you filled it out I see... meh what's an election without a bit of corruption right? I'm sure if we weren't just 2d drawings we would be more than capable of doing without corruption!",
-                        "NextIndex": 41,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -9747,9 +9585,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 7,
                     "type": "",
-                    "birthWeight": 2.05,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Upson",
                     "notes": "[[Bill Brr]] is located in the [[Worlds#Overpass of Sound|Overpass of Sound]]."
                 },
                 "quests": {
@@ -10010,7 +9845,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Not bad not bad. But I wont lie to ya I'm tired of seeing that blank face of yours. How about we do one last thing and call it quits?",
-                        "NextIndex": 23,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -10021,9 +9856,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 1.06,
-                    "starSign": "eo",
-                    "mothersMaidenName": "awless",
                     "notes": "[[Bellows]] is located in [[Worlds#Crystal Basecamp|Crystal Basecamp]].$$NEWLINE$$$$NEWLINE$$Upon completing his third quest the player is awarded with the ability to talk to him once every day to obtain a {{CraftReq|Chizoar's Cavern Key}}. He will hold keys for you for up to 3 days. Having more characters complete his third quest provides more daily keys, and one character can collect all of your daily keys at once."
                 },
                 "quests": {
@@ -10165,7 +9997,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You've got... the vibes... <br> and I've got... the keys... <br> Every day... you can have more keys...",
-                        "NextIndex": 12,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -10176,9 +10008,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 8.75,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Vogal",
                     "notes": "[[Crystalswine]] is found in [[Worlds#Cryo Catacombs|Cryo Catacombs]]."
                 },
                 "quests": {
@@ -10339,7 +10168,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "'The frozen pig seems happy with you... wait no that's just a smudge on the ice making it look like he's smiling. He is infact unmoved by your actions literally.",
-                        "NextIndex": 14,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -10350,9 +10179,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 7,
                     "type": "",
-                    "birthWeight": 5.03,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "apier",
                     "notes": "[[Yondergreen]] is found in [[Worlds#Signature Slopes|Signature Slopes]]."
                 },
                 "quests": {
@@ -10609,7 +10435,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "I can see why Hoggi picked you to represent him you're a very versatile and competent person! Thank you for the help and best of luck to you in your future endeavors!",
-                        "NextIndex": 24,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -10620,9 +10446,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 3.97,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Rice",
                     "notes": "[[Worldo]] is found in [[Worlds#Inside the Igloo|Inside the Igloo]], accessible from W3 Town. He is also the shopkeeper within Glacial Basement, the third [[Dungeons|Party Dungeon]]."
                 },
                 "quests": {
@@ -10715,7 +10538,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "That'll show 'em! <br> Well guess that's all we can do. I mean I'd give you a quest to kill the Big Boss and bring down the system but if any of his goons found out they'd come get me for sure... so yea no more quests.",
-                        "NextIndex": 9,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -10726,9 +10549,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 7,
                     "type": "",
-                    "birthWeight": 6.48,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Chambers",
                     "notes": "[[Shuvelle]] is found in [[Worlds#Mamooooth Mountain|Mamooooth Mountain]]."
                 },
                 "quests": {
@@ -10994,7 +10814,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "You're a great digger especially for someone who isn't a literal shovel! Well I better get back to digging my own grave here who knows when my handle will splinter!",
-                        "NextIndex": 23,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11005,9 +10825,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 7.48,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Ziegler",
                     "notes": "[[Lonely Hunter]] is found in [[Worlds#Snowfield Outskirts|Snowfield Outskirts]], next to [[Colosseum/Chillsnap|Chillsnap Colosseum]].$$NEWLINE$$$$NEWLINE$$Completing his quests gives the player the ability to talk to him once every day to obtain a {{CraftReq|Colosseum Ticket}}. He will hold tickets for you for up to 3 days. Having more characters complete his quests does not provide more daily tickets."
                 },
                 "quests": {
@@ -11124,7 +10941,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Alright you got your tickets now get outta here.",
-                        "NextIndex": 10,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11135,9 +10952,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 5.57,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Uflann",
                     "notes": "[[Carpenter Cardinal]] is found in the top left of Frostbite Towndra, next to the portal to World 4.$$NEWLINE$$$$NEWLINE$$Upon completing his quest the player gains access to the portal to World 4 - Hyperion Nebula.$$NEWLINE$$$$NEWLINE$$'''Note:''' Unlocking the portal with one character unlocks it for all characters on your account."
                 },
                 "quests": {
@@ -11178,7 +10992,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "KAW! KAWWWWWW! <br> 'The bird looks very proud of itself after successfully restoring the portal.'",
-                        "NextIndex": 3,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11189,9 +11003,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 11,
                     "type": "",
-                    "birthWeight": 5.64,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Aikin",
                     "notes": "[[Lord of the Hunt]] is located in [[Worlds#Trappers Folly|Trappers Folly]], to the left of W3 Town."
                 },
                 "quests": {
@@ -11584,7 +11395,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Huh. I guess that makes YOU the Lord of the Hunt... Well we can't be having a plot hole like this no sir! Enjoy the trophy but I'm going to go sell all this evidence to the store.",
-                        "NextIndex": 37,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11595,9 +11406,6 @@ export const initNpcRepo = () => {
                     "world": "Frostbite Tundra",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 5.93,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Vanderpoel",
                     "notes": "[[Snouts]] is hanging around in [[Worlds#The Stache Split|The Stache Split]].$$NEWLINE$$$$NEWLINE$$Like other piggy NPCs, his quests award stamps."
                 },
                 "quests": {
@@ -11778,7 +11586,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Oh right mana potions don't actually give you mana they just make it recharge faster... guess I'll have to wait!",
-                        "NextIndex": 18,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11789,9 +11597,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "Event",
-                    "birthWeight": 6.99,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Bateman",
                     "notes": "'''Cmon bro go get yourself some of that summer action!! I wanna see you opening those coolers like no other!'''$$NEWLINE$$$$NEWLINE$$The [[Coastiolyte]] is a blobulyte available during the [[Events#Summer Break|Summer Break Event]] (June 26th 2021 until July 18th 2021). Its daily quests award players {{CraftReq|Summer Cooler}} and {{CraftReq|Beach Oyster}} in exchange for finding {{CraftReq|Summer Cooler}} or killing [[Plasti Doug]] and [[Mr Blueberry]]."
                 },
                 "quests": {
@@ -11875,7 +11680,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Yooo now its a party! <br> Pfft cmon don't be down about it bro it's Summer Break! We don't worry about the underlying morals and themes behind quests around here we just have fun!",
-                        "NextIndex": 9999,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -11886,9 +11691,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 1.74,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "ngram",
                     "notes": "See the [https://www.youtube.com/playlist?list=PLBG_WXgv7iS7UtkCmTxAL_-nH8V4ldufF Legends of Idleon Youtube Channel] for more details. (Steps will not be included here. You have to follow the videos with the steps in them instead.)"
                 },
                 "quests": {
@@ -12033,7 +11835,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "WAOOO!! YEHEHEHE!!",
-                        "NextIndex": 12,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -12044,9 +11846,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 6.71,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Soukup",
                     "notes": "[[Toadstall]] is found in [[Worlds#Grandfrog's Backyard|Grandfrog's Backyard]], accessible from the bottom left of the [[Frog]] map. He introduces the player to the Party mechanic and is also the shopkeeper within Grandfrog's Gazebo, the first [[Dungeons|Party Dungeon]]."
                 },
                 "quests": {
@@ -12175,7 +11974,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hehe... that outta teach that old coot to not hit me off my walking stick! Please do keep bothering him from time to time he has it coming!",
-                        "NextIndex": 12,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -12186,9 +11985,6 @@ export const initNpcRepo = () => {
                     "world": "Yum-Yum Desert",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 5.49,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Darnell",
                     "notes": "[[Gangster Gus]] is found in [[Worlds#Heaty Hole|Heaty Hole]], accessible from the bottom of the [[Mimic]] map. He is also the shopkeeper within Crypt of Snakenhotep, the second [[Dungeons|Party Dungeon]]."
                 },
                 "quests": {
@@ -12314,7 +12110,7 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Ya got rid of 'im? They had it comin always sneerin' at me and tellin' me want to do.",
-                        "NextIndex": 12,
+                        "NextIndex": -1,
                         "Name": ""
                     }
                 ]
@@ -12325,9 +12121,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 5,
                     "type": "Event",
-                    "birthWeight": 4.14,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "agner",
                     "notes": "''A jackolantern in November bet you weren't expecting that!''$$NEWLINE$$$$NEWLINE$$The [[Falloween Pumpkin]] is an NPC available during the [[Events|Falloween]] Event (October 21, 2023 - November 6, 2023). Its questline awarded players with {{CraftReq|Falloween Treat}}s and {{CraftReq|Spooky Time Candy}}."
                 },
                 "quests": {
@@ -12542,9 +12335,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 5.74,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "ewis",
                     "notes": ""
                 },
                 "quests": {
@@ -12671,9 +12461,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 1.83,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Reardon",
                     "notes": "[[Oinkin]] is found in [[Worlds#H3 - Donut Drive-In|Donut Drive-In]], on the bottom platform with the portal.$$NEWLINE$$$$NEWLINE$$Like other piggy NPCs, his quests award stamps. In addition to stamps, the rewards include [[Cooking Ladle|Cooking Ladles]] and [[Pet Egg|Pet Eggs]]"
                 },
                 "quests": {
@@ -12814,9 +12601,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 5,
                     "type": "",
-                    "birthWeight": 4.26,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Ramachandrann",
                     "notes": " "
                 },
                 "quests": {
@@ -13033,9 +12817,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 2.28,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Resnick",
                     "notes": ""
                 },
                 "quests": {
@@ -13123,9 +12904,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 2.73,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Schiebel",
                     "notes": " "
                 },
                 "quests": {
@@ -13191,9 +12969,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 2,
                     "type": "",
-                    "birthWeight": 4.46,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "Darnell",
                     "notes": "[[Eliteus]] is found in [[Worlds#H4 - Outskirts of Fallstar Isle|Outskirts of Fallstar Isle]].$$NEWLINE$$$$NEWLINE$$Complete his quests to choose a [[Classes|elite class]] for your Barbarian, Squire, Bowman, Hunter, Shaman, or Wizard."
                 },
                 "quests": {
@@ -13290,9 +13065,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.1,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Thompson",
                     "notes": " "
                 },
                 "quests": {
@@ -13384,9 +13156,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 7.11,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Moody",
                     "notes": " "
                 },
                 "quests": {
@@ -13565,9 +13334,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 4,
                     "type": "",
-                    "birthWeight": 6.77,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "eisinger",
                     "notes": " "
                 },
                 "quests": {
@@ -13741,9 +13507,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 4.32,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "rwin",
                     "notes": ""
                 },
                 "quests": {
@@ -13874,9 +13637,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 6.29,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Hancock",
                     "notes": " "
                 },
                 "quests": {
@@ -14013,9 +13773,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 4.98,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Tapia",
                     "notes": ""
                 },
                 "quests": {
@@ -14077,9 +13834,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.01,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Sawyer",
                     "notes": ""
                 },
                 "quests": {
@@ -14141,9 +13895,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 1,
                     "type": "",
-                    "birthWeight": 6.87,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Ashwoon",
                     "notes": ""
                 },
                 "quests": {
@@ -14227,9 +13978,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 3,
                     "type": "Secret",
-                    "birthWeight": 8.72,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Root",
                     "notes": "Nebulyte's quest line requires a level 150 [[Maestro]] to start. Until then, his name appears as Agent L150 while he taunts you for being a low level noob."
                 },
                 "quests": {
@@ -14401,9 +14149,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 1,
                     "type": "Event",
-                    "birthWeight": 3.29,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "Trussel",
                     "notes": ""
                 },
                 "quests": {
@@ -14457,9 +14202,6 @@ export const initNpcRepo = () => {
                     "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3.91,
-                    "starSign": "Capricorn",
-                    "mothersMaidenName": "Kalleg",
                     "notes": ""
                 },
                 "quests": {
@@ -14602,9 +14344,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 3,
                     "type": "",
-                    "birthWeight": 2.77,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Sawyer",
                     "notes": " "
                 },
                 "quests": {
@@ -14738,9 +14477,6 @@ export const initNpcRepo = () => {
                     "world": "Hyperion Nebula",
                     "noQuest": 9,
                     "type": "",
-                    "birthWeight": 1.1,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Mills",
                     "notes": " "
                 },
                 "quests": {
@@ -15135,9 +14871,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.71,
-                    "starSign": "ibra",
-                    "mothersMaidenName": "llingsworth",
                     "notes": ""
                 },
                 "quests": {
@@ -15383,9 +15116,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 5.55,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Ashwoon",
                     "notes": ""
                 },
                 "quests": {
@@ -15560,9 +15290,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.81,
-                    "starSign": "Taurus",
-                    "mothersMaidenName": "Hancock",
                     "notes": ""
                 },
                 "quests": {
@@ -15752,9 +15479,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.54,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Soukup",
                     "notes": ""
                 },
                 "quests": {},
@@ -15797,9 +15521,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.52,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Soloman",
                     "notes": ""
                 },
                 "quests": {
@@ -15946,9 +15667,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.61,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Tiernan",
                     "notes": ""
                 },
                 "quests": {},
@@ -15973,9 +15691,6 @@ export const initNpcRepo = () => {
                     "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.14,
-                    "starSign": "eo",
-                    "mothersMaidenName": "Dugelman",
                     "notes": ""
                 },
                 "quests": {
@@ -16256,9 +15971,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 9.53,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Schuster",
                     "notes": " "
                 },
                 "quests": {},
@@ -16289,9 +16001,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.91,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Knutson",
                     "notes": " "
                 },
                 "quests": {},
@@ -16310,9 +16019,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.69,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Hancock",
                     "notes": " "
                 },
                 "quests": {
@@ -16383,9 +16089,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 9.85,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Trussel",
                     "notes": " "
                 },
                 "quests": {
@@ -16510,9 +16213,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.25,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Kaskel",
                     "notes": " "
                 },
                 "quests": {
@@ -16598,9 +16298,6 @@ export const initNpcRepo = () => {
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.54,
-                    "starSign": "Libra",
-                    "mothersMaidenName": "Ventotla",
                     "notes": " "
                 },
                 "quests": {
@@ -16780,9 +16477,6 @@ export const initNpcRepo = () => {
                     "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "Event",
-                    "birthWeight": 7.12,
-                    "starSign": "Pisces",
-                    "mothersMaidenName": "McCormack",
                     "notes": " "
                 },
                 "quests": {},
@@ -16807,15 +16501,42 @@ export const initNpcRepo = () => {
                     }
                 ]
             }),
+        new NpcBase("Luckulyte", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Blunder Hills",
+                    "noQuest": 0,
+                    "type": "Event",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Feeling lucky?",
+                        "NextIndex": 1,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "You are???",
+                        "NextIndex": 2,
+                        "Name": ""
+                    },
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Well I'm happy for you. Go talk to the Pot O Gold not me! I only operate on Event Points!",
+                        "NextIndex": -1,
+                        "Name": ""
+                    }
+                ]
+            }),
         new NpcBase("Zenelith", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
                     "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 7.19,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Cannon",
                     "notes": " "
                 },
                 "quests": {
@@ -16879,9 +16600,6 @@ export const initNpcRepo = () => {
                     "world": "Unknown",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.72,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Schickowski",
                     "notes": " "
                 },
                 "quests": {},
@@ -16897,12 +16615,9 @@ export const initNpcRepo = () => {
         new NpcBase("Coral Kid", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.2,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Mills",
                     "notes": " "
                 },
                 "quests": {},
@@ -16918,12 +16633,9 @@ export const initNpcRepo = () => {
         new NpcBase("Musselini", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 6.21,
-                    "starSign": "Aquarius",
-                    "mothersMaidenName": "Ashwoon",
                     "notes": " "
                 },
                 "quests": {},
@@ -16939,12 +16651,9 @@ export const initNpcRepo = () => {
         new NpcBase("Forest Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 7.51,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Valente",
                     "notes": " "
                 },
                 "quests": {},
@@ -16960,12 +16669,9 @@ export const initNpcRepo = () => {
         new NpcBase("Dune Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Yum-Yum Desert",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3.13,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Weinstein",
                     "notes": " "
                 },
                 "quests": {},
@@ -16981,12 +16687,9 @@ export const initNpcRepo = () => {
         new NpcBase("Root Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 3.22,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Sonderling",
                     "notes": " "
                 },
                 "quests": {},
@@ -17002,12 +16705,9 @@ export const initNpcRepo = () => {
         new NpcBase("Frigid Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Frostbite Tundra",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 2.11,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Dewalt",
                     "notes": " "
                 },
                 "quests": {},
@@ -17023,12 +16723,9 @@ export const initNpcRepo = () => {
         new NpcBase("Squish Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Hyperion Nebula",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.63,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Ashwoon",
                     "notes": " "
                 },
                 "quests": {},
@@ -17044,12 +16741,9 @@ export const initNpcRepo = () => {
         new NpcBase("Oozie Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Smolderin' Plateau",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.41,
-                    "starSign": "Virgo",
-                    "mothersMaidenName": "Dugelman",
                     "notes": " "
                 },
                 "quests": {},
@@ -17065,12 +16759,9 @@ export const initNpcRepo = () => {
         new NpcBase("Brezy Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Spirited Valley",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 9.95,
-                    "starSign": "Cancer",
-                    "mothersMaidenName": "Wagner",
                     "notes": " "
                 },
                 "quests": {},
@@ -17086,12 +16777,9 @@ export const initNpcRepo = () => {
         new NpcBase("Deeps Soul", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.04,
-                    "starSign": "Leo",
-                    "mothersMaidenName": "Linde",
                     "notes": " "
                 },
                 "quests": {},
@@ -17107,12 +16795,9 @@ export const initNpcRepo = () => {
         new NpcBase("Keymaster", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 8.66,
-                    "starSign": "Aries",
-                    "mothersMaidenName": "Sagar",
                     "notes": " "
                 },
                 "quests": {},
@@ -17128,12 +16813,9 @@ export const initNpcRepo = () => {
         new NpcBase("Pet Dog", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Blunder Hills",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 1.92,
-                    "starSign": "Scorpio",
-                    "mothersMaidenName": "Myers",
                     "notes": " "
                 },
                 "quests": {},
@@ -17149,12 +16831,9 @@ export const initNpcRepo = () => {
         new NpcBase("Minehead", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 5.25,
-                    "starSign": "Sagittarius",
-                    "mothersMaidenName": "Trusela",
                     "notes": " "
                 },
                 "quests": {},
@@ -17176,12 +16855,9 @@ export const initNpcRepo = () => {
         new NpcBase("Glimbo", <NpcModel>{
                 "head": <NpcHeadModel>{
                     "location": "Unknown",
-                    "world": "Unknown",
+                    "world": "Shimmerfin Deep",
                     "noQuest": 0,
                     "type": "Unknown",
-                    "birthWeight": 4.07,
-                    "starSign": "Gemini",
-                    "mothersMaidenName": "Ventotla",
                     "notes": " "
                 },
                 "quests": {},

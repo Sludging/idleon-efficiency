@@ -162,7 +162,7 @@ export const initTaskShopDescRepo = () => {
             }),
         new TaskShopDescBase(11, <TaskShopDescModel>{
                 "descLine1": "Boosts Max Lv. to { for 'Convert Better",
-                "descLine2": "Darnit' Talent. Probs still stinks...",
+                "descLine2": "Darnit' Talent.",
                 "number1": 0,
                 "number2": 0,
                 "number3": 0,

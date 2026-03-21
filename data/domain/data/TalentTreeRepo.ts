@@ -2953,7 +2953,7 @@ export const initTalentTreeRepo = () => {
                     },
                     "Robbinghood": <TalentModel>{
                         "name": "Robbinghood",
-                        "description": "Monster drop rarity increased by {%",
+                        "description": "Monster drop rate increased by {%",
                         "x1": 40,
                         "x2": 65,
                         "funcX": "decay",

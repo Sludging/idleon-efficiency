@@ -591,11 +591,11 @@ export const initMealRepo = () => {
                 "bonusKey": "ResearchXP"
             }),
         new MealBase(73, <MealModel>{
-                "name": "Wedding Cake",
+                "name": "2nd Wedding Cake",
                 "cookingReq": 1e+66,
-                "bonusQty": 0.01,
+                "bonusQty": 0.02,
                 "bonusText": "+{% Minehead Mine Currency gain",
-                "description": "Congrats on getting married last year! I hope it lasts because I don't have a 2nd cake!",
+                "description": "Congrats on getting married again! I hope it lasts this time... I don't have a 3rd cake!",
                 "bonusKey": "MineCurr"
             })    
 ]

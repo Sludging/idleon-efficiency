@@ -1,4 +1,3 @@
-import { ComponentBaseModel } from './componentBaseModel';
 import { ComponentModel } from './componentModel';
 import { NoteModel } from './noteModel';
 import { QuestModel } from './questModel';

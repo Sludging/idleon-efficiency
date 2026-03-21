@@ -2649,7 +2649,7 @@ export const initAchievementRepo = () => {
                 "name": "Summoning GM",
                 "qty": 1,
                 "desc": "Get 58 Career Wins within Summoning",
-                "rewards": "6% Drop Chance &for all characters",
+                "rewards": "6% Drop Rate &for all characters",
                 "world": "Spirited Valley"
             }),
         new AchievementBase(378, <AchievementModel>{
@@ -2677,7 +2677,7 @@ export const initAchievementRepo = () => {
                 "name": "Big Big Hampter",
                 "qty": 1,
                 "desc": "SECRET ACHIEVEMENT ------------------------ Hampter is worth it!",
-                "rewards": "4% Drop Chance &for all characters",
+                "rewards": "4% Drop Rate &for all characters",
                 "world": "Spirited Valley"
             }),
         new AchievementBase(382, <AchievementModel>{

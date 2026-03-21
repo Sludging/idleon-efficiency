@@ -341,7 +341,7 @@ export const initPostOfficeUpgradesRepo = () => {
                 "name": "Non Predatory Loot Box",
                 "bonuses": [
                     <PostOfficeUpgradeModel>{
-                        "bonus": "% Drop Rarity",
+                        "bonus": "% Drop Rate",
                         "x1": 50,
                         "x2": 200,
                         "func": "decay",

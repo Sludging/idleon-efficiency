@@ -248,11 +248,11 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("Blank", <CardDataModel>{
                 "cardID": "A0",
-                "category": "Event",
+                "category": "Bosses",
                 "perTier": 10,
                 "effect": "+{% Base HP",
                 "bonus": 3,
-                "order": 24
+                "order": 32
             }),
         new CardDataBase("Copper", <CardDataModel>{
                 "cardID": "C1",
@@ -2157,6 +2157,22 @@ export const initCardRepo = () => {
                 "effect": "+{% Catching Away Gains",
                 "bonus": 2,
                 "order": 22
+            }),
+        new CardDataBase("luckEvent1", <CardDataModel>{
+                "cardID": "Y22",
+                "category": "Event",
+                "perTier": 5,
+                "effect": "+{% Drop Rate (Passive)",
+                "bonus": 3,
+                "order": 23
+            }),
+        new CardDataBase("luckEvent2", <CardDataModel>{
+                "cardID": "Y23",
+                "category": "Event",
+                "perTier": 5,
+                "effect": "+{% Money from Monsters",
+                "bonus": 4,
+                "order": 24
             })    
 ]
 }
