@@ -4,7 +4,7 @@ export interface LegendTalentModel {
     name: string,
     maxLevel: number,
     bonusValue: number,
-    x3: number | undefined,
-    desc: string,
-    nextLevelPreview: string
+    x3: string,
+    bonus: string,
+    description: string
 }

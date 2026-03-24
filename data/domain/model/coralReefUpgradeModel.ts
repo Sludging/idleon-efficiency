@@ -1,3 +1,5 @@
+
+
 export interface CoralReefUpgradeModel {
     desc: string,
     x0: number,
@@ -11,5 +13,5 @@ export interface CoralReefUpgradeModel {
     x8: number,
     x9: number,
     x10: number,
-    x11: number,
+    x11: number
 }

@@ -1,3 +1,5 @@
+
+
 export interface TomeEpilogueBonusModel {
     bonus: string,
     x0: number,
