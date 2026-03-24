@@ -39,6 +39,7 @@ const CompanionBox = ({ companion, editable = false, setOwned }: { companion: Co
                     onChange={handleChecked}
                 />
                 <IconImage data={companion.imageData} />
+                <Text>{companion.name}</Text>
             </Box>
             <Text>{companion.getBonus()}</Text>
         </ShadowBox>
@@ -56,7 +57,7 @@ function CompanionDisplay() {
     const setOwned = (companion: Companion, owned: boolean) => {
         companion.owned = owned;
     }
-    
+
     const editCompanions = () => {
         setAllowEditing(true);
     }
@@ -96,7 +97,11 @@ function CompanionDisplay() {
             </Box>
             <Grid columns={{ size: 'auto', count: 4 }} gap="medium">
                 {
-                    companions.map((companion, index) => <CompanionBox key={index} companion={companion} editable={allowEditing} setOwned={setOwned} />)
+                    companions
+                        .filter((companion) => companion.data.desc !== 'Not officially in the game and may never be')
+                        .map((companion, index) =>
+                            <CompanionBox key={index} companion={companion} editable={allowEditing} setOwned={setOwned} />
+                        )
                 }
             </Grid>
         </Box>
