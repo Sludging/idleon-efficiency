@@ -6,7 +6,7 @@ import { Hole } from "../world-5/hole/hole";
 import { Summoning } from "../world-6/summoning";
 import { LegendTalents } from "../world-7/legendTalents";
 import { EventShop } from "../eventShop";
-import { initVotesBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
+import { initVoteBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
 import { VoteBonusModel } from "../model/voteBonusModel";
 import { Meritocraty } from "../world-7/meritocraty";
 
@@ -31,7 +31,7 @@ export class Votes extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
-        this.bonuses = VoteBonus.fromBase(initVotesBonusRepo());
+        this.bonuses = VoteBonus.fromBase(initVoteBonusRepo());
 
         return this;
     }

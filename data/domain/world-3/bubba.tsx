@@ -200,7 +200,7 @@ export class Bubba extends Domain {
         }
 
         return 1 / (1 + this.getUpgradeBonus(4) / 100) * (1 / (1 + this.getUpgradeBonus(18) / 100)) * (1 / (1 + this.getUpgradeBonus(26) / 100)) * (1 / (1 + this.getCharismaBonus(1) / 100)) * 
-            (Math.pow(upgrade.index + 1, 2) * upgrade.level1 + Math.pow(2.4 + upgrade.index / 3.65, upgrade.index) * Math.pow(upgrade.data.x1, upgrade.level1)) * upgrade.data.x0;
+            (Math.pow(upgrade.index + 1, 2) * upgrade.level1 + Math.pow(2.4 + upgrade.index / 3.65, upgrade.index) * Math.pow(upgrade.data.costExponent, upgrade.level1)) * upgrade.data.x0;
     }
 
     getCharismaBonus(index: number): number {

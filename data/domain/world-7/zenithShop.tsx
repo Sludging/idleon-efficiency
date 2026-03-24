@@ -1,7 +1,7 @@
 import { Domain, RawData } from "../base/domain";
-import { initZenithMarketBonusRepo, ZenithMarketBonusBase } from "../data/ZenithMarketBonusRepo";
+import { initZenithMarketRepo, ZenithMarketBase } from "../data/ZenithMarketRepo";
 import { Item } from "../items";
-import { ZenithMarketBonusModel } from "../model/zenithMarketBonusModel";
+import { ZenithMarketModel } from "../model/zenithMarketModel";
 import { Player } from "../player";
 import { Storage } from "../storage";
 
@@ -13,10 +13,10 @@ export interface NonDepositedCluster {
 export class ZenithMarketBonus {
     public level: number = 0;
 
-    constructor(public index: number, public data: ZenithMarketBonusModel) {}
+    constructor(public index: number, public data: ZenithMarketModel) {}
 
     getBonus(): number {
-        return this.data.bonus * this.level;
+        return this.data.bonusPerLevel * this.level;
     }
 
     getNextLevelCost(): number {
@@ -30,7 +30,7 @@ export class ZenithMarketBonus {
         return nextlevelCost;
     }
 
-    static fromBase(data : ZenithMarketBonusBase[]) {
+    static fromBase(data : ZenithMarketBase[]) {
         return data.map(d => new ZenithMarketBonus(d.index, d.data));
     }
 }
@@ -47,7 +47,7 @@ export class ZenithMarket extends Domain {
     }
 
     init(_allItems: Item[]) {
-        this.bonuses = ZenithMarketBonus.fromBase(initZenithMarketBonusRepo());
+        this.bonuses = ZenithMarketBonus.fromBase(initZenithMarketRepo());
         return this;
     }
 

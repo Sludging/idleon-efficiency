@@ -1,6 +1,6 @@
 import { Domain, RawData } from "../base/domain";
 import { Companion } from "../companions";
-import { initPoppyTarpitUpgradeRepo, initPoppyUpgradeRepo, PoppyUpgradeBase } from "../data/PoppyUpgradeRepo";
+import { initPoppyUpgradeRepo, PoppyUpgradeBase } from "../data/PoppyUpgradeRepo";
 import { Item } from "../items";
 import { ClickerUpgradeModel } from "../model/clickerUpgradeModel";
 import { UpgradeVault } from "../upgradeVault";
@@ -91,8 +91,11 @@ export class Poppy extends Domain {
     }
 
     init(_allItems: Item[]) {
-        this.upgrades = PoppyUpgrade.fromBase(initPoppyUpgradeRepo());
-        this.tarpitUpgrades = TarpitUpgrade.fromBase(initPoppyTarpitUpgradeRepo());
+        const allUpgrades = initPoppyUpgradeRepo();
+        this.upgrades = PoppyUpgrade.fromBase(allUpgrades.filter(u => u.index < 12));
+        this.tarpitUpgrades = TarpitUpgrade.fromBase(
+            allUpgrades.filter(u => u.index >= 12).map(b => new PoppyUpgradeBase(b.index - 12, b.data))
+        );
         return this;
     }
 
