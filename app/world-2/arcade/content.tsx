@@ -15,6 +15,14 @@ import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
+const goldBallStyle: React.CSSProperties = {
+    filter: 'sepia(1) saturate(4.2) hue-rotate(8deg) brightness(1.08) contrast(1.1) drop-shadow(0 0 1px rgba(255, 214, 90, 0.3))',
+};
+
+const cosmicBallStyle: React.CSSProperties = {
+    filter: 'sepia(1) saturate(8.5) hue-rotate(168deg) brightness(1.24) contrast(1.16) drop-shadow(0 0 1px rgba(205, 245, 255, 0.85)) drop-shadow(0 0 2px rgba(102, 193, 255, 0.4))',
+};
+
 function Arcade() {
     const [arcadeData, setArcadeData] = useState<ArcadeData>();
     const [stampData, setStampData] = useState<Stamp[][]>([]);
@@ -47,9 +55,37 @@ function Arcade() {
         <Box pad="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Arcade</Heading>
             <Box gap="small">
-                <Box direction="row">
-                    <TextAndLabel text={arcadeData?.balls?.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
-                    <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }} />
+                <Box direction="row" wrap>
+                    <ComponentAndLabel
+                        label="Silver balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} />
+                                <Text>{arcadeData?.balls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
+                    <ComponentAndLabel
+                        label="Gold balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} style={goldBallStyle} />
+                                <Text>{arcadeData?.goldBalls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
+                    <ComponentAndLabel
+                        label="Cosmic balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} style={cosmicBallStyle} />
+                                <Text>{arcadeData?.cosmicBalls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
                     <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.secondsPerBall ?? 0} size={TimeDisplaySize.Small} />} label="Time per ball" margin={{ right: 'medium' }} />
                     <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.maxClaimTime ?? 0} size={TimeDisplaySize.Small} />} label="Max Claim time" margin={{ right: 'medium' }} />
                     <TextAndLabel text={`${(arcadeData?.ballsToClaim ?? 0).toString()}/${arcadeData?.maxBalls}`} label="Balls to claim" />
@@ -65,10 +101,9 @@ function Arcade() {
                                             <IconImage data={bonus.getImageData()} />
                                         </Box>
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonusText()} label="Effect" margin={{ right: 'medium' }} />
+                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonus(true, 100).toString()} label="Max Bonus" margin={{ right: 'medium' }} />
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={`${bonus.level}/100`} label="Level" margin={{ right: 'medium' }} />
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getCost(goldenBallStampBonus).toString()} label="Cost" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={`${bonus.level}/100`} label="Level" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonus(true, 100).toString()} label="Max Bonus" margin={{ right: 'medium' }} />
                                         <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getCostToMax(goldenBallStampBonus).toString()} label="Cost to max" margin={{ right: 'medium' }} />
                                     </Box>
                                 </ShadowBox>

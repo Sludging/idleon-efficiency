@@ -110,6 +110,7 @@ export class Arcade extends Domain {
     bonuses: ArcadeBonus[] = [];
     balls: number = 0;
     goldBalls: number = 0;
+    cosmicBalls: number = 0;
 
     // Computed
 
@@ -174,6 +175,7 @@ export class Arcade extends Domain {
 
         arcade.balls = optionList[74] as number || 0;
         arcade.goldBalls = optionList[75] as number || 0;
+        arcade.cosmicBalls = optionList[324] as number || 0;
     }
 }
 
