@@ -12,7 +12,7 @@ import { Player } from "./player";
 export class Companion {
     owned: boolean = false;
     real: boolean = false;
-    constructor(public id: number, public data: CompanionModel, public imageData: ImageData) { }
+    constructor(public id: number, public name: string, public data: CompanionModel, public imageData: ImageData) { }
 
     getBonus = () => {
         return this.data.desc.replace(/{/g, "+");
@@ -23,7 +23,7 @@ export class Companion {
             const enemy = EnemyInfo.find(enemy => enemy.id == c.data.id);
             const imageData = { location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }
 
-            return new Companion(c.index, c.data, imageData);
+            return new Companion(c.index, enemy?.details.Name ?? "Unknown", c.data, imageData);
         });
     }
 }
