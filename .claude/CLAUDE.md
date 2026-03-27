@@ -17,6 +17,8 @@ This project uses Claude Code skills for context-specific guidance. Use these sk
 - **/testing** - Live game extraction testing, domain test writing, validation patterns
 - **/feature-implementation** - Step-by-step guide for implementing new game features
 - **/architecture** - Data flow, domain patterns, cross-domain dependencies, architectural constraints
+- **/update-game-version** - Update game data when a new Idleon version is released (extract from Steam, process via WikiBot, sync back)
+- **/sync-game-assets** - Sync new/changed game images from Android APK to S3 CDN (requires Android device with wireless debugging)
 
 ## Critical Architecture Constraints
 

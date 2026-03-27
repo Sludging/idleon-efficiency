@@ -1,6 +1,8 @@
+
+
 export interface HoleJarBonusModel {
     name: string,
     bonus: number,
-    filler1: string
+    filler1: string,
     description: string
 }

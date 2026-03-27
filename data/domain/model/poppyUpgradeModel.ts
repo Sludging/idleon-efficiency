@@ -1,6 +1,6 @@
 
 
-export interface ClickerUpgradeModel {
+export interface PoppyUpgradeModel {
     name: string,
     x0: number,
     x1: number,

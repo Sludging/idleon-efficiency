@@ -39,13 +39,13 @@ export class LegendTalent {
 
         const value = this.getBonus(this.level + 1);
 
-        return this.data.nextLevelPreview.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue(this.level + 1));
+        return this.data.description.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue(this.level + 1));
     }
 
     getDesc = (): string => {
         const value = this.getBonus();
 
-        return this.data.desc.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue());
+        return this.data.bonus.replace("}", `${(1 + value / 100).toString()}`).replace("{", value.toString()).replace("$", this.getSecondaryValue());
     }
 }
 
