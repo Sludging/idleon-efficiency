@@ -13,7 +13,8 @@ import { StaticTime, TimeDisplaySize } from '../../../components/base/TimeDispla
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
-import ArcadeBonusRow from '../../../components/world-2/arcade/ArcadeBonusRow';
+import ArcadeBonusTable from '../../../components/world-2/arcade/ArcadeBonusTable';
+import { buildArcadeBonusTableRows } from '../../../components/world-2/arcade/arcadeBonusTableData';
 import { cosmicBallStyle, goldBallStyle } from '../../../components/world-2/arcade/ballStyles';
 
 function Arcade() {
@@ -84,20 +85,13 @@ function Arcade() {
                     <TextAndLabel text={`${(arcadeData?.ballsToClaim ?? 0).toString()}/${arcadeData?.maxBalls}`} label="Balls to claim" />
                 </Box>
                 <Text>Gold Balls Shop</Text>
-                <Box>
-                    {
-                        arcadeData && arcadeData.bonuses.map((bonus) => {
-                            return (
-                                <ArcadeBonusRow
-                                    key={bonus.index}
-                                    bonus={bonus}
-                                    goldenBallStampBonus={goldenBallStampBonus}
-                                    isOnRotation={activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0}
-                                />
-                            )
-                        })
-                    }
-                </Box>
+                <ArcadeBonusTable
+                    rows={buildArcadeBonusTableRows(
+                        arcadeData?.bonuses ?? [],
+                        goldenBallStampBonus,
+                        activeArcadeBonuses
+                    )}
+                />
             </Box>
         </Box>
     )
