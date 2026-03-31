@@ -55,7 +55,7 @@ function Arcade() {
                         margin={{ right: 'medium' }}
                         component={
                             <Box direction="row" align="center" gap="xsmall">
-                                <IconImage data={ArcadeData.silverBallImageData()} />
+                                <IconImage data={ArcadeData.silverBallImageData()} scale={0.7} />
                                 <Text>{arcadeData?.balls?.toString() ?? "0"}</Text>
                             </Box>
                         }
@@ -65,7 +65,7 @@ function Arcade() {
                         margin={{ right: 'medium' }}
                         component={
                             <Box direction="row" align="center" gap="xsmall">
-                                <IconImage data={ArcadeData.silverBallImageData()} style={goldBallStyle} />
+                                <IconImage data={ArcadeData.silverBallImageData()} style={goldBallStyle} scale={0.7} />
                                 <Text>{arcadeData?.goldBalls?.toString() ?? "0"}</Text>
                             </Box>
                         }
@@ -75,7 +75,7 @@ function Arcade() {
                         margin={{ right: 'medium' }}
                         component={
                             <Box direction="row" align="center" gap="xsmall">
-                                <IconImage data={ArcadeData.silverBallImageData()} style={cosmicBallStyle} />
+                                <IconImage data={ArcadeData.silverBallImageData()} style={cosmicBallStyle} scale={0.7} />
                                 <Text>{arcadeData?.cosmicBalls?.toString() ?? "0"}</Text>
                             </Box>
                         }

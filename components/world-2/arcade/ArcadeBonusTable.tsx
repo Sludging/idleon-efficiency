@@ -54,7 +54,7 @@ export function ArcadeBonusTable({
 }: {
     rows: ArcadeBonusTableRow[]
 }) {
-    const [sortBy, setSortBy] = useState<ArcadeBonusSortValue>('default');
+    const [sortBy, setSortBy] = useState<ArcadeBonusSortValue>('rotation');
     const [searchText, setSearchText] = useState('');
 
     const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -80,7 +80,6 @@ export function ArcadeBonusTable({
     const columns = [
         {
             property: 'upgrade',
-            header: 'Upgrade',
             render: (data: ArcadeBonusTableRow) => (
                 <RowCell isOnRotation={data.isOnRotation}>
                     <IconImage data={data.bonus.getImageData()} scale={0.55} />
@@ -158,7 +157,6 @@ export function ArcadeBonusTable({
                     </Box>
                 </Box>
                 <Box direction="row" gap="small" align="center">
-                    <Text size="small">Search:</Text>
                     <TextInput
                         placeholder="Search bonus..."
                         value={searchText}
