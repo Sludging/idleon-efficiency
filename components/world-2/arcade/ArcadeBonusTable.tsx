@@ -9,12 +9,13 @@ import { nFormatter } from "../../../data/utility";
 import { ArcadeBonusTableRow } from "./arcadeBonusTableData";
 import { cosmicBallStyle, goldBallStyle } from "./ballStyles";
 
-type ArcadeBonusSortValue = 'default' | 'rotation';
+// 'Tier' sorting will be implemented in next PR. Leaving some placeholder code for it as commented out
+// type ArcadeBonusSortValue = 'tier' | 'rotation';
 
-const sortOptions: Array<{ label: string, value: ArcadeBonusSortValue }> = [
-    { label: 'Default Order', value: 'default' },
-    { label: 'Current Rotation', value: 'rotation' }
-];
+// const sortOptions: Array<{ label: string, value: ArcadeBonusSortValue }> = [
+//     { label: 'Tier', value: 'tier' },
+//     { label: 'Current Rotation', value: 'rotation' }
+// ];
 
 function sortByRotation(rows: ArcadeBonusTableRow[]) {
     const activeRows: ArcadeBonusTableRow[] = [];
@@ -54,7 +55,7 @@ export function ArcadeBonusTable({
 }: {
     rows: ArcadeBonusTableRow[]
 }) {
-    const [sortBy, setSortBy] = useState<ArcadeBonusSortValue>('rotation');
+    // const [sortBy, setSortBy] = useState<ArcadeBonusSortValue>('rotation');
     const [searchText, setSearchText] = useState('');
 
     const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -73,9 +74,7 @@ export function ArcadeBonusTable({
         })
         : rows;
 
-    const displayedTableData = sortBy === 'rotation'
-        ? sortByRotation(filteredRows)
-        : filteredRows;
+    const displayedTableData = sortByRotation(filteredRows);
 
     const columns = [
         {
@@ -144,7 +143,7 @@ export function ArcadeBonusTable({
     return (
         <ShadowBox background="dark-1" pad="medium">
             <Box direction="row" gap="medium" align="center" margin={{ bottom: 'medium' }} wrap>
-                <Box direction="row" gap="small" align="center">
+                {/* <Box direction="row" gap="small" align="center">
                     <Text size="small">Sort by:</Text>
                     <Box width="small">
                         <Select
@@ -155,8 +154,8 @@ export function ArcadeBonusTable({
                             onChange={({ value }) => setSortBy(value as ArcadeBonusSortValue)}
                         />
                     </Box>
-                </Box>
-                <Box direction="row" gap="small" align="center">
+                </Box> */}
+                <Box direction="row" gap="small" align="center" >
                     <TextInput
                         placeholder="Search bonus..."
                         value={searchText}
