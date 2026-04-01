@@ -20,6 +20,7 @@ import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { Item } from '../../../data/domain/items';
 import { ResourceDisplay } from '../../../components/account/shared/ResourceDisplay';
+import { nFormatter } from "../../../data/utility";
 
 interface PlayerTrapProps {
     traps: Array<Trap>
@@ -125,7 +126,7 @@ function PlayerTraps(props: PlayerTrapProps) {
                                                         Bonuses: {trap.getBenefits().join(" | ")}    
                                                     </Text>
                                                 </Box>
-                                                <Text>Critters: {trap.critters}</Text>
+                                                <Text>Critters: {nFormatter(trap.critters)}</Text>
                                             </Box>
                                         }
                                         size='medium'

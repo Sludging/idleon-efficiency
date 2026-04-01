@@ -6,7 +6,6 @@ import {
     Heading,
 } from 'grommet'
 import { useEffect, useState, useMemo } from 'react';
-import ShadowBox from '../../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Arcade as ArcadeData } from '../../../data/domain/world-2/arcade';
 import { Stamp } from '../../../data/domain/world-1/stamps';
@@ -14,6 +13,9 @@ import { StaticTime, TimeDisplaySize } from '../../../components/base/TimeDispla
 import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
+import ArcadeBonusTable from '../../../components/world-2/arcade/ArcadeBonusTable';
+import { buildArcadeBonusTableRows } from '../../../components/world-2/arcade/arcadeBonusTableData';
+import { cosmicBallStyle, goldBallStyle } from '../../../components/world-2/arcade/ballStyles';
 
 function Arcade() {
     const [arcadeData, setArcadeData] = useState<ArcadeData>();
@@ -47,35 +49,49 @@ function Arcade() {
         <Box pad="medium">
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Arcade</Heading>
             <Box gap="small">
-                <Box direction="row">
-                    <TextAndLabel text={arcadeData?.balls?.toString() ?? "0"} label="Silver balls" margin={{ right: 'medium' }} />
-                    <TextAndLabel text={arcadeData?.goldBalls?.toString() ?? "0"} label="Gold balls" margin={{ right: 'medium' }} />
+                <Box direction="row" wrap>
+                    <ComponentAndLabel
+                        label="Silver balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} scale={0.7} />
+                                <Text>{arcadeData?.balls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
+                    <ComponentAndLabel
+                        label="Gold balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} style={goldBallStyle} scale={0.7} />
+                                <Text>{arcadeData?.goldBalls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
+                    <ComponentAndLabel
+                        label="Cosmic balls"
+                        margin={{ right: 'medium' }}
+                        component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={ArcadeData.silverBallImageData()} style={cosmicBallStyle} scale={0.7} />
+                                <Text>{arcadeData?.cosmicBalls?.toString() ?? "0"}</Text>
+                            </Box>
+                        }
+                    />
                     <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.secondsPerBall ?? 0} size={TimeDisplaySize.Small} />} label="Time per ball" margin={{ right: 'medium' }} />
                     <ComponentAndLabel component={<StaticTime fromSeconds={arcadeData?.maxClaimTime ?? 0} size={TimeDisplaySize.Small} />} label="Max Claim time" margin={{ right: 'medium' }} />
                     <TextAndLabel text={`${(arcadeData?.ballsToClaim ?? 0).toString()}/${arcadeData?.maxBalls}`} label="Balls to claim" />
                 </Box>
                 <Text>Gold Balls Shop</Text>
-                <Box>
-                    {
-                        arcadeData && arcadeData.bonuses.map((bonus, index) => {
-                            return (
-                                <ShadowBox background="dark-1" key={index} direction="row">
-                                    <Box justify="start" direction="row" fill border={index != arcadeData.bonuses.length - 1 ? { side: 'bottom', color: 'accent-3', size: '1px' } : undefined} pad="medium">
-                                        <Box style={{ opacity: activeArcadeBonuses?.includes(bonus.index) || activeArcadeBonuses.length == 0 ? 1 : 0.3 }} margin={{ right: 'medium' }}>
-                                            <IconImage data={bonus.getImageData()} />
-                                        </Box>
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonusText()} label="Effect" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={`${bonus.level}/100`} label="Level" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getCost(goldenBallStampBonus).toString()} label="Cost" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={`${bonus.level}/100`} label="Level" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getBonus(true, 100).toString()} label="Max Bonus" margin={{ right: 'medium' }} />
-                                        <TextAndLabel labelSize='small' textSize='xsmall' text={bonus.getCostToMax(goldenBallStampBonus).toString()} label="Cost to max" margin={{ right: 'medium' }} />
-                                    </Box>
-                                </ShadowBox>
-                            )
-                        })
-                    }
-                </Box>
+                <ArcadeBonusTable
+                    rows={buildArcadeBonusTableRows(
+                        arcadeData?.bonuses ?? [],
+                        goldenBallStampBonus,
+                        activeArcadeBonuses
+                    )}
+                />
             </Box>
         </Box>
     )
