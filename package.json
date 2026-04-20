@@ -12,7 +12,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:domains": "jest domains/",
-    "test:integration": "jest integration/"
+    "test:integration": "jest integration/",
+    "coverage:report": "tsx scripts/coverage.ts"
   },
   "dependencies": {
     "@next/third-parties": "16.1.7",
@@ -56,6 +57,8 @@
     "pixelmatch": "^7.1.0",
     "spdy": "^4.0.2",
     "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
   "packageManager": "yarn@4.5.1",

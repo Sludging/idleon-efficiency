@@ -10,6 +10,8 @@
  *   3: +{% Skill XP (base 4)
  *   4: +{% Drop Rate (base 1)
  *   5: +{ All Stat (base 2)
+ * 
+ * @testCovers Orion.getGlobalBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

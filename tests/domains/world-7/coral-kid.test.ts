@@ -10,6 +10,9 @@
  * - Bonus 3: Minor link boost (level, rounded)
  * - Bonus 4: Divinity PTS gain (+2 * level, rounded)
  * - Bonus 5: Daily Coral generation (100 * level / (40 + level))
+ * 
+ * @testCovers CoralKid.getBonusFromIndex
+ * @testCovers CoralKid.getBonusNextlevelCost
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

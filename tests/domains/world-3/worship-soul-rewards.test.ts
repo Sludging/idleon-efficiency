@@ -2,6 +2,8 @@
  * Worship Soul Rewards Calculation Validation
  *
  * Tests our Worship soul rewards calculations against live game data.
+ * 
+ * @testCovers Totem.getSoulRewards
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

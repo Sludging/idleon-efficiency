@@ -3,6 +3,8 @@
  *
  * Tests our diamond chef bubble calculations against live game data
  * extracted from running game using the debug tool.
+ * 
+ * @testCovers DiamonChefBubble.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

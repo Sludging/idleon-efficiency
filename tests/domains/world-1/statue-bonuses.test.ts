@@ -1,3 +1,11 @@
+/**
+ * Statue Bonus Calculation Validation
+ * 
+ * Tests our statue bonus calculations against live game data.
+ * 
+ * @testCovers Statue.getBonus
+ */
+
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { PlayerStatues } from '../../../data/domain/world-1/statues';

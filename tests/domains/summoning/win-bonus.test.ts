@@ -2,6 +2,8 @@
  * Summoning Winner Bonus Calculation Validation
  *
  * Tests our Summoning winner bonus calculations against live game data.
+ * 
+ * @testCovers SummonBonus.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

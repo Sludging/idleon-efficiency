@@ -5,6 +5,8 @@
  *
  * CoralReef provides 6 upgrades with various effects:
  * - Cost formula: x1 * x2^level
+ * 
+ * @testCovers CoralReef.getBonusNextlevelCost
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

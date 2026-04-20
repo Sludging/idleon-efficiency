@@ -81,3 +81,6 @@ install-state.gz
 
 ## Reference repositories (competitor codebases for reference only)
 reference-repos/
+sub-projects/game-parser
+.patch_notes
+docs/GAME_CODE*

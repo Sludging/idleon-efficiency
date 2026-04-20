@@ -1,8 +1,14 @@
 /**
  * Cooking Domain Live Game Validation
- * 
+ *
  * Tests our cooking domain calculations against live game data
  * extracted from running game using the debug tool.
+ *
+ * @testCovers Cooking.getTotalCookingSpeed
+ * @testCovers Meal.getContributionSpeed
+ * @testCovers Meal.getTotalCookingSpeed
+ * @testCovers Kitchen.getMealSpeed
+ * @testCovers Kitchen.mealSpeed
  */
 
 import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';

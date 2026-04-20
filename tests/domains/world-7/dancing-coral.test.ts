@@ -8,6 +8,10 @@
  * - Cost formula: baseCost / (1 + (10 * unlockValue + 1.05^unlockValue) / 100)
  *
  * Each upgrade has a shrine level (Tower[18-26]) that must exceed 200 to provide benefits.
+ * 
+ * @testCovers DancingCoral.getBonusFromIndex
+ * @testCovers DancingCoralBonus.getCost
+ * @testCovers DancingCoralBonus.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

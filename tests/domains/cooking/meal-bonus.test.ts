@@ -3,6 +3,9 @@
  *
  * Tests that given the correct input parameters, our domain calculates
  * the correct meal bonus values.
+ *
+ * @testCovers Meal.getBonus
+ * @testCovers Cooking.getMealBonusForKey
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
