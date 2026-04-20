@@ -412,22 +412,22 @@ export const initJadeUpgradeRepo = () => {
                 "bonus": "Adds a new bonus type to your crop scientist! Specifically '+1% Research EXP' per 10 Crops after 200! So 240 crops would only give +4%"
             }),
         new JadeUpgradeBase(45, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Depth Charge Disposal",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 45,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
+                "bonus": "All Minehead opponents in Mr. Minehead's Depth Charge game have 1 less Depth Charge to deploy! Less mines means less booms!"
             }),
         new JadeUpgradeBase(46, <JadeUpgradeModel>{
-                "name": "UNDER CONSTRUCTION",
+                "name": "Optimal Optometry",
                 "costA": 500,
                 "costB": 1,
                 "imageId": 46,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
+                "bonus": "Your Optical Monocles give 1.35x more Insight EXP/hr, and your Kaleidoscopes have a 1.06x larger boost to adjacent magnifiers!"
             }),
         new JadeUpgradeBase(47, <JadeUpgradeModel>{
                 "name": "UNDER CONSTRUCTION",
@@ -436,25 +436,25 @@ export const initJadeUpgradeRepo = () => {
                 "imageId": 47,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "This bonus isn't out yet. 'nuff said."
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, since this isn't out yet!"
             }),
         new JadeUpgradeBase(48, <JadeUpgradeModel>{
-                "name": "IDK YET",
+                "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 39,
+                "imageId": 48,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Idk yet"
+                "bonus": "This bonus isn't out yet, so you cant buy it! Please come back in a few updates, I made myself clear before!"
             }),
         new JadeUpgradeBase(49, <JadeUpgradeModel>{
-                "name": "IDK YET",
+                "name": "UNDER CONSTRUCTION",
                 "costA": 500,
                 "costB": 1,
-                "imageId": 39,
+                "imageId": 49,
                 "filler1": "filler",
                 "filler2": "filler",
-                "bonus": "Idk yet"
+                "bonus": "This bonus isn't out yet. 'nuff said."
             })    
 ]
 }

@@ -248,7 +248,7 @@ export const initCardRepo = () => {
             }),
         new CardDataBase("Blank", <CardDataModel>{
                 "cardID": "A0",
-                "category": "Bosses",
+                "category": "Event",
                 "perTier": 10,
                 "effect": "+{% Base HP",
                 "bonus": 3,
@@ -1530,8 +1530,8 @@ export const initCardRepo = () => {
                 "cardID": "J20",
                 "category": "Shimmerfin Deep",
                 "perTier": 1e+07,
-                "effect": "+{% Drop Rate Multi",
-                "bonus": 1,
+                "effect": "+{% Research EXP (Passive)",
+                "bonus": 3,
                 "order": 20
             }),
         new CardDataBase("w7b9", <CardDataModel>{
@@ -2173,6 +2173,14 @@ export const initCardRepo = () => {
                 "effect": "+{% Money from Monsters",
                 "bonus": 4,
                 "order": 24
+            }),
+        new CardDataBase("anni5Event1", <CardDataModel>{
+                "cardID": "Y24",
+                "category": "Event",
+                "perTier": 6,
+                "effect": "+{% Gold Food Effect (Passive)",
+                "bonus": 5,
+                "order": 25
             })    
 ]
 }

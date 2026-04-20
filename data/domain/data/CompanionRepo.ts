@@ -388,7 +388,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(38, <CompanionModel>{
                 "id": "w7a5",
-                "desc": "4x Masterclass drops (Bones/Dust/Tachyon)",
+                "desc": "4x Coins from monsters, and 4x Masterclass drops",
                 "bonus": 3,
                 "x1": -54,
                 "x2": 0,
@@ -1124,7 +1124,7 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 60
             }),
         new CompanionBase(112, <CompanionModel>{
                 "id": "w4c2",
@@ -1288,11 +1288,11 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(128, <CompanionModel>{
                 "id": "w6a4",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "{100% Class EXP and 1.50x Class EXP Multi",
+                "bonus": 100,
+                "x1": -10,
                 "x2": 0,
-                "x3": 0,
+                "x3": -4,
                 "x4": 1,
                 "x5": 100
             }),
@@ -1328,13 +1328,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(132, <CompanionModel>{
                 "id": "w6b3",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "{100% Drop Rate and 1.50x Drop Rate Multi",
+                "bonus": 100,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 175
             }),
         new CompanionBase(133, <CompanionModel>{
                 "id": "w6c1",
@@ -1358,13 +1358,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(135, <CompanionModel>{
                 "id": "w6d1",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "2x LVs for Monuments Bonuses when selecting Rewards!",
+                "bonus": 100,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 195
             }),
         new CompanionBase(136, <CompanionModel>{
                 "id": "w6d2",
@@ -1458,13 +1458,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(145, <CompanionModel>{
                 "id": "w7b4",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "3x Class EXP gain",
+                "bonus": 2,
+                "x1": -9,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 180
             }),
         new CompanionBase(146, <CompanionModel>{
                 "id": "w7b6",
@@ -1477,14 +1477,14 @@ export const initCompanionRepo = () => {
                 "x5": 100
             }),
         new CompanionBase(147, <CompanionModel>{
-                "id": "w7b7zzz",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "id": "w7b7",
+                "desc": "All bonuses from The Button in W7 are 1.50x bigger",
+                "bonus": 50,
+                "x1": -40,
                 "x2": 0,
-                "x3": 0,
+                "x3": -33,
                 "x4": 1,
-                "x5": 100
+                "x5": 160
             }),
         new CompanionBase(148, <CompanionModel>{
                 "id": "w7b8zzz",
@@ -1615,6 +1615,36 @@ export const initCompanionRepo = () => {
                 "x3": -34,
                 "x4": 1,
                 "x5": 230
+            }),
+        new CompanionBase(161, <CompanionModel>{
+                "id": "poppy",
+                "desc": "2x bonuses from Bonus Ballot and Multi Meritocracy",
+                "bonus": 100,
+                "x1": -49,
+                "x2": 0,
+                "x3": -15,
+                "x4": 1,
+                "x5": 235
+            }),
+        new CompanionBase(162, <CompanionModel>{
+                "id": "w6b2b",
+                "desc": "All meals are 5x cheaper to level up, and give 1.25x higher bonuses!",
+                "bonus": 1,
+                "x1": -25,
+                "x2": 0,
+                "x3": 0,
+                "x4": 1,
+                "x5": 165
+            }),
+        new CompanionBase(163, <CompanionModel>{
+                "id": "w5b5b",
+                "desc": "100x Jade Gain, 40x Ninja Stealth, and 2.50x Sneaking EXP",
+                "bonus": 1,
+                "x1": -18,
+                "x2": 0,
+                "x3": 0,
+                "x4": 1,
+                "x5": 190
             })    
 ]
 }

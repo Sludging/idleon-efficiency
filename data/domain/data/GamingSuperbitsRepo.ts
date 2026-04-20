@@ -403,16 +403,16 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Artistic Gamer"
             }),
         new GamingSuperbitBase(66, <GamingSuperbitModel>{
-                "description": "Dont buy this. Not like you can afford it regardless.",
-                "x1": 2,
-                "x2": 150,
-                "name": "Not Yet"
+                "description": "Opponents in Mr. Minehead's Depth Charge always have 1 less mine.",
+                "x1": 1,
+                "x2": 80,
+                "name": "Less Charge"
             }),
         new GamingSuperbitBase(67, <GamingSuperbitModel>{
-                "description": "You can't buy this. At least not with so few bits.",
+                "description": "Your sushi generate +100% more Bucks at the Sushi Station!",
                 "x1": 2,
-                "x2": 150,
-                "name": "Nuh Uh"
+                "x2": 89,
+                "name": "Small Gratuity"
             }),
         new GamingSuperbitBase(68, <GamingSuperbitModel>{
                 "description": "You can't buy this today, or tomorrow, or the next day.",

@@ -111,12 +111,20 @@ export const initAtomColliderRepo = () => {
                 "desc": "Stamp Doublers give an extra +{% MORE bonus than the normal +100% they give!"
             }),
         new AtomColliderBase(13, <AtomColliderModel>{
-                "name": "Silicon - Minehead Money Printer",
+                "name": "Silicon - Minehead Currency Printer",
                 "growthFactor": 50000,
                 "baseExponent": 1.3,
                 "baseCost": 250000,
                 "bonusPerLv": 1,
                 "desc": "Boosts your Minehead Currency gain by +{%! This is a new multiplier, so it's always relevant!"
+            }),
+        new AtomColliderBase(14, <AtomColliderModel>{
+                "name": "Phosphorus - Sushi Bucks Generator",
+                "growthFactor": 100000,
+                "baseExponent": 1.45,
+                "baseCost": 400000,
+                "bonusPerLv": 1,
+                "desc": "Boosts your Sushi Station Bucks gain by +{%! This is a new multiplier, so it's always relevant!"
             })    
 ]
 }

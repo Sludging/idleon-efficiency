@@ -78,7 +78,12 @@ export const initDreamUpgradeRepo = () => {
                 "x1": 15,
                 "x2": 1
             }),
-        new DreamUpgradeBase(12, <DreamUpgradeModel>{"name": "Hmm...", "upgrade": "Huh...", "x1": 2, "x2": -1}),
+        new DreamUpgradeBase(12, <DreamUpgradeModel>{
+                "name": "Nonstop Studies",
+                "upgrade": "3% Research EXP. This is its own multiplier, so it's EXTRA powerful! @   @ Total Bonus: % Research EXP gain",
+                "x1": 10,
+                "x2": 3
+            }),
         new DreamUpgradeBase(13, <DreamUpgradeModel>{"name": "Hmm...", "upgrade": "Huh...", "x1": 2, "x2": -1})    
 ]
 }

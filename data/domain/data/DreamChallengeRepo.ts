@@ -217,9 +217,255 @@ export const initDreamChallengeRepo = () => {
                 "filler": "Filler"
             }),
         new DreamChallengeBase(35, <DreamChallengeModel>{
-                "challenge": "Get at least 100 Killroy kills on all monsters in World 1, 2, 3, 4, 5 and 6, as shown in Killroy Prime in Rift",
-                "req": 80,
+                "challenge": "Get at least 100 Killroy kills on HALF of monsters in World 1 through 6, as shown in Killroy Prime in Rift",
+                "req": 40,
                 "reward": "+15 Max LV for 'Voter Rights' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(36, <DreamChallengeModel>{
+                "challenge": "Hit a bomb instantly while playing Mr. Minehead's Depth Charge 5 times",
+                "req": 5,
+                "reward": "Unlock next Equinox upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(37, <DreamChallengeModel>{
+                "challenge": "Create a Tier 25 Sushi at the Sushi Station",
+                "req": 25,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(38, <DreamChallengeModel>{
+                "challenge": "Reach Worker Class Lv.3 or higher at The Clamworks in World 7",
+                "req": 3,
+                "reward": "+60% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(39, <DreamChallengeModel>{
+                "challenge": "Reach Showdown 100 at the Emperor's Castle in World 6",
+                "req": 100,
+                "reward": "+10 Max LV for 'Matching Scims' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(40, <DreamChallengeModel>{
+                "challenge": "Fill half of your cog board, at least 48 slots, with Jewel Cogs. They're unlocked from Duperbits in Gaming.",
+                "req": 48,
+                "reward": "+65% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(41, <DreamChallengeModel>{
+                "challenge": "Reach Lv 1000 on ALL your characters!",
+                "req": 1,
+                "reward": "All Minehead opponents have 1 less Depth Charge",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(42, <DreamChallengeModel>{
+                "challenge": "Reach LV. 30 for any Palette Colour in Gaming",
+                "req": 30,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(43, <DreamChallengeModel>{
+                "challenge": "Reclaim at least 50 of the King Rat's missing crowns, as shown in your Gaming Logbook",
+                "req": 50,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(44, <DreamChallengeModel>{
+                "challenge": "Complete 300 different Quests. This is the same value used by those Star Talents of yours on the 1st page!",
+                "req": 300,
+                "reward": "+75% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(45, <DreamChallengeModel>{
+                "challenge": "Help Bolaia, Student of Cavern Lore, reach Lv 200 or higher",
+                "req": 200,
+                "reward": "1.03x Equinox Bar fill rate, MULTI!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(46, <DreamChallengeModel>{
+                "challenge": "Level up your C String at The Harp in the Caverns to Lv 150 or higher",
+                "req": 150,
+                "reward": "+90% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(47, <DreamChallengeModel>{
+                "challenge": "Defeat 300 opponents in Endless Summoning",
+                "req": 300,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(48, <DreamChallengeModel>{
+                "challenge": "Reach 10,000,000+ Total Points in the Gambit Cavern",
+                "req": 10000000,
+                "reward": "+100% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(49, <DreamChallengeModel>{
+                "challenge": "Reach LV. 60 for any Palette Colour in Gaming",
+                "req": 60,
+                "reward": "1.05x Equinox Bar fill rate, MULTI!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(50, <DreamChallengeModel>{
+                "challenge": "Reach Sanctum 25 in the Temple Cavern",
+                "req": 25,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(51, <DreamChallengeModel>{
+                "challenge": "Get a score of 100,000,000 or more in The Dawg Den Cavern",
+                "req": 100000000,
+                "reward": "+120% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(52, <DreamChallengeModel>{
+                "challenge": "Collect 60 Stickers from Harvesting Megacrops in Farming",
+                "req": 60,
+                "reward": "1.06x Equinox Bar fill rate, MULTI!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(53, <DreamChallengeModel>{
+                "challenge": "Get a LV. 7 slot in Sneaking, using Symbols. This is the Green slot that comes after the Lv.6 White slot.",
+                "req": 7,
+                "reward": "+100 Max possible LV for all Sneaking Charms",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(54, <DreamChallengeModel>{
+                "challenge": "Have 16 or more Millionmega Gold Foods on the Beanstalk. You must complete Sad Urie's questline first...",
+                "req": 16,
+                "reward": "+150% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(55, <DreamChallengeModel>{
+                "challenge": "Acquire at least 8 Megaflesh from Bubba the Seal",
+                "req": 8,
+                "reward": "+5 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(56, <DreamChallengeModel>{
+                "challenge": "Find at least 1850 items, according to The Slab",
+                "req": 1850,
+                "reward": "+160% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(57, <DreamChallengeModel>{
+                "challenge": "Reach LV. 82 for any Palette Colour in Gaming",
+                "req": 82,
+                "reward": "+170% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(58, <DreamChallengeModel>{
+                "challenge": "Reach a 200,000x or higher multiplier for Extra Bones, or Extra Tachyons. Your choice.",
+                "req": 200000,
+                "reward": "+6 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(59, <DreamChallengeModel>{
+                "challenge": "Find a Nugget worth at least 1000Mx Bits Gain in Gaming. Yes, a BILLIONAIRE golden nugget...",
+                "req": 1000000000,
+                "reward": "1.07x Equinox Bar fill rate, MULTI!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(60, <DreamChallengeModel>{
+                "challenge": "Acquire a Tier 6 Tiny Cog. Yes, a Tier 6 exactly. Tier 7 and up ain't it.",
+                "req": 1,
+                "reward": "+185% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(61, <DreamChallengeModel>{
+                "challenge": "Reach Lv. 1500 on any of your characters, you absolute legend",
+                "req": 1,
+                "reward": "+6 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(62, <DreamChallengeModel>{
+                "challenge": "Add either the Nine Dart Finish Trophy or the Baller Trophy to your Gallery",
+                "req": 1,
+                "reward": "+190% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(63, <DreamChallengeModel>{
+                "challenge": "Press THE BUTTON at least 200 times... actually, better make that 210 times!",
+                "req": 210,
+                "reward": "+195% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(64, <DreamChallengeModel>{
+                "challenge": "Create a Tier 54 Sushi at the Sushi Station",
+                "req": 54,
+                "reward": "+7 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(65, <DreamChallengeModel>{
+                "challenge": "Reclaim at least 70 of the King Rat's missing crowns, as shown in your Gaming Logbook",
+                "req": 70,
+                "reward": "+200% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(66, <DreamChallengeModel>{
+                "challenge": "Reach Worker Class Lv.8 or higher at The Clamworks in World 7",
+                "req": 8,
+                "reward": "+3 Exotic Market purchases per week",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(67, <DreamChallengeModel>{
+                "challenge": "Hit a bomb instantly while playing Mr. Minehead's Depth Charge 500 times",
+                "req": 500,
+                "reward": "1.07x Equinox Bar fill rate, MULTI!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(68, <DreamChallengeModel>{
+                "challenge": "Collect 80 Stickers from Harvesting Megacrops in Farming",
+                "req": 80,
+                "reward": "+220% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(69, <DreamChallengeModel>{
+                "challenge": "Acquire at least 10 Megaflesh from Bubba the Seal",
+                "req": 10,
+                "reward": "1.05x Drop Rate multi",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(70, <DreamChallengeModel>{
+                "challenge": "Reach LV. 100 for any Palette Colour in Gaming",
+                "req": 100,
+                "reward": "1.05x Class EXP multi",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(71, <DreamChallengeModel>{
+                "challenge": "Find all 10 Grand Discoveries in Pebble Cove, the first Spelunking tunnel",
+                "req": 10,
+                "reward": "All Research Grid bonuses are +1% bigger",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(72, <DreamChallengeModel>{
+                "challenge": "Deliver the Unstable Reliquarium 7 times",
+                "req": 7,
+                "reward": "All Research Grid bonuses are +1% bigger",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(73, <DreamChallengeModel>{
+                "challenge": "Get a Rank 20 Ribbon.",
+                "req": 1,
+                "reward": "Ribbons give +1% extra multi every 10 Ranks!",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(74, <DreamChallengeModel>{
+                "challenge": "Discover every object across all Spelunking tunnels. Better do this now before the next tunnel comes out!",
+                "req": 90,
+                "reward": "+250% Equinox Bar fill rate",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(75, <DreamChallengeModel>{
+                "challenge": "Reach Sneaking Mastery VII",
+                "req": 7,
+                "reward": "+8 Max LV for 'Nonstop Studies' Equinox Upgrade",
+                "filler": "Filler"
+            }),
+        new DreamChallengeBase(76, <DreamChallengeModel>{
+                "challenge": "Get at least 100 Killroy kills on ALL monsters in World 1 through 6, as shown in Killroy Prime in Rift",
+                "req": 80,
+                "reward": "All Research Grid bonuses are +1% bigger",
                 "filler": "Filler"
             })    
 ]

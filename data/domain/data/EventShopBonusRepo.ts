@@ -205,7 +205,7 @@ export const initEventShopBonusRepo = () => {
             }),
         new EventShopBonusBase(41, <EventShopBonusModel>{
                 "name": "Golden Registrant",
-                "desc": "Registering for the Grand Tourny gives 1000 Gold Balls",
+                "desc": "Registering for Grand Tournament gives 1000 Gold Balls",
                 "price": 15
             }),
         new EventShopBonusBase(42, <EventShopBonusModel>{"name": "Glass Dice", "desc": "+50% total Crystal Mob Spawn Chance", "price": 35}),
@@ -213,6 +213,26 @@ export const initEventShopBonusRepo = () => {
                 "name": "Magnate Exotica",
                 "desc": "+8 weekly Exotic Market purchases and +30% are free",
                 "price": 170
+            }),
+        new EventShopBonusBase(44, <EventShopBonusModel>{
+                "name": "Minehead Money",
+                "desc": "Earn 2x more currency for World 7's Depth Charge",
+                "price": 35
+            }),
+        new EventShopBonusBase(45, <EventShopBonusModel>{
+                "name": "Sushi Stackz",
+                "desc": "Earn 2x more currency for World 7's Sushi Station",
+                "price": 20
+            }),
+        new EventShopBonusBase(46, <EventShopBonusModel>{
+                "name": "Research Registrant",
+                "desc": "Registering for Tournament gives 12hrs Research gains",
+                "price": 150
+            }),
+        new EventShopBonusBase(47, <EventShopBonusModel>{
+                "name": "Monumental Reverence",
+                "desc": "+100 LVs for all Monument bonuses every day forever",
+                "price": 100
             })    
 ]
 }
