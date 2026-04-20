@@ -11,6 +11,8 @@
  *   5: +{% All Kills (base 1)
  *   6: {% XP Multi (base 4)
  *   7: -{% Atom Cost (base 3)
+ * 
+ * @testCovers Bubba.getGlobalBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

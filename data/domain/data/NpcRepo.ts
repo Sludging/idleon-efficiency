@@ -16865,6 +16865,42 @@ export const initNpcRepo = () => {
                     <DialogueLineModel>{
                         "Type": QuestTypeEnum.NoQuest,
                         "DialogueText": "Hows it flowin' 'n goin' my guy? This pipin' hot heat out here making you and I very dry.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("Sushi Station", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hows it flowin' 'n goin' my guy? This pipin' hot heat out here making you and I very dry.",
+                        "NextIndex": 1,
+                        "Name": ""
+                    }
+                ]
+            }),
+        new NpcBase("The Button", <NpcModel>{
+                "head": <NpcHeadModel>{
+                    "location": "Unknown",
+                    "world": "Shimmerfin Deep",
+                    "noQuest": 0,
+                    "type": "Unknown",
+                    "notes": " "
+                },
+                "quests": {},
+                "dialogue": [
+                    <DialogueLineModel>{
+                        "Type": QuestTypeEnum.NoQuest,
+                        "DialogueText": "Hows it flowin' 'n goin' my guy? This pipin' hot heat out here making you and I very dry.",
                         "NextIndex": -1,
                         "Name": ""
                     }

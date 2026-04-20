@@ -2,6 +2,8 @@
  * Worship Totalizer Bonuses Calculation Validation
  *
  * Tests our Worship totalizer bonus calculations against live game data.
+ * 
+ * @testCovers Totalizer.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

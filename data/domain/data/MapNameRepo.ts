@@ -327,7 +327,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(318, <MapNameModel>{"intName": "uAquaB4", "name": "Sushi Perimeter", "id": 318}),
         new MapNameBase(319, <MapNameModel>{"intName": "uAquaB5", "name": "Jellofish Fields", "id": 319}),
         new MapNameBase(320, <MapNameModel>{"intName": "uAquaB6", "name": "Where the Kelp Meets Trench", "id": 320}),
-        new MapNameBase(321, <MapNameModel>{"intName": "uAquaB7", "name": "fillername", "id": 321}),
+        new MapNameBase(321, <MapNameModel>{"intName": "uAquaB7", "name": "Trench Precipice", "id": 321}),
         new MapNameBase(322, <MapNameModel>{"intName": "uAquaB8", "name": "fillername", "id": 322}),
         new MapNameBase(323, <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323}),
         new MapNameBase(324, <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324}),

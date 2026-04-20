@@ -11,6 +11,8 @@
  *   4: +{% Total DMG (base 2)
  *   5: +{% AFK Gains (base 0.5)
  *   6: +{% Cash (base 3)
+ * 
+ * @testCovers Poppy.getGlobalBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

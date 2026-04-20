@@ -649,9 +649,9 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(80, <TomeModel>{
                 "name": "Total Arcade Gold Ball Shop Upgrade LV",
-                "keyQty": 3800,
+                "keyQty": 6800,
                 "scalingType": TomeScalingEnum.linearToMax,
-                "totalVal": 800,
+                "totalVal": 1200,
                 "decimalDisplay": undefined,
                 "desc": undefined
             }),
@@ -934,6 +934,22 @@ export const initTomeRepo = () => {
                 "totalVal": 400,
                 "decimalDisplay": undefined,
                 "desc": "Glimbo can be found deep in World 7, he increases your Upgrade Vault max LV's in exchange for valuable items!"
+            }),
+        new TomeBase(116, <TomeModel>{
+                "name": "Unique Sushi Created 膛",
+                "keyQty": 54,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 800,
+                "decimalDisplay": undefined,
+                "desc": "Basically, the highest Tier of Sushi you've created over at the Sushi Station in World 7!"
+            }),
+        new TomeBase(117, <TomeModel>{
+                "name": "Button Presses 膛",
+                "keyQty": 300,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 500,
+                "decimalDisplay": undefined,
+                "desc": "This is referring to THE BUTTON, found in the Mantaray map in World 7! This map is the 12th map away from town, to give you an idea of where this map is."
             })    
 ]
 }

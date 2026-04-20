@@ -1,3 +1,8 @@
+/**
+ * @testCovers LegendTalents.getBonusFromIndex
+ * @testCovers LegendTalent.getBonus
+ */
+
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';

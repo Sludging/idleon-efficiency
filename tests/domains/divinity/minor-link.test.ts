@@ -3,6 +3,8 @@
  *
  * Tests that given the correct input parameters, our domain calculates
  * the correct minor link bonus values.
+ * 
+ * @testCovers DivinityGod.getMinorLinkBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

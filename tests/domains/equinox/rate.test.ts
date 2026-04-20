@@ -1,3 +1,7 @@
+/**
+ * Equinox Rate Calculation Tests
+ */
+
 import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Equinox } from '../../../data/domain/equinox';

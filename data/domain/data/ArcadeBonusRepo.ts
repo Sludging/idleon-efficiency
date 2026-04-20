@@ -608,6 +608,15 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% Chance",
                 "barType": 31
+            }),
+        new ArcadeBonusBase(67, <ArcadeBonusModel>{
+                "effect": "+{% Sushi Bucks",
+                "x1": 25,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Bucks",
+                "barType": 35
             })    
 ]
 }

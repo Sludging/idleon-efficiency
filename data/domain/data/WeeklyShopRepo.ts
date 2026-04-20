@@ -170,7 +170,7 @@ export const initWeeklyShopRepo = () => {
         new WeeklyShopBase(20, <WeeklyShopModel>{
                 "name": "Gold_Pocketwatch",
                 "section": WeeklyShopSectionEnum.Items,
-                "cost": 30,
+                "cost": 50,
                 "intName": "Quest77",
                 "desc": "Shift_time_forward_by_24_hours,_triggering_daily_bonuses_and_resets",
                 "itemType": 1

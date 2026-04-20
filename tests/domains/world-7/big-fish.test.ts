@@ -9,6 +9,10 @@
  * - Unlock requirement: 4000 + (300 + 50 * max(0, index - 2)) * index
  *
  * Bonuses are unlocked when total player levels exceed the unlock requirement.
+ * 
+ * @testCovers BigFish.getBonusFromIndex
+ * @testCovers BigFish.getBonusNextlevelCost
+ * @testCovers BigFish.getUnlockLevelRequired
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
