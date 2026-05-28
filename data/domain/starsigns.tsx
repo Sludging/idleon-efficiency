@@ -1,9 +1,10 @@
 import { Domain } from './base/domain';
 import { RawData } from './base/domain';
 import { Item } from "./items";
-import { Summoning } from "./world-6/summoning";
 import { InfiniteStarsBonus, Rift } from "./world-4/rift";
 import { Tesseract } from './tesseract';
+import type { Player } from './player';
+import { SkillsIndex } from './SkillsIndex';
 
 interface StarBonus {
     text: string,
@@ -89,7 +90,7 @@ export class StarSigns extends Domain  {
 
     getSeraphCosmosBonus = (): number => {
         if (this.isStarSignUnlocked("Seraph Cosmos")) {
-            return Math.min(3, Math.pow(1.1 + Math.min(this.tesseractBonusToSeraph, 10) / 100, Math.ceil((this.summoningLevel + 1) / 20)));
+            return Math.min(5, Math.pow(1.1 + Math.min(this.tesseractBonusToSeraph, 10) / 100, Math.ceil((this.summoningLevel + 1) / 20)));
         } else {
             return 1;
         }
@@ -109,10 +110,10 @@ export class StarSigns extends Domain  {
 
 export const updateStarSignsUnlocked = (data: Map<string, any>) => {
     const starSigns = data.get("starsigns") as StarSigns;
-    const summoning = data.get("summoning") as Summoning;
+    const players = data.get("players") as Player[];
     const tesseract = data.get("tesseract") as Tesseract;
 
-    starSigns.summoningLevel = summoning.summoningLevel;
+    starSigns.summoningLevel = Math.max(...players.map(player => player.skills.get(SkillsIndex.Summoning)?.level ?? 0));
     starSigns.tesseractBonusToSeraph = tesseract.getUpgradeBonus(40);
     const seraphCosmosBonus = starSigns.getSeraphCosmosBonus();
     starSigns.unlockedStarSigns.filter(sign => !["Chronus Cosmos", "Hydron Cosmos", "Seraph Cosmos"].includes(sign.name)).forEach(sign => {

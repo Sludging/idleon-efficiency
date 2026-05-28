@@ -9,7 +9,6 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Cooking } from '../../../data/domain/world-4/cooking';
-import { StarSigns } from '../../../data/domain/starsigns';
 import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
 import { Player } from '../../../data/domain/player';
 import { Votes } from '../../../data/domain/world-2/votes';
@@ -65,8 +64,8 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     description: 'Star sign cooking speed bonus',
     extractionKey: 'starsign_58_bonus',
     domainExtractor: (gameData) => {
-      const starSigns = gameData.get("starsigns") as StarSigns;
-      const starsign58 = starSigns.unlockedStarSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0;
+      const players = gameData.get('players') as Player[];
+      const starsign58 = players[0].starSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0;
       return starsign58;
     },
   },
