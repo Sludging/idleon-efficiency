@@ -24,6 +24,7 @@ import { TaskBoard } from "../tasks";
 import { Grimoire } from "../grimoire";
 import { LegendTalents } from "../world-7/legendTalents";
 
+// TODO: This is a temporary solution until proper Exotic Market implementation
 const exoticMarketBonusData: Record<number, { bonusPerLevel: number, diminishing: boolean }> = {
     48: { bonusPerLevel: 2, diminishing: true }, // Prisma Bubble Bonus
 };
