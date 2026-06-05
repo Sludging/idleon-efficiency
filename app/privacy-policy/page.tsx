@@ -2,6 +2,7 @@ import {
     Box
 } from 'grommet'
 import type { Metadata } from 'next'
+import Link from 'next/link';
  
 export const metadata: Metadata = {
     title: "Privacy Policy",
@@ -131,6 +132,9 @@ function PrivacyPolicy() {
                     <p><strong>For other purposes</strong>: We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience.</p>
                 </li>
             </ul>
+            <h3>Advertising and Identity</h3>
+            <p>When you are signed in to your account, we may share a one-way cryptographic hash (SHA-256) of your verified account email address with our advertising provider, NitroPay, and their advertising partners, to help deliver more relevant advertisements. We do not share your raw email address through this process for ad matching, and we do not store these hashes on our servers.</p>
+            <p>You may opt out at any time in <Link href="/profile/settings">Settings</Link></p>
             <p>We may share Your personal information in the following situations:</p>
             <ul>
                 <li><strong>With Service Providers:</strong> We may share Your personal information with Service Providers to monitor and analyze the use of our Service,  to contact You.</li>

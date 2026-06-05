@@ -79,11 +79,18 @@ export const Profile = () => {
                     dropContent={
                         <Box width="small" border={{ color: 'grey-1' }} round="small">
                             {dataStatus == DataStatus.LiveData &&
-                                <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/upload'}>
-                                    <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
-                                        <Box align="center" pad="small">Public Profile</Box>
-                                    </Button>
-                                </Link>
+                                <>
+                                    <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/upload'}>
+                                        <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                            <Box align="center" pad="small">Public Profile</Box>
+                                        </Button>
+                                    </Link>
+{/*                                     <Link prefetch={false} href={'https://www.idleonefficiency.com/profile/settings'}>
+                                        <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">
+                                            <Box align="center" pad="small">Settings</Box>
+                                        </Button>
+                                    </Link> */}
+                                </>
                             }
                             <Link prefetch={false} href={'https://www.idleonefficiency.com/changelog'}>
                                 <Button onClick={() => setProfileDropDownOpen(false)} hoverIndicator={{ color: 'brand', size: 'large' }} color="accent-2">

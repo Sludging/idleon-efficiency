@@ -105,6 +105,9 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
             window.nitroAds.addUserToken = function (...args: any[]) {
                 window.nitroAds.queue.push(["addUserToken", args])
             };
+            window.nitroAds.clearUserTokens = function () {
+                window.nitroAds.queue.push(["clearUserTokens", []])
+            };
             window.nitroAds.queue = [];
             // Load the Ramp configuration script
             const configScript = document.createElement("script");
