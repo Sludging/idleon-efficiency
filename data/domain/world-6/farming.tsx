@@ -23,6 +23,7 @@ import { Votes } from "../world-2/votes";
 import { TaskBoard } from "../tasks";
 import { Grimoire } from "../grimoire";
 import { LegendTalents } from "../world-7/legendTalents";
+import { Emperor } from "./emperor";
 
 // TODO: This is a temporary solution until proper Exotic Market implementation
 const exoticMarketBonusData: Record<number, { bonusPerLevel: number, diminishing: boolean }> = {
@@ -117,6 +118,7 @@ export class LandRankUpgrade {
 export class MarketUpgrade {
     level: number = 0;
     unlocked: boolean = false;
+    costMultiplier: number = 1;
 
     constructor(public index: number, public data: MarketInfoModel) { }
 
@@ -151,7 +153,7 @@ export class MarketUpgrade {
             }
         }
 
-        const cropCost = (this.data.maxLvl > currentLevel ? Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel))) : 0);
+        const cropCost = (this.data.maxLvl > currentLevel ? Math.floor(this.data.cost * Math.pow(this.data.costExponent, (currentLevel)) * this.costMultiplier) : 0);
 
         return { cropId: cropId, cropQuantity: cropCost };
     }
@@ -503,6 +505,7 @@ export class Farming extends Domain {
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
     exoticMarketLevels: number[] = [];
+    marketCostMultiplier: number = 1;
 
     cropNames = ["Apple", "Orange", "Lemon", "Pear", "Strawberry", "Bananas", "Blueberry", "Red Grapes", "Red Pear", "Pineapple", "Lime", "Raspberry", "Fig", "Peach", "Purple Grapes", "Yellow Pear", "Watermelon", "Green Grapes", "Dragon Fruit", "Mango", "Gold Blueberry",
         "Carrot", "Potato", "Beat", "Tomato", "Artichoke", "Roma Tomato", "Butternut Squash", "Avocado", "Red Pepper", "Broccoli", "Beatroot", "Coconut", "Sliced Tomato", "Cashew", "Turnip", "Coffee Bean", "Pumpkin", "Sliced Cucumber", "Eggplant", "Lettuce", "Garlic", "Green Beans", "Bell Pepper", "Corn", "Gold Sliced Tomato",
@@ -685,6 +688,14 @@ export class Farming extends Domain {
         });
     }
 
+    updateMarketCostDiscount = (discountValue: number) => {
+        const discount = Math.max(0, discountValue);
+        this.marketCostMultiplier = Math.max(0.001, 1 - discount / (discount + 100));
+        this.marketUpgrades.forEach(upgrade => {
+            upgrade.costMultiplier = this.marketCostMultiplier;
+        });
+    }
+
     updatePlotGrowthSinceSave = (saveTime: number) => {
         this.farmPlots.forEach(plot => {
             plot.lastRefresh = saveTime;
@@ -851,8 +862,12 @@ export const updateFarmingDisplayData = (data: Map<string, any>) => {
     const taskBoard = data.get("taskboard") as TaskBoard;
     const legendTalents = data.get("legendTalents") as LegendTalents;
     const grimoire = data.get("grimoire") as Grimoire;
+    const emperor = data.get("emperor") as Emperor;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
+
+    const emperorFarmingDiscount = emperor?.emperorBonuses[2]?.getBonus() ?? 0;
+    farming.updateMarketCostDiscount(emperorFarmingDiscount);
 
     // Update Min and Max possible quantity to collect from one fully grown crop 
     const gemInstagrowPurchase = gemStore.purchases.find(purchase => purchase.no == 139)?.pucrhased ?? 0;
