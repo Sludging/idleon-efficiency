@@ -14,8 +14,6 @@ import {
     isNitroHashedEmailOptedOut,
     setNitroHashedEmailOptOut,
 } from '../../../lib/nitroHashedEmailConsent';
-import { hashEmailForAds } from '../../../lib/hashEmail';
-import { addNitroHashedEmailToken, clearNitroHashedEmailTokens } from '../../../lib/nitroTokens';
 import { useShallow } from 'zustand/react/shallow';
 
 function ProfileSettings() {
@@ -36,17 +34,9 @@ function ProfileSettings() {
         );
     }
 
-    const onToggle = async (checked: boolean) => {
+    const onToggle = (checked: boolean) => {
         setPersonalizedAds(checked);
         setNitroHashedEmailOptOut(!checked);
-        if (!checked) {
-            clearNitroHashedEmailTokens();
-            return;
-        }
-        if (user.email && user.emailVerified) {
-            const hash = await hashEmailForAds(user.email);
-            addNitroHashedEmailToken(hash);
-        }
     };
 
     return (
@@ -56,7 +46,7 @@ function ProfileSettings() {
                 <CheckBox
                     label="Personalized ads (hashed email)"
                     checked={personalizedAds}
-                    onChange={(event) => void onToggle(event.target.checked)}
+                    onChange={(event) => onToggle(event.target.checked)}
                 />
                 <Paragraph color="grey-2">
                     When enabled, we pass a one-way SHA-256 hash of your verified account email to our ad provider (NitroPay) to help show more relevant ads. We never send your raw email for this purpose. You can read more in our{' '}

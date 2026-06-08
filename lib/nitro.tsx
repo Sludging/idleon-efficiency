@@ -1,6 +1,11 @@
 "use client"
 
 import { useEffect } from 'react';
+import {
+    getNitroHashedEmail,
+    NITRO_HASHED_EMAIL_HASH_KEY,
+    NITRO_HASHED_EMAIL_UPDATED,
+} from './nitroHashedEmailConsent';
 
 declare const window: Window &
     typeof globalThis & {
@@ -85,6 +90,29 @@ const adUnits: Record<string, any> = {
 
 const Nitro = ({ demo = false }: { demo: boolean }) => {
     useEffect(() => {    
+        let adsCreated = false;
+
+        const addStoredUserToken = () => {
+            if (demo) {
+                return;
+            }
+
+            const hashedEmail = getNitroHashedEmail();
+            if (hashedEmail) {
+                window.nitroAds.addUserToken(hashedEmail, 'SHA-256');
+            }
+        }
+
+        // Used after ads exist; initial load adds the token before createAd below.
+        const syncStoredUserToken = () => {
+            const hashedEmail = getNitroHashedEmail();
+            if (hashedEmail && !demo) {
+                window.nitroAds.addUserToken(hashedEmail, 'SHA-256');
+                return;
+            }
+            window.nitroAds.clearUserTokens?.();
+        }
+
         // Function to add ad units
         const addUnits = () => {
             Object.keys(adUnits).forEach(key => {
@@ -116,7 +144,12 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
             configScript.setAttribute("data-spa", "auto");
             document.head.appendChild(configScript);
 
-            configScript.onload = addUnits;
+            configScript.onload = () => {
+                // NitroPay recommends registering user data before creating ad units.
+                addStoredUserToken();
+                addUnits();
+                adsCreated = true;
+            };
 
             // We want to add padding to the bottom of the page when the anchor is visible.
             document.addEventListener('nitroAds.anchorVisibility', (event) => {
@@ -140,8 +173,31 @@ const Nitro = ({ demo = false }: { demo: boolean }) => {
                     }
                 }, 100);
             });
+        } else {
+            adsCreated = true;
+            syncStoredUserToken();
         }
-    }, []);
+
+        // Custom event handles this tab; storage handles the same value changing in another tab.
+        const onNitroHashedEmailUpdated = () => {
+            if (adsCreated) {
+                syncStoredUserToken();
+            }
+        };
+        const onStorage = (event: StorageEvent) => {
+            if (event.key === NITRO_HASHED_EMAIL_HASH_KEY) {
+                onNitroHashedEmailUpdated();
+            }
+        }
+
+        window.addEventListener(NITRO_HASHED_EMAIL_UPDATED, onNitroHashedEmailUpdated);
+        window.addEventListener('storage', onStorage);
+
+        return () => {
+            window.removeEventListener(NITRO_HASHED_EMAIL_UPDATED, onNitroHashedEmailUpdated);
+            window.removeEventListener('storage', onStorage);
+        }
+    }, [demo]);
 
     return null;
 };

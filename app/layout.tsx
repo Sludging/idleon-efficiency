@@ -14,7 +14,6 @@ import { RouterTracker } from '../components/routerTracker';
 import { Suspense } from 'react';
 import type { Metadata } from 'next'
 import Nitro from '../lib/nitro';
-import { NitroHashedEmail } from '../components/nitroHashedEmail';
 
 export const metadata: Metadata = {
     metadataBase: new URL(`https://www.idleonefficiency.com`),
@@ -79,8 +78,6 @@ export default function RootLayout({
                 <StyledComponentsRegistry>
                     <Grommet theme={customTheme} full>
                         <AuthStoreProvider>
-                            <Nitro demo={demoAds} />
-                            <NitroHashedEmail />
                             <AppDataStoreProvider>
                                 <Box 
                                     flex 
@@ -131,6 +128,7 @@ export default function RootLayout({
                             });
                         `}}
                 />
+                <Nitro demo={demoAds} />
             </body>
         </html>
     )

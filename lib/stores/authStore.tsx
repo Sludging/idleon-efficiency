@@ -5,6 +5,12 @@ import app from '../../data/firebase/config'
 import { loginEvent, sendEvent } from '../gtag'
 import { AppleLogin } from '../../data/domain/login/appleLogin'
 import { isSubDomain } from '../../data/utility'
+import { hashEmailForAds } from '../hashEmail'
+import {
+    clearNitroHashedEmail,
+    isNitroHashedEmailOptedOut,
+    setNitroHashedEmail,
+} from '../nitroHashedEmailConsent'
 
 export type AuthState = {
     // We use this to mark if we ran the initial init or not. Init is used to fetch a user if previously authenticated.
@@ -54,12 +60,25 @@ export const defaultInitState: AuthState = {
     initialized: false,
 }
 
+// Expose a hashed user email through localStorage.
+// This is used only by Nitro to display targeted ads.
+const syncNitroHashedEmail = async (user?: User): Promise<void> => {
+    if (!user?.email || !user.emailVerified || isNitroHashedEmailOptedOut()) {
+        clearNitroHashedEmail();
+        return;
+    }
+
+    const hashedEmail = await hashEmailForAds(user.email);
+    setNitroHashedEmail(hashedEmail);
+}
+
 const loginThroughToken = async (id_token: string, _?: Function): Promise<Partial<AuthState>> => {
     const auth = getAuth(app);
     const credential = GoogleAuthProvider.credential(id_token, null);
     try {
         const result = await signInWithCredential(auth, credential)
         loginEvent("TOKEN");
+        await syncNitroHashedEmail(result.user);
         return {
             user: result.user,
             authStatus: AuthStatus.Valid
@@ -117,9 +136,10 @@ const getFirebaseToken = async (openIdParams: Record<string, string>) => {
 const loginThroughCustomToken = async (customToken: string): Promise<Partial<AuthState>> => {
     const auth = getAuth(app);
     try {
-    const result = await signInWithCustomToken(auth, customToken)
-    loginEvent("CUSTOM_TOKEN");
-    return {
+        const result = await signInWithCustomToken(auth, customToken)
+        loginEvent("CUSTOM_TOKEN");
+        await syncNitroHashedEmail(result.user);
+        return {
             user: result.user,
             authStatus: AuthStatus.Valid
         }
@@ -138,6 +158,7 @@ const loginThroughEmailPassword = async (email: string, password: string): Promi
         const credential = EmailAuthProvider.credential(email, password);
         const result = await signInWithCredential(auth, credential)
         loginEvent("EMAIL");
+        await syncNitroHashedEmail(result.user);
         return {
             user: result.user,
             authStatus: AuthStatus.Valid
@@ -161,6 +182,7 @@ const loginThroughApple = async (): Promise<Partial<AuthState>> => {
         const credential = provider.credential({ idToken: idToken });
         const result = await signInWithCredential(auth, credential)
         loginEvent("APPLE");
+        await syncNitroHashedEmail(result.user);
         return {
             user: result.user,
             authStatus: AuthStatus.Valid
@@ -180,6 +202,7 @@ const logout = async (): Promise<Partial<AuthState>> => {
 
     try {
         await signOut(auth)
+        clearNitroHashedEmail();
         sendEvent({
             action: "logout",
             category: "engagement",
@@ -251,12 +274,14 @@ export const createAuthStore = (
             await auth.authStateReady()
 
             if (auth.currentUser) {
+                await syncNitroHashedEmail(auth.currentUser);
                 set((_) => ({
                     user: auth.currentUser!,
                     authStatus: AuthStatus.Valid,
                 }))
             }
             else {
+                clearNitroHashedEmail();
                 set((_) => ({
                     user: undefined,
                     authStatus: AuthStatus.NoUser,
