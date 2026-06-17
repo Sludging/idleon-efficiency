@@ -617,6 +617,24 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% Bucks",
                 "barType": 35
+            }),
+        new ArcadeBonusBase(68, <ArcadeBonusModel>{
+                "effect": "+{% Fountain Speed",
+                "x1": 30,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Fill Spd",
+                "barType": 35
+            }),
+        new ArcadeBonusBase(69, <ArcadeBonusModel>{
+                "effect": "+{% Cook Mastery EXP",
+                "x1": 100,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% EXP",
+                "barType": 49
             })    
 ]
 }

@@ -415,10 +415,10 @@ export const initGamingSuperbitsRepo = () => {
                 "name": "Small Gratuity"
             }),
         new GamingSuperbitBase(68, <GamingSuperbitModel>{
-                "description": "You can't buy this today, or tomorrow, or the next day.",
-                "x1": 2,
-                "x2": 150,
-                "name": "Not Today"
+                "description": "Boosts your Cooking Mastery EXP gain rate by 1.40x",
+                "x1": 4,
+                "x2": 100,
+                "name": "Cooking Master"
             }),
         new GamingSuperbitBase(69, <GamingSuperbitModel>{
                 "description": "You? Buying THIS?? YOU'RE BROOOOKE!!!",

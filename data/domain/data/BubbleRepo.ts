@@ -2292,6 +2292,26 @@ export const initBubbleRepo = () => {
                         "description": "+{% Class EXP gain MULTIPLIER! What? No, don't thank Lava, thank ME!!! I'm the one giving you my bonus!",
                         "requirements": [<ComponentModel>{"item": "w7A12", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
                         "bonusKey": "7classexp"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Shipinabottle",
+                        "x1": 0.1,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% Drop Rate MULTIPLIER! It's golden and pirate themed, of course it gives DR!",
+                        "requirements": [<ComponentModel>{"item": "w7B12b", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7drMulto"
+                    },
+                    <BubbleModel>{
+                        "cauldron": "Vials",
+                        "name": "Canteen Read",
+                        "x1": 0.2,
+                        "x2": 0,
+                        "func": "add",
+                        "description": "+{% extra Cooking Mastery EXP gain!",
+                        "requirements": [<ComponentModel>{"item": "Spelunking5", "quantity": -1}, <LiquidComponentModel>{"liquidNo": "4", "quantity": -1}],
+                        "bonusKey": "7cookmastery"
                     }
                 ]
             }),

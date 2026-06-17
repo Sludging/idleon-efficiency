@@ -619,11 +619,17 @@ export const initItemSetRepo = () => {
         new ItemSetBase("EquipmentNametagReplica27", <ItemSetModel>{"set": "Tome"}),
         new ItemSetBase("EquipmentNametagReplica28", <ItemSetModel>{"set": "Tome"}),
         new ItemSetBase("EquipmentNametagReplica34", <ItemSetModel>{"set": "Emerald"}),
+        new ItemSetBase("EquipmentNametagReplica38", <ItemSetModel>{"set": "Bronze"}),
+        new ItemSetBase("EquipmentNametagReplica39", <ItemSetModel>{"set": "Silver"}),
+        new ItemSetBase("EquipmentNametagReplica40", <ItemSetModel>{"set": "Gold"}),
         new ItemSetBase("EquipmentHats49", <ItemSetModel>{"set": "The"}),
         new ItemSetBase("EquipmentHats50", <ItemSetModel>{"set": "Green"}),
         new ItemSetBase("EquipmentHats57", <ItemSetModel>{"set": "Big"}),
         new ItemSetBase("EquipmentHats65", <ItemSetModel>{"set": "The"}),
         new ItemSetBase("EquipmentHats95", <ItemSetModel>{"set": "Gilded"}),
-        new ItemSetBase("EquipmentHats131", <ItemSetModel>{"set": "Lucky"})    
+        new ItemSetBase("EquipmentHats131", <ItemSetModel>{"set": "Lucky"}),
+        new ItemSetBase("EquipmentHats136", <ItemSetModel>{"set": "Bronze"}),
+        new ItemSetBase("EquipmentHats137", <ItemSetModel>{"set": "Silver"}),
+        new ItemSetBase("EquipmentHats138", <ItemSetModel>{"set": "Gold"})    
 ]
 }

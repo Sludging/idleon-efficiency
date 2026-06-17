@@ -135,6 +135,14 @@ export const initMeasurementRepo = () => {
                 "description": "+{% DROP RATE",
                 "formula": "50TOT",
                 "formulaType": "TOT"
+            }),
+        new MeasurementBase(16, <MeasurementModel>{
+                "index": 16,
+                "itemRequirement": <ItemRequirementModel>{"id": "30", "name": "Unknown30"},
+                "measurementType": <MeasurementTypeModel>{"type": "8", "name": "Slab Items"},
+                "description": "+{% FOUNTAIN COINS VALUE",
+                "formula": "10TOT",
+                "formulaType": "TOT"
             })    
 ]
 }

@@ -15,12 +15,12 @@ export const initSaltLickRepo = () => {
                 "costInc": 1.5
             }),
         new SaltLickBase(1, <SaltLickModel>{
-                "item": "Critter1",
+                "item": "Refinery1",
                 "desc": "+4 Obol storage slots per upgrade! Circle, Square, Hexagon, then Sparkle, in that order.",
-                "baseCost": 100,
+                "baseCost": 10,
                 "baseBonus": 1,
                 "maxLevel": 8,
-                "costInc": 1.92
+                "costInc": 2.3
             }),
         new SaltLickBase(2, <SaltLickModel>{
                 "item": "Refinery2",
@@ -31,12 +31,12 @@ export const initSaltLickRepo = () => {
                 "costInc": 1.15
             }),
         new SaltLickBase(3, <SaltLickModel>{
-                "item": "Soul2",
+                "item": "Refinery2",
                 "desc": "+{% Class EXP and Skill EXP. Not really sure what those blobulytes do with these souls...",
-                "baseCost": 250,
+                "baseCost": 10,
                 "baseBonus": 0.2,
                 "maxLevel": 100,
-                "costInc": 1.079
+                "costInc": 1.2
             }),
         new SaltLickBase(4, <SaltLickModel>{
                 "item": "Refinery3",
@@ -47,9 +47,9 @@ export const initSaltLickRepo = () => {
                 "costInc": 2.2
             }),
         new SaltLickBase(5, <SaltLickModel>{
-                "item": "Critter4",
+                "item": "Refinery3",
                 "desc": "+{% Liquid rate and Capacity for all liquids in Alchemy.",
-                "baseCost": 100,
+                "baseCost": 10,
                 "baseBonus": 1,
                 "maxLevel": 100,
                 "costInc": 1.122
@@ -60,15 +60,15 @@ export const initSaltLickRepo = () => {
                 "baseCost": 5,
                 "baseBonus": 5,
                 "maxLevel": 10,
-                "costInc": 2
+                "costInc": 2.1
             }),
         new SaltLickBase(7, <SaltLickModel>{
-                "item": "Soul4",
+                "item": "Refinery4",
                 "desc": "+{% Movement Speed. Doesn't work if you're above 170% move speed already.",
-                "baseCost": 100,
+                "baseCost": 10,
                 "baseBonus": 0.4,
                 "maxLevel": 25,
-                "costInc": 1.15
+                "costInc": 1.4
             }),
         new SaltLickBase(8, <SaltLickModel>{
                 "item": "Refinery5",
@@ -79,12 +79,20 @@ export const initSaltLickRepo = () => {
                 "costInc": 2.2
             }),
         new SaltLickBase(9, <SaltLickModel>{
-                "item": "Critter6",
+                "item": "Refinery5",
                 "desc": "+{% Total Damage dealt.",
-                "baseCost": 250,
+                "baseCost": 10,
                 "baseBonus": 0.1,
                 "maxLevel": 250,
                 "costInc": 1.04
+            }),
+        new SaltLickBase(10, <SaltLickModel>{
+                "item": "Refinery6",
+                "desc": "+{% Cooking Mastery EXP gain, a feature unlocked via Rift 61 deep in World 4.",
+                "baseCost": 100,
+                "baseBonus": 1,
+                "maxLevel": 100,
+                "costInc": 1.22
             })    
 ]
 }

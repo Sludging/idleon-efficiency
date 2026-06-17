@@ -7271,21 +7271,22 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 10,
                     "RespawnTime": 45,
                     "DeathFrame": 21,
-                    "MonsterHPTotal": 1e+37,
+                    "MonsterHPTotal": 7.5e+32,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 3e+11,
+                    "ExpGiven": 1.5e+13,
                     "ExpType": 0,
-                    "Defence": 2500000,
+                    "Defence": 1000000000,
                     "MoveSPEED": 4,
-                    "Damages": [600000, 1],
-                    "DefFor0": 333313
+                    "Damages": [600000000, 1],
+                    "DefFor0": 8.73561e+07
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B12", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsJ24", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 2e+09, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B12", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B12b", "quantity": 1, "chance": 1e-09, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ24", "quantity": 1, "chance": 3e-08, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7293,7 +7294,7 @@ export const initEnemyRepo = () => {
                 "mapData": <MapDataModel>{
                     "enemy": "w7b12",
                     "world": "Shimmerfin Deep",
-                    "map": <MapNameModel>{"intName": "uAquaB12", "name": "fillername", "id": 326},
+                    "map": <MapNameModel>{"intName": "uAquaB12", "name": "Dreadnaught Chamber", "id": 326},
                     "portalRequirements": [0]
                 },
                 "navigation": <EnemyNavModel>{
@@ -10690,6 +10691,33 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("fm_frog", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Abacus Frog",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 23,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 40,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 14000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 420,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
         new EnemyBase("T1a", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Bronze Champion Ram",
@@ -10765,6 +10793,87 @@ export const initEnemyRepo = () => {
                     "MoveSPEED": 6,
                     "Damages": [2500, 1],
                     "DefFor0": 3001.06
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T2a", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bronze Champion Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 58,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 2e+10,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 6,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T2b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Silver Champion Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 58,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 2e+10,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 6,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("T2c", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Gold Champion Troll",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 60,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 58,
+                    "DeathFrame": 20,
+                    "MonsterHPTotal": 2e+10,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 6,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
                 },
                 "drops": undefined,
                 "mapData": undefined,

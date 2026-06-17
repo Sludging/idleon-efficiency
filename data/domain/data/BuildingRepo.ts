@@ -12,7 +12,7 @@ export const initBuildingRepo = () => {
                 "description": "Using the new Star Talent (on the 2nd tab of Star Talents), you can collect samples to start printing resources! ",
                 "bonus": " $ Player Slots Unlocked",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery1", "quantity": 3}, <ComponentModel>{"item": "Blank", "quantity": 0}],
-                "maxLvl": 10,
+                "maxLvl": 11,
                 "costInc": 1,
                 "bonusInc": [1, 30],
                 "misc": 10
@@ -42,7 +42,7 @@ export const initBuildingRepo = () => {
                 "description": "Spend refinery salts and other World 3 Resources in return for bonuses from the hungry blobulytes! ",
                 "bonus": " $ Available Upgrades",
                 "lvlUpReq": [<ComponentModel>{"item": "Refinery2", "quantity": 20}, <ComponentModel>{"item": "Blank", "quantity": 0}],
-                "maxLvl": 10,
+                "maxLvl": 11,
                 "costInc": 2,
                 "bonusInc": [1, 30],
                 "misc": 10

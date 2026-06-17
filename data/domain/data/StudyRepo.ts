@@ -95,6 +95,18 @@ export const initStudyRepo = () => {
                 "name": "TEMPLE",
                 "description": "There is an extra +{% chance to get double torches when picking them up!",
                 "multiplier": 30
+            }),
+        new StudyBase(15, <StudyModel>{
+                "index": 15,
+                "name": "FOUNTAIN",
+                "description": "You can Marbleize upgrades more than once! Also, }x higher Marble production!",
+                "multiplier": 5
+            }),
+        new StudyBase(16, <StudyModel>{
+                "index": 16,
+                "name": "TRENCH",
+                "description": "Every depth cast lowers the resources needed to destroy other skilling caverns by {%",
+                "multiplier": 3
             })    
 ]
 }

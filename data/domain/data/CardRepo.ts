@@ -1561,9 +1561,9 @@ export const initCardRepo = () => {
         new CardDataBase("w7b12", <CardDataModel>{
                 "cardID": "J24",
                 "category": "Shimmerfin Deep",
-                "perTier": 1e+08,
-                "effect": "+{% Drop Rate Multi",
-                "bonus": 1,
+                "perTier": 4e+07,
+                "effect": "+{% Spelunk Amber (Passive)",
+                "bonus": 10,
                 "order": 24
             }),
         new CardDataBase("Crystal6", <CardDataModel>{

@@ -468,7 +468,7 @@ export const initHoleBuildingRepo = () => {
             }),
         new HoleBuildingBase(51, <HoleBuildingModel>{
                 "name": "Rift Guy",
-                "squareImageType": 3,
+                "squareImageType": 4,
                 "costType": SedimentTypeEnum.Gravel,
                 "baseCost": 10,
                 "costCalcType": false,
@@ -842,7 +842,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 10,
                 "costCalcType": false,
                 "desc": "Unlocks the Castle challenge in the Gambit cavern.",
-                "order": 51
+                "order": 97
             }),
         new HoleBuildingBase(93, <HoleBuildingModel>{
                 "name": "Noob Gambit",
@@ -851,6 +851,51 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 10,
                 "costCalcType": false,
                 "desc": "Unlocks the Noob challenge in the Gambit cavern.",
+                "order": 94
+            }),
+        new HoleBuildingBase(94, <HoleBuildingModel>{
+                "name": "Trench ~ Coin Synergy",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 500,
+                "costCalcType": true,
+                "desc": "Boosts the value of all coin types, also called Currencies, by 1.10x per Trench Depth you've cast! @ Total Bonus: {x",
+                "order": 98
+            }),
+        new HoleBuildingBase(95, <HoleBuildingModel>{
+                "name": "Size DOES Matter",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 7500,
+                "costCalcType": true,
+                "desc": "When collecting a coinstack at The Fountain, you get +10% MULTI per stack height. Example:If a stack was 5 coins high, they'd all be worth 1.50x more!!!",
+                "order": 95
+            }),
+        new HoleBuildingBase(96, <HoleBuildingModel>{
+                "name": "Monument Mogmaxing",
+                "squareImageType": 1,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 25000,
+                "costCalcType": true,
+                "desc": "Monument Reward Multi now increases at the normal rate of +100% daily for 6 full days! Before this upgrade, it was only 4 days...",
+                "order": 96
+            }),
+        new HoleBuildingBase(97, <HoleBuildingModel>{
+                "name": "Triple Decker Extender",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 150,
+                "costCalcType": true,
+                "desc": "All coinstacks at The Fountain can stack +3 coins higher than before!",
+                "order": 51
+            }),
+        new HoleBuildingBase(98, <HoleBuildingModel>{
+                "name": "Trench Trickledown",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 2500,
+                "costCalcType": true,
+                "desc": "+15% All Skill Efficiency, and +10% All Skill EXP gain per Bottomless Trench Depth you've cast down to!",
                 "order": 31
             })    
 ]

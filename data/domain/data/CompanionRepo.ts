@@ -878,13 +878,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(87, <CompanionModel>{
                 "id": "rift1",
-                "desc": "Not officially in the game and may never be",
+                "desc": "3x Cooking Mastery EXP gain and {5 PTS for Cooking Mastery",
                 "bonus": 1,
-                "x1": 0,
+                "x1": -26,
                 "x2": 0,
-                "x3": 0,
+                "x3": -15,
                 "x4": 1,
-                "x5": 100
+                "x5": 160
             }),
         new CompanionBase(88, <CompanionModel>{
                 "id": "rift4",
@@ -1330,9 +1330,9 @@ export const initCompanionRepo = () => {
                 "id": "w6b3",
                 "desc": "{100% Drop Rate and 1.50x Drop Rate Multi",
                 "bonus": 100,
-                "x1": 0,
+                "x1": -21,
                 "x2": 0,
-                "x3": 0,
+                "x3": -18,
                 "x4": 1,
                 "x5": 175
             }),
@@ -1508,7 +1508,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(150, <CompanionModel>{
                 "id": "T1a",
-                "desc": "Congratulations on winning the Bronze Tournament in Season 1!",
+                "desc": "Congratulations on winning the Tournament!",
                 "bonus": 1,
                 "x1": -26,
                 "x2": 0,
@@ -1518,7 +1518,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(151, <CompanionModel>{
                 "id": "T1b",
-                "desc": "Congratulations on winning the Silver Tournament in Season 1!",
+                "desc": "Congratulations on winning the Tournament!",
                 "bonus": 1,
                 "x1": -26,
                 "x2": 0,
@@ -1528,7 +1528,7 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(152, <CompanionModel>{
                 "id": "T1c",
-                "desc": "Congratulations on winning the Gold Tournament in Season 1!",
+                "desc": "Congratulations on winning the Tournament!",
                 "bonus": 1,
                 "x1": -26,
                 "x2": 0,
@@ -1645,6 +1645,46 @@ export const initCompanionRepo = () => {
                 "x3": 0,
                 "x4": 1,
                 "x5": 190
+            }),
+        new CompanionBase(164, <CompanionModel>{
+                "id": "T2a",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -19,
+                "x2": 0,
+                "x3": -5,
+                "x4": 1,
+                "x5": 10
+            }),
+        new CompanionBase(165, <CompanionModel>{
+                "id": "T2b",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -19,
+                "x2": 0,
+                "x3": -5,
+                "x4": 1,
+                "x5": 10
+            }),
+        new CompanionBase(166, <CompanionModel>{
+                "id": "T2c",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -19,
+                "x2": 0,
+                "x3": -5,
+                "x4": 1,
+                "x5": 10
+            }),
+        new CompanionBase(167, <CompanionModel>{
+                "id": "fm frog",
+                "desc": "Thank you for rescuing me from the Fortune Mill!",
+                "bonus": 1,
+                "x1": -18,
+                "x2": 0,
+                "x3": -34,
+                "x4": 1,
+                "x5": 177
             })    
 ]
 }

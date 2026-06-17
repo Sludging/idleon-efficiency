@@ -40,12 +40,12 @@ export const initCosmoUpgradeRepo = () => {
                 "maxEnhance": 4
             }),
         new CosmoUpgradeBase(4, <CosmoUpgradeModel>{
-                "perLvl": 10,
+                "perLvl": 1,
                 "zero": 0,
-                "name": "Confused_Bonus",
-                "desc": "Don't_conjure_this..._it_does_nothing_yet!_Wait_for_future_updates,_where_this_bonus_and_more_will_be_added!",
+                "name": "Profoun-tain",
+                "desc": "Each_level_gives_+1_Max_Coin_Stack_size,_1.25x_all_coins_value,_and_1.10x_Marble_rate_for_The_Fountain_cave!",
                 "cosmoType": CosmoTypeEnum.Hole,
-                "maxEnhance": 1
+                "maxEnhance": 4
             }),
         new CosmoUpgradeBase(5, <CosmoUpgradeModel>{
                 "perLvl": 10,

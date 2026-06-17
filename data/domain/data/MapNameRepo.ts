@@ -332,6 +332,6 @@ export const initMapNameRepo = () => {
         new MapNameBase(323, <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323}),
         new MapNameBase(324, <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324}),
         new MapNameBase(325, <MapNameModel>{"intName": "uAquaB11", "name": "Pirate Mess Hall", "id": 325}),
-        new MapNameBase(326, <MapNameModel>{"intName": "uAquaB12", "name": "fillername", "id": 326})    
+        new MapNameBase(326, <MapNameModel>{"intName": "uAquaB12", "name": "Dreadnaught Chamber", "id": 326})    
 ]
 }

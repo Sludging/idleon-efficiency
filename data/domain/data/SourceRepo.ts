@@ -8195,6 +8195,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("w7B12b", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("CardsJ24", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Dreadnaught Captain]]", "txtName": "Dreadnaught Captain"}],
                 "recipeFrom": [],
@@ -12635,8 +12640,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Royal Worm#Normie Bidding|Normie Bidding]]",
                         "txtName": "Royal Worm: Normie Bidding"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                    }
                 ],
                 "recipeFrom": [],
                 "questAss": []
