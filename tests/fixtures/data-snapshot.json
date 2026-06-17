@@ -1,0 +1,24 @@
+{
+  "verifiedAt": "2026-06-16T13:12:49.460Z",
+  "gateStatus": "PROCEED",
+  "gameVersion": "1.17",
+  "latestJsonCapturedAt": "2026-06-16T13:09:09.191Z",
+  "extractionBatchAt": "2026-06-16T13:09:22.017Z",
+  "oldestResultExtractedAt": "2026-06-16T13:09:22.033Z",
+  "newestResultExtractedAt": "2026-06-16T13:09:24.701Z",
+  "repoGitSha": "86d53fcb",
+  "preflightId": "preflight-20260616-1007",
+  "worktrees": {
+    "idleonEfficiency": "/home/sludge/Development/idleon-efficiency/.worktrees/preflight-20260616-1007",
+    "wikibot": "/home/sludge/Development/IdleonWikiBot/.worktrees/preflight-20260616-1007",
+    "wikibotBaseline": "origin/master"
+  },
+  "suiteSummary": {
+    "timestamp": "2026-06-16T13:12:19.169Z",
+    "passed": 332,
+    "failed": 46,
+    "total": 378
+  },
+  "verifiedBy": "cursor-session-20260616",
+  "notes": "Phase A required candidate WikiBot fixes for StudyRepo placeholder rows and Tome.uiPositionIndex typing. Full suite cache refreshed and currently red; use failing tests as calculation-correctness baseline."
+}
