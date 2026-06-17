@@ -4065,7 +4065,7 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
                     <SourceModel>{"wikiName": "[[Gloomie Mushroom]]", "txtName": "Gloomie Mushroom"},
                     <SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"},
-                    <SourceModel>{"wikiName": "[[Shimmer Glunko]]", "txtName": "Shimmer Glunko"},
+                    <SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"},
                     <SourceModel>{"wikiName": "[[Equinox Broadbass]]", "txtName": "Equinox Broadbass"},
                     <SourceModel>{"wikiName": "[[Doodlefish]]", "txtName": "Doodlefish"},
                     <SourceModel>{"wikiName": "[[Eamsy Earl]]", "txtName": "Eamsy Earl"},
@@ -4349,7 +4349,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{"wikiName": "[[DropTable36]]", "txtName": "DropTable36"},
                     <SourceModel>{"wikiName": "[[DropTable37]]", "txtName": "DropTable37"},
                     <SourceModel>{"wikiName": "[[DropTable38]]", "txtName": "DropTable38"},
-                    <SourceModel>{"wikiName": "[[SuperDropTable7]]", "txtName": "SuperDropTable7"}
+                    <SourceModel>{"wikiName": "[[SuperDropTable7]]", "txtName": "SuperDropTable7"},
+                    <SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -7815,8 +7816,7 @@ export const initSourceRepo = () => {
                 "sources": [
                     <SourceModel>{"wikiName": "[[Samurai Guardian]]", "txtName": "Samurai Guardian"},
                     <SourceModel>{"wikiName": "[[Spirit Reindeer]]", "txtName": "Spirit Reindeer"},
-                    <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"},
-                    <SourceModel>{"wikiName": "[[Shimmer Glunko]]", "txtName": "Shimmer Glunko"}
+                    <SourceModel>{"wikiName": "[[Demon Hound]]", "txtName": "Demon Hound"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -7922,6 +7922,46 @@ export const initSourceRepo = () => {
             }),
         new SourcesBase("StampC25", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Ancient Golem]]", "txtName": "Ancient Golem"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("CardsH17", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape0", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape1", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape2", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape3", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape4", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("DropTable39", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Crystal Glunko]]", "txtName": "Crystal Glunko"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -13058,6 +13098,36 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("HoleGshape6", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape7", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape8", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape9", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape10", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("HoleGshape11", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[DropTable39]]", "txtName": "DropTable39"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Secretstone", <SourcesModel>{
                 "sources": [],
                 "recipeFrom": [],
@@ -15374,7 +15444,8 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
                         "txtName": "Toobus Goobus: RESEARCH STUDIES"
-                    }
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
                 ],
                 "recipeFrom": [],
                 "questAss": []
@@ -15570,6 +15641,16 @@ export const initSourceRepo = () => {
                         "txtName": "Dungeons: Flurbo Shop"
                     }
                 ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentNametag3", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("EquipmentHats118", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
                 "recipeFrom": [],
                 "questAss": []
             }),

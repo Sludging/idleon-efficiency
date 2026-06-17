@@ -975,16 +975,21 @@ export const initRandoListRepo = () => {
                     "60000000",
                     "80000000",
                     "100000000",
-                    "999999999",
-                    "999999999",
-                    "999999999",
-                    "999999999",
-                    "999999999",
-                    "1999999999",
-                    "1999999999",
-                    "1999999999",
-                    "1999999999",
-                    "1999999999"
+                    "120000000",
+                    "150000000",
+                    "200000000",
+                    "250000000",
+                    "300000000",
+                    "400000000",
+                    "500000000",
+                    "600000000",
+                    "800000000",
+                    "1000000000",
+                    "1200000000",
+                    "1400000000",
+                    "1600000000",
+                    "1800000000",
+                    "2000000000"
                 ]
             }),
         new RandoListBase(30, <RandoListModel>{
@@ -1888,7 +1893,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Cooking_MASTERY_v1.17;*Unlocked_at_Rift_61,_Cooking_Mastery_(CM)_lets_you_RANK_UP_to_boost_your_meals!_@_*You_gain_CM_EXP_over_time,_and_when_you_earn_enough,_you'll_get_+1_Rank._@_*Each_Rank_gives_you_1_Purple_AND_Yellow_CM_points._Spend_purple_to_boost_CM_EXP_gain,_and_spend_yellow_points_to_boost_specific_Meal_bonuses!_@_*New_Ribbon_Max_Rank._Friendship_ended_with_Rank_20,_now_Rank_25_is_the_best_ribbon!_@_*New_Research_Grid_-_K3_@_*New_Vial_-_Spelunking_Chapter_6_pages._@_*New_Arcade_Bonus_type,_but_only_if_the_Twitch_Viewers_vote_for_it..._@_*New_Salt_Lick_upgrade._I'm_moving_DIFFERENT,_making_moves_here_guys!_@_*New_Zuperbit_upgrade_in_Gaming._@___@___@_*Shoutout_to_my_Mill_Escapers,_yall_know_who_you_are!!_Good_luck_in_the_new_NG+_mode!;*Le",
+                    "Glunko_Cavern_v1.18;*Cavern_18_now_available_-_The_CRYSTAL_GLUNKO_COVE!_@_*Collect_gooey_shapes,_from_Triangle_to_Nonagons,_and_use_them_to_upgrade_your_Cove_Stats!_You_have_unique_Drop_Rate,_AFK_gains,_and_Multikill_values_while_fighting_Crystal_Glunkos_in_this_new_cavern!_@_*Each_new_Shape_drop_from_Crystal_Glunkos_is_a_new_Slab_Item!_@_*Green_Water_added_to_Cavern_16_-_The_Fountain._that_means_20_new_Green_Water_upgrades,_including_powerful_multiplicative_IdleOn_bonuses!_@_*7_new_Schematics_to_build_from_Kaipu_the_Engineer_Villager!_@_*6_Star_Cardifiers_are_here,_and_everybody_gets_1_for_free!_In_fact,_if_you're_a_valued_active_player,_I_actually_gave_you_TWO_for_free!_@_*New_Crystalling_Glunko_pack_and_Limited_Items_available_now_in_the_Gemshop!_@_*Kill_Requirement_for_the_next_map_is_now_shown_in_the_top_left,_always!_@_*Fixed_a_bug_where_Dungeon_Rank_60+_would_show_as_Rank_1._Just_a_display_issue,_no_gains_were_lost!;*Le",
                     "Monde",
                     "6",
                     "est",

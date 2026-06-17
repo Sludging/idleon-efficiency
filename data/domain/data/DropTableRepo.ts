@@ -592,6 +592,18 @@ export const initDropTableRepo = () => {
                     <ItemDropModel>{"item": "Trophy25", "quantity": 1, "chance": 2e-07, "questLink": "N/A"}
                 ],
                 "subTable": "SuperDropTable7"
+            }),
+        new DropTableBase("DropTable39", <DropTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape6", "quantity": 1, "chance": 1e-06, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape7", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape8", "quantity": 1, "chance": 1e-08, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape9", "quantity": 1, "chance": 1e-09, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape10", "quantity": 1, "chance": 1e-10, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape11", "quantity": 1, "chance": 1e-11, "questLink": "N/A"}
+                ],
+                "subTable": "DropTable39"
             })    
 ]
 }

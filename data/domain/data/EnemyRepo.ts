@@ -2104,8 +2104,8 @@ export const initEnemyRepo = () => {
                 },
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
-                    "prev": "caveC",
-                    "next": undefined,
+                    "prev": "caveD",
+                    "next": "Blank",
                     "hasCrystal": false,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -6128,7 +6128,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "caveB",
-                    "next": "Crystal4",
+                    "next": "caveD",
                     "hasCrystal": true,
                     "crystalName": "Crystal4",
                     "hasCard": true
@@ -6137,17 +6137,17 @@ export const initEnemyRepo = () => {
             }),
         new EnemyBase("caveD", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
-                    "Name": "Shimmer Glunko",
+                    "Name": "Crystal Glunko",
                     "AFKtype": AFKTypeEnum.Fighting,
-                    "MonsterFace": 89,
+                    "MonsterFace": 116,
                     "MonsterOffsetX": 34,
                     "MonsterOffsetY": 49,
                     "HeightOfMonster": 90,
                     "MonsterMoving": 1,
                     "MovingFrame": 10,
-                    "RespawnTime": 45,
+                    "RespawnTime": 30,
                     "DeathFrame": 22,
-                    "MonsterHPTotal": 10000000,
+                    "MonsterHPTotal": 1e+19,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
                     "ExpGiven": 10000,
@@ -6160,11 +6160,24 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                        <CardDropModel>{"item": "CardsH17", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape0", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape1", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape2", "quantity": 1, "chance": 0.005, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape3", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape4", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "HoleGshape5", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                        <SubTableDropModel>{"item": "DropTable39", "quantity": 1, "chance": 1, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
-                "navigation": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "caveC",
+                    "next": "Crystal4",
+                    "hasCrystal": true,
+                    "crystalName": "Crystal4",
+                    "hasCard": true
+                },
                 "bossData": undefined
             }),
         new EnemyBase("reindeer", <EnemyModel>{

@@ -584,7 +584,7 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -41,
                 "x4": 1,
-                "x5": 340
+                "x5": 300
             }),
         new CompanionBase(58, <CompanionModel>{
                 "id": "bubbab",
@@ -1685,6 +1685,16 @@ export const initCompanionRepo = () => {
                 "x3": -34,
                 "x4": 1,
                 "x5": 177
+            }),
+        new CompanionBase(168, <CompanionModel>{
+                "id": "caveD",
+                "desc": "1.50x Damage, 1.40x Class EXP, 1.30x Drop Rate, and 1.20x extra Kills",
+                "bonus": 1,
+                "x1": -50,
+                "x2": 0,
+                "x3": -33,
+                "x4": 1,
+                "x5": 210
             })    
 ]
 }

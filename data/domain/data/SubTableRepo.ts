@@ -417,6 +417,7 @@ export const initSubTableRepo = () => {
                     <SubTableModel>{"name": "GiantMobzz69", "chance": 1, "quantity": 1}
                 ]
             }),
+        new SubTablesBase("DropTable39", <SubTablesModel>{"sources": [<SubTableModel>{"name": "caveD", "chance": 1, "quantity": 1}]}),
         new SubTablesBase("DropTable12", <SubTablesModel>{
                 "sources": [
                     <SubTableModel>{"name": "Bug1", "chance": 0.015, "quantity": 1},

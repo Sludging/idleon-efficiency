@@ -28264,6 +28264,102 @@ export const initSpecificItemRepo = () => {
                 "Type": "Time Sand",
                 "description": "Hold down instantly gain 6 Hours of Sneaking Progress! Applies to all your ninja twins, so it doesn't matter who uses this. "
             }),
+        new BaseItemBase("HoleGshape0", <DescItemModel>{
+                "internalName": "HoleGshape0",
+                "displayName": "Gooey Triangle",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape1", <DescItemModel>{
+                "internalName": "HoleGshape1",
+                "displayName": "Gooey Square",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape2", <DescItemModel>{
+                "internalName": "HoleGshape2",
+                "displayName": "Gooey Pentagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape3", <DescItemModel>{
+                "internalName": "HoleGshape3",
+                "displayName": "Gooey Hexagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape4", <DescItemModel>{
+                "internalName": "HoleGshape4",
+                "displayName": "Gooey Heptagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape5", <DescItemModel>{
+                "internalName": "HoleGshape5",
+                "displayName": "Gooey Nonagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape6", <DescItemModel>{
+                "internalName": "HoleGshape6",
+                "displayName": "Quartz Prismagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape7", <DescItemModel>{
+                "internalName": "HoleGshape7",
+                "displayName": "Quartz Cubigon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape8", <DescItemModel>{
+                "internalName": "HoleGshape8",
+                "displayName": "Quartz Pointagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape9", <DescItemModel>{
+                "internalName": "HoleGshape9",
+                "displayName": "Quartz Octergon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape10", <DescItemModel>{
+                "internalName": "HoleGshape10",
+                "displayName": "Quartz Nullagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
+        new BaseItemBase("HoleGshape11", <DescItemModel>{
+                "internalName": "HoleGshape11",
+                "displayName": "Quartz Brillagon",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Dungeon Evaporate",
+                "description": "Now now, you shouldn't be seeing this! I spray you with water bottle pss pss shoo! "
+            }),
         new BaseItemBase("Trophy1", <ArmourItemModel>{
                 "internalName": "Trophy1",
                 "displayName": "King of Food",
@@ -34966,7 +35062,7 @@ export const initSpecificItemRepo = () => {
                     "perTier": 15,
                     "effect": "+{% Skill Efficncy (Passive)",
                     "bonus": 3,
-                    "order": 16
+                    "order": 17
                 },
                 "dropChance": 0.006
             }),
@@ -35001,6 +35097,22 @@ export const initSpecificItemRepo = () => {
                     "order": 15
                 },
                 "dropChance": 5e-05
+            }),
+        new BaseItemBase("CardsH17", <CardItemModel>{
+                "internalName": "CardsH17",
+                "displayName": "Crystal Glunko Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "H17",
+                    "category": "Smolderin' Plateau",
+                    "perTier": 1e+06,
+                    "effect": "+{% Total Drop Rate (Passive)",
+                    "bonus": 6,
+                    "order": 16
+                },
+                "dropChance": 0.05
             }),
         new BaseItemBase("CardsI1", <CardItemModel>{
                 "internalName": "CardsI1",

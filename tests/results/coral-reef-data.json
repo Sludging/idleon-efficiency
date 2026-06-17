@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-06-16T13:09:22.901Z",
+  "timestamp": "2026-06-17T13:11:52.096Z",
   "extractions": {
     "coral_reef_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 0)",
       "result": 284.2170943040401,
       "description": "Coral Reef upgrade cost for upgrade 0",
-      "extractedAt": "2026-06-16T13:09:22.918Z"
+      "extractedAt": "2026-06-17T13:11:52.110Z"
     },
     "coral_reef_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
       "result": 10,
       "description": "Coral Reef upgrade cost for upgrade 1",
-      "extractedAt": "2026-06-16T13:09:22.931Z"
+      "extractedAt": "2026-06-17T13:11:52.112Z"
     },
     "coral_reef_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",
       "result": 4040.840849876404,
       "description": "Coral Reef upgrade cost for upgrade 2",
-      "extractedAt": "2026-06-16T13:09:22.933Z"
+      "extractedAt": "2026-06-17T13:11:52.114Z"
     },
     "coral_reef_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 3)",
       "result": 4071.9958861156833,
       "description": "Coral Reef upgrade cost for upgrade 3",
-      "extractedAt": "2026-06-16T13:09:22.935Z"
+      "extractedAt": "2026-06-17T13:11:52.127Z"
     },
     "coral_reef_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 4)",
       "result": 4398.046511104002,
       "description": "Coral Reef upgrade cost for upgrade 4",
-      "extractedAt": "2026-06-16T13:09:22.947Z"
+      "extractedAt": "2026-06-17T13:11:52.129Z"
     },
     "coral_reef_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 5)",
       "result": 10,
       "description": "Coral Reef upgrade cost for upgrade 5",
-      "extractedAt": "2026-06-16T13:09:22.949Z"
+      "extractedAt": "2026-06-17T13:11:52.131Z"
     }
   },
   "errors": {},

@@ -1,47 +1,47 @@
 {
-  "timestamp": "2026-06-16T13:09:22.468Z",
+  "timestamp": "2026-06-17T13:11:51.650Z",
   "extractions": {
     "mainframe_jewel_16": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 116)",
       "result": 25.6,
       "description": "Mainframe jewel 16 bonus (meal bonus)",
-      "extractedAt": "2026-06-16T13:09:22.483Z"
+      "extractedAt": "2026-06-17T13:11:51.661Z"
     },
     "shiny_bonus_20": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 20, -1)",
       "result": 17,
       "description": "Breeding shiny bonus 20 (meal bonus)",
-      "extractedAt": "2026-06-16T13:09:22.486Z"
+      "extractedAt": "2026-06-17T13:11:51.663Z"
     },
     "win_bonus_26": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
       "result": 204.57450000000003,
       "description": "Summoning winner bonus 26 (meal bonus)",
-      "extractedAt": "2026-06-16T13:09:22.496Z"
+      "extractedAt": "2026-06-17T13:11:51.666Z"
     },
     "ribbon_bonus_meal_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"RibbonBonus\", idleon.engine.getGameAttribute(\"Ribbon\")[28 + 11], 0)",
       "result": 1,
       "description": "Ribbon bonus for meal 11",
-      "extractedAt": "2026-06-16T13:09:22.498Z"
+      "extractedAt": "2026-06-17T13:11:51.679Z"
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
-      "result": 1226.963144525,
+      "result": 1259.5373872999999,
       "description": "Meal bonus for Sailing",
-      "extractedAt": "2026-06-16T13:09:22.500Z"
+      "extractedAt": "2026-06-17T13:11:51.682Z"
     },
     "meal_bonus_mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 153886.7491040134,
+      "result": 156598.21550000325,
       "description": "Meal bonus for Mcook",
-      "extractedAt": "2026-06-16T13:09:22.501Z"
+      "extractedAt": "2026-06-17T13:11:51.693Z"
     },
     "meal_bonus_kitchen_eff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 12936.860518091251,
       "description": "Meal bonus for KitchenEff",
-      "extractedAt": "2026-06-16T13:09:22.503Z"
+      "extractedAt": "2026-06-17T13:11:51.695Z"
     }
   },
   "errors": {},

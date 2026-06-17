@@ -1625,7 +1625,14 @@ export const initEnemyTableRepo = () => {
         new EnemyTableBase("caveD", <EnemyTableModel>{
                 "drops": [
                     <CoinDropModel>{"item": "COIN", "quantity": 1, "chance": 0, "questLink": "N/A"},
-                    <ItemDropModel>{"item": "SpiD3", "quantity": 1, "chance": 0, "questLink": "N/A"}
+                    <CardDropModel>{"item": "CardsH17", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape0", "quantity": 1, "chance": 0.1, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape1", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape2", "quantity": 1, "chance": 0.005, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape3", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape4", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "HoleGshape5", "quantity": 1, "chance": 1e-05, "questLink": "N/A"},
+                    <SubTableDropModel>{"item": "DropTable39", "quantity": 1, "chance": 1, "questLink": "N/A"}
                 ]
             }),
         new EnemyTableBase("w7a1", <EnemyTableModel>{

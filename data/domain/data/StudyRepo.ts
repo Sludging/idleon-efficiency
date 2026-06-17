@@ -107,6 +107,12 @@ export const initStudyRepo = () => {
                 "name": "TRENCH",
                 "description": "Every depth cast lowers the resources needed to destroy other skilling caverns by {%",
                 "multiplier": 3
+            }),
+        new StudyBase(17, <StudyModel>{
+                "index": 17,
+                "name": "THE COVE",
+                "description": "The first { upgrades each day in The Cove are 15% cheaper",
+                "multiplier": 1
             })    
 ]
 }

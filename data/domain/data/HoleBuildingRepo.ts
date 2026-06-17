@@ -544,7 +544,7 @@ export const initHoleBuildingRepo = () => {
                 "costType": SedimentTypeEnum.Gravel,
                 "baseCost": 30,
                 "costCalcType": true,
-                "desc": "Gives +10 B.F.R. per 100 hounds defeated in best runs of each class. 尬  Beginner:!, Warrior:#, Archer:$, Mage:% @ Total Bonus: +{/hr Bucket Fill Rate",
+                "desc": "Gives +10 B.F.R. per 100 hounds defeated in best runs of each class. 尬  Beginner:!, Warrior:#, Archer:$, Mage:% @ Total Bonus: +{/hr Bucket Fill Rate (B.F.R.)",
                 "order": 69
             }),
         new HoleBuildingBase(60, <HoleBuildingModel>{
@@ -887,7 +887,7 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 150,
                 "costCalcType": true,
                 "desc": "All coinstacks at The Fountain can stack +3 coins higher than before!",
-                "order": 51
+                "order": 99
             }),
         new HoleBuildingBase(98, <HoleBuildingModel>{
                 "name": "Trench Trickledown",
@@ -896,6 +896,69 @@ export const initHoleBuildingRepo = () => {
                 "baseCost": 2500,
                 "costCalcType": true,
                 "desc": "+15% All Skill Efficiency, and +10% All Skill EXP gain per Bottomless Trench Depth you've cast down to!",
+                "order": 100
+            }),
+        new HoleBuildingBase(99, <HoleBuildingModel>{
+                "name": "2nd Billion Dollar Grant",
+                "squareImageType": 3,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 1e+09,
+                "costCalcType": true,
+                "desc": "Bolaia now get a brilliant +20% Study Rate per LV, instead of the previous +15% per LV!",
+                "order": 101
+            }),
+        new HoleBuildingBase(100, <HoleBuildingModel>{
+                "name": "Glunko Conglomeration",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Crystal Glunko monsters in Cavern 18 now respawn 25% faster!",
+                "order": 102
+            }),
+        new HoleBuildingBase(101, <HoleBuildingModel>{
+                "name": "More Goo",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Whenever you pick up shapes dropped by Crystal Glunko monsters, there's a 10% chance to get DOUBLE the amount!",
+                "order": 103
+            }),
+        new HoleBuildingBase(102, <HoleBuildingModel>{
+                "name": "Justin Opal",
+                "squareImageType": 0,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Its 'just an' Opal. A single opal.",
+                "order": 104
+            }),
+        new HoleBuildingBase(103, <HoleBuildingModel>{
+                "name": "Even More Goo",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Boosts your Double Shape chance from 10% up to 20%",
+                "order": 105
+            }),
+        new HoleBuildingBase(104, <HoleBuildingModel>{
+                "name": "Anotha One",
+                "squareImageType": 1,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Gives you a 2nd Golden Bucket, which fills faster as described by the 'Golden Bucket Boost' upgrade at Cavern 16's Fountain",
+                "order": 51
+            }),
+        new HoleBuildingBase(105, <HoleBuildingModel>{
+                "name": "Increasingly More Goo",
+                "squareImageType": 4,
+                "costType": SedimentTypeEnum.Gravel,
+                "baseCost": 10,
+                "costCalcType": false,
+                "desc": "Boosts your Double Shape chance from 20% up to 30%",
                 "order": 31
             })    
 ]

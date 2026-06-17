@@ -232,7 +232,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(47, <EventShopBonusModel>{
                 "name": "Monumental Reverence",
                 "desc": "+100 LVs for all Monument bonuses every day forever",
-                "price": 100
+                "price": 175
             })    
 ]
 }
