@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+/tests/.cache
+/tests/fixtures/data-snapshot.json
 
 # next.js
 /.next/
@@ -84,3 +86,8 @@ reference-repos/
 sub-projects/game-parser
 .patch_notes
 docs/GAME_CODE*
+
+## Trash things to hide
+coverage-report.md
+test-analysis.md
+tsconfig.tsbuildinfo

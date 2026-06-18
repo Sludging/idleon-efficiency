@@ -92,7 +92,7 @@ Before beginning implementation, gather the following information from the devel
 2. **Identify similar features**: Use existing patterns when possible
 3. **Implement domain logic**: Start with core calculations and data parsing
 4. **Create UI components**: Build user interface following existing patterns
-5. **Add automated tests**: Implement snapshot-based testing for regression protection
+5. **Add automated tests**: Implement live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
 
 ### Blocked Dependencies
 

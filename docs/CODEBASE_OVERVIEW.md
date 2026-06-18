@@ -4,7 +4,7 @@
 **IdleOn Efficiency** (https://www.idleonefficiency.com) is a companion website for the popular idle MMO game "Legends of Idleon" developed by LavaFlame2. This is a NextJS-based web application that provides efficiency tools and calculators to help players optimize their gameplay in the idle MMO.
 
 ## **Technical Stack**
-- **Framework**: Next.js 15.1.0 with App Router architecture
+- **Framework**: Next.js 16 with App Router architecture
 - **Language**: TypeScript throughout
 - **UI Libraries**: Grommet UI, styled-components, some custom components
 - **State Management**: Zustand for app-wide state
@@ -31,9 +31,12 @@ The website provides comprehensive tracking and optimization tools for virtually
 
 ## **Architecture Patterns**
 - **Domain-Driven Design**: Each game system has its own domain class in `data/domain/`
-- **Data Flow**: Game save → Parse → Calculate cross-impacts → Display
+- **Three-Phase Data Pipeline** (see `idleonData.tsx`):
+  1. **Init** — One-time setup of domain instances and static game data
+  2. **Parse** — Extract raw data from cloud save (no cross-domain access, no calculations)
+  3. **Calculate** — Compute values in strict dependency order (cross-domain access allowed)
 - **Real-time Updates**: Firebase integration for live game data sync
-- **Modular Processing**: Post-processing pipeline for complex calculations
+- **Order Sensitivity**: Calculate phase ordering is manual and fragile — wrong order produces incorrect results
 
 ## **Data Sources & External Dependencies**
 
@@ -60,13 +63,17 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 2. **Code Analysis**: Manually inspect minified game source code for target feature
 3. **Reverse Engineering**: Implement game calculations in relevant domain files
 4. **UI Development**: Create components to display the calculated information
-5. **Visual Testing**: Compare website output with running game client
-6. **Enhancement**: Add value-added features beyond basic game data display
+5. **Automated Testing**: Add live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
+6. **Visual Testing**: Compare website output with running game client
+7. **Enhancement**: Add value-added features beyond basic game data display
 
 ### **Testing Strategy**
-- **Visual Comparison**: Primary validation method using side-by-side game client inspection
-- **Manual Verification**: Direct comparison of calculated results with in-game values
-- **No Automated Testing**: Relies on visual validation and manual verification
+- **Live Game Extraction Tests**: Jest suite in `tests/` validates domain calculations against values extracted from the running game client via a debug server
+- **Parameter-First**: Individual calculation inputs are tested before final composite calculations
+- **Visual Comparison**: Still required for UI and features not covered by automated tests
+- **Coverage Tracking**: `@testCovers` annotations + `yarn coverage:report` track which domain methods have tests
+
+See `docs/TESTING_IMPLEMENTATION.md` and `tests/README.md` for details.
 
 ### **Deployment Process**
 - **Continuous Integration**: Vercel automatically builds and deploys on GitHub pushes
@@ -117,5 +124,5 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 - Always use TypeScript for new code
 - Prefer NextJS App Router patterns for new pages
 - Use Yarn instead of npm for package management
-- Consider shadcn/ui components for new UI elements
+- Use Grommet UI components for new UI elements (existing convention)
 - Never assume or guess game mechanics - always verify against the actual game 

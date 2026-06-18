@@ -23,7 +23,7 @@ For comprehensive implementation documentation, read [docs/NEW_FEATURE_IMPLEMENT
 **Critical constraints:**
 - DO NOT modify auto-generated directories: `data/domain/data/`, `data/domain/enum/`, `data/domain/model/`
 - Calculate phase has strict dependency ordering - place your feature AFTER dependencies, BEFORE dependents
-- Testing is MANDATORY for domain logic - use `/testing` skill
+- Testing is MANDATORY for domain logic - read the [testing skill](../testing/SKILL.md)
 - Always do visual validation against the actual game
 
 **Common patterns to follow:**

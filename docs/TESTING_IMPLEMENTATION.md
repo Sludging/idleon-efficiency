@@ -4,6 +4,8 @@
 
 This testing approach validates domain calculations against live game data extracted from the running IdleOn game client. By comparing our reverse-engineered code against actual game behavior, we ensure calculation accuracy and catch regressions when game mechanics change.
 
+**Operational details:** See also `tests/README.md` (coverage tracking) and `tests/helpers/README.md` (extraction workflow).
+
 ## Core Principles
 
 1. **Live Game Extraction**: Extract actual values from running game via debug server
@@ -16,12 +18,13 @@ This testing approach validates domain calculations against live game data extra
 ### Components
 
 #### 1. Debug Server
-**Location:** `sub-project/game-debug-tool/idleon-debug-server.js`
+**Location:** `sub-projects/game-debug-tool/idleon-debug-server.js`
 
-Injects code into the running game to enable remote code execution:
-- Receives HTTP requests with JavaScript expressions
-- Executes expressions in game context
-- Returns results for validation
+Start from that directory:
+```bash
+cd sub-projects/game-debug-tool
+node idleon-debug-server.js
+```
 
 #### 2. Extraction Configurations
 **Location:** `tests/configs/`
@@ -41,10 +44,16 @@ JSON files defining what data to extract from the game:
 }
 ```
 
-#### 3. Extraction Tool
-**Location:** `tests/helpers/game-data-extractor.js`
+#### 3. Extraction Tools
+**Location:** `tests/helpers/`
 
-Generic script that reads configs and extracts live game data:
+**Batch extraction (recommended):**
+```bash
+node tests/helpers/extract-all-game-data.js
+```
+Extracts all configs in `tests/configs/` and saves results to `tests/results/`.
+
+**Single config extraction:**
 ```bash
 node tests/helpers/game-data-extractor.js \
   tests/configs/sailing-speed.json \
@@ -72,18 +81,17 @@ node tests/helpers/game-data-extractor.js \
 
 #### 4. Test Fixtures
 
-Currently only supports one file. (`latest.json`)
+**Location:** `tests/fixtures/saves/latest.json`
 
-In the future, can explore adding support for multiple files to allow for testing of different game states / older data.
+All tests load save data via `loadGameDataFromSave('latest')`. Update `latest.json` from the idleonefficiency.com raw-data tab when the game state changes. The save must correspond to the same game state used during live extraction.
 
 #### 5. Parameter Tests
 **Location:** `tests/domains/[feature]/[aspect]-parameters.test.ts`
 
 Test individual parameters that influence calculations:
 ```typescript
-export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
+const parameterSpecs: Record<string, ParameterTestSpec> = {
   divinity_minor_bonus_6: {
-    id: 'divinity_minor_bonus_6',
     description: 'Divinity minor bonus for Purrmep (god 6)',
     extractionKey: 'divinity_minor_bonus_6',
     domainExtractor: (gameData) => {
@@ -93,10 +101,29 @@ export const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   }
 };
+
+describe('Sailing Domain - Speed - Parameters', () => {
+  let extractionResults: any;
+  let gameData: Map<string, any>;
+
+  beforeAll(() => {
+    extractionResults = loadExtractionResults('sailing-speed-data.json');
+    validateExtractionHealth(extractionResults);
+    gameData = loadGameDataFromSave('latest');
+  });
+
+  Object.entries(parameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
+    });
+  });
+});
 ```
 
 #### 6. Calculation Tests
-**Location:** `tests/domains/[feature]/[aspect]-calculations.test.ts`
+**Location:** `tests/domains/[feature]/[aspect].test.ts`
 
 Test final calculations using validated parameters:
 ```typescript
@@ -111,8 +138,25 @@ it('validates boat 0 current speed calculation', () => {
     islandBound: false
   });
 
-  expect(calculatedSpeed).toBeCloseTo(extractedSpeed, 2);
+  expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
+    tolerance: 0,
+    context: 'Boat 0 current speed'
+  });
 });
+```
+
+#### 7. Custom Matchers
+**Location:** `tests/setup.ts`
+
+- `toMatchLiveGame(received, expected, tolerance?)` — for parameter tests (use tolerance `0`)
+- `toMatchLiveGameWithDetails(received, expected, { tolerance, context, debugInfo })` — for calculation tests with richer failure output
+
+#### 8. Coverage Tracking
+**Location:** `tests/README.md`, `coverage-config.json`
+
+Annotate test files with `@testCovers Domain.methodName` in JSDoc, then run:
+```bash
+yarn coverage:report
 ```
 
 ## Testing Workflow
@@ -128,7 +172,7 @@ Choose a complex calculation with cross-domain dependencies:
 
 #### Step 2: Create Extraction Config
 
-Create `tests/configs/[optional-grouping]/[feature]-[aspect].json`:
+Create `tests/configs/[feature]-[aspect].json`:
 
 1. **Ask developer for game code first** - Do NOT create configs based on existing domain code
 2. **Identify all input parameters** that influence the calculation
@@ -142,11 +186,19 @@ See existing configs for examples: `tests/configs/cooking-meal-bonus.json`, `tes
 #### Step 3: Run Live Extraction
 
 **Prerequisites:**
-1. Launch game with debug port (require peer developer to do this)
-2. Start debug server (require peer developer to do this)
-3. Update cloud save fixture (require peer developer to do this)
+1. Launch game with debug port (usually port 9223)
+2. Start debug server: `cd sub-projects/game-debug-tool && node idleon-debug-server.js`
+3. Update `tests/fixtures/saves/latest.json` from idleonefficiency.com raw-data tab
+4. Verify `GET http://localhost:3100/status` reports `cdpConnected: true`, `injected: true`, and
+   `gameReady: true` before extraction. If `/inject` times out or leaves `gameReady: false`, restart
+   the debug server and check `/status` again before running extraction.
 
-**Run extraction:**
+**Run extraction (recommended — all configs):**
+```bash
+node tests/helpers/extract-all-game-data.js
+```
+
+**Or single config:**
 ```bash
 node tests/helpers/game-data-extractor.js \
   tests/configs/[feature]-[aspect].json \
@@ -156,13 +208,14 @@ node tests/helpers/game-data-extractor.js \
 **Verify output:**
 - Check `tests/results/[feature]-[aspect]-data.json` for results
 - Ensure no errors in extraction
+- Ensure result files have non-empty `extractions` and game-ready metadata
 - Confirm values look reasonable
 
 #### Step 4: Write Parameter Tests
 
-Create `tests/domains/[optional-grouping]/[feature]/[aspect]-parameters.test.ts`:
+Create `tests/domains/[feature]/[aspect]-parameters.test.ts`:
 
-1. **Define parameter specs** for each extracted value
+1. **Define parameter specs** for each extracted value (see `tests/utils/parameter-test-config.ts`)
 2. **Map extraction keys** to domain extractors
 3. **Handle missing implementations explicitly**
 
@@ -175,19 +228,14 @@ describe('Feature - Aspect - Parameters', () => {
   beforeAll(() => {
     extractionResults = loadExtractionResults('feature-aspect-data.json');
     validateExtractionHealth(extractionResults);
-    gameData = loadGameDataFromSave('live-game-2026-01-11');
+    gameData = loadGameDataFromSave('latest');
   });
 
-  describe('Parameter Validation', () => {
-    it('validates all parameters against extracted results', () => {
-      const parameterResults = runParameterValidationSuite(
-        parameterSpecs,
-        extractionResults,
-        gameData
-      );
-
-      // Assert all parameters match
-      // Provides detailed error messages for mismatches
+  Object.entries(parameterSpecs).forEach(([_, spec]) => {
+    it(`validates ${spec.description}`, () => {
+      const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
+      const domainValue = spec.domainExtractor(gameData);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
     });
   });
 });
@@ -205,7 +253,6 @@ When implementing a parameter extractor:
 ```typescript
 export const parameterSpecs: Record<string, ParameterTestSpec> = {
   some_bonus: {
-    id: 'some_bonus',
     description: 'Some bonus calculation (MISSING IMPLEMENTATION)',
     extractionKey: 'some_bonus',
     domainExtractor: (_gameData) => {
@@ -224,7 +271,7 @@ This approach:
 
 #### Step 5: Write Calculation Tests
 
-After parameter tests pass, add final calculation tests:
+After parameter tests pass, create `tests/domains/[feature]/[aspect].test.ts`:
 
 ```typescript
 describe('Final Calculations', () => {
@@ -235,7 +282,10 @@ describe('Final Calculations', () => {
     const extractedSpeed = extractionResults.extractions.boat_0_speed.result;
     const calculatedSpeed = boat.getSpeedValue({...options});
 
-    expect(calculatedSpeed).toBeCloseTo(extractedSpeed, 2);
+    expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
+      tolerance: 0,
+      context: 'Boat speed'
+    });
   });
 });
 ```
@@ -351,7 +401,7 @@ If a test fails because of an unimplemented feature, leave it failing. The failu
 **Problem:** `game-data-extractor.js` returns errors
 
 **Solutions:**
-- Check debug server is running (`node idleon-debug-server.js`)
+- Check debug server is running: `cd sub-projects/game-debug-tool && node idleon-debug-server.js`
 - Verify game launched with debug port
 - Test expression in browser console first
 - Check game function names haven't changed (obfuscation)
@@ -406,7 +456,7 @@ After game updates:
 See: `tests/configs/sailing-speed.json`
 
 ### Test Template
-See: `tests/domains/sailing/speed-parameters.test.ts`
+See: `tests/domains/sailing/speed-parameters.test.ts` and `tests/domains/sailing/speed.test.ts`
 
 ### Helper Documentation
-See: `tests/helpers/README.md`
+See: `tests/helpers/README.md` and `tests/README.md`

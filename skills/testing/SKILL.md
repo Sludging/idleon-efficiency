@@ -11,7 +11,23 @@ triggers:
 
 For comprehensive testing documentation, read [docs/TESTING_IMPLEMENTATION.md](docs/TESTING_IMPLEMENTATION.md).
 
+For day-to-day workflow (batch extraction, save fixtures, coverage), see [tests/README.md](../tests/README.md) and [tests/helpers/README.md](../tests/helpers/README.md).
+
 ## Key Reminders
+
+**Extraction workflow:**
+- Batch extract all configs: `node tests/helpers/extract-all-game-data.js`
+- Debug server: `sub-projects/game-debug-tool/idleon-debug-server.js`
+- Save fixture: update `tests/fixtures/saves/latest.json` from idleonefficiency.com raw-data tab
+
+**Custom matchers** (defined in `tests/setup.ts`):
+- `expect(domainValue).toMatchLiveGame(liveValue, 0)` — parameter tests
+- `expect(domainValue).toMatchLiveGameWithDetails(liveValue, { tolerance: 0, context: '...' })` — calculation tests
+
+**Coverage tracking:**
+- Annotate tests with `@testCovers Domain.methodName`
+- Run `yarn coverage:report` to see gaps
+
 
 **When creating extraction configs:**
 - Ask developer for game code to base configs on

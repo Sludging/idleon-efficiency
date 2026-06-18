@@ -10,8 +10,9 @@
       "Bash(head:*)",
       "Bash(tail:*)",
       "Bash(head:*)",
-      "Bash(diff:*)"
-      
+      "Bash(diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [
       "Read(.env)",

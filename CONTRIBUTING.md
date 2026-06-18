@@ -4,6 +4,10 @@ I haven't done this fresh in a while so please let me know if this doesn't work 
 
 It should be as simple as running `npm install` or `yarn install` (depending on your tool of choice) followed by `yarn dev` or `npm run dev`.
 
+## AI Assistants
+
+If you're using an AI coding assistant (Cursor, Claude Code, etc.), start with [AGENTS.md](AGENTS.md) for project context, skills, and constraints. Detailed guides live in [`docs/`](docs/) and operational procedures in [`docs/runbooks/`](docs/runbooks/).
+
 ## How can you help
 
 In no particular order:

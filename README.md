@@ -16,6 +16,8 @@ Special shoutout as well to [Corbeno](https://github.com/Corbeno) for his contri
 
 Checkout the [docs](/docs) folder to learn more about how this project is structured and some insight into the maddness.
 
+For AI coding assistants, see [AGENTS.md](AGENTS.md).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -4,7 +4,7 @@
  * Batch Game Data Extractor
  *
  * Runs all extraction configs in tests/configs/ and saves results to tests/results/
- * Also saves the current cloud save as latest.json for test alignment
+ * Save fixture (latest.json) is managed separately — see docs/TESTING_IMPLEMENTATION.md Step 3
  */
 
 const fs = require('fs');

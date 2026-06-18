@@ -1,0 +1,40 @@
+---
+description: Project bootstrap — read AGENTS.md and know where skills/docs live
+alwaysApply: true
+---
+
+# Project Bootstrap
+
+Read [AGENTS.md](../AGENTS.md) for full project context.
+
+## Critical Constraints
+
+- **DO NOT modify** auto-generated dirs: `data/domain/data/`, `data/domain/enum/`, `data/domain/model/`
+- Use **yarn** (never npm) for package management
+- Never guess game calculations — verify against the actual running game
+
+## Skills Index
+
+Read the relevant skill from `skills/` when working on matching tasks:
+
+| Skill | Path |
+|-------|------|
+| architecture | `skills/architecture/SKILL.md` |
+| calculation-correctness | `skills/calculation-correctness/SKILL.md` |
+| testing | `skills/testing/SKILL.md` |
+| feature-implementation | `skills/feature-implementation/SKILL.md` |
+| update-game-version | `skills/update-game-version/SKILL.md` |
+| sync-game-assets | `skills/sync-game-assets/SKILL.md` |
+
+## Documentation Index
+
+| Document | Purpose |
+|----------|---------|
+| `docs/CODEBASE_OVERVIEW.md` | Technical architecture |
+| `docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md` | Feature implementation |
+| `docs/TESTING_IMPLEMENTATION.md` | Testing strategy |
+| `docs/GAME_CODE_PROCESSOR_PLAN.md` | Game code processor plan |
+| `docs/runbooks/` | Operational procedures |
+| `CONTRIBUTING.md` | Contributor guidelines |
+
+@AGENTS.md
