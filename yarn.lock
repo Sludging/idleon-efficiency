@@ -7159,6 +7159,7 @@ __metadata:
     ts-node: "npm:^10.9.2"
     tsx: "npm:^4.21.0"
     typescript: "npm:^5.9.3"
+    typescript-language-server: "npm:^5.1.3"
     zustand: "npm:^5.0.9"
   languageName: unknown
   linkType: soft
@@ -11286,6 +11287,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript-language-server@npm:^5.1.3":
+  version: 5.3.0
+  resolution: "typescript-language-server@npm:5.3.0"
+  bin:
+    typescript-language-server: lib/cli.mjs
+  checksum: 10c0/d37d795f20849f5788134c18b00ad724ba325536d7f9fd308fc7ee97ee10a4ca383b7e35791b4e526beaa6a286e8255e42c807c3f20e884d71f21d5fe19807d5
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^5.9.3":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
@@ -11520,6 +11530,37 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: 10c0/f15d588d79f3675135ba783c91a4083dcd290a2a5be9fcb6514220a1634e23df116847b1cc51f66bfb0644cf9353b2abb7815ae499bab06e46dd33c1a6bf1f4f
+  languageName: node
+  linkType: hard
+
+"vscode-jsonrpc@npm:9.0.1":
+  version: 9.0.1
+  resolution: "vscode-jsonrpc@npm:9.0.1"
+  checksum: 10c0/6ca63393dd78675ed33b5537c147e673865557ff93915cd5189ceae039ca7fe01808ffd9a14016732d4789f2102a037d68d4216f557c3380d1c7f3ea50fd85b4
+  languageName: node
+  linkType: hard
+
+"vscode-jsonrpc@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "vscode-jsonrpc@npm:5.0.1"
+  checksum: 10c0/365dc54648247f0eb31ffdeb45b67c17f2cfac6cf55810b52376bad0becc7ee029dbe722e8d94fc779217e012466e8f7c7360749667946ff4e1156731abe1941
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-protocol@npm:^3.15.0":
+  version: 3.18.2
+  resolution: "vscode-languageserver-protocol@npm:3.18.2"
+  dependencies:
+    vscode-jsonrpc: "npm:9.0.1"
+    vscode-languageserver-types: "npm:3.18.0"
+  checksum: 10c0/c77862958063b2d6edcdbab7da1abece58b251051338083296c468d5caafc2c249aba63f1a15011d8b8354e145937252520fe6a9632c146606a833bdeae9784c
+  languageName: node
+  linkType: hard
+
+"vscode-languageserver-types@npm:3.18.0":
+  version: 3.18.0
+  resolution: "vscode-languageserver-types@npm:3.18.0"
+  checksum: 10c0/d8c51cd286cc55b4c1f333e87fa3cefc66d2aae8c65f6209e7ecf88032d3326308b333d62b05243c194be8a3304760445b87630b298116c6c612607f011b4de0
   languageName: node
   linkType: hard
 
