@@ -40,9 +40,9 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **Auto-triggers:** None (load manually when needed)
 
-**When to use:** A domain calculation is wrong / a test is failing, or you want to expand test coverage of an existing calculation
+**When to use:** A backend main calculation is red or confirmed missing and has a human-approved canonical correctness case
 
-**Covers:** Coverage-driven recursive validation against live game data, the game-code handoff, failure classification, specialized agent roster (coverage-investigator / test-writer / domain-writer), work-item template
+**Covers:** Accepted paired evidence, one-root GitHub lifecycle, demand-driven parameter diagnosis, explicit stops, WikiBot ownership handoff, zero-tolerance resolution, and terminal learning
 
 **Points to:** [docs/calculation-correctness/PLAYBOOK.md](../docs/calculation-correctness/PLAYBOOK.md)
 

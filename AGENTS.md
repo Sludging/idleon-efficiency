@@ -17,7 +17,7 @@ Context-specific guidance lives in [`skills/`](skills/). Read the relevant skill
 | Skill | When to use |
 |-------|-------------|
 | [architecture](skills/architecture/SKILL.md) | Data flow, domain patterns, cross-domain dependencies |
-| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A calculation is wrong / test failing, or expanding test coverage — recursive validation against live game data |
+| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — supervised canonical-case workflow with demand-driven live/game-code evidence |
 | [testing](skills/testing/SKILL.md) | Live game extraction testing, domain test writing, validation |
 | [feature-implementation](skills/feature-implementation/SKILL.md) | Implementing new game features and domain logic |
 | [update-game-version](skills/update-game-version/SKILL.md) | New Idleon version released — extract from Steam, process via WikiBot, sync data |

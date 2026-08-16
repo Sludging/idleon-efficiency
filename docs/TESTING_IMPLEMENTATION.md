@@ -323,7 +323,7 @@ Do not write tests that simply validate parsed save data matches model fields (e
 
 ### What Inputs to Test
 
-Parameters = all calculation inputs, regardless of domain. Extract same-domain dependencies if they're inputs (e.g., ribbon bonus for cooking calculations).
+For an active calculation-correctness case, extract and test only the smallest demand-driven parameter frontier needed to explain and correct the approved root. Parameters remain evidence inside that root; parameter-only failures do not create correctness cases. Broader feature-test design outside correctness cases remains a separate developer decision.
 
 ### When to Split Parameter vs Calculation Files
 
@@ -333,7 +333,7 @@ Use a single calculation test file when the formula is trivially simple (e.g., `
 
 ### How Many Scenarios to Test
 
-Test 3-5 different scenarios when there are many similar calculations (e.g., test meal bonuses for "Sailing", "Mcook", "KitchenEff" rather than just one).
+Use the accepted coherent save/extraction pair for calculation-correctness v0, including neutral or inactive values. No manufactured state or scenario count is required. Add scenarios only when they defend an observable contract required by the approved root.
 
 ### Handling Missing Implementations
 
@@ -348,30 +348,11 @@ domainExtractor: (_gameData) => {
 
 ## Test Patterns & Best Practices
 
-### Parameter-First Testing
+### Demand-Driven Parameter Testing
 
-**Always test parameters before final calculations:**
-```
-✅ GOOD: Test 15 parameters → Test final calculation
-❌ BAD: Test only final calculation
-```
+Start from the approved main calculation and add parameter tests only where they reduce uncertainty on its current frontier. Record examined inputs as `GREEN`, `RED`, or `UNKNOWN` in the canonical root checkpoint. A passing parameter closes that branch; a red parameter narrows the mismatch; an unknown remains explicit.
 
-**Why:** When final calculation fails, parameter tests show exactly which dependency is wrong.
-
-### Comprehensive Coverage
-
-**Test multiple scenarios:**
-```typescript
-// Test current value
-boat.getSpeedValue({currentLevel: true})
-
-// Test next level
-boat.getSpeedValue({currentLevel: false, nextLevel: true})
-
-// Test with/without bonuses
-boat.getSpeedValue({withCaptain: true})
-boat.getSpeedValue({withCaptain: false})
-```
+Parameter-first coverage of every transitive input is not a calculation-correctness completion criterion. Completion is the approved root main test plus every targeted test changed or added by the case being green against the accepted pair and current-code ref.
 
 ### Precision Handling
 

@@ -1,47 +1,39 @@
 ---
 name: calculation-correctness
-description: Methodology for diagnosing and fixing wrong domain calculations and expanding test coverage by recursively validating against live game data
+description: Supervised methodology for one wrong or missing backend main calculation, using a canonical GitHub correctness case and demand-driven live/game-code evidence
 ---
 
-# Calculation Correctness Playbook
+# Calculation Correctness
 
-For the full methodology, read [docs/calculation-correctness/PLAYBOOK.md](docs/calculation-correctness/PLAYBOOK.md).
+Use this skill for a red main calculation test or a confirmed-missing backend main calculation. Read the authoritative [v0 playbook](../../docs/calculation-correctness/PLAYBOOK.md) before acting.
 
-## When to use
+Use [testing](../testing/SKILL.md) for extraction and test mechanics. Use [feature-implementation](../feature-implementation/SKILL.md) for a new feature that is not an approved correctness case.
 
-- A domain calculation is wrong or a domain test is failing.
-- You want to expand test coverage of an existing calculation.
+## Entry gate
 
-(For *new* features use [feature-implementation](../feature-implementation/SKILL.md); for the
-mechanics of writing one test use [testing](../testing/SKILL.md). This playbook sits above both.)
+The canonical GitHub issue for `backend domain + main calculation` and its append-only checkpoint comments are the sole lifecycle and resume authority. The issue must identify the accepted coherent save/live-extraction pair, current-code run, root signal, main test, and exit checks. A human must approve and claim exactly one pending root before root work starts.
 
-## Key Reminders
+Do not form or refresh the queue, select a pilot, or activate a root unless the user explicitly asks. Parameter-only failures are evidence within a root, never cases.
 
-- **Preflight first — run runbooks, do not audit.** Before picking a target, complete the preflight
-  gate in `docs/calculation-correctness/PLAYBOOK.md`
-- **The test is the oracle.** The only question: does our domain value match the live-extracted
-  value? Yes → done. Game code is consulted only to (a) enumerate a calc's real inputs and (b) fix
-  a wrong value.
-- **Source of truth:** decompiled game code (`$WIKIBOT_ROOT/codefiles/idleon<ver>.txt` for the
-  current version) > live extracted values > our domain code (**never**). The repo is out of date —
-  never derive inputs or formulas from our own domain code.
-- **The loop:** start from `tests/.cache/suite-summary.json`, pick a target → read its real game
-  function → enumerate inputs from game code → for each input: no coverage → write a test; green →
-  stop; red → recurse. All inputs green but parent red → composition formula is stale → fix it.
-- **No deferred fixes.** Every red node (parent or leaf) is chased to root cause.
-- **Slow, sequential recovery.** Work one target at a time; the agent split is for context hygiene,
-  not parallel throughput. Do not broaden scope unless the developer explicitly chooses that.
-- **Two failure classes only:** test/harness defect (fix the test) or domain-correctness gap (read
-  game code, make the domain match). Validatability is a flag, not a class.
-- **Diagnosis ≠ fix.** Red/green triage needs only committed data; enumerating true inputs and
-  fixing need game code.
-- **Game-code handoff:** never read the 45 MB file whole — targeted grep only; `_customBlock_` names
-  are stable across versions. If the current version isn't extracted, STOP and ask the developer.
-- **Specialized agents** carry the work: `coverage-investigator` (discovery → work item),
-  `test-writer`, `domain-writer`, plus the existing `test-runner`. The work item is the handoff
-  contract and must be self-contained with game-code evidence. Live extraction is a serialization
-  point — append configs, run one batch extraction, then write tests/fixes.
-- **Tolerance is `0`** (float-ordering exception only). Never suppress a failing test.
-- **Learning loop:** every completed target gets a short learning review. Promote durable lessons into
-  this playbook or agent instructions; track tentative lessons in
-  `docs/calculation-correctness/LEARNINGS.md`.
+## State machine
+
+1. Accept or reuse one coherent save/live-extraction pair and reproduce against current code.
+2. When intake is explicitly requested, run the full domain calculation suite and normalize only red main calculations or confirmed-missing roots by `backend domain + main calculation`.
+3. Activate exactly one human-approved root and record `ACTIVE` in its first checkpoint.
+4. Follow the smallest demand-driven parameter frontier needed to explain and correct that root. Record each checked input as `GREEN`, `RED`, or `UNKNOWN` in checkpoints.
+5. Checkpoint `BLOCKED` and stop immediately for any playbook stop condition. Two materially different attempts at the same next action with no new fact and no reduced uncertainty also block the case.
+6. Merge same-root signals into the active case. Return independently red or missing main calculations to pending intake; never activate them from diagnosis.
+7. Resolve only when the root main test and every targeted test changed or added by the case are green against the accepted pair and current-code ref. Append the final checkpoint and terminal learning block, then close the root issue.
+
+## Evidence and ownership
+
+- Live extraction establishes expected values for the accepted snapshot.
+- Current delivered game code establishes formula and composition.
+- Repository domain code is the implementation under test. Tests are executable evidence, not infallible oracles.
+- Formula discovery, save parsing, dependency wiring, extraction configs, tests, and handwritten domain fixes belong to idleon-efficiency.
+- WikiBot owns game-code extraction and generated static representation. Never hand-edit or regenerate WikiBot-owned output during correctness work.
+- New or changed comparisons use tolerance `0`. An existing non-zero tolerance affecting the active root requires game-behavior or floating-point evaluation-order evidence; otherwise stop and ask before closure.
+
+## Hard boundaries
+
+One root at a time. No guessed formulas, hidden failures, automatic orchestration, role choreography, work-item handoffs, coverage expansion, or methodology promotion from one case. Parsing completes before cross-domain calculation; calculations follow dependency order. Never edit generated `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/` content.
