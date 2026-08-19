@@ -9,58 +9,27 @@ triggers:
 
 # Testing Guide
 
-For comprehensive testing documentation, read [docs/TESTING_IMPLEMENTATION.md](../../docs/TESTING_IMPLEMENTATION.md).
+Read the [testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for the complete mechanics of extraction, fixtures, parameter tests, calculation tests, matchers, and test commands.
 
-For day-to-day workflow (batch extraction, save fixtures, coverage), see [tests/README.md](../../tests/README.md) and [tests/helpers/README.md](../../tests/helpers/README.md).
+For day-to-day batch extraction, save fixtures, and coverage tracking, also read [tests/README.md](../../tests/README.md) and [tests/helpers/README.md](../../tests/helpers/README.md).
 
-## Key Reminders
+When a human has activated a calculation-correctness case, read the [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) before deciding what to test or change. The playbook controls case scope, dependency decisions, checkpoints, and closure. This skill and the implementation guide explain how to produce the approved test evidence. Ordinary domain testing uses this skill without the correctness-case branch.
 
-**Extraction workflow:**
-- Batch extract all configs: `node tests/helpers/extract-all-game-data.js`
-- Debug server: `sub-projects/game-debug-tool/idleon-debug-server.js`
-- Save fixture: update `tests/fixtures/saves/latest.json` from idleonefficiency.com raw-data tab
+## Operational reminders
 
-**Custom matchers** (defined in `tests/setup.ts`):
-- `expect(domainValue).toMatchLiveGame(liveValue, 0)` — parameter tests
-- `expect(domainValue).toMatchLiveGameWithDetails(liveValue, { tolerance: 0, context: '...' })` — calculation tests
+- Run `node tests/helpers/extract-all-game-data.js` to batch-extract every configuration.
+- Use `sub-projects/game-debug-tool/idleon-debug-server.js` for the debug server.
+- Update `tests/fixtures/saves/latest.json` from the idleonefficiency.com raw-data tab when the fixture changes.
+- Use `expect(domainValue).toMatchLiveGame(liveValue, 0)` for parameter tests.
+- Use `expect(domainValue).toMatchLiveGameWithDetails(liveValue, { tolerance: 0, context: '...' })` for calculation tests.
+- Existing `@testCovers` annotations and `yarn coverage:report` remain optional. Coverage is not a calculation-correctness deliverable.
 
-**Coverage tools (optional):**
-- Existing `@testCovers` annotations and `yarn coverage:report` remain available, but coverage is not a calculation-correctness deliverable.
+## Mechanics that affect correctness evidence
 
-
-**When creating extraction configs:**
-- Base formulas and composition on current delivered game code; base expected values on live extraction from the accepted coherent save/extraction pair.
-- Extract only the smallest set of components needed by the active root's demand-driven parameter frontier.
-- Keep extraction serialized: append configs, then run one batch extraction.
-- Game functions may return raw values that the domain transforms with hardcoded constants. Normalize the extraction expression only when game-code evidence establishes the equivalent output.
-
-**When writing parameter tests:**
-- Parameter tests are targeted diagnostic evidence inside the approved main-calculation root; they never create separate correctness cases.
-- Record examined parameters as `GREEN`, `RED`, or `UNKNOWN` in the canonical root checkpoint.
-- A confirmed missing implementation remains visible as a failing result; do not hide it.
-
-**Failing tests are visible evidence:**
-- Never use `it.skip()`, `it.todo()`, `xit()`, removal, or tolerance changes to hide a failure.
-- New or changed correctness comparisons use tolerance `0`.
-- An existing non-zero tolerance affecting the active root requires game-behavior or floating-point evaluation-order evidence; otherwise stop and ask.
-
-**What NOT to test:**
-- Do not write tests that simply validate parsed save data matches model fields (e.g., "level in Spelunk[45][0] == bonus.level"). Parsing correctness is assumed — if parsing breaks, every calculation test will fail anyway. Only test actual calculations and formulas.
-
-**When to split parameter vs calculation files:**
-- Split into separate parameter and calculation files when the calculation has multiple cross-domain inputs worth validating individually (e.g., statues depend on artifacts, event shop, meritocracy, vault, talents)
-- Use a single calculation file when the formula is trivially simple (e.g., `bonus * level`) with no meaningful cross-domain inputs to isolate
-
-**Calculation-correctness workflow:**
-1. Start only from the human-approved canonical GitHub root case and accepted coherent pair.
-2. Read current delivered game code for formula/composition and use live extraction for expected values.
-3. Extend extraction configs and parameter tests only along the smallest frontier needed to resolve the root.
-4. Capture extraction and save together only when a refresh trigger in the calculation-correctness playbook applies.
-5. Run the selected main test and targeted parameter tests; completion requires the main test and every test changed or added by the case to be green.
-
-**Common test commands:**
-```bash
-yarn test tests/domains/[feature]/[aspect]-parameters.test.ts
-yarn test:domains
-yarn test:watch
-```
+- Base formulas and composition on current delivered game code. Base expected values on live extraction from the accepted coherent save and extraction pair.
+- Extract only the smallest set of components needed by the approved test surface. Keep extraction serialized: append configurations, then run one batch extraction.
+- If the game returns a raw value that the domain transforms with a fixed constant, normalize the extraction expression only when game-code evidence establishes the equivalent output.
+- Keep confirmed missing implementations visible as explicit failing results. Do not hide them.
+- Never use `it.skip()`, `it.todo()`, `xit()`, test removal, or a tolerance change to hide a failure. New or changed correctness comparisons use tolerance `0`.
+- Do not write tests that only compare a parsed save field with a model field. Test calculations and formulas instead.
+- Split parameter and calculation files when several meaningful cross-domain inputs need individual diagnosis. Use one calculation file when the formula is simple and there are no meaningful inputs to isolate.

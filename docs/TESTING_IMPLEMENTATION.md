@@ -323,7 +323,7 @@ Do not write tests that simply validate parsed save data matches model fields (e
 
 ### What Inputs to Test
 
-For an active calculation-correctness case, extract and test only the smallest demand-driven parameter frontier needed to explain and correct the approved root. Parameters remain evidence inside that root; parameter-only failures do not create correctness cases. Broader feature-test design outside correctness cases remains a separate developer decision.
+For an active calculation-correctness case, extract and test only the smallest demand-driven parameter frontier needed to explain and correct the approved root. The [calculation-correctness playbook](calculation-correctness/PLAYBOOK.md) defines whether a finding stays in the current case or requires a separately selected case. This guide defines how to implement and run the approved test surface. Broader feature-test design outside correctness cases remains a separate developer decision.
 
 ### When to Split Parameter vs Calculation Files
 
