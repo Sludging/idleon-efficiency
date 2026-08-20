@@ -46,6 +46,7 @@ node idleon-debug-server.js
 - `POST /inject` - Inject into running game (auto-skipped if already injected)
 - `POST /exec` - Execute JavaScript expressions in game context
 - `GET /game-info` - Get game object information
+- `GET /game-version` - Current game version from the live `RANDOlist` patch entry (e.g. `{"title":"Summer_Event","version":"1.19"}`)
 - `GET /cloud-save` - Read the authenticated `_data/<uid>` Firestore save document with `source: 'server'`; filters out internal `_-1` keys; merges `playerNames` (from Realtime DB `_uid/<uid>`), `companions` (from Realtime DB `_comp/<uid>`), and `servervars` (from Firestore `_vars/_vars`) to match the raw-data page representation
 
 ### **Usage Examples**
@@ -115,6 +116,7 @@ idleon.getAttr(name)                    // Get any game attribute
 idleon.getHP()                          // Get player HP
 idleon.getClass()                       // Get character class  
 idleon.getMap()                         // Get current map
+idleon.getGameVersion()                 // Current game version from live RANDOlist: { title, version }
 
 // DNSM data (main game state) - Returns keys for discovery
 idleon.getDNSM()                        // Get all DNSM categories

@@ -100,6 +100,25 @@ class IdleonDebugServer {
                 res.status(500).json({ error: error.message });
             }
         });
+
+        // Current game version from the live RANDOlist patch entry
+        this.app.get('/game-version', async (req, res) => {
+            try {
+                if (!this.gameReady) {
+                    return res.status(400).json({ error: 'Game not ready. Call /inject first.' });
+                }
+
+                const version = await this.executeCommand('idleon.getGameVersion()');
+                if (typeof version === 'string') {
+                    // Helper returns an error string on failure
+                    return res.status(500).json({ error: version });
+                }
+                res.json(version);
+            } catch (error) {
+                console.error('Game version error:', error);
+                res.status(500).json({ error: error.message });
+            }
+        });
         // Export the authenticated Firestore save document without committing a save
         this.app.get('/cloud-save', async (req, res) => {
             try {
@@ -466,6 +485,27 @@ class IdleonDebugServer {
                         return "Search error: " + e.message; 
                     }
                 },
+                // Current game version, from the live RANDOlist patch entry.
+                // The game keeps legacy patch entries elsewhere (e.g. PatchNotesInfo),
+                // so max-sorting version numbers across the game yields stale results
+                // after a version reset. RANDOlist holds exactly one current-patch
+                // string of the form "<Title>_v<version>"; returning it verbatim keeps
+                // detection deterministic, and ambiguity is surfaced instead of guessed.
+                getGameVersion: function() {
+                    try {
+                        const rando = window.frames[0].__idleon_cheats__["scripts.CustomLists"].RANDOlist();
+                        const found = [];
+                        (function walk(x) {
+                            if (typeof x === "string") {
+                                const m = x.match(/^([A-Za-z0-9_,]+)_v([0-9]+\.[0-9]+[a-zA-Z]?)/);
+                                if (m) found.push({ title: m[1], version: m[2] });
+                            } else if (Array.isArray(x)) x.forEach(walk);
+                        })(rando);
+                        if (found.length === 0) return "No version entry found in RANDOlist";
+                        if (found.length > 1) return "Ambiguous version entries in RANDOlist: " + JSON.stringify(found);
+                        return found[0];
+                    } catch(e) { return "Game version error: " + e.message; }
+                },
                 getPlayer: function() { 
                     try {
                         const player = this.getAttr("Player");
@@ -622,12 +662,11 @@ class IdleonDebugServer {
                         
                         // Smart function access
                         callFunction: "Call any function by name: callFunction('GetTalentNumber', char, id)",
-                        findFunction: "Find which ActorEvents contains a function: findFunction('Breeding')",
                         
                         // Game data
                         getAttr: "Get any game attribute: getAttr('PlayerHP')",
                         getDNSM: "Get DNSM data keys: getDNSM() or getDNSM('BoxRewards')",
-                        safeGetDNSM: "Safer DNSM access: safeGetDNSM('AlchBubbles')",
+                        getGameVersion: "Current game version from the live RANDOlist patch entry: getGameVersion() -> { title, version }",
                         getTalent: "Get talent level: getTalent(characterIndex, talentId)",
                         getPlayer: "Get player data keys",
                         getPlayerData: "Safe player access: getPlayerData(0) or getPlayerData(0, 'StatueLevels')",
@@ -816,7 +855,7 @@ class IdleonDebugServer {
                 console.log(`  POST /inject     - Inject into game`);
                 console.log(`  POST /exec       - Execute game commands`);
                 console.log(`  GET  /game-info  - Get game object info`);
-                console.log(`  GET  /cloud-save - Export authenticated Firestore save document`);
+                console.log(`  GET  /game-version - Current game version from the live RANDOlist patch entry`);
                 console.log(`  POST /refresh-helpers  - Refresh injected helpers with latest code`);
 
                 // Auto-check for existing injection
