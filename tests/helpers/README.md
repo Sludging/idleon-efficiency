@@ -14,8 +14,8 @@ This will:
 1. Extract data for all configs in `tests/configs/`
 2. Save results to `tests/results/`
 
-**Note:** This script only extracts data from the game. The save file (`latest.json`) is managed separately - update it manually from idleonefficiency.com raw-data tab when needed.
-
+- The batch script refreshes `tests/fixtures/saves/latest.json` from
+  `GET http://localhost:3100/cloud-save` before extracting live values.
 ## Individual Extraction (Advanced)
 
 If you need to extract data for a single config file:
@@ -29,6 +29,16 @@ node tests/helpers/game-data-extractor.js \
   tests/configs/cooking-speed.json \
   tests/results/cooking-speed-data.json
 ```
+
+### Save Export (Standalone)
+
+```bash
+curl http://localhost:3100/cloud-save > tests/fixtures/saves/latest.json
+```
+
+The endpoint returns the complete enriched save matching the raw-data page
+representation (see debug server docs). It does not trigger or commit a save.
+
 
 ### Prerequisites
 

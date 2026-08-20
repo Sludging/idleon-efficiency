@@ -83,7 +83,7 @@ node tests/helpers/game-data-extractor.js \
 
 **Location:** `tests/fixtures/saves/latest.json`
 
-All tests load save data via `loadGameDataFromSave('latest')`. Update `latest.json` from the idleonefficiency.com raw-data tab when the game state changes. The save must correspond to the same game state used during live extraction.
+All tests load save data via `loadGameDataFromSave('latest')`. Refresh `latest.json` by running the debug server and calling `GET /cloud-save` (e.g. via `node tests/helpers/extract-all-game-data.js`). The endpoint returns the complete, enriched save matching the raw-data page — see the debug server documentation for details.
 
 #### 5. Parameter Tests
 **Location:** `tests/domains/[feature]/[aspect]-parameters.test.ts`
@@ -188,10 +188,12 @@ See existing configs for examples: `tests/configs/cooking-meal-bonus.json`, `tes
 **Prerequisites:**
 1. Launch game with debug port (usually port 9223)
 2. Start debug server: `cd sub-projects/game-debug-tool && node idleon-debug-server.js`
-3. Update `tests/fixtures/saves/latest.json` from idleonefficiency.com raw-data tab
-4. Verify `GET http://localhost:3100/status` reports `cdpConnected: true`, `injected: true`, and
-   `gameReady: true` before extraction. If `/inject` times out or leaves `gameReady: false`, restart
-   the debug server and check `/status` again before running extraction.
+3. Verify `GET http://localhost:3100/status` reports `cdpConnected: true`,
+   `injected: true`, and `gameReady: true` before extraction. If `/inject` times out
+   or leaves `gameReady: false`, check the server logs and `/status` before continuing.
+4. `node tests/helpers/extract-all-game-data.js` refreshes
+   `tests/fixtures/saves/latest.json` through `GET /cloud-save` before running
+   the live-value extraction.
 
 **Run extraction (recommended — all configs):**
 ```bash
