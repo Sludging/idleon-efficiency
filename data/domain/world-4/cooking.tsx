@@ -1,5 +1,6 @@
 import { commaNotation, round } from "../../utility"
 import { Achievement } from "../achievements";
+import { Companion } from "../companions";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { AtomCollider } from "../world-3/construction/atomCollider";
 import { Breeding, territoryNiceNames } from "./breeding";
@@ -77,6 +78,8 @@ export class Meal {
     mainframeBonus: number = 0;
     shinyBonus: number = 0;
     winnerBonus: number = 0;
+    companion162Bonus: number = 0;
+    cookMasterLevel: number = 0;
     armorSetBonus: number = 0;
 
     // Active cooking values
@@ -121,6 +124,11 @@ export class Meal {
         return 1 + (Math.floor(5 * ribbonLevel + Math.floor(ribbonLevel / 2) * (4 + 6.5 * Math.floor(ribbonLevel / 5))) + Math.floor(ribbonLevel / 4) * (this.armorSetBonus / 4)) / 100;
     }
 
+    // Cooking Mastery multiplier for this meal's bonus.
+    getBonusMultiCook = () => {
+        return 1 + (100 * this.cookMasterLevel) / (this.cookMasterLevel + 5) / 100;
+    }
+
     getBonus = (roundResult: boolean = false, mainFrameBonus: number = this.mainframeBonus, level: number = this.level) => {
         // Jewel doesn't impact the line width meals.
         if (this.bonusKey == "PxLine") {  // This used to be the case but no more? -> || this.bonusKey == "LinePct") {
@@ -128,7 +136,15 @@ export class Meal {
             return roundResult ? round(finalMath) : finalMath;
         }
 
-        const finalMath = (1 + ((mainFrameBonus + this.shinyBonus) / 100)) * (1 + this.winnerBonus / 100) * this.getRibbonBonus() * level * this.bonusQty;
+        const cookingMealBonusMultioo =
+            (1 + ((mainFrameBonus + this.shinyBonus) / 100)) *
+            (1 + this.winnerBonus / 100) *
+            (1 + (25 * this.companion162Bonus) / 100);
+        const finalMath = this.getBonusMultiCook() *
+            cookingMealBonusMultioo *
+            this.getRibbonBonus() *
+            level *
+            this.bonusQty;
         return roundResult ? round(finalMath) : finalMath;
     }
 
@@ -517,6 +533,7 @@ export class Cooking extends Domain {
             { key: "Cooking", perPlayer: false, default: [] },
             { key: "Meals", perPlayer: false, default: [] },
             { key: "Ribbon", perPlayer: false, default: [] },
+            { key: "CookMaster", perPlayer: false, default: [] },
         ]
     }
 
@@ -533,6 +550,7 @@ export class Cooking extends Domain {
         const cookingData = data.get("Cooking") as number[][];
         const mealsData = data.get("Meals") as number[][];
         const ribbonData = data.get("Ribbon") as number[];
+        const cookMasterData = data.get("CookMaster") as number[][];
 
         if (cookingData.length == 0 || mealsData.length == 0) {
             return;
@@ -545,6 +563,7 @@ export class Cooking extends Domain {
                     cooking.meals[index].level = mealLevel;
                     cooking.meals[index].count = mealsData[2][index];
                     cooking.meals[index].ribbonLevel = ribbonData[28 + index];
+                    cooking.meals[index].cookMasterLevel = cookMasterData?.[0]?.[index] ?? 0;
                 }
             })
         }
@@ -636,6 +655,9 @@ export const updateCooking = (data: Map<string, any>) => {
     const hole = data.get("hole") as Hole;
     const votes = data.get("votes") as Votes;
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const companions = data.get("companions") as Companion[];
+    const companion162 = companions.find(companion => companion.id == 162);
+    const companion162Bonus = companion162?.owned ? companion162.data.bonus : 0;
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {
@@ -651,6 +673,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const foodLust = (equinox.upgrades[9] as FoodLust);
     cooking.meals.forEach(meal => {
         meal.mainframeBonus = jewelMealBonus;
+        meal.companion162Bonus = companion162Bonus;
         meal.reducedCostToUpgrade = voidPlateAchiev;
         meal.foodLustDiscount = foodLust.getBonus();
         meal.armorSetBonus = equipmentSets.getSetBonus("EMPEROR_SET", undefined, true);
