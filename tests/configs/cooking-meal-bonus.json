@@ -36,6 +36,41 @@
       "label": "meal_bonus_kitchen_eff",
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "description": "Meal bonus for KitchenEff"
+    },
+    {
+      "label": "bonus_multi_cook_meal_1",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 1, 0)",
+      "description": "BonusMultiCook multiplier for meal 1 (Egg)"
+    },
+    {
+      "label": "bonus_multi_cook_meal_12",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 12, 0)",
+      "description": "BonusMultiCook multiplier for meal 12 (Corndog)"
+    },
+    {
+      "label": "bonus_multi_cook_meal_13",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 13, 0)",
+      "description": "BonusMultiCook multiplier for meal 13 (Cabbage)"
+    },
+    {
+      "label": "bonus_multi_cook_meal_43",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 43, 0)",
+      "description": "BonusMultiCook multiplier for meal 43 (Soda)"
+    },
+    {
+      "label": "bonus_multi_cook_meal_51",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 51, 0)",
+      "description": "BonusMultiCook multiplier for meal 51 (Popped Corn)"
+    },
+    {
+      "label": "bonus_multi_cook_meal_52",
+      "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 52, 0)",
+      "description": "BonusMultiCook multiplier for meal 52 (Double Cherry)"
+    },
+    {
+      "label": "companion_162_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 162, 0)",
+      "description": "Companion 162 meal bonus multiplier input"
     }
   ]
 }
