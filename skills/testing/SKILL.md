@@ -19,7 +19,7 @@ When a human has activated a calculation-correctness case, read the [calculation
 
 - Run `node tests/helpers/extract-all-game-data.js` to batch-extract every configuration.
 - Use `sub-projects/game-debug-tool/idleon-debug-server.js` for the debug server.
-- Update `tests/fixtures/saves/latest.json` from the idleonefficiency.com raw-data tab when the fixture changes.
+- When refreshing a fixture for live extraction, run `node tests/helpers/extract-all-game-data.js`; it obtains `tests/fixtures/saves/latest.json` from `GET http://localhost:3100/cloud-save` before extracting values.
 - Use `expect(domainValue).toMatchLiveGame(liveValue, 0)` for parameter tests.
 - Use `expect(domainValue).toMatchLiveGameWithDetails(liveValue, { tolerance: 0, context: '...' })` for calculation tests.
 - Existing `@testCovers` annotations and `yarn coverage:report` remain optional. Coverage is not a calculation-correctness deliverable.
