@@ -94,17 +94,21 @@ test('GET /game-version returns the live RANDOlist version', async () => {
     }
 });
 
-test('getCloudSave reads the authenticated Firestore save document from the server', async () => {
+test('getCloudSave uses the game companion list instead of the real Realtime DB companions', async () => {
     const server = new IdleonDebugServer();
     const save = { CloudsaveTimer: 123, BundlesReceived: '{"bun_q":1}', 'EquipQTY_-1': 'should-be-filtered' };
     const serverVars = { GameVERSION: 135, TestData: 'Hello There' };
     const playerNames = ['TestPlayer1', 'TestPlayer2'];
     const companions = [0, 1, 2, 3];
     let request;
-    let requestedPaths = [];
-    let requestedOptions = [];
-    let databaseRefCalls = [];
+    const requestedPaths = [];
+    const requestedOptions = [];
     const gameFrame = {
+        __idleon_cheats__: {
+            FirebaseStorage: {
+                getCompanionInfoMe: () => companions
+            }
+        },
         firebase: {
             auth: () => ({ currentUser: { uid: 'user' } }),
             firestore: () => ({
@@ -123,17 +127,12 @@ test('getCloudSave reads the authenticated Firestore save document from the serv
             }),
             database: () => ({
                 ref: (path) => {
-                    databaseRefCalls.push(path);
+                    requestedPaths.push(path);
+                    if (path !== '_uid/user') {
+                        throw new Error(`Unexpected Realtime DB path: ${path}`);
+                    }
                     return {
-                        once: async (event) => {
-                            if (path === '_uid/user') {
-                                return { exists: () => true, val: () => playerNames };
-                            }
-                            if (path === '_comp/user') {
-                                return { exists: () => true, val: () => ({ l: companions.map(c => c + ',0') }) };
-                            }
-                            return { exists: () => false };
-                        }
+                        once: async () => ({ exists: () => true, val: () => playerNames })
                     };
                 }
             })
@@ -160,6 +159,7 @@ test('getCloudSave reads the authenticated Firestore save document from the serv
     assert.deepEqual(result.companions, companions);
     assert.deepEqual(result.servervars, serverVars);
     assert.equal('EquipQTY_-1' in result, false);
+    assert.deepEqual(requestedPaths, ['_data/user', '_vars/_vars', '_uid/user']);
     assert.equal(request.returnByValue, true);
     assert.equal(request.awaitPromise, true);
     assert.equal(requestedOptions[0].source, 'server');

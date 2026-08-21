@@ -792,18 +792,24 @@ class IdleonDebugServer {
                     console.warn('Failed to fetch playerNames:', error);
                 }
 
-                // Fetch companions from Realtime DB _comp/{uid}
-                let companions = [];
+                // Use the game's client-side companion list. This is intentionally
+                // separate from the authenticated Realtime DB record: the game
+                // exposes a deterministic test list through getCompanionInfoMe().
+                let companions;
                 try {
-                    const compSnapshot = await database.ref('_comp/' + uid).once('value');
-                    if (compSnapshot.exists()) {
-                        const compData = compSnapshot.val();
-                        if (compData && compData.l) {
-                            companions = compData.l.map(comp => parseInt(comp.split(',')[0]));
-                        }
+                    const companionStorage = frame &&
+                        frame.__idleon_cheats__ &&
+                        frame.__idleon_cheats__.FirebaseStorage;
+                    if (!companionStorage || typeof companionStorage.getCompanionInfoMe !== 'function') {
+                        throw new Error('Game companion info function is unavailable');
+                    }
+
+                    companions = companionStorage.getCompanionInfoMe();
+                    if (!Array.isArray(companions)) {
+                        throw new Error('Game companion info did not return an array');
                     }
                 } catch (error) {
-                    console.warn('Failed to fetch companions:', error);
+                    throw new Error('Failed to read game companion info: ' + error.message);
                 }
 
                 // Combine everything to match raw-data page output
