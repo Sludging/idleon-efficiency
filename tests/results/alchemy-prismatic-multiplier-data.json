@@ -1,53 +1,53 @@
 {
-  "timestamp": "2026-06-17T13:11:51.326Z",
+  "timestamp": "2026-08-21T00:15:01.357Z",
   "extractions": {
     "arcane_upgrade_45_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 45, 0)",
       "result": 6,
       "description": "Arcane (tesseract) upgrade 45 bonus",
-      "extractedAt": "2026-06-17T13:11:51.344Z"
+      "extractedAt": "2026-08-21T00:15:01.373Z"
     },
     "arcade_bonus_54": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
       "result": 4,
       "description": "Arcade bonus 54",
-      "extractedAt": "2026-06-17T13:11:51.346Z"
+      "extractedAt": "2026-08-21T00:15:01.376Z"
     },
     "world_6_trophy_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "result": 10,
       "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)",
-      "extractedAt": "2026-06-17T13:11:51.359Z"
+      "extractedAt": "2026-08-21T00:15:01.379Z"
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
       "result": 3.230769230769231,
       "description": "Gaming palette bonus 28",
-      "extractedAt": "2026-06-17T13:11:51.362Z"
+      "extractedAt": "2026-08-21T00:15:01.389Z"
     },
     "total_purple_sigils": {
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
       "result": 8,
       "description": "Total purple sigils (boost level >= 4)",
-      "extractedAt": "2026-06-17T13:11:51.364Z"
+      "extractedAt": "2026-08-21T00:15:01.393Z"
     },
     "exotic_market_bonus_48": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 48, 0)",
       "result": 0.2978723404255319,
       "description": "Exotic market bonus 48",
-      "extractedAt": "2026-06-17T13:11:51.378Z"
+      "extractedAt": "2026-08-21T00:15:01.397Z"
     },
     "legend_talent_36_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
       "result": 3,
       "description": "Legend talent 36 bonus",
-      "extractedAt": "2026-06-17T13:11:51.381Z"
+      "extractedAt": "2026-08-21T00:15:01.404Z"
     },
     "prismatic_multiplier": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "result": 2.7912864157119475,
       "description": "Final prismatic multiplier calculation (min 3, base 2)",
-      "extractedAt": "2026-06-17T13:11:51.392Z"
+      "extractedAt": "2026-08-21T00:15:01.406Z"
     }
   },
   "errors": {},

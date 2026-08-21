@@ -1,77 +1,77 @@
 {
-  "timestamp": "2026-06-17T13:11:51.878Z",
+  "timestamp": "2026-08-21T00:15:01.742Z",
   "extractions": {
     "coral_kid_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 0, 0)",
       "result": 660,
       "description": "CoralKid bonus 0: Divinity EXP gain",
-      "extractedAt": "2026-06-17T13:11:51.891Z"
+      "extractedAt": "2026-08-21T00:15:01.745Z"
     },
     "coral_kid_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 1, 0)",
       "result": 50,
       "description": "CoralKid bonus 1: Blessing max level increase",
-      "extractedAt": "2026-06-17T13:11:51.894Z"
+      "extractedAt": "2026-08-21T00:15:01.754Z"
     },
     "coral_kid_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 2, 0)",
       "result": 14.791666666666668,
       "description": "CoralKid bonus 2: God Rank class EXP multiplier",
-      "extractedAt": "2026-06-17T13:11:51.896Z"
+      "extractedAt": "2026-08-21T00:15:01.756Z"
     },
     "coral_kid_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
       "result": 80,
       "description": "CoralKid bonus 3: Divinity skill level boost to minor links",
-      "extractedAt": "2026-06-17T13:11:51.909Z"
+      "extractedAt": "2026-08-21T00:15:01.758Z"
     },
     "coral_kid_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 4, 0)",
       "result": 28,
       "description": "CoralKid bonus 4: Divinity PTS gain per Coral Reef upgrade",
-      "extractedAt": "2026-06-17T13:11:51.912Z"
+      "extractedAt": "2026-08-21T00:15:01.760Z"
     },
     "coral_kid_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
       "result": 2.4390243902439024,
       "description": "CoralKid bonus 5: Daily Coral generation increase",
-      "extractedAt": "2026-06-17T13:11:51.926Z"
+      "extractedAt": "2026-08-21T00:15:01.762Z"
     },
     "coral_kid_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 0)",
       "result": 5394077978.276371,
       "description": "CoralKid upgrade cost for bonus 0",
-      "extractedAt": "2026-06-17T13:11:51.929Z"
+      "extractedAt": "2026-08-21T00:15:01.770Z"
     },
     "coral_kid_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 1)",
       "result": 15881867761.018133,
       "description": "CoralKid upgrade cost for bonus 1",
-      "extractedAt": "2026-06-17T13:11:51.940Z"
+      "extractedAt": "2026-08-21T00:15:01.772Z"
     },
     "coral_kid_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 2)",
       "result": 312739794892.5797,
       "description": "CoralKid upgrade cost for bonus 2",
-      "extractedAt": "2026-06-17T13:11:51.943Z"
+      "extractedAt": "2026-08-21T00:15:01.774Z"
     },
     "coral_kid_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 3)",
       "result": 4424544463504.635,
       "description": "CoralKid upgrade cost for bonus 3",
-      "extractedAt": "2026-06-17T13:11:51.945Z"
+      "extractedAt": "2026-08-21T00:15:01.776Z"
     },
     "coral_kid_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 4)",
       "result": 49215578432.38809,
       "description": "CoralKid upgrade cost for bonus 4",
-      "extractedAt": "2026-06-17T13:11:51.947Z"
+      "extractedAt": "2026-08-21T00:15:01.778Z"
     },
     "coral_kid_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 5)",
       "result": 85536000000,
       "description": "CoralKid upgrade cost for bonus 5",
-      "extractedAt": "2026-06-17T13:11:51.959Z"
+      "extractedAt": "2026-08-21T00:15:01.780Z"
     }
   },
   "errors": {},

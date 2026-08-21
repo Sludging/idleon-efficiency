@@ -1,65 +1,65 @@
 {
-  "timestamp": "2026-06-17T13:11:52.531Z",
+  "timestamp": "2026-08-21T00:15:02.046Z",
   "extractions": {
     "points_owned": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_owned\", 0, 0)",
-      "result": 101,
+      "result": 116,
       "description": "Total legend talent points owned from all sources",
-      "extractedAt": "2026-06-17T13:11:52.541Z"
+      "extractedAt": "2026-08-21T00:15:02.055Z"
     },
     "points_spent": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_spent\", 0, 0)",
       "result": 70,
       "description": "Total points spent (sum of all talent levels)",
-      "extractedAt": "2026-06-17T13:11:52.543Z"
+      "extractedAt": "2026-08-21T00:15:02.057Z"
     },
     "companion_37_owned": {
       "expression": "idleon.callFunction(\"Companions\", 37, 0)",
       "result": 1,
       "description": "Companion 37 owned status (contributes 10 points if owned)",
-      "extractedAt": "2026-06-17T13:11:52.544Z"
+      "extractedAt": "2026-08-21T00:15:02.059Z"
     },
     "gem_shop_42": {
       "expression": "idleon.getAttr(\"GemItemsPurchased\")[42]",
       "result": 5,
       "description": "Gem shop item 42 purchase count",
-      "extractedAt": "2026-06-17T13:11:52.546Z"
+      "extractedAt": "2026-08-21T00:15:02.061Z"
     },
     "sailing_artifact_34_raw": {
       "expression": "idleon.getAttr(\"Sailing\")[3][34]",
       "result": 4,
       "description": "Sailing artifact 34 raw bonus (before min/round)",
-      "extractedAt": "2026-06-17T13:11:52.562Z"
+      "extractedAt": "2026-08-21T00:15:02.063Z"
     },
     "sailing_artifact_34_processed": {
       "expression": "Math.min(5, Math.round(idleon.getAttr(\"Sailing\")[3][34]))",
       "result": 4,
       "description": "Sailing artifact 34 processed bonus (min 5, rounded)",
-      "extractedAt": "2026-06-17T13:11:52.564Z"
+      "extractedAt": "2026-08-21T00:15:02.071Z"
     },
     "clam_work_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 1, 0)",
       "result": 1,
       "description": "Clam work bonus 1 (TODO feature - expected to be 0)",
-      "extractedAt": "2026-06-17T13:11:52.577Z"
+      "extractedAt": "2026-08-21T00:15:02.073Z"
     },
     "clam_work_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 4, 0)",
       "result": 1,
       "description": "Clam work bonus 4 (TODO feature - expected to be 0)",
-      "extractedAt": "2026-06-17T13:11:52.578Z"
+      "extractedAt": "2026-08-21T00:15:02.075Z"
     },
     "event_shop_32": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 32, 0)",
       "result": 0,
       "description": "Event shop bonus 32 (TODO feature - expected to be 0)",
-      "extractedAt": "2026-06-17T13:11:52.580Z"
+      "extractedAt": "2026-08-21T00:15:02.076Z"
     },
     "zenith_market_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
       "result": 1,
       "description": "Zenith market bonus 5 (Super Dupers) - now implemented via ZenithMarket domain; feeds into superTalentBonusLevels",
-      "extractedAt": "2026-06-17T13:11:52.592Z"
+      "extractedAt": "2026-08-21T00:15:02.078Z"
     },
     "spelunk_18_array": {
       "expression": "idleon.getAttr(\"Spelunk\")[18]",
@@ -116,7 +116,7 @@
         0
       ],
       "description": "Full talent levels array (50 elements)",
-      "extractedAt": "2026-06-17T13:11:52.594Z"
+      "extractedAt": "2026-08-21T00:15:02.080Z"
     },
     "talent_7_data": {
       "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[7]",
@@ -129,7 +129,7 @@
         "Super_Talent_PTS_give_+{_more_LVs_to_talents_than_they_normally_do"
       ],
       "description": "Talent 7 (Super Duper Talents) definition data - sample validation",
-      "extractedAt": "2026-06-17T13:11:52.595Z"
+      "extractedAt": "2026-08-21T00:15:02.089Z"
     },
     "talent_19_data": {
       "expression": "idleon.getAttr(\"CustomLists\").h.LegendTalents[19]",
@@ -142,199 +142,199 @@
         "Refinery_cycles_are_}x_faster"
       ],
       "description": "Talent 19 (More Soot More Salt) definition data - sample validation",
-      "extractedAt": "2026-06-17T13:11:52.597Z"
+      "extractedAt": "2026-08-21T00:15:02.091Z"
     },
     "talent_0_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][0]",
       "result": 2,
       "description": "Talent 0 (Coral Restoration) level",
-      "extractedAt": "2026-06-17T13:11:52.609Z"
+      "extractedAt": "2026-08-21T00:15:02.093Z"
     },
     "talent_3_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][3]",
       "result": 2,
       "description": "Talent 3 (Extended Database) level",
-      "extractedAt": "2026-06-17T13:11:52.612Z"
+      "extractedAt": "2026-08-21T00:15:02.095Z"
     },
     "talent_5_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][5]",
       "result": 1,
       "description": "Talent 5 (Kruk be Bubblin') level",
-      "extractedAt": "2026-06-17T13:11:52.614Z"
+      "extractedAt": "2026-08-21T00:15:02.096Z"
     },
     "talent_7_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][7]",
       "result": 1,
       "description": "Talent 7 (Super Duper Talents) level",
-      "extractedAt": "2026-06-17T13:11:52.627Z"
+      "extractedAt": "2026-08-21T00:15:02.103Z"
     },
     "talent_11_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][11]",
       "result": 4,
       "description": "Talent 11 (Davey Jones Returns) level",
-      "extractedAt": "2026-06-17T13:11:52.629Z"
+      "extractedAt": "2026-08-21T00:15:02.106Z"
     },
     "talent_15_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][15]",
       "result": 1,
       "description": "Talent 15 (Reduced Jail Sentence) level",
-      "extractedAt": "2026-06-17T13:11:52.646Z"
+      "extractedAt": "2026-08-21T00:15:02.107Z"
     },
     "talent_19_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][19]",
       "result": 2,
       "description": "Talent 19 (More Soot More Salt) level",
-      "extractedAt": "2026-06-17T13:11:52.661Z"
+      "extractedAt": "2026-08-21T00:15:02.109Z"
     },
     "talent_21_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][21]",
       "result": 5,
       "description": "Talent 21 (Flopping a Full House) level",
-      "extractedAt": "2026-06-17T13:11:52.663Z"
+      "extractedAt": "2026-08-21T00:15:02.111Z"
     },
     "talent_22_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][22]",
       "result": 1,
       "description": "Talent 22 (Democracy FTW) level",
-      "extractedAt": "2026-06-17T13:11:52.679Z"
+      "extractedAt": "2026-08-21T00:15:02.113Z"
     },
     "talent_25_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][25]",
       "result": 3,
       "description": "Talent 25 (Midusian Appetite) level",
-      "extractedAt": "2026-06-17T13:11:52.698Z"
+      "extractedAt": "2026-08-21T00:15:02.120Z"
     },
     "talent_30_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][30]",
       "result": 2,
       "description": "Talent 30 (Lightning Fast Naps) level",
-      "extractedAt": "2026-06-17T13:11:52.710Z"
+      "extractedAt": "2026-08-21T00:15:02.123Z"
     },
     "talent_35_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][35]",
       "result": 1,
       "description": "Talent 35 (Obsolete No More) level",
-      "extractedAt": "2026-06-17T13:11:52.712Z"
+      "extractedAt": "2026-08-21T00:15:02.125Z"
     },
     "talent_38_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][38]",
       "result": 1,
       "description": "Talent 38 (Shrine World Order Bill) level",
-      "extractedAt": "2026-06-17T13:11:52.713Z"
+      "extractedAt": "2026-08-21T00:15:02.127Z"
     },
     "talent_39_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][39]",
       "result": 1,
       "description": "Talent 39 (Super Talent Points) level",
-      "extractedAt": "2026-06-17T13:11:52.728Z"
+      "extractedAt": "2026-08-21T00:15:02.129Z"
     },
     "talent_40_level": {
       "expression": "idleon.getAttr(\"Spelunk\")[18][40]",
       "result": 0,
       "description": "Talent 40 (filler) level - should be 0",
-      "extractedAt": "2026-06-17T13:11:52.729Z"
+      "extractedAt": "2026-08-21T00:15:02.139Z"
     },
     "talent_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 0, 0)",
       "result": 60,
       "description": "Talent 0 (Coral Restoration) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.732Z"
+      "extractedAt": "2026-08-21T00:15:02.141Z"
     },
     "talent_3_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 3, 0)",
       "result": 20,
       "description": "Talent 3 (Extended Database) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.744Z"
+      "extractedAt": "2026-08-21T00:15:02.144Z"
     },
     "talent_5_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 5, 0)",
       "result": 10,
       "description": "Talent 5 (Kruk be Bubblin') bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.746Z"
+      "extractedAt": "2026-08-21T00:15:02.146Z"
     },
     "talent_7_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 7, 0)",
       "result": 10,
       "description": "Talent 7 (Super Duper Talents) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.748Z"
+      "extractedAt": "2026-08-21T00:15:02.155Z"
     },
     "talent_11_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 11, 0)",
       "result": 60,
       "description": "Talent 11 (Davey Jones Returns) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.758Z"
+      "extractedAt": "2026-08-21T00:15:02.157Z"
     },
     "talent_15_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 15, 0)",
       "result": 150,
       "description": "Talent 15 (Reduced Jail Sentence) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.759Z"
+      "extractedAt": "2026-08-21T00:15:02.160Z"
     },
     "talent_19_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 19, 0)",
       "result": 150,
       "description": "Talent 19 (More Soot More Salt) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.761Z"
+      "extractedAt": "2026-08-21T00:15:02.162Z"
     },
     "talent_21_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 21, 0)",
       "result": 75,
       "description": "Talent 21 (Flopping a Full House) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.763Z"
+      "extractedAt": "2026-08-21T00:15:02.165Z"
     },
     "talent_22_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",
       "result": 25,
       "description": "Talent 22 (Democracy FTW) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.775Z"
+      "extractedAt": "2026-08-21T00:15:02.171Z"
     },
     "talent_25_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 25, 0)",
       "result": 1500,
       "description": "Talent 25 (Midusian Appetite) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.777Z"
+      "extractedAt": "2026-08-21T00:15:02.174Z"
     },
     "talent_30_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 30, 0)",
       "result": 50,
       "description": "Talent 30 (Lightning Fast Naps) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.778Z"
+      "extractedAt": "2026-08-21T00:15:02.176Z"
     },
     "talent_35_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 35, 0)",
       "result": 1,
       "description": "Talent 35 (Obsolete No More) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.780Z"
+      "extractedAt": "2026-08-21T00:15:02.178Z"
     },
     "talent_38_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 38, 0)",
       "result": 1,
       "description": "Talent 38 (Shrine World Order Bill) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.793Z"
+      "extractedAt": "2026-08-21T00:15:02.181Z"
     },
     "talent_39_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 39, 0)",
       "result": 1,
       "description": "Talent 39 (Super Talent Points) bonus calculation",
-      "extractedAt": "2026-06-17T13:11:52.795Z"
+      "extractedAt": "2026-08-21T00:15:02.190Z"
     },
     "talent_40_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 40, 0)",
       "result": null,
       "description": "Talent 40 (filler) bonus - should be 0",
-      "extractedAt": "2026-06-17T13:11:52.797Z"
+      "extractedAt": "2026-08-21T00:15:02.192Z"
     },
     "super_talent_unlocked": {
       "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_unlockedstatus\", 0, 0)",
       "result": 1,
       "description": "Super talent system unlock status (1 if unlocked, 0 otherwise)",
-      "extractedAt": "2026-06-17T13:11:52.807Z"
+      "extractedAt": "2026-08-21T00:15:02.194Z"
     },
     "super_talent_bonus_levels": {
       "expression": "idleon.callFunction(\"Thingies\", \"SuperTalentPTS_LVgiven\", 0, 0)",
       "result": 61,
       "description": "Super talent bonus levels (50 + talent7 bonus + zenith market bonus)",
-      "extractedAt": "2026-06-17T13:11:52.809Z"
+      "extractedAt": "2026-08-21T00:15:02.196Z"
     }
   },
   "errors": {},

@@ -1,95 +1,95 @@
 {
-  "timestamp": "2026-06-17T13:11:51.959Z",
+  "timestamp": "2026-08-21T00:15:01.781Z",
   "extractions": {
     "reef_daily_gains": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefDayGains\")",
-      "result": 175.12297404882494,
+      "result": 196.12297404882494,
       "description": "Final Coral Reef daily gains calculation",
-      "extractedAt": "2026-06-17T13:11:51.963Z"
+      "extractedAt": "2026-08-21T00:15:01.788Z"
     },
     "param_companion_40_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 40)",
       "result": 0.75,
       "description": "Companion 40 bonus (multiplicative)",
-      "extractedAt": "2026-06-17T13:11:51.979Z"
+      "extractedAt": "2026-08-21T00:15:01.790Z"
     },
     "param_event_shop_25_owned": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 25, 0)",
       "result": 0,
       "description": "Event shop bonus 25 owned",
-      "extractedAt": "2026-06-17T13:11:51.991Z"
+      "extractedAt": "2026-08-21T00:15:01.791Z"
     },
     "param_gem_purchase_41": {
       "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[41]",
       "result": 10,
       "description": "Gem purchase 41 count",
-      "extractedAt": "2026-06-17T13:11:51.994Z"
+      "extractedAt": "2026-08-21T00:15:01.793Z"
     },
     "param_coral_kid_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
       "result": 2.4390243902439024,
       "description": "Coral Kid bonus 5 (daily coral generation)",
-      "extractedAt": "2026-06-17T13:11:51.996Z"
+      "extractedAt": "2026-08-21T00:15:01.795Z"
     },
     "param_dancing_coral_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 0, 0)",
-      "result": 116,
+      "result": 156,
       "description": "Dancing Coral bonus 0 (daily reef coral)",
-      "extractedAt": "2026-06-17T13:11:52.012Z"
+      "extractedAt": "2026-08-21T00:15:01.797Z"
     },
     "param_clamwork_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 5, 0)",
       "result": 0,
       "description": "Clamwork bonus 5",
-      "extractedAt": "2026-06-17T13:11:52.015Z"
+      "extractedAt": "2026-08-21T00:15:01.803Z"
     },
     "param_killroy_bonus_6": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 6, 0)",
       "result": 0,
       "description": "Killroy bonus 6 (daily coral reef gains)",
-      "extractedAt": "2026-06-17T13:11:52.026Z"
+      "extractedAt": "2026-08-21T00:15:01.805Z"
     },
     "param_stamp_corale": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"corale\")",
       "result": 4.117647058823529,
       "description": "Stamp bonus for corale",
-      "extractedAt": "2026-06-17T13:11:52.029Z"
+      "extractedAt": "2026-08-21T00:15:01.807Z"
     },
     "param_vial_7corale": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchVials.h[\"7corale\"]",
       "result": 5.32,
       "description": "Alchemy vial 7corale bonus",
-      "extractedAt": "2026-06-17T13:11:52.041Z"
+      "extractedAt": "2026-08-21T00:15:01.809Z"
     },
     "param_legend_talent_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 0, 0)",
       "result": 60,
       "description": "Legend talent bonus 0",
-      "extractedAt": "2026-06-17T13:11:52.043Z"
+      "extractedAt": "2026-08-21T00:15:01.811Z"
     },
     "param_arcade_bonus_57": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 57)",
       "result": 0,
       "description": "Arcade bonus 57",
-      "extractedAt": "2026-06-17T13:11:52.046Z"
+      "extractedAt": "2026-08-21T00:15:01.813Z"
     },
     "param_emporium_bonus_43": {
       "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 43, 0)",
       "result": 1,
       "description": "Sneaking emporium bonus 43",
-      "extractedAt": "2026-06-17T13:11:52.065Z"
+      "extractedAt": "2026-08-21T00:15:01.821Z"
     },
     "param_card_w7a9_level": {
       "expression": "Math.min(2 * idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a9\"), 15)",
       "result": 2,
       "description": "Card w7a9 (Demonblub) level",
-      "extractedAt": "2026-06-17T13:11:52.080Z"
+      "extractedAt": "2026-08-21T00:15:01.823Z"
     },
     "param_statue_31_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven31\")",
       "result": 23.690898167741935,
       "description": "Statue 31 bonus",
-      "extractedAt": "2026-06-17T13:11:52.095Z"
+      "extractedAt": "2026-08-21T00:15:01.825Z"
     }
   },
   "errors": {},
