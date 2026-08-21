@@ -32,6 +32,7 @@ Keep the repository's existing execution model and testing harness:
 - Initialize the domains, finish parsing the save, and then calculate values in dependency order. Parsing must finish before cross-domain calculation begins.
 - Never hand-edit generated files under `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`.
 - Use the existing debug transport, declarative extraction configurations and results, same-save domain loading, extraction health checks, exact-capable matchers, main calculation tests, parameter tests, and serialized extraction process.
+- Keep one extraction configuration and result artifact per root calculation. Add new targeted parameters to the existing root configuration and regenerate that result set; keep the root parameter tests on that same result file. Do not create a parallel config/result pair solely to preserve an accepted artifact hash. If regeneration changes the result hash or timestamp, record the new artifact, unchanged save hash, and same-session/coherence evidence in the next checkpoint.
 - Work on one root calculation at a time. Never guess a formula, hide or skip a failure, or replace observable test output with a worker's description of what probably happened.
 - idleon-efficiency owns formula research, save parsing, dependency wiring, extraction configurations, tests, and handwritten domain fixes. WikiBot owns game-code extraction and generated static representations: the generated data repos under `data/domain/data/` (meals, bubbles, cards, items, and similar static game facts). Formula logic is not WikiBot scope — reading formulas from the running game (see §4 "Reading the game formula"), formula research, and all correctness work belong to idleon-efficiency.
 
@@ -97,6 +98,7 @@ Immediate-input investigation is a defined procedure, not a free-form study:
 2. **Read the game formula** (see "Reading the game formula") and enumerate its parameters from the game's source, never from our domain code.
 3. **Run the parameter tests.** The ledger below is built from their results.
 4. **Never recompute parameter values outside the parameter-test harness.** If a needed parameter has no test spec, that absence is the finding (`MISSING`).
+- Keep parameter comparisons at the direct-input semantic boundary. Normalize a game representation only when the game source exposes a different representation than the domain parameter (for example, mapping a `0`/`1` completion status to the domain's `0`/`5` bonus). Do not fold root-formula arithmetic into a parameter extraction when the domain extractor already exposes the direct input; the main calculation test owns that composition.
 
 #### Reading the game formula
 
