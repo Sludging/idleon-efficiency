@@ -1,0 +1,51 @@
+{
+  "description": "Extract representative alchemy bubble bonuses for testing the Bubble bonus root",
+  "target": "Alchemy Bubble Bonus",
+  "extractions": [
+    {
+      "label": "diamond_chef_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
+      "description": "Diamond Chef final bubble bonus (MealSpdz)"
+    },
+    {
+      "label": "diamond_chef_prismatic_state",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
+      "description": "Diamond Chef prismatic state"
+    },
+    {
+      "label": "alchemy_prismatic_bonus",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "description": "Alchemy Prismatic Bonus"
+    },
+    {
+      "label": "daily_drip_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.LqdCap",
+      "description": "Da Daily Drip final bubble bonus (LqdCap)"
+    },
+    {
+      "label": "cropius_mapper_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y6",
+      "description": "Cropius Mapper final bubble bonus (Y6)"
+    },
+    {
+      "label": "slab_w2_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W2",
+      "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)"
+    },
+    {
+      "label": "tome_w8_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
+      "description": "Tome-scaled representative final bubble bonus (W8 / Tome Strength)"
+    },
+    {
+      "label": "boosted_min_eff_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
+      "description": "16th-bubble boosted final bubble bonus (MinEff / Hearty Diggy)"
+    },
+    {
+      "label": "ordinary_tool_w_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
+      "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)"
+    }
+  ]
+}

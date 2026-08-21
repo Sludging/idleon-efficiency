@@ -644,17 +644,14 @@ export class Alchemy extends Domain {
         return this.cauldrons[cauldron].bubbles[bubble].getBonus() * extraBonus;
     }
 
-    getBubbleBonusForKey = (bonusKey: string) => {
+    getBubbleBonusForKey = (bonusKey: string, player?: Player) => {
         const matchingBubbles = this.cauldrons.flatMap(cauldron => cauldron.bubbles).filter(bubble => bubble.data.bonusKey == bonusKey);
         return matchingBubbles.reduce((sum, bubble) => {
-            // If bubble is boosted by the 16th bubble.
-            let extraBonus = 1;
-            if (this._shouldBoostBubble(bubble.bubbleIndex, bubble.cauldronIndex)) {
-                extraBonus *= this.cauldrons[bubble.cauldronIndex].bubbles[16].getBonus();
-            }
+            const bonus = player
+                ? this.getBonusForPlayer(player, bubble.cauldronIndex, bubble.bubbleIndex)
+                : this.getBonusForBubble(bubble.cauldronIndex, bubble.bubbleIndex);
 
-            sum += bubble.getBonus() * extraBonus;
-            return sum;
+            return sum + bonus;
         }, 0)
     }
 
@@ -1026,11 +1023,11 @@ export function updateAlchemy(data: Map<string, any>) {
     const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
     const paletteBonus28 = gaming.getPaletteBonus(28);
     const legendBonus36 = legendTalents.getBonusFromIndex(36);
-    const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 4 ? 1: 0), 0);
+    const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 4 ? 1 : 0), 0);
     const exoticMarketBonus48 = farming.getExoticMarketBonusValue(48);
 
     const prismaBonus = Math.min(4, 2 + (arcaneBonus45 + arcadeBonus54 + world6TrophyBonus + paletteBonus28 + .2 * purpleSigilsBonus + exoticMarketBonus48 + legendBonus36) / 100);
-    
+
     alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles).forEach(bubble => {
         if (bubble.prismatic) {
             bubble.prismaticMultiplier = prismaBonus;

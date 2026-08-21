@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-08-21T12:08:04.490Z",
+  "extractions": {
+    "diamond_chef_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
+      "result": {
+        "type": "large_number",
+        "value": "2.5080221678659284e+41",
+        "original": 2.5080221678659284e+41
+      },
+      "description": "Diamond Chef final bubble bonus (MealSpdz)",
+      "extractedAt": "2026-08-21T12:08:04.568Z"
+    },
+    "diamond_chef_prismatic_state": {
+      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
+      "result": 1,
+      "description": "Diamond Chef prismatic state",
+      "extractedAt": "2026-08-21T12:08:04.595Z"
+    },
+    "alchemy_prismatic_bonus": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
+      "result": 2.7932864157119477,
+      "description": "Alchemy Prismatic Bonus",
+      "extractedAt": "2026-08-21T12:08:04.624Z"
+    },
+    "daily_drip_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.LqdCap",
+      "result": 26.25935162094763,
+      "description": "Da Daily Drip final bubble bonus (LqdCap)",
+      "extractedAt": "2026-08-21T12:08:04.654Z"
+    },
+    "cropius_mapper_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y6",
+      "result": 604.9058473736372,
+      "description": "Cropius Mapper final bubble bonus (Y6)",
+      "extractedAt": "2026-08-21T12:08:04.676Z"
+    },
+    "slab_w2_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W2",
+      "result": 359.7236861693241,
+      "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)",
+      "extractedAt": "2026-08-21T12:08:04.698Z"
+    },
+    "tome_w8_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
+      "result": 764.7761211312882,
+      "description": "Tome-scaled representative final bubble bonus (W8 / Tome Strength)",
+      "extractedAt": "2026-08-21T12:08:04.723Z"
+    },
+    "boosted_min_eff_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
+      "result": 24708.113322384863,
+      "description": "16th-bubble boosted final bubble bonus (MinEff / Hearty Diggy)",
+      "extractedAt": "2026-08-21T12:08:04.744Z"
+    },
+    "ordinary_tool_w_final_bonus": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
+      "result": 3374.1245086103418,
+      "description": "Ordinary non-special bubble final bonus (ToolW / index 5)",
+      "extractedAt": "2026-08-21T12:08:04.767Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
