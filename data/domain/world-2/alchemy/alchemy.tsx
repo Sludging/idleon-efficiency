@@ -1023,7 +1023,7 @@ export function updateAlchemy(data: Map<string, any>) {
     const world6TrophyBonus = world6Trophy?.obtained ? 10 : 0;
     const paletteBonus28 = gaming.getPaletteBonus(28);
     const legendBonus36 = legendTalents.getBonusFromIndex(36);
-    const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 4 ? 1 : 0), 0);
+    const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 3 ? 1 : 0), 0);
     const exoticMarketBonus48 = farming.getExoticMarketBonusValue(48);
 
     const prismaBonus = Math.min(4, 2 + (arcaneBonus45 + arcadeBonus54 + world6TrophyBonus + paletteBonus28 + .2 * purpleSigilsBonus + exoticMarketBonus48 + legendBonus36) / 100);

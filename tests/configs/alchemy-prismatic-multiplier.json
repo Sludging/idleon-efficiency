@@ -13,6 +13,11 @@
       "description": "Arcade bonus 54"
     },
     {
+      "label": "sushi_rog_bonus_qty_23",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
+      "description": "Sushi RoG bonus quantity 23"
+    },
+    {
       "label": "world_6_trophy_bonus",
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)"
@@ -25,7 +30,7 @@
     {
       "label": "total_purple_sigils",
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
-      "description": "Total purple sigils (boost level >= 4)"
+      "description": "Total purple sigils (boost level >= 3)"
     },
     {
       "label": "exotic_market_bonus_48",
@@ -38,9 +43,14 @@
       "description": "Legend talent 36 bonus"
     },
     {
+      "label": "companion_88_bonus",
+      "expression": "idleon.callFunction(\"Companions\", 88, 0)",
+      "description": "Companion 88 prismatic multiplier input"
+    },
+    {
       "label": "prismatic_multiplier",
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "description": "Final prismatic multiplier calculation (min 3, base 2)"
+      "description": "Final prismatic multiplier calculation (min 4, base 2)"
     }
   ]
 }
