@@ -1893,7 +1893,7 @@ export const initRandoListRepo = () => {
             }),
         new RandoListBase(61, <RandoListModel>{
                 "elements": [
-                    "Glunko_Cavern_v1.18;*Cavern_18_now_available_-_The_CRYSTAL_GLUNKO_COVE!_@_*Collect_gooey_shapes,_from_Triangle_to_Nonagons,_and_use_them_to_upgrade_your_Cove_Stats!_You_have_unique_Drop_Rate,_AFK_gains,_and_Multikill_values_while_fighting_Crystal_Glunkos_in_this_new_cavern!_@_*Each_new_Shape_drop_from_Crystal_Glunkos_is_a_new_Slab_Item!_@_*Green_Water_added_to_Cavern_16_-_The_Fountain._that_means_20_new_Green_Water_upgrades,_including_powerful_multiplicative_IdleOn_bonuses!_@_*7_new_Schematics_to_build_from_Kaipu_the_Engineer_Villager!_@_*6_Star_Cardifiers_are_here,_and_everybody_gets_1_for_free!_In_fact,_if_you're_a_valued_active_player,_I_actually_gave_you_TWO_for_free!_@_*New_Crystalling_Glunko_pack_and_Limited_Items_available_now_in_the_Gemshop!_@_*Kill_Requirement_for_the_next_map_is_now_shown_in_the_top_left,_always!_@_*Fixed_a_bug_where_Dungeon_Rank_60+_would_show_as_Rank_1._Just_a_display_issue,_no_gains_were_lost!;*Le",
+                    "Summer_Event_v1.19;*The_Summer_Event_is_HERE!_Collect_50_coolers_from_mobs_every_day_for_event_items_and_a_free_play_at_the_Buried_Treasure_event_game!_@_*FOR_THIS_EVENT_ONLY,_if_you_kill_a_single_monster_you_get_a_unique_PET_BONUS_TOKEN!_Use_it_to_get_the_bonus_of_ANY_pet_you_want!!_If_you_ever_get_the_pet_later_by_buying_it_or_from_trading,_your_token_is_REFUNDED_and_you_can_use_it_on_a_different_bonus!_@_*New_Friend_Bonus,_exclusive_to_this_event,_the_EXTRA_KILLS_bonus!_Go_give_it_to_a_friend_in_need!_@_*New_Map,_with_a_new_monster!_The_GLOWFISH_is_the_toughest_mob_in_the_game_with_5,000T_crystal_HP,_but_their_passive_Research_EXP_makes_them_more_than_worth_farming!_@_*Added_touchable_grass_to_World_1_maps,_watch_out!_@_*Friend_Bonus_max_is_increased_beyond_Lv._12000!_@_*Buffed_many_upgrades_in_Cavern_18,_including_Killionaire,_Slop_Drop,_Droplier,_and_Droplier+_@_*Fixed_the_Cardiovascular_and_Pulsation_star_talent_book_drops_from_W1_Minibosses.;*Le",
                     "Monde",
                     "6",
                     "est",
@@ -2418,7 +2418,8 @@ export const initRandoListRepo = () => {
                     "frogGR",
                     "frogGR2",
                     "frogGR3",
-                    "Meteor"
+                    "Meteor",
+                    "demonPtutorial"
                 ]
             }),
         new RandoListBase(66, <RandoListModel>{

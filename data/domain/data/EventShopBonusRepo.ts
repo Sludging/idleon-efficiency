@@ -9,7 +9,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(0, <EventShopBonusModel>{
                 "name": "Golden Tome",
                 "desc": "Adds a new DMG Multi bonus type to the Tome in World 4",
-                "price": 25
+                "price": 35
             }),
         new EventShopBonusBase(1, <EventShopBonusModel>{
                 "name": "Stamp Stack",
@@ -39,7 +39,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(6, <EventShopBonusModel>{
                 "name": "Village Encouragement",
                 "desc": "All Villagers in World 5 Camp get 1.25x EXP Gain",
-                "price": 30
+                "price": 40
             }),
         new EventShopBonusBase(7, <EventShopBonusModel>{
                 "name": "Gilded Vote Button",
@@ -69,7 +69,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(12, <EventShopBonusModel>{
                 "name": "Secret Pouch",
                 "desc": "Get +3 Inventory slots for your Items Backpack",
-                "price": 27
+                "price": 30
             }),
         new EventShopBonusBase(13, <EventShopBonusModel>{
                 "name": "Ribbon Connoisseur",
@@ -84,12 +84,12 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(15, <EventShopBonusModel>{
                 "name": "Summoning Star",
                 "desc": "Get +10 Summoning Doublers, used on Summoning Upgrades!",
-                "price": 30
+                "price": 50
             }),
         new EventShopBonusBase(16, <EventShopBonusModel>{
                 "name": "Royal Vote Button",
                 "desc": "Get +30% higher Ballot Bonus Multi instead of +17%",
-                "price": 25
+                "price": 35
             }),
         new EventShopBonusBase(17, <EventShopBonusModel>{
                 "name": "Another Page",
@@ -156,7 +156,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(31, <EventShopBonusModel>{
                 "name": "Omega Bubble",
                 "desc": "Kattlekruk divinity gives 1.50x more daily bubbles",
-                "price": 75
+                "price": 90
             }),
         new EventShopBonusBase(32, <EventShopBonusModel>{
                 "name": "Legend Scroll",
@@ -233,6 +233,21 @@ export const initEventShopBonusRepo = () => {
                 "name": "Monumental Reverence",
                 "desc": "+100 LVs for all Monument bonuses every day forever",
                 "price": 175
+            }),
+        new EventShopBonusBase(48, <EventShopBonusModel>{
+                "name": "Noble Sluggo",
+                "desc": "Roams your dock, giving 1.50x Artifact Find chance",
+                "price": 90
+            }),
+        new EventShopBonusBase(49, <EventShopBonusModel>{
+                "name": "Doggie Sticker",
+                "desc": "Boosts Sticker odds by 2x daily, resets when finding one",
+                "price": 250
+            }),
+        new EventShopBonusBase(50, <EventShopBonusModel>{
+                "name": "6 Star Cardifiers",
+                "desc": "Gives you EIGHT usable 6star cardifiers!",
+                "price": 200
             })    
 ]
 }

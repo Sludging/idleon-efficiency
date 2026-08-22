@@ -23898,7 +23898,7 @@ export const initSpecificItemRepo = () => {
                 "displayName": "Glimmerwick Candle",
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
-                "Type": "Event Box",
+                "Type": "Event Wish",
                 "description": "Hold down to make a wish. If it comes true, you will get a Top 0.1% Tome Nametag, just like you've always wanted! "
             }),
         new BaseItemBase("Quest115", <DescItemModel>{
@@ -23916,6 +23916,22 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Box",
                 "description": "Hold down to open! Contains a random Goldrush goodie, from gems to limited time Hats and Nametags! "
+            }),
+        new BaseItemBase("Quest119", <DescItemModel>{
+                "internalName": "Quest119",
+                "displayName": "Pet Bonus Token",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Amazing Item",
+                "description": "Gives ANY pet bonus you want! Just the bonus, not the pet. Use this within the Trade Popup found by Double Clicking a player. If you get the pet later from buying or trading, your token is REFUNDED! "
+            }),
+        new BaseItemBase("Quest120", <DescItemModel>{
+                "internalName": "Quest120",
+                "displayName": "Skeleton Key",
+                "sellPrice": 100,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Event Box",
+                "description": "Hold down to get a random reward added directly to your account! It could be a Prisma Fragment for Alchemy, Gold Balls for the Arcade Shop, or even Cosmic Balls to super boost your maxed out Arcade Shop bonuses! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -30208,6 +30224,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentNametag41", <ArmourItemModel>{
+                "internalName": "EquipmentNametag41",
+                "displayName": "All That Glitters Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 50,
+                "Defence": 0,
+                "miscUp1": "250% Xp From Monsters",
+                "miscUp2": "50% Class Exp Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentNametagReplica0", <ArmourItemModel>{
                 "internalName": "EquipmentNametagReplica0",
                 "displayName": "Replica Nametag",
@@ -31065,6 +31102,27 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "",
                 "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentNametagReplica41", <ArmourItemModel>{
+                "internalName": "EquipmentNametagReplica41",
+                "displayName": "All That Glitters Nametag",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aNametag,
+                "Type": "Replica Nametag",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 50,
+                "Defence": 0,
+                "miscUp1": "250% Xp From Monsters",
+                "miscUp2": "50% Class Exp Multi",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -32534,6 +32592,27 @@ export const initSpecificItemRepo = () => {
                 "LUK": 1,
                 "Defence": 0,
                 "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentHats139", <ArmourItemModel>{
+                "internalName": "EquipmentHats139",
+                "displayName": "Sun Hat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "1% Class Exp Multi",
                 "miscUp2": "00",
                 "Upgrade_Slots_Left": 5,
                 "Skill": "",
@@ -35672,7 +35751,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 3,
                     "order": 20
                 },
-                "dropChance": 3e-07
+                "dropChance": 2e-07
             }),
         new BaseItemBase("CardsJ21", <CardItemModel>{
                 "internalName": "CardsJ21",
@@ -35688,7 +35767,7 @@ export const initSpecificItemRepo = () => {
                     "bonus": 1,
                     "order": 21
                 },
-                "dropChance": 2e-07
+                "dropChance": 1.5e-07
             }),
         new BaseItemBase("CardsJ22", <CardItemModel>{
                 "internalName": "CardsJ22",

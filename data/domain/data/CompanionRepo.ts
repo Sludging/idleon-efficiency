@@ -318,13 +318,13 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(31, <CompanionModel>{
                 "id": "Pet2",
-                "desc": "Bababooey!",
-                "bonus": 3,
+                "desc": "{15% Hat Rack Bonus Multi",
+                "bonus": 15,
                 "x1": 2,
                 "x2": 0,
                 "x3": -8,
                 "x4": 100,
-                "x5": 90
+                "x5": 170
             }),
         new CompanionBase(32, <CompanionModel>{
                 "id": "Pet4",
@@ -578,8 +578,8 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(57, <CompanionModel>{
                 "id": "w7b12",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "desc": "Glimbo's Swap Meet's prices are 5.00x cheaper (World 7 feature)",
+                "bonus": 80,
                 "x1": -36,
                 "x2": 0,
                 "x3": -41,
@@ -1695,6 +1695,16 @@ export const initCompanionRepo = () => {
                 "x3": -33,
                 "x4": 1,
                 "x5": 210
+            }),
+        new CompanionBase(169, <CompanionModel>{
+                "id": "fm goose",
+                "desc": "All daily ribbons have a 50% chance to be +1 Tier, 40% for +3 Tiers, and 10% for +5 Tiers",
+                "bonus": 1,
+                "x1": -59,
+                "x2": 0,
+                "x3": -23,
+                "x4": 1,
+                "x5": 250
             })    
 ]
 }

@@ -7020,7 +7020,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 250000000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B6", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B6", "quantity": 1, "chance": 0.0005, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ18", "quantity": 1, "chance": 7e-07, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
@@ -7053,10 +7053,10 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 12,
                     "RespawnTime": 45,
                     "DeathFrame": 28,
-                    "MonsterHPTotal": 2.5e+31,
+                    "MonsterHPTotal": 1e+31,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 8e+12,
+                    "ExpGiven": 6e+12,
                     "ExpType": 0,
                     "Defence": 8e+12,
                     "MoveSPEED": 4,
@@ -7066,7 +7066,7 @@ export const initEnemyRepo = () => {
                 "drops": <EnemyTableModel>{
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 600000000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B7", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B7", "quantity": 1, "chance": 0.0005, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ19", "quantity": 1, "chance": 5e-07, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
@@ -7099,10 +7099,10 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 11,
                     "RespawnTime": 45,
                     "DeathFrame": 24,
-                    "MonsterHPTotal": 3e+31,
+                    "MonsterHPTotal": 5e+33,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 1,
+                    "ExpGiven": 2.2e+13,
                     "ExpType": 0,
                     "Defence": 2500000,
                     "MoveSPEED": 4,
@@ -7111,9 +7111,9 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B8", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsJ20", "quantity": 1, "chance": 3e-07, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 2.5e+09, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B8", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ20", "quantity": 1, "chance": 2e-07, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7121,7 +7121,7 @@ export const initEnemyRepo = () => {
                 "mapData": <MapDataModel>{
                     "enemy": "w7b8",
                     "world": "Shimmerfin Deep",
-                    "map": <MapNameModel>{"intName": "uAquaB8", "name": "fillername", "id": 322},
+                    "map": <MapNameModel>{"intName": "uAquaB8", "name": "The Glowing Underbelly", "id": 322},
                     "portalRequirements": [500000000]
                 },
                 "navigation": <EnemyNavModel>{
@@ -7157,9 +7157,9 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B9", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
-                        <CardDropModel>{"item": "CardsJ21", "quantity": 1, "chance": 2e-07, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 3.5e+09, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B9", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsJ21", "quantity": 1, "chance": 1.5e-07, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7203,8 +7203,8 @@ export const initEnemyRepo = () => {
                 },
                 "drops": <EnemyTableModel>{
                     "drops": [
-                        <CoinDropModel>{"item": "COIN", "quantity": 1100000, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "w7B10", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <CoinDropModel>{"item": "COIN", "quantity": 5e+09, "chance": 0.5, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "w7B10", "quantity": 1, "chance": 0.0001, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ22", "quantity": 1, "chance": 1e-07, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
@@ -9411,13 +9411,13 @@ export const initEnemyRepo = () => {
                     "drops": [
                         <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0.5, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0.05, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Timecandy1", "quantity": 1, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Timecandy2", "quantity": 3, "chance": 0.01, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneWeb", "quantity": 1, "chance": 0.02, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneT1eb", "quantity": 3, "chance": 0.03, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "StoneAeB", "quantity": 3, "chance": 0.04, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "Quest50", "quantity": 1, "chance": 0.1, "questLink": "N/A"}
+                        <ItemDropModel>{"item": "EquipmentHats139", "quantity": 1, "chance": 0.002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats63", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats46", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats120", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats110", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentNametag8", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats121", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
                 },
                 "mapData": undefined,
@@ -10716,6 +10716,33 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 9,
                     "RespawnTime": 40,
                     "DeathFrame": 18,
+                    "MonsterHPTotal": 14000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 420,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("fm_goose", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Bin Goosey",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 23,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 11,
+                    "RespawnTime": 40,
+                    "DeathFrame": 22,
                     "MonsterHPTotal": 14000,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
