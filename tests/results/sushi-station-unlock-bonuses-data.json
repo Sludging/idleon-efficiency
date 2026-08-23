@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-08-23T04:50:27.471Z",
+  "extractions": {
+    "sushi_unique_count": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"UniqueSushi\", 0, 0)",
+      "result": 38,
+      "description": "Number of contiguous unlocked Sushi entries",
+      "extractedAt": "2026-08-23T04:50:27.555Z"
+    },
+    "sushi_rog_bonus_qty_23": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
+      "result": 1,
+      "description": "Sushi unlock bonus at internal index 23",
+      "extractedAt": "2026-08-23T04:50:27.559Z"
+    },
+    "sushi_rog_bonus_qty_26": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 26, 0)",
+      "result": 25,
+      "description": "Sushi unlock bonus at internal index 26",
+      "extractedAt": "2026-08-23T04:50:27.564Z"
+    },
+    "sushi_rog_bonus_qty_41": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 41, 0)",
+      "result": 0,
+      "description": "Sushi unlock bonus at internal index 41",
+      "extractedAt": "2026-08-23T04:50:27.568Z"
+    },
+    "sushi_rog_bonus_qty_44": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 44, 0)",
+      "result": 0,
+      "description": "Sushi unlock bonus at internal index 44",
+      "extractedAt": "2026-08-23T04:50:27.572Z"
+    },
+    "sushi_rog_bonus_qty_50": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
+      "result": 0,
+      "description": "Sushi unlock bonus at internal index 50",
+      "extractedAt": "2026-08-23T04:50:27.575Z"
+    },
+    "sushi_rog_bonus_qty_51": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 51, 0)",
+      "result": 0,
+      "description": "Sushi unlock bonus at internal index 51",
+      "extractedAt": "2026-08-23T04:50:27.580Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

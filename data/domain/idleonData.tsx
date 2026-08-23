@@ -50,6 +50,7 @@ import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
+import { SushiStation } from './world-7/sushi';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeScores } from './world-4/tome';
@@ -147,6 +148,7 @@ const domainList: Domain[] = [
     new Sneaking("sneaking"),
     new Summoning("summoning"),
     new Farming("farming"),
+    new SushiStation("sushi"),
     new StarSigns("starsigns"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),

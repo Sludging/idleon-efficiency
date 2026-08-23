@@ -1,0 +1,41 @@
+{
+  "description": "Extract Sushi Station unlock bonuses used by current game callers",
+  "target": "Sushi Station unlock bonuses",
+  "extractions": [
+    {
+      "label": "sushi_unique_count",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"UniqueSushi\", 0, 0)",
+      "description": "Number of contiguous unlocked Sushi entries"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_23",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
+      "description": "Sushi unlock bonus at internal index 23"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_26",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 26, 0)",
+      "description": "Sushi unlock bonus at internal index 26"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_41",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 41, 0)",
+      "description": "Sushi unlock bonus at internal index 41"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_44",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 44, 0)",
+      "description": "Sushi unlock bonus at internal index 44"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_50",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
+      "description": "Sushi unlock bonus at internal index 50"
+    },
+    {
+      "label": "sushi_rog_bonus_qty_51",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 51, 0)",
+      "description": "Sushi unlock bonus at internal index 51"
+    }
+  ]
+}
