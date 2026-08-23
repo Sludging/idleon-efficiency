@@ -19,6 +19,7 @@ import { Sigils } from '../../../data/domain/world-2/alchemy/sigils';
 import { Farming } from '../../../data/domain/world-6/farming';
 import { Companion } from '../../../data/domain/companions';
 import { Gaming } from '../../../data/domain/world-5/gaming';
+import { SushiStation } from '../../../data/domain/world-7/sushi';
 
 const saveName = 'latest';
 const extractionResultsName = 'alchemy-prismatic-multiplier-data.json';
@@ -90,10 +91,11 @@ const parameterSpecs = {
  },
 
  sushi_rog_bonus_qty_23: {
-  description: 'Sushi RoG bonus quantity 23 (MISSING IMPLEMENTATION)',
+  description: 'Sushi RoG bonus quantity 23',
   extractionKey: 'sushi_rog_bonus_qty_23',
-  domainExtractor: (_gameData: Map<string, any>) => {
-   throw new Error('sushi_rog_bonus_qty_23: NOT IMPLEMENTED - no Sushi domain implementation for SushiStuff("RoG_BonusQTY", 23, 0)');
+  domainExtractor: (gameData: Map<string, any>) => {
+   const sushi = gameData.get("sushi") as SushiStation;
+   return sushi.getBonusFromIndex(23);
   }
  },
 
