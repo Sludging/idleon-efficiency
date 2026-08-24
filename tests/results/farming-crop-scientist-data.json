@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-08-24T12:24:43.415Z",
+  "extractions": {
+    "crop_sc_0_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 0, 0)",
+      "result": 13455.362331854478,
+      "description": "Crop Scientist total damage bonus",
+      "extractedAt": "2026-08-24T12:24:43.496Z"
+    },
+    "crop_sc_1_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 1, 0)",
+      "result": 179.18591477719926,
+      "description": "Crop Scientist plant evolution chance bonus",
+      "extractedAt": "2026-08-24T12:24:43.515Z"
+    },
+    "crop_sc_2_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 2, 0)",
+      "result": 5382.144932741791,
+      "description": "Crop Scientist jade coin gain bonus",
+      "extractedAt": "2026-08-24T12:24:43.534Z"
+    },
+    "crop_sc_3_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
+      "result": 699196202.4520411,
+      "description": "Crop Scientist cooking speed bonus",
+      "extractedAt": "2026-08-24T12:24:43.560Z"
+    },
+    "crop_sc_4_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 4, 0)",
+      "result": 10091.521748890858,
+      "description": "Crop Scientist cash bonus",
+      "extractedAt": "2026-08-24T12:24:43.582Z"
+    },
+    "crop_sc_5_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 5, 0)",
+      "result": 4709.376816149067,
+      "description": "Crop Scientist shiny rate bonus",
+      "extractedAt": "2026-08-24T12:24:43.600Z"
+    },
+    "crop_sc_6_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 6, 0)",
+      "result": 67.2768116592724,
+      "description": "Crop Scientist base critter bonus",
+      "extractedAt": "2026-08-24T12:24:43.620Z"
+    },
+    "crop_sc_7_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 7, 0)",
+      "result": 338.05761082519956,
+      "description": "Crop Scientist drop rate bonus",
+      "extractedAt": "2026-08-24T12:24:43.643Z"
+    },
+    "crop_sc_8_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 8, 0)",
+      "result": 16.735525288376216,
+      "description": "Crop Scientist spelunky bonus",
+      "extractedAt": "2026-08-24T12:24:43.665Z"
+    },
+    "crop_sc_9_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",
+      "result": 0,
+      "description": "Crop Scientist research EXP bonus",
+      "extractedAt": "2026-08-24T12:24:43.685Z"
+    },
+    "crop_sc_mainframe_17_bonus": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 17)",
+      "result": 46,
+      "description": "Mainframe bonus used by Crop Scientist",
+      "extractedAt": "2026-08-24T12:24:43.707Z"
+    },
+    "crop_sc_grimoire_22_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 22, 0)",
+      "result": 117,
+      "description": "Grimoire upgrade 22 bonus used by Crop Scientist",
+      "extractedAt": "2026-08-24T12:24:43.727Z"
+    },
+    "crop_sc_exotic_40_bonus": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 40, 0)",
+      "result": 2.25377107364685,
+      "description": "Exotic Market bonus 40 used by Crop Scientist",
+      "extractedAt": "2026-08-24T12:24:43.754Z"
+    },
+    "crop_sc_vault_79_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 79, 0)",
+      "result": 10,
+      "description": "Upgrade Vault bonus 79 used by Crop Scientist",
+      "extractedAt": "2026-08-24T12:24:43.774Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

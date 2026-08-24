@@ -22,11 +22,13 @@ import { KillRoy } from "../world-2/killroy";
 import { Votes } from "../world-2/votes";
 import { TaskBoard } from "../tasks";
 import { Grimoire } from "../grimoire";
+import { UpgradeVault } from "../upgradeVault";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Emperor } from "./emperor";
 
 // TODO: This is a temporary solution until proper Exotic Market implementation
 const exoticMarketBonusData: Record<number, { bonusPerLevel: number, diminishing: boolean }> = {
+    40: { bonusPerLevel: 20, diminishing: true }, // Crop Scientist bonus multiplier
     48: { bonusPerLevel: 2, diminishing: true }, // Prisma Bubble Bonus
 };
 
@@ -392,17 +394,30 @@ export class CropScientist {
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.CashBonus, 15, 23));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ShinyPetLvlUpRate, 7, 28));
         this.bonuses.push(new CropScientistBonus(CropScientistBonusText.BaseCritterPerTrap, 0.1, 29));
+        this.bonuses.push(new CropScientistBonus(CropScientistBonusText.DropRate, 1, 38));
+        this.bonuses.push(new CropScientistBonus(CropScientistBonusText.Spelunky, 5, 40));
+        this.bonuses.push(new CropScientistBonus(CropScientistBonusText.ResearchExp, 1, 44));
     }
 
-    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number, bonusFromGrimoireBonus22: number) => {
+    updateCropScientistBonusValues = (cropsFound: number, bonusFromLabBonus17: number, bonusFromGrimoireBonus22: number, bonusFromExoticMarket40: number, bonusFromVault79: number) => {
         this.discoveredCrops = cropsFound;
-        const multiplier = (1 + bonusFromLabBonus17 / 100) * (1 + bonusFromGrimoireBonus22 / 100);
+        const multiplier = (1 + bonusFromLabBonus17 / 100) * (1 + (bonusFromGrimoireBonus22 + bonusFromExoticMarket40 + bonusFromVault79) / 100);
+        const roundedCropsFound = Math.round(cropsFound);
 
         this.bonuses.forEach(bonus => {
             switch (bonus.bonusText) {
                 case CropScientistBonusText.CookingSpeed:
                 case CropScientistBonusText.PlantEvolutionChance:
-                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, cropsFound) * multiplier;
+                    bonus.bonusValue = Math.pow(bonus.bonusPerCrop, roundedCropsFound) * multiplier;
+                    break;
+                case CropScientistBonusText.DropRate:
+                    bonus.bonusValue = Math.round(Math.max(0, roundedCropsFound - 100)) * multiplier;
+                    break;
+                case CropScientistBonusText.Spelunky:
+                    bonus.bonusValue = 5 * Math.round(Math.max(0, roundedCropsFound - 200)) * multiplier;
+                    break;
+                case CropScientistBonusText.ResearchExp:
+                    bonus.bonusValue = Math.round(Math.max(0, Math.floor((roundedCropsFound - 200) / 10))) * multiplier;
                     break;
                 case CropScientistBonusText.ShinyPetLvlUpRate:
                 case CropScientistBonusText.CashBonus:
@@ -410,7 +425,7 @@ export class CropScientist {
                 case CropScientistBonusText.TotalDamage:
                 case CropScientistBonusText.BaseCritterPerTrap:
                 default:
-                    bonus.bonusValue = (bonus.bonusPerCrop * cropsFound) * multiplier;
+                    bonus.bonusValue = (bonus.bonusPerCrop * roundedCropsFound) * multiplier;
                     break;
             }
         })
@@ -449,6 +464,9 @@ export class CropScientist {
                 return `x${nFormatter(bonusValue)}`;
             case CropScientistBonusText.BaseCritterPerTrap:
                 return `+${nFormatter(bonusValue)}`;
+            case CropScientistBonusText.DropRate:
+            case CropScientistBonusText.Spelunky:
+            case CropScientistBonusText.ResearchExp:
             case CropScientistBonusText.ShinyPetLvlUpRate:
             case CropScientistBonusText.CashBonus:
             case CropScientistBonusText.JadeCoinGain:
@@ -474,6 +492,12 @@ export class CropScientist {
                 return "Damage";
             case CropScientistBonusText.BaseCritterPerTrap:
                 return "Critters";
+            case CropScientistBonusText.DropRate:
+                return "Drop Rate";
+            case CropScientistBonusText.Spelunky:
+                return "Spelunky";
+            case CropScientistBonusText.ResearchExp:
+                return "Research EXP";
             default:
                 return "Unknown bonus";
         }
@@ -835,6 +859,7 @@ export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     const mainframe = data.get("lab") as Lab;
     const sneaking = data.get("sneaking") as Sneaking;
     const grimoire = data.get("grimoire") as Grimoire;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
 
     // Set bonus to unlocked if the corresponding Jade Upgrade have been purchased
     farming.cropScientist.updateUnlockedCropScientist(sneaking.jadeUpgrades);
@@ -842,7 +867,9 @@ export const updateFarmingCropScientistBonuses = (data: Map<string, any>) => {
     // Update all CropScientist bonuses so we can use those values in other pages (cooking for example)
     const labBonusCropScientist = mainframe.bonuses.find(bonus => bonus.index == 17)?.getBonus() ?? 0;
     const grimoire22Bonus = grimoire.getUpgradeBonus(22);
-    farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist, grimoire22Bonus);
+    const exoticMarket40Bonus = farming.getExoticMarketBonusValue(40);
+    const vault79Bonus = upgradeVault.getBonusForId(79);
+    farming.cropScientist.updateCropScientistBonusValues(farming.discoveredCrops, labBonusCropScientist, grimoire22Bonus, exoticMarket40Bonus, vault79Bonus);
 }
 
 export const updateFarmingDisplayData = (data: Map<string, any>) => {
@@ -947,7 +974,10 @@ export enum CropScientistBonusText {
     CookingSpeed = "{x Cooking Speed (multiplicative)",
     TotalDamage = "+{% Total Damage",
     ShinyPetLvlUpRate = "+{% Shiny Pet Lv Up Rate and Pet Breeding Rate",
-    BaseCritterPerTrap = "+{ Base Critter caught in Trapping"
+    BaseCritterPerTrap = "+{ Base Critter caught in Trapping",
+    DropRate = "+{% Drop Rate",
+    Spelunky = "+{% Spelunky",
+    ResearchExp = "+{% Research EXP"
 }
 
 export enum PlotGrowthStage {

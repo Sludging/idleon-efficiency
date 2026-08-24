@@ -1,0 +1,76 @@
+{
+  "description": "Extract Crop Scientist bonus calculations for all live bonus types",
+  "target": "Crop Scientist bonus calculations",
+  "extractions": [
+    {
+      "label": "crop_sc_0_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 0, 0)",
+      "description": "Crop Scientist total damage bonus"
+    },
+    {
+      "label": "crop_sc_1_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 1, 0)",
+      "description": "Crop Scientist plant evolution chance bonus"
+    },
+    {
+      "label": "crop_sc_2_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 2, 0)",
+      "description": "Crop Scientist jade coin gain bonus"
+    },
+    {
+      "label": "crop_sc_3_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
+      "description": "Crop Scientist cooking speed bonus"
+    },
+    {
+      "label": "crop_sc_4_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 4, 0)",
+      "description": "Crop Scientist cash bonus"
+    },
+    {
+      "label": "crop_sc_5_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 5, 0)",
+      "description": "Crop Scientist shiny rate bonus"
+    },
+    {
+      "label": "crop_sc_6_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 6, 0)",
+      "description": "Crop Scientist base critter bonus"
+    },
+    {
+      "label": "crop_sc_7_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 7, 0)",
+      "description": "Crop Scientist drop rate bonus"
+    },
+    {
+      "label": "crop_sc_8_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 8, 0)",
+      "description": "Crop Scientist spelunky bonus"
+    },
+    {
+      "label": "crop_sc_9_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 9, 0)",
+      "description": "Crop Scientist research EXP bonus"
+    },
+    {
+      "label": "crop_sc_mainframe_17_bonus",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 17)",
+      "description": "Mainframe bonus used by Crop Scientist"
+    },
+    {
+      "label": "crop_sc_grimoire_22_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 22, 0)",
+      "description": "Grimoire upgrade 22 bonus used by Crop Scientist"
+    },
+    {
+      "label": "crop_sc_exotic_40_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 40, 0)",
+      "description": "Exotic Market bonus 40 used by Crop Scientist"
+    },
+    {
+      "label": "crop_sc_vault_79_bonus",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 79, 0)",
+      "description": "Upgrade Vault bonus 79 used by Crop Scientist"
+    }
+  ]
+}
