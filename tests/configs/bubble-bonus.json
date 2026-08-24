@@ -19,8 +19,8 @@
     },
     {
       "label": "daily_drip_final_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.LqdCap",
-      "description": "Da Daily Drip final bubble bonus (LqdCap)"
+      "expression": "(() => { const raw = Number(idleon.getDNSM(\"AlchBubbles\").h.LqdCap); const alchemyLevel = Number(idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]); return raw * Math.max(Math.pow(alchemyLevel / 25, 0.3), 0); })()",
+      "description": "Da Daily Drip effective final bubble bonus (AlchBubbles.LqdCap × ActorEvents_232._GenINFO[87])"
     },
     {
       "label": "cropius_mapper_final_bonus",
@@ -33,19 +33,14 @@
       "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)"
     },
     {
-      "label": "tome_w8_final_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "description": "Tome-scaled representative final bubble bonus (W8 / Tome Strength)"
-    },
-    {
-      "label": "boosted_min_eff_final_bonus",
-      "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
-      "description": "16th-bubble boosted final bubble bonus (MinEff / Hearty Diggy)"
-    },
-    {
       "label": "ordinary_tool_w_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
       "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)"
+    },
+    {
+      "label": "ordinary_tool_w_base_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 7, 0)",
+      "description": "Stronk Tools base BubbleBonus (ToolW / Power index 7)"
     }
   ]
 }

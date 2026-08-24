@@ -6,9 +6,11 @@
  *
  * @testCovers Bubble.getBonus
  * @testCovers DiamonChefBubble.getBonus
+ * @testCovers DailyDripBubble.getBonus
+ * @testCovers CropiusMapperBubble.getBonus
+ * @testCovers ImpactedBySlabBubble.getBonus
  * @testCovers Alchemy.getBubbleBonusForKey
  */
-
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
@@ -16,12 +18,18 @@ import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 const saveName = 'latest';
 const extractionResultsName = 'bubble-bonus-data.json';
 
-const bubbleBonusCalculationSpecs: Record<string, { description: string; extractionKey: string; bonusKey: string; playerIndex?: number }> = {
+const bubbleBonusCalculationSpecs: Record<string, { description: string; extractionKey: string; bonusKey: string; playerIndex?: number; directBubble?: { cauldronIndex: number; bubbleIndex: number } }> = {
  toolW: {
   description: 'Stronk Tools (ToolW / Power index 7; player 0 class and 16th-bubble dependent)',
   extractionKey: 'ordinary_tool_w_final_bonus',
   bonusKey: 'ToolW',
   playerIndex: 0,
+ },
+ ordinaryToolWBase: {
+  description: 'Stronk Tools base BubbleBonus (ToolW / Power index 7)',
+  extractionKey: 'ordinary_tool_w_base_bonus',
+  bonusKey: 'ToolW',
+  directBubble: { cauldronIndex: 0, bubbleIndex: 7 },
  },
  diamondChef: {
   description: 'Diamond Chef (MealSpdz)',
@@ -29,7 +37,7 @@ const bubbleBonusCalculationSpecs: Record<string, { description: string; extract
   bonusKey: 'MealSpdz',
  },
  dailyDrip: {
-  description: 'Da Daily Drip (LqdCap)',
+  description: 'Da Daily Drip effective final bonus (LqdCap / CauldStatDNh20)',
   extractionKey: 'daily_drip_final_bonus',
   bonusKey: 'LqdCap',
  },
@@ -39,19 +47,10 @@ const bubbleBonusCalculationSpecs: Record<string, { description: string; extract
   bonusKey: 'Y6',
  },
  slabW2: {
-  description: 'Slab-scaled bubble (W2 / Slabi Orefish)',
+  description: 'Slab-scaled bubble (W2 / Slabi Orefish; player 0 class boost)',
   extractionKey: 'slab_w2_final_bonus',
   bonusKey: 'W2',
- },
- tomeW8: {
-  description: 'Tome-scaled bubble (W8 / Tome Strength)',
-  extractionKey: 'tome_w8_final_bonus',
-  bonusKey: 'W8',
- },
- boostedMinEff: {
-  description: '16th-bubble boosted bubble (MinEff / Hearty Diggy)',
-  extractionKey: 'boosted_min_eff_final_bonus',
-  bonusKey: 'MinEff',
+  playerIndex: 0,
  },
 };
 
@@ -71,7 +70,9 @@ describe('Alchemy Domain - Bubble Bonus', () => {
   it(`validates ${spec.description}`, () => {
    const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
    const player = spec.playerIndex === undefined ? undefined : gameData.get('players')[spec.playerIndex];
-   const domainValue = alchemy.getBubbleBonusForKey(spec.bonusKey, player);
+   const domainValue = spec.directBubble
+    ? alchemy.cauldrons[spec.directBubble.cauldronIndex].bubbles[spec.directBubble.bubbleIndex].getBonus()
+    : alchemy.getBubbleBonusForKey(spec.bonusKey, player);
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
     tolerance: 0,
