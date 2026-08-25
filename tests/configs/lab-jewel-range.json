@@ -1,0 +1,31 @@
+{
+  "description": "Extract fixed connection ranges for unique Lab Jewels",
+  "target": "Lab Jewel fixed connection ranges",
+  "extractions": [
+    {
+      "label": "jewel_9_range",
+      "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 9, 0)",
+      "description": "Pyrite Rhombol Jewel 9 connection range"
+    },
+    {
+      "label": "jewel_19_range",
+      "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 19, 0)",
+      "description": "Pure Opal Navette Jewel 19 connection range"
+    },
+    {
+      "label": "jewel_21_range",
+      "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 21, 0)",
+      "description": "Deadly Wrath Jewel 21 connection range"
+    },
+    {
+      "label": "jewel_22_range",
+      "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 22, 0)",
+      "description": "North Winds Jewel 22 connection range"
+    },
+    {
+      "label": "jewel_23_range",
+      "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 23, 0)",
+      "description": "Eternal Energy Jewel 23 connection range"
+    }
+  ]
+}
