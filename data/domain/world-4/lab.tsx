@@ -144,7 +144,7 @@ export class SlabSovereigntyBonus extends MainframeBonus {
     jewelBoost: number = 0;
 
     override getBonus = () => {
-        return  this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
+        return this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }
 
@@ -152,7 +152,7 @@ export class DepotStudiesPhD extends MainframeBonus {
     jewelBoost: number = 0;
 
     override getBonus = () => {
-        return  this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
+        return this.active ? (this.bonusOn + this.jewelBoost) : this.bonusOff;
     }
 }
 
@@ -192,18 +192,40 @@ export class Jewel {
         const jewels = data.map(jewel => {
             switch (jewel.index) {
                 case 0: return new AmethystRhinestoneJewel(jewel.index, jewel.data);
+                case 3: return new SapphireRhinestoneJewel(jewel.index, jewel.data);
                 case 5: return new SapphireRhombolJewel(jewel.index, jewel.data);
                 case 9: return new PyriteRhombolJewel(jewel.index, jewel.data);
                 case 10: return new PyritePyramiteJewel(jewel.index, jewel.data);
                 case 12: return new EmeraldNavetteJewel(jewel.index, jewel.data);
                 case 14: return new EmeraldPyramiteJewel(jewel.index, jewel.data);
                 case 19: return new PureOpalNavette(jewel.index, jewel.data);
+                case 21:
+                case 22:
+                case 23: return new FixedHundredRangeJewel(jewel.index, jewel.data);
                 default: return new Jewel(jewel.index, jewel.data);
             }
         });
 
         // Like for bonuses, making sure they're in the index order
         return jewels.sort((jewel1, jewel2) => jewel1.index < jewel2.index ? -1 : 1);
+    }
+}
+
+export class SapphireRhinestoneJewel extends Jewel {
+    numberOfActiveBlue: number = 0;
+    override getBonus = (bonusMultiplier: number = this.bonusMultiplier) => {
+        if (!this.active) {
+            return 0;
+        }
+
+        const extraMultiplier = this.numberOfActiveBlue >= 4 ? 2 : 1;
+        return this.data.bonusGiven * bonusMultiplier * extraMultiplier;
+    }
+}
+
+export class FixedHundredRangeJewel extends Jewel {
+    override getRange = () => {
+        return 100;
     }
 }
 
@@ -354,7 +376,7 @@ export class Lab extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            {key: "Lab", perPlayer: false, default: []},
+            { key: "Lab", perPlayer: false, default: [] },
         ]
     }
 
@@ -599,6 +621,7 @@ export const updateLab = (data: Map<string, any>) => {
 
     // Special Jewel handling
     (lab.jewels[0] as AmethystRhinestoneJewel).numberOfActivePurples = lab.jewels.filter(jewel => (jewel.data.name.includes("Amethyst") || jewel.data.name.includes("Purple")) && jewel.active).length;
+    (lab.jewels[3] as SapphireRhinestoneJewel).numberOfActiveBlue = lab.jewels.filter(jewel => jewel.data.name.includes("Sapphire") && jewel.active).length;
     (lab.jewels[10] as PyritePyramiteJewel).numberOfActiveOrange = lab.jewels.filter(jewel => jewel.data.name.includes("Pyrite") && jewel.active).length;
     (lab.jewels[12] as EmeraldNavetteJewel).numberOfActiveGreen = lab.jewels.filter(jewel => jewel.data.name.includes("Emerald") && jewel.active).length;
     (lab.jewels[14] as EmeraldPyramiteJewel).numberOfKitchenLevels = cooking.kitchens.reduce((sum, kitchen) => sum += kitchen.recipeLevels + kitchen.mealLevels + kitchen.luckLevels, 0);
