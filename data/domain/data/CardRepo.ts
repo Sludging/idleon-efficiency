@@ -1990,6 +1990,14 @@ export const initCardRepo = () => {
                 "bonus": 20,
                 "order": 28
             }),
+        new CardDataBase("fm_rat", <CardDataModel>{
+                "cardID": "Z27",
+                "category": "Bosses",
+                "perTier": 1e+08,
+                "effect": "+{% Masterclass Drops (Passive)",
+                "bonus": 1,
+                "order": 29
+            }),
         new CardDataBase("ghost", <CardDataModel>{
                 "cardID": "Y0",
                 "category": "Event",

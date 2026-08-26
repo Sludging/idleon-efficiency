@@ -305,10 +305,10 @@ export const initLegendTalentsRepo = () => {
         new LegendTalentBase(37, <LegendTalentModel>{
                 "name": "6 O'Clock Crystals",
                 "maxLevel": 1,
-                "bonusValue": 2000,
+                "bonusValue": 300,
                 "x3": "filler",
                 "bonus": "}x more Daily Guaranteed Crystal Mobs",
-                "description": "You know how you're guaranteed to spawn $ Crystal Mobs every day? Well that'll be }x higher with this talent!"
+                "description": "}x more Guaranteed Crystal Mobs every day. You currently get $ daily guaranteed."
             }),
         new LegendTalentBase(38, <LegendTalentModel>{
                 "name": "Shrine World Order Bill",

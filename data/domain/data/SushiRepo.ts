@@ -443,37 +443,69 @@ export const initSushiRepo = () => {
                 "name": "Dulce Vitiri",
                 "unlockDescription": "+{% Gallery Bonus Multi",
                 "unlockBonus": 1,
-                "knowledgeBonusCategory": undefined,
-                "knowledgeBonusBase": undefined
+                "knowledgeBonusCategory": "}x higher Fuel Capacity",
+                "knowledgeBonusBase": 10
             }),
         new SushiBase(55, <SushiModel>{
                 "index": 55,
                 "name": "Wasabaisamarama",
                 "unlockDescription": "}x Megacrop Growth Chance for getting more Farming Stickers",
                 "unlockBonus": 25,
-                "knowledgeBonusCategory": undefined,
-                "knowledgeBonusBase": undefined
+                "knowledgeBonusCategory": "+^% chance for free shaker usage",
+                "knowledgeBonusBase": 0.05
             }),
         new SushiBase(56, <SushiModel>{
                 "index": 56,
                 "name": "Kraken Roll",
                 "unlockDescription": "+{ Opals for your Villagers",
                 "unlockBonus": 2,
-                "knowledgeBonusCategory": undefined,
-                "knowledgeBonusBase": undefined
+                "knowledgeBonusCategory": "+^% bigger effects from Slots",
+                "knowledgeBonusBase": 0.2
             }),
         new SushiBase(57, <SushiModel>{
                 "index": 57,
                 "name": "Leviathan Roll",
                 "unlockDescription": "}x extra Treasure found from opening Sailing Chests",
                 "unlockBonus": 30,
-                "knowledgeBonusCategory": undefined,
-                "knowledgeBonusBase": undefined
+                "knowledgeBonusCategory": "}x faster Fuel generation",
+                "knowledgeBonusBase": 2
             }),
         new SushiBase(58, <SushiModel>{
                 "index": 58,
                 "name": "Golthulu Roll",
                 "unlockDescription": "+{ Max Build LVs for all Shrines in Construction",
+                "unlockBonus": 10,
+                "knowledgeBonusCategory": undefined,
+                "knowledgeBonusBase": undefined
+            }),
+        new SushiBase(59, <SushiModel>{
+                "index": 59,
+                "name": "Wasomber Nigiri",
+                "unlockDescription": "+{% chance for an additional Orblet stack to drop on Royal Guardians!",
+                "unlockBonus": 10,
+                "knowledgeBonusCategory": undefined,
+                "knowledgeBonusBase": undefined
+            }),
+        new SushiBase(60, <SushiModel>{
+                "index": 60,
+                "name": "Leek Nigiri",
+                "unlockDescription": "+{% Resource Collection Rate for all your Royal Guardian outposts!",
+                "unlockBonus": 30,
+                "knowledgeBonusCategory": undefined,
+                "knowledgeBonusBase": undefined
+            }),
+        new SushiBase(61, <SushiModel>{
+                "index": 61,
+                "name": "Atomiroll",
+                "unlockDescription": "Regal Intervention spawns +{ more Regal Mobs than normal when triggered",
+                "unlockBonus": 2,
+                "knowledgeBonusCategory": undefined,
+                "knowledgeBonusBase": undefined
+            }),
+        new SushiBase(62, <SushiModel>{
+                "index": 62,
+                "name": "Octolingo",
+                "unlockDescription": "+{% drop chance for Marble for your Royal Guardian",
                 "unlockBonus": 10,
                 "knowledgeBonusCategory": undefined,
                 "knowledgeBonusBase": undefined

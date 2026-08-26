@@ -869,7 +869,7 @@ export const initTomeRepo = () => {
                 "totalVal": 400,
                 "decimalDisplay": undefined,
                 "desc": "This counts your current Showdown for the Emperor boss in World 6, not the total amount of kills.",
-                "uiPositionIndex": 106
+                "uiPositionIndex": 109
             }),
         new TomeBase(96, <TomeModel>{
                 "name": "Total Summoning Boss Stone victories 膛",
@@ -887,7 +887,7 @@ export const initTomeRepo = () => {
                 "totalVal": 400,
                 "decimalDisplay": undefined,
                 "desc": "The Coral Reef is a feature in World 7 town, unlocked by rescuing Humble Hugh's missing Fishies!",
-                "uiPositionIndex": 107
+                "uiPositionIndex": 110
             }),
         new TomeBase(98, <TomeModel>{
                 "name": "Deepest Depth reached in a single Delve 膛",
@@ -896,7 +896,7 @@ export const initTomeRepo = () => {
                 "totalVal": 300,
                 "decimalDisplay": undefined,
                 "desc": "This is for the Spelunking skill, it's just the deepest you've gone in a single attempt.",
-                "uiPositionIndex": 110
+                "uiPositionIndex": 113
             }),
         new TomeBase(99, <TomeModel>{
                 "name": "Total Ninja Knowledge Upgrades LV 膛",
@@ -932,7 +932,7 @@ export const initTomeRepo = () => {
                 "totalVal": 300,
                 "decimalDisplay": undefined,
                 "desc": "This is for the Spelunking skill, it's just the most amount of Amber you've gotten in a single attempt.",
-                "uiPositionIndex": 111
+                "uiPositionIndex": 114
             }),
         new TomeBase(103, <TomeModel>{
                 "name": "Total Spelunk Shop Upgrades LV",
@@ -941,7 +941,7 @@ export const initTomeRepo = () => {
                 "totalVal": 500,
                 "decimalDisplay": undefined,
                 "desc": undefined,
-                "uiPositionIndex": 108
+                "uiPositionIndex": 111
             }),
         new TomeBase(104, <TomeModel>{
                 "name": "Total Spelunk Discoveries made 膛",
@@ -950,7 +950,7 @@ export const initTomeRepo = () => {
                 "totalVal": 300,
                 "decimalDisplay": undefined,
                 "desc": "A Discovery is when you destroy a rock for the first time in a cave. It's basically how many unique 'things' you've encountered while spelunking!",
-                "uiPositionIndex": 109
+                "uiPositionIndex": 112
             }),
         new TomeBase(105, <TomeModel>{
                 "name": "Highest leveled Spelunker 膛",
@@ -959,7 +959,7 @@ export const initTomeRepo = () => {
                 "totalVal": 200,
                 "decimalDisplay": undefined,
                 "desc": "In other words, this is the Spelunking LV of the highest leveled spelunker in your account.",
-                "uiPositionIndex": 112
+                "uiPositionIndex": 115
             }),
         new TomeBase(106, <TomeModel>{
                 "name": "Lava Dev Streams watched 膛",
@@ -1004,7 +1004,7 @@ export const initTomeRepo = () => {
                 "totalVal": 600,
                 "decimalDisplay": undefined,
                 "desc": "Haven't heard of Mr Minehead's Depth Charge game yet? It's great, you'll find it deep in World 7!",
-                "uiPositionIndex": 113
+                "uiPositionIndex": 116
             }),
         new TomeBase(111, <TomeModel>{
                 "name": "Rat King Crowns Reclaimed 膛",
@@ -1040,7 +1040,7 @@ export const initTomeRepo = () => {
                 "totalVal": 750,
                 "decimalDisplay": undefined,
                 "desc": "Research is a World 7 skill, you need to progress past the Ballonfish Map to unlock it!",
-                "uiPositionIndex": 114
+                "uiPositionIndex": 117
             }),
         new TomeBase(115, <TomeModel>{
                 "name": "Total Glimbo Trades 膛",
@@ -1049,16 +1049,16 @@ export const initTomeRepo = () => {
                 "totalVal": 400,
                 "decimalDisplay": undefined,
                 "desc": "Glimbo can be found deep in World 7, he increases your Upgrade Vault max LV's in exchange for valuable items!",
-                "uiPositionIndex": 115
+                "uiPositionIndex": 118
             }),
         new TomeBase(116, <TomeModel>{
                 "name": "Unique Sushi Created 膛",
-                "keyQty": 54,
+                "keyQty": 63,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 800,
                 "decimalDisplay": undefined,
                 "desc": "Basically, the highest Tier of Sushi you've created over at the Sushi Station in World 7!",
-                "uiPositionIndex": 116
+                "uiPositionIndex": 119
             }),
         new TomeBase(117, <TomeModel>{
                 "name": "Button Presses 膛",
@@ -1067,7 +1067,34 @@ export const initTomeRepo = () => {
                 "totalVal": 500,
                 "decimalDisplay": undefined,
                 "desc": "This is referring to THE BUTTON, found in the Mantaray map in World 7! This map is the 12th map away from town, to give you an idea of where this map is.",
-                "uiPositionIndex": 117
+                "uiPositionIndex": 120
+            }),
+        new TomeBase(118, <TomeModel>{
+                "name": "Total Royal Statue LV",
+                "keyQty": 100,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 600,
+                "decimalDisplay": undefined,
+                "desc": undefined,
+                "uiPositionIndex": 106
+            }),
+        new TomeBase(119, <TomeModel>{
+                "name": "Royal Guardian Outposts Built",
+                "keyQty": 65,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 650,
+                "decimalDisplay": undefined,
+                "desc": undefined,
+                "uiPositionIndex": 107
+            }),
+        new TomeBase(120, <TomeModel>{
+                "name": "Total Resource Grade 膛",
+                "keyQty": 1000,
+                "scalingType": TomeScalingEnum.decay,
+                "totalVal": 600,
+                "decimalDisplay": undefined,
+                "desc": "Resource Grade refers to the Royal Guardian resource system, where you increase each resource node's Grade by collecting all its resources.",
+                "uiPositionIndex": 108
             })    
 ]
 }

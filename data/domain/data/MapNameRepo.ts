@@ -49,7 +49,7 @@ export const initMapNameRepo = () => {
         new MapNameBase(40, <MapNameModel>{"intName": "Dungeon1", "name": "Grandfrog's Gazebo", "id": 40}),
         new MapNameBase(41, <MapNameModel>{"intName": "GrasslandsF", "name": "Pet Park", "id": 41}),
         new MapNameBase(42, <MapNameModel>{"intName": "GrasslandsG", "name": "Grand Owl Perch", "id": 42}),
-        new MapNameBase(43, <MapNameModel>{"intName": "Z", "name": "Z", "id": 43}),
+        new MapNameBase(43, <MapNameModel>{"intName": "GrasslandsH", "name": "The Royal Castle", "id": 43}),
         new MapNameBase(44, <MapNameModel>{"intName": "Z", "name": "Z", "id": 44}),
         new MapNameBase(45, <MapNameModel>{"intName": "Z", "name": "Z", "id": 45}),
         new MapNameBase(46, <MapNameModel>{"intName": "Z", "name": "Z", "id": 46}),

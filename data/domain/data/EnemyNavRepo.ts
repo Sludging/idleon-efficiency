@@ -1016,6 +1016,13 @@ export const initEnemyNavRepo = () => {
             }),
         new EnemyNavBase("Boss6C", <EnemyNavModel>{
                 "prev": "Boss6B",
+                "next": "fm_rat",
+                "hasCrystal": true,
+                "crystalName": undefined,
+                "hasCard": true
+            }),
+        new EnemyNavBase("fm_rat", <EnemyNavModel>{
+                "prev": "Boss6C",
                 "next": "Blank",
                 "hasCrystal": true,
                 "crystalName": undefined,

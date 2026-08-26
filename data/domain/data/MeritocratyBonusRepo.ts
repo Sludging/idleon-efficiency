@@ -67,7 +67,7 @@ export const initMeritocratyBonusRepo = () => {
             }),
         new MeritocratyBonusBase(15, <MeritocratyBonusModel>{
                 "text": "You're guaranteed }x more Crystal Mobs than normal to start each day",
-                "bonus": 900,
+                "bonus": 100,
                 "value": 0
             }),
         new MeritocratyBonusBase(16, <MeritocratyBonusModel>{

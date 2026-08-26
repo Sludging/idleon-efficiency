@@ -567,8 +567,8 @@ export const initTaskShopDescRepo = () => {
                 "bonusPerLevel": 0
             }),
         new TaskShopDescBase(40, <TaskShopDescModel>{
-                "descLine1": "+{ Talent Pts for Tab 5, for all the",
-                "descLine2": "Classes that aren't out yet! Exciting!",
+                "descLine1": "+{ Talent Pts for the 5th tab, which",
+                "descLine2": "is the Master Class's tab!",
                 "number1": 0,
                 "number2": 0,
                 "number3": 0,

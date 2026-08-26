@@ -236,6 +236,13 @@ export const initEnemyTableRepo = () => {
                     <ItemDropModel>{"item": "Quest19", "quantity": 69, "chance": 0.07, "questLink": "N/A"}
                 ]
             }),
+        new EnemyTableBase("fm_rat", <EnemyTableModel>{
+                "drops": [
+                    <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0, "questLink": "N/A"},
+                    <ItemDropModel>{"item": "Sewers2", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                    <CardDropModel>{"item": "CardsZ27", "quantity": 1, "chance": 1e-07, "questLink": "N/A"}
+                ]
+            }),
         new EnemyTableBase("mushPtutorial", <EnemyTableModel>{
                 "drops": [<CoinDropModel>{"item": "COIN", "quantity": 50, "chance": 0.5, "questLink": "N/A"}]
             }),

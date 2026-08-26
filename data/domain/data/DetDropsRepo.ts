@@ -573,6 +573,7 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "iceBossZ", "quantity": 69, "chance": 0.5},
                     <DetDropModel>{"source": "iceBossZ2", "quantity": 69, "chance": 0.5},
                     <DetDropModel>{"source": "iceBossZ3", "quantity": 69, "chance": 0.5},
+                    <DetDropModel>{"source": "fm_rat", "quantity": 69, "chance": 0},
                     <DetDropModel>{"source": "Crystal0", "quantity": 3, "chance": 0.5},
                     <DetDropModel>{"source": "Crystal1", "quantity": 3, "chance": 0.5},
                     <DetDropModel>{"source": "Crystal2", "quantity": 3, "chance": 0.5},
@@ -5302,6 +5303,13 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "iceBossZ3", "quantity": 1, "chance": 0.8}
                 ]
             }),
+        new DetDropsBase("Sewers2", <DetDropsModel>{
+                "sources": [
+                    <DetDropModel>{"source": "fm_rat", "quantity": 1, "chance": 1},
+                    <DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.19}
+                ]
+            }),
+        new DetDropsBase("CardsZ27", <DetDropsModel>{"sources": [<DetDropModel>{"source": "fm_rat", "quantity": 1, "chance": 1e-07}]}),
         new DetDropsBase("CardsA14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "Crystal0", "quantity": 1, "chance": 0.01}]}),
         new DetDropsBase("StampC3", <DetDropsModel>{
                 "sources": [
@@ -5815,7 +5823,6 @@ export const initDetDropsRepo = () => {
                     <DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.006}
                 ]
             }),
-        new DetDropsBase("Sewers2", <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.19}]}),
         new DetDropsBase("CardsA11", <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 5e-05}]}),
         new DetDropsBase("Quest14", <DetDropsModel>{"sources": [<DetDropModel>{"source": "ratB", "quantity": 1, "chance": 0.1}]}),
         new DetDropsBase("Sewers3", <DetDropsModel>{"sources": [<DetDropModel>{"source": "poopD", "quantity": 1, "chance": 0.5}]}),

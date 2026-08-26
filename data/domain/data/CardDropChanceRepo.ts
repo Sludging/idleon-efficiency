@@ -6,6 +6,7 @@ export class CardDropChanceBase { constructor(public id: string, public data: Ca
 
 export const initCardDropChanceRepo = () => {
     return [    
+        new CardDropChanceBase("CardsZ27", <CardDropChanceModel>{"dropChance": 1e-07}),
         new CardDropChanceBase("CardsA14", <CardDropChanceModel>{"dropChance": 0.01}),
         new CardDropChanceBase("CardsB13", <CardDropChanceModel>{"dropChance": 0.008}),
         new CardDropChanceBase("CardsE15", <CardDropChanceModel>{"dropChance": 0.008}),

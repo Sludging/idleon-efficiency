@@ -1727,12 +1727,12 @@ export const initResearchGridBonusRepo = () => {
             }),
         new ResearchGridBonusBase(191, <ResearchGridBonusModel>{
                 "index": 191,
-                "name": "Name",
-                "maxLevel": 1,
-                "bonusPerLevel": 1,
+                "name": "Royal Rewards",
+                "maxLevel": 4,
+                "bonusPerLevel": 10,
                 "x3": 0,
                 "x4": 0,
-                "description": "desc"
+                "description": "Regal Mobs now have a {% chance to give +3 kills for your Royal Guardian's Orb of Virisimilitude instead of simply +2 kills"
             }),
         new ResearchGridBonusBase(192, <ResearchGridBonusModel>{
                 "index": 192,

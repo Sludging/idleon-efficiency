@@ -635,6 +635,24 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% EXP",
                 "barType": 49
+            }),
+        new ArcadeBonusBase(70, <ArcadeBonusModel>{
+                "effect": "+{% Kingdom Resources",
+                "x1": 6,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Resources",
+                "barType": 31
+            }),
+        new ArcadeBonusBase(71, <ArcadeBonusModel>{
+                "effect": "+{% Marble Drop Rate",
+                "x1": 3,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Marble DR",
+                "barType": 35
             })    
 ]
 }

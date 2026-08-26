@@ -10,11 +10,15 @@ export const initCompanionRepo = () => {
                 "id": "babaMummy",
                 "desc": "All Divinities from World 5 count as Active",
                 "bonus": 1,
-                "x1": -53,
+                "x1": -66,
                 "x2": -22,
                 "x3": -14,
                 "x4": 2000,
-                "x5": 165
+                "x5": 165,
+                "x6": 3000,
+                "x7": 240,
+                "desc2": "All Divinities count as Active, and 1.25x Divinity PTS gain",
+                "bonus2": 1
             }),
         new CompanionBase(1, <CompanionModel>{
                 "id": "rift2",
@@ -24,7 +28,11 @@ export const initCompanionRepo = () => {
                 "x2": 6,
                 "x3": -14,
                 "x4": 450,
-                "x5": 125
+                "x5": 125,
+                "x6": 2500,
+                "x7": 180,
+                "desc2": "+35 Lv for all Talents",
+                "bonus2": 35
             }),
         new CompanionBase(2, <CompanionModel>{
                 "id": "ram",
@@ -34,7 +42,11 @@ export const initCompanionRepo = () => {
                 "x2": 16,
                 "x3": -19,
                 "x4": 150,
-                "x5": 120
+                "x5": 120,
+                "x6": 2100,
+                "x7": 170,
+                "desc2": "Use Storage Chest from anywhere, and +30% Carry Capacity",
+                "bonus2": 1
             }),
         new CompanionBase(3, <CompanionModel>{
                 "id": "Crystal3",
@@ -44,7 +56,11 @@ export const initCompanionRepo = () => {
                 "x2": 20,
                 "x3": -8,
                 "x4": 150,
-                "x5": 110
+                "x5": 110,
+                "x6": 1750,
+                "x7": 150,
+                "desc2": "{130% Drop Rate and Class Exp",
+                "bonus2": 130
             }),
         new CompanionBase(4, <CompanionModel>{
                 "id": "sheep",
@@ -54,7 +70,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 10,
-                "x5": 80
+                "x5": 80,
+                "x6": 1500,
+                "x7": 130,
+                "desc2": "All big bubbles in Alchemy count as equipped",
+                "bonus2": 1
             }),
         new CompanionBase(5, <CompanionModel>{
                 "id": "w5b1",
@@ -64,7 +84,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 10,
-                "x5": 70
+                "x5": 70,
+                "x6": 1400,
+                "x7": 100,
+                "desc2": "{8% All Skill Efficiency",
+                "bonus2": 8
             }),
         new CompanionBase(6, <CompanionModel>{
                 "id": "beanG",
@@ -74,7 +98,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -22,
                 "x4": 10,
-                "x5": 65
+                "x5": 65,
+                "x6": 1200,
+                "x7": 90,
+                "desc2": "{8% AFK Gains Rate for Fighting and Skills",
+                "bonus2": 8
             }),
         new CompanionBase(7, <CompanionModel>{
                 "id": "slimeG",
@@ -84,7 +112,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -1,
                 "x4": 5,
-                "x5": 50
+                "x5": 50,
+                "x6": 1000,
+                "x7": 80,
+                "desc2": "+50% Golden Balls earned in Arcade for Upgrades",
+                "bonus2": 2
             }),
         new CompanionBase(8, <CompanionModel>{
                 "id": "jarSand",
@@ -94,7 +126,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -3,
                 "x4": 5,
-                "x5": 50
+                "x5": 50,
+                "x6": 800,
+                "x7": 80,
+                "desc2": "+20 Base All Stats (STR/AGI/WIS/LUK)",
+                "bonus2": 20
             }),
         new CompanionBase(9, <CompanionModel>{
                 "id": "bloque",
@@ -104,7 +140,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -17,
                 "x4": 5,
-                "x5": 50
+                "x5": 50,
+                "x6": 700,
+                "x7": 75,
+                "desc2": "+30% All Skill EXP",
+                "bonus2": 30
             }),
         new CompanionBase(10, <CompanionModel>{
                 "id": "frogG",
@@ -114,7 +154,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 5,
-                "x5": 40
+                "x5": 40,
+                "x6": 600,
+                "x7": 70,
+                "desc2": "+15% Total Damage",
+                "bonus2": 15
             }),
         new CompanionBase(11, <CompanionModel>{
                 "id": "slimeBz",
@@ -124,7 +168,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -30,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 11,
+                "desc2": "Only 100 of these exist in IdleOn...",
+                "bonus2": 10
             }),
         new CompanionBase(12, <CompanionModel>{
                 "id": "caveC",
@@ -134,7 +182,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -35,
                 "x4": 1000,
-                "x5": 150
+                "x5": 150,
+                "x6": 4700,
+                "x7": 230,
+                "desc2": "15x Total Damage",
+                "bonus2": 14
             }),
         new CompanionBase(13, <CompanionModel>{
                 "id": "w6d3",
@@ -144,7 +196,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 250,
-                "x5": 140
+                "x5": 140,
+                "x6": 3800,
+                "x7": 200,
+                "desc2": "4x Villager EXP and +33 Opals",
+                "bonus2": 1.34
             }),
         new CompanionBase(14, <CompanionModel>{
                 "id": "rift3",
@@ -154,7 +210,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -16,
                 "x4": 250,
-                "x5": 135
+                "x5": 135,
+                "x6": 3400,
+                "x7": 185,
+                "desc2": "3x Kills for Opening Portals and Deathnote",
+                "bonus2": 1.5
             }),
         new CompanionBase(15, <CompanionModel>{
                 "id": "w6b4",
@@ -164,7 +224,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 100,
-                "x5": 110
+                "x5": 110,
+                "x6": 2900,
+                "x7": 160,
+                "desc2": "5.00x faster Equinox Bar Fill Rate",
+                "bonus2": 4
             }),
         new CompanionBase(16, <CompanionModel>{
                 "id": "Crystal4",
@@ -174,7 +238,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 100,
-                "x5": 110
+                "x5": 110,
+                "x6": 2800,
+                "x7": 160,
+                "desc2": "2.00x Lab EXP and Divinity EXP Gain",
+                "bonus2": 1
             }),
         new CompanionBase(17, <CompanionModel>{
                 "id": "w5b6",
@@ -184,7 +252,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -15,
                 "x4": 100,
-                "x5": 100
+                "x5": 100,
+                "x6": 2700,
+                "x7": 150,
+                "desc2": "3d Printer samples grow {2%/day for 100 days",
+                "bonus2": 2
             }),
         new CompanionBase(18, <CompanionModel>{
                 "id": "frogBIG",
@@ -194,7 +266,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -29,
                 "x4": 10,
-                "x5": 80
+                "x5": 80,
+                "x6": 2200,
+                "x7": 125,
+                "desc2": "{35% Carry Capacity for all item types",
+                "bonus2": 35
             }),
         new CompanionBase(19, <CompanionModel>{
                 "id": "potato",
@@ -204,7 +280,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -25,
                 "x4": 10,
-                "x5": 70
+                "x5": 70,
+                "x6": 1900,
+                "x7": 120,
+                "desc2": "{8% Ballot Bonus Multi (World 2 feature)",
+                "bonus2": 8
             }),
         new CompanionBase(20, <CompanionModel>{
                 "id": "w4b1",
@@ -214,7 +294,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 10,
-                "x5": 60
+                "x5": 60,
+                "x6": 1800,
+                "x7": 100,
+                "desc2": "{40 Talent Points for all classes",
+                "bonus2": 40
             }),
         new CompanionBase(21, <CompanionModel>{
                 "id": "frogP",
@@ -224,7 +308,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 5,
-                "x5": 55
+                "x5": 55,
+                "x6": 1500,
+                "x7": 80,
+                "desc2": "+20% Defence",
+                "bonus2": 20
             }),
         new CompanionBase(22, <CompanionModel>{
                 "id": "glass",
@@ -234,7 +322,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 5,
-                "x5": 50
+                "x5": 50,
+                "x6": 1400,
+                "x7": 70,
+                "desc2": "+20% Drop Rate",
+                "bonus2": 20
             }),
         new CompanionBase(23, <CompanionModel>{
                 "id": "mushG",
@@ -244,7 +336,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 5,
-                "x5": 30
+                "x5": 30,
+                "x6": 1300,
+                "x7": 60,
+                "desc2": "+20% Accuracy",
+                "bonus2": 20
             }),
         new CompanionBase(24, <CompanionModel>{
                 "id": "Pet10",
@@ -254,7 +350,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -13,
                 "x4": 500,
-                "x5": 100
+                "x5": 100,
+                "x6": 2500,
+                "x7": 150,
+                "desc2": "6x Coins from Mobs",
+                "bonus2": 5
             }),
         new CompanionBase(25, <CompanionModel>{
                 "id": "Pet12",
@@ -264,7 +364,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -20,
                 "x4": 500,
-                "x5": 110
+                "x5": 110,
+                "x6": 2500,
+                "x7": 150,
+                "desc2": "{70% AFK Gains",
+                "bonus2": 70
             }),
         new CompanionBase(26, <CompanionModel>{
                 "id": "Pet3",
@@ -274,7 +378,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 500,
-                "x5": 100
+                "x5": 100,
+                "x6": 2900,
+                "x7": 150,
+                "desc2": "1.50x Drop Rate",
+                "bonus2": 0.5
             }),
         new CompanionBase(27, <CompanionModel>{
                 "id": "reindeer",
@@ -284,7 +392,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -33,
                 "x4": 500,
-                "x5": 150
+                "x5": 150,
+                "x6": 3200,
+                "x7": 240,
+                "desc2": "2.50x Gold Ball Shop Bonuses",
+                "bonus2": 1.5
             }),
         new CompanionBase(28, <CompanionModel>{
                 "id": "w7d1",
@@ -294,7 +406,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -48,
                 "x4": 500,
-                "x5": 200
+                "x5": 200,
+                "x6": 4500,
+                "x7": 300,
+                "desc2": "{40% AFK gains for World 7 skills, and {2 Worldclass Showcase Slots in Gallery",
+                "bonus2": 40
             }),
         new CompanionBase(29, <CompanionModel>{
                 "id": "Pet0",
@@ -304,7 +420,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -8,
                 "x4": 100,
-                "x5": 115
+                "x5": 115,
+                "x6": 2700,
+                "x7": 170,
+                "desc2": "1.75x Kills for Opening Portals and Deathnote",
+                "bonus2": 0.75
             }),
         new CompanionBase(30, <CompanionModel>{
                 "id": "Pet1",
@@ -314,7 +434,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 100,
-                "x5": 110
+                "x5": 110,
+                "x6": 3500,
+                "x7": 160,
+                "desc2": "2.5x Friend Bonuses, {3 Friend Bonus Slots, Auto Loot, Storage Quickref Usage, Infinite Teleporting",
+                "bonus2": 1.5
             }),
         new CompanionBase(31, <CompanionModel>{
                 "id": "Pet2",
@@ -324,7 +448,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -8,
                 "x4": 100,
-                "x5": 170
+                "x5": 170,
+                "x6": 3900,
+                "x7": 250,
+                "desc2": "{25% Hat Rack Bonus Multi",
+                "bonus2": 25
             }),
         new CompanionBase(32, <CompanionModel>{
                 "id": "Pet4",
@@ -334,7 +462,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -13,
                 "x4": 100,
-                "x5": 125
+                "x5": 125,
+                "x6": 2800,
+                "x7": 189,
+                "desc2": "2.5x Class EXP gain and 2.5x All Skill EXP gain",
+                "bonus2": 1.5
             }),
         new CompanionBase(33, <CompanionModel>{
                 "id": "Pet5",
@@ -344,7 +476,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -10,
                 "x4": 100,
-                "x5": 100
+                "x5": 100,
+                "x6": 2500,
+                "x7": 150,
+                "desc2": "2.5x Total Damage, and 2.5x Class EXP gain",
+                "bonus2": 1.5
             }),
         new CompanionBase(34, <CompanionModel>{
                 "id": "Pet6",
@@ -354,7 +490,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -9,
                 "x4": 100,
-                "x5": 80
+                "x5": 80,
+                "x6": 2200,
+                "x7": 130,
+                "desc2": "4x Class EXP gain",
+                "bonus2": 3
             }),
         new CompanionBase(35, <CompanionModel>{
                 "id": "Pet8",
@@ -364,7 +504,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -13,
                 "x4": 100,
-                "x5": 110
+                "x5": 110,
+                "x6": 2500,
+                "x7": 155,
+                "desc2": "3x Refinery Salts produced (affects POW produced in Refinery)",
+                "bonus2": 2
             }),
         new CompanionBase(36, <CompanionModel>{
                 "id": "Pet11",
@@ -374,7 +518,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 100,
-                "x5": 100
+                "x5": 100,
+                "x6": 2600,
+                "x7": 160,
+                "desc2": "{300% Gold Balls gained from the Arcade,",
+                "bonus2": 300
             }),
         new CompanionBase(37, <CompanionModel>{
                 "id": "w7e1",
@@ -384,7 +532,11 @@ export const initCompanionRepo = () => {
                 "x2": 20,
                 "x3": -33,
                 "x4": 1000,
-                "x5": 150
+                "x5": 150,
+                "x6": 4900,
+                "x7": 250,
+                "desc2": "15x Class EXP and {15 Legend Talent PTS",
+                "bonus2": 1.5
             }),
         new CompanionBase(38, <CompanionModel>{
                 "id": "w7a5",
@@ -394,7 +546,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -15,
                 "x4": 250,
-                "x5": 130
+                "x5": 130,
+                "x6": 3800,
+                "x7": 200,
+                "desc2": "6x Coins from monsters, and 6x Masterclass drops",
+                "bonus2": 5
             }),
         new CompanionBase(39, <CompanionModel>{
                 "id": "w7a8",
@@ -404,7 +560,11 @@ export const initCompanionRepo = () => {
                 "x2": 30,
                 "x3": -7,
                 "x4": 250,
-                "x5": 115
+                "x5": 115,
+                "x6": 3500,
+                "x7": 170,
+                "desc2": "+75% Meritocracy Bonus Multi (World 7 feature)",
+                "bonus2": 75
             }),
         new CompanionBase(40, <CompanionModel>{
                 "id": "w7a4",
@@ -414,7 +574,11 @@ export const initCompanionRepo = () => {
                 "x2": 20,
                 "x3": -19,
                 "x4": 100,
-                "x5": 110
+                "x5": 110,
+                "x6": 2800,
+                "x7": 160,
+                "desc2": "2.00x Daily Reef Coral (World 7 feature)",
+                "bonus2": 1
             }),
         new CompanionBase(41, <CompanionModel>{
                 "id": "Crystal6",
@@ -424,7 +588,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -14,
                 "x4": 100,
-                "x5": 105
+                "x5": 105,
+                "x6": 2700,
+                "x7": 150,
+                "desc2": "{50% Ballot Bonus Multi (World 2 feature)",
+                "bonus2": 50
             }),
         new CompanionBase(42, <CompanionModel>{
                 "id": "w7a3",
@@ -434,7 +602,11 @@ export const initCompanionRepo = () => {
                 "x2": 28,
                 "x3": -17,
                 "x4": 100,
-                "x5": 90
+                "x5": 90,
+                "x6": 2600,
+                "x7": 140,
+                "desc2": "{1 Grade for 3 Gallery Showcases (World 7 feature)",
+                "bonus2": 3
             }),
         new CompanionBase(43, <CompanionModel>{
                 "id": "w7a7",
@@ -444,7 +616,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 10,
-                "x5": 80
+                "x5": 80,
+                "x6": 1900,
+                "x7": 125,
+                "desc2": "1.50x Artifact Find chance (World 5 feature)",
+                "bonus2": 0.5
             }),
         new CompanionBase(44, <CompanionModel>{
                 "id": "w7a10",
@@ -454,7 +630,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -15,
                 "x4": 10,
-                "x5": 75
+                "x5": 75,
+                "x6": 1800,
+                "x7": 120,
+                "desc2": "{1 Friend Bonus slot and {25% Friend Bonuses",
+                "bonus2": 1
             }),
         new CompanionBase(45, <CompanionModel>{
                 "id": "w7a1",
@@ -464,7 +644,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 10,
-                "x5": 65
+                "x5": 65,
+                "x6": 1750,
+                "x7": 100,
+                "desc2": "2.50x Coins from monsters",
+                "bonus2": 1.5
             }),
         new CompanionBase(46, <CompanionModel>{
                 "id": "coconut",
@@ -474,7 +658,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -24,
                 "x4": 5,
-                "x5": 60
+                "x5": 60,
+                "x6": 1200,
+                "x7": 90,
+                "desc2": "+25% faster Alchemy Brew Speed",
+                "bonus2": 25
             }),
         new CompanionBase(47, <CompanionModel>{
                 "id": "snakeG",
@@ -484,7 +672,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -9,
                 "x4": 5,
-                "x5": 55
+                "x5": 55,
+                "x6": 900,
+                "x7": 80,
+                "desc2": "+15% Class EXP",
+                "bonus2": 15
             }),
         new CompanionBase(48, <CompanionModel>{
                 "id": "mushP",
@@ -494,7 +686,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 5,
-                "x5": 50
+                "x5": 50,
+                "x6": 600,
+                "x7": 70,
+                "desc2": "+7% Golden Food bonus",
+                "bonus2": 7
             }),
         new CompanionBase(49, <CompanionModel>{
                 "id": "bubba",
@@ -504,7 +700,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -37,
                 "x4": 5,
-                "x5": 165
+                "x5": 165,
+                "x6": 4500,
+                "x7": 280,
+                "desc2": "{50% Gallery Bonus Multi (World 7 feature)",
+                "bonus2": 50
             }),
         new CompanionBase(50, <CompanionModel>{
                 "id": "snakeR",
@@ -514,7 +714,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -9,
                 "x4": 0,
-                "x5": 60
+                "x5": 60,
+                "x6": 450,
+                "x7": 80,
+                "desc2": "{50% Class EXP, {50% Drop Rate, 1.01x Class EXP, and 1.01x Drop Rate",
+                "bonus2": 50
             }),
         new CompanionBase(51, <CompanionModel>{
                 "id": "w6c2b",
@@ -524,7 +728,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 100,
-                "x5": 130
+                "x5": 130,
+                "x6": 2900,
+                "x7": 225,
+                "desc2": "5x bonuses from Orion, Poppy, and Bubba (and all future Clickers)",
+                "bonus2": 4
             }),
         new CompanionBase(52, <CompanionModel>{
                 "id": "w7b5",
@@ -534,7 +742,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -18,
                 "x4": 1,
-                "x5": 120
+                "x5": 120,
+                "x6": 2500,
+                "x7": 180,
+                "desc2": "1.80x Research EXP gain (World 7 feature)",
+                "bonus2": 0.8
             }),
         new CompanionBase(53, <CompanionModel>{
                 "id": "w7b1b",
@@ -544,7 +756,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -18,
                 "x4": 1,
-                "x5": 140
+                "x5": 140,
+                "x6": 2800,
+                "x7": 220,
+                "desc2": "200x Gaming Bits gained (World 5 feature)",
+                "bonus2": 199
             }),
         new CompanionBase(54, <CompanionModel>{
                 "id": "w7b6b",
@@ -554,7 +770,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -26,
                 "x4": 1,
-                "x5": 165
+                "x5": 165,
+                "x6": 3900,
+                "x7": 250,
+                "desc2": "{1 new Research Shape, and a new 1.15x Research EXP multi",
+                "bonus2": 1
             }),
         new CompanionBase(55, <CompanionModel>{
                 "id": "w7b11",
@@ -564,7 +784,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -28,
                 "x4": 1,
-                "x5": 200
+                "x5": 200,
+                "x6": 4900,
+                "x7": 300,
+                "desc2": "Multiplies ALL Research Grid bonuses by 1.20x (World 7 feature)",
+                "bonus2": 20
             }),
         new CompanionBase(56, <CompanionModel>{
                 "id": "w7b10",
@@ -574,7 +798,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -30,
                 "x4": 1,
-                "x5": 260
+                "x5": 260,
+                "x6": 5400,
+                "x7": 370,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(57, <CompanionModel>{
                 "id": "w7b12",
@@ -584,7 +812,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -41,
                 "x4": 1,
-                "x5": 300
+                "x5": 300,
+                "x6": 5900,
+                "x7": 430,
+                "desc2": "Glimbo's Swap Meet's prices are 15.00x cheaper (World 7 feature)",
+                "bonus2": 93.34
             }),
         new CompanionBase(58, <CompanionModel>{
                 "id": "bubbab",
@@ -594,7 +826,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -35,
                 "x4": 1,
-                "x5": 420
+                "x5": 420,
+                "x6": 7000,
+                "x7": 600,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(59, <CompanionModel>{
                 "id": "acorn",
@@ -604,7 +840,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 60
+                "x5": 60,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(60, <CompanionModel>{
                 "id": "babaHour",
@@ -614,7 +854,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 150
+                "x5": 150,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(61, <CompanionModel>{
                 "id": "babayaga",
@@ -624,7 +868,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 150
+                "x5": 150,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(62, <CompanionModel>{
                 "id": "branch",
@@ -634,7 +882,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 55
+                "x5": 55,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(63, <CompanionModel>{
                 "id": "carrotO",
@@ -644,7 +896,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 80
+                "x5": 80,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(64, <CompanionModel>{
                 "id": "caveA",
@@ -654,7 +910,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(65, <CompanionModel>{
                 "id": "caveB",
@@ -664,7 +924,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(66, <CompanionModel>{
                 "id": "crabcake",
@@ -674,7 +938,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 60
+                "x5": 60,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(67, <CompanionModel>{
                 "id": "crabcakeB",
@@ -684,7 +952,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(68, <CompanionModel>{
                 "id": "Crystal0",
@@ -694,7 +966,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 105
+                "x5": 105,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(69, <CompanionModel>{
                 "id": "Crystal1",
@@ -704,7 +980,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 105
+                "x5": 105,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(70, <CompanionModel>{
                 "id": "Crystal2",
@@ -714,7 +994,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(71, <CompanionModel>{
                 "id": "Crystal5",
@@ -724,7 +1008,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(72, <CompanionModel>{
                 "id": "demonP",
@@ -734,7 +1022,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(73, <CompanionModel>{
                 "id": "frogGG",
@@ -744,7 +1036,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 125
+                "x5": 125,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(74, <CompanionModel>{
                 "id": "frogR",
@@ -754,7 +1050,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 120
+                "x5": 120,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(75, <CompanionModel>{
                 "id": "frogY",
@@ -764,7 +1064,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 110
+                "x5": 110,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(76, <CompanionModel>{
                 "id": "ghost",
@@ -774,7 +1078,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(77, <CompanionModel>{
                 "id": "goblinG",
@@ -784,7 +1092,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 45
+                "x5": 45,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(78, <CompanionModel>{
                 "id": "mamoth",
@@ -794,7 +1106,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(79, <CompanionModel>{
                 "id": "mimicA",
@@ -804,7 +1120,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 40
+                "x5": 40,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(80, <CompanionModel>{
                 "id": "moonman",
@@ -814,7 +1134,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 70
+                "x5": 70,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(81, <CompanionModel>{
                 "id": "mushR",
@@ -824,7 +1148,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 40
+                "x5": 40,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(82, <CompanionModel>{
                 "id": "mushW",
@@ -834,7 +1162,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(83, <CompanionModel>{
                 "id": "pincermin",
@@ -844,7 +1176,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 95
+                "x5": 95,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(84, <CompanionModel>{
                 "id": "plank",
@@ -854,7 +1190,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 50
+                "x5": 50,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(85, <CompanionModel>{
                 "id": "potatoB",
@@ -864,7 +1204,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 110
+                "x5": 110,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(86, <CompanionModel>{
                 "id": "ratB",
@@ -874,7 +1218,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 90
+                "x5": 90,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(87, <CompanionModel>{
                 "id": "rift1",
@@ -884,7 +1232,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -15,
                 "x4": 1,
-                "x5": 160
+                "x5": 160,
+                "x6": 3000,
+                "x7": 240,
+                "desc2": "4x Cooking Mastery EXP gain and {7 PTS for Cooking Mastery",
+                "bonus2": 1.5
             }),
         new CompanionBase(88, <CompanionModel>{
                 "id": "rift4",
@@ -894,7 +1246,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -11,
                 "x4": 1,
-                "x5": 170
+                "x5": 170,
+                "x6": 3500,
+                "x7": 255,
+                "desc2": "{75% Prisma Bubble bonus multi and {7 Prisma Bubbles",
+                "bonus2": 1.5
             }),
         new CompanionBase(89, <CompanionModel>{
                 "id": "sheepB",
@@ -904,7 +1260,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(90, <CompanionModel>{
                 "id": "sandcastle",
@@ -914,7 +1274,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 45
+                "x5": 45,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(91, <CompanionModel>{
                 "id": "sandgiant",
@@ -924,7 +1288,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 105
+                "x5": 105,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(92, <CompanionModel>{
                 "id": "shovelR",
@@ -934,7 +1302,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 50
+                "x5": 50,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(93, <CompanionModel>{
                 "id": "shovel",
@@ -944,7 +1316,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(94, <CompanionModel>{
                 "id": "skele",
@@ -954,7 +1330,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(95, <CompanionModel>{
                 "id": "skele2",
@@ -964,7 +1344,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(96, <CompanionModel>{
                 "id": "slimeB",
@@ -974,7 +1358,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(97, <CompanionModel>{
                 "id": "slimmer",
@@ -984,7 +1372,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(98, <CompanionModel>{
                 "id": "snailZ",
@@ -994,7 +1386,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 115
+                "x5": 115,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(99, <CompanionModel>{
                 "id": "snakeB",
@@ -1004,7 +1400,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 1500,
+                "x7": 140,
+                "desc2": "All Upgrade Vault upgrades are 75% cheaper!",
+                "bonus2": 75
             }),
         new CompanionBase(100, <CompanionModel>{
                 "id": "snakeY",
@@ -1014,7 +1414,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(101, <CompanionModel>{
                 "id": "snowball",
@@ -1024,7 +1428,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(102, <CompanionModel>{
                 "id": "speaker",
@@ -1034,7 +1442,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(103, <CompanionModel>{
                 "id": "steak",
@@ -1044,7 +1456,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 85
+                "x5": 85,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(104, <CompanionModel>{
                 "id": "steakR",
@@ -1054,7 +1470,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(105, <CompanionModel>{
                 "id": "thermostat",
@@ -1064,7 +1484,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(106, <CompanionModel>{
                 "id": "w4a2",
@@ -1074,7 +1498,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(107, <CompanionModel>{
                 "id": "w4a3",
@@ -1084,7 +1512,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(108, <CompanionModel>{
                 "id": "w4b2",
@@ -1094,7 +1526,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(109, <CompanionModel>{
                 "id": "w4b3",
@@ -1104,7 +1540,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(110, <CompanionModel>{
                 "id": "w4b4",
@@ -1114,7 +1554,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(111, <CompanionModel>{
                 "id": "w4c1",
@@ -1124,7 +1568,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 60
+                "x5": 60,
+                "x6": 1200,
+                "x7": 100,
+                "desc2": "{150% Class EXP and Drop Rate",
+                "bonus2": 150
             }),
         new CompanionBase(112, <CompanionModel>{
                 "id": "w4c2",
@@ -1134,7 +1582,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(113, <CompanionModel>{
                 "id": "w4c3",
@@ -1144,7 +1596,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(114, <CompanionModel>{
                 "id": "w4c4",
@@ -1154,7 +1610,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(115, <CompanionModel>{
                 "id": "w5a1",
@@ -1164,7 +1624,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(116, <CompanionModel>{
                 "id": "w5a2",
@@ -1174,7 +1638,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(117, <CompanionModel>{
                 "id": "w5a3",
@@ -1184,7 +1652,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(118, <CompanionModel>{
                 "id": "w5a4",
@@ -1194,7 +1666,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(119, <CompanionModel>{
                 "id": "w5a5",
@@ -1204,7 +1680,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(120, <CompanionModel>{
                 "id": "w5b3",
@@ -1214,7 +1694,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(121, <CompanionModel>{
                 "id": "w5b4",
@@ -1224,7 +1708,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(122, <CompanionModel>{
                 "id": "w5b5",
@@ -1234,7 +1722,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(123, <CompanionModel>{
                 "id": "w5c1",
@@ -1244,7 +1736,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(124, <CompanionModel>{
                 "id": "w5c2",
@@ -1254,7 +1750,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(125, <CompanionModel>{
                 "id": "w6a1",
@@ -1264,7 +1764,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(126, <CompanionModel>{
                 "id": "w6a2",
@@ -1274,7 +1778,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(127, <CompanionModel>{
                 "id": "w6a3",
@@ -1284,7 +1792,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(128, <CompanionModel>{
                 "id": "w6a4",
@@ -1294,7 +1806,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -4,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 1500,
+                "x7": 140,
+                "desc2": "{300% Class EXP and 1.75x Class EXP Multi",
+                "bonus2": 300
             }),
         new CompanionBase(129, <CompanionModel>{
                 "id": "w6a5",
@@ -1304,7 +1820,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(130, <CompanionModel>{
                 "id": "w6b1",
@@ -1314,7 +1834,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(131, <CompanionModel>{
                 "id": "w6b2",
@@ -1324,7 +1848,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(132, <CompanionModel>{
                 "id": "w6b3",
@@ -1334,7 +1862,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -18,
                 "x4": 1,
-                "x5": 175
+                "x5": 175,
+                "x6": 3500,
+                "x7": 265,
+                "desc2": "{300% Drop Rate and 1.70x Drop Rate Multi",
+                "bonus2": 300
             }),
         new CompanionBase(133, <CompanionModel>{
                 "id": "w6c1",
@@ -1344,7 +1876,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(134, <CompanionModel>{
                 "id": "w6c2",
@@ -1354,7 +1890,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(135, <CompanionModel>{
                 "id": "w6d1",
@@ -1364,7 +1904,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 195
+                "x5": 195,
+                "x6": 4300,
+                "x7": 300,
+                "desc2": "3x LVs for Monuments Bonuses when selecting Rewards!",
+                "bonus2": 200
             }),
         new CompanionBase(136, <CompanionModel>{
                 "id": "w6d2",
@@ -1374,7 +1918,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(137, <CompanionModel>{
                 "id": "w7a2",
@@ -1384,7 +1932,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(138, <CompanionModel>{
                 "id": "w7a6",
@@ -1394,7 +1946,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(139, <CompanionModel>{
                 "id": "w7a9",
@@ -1404,7 +1960,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(140, <CompanionModel>{
                 "id": "w7a11",
@@ -1414,17 +1974,25 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(141, <CompanionModel>{
                 "id": "w7a12",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "3x Resources from Outposts for Royal Guardian",
+                "bonus": 2,
+                "x1": -31,
                 "x2": 0,
-                "x3": 0,
+                "x3": -35,
                 "x4": 1,
-                "x5": 100
+                "x5": 200,
+                "x6": 4400,
+                "x7": 310,
+                "desc2": "5x Resources from Outposts for Royal Guardian",
+                "bonus2": 4
             }),
         new CompanionBase(142, <CompanionModel>{
                 "id": "w7b1",
@@ -1434,7 +2002,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(143, <CompanionModel>{
                 "id": "w7b2",
@@ -1444,7 +2016,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 1,
-                "x5": 190
+                "x5": 190,
+                "x6": 3700,
+                "x7": 280,
+                "desc2": "30x total Spelunking POW, and 3x Minehead Currency Gain!",
+                "bonus2": 30
             }),
         new CompanionBase(144, <CompanionModel>{
                 "id": "w7b3",
@@ -1454,7 +2030,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(145, <CompanionModel>{
                 "id": "w7b4",
@@ -1464,7 +2044,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 180
+                "x5": 180,
+                "x6": 3000,
+                "x7": 275,
+                "desc2": "4x Class EXP gain",
+                "bonus2": 3
             }),
         new CompanionBase(146, <CompanionModel>{
                 "id": "w7b6",
@@ -1474,7 +2058,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(147, <CompanionModel>{
                 "id": "w7b7",
@@ -1484,7 +2072,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -33,
                 "x4": 1,
-                "x5": 160
+                "x5": 160,
+                "x6": 2750,
+                "x7": 240,
+                "desc2": "All bonuses from The Button in W7 are 1.75x bigger",
+                "bonus2": 75
             }),
         new CompanionBase(148, <CompanionModel>{
                 "id": "w7b8zzz",
@@ -1494,7 +2086,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(149, <CompanionModel>{
                 "id": "w7b9zzz",
@@ -1504,7 +2100,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100
+                "x5": 100,
+                "x6": 9999,
+                "x7": 99,
+                "desc2": "Not officially in the game and may never be",
+                "bonus2": 1
             }),
         new CompanionBase(150, <CompanionModel>{
                 "id": "T1a",
@@ -1514,7 +2114,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(151, <CompanionModel>{
                 "id": "T1b",
@@ -1524,7 +2128,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -19,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(152, <CompanionModel>{
                 "id": "T1c",
@@ -1534,7 +2142,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -24,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(153, <CompanionModel>{
                 "id": "rift5",
@@ -1544,7 +2156,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -20,
                 "x4": 1,
-                "x5": 225
+                "x5": 225,
+                "x6": 4500,
+                "x7": 325,
+                "desc2": "{15 Research PTS, {30% Research AFK Gains, 3x Research EXP Gain, and {1 Magnifier",
+                "bonus2": 1
             }),
         new CompanionBase(154, <CompanionModel>{
                 "id": "w7b3b",
@@ -1554,7 +2170,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -22,
                 "x4": 1,
-                "x5": 160
+                "x5": 160,
+                "x6": 2800,
+                "x7": 230,
+                "desc2": "2x Kills multi, and 3x Artifact Find Chance for Sailing!",
+                "bonus2": 1
             }),
         new CompanionBase(155, <CompanionModel>{
                 "id": "w4b4b",
@@ -1564,7 +2184,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -9,
                 "x4": 1,
-                "x5": 175
+                "x5": 175,
+                "x6": 3000,
+                "x7": 250,
+                "desc2": "{4000% additive Gold Food bonus effect",
+                "bonus2": 4000
             }),
         new CompanionBase(156, <CompanionModel>{
                 "id": "slimeR",
@@ -1574,7 +2198,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -2,
                 "x4": 1,
-                "x5": 60
+                "x5": 60,
+                "x6": 500,
+                "x7": 90,
+                "desc2": "{25% Total Damage",
+                "bonus2": 25
             }),
         new CompanionBase(157, <CompanionModel>{
                 "id": "Pet7",
@@ -1584,7 +2212,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -10,
                 "x4": 1,
-                "x5": 110
+                "x5": 110,
+                "x6": 2100,
+                "x7": 175,
+                "desc2": "3x Construction Build Speed",
+                "bonus2": 200
             }),
         new CompanionBase(158, <CompanionModel>{
                 "id": "slugG",
@@ -1594,7 +2226,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 5,
                 "x4": 1,
-                "x5": 65
+                "x5": 65,
+                "x6": 1250,
+                "x7": 100,
+                "desc2": "{20% Drop Rate",
+                "bonus2": 20
             }),
         new CompanionBase(159, <CompanionModel>{
                 "id": "PotG",
@@ -1604,7 +2240,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 1,
-                "x5": 110
+                "x5": 110,
+                "x6": 2000,
+                "x7": 170,
+                "desc2": "4x Coins from Mobs",
+                "bonus2": 3
             }),
         new CompanionBase(160, <CompanionModel>{
                 "id": "slimeB",
@@ -1614,7 +2254,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -34,
                 "x4": 1,
-                "x5": 230
+                "x5": 230,
+                "x6": 5400,
+                "x7": 350,
+                "desc2": "5x Total Damage, 9x Class EXP gain, 2x Drop Rate",
+                "bonus2": 1
             }),
         new CompanionBase(161, <CompanionModel>{
                 "id": "poppy",
@@ -1624,7 +2268,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -15,
                 "x4": 1,
-                "x5": 235
+                "x5": 235,
+                "x6": 5800,
+                "x7": 380,
+                "desc2": "2.5x bonuses from Bonus Ballot and Multi Meritocracy",
+                "bonus2": 150
             }),
         new CompanionBase(162, <CompanionModel>{
                 "id": "w6b2b",
@@ -1634,7 +2282,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 165
+                "x5": 165,
+                "x6": 3000,
+                "x7": 245,
+                "desc2": "All meals are 8x cheaper to level up, and give 1.40x higher bonuses!",
+                "bonus2": 1.6
             }),
         new CompanionBase(163, <CompanionModel>{
                 "id": "w5b5b",
@@ -1644,7 +2296,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 190
+                "x5": 190,
+                "x6": 3750,
+                "x7": 290,
+                "desc2": "150x Jade Gain, 60x Ninja Stealth, and 3.25x Sneaking EXP",
+                "bonus2": 1.5
             }),
         new CompanionBase(164, <CompanionModel>{
                 "id": "T2a",
@@ -1654,7 +2310,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(165, <CompanionModel>{
                 "id": "T2b",
@@ -1664,7 +2324,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(166, <CompanionModel>{
                 "id": "T2c",
@@ -1674,17 +2338,25 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -5,
                 "x4": 1,
-                "x5": 10
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             }),
         new CompanionBase(167, <CompanionModel>{
                 "id": "fm frog",
-                "desc": "Thank you for rescuing me from the Fortune Mill!",
+                "desc": "Thanks a million for rescuing me from the Fortune Mill!",
                 "bonus": 1,
                 "x1": -18,
                 "x2": 0,
                 "x3": -34,
                 "x4": 1,
-                "x5": 177
+                "x5": 177,
+                "x6": 1000,
+                "x7": 277,
+                "desc2": "Thanks a million for rescuing me from the Fortune Mill, for real!",
+                "bonus2": 1
             }),
         new CompanionBase(168, <CompanionModel>{
                 "id": "caveD",
@@ -1694,7 +2366,11 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -33,
                 "x4": 1,
-                "x5": 210
+                "x5": 210,
+                "x6": 4000,
+                "x7": 310,
+                "desc2": "1.75x Damage, 1.60x Class EXP, 1.45x Drop Rate, and 1.30x extra Kills",
+                "bonus2": 1.5
             }),
         new CompanionBase(169, <CompanionModel>{
                 "id": "fm goose",
@@ -1704,7 +2380,67 @@ export const initCompanionRepo = () => {
                 "x2": 0,
                 "x3": -23,
                 "x4": 1,
-                "x5": 250
+                "x5": 250,
+                "x6": 5900,
+                "x7": 380,
+                "desc2": "All daily ribbons have a 50% chance to be +1 Tier, 40% for +4 Tiers, and 10% for +8 Tiers",
+                "bonus2": 1
+            }),
+        new CompanionBase(170, <CompanionModel>{
+                "id": "r0a",
+                "desc": "1.25x Total Damage",
+                "bonus": 0.25,
+                "x1": -8,
+                "x2": 0,
+                "x3": -17,
+                "x4": 1,
+                "x5": 130,
+                "x6": 2500,
+                "x7": 225,
+                "desc2": "1.35x Total Damage",
+                "bonus2": 0.35
+            }),
+        new CompanionBase(171, <CompanionModel>{
+                "id": "r0b",
+                "desc": "{100% additive Crystal Monster Spawn chance",
+                "bonus": 100,
+                "x1": -28,
+                "x2": 0,
+                "x3": -30,
+                "x4": 1,
+                "x5": 180,
+                "x6": 4400,
+                "x7": 300,
+                "desc2": "{175% additive Crystal Monster Spawn chance",
+                "bonus2": 175
+            }),
+        new CompanionBase(172, <CompanionModel>{
+                "id": "r0c",
+                "desc": "{20% Marble and Parchment drop rate for Royal Guardians",
+                "bonus": 20,
+                "x1": -48,
+                "x2": 0,
+                "x3": -33,
+                "x4": 1,
+                "x5": 220,
+                "x6": 5500,
+                "x7": 390,
+                "desc2": "{35% Marble and Parchment drop rate for Royal Guardians",
+                "bonus2": 35
+            }),
+        new CompanionBase(173, <CompanionModel>{
+                "id": "r0d",
+                "desc": "The lord of amber herself is keeping her bonus a secret... for now...",
+                "bonus": 1,
+                "x1": -100,
+                "x2": 0,
+                "x3": -60,
+                "x4": 1,
+                "x5": 480,
+                "x6": 7200,
+                "x7": 650,
+                "desc2": "Bonus still unknown... for now...",
+                "bonus2": 1
             })    
 ]
 }

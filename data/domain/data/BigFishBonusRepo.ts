@@ -47,6 +47,13 @@ export const initBigFishBonusRepo = () => {
                 "x0": 10,
                 "x1": 38,
                 "filler": "filler"
+            }),
+        new BigFishBonusBase(6, <BigFishBonusModel>{
+                "name": "Advice on Settlement",
+                "desc": "Clear mobs build outpost ez. @ +{% extra mob clear for Royal Guardian",
+                "x0": 15,
+                "x1": 41,
+                "filler": "filler"
             })    
 ]
 }

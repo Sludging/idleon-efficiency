@@ -89,12 +89,21 @@ export const initZenithMarketRepo = () => {
             }),
         new ZenithMarketBase(9, <ZenithMarketModel>{
                 "name": "CLASSY GOGO",
-                "unlockCost": 25000,
+                "unlockCost": 10000,
                 "costExponent": 1.115,
                 "maxLevel": 100,
                 "bonusPerLevel": 1,
                 "x1": 1,
-                "description": "}x Class EXP gain, for now..."
+                "description": "}x Class EXP gain"
+            }),
+        new ZenithMarketBase(10, <ZenithMarketModel>{
+                "name": "KINGDOMERCIAL",
+                "unlockCost": 25000,
+                "costExponent": 1.41,
+                "maxLevel": 100,
+                "bonusPerLevel": 1,
+                "x1": 1,
+                "description": "}x Resource gains for Royal Guardian"
             })    
 ]
 }

@@ -8563,7 +8563,7 @@ export const initEnemyRepo = () => {
                 "mapData": undefined,
                 "navigation": <EnemyNavModel>{
                     "prev": "Boss6B",
-                    "next": "Blank",
+                    "next": "fm_rat",
                     "hasCrystal": true,
                     "crystalName": undefined,
                     "hasCard": true
@@ -10758,6 +10758,45 @@ export const initEnemyRepo = () => {
                 "navigation": undefined,
                 "bossData": undefined
             }),
+        new EnemyBase("fm_rat", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Verminous",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 117,
+                    "MonsterOffsetX": 38,
+                    "MonsterOffsetY": 47,
+                    "HeightOfMonster": 100,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 100,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 100000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 1,
+                    "ExpType": 0,
+                    "Defence": 1,
+                    "MoveSPEED": 4,
+                    "Damages": [2, 1],
+                    "DefFor0": 0.5
+                },
+                "drops": <EnemyTableModel>{
+                    "drops": [
+                        <CoinDropModel>{"item": "COIN", "quantity": 69, "chance": 0, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Sewers2", "quantity": 1, "chance": 1, "questLink": "N/A"},
+                        <CardDropModel>{"item": "CardsZ27", "quantity": 1, "chance": 1e-07, "questLink": "N/A"}
+                    ]
+                },
+                "mapData": undefined,
+                "navigation": <EnemyNavModel>{
+                    "prev": "Boss6C",
+                    "next": "Blank",
+                    "hasCrystal": true,
+                    "crystalName": undefined,
+                    "hasCard": true
+                },
+                "bossData": undefined
+            }),
         new EnemyBase("T1a", <EnemyModel>{
                 "details": <EnemyDetailsModel>{
                     "Name": "Bronze Champion Ram",
@@ -10912,6 +10951,114 @@ export const initEnemyRepo = () => {
                     "ExpType": 0,
                     "Defence": 90000,
                     "MoveSPEED": 6,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("r0a", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Magician Grub",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 50,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 58,
+                    "DeathFrame": 21,
+                    "MonsterHPTotal": 200000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 4,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("r0b", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Armadillo",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 70,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 8,
+                    "RespawnTime": 58,
+                    "DeathFrame": 18,
+                    "MonsterHPTotal": 200000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 4,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("r0c", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Imperial Ogre",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 90,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 9,
+                    "RespawnTime": 58,
+                    "DeathFrame": 24,
+                    "MonsterHPTotal": 200000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 3,
+                    "Damages": [80000, 1],
+                    "DefFor0": 63171.2
+                },
+                "drops": undefined,
+                "mapData": undefined,
+                "navigation": undefined,
+                "bossData": undefined
+            }),
+        new EnemyBase("r0d", <EnemyModel>{
+                "details": <EnemyDetailsModel>{
+                    "Name": "Pipsqueak",
+                    "AFKtype": AFKTypeEnum.Fighting,
+                    "MonsterFace": 79,
+                    "MonsterOffsetX": 34,
+                    "MonsterOffsetY": 49,
+                    "HeightOfMonster": 146,
+                    "MonsterMoving": 1,
+                    "MovingFrame": 12,
+                    "RespawnTime": 58,
+                    "DeathFrame": 22,
+                    "MonsterHPTotal": 200000,
+                    "Type": EnemyTypeEnum.monsterType,
+                    "SpecialType": "",
+                    "ExpGiven": 7000000,
+                    "ExpType": 0,
+                    "Defence": 90000,
+                    "MoveSPEED": 3,
                     "Damages": [80000, 1],
                     "DefFor0": 63171.2
                 },

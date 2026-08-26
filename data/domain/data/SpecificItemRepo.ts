@@ -7977,6 +7977,69 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentRingsChat13", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat13",
+                "displayName": "Bronze Div Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat14", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat14",
+                "displayName": "Bronze Div Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentRingsChat15", <ArmourItemModel>{
+                "internalName": "EquipmentRingsChat15",
+                "displayName": "Bronze Div Ring",
+                "sellPrice": 2500,
+                "typeGen": TypeGenEnum.aChatRingMTX,
+                "Type": "Chat Ring",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentCape0", <ArmourItemModel>{
                 "internalName": "EquipmentCape0",
                 "displayName": "Angel Wings",
@@ -8414,6 +8477,48 @@ export const initSpecificItemRepo = () => {
                 "Defence": 0,
                 "miscUp1": "300% Bigger Damage",
                 "miscUp2": "10% Afk Gains Multi",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape21", <ArmourItemModel>{
+                "internalName": "EquipmentCape21",
+                "displayName": "Crystal Crescent",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 30,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "200% Class Exp Multi",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("EquipmentCape22", <ArmourItemModel>{
+                "internalName": "EquipmentCape22",
+                "displayName": "Bladed Rucksack",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aCape,
+                "Type": "Cape",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 50,
+                "STR": 0,
+                "AGI": 0,
+                "WIS": 0,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "500% Bigger Damage",
+                "miscUp2": "00",
                 "Upgrade_Slots_Left": 0,
                 "Skill": "",
                 "Skill_Power": 0
@@ -19640,6 +19745,27 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentGown8", <ArmourItemModel>{
+                "internalName": "EquipmentGown8",
+                "displayName": "Arctic Furcoat",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aGown,
+                "Type": "Attire",
+                "lvReqToCraft": 55,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 35,
+                "STR": 20,
+                "AGI": 20,
+                "WIS": 20,
+                "LUK": 20,
+                "Defence": 30,
+                "miscUp1": "250% Bonus Kills",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 0,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
         new BaseItemBase("EquipmentKeychain0", <KeychainItemModel>{
                 "internalName": "EquipmentKeychain0",
                 "displayName": "Simple Key Chain",
@@ -23932,6 +24058,14 @@ export const initSpecificItemRepo = () => {
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Box",
                 "description": "Hold down to get a random reward added directly to your account! It could be a Prisma Fragment for Alchemy, Gold Balls for the Arcade Shop, or even Cosmic Balls to super boost your maxed out Arcade Shop bonuses! "
+            }),
+        new BaseItemBase("Orblet", <DescItemModel>{
+                "internalName": "Orblet",
+                "displayName": "Orblet",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Currency",
+                "description": "Spend these in the Lil' Orblet Shop, opened by using the Royal Guardian talent! "
             }),
         new BaseItemBase("EquipmentSmithingTabs2", <DescItemModel>{
                 "internalName": "EquipmentSmithingTabs2",
@@ -32618,6 +32752,107 @@ export const initSpecificItemRepo = () => {
                 "Skill": "",
                 "Skill_Power": 0
             }),
+        new BaseItemBase("EquipmentHats140", <ArmourItemModel>{
+                "internalName": "EquipmentHats140",
+                "displayName": "Legion Commander Bicorne",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.aHelmetMTX,
+                "Type": "Premium Helmet",
+                "lvReqToCraft": 5,
+                "lvReqToEquip": 1,
+                "Class": ClassTypeEnum.All,
+                "Weapon_Power": 0,
+                "STR": 1,
+                "AGI": 1,
+                "WIS": 1,
+                "LUK": 0,
+                "Defence": 0,
+                "miscUp1": "3% Marble Drop",
+                "miscUp2": "00",
+                "Upgrade_Slots_Left": 5,
+                "Skill": "",
+                "Skill_Power": 0
+            }),
+        new BaseItemBase("RGenh", <DescItemModel>{
+                "internalName": "RGenh",
+                "displayName": "Parchment of Enchantment",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used to enchant the Royal Statues, if you're lucky, to boost their bonuses! "
+            }),
+        new BaseItemBase("RGenhB", <DescItemModel>{
+                "internalName": "RGenhB",
+                "displayName": "Parchment of Cease and Desist",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "You are not permitted to farm thine unholy rats, only those deemed Royal Guardians may do so. "
+            }),
+        new BaseItemBase("RGshard0", <DescItemModel>{
+                "internalName": "RGshard0",
+                "displayName": "Leafy Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 1st Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard1", <DescItemModel>{
+                "internalName": "RGshard1",
+                "displayName": "Sandy Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 2nd Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard2", <DescItemModel>{
+                "internalName": "RGshard2",
+                "displayName": "Frosty Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 3rd Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard3", <DescItemModel>{
+                "internalName": "RGshard3",
+                "displayName": "Sparkly Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 4th Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard4", <DescItemModel>{
+                "internalName": "RGshard4",
+                "displayName": "Toasty Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 5th Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard5", <DescItemModel>{
+                "internalName": "RGshard5",
+                "displayName": "Wispy Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 6th Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard6", <DescItemModel>{
+                "internalName": "RGshard6",
+                "displayName": "Briny Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 7th Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
+        new BaseItemBase("RGshard7", <DescItemModel>{
+                "internalName": "RGshard7",
+                "displayName": "NoNotYety Marble",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dQuest,
+                "Type": "Royal Usable",
+                "description": "Used at the Royal Castle for a chance to restore the 8th Royal Statue, finally pulling back the curtain and unveiling its brilliance! "
+            }),
         new BaseItemBase("CardsA0", <CardItemModel>{
                 "internalName": "CardsA0",
                 "displayName": "Green Mushroom Card",
@@ -37032,6 +37267,22 @@ export const initSpecificItemRepo = () => {
                     "order": 1
                 },
                 "dropChance": 0.99
+            }),
+        new BaseItemBase("CardsZ27", <CardItemModel>{
+                "internalName": "CardsZ27",
+                "displayName": "Verminous Card",
+                "sellPrice": 1,
+                "typeGen": TypeGenEnum.dCard,
+                "Type": "Card",
+                "cardData": <CardDataModel>{
+                    "cardID": "Z27",
+                    "category": "Bosses",
+                    "perTier": 1e+08,
+                    "effect": "+{% Masterclass Drops (Passive)",
+                    "bonus": 1,
+                    "order": 29
+                },
+                "dropChance": 1e-07
             })    
 ]
 }

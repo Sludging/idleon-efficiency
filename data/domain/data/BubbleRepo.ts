@@ -354,12 +354,12 @@ export const initBubbleRepo = () => {
                     },
                     <BubbleModel>{
                         "cauldron": "Power Cauldron",
-                        "name": "Bubble",
-                        "x1": 99,
+                        "name": "Royal Riches",
+                        "x1": 20,
                         "x2": 40,
                         "func": "decay",
-                        "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
-                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "description": "+{% Resource Collection Rate for all of your Royal Guardian's Outposts",
+                        "requirements": [<ComponentModel>{"item": "w7B2", "quantity": 10000}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 20}],
                         "bonusKey": "W14"
                     },
                     <BubbleModel>{
@@ -369,7 +369,10 @@ export const initBubbleRepo = () => {
                         "x2": 40,
                         "func": "decay",
                         "description": "It's just a normal bubble. It doesn't have a bonus yet, it just floats and is round.",
-                        "requirements": [<ComponentModel>{"item": "FillerMaterial", "quantity": 2500}, <LiquidComponentModel>{"liquidNo": "4", "quantity": 6}],
+                        "requirements": [
+                            <ComponentModel>{"item": "FillerMaterial", "quantity": 50000},
+                            <LiquidComponentModel>{"liquidNo": "4", "quantity": 50}
+                        ],
                         "bonusKey": "W15"
                     }
                 ]

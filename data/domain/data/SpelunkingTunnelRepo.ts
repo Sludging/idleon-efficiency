@@ -999,7 +999,7 @@ export const initSpelunkingTunnelRepo = () => {
                 "index": 8,
                 "name": "Scoutpost",
                 "loreBonus": "Palette Colours now give 1.50x bonuses, and Palette Luck is +4% higher per Gaming LV",
-                "bossDepth": 55,
+                "bossDepth": 115,
                 "discoveries": [
                     <SpelunkingDiscoveryModel>{
                         "tunnelIndex": 8,
@@ -1149,7 +1149,7 @@ export const initSpelunkingTunnelRepo = () => {
                         "name": "DMK Snowgoon",
                         "x1": 30000000,
                         "x2": 120,
-                        "x3": 1000000,
+                        "x3": 1200000,
                         "x4": 1,
                         "x5": 1.32,
                         "x6": 140,
@@ -1170,10 +1170,187 @@ export const initSpelunkingTunnelRepo = () => {
             }),
         new SpelunkingTunnelBase(9, <SpelunkingTunnelModel>{
                 "index": 9,
-                "name": "Name10",
-                "loreBonus": "9",
-                "bossDepth": 60,
-                "discoveries": []
+                "name": "Exiled Throne",
+                "loreBonus": "1.50x chance for Marble Drops on Royal Guardians, and +50 Royal Guardian Talent PTS!",
+                "bossDepth": 130,
+                "discoveries": [
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Candles",
+                        "x1": 1,
+                        "x2": 2,
+                        "x3": 15000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 0,
+                        "x7": 1.75e+28
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Lil Jar",
+                        "x1": 2,
+                        "x2": 3,
+                        "x3": 20000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 5,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Wreath",
+                        "x1": 5,
+                        "x2": 5,
+                        "x3": 32000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 12,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Stool",
+                        "x1": 10,
+                        "x2": 8,
+                        "x3": 45000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 24,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Candlssimo",
+                        "x1": 50,
+                        "x2": 10,
+                        "x3": 65000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 33,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Vase of Air",
+                        "x1": 125,
+                        "x2": 15,
+                        "x3": 80000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 42,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Barrier Rope",
+                        "x1": 300,
+                        "x2": 25,
+                        "x3": 110000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 54,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Vase of Thistle",
+                        "x1": 750,
+                        "x2": 35,
+                        "x3": 140000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 68,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Chair",
+                        "x1": 3000,
+                        "x2": 40,
+                        "x3": 190000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 80,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Marble Urn",
+                        "x1": 15000,
+                        "x2": 50,
+                        "x3": 250000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 91,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Holy Visage",
+                        "x1": 60000,
+                        "x2": 60,
+                        "x3": 350000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 105,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Candelabra",
+                        "x1": 200000,
+                        "x2": 80,
+                        "x3": 600000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 120,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Squarelumn",
+                        "x1": 5000000,
+                        "x2": 100,
+                        "x3": 1000000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 140,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Crown Jewel",
+                        "x1": 20000000,
+                        "x2": 120,
+                        "x3": 1200000,
+                        "x4": 1,
+                        "x5": 1,
+                        "x6": 160,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Vase of Sanctimony",
+                        "x1": 60000000,
+                        "x2": 150,
+                        "x3": 1500000,
+                        "x4": 1,
+                        "x5": 1.35,
+                        "x6": 180,
+                        "x7": -1
+                    },
+                    <SpelunkingDiscoveryModel>{
+                        "tunnelIndex": 9,
+                        "name": "Esquire Morose",
+                        "x1": 10000000,
+                        "x2": 15000,
+                        "x3": 250000,
+                        "x4": 0,
+                        "x5": 1,
+                        "x6": 130,
+                        "x7": -1
+                    }
+                ]
             }),
         new SpelunkingTunnelBase(10, <SpelunkingTunnelModel>{
                 "index": 10,
