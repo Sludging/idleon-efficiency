@@ -18,6 +18,7 @@ import { MonumentUnlockModel } from "../../model/monumentUnlockModel";
 import { BellImprovementModel } from "../../model/bellImprovementModel";
 import { initBellImprovementRepo } from "../../data/BellImprovementRepo";
 import { Well } from "./well";
+import { Fountain } from "./fountain";
 import { lavaLog } from "../../../utility";
 import { TaskBoard } from "../../tasks";
 import { Tome } from "../../world-4/tome";
@@ -706,6 +707,7 @@ export class Hole extends Domain {
     monuments: Monuments = new Monuments();
     bell: Bell = new Bell();
     well: Well = new Well();
+    fountain: Fountain = new Fountain();
     resourceCavrens = new ResourceCavrens();
     harp: Harp = new Harp();
     lamp: Lamp = new Lamp();
@@ -741,6 +743,10 @@ export class Hole extends Domain {
     getMonumentBonus(monumentName: string, bonusIndex: number): number {
         const monument = this.monuments.monuments[monumentName];
         return monument.bonuses.find(bonus => bonus.index == bonusIndex)?.getBonus() ?? 0;
+    }
+
+    getFountainBonus(waterIndex: number, upgradeIndex: number): number {
+        return this.fountain.getBonus(waterIndex, upgradeIndex);
     }
 
     getMonumentBonusByText(text: string): number {
@@ -883,6 +889,7 @@ export class Hole extends Domain {
             cavren.resourceExtracted = holeData[11][cavren.index * 2] || 0;
         });
 
+        hole.fountain.parse(holeData);
         hole.well.parse(hole, holeData);
         // TODO: Finish this, missing information
         hole.harp.parse(holeData);

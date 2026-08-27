@@ -1,0 +1,111 @@
+{
+  "description": "Extract Fountain marble and total bonuses across water types and upgrade states",
+  "target": "Fountain total bonus",
+  "extractions": [
+    {
+      "label": "fountain_marble_bonus_0_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 8)",
+      "description": "Fountain marble bonus for water 0 upgrade 8 (zero marbleization branch)"
+    },
+    {
+      "label": "fountain_marble_bonus_0_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 13)",
+      "description": "Fountain marble bonus for water 0 upgrade 13 (positive marbleization branch)"
+    },
+    {
+      "label": "fountain_total_bonus_0_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 0)",
+      "description": "Fountain total bonus for water 0 upgrade 0"
+    },
+    {
+      "label": "fountain_total_bonus_0_1",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 1)",
+      "description": "Fountain total bonus for water 0 upgrade 1 (non-unit factor)"
+    },
+    {
+      "label": "fountain_total_bonus_0_5",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 5)",
+      "description": "Fountain total bonus for water 0 upgrade 5"
+    },
+    {
+      "label": "fountain_total_bonus_0_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 8)",
+      "description": "Fountain total bonus for water 0 upgrade 8 (zero marbleization branch)"
+    },
+    {
+      "label": "fountain_total_bonus_0_9",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 9)",
+      "description": "Fountain total bonus for water 0 upgrade 9"
+    },
+    {
+      "label": "fountain_total_bonus_0_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
+      "description": "Fountain total bonus for water 0 upgrade 13 (Bravery Monumental Boost)"
+    },
+    {
+      "label": "fountain_total_bonus_0_19",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 19)",
+      "description": "Fountain total bonus for water 0 upgrade 19 (last upgrade)"
+    },
+    {
+      "label": "fountain_total_bonus_1_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 0)",
+      "description": "Fountain total bonus for water 1 upgrade 0"
+    },
+    {
+      "label": "fountain_total_bonus_1_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 8)",
+      "description": "Fountain total bonus for water 1 upgrade 8 (zero marbleization branch)"
+    },
+    {
+      "label": "fountain_total_bonus_1_10",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 10)",
+      "description": "Fountain total bonus for water 1 upgrade 10 (non-marbleizable upgrade)"
+    },
+    {
+      "label": "fountain_total_bonus_1_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
+      "description": "Fountain total bonus for water 1 upgrade 13"
+    },
+    {
+      "label": "fountain_total_bonus_1_19",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 19)",
+      "description": "Fountain total bonus for water 1 upgrade 19 (last upgrade)"
+    },
+    {
+      "label": "fountain_total_bonus_2_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
+      "description": "Fountain total bonus for water 2 upgrade 0 (zero upgrade level)"
+    },
+    {
+      "label": "fountain_total_bonus_2_1",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
+      "description": "Fountain total bonus for water 2 upgrade 1 (large factor)"
+    },
+    {
+      "label": "fountain_total_bonus_2_2",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
+      "description": "Fountain total bonus for water 2 upgrade 2 (zero marbleization branch)"
+    },
+    {
+      "label": "fountain_total_bonus_2_8",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
+      "description": "Fountain total bonus for water 2 upgrade 8 (zero marbleization branch)"
+    },
+    {
+      "label": "fountain_total_bonus_2_12",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
+      "description": "Fountain total bonus for water 2 upgrade 12"
+    },
+    {
+      "label": "fountain_total_bonus_2_18",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 18)",
+      "description": "Fountain total bonus for water 2 upgrade 18"
+    },
+    {
+      "label": "fountain_total_bonus_2_19",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
+      "description": "Fountain total bonus for water 2 upgrade 19 (last upgrade)"
+    }
+  ]
+}
