@@ -28,6 +28,12 @@ export class Companion {
     }
 }
 
+/** Returns the numeric bonus exposed by an owned companion to game formulas. */
+export const getCompanionBonus = (companions: Companion[], index: number): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned ? companion.data.bonus : 0;
+};
+
 export class Companions extends Domain {
     constructor(public dataKey: string) {
         super(dataKey);

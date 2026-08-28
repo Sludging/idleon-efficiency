@@ -91,6 +91,7 @@ export class SkillMastery extends RiftBonus {
         [SkillsIndex.Sneaking]: 0,
         [SkillsIndex.Summoning]: 0,
         [SkillsIndex.Spelunking]: 0,
+        [SkillsIndex.Research]: 0,
     };
 
     getSkillRank = (skill: SkillsIndex) => {

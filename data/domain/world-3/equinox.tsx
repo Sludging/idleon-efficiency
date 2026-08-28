@@ -283,6 +283,11 @@ export class Equinox extends Domain {
     }
 }
 
+/** Converts a completed Equinox cloud challenge into the game's 0-or-1 bonus. */
+export const getCloudBonus = (equinox: Equinox, index: number): number => {
+    return equinox.challenges.find(challenge => challenge.index === index)?.getValue() ?? 0;
+};
+
 export function updateEquinoxBar(data: Map<string, any>) {
     const equinox = data.get("equinox") as Equinox;
     const alchemy = data.get("alchemy") as Alchemy
