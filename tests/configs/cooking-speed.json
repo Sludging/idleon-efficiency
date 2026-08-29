@@ -78,6 +78,11 @@
       "description": "Artifact 13 bonus"
     },
     {
+      "label": "button_bonus_7",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
+      "description": "The Button bonus applied to cooking speed"
+    },
+    {
       "label": "arcade_28_bonus",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
       "description": "Arcade 28 bonus"

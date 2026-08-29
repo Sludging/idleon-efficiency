@@ -57,7 +57,7 @@ describe('Cooking Domain - Meal Speed', () => {
       // Use custom matcher with detailed logging
       const ratio = domainResult / liveFinalSpeed;
       expect(domainResult).toMatchLiveGameWithDetails(liveFinalSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Kitchen 0 meal speed calculation',
         debugInfo: {
           ratio: ratio.toExponential(3),

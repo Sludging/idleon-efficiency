@@ -152,6 +152,7 @@ const domainList: Domain[] = [
     new Farming("farming"),
     new SushiStation("sushi"),
     new ResearchGrid("research"),
+    new StarSigns("starsigns"),
     new Button("button"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
