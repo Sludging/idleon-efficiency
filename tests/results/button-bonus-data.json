@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-08-28T05:08:23.293Z",
+  "extractions": {
+    "button_bonus_multi": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
+      "result": 1.59,
+      "description": "The dynamic multiplier applied to Button bonuses",
+      "extractedAt": "2026-08-28T05:08:23.319Z"
+    },
+    "button_bonus_0": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
+      "result": 31.8,
+      "description": "Representative Button bonus at the first category index",
+      "extractedAt": "2026-08-28T05:08:23.350Z"
+    },
+    "button_bonus_7": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
+      "result": 278.25,
+      "description": "Representative Button bonus at the downstream cooking consumer index",
+      "extractedAt": "2026-08-28T05:08:23.382Z"
+    },
+    "button_bonus_8": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
+      "result": 39.75,
+      "description": "Representative Button bonus at the final category index",
+      "extractedAt": "2026-08-28T05:08:23.411Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

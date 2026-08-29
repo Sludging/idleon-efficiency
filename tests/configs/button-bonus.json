@@ -1,0 +1,26 @@
+{
+  "description": "Extract representative The Button bonus calculations",
+  "target": "The Button bonuses",
+  "extractions": [
+    {
+      "label": "button_bonus_multi",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
+      "description": "The dynamic multiplier applied to Button bonuses"
+    },
+    {
+      "label": "button_bonus_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
+      "description": "Representative Button bonus at the first category index"
+    },
+    {
+      "label": "button_bonus_7",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
+      "description": "Representative Button bonus at the downstream cooking consumer index"
+    },
+    {
+      "label": "button_bonus_8",
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
+      "description": "Representative Button bonus at the final category index"
+    }
+  ]
+}

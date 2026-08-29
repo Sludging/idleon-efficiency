@@ -52,6 +52,7 @@ import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, up
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { SushiStation } from './world-7/sushi';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
+import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeScores } from './world-4/tome';
@@ -151,7 +152,7 @@ const domainList: Domain[] = [
     new Farming("farming"),
     new SushiStation("sushi"),
     new ResearchGrid("research"),
-    new StarSigns("starsigns"),
+    new Button("button"),
     new IslandExpeditions("islandExpeditions"),
     new Companions("companions"),
     new Tome("tome"),
@@ -245,7 +246,7 @@ const postProcessingMap: Record<string, Function> = {
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
-    "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
+    "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
     "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
