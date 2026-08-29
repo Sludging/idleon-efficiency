@@ -434,11 +434,11 @@ export class MonumentBonus {
     level: number = 0;
     monumentSelfBoost: number = 0;
     cosmoBonus: number = 0;
+    fountainBonus: number = 0;
 
     constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
 
     getBonus(): number {
-        // Placeholder variables for required data, to be replaced with actual data sources
         let bonusMultiplier = 1;
 
         // Apply ROG and Cosmo bonuses if i != 9
@@ -446,6 +446,9 @@ export class MonumentBonus {
             bonusMultiplier = 1 + this.monumentSelfBoost / 100;
             bonusMultiplier += this.cosmoBonus / 100;
         }
+
+        // Fountain bonuses apply to every monument bonus, including bonus 9.
+        bonusMultiplier *= 1 + this.fountainBonus / 100;
 
         if (this.data.multiplier < 30) {
             return this.level * this.data.multiplier * Math.max(1, bonusMultiplier);
@@ -848,6 +851,8 @@ export class Hole extends Domain {
             measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() || 0;
         });
 
+        hole.fountain.parse(holeData);
+
         // Monument Jazz
         const braveryMonument = hole.monuments.monuments["Bravery"];
         braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
@@ -870,6 +875,9 @@ export class Hole extends Domain {
                 bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
                 // Monumental Vibes
                 bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() || 0;
+                bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13);
+            });
+            monument.bonuses.forEach(bonus => {
                 bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
             });
         });
@@ -889,7 +897,6 @@ export class Hole extends Domain {
             cavren.resourceExtracted = holeData[11][cavren.index * 2] || 0;
         });
 
-        hole.fountain.parse(holeData);
         hole.well.parse(hole, holeData);
         // TODO: Finish this, missing information
         hole.harp.parse(holeData);

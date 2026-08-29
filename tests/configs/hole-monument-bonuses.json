@@ -1,0 +1,81 @@
+{
+  "description": "Extract representative Hole monument bonuses and calculated direct inputs",
+  "target": "Hole monument bonuses",
+  "extractions": [
+    {
+      "label": "fountain_total_bonus_0_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
+      "description": "Fountain total bonus for Bravery monument input"
+    },
+    {
+      "label": "fountain_total_bonus_1_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
+      "description": "Fountain total bonus for Justice monument input"
+    },
+    {
+      "label": "fountain_total_bonus_2_13",
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 13)",
+      "description": "Fountain total bonus for Wisdom monument input"
+    },
+    {
+      "label": "cosmo_bonus_qty_0_0",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 0, 0)",
+      "description": "Monumental Vibes Cosmo bonus"
+    },
+    {
+      "label": "monument_rog_bonus_0_2",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 2)",
+      "description": "Bravery monument bonus 2 (linear branch; accepted root)"
+    },
+    {
+      "label": "monument_rog_bonus_0_8",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 8)",
+      "description": "Bravery monument bonus 8 (nonlinear branch)"
+    },
+    {
+      "label": "monument_rog_bonus_0_9",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 9)",
+      "description": "Bravery monument bonus 9 (self multiplier)"
+    },
+    {
+      "label": "monument_rog_bonus_1_0",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 0)",
+      "description": "Justice monument bonus 0 (linear branch)"
+    },
+    {
+      "label": "monument_rog_bonus_1_2",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 2)",
+      "description": "Justice monument bonus 2 (nonlinear branch)"
+    },
+    {
+      "label": "monument_rog_bonus_1_7",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 7)",
+      "description": "Justice monument bonus 7 (nonlinear zero-level case)"
+    },
+    {
+      "label": "monument_rog_bonus_1_9",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 9)",
+      "description": "Justice monument bonus 9 (self multiplier)"
+    },
+    {
+      "label": "monument_rog_bonus_2_0",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 0)",
+      "description": "Wisdom monument bonus 0 (linear branch)"
+    },
+    {
+      "label": "monument_rog_bonus_2_6",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 6)",
+      "description": "Wisdom monument bonus 6 (nonlinear branch)"
+    },
+    {
+      "label": "monument_rog_bonus_2_7",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 7)",
+      "description": "Wisdom monument bonus 7 (linear zero-level case)"
+    },
+    {
+      "label": "monument_rog_bonus_2_9",
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 9)",
+      "description": "Wisdom monument bonus 9 (self multiplier)"
+    }
+  ]
+}
