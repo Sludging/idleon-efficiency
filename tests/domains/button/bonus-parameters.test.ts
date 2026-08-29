@@ -1,23 +1,29 @@
 /**
- * Validates the dynamic multiplier used by The Button bonus accumulation.
- *
- * @testCovers Button.getBonusMultiplier
+ * Validates the cross-domain inputs used by The Button bonus multiplier.
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Button } from '../../../data/domain/world-7/button';
+import { Companion, getCompanionBonus } from '../../../data/domain/companions';
+import { ResearchGrid } from '../../../data/domain/world-7/research';
 
 const saveName = 'latest';
 const extractionResultsName = 'button-bonus-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
- button_bonus_multi: {
-  description: 'The Button dynamic bonus multiplier',
-  extractionKey: 'button_bonus_multi',
+ companion_bonus_147: {
+  description: 'Companion 147 bonus that increases The Button multiplier',
+  extractionKey: 'companion_bonus_147',
   domainExtractor: (gameData) => {
-   return (gameData.get('button') as Button).getBonusMultiplier();
+   return getCompanionBonus(gameData.get('companions') as Companion[], 147);
+  }
+ },
+ grid_bonus_125: {
+  description: 'Research Grid Better Button bonus at index 125',
+  extractionKey: 'grid_bonus_125',
+  domainExtractor: (gameData) => {
+   return (gameData.get('research') as ResearchGrid).getBonusForId(125);
   }
  }
 };

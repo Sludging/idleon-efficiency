@@ -3,9 +3,19 @@
   "target": "The Button bonuses",
   "extractions": [
     {
+      "label": "companion_bonus_147",
+      "expression": "idleon.callFunction(\"Companions\", 147, 0)",
+      "description": "Companion 147 bonus that increases The Button multiplier"
+    },
+    {
+      "label": "grid_bonus_125",
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
+      "description": "Research Grid Better Button bonus at index 125"
+    },
+    {
       "label": "button_bonus_multi",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
-      "description": "The dynamic multiplier applied to Button bonuses"
+      "description": "The Button dynamic multiplier applied to accumulated bonuses"
     },
     {
       "label": "button_bonus_0",

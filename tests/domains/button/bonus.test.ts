@@ -30,6 +30,15 @@ describe('The Button - Bonus Calculations', () => {
   validateExtractionHealth(extractionResults);
   button = loadGameDataFromSave(saveName).get('button') as Button;
  });
+ it('validates the dynamic Button bonus multiplier', () => {
+  const liveValue = getExtractedValue(extractionResults, 'button_bonus_multi');
+  const domainValue = button.getBonusMultiplier();
+
+  expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
+   tolerance: 0,
+   context: 'The Button dynamic bonus multiplier',
+  });
+ });
 
  bonusCases.forEach(({ index, extractionKey, description }) => {
   it(`validates ${description} bonus at index ${index}`, () => {

@@ -15,7 +15,7 @@ type ButtonBonusData = ButtonBonusBase["data"];
 
 /** A single accumulated bonus category from The Button. */
 export class ButtonBonus {
- pressCount: number = 0;
+ categoryPresses: number = 0;
  bonusMultiplier: number = 1;
 
  constructor(public index: number, public data: ButtonBonusData) { }
@@ -29,18 +29,21 @@ export class ButtonBonus {
   * repeats the nine-category schedule from the beginning.
   */
  getBonus(): number {
-  const pressCount = Math.max(0, Math.trunc(this.pressCount));
-  const completedCycles = Math.floor(pressCount / BUTTON_PRESSES_PER_CYCLE);
-  const remainingPresses = pressCount % BUTTON_PRESSES_PER_CYCLE;
-  const remainingCategoryPresses = Math.min(
-   BUTTON_PRESSES_PER_CATEGORY,
-   Math.max(0, remainingPresses - this.index * BUTTON_PRESSES_PER_CATEGORY),
-  );
-  const categoryPresses = completedCycles * BUTTON_PRESSES_PER_CATEGORY + remainingCategoryPresses;
-
-  return categoryPresses * this.data.bonusPerPress * this.bonusMultiplier;
+  return this.categoryPresses * this.data.bonusPerPress * this.bonusMultiplier;
  }
 }
+
+const calculateCategoryPresses = (index: number, pressCount: number): number => {
+ const normalizedPressCount = Math.max(0, Math.trunc(pressCount));
+ const completedCycles = Math.floor(normalizedPressCount / BUTTON_PRESSES_PER_CYCLE);
+ const remainingPresses = normalizedPressCount % BUTTON_PRESSES_PER_CYCLE;
+ const remainingCategoryPresses = Math.min(
+  BUTTON_PRESSES_PER_CATEGORY,
+  Math.max(0, remainingPresses - index * BUTTON_PRESSES_PER_CATEGORY),
+ );
+
+ return completedCycles * BUTTON_PRESSES_PER_CATEGORY + remainingCategoryPresses;
+};
 
 export class Button extends Domain {
  bonuses: ButtonBonus[] = [];
@@ -61,7 +64,7 @@ export class Button extends Domain {
   const pressCount = Math.max(0, Math.trunc(Number(optionList?.[BUTTON_PRESS_COUNT_OPTION]) || 0));
 
   button.bonuses.forEach(bonus => {
-   bonus.pressCount = pressCount;
+   bonus.categoryPresses = calculateCategoryPresses(bonus.index, pressCount);
   });
  }
 

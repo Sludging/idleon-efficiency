@@ -247,6 +247,7 @@ const postProcessingMap: Record<string, Function> = {
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
+    "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
     "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
     "updateBubba": (doc: Cloudsave, accountData: Map<string, any>) => updateBubba(accountData),
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
