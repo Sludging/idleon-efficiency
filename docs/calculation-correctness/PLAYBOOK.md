@@ -42,6 +42,8 @@ node tests/helpers/extract-all-game-data.js
 
 Require a successful command. It refreshes `tests/fixtures/saves/latest.json` and writes batch results under `tests/results/`. Run it at every case start, even when those files already exist. If it fails, report `BLOCKED` to the human and do not diagnose.
 
+For an issue created before this playbook, keep its body and old comments unchanged. After the fresh extraction, append the first checkpoint in the format below and use it as the new resume point. Old save/extraction pairs, nonzero tolerances, and decisions to exclude parameter tests remain history; this playbook's fresh extraction, tolerance `0`, and diagnosis-driven core/parameter choices control the selected case.
+
 ### 2. Diagnose from delivered game code
 
 The diagnoser runs `GET http://localhost:3100/game-version` and uses the returned version exactly:
@@ -52,7 +54,7 @@ curl -fsS http://localhost:3100/game-version
 
 If `docs/game-snippets/<domain>/<FunctionName>.<version>.js` exists for that version, the diagnoser reads the entire snippet, not one branch. If it does not exist, the diagnoser follows [`docs/game-snippets/README.md`](../game-snippets/README.md) to capture the entire function from its declaration through its return and save the versioned snippet before analysis.
 
-The diagnoser lists the aspect's formula used when no branch-specific condition applies, every branch that changes the named aspect, each calculation the aspect consumes, and each missing WikiBot static fact. Only after reading the game code, the diagnoser inspects tests and domain code to locate the implementation under test and confirm `init → parse → calculate`.
+The diagnoser lists the aspect's formula used when no branch-specific condition applies, every branch that changes the named aspect, each calculation the aspect consumes, and each missing WikiBot static fact. Label static facts separately: they are data, not parameters, and never receive parameter tests. Only after reading the game code, the diagnoser inspects tests and domain code to locate the implementation under test and confirm `init → parse → calculate`.
 
 If game behavior, whether a branch belongs to this aspect, whether a called calculation needs its own core test, or a required static fact is unclear, the diagnoser asks the human one precise question or reports `BLOCKED` with the missing fact. It does not fill a gap with an assumption.
 
@@ -84,7 +86,7 @@ gh issue list --state all --search '<domain> <aspect> in:title' --json number,ti
 
 Compare titles exactly with `Correctness: <domain> — <aspect>`. The coordinator reuses exactly one open exact match. Multiple open exact matches or any closed exact match require `NEEDS_HUMAN`. With no exact match, the coordinator creates the blocker with the title and body required by the role contract, links it to the active issue with GitHub's native `blocked_by` dependency, and confirms the parent reports the link. Follow [`docs/agents/issue-tracker.md`](../agents/issue-tracker.md) for the link operation and its unsupported-endpoint fallback. Authentication, permission, or transient failures require `NEEDS_HUMAN`; do not claim an unconfirmed link. Record the resume condition, post a checkpoint, and stop without starting the blocker case.
 
-When the diagnoser, implementer, or reviewer reports missing WikiBot static data, the coordinator records the exact fact and why it is needed. The human requests that fact in the WikiBot repository; no idleon-efficiency blocker issue is created. Resume after the human supplies the data and the tests can use it.
+When the diagnoser, implementer, or reviewer reports missing WikiBot static data, the coordinator records the exact fact and why it is needed. Static facts are not parameters and never receive parameter tests; the human requests the data in the WikiBot repository, and no idleon-efficiency blocker issue is created. Resume after the human supplies the data and the tests can use it.
 
 ## Checkpoints
 

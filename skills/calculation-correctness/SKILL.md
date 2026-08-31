@@ -16,4 +16,4 @@ The role files under `.omp/agents/` define role responsibilities and return cont
 
 ## Generated data guardrail
 
-Never modify generated content under `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`. WikiBot owns that content and its game-code extraction.
+Never modify generated content under `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`. WikiBot owns that content and its game-code extraction. Generated static data is not a parameter-test target.

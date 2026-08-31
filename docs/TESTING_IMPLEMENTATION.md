@@ -38,10 +38,11 @@ For every domain calculation test, work in this order:
 ### Choosing core and parameter tests
 
 Put the calculation's public result in a core test. Add a parameter test when comparing the producer separately can distinguish whether a failure comes from that producer or from the consuming formula. This includes a calculation that has or should have its own core test when it is consumed by another aspect in the same domain. Use one calculation file when there are no meaningful inputs to isolate; add a `-parameters.test.ts` file when separate producer comparisons provide that isolation.
+WikiBot static values are game definitions, not calculated parameters; do not add parameter tests or extraction entries solely to compare them—test the calculation consuming static data, and block implementation when data is missing or wrong for the human’s WikiBot request.
 
 ### Building extraction configs
 
-Read the entire delivered function from declaration through return before writing its config, including its signature, arguments, constants, branches, and composition. Use expressions that call the game functions or read the game values that the function itself uses. Add no extraction entry that is not compared by a core or parameter test.
+Read the entire delivered function from declaration through return before writing its config, including its signature, arguments, constants, branches, and composition. Use expressions that call the game functions or read the game values that the function itself uses. Add no extraction entry that is not compared by a core or parameter test. For WikiBot static values, extract only data consumed by a tested calculation, never an entry solely for static-value comparison.
 
 If the game returns a raw representation and domain code applies a fixed conversion, normalize the extraction expression to the domain's output only when the delivered function establishes that conversion. Document the conversion in the extraction description; never infer it from a domain value or an observed match.
 

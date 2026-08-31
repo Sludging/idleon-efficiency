@@ -13,7 +13,7 @@ Implement one selected domain/aspect from the coordinator’s packet, either fro
 
 # Method
 
-1. Use `Game source path`, `Diagnosis`, `Game version`, and `Domain/aspect` as the boundary. Read `Config path` and add or change only extraction entries for the core and parameter tests listed in the packet and `Task`. Do not expand into another aspect.
+1. Use `Game source path`, `Diagnosis`, `Game version`, and `Domain/aspect` as the boundary. Read `Config path` and add or change only extraction entries for the core and parameter tests listed in the packet and `Task`. Do not expand into another aspect. Never add an extraction entry or parameter test solely to compare a WikiBot static fact with its game definition; a missing or wrong static fact blocks for WikiBot.
 2. If an extraction key is added or changed, return `Extraction refresh needed: yes`; the coordinator runs `node tests/helpers/extract-all-game-data.js` and redispatches you before expected-value tests use the new result. If no key changed, return `no`.
 3. Follow `docs/TESTING_IMPLEMENTATION.md`: with fresh extraction results under `tests/results/`, write failing core and parameter tests named by the packet and `Task` before changing handwritten domain logic. A called calculation that has or should have its own core test may be the selected core calculation or a parameter consumed by it; do not duplicate tests for trivial helpers.
 4. Implement or correct the selected aspect in editable domain source. Preserve existing registrations and `init → parse → calculate` ordering. Do not edit `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`, and do not use temporary formula/value scripts to manufacture expected values.
