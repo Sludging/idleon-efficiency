@@ -1,15 +1,18 @@
 ---
 name: calculation-correctness
-description: Supervised methodology for one wrong or missing backend main calculation, using a canonical GitHub correctness case and demand-driven live/game-code evidence
+description: Route calculation-correctness work to the appropriate OMP role and authoritative guidance
 ---
 
 # Calculation Correctness
 
-Use this skill when a backend main calculation is red or confirmed missing. Before doing any work, read the authoritative [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md). The playbook is the only source for case scope, lifecycle, evidence decisions, dependency boundaries, checkpoints, and closure.
+This skill is a role-aware router, not a second correctness workflow.
 
-Use the [testing skill](../testing/SKILL.md) and [testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for extraction and test mechanics. Use the [feature-implementation skill](../feature-implementation/SKILL.md) for a new feature that is not an approved correctness case.
+- **Coordinator (`correctness-coordinator`)**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and follow the coordinator role.
+- **Diagnoser (`correctness-diagnoser`) and reviewer (`correctness-reviewer`)**: Follow the matching role and coordinator packet. Do not load the full playbook.
+- **Implementer (`correctness-implementer`)**: Follow the matching role and coordinator packet, and read [the testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for mechanics. Do not load the full playbook.
+- **Ordinary non-role correctness work**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md).
 
-This skill only routes the worker to the correct guidance. It does not define a second correctness workflow.
+The role files under `.omp/agents/` define role responsibilities and return contracts; this router does not repeat them.
 
 ## Generated data guardrail
 
