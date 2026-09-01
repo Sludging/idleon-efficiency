@@ -40,9 +40,9 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **Auto-triggers:** None (load manually when needed)
 
-**When to use:** A backend main calculation is red or confirmed missing and has a human-approved canonical correctness case
+**When to use:** A backend main calculation is wrong or confirmed missing and one correctness aspect has been selected
 
-**Covers:** Accepted paired evidence, one-root GitHub lifecycle, demand-driven parameter diagnosis, explicit stops, WikiBot ownership handoff, zero-tolerance resolution, and terminal learning
+**Covers:** One selected aspect, fresh full extraction, game-code-first diagnosis, blocking/resume checkpoints, independent review, and tolerance-zero completion
 
 **Points to:** [docs/calculation-correctness/PLAYBOOK.md](../docs/calculation-correctness/PLAYBOOK.md)
 

@@ -11,7 +11,7 @@ import { DataStatus } from '../../lib/stores/appDataStore';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow'
 import TextAndLabel from '../base/TextAndLabel';
-import { UserCircle } from '@phosphor-icons/react';
+import { UserCircleIcon } from '@phosphor-icons/react/dist/csr/UserCircle';
 
 export const Profile = () => {
     const { authStatus, logout } = useAuthStore(
@@ -57,7 +57,7 @@ export const Profile = () => {
                         <Box style={{ position: 'relative' }}>
                             <Avatar direction='row'>
                                 <Stack anchor='top-right'>
-                                    <UserCircle color={normalizeColor("accent-3", theme)} size={"32px"} />
+                                    <UserCircleIcon color={normalizeColor("accent-3", theme)} size={"32px"} />
                                     {hasUnseenChangelogs && <Box margin={{ right: '-2px' }} fill background="status-critical" round="full" pad="xxsmall" width="8px" height="8px" />}
                                 </Stack>
                                 <CaretDownFill size="small" />
@@ -121,7 +121,7 @@ export const Profile = () => {
                         <Box style={{ position: 'relative' }}>
                             <Avatar direction='row'>
                                 <Stack anchor='top-right'>
-                                    <UserCircle color={normalizeColor("accent-3", theme)} size={"32px"} />
+                                    <UserCircleIcon color={normalizeColor("accent-3", theme)} size={"32px"} />
                                     {hasUnseenChangelogs && <Box margin={{ right: '-2px' }} fill background="status-critical" round="full" pad="xxsmall" width="8px" height="8px" />}
                                 </Stack>
                                 <CaretDownFill size="small" />

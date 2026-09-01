@@ -8214,6 +8214,11 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Coral5", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Ancientfish]]", "txtName": "Ancientfish"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("w7B10", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Magni Pufferfin]]", "txtName": "Magni Pufferfin"}],
                 "recipeFrom": [],
@@ -9988,10 +9993,7 @@ export const initSourceRepo = () => {
                 "questAss": []
             }),
         new SourcesBase("EquipmentHats86", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"},
-                    <SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}
-                ],
+                "sources": [<SourceModel>{"wikiName": "[[Falloween Pumpkin]]", "txtName": "Falloween Pumpkin"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
@@ -10043,12 +10045,17 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("EquipmentHats141", <SourcesModel>{
+                "sources": [<SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("EquipmentNametag12", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}],
                 "recipeFrom": [],
                 "questAss": []
             }),
-        new SourcesBase("EquipmentNametag9", <SourcesModel>{
+        new SourcesBase("EquipmentHats46", <SourcesModel>{
                 "sources": [<SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}],
                 "recipeFrom": [],
                 "questAss": []

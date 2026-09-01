@@ -44,29 +44,29 @@ export const initDancingCoralBonusRepo = () => {
         new DancingCoralBonusBase(5, <DancingCoralBonusModel>{
                 "name": "Aegean Coral",
                 "itemSource": "Dropped by RIPtide",
-                "desc": "+{% who knows",
-                "cost": 10000,
-                "bonus": 1
+                "desc": "+{% Minehead DMG潤Money",
+                "cost": 25000,
+                "bonus": 5
             }),
         new DancingCoralBonusBase(6, <DancingCoralBonusModel>{
                 "name": "Gilded Coral",
                 "itemSource": "Dropped by RIPtide",
                 "desc": "+{% who knows",
-                "cost": 25000,
+                "cost": 500000,
                 "bonus": 1
             }),
         new DancingCoralBonusBase(7, <DancingCoralBonusModel>{
                 "name": "Twisted Coral",
                 "itemSource": "Dropped by RIPtide",
                 "desc": "+{% who knows",
-                "cost": 100000,
+                "cost": 10000000,
                 "bonus": 1
             }),
         new DancingCoralBonusBase(8, <DancingCoralBonusModel>{
                 "name": "Eternal Coral",
                 "itemSource": "Dropped by RIPtide",
                 "desc": "+{% who knows",
-                "cost": 500000,
+                "cost": 250000000,
                 "bonus": 1
             })    
 ]

@@ -7,6 +7,15 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.4.0",
+    title: "Cooking speed",
+    date: "September 1, 2026",
+    changes: [
+      "Cooking speed should be accurate again!",
+      "Working through fixing all existing maths and calculations across the site before I create new UI elements.",
+    ]
+  },
+  {
     version: "1.3.0",
     title: "World 7 - Part 2",
     date: "February 22, 2026",

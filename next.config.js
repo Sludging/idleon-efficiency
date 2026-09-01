@@ -29,7 +29,7 @@ const moduleExports = {
     styledComponents: true,
   },
   experimental: {
-    optimizePackageImports: ['styled-components', 'grommet', 'grommet-icons', 'firebase'],
+    optimizePackageImports: ['styled-components', 'grommet', 'grommet-icons', 'firebase', '@phosphor-icons/react'],
     turbopackFileSystemCacheForDev: true
   },
   images: {

@@ -9,6 +9,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Cooking } from '../../../data/domain/world-4/cooking';
+import { EventShop } from '../../../data/domain/eventShop';
 import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
 import { Player } from '../../../data/domain/player';
 import { Votes } from '../../../data/domain/world-2/votes';
@@ -18,6 +19,7 @@ import { AtomCollider } from '../../../data/domain/world-3/construction/atomColl
 import { TotalizerBonus, Worship } from '../../../data/domain/world-3/worship';
 import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 import { Arcade } from '../../../data/domain/world-2/arcade';
+import { Button } from '../../../data/domain/world-7/button';
 import { Stamp } from '../../../data/domain/world-1/stamps';
 import { Lab } from '../../../data/domain/world-4/lab';
 import { Summoning } from '../../../data/domain/world-6/summoning';
@@ -65,7 +67,7 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'starsign_58_bonus',
     domainExtractor: (gameData) => {
       const players = gameData.get('players') as Player[];
-      const starsign58 = players[0].starSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0;
+      const starsign58 = Math.max(...players.map(player => player.starSigns.find(sign => sign.name == "Gordonius Major")?.getBonus("Cooking SPD (Multiplicative!)") ?? 0), 0);
       return starsign58;
     },
   },
@@ -96,6 +98,15 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
       const players = gameData.get('players') as Player[];
       const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
       return bestapocalypseChowBonus;
+    },
+  },
+
+  eventShop53Owned: {
+    description: 'Event shop Dough Roller owned',
+    extractionKey: 'event_shop_53_owned',
+    domainExtractor: (gameData) => {
+      const eventShop = gameData.get('eventShop') as EventShop;
+      return eventShop.isBonusOwned(53) ? 1 : 0;
     },
   },
 
@@ -166,6 +177,15 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
       const sailing = gameData.get("sailing") as Sailing;
       const artifactBonus13 = sailing.artifacts[13].getBonus();
       return artifactBonus13;
+    }
+  },
+
+  buttonBonus7: {
+    description: 'The Button cooking speed bonus',
+    extractionKey: 'button_bonus_7',
+    domainExtractor: (gameData) => {
+      const button = gameData.get("button") as Button;
+      return button.getBonusForIndex(7);
     }
   },
 
@@ -356,7 +376,7 @@ describe('Cooking Domain - Parameters', () => {
     it(`validates ${spec.description}`, () => {
       const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
       const domainValue = spec.domainExtractor(gameData);
-      expect(domainValue).toMatchLiveGame(liveValue, 0.01);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
     });
   });
 });

@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { Box, Notification, Text, ThemeContext, ThemeType } from "grommet";
 import TextAndLabel from "../base/TextAndLabel";
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { ArrowsClockwiseIcon } from "@phosphor-icons/react/dist/csr/ArrowsClockwise";
 import { normalizeColor } from "grommet/utils";
 import { DataStatus } from "../../lib/stores/appDataStore";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
@@ -18,7 +18,7 @@ export const DataStatusDisplay = () => {
 
     if ([DataStatus.Init, DataStatus.Loading].includes(dataStatus)) {
         return (
-            <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwise color={normalizeColor("green-2", theme)} size={24} /></Box>
+            <Box align="center" justify='center' animation={'rotateRight'}><ArrowsClockwiseIcon color={normalizeColor("green-2", theme)} size={24} /></Box>
         )
     }
     if ([DataStatus.LiveData, DataStatus.StaticData].includes(dataStatus)) {

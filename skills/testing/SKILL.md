@@ -9,11 +9,9 @@ triggers:
 
 # Testing Guide
 
-Read the [testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for the complete mechanics of extraction, fixtures, parameter tests, calculation tests, matchers, and test commands.
+Read the [testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for extraction, fixtures, parameter tests, calculation tests, matchers, and test commands.
 
 For day-to-day batch extraction, save fixtures, and coverage tracking, also read [tests/README.md](../../tests/README.md) and [tests/helpers/README.md](../../tests/helpers/README.md).
-
-When a human has activated a calculation-correctness case, read the [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) before deciding what to test or change. The playbook controls case scope, dependency decisions, checkpoints, and closure. This skill and the implementation guide explain how to produce the approved test evidence. Ordinary domain testing uses this skill without the correctness-case branch.
 
 ## Operational reminders
 
@@ -26,8 +24,9 @@ When a human has activated a calculation-correctness case, read the [calculation
 
 ## Mechanics that affect correctness evidence
 
-- Base formulas and composition on current delivered game code. Base expected values on live extraction from the accepted coherent save and extraction pair.
-- Extract only the smallest set of components needed by the approved test surface. Keep extraction serialized: append configurations, then run one batch extraction.
+- Base formulas and composition on delivered game code for the version under test. Base expected values on the fresh save and results produced by `node tests/helpers/extract-all-game-data.js`.
+- Extract only values actually compared by core or parameter tests. Keep extraction serialized: append configurations, then run one batch extraction.
+- WikiBot static values are game definitions, not calculated parameters; test the calculation consuming static data rather than adding parameter tests or extraction entries solely to compare them, and block implementation when data is missing or wrong for the human’s WikiBot request.
 - If the game returns a raw value that the domain transforms with a fixed constant, normalize the extraction expression only when game-code evidence establishes the equivalent output.
 - Keep confirmed missing implementations visible as explicit failing results. Do not hide them.
 - Never use `it.skip()`, `it.todo()`, `xit()`, test removal, or a tolerance change to hide a failure. New or changed correctness comparisons use tolerance `0`.
