@@ -59,7 +59,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(10, <EventShopBonusModel>{
                 "name": "Storage Chest",
                 "desc": "Get +12 storage slots for your storage chest",
-                "price": 15
+                "price": 20
             }),
         new EventShopBonusBase(11, <EventShopBonusModel>{
                 "name": "Storage Vault",
@@ -74,7 +74,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(13, <EventShopBonusModel>{
                 "name": "Ribbon Connoisseur",
                 "desc": "Get +3 more ribbons every day for your Ribbon Shelf",
-                "price": 55
+                "price": 60
             }),
         new EventShopBonusBase(14, <EventShopBonusModel>{
                 "name": "Golden Square",
@@ -104,7 +104,7 @@ export const initEventShopBonusRepo = () => {
         new EventShopBonusBase(19, <EventShopBonusModel>{
                 "name": "Smiley Statue",
                 "desc": "All statues give 1.30x higher bonuses, forever!",
-                "price": 70
+                "price": 90
             }),
         new EventShopBonusBase(20, <EventShopBonusModel>{
                 "name": "Government Subsidy",
@@ -152,7 +152,7 @@ export const initEventShopBonusRepo = () => {
                 "desc": "Turns a Gallery Slot in World 7 to Grade 4",
                 "price": 180
             }),
-        new EventShopBonusBase(30, <EventShopBonusModel>{"name": "King of the Rack", "desc": "+10% Hat Rack Bonus Multi", "price": 30}),
+        new EventShopBonusBase(30, <EventShopBonusModel>{"name": "King of the Rack", "desc": "+10% Hat Rack Bonus Multi", "price": 35}),
         new EventShopBonusBase(31, <EventShopBonusModel>{
                 "name": "Omega Bubble",
                 "desc": "Kattlekruk divinity gives 1.50x more daily bubbles",
@@ -248,6 +248,27 @@ export const initEventShopBonusRepo = () => {
                 "name": "6 Star Cardifiers",
                 "desc": "Gives you EIGHT usable 6star cardifiers!",
                 "price": 200
+            }),
+        new EventShopBonusBase(51, <EventShopBonusModel>{
+                "name": "Elegant Ribbons",
+                "desc": "New ribbons have 25% chance to be +1 Tier higher!",
+                "price": 190
+            }),
+        new EventShopBonusBase(52, <EventShopBonusModel>{
+                "name": "Fishmaxxing",
+                "desc": "5x Fish and 75% cheaper upgrades for Poppy!",
+                "price": 275
+            }),
+        new EventShopBonusBase(53, <EventShopBonusModel>{"name": "Dough Roller", "desc": "2x Cooking Speed", "price": 50}),
+        new EventShopBonusBase(54, <EventShopBonusModel>{
+                "name": "Bejeweled Ladle",
+                "desc": "+5 Purple and Yellow PTS for Cooking Mastery!",
+                "price": 250
+            }),
+        new EventShopBonusBase(55, <EventShopBonusModel>{
+                "name": "Boat Discount",
+                "desc": "All sailing boat upgrades are 30% cheaper",
+                "price": 100
             })    
 ]
 }

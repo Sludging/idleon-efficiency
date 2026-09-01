@@ -7145,10 +7145,10 @@ export const initEnemyRepo = () => {
                     "MovingFrame": 6,
                     "RespawnTime": 45,
                     "DeathFrame": 14,
-                    "MonsterHPTotal": 2e+33,
+                    "MonsterHPTotal": 3e+35,
                     "Type": EnemyTypeEnum.monsterType,
                     "SpecialType": "",
-                    "ExpGiven": 1,
+                    "ExpGiven": 2.8e+13,
                     "ExpType": 0,
                     "Defence": 2500000,
                     "MoveSPEED": 4,
@@ -7160,6 +7160,7 @@ export const initEnemyRepo = () => {
                         <CoinDropModel>{"item": "COIN", "quantity": 3.5e+09, "chance": 0.5, "questLink": "N/A"},
                         <ItemDropModel>{"item": "w7B9", "quantity": 1, "chance": 0.0002, "questLink": "N/A"},
                         <CardDropModel>{"item": "CardsJ21", "quantity": 1, "chance": 1.5e-07, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "Coral5", "quantity": 1, "chance": 2e-09, "questLink": "N/A"},
                         <RecipeDropModel>{"item": "SmithingRecipes7", "quantity": 0, "chance": 8e-07, "questLink": "N/A"},
                         <SubTableDropModel>{"item": "DropTable34", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
@@ -7167,7 +7168,7 @@ export const initEnemyRepo = () => {
                 "mapData": <MapDataModel>{
                     "enemy": "w7b9",
                     "world": "Shimmerfin Deep",
-                    "map": <MapNameModel>{"intName": "uAquaB9", "name": "fillername", "id": 323},
+                    "map": <MapNameModel>{"intName": "uAquaB9", "name": "Ancient Fissure", "id": 323},
                     "portalRequirements": [750000000]
                 },
                 "navigation": <EnemyNavModel>{
@@ -9605,10 +9606,10 @@ export const initEnemyRepo = () => {
                         <CardDropModel>{"item": "CardsY2", "quantity": 1, "chance": 0, "questLink": "N/A"},
                         <ItemDropModel>{"item": "PremiumGem", "quantity": 1, "chance": 0.2, "questLink": "N/A"},
                         <ItemDropModel>{"item": "Gfoodcoupon", "quantity": 1, "chance": 0.5, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentHats86", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats141", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats117", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentNametag12", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
-                        <ItemDropModel>{"item": "EquipmentNametag9", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
+                        <ItemDropModel>{"item": "EquipmentHats46", "quantity": 1, "chance": 0.001, "questLink": "N/A"},
                         <ItemDropModel>{"item": "EquipmentHats73", "quantity": 1, "chance": 0.001, "questLink": "N/A"}
                     ]
                 },

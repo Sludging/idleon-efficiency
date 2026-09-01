@@ -1772,17 +1772,17 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(126, <CompanionModel>{
                 "id": "w6a2",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "4x Summoning EXP gain",
+                "bonus": 3,
+                "x1": -13,
                 "x2": 0,
-                "x3": 0,
+                "x3": -3,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x5": 160,
+                "x6": 2700,
+                "x7": 225,
+                "desc2": "7x Summoning EXP gain",
+                "bonus2": 6
             }),
         new CompanionBase(127, <CompanionModel>{
                 "id": "w6a3",
@@ -2441,6 +2441,20 @@ export const initCompanionRepo = () => {
                 "x7": 650,
                 "desc2": "Bonus still unknown... for now...",
                 "bonus2": 1
+            }),
+        new CompanionBase(174, <CompanionModel>{
+                "id": "fm rat",
+                "desc": "+10000% additive Gold Food bonus effect and 1.50x multiplier to Gold Food",
+                "bonus": 1,
+                "x1": -56,
+                "x2": 0,
+                "x3": -43,
+                "x4": 1,
+                "x5": 280,
+                "x6": 6800,
+                "x7": 410,
+                "desc2": "+20000% additive Gold Food bonus effect and 2x multiplier to Gold Food",
+                "bonus2": 2
             })    
 ]
 }
