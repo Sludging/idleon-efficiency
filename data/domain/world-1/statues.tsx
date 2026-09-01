@@ -55,49 +55,52 @@ export class Statue {
     }
 
     getBonus = (player: Player | undefined = undefined): number => {
+        const talentFactor = (skillIndex: number) => Math.max(1,
+            1 + (player?.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0) / 100);
         let talentBonus = 1;
 
         // Calculate statue bonus based on talents
-        if (player) {
-            switch (this.displayName) {
-                case "Power Statue":
-                case "Mining Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 112 || x.skillIndex == 127)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Thicc Skin Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 127)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Oceanman Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 112)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Speed Statue":
-                case "Anvil Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 307 || x.skillIndex == 292)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Bullseye Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 307)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Ol Reliable Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 292)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Exp Statue":
-                case "Lumberbob Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 472 || x.skillIndex == 487)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Beholder Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 472)?.getBonus() ?? 0) / 100;
-                    break;
-                case "Cauldron Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 487)?.getBonus() ?? 0) / 100;
-                    break;
-                case "EhExPee Statue":
-                case "Kachow Statue":
-                case "Feasty Statue":
-                    talentBonus += (player.talents.find(x => x.skillIndex == 37)?.getBonus() ?? 0) / 100;
-                    break;
-                default: talentBonus = 1;
-            }
+        switch (this.displayName) {
+            case "Power Statue":
+            case "Mining Statue":
+                talentBonus *= talentFactor(112);
+                talentBonus *= talentFactor(127);
+                break;
+            case "Thicc Skin Statue":
+                talentBonus *= talentFactor(127);
+                break;
+            case "Oceanman Statue":
+                talentBonus *= talentFactor(112);
+                break;
+            case "Speed Statue":
+            case "Anvil Statue":
+                talentBonus *= talentFactor(292);
+                talentBonus *= talentFactor(307);
+                break;
+            case "Bullseye Statue":
+                talentBonus *= talentFactor(307);
+                break;
+            case "Ol Reliable Statue":
+                talentBonus *= talentFactor(292);
+                break;
+            case "Exp Statue":
+            case "Lumberbob Statue":
+                talentBonus *= talentFactor(487);
+                talentBonus *= talentFactor(472);
+                break;
+            case "Beholder Statue":
+                talentBonus *= talentFactor(472);
+                break;
+            case "Cauldron Statue":
+                talentBonus *= talentFactor(487);
+                break;
+            case "EhExPee Statue":
+            case "Kachow Statue":
+            case "Feasty Statue":
+                talentBonus *= talentFactor(37);
+                break;
         }
+
         return this.level * this.statueData.bonus * talentBonus * (this.type >= StatusType.Onyx ? this.onyxStatueBonus : 1)
             * (this.type >= StatusType.Zenith ? this.zenithStatueBonus : 1) * this.dragonStatueBonus * this.otherBonuses;
     }
