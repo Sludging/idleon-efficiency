@@ -12,7 +12,6 @@ export const changelogData: ChangelogEntryData[] = [
     date: "September 1, 2026",
     changes: [
       "Cooking speed should be accurate again!",
-      "Sadly not including the new event bonus just yet, but that will be up very soon.",
       "Working through fixing all existing maths and calculations across the site before I create new UI elements.",
     ]
   },

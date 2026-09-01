@@ -43,6 +43,11 @@
       "description": "Enhanced Talent 146 bonus"
     },
     {
+      "label": "event_shop_53_owned",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 53, 0)",
+      "description": "Event shop Dough Roller owned (1 if owned, 0 otherwise)"
+    },
+    {
       "label": "voting_13_bonus",
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 13, 0)",
       "description": "Voting 13 bonus"

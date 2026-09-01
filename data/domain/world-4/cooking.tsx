@@ -23,6 +23,7 @@ import { Summoning } from "../world-6/summoning";
 import { Arcade } from "../world-2/arcade";
 import { Sneaking } from "../world-6/sneaking";
 import { Button } from "../world-7/button";
+import { EventShop } from "../eventShop";
 import { StarSigns } from "../starsigns";
 import { IslandExpeditions } from '../world-2/islandExpedition';
 import { UpgradeVault } from "../upgradeVault";
@@ -266,6 +267,7 @@ type KitchenSpeedParameters = {
     totalizerBonus: number,
     bloodMarrowBonus: number,
     superChowBonus: number,
+    eventShopDoughRollerBonus: number,
     cropScientistBonus: number,
     buttonBonus7: number,
     farmingLevel: number,
@@ -307,6 +309,7 @@ export class Kitchen {
             bloodMarrowBonus,
             cropScientistBonus,
             superChowBonus,
+            eventShopDoughRollerBonus,
             meal63Bonus,
             farmingLevel,
             diamonChef,
@@ -340,6 +343,7 @@ export class Kitchen {
             (1 + bloodMarrowBonus / 100) *
             Math.max(1, cropScientistBonus) *
             Math.max(1, superChowBonus) *
+            (1 + eventShopDoughRollerBonus) *
             (1 + (this.richelin ? 2 : 0)) *
             (1 + votingBonus13 / 100) *
             (1 + vaultBonus54 / 100) *
@@ -661,6 +665,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const companions = data.get("companions") as Companion[];
     const button = data.get("button") as Button;
+    const eventShop = data.get("eventShop") as EventShop;
     const companion162 = companions.find(companion => companion.id == 162);
     const companion162Bonus = companion162?.owned ? companion162.data.bonus : 0;
 
@@ -717,6 +722,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const arcadeBonus = arcade.bonuses.find(bonus => bonus.effect == "+{% Cook SPD multi")?.getBonus() ?? 0;
     const summonBonus = summoning.summonBonuses.find(bonus => bonus.data.bonusId == 16);
     const winnerBonus = summonBonus?.getBonus() ?? 0;
+    const eventShopDoughRollerBonus = eventShop.isBonusOwned(53) ? 1 : 0;
 
     const bestBloodMarrowTalent = players
         .map(player => player.talents.find(talent => talent.skillIndex === 59))
@@ -774,6 +780,7 @@ export const updateCooking = (data: Map<string, any>) => {
         totalizerBonus: worshipBonus,
         bloodMarrowBonus: bestbloodMarrowBonus,
         superChowBonus: bestapocalypseChowBonus,
+        eventShopDoughRollerBonus: eventShopDoughRollerBonus,
         cropScientistBonus: cropScientistBonus,
         farmingLevel: farming.farmingLevel,
         arcadeBonus: arcadeBonus,

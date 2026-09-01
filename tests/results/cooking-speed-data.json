@@ -210,6 +210,12 @@
       "result": 12936.860518091251,
       "description": "Meal bonus for KitchenEff",
       "extractedAt": "2026-08-29T08:38:54.454Z"
+    },
+    "event_shop_53_owned": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 53, 0)",
+      "result": 0,
+      "description": "Event shop Dough Roller owned (1 if owned, 0 otherwise)",
+      "extractedAt": "2026-09-01T04:57:33.744Z"
     }
   },
   "errors": {},

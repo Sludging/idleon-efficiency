@@ -9,6 +9,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Cooking } from '../../../data/domain/world-4/cooking';
+import { EventShop } from '../../../data/domain/eventShop';
 import { CropScientistBonusText, Farming } from '../../../data/domain/world-6/farming';
 import { Player } from '../../../data/domain/player';
 import { Votes } from '../../../data/domain/world-2/votes';
@@ -97,6 +98,15 @@ const cookingParameterSpecs: Record<string, ParameterTestSpec> = {
       const players = gameData.get('players') as Player[];
       const bestapocalypseChowBonus = Math.max(...players.flatMap(player => (player.getTalentEnhancedBonus(146))));
       return bestapocalypseChowBonus;
+    },
+  },
+
+  eventShop53Owned: {
+    description: 'Event shop Dough Roller owned',
+    extractionKey: 'event_shop_53_owned',
+    domainExtractor: (gameData) => {
+      const eventShop = gameData.get('eventShop') as EventShop;
+      return eventShop.isBonusOwned(53) ? 1 : 0;
     },
   },
 
