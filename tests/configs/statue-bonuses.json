@@ -1,6 +1,7 @@
 {
   "description": "Extract data for updated statue bonus calculations including Zenith statue support",
   "target": "Statue Bonuses",
+  "requiredActivePlayerIndex": 0,
   "extractions": [
     {
       "label": "artifact_30_bonus",

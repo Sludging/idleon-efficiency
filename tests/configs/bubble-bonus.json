@@ -1,6 +1,7 @@
 {
   "description": "Extract representative alchemy bubble bonuses for testing the Bubble bonus root",
   "target": "Alchemy Bubble Bonus",
+  "requiredActivePlayerIndex": 0,
   "extractions": [
     {
       "label": "diamond_chef_final_bonus",

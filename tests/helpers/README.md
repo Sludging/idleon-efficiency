@@ -16,6 +16,13 @@ This will:
 
 - The batch script refreshes `tests/fixtures/saves/latest.json` from
   `GET http://localhost:3100/cloud-save` before extracting live values.
+
+### Active Player Policy
+
+Extraction runs require the game to be open on active player index `0`. The default is defined in `tests/helpers/game-data-extractor.js`; the extractor checks it once before evaluating each config and aborts if the active player does not match.
+
+Configs with a real dependency on a specific character may set `requiredActivePlayerIndex` at the top level. Currently this is used by `bubble-bonus.json`, `talents-sludgeadin.json`, and `statue-bonuses.json`; do not add it for ordinary fixture alignment.
+
 ## Individual Extraction (Advanced)
 
 If you need to extract data for a single config file:
@@ -57,7 +64,7 @@ Create JSON config files in `tests/configs/`:
 ```json
 {
   "description": "What this extraction is for",
-  "target": "Specific function or calculation being tested", 
+  "target": "Specific function or calculation being tested",
   "extractions": [
     {
       "label": "unique_identifier",
