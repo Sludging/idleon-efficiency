@@ -1,71 +1,185 @@
 {
-  "timestamp": "2026-09-03T06:33:06.668Z",
+  "timestamp": "2026-09-03T09:05:17.626Z",
   "extractions": {
     "artifact_30_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 30, 0)",
       "result": 150,
       "description": "Sailing artifact 30 (Onyx Lantern) bonus - added to the base onyxStatueBonus of 2",
-      "extractedAt": "2026-09-03T06:33:06.672Z"
+      "extractedAt": "2026-09-03T09:05:17.630Z"
     },
     "zenith_market_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
       "result": 70,
       "description": "ZenithMarket bonus 0 (True Zen) - added to the base 50 in zenithStatueBonus calculation",
-      "extractedAt": "2026-09-03T06:33:06.673Z"
+      "extractedAt": "2026-09-03T09:05:17.632Z"
     },
     "event_shop_19_owned": {
       "expression": "0.3 * 100 * idleon.callFunction(\"Summoning\", \"EventShopOwned\", 19, 0)",
       "result": 0,
       "description": "Event shop bonus 19 (0 or 30) - game returns 0/1, multiplied by 0.3*100 to match domain's hardcoded 30",
-      "extractedAt": "2026-09-03T06:33:06.675Z"
+      "extractedAt": "2026-09-03T09:05:17.644Z"
     },
     "meritocracy_26_bonus": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 26, 0)",
       "result": 0,
       "description": "Meritocracy bonus 26 (statue bonus) - part of otherBonuses multiplier",
-      "extractedAt": "2026-09-03T06:33:06.676Z"
+      "extractedAt": "2026-09-03T09:05:17.646Z"
     },
     "upgrade_vault_25_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 25, 0)",
       "result": 154,
       "description": "UpgradeVault upgrade 25 computed bonus (%) - applied to statues at indices [0, 1, 2, 6] only",
-      "extractedAt": "2026-09-03T06:33:06.683Z"
+      "extractedAt": "2026-09-03T09:05:17.647Z"
     },
     "voodoo_statufication_bonus": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 56, -1)",
       "result": 119.35483870967742,
       "description": "Voodoo Statufication talent bonus (skillIndex 56, -1 = best across all players)",
-      "extractedAt": "2026-09-03T06:33:06.685Z"
+      "extractedAt": "2026-09-03T09:05:17.649Z"
+    },
+    "talent_37_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 37)",
+      "result": 0,
+      "description": "Talent 37 bonus applied to statue indices [3, 5, 17]",
+      "extractedAt": "2026-09-03T09:05:17.659Z"
+    },
+    "talent_112_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
+      "result": 88.03827751196172,
+      "description": "Talent 112 bonus applied to statue indices [0, 2, 8]",
+      "extractedAt": "2026-09-03T09:05:17.661Z"
+    },
+    "talent_127_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 127)",
+      "result": 0,
+      "description": "Talent 127 bonus applied to statue indices [0, 2, 7]",
+      "extractedAt": "2026-09-03T09:05:17.663Z"
+    },
+    "talent_292_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 292)",
+      "result": 0,
+      "description": "Talent 292 bonus applied to statue indices [1, 9, 11]",
+      "extractedAt": "2026-09-03T09:05:17.664Z"
+    },
+    "talent_307_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 307)",
+      "result": 0,
+      "description": "Talent 307 bonus applied to statue indices [1, 11, 14]",
+      "extractedAt": "2026-09-03T09:05:17.665Z"
+    },
+    "talent_472_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 472)",
+      "result": 0,
+      "description": "Talent 472 bonus applied to statue indices [6, 10, 13]",
+      "extractedAt": "2026-09-03T09:05:17.667Z"
+    },
+    "talent_487_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 487)",
+      "result": 0,
+      "description": "Talent 487 bonus applied to statue indices [6, 10, 12]",
+      "extractedAt": "2026-09-03T09:05:17.679Z"
     },
     "statue_0_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
-      "result": 735319.1794488938,
+      "result": 744397.1940099911,
       "description": "Statue index 0 bonus (upgrade vault bonus applies, index is in [0,1,2,6])",
-      "extractedAt": "2026-09-03T06:33:06.687Z"
+      "extractedAt": "2026-09-03T09:05:17.681Z"
     },
     "statue_1_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven1\")",
-      "result": 19512.148981883867,
+      "result": 19592.611451912257,
       "description": "Statue index 1 bonus (upgrade vault bonus applies, index is in [0,1,2,6])",
-      "extractedAt": "2026-09-03T06:33:06.688Z"
+      "extractedAt": "2026-09-03T09:05:17.682Z"
     },
     "statue_5_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven5\")",
       "result": 2937.4273238709675,
       "description": "Statue index 5 bonus (upgrade vault bonus does NOT apply - not in [0,1,2,6])",
-      "extractedAt": "2026-09-03T06:33:06.689Z"
+      "extractedAt": "2026-09-03T09:05:17.694Z"
     },
     "statue_24_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
       "result": 9582.636686451611,
       "description": "Statue index 24 bonus (upgrade vault bonus does NOT apply)",
-      "extractedAt": "2026-09-03T06:33:06.691Z"
+      "extractedAt": "2026-09-03T09:05:17.696Z"
+    },
+    "statue_2_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven2\")",
+      "result": 98042.55725985247,
+      "description": "Mining statue (index 2) bonus - talent 112 and 127 branches; UpgradeVault applies",
+      "extractedAt": "2026-09-03T09:05:17.698Z"
+    },
+    "statue_3_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven3\")",
+      "result": 75393.96797935483,
+      "description": "Feasty statue (index 3) bonus - talent 37 branch",
+      "extractedAt": "2026-09-03T09:05:17.700Z"
+    },
+    "statue_6_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven6\")",
+      "result": 52139.68057839484,
+      "description": "Lumberbob statue (index 6) bonus - talent 487 and 472 branches; UpgradeVault applies",
+      "extractedAt": "2026-09-03T09:05:17.710Z"
+    },
+    "statue_7_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven7\")",
+      "result": 52268.92738064515,
+      "description": "Thicc Skin statue (index 7) bonus - talent 127 branch",
+      "extractedAt": "2026-09-03T09:05:17.712Z"
+    },
+    "statue_8_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven8\")",
+      "result": 30379.182586349747,
+      "description": "Oceanman statue (index 8) bonus - talent 112 branch",
+      "extractedAt": "2026-09-03T09:05:17.714Z"
+    },
+    "statue_9_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven9\")",
+      "result": 15538.126594064515,
+      "description": "Ol Reliable statue (index 9) bonus - talent 292 branch",
+      "extractedAt": "2026-09-03T09:05:17.716Z"
+    },
+    "statue_10_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven10\")",
+      "result": 4545.812775225808,
+      "description": "Exp statue (index 10) bonus - talent 487 and 472 branches",
+      "extractedAt": "2026-09-03T09:05:17.725Z"
+    },
+    "statue_11_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven11\")",
+      "result": 23916.994043870964,
+      "description": "Anvil statue (index 11) bonus - talent 292 and 307 branches",
+      "extractedAt": "2026-09-03T09:05:17.727Z"
+    },
+    "statue_12_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven12\")",
+      "result": 22333.087153548386,
+      "description": "Cauldron statue (index 12) bonus - talent 487 branch",
+      "extractedAt": "2026-09-03T09:05:17.730Z"
+    },
+    "statue_13_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven13\")",
+      "result": 13653.277394580644,
+      "description": "Beholder statue (index 13) bonus - talent 472 branch",
+      "extractedAt": "2026-09-03T09:05:17.732Z"
+    },
+    "statue_14_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven14\")",
+      "result": 51318.583246451606,
+      "description": "Bullseye statue (index 14) bonus - talent 307 branch",
+      "extractedAt": "2026-09-03T09:05:17.742Z"
+    },
+    "statue_17_bonus": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven17\")",
+      "result": 5812.938287483872,
+      "description": "Ehexpee statue (index 17) bonus - talent 37 branch",
+      "extractedAt": "2026-09-03T09:05:17.744Z"
     },
     "statue_29_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven29\")",
       "result": 837.76,
       "description": "Dragon statue (index 29) bonus - used as dragonStatueBonus input; dragon does NOT apply dragonStatueBonus to itself",
-      "extractedAt": "2026-09-03T06:33:06.692Z"
+      "extractedAt": "2026-09-03T09:05:17.746Z"
     }
   },
   "errors": {},

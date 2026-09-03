@@ -34,8 +34,11 @@ export class Statue {
 
     public onyxStatueBonus: number = 2;
     public zenithStatueBonus: number = 1.5;
+    public upgradeVaultStatueBonus: number = 1;
     public dragonStatueBonus: number = 1;
-    public otherBonuses: number = 1;
+    public eventShopStatueBonus: number = 1;
+    public voodooStatueBonus: number = 1;
+    public meritocratyStatueBonus: number = 1;
 
     constructor(public index: number, public displayName: string, public internalName: string, public bonus: string, public statueData: StatueDataModel) {
         const StatueNumberRegex = /EquipmentStatues(\d+)/gm;
@@ -57,52 +60,65 @@ export class Statue {
     getBonus = (player: Player | undefined = undefined): number => {
         const talentFactor = (skillIndex: number) => Math.max(1,
             1 + (player?.talents.find(talent => talent.skillIndex == skillIndex)?.getBonus() ?? 0) / 100);
-        let talentBonus = 1;
+        let bonus = this.level * this.statueData.bonus;
 
         // Calculate statue bonus based on talents
         switch (this.displayName) {
             case "Power Statue":
             case "Mining Statue":
-                talentBonus *= talentFactor(112);
-                talentBonus *= talentFactor(127);
+                bonus *= talentFactor(112);
+                bonus *= talentFactor(127);
                 break;
             case "Thicc Skin Statue":
-                talentBonus *= talentFactor(127);
+                bonus *= talentFactor(127);
                 break;
             case "Oceanman Statue":
-                talentBonus *= talentFactor(112);
+                bonus *= talentFactor(112);
                 break;
             case "Speed Statue":
             case "Anvil Statue":
-                talentBonus *= talentFactor(292);
-                talentBonus *= talentFactor(307);
+                bonus *= talentFactor(292);
+                bonus *= talentFactor(307);
                 break;
             case "Bullseye Statue":
-                talentBonus *= talentFactor(307);
+                bonus *= talentFactor(307);
                 break;
             case "Ol Reliable Statue":
-                talentBonus *= talentFactor(292);
+                bonus *= talentFactor(292);
                 break;
             case "Exp Statue":
             case "Lumberbob Statue":
-                talentBonus *= talentFactor(487);
-                talentBonus *= talentFactor(472);
+                bonus *= talentFactor(487);
+                bonus *= talentFactor(472);
                 break;
             case "Beholder Statue":
-                talentBonus *= talentFactor(472);
+                bonus *= talentFactor(472);
                 break;
             case "Cauldron Statue":
-                talentBonus *= talentFactor(487);
+                bonus *= talentFactor(487);
                 break;
-            case "EhExPee Statue":
+            case "Ehexpee Statue":
             case "Kachow Statue":
             case "Feasty Statue":
-                talentBonus *= talentFactor(37);
+                bonus *= talentFactor(37);
                 break;
         }
 
-        return this.level * this.statueData.bonus * talentBonus * (this.type >= StatusType.Onyx ? this.onyxStatueBonus : 1)
-            * (this.type >= StatusType.Zenith ? this.zenithStatueBonus : 1) * this.dragonStatueBonus * this.otherBonuses;
+        // Match StatueBonusGiven's multiplication order: base, talents, artifact,
+        // Zenith, Vault, Dragon, Event Shop, Voodoo, then Meritocracy.
+        if (this.type >= StatusType.Onyx) {
+            bonus *= this.onyxStatueBonus;
+        }
+        if (this.type >= StatusType.Zenith) {
+            bonus *= this.zenithStatueBonus;
+        }
+        bonus *= this.upgradeVaultStatueBonus;
+        bonus *= this.dragonStatueBonus;
+        bonus *= this.eventShopStatueBonus;
+        bonus *= this.voodooStatueBonus;
+        bonus *= this.meritocratyStatueBonus;
+
+        return bonus;
     }
 
     getBonusText = (player: Player | undefined = undefined) => {
@@ -213,14 +229,14 @@ export const updateStatueBonuses = (data: Map<string, any>) => {
     if (bestVoidMan) {
         voodooStatuficationTalentBonus = bestVoidMan.talents.find(talent => talent.skillIndex == 56)?.getBonus() ?? 0;
     }
-    const eventShopBonus19 = eventShop.isBonusOwned(19) ? 30 : 0;
-    const meritocratyBonus26 = meritocraty.getCurrentBonus(26);
-    const otherBonuses = (1 + eventShopBonus19 / 100) * (1 + voodooStatuficationTalentBonus / 100) * (1 + meritocratyBonus26 / 100);
+    const eventShopStatueBonus = 1 + 0.3 * (eventShop.isBonusOwned(19) ? 1 : 0);
+    const voodooStatueBonus = Math.max(1, 1 + voodooStatuficationTalentBonus / 100);
+    const meritocratyStatueBonus = 1 + meritocraty.getCurrentBonus(26) / 100;
 
     // Bonus for a few statues only
-    const upgradeVaultBonus = 1 + upgradeVault.getBonusForId(25) / 100;
+    const upgradeVaultBonus = Math.max(1, 1 + upgradeVault.getBonusForId(25) / 100);
 
-    const onyxStatueBonus = 2 + Math.max(0, sailing.artifacts[30].getBonus()) / 100;
+    const onyxStatueBonus = Math.max(1, 1 + (100 + sailing.artifacts[30].getBonus()) / 100);
     const zenithStatueBonus = Math.max(1, 1 + (50 + zenithMarket.getBonusForId(0)) / 100);
 
     statues.forEach(playerStatues => {
@@ -230,9 +246,12 @@ export const updateStatueBonuses = (data: Map<string, any>) => {
         if (dragonStatue) {
             dragonStatue.onyxStatueBonus = onyxStatueBonus;
             dragonStatue.zenithStatueBonus = zenithStatueBonus;
-            dragonStatue.otherBonuses = otherBonuses;
+            dragonStatue.upgradeVaultStatueBonus = 1;
             dragonStatue.dragonStatueBonus = 1;
-            dragonStatueBonus = 1 + dragonStatue.getBonus() / 100;
+            dragonStatue.eventShopStatueBonus = eventShopStatueBonus;
+            dragonStatue.voodooStatueBonus = voodooStatueBonus;
+            dragonStatue.meritocratyStatueBonus = meritocratyStatueBonus;
+            dragonStatueBonus = Math.max(1, 1 + dragonStatue.getBonus() / 100);
         }
 
         // Then calculate the bonus for all other statues
@@ -241,12 +260,11 @@ export const updateStatueBonuses = (data: Map<string, any>) => {
                 statue.onyxStatueBonus = onyxStatueBonus;
                 statue.zenithStatueBonus = zenithStatueBonus;
                 // Add the upgrade vault bonus for those ones only
-                if([0, 1, 2, 6].includes(statue.index)) {
-                    statue.otherBonuses = otherBonuses * upgradeVaultBonus;
-                } else {
-                    statue.otherBonuses = otherBonuses;
-                }
+                statue.upgradeVaultStatueBonus = [0, 1, 2, 6].includes(statue.index) ? upgradeVaultBonus : 1;
                 statue.dragonStatueBonus = dragonStatueBonus;
+                statue.eventShopStatueBonus = eventShopStatueBonus;
+                statue.voodooStatueBonus = voodooStatueBonus;
+                statue.meritocratyStatueBonus = meritocratyStatueBonus;
             }
         });
     });

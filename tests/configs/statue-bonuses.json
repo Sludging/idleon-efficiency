@@ -34,6 +34,41 @@
       "description": "Voodoo Statufication talent bonus (skillIndex 56, -1 = best across all players)"
     },
     {
+      "label": "talent_37_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 37)",
+      "description": "Talent 37 bonus applied to statue indices [3, 5, 17]"
+    },
+    {
+      "label": "talent_112_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
+      "description": "Talent 112 bonus applied to statue indices [0, 2, 8]"
+    },
+    {
+      "label": "talent_127_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 127)",
+      "description": "Talent 127 bonus applied to statue indices [0, 2, 7]"
+    },
+    {
+      "label": "talent_292_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 292)",
+      "description": "Talent 292 bonus applied to statue indices [1, 9, 11]"
+    },
+    {
+      "label": "talent_307_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 307)",
+      "description": "Talent 307 bonus applied to statue indices [1, 11, 14]"
+    },
+    {
+      "label": "talent_472_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 472)",
+      "description": "Talent 472 bonus applied to statue indices [6, 10, 13]"
+    },
+    {
+      "label": "talent_487_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 487)",
+      "description": "Talent 487 bonus applied to statue indices [6, 10, 12]"
+    },
+    {
       "label": "statue_0_bonus",
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
       "description": "Statue index 0 bonus (upgrade vault bonus applies, index is in [0,1,2,6])"
@@ -52,6 +87,66 @@
       "label": "statue_24_bonus",
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven24\")",
       "description": "Statue index 24 bonus (upgrade vault bonus does NOT apply)"
+    },
+    {
+      "label": "statue_2_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven2\")",
+      "description": "Mining statue (index 2) bonus - talent 112 and 127 branches; UpgradeVault applies"
+    },
+    {
+      "label": "statue_3_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven3\")",
+      "description": "Feasty statue (index 3) bonus - talent 37 branch"
+    },
+    {
+      "label": "statue_6_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven6\")",
+      "description": "Lumberbob statue (index 6) bonus - talent 487 and 472 branches; UpgradeVault applies"
+    },
+    {
+      "label": "statue_7_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven7\")",
+      "description": "Thicc Skin statue (index 7) bonus - talent 127 branch"
+    },
+    {
+      "label": "statue_8_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven8\")",
+      "description": "Oceanman statue (index 8) bonus - talent 112 branch"
+    },
+    {
+      "label": "statue_9_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven9\")",
+      "description": "Ol Reliable statue (index 9) bonus - talent 292 branch"
+    },
+    {
+      "label": "statue_10_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven10\")",
+      "description": "Exp statue (index 10) bonus - talent 487 and 472 branches"
+    },
+    {
+      "label": "statue_11_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven11\")",
+      "description": "Anvil statue (index 11) bonus - talent 292 and 307 branches"
+    },
+    {
+      "label": "statue_12_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven12\")",
+      "description": "Cauldron statue (index 12) bonus - talent 487 branch"
+    },
+    {
+      "label": "statue_13_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven13\")",
+      "description": "Beholder statue (index 13) bonus - talent 472 branch"
+    },
+    {
+      "label": "statue_14_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven14\")",
+      "description": "Bullseye statue (index 14) bonus - talent 307 branch"
+    },
+    {
+      "label": "statue_17_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven17\")",
+      "description": "Ehexpee statue (index 17) bonus - talent 37 branch"
     },
     {
       "label": "statue_29_bonus",
