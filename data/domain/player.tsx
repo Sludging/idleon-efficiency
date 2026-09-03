@@ -1298,6 +1298,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
         players.forEach(player => {
             player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                 .forEach(talent => {
+                    talent.level += talent.level > 0 ? sneakyingMasteryBonus : 0;
                     talent.maxLevel += sneakyingMasteryBonus
                 });
             player.extraLevelsFromNinjaMastery = sneakyingMasteryBonus;
@@ -1309,6 +1310,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
         players.forEach(player => {
             player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                 .forEach(talent => {
+                    talent.level += talent.level > 0 ? kattlekrukSetBonus : 0;
                     talent.maxLevel += kattlekrukSetBonus;
                 });
             player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;

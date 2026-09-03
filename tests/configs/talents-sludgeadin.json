@@ -49,6 +49,26 @@
       "description": "Talent 59 bonus - Blood Marrow"
     },
     {
+      "label": "talent_112_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
+      "description": "Talent 112 bonus"
+    },
+    {
+      "label": "talent_91_y_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 91)",
+      "description": "Talent 91 Y bonus - Whirl target count"
+    },
+    {
+      "label": "talent_8_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 8)",
+      "description": "Talent 8 bonus"
+    },
+    {
+      "label": "talent_91_x_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 91)",
+      "description": "Talent 91 X bonus"
+    },
+    {
       "label": "talent_max_level_149_bonus",
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
       "description": "Talent level bonus from talent 149"
