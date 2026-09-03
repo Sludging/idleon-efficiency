@@ -60,7 +60,7 @@ describe('Talent Domain - General - Parameters', () => {
     it(`validates ${spec.description}`, () => {
       const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
       const domainValue = spec.domainExtractor(gameData);
-      expect(domainValue).toMatchLiveGame(liveValue, 0.001);
+      expect(domainValue).toMatchLiveGame(liveValue, 0);
     });
   });
 });

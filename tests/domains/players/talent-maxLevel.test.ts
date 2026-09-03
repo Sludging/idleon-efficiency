@@ -94,6 +94,15 @@ const talentMaxLevelParameterSpecs = {
       return sludgadin?.extraLevelsFromTesseract ?? 0;
     }
   },
+  talent_max_level_timmy_talented_bonus: {
+    description: 'Max level bonus - Timmy Talented SuperBit 47 - Sludgadin',
+    extractionKey: 'talent_max_level_timmy_talented_bonus',
+    domainExtractor: (gameData: Map<string, any>) => {
+      const players = gameData.get("players") as Player[];
+      const sludgadin = players.find(player => player.playerID == 0) ?? undefined;
+      return sludgadin?.extraLevelsFromSuperBit ?? 0;
+    }
+  },
   talent_max_level_final_bonus: {
     description: 'Max level bonus - Final - Sludgadin',
     extractionKey: 'all_talent_level_146',

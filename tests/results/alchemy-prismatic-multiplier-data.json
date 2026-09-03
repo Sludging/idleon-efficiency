@@ -1,65 +1,65 @@
 {
-  "timestamp": "2026-08-24T08:02:28.348Z",
+  "timestamp": "2026-09-03T00:13:04.855Z",
   "extractions": {
     "arcane_upgrade_45_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 45, 0)",
       "result": 6,
       "description": "Arcane (tesseract) upgrade 45 bonus",
-      "extractedAt": "2026-08-24T08:02:28.355Z"
+      "extractedAt": "2026-09-03T00:13:04.872Z"
     },
     "arcade_bonus_54": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
       "result": 4,
       "description": "Arcade bonus 54",
-      "extractedAt": "2026-08-24T08:02:28.358Z"
+      "extractedAt": "2026-09-03T00:13:04.875Z"
     },
     "sushi_rog_bonus_qty_23": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
       "result": 1,
       "description": "Sushi RoG bonus quantity 23",
-      "extractedAt": "2026-08-24T08:02:28.366Z"
+      "extractedAt": "2026-09-03T00:13:04.878Z"
     },
     "world_6_trophy_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"HaveW6Trophy\", 0, 0)",
       "result": 10,
       "description": "World 6 trophy bonus (Trophy23 - 10 if obtained, 0 otherwise)",
-      "extractedAt": "2026-08-24T08:02:28.369Z"
+      "extractedAt": "2026-09-03T00:13:04.885Z"
     },
     "palette_bonus_28": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 28, 0)",
       "result": 3.230769230769231,
       "description": "Gaming palette bonus 28",
-      "extractedAt": "2026-08-24T08:02:28.371Z"
+      "extractedAt": "2026-09-03T00:13:04.889Z"
     },
     "total_purple_sigils": {
       "expression": "idleon.callFunction(\"Labb\", \"TotalPurpleSigils\", \"0\", 0, 0)",
       "result": 9,
       "description": "Total purple sigils (boost level >= 3)",
-      "extractedAt": "2026-08-24T08:02:28.374Z"
+      "extractedAt": "2026-09-03T00:13:04.916Z"
     },
     "exotic_market_bonus_48": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 48, 0)",
       "result": 0.2978723404255319,
       "description": "Exotic market bonus 48",
-      "extractedAt": "2026-08-24T08:02:28.382Z"
+      "extractedAt": "2026-09-03T00:13:04.926Z"
     },
     "legend_talent_36_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
       "result": 3,
       "description": "Legend talent 36 bonus",
-      "extractedAt": "2026-08-24T08:02:28.384Z"
+      "extractedAt": "2026-09-03T00:13:04.932Z"
     },
     "companion_88_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 88, 0)",
       "result": 1,
       "description": "Companion 88 prismatic multiplier input",
-      "extractedAt": "2026-08-24T08:02:28.386Z"
+      "extractedAt": "2026-09-03T00:13:04.937Z"
     },
     "prismatic_multiplier": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "result": 2.7932864157119477,
       "description": "Final prismatic multiplier calculation (min 4, base 2)",
-      "extractedAt": "2026-08-24T08:02:28.389Z"
+      "extractedAt": "2026-09-03T00:13:04.939Z"
     }
   },
   "errors": {},

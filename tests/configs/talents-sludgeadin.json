@@ -92,6 +92,26 @@
       "label": "talent_max_level_tesseract_57_bonus",
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
       "description": "Talent level bonus from tesseract 57"
+    },
+    {
+      "label": "talent_max_level_timmy_talented_bonus",
+      "expression": "Math.max(0, Math.floor(((idleon.getAttr(\"Lv0\")[0] - 500) / 100) * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 47, 0)))",
+      "description": "Talent max level bonus from Timmy Talented SuperBit 47"
+    },
+    {
+      "label": "all_talent_level_149",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"149\")",
+      "description": "All talent level 149 - gate-passing banned talent"
+    },
+    {
+      "label": "all_talent_level_z_membership_delta_player_3",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"125|3\") - idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"170|3\")",
+      "description": "All talent level membership delta for player 3: Super Talent member 125 minus nonmember 170"
+    },
+    {
+      "label": "all_talent_level_z_225_player_3",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"225|3\")",
+      "description": "All talent level 225 for player 3 via AllTalentLVz - Royal Guardian cap"
     }
   ]
 }

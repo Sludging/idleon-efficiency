@@ -66,6 +66,7 @@ export class LegendTalents extends Domain {
         ]
     }
 
+
     init(_allItems: Item[]) {
         this.talents = LegendTalent.fromBase(initLegendTalentsRepo());
         return this;
@@ -87,6 +88,7 @@ export class LegendTalents extends Domain {
             }
         });
     }
+    
 
     getBonusFromIndex = (index: number): number => {
         const bonus = this.talents.find(talent => talent.index == index);

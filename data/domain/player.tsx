@@ -168,6 +168,8 @@ export class Player {
     extraLevelsFromKattlekrukSet: number = 0;
     extraLevelsFromGrimoire: number = 0;
     extraLevelsFromTesseract: number = 0;
+    extraLevelsFromSuperBit: number = 0;
+    royalGuardianAllTalentCap: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -304,6 +306,7 @@ export class Player {
     getTalent = (skillIndex: number) => {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
     }
+
     
     markTalentAsEnhanced = (skillIndex: number) => {
         const talent = this.talents.find(talent => talent.skillIndex == skillIndex);
@@ -641,6 +644,8 @@ const keyFunctionMap: Record<string, Function> = {
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
+        safeJsonParse(doc, "Spelunk", []) as number[][],
+        safeJsonParse(doc, "RoyalG", []) as number[][],
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -703,9 +708,13 @@ const parsePostOffice = (postOffice: string, player: Player) => {
     });
 }
 
-const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Player) => {
+const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], royalG: number[][], player: Player) => {
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
+    let royalGuardianTalentCap = 0;
+    if (royalG.length > 2 && royalG[2].length > 55) {
+        royalGuardianTalentCap = royalG[2][55];
+    }
 
     if (player.talents.length == 0) {
         const talentPageNames: string[] = ClassTalentMap[player.classId].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
@@ -714,15 +723,21 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         })
     }
 
+    const superedTalentIndexes = new Set([
+        ...spelunkData[20 + player.playerID],
+        ...spelunkData[32 + player.playerID],
+    ]);
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
         talent.bookMaxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+        talent.isSupered = superedTalentIndexes.has(talent.skillIndex);
     })
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;
     player.extraLevelsFromTalent = 0;
+    player.royalGuardianAllTalentCap = royalGuardianTalentCap;
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
@@ -736,6 +751,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         player.extraLevelsFromTalent = extraLevels;
     }
 }
+
 
 const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     skills.forEach((skillLevel, skillIndex) => {
@@ -1134,6 +1150,7 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
 
     // Max talent level from Elemental Sorcerer
     players.forEach(player => {
@@ -1149,6 +1166,38 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
         }
     })
 
+    // Max talent level from Royal Guardian All Talent Cap
+    players.forEach(player => {
+        const allTalentCap = player.royalGuardianAllTalentCap;
+        player.talents
+            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
+            .forEach(talent => {
+                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
+                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
+                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
+                talent.maxLevel += adjustment;
+                if (talent.level > 0) {
+                    talent.level += adjustment;
+                }
+            });
+    });
+
+    // Super-talent levels are added after the capped all-talent aggregate.
+    const superTalentBonusLevels = legendTalents.superTalentBonusLevels;
+    if (superTalentBonusLevels > 0) {
+        players.forEach(player => {
+            player.talents.filter(talent =>
+                ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                talent.skillIndex <= 614 &&
+                !(49 <= talent.skillIndex && talent.skillIndex <= 59) &&
+                talent.isSupered
+            ).forEach(talent => {
+                talent.level += talent.level > 0 ? superTalentBonusLevels : 0;
+                talent.maxLevel += superTalentBonusLevels;
+            });
+        });
+    }
+
     return players;
 }
 
@@ -1161,6 +1210,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const tesseract = data.get("tesseract") as Tesseract;
     const optLacc = data.get("OptLacc") as (number | string)[];
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
+    const gaming = data.get("gaming") as Gaming;
 
     // Update max talent level due to bear.
     const bearGod = divinity.gods[1];
@@ -1264,6 +1314,23 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
             player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;
         })
     }
+    players.forEach(player => {
+        const timmyTalentedBonus = gaming.superbits[47].unlocked
+            ? Math.max(0, Math.floor((player.level - 500) / 100))
+            : 0;
+        if (player.extraLevelsFromSuperBit == 0 || player.extraLevelsFromSuperBit != timmyTalentedBonus) {
+            player.talents.filter(talent =>
+                ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                talent.skillIndex <= 614 &&
+                !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+            ).forEach(talent => {
+                talent.level += talent.level > 0 ? timmyTalentedBonus : 0;
+                talent.maxLevel += timmyTalentedBonus;
+            });
+            player.extraLevelsFromSuperBit = timmyTalentedBonus;
+        }
+    });
+    
 
     return players;
 }

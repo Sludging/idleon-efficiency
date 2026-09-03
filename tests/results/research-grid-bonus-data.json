@@ -1,125 +1,125 @@
 {
-  "timestamp": "2026-08-28T05:08:29.214Z",
+  "timestamp": "2026-09-03T00:13:06.120Z",
   "extractions": {
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 6,
       "description": "Better Button Research Grid bonus at index 125",
-      "extractedAt": "2026-08-28T05:08:29.231Z"
+      "extractedAt": "2026-09-03T00:13:06.124Z"
     },
     "grid_bonus_allmulti": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus_Allmulti\", 0, 0)",
       "result": 1.2,
       "description": "Generic multiplier applied to Research Grid bonuses",
-      "extractedAt": "2026-08-28T05:08:29.247Z"
+      "extractedAt": "2026-09-03T00:13:06.125Z"
     },
     "companion_bonus_55": {
       "expression": "idleon.callFunction(\"Companions\", 55)",
       "result": 15,
       "description": "Companion bonus that increases all Research Grid bonuses",
-      "extractedAt": "2026-08-28T05:08:29.263Z"
+      "extractedAt": "2026-09-03T00:13:06.128Z"
     },
     "companion_bonus_0": {
       "expression": "idleon.callFunction(\"Companions\", 0)",
       "result": 1,
       "description": "King Doot Research dependency bonus",
-      "extractedAt": "2026-08-28T05:08:29.282Z"
+      "extractedAt": "2026-09-03T00:13:06.135Z"
     },
     "cloud_bonus_71": {
       "expression": "idleon.callFunction(\"Dreamstuff\", \"CloudBonus\", 71)",
       "result": 0,
       "description": "Equinox cloud bonus 71 for Research Grid all-multiplier",
-      "extractedAt": "2026-08-28T05:08:29.298Z"
+      "extractedAt": "2026-09-03T00:13:06.138Z"
     },
     "cloud_bonus_72": {
       "expression": "idleon.callFunction(\"Dreamstuff\", \"CloudBonus\", 72)",
       "result": 0,
       "description": "Equinox cloud bonus 72 for Research Grid all-multiplier",
-      "extractedAt": "2026-08-28T05:08:29.313Z"
+      "extractedAt": "2026-09-03T00:13:06.140Z"
     },
     "cloud_bonus_76": {
       "expression": "idleon.callFunction(\"Dreamstuff\", \"CloudBonus\", 76)",
       "result": 0,
       "description": "Equinox cloud bonus 76 for Research Grid all-multiplier",
-      "extractedAt": "2026-08-28T05:08:29.328Z"
+      "extractedAt": "2026-09-03T00:13:06.142Z"
     },
     "sushi_bonus_53": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 53, 0)",
       "result": 0,
       "description": "Sushi bonus that increases all Research Grid bonuses",
-      "extractedAt": "2026-08-28T05:08:29.345Z"
+      "extractedAt": "2026-09-03T00:13:06.144Z"
     },
     "grid_bonus_31": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 0)",
       "result": 27,
       "description": "Smart Eye Research Grid bonus with a shape multiplier",
-      "extractedAt": "2026-08-28T05:08:29.347Z"
+      "extractedAt": "2026-09-03T00:13:06.153Z"
     },
     "grid_bonus_47": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 47, 0)",
       "result": 2.88,
       "description": "Sticker-it To Em Research Grid bonus with a shape multiplier",
-      "extractedAt": "2026-08-28T05:08:29.363Z"
+      "extractedAt": "2026-09-03T00:13:06.155Z"
     },
     "grid_bonus_125_mode1": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 1)",
       "result": 1,
       "description": "Better Button Research Grid level",
-      "extractedAt": "2026-08-28T05:08:29.379Z"
+      "extractedAt": "2026-09-03T00:13:06.157Z"
     },
     "grid_bonus_125_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 2)",
       "result": 6,
       "description": "Better Button default secondary Research Grid bonus",
-      "extractedAt": "2026-08-28T05:08:29.395Z"
+      "extractedAt": "2026-09-03T00:13:06.159Z"
     },
     "grid_bonus_31_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 2)",
       "result": 75,
       "description": "Smart Eye minimum-roll secondary bonus",
-      "extractedAt": "2026-08-28T05:08:29.411Z"
+      "extractedAt": "2026-09-03T00:13:06.161Z"
     },
     "grid_bonus_67_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 67, 2)",
       "result": 864,
       "description": "Sticker Crown secondary bonus scaled by crown count",
-      "extractedAt": "2026-08-28T05:08:29.429Z"
+      "extractedAt": "2026-09-03T00:13:06.169Z"
     },
     "grid_bonus_68_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 68, 2)",
       "result": 34.56,
       "description": "Sticker Crown secondary bonus scaled by crown count",
-      "extractedAt": "2026-08-28T05:08:29.446Z"
+      "extractedAt": "2026-09-03T00:13:06.170Z"
     },
     "grid_bonus_107_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 107, 2)",
       "result": 86.39999999999999,
       "description": "Sticker Crown secondary bonus scaled by crown count",
-      "extractedAt": "2026-08-28T05:08:29.463Z"
+      "extractedAt": "2026-09-03T00:13:06.172Z"
     },
     "grid_bonus_94_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
       "result": 942,
       "description": "Observation-level secondary bonus",
-      "extractedAt": "2026-08-28T05:08:29.481Z"
+      "extractedAt": "2026-09-03T00:13:06.173Z"
     },
     "grid_bonus_112_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
       "result": 151.79999999999998,
       "description": "Occurrence-count secondary bonus",
-      "extractedAt": "2026-08-28T05:08:29.497Z"
+      "extractedAt": "2026-09-03T00:13:06.175Z"
     },
     "grid_bonus_151_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 151, 2)",
-      "result": 7831,
+      "result": 8191,
       "description": "Account-option secondary bonus",
-      "extractedAt": "2026-08-28T05:08:29.511Z"
+      "extractedAt": "2026-09-03T00:13:06.177Z"
     },
     "grid_bonus_168_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 168, 2)",
       "result": 4.8,
       "description": "Glimbo-trade secondary bonus",
-      "extractedAt": "2026-08-28T05:08:29.514Z"
+      "extractedAt": "2026-09-03T00:13:06.184Z"
     }
   },
   "errors": {},
