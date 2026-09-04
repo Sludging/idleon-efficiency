@@ -1,119 +1,119 @@
 {
-  "timestamp": "2026-09-03T09:05:16.713Z",
+  "timestamp": "2026-09-04T02:11:41.880Z",
   "extractions": {
     "has_bun_q": {
       "expression": "idleon.getAttr(\"BundlesReceived\").h.bun_q",
       "result": 1,
       "description": "Has bun_q bundle",
-      "extractedAt": "2026-09-03T09:05:16.725Z"
+      "extractedAt": "2026-09-04T02:11:41.885Z"
     },
     "voting_bonus_32": {
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\", 32, 0)",
       "result": 0,
       "description": "Voting bonus 32",
-      "extractedAt": "2026-09-03T09:05:16.728Z"
+      "extractedAt": "2026-09-04T02:11:41.893Z"
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
       "result": 332.15348358300014,
       "description": "Lore Epic bonus 8",
-      "extractedAt": "2026-09-03T09:05:16.729Z"
+      "extractedAt": "2026-09-04T02:11:41.895Z"
     },
     "companion_15_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 15)",
       "result": 2.5,
       "description": "Companion 15 bonus",
-      "extractedAt": "2026-09-03T09:05:16.732Z"
+      "extractedAt": "2026-09-04T02:11:41.897Z"
     },
     "cosmo_bonus_2_5": {
       "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\", 2, 5)",
       "result": 60,
       "description": "Cosmo bonus 2 - 5",
-      "extractedAt": "2026-09-03T09:05:16.739Z"
+      "extractedAt": "2026-09-04T02:11:41.899Z"
     },
     "event_shop_owned_3": {
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\", 3, 0)",
       "result": 1,
       "description": "Event shop owned 3",
-      "extractedAt": "2026-09-03T09:05:16.741Z"
+      "extractedAt": "2026-09-04T02:11:41.901Z"
     },
     "option_320_bonus": {
       "expression": "idleon.getAttr(\"OptionsListAccount\")[320]",
       "result": 0,
       "description": "Option 320 bonus",
-      "extractedAt": "2026-09-03T09:05:16.743Z"
+      "extractedAt": "2026-09-04T02:11:41.910Z"
     },
     "alch_vials_eq_bar_bonus": {
       "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h.EqBar",
       "result": 345.8,
       "description": "Alch vials eq bar bonus",
-      "extractedAt": "2026-09-03T09:05:16.745Z"
+      "extractedAt": "2026-09-04T02:11:41.912Z"
     },
     "cloud_bonus_3": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 3)",
       "result": 1,
       "description": "Cloud bonus 3",
-      "extractedAt": "2026-09-03T09:05:16.747Z"
+      "extractedAt": "2026-09-04T02:11:41.914Z"
     },
     "cloud_bonus_9": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 9)",
       "result": 1,
       "description": "Cloud bonus 9",
-      "extractedAt": "2026-09-03T09:05:16.758Z"
+      "extractedAt": "2026-09-04T02:11:41.916Z"
     },
     "cloud_bonus_14": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 14)",
       "result": 1,
       "description": "Cloud bonus 14",
-      "extractedAt": "2026-09-03T09:05:16.760Z"
+      "extractedAt": "2026-09-04T02:11:41.918Z"
     },
     "cloud_bonus_19": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 19)",
       "result": 1,
       "description": "Cloud bonus 19",
-      "extractedAt": "2026-09-03T09:05:16.761Z"
+      "extractedAt": "2026-09-04T02:11:41.929Z"
     },
     "cloud_bonus_22": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 22)",
       "result": 1,
       "description": "Cloud bonus 22",
-      "extractedAt": "2026-09-03T09:05:16.763Z"
+      "extractedAt": "2026-09-04T02:11:41.931Z"
     },
     "cloud_bonus_24": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 24)",
       "result": 1,
       "description": "Cloud bonus 24",
-      "extractedAt": "2026-09-03T09:05:16.764Z"
+      "extractedAt": "2026-09-04T02:11:41.933Z"
     },
     "cloud_bonus_29": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"CloudBonus\", 29)",
       "result": 0,
       "description": "Cloud bonus 29",
-      "extractedAt": "2026-09-03T09:05:16.766Z"
+      "extractedAt": "2026-09-04T02:11:41.935Z"
     },
     "arcade_bonus_41": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 41)",
       "result": 39,
       "description": "Arcade bonus 41",
-      "extractedAt": "2026-09-03T09:05:16.775Z"
+      "extractedAt": "2026-09-04T02:11:41.943Z"
     },
     "emperor_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\",\"EmperorBon\", 5, 0)",
       "result": 174,
       "description": "Emperor bonus 5",
-      "extractedAt": "2026-09-03T09:05:16.777Z"
+      "extractedAt": "2026-09-04T02:11:41.945Z"
     },
     "tesseract_bonus_37": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
       "result": 84.42,
       "description": "Tesseract bonus 37",
-      "extractedAt": "2026-09-03T09:05:16.779Z"
+      "extractedAt": "2026-09-04T02:11:41.947Z"
     },
     "equinox_bar_rate": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
       "result": 68645.25190311663,
       "description": "Equinox bar rate",
-      "extractedAt": "2026-09-03T09:05:16.780Z"
+      "extractedAt": "2026-09-04T02:11:41.949Z"
     }
   },
   "errors": {},

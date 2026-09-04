@@ -96,9 +96,9 @@ describe('Worship Domain - Totalizer Bonus Calculations', () => {
       expect(domainBonus).toMatchLiveGame(liveBonus, 0);
     });
 
-    it('validates bonus 10 (World 7 Second Skill)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'bonus_10_world7_skill');
-      const domainBonus = worship.totalizer.getBonus(TotalizerBonus.World7SeconSkill);
+    it('validates bonus 10 (Research Exp)', () => {
+      const liveBonus = getExtractedValue(extractionResults, 'bonus_10_research_exp');
+      const domainBonus = worship.totalizer.getBonus(TotalizerBonus.ResearchExp);
 
       expect(domainBonus).toMatchLiveGame(liveBonus, 0);
     });

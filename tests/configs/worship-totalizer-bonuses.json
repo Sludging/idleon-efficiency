@@ -58,9 +58,9 @@
       "description": "Totalizer bonus 9 - Spelunking Power"
     },
     {
-      "label": "bonus_10_world7_skill",
+      "label": "bonus_10_research_exp",
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
-      "description": "Totalizer bonus 10 - World 7 Second Skill (not yet implemented)"
+      "description": "Totalizer bonus 10 - Research Exp"
     }
   ]
 }

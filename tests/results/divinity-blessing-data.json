@@ -1,83 +1,83 @@
 {
-  "timestamp": "2026-09-03T09:05:16.644Z",
+  "timestamp": "2026-09-04T02:11:41.815Z",
   "extractions": {
     "emporium_bonus_33": {
       "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 33, 0)",
       "result": 1,
       "description": "Jade Emporium upgrade 33 bonus",
-      "extractedAt": "2026-09-03T09:05:16.649Z"
+      "extractedAt": "2026-09-04T02:11:41.825Z"
     },
     "gods_unlocked_count": {
       "expression": "idleon.engine.getGameAttribute(\"Divinity\")[25]",
       "result": 20,
       "description": "Number of gods unlocked (for god rank calculation)",
-      "extractedAt": "2026-09-03T09:05:16.658Z"
+      "extractedAt": "2026-09-04T02:11:41.827Z"
     },
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
       "result": 22208.030186864966,
       "description": "All skill efficiencies stat for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.660Z"
+      "extractedAt": "2026-09-04T02:11:41.829Z"
     },
     "alchemy_bubble_mineff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.MinEff",
-      "result": 25973.72683032156,
+      "result": 25978.902567265377,
       "description": "Mining efficiency bubble for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.662Z"
+      "extractedAt": "2026-09-04T02:11:41.831Z"
     },
     "alchemy_bubble_chopeff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.ChopEff",
-      "result": 1747.9648064712144,
+      "result": 1747.9846362676988,
       "description": "Chopping efficiency bubble for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.663Z"
+      "extractedAt": "2026-09-04T02:11:41.833Z"
     },
     "total_stats_str": {
       "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
-      "result": 1609878,
+      "result": 1610076,
       "description": "Total STR stat for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.676Z"
+      "extractedAt": "2026-09-04T02:11:41.835Z"
     },
     "total_stats_agi": {
       "expression": "idleon.callFunction(\"TotalStats\", \"AGI\")",
-      "result": 667812,
+      "result": 667881,
       "description": "Total AGI stat for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.678Z"
+      "extractedAt": "2026-09-04T02:11:41.842Z"
     },
     "total_stats_wis": {
       "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
-      "result": 682577,
+      "result": 682647,
       "description": "Total WIS stat for BlessyBunDN calculation",
-      "extractedAt": "2026-09-03T09:05:16.680Z"
+      "extractedAt": "2026-09-04T02:11:41.844Z"
     },
     "divinity_blessing_2": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
       "result": 1070,
       "description": "Divinity blessing bonus for god 2 (Nobisect - special formula)",
-      "extractedAt": "2026-09-03T09:05:16.682Z"
+      "extractedAt": "2026-09-04T02:11:41.847Z"
     },
     "divinity_blessing_4": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
       "result": 852,
       "description": "Divinity blessing bonus for god 4",
-      "extractedAt": "2026-09-03T09:05:16.691Z"
+      "extractedAt": "2026-09-04T02:11:41.849Z"
     },
     "divinity_blessing_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
       "result": 873,
       "description": "Divinity blessing bonus for god 6 (Purrmep)",
-      "extractedAt": "2026-09-03T09:05:16.693Z"
+      "extractedAt": "2026-09-04T02:11:41.850Z"
     },
     "divinity_blessing_7": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
       "result": 193.5,
       "description": "Divinity blessing bonus for god 7",
-      "extractedAt": "2026-09-03T09:05:16.695Z"
+      "extractedAt": "2026-09-04T02:11:41.861Z"
     },
     "divinity_blessing_9": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
       "result": 847.5,
       "description": "Divinity blessing bonus for god 9",
-      "extractedAt": "2026-09-03T09:05:16.696Z"
+      "extractedAt": "2026-09-04T02:11:41.863Z"
     }
   },
   "errors": {},
