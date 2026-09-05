@@ -6,10 +6,13 @@ import { RoyalArmoryUpgradeModel } from "../model/royalArmoryUpgradeModel";
 export class RoyalArmoryUpgrade {
     level: number = 0;
 
-    constructor(public index: number, public data: RoyalArmoryUpgradeModel) { }
+    constructor(
+        public index: number,
+        public data: RoyalArmoryUpgradeModel,
+    ) { }
 
     static fromBase(data: RoyalArmoryUpgradeBase[]): RoyalArmoryUpgrade[] {
-        return data.map(upgrade => new RoyalArmoryUpgrade(upgrade.index, upgrade.data));
+        return data.map((upgrade) => new RoyalArmoryUpgrade(upgrade.index, upgrade.data));
     }
 
     getBonus(): number {
@@ -21,9 +24,7 @@ export class RoyalArmory extends Domain {
     upgrades: RoyalArmoryUpgrade[] = [];
 
     getRawKeys(): RawData[] {
-        return [
-            { key: "RoyalG", perPlayer: false, default: [] }
-        ];
+        return [{ key: "RoyalG", perPlayer: false, default: [] }];
     }
 
     init(_allItems: Item[], _charCount: number) {
@@ -36,12 +37,12 @@ export class RoyalArmory extends Domain {
         const royalG = data.get("RoyalG") as number[][] | undefined;
         const upgradeLevels = royalG?.[2] ?? [];
 
-        royalArmory.upgrades.forEach(upgrade => {
+        royalArmory.upgrades.forEach((upgrade) => {
             upgrade.level = Number(upgradeLevels[upgrade.index]) || 0;
         });
     }
 
     getUpgradeBonus(index: number): number {
-        return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
+        return this.upgrades.find((upgrade) => upgrade.index === index)?.getBonus() ?? 0;
     }
 }
