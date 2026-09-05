@@ -1,0 +1,21 @@
+{
+  "description": "Extract Royal Armory upgrade bonus calculations",
+  "target": "Royal Armory upgrade bonuses",
+  "extractions": [
+    {
+      "label": "royal_armory_bonus_76",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
+      "description": "Royal Armory upgrade 76 bonus used by Equinox Dreamstuff bar fill rate"
+    },
+    {
+      "label": "royal_armory_bonus_9",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 9, 0)",
+      "description": "Royal Armory upgrade 9 bonus representative nonzero level"
+    },
+    {
+      "label": "royal_armory_bonus_19",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
+      "description": "Royal Armory upgrade 19 bonus representative nonzero level"
+    }
+  ]
+}

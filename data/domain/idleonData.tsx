@@ -64,6 +64,7 @@ import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
+import { RoyalArmory } from './world-6/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Clamworks } from './world-7/clamworks';
@@ -165,6 +166,7 @@ const domainList: Domain[] = [
     new Tesseract("tesseract"),
     new Compass("compass"),
     new Emperor("emperor"),
+    new RoyalArmory("royalArmory"),
     new EquipmentSets("equipmentSets"),
     new EventShop("eventShop"),
     new Clamworks("clamworks"),
