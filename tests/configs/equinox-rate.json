@@ -13,6 +13,11 @@
       "description": "Voting bonus 32"
     },
     {
+      "label": "research_grid_bonus_86",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\", 86, 0)",
+      "description": "Research Grid bonus 86"
+    },
+    {
       "label": "lore_epic_bonus_8",
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
       "description": "Lore Epic bonus 8"
@@ -91,6 +96,11 @@
       "label": "tesseract_bonus_37",
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
       "description": "Tesseract bonus 37"
+    },
+    {
+      "label": "royal_armory_bonus_76",
+      "expression": "idleon.callFunction(\"RoyalG\",\"ArmoryUpgBonus\", 76, 0)",
+      "description": "Royal Armory bonus 76"
     },
     {
       "label": "equinox_bar_rate",

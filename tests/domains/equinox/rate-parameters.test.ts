@@ -11,6 +11,8 @@ import { Arcade } from '../../../data/domain/arcade';
 import { Emperor } from '../../../data/domain/emperor';
 import { Tesseract } from '../../../data/domain/tesseract';
 import { Tome } from '../../../data/domain/tome';
+import { ResearchGrid } from '../../../data/domain/world-7/research';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
@@ -30,6 +32,14 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
       }
       const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
       return hasBundle;
+    }
+  },
+  research_grid_bonus_86: {
+    description: 'Research Grid bonus 86',
+    extractionKey: 'research_grid_bonus_86',
+    domainExtractor: (gameData) => {
+      const researchGrid = gameData.get("research") as ResearchGrid;
+      return researchGrid.getBonusForId(86);
     }
   },
   voting_bonus_32: {
@@ -166,6 +176,14 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const tesseract = gameData.get("tesseract") as Tesseract;
       return tesseract.getUpgradeBonus(37) ?? 0;
+    }
+  },
+  royal_armory_bonus_76: {
+    description: 'Royal Armory bonus 76',
+    extractionKey: 'royal_armory_bonus_76',
+    domainExtractor: (gameData) => {
+      const royalArmory = gameData.get("royalArmory") as RoyalArmory;
+      return royalArmory.getUpgradeBonus(76);
     }
   }
 };

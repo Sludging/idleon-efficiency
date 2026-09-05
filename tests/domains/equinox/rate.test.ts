@@ -45,11 +45,10 @@ describe('Equinox Domain - Rate', () => {
       const domainResult = equinox.bar.rate;
       
       // Use custom matcher with detailed logging
-      const ratio = domainResult / liveBarFillRate;
       expect(domainResult).toMatchLiveGameWithDetails(liveBarFillRate, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Equinox bar fill rate calculation',
       });
-    });
   });
+});
 });

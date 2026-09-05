@@ -2,7 +2,7 @@ import { Domain, RawData } from "../base/domain";
 import { initResearchGridBonusRepo, ResearchGridBonusBase } from "../data/ResearchGridBonusRepo";
 import { Item } from "../items";
 import { Companion, getCompanionBonus } from "../companions";
-import { Equinox, getCloudBonus } from "../world-3/equinox";
+import { Equinox } from "../world-3/equinox";
 import { SushiStation } from "./sushi";
 import { SkillsIndex } from "../SkillsIndex";
 
@@ -287,7 +287,7 @@ export class ResearchGrid extends Domain {
 
     const companion55Bonus = getCompanionBonus(companions, RESEARCH_GRID_ALL_MULTI_COMPANION);
     const cloudBonus = RESEARCH_GRID_ALL_MULTI_CHALLENGES.reduce(
-      (sum, index) => sum + getCloudBonus(equinox, index),
+      (sum, index) => sum + equinox.getChallengeBonus(index),
       0,
     );
     const sushiBonus = sushi.getBonusFromIndex(RESEARCH_GRID_ALL_MULTI_SUSHI);

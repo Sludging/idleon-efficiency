@@ -31,21 +31,24 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Equinox cloud bonus 71',
   extractionKey: 'cloud_bonus_71',
   domainExtractor: (gameData) => {
-   return getCloudBonus(gameData.get('equinox') as Equinox, 71);
+    const equinox = gameData.get('equinox') as Equinox;
+    return equinox.getChallengeBonus(71);
   }
  },
  cloud_bonus_72: {
   description: 'Equinox cloud bonus 72',
   extractionKey: 'cloud_bonus_72',
   domainExtractor: (gameData) => {
-   return getCloudBonus(gameData.get('equinox') as Equinox, 72);
+    const equinox = gameData.get('equinox') as Equinox;
+    return equinox.getChallengeBonus(72);
   }
  },
  cloud_bonus_76: {
   description: 'Equinox cloud bonus 76',
   extractionKey: 'cloud_bonus_76',
   domainExtractor: (gameData) => {
-   return getCloudBonus(gameData.get('equinox') as Equinox, 76);
+    const equinox = gameData.get('equinox') as Equinox;
+    return equinox.getChallengeBonus(76);
   }
  },
  sushi_bonus_53: {
