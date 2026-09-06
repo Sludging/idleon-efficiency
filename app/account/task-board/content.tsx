@@ -25,7 +25,7 @@ function TaskBoard() {
             <ThemeContext.Extend value={customTabsTheme}>
                 <Tabs activeIndex={index} onActive={onActive}>
                     {
-                        ["Blunder Hills", "Yum-Yum Desert", "Frostbite Tundra", "Hyperion Nebula", "Smolderin' Plateau", "Spirited Valley"].map((world, worldIndex) => {
+                        ["Blunder Hills", "Yum-Yum Desert", "Frostbite Tundra", "Hyperion Nebula", "Smolderin' Plateau", "Spirited Valley", "Shimmerfin Deep"].map((world, worldIndex) => {
                             return (
                                 <Tab key={worldIndex} title={<CustomTabTitle isActive={index == worldIndex} label={world} />}>
                                     <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
