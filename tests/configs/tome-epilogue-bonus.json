@@ -1,0 +1,81 @@
+{
+  "description": "Extract data for Tome epilogue bonus calculations",
+  "target": "Tome epilogue bonus",
+  "extractions": [
+    {
+      "label": "lore_epic_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 0"
+    },
+    {
+      "label": "lore_epic_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 1"
+    },
+    {
+      "label": "lore_epic_bonus_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 2"
+    },
+    {
+      "label": "lore_epic_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 3"
+    },
+    {
+      "label": "lore_epic_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 4"
+    },
+    {
+      "label": "lore_epic_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 5"
+    },
+    {
+      "label": "lore_epic_bonus_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 6"
+    },
+    {
+      "label": "lore_epic_bonus_7",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 7"
+    },
+    {
+      "label": "lore_epic_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 8"
+    },
+    {
+      "label": "lore_epic_bonus_9",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 9"
+    },
+    {
+      "label": "lore_epic_bonus_10",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
+      "description": "Game LoreEpiBon bonus for Tome epilogue index 10"
+    },
+    {
+      "label": "tome_score",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "description": "Game Tome score input (_GenInfo[84]) used by LoreEpiBon"
+    },
+    {
+      "label": "grimoire_bonus_17",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "description": "Game Grimoire upgrade 17 bonus used by LoreEpiBon"
+    },
+    {
+      "label": "troll_set_bonus",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "description": "Game Troll equipment set bonus used by LoreEpiBon"
+    },
+    {
+      "label": "epilogue_bonus_unlocked_count",
+      "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
+      "description": "The number of Tome epilogue indexes unlocked by the Spelunk unlock count"
+    }
+  ]
+}
