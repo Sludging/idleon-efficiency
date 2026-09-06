@@ -180,7 +180,7 @@ export const initRoyalArmoryUpgradeRepo = () => {
                 "name": "Hyperion Outpost PTS",
                 "costBase": 1,
                 "costExponent": 1.65,
-                "resourceType": 2,
+                "resourceType": 4,
                 "maxLevel": 999999,
                 "bonusPerLevel": 1,
                 "requiredUpgrades": 1850,

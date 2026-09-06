@@ -2209,6 +2209,196 @@ export const initTaskDescriptionRepo = () => {
                     -1,
                     -1
                 ]
+            }),
+        new TaskDescriptionBase(116, <TaskDescriptionModel>{
+                "name": "Marathon Delver",
+                "description": "Use up { or more Stamina in a single Spelunking Delve",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Ok, now go use up IRL Stamina on a real marathon!",
+                "numbers": [
+                    100,
+                    500,
+                    3100,
+                    8000,
+                    20000,
+                    40000,
+                    80000,
+                    150000,
+                    250000,
+                    500000
+                ]
+            }),
+        new TaskDescriptionBase(117, <TaskDescriptionModel>{
+                "name": "Record Depths",
+                "description": "Have a total Best Depth of { across all tunnels, including Manic Mode!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Quit while you're ahead... or, below? I guess?",
+                "numbers": [
+                    50,
+                    300,
+                    1000,
+                    2500,
+                    5000,
+                    10000,
+                    25000,
+                    50000,
+                    100000,
+                    10000
+                ]
+            }),
+        new TaskDescriptionBase(118, <TaskDescriptionModel>{
+                "name": "Minehead 1HKO",
+                "description": "Deal { Damage in a single round of Minehead's Depth Charge!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Aw shucks, I knew you liked minehead all along!",
+                "numbers": [
+                    5000,
+                    20000,
+                    100000,
+                    500000,
+                    2500000,
+                    10000000,
+                    50000000,
+                    250000000,
+                    1000000000,
+                    2000000000
+                ]
+            }),
+        new TaskDescriptionBase(119, <TaskDescriptionModel>{
+                "name": "Smarti Sushi",
+                "description": "Reach a total Knowledge LV across all your Sushi of {",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|It's not real knowledge ya know, it's just pixellated sushi.",
+                "numbers": [
+                    100,
+                    200,
+                    300,
+                    500,
+                    750,
+                    1000,
+                    1300,
+                    1600,
+                    2000,
+                    2500
+                ]
+            }),
+        new TaskDescriptionBase(120, <TaskDescriptionModel>{
+                "name": "Undisclosed Task",
+                "description": "To be revealed in World 7 Part 3!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|Essentially speaking, you have a lot of unspent essence.",
+                "numbers": [
+                    4,
+                    10,
+                    15,
+                    20,
+                    30,
+                    45,
+                    60,
+                    80,
+                    100,
+                    125
+                ]
+            }),
+        new TaskDescriptionBase(121, <TaskDescriptionModel>{
+                "name": "Undisclosed Task",
+                "description": "To be revealed in World 7 Part 3!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "1|0|You stole all those items. Hope you're proud... oh you are? Well good!",
+                "numbers": [
+                    10,
+                    25,
+                    100,
+                    250,
+                    500,
+                    1000,
+                    2000,
+                    3500,
+                    7500,
+                    15000
+                ]
+            }),
+        new TaskDescriptionBase(122, <TaskDescriptionModel>{
+                "name": "Sinking the Nautilus!",
+                "description": "}",
+                "extraStr": "Defeat the World 7 boss!|Reach Showdown 3 by defeating the Emperor twice|Defeat the Emperor on 3 players, in order, starting with the 1st|Reach Showdown 5 by defeating the Emperor twice.|Reach Showdown 10 by defeating the Emperor nine times.|Reach Showdown 15 by defeating the Emperor fourteen times.|Reach Showdown 21 by defeating the Emperor twenty times|Reach Showdown 50 by defeating the Emperor fourty nine times|Reach Showdown 75 by defeating the Emperor seventy four times|Reach Showdown 100 by defeating the Emperor ninety nine times",
+                "number1": 10,
+                "descLine2": "2|1|Kattlekruk's demeanor gives you the feeling there are powers greater than the Gods",
+                "numbers": [
+                    1,
+                    1,
+                    3,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                ]
+            }),
+        new TaskDescriptionBase(123, <TaskDescriptionModel>{
+                "name": "Achievement Diver",
+                "description": "Complete { Shimmerfin Achievements, not that you can yet!",
+                "extraStr": "Blank420q",
+                "number1": 10,
+                "descLine2": "2|0|Filler haha",
+                "numbers": [
+                    5,
+                    10,
+                    15,
+                    20,
+                    25,
+                    30,
+                    40,
+                    50,
+                    60,
+                    70
+                ]
+            }),
+        new TaskDescriptionBase(124, <TaskDescriptionModel>{
+                "name": "Nope",
+                "description": "You have enough daily stuff already. Go do the other world's daily task!",
+                "extraStr": "Blank420q",
+                "number1": 6,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
+            }),
+        new TaskDescriptionBase(125, <TaskDescriptionModel>{
+                "name": "Nuh uh",
+                "description": "Seriously, you don't need more daily stuff to do. I wont let you.",
+                "extraStr": "Blank420q",
+                "number1": 4,
+                "descLine2": "0",
+                "numbers": [
+                    69420,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
             })    
 ]
 }

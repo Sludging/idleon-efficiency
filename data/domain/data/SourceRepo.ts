@@ -15243,6 +15243,43 @@ export const initSourceRepo = () => {
                 "recipeFrom": [],
                 "questAss": []
             }),
+        new SourcesBase("Quest108", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                        "txtName": "Wavey Wayne: Briny Tasks"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Toobus Goobus#TUNNEL EXPLORING|TUNNEL EXPLORING]]",
+                        "txtName": "Toobus Goobus: TUNNEL EXPLORING"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Toobus Goobus#FEAR HOLE! FEAR HOLE!|FEAR HOLE! FEAR HOLE!]]",
+                        "txtName": "Toobus Goobus: FEAR HOLE! FEAR HOLE!"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Toobus Goobus#READING CHALLENGE|READING CHALLENGE]]",
+                        "txtName": "Toobus Goobus: READING CHALLENGE"
+                    },
+                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
+        new SourcesBase("Quest115", <SourcesModel>{
+                "sources": [
+                    <SourceModel>{
+                        "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                        "txtName": "Wavey Wayne: Briny Tasks"
+                    },
+                    <SourceModel>{
+                        "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
+                        "txtName": "Toobus Goobus: RESEARCH STUDIES"
+                    }
+                ],
+                "recipeFrom": [],
+                "questAss": []
+            }),
         new SourcesBase("Quest70", <SourcesModel>{
                 "sources": [
                     <SourceModel>{
@@ -15432,35 +15469,6 @@ export const initSourceRepo = () => {
                     <SourceModel>{
                         "wikiName": "[[Bloo Radley#The Hero's Journey|The Hero's Journey]]",
                         "txtName": "Bloo Radley: The Hero's Journey"
-                    }
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest108", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Toobus Goobus#TUNNEL EXPLORING|TUNNEL EXPLORING]]",
-                        "txtName": "Toobus Goobus: TUNNEL EXPLORING"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Toobus Goobus#FEAR HOLE! FEAR HOLE!|FEAR HOLE! FEAR HOLE!]]",
-                        "txtName": "Toobus Goobus: FEAR HOLE! FEAR HOLE!"
-                    },
-                    <SourceModel>{
-                        "wikiName": "[[Toobus Goobus#READING CHALLENGE|READING CHALLENGE]]",
-                        "txtName": "Toobus Goobus: READING CHALLENGE"
-                    },
-                    <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
-                ],
-                "recipeFrom": [],
-                "questAss": []
-            }),
-        new SourcesBase("Quest115", <SourcesModel>{
-                "sources": [
-                    <SourceModel>{
-                        "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
-                        "txtName": "Toobus Goobus: RESEARCH STUDIES"
                     }
                 ],
                 "recipeFrom": [],

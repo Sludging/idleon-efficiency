@@ -33839,7 +33839,7 @@ export const initItemDetailRepo = () => {
                 "ID": 0,
                 "Type": "Event Wish",
                 "lvReqToCraft": 15,
-                "desc_line1": "Hold down on this candle to see the 5th Birthday Lucky Pet winners list! There's a new winner every 5 MINUTES! WOW!",
+                "desc_line1": "Hold down on this candle to see the Lucky Pet winners list! Who knows, maybe you'll win!",
                 "desc_line2": "Filler",
                 "desc_line3": "Filler",
                 "desc_line4": "Filler",

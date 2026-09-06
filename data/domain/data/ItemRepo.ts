@@ -70663,7 +70663,7 @@ export const initItemRepo = () => {
                     "sellPrice": 100,
                     "typeGen": TypeGenEnum.dQuest,
                     "Type": "Event Wish",
-                    "description": "Hold down on this candle to see the 5th Birthday Lucky Pet winners list! There's a new winner every 5 MINUTES! WOW! "
+                    "description": "Hold down on this candle to see the Lucky Pet winners list! Who knows, maybe you'll win! "
                 },
                 "sources": undefined,
                 "notes": undefined,
@@ -70988,6 +70988,10 @@ export const initItemRepo = () => {
                 "sources": <SourcesModel>{
                     "sources": [
                         <SourceModel>{
+                            "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                            "txtName": "Wavey Wayne: Briny Tasks"
+                        },
+                        <SourceModel>{
                             "wikiName": "[[Toobus Goobus#TUNNEL EXPLORING|TUNNEL EXPLORING]]",
                             "txtName": "Toobus Goobus: TUNNEL EXPLORING"
                         },
@@ -71095,6 +71099,10 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                            "txtName": "Wavey Wayne: Briny Tasks"
+                        },
                         <SourceModel>{
                             "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
                             "txtName": "Toobus Goobus: RESEARCH STUDIES"

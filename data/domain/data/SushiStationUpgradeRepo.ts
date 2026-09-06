@@ -38,7 +38,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(3, <SushiStationUpgradeModel>{
                 "index": 3,
-                "displayOrder": 18,
+                "displayOrder": 19,
                 "name": "Fuel Capacity III",
                 "maxLevel": 9999,
                 "costExponent": 1.12,
@@ -48,7 +48,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(4, <SushiStationUpgradeModel>{
                 "index": 4,
-                "displayOrder": 29,
+                "displayOrder": 30,
                 "name": "Fuel Capacity IV",
                 "maxLevel": 9999,
                 "costExponent": 1.13,
@@ -58,7 +58,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(5, <SushiStationUpgradeModel>{
                 "index": 5,
-                "displayOrder": 39,
+                "displayOrder": 40,
                 "name": "Fuel Capacity V",
                 "maxLevel": 9999,
                 "costExponent": 1.15,
@@ -78,7 +78,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(7, <SushiStationUpgradeModel>{
                 "index": 7,
-                "displayOrder": 21,
+                "displayOrder": 22,
                 "name": "Quality Freshness",
                 "maxLevel": 25,
                 "costExponent": 6.5,
@@ -108,7 +108,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(10, <SushiStationUpgradeModel>{
                 "index": 10,
-                "displayOrder": 17,
+                "displayOrder": 18,
                 "name": "Fastburn Fuel III",
                 "maxLevel": 9999,
                 "costExponent": 1.14,
@@ -118,7 +118,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(11, <SushiStationUpgradeModel>{
                 "index": 11,
-                "displayOrder": 26,
+                "displayOrder": 27,
                 "name": "Fastburn Fuel IV",
                 "maxLevel": 9999,
                 "costExponent": 1.16,
@@ -128,7 +128,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(12, <SushiStationUpgradeModel>{
                 "index": 12,
-                "displayOrder": 34,
+                "displayOrder": 35,
                 "name": "Fastburn Fuel V",
                 "maxLevel": 9999,
                 "costExponent": 1.17,
@@ -138,7 +138,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(13, <SushiStationUpgradeModel>{
                 "index": 13,
-                "displayOrder": 14,
+                "displayOrder": 15,
                 "name": "Seared Knowledge",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -148,7 +148,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(14, <SushiStationUpgradeModel>{
                 "index": 14,
-                "displayOrder": 12,
+                "displayOrder": 13,
                 "name": "Hot Slot",
                 "maxLevel": 20,
                 "costExponent": 20,
@@ -158,7 +158,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(15, <SushiStationUpgradeModel>{
                 "index": 15,
-                "displayOrder": 33,
+                "displayOrder": 34,
                 "name": "Cold Slot",
                 "maxLevel": 8,
                 "costExponent": 150,
@@ -168,7 +168,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(16, <SushiStationUpgradeModel>{
                 "index": 16,
-                "displayOrder": 23,
+                "displayOrder": 24,
                 "name": "Milktoast Slot",
                 "maxLevel": 12,
                 "costExponent": 70,
@@ -188,7 +188,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(18, <SushiStationUpgradeModel>{
                 "index": 18,
-                "displayOrder": 22,
+                "displayOrder": 23,
                 "name": "Pepper Shaker",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -198,7 +198,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(19, <SushiStationUpgradeModel>{
                 "index": 19,
-                "displayOrder": 32,
+                "displayOrder": 33,
                 "name": "Saffron Shaker",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -208,7 +208,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(20, <SushiStationUpgradeModel>{
                 "index": 20,
-                "displayOrder": 19,
+                "displayOrder": 20,
                 "name": "Shake N' Bake",
                 "maxLevel": 10,
                 "costExponent": 100,
@@ -218,7 +218,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(21, <SushiStationUpgradeModel>{
                 "index": 21,
-                "displayOrder": 28,
+                "displayOrder": 29,
                 "name": "Bottomless Shakers",
                 "maxLevel": 20,
                 "costExponent": 12,
@@ -228,7 +228,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(22, <SushiStationUpgradeModel>{
                 "index": 22,
-                "displayOrder": 35,
+                "displayOrder": 36,
                 "name": "Sasaphrax Saffron",
                 "maxLevel": 23,
                 "costExponent": 11,
@@ -238,7 +238,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(23, <SushiStationUpgradeModel>{
                 "index": 23,
-                "displayOrder": 15,
+                "displayOrder": 16,
                 "name": "Charcoal Fireplace",
                 "maxLevel": 15,
                 "costExponent": 40,
@@ -248,7 +248,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(24, <SushiStationUpgradeModel>{
                 "index": 24,
-                "displayOrder": 31,
+                "displayOrder": 32,
                 "name": "Copper Firelighter",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -258,7 +258,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(25, <SushiStationUpgradeModel>{
                 "index": 25,
-                "displayOrder": 40,
+                "displayOrder": 41,
                 "name": "Potassium Firelighter",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -268,7 +268,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(26, <SushiStationUpgradeModel>{
                 "index": 26,
-                "displayOrder": 38,
+                "displayOrder": 39,
                 "name": "Lithium Firelighter",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -278,7 +278,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(27, <SushiStationUpgradeModel>{
                 "index": 27,
-                "displayOrder": 24,
+                "displayOrder": 25,
                 "name": "Barium Firelighter",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -288,7 +288,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(28, <SushiStationUpgradeModel>{
                 "index": 28,
-                "displayOrder": 37,
+                "displayOrder": 38,
                 "name": "Overtuned Fuel",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -298,7 +298,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(29, <SushiStationUpgradeModel>{
                 "index": 29,
-                "displayOrder": 25,
+                "displayOrder": 26,
                 "name": "Heat of the East Wind",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -328,7 +328,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(32, <SushiStationUpgradeModel>{
                 "index": 32,
-                "displayOrder": 20,
+                "displayOrder": 21,
                 "name": "Customer Surcharge III",
                 "maxLevel": 9999,
                 "costExponent": 1.17,
@@ -338,7 +338,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(33, <SushiStationUpgradeModel>{
                 "index": 33,
-                "displayOrder": 36,
+                "displayOrder": 37,
                 "name": "Customer Surcharge IV",
                 "maxLevel": 9999,
                 "costExponent": 1.19,
@@ -348,7 +348,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(34, <SushiStationUpgradeModel>{
                 "index": 34,
-                "displayOrder": 43,
+                "displayOrder": 44,
                 "name": "Customer Surcharge V",
                 "maxLevel": 9999,
                 "costExponent": 1.2,
@@ -358,7 +358,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(35, <SushiStationUpgradeModel>{
                 "index": 35,
-                "displayOrder": 16,
+                "displayOrder": 17,
                 "name": "Quickpay Fee",
                 "maxLevel": 120,
                 "costExponent": 2,
@@ -368,7 +368,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(36, <SushiStationUpgradeModel>{
                 "index": 36,
-                "displayOrder": 27,
+                "displayOrder": 28,
                 "name": "Wholesale Pricing",
                 "maxLevel": 9999,
                 "costExponent": 1.15,
@@ -378,7 +378,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(37, <SushiStationUpgradeModel>{
                 "index": 37,
-                "displayOrder": 30,
+                "displayOrder": 31,
                 "name": "2nd Degree Searing",
                 "maxLevel": 9999,
                 "costExponent": 1.35,
@@ -388,7 +388,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(38, <SushiStationUpgradeModel>{
                 "index": 38,
-                "displayOrder": 42,
+                "displayOrder": 43,
                 "name": "3rd Degree Searing",
                 "maxLevel": 9999,
                 "costExponent": 1.15,
@@ -398,17 +398,17 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(39, <SushiStationUpgradeModel>{
                 "index": 39,
-                "displayOrder": 44,
-                "name": "Rift Guy's Upgrade",
-                "maxLevel": 0,
+                "displayOrder": 12,
+                "name": "Combo Meter",
+                "maxLevel": 1,
                 "costExponent": 1.1,
                 "bonusPerLevel": 1,
                 "costMultiplier": 0,
-                "description": "I've got my hands in everything! Minehead, farming, the rift... so yea, of course I'm in the Sushi biz too, don't be so shocked."
+                "description": "Combining sushi adds score to the Combo Meter equal to the Tier created, but cooking new sushi OR taking too long ends the combo. Get a perma Bucks Multi based on your best combo!"
             }),
         new SushiStationUpgradeBase(40, <SushiStationUpgradeModel>{
                 "index": 40,
-                "displayOrder": 41,
+                "displayOrder": 42,
                 "name": "No Tax on Tips",
                 "maxLevel": 9999,
                 "costExponent": 1.2,
@@ -428,7 +428,7 @@ export const initSushiStationUpgradeRepo = () => {
             }),
         new SushiStationUpgradeBase(42, <SushiStationUpgradeModel>{
                 "index": 42,
-                "displayOrder": 13,
+                "displayOrder": 14,
                 "name": "Movement Mittens",
                 "maxLevel": 1,
                 "costExponent": 1.1,
@@ -455,6 +455,16 @@ export const initSushiStationUpgradeRepo = () => {
                 "bonusPerLevel": 1,
                 "costMultiplier": 0,
                 "description": "Creating a new sushi type gives a new IdleOn bonus for the REST of the game! Check them out in the BONUS tap, top right corner."
+            }),
+        new SushiStationUpgradeBase(45, <SushiStationUpgradeModel>{
+                "index": 45,
+                "displayOrder": 45,
+                "name": "Rift Guy's Upgrade",
+                "maxLevel": 0,
+                "costExponent": 1.1,
+                "bonusPerLevel": 1,
+                "costMultiplier": 0,
+                "description": "I've got my hands in everything! Minehead, farming, the rift... so yea, of course I'm in the Sushi biz too, don't be so shocked."
             })    
 ]
 }

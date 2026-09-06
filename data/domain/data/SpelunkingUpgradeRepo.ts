@@ -1091,7 +1091,7 @@ export const initSpelunkingUpgradeRepo = () => {
                 "x3": 1,
                 "dash1": "",
                 "dash2": "",
-                "description": "Amber is worth 25x more but now drops 20x less often, utterly destroying your naive childhood fantasy of achieving 100% Amber Drop Chance. Oh, what a shame.",
+                "description": "Amber is worth 15x more but now drops 10x less often, utterly destroying your naive childhood fantasy of achieving 100% Amber Drop Chance. Oh, what a shame.",
                 "dash3": ""
             })    
 ]

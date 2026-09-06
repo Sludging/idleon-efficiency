@@ -1363,7 +1363,7 @@ export const initResearchGridBonusRepo = () => {
                 "bonusPerLevel": 10,
                 "x3": 0,
                 "x4": 0,
-                "description": "Reduces the cost of all Masterclass upgrades by {% every day, FOREVER! Total Reduction:-&%"
+                "description": "Reduces the cost of all OG Masterclass upgrades (DB, WW, AC) by {% every day, FOREVER! Total Reduction:-&%"
             }),
         new ResearchGridBonusBase(151, <ResearchGridBonusModel>{
                 "index": 151,

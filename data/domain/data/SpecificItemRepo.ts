@@ -23881,7 +23881,7 @@ export const initSpecificItemRepo = () => {
                 "sellPrice": 100,
                 "typeGen": TypeGenEnum.dQuest,
                 "Type": "Event Wish",
-                "description": "Hold down on this candle to see the 5th Birthday Lucky Pet winners list! There's a new winner every 5 MINUTES! WOW! "
+                "description": "Hold down on this candle to see the Lucky Pet winners list! Who knows, maybe you'll win! "
             }),
         new BaseItemBase("Quest96", <DescItemModel>{
                 "internalName": "Quest96",
