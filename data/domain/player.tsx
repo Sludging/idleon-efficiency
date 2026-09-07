@@ -39,7 +39,7 @@ import { Grimoire } from './grimoire';
 import { Tesseract } from './tesseract';
 import { EquipmentSets } from './misc/equipmentSets';
 import { LegendTalents } from './world-7/legendTalents';
-import { Companion } from './companions';
+import { Companion, getCompanionBonus } from './companions';
 import { Votes } from './world-2/votes';
 import { Storage } from './storage';
 import { ConstructionMastery, Rift, SkillMastery } from './world-4/rift';
@@ -936,6 +936,8 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const dungeonsData = data.get("dungeons") as Dungeons;
     const breeding = data.get("breeding") as Breeding;
     const arcade = data.get("arcade") as Arcade;
+    const companions = data.get("companions") as Companion[];
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
     
     players.forEach(player => {
         player.talentPoints = [];
@@ -1095,6 +1097,8 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
             (achievements[305].completed ? 20 : 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) + 
             (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + 
+            upgradeVault.getBonusForId(53) +
+            getCompanionBonus(companions, 20) +
             islandExpeditions.bonusStarTalentPoints);
         player.talentPoints.push({tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints});
 

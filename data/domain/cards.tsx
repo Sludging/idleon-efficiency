@@ -12,6 +12,7 @@ import { Rift, SkillMastery } from "./world-4/rift";
 import { initCardDropChanceRepo } from './data/CardDropChanceRepo';
 import { nFormatter } from '../utility';
 import { LegendTalents } from "./world-7/legendTalents";
+import { Spelunking } from "./world-7/spelunking";
 
 export class Card {
     count: number = 0;
@@ -33,14 +34,14 @@ export class Card {
             this.passive = true;
         }
         this.bonusID = this.getBonusID();
-        this.baseDropChance = initCardDropChanceRepo()?.find(cardRate => cardRate.id == "Cards"+this.data.cardID)?.data.dropChance || 0;
+        this.baseDropChance = initCardDropChanceRepo()?.find(cardRate => cardRate.id == "Cards" + this.data.cardID)?.data.dropChance || 0;
         // I noticed some cards (namely w4 crystal mob for now) don't have the { in the bonus text, so I force it into it to at least show it somehow when displaying the bonus effect
-        if(this.data.effect.indexOf('{') == -1) {
-            if(this.data.effect.startsWith('+')) {
-                this.data.effect=this.data.effect.slice(0,1)+'{'+this.data.effect.slice(1);
+        if (this.data.effect.indexOf('{') == -1) {
+            if (this.data.effect.startsWith('+')) {
+                this.data.effect = this.data.effect.slice(0, 1) + '{' + this.data.effect.slice(1);
             } else {
-                this.data.effect='{'+this.data.effect;
-            }            
+                this.data.effect = '{' + this.data.effect;
+            }
         }
     }
 
@@ -65,21 +66,21 @@ export class Card {
     }
 
     getLevels = (): number => {
-        const maxCardLevel = this.getMaxCardLevel();
+        const maxStarLevel = Math.round(this.getMaxCardLevel());
         switch (true) {
-            case maxCardLevel >= 7 && this.count >= Math.floor(this.getCardsForLevel(7)): return 7;
-            case maxCardLevel >= 6 && this.count >= Math.floor(this.getCardsForLevel(6)): return 6;
-            case this.count >= Math.floor(this.getCardsForLevel(4)): return 5;
-            case this.count >= Math.floor(this.getCardsForLevel(3)): return 4;
-            case this.count >= Math.floor(this.getCardsForLevel(2)): return 3;
-            case this.count >= Math.floor(this.getCardsForLevel(1)): return 2;
-            case this.count >= Math.floor(this.getCardsForLevel(1)): return 1;
+            case maxStarLevel >= 7 && this.count >= this.getCardsForLevel(7): return 7;
+            case maxStarLevel >= 6 && this.count >= this.getCardsForLevel(6): return 6;
+            case maxStarLevel >= 5 && this.count >= this.getCardsForLevel(5): return 5;
+            case this.count >= this.getCardsForLevel(4): return 4;
+            case this.count >= this.getCardsForLevel(3): return 3;
+            case this.count >= this.getCardsForLevel(2): return 2;
+            case this.count >= this.getCardsForLevel(1): return 1;
             default: return 0;
         }
     }
 
     getBaseDropRateText = (): string => {
-        return (this.baseDropChance > 0) ? "1 in "+nFormatter(Math.round(1/this.baseDropChance)) : "Not Found";
+        return (this.baseDropChance > 0) ? "1 in " + nFormatter(Math.round(1 / this.baseDropChance)) : "Not Found";
     }
 
     getCardsForLevel = (level: number): number => {
@@ -87,19 +88,19 @@ export class Card {
             return 1;
         }
 
-        // cchiz is .. special? .. who knows why...
-        if (this.id == "Boss3B") {
-            return 1.5 * Math.pow(level + 1 + Math.floor(level / 3), 2)
-        } else {
-            return this.data.perTier * Math.pow(level + 1 + (Math.floor(level / 3) + (16 * Math.floor(level / 4) + 100 * Math.floor(level / 5))), 2);
-        }
+        const thresholdLevel = level - 1;
+        const threshold = this.id == "Boss3B"
+            ? 1.5 * Math.pow(thresholdLevel + 1 + Math.floor(thresholdLevel / 3), 2)
+            : this.data.perTier * Math.pow(thresholdLevel + 1 + (Math.floor(thresholdLevel / 3) + (16 * Math.floor(thresholdLevel / 4) + 100 * Math.floor(thresholdLevel / 5))), 2);
+
+        return Math.floor(threshold) + 1;
     }
 
     getBonus = (level: number = this.getLevels()): number => {
         if (this.count == 0) {
             return 0;
         }
-        return this.data.bonus * (level + 1) * (1 + (this.passive ? 0 :this.legendTalentBoost) / 100) * this.chipBoost;
+        return this.data.bonus * (level + 1) * (1 + (this.passive ? 0 : this.legendTalentBoost) / 100) * this.chipBoost;
     }
 
     getBonusText = (level: number = this.getLevels()): string => {
@@ -170,7 +171,7 @@ export interface CardSet {
 export class CardInfo {
     cards: Card[];
     equippedCards: Card[] = [];
-    cardSet: CardSet = { id: -1, text: 'You don\'t have one equipped!', bonus: 0};
+    cardSet: CardSet = { id: -1, text: 'You don\'t have one equipped!', bonus: 0 };
 
     constructor(cardData: Record<string, number>, cardSetData: Map<string, number>, equippedCardsData: string[]) {
         this.cards = Card.fromBase(initCardRepo());
@@ -246,6 +247,7 @@ export const updateCards = (data: Map<string, any>) => {
     const rift = data.get("rift") as Rift;
     const players = data.get("players") as Player[];
     const optLacc = data.get("OptLacc");
+    const spelunking = data.get("spelunking") as Spelunking;
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
@@ -264,24 +266,27 @@ export const updateCards = (data: Map<string, any>) => {
                     players.flatMap(player => player.cardInfo?.cards ?? []).filter(card => card.bonusID == bonusID).forEach(card => {
                         card.passive = true;
                     })
-                })                
+                })
             }
         })
     }
 
     const bonusEffectFromLegendTalents = legendTalents.getBonusFromIndex(21);
     const rubyCardsUnlocked = rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active || false;
+    const sixStarCardsUnlocked = spelunking.tunnels.find(tunnel => tunnel.index == 2)?.unlocked ?? false;
     const cardifiedFiveStarCards = (optLacc[155] ?? "" as string).split(",") as string[];
 
     // Ensure there's a need to parse cards
-    if (bonusEffectFromLegendTalents > 0 || rubyCardsUnlocked || cardifiedFiveStarCards.length > 0) {
-        const cardsToParse = rubyCardsUnlocked ? cards : cards.filter(card => cardifiedFiveStarCards.indexOf(card.id) >= 0);
-        cardsToParse.forEach(card => {          
-            card.bonusMaxCardLevelFromRift = 1;
+    if (bonusEffectFromLegendTalents > 0 || rubyCardsUnlocked || sixStarCardsUnlocked || cardifiedFiveStarCards.length > 0) {
+        const cardsToParse = rubyCardsUnlocked || sixStarCardsUnlocked ? cards : cards.filter(card => cardifiedFiveStarCards.indexOf(card.id) >= 0);
+        cardsToParse.forEach(card => {
+            card.bonusMaxCardLevelFromRift = (rubyCardsUnlocked || cardifiedFiveStarCards.indexOf(card.id) >= 0) ? 1 : 0;
+            card.bonusMaxCardLevelFromSpelunking = sixStarCardsUnlocked ? 1 : 0;
         });
         // I should probably not duplicate cards at some point, but for now ...
         players.flatMap(player => player.cardInfo?.cards ?? []).forEach(card => {
             card.bonusMaxCardLevelFromRift = (rubyCardsUnlocked || cardifiedFiveStarCards.indexOf(card.id) >= 0) ? 1 : 0;
+            card.bonusMaxCardLevelFromSpelunking = sixStarCardsUnlocked ? 1 : 0;
             card.legendTalentBoost = bonusEffectFromLegendTalents;
         });
     }

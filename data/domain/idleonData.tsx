@@ -51,6 +51,7 @@ import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
 import { SushiStation } from './world-7/sushi';
+import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
@@ -152,6 +153,7 @@ const domainList: Domain[] = [
     new Summoning("summoning"),
     new Farming("farming"),
     new SushiStation("sushi"),
+    new Spelunking("spelunking"),
     new ResearchGrid("research"),
     new StarSigns("starsigns"),
     new Button("button"),
