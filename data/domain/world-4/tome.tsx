@@ -5,7 +5,7 @@ import { Stamp } from '../world-1/stamps';
 import { PlayerStatues, StatusType } from '../world-1/statues';
 import { Card } from '../cards';
 import { Quests } from '../quests';
-import { Player, TalentTab } from '../player';
+import { TalentTab, type Player } from '../player';
 import { TaskBoard } from '../tasks';
 import { Achievement } from '../achievements';
 import { Slab } from '../world-5/slab';
@@ -33,6 +33,7 @@ import { ElegantSeashell, Gaming, ImmortalSnail } from '../world-5/gaming';
 import { ArtifactStatus } from '../world-5/sailing/artifacts';
 import { Account } from '../account';
 import { Farming } from '../world-6/farming';
+import { SushiStation } from '../world-7/sushi';
 import { Sneaking } from '../world-6/sneaking';
 import { Summoning } from '../world-6/summoning';
 import { Arcade } from '../world-2/arcade';
@@ -46,6 +47,7 @@ import { EquipmentSets } from '../misc/equipmentSets';
 import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
 import { CoralReef } from '../world-7/coralReef';
+import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -92,6 +94,10 @@ export class TomeLine {
     getLineMultiplyer = (playerIndex: number): number => {
         // Just to be safe
         if (playerIndex >= this.currentValues.length) {
+            return 0;
+        }
+
+        if (!this.unlocked) {
             return 0;
         }
 
@@ -352,6 +358,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const equinoxData = data.get("equinox") as Equinox;
     const refineryData = data.get("refinery") as Refinery;
     const atomCollider = data.get("collider") as AtomCollider;
+    const sushiStation = data.get("sushi") as SushiStation;
     const deathnote = data.get("deathnote") as Deathnote;
     const construction = data.get("construction") as Construction;
     const rift = data.get("rift") as Rift;
@@ -374,6 +381,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const grimoire = data.get("grimoire") as Grimoire;
     const bubba = data.get("bubba") as Bubba;
     const coralReef = data.get("coralReef") as CoralReef;
+    const researchGrid = data.get("research") as ResearchGrid;
+
 
     // Calculate how many trophy and obols have been found
     const slab = data.get("slab") as Slab;
@@ -403,22 +412,17 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
     let completedQuests: number = 0;
     const playerQuestData = questsData?.playerData ?? {};
-    filteredNPCs.forEach(([_, npc], _npcIndex) => {
-        Object.entries(npc.data.quests).forEach(([_, info], _index) => {
+    filteredNPCs.forEach(([_, npc]) => {
+        Object.entries(npc.data.quests).forEach(([_, info]) => {
             if (Object.entries(playerQuestData).some(playerData => playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
                 completedQuests++;
             }
         });
     });
-
-    // Sum of all skills levels of all players
-    const sumOfSkillsLevels = players.reduce((sum, player) => {
-        let skillTotalLv: number = 0;
-        player.skills.forEach((skill) => {
-            skillTotalLv += skill.level;
-        });
-        return sum + skillTotalLv;
-    }, 0);
+    // Sum all skill levels across players.
+    const sumOfSkillsLevels = players.reduce((sum, player) =>
+        sum + [...player.skills.values()].reduce((skillSum, skill) => skillSum + skill.level, 0),
+    0);
 
     // Total level of all stamps
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
@@ -466,8 +470,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Number of completed equinox challenges/cloud
     const completedEquinoxCloud = equinoxData.challenges.filter(challenge => challenge.complete).length;
 
-    // Sum of all refinery ranks
-    const totalRefineryRanks = Object.entries(refineryData.salts).reduce((sum, [_, refinery]) => sum + refinery.rank, 0);
+    // Sum ranks for the six refinery rows used by the game.
+    const totalRefineryRanks = Object.values(refineryData.salts)
+        .slice(0, 6)
+        .reduce((sum, refinery) => sum + refinery.rank, 0);
 
     // Sum of Atoms upgrades levels
     const totalAtomUpgradeLevels = atomCollider.atoms.reduce((sum, atom) => sum + atom.level, 0);
@@ -587,8 +593,19 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Total of Layers Destroyed in The Hole ressources
     const totalDestroyedRessourcesLayers = Object.entries(hole.resourceCavrens.cavrens).reduce((sum, [_, cavren]) => sum + cavren.layer, 0);
 
-    // Highest leveled Spelunker of the account
+    // Highest leveled Spelunker of the account.
     const highestSpelunkingLevel = Math.max(0, ...players.map(player => player.skills.get(SkillsIndex.Spelunking)?.level ?? 0));
+
+    // Number of reclaimed King Rat Crowns.
+    const crownBonus = researchGrid.bonuses[67] as CrownCountResearchGridBonus;
+    const researchCrownCount = crownBonus.crownCount;
+
+    // Number of research grid points spent.
+    const researchGridPointsSpent = researchGrid.bonuses.reduce((sum, bonus) => sum + bonus.level, 0);
+
+    // Number of Glimbo trades completed.
+    const glimboBonus = researchGrid.bonuses[168] as GlimboTradesResearchGridBonus;
+    const totalResearchGlimboTrades = glimboBonus.totalGlimboTrades;
 
     tome.totalAccountLevel = totalPlayersLevels;
     tome.lines.forEach(line => {
@@ -661,7 +678,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 // Sum of star talent points owned
                 // TODO : fix this, difference between this and IE
                 for (let i = 0; i < players.length; i++) {
-                    line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab == TalentTab.SpecialTab)?.totalOwned ?? 0), i);
+                    line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab === TalentTab.SpecialTab)?.totalOwned ?? 0), i);
                 }
                 break;
             case 16:
@@ -761,7 +778,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(completedEquinoxCloud);
                 break;
             case 40:
-                // Sum of Refinery rank
+                // Sum of the six refinery rows used by the game.
                 line.updateAllPlayersCurrentValue(totalRefineryRanks);
                 break;
             case 41:
@@ -839,8 +856,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(divinity.godRank);
                 break;
             case 59:
-                // Total gaming plants evolved
-                line.updateAllPlayersCurrentValue(((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0));
+                // Number of evolved Gaming plants.
+                line.updateAllPlayersCurrentValue((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0);
                 break;
             case 60:
                 // Number of artifacts found
@@ -863,11 +880,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(gaming.biggestGoldNugget);
                 break;
             case 65:
-                // Number of items found
+                // Number of items found.
                 line.updateAllPlayersCurrentValue(slab.rawObtainedCount);
                 break;
             case 66:
-                // Gaming bits owned
+                // Gaming bits owned.
                 line.updateAllPlayersCurrentValue(gaming.currenBitsOwned);
                 break;
             case 67:
@@ -1042,9 +1059,48 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 // Megaflesh Earned from Bubba
                 line.updateAllPlayersCurrentValue(bubba.ownedMegaflesh);
                 break;
-            case 109:
-                // Premium Hats Found
-                // TODO : add this once Hat rack from world 3 is implemented
+            case 111:
+                // Reclaimed King Rat Crown count
+                line.updateAllPlayersCurrentValue(researchCrownCount);
+                break;
+            case 112:
+                // Farming stickers found
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 113:
+                // Tournaments Registrations (To be confirmed.)
+                line.updateAllPlayersCurrentValue(optionListAccount[498] ?? 0);
+                break;
+            case 114:
+                // Research Grid points spent
+                line.updateAllPlayersCurrentValue(researchGridPointsSpent);
+                break;
+            case 115:
+                // Total Glimbo trades completed.
+                line.updateAllPlayersCurrentValue(totalResearchGlimboTrades);
+                break;
+            case 116:
+                // Unique Sushi found
+                line.updateAllPlayersCurrentValue(sushiStation.getUniqueSushi());
+                break;
+            case 117:
+                // Button presses (To be confirmed.)
+                line.updateAllPlayersCurrentValue(optionListAccount[594] ?? 0);
+                break;
+            case 118:
+                // Total Royal Statue LV (To be confirmed.)
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 119:
+                // (a.engine.getGameAttribute("DNSM").h.TomeQTY[119] = m._customBlock_RoyalG("TotalStatz", 4, 0)),
+                // TODO : add this once implemented
+                line.updateAllPlayersCurrentValue(0);
+                break;
+            case 120:
+                // (a.engine.getGameAttribute("DNSM").h.TomeQTY[120] = m._customBlock_RoyalG("TotalStatz", 0, 0)),
+                // TODO : add this once implemented
                 line.updateAllPlayersCurrentValue(0);
                 break;
             default:
