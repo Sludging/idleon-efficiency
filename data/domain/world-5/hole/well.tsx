@@ -1,7 +1,7 @@
 import { SedimentModel } from "../../model/sedimentModel";
 import { initSedimentRepo } from "../../data/SedimentRepo";
 import { Hole } from "./hole";
-import { range } from "../../../utility";
+import { range, lavaLog } from "../../../utility";
 import { initHoleBuildingRepo } from "../../data/HoleBuildingRepo";
 
 export class WellSediment {
@@ -14,7 +14,7 @@ export class WellSediment {
     constructor(public index: number, public data: SedimentModel) { }
 }
 
-const configureUnlockMethod = (buckets: { 
+const configureUnlockMethod = (buckets: {
     unlocked: boolean,
     unlockMethod: string,
     sedimentIndex: number
@@ -37,11 +37,12 @@ const configureUnlockMethod = (buckets: {
 
 export class Well {
     sediments: WellSediment[] = [];
-    buckets: { 
+    resourceValues: number[] = [];
+    buckets: {
         unlocked: boolean,
         unlockMethod: string,
         sedimentIndex: number
-    }[] = [];   
+    }[] = [];
 
     constructor() {
         const data = initSedimentRepo();
@@ -62,8 +63,10 @@ export class Well {
 
     parse(hole: Hole, holeData: number[][]) {
         const sedimentMulti = holeData[8];
-        const currentSediment = holeData[9];
+        const currentSediment = holeData[9] ?? [];
         const bucketConfiguration = holeData[10];
+
+        this.resourceValues = currentSediment;
 
         this.sediments.forEach((sediment, index) => {
             sediment.current = currentSediment[index];
@@ -84,4 +87,9 @@ export class Well {
             }
         });
     }
+
+    getTotalResourceDigits(): number {
+        return this.resourceValues.reduce((sum, value) => sum + Math.ceil(lavaLog(value ?? 0)), 0);
+    }
 }
+

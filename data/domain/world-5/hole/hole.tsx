@@ -600,6 +600,9 @@ export class ResourceCavren {
             case "Logs":
                 this.efficiencyType = "Chopping";
                 break;
+            case "Fish":
+                this.efficiencyType = "Fishing";
+                break;
             default:
                 this.efficiencyType = "";
                 break;
@@ -612,7 +615,22 @@ export class ResourceCavrens {
         "Motherload": new ResourceCavren(0, "Motherload", "Ores"),
         "The Hive": new ResourceCavren(1, "The Hive", "Bugs"),
         "Evertree": new ResourceCavren(2, "Evertree", "Logs"),
+        "The Bottomless Trench": new ResourceCavren(3, "The Bottomless Trench", "Fish"),
 
+    }
+
+    parse(extraCalculations: number[] = []): void {
+        Object.values(this.cavrens).forEach(cavren => {
+            cavren.layer = extraCalculations[cavren.index * 2 + 1] || 0;
+            cavren.resourceExtracted = extraCalculations[cavren.index * 2] || 0;
+        });
+    }
+
+    getTotalResourceLayers(): number {
+        return Object.values(this.cavrens).reduce(
+            (sum, cavren) => sum + Math.round(Math.max(0, cavren.layer)),
+            0,
+        );
     }
 }
 
@@ -890,12 +908,9 @@ export class Hole extends Domain {
             bonus.level = holeData[17][bonus.index] || 0;
         });
 
-        // Resource Cavrens
+        // Resource Caverns
         // TODO: Calculate required efficiency, and required resource for next layer.
-        Object.entries(hole.resourceCavrens.cavrens).forEach(([_, cavren]) => {
-            cavren.layer = holeData[11][cavren.index * 2 + 1] || 0;
-            cavren.resourceExtracted = holeData[11][cavren.index * 2] || 0;
-        });
+        hole.resourceCavrens.parse(holeData[11] || []);
 
         hole.well.parse(hole, holeData);
         // TODO: Finish this, missing information

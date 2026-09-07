@@ -584,13 +584,13 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const totalGambitTime = hole.gambit.getGambitTotalTime();
 
     // Sum of digit counts for resources extracted from Hole caverns.
-    const totalDigitsHoleRessources = Object.entries(hole.resourceCavrens.cavrens).reduce((sum, [_, cavren]) => sum + Math.ceil(lavaLog(cavren.resourceExtracted)), 0);
+    const totalDigitsHoleResources = hole.well.getTotalResourceDigits();
 
     // Sum of Hole villager levels.
     const totalVillagersLevels = hole.villagers.reduce((sum, villager) => sum + villager.level, 0);
 
     // Sum of resource layers destroyed in the Hole.
-    const totalDestroyedRessourcesLayers = Object.entries(hole.resourceCavrens.cavrens).reduce((sum, [_, cavren]) => sum + cavren.layer, 0);
+    const totalDestroyedResourceLayers = hole.resourceCavrens.getTotalResourceLayers();
 
     // Highest Spelunker skill level across all players.
     const highestSpelunkingLevel = Math.max(0, ...players.map(player => player.skills.get(SkillsIndex.Spelunking)?.level ?? 0));
@@ -952,7 +952,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 83:
                 // Sum of digit counts for resources extracted from Hole caverns.
-                line.updateAllPlayersCurrentValue(totalDigitsHoleRessources);
+                line.updateAllPlayersCurrentValue(totalDigitsHoleResources);
                 break;
             case 84:
                 // Sum of Hole villager levels.
@@ -988,7 +988,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 92:
                 // Sum of resource layers destroyed in the Hole.
-                line.updateAllPlayersCurrentValue(totalDestroyedRessourcesLayers);
+                line.updateAllPlayersCurrentValue(totalDestroyedResourceLayers);
                 break;
             case 93:
                 // Total Opals found in the Hole.
