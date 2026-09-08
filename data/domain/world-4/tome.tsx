@@ -47,6 +47,7 @@ import { EquipmentSets } from '../misc/equipmentSets';
 import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
 import { CoralReef } from '../world-7/coralReef';
+import { Spelunking } from '../world-7/spelunking';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 
 export enum TomeScoreColors {
@@ -381,6 +382,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const grimoire = data.get("grimoire") as Grimoire;
     const bubba = data.get("bubba") as Bubba;
     const coralReef = data.get("coralReef") as CoralReef;
+    const spelunking = data.get("spelunking") as Spelunking;
     const researchGrid = data.get("research") as ResearchGrid;
 
 
@@ -1012,8 +1014,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 98:
                 // Deepest Delve depth reached in a single run.
-                // TODO: populate from the maximum Spelunk[1] value.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(spelunking.getDeepestDelveDepth());
                 break;
             case 99:
                 // Sum of Ninja Knowledge upgrade levels.
@@ -1029,18 +1030,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 102:
                 // Biggest haul in a single Delve.
-                // TODO: populate from the maximum Spelunk[2] value.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(spelunking.getBiggestDelveHaul());
                 break;
             case 103:
                 // Total Spelunk Shop upgrade levels.
-                // TODO: populate from the non-negative Spelunk[5] sum.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(spelunking.getTotalShopUpgradeLevels());
                 break;
             case 104:
                 // Total Spelunk discoveries made.
-                // TODO: populate from Spelunk[6].length.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(spelunking.getTotalDiscoveries());
                 break;
             case 105:
                 // Highest Spelunker skill level across all players.
@@ -1059,9 +1057,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(bubba.ownedMegaflesh);
                 break;
             case 109:
-                // Premium Hats found (game source: Spelunk[46].length).
-                // TODO: add this once implemented.
-                line.updateAllPlayersCurrentValue(0);
+                // Premium Hats found.
+                line.updateAllPlayersCurrentValue(spelunking.premiumHatsFound);
                 break;
             case 110:
                 // Minehead opponents defeated (game source: Research[7][4]).
