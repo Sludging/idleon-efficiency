@@ -9,14 +9,6 @@ const saveName = 'latest';
 const extractionResultsName = 'tome-epilogue-bonus-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
-  tome_score: {
-    description: 'Tome score input (_GenInfo[84])',
-    extractionKey: 'tome_score',
-    domainExtractor: (gameData) => {
-      const tome = gameData.get('tome') as Tome;
-      return tome.getHighestScore();
-    },
-  },
   grimoire_bonus_17: {
     description: 'Grimoire upgrade 17 bonus',
     extractionKey: 'grimoire_bonus_17',

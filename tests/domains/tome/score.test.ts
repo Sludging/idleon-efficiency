@@ -1,0 +1,84 @@
+/**
+ * Tome score calculation tests.
+ *
+ * @testCovers TomeLine.getLineMultiplyer
+ * @testCovers TomeLine.getPlayerScore
+ */
+
+import {
+ ExtractionResults,
+ getExtractedValue,
+ loadExtractionResults,
+ validateExtractionHealth,
+} from '../../utils/live-game-data-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Tome, TomeLine } from '../../../data/domain/world-4/tome';
+import tomeScoreConfig from '../../configs/tome-score.json';
+
+const saveName = 'latest';
+const extractionResultsName = 'tome-score-data.json';
+const tomeLineIndices = tomeScoreConfig.extractions
+ .filter((extraction) => /^tome_pts_\d+$/.test(extraction.label))
+ .map((extraction) => Number(extraction.label.replace('tome_pts_', '')));
+const tomeLineDescriptions: Record<string, string> = Object.fromEntries(
+ tomeScoreConfig.extractions
+  .filter((extraction) => extraction.label.startsWith('tome_pts_'))
+  .map((extraction) => [extraction.label, extraction.description]),
+);
+
+const getTomeLineDescription = (index: number): string =>
+ tomeLineDescriptions[`tome_pts_${index}`] ?? `Tome line ${index}`;
+
+const getTomeLine = (tome: Tome, index: number): TomeLine => {
+ const line = tome.lines.find((candidate) => candidate.index === index);
+ if (!line) {
+  throw new Error(`Tome line ${index} not found`);
+ }
+ return line;
+};
+
+describe('Tome Domain - Score', () => {
+ let extractionResults: ExtractionResults;
+ let tome: Tome;
+ let gameData: Map<string, any>;
+
+ beforeAll(() => {
+  extractionResults = loadExtractionResults(extractionResultsName);
+  validateExtractionHealth(extractionResults);
+  gameData = loadGameDataFromSave(saveName);
+  tome = gameData.get('tome') as Tome;
+
+  if (!tome) {
+   throw new Error('Tome domain not found in save data');
+  }
+ });
+
+ it('matches the number of Tome lines supported by the game', () => {
+  const gameLineCount = getExtractedValue(extractionResults, 'tome_line_count');
+
+  expect(tomeLineIndices).toHaveLength(gameLineCount);
+  expect(tome.lines).toHaveLength(gameLineCount);
+ });
+
+ tomeLineIndices.forEach((index) => {
+  it(`${getTomeLineDescription(index)}`, () => {
+   const line = getTomeLine(tome, index);
+   const liveScore = getExtractedValue(extractionResults, `tome_pts_${index}`);
+   const description = getTomeLineDescription(index);
+
+   expect(line.getPlayerScore(0)).toMatchLiveGameWithDetails(liveScore, {
+    tolerance: 0,
+    context: `Tome ${description} score`,
+   });
+  });
+ });
+
+ it('returns zero multiplier and score for every locked line', () => {
+  tome.lines
+   .filter((line) => !line.unlocked)
+   .forEach((line) => {
+    expect(line.getLineMultiplyer(0)).toBe(0);
+    expect(line.getPlayerScore(0)).toBe(0);
+   });
+ });
+});

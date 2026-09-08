@@ -1,0 +1,846 @@
+{
+  "timestamp": "2026-09-08T02:16:26.515Z",
+  "extractions": {
+    "tome_line_count": {
+      "expression": "idleon.getAttr(\"CustomLists\").h.Tome.length",
+      "result": 121,
+      "description": "Number of Tome lines calculated by the game.",
+      "extractedAt": "2026-09-08T06:04:01.266Z"
+    },
+    "tome_pts_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 0, 0)",
+      "result": 1049,
+      "description": "Total level of all stamps.",
+      "extractedAt": "2026-09-08T02:16:26.529Z"
+    },
+    "tome_pts_1": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 1, 0)",
+      "result": 743,
+      "description": "Player 0's total statue levels.",
+      "extractedAt": "2026-09-08T02:16:26.541Z"
+    },
+    "tome_pts_2": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 2, 0)",
+      "result": 1000,
+      "description": "Total levels of discovered cards.",
+      "extractedAt": "2026-09-08T02:16:26.543Z"
+    },
+    "tome_pts_3": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 3, 0)",
+      "result": 795,
+      "description": "Sum of the highest level of each talent; shared talents count once.",
+      "extractedAt": "2026-09-08T02:16:26.546Z"
+    },
+    "tome_pts_4": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 4, 0)",
+      "result": 491,
+      "description": "Account-wide completed quests, not per-player quest totals.",
+      "extractedAt": "2026-09-08T02:16:26.557Z"
+    },
+    "tome_pts_5": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 5, 0)",
+      "result": 1646,
+      "description": "Account's total character levels.",
+      "extractedAt": "2026-09-08T02:16:26.559Z"
+    },
+    "tome_pts_6": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 6, 0)",
+      "result": 440,
+      "description": "Sum of non-daily task rank levels.",
+      "extractedAt": "2026-09-08T02:16:26.561Z"
+    },
+    "tome_pts_7": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 7, 0)",
+      "result": 751,
+      "description": "Completed achievements.",
+      "extractedAt": "2026-09-08T02:16:26.573Z"
+    },
+    "tome_pts_8": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 8, 0)",
+      "result": 370,
+      "description": "Most money held in Storage.",
+      "extractedAt": "2026-09-08T02:16:26.575Z"
+    },
+    "tome_pts_9": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 9, 0)",
+      "result": 151,
+      "description": "Most Spore Caps held in Storage.",
+      "extractedAt": "2026-09-08T02:16:26.577Z"
+    },
+    "tome_pts_10": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 10, 0)",
+      "result": 573,
+      "description": "Number of different trophies found.",
+      "extractedAt": "2026-09-08T02:16:26.579Z"
+    },
+    "tome_pts_11": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 11, 0)",
+      "result": 1480,
+      "description": "Sum of all skill levels across all players.",
+      "extractedAt": "2026-09-08T02:16:26.588Z"
+    },
+    "tome_pts_12": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 12, 0)",
+      "result": 0,
+      "description": "Best Spike Trap round reached.",
+      "extractedAt": "2026-09-08T02:16:26.590Z"
+    },
+    "tome_pts_13": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 13, 0)",
+      "result": 152,
+      "description": "Total AFK hours claimed.",
+      "extractedAt": "2026-09-08T02:16:26.592Z"
+    },
+    "tome_pts_14": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 14, 0)",
+      "result": 272,
+      "description": "DPS record on the Shimmer Island dummy in World 2.",
+      "extractedAt": "2026-09-08T02:16:26.594Z"
+    },
+    "tome_pts_15": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 15, 0)",
+      "result": 225,
+      "description": "Player 0's owned Star Talent Points.",
+      "extractedAt": "2026-09-08T02:16:26.596Z"
+    },
+    "tome_pts_16": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 16, 0)",
+      "result": 391,
+      "description": "Lowest average kills required for a Crystal Spawn.",
+      "extractedAt": "2026-09-08T02:16:26.607Z"
+    },
+    "tome_pts_17": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 17, 0)",
+      "result": 260,
+      "description": "Dungeon Rank.",
+      "extractedAt": "2026-09-08T02:16:26.609Z"
+    },
+    "tome_pts_18": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 18, 0)",
+      "result": 503,
+      "description": "Highest drop multiplier.",
+      "extractedAt": "2026-09-08T02:16:26.611Z"
+    },
+    "tome_pts_19": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 19, 0)",
+      "result": 300,
+      "description": "Completed constellations.",
+      "extractedAt": "2026-09-08T02:16:26.613Z"
+    },
+    "tome_pts_20": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 20, 0)",
+      "result": 209,
+      "description": "Highest damage dealt to the Gravestone in the World 2 weekly battle.",
+      "extractedAt": "2026-09-08T02:16:26.622Z"
+    },
+    "tome_pts_21": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 21, 0)",
+      "result": 218,
+      "description": "Number of different Obols found.",
+      "extractedAt": "2026-09-08T02:16:26.625Z"
+    },
+    "tome_pts_22": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 22, 0)",
+      "result": 1111,
+      "description": "Sum of visible and hidden Alchemy bubble levels.",
+      "extractedAt": "2026-09-08T02:16:26.627Z"
+    },
+    "tome_pts_23": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 23, 0)",
+      "result": 600,
+      "description": "Sum of all vial levels.",
+      "extractedAt": "2026-09-08T02:16:26.629Z"
+    },
+    "tome_pts_24": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 24, 0)",
+      "result": 363,
+      "description": "Sum of effective Alchemy sigil levels (boostLevel + 1).",
+      "extractedAt": "2026-09-08T02:16:26.639Z"
+    },
+    "tome_pts_25": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 25, 0)",
+      "result": 0,
+      "description": "Number of Jackpot hits in Arcade.",
+      "extractedAt": "2026-09-08T02:16:26.641Z"
+    },
+    "tome_pts_26": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 26, 0)",
+      "result": 313,
+      "description": "Sum of Post Office boxes found, including complete, miscellaneous, and streak boxes.",
+      "extractedAt": "2026-09-08T02:16:26.643Z"
+    },
+    "tome_pts_27": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 27, 0)",
+      "result": 120,
+      "description": "Highest Killroy score on a Warrior.",
+      "extractedAt": "2026-09-08T02:16:26.644Z"
+    },
+    "tome_pts_28": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 28, 0)",
+      "result": 153,
+      "description": "Highest Killroy score on an Archer.",
+      "extractedAt": "2026-09-08T02:16:26.646Z"
+    },
+    "tome_pts_29": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 29, 0)",
+      "result": 148,
+      "description": "Highest Killroy score on a Mage.",
+      "extractedAt": "2026-09-08T02:16:26.654Z"
+    },
+    "tome_pts_30": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 30, 0)",
+      "result": 219,
+      "description": "Fastest time to kill Efaunt.",
+      "extractedAt": "2026-09-08T02:16:26.656Z"
+    },
+    "tome_pts_31": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 31, 0)",
+      "result": 341,
+      "description": "Largest Oak Log printer sample.",
+      "extractedAt": "2026-09-08T02:16:26.658Z"
+    },
+    "tome_pts_32": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 32, 0)",
+      "result": 336,
+      "description": "Largest Copper Ore printer sample.",
+      "extractedAt": "2026-09-08T02:16:26.660Z"
+    },
+    "tome_pts_33": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 33, 0)",
+      "result": 202,
+      "description": "Largest Spore Cap printer sample.",
+      "extractedAt": "2026-09-08T02:16:26.662Z"
+    },
+    "tome_pts_34": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 34, 0)",
+      "result": 239,
+      "description": "Largest Goldfish printer sample.",
+      "extractedAt": "2026-09-08T02:16:26.671Z"
+    },
+    "tome_pts_35": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 35, 0)",
+      "result": 238,
+      "description": "Largest Fly printer sample.",
+      "extractedAt": "2026-09-08T02:16:26.673Z"
+    },
+    "tome_pts_36": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 36, 0)",
+      "result": 17,
+      "description": "Best non-duplicate Goblin Gorefest wave in Worship.",
+      "extractedAt": "2026-09-08T02:16:26.675Z"
+    },
+    "tome_pts_37": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 37, 0)",
+      "result": 283,
+      "description": "Sum of the best waves across all Worship totems.",
+      "extractedAt": "2026-09-08T02:16:26.677Z"
+    },
+    "tome_pts_38": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 38, 0)",
+      "result": 616,
+      "description": "Total digit count of all Deathnote kill totals.",
+      "extractedAt": "2026-09-08T02:16:26.679Z"
+    },
+    "tome_pts_39": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 39, 0)",
+      "result": 750,
+      "description": "Completed Equinox clouds.",
+      "extractedAt": "2026-09-08T02:16:26.688Z"
+    },
+    "tome_pts_40": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 40, 0)",
+      "result": 573,
+      "description": "Sum of the ranks of the six Refinery rows used by the game.",
+      "extractedAt": "2026-09-08T02:16:26.690Z"
+    },
+    "tome_pts_41": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 41, 0)",
+      "result": 495,
+      "description": "Sum of Atom upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.692Z"
+    },
+    "tome_pts_42": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 42, 0)",
+      "result": 819,
+      "description": "Sum of Construction building levels.",
+      "extractedAt": "2026-09-08T02:16:26.694Z"
+    },
+    "tome_pts_43": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 43, 0)",
+      "result": 116,
+      "description": "Current Tottoise count held in Storage.",
+      "extractedAt": "2026-09-08T02:16:26.695Z"
+    },
+    "tome_pts_44": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 44, 0)",
+      "result": 635,
+      "description": "Most Greenstacks held in Storage.",
+      "extractedAt": "2026-09-08T02:16:26.706Z"
+    },
+    "tome_pts_45": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 45, 0)",
+      "result": 500,
+      "description": "Completed Rift levels.",
+      "extractedAt": "2026-09-08T02:16:26.709Z"
+    },
+    "tome_pts_46": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 46, 0)",
+      "result": 126,
+      "description": "Highest pet power among pets in the fenceyard, storage, and territories.",
+      "extractedAt": "2026-09-08T02:16:26.712Z"
+    },
+    "tome_pts_47": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 47, 0)",
+      "result": 32,
+      "description": "Fastest time to reach Round 100 in the Arena.",
+      "extractedAt": "2026-09-08T02:16:26.724Z"
+    },
+    "tome_pts_48": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 48, 0)",
+      "result": 213,
+      "description": "Sum of Kitchen upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.727Z"
+    },
+    "tome_pts_49": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 49, 0)",
+      "result": 219,
+      "description": "Sum of Shiny pet bonus levels.",
+      "extractedAt": "2026-09-08T02:16:26.729Z"
+    },
+    "tome_pts_50": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 50, 0)",
+      "result": 774,
+      "description": "Sum of all meal levels.",
+      "extractedAt": "2026-09-08T02:16:26.731Z"
+    },
+    "tome_pts_51": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 51, 0)",
+      "result": 156,
+      "description": "Sum of base pet breedability levels.",
+      "extractedAt": "2026-09-08T02:16:26.739Z"
+    },
+    "tome_pts_52": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 52, 0)",
+      "result": 176,
+      "description": "Total Lab chips owned, including global chip counts and occupied player-chip slots.",
+      "extractedAt": "2026-09-08T02:16:26.742Z"
+    },
+    "tome_pts_53": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 53, 0)",
+      "result": 152,
+      "description": "Sum of all Colosseum highscores.",
+      "extractedAt": "2026-09-08T02:16:26.744Z"
+    },
+    "tome_pts_54": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 54, 0)",
+      "result": 277,
+      "description": "Most Giants killed in a single week.",
+      "extractedAt": "2026-09-08T02:16:26.745Z"
+    },
+    "tome_pts_55": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 55, 0)",
+      "result": 450,
+      "description": "Player 0's number of Onyx-tier-or-higher statues.",
+      "extractedAt": "2026-09-08T02:16:26.747Z"
+    },
+    "tome_pts_56": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 56, 0)",
+      "result": 161,
+      "description": "Fastest time to kill 200 Tremor Wurms.",
+      "extractedAt": "2026-09-08T02:16:26.757Z"
+    },
+    "tome_pts_57": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 57, 0)",
+      "result": 149,
+      "description": "Sum of Sailing boat loot and speed upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.759Z"
+    },
+    "tome_pts_58": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 58, 0)",
+      "result": 179,
+      "description": "God Rank in Divinity.",
+      "extractedAt": "2026-09-08T02:16:26.761Z"
+    },
+    "tome_pts_59": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 59, 0)",
+      "result": 249,
+      "description": "Number of evolved Gaming plants.",
+      "extractedAt": "2026-09-08T02:16:26.762Z"
+    },
+    "tome_pts_60": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 60, 0)",
+      "result": 1000,
+      "description": "Weighted artifact progression: Obtained=1, Ancient=2, Eldritch=3, Sovereign=4, Omnipotent=5, Transcendent=6.",
+      "extractedAt": "2026-09-08T02:16:26.776Z"
+    },
+    "tome_pts_61": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 61, 0)",
+      "result": 157,
+      "description": "Number of Sailing gold bars owned.",
+      "extractedAt": "2026-09-08T02:16:26.778Z"
+    },
+    "tome_pts_62": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 62, 0)",
+      "result": 126,
+      "description": "Highest Sailing captain level.",
+      "extractedAt": "2026-09-08T02:16:26.780Z"
+    },
+    "tome_pts_63": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 63, 0)",
+      "result": 282,
+      "description": "Highest Immortal Snail level.",
+      "extractedAt": "2026-09-08T02:16:26.790Z"
+    },
+    "tome_pts_64": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 64, 0)",
+      "result": 152,
+      "description": "Best Gold Nugget.",
+      "extractedAt": "2026-09-08T02:16:26.792Z"
+    },
+    "tome_pts_65": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 65, 0)",
+      "result": 1183,
+      "description": "Number of items found in the Slab.",
+      "extractedAt": "2026-09-08T02:16:26.794Z"
+    },
+    "tome_pts_66": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 66, 0)",
+      "result": 327,
+      "description": "Number of Gaming bits owned.",
+      "extractedAt": "2026-09-08T02:16:26.796Z"
+    },
+    "tome_pts_67": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 67, 0)",
+      "result": 172,
+      "description": "Highest Crop OG value, derived as 2^OptionsListAccount[219].",
+      "extractedAt": "2026-09-08T02:16:26.807Z"
+    },
+    "tome_pts_68": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 68, 0)",
+      "result": 350,
+      "description": "Number of crops discovered.",
+      "extractedAt": "2026-09-08T02:16:26.809Z"
+    },
+    "tome_pts_69": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 69, 0)",
+      "result": 400,
+      "description": "Total Golden Food Beanstacks, represented by the sum of Beanstalking bonus levels.",
+      "extractedAt": "2026-09-08T02:16:26.811Z"
+    },
+    "tome_pts_70": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 70, 0)",
+      "result": 190,
+      "description": "Sum of all Summoning upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.813Z"
+    },
+    "tome_pts_71": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 71, 0)",
+      "result": 482,
+      "description": "Total Summoning victories.",
+      "extractedAt": "2026-09-08T02:16:26.823Z"
+    },
+    "tome_pts_72": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 72, 0)",
+      "result": 250,
+      "description": "Number of Ninja floors unlocked.",
+      "extractedAt": "2026-09-08T02:16:26.825Z"
+    },
+    "tome_pts_73": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 73, 0)",
+      "result": 197,
+      "description": "Weighted number of Summoning familiars owned; familiars above Slime use the game's tier multipliers.",
+      "extractedAt": "2026-09-08T02:16:26.827Z"
+    },
+    "tome_pts_74": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 74, 0)",
+      "result": 658,
+      "description": "Number of Jade Emporium upgrades purchased.",
+      "extractedAt": "2026-09-08T02:16:26.828Z"
+    },
+    "tome_pts_75": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 75, 0)",
+      "result": 91,
+      "description": "Sum of all minigame highscores, including the Trapping minigame.",
+      "extractedAt": "2026-09-08T02:16:26.830Z"
+    },
+    "tome_pts_76": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 76, 0)",
+      "result": 160,
+      "description": "Sum of all Prayer upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.840Z"
+    },
+    "tome_pts_77": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 77, 0)",
+      "result": 196,
+      "description": "Sum of all farm plot Land Rank levels.",
+      "extractedAt": "2026-09-08T02:16:26.842Z"
+    },
+    "tome_pts_78": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 78, 0)",
+      "result": 290,
+      "description": "Largest Magic Bean trade.",
+      "extractedAt": "2026-09-08T02:16:26.843Z"
+    },
+    "tome_pts_79": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 79, 0)",
+      "result": 42,
+      "description": "Most balls earned from LBoFaF, including Arcade bonus balls.",
+      "extractedAt": "2026-09-08T02:16:26.845Z"
+    },
+    "tome_pts_80": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 80, 0)",
+      "result": 340,
+      "description": "Sum of all Gold Ball shop upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.846Z"
+    },
+    "tome_pts_81": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 81, 0)",
+      "result": 524,
+      "description": "Teh TOM bonus from Upgrade Vault bonus 57.",
+      "extractedAt": "2026-09-08T02:16:26.855Z"
+    },
+    "tome_pts_82": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 82, 0)",
+      "result": 346,
+      "description": "Total Gambit time in seconds.",
+      "extractedAt": "2026-09-08T02:16:26.857Z"
+    },
+    "tome_pts_83": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 83, 0)",
+      "result": 719,
+      "description": "Sum of digit counts for resources extracted from Hole caverns.",
+      "extractedAt": "2026-09-08T02:16:26.859Z"
+    },
+    "tome_pts_84": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 84, 0)",
+      "result": 359,
+      "description": "Sum of all Hole villager levels.",
+      "extractedAt": "2026-09-08T02:16:26.860Z"
+    },
+    "tome_pts_85": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 85, 0)",
+      "result": 261,
+      "description": "Megafeathers earned from the Orion minigame.",
+      "extractedAt": "2026-09-08T02:16:26.862Z"
+    },
+    "tome_pts_86": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 86, 0)",
+      "result": 250,
+      "description": "Megafish earned from the Poppy minigame.",
+      "extractedAt": "2026-09-08T02:16:26.872Z"
+    },
+    "tome_pts_87": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 87, 0)",
+      "result": 219,
+      "description": "Best Bravery Monument round.",
+      "extractedAt": "2026-09-08T02:16:26.874Z"
+    },
+    "tome_pts_88": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 88, 0)",
+      "result": 146,
+      "description": "Best Justice Monument round.",
+      "extractedAt": "2026-09-08T02:16:26.876Z"
+    },
+    "tome_pts_89": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 89, 0)",
+      "result": 125,
+      "description": "Best Wisdom Monument round.",
+      "extractedAt": "2026-09-08T02:16:26.878Z"
+    },
+    "tome_pts_90": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 90, 0)",
+      "result": 336,
+      "description": "Best Deathbringer max damage in Wraith mode.",
+      "extractedAt": "2026-09-08T02:16:26.880Z"
+    },
+    "tome_pts_91": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 91, 0)",
+      "result": 193,
+      "description": "Best Dawg Den score.",
+      "extractedAt": "2026-09-08T02:16:26.888Z"
+    },
+    "tome_pts_92": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 92, 0)",
+      "result": 218,
+      "description": "Total resource layers destroyed in the Hole.",
+      "extractedAt": "2026-09-08T02:16:26.890Z"
+    },
+    "tome_pts_93": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 93, 0)",
+      "result": 252,
+      "description": "Total Opals found in the Hole.",
+      "extractedAt": "2026-09-08T02:16:26.892Z"
+    },
+    "tome_pts_94": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 94, 0)",
+      "result": 4,
+      "description": "Best Pure Memory round reached.",
+      "extractedAt": "2026-09-08T02:16:26.894Z"
+    },
+    "tome_pts_95": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 95, 0)",
+      "result": 396,
+      "description": "Current World 6 Spirited Valley Emperor boss kills; this counter resets when the bonuses are reset.",
+      "extractedAt": "2026-09-08T02:16:26.896Z"
+    },
+    "tome_pts_96": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 96, 0)",
+      "result": 231,
+      "description": "Total Summoning boss stone victories.",
+      "extractedAt": "2026-09-08T02:16:26.905Z"
+    },
+    "tome_pts_97": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 97, 0)",
+      "result": 400,
+      "description": "Sum of all Coral Reef upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.907Z"
+    },
+    "tome_pts_98": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 98, 0)",
+      "result": 353,
+      "description": "Deepest depth reached in a single Delve.",
+      "extractedAt": "2026-09-08T02:16:26.909Z"
+    },
+    "tome_pts_99": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 99, 0)",
+      "result": 637,
+      "description": "Sum of all Ninja Knowledge upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.911Z"
+    },
+    "tome_pts_100": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 100, 0)",
+      "result": 327,
+      "description": "Best Windwalker max damage in Tempest mode.",
+      "extractedAt": "2026-09-08T02:16:26.912Z"
+    },
+    "tome_pts_101": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 101, 0)",
+      "result": 306,
+      "description": "Best Arcane Cultist max damage in Arcanist mode.",
+      "extractedAt": "2026-09-08T02:16:26.914Z"
+    },
+    "tome_pts_102": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 102, 0)",
+      "result": 257,
+      "description": "Biggest haul in a single Delve.",
+      "extractedAt": "2026-09-08T02:16:26.922Z"
+    },
+    "tome_pts_103": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 103, 0)",
+      "result": 613,
+      "description": "Total Spelunk Shop upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:26.924Z"
+    },
+    "tome_pts_104": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 104, 0)",
+      "result": 274,
+      "description": "Total Spelunk discoveries made.",
+      "extractedAt": "2026-09-08T02:16:26.926Z"
+    },
+    "tome_pts_105": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 105, 0)",
+      "result": 187,
+      "description": "Highest leveled Spelunker.",
+      "extractedAt": "2026-09-08T02:16:26.928Z"
+    },
+    "tome_pts_106": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 106, 0)",
+      "result": 0,
+      "description": "Number of Lava Dev Streams watched.",
+      "extractedAt": "2026-09-08T02:16:26.930Z"
+    },
+    "tome_pts_107": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 107, 0)",
+      "result": 525,
+      "description": "Number of Nametags found.",
+      "extractedAt": "2026-09-08T02:16:26.938Z"
+    },
+    "tome_pts_108": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 108, 0)",
+      "result": 168,
+      "description": "Megaflesh earned from Bubba.",
+      "extractedAt": "2026-09-08T02:16:26.940Z"
+    },
+    "tome_pts_109": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 109, 0)",
+      "result": 430,
+      "description": "Premium Hats found.",
+      "extractedAt": "2026-09-08T02:16:26.942Z"
+    },
+    "tome_pts_110": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 110, 0)",
+      "result": 195,
+      "description": "Minehead opponents defeated.",
+      "extractedAt": "2026-09-08T02:16:26.944Z"
+    },
+    "tome_pts_111": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 111, 0)",
+      "result": 96,
+      "description": "Reclaimed King Rat Crown count.",
+      "extractedAt": "2026-09-08T02:16:26.946Z"
+    },
+    "tome_pts_112": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 112, 0)",
+      "result": 154,
+      "description": "Farming stickers found; Farming.getTotalStickers now mirrors FarmingStuffs.TotalStickers.",
+      "extractedAt": "2026-09-08T02:16:26.958Z"
+    },
+    "tome_pts_113": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 113, 0)",
+      "result": 6,
+      "description": "Tournament registrations.",
+      "extractedAt": "2026-09-08T02:16:26.960Z"
+    },
+    "tome_pts_114": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 114, 0)",
+      "result": 709,
+      "description": "Research Grid points spent.",
+      "extractedAt": "2026-09-08T02:16:26.963Z"
+    },
+    "tome_pts_115": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 115, 0)",
+      "result": 220,
+      "description": "Total Glimbo trades completed.",
+      "extractedAt": "2026-09-08T02:16:26.975Z"
+    },
+    "tome_pts_116": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 116, 0)",
+      "result": 496,
+      "description": "Unique Sushi created.",
+      "extractedAt": "2026-09-08T02:16:26.977Z"
+    },
+    "tome_pts_117": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 117, 0)",
+      "result": 247,
+      "description": "Button presses.",
+      "extractedAt": "2026-09-08T02:16:26.979Z"
+    },
+    "tome_pts_118": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 118, 0)",
+      "result": 56,
+      "description": "Total Royal Statue levels; RoyalArmory.getTotalRoyalStatueLevels mirrors the non-negative RoyalG[0] sum.",
+      "extractedAt": "2026-09-08T02:16:26.990Z"
+    },
+    "tome_pts_119": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 119, 0)",
+      "result": 290,
+      "description": "Royal Guardian outposts built; RoyalArmory.getOutpostsBuilt mirrors RoyalG.TotalStatz(4, 0).",
+      "extractedAt": "2026-09-08T02:16:26.993Z"
+    },
+    "tome_pts_120": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 120, 0)",
+      "result": 0,
+      "description": "Total Resource Grade; RoyalArmory.getTotalResourceGrade mirrors RoyalG.TotalStatz(0, 0).",
+      "extractedAt": "2026-09-08T02:16:26.995Z"
+    },
+    "tome_producer_98_spelunk_1_max": {
+      "expression": "Math.max(...idleon.getAttr(\"Spelunk\")[1])",
+      "result": 286,
+      "description": "Game source for Tome line 98: maximum Spelunk[1] value, representing deepest depth reached in a single Delve.",
+      "extractedAt": "2026-09-08T02:16:27.006Z"
+    },
+    "tome_producer_102_spelunk_2_max": {
+      "expression": "Math.max(...idleon.getAttr(\"Spelunk\")[2])",
+      "result": {
+        "type": "large_number",
+        "value": "6.907809127140328e+30",
+        "original": 6.907809127140328e+30
+      },
+      "description": "Game source for Tome line 102: maximum Spelunk[2] value, representing the biggest haul in a single Delve.",
+      "extractedAt": "2026-09-08T02:16:27.008Z"
+    },
+    "tome_producer_103_spelunk_5_sum": {
+      "expression": "idleon.getAttr(\"Spelunk\")[5].reduce((sum, value) => sum + Math.max(0, value), 0)",
+      "result": 7320,
+      "description": "Game source for Tome line 103: sum of non-negative Spelunk[5] values, representing total Spelunk Shop upgrade levels.",
+      "extractedAt": "2026-09-08T02:16:27.010Z"
+    },
+    "tome_producer_104_spelunk_6_count": {
+      "expression": "idleon.getAttr(\"Spelunk\")[6].length",
+      "result": 82,
+      "description": "Game source for Tome line 104: length of Spelunk[6], representing total Spelunk discoveries.",
+      "extractedAt": "2026-09-08T02:16:27.012Z"
+    },
+    "tome_producer_109_spelunk_46_count": {
+      "expression": "idleon.getAttr(\"Spelunk\")[46].length",
+      "result": 46,
+      "description": "Game source for Tome line 109: length of Spelunk[46], representing Premium Hats found.",
+      "extractedAt": "2026-09-08T02:16:27.027Z"
+    },
+    "tome_producer_110_research_7_4": {
+      "expression": "idleon.getAttr(\"Research\")[7][4]",
+      "result": 13,
+      "description": "Game source for Tome line 110: Research[7][4], representing Minehead opponents defeated.",
+      "extractedAt": "2026-09-08T02:16:27.030Z"
+    },
+    "tome_producer_111_research_11_count": {
+      "expression": "idleon.getAttr(\"Research\")[11].length",
+      "result": 24,
+      "description": "Game source for Tome line 111: length of Research[11], representing reclaimed King Rat Crowns.",
+      "extractedAt": "2026-09-08T02:16:27.038Z"
+    },
+    "tome_producer_112_total_stickers": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"TotalStickers\", 0, 0)",
+      "result": 44,
+      "description": "Game source for Tome line 112: FarmingStuffs.TotalStickers, consumed by Farming.getTotalStickers.",
+      "extractedAt": "2026-09-08T02:16:27.041Z"
+    },
+    "tome_producer_113_optlacc_498": {
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[498]",
+      "result": 6,
+      "description": "Game source for Tome line 113: OptionsListAccount[498], representing Tournament registrations.",
+      "extractedAt": "2026-09-08T02:16:27.043Z"
+    },
+    "tome_producer_114_grid_pts_spent": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_PTSspent\", 0, 0)",
+      "result": 103,
+      "description": "Game source for Tome line 114: ResearchStuff.Grid_PTSspent, representing Research Grid points spent.",
+      "extractedAt": "2026-09-08T02:16:27.045Z"
+    },
+    "tome_producer_115_research_12_sum": {
+      "expression": "idleon.getAttr(\"Research\")[12].reduce((sum, value) => sum + Math.round(Math.max(0, value)), 0)",
+      "result": 498,
+      "description": "Game source for Tome line 115: the rounded sum of non-negative Research[12] values, representing total Glimbo trades completed.",
+      "extractedAt": "2026-09-08T02:16:27.047Z"
+    },
+    "tome_producer_116_unique_sushi": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"UniqueSushi\", 0, 0)",
+      "result": 39,
+      "description": "Game source for Tome line 116: SushiStuff.UniqueSushi, representing unique Sushi created.",
+      "extractedAt": "2026-09-08T02:16:27.056Z"
+    },
+    "tome_producer_117_optlacc_594": {
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[594]",
+      "result": 82,
+      "description": "Game source for Tome line 117: OptionsListAccount[594], representing button presses.",
+      "extractedAt": "2026-09-08T02:16:27.058Z"
+    },
+    "tome_producer_118_royalg_0_sum": {
+      "expression": "idleon.getAttr(\"RoyalG\")[0].reduce((sum, value) => sum + Math.max(0, value), 0)",
+      "result": 2,
+      "description": "Game source for Tome line 118: the non-negative RoyalG[0] sum, consumed by RoyalArmory.getTotalRoyalStatueLevels.",
+      "extractedAt": "2026-09-08T02:16:27.060Z"
+    },
+    "tome_producer_119_royalg_total_stats_4": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 4, 0)",
+      "result": 29,
+      "description": "Game source for Tome line 119: RoyalG.TotalStatz(4, 0), consumed by RoyalArmory.getOutpostsBuilt.",
+      "extractedAt": "2026-09-08T02:16:27.062Z"
+    },
+    "tome_producer_120_royalg_total_stats_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
+      "result": 0,
+      "description": "Game source for Tome line 120: RoyalG.TotalStatz(0, 0), consumed by RoyalArmory.getTotalResourceGrade.",
+      "extractedAt": "2026-09-08T02:16:27.074Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

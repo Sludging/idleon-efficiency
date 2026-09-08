@@ -58,11 +58,6 @@
       "description": "Game LoreEpiBon bonus for Tome epilogue index 10"
     },
     {
-      "label": "tome_score",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "description": "Game Tome score input (_GenInfo[84]) used by LoreEpiBon"
-    },
-    {
       "label": "grimoire_bonus_17",
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
       "description": "Game Grimoire upgrade 17 bonus used by LoreEpiBon"
