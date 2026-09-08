@@ -33,6 +33,7 @@ import { ElegantSeashell, Gaming, ImmortalSnail } from '../world-5/gaming';
 import { ArtifactStatus } from '../world-5/sailing/artifacts';
 import { Account } from '../account';
 import { Farming } from '../world-6/farming';
+import { RoyalArmory } from '../world-6/royalArmory';
 import { SushiStation } from '../world-7/sushi';
 import { Sneaking } from '../world-6/sneaking';
 import { Summoning } from '../world-6/summoning';
@@ -372,6 +373,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const gaming = data.get("gaming") as Gaming;
     const account = data.get("account") as Account;
     const farming = data.get("farming") as Farming;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
     const sneaking = data.get("sneaking") as Sneaking;
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
@@ -1071,8 +1073,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 112:
                 // Farming stickers found (game source: FarmingStuffs.TotalStickers).
-                // TODO: add this once implemented.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(farming.getTotalStickers());
                 break;
             case 113:
                 // Tournament registrations, currently mapped to OptionsListAccount[498].
@@ -1098,18 +1099,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 118:
                 // Total Royal Statue levels (game source: sum of non-negative RoyalG[0] values).
-                // TODO: confirm the measurement and implement it.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(royalArmory.getTotalRoyalStatueLevels());
                 break;
             case 119:
                 // Royal Guardian outposts built (game source: RoyalG.TotalStatz(4, 0)).
-                // TODO: add this once implemented.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(royalArmory.getOutpostsBuilt());
                 break;
             case 120:
                 // Total Resource Grade (game source: RoyalG.TotalStatz(0, 0)).
-                // TODO: add this once implemented.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(royalArmory.getTotalResourceGrade());
                 break;
             default:
                 line.updateAllPlayersCurrentValue(0);

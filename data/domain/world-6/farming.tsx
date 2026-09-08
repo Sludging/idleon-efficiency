@@ -528,6 +528,8 @@ export class Farming extends Domain {
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
+    // TODO: Get sticker data from wiki and make a real model.
+    totalStickers: number = 0;
     exoticMarketLevels: number[] = [];
     marketCostMultiplier: number = 1;
 
@@ -548,6 +550,7 @@ export class Farming extends Domain {
             { key: "FarmCrop", perPlayer: false, default: [] },
             { key: "FarmUpg", perPlayer: false, default: [] },
             { key: "FarmRank", perPlayer: false, default: [] },
+            { key: "Research", perPlayer: false, default: [] },
         ]
     }
 
@@ -561,6 +564,11 @@ export class Farming extends Domain {
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
+        const researchData = data.get("Research") as number[][] | undefined;
+        farming.totalStickers = (researchData?.[9] ?? []).reduce(
+            (total, stickers) => Math.round(total + (Number(stickers) || 0)),
+            0,
+        );
 
         // Old accounts won't have this data, exit early.
         if (!cropsData || (!plotsData || plotsData.length == 0) || (!upgradesData || upgradesData.length == 0) || (!landRankData || landRankData.length == 0)) {
@@ -636,6 +644,9 @@ export class Farming extends Domain {
         });
     }
 
+    getTotalStickers = (): number => {
+        return this.totalStickers;
+    }
     updateUnlockedMarketBonuses = () => {
         this.marketUpgrades.forEach(upgrade => {
             upgrade.unlocked = (upgrade.data.cropReq <= this.discoveredCrops);
