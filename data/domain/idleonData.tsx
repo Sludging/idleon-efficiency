@@ -53,6 +53,7 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { SushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
+import { Minehead } from './world-7/minehead';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
@@ -155,6 +156,7 @@ const domainList: Domain[] = [
     new SushiStation("sushi"),
     new Spelunking("spelunking"),
     new ResearchGrid("research"),
+    new Minehead("minehead"),
     new StarSigns("starsigns"),
     new Button("button"),
     new IslandExpeditions("islandExpeditions"),

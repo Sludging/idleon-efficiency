@@ -50,6 +50,7 @@ import { Bubba } from '../world-3/bubba';
 import { CoralReef } from '../world-7/coralReef';
 import { Spelunking } from '../world-7/spelunking';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
+import { Minehead } from '../world-7/minehead';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -386,6 +387,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const coralReef = data.get("coralReef") as CoralReef;
     const spelunking = data.get("spelunking") as Spelunking;
     const researchGrid = data.get("research") as ResearchGrid;
+    const minehead = data.get("minehead") as Minehead;
 
 
     // Count obtained trophies, obols, and equipment nametags from the Slab.
@@ -1064,8 +1066,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 110:
                 // Minehead opponents defeated (game source: Research[7][4]).
-                // TODO: add this once implemented.
-                line.updateAllPlayersCurrentValue(0);
+                line.updateAllPlayersCurrentValue(minehead.getOpponentsDefeated());
                 break;
             case 111:
                 // Reclaimed King Rat Crown count from Research Grid bonus 67; the game source uses Research[11].length.
