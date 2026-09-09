@@ -1,0 +1,131 @@
+{
+  "description": "Extract SkillStats AllEfficiencies and its issue-375 formula inputs",
+  "target": "SkillStats AllEfficiencies",
+  "extractions": [
+    {
+      "label": "skill_all_efficiencies",
+      "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
+      "description": "SkillStats AllEfficiencies account-level result"
+    },
+    {
+      "label": "all_eff_family_bonus_42",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "description": "Family bonus quantity 42 (factor A)"
+    },
+    {
+      "label": "all_eff_etc_bonus_48",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
+      "description": "Equipment EtcBonuses 48 (factor A)"
+    },
+    {
+      "label": "all_eff_vial_6_skill_eff",
+      "expression": "idleon.getDNSM(\"AlchVials\").h[\"6SkillEff\"]",
+      "description": "Alchemy vial 6SkillEff (factor A)"
+    },
+    {
+      "label": "all_eff_artifact_15",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 15, 0)",
+      "description": "Sailing artifact 15 bonus (factor A)"
+    },
+    {
+      "label": "all_eff_total_quests_complete",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
+      "description": "Total completed quests used by the Talent 617 min fork"
+    },
+    {
+      "label": "all_eff_talent_617",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 617)",
+      "description": "Studious Quester cap used by the factor A min fork"
+    },
+    {
+      "label": "all_eff_meal_seff",
+      "expression": "idleon.callFunction(\"MealBonus\", \"Seff\")",
+      "description": "Cooking meal Seff bonus (factor B)"
+    },
+    {
+      "label": "all_eff_talent_646",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 646)",
+      "description": "Ancient Multitool bonus (factor B)"
+    },
+    {
+      "label": "all_eff_tome_bonus_1",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
+      "description": "Summoning TomeBonus 1 (factor B)"
+    },
+    {
+      "label": "all_eff_palette_10",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 10, 0)",
+      "description": "Gaming palette 10 bonus (factor B)"
+    },
+    {
+      "label": "all_eff_chip_toteff",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",
+      "description": "Lab chip toteff bonus (factor B)"
+    },
+    {
+      "label": "all_eff_card_lv_crystal4",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Crystal4\")",
+      "description": "Crystal4 card level (factor B)"
+    },
+    {
+      "label": "all_eff_friend_bonus_stat_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
+      "description": "Friend bonus stat 2 (factor B)"
+    },
+    {
+      "label": "all_eff_rift_skill_etc_2",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 2)",
+      "description": "Rift skill efficiency total (factor B)"
+    },
+    {
+      "label": "all_eff_hole_b_upg_49_15",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
+      "description": "Hole B_UPG 49 with input 15 (factor B)"
+    },
+    {
+      "label": "all_eff_shimmer_multiplier",
+      "expression": "idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "description": "All Shimmer Bonuses multiplier (factor B)"
+    },
+    {
+      "label": "all_eff_card_bonus_84",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 84)",
+      "description": "Card bonus 84 (factor C)"
+    },
+    {
+      "label": "all_eff_companion_5",
+      "expression": "idleon.callFunction(\"Companions\", 5)",
+      "description": "Companion 5 bonus (factor C)"
+    },
+    {
+      "label": "all_eff_win_bonus_14",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 14, 0)",
+      "description": "Summoning winner bonus 14 (factor D)"
+    },
+    {
+      "label": "all_eff_guild_bonus_6",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 6)",
+      "description": "Guild bonus 6 (factor E)"
+    },
+    {
+      "label": "all_eff_card_set_2",
+      "expression": "idleon.callFunction(\"CardSetBonuses\", 0, \"2\")",
+      "description": "Active card set skill efficiency bonus (factor E)"
+    },
+    {
+      "label": "all_eff_prayer_1_bonus",
+      "expression": "idleon.callFunction(\"prayersReal\", 1, 0)",
+      "description": "Prayer 1 bonus (factor E)"
+    },
+    {
+      "label": "all_eff_buff_40_2",
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 40, 2)",
+      "description": "Active Maestro Transfusion efficiency penalty (factor P)"
+    },
+    {
+      "label": "all_eff_prayer_17_curse",
+      "expression": "idleon.callFunction(\"prayersReal\", 17, 1)",
+      "description": "Prayer 17 curse (factor P)"
+    }
+  ]
+}

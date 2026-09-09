@@ -407,24 +407,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
         }
     });
 
-    // Number of quests completed (by account, not by player)
-    const badNPCNames = [
-        "Secretkeeper",
-        "Game Message",
-        "Unmade Character",
-        "FillerNPC"
-    ]
-    // remove NPCs that should be ignored
-    const filteredNPCs = Object.entries(questsData?.npcData ?? {}).filter(([name, info]) => !badNPCNames.includes(name) && Object.entries(info.data.quests).length > 0);
-    let completedQuests: number = 0;
-    const playerQuestData = questsData?.playerData ?? {};
-    filteredNPCs.forEach(([_, npc]) => {
-        Object.entries(npc.data.quests).forEach(([_, info]) => {
-            if (Object.entries(playerQuestData).some(playerData => playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
-                completedQuests++;
-            }
-        });
-    });
     // Sum all skill levels across players.
     const sumOfSkillsLevels = players.reduce((sum, player) =>
         sum + [...player.skills.values()].reduce((skillSum, skill) => skillSum + skill.level, 0),
@@ -637,7 +619,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 4:
                 // Number of quests completed (by account, not by player)
-                line.updateAllPlayersCurrentValue(completedQuests);
+                line.updateAllPlayersCurrentValue(questsData.getTotalQuestsComplete());
                 break;
             case 5:
                 // Total levels of all players.

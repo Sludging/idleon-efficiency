@@ -21,7 +21,7 @@ export class Card {
 
     chipBoost: number = 1;
     legendTalentBoost: number = 0;
-    baseMaxCardLevel: number = 4;
+    baseMaxCardLevel: number = 5;
     bonusMaxCardLevelFromSpelunking: number = 0;
     bonusMaxCardLevelFromRift: number = 0;
     passive: boolean = false;
