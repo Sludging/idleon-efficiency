@@ -6,34 +6,148 @@ import { ImageData } from "../imageData";
 import { Item } from "../items";
 
 
-const defaultBonuses = [
-    '+25%_{_EXP_GAIN',
-    '+10%_{_EFFICIENCY',
-    '+5%_TOTAL_DAMAGE',
-    '+10%_ALL_SKILL_EXP',
-    '+5%_ALL_SKILL_EFFICIENCY',
-    '+1%_PRINTER_OUTPUT',
-    '+25%_ALL_SKILL_EXP',
-];
+const skillMasteryBonusIndex = {
+    experience: 0,
+    efficiency: 1,
+    totalDamage: 2,
+    allSkillExperience: 3,
+    allSkillEfficiency: 4,
+    printerOutput: 5,
+    largeAllSkillExperience: 6,
+} as const;
 
-const specialBonuses: Map<SkillsIndex, string> = new Map([
-    [SkillsIndex.Mining, 'ALL_MINING_CARDS_ARE_NOW_PASSIVE'],
-    [SkillsIndex.Fishing, 'ALL_FISHING_CARDS_ARE_NOW_PASSIVE'],
-    [SkillsIndex.Chopping, 'ALL_CHOPPING_CARDS_ARE_NOW_PASSIVE'],
-    [SkillsIndex.Catching, 'ALL_CATCHING_CARDS_ARE_NOW_PASSIVE'],
-    [SkillsIndex.Trapping, 'ALL_TRAPPING_CARDS_ARE_NOW_PASSIVE'],
-    [SkillsIndex.Smithing, "+25%_FORGE_ORE_CAPACITY"],
-    [SkillsIndex.Alchemy, "+5%_ALL_LIQUID_CAP"],
-    [SkillsIndex.Construction, "+15%_SHRINE_LV_UP_RATE"],
-    [SkillsIndex.Worship, "ALL_WORSHIP_CARDS_ARE_NOW_PASSIVE"],
-    [SkillsIndex.Breeding, "+15%_EGG_INCUBATION_SPEED"],
-    [SkillsIndex.Sailing, "+15%_BOAT_SAILING_SPEED"],
-    [SkillsIndex.Divinity, "+15%_DIVINITY_PTS_GAINED"],
-    [SkillsIndex.Gaming, "1.15X_GAMING_BITS_GAINED"],
-    [SkillsIndex.Farming, "1.15X_CROP_EVO_CHANCE"],
-    [SkillsIndex.Sneaking, "1.10X_JADE_COIN_GAIN"],
-    [SkillsIndex.Summoning, "1.10X_ESSENCE_GAIN"],
-]);
+type SkillMasteryBonusIndex = typeof skillMasteryBonusIndex[keyof typeof skillMasteryBonusIndex];
+
+/**
+ * Public Skill Mastery owner slots:
+ * 0 +25% skill EXP, 1 +10% skill efficiency, 2 +5% total damage,
+ * 3 +10% all-skill EXP, 4 +5% all-skill efficiency, 5 +1% printer output,
+ * and 6 +25% all-skill EXP.  Slots 2..6 are also the account-total effects.
+ */
+const defaultBonuses: Record<SkillMasteryBonusIndex, string> = {
+    [skillMasteryBonusIndex.experience]: '+25%_{_EXP_GAIN',
+    [skillMasteryBonusIndex.efficiency]: '+10%_{_EFFICIENCY',
+    [skillMasteryBonusIndex.totalDamage]: '+5%_TOTAL_DAMAGE',
+    [skillMasteryBonusIndex.allSkillExperience]: '+10%_ALL_SKILL_EXP',
+    [skillMasteryBonusIndex.allSkillEfficiency]: '+5%_ALL_SKILL_EFFICIENCY',
+    [skillMasteryBonusIndex.printerOutput]: '+1%_PRINTER_OUTPUT',
+    [skillMasteryBonusIndex.largeAllSkillExperience]: '+25%_ALL_SKILL_EXP',
+};
+
+type SkillMasteryDisplayBonuses = Partial<Record<SkillMasteryBonusIndex, string>>;
+
+/**
+ * Sparse display overrides for special owner effects. Slot 2 grants passive
+ * cards for Mining, Chopping, Fishing, Catching, Trapping, Worship, and
+ * Spelunking. The other special effects are Smithing slot 1 +25% forge ore
+ * capacity, Alchemy +5% liquid cap, Construction +15% shrine level-up rate,
+ * Breeding +15% egg incubation speed, Sailing +15% boat speed, Divinity +15%
+ * points gained, Gaming 1.15x bits, Farming 1.15x crop evolution chance,
+ * Sneaking 1.10x jade coins, and Summoning 1.10x essence. Spelunking's
+ * seven effects are EXP, efficiency, passive cards, max stamina, daily page
+ * reads, stamina regeneration, and amber gain across slots 0..6. Omitted
+ * skill/slot pairs use the defaults above; Research has no display effect.
+ */
+const skillMasteryDisplayOverrides: Partial<Record<SkillsIndex, SkillMasteryDisplayBonuses>> = {
+    [SkillsIndex.Mining]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_MINING_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Smithing]: { [skillMasteryBonusIndex.efficiency]: '+25%_FORGE_ORE_CAPACITY' },
+    [SkillsIndex.Chopping]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_CHOPPING_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Fishing]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_FISHING_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Alchemy]: { [skillMasteryBonusIndex.efficiency]: '+5%_ALL_LIQUID_CAP' },
+    [SkillsIndex.Catching]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_CATCHING_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Trapping]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_TRAPPING_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Construction]: { [skillMasteryBonusIndex.efficiency]: '+15%_SHRINE_LV_UP_RATE' },
+    [SkillsIndex.Worship]: { [skillMasteryBonusIndex.totalDamage]: 'ALL_WORSHIP_CARDS_ARE_NOW_PASSIVE' },
+    [SkillsIndex.Breeding]: { [skillMasteryBonusIndex.efficiency]: '+15%_EGG_INCUBATION_SPEED' },
+    [SkillsIndex.Sailing]: { [skillMasteryBonusIndex.efficiency]: '+15%_BOAT_SAILING_SPEED' },
+    [SkillsIndex.Divinity]: { [skillMasteryBonusIndex.efficiency]: '+15%_DIVINITY_PTS_GAINED' },
+    [SkillsIndex.Gaming]: { [skillMasteryBonusIndex.efficiency]: '1.15X_GAMING_BITS_GAINED' },
+    [SkillsIndex.Farming]: { [skillMasteryBonusIndex.efficiency]: '1.15X_CROP_EVO_CHANCE' },
+    [SkillsIndex.Sneaking]: { [skillMasteryBonusIndex.efficiency]: '1.10X_JADE_COIN_GAIN' },
+    [SkillsIndex.Summoning]: { [skillMasteryBonusIndex.efficiency]: '1.10X_ESSENCE_GAIN' },
+    [SkillsIndex.Spelunking]: {
+        [skillMasteryBonusIndex.experience]: '+25%_SPELUNKING_EXP',
+        [skillMasteryBonusIndex.efficiency]: '+30%_SPELUNKING_EFFICIENCY',
+        [skillMasteryBonusIndex.totalDamage]: 'ALL_SPELUNKING_CARDS_ARE_NOW_PASSIVE',
+        [skillMasteryBonusIndex.allSkillExperience]: '+15_MAX_STAMINA_FOR_EVERYONE',
+        [skillMasteryBonusIndex.allSkillEfficiency]: '+3_DAILY_PAGE_READS',
+        [skillMasteryBonusIndex.printerOutput]: '+10%_STAMINA_REGEN_RATE',
+        [skillMasteryBonusIndex.largeAllSkillExperience]: '1.50x_ALL_AMBER_GAIN',
+    },
+};
+
+type SkillMasteryNumericOverrides = Partial<Record<SkillMasteryBonusIndex, number>>;
+
+/**
+ * Sparse live numeric overrides. The special values are Smithing 25,
+ * Alchemy 5, Construction 15, Breeding 15, Sailing 17 (despite its +15%
+ * display), Divinity 15, Gaming 15, Farming 15, Sneaking 10, and Summoning
+ * 10 in owner slot 1. Spelunking's seven values are 25, 30, default 5, 15,
+ * 3, 10, and 50 in slots 0..6; slot 2 remains the default numeric effect
+ * while its public label is the passive-card effect above.
+ */
+const skillMasteryNumericOverrides: Partial<Record<SkillsIndex, SkillMasteryNumericOverrides>> = {
+    [SkillsIndex.Smithing]: { [skillMasteryBonusIndex.efficiency]: 25 },
+    [SkillsIndex.Alchemy]: { [skillMasteryBonusIndex.efficiency]: 5 },
+    [SkillsIndex.Construction]: { [skillMasteryBonusIndex.efficiency]: 15 },
+    [SkillsIndex.Breeding]: { [skillMasteryBonusIndex.efficiency]: 15 },
+    [SkillsIndex.Sailing]: { [skillMasteryBonusIndex.efficiency]: 17 },
+    [SkillsIndex.Divinity]: { [skillMasteryBonusIndex.efficiency]: 15 },
+    [SkillsIndex.Gaming]: { [skillMasteryBonusIndex.efficiency]: 15 },
+    [SkillsIndex.Farming]: { [skillMasteryBonusIndex.efficiency]: 15 },
+    [SkillsIndex.Sneaking]: { [skillMasteryBonusIndex.efficiency]: 10 },
+    [SkillsIndex.Summoning]: { [skillMasteryBonusIndex.efficiency]: 10 },
+    [SkillsIndex.Spelunking]: {
+        [skillMasteryBonusIndex.experience]: 25,
+        [skillMasteryBonusIndex.efficiency]: 30,
+        [skillMasteryBonusIndex.allSkillExperience]: 15,
+        [skillMasteryBonusIndex.allSkillEfficiency]: 3,
+        [skillMasteryBonusIndex.printerOutput]: 10,
+        [skillMasteryBonusIndex.largeAllSkillExperience]: 50,
+    },
+};
+
+const defaultSkillBonusValues: Record<SkillMasteryBonusIndex, number> = {
+    [skillMasteryBonusIndex.experience]: 25,
+    [skillMasteryBonusIndex.efficiency]: 10,
+    [skillMasteryBonusIndex.totalDamage]: 5,
+    [skillMasteryBonusIndex.allSkillExperience]: 10,
+    [skillMasteryBonusIndex.allSkillEfficiency]: 5,
+    [skillMasteryBonusIndex.printerOutput]: 1,
+    [skillMasteryBonusIndex.largeAllSkillExperience]: 25,
+};
+
+/**
+ * The delivered RiftSkillETC source argument 0..4 maps to owner slots 2..6.
+ * Every account total starts at baseline 7, including while Skill Mastery is
+ * locked. The loop then visits its 18 source categories (s=0..17), which map
+ * to owner SkillsIndex values s+1; Spelunking and Research are not in it.
+ */
+const riftSkillEtcTotalBonusIndexes: Record<number, true> = {
+    [skillMasteryBonusIndex.totalDamage]: true,
+    [skillMasteryBonusIndex.allSkillExperience]: true,
+    [skillMasteryBonusIndex.allSkillEfficiency]: true,
+    [skillMasteryBonusIndex.printerOutput]: true,
+    [skillMasteryBonusIndex.largeAllSkillExperience]: true,
+};
+const riftSkillEtcBaselineBonus = 7;
+
+/**
+ * RiftSkillETC's source totals 0 and 2 (owner slots 2 and 4) skip these six
+ * card-passive categories: s=0 Mining, 2 Chopping, 3 Fishing, 5 Catching,
+ * 6 Trapping, and 8 Worship.
+ */
+const riftSkillEtcExcludedGameIndexes: Record<number, true> = {
+    0: true,
+    2: true,
+    3: true,
+    5: true,
+    6: true,
+    8: true,
+};
+const riftSkillEtcGameSkillCount = 18;
+
+const smithingForgeCapacitySourceThreshold = 0;
 
 export class RiftBonus {
     active: boolean = false;
@@ -64,14 +178,11 @@ export class InfiniteStarsBonus extends RiftBonus {
     }
 }
 
-// Use a typeguard to prove a skill index is a valid rift mastery skill
-const isRiftMasterySkill = (x: SkillsIndex): x is RiftMasterySkills => true;
-
-// Leaving this in case in need of hiding some other skills
-type RiftMasterySkills = SkillsIndex
+// Keep all 20 SkillsIndex values in skillLevels so every category reports a
+// rank. Research is the one category with no Rift Skill Mastery effects.
 export class SkillMastery extends RiftBonus {
 
-    skillLevels: Record<RiftMasterySkills, number> = {
+    skillLevels: Record<SkillsIndex, number> = {
         [SkillsIndex.Mining]: 0,
         [SkillsIndex.Smithing]: 0,
         [SkillsIndex.Chopping]: 0,
@@ -95,100 +206,91 @@ export class SkillMastery extends RiftBonus {
     };
 
     getSkillRank = (skill: SkillsIndex) => {
-        if (isRiftMasterySkill(skill)) {
-            const level = this.skillLevels[skill];
-            switch (true) {
-                case level < 150: return 0;
-                case level < 200: return 1;
-                case level < 300: return 2;
-                case level < 400: return 3;
-                case level < 500: return 4;
-                case level < 750: return 5;
-                case level < 1000: return 6;
-                case level >= 1000: return 7;
-                default: return -1;
-            }
+        if (!Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
+            return -1;
         }
 
-        return -1;
+        const level = this.skillLevels[skill];
+        switch (true) {
+            case level < 150: return 0;
+            case level < 200: return 1;
+            case level < 300: return 2;
+            case level < 400: return 3;
+            case level < 500: return 4;
+            case level < 750: return 5;
+            case level < 1000: return 6;
+            case level >= 1000: return 7;
+            default: return -1;
+        }
     }
 
     getBonusText = (skill: SkillsIndex, bonusIndex: number) => {
-        // Some skills override the 2nd bonus, the others the third one.
-        const specialIndex = [
-            SkillsIndex.Smithing,
-            SkillsIndex.Alchemy,
-            SkillsIndex.Construction,
-            SkillsIndex.Breeding,
-            SkillsIndex.Sailing,
-            SkillsIndex.Divinity,
-            SkillsIndex.Gaming,
-            SkillsIndex.Farming,
-            SkillsIndex.Sneaking,
-            SkillsIndex.Summoning
-        ].includes(skill) ? 1 : 2;
-        // If it's the special bonus and we have an override for that skill, get the special text.
-        if (bonusIndex == specialIndex && specialBonuses.has(skill)) {
-            return specialBonuses.get(skill)!.replace(/_/g, " ");
+        // Research keeps its rank but has no numeric or display mastery effect.
+        if (skill === SkillsIndex.Research || !Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
+            return "";
         }
 
-        return defaultBonuses[bonusIndex].replace(/_/g, " ").replace(/{/, skill == SkillsIndex.Intellect ? "Laboratory" : SkillsIndex[skill]);
+        const specialBonus = skillMasteryDisplayOverrides[skill]?.[bonusIndex as SkillMasteryBonusIndex];
+
+        if (specialBonus !== undefined) {
+            return specialBonus.replace(/_/g, " ");
+        }
+
+        const defaultBonus = defaultBonuses[bonusIndex as SkillMasteryBonusIndex];
+        if (defaultBonus === undefined) {
+            return "";
+        }
+
+        return defaultBonus.replace(/_/g, " ").replace(/{/, skill === SkillsIndex.Intellect ? "Laboratory" : SkillsIndex[skill]);
     }
 
     getSkillBonus = (skill: SkillsIndex, bonusIndex: number) => {
-        if (!this.active) {
+        // Research keeps its rank but has no numeric or display mastery effect.
+        if (!this.active || skill === SkillsIndex.Research || !Object.prototype.hasOwnProperty.call(this.skillLevels, skill)) {
             return 0;
         }
 
-        // Can be less duplicated/smarter but I prefer it readable.
-        switch (true) {
-            case bonusIndex == 0: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
-            case bonusIndex == 2: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
-            case bonusIndex == 3: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
-            case bonusIndex == 4: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
-            case bonusIndex == 5: return this.getSkillRank(skill) > bonusIndex ? 1 : 0;
-            case bonusIndex == 6: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Smithing: return this.getSkillRank(skill) > bonusIndex ? 25 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Alchemy: return this.getSkillRank(skill) > bonusIndex ? 5 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Construction: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Breeding: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            // Lava says 15 but he gives 17
-            case bonusIndex == 1 && skill == SkillsIndex.Sailing: return this.getSkillRank(skill) > bonusIndex ? 17 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Divinity: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Gaming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Farming: return this.getSkillRank(skill) > bonusIndex ? 15 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Sneaking: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
-            case bonusIndex == 1 && skill == SkillsIndex.Summoning: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
-            // This is basically a boolean for the passive cards, 1 = active. Likely won't be used in code but just safer to handle.
-            case bonusIndex == 1 && specialBonuses.has(skill): return this.getSkillRank(skill) > bonusIndex ? 1 : 0;
-            // Only thing left should be the skill efficiency, so 10%.
-            default: return this.getSkillRank(skill) > bonusIndex ? 10 : 0;
-        }
+        const rank = this.getSkillRank(skill);
+        const bonusValue = skillMasteryNumericOverrides[skill]?.[bonusIndex as SkillMasteryBonusIndex]
+            ?? defaultSkillBonusValues[bonusIndex as SkillMasteryBonusIndex]
+            ?? 0;
+
+        // RiftSkillBonus returns a value when rank is above its source
+        // threshold. The owner slot is normally that threshold; the live
+        // SmithingEXPmulti call uses source threshold 0 for owner slot 1,
+        // which is also the slot passed by the anvil consumer.
+        const rankThreshold = skill === SkillsIndex.Smithing
+            && bonusIndex === skillMasteryBonusIndex.efficiency
+            ? smithingForgeCapacitySourceThreshold
+            : bonusIndex;
+        return rank > rankThreshold ? bonusValue : 0;
     }
 
-    // RiftSkillETC function is used for:
-    // 0 -> which translates to 2 -> which is dmg which I don't care about yet.
-    // 2 -> which translates to 4 -> which is all skill eff which I don't care about yet.
-    // 1,4 -> which translate to 3,6 -> which is all skill xp which I do care about.
-    // 3 -> which translates to 5 -> which is printer output which I care about
-    //
-    // All of the above give a baseline of 7 (even if you haven't unlocked rift), and then sum up their respective bonuses across all skills
-    //
-    // All other bonuses should just give their respective skill bonus based on their text
+    // RiftSkillETC's source argument 0..4 maps to owner slots 2..6 above.
+    // It calls RiftSkillBonus with source thresholds 2..6 and adds each
+    // rank-gated result using the corresponding default multiplier.
     getTotalBonusByIndex = (bonusIndex: number) => {
-        // The first 2 bonuses don't make sense as totals, so just for sanity sake return 0 here.
-        if ([0, 1].includes(bonusIndex)) {
-            return 0;
-        }
+        const baseBonus = riftSkillEtcTotalBonusIndexes[bonusIndex] ? riftSkillEtcBaselineBonus : 0;
 
-        const baseBonus = [2, 3, 4, 5, 6].includes(bonusIndex) ? 7 : 0;
-
-        // Yes we get a base bonus of 7 on some things even if rift isn't active
-        if (!this.active) {
+        // The delivered source keeps the baseline 7 even while Rift is locked.
+        if (!this.active || baseBonus === 0) {
             return baseBonus;
         }
 
-        return Object.entries(this.skillLevels).reduce((sum, [_, skill]) => sum += this.getSkillBonus(skill, bonusIndex), baseBonus);
+        const usesCardPassiveExclusions = bonusIndex === skillMasteryBonusIndex.totalDamage
+            || bonusIndex === skillMasteryBonusIndex.allSkillEfficiency;
+        let totalBonus = baseBonus;
+
+        for (let gameSkillIndex = 0; gameSkillIndex < riftSkillEtcGameSkillCount; gameSkillIndex++) {
+            if (usesCardPassiveExclusions && riftSkillEtcExcludedGameIndexes[gameSkillIndex]) {
+                continue;
+            }
+
+            const skillIndex = (gameSkillIndex + 1) as SkillsIndex;
+            totalBonus += this.getSkillBonus(skillIndex, bonusIndex);
+        }
+
+        return totalBonus;
     }
 }
 
@@ -349,7 +451,7 @@ export class Rift extends Domain {
             playerSkills.forEach((skillLevel, skillIndex) => {
                 // Only get the indexes we care about
                 if (skillIndex in skillMastery.skillLevels) {
-                    skillMastery.skillLevels[skillIndex as RiftMasterySkills] += skillLevel;
+                    skillMastery.skillLevels[skillIndex as SkillsIndex] += skillLevel;
                 }
             })
         });

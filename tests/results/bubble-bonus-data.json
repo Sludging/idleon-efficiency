@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-10T05:52:07.578Z",
+  "timestamp": "2026-09-10T10:01:13.281Z",
   "extractions": {
     "diamond_chef_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
@@ -9,49 +9,49 @@
         "original": 2.5080221678659284e+41
       },
       "description": "Diamond Chef final bubble bonus (MealSpdz)",
-      "extractedAt": "2026-09-10T05:52:07.587Z"
+      "extractedAt": "2026-09-10T10:01:13.292Z"
     },
     "diamond_chef_prismatic_state": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
       "result": 1,
       "description": "Diamond Chef prismatic state",
-      "extractedAt": "2026-09-10T05:52:07.589Z"
+      "extractedAt": "2026-09-10T10:01:13.294Z"
     },
     "alchemy_prismatic_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "result": 2.7932864157119477,
       "description": "Alchemy Prismatic Bonus",
-      "extractedAt": "2026-09-10T05:52:07.592Z"
+      "extractedAt": "2026-09-10T10:01:13.297Z"
     },
     "daily_drip_final_bonus": {
       "expression": "(() => { const raw = Number(idleon.getDNSM(\"AlchBubbles\").h.LqdCap); const alchemyLevel = Number(idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]); return raw * Math.max(Math.pow(alchemyLevel / 25, 0.3), 0); })()",
       "result": 91.31323914550651,
       "description": "Da Daily Drip effective final bubble bonus (AlchBubbles.LqdCap × ActorEvents_232._GenINFO[87])",
-      "extractedAt": "2026-09-10T05:52:07.594Z"
+      "extractedAt": "2026-09-10T10:01:13.309Z"
     },
     "cropius_mapper_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y6",
       "result": 604.9058473736372,
       "description": "Cropius Mapper final bubble bonus (Y6)",
-      "extractedAt": "2026-09-10T05:52:07.596Z"
+      "extractedAt": "2026-09-10T10:01:13.311Z"
     },
     "slab_w2_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W2",
       "result": 359.7236861693241,
       "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)",
-      "extractedAt": "2026-09-10T05:52:07.603Z"
+      "extractedAt": "2026-09-10T10:01:13.313Z"
     },
     "ordinary_tool_w_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
       "result": 3374.1245086103418,
       "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)",
-      "extractedAt": "2026-09-10T05:52:07.606Z"
+      "extractedAt": "2026-09-10T10:01:13.324Z"
     },
     "ordinary_tool_w_base_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 7, 0)",
       "result": 61.58408408408408,
       "description": "Stronk Tools base BubbleBonus (ToolW / Power index 7)",
-      "extractedAt": "2026-09-10T05:52:07.608Z"
+      "extractedAt": "2026-09-10T10:01:13.327Z"
     }
   },
   "errors": {},

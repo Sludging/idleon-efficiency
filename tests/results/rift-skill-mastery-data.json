@@ -1,0 +1,500 @@
+{
+  "timestamp": "2026-09-10T10:01:14.594Z",
+  "extractions": {
+    "rift_skill_mastery_mining_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[0]; })()",
+      "result": 7,
+      "description": "Mining Skill Mastery rank for the Mining category",
+      "extractedAt": "2026-09-10T10:01:14.607Z"
+    },
+    "rift_skill_mastery_smithing_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[1]; })()",
+      "result": 7,
+      "description": "Smithing Skill Mastery rank for the Smithing category",
+      "extractedAt": "2026-09-10T10:01:14.609Z"
+    },
+    "rift_skill_mastery_chopping_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[2]; })()",
+      "result": 7,
+      "description": "Chopping Skill Mastery rank for the Chopping category",
+      "extractedAt": "2026-09-10T10:01:14.611Z"
+    },
+    "rift_skill_mastery_fishing_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[3]; })()",
+      "result": 7,
+      "description": "Fishing Skill Mastery rank for the Fishing category",
+      "extractedAt": "2026-09-10T10:01:14.612Z"
+    },
+    "rift_skill_mastery_alchemy_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[4]; })()",
+      "result": 7,
+      "description": "Alchemy Skill Mastery rank for the Alchemy category",
+      "extractedAt": "2026-09-10T10:01:14.614Z"
+    },
+    "rift_skill_mastery_catching_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[5]; })()",
+      "result": 7,
+      "description": "Catching Skill Mastery rank for the Catching category",
+      "extractedAt": "2026-09-10T10:01:14.623Z"
+    },
+    "rift_skill_mastery_trapping_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[6]; })()",
+      "result": 7,
+      "description": "Trapping Skill Mastery rank for the Trapping category",
+      "extractedAt": "2026-09-10T10:01:14.625Z"
+    },
+    "rift_skill_mastery_construction_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[7]; })()",
+      "result": 7,
+      "description": "Construction Skill Mastery rank for the Construction category",
+      "extractedAt": "2026-09-10T10:01:14.627Z"
+    },
+    "rift_skill_mastery_worship_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[8]; })()",
+      "result": 7,
+      "description": "Worship Skill Mastery rank for the Worship category",
+      "extractedAt": "2026-09-10T10:01:14.628Z"
+    },
+    "rift_skill_mastery_cooking_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[9]; })()",
+      "result": 7,
+      "description": "Cooking Skill Mastery rank for the Cooking category",
+      "extractedAt": "2026-09-10T10:01:14.630Z"
+    },
+    "rift_skill_mastery_breeding_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[10]; })()",
+      "result": 7,
+      "description": "Breeding Skill Mastery rank for the Breeding category",
+      "extractedAt": "2026-09-10T10:01:14.631Z"
+    },
+    "rift_skill_mastery_laboratory_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[11]; })()",
+      "result": 7,
+      "description": "Laboratory Skill Mastery rank for the Intellect category",
+      "extractedAt": "2026-09-10T10:01:14.638Z"
+    },
+    "rift_skill_mastery_sailing_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[12]; })()",
+      "result": 7,
+      "description": "Sailing Skill Mastery rank for the Sailing category",
+      "extractedAt": "2026-09-10T10:01:14.640Z"
+    },
+    "rift_skill_mastery_divinity_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[13]; })()",
+      "result": 7,
+      "description": "Divinity Skill Mastery rank for the Divinity category",
+      "extractedAt": "2026-09-10T10:01:14.641Z"
+    },
+    "rift_skill_mastery_gaming_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[14]; })()",
+      "result": 7,
+      "description": "Gaming Skill Mastery rank for the Gaming category",
+      "extractedAt": "2026-09-10T10:01:14.643Z"
+    },
+    "rift_skill_mastery_farming_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[15]; })()",
+      "result": 7,
+      "description": "Farming Skill Mastery rank for the Farming category",
+      "extractedAt": "2026-09-10T10:01:14.645Z"
+    },
+    "rift_skill_mastery_sneaking_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[16]; })()",
+      "result": 7,
+      "description": "Sneaking Skill Mastery rank for the Sneaking category",
+      "extractedAt": "2026-09-10T10:01:14.646Z"
+    },
+    "rift_skill_mastery_summoning_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[17]; })()",
+      "result": 7,
+      "description": "Summoning Skill Mastery rank for the Summoning category",
+      "extractedAt": "2026-09-10T10:01:14.648Z"
+    },
+    "rift_skill_mastery_spelunking_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[18]; })()",
+      "result": 7,
+      "description": "Spelunking Skill Mastery rank for the Spelunking category",
+      "extractedAt": "2026-09-10T10:01:14.656Z"
+    },
+    "rift_skill_mastery_research_rank": {
+      "expression": "(() => { idleon.callFunction(\"RiftStuff\", \"skillLvRanks\", 0); return idleon.getAttr(\"DNSM\").h.skillLvRanks[19]; })()",
+      "result": 5,
+      "description": "Research rank for the Research category; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.658Z"
+    },
+    "rift_skill_mastery_mining_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,0\", 0)",
+      "result": 25,
+      "description": "Mining experience gain: twenty-five percentage points when the Mining rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.659Z"
+    },
+    "rift_skill_mastery_mining_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,0\", 1)",
+      "result": 10,
+      "description": "Mining efficiency: ten percentage points when the Mining rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.661Z"
+    },
+    "rift_skill_mastery_smithing_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,1\", 0)",
+      "result": 25,
+      "description": "Smithing experience gain: twenty-five percentage points when the Smithing rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.662Z"
+    },
+    "rift_skill_mastery_smithing_forge_capacity": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,1\", 0)",
+      "result": 25,
+      "description": "Smithing forge ore capacity: twenty-five percentage points when the Smithing rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.664Z"
+    },
+    "rift_skill_mastery_chopping_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,2\", 0)",
+      "result": 25,
+      "description": "Chopping experience gain: twenty-five percentage points when the Chopping rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.679Z"
+    },
+    "rift_skill_mastery_chopping_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,2\", 1)",
+      "result": 10,
+      "description": "Chopping efficiency: ten percentage points when the Chopping rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.681Z"
+    },
+    "rift_skill_mastery_fishing_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,3\", 0)",
+      "result": 25,
+      "description": "Fishing experience gain: twenty-five percentage points when the Fishing rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.689Z"
+    },
+    "rift_skill_mastery_fishing_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,3\", 1)",
+      "result": 10,
+      "description": "Fishing efficiency: ten percentage points when the Fishing rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.690Z"
+    },
+    "rift_skill_mastery_alchemy_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,4\", 0)",
+      "result": 25,
+      "description": "Alchemy experience gain: twenty-five percentage points when the Alchemy rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.692Z"
+    },
+    "rift_skill_mastery_alchemy_liquid_capacity": {
+      "expression": "5 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,4\", 1)",
+      "result": 5,
+      "description": "Alchemy liquid capacity: five percentage points when the Alchemy rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.694Z"
+    },
+    "rift_skill_mastery_catching_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,5\", 0)",
+      "result": 25,
+      "description": "Catching experience gain: twenty-five percentage points when the Catching rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.695Z"
+    },
+    "rift_skill_mastery_catching_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,5\", 1)",
+      "result": 10,
+      "description": "Catching efficiency: ten percentage points when the Catching rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.697Z"
+    },
+    "rift_skill_mastery_trapping_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,6\", 0)",
+      "result": 25,
+      "description": "Trapping experience gain: twenty-five percentage points when the Trapping rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.698Z"
+    },
+    "rift_skill_mastery_trapping_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,6\", 1)",
+      "result": 10,
+      "description": "Trapping efficiency: ten percentage points when the Trapping rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.706Z"
+    },
+    "rift_skill_mastery_construction_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,7\", 0)",
+      "result": 25,
+      "description": "Construction experience gain: twenty-five percentage points when the Construction rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.707Z"
+    },
+    "rift_skill_mastery_construction_shrine_rate": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,7\", 1)",
+      "result": 15,
+      "description": "Construction shrine level-up rate: fifteen percentage points when the Construction rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.709Z"
+    },
+    "rift_skill_mastery_worship_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,8\", 0)",
+      "result": 25,
+      "description": "Worship experience gain: twenty-five percentage points when the Worship rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.710Z"
+    },
+    "rift_skill_mastery_worship_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,8\", 1)",
+      "result": 10,
+      "description": "Worship efficiency: ten percentage points when the Worship rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.712Z"
+    },
+    "rift_skill_mastery_cooking_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,9\", 0)",
+      "result": 25,
+      "description": "Cooking experience gain: twenty-five percentage points when the Cooking rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.713Z"
+    },
+    "rift_skill_mastery_cooking_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,9\", 1)",
+      "result": 10,
+      "description": "Cooking efficiency: ten percentage points when the Cooking rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.714Z"
+    },
+    "rift_skill_mastery_breeding_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,10\", 0)",
+      "result": 25,
+      "description": "Breeding experience gain: twenty-five percentage points when the Breeding rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.716Z"
+    },
+    "rift_skill_mastery_breeding_egg_speed": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,10\", 1)",
+      "result": 15,
+      "description": "Breeding egg incubation speed: fifteen percentage points when the Breeding rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.723Z"
+    },
+    "rift_skill_mastery_laboratory_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,11\", 0)",
+      "result": 25,
+      "description": "Laboratory experience gain: twenty-five percentage points when the Intellect category rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.725Z"
+    },
+    "rift_skill_mastery_laboratory_efficiency": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,11\", 1)",
+      "result": 10,
+      "description": "Laboratory efficiency: ten percentage points when the Intellect category rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.726Z"
+    },
+    "rift_skill_mastery_sailing_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,12\", 0)",
+      "result": 25,
+      "description": "Sailing experience gain: twenty-five percentage points when the Sailing rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.728Z"
+    },
+    "rift_skill_mastery_sailing_speed": {
+      "expression": "17 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,12\", 1)",
+      "result": 17,
+      "description": "Sailing boat speed: seventeen percentage points when the Sailing rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.729Z"
+    },
+    "rift_skill_mastery_divinity_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,13\", 0)",
+      "result": 25,
+      "description": "Divinity experience gain: twenty-five percentage points when the Divinity rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.731Z"
+    },
+    "rift_skill_mastery_divinity_points": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,13\", 1)",
+      "result": 15,
+      "description": "Divinity points gained: fifteen percentage points when the Divinity rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.740Z"
+    },
+    "rift_skill_mastery_gaming_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,14\", 0)",
+      "result": 25,
+      "description": "Gaming experience gain: twenty-five percentage points when the Gaming rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.743Z"
+    },
+    "rift_skill_mastery_gaming_bits": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,14\", 1)",
+      "result": 15,
+      "description": "Gaming bits gain: a 1.15 multiplier represented by fifteen percentage points above Gaming rank one",
+      "extractedAt": "2026-09-10T10:01:14.744Z"
+    },
+    "rift_skill_mastery_farming_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,15\", 0)",
+      "result": 25,
+      "description": "Farming experience gain: twenty-five percentage points when the Farming rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.746Z"
+    },
+    "rift_skill_mastery_farming_crop_chance": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,15\", 1)",
+      "result": 15,
+      "description": "Farming crop evolution chance: a 1.15 multiplier represented by fifteen percentage points above Farming rank one",
+      "extractedAt": "2026-09-10T10:01:14.748Z"
+    },
+    "rift_skill_mastery_sneaking_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,16\", 0)",
+      "result": 25,
+      "description": "Sneaking experience gain: twenty-five percentage points when the Sneaking rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.758Z"
+    },
+    "rift_skill_mastery_sneaking_jade_coins": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,16\", 1)",
+      "result": 10,
+      "description": "Sneaking jade coin gain: a 1.10 multiplier represented by ten percentage points above Sneaking rank one",
+      "extractedAt": "2026-09-10T10:01:14.760Z"
+    },
+    "rift_skill_mastery_summoning_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,17\", 0)",
+      "result": 25,
+      "description": "Summoning experience gain: twenty-five percentage points when the Summoning rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.762Z"
+    },
+    "rift_skill_mastery_summoning_essence": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,17\", 1)",
+      "result": 10,
+      "description": "Summoning essence gain: a 1.10 multiplier represented by ten percentage points above Summoning rank one",
+      "extractedAt": "2026-09-10T10:01:14.763Z"
+    },
+    "rift_skill_mastery_spelunking_experience": {
+      "expression": "25 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 0)",
+      "result": 25,
+      "description": "Spelunking experience gain: twenty-five percentage points when the Spelunking rank is above zero",
+      "extractedAt": "2026-09-10T10:01:14.765Z"
+    },
+    "rift_skill_mastery_spelunking_efficiency": {
+      "expression": "30 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 1)",
+      "result": 30,
+      "description": "Spelunking efficiency: thirty percentage points when the Spelunking rank is above one",
+      "extractedAt": "2026-09-10T10:01:14.776Z"
+    },
+    "rift_skill_mastery_spelunking_max_stamina": {
+      "expression": "15 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 3)",
+      "result": 15,
+      "description": "Spelunking maximum stamina for everyone: fifteen points when the Spelunking rank is above three",
+      "extractedAt": "2026-09-10T10:01:14.778Z"
+    },
+    "rift_skill_mastery_spelunking_daily_page_reads": {
+      "expression": "3 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 4)",
+      "result": 3,
+      "description": "Spelunking daily page reads: three additional reads when the Spelunking rank is above four",
+      "extractedAt": "2026-09-10T10:01:14.780Z"
+    },
+    "rift_skill_mastery_spelunking_stamina_regen": {
+      "expression": "10 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 5)",
+      "result": 10,
+      "description": "Spelunking stamina regeneration: ten percentage points when the Spelunking rank is above five",
+      "extractedAt": "2026-09-10T10:01:14.790Z"
+    },
+    "rift_skill_mastery_spelunking_amber_gain": {
+      "expression": "50 * idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 6)",
+      "result": 50,
+      "description": "Spelunking amber gain: a 1.50 multiplier represented by fifty percentage points above Spelunking rank six",
+      "extractedAt": "2026-09-10T10:01:14.792Z"
+    },
+    "rift_skill_mastery_mining_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,0\", 2)",
+      "result": 1,
+      "description": "Mining card effect access: all Mining cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.794Z"
+    },
+    "rift_skill_mastery_chopping_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,2\", 2)",
+      "result": 1,
+      "description": "Chopping card effect access: all Chopping cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.796Z"
+    },
+    "rift_skill_mastery_fishing_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,3\", 2)",
+      "result": 1,
+      "description": "Fishing card effect access: all Fishing cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.798Z"
+    },
+    "rift_skill_mastery_catching_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,5\", 2)",
+      "result": 1,
+      "description": "Catching card effect access: all Catching cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.806Z"
+    },
+    "rift_skill_mastery_trapping_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,6\", 2)",
+      "result": 1,
+      "description": "Trapping card effect access: all Trapping cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.808Z"
+    },
+    "rift_skill_mastery_worship_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,8\", 2)",
+      "result": 1,
+      "description": "Worship card effect access: all Worship cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.810Z"
+    },
+    "rift_skill_mastery_spelunking_cards_passive": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,18\", 2)",
+      "result": 1,
+      "description": "Spelunking card effect access: all Spelunking cards become passive above rank two",
+      "extractedAt": "2026-09-10T10:01:14.812Z"
+    },
+    "rift_skill_mastery_research_rank_above_0": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 0)",
+      "result": 1,
+      "description": "Research rank access above zero; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.813Z"
+    },
+    "rift_skill_mastery_research_rank_above_1": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 1)",
+      "result": 1,
+      "description": "Research rank access above one; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.823Z"
+    },
+    "rift_skill_mastery_research_rank_above_2": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 2)",
+      "result": 1,
+      "description": "Research rank access above two; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.825Z"
+    },
+    "rift_skill_mastery_research_rank_above_3": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 3)",
+      "result": 1,
+      "description": "Research rank access above three; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.826Z"
+    },
+    "rift_skill_mastery_research_rank_above_4": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 4)",
+      "result": 1,
+      "description": "Research rank access above four; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.828Z"
+    },
+    "rift_skill_mastery_research_rank_above_5": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 5)",
+      "result": 0,
+      "description": "Research rank access above five; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.829Z"
+    },
+    "rift_skill_mastery_research_rank_above_6": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillBonus,19\", 6)",
+      "result": 0,
+      "description": "Research rank access above six; Research has no numeric or display Skill Mastery effect",
+      "extractedAt": "2026-09-10T10:01:14.831Z"
+    },
+    "rift_skill_mastery_total_damage": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 0)",
+      "result": 67,
+      "description": "Total damage: begins at seven points and adds five points for each eligible skill above rank two; Mining, Chopping, Fishing, Catching, Trapping, and Worship do not contribute because their cards are passive",
+      "extractedAt": "2026-09-10T10:01:14.838Z"
+    },
+    "rift_skill_mastery_total_all_skill_experience": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 1)",
+      "result": 187,
+      "description": "All-skill experience: begins at seven points and adds ten points for each of the 18 skill categories above rank three",
+      "extractedAt": "2026-09-10T10:01:14.840Z"
+    },
+    "rift_skill_mastery_total_all_skill_efficiency": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 2)",
+      "result": 67,
+      "description": "All-skill efficiency: begins at seven points and adds five points for each eligible skill above rank four; Mining, Chopping, Fishing, Catching, Trapping, and Worship do not contribute because their cards are passive",
+      "extractedAt": "2026-09-10T10:01:14.842Z"
+    },
+    "rift_skill_mastery_total_printer_output": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 3)",
+      "result": 25,
+      "description": "Printer output: begins at seven points and adds one percentage point for each of the 18 skill categories above rank five",
+      "extractedAt": "2026-09-10T10:01:14.843Z"
+    },
+    "rift_skill_mastery_total_large_all_skill_experience": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 4)",
+      "result": 457,
+      "description": "Large all-skill experience: begins at seven points and adds twenty-five points for each of the 18 skill categories above rank six",
+      "extractedAt": "2026-09-10T10:01:14.845Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
