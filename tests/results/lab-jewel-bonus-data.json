@@ -1,155 +1,155 @@
 {
-  "timestamp": "2026-09-09T06:28:59.639Z",
+  "timestamp": "2026-09-10T05:52:08.359Z",
   "extractions": {
     "jewel_0_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
       "result": 4.800000000000001,
       "description": "Amethyst Rhinestone Jewel 0 bonus",
-      "extractedAt": "2026-09-09T06:28:59.650Z"
+      "extractedAt": "2026-09-10T05:52:08.370Z"
     },
     "jewel_0_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][0]",
       "result": 1,
       "description": "Amethyst Rhinestone Jewel 0 active flag",
-      "extractedAt": "2026-09-09T06:28:59.653Z"
+      "extractedAt": "2026-09-10T05:52:08.372Z"
     },
     "jewel_0_bonus_multiplier": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 8)",
       "result": 1.6,
       "description": "Lab mainframe Jewel multiplier",
-      "extractedAt": "2026-09-09T06:28:59.655Z"
+      "extractedAt": "2026-09-10T05:52:08.374Z"
     },
     "jewel_1_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 101)",
       "result": 0.8,
       "description": "Purple Navette Jewel 1 bonus used by Jewel 0 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.657Z"
+      "extractedAt": "2026-09-10T05:52:08.376Z"
     },
     "jewel_2_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 102)",
       "result": 64,
       "description": "Purple Rhombol Jewel 2 bonus used by Jewel 0 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.664Z"
+      "extractedAt": "2026-09-10T05:52:08.377Z"
     },
     "jewel_3_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 103)",
       "result": 9.600000000000001,
       "description": "Sapphire Rhinestone Jewel 3 bonus",
-      "extractedAt": "2026-09-09T06:28:59.670Z"
+      "extractedAt": "2026-09-10T05:52:08.385Z"
     },
     "jewel_3_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][3]",
       "result": 1,
       "description": "Sapphire Rhinestone Jewel 3 active flag",
-      "extractedAt": "2026-09-09T06:28:59.673Z"
+      "extractedAt": "2026-09-10T05:52:08.387Z"
     },
     "jewel_4_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 104)",
       "result": 4.800000000000001,
       "description": "Sapphire Navette Jewel 4 bonus used by Jewel 3 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.682Z"
+      "extractedAt": "2026-09-10T05:52:08.389Z"
     },
     "jewel_5_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 105)",
       "result": 40,
       "description": "Sapphire Rhombol Jewel 5 bonus used by Jewel 3 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.684Z"
+      "extractedAt": "2026-09-10T05:52:08.390Z"
     },
     "jewel_6_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 106)",
       "result": 3.2,
       "description": "Sapphire Pyramite Jewel 6 bonus used by Jewel 3 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.686Z"
+      "extractedAt": "2026-09-10T05:52:08.392Z"
     },
     "jewel_10_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
       "result": 32,
       "description": "Pyrite Pyramite Jewel 10 bonus",
-      "extractedAt": "2026-09-09T06:28:59.688Z"
+      "extractedAt": "2026-09-10T05:52:08.394Z"
     },
     "jewel_10_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][10]",
       "result": 1,
       "description": "Pyrite Pyramite Jewel 10 active flag",
-      "extractedAt": "2026-09-09T06:28:59.690Z"
+      "extractedAt": "2026-09-10T05:52:08.402Z"
     },
     "jewel_7_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 107)",
       "result": 3.2,
       "description": "Pyrite Rhinestone Jewel 7 bonus used by Jewel 10 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.699Z"
+      "extractedAt": "2026-09-10T05:52:08.404Z"
     },
     "jewel_8_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 108)",
       "result": 4.800000000000001,
       "description": "Pyrite Navette Jewel 8 bonus used by Jewel 10 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.701Z"
+      "extractedAt": "2026-09-10T05:52:08.406Z"
     },
     "jewel_9_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 109)",
       "result": 48,
       "description": "Pyrite Rhombol Jewel 9 bonus used by Jewel 10 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.703Z"
+      "extractedAt": "2026-09-10T05:52:08.408Z"
     },
     "jewel_12_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 112)",
       "result": 640,
       "description": "Emerald Navette Jewel 12 bonus",
-      "extractedAt": "2026-09-09T06:28:59.705Z"
+      "extractedAt": "2026-09-10T05:52:08.410Z"
     },
     "jewel_12_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][12]",
       "result": 1,
       "description": "Emerald Navette Jewel 12 active flag",
-      "extractedAt": "2026-09-09T06:28:59.713Z"
+      "extractedAt": "2026-09-10T05:52:08.411Z"
     },
     "jewel_11_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 111)",
       "result": 44.800000000000004,
       "description": "Emerald Rhinestone Jewel 11 bonus used by Jewel 12 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.716Z"
+      "extractedAt": "2026-09-10T05:52:08.418Z"
     },
     "jewel_13_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 113)",
       "result": 1.6,
       "description": "Emerald Rhombol Jewel 13 bonus used by Jewel 12 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.718Z"
+      "extractedAt": "2026-09-10T05:52:08.420Z"
     },
     "jewel_14_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
       "result": 912,
       "description": "Emerald Pyramite Jewel 14 bonus used by Jewel 12 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.719Z"
+      "extractedAt": "2026-09-10T05:52:08.422Z"
     },
     "jewel_15_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 115)",
       "result": 48,
       "description": "Emerald Ulthurite Jewel 15 bonus used by Jewel 12 doubling gate",
-      "extractedAt": "2026-09-09T06:28:59.721Z"
+      "extractedAt": "2026-09-10T05:52:08.424Z"
     },
     "jewel_19_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 119)",
       "result": 10,
       "description": "Pure Opal Navette Jewel 19 bonus",
-      "extractedAt": "2026-09-09T06:28:59.730Z"
+      "extractedAt": "2026-09-10T05:52:08.425Z"
     },
     "jewel_19_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][19]",
       "result": 1,
       "description": "Pure Opal Navette Jewel 19 active flag",
-      "extractedAt": "2026-09-09T06:28:59.732Z"
+      "extractedAt": "2026-09-10T05:52:08.427Z"
     },
     "jewel_20_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 120)",
       "result": 16,
       "description": "Pure Opal Rhombol Jewel 20 bonus",
-      "extractedAt": "2026-09-09T06:28:59.734Z"
+      "extractedAt": "2026-09-10T05:52:08.428Z"
     },
     "jewel_20_active": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][20]",
       "result": 1,
       "description": "Pure Opal Rhombol Jewel 20 active flag",
-      "extractedAt": "2026-09-09T06:28:59.736Z"
+      "extractedAt": "2026-09-10T05:52:08.435Z"
     }
   },
   "errors": {},

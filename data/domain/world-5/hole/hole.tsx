@@ -123,6 +123,8 @@ export class Majiks {
     }
 }
 
+type SchematicBonusLookup = (schematicIndex: number, baseMultiplier: number) => number;
+
 export class Schematic {
     unlocked: boolean = false;
 
@@ -140,14 +142,16 @@ export class Schematic {
     private sedimentSum?: number;
     private bellSum?: number;
 
-    constructor(public index: number, public data: HoleBuildingModel) { }
+    constructor(
+        public index: number,
+        public data: HoleBuildingModel,
+        private readonly getSchematicBonus: SchematicBonusLookup = () => 0,
+    ) { }
 
-    static fromBase(data: HoleBuildingBase[]) {
-        return data.map(d => new Schematic(d.index, d.data));
+    static fromBase(data: HoleBuildingBase[], getSchematicBonus: SchematicBonusLookup = () => 0) {
+        return data.map(d => new Schematic(d.index, d.data, getSchematicBonus));
     }
 
-    // TODO: Investigate what baseMultiplier should be - appears to be variable 'i' in original code
-    // TODO: This seems to be in-accurate, needs a second pass.
     getBonus(baseMultiplier: number = 1): number {
         // Return 0 if not unlocked
         if (!this.unlocked) {
@@ -171,7 +175,7 @@ export class Schematic {
             case 48: // 10x extraCalculations[26]
                 return 10 * (this.extraCalculations[26] || 0);
 
-            case 49: // Complex formula with recursive schematic calls
+            case 49: // Resource-layer formula with nested schematic calls
                 return this.resourceLayersBonus(baseMultiplier);
 
             case 52: // 60 * LOG(wellSediment[0])
@@ -196,11 +200,12 @@ export class Schematic {
                 return 5 * lavaLog(this.extraCalculations[32] || 0);
 
             case 59: // Sum of extraCalculations[33-36] / 100 * 10
-                const sum = (this.extraCalculations[33] || 0) +
-                    (this.extraCalculations[34] || 0) +
-                    (this.extraCalculations[35] || 0) +
-                    (this.extraCalculations[36] || 0);
-                return (sum / 100) * 10;
+                return (
+                    ((this.extraCalculations[33] || 0) +
+                        ((this.extraCalculations[34] || 0) +
+                            ((this.extraCalculations[35] || 0) + (this.extraCalculations[36] || 0)))) /
+                    100
+                ) * 10;
 
             case 82:
             case 83:
@@ -228,13 +233,13 @@ export class Schematic {
     }
 
     private resourceLayersBonus(baseMultiplier: number = 1): number {
-        // This bonus is based on the total of the layers you broke through in resource cavrens.
-        // +15% All Skill Efficiency, and +10% All Skill EXP gain per resource layer.
-        const totalResourceLayers = this.extraCalculations[1] +
-            (this.extraCalculations[3] || 0) +
-            (this.extraCalculations[5] || 0);
+        // Match B_UPG(49): apply the caller factor to the weighted resource-layer total.
+        const resourceLayers = this.extraCalculations[1] +
+            (this.extraCalculations[3] * this.getSchematicBonus(50, 1) +
+                (this.extraCalculations[5] * this.getSchematicBonus(79, 1) +
+                    this.extraCalculations[7] * this.getSchematicBonus(98, 1)));
 
-        return baseMultiplier * (totalResourceLayers);
+        return baseMultiplier * resourceLayers;
     }
 
     getDescription(): string {
@@ -722,7 +727,10 @@ export class Hole extends Domain {
     // Processed
     villagers: Villager[] = Villagers.getVillagers();
     majiks = new Majiks();
-    schematics: Schematic[] = Schematic.fromBase(initHoleBuildingRepo());
+    schematics: Schematic[] = Schematic.fromBase(
+        initHoleBuildingRepo(),
+        (schematicIndex, baseMultiplier) => this.getSchematicBonus(schematicIndex, baseMultiplier),
+    );
     studies: Study[] = Study.fromBase(initStudyRepo());
     measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
     monuments: Monuments = new Monuments();

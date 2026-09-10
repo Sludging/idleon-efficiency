@@ -1,77 +1,77 @@
 {
-  "timestamp": "2026-09-09T06:29:01.308Z",
+  "timestamp": "2026-09-10T05:52:09.807Z",
   "extractions": {
     "total_waves": {
       "expression": "idleon.getAttr(\"TotemInfo\")[0].reduce((sum, val) => sum + val, 0)",
       "result": 1170,
       "description": "Total waves across all totems",
-      "extractedAt": "2026-09-09T06:29:01.318Z"
+      "extractedAt": "2026-09-10T05:52:09.811Z"
     },
     "bonus_0_damage": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 0, 0)",
       "result": 117,
       "description": "Totalizer bonus 0 - Damage",
-      "extractedAt": "2026-09-09T06:29:01.319Z"
+      "extractedAt": "2026-09-10T05:52:09.812Z"
     },
     "bonus_1_cooking": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 1, 0)",
       "result": 1521,
       "description": "Totalizer bonus 1 - Cooking",
-      "extractedAt": "2026-09-09T06:29:01.321Z"
+      "extractedAt": "2026-09-10T05:52:09.822Z"
     },
     "bonus_2_boat_speed": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 2, 0)",
       "result": 117,
       "description": "Totalizer bonus 2 - Boat Speed",
-      "extractedAt": "2026-09-09T06:29:01.322Z"
+      "extractedAt": "2026-09-10T05:52:09.823Z"
     },
     "bonus_3_bit_value": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 3, 0)",
       "result": 5850,
       "description": "Totalizer bonus 3 - Bit Value",
-      "extractedAt": "2026-09-09T06:29:01.332Z"
+      "extractedAt": "2026-09-10T05:52:09.825Z"
     },
     "bonus_4_exp_multi": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 4, 0)",
       "result": 131.04000000000002,
       "description": "Totalizer bonus 4 - Exp Multi",
-      "extractedAt": "2026-09-09T06:29:01.334Z"
+      "extractedAt": "2026-09-10T05:52:09.827Z"
     },
     "bonus_5_skill_exp": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 5, 0)",
       "result": 117,
       "description": "Totalizer bonus 5 - Skill Exp",
-      "extractedAt": "2026-09-09T06:29:01.336Z"
+      "extractedAt": "2026-09-10T05:52:09.828Z"
     },
     "bonus_6_farming_exp": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 6, 0)",
       "result": 204.75,
       "description": "Totalizer bonus 6 - Farming Exp",
-      "extractedAt": "2026-09-09T06:29:01.337Z"
+      "extractedAt": "2026-09-10T05:52:09.836Z"
     },
     "bonus_7_jade_coin": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 7, 0)",
       "result": 234,
       "description": "Totalizer bonus 7 - Jade Coin",
-      "extractedAt": "2026-09-09T06:29:01.339Z"
+      "extractedAt": "2026-09-10T05:52:09.838Z"
     },
     "bonus_8_essence_gain": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 8, 0)",
       "result": 175.5,
       "description": "Totalizer bonus 8 - Essence Gain",
-      "extractedAt": "2026-09-09T06:29:01.341Z"
+      "extractedAt": "2026-09-10T05:52:09.840Z"
     },
     "bonus_9_spelunking_pow": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 9, 0)",
       "result": 217.5,
       "description": "Totalizer bonus 9 - Spelunking Power",
-      "extractedAt": "2026-09-09T06:29:01.352Z"
+      "extractedAt": "2026-09-10T05:52:09.841Z"
     },
     "bonus_10_research_exp": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 10, 0)",
       "result": 26.099999999999998,
       "description": "Totalizer bonus 10 - Research Exp",
-      "extractedAt": "2026-09-09T06:29:01.354Z"
+      "extractedAt": "2026-09-10T05:52:09.843Z"
     }
   },
   "errors": {},

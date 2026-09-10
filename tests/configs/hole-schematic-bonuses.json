@@ -1,0 +1,121 @@
+{
+  "description": "Extract representative Hole schematic bonuses and every calculated B_UPG dependency",
+  "target": "Hole B_UPG schematic bonuses",
+  "extractions": [
+    {
+      "label": "hole_b_upg_31_1",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 31, 1)",
+      "description": "B_UPG locked guard (index 31 is locked in the saved state)"
+    },
+    {
+      "label": "hole_b_upg_0_25",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 0, 25)",
+      "description": "B_UPG default branch with factor 25"
+    },
+    {
+      "label": "hole_b_upg_14_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 14, 0)",
+      "description": "B_UPG sediment expansion branch"
+    },
+    {
+      "label": "hole_b_upg_45_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 45, 0)",
+      "description": "B_UPG bell improvement branch"
+    },
+    {
+      "label": "hole_b_upg_46_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 46, 0)",
+      "description": "B_UPG extra-calculation branch for index 46"
+    },
+    {
+      "label": "hole_b_upg_47_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 47, 0)",
+      "description": "B_UPG extra-calculation branch for index 47"
+    },
+    {
+      "label": "hole_b_upg_48_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
+      "description": "B_UPG extra-calculation branch for index 48"
+    },
+    {
+      "label": "hole_b_upg_49_15",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
+      "description": "B_UPG resource-layer branch with factor 15"
+    },
+    {
+      "label": "hole_b_upg_52_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 52, 0)",
+      "description": "B_UPG well-sediment logarithm branch for index 52"
+    },
+    {
+      "label": "hole_b_upg_53_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 53, 0)",
+      "description": "B_UPG well-sediment logarithm branch for index 53"
+    },
+    {
+      "label": "hole_b_upg_54_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 54, 0)",
+      "description": "B_UPG well-sediment power branch for index 54"
+    },
+    {
+      "label": "hole_b_upg_55_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
+      "description": "B_UPG well-sediment logarithm branch for index 55"
+    },
+    {
+      "label": "hole_b_upg_56_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
+      "description": "B_UPG well-sediment power branch for index 56"
+    },
+    {
+      "label": "hole_b_upg_57_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 57, 0)",
+      "description": "B_UPG well-sediment logarithm branch for index 57"
+    },
+    {
+      "label": "hole_b_upg_58_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 58, 0)",
+      "description": "B_UPG extra-calculation logarithm branch"
+    },
+    {
+      "label": "hole_b_upg_59_0",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 59, 0)",
+      "description": "B_UPG extra-calculation sum branch"
+    },
+    {
+      "label": "hole_b_upg_82_2",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 82, 2)",
+      "description": "B_UPG Sanctum branch with factor 2 (index 82)"
+    },
+    {
+      "label": "hole_b_upg_83_3",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 83, 3)",
+      "description": "B_UPG Sanctum branch with factor 3 (index 83)"
+    },
+    {
+      "label": "hole_b_upg_84_5",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 84, 5)",
+      "description": "B_UPG Sanctum branch with factor 5 (index 84)"
+    },
+    {
+      "label": "hole_study_bolaia_bonuses_0_0",
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
+      "description": "StudyBolaiaBonuses input used by B_UPG index 14"
+    },
+    {
+      "label": "hole_b_upg_50_1",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 50, 1)",
+      "description": "Nested B_UPG input used by B_UPG index 49"
+    },
+    {
+      "label": "hole_b_upg_79_1",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 79, 1)",
+      "description": "Nested B_UPG input used by B_UPG index 49"
+    },
+    {
+      "label": "hole_b_upg_98_1",
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 98, 1)",
+      "description": "Nested B_UPG input used by B_UPG index 49"
+    }
+  ]
+}

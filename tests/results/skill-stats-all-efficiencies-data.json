@@ -1,155 +1,155 @@
 {
-  "timestamp": "2026-09-09T06:29:00.287Z",
+  "timestamp": "2026-09-10T05:52:08.889Z",
   "extractions": {
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
-      "result": 22216.412416694206,
+      "result": 22217.879418984736,
       "description": "SkillStats AllEfficiencies account-level result",
-      "extractedAt": "2026-09-09T06:29:00.298Z"
+      "extractedAt": "2026-09-10T05:52:08.893Z"
     },
     "all_eff_family_bonus_42": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
       "result": 27.8708303761533,
       "description": "Family bonus quantity 42 (factor A)",
-      "extractedAt": "2026-09-09T06:29:00.300Z"
+      "extractedAt": "2026-09-10T05:52:08.895Z"
     },
     "all_eff_etc_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
       "result": 74.80183896167352,
       "description": "Equipment EtcBonuses 48 (factor A)",
-      "extractedAt": "2026-09-09T06:29:00.302Z"
+      "extractedAt": "2026-09-10T05:52:08.902Z"
     },
     "all_eff_vial_6_skill_eff": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6SkillEff\"]",
       "result": 191.52,
       "description": "Alchemy vial 6SkillEff (factor A)",
-      "extractedAt": "2026-09-09T06:29:00.303Z"
+      "extractedAt": "2026-09-10T05:52:08.904Z"
     },
     "all_eff_artifact_15": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 15, 0)",
       "result": 180,
       "description": "Sailing artifact 15 bonus (factor A)",
-      "extractedAt": "2026-09-09T06:29:00.305Z"
+      "extractedAt": "2026-09-10T05:52:08.906Z"
     },
     "all_eff_total_quests_complete": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
       "result": 317,
       "description": "Total completed quests used by the Talent 617 min fork",
-      "extractedAt": "2026-09-09T06:29:00.306Z"
+      "extractedAt": "2026-09-10T05:52:08.908Z"
     },
     "all_eff_talent_617": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 617)",
       "result": 60,
       "description": "Studious Quester cap used by the factor A min fork",
-      "extractedAt": "2026-09-09T06:29:00.314Z"
+      "extractedAt": "2026-09-10T05:52:08.909Z"
     },
     "all_eff_meal_seff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Seff\")",
       "result": 12743.749548840125,
       "description": "Cooking meal Seff bonus (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.316Z"
+      "extractedAt": "2026-09-10T05:52:08.911Z"
     },
     "all_eff_talent_646": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 646)",
       "result": 0,
       "description": "Ancient Multitool bonus (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.318Z"
+      "extractedAt": "2026-09-10T05:52:08.925Z"
     },
     "all_eff_tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 547.0468365902523,
+      "result": 548.0283383009655,
       "description": "Summoning TomeBonus 1 (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.319Z"
+      "extractedAt": "2026-09-10T05:52:08.927Z"
     },
     "all_eff_palette_10": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 10, 0)",
       "result": 270,
       "description": "Gaming palette 10 bonus (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.321Z"
+      "extractedAt": "2026-09-10T05:52:08.929Z"
     },
     "all_eff_chip_toteff": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",
       "result": 0,
       "description": "Lab chip toteff bonus (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.322Z"
+      "extractedAt": "2026-09-10T05:52:08.935Z"
     },
     "all_eff_card_lv_crystal4": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Crystal4\")",
       "result": 7,
       "description": "Crystal4 card level (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.331Z"
+      "extractedAt": "2026-09-10T05:52:08.937Z"
     },
     "all_eff_friend_bonus_stat_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
       "result": 103.15231708777392,
       "description": "Friend bonus stat 2 (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.333Z"
+      "extractedAt": "2026-09-10T05:52:08.939Z"
     },
     "all_eff_rift_skill_etc_2": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 2)",
       "result": 67,
       "description": "Rift skill efficiency total (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.334Z"
+      "extractedAt": "2026-09-10T05:52:08.941Z"
     },
     "all_eff_hole_b_upg_49_15": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
       "result": 960,
       "description": "Hole B_UPG 49 with input 15 (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.336Z"
+      "extractedAt": "2026-09-10T05:52:08.943Z"
     },
     "all_eff_shimmer_multiplier": {
       "expression": "idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 4,
       "description": "All Shimmer Bonuses multiplier (factor B)",
-      "extractedAt": "2026-09-09T06:29:00.338Z"
+      "extractedAt": "2026-09-10T05:52:08.944Z"
     },
     "all_eff_card_bonus_84": {
       "expression": "idleon.callFunction(\"CardBonusREAL\", 84)",
       "result": 0,
       "description": "Card bonus 84 (factor C)",
-      "extractedAt": "2026-09-09T06:29:00.339Z"
+      "extractedAt": "2026-09-10T05:52:08.953Z"
     },
     "all_eff_companion_5": {
       "expression": "idleon.callFunction(\"Companions\", 5)",
       "result": 5,
       "description": "Companion 5 bonus (factor C)",
-      "extractedAt": "2026-09-09T06:29:00.349Z"
+      "extractedAt": "2026-09-10T05:52:08.955Z"
     },
     "all_eff_win_bonus_14": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 14, 0)",
       "result": 734.37,
       "description": "Summoning winner bonus 14 (factor D)",
-      "extractedAt": "2026-09-09T06:29:00.351Z"
+      "extractedAt": "2026-09-10T05:52:08.957Z"
     },
     "all_eff_guild_bonus_6": {
       "expression": "idleon.callFunction(\"GuildBonuses\", 6)",
       "result": 4.576271186440678,
       "description": "Guild bonus 6 (factor E)",
-      "extractedAt": "2026-09-09T06:29:00.353Z"
+      "extractedAt": "2026-09-10T05:52:08.959Z"
     },
     "all_eff_card_set_2": {
       "expression": "idleon.callFunction(\"CardSetBonuses\", 0, \"2\")",
       "result": 0,
       "description": "Active card set skill efficiency bonus (factor E)",
-      "extractedAt": "2026-09-09T06:29:00.355Z"
+      "extractedAt": "2026-09-10T05:52:08.961Z"
     },
     "all_eff_prayer_1_bonus": {
       "expression": "idleon.callFunction(\"prayersReal\", 1, 0)",
       "result": 177,
       "description": "Prayer 1 bonus (factor E)",
-      "extractedAt": "2026-09-09T06:29:00.358Z"
+      "extractedAt": "2026-09-10T05:52:08.971Z"
     },
     "all_eff_buff_40_2": {
       "expression": "idleon.callFunction(\"GetBuffBonuses\", 40, 2)",
       "result": 0,
       "description": "Active Maestro Transfusion efficiency penalty (factor P)",
-      "extractedAt": "2026-09-09T06:29:00.364Z"
+      "extractedAt": "2026-09-10T05:52:08.974Z"
     },
     "all_eff_prayer_17_curse": {
       "expression": "idleon.callFunction(\"prayersReal\", 17, 1)",
       "result": 0,
       "description": "Prayer 17 curse (factor P)",
-      "extractedAt": "2026-09-09T06:29:00.366Z"
+      "extractedAt": "2026-09-10T05:52:08.975Z"
     }
   },
   "errors": {},
