@@ -42,7 +42,7 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **When to use:** A backend main calculation is wrong or confirmed missing and one correctness aspect has been selected
 
-**Covers:** One selected aspect, fresh full extraction, game-code-first diagnosis, blocking/resume checkpoints, independent review, and tolerance-zero completion
+**Covers:** Checking the selected calculation and its parameters against the game, testing before implementation, handling dependencies, independent review, and recording pilot outcomes
 
 **Points to:** [docs/calculation-correctness/PLAYBOOK.md](../docs/calculation-correctness/PLAYBOOK.md)
 

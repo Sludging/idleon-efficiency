@@ -1,10 +1,10 @@
 # Game Snippets
 
-Captured source code of game calculation functions, used as the formula authority for calculation-correctness work. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) defines when a case needs a snippet; this file defines how to capture and store one.
+Captured source code of game calculation functions, used to establish the intended game behavior. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) explains when a case needs a snippet; this file explains how to capture and store one.
 
 ## Rules
 
-- Read the version first (`GET http://localhost:3100/game-version`). If a snippet exists for the current version, read it from here instead of retrieving from the game.
+- Reuse an existing snippet for the case's established game version. When a new capture is needed, obtain the current version using the procedure below. If the case information leaves the version under review unclear, ask the human before choosing a snippet.
 - These files are evidence, not implementation. They are never imported by application code.
 
 ## Structure

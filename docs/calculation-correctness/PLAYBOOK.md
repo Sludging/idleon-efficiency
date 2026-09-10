@@ -1,125 +1,109 @@
 # Calculation Correctness Playbook
 
-This playbook is the lifecycle for one backend calculation case. The coordinator handles one selected case and never selects or works on another case.
+## Goal
 
-## Purpose and terms
+Ensure the selected domain/aspect produces the correct game result. Use delivered game code to establish the intended behavior and game-backed tests to distinguish errors in the selected calculation from errors in the calculations it uses. Implement missing or incorrect behavior within the selected scope, then verify the result for human acceptance.
+
+## Terms and sources
 
 - A **domain** is a backend area, such as Cooking or Research.
-- An **aspect** is one named calculation area inside a domain, such as Cooking speed, Cooking meal bonuses, Research Grid bonuses, or Research XP gains. A single bonus inside an aspect remains part of that aspect.
-- A **correctness case** is one aspect with a wrong or missing result, tracked by one GitHub issue.
-- A **human** is the person supervising the case and accepting or aborting it.
-- A **dependency** is another calculation that has or should have its own core test. A dependency consumed by the selected aspect can pause this case; it does not start another case here.
+- An **aspect** is one named calculation within a domain. It covers that calculation's supported inputs and behavior; a single bonus, index, or failing value remains part of the aspect.
+- A **case** is one selected domain/aspect tracked by a GitHub issue. Its implementation may be correct, wrong, or missing.
+- A **dependency** is another domain/aspect calculation used by the selected aspect. A missing or incorrect dependency can block the case.
+- The **human** selects the case, decides unclear game meaning or scope, and accepts or aborts the result.
 
-Use these sources in this order:
+Delivered game code defines the formula, conditions, and operation order. Extracted game values provide expected test results. Domain code is the implementation being tested; the Wiki can help explain player-facing meaning. The [testing guide](../TESTING_IMPLEMENTATION.md) defines core tests, parameter tests, and branches, with examples.
 
-1. Delivered game code for the game version under review defines the formula, composition, branches, and branch-specific rules.
-2. A fresh extraction from the running game supplies expected values.
-3. The Idleon Wiki may explain player-facing meaning.
-4. Repository domain code is the implementation under test; inspect it after the game code for comparison.
-5. Nearby code is used only to confirm the established `init → parse → calculate` mechanics.
+## Process
 
-## Case flow
+### 1. Establish the selected case
 
-Perform these five actions in order. The coordinator owns each handoff and stops when an action reports a blocker or a question.
+The coordinator reads the selected issue, its current case working note, and human decisions. Identify the result to check and any known dependencies or questions. Begin with the tests stage, or continue from an established result when resuming a case. After a dependency is fixed, run the selected tests to establish whether the case can continue.
 
-### 1. Start one selected case
+Use existing snippets, test configs, saves, and results where available. A missing test or domain implementation is something the case can establish and address. Obtain live game access when source capture or extraction is needed. Follow [snippet guidance](../game-snippets/README.md) to capture missing source; ask the human if the game version or meaning under review is unclear.
 
-The human supplies one GitHub issue naming one domain and aspect. The coordinator confirms that issue as the selected case and does not select another issue.
+### 2. Establish tests before changing domain code
 
-Run `GET http://localhost:3100/status`:
+The worker follows the [tests stage](TESTS_STAGE.md). Its result should show:
 
-```bash
-curl -fsS http://localhost:3100/status
-```
+- Parameter tests for every calculation the selected aspect uses from another domain/aspect, including another aspect in the same domain.
+- Core tests for selected behaviors, branches, or representative values.
+- Actual test commands and results, identifying a selected calculation failure, dependency failure, setup problem, or passing result.
+- Findings, relevant source and domain locations, and any question needing a human decision.
 
-Proceed only when the response contains `cdpConnected: true`, `injected: true`, and `gameReady: true`. Otherwise, report `BLOCKED` to the human and do not extract data.
+During this stage, write tests and extraction config, not domain code. The coordinator checks that the selected tests ran before domain changes and that the results support the next step. An explicit failure for a missing selected implementation is valid; a command that fails before reaching the selected tests has not established a calculation failure.
 
-After status passes, run the unconditional fresh full extraction:
+### 3. Use the test results to choose the next step
+
+| Result | Next step |
+| --- | --- |
+| `EXTRACTION_NEEDED`: config changed or human requested extraction | Run the extraction procedure below, then resume tests. |
+| `TESTS_READY`: core test fails or selected implementation is missing; parameter tests pass | Accept the tests-stage result and assign implementation. |
+| `TESTS_READY`: core and parameter tests pass | Assign review of the existing behavior and test coverage. |
+| `BLOCKED`: missing or incorrect dependency, missing WikiBot fact, or external prerequisite | Record the blocker and resume condition; follow the dependency procedure where applicable. |
+| Setup or extraction error prevents the selected tests from running | Address a clear test/config problem in the tests stage; report an external prerequisite to the human. |
+| `NEEDS_HUMAN`: game meaning, scope, or which aspect implements a calculation is unclear | Ask the question and pause. |
+| Domain changes preceded the tests-stage approval, or the order cannot be established at review | Record what is known and ask the human how to proceed. |
+| `REPORT`: stage is incomplete | Use the reported progress to continue the same stage, narrow the next task, or ask the human. |
+
+Implementation requires a selected calculation failure, passing parameter tests, and answers to any scope or meaning questions. When parameter tests fail, keep those failures visible and handle the dependency first.
+
+### 4. Implement and review
+
+The worker follows the [implementation stage](IMPLEMENTATION_STAGE.md): correct the selected calculation, preserve its `init → parse → calculate` integration, and run the targeted tests. New test/config needs return through the tests stage before further domain changes.
+
+A `READY_FOR_REVIEW` result goes to a fresh reviewer. The reviewer uses the case findings to locate the relevant game source, domain code, and tests, then independently checks the selected behavior and coverage. See the [reviewer instructions](../../.omp/agents/correctness-reviewer.md).
+
+- `PASS` goes to the human for acceptance.
+- `CHANGES_REQUIRED` returns to the worker with the specific findings. Test/config or coverage changes go to tests first. An implementation correction can proceed when its failing test is already established. Review the corrected result again.
+- A blocker or unanswered question pauses the case. If the same finding remains after one correction, ask the human for direction.
+
+### 5. Complete the case
+
+Normal completion requires the selected core and parameter tests, and all tests changed by the case, to pass at tolerance `0`; a fresh independent review covering the final changes to return `PASS`; and human acceptance. Changes after review need verification and review of the changed behavior before normal completion.
+
+The human may accept an exception or abort. Record what was completed, what was verified, and any omitted step. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
+
+## Extraction when needed
+
+Reuse `tests/fixtures/saves/latest.json` and existing results under `tests/results/` while the extraction config is unchanged. For a required value not yet configured, add or correct its config entry and extract. Run extraction after a config change or human request.
+
+Before extraction, require `GET http://localhost:3100/status` to report `cdpConnected: true`, `injected: true`, and `gameReady: true`. Follow the [runtime prerequisites and active-player policy](../../tests/helpers/README.md), then run:
 
 ```bash
 node tests/helpers/extract-all-game-data.js
 ```
 
-Require a successful command. It refreshes `tests/fixtures/saves/latest.json` and writes batch results under `tests/results/`. Run it at every case start, even when those files already exist. If it fails, report `BLOCKED` to the human and do not diagnose.
-
-For an issue created before this playbook, keep its body and old comments unchanged. After the fresh extraction, append the first checkpoint in the format below and use it as the new resume point. Old save/extraction pairs, nonzero tolerances, and decisions to exclude parameter tests remain history; this playbook's fresh extraction, tolerance `0`, and diagnosis-driven core/parameter choices control the selected case.
-
-### 2. Diagnose from delivered game code
-
-The diagnoser runs `GET http://localhost:3100/game-version` and uses the returned version exactly:
-
-```bash
-curl -fsS http://localhost:3100/game-version
-```
-
-If `docs/game-snippets/<domain>/<FunctionName>.<version>.js` exists for that version, the diagnoser reads the entire snippet, not one branch. If it does not exist, the diagnoser follows [`docs/game-snippets/README.md`](../game-snippets/README.md) to capture the entire function from its declaration through its return and save the versioned snippet before analysis.
-
-The diagnoser lists the aspect's formula used when no branch-specific condition applies, every branch that changes the named aspect, each calculation the aspect consumes, and each missing WikiBot static fact. Label static facts separately: they are data, not parameters, and never receive parameter tests. Only after reading the game code, the diagnoser inspects tests and domain code to locate the implementation under test and confirm `init → parse → calculate`.
-
-If game behavior, whether a branch belongs to this aspect, whether a called calculation needs its own core test, or a required static fact is unclear, the diagnoser asks the human one precise question or reports `BLOCKED` with the missing fact. It does not fill a gap with an assumption.
-
-### 3. Implement through the testing guide
-
-The implementer follows [`docs/TESTING_IMPLEMENTATION.md`](../TESTING_IMPLEMENTATION.md) for extraction configuration, core and parameter tests, matchers, and the red-green sequence. This playbook does not repeat those mechanics.
-
-The implementer changes the selected aspect while preserving `init → parse → calculate`. If extraction keys change, the coordinator reruns the full extraction before tests use its result. No role edits `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`.
-
-### 4. Review independently
-
-The coordinator dispatches review after the implementer reports passing tests. A **fresh reviewer** is a new reviewer invocation with no prior conversation.
-
-The fresh reviewer compares the implementation with the delivered game code and exact-version snippet, fresh extraction results, every branch named in diagnosis, existing registrations and behavior, and the established `init → parse → calculate` mechanics. The reviewer runs the targeted tests and returns `PASS`, `CHANGES_REQUIRED`, `BLOCKED`, or `NEEDS_HUMAN` with concrete findings.
-
-`PASS` goes to the human for acceptance. `CHANGES_REQUIRED` goes back to the implementer with the findings, followed by another fresh review. If the same finding remains after one correction, or game meaning is unclear, stop and ask the human.
-
-### 5. Resolve or block
-
-When review passes and the human accepts, the coordinator follows the completion rule below. When the diagnoser, implementer, or reviewer reports a blocker, the coordinator pauses this case and applies the dependency or WikiBot rule below. The coordinator never starts the blocked calculation as a second case.
+Use new results after the command succeeds. The batch refreshes the save and values together. Report a failed extraction's concrete error and any human action needed. If an unchanged valid config has missing output because files were lost or extraction failed, explain the condition and ask for refresh direction.
 
 ## Dependencies and WikiBot
 
-The diagnoser, implementer, or reviewer may report a dependency. When the selected aspect consumes a dependency that is wrong or missing, the coordinator pauses the case and searches all issue states:
+For a missing or failing dependency, identify the full named calculation that needs separate work. Record its game call, domain location or missing status, and parameter-test result. The failing call explains why the case is needed; its particular index or value does not define the new case's scope. Ask the human when the calculation boundary or owning domain/aspect is unclear.
 
-```bash
-gh issue list --state all --search '<domain> <aspect> in:title' --json number,title,state
-```
+For example, a failing `getEpilogueBonus(1)` comparison leads to **Correctness: Tome — epilogue bonus**. Record index 1 as the observed failure, while the case addresses the epilogue bonus calculation across its supported bonus indices and conditions. Other Tome calculations, such as score, remain separate dependencies.
 
-Compare titles exactly with `Correctness: <domain> — <aspect>`. The coordinator reuses exactly one open exact match. Multiple open exact matches or any closed exact match require `NEEDS_HUMAN`. With no exact match, the coordinator creates the blocker with the title and body required by the role contract, links it to the active issue with GitHub's native `blocked_by` dependency, and confirms the parent reports the link. Follow [`docs/agents/issue-tracker.md`](../agents/issue-tracker.md) for the link operation and its unsupported-endpoint fallback. Authentication, permission, or transient failures require `NEEDS_HUMAN`; do not claim an unconfirmed link. Record the resume condition, post a checkpoint, and stop without starting the blocker case.
+Case scope and test selection serve different purposes: the case covers the whole named calculation, while core tests still use selected behaviors or representative values and parameter tests cover its directly used calculations.
 
-When the diagnoser, implementer, or reviewer reports missing WikiBot static data, the coordinator records the exact fact and why it is needed. Static facts are not parameters and never receive parameter tests; the human requests the data in the WikiBot repository, and no idleon-efficiency blocker issue is created. Resume after the human supplies the data and the tests can use it.
+Search all issue states for `Correctness: <domain> — <aspect>`. Reuse exactly one open exact-title match. Multiple open matches or a closed exact match require human direction. With no match, create an issue with the domain/aspect, test paths or missing status, parent case, command/result, source reference, and the calculation needed for the parent to resume. Completion follows the same test, review, and acceptance requirements as the selected case.
 
-## Checkpoints
+Link the issue using the native `blocked_by` procedure in [issue-tracker guidance](../agents/issue-tracker.md) and verify the link. Use its body-link fallback only when native dependencies are unsupported; report other failures for human help. Pause the selected case until its dependency is ready rather than starting another case.
 
-A checkpoint is a comment on the active GitHub issue. The coordinator posts one only after diagnosis, before a context reset, when blocked, when ready for review, or at completion. Render this exact Markdown template, replace every placeholder, and add no fields. Pass the rendered body to the Bash tool in the environment variable `CHECKPOINT`, then run:
+Missing or wrong WikiBot static data goes to the human for a request in the WikiBot repository. Record the needed fact and why the calculation needs it. Static data is not a parameter-test target or an idleon-efficiency dependency issue. Correctness agents must not edit generated directories `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`.
 
-```md
-## Checkpoint — <date>
-### Case
-- Issue: #<number>
-- Aspect: <domain> / <aspect>
-- Phase: start | diagnose | implement | review | blocked | resolve
+## Assignments and progress
 
-### Established facts
-- <fact with its game-code, extraction, test, or issue reference>
+The coordinator assigns the current stage and case facts; each worker reads its stage instructions. Each assignment includes `Issue`, `Domain/aspect`, `Stage`, `Case note`, and `Task`. Implementation also receives the accepted `Tests-stage result`; corrections include `Findings`. Review uses `Stage: review` and adds `Work/result` and any `Prior findings`.
 
-### Work recorded
-- <files, tests, configuration, results, or `none`>
+Each stage returns a result before the coordinator assigns the next stage. Keep a focused worker conversation when useful, or start a fresh worker from the case working note after a long investigation, blocker, or context reset. The coordinator follows its [ten-minute supervision procedure](../../.omp/agents/correctness-coordinator.md#ten-minute-supervision) for every worker/reviewer assignment.
 
-### Blocker
-- none | <specific missing prerequisite or decision>
+## Shared case working note
 
-### Resume
-- <one exact next action or command>
-```
+Maintain one issue comment headed **Case working note** with the current information needed to continue:
 
-```bash
-gh issue comment <number> --body "$CHECKPOINT"
-```
+- **Scope and decisions:** selected aspect and human decisions.
+- **Findings:** relevant game source/version, established behavior, domain locations or missing calculations, and links between parameters and tests.
+- **Tests and changes:** coverage choices, config/extraction status, commands/results, tests-stage approval, and changed paths.
+- **Blockers and next step:** unanswered questions, missing prerequisites, and the next task.
+- **Process observations:** useful events for the pilot, when any occurred.
 
-The newest checkpoint and the issue body must let a fresh session perform the listed resume action without reconstructing prior discussion.
-
-## Completion
-
-The coordinator may close a case only when the aspect's core test and every test changed or added by the case pass against the fresh full extraction at tolerance `0`, an independent fresh review returns `PASS`, and the human accepts the result. The coordinator posts the completion checkpoint and closes the issue through [`docs/agents/issue-tracker.md`](../agents/issue-tracker.md).
-
-If the human aborts, the coordinator records `Outcome: aborted` in `Work recorded`, posts a checkpoint, and closes the issue through the same documented flow. It does not describe the case as reviewer-approved.
+Workers and reviewers return updates with their results. The coordinator updates the comment before another assignment, when blocked, and before a context reset. Preserve historical comments; this note supplies the current starting point. Include enough detail to continue without the previous conversation, with short explanations and links to supporting files or results. A simple calculation needs a short note.
