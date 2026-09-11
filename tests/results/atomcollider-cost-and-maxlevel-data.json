@@ -1,119 +1,119 @@
 {
-  "timestamp": "2026-09-11T05:22:04.223Z",
+  "timestamp": "2026-09-11T06:22:37.588Z",
   "extractions": {
     "superbit_23_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 23, 0)",
       "result": 1,
       "description": "Super bit 23 bonus (max level boost, multiplied by 10)",
-      "extractedAt": "2026-09-11T05:22:04.236Z"
+      "extractedAt": "2026-09-11T06:22:37.594Z"
     },
     "compass_bonus_53": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 53, 0)",
       "result": 20,
       "description": "Compass bonus 53 (max level boost)",
-      "extractedAt": "2026-09-11T05:22:04.238Z"
+      "extractedAt": "2026-09-11T06:22:37.602Z"
     },
     "event_shop_28_owned": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 28, 0)",
       "result": 0,
       "description": "Event shop 28 owned (max level boost, 1 if owned, 0 otherwise)",
-      "extractedAt": "2026-09-11T05:22:04.240Z"
+      "extractedAt": "2026-09-11T06:22:37.605Z"
     },
     "palette_bonus_35": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 35, 0)",
       "result": 43.07692307692308,
       "description": "Palette bonus 35 (atom cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.241Z"
+      "extractedAt": "2026-09-11T06:22:37.607Z"
     },
     "stamp_atom_cost": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AtomCost\", 0, 0)",
       "result": 12.307692307692308,
       "description": "Stamp bonus for atom cost reduction",
-      "extractedAt": "2026-09-11T05:22:04.243Z"
+      "extractedAt": "2026-09-11T06:22:37.609Z"
     },
     "atom_bonus_9": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 9, 0)",
       "result": 50,
       "description": "Atom bonus 9 (Neon - cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.252Z"
+      "extractedAt": "2026-09-11T06:22:37.611Z"
     },
     "superbit_21_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 21, 0)",
       "result": 1,
       "description": "Super bit 21 bonus (cost reduction, multiplied by 10)",
-      "extractedAt": "2026-09-11T05:22:04.254Z"
+      "extractedAt": "2026-09-11T06:22:37.618Z"
     },
     "grimoire_bonus_51": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 51, 0)",
       "result": 135,
       "description": "Grimoire upgrade bonus 51 (cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.256Z"
+      "extractedAt": "2026-09-11T06:22:37.621Z"
     },
     "compass_bonus_50": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 50, 0)",
       "result": 100,
       "description": "Compass bonus 50 (cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.258Z"
+      "extractedAt": "2026-09-11T06:22:37.623Z"
     },
     "bubble_y5": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y5",
       "result": 13.027777777777779,
       "description": "Alchemy bubble Y5 (cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.268Z"
+      "extractedAt": "2026-09-11T06:22:37.625Z"
     },
     "collider_building_level": {
       "expression": "idleon.getAttr(\"TowerInfo\")[8]",
       "result": 200,
       "description": "Atom Collider building level (divided by 10 in cost calculation)",
-      "extractedAt": "2026-09-11T05:22:04.270Z"
+      "extractedAt": "2026-09-11T06:22:37.627Z"
     },
     "merit_atom_cost": {
       "expression": "idleon.getAttr(\"Tasks\")[2][4][6]",
       "result": 4,
       "description": "Merit level for atom cost reduction (multiplied by 7)",
-      "extractedAt": "2026-09-11T05:22:04.272Z"
+      "extractedAt": "2026-09-11T06:22:37.641Z"
     },
     "bubba_bonus_7": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
       "result": 12.599999999999998,
       "description": "Bubba bonus 7 (cost reduction)",
-      "extractedAt": "2026-09-11T05:22:04.274Z"
+      "extractedAt": "2026-09-11T06:22:37.643Z"
     },
     "atom_max_level": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomMaxLv\", 0, 0)",
       "result": 50,
       "description": "Atom max level calculation",
-      "extractedAt": "2026-09-11T05:22:04.276Z"
+      "extractedAt": "2026-09-11T06:22:37.645Z"
     },
     "atom_0_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 0, 0)",
       "result": 32609955.787597258,
       "description": "Hydrogen (atom 0) cost",
-      "extractedAt": "2026-09-11T05:22:04.282Z"
+      "extractedAt": "2026-09-11T06:22:37.654Z"
     },
     "atom_3_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 3, 0)",
       "result": 21408890.54196523,
       "description": "Lithium (atom 3) cost",
-      "extractedAt": "2026-09-11T05:22:04.285Z"
+      "extractedAt": "2026-09-11T06:22:37.657Z"
     },
     "atom_5_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 5, 0)",
       "result": 384403950.0307882,
       "description": "Carbon (atom 5) cost",
-      "extractedAt": "2026-09-11T05:22:04.286Z"
+      "extractedAt": "2026-09-11T06:22:37.659Z"
     },
     "atom_8_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 8, 0)",
       "result": 761069290.5639385,
       "description": "Fluoride (atom 8) cost",
-      "extractedAt": "2026-09-11T05:22:04.288Z"
+      "extractedAt": "2026-09-11T06:22:37.662Z"
     },
     "atom_11_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 11, 0)",
       "result": 2436250902.0228834,
       "description": "Sodium (atom 11) cost",
-      "extractedAt": "2026-09-11T05:22:04.290Z"
+      "extractedAt": "2026-09-11T06:22:37.670Z"
     }
   },
   "errors": {},

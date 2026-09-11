@@ -8,8 +8,8 @@ This stage writes tests and extraction config, not domain code. Read the assignm
 
 ## Establish the selected calculation
 
-1. Confirm the selected domain/aspect and human decisions. Locate its public calculation and each calculation it uses directly, including calculations in another aspect of the same domain. Direct means an immediate calculation used by the selected result; inputs used only inside that calculation belong to its own case.
-2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and read the source needed to complete or verify them.
+1. Confirm the selected domain/aspect and human decisions. Locate its public calculation, website consumers, and each calculation it uses directly, including calculations in another aspect of the same domain. Direct means an immediate calculation used by the selected result; inputs used only inside that calculation belong to its own case. For a missing implementation, use comparable website features and the intended consumers to establish the expected public interface; ask the human when these leave a consequential choice unresolved.
+2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and read the source needed to complete or verify them, following the [snippet version rules](../game-snippets/README.md#rules).
 3. Map every direct calculation to its domain implementation or an explicit missing status. A missing selected implementation is a selected-core failure to expose. For a missing or failing dependency, report the full named calculation and include the failing call, index, or value as the observed problem. Keep its parameter comparison active; the separate case covers that calculation, not only the failing input.
 4. Ask the human one precise question when player-facing meaning, internal mapping, aspect ownership, or scope remains unclear. Record a missing path as a location to find, not as a reason to stop the assignment.
 
@@ -18,7 +18,7 @@ This stage writes tests and extraction config, not domain code. Read the assignm
 Use the [testing guide](../TESTING_IMPLEMENTATION.md) for definitions and examples. For this case:
 
 - Parameter tests compare every calculation used directly across domains/aspects by the selected aspect, including another aspect in the same domain. Static data, trivial helpers, raw save plumbing, and inputs used only by dependencies are outside this selected coverage.
-- Core tests check selected behaviors or branches, or representative values. Use the testing guide's examples to choose useful comparisons. State what the real save exercises and ask the human if needed behavior cannot be observed.
+- Core tests check selected behaviors or branches, or representative values. Choose comparisons and test descriptions that express the mechanic's observable behavior. Use the testing guide's examples to choose useful comparisons. State what the real save exercises and ask the human if needed behavior cannot be observed.
 
 Record the selected result, parameter calculations, chosen core tests, and any coverage question in the stage result.
 

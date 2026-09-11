@@ -9,7 +9,7 @@ Read the assignment, current case working note, and accepted `Tests-stage result
 ## Establish the implementation boundary
 
 1. Confirm the accepted result identifies the selected public calculation, all direct parameter comparisons, representative core coverage, exact pre-implementation test results, and the selected mismatch or explicit missing implementation. Confirm that no dependency or human meaning/ownership question remains. An already-green result proceeds to review without implementation.
-2. Use the established source findings and game version to implement the selected behavior. Read the relevant delivered source when a precise formula, branch, representation, or operation-order detail needs verification. Ask the human one precise question before assuming unresolved player-facing meaning or aspect ownership.
+2. Reuse the established source findings and game version. Inspect additional game callers or comparable website implementations when needed to settle an implementation choice. Resolve unclear ownership, player semantics, or public-interface choices with the human before editing that design.
 3. Keep direct dependencies in their own cases. A missing or failing calculation used by the selected aspect remains visible in its parameter comparison and returns to the coordinator; this stage changes only the selected calculation.
 4. Edit the selected handwritten domain source and the registration or caller needed to integrate that aspect. Test, extraction configuration, and coverage changes return to the tests stage. Generated directories `data/domain/data/`, `data/domain/enum/`, and `data/domain/model/` remain unchanged.
 
@@ -17,7 +17,7 @@ Before domain edits, establish the accepted failure, passing parameter tests, be
 
 ## Change the selected calculation
 
-- Match the delivered game formula, setup, branches, constants, representation, composition, and operation order. Preserve existing registrations and the `init → parse → calculate` flow.
+- Implement the established game behavior using the website's domain ownership, public interfaces, and calculation conventions. Preserve how consumers obtain account-wide and character-specific results, existing registrations, and the `init → parse → calculate` flow. Match the game's formula, conditions, constants, numeric representation, composition, and operation order without copying its code structure or save layout.
 - For a missing selected implementation, add the game behavior identified by its failing core test and connect the comparison to the implemented calculation through the tests stage where test changes are needed.
 - Keep tolerance at `0`. Resolve last-bit differences by matching delivered multiplication and composition order rather than changing the comparison.
 - If the change requires a new test, parameter, extraction value, or test/configuration correction, stop domain editing and return the finding to the tests stage. A changed extraction configuration or explicit human direction triggers the coordinator's extraction procedure before new results are used.
