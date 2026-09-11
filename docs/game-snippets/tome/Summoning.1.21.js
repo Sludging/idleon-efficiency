@@ -1,0 +1,957 @@
+/**
+ * Game formula snippet — idleon-efficiency formula research.
+ * Function: _customBlock_Summoning (from scripts.ActorEvents_579)
+ * Game version: 1.21 ("World_7_Taskmaster")
+ * Captured: 2026-09-10 via game-debug-tool (findFunction + toString)
+ * Case reference: #378
+ */
+function (e, t, i) {
+                            if ("RegionLockMulticharProg" == e) {
+                                e = a.engine.getGameAttribute("DNSM").h.RLMultzDN = 0;
+                                for (var s = a.engine.getGameAttribute("GetPlayersUsernames").length; e < s;) {
+                                    var r = e++;
+                                    if (a.engine.getGameAttribute("UserInfo")[0] == a.engine.getGameAttribute("GetPlayersUsernames")[r]) {
+                                        if (0 >= c.asNumber(a.engine.getGameAttribute("KillsLeft2Advance")[0 | t][0])) {
+                                            i = a.engine.getGameAttribute("DNSM");
+                                            var _ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RLMultzDN) + 1;
+                                            i.h.RLMultzDN = _;
+                                        }
+                                    } else {
+                                        var o = a.engine.getGameAttribute("PlayerDATABASE");
+                                        ((r = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[r])),
+                                            0 >= c.asNumber(o.h[r].h.KillsLeft2Advance[0 | t][0]) && ((i = a.engine.getGameAttribute("DNSM")), (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RLMultzDN) + 1), (i.h.RLMultzDN = _)));
+                                    }
+                                }
+                                return a.engine.getGameAttribute("DNSM").h.RLMultzDN;
+                            }
+                            if ("ArcadeGballsExtraPCT" == e)
+                                return (
+                                    m._customBlock_GamingStatType("PaletteBonus", 15, 0) +
+                                    (p._customBlock_ArcadeBonus(39) +
+                                        (m._customBlock_ArcaneType("ArcaneUpgBonus", 16, 0) +
+                                            (m._customBlock_FarmingStuffs("ExoticBonusQTY", 57, 0) +
+                                                (50 * Math.min(1, c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[427]) * m._customBlock_Companions(0)) + m._customBlock_Companions(36)))))
+                                );
+                            if ("HighestLvPlayer" == e) {
+                                for (i = a.engine.getGameAttribute("DNSM"), _ = a.engine.getGameAttribute("Lv0")[0], i.h.HiLvPl_qyxw = _, e = 0, s = a.engine.getGameAttribute("GetPlayersUsernames").length; e < s;)
+                                    ((r = e++),
+                                        (i = a.engine.getGameAttribute("DNSM")),
+                                        (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.HiLvPl_qyxw)),
+                                        (o = a.engine.getGameAttribute("PlayerDATABASE")),
+                                        (r = "" + h.string(a.engine.getGameAttribute("GetPlayersUsernames")[r])),
+                                        (_ = Math.max(_, c.asNumber(o.h[r].h.Lv0[0]))),
+                                        (i.h.HiLvPl_qyxw = _));
+                                return a.engine.getGameAttribute("DNSM").h.HiLvPl_qyxw;
+                            }
+                            if ("GrimoireWraith" == e)
+                                return 1 <= x._customBlock_GetBuffBonuses(195, 1) &&
+                                    100 < c.asNumber(a.engine.getGameAttribute("BuffsActive")[n.__cast(a.engine.getGameAttribute("PixelHelperActor")[2].behaviors.getBehavior("ActorEvents_167"), zb)._BuffIDsOn.indexOf(195)][1])
+                                    ? 1
+                                    : 0;
+                            if ("RibbonShelfUnlocked" == e)
+                                return 1 <= m._customBlock_Summoning("GrimoireUpgBonus", 4, 0) || 1 == a.engine.getGameAttribute("BundlesReceived").h.bun_v || 1 == a.engine.getGameAttribute("OptionsListAccount")[337] ? 1 : 0;
+                            if ("RibbonBonus" == e)
+                                return (
+                                    1 +
+                                    (Math.floor(5 * t + Math.floor(t / 2) * (4 + 6.5 * Math.floor(t / 5))) +
+                                        (Math.floor(t / 4) * (m._customBlock_GetSetBonus("EMPEROR_SET", "Bonus", 0, 0) / 4) + Math.floor(t / 10) * m._customBlock_Dreamstuff("CloudBonus", 73))) /
+                                        100
+                                );
+                            if ("GrimoireBoneQTYbase" == e)
+                                return 3 <= m._customBlock_Summoning("GrimoireBoneType", t, 0)
+                                    ? Math.pow(Math.max(1, t - 3699), 0.9)
+                                    : 2 <= m._customBlock_Summoning("GrimoireBoneType", t, 0)
+                                      ? Math.pow(Math.max(1, t - 739), 0.9)
+                                      : 1 <= m._customBlock_Summoning("GrimoireBoneType", t, 0)
+                                        ? Math.pow(Math.max(1, t - 189), 0.9)
+                                        : Math.pow(Math.max(1, t), 0.9);
+                            if ("GrimoireBoneType" == e)
+                                return 6e3 == Math.floor(t) || 12500 == Math.floor(t) || 22e3 == Math.floor(t) || 35e4 == Math.floor(t)
+                                    ? 0
+                                    : 4e5 == Math.floor(t)
+                                      ? 1
+                                      : 3700 <= t
+                                        ? Math.min(Math.floor(t / 27) % 4, 3)
+                                        : 740 <= t
+                                          ? Math.min(Math.floor(t / 27) % 3, 2)
+                                          : 190 <= t
+                                            ? Math.min(Math.floor(t / 27) % 2, 1)
+                                            : 0;
+                            if ("AllMasterclassDropz" == e)
+                                return (
+                                    (1 + m._customBlock_RandomEvent("KillroyBonuses", 4, 0) / 100) *
+                                    (1 + m._customBlock_Spelunk("ShopUpgBonus", 49, 0) / 100) *
+                                    (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["7masta"]) / 100) *
+                                    (1 + m._customBlock_Minehead("Button_Bonuses", 4, 0) / 100) *
+                                    (1 + m._customBlock_Companions(38)) *
+                                    (1 + v._customBlock_EtcBonuses("101") / 100) *
+                                    (1 + v._customBlock_EtcBonuses("106") / 100) *
+                                    (1 + Math.min(x._customBlock_RunCodeOfTypeXforThingY("CardLv", "fm_rat"), 25) / 100)
+                                );
+                            if ("GrimoireBonesDropDEC" == e)
+                                return (
+                                    (1 + m._customBlock_Ninja("PristineBon", 18, 0) / 100) *
+                                    (1 + m._customBlock_Thingies("LoreEpiBon", 0, 0) / 100) *
+                                    m._customBlock_Summoning("AllMasterclassDropz", 0, 0) *
+                                    (1 + k._customBlock_GetTalentNumber(1, 196) / 100) *
+                                    (1 + m._customBlock_Summoning2("MeritocBonusz", 25, 0) / 100) *
+                                    Math.min(2, 1 + m._customBlock_Holes("GambitBonuses", 12, 0)) *
+                                    Math.min(1.5, 1 + v._customBlock_EtcBonuses("76") / 100) *
+                                    (1 + (m._customBlock_Thingies("EmperorBon", 1, 0) + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W13)) / 100) *
+                                    (1 +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 23, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 48, 0) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[333])) +
+                                                (p._customBlock_ArcadeBonus(40) + (p._customBlock_MainframeBonus(121) + (m._customBlock_GamingStatType("PaletteBonus", 22, 0) + m._customBlock_FarmingStuffs("ExoticBonusQTY", 53, 0)))))) /
+                                            100) *
+                                    (1 + (c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[8].behaviors.getBehavior("ActorEvents_481"), na)._GenINFO[125]) * k._customBlock_GetTalentNumber(1, 198)) / 100)
+                                );
+                            if ("AllMasterclassCostReduxPrefix" == e)
+                                return c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[480]) < m._customBlock_Thingies("LegendPTS_bonus", 23, 0)
+                                    ? 1 == a.engine.getGameAttribute("BundlesReceived").h.bon_p
+                                        ? 0.05
+                                        : 0.2
+                                    : 1 == a.engine.getGameAttribute("BundlesReceived").h.bon_p
+                                      ? 0.25
+                                      : 1;
+                            if ("AllMasterclassCostRedux" == e) return m._customBlock_Summoning("AllMasterclassCostReduxPrefix", 0, 0) * (1 / (1 + m._customBlock_Thingies("OrbletMarketBonus", 7, 0) / 100));
+                            if ("First3MC_CostRedux" == e)
+                                return (
+                                    (1 / (1 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[499]) / 100)) *
+                                    (1 / (1 + (c.asNumber(a.engine.getGameAttribute("RoyalG")[3][2]) * m._customBlock_RoyalG("ArmoryUpgBonus", 79, 0)) / 100))
+                                );
+                            if ("GrimoireUpgCost" == e)
+                                return (
+                                    3 *
+                                    Math.pow(1.05, t) *
+                                    m._customBlock_Summoning("First3MC_CostRedux", 0, 0) *
+                                    m._customBlock_Summoning("AllMasterclassCostRedux", 0, 0) *
+                                    (c.asNumber(a.engine.getGameAttribute("Grimoire")[Math.round(t)]) +
+                                        (c.asNumber(a.engine.getGameAttribute("CustomLists").h.GrimoireUpg[0 | t][1]) + c.asNumber(a.engine.getGameAttribute("Grimoire")[Math.round(t)])) *
+                                            Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.GrimoireUpg[0 | t][2]) + 0.01, c.asNumber(a.engine.getGameAttribute("Grimoire")[Math.round(t)])))
+                                );
+                            if ("GrimoireUpgUNLOCKED" == e) {
+                                for (e = a.engine.getGameAttribute("DNSM").h.GrimoireDN = 0, s = a.engine.getGameAttribute("CustomLists").h.GrimoireUpg.length; e < s;)
+                                    ((r = e++),
+                                        m._customBlock_Summoning("GrimoireUpgTotal", 0, 0) >= c.asNumber(a.engine.getGameAttribute("CustomLists").h.GrimoireUpg[r][6]) &&
+                                            ((i = a.engine.getGameAttribute("DNSM")), (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.GrimoireDN) + 1), (i.h.GrimoireDN = _)));
+                                return a.engine.getGameAttribute("DNSM").h.GrimoireDN;
+                            }
+                            if ("GrimoireUpgTotal" == e) {
+                                if (((i = a.engine.getGameAttribute("DNSM")), !Object.prototype.hasOwnProperty.call(i.h, "GrimoireTotLV")))
+                                    for (e = a.engine.getGameAttribute("DNSM").h.GrimoireTotLV = 0, s = a.engine.getGameAttribute("CustomLists").h.GrimoireUpg.length; e < s;)
+                                        ((r = e++),
+                                            (i = a.engine.getGameAttribute("DNSM")),
+                                            (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.GrimoireTotLV) + c.asNumber(a.engine.getGameAttribute("Grimoire")[r])),
+                                            (i.h.GrimoireTotLV = _));
+                                return a.engine.getGameAttribute("DNSM").h.GrimoireTotLV;
+                            }
+                            if ("GrimoireUpgBonus" == e)
+                                return 9 == t || 11 == t || 26 == t || 36 == t || 39 == t || 17 == t || 32 == t || 45 == t
+                                    ? c.asNumber(a.engine.getGameAttribute("Grimoire")[Math.round(t)]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.GrimoireUpg[0 | t][5])
+                                    : c.asNumber(a.engine.getGameAttribute("Grimoire")[Math.round(t)]) *
+                                          c.asNumber(a.engine.getGameAttribute("CustomLists").h.GrimoireUpg[0 | t][5]) *
+                                          (1 + m._customBlock_Summoning("GrimoireUpgBonus", 36, 0) / 100);
+                            if ("Grimoire_HP" == e)
+                                return (
+                                    (10 +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 3, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 19, 0) + (m._customBlock_Summoning("GrimoireUpgBonus", 34, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 42, 0))))) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 7, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 38, 0)) / 100) *
+                                    (1 + (k._customBlock_GetTalentNumber(1, 201) * (m._customBlock_Summoning("GrimoireUpgTotal", 0, 0) / 100)) / 100)
+                                );
+                            if ("Grimoire_DMG" == e)
+                                return (
+                                    (5 +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 0, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 6, 0) +
+                                                (m._customBlock_Summoning("GrimoireUpgBonus", 16, 0) + (m._customBlock_Summoning("GrimoireUpgBonus", 33, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 46, 0)))))) *
+                                    (1 + k._customBlock_GetTalentNumber(1, 195) / 100) *
+                                    (1 +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 8, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 28, 0) + (m._customBlock_Summoning("GrimoireUpgBonus", 43, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 50, 0)))) /
+                                            100) *
+                                    (1 +
+                                        (c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[334]) * m._customBlock_Summoning("GrimoireUpgBonus", 13, 0) +
+                                            (c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[335]) * m._customBlock_Summoning("GrimoireUpgBonus", 21, 0) +
+                                                c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[336]) * m._customBlock_Summoning("GrimoireUpgBonus", 31, 0))) /
+                                            100) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 18, 0) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[330]))) / 100) *
+                                    (1 + (k._customBlock_GetTalentNumber(1, 200) * (m._customBlock_Summoning("GrimoireUpgTotal", 0, 0) / 100)) / 100)
+                                );
+                            if ("Grimoire_ACC" == e)
+                                return (
+                                    (2 +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 1, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 12, 0) +
+                                                (m._customBlock_Summoning("GrimoireUpgBonus", 25, 0) + (m._customBlock_Summoning("GrimoireUpgBonus", 37, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 47, 0)))))) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 7, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 38, 0)) / 100) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 41, 0) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[332]))) / 100) *
+                                    (1 + (k._customBlock_GetTalentNumber(1, 200) * (m._customBlock_Summoning("GrimoireUpgTotal", 0, 0) / 100)) / 100)
+                                );
+                            if ("Grimoire_DEF" == e)
+                                return (
+                                    (m._customBlock_Summoning("GrimoireUpgBonus", 2, 0) +
+                                        (m._customBlock_Summoning("GrimoireUpgBonus", 15, 0) +
+                                            (m._customBlock_Summoning("GrimoireUpgBonus", 30, 0) + (m._customBlock_Summoning("GrimoireUpgBonus", 40, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 49, 0))))) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 7, 0) + m._customBlock_Summoning("GrimoireUpgBonus", 38, 0)) / 100) *
+                                    (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 27, 0) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[331]))) / 100) *
+                                    (1 + (k._customBlock_GetTalentNumber(1, 201) * (m._customBlock_Summoning("GrimoireUpgTotal", 0, 0) / 100)) / 100)
+                                );
+                            if ("Grimoire_MASTERY" == e) return 0.2;
+                            if ("Grimoire_CRITPCT" == e) return 10 + (m._customBlock_Summoning("GrimoireUpgBonus", 10, 0) + k._customBlock_GetTalentNumber(1, 202) * k._customBlock_getLOG(x._customBlock_SkillStats("FishingEfficiency")));
+                            if ("Grimoire_CRITDMG" == e)
+                                return 1 + (25 + m._customBlock_Summoning("GrimoireUpgBonus", 20, 0) + k._customBlock_GetTalentNumber(2, 202) * k._customBlock_getLOG(x._customBlock_SkillStats("FishingEfficiency"))) / 100;
+                            if ("VaultUpgCost" == e)
+                                return 33 > t
+                                    ? Math.max(0.001, (1 / (1 + m._customBlock_Summoning("VaultUpgBonus", 13, 0) / 100)) * (1 / (1 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[437]) / 100))) *
+                                          Math.max(0.1, 1 - m._customBlock_Companions(99) / 100) *
+                                          Math.max(0.1, 1 - Math.max(m._customBlock_SushiStuff("RoG_BonusQTY", 38, 0), m._customBlock_SushiStuff("RoG_BonusQTY", 47, 0)) / 100) *
+                                          (c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) +
+                                              (c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][1]) + c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)])) *
+                                                  Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][2]), c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)])))
+                                    : Math.max(0.01, 1 / (1 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[437]) / 100)) *
+                                          Math.max(0.1, 1 - m._customBlock_Companions(99) / 100) *
+                                          Math.max(0.1, 1 - Math.max(m._customBlock_SushiStuff("RoG_BonusQTY", 38, 0), m._customBlock_SushiStuff("RoG_BonusQTY", 47, 0)) / 100) *
+                                          Math.pow(1.1, Math.max(0, t - 61)) *
+                                          (c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) +
+                                              (c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][1]) + c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)])) *
+                                                  Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][2]), c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)])));
+                            if ("VaultUpgUNLOCKED" == e) {
+                                for (e = a.engine.getGameAttribute("DNSM").h.VaultDN = 0, s = a.engine.getGameAttribute("CustomLists").h.UpgradeVault.length; e < s;)
+                                    ((r = e++),
+                                        m._customBlock_Summoning("VaultUpgTotal", 0, 0) >= c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[r][6]) &&
+                                            ((i = a.engine.getGameAttribute("DNSM")), (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultDN) + 1), (i.h.VaultDN = _)));
+                                return a.engine.getGameAttribute("DNSM").h.VaultDN;
+                            }
+                            if ("VaultUpgMaxLV" == e)
+                                return D.contains(a.engine.getGameAttribute("CustomLists").h.Research[26], "" + t)
+                                    ? 1 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Research[29][a.engine.getGameAttribute("CustomLists").h.Research[26].indexOf("" + t)])
+                                        ? Math.round(
+                                              c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][4]) +
+                                                  (Math.max(0, Math.min(10, 10 * c.asNumber(a.engine.getGameAttribute("BundlesReceived").h.bon_u))) +
+                                                      (1 + (m._customBlock_ResearchStuff("Grid_Bonus", 169, 1) + m._customBlock_Summoning("EventShopOwned", 40, 0))) *
+                                                          c.asNumber(a.engine.getGameAttribute("Research")[12][a.engine.getGameAttribute("CustomLists").h.Research[26].indexOf("" + t)]))
+                                          )
+                                        : Math.round(
+                                              c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][4]) +
+                                                  (Math.max(0, Math.min(10, 10 * c.asNumber(a.engine.getGameAttribute("BundlesReceived").h.bon_u))) +
+                                                      c.asNumber(a.engine.getGameAttribute("Research")[12][a.engine.getGameAttribute("CustomLists").h.Research[26].indexOf("" + t)]))
+                                          )
+                                    : 2 <= c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][4])
+                                      ? Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][4]) + Math.max(0, Math.min(10, 10 * c.asNumber(a.engine.getGameAttribute("BundlesReceived").h.bon_u))))
+                                      : c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][4]);
+                            if ("VaultUpgTotal" == e) {
+                                if (((i = a.engine.getGameAttribute("DNSM")), !Object.prototype.hasOwnProperty.call(i.h, "VaultTotLV")))
+                                    for (e = a.engine.getGameAttribute("DNSM").h.VaultTotLV = 0, s = a.engine.getGameAttribute("CustomLists").h.UpgradeVault.length; e < s;)
+                                        ((r = e++), (i = a.engine.getGameAttribute("DNSM")), (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultTotLV) + c.asNumber(a.engine.getGameAttribute("UpgVault")[r])), (i.h.VaultTotLV = _));
+                                return a.engine.getGameAttribute("DNSM").h.VaultTotLV;
+                            }
+                            if ("VaultUpgBonus" == e)
+                                return -1 == c.getCurrentSceneName().indexOf("Tutorial")
+                                    ? 32 == t ||
+                                      1 == t ||
+                                      6 == t ||
+                                      7 == t ||
+                                      8 == t ||
+                                      9 == t ||
+                                      13 == t ||
+                                      999 == t ||
+                                      999 == t ||
+                                      33 == t ||
+                                      36 == t ||
+                                      40 == t ||
+                                      42 == t ||
+                                      43 == t ||
+                                      44 == t ||
+                                      49 == t ||
+                                      51 == t ||
+                                      52 == t ||
+                                      53 == t ||
+                                      57 == t ||
+                                      61 == t ||
+                                      89 == t ||
+                                      64 == t ||
+                                      70 == t ||
+                                      73 == t ||
+                                      74 == t ||
+                                      76 == t ||
+                                      79 == t ||
+                                      85 == t ||
+                                      86 == t ||
+                                      88 == t
+                                        ? c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5])
+                                        : 0 == t
+                                          ? (c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5]) +
+                                                (Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) - 25) +
+                                                    (Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) - 50) + Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) - 100)))) *
+                                            (1 + m._customBlock_Summoning("VaultUpgBonus", 32, 0) / 100)
+                                          : 60 == t
+                                            ? (c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[60][5]) +
+                                                  (Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 25) +
+                                                      (Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 50) +
+                                                          (2 * Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 100) +
+                                                              (3 * Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 200) +
+                                                                  (5 * Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 300) +
+                                                                      (7 * Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 400) + 10 * Math.max(0, c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) - 450)))))))) *
+                                              (1 + Math.floor(c.asNumber(a.engine.getGameAttribute("UpgVault")[60]) / 25) / 5) *
+                                              (1 + m._customBlock_Summoning("VaultUpgBonus", 61, 0) / 100)
+                                            : 32 > t
+                                              ? c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) *
+                                                c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5]) *
+                                                (1 + m._customBlock_Summoning("VaultUpgBonus", 32, 0) / 100)
+                                              : 61 > t
+                                                ? c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) *
+                                                  c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5]) *
+                                                  (1 + m._customBlock_Summoning("VaultUpgBonus", 61, 0) / 100)
+                                                : 89 > t
+                                                  ? c.asNumber(a.engine.getGameAttribute("UpgVault")[Math.round(t)]) *
+                                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.UpgradeVault[0 | t][5]) *
+                                                    (1 + m._customBlock_Summoning("VaultUpgBonus", 89, 0) / 100)
+                                                  : 0
+                                    : 0;
+                            if ("VaultKillzTotal" == e) {
+                                if (((i = a.engine.getGameAttribute("DNSM")), !Object.prototype.hasOwnProperty.call(i.h, "VaultKillzTOT"))) {
+                                    for (_ = [], (i = a.engine.getGameAttribute("DNSM")).h.VaultKillzTOT = _, e = 0; 4 > e;) {
+                                        ((r = e++),
+                                            (a.engine.getGameAttribute("DNSM").h.VaultKillzDN3 = 0 == r ? 14 : 1 == r ? 24 : 2 == r ? 13 : 8),
+                                            (a.engine.getGameAttribute("DNSM").h.VaultKillzDN4 = 0),
+                                            (i = a.engine.getGameAttribute("DNSM")),
+                                            (_ =
+                                                c.asNumber(a.engine.getGameAttribute("CustomLists").h.MapDetails[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][0][0]) -
+                                                c.asNumber(a.engine.getGameAttribute("KillsLeft2Advance")[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][0])),
+                                            (i.h.VaultKillzDN4 = _),
+                                            (i = a.engine.getGameAttribute("PlayerDATABASE").h),
+                                            (r = (s = Object.keys(i)).length));
+                                        for (var u = 0; u < r;)
+                                            ((_ = s[u++]),
+                                                a.engine.getGameAttribute("UserInfo")[0] != _ &&
+                                                    ((o = a.engine.getGameAttribute("DNSM")),
+                                                    (_ =
+                                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4) +
+                                                        (c.asNumber(a.engine.getGameAttribute("CustomLists").h.MapDetails[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][0][0]) -
+                                                            c.asNumber(a.engine.getGameAttribute("PlayerDATABASE").h["" + _].h.KillsLeft2Advance[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][0]))),
+                                                    (o.h.VaultKillzDN4 = _)));
+                                        a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4);
+                                    }
+                                    for (e = 0; 4 > e;)
+                                        ((r = e++),
+                                            10 > c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzTOT[r])
+                                                ? a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(0)
+                                                : a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(Math.floor(k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzTOT[r])))));
+                                    for (e = a.engine.getGameAttribute("DNSM").h.VaultKillzDN4 = 0; 4 > e;)
+                                        for (r = e++, a.engine.getGameAttribute("DNSM").h.VaultKillzDN3 = r, s = 0, o = a.engine.getGameAttribute("Tasks")[3][0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)].length; s < o;)
+                                            ((_ = s++),
+                                                1 == a.engine.getGameAttribute("Tasks")[3][0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][_] &&
+                                                    ((i = a.engine.getGameAttribute("DNSM")), (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4) + 1), (i.h.VaultKillzDN4 = _)));
+                                    for (a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4), e = a.engine.getGameAttribute("DNSM").h.VaultKillzDN4 = 0; 4 > e;)
+                                        for (
+                                            r = e++, a.engine.getGameAttribute("DNSM").h.VaultKillzDN3 = r, s = 0, o = a.engine.getGameAttribute("CauldronInfo")[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)].length;
+                                            s < o;
+                                        )
+                                            ((_ = s++),
+                                                (i = a.engine.getGameAttribute("DNSM")),
+                                                (_ = Math.round(
+                                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4) +
+                                                        Math.min(100, c.asNumber(a.engine.getGameAttribute("CauldronInfo")[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN3)][_]))
+                                                )),
+                                                (i.h.VaultKillzDN4 = _));
+                                    for (
+                                        a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4),
+                                            i = a.engine.getGameAttribute("DNSM"),
+                                            _ = c.asNumber(a.engine.getGameAttribute("CustomLists").h.MapDetails[101][0][0]) - c.asNumber(a.engine.getGameAttribute("KillsLeft2Advance")[101][0]),
+                                            i.h.VaultKillzDN4 = _,
+                                            i = a.engine.getGameAttribute("PlayerDATABASE").h,
+                                            r = (s = Object.keys(i)).length,
+                                            u = 0;
+                                        u < r;
+                                    )
+                                        ((_ = s[u++]),
+                                            a.engine.getGameAttribute("UserInfo")[0] != _ &&
+                                                ((i = a.engine.getGameAttribute("DNSM")),
+                                                (_ =
+                                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4) +
+                                                    (c.asNumber(a.engine.getGameAttribute("CustomLists").h.MapDetails[101][0][0]) - c.asNumber(a.engine.getGameAttribute("PlayerDATABASE").h["" + _].h.KillsLeft2Advance[101][0]))),
+                                                (i.h.VaultKillzDN4 = _)));
+                                    (a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4),
+                                        a.engine.getGameAttribute("DNSM").h.VaultKillzTOT.push(Math.floor(k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("DNSM").h.VaultKillzDN4)))));
+                                }
+                                return a.engine.getGameAttribute("DNSM").h.VaultKillzTOT[0 | t];
+                            }
+                            if ("EventShopOwned" == e) return -1 != ("" + h.string(a.engine.getGameAttribute("OptionsListAccount")[311])).indexOf("" + h.string(a.engine.getGameAttribute("Number2Letter")[0 | t])) ? 1 : 0;
+                            if ("RooNextUpgReq" == e)
+                                return c.asNumber(
+                                    a.engine.getGameAttribute("CustomLists").h.Owlz[(9 + c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[12])) | 0][3]
+                                );
+                            if ("RooCost" == e)
+                                return (
+                                    (a.engine.getGameAttribute("DNSM").h.RooDN1 = 1),
+                                    0 == t && ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[268])), (i.h.RooDN1 = _)),
+                                    (i = a.engine.getGameAttribute("DNSM")),
+                                    (_ =
+                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN1) *
+                                        (1 / (1 + (10 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[272])) / 100)) *
+                                        (1 / (1 + 3 * m._customBlock_Summoning("EventShopOwned", 52, 0))) *
+                                        (1 / (1 + (15 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[300])) / 100)) *
+                                        (1 / (1 + (5 * m._customBlock_Summoning("RooMegafeather", 10, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[304])) / 100))),
+                                    (i.h.RooDN1 = _),
+                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN1) *
+                                        (1 / Math.max(1, m._customBlock_Summoning("RooRESETbon", 2, 0))) *
+                                        c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[(t + 9) | 0][1]) *
+                                        Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[(t + 9) | 0][2]), c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(268 + t) | 0]))
+                                );
+                            if ("RooShinyMulti" == e)
+                                return 0 > t
+                                    ? ((i = a.engine.getGameAttribute("DNSM")),
+                                      (Object.prototype.hasOwnProperty.call(i.h, "RooTotalShiny") && -99 != t) ||
+                                          ((a.engine.getGameAttribute("DNSM").h.RooDN2 = 1),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 0, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 1, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 2, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 3, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 4, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN2) * m._customBlock_Summoning("RooShinyMulti", 5, 0)),
+                                          (i.h.RooDN2 = _),
+                                          (i = a.engine.getGameAttribute("DNSM")),
+                                          (_ = a.engine.getGameAttribute("DNSM").h.RooDN2),
+                                          (i.h.RooTotalShiny = _)),
+                                      a.engine.getGameAttribute("DNSM").h.RooTotalShiny)
+                                    : ((a.engine.getGameAttribute("DNSM").h.RooDN1 = 1),
+                                      0 == t
+                                          ? (a.engine.getGameAttribute("DNSM").h.RooDN1 = 30)
+                                          : 1 == t
+                                            ? (a.engine.getGameAttribute("DNSM").h.RooDN1 = 50)
+                                            : 2 == t
+                                              ? (a.engine.getGameAttribute("DNSM").h.RooDN1 = 100)
+                                              : 3 == t
+                                                ? (a.engine.getGameAttribute("DNSM").h.RooDN1 = 150)
+                                                : 4 == t
+                                                  ? (a.engine.getGameAttribute("DNSM").h.RooDN1 = 250)
+                                                  : 5 == t && (a.engine.getGameAttribute("DNSM").h.RooDN1 = 500),
+                                      1 + (c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN1) * Math.log(Math.max(1, c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[Math.round(281 + t)])))) / 100);
+                            if ("RooCatchRate" == e) return 1;
+                            if ("RooCatchREQ" == e) return 30 / (1 + (5 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[269])) / 100);
+                            if ("RooCatchFishQTY" == e)
+                                return (
+                                    (1 + Math.min(5, c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[275]))) *
+                                    Math.max(1, 1 + 0.5 * (c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[275]) - 5) * m._customBlock_Summoning("RooMegafeather", 5, 0)) *
+                                    m._customBlock_Summoning("RooRESETbon", 0, 0) *
+                                    (1 + m._customBlock_Summoning("VaultUpgBonus", 45, 0) / 100) *
+                                    (1 + m._customBlock_Holes("GambitBonuses", 8, 0) / 100) *
+                                    (1 + m._customBlock_Holes2("Fountain_BonTOT", 1, 18) / 100) *
+                                    (1 + m._customBlock_Summoning2("MeritocBonusz", 12, 0) / 100) *
+                                    (1 + 4 * m._customBlock_Summoning("EventShopOwned", 52, 0)) *
+                                    (10 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[268]) +
+                                        (100 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[297]) + 1e3 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[304])) +
+                                        (50 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[273]) + 200 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[278]))) *
+                                    m._customBlock_Summoning("RooShinyMulti", -1, 0) *
+                                    (1 + (8 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[299])) / 100)
+                                );
+                            if ("RooCatchRate_S" == e)
+                                return (
+                                    m._customBlock_Summoning("RooRESETbon", 1, 0) *
+                                    c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[270]) *
+                                    (1 + (m._customBlock_Summoning("RooMegafeather", 9, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[268])) / 100) *
+                                    Math.max(1, 1 + 0.5 * (c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[275]) - 5) * m._customBlock_Summoning("RooMegafeather", 5, 0))
+                                );
+                            if ("RooCatchREQ_S" == e) return 7200 / (1 + (4 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[276])) / 100);
+                            if ("RooCatchRate_T" == e) return 1;
+                            if ("RooCatchREQ_T" == e)
+                                return (
+                                    (1 / (1 + 0.05 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[301]))) *
+                                    1800 *
+                                    (1 / Math.max(1, m._customBlock_Summoning("RooRESETbon", 4, 0))) *
+                                    (1 / (1 + 2 * m._customBlock_Summoning("RooMegafeather", 4, 0))) *
+                                    (1 / (1 + 2 * m._customBlock_Summoning("RooMegafeather", 7, 0)))
+                                );
+                            if ("RooShinyLuck" == e) return m._customBlock_Summoning("RooRESETbon", 1, 0);
+                            if ("RooTarOwned" == e)
+                                return Math.min(8, Math.round(3 * m._customBlock_Summoning("RooMegafeather", 0, 0) + (3 * m._customBlock_Summoning("RooMegafeather", 4, 0) + 2 * m._customBlock_Summoning("RooMegafeather", 7, 0))));
+                            if ("RooCost_T" == e)
+                                return (
+                                    (a.engine.getGameAttribute("DNSM").h.RooDN1 = 1),
+                                    (i = a.engine.getGameAttribute("DNSM")),
+                                    (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN1) * (1 / (1 + (5 * m._customBlock_Summoning("RooMegafeather", 10, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[304])) / 100))),
+                                    (i.h.RooDN1 = _),
+                                    c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(297 + t) | 0]) +
+                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN1) *
+                                            c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[(t + 21) | 0][1]) *
+                                            Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[(t + 21) | 0][2]), c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(297 + t) | 0]))
+                                );
+                            if ("RooRESETbon" == e)
+                                return (
+                                    0 == t
+                                        ? ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.4 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[291])))
+                                        : 1 == t
+                                          ? ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.3 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[292])))
+                                          : 2 == t
+                                            ? ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.15 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[293])))
+                                            : 3 == t
+                                              ? ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.04 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[294])))
+                                              : ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.2 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[295]))),
+                                    (i.h.RooDN3 = _),
+                                    (a.engine.getGameAttribute("DNSM").h.RooDN4 = 1),
+                                    3 != t &&
+                                        0 < c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(291 + t) | 0]) &&
+                                        ((i = a.engine.getGameAttribute("DNSM")), (_ = 1 + 0.04 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[294])), (i.h.RooDN4 = _)),
+                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN3) * c.asNumber(a.engine.getGameAttribute("DNSM").h.RooDN4)
+                                );
+                            if ("RooMegafeather" == e) return c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[279]) > t ? (11 == t ? c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[279]) - 11 : 1) : 0;
+                            if ("RooBonuses" == e)
+                                return (
+                                    -1 != t ? ((i = a.engine.getGameAttribute("DNSM")), (e = !Object.prototype.hasOwnProperty.call(i.h, "RooBonus"))) : (e = !0),
+                                    e &&
+                                        ((_ = []),
+                                        ((i = a.engine.getGameAttribute("DNSM")).h.RooBonus = _),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        a.engine.getGameAttribute("DNSM").h.RooBonus.push(0),
+                                        (i = a.engine.getGameAttribute("DNSM")),
+                                        (_ =
+                                            50 * m._customBlock_Summoning("RooMegafeather", 1, 0) +
+                                            (50 * m._customBlock_Summoning("RooMegafeather", 3, 0) +
+                                                (50 * m._customBlock_Summoning("RooMegafeather", 6, 0) +
+                                                    (50 * m._customBlock_Summoning("RooMegafeather", 8, 0) +
+                                                        (50 * Math.min(1, m._customBlock_Summoning("RooMegafeather", 11, 0)) + 25 * Math.max(0, m._customBlock_Summoning("RooMegafeather", 11, 0) - 1)))))),
+                                        (i.h.RooBonusAll = _),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[0] =
+                                            3 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[1] =
+                                            3 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 1) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[2] =
+                                            5 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 2) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[3] =
+                                            2 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 3) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[4] =
+                                            2 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 4) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[5] =
+                                            0.5 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 5) / 7))),
+                                        (a.engine.getGameAttribute("DNSM").h.RooBonus[6] =
+                                            3 *
+                                            (1 + m._customBlock_Thingies("LegendPTS_bonus", 26, 0) / 100) *
+                                            (1 + m._customBlock_Companions(51)) *
+                                            (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.RooBonusAll) / 100) *
+                                            Math.max(0, Math.ceil((c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[271]) - 6) / 7)))),
+                                    -1 == t ? 0 : a.engine.getGameAttribute("DNSM").h.RooBonus[0 | t]
+                                );
+                            if ("OwlCost" == e)
+                                return 0 == t
+                                    ? (1 / (1 + (10 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[257])) / 100)) *
+                                          (1 / (1 + (20 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[261])) / 100)) *
+                                          (1 / (1 + (m._customBlock_Summoning("OwlMegafeather", 2, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[254])) / 100)) *
+                                          c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[0 | t][1]) *
+                                          c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(254 + t) | 0]) *
+                                          Math.pow(
+                                              Math.max(1.05, c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[0 | t][2]) - 0.025 * m._customBlock_Summoning("OwlMegafeather", 8, 0)),
+                                              c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(254 + t) | 0])
+                                          )
+                                    : (1 / (1 + (10 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[257])) / 100)) *
+                                          (1 / (1 + (20 * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[261])) / 100)) *
+                                          (1 / (1 + (m._customBlock_Summoning("OwlMegafeather", 2, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[254])) / 100)) *
+                                          c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[0 | t][1]) *
+                                          Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.Owlz[0 | t][2]), c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[(254 + t) | 0]));
+                            if ("TomeLvReq" == e) return 40 * t + (5 * Math.max(0, t - 35) + (10 * Math.max(0, t - 60) + (10 * Math.max(0, t - 80) + 15 * Math.max(0, t - 100)))) + 350;
+                            if ("TomeBonus" == e)
+                                return null == n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo
+                                    ? 0
+                                    : 0 == t
+                                      ? 10 *
+                                        Math.pow(Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[84]) / 100), 0.7) *
+                                        (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 17, 0) + m._customBlock_GetSetBonus("TROLL_SET", "Bonus", 0, 0)) / 100)
+                                      : 1 == t
+                                        ? 1 == a.engine.getGameAttribute("OptionsListAccount")[196]
+                                            ? 4 *
+                                              Math.pow(Math.floor(Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[84]) - 4e3) / 100), 0.7) *
+                                              (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 17, 0) + m._customBlock_GetSetBonus("TROLL_SET", "Bonus", 0, 0)) / 100)
+                                            : 0
+                                        : 2 == t
+                                          ? 1 == a.engine.getGameAttribute("OptionsListAccount")[197]
+                                              ? 2 *
+                                                Math.pow(Math.floor(Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[84]) - 8e3) / 100), 0.7) *
+                                                (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 17, 0) + m._customBlock_GetSetBonus("TROLL_SET", "Bonus", 0, 0)) / 100)
+                                              : 0
+                                          : 3 == t
+                                            ? a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.W8
+                                            : 4 == t
+                                              ? a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.A9
+                                              : 5 == t
+                                                ? a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.M9
+                                                : 6 == t
+                                                  ? 1 == m._customBlock_Summoning("EventShopOwned", 0, 0)
+                                                      ? 4 *
+                                                        Math.pow(Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[84]) / 1e3), 0.4) *
+                                                        (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 17, 0) + m._customBlock_GetSetBonus("TROLL_SET", "Bonus", 0, 0)) / 100)
+                                                      : 0
+                                                  : 7 == t && 1 == m._customBlock_Summoning("EventShopOwned", 27, 0)
+                                                    ? 3 *
+                                                      Math.pow(Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[84]) / 1e3), 0.3) *
+                                                      (1 + (m._customBlock_Summoning("GrimoireUpgBonus", 17, 0) + m._customBlock_GetSetBonus("TROLL_SET", "Bonus", 0, 0)) / 100)
+                                                    : 0;
+                            if ("isTomeUnlocked" == e)
+                                return c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[4].behaviors.getBehavior("ActorEvents_229"), nb)._GenInfo[83]) >=
+                                    m._customBlock_Summoning("TomeLvReq", a.engine.getGameAttribute("CustomLists").h.NinjaInfo[32].indexOf("" + t), 0)
+                                    ? 1
+                                    : 0;
+                            if ("TomePCT" == e)
+                                return (
+                                    (i = a.engine.getGameAttribute("DNSM")),
+                                    Object.prototype.hasOwnProperty.call(i.h, "TomeQTY")
+                                        ? 0 == m._customBlock_Summoning("isTomeUnlocked", t, 0)
+                                            ? 0
+                                            : 0 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][2])
+                                              ? 0 > c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t])
+                                                  ? 0
+                                                  : Math.pow(
+                                                        (1.7 * c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t])) /
+                                                            (c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1])),
+                                                        0.7
+                                                    )
+                                              : 1 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][2])
+                                                ? (2.4 * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]))) /
+                                                  (2 * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t])) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]))
+                                                : 2 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][2])
+                                                  ? Math.min(1, c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]) / c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]))
+                                                  : 3 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][2])
+                                                    ? c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]) > 5 * c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1])
+                                                        ? 0
+                                                        : Math.pow(
+                                                              (1.2 * (6 * c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]) - c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]))) /
+                                                                  (7 * c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]) - c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t])),
+                                                              5
+                                                          )
+                                                    : 4 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][2])
+                                                      ? Math.pow(
+                                                            (2 * Math.min(c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]), c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t]))) /
+                                                                (Math.min(c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1]), c.asNumber(a.engine.getGameAttribute("DNSM").h.TomeQTY[0 | t])) +
+                                                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][1])),
+                                                            0.7
+                                                        )
+                                                      : 0
+                                        : 0
+                                );
+                            if ("TomePTS" == e) return Math.ceil(m._customBlock_Summoning("TomePCT", t, 0) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.Tome[0 | t][3]));
+                            if ("EndlessUnlocked" == e) return 1 == m._customBlock_Summoning("SummUpgBonus", 70, 0) ? 1 : 0;
+                            if ("EndlessModifierID" == e)
+                                return 99 == i
+                                    ? t == m._customBlock_Summoning("EndlessModifierID", 0, 0) && 9 == n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[146]
+                                        ? 1
+                                        : 0
+                                    : c.asNumber(
+                                          a.engine.getGameAttribute("CustomLists").h.SummonEnemies[11][
+                                              Math.round(
+                                                  c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[174]) -
+                                                      40 * Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[174]) / 40)
+                                              )
+                                          ]
+                                      );
+                            if ("MaxMana" == e) return 20 * Math.pow(1.5, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[118]));
+                            if ("ManaStart" == e) return m._customBlock_Summoning("SummUpgBonus", 16, 0);
+                            if ("ManaRegen" == e)
+                                return (
+                                    0.8 *
+                                    (1 +
+                                        (m._customBlock_Summoning("SummUpgBonus", 5, 0) +
+                                            (m._customBlock_Summoning("SummUpgBonus", 29, 0) + m._customBlock_Summoning("SummUpgBonus", 42, 0)) +
+                                            (15 * c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[118]) +
+                                                (c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[162]) +
+                                                    c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[163])))) /
+                                            100)
+                                );
+                            if ("UnitSpd" == e)
+                                return (
+                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][1]) *
+                                    (1 + -0.4 * m._customBlock_Summoning("EndlessModifierID", 0, 99)) *
+                                    (1 + 0.7 * m._customBlock_Summoning("EndlessModifierID", 1, 99))
+                                );
+                            if ("UnitHP" == e)
+                                return -1 == t
+                                    ? c.asNumber(1) *
+                                          (2 +
+                                              (1 +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 1, 0) +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 10, 0) + (m._customBlock_Summoning("SummUpgBonus", 35, 0) + m._customBlock_Summoning("SummUpgBonus", 37, 0))))) *
+                                                  (1 + (m._customBlock_Summoning("SummUpgBonus", 20, 0) + m._customBlock_Summoning("SummUpgBonus", 81, 0)) / 100) *
+                                                  (1 +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 50, 0) +
+                                                          (m._customBlock_Summoning("SummUpgBonus", 59, 0) + m._customBlock_Summoning("SummUpgBonus", 63, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]))) /
+                                                          100) *
+                                                  (1 +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 61, 0) *
+                                                          Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[170]))) /
+                                                          100))
+                                    : c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][7]) *
+                                          (2 +
+                                              (1 +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 1, 0) +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 10, 0) + (m._customBlock_Summoning("SummUpgBonus", 35, 0) + m._customBlock_Summoning("SummUpgBonus", 37, 0))))) *
+                                                  (1 + (m._customBlock_Summoning("SummUpgBonus", 20, 0) + m._customBlock_Summoning("SummUpgBonus", 81, 0)) / 100) *
+                                                  (1 +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 50, 0) +
+                                                          (m._customBlock_Summoning("SummUpgBonus", 59, 0) + m._customBlock_Summoning("SummUpgBonus", 63, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]))) /
+                                                          100) *
+                                                  (1 +
+                                                      (m._customBlock_Summoning("SummUpgBonus", 61, 0) *
+                                                          Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[170]))) /
+                                                          100));
+                            if ("UnitDMG" == e)
+                                return -1 == t
+                                    ? c.asNumber(1) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 3, 0) +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 12, 0) + (m._customBlock_Summoning("SummUpgBonus", 21, 0) + m._customBlock_Summoning("SummUpgBonus", 31, 0))))) *
+                                          (1 + (m._customBlock_Summoning("SummUpgBonus", 43, 0) + m._customBlock_Summoning("SummUpgBonus", 74, 0)) / 100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 51, 0) +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 56, 0) + m._customBlock_Summoning("SummUpgBonus", 64, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]))) /
+                                                  100) *
+                                          (1 + (m._customBlock_Summoning("SummUpgBonus", 76, 0) * c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[185])) / 100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 47, 0) *
+                                                  Math.max(
+                                                      0,
+                                                      c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[124]) -
+                                                          c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[123])
+                                                  )) /
+                                                  100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 60, 0) *
+                                                  Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[170]))) /
+                                                  100)
+                                    : c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][8]) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 3, 0) +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 12, 0) + (m._customBlock_Summoning("SummUpgBonus", 21, 0) + m._customBlock_Summoning("SummUpgBonus", 31, 0))))) *
+                                          (1 + (m._customBlock_Summoning("SummUpgBonus", 43, 0) + m._customBlock_Summoning("SummUpgBonus", 74, 0)) / 100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 51, 0) +
+                                                  (m._customBlock_Summoning("SummUpgBonus", 56, 0) + m._customBlock_Summoning("SummUpgBonus", 64, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]))) /
+                                                  100) *
+                                          (1 + (m._customBlock_Summoning("SummUpgBonus", 76, 0) * c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[185])) / 100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 47, 0) *
+                                                  Math.max(
+                                                      0,
+                                                      c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[124]) -
+                                                          c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[123])
+                                                  )) /
+                                                  100) *
+                                          (1 +
+                                              (m._customBlock_Summoning("SummUpgBonus", 60, 0) *
+                                                  Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[170]))) /
+                                                  100);
+                            if ("UnitDODGE" == e)
+                                return 4 == t
+                                    ? Math.min(0.8, (m._customBlock_Summoning("SummUpgBonus", 9, 0) + (m._customBlock_Summoning("SummUpgBonus", 7, 0) + m._customBlock_Summoning("SummUpgBonus", 55, 0))) / 100)
+                                    : Math.min(0.8, (m._customBlock_Summoning("SummUpgBonus", 7, 0) + m._customBlock_Summoning("SummUpgBonus", 55, 0)) / 100);
+                            if ("SummUpgBonus" == e)
+                                return (
+                                    (a.engine.getGameAttribute("DNSM").h.SumUpgMoltoz = 1),
+                                    D.contains(a.engine.getGameAttribute("Holes")[28], t) &&
+                                        ((i = a.engine.getGameAttribute("DNSM")), (_ = 2 + (Math.max(0, p._customBlock_getbonus2(1, 597, -1) / 100 - 1) + m._customBlock_Summoning("SummUpgBonus", 78, 0) / 100)), (i.h.SumUpgMoltoz = _)),
+                                    0 < m._customBlock_Thingies("SumStoneTrialz", c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][2]), 0) &&
+                                        1 == c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][10]) &&
+                                        ((i = a.engine.getGameAttribute("DNSM")),
+                                        (_ = c.asNumber(a.engine.getGameAttribute("DNSM").h.SumUpgMoltoz) * (1 + m._customBlock_Thingies("SumStoneTrialz", c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][2]), 0))),
+                                        (i.h.SumUpgMoltoz = _)),
+                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.SumUpgMoltoz) * c.asNumber(a.engine.getGameAttribute("Summon")[0][0 | t]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][6])
+                                );
+                            if ("SummVictories" == e)
+                                return 0 == t
+                                    ? n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[143][9]
+                                    : n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[143][0 | t];
+                            if ("UpgCost" == e)
+                                return (
+                                    (1 / (1 + (p._customBlock_getbonus2(1, 595, -1) * Math.max(0, Math.floor(c.asNumber(a.engine.getGameAttribute("DNSM").h.CalcTalentMAP.h[595]) / 100))) / 100)) *
+                                    (1 / (1 + m._customBlock_Summoning("SummUpgBonus", 49, 0) / 100)) *
+                                    Math.max(0.1, 1 - Math.max(m._customBlock_SushiStuff("RoG_BonusQTY", 9, 0), m._customBlock_SushiStuff("RoG_BonusQTY", 34, 0)) / 100) *
+                                    (1 / (1 + (m._customBlock_ArcaneType("ArcaneUpgBonus", 54, 0) * c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319])) / 100)) *
+                                    (1 / (1 + m._customBlock_Summoning("SummUpgBonus", 57, 0) / 100)) *
+                                    (1 / (1 + m._customBlock_Summoning("SummUpgBonus", 72, 0) / 100)) *
+                                    (1 /
+                                        (1 +
+                                            (m._customBlock_Summoning("SummUpgBonus", 75, 0) *
+                                                Math.max(0, c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[170]))) /
+                                                100)) *
+                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][4]) *
+                                    Math.pow(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUPG[0 | t][5]), c.asNumber(a.engine.getGameAttribute("Summon")[0][0 | t]))
+                                );
+                            if ("UnitCost" == e)
+                                return 9 == n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[146]
+                                    ? 1 == i
+                                        ? Math.ceil(
+                                              Math.floor(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]) / 8) +
+                                                  Math.min(
+                                                      c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 1),
+                                                      c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) - 1
+                                                  )
+                                          )
+                                        : Math.ceil(
+                                              Math.floor(c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]) / 8) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 1)
+                                          )
+                                    : 10 == n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[146] ||
+                                        11 == n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[146]
+                                      ? 1 == i
+                                          ? Math.ceil(
+                                                (1 + Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 120) / 2) *
+                                                    (Math.ceil(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 15) +
+                                                        5 * Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 60) +
+                                                        c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 1))
+                                            )
+                                          : 3 == i
+                                            ? Math.ceil(
+                                                  (1 + Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 120) / 2) *
+                                                      (3 +
+                                                          (Math.ceil(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 15) +
+                                                              5 * Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 60) +
+                                                              c.asNumber(35) * c.randomFloatBetween(0.5, 2)))
+                                              )
+                                            : Math.ceil(
+                                                  (1 + Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 120) / 2) *
+                                                      (Math.ceil(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 15) +
+                                                          5 * Math.floor(c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[25].behaviors.getBehavior("ActorEvents_670"), Ga)._GenINFO[189]) / 60) +
+                                                          c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 2))
+                                              )
+                                      : 1 == i
+                                        ? Math.ceil(
+                                              Math.min(
+                                                  c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 1),
+                                                  c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) - 1
+                                              )
+                                          )
+                                        : Math.ceil(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonUnits[0 | t][6]) * c.randomFloatBetween(0.5, 1));
+                            if ("RerollCost" == e)
+                                return Math.floor(
+                                    5 *
+                                        Math.max(
+                                            0,
+                                            c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[130]) - (m._customBlock_Summoning("SummUpgBonus", 24, 0) - 1)
+                                        ) *
+                                        Math.pow(
+                                            1.2,
+                                            c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[24].behaviors.getBehavior("ActorEvents_623"), xa)._GenINFO[130]) - (m._customBlock_Summoning("SummUpgBonus", 24, 0) - 1)
+                                        )
+                                );
+                            if ("WinBonus" == e) {
+                                if (-1 != c.getCurrentSceneName().indexOf("Tutorial")) return 0;
+                                if ((-1 != t ? ((i = a.engine.getGameAttribute("DNSM")), (e = !Object.prototype.hasOwnProperty.call(i.h, "SummWinBonus"))) : (e = !0), e)) {
+                                    for (_ = [], (i = a.engine.getGameAttribute("DNSM")).h.SummWinBonus = _, e = 0; 32 > e;) (e++, a.engine.getGameAttribute("DNSM").h.SummWinBonus.push(0));
+                                    for (e = 0, s = a.engine.getGameAttribute("Summon")[1].length; e < s;)
+                                        ((r = e++),
+                                            0 != ("" + h.string(a.engine.getGameAttribute("Summon")[1][r])).indexOf("rift") &&
+                                                ((i = a.engine.getGameAttribute("DNSM")),
+                                                (_ = a.engine.getGameAttribute("CustomLists").h.SummonEnemies[0].indexOf(a.engine.getGameAttribute("Summon")[1][r])),
+                                                (i.h.SWinBonDN = _),
+                                                (o = a.engine.getGameAttribute("DNSM")),
+                                                (_ = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[5][0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN)]) - 1)),
+                                                (o.h.SWinBonDN2 = _),
+                                                (a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2)] =
+                                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2)]) +
+                                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[7][0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN)]))));
+                                    for (e = 0, s = 0 | c.asNumber(a.engine.getGameAttribute("OptionsListAccount")[319]); e < s;)
+                                        ((r = e++),
+                                            (i = a.engine.getGameAttribute("DNSM")),
+                                            (_ = Math.round(c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[9][r - 40 * Math.floor(r / 40)]) - 1)),
+                                            (i.h.SWinBonDN2 = _),
+                                            (a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2)] =
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | c.asNumber(a.engine.getGameAttribute("DNSM").h.SWinBonDN2)]) +
+                                                c.asNumber(a.engine.getGameAttribute("CustomLists").h.SummonEnemies[10][r - 40 * Math.floor(r / 40)])));
+                                }
+                                return -1 == t
+                                    ? 0
+                                    : 20 == t || 22 == t || 24 == t || 31 == t
+                                      ? a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | t]
+                                      : 19 == t
+                                        ? 3.5 *
+                                          c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | t]) *
+                                          (1 + m._customBlock_Ninja("PristineBon", 8, 0) / 100) *
+                                          (1 + (10 * c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[11])) / 100) *
+                                          (1 +
+                                              (m._customBlock_Sailing("ArtifactBonus", 32, 0) +
+                                                  (Math.min(10, c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][4])) +
+                                                      (p._customBlock_AchieveStatus(379) +
+                                                          (p._customBlock_AchieveStatus(373) + (m._customBlock_GetSetBonus("GODSHARD_SET", "Bonus", 0, 0) + 50 * m._customBlock_Thingies("Have_ban_i", 0, 0)))))) /
+                                                  100)
+                                        : 20 <= t && 33 >= t
+                                          ? c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | t]) *
+                                            (1 + m._customBlock_Ninja("PristineBon", 8, 0) / 100) *
+                                            (1 + (10 * c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[11])) / 100) *
+                                            (1 +
+                                                (m._customBlock_Sailing("ArtifactBonus", 32, 0) +
+                                                    (Math.min(10, c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][4])) +
+                                                        (p._customBlock_AchieveStatus(379) +
+                                                            (p._customBlock_AchieveStatus(373) +
+                                                                (m._customBlock_Summoning("WinBonus", 31, 0) +
+                                                                    (m._customBlock_Thingies("EmperorBon", 8, 0) + (m._customBlock_GetSetBonus("GODSHARD_SET", "Bonus", 0, 0) + 50 * m._customBlock_Thingies("Have_ban_i", 0, 0)))))))) /
+                                                    100)
+                                          : 3.5 *
+                                            c.asNumber(a.engine.getGameAttribute("DNSM").h.SummWinBonus[0 | t]) *
+                                            (1 + m._customBlock_Ninja("PristineBon", 8, 0) / 100) *
+                                            (1 + (10 * c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[11])) / 100) *
+                                            (1 +
+                                                (m._customBlock_Sailing("ArtifactBonus", 32, 0) +
+                                                    (Math.min(10, c.asNumber(a.engine.getGameAttribute("Tasks")[2][5][4])) +
+                                                        (p._customBlock_AchieveStatus(379) +
+                                                            (p._customBlock_AchieveStatus(373) +
+                                                                (m._customBlock_Summoning("WinBonus", 31, 0) +
+                                                                    (m._customBlock_Thingies("EmperorBon", 8, 0) + (m._customBlock_GetSetBonus("GODSHARD_SET", "Bonus", 0, 0) + 50 * m._customBlock_Thingies("Have_ban_i", 0, 0)))))))) /
+                                                    100);
+                            }
+                            return "SummEXPgain" == e
+                                ? Math.max(1, p._customBlock_getbonus2(1, 596, -1)) *
+                                      x._customBlock_SkillStats("AllSkillxpMULTI") *
+                                      (1 +
+                                          (c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6SummEXP"]) +
+                                              (3 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "w6b1") +
+                                                  (q._customBlock_MealBonus("zSummonExp") + (p._customBlock_MainframeBonus(16) + m._customBlock_Summoning("VaultUpgBonus", 84, 0))))) /
+                                              100) *
+                                      (1 + p._customBlock_ArcadeBonus(53) / 100) *
+                                      (1 + m._customBlock_Companions(121)) *
+                                      (1 +
+                                          (p._customBlock_Breeding("ShinyBonusS", "Nah", 25, -1) +
+                                              25 * m._customBlock_RiftStuff("RiftSkillBonus,17", 0) +
+                                              (k._customBlock_StampBonusOfTypeX("SummonExp") +
+                                                  (c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h[77]) + (p._customBlock_GuildBonuses(14) + m._customBlock_Summoning("VotingBonusz", 28, 0))))) /
+                                              100)
+                                : "SpikePlacementDMG" == e
+                                  ? (m._customBlock_Summoning("SummUpgBonus", 15, 0) + m._customBlock_Summoning("UnitDMG", -1, 0) * (m._customBlock_Summoning("SummUpgBonus", 68, 0) / 100)) *
+                                    (1 + m._customBlock_Summoning("SummUpgBonus", 77, 0) / 100)
+                                  : m._customBlock_Summoning2(e, t, i);
+                        }

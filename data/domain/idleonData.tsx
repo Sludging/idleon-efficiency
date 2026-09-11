@@ -57,7 +57,7 @@ import { Minehead } from './world-7/minehead';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions } from './world-2/islandExpedition';
-import { Tome, updateTomeScores } from './world-4/tome';
+import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
@@ -291,7 +291,8 @@ const postProcessingMap: Record<string, Function> = {
     "tomeScore": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeScores(accountData),
     "hole": (doc: Cloudsave, accountData: Map<string, any>) => updateHole(accountData),
     "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
-    "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
+    // Tome bonuses consume the score and Tome-adjusted bubbles above; callers pass the relevant Player to getTomeBonus.
+    "tomeBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeBonuses(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),

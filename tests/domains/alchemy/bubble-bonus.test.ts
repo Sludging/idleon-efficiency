@@ -9,6 +9,7 @@
  * @testCovers DailyDripBubble.getBonus
  * @testCovers CropiusMapperBubble.getBonus
  * @testCovers ImpactedBySlabBubble.getBonus
+ * @testCovers ImpactedByTheTomeBubble.getBonus
  * @testCovers Alchemy.getBubbleBonusForKey
  */
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
@@ -50,6 +51,24 @@ const bubbleBonusCalculationSpecs: Record<string, { description: string; extract
   description: 'Slab-scaled bubble (W2 / Slabi Orefish; player 0 class boost)',
   extractionKey: 'slab_w2_final_bonus',
   bonusKey: 'W2',
+  playerIndex: 0,
+ },
+ tomeW8: {
+  description: 'Tome score-scaled W8 (+{% STR; player 0)',
+  extractionKey: 'tome_w8_final_bonus',
+  bonusKey: 'W8',
+  playerIndex: 0,
+ },
+ tomeA9: {
+  description: 'Tome score-scaled A9 (+{% AGI; player 0)',
+  extractionKey: 'tome_a9_final_bonus',
+  bonusKey: 'A9',
+  playerIndex: 0,
+ },
+ tomeM9: {
+  description: 'Tome score-scaled M9 (+{% WIS; player 0)',
+  extractionKey: 'tome_m9_final_bonus',
+  bonusKey: 'M9',
   playerIndex: 0,
  },
 };

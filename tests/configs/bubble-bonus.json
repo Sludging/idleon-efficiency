@@ -34,6 +34,21 @@
       "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)"
     },
     {
+      "label": "tome_w8_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
+      "description": "Tome score-scaled W8 (+{% STR) final bubble bonus for player 0"
+    },
+    {
+      "label": "tome_a9_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
+      "description": "Tome score-scaled A9 (+{% AGI) final bubble bonus for player 0"
+    },
+    {
+      "label": "tome_m9_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
+      "description": "Tome score-scaled M9 (+{% WIS) final bubble bonus for player 0"
+    },
+    {
       "label": "ordinary_tool_w_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
       "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)"

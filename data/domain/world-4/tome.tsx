@@ -43,7 +43,9 @@ import { UpgradeVault } from '../upgradeVault';
 import { Hole, WisdomMonument } from '../world-5/hole/hole';
 import { SkillsIndex } from '../SkillsIndex';
 import { initTomeEpilogueBonusRepo, TomeEpilogueBonusBase } from '../data/TomeEpilogueBonusRepo';
-import { TomeEpilogueBonusModel } from '../model/tomeEpilogueBonusModel';
+import { initTomeBonusRepo } from '../data/TomeBonusRepo';
+import { TomeBonusModel } from '../model/tomeBonusModel';
+import type { TomeEpilogueBonusModel } from '../model/tomeEpilogueBonusModel';
 import { EquipmentSets } from '../misc/equipmentSets';
 import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
@@ -51,6 +53,7 @@ import { CoralReef } from '../world-7/coralReef';
 import { Spelunking } from '../world-7/spelunking';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 import { Minehead } from '../world-7/minehead';
+import { EventShop } from '../eventShop';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -77,11 +80,57 @@ export class TomeEpilogueBonus {
             * Math.max(0, Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7) / (25 + Math.pow(Math.floor(Math.max(0, score - this.data.x1) / 100), .7)))
     }
 }
+const localTomeBonusModels: TomeBonusModel[] = [
+    { index: 6, description: "}x DMG" },
+    { index: 7, description: "}x Drop Rate" },
+];
+
+export class TomeBonus {
+    unlocked: boolean = false;
+    tomeScore: number = 0;
+    boostFromBonuses: number = 0;
+    alchemy?: Alchemy;
+
+    constructor(public index: number, public data: TomeBonusModel) { }
+
+    getBonus(player?: Player): number {
+        if (!this.unlocked) return 0;
+
+        const scoreMultiplier = 1 + this.boostFromBonuses / 100;
+        switch (this.index) {
+            case 0:
+                return 10 * Math.pow(Math.floor(this.tomeScore / 100), 0.7) * scoreMultiplier;
+            case 1:
+                return 4 * Math.pow(Math.floor(Math.max(0, this.tomeScore - 4000) / 100), 0.7) * scoreMultiplier;
+            case 2:
+                return 2 * Math.pow(Math.floor(Math.max(0, this.tomeScore - 8000) / 100), 0.7) * scoreMultiplier;
+            case 3:
+                return this.alchemy?.getBubbleBonusForKey("W8", player) ?? 0;
+            case 4:
+                return this.alchemy?.getBubbleBonusForKey("A9", player) ?? 0;
+            case 5:
+                return this.alchemy?.getBubbleBonusForKey("M9", player) ?? 0;
+            case 6:
+                return 4 * Math.pow(Math.floor(this.tomeScore / 1000), 0.4) * scoreMultiplier;
+            case 7:
+                return 3 * Math.pow(Math.floor(this.tomeScore / 1000), 0.3) * scoreMultiplier;
+            default:
+                return 0;
+        }
+    }
+
+    getDescription(player?: Player): string {
+        const bonus = this.getBonus(player);
+        return this.data.description
+            .replace(/{/g, nFormatter(bonus, "Big"))
+            .replace(/}/g, nFormatter(1 + bonus / 100, "MultiplierInfo"));
+    }
+}
+
 
 export class TomeLine {
-    // Needs this to be updated
-    // To know how, check game code searching for "_customEvent_TomeQTY: function() {"
-    // It's where engine.getGameAttribute("DNSM").h.TomeQTY array is populated with each line current value which is then used to calculate each line points
+    // Current Tome-line values are recalculated from each player's tracked progress
+    // before the line score is derived.
     private currentValues: number[] = [];
     private lineScores: number[] = [];
     unlocked: boolean = false;
@@ -250,6 +299,7 @@ export class Tome extends Domain {
     charCount: number = 0;
     totalAccountLevel: number = 0;
 
+    bonuses: TomeBonus[] = [];
     getRawKeys(): RawData[] {
         return [
             { key: "OptLacc", perPlayer: false, default: [] },
@@ -258,7 +308,13 @@ export class Tome extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        const bonusModels = [
+            ...initTomeBonusRepo().map(bonus => bonus.data),
+            ...localTomeBonusModels,
+        ].sort((bonusA, bonusB) => bonusA.index - bonusB.index);
+
         this.epilogueBonuses = TomeEpilogueBonus.fromBase(initTomeEpilogueBonusRepo());
+        this.bonuses = bonusModels.map(bonus => new TomeBonus(bonus.index, bonus));
         return this;
     }
 
@@ -331,6 +387,10 @@ export class Tome extends Domain {
 
     getHighestScore = (): number => {
         return this.unlocked ? this.highestScore : 0;
+    }
+    getTomeBonus = (index: number, player?: Player): number => {
+        const bonus = this.bonuses.find(bonus => bonus.index == index);
+        return bonus?.getBonus(player) ?? 0;
     }
 
     getEpilogueBonus = (index: number, playerIndex: number = -1): number => {
@@ -662,11 +722,9 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue((optionListAccount[172] ?? 0));
                 break;
             case 15:
-                // This player's owned Star Talent Points.
-                // TODO: verify this still matches Idleon Efficiency.
-                for (let i = 0; i < players.length; i++) {
-                    line.updatePlayerCurrentValue((players[i].talentPoints.find(talentPoints => talentPoints.tab === TalentTab.SpecialTab)?.totalOwned ?? 0), i);
-                }
+                // The game computes this Tome quantity from the active player's Star Talent points.
+                // The account data is normalized with the active player at index 0.
+                line.updateAllPlayersCurrentValue(players[0].talentPoints.find(talentPoints => talentPoints.tab === TalentTab.SpecialTab)?.totalOwned ?? 0);
                 break;
             case 16:
                 // Average kills per Crystal Spawn, stored as a reciprocal because lower is better.
@@ -1047,15 +1105,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(spelunking.premiumHatsFound);
                 break;
             case 110:
-                // Minehead opponents defeated (game source: Research[7][4]).
+                // Number of Minehead opponents defeated.
                 line.updateAllPlayersCurrentValue(minehead.getOpponentsDefeated());
                 break;
             case 111:
-                // Reclaimed King Rat Crown count from Research Grid bonus 67; the game source uses Research[11].length.
+                // Number of King Rat Crowns reclaimed through the Research Grid.
                 line.updateAllPlayersCurrentValue(researchCrownCount);
                 break;
             case 112:
-                // Farming stickers found (game source: FarmingStuffs.TotalStickers).
+                // Number of Farming stickers discovered.
                 line.updateAllPlayersCurrentValue(farming.getTotalStickers());
                 break;
             case 113:
@@ -1081,15 +1139,15 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(optionListAccount[594] ?? 0);
                 break;
             case 118:
-                // Total Royal Statue levels (game source: sum of non-negative RoyalG[0] values).
+                // Total levels of Royal Statues.
                 line.updateAllPlayersCurrentValue(royalArmory.getTotalRoyalStatueLevels());
                 break;
             case 119:
-                // Royal Guardian outposts built (game source: RoyalG.TotalStatz(4, 0)).
+                // Number of Royal Guardian outposts built.
                 line.updateAllPlayersCurrentValue(royalArmory.getOutpostsBuilt());
                 break;
             case 120:
-                // Total Resource Grade (game source: RoyalG.TotalStatz(0, 0)).
+                // Total Royal Armory resource grade.
                 line.updateAllPlayersCurrentValue(royalArmory.getTotalResourceGrade());
                 break;
             default:
@@ -1108,4 +1166,36 @@ export const updateTomeScores = (data: Map<string, any>) => {
     tome.epilogueBonuses.forEach(bonus => {
         bonus.boostFromBonuses = grimoireBonus + equipmentSetBonus;
     });
+}
+
+export const updateTomeBonuses = (data: Map<string, any>) => {
+    const tome = data.get("tome") as Tome;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const grimoire = data.get("grimoire") as Grimoire;
+    const equipmentSet = data.get("equipmentSets") as EquipmentSets;
+    const eventShop = data.get("eventShop") as EventShop;
+    const optionListAccount = data.get("OptLacc") as number[];
+    const tomeScore = tome.getHighestScore();
+    const boostFromBonuses = grimoire.getUpgradeBonus(17) + equipmentSet.getSetBonus("TROLL_SET", undefined, true);
+
+    // Several tome bonuses get unlocked by certain conditions.
+    const unlockedByIndex: Record<number, boolean> = {
+        0: true,
+        1: optionListAccount[196] === 1,
+        2: optionListAccount[197] === 1,
+        3: alchemy.getBubbleBonusForKey("W8") > 0,
+        4: alchemy.getBubbleBonusForKey("A9") > 0,
+        5: alchemy.getBubbleBonusForKey("M9") > 0,
+        6: eventShop.isBonusOwned(0),
+        7: eventShop.isBonusOwned(27),
+    };
+
+    tome.bonuses.forEach(bonus => {
+        bonus.unlocked = unlockedByIndex[bonus.index] ?? false;
+        bonus.tomeScore = tomeScore;
+        bonus.boostFromBonuses = boostFromBonuses;
+        bonus.alchemy = alchemy;
+    });
+
+    return tome;
 }

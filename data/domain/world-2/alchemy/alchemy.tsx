@@ -23,6 +23,8 @@ import { CropComponentModel } from '../../model/cropComponentModel';
 import { SummonComponentModel } from '../../model/summonComponentModel';
 import { SailTreasureComponentModel } from '../../model/sailTreasureComponentModel';
 import { Tome } from '../../world-4/tome';
+import type { EquipmentSets } from '../../misc/equipmentSets';
+import type { Grimoire } from '../../grimoire';
 import { UpgradeVault } from '../../upgradeVault';
 import { Tesseract } from '../../tesseract';
 import { Arcade } from '../arcade';
@@ -228,6 +230,8 @@ export class ImpactedBySlabBubble extends Bubble {
 
 export class ImpactedByTheTomeBubble extends Bubble {
     theTomeTotalScore: number = 0;
+    grimoireTomeBonus: number = 0;
+    trollSetTomeBonus: number = 0;
 
     static fromBase = (id: string, data: BubbleModel, iconPrefix: string, bubbleIndex: number) => {
         return new ImpactedByTheTomeBubble(id, data, iconPrefix, bubbleIndex);
@@ -240,7 +244,9 @@ export class ImpactedByTheTomeBubble extends Bubble {
     override getBonus = (roundResult: boolean = false): number => {
         const bonus = lavaFunc(this.func, this.level, this.x1, this.x2, false) *
             (this.prismatic ? this.prismaticMultiplier : 1);
-        return roundResult ? round(Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus) : Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
+        const scoreStackBonus = Math.floor(Math.max(0, this.theTomeTotalScore - 5000) / 2000) * bonus;
+        const finalBonus = scoreStackBonus * (1 + (this.grimoireTomeBonus + this.trollSetTomeBonus) / 100);
+        return roundResult ? round(finalBonus) : finalBonus;
     }
 
     override getBonusText = (bonus: number = this.getBonus(true)): string => {
@@ -925,11 +931,22 @@ export function updateAlchemySlabBubbles(data: Map<string, any>) {
 export function updateAlchemyTomeBubbles(data: Map<string, any>) {
     const alchemy = data.get("alchemy") as Alchemy;
     const tome = data.get("tome") as Tome;
+    const grimoire = data.get("grimoire") as Grimoire;
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const tomeScore = tome.getHighestScore();
+    const grimoireTomeBonus = grimoire.getUpgradeBonus(17);
+    const trollSetTomeBonus = equipmentSets.getSetBonus("TROLL_SET", undefined, true);
+    const scoreScaledBubbleKeys = ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"];
+    const modifierBubbleKeys = ["W8", "A9", "M9"];
 
-    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => ["W10AllCharz", "W8", "A10AllCharz", "A9", "M10AllCharz", "M9"].includes(bubble.data.bonusKey)))
+    alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles.filter(bubble => scoreScaledBubbleKeys.includes(bubble.data.bonusKey)))
         .forEach(bubble => {
-            (bubble as ImpactedByTheTomeBubble).theTomeTotalScore = tomeScore;
+            const tomeBubble = bubble as ImpactedByTheTomeBubble;
+            tomeBubble.theTomeTotalScore = tomeScore;
+            if (modifierBubbleKeys.includes(bubble.data.bonusKey)) {
+                tomeBubble.grimoireTomeBonus = grimoireTomeBonus;
+                tomeBubble.trollSetTomeBonus = trollSetTomeBonus;
+            }
         })
 
     return alchemy;
