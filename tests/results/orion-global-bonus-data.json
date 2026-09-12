@@ -1,53 +1,53 @@
 {
-  "timestamp": "2026-09-11T06:22:39.378Z",
+  "timestamp": "2026-09-12T02:19:33.075Z",
   "extractions": {
     "legend_talent_26_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
       "result": 400,
       "description": "Legend talent 26 bonus (Orion Overload)",
-      "extractedAt": "2026-09-11T06:22:39.390Z"
+      "extractedAt": "2026-09-12T02:19:33.094Z"
     },
     "companion_51_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 51, 0)",
       "result": 2,
       "description": "Companion 51 bonus (multiplier for Orion bonuses)",
-      "extractedAt": "2026-09-11T06:22:39.392Z"
+      "extractedAt": "2026-09-12T02:19:33.104Z"
     },
     "global_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
       "result": 4125,
       "description": "Global bonus 0: +{% Class XP (base 5)",
-      "extractedAt": "2026-09-11T06:22:39.394Z"
+      "extractedAt": "2026-09-12T02:19:33.107Z"
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 1, 0)",
       "result": 8250,
       "description": "Global bonus 1: +{ Base DMG (base 10)",
-      "extractedAt": "2026-09-11T06:22:39.395Z"
+      "extractedAt": "2026-09-12T02:19:33.110Z"
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 2, 0)",
       "result": 1650,
       "description": "Global bonus 2: +{% Total DMG (base 2)",
-      "extractedAt": "2026-09-11T06:22:39.405Z"
+      "extractedAt": "2026-09-12T02:19:33.128Z"
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 3, 0)",
       "result": 3300,
       "description": "Global bonus 3: +{% Skill XP (base 4)",
-      "extractedAt": "2026-09-11T06:22:39.407Z"
+      "extractedAt": "2026-09-12T02:19:33.138Z"
     },
     "global_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 4, 0)",
       "result": 825,
       "description": "Global bonus 4: +{% Drop Rate (base 1)",
-      "extractedAt": "2026-09-11T06:22:39.409Z"
+      "extractedAt": "2026-09-12T02:19:33.142Z"
     },
     "global_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 5, 0)",
       "result": 1320,
       "description": "Global bonus 5: +{ All Stat (base 2)",
-      "extractedAt": "2026-09-11T06:22:39.410Z"
+      "extractedAt": "2026-09-12T02:19:33.146Z"
     }
   },
   "errors": {},

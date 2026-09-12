@@ -180,12 +180,11 @@ export class Player {
 
     getBaseClass = (): ClassIndex => {
         switch (this.classId) {
-            case ClassIndex.Beginner:
             case ClassIndex.Journeyman:
             case ClassIndex.Maestro:
             case ClassIndex.Voidwalker:
             case ClassIndex.Infinilyte:
-                return ClassIndex.Beginner;
+                return ClassIndex.Journeyman;
             case ClassIndex.Warrior:
             case ClassIndex.Barbarian:
             case ClassIndex.Squire:
@@ -307,7 +306,7 @@ export class Player {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
     }
 
-    
+
     markTalentAsEnhanced = (skillIndex: number) => {
         const talent = this.talents.find(talent => talent.skillIndex == skillIndex);
         if (talent && talent instanceof EnhancedTalent) {
@@ -331,7 +330,7 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number , companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
         const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
 
         const setBonus = (1 + equipmentSetBonus / 100);
@@ -377,8 +376,8 @@ export class Player {
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[], 
-        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, 
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[],
+        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number,
         beanstalkingItem: Food | undefined, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legenTalent25: number, cropFallEventCard: number) => {
         const gearBonus = this.getMiscBonusFromGear("Money");
         const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
@@ -429,8 +428,8 @@ export class Player {
             name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
-        this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus});
-        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus});
+        this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus });
+        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus });
     }
 
     setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
@@ -517,7 +516,7 @@ export class Player {
 
             weights.forEach(block => {
                 const contribution = totalBonusSpeed * (block.weight / totalWeight);
-                
+
                 if (block.name === "Additive Sources (Total)") {
                     additiveShareValue = contribution;
                     this.buildSpeed.sources.push({ name: block.name, value: contribution });
@@ -938,16 +937,16 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const arcade = data.get("arcade") as Arcade;
     const companions = data.get("companions") as Companion[];
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
-    
+
     players.forEach(player => {
         player.talentPoints = [];
         const talentDL: number[] = [];
         const talentDLbonus: number[] = [];
         let talentDN4 = -3
 
-        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping, 
-                                            SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching, 
-                                            SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
+        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping,
+        SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching,
+        SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
 
 
         // Base talent points
@@ -996,12 +995,12 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
                 const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
                 if (bubbleMageIndex > -1) {
                     bubbleBonus = alchemy.getBonusForPlayer(player, 2, bubbleMageIndex);
-                }                    
+                }
                 break;
-        }  
+        }
 
         for (let f = 0; 4 > f; f++) {
-                talentDLbonus[f] += bubbleBonus;       
+            talentDLbonus[f] += bubbleBonus;
         }
 
         // Sum of all sources for talent points
@@ -1011,72 +1010,72 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
             alchemy.getVialBonusForKey("Tab1Pts") +
             player.starSigns.reduce((sum, sign) => sum + sign.getBonus("Talent Points"), 0) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent1" ? stamp.getBonus() : 0), 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-            (arcade.bonuses.find(bonus => bonus.index == 16)?.getBonus() ?? 0) + 
-            (achievements[54].completed ? 5 : 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+            (arcade.bonuses.find(bonus => bonus.index == 16)?.getBonus() ?? 0) +
+            (achievements[54].completed ? 5 : 0) +
             (achievements[216].completed ? 6 : 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 10)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.FirstTab, spent: 0, totalOwned: firstTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FirstTab, spent: 0, totalOwned: firstTabPoints });
 
         // Second tab
         let secondTabPoints = 0;
-        secondTabPoints = Math.floor((3 * (player.level - 9)) + talentDL[1] + talentDLbonus[1] + 
-            alchemy.getVialBonusForKey("Tab2Pts") + 
+        secondTabPoints = Math.floor((3 * (player.level - 9)) + talentDL[1] + talentDLbonus[1] +
+            alchemy.getVialBonusForKey("Tab2Pts") +
             player.getTalentBonus(119) +
             player.getTalentBonus(299) +
             player.getTalentBonus(494) +
             player.getTalentBonus(44) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent2" ? stamp.getBonus() : 0), 0) +
-            (achievements[76].completed ? 2 : 0) + 
+            (achievements[76].completed ? 2 : 0) +
             (achievements[78].completed ? 3 : 0) +
             (achievements[230].completed ? 8 : 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 11)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.SecondTab, spent: 0, totalOwned: secondTabPoints});
+        player.talentPoints.push({ tab: TalentTab.SecondTab, spent: 0, totalOwned: secondTabPoints });
 
         // Third tab
         let thirdTabPoints = 0;
-        thirdTabPoints = Math.floor((3 * (player.level - 29)) + talentDL[1] + talentDLbonus[2] + 
-            alchemy.getVialBonusForKey("Tab3Pts") + 
+        thirdTabPoints = Math.floor((3 * (player.level - 29)) + talentDL[1] + talentDLbonus[2] +
+            alchemy.getVialBonusForKey("Tab3Pts") +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent3" ? stamp.getBonus() : 0), 0) +
-            (achievements[166].completed ? 5 : 0) + 
+            (achievements[166].completed ? 5 : 0) +
             (achievements[170].completed ? 10 : 0) +
             (achievements[219].completed ? 8 : 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 12)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.ThirdTab, spent: 0, totalOwned: thirdTabPoints});
+        player.talentPoints.push({ tab: TalentTab.ThirdTab, spent: 0, totalOwned: thirdTabPoints });
 
         // Fourth tab
         let fourthTabPoints = 0;
         if (player.getEliteClass() == ClassIndex.Maestro) {
-            fourthTabPoints = Math.floor(Math.max(0, 1 + 
-                player.getTalentBonus(34) + 
-                player.getTalentBonus(45) * optionListAccount[158])); 
+            fourthTabPoints = Math.floor(Math.max(0, 1 +
+                player.getTalentBonus(34) +
+                player.getTalentBonus(45) * optionListAccount[158]));
         } else {
-            fourthTabPoints = Math.floor(Math.max(0, 
-                3 * Math.min(player.level - 89, 100) + 
+            fourthTabPoints = Math.floor(Math.max(0,
+                3 * Math.min(player.level - 89, 100) +
                 Math.max(0, 2 * (player.level - 189)) + talentDL[2] + talentDLbonus[3] +
                 stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent4" ? stamp.getBonus() : 0), 0) +
-                (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) + 
+                (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) +
                 alchemy.getVialBonusForKey("Tab4Pts") +
                 (taskBoard.merits.find(merit => merit.index == 32)?.getBonus() ?? 0) +
-                (achievements[292].completed ? 10 : 0) + 
+                (achievements[292].completed ? 10 : 0) +
                 (achievements[295].completed ? 10 : 0) +
                 (achievements[239].completed ? 10 : 0) +
                 (achievements[240].completed ? 15 : 0) +
                 (achievements[241].completed ? 12 : 0) +
                 (breeding.shinyBonuses.find(bonus => bonus.data.index == 13)?.getBonus() ?? 0)));
         }
-        player.talentPoints.push({tab: TalentTab.FourthTab, spent: 0, totalOwned: fourthTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FourthTab, spent: 0, totalOwned: fourthTabPoints });
 
         // Fifth tab
         let fifthTabPoints = 0;
-        fifthTabPoints = Math.floor(Math.max(0, 3 * (player.level - 149) + talentDL[2] + talentDLbonus[4] + 
+        fifthTabPoints = Math.floor(Math.max(0, 3 * (player.level - 149) + talentDL[2] + talentDLbonus[4] +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent5" ? stamp.getBonus() : 0), 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (taskBoard.merits.find(merit => merit.index == 40)?.getBonus() ?? 0)));
-        player.talentPoints.push({tab: TalentTab.FifthTab, spent: 0, totalOwned: fifthTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FifthTab, spent: 0, totalOwned: fifthTabPoints });
 
         // Star talents
         let specialTabPoints = 0;
@@ -1084,23 +1083,23 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
             player.getTalentBonus(8) +
             player.getTalentBonus(622) +
             player.getTalentBonus(17) +
-            (family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) + 
+            (family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "TalentS" ? stamp.getBonus() : 0), 0) +
-            Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) + 
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-            Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) + 
-            Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) + 
-            Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100) + 
-            (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0) + 
-            (achievements[212].completed ? 10 : 0) + 
-            (achievements[289].completed ? 20 : 0) + 
+            Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+            Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) +
+            Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) +
+            Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100) +
+            (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0) +
+            (achievements[212].completed ? 10 : 0) +
+            (achievements[289].completed ? 20 : 0) +
             (achievements[305].completed ? 20 : 0) +
-            (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) + 
-            (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + 
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) +
+            (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) +
             upgradeVault.getBonusForId(53) +
             getCompanionBonus(companions, 20) +
             islandExpeditions.bonusStarTalentPoints);
-        player.talentPoints.push({tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints});
+        player.talentPoints.push({ tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints });
 
         // Calculate the points spent for each tab
         ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).forEach((talentPage, pageIndex) => {
@@ -1151,12 +1150,15 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     });
 }
 
+// This is the ES talent-level pass: Family has already calculated and cached
+// its Elemental Sorcerer result, which this function consumes with the caller's context.
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
-    // Max talent level from Elemental Sorcerer
+    // Read the cached Elemental Sorcerer Family result only after Family calculation has completed.
+    // ES can also raise Family Guy, so these cached Family results must remain the source for this pass.
     players.forEach(player => {
         const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
         // Only update if different.
@@ -1169,22 +1171,6 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
             player.extraLevelsFromES = esBonus;
         }
     })
-
-    // Max talent level from Royal Guardian All Talent Cap
-    players.forEach(player => {
-        const allTalentCap = player.royalGuardianAllTalentCap;
-        player.talents
-            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
-            .forEach(talent => {
-                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
-                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
-                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
-                talent.maxLevel += adjustment;
-                if (talent.level > 0) {
-                    talent.level += adjustment;
-                }
-            });
-    });
 
     // Super-talent levels are added after the capped all-talent aggregate.
     const superTalentBonusLevels = legendTalents.superTalentBonusLevels;
@@ -1205,6 +1191,7 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     return players;
 }
 
+// This pass must run before Family calculation so ordinary Family Guy snapshots use non-ES talent levels.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
@@ -1213,7 +1200,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const grimoire = data.get("grimoire") as Grimoire;
     const tesseract = data.get("tesseract") as Tesseract;
     const optLacc = data.get("OptLacc") as (number | string)[];
-    const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const gaming = data.get("gaming") as Gaming;
 
     // Update max talent level due to bear.
@@ -1320,6 +1307,8 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
             player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;
         })
     }
+
+    // Timmy/Super Bit is a non-ES increase, so it is included before Family captures Family Guy.
     players.forEach(player => {
         const timmyTalentedBonus = gaming.superbits[47].unlocked
             ? Math.max(0, Math.floor((player.level - 500) / 100))
@@ -1336,7 +1325,23 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
             player.extraLevelsFromSuperBit = timmyTalentedBonus;
         }
     });
-    
+
+    // Max talent level from Royal Guardian All Talent Cap
+    players.forEach(player => {
+        const allTalentCap = player.royalGuardianAllTalentCap;
+        player.talents
+            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
+            .forEach(talent => {
+                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
+                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
+                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
+                talent.maxLevel += adjustment;
+                if (talent.level > 0) {
+                    talent.level += adjustment;
+                }
+            });
+    });
+
 
     return players;
 }
@@ -1349,16 +1354,16 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
 
     // Find the highest level of the voidwalker "Enhancement Eclipse" talent.
     const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
-    switch(true) {
+    switch (true) {
         case enhancementLevel >= 25:
             // Left Hand of Learning - Enhanced bonus is double xp for mman only.
             players.forEach(player => {
                 player.markTalentAsEnhanced(42);
             });
         case enhancementLevel >= 50:
-            // Pirate Flag - Gameplay only, I don't care.
+        // Pirate Flag - Gameplay only, I don't care.
         case enhancementLevel >= 75:
-            // Radiant Chainbolt - Gameplay only, I don't care.
+        // Radiant Chainbolt - Gameplay only, I don't care.
         case enhancementLevel >= 100:
             // Sleepin' On The Job - Enhanced bonus is skilling afk for mman.
             players.forEach(player => {
@@ -1375,7 +1380,7 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
                 }
             });
         case enhancementLevel >= 150:
-            // Whale Wallop - Gameplay only, I don't care.
+        // Whale Wallop - Gameplay only, I don't care.
         case enhancementLevel >= 175:
             // Right hand of action - Enhanced Bonus is double skill eff for mman only. 
             players.forEach(player => {
@@ -1387,7 +1392,7 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
                 player.markTalentAsEnhanced(536);
             });
         case enhancementLevel >= 225:
-            // Knightly Disciple - Gameplay only, I don't care.
+        // Knightly Disciple - Gameplay only, I don't care.
         case enhancementLevel >= 250:
             // Lucky Charm - Skill exp on top of class exp.
             players.forEach(player => {
@@ -1513,7 +1518,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
     const legenTalent25 = legendTalents.getBonusFromIndex(25);
     const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);;
-    
+
     let apocalypseWoW = 0;
     const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
     const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
@@ -1565,7 +1570,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
             dungeonBonus, guildBonus8, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
             zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
-    
+
         // Crystal spawn chance
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
 

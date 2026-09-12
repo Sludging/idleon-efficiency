@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-11T06:22:37.879Z",
+  "timestamp": "2026-09-12T02:19:31.908Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 50,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-09-11T06:22:37.911Z"
+      "extractedAt": "2026-09-12T02:19:31.920Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 6,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-09-11T06:22:37.913Z"
+      "extractedAt": "2026-09-12T02:19:31.922Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
       "result": 1.59,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-09-11T06:22:37.923Z"
+      "extractedAt": "2026-09-12T02:19:31.924Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
       "result": 31.8,
       "description": "Representative Button bonus at the first category index",
-      "extractedAt": "2026-09-11T06:22:37.926Z"
+      "extractedAt": "2026-09-12T02:19:31.926Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
       "result": 278.25,
       "description": "Representative Button bonus at the downstream cooking consumer index",
-      "extractedAt": "2026-09-11T06:22:37.928Z"
+      "extractedAt": "2026-09-12T02:19:31.934Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "result": 39.75,
       "description": "Representative Button bonus at the final category index",
-      "extractedAt": "2026-09-11T06:22:37.943Z"
+      "extractedAt": "2026-09-12T02:19:31.937Z"
     }
   },
   "errors": {},

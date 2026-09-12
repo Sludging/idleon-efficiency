@@ -2,9 +2,9 @@
  * SkillStats AllEfficiencies owner-domain dependency validation.
  *
  * These comparisons isolate the producer values consumed by the delivered
- * SkillStats("AllEfficiencies") formula. Missing owner APIs intentionally
- * throw so their prerequisites remain visible instead of being duplicated in
- * Skilling.
+ * SkillStats("AllEfficiencies") formula. The Family owner is compared through
+ * its typed API; only unrelated calculations with no owning API retain an
+ * explicit missing-owner failure.
  */
 
 import {
@@ -29,6 +29,8 @@ import { Tome } from '../../../data/domain/world-4/tome';
 import { Guild } from '../../../data/domain/guild';
 import { Companion, getCompanionBonus } from '../../../data/domain/companions';
 import { Quests } from '../../../data/domain/quests';
+import { Family } from '../../../data/domain/family';
+import { ClassIndex } from '../../../data/domain/talents';
 
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
@@ -45,11 +47,12 @@ const missingOwnerApi = (signature: string): never => {
  throw new Error(`MISSING OWNER API - ${signature} is not exposed by its owning domain`);
 };
 
+
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_family_bonus_42: {
-  description: 'Family bonus quantity 42',
+  description: 'Family Hunter branch-0 class bonus (FamBonusQTYs[42])',
   extractionKey: 'all_eff_family_bonus_42',
-  domainExtractor: () => missingOwnerApi('FamBonusQTYs[42]'),
+  domainExtractor: (gameData) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Hunter)?.getBonus(),
  },
  all_eff_etc_bonus_48: {
   description: 'Player 0 equipment EtcBonuses(48) / Skill Efficiency',

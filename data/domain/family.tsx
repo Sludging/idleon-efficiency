@@ -1,4 +1,4 @@
-import { GroupBy, lavaFunc, round } from "../utility";
+import { lavaFunc, round } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { Item } from "./items";
 import { Player } from "./player";
@@ -6,6 +6,7 @@ import { ClassIndex } from "./talents";
 
 
 
+// Copied directly from the game.
 export const familyBonusMapping = [
     "NO_FAMILY_BONUS _ _ txt _ _ txt".split(" "),
     "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
@@ -18,12 +19,12 @@ export const familyBonusMapping = [
     "+{_WEAPON_POWER 25 100 decay _ _ txt".split(" "),
     "+{%_TOTAL_HP 40 100 decay _ _ txt".split(" "),
     "+{%_TOTAL_DAMAGE 20 180 decay _ _ txt".split(" "),
-    "DEATH_BRINGER _ _ txt _ _ txt".split(" "),
+    "NOPE _ _ txt _ _ txt".split(" "),
     "+{%_Refinery_Speed 50 150 decay _ _ txt".split(" "),
-    "ROYAL_GUARDIAN _ _ txt _ _ txt".split(" "),
+    "NOPE _ _ txt _ _ txt".split(" "),
+    "+{%_KILL_PER_KILL 60 800 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" "),
+    "+{%_DROP_RATE|MULTIPLIER 10 800 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
     "+{_TOTAL_AGI 1 5 intervalAdd _ _ txt".split(" "),
@@ -36,21 +37,22 @@ export const familyBonusMapping = [
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" "),
+    "{千_COINS|FROM_MOBS 1.4 800 decayMulti _ _ txt".split(" "),
     "NO_FAMILY_BONUS 0 0 add _ _ txt".split(" "),
     "+{_TOTAL_WIS 1 5 intervalAdd _ _ txt".split(" "),
     "+{_STAR_TAB|TALENT_POINTS 1 6 intervalAdd _ _ txt".split(" "),
-    "{#@HIGHER_BONUSES|FROM_GOLDEN_FOODS 0.4 100 decayMulti _ _ txt".split(" "),
+    "{千@HIGHER_BONUSES|FROM_GOLDEN_FOODS 0.4 100 decayMulti _ _ txt".split(" "),
     "+{_LV_FOR_ALL|TALENTS_ABOVE_LV_1 20 350 decay _ _ txt".split(" "),
     "SPIRITUAL_MONK 25 100 decay _ _ txt".split(" "),
     "+{%_ALL_STAT.|STR,_AGI,_WIS,_LUK. 5 180 decay _ _ txt".split(" "),
-    "ARCANE_CULTIST 25 100 decay _ _ txt".split(" "),
+    "FILLER 25 100 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
-    "FILLER _ _ txt _ _ txt".split(" "),
+    "+{%_TOTAL_DMG|MULTIPLIER 12 800 decay _ _ txt".split(" "),
     "FILLER _ _ txt _ _ txt".split(" "),
 ];
 
+// Copied directly from the game.
 export const classAccountBonus = [
     ["Z", "0"],
     ["_Base_Damage", "0"],
@@ -96,56 +98,102 @@ export const classAccountBonus = [
     ["FILLER", "129"],
 ];
 
+// For each class, list only the useful ancestor classes in its class lineage.
 export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
     [ClassIndex.None]: [],
     [ClassIndex.Beginner]: [],
-    [ClassIndex.Journeyman]: [],
-    [ClassIndex.Maestro]: [ClassIndex.Journeyman],
-    [ClassIndex.Voidwalker]: [ClassIndex.Journeyman, ClassIndex.Maestro],
-    [ClassIndex.Infinilyte]: [],
+    [ClassIndex.Journeyman]: [ClassIndex.Beginner],
+    [ClassIndex.Maestro]: [ClassIndex.Beginner, ClassIndex.Journeyman],
+    [ClassIndex.Voidwalker]: [ClassIndex.Beginner, ClassIndex.Journeyman, ClassIndex.Maestro],
+    [ClassIndex.Infinilyte]: [ClassIndex.Beginner, ClassIndex.Journeyman, ClassIndex.Maestro, ClassIndex.Voidwalker],
     [ClassIndex.Warrior]: [],
     [ClassIndex.Barbarian]: [ClassIndex.Warrior],
     [ClassIndex.Squire]: [ClassIndex.Warrior],
     [ClassIndex.Blood_Berserker]: [ClassIndex.Warrior, ClassIndex.Barbarian],
-    [ClassIndex.Death_Bringer]: [],
+    [ClassIndex.Death_Bringer]: [ClassIndex.Warrior, ClassIndex.Barbarian, ClassIndex.Blood_Berserker],
     [ClassIndex.Divine_Knight]: [ClassIndex.Warrior, ClassIndex.Squire],
-    [ClassIndex.Royal_Guardian]: [],
+    [ClassIndex.Royal_Guardian]: [ClassIndex.Warrior, ClassIndex.Squire, ClassIndex.Divine_Knight],
     [ClassIndex.Archer]: [],
     [ClassIndex.Bowman]: [ClassIndex.Archer],
     [ClassIndex.Hunter]: [ClassIndex.Archer],
     [ClassIndex.Siege_Breaker]: [ClassIndex.Archer, ClassIndex.Bowman],
-    [ClassIndex.Mayheim]: [],
-    [ClassIndex.Wind_Walker]: [],
+    [ClassIndex.Mayheim]: [ClassIndex.Archer, ClassIndex.Bowman],
+    [ClassIndex.Wind_Walker]: [ClassIndex.Archer, ClassIndex.Hunter, ClassIndex.Beast_Master],
     [ClassIndex.Beast_Master]: [ClassIndex.Archer, ClassIndex.Hunter],
     [ClassIndex.Mage]: [],
     [ClassIndex.Shaman]: [ClassIndex.Mage],
     [ClassIndex.Wizard]: [ClassIndex.Mage],
     [ClassIndex.Elemental_Sorcerer]: [ClassIndex.Mage, ClassIndex.Wizard],
-    [ClassIndex.Spiritual_Monk]: [],
+    [ClassIndex.Spiritual_Monk]: [ClassIndex.Mage, ClassIndex.Wizard],
     [ClassIndex.Bubonic_Conjuror]: [ClassIndex.Mage, ClassIndex.Shaman],
-    [ClassIndex.Arcane_Cultist]: [],
+    [ClassIndex.Arcane_Cultist]: [ClassIndex.Mage, ClassIndex.Shaman, ClassIndex.Bubonic_Conjuror],
 }
 
+// Family bonuses are calculated at runtime by the game, we can't do that so we store candidates.
+// We store the Family bonus value, its owner ID, and that owner's Family Guy percentage
+// captured during the Family phase.
+type FamilyBonusCandidate = {
+    value: number;
+    playerID: number;
+    familyGuyBonus: number;
+};
+
 export class FamilyBonus {
-    constructor(public classIndex: ClassIndex, public bonus: string, public value: number, public playerID: number) { }
+    private readonly candidates: FamilyBonusCandidate[] = [];
+    // Each player gets its own set of results.
+    private readonly results: Map<number | undefined, number> = new Map();
+
+    // highestFamilyGuy is used only by the account-wide multiplier on Divine Knight and Siege Breaker.
+    constructor(public classIndex: ClassIndex, public bonus: string, public highestFamilyGuy: number) { }
 
     getBonusText = (player: Player | undefined = undefined, rounding: boolean = true) => {
         return this.bonus.replace(/_/g, " ").replace("|", " ").replace("#@", "x ").replace(/{/g, this.getBonus(player, rounding).toString());
     }
 
     getBonus = (player: Player | undefined = undefined, rounding: boolean = false) => {
-        let familyManBoost = 1;
-        // Only the highest player of a class gets boosted by family guy, so check if same class and if highest level of that class.
-        if (player && player.classId == this.classIndex && player.playerID == this.playerID) {
-            familyManBoost += player.getTalentBonus(144) / 100;
-        }
+        const familyBonus = this.results.get(player?.playerID) ?? 0;
+        return rounding ? round(familyBonus) : familyBonus;
+    }
 
-        return rounding ? round(this.value * familyManBoost) : this.value * familyManBoost;
+    addCandidate = (value: number, playerID: number, familyGuyBonus: number) => {
+        this.candidates.push({ value, playerID, familyGuyBonus });
+    }
+
+    // Pre-calculate the cached results so we don't have to recalculate them every time a we query the bonus.
+    calculateResults = (playerIDs: Iterable<number>) => {
+        this.results.clear();
+        this.results.set(undefined, this.calculateResult(undefined));
+        for (const playerID of playerIDs) {
+            this.results.set(playerID, this.calculateResult(playerID));
+        }
+    }
+
+    private calculateResult = (playerID: number | undefined) => {
+        let familyBonus = 0;
+        const usesAccountWideFamilyGuy = [ClassIndex.Siege_Breaker, ClassIndex.Divine_Knight].includes(this.classIndex);
+
+        // Candidates are considered in game order. Compare each raw candidate to the current stored
+        // result; when it wins, write it first, then apply the owner's captured Family Guy value for
+        // the requested player context. DK/SB overwrite that owner-specific value with the account-wide
+        // Family Guy multiplier, rather than stacking both multipliers.
+        this.candidates.forEach(candidate => {
+            if (candidate.value > familyBonus) {
+                familyBonus = candidate.value;
+                if (usesAccountWideFamilyGuy) {
+                    familyBonus *= 1 + this.highestFamilyGuy / 100;
+                } else if (playerID === candidate.playerID) {
+                    familyBonus *= 1 + candidate.familyGuyBonus / 100;
+                }
+            }
+        });
+
+        return familyBonus;
     }
 }
 
 export class Family extends Domain {
     classBonus: Map<ClassIndex, FamilyBonus> = new Map()
+    getClassBonus = (classIndex: ClassIndex) => this.classBonus.get(classIndex);
 
     getRawKeys(): RawData[] {
         return [];
@@ -160,31 +208,60 @@ export class Family extends Domain {
     }
 }
 
+// This function runs in the pre-ES phase to match the game behavior.
 export const calculateFamily = (data: Map<string, any>) => {
     const family = data.get("family") as Family;
     const players = data.get("players") as Player[];
 
-    const highestFamilyGuy = players.slice().sort((player1, player2) => player1.getTalentBonus(144) > player2.getTalentBonus(144) ? -1 : 1)[0];
+    family.classBonus.clear();
+    const highestFamilyGuy = players.reduce((highest, player) => Math.max(highest, getSpecialFamilyGuyBonus(player)), 0);
+    const playerIDs = players.map(player => player.playerID);
 
-    GroupBy(players, "classId").forEach(classPlayers => {
-        const highestLevel = classPlayers.slice().sort((player1, player2) => player1.level > player2.level ? -1 : 1)[0];
-        const bonusData = familyBonusMapping[highestLevel.classId];
-        let familyManBoost = 1;
-        // For siege breaker and divine knight bonus, the highest family guy bonus (across all players, not just dk/sb) boosts the family bonus.
-        if ([ClassIndex.Siege_Breaker, ClassIndex.Divine_Knight].includes(highestLevel.classId)) {
-            familyManBoost += highestFamilyGuy.getTalentBonus(144) / 100;
-        }
-        const familyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[highestLevel.classId][1]), Number(bonusData[1]), Number(bonusData[2]), false);
-        family.classBonus.set(highestLevel.classId, new FamilyBonus(highestLevel.classId, bonusData[0], familyBonus * familyManBoost, highestLevel.playerID));
-        FamilyBonusRelations[highestLevel.classId].forEach((subClass) => {
-            const bonusData = familyBonusMapping[subClass];
-            const subClassFamilyBonus = lavaFunc(bonusData[3], highestLevel.level - Number(classAccountBonus[subClass][1]), Number(bonusData[1]), Number(bonusData[2]), false)
-            // if we never seen this subclass or the value is higher, set a new family bonus.
-            const currentBonus = family.classBonus.get(subClass);
-            if (subClassFamilyBonus > (currentBonus?.getBonus() ?? 0)) {
-                family.classBonus.set(subClass, new FamilyBonus(highestLevel.classId, bonusData[0], subClassFamilyBonus, highestLevel.playerID));
-            }
-        })
-    })
+    players.forEach(player => {
+        // The game uses the pre-ES bonus, so we need to capture it explicitly at this stage.
+        const familyGuyBonus = player.getTalentBonus(144);
+        // Family considers each useful ancestor lineage before adding the owner's direct class.
+        const familyLineage = FamilyBonusRelations[player.classId] ?? [];
+        familyLineage.forEach(classId => updateFamilyBonus(family, player, classId, highestFamilyGuy, familyGuyBonus));
+        updateFamilyBonus(family, player, player.classId, highestFamilyGuy, familyGuyBonus);
+    });
+
+    family.classBonus.forEach(familyBonus => familyBonus.calculateResults(playerIDs));
     return family;
+}
+
+// Separate rule for Divine Knight and Siege Breaker: their Family value uses the best
+// account-wide Family Guy percentage, calculated without Timmy/Super Bit.
+const getSpecialFamilyGuyBonus = (player: Player) => {
+    const familyGuy = player.getTalent(144);
+    if (!familyGuy || familyGuy.level <= 0) {
+        return 0;
+    }
+
+    // Remove only Timmy/Super Bit here before calculating.
+    const databaseLevel = Math.max(0, familyGuy.level - player.extraLevelsFromSuperBit);
+    return lavaFunc(familyGuy.funcX, databaseLevel, familyGuy.x1, familyGuy.x2);
+}
+
+const updateFamilyBonus = (family: Family, player: Player, classId: ClassIndex, highestFamilyGuy: number, familyGuyBonus: number) => {
+    const bonusData = familyBonusMapping[classId];
+    if (!bonusData) {
+        return;
+    }
+
+    const familyBonus = lavaFunc(
+        bonusData[3],
+        Math.max(0, Math.round(player.level - Number(classAccountBonus[classId][1]))),
+        Number(bonusData[1]),
+        Number(bonusData[2]),
+        false
+    );
+    // First, create a bonus if non exist for this classId yet.
+    let familyClassBonus = family.classBonus.get(classId);
+    if (!familyClassBonus) {
+        familyClassBonus = new FamilyBonus(classId, bonusData[0], highestFamilyGuy);
+        family.classBonus.set(classId, familyClassBonus);
+    }
+    // Then add candidate player to later calculate the final bonus.
+    familyClassBonus.addCandidate(familyBonus, player.playerID, familyGuyBonus);
 }

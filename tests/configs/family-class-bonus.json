@@ -1,0 +1,126 @@
+{
+  "description": "Extract branch-0 Family Class Bonuses and The Family Guy input for the Family domain",
+  "target": "Family Class Bonus",
+  "extractions": [
+    {
+      "label": "family_bonus_2",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[2]",
+      "description": "Beginner Family Bonus branch 0 (FamBonusQTYs[2])"
+    },
+    {
+      "label": "family_bonus_4",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[4]",
+      "description": "Journeyman Family Bonus branch 0 (FamBonusQTYs[4])"
+    },
+    {
+      "label": "family_bonus_6",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[6]",
+      "description": "Maestro Family Bonus branch 0 (FamBonusQTYs[6])"
+    },
+    {
+      "label": "family_bonus_8",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[8]",
+      "description": "Voidwalker Family Bonus branch 0 (FamBonusQTYs[8])"
+    },
+    {
+      "label": "family_bonus_14",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[14]",
+      "description": "Warrior Family Bonus branch 0 (FamBonusQTYs[14])"
+    },
+    {
+      "label": "family_bonus_16",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[16]",
+      "description": "Barbarian Family Bonus branch 0 (FamBonusQTYs[16])"
+    },
+    {
+      "label": "family_bonus_18",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
+      "description": "Squire Family Bonus branch 0 (FamBonusQTYs[18])"
+    },
+    {
+      "label": "family_bonus_20",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[20]",
+      "description": "Blood Berserker Family Bonus branch 0 (FamBonusQTYs[20])"
+    },
+    {
+      "label": "family_bonus_24",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[24]",
+      "description": "Divine Knight Family Bonus branch 0 (FamBonusQTYs[24])"
+    },
+    {
+      "label": "family_bonus_28",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[28]",
+      "description": "Death Bringer Family Bonus branch 0 (FamBonusQTYs[28])"
+    },
+    {
+      "label": "family_bonus_32",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[32]",
+      "description": "Royal Guardian Family Bonus branch 0 (FamBonusQTYs[32])"
+    },
+    {
+      "label": "family_bonus_38",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[38]",
+      "description": "Archer Family Bonus branch 0 (FamBonusQTYs[38])"
+    },
+    {
+      "label": "family_bonus_40",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[40]",
+      "description": "Bowman Family Bonus branch 0 (FamBonusQTYs[40])"
+    },
+    {
+      "label": "family_bonus_42",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
+      "description": "Hunter Family Bonus branch 0 (FamBonusQTYs[42])"
+    },
+    {
+      "label": "family_bonus_44",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[44]",
+      "description": "Siege Breaker Family Bonus branch 0 (FamBonusQTYs[44])"
+    },
+    {
+      "label": "family_bonus_50",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[50]",
+      "description": "Beast Master Family Bonus branch 0 (FamBonusQTYs[50])"
+    },
+    {
+      "label": "family_bonus_58",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[58]",
+      "description": "Wind Walker Family Bonus branch 0 (FamBonusQTYs[58])"
+    },
+    {
+      "label": "family_bonus_62",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[62]",
+      "description": "Mage Family Bonus branch 0 (FamBonusQTYs[62])"
+    },
+    {
+      "label": "family_bonus_64",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[64]",
+      "description": "Wizard Family Bonus branch 0 (FamBonusQTYs[64])"
+    },
+    {
+      "label": "family_bonus_66",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
+      "description": "Shaman Family Bonus branch 0 (FamBonusQTYs[66])"
+    },
+    {
+      "label": "family_bonus_68",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[68]",
+      "description": "Elemental Sorcerer Family Bonus branch 0 (FamBonusQTYs[68])"
+    },
+    {
+      "label": "family_bonus_72",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[72]",
+      "description": "Bubonic Conjuror Family Bonus branch 0 (FamBonusQTYs[72])"
+    },
+    {
+      "label": "family_bonus_80",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[80]",
+      "description": "Arcane Cultist Family Bonus branch 0 (FamBonusQTYs[80])"
+    },
+    {
+      "label": "family_guy_talent_144",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
+      "description": "Active character The Family Guy talent bonus used to boost Family Bonuses"
+    }
+  ]
+}
