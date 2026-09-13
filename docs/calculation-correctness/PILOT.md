@@ -2,7 +2,7 @@
 
 ## Goal and review point
 
-Evaluate whether the process leads to correct calculations, clear decisions about dependencies, and useful test coverage. Record observations from real cases so the human can decide what to improve.
+Evaluate whether the process leads to correct calculations, suitable website implementations, clear dependency decisions, and useful test coverage.
 
 Use pilot [#368](https://github.com/Sludging/idleon-efficiency/issues/368). Review iteration two after **five distinct closed cases**, including resolved and aborted outcomes. Mark each record `Iteration 2`; preserve earlier records. Count cases by issue number. If a case reopens, exclude it from the closed count and update its existing entry when it closes again.
 
@@ -11,6 +11,7 @@ Use pilot [#368](https://github.com/Sludging/idleon-efficiency/issues/368). Revi
 Use the [case working note](PLAYBOOK.md#shared-case-working-note) to retain useful observations when work passes between stages or a progress report is due. Examples include:
 
 - A configuration change triggered extraction, or existing matching results were reused.
+- Plan approval corrected the proposed design before tests or implementation; later evidence required a plan change.
 - Tests established a selected mismatch or exposed a direct dependency before implementation; implementation order or a human exception was recorded.
 - Parameter coverage, scope, or ownership was corrected.
 - A timed stop/report exposed a stall or drift, or enabled a concrete next action.
@@ -40,7 +41,7 @@ At resolution or abort, summarize the selected calculation's result and process 
 
 Mark **Tests before implementation** as `satisfied` when core and parameter tests ran before domain edits, parameter tests passed, and the coordinator approved the tests-stage result. Passing core tests can proceed directly to review. Use `violated` when domain edits came first, and `not established` when the earlier test result is unavailable.
 
-Normal completion also requires targeted tests passing at tolerance `0`, a fresh reviewer `PASS` covering the final changes, and human acceptance. An exception states what was omitted or supplied through human work. Record review that ran but did not pass separately from review that never ran. Correction rounds count observed `CHANGES_REQUIRED` results.
+Use the [playbook's completion requirements](PLAYBOOK.md#6-complete-the-case). An exception states what was omitted or supplied through human work. Record review that ran but did not pass separately from review that never ran. Correction rounds count observed `CHANGES_REQUIRED` results.
 
 ## Tracker maintenance
 
@@ -56,6 +57,6 @@ After the fifth distinct closed case, post one iteration-two review-ready notice
 4. **Worker context:** Did a continuing worker context reduce handoff work while staying focused? When was a fresh context more useful?
 5. **Reviewer independence:** Did the recorded findings help the reviewer locate the relevant code while still checking game behavior, implementation, and tests independently?
 6. **Timed reports:** Did ten-minute reports expose stalls or drift early enough to act, and were stop requests honored?
-7. **Coordination and outcomes:** Did the coordinator follow the stage requirements and ask the human about ambiguity? Which cases completed the process, which used an exception or abort, and what did corrections reveal?
+7. **Coordination and outcomes:** Did plan approval settle the website design before changes? Did workers follow it, and did later corrections repeat decisions already made? Which cases completed the process, and which used an exception or abort?
 
 Compare the calculation results, process observations, exceptions, and coverage limits recorded in the cases. Use timed reports to discuss the work they describe; overall claims about speed or cost need measurements of those quantities.

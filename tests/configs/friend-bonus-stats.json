@@ -1,0 +1,61 @@
+{
+  "description": "Extract the seven player-facing Friend Bonus stats and the cross-domain inputs used by their slot and multiplier helpers. OptionsListAccount[476] is the raw assigned-bonus list, not a calculated parameter.",
+  "target": "Thingies FriendBonusStatz (Friend Bonuses / Stats)",
+  "extractions": [
+    {
+      "label": "friend_bonus_stat_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
+      "description": "Friend Bonus: Total Damage (stat index 0)"
+    },
+    {
+      "label": "friend_bonus_stat_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 1, 0)",
+      "description": "Friend Bonus: Class EXP gain (stat index 1)"
+    },
+    {
+      "label": "friend_bonus_stat_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
+      "description": "Friend Bonus: Skill Efficiency (stat index 2)"
+    },
+    {
+      "label": "friend_bonus_stat_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 3, 0)",
+      "description": "Friend Bonus: Drop Rate (stat index 3)"
+    },
+    {
+      "label": "friend_bonus_stat_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 4, 0)",
+      "description": "Friend Bonus: Skill EXP gain (stat index 4)"
+    },
+    {
+      "label": "friend_bonus_stat_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 5, 0)",
+      "description": "Friend Bonus: More Coins (stat index 5)"
+    },
+    {
+      "label": "friend_bonus_stat_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 6, 0)",
+      "description": "Friend Bonus: Extra Kills (stat index 6)"
+    },
+    {
+      "label": "friend_bonus_companion_44",
+      "expression": "idleon.callFunction(\"Companions\", 44)",
+      "description": "Companion 44 bonus that adds a Friend Bonus slot"
+    },
+    {
+      "label": "friend_bonus_companion_30",
+      "expression": "idleon.callFunction(\"Companions\", 30)",
+      "description": "Companion 30 base effect that doubles Friend Bonuses and adds slots"
+    },
+    {
+      "label": "friend_bonus_companion_lv2_44",
+      "expression": "idleon.callFunction(\"CompLV2\", 44)",
+      "description": "Companion 44 level-two state that adds 25% to Friend Bonuses"
+    },
+    {
+      "label": "friend_bonus_event_shop_22",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0)",
+      "description": "Friendly Slot Event Shop ownership that adds a Friend Bonus slot"
+    }
+  ]
+}

@@ -1,137 +1,137 @@
 {
-  "timestamp": "2026-09-12T02:19:33.888Z",
+  "timestamp": "2026-09-12T12:05:43.095Z",
   "extractions": {
     "tome_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
       "result": 1466.7408372268155,
       "description": "Tome Bonus index 0: +{% DMG from Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses",
-      "extractedAt": "2026-09-12T02:19:33.893Z"
+      "extractedAt": "2026-09-12T12:05:43.107Z"
     },
     "tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
       "result": 548.0283383009655,
       "description": "Tome Bonus index 1: optional +{% Skill Eff bonus after 4,000 Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses",
-      "extractedAt": "2026-09-12T02:19:33.894Z"
+      "extractedAt": "2026-09-12T12:05:43.109Z"
     },
     "tome_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 2, 0)",
       "result": 254.07636761104854,
       "description": "Tome Bonus index 2: optional +{% Drop Rate bonus after 8,000 Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses",
-      "extractedAt": "2026-09-12T02:19:33.897Z"
+      "extractedAt": "2026-09-12T12:05:43.111Z"
     },
     "tome_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 3, 0)",
       "result": 807.9853049828752,
       "description": "Tome Bonus index 3: +{% STR stat bonus",
-      "extractedAt": "2026-09-12T02:19:33.904Z"
+      "extractedAt": "2026-09-12T12:05:43.113Z"
     },
     "tome_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 4, 0)",
       "result": 96.87674027844456,
       "description": "Tome Bonus index 4: +{% AGI stat bonus",
-      "extractedAt": "2026-09-12T02:19:33.906Z"
+      "extractedAt": "2026-09-12T12:05:43.115Z"
     },
     "tome_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 5, 0)",
       "result": 94.25413223140497,
       "description": "Tome Bonus index 5: +{% WIS stat bonus",
-      "extractedAt": "2026-09-12T02:19:33.907Z"
+      "extractedAt": "2026-09-12T12:05:43.124Z"
     },
     "tome_bonus_6": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
       "result": 0,
       "description": "Tome Bonus index 6: Golden Tome DMG Multi bonus unlocked by owning Golden Tome in the Event Shop, with Grimoire upgrade 17 and Troll equipment set bonuses",
-      "extractedAt": "2026-09-12T02:19:33.909Z"
+      "extractedAt": "2026-09-12T12:05:43.126Z"
     },
     "tome_bonus_7": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 7, 0)",
       "result": 0,
       "description": "Tome Bonus index 7: Singed Tome Drop Rate Multi bonus unlocked by owning Singed Tome in the Event Shop, with Grimoire upgrade 17 and Troll equipment set bonuses",
-      "extractedAt": "2026-09-12T02:19:33.911Z"
+      "extractedAt": "2026-09-12T12:05:43.128Z"
     },
     "tome_bonus_score": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
       "result": 43180,
       "description": "Tome score input used by Tome Bonuses, including the 4,000- and 8,000-score conditions",
-      "extractedAt": "2026-09-12T02:19:33.913Z"
+      "extractedAt": "2026-09-12T12:05:43.130Z"
     },
     "tome_bonus_unlocked_0": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",
       "result": 1,
       "description": "Tome Bonus index 0 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.920Z"
+      "extractedAt": "2026-09-12T12:05:43.131Z"
     },
     "tome_bonus_unlocked_1": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][1]",
       "result": 1,
       "description": "Tome Bonus index 1 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.922Z"
+      "extractedAt": "2026-09-12T12:05:43.133Z"
     },
     "tome_bonus_unlocked_2": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][2]",
       "result": 1,
       "description": "Tome Bonus index 2 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.924Z"
+      "extractedAt": "2026-09-12T12:05:43.143Z"
     },
     "tome_bonus_unlocked_3": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][3]",
       "result": 1,
       "description": "Tome Bonus index 3 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.925Z"
+      "extractedAt": "2026-09-12T12:05:43.145Z"
     },
     "tome_bonus_unlocked_4": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][4]",
       "result": 1,
       "description": "Tome Bonus index 4 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.927Z"
+      "extractedAt": "2026-09-12T12:05:43.147Z"
     },
     "tome_bonus_unlocked_5": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][5]",
       "result": 1,
       "description": "Tome Bonus index 5 unlock state from the live Tome actor",
-      "extractedAt": "2026-09-12T02:19:33.929Z"
+      "extractedAt": "2026-09-12T12:05:43.148Z"
     },
     "tome_bonus_grimoire_17": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
       "result": 85,
       "description": "Grimoire upgrade 17 bonus applied to Tome Bonuses",
-      "extractedAt": "2026-09-12T02:19:33.936Z"
+      "extractedAt": "2026-09-12T12:05:43.157Z"
     },
     "tome_bonus_troll_set": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
       "result": 25,
       "description": "Troll equipment set bonus applied to Tome Bonuses",
-      "extractedAt": "2026-09-12T02:19:33.938Z"
+      "extractedAt": "2026-09-12T12:05:43.160Z"
     },
     "tome_bonus_event_shop_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 0, 0)",
       "result": 0,
       "description": "Golden Tome ownership in the Event Shop gates Tome Bonus index 6 DMG Multi",
-      "extractedAt": "2026-09-12T02:19:33.940Z"
+      "extractedAt": "2026-09-12T12:05:43.161Z"
     },
     "tome_bonus_event_shop_27": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 27, 0)",
       "result": 0,
       "description": "Singed Tome ownership in the Event Shop gates Tome Bonus index 7 Drop Rate Multi",
-      "extractedAt": "2026-09-12T02:19:33.942Z"
+      "extractedAt": "2026-09-12T12:05:43.163Z"
     },
     "tome_bonus_alchemy_str": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
       "result": 807.9853049828752,
       "description": "Final active-player Alchemy +{% STR bubble bonus consumed by Tome Bonus index 3",
-      "extractedAt": "2026-09-12T02:19:33.943Z"
+      "extractedAt": "2026-09-12T12:05:43.164Z"
     },
     "tome_bonus_alchemy_agi": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
       "result": 96.87674027844456,
       "description": "Final active-player Alchemy +{% AGI bubble bonus consumed by Tome Bonus index 4",
-      "extractedAt": "2026-09-12T02:19:33.945Z"
+      "extractedAt": "2026-09-12T12:05:43.172Z"
     },
     "tome_bonus_alchemy_wis": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
       "result": 94.25413223140497,
       "description": "Final active-player Alchemy +{% WIS bubble bonus consumed by Tome Bonus index 5",
-      "extractedAt": "2026-09-12T02:19:33.952Z"
+      "extractedAt": "2026-09-12T12:05:43.174Z"
     }
   },
   "errors": {},

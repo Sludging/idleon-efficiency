@@ -130,7 +130,7 @@ export const FamilyBonusRelations: Record<ClassIndex, ClassIndex[]> = {
 }
 
 // Family bonuses are calculated at runtime by the game, we can't do that so we store candidates.
-// We store the Family bonus value, its owner ID, and that owner's Family Guy percentage
+// For each player we store the Family bonus value, the player ID, and that player's Family Guy percentage
 // captured during the Family phase.
 type FamilyBonusCandidate = {
     value: number;
@@ -226,6 +226,7 @@ export const calculateFamily = (data: Map<string, any>) => {
         updateFamilyBonus(family, player, player.classId, highestFamilyGuy, familyGuyBonus);
     });
 
+    // Pre-calculate the family bonus for each player based on the candidates collected above.
     family.classBonus.forEach(familyBonus => familyBonus.calculateResults(playerIDs));
     return family;
 }

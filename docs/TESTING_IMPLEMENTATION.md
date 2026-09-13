@@ -34,7 +34,7 @@ The [extraction helper guide](../tests/helpers/README.md) explains runtime prere
 node tests/helpers/extract-all-game-data.js
 ```
 
-In a supervised case, the coordinator runs extraction and returns the result to the worker. Use new results after the command succeeds. For a technical failure with unchanged valid config, report the concrete error and any human action needed.
+In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval) before changing tests or extraction configs. Use the approved scope and interface. The coordinator runs extraction and returns the result to the worker. Use new results after the command succeeds. For a technical failure with unchanged valid config, report the concrete error and any human action needed.
 
 ## Compare the same game state
 

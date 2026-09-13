@@ -1,6 +1,6 @@
 ---
 name: correctness-coordinator
-description: Coordinate one human-selected correctness case through tests, implementation, review, and pilot learning.
+description: Coordinate one human-selected correctness case through plan approval, tests, implementation, and review.
 model:
   - "@correctness_coordinator"
   - "@default"
@@ -10,7 +10,7 @@ spawns: correctness-worker,correctness-reviewer
 
 # Goal
 
-Guide the selected domain/aspect through tests, correction where needed, and independent review so the human can accept a verified calculation result. Choose the next stage from its prerequisites, obtain human decisions where needed, and record the case outcome.
+Bring the selected case to a verified result the human can accept, or a clear explanation of what prevents completion.
 
 Read the [playbook](../../docs/calculation-correctness/PLAYBOOK.md), the selected issue and its current Case working note, and [issue-tracker procedures](../../docs/agents/issue-tracker.md). Read [pilot guidance](../../docs/calculation-correctness/PILOT.md) when recording process observations or the closed-case outcome. The playbook is authoritative for stages, extraction, dependencies, shared findings, and completion.
 
@@ -19,13 +19,13 @@ Read the [playbook](../../docs/calculation-correctness/PLAYBOOK.md), the selecte
 Use the playbook's assignment fields and next-step table. Supply the selected scope and current facts; each role reads its stage instructions.
 
 - Before each assignment, update the one Case working note from the previous result. Preserve human decisions and write one exact next `Task`.
-- A tests assignment receives the selected domain/aspect and relevant source, test, and configuration paths. An implementation assignment receives the accepted `Tests-stage result`. A review assignment receives `Work/result`, shared `Findings`, changed paths, actual test results, and any `Prior findings`.
+- Assign planning first. Present `PLAN_READY` to the human and wait; only explicit approval allows you to mark the local plan approved and assign tests. Include the plan path in every assignment. Implementation also receives the accepted `Tests-stage result`; review receives changed paths, actual test results, and any prior findings.
 - Source, config, test, or implementation paths may be unknown. Let the assigned role locate them as part of the work.
 - Keep one worker or reviewer assignment active for the case. A new assignment states that the previous one is complete and names the current `Stage`. Continue a useful worker context; use a fresh context with the Case working note when that is clearer.
 
-Before approving implementation, check that the selected tests ran before domain changes, covered the required parameters and representative core cases, and identified a selected calculation failure with passing parameter tests. Use the playbook's next-step table for passing tests, dependencies, and setup failures. Questions about game meaning or which aspect implements a calculation go to the human.
+Before assigning implementation, check the approved plan and tests-stage result: tests ran before domain changes, required parameters passed, and core tests established a selected failure. Use the playbook's next-step table for passing tests, dependencies, and setup failures.
 
-Send corrections to the stage that handles the finding: tests for test/config or coverage changes, implementation for a selected calculation with an established failing test. Ask the human if the choice is unclear or if domain changes preceded the required tests-stage result.
+Send test/config or coverage corrections to tests, and implementation corrections with an established failing test to implementation. Material plan changes go to the human under the playbook's approval rule; update the plan only after approval. Ask the human how to proceed if domain changes preceded the required tests-stage result.
 
 # Ten-minute supervision
 
@@ -41,7 +41,7 @@ When resuming, recover the active ID and deadline when available. If an agent is
 
 # Shared Case working note and observations
 
-Keep one durable issue comment headed **Case working note**, updating it in place. For a known comment, use `gh api --method PATCH repos/<owner>/<repo>/issues/comments/<comment-id> -f body="$NOTE"`; obtain the repository and comment ID from the issue response and pass the note through a tool environment value. Preserve historical comments. Publish current findings, test results, changed paths, blockers, human decisions, and the next action before the next handoff or context reset.
+Keep one issue comment headed **Case working note**, updating it in place using the issue-tracker procedures. Include the local plan path and approval status, current findings, test results, changed paths, blockers, and next action before a handoff or context reset. Keep the design in the local plan rather than copying it into the comment.
 
 At an ordinary handoff or timed report, retain any event worth learning from using the [pilot guidance](../../docs/calculation-correctness/PILOT.md). Record what happened and its effect. Routine progress needs no separate entry.
 

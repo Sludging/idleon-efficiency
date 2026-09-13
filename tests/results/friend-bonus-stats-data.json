@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-09-12T12:05:41.996Z",
+  "extractions": {
+    "friend_bonus_stat_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
+      "result": 206.30463417554785,
+      "description": "Friend Bonus: Total Damage (stat index 0)",
+      "extractedAt": "2026-09-12T12:05:42.006Z"
+    },
+    "friend_bonus_stat_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 1, 0)",
+      "result": 61.89139025266436,
+      "description": "Friend Bonus: Class EXP gain (stat index 1)",
+      "extractedAt": "2026-09-12T12:05:42.008Z"
+    },
+    "friend_bonus_stat_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
+      "result": 103.15231708777392,
+      "description": "Friend Bonus: Skill Efficiency (stat index 2)",
+      "extractedAt": "2026-09-12T12:05:42.009Z"
+    },
+    "friend_bonus_stat_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 3, 0)",
+      "result": 51.57615854388696,
+      "description": "Friend Bonus: Drop Rate (stat index 3)",
+      "extractedAt": "2026-09-12T12:05:42.011Z"
+    },
+    "friend_bonus_stat_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 4, 0)",
+      "result": 61.89139025266436,
+      "description": "Friend Bonus: Skill EXP gain (stat index 4)",
+      "extractedAt": "2026-09-12T12:05:42.013Z"
+    },
+    "friend_bonus_stat_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 5, 0)",
+      "result": 82.52185367021914,
+      "description": "Friend Bonus: More Coins (stat index 5)",
+      "extractedAt": "2026-09-12T12:05:42.015Z"
+    },
+    "friend_bonus_stat_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 6, 0)",
+      "result": 0,
+      "description": "Friend Bonus: Extra Kills (stat index 6)",
+      "extractedAt": "2026-09-12T12:05:42.022Z"
+    },
+    "friend_bonus_companion_44": {
+      "expression": "idleon.callFunction(\"Companions\", 44)",
+      "result": 1,
+      "description": "Companion 44 bonus that adds a Friend Bonus slot",
+      "extractedAt": "2026-09-12T12:05:42.024Z"
+    },
+    "friend_bonus_companion_30": {
+      "expression": "idleon.callFunction(\"Companions\", 30)",
+      "result": 1,
+      "description": "Companion 30 base effect that doubles Friend Bonuses and adds slots",
+      "extractedAt": "2026-09-12T12:05:42.026Z"
+    },
+    "friend_bonus_companion_lv2_44": {
+      "expression": "idleon.callFunction(\"CompLV2\", 44)",
+      "result": 0,
+      "description": "Companion 44 level-two state that adds 25% to Friend Bonuses",
+      "extractedAt": "2026-09-12T12:05:42.027Z"
+    },
+    "friend_bonus_event_shop_22": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0)",
+      "result": 1,
+      "description": "Friendly Slot Event Shop ownership that adds a Friend Bonus slot",
+      "extractedAt": "2026-09-12T12:05:42.029Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
