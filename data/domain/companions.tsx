@@ -8,10 +8,13 @@ import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { CompanionModel } from "./model/companionModel";
 import { Player } from "./player";
+import { mergeCompanionStates } from "./companions/companionState";
+import type { CompanionLevel, CompanionState } from "./companions/companionState";
 
 export class Companion {
     owned: boolean = false;
     real: boolean = false;
+    level: CompanionLevel = 1;
     constructor(public id: number, public name: string, public data: CompanionModel, public imageData: ImageData) { }
 
     getBonus = () => {
@@ -28,10 +31,18 @@ export class Companion {
     }
 }
 
-/** Returns the numeric bonus exposed by an owned companion to game formulas. */
-export const getCompanionBonus = (companions: Companion[], index: number): number => {
+/** Returns the metadata bonus for an owned companion at the requested level. */
+export const getCompanionBonus = (companions: Companion[], index: number, level: CompanionLevel = 1): number => {
     const companion = companions.find(companion => companion.id === index);
-    return companion?.owned ? companion.data.bonus : 0;
+    if (!companion?.owned) {
+        return 0;
+    }
+
+    if (level === 2) {
+        return companion.level === 2 ? companion.data.bonus2 ?? 0 : 0;
+    }
+
+    return companion.data.bonus;
 };
 
 export class Companions extends Domain {
@@ -46,7 +57,7 @@ export class Companions extends Domain {
 
     parse = (data: Map<string, any>) => {
         const companions = data.get(this.getDataKey()) as Companion[];
-        const ownedCompanions = data.get("ownedCompanions") as number[]
+        const ownedCompanions = mergeCompanionStates(data.get("ownedCompanions") as CompanionState[]);
 
         const localCompanions = localStorage.getItem("companions");
         const editedCompanions: Companion[] = [];
@@ -54,15 +65,16 @@ export class Companions extends Domain {
             editedCompanions.push(...JSON.parse(localCompanions) as Companion[]);
         }
 
+        const sourceCompanions = new Map(ownedCompanions.map(companion => [companion.id, companion]));
         companions.forEach(companion => {
+            const sourceCompanion = sourceCompanions.get(companion.id);
             const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-            // Check if user edited it before, else default to false.
-            const editState = editedCompanion ? editedCompanion.owned : false;
-            // We might have an old edit state, so priority for source of truth is currently owned companions
-            // if that one is false, use the edited value.
-            companion.owned = ownedCompanions.includes(companion.id) || editState;
-            companion.real = ownedCompanions.includes(companion.id);
-        })
+            // Source records own the level; local edits can only override ownership.
+            companion.level = sourceCompanion?.level ?? 1;
+            companion.real = sourceCompanion !== undefined;
+            // Preserve the existing ownership for unowned companions without changing level state.
+            companion.owned = companion.real || (editedCompanion?.owned ?? false);
+        });
     }
 
     getRawKeys(): RawData[] {

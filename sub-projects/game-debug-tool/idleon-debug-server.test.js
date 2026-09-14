@@ -99,7 +99,12 @@ test('getCloudSave uses the game companion list instead of the real Realtime DB 
     const save = { CloudsaveTimer: 123, BundlesReceived: '{"bun_q":1}', 'EquipQTY_-1': 'should-be-filtered' };
     const serverVars = { GameVERSION: 135, TestData: 'Hello There' };
     const playerNames = ['TestPlayer1', 'TestPlayer2'];
-    const companions = [0, 1, 2, 3];
+    const companions = [
+        '0,0,0,0,1,0,0',
+        '1,0,0,0,0,0,0',
+        '2,0,0,0,1,0,0',
+        '3,0,0,0,0,0,0'
+    ];
     let request;
     const requestedPaths = [];
     const requestedOptions = [];
@@ -156,7 +161,12 @@ test('getCloudSave uses the game companion list instead of the real Realtime DB 
     assert.equal(result.CloudsaveTimer, 123);
     assert.equal(result.BundlesReceived, '{"bun_q":1}');
     assert.equal(result.playerNames, playerNames);
-    assert.deepEqual(result.companions, companions);
+    assert.deepEqual(JSON.parse(JSON.stringify(result.companions)), [
+        { id: 0, level: 2 },
+        { id: 1, level: 1 },
+        { id: 2, level: 2 },
+        { id: 3, level: 1 }
+    ]);
     assert.deepEqual(result.servervars, serverVars);
     assert.equal('EquipQTY_-1' in result, false);
     assert.deepEqual(requestedPaths, ['_data/user', '_vars/_vars', '_uid/user']);

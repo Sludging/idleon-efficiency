@@ -804,10 +804,28 @@ class IdleonDebugServer {
                         throw new Error('Game companion info function is unavailable');
                     }
 
-                    companions = companionStorage.getCompanionInfoMe();
-                    if (!Array.isArray(companions)) {
+                    const rawCompanions = companionStorage.getCompanionInfoMe();
+                    if (!Array.isArray(rawCompanions)) {
                         throw new Error('Game companion info did not return an array');
                     }
+
+                    companions = rawCompanions.map((record, index) => {
+                        if (typeof record !== 'string') {
+                            throw new Error('Game companion info record ' + index + ' is not a CSV string');
+                        }
+
+                        const fields = record.split(',');
+                        const id = Number(fields[0]?.trim());
+                        const levelMarker = Number(fields[4]?.trim());
+                        if (!Number.isFinite(id) || !Number.isFinite(levelMarker)) {
+                            throw new Error('Game companion info record ' + index + ' is malformed');
+                        }
+
+                        return {
+                            id,
+                            level: levelMarker >= 1 ? 2 : 1
+                        };
+                    });
                 } catch (error) {
                     throw new Error('Failed to read game companion info: ' + error.message);
                 }

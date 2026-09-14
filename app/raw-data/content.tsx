@@ -33,7 +33,7 @@ function RawData() {
         }
 
         cleanRaw["playerNames"] = theData.get("playerNames");
-        cleanRaw["companions"] = Array.from(new Set(theData.get("ownedCompanions"))); // can probably remove duplicates earlier on, but :shrug:
+        cleanRaw["companions"] = theData.get("ownedCompanions");
         cleanRaw["servervars"] = theData.get("servervars");
 
         return cleanRaw;

@@ -25,10 +25,6 @@ import { EventShop } from '../../../data/domain/eventShop';
 const saveName = 'latest';
 const extractionResultsName = 'friend-bonus-stats-data.json';
 
-const missingOwnerApi = (signature: string): never => {
-  throw new Error(`MISSING OWNER API - ${signature} is not exposed by its owning domain`);
-};
-
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   friend_bonus_companion_44: {
     description: 'Companion 44 bonus that adds one Friend Bonus slot',
@@ -43,7 +39,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   friend_bonus_companion_lv2_44: {
     description: 'Companion 44 level-two state used for the extra 25% Friend Bonuses multiplier',
     extractionKey: 'friend_bonus_companion_lv2_44',
-    domainExtractor: () => missingOwnerApi('CompLV2(44)'),
+    domainExtractor: (gameData) => getCompanionBonus(gameData.get('companions') as Companion[], 44, 2),
   },
   friend_bonus_event_shop_22: {
     description: 'Friendly Slot Event Shop ownership that adds one Friend Bonus slot',

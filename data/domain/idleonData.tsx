@@ -42,6 +42,7 @@ import { Slab, updateSlabBonusDisplay } from './world-5/slab';
 import { Capacity, updateCapacity } from './capacity';
 import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './world-3/construction/deathnote';
 import { Companions, updateCompanionImpact } from './companions';
+import type { CompanionState } from './companions/companionState';
 import { Domain, HandleRawDataKey } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from "./world-4/rift";
@@ -340,7 +341,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
 }
 
-export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: number[], serverVars: Record<string, any>, isStatic: boolean = false) => {
+export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {
     accountData.set("playerNames", charNames);
     accountData.set("servervars", serverVars);
     accountData.set("OptLacc", data.get("OptLacc"));
