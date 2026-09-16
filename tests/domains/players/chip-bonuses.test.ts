@@ -1,0 +1,53 @@
+/**
+ * Equipped-chip contributions for the extraction character, in raw game units.
+ *
+ * The real save goes through the application pipeline, including Lab attaching
+ * equipped chips to Player. This does not cover other characters or equipment
+ * changes; nonzero toteff coverage is deferred at the human's direction.
+ *
+ * @testCovers Player.getChipBonus
+ */
+import { ExtractionResults, loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
+import { Player } from '../../../data/domain/player';
+
+const saveName = 'latest';
+const extractionResultsName = 'player-chip-bonuses-data.json';
+
+// Numeric effects and enabling contributions use the same equipped-chip producer.
+const chipBonusSelectors = [
+  'def', 'move', 'acc', 'dr', 'atkspd', 'labexp', 'linewidth', 'fafk',
+  'safk', 'crys', 'resp', 'toteff', 'dmg', 'eff', 'mkill', 'star',
+  'troph', 'key1', 'pend', 'weppow', 'card1', 'card2', '__missing_chip_bonus__',
+];
+
+describe('Player Domain - Chip Bonuses', () => {
+  let extractionResults: ExtractionResults;
+  let player: Player & { getChipBonus?: (stat: string) => number };
+
+  beforeAll(() => {
+    extractionResults = loadExtractionResults(extractionResultsName);
+    validateExtractionHealth(extractionResults);
+    const gameData = loadGameDataFromSave(saveName);
+    const player0 = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
+    if (!player0) {
+      throw new Error('Player 0 not found in save data');
+    }
+    player = player0;
+  });
+
+  chipBonusSelectors.forEach(stat => {
+    it(`matches the equipped-chip ${stat} contribution for player 0`, () => {
+      const liveValue = getExtractedValue(extractionResults, `chip_bonus_${stat}`);
+      if (typeof player.getChipBonus !== 'function') {
+        throw new Error(`MISSING OWNER API - Player.getChipBonus("${stat}") must expose chipBonuses("${stat}")`);
+      }
+      const domainValue = player.getChipBonus(stat);
+
+      expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
+        tolerance: 0,
+        context: `Player ${player.playerID} chip contribution ${stat}; equipped chips: ${player.labInfo.chips.map(slot => slot.chip?.index ?? -1).join(', ')}`,
+      });
+    });
+  });
+});

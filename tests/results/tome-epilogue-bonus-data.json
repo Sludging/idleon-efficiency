@@ -1,89 +1,89 @@
 {
-  "timestamp": "2026-09-16T07:45:04.798Z",
+  "timestamp": "2026-09-16T11:52:50.936Z",
   "extractions": {
     "lore_epic_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
       "result": 628.0125191499686,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 0",
-      "extractedAt": "2026-09-16T07:45:04.805Z"
+      "extractedAt": "2026-09-16T11:52:50.941Z"
     },
     "lore_epic_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
       "result": 231.0632470085537,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 1",
-      "extractedAt": "2026-09-16T07:45:04.817Z"
+      "extractedAt": "2026-09-16T11:52:50.943Z"
     },
     "lore_epic_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
       "result": 1127.5859584183772,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 2",
-      "extractedAt": "2026-09-16T07:45:04.820Z"
+      "extractedAt": "2026-09-16T11:52:50.952Z"
     },
     "lore_epic_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
       "result": 152.63606521518747,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 3",
-      "extractedAt": "2026-09-16T07:45:04.829Z"
+      "extractedAt": "2026-09-16T11:52:50.954Z"
     },
     "lore_epic_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
       "result": 566.9210536664989,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 4",
-      "extractedAt": "2026-09-16T07:45:04.831Z"
+      "extractedAt": "2026-09-16T11:52:50.956Z"
     },
     "lore_epic_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
       "result": 289.89943930528057,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 5",
-      "extractedAt": "2026-09-16T07:45:04.833Z"
+      "extractedAt": "2026-09-16T11:52:50.957Z"
     },
     "lore_epic_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
       "result": 906.8079183411153,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 6",
-      "extractedAt": "2026-09-16T07:45:04.835Z"
+      "extractedAt": "2026-09-16T11:52:50.961Z"
     },
     "lore_epic_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
       "result": 28.112132444946923,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 7",
-      "extractedAt": "2026-09-16T07:45:04.837Z"
+      "extractedAt": "2026-09-16T11:52:50.969Z"
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
       "result": 332.4962367250756,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 8",
-      "extractedAt": "2026-09-16T07:45:04.846Z"
+      "extractedAt": "2026-09-16T11:52:50.971Z"
     },
     "lore_epic_bonus_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
       "result": 139.3366233362794,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 9",
-      "extractedAt": "2026-09-16T07:45:04.848Z"
+      "extractedAt": "2026-09-16T11:52:50.973Z"
     },
     "lore_epic_bonus_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
       "result": 0,
       "description": "Game LoreEpiBon bonus for Tome epilogue index 10",
-      "extractedAt": "2026-09-16T07:45:04.850Z"
+      "extractedAt": "2026-09-16T11:52:50.975Z"
     },
     "grimoire_bonus_17": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
       "result": 85,
       "description": "Game Grimoire upgrade 17 bonus used by LoreEpiBon",
-      "extractedAt": "2026-09-16T07:45:04.852Z"
+      "extractedAt": "2026-09-16T11:52:50.976Z"
     },
     "troll_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
       "result": 25,
       "description": "Game Troll equipment set bonus used by LoreEpiBon",
-      "extractedAt": "2026-09-16T07:45:04.862Z"
+      "extractedAt": "2026-09-16T11:52:50.985Z"
     },
     "epilogue_bonus_unlocked_count": {
       "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
       "result": 10,
       "description": "The number of Tome epilogue indexes unlocked by the Spelunk unlock count",
-      "extractedAt": "2026-09-16T07:45:04.864Z"
+      "extractedAt": "2026-09-16T11:52:50.987Z"
     }
   },
   "errors": {},

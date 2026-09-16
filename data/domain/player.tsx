@@ -337,6 +337,16 @@ export class Player {
         return setBonus * ((Math.max(familyBonus, 1) + gearBonus + (this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + goldFoodStampBonus + (achievement37 ? 5 : 0) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14 + (achievement380 ? 2 : 0) + (achievement383 ? 3 : 0) + votingBonus26 + apocalypseWoW + companion48 + legendTalentBonus25 + Math.min(cropfallEvent1Card, 50)) / 100);
     }
 
+    getChipBonus = (stat: string): number => {
+        let bonus = 0;
+        for (const slot of this.labInfo.chips) {
+            if (slot.chip?.data.stat == stat) {
+                bonus += slot.chip.getBonus();
+            }
+        }
+        return bonus;
+    }
+
     getMiscBonusFromGear = (bonusType: string) => {
         let gearBonus = 0;
         this.gear.equipment.forEach((gear, index) => {

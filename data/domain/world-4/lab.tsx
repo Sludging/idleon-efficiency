@@ -367,7 +367,7 @@ export class Lab extends Domain {
                 baseWidth *= 1.25;
             }
         }
-        const playerChipBonus = player.labInfo.chips.filter(slot => slot.chip && slot.chip.data.name == "Conductive Motherboard").reduce((sum, slot) => sum += slot.chip?.getBonus() ?? 0, 0);
+        const playerChipBonus = player.getChipBonus("linewidth");
         const bonusWidth = inGemTube ? 30 : 0;
         return Math.floor((baseWidth + (pxMealBonus + Math.min(passiveCardBonus, 50)))
             * (1 + ((buboBoost + linePctMealBonus + playerChipBonus + (20 * petArenaBonus) + bonusWidth + shinyBonus) / 100))
@@ -410,7 +410,8 @@ export class Lab extends Domain {
 
         // Figure out what chips players have.
         labData.slice(1, 1 + charCount).forEach((playerChips, index) => {
-            lab.playerChips[index] = playerChips.filter(chip => chip != -1).map(chip => lab.chips[chip]);
+            // Only the seven equipment slots contribute, even when some slots are empty.
+            lab.playerChips[index] = playerChips.slice(0, 7).filter(chip => chip != -1).map(chip => lab.chips[chip]);
         });
 
         labData[15].forEach((chipCount, index) => {
