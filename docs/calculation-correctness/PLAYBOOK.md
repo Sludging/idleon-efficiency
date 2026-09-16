@@ -20,11 +20,11 @@ Delivered game code defines the formula, conditions, and operation order. Extrac
 
 The coordinator reads the selected issue, its current case working note, and human decisions. Identify the result to check and any known dependencies or questions. Begin with planning. On resume, read the local plan: continue planning if it is a draft, or resume the established stage if approved. After a dependency is fixed, run the selected tests to establish whether the case can continue.
 
-Use existing snippets, test configs, saves, and results where available. A missing test or domain implementation is something the case can establish and address. Obtain live game access when source capture or extraction is needed. Follow [snippet guidance](../game-snippets/README.md) to capture missing source; ask the human if the game version or meaning under review is unclear.
+Use existing snippets, test configs, saves, and results where available. A missing test or domain implementation is something the case can establish and address. Workers and reviewers obtain missing game-source evidence through `correctness-researcher` when source capture is needed. The coordinator runs extraction only when the next-step table requires it. Follow [snippet guidance](../game-snippets/README.md) through the researcher to capture missing source; ask the human if the game version or meaning under review is unclear.
 
 ### 2. Plan and obtain human approval
 
-Assign `Stage: planning` to the worker. Inspect game behavior, website consumers, and comparable domain implementations before proposing the design. Existing tests may be run and source evidence gathered; domain code, tests, and extraction configs remain unchanged until approval.
+Assign `Stage: planning` to the worker. The planning worker inspects game behavior, website consumers, and comparable domain implementations before proposing the design. If game-source or runtime evidence is missing, it delegates that work to `correctness-researcher`. Existing tests may be run, and focused source evidence may be gathered through the researcher; domain code, tests, and extraction configs remain unchanged until approval.
 
 Keep one plan at `.omp/plans/correctness-<issue-number>.md`. Include:
 
@@ -120,9 +120,9 @@ Each stage returns a result before the coordinator assigns the next stage. Keep 
 
 ## Local game research
 
-Workers and reviewers delegate game-source discovery and debug-server command exploration to `correctness-researcher`, using its cheaper model. This is a helper within the current stage, not a new stage or approval gate. The assigning agent owns its helper's completion and stops it before returning a stage result or timed report.
+Workers and reviewers delegate game-source discovery, in-game caller investigation, debug-server command exploration, and needed Wiki lookup to `correctness-researcher`, using its cheaper model. This helper can run within any current stage; it is not a new stage or approval gate. The assigning agent owns its helper's completion and stops it before returning a stage result or timed report.
 
-Keep research in `.omp/research/correctness-<issue-number>.md`, separate from the Case working note and approved plan. Pass the issue, domain/aspect, this path, and concrete questions to the researcher. Reuse the file across workers and reviewers; delegate additional discovery when information is missing. Read focused evidence directly to interpret or verify it.
+Keep research in `.omp/research/correctness-<issue-number>.md`, separate from the Case working note and approved plan. Pass the issue, domain/aspect, this path, and concrete questions to the researcher. Reuse the file across workers and reviewers; delegate additional discovery when information is missing. Read focused evidence directly to interpret or verify it. Workers and reviewers do not perform broad game-file searches or exploratory debug-server or Wiki investigation themselves.
 
 The file holds source-backed facts, game version, relevant function and in-game caller evidence, optional Wiki context, reproducible debug-server commands, and unresolved gaps. Link reusable captures under `docs/game-snippets/` rather than duplicating whole functions. Distinguish observed runtime values from source facts and Wiki descriptions. It supplies evidence, not website design decisions or a correctness verdict.
 

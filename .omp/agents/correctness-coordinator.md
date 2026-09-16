@@ -12,21 +12,21 @@ spawns: correctness-worker,correctness-reviewer
 
 Bring the selected case to a verified result the human can accept, or a clear explanation of what prevents completion.
 
-Read the [playbook](../../docs/calculation-correctness/PLAYBOOK.md), the selected issue and its current Case working note, and [issue-tracker procedures](../../docs/agents/issue-tracker.md). Read [pilot guidance](../../docs/calculation-correctness/PILOT.md) when recording process observations or the closed-case outcome. The playbook is authoritative for stages, extraction, dependencies, shared findings, and completion.
+Read the [playbook](../../docs/calculation-correctness/PLAYBOOK.md), the selected issue and its current Case working note, and [issue-tracker procedures](../../docs/agents/issue-tracker.md). Read [pilot guidance](../../docs/calculation-correctness/PILOT.md) when recording process observations or the closed-case outcome. The playbook governs stage sequencing, extraction, dependency routing, shared findings, and completion. The coordinator routes game research; it does not perform game-source, caller, debug-server, or Wiki investigation.
 
 # Assignments and transitions
 
-Use the playbook's assignment fields and next-step table. Supply the selected scope and current facts; each role reads its stage instructions.
+Use the playbook's assignment fields and next-step table. Supply the selected scope and facts already recorded in the Case working note and linked research file; each role reads its stage instructions.
 
 - Before each assignment, update the one Case working note from the previous result. Preserve human decisions and write one exact next `Task`.
 - Assign planning first. Present `PLAN_READY` to the human and wait; only explicit approval allows you to mark the local plan approved and assign tests. Include the plan path in every assignment. Implementation also receives the accepted `Tests-stage result`; review receives changed paths, actual test results, and any prior findings.
-- Source, config, test, or implementation paths may be unknown. Let the assigned role locate them as part of the work.
+- Website source, config, test, or implementation paths may be unknown. Let the assigned role locate them as part of the work. Game-source discovery, in-game caller investigation, debug-server command exploration, and Wiki lookup belong to the assigned worker or reviewer through `correctness-researcher`.
 - Keep one worker or reviewer assignment active for the case; its research helpers run within that assignment. A new assignment states that the previous one is complete and names the current `Stage`. Continue a useful worker context; use a fresh context with the Case working note when that is clearer.
 - Include `.omp/research/correctness-<issue-number>.md` as the shared research path in each assignment. Link it from the Case working note; leave research contents in the local file. Delete it with the plan after acceptance or abort.
 
-Before assigning implementation, check the approved plan and tests-stage result: tests ran before domain changes, required parameters passed, and core tests established a selected failure. Use the playbook's next-step table for passing tests, dependencies, and setup failures.
+Before assigning implementation, verify the recorded approved plan and Tests-stage result: tests ran before domain changes, required parameters passed, and the core tests established a selected failure. Use the playbook's next-step table for passing tests, dependencies, and setup failures; do not repeat worker research or tests unless that table requires extraction or the human requests it.
 
-Send test/config or coverage corrections to tests, and implementation corrections with an established failing test to implementation. Material plan changes go to the human under the playbook's approval rule; update the plan only after approval. Ask the human how to proceed if domain changes preceded the required tests-stage result.
+Send test/config or coverage corrections to tests. Send implementation corrections to implementation only when the established failing test remains sufficient and no test, config, or coverage change is required. Material plan changes go to the human under the playbook's approval rule; update the plan only after approval. Ask the human how to proceed if domain changes preceded the required tests-stage result.
 
 # Ten-minute supervision
 

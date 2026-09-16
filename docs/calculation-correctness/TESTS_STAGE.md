@@ -4,12 +4,12 @@
 
 Establish whether the selected calculation matches the game and whether any mismatch comes from that calculation or a calculation it uses.
 
-This stage writes tests and extraction config, not domain code. Read the approved local plan, assignment, and case working note, then the [testing guide](../TESTING_IMPLEMENTATION.md) for comparison mechanics. Use existing source findings and follow [source capture guidance](../game-snippets/README.md) when more evidence is needed.
+This stage writes tests and extraction config, not domain code. Read the approved local plan, assignment, and case working note, then the [testing guide](../TESTING_IMPLEMENTATION.md) for comparison mechanics. Use existing source findings and focused captured evidence; delegate missing game-source, caller, debug-server, or Wiki evidence to `correctness-researcher`. Follow [source capture guidance](../game-snippets/README.md) when more evidence is needed.
 
 ## Establish the selected calculation
 
 1. Use the approved scope, public interface, and ownership. Locate the selected calculation and each calculation it uses directly. Direct means an immediate calculation used by the selected result; inputs used only inside that calculation belong to its own case.
-2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and read the source needed to complete or verify them, following the [snippet version rules](../game-snippets/README.md#rules).
+2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and inspect focused source evidence captured by the researcher, following the [snippet version rules](../game-snippets/README.md#rules).
 3. Map every direct calculation to its domain implementation or an explicit missing status. A missing selected implementation is a selected-core failure to expose. For a missing or failing dependency, report the full named calculation and include the failing call, index, or value as the observed problem. Keep its parameter comparison active; the separate case covers that calculation, not only the failing input.
 4. If evidence calls for a material change to the plan, return the proposed change and reason under the [plan approval rule](PLAYBOOK.md#2-plan-and-obtain-human-approval). Do not choose a different interface to make the tests fit.
 
