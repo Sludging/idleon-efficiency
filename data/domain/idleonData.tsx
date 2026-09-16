@@ -57,7 +57,7 @@ import { ResearchGrid, updateResearchGrid } from './world-7/research';
 import { Minehead } from './world-7/minehead';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
-import { IslandExpeditions } from './world-2/islandExpedition';
+import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
@@ -285,6 +285,7 @@ const postProcessingMap: Record<string, Function> = {
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
+    "islandExpeditions": (doc: Cloudsave, accountData: Map<string, any>) => updateIslandExpeditions(accountData),
     "sigils": (doc: Cloudsave, accountData: Map<string, any>) => updateSigils(accountData),
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),

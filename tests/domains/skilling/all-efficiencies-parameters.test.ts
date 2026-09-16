@@ -32,6 +32,7 @@ import { Quests } from '../../../data/domain/quests';
 import { Family } from '../../../data/domain/family';
 import { Friends } from '../../../data/domain/friends';
 import { ClassIndex } from '../../../data/domain/talents';
+import { IslandExpeditions } from '../../../data/domain/world-2/islandExpedition';
 
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
@@ -135,10 +136,16 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   extractionKey: 'all_eff_hole_b_upg_49_15',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getSchematicBonus(49, 15),
  },
- all_eff_shimmer_multiplier: {
-  description: 'Dreamstuff AllShimmerBonuses(0)',
-  extractionKey: 'all_eff_shimmer_multiplier',
-  domainExtractor: () => missingOwnerApi('Dreamstuff("AllShimmerBonuses", 0)'),
+ all_eff_shimmer_skill_efficiency: {
+  description: 'Shimmer Skill Efficiency bonus including The Shim Lantern boost',
+  extractionKey: 'all_eff_shimmer_skill_efficiency',
+  domainExtractor: (gameData) => {
+   const expeditions = gameData.get('islandExpeditions') as IslandExpeditions & { getShimmerBonus?: (index: number) => number };
+   if (typeof expeditions?.getShimmerBonus !== 'function') {
+    return missingOwnerApi('IslandExpeditions.getShimmerBonus(6): OptionsListAccount[180] * Dreamstuff("AllShimmerBonuses", 0)');
+   }
+   return expeditions.getShimmerBonus(6);
+  },
  },
  all_eff_card_bonus_84: {
   description: 'CardBonusREAL(84)',

@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-14T04:47:12.858Z",
+  "timestamp": "2026-09-16T07:45:02.693Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 75,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-09-14T04:47:12.863Z"
+      "extractedAt": "2026-09-16T07:45:02.699Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 6.25,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-09-14T04:47:12.865Z"
+      "extractedAt": "2026-09-16T07:45:02.709Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
       "result": 1.859375,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-09-14T04:47:12.873Z"
+      "extractedAt": "2026-09-16T07:45:02.711Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
       "result": 37.1875,
       "description": "Representative Button bonus at the first category index",
-      "extractedAt": "2026-09-14T04:47:12.875Z"
+      "extractedAt": "2026-09-16T07:45:02.713Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
       "result": 325.390625,
       "description": "Representative Button bonus at the downstream cooking consumer index",
-      "extractedAt": "2026-09-14T04:47:12.877Z"
+      "extractedAt": "2026-09-16T07:45:02.715Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "result": 46.484375,
       "description": "Representative Button bonus at the final category index",
-      "extractedAt": "2026-09-14T04:47:12.878Z"
+      "extractedAt": "2026-09-16T07:45:02.725Z"
     }
   },
   "errors": {},
