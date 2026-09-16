@@ -30,6 +30,7 @@ import { Guild } from '../../../data/domain/guild';
 import { Companion, getCompanionBonus } from '../../../data/domain/companions';
 import { Quests } from '../../../data/domain/quests';
 import { Family } from '../../../data/domain/family';
+import { Friends } from '../../../data/domain/friends';
 import { ClassIndex } from '../../../data/domain/talents';
 
 const saveName = 'latest';
@@ -113,9 +114,9 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  all_eff_friend_bonus_stat_2: {
-  description: 'Thingies FriendBonusStatz(2, 0)',
+  description: 'Skill Efficiency Friend Bonus',
   extractionKey: 'all_eff_friend_bonus_stat_2',
-  domainExtractor: () => missingOwnerApi('Thingies("FriendBonusStatz", 2, 0)'),
+  domainExtractor: (gameData) => (gameData.get('friends') as Friends).getFriendBonus(2),
  },
  all_eff_rift_skill_etc_2: {
   description: 'RiftSkillETC(2) all-skill-efficiency total',

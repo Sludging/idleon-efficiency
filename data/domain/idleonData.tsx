@@ -70,6 +70,7 @@ import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world
 import { RoyalArmory } from './world-6/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
+import { Friends, updateFriends } from './friends';
 import { Clamworks } from './world-7/clamworks';
 import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
@@ -174,6 +175,7 @@ const domainList: Domain[] = [
     new RoyalArmory("royalArmory"),
     new EquipmentSets("equipmentSets"),
     new EventShop("eventShop"),
+    new Friends("friends"),
     new Clamworks("clamworks"),
     new Meritocraty("meritocraty"),
     new LegendTalents("legendTalents"),
@@ -252,6 +254,8 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
+    // Friend Bonuses consumes parsed companion and Event Shop state.
+    "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),

@@ -31,18 +31,30 @@ export class Companion {
     }
 }
 
-/** Returns the metadata bonus for an owned companion at the requested level. */
-export const getCompanionBonus = (companions: Companion[], index: number, level: CompanionLevel = 1): number => {
-    const companion = companions.find(companion => companion.id === index);
-    if (!companion?.owned) {
-        return 0;
-    }
-
+const getCompanionBonusAtLevel = (companion: Companion, level: CompanionLevel): number => {
     if (level === 2) {
         return companion.level === 2 ? companion.data.bonus2 ?? 0 : 0;
     }
 
     return companion.data.bonus;
+};
+
+/** Returns the metadata bonus for an owned companion at the requested level. */
+export const getCompanionBonus = (companions: Companion[], index: number, level: CompanionLevel = 1): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned ? getCompanionBonusAtLevel(companion, level) : 0;
+};
+
+/** Returns the metadata bonus for an owned companion at its active level. */
+export const getCompanionActiveBonus = (companions: Companion[], index: number): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned ? getCompanionBonusAtLevel(companion, companion.level) : 0;
+};
+
+/** Returns one when an owned companion has reached level two. */
+export const isCompanionLevelTwo = (companions: Companion[], index: number): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned && companion.level === 2 ? 1 : 0;
 };
 
 export class Companions extends Domain {

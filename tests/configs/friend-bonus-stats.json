@@ -1,61 +1,61 @@
 {
-  "description": "Extract the seven player-facing Friend Bonus stats and the cross-domain inputs used by their slot and multiplier helpers. OptionsListAccount[476] is the raw assigned-bonus list, not a calculated parameter.",
-  "target": "Thingies FriendBonusStatz (Friend Bonuses / Stats)",
+  "description": "Extract seven Friend Bonus stats and the four account-wide inputs used to calculate slots and the active multiplier.",
+  "target": "Friend Bonuses (Stats)",
   "extractions": [
     {
       "label": "friend_bonus_stat_0",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
-      "description": "Friend Bonus: Total Damage (stat index 0)"
+      "description": "Total Damage Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_1",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 1, 0)",
-      "description": "Friend Bonus: Class EXP gain (stat index 1)"
+      "description": "Class EXP gain Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_2",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
-      "description": "Friend Bonus: Skill Efficiency (stat index 2)"
+      "description": "Skill Efficiency Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_3",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 3, 0)",
-      "description": "Friend Bonus: Drop Rate (stat index 3)"
+      "description": "Drop Rate Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_4",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 4, 0)",
-      "description": "Friend Bonus: Skill EXP gain (stat index 4)"
+      "description": "Skill EXP gain Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_5",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 5, 0)",
-      "description": "Friend Bonus: More Coins (stat index 5)"
+      "description": "More Coins Friend Bonus"
     },
     {
       "label": "friend_bonus_stat_6",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 6, 0)",
-      "description": "Friend Bonus: Extra Kills (stat index 6)"
+      "description": "Extra Kills Friend Bonus"
     },
     {
       "label": "friend_bonus_companion_44",
       "expression": "idleon.callFunction(\"Companions\", 44)",
-      "description": "Companion 44 bonus that adds a Friend Bonus slot"
+      "description": "Spearfish active bonus adds one Friend Bonus slot"
     },
     {
       "label": "friend_bonus_companion_30",
       "expression": "idleon.callFunction(\"Companions\", 30)",
-      "description": "Companion 30 base effect that doubles Friend Bonuses and adds slots"
+      "description": "Mr Pig active bonus contributes 1.5 slots and 150% to the Friend Bonus multiplier"
     },
     {
       "label": "friend_bonus_companion_lv2_44",
       "expression": "idleon.callFunction(\"CompLV2\", 44)",
-      "description": "Companion 44 level-two state that adds 25% to Friend Bonuses"
+      "description": "Spearfish level-two state adds 25% to the Friend Bonus multiplier"
     },
     {
       "label": "friend_bonus_event_shop_22",
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0)",
-      "description": "Friendly Slot Event Shop ownership that adds a Friend Bonus slot"
+      "description": "Friendly Slot ownership adds one Friend Bonus slot"
     }
   ]
 }

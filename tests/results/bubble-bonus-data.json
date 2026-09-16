@@ -1,75 +1,75 @@
 {
-  "timestamp": "2026-09-12T12:05:41.282Z",
+  "timestamp": "2026-09-14T04:47:12.810Z",
   "extractions": {
     "diamond_chef_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
       "result": {
         "type": "large_number",
-        "value": "2.679457364396466e+41",
-        "original": 2.679457364396466e+41
+        "value": "9.640546856341006e+43",
+        "original": 9.640546856341006e+43
       },
       "description": "Diamond Chef final bubble bonus (MealSpdz)",
-      "extractedAt": "2026-09-12T12:05:41.291Z"
+      "extractedAt": "2026-09-14T04:47:12.814Z"
     },
     "diamond_chef_prismatic_state": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
       "result": 1,
       "description": "Diamond Chef prismatic state",
-      "extractedAt": "2026-09-12T12:05:41.293Z"
+      "extractedAt": "2026-09-14T04:47:12.823Z"
     },
     "alchemy_prismatic_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
-      "result": 2.7957833640578738,
+      "result": 3.0272256717501813,
       "description": "Alchemy Prismatic Bonus",
-      "extractedAt": "2026-09-12T12:05:41.295Z"
+      "extractedAt": "2026-09-14T04:47:12.826Z"
     },
     "daily_drip_final_bonus": {
       "expression": "(() => { const raw = Number(idleon.getDNSM(\"AlchBubbles\").h.LqdCap); const alchemyLevel = Number(idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]); return raw * Math.max(Math.pow(alchemyLevel / 25, 0.3), 0); })()",
       "result": 91.40560302376724,
       "description": "Da Daily Drip effective final bubble bonus (AlchBubbles.LqdCap × ActorEvents_232._GenINFO[87])",
-      "extractedAt": "2026-09-12T12:05:41.297Z"
+      "extractedAt": "2026-09-14T04:47:12.828Z"
     },
     "cropius_mapper_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y6",
       "result": 604.9058473736372,
       "description": "Cropius Mapper final bubble bonus (Y6)",
-      "extractedAt": "2026-09-12T12:05:41.308Z"
+      "extractedAt": "2026-09-14T04:47:12.830Z"
     },
     "slab_w2_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W2",
-      "result": 360.0452469867607,
+      "result": 389.8507404693873,
       "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)",
-      "extractedAt": "2026-09-12T12:05:41.310Z"
+      "extractedAt": "2026-09-14T04:47:12.840Z"
     },
     "tome_w8_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "result": 807.9853049828752,
+      "result": 874.8724558153667,
       "description": "Tome score-scaled W8 (+{% STR) final bubble bonus for player 0",
-      "extractedAt": "2026-09-12T12:05:41.312Z"
+      "extractedAt": "2026-09-14T04:47:12.842Z"
     },
     "tome_a9_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
       "result": 96.87674027844456,
       "description": "Tome score-scaled A9 (+{% AGI) final bubble bonus for player 0",
-      "extractedAt": "2026-09-12T12:05:41.314Z"
+      "extractedAt": "2026-09-14T04:47:12.844Z"
     },
     "tome_m9_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
       "result": 94.25413223140497,
       "description": "Tome score-scaled M9 (+{% WIS) final bubble bonus for player 0",
-      "extractedAt": "2026-09-12T12:05:41.316Z"
+      "extractedAt": "2026-09-14T04:47:12.845Z"
     },
     "ordinary_tool_w_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
-      "result": 3380.1595361451195,
+      "result": 3962.9606603262287,
       "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)",
-      "extractedAt": "2026-09-12T12:05:41.323Z"
+      "extractedAt": "2026-09-14T04:47:12.847Z"
     },
     "ordinary_tool_w_base_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 7, 0)",
       "result": 61.58408408408408,
       "description": "Stronk Tools base BubbleBonus (ToolW / Power index 7)",
-      "extractedAt": "2026-09-12T12:05:41.325Z"
+      "extractedAt": "2026-09-14T04:47:12.858Z"
     }
   },
   "errors": {},

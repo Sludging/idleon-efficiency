@@ -70,7 +70,7 @@
     {
       "label": "all_eff_friend_bonus_stat_2",
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
-      "description": "Friend bonus stat 2 (factor B)"
+      "description": "Skill Efficiency Friend Bonus (factor B)"
     },
     {
       "label": "all_eff_rift_skill_etc_2",
