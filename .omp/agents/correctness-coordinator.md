@@ -21,7 +21,8 @@ Use the playbook's assignment fields and next-step table. Supply the selected sc
 - Before each assignment, update the one Case working note from the previous result. Preserve human decisions and write one exact next `Task`.
 - Assign planning first. Present `PLAN_READY` to the human and wait; only explicit approval allows you to mark the local plan approved and assign tests. Include the plan path in every assignment. Implementation also receives the accepted `Tests-stage result`; review receives changed paths, actual test results, and any prior findings.
 - Source, config, test, or implementation paths may be unknown. Let the assigned role locate them as part of the work.
-- Keep one worker or reviewer assignment active for the case. A new assignment states that the previous one is complete and names the current `Stage`. Continue a useful worker context; use a fresh context with the Case working note when that is clearer.
+- Keep one worker or reviewer assignment active for the case; its research helpers run within that assignment. A new assignment states that the previous one is complete and names the current `Stage`. Continue a useful worker context; use a fresh context with the Case working note when that is clearer.
+- Include `.omp/research/correctness-<issue-number>.md` as the shared research path in each assignment. Link it from the Case working note; leave research contents in the local file. Delete it with the plan after acceptance or abort.
 
 Before assigning implementation, check the approved plan and tests-stage result: tests ran before domain changes, required parameters passed, and core tests established a selected failure. Use the playbook's next-step table for passing tests, dependencies, and setup failures.
 

@@ -78,6 +78,7 @@ base.apk
 codex.tsx
 certificates
 .omp/plans/
+.omp/research/
 
 ## Yarn
 install-state.gz

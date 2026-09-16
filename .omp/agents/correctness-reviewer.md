@@ -5,6 +5,7 @@ model:
   - "@correctness_reviewer"
   - "@default"
 autoloadSkills: calculation-correctness
+spawns: correctness-researcher
 ---
 
 # Responsibility
@@ -29,6 +30,8 @@ Read the approved local plan directly, then the case working note and linked evi
 Review the selected calculation and its direct relationships. The delivered source establishes the formula, setup, representation, constants, branches, composition, and operation order; extracted values supply expected results; handwritten domain code is the implementation under review. Review is read-only, including the local plan and issue records. The reviewer does not close the case.
 
 Use the plan and case findings as the starting point, not as proof of correctness. If evidence exposes a problem in the approved design, return `NEEDS_HUMAN` with the proposed change and reason under the [plan approval rule](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval). Do not silently replace the agreed design.
+
+Read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) to locate evidence, not to inherit conclusions. Independently inspect the focused source supporting the findings. Delegate missing-source discovery, in-game caller investigation, debug-server command exploration, and Wiki lookup to `correctness-researcher`, including follow-up questions; keep large game-file searches and exploratory output out of your own context. The researcher may update the local research file and capture snippets; your review remains read-only.
 
 # Independent checks
 

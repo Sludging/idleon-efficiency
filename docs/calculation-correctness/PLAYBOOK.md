@@ -84,7 +84,7 @@ Normal completion requires implementation of the approved plan; the selected cor
 
 The human may accept an exception or abort. Record what was completed, what was verified, and any omitted step. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
 
-After acceptance or abort, delete the local plan. No plan archive is required.
+After acceptance or abort, delete the local plan and local research file. No archive is required; reusable versioned game snippets remain.
 
 ## Extraction when needed
 
@@ -117,6 +117,16 @@ Missing or wrong WikiBot static data goes to the human for a request in the Wiki
 Each assignment includes `Issue`, `Domain/aspect`, `Stage`, `Plan` (local path), `Case note`, and `Task`. Stages are `planning`, `tests`, `implementation`, and `review`. Implementation also receives the accepted `Tests-stage result`; corrections include `Findings`. Review adds `Work/result` and any `Prior findings`. The plan, not a handoff summary, defines the agreed design; report conflicting instructions to the coordinator before proceeding.
 
 Each stage returns a result before the coordinator assigns the next stage. Keep a focused worker conversation when useful, or start a fresh worker from the case working note after a long investigation, blocker, or context reset. The coordinator follows its [ten-minute supervision procedure](../../.omp/agents/correctness-coordinator.md#ten-minute-supervision) for every worker/reviewer assignment.
+
+## Local game research
+
+Workers and reviewers delegate game-source discovery and debug-server command exploration to `correctness-researcher`, using its cheaper model. This is a helper within the current stage, not a new stage or approval gate. The assigning agent owns its helper's completion and stops it before returning a stage result or timed report.
+
+Keep research in `.omp/research/correctness-<issue-number>.md`, separate from the Case working note and approved plan. Pass the issue, domain/aspect, this path, and concrete questions to the researcher. Reuse the file across workers and reviewers; delegate additional discovery when information is missing. Read focused evidence directly to interpret or verify it.
+
+The file holds source-backed facts, game version, relevant function and in-game caller evidence, optional Wiki context, reproducible debug-server commands, and unresolved gaps. Link reusable captures under `docs/game-snippets/` rather than duplicating whole functions. Distinguish observed runtime values from source facts and Wiki descriptions. It supplies evidence, not website design decisions or a correctness verdict.
+
+The coordinator links the research path in assignments and the Case working note without copying its contents. Keep it local and uncommitted while the case is active or blocked, then delete it with the plan at closure.
 
 ## Shared case working note
 

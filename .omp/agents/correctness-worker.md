@@ -5,6 +5,7 @@ model:
   - "@correctness_worker"
   - "@default"
 autoloadSkills: calculation-correctness
+spawns: correctness-researcher
 ---
 
 # Goal
@@ -15,9 +16,9 @@ Make the selected domain/aspect correct and suitable for the website, with evide
 
 Game code establishes formulas, conditions, and operation order. It is obfuscated and generated from a visual programming tool; its structure, names, and placement of save values are not a design model for the website.
 
-During planning, establish what the selected mechanic does for the player and how the website consumes or displays it. Inspect relevant game callers when the calculation snippet does not explain its usage; follow the [source exploration guidance](../../docs/game-snippets/README.md#understanding-callers-and-finding-additional-source) when the debug server is insufficient. Inspect website consumers and comparable domain implementations to propose ownership, public interfaces, and account-wide versus character-specific behavior.
+During planning, read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) and focused source evidence to establish what the selected mechanic does for the player. Delegate game-source discovery, in-game caller investigation, debug-server command exploration, and any needed Wiki lookup to `correctness-researcher`, including follow-up research. Keep large game-file searches and exploratory command output out of your own context.
 
-Use the Idleon Wiki to clarify mechanic names, effects, unlocks, and player-facing meaning when source code is unclear. Use game code for the exact calculation. If meaning or an important implementation choice remains unclear after this investigation, return `NEEDS_HUMAN` with the decision needed before proceeding.
+Interpret the evidence yourself. Inspect website consumers and comparable domain implementations to propose ownership, public interfaces, and account-wide versus character-specific behavior. Game code establishes the exact calculation; Wiki context can clarify names, effects, unlocks, and player-facing meaning. If meaning or an important implementation choice remains unclear after investigation, return `NEEDS_HUMAN` with the decision needed before proceeding.
 
 Follow the website's existing conventions. The game evaluates its active character; the website represents all characters. Use the repository's explicit-player or per-player patterns where results depend on a character, rather than reproducing the game's active-player selection.
 
