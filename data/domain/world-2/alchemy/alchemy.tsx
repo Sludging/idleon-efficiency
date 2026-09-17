@@ -31,7 +31,7 @@ import { Arcade } from '../arcade';
 import { LegendTalent, LegendTalents } from '../../world-7/legendTalents';
 import { Sigils } from './sigils';
 import type { Farming } from '../../world-6/farming';
-import type { Companion } from '../../companions';
+import { getCompanionActiveBonus, type Companion } from '../../companions';
 import type { SushiStation } from '../../world-7/sushi';
 import { Gaming } from '../../world-5/gaming';
 
@@ -600,8 +600,9 @@ export class Alchemy extends Domain {
     }
 
     _shouldBoostPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
-        // 2nd bubble doesn't boost active talents.
-        if (this.cauldrons[cauldron].bubbles[bubble].data.bonusKey.includes("ACTIVE")) {
+        const bonusKey = this.cauldrons[cauldron].bubbles[bubble].data.bonusKey;
+        // Class boosts exclude multiplier, active, all-character, and late bubbles; the 16th-bubble pass is independent.
+        if (bubble === 16 || bubble >= 30 || bonusKey.includes("passz") || bonusKey.includes("ACTIVE") || bonusKey.includes("AllCharz")) {
             return false;
         }
 
@@ -1047,8 +1048,8 @@ export function updateAlchemy(data: Map<string, any>) {
     const legendBonus36 = legendTalents.getBonusFromIndex(36);
     const purpleSigilsBonus = sigils.sigils.reduce((sum, sigil) => sum += (sigil.boostLevel >= 3 ? 1 : 0), 0);
     const exoticMarketBonus48 = farming.getExoticMarketBonusValue(48);
-    const companion88 = companions.find(companion => companion.id == 88);
-    const companion88Bonus = companion88?.owned ? companion88.data.bonus : 0;
+    // Prismatic strength uses the companion's active bonus, including its evolved value.
+    const companion88Bonus = getCompanionActiveBonus(companions, 88);
 
     const prismaBonus = Math.min(4, 2 + (arcaneBonus45 + (arcadeBonus54 + sushiBonus23 + (world6TrophyBonus + (paletteBonus28 + (.2 * purpleSigilsBonus + exoticMarketBonus48)))) + (legendBonus36 + 50 * companion88Bonus)) / 100);
 

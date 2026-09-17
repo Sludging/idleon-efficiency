@@ -47,7 +47,7 @@ export class ArcadeBonus {
     lvlUpText: string
 
     level: number = 0;
-    hasCompanion27: boolean = false;
+    companion27Bonus: number = 0;
 
     constructor(public index: number, data: ArcadeBonusModel) {
         this.effect = data.effect;
@@ -59,22 +59,18 @@ export class ArcadeBonus {
     }
 
     getBonus = (round: boolean = false, level: number = this.level) => {
-        // Calculate base bonus using lava function
-        const baseBonus = lavaFunc(this.func, level, this.x1, this.x2, round);
-
-        // Apply multipliers as per game source code
         let multiplier = 1;
 
-        // If at max level (101), double the multiplier
-        if (level >= 101) {
+        if (level === 101) {
             multiplier *= 2;
         }
 
-        // If companion 27 (reindeer) is active, double the multiplier again
-        if (this.hasCompanion27) {
+        // The game requires an active bonus exactly equal to 1; evolved 1.5 is deliberately excluded.
+        if (this.companion27Bonus === 1) {
             multiplier *= 2;
         }
 
+        const baseBonus = lavaFunc(this.func, level, this.x1, this.x2, false);
         const finalBonus = baseBonus * multiplier;
         return round ? parseFloat(nFormatter(finalBonus)) : finalBonus;
     }

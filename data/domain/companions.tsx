@@ -120,16 +120,17 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     }
 
     // Rift Slug
-    if (companions.find(c => c.id === 1)?.owned) {
+    const slugBonus = getCompanionActiveBonus(companions, 1);
+    if (slugBonus > 0) {
         players.forEach(player => {
             // avoid double handling.
-            if (player.extraLevelsFromSlug != 25) {
+            if (player.extraLevelsFromSlug != slugBonus) {
                 player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                     .forEach(talent => {
-                        talent.level += talent.level > 0 ? 25 : 0;
-                        talent.maxLevel += 25;
+                        talent.level += talent.level > 0 ? slugBonus : 0;
+                        talent.maxLevel += slugBonus;
                     });
-                player.extraLevelsFromSlug = 25;
+                player.extraLevelsFromSlug = slugBonus;
             }
 
         })
@@ -144,9 +145,8 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     }
 
     // Reindeer
-    if (companions.find(c => c.id === 27)?.owned) {
-        arcade.bonuses.forEach(bonus => {
-            bonus.hasCompanion27 = true;
-        });
-    }
+    const companion27Bonus = getCompanionActiveBonus(companions, 27);
+    arcade.bonuses.forEach(bonus => {
+        bonus.companion27Bonus = companion27Bonus;
+    });
 }
