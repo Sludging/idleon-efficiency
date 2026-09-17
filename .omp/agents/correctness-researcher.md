@@ -3,6 +3,7 @@ name: correctness-researcher
 description: Gather game-source, in-game caller, debug-server, and Wiki evidence for a correctness case without filling worker or reviewer context.
 model:
   - "@correctness_researcher"
+spawns: correctness-researcher
 ---
 
 # Responsibility
