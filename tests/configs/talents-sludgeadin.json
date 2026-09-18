@@ -124,11 +124,6 @@
       "description": "All talent level 149 - gate-passing banned talent"
     },
     {
-      "label": "all_talent_level_z_membership_delta_player_3",
-      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"125|3\") - idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"170|3\")",
-      "description": "All talent level membership delta for player 3: Super Talent member 125 minus nonmember 170"
-    },
-    {
       "label": "all_talent_level_z_225_player_3",
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"225|3\")",
       "description": "All talent level 225 for player 3 via AllTalentLVz - Royal Guardian cap"

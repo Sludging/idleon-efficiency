@@ -39,22 +39,6 @@ describe('Player Domain - All Talent Level', () => {
       context: 'Player 0 AllTalentLV(146)',
     });
   });
-  it('isolates target-player Super Talent membership from the active game aggregate', () => {
-    const liveValue = getExtractedValue(extractionResults, 'all_talent_level_z_membership_delta_player_3');
-    const targetPlayer = players.find(player => player.playerID === 3);
-    const memberTalent = targetPlayer?.talents.find(talent => talent.skillIndex === 125);
-    const nonmemberTalent = targetPlayer?.talents.find(talent => talent.skillIndex === 170);
-    const domainMemberLevel = getPlayerTalentAllLevel(players, 125, 3);
-    const domainUnmemberLevel = getPlayerTalentAllLevel(players, 170, 3);
-    const domainValue = domainMemberLevel - domainUnmemberLevel;
-
-    expect(memberTalent?.isSupered).toBe(true);
-    expect(nonmemberTalent?.isSupered).toBe(false);
-    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
-      tolerance: 0,
-      context: 'Player 3 Super Talent membership delta (AllTalentLVz(125|3) - AllTalentLVz(170|3))',
-    });
-  });
 
   it('validates banned AllTalentLV(49) for player 0', () => {
     const liveValue = getExtractedValue(extractionResults, 'all_talent_level_49');

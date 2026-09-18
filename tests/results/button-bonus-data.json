@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-16T11:52:48.603Z",
+  "timestamp": "2026-09-17T10:17:33.584Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 75,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-09-16T11:52:48.608Z"
+      "extractedAt": "2026-09-17T10:17:33.597Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
-      "result": 6.25,
+      "result": 18.75,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-09-16T11:52:48.618Z"
+      "extractedAt": "2026-09-17T10:17:33.599Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
-      "result": 1.859375,
+      "result": 2.078125,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-09-16T11:52:48.620Z"
+      "extractedAt": "2026-09-17T10:17:33.601Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
-      "result": 37.1875,
+      "result": 41.5625,
       "description": "Representative Button bonus at the first category index",
-      "extractedAt": "2026-09-16T11:52:48.622Z"
+      "extractedAt": "2026-09-17T10:17:33.602Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 325.390625,
+      "result": 363.671875,
       "description": "Representative Button bonus at the downstream cooking consumer index",
-      "extractedAt": "2026-09-16T11:52:48.623Z"
+      "extractedAt": "2026-09-17T10:17:33.612Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
-      "result": 46.484375,
+      "result": 51.953125,
       "description": "Representative Button bonus at the final category index",
-      "extractedAt": "2026-09-16T11:52:48.625Z"
+      "extractedAt": "2026-09-17T10:17:33.614Z"
     }
   },
   "errors": {},

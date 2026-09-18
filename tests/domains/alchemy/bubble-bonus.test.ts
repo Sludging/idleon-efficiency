@@ -32,6 +32,17 @@ const bubbleBonusCalculationSpecs: Record<string, { description: string; extract
   bonusKey: 'ToolW',
   directBubble: { cauldronIndex: 0, bubbleIndex: 7 },
  },
+ y13: {
+  description: 'Y13 public Alchemy bubble bonus (Codfrey Rulz Ok / Kazam cauldron 3, bubble 32)',
+  extractionKey: 'y13_final_bonus',
+  bonusKey: 'Y13',
+ },
+ y13Direct: {
+  description: 'Y13 direct BubbleBonus root (Kazam cauldron 3, bubble 32)',
+  extractionKey: 'y13_direct_bubble_bonus',
+  bonusKey: 'Y13',
+  directBubble: { cauldronIndex: 3, bubbleIndex: 32 },
+ },
  diamondChef: {
   description: 'Diamond Chef (MealSpdz)',
   extractionKey: 'diamond_chef_final_bonus',

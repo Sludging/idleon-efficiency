@@ -84,6 +84,7 @@ import { Darts } from './world-1/darts';
 import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1/orion';
 import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
+import { Gallery, updateGallery } from './world-7/gallery';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -189,6 +190,7 @@ const domainList: Domain[] = [
     new Orion("orion"),
     new Poppy("poppy"),
     new ZenithMarket("zenithMarket"),
+    new Gallery("gallery"),
 ]
 
 export class IdleonData {
@@ -309,6 +311,8 @@ const postProcessingMap: Record<string, Function> = {
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateSailing(accountData),
     "breeding": (doc: Cloudsave, accountData: Map<string, any>) => updateBreeding(accountData),
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
+    // Gallery consumes settled Alchemy, Cards and character-specific Lab chips.
+    "gallery": (doc: Cloudsave, accountData: Map<string, any>) => updateGallery(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),

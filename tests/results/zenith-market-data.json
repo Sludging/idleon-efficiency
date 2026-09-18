@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-09-16T11:52:51.487Z",
+  "timestamp": "2026-09-17T10:17:36.736Z",
   "extractions": {
     "zenith_market_0_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 0, 0)",
       "result": 70,
       "description": "ZenithMarket bonus 0 (True Zen) computed bonus - used in zenith statue multiplier calculation",
-      "extractedAt": "2026-09-16T11:52:51.491Z"
+      "extractedAt": "2026-09-17T10:17:36.740Z"
     },
     "zenith_market_2_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 2, 0)",
       "result": 31,
       "description": "ZenithMarket bonus 2 (Lamp Boost) computed bonus",
-      "extractedAt": "2026-09-16T11:52:51.493Z"
+      "extractedAt": "2026-09-17T10:17:36.742Z"
     },
     "zenith_market_5_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
       "result": 10,
       "description": "ZenithMarket bonus 5 (Super Dupers) computed bonus - feeds into legend talent superTalentBonusLevels",
-      "extractedAt": "2026-09-16T11:52:51.501Z"
+      "extractedAt": "2026-09-17T10:17:36.751Z"
     },
     "zenith_market_9_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 9, 0)",
       "result": 0,
       "description": "ZenithMarket bonus 9 (Classy Gogo) computed bonus - sample upper index",
-      "extractedAt": "2026-09-16T11:52:51.504Z"
+      "extractedAt": "2026-09-17T10:17:36.753Z"
     }
   },
   "errors": {},

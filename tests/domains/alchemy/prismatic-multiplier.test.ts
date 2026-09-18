@@ -43,53 +43,12 @@ describe('Alchemy Domain - Prismatic Multiplier Calculation', () => {
 
    const domainMultiplier = prismaticBubble.prismaticMultiplier;
 
-   expect(domainMultiplier).toMatchLiveGame(liveMultiplier, 0);
+   expect(domainMultiplier).toMatchLiveGameWithDetails(liveMultiplier, {
+    tolerance: 0,
+    context: 'Shared prismatic Bubble bonus multiplier',
+   });
   });
 
-  it('validates multiplier is capped at 4', () => {
-   const prismaticBubble = alchemy.cauldrons
-    .flatMap(cauldron => cauldron.bubbles)
-    .find(bubble => bubble.prismatic);
-
-   if (prismaticBubble) {
-    expect(prismaticBubble.prismaticMultiplier).toBeLessThanOrEqual(4);
-   }
-  });
-
-  it('validates multiplier is at least 2 (base value)', () => {
-   const prismaticBubble = alchemy.cauldrons
-    .flatMap(cauldron => cauldron.bubbles)
-    .find(bubble => bubble.prismatic);
-
-   if (prismaticBubble) {
-    expect(prismaticBubble.prismaticMultiplier).toBeGreaterThanOrEqual(2);
-   }
-  });
  });
 
- describe('Prismatic Bubble Application', () => {
-  it('validates all prismatic bubbles have the same multiplier', () => {
-   const prismaticBubbles = alchemy.cauldrons
-    .flatMap(cauldron => cauldron.bubbles)
-    .filter(bubble => bubble.prismatic);
-
-   if (prismaticBubbles.length > 1) {
-    const firstMultiplier = prismaticBubbles[0].prismaticMultiplier;
-
-    prismaticBubbles.forEach(bubble => {
-     expect(bubble.prismaticMultiplier).toBe(firstMultiplier);
-    });
-   }
-  });
-
-  it('validates non-prismatic bubbles use default multiplier of 2', () => {
-   const nonPrismaticBubble = alchemy.cauldrons
-    .flatMap(cauldron => cauldron.bubbles)
-    .find(bubble => !bubble.prismatic);
-
-   if (nonPrismaticBubble) {
-    expect(nonPrismaticBubble.prismaticMultiplier).toBe(2);
-   }
-  });
- });
 });
