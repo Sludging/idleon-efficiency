@@ -1,0 +1,221 @@
+{
+  "description": "Minehead opponent rewards and persistent upgrade shop; exact game scalars, no mutation or synthetic state. Sources: Minehead.1.21.js and shop caller evidence in correctness-390 research. Research and currency are account-wide; default extraction player 0 supplies the Research level.",
+  "target": "Minehead opponent bonuses and upgrades",
+  "extractions": [
+    {
+      "label": "minehead_bonus_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
+      "description": "Earned opponent reward at progression index 0; strict defeated-count gate, not display ID."
+    },
+    {
+      "label": "minehead_bonus_12",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
+      "description": "Earned opponent reward at progression index 12; strict defeated-count gate, not display ID."
+    },
+    {
+      "label": "minehead_bonus_13",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 13, 0)",
+      "description": "Earned opponent reward at progression index 13; strict defeated-count gate, not display ID."
+    },
+    {
+      "label": "minehead_bonus_21",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
+      "description": "Earned opponent reward at progression index 21; strict defeated-count gate, not display ID."
+    },
+    {
+      "label": "minehead_bonus_31",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 0)",
+      "description": "Earned opponent reward at progression index 31; strict defeated-count gate, not display ID."
+    },
+    {
+      "label": "minehead_preview_21",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 99)",
+      "description": "Opponent 21 preview bypasses the defeat gate; compared to getBaseBonus, not an earned reward."
+    },
+    {
+      "label": "minehead_preview_31",
+      "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 99)",
+      "description": "Opponent 31 preview bypasses the defeat gate; compared to getBaseBonus, not an earned reward."
+    },
+    {
+      "label": "minehead_upgrade_quantity_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 0, 0)",
+      "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 0."
+    },
+    {
+      "label": "minehead_upgrade_quantity_3",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 3, 0)",
+      "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 3."
+    },
+    {
+      "label": "minehead_upgrade_quantity_16",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 16, 0)",
+      "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 16."
+    },
+    {
+      "label": "minehead_upgrade_quantity_26",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0)",
+      "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 26."
+    },
+    {
+      "label": "minehead_upgrade_quantity_29",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 29, 0)",
+      "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 29."
+    },
+    {
+      "label": "minehead_upgrade_requirement_2",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 2, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 2."
+    },
+    {
+      "label": "minehead_upgrade_requirement_3",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 3, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 3."
+    },
+    {
+      "label": "minehead_upgrade_requirement_10",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 10, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 10."
+    },
+    {
+      "label": "minehead_upgrade_requirement_11",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 11, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 11."
+    },
+    {
+      "label": "minehead_upgrade_requirement_20",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 20."
+    },
+    {
+      "label": "minehead_upgrade_requirement_21",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0)",
+      "description": "Research level requirement for the indexed upgrade: upgrade 21."
+    },
+    {
+      "label": "minehead_upgrade_cost_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 0, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 0."
+    },
+    {
+      "label": "minehead_upgrade_cost_1",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 1, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 1."
+    },
+    {
+      "label": "minehead_upgrade_cost_2",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 2, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 2."
+    },
+    {
+      "label": "minehead_upgrade_cost_3",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 3, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 3."
+    },
+    {
+      "label": "minehead_upgrade_cost_4",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 4, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 4."
+    },
+    {
+      "label": "minehead_upgrade_cost_5",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 5, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 5."
+    },
+    {
+      "label": "minehead_upgrade_cost_9",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 9, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 9."
+    },
+    {
+      "label": "minehead_upgrade_cost_10",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 10, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 10."
+    },
+    {
+      "label": "minehead_upgrade_cost_26",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 26, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 26."
+    },
+    {
+      "label": "minehead_upgrade_cost_29",
+      "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 29, 0)",
+      "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 29."
+    },
+    {
+      "label": "minehead_upgrade_affordable_0",
+      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)",
+      "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 0."
+    },
+    {
+      "label": "minehead_upgrade_affordable_1",
+      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)",
+      "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 1."
+    },
+    {
+      "label": "minehead_upgrade_affordable_29",
+      "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)",
+      "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 29."
+    },
+    {
+      "label": "minehead_upgrade_unlocked_20",
+      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
+      "description": "Account Research unlock for upgrade 20 from the shop caller; active player 0 required by extraction policy. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_unlocked_21",
+      "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
+      "description": "Account Research unlock for upgrade 21 from the shop caller; active player 0 required by extraction policy. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_buyable_0",
+      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 0, 0))",
+      "description": "Complete shop purchase eligibility for upgrade 0, combining affordability/cap and Research unlock. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_buyable_1",
+      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 1, 0))",
+      "description": "Complete shop purchase eligibility for upgrade 1, combining affordability/cap and Research unlock. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_buyable_20",
+      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 20, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
+      "description": "Complete shop purchase eligibility for upgrade 20, combining affordability/cap and Research unlock. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_buyable_21",
+      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 21, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
+      "description": "Complete shop purchase eligibility for upgrade 21, combining affordability/cap and Research unlock. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_buyable_29",
+      "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 29, 0))",
+      "description": "Complete shop purchase eligibility for upgrade 29, combining affordability/cap and Research unlock. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_maxed_0",
+      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][0]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]))",
+      "description": "Upgrade 0 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_maxed_1",
+      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][1]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]))",
+      "description": "Upgrade 1 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_upgrade_maxed_29",
+      "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][29]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]))",
+      "description": "Upgrade 29 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1."
+    },
+    {
+      "label": "minehead_sushi_1",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0)",
+      "description": "External Sushi unlock bonus 1, before Minehead max-combines its two Sushi discounts."
+    },
+    {
+      "label": "minehead_sushi_16",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)",
+      "description": "External Sushi unlock bonus 16, before Minehead max-combines its two Sushi discounts."
+    }
+  ]
+}

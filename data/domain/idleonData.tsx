@@ -54,7 +54,7 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { SushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
-import { Minehead } from './world-7/minehead';
+import { Minehead, updateMinehead } from './world-7/minehead';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
@@ -255,6 +255,8 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    // Minehead rewards are account-wide inputs to downstream bonus consumers.
+    "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     // Friend Bonuses consumes parsed companion and Event Shop state.
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
