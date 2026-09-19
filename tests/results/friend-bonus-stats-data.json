@@ -1,71 +1,71 @@
 {
-  "timestamp": "2026-09-19T06:36:49.803Z",
+  "timestamp": "2026-09-19T09:23:17.604Z",
   "extractions": {
     "friend_bonus_stat_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
       "result": 283.6688719913783,
       "description": "Total Damage Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.813Z"
+      "extractedAt": "2026-09-19T09:23:17.609Z"
     },
     "friend_bonus_stat_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 1, 0)",
       "result": 85.10066159741349,
       "description": "Class EXP gain Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.815Z"
+      "extractedAt": "2026-09-19T09:23:17.611Z"
     },
     "friend_bonus_stat_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
       "result": 141.83443599568915,
       "description": "Skill Efficiency Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.817Z"
+      "extractedAt": "2026-09-19T09:23:17.613Z"
     },
     "friend_bonus_stat_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 3, 0)",
       "result": 70.91721799784457,
       "description": "Drop Rate Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.832Z"
+      "extractedAt": "2026-09-19T09:23:17.621Z"
     },
     "friend_bonus_stat_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 4, 0)",
       "result": 85.10066159741349,
       "description": "Skill EXP gain Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.834Z"
+      "extractedAt": "2026-09-19T09:23:17.623Z"
     },
     "friend_bonus_stat_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 5, 0)",
       "result": 113.46754879655133,
       "description": "More Coins Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.845Z"
+      "extractedAt": "2026-09-19T09:23:17.626Z"
     },
     "friend_bonus_stat_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 6, 0)",
       "result": 0,
       "description": "Extra Kills Friend Bonus",
-      "extractedAt": "2026-09-19T06:36:49.847Z"
+      "extractedAt": "2026-09-19T09:23:17.628Z"
     },
     "friend_bonus_companion_44": {
       "expression": "idleon.callFunction(\"Companions\", 44)",
       "result": 1,
       "description": "Spearfish active bonus adds one Friend Bonus slot",
-      "extractedAt": "2026-09-19T06:36:49.849Z"
+      "extractedAt": "2026-09-19T09:23:17.629Z"
     },
     "friend_bonus_companion_30": {
       "expression": "idleon.callFunction(\"Companions\", 30)",
       "result": 1.5,
       "description": "Mr Pig active bonus contributes 1.5 slots and 150% to the Friend Bonus multiplier",
-      "extractedAt": "2026-09-19T06:36:49.852Z"
+      "extractedAt": "2026-09-19T09:23:17.639Z"
     },
     "friend_bonus_companion_lv2_44": {
       "expression": "idleon.callFunction(\"CompLV2\", 44)",
       "result": 1,
       "description": "Spearfish level-two state adds 25% to the Friend Bonus multiplier",
-      "extractedAt": "2026-09-19T06:36:49.862Z"
+      "extractedAt": "2026-09-19T09:23:17.641Z"
     },
     "friend_bonus_event_shop_22": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0)",
       "result": 1,
       "description": "Friendly Slot ownership adds one Friend Bonus slot",
-      "extractedAt": "2026-09-19T06:36:49.864Z"
+      "extractedAt": "2026-09-19T09:23:17.643Z"
     }
   },
   "errors": {},

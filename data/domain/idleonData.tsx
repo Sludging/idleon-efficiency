@@ -86,6 +86,7 @@ import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/po
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
+import { Skilling, updateAllEfficiencies } from './skilling';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -193,6 +194,7 @@ const domainList: Domain[] = [
     new ZenithMarket("zenithMarket"),
     new Gallery("gallery"),
     new HatRack("hatRack"),
+    new Skilling("skilling"),
 ]
 
 export class IdleonData {
@@ -339,6 +341,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
+    "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),

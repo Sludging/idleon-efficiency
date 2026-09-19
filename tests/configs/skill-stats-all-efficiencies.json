@@ -83,6 +83,11 @@
       "description": "Hole B_UPG 49 with input 15 (factor B)"
     },
     {
+      "label": "all_eff_hoops_bonus_3",
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[422])",
+      "description": "Hoops all-skills efficiency bonus (factor B)"
+    },
+    {
       "label": "all_eff_shimmer_skill_efficiency",
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[180]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "description": "Complete Shimmer Skill Efficiency percentage points including The Shim Lantern boost (factor B)"

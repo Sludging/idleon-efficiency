@@ -34,6 +34,7 @@ import { Family } from '../../../data/domain/family';
 import { Friends } from '../../../data/domain/friends';
 import { ClassIndex } from '../../../data/domain/talents';
 import { IslandExpeditions } from '../../../data/domain/world-2/islandExpedition';
+import { Hoops } from '../../../data/domain/world-1/hoops';
 
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
@@ -57,7 +58,10 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_family_bonus_42: {
   description: 'Family Hunter branch-0 class bonus (FamBonusQTYs[42])',
   extractionKey: 'all_eff_family_bonus_42',
-  domainExtractor: (gameData) => (gameData.get('family') as Family).getClassBonus(ClassIndex.Hunter)?.getBonus(),
+  domainExtractor: (gameData) => {
+   const player0 = getPlayer0(gameData);
+   return (gameData.get('family') as Family).getClassBonus(ClassIndex.Hunter)?.getBonus(player0);
+  },
  },
  all_eff_etc_bonus_48: {
   description: 'Player 0 equipment EtcBonuses(48) / Skill Efficiency',
@@ -141,6 +145,11 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Hole B_UPG(49, 15)',
   extractionKey: 'all_eff_hole_b_upg_49_15',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getSchematicBonus(49, 15),
+ },
+ all_eff_hoops_bonus_3: {
+  description: 'Hoops bonus 3 / OptionsListAccount[422]',
+  extractionKey: 'all_eff_hoops_bonus_3',
+  domainExtractor: (gameData) => (gameData.get('hoops') as Hoops).getBonus(3),
  },
  all_eff_shimmer_skill_efficiency: {
   description: 'Shimmer Skill Efficiency bonus including The Shim Lantern boost',

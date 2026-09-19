@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-19T06:36:49.035Z",
+  "timestamp": "2026-09-19T09:23:16.880Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 75,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-09-19T06:36:49.043Z"
+      "extractedAt": "2026-09-19T09:23:16.892Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 18.75,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-09-19T06:36:49.045Z"
+      "extractedAt": "2026-09-19T09:23:16.893Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
       "result": 2.078125,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-09-19T06:36:49.047Z"
+      "extractedAt": "2026-09-19T09:23:16.895Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
       "result": 41.5625,
       "description": "Representative Button bonus at the first category index",
-      "extractedAt": "2026-09-19T06:36:49.049Z"
+      "extractedAt": "2026-09-19T09:23:16.897Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
       "result": 363.671875,
       "description": "Representative Button bonus at the downstream cooking consumer index",
-      "extractedAt": "2026-09-19T06:36:49.057Z"
+      "extractedAt": "2026-09-19T09:23:16.905Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "result": 51.953125,
       "description": "Representative Button bonus at the final category index",
-      "extractedAt": "2026-09-19T06:36:49.060Z"
+      "extractedAt": "2026-09-19T09:23:16.907Z"
     }
   },
   "errors": {},
