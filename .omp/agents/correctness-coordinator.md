@@ -5,7 +5,7 @@ model:
   - "@correctness_coordinator"
   - "@default"
 autoloadSkills: calculation-correctness
-spawns: correctness-worker,correctness-reviewer,correctness-researcher
+spawns: correctness-worker,correctness-reviewer,correctness-researcher,correctness-pattern-researcher
 ---
 
 # Goal

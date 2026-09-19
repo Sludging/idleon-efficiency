@@ -5,7 +5,7 @@ model:
   - "@correctness_reviewer"
   - "@default"
 autoloadSkills: calculation-correctness
-spawns: correctness-researcher
+spawns: correctness-researcher,correctness-pattern-researcher
 ---
 
 # Responsibility
@@ -31,7 +31,7 @@ Review the selected calculation and its direct relationships. The delivered sour
 
 Use the plan and case findings as the starting point, not as proof of correctness. If evidence exposes a problem in the approved design, return `NEEDS_HUMAN` with the proposed change and reason under the [plan approval rule](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval). Do not silently replace the agreed design.
 
-Read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) to locate evidence, not to inherit conclusions. Independently inspect the focused source supporting the findings. Delegate missing-source discovery, in-game caller investigation, debug-server command exploration, and Wiki lookup to `correctness-researcher`, including follow-up questions; keep large game-file searches and exploratory output out of your own context. The researcher may update the local research file and capture snippets; your review remains read-only.
+Read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) to locate evidence, not to inherit conclusions. Independently inspect the focused source supporting the findings. Delegate missing-source discovery, in-game caller investigation, debug-server command exploration, and Wiki lookup to `correctness-researcher`, including follow-up questions; keep large game-file searches and exploratory output out of your own context. The researcher may update the local research file and capture snippets; your review remains read-only. Use `correctness-pattern-researcher` when you need more detail about selected examples or the code that uses the result.
 
 # Independent checks
 
@@ -41,7 +41,7 @@ Perform these checks in order:
 2. **Named test results.** Run every targeted command and path named in `Work/result`. Require the matching real save/results pair, tolerance `0`, and observed output. The core test compares the public selected result. Parameter tests compare each direct cross-domain/aspect calculation used by that result, rather than save plumbing or static WikiBot definitions.
 3. **Core coverage.** Check whether the selected tests provide useful coverage through distinct behaviors or branches, or representative values. State what the real save exercises and any limits that matter to acceptance.
 4. **Direct parameters and dependencies.** Confirm that every calculation used directly across domains/aspects, including another aspect in the same domain, has an active parameter comparison and matching domain mapping. Static data, trivial helpers, raw save fields, and calculations used only inside a dependency are outside this selected coverage. A missing required comparison is `CHANGES_REQUIRED`; an unclear mapping is `NEEDS_HUMAN`; a missing or failing direct dependency is `BLOCKED` and remains separate from the selected implementation.
-5. **Plan, website fit, and integration.** Check that ownership, public interface, character semantics, and scope match the approved plan and work for its website consumers. Verify registrations, callers, and the `init → parse → calculate` flow. Check that names, descriptions, tests, and comments explain the mechanic rather than the obfuscated source. Approval does not excuse a broken design; report it for human decision. State the actual integration behavior covered.
+5. **Plan, website fit, and integration.** Check that ownership, public interface, character semantics, and scope match the approved plan and work for its website consumers. Compare the implementation with the existing code examples selected in the plan. Check the code that uses the result. Verify registrations, callers, and the `init → parse → calculate` flow. Check that names, descriptions, tests, and comments explain the mechanic rather than the obfuscated source. Approval does not excuse a broken design; report it for human decision. State the actual integration behavior covered.
 6. **Tests before implementation.** Check the linked tests-stage result for core and all direct parameter comparisons run before domain edits, with direct parameters passing and a meaningful selected result. An already-green result may proceed directly to review. Mark the test-first status as `violated` when implementation preceded that result and `not established` when the historical result is missing; later green results do not change either fact.
 
 One real save checks only the values and branches it exercises. Report a coverage limit that does not affect the agreed acceptance as a note with `PASS`. Missing required coverage needs correction or a human decision when its meaning is unclear.

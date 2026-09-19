@@ -31,7 +31,7 @@ Keep one plan at `.omp/plans/correctness-<issue-number>.md`. Include:
 - **Status:** `draft` or `approved`. Only the coordinator records approval after the human explicitly approves the current proposal.
 - **Scope:** behavior to deliver and what is excluded.
 - **Website design:** owning domain, public interface and a caller example, including account-wide or per-character behavior where relevant.
-- **Implementation approach:** existing pattern to follow, important dependencies, and any pipeline changes.
+- **Implementation approach:** existing pattern to follow, important dependencies, and any pipeline changes. If website pattern research applies, name and cite the existing code examples you used. Explain why each fits. State any deliberate differences.
 - **Verification:** results to compare against the game and known coverage limits.
 
 Keep simple cases short. An unchanged interface needs only its existing usage and the intended correction, not a redesign.
@@ -127,6 +127,10 @@ Keep research in `.omp/research/correctness-<issue-number>.md`, separate from th
 The file holds source-backed facts, game version, relevant function and in-game caller evidence, optional Wiki context, reproducible debug-server commands, and unresolved gaps. Link reusable captures under `docs/game-snippets/` rather than duplicating whole functions. Distinguish observed runtime values from source facts and Wiki descriptions. It supplies evidence, not website design decisions or a correctness verdict.
 
 The coordinator links the research path in assignments and the Case working note without copying its contents. Keep it local and uncommitted while the case is active or blocked, then delete it with the plan at closure.
+
+## Website pattern research
+
+During planning, ask `correctness-pattern-researcher` to find existing code before adding or changing domains, classes, saved-data handling, or public methods. Give the helper the proposed change and the questions you need answered. A formula correction that keeps the same code structure and public methods does not need a helper call.
 
 ## Shared case working note
 

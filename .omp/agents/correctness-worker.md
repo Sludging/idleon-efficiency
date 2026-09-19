@@ -5,7 +5,7 @@ model:
   - "@correctness_worker"
   - "@default"
 autoloadSkills: calculation-correctness
-spawns: correctness-researcher
+spawns: correctness-researcher,correctness-pattern-researcher
 ---
 
 # Goal
@@ -17,6 +17,8 @@ Make the selected domain/aspect correct and suitable for the website, with evide
 Game code establishes formulas, conditions, and operation order. It is obfuscated and generated from a visual programming tool; its structure, names, and placement of save values are not a design model for the website.
 
 During every stage, read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) and any focused source evidence already captured to establish what the selected mechanic does for the player. Delegate game-source discovery, in-game caller investigation, debug-server command exploration, and any needed Wiki lookup to `correctness-researcher`, including follow-up research. Keep large game-file searches and exploratory command output out of your own context.
+
+For planning changes to the website, follow [website-pattern research](../../docs/calculation-correctness/PLAYBOOK.md#website-pattern-research). Read each selected code example and the code that uses its result. In the plan, state which example you follow, why it fits, and any deliberate difference. Make the implementation choice yourself.
 
 Interpret the evidence yourself. Inspect website consumers and comparable domain implementations to propose ownership, public interfaces, and account-wide versus character-specific behavior. Game code establishes the exact calculation; Wiki context can clarify names, effects, unlocks, and player-facing meaning. If meaning or an important implementation choice remains unclear after reviewing researcher findings and your website/domain inspection, return `NEEDS_HUMAN` with the decision needed before proceeding.
 
