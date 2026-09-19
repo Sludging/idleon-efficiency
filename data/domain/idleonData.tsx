@@ -33,7 +33,7 @@ import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
 import { Divinity, updateDivinity } from './world-5/divinity';
-import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
+import { Sailing, updateSailing, updateMinTravelTimeAndSpeed, updateSailingSlabBonusMultiplier } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
 import { updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
@@ -273,6 +273,7 @@ const postProcessingMap: Record<string, Function> = {
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
+    "updateSailingSlabBonusMultiplier": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingSlabBonusMultiplier(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),
     "emperorBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateEmperorBonuses(accountData),

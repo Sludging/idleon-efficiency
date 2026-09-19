@@ -30,6 +30,8 @@ import { Arcade } from "../../world-2/arcade";
 import { Hole } from "../hole/hole";
 import { Votes } from "../../world-2/votes";
 import { LegendTalents } from "../../world-7/legendTalents";
+import { Meritocraty } from "../../world-7/meritocraty";
+import { UpgradeVault } from "../../upgradeVault";
 
 // "Captains": [
 //     [0,0,-1,3,6.75,2,0],
@@ -263,6 +265,7 @@ export class Sailing extends Domain {
     captains: Captain[] = [];
     shopCaptains: Captain[] = [];
     loot: number[] = [];
+    private slabBonusMultiplier: number = 1;
 
     maxChests: number = 5;
     captainsUnlocked = 1;
@@ -311,6 +314,17 @@ export class Sailing extends Domain {
         })
 
         return this;
+    }
+
+    getSlabBonusMultiplier(): number {
+        return this.slabBonusMultiplier;
+    }
+
+    updateCalculationState(meritocraty: Meritocraty, legendTalents: LegendTalents, upgradeVault: UpgradeVault): void {
+        // Multi Meritocracy, Legend Talents, and Super Slab multiply every Slab bonus.
+        this.slabBonusMultiplier = (1 + meritocraty.getCurrentBonus(23) / 100)
+            * (1 + legendTalents.getBonusFromIndex(28) / 100)
+            * (1 + upgradeVault.getBonusForId(74) / 100);
     }
 
     parse(data: Map<string, any>): void {
@@ -377,6 +391,20 @@ export class Sailing extends Domain {
         })
     }
 }
+
+export const updateSailingSlabBonusMultiplier = (data: Map<string, any>) => {
+    const sailing = data.get("sailing") as Sailing | undefined;
+    const meritocraty = data.get("meritocraty") as Meritocraty | undefined;
+    const legendTalents = data.get("legendTalents") as LegendTalents | undefined;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault | undefined;
+
+    if (!sailing || !meritocraty || !legendTalents || !upgradeVault) {
+        throw new Error("Sailing Slab bonus calculation requires Sailing, Meritocraty, Legend Talents, and Upgrade Vault data");
+    }
+
+    sailing.updateCalculationState(meritocraty, legendTalents, upgradeVault);
+    return sailing;
+};
 
 export const updateSailing = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
