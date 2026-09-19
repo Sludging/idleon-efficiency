@@ -85,6 +85,7 @@ import { Orion, updateOrionFeatherRate, updateOrionGlobalBonus } from './world-1
 import { Poppy, updatePoppyFishRate, updatePoppyGlobalBonus } from './world-2/poppy';
 import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenithShop';
 import { Gallery, updateGallery } from './world-7/gallery';
+import { HatRack, updateHatRack } from './world-7/hatRack';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -191,6 +192,7 @@ const domainList: Domain[] = [
     new Poppy("poppy"),
     new ZenithMarket("zenithMarket"),
     new Gallery("gallery"),
+    new HatRack("hatRack"),
 ]
 
 export class IdleonData {
@@ -315,8 +317,9 @@ const postProcessingMap: Record<string, Function> = {
     "shrines": (doc: Cloudsave, accountData: Map<string, any>) => updateShrines(accountData),
     // Gallery consumes settled Alchemy, Cards and character-specific Lab chips.
     "gallery": (doc: Cloudsave, accountData: Map<string, any>) => updateGallery(accountData),
+    // Hat Rack consumes settled Minehead, companion, Event Shop and Sushi state.
+    "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
-    "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
