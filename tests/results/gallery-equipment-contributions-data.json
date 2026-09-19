@@ -1,113 +1,113 @@
 {
-  "timestamp": "2026-09-18T08:00:29.392Z",
+  "timestamp": "2026-09-19T05:16:48.063Z",
   "extractions": {
     "gallery_trophy_agility_percent": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
       "result": 15.23059602923109,
       "description": "Trophy Agility contribution at the improved-podium boundary; the paired save has artifact33 status4 and Trophy10 in collection position62",
-      "extractedAt": "2026-09-18T08:00:29.402Z"
+      "extractedAt": "2026-09-19T05:16:48.067Z"
     },
     "gallery_nametag_skill_efficiency": {
       "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"GalleryNametagBonTOT\").h, \"%_SKILL_EFFICIENCY\") ? idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_SKILL_EFFICIENCY\"] : 0",
       "result": 0,
       "description": "Nametag Skill Efficiency contribution; absent effect keys contribute zero, following EtcBonuses own-property fallback (EtcBonuses.1.21.js:8-12)",
-      "extractedAt": "2026-09-18T08:00:29.404Z"
+      "extractedAt": "2026-09-19T05:16:48.076Z"
     },
     "gallery_item_trophy16_skill_efficiency": {
       "expression": "idleon.getAttr(\"ItemDefinitionsGET\").h.Trophy16.h.UQ1val",
       "result": 15,
       "description": "Trophy16 unupgraded Skill Efficiency effect consumed by Gallery",
-      "extractedAt": "2026-09-18T08:00:29.406Z"
+      "extractedAt": "2026-09-19T05:16:48.078Z"
     },
     "gallery_item_nametag3_drop_rate": {
       "expression": "idleon.getAttr(\"ItemDefinitionsGET\").h.EquipmentNametag3.h.UQ1val",
       "result": 40,
       "description": "Nametag3 unupgraded Drop Rate effect consumed by Gallery",
-      "extractedAt": "2026-09-18T08:00:29.408Z"
+      "extractedAt": "2026-09-19T05:16:48.079Z"
     },
     "gallery_item_nametag6b_fishing_xp": {
       "expression": "idleon.getAttr(\"ItemDefinitionsGET\").h.EquipmentNametag6b.h.UQ1val",
       "result": 200,
       "description": "Alternate nametag index 6 unupgraded Fishing XP effect; collection branch is not exercised by the current save",
-      "extractedAt": "2026-09-18T08:00:29.417Z"
+      "extractedAt": "2026-09-19T05:16:48.081Z"
     },
     "gallery_chip_troph": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
       "result": 1,
       "description": "Active character trophy chip contribution",
-      "extractedAt": "2026-09-18T08:00:29.419Z"
+      "extractedAt": "2026-09-19T05:16:48.082Z"
     },
     "gallery_clamworks_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 0, 0)",
       "result": 1,
       "description": "Clamworks promotion 0 podium contribution",
-      "extractedAt": "2026-09-18T08:00:29.421Z"
+      "extractedAt": "2026-09-19T05:16:48.084Z"
     },
     "gallery_clamworks_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"ClamWorkBonus\", 7, 0)",
       "result": 0,
       "description": "Clamworks promotion 7 Gallery scaling contribution",
-      "extractedAt": "2026-09-18T08:00:29.423Z"
+      "extractedAt": "2026-09-19T05:16:48.093Z"
     },
     "gallery_killroy_3": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
       "result": 0,
       "description": "Killroy bonus used by podium grades and Gallery scaling",
-      "extractedAt": "2026-09-18T08:00:29.432Z"
+      "extractedAt": "2026-09-19T05:16:48.094Z"
     },
     "gallery_alchemy_y13": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
       "result": 12.074613723081224,
       "description": "Calculated Y13 bubble bonus before Gallery's cap of 20",
-      "extractedAt": "2026-09-18T08:00:29.435Z"
+      "extractedAt": "2026-09-19T05:16:48.096Z"
     },
     "gallery_card_w7a11": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
       "result": 1,
       "description": "Calculated w7a11 card level before Gallery's cap of 10",
-      "extractedAt": "2026-09-18T08:00:29.437Z"
+      "extractedAt": "2026-09-19T05:16:48.097Z"
     },
     "gallery_companion_28": {
       "expression": "idleon.callFunction(\"Companions\", 28)",
       "result": 40,
       "description": "Companion 28 highest-grade podium contribution",
-      "extractedAt": "2026-09-18T08:00:29.439Z"
+      "extractedAt": "2026-09-19T05:16:48.099Z"
     },
     "gallery_companion_evolution_28": {
       "expression": "idleon.callFunction(\"CompLV2\", 28)",
       "result": 1,
       "description": "Companion 28 evolution highest-grade podium contribution",
-      "extractedAt": "2026-09-18T08:00:29.441Z"
+      "extractedAt": "2026-09-19T05:16:48.100Z"
     },
     "gallery_companion_42": {
       "expression": "idleon.callFunction(\"Companions\", 42)",
       "result": 3,
       "description": "Companion 42 improved podium contribution",
-      "extractedAt": "2026-09-18T08:00:29.448Z"
+      "extractedAt": "2026-09-19T05:16:48.102Z"
     },
     "gallery_companion_49": {
       "expression": "idleon.callFunction(\"Companions\", 49)",
       "result": 50,
       "description": "Companion 49 Gallery scaling contribution",
-      "extractedAt": "2026-09-18T08:00:29.451Z"
+      "extractedAt": "2026-09-19T05:16:48.110Z"
     },
     "gallery_sushi_54": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 54, 0)",
       "result": 0,
       "description": "Sushi bonus 54 Gallery scaling contribution",
-      "extractedAt": "2026-09-18T08:00:29.452Z"
+      "extractedAt": "2026-09-19T05:16:48.111Z"
     },
     "gallery_legend_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 9, 0)",
       "result": 2,
       "description": "Legend talent 9 improved podium contribution",
-      "extractedAt": "2026-09-18T08:00:29.454Z"
+      "extractedAt": "2026-09-19T05:16:48.113Z"
     },
     "gallery_event_shop_29": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 29, 0)",
       "result": 0,
       "description": "Event Shop 29 highest-grade podium unlock",
-      "extractedAt": "2026-09-18T08:00:29.456Z"
+      "extractedAt": "2026-09-19T05:16:48.114Z"
     }
   },
   "errors": {},

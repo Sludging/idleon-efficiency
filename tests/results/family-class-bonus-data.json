@@ -1,149 +1,149 @@
 {
-  "timestamp": "2026-09-18T08:00:29.139Z",
+  "timestamp": "2026-09-19T05:16:47.833Z",
   "extractions": {
     "family_bonus_2": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[2]",
       "result": null,
       "description": "Beginner Family Bonus branch 0 (FamBonusQTYs[2])",
-      "extractedAt": "2026-09-18T08:00:29.150Z"
+      "extractedAt": "2026-09-19T05:16:47.844Z"
     },
     "family_bonus_4": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[4]",
       "result": 259,
       "description": "Journeyman Family Bonus branch 0 (FamBonusQTYs[4])",
-      "extractedAt": "2026-09-18T08:00:29.152Z"
+      "extractedAt": "2026-09-19T05:16:47.845Z"
     },
     "family_bonus_6": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[6]",
       "result": 5.562682215743441,
       "description": "Maestro Family Bonus branch 0 (FamBonusQTYs[6])",
-      "extractedAt": "2026-09-18T08:00:29.153Z"
+      "extractedAt": "2026-09-19T05:16:47.847Z"
     },
     "family_bonus_8": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[8]",
       "result": 4.156545209176788,
       "description": "Voidwalker Family Bonus branch 0 (FamBonusQTYs[8])",
-      "extractedAt": "2026-09-18T08:00:29.155Z"
+      "extractedAt": "2026-09-19T05:16:47.848Z"
     },
     "family_bonus_14": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[14]",
       "result": 288.04734299516906,
       "description": "Warrior Family Bonus branch 0 (FamBonusQTYs[14])",
-      "extractedAt": "2026-09-18T08:00:29.156Z"
+      "extractedAt": "2026-09-19T05:16:47.850Z"
     },
     "family_bonus_16": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[16]",
       "result": 29.827811700466743,
       "description": "Barbarian Family Bonus branch 0 (FamBonusQTYs[16])",
-      "extractedAt": "2026-09-18T08:00:29.158Z"
+      "extractedAt": "2026-09-19T05:16:47.851Z"
     },
     "family_bonus_18": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
       "result": 37.19298245614035,
       "description": "Squire Family Bonus branch 0 (FamBonusQTYs[18])",
-      "extractedAt": "2026-09-18T08:00:29.165Z"
+      "extractedAt": "2026-09-19T05:16:47.859Z"
     },
     "family_bonus_20": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[20]",
       "result": 22.22788333056603,
       "description": "Blood Berserker Family Bonus branch 0 (FamBonusQTYs[20])",
-      "extractedAt": "2026-09-18T08:00:29.167Z"
+      "extractedAt": "2026-09-19T05:16:47.861Z"
     },
     "family_bonus_24": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[24]",
       "result": 59.56824723526738,
       "description": "Divine Knight Family Bonus branch 0 (FamBonusQTYs[24])",
-      "extractedAt": "2026-09-18T08:00:29.169Z"
+      "extractedAt": "2026-09-19T05:16:47.862Z"
     },
     "family_bonus_28": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[28]",
       "result": 43.09497552009629,
       "description": "Death Bringer Family Bonus branch 0 (FamBonusQTYs[28])",
-      "extractedAt": "2026-09-18T08:00:29.171Z"
+      "extractedAt": "2026-09-19T05:16:47.864Z"
     },
     "family_bonus_32": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[32]",
       "result": 6.049382716049383,
       "description": "Royal Guardian Family Bonus branch 0 (FamBonusQTYs[32])",
-      "extractedAt": "2026-09-18T08:00:29.172Z"
+      "extractedAt": "2026-09-19T05:16:47.865Z"
     },
     "family_bonus_38": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[38]",
       "result": 267,
       "description": "Archer Family Bonus branch 0 (FamBonusQTYs[38])",
-      "extractedAt": "2026-09-18T08:00:29.174Z"
+      "extractedAt": "2026-09-19T05:16:47.867Z"
     },
     "family_bonus_40": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[40]",
       "result": 35.306874557051735,
       "description": "Bowman Family Bonus branch 0 (FamBonusQTYs[40])",
-      "extractedAt": "2026-09-18T08:00:29.182Z"
+      "extractedAt": "2026-09-19T05:16:47.869Z"
     },
     "family_bonus_42": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[42]",
       "result": 27.8708303761533,
       "description": "Hunter Family Bonus branch 0 (FamBonusQTYs[42])",
-      "extractedAt": "2026-09-18T08:00:29.184Z"
+      "extractedAt": "2026-09-19T05:16:47.876Z"
     },
     "family_bonus_44": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[44]",
       "result": 23.46957125184805,
       "description": "Siege Breaker Family Bonus branch 0 (FamBonusQTYs[44])",
-      "extractedAt": "2026-09-18T08:00:29.186Z"
+      "extractedAt": "2026-09-19T05:16:47.878Z"
     },
     "family_bonus_50": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[50]",
       "result": 4.37888198757764,
       "description": "Beast Master Family Bonus branch 0 (FamBonusQTYs[50])",
-      "extractedAt": "2026-09-18T08:00:29.187Z"
+      "extractedAt": "2026-09-19T05:16:47.880Z"
     },
     "family_bonus_58": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[58]",
       "result": 1.8425087108013938,
       "description": "Wind Walker Family Bonus branch 0 (FamBonusQTYs[58])",
-      "extractedAt": "2026-09-18T08:00:29.189Z"
+      "extractedAt": "2026-09-19T05:16:47.881Z"
     },
     "family_bonus_62": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[62]",
       "result": 264,
       "description": "Mage Family Bonus branch 0 (FamBonusQTYs[62])",
-      "extractedAt": "2026-09-18T08:00:29.191Z"
+      "extractedAt": "2026-09-19T05:16:47.883Z"
     },
     "family_bonus_64": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[64]",
       "result": 217,
       "description": "Wizard Family Bonus branch 0 (FamBonusQTYs[64])",
-      "extractedAt": "2026-09-18T08:00:29.198Z"
+      "extractedAt": "2026-09-19T05:16:47.885Z"
     },
     "family_bonus_66": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
       "result": 1.3710773680404917,
       "description": "Shaman Family Bonus branch 0 (FamBonusQTYs[66])",
-      "extractedAt": "2026-09-18T08:00:29.200Z"
+      "extractedAt": "2026-09-19T05:16:47.892Z"
     },
     "family_bonus_68": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[68]",
       "result": 15.64134495641345,
       "description": "Elemental Sorcerer Family Bonus branch 0 (FamBonusQTYs[68])",
-      "extractedAt": "2026-09-18T08:00:29.202Z"
+      "extractedAt": "2026-09-19T05:16:47.894Z"
     },
     "family_bonus_72": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[72]",
       "result": 4.367533380182713,
       "description": "Bubonic Conjuror Family Bonus branch 0 (FamBonusQTYs[72])",
-      "extractedAt": "2026-09-18T08:00:29.203Z"
+      "extractedAt": "2026-09-19T05:16:47.896Z"
     },
     "family_bonus_80": {
       "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[80]",
       "result": 7.158850226928895,
       "description": "Arcane Cultist Family Bonus branch 0 (FamBonusQTYs[80])",
-      "extractedAt": "2026-09-18T08:00:29.205Z"
+      "extractedAt": "2026-09-19T05:16:47.898Z"
     },
     "family_guy_talent_144": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
       "result": 30.675990675990676,
       "description": "Active character The Family Guy talent bonus used to boost Family Bonuses",
-      "extractedAt": "2026-09-18T08:00:29.208Z"
+      "extractedAt": "2026-09-19T05:16:47.899Z"
     }
   },
   "errors": {},

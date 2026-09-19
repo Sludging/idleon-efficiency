@@ -1,47 +1,47 @@
 {
-  "timestamp": "2026-09-18T08:00:30.903Z",
+  "timestamp": "2026-09-19T05:16:49.362Z",
   "extractions": {
     "sushi_unique_count": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"UniqueSushi\", 0, 0)",
       "result": 39,
       "description": "Number of contiguous unlocked Sushi entries",
-      "extractedAt": "2026-09-18T08:00:30.908Z"
+      "extractedAt": "2026-09-19T05:16:49.365Z"
     },
     "sushi_rog_bonus_qty_23": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 23, 0)",
       "result": 1,
       "description": "Sushi unlock bonus at internal index 23",
-      "extractedAt": "2026-09-18T08:00:30.917Z"
+      "extractedAt": "2026-09-19T05:16:49.367Z"
     },
     "sushi_rog_bonus_qty_26": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 26, 0)",
       "result": 25,
       "description": "Sushi unlock bonus at internal index 26",
-      "extractedAt": "2026-09-18T08:00:30.919Z"
+      "extractedAt": "2026-09-19T05:16:49.368Z"
     },
     "sushi_rog_bonus_qty_41": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 41, 0)",
       "result": 0,
       "description": "Sushi unlock bonus at internal index 41",
-      "extractedAt": "2026-09-18T08:00:30.920Z"
+      "extractedAt": "2026-09-19T05:16:49.370Z"
     },
     "sushi_rog_bonus_qty_44": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 44, 0)",
       "result": 0,
       "description": "Sushi unlock bonus at internal index 44",
-      "extractedAt": "2026-09-18T08:00:30.922Z"
+      "extractedAt": "2026-09-19T05:16:49.379Z"
     },
     "sushi_rog_bonus_qty_50": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
       "result": 0,
       "description": "Sushi unlock bonus at internal index 50",
-      "extractedAt": "2026-09-18T08:00:30.924Z"
+      "extractedAt": "2026-09-19T05:16:49.381Z"
     },
     "sushi_rog_bonus_qty_51": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 51, 0)",
       "result": 0,
       "description": "Sushi unlock bonus at internal index 51",
-      "extractedAt": "2026-09-18T08:00:30.925Z"
+      "extractedAt": "2026-09-19T05:16:49.382Z"
     }
   },
   "errors": {},

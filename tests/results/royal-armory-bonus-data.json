@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-09-18T08:00:30.554Z",
+  "timestamp": "2026-09-19T05:16:49.068Z",
   "extractions": {
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
       "result": 0,
       "description": "Royal Armory upgrade 76 bonus used by Equinox Dreamstuff bar fill rate",
-      "extractedAt": "2026-09-18T08:00:30.566Z"
+      "extractedAt": "2026-09-19T05:16:49.080Z"
     },
     "royal_armory_bonus_9": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 9, 0)",
       "result": 12,
       "description": "Royal Armory upgrade 9 bonus representative nonzero level",
-      "extractedAt": "2026-09-18T08:00:30.569Z"
+      "extractedAt": "2026-09-19T05:16:49.082Z"
     },
     "royal_armory_bonus_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
       "result": 80,
       "description": "Royal Armory upgrade 19 bonus representative nonzero level",
-      "extractedAt": "2026-09-18T08:00:30.570Z"
+      "extractedAt": "2026-09-19T05:16:49.084Z"
     }
   },
   "errors": {},

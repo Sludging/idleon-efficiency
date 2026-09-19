@@ -5,8 +5,8 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Companion, getCompanionBonus } from '../../../data/domain/companions';
-import { Equinox, getCloudBonus } from '../../../data/domain/world-3/equinox';
+import { Companion, getCompanionBonus, getCompanionActiveBonus } from '../../../data/domain/companions';
+import { Equinox } from '../../../data/domain/world-3/equinox';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 
 const saveName = 'latest';
@@ -17,7 +17,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Companion bonus that increases all Research Grid bonuses',
   extractionKey: 'companion_bonus_55',
   domainExtractor: (gameData) => {
-   return getCompanionBonus(gameData.get('companions') as Companion[], 55);
+   return getCompanionActiveBonus(gameData.get('companions') as Companion[], 55);
   }
  },
  companion_bonus_0: {
