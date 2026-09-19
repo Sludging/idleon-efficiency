@@ -653,6 +653,15 @@ export const initArcadeBonusRepo = () => {
                 "type": "%",
                 "lvlUpText": "+{% Marble DR",
                 "barType": 35
+            }),
+        new ArcadeBonusBase(72, <ArcadeBonusModel>{
+                "effect": "+{% Jelly Bloodcells",
+                "x1": 5,
+                "x2": 100,
+                "func": "decay",
+                "type": "%",
+                "lvlUpText": "+{% Bloodcells",
+                "barType": 42
             })    
 ]
 }

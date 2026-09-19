@@ -1673,30 +1673,30 @@ export const initResearchGridBonusRepo = () => {
             }),
         new ResearchGridBonusBase(185, <ResearchGridBonusModel>{
                 "index": 185,
-                "name": "Name",
-                "maxLevel": 1,
-                "bonusPerLevel": 1,
+                "name": "Cellular Warfare",
+                "maxLevel": 4,
+                "bonusPerLevel": 5,
                 "x3": 0,
                 "x4": 0,
-                "description": "desc"
+                "description": "Multiplies all damage dealt by your cells during operations by }x @ A true operator must consider the indirect bloodcell gain..."
             }),
         new ResearchGridBonusBase(186, <ResearchGridBonusModel>{
                 "index": 186,
-                "name": "Name",
-                "maxLevel": 1,
-                "bonusPerLevel": 1,
+                "name": "Daily Operating Procedure",
+                "maxLevel": 4,
+                "bonusPerLevel": 2,
                 "x3": 0,
                 "x4": 0,
-                "description": "desc"
+                "description": "Gives you +  more operations to start every day at the Jelly Operator game!"
             }),
         new ResearchGridBonusBase(187, <ResearchGridBonusModel>{
                 "index": 187,
-                "name": "Name",
-                "maxLevel": 1,
-                "bonusPerLevel": 1,
+                "name": "Jelly Operator Linguistics",
+                "maxLevel": 4,
+                "bonusPerLevel": 10,
                 "x3": 0,
                 "x4": 0,
-                "description": "desc"
+                "description": "You can now speak to the Jelly found in the Jellofish map to play the Jelly Operator game! @ Also, }x more Bloodcells gained from operations!"
             }),
         new ResearchGridBonusBase(188, <ResearchGridBonusModel>{
                 "index": 188,

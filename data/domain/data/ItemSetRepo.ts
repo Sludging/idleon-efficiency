@@ -633,6 +633,9 @@ export const initItemSetRepo = () => {
         new ItemSetBase("EquipmentHats131", <ItemSetModel>{"set": "Lucky"}),
         new ItemSetBase("EquipmentHats136", <ItemSetModel>{"set": "Bronze"}),
         new ItemSetBase("EquipmentHats137", <ItemSetModel>{"set": "Silver"}),
-        new ItemSetBase("EquipmentHats138", <ItemSetModel>{"set": "Gold"})    
+        new ItemSetBase("EquipmentHats138", <ItemSetModel>{"set": "Gold"}),
+        new ItemSetBase("EquipmentHats142", <ItemSetModel>{"set": "Bronze"}),
+        new ItemSetBase("EquipmentHats143", <ItemSetModel>{"set": "Silver"}),
+        new ItemSetBase("EquipmentHats144", <ItemSetModel>{"set": "Gold"})    
 ]
 }

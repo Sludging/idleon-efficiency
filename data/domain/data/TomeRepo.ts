@@ -1053,7 +1053,7 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(116, <TomeModel>{
                 "name": "Unique Sushi Created 膛",
-                "keyQty": 63,
+                "keyQty": 64,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 800,
                 "decimalDisplay": undefined,
@@ -1095,6 +1095,15 @@ export const initTomeRepo = () => {
                 "decimalDisplay": undefined,
                 "desc": "Resource Grade refers to the Royal Guardian resource system, where you increase each resource node's Grade by collecting all its resources.",
                 "uiPositionIndex": 108
+            }),
+        new TomeBase(121, <TomeModel>{
+                "name": "Successful Jelly Operations 膛",
+                "keyQty": 72,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 800,
+                "decimalDisplay": undefined,
+                "desc": "This is the number of obstructions you've defeated at the Jelly Operator research game in World 7!",
+                "uiPositionIndex": 121
             })    
 ]
 }
