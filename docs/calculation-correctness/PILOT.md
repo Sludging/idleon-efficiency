@@ -60,3 +60,31 @@ After the fifth distinct closed case, post one iteration-two review-ready notice
 7. **Coordination and outcomes:** Did plan approval settle the website design before changes? Did workers follow it, and did later corrections repeat decisions already made? Which cases completed the process, and which used an exception or abort?
 
 Compare the calculation results, process observations, exceptions, and coverage limits recorded in the cases. Use timed reports to discuss the work they describe; overall claims about speed or cost need measurements of those quantities.
+
+## Supervisor experiment
+
+For each supervised case, a human may explicitly ask
+`correctness-supervisor` to run one selected issue. The coordinator records
+`Approver: supervisor` in the existing Case working note and keeps using the
+existing `Iteration 2` outcome entry. Leave older human entries unchanged.
+
+The supervisor reviews the plan and normal result. The supervisor may approve
+the plan, request changes, accept normal completion, or escalate a reserved
+question. The coordinator still manages stages, timers, research, extraction,
+dependencies, notes, and closure.
+
+For a supervised entry, add `Approver: supervisor` and
+`Supervisor feedback: <useful correction and reason; none recorded>` to the
+existing outcome. Record useful feedback in the Case working note before the
+next handoff. Distinguish unclear or missing instructions, failure to follow an
+existing instruction, missing evidence, and a case-specific choice.
+
+The first supervised case only suggests clarifications. After the human enables
+learning between cases, the supervisor may apply an independently reviewed
+clarification of an existing rule between cases. The human owns policy and
+authority changes. Do not create a duplicate rule.
+
+Use five distinct closed supervised cases as the evaluation point. Review their
+existing outcome entries with the iteration-two findings and present a short
+comparison to the human. Check whether feedback corrected plans or results,
+whether the same issue returned, and whether the normal gates held.

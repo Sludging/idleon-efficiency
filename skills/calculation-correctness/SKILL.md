@@ -7,6 +7,7 @@ description: Check and correct a selected game calculation using the correctness
 
 Use the instructions for your role to check whether the selected calculation matches the game.
 
+- **Supervisor (`correctness-supervisor`)**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and follow the supervisor role.
 - **Coordinator (`correctness-coordinator`)**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and follow the coordinator role.
 - **Worker (`correctness-worker`)**: Read your role instructions, the assigned stage, and the case working note. The stage links to the testing guide when needed.
 - **Reviewer (`correctness-reviewer`)**: Read your role instructions and case findings, then independently check the relevant game source, domain code, and tests.

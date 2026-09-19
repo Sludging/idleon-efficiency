@@ -10,25 +10,45 @@ Ensure the selected domain/aspect produces correct game results through an inter
 - An **aspect** is one named calculation within a domain. It covers that calculation's supported inputs and behavior; a single bonus, index, or failing value remains part of the aspect.
 - A **case** is one selected domain/aspect tracked by a GitHub issue. Its implementation may be correct, wrong, or missing.
 - A **dependency** is another domain/aspect calculation used by the selected aspect. A missing or incorrect dependency can block the case.
-- The **human** selects the case, approves its plan and material changes, and accepts or aborts the result.
 
 Delivered game code defines the formula, conditions, and operation order. Extracted game values provide expected test results. Domain code is the implementation being tested; the Wiki can help explain player-facing meaning. The [testing guide](../TESTING_IMPLEMENTATION.md) defines core tests, parameter tests, and branches, with examples.
+
+## Approval authority
+
+The **approver** is the human by default. When a human explicitly asks
+`correctness-supervisor` to run one selected issue, the supervisor is the
+approver for that case. The supervisor approves the plan and material changes
+within the approved scope, then accepts the normal result. The coordinator
+records `Approver: human` or `Approver: supervisor` in the existing Case
+working note.
+
+The human selects the case and any scope extension. Ask the human about unclear
+source, policy, or meaning. The human decides exceptions, waivers, aborts, and
+the same finding after one correction. The coordinator manages stages, timers,
+research, extraction, dependency recording, the working note, plan approval,
+and closure. The supervisor reviews and sends decisions, then continues through
+closure. A fresh correctness reviewer remains technically independent.
+Supervisor acceptance is normal acceptance; it needs no additional human
+acceptance.
+
+Read the current plan before work. Send material plan changes to the approver.
+Changes after review require verification and a fresh review before acceptance.
 
 ## Process
 
 ### 1. Establish the selected case
 
-The coordinator reads the selected issue, its current case working note, and human decisions. Identify the result to check and any known dependencies or questions. Begin with planning. On resume, read the local plan: continue planning if it is a draft, or resume the established stage if approved. After a dependency is fixed, run the selected tests to establish whether the case can continue.
+The coordinator reads the selected issue, its current Case working note, and recorded decisions. Identify the result to check and any known dependencies or questions. Begin with planning. On resume, read the current plan and its approver: continue planning if it is a draft, or resume the established stage if it is approved. After a dependency is fixed, run the selected tests to establish whether the case can continue.
 
-Use existing snippets, test configs, saves, and results where available. A missing test or domain implementation is something the case can establish and address. Workers and reviewers obtain missing game-source evidence through `correctness-researcher` when source capture is needed. The coordinator runs extraction only when the next-step table requires it. Follow [snippet guidance](../game-snippets/README.md) through the researcher to capture missing source; ask the human if the game version or meaning under review is unclear.
+Use existing snippets, test configs, saves, and results where available. A missing test or domain implementation is something the case can establish and address. Workers and reviewers obtain missing game-source evidence through `correctness-researcher` when source capture is needed. The coordinator runs extraction only when the next-step table requires it. Follow [snippet guidance](../game-snippets/README.md) through the researcher to capture missing source; ask the human if the game version or meaning under review is unclear or source/policy evidence conflicts.
 
-### 2. Plan and obtain human approval
+### 2. Plan and obtain approval
 
-Assign `Stage: planning` to the worker. The planning worker inspects game behavior, website consumers, and comparable domain implementations before proposing the design. If game-source or runtime evidence is missing, it delegates that work to `correctness-researcher`. Existing tests may be run, and focused source evidence may be gathered through the researcher; domain code, tests, and extraction configs remain unchanged until approval.
+Assign `Stage: planning` to the worker. The planning worker inspects game behavior, website consumers, and comparable domain implementations before proposing the design. If game-source or runtime evidence is missing, it delegates that work to `correctness-researcher`. Existing tests may be run, and focused source evidence may be gathered through the researcher; domain code, tests, and extraction configs remain unchanged until the coordinator records approval.
 
 Keep one plan at `.omp/plans/correctness-<issue-number>.md`. Include:
 
-- **Status:** `draft` or `approved`. Only the coordinator records approval after the human explicitly approves the current proposal.
+- **Status:** `draft` or `approved`. Only the coordinator records approval after the approver approves the current proposal.
 - **Scope:** behavior to deliver and what is excluded.
 - **Website design:** owning domain, public interface and a caller example, including account-wide or per-character behavior where relevant.
 - **Implementation approach:** existing pattern to follow, important dependencies, and any pipeline changes. If website pattern research applies, name and cite the existing code examples you used. Explain why each fits. State any deliberate differences.
@@ -36,11 +56,11 @@ Keep one plan at `.omp/plans/correctness-<issue-number>.md`. Include:
 
 Keep simple cases short. An unchanged interface needs only its existing usage and the intended correction, not a redesign.
 
-The worker returns `PLAN_READY` when the proposal is ready for the human. The coordinator presents it and waits for approval or requested changes before assigning tests. Plan approval does not replace the tests-stage prerequisites for implementation.
+The worker returns `PLAN_READY` when the proposal is ready. The coordinator presents it to the approver and waits for approval or requested changes before assigning tests. The coordinator records the decision. Plan approval does not replace the tests-stage prerequisites for implementation.
 
 Every worker and reviewer reads the plan directly. Keep progress and results in the issue's Case working note, with the plan path; do not duplicate the plan there. Keep the file while the case is active or blocked. If it is missing on resume, re-establish the plan and obtain approval before further changes.
 
-If new evidence requires changing scope, ownership, public interface, character semantics, or materially weakening agreed verification, return `NEEDS_HUMAN` with the proposed change and reason. Keep the approved plan unchanged until the human decides; then the coordinator updates it before work resumes. Internal implementation choices and additional tests within the approved scope do not need renewed approval.
+If new evidence requires changing scope, ownership, public interface, character semantics, or materially weakening agreed verification, return `NEEDS_HUMAN` with the proposed change and reason. Keep the approved plan unchanged until the approver decides. The coordinator sends material in-scope changes to the approver and scope changes to the human, then updates the plan before work resumes. Internal implementation choices and additional tests within the approved scope do not need renewed approval.
 
 ### 3. Establish tests before changing domain code
 
@@ -74,15 +94,15 @@ The worker follows the [implementation stage](IMPLEMENTATION_STAGE.md): correct 
 
 A `READY_FOR_REVIEW` result goes to a fresh reviewer. The reviewer uses the case findings to locate the relevant game source, domain code, and tests, then independently checks the selected behavior and coverage. See the [reviewer instructions](../../.omp/agents/correctness-reviewer.md).
 
-- `PASS` goes to the human for acceptance.
+- `PASS` goes to the approver for acceptance.
 - `CHANGES_REQUIRED` returns to the worker with the specific findings. Test/config or coverage changes go to tests first. An implementation correction can proceed when its failing test is already established. Review the corrected result again.
 - A blocker or unanswered question pauses the case. If the same finding remains after one correction, ask the human for direction.
 
 ### 6. Complete the case
 
-Normal completion requires implementation of the approved plan; the selected core and parameter tests, and all tests changed by the case, to pass at tolerance `0`; a fresh independent review covering the final changes to return `PASS`; and human acceptance. Changes after review need verification and review of the changed behavior before normal completion.
+Normal completion requires implementation of the approved plan; the selected core and parameter tests, and all tests changed by the case, to pass at tolerance `0`; a fresh independent review covering the final changes to return `PASS`; and acceptance by the approver. Changes after review need verification and a fresh review of the changed behavior before normal completion.
 
-The human may accept an exception or abort. Record what was completed, what was verified, and any omitted step. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
+The human may accept an exception or abort. The supervisor may not waive a gate, accept an exception, or abort. Record what was completed, what was verified, and any omitted step. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
 
 After acceptance or abort, delete the local plan and local research file. No archive is required; reusable versioned game snippets remain.
 
@@ -136,7 +156,7 @@ During planning, ask `correctness-pattern-researcher` to find existing code befo
 
 Maintain one issue comment headed **Case working note** with the current information needed to continue:
 
-- **Plan:** local file path and whether human approval is pending or recorded.
+- **Plan and approver:** local plan path and status; the approver and decision.
 - **Findings:** relevant game source/version, established behavior, domain locations or missing calculations, and links between parameters and tests.
 - **Tests and changes:** coverage choices, config/extraction status, commands/results, tests-stage approval, and changed paths.
 - **Blockers and next step:** unanswered questions, missing prerequisites, and the next task.

@@ -36,7 +36,7 @@ Each assignment provides `Issue`, `Domain/aspect`, `Stage`, `Plan` (local path),
 
 Read the local plan directly and the case working note. Create the draft during planning if it does not exist. Tests and implementation require an approved plan; use its design decisions rather than choosing them again. Follow the assigned stage:
 
-- `planning`: [Plan and obtain human approval](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval). Write the local draft and return `PLAN_READY`; use `NEEDS_HUMAN` for a question preventing a concrete proposal.
+- `planning`: [Plan and obtain approval](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval). Write the local draft and return `PLAN_READY`; use `NEEDS_HUMAN` for a question preventing a concrete proposal.
 - `tests`: [Tests stage](../../docs/calculation-correctness/TESTS_STAGE.md).
 - `implementation`: [Implementation stage](../../docs/calculation-correctness/IMPLEMENTATION_STAGE.md).
 
@@ -55,5 +55,5 @@ Use these result fields:
 - `Findings/note updates`: calculation findings, coverage, test results, and useful process observations.
 - `Changed paths`: repository-relative paths, or `none`.
 - `Tests`: exact commands and observed results, or `not run — <reason>`.
-- `Question`: `none`, or the question needing human input.
+- `Question`: `none`, or one precise question for the coordinator.
 - `Next`: the next coordinator action.

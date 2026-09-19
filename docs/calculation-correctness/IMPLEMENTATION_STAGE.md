@@ -9,7 +9,7 @@ Read the approved local plan, assignment, case working note, and accepted `Tests
 ## Establish the implementation boundary
 
 1. Confirm the accepted tests-stage result establishes a selected failure with passing direct parameters and coverage of the planned behavior. An already-green result proceeds to review without implementation.
-2. Follow the approved ownership, interface, character semantics, and integration approach. Reuse source findings and focused evidence. If additional game-source, caller, debug-server, or Wiki evidence is needed, delegate it to `correctness-researcher` rather than investigating directly. Material design changes return for [human approval](PLAYBOOK.md#2-plan-and-obtain-human-approval).
+2. Follow the approved ownership, interface, character semantics, and integration approach. Reuse source findings and focused evidence. If additional game-source, caller, debug-server, or Wiki evidence is needed, delegate it to `correctness-researcher` rather than investigating directly. Material design changes return for [plan approval](PLAYBOOK.md#2-plan-and-obtain-approval).
 3. Keep direct dependencies in their own cases. A missing or failing calculation used by the selected aspect remains visible in its parameter comparison and returns to the coordinator; this stage changes only the selected calculation.
 4. Edit the selected handwritten domain source and the registration or caller needed to integrate that aspect. Test, extraction configuration, and coverage changes return to the tests stage. Generated directories `data/domain/data/`, `data/domain/enum/`, and `data/domain/model/` remain unchanged.
 

@@ -11,14 +11,14 @@ This stage writes tests and extraction config, not domain code. Read the approve
 1. Use the approved scope, public interface, and ownership. Locate the selected calculation and each calculation it uses directly. Direct means an immediate calculation used by the selected result; inputs used only inside that calculation belong to its own case.
 2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and inspect focused source evidence captured by the researcher, following the [snippet version rules](../game-snippets/README.md#rules).
 3. Map every direct calculation to its domain implementation or an explicit missing status. A missing selected implementation is a selected-core failure to expose. For a missing or failing dependency, report the full named calculation and include the failing call, index, or value as the observed problem. Keep its parameter comparison active; the separate case covers that calculation, not only the failing input.
-4. If evidence calls for a material change to the plan, return the proposed change and reason under the [plan approval rule](PLAYBOOK.md#2-plan-and-obtain-human-approval). Do not choose a different interface to make the tests fit.
+4. If evidence calls for a material change to the plan, return the proposed change and reason under the [plan approval rule](PLAYBOOK.md#2-plan-and-obtain-approval). Do not choose a different interface to make the tests fit.
 
 ## Coverage target
 
 Use the [testing guide](../TESTING_IMPLEMENTATION.md) for definitions and examples. For this case:
 
 - Parameter tests compare every calculation used directly across domains/aspects by the selected aspect, including another aspect in the same domain. Static data, trivial helpers, raw save plumbing, and inputs used only by dependencies are outside this selected coverage.
-- Core tests check selected behaviors or branches, or representative values. Choose comparisons and test descriptions that express the mechanic's observable behavior. Use the testing guide's examples to choose useful comparisons. State what the real save exercises and ask the human if needed behavior cannot be observed.
+- Core tests check selected behaviors or branches, or representative values. Choose comparisons and test descriptions that express the mechanic's observable behavior. Use the testing guide's examples to choose useful comparisons. State what the real save exercises and send the coverage question to the coordinator if needed.
 
 Record the selected result, parameter calculations, chosen core tests, and any coverage question in the stage result.
 
