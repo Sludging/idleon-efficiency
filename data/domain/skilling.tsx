@@ -19,6 +19,7 @@ import { BeanstalkingBonusType, Sneaking } from "./world-6/sneaking";
 import { Bribe } from "./world-1/bribes";
 import { Cooking } from "./world-4/cooking";
 import { EquipmentSets } from "./misc/equipmentSets";
+import { EquipmentBonus } from "./equipment-effects";
 import { LegendTalents } from "./world-7/legendTalents";
 import { Companion } from "./companions";
 import { Votes } from "./world-2/votes";
@@ -102,7 +103,7 @@ export class Skilling {
         const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonus(), 0) ?? 0;
         const prayerDecrease = prayers.filter(prayer => [1, 9].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getCurse(), 0) ?? 0;
         const masteroBuff = player.activeBuffs.find(talent => talent.skillIndex == 40)?.getBonus() ?? 0;
-        const equipmentBonus = player.gear.equipment.reduce((sum, item) => sum += item?.getMiscBonus("Skill Exp") ?? 0, 0);
+        const equipmentBonus = player.getEquipmentBonus(EquipmentBonus.SkillExp);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
         const summoningBonus = summoning.summonBonuses?.find(bonus => bonus.data.bonusId == 13)?.getBonus() || 0;
         const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 14)?.getBonus() ?? 0;

@@ -15,6 +15,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { CompassUpgradeModel } from "./model/compassUpgradeModel";
 import { Player } from "./player";
+import { EquipmentBonus } from "./equipment-effects";
 import { Sneaking } from "./world-6/sneaking";
 import { Emperor } from "./world-6/emperor";
 import { Lab } from "./world-4/lab";
@@ -866,9 +867,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 3: ETC bonus multiplier - specifically for ETC bonus 86 "Tempest Damage"
         let etcBonusMultiplier = 1;
         if (includeEquipment && this.bestWindWalker.gear?.equipment) {
-            const equipment = this.bestWindWalker.gear.equipment;
-            // Check for "Tempest Damage" misc bonus (currently just rings)
-            etcBonusMultiplier += equipment.reduce((sum, item) => sum += item?.getMiscBonus("Tempest Damage") ?? 0, 0);
+            etcBonusMultiplier += this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDamage);
         }
         damage *= etcBonusMultiplier;
 
@@ -1131,8 +1130,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 4: ETC bonus 87 multiplier (1 + EtcBonuses(87) / 100)
         let etcBonus87 = 0;
         if (this.bestWindWalker.gear?.equipment) {
-            const equipment = this.bestWindWalker.gear.equipment;
-            etcBonus87 = equipment.reduce((sum, item) => sum += item?.getMiscBonus("Tempest Defence") ?? 0, 0);
+            etcBonus87 = this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDefence);
         }
         defense *= (1 + etcBonus87 / 100);
 
@@ -1283,9 +1281,8 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
                 compass.bestWindWalker = windWalker;
 
                 // Set ETC bonuses from Wind Walker equipment
-                const windWalkerEquipment = windWalker.gear.equipment;
-                compass.etcBonus85 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Dust Multi") ?? 0, 0);
-                compass.etcBonus79 = windWalkerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Extra Dust") ?? 0, 0);
+                compass.etcBonus85 = windWalker.getEquipmentBonus(EquipmentBonus.DustMulti);
+                compass.etcBonus79 = windWalker.getEquipmentBonus(EquipmentBonus.ExtraDust);
             }
 
             // Set pristine bonus 19 from sneaking

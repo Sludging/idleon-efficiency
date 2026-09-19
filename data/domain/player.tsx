@@ -3,6 +3,7 @@ import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
+import { EquipmentBonus, getEquipmentEffect } from './equipment-effects';
 import { lavaLog, notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
@@ -49,6 +50,10 @@ import { AtomCollider } from './world-3/construction/atomCollider';
 import { Summoning } from './world-6/summoning';
 import { Construction } from './world-3/construction/construction';
 import { Gaming } from './world-5/gaming';
+import type { Gallery } from './world-7/gallery';
+import type { HatRack } from './world-7/hatRack';
+import type { ResearchGrid } from './world-7/research';
+const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
 
 export class PlayerStats {
     strength: number = 0;
@@ -151,6 +156,9 @@ export class Player {
     };
     killInfo: Map<number, number> = new Map();
     obolStats: ObolStats[] = [];
+    private equipmentBonusGallery!: Gallery;
+    private equipmentBonusHatRack!: HatRack;
+    private equipmentBonusResearch!: ResearchGrid;
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
@@ -331,7 +339,7 @@ export class Player {
     }
 
     getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
-        const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
+        const gearBonus = this.getEquipmentBonus(EquipmentBonus.GoldFoodEffect);
 
         const setBonus = (1 + equipmentSetBonus / 100);
         return setBonus * ((Math.max(familyBonus, 1) + gearBonus + (this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + goldFoodStampBonus + (achievement37 ? 5 : 0) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14 + (achievement380 ? 2 : 0) + (achievement383 ? 3 : 0) + votingBonus26 + apocalypseWoW + companion48 + legendTalentBonus25 + Math.min(cropfallEvent1Card, 50)) / 100);
@@ -347,49 +355,102 @@ export class Player {
         return bonus;
     }
 
-    getMiscBonusFromGear = (bonusType: string) => {
-        let gearBonus = 0;
-        this.gear.equipment.forEach((gear, index) => {
-            if (gear) {
+    bindEquipmentBonusDependencies = (gallery: Gallery, hatRack: HatRack, research: ResearchGrid): void => {
+        this.equipmentBonusGallery = gallery;
+        this.equipmentBonusHatRack = hatRack;
+        this.equipmentBonusResearch = research;
+    }
 
-                if (index == 3 && this.labInfo.chips.find(chip => chip.chip?.index == 18) != undefined ||  // Pendant
-                    index == 10 && this.labInfo.chips.find(chip => chip.chip?.index == 16) != undefined || // Trophy
-                    index == 9 && this.labInfo.chips.find(chip => chip.chip?.index == 17) != undefined) {  // Upper Keychain
-                    gearBonus += gear.getMiscBonus(bonusType) * 2;
+    getEquipmentBonus = (bonus: EquipmentBonus, inDungeon: boolean = false): number => {
+        const gallery = this.equipmentBonusGallery;
+        const hatRack = this.equipmentBonusHatRack;
+        const research = this.equipmentBonusResearch;
+
+        const effect = getEquipmentEffect(bonus);
+        if (effect === undefined) {
+            return 0;
+        }
+
+        const galleryUnlocked = gallery.isUnlocked(this);
+        const hatRackUnlocked = hatRack.isUnlocked(this);
+        // Research boosts only the final equipment slot.
+        const researchBonus = research.getBonusForId(172);
+        let equipmentBonus = 0;
+        const addItemBonus = (item: Item | undefined, slot: number, row: 0 | 1): void => {
+            if (!item || item.internalName == "Blank" || (inDungeon && !item.internalName.includes("Dung"))) {
+                return;
+            }
+            // Gallery replaces the trophy and nametag slots after this character unlocks its portal.
+            if (row == 0 && galleryUnlocked && (slot == 10 || slot == 14)) {
+                return;
+            }
+            // Hat Rack replaces the premium-hat slot after this character unlocks its portal.
+            if (row == 0 && hatRackUnlocked && slot == 8) {
+                return;
+            }
+
+            // Pendant, upper-keychain and trophy chips double bonuses in their matching slot.
+            const chipDoubles = row == 0 && (
+                (slot == 3 && this.getChipBonus("pend") == 1) ||
+                (slot == 9 && this.getChipBonus("key1") == 1) ||
+                (slot == 10 && this.getChipBonus("troph") == 1)
+            );
+            const multiplier = chipDoubles
+                ? 2
+                : row == 0 && slot == 15 && researchBonus >= 1
+                    ? 1 + researchBonus / 100
+                    : 1;
+
+            // Include both item bonuses and upgrade-stone bonuses.
+            for (const stat of item.itemStats) {
+                if ((stat.stoneName != "UQ1val" && stat.stoneName != "UQ2val" && stat.stoneName != "Nothing") || !stat.extra || stat.extra == "0") {
+                    continue;
                 }
-                else {
-                    gearBonus += gear.getMiscBonus(bonusType)
+                if (normalizeEquipmentEffect(stat.extra) == effect) {
+                    // Add bonuses separately to preserve the game's arithmetic order.
+                    equipmentBonus += stat.getValue() * multiplier;
                 }
             }
-        })
-        gearBonus = this.obolStats.flatMap(stat => stat.stats).filter(stat => stat.extra.includes(bonusType)).reduce((sum, stat) => sum += stat.getValue(), gearBonus);
+        };
 
-        return gearBonus;
+        for (let slot = 0; slot < Math.min(16, this.gear.equipment.length); slot++) {
+            addItemBonus(this.gear.equipment[slot], slot, 0);
+        }
+        for (let slot = 0; slot < Math.min(8, this.gear.tools.length); slot++) {
+            addItemBonus(this.gear.tools[slot], slot, 1);
+        }
+
+        // Game order is equipment/tools, Gallery trophy, Gallery nametag, then Hat Rack.
+        if (galleryUnlocked) {
+            equipmentBonus += gallery.getTrophyBonus(effect, this);
+            equipmentBonus += gallery.getNametagBonus(effect, this);
+        }
+        if (hatRackUnlocked) {
+            equipmentBonus += hatRack.getBonus(effect, this);
+        }
+
+        if (!inDungeon) {
+            // Personal and family obol bonuses are already combined; add them only outside dungeons.
+            for (const group of this.obolStats) {
+                for (const stat of group.stats) {
+                    if (normalizeEquipmentEffect(stat.extra) == effect) {
+                        equipmentBonus += stat.getValue();
+                    }
+                }
+            }
+        }
+
+        return equipmentBonus;
     }
 
-    setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
-        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
-        const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
-        const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
 
-        // Reset any existing data, since next section should include all the required info.
-        this.doubleClaimChance.sources = [];
-
-        this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
-        this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
-        this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
-        this.doubleClaimChance.sources.push({ name: "Alchemy Bubble", value: bubbleBonus });
-        this.doubleClaimChance.sources.push({ name: "Bribe", value: bribeBonus });
-        this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
-        this.doubleClaimChance.max = 75;
-    }
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
         family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[],
         arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number,
         beanstalkingItem: Food | undefined, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legenTalent25: number, cropFallEventCard: number) => {
-        const gearBonus = this.getMiscBonusFromGear("Money");
+        const gearBonus = this.getEquipmentBonus(EquipmentBonus.Money);
         const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
@@ -441,6 +502,24 @@ export class Player {
         this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus });
         this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus });
     }
+
+    setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
+        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
+        const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
+        const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
+
+        // Reset any existing data, since next section should include all the required info.
+        this.doubleClaimChance.sources = [];
+
+        this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
+        this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
+        this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
+        this.doubleClaimChance.sources.push({ name: "Alchemy Bubble", value: bubbleBonus });
+        this.doubleClaimChance.sources.push({ name: "Bribe", value: bribeBonus });
+        this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
+        this.doubleClaimChance.max = 75;
+    }
+
 
     setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
         const shrineBonus = crystalShrine.getBonus(this.currentMapId);
@@ -1463,6 +1542,10 @@ export const updatePlayers = (data: Map<string, any>) => {
                 player.obolStats.push(newObolStat);
             });
     })
+    const gallery = data.get("gallery") as Gallery;
+    const hatRack = data.get("hatRack") as HatRack;
+    const research = data.get("research") as ResearchGrid;
+    players.forEach(player => player.bindEquipmentBonusDependencies(gallery, hatRack, research));
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -1558,10 +1641,6 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const redoxSaltsOwned = storage.amountInStorage("Refinery1");
     const winnerBonus13 = summoning.summonBonuses.find(bonus => bonus.index == 13)?.getBonus() || 0;
     const paletteBonus25 = gaming.getPaletteBonus(25);
-    // EtcBonuses("30") reads the active character even when PlayerBuildSpd targets another player.
-    const activePlayer = players.reduce<Player | undefined>((closest, player) =>
-        !closest || player.afkFor < closest.afkFor ? player : closest, undefined);
-    const activePlayerGearBonus = activePlayer?.getMiscBonusFromGear("Build Spd") ?? 0;
 
     // Apply everything to players
     players.forEach(player => {
@@ -1586,7 +1665,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
 
         // Build Speed
         const constructionBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 12);
-        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, activePlayerGearBonus, achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
+        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.getEquipmentBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
             arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
     });
 

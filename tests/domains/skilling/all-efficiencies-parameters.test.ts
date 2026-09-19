@@ -16,6 +16,7 @@ import {
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Player } from '../../../data/domain/player';
+import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import { Card } from '../../../data/domain/cards';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import { Cooking } from '../../../data/domain/world-4/cooking';
@@ -27,7 +28,7 @@ import { Prayer } from '../../../data/domain/world-3/prayers';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Tome } from '../../../data/domain/world-4/tome';
 import { Guild } from '../../../data/domain/guild';
-import { Companion, getCompanionBonus } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Quests } from '../../../data/domain/quests';
 import { Family } from '../../../data/domain/family';
 import { Friends } from '../../../data/domain/friends';
@@ -37,7 +38,9 @@ import { IslandExpeditions } from '../../../data/domain/world-2/islandExpedition
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
 
-const getPlayer0 = (gameData: Map<string, any>): Player => {
+const getPlayer0 = (
+ gameData: Map<string, any>,
+): Player => {
  const player = (gameData.get('players') as Player[])[0];
  if (!player) {
   throw new Error('Player 0 not found in save data');
@@ -59,7 +62,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_etc_bonus_48: {
   description: 'Player 0 equipment EtcBonuses(48) / Skill Efficiency',
   extractionKey: 'all_eff_etc_bonus_48',
-  domainExtractor: (gameData) => getPlayer0(gameData).getMiscBonusFromGear('Skill Efficiency'),
+  domainExtractor: (gameData) => getPlayer0(gameData).getEquipmentBonus(EquipmentBonus.SkillEfficiency),
  },
  all_eff_vial_6_skill_eff: {
   description: 'Alchemy 6SkillEff vial bonus',
@@ -104,7 +107,10 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_chip_toteff: {
   description: 'Lab chipBonuses("toteff")',
   extractionKey: 'all_eff_chip_toteff',
-  domainExtractor: () => missingOwnerApi('chipBonuses("toteff")'),
+  domainExtractor: (gameData) => {
+   const player0 = getPlayer0(gameData);
+   return player0.getChipBonus('toteff');
+  }
  },
  all_eff_card_lv_crystal4: {
   description: 'CardLv("Crystal4")',
@@ -158,7 +164,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_companion_5: {
   description: 'Companions(5) bonus',
   extractionKey: 'all_eff_companion_5',
-  domainExtractor: (gameData) => getCompanionBonus(gameData.get('companions') as Companion[], 5),
+  domainExtractor: (gameData) => getCompanionActiveBonus(gameData.get('companions') as Companion[], 5),
  },
  all_eff_win_bonus_14: {
   description: 'Summoning WinBonus(14, 0)',

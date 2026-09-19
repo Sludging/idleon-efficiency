@@ -1,6 +1,7 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { Player } from '../../../data/domain/player';
+import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import type { Stamp } from '../../../data/domain/world-1/stamps';
 import type { Guild } from '../../../data/domain/guild';
 import type { Achievement } from '../../../data/domain/achievements';
@@ -144,13 +145,13 @@ const parameterSpecs = {
     }
   },
   gear_bonus_etc_bonuses_30: {
-    description: 'Active character gear bonus from EtcBonuses 30',
+    description: 'Player 0 equipment Build Speed',
     extractionKey: 'gear_bonus_etc_bonuses_30',
     domainExtractor: (gameData: Map<string, any>) => {
       const players = gameData.get("players") as Player[];
-      const activePlayer = players.reduce<Player | undefined>((closest, player) =>
-        !closest || player.afkFor < closest.afkFor ? player : closest, undefined);
-      return activePlayer?.getMiscBonusFromGear("Build Spd") ?? 0;
+      const player0 = players.find(player => player.playerID === 0);
+      if (!player0) throw new Error('Player 0 not found in save data');
+      return player0.getEquipmentBonus(EquipmentBonus.BuildSpeed);
     }
   },
 };
