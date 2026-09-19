@@ -139,11 +139,8 @@ export class Minehead extends Domain {
 }
 
 export const updateMinehead = (data: Map<string, any>) => {
-    const minehead = data.get("minehead") as Minehead | undefined;
-    const sushi = data.get("sushi") as SushiStation | undefined;
-    if (!minehead || !sushi) {
-        throw new Error("Minehead calculation requires Minehead and Sushi data");
-    }
+    const minehead = data.get("minehead") as Minehead;
+    const sushi = data.get("sushi") as SushiStation;
 
     // Progression indices gate earned rewards; display IDs are presentation-only.
     minehead.opponents.forEach(opponent => {
