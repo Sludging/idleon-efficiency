@@ -45,14 +45,18 @@ export class VaultUpgBonus {
             return 0;
         }
 
-        const isSpecialUpgrade = [32, 1, 6, 7, 8, 9, 13, 33, 36, 40, 42, 43, 44, 49, 51, 52, 53, 57, 61].includes(this.id);
+        // These rows ignore their color band's Vault Mastery multiplier.
+        const isDirectUpgrade = [
+            1, 6, 7, 8, 9, 13, 32, 33, 36, 40, 42, 43, 44, 49, 51, 52, 53, 57, 61,
+            64, 70, 73, 74, 76, 79, 85, 86, 88, 89,
+        ].includes(this.id);
 
         const baseBonus = this.level * this.data.value;
-        if (isSpecialUpgrade) {
+        if (isDirectUpgrade) {
             return baseBonus;
         }
 
-        // Special handling for base damage upgrade (index 0)
+        // Base damage gains extra points past its level thresholds, then blue Vault Mastery.
         if (this.id === 0) {
             const extraBonus = (
                 Math.max(0, this.level - 25) +
@@ -63,7 +67,7 @@ export class VaultUpgBonus {
             return (baseBonus + extraBonus) * (1 + vaultMasteryBonus / 100);
         }
 
-        // Special handling for cooking upgrade (index 60)
+        // Cooking gains increasingly weighted threshold points, a level multiplier, then green Vault Mastery.
         if (this.id === 60) {
             const extraBonus = (
                 Math.max(0, this.level - 25) +
@@ -79,7 +83,7 @@ export class VaultUpgBonus {
             return (baseBonus + extraBonus) * levelMultiplier * (1 + vaultMasteryBonus2 / 100);
         }
 
-        // Regular upgrades with mastery bonuses
+        // Ordinary rows use the Vault Mastery upgrade at the end of their color band.
         if (this.id < 32) {
             const vaultMasteryBonus: number = allUpgrades[32]?.getBonus(allUpgrades) || 0;
             return this.level * this.data.value * (1 + vaultMasteryBonus / 100);
@@ -90,7 +94,12 @@ export class VaultUpgBonus {
             return this.level * this.data.value * (1 + vaultMasteryBonus2 / 100);
         }
 
-        return baseBonus;
+        if (this.id < 89) {
+            const vaultMasteryBonus3: number = allUpgrades[89]?.getBonus(allUpgrades) || 0;
+            return this.level * this.data.value * (1 + vaultMasteryBonus3 / 100);
+        }
+
+        return 0;
     }
 
     getCost = (allUpgrades: VaultUpgBonus[]): number => {
@@ -185,8 +194,8 @@ export class UpgradeVault extends Domain {
         });
 
         // Pre-calculate bonus, cost and cost to max for each upgrade
-        // We first need the bonuses for special upgrades that impact other upgrades
-        const specialUpgrades = [13, 32, 61];
+        // Mastery rows must be available before their color bands are cached.
+        const specialUpgrades = [13, 32, 61, 89];
         const specialUpgradesBonuses = upgradeVault.bonuses.filter(bonus => specialUpgrades.includes(bonus.id));
 
         specialUpgradesBonuses.forEach(bonus => {
