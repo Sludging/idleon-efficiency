@@ -2,10 +2,13 @@ import { Domain, RawData } from '../base/domain';
 import { initSlabItemSortRepo } from '../data/SlabItemSortRepo';
 import { Item } from '../items'
 import { Lab, SlabSovereigntyBonus } from '../world-4/lab';
-import { Sailing } from './sailing/sailing';
-import { SlabInfluencedArtifact } from './sailing/artifacts';
+import type { Sailing } from './sailing/sailing';
+import type { SlabInfluencedArtifact } from './sailing/artifacts';
 import { Sneaking } from '../world-6/sneaking';
 import { ImageData } from "../imageData";
+import { Meritocraty } from '../world-7/meritocraty';
+import { LegendTalents } from '../world-7/legendTalents';
+import { UpgradeVault } from '../upgradeVault';
 
 export enum SlabBonusesText {
     TotalDamage = "Total Damage",
@@ -35,6 +38,19 @@ export class Slab extends Domain {
     obtainableCount: number = 0;
 
     bonuses: SlabBonus[] = [];
+
+    private slabBonusMultiplier: number = 1;
+
+    getSlabBonusMultiplier(): number {
+        return this.slabBonusMultiplier;
+    }
+
+    updateCalculationState(meritocraty: Meritocraty, legendTalents: LegendTalents, upgradeVault: UpgradeVault): void {
+        // Multi Meritocracy, Legend Talents, and Super Slab multiply every Slab bonus.
+        this.slabBonusMultiplier = (1 + meritocraty.getCurrentBonus(23) / 100)
+            * (1 + legendTalents.getBonusFromIndex(28) / 100)
+            * (1 + upgradeVault.getBonusForId(74) / 100);
+    }
 
     getRawKeys(): RawData[] {
         return [
@@ -98,6 +114,20 @@ export const slabItems = initSlabItemSortRepo().map(slabItem => {
         order: slabItem.data.order,
     }
 });
+
+export const updateSlabBonusMultiplier = (data: Map<string, any>) => {
+    const slab = data.get("slab") as Slab | undefined;
+    const meritocraty = data.get("meritocraty") as Meritocraty | undefined;
+    const legendTalents = data.get("legendTalents") as LegendTalents | undefined;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault | undefined;
+
+    if (!slab || !meritocraty || !legendTalents || !upgradeVault) {
+        throw new Error("Slab bonus calculation requires Slab, Meritocraty, Legend Talents, and Upgrade Vault data");
+    }
+
+    slab.updateCalculationState(meritocraty, legendTalents, upgradeVault);
+    return slab;
+}
 
 export const updateSlabBonusDisplay = (data: Map<string, any>) => {
     const slab = data.get("slab") as Slab;

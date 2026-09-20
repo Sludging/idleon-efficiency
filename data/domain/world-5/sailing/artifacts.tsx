@@ -8,7 +8,7 @@ import { ArtifactModel } from "../../model/artifactModel";
 import { Player } from "../../player";
 import { Sailing } from "./sailing";
 import { SkillsIndex } from "../../SkillsIndex";
-import { Slab } from "../slab";
+import type { Slab } from "../slab";
 import { ClassIndex } from "../../talents";
 
 export enum ArtifactStatus {
@@ -420,9 +420,10 @@ export const updateArtifacts = (data: Map<string, any>) => {
 export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const lab = data.get("lab") as Lab;
+    const slab = data.get("slab") as Slab;
 
     const mainframeBonus = lab.bonuses[15].active ? (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() : 0;
-    const slabBonusMultiplier = sailing.getSlabBonusMultiplier();
+    const slabBonusMultiplier = slab.getSlabBonusMultiplier();
 
     [2, 10, 18, 20].forEach(index => {
         const artifact = sailing.artifacts[index] as SlabInfluencedArtifact;

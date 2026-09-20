@@ -1,5 +1,5 @@
 /**
- * Validates the direct account-wide inputs used by Sailing's Slab bonus multiplier.
+ * Validates the direct account-wide inputs used by Slab's bonus multiplier.
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -30,7 +30,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
 };
 
-describe('Sailing Domain - Slab Bonus - Parameters', () => {
+describe('Slab Domain - Slab Bonus - Parameters', () => {
   let extractionResults: ExtractionResults;
   let gameData: Map<string, unknown>;
 

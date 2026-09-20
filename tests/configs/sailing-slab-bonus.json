@@ -1,9 +1,9 @@
 {
-  "description": "Extract the Sailing Slab-wide bonus multiplier and its direct calculated inputs",
-  "target": "Sailing Slab bonus multiplier",
+  "description": "Extract the Slab-wide bonus multiplier and its direct calculated inputs",
+  "target": "Slab bonus multiplier",
   "extractions": [
     {
-      "label": "sailing_slab_bonus_multiplier",
+      "label": "slab_bonus_multiplier",
       "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
       "description": "Account-wide multiplier applied to Slab bonuses"
     },
