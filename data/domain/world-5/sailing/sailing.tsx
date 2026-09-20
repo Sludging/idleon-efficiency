@@ -503,6 +503,7 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const family = data.get("family") as Family;
     const gemStore = data.get("gems") as GemStore;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
     const cooking = data.get("cooking") as Cooking;
     const divinity = data.get("divinity") as Divinity;
     const cards = data.get("cards") as Card[];
@@ -537,9 +538,9 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;
     const gemShopPurchases = gemStore.purchases.find(upgrade => upgrade.no == 8)?.pucrhased ?? 0;
-    // TODO : update this value legend talents are implemented
-    const legendPointsBonus = 0;
-    const minTravelTime = Math.max(15, 120 / (1 + ((siegeBonus + sailing.shinyMinSpeedBonus + legendPointsBonus) / 100)) - 4 * gemShopPurchases);
+    const legendPointsBonus = legendTalents.getBonusFromIndex(11);
+    // Gem reduction applies before the 15-minute floor and final rounding.
+    const minTravelTime = Math.round(Math.max(15, 120 / (1 + (siegeBonus + (sailing.shinyMinSpeedBonus + legendPointsBonus)) / 100) - 4 * gemShopPurchases));
 
     // Update boat impacts
     sailing.boats.forEach(boat => {
