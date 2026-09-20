@@ -88,6 +88,16 @@
       "description": "Star sign 63 (C. Shanti Minor) bonus"
     },
     {
+      "label": "boat_0_captain_speed_bonus",
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
+      "description": "Captain boat-speed bonus assigned to boat 0"
+    },
+    {
+      "label": "boat_1_captain_speed_bonus",
+      "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
+      "description": "Captain boat-speed bonus assigned to boat 1"
+    },
+    {
       "label": "boat_0_current_speed",
       "expression": "idleon.callFunction(\"Sailing\", \"BoatSpeed\", 0, 4)",
       "description": "Boat 0 current speed (i=4)"
