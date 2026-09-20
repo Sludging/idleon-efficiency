@@ -8,7 +8,7 @@ import { BubbaCharismaBonusModel } from "../model/bubbaCharismaBonusModel";
 import { BubbaGiftModel } from "../model/bubbaGiftModel";
 import { BubbaGiftBase, initBubbaGiftRepo } from "../data/BubbaGiftRepo";
 import { BubbaMegafleshBase, initBubbaMegafleshRepo } from "../data/BubbaMegafleshRepo";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 
 const SmokedMeatValues = [ 2, 3, 4, 6, 10 ];
 
@@ -283,7 +283,8 @@ export const updateBubba = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const companions = data.get("companions") as Companion[];
 
-    bubba.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
+    // The clicker multiplier uses companion 51's evolved bonus while that level is active.
+    bubba.companionBonus51 = getCompanionActiveBonus(companions, 51);
 
     return bubba;
 }
