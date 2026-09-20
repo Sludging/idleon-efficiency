@@ -57,6 +57,8 @@ export class Artifact {
                     return new CrystalSteakArtifact(artifact.index, artifact.data);
                 case 8:
                     return new FunHippoeteArtifact(artifact.index, artifact.data);
+                case 33:
+                    return new DeathskullArtifact(artifact.index, artifact.data);
                 default: return new Artifact(artifact.index, artifact.data)
             }
         });
