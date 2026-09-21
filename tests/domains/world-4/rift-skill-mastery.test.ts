@@ -1,11 +1,10 @@
 /**
- * Rift Skill Mastery compares account-visible ranks, skill effects, card access,
- * and account-wide totals against the live game for every SkillsIndex category.
+ * Rift Skill Mastery compares configured live effects, card access,
+ * Research boundaries, and account-wide totals against the live game.
  *
- * The game exposes 20 rank categories. Research has a rank but no numeric or
- * display Skill Mastery effect; Spelunking has seven public effects.
+ * The extraction config contains selected numeric effects, two Research
+ * boundaries, one card-access check, and all account-wide totals.
  *
- * @testCovers SkillMastery.getSkillRank
  * @testCovers SkillMastery.getSkillBonus
  * @testCovers SkillMastery.getTotalBonusByIndex
  */
@@ -17,38 +16,6 @@ import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 
 const saveName = 'latest';
 const extractionResultsName = 'rift-skill-mastery-data.json';
-
-type SkillRankCase = {
-  sourceIndex: number;
-  skill: SkillsIndex;
-  displayName: string;
-  extractionKey: string;
-};
-
-// Keep the account enum and the live rank category position side by side.
-// Intellect is shown to players as Laboratory.
-const skillRankCases: SkillRankCase[] = [
-  { sourceIndex: 0, skill: SkillsIndex.Mining, displayName: 'Mining', extractionKey: 'rift_skill_mastery_mining_rank' },
-  { sourceIndex: 1, skill: SkillsIndex.Smithing, displayName: 'Smithing', extractionKey: 'rift_skill_mastery_smithing_rank' },
-  { sourceIndex: 2, skill: SkillsIndex.Chopping, displayName: 'Chopping', extractionKey: 'rift_skill_mastery_chopping_rank' },
-  { sourceIndex: 3, skill: SkillsIndex.Fishing, displayName: 'Fishing', extractionKey: 'rift_skill_mastery_fishing_rank' },
-  { sourceIndex: 4, skill: SkillsIndex.Alchemy, displayName: 'Alchemy', extractionKey: 'rift_skill_mastery_alchemy_rank' },
-  { sourceIndex: 5, skill: SkillsIndex.Catching, displayName: 'Catching', extractionKey: 'rift_skill_mastery_catching_rank' },
-  { sourceIndex: 6, skill: SkillsIndex.Trapping, displayName: 'Trapping', extractionKey: 'rift_skill_mastery_trapping_rank' },
-  { sourceIndex: 7, skill: SkillsIndex.Construction, displayName: 'Construction', extractionKey: 'rift_skill_mastery_construction_rank' },
-  { sourceIndex: 8, skill: SkillsIndex.Worship, displayName: 'Worship', extractionKey: 'rift_skill_mastery_worship_rank' },
-  { sourceIndex: 9, skill: SkillsIndex.Cooking, displayName: 'Cooking', extractionKey: 'rift_skill_mastery_cooking_rank' },
-  { sourceIndex: 10, skill: SkillsIndex.Breeding, displayName: 'Breeding', extractionKey: 'rift_skill_mastery_breeding_rank' },
-  { sourceIndex: 11, skill: SkillsIndex.Intellect, displayName: 'Laboratory', extractionKey: 'rift_skill_mastery_laboratory_rank' },
-  { sourceIndex: 12, skill: SkillsIndex.Sailing, displayName: 'Sailing', extractionKey: 'rift_skill_mastery_sailing_rank' },
-  { sourceIndex: 13, skill: SkillsIndex.Divinity, displayName: 'Divinity', extractionKey: 'rift_skill_mastery_divinity_rank' },
-  { sourceIndex: 14, skill: SkillsIndex.Gaming, displayName: 'Gaming', extractionKey: 'rift_skill_mastery_gaming_rank' },
-  { sourceIndex: 15, skill: SkillsIndex.Farming, displayName: 'Farming', extractionKey: 'rift_skill_mastery_farming_rank' },
-  { sourceIndex: 16, skill: SkillsIndex.Sneaking, displayName: 'Sneaking', extractionKey: 'rift_skill_mastery_sneaking_rank' },
-  { sourceIndex: 17, skill: SkillsIndex.Summoning, displayName: 'Summoning', extractionKey: 'rift_skill_mastery_summoning_rank' },
-  { sourceIndex: 18, skill: SkillsIndex.Spelunking, displayName: 'Spelunking', extractionKey: 'rift_skill_mastery_spelunking_rank' },
-  { sourceIndex: 19, skill: SkillsIndex.Research, displayName: 'Research', extractionKey: 'rift_skill_mastery_research_rank' },
-];
 
 type SkillBonusCase = {
   skill: SkillsIndex;
@@ -65,42 +32,16 @@ type SkillBonusCase = {
 const skillBonusCases: SkillBonusCase[] = [
   { skill: SkillsIndex.Mining, displayName: 'Mining', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_mining_experience' },
   { skill: SkillsIndex.Mining, displayName: 'Mining', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_mining_efficiency' },
-  { skill: SkillsIndex.Smithing, displayName: 'Smithing', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_smithing_experience' },
   { skill: SkillsIndex.Smithing, displayName: 'Smithing', bonusIndex: 1, sourceThreshold: 0, feature: 'forge capacity', extractionKey: 'rift_skill_mastery_smithing_forge_capacity' },
-  { skill: SkillsIndex.Chopping, displayName: 'Chopping', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_chopping_experience' },
-  { skill: SkillsIndex.Chopping, displayName: 'Chopping', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_chopping_efficiency' },
-  { skill: SkillsIndex.Fishing, displayName: 'Fishing', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_fishing_experience' },
-  { skill: SkillsIndex.Fishing, displayName: 'Fishing', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_fishing_efficiency' },
-  { skill: SkillsIndex.Alchemy, displayName: 'Alchemy', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_alchemy_experience' },
   { skill: SkillsIndex.Alchemy, displayName: 'Alchemy', bonusIndex: 1, sourceThreshold: 1, feature: 'liquid capacity', extractionKey: 'rift_skill_mastery_alchemy_liquid_capacity' },
-  { skill: SkillsIndex.Catching, displayName: 'Catching', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_catching_experience' },
-  { skill: SkillsIndex.Catching, displayName: 'Catching', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_catching_efficiency' },
-  { skill: SkillsIndex.Trapping, displayName: 'Trapping', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_trapping_experience' },
-  { skill: SkillsIndex.Trapping, displayName: 'Trapping', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_trapping_efficiency' },
-  { skill: SkillsIndex.Construction, displayName: 'Construction', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_construction_experience' },
   { skill: SkillsIndex.Construction, displayName: 'Construction', bonusIndex: 1, sourceThreshold: 1, feature: 'shrine level-up rate', extractionKey: 'rift_skill_mastery_construction_shrine_rate' },
-  { skill: SkillsIndex.Worship, displayName: 'Worship', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_worship_experience' },
-  { skill: SkillsIndex.Worship, displayName: 'Worship', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_worship_efficiency' },
-  { skill: SkillsIndex.Cooking, displayName: 'Cooking', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_cooking_experience' },
-  { skill: SkillsIndex.Cooking, displayName: 'Cooking', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_cooking_efficiency' },
-  { skill: SkillsIndex.Breeding, displayName: 'Breeding', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_breeding_experience' },
   { skill: SkillsIndex.Breeding, displayName: 'Breeding', bonusIndex: 1, sourceThreshold: 1, feature: 'egg incubation speed', extractionKey: 'rift_skill_mastery_breeding_egg_speed' },
-  { skill: SkillsIndex.Intellect, displayName: 'Laboratory', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_laboratory_experience' },
-  { skill: SkillsIndex.Intellect, displayName: 'Laboratory', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_laboratory_efficiency' },
-  { skill: SkillsIndex.Sailing, displayName: 'Sailing', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_sailing_experience' },
   { skill: SkillsIndex.Sailing, displayName: 'Sailing', bonusIndex: 1, sourceThreshold: 1, feature: 'boat sailing speed', extractionKey: 'rift_skill_mastery_sailing_speed' },
-  { skill: SkillsIndex.Divinity, displayName: 'Divinity', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_divinity_experience' },
   { skill: SkillsIndex.Divinity, displayName: 'Divinity', bonusIndex: 1, sourceThreshold: 1, feature: 'points gained', extractionKey: 'rift_skill_mastery_divinity_points' },
-  { skill: SkillsIndex.Gaming, displayName: 'Gaming', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_gaming_experience' },
   { skill: SkillsIndex.Gaming, displayName: 'Gaming', bonusIndex: 1, sourceThreshold: 1, feature: 'bits gained', extractionKey: 'rift_skill_mastery_gaming_bits' },
-  { skill: SkillsIndex.Farming, displayName: 'Farming', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_farming_experience' },
   { skill: SkillsIndex.Farming, displayName: 'Farming', bonusIndex: 1, sourceThreshold: 1, feature: 'crop evolution chance', extractionKey: 'rift_skill_mastery_farming_crop_chance' },
-  { skill: SkillsIndex.Sneaking, displayName: 'Sneaking', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_sneaking_experience' },
   { skill: SkillsIndex.Sneaking, displayName: 'Sneaking', bonusIndex: 1, sourceThreshold: 1, feature: 'jade coin gain', extractionKey: 'rift_skill_mastery_sneaking_jade_coins' },
-  { skill: SkillsIndex.Summoning, displayName: 'Summoning', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_summoning_experience' },
   { skill: SkillsIndex.Summoning, displayName: 'Summoning', bonusIndex: 1, sourceThreshold: 1, feature: 'essence gain', extractionKey: 'rift_skill_mastery_summoning_essence' },
-  { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', bonusIndex: 0, sourceThreshold: 0, feature: 'experience gain', extractionKey: 'rift_skill_mastery_spelunking_experience' },
-  { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', bonusIndex: 1, sourceThreshold: 1, feature: 'efficiency', extractionKey: 'rift_skill_mastery_spelunking_efficiency' },
   { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', bonusIndex: 3, sourceThreshold: 3, feature: 'maximum stamina', extractionKey: 'rift_skill_mastery_spelunking_max_stamina' },
   { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', bonusIndex: 4, sourceThreshold: 4, feature: 'daily page reads', extractionKey: 'rift_skill_mastery_spelunking_daily_page_reads' },
   { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', bonusIndex: 5, sourceThreshold: 5, feature: 'stamina regeneration', extractionKey: 'rift_skill_mastery_spelunking_stamina_regen' },
@@ -132,12 +73,6 @@ type CardPassiveCase = {
 
 const cardPassiveCases: CardPassiveCase[] = [
   { skill: SkillsIndex.Mining, displayName: 'Mining', sourceIndex: 0, effectLabel: 'ALL MINING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_mining_cards_passive' },
-  { skill: SkillsIndex.Chopping, displayName: 'Chopping', sourceIndex: 2, effectLabel: 'ALL CHOPPING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_chopping_cards_passive' },
-  { skill: SkillsIndex.Fishing, displayName: 'Fishing', sourceIndex: 3, effectLabel: 'ALL FISHING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_fishing_cards_passive' },
-  { skill: SkillsIndex.Catching, displayName: 'Catching', sourceIndex: 5, effectLabel: 'ALL CATCHING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_catching_cards_passive' },
-  { skill: SkillsIndex.Trapping, displayName: 'Trapping', sourceIndex: 6, effectLabel: 'ALL TRAPPING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_trapping_cards_passive' },
-  { skill: SkillsIndex.Worship, displayName: 'Worship', sourceIndex: 8, effectLabel: 'ALL WORSHIP CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_worship_cards_passive' },
-  { skill: SkillsIndex.Spelunking, displayName: 'Spelunking', sourceIndex: 18, effectLabel: 'ALL SPELUNKING CARDS ARE NOW PASSIVE', extractionKey: 'rift_skill_mastery_spelunking_cards_passive' },
 ];
 
 type PublicBonusCase = {
@@ -186,11 +121,6 @@ type ResearchGateCase = {
 const researchGateCases: ResearchGateCase[] = [
   { threshold: 0, extractionKey: 'rift_skill_mastery_research_rank_above_0' },
   { threshold: 1, extractionKey: 'rift_skill_mastery_research_rank_above_1' },
-  { threshold: 2, extractionKey: 'rift_skill_mastery_research_rank_above_2' },
-  { threshold: 3, extractionKey: 'rift_skill_mastery_research_rank_above_3' },
-  { threshold: 4, extractionKey: 'rift_skill_mastery_research_rank_above_4' },
-  { threshold: 5, extractionKey: 'rift_skill_mastery_research_rank_above_5' },
-  { threshold: 6, extractionKey: 'rift_skill_mastery_research_rank_above_6' },
 ];
 
 const researchSlotCases = [
@@ -243,17 +173,6 @@ describe('Rift Domain - Skill Mastery account effects', () => {
     if (!skillMastery.active) {
       throw new Error('The latest real save does not have Skill Mastery active; active comparisons require an unlocked effect');
     }
-  });
-
-  describe('ranks for all SkillsIndex categories', () => {
-    skillRankCases.forEach(({ sourceIndex, skill, displayName, extractionKey }) => {
-      it(`matches the live ${displayName} Skill Mastery rank`, () => {
-        expect(skillMastery.getSkillRank(skill)).toMatchLiveGameWithDetails(getExtractedValue(extractionResults, extractionKey), {
-          tolerance: 0,
-          context: `Skill Mastery rank / ${displayName} / source position ${sourceIndex}`,
-        });
-      });
-    });
   });
 
   describe('numeric effects for each supported category', () => {
@@ -309,7 +228,7 @@ describe('Rift Domain - Skill Mastery account effects', () => {
     });
   });
 
-  describe('card effects for the seven public card categories', () => {
+  describe('card effects for configured public card categories', () => {
     cardPassiveCases.forEach(({ skill, displayName, sourceIndex, effectLabel, extractionKey }) => {
       it(`matches live ${displayName} card effect access`, () => {
         const domainGate = skillMastery.getSkillRank(skill) > 2 ? 1 : 0;

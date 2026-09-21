@@ -734,7 +734,6 @@ const keyFunctionMap: Record<string, Function> = {
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
         safeJsonParse(doc, "Spelunk", []) as number[][],
-        safeJsonParse(doc, "RoyalG", []) as number[][],
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -797,7 +796,7 @@ const parsePostOffice = (postOffice: string, player: Player) => {
     });
 }
 
-const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], royalG: number[][], player: Player) => {
+const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], player: Player) => {
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
 
@@ -1242,6 +1241,7 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;
     const legendTalents = data.get("legendTalents") as LegendTalents;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
 
     // Read the cached Elemental Sorcerer Family result only after Family calculation has completed.
     // ES can also raise Family Guy, so these cached Family results must remain the source for this pass.
@@ -1257,6 +1257,26 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
             player.extraLevelsFromES = esBonus;
         }
     })
+
+    
+    // Max talent level from Royal Guardian All Talent Cap
+    // This must happen after all other talent level adjustments, but before super talents.
+    const royalGuardianAllTalentCap = royalArmory.getUpgradeBonus(55);
+    players.forEach(player => {
+        const allTalentCap = royalGuardianAllTalentCap;
+        player.talents
+            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
+            .forEach(talent => {
+                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
+                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
+                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
+                talent.maxLevel += adjustment;
+                if (talent.level > 0) {
+                    talent.level += adjustment;
+                }
+            });
+        player.royalGuardianAllTalentCap = royalGuardianAllTalentCap;
+    });
 
     // Super-talent levels are added after the capped all-talent aggregate.
     const superTalentBonusLevels = legendTalents.superTalentBonusLevels;
@@ -1288,7 +1308,6 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const optLacc = data.get("OptLacc") as (number | string)[];
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const gaming = data.get("gaming") as Gaming;
-    const royalArmory = data.get("royalArmory") as RoyalArmory;
 
     // Update max talent level due to bear.
     const bearGod = divinity.gods[1];
@@ -1411,24 +1430,6 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
             });
             player.extraLevelsFromSuperBit = timmyTalentedBonus;
         }
-    });
-
-    // Max talent level from Royal Guardian All Talent Cap
-    const royalGuardianAllTalentCap = royalArmory.getUpgradeBonus(55);
-    players.forEach(player => {
-        const allTalentCap = royalGuardianAllTalentCap;
-        player.talents
-            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
-            .forEach(talent => {
-                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
-                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
-                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
-                talent.maxLevel += adjustment;
-                if (talent.level > 0) {
-                    talent.level += adjustment;
-                }
-            });
-        player.royalGuardianAllTalentCap = royalGuardianAllTalentCap;
     });
 
 
