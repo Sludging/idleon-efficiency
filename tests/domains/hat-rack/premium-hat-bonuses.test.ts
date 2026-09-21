@@ -1,5 +1,5 @@
 /**
- * Representative Hat Rack contributions for player 0 from the paired save.
+ * Representative Hat Rack contributions for the target player from the paired save.
  * These samples cover populated unique/base effects and an absent effect, not
  * locked characters, empty collections, new deposits or dungeon transitions.
  * @testCovers HatRack.getBonus
@@ -7,6 +7,7 @@
 import { Player } from '../../../data/domain/player';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const samples = [
   { key: 'hat_rack_skill_efficiency', effect: '% SKILL EFFICIENCY', description: 'deposited hats Skill Efficiency' },
@@ -68,9 +69,7 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
     validateExtractionHealth(extractionResults);
     validateExtractionHealth(equipmentResults);
     gameData = loadGameDataFromSave('latest');
-    const player0 = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
-    if (!player0) throw new Error('Player 0 not found in save data');
-    player = player0;
+    player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
   samples.forEach(({ key, effect, description }) => {
@@ -83,7 +82,7 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
       }
       expect(hatRack.getBonus(effect, player)).toMatchLiveGameWithDetails(liveValue, {
         tolerance: 0,
-        context: `Player 0 Hat Rack ${description}`,
+        context: `Target player Hat Rack ${description}`,
       });
     });
   });

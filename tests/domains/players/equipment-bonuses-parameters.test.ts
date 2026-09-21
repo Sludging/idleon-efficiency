@@ -10,28 +10,23 @@ import { ResearchGrid } from '../../../data/domain/world-7/research';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-
-const getPlayer0 = (gameData: Map<string, any>): Player => {
-  const player = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
-  if (!player) throw new Error('Player 0 not found in save data');
-  return player;
-};
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   pendant_chip: {
     description: 'pendant chip contribution controlling slot doubling',
     extractionKey: 'equipment_chip_pend',
-    domainExtractor: gameData => getPlayer0(gameData).getChipBonus('pend'),
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).getChipBonus('pend'),
   },
   upper_keychain_chip: {
     description: 'upper keychain chip contribution controlling slot doubling',
     extractionKey: 'equipment_chip_key1',
-    domainExtractor: gameData => getPlayer0(gameData).getChipBonus('key1'),
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).getChipBonus('key1'),
   },
   trophy_chip: {
     description: 'trophy chip contribution controlling slot doubling',
     extractionKey: 'equipment_chip_troph',
-    domainExtractor: gameData => getPlayer0(gameData).getChipBonus('troph'),
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).getChipBonus('troph'),
   },
   equipment_research: {
     description: 'Research bonus multiplying the final equipment slot',
@@ -41,29 +36,29 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   gallery_trophy_skill_efficiency: {
     description: 'Gallery trophy Skill Efficiency contribution',
     extractionKey: 'gallery_trophy_skill_efficiency',
-    domainExtractor: gameData => (gameData.get('gallery') as Gallery).getTrophyBonus('% SKILL EFFICIENCY', getPlayer0(gameData)),
+    domainExtractor: gameData => (gameData.get('gallery') as Gallery).getTrophyBonus('% SKILL EFFICIENCY', getTargetPlayer(gameData.get('players') as Player[])),
   },
   gallery_nametag_drop_rate: {
     description: 'Gallery nametag Drop Rate contribution',
     extractionKey: 'gallery_nametag_drop_rate',
-    domainExtractor: gameData => (gameData.get('gallery') as Gallery).getNametagBonus('% DROP RATE', getPlayer0(gameData)),
+    domainExtractor: gameData => (gameData.get('gallery') as Gallery).getNametagBonus('% DROP RATE', getTargetPlayer(gameData.get('players') as Player[])),
   },
   hat_rack_skill_efficiency: {
     description: 'Hat Rack Skill Efficiency contribution',
     extractionKey: 'hat_rack_skill_efficiency',
-    domainExtractor: gameData => (gameData.get('hatRack') as HatRack).getBonus('% SKILL EFFICIENCY', getPlayer0(gameData)),
+    domainExtractor: gameData => (gameData.get('hatRack') as HatRack).getBonus('% SKILL EFFICIENCY', getTargetPlayer(gameData.get('players') as Player[])),
   },
   player_obol_drop_rate: {
-    description: 'player 0 personal and family obol Drop Rate',
+    description: `Player ${TARGET_PLAYER_INDEX} personal and family obol Drop Rate`,
     extractionKey: 'player_obol_drop_rate',
     // Read the existing calculated total, not the individual obols or save rows.
-    domainExtractor: gameData => getPlayer0(gameData).obolStats.flatMap(group => group.stats)
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).obolStats.flatMap(group => group.stats)
       .filter(stat => stat.extra === '% Drop Rate').reduce((total, stat) => total + stat.getValue(), 0),
   },
   player_obol_total_damage: {
-    description: 'player 0 personal and family obol Total Damage',
+    description: `Player ${TARGET_PLAYER_INDEX} personal and family obol Total Damage`,
     extractionKey: 'player_obol_total_damage',
-    domainExtractor: gameData => getPlayer0(gameData).obolStats.flatMap(group => group.stats)
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).obolStats.flatMap(group => group.stats)
       .filter(stat => stat.extra === '% Total Damage').reduce((total, stat) => total + stat.getValue(), 0),
   },
 };

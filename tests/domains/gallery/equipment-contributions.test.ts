@@ -1,5 +1,5 @@
 /**
- * Representative Gallery contributions from the paired player-0 save.
+ * Representative Gallery contributions from the paired target-player save.
  * These samples do not establish empty collections, podium transitions,
  * nametag stack caps, or different characters' chip effects.
  */
@@ -7,6 +7,7 @@ import { Player } from '../../../data/domain/player';
 import { Gallery } from '../../../data/domain/world-7/gallery';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const samples = [
   { key: 'gallery_trophy_skill_efficiency', description: 'collected trophy Skill Efficiency', method: 'getTrophyBonus' as const, effect: '% SKILL EFFICIENCY' },
@@ -24,9 +25,7 @@ describe('Gallery Domain - Equipment Contributions', () => {
     extractionResults = loadExtractionResults('player-equipment-bonuses-data.json');
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave('latest');
-    const player0 = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
-    if (!player0) throw new Error('Player 0 not found in save data');
-    player = player0;
+    player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
   samples.forEach(sample => {
@@ -40,7 +39,7 @@ describe('Gallery Domain - Equipment Contributions', () => {
       const domainValue = gallery[sample.method](sample.effect, player);
       expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
         tolerance: 0,
-        context: `Player 0 Gallery ${sample.description}`,
+        context: `Target player Gallery ${sample.description}`,
       });
     });
   });

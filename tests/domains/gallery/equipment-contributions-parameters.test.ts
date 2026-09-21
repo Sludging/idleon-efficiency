@@ -11,6 +11,7 @@ import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const getCollectedItemEffect = (gameData: Map<string, any>, name: string, effect: string): number => {
   const item = (gameData.get('itemsData') as Item[]).find(item => item.internalName === name);
@@ -22,13 +23,9 @@ const getCollectedItemEffect = (gameData: Map<string, any>, name: string, effect
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   trophy_chip: {
-    description: 'player 0 trophy chip contribution to Gallery scaling',
+    description: 'target player trophy chip contribution to Gallery scaling',
     extractionKey: 'gallery_chip_troph',
-    domainExtractor: gameData => {
-      const player = (gameData.get('players') as Player[]).find(player => player.playerID === 0);
-      if (!player) throw new Error('Player 0 not found in save data');
-      return player.getChipBonus('troph');
-    },
+    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).getChipBonus('troph'),
   },
   clamworks_podiums: {
     description: 'Clamworks promotion 0 enabling improved podiums',

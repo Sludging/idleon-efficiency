@@ -2,7 +2,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { Player } from '../../../data/domain/player';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
-import type { Stamp } from '../../../data/domain/world-1/stamps';
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 import type { Guild } from '../../../data/domain/guild';
 import type { Achievement } from '../../../data/domain/achievements';
 import type { Rift } from '../../../data/domain/world-4/rift';
@@ -145,13 +145,11 @@ const parameterSpecs = {
     }
   },
   gear_bonus_etc_bonuses_30: {
-    description: 'Player 0 equipment Build Speed',
+    description: `Player ${TARGET_PLAYER_INDEX} equipment Build Speed`,
     extractionKey: 'gear_bonus_etc_bonuses_30',
     domainExtractor: (gameData: Map<string, any>) => {
       const players = gameData.get("players") as Player[];
-      const player0 = players.find(player => player.playerID === 0);
-      if (!player0) throw new Error('Player 0 not found in save data');
-      return player0.getEquipmentBonus(EquipmentBonus.BuildSpeed);
+      return getTargetPlayer(players).getEquipmentBonus(EquipmentBonus.BuildSpeed);
     }
   },
 };

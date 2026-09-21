@@ -10,7 +10,7 @@
 import { ExtractionResults, loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Player } from '../../../data/domain/player';
-
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 const saveName = 'latest';
 const extractionResultsName = 'player-chip-bonuses-data.json';
 
@@ -29,15 +29,12 @@ describe('Player Domain - Chip Bonuses', () => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     const gameData = loadGameDataFromSave(saveName);
-    const player0 = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
-    if (!player0) {
-      throw new Error('Player 0 not found in save data');
-    }
-    player = player0;
+    const players = gameData.get('players') as Player[];
+    player = getTargetPlayer(players);
   });
 
   chipBonusSelectors.forEach(stat => {
-    it(`matches the equipped-chip ${stat} contribution for player 0`, () => {
+    it(`matches the equipped-chip ${stat} contribution for player ${TARGET_PLAYER_INDEX}`, () => {
       const liveValue = getExtractedValue(extractionResults, `chip_bonus_${stat}`);
       if (typeof player.getChipBonus !== 'function') {
         throw new Error(`MISSING OWNER API - Player.getChipBonus("${stat}") must expose chipBonuses("${stat}")`);

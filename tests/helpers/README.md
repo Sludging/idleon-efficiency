@@ -19,9 +19,11 @@ This will:
 
 ### Active Player Policy
 
-Extraction runs require the game to be open on active player index `0`. The default is defined in `tests/helpers/game-data-extractor.js`; the extractor checks it once before evaluating each config and aborts if the active player does not match.
+Extraction runs require the game to be open on the shared target player. Set its index in `tests/utils/target-player.json`; the extractor checks it once before evaluating each config and aborts if the active player does not match.
 
-Configs with a real dependency on a specific character may set `requiredActivePlayerIndex` at the top level. Currently this is used by `bubble-bonus.json`, `talents-sludgeadin.json`, and `statue-bonuses.json`; do not add it for ordinary fixture alignment.
+Extraction expressions may use `__TARGET_PLAYER__` for arguments that are semantically player indexes. The extractor replaces that placeholder with the shared target index before sending the expression to the debug server. Do not use it for domain indexes or for configs that intentionally cover multiple players.
+
+Configs with a real dependency on a different specific character may set `requiredActivePlayerIndex` at the top level. That override takes precedence over the shared target. Do not add it for ordinary fixture alignment.
 
 ## Individual Extraction (Advanced)
 

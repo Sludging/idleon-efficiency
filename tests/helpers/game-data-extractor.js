@@ -12,7 +12,8 @@ const fs = require('fs');
 const path = require('path');
 
 const DEBUG_SERVER_URL = 'http://localhost:3100';
-const DEFAULT_ACTIVE_PLAYER_INDEX = 0;
+const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-player.json');
+const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
 
 class GameDataExtractor {
  constructor(configPath, outputPath) {
@@ -62,11 +63,31 @@ class GameDataExtractor {
   }
  }
 
+ readTargetPlayerIndex() {
+  let targetPlayerConfig;
+  try {
+   targetPlayerConfig = JSON.parse(fs.readFileSync(TARGET_PLAYER_CONFIG_PATH, 'utf8'));
+  } catch (error) {
+   throw new Error(
+    `Failed to load target player config from ${TARGET_PLAYER_CONFIG_PATH}: ${error.message}`
+   );
+  }
+
+  const targetPlayerIndex = targetPlayerConfig?.index;
+  if (!Number.isInteger(targetPlayerIndex) || targetPlayerIndex < 0) {
+   throw new Error(
+    `Invalid target player index in ${TARGET_PLAYER_CONFIG_PATH}: expected a non-negative integer`
+   );
+  }
+
+  return targetPlayerIndex;
+ }
+
  getRequiredActivePlayerIndex() {
   const configuredIndex = this.config?.requiredActivePlayerIndex;
 
   if (configuredIndex === undefined) {
-   return DEFAULT_ACTIVE_PLAYER_INDEX;
+   return this.readTargetPlayerIndex();
   }
 
   if (!Number.isInteger(configuredIndex) || configuredIndex < 0) {
@@ -92,14 +113,24 @@ class GameDataExtractor {
   return activePlayerIndex;
  }
 
+ resolveExpression(expression) {
+  if (typeof expression !== 'string' || !expression.includes(TARGET_PLAYER_PLACEHOLDER)) {
+   return expression;
+  }
+
+  return expression.replaceAll(TARGET_PLAYER_PLACEHOLDER, String(this.readTargetPlayerIndex()));
+ }
+
  async executeExpression(expression) {
+  const executedExpression = this.resolveExpression(expression);
+
   try {
    const response = await fetch(`${DEBUG_SERVER_URL}/exec`, {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ expression })
+    body: JSON.stringify({ expression: executedExpression })
    });
 
    const result = await response.json();
@@ -110,7 +141,7 @@ class GameDataExtractor {
 
    return this.normalizeResult(result.result);
   } catch (error) {
-   throw new Error(`Failed to execute "${expression}": ${error.message}`);
+   throw new Error(`Failed to execute "${executedExpression}": ${error.message}`);
   }
  }
 
@@ -150,15 +181,16 @@ class GameDataExtractor {
 
   for (const extraction of this.config.extractions) {
    const { label, expression, description } = extraction;
+   const executedExpression = this.resolveExpression(expression);
 
    try {
     console.log(`  Extracting: ${label}`);
-    console.log(`    Expression: ${expression}`);
+    console.log(`    Expression: ${executedExpression}`);
 
-    const result = await this.executeExpression(expression);
+    const result = await this.executeExpression(executedExpression);
 
     this.results.extractions[label] = {
-     expression,
+     expression: executedExpression,
      result,
      description: description || '',
      extractedAt: new Date().toISOString()
@@ -169,7 +201,7 @@ class GameDataExtractor {
 
    } catch (error) {
     this.results.errors[label] = {
-     expression,
+     expression: executedExpression,
      error: error.message,
      description: description || '',
      failedAt: new Date().toISOString()

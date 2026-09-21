@@ -1,4 +1,5 @@
 import GameDataExtractor from './game-data-extractor';
+import targetPlayerConfig from '../utils/target-player.json';
 
 describe('GameDataExtractor active-player policy', () => {
   afterEach(() => {
@@ -18,19 +19,20 @@ describe('GameDataExtractor active-player policy', () => {
     } as Response);
   };
 
-  it('accepts the default active player index', async () => {
+  it('accepts the shared target player index by default', async () => {
     const extractor = createExtractor();
-    mockActivePlayerIndex(0);
+    mockActivePlayerIndex(targetPlayerConfig.index);
 
-    await expect(extractor.checkActivePlayer()).resolves.toBe(0);
+    await expect(extractor.checkActivePlayer()).resolves.toBe(targetPlayerConfig.index);
   });
 
-  it('rejects an unexpected default active player index', async () => {
+  it('rejects an unexpected shared target player index', async () => {
     const extractor = createExtractor();
-    mockActivePlayerIndex(1);
+    const unexpectedIndex = targetPlayerConfig.index === 0 ? 1 : 0;
+    mockActivePlayerIndex(unexpectedIndex);
 
     await expect(extractor.checkActivePlayer()).rejects.toThrow(
-      'expected player index 0, found 1'
+      `expected player index ${targetPlayerConfig.index}, found ${unexpectedIndex}`
     );
   });
 
@@ -41,6 +43,28 @@ describe('GameDataExtractor active-player policy', () => {
     await expect(extractor.checkActivePlayer()).resolves.toBe(2);
   });
 
+  it('substitutes the shared target player index in extraction expressions', async () => {
+    const extractor = createExtractor({
+      extractions: [
+        {
+          label: 'target_player_expression',
+          expression: 'game.callFunction(__TARGET_PLAYER__)'
+        }
+      ]
+    });
+    mockActivePlayerIndex(targetPlayerConfig.index);
+
+    await extractor.extractData();
+
+    const request = (global.fetch as jest.Mock).mock.calls[0];
+    expect(JSON.parse(request[1].body)).toEqual({
+      expression: `game.callFunction(${targetPlayerConfig.index})`
+    });
+    expect(extractor.results.extractions.target_player_expression).toMatchObject({
+      expression: `game.callFunction(${targetPlayerConfig.index})`,
+      result: targetPlayerConfig.index
+    });
+  });
   it('checks the active player before extracting data', async () => {
     const extractor = createExtractor();
     const calls: string[] = [];

@@ -9,7 +9,7 @@ import { Player } from '../../../data/domain/player';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
-
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 const equipmentBonusSamples: { bonus: EquipmentBonus; description: string }[] = [
   { bonus: EquipmentBonus.SkillEfficiency, description: 'Skill Efficiency from equipment and account bonuses' },
   { bonus: EquipmentBonus.DropRate, description: 'Drop Rate including personal and family obols' },
@@ -27,9 +27,8 @@ describe('Player Domain - Equipment Bonuses', () => {
     extractionResults = loadExtractionResults('player-equipment-bonuses-data.json');
     validateExtractionHealth(extractionResults);
     const gameData = loadGameDataFromSave('latest');
-    const player0 = (gameData.get('players') as Player[]).find(candidate => candidate.playerID === 0);
-    if (!player0) throw new Error('Player 0 not found in save data');
-    player = player0;
+    const players = gameData.get('players') as Player[];
+    player = getTargetPlayer(players);
   });
 
   equipmentBonusSamples.forEach(({ bonus, description }) => {
@@ -37,7 +36,7 @@ describe('Player Domain - Equipment Bonuses', () => {
       const liveValue = getExtractedValue(extractionResults, `equipment_bonus_${bonus}`);
       expect(player.getEquipmentBonus(bonus)).toMatchLiveGameWithDetails(liveValue, {
         tolerance: 0,
-        context: `Player 0 equipment ${description}`,
+        context: `Player ${TARGET_PLAYER_INDEX} equipment ${description}`,
       });
     });
   });
