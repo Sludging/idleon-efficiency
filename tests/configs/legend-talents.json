@@ -52,6 +52,11 @@
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 5, 0)",
       "description": "Zenith market bonus 5 (Super Dupers) - now implemented via ZenithMarket domain; feeds into superTalentBonusLevels"
     },
+    { 
+      "label": "sushi_19",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 19, 0)",
+      "description": "Sushi 19 (Live Squid) unlock status - contributes 1 legend point if unlocked"
+    },
     {
       "label": "spelunk_18_array",
       "expression": "idleon.getAttr(\"Spelunk\")[18]",

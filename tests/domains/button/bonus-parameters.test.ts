@@ -5,7 +5,7 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
-import { Companion, getCompanionBonus } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
 
 const saveName = 'latest';
@@ -16,7 +16,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Companion 147 bonus that increases The Button multiplier',
   extractionKey: 'companion_bonus_147',
   domainExtractor: (gameData) => {
-   return getCompanionBonus(gameData.get('companions') as Companion[], 147);
+   return getCompanionActiveBonus(gameData.get('companions') as Companion[], 147);
   }
  },
  grid_bonus_125: {

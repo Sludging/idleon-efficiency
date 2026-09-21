@@ -20,14 +20,15 @@ import { EventShop } from '../../../data/domain/eventShop';
 import { Meritocraty } from '../../../data/domain/world-7/meritocraty';
 import { UpgradeVault } from '../../../data/domain/upgradeVault';
 import { Player } from '../../../data/domain/player';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'statue-bonuses-data.json';
 
-const player0TalentBonus = (gameData: Map<string, unknown>, skillIndex: number): number => {
+const playerTalentBonus = (gameData: Map<string, unknown>, skillIndex: number): number => {
  const players = gameData.get("players") as Player[];
- const player0 = players.find(player => player.playerID === 0);
- return player0?.talents.find(talent => talent.skillIndex === skillIndex)?.getBonus() ?? 0;
+ const player = getTargetPlayer(players);
+ return player?.talents.find(talent => talent.skillIndex === skillIndex)?.getBonus() ?? 0;
 };
 
 const statueParameterSpecs: Record<string, ParameterTestSpec> = {
@@ -53,37 +54,37 @@ const statueParameterSpecs: Record<string, ParameterTestSpec> = {
  talent_37_bonus: {
   description: 'Talent 37 bonus (Feasty, Kachow, and Ehexpee statues)',
   extractionKey: 'talent_37_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 37)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 37)
  },
  talent_112_bonus: {
   description: 'Talent 112 bonus (Power, Mining, and Oceanman statues)',
   extractionKey: 'talent_112_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 112)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 112)
  },
  talent_127_bonus: {
   description: 'Talent 127 bonus (Power, Mining, and Thicc Skin statues)',
   extractionKey: 'talent_127_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 127)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 127)
  },
  talent_292_bonus: {
   description: 'Talent 292 bonus (Speed, Anvil, and Ol Reliable statues)',
   extractionKey: 'talent_292_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 292)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 292)
  },
  talent_307_bonus: {
   description: 'Talent 307 bonus (Speed, Anvil, and Bullseye statues)',
   extractionKey: 'talent_307_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 307)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 307)
  },
  talent_472_bonus: {
   description: 'Talent 472 bonus (Exp, Lumberbob, and Beholder statues)',
   extractionKey: 'talent_472_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 472)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 472)
  },
  talent_487_bonus: {
   description: 'Talent 487 bonus (Exp, Lumberbob, and Cauldron statues)',
   extractionKey: 'talent_487_bonus',
-  domainExtractor: (gameData) => player0TalentBonus(gameData, 487)
+  domainExtractor: (gameData) => playerTalentBonus(gameData, 487)
  },
 
  // ===== OTHER BONUSES MULTIPLIER INPUTS =====

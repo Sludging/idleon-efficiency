@@ -15,6 +15,7 @@ import {
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
 import { Player } from '../../../data/domain/player';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
 import { Card } from '../../../data/domain/cards';
@@ -39,18 +40,14 @@ import { Hoops } from '../../../data/domain/world-1/hoops';
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
 
-const getPlayer0 = (
+const getPlayer = (
  gameData: Map<string, any>,
 ): Player => {
- const player = (gameData.get('players') as Player[])[0];
+ const player = getTargetPlayer(gameData.get('players') as Player[]);
  if (!player) {
-  throw new Error('Player 0 not found in save data');
+  throw new Error(`Player ${TARGET_PLAYER_INDEX} not found in save data`);
  }
  return player;
-};
-
-const missingOwnerApi = (signature: string): never => {
- throw new Error(`MISSING OWNER API - ${signature} is not exposed by its owning domain`);
 };
 
 
@@ -59,14 +56,14 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Family Hunter branch-0 class bonus (FamBonusQTYs[42])',
   extractionKey: 'all_eff_family_bonus_42',
   domainExtractor: (gameData) => {
-   const player0 = getPlayer0(gameData);
-   return (gameData.get('family') as Family).getClassBonus(ClassIndex.Hunter)?.getBonus(player0);
+   const player = getPlayer(gameData);
+   return (gameData.get('family') as Family).getClassBonus(ClassIndex.Hunter)?.getBonus(player);
   },
  },
  all_eff_etc_bonus_48: {
-  description: 'Player 0 equipment EtcBonuses(48) / Skill Efficiency',
+  description: 'Target Player equipment EtcBonuses(48) / Skill Efficiency',
   extractionKey: 'all_eff_etc_bonus_48',
-  domainExtractor: (gameData) => getPlayer0(gameData).getEquipmentBonus(EquipmentBonus.SkillEfficiency),
+  domainExtractor: (gameData) => getPlayer(gameData).getEquipmentBonus(EquipmentBonus.SkillEfficiency),
  },
  all_eff_vial_6_skill_eff: {
   description: 'Alchemy 6SkillEff vial bonus',
@@ -84,9 +81,9 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   domainExtractor: (gameData) => (gameData.get('quests') as Quests).getTotalQuestsComplete(),
  },
  all_eff_talent_617: {
-  description: 'Player 0 Talent 617 bonus',
+  description: 'Target Player Talent 617 bonus',
   extractionKey: 'all_eff_talent_617',
-  domainExtractor: (gameData) => getPlayer0(gameData).getTalentBonus(617),
+  domainExtractor: (gameData) => getPlayer(gameData).getTalentBonus(617),
  },
  all_eff_meal_seff: {
   description: 'Cooking MealBonus("Seff")',
@@ -94,14 +91,14 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   domainExtractor: (gameData) => (gameData.get('cooking') as Cooking).getMealBonusForKey('Seff'),
  },
  all_eff_talent_646: {
-  description: 'Player 0 Talent 646 bonus',
+  description: 'Target Player Talent 646 bonus',
   extractionKey: 'all_eff_talent_646',
-  domainExtractor: (gameData) => getPlayer0(gameData).getTalentBonus(646),
+  domainExtractor: (gameData) => getPlayer(gameData).getTalentBonus(646),
  },
  all_eff_tome_bonus_1: {
-  description: 'TomeBonus(1, player 0)',
+  description: 'TomeBonus(1, target player)',
   extractionKey: 'all_eff_tome_bonus_1',
-  domainExtractor: (gameData) => (gameData.get('tome') as Tome).getTomeBonus(1, getPlayer0(gameData)),
+  domainExtractor: (gameData) => (gameData.get('tome') as Tome).getTomeBonus(1, getPlayer(gameData)),
  },
  all_eff_palette_10: {
   description: 'Gaming PaletteBonus(10, 0)',
@@ -112,8 +109,8 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Lab chipBonuses("toteff")',
   extractionKey: 'all_eff_chip_toteff',
   domainExtractor: (gameData) => {
-   const player0 = getPlayer0(gameData);
-   return player0.getChipBonus('toteff');
+   const player = getPlayer(gameData);
+   return player.getChipBonus('toteff');
   }
  },
  all_eff_card_lv_crystal4: {
@@ -155,10 +152,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'Shimmer Skill Efficiency bonus including The Shim Lantern boost',
   extractionKey: 'all_eff_shimmer_skill_efficiency',
   domainExtractor: (gameData) => {
-   const expeditions = gameData.get('islandExpeditions') as IslandExpeditions & { getShimmerBonus?: (index: number) => number };
-   if (typeof expeditions?.getShimmerBonus !== 'function') {
-    return missingOwnerApi('IslandExpeditions.getShimmerBonus(6): OptionsListAccount[180] * Dreamstuff("AllShimmerBonuses", 0)');
-   }
+   const expeditions = gameData.get('islandExpeditions') as IslandExpeditions;
    return expeditions.getShimmerBonus(6);
   },
  },
@@ -166,8 +160,8 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   description: 'CardBonusREAL(84)',
   extractionKey: 'all_eff_card_bonus_84',
   domainExtractor: (gameData) => {
-   const player0cards = getPlayer0(gameData).cardInfo?.equippedCards ?? [];
-   return Card.GetTotalBonusForId(player0cards, 84);
+   const playercards = getPlayer(gameData).cardInfo?.equippedCards ?? [];
+   return Card.GetTotalBonusForId(playercards, 84);
   }
  },
  all_eff_companion_5: {
@@ -186,29 +180,29 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   domainExtractor: (gameData) => (gameData.get('guild') as Guild).guildBonuses.find((bonus) => bonus.index === 6)?.getBonus() ?? 0,
  },
  all_eff_card_set_2: {
-  description: 'Player 0 CardSetBonuses(0, "2")',
+  description: 'Target Player CardSetBonuses(0, "2")',
   extractionKey: 'all_eff_card_set_2',
-  domainExtractor: (gameData) => getPlayer0(gameData).cardInfo?.getBonusForId(2) ?? 0,
+  domainExtractor: (gameData) => getPlayer(gameData).cardInfo?.getBonusForId(2) ?? 0,
  },
  all_eff_prayer_1_bonus: {
   description: 'prayersReal(1, 0) bonus',
   extractionKey: 'all_eff_prayer_1_bonus',
   domainExtractor: (gameData) => {
    const prayer1bonus = (gameData.get('prayers') as Prayer[]).find((prayer) => prayer.index === 1)?.getBonus() ?? 0;
-   return getPlayer0(gameData).activePrayers.includes(1) ? prayer1bonus : 0;
+   return getPlayer(gameData).activePrayers.includes(1) ? prayer1bonus : 0;
   }
  },
  all_eff_buff_40_2: {
-  description: 'Player 0 GetBuffBonuses(40, 2) Maestro Transfusion efficiency penalty',
+  description: 'Target Player GetBuffBonuses(40, 2) Maestro Transfusion efficiency penalty',
   extractionKey: 'all_eff_buff_40_2',
-  domainExtractor: (gameData) => getPlayer0(gameData).activeBuffs.find((talent) => talent.skillIndex === 40)?.getBonus(false, true) ?? 0,
+  domainExtractor: (gameData) => getPlayer(gameData).activeBuffs.find((talent) => talent.skillIndex === 40)?.getBonus(false, true) ?? 0,
  },
  all_eff_prayer_17_curse: {
   description: 'prayersReal(17, 1) curse',
   extractionKey: 'all_eff_prayer_17_curse',
   domainExtractor: (gameData) => {
    const prayer17curse = (gameData.get('prayers') as Prayer[]).find((prayer) => prayer.index === 17)?.getCurse() ?? 0;
-   return getPlayer0(gameData).activePrayers.includes(17) ? prayer17curse : 0;
+   return getPlayer(gameData).activePrayers.includes(17) ? prayer17curse : 0;
   }
  },
 };

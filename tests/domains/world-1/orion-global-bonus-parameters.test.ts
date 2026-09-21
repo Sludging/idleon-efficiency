@@ -14,7 +14,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
 const saveName = 'latest';
@@ -35,8 +35,7 @@ const parameterSpecs = {
     extractionKey: 'companion_51_bonus',
     domainExtractor: (gameData: Map<string, any>) => {
       const companions = gameData.get("companions") as Companion[];
-      const companion51 = companions.find(c => c.id === 51);
-      return companion51?.owned ? companion51.data.bonus : 0;
+      return getCompanionActiveBonus(companions, 51);
     }
   },
 };

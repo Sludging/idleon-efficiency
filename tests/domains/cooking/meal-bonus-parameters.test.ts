@@ -23,7 +23,7 @@ import { Lab } from '../../../data/domain/world-4/lab';
 import { Breeding } from '../../../data/domain/world-4/breeding';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Cooking } from '../../../data/domain/world-4/cooking';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const saveName = 'latest';
@@ -125,8 +125,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   extractionKey: 'companion_162_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const companions = gameData.get("companions") as Companion[];
-   const companion = companions.find(c => c.id === 162);
-   return companion?.owned ? companion.data.bonus : 0;
+   return getCompanionActiveBonus(companions, 162);
   }
  },
 };

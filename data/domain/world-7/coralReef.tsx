@@ -2,7 +2,7 @@ import { Alchemy } from "../world-2/alchemy/alchemy";
 import { Arcade } from "../world-2/arcade";
 import { Domain, RawData } from "../base/domain";
 import { Card } from "../cards";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { CoralReefUpgradeBase, initCoralReefUpgradeRepo } from "../data/CoralReefUpgradeRepo";
 import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
@@ -103,7 +103,7 @@ export const updateCoralReefDailyGain = (data: Map<string, any>) => {
     const statues = data.get("statues") as PlayerStatues[];
 
     // Multiplicative bonuses
-    const companionBonus40 = 1 + (companions.find(companion => companion.id == 40)?.owned || false ? companions.find(companion => companion.id == 40)?.data.bonus || 0 : 0);
+    const companionBonus40 = 1 + getCompanionActiveBonus(companions, 40);
     const eventShopBonus25 = 1 + (eventShop.isBonusOwned(25) ? .3 : 0);
     const gemShopBonus41 = 1 + 20 * (gemStore.purchases.find(purchase => purchase.no == 41)?.pucrhased ?? 0) /100;
 

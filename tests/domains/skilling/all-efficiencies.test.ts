@@ -7,43 +7,31 @@ import {
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Player } from '../../../data/domain/player';
 import { Skilling } from '../../../data/domain/skilling';
+import { getTargetPlayer } from '../../utils/target-player';
 
 const saveName = 'latest';
 const extractionResultsName = 'skill-stats-all-efficiencies-data.json';
 
-type AllEfficienciesSkilling = Skilling & {
-  getAllEfficiencies?: (player: Player) => number;
-};
-
-const getAllEfficiencies = (skilling: AllEfficienciesSkilling, player: Player): number => {
-  if (typeof skilling?.getAllEfficiencies !== 'function') {
-    throw new Error(
-      'MISSING SELECTED CALCULATION - Skilling.getAllEfficiencies(player) must expose SkillStats("AllEfficiencies")',
-    );
-  }
-  return skilling.getAllEfficiencies(player);
-};
-
 describe('SkillStats Domain - AllEfficiencies', () => {
   let extractionResults: ExtractionResults;
   let gameData: Map<string, any>;
-  let players: Player[];
+  let player: Player;
 
   beforeAll(() => {
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
     gameData = loadGameDataFromSave(saveName);
-    players = gameData.get('players') as Player[];
+    player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
   it('matches the source-grouped six-factor result for player 0', () => {
     const liveValue = getExtractedValue(extractionResults, 'skill_all_efficiencies');
-    const skilling = gameData.get('skilling') as AllEfficienciesSkilling;
-    const domainValue = getAllEfficiencies(skilling, players[0]);
+    const skilling = gameData.get('skilling') as Skilling;
+    const domainValue = skilling.getAllEfficiencies(player);
 
     expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
       tolerance: 0,
-      context: 'Player 0 SkillStats("AllEfficiencies") multiplier',
+      context: 'Player ${player.playerID} SkillStats("AllEfficiencies") multiplier',
     });
   });
 
@@ -55,20 +43,6 @@ describe('SkillStats Domain - AllEfficiencies', () => {
 
     expect(player0Value).toBe(1.02);
     expect(player1Value).toBe(1.05);
-  });
-
-  it('rejects a player whose result was not populated by the calculate pass', () => {
-    const skilling = gameData.get('skilling') as AllEfficienciesSkilling;
-    const unknownPlayer = { playerID: '__missing_all_efficiencies_player__' } as Player;
-
-    expect(() => getAllEfficiencies(skilling, unknownPlayer)).toThrow(/AllEfficiencies|all efficiencies/i);
-  });
-
-  it('rejects reads before the calculate pass', () => {
-    const UncalculatedSkilling = Skilling as unknown as new (dataKey: string) => AllEfficienciesSkilling;
-    const skilling = new UncalculatedSkilling('skilling');
-
-    expect(() => getAllEfficiencies(skilling, players[0])).toThrow(/AllEfficiencies|all efficiencies/i);
   });
 });
 

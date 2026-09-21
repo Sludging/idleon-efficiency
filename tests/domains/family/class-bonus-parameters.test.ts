@@ -15,25 +15,19 @@ import {
 } from "../../utils/live-game-data-loader";
 import { loadGameDataFromSave } from "../../utils/cloudsave-loader";
 import { ParameterTestSpec } from "../../utils/parameter-test-config";
+import { getTargetPlayer } from '../../utils/target-player';
 import { Player } from "../../../data/domain/player";
+
 
 const saveName = "latest";
 const extractionResultsName = "family-class-bonus-data.json";
 
-const getPlayerById = (gameData: Map<string, any>, playerID: number): Player => {
-  const players = gameData.get("players") as Player[];
-  const player = players.find((candidate) => candidate.playerID === playerID);
-  if (!player) {
-    throw new Error(`Player ${playerID} not found in save data`);
-  }
-  return player;
-};
 
 const parameterSpecs: ParameterTestSpec = {
   description:
-    "Player 0 The Family Guy talent bonus used by an owner-specific Family Bonus calculation",
+    "Target player The Family Guy talent bonus used by an owner-specific Family Bonus calculation",
   extractionKey: "family_guy_talent_144",
-  domainExtractor: (gameData) => getPlayerById(gameData, 0).getTalentBonus(144),
+  domainExtractor: (gameData) => getTargetPlayer(gameData.get("players") as Player[]).getTalentBonus(144),
 };
 
 describe("Family Domain - Class Bonus - Parameters", () => {

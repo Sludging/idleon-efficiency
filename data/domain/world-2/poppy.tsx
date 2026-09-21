@@ -1,5 +1,5 @@
 import { Domain, RawData } from "../base/domain";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { initPoppyUpgradeRepo, PoppyUpgradeBase } from "../data/PoppyUpgradeRepo";
 import { Item } from "../items";
 import { ClickerUpgradeModel } from "../model/clickerUpgradeModel";
@@ -222,7 +222,7 @@ export const updatePoppyGlobalBonus = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const legendTalents = data.get("legendTalents") as LegendTalents;
 
-    poppy.companionBonus51 = companions.find(companion => companion.id == 51)?.owned || false ? companions.find(companion => companion.id == 51)?.data.bonus || 0 : 0;
+    poppy.companionBonus51 = getCompanionActiveBonus(companions, 51);
     poppy.legendTalent26 = legendTalents.getBonusFromIndex(26);
 
     return poppy;

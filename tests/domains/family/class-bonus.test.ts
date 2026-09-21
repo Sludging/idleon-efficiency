@@ -24,6 +24,8 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Family } from '../../../data/domain/family';
 import { ClassIndex } from '../../../data/domain/talents';
 import { Player } from '../../../data/domain/player';
+import { getTargetPlayer } from '../../utils/target-player';
+
 
 const saveName = 'latest';
 const extractionResultsName = 'family-class-bonus-data.json';
@@ -85,19 +87,13 @@ const explicitWinnerCases: ExplicitWinnerCase[] = [
  },
 ];
 
-const getPlayerById = (players: Player[], playerID: number): Player => {
- const player = players.find(candidate => candidate.playerID === playerID);
- if (!player) {
-  throw new Error(`Family Bonus owner player ${playerID} not found in save data`);
- }
- return player;
-};
 
 describe('Family Domain - Class Bonus', () => {
  let extractionResults: ExtractionResults;
  let gameData: Map<string, any>;
  let family: Family;
  let players: Player[];
+ let player: Player;
 
  beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
@@ -105,14 +101,14 @@ describe('Family Domain - Class Bonus', () => {
   gameData = loadGameDataFromSave(saveName);
   family = gameData.get('family') as Family;
   players = gameData.get('players') as Player[];
+  player = getTargetPlayer(players);
  });
 
  branchZeroCases.forEach(({ classIndex, gameKey, description }) => {
 
   it(`matches the game ${description} Family Bonus (FamBonusQTYs[${gameKey}])`, () => {
    const liveBonus = getExtractedValue(extractionResults, `family_bonus_${gameKey}`);
-   const player0 = getPlayerById(players, 0);
-   const domainBonus = family.getClassBonus(classIndex)?.getBonus(player0);
+   const domainBonus = family.getClassBonus(classIndex)?.getBonus(player);
 
    expect(domainBonus).toBeDefined();
    if (domainBonus === undefined) {
@@ -128,7 +124,7 @@ describe('Family Domain - Class Bonus', () => {
 explicitWinnerCases.forEach(({ classIndex, gameKey, description, ownerID, ownerDescription }) => {
  it(`matches the game ${description} Family Bonus for its explicit winning owner (${ownerDescription})`, () => {
   const liveBonus = getExtractedValue(extractionResults, `family_bonus_${gameKey}`);
-  const explicitWinningOwner = getPlayerById(players, ownerID);
+  const explicitWinningOwner = getTargetPlayer(players, ownerID);
   const domainBonus = family.getClassBonus(classIndex)?.getBonus(explicitWinningOwner);
 
   expect(domainBonus).toBeDefined();

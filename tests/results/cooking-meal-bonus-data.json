@@ -1,89 +1,89 @@
 {
-  "timestamp": "2026-09-21T04:41:16.976Z",
+  "timestamp": "2026-09-21T07:22:46.628Z",
   "extractions": {
     "mainframe_jewel_16": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 116)",
       "result": 25.6,
       "description": "Mainframe jewel 16 bonus (meal bonus)",
-      "extractedAt": "2026-09-21T04:41:17.014Z"
+      "extractedAt": "2026-09-21T07:22:46.664Z"
     },
     "shiny_bonus_20": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 20, -1)",
       "result": 17,
       "description": "Breeding shiny bonus 20 (meal bonus)",
-      "extractedAt": "2026-09-21T04:41:17.034Z"
+      "extractedAt": "2026-09-21T07:22:46.682Z"
     },
     "win_bonus_26": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
       "result": 251.78400000000002,
       "description": "Summoning winner bonus 26 (meal bonus)",
-      "extractedAt": "2026-09-21T04:41:17.059Z"
+      "extractedAt": "2026-09-21T07:22:46.700Z"
     },
     "ribbon_bonus_meal_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"RibbonBonus\", idleon.engine.getGameAttribute(\"Ribbon\")[28 + 11], 0)",
       "result": 1,
       "description": "Ribbon bonus for meal 11",
-      "extractedAt": "2026-09-21T04:41:17.078Z"
+      "extractedAt": "2026-09-21T07:22:46.718Z"
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
       "result": 1629.339660032,
       "description": "Meal bonus for Sailing",
-      "extractedAt": "2026-09-21T04:41:17.103Z"
+      "extractedAt": "2026-09-21T07:22:46.738Z"
     },
     "meal_bonus_mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
-      "result": 231778.259454709,
+      "result": 239971.6067865811,
       "description": "Meal bonus for Mcook",
-      "extractedAt": "2026-09-21T04:41:17.123Z"
+      "extractedAt": "2026-09-21T07:22:46.757Z"
     },
     "meal_bonus_kitchen_eff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
-      "result": 23322.3819397296,
+      "result": 24219.3966297192,
       "description": "Meal bonus for KitchenEff",
-      "extractedAt": "2026-09-21T04:41:17.139Z"
+      "extractedAt": "2026-09-21T07:22:46.777Z"
     },
     "bonus_multi_cook_meal_1": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 1, 0)",
       "result": 1.6153846153846154,
       "description": "BonusMultiCook multiplier for meal 1 (Egg)",
-      "extractedAt": "2026-09-21T04:41:17.156Z"
+      "extractedAt": "2026-09-21T07:22:46.801Z"
     },
     "bonus_multi_cook_meal_12": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 12, 0)",
-      "result": 1.1666666666666667,
+      "result": 1.375,
       "description": "BonusMultiCook multiplier for meal 12 (Corndog)",
-      "extractedAt": "2026-09-21T04:41:17.173Z"
+      "extractedAt": "2026-09-21T07:22:46.825Z"
     },
     "bonus_multi_cook_meal_13": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 13, 0)",
-      "result": 1.4444444444444444,
+      "result": 1.5,
       "description": "BonusMultiCook multiplier for meal 13 (Cabbage)",
-      "extractedAt": "2026-09-21T04:41:17.191Z"
+      "extractedAt": "2026-09-21T07:22:46.844Z"
     },
     "bonus_multi_cook_meal_43": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 43, 0)",
       "result": 1.1666666666666667,
       "description": "BonusMultiCook multiplier for meal 43 (Soda)",
-      "extractedAt": "2026-09-21T04:41:17.209Z"
+      "extractedAt": "2026-09-21T07:22:46.861Z"
     },
     "bonus_multi_cook_meal_51": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 51, 0)",
       "result": 1,
       "description": "BonusMultiCook multiplier for meal 51 (Popped Corn)",
-      "extractedAt": "2026-09-21T04:41:17.228Z"
+      "extractedAt": "2026-09-21T07:22:46.880Z"
     },
     "bonus_multi_cook_meal_52": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 52, 0)",
       "result": 1.375,
       "description": "BonusMultiCook multiplier for meal 52 (Double Cherry)",
-      "extractedAt": "2026-09-21T04:41:17.250Z"
+      "extractedAt": "2026-09-21T07:22:46.898Z"
     },
     "companion_162_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 162, 0)",
       "result": 1.6,
       "description": "Companion 162 meal bonus multiplier input",
-      "extractedAt": "2026-09-21T04:41:17.268Z"
+      "extractedAt": "2026-09-21T07:22:46.916Z"
     }
   },
   "errors": {},

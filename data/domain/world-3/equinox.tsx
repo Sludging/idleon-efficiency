@@ -8,7 +8,7 @@ import { DreamChallengeModel } from "../model/dreamChallengeModel";
 import { DreamUpgradeModel } from "../model/dreamUpgradeModel";
 import { ImageData } from "../imageData";
 import { Votes } from "../world-2/votes";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { Hole } from "../world-5/hole/hole";
 import { Arcade } from "../world-2/arcade";
 import { Emperor } from "../world-6/emperor";
@@ -379,11 +379,7 @@ export function updateEquinoxBar(data: Map<string, any>) {
   const baseMultiplier = hasBundle ? 90 : 60;
   const vialBonus = alchemy.getVialBonusForKey("EqBar");
   const vote32Bonus = votes.getCurrentBonus(32);
-  const companion15 = companions.find((c) => c.id === 15);
-  let companion15Bonus = 0;
-  if (companion15 && companion15.owned) {
-    companion15Bonus = companion15.data.bonus;
-  }
+  const companion15Bonus = getCompanionActiveBonus(companions, 15);
   const cosmo26Bonus =
     hole.majiks.IdleonUpgrades.find((upgrade) => upgrade.index == 26)?.getBonus() ?? 0;
   const eventShop3Bonus = eventShop.isBonusOwned(3) ? 1 : 0;

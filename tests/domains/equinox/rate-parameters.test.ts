@@ -2,7 +2,7 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Votes } from '../../../data/domain/world-2/votes';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
 import { number2letter } from '../../../data/utility';
 import { Alchemy } from '../../../data/domain/alchemy';
@@ -63,7 +63,7 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'companion_15_bonus',
     domainExtractor: (gameData) => {
       const companions = gameData.get("companions") as Companion[];
-      return companions.find(c => c.id === 15)?.data.bonus ?? 0;
+      return getCompanionActiveBonus(companions, 15);
     }
   },
   cosmo_bonus_2_5: {

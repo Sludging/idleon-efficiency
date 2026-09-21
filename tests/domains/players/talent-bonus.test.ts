@@ -23,7 +23,9 @@ describe('Player Domain - Talent Bonus', () => {
 
     const gameData = loadGameDataFromSave(saveName);
     const players = gameData.get('players') as Player[];
-    player = getTargetPlayer(players);
+    
+    // This test explicitly is confiugred against player 0.
+    player = getTargetPlayer(players, 0);
   });
 
   it(`validates Talent 112 bonus for player ${TARGET_PLAYER_INDEX}`, () => {
