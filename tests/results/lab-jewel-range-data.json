@@ -1,35 +1,35 @@
 {
-  "timestamp": "2026-09-19T09:23:17.960Z",
+  "timestamp": "2026-09-21T04:41:22.599Z",
   "extractions": {
     "jewel_9_range": {
       "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 9, 0)",
       "result": 80,
       "description": "Pyrite Rhombol Jewel 9 connection range",
-      "extractedAt": "2026-09-19T09:23:17.971Z"
+      "extractedAt": "2026-09-21T04:41:22.615Z"
     },
     "jewel_19_range": {
       "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 19, 0)",
       "result": 80,
       "description": "Pure Opal Navette Jewel 19 connection range",
-      "extractedAt": "2026-09-19T09:23:17.973Z"
+      "extractedAt": "2026-09-21T04:41:22.632Z"
     },
     "jewel_21_range": {
       "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 21, 0)",
       "result": 100,
       "description": "Deadly Wrath Jewel 21 connection range",
-      "extractedAt": "2026-09-19T09:23:17.975Z"
+      "extractedAt": "2026-09-21T04:41:22.648Z"
     },
     "jewel_22_range": {
       "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 22, 0)",
       "result": 100,
       "description": "North Winds Jewel 22 connection range",
-      "extractedAt": "2026-09-19T09:23:17.976Z"
+      "extractedAt": "2026-09-21T04:41:22.663Z"
     },
     "jewel_23_range": {
       "expression": "idleon.callFunction(\"Labb\", \"Dist\", \"Gem\", 23, 0)",
       "result": 100,
       "description": "Eternal Energy Jewel 23 connection range",
-      "extractedAt": "2026-09-19T09:23:17.978Z"
+      "extractedAt": "2026-09-21T04:41:22.665Z"
     }
   },
   "errors": {},

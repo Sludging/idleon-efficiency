@@ -15,7 +15,7 @@
     {
       "label": "tome_pts_1",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 1, 0)",
-      "description": "Player 0's total statue levels."
+      "description": "Target player's total statue levels."
     },
     {
       "label": "tome_pts_2",
@@ -85,7 +85,7 @@
     {
       "label": "tome_pts_15",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 15, 0)",
-      "description": "Player 0's owned Star Talent Points."
+      "description": "Target player's owned Star Talent Points."
     },
     {
       "label": "tome_pts_16",
@@ -285,7 +285,7 @@
     {
       "label": "tome_pts_55",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 55, 0)",
-      "description": "Player 0's number of Onyx-tier-or-higher statues."
+      "description": "Target player's number of Onyx-tier-or-higher statues."
     },
     {
       "label": "tome_pts_56",

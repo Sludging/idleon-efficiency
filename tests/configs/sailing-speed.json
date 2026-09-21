@@ -88,6 +88,11 @@
       "description": "Star sign 63 (C. Shanti Minor) bonus"
     },
     {
+      "label": "vault_upgrade_62",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 62, 0)",
+      "description": "Upgrade Vault 62 Speedy Sailing bonus"
+    },
+    {
       "label": "boat_0_captain_speed_bonus",
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[0][0])",
       "description": "Captain boat-speed bonus assigned to boat 0"
@@ -96,6 +101,41 @@
       "label": "boat_1_captain_speed_bonus",
       "expression": "window.frames[0].__idleon_cheats__[\"scripts.ActorEvents_579\"]._customBlock_CaptBonusCalc(0, window.frames[0].__idleon_cheats__[\"com.stencyl.Engine\"].engine.getGameAttribute(\"Boats\")[1][0])",
       "description": "Captain boat-speed bonus assigned to boat 1"
+    },
+    {
+      "label": "boat_0_island_distance",
+      "expression": "idleon.callFunction(\"Sailing\", \"IslandDistance\", idleon.getAttr(\"Boats\")[0][1], 0)",
+      "description": "IslandDistance for boat 0's assigned destination"
+    },
+    {
+      "label": "shiny_bonus_18",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 18, -1)",
+      "description": "Breeding shiny bonus 18 used by Sailing Minimumtraveltime"
+    },
+    {
+      "label": "minimum_travel_time",
+      "expression": "idleon.callFunction(\"Sailing\", \"Minimumtraveltime\", 0, 0)",
+      "description": "Rounded Sailing Minimumtraveltime used by BoatSpeed"
+    },
+    {
+      "label": "boat_0_destination",
+      "expression": "idleon.getAttr(\"Boats\")[0][1]",
+      "description": "Boat 0 destination used by the BoatSpeed travel gate"
+    },
+    {
+      "label": "boat_0_route_state",
+      "expression": "idleon.getAttr(\"Boats\")[0][2]",
+      "description": "Boat 0 route state used by the BoatSpeed travel gate"
+    },
+    {
+      "label": "boat_1_destination",
+      "expression": "idleon.getAttr(\"Boats\")[1][1]",
+      "description": "Boat 1 destination used by the BoatSpeed travel gate"
+    },
+    {
+      "label": "boat_1_route_state",
+      "expression": "idleon.getAttr(\"Boats\")[1][2]",
+      "description": "Boat 1 route state used by the BoatSpeed travel gate"
     },
     {
       "label": "boat_0_current_speed",

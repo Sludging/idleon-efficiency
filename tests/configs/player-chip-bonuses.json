@@ -1,5 +1,5 @@
 {
-  "description": "Extract raw equipped-chip contributions for the active player (player 0 by the extraction policy), including numeric effects, enabling values, and an absent selector",
+  "description": "Extract raw equipped-chip contributions for the target player, including numeric effects, enabling values, and an absent selector",
   "target": "Player.getChipBonus: game chipBonuses selector aggregation",
   "extractions": [
     {

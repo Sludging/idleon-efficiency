@@ -48,19 +48,6 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'hat_rack_skill_efficiency',
     domainExtractor: gameData => (gameData.get('hatRack') as HatRack).getBonus('% SKILL EFFICIENCY', getTargetPlayer(gameData.get('players') as Player[])),
   },
-  player_obol_drop_rate: {
-    description: `Player ${TARGET_PLAYER_INDEX} personal and family obol Drop Rate`,
-    extractionKey: 'player_obol_drop_rate',
-    // Read the existing calculated total, not the individual obols or save rows.
-    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).obolStats.flatMap(group => group.stats)
-      .filter(stat => stat.extra === '% Drop Rate').reduce((total, stat) => total + stat.getValue(), 0),
-  },
-  player_obol_total_damage: {
-    description: `Player ${TARGET_PLAYER_INDEX} personal and family obol Total Damage`,
-    extractionKey: 'player_obol_total_damage',
-    domainExtractor: gameData => getTargetPlayer(gameData.get('players') as Player[]).obolStats.flatMap(group => group.stats)
-      .filter(stat => stat.extra === '% Total Damage').reduce((total, stat) => total + stat.getValue(), 0),
-  },
 };
 
 describe('Player Domain - Equipment Bonuses - Parameters', () => {

@@ -16,9 +16,10 @@ const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-playe
 const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
 
 class GameDataExtractor {
- constructor(configPath, outputPath) {
+ constructor(configPath, outputPath, options = {}) {
   this.configPath = configPath;
   this.outputPath = outputPath;
+  this.verbose = options.verbose !== false;
   this.config = null;
   this.results = {
    timestamp: new Date().toISOString(),
@@ -28,11 +29,17 @@ class GameDataExtractor {
   };
  }
 
+ log(...args) {
+  if (this.verbose) {
+   console.log(...args);
+  }
+ }
+
  async loadConfig() {
   try {
    const configContent = fs.readFileSync(this.configPath, 'utf8');
    this.config = JSON.parse(configContent);
-   console.log(`✅ Loaded config with ${this.config.extractions?.length || 0} extractions`);
+   this.log(`✅ Loaded config with ${this.config.extractions?.length || 0} extractions`);
   } catch (error) {
    throw new Error(`Failed to load config from ${this.configPath}: ${error.message}`);
   }
@@ -47,11 +54,11 @@ class GameDataExtractor {
     throw new Error(`Server responded with ${response.status}`);
    }
 
-   console.log(`✅ Debug server status: ${status.status}`);
-   console.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
+   this.log(`✅ Debug server status: ${status.status}`);
+   this.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
 
    if (!status.injected) {
-    console.log(`⚠️  Game not detected. Make sure:
+    console.warn(`⚠️  Game not detected. Make sure:
 1. Game is running with --remote-debugging-port=9223
 2. Debug server auto-injection completed successfully`);
    }
@@ -62,6 +69,118 @@ class GameDataExtractor {
    throw new Error(`Failed to connect to debug server: ${error.message}`);
   }
  }
+
+ async checkActivePlayer() {
+  const requiredIndex = this.getRequiredActivePlayerIndex();
+  const activePlayerIndex = await this.executeExpression(
+   'idleon.getAttr("GetPlayersUsernames").indexOf(idleon.getAttr("UserInfo")[0])'
+  );
+
+  if (activePlayerIndex !== requiredIndex) {
+   throw new Error(
+    `Active player policy failed for ${this.configPath}: expected player index ${requiredIndex}, found ${activePlayerIndex}`
+   );
+  }
+
+  this.log(`✅ Active player index: ${activePlayerIndex}`);
+  return activePlayerIndex;
+ }
+
+ async extractData() {
+  if (!this.config?.extractions) {
+   throw new Error('No extractions found in config');
+  }
+
+  this.log(`\n🎯 Extracting ${this.config.extractions.length} values from game...\n`);
+
+  for (const extraction of this.config.extractions) {
+   const { label, expression, description } = extraction;
+   const executedExpression = this.resolveExpression(expression);
+
+   try {
+    this.log(`  Extracting: ${label}`);
+    this.log(`    Expression: ${executedExpression}`);
+
+    const result = await this.executeExpression(executedExpression);
+
+    this.results.extractions[label] = {
+     expression: executedExpression,
+     result,
+     description: description || '',
+     extractedAt: new Date().toISOString()
+    };
+
+    this.log(`    Result: ${JSON.stringify(result)}`);
+    this.log(`    ✅ Success\n`);
+
+   } catch (error) {
+    this.results.errors[label] = {
+     expression: executedExpression,
+     error: error.message,
+     description: description || '',
+     failedAt: new Date().toISOString()
+    };
+
+    console.error(`    ❌ Error: ${error.message}\n`);
+   }
+  }
+ }
+
+ saveResults() {
+  try {
+   // Ensure output directory exists
+   const outputDir = path.dirname(this.outputPath);
+   if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+   }
+
+   fs.writeFileSync(this.outputPath, JSON.stringify(this.results, null, 2));
+
+   const extractionCount = Object.keys(this.results.extractions).length;
+   const errorCount = Object.keys(this.results.errors).length;
+
+   this.log(`\n📁 Results saved to: ${this.outputPath}`);
+   this.log(`✅ Successful extractions: ${extractionCount}`);
+   this.log(`❌ Failed extractions: ${errorCount}`);
+
+   if (errorCount > 0) {
+    console.warn(`\n⚠️  Errors occurred during extraction. Check the output file for details.`);
+   }
+  } catch (error) {
+   throw new Error(`Failed to save results: ${error.message}`);
+  }
+ }
+
+ async run(options = {}) {
+  const exitOnError = options.exitOnError !== false;
+
+  try {
+   this.log('🚀 Game Data Extractor Starting...\n');
+
+   await this.loadConfig();
+   const gameConnected = await this.checkServerStatus();
+
+   if (!gameConnected) {
+    console.warn(`\n⚠️  Proceeding without game connection (some extractions may fail)`);
+   } else {
+    await this.checkActivePlayer();
+   }
+
+   await this.extractData();
+   this.saveResults();
+
+   this.log('\n🎉 Extraction completed!');
+   return this.results;
+
+  } catch (error) {
+   console.error(`\n💥 Extraction failed: ${error.message}`);
+   if (exitOnError) {
+    process.exit(1);
+   }
+   throw error;
+  }
+ }
+
 
  readTargetPlayerIndex() {
   let targetPlayerConfig;
@@ -97,21 +216,6 @@ class GameDataExtractor {
   return configuredIndex;
  }
 
- async checkActivePlayer() {
-  const requiredIndex = this.getRequiredActivePlayerIndex();
-  const activePlayerIndex = await this.executeExpression(
-   'idleon.getAttr("GetPlayersUsernames").indexOf(idleon.getAttr("UserInfo")[0])'
-  );
-
-  if (activePlayerIndex !== requiredIndex) {
-   throw new Error(
-    `Active player policy failed for ${this.configPath}: expected player index ${requiredIndex}, found ${activePlayerIndex}`
-   );
-  }
-
-  console.log(`✅ Active player index: ${activePlayerIndex}`);
-  return activePlayerIndex;
- }
 
  resolveExpression(expression) {
   if (typeof expression !== 'string' || !expression.includes(TARGET_PLAYER_PLACEHOLDER)) {
@@ -172,94 +276,6 @@ class GameDataExtractor {
   return result;
  }
 
- async extractData() {
-  if (!this.config?.extractions) {
-   throw new Error('No extractions found in config');
-  }
-
-  console.log(`\n🎯 Extracting ${this.config.extractions.length} values from game...\n`);
-
-  for (const extraction of this.config.extractions) {
-   const { label, expression, description } = extraction;
-   const executedExpression = this.resolveExpression(expression);
-
-   try {
-    console.log(`  Extracting: ${label}`);
-    console.log(`    Expression: ${executedExpression}`);
-
-    const result = await this.executeExpression(executedExpression);
-
-    this.results.extractions[label] = {
-     expression: executedExpression,
-     result,
-     description: description || '',
-     extractedAt: new Date().toISOString()
-    };
-
-    console.log(`    Result: ${JSON.stringify(result)}`);
-    console.log(`    ✅ Success\n`);
-
-   } catch (error) {
-    this.results.errors[label] = {
-     expression: executedExpression,
-     error: error.message,
-     description: description || '',
-     failedAt: new Date().toISOString()
-    };
-
-    console.log(`    ❌ Error: ${error.message}\n`);
-   }
-  }
- }
-
- saveResults() {
-  try {
-   // Ensure output directory exists
-   const outputDir = path.dirname(this.outputPath);
-   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-   }
-
-   fs.writeFileSync(this.outputPath, JSON.stringify(this.results, null, 2));
-
-   const extractionCount = Object.keys(this.results.extractions).length;
-   const errorCount = Object.keys(this.results.errors).length;
-
-   console.log(`\n📁 Results saved to: ${this.outputPath}`);
-   console.log(`✅ Successful extractions: ${extractionCount}`);
-   console.log(`❌ Failed extractions: ${errorCount}`);
-
-   if (errorCount > 0) {
-    console.log(`\n⚠️  Errors occurred during extraction. Check the output file for details.`);
-   }
-  } catch (error) {
-   throw new Error(`Failed to save results: ${error.message}`);
-  }
- }
-
- async run() {
-  try {
-   console.log('🚀 Game Data Extractor Starting...\n');
-
-   await this.loadConfig();
-   const gameConnected = await this.checkServerStatus();
-
-   if (!gameConnected) {
-    console.log(`\n⚠️  Proceeding without game connection (some extractions may fail)`);
-   } else {
-    await this.checkActivePlayer();
-   }
-
-   await this.extractData();
-   this.saveResults();
-
-   console.log('\n🎉 Extraction completed!');
-
-  } catch (error) {
-   console.error(`\n💥 Extraction failed: ${error.message}`);
-   process.exit(1);
-  }
- }
 }
 
 // CLI usage

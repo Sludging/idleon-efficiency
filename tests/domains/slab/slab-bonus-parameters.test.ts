@@ -10,7 +10,7 @@ import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { Meritocraty } from '../../../data/domain/world-7/meritocraty';
 
 const saveName = 'latest';
-const extractionResultsName = 'sailing-slab-bonus-data.json';
+const extractionResultsName = 'slab-bonus-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   meritocracy_bonus_23: {

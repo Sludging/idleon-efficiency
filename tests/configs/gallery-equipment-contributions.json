@@ -1,7 +1,6 @@
 {
-  "description": "Direct calculated inputs to Gallery trophy and nametag contributions. Read calculated values for active player 0 without initializing or rebuilding Gallery maps. Values are uncapped; Gallery owns its caps and podium arithmetic.",
+  "description": "Direct calculated inputs to Gallery trophy and nametag contributions. Read calculated values for the target player without initializing or rebuilding Gallery maps. Values are uncapped; Gallery owns its caps and podium arithmetic.",
   "target": "Gallery equipment contributions",
-  "requiredActivePlayerIndex": 0,
   "extractions": [
     {
       "label": "gallery_trophy_agility_percent",

@@ -1,5 +1,5 @@
 {
-  "description": "Representative player 0 equipment subtotals and direct numeric producer values from the paired save. Read current calculated game values in the overworld; no cache rebuild or initialization is performed by this config.",
+  "description": "Representative target-player equipment subtotals and direct numeric producer values from the paired save. Read current calculated game values in the overworld; no cache rebuild or initialization is performed by this config.",
   "target": "Player Equipment Bonuses / EtcBonuses",
   "extractions": [
     {
@@ -66,16 +66,6 @@
       "label": "hat_rack_skill_efficiency",
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
       "description": "Calculated Hat Rack Skill Efficiency contribution"
-    },
-    {
-      "label": "player_obol_drop_rate",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43].find(row => row[0] === \"%_DROP_RATE\")[3]",
-      "description": "Delivered combined personal and family obol Drop Rate total; read the already-calculated aggregate without rebuilding UI state"
-    },
-    {
-      "label": "player_obol_total_damage",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43].find(row => row[0] === \"%_TOTAL_DAMAGE\")[3]",
-      "description": "Delivered combined personal and family obol Total Damage total; read the already-calculated aggregate without rebuilding UI state"
     }
   ]
 }

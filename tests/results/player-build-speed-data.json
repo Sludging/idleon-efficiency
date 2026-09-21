@@ -1,161 +1,161 @@
 {
-  "timestamp": "2026-09-19T09:23:18.321Z",
+  "timestamp": "2026-09-21T04:41:23.522Z",
   "extractions": {
     "stamps_bonus_build_prod": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BuildProd\")",
       "result": 0,
       "description": "Stamp bonus for Build Prod",
-      "extractedAt": "2026-09-19T09:23:18.326Z"
+      "extractedAt": "2026-09-21T04:41:23.537Z"
     },
     "guild_bonus_5": {
       "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
       "result": 0,
       "description": "Guild bonus 5",
-      "extractedAt": "2026-09-19T09:23:18.328Z"
+      "extractedAt": "2026-09-21T04:41:23.551Z"
     },
     "achievement_153": {
       "expression": "Math.min(5, 5 * idleon.callFunction(\"AchieveStatus\", 153))",
       "result": 5,
       "description": "Achievement 153 bonus (5 if completed, 0 otherwise)",
-      "extractedAt": "2026-09-19T09:23:18.330Z"
+      "extractedAt": "2026-09-21T04:41:23.553Z"
     },
     "construction_mastery_bonus": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
       "result": 1510,
       "description": "Construction mastery bonus from Rift",
-      "extractedAt": "2026-09-19T09:23:18.341Z"
+      "extractedAt": "2026-09-21T04:41:23.554Z"
     },
     "vial_equinox_fish_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
       "result": 484.12,
       "description": "Vial bonus - Shinyfin Stew (Contspd)",
-      "extractedAt": "2026-09-19T09:23:18.343Z"
+      "extractedAt": "2026-09-21T04:41:23.571Z"
     },
     "vial_turtle_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
       "result": 276.64,
       "description": "Vial bonus - Turtle Tisane",
-      "extractedAt": "2026-09-19T09:23:18.344Z"
+      "extractedAt": "2026-09-21T04:41:23.585Z"
     },
     "arcade_bonus_44": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 44)",
       "result": 50,
       "description": "Arcade bonus 44",
-      "extractedAt": "2026-09-19T09:23:18.346Z"
+      "extractedAt": "2026-09-21T04:41:23.587Z"
     },
     "voting_bonus_18": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 18, 0)",
       "result": 0,
       "description": "Voting bonus 18",
-      "extractedAt": "2026-09-19T09:23:18.354Z"
+      "extractedAt": "2026-09-21T04:41:23.602Z"
     },
     "vault_upgrade_48": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
       "result": 60,
       "description": "Vault upgrade 48",
-      "extractedAt": "2026-09-19T09:23:18.356Z"
+      "extractedAt": "2026-09-21T04:41:23.604Z"
     },
     "sheepies_killed": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
       "result": 10,
       "description": "Total sheepies killed (vault kills)",
-      "extractedAt": "2026-09-19T09:23:18.358Z"
+      "extractedAt": "2026-09-21T04:41:23.617Z"
     },
     "bubba_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "result": 140,
       "description": "Bubba global bonus 1",
-      "extractedAt": "2026-09-19T09:23:18.360Z"
+      "extractedAt": "2026-09-21T04:41:23.619Z"
     },
     "atom_collider_1": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
       "result": 11,
       "description": "Atom collider atom 1 bonus",
-      "extractedAt": "2026-09-19T09:23:18.362Z"
+      "extractedAt": "2026-09-21T04:41:23.620Z"
     },
     "redox_salts_in_storage": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h[\"Refinery1\"]",
-      "result": 59639057,
+      "result": 59973145,
       "description": "Redox salts owned in storage",
-      "extractedAt": "2026-09-19T09:23:18.364Z"
+      "extractedAt": "2026-09-21T04:41:23.634Z"
     },
     "winner_bonus_13": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
       "result": 8628.8475,
       "description": "Summoning winner bonus 13",
-      "extractedAt": "2026-09-19T09:23:18.373Z"
+      "extractedAt": "2026-09-21T04:41:23.636Z"
     },
     "palette_bonus_25": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
       "result": 78,
       "description": "Gaming palette bonus 25",
-      "extractedAt": "2026-09-19T09:23:18.375Z"
+      "extractedAt": "2026-09-21T04:41:23.637Z"
     },
     "gear_bonus_etc_bonuses_30": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
-      "result": 0,
+      "result": 98,
       "description": "Gear bonus from EtcBonuses 30",
-      "extractedAt": "2026-09-19T09:23:18.377Z"
+      "extractedAt": "2026-09-21T04:41:23.649Z"
     },
     "build_speed_player_0": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "result": 353062209664.0818,
+      "result": 366941313046.96826,
       "description": "Build speed for player 0",
-      "extractedAt": "2026-09-19T09:23:18.379Z"
+      "extractedAt": "2026-09-21T04:41:23.651Z"
     },
     "build_speed_player_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "result": 209162724473.68478,
+      "result": 225816574128.8608,
       "description": "Build speed for player 1",
-      "extractedAt": "2026-09-19T09:23:18.390Z"
+      "extractedAt": "2026-09-21T04:41:23.652Z"
     },
     "build_speed_player_2": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "result": 194644179296.58694,
+      "result": 212044548935.63348,
       "description": "Build speed for player 2",
-      "extractedAt": "2026-09-19T09:23:18.392Z"
+      "extractedAt": "2026-09-21T04:41:23.654Z"
     },
     "build_speed_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 8014177170210.371,
+      "result": 8515115904818.194,
       "description": "Build speed for player 3",
-      "extractedAt": "2026-09-19T09:23:18.394Z"
+      "extractedAt": "2026-09-21T04:41:23.655Z"
     },
     "build_speed_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "result": 194335675474.46338,
+      "result": 212044548935.63348,
       "description": "Build speed for player 4",
-      "extractedAt": "2026-09-19T09:23:18.396Z"
+      "extractedAt": "2026-09-21T04:41:23.669Z"
     },
     "build_speed_player_5": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "result": 195571498348.37595,
+      "result": 213034213523.20627,
       "description": "Build speed for player 5",
-      "extractedAt": "2026-09-19T09:23:18.405Z"
+      "extractedAt": "2026-09-21T04:41:23.670Z"
     },
     "build_speed_player_6": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "result": 578983955202.8262,
+      "result": 615580670125.6458,
       "description": "Build speed for player 6",
-      "extractedAt": "2026-09-19T09:23:18.407Z"
+      "extractedAt": "2026-09-21T04:41:23.672Z"
     },
     "build_speed_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 740413420577.7037,
+      "result": 808337449626.3263,
       "description": "Build speed for player 7",
-      "extractedAt": "2026-09-19T09:23:18.409Z"
+      "extractedAt": "2026-09-21T04:41:23.685Z"
     },
     "build_speed_player_8": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "result": 184920845109.56503,
+      "result": 203585853744.76117,
       "description": "Build speed for player 8",
-      "extractedAt": "2026-09-19T09:23:18.411Z"
+      "extractedAt": "2026-09-21T04:41:23.687Z"
     },
     "build_speed_player_9": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "result": 185220066824.39853,
+      "result": 203585853744.76117,
       "description": "Build speed for player 9",
-      "extractedAt": "2026-09-19T09:23:18.413Z"
+      "extractedAt": "2026-09-21T04:41:23.700Z"
     }
   },
   "errors": {},

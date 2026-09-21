@@ -6,7 +6,7 @@
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Sailing } from '../../../data/domain/sailing';
+import { Boat, Sailing } from '../../../data/domain/world-5/sailing/sailing';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
@@ -54,7 +54,7 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 0 current speed calculation',
       });
     });
@@ -76,7 +76,7 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 0 next speed level calculation',
       });
     });
@@ -97,7 +97,7 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 0 island-bound speed calculation',
       });
     });
@@ -118,7 +118,7 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 1 current speed calculation',
       });
     });
@@ -140,7 +140,7 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 1 next speed level calculation',
       });
     });
@@ -161,9 +161,42 @@ describe('Sailing Domain - Speed', () => {
       });
 
       expect(calculatedSpeed).toMatchLiveGameWithDetails(extractedSpeed, {
-        tolerance: 0.01,
+        tolerance: 0,
         context: 'Boat 1 island-bound speed calculation',
       });
+    });
+  });
+
+  describe('Deterministic BoatSpeed branches', () => {
+    const makeBoat = (speedUpgrades: number) => {
+      const boat = new Boat(0, undefined, 0, 0, speedUpgrades, undefined);
+      boat.speedBaseMathWithoutStarSign = 1;
+      return boat;
+    };
+
+    it('does not cap an unassigned boat in island-bound mode', () => {
+      const boat = makeBoat(6);
+
+      expect(boat.getSpeedValue({
+        starSignEquipped: false,
+        silkRodeEquipped: false,
+        includeCaptain: false,
+        islandBound: true,
+      })).toBe(40);
+    });
+
+    it('applies the level-7 squared speed-upgrade milestone', () => {
+      const levelSixBoat = makeBoat(6);
+      const levelSevenBoat = makeBoat(7);
+      const options = {
+        starSignEquipped: false,
+        silkRodeEquipped: false,
+        includeCaptain: false,
+        islandBound: false,
+      };
+
+      expect(levelSixBoat.getSpeedValue(options)).toBe(40);
+      expect(levelSevenBoat.getSpeedValue(options)).toBe(52);
     });
   });
 });

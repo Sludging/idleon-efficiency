@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-19T09:23:16.688Z",
+  "timestamp": "2026-09-21T04:41:15.678Z",
   "extractions": {
     "big_fish_bonus_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 0)",
       "result": 4.219653179190751,
       "description": "Big Fish bonus 0: W7 mob respawn rate",
-      "extractedAt": "2026-09-19T09:23:16.692Z"
+      "extractedAt": "2026-09-21T04:41:15.734Z"
     },
     "big_fish_bonus_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 1)",
       "result": 2.5205479452054793,
       "description": "Big Fish bonus 1: Max Stamina in Spelunking",
-      "extractedAt": "2026-09-19T09:23:16.693Z"
+      "extractedAt": "2026-09-21T04:41:15.757Z"
     },
     "big_fish_bonus_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 2)",
       "result": 3.6065573770491803,
       "description": "Big Fish bonus 2: Spelunking AFK Gains",
-      "extractedAt": "2026-09-19T09:23:16.695Z"
+      "extractedAt": "2026-09-21T04:41:15.786Z"
     },
     "big_fish_bonus_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 3)",
       "result": 0.38461538461538464,
       "description": "Big Fish bonus 3: Kill per Kill in W7",
-      "extractedAt": "2026-09-19T09:23:16.704Z"
+      "extractedAt": "2026-09-21T04:41:15.808Z"
     },
     "big_fish_bonus_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 4)",
       "result": 1.8518518518518516,
       "description": "Big Fish bonus 4: Class EXP Gain",
-      "extractedAt": "2026-09-19T09:23:16.706Z"
+      "extractedAt": "2026-09-21T04:41:15.826Z"
     },
     "big_fish_bonus_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 5)",
       "result": 0,
       "description": "Big Fish bonus 5: Double Gold Food drop chance",
-      "extractedAt": "2026-09-19T09:23:16.708Z"
+      "extractedAt": "2026-09-21T04:41:15.845Z"
     },
     "big_fish_cost_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 0)",
@@ -45,7 +45,7 @@
         "original": 2.7683969383865974e+30
       },
       "description": "Big Fish upgrade cost for bonus 0",
-      "extractedAt": "2026-09-19T09:23:16.709Z"
+      "extractedAt": "2026-09-21T04:41:15.862Z"
     },
     "big_fish_cost_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 1)",
@@ -55,7 +55,7 @@
         "original": 6.3780644458109655e+31
       },
       "description": "Big Fish upgrade cost for bonus 1",
-      "extractedAt": "2026-09-19T09:23:16.711Z"
+      "extractedAt": "2026-09-21T04:41:15.880Z"
     },
     "big_fish_cost_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 2)",
@@ -65,7 +65,7 @@
         "original": 2.232589560356753e+32
       },
       "description": "Big Fish upgrade cost for bonus 2",
-      "extractedAt": "2026-09-19T09:23:16.713Z"
+      "extractedAt": "2026-09-21T04:41:15.896Z"
     },
     "big_fish_cost_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 3)",
@@ -75,7 +75,7 @@
         "original": 1.8076565461144807e+33
       },
       "description": "Big Fish upgrade cost for bonus 3",
-      "extractedAt": "2026-09-19T09:23:16.721Z"
+      "extractedAt": "2026-09-21T04:41:15.919Z"
     },
     "big_fish_cost_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 4)",
@@ -85,7 +85,7 @@
         "original": 3.1679289638042507e+35
       },
       "description": "Big Fish upgrade cost for bonus 4",
-      "extractedAt": "2026-09-19T09:23:16.723Z"
+      "extractedAt": "2026-09-21T04:41:15.940Z"
     },
     "big_fish_cost_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 5)",
@@ -95,43 +95,43 @@
         "original": 1.0387115103197146e+38
       },
       "description": "Big Fish upgrade cost for bonus 5",
-      "extractedAt": "2026-09-19T09:23:16.725Z"
+      "extractedAt": "2026-09-21T04:41:15.959Z"
     },
     "big_fish_unlock_req_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 0)",
       "result": 4000,
       "description": "Big Fish unlock level requirement for bonus 0",
-      "extractedAt": "2026-09-19T09:23:16.726Z"
+      "extractedAt": "2026-09-21T04:41:15.977Z"
     },
     "big_fish_unlock_req_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 1)",
       "result": 4300,
       "description": "Big Fish unlock level requirement for bonus 1",
-      "extractedAt": "2026-09-19T09:23:16.728Z"
+      "extractedAt": "2026-09-21T04:41:15.999Z"
     },
     "big_fish_unlock_req_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 2)",
       "result": 4600,
       "description": "Big Fish unlock level requirement for bonus 2",
-      "extractedAt": "2026-09-19T09:23:16.738Z"
+      "extractedAt": "2026-09-21T04:41:16.018Z"
     },
     "big_fish_unlock_req_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 3)",
       "result": 5050,
       "description": "Big Fish unlock level requirement for bonus 3",
-      "extractedAt": "2026-09-19T09:23:16.740Z"
+      "extractedAt": "2026-09-21T04:41:16.036Z"
     },
     "big_fish_unlock_req_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 4)",
       "result": 5600,
       "description": "Big Fish unlock level requirement for bonus 4",
-      "extractedAt": "2026-09-19T09:23:16.742Z"
+      "extractedAt": "2026-09-21T04:41:16.056Z"
     },
     "big_fish_unlock_req_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
       "result": 6250,
       "description": "Big Fish unlock level requirement for bonus 5",
-      "extractedAt": "2026-09-19T09:23:16.744Z"
+      "extractedAt": "2026-09-21T04:41:16.074Z"
     }
   },
   "errors": {},

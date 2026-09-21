@@ -9,7 +9,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Slab, updateSlabBonusMultiplier } from '../../../data/domain/world-5/slab';
 
 const saveName = 'latest';
-const extractionResultsName = 'sailing-slab-bonus-data.json';
+const extractionResultsName = 'slab-bonus-data.json';
 
 describe('Slab Domain - Slab Bonus', () => {
   let extractionResults: ExtractionResults;

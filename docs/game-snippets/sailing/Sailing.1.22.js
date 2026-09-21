@@ -1,0 +1,608 @@
+/**
+ * Game formula snippet — idleon-efficiency formula research.
+ * Function: _customBlock_Sailing (from scripts.ActorEvents_579)
+ * Game version: 1.22 ("Jelly_Operator")
+ * Captured: 2026-09-19 via game-debug-tool (findFunction + toString)
+ * Case reference: correctness case issue 348
+ */
+function (e, t, i) {
+                            if ("BoatFrame" == e) {
+                                var s = a.engine.getGameAttribute("DNSM"),
+                                    r = c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3]) + c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]);
+                                return (
+                                    (s.h.SailzDN = r),
+                                    25 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN)
+                                        ? 0
+                                        : 50 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN)
+                                          ? 1
+                                          : 100 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN)
+                                            ? 2
+                                            : 200 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN)
+                                              ? 3
+                                              : 300 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN)
+                                                ? 4
+                                                : 400 > c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) || 0 == m._customBlock_ResearchStuff("Grid_Bonus", 105, 1)
+                                                  ? 5
+                                                  : 6
+                                );
+                            }
+                            if ("IslandDistance" == e) return c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfo[0 | t][1]);
+                            if ("MaxChests" == e)
+                                return Math.min(
+                                    34,
+                                    Math.round(
+                                        5 +
+                                            c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[129]) +
+                                            (Math.min(4, m._customBlock_Sailing("ArtifactBonus", 19, 0)) + (c.asNumber(a.engine.getGameAttribute("Tasks")[2][4][2]) + (p._customBlock_AchieveStatus(287) + p._customBlock_AchieveStatus(290))))
+                                    )
+                                );
+                            if ("RareTreasureChance" == e) return 0.05;
+                            if ("CaptainSlotsUnlocked" == e) return Math.round(1 + c.asNumber(a.engine.getGameAttribute("Sailing")[2][0]));
+                            if ("BoatSlotsUnlocked" == e) return Math.round(1 + c.asNumber(a.engine.getGameAttribute("Sailing")[2][1]));
+                            if ("Minimumtraveltime" == e)
+                                return Math.round(
+                                    Math.max(
+                                        15,
+                                        120 / (1 + (c.asNumber(a.engine.getGameAttribute("DNSM").h.FamBonusQTYs.h[44]) + (p._customBlock_Breeding("ShinyBonusS", "Nah", 18, -1) + m._customBlock_Thingies("LegendPTS_bonus", 11, 0))) / 100) -
+                                            4 * c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[8])
+                                    )
+                                );
+                            if ("BoatUpgCostType" == e) return 0 == i ? (4 > t ? 0 : Math.min(30, 1 + 2 * (t - 4))) : 2 > t ? t : 5 > t ? 1 + 2 * (t - 2) : Math.min(30, 2 * (t - 4));
+                            if ("BoatUpgCostQty" == e)
+                                return (
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    (r = a.engine.getGameAttribute("Boats")[0 | t]),
+                                    (s.h.SailzDN2 = r[Math.round(3 + 2 * i)]),
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    (r = 1 / (1 + Math.max(0, 0.43 * m._customBlock_Summoning("EventShopOwned", 55, 0)))),
+                                    (s.h.SailzCR = r),
+                                    0 == m._customBlock_Sailing("BoatUpgCostType", t, i)
+                                        ? 1e6 >
+                                          (5 + 4 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                              Math.pow(
+                                                  1.17 - (0.12 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                              ) *
+                                              c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                            ? Math.floor(
+                                                  (5 + 4 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                      Math.pow(
+                                                          1.17 - (0.12 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                          c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                      ) *
+                                                      c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                              )
+                                            : (5 + 4 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                              Math.pow(
+                                                  1.17 - (0.12 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                              ) *
+                                              c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                        : 1 == m._customBlock_Sailing("BoatUpgCostType", t, i) % 2
+                                          ? 1e6 >
+                                            (5 + 2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                Math.pow(
+                                                    1.15 - (0.1 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                ) *
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                              ? Math.floor(
+                                                    (5 + 2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                        Math.pow(
+                                                            1.15 - (0.1 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                            c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                        ) *
+                                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                                )
+                                              : (5 + 2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                Math.pow(
+                                                    1.15 - (0.1 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                    c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                ) *
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                          : 1e6 >
+                                              (2 + c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                  Math.pow(
+                                                      1.12 - (0.07 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                      c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                  ) *
+                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                            ? Math.floor(
+                                                  (2 + c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                                      Math.pow(
+                                                          1.12 - (0.07 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                          c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                                      ) *
+                                                      c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                              )
+                                            : (2 + c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) *
+                                              Math.pow(
+                                                  1.12 - (0.07 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)) / (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) + 200),
+                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2)
+                                              ) *
+                                              c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzCR)
+                                );
+                            if ("CaptainExpReq" == e)
+                                return (
+                                    (9 + Math.pow(c.asNumber(a.engine.getGameAttribute("Captains")[0 | t][3]), 3)) *
+                                    Math.pow(1.5, c.asNumber(a.engine.getGameAttribute("Captains")[0 | t][3])) *
+                                    Math.pow(1.5, Math.max(c.asNumber(a.engine.getGameAttribute("Captains")[0 | t][3]) - 10, 0))
+                                );
+                            if ("BoatValue" == e)
+                                return 6 == i
+                                    ? (5 + (2 + Math.pow(Math.floor((c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3]) + 1) / 8), 2)) * (c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3]) + 1)) *
+                                          (1 +
+                                              (p._customBlock_Labb("SigilBonus", "Blank", 21, 0) +
+                                                  (m._customBlock_CaptBonusCalc(1, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) +
+                                                      (m._customBlock_Sailing("ArtifactBonus", 5, 0) +
+                                                          (25 * Math.min(30, c.asNumber(a.engine.getGameAttribute("NONdummies")[60])) + (p._customBlock_ArcadeBonus(33) + m._customBlock_Summoning("VaultUpgBonus", 67, 0)))))) /
+                                                  100) *
+                                          (1 + p._customBlock_getbonus2(1, 325, -1) / 100) *
+                                          m._customBlock_Sailing("DaveyJonesBonus", t, 0) *
+                                          (1 + m._customBlock_Holes("LampBonuses", 1, 0) / 100) *
+                                          (1 + m._customBlock_SushiStuff("RoG_BonusQTY", 57, 0) / 100) *
+                                          (1 + m._customBlock_Holes2("Fountain_BonTOT", 0, 17) / 100)
+                                    : (5 + (2 + Math.pow(Math.floor(c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3]) / 8), 2)) * c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3])) *
+                                          (1 +
+                                              (p._customBlock_Labb("SigilBonus", "Blank", 21, 0) +
+                                                  (m._customBlock_CaptBonusCalc(1, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) +
+                                                      (m._customBlock_Sailing("ArtifactBonus", 5, 0) +
+                                                          (25 * Math.min(30, c.asNumber(a.engine.getGameAttribute("NONdummies")[60])) + (p._customBlock_ArcadeBonus(33) + m._customBlock_Summoning("VaultUpgBonus", 67, 0)))))) /
+                                                  100) *
+                                          (1 + p._customBlock_getbonus2(1, 325, -1) / 100) *
+                                          m._customBlock_Sailing("DaveyJonesBonus", t, 0) *
+                                          (1 + m._customBlock_Holes("LampBonuses", 1, 0) / 100) *
+                                          (1 + m._customBlock_SushiStuff("RoG_BonusQTY", 57, 0) / 100) *
+                                          (1 + m._customBlock_Holes2("Fountain_BonTOT", 0, 17) / 100);
+                            if ("BoatSpeed" == e)
+                                return (
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    (r =
+                                        (1 +
+                                            (m._customBlock_Divinity("Bonus_Minor", -1, 6) +
+                                                (4 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "w5c1") +
+                                                    (6 * x._customBlock_RunCodeOfTypeXforThingY("CardLv", "Boss5A") + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchBubbles.h.Y1)))) /
+                                                125) *
+                                        m._customBlock_Sailing("DaveyJonesBonus", t, 0) *
+                                        (1 + m._customBlock_Divinity("BlesssBonus", 4, 0) / 100) *
+                                        (1 + m._customBlock_Divinity("BlesssBonus", 6, 0) / 100) *
+                                        (1 + m._customBlock_Summoning("VotingBonusz", 24, 0) / 100) *
+                                        (1 +
+                                            (m._customBlock_Divinity("BlesssBonus", 9, 0) +
+                                                (m._customBlock_Sailing("ArtifactBonus", 10, 0) +
+                                                    (k._customBlock_StampBonusOfTypeX("SailSpd") +
+                                                        (x._customBlock_ArbitraryCode("StatueBonusGiven24") +
+                                                            (q._customBlock_MealBonus("Sailing") +
+                                                                (c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.SailSpd) +
+                                                                    (17 * m._customBlock_RiftStuff("RiftSkillBonus,12", 1) +
+                                                                        (m._customBlock_GamingStatType("MSA_Bonus", 2, 0) +
+                                                                            (c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h[63]) + m._customBlock_Summoning("VaultUpgBonus", 62, 0)))))))))) /
+                                                125)),
+                                    (s.h.SailzDN3 = r),
+                                    6 == i
+                                        ? (10 + (5 + Math.pow(Math.floor((c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) + 1) / 7), 2)) * (c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) + 1)) *
+                                          (1 + m._customBlock_CaptBonusCalc(0, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) / 100) *
+                                          c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN3)
+                                        : 4 == i
+                                          ? (10 + (5 + Math.pow(Math.floor(c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) / 7), 2)) * c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5])) *
+                                            (1 + m._customBlock_CaptBonusCalc(0, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) / 100) *
+                                            c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN3)
+                                          : 0 <= c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][1]) && 0 == a.engine.getGameAttribute("Boats")[0 | t][2]
+                                            ? Math.min(
+                                                  (10 + (5 + Math.pow(Math.floor(c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) / 7), 2)) * c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5])) *
+                                                      (1 + m._customBlock_CaptBonusCalc(0, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) / 100) *
+                                                      c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN3),
+                                                  (60 * c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfo[0 | c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][1])][1])) / m._customBlock_Sailing("Minimumtraveltime", 0, 0)
+                                              )
+                                            : (10 + (5 + Math.pow(Math.floor(c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) / 7), 2)) * c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5])) *
+                                              (1 + m._customBlock_CaptBonusCalc(0, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) / 100) *
+                                              c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN3)
+                                );
+                            if ("BoatArtiMulti" == e)
+                                return Math.max(
+                                    1,
+                                    (1 +
+                                        (m._customBlock_Sailing("ArtifactBonus", 3, 0) +
+                                            (m._customBlock_CaptBonusCalc(3, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) +
+                                                (p._customBlock_Breeding("ShinyBonusS", "Nah", 21, -1) +
+                                                    (20 * m._customBlock_RandomEvent("FractalIslandBonus", 3, 999) +
+                                                        (q._customBlock_GetBribeBonus("34") +
+                                                            (25 * Math.min(30, c.asNumber(a.engine.getGameAttribute("NONdummies")[60])) +
+                                                                (p._customBlock_ArcadeBonus(32) +
+                                                                    p._customBlock_ArcadeBonus(66) +
+                                                                    (m._customBlock_Holes("B_UPG", 55, 0) +
+                                                                        (m._customBlock_FarmingStuffs("StickerBonus", 2, 0) + (m._customBlock_ResearchStuff("Grid_Bonus", 109, 0) + m._customBlock_Summoning("VaultUpgBonus", 63, 0))))))))))) /
+                                            100) *
+                                        (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.StarSigns.h[61]) / 100) *
+                                        Math.max(1, Math.min(2, 1 + 2 * m._customBlock_Companions(154)) + m._customBlock_CompLV2(154)) *
+                                        Math.max(1, m._customBlock_RandomEvent("KillroyBonuses", 0, 0)) *
+                                        (1 + m._customBlock_Minehead("Button_Bonuses", 3, 0) / 100) *
+                                        (1 + m._customBlock_ResearchStuff("Grid_Bonus", 106, 0) / 100) *
+                                        (1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h["6turtle"]) / 100) *
+                                        Math.max(1, Math.pow(1.5, m._customBlock_Stuff2("PurpleChestSlugsOwned", 0, 0))) *
+                                        (1 + m._customBlock_SushiStuff("RoG_BonusQTY", 7, 0) / 100) *
+                                        (1 + m._customBlock_Summoning("WinBonus", 3, 0) / 100) *
+                                        (1 + q._customBlock_JellyOperation("RoG_BonusQTY", 19, 0) / 100) *
+                                        m._customBlock_Sailing("DaveyJonesBonus", t, 0) *
+                                        (1 + p._customBlock_MainframeBonus(14) / 100) *
+                                        (1 + m._customBlock_Thingies("LoreEpiBon", 3, 0) / 100) *
+                                        (1 + m._customBlock_Ninja("PristineBon", 2, 0) / 100) *
+                                        (1 + m._customBlock_Summoning("VotingBonusz", 20, 0) / 100) *
+                                        (1 + m._customBlock_Companions(43)) *
+                                        (1 + m._customBlock_Holes("MonumentROGbonuses", 1, 2) / 100) *
+                                        (1 + m._customBlock_FarmingStuffs("ExoticBonusQTY", 45, 0) / 100) *
+                                        (1 + m._customBlock_GamingStatType("PaletteBonus", 5, 0) / 100) *
+                                        Math.max(1, Math.pow(1.02, a.engine.getGameAttribute("Spelunk")[6].length) * m._customBlock_GamingStatType("SuperBitType", 26, 0))
+                                );
+                            if ("CloudDiscoverBonus" == e) return 1 + m._customBlock_CaptBonusCalc(2, c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][0])) / 100;
+                            if ("CaptainEXPgain" == e)
+                                return (
+                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfo[0 | t][8]) *
+                                    m._customBlock_Sailing("DaveyJonesBonus", 0, 0) *
+                                    (1 + m._customBlock_Summoning("VotingBonusz", 24, 0) / 100) *
+                                    (1 + m._customBlock_SushiStuff("RoG_BonusQTY", 45, 0) / 100) *
+                                    (1 +
+                                        (p._customBlock_getbonus2(1, 327, -1) +
+                                            (20 * p._customBlock_AchieveStatus(301) + (3 * p._customBlock_AchieveStatus(310) + (p._customBlock_Breeding("ShinyBonusS", "Nah", 17, -1) + m._customBlock_Summoning("VaultUpgBonus", 75, 0))))) /
+                                            100)
+                                );
+                            if ("DaveyJonesBonus" == e)
+                                return (
+                                    (1 + (50 * c.asNumber(a.engine.getGameAttribute("GemItemsPurchased")[8]) + m._customBlock_Thingies("LegendPTS_bonus", 11, 0)) / 100) *
+                                    (1 +
+                                        2 *
+                                            Math.max(
+                                                0,
+                                                Math.min(
+                                                    1,
+                                                    Math.floor((c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][3]) + c.asNumber(a.engine.getGameAttribute("Boats")[0 | t][5]) + 99600) / 1e5) *
+                                                        m._customBlock_ResearchStuff("Grid_Bonus", 105, 1)
+                                                )
+                                            ))
+                                );
+                            if ("NewCaptBoatSlot" == e) return 0 == t ? (60 * i + 15 * Math.pow(i, 2.2)) * Math.pow(1.52, i) * 0.6 : (60 * i + 15 * Math.pow(i, 2.25)) * Math.pow(1.55, i);
+                            if ("BuyCaptainCost" == e)
+                                return (
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    (r = a.engine.getGameAttribute("Captains")[(30 + c.asNumber(n.__cast(a.engine.getGameAttribute("PixelHelperActor")[23].behaviors.getBehavior("ActorEvents_577"), Aa)._GenINFO[30])) | 0]),
+                                    (s.h.SailzDL = r),
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    (r =
+                                        2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDL[1]) +
+                                        (2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDL[2]) + (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDL[5]) + c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDL[6])))),
+                                    (s.h.SailzDN = r),
+                                    Math.pow(8, 1 + c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDL[0])) * (1 + Math.pow(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN), 2) / 100)
+                                );
+                            if ("TreasureGoldBarConvert" == e)
+                                return (
+                                    1.5 *
+                                    Math.pow(1.6, Math.floor(t / 2)) *
+                                    (1 + (((t + 1) % 2) * 150 + (30 * Math.floor(c.asNumber(a.engine.getGameAttribute("Sailing")[3][7]) / 2) + 30 * Math.floor(c.asNumber(a.engine.getGameAttribute("Sailing")[3][7]) / 3))) / 100)
+                                );
+                            if ("BuyCaptainCostType" == e) return 0;
+                            if ("ArtifactChance" == e) {
+                                if (0 < a.engine.getGameAttribute("SailChests").length) {
+                                    for (i = a.engine.getGameAttribute("DNSM").h.SailzDN = 0, e = 0 | c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]); i < e;) {
+                                        var _ = i++;
+                                        ((s = a.engine.getGameAttribute("DNSM")),
+                                            (r = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfobox[_][2])),
+                                            (s.h.SailzDN = r));
+                                    }
+                                    if (1 == t) {
+                                        for (
+                                            a.engine.getGameAttribute("DNSM").h.SailzDN2 = 1,
+                                                i = 0,
+                                                e = 0 | c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfobox[0 | c.asNumber(a.engine.getGameAttribute("SailChests")[0][1])][2]);
+                                            i < e;
+                                        )
+                                            ((_ = i++),
+                                                0 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0]
+                                                    ? ((s = a.engine.getGameAttribute("DNSM")),
+                                                      (r =
+                                                          c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                          (1 -
+                                                              c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                  c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0][2]))),
+                                                      (s.h.SailzDN2 = r))
+                                                    : 1 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0]
+                                                      ? ((s = a.engine.getGameAttribute("DNSM")),
+                                                        (_ =
+                                                            c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                            (1 -
+                                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                    c.asNumber(m._customBlock_Sailing("AncientChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0)))),
+                                                        (s.h.SailzDN2 = _))
+                                                      : 2 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 29 < c.asNumber(a.engine.getGameAttribute("Rift")[0])
+                                                        ? ((t = a.engine.getGameAttribute("DNSM")),
+                                                          (_ =
+                                                              c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                              (1 -
+                                                                  c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                      c.asNumber(m._customBlock_Sailing("EldritchChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0)))),
+                                                          (t.h.SailzDN2 = _))
+                                                        : 3 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 1 == m._customBlock_Ninja("EmporiumBonus", 35, 0)
+                                                          ? ((t = a.engine.getGameAttribute("DNSM")),
+                                                            (_ =
+                                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                                (1 -
+                                                                    c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                        c.asNumber(m._customBlock_Sailing("SovereignChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0)))),
+                                                            (t.h.SailzDN2 = _))
+                                                          : 4 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 1 == m._customBlock_Spelunk("OmnipotentArtifactsUnlocked", 0, 0)
+                                                            ? ((t = a.engine.getGameAttribute("DNSM")),
+                                                              (_ =
+                                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                                  (1 -
+                                                                      c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                          c.asNumber(m._customBlock_Sailing("OmnipotentChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0)))),
+                                                              (t.h.SailzDN2 = _))
+                                                            : 5 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] &&
+                                                              1 == m._customBlock_ResearchStuff("TranscendentArtifactsUnlocked", 0, 0) &&
+                                                              ((t = a.engine.getGameAttribute("DNSM")),
+                                                              (_ =
+                                                                  c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) *
+                                                                  (1 -
+                                                                      c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                                          c.asNumber(m._customBlock_Sailing("TranscendentChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0)))),
+                                                              (t.h.SailzDN2 = _)));
+                                        return 1 < c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2) ? 100 : 100 * Math.min(1, 1 - c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN2));
+                                    }
+                                    for (
+                                        a.engine.getGameAttribute("DNSM").h.SailzDN2 = -1,
+                                            i = 0,
+                                            e = 0 | c.asNumber(a.engine.getGameAttribute("CustomLists").h.IslandInfobox[0 | c.asNumber(a.engine.getGameAttribute("SailChests")[0][1])][2]);
+                                        i < e;
+                                    )
+                                        if (((_ = i++), 0 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0])) {
+                                            if (
+                                                c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) /
+                                                    c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0][2])
+                                            ) {
+                                                ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 1),
+                                                    (s = a.engine.getGameAttribute("DNSM")),
+                                                    (r = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _),
+                                                    (s.h.SailzDN2 = r));
+                                                break;
+                                            }
+                                        } else if (1 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0]) {
+                                            if (
+                                                c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) / c.asNumber(m._customBlock_Sailing("AncientChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0))
+                                            ) {
+                                                ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 2),
+                                                    (s = a.engine.getGameAttribute("DNSM")),
+                                                    (_ = 100 * (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _)),
+                                                    (s.h.SailzDN2 = _));
+                                                break;
+                                            }
+                                        } else if (2 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 29 < c.asNumber(a.engine.getGameAttribute("Rift")[0])) {
+                                            if (
+                                                c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) / c.asNumber(m._customBlock_Sailing("EldritchChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0))
+                                            ) {
+                                                ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 3),
+                                                    (t = a.engine.getGameAttribute("DNSM")),
+                                                    (_ = 1e4 * (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _)),
+                                                    (t.h.SailzDN2 = _));
+                                                break;
+                                            }
+                                        } else if (3 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 1 == m._customBlock_Ninja("EmporiumBonus", 35, 0)) {
+                                            if (
+                                                c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) / c.asNumber(m._customBlock_Sailing("SovereignChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0))
+                                            ) {
+                                                ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 4),
+                                                    (t = a.engine.getGameAttribute("DNSM")),
+                                                    (_ = 1e6 * (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _)),
+                                                    (t.h.SailzDN2 = _));
+                                                break;
+                                            }
+                                        } else if (4 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] && 1 == m._customBlock_Spelunk("OmnipotentArtifactsUnlocked", 0, 0)) {
+                                            if (
+                                                c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) / c.asNumber(m._customBlock_Sailing("OmnipotentChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0))
+                                            ) {
+                                                ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 5),
+                                                    (t = a.engine.getGameAttribute("DNSM")),
+                                                    (_ = 1e8 * (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _)),
+                                                    (t.h.SailzDN2 = _));
+                                                break;
+                                            }
+                                        } else if (
+                                            5 == a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] &&
+                                            1 == m._customBlock_ResearchStuff("TranscendentArtifactsUnlocked", 0, 0) &&
+                                            c.randomFloat() <
+                                                c.asNumber(a.engine.getGameAttribute("SailChests")[0][2]) / c.asNumber(m._customBlock_Sailing("TranscendentChances", c.asNumber(a.engine.getGameAttribute("SailChests")[0][1]), 0))
+                                        ) {
+                                            ((a.engine.getGameAttribute("Sailing")[3][(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _) | 0] = 6),
+                                                (t = a.engine.getGameAttribute("DNSM")),
+                                                (_ = 1e10 * (c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzDN) + _)),
+                                                (t.h.SailzDN2 = _));
+                                            break;
+                                        }
+                                    return a.engine.getGameAttribute("DNSM").h.SailzDN2;
+                                }
+                                return 0;
+                            }
+                            if ("AncientChances" == e) return 3 > t ? 850 : (1e3 + (t - 3) * u.getServerVarLoad("AncientOddPerIsland")) / (1 + u.getServerVarLoad("AncientArtiPCT") / 100);
+                            if ("EldritchChances" == e) return 3 > t ? 900 + 250 * t : ((1e3 + (t - 3) * u.getServerVarLoad("AncientOddPerIsland")) / (1 + u.getServerVarLoad("AncientArtiPCT") / 100)) * 4;
+                            if ("SovereignChances" == e) return 5 > t ? 9e3 + 2e3 * t : ((1e3 + 1.25 * (t - 3) * u.getServerVarLoad("AncientOddPerIsland")) / (1 + u.getServerVarLoad("AncientArtiPCT") / 100)) * 180;
+                            if ("OmnipotentChances" == e)
+                                return 6 > t ? 12e4 + 4e4 * t : 1e4 * (1 + (50 * (t - 5)) / 100) * ((3e3 + 3 * (t - 5) * u.getServerVarLoad("AncientOddPerIsland")) / (1 + u.getServerVarLoad("AncientArtiPCT") / 100));
+                            if ("TranscendentChances" == e)
+                                return 6 > t
+                                    ? 4e7 + 6e7 * t
+                                    : 1e6 *
+                                          (1 + (100 * (t - 5)) / 100) *
+                                          Math.max(1, Math.pow(1.7, Math.max(0, t - 7))) *
+                                          (1 + (50 * Math.max(0, t - 9)) / 100) *
+                                          ((1e4 + 5e3 * (t - 5) * (u.getServerVarLoad("AncientOddPerIsland") / 960)) / (1 + u.getServerVarLoad("AncientArtiPCT") / 100));
+                            if ("CaptainPedastalTypeGen" == e) {
+                                for (i = a.engine.getGameAttribute("DNSM").h.SailzDN4 = 0; 5 > i;)
+                                    if (
+                                        ((_ = i++),
+                                        c.asNumber(a.engine.getGameAttribute("Lv0")[13]) >= 10 * (_ + 1) &&
+                                            c.randomFloat() > (0.25 * c.asNumber(a.engine.getGameAttribute("Lv0")[13])) / (c.asNumber(a.engine.getGameAttribute("Lv0")[13]) + 50) + 0.5 / Math.pow(1.6, _))
+                                    ) {
+                                        a.engine.getGameAttribute("DNSM").h.SailzDN4 = _ + 1;
+                                        break;
+                                    }
+                                return (
+                                    50 <= c.asNumber(a.engine.getGameAttribute("Lv0")[13]) && 1 == m._customBlock_Ninja("EmporiumBonus", 32, 0) && 0.025 > c.randomFloat() && (a.engine.getGameAttribute("DNSM").h.SailzDN4 = 6),
+                                    a.engine.getGameAttribute("DNSM").h.SailzDN4
+                                );
+                            }
+                            if ("CaptainPedastalBonusGen" == e) return 0 == i || (c.randomFloat() > 0.05 * Math.pow(2, t - 1) && 0 < t) || 5 == t || 6 == t ? c.randomInt(0, 0 | Math.min(4, 1 + t)) : -1;
+                            if ("CaptainPedastalBonusQTYGen" == e)
+                                return 0 <= t
+                                    ? 6 == i
+                                        ? Math.floor(
+                                              0.15 *
+                                                  c.randomInt(
+                                                      0 | c.asNumber(Math.floor((0.5 + 0.8 * i) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.CaptainBonuses[0 | t][1]) * 0.65)),
+                                                      ((0.5 + 0.8 * i) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.CaptainBonuses[0 | t][1])) | 0
+                                                  )
+                                          )
+                                        : Math.floor(
+                                              0.15 *
+                                                  c.randomInt(
+                                                      0 | c.asNumber(a.engine.getGameAttribute("CustomLists").h.CaptainBonuses[0 | t][0]),
+                                                      ((0.5 + 0.8 * i) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.CaptainBonuses[0 | t][1])) | 0
+                                                  )
+                                          )
+                                    : 0;
+                            if ("ArtifactBonus" == e) {
+                                if (1 == i)
+                                    return 2 == a.engine.getGameAttribute("Sailing")[3][0 | t]
+                                        ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[0 | t][6])
+                                        : 3 == a.engine.getGameAttribute("Sailing")[3][0 | t]
+                                          ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[0 | t][8])
+                                          : 4 == a.engine.getGameAttribute("Sailing")[3][0 | t]
+                                            ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[0 | t][10])
+                                            : 5 == a.engine.getGameAttribute("Sailing")[3][0 | t]
+                                              ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[0 | t][12])
+                                              : 6 == a.engine.getGameAttribute("Sailing")[3][0 | t]
+                                                ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[0 | t][14])
+                                                : 0;
+                                if (-1 == t) {
+                                    for (
+                                        r = [], (s = a.engine.getGameAttribute("DNSM")).h.SailzArtiBonusL = r, i = a.engine.getGameAttribute("DNSM").h.SailzArtiBonusDN = 0, e = a.engine.getGameAttribute("CustomLists").h.ArtifactInfo.length;
+                                        i < e;
+                                    )
+                                        (i++, a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL.push(0));
+                                    for (i = 0, e = a.engine.getGameAttribute("CustomLists").h.ArtifactInfo.length; i < e;) {
+                                        if (
+                                            ((_ = i++),
+                                            0 == a.engine.getGameAttribute("Sailing")[3][_]
+                                                ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 0)
+                                                : (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][3])),
+                                            2 == _ || 10 == _ || 18 == _ || 20 == _ || 999 == _)
+                                        )
+                                            a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) *
+                                                (1 + p._customBlock_MainframeBonus(15) / 100) *
+                                                m._customBlock_Sailing("SlabboBonus_AllMulti", 0, 0) *
+                                                Math.floor(Math.max(0, a.engine.getGameAttribute("Cards")[1].length - 500) / 10);
+                                        else if (1 == _)
+                                            a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CalcTalentMAP.h[620]);
+                                        else if (11 == _)
+                                            a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) *
+                                                Math.min(c.asNumber(a.engine.getGameAttribute("DNSM").h.CalcTalentMAP.h[620]), 200 + 200 * (c.asNumber(a.engine.getGameAttribute("Sailing")[3][11]) - 1));
+                                        else if (3 == _) a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * c.asNumber(a.engine.getGameAttribute("Lv0")[13]);
+                                        else if (23 == _) a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * c.asNumber(a.engine.getGameAttribute("Lv0")[15]);
+                                        else if (5 == _) a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * c.asNumber(a.engine.getGameAttribute("Lv0")[13]);
+                                        else if (25 == _) {
+                                            r = a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL;
+                                            var o = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]);
+                                            s = a.engine.getGameAttribute("CustomMaps").h.ClassStatTypes;
+                                            var g = "" + h.string(x._customBlock_ReturnClasses(a.engine.getGameAttribute("CharacterClass"))[0]);
+                                            r[_] = o * Math.floor(x._customBlock_TotalStats("" + h.string(s.h[g][0])) / 100);
+                                        } else if (8 == _) {
+                                            for (o = a.engine.getGameAttribute("DNSM").h.SailzArtiBonusDN = 0, g = a.engine.getGameAttribute("GetPlayersUsernames").length; o < g;)
+                                                ((r = o++),
+                                                    (s = a.engine.getGameAttribute("DNSM")),
+                                                    (r = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusDN) + p._customBlock_WorkbenchStuff("PlayerBuildSpd", r, 0)),
+                                                    (s.h.SailzArtiBonusDN = r));
+                                            a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusDN));
+                                        } else
+                                            13 == _
+                                                ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                      c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("Meals")[2][0])))
+                                                : 27 == _
+                                                  ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("Sailing")[1][0])))
+                                                  : 29 == _ &&
+                                                    (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] =
+                                                        c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]) * k._customBlock_getLOG(c.asNumber(a.engine.getGameAttribute("Divinity")[39])));
+                                        "The_artifact's_main_bonus_is_doubled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][5] && 2 == a.engine.getGameAttribute("Sailing")[3][_]
+                                            ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]))
+                                            : "The_artifact's_main_bonus_is_tripled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][7] && 3 == a.engine.getGameAttribute("Sailing")[3][_]
+                                              ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 3 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]))
+                                              : "The_artifact's_main_bonus_is_quadrupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][9] && 4 == a.engine.getGameAttribute("Sailing")[3][_]
+                                                ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 4 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]))
+                                                : "The_artifact's_main_bonus_is_quintupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][11] && 5 == a.engine.getGameAttribute("Sailing")[3][_]
+                                                  ? (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]))
+                                                  : "The_artifact's_main_bonus_is_sixtupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[_][13] &&
+                                                    6 == a.engine.getGameAttribute("Sailing")[3][_] &&
+                                                    (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_] = 6 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[_]));
+                                    }
+                                }
+                                return (
+                                    25 == t &&
+                                        0 != a.engine.getGameAttribute("Sailing")[3][25] &&
+                                        ((a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = c.asNumber(a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][3])),
+                                        (r = a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL),
+                                        (o = c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25])),
+                                        (s = a.engine.getGameAttribute("CustomMaps").h.ClassStatTypes),
+                                        (g = "" + h.string(x._customBlock_ReturnClasses(a.engine.getGameAttribute("CharacterClass"))[0])),
+                                        (r[25] = o * Math.floor(x._customBlock_TotalStats("" + h.string(s.h[g][0])) / 100)),
+                                        "The_artifact's_main_bonus_is_doubled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][5] &&
+                                            2 == a.engine.getGameAttribute("Sailing")[3][25] &&
+                                            (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = 2 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25])),
+                                        "The_artifact's_main_bonus_is_tripled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][7] &&
+                                            3 == a.engine.getGameAttribute("Sailing")[3][25] &&
+                                            (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = 3 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25])),
+                                        "The_artifact's_main_bonus_is_quadrupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][9] &&
+                                            4 == a.engine.getGameAttribute("Sailing")[3][25] &&
+                                            (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = 4 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25])),
+                                        "The_artifact's_main_bonus_is_quintupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][11] &&
+                                            5 == a.engine.getGameAttribute("Sailing")[3][25] &&
+                                            (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = 5 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25])),
+                                        "The_artifact's_main_bonus_is_sixtupled!" == a.engine.getGameAttribute("CustomLists").h.ArtifactInfo[25][13] &&
+                                            6 == a.engine.getGameAttribute("Sailing")[3][25] &&
+                                            (a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25] = 6 * c.asNumber(a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[25]))),
+                                    (s = a.engine.getGameAttribute("DNSM")),
+                                    Object.prototype.hasOwnProperty.call(s.h, "SailzArtiBonusL") ? a.engine.getGameAttribute("DNSM").h.SailzArtiBonusL[0 | Math.max(0, t)] : 0
+                                );
+                            }
+                            return "SailingExpMulti" == e
+                                ? x._customBlock_SkillStats("AllSkillxpMULTI") *
+                                      (1 +
+                                          (p._customBlock_getbonus2(1, 326, -1) +
+                                              (c.asNumber(a.engine.getGameAttribute("DNSM").h.AlchVials.h.SailXP) +
+                                                  (10 * c.asNumber(a.engine.getGameAttribute("Tasks")[2][4][4]) +
+                                                      (25 * m._customBlock_RiftStuff("RiftSkillBonus,12", 0) + (p._customBlock_GuildBonuses(14) + m._customBlock_Summoning("VaultUpgBonus", 66, 0)))))) /
+                                              100)
+                                : "SlabboBonus_AllMulti" == e
+                                  ? (1 + m._customBlock_Summoning2("MeritocBonusz", 23, 0) / 100) * (1 + m._customBlock_Thingies("LegendPTS_bonus", 28, 0) / 100) * (1 + m._customBlock_Summoning("VaultUpgBonus", 74, 0) / 100)
+                                  : "SlabboBonus" == e
+                                    ? 4 == t
+                                        ? 1 == m._customBlock_Ninja("EmporiumBonus", 17, 0)
+                                            ? 5 * (1 + p._customBlock_MainframeBonus(15) / 100) * m._customBlock_Sailing("SlabboBonus_AllMulti", 0, 0) * Math.floor(Math.max(0, a.engine.getGameAttribute("Cards")[1].length - 1e3) / 10)
+                                            : 0
+                                        : 5 == t
+                                          ? 1 == m._customBlock_Ninja("EmporiumBonus", 18, 0)
+                                              ? 3 * (1 + p._customBlock_MainframeBonus(15) / 100) * m._customBlock_Sailing("SlabboBonus_AllMulti", 0, 0) * Math.floor(Math.max(0, a.engine.getGameAttribute("Cards")[1].length - 1e3) / 10)
+                                              : 0
+                                          : 6 == t
+                                            ? 1 == m._customBlock_GamingStatType("SuperBitType", 25, 0)
+                                                ? 3 * (1 + p._customBlock_MainframeBonus(15) / 100) * m._customBlock_Sailing("SlabboBonus_AllMulti", 0, 0) * Math.floor(Math.max(0, a.engine.getGameAttribute("Cards")[1].length - 1300) / 5)
+                                                : 0
+                                            : 7 == t && 1 == m._customBlock_GamingStatType("SuperBitType", 34, 0)
+                                              ? 0.1 * (1 + p._customBlock_MainframeBonus(15) / 100) * m._customBlock_Sailing("SlabboBonus_AllMulti", 0, 0) * Math.floor(Math.max(0, a.engine.getGameAttribute("Cards")[1].length - 1300) / 5)
+                                              : 0
+                                    : 1;
+                        }

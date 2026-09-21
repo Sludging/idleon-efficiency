@@ -1,7 +1,6 @@
 {
   "description": "Extract representative alchemy bubble bonuses for testing the Bubble bonus root",
   "target": "Alchemy Bubble Bonus",
-  "requiredActivePlayerIndex": 0,
   "extractions": [
     {
       "label": "diamond_chef_final_bonus",
@@ -36,17 +35,17 @@
     {
       "label": "tome_w8_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "description": "Tome score-scaled W8 (+{% STR) final bubble bonus for player 0"
+      "description": "Tome score-scaled W8 (+{% STR) final bubble bonus for the target player"
     },
     {
       "label": "tome_a9_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
-      "description": "Tome score-scaled A9 (+{% AGI) final bubble bonus for player 0"
+      "description": "Tome score-scaled A9 (+{% AGI) final bubble bonus for the target player"
     },
     {
       "label": "tome_m9_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
-      "description": "Tome score-scaled M9 (+{% WIS) final bubble bonus for player 0"
+      "description": "Tome score-scaled M9 (+{% WIS) final bubble bonus for the target player"
     },
     {
       "label": "ordinary_tool_w_final_bonus",

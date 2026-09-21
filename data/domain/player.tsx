@@ -53,6 +53,7 @@ import { Gaming } from './world-5/gaming';
 import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
 import type { ResearchGrid } from './world-7/research';
+import { RoyalArmory } from './world-6/royalArmory';
 const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
 
 export class PlayerStats {
@@ -799,10 +800,6 @@ const parsePostOffice = (postOffice: string, player: Player) => {
 const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], royalG: number[][], player: Player) => {
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
-    let royalGuardianTalentCap = 0;
-    if (royalG.length > 2 && royalG[2].length > 55) {
-        royalGuardianTalentCap = royalG[2][55];
-    }
 
     if (player.talents.length == 0) {
         const talentPageNames: string[] = ClassTalentMap[player.classId].concat(Array(5).fill("Blank").map((_, i) => `Special Talent ${i + 1}`))
@@ -825,7 +822,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;
     player.extraLevelsFromTalent = 0;
-    player.royalGuardianAllTalentCap = royalGuardianTalentCap;
+    player.royalGuardianAllTalentCap = 0;
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
@@ -1291,6 +1288,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const optLacc = data.get("OptLacc") as (number | string)[];
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const gaming = data.get("gaming") as Gaming;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
 
     // Update max talent level due to bear.
     const bearGod = divinity.gods[1];
@@ -1416,8 +1414,9 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     });
 
     // Max talent level from Royal Guardian All Talent Cap
+    const royalGuardianAllTalentCap = royalArmory.getUpgradeBonus(55);
     players.forEach(player => {
-        const allTalentCap = player.royalGuardianAllTalentCap;
+        const allTalentCap = royalGuardianAllTalentCap;
         player.talents
             .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
             .forEach(talent => {
@@ -1429,6 +1428,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
                     talent.level += adjustment;
                 }
             });
+        player.royalGuardianAllTalentCap = royalGuardianAllTalentCap;
     });
 
 

@@ -1,7 +1,7 @@
 {
   "description": "Extract talent data to test max level, bonus levels, and special talents - Currently doesn't account for different players having different bonuses",
-  "target": "Talent data - Extracted as first character",
   "requiredActivePlayerIndex": 0,
+  "target": "Talent data - Extracted as first character",
   "extractions": [
     {
       "label": "talent_42_enhanced",
