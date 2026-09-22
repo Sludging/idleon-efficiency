@@ -47,6 +47,18 @@ Use these existing matchers:
 
 When a domain result uses a fixed conversion of the game value, convert the extraction value only when delivered game code establishes that conversion. Explain it in the config description. Match the game's formula and operation order when small numeric differences occur.
 
+### Documented non-zero tolerances
+
+The default tolerance is zero. A selected comparison may use a non-zero tolerance only when the delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that tolerance:
+
+- named at the aspect test site, not in the global matcher;
+- narrow and tied to the observed discrepancy;
+- explained with the game source, the domain contract, and the reason the comparison remains useful;
+- active, so differences outside the documented bound still fail.
+
+Do not use `test.failing`, `skip`, or a broad tolerance to suppress a suspected calculation error. Revisit the bound when the game version, caller context, or domain semantics change.
+
+
 State which values and branches the real save exercises. If a needed behavior cannot be observed with the available data, ask the human about coverage rather than claiming it was tested.
 
 ## Read the test results
@@ -60,9 +72,9 @@ State which values and branches the real save exercises. If a needed behavior ca
 
 For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. If it is the selected calculation, that failure can support implementation after the tests-stage approval. If it is another aspect's calculation, preserve the failing parameter test while that dependency is handled.
 
-Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
+Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. A documented non-zero tolerance is an exception only when the preceding rule is satisfied; it must describe the known semantic mismatch rather than conceal an unexplained failure. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
 
-After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0`. New test/config needs return through the tests stage before further domain changes.
+After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0`, except for a named, source-backed non-zero tolerance documented under the preceding rule. New test/config needs return through the tests stage before further domain changes.
 
 ## Test files and commands
 
