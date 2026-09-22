@@ -29,6 +29,7 @@ import { Sneaking } from "../../world-6/sneaking";
 import { Arcade } from "../../world-2/arcade";
 import { Hole } from "../hole/hole";
 import { Votes } from "../../world-2/votes";
+import { UpgradeVault } from "../../upgradeVault";
 import { LegendTalents } from "../../world-7/legendTalents";
 
 // "Captains": [
@@ -203,7 +204,7 @@ export class Boat {
             : 0;
 
         const firstMath = (10 + (5 + Math.pow(Math.floor(speedUpgrades / 7), 2)) * speedUpgrades);
-        const boatSpeed = firstMath * this.daveyJonesBonus * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
+        const boatSpeed = firstMath * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
         if (islandBound && this.assignIsland) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
@@ -488,10 +489,9 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const worship = data.get("worship") as Worship;
     const votes = data.get("votes") as Votes;
     const starSigns = data.get("starsigns") as StarSigns;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
 
     const skillMastery = rift.bonuses.find(bonus => bonus.name == "Skill Mastery") as SkillMastery;
-
-    // Boat Speed
     const purrmepPlayer = divinity.gods[6].linkedPlayers.at(0); // purrmep is limited to only 1 player linked.
     const cardBonus = cards.filter(card => card.data.effect.includes("Sailing Speed (Passive)")).reduce((sum, card) => sum += card.getBonus(), 0);
     const divinityMinorBonus = purrmepPlayer ? divinity.gods[6].getMinorLinkBonus(purrmepPlayer) : 0;
@@ -500,14 +500,34 @@ export const updateMinTravelTimeAndSpeed = (data: Map<string, any>) => {
     const skillMasteryBonus = skillMastery.getSkillBonus(SkillsIndex.Sailing, 1);
     const worshipBonus = worship.totalizer.getBonus(TotalizerBonus.BoatSpeed);
     const starsignBonus = starSigns.unlockedStarSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
-    // Doesn't include DaveyJonesBonus as boat already have this value, so we don't calculate it a second time
-    const firstMath = (1 + (divinityMinorBonus + cardBonus + alchemy.getBubbleBonusForKey("Y1")) / 125)
+    const vaultUpgradeBonus = upgradeVault.getBonusForId(62);
+
+    // Boat speed uses the same multiplier order as the game, including DaveyJonesBonus.
+    const firstMath = (1 + (divinityMinorBonus + (cardBonus + alchemy.getBubbleBonusForKey("Y1"))) / 125)
+        * (sailing.boats[0]?.daveyJonesBonus ?? 1)
         * (1 + divinity.gods[4].getBlessingBonus() / 100)
         * (1 + divinity.gods[6].getBlessingBonus() / 100)
         * (1 + votes.getCurrentBonus(24) / 100);
-    const speedBaseMath = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + starsignBonus) / 125);
-    const speedBaseMathWithSilkrode = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + (starsignBonus * 2)) / 125);
-    const speedBaseMathWithoutStarSign = firstMath * (1 + (divinity.gods[9].getBlessingBonus() + (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + stampBonus + statues[0].statues[24].getBonus() + mealBonus + alchemy.getVialBonusForKey("SailSpd") + skillMasteryBonus + worshipBonus + 0) / 125);
+    const secondMath = (starsignValue: number) => 1 + (
+        divinity.gods[9].getBlessingBonus() + (
+            (sailing.artifacts[10] as SlabInfluencedArtifact).getBonus() + (
+                stampBonus + (
+                    statues[0].statues[24].getBonus() + (
+                        mealBonus + (
+                            alchemy.getVialBonusForKey("SailSpd") + (
+                                skillMasteryBonus + (
+                                    worshipBonus + (starsignValue + vaultUpgradeBonus)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    ) / 125;
+    const speedBaseMath = firstMath * secondMath(starsignBonus);
+    const speedBaseMathWithSilkrode = firstMath * secondMath(starsignBonus * 2);
+    const speedBaseMathWithoutStarSign = firstMath * secondMath(0);
 
     // Minimum travel time
     const siegeBonus = family.classBonus.get(ClassIndex.Siege_Breaker)?.getBonus() ?? 0;

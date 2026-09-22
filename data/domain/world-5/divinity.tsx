@@ -52,8 +52,8 @@ export class DivinityGod {
         const divinityLevel = player.skills.get(SkillsIndex.Divinity)?.level ?? 0
 
         return Math.max(1, this.activeBubblePassiveBonus)
-            * (1 + this.coralKidUpgrade3 / 100)
-            * divinityLevel / (60 + divinityLevel) * this.data.passiveMax;
+            * ((1 + this.coralKidUpgrade3 / 100) * divinityLevel / (60 + divinityLevel))
+            * this.data.passiveMax;
     }
 
     getBlessingBonusText = () => {

@@ -15,6 +15,7 @@ import { ChipModel } from "../model/chipModel"
 import { JewelModel } from "../model/jewelModel"
 import { LabBonusModel } from "../model/labBonusModel"
 import { Player } from "../player"
+import { StarSigns } from "../starsigns"
 import { SkillsIndex } from "../SkillsIndex"
 import { Storage } from "../storage"
 import { TaskBoard } from "../tasks"
@@ -502,6 +503,7 @@ const _calculatePlayerImpact = (connectedPlayers: Player[], chainIndex: number, 
 export const updateLab = (data: Map<string, any>) => {
     const lab = data.get("lab") as Lab;
     const playerData = data.get("players") as Player[];
+    const starsigns = data.get("starsigns") as StarSigns | undefined;
     const cooking = data.get("cooking") as Cooking;
     const cards = data.get("cards") as Card[];
     const gemStore = data.get("gems") as GemStore;
@@ -519,6 +521,10 @@ export const updateLab = (data: Map<string, any>) => {
     lab.bonuses[16].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 10)?.purchased ?? false;
     lab.bonuses[17].unlocked = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 11)?.purchased ?? false;
 
+    // Reset chip state before applying the current per-player lab loadouts.
+    playerData.forEach(player => player.starSigns.forEach(sign => sign.hasChip = false));
+    let hasGlobalStarSignChip = false;
+
     // Append chip info to the players.
     Object.entries(lab.playerChips).forEach(([playerIndex, chips]) => {
         const index = parseInt(playerIndex);
@@ -532,11 +538,16 @@ export const updateLab = (data: Map<string, any>) => {
         if (chips.filter(chip => chip.data.name == "Omega Motherboard").length > 0 && playerData[index].cardInfo) {
             (playerData[index].cardInfo as CardInfo).equippedCards[7].chipBoost = 2;
         }
-        // Same ugly handling for starsign doubler.
-        if (chips.filter(chip => chip.data.name == "Silkrode Nanochip").length > 0) {
-            playerData[index].starSigns.forEach(sign => sign.hasChip = true);
+        // Silkrode applies to every infinite sign in the account-wide StarSigns table,
+        // while its active-sign effect remains scoped to the player wearing the chip.
+        const hasSilkrode = chips.some(chip => chip.data.name == "Silkrode Nanochip");
+        if (hasSilkrode) {
+            hasGlobalStarSignChip = true;
         }
+        playerData[index].starSigns.forEach(sign => sign.hasChip = hasSilkrode);
     })
+    starsigns?.unlockedStarSigns.forEach(sign => sign.hasChip = hasGlobalStarSignChip);
+    starsigns?.infinityStarSigns.forEach(sign => sign.hasChip = hasGlobalStarSignChip);
 
     // Things to care about:
     // 1. Jewel that boosts meal bonus.
