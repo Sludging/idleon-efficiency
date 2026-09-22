@@ -214,7 +214,7 @@ export const calculateFamily = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
 
     family.classBonus.clear();
-    const highestFamilyGuy = players.reduce((highest, player) => Math.max(highest, getSpecialFamilyGuyBonus(player)), 0);
+    const highestFamilyGuy = players.reduce((highest, player) => Math.max(highest, player.getTalentBonus(144)), 0);
     const playerIDs = players.map(player => player.playerID);
 
     players.forEach(player => {
@@ -229,19 +229,6 @@ export const calculateFamily = (data: Map<string, any>) => {
     // Pre-calculate the family bonus for each player based on the candidates collected above.
     family.classBonus.forEach(familyBonus => familyBonus.calculateResults(playerIDs));
     return family;
-}
-
-// Separate rule for Divine Knight and Siege Breaker: their Family value uses the best
-// account-wide Family Guy percentage, calculated without Timmy/Super Bit.
-const getSpecialFamilyGuyBonus = (player: Player) => {
-    const familyGuy = player.getTalent(144);
-    if (!familyGuy || familyGuy.level <= 0) {
-        return 0;
-    }
-
-    // Remove only Timmy/Super Bit here before calculating.
-    const databaseLevel = Math.max(0, familyGuy.level - player.extraLevelsFromSuperBit);
-    return lavaFunc(familyGuy.funcX, databaseLevel, familyGuy.x1, familyGuy.x2);
 }
 
 const updateFamilyBonus = (family: Family, player: Player, classId: ClassIndex, highestFamilyGuy: number, familyGuyBonus: number) => {

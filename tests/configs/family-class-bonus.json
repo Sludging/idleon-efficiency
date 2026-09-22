@@ -121,6 +121,11 @@
       "label": "family_guy_talent_144",
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
       "description": "Active character The Family Guy talent bonus used to boost Family Bonuses"
+    },
+    {
+      "label": "family_guy_special_144",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 144, -1)",
+      "description": "DK/SB account-wide The Family Guy approximation (getbonus2(1, 144, -1))"
     }
   ]
 }
