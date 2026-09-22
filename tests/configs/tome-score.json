@@ -613,6 +613,11 @@
       "description": "Total Resource Grade; RoyalArmory.getTotalResourceGrade mirrors RoyalG.TotalStatz(0, 0)."
     },
     {
+      "label": "tome_pts_121",
+      "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 121, 0)",
+      "description": "Successful Jelly Operations."
+    },
+    {
       "label": "tome_producer_98_spelunk_1_max",
       "expression": "Math.max(...idleon.getAttr(\"Spelunk\")[1])",
       "description": "Game source for Tome line 98: maximum Spelunk[1] value, representing deepest depth reached in a single Delve."

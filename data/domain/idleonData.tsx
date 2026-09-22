@@ -55,6 +55,7 @@ import { SushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
+import { JellyOperator, updateJellyOperator } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
@@ -162,6 +163,7 @@ const domainList: Domain[] = [
     new Spelunking("spelunking"),
     new ResearchGrid("research"),
     new Minehead("minehead"),
+    new JellyOperator("jellyOperator"),
     new StarSigns("starsigns"),
     new Button("button"),
     new IslandExpeditions("islandExpeditions"),
@@ -261,6 +263,7 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 const postProcessingMap: Record<string, Function> = {
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
+    "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     // Friend Bonuses consumes parsed companion and Event Shop state.
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),

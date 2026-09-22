@@ -8,6 +8,7 @@ export const initJellyOperatorUpgradeRepo = () => {
     return [    
         new JellyOperatorUpgradeBase(0, <JellyOperatorUpgradeModel>{
                 "index": 0,
+                "displayIndex": 0,
                 "name": "Amoeba Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -17,6 +18,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(1, <JellyOperatorUpgradeModel>{
                 "index": 1,
+                "displayIndex": 3,
                 "name": "Plasmid Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -26,6 +28,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(2, <JellyOperatorUpgradeModel>{
                 "index": 2,
+                "displayIndex": 8,
                 "name": "Ribosome Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -35,6 +38,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(3, <JellyOperatorUpgradeModel>{
                 "index": 3,
+                "displayIndex": 14,
                 "name": "Organelle Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -44,6 +48,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(4, <JellyOperatorUpgradeModel>{
                 "index": 4,
+                "displayIndex": 20,
                 "name": "Immunoid Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -53,6 +58,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(5, <JellyOperatorUpgradeModel>{
                 "index": 5,
+                "displayIndex": 25,
                 "name": "Virus Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -62,6 +68,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(6, <JellyOperatorUpgradeModel>{
                 "index": 6,
+                "displayIndex": 30,
                 "name": "Mitochondria Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -71,6 +78,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(7, <JellyOperatorUpgradeModel>{
                 "index": 7,
+                "displayIndex": 34,
                 "name": "Gigacyst Cell Cultivation",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -80,6 +88,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(8, <JellyOperatorUpgradeModel>{
                 "index": 8,
+                "displayIndex": 6,
                 "name": "Another Unlock",
                 "maxLevel": 25,
                 "costExponent": 11.5,
@@ -89,6 +98,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(9, <JellyOperatorUpgradeModel>{
                 "index": 9,
+                "displayIndex": 5,
                 "name": "Slot Unlocking",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -98,6 +108,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(10, <JellyOperatorUpgradeModel>{
                 "index": 10,
+                "displayIndex": 12,
                 "name": "Cell Biology",
                 "maxLevel": 9999,
                 "costExponent": 1.21,
@@ -107,6 +118,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(11, <JellyOperatorUpgradeModel>{
                 "index": 11,
+                "displayIndex": 38,
                 "name": "Cell Evolution",
                 "maxLevel": 9999,
                 "costExponent": 1.65,
@@ -116,6 +128,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(12, <JellyOperatorUpgradeModel>{
                 "index": 12,
+                "displayIndex": 9,
                 "name": "DPS Biometrics",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -125,6 +138,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(13, <JellyOperatorUpgradeModel>{
                 "index": 13,
+                "displayIndex": 31,
                 "name": "Proximity Stimulus",
                 "maxLevel": 5,
                 "costExponent": 2000,
@@ -134,6 +148,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(14, <JellyOperatorUpgradeModel>{
                 "index": 14,
+                "displayIndex": 21,
                 "name": "Cells of Three, Better They Be!",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -143,6 +158,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(15, <JellyOperatorUpgradeModel>{
                 "index": 15,
+                "displayIndex": 26,
                 "name": "Viral Injection",
                 "maxLevel": 4,
                 "costExponent": 10000,
@@ -152,6 +168,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(16, <JellyOperatorUpgradeModel>{
                 "index": 16,
+                "displayIndex": 18,
                 "name": "Feverizer",
                 "maxLevel": 6,
                 "costExponent": 250,
@@ -161,6 +178,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(17, <JellyOperatorUpgradeModel>{
                 "index": 17,
+                "displayIndex": 15,
                 "name": "Cell Mutilation",
                 "maxLevel": 20,
                 "costExponent": 40,
@@ -170,6 +188,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(18, <JellyOperatorUpgradeModel>{
                 "index": 18,
+                "displayIndex": 4,
                 "name": "Cell Destruction I",
                 "maxLevel": 9999,
                 "costExponent": 1.15,
@@ -179,6 +198,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(19, <JellyOperatorUpgradeModel>{
                 "index": 19,
+                "displayIndex": 10,
                 "name": "Cell Destruction II",
                 "maxLevel": 9999,
                 "costExponent": 1.22,
@@ -188,6 +208,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(20, <JellyOperatorUpgradeModel>{
                 "index": 20,
+                "displayIndex": 22,
                 "name": "Cell Destruction III",
                 "maxLevel": 9999,
                 "costExponent": 1.51,
@@ -197,6 +218,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(21, <JellyOperatorUpgradeModel>{
                 "index": 21,
+                "displayIndex": 28,
                 "name": "Cell Desolation I",
                 "maxLevel": 9999,
                 "costExponent": 1.35,
@@ -206,6 +228,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(22, <JellyOperatorUpgradeModel>{
                 "index": 22,
+                "displayIndex": 36,
                 "name": "Cell Desolation II",
                 "maxLevel": 9999,
                 "costExponent": 2.1,
@@ -215,6 +238,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(23, <JellyOperatorUpgradeModel>{
                 "index": 23,
+                "displayIndex": 1,
                 "name": "Bloodcell Coagulation",
                 "maxLevel": 9999,
                 "costExponent": 1.1,
@@ -224,6 +248,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(24, <JellyOperatorUpgradeModel>{
                 "index": 24,
+                "displayIndex": 7,
                 "name": "Bloodletting I",
                 "maxLevel": 9999,
                 "costExponent": 1.15,
@@ -233,6 +258,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(25, <JellyOperatorUpgradeModel>{
                 "index": 25,
+                "displayIndex": 19,
                 "name": "Bloodletting II",
                 "maxLevel": 9999,
                 "costExponent": 1.32,
@@ -242,6 +268,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(26, <JellyOperatorUpgradeModel>{
                 "index": 26,
+                "displayIndex": 37,
                 "name": "Blood Tribunal I",
                 "maxLevel": 9999,
                 "costExponent": 1.4,
@@ -251,6 +278,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(27, <JellyOperatorUpgradeModel>{
                 "index": 27,
+                "displayIndex": 29,
                 "name": "Blood Tribunal II",
                 "maxLevel": 9999,
                 "costExponent": 1.85,
@@ -260,6 +288,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(28, <JellyOperatorUpgradeModel>{
                 "index": 28,
+                "displayIndex": 16,
                 "name": "Immuno Weakening",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -269,6 +298,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(29, <JellyOperatorUpgradeModel>{
                 "index": 29,
+                "displayIndex": 23,
                 "name": "Stronkroid",
                 "maxLevel": 150,
                 "costExponent": 1.3,
@@ -278,6 +308,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(30, <JellyOperatorUpgradeModel>{
                 "index": 30,
+                "displayIndex": 32,
                 "name": "Cell Adaptation I",
                 "maxLevel": 9999,
                 "costExponent": 1.12,
@@ -287,6 +318,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(31, <JellyOperatorUpgradeModel>{
                 "index": 31,
+                "displayIndex": 24,
                 "name": "Cell Adaptation II",
                 "maxLevel": 9999,
                 "costExponent": 1.18,
@@ -296,6 +328,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(32, <JellyOperatorUpgradeModel>{
                 "index": 32,
+                "displayIndex": 27,
                 "name": "Cell Metabolism",
                 "maxLevel": 10,
                 "costExponent": 65,
@@ -305,6 +338,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(33, <JellyOperatorUpgradeModel>{
                 "index": 33,
+                "displayIndex": 13,
                 "name": "Cell Dialysis",
                 "maxLevel": 25,
                 "costExponent": 5.5,
@@ -314,6 +348,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(34, <JellyOperatorUpgradeModel>{
                 "index": 34,
+                "displayIndex": 33,
                 "name": "Lower Cholesterol",
                 "maxLevel": 9999,
                 "costExponent": 1.45,
@@ -323,6 +358,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(35, <JellyOperatorUpgradeModel>{
                 "index": 35,
+                "displayIndex": 35,
                 "name": "Revival Shots",
                 "maxLevel": 5,
                 "costExponent": 1500,
@@ -332,6 +368,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(36, <JellyOperatorUpgradeModel>{
                 "index": 36,
+                "displayIndex": 17,
                 "name": "Critical Status",
                 "maxLevel": 1,
                 "costExponent": 1,
@@ -341,6 +378,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(37, <JellyOperatorUpgradeModel>{
                 "index": 37,
+                "displayIndex": 39,
                 "name": "Rift Guy's Upgrade",
                 "maxLevel": 0,
                 "costExponent": 1,
@@ -350,6 +388,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(38, <JellyOperatorUpgradeModel>{
                 "index": 38,
+                "displayIndex": 11,
                 "name": "Daily Transfusion",
                 "maxLevel": 20,
                 "costExponent": 2.5,
@@ -359,6 +398,7 @@ export const initJellyOperatorUpgradeRepo = () => {
             }),
         new JellyOperatorUpgradeBase(39, <JellyOperatorUpgradeModel>{
                 "index": 39,
+                "displayIndex": 2,
                 "name": "Operational Bonuses",
                 "maxLevel": 1,
                 "costExponent": 1.1,

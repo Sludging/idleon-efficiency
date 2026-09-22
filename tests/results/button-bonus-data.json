@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-09-21T07:22:46.474Z",
+  "timestamp": "2026-09-22T07:39:45.848Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 75,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-09-21T07:22:46.516Z"
+      "extractedAt": "2026-09-22T07:39:45.892Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 18.75,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-09-21T07:22:46.536Z"
+      "extractedAt": "2026-09-22T07:39:45.916Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
       "result": 2.078125,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-09-21T07:22:46.556Z"
+      "extractedAt": "2026-09-22T07:39:45.942Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
       "result": 41.5625,
       "description": "Representative Button bonus at the first category index",
-      "extractedAt": "2026-09-21T07:22:46.576Z"
+      "extractedAt": "2026-09-22T07:39:45.973Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 363.671875,
+      "result": 415.625,
       "description": "Representative Button bonus at the downstream cooking consumer index",
-      "extractedAt": "2026-09-21T07:22:46.603Z"
+      "extractedAt": "2026-09-22T07:39:46.007Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "result": 51.953125,
       "description": "Representative Button bonus at the final category index",
-      "extractedAt": "2026-09-21T07:22:46.627Z"
+      "extractedAt": "2026-09-22T07:39:46.045Z"
     }
   },
   "errors": {},

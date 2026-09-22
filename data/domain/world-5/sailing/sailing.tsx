@@ -138,7 +138,7 @@ export class Boat {
     speedBaseMathWithSilkrode = 0;
     minTravelTime = 120;
 
-    constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined) { }
+    constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined, public routeState: number = 0) { }
 
     getSpeedUpgradeType = () => {
         if (this.index < 2) {
@@ -205,7 +205,8 @@ export class Boat {
 
         const firstMath = (10 + (5 + Math.pow(Math.floor(speedUpgrades / 7), 2)) * speedUpgrades);
         const boatSpeed = firstMath * (1 + captainBonus / 100) * (starSignEquipped ? (silkRodeEquipped ? this.speedBaseMathWithSilkrode : this.speedBaseMath) : this.speedBaseMathWithoutStarSign);
-        if (islandBound && this.assignIsland) {
+        // The game only applies the island cap while the boat is in route state 0.
+        if (islandBound && this.assignIsland && this.routeState == 0) {
             return Math.min(boatSpeed, (this.assignIsland.data.distance * 60) / this.minTravelTime);
         }
 
@@ -374,7 +375,7 @@ export class Sailing extends Domain {
             if (bIndex < sailing.boatsUnlocked && (boat[3] + boat[5]) != 0) {
                 const boatCaptain = sailing.captains.find(captain => captain.index == boat[0]);
                 const targetIsland = boat[1] != -1 && boat[1] < sailing.islands.length ? sailing.islands[boat[1]] : undefined;
-                sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain));
+                sailing.boats.push(new Boat(bIndex, targetIsland, boat[4], boat[3], boat[5], boatCaptain, boat[2]));
             }
         })
     }

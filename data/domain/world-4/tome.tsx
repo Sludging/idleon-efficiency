@@ -53,6 +53,7 @@ import { CoralReef } from '../world-7/coralReef';
 import { Spelunking } from '../world-7/spelunking';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 import { Minehead } from '../world-7/minehead';
+import { JellyOperator } from '../world-7/jellyOperator';
 import { EventShop } from '../eventShop';
 
 export enum TomeScoreColors {
@@ -448,6 +449,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const spelunking = data.get("spelunking") as Spelunking;
     const researchGrid = data.get("research") as ResearchGrid;
     const minehead = data.get("minehead") as Minehead;
+    const jellyOperator = data.get("jellyOperator") as JellyOperator;
 
 
     // Count obtained trophies, obols, and equipment nametags from the Slab.
@@ -1149,6 +1151,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
             case 120:
                 // Total Royal Armory resource grade.
                 line.updateAllPlayersCurrentValue(royalArmory.getTotalResourceGrade());
+                break;
+            case 121:
+                // Completed Jelly obstructions are account-wide Research[7][9] progress.
+                line.updateAllPlayersCurrentValue(jellyOperator.getSuccessfulOperations());
                 break;
             default:
                 line.updateAllPlayersCurrentValue(0);
