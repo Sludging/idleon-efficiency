@@ -1,131 +1,131 @@
 {
-  "timestamp": "2026-09-22T07:39:50.281Z",
+  "timestamp": "2026-09-23T02:22:53.721Z",
   "extractions": {
     "fountain_marble_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 8)",
       "result": 1,
       "description": "Fountain marble bonus for water 0 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.341Z"
+      "extractedAt": "2026-09-23T02:22:53.734Z"
     },
     "fountain_marble_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 13)",
       "result": 2.5,
       "description": "Fountain marble bonus for water 0 upgrade 13 (positive marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.363Z"
+      "extractedAt": "2026-09-23T02:22:53.736Z"
     },
     "fountain_total_bonus_0_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 0)",
       "result": 699,
       "description": "Fountain total bonus for water 0 upgrade 0",
-      "extractedAt": "2026-09-22T07:39:50.382Z"
+      "extractedAt": "2026-09-23T02:22:53.737Z"
     },
     "fountain_total_bonus_0_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 1)",
       "result": 4650,
       "description": "Fountain total bonus for water 0 upgrade 1 (non-unit factor)",
-      "extractedAt": "2026-09-22T07:39:50.400Z"
+      "extractedAt": "2026-09-23T02:22:53.739Z"
     },
     "fountain_total_bonus_0_5": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 5)",
       "result": 4013,
       "description": "Fountain total bonus for water 0 upgrade 5",
-      "extractedAt": "2026-09-22T07:39:50.422Z"
+      "extractedAt": "2026-09-23T02:22:53.741Z"
     },
     "fountain_total_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 8)",
       "result": 223,
       "description": "Fountain total bonus for water 0 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.443Z"
+      "extractedAt": "2026-09-23T02:22:53.751Z"
     },
     "fountain_total_bonus_0_9": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 9)",
       "result": 2338,
       "description": "Fountain total bonus for water 0 upgrade 9",
-      "extractedAt": "2026-09-22T07:39:50.467Z"
+      "extractedAt": "2026-09-23T02:22:53.753Z"
     },
     "fountain_total_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
       "result": 73,
       "description": "Fountain total bonus for water 0 upgrade 13 (Bravery Monumental Boost)",
-      "extractedAt": "2026-09-22T07:39:50.488Z"
+      "extractedAt": "2026-09-23T02:22:53.755Z"
     },
     "fountain_total_bonus_0_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 19)",
       "result": 333,
       "description": "Fountain total bonus for water 0 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-22T07:39:50.516Z"
+      "extractedAt": "2026-09-23T02:22:53.757Z"
     },
     "fountain_total_bonus_1_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 0)",
       "result": 1314,
       "description": "Fountain total bonus for water 1 upgrade 0",
-      "extractedAt": "2026-09-22T07:39:50.542Z"
+      "extractedAt": "2026-09-23T02:22:53.765Z"
     },
     "fountain_total_bonus_1_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 8)",
       "result": 244,
       "description": "Fountain total bonus for water 1 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.570Z"
+      "extractedAt": "2026-09-23T02:22:53.767Z"
     },
     "fountain_total_bonus_1_10": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 10)",
       "result": 1290,
       "description": "Fountain total bonus for water 1 upgrade 10 (non-marbleizable upgrade)",
-      "extractedAt": "2026-09-22T07:39:50.590Z"
+      "extractedAt": "2026-09-23T02:22:53.769Z"
     },
     "fountain_total_bonus_1_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
       "result": 83,
       "description": "Fountain total bonus for water 1 upgrade 13",
-      "extractedAt": "2026-09-22T07:39:50.608Z"
+      "extractedAt": "2026-09-23T02:22:53.770Z"
     },
     "fountain_total_bonus_1_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 19)",
       "result": 313,
       "description": "Fountain total bonus for water 1 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-22T07:39:50.625Z"
+      "extractedAt": "2026-09-23T02:22:53.772Z"
     },
     "fountain_total_bonus_2_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
       "result": 0,
       "description": "Fountain total bonus for water 2 upgrade 0 (zero upgrade level)",
-      "extractedAt": "2026-09-22T07:39:50.640Z"
+      "extractedAt": "2026-09-23T02:22:53.774Z"
     },
     "fountain_total_bonus_2_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
       "result": 300,
       "description": "Fountain total bonus for water 2 upgrade 1 (large factor)",
-      "extractedAt": "2026-09-22T07:39:50.660Z"
+      "extractedAt": "2026-09-23T02:22:53.782Z"
     },
     "fountain_total_bonus_2_2": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
       "result": 39,
       "description": "Fountain total bonus for water 2 upgrade 2 (zero marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.679Z"
+      "extractedAt": "2026-09-23T02:22:53.784Z"
     },
     "fountain_total_bonus_2_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
       "result": 29,
       "description": "Fountain total bonus for water 2 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-22T07:39:50.696Z"
+      "extractedAt": "2026-09-23T02:22:53.786Z"
     },
     "fountain_total_bonus_2_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
       "result": 55,
       "description": "Fountain total bonus for water 2 upgrade 12",
-      "extractedAt": "2026-09-22T07:39:50.719Z"
+      "extractedAt": "2026-09-23T02:22:53.787Z"
     },
     "fountain_total_bonus_2_18": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 18)",
       "result": 0,
       "description": "Fountain total bonus for water 2 upgrade 18",
-      "extractedAt": "2026-09-22T07:39:50.746Z"
+      "extractedAt": "2026-09-23T02:22:53.789Z"
     },
     "fountain_total_bonus_2_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
       "result": 7,
       "description": "Fountain total bonus for water 2 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-22T07:39:50.771Z"
+      "extractedAt": "2026-09-23T02:22:53.791Z"
     }
   },
   "errors": {},

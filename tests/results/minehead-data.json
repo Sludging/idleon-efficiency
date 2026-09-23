@@ -1,263 +1,263 @@
 {
-  "timestamp": "2026-09-22T07:39:54.887Z",
+  "timestamp": "2026-09-23T02:22:54.325Z",
   "extractions": {
     "minehead_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
       "result": 10,
       "description": "Earned opponent reward at progression index 0; strict defeated-count gate, not display ID.",
-      "extractedAt": "2026-09-22T07:39:54.927Z"
+      "extractedAt": "2026-09-23T02:22:54.333Z"
     },
     "minehead_bonus_12": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
       "result": 1,
       "description": "Earned opponent reward at progression index 12; strict defeated-count gate, not display ID.",
-      "extractedAt": "2026-09-22T07:39:54.946Z"
+      "extractedAt": "2026-09-23T02:22:54.334Z"
     },
     "minehead_bonus_13": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 13, 0)",
       "result": 0,
       "description": "Earned opponent reward at progression index 13; strict defeated-count gate, not display ID.",
-      "extractedAt": "2026-09-22T07:39:54.965Z"
+      "extractedAt": "2026-09-23T02:22:54.336Z"
     },
     "minehead_bonus_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
       "result": 0,
       "description": "Earned opponent reward at progression index 21; strict defeated-count gate, not display ID.",
-      "extractedAt": "2026-09-22T07:39:54.983Z"
+      "extractedAt": "2026-09-23T02:22:54.337Z"
     },
     "minehead_bonus_31": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 0)",
       "result": 0,
       "description": "Earned opponent reward at progression index 31; strict defeated-count gate, not display ID.",
-      "extractedAt": "2026-09-22T07:39:55.008Z"
+      "extractedAt": "2026-09-23T02:22:54.339Z"
     },
     "minehead_preview_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 99)",
       "result": 2,
       "description": "Opponent 21 preview bypasses the defeat gate; compared to getBaseBonus, not an earned reward.",
-      "extractedAt": "2026-09-22T07:39:55.032Z"
+      "extractedAt": "2026-09-23T02:22:54.340Z"
     },
     "minehead_preview_31": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 99)",
       "result": 31,
       "description": "Opponent 31 preview bypasses the defeat gate; compared to getBaseBonus, not an earned reward.",
-      "extractedAt": "2026-09-22T07:39:55.056Z"
+      "extractedAt": "2026-09-23T02:22:54.342Z"
     },
     "minehead_upgrade_quantity_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 0, 0)",
       "result": 109,
       "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 0.",
-      "extractedAt": "2026-09-22T07:39:55.086Z"
+      "extractedAt": "2026-09-23T02:22:54.350Z"
     },
     "minehead_upgrade_quantity_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 3, 0)",
       "result": 650,
       "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 3.",
-      "extractedAt": "2026-09-22T07:39:55.111Z"
+      "extractedAt": "2026-09-23T02:22:54.351Z"
     },
     "minehead_upgrade_quantity_16": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 16, 0)",
       "result": 0,
       "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 16.",
-      "extractedAt": "2026-09-22T07:39:55.135Z"
+      "extractedAt": "2026-09-23T02:22:54.353Z"
     },
     "minehead_upgrade_quantity_26": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0)",
       "result": 0,
       "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 26.",
-      "extractedAt": "2026-09-22T07:39:55.157Z"
+      "extractedAt": "2026-09-23T02:22:54.354Z"
     },
     "minehead_upgrade_quantity_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 29, 0)",
       "result": 0,
       "description": "Saved upgrade numeric quantity before downstream gameplay transformations: upgrade 29.",
-      "extractedAt": "2026-09-22T07:39:55.202Z"
+      "extractedAt": "2026-09-23T02:22:54.355Z"
     },
     "minehead_upgrade_requirement_2": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 2, 0)",
       "result": 7,
       "description": "Research level requirement for the indexed upgrade: upgrade 2.",
-      "extractedAt": "2026-09-22T07:39:55.229Z"
+      "extractedAt": "2026-09-23T02:22:54.357Z"
     },
     "minehead_upgrade_requirement_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 3, 0)",
       "result": 11,
       "description": "Research level requirement for the indexed upgrade: upgrade 3.",
-      "extractedAt": "2026-09-22T07:39:55.255Z"
+      "extractedAt": "2026-09-23T02:22:54.358Z"
     },
     "minehead_upgrade_requirement_10": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 10, 0)",
       "result": 34,
       "description": "Research level requirement for the indexed upgrade: upgrade 10.",
-      "extractedAt": "2026-09-22T07:39:55.281Z"
+      "extractedAt": "2026-09-23T02:22:54.366Z"
     },
     "minehead_upgrade_requirement_11": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 11, 0)",
       "result": 38,
       "description": "Research level requirement for the indexed upgrade: upgrade 11.",
-      "extractedAt": "2026-09-22T07:39:55.305Z"
+      "extractedAt": "2026-09-23T02:22:54.368Z"
     },
     "minehead_upgrade_requirement_20": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0)",
       "result": 68,
       "description": "Research level requirement for the indexed upgrade: upgrade 20.",
-      "extractedAt": "2026-09-22T07:39:55.329Z"
+      "extractedAt": "2026-09-23T02:22:54.370Z"
     },
     "minehead_upgrade_requirement_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0)",
       "result": 72,
       "description": "Research level requirement for the indexed upgrade: upgrade 21.",
-      "extractedAt": "2026-09-22T07:39:55.348Z"
+      "extractedAt": "2026-09-23T02:22:54.371Z"
     },
     "minehead_upgrade_cost_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 0, 0)",
       "result": 81234.90761812578,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 0.",
-      "extractedAt": "2026-09-22T07:39:55.367Z"
+      "extractedAt": "2026-09-23T02:22:54.372Z"
     },
     "minehead_upgrade_cost_1": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 1, 0)",
       "result": 5038848,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 1.",
-      "extractedAt": "2026-09-22T07:39:55.384Z"
+      "extractedAt": "2026-09-23T02:22:54.374Z"
     },
     "minehead_upgrade_cost_2": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 2, 0)",
       "result": 35039520.263671875,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 2.",
-      "extractedAt": "2026-09-22T07:39:55.401Z"
+      "extractedAt": "2026-09-23T02:22:54.375Z"
     },
     "minehead_upgrade_cost_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 3, 0)",
       "result": 39680.04324181048,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 3.",
-      "extractedAt": "2026-09-22T07:39:55.422Z"
+      "extractedAt": "2026-09-23T02:22:54.384Z"
     },
     "minehead_upgrade_cost_4": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 4, 0)",
       "result": 62247.11258383535,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 4.",
-      "extractedAt": "2026-09-22T07:39:55.445Z"
+      "extractedAt": "2026-09-23T02:22:54.386Z"
     },
     "minehead_upgrade_cost_5": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 5, 0)",
       "result": 133383.8985527329,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 5.",
-      "extractedAt": "2026-09-22T07:39:55.465Z"
+      "extractedAt": "2026-09-23T02:22:54.388Z"
     },
     "minehead_upgrade_cost_9": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 9, 0)",
       "result": 7612.962508178956,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 9.",
-      "extractedAt": "2026-09-22T07:39:55.486Z"
+      "extractedAt": "2026-09-23T02:22:54.390Z"
     },
     "minehead_upgrade_cost_10": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 10, 0)",
       "result": 1254603888083.5676,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 10.",
-      "extractedAt": "2026-09-22T07:39:55.506Z"
+      "extractedAt": "2026-09-23T02:22:54.391Z"
     },
     "minehead_upgrade_cost_26": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 26, 0)",
       "result": 19274409133.936085,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 26.",
-      "extractedAt": "2026-09-22T07:39:55.539Z"
+      "extractedAt": "2026-09-23T02:22:54.401Z"
     },
     "minehead_upgrade_cost_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 29, 0)",
       "result": 396087843839.4885,
       "description": "Unrounded next-level cost including server scaling, Minehead upgrade 26 and Sushi discounts: upgrade 29.",
-      "extractedAt": "2026-09-22T07:39:55.566Z"
+      "extractedAt": "2026-09-23T02:22:54.404Z"
     },
     "minehead_upgrade_affordable_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)",
       "result": 1,
       "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 0.",
-      "extractedAt": "2026-09-22T07:39:55.587Z"
+      "extractedAt": "2026-09-23T02:22:54.405Z"
     },
     "minehead_upgrade_affordable_1": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)",
       "result": 0,
       "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 1.",
-      "extractedAt": "2026-09-22T07:39:55.608Z"
+      "extractedAt": "2026-09-23T02:22:54.407Z"
     },
     "minehead_upgrade_affordable_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)",
       "result": 0,
       "description": "Funds and maximum-level eligibility, independent of the separate Research unlock: upgrade 29.",
-      "extractedAt": "2026-09-22T07:39:55.626Z"
+      "extractedAt": "2026-09-23T02:22:54.419Z"
     },
     "minehead_upgrade_unlocked_20": {
       "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
       "result": 1,
       "description": "Account Research unlock for upgrade 20 from the shop caller; active player 0 required by extraction policy. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.645Z"
+      "extractedAt": "2026-09-23T02:22:54.421Z"
     },
     "minehead_upgrade_unlocked_21": {
       "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
       "result": 0,
       "description": "Account Research unlock for upgrade 21 from the shop caller; active player 0 required by extraction policy. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.662Z"
+      "extractedAt": "2026-09-23T02:22:54.423Z"
     },
     "minehead_upgrade_buyable_0": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 0, 0))",
       "result": 1,
       "description": "Complete shop purchase eligibility for upgrade 0, combining affordability/cap and Research unlock. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.682Z"
+      "extractedAt": "2026-09-23T02:22:54.424Z"
     },
     "minehead_upgrade_buyable_1": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 1, 0))",
       "result": 0,
       "description": "Complete shop purchase eligibility for upgrade 1, combining affordability/cap and Research unlock. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.708Z"
+      "extractedAt": "2026-09-23T02:22:54.433Z"
     },
     "minehead_upgrade_buyable_20": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 20, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
       "result": 0,
       "description": "Complete shop purchase eligibility for upgrade 20, combining affordability/cap and Research unlock. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.736Z"
+      "extractedAt": "2026-09-23T02:22:54.434Z"
     },
     "minehead_upgrade_buyable_21": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 21, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
       "result": 0,
       "description": "Complete shop purchase eligibility for upgrade 21, combining affordability/cap and Research unlock. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.759Z"
+      "extractedAt": "2026-09-23T02:22:54.436Z"
     },
     "minehead_upgrade_buyable_29": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 29, 0))",
       "result": 0,
       "description": "Complete shop purchase eligibility for upgrade 29, combining affordability/cap and Research unlock. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.781Z"
+      "extractedAt": "2026-09-23T02:22:54.438Z"
     },
     "minehead_upgrade_maxed_0": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][0]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]))",
       "result": 0,
       "description": "Upgrade 0 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.799Z"
+      "extractedAt": "2026-09-23T02:22:54.440Z"
     },
     "minehead_upgrade_maxed_1": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][1]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]))",
       "result": 0,
       "description": "Upgrade 1 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.821Z"
+      "extractedAt": "2026-09-23T02:22:54.441Z"
     },
     "minehead_upgrade_maxed_29": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][29]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]))",
       "result": 1,
       "description": "Upgrade 29 has reached its finite cap: complement of the level branch in CanWeBuyUpg. Maximums above 998 are unlimited. Boolean represented as 0/1.",
-      "extractedAt": "2026-09-22T07:39:55.838Z"
+      "extractedAt": "2026-09-23T02:22:54.443Z"
     },
     "minehead_sushi_1": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0)",
       "result": 30,
       "description": "External Sushi unlock bonus 1, before Minehead max-combines its two Sushi discounts.",
-      "extractedAt": "2026-09-22T07:39:55.857Z"
+      "extractedAt": "2026-09-23T02:22:54.451Z"
     },
     "minehead_sushi_16": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)",
       "result": 50,
       "description": "External Sushi unlock bonus 16, before Minehead max-combines its two Sushi discounts.",
-      "extractedAt": "2026-09-22T07:39:55.877Z"
+      "extractedAt": "2026-09-23T02:22:54.453Z"
     }
   },
   "errors": {},

@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-09-22T07:40:00.654Z",
+  "timestamp": "2026-09-23T02:22:55.003Z",
   "extractions": {
     "slab_bonus_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
       "result": 1.547,
       "description": "Account-wide multiplier applied to Slab bonuses",
-      "extractedAt": "2026-09-22T07:40:00.690Z"
+      "extractedAt": "2026-09-23T02:22:55.007Z"
     },
     "meritocracy_bonus_23": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 23, 0)",
       "result": 0,
       "description": "Multi Meritocracy bonus 23 used by the Slab-wide multiplier",
-      "extractedAt": "2026-09-22T07:40:00.706Z"
+      "extractedAt": "2026-09-23T02:22:55.008Z"
     },
     "legend_talent_bonus_28": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 28, 0)",
       "result": 30,
       "description": "Legend Talent bonus 28 used by the Slab-wide multiplier",
-      "extractedAt": "2026-09-22T07:40:00.723Z"
+      "extractedAt": "2026-09-23T02:22:55.017Z"
     },
     "vault_upgrade_bonus_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
       "result": 19,
       "description": "Upgrade Vault bonus 74 used by the Slab-wide multiplier",
-      "extractedAt": "2026-09-22T07:40:00.744Z"
+      "extractedAt": "2026-09-23T02:22:55.019Z"
     }
   },
   "errors": {},

@@ -724,9 +724,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue((optionListAccount[172] ?? 0));
                 break;
             case 15:
-                // The game computes this Tome quantity from the active player's Star Talent points.
-                // The account data is normalized with the active player at index 0.
-                line.updateAllPlayersCurrentValue(players[0].talentPoints.find(talentPoints => talentPoints.tab === TalentTab.SpecialTab)?.totalOwned ?? 0);
+                // Star Talent points are character-specific.
+                players.forEach((player, playerIndex) => {
+                    const starTalentPoints = player.talentPoints.find(talentPoints => talentPoints.tab === TalentTab.SpecialTab)?.totalOwned ?? 0;
+                    line.updatePlayerCurrentValue(starTalentPoints, playerIndex);
+                });
                 break;
             case 16:
                 // Average kills per Crystal Spawn, stored as a reciprocal because lower is better.

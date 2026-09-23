@@ -1,83 +1,83 @@
 {
-  "timestamp": "2026-09-22T07:39:57.193Z",
+  "timestamp": "2026-09-23T02:22:54.606Z",
   "extractions": {
     "equipment_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
       "result": 64.72301934731323,
       "description": "Skill Efficiency from equipment and account bonuses",
-      "extractedAt": "2026-09-22T07:39:57.244Z"
+      "extractedAt": "2026-09-23T02:22:54.609Z"
     },
     "equipment_bonus_2": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"2\")",
       "result": 3306.7932812220756,
       "description": "Drop Rate including personal and family obols",
-      "extractedAt": "2026-09-22T07:39:57.274Z"
+      "extractedAt": "2026-09-23T02:22:54.617Z"
     },
     "equipment_bonus_3": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"3\")",
       "result": 94.4964068790447,
       "description": "Money, distinct from other money effects",
-      "extractedAt": "2026-09-22T07:39:57.296Z"
+      "extractedAt": "2026-09-23T02:22:54.619Z"
     },
     "equipment_bonus_45": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"45\")",
       "result": 169.52567051020816,
       "description": "Total Damage",
-      "extractedAt": "2026-09-22T07:39:57.317Z"
+      "extractedAt": "2026-09-23T02:22:54.620Z"
     },
     "equipment_bonus_32": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"32\")",
       "result": 0,
       "description": "Distinct dungeon-labelled Total Damage key in the overworld; not a dungeon transition test",
-      "extractedAt": "2026-09-22T07:39:57.335Z"
+      "extractedAt": "2026-09-23T02:22:54.622Z"
     },
     "equipment_bonus_0": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"0\")",
       "result": 0,
       "description": "Unsupported equipment effect",
-      "extractedAt": "2026-09-22T07:39:57.351Z"
+      "extractedAt": "2026-09-23T02:22:54.623Z"
     },
     "equipment_chip_pend": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
       "result": 1,
       "description": "Pendant chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-22T07:39:57.369Z"
+      "extractedAt": "2026-09-23T02:22:54.625Z"
     },
     "equipment_chip_key1": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
       "result": 1,
       "description": "Upper keychain chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-22T07:39:57.387Z"
+      "extractedAt": "2026-09-23T02:22:54.633Z"
     },
     "equipment_chip_troph": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
       "result": 1,
       "description": "Trophy chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-22T07:39:57.404Z"
+      "extractedAt": "2026-09-23T02:22:54.634Z"
     },
     "equipment_research_172": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 172, 0)",
       "result": 37.5,
       "description": "Research bonus multiplying the final equipment slot",
-      "extractedAt": "2026-09-22T07:39:57.423Z"
+      "extractedAt": "2026-09-23T02:22:54.636Z"
     },
     "gallery_trophy_skill_efficiency": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
       "result": 45.69301934731322,
       "description": "Calculated Gallery trophy Skill Efficiency contribution",
-      "extractedAt": "2026-09-22T07:39:57.449Z"
+      "extractedAt": "2026-09-23T02:22:54.638Z"
     },
     "gallery_nametag_drop_rate": {
       "expression": "idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_DROP_RATE\"]",
       "result": 305.63552941202835,
       "description": "Calculated Gallery nametag Drop Rate contribution",
-      "extractedAt": "2026-09-22T07:39:57.476Z"
+      "extractedAt": "2026-09-23T02:22:54.640Z"
     },
     "hat_rack_skill_efficiency": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
       "result": 19.03,
       "description": "Calculated Hat Rack Skill Efficiency contribution",
-      "extractedAt": "2026-09-22T07:39:57.497Z"
+      "extractedAt": "2026-09-23T02:22:54.642Z"
     }
   },
   "errors": {},

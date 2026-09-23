@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-09-22T07:39:43.486Z",
+  "timestamp": "2026-09-23T02:22:52.772Z",
   "extractions": {
     "arcade_bonus_54": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
       "result": 2,
       "description": "Unmaxed Prisma Bonuses Arcade bonus (index 54)",
-      "extractedAt": "2026-09-22T07:39:43.548Z"
+      "extractedAt": "2026-09-23T02:22:52.785Z"
     },
     "arcade_bonus_8": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 8, 0)",
       "result": 10.049751243781095,
       "description": "Real max-level Multikill per Tier Arcade bonus (index 8)",
-      "extractedAt": "2026-09-22T07:39:43.576Z"
+      "extractedAt": "2026-09-23T02:22:52.787Z"
     },
     "companion_27_active_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 27, 0)",
       "result": 1.5,
       "description": "Active numeric Companion 27 bonus consumed by the Arcade multiplier gate",
-      "extractedAt": "2026-09-22T07:39:43.593Z"
+      "extractedAt": "2026-09-23T02:22:52.789Z"
     }
   },
   "errors": {},

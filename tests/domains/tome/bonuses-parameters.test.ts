@@ -22,6 +22,8 @@ import type { Player } from '../../../data/domain/player';
 
 const saveName = 'latest';
 const extractionResultsName = 'tome-bonus-data.json';
+// Game extraction reads cached total score while the domain recomputes current Tome lines; keep this bound narrow to retain failure detection.
+const DIRECT_TOME_SCORE_TOLERANCE = 0.001;
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  tome_bonus_score: {
@@ -105,7 +107,7 @@ describe('Tome Domain - Bonuses - Parameters', () => {
    const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
    const domainValue = spec.domainExtractor(gameData);
 
-   expect(domainValue).toMatchLiveGame(liveValue, 0);
+   expect(domainValue).toMatchLiveGame(liveValue, spec.extractionKey === 'tome_bonus_score' ? DIRECT_TOME_SCORE_TOLERANCE : 0);
   });
  });
 });
