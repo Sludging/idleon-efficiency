@@ -34,6 +34,8 @@ export class Artifact {
                     return new ManekiKatArtifact(artifact.index, artifact.data);
                 case 3:
                     return new FauxoryTuskArtifact(artifact.index, artifact.data);
+                case 4:
+                    return new GoldRelicArtifact(artifact.index, artifact.data);
                 case 5: 
                     return new GenieLampArtifact(artifact.index, artifact.data);
                 case 2:
@@ -175,6 +177,26 @@ export class Artifact {
                 return "Unlocked through Jade Emporium in W6"
             default:
                 return "First unlock this artifact's island";
+        }
+    }
+}
+
+export class GoldRelicArtifact extends Artifact {
+    getTierIncrement = (): number => {
+        // Sailing's selector 1 uses Gold Relic's tier quantities, separate from its general artifact bonus.
+        switch (this.status) {
+            case ArtifactStatus.Ancient:
+                return this.data.ancientBonusQty;
+            case ArtifactStatus.Eldritch:
+                return this.data.eldritchBonusQty ?? 0;
+            case ArtifactStatus.Sovereign:
+                return this.data.sovereignBonusQty ?? 0;
+            case ArtifactStatus.Omnipotent:
+                return this.data.omnipotentBonusQty ?? 0;
+            case ArtifactStatus.Transcendent:
+                return this.data.transcendentBonusQty ?? 0;
+            default:
+                return 0;
         }
     }
 }
