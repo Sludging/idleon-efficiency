@@ -1,0 +1,111 @@
+{
+  "description": "Live game values for Printer output and its direct calculated inputs (game 1.22, Jelly_Operator)",
+  "target": "Printer output for active samples on saved character slots 0–9, compared through Sample.getSampleQuantity(false)",
+  "extractions": [
+    {
+      "label": "printer_orb_kill_count",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[138]",
+      "description": "Saved Orb Kill count from OptionsListAccount[138], mapped to Printer.divineKnightOrbKills"
+    },
+    {
+      "label": "printer_addition_extra_printing",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
+      "description": "Account-wide calculated AdditionExtraPrinting used by Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_0",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 0, 0)",
+      "description": "Character 0 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_1",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 1, 0)",
+      "description": "Character 1 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_2",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 2, 0)",
+      "description": "Character 2 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_3",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 3, 0)",
+      "description": "Character 3 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_4",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 4, 0)",
+      "description": "Character 4 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_5",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 5, 0)",
+      "description": "Character 5 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_6",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 6, 0)",
+      "description": "Character 6 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_7",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 7, 0)",
+      "description": "Character 7 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_8",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 8, 0)",
+      "description": "Character 8 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "printer_extra_printing_player_9",
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 9, 0)",
+      "description": "Character 9 ExtraPrinting multiplier used by active Printer output"
+    },
+    {
+      "label": "sailing_gold_relic_tier_increment",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",
+      "description": "Gold Relic artifact 4 tier increment used alongside the game's local base +2"
+    },
+    {
+      "label": "best_divine_knight_talent_178",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 178, -1)",
+      "description": "Best Divine Knight talent 178 contribution used by the Printer product"
+    },
+    {
+      "label": "rift_skill_mastery_printer_output",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 3)",
+      "description": "Rift Skill Mastery bonus used by the Printer output product"
+    },
+    {
+      "label": "voting_bonus_11",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 11, 0)",
+      "description": "Summoning vote bonus 11 used by the Printer output product"
+    },
+    {
+      "label": "compass_upgrade_43",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 43, 0)",
+      "description": "Compass upgrade 43 calculated bonus used by the Printer output product"
+    },
+    {
+      "label": "mainframe_bonus_1",
+      "expression": "idleon.callFunction(\"MainframeBonus\", 1)",
+      "description": "Mainframe bonus 1 numeric value; the game gates the Lab branch on this equaling 2"
+    },
+    {
+      "label": "divinity_major_2_player_0",
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 2)",
+      "description": "Arctis major bonus active flag for character slot 0"
+    },
+    {
+      "label": "divinity_major_3_player_0",
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 3)",
+      "description": "Harriep major bonus active flag for character slot 0"
+    },
+    {
+      "label": "printer_companion_17_effect",
+      "expression": "idleon.callFunction(\"Companions\", 17)",
+      "description": "Cached active-level effect for owned Companion 17 used by Printer"
+    }
+  ]
+}

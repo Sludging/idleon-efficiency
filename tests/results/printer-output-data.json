@@ -1,0 +1,140 @@
+{
+  "timestamp": "2026-09-24T00:15:10.876Z",
+  "extractions": {
+    "printer_orb_kill_count": {
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[138]",
+      "result": 26719756,
+      "description": "Saved Orb Kill count from OptionsListAccount[138], mapped to Printer.divineKnightOrbKills",
+      "extractedAt": "2026-09-24T00:15:10.928Z"
+    },
+    "printer_addition_extra_printing": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
+      "result": 628.8733855109957,
+      "description": "Account-wide calculated AdditionExtraPrinting used by Printer output",
+      "extractedAt": "2026-09-24T00:15:10.930Z"
+    },
+    "printer_extra_printing_player_0": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 0, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 0 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.933Z"
+    },
+    "printer_extra_printing_player_1": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 1, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 1 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.942Z"
+    },
+    "printer_extra_printing_player_2": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 2, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 2 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.944Z"
+    },
+    "printer_extra_printing_player_3": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 3, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 3 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.947Z"
+    },
+    "printer_extra_printing_player_4": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 4, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 4 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.950Z"
+    },
+    "printer_extra_printing_player_5": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 5, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 5 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.961Z"
+    },
+    "printer_extra_printing_player_6": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 6, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 6 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.963Z"
+    },
+    "printer_extra_printing_player_7": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 7, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 7 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.966Z"
+    },
+    "printer_extra_printing_player_8": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 8, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 8 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.978Z"
+    },
+    "printer_extra_printing_player_9": {
+      "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 9, 0)",
+      "result": 3773.240313065974,
+      "description": "Character 9 ExtraPrinting multiplier used by active Printer output",
+      "extractedAt": "2026-09-24T00:15:10.980Z"
+    },
+    "sailing_gold_relic_tier_increment": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",
+      "result": 5,
+      "description": "Gold Relic artifact 4 tier increment used alongside the game's local base +2",
+      "extractedAt": "2026-09-24T00:15:10.982Z"
+    },
+    "best_divine_knight_talent_178": {
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 178, -1)",
+      "result": 3.9583333333333335,
+      "description": "Best Divine Knight talent 178 contribution used by the Printer product",
+      "extractedAt": "2026-09-24T00:15:10.993Z"
+    },
+    "rift_skill_mastery_printer_output": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 3)",
+      "result": 25,
+      "description": "Rift Skill Mastery bonus used by the Printer output product",
+      "extractedAt": "2026-09-24T00:15:10.995Z"
+    },
+    "voting_bonus_11": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 11, 0)",
+      "result": 0,
+      "description": "Summoning vote bonus 11 used by the Printer output product",
+      "extractedAt": "2026-09-24T00:15:10.997Z"
+    },
+    "compass_upgrade_43": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 43, 0)",
+      "result": 4,
+      "description": "Compass upgrade 43 calculated bonus used by the Printer output product",
+      "extractedAt": "2026-09-24T00:15:10.999Z"
+    },
+    "mainframe_bonus_1": {
+      "expression": "idleon.callFunction(\"MainframeBonus\", 1)",
+      "result": 2,
+      "description": "Mainframe bonus 1 numeric value; the game gates the Lab branch on this equaling 2",
+      "extractedAt": "2026-09-24T00:15:11.009Z"
+    },
+    "divinity_major_2_player_0": {
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 2)",
+      "result": 1,
+      "description": "Arctis major bonus active flag for character slot 0",
+      "extractedAt": "2026-09-24T00:15:11.011Z"
+    },
+    "divinity_major_3_player_0": {
+      "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 3)",
+      "result": 1,
+      "description": "Harriep major bonus active flag for character slot 0",
+      "extractedAt": "2026-09-24T00:15:11.013Z"
+    },
+    "printer_companion_17_effect": {
+      "expression": "idleon.callFunction(\"Companions\", 17)",
+      "result": 2,
+      "description": "Cached active-level effect for owned Companion 17 used by Printer",
+      "extractedAt": "2026-09-24T00:15:11.014Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}
