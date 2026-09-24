@@ -3,7 +3,6 @@
  * 
  * Tests our statue bonus calculations against live game data.
  * 
- * @testCovers Statue.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue, type ExtractionResults } from '../../utils/live-game-data-loader';

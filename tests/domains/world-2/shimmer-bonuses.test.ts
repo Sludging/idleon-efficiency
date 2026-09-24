@@ -5,7 +5,6 @@
  * multiplier branches. The live account's artifact rarity determines which
  * clamp behavior is exercised; zero base amounts cannot verify the boost.
  *
- * @testCovers IslandExpeditions.getShimmerBonus
  */
 
 import {

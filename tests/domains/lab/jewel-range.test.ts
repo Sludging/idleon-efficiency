@@ -3,7 +3,6 @@
  *
  * Tests the fixed-range Jewel formulas against the delivered game function.
  *
- * @testCovers Jewel.getRange
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

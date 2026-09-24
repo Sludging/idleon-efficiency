@@ -4,8 +4,6 @@
  * The game accumulates each static per-press value in a repeating
  * nine-category schedule, then applies Button_BonusMULTI.
  *
- * @testCovers Button.getBonusForIndex
- * @testCovers ButtonBonus.getBonus
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

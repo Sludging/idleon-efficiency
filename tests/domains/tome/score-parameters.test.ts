@@ -3,11 +3,6 @@
  *
  * Tests the producer calculations consumed by Tome score lines against live game data.
  *
- * @testCovers Farming.getTotalStickers
- * @testCovers Minehead.getOpponentsDefeated
- * @testCovers RoyalArmory.getTotalRoyalStatueLevels
- * @testCovers RoyalArmory.getOutpostsBuilt
- * @testCovers RoyalArmory.getTotalResourceGrade
  */
 
 import {

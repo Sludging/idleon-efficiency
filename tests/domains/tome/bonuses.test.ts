@@ -13,7 +13,6 @@
  * The paired current save keeps Golden Tome and Singed Tome locked, so their
  * nonzero formulas are source-reviewed but not exercised by this fixture.
  *
- * @testCovers Tome.getTomeBonus
  */
 
 import {

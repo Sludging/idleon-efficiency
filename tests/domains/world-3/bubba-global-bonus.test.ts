@@ -12,7 +12,6 @@
  *   6: {% XP Multi (base 4)
  *   7: -{% Atom Cost (base 3)
  * 
- * @testCovers Bubba.getGlobalBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
@@ -23,72 +22,72 @@ const saveName = 'latest';
 const extractionResultsName = 'bubba-global-bonus-data.json';
 
 describe('Bubba Domain - Global Bonus Calculations', () => {
-  let extractionResults: any;
-  let gameData: Map<string, any>;
-  let bubba: Bubba;
+ let extractionResults: any;
+ let gameData: Map<string, any>;
+ let bubba: Bubba;
 
-  beforeAll(() => {
-    extractionResults = loadExtractionResults(extractionResultsName);
-    validateExtractionHealth(extractionResults);
-    gameData = loadGameDataFromSave(saveName);
-    bubba = gameData.get("bubba") as Bubba;
+ beforeAll(() => {
+  extractionResults = loadExtractionResults(extractionResultsName);
+  validateExtractionHealth(extractionResults);
+  gameData = loadGameDataFromSave(saveName);
+  bubba = gameData.get("bubba") as Bubba;
+ });
+
+ describe('All Global Bonuses', () => {
+  it('validates global bonus 1 (+{% Build Rate)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_1');
+   const domainBonus = bubba.getGlobalBonus(1);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
   });
 
-  describe('All Global Bonuses', () => {
-    it('validates global bonus 1 (+{% Build Rate)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_1');
-      const domainBonus = bubba.getGlobalBonus(1);
+  it('validates global bonus 2 (+{% Critter Gain)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_2');
+   const domainBonus = bubba.getGlobalBonus(2);
 
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 2 (+{% Critter Gain)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_2');
-      const domainBonus = bubba.getGlobalBonus(2);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 3 (+{% Soul Gain)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_3');
-      const domainBonus = bubba.getGlobalBonus(3);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 4 (+{% Total DMG)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_4');
-      const domainBonus = bubba.getGlobalBonus(4);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 5 (+{% All Kills)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_5');
-      const domainBonus = bubba.getGlobalBonus(5);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 6 ({% XP Multi)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_6');
-      const domainBonus = bubba.getGlobalBonus(6);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
-
-    it('validates global bonus 7 (-{% Atom Cost)', () => {
-      const liveBonus = getExtractedValue(extractionResults, 'global_bonus_7');
-      const domainBonus = bubba.getGlobalBonus(7);
-
-      expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-    });
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
   });
 
-  describe('Edge Cases', () => {
-    it('returns 0 for invalid bonus index', () => {
-      const domainBonus = bubba.getGlobalBonus(99);
-      expect(domainBonus).toBe(0);
-    });
+  it('validates global bonus 3 (+{% Soul Gain)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_3');
+   const domainBonus = bubba.getGlobalBonus(3);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
   });
+
+  it('validates global bonus 4 (+{% Total DMG)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_4');
+   const domainBonus = bubba.getGlobalBonus(4);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+  });
+
+  it('validates global bonus 5 (+{% All Kills)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_5');
+   const domainBonus = bubba.getGlobalBonus(5);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+  });
+
+  it('validates global bonus 6 ({% XP Multi)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_6');
+   const domainBonus = bubba.getGlobalBonus(6);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+  });
+
+  it('validates global bonus 7 (-{% Atom Cost)', () => {
+   const liveBonus = getExtractedValue(extractionResults, 'global_bonus_7');
+   const domainBonus = bubba.getGlobalBonus(7);
+
+   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+  });
+ });
+
+ describe('Edge Cases', () => {
+  it('returns 0 for invalid bonus index', () => {
+   const domainBonus = bubba.getGlobalBonus(99);
+   expect(domainBonus).toBe(0);
+  });
+ });
 });

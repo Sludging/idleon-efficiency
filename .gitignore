@@ -91,6 +91,8 @@ docs/GAME_CODE*
 
 ## Trash things to hide
 coverage-report.md
+coverage-report.html
+coverage-report.json
 test-analysis.md
 tsconfig.tsbuildinfo
 

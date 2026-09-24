@@ -68,10 +68,30 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 7. **Enhancement**: Add value-added features beyond basic game data display
 
 ### **Testing Strategy**
+
 - **Live Game Extraction Tests**: Jest suite in `tests/` validates domain calculations against values extracted from the running game client via a debug server
 - **Parameter-First**: Individual calculation inputs are tested before final composite calculations
 - **Visual Comparison**: Still required for UI and features not covered by automated tests
-- **Coverage Tracking**: `@testCovers` annotations + `yarn coverage:report` track which domain methods have tests
+- **Class Reference Inventory**: `scripts/domain-class-references.ts` inventories class declarations in editable `data/domain/**` and symbol references from `app/**`, `components/**`, and test files. A class counts when its class symbol or a declared member symbol is referenced; it does not classify core or parameter calculations.
+
+The top-level `excludedDomainDirectories` set near the top of
+`scripts/domain-class-references.ts` controls exclusions under `data/domain`.
+It currently contains `data`, `enum`, `model`, `base`, and `login`; maintainers
+add or remove top-level directory names there when exclusions change.
+
+All formats group classes into **both**, **UI-only**, **tests-only**, and
+**neither**, with entries grouped by implementation path:
+
+```bash
+yarn coverage:report                         # Markdown: coverage-report.md
+yarn coverage:report --format=markdown       # Markdown: coverage-report.md
+yarn coverage:report --format=html           # HTML: coverage-report.html
+yarn coverage:report --format=json           # JSON: coverage-report.json
+```
+
+The space-separated form is also accepted, for example
+`yarn coverage:report --format markdown`. HTML is standalone and human-readable,
+with collapsed references and search; JSON is machine-readable.
 
 See `docs/TESTING_IMPLEMENTATION.md` and `tests/README.md` for details.
 

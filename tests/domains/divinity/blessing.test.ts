@@ -4,7 +4,6 @@
  * Tests that given the correct input parameters, our domain calculates
  * the correct blessing bonus values.
  * 
- * @testCovers DivinityGod.getBlessingBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

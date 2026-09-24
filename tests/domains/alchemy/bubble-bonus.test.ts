@@ -4,13 +4,6 @@
  * Tests representative ordinary and special bubble bonuses against live game
  * data extracted from the running game.
  *
- * @testCovers Bubble.getBonus
- * @testCovers DiamonChefBubble.getBonus
- * @testCovers DailyDripBubble.getBonus
- * @testCovers CropiusMapperBubble.getBonus
- * @testCovers ImpactedBySlabBubble.getBonus
- * @testCovers ImpactedByTheTomeBubble.getBonus
- * @testCovers Alchemy.getBubbleBonusForKey
  */
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';

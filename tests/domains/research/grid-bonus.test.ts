@@ -7,17 +7,6 @@
  * The approved root is Better Button (index 125); the domain API remains
  * generic so downstream consumers can use other Research Grid bonuses.
  *
- * @testCovers ResearchGrid.getBonusForId
- * @testCovers ResearchGrid.getGridBonusAllmulti
- * @testCovers ResearchGridBonus.getBonus
- * @testCovers ResearchGridBonus.getBonusMode2
- * @testCovers SmartEyeResearchGridBonus.getBonusMode2
- * @testCovers CrownCountResearchGridBonus.getBonusMode2
- * @testCovers ObservationLevelResearchGridBonus.getBonusMode2
- * @testCovers OccurrenceCountResearchGridBonus.getBonusMode2
- * @testCovers AccountOptionResearchGridBonus.getBonusMode2
- * @testCovers GlimboTradesResearchGridBonus.getBonusMode2
- * @testCovers DivineDesignResearchGridBonus.getGridBonusAllmultiContribution
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

@@ -5,8 +5,6 @@
  * including the locked guard, factor-preserving default branch, and index 49
  * resource-layer calculation.
  *
- * @testCovers Hole.getSchematicBonus
- * @testCovers Schematic.getBonus
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

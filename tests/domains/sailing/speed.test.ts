@@ -1,7 +1,6 @@
 /**
  * Sailing Speed Calculation Tests
  * 
- * @testCovers Boat.getSpeedValue
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

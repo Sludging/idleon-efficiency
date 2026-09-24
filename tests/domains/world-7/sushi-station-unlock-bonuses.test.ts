@@ -4,8 +4,6 @@
  * Validates the reusable SushiStuff("RoG_BonusQTY", index, 0) calculation for
  * every current delivered-game caller index.
  *
- * @testCovers Sushi.getBonus
- * @testCovers SushiStation.getBonusFromIndex
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

@@ -2,51 +2,33 @@
 
 Testing approach that validates domain calculations against live game data extracted from running game.
 
-## Test Coverage Tracking
+## Automatic Domain Class Reference Report
 
-We use a **JSDoc-based annotation system** to track which domain methods are covered by tests.
+`scripts/domain-class-references.ts` inventories class declarations in editable
+`data/domain/**` and their symbol references from `app/**`, `components/**`, and
+test files. A class counts as referenced when its class symbol or one of its
+declared member symbols is referenced from a root. This is a symbol-reference
+inventory; it does not classify classes as core or parameter calculations.
 
-### How It Works
+The top-level `excludedDomainDirectories` set near the top of
+`scripts/domain-class-references.ts` controls which top-level directories under
+`data/domain` are excluded. It currently contains `data`, `enum`, `model`,
+`base`, and `login`; maintainers add or remove directory names there when the
+exclusion list changes.
 
-1. **Annotate tests with `@testCovers`:**
-   ```typescript
-   /**
-    * Cooking Domain - Meal Speed
-    * 
-    * Tests our cooking domain calculations against live game data.
-    *
-    * @testCovers Cooking.getTotalCookingSpeed
-    * @testCovers Kitchen.getMealSpeed
-    * @testCovers Kitchen.mealSpeed
-    */
-   describe('Cooking Domain - Meal Speed', () => {
-     // test code...
-   });
-   ```
+All formats group classes into **both**, **UI-only**, **tests-only**, and
+**neither**, and group entries by implementation path:
 
-2. **Generate coverage report:**
-   ```bash
-   yarn coverage:report
-   ```
-   This creates `coverage-report.md` showing:
-   - Which methods are tested (covered)
-   - Which methods lack tests (gaps)
-   - Coverage percentage
-   - Ignored methods (utility functions, imports, etc.)
+```bash
+yarn coverage:report                         # Markdown: coverage-report.md
+yarn coverage:report --format=markdown       # Markdown: coverage-report.md
+yarn coverage:report --format=html           # HTML: coverage-report.html
+yarn coverage:report --format=json           # JSON: coverage-report.json
+```
 
-3. **Configure ignore list:**
-   Edit `coverage-config.json` to exclude methods that don't need testing:
-   ```json
-   {
-     "domains": ["starsigns", "voting"],
-     "methods": ["*.getImageData", "*.init"],
-     "patterns": ["*.*Image*"]
-   }
-   ```
-
-### Current Coverage
-
-Run `yarn coverage:report` to see the latest metrics.
+The command also accepts the space-separated form, for example
+`yarn coverage:report --format markdown`. HTML is a standalone, human-readable
+report with collapsed references and search; JSON is machine-readable.
 
 ## Documentation
 

@@ -13,7 +13,7 @@
     "test:coverage": "jest --coverage",
     "test:domains": "jest domains/",
     "test:integration": "jest integration/",
-    "coverage:report": "tsx scripts/coverage.ts"
+    "coverage:report": "tsx scripts/domain-class-references.ts"
   },
   "dependencies": {
     "@next/third-parties": "16.1.7",

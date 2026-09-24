@@ -4,10 +4,6 @@
  * Tests Fountain marble and total bonuses across all water types, zero and
  * non-zero upgrade levels, both marbleization branches, and varied factors.
  *
- * @testCovers Hole.getFountainBonus
- * @testCovers Fountain.getBonus
- * @testCovers FountainUpgrade.getMarbleBonus
- * @testCovers FountainUpgrade.getBonus
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

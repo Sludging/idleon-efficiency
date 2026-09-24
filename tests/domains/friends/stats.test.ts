@@ -5,7 +5,6 @@
  * stat unassigned. The assertions cover those seven visible stat values,
  * including the zero value for the unassigned stat.
  *
- * @testCovers Friends.getFriendBonus
  */
 
 import {

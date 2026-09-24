@@ -3,7 +3,6 @@
  *
  * Tests the dynamic Jewel bonus calculation against the delivered game formula.
  *
- * @testCovers Jewel.getBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';

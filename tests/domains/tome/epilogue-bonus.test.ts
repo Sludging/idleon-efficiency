@@ -1,7 +1,6 @@
 /**
  * Tome epilogue bonus calculation tests.
  *
- * @testCovers Tome.getEpilogueBonus
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue, ExtractionResults } from '../../utils/live-game-data-loader';

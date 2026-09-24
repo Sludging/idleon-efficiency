@@ -4,8 +4,6 @@
  * Validates representative Bravery, Justice, and Wisdom monument bonuses,
  * including self multipliers and both delivered calculation branches.
  *
- * @testCovers Hole.getMonumentBonus
- * @testCovers MonumentBonus.getBonus
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';

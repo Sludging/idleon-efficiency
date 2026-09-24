@@ -1,8 +1,6 @@
 /**
  * Tome score calculation tests.
  *
- * @testCovers TomeLine.getLineMultiplyer
- * @testCovers TomeLine.getPlayerScore
  */
 
 import {

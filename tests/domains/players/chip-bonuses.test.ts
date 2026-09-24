@@ -5,7 +5,6 @@
  * equipped chips to Player. This does not cover other characters or equipment
  * changes; nonzero toteff coverage is deferred at the human's direction.
  *
- * @testCovers Player.getChipBonus
  */
 import { ExtractionResults, loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
@@ -16,35 +15,35 @@ const extractionResultsName = 'player-chip-bonuses-data.json';
 
 // Numeric effects and enabling contributions use the same equipped-chip producer.
 const chipBonusSelectors = [
-  'def', 'move', 'acc', 'dr', 'atkspd', 'labexp', 'linewidth', 'fafk',
-  'safk', 'crys', 'resp', 'toteff', 'dmg', 'eff', 'mkill', 'star',
-  'troph', 'key1', 'pend', 'weppow', 'card1', 'card2', '__missing_chip_bonus__',
+ 'def', 'move', 'acc', 'dr', 'atkspd', 'labexp', 'linewidth', 'fafk',
+ 'safk', 'crys', 'resp', 'toteff', 'dmg', 'eff', 'mkill', 'star',
+ 'troph', 'key1', 'pend', 'weppow', 'card1', 'card2', '__missing_chip_bonus__',
 ];
 
 describe('Player Domain - Chip Bonuses', () => {
-  let extractionResults: ExtractionResults;
-  let player: Player & { getChipBonus?: (stat: string) => number };
+ let extractionResults: ExtractionResults;
+ let player: Player & { getChipBonus?: (stat: string) => number };
 
-  beforeAll(() => {
-    extractionResults = loadExtractionResults(extractionResultsName);
-    validateExtractionHealth(extractionResults);
-    const gameData = loadGameDataFromSave(saveName);
-    const players = gameData.get('players') as Player[];
-    player = getTargetPlayer(players);
+ beforeAll(() => {
+  extractionResults = loadExtractionResults(extractionResultsName);
+  validateExtractionHealth(extractionResults);
+  const gameData = loadGameDataFromSave(saveName);
+  const players = gameData.get('players') as Player[];
+  player = getTargetPlayer(players);
+ });
+
+ chipBonusSelectors.forEach(stat => {
+  it(`matches the equipped-chip ${stat} contribution for player ${TARGET_PLAYER_INDEX}`, () => {
+   const liveValue = getExtractedValue(extractionResults, `chip_bonus_${stat}`);
+   if (typeof player.getChipBonus !== 'function') {
+    throw new Error(`MISSING OWNER API - Player.getChipBonus("${stat}") must expose chipBonuses("${stat}")`);
+   }
+   const domainValue = player.getChipBonus(stat);
+
+   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
+    tolerance: 0,
+    context: `Player ${player.playerID} chip contribution ${stat}; equipped chips: ${player.labInfo.chips.map(slot => slot.chip?.index ?? -1).join(', ')}`,
+   });
   });
-
-  chipBonusSelectors.forEach(stat => {
-    it(`matches the equipped-chip ${stat} contribution for player ${TARGET_PLAYER_INDEX}`, () => {
-      const liveValue = getExtractedValue(extractionResults, `chip_bonus_${stat}`);
-      if (typeof player.getChipBonus !== 'function') {
-        throw new Error(`MISSING OWNER API - Player.getChipBonus("${stat}") must expose chipBonuses("${stat}")`);
-      }
-      const domainValue = player.getChipBonus(stat);
-
-      expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
-        tolerance: 0,
-        context: `Player ${player.playerID} chip contribution ${stat}; equipped chips: ${player.labInfo.chips.map(slot => slot.chip?.index ?? -1).join(', ')}`,
-      });
-    });
-  });
+ });
 });
