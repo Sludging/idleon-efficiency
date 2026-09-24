@@ -326,13 +326,13 @@ const postProcessingMap: Record<string, Function> = {
     // Hat Rack consumes settled Minehead, companion, Event Shop and Sushi state.
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
+    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
-    "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
 }
 
 // I really really hate this.
