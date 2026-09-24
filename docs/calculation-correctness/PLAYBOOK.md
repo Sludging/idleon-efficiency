@@ -9,7 +9,7 @@ Ensure the selected domain/aspect produces correct game results through an inter
 - A **domain** is a backend area, such as Cooking or Research.
 - An **aspect** is one named calculation within a domain. It covers that calculation's supported inputs and behavior; a single bonus, index, or failing value remains part of the aspect.
 - A **case** is one selected domain/aspect tracked by a GitHub issue. Its implementation may be correct, wrong, or missing.
-- A **dependency** is another domain/aspect calculation used by the selected aspect. A missing or incorrect dependency can block the case.
+- A **dependency** is another domain/aspect calculation used directly by the selected aspect.
 
 Delivered game code defines the formula, conditions, and operation order. Extracted game values provide expected test results. Domain code is the implementation being tested; the Wiki can help explain player-facing meaning. The [testing guide](../TESTING_IMPLEMENTATION.md) defines core tests, parameter tests, and branches, with examples.
 
@@ -78,15 +78,15 @@ During this stage, write tests and extraction config, not domain code. The coord
 | Result | Next step |
 | --- | --- |
 | `EXTRACTION_NEEDED`: config changed or human requested extraction | Run the extraction procedure below, then resume tests. |
-| `TESTS_READY`: core test fails or selected implementation is missing; parameter tests pass | Accept the tests-stage result and assign implementation. |
-| `TESTS_READY`: core and parameter tests pass | Assign review of the existing behavior and test coverage. |
-| `BLOCKED`: missing or incorrect dependency, missing WikiBot fact, or external prerequisite | Record the blocker and resume condition; follow the dependency procedure where applicable. |
+| `TESTS_READY`: core test fails or selected implementation is missing; all direct parameter comparisons pass | Accept the tests-stage result and assign implementation. |
+| `TESTS_READY`: core and all direct parameter comparisons pass | Assign review of the selected behavior and test coverage. |
+| `BLOCKED`: a direct parameter comparison fails, or a missing website result prevents that comparison; missing WikiBot fact or external prerequisite | Record the blocker and resume condition; follow the dependency procedure where applicable. |
 | Setup or extraction error prevents the selected tests from running | Address a clear test/config problem in the tests stage; report an external prerequisite to the human. |
 | `NEEDS_HUMAN`: game meaning, scope, or which aspect implements a calculation is unclear | Ask the question and pause. |
 | Domain changes preceded the tests-stage approval, or the order cannot be established at review | Record what is known and ask the human how to proceed. |
 | `REPORT`: stage is incomplete | Use the reported progress to continue the same stage, narrow the next task, or ask the human. |
 
-Implementation requires an approved plan, a selected calculation failure, and passing parameter tests. When parameter tests fail, keep those failures visible and handle the dependency first.
+Implementation requires an approved plan, a selected calculation failure, and passing direct parameter comparisons.
 
 ### 5. Implement and review
 
@@ -120,7 +120,7 @@ Use new results after the command succeeds. The batch refreshes the save and val
 
 ## Dependencies and WikiBot
 
-For a missing or failing dependency, identify the full named calculation that needs separate work. Record its game call, domain location or missing status, and parameter-test result. The failing call explains why the case is needed; its particular index or value does not define the new case's scope. Ask the human when the calculation boundary or owning domain/aspect is unclear.
+Investigate a dependency when its direct parameter comparison fails or its website result is missing, preventing comparison. A passing comparison ends dependency work for this case. Record the named calculation, game call, domain location or missing status, and observed test result. The failing call explains why a separate case is needed; its particular index or value does not define that case's scope. Ask the human when the calculation boundary or owning domain/aspect is unclear.
 
 For example, a failing `getEpilogueBonus(1)` comparison leads to **Correctness: Tome — epilogue bonus**. Record index 1 as the observed failure, while the case addresses the epilogue bonus calculation across its supported bonus indices and conditions. Other Tome calculations, such as score, remain separate dependencies.
 

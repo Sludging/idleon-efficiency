@@ -16,7 +16,7 @@ Static data and trivial helpers are not parameter-test targets. Calculations use
 
 A **branch** is a condition that changes the selected calculation's behavior, such as using a different formula or returning zero until an unlock. Changing an index is not by itself a new branch: check whether the game applies a different rule or the same rule to another value.
 
-Core tests check the selected result; parameter tests help distinguish an error in that result from an error in a calculation it uses. Passing parameter tests are useful results, not failures that need to be created for test-first work.
+Core tests check the selected result; parameter tests help distinguish an error in that result from an error in a calculation it uses. Passing direct parameter tests are useful results, not failures to create for test-first work; under the [playbook dependency boundary](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot), they end producer investigation for this case.
 
 The [real examples below](#examples-from-existing-tests) show these distinctions in Tome and Cooking tests.
 
@@ -38,7 +38,7 @@ In a supervised correctness case, follow the [plan approval step](calculation-co
 
 ## Compare the same game state
 
-The batch command refreshes `tests/fixtures/saves/latest.json` and writes extracted values under `tests/results/`. Use that save and its corresponding results together. Existing files can be reused while the config is unchanged. Keep test state based on the real save; do not manufacture save values or derive expected results from domain code.
+The batch command refreshes `tests/fixtures/saves/latest.json` and writes extracted values under `tests/results/`. Use that save and its corresponding results together. Existing files can be reused while the config is unchanged. Keep test state based on the real save; do not manufacture save values, simulate hypothetical branches, or derive expected results from domain code.
 
 Use these existing matchers:
 
@@ -65,12 +65,12 @@ State which values and branches the real save exercises. If a needed behavior ca
 
 | Result | What it establishes and what follows |
 | --- | --- |
-| Core test fails; parameter tests pass | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
-| A parameter test fails or its calculation is missing | A calculation used by the selected aspect needs separate work. Keep its failing comparison and report the dependency. |
-| Core and parameter tests pass | The existing behavior passes these comparisons. Proceed to review of the result and coverage. |
+| Core test fails; all direct parameter tests pass | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
+| A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing producer comparison ends its investigation for this case. |
+| Core and all direct parameter tests pass | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
 | Setup fails before the selected assertions run | No calculation result was checked. Address a clear test/config problem or report the external prerequisite. |
 
-For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. If it is the selected calculation, that failure can support implementation after the tests-stage approval. If it is another aspect's calculation, preserve the failing parameter test while that dependency is handled.
+For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. If it is the selected calculation, that failure can support implementation after the tests-stage approval. If it is a directly used calculation, treat it as a dependency only when its website result is missing and the parameter comparison therefore cannot be made; a passing comparison does not invite upstream investigation.
 
 Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. A documented non-zero tolerance is an exception only when the preceding rule is satisfied; it must describe the known semantic mismatch rather than conceal an unexplained failure. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
 

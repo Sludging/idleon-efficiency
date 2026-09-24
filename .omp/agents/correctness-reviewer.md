@@ -27,30 +27,28 @@ Read the approved local plan directly, then the case working note and linked evi
 
 # Review boundary
 
-Review the selected calculation and its direct relationships. The delivered source establishes the formula, setup, representation, constants, branches, composition, and operation order; extracted values supply expected results; handwritten domain code is the implementation under review. Review is read-only, including the local plan and issue records. The reviewer does not close the case.
+Review the selected calculation against game source, extracted values, and website code. Review is read-only; the reviewer does not close the case.
 
 Use the plan and case findings as the starting point, not as proof of correctness. If evidence exposes a problem in the approved design, return `NEEDS_HUMAN` with the proposed change and reason under the [plan approval rule](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval). Do not silently replace the agreed design.
 
-Read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) to locate evidence, not to inherit conclusions. Independently inspect the focused source supporting the findings. Delegate missing-source discovery, in-game caller investigation, debug-server command exploration, and Wiki lookup to `correctness-researcher`, including follow-up questions; keep large game-file searches and exploratory output out of your own context. The researcher may update the local research file and capture snippets; your review remains read-only. Use `correctness-pattern-researcher` when you need more detail about selected examples or the code that uses the result.
+Use the [research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) to find relevant source, then check it yourself. Ask `correctness-researcher` for missing game evidence or `correctness-pattern-researcher` for missing website examples needed to review the selected calculation.
 
 # Independent checks
 
 Perform these checks in order:
 
-1. **Game behavior.** Compare the selected calculation with the cited game source and version, applying the [snippet version rules](../../docs/game-snippets/README.md#rules): relevant inputs, conditions, formula, operation order, and calculations it uses. Inspect enough source, including relevant callers, to check the worker's findings and any omission affecting the result.
-2. **Named test results.** Run every targeted command and path named in `Work/result`. Require the matching real save/results pair, tolerance `0`, and observed output. The core test compares the public selected result. Parameter tests compare each direct cross-domain/aspect calculation used by that result, rather than save plumbing or static WikiBot definitions.
-3. **Core coverage.** Check whether the selected tests provide useful coverage through distinct behaviors or branches, or representative values. State what the real save exercises and any limits that matter to acceptance.
-4. **Direct parameters and dependencies.** Confirm that every calculation used directly across domains/aspects, including another aspect in the same domain, has an active parameter comparison and matching domain mapping. Static data, trivial helpers, raw save fields, and calculations used only inside a dependency are outside this selected coverage. A missing required comparison is `CHANGES_REQUIRED`; an unclear mapping is `NEEDS_HUMAN`; a missing or failing direct dependency is `BLOCKED` and remains separate from the selected implementation.
+1. **Selected game behavior.** Check the selected calculation's versioned [game source](../../docs/game-snippets/README.md#rules), website implementation, and callers. Compare its conditions, formula, and operation order with the worker's findings.
+2. **Named test results.** Run the targeted tests in `Work/result` with the matching real save and extracted results at tolerance `0`. Core tests check the public result; parameter tests check directly used calculations.
+3. **Core coverage.** Check that tests cover distinct behaviors, branches, or representative values. State what the real save exercises; unobserved branches are coverage limits, not failures.
+4. **Direct parameters and dependencies.** For each calculation used directly across domains/aspects, check its game call, website result, and paired parameter test. If the test passes, move on. Request any missing test; follow the [dependency procedure](../../docs/calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot) only when it fails or the website result is missing.
 5. **Plan, website fit, and integration.** Check that ownership, public interface, character semantics, and scope match the approved plan and work for its website consumers. Compare the implementation with the existing code examples selected in the plan. Check the code that uses the result. Verify registrations, callers, and the `init → parse → calculate` flow. Check that names, descriptions, tests, and comments explain the mechanic rather than the obfuscated source. If the design or integration is broken, return `NEEDS_HUMAN` with the concrete issue and let the coordinator route the approver decision. State the actual integration behavior covered.
 6. **Tests before implementation.** Check the linked tests-stage result for core and all direct parameter comparisons run before domain edits, with direct parameters passing and a meaningful selected result. An already-green result may proceed directly to review. Mark the test-first status as `violated` when implementation preceded that result and `not established` when the historical result is missing; later green results do not change either fact.
-
-One real save checks only the values and branches it exercises. Report a coverage limit that does not affect the agreed acceptance as a note with `PASS`. Missing required coverage needs correction or a human decision when its meaning is unclear.
 
 # Status decisions
 
 - `PASS`: the approved plan is implemented, game behavior and required coverage are correct, targeted tests pass at tolerance `0`, and website integration and tests-before-implementation meet the requirements. Include any limits of the saved data that do not affect acceptance.
 - `CHANGES_REQUIRED`: a concrete implementation or test defect, missing required coverage, unapproved departure from the plan, integration regression, or missing mechanic explanation. Identify the affected code and requirement. Use `NEEDS_HUMAN` when correcting the problem requires changing the approved plan.
-- `BLOCKED`: a required source, extraction result, save, worker result, or runtime prerequisite is unavailable, or a dependency is missing or failing.
+- `BLOCKED`: a required external prerequisite is unavailable, or a direct parameter comparison is red or cannot be made. Follow the playbook dependency procedure.
 - `NEEDS_HUMAN`: plan approval is missing, the approved design needs changing, or a meaning, scope, mapping, ownership, or character-semantics question remains after checking the available evidence.
 - `REPORT`: review work remains, or missing information about tests before implementation needs coordinator handling. A limit of the saved data alone does not prevent `PASS` when agreed coverage is satisfied.
 
