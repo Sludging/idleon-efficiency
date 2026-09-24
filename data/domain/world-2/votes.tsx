@@ -1,5 +1,5 @@
 import { Domain, RawData } from "../base/domain";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { Equinox } from "../world-3/equinox";
 import { Item } from "../items";
 import { Hole } from "../world-5/hole/hole";
@@ -10,10 +10,12 @@ import { initVoteBonusRepo, VoteBonusBase } from "../data/VoteBonusRepo";
 import { VoteBonusModel } from "../model/voteBonusModel";
 import { Meritocraty } from "../world-7/meritocraty";
 import { Gaming } from "../world-5/gaming";
+import { SushiStation } from "../world-7/sushi";
 
 export class Votes extends Domain {
     multiFromBonuses: number = 0;
     multiFromMeritocraty: number = 0;
+    multiFromCompanion161: number = 0;
 
     bonuses: VoteBonus[] = [];
     currentBonusIndex: number = 0;
@@ -73,7 +75,10 @@ export class Votes extends Domain {
     }
 
     getBonusMultiplier = () => {
-        return (1 + this.multiFromMeritocraty / 100) * (1 + this.multiFromBonuses / 100);
+        // Keep Poppy, Meritocracy, and the additive vote bonuses as separate factors in game order.
+        return (1 + this.multiFromCompanion161 / 100)
+            * (1 + this.multiFromMeritocraty / 100)
+            * (1 + this.multiFromBonuses / 100);
     }
 }
 
@@ -87,11 +92,10 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const eventShop = data.get("eventShop") as EventShop;
     const meritocraty = data.get("meritocraty") as Meritocraty;
     const gaming = data.get("gaming") as Gaming;
+    const sushi = data.get("sushi") as SushiStation;
 
-    const companion41 = companions.find(companion => companion.id == 41);
-    const multiFromCompanion41 = companion41?.owned || false ? companion41.data.bonus : 0;
-    const companion19 = companions.find(companion => companion.id == 19);
-    const multiFromCompanion19 = companion19?.owned || false ? companion19.data.bonus : 0;
+    const multiFromCompanion161 = getCompanionActiveBonus(companions, 161);
+    const multiFromCompanion41 = getCompanionActiveBonus(companions, 41);
     const multiFromDream13 = (equinox.upgrades[11]?.getBonus() ?? 0);
     const multiFromHoleCosmo = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 24)?.getBonus() ?? 0;
     const multiFromSUmmoningWinningBonus22 = summoning.summonBonuses.find(bonus => bonus.index == 22)?.getBonus() ?? 0;
@@ -99,11 +103,15 @@ export const updateVotesBonus = (data: Map<string, any>) => {
     const multiFromEventShop16 = eventShop.isBonusOwned(16) ? 13 : 0;
     const multiFromGamingPalette32 = gaming.getPaletteBonus(32);
     const multiFromLegendTalents22 = legendTalents.getBonusFromIndex(22);
+    const multiFromCompanion19 = getCompanionActiveBonus(companions, 19);
+    // RoG_BonusQTY(50, 0) returns Sushi 50's unlock bonus only after 51 unique Sushi are unlocked.
+    const multiFromSushi50 = sushi.getUniqueSushi() > 50 ? sushi.getBonusFromIndex(50) : 0;
+    votes.multiFromCompanion161 = multiFromCompanion161;
+    votes.multiFromBonuses = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16
+        + multiFromCompanion19 + multiFromGamingPalette32 + multiFromLegendTalents22 + multiFromSushi50;
+
 
     const multiFromMeritocraty9 = meritocraty.getCurrentBonus(9);
-
-    votes.multiFromBonuses = multiFromCompanion41 + multiFromDream13 + multiFromHoleCosmo + multiFromSUmmoningWinningBonus22 + multiFromEventShop7 + multiFromEventShop16 
-        + multiFromCompanion19 + multiFromGamingPalette32 + multiFromLegendTalents22;
     votes.multiFromMeritocraty = multiFromMeritocraty9;
 
     return votes;
