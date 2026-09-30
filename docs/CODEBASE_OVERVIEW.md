@@ -32,7 +32,7 @@ The website provides comprehensive tracking and optimization tools for virtually
 ## **Architecture Patterns**
 - **Domain-Driven Design**: Each game system has its own domain class in `data/domain/`
 - **Three-Phase Data Pipeline** (see `idleonData.tsx`):
-  1. **Init** — One-time setup of domain instances and static game data
+  1. **Init** — Set up domain instances and static game data
   2. **Parse** — Extract raw data from cloud save (no cross-domain access, no calculations)
   3. **Calculate** — Compute values in strict dependency order (cross-domain access allowed)
 - **Real-time Updates**: Firebase integration for live game data sync
@@ -58,6 +58,8 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 
 ## **Development Workflow**
 
+
+Before backend architecture or implementation work, use the [implementation patterns guide](agents/implementation-patterns.md) to select applicable examples and aspects. Use its UI route only when planning or changing UI.
 ### **Adding New Features**
 1. **Data Sync**: Pull latest game data from WikBot project using sync command
 2. **Code Analysis**: Manually inspect minified game source code for target feature
@@ -144,5 +146,5 @@ See `docs/TESTING_IMPLEMENTATION.md` and `tests/README.md` for details.
 - Always use TypeScript for new code
 - Prefer NextJS App Router patterns for new pages
 - Use Yarn instead of npm for package management
-- Use Grommet UI components for new UI elements (existing convention)
+- Use the UI patterns named in the [implementation patterns guide](agents/implementation-patterns.md) for new UI work.
 - Never assume or guess game mechanics - always verify against the actual game 

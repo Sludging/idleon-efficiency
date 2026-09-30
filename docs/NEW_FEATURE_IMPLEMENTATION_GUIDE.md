@@ -4,6 +4,17 @@
 
 This guide provides a systematic approach for implementing new game features in the IdleOn Efficiency codebase. Follow these steps to ensure proper integration with existing systems and maintain code quality standards.
 
+## Planning a Page for a Calculation-Ready Domain
+
+Use this plan for a page built on an existing domain. An existing domain does not need its implementation repeated.
+
+1. **Set the player goal and scope.** State what the player needs to do or learn, and what is out of scope.
+2. **Check the data.** Identify existing domain values that support the page and any missing calculations or inputs. Investigate game evidence only for calculations you add, change, or cannot confirm; see [testing guidance](TESTING_IMPLEMENTATION.md).
+3. **Choose the presentation.** Use applicable examples from the [implementation patterns guide](agents/implementation-patterns.md). Record page behavior choices those examples do not cover.
+4. **Plan runtime checks.** Name the important save states and interactions to verify in the running page, including a narrow screen. Consult [asset guidance](runbooks/sync-game-assets.md) if needed.
+
+Continue to the implementation steps below only where they apply to the planned work. Keep UI checks distinct from game-calculation verification.
+
 ## Prerequisites (Information Required from Developer)
 
 Before beginning implementation, gather the following information from the developer:
@@ -19,7 +30,7 @@ Before beginning implementation, gather the following information from the devel
 - **Asset names**: What are the correct image location names for UI assets?
 
 ### 3. Feature Similarity and UI Requirements
-- **Similar features**: Is there an existing feature this should be modeled after?
+- **Pattern selection**: Use the implementation patterns guide to choose applicable examples and name the aspects that fit; record any uncovered choices or conflicts for resolution as described there.
 - **Navigation placement**: Under which main navigation section should this appear?
 - **Route structure**: What should the page URL/routing structure be?
 
@@ -33,9 +44,7 @@ Before beginning implementation, gather the following information from the devel
 
 ### 1. Create Domain Class (`data/domain/[feature].tsx`)
 
-**Key considerations based on feature similarity:**
-- If modeling after an existing feature, copy the pattern from that domain
-- If not, create a skeleton as a starting point we can iterate on.
+**Use only the selected aspects of existing examples.** The implementation patterns guide identifies applicable backend and UI examples and boundaries; do not treat a whole feature as a template or create a skeleton in place of resolving the required design.
 
 **Implementation steps:**
 - Create main feature class extending `Domain`
@@ -88,11 +97,35 @@ Before beginning implementation, gather the following information from the devel
 ## Implementation Guidelines
 
 ### Development Workflow
-1. **Confirm prerequisites**: Ensure all required information is available
-2. **Identify similar features**: Use existing patterns when possible
-3. **Implement domain logic**: Start with core calculations and data parsing
-4. **Create UI components**: Build user interface following existing patterns
+1. **Confirm prerequisites**: Verify repository and game evidence needed for the scoped work.
+2. **Select applicable examples**: Use the implementation patterns guide and name relevant aspects.
+3. **Implement domain logic**: Start with core calculations and data parsing.
+4. **Create UI components**: Follow the selected UI aspects when UI work is in scope.
 5. **Add automated tests**: Implement live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
+
+### Verify a page with your IdleOn save
+
+Use OMP’s browser in JavaScript Eval when verification needs the save loaded in Chrome. The headless browser has separate browser data.
+
+The relay uses existing Chrome tabs; it does not create a new one. Open or duplicate an IdleOn tab in Chrome and load the save. Use a dedicated tab so verification does not change your working tab. The feature route does not need to be open yet.
+
+Attach to the existing tab using a unique part of its current URL or title. `app.target` matches existing tabs, so leave out `url` when opening:
+
+```js
+const tab = await browser.open({
+  name: "idleon-check",
+  app: { relay: true, target: "<unique part of the tab's URL or title>" },
+});
+
+try {
+  await tab.goto("https://localhost:3000/<feature-route>");
+  // Verify the page in the running app.
+} finally {
+  await tab.close();
+}
+```
+
+`tab.close()` releases OMP’s attachment but leaves the Chrome tab open. If the relay cannot connect, run `omp browser-relay` in WSL and confirm the Chrome extension is connected.
 
 ### Blocked Dependencies
 

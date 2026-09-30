@@ -26,7 +26,7 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 2. **Locate the domain code and tests.** Match each game calculation to the domain method and test that check it, or record that the implementation is missing. Ask the human if the meaning or owning domain/aspect is unclear.
 3. **Choose extraction values.** Each core or parameter comparison needs an entry in `tests/configs/`. Use the game function and arguments, or game value, used by the selected calculation. Each entry should support a comparison.
 4. **Obtain any new expected values.** Add or correct config entries for required values not yet configured, then request extraction. With unchanged config and usable results, continue with the existing save and results. Extraction also runs when the human requests it.
-5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code. Missing calculations should produce explicit failures.
+5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code. A missing calculation should produce an explicit failure while it is unimplemented; after implementation, tests call its typed public API directly.
 
 The [extraction helper guide](../tests/helpers/README.md) explains runtime prerequisites, the active-player requirement, config/output formats, and the batch command:
 
@@ -36,9 +36,23 @@ node tests/helpers/extract-all-game-data.js
 
 In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval) before changing tests or extraction configs. Use the approved scope and interface. The coordinator runs extraction and returns the result to the worker. Use new results after the command succeeds. For a technical failure with unchanged valid config, report the concrete error and any human action needed.
 
-## Compare the same game state
+## Keep tests tied to the real save
 
-The batch command refreshes `tests/fixtures/saves/latest.json` and writes extracted values under `tests/results/`. Use that save and its corresponding results together. Existing files can be reused while the config is unchanged. Keep test state based on the real save; do not manufacture save values, simulate hypothetical branches, or derive expected results from domain code.
+Use only the current real save and its matching extracted game values. Tests exercise that saved state; do not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save actually exercises, and raise an uncovered behavior as a coverage question rather than inventing test data.
+
+Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
+
+Write the completed test against the typed public API directly and assert the calculated result. If an implementation is missing during the tests stage, temporary failure scaffolding may identify the missing calculation and game signature. Remove that scaffolding once the implementation exists: do not retain `typeof`/`in` guards, `unknown` casts, or `.call` wrappers around an implemented API.
+
+Choose indices because they represent a game concept or scenario, and explain why they are selected. Descriptions should say what gameplay effect is compared and what website result would be wrong; keep obfuscated game identifiers and extraction mappings separately for traceability. Assert calculation results, not incidental save or object representation. Cover distinct behaviors and representative inputs rather than repeating aliases of the same path; a small exhaustive set is useful when the set itself is small and justified.
+
+### Positive patterns
+
+- **Core result:** compare the application's populated public result with the extracted game value for the same save. For example, the Cooking meal-speed test compares the kitchen's calculated `mealSpeed` with the matching `CookingR / CookingSPEED` extraction. Describe this as the kitchen's meal speed, not as a test of an obfuscated function name.
+- **Direct parameter:** compare a directly used calculation via its public typed method or property with its own extracted game value. The Tome Grimoire-bonus and Cooking meal-bonus examples below show separate parameter comparisons, including a same-domain parameter.
+- **Meaningful selection:** name the selected index by its gameplay role or observed state, and explain why it exercises a relevant behavior. The Tome example below checks locked and unlocked bonuses using one real saved state; it does not claim to cover every unlock transition.
+
+Keep the extraction key, exact game call, and domain mapping in the config/test wiring for traceability. The test description should remain understandable as a statement about the player-facing mechanic and the result the website calculates.
 
 Use these existing matchers:
 
@@ -56,10 +70,11 @@ The default tolerance is zero. A selected comparison may use a non-zero toleranc
 - explained with the game source, the domain contract, and the reason the comparison remains useful;
 - active, so differences outside the documented bound still fail.
 
-Do not use `test.failing`, `skip`, or a broad tolerance to suppress a suspected calculation error. Revisit the bound when the game version, caller context, or domain semantics change.
+For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. This is temporary failure scaffolding for an unimplemented API; once implemented, call the typed public API directly and remove the missing-method guards and wrappers. If the selected calculation is missing, that failure can support implementation after the tests-stage approval. If a directly used calculation is missing, treat it as a dependency only when its website result is missing and the parameter comparison therefore cannot be made; a passing comparison does not invite upstream investigation.
 
+Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. A documented non-zero tolerance is an exception only when the preceding rule is satisfied; it must describe the known semantic mismatch rather than conceal an unexplained failure. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
 
-State which values and branches the real save exercises. If a needed behavior cannot be observed with the available data, ask the human about coverage rather than claiming it was tested.
+After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0`, except for a named, source-backed non-zero tolerance documented under the preceding rule. New test/config needs return through the tests stage before further domain changes.
 
 ## Read the test results
 

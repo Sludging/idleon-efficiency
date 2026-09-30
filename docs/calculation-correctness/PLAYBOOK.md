@@ -152,6 +152,8 @@ The coordinator links the research path in assignments and the Case working note
 
 During planning, ask `correctness-pattern-researcher` to find existing code before adding or changing domains, classes, saved-data handling, or public methods. Give the helper the proposed change and the questions you need answered. A formula correction that keeps the same code structure and public methods does not need a helper call.
 
+For backend implementation choices, use the [implementation patterns guide](../agents/implementation-patterns.md) to select named examples and aspects. For UI choices, use its UI route only when the correctness change includes UI planning or changes. Resolve uncovered choices and conflicts using the guide's selection policy.
+
 ## Shared case working note
 
 Maintain one issue comment headed **Case working note** with the current information needed to continue:

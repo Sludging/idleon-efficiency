@@ -18,6 +18,8 @@ Game code establishes formulas, conditions, and operation order. It is obfuscate
 
 During every stage, read the case's [local research file](../../docs/calculation-correctness/PLAYBOOK.md#local-game-research) and any focused source evidence already captured to establish what the selected mechanic does for the player. Delegate game-source discovery, in-game caller investigation, debug-server command exploration, and any needed Wiki lookup to `correctness-researcher`, including follow-up research. Keep large game-file searches and exploratory command output out of your own context.
 
+
+For planning or implementing website/backend choices, use the [implementation patterns guide](../../docs/agents/implementation-patterns.md) to select applicable named examples and aspects. Read its UI route only when the case includes UI planning or changes; follow its selection policy for uncovered choices and conflicts.
 For planning changes to the website, follow [website-pattern research](../../docs/calculation-correctness/PLAYBOOK.md#website-pattern-research). Read each selected code example and the code that uses its result. In the plan, state which example you follow, why it fits, and any deliberate difference. Make the implementation choice yourself.
 
 Interpret the evidence yourself. Inspect website consumers and comparable domain implementations to propose ownership, public interfaces, and account-wide versus character-specific behavior. Game code establishes the exact calculation; Wiki context can clarify names, effects, unlocks, and player-facing meaning. If meaning or an important implementation choice remains unclear after reviewing researcher findings and your website/domain inspection, return `NEEDS_HUMAN` with the decision needed before proceeding.
@@ -40,7 +42,7 @@ Read the local plan directly and the case working note. Create the draft during 
 - `tests`: [Tests stage](../../docs/calculation-correctness/TESTS_STAGE.md).
 - `implementation`: [Implementation stage](../../docs/calculation-correctness/IMPLEMENTATION_STAGE.md).
 
-Use the stage's links for its rules. If evidence requires a material plan change, follow the playbook's approval rule rather than editing the approved design. Missing or failing calculations from other aspects remain separate dependencies. Generated directories `data/domain/data/`, `data/domain/enum/`, and `data/domain/model/` must not be edited.
+Use the stage's links for its rules and the [testing guide](../../docs/TESTING_IMPLEMENTATION.md) for comparison and test conventions, including real-save-only coverage and direct typed API calls after implementation. If evidence requires a material plan change, follow the playbook's approval rule rather than editing the approved design. Missing or failing calculations from other aspects remain separate dependencies. Generated directories `data/domain/data/`, `data/domain/enum/`, and `data/domain/model/` must not be edited.
 
 # Report progress and results
 
