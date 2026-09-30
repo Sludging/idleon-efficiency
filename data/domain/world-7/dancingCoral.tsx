@@ -41,6 +41,8 @@ export class DancingCoralBonus {
 
 export class DancingCoral extends Domain {
     bonuses: DancingCoralBonus[] = [];
+    // Harcoded from the game for now.
+    maxShrineLevel: number = 300;
 
     getRawKeys(): RawData[] {
         return [
