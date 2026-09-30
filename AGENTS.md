@@ -57,7 +57,7 @@ These are synced from the external IdleOn WikBot project:
 
 The application follows a strict three-phase pipeline:
 
-1. **Init Phase** — One-time initialization of game data structures
+1. **Init Phase** — Set up domain instances and static game data
 2. **Parse Phase** — Process user's cloud save and extract raw game data
 3. **Calculate Phase** — Execute domain calculations in strict dependency order
 
@@ -120,12 +120,13 @@ Read the [testing skill](skills/testing/SKILL.md) for:
 
 ## New Feature Implementation
 
-Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) for:
+Before backend implementation or architecture decisions, use the [implementation patterns guide](docs/agents/implementation-patterns.md) to select applicable examples and aspects. Use its UI route when planning or changing UI.
 
+Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) for:
 - Prerequisites verification
-- Domain implementation patterns
+- Domain implementation
 - Data pipeline integration
-- UI development with Grommet
+- UI development
 - Navigation integration
 - Testing requirements
 

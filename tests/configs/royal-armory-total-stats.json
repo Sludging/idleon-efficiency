@@ -1,0 +1,11 @@
+{
+  "description": "Purification rank for a representative built outpost, a direct input to the account's purified-outpost collection bonus",
+  "target": "RoyalG OutpostEXPrank(row, 4), directly consumed by TotalStatz(2)",
+  "extractions": [
+    {
+      "label": "royal_armory_total_stats_rank_row_1_type_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
+      "description": "Purification rank for built outpost row 1; reaching rank 1 adds this outpost to the collection-rate bonus count"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "description": "Whether an outpost has reached purification rank and therefore earns the purified resource-rate bonus",
+  "target": "Royal Armory isMapPurified(mapIndex)",
+  "extractions": [
+    {
+      "label": "royal_armory_map_purification_row_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 0, 0)",
+      "description": "Whether outpost row 0 has reached its first purification rank and earns the purified production bonus"
+    },
+    {
+      "label": "royal_armory_map_purification_row_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 1, 0)",
+      "description": "Whether outpost row 1 has reached its first purification rank and earns the purified production bonus"
+    },
+    {
+      "label": "royal_armory_outpost_exp_rank_row_1_rank_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
+      "description": "Outpost row 1 purification-track rank; reaching rank 1 activates its purified production bonus"
+    }
+  ]
+}

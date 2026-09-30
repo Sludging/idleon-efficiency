@@ -1,143 +1,143 @@
 {
-  "timestamp": "2026-09-23T02:22:53.953Z",
+  "timestamp": "2026-09-27T01:50:42.908Z",
   "extractions": {
     "hole_b_upg_31_1": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 31, 1)",
       "result": 0,
       "description": "B_UPG locked guard (index 31 is locked in the saved state)",
-      "extractedAt": "2026-09-23T02:22:53.958Z"
+      "extractedAt": "2026-09-27T01:50:42.918Z"
     },
     "hole_b_upg_0_25": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 0, 25)",
       "result": 25,
       "description": "B_UPG default branch with factor 25",
-      "extractedAt": "2026-09-23T02:22:53.968Z"
+      "extractedAt": "2026-09-27T01:50:42.920Z"
     },
     "hole_b_upg_14_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 14, 0)",
-      "result": 115200,
+      "result": 115380,
       "description": "B_UPG sediment expansion branch",
-      "extractedAt": "2026-09-23T02:22:53.970Z"
+      "extractedAt": "2026-09-27T01:50:42.922Z"
     },
     "hole_b_upg_45_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 45, 0)",
       "result": 80.17953205361366,
       "description": "B_UPG bell improvement branch",
-      "extractedAt": "2026-09-23T02:22:53.971Z"
+      "extractedAt": "2026-09-27T01:50:42.923Z"
     },
     "hole_b_upg_46_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 46, 0)",
       "result": 60,
       "description": "B_UPG extra-calculation branch for index 46",
-      "extractedAt": "2026-09-23T02:22:53.973Z"
+      "extractedAt": "2026-09-27T01:50:42.925Z"
     },
     "hole_b_upg_47_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 47, 0)",
       "result": 300,
       "description": "B_UPG extra-calculation branch for index 47",
-      "extractedAt": "2026-09-23T02:22:53.974Z"
+      "extractedAt": "2026-09-27T01:50:42.933Z"
     },
     "hole_b_upg_48_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
       "result": 120,
       "description": "B_UPG extra-calculation branch for index 48",
-      "extractedAt": "2026-09-23T02:22:53.982Z"
+      "extractedAt": "2026-09-27T01:50:42.935Z"
     },
     "hole_b_upg_49_15": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 49, 15)",
       "result": 960,
       "description": "B_UPG resource-layer branch with factor 15",
-      "extractedAt": "2026-09-23T02:22:53.983Z"
+      "extractedAt": "2026-09-27T01:50:42.937Z"
     },
     "hole_b_upg_52_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 52, 0)",
       "result": 900,
       "description": "B_UPG well-sediment logarithm branch for index 52",
-      "extractedAt": "2026-09-23T02:22:53.985Z"
+      "extractedAt": "2026-09-27T01:50:42.938Z"
     },
     "hole_b_upg_53_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 53, 0)",
       "result": 76,
       "description": "B_UPG well-sediment logarithm branch for index 53",
-      "extractedAt": "2026-09-23T02:22:53.987Z"
+      "extractedAt": "2026-09-27T01:50:42.940Z"
     },
     "hole_b_upg_54_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 54, 0)",
       "result": 46.00511990936967,
       "description": "B_UPG well-sediment power branch for index 54",
-      "extractedAt": "2026-09-23T02:22:53.988Z"
+      "extractedAt": "2026-09-27T01:50:42.948Z"
     },
     "hole_b_upg_55_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 55, 0)",
       "result": 190,
       "description": "B_UPG well-sediment logarithm branch for index 55",
-      "extractedAt": "2026-09-23T02:22:53.990Z"
+      "extractedAt": "2026-09-27T01:50:42.950Z"
     },
     "hole_b_upg_56_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
       "result": 51.18589301409078,
       "description": "B_UPG well-sediment power branch for index 56",
-      "extractedAt": "2026-09-23T02:22:53.999Z"
+      "extractedAt": "2026-09-27T01:50:42.952Z"
     },
     "hole_b_upg_57_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 57, 0)",
       "result": 340,
       "description": "B_UPG well-sediment logarithm branch for index 57",
-      "extractedAt": "2026-09-23T02:22:54.000Z"
+      "extractedAt": "2026-09-27T01:50:42.954Z"
     },
     "hole_b_upg_58_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 58, 0)",
       "result": 45.57174588754073,
       "description": "B_UPG extra-calculation logarithm branch",
-      "extractedAt": "2026-09-23T02:22:54.002Z"
+      "extractedAt": "2026-09-27T01:50:42.955Z"
     },
     "hole_b_upg_59_0": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 59, 0)",
       "result": 34.1,
       "description": "B_UPG extra-calculation sum branch",
-      "extractedAt": "2026-09-23T02:22:54.003Z"
+      "extractedAt": "2026-09-27T01:50:42.957Z"
     },
     "hole_b_upg_82_2": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 82, 2)",
       "result": 36,
       "description": "B_UPG Sanctum branch with factor 2 (index 82)",
-      "extractedAt": "2026-09-23T02:22:54.005Z"
+      "extractedAt": "2026-09-27T01:50:42.958Z"
     },
     "hole_b_upg_83_3": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 83, 3)",
       "result": 54,
       "description": "B_UPG Sanctum branch with factor 3 (index 83)",
-      "extractedAt": "2026-09-23T02:22:54.006Z"
+      "extractedAt": "2026-09-27T01:50:42.965Z"
     },
     "hole_b_upg_84_5": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 84, 5)",
       "result": 90,
       "description": "B_UPG Sanctum branch with factor 5 (index 84)",
-      "extractedAt": "2026-09-23T02:22:54.008Z"
+      "extractedAt": "2026-09-27T01:50:42.967Z"
     },
     "hole_study_bolaia_bonuses_0_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
       "result": 160,
       "description": "StudyBolaiaBonuses input used by B_UPG index 14",
-      "extractedAt": "2026-09-23T02:22:54.017Z"
+      "extractedAt": "2026-09-27T01:50:42.969Z"
     },
     "hole_b_upg_50_1": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 50, 1)",
       "result": 1,
       "description": "Nested B_UPG input used by B_UPG index 49",
-      "extractedAt": "2026-09-23T02:22:54.019Z"
+      "extractedAt": "2026-09-27T01:50:42.970Z"
     },
     "hole_b_upg_79_1": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 79, 1)",
       "result": 1,
       "description": "Nested B_UPG input used by B_UPG index 49",
-      "extractedAt": "2026-09-23T02:22:54.021Z"
+      "extractedAt": "2026-09-27T01:50:42.972Z"
     },
     "hole_b_upg_98_1": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 98, 1)",
       "result": 1,
       "description": "Nested B_UPG input used by B_UPG index 49",
-      "extractedAt": "2026-09-23T02:22:54.023Z"
+      "extractedAt": "2026-09-27T01:50:42.974Z"
     }
   },
   "errors": {},

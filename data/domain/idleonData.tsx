@@ -68,7 +68,7 @@ import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
-import { RoyalArmory } from './world-6/royalArmory';
+import { RoyalArmory, updateRoyalArmory } from './world-6/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';
@@ -264,6 +264,7 @@ const postProcessingMap: Record<string, Function> = {
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),
+    "royalArmory": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmory(accountData),
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     // Friend Bonuses consumes parsed companion and Event Shop state.
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),

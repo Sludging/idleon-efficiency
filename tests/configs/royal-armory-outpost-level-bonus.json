@@ -1,0 +1,26 @@
+{
+  "description": "Outpost-level effects for resource collection, connection range, rank progression, and Barrel experience",
+  "target": "RoyalG OutpostLV_Bonuses(selector, variant)",
+  "extractions": [
+    {
+      "label": "royal_armory_outpost_level_bonus_0_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 0, 0)",
+      "description": "Baseline coefficient for the ordinary outpost-level effect"
+    },
+    {
+      "label": "royal_armory_outpost_level_bonus_1_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 0)",
+      "description": "Collection-rate percentage points added by each outpost level"
+    },
+    {
+      "label": "royal_armory_outpost_level_bonus_1_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 1)",
+      "description": "Connection-range bonus for the alternate outpost-level effect"
+    },
+    {
+      "label": "royal_armory_outpost_level_bonus_2_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 2, 0)",
+      "description": "Rank and Barrel experience percentage points added by each outpost level"
+    }
+  ]
+}

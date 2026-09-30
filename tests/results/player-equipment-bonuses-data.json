@@ -1,83 +1,83 @@
 {
-  "timestamp": "2026-09-23T02:22:54.606Z",
+  "timestamp": "2026-09-27T01:50:43.719Z",
   "extractions": {
     "equipment_bonus_48": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
-      "result": 64.72301934731323,
+      "result": 62.48316649008579,
       "description": "Skill Efficiency from equipment and account bonuses",
-      "extractedAt": "2026-09-23T02:22:54.609Z"
+      "extractedAt": "2026-09-27T01:50:43.723Z"
     },
     "equipment_bonus_2": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"2\")",
-      "result": 3306.7932812220756,
+      "result": 3158.465247565681,
       "description": "Drop Rate including personal and family obols",
-      "extractedAt": "2026-09-23T02:22:54.617Z"
+      "extractedAt": "2026-09-27T01:50:43.724Z"
     },
     "equipment_bonus_3": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"3\")",
-      "result": 94.4964068790447,
+      "result": 93.70001475203051,
       "description": "Money, distinct from other money effects",
-      "extractedAt": "2026-09-23T02:22:54.619Z"
+      "extractedAt": "2026-09-27T01:50:43.726Z"
     },
     "equipment_bonus_45": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"45\")",
-      "result": 169.52567051020816,
+      "result": 161.36265120831263,
       "description": "Total Damage",
-      "extractedAt": "2026-09-23T02:22:54.620Z"
+      "extractedAt": "2026-09-27T01:50:43.733Z"
     },
     "equipment_bonus_32": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"32\")",
       "result": 0,
       "description": "Distinct dungeon-labelled Total Damage key in the overworld; not a dungeon transition test",
-      "extractedAt": "2026-09-23T02:22:54.622Z"
+      "extractedAt": "2026-09-27T01:50:43.735Z"
     },
     "equipment_bonus_0": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"0\")",
       "result": 0,
       "description": "Unsupported equipment effect",
-      "extractedAt": "2026-09-23T02:22:54.623Z"
+      "extractedAt": "2026-09-27T01:50:43.736Z"
     },
     "equipment_chip_pend": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
       "result": 1,
       "description": "Pendant chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-23T02:22:54.625Z"
+      "extractedAt": "2026-09-27T01:50:43.738Z"
     },
     "equipment_chip_key1": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
       "result": 1,
       "description": "Upper keychain chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-23T02:22:54.633Z"
+      "extractedAt": "2026-09-27T01:50:43.739Z"
     },
     "equipment_chip_troph": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
       "result": 1,
       "description": "Trophy chip contribution controlling slot doubling",
-      "extractedAt": "2026-09-23T02:22:54.634Z"
+      "extractedAt": "2026-09-27T01:50:43.741Z"
     },
     "equipment_research_172": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 172, 0)",
       "result": 37.5,
       "description": "Research bonus multiplying the final equipment slot",
-      "extractedAt": "2026-09-23T02:22:54.636Z"
+      "extractedAt": "2026-09-27T01:50:43.750Z"
     },
     "gallery_trophy_skill_efficiency": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
-      "result": 45.69301934731322,
+      "result": 43.45316649008579,
       "description": "Calculated Gallery trophy Skill Efficiency contribution",
-      "extractedAt": "2026-09-23T02:22:54.638Z"
+      "extractedAt": "2026-09-27T01:50:43.752Z"
     },
     "gallery_nametag_drop_rate": {
       "expression": "idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_DROP_RATE\"]",
-      "result": 305.63552941202835,
+      "result": 290.6534025225738,
       "description": "Calculated Gallery nametag Drop Rate contribution",
-      "extractedAt": "2026-09-23T02:22:54.640Z"
+      "extractedAt": "2026-09-27T01:50:43.753Z"
     },
     "hat_rack_skill_efficiency": {
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
       "result": 19.03,
       "description": "Calculated Hat Rack Skill Efficiency contribution",
-      "extractedAt": "2026-09-23T02:22:54.642Z"
+      "extractedAt": "2026-09-27T01:50:43.755Z"
     }
   },
   "errors": {},

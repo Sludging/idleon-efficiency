@@ -1,0 +1,156 @@
+{
+  "description": "Hourly collection from built Royal Guardian outposts, with direct comparisons for the account and outpost bonuses that scale collection",
+  "target": "RoyalG OutpostResourceRate(mapIndex), the raw hourly collection rate for a Royal Guardian outpost",
+  "extractions": [
+    {
+      "label": "royal_armory_rate_row_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 1, 0)",
+      "description": "Raw Royal Armory rate for populated row 1; the detail caller displays this scalar per hour before collection conversion"
+    },
+    {
+      "label": "royal_armory_rate_row_0_empty",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostResourceRate\", 0, 0)",
+      "description": "Raw rate for empty row 0; verifies the scalar calculation does not add caller-only row eligibility filtering"
+    },
+    {
+      "label": "royal_armory_rate_companion_141",
+      "expression": "idleon.callFunction(\"Companions\", 141)",
+      "description": "Companion production bonus multiplying every outpost resource rate"
+    },
+    {
+      "label": "royal_armory_rate_orblet_market_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
+      "description": "Orblet market bonus 1 added to the Royal Armory shared percentage multiplier"
+    },
+    {
+      "label": "royal_armory_rate_sushi_60",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 60, 0)",
+      "description": "Sushi production bonus included in the shared outpost resource-rate percentage"
+    },
+    {
+      "label": "royal_armory_rate_alchemy_w14_raw",
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.W14",
+      "description": "Raw W14 alchemy bubble bonus for the extraction's selected player, before the Outpost rate applies its 50-point cap"
+    },
+    {
+      "label": "royal_armory_rate_arcade_70",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 70)",
+      "description": "Arcade production bonus included in the shared outpost resource-rate percentage"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_18",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 18, 0)",
+      "description": "Upgrade 18 percentage per point of the account-wide Armory stat sum in resource production"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_50",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 50, 0)",
+      "description": "Upgrade 50 percentage per point of built-outpost level and stat sum in resource production"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_51",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 51, 0)",
+      "description": "Upgrade 51 percentage per purified built outpost in resource production"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_52",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 52, 0)",
+      "description": "Royal Armory upgrade 52 contribution to the explicit character-level factor"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_53",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 53, 0)",
+      "description": "Upgrade 53 percentage applied to the logarithmic amount of owned Top of List resources in the Royal Armory collection-rate multiplier"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_70",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 70, 0)",
+      "description": "Royal Armory upgrade 70 contribution to the shared percentage multiplier"
+    },
+    {
+      "label": "royal_armory_rate_armory_upgrade_73",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 73, 0)",
+      "description": "Royal Armory upgrade 73 contribution to the row experience-rank factor"
+    },
+    {
+      "label": "royal_armory_rate_outpost_purify_bonus",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPurifyBonus\", 0, 0)",
+      "description": "Purification percentage bonus consumed by the Royal Armory row rate"
+    },
+    {
+      "label": "royal_armory_rate_is_map_purified_row_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 1, 0)",
+      "description": "Whether populated Royal Armory row 1 receives its purification multiplier"
+    },
+    {
+      "label": "royal_armory_rate_support_collection",
+      "expression": "idleon.callFunction(\"RoyalG\", \"SupportCollection\", 0, 0)",
+      "description": "Support Collection percentage used by the Royal Armory row rate"
+    },
+    {
+      "label": "royal_armory_rate_total_supports_row_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalSupports\", 1, 0)",
+      "description": "Support count contributing to populated Royal Armory row 1"
+    },
+    {
+      "label": "royal_armory_rate_outpost_level_bonus_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 0)",
+      "description": "Outpost level bonus coefficient applied to row 1 level"
+    },
+    {
+      "label": "royal_armory_rate_outpost_exp_rank_row_1_rank_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 2)",
+      "description": "Experience-rank 2 contribution for Royal Armory row 1"
+    },
+    {
+      "label": "royal_armory_rate_total_statz_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
+      "description": "Account-wide sum of Armory stat entries, multiplied by upgrade 18 to scale outpost production"
+    },
+    {
+      "label": "royal_armory_rate_total_statz_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 1, 0)",
+      "description": "Total Royal Guardian outpost upgrade levels across built outposts, scaled by Armory upgrade 50 in the collection-rate multiplier"
+    },
+    {
+      "label": "royal_armory_rate_total_statz_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 2, 0)",
+      "description": "Number of built outposts with purification rank at least 1, multiplied by upgrade 51 for production"
+    },
+    {
+      "label": "royal_armory_rate_total_statz_3",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 3, 0)",
+      "description": "Log-scaled quantities of eight owned Top of List resources, scaled by Armory upgrade 53 in the collection-rate multiplier; compared directly with the game's cached TotalStatz(3) value"
+    },
+    {
+      "label": "royal_armory_rate_unit_spec_effect_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
+      "description": "Unit specialization percentage used by the Royal Armory row rate"
+    },
+    {
+      "label": "royal_armory_rate_total_units_row_1_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
+      "description": "Unit count contributing to populated Royal Armory row 1"
+    },
+    {
+      "label": "royal_armory_rate_talent_225_best",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 225, -1)",
+      "description": "Highest saved-character bonus from talent 225, added to the shared production percentage"
+    },
+    {
+      "label": "royal_armory_rate_talent_226_best",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 226, -1)",
+      "description": "Highest saved-character bonus from talent 226, added to the shared production percentage"
+    },
+    {
+      "label": "royal_armory_rate_talent_230_best",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 230, -1)",
+      "description": "Highest saved-character talent 230 bonus, used as a resource-rate multiplier with a minimum of one"
+    },
+    {
+      "label": "royal_armory_rate_zenith_market_10",
+      "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 10, 0)",
+      "description": "Zenith market bonus 10 applied after the Royal Armory row and talent factors"
+    }
+  ]
+}

@@ -605,12 +605,12 @@
     {
       "label": "tome_pts_119",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 119, 0)",
-      "description": "Royal Guardian outposts built; RoyalArmory.getOutpostsBuilt mirrors RoyalG.TotalStatz(4, 0)."
+      "description": "Royal Guardian outposts built; RoyalArmory.getTotalStat(4) mirrors RoyalG.TotalStatz(4, 0)."
     },
     {
       "label": "tome_pts_120",
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 120, 0)",
-      "description": "Total Resource Grade; RoyalArmory.getTotalResourceGrade mirrors RoyalG.TotalStatz(0, 0)."
+      "description": "Total Resource Grade; RoyalArmory.getTotalStat(0) mirrors RoyalG.TotalStatz(0, 0)."
     },
     {
       "label": "tome_pts_121",
@@ -690,12 +690,12 @@
     {
       "label": "tome_producer_119_royalg_total_stats_4",
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 4, 0)",
-      "description": "Game source for Tome line 119: RoyalG.TotalStatz(4, 0), consumed by RoyalArmory.getOutpostsBuilt."
+      "description": "Game source for Tome line 119: RoyalG.TotalStatz(4, 0), consumed by RoyalArmory.getTotalStat(4)."
     },
     {
       "label": "tome_producer_120_royalg_total_stats_0",
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
-      "description": "Game source for Tome line 120: RoyalG.TotalStatz(0, 0), consumed by RoyalArmory.getTotalResourceGrade."
+      "description": "Game source for Tome line 120: RoyalG.TotalStatz(0, 0), consumed by RoyalArmory.getTotalStat(0)."
     }
   ]
 }

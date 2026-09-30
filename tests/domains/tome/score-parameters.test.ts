@@ -39,12 +39,12 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  royalOutpostsBuilt: {
   description: 'RoyalG outpost producer',
   extractionKey: 'tome_producer_119_royalg_total_stats_4',
-  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getOutpostsBuilt(),
+  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(4),
  },
  royalResourceGrade: {
   description: 'RoyalG resource-grade producer',
   extractionKey: 'tome_producer_120_royalg_total_stats_0',
-  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalResourceGrade(),
+  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(0),
  },
 };
 

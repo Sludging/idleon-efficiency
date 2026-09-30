@@ -1,23 +1,17 @@
 {
-  "timestamp": "2026-09-23T02:22:54.818Z",
+  "timestamp": "2026-09-30T03:47:19.166Z",
   "extractions": {
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
       "result": 0,
-      "description": "Royal Armory upgrade 76 bonus used by Equinox Dreamstuff bar fill rate",
-      "extractedAt": "2026-09-23T02:22:54.822Z"
-    },
-    "royal_armory_bonus_9": {
-      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 9, 0)",
-      "result": 12,
-      "description": "Royal Armory upgrade 9 bonus representative nonzero level",
-      "extractedAt": "2026-09-23T02:22:54.823Z"
+      "description": "Upgrade bonus that increases Dreamstuff gained from the Royal Guardian Outpost board",
+      "extractedAt": "2026-09-30T03:47:21.076Z"
     },
     "royal_armory_bonus_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
       "result": 90,
-      "description": "Royal Armory upgrade 19 bonus representative nonzero level",
-      "extractedAt": "2026-09-23T02:22:54.825Z"
+      "description": "Upgrade bonus that contributes to the Outpost resource-production specialization",
+      "extractedAt": "2026-09-30T03:47:21.090Z"
     }
   },
   "errors": {},

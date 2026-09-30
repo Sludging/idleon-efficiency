@@ -1,0 +1,16 @@
+{
+  "description": "Collection-rate percentage awarded to purified outposts and its Armory upgrade input",
+  "target": "Royal Armory OutpostPurifyBonus",
+  "extractions": [
+    {
+      "label": "royal_armory_outpost_purify_bonus",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPurifyBonus\", 0, 0)",
+      "description": "Raw percentage-point bonus added to collection rate for purified maps"
+    },
+    {
+      "label": "royal_armory_outpost_purify_armory_upgrade_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 1, 0)",
+      "description": "Perfect Purification upgrade contribution added to the purified-map collection bonus"
+    }
+  ]
+}

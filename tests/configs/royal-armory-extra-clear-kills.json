@@ -1,0 +1,31 @@
+{
+  "description": "Bonuses that increase extra mob kills credited toward building Royal Guardian Outposts",
+  "target": "RoyalG XtraClearKillz(0, 0) and its direct character/account inputs",
+  "extractions": [
+    {
+      "label": "royal_armory_extra_clear_kills",
+      "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
+      "description": "Extra mob kills credited toward clearing mobs for Royal Armory Outposts"
+    },
+    {
+      "label": "royal_armory_extra_clear_kills_talent_231",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 231, -1)",
+      "description": "Warbound Politics talent bonus used by the account's strongest character to increase Outpost clearing"
+    },
+    {
+      "label": "royal_armory_extra_clear_kills_orblet_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
+      "description": "Full Clear Market bonus that increases extra kills while clearing mobs to build Outposts"
+    },
+    {
+      "label": "royal_armory_extra_clear_kills_big_fish_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6, 0)",
+      "description": "Big Fish bonus contribution to the extra kills credited toward Outpost clearing"
+    },
+    {
+      "label": "royal_armory_extra_clear_kills_jelly_quantity_2",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 2, 0)",
+      "description": "Jelly Operation contribution that increases extra kills credited toward Outpost clearing"
+    }
+  ]
+}

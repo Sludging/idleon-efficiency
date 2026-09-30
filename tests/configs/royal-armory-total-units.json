@@ -1,0 +1,116 @@
+{
+  "description": "Assigned workers plus rank-granted passive workers for selected saved Royal Guardian outposts and unit types",
+  "target": "Total outpost workers and their direct passive-worker inputs for the representative resource-production cases",
+  "extractions": [
+    {
+      "label": "royal_armory_total_units_row_1_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
+      "description": "Total assigned and passive workers of unit type 0 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_total_units_row_1_selector_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",
+      "description": "Total assigned and passive workers of unit type 1 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_total_units_row_1_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 2)",
+      "description": "Total assigned and passive workers of unit type 2 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_total_units_row_15_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 0)",
+      "description": "Total assigned and passive workers of unit type 0 on outpost row 15"
+    },
+    {
+      "label": "royal_armory_total_units_row_15_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 2)",
+      "description": "Total assigned and passive workers of unit type 2 on outpost row 15"
+    },
+    {
+      "label": "royal_armory_total_units_row_16_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 0)",
+      "description": "Total assigned and passive workers of unit type 0 on outpost row 16"
+    },
+    {
+      "label": "royal_armory_total_units_row_16_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 2)",
+      "description": "Total assigned and passive workers of unit type 2 on outpost row 16"
+    },
+    {
+      "label": "royal_armory_total_units_row_26_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 26, 2)",
+      "description": "Total assigned and passive workers of unit type 2 on outpost row 26"
+    },
+    {
+      "label": "royal_armory_total_units_row_51_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 51, 2)",
+      "description": "Total assigned and passive workers of unit type 2 on outpost row 51"
+    },
+    {
+      "label": "royal_armory_total_units_row_53_selector_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 1)",
+      "description": "Total assigned and passive workers of unit type 1 on outpost row 53"
+    },
+    {
+      "label": "royal_armory_total_units_row_53_selector_3",
+      "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 3)",
+      "description": "Total assigned and passive workers of unit type 3 on outpost row 53"
+    },
+    {
+      "label": "royal_armory_passive_units_row_1_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 0)",
+      "description": "Passive worker contribution for unit type 0 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_passive_units_row_1_selector_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 1)",
+      "description": "Passive worker contribution for unit type 1 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_passive_units_row_1_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 2)",
+      "description": "Passive worker contribution for unit type 2 on outpost row 1"
+    },
+    {
+      "label": "royal_armory_passive_units_row_15_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 0)",
+      "description": "Passive worker contribution for unit type 0 on outpost row 15"
+    },
+    {
+      "label": "royal_armory_passive_units_row_15_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 2)",
+      "description": "Passive worker contribution for unit type 2 on outpost row 15"
+    },
+    {
+      "label": "royal_armory_passive_units_row_16_selector_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 0)",
+      "description": "Passive worker contribution for unit type 0 on outpost row 16"
+    },
+    {
+      "label": "royal_armory_passive_units_row_16_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 2)",
+      "description": "Passive worker contribution for unit type 2 on outpost row 16"
+    },
+    {
+      "label": "royal_armory_passive_units_row_26_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 26, 2)",
+      "description": "Passive worker contribution for unit type 2 on outpost row 26"
+    },
+    {
+      "label": "royal_armory_passive_units_row_51_selector_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 51, 2)",
+      "description": "Passive worker contribution for unit type 2 on outpost row 51"
+    },
+    {
+      "label": "royal_armory_passive_units_row_53_selector_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 1)",
+      "description": "Passive worker contribution for unit type 1 on outpost row 53"
+    },
+    {
+      "label": "royal_armory_passive_units_row_53_selector_3",
+      "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 3)",
+      "description": "Passive worker contribution for unit type 3 on outpost row 53"
+    }
+  ]
+}
