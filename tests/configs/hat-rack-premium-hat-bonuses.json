@@ -25,32 +25,22 @@
     {
       "label": "hat_rack_companion_31",
       "expression": "idleon.callFunction(\"Companions\", 31)",
-      "description": "Companions(31) active bonus used in the Hat Rack multiplier"
+      "description": "Pet2 companion +15% contribution to the Hat Rack Bonus Multi"
     },
     {
       "label": "hat_rack_event_shop_30",
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 30, 0)",
-      "description": "Summoning EventShopOwned(30, 0) input used in the Hat Rack multiplier"
+      "description": "King of the Rack Event Shop +10% contribution to the Hat Rack Bonus Multi"
     },
     {
       "label": "hat_rack_minehead_21",
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
-      "description": "Minehead BonusQTY(21, 0) input used in the Hat Rack multiplier; Minehead is the owning producer for this input"
+      "description": "Brainhead Minehead +2% contribution to the Hat Rack Bonus Multi"
     },
     {
       "label": "hat_rack_sushi_36",
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 36, 0)",
-      "description": "SushiStuff RoG_BonusQTY(36, 0) input used in the Hat Rack multiplier"
-    },
-    {
-      "label": "hat_rack_item_hats76_skill_efficiency",
-      "expression": "idleon.getAttr(\"ItemDefinitionsGET\").h.EquipmentHats76.h.UQ1val",
-      "description": "EquipmentHats76 UQ1 Skill Efficiency definition value consumed by Hat Rack"
-    },
-    {
-      "label": "hat_rack_item_hats108_drop_rate",
-      "expression": "idleon.getAttr(\"ItemDefinitionsGET\").h.EquipmentHats108.h.UQ2val",
-      "description": "EquipmentHats108 UQ2 Drop Rate definition value consumed by Hat Rack"
+      "description": "Wholesale Pricing Sushi upgrade bonus value contributing to Hat Rack's Bonus Multi"
     },
     {
       "label": "hat_rack_eligible_hats",

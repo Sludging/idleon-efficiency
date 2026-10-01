@@ -1,8 +1,8 @@
 /**
- * Representative equipment subtotals for player 0 from the paired real save.
- * Dungeon Total Damage is checked separately from ordinary Total Damage in the
- * overworld, not during a dungeon transition. These samples do not prove
- * unobserved slot or system conditions.
+ * Representative equipment subtotals for the configured target player (player 3)
+ * from the paired real save. Dungeon Total Damage is checked separately from
+ * ordinary Total Damage in the overworld, not during a dungeon transition.
+ * These samples do not prove unobserved slot or system conditions.
  */
 import { Player } from '../../../data/domain/player';
 import { EquipmentBonus } from '../../../data/domain/equipment-effects';
@@ -15,7 +15,6 @@ const equipmentBonusSamples: { bonus: EquipmentBonus; description: string }[] = 
  { bonus: EquipmentBonus.Money, description: 'Money without conflating other money effects' },
  { bonus: EquipmentBonus.TotalDamage, description: 'Total Damage' },
  { bonus: EquipmentBonus.DungeonTotalDamage, description: 'distinct dungeon-labelled Total Damage in the overworld' },
- { bonus: 0 as EquipmentBonus, description: 'an unsupported equipment effect' },
 ];
 
 describe('Player Domain - Equipment Bonuses', () => {

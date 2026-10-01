@@ -1,13 +1,14 @@
 /**
  * Lab Domain - Jewel Bonus Calculation
  *
- * Tests the dynamic Jewel bonus calculation against the delivered game formula.
+ * Checks the Lab mainframe effects that scale Rhinestone and Pyramite jewel
+ * bonuses and the Emerald Navette jewel's unlock-gated bonus.
  *
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Lab, Jewel } from '../../../data/domain/world-4/lab';
+import { Lab } from '../../../data/domain/world-4/lab';
 
 const saveName = 'latest';
 const extractionResultsName = 'lab-jewel-bonus-data.json';
@@ -17,12 +18,12 @@ describe('Lab Domain - Jewel Bonus', () => {
  let lab: Lab;
 
  const jewelBonusSpecs = [
-  { index: 0, extractionKey: 'jewel_0_bonus', description: 'Amethyst Rhinestone Jewel 0 bonus' },
-  { index: 3, extractionKey: 'jewel_3_bonus', description: 'Sapphire Rhinestone Jewel 3 bonus' },
-  { index: 10, extractionKey: 'jewel_10_bonus', description: 'Pyrite Pyramite Jewel 10 bonus' },
-  { index: 12, extractionKey: 'jewel_12_bonus', description: 'Emerald Navette Jewel 12 bonus' },
-  { index: 19, extractionKey: 'jewel_19_bonus', description: 'Pure Opal Navette Jewel 19 bonus' },
-  { index: 20, extractionKey: 'jewel_20_bonus', description: 'Pure Opal Rhombol Jewel 20 bonus' },
+  { index: 0, extractionKey: 'jewel_0_bonus', description: 'Meal Cooking speed from Amethyst Rhinestone, doubled by the saved Purple Jewel synergy' },
+  { index: 3, extractionKey: 'jewel_3_bonus', description: 'Construction slot 1 building speed and slot 2 trim from Sapphire Rhinestone, doubled by the saved Blue Jewel synergy' },
+  { index: 10, extractionKey: 'jewel_10_bonus', description: 'All-player damage from Pyrite Pyramite, doubled by the saved Orange Jewel synergy' },
+  { index: 12, extractionKey: 'jewel_12_bonus', description: 'All-skill base efficiency and action speed from Emerald Navette, doubled by the saved Green Jewel synergy' },
+  { index: 19, extractionKey: 'jewel_19_bonus', description: 'Pure Opal Navette boost to active Mainframe bonuses and jewels, excluding Spelunker Obol' },
+  { index: 20, extractionKey: 'jewel_20_bonus', description: 'Pure Opal Rhombol boost to all Crop Depot bonuses' },
  ];
 
  beforeAll(() => {

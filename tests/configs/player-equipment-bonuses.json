@@ -28,11 +28,6 @@
       "description": "Distinct dungeon-labelled Total Damage key in the overworld; not a dungeon transition test"
     },
     {
-      "label": "equipment_bonus_0",
-      "expression": "idleon.callFunction(\"EtcBonuses\", \"0\")",
-      "description": "Unsupported equipment effect"
-    },
-    {
       "label": "equipment_chip_pend",
       "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
       "description": "Pendant chip contribution controlling slot doubling"

@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-09-30T03:47:19.167Z",
+  "timestamp": "2026-10-01T08:49:56.462Z",
   "extractions": {
     "royal_armory_total_stats_rank_row_1_type_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
       "result": 0,
       "description": "Purification rank for built outpost row 1; reaching rank 1 adds this outpost to the collection-rate bonus count",
-      "extractedAt": "2026-09-30T03:47:21.897Z"
+      "extractedAt": "2026-10-01T08:49:56.474Z"
     }
   },
   "errors": {},

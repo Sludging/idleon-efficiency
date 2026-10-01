@@ -1,137 +1,137 @@
 {
-  "timestamp": "2026-09-30T03:47:19.167Z",
+  "timestamp": "2026-10-01T08:49:56.474Z",
   "extractions": {
     "royal_armory_total_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
       "result": 2,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:21.939Z"
+      "extractedAt": "2026-10-01T08:49:56.478Z"
     },
     "royal_armory_total_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 1 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:21.957Z"
+      "extractedAt": "2026-10-01T08:49:56.491Z"
     },
     "royal_armory_total_units_row_1_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 2)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:21.972Z"
+      "extractedAt": "2026-10-01T08:49:56.493Z"
     },
     "royal_armory_total_units_row_15_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 0)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 15",
-      "extractedAt": "2026-09-30T03:47:21.986Z"
+      "extractedAt": "2026-10-01T08:49:56.495Z"
     },
     "royal_armory_total_units_row_15_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 2)",
       "result": 3,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 15",
-      "extractedAt": "2026-09-30T03:47:21.999Z"
+      "extractedAt": "2026-10-01T08:49:56.507Z"
     },
     "royal_armory_total_units_row_16_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 0)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 16",
-      "extractedAt": "2026-09-30T03:47:22.013Z"
+      "extractedAt": "2026-10-01T08:49:56.509Z"
     },
     "royal_armory_total_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 2)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 16",
-      "extractedAt": "2026-09-30T03:47:22.015Z"
+      "extractedAt": "2026-10-01T08:49:56.511Z"
     },
     "royal_armory_total_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 26, 2)",
       "result": 2,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 26",
-      "extractedAt": "2026-09-30T03:47:22.017Z"
+      "extractedAt": "2026-10-01T08:49:56.512Z"
     },
     "royal_armory_total_units_row_51_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 51, 2)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 51",
-      "extractedAt": "2026-09-30T03:47:22.039Z"
+      "extractedAt": "2026-10-01T08:49:56.524Z"
     },
     "royal_armory_total_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 1)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 1 on outpost row 53",
-      "extractedAt": "2026-09-30T03:47:22.050Z"
+      "extractedAt": "2026-10-01T08:49:56.526Z"
     },
     "royal_armory_total_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 3)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 3 on outpost row 53",
-      "extractedAt": "2026-09-30T03:47:22.062Z"
+      "extractedAt": "2026-10-01T08:49:56.527Z"
     },
     "royal_armory_passive_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:22.065Z"
+      "extractedAt": "2026-10-01T08:49:56.529Z"
     },
     "royal_armory_passive_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 1)",
       "result": 0,
       "description": "Passive worker contribution for unit type 1 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:22.081Z"
+      "extractedAt": "2026-10-01T08:49:56.542Z"
     },
     "royal_armory_passive_units_row_1_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 1",
-      "extractedAt": "2026-09-30T03:47:22.083Z"
+      "extractedAt": "2026-10-01T08:49:56.543Z"
     },
     "royal_armory_passive_units_row_15_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 15",
-      "extractedAt": "2026-09-30T03:47:22.095Z"
+      "extractedAt": "2026-10-01T08:49:56.545Z"
     },
     "royal_armory_passive_units_row_15_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 15",
-      "extractedAt": "2026-09-30T03:47:22.097Z"
+      "extractedAt": "2026-10-01T08:49:56.559Z"
     },
     "royal_armory_passive_units_row_16_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 16",
-      "extractedAt": "2026-09-30T03:47:22.099Z"
+      "extractedAt": "2026-10-01T08:49:56.561Z"
     },
     "royal_armory_passive_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 16",
-      "extractedAt": "2026-09-30T03:47:22.118Z"
+      "extractedAt": "2026-10-01T08:49:56.562Z"
     },
     "royal_armory_passive_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 26, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 26",
-      "extractedAt": "2026-09-30T03:47:22.131Z"
+      "extractedAt": "2026-10-01T08:49:56.575Z"
     },
     "royal_armory_passive_units_row_51_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 51, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 51",
-      "extractedAt": "2026-09-30T03:47:22.133Z"
+      "extractedAt": "2026-10-01T08:49:56.577Z"
     },
     "royal_armory_passive_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 1)",
       "result": 0,
       "description": "Passive worker contribution for unit type 1 on outpost row 53",
-      "extractedAt": "2026-09-30T03:47:22.147Z"
+      "extractedAt": "2026-10-01T08:49:56.578Z"
     },
     "royal_armory_passive_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 3)",
       "result": 0,
       "description": "Passive worker contribution for unit type 3 on outpost row 53",
-      "extractedAt": "2026-09-30T03:47:22.149Z"
+      "extractedAt": "2026-10-01T08:49:56.590Z"
     }
   },
   "errors": {},

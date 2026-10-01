@@ -15,7 +15,7 @@ const extractionResultsName = 'hole-monument-bonuses-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  fountainBraveryBonus: {
-  description: 'Fountain total bonus for Bravery monument',
+  description: 'Fountain Monumental Boost multiplier used by the Bravery bonus',
   extractionKey: 'fountain_total_bonus_0_13',
   domainExtractor: (gameData) => {
    const hole = gameData.get('hole') as Hole;
@@ -24,7 +24,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  fountainJusticeBonus: {
-  description: 'Fountain total bonus for Justice monument',
+  description: 'Fountain Judicial Boost multiplier used by the Justice bonus',
   extractionKey: 'fountain_total_bonus_1_13',
   domainExtractor: (gameData) => {
    const hole = gameData.get('hole') as Hole;
@@ -33,7 +33,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  fountainWisdomBonus: {
-  description: 'Fountain total bonus for Wisdom monument',
+  description: 'Fountain Wisdom Boost multiplier used by the Wisdom bonus',
   extractionKey: 'fountain_total_bonus_2_13',
   domainExtractor: (gameData) => {
    const hole = gameData.get('hole') as Hole;
@@ -42,11 +42,11 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  monumentalVibesBonus: {
-  description: 'Monumental Vibes Cosmo bonus',
+  description: 'Cosmo the Villager’s Monumental Vibes effect added to non-self monument rewards',
   extractionKey: 'cosmo_bonus_qty_0_0',
   domainExtractor: (gameData) => {
    const hole = gameData.get('hole') as Hole;
-   return hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() ?? 0;
+   return hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)!.getBonus();
   }
  }
 };

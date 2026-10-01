@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-09-30T03:47:19.167Z",
+  "timestamp": "2026-10-01T08:49:56.277Z",
   "extractions": {
     "royal_armory_outpost_purify_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPurifyBonus\", 0, 0)",
       "result": 200,
       "description": "Raw percentage-point bonus added to collection rate for purified maps",
-      "extractedAt": "2026-09-30T03:47:21.567Z"
+      "extractedAt": "2026-10-01T08:49:56.291Z"
     },
     "royal_armory_outpost_purify_armory_upgrade_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 1, 0)",
       "result": 0,
       "description": "Perfect Purification upgrade contribution added to the purified-map collection bonus",
-      "extractedAt": "2026-09-30T03:47:21.583Z"
+      "extractedAt": "2026-10-01T08:49:56.293Z"
     }
   },
   "errors": {},

@@ -11,7 +11,7 @@ const extractionResultsName = 'farming-crop-scientist-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   mainframe17Bonus: {
-    description: 'Mainframe bonus 17',
+    description: 'Depot Studies PhD multiplier on Crop Depot bonuses',
     extractionKey: 'crop_sc_mainframe_17_bonus',
     domainExtractor: (gameData) => {
       const lab = gameData.get('lab') as Lab;
@@ -19,7 +19,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   grimoire22Bonus: {
-    description: 'Grimoire upgrade 22 bonus',
+    description: 'Superior Crop Research multiplier for Crop Scientist bonuses',
     extractionKey: 'crop_sc_grimoire_22_bonus',
     domainExtractor: (gameData) => {
       const grimoire = gameData.get('grimoire') as Grimoire;
@@ -27,7 +27,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   exoticMarket40Bonus: {
-    description: 'Exotic Market bonus 40',
+    description: 'SCIENTERRIFIC Crop Scientist bonus multiplier',
     extractionKey: 'crop_sc_exotic_40_bonus',
     domainExtractor: (gameData) => {
       const farming = gameData.get('farming') as Farming;
@@ -35,7 +35,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   vault79Bonus: {
-    description: 'Upgrade Vault bonus 79',
+    description: 'Properly Funded Research multiplier for Crop Depot bonuses',
     extractionKey: 'crop_sc_vault_79_bonus',
     domainExtractor: (gameData) => {
       const upgradeVault = gameData.get('upgradeVault') as UpgradeVault;

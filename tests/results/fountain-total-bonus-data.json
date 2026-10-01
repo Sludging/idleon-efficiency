@@ -1,131 +1,131 @@
 {
-  "timestamp": "2026-09-27T01:50:42.621Z",
+  "timestamp": "2026-10-01T08:49:53.690Z",
   "extractions": {
     "fountain_marble_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 8)",
       "result": 1,
-      "description": "Fountain marble bonus for water 0 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.635Z"
+      "description": "Money Back Guarantee marble multiplier before marbleization (no saved marble levels)",
+      "extractedAt": "2026-10-01T08:49:53.705Z"
     },
     "fountain_marble_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 13)",
       "result": 2.5,
-      "description": "Fountain marble bonus for water 0 upgrade 13 (positive marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.637Z"
+      "description": "Monumental Boost marble multiplier used for Bravery monument bonuses",
+      "extractedAt": "2026-10-01T08:49:53.706Z"
     },
     "fountain_total_bonus_0_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 0)",
       "result": 699,
-      "description": "Fountain total bonus for water 0 upgrade 0",
-      "extractedAt": "2026-09-27T01:50:42.639Z"
+      "description": "Yellow Water unlock and Fountain currency value",
+      "extractedAt": "2026-10-01T08:49:53.708Z"
     },
     "fountain_total_bonus_0_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 1)",
       "result": 4650,
-      "description": "Fountain total bonus for water 0 upgrade 1 (non-unit factor)",
-      "extractedAt": "2026-09-27T01:50:42.641Z"
+      "description": "Currency Booster I increase to Fountain currency value",
+      "extractedAt": "2026-10-01T08:49:53.720Z"
     },
     "fountain_total_bonus_0_5": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 5)",
       "result": 4013,
-      "description": "Fountain total bonus for water 0 upgrade 5",
-      "extractedAt": "2026-09-27T01:50:42.649Z"
+      "description": "Stackin' Silver increase to silver coin value",
+      "extractedAt": "2026-10-01T08:49:53.722Z"
     },
     "fountain_total_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 8)",
       "result": 223,
-      "description": "Fountain total bonus for water 0 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.651Z"
+      "description": "Money Back Guarantee auto-collect value for coins at capacity",
+      "extractedAt": "2026-10-01T08:49:53.723Z"
     },
     "fountain_total_bonus_0_9": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 9)",
       "result": 2338,
-      "description": "Fountain total bonus for water 0 upgrade 9",
-      "extractedAt": "2026-09-27T01:50:42.653Z"
+      "description": "Fountain Filling coin generation when the Fountain fills",
+      "extractedAt": "2026-10-01T08:49:53.734Z"
     },
     "fountain_total_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
       "result": 73,
-      "description": "Fountain total bonus for water 0 upgrade 13 (Bravery Monumental Boost)",
-      "extractedAt": "2026-09-27T01:50:42.655Z"
+      "description": "Monumental Boost multiplier to Bravery monument bonuses",
+      "extractedAt": "2026-10-01T08:49:53.736Z"
     },
     "fountain_total_bonus_0_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 19)",
       "result": 333,
-      "description": "Fountain total bonus for water 0 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-27T01:50:42.656Z"
+      "description": "Mythril Transience increase to bronze, silver, and gold coin value",
+      "extractedAt": "2026-10-01T08:49:53.737Z"
     },
     "fountain_total_bonus_1_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 0)",
       "result": 1314,
-      "description": "Fountain total bonus for water 1 upgrade 0",
-      "extractedAt": "2026-09-27T01:50:42.667Z"
+      "description": "Green Water unlock and Fountain currency value",
+      "extractedAt": "2026-10-01T08:49:53.739Z"
     },
     "fountain_total_bonus_1_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 8)",
       "result": 244,
-      "description": "Fountain total bonus for water 1 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.669Z"
+      "description": "Royal Stacks chance and value for coins created when the Fountain fills",
+      "extractedAt": "2026-10-01T08:49:53.740Z"
     },
     "fountain_total_bonus_1_10": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 10)",
       "result": 1290,
-      "description": "Fountain total bonus for water 1 upgrade 10 (non-marbleizable upgrade)",
-      "extractedAt": "2026-09-27T01:50:42.671Z"
+      "description": "Marble Filling production of marble for upgrade marbleization",
+      "extractedAt": "2026-10-01T08:49:53.753Z"
     },
     "fountain_total_bonus_1_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
       "result": 83,
-      "description": "Fountain total bonus for water 1 upgrade 13",
-      "extractedAt": "2026-09-27T01:50:42.673Z"
+      "description": "Judicial Boost multiplier to Justice monument bonuses",
+      "extractedAt": "2026-10-01T08:49:53.755Z"
     },
     "fountain_total_bonus_1_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 19)",
       "result": 313,
-      "description": "Fountain total bonus for water 1 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-27T01:50:42.674Z"
+      "description": "Sharp Surrogate increase to dollar, credit, and treasury bill value",
+      "extractedAt": "2026-10-01T08:49:53.756Z"
     },
     "fountain_total_bonus_2_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
       "result": 0,
-      "description": "Fountain total bonus for water 2 upgrade 0 (zero upgrade level)",
-      "extractedAt": "2026-09-27T01:50:42.684Z"
+      "description": "Red Water unlock and Fountain currency value",
+      "extractedAt": "2026-10-01T08:49:53.769Z"
     },
     "fountain_total_bonus_2_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
       "result": 300,
-      "description": "Fountain total bonus for water 2 upgrade 1 (large factor)",
-      "extractedAt": "2026-09-27T01:50:42.686Z"
+      "description": "Currency Booster III increase to Fountain currency value",
+      "extractedAt": "2026-10-01T08:49:53.771Z"
     },
     "fountain_total_bonus_2_2": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
       "result": 39,
-      "description": "Fountain total bonus for water 2 upgrade 2 (zero marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.688Z"
+      "description": "Moolahleluja unlock and Moolah Stack value",
+      "extractedAt": "2026-10-01T08:49:53.773Z"
     },
     "fountain_total_bonus_2_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
       "result": 29,
-      "description": "Fountain total bonus for water 2 upgrade 8 (zero marbleization branch)",
-      "extractedAt": "2026-09-27T01:50:42.690Z"
+      "description": "Luck fo' REAL chance to make collected currency lucky",
+      "extractedAt": "2026-10-01T08:49:53.775Z"
     },
     "fountain_total_bonus_2_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
       "result": 55,
-      "description": "Fountain total bonus for water 2 upgrade 12",
-      "extractedAt": "2026-09-27T01:50:42.691Z"
+      "description": "Rubber Ducky production from the Fountain bar",
+      "extractedAt": "2026-10-01T08:49:53.784Z"
     },
     "fountain_total_bonus_2_18": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 18)",
       "result": 0,
-      "description": "Fountain total bonus for water 2 upgrade 18",
-      "extractedAt": "2026-09-27T01:50:42.699Z"
+      "description": "Bubba Forever permanent Meat Slice production rate",
+      "extractedAt": "2026-10-01T08:49:53.786Z"
     },
     "fountain_total_bonus_2_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
       "result": 7,
-      "description": "Fountain total bonus for water 2 upgrade 19 (last upgrade)",
-      "extractedAt": "2026-09-27T01:50:42.701Z"
+      "description": "Rupie Monie increase to Moolah, Shilling, and Greane Stack value",
+      "extractedAt": "2026-10-01T08:49:53.788Z"
     }
   },
   "errors": {},

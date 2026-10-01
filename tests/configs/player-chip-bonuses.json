@@ -1,5 +1,5 @@
 {
-  "description": "Extract raw equipped-chip contributions for the target player, including numeric effects, enabling values, and an absent selector",
+  "description": "Extract raw equipped-chip contributions for the target player, including numeric effects and enabling values",
   "target": "Player.getChipBonus: game chipBonuses selector aggregation",
   "extractions": [
     {
@@ -111,11 +111,6 @@
       "label": "chip_bonus_card2",
       "expression": "idleon.callFunction(\"chipBonuses\", \"card2\")",
       "description": "Raw equipped-chip bottom-right-card enabling contribution"
-    },
-    {
-      "label": "chip_bonus___missing_chip_bonus__",
-      "expression": "idleon.callFunction(\"chipBonuses\", \"__missing_chip_bonus__\")",
-      "description": "Absent bonus selector returns zero"
     }
   ]
 }

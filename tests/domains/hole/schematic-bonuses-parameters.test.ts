@@ -15,22 +15,22 @@ const extractionResultsName = 'hole-schematic-bonuses-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  studyBolaiaBonuses0: {
-  description: 'StudyBolaiaBonuses(0, 0) used by B_UPG(14)',
+  description: 'Bolaia research bonus used to calculate the sediment expansion effect',
   extractionKey: 'hole_study_bolaia_bonuses_0_0',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getStudyBolaiaBonuses(0),
  },
  bUpg50: {
-  description: 'B_UPG(50, 1) nested by B_UPG(49)',
+  description: 'Fractalfly Trickledown All Skill Efficiency and EXP input to Motherlode Trickledown',
   extractionKey: 'hole_b_upg_50_1',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getSchematicBonus(50, 1),
  },
  bUpg79: {
-  description: 'B_UPG(79, 1) nested by B_UPG(49)',
+  description: 'Evertree Trickledown All Skill Efficiency and EXP input to Motherlode Trickledown',
   extractionKey: 'hole_b_upg_79_1',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getSchematicBonus(79, 1),
  },
  bUpg98: {
-  description: 'B_UPG(98, 1) nested by B_UPG(49)',
+  description: 'Trench Trickledown All Skill Efficiency and EXP input to Motherlode Trickledown',
   extractionKey: 'hole_b_upg_98_1',
   domainExtractor: (gameData) => (gameData.get('hole') as Hole).getSchematicBonus(98, 1),
  },

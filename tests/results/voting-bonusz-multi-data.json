@@ -1,65 +1,65 @@
 {
-  "timestamp": "2026-09-27T01:50:45.826Z",
+  "timestamp": "2026-10-01T08:49:59.767Z",
   "extractions": {
     "voting_bonusz_multi": {
       "expression": "idleon.callFunction(\"Summoning2\", \"VotingBonuszMulti\", 0, 0)",
       "result": 6.116666666666667,
       "description": "Complete account-wide vote multiplier from its distinct percentage factors and additive bonuses",
-      "extractedAt": "2026-09-27T01:50:45.837Z"
+      "extractedAt": "2026-10-01T08:49:59.805Z"
     },
     "meritocracy_bonus_9": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 9, 0)",
       "result": 0,
       "description": "Meritocracy bonus 9 used as a distinct multiplier factor",
-      "extractedAt": "2026-09-27T01:50:45.838Z"
+      "extractedAt": "2026-10-01T08:49:59.818Z"
     },
     "hole_cosmo_bonus_2_3": {
       "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 3)",
       "result": 30,
       "description": "Hole Cosmo quantity bonus at game coordinates 2,3, mapped to website upgrade 24",
-      "extractedAt": "2026-09-27T01:50:45.840Z"
+      "extractedAt": "2026-10-01T08:49:59.835Z"
     },
     "summoning_win_bonus_22": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 22, 0)",
       "result": 25,
       "description": "Summoning Win bonus 22 added to Votes",
-      "extractedAt": "2026-09-27T01:50:45.841Z"
+      "extractedAt": "2026-10-01T08:49:59.837Z"
     },
     "gaming_palette_bonus_32": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 32, 0)",
       "result": 6.666666666666667,
       "description": "Gaming Palette bonus 32 added to Votes",
-      "extractedAt": "2026-09-27T01:50:45.851Z"
+      "extractedAt": "2026-10-01T08:49:59.853Z"
     },
     "legend_talent_bonus_22": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",
       "result": 25,
       "description": "Legend Talent bonus 22 added to Votes",
-      "extractedAt": "2026-09-27T01:50:45.853Z"
+      "extractedAt": "2026-10-01T08:49:59.867Z"
     },
     "sushi_rog_bonus_50": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
       "result": 0,
       "description": "Sushi unlock bonus at index 50, gated until more than 50 unique Sushi are unlocked",
-      "extractedAt": "2026-09-27T01:50:45.854Z"
+      "extractedAt": "2026-10-01T08:49:59.869Z"
     },
     "companion_bonus_161": {
       "expression": "idleon.callFunction(\"Companions\", 161)",
       "result": 150,
       "description": "Poppy effect used as the separate multiplicative vote contribution",
-      "extractedAt": "2026-09-27T01:50:45.856Z"
+      "extractedAt": "2026-10-01T08:49:59.885Z"
     },
     "companion_bonus_41": {
       "expression": "idleon.callFunction(\"Companions\", 41)",
       "result": 50,
       "description": "Companion 41 effect added to the Votes percentage sum",
-      "extractedAt": "2026-09-27T01:50:45.857Z"
+      "extractedAt": "2026-10-01T08:49:59.902Z"
     },
     "companion_bonus_19": {
       "expression": "idleon.callFunction(\"Companions\", 19)",
       "result": 8,
       "description": "Companion 19 effect added to the Votes percentage sum",
-      "extractedAt": "2026-09-27T01:50:45.858Z"
+      "extractedAt": "2026-10-01T08:49:59.917Z"
     }
   },
   "errors": {},

@@ -29,42 +29,42 @@ describe('Player Domain - All Talent Level', () => {
   players = gameData.get('players') as Player[];
  });
 
- it('validates eligible AllTalentLV(146) for player 0', () => {
+ it('validates eligible AllTalentLV level addition for Apocalypse Chow (talent 146) on player 0', () => {
   const liveValue = getExtractedValue(extractionResults, 'all_talent_level_146');
   const domainValue = getPlayerTalentAllLevel(players, 146);
 
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,
-   context: 'Player 0 AllTalentLV(146)',
+   context: 'Player 0 Apocalypse Chow AllTalentLV level addition',
   });
  });
 
- it('validates banned AllTalentLV(49) for player 0', () => {
+ it('validates banned AllTalentLV level addition for Enhancement Eclipse (talent 49) on player 0', () => {
   const liveValue = getExtractedValue(extractionResults, 'all_talent_level_49');
   const domainValue = getPlayerTalentAllLevel(players, 49);
 
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,
-   context: 'Player 0 AllTalentLV(49)',
+   context: 'Player 0 Enhancement Eclipse AllTalentLV level addition',
   });
  });
- it('validates gate-passing banned AllTalentLV(149) for player 0', () => {
+ it('validates gate-passing AllTalentLV level addition for Symbols Of Beyond (talent 149) on player 0', () => {
   const liveValue = getExtractedValue(extractionResults, 'all_talent_level_149');
   const domainValue = getPlayerTalentAllLevel(players, 149);
 
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,
-   context: 'Player 0 AllTalentLV(149)',
+   context: 'Player 0 Symbols Of Beyond AllTalentLV level addition',
   });
  });
 
- it('validates capped AllTalentLVz(225|3) for player 3', () => {
+ it('validates capped AllTalentLVz level addition for Castle Convene (talent 225) on player 3', () => {
   const liveValue = getExtractedValue(extractionResults, 'all_talent_level_z_225_player_3');
   const domainValue = getPlayerTalentAllLevel(players, 225, 3);
 
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,
-   context: 'Player 3 AllTalentLVz(225|3)',
+   context: 'Player 3 Castle Convene AllTalentLVz level addition',
   });
  });
 });

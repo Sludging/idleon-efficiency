@@ -5,66 +5,40 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
-type UpgradeParameter = {
-  index: number;
-  nextLevelCost?: () => number;
-  getRequiredLevel?: () => number;
-};
-
-type SelectedMinehead = Minehead & {
-  getUpgradeBonus?: (index: number) => number;
-  upgrades?: UpgradeParameter[];
-};
-
-const getUpgrade = (gameData: Map<string, any>, index: number, gameMethod: 'UpgCost' | 'UpgLvREQ'): UpgradeParameter => {
-  const minehead = gameData.get('minehead') as SelectedMinehead;
-  const upgrade = minehead?.upgrades?.find(upgrade => upgrade.index === index);
+const getUpgrade = (gameData: Map<string, any>, index: number) => {
+  const minehead = gameData.get('minehead') as Minehead;
+  const upgrade = minehead.upgrades.find(upgrade => upgrade.index === index);
   if (!upgrade) {
-    throw new Error(`MISSING SELECTED CALCULATION - Minehead("${gameMethod}", ${index}, 0), a same-case shop input`);
+    throw new Error(`Minehead upgrade ${index} is not present in the initialized domain`);
   }
   return upgrade;
 };
 
 const parameterSpecs: ParameterTestSpec[] = [
   ...[1, 16].map(index => ({
-    description: `external Sushi unlock bonus ${index} used by the Minehead cost discount`,
+    description: index === 1
+      ? 'Eggroll Sushi bonus discounting all Minehead upgrade costs'
+      : 'Tobiko Cluster Sushi bonus increasing the Minehead upgrade discount to 50%',
     extractionKey: `minehead_sushi_${index}`,
     domainExtractor: (gameData: Map<string, any>) => (gameData.get('sushi') as SushiStation).getBonusFromIndex(index),
   })),
   {
-    description: 'same-case El Cheapo Upgrado quantity used by every next-level cost',
+    description: "El' Cheapo Upgrado reduction to next-level Minehead shop costs",
     extractionKey: 'minehead_upgrade_quantity_26',
-    domainExtractor: gameData => {
-      const minehead = gameData.get('minehead') as SelectedMinehead;
-      if (typeof minehead?.getUpgradeBonus !== 'function') {
-        throw new Error('MISSING SELECTED CALCULATION - Minehead("UpgradeQTY", 26, 0), a same-case input to upgrade costs');
-      }
-      return minehead.getUpgradeBonus(26);
-    },
+    domainExtractor: gameData => (gameData.get('minehead') as Minehead).getUpgradeBonus(26),
   },
   ...[0, 1, 29].map(index => ({
-    description: `same-case next-level cost ${index} used by purchase affordability`,
+    description: `Minehead upgrade ${index === 0 ? 'Base Damage I' : index === 1 ? 'Numbahs' : "Rift Guy's Upgrade"} calculated shop price`,
     extractionKey: `minehead_upgrade_cost_${index}`,
-    domainExtractor: (gameData: Map<string, any>) => {
-      const upgrade = getUpgrade(gameData, index, 'UpgCost');
-      if (typeof upgrade.nextLevelCost !== 'function') {
-        throw new Error(`MISSING SELECTED CALCULATION - Minehead("UpgCost", ${index}, 0), a same-case input to affordability`);
-      }
-      return upgrade.nextLevelCost();
-    },
+    domainExtractor: (gameData: Map<string, any>) => getUpgrade(gameData, index).nextLevelCost(),
   })),
   ...[20, 21].map(index => ({
-    description: `same-case Research requirement ${index} used by account upgrade unlock`,
+    description: `Research level requirement for Minehead ${index === 20 ? 'Classic Flags' : 'Mega Damage II'} account-wide shop unlock`,
     extractionKey: `minehead_upgrade_requirement_${index}`,
-    domainExtractor: (gameData: Map<string, any>) => {
-      const upgrade = getUpgrade(gameData, index, 'UpgLvREQ');
-      if (typeof upgrade.getRequiredLevel !== 'function') {
-        throw new Error(`MISSING SELECTED CALCULATION - Minehead("UpgLvREQ", ${index}, 0), a same-case input to unlock`);
-      }
-      return upgrade.getRequiredLevel();
-    },
+    domainExtractor: (gameData: Map<string, any>) => getUpgrade(gameData, index).getRequiredLevel(),
   })),
 ];
+
 
 describe('Minehead upgrades - direct parameters', () => {
   let extractionResults: ExtractionResults;

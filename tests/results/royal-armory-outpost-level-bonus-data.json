@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-09-30T03:47:19.167Z",
+  "timestamp": "2026-10-01T08:49:56.244Z",
   "extractions": {
     "royal_armory_outpost_level_bonus_0_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 0, 0)",
       "result": 1,
       "description": "Baseline coefficient for the ordinary outpost-level effect",
-      "extractedAt": "2026-09-30T03:47:21.506Z"
+      "extractedAt": "2026-10-01T08:49:56.261Z"
     },
     "royal_armory_outpost_level_bonus_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 0)",
       "result": 5,
       "description": "Collection-rate percentage points added by each outpost level",
-      "extractedAt": "2026-09-30T03:47:21.517Z"
+      "extractedAt": "2026-10-01T08:49:56.273Z"
     },
     "royal_armory_outpost_level_bonus_1_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 1)",
       "result": 250,
       "description": "Connection-range bonus for the alternate outpost-level effect",
-      "extractedAt": "2026-09-30T03:47:21.534Z"
+      "extractedAt": "2026-10-01T08:49:56.275Z"
     },
     "royal_armory_outpost_level_bonus_2_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 2, 0)",
       "result": 10,
       "description": "Rank and Barrel experience percentage points added by each outpost level",
-      "extractedAt": "2026-09-30T03:47:21.547Z"
+      "extractedAt": "2026-10-01T08:49:56.277Z"
     }
   },
   "errors": {},

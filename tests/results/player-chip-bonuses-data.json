@@ -1,143 +1,143 @@
 {
-  "timestamp": "2026-09-27T01:50:43.634Z",
+  "timestamp": "2026-10-01T08:49:55.329Z",
   "extractions": {
     "chip_bonus_def": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"def\")",
       "result": 0,
       "description": "Equipped-chip defence contribution",
-      "extractedAt": "2026-09-27T01:50:43.639Z"
+      "extractedAt": "2026-10-01T08:49:55.342Z"
     },
     "chip_bonus_move": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"move\")",
       "result": 0,
       "description": "Raw equipped-chip movement contribution, before consumer conditions",
-      "extractedAt": "2026-09-27T01:50:43.641Z"
+      "extractedAt": "2026-10-01T08:49:55.344Z"
     },
     "chip_bonus_acc": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"acc\")",
       "result": 0,
       "description": "Equipped-chip accuracy contribution",
-      "extractedAt": "2026-09-27T01:50:43.650Z"
+      "extractedAt": "2026-10-01T08:49:55.354Z"
     },
     "chip_bonus_dr": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"dr\")",
       "result": 0,
       "description": "Raw equipped-chip drop-rate contribution, before consumer conditions",
-      "extractedAt": "2026-09-27T01:50:43.652Z"
+      "extractedAt": "2026-10-01T08:49:55.356Z"
     },
     "chip_bonus_atkspd": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"atkspd\")",
       "result": 0,
       "description": "Equipped-chip basic attack speed contribution",
-      "extractedAt": "2026-09-27T01:50:43.653Z"
+      "extractedAt": "2026-10-01T08:49:55.358Z"
     },
     "chip_bonus_labexp": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"labexp\")",
       "result": 0,
       "description": "Equipped-chip Lab experience contribution",
-      "extractedAt": "2026-09-27T01:50:43.655Z"
+      "extractedAt": "2026-10-01T08:49:55.359Z"
     },
     "chip_bonus_linewidth": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"linewidth\")",
       "result": 0,
       "description": "Equipped-chip mainframe line-width contribution",
-      "extractedAt": "2026-09-27T01:50:43.656Z"
+      "extractedAt": "2026-10-01T08:49:55.361Z"
     },
     "chip_bonus_fafk": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"fafk\")",
       "result": 0,
       "description": "Equipped-chip fighting AFK contribution",
-      "extractedAt": "2026-09-27T01:50:43.658Z"
+      "extractedAt": "2026-10-01T08:49:55.373Z"
     },
     "chip_bonus_safk": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"safk\")",
       "result": 0,
       "description": "Equipped-chip skilling AFK contribution",
-      "extractedAt": "2026-09-27T01:50:43.668Z"
+      "extractedAt": "2026-10-01T08:49:55.375Z"
     },
     "chip_bonus_crys": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"crys\")",
       "result": 75,
       "description": "Equipped-chip crystal revival contribution",
-      "extractedAt": "2026-09-27T01:50:43.670Z"
+      "extractedAt": "2026-10-01T08:49:55.377Z"
     },
     "chip_bonus_resp": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"resp\")",
       "result": 0,
       "description": "Equipped-chip monster respawn contribution",
-      "extractedAt": "2026-09-27T01:50:43.671Z"
+      "extractedAt": "2026-10-01T08:49:55.395Z"
     },
     "chip_bonus_toteff": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",
       "result": 0,
       "description": "Equipped-chip total skilling efficiency percentage points used by AllEfficiencies",
-      "extractedAt": "2026-09-27T01:50:43.673Z"
+      "extractedAt": "2026-10-01T08:49:55.405Z"
     },
     "chip_bonus_dmg": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"dmg\")",
       "result": 0,
       "description": "Equipped-chip total damage contribution",
-      "extractedAt": "2026-09-27T01:50:43.674Z"
+      "extractedAt": "2026-10-01T08:49:55.407Z"
     },
     "chip_bonus_eff": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"eff\")",
       "result": 0,
       "description": "Equipped-chip base skill efficiency contribution",
-      "extractedAt": "2026-09-27T01:50:43.688Z"
+      "extractedAt": "2026-10-01T08:49:55.409Z"
     },
     "chip_bonus_mkill": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"mkill\")",
       "result": 0,
       "description": "Equipped-chip multikill contribution",
-      "extractedAt": "2026-09-27T01:50:43.691Z"
+      "extractedAt": "2026-10-01T08:49:55.411Z"
     },
     "chip_bonus_star": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"star\")",
       "result": 1,
       "description": "Raw equipped-chip star-sign enabling contribution, not the resulting star-sign multiplier",
-      "extractedAt": "2026-09-27T01:50:43.693Z"
+      "extractedAt": "2026-10-01T08:49:55.424Z"
     },
     "chip_bonus_troph": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
       "result": 1,
       "description": "Raw equipped-chip trophy enabling contribution",
-      "extractedAt": "2026-09-27T01:50:43.702Z"
+      "extractedAt": "2026-10-01T08:49:55.426Z"
     },
     "chip_bonus_key1": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
       "result": 1,
       "description": "Raw equipped-chip upper-keychain enabling contribution",
-      "extractedAt": "2026-09-27T01:50:43.703Z"
+      "extractedAt": "2026-10-01T08:49:55.428Z"
     },
     "chip_bonus_pend": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
       "result": 1,
       "description": "Raw equipped-chip pendant enabling contribution",
-      "extractedAt": "2026-09-27T01:50:43.705Z"
+      "extractedAt": "2026-10-01T08:49:55.439Z"
     },
     "chip_bonus_weppow": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"weppow\")",
       "result": 0,
       "description": "Raw equipped-chip weapon-power contribution, not the resulting weapon multiplier",
-      "extractedAt": "2026-09-27T01:50:43.706Z"
+      "extractedAt": "2026-10-01T08:49:55.440Z"
     },
     "chip_bonus_card1": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"card1\")",
       "result": 1,
       "description": "Raw equipped-chip top-left-card enabling contribution",
-      "extractedAt": "2026-09-27T01:50:43.708Z"
+      "extractedAt": "2026-10-01T08:49:55.443Z"
     },
     "chip_bonus_card2": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"card2\")",
       "result": 1,
       "description": "Raw equipped-chip bottom-right-card enabling contribution",
-      "extractedAt": "2026-09-27T01:50:43.717Z"
+      "extractedAt": "2026-10-01T08:49:55.444Z"
     },
     "chip_bonus___missing_chip_bonus__": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"__missing_chip_bonus__\")",
       "result": 0,
       "description": "Absent bonus selector returns zero",
-      "extractedAt": "2026-09-27T01:50:43.719Z"
+      "extractedAt": "2026-10-01T08:49:55.455Z"
     }
   },
   "errors": {},
