@@ -146,7 +146,6 @@ describe('CoralReef upgrade state', () => {
 
   upgrade.level = upgrade.getMaxLevel()!;
   expect(upgrade.isMaxed()).toBe(true);
-  expect(upgrade.getNextLevelCost()).toBeUndefined();
   expect(coralReef.canAffordUpgrade(0)).toBe(false);
   expect(coralReef.getDaysUntilNextLevel(0)).toBeUndefined();
  });

@@ -1,9 +1,6 @@
 /**
- * Divinity Minor Link Bonus Calculation Tests
- *
- * Tests that given the correct input parameters, our domain calculates
- * the correct minor link bonus values.
- * 
+ * Compares Purrmep's linked-player passive bonus shown by the website with
+ * the matching game result for the saved linked player.
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -39,24 +36,19 @@ describe('Divinity Domain - Minor Link Bonus', () => {
  });
 
  describe('Minor Link Bonus Calculations', () => {
-  it('validates god 6 (Purrmep) minor link bonus calculation', () => {
+  it('matches Purrmep minor-link bonus for its linked player', () => {
    const god = divinity.gods[6];
-
-   if (!god) {
-    throw new Error('God 6 not found');
-   }
+   if (!god) throw new Error('God 6 (Purrmep) not found');
 
    const purrmepPlayer = god.linkedPlayers.at(0);
-   if (!purrmepPlayer) {
-    throw new Error('No player linked to god 6');
-   }
+   if (!purrmepPlayer) throw new Error('No player linked to Purrmep');
 
    const extractedBonus = extractionResults.extractions.divinity_minor_bonus_6.result;
    const calculatedBonus = god.getMinorLinkBonus(purrmepPlayer);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 6 (Purrmep) minor link bonus calculation',
+    context: 'Purrmep minor-link passive bonus shown for its linked player',
    });
   });
  });

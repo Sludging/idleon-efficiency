@@ -1,9 +1,6 @@
 /**
- * Cooking Domain Live Game Validation
- *
- * Tests our cooking domain calculations against live game data
- * extracted from running game using the debug tool.
- *
+ * Compares kitchen 0's calculated meal-cooking speed, shown by the website,
+ * with the game's CookingSPEED result for this saved account.
  */
 
 import { loadExtractionResults, getExtractedValue, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -39,21 +36,15 @@ describe('Cooking Domain - Meal Speed', () => {
   }
  });
 
- describe('getMealSpeed Function Testing', () => {
-  it('validates getMealSpeed calculation against live game', () => {
-   // Get live game final result
+ describe('Kitchen meal-cooking speed', () => {
+  it('matches the displayed meal speed for kitchen 0', () => {
    const liveFinalSpeed = getExtractedValue(extractionResults, 'final_cooking_speed');
-
-
-   // Call the ACTUAL domain function - this should use all the save data dependencies
-   // The kitchen should already be fully configured from save data
-   const domainResult = cooking.kitchens[0].mealSpeed; // This is the calculated value from updateCooking()
-
-   // Use custom matcher with detailed logging
+   const domainResult = cooking.kitchens[0].mealSpeed;
    const ratio = domainResult / liveFinalSpeed;
+
    expect(domainResult).toMatchLiveGameWithDetails(liveFinalSpeed, {
     tolerance: 0,
-    context: 'Kitchen 0 meal speed calculation',
+    context: 'Kitchen 0 meal-cooking speed shown by the website',
     debugInfo: {
      ratio: ratio.toExponential(3),
      timestamp: extractionResults.timestamp,

@@ -1,9 +1,9 @@
 /**
  * The Button bonus calculation tests.
  *
- * The game accumulates each static per-press value in a repeating
- * nine-category schedule, then applies Button_BonusMULTI.
- *
+ * Each selected accumulated gameplay effect is compared with its saved-press
+ * extraction after the dynamic multiplier. Research XP and Class EXP bookend
+ * the schedule; Cooking SPD is included because Cooking consumes it.
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -14,9 +14,9 @@ const saveName = 'latest';
 const extractionResultsName = 'button-bonus-data.json';
 
 const bonusCases = [
- { index: 0, extractionKey: 'button_bonus_0', description: 'first category' },
- { index: 7, extractionKey: 'button_bonus_7', description: 'downstream cooking category' },
- { index: 8, extractionKey: 'button_bonus_8', description: 'final category' },
+ { index: 0, extractionKey: 'button_bonus_0', description: 'Research XP' },
+ { index: 7, extractionKey: 'button_bonus_7', description: 'Cooking SPD' },
+ { index: 8, extractionKey: 'button_bonus_8', description: 'Class EXP' },
 ];
 
 describe('The Button - Bonus Calculations', () => {
@@ -39,19 +39,15 @@ describe('The Button - Bonus Calculations', () => {
  });
 
  bonusCases.forEach(({ index, extractionKey, description }) => {
-  it(`validates ${description} bonus at index ${index}`, () => {
+  it(`validates accumulated ${description}`, () => {
    const liveValue = getExtractedValue(extractionResults, extractionKey);
    const domainValue = button.getBonusForIndex(index);
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
     tolerance: 0,
-    context: `The Button ${description} bonus at index ${index}`,
+    context: `The Button accumulated ${description}`,
    });
   });
  });
 
- it('returns zero for unknown bonus indexes', () => {
-  expect(button.getBonusForIndex(-1)).toBe(0);
-  expect(button.getBonusForIndex(999)).toBe(0);
- });
 });

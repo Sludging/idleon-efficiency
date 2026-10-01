@@ -20,17 +20,17 @@
     {
       "label": "button_bonus_0",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
-      "description": "Representative Button bonus at the first category index"
+      "description": "Accumulated Research XP bonus from saved presses"
     },
     {
       "label": "button_bonus_7",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "description": "Representative Button bonus at the downstream cooking consumer index"
+      "description": "Accumulated Cooking SPD bonus"
     },
     {
       "label": "button_bonus_8",
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
-      "description": "Representative Button bonus at the final category index"
+      "description": "Accumulated Class EXP bonus from saved presses"
     }
   ]
 }

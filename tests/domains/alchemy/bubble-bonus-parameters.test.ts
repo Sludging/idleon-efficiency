@@ -36,56 +36,21 @@ const getBubbleByName = (alchemy: Alchemy, name: string) => {
 };
 
 const bubbleBonusParameterSpecs = {
- diamondChefPrismaticState: {
-  description: 'Diamond Chef - Prismatic State',
-  extractionKey: 'diamond_chef_prismatic_state',
+ y13DirectBubbleBonus: {
+  description: 'Y13 root Bubble bonus before any account-level Alchemy scaling',
+  extractionKey: 'y13_direct_bubble_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByName(alchemy, "Diamond Chef").prismatic ? 1 : 0;
+   return alchemy.cauldrons[CauldronIndex.Kazam].bubbles[32].getBonus();
   }
  },
 
- y13PrismaticState: {
-  description: 'Y13 - Prismatic State',
-  extractionKey: 'y13_prismatic_state',
+ ordinaryToolWBaseBonus: {
+  description: 'Stronk Tools base Bubble bonus before player class and 16th-bubble scaling',
+  extractionKey: 'ordinary_tool_w_base_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByBonusKey(alchemy, "Y13").prismatic ? 1 : 0;
-  }
- },
- ordinaryToolWPrismaticState: {
-  description: 'Stronk Tools - Prismatic State',
-  extractionKey: 'ordinary_tool_w_prismatic_state',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByBonusKey(alchemy, "ToolW").prismatic ? 1 : 0;
-  }
- },
-
- dailyDripPrismaticState: {
-  description: 'Da Daily Drip - Prismatic State',
-  extractionKey: 'daily_drip_prismatic_state',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByBonusKey(alchemy, "LqdCap").prismatic ? 1 : 0;
-  }
- },
-
- cropiusMapperPrismaticState: {
-  description: 'Cropius Mapper - Prismatic State',
-  extractionKey: 'cropius_mapper_prismatic_state',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByBonusKey(alchemy, "Y6").prismatic ? 1 : 0;
-  }
- },
-
- slabW2PrismaticState: {
-  description: 'Slabi Orefish - Prismatic State',
-  extractionKey: 'slab_w2_prismatic_state',
-  domainExtractor: (gameData: Map<string, any>) => {
-   const alchemy = gameData.get("alchemy") as Alchemy;
-   return getBubbleByBonusKey(alchemy, "W2").prismatic ? 1 : 0;
+   return alchemy.cauldrons[CauldronIndex.Power].bubbles[7].getBonus();
   }
  },
 

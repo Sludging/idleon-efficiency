@@ -1,12 +1,6 @@
 /**
- * Divinity Minor Link Bonus Parameter Validation
- *
- * Tests our divinity minor link bonus calculations against live game data.
- *
- * Formula:
- *   max(1, Y2ACTIVE) *
- *   ((1 + CoralKidUpgBonus(3, 0) / 100) * divinityLevel) / (60 + divinityLevel) *
- *   passiveMax
+ * Directly compares calculations used by Divinity minor links with the saved
+ * game's values; these inputs determine the linked player's displayed bonus.
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
@@ -19,7 +13,7 @@ const extractionResultsName = 'divinity-minor-link-data.json';
 
 const parameterSpecs = {
   alchemy_bubble_y2active: {
-    description: 'Alchemy bubble Y2ACTIVE (yellow bubble 2 active)',
+    description: 'Big P bubble input that increases linked-god passive bonuses',
     extractionKey: 'alchemy_bubble_y2active',
     domainExtractor: (gameData: Map<string, any>) => {
       const alchemy = gameData.get("alchemy") as Alchemy;
@@ -28,7 +22,7 @@ const parameterSpecs = {
   },
 
   clamworks_bonus_3: {
-    description: 'CoralKid upgrade bonus 3 (MISSING IMPLEMENTATION)',
+    description: 'Clamworks Multikill multiplier input to the linked-player passive bonus',
     extractionKey: 'clamworks_bonus_3',
     domainExtractor: (gameData: Map<string, any>) => {
       const coralKid = gameData.get("coralKid") as CoralKid;

@@ -1,9 +1,6 @@
 /**
- * Cooking Meal Bonus Calculation Tests
- *
- * Tests that given the correct input parameters, our domain calculates
- * the correct meal bonus values.
- *
+ * Compares Cooking's displayed meal-bonus totals with the saved game's
+ * matching MealBonus values.
  */
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -39,33 +36,35 @@ describe('Cooking Domain - Meal Bonus', () => {
  });
 
  describe('Meal Bonus Calculations', () => {
-  it('validates Sailing meal bonus calculation', () => {
+  it('matches Popped Corn meal Sailing Speed bonus shown by the website', () => {
    const extractedBonus = extractionResults.extractions.meal_bonus_sailing.result;
    const calculatedBonus = cooking.getMealBonusForKey("Sailing");
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'Sailing meal bonus calculation',
+    context: 'Popped Corn Sailing Speed bonus shown by the website',
    });
   });
 
-  it('validates Mcook meal bonus calculation', () => {
+
+  it('matches the meal-cooking-speed bonus total used by the website', () => {
    const extractedBonus = extractionResults.extractions.meal_bonus_mcook.result;
    const calculatedBonus = cooking.getMealBonusForKey("Mcook");
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'Mcook meal bonus calculation',
+    context: 'Cooking meal bonus contributing to the website meal cooking speed',
    });
   });
 
-  it('validates KitchenEff meal bonus calculation', () => {
+
+  it('matches Cabbage meal kitchen efficiency bonus shown by the website', () => {
    const extractedBonus = extractionResults.extractions.meal_bonus_kitchen_eff.result;
    const calculatedBonus = cooking.getMealBonusForKey("KitchenEff");
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'KitchenEff meal bonus calculation',
+    context: 'Cabbage kitchen efficiency bonus shown by the website',
    });
   });
  });

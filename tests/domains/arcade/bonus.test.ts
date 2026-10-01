@@ -1,15 +1,9 @@
 /**
- * Arcade bonus calculation tests.
- *
- * The paired save exercises the evolved companion 27 branch on an unmaxed
- * Prisma bonus (54) and has two real max-level entries. Index 8 is the
- * representative max-level comparison below; the source gate is exact level
- * 101, not every level at or above 101.
- *
- * The synthetic cases keep the source-backed multiplier boundaries visible
- * without inventing live save state. They use initialized Arcade/Companion
- * objects and the normal companion-impact update to drive getBonus.
- *
+ * Arcade bonuses are checked against the saved account: Prisma Bonuses index
+ * 54 exercises the evolved Companion 27 value (1.5, which does not activate
+ * the exact-1 doubling gate), and Multikill per Tier index 8 is a real
+ * max-level entry. The game doubles only at level 101, not for all levels
+ * above that threshold.
  */
 
 import {

@@ -1,16 +1,10 @@
 /**
- * Divinity Blessing Bonus Calculation Tests
- *
- * Tests that given the correct input parameters, our domain calculates
- * the correct blessing bonus values.
- * 
+ * Compares each selected god's blessing bonus shown by the website with the
+ * matching game result for this saved account.
  */
-
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Divinity } from '../../../data/domain/divinity';
-import { Player } from '../../../data/domain/player';
-import { getTargetPlayer } from '../../utils/target-player';
 const saveName = 'latest';
 const extractionResultsName = 'divinity-blessing-data.json';
 
@@ -18,7 +12,6 @@ describe('Divinity Domain - Blessing Bonus', () => {
  let extractionResults: any;
  let gameData: Map<string, any>;
  let divinity: Divinity;
- let players: Player[];
 
  beforeAll(() => {
   // Load live game extraction results
@@ -31,7 +24,6 @@ describe('Divinity Domain - Blessing Bonus', () => {
 
    // Get fully configured divinity domain
    divinity = gameData.get('divinity') as Divinity;
-   players = gameData.get('players') as Player[];
    if (!divinity) {
     throw new Error('Divinity domain not found in save data');
    }
@@ -42,83 +34,72 @@ describe('Divinity Domain - Blessing Bonus', () => {
  });
 
  describe('Blessing Bonus Calculations', () => {
-  it('validates god 2 (Nobisect) blessing bonus - special BlessyBunDN formula', () => {
+  it('matches Nobisect blessing bonus shown by the website', () => {
    const god = divinity.gods[2];
-
-   if (!god) {
-    throw new Error('God 2 not found');
-   }
+   if (!god) throw new Error('God 2 (Nobisect) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_2.result;
-   const calculatedBonus = (god.getBlessingBonus as (player: Player) => number)(getTargetPlayer(players));
+   const calculatedBonus = god.getBlessingBonus();
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 2 (Nobisect) blessing bonus calculation (special BlessyBunDN formula)',
+    context: 'Nobisect blessing bonus shown on the website',
    });
   });
 
-  it('validates god 4 blessing bonus - standard formula', () => {
-   const god = divinity.gods[4];
 
-   if (!god) {
-    throw new Error('God 4 not found');
-   }
+  it('matches Goharut blessing bonus shown on the website', () => {
+   const god = divinity.gods[4];
+   if (!god) throw new Error('God 4 (Goharut) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_4.result;
    const calculatedBonus = god.getBlessingBonus();
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 4 blessing bonus calculation',
+    context: 'Goharut blessing bonus shown on the website',
    });
   });
 
-  it('validates god 6 (Purrmep) blessing bonus - standard formula', () => {
-   const god = divinity.gods[6];
 
-   if (!god) {
-    throw new Error('God 6 not found');
-   }
+  it('matches Purrmep blessing bonus shown on the website', () => {
+   const god = divinity.gods[6];
+   if (!god) throw new Error('God 6 (Purrmep) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_6.result;
    const calculatedBonus = god.getBlessingBonus();
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 6 (Purrmep) blessing bonus calculation',
+    context: 'Purrmep blessing bonus shown on the website',
    });
   });
 
-  it('validates god 7 blessing bonus - standard formula', () => {
-   const god = divinity.gods[7];
 
-   if (!god) {
-    throw new Error('God 7 not found');
-   }
+  it('matches Flutterbis blessing bonus shown on the website', () => {
+   const god = divinity.gods[7];
+   if (!god) throw new Error('God 7 (Flutterbis) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_7.result;
    const calculatedBonus = god.getBlessingBonus();
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 7 blessing bonus calculation',
+    context: 'Flutterbis blessing bonus shown on the website',
    });
   });
 
-  it('validates god 9 blessing bonus - standard formula', () => {
-   const god = divinity.gods[9];
 
-   if (!god) {
-    throw new Error('God 9 not found');
-   }
+  it('matches Bagur blessing bonus shown on the website', () => {
+   const god = divinity.gods[9];
+   if (!god) throw new Error('God 9 (Bagur) not found');
 
    const extractedBonus = extractionResults.extractions.divinity_blessing_9.result;
    const calculatedBonus = god.getBlessingBonus();
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
     tolerance: 0,
-    context: 'God 9 blessing bonus calculation',
+    context: 'Bagur blessing bonus shown on the website',
    });
   });
  });

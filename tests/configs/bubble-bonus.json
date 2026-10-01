@@ -8,11 +8,6 @@
       "description": "Diamond Chef final bubble bonus (MealSpdz)"
     },
     {
-      "label": "diamond_chef_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
-      "description": "Diamond Chef prismatic state"
-    },
-    {
       "label": "alchemy_prismatic_bonus",
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "description": "Alchemy Prismatic Bonus"
@@ -66,31 +61,6 @@
       "label": "y13_direct_bubble_bonus",
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 3, 32, 0)",
       "description": "Y13 direct BubbleBonus root (Kazam cauldron 3, bubble 32)"
-    },
-    {
-      "label": "y13_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 32, 0)",
-      "description": "Y13 prismatic-state predicate"
-    },
-    {
-      "label": "ordinary_tool_w_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 0, 7, 0)",
-      "description": "Stronk Tools prismatic-state predicate (Power cauldron 0, bubble 7)"
-    },
-    {
-      "label": "daily_drip_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 7, 0)",
-      "description": "Da Daily Drip prismatic-state predicate (Kazam cauldron 3, bubble 7)"
-    },
-    {
-      "label": "cropius_mapper_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 25, 0)",
-      "description": "Cropius Mapper prismatic-state predicate (Kazam cauldron 3, bubble 25)"
-    },
-    {
-      "label": "slab_w2_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 0, 21, 0)",
-      "description": "Slabi Orefish prismatic-state predicate (Power cauldron 0, bubble 21)"
     },
     {
       "label": "ordinary_tool_w_second_bonus",

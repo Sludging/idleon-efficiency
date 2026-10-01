@@ -1,13 +1,6 @@
 /**
- * Divinity Blessing Bonus Validation
- *
- * Tests our divinity blessing bonus calculations against live game data.
- *
- * Standard formula (most gods):
- *   blessLevel * blessingPerLevel * (1 + 0.05 * emporiumBonus33 * max(0, godRank))
- *   where godRank = numberOfUnlockedGods - 10
- *
- * God 2 (Nobisect) uses special BlessyBunDN formula with skill efficiencies and stats.
+ * Direct comparisons for inputs used by blessing bonuses shown by the website.
+ * Nobisect's bonus is the saved case that depends on the active player's stats.
  */
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
@@ -23,7 +16,7 @@ const extractionResultsName = 'divinity-blessing-data.json';
 
 const parameterSpecs = {
  emporium_bonus_33: {
-  description: 'Jade Emporium upgrade 33 bonus (True Godly Blessings)',
+  description: 'Jade Emporium upgrade 33 True Godly Blessings input to website blessing bonuses',
   extractionKey: 'emporium_bonus_33',
   domainExtractor: (gameData: Map<string, any>) => {
    const sneaking = gameData.get("sneaking") as Sneaking;
@@ -33,7 +26,7 @@ const parameterSpecs = {
  },
 
  gods_unlocked_count: {
-  description: 'Number of gods unlocked + god rank',
+  description: 'Unlocked-god count plus god rank input to website blessing bonuses',
   extractionKey: 'gods_unlocked_count',
   domainExtractor: (gameData: Map<string, any>) => {
    const divinity = gameData.get("divinity") as Divinity;
@@ -43,7 +36,7 @@ const parameterSpecs = {
  },
 
  skill_all_efficiencies: {
-  description: 'All skill efficiencies stat (active player)',
+  description: 'Active player all-skill efficiency input to Nobisect blessing bonus',
   extractionKey: 'skill_all_efficiencies',
   domainExtractor: (gameData: Map<string, any>) => {
    const skilling = gameData.get("skilling") as Skilling;
@@ -53,7 +46,7 @@ const parameterSpecs = {
  },
 
  alchemy_bubble_mineff: {
-  description: 'Mining efficiency bubble (active player)',
+  description: 'Active player mining-efficiency bubble input to Nobisect blessing bonus',
   extractionKey: 'alchemy_bubble_mineff',
   domainExtractor: (gameData: Map<string, any>) => {
    const alchemy = gameData.get("alchemy") as Alchemy;
@@ -63,7 +56,7 @@ const parameterSpecs = {
  },
 
  alchemy_bubble_chopeff: {
-  description: 'Chopping efficiency bubble (active player)',
+  description: 'Active player chopping-efficiency bubble input to Nobisect blessing bonus',
   extractionKey: 'alchemy_bubble_chopeff',
   domainExtractor: (gameData: Map<string, any>) => {
    const alchemy = gameData.get("alchemy") as Alchemy;
@@ -73,7 +66,7 @@ const parameterSpecs = {
  },
 
  total_stats_str: {
-  description: 'Total STR stat (active player)',
+  description: 'Active player STR input to Nobisect blessing bonus',
   extractionKey: 'total_stats_str',
   domainExtractor: (gameData: Map<string, any>) => {
    const players = gameData.get("players") as Player[];
@@ -82,7 +75,7 @@ const parameterSpecs = {
  },
 
  total_stats_agi: {
-  description: 'Total AGI stat (active player)',
+  description: 'Active player AGI input to Nobisect blessing bonus',
   extractionKey: 'total_stats_agi',
   domainExtractor: (gameData: Map<string, any>) => {
    const players = gameData.get("players") as Player[];
@@ -91,7 +84,7 @@ const parameterSpecs = {
  },
 
  total_stats_wis: {
-  description: 'Total WIS stat (active player)',
+  description: 'Active player WIS input to Nobisect blessing bonus',
   extractionKey: 'total_stats_wis',
   domainExtractor: (gameData: Map<string, any>) => {
    const players = gameData.get("players") as Player[];

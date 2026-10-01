@@ -1,12 +1,7 @@
 /**
- * Family Class Bonus parameter validation.
- *
- * TalentCalc(-3) reads The Family Guy talent (144) when a winning character
- * contribution is written to FamBonusQTYs. This parameter test keeps the
- * Player-owned talent calculation separate from Family's class-lineage and
- * bonus selection logic, using the explicit owner represented by player 0.
+ * The Family Guy talent (144) boosts the winning character's Family Class
+ * Bonus; this comparison isolates that player-specific website input.
  */
-
 import {
   ExtractionResults,
   getExtractedValue,
@@ -25,7 +20,7 @@ const extractionResultsName = "family-class-bonus-data.json";
 
 const parameterSpecs: ParameterTestSpec = {
   description:
-    "Target player The Family Guy talent bonus used by an owner-specific Family Bonus calculation",
+    "The Family Guy talent bonus used by the winning owner's Family class bonus",
   extractionKey: "family_guy_talent_144",
   domainExtractor: (gameData) => getTargetPlayer(gameData.get("players") as Player[]).getTalentBonus(144),
 };

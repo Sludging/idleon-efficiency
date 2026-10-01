@@ -120,7 +120,7 @@
     {
       "label": "family_guy_talent_144",
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 144)",
-      "description": "Active character The Family Guy talent bonus used to boost Family Bonuses"
+      "description": "The Family Guy talent bonus used by its owner's Family class bonus"
     },
     {
       "label": "family_guy_special_144",
