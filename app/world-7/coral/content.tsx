@@ -60,9 +60,9 @@ function CoralContent() {
     const purchasedCount = dancingBonuses.filter(bonus => bonus.purchased).length
 
     return (
-        <Box width="100%" style={{ maxWidth: '1440px', margin: '0 auto' }} pad={{ horizontal: 'medium', vertical: 'small' }} gap="medium">
-            <Box gap="xsmall">
-                <Heading level="1" size="small" margin="none" style={{ fontWeight: 'normal' }}>Coral Reef &amp; Dancing Coral</Heading>
+        <Box width="100%" pad={{ vertical: 'small' }} gap="medium">
+            <Box gap="xsmall" margin={{ top: '16px' }}>
+                <Heading level="2" size="medium" margin="none" style={{ fontWeight: 'normal' }}>Coral Reef &amp; Dancing Coral</Heading>
                 <Text size="small">Track Reef Coral production and shrine bonuses; rows with placeholder or filler catalog descriptions are hidden.</Text>
             </Box>
 
@@ -92,7 +92,7 @@ function CoralContent() {
                         const days = reef.getDaysUntilNextLevel(upgrade.index)
 
                         return (
-                            <ShadowBox key={upgrade.index} background="dark-1" direction="row" pad="xsmall" align="center">
+                            <ShadowBox key={upgrade.index} background="dark-1" direction="row" pad="medium" gap="small" align="center" style={{ opacity: upgrade.unlocked ? 1 : 0.6 }}>
                                 <Grid
                                     columns={size === 'small'
                                         ? '100%'
@@ -110,31 +110,31 @@ function CoralContent() {
                                         >
                                             <IconImage data={upgrade.getImageData()} scale={0.5} />
                                         </Box>
-                                        <TextAndLabel label="Effect" text={upgrade.getBonusText()} textSize="small" labelSize="xsmall" />
+                                        <TextAndLabel label="Effect" text={upgrade.getBonusText()} textSize="xsmall" labelSize="xsmall" />
                                     </Box>
-                                    <TextAndLabel label="Level" text={`${formatNumber(upgrade.level, 'Whole')}${maxLevel !== undefined ? ` / ${formatNumber(maxLevel, 'Whole')}` : ''}`} textSize="xsmall" labelSize="xsmall" />
-                                    <TextAndLabel label="Status" text={!upgrade.unlocked ? 'Locked' : maxed ? 'Maxed' : 'Unlocked'} textSize="xsmall" labelSize="xsmall" />
+                                    <TextAndLabel label="Level" text={`${formatNumber(upgrade.level, 'Whole')}${maxLevel !== undefined ? ` / ${formatNumber(maxLevel, 'Whole')}` : ''}`} textSize="small" labelSize="xsmall" />
+                                    <TextAndLabel label="Status" text={!upgrade.unlocked ? 'Locked' : maxed ? 'Maxed' : 'Unlocked'} textSize="small" labelSize="xsmall" />
                                     <Box gap="xxsmall">
-                                        {!upgrade.unlocked
-                                            ? <TextAndLabel
-                                                label="First-level cost after unlock"
-                                                text={nextLevelCost === undefined ? 'Unavailable' : `${formatNumber(nextLevelCost, 'Whole')} Coral`}
-                                                textSize="xsmall"
-                                                labelSize="xsmall"
-                                            />
-                                            : nextLevelCost !== undefined
-                                                ? <>
-                                                    <TextAndLabel label="Next level cost" text={`${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="xsmall" labelSize="xsmall" />
-                                                    <TextAndLabel label="Saved toward cost" text={`${formatNumber(saved, 'Whole')} / ${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="xsmall" labelSize="xsmall" />
-                                                    {affordable
-                                                        ? <Text size="xsmall">Ready</Text>
-                                                        : days !== undefined
-                                                            ? <Text size="xsmall">Estimated time: {formatNumber(days, 'Whole')} {days === 1 ? 'day' : 'days'} assuming the daily rate stays constant</Text>
-                                                            : <Text size="xsmall">No ETA: daily Coral rate is zero or unavailable.</Text>}
-                                                </>
-                                                : <Text size="xsmall">{maxed
-                                                    ? 'Maximum level reached; no next-level cost.'
-                                                    : 'Next-level cost unavailable.'}</Text>}
+                                        {maxed
+                                            ? <Text size="xsmall">Maximum level reached; no next-level cost.</Text>
+                                            : !upgrade.unlocked
+                                                ? <TextAndLabel
+                                                    label="First-level cost after unlock"
+                                                    text={nextLevelCost === undefined ? 'Unavailable' : `${formatNumber(nextLevelCost, 'Whole')} Coral`}
+                                                    textSize="small"
+                                                    labelSize="xsmall"
+                                                />
+                                                : nextLevelCost !== undefined
+                                                    ? <>
+                                                        <TextAndLabel label="Next level cost" text={`${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="small" labelSize="xsmall" />
+                                                        <TextAndLabel label="Saved toward cost" text={`${formatNumber(saved, 'Whole')} / ${formatNumber(nextLevelCost, 'Whole')} Coral`} textSize="small" labelSize="xsmall" />
+                                                        {affordable
+                                                            ? <Text size="xsmall">Ready</Text>
+                                                            : days !== undefined
+                                                                ? <Text size="xsmall">Estimated time: {formatNumber(days, 'Whole')} {days === 1 ? 'day' : 'days'} assuming the daily rate stays constant</Text>
+                                                                : <Text size="xsmall">No ETA: daily Coral rate is zero or unavailable.</Text>}
+                                                    </>
+                                                    : <Text size="xsmall">Next-level cost unavailable.</Text>}
                                     </Box>
                                 </Grid>
                             </ShadowBox>
@@ -154,11 +154,12 @@ function CoralContent() {
                         const shrine = construction.buildings.find(building => building.index === shrineIndex)
 
                         return (
-                            <ShadowBox key={bonus.index} background="dark-1" direction="row" pad="xsmall" align="center" style={{ opacity: bonus.purchased ? 1 : 0.5 }}>
+                            <ShadowBox key={bonus.index} background="dark-1" direction="row" pad="medium" gap="small" align="center" style={{ opacity: bonus.purchased ? 1 : 0.5 }}>
                                 <Grid
                                     columns={size === 'small'
-                                        ? '%'
+                                        ? '100%'
                                         : ['minmax(0, 2fr)', 'minmax(110px, 1fr)', 'minmax(120px, 1fr)']}
+                                    gap="small"
                                     align="center"
                                     fill
                                 >
@@ -173,12 +174,12 @@ function CoralContent() {
                                         <TextAndLabel
                                             label="Effect"
                                             text={bonus.getBonusText().replace(/_/g, ' ')}
-                                            textSize="small"
+                                            textSize="xsmall"
                                             labelSize="xsmall"
                                         />
                                     </Box>
                                     <Box direction="row" gap="small" wrap>
-                                        <TextAndLabel label="Shrine level" text={`${formatNumber(bonus.shrineLevel)}/${dancingCoral.maxShrineLevel}`} textSize="xsmall" labelSize="xsmall" />
+                                        <TextAndLabel label="Shrine level" text={`${formatNumber(bonus.shrineLevel)}/${dancingCoral.maxShrineLevel}`} textSize="small" labelSize="xsmall" />
                                         {bonus.purchased && <TextAndLabel label="Current bonus" text={`${formatNumber(bonus.getBonus())}%`} textSize="xsmall" labelSize="xsmall" />}
                                     </Box>
                                     <Box direction="row" gap="xsmall" align="center">
@@ -191,7 +192,7 @@ function CoralContent() {
                                                         <TipDisplay heading={bonus.data.name} size="small">
                                                             <Box><IconImage data={Item.getImageData(`Coral${bonus.index}`)} scale={0.7} /></Box>
                                                         </TipDisplay>
-                                                        <Text size="xsmall">{formatNumber(bonus.getCost(), 'Whole')}</Text>
+                                                        <Text size="small">{formatNumber(bonus.getCost(), 'Whole')}</Text>
                                                     </Box>
                                                 }
                                             />
@@ -203,7 +204,7 @@ function CoralContent() {
                     })}
                 </Box>
             </Box>
-        </Box >
+        </Box>
     )
 }
 

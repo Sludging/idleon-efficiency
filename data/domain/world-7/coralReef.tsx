@@ -115,7 +115,7 @@ export class CoralReef extends Domain {
     canAffordUpgrade(index: number): boolean {
         const upgrade = this.upgrades.find(upgrade => upgrade.index === index);
 
-        if (!upgrade || !upgrade.unlocked) {
+        if (!upgrade || !upgrade.unlocked || upgrade.isMaxed()) {
             return false;
         }
 
@@ -126,7 +126,7 @@ export class CoralReef extends Domain {
 
     getDaysUntilNextLevel(index: number): number | undefined {
         const upgrade = this.upgrades.find(upgrade => upgrade.index === index);
-        if (!upgrade || !upgrade.unlocked || this.dailyCoralGains <= 0) {
+        if (!upgrade || !upgrade.unlocked || upgrade.isMaxed() || this.dailyCoralGains <= 0) {
             return undefined;
         }
 
