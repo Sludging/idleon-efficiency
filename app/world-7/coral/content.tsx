@@ -69,7 +69,18 @@ function CoralContent() {
             <Box as="section" gap="small" aria-labelledby="coral-summary-heading">
                 <Heading id="coral-summary-heading" level="2" size="small" margin="none" style={{ fontWeight: 'normal' }}>Your progress</Heading>
                 <Grid columns={{ count: summaryColumnCount, size: 'auto' }} gap="small">
-                    <Metric label="Reef Coral held" value={formatNumber(reef.ownedCoral, 'Whole')} />
+                    <ShadowBox background="dark-1" pad="small">
+                        <ComponentAndLabel
+                            label="Reef Coral held"
+                            labelSize="xsmall"
+                            component={
+                                <Box direction="row" gap="xsmall" align="center">
+                                    <IconImage data={CoralReef.getCoralImageData()} scale={0.6} />
+                                    <Text size={size === 'small' ? 'xsmall' : 'small'}>{formatNumber(reef.ownedCoral, 'Whole')}</Text>
+                                </Box>
+                            }
+                        />
+                    </ShadowBox>
                     <Metric label="Daily Reef Coral" value={`${formatNumber(reef.dailyCoralGains)} / day`} tooltip={reef.dailyCoralGainBreakdown ? <DailyGainBreakdown reef={reef} /> : undefined} />
                     <Metric label="Reef upgrades unlocked" value={`${unlockedCount} / ${reefUpgrades.length}`} />
                     <Metric label="Dancing Coral purchased" value={`${purchasedCount} / ${dancingBonuses.length}`} />

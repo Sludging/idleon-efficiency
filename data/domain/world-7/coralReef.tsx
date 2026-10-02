@@ -83,6 +83,11 @@ export class CoralReef extends Domain {
         base: 0,
     }
     ownedCoral: number = 0;
+    static getCoralImageData = (): ImageData => ({
+        location: "Coral0_x1",
+        width: 36,
+        height: 36,
+    })
 
     getRawKeys(): RawData[] {
         return [
