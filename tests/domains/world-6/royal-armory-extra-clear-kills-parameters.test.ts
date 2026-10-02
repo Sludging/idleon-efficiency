@@ -72,10 +72,7 @@ describe('Royal Armory extra clear-kills direct parameters', () => {
             validateExtractionHealth(extractionResults);
             const liveValue = getExtractedValue(extractionResults, extractionKey);
 
-            expect(websiteValue).toMatchLiveGameWithDetails(liveValue, {
-                tolerance: 0,
-                context: `Royal Armory extra clear-kills direct input: ${description}`,
-            });
+            expect(websiteValue).toMatchLiveGame(liveValue, 0);
         });
     });
 });

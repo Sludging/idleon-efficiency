@@ -14,7 +14,7 @@ import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-outpost-level-bonus-data.json';
 const bonusCases = [
- { index: 0, variant: 0, description: 'the baseline outpost-level effect' },
+ { index: 0, variant: 0, description: 'the baseline coefficient for the ordinary outpost-level effect' },
  { index: 1, variant: 0, description: 'the collection-rate increase per outpost level' },
  { index: 1, variant: 1, description: 'the alternate connection-range increase' },
  { index: 2, variant: 0, description: 'the rank and Barrel experience increase per outpost level' },

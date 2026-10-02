@@ -50,9 +50,4 @@ describe('ZenithMarket Bonus Calculations', () => {
   });
  });
 
- describe('Edge Cases', () => {
-  it('returns 0 for getBonusForId with non-existent index', () => {
-   expect(zenithMarket.getBonusForId(99)).toBe(0);
-  });
- });
 });

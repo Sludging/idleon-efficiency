@@ -27,12 +27,12 @@ const DIRECT_TOME_SCORE_TOLERANCE = 0.001;
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  tome_bonus_score: {
-  description: 'Tome score input used by Tome Bonuses, including the 4,000- and 8,000-score conditions',
+  description: 'Tome score that scales Damage and unlocks Skill Efficiency and Drop Rate bonuses',
   extractionKey: 'tome_bonus_score',
   domainExtractor: (gameData) => (gameData.get('tome') as Tome).getHighestScore(),
  },
  tome_bonus_grimoire_17: {
-  description: 'Grimoire upgrade 17 bonus applied to Tome Bonuses',
+  description: 'Grimoire upgrade 17 contribution to Tome score bonuses',
   extractionKey: 'tome_bonus_grimoire_17',
   domainExtractor: (gameData) => {
    const grimoire = gameData.get('grimoire') as Grimoire;
@@ -40,7 +40,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_troll_set: {
-  description: 'Troll equipment set bonus applied to Tome Bonuses',
+  description: 'Troll equipment set contribution to Tome score bonuses',
   extractionKey: 'tome_bonus_troll_set',
   domainExtractor: (gameData) => {
    const equipmentSets = gameData.get('equipmentSets') as EquipmentSets;
@@ -48,7 +48,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_str: {
-  description: 'Player 0 final Alchemy +{% STR bubble bonus consumed by Tome Bonus index 3',
+  description: 'Player 0 final Alchemy Strength stat bonus used by Tome STR',
   extractionKey: 'tome_bonus_alchemy_str',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
@@ -57,7 +57,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_agi: {
-  description: 'Player 0 final Alchemy +{% AGI bubble bonus consumed by Tome Bonus index 4',
+  description: 'Player 0 final Alchemy Agility stat bonus used by Tome AGI',
   extractionKey: 'tome_bonus_alchemy_agi',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
@@ -66,7 +66,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_alchemy_wis: {
-  description: 'Player 0 final Alchemy +{% WIS bubble bonus consumed by Tome Bonus index 5',
+  description: 'Player 0 final Alchemy Wisdom stat bonus used by Tome WIS',
   extractionKey: 'tome_bonus_alchemy_wis',
   domainExtractor: (gameData) => {
    const alchemy = gameData.get('alchemy') as Alchemy;
@@ -75,7 +75,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_event_shop_0: {
-  description: 'Golden Tome ownership in the Event Shop gates Tome Bonus index 6 DMG Multi',
+  description: 'Golden Tome ownership gates the Golden Tome Damage Multi bonus',
   extractionKey: 'tome_bonus_event_shop_0',
   domainExtractor: (gameData) => {
    const eventShop = gameData.get('eventShop') as EventShop;
@@ -83,7 +83,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   },
  },
  tome_bonus_event_shop_27: {
-  description: 'Singed Tome ownership in the Event Shop gates Tome Bonus index 7 Drop Rate Multi',
+  description: 'Singed Tome ownership gates the Singed Tome Drop Rate Multi bonus',
   extractionKey: 'tome_bonus_event_shop_27',
   domainExtractor: (gameData) => {
    const eventShop = gameData.get('eventShop') as EventShop;
@@ -106,8 +106,8 @@ describe('Tome Domain - Bonuses - Parameters', () => {
   it(`matches ${spec.description}`, () => {
    const liveValue = getExtractedValue(extractionResults, spec.extractionKey);
    const domainValue = spec.domainExtractor(gameData);
-
    expect(domainValue).toMatchLiveGame(liveValue, spec.extractionKey === 'tome_bonus_score' ? DIRECT_TOME_SCORE_TOLERANCE : 0);
+
   });
  });
 });

@@ -9,7 +9,20 @@ import { Tome } from '../../../data/domain/world-4/tome';
 
 const saveName = 'latest';
 const extractionResultsName = 'tome-epilogue-bonus-data.json';
-const epilogueBonusIndices = Array.from({ length: 11 }, (_, index) => index);
+const epilogueBonusEffects = [
+ 'Bones multiplier',
+ 'Villager EXP multiplier',
+ 'Dust multiplier',
+ 'Artifact Find multiplier',
+ 'Amber multiplier',
+ 'Palette Luck',
+ 'Tachyon multiplier',
+ 'Research XP',
+ 'Equinox multiplier',
+ 'World 7 Skill 3 bonus',
+ 'filler bonus',
+] as const;
+const epilogueBonusIndices = epilogueBonusEffects.map((_, index) => index);
 // Game extraction reads cached total score while the domain recomputes current Tome lines; keep this bound narrow to retain failure detection.
 const SCORE_DERIVED_EPILOGUE_TOLERANCE = 0.001;
 
@@ -30,12 +43,13 @@ describe('Tome Domain - Epilogue Bonus', () => {
  });
 
  epilogueBonusIndices.forEach(index => {
-  it(`matches the game LoreEpiBon calculation for epilogue index ${index}`, () => {
+  const effect = epilogueBonusEffects[index];
+  it(`matches the Tome epilogue ${effect}`, () => {
    const liveBonus = getExtractedValue(extractionResults, `lore_epic_bonus_${index}`);
 
    expect(tome.getEpilogueBonus(index)).toMatchLiveGameWithDetails(liveBonus, {
     tolerance: SCORE_DERIVED_EPILOGUE_TOLERANCE,
-    context: `Tome epilogue index-${index} bonus`,
+    context: `Tome epilogue ${effect}`,
    });
   });
  });

@@ -33,11 +33,6 @@
       "description": "Megaflesh ownership contribution at upgrade threshold 11"
     },
     {
-      "label": "upgrade_level_3",
-      "expression": "idleon.getAttr(\"Bubba\")[1][3]",
-      "description": "Bubba upgrade 3 level (controls bonus unlock progression)"
-    },
-    {
       "label": "global_bonus_1",
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
       "description": "Global bonus 1: +{% Build Rate (base 10)"

@@ -41,7 +41,6 @@ describe('Printer output', () => {
           tolerance: 0,
           context: `Printer output / character ${playerIndex} / ${sample.item} / Lab ${sample.inLab} / Harriep ${sample.harriep}`,
           debugInfo: {
-            orbKillCount: `OptionsListAccount[138] = ${getExtractedValue(extractionResults, 'printer_orb_kill_count')}`,
             gameExtraPrinting: `Game ExtraPrinting(${playerIndex}) = ${gameOutputMultiplier}`,
             possibleCauses: [
               `Companion 17 active-level effect: website=${websiteCompanion17Effect}; game Companions(17)=${gameCompanion17Effect}`,

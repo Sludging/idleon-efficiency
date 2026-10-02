@@ -71,7 +71,7 @@ describe('CoralKid Domain - Calculations', () => {
    const calculatedBonus = coralKid.getBonusFromIndex(2);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'CoralKid bonus 2: God Rank class EXP multiplier',
    });
   });
@@ -101,70 +101,70 @@ describe('CoralKid Domain - Calculations', () => {
    const calculatedBonus = coralKid.getBonusFromIndex(5);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'CoralKid bonus 5: Daily Coral generation increase',
    });
   });
  });
 
  describe('Cost Calculations', () => {
-  it('validates cost calculation for bonus 0', () => {
+  it('matches next cost for the Divinity EXP bonus', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_0');
    const calculatedCost = coralKid.getBonusNextlevelCost(0);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 0',
+    tolerance: 0,
+    context: 'Coral Kid next cost for the Divinity EXP bonus',
    });
   });
 
-  it('validates cost calculation for bonus 1', () => {
+  it('matches next cost for the Divinity blessing max-level increase', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_1');
    const calculatedCost = coralKid.getBonusNextlevelCost(1);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 1',
+    tolerance: 0,
+    context: 'Coral Kid next cost for the blessing max-level increase',
    });
   });
 
-  it('validates cost calculation for bonus 2', () => {
+  it('matches next cost for the God Rank class EXP multiplier', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_2');
    const calculatedCost = coralKid.getBonusNextlevelCost(2);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 2',
+    tolerance: 0,
+    context: 'Coral Kid next cost for the God Rank class EXP multiplier',
    });
   });
 
-  it('validates cost calculation for bonus 3', () => {
+  it('matches next cost for the Divinity minor-link bonus', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_3');
    const calculatedCost = coralKid.getBonusNextlevelCost(3);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 3',
+    tolerance: 0,
+    context: 'Coral Kid next cost for the Divinity minor-link bonus',
    });
   });
 
-  it('validates cost calculation for bonus 4', () => {
+  it('matches next cost for Divinity points per Coral Reef upgrade', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_4');
    const calculatedCost = coralKid.getBonusNextlevelCost(4);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 4',
+    tolerance: 0,
+    context: 'Coral Kid next cost for Divinity points per Coral Reef upgrade',
    });
   });
 
-  it('validates cost calculation for bonus 5', () => {
+  it('matches next cost for daily Coral generation', () => {
    const extractedCost = getExtractedValue(extractionResults, 'coral_kid_cost_5');
    const calculatedCost = coralKid.getBonusNextlevelCost(5);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'CoralKid upgrade cost for bonus 5',
+    tolerance: 0,
+    context: 'Coral Kid next cost for daily Coral generation',
    });
   });
  });

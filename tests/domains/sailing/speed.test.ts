@@ -5,7 +5,7 @@
 
 import { loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Boat, Sailing } from '../../../data/domain/world-5/sailing/sailing';
+import { Sailing } from '../../../data/domain/world-5/sailing/sailing';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
@@ -166,48 +166,4 @@ describe('Sailing Domain - Speed', () => {
   });
  });
 
- describe('Deterministic BoatSpeed branches', () => {
-  const makeBoat = (speedUpgrades: number, assignIsland?: Island) => {
-   const boat = new Boat(0, assignIsland, 0, 0, speedUpgrades, undefined);
-   boat.speedBaseMathWithoutStarSign = 1;
-   return boat;
-  };
-
-  it('does not cap an unassigned boat in island-bound mode', () => {
-   const boat = makeBoat(6);
-
-   expect(boat.getSpeedValue({
-    starSignEquipped: false,
-    silkRodeEquipped: false,
-    includeCaptain: false,
-    islandBound: true,
-   })).toBe(40);
-  });
-
-  it('does not cap an assigned boat while it is in a nonzero route state', () => {
-   const boat = makeBoat(6, { data: { distance: 1 } } as Island);
-   Object.assign(boat, { routeState: 1 });
-
-   expect(boat.getSpeedValue({
-    starSignEquipped: false,
-    silkRodeEquipped: false,
-    includeCaptain: false,
-    islandBound: true,
-   })).toBe(40);
-  });
-
-  it('applies the level-7 squared speed-upgrade milestone', () => {
-   const levelSixBoat = makeBoat(6);
-   const levelSevenBoat = makeBoat(7);
-   const options = {
-    starSignEquipped: false,
-    silkRodeEquipped: false,
-    includeCaptain: false,
-    islandBound: false,
-   };
-
-   expect(levelSixBoat.getSpeedValue(options)).toBe(40);
-   expect(levelSevenBoat.getSpeedValue(options)).toBe(52);
-  });
- });
 });

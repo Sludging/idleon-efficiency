@@ -20,7 +20,7 @@ describe('Royal Armory Support Collection bonus', () => {
         jellyOperator = gameData.get('jellyOperator') as JellyOperator;
     });
 
-    it('matches the collection-rate percentage contributed by one assigned support', () => {
+    it('matches the per-support collection-rate percentage', () => {
         const supportObstruction = jellyOperator.obstructions.find(candidate => candidate.index === 41);
         if (!supportObstruction) {
             throw new Error(
@@ -36,7 +36,7 @@ describe('Royal Armory Support Collection bonus', () => {
 
         expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
             tolerance: 0,
-            context: 'Royal Armory collection-rate percentage contributed by one assigned support',
+            context: 'Royal Armory per-support collection-rate percentage',
         });
     });
 });

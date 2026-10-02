@@ -5,112 +5,112 @@
     {
       "label": "tome_bonus_0",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
-      "description": "Tome Bonus index 0: +{% DMG from Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses"
+      "description": "Tome Damage bonus from Tome score, Grimoire upgrade 17, and Troll equipment set"
     },
     {
       "label": "tome_bonus_1",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "description": "Tome Bonus index 1: optional +{% Skill Eff bonus after 4,000 Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses"
+      "description": "Tome Skill Efficiency bonus after 4,000 Tome score, with Grimoire upgrade 17 and Troll set"
     },
     {
       "label": "tome_bonus_2",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 2, 0)",
-      "description": "Tome Bonus index 2: optional +{% Drop Rate bonus after 8,000 Tome score, with Grimoire upgrade 17 and Troll equipment set bonuses"
+      "description": "Tome Drop Rate bonus after 8,000 Tome score, with Grimoire upgrade 17 and Troll set"
     },
     {
       "label": "tome_bonus_3",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 3, 0)",
-      "description": "Tome Bonus index 3: +{% STR stat bonus"
+      "description": "Tome STR stat bonus"
     },
     {
       "label": "tome_bonus_4",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 4, 0)",
-      "description": "Tome Bonus index 4: +{% AGI stat bonus"
+      "description": "Tome AGI stat bonus"
     },
     {
       "label": "tome_bonus_5",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 5, 0)",
-      "description": "Tome Bonus index 5: +{% WIS stat bonus"
+      "description": "Tome WIS stat bonus"
     },
     {
       "label": "tome_bonus_6",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
-      "description": "Tome Bonus index 6: Golden Tome DMG Multi bonus unlocked by owning Golden Tome in the Event Shop, with Grimoire upgrade 17 and Troll equipment set bonuses"
+      "description": "Golden Tome Damage Multi bonus gated by Event Shop ownership"
     },
     {
       "label": "tome_bonus_7",
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 7, 0)",
-      "description": "Tome Bonus index 7: Singed Tome Drop Rate Multi bonus unlocked by owning Singed Tome in the Event Shop, with Grimoire upgrade 17 and Troll equipment set bonuses"
+      "description": "Singed Tome Drop Rate Multi bonus gated by Event Shop ownership"
     },
     {
       "label": "tome_bonus_score",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "description": "Tome score input used by Tome Bonuses, including the 4,000- and 8,000-score conditions"
+      "description": "Tome score that scales the Damage bonus and unlocks Skill Efficiency and Drop Rate bonuses"
     },
     {
       "label": "tome_bonus_unlocked_0",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",
-      "description": "Tome Bonus index 0 unlock state from the live Tome actor"
+      "description": "Tome Damage bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_unlocked_1",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][1]",
-      "description": "Tome Bonus index 1 unlock state from the live Tome actor"
+      "description": "Tome Skill Efficiency bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_unlocked_2",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][2]",
-      "description": "Tome Bonus index 2 unlock state from the live Tome actor"
+      "description": "Tome Drop Rate bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_unlocked_3",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][3]",
-      "description": "Tome Bonus index 3 unlock state from the live Tome actor"
+      "description": "Tome STR stat bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_unlocked_4",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][4]",
-      "description": "Tome Bonus index 4 unlock state from the live Tome actor"
+      "description": "Tome AGI stat bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_unlocked_5",
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][5]",
-      "description": "Tome Bonus index 5 unlock state from the live Tome actor"
+      "description": "Tome WIS stat bonus unlock state from the live Tome actor"
     },
     {
       "label": "tome_bonus_grimoire_17",
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
-      "description": "Grimoire upgrade 17 bonus applied to Tome Bonuses"
+      "description": "Grimoire upgrade 17 contribution to Tome score bonuses"
     },
     {
       "label": "tome_bonus_troll_set",
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
-      "description": "Troll equipment set bonus applied to Tome Bonuses"
+      "description": "Troll equipment set contribution to Tome score bonuses"
     },
     {
       "label": "tome_bonus_event_shop_0",
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 0, 0)",
-      "description": "Golden Tome ownership in the Event Shop gates Tome Bonus index 6 DMG Multi"
+      "description": "Golden Tome ownership gates its Damage Multi bonus"
     },
     {
       "label": "tome_bonus_event_shop_27",
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 27, 0)",
-      "description": "Singed Tome ownership in the Event Shop gates Tome Bonus index 7 Drop Rate Multi"
+      "description": "Singed Tome ownership gates its Drop Rate Multi bonus"
     },
     {
       "label": "tome_bonus_alchemy_str",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "description": "Final active-player Alchemy +{% STR bubble bonus consumed by Tome Bonus index 3"
+      "description": "Active player final Alchemy Strength stat bonus used by Tome STR"
     },
     {
       "label": "tome_bonus_alchemy_agi",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
-      "description": "Final active-player Alchemy +{% AGI bubble bonus consumed by Tome Bonus index 4"
+      "description": "Active player final Alchemy Agility stat bonus used by Tome AGI"
     },
     {
       "label": "tome_bonus_alchemy_wis",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
-      "description": "Final active-player Alchemy +{% WIS bubble bonus consumed by Tome Bonus index 5"
+      "description": "Active player final Alchemy Wisdom stat bonus used by Tome WIS"
     }
   ]
 }

@@ -22,27 +22,27 @@ const extractionResultsName = 'tome-score-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  farmingTotalStickers: {
-  description: 'Farming stickers producer',
+  description: 'Farming sticker collection total used for Tome score',
   extractionKey: 'tome_producer_112_total_stickers',
   domainExtractor: (gameData) => (gameData.get('farming') as Farming).getTotalStickers(),
  },
  mineheadOpponentsDefeated: {
-  description: 'Minehead opponents defeated producer',
+  description: 'Minehead opponents defeated contribution to Tome score line 110',
   extractionKey: 'tome_producer_110_research_7_4',
   domainExtractor: (gameData) => (gameData.get('minehead') as Minehead).getOpponentsDefeated(),
  },
  royalStatueLevels: {
-  description: 'RoyalG statue-level producer',
+  description: 'Total Royal Guardian Statue levels used in Tome score',
   extractionKey: 'tome_producer_118_royalg_0_sum',
   domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalRoyalStatueLevels(),
  },
  royalOutpostsBuilt: {
-  description: 'RoyalG outpost producer',
+  description: 'Royal Guardian outposts built used in Tome score',
   extractionKey: 'tome_producer_119_royalg_total_stats_4',
   domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(4),
  },
  royalResourceGrade: {
-  description: 'RoyalG resource-grade producer',
+  description: 'Royal Armory Resource Grade used in Tome score line 120',
   extractionKey: 'tome_producer_120_royalg_total_stats_0',
   domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(0),
  },

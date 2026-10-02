@@ -31,7 +31,7 @@ const shimmerBonuses = [
 
 describe('Island Expeditions Domain - Shimmer Bonuses', () => {
  let extractionResults: ExtractionResults;
- let expeditions: IslandExpeditions & { getShimmerBonus?: (index: number) => number };
+ let expeditions: IslandExpeditions;
 
  beforeAll(() => {
   extractionResults = loadExtractionResults(extractionResultsName);
@@ -41,16 +41,13 @@ describe('Island Expeditions Domain - Shimmer Bonuses', () => {
  });
 
  shimmerBonuses.forEach(({ index, label, description }) => {
-  it(`matches the complete Shimmer bonus for ${description}`, () => {
+  it(`matches the complete account-wide ${description} bonus after The Shim Lantern boost`, () => {
    const liveValue = getExtractedValue(extractionResults, label);
-   if (typeof expeditions?.getShimmerBonus !== 'function') {
-    throw new Error(`MISSING OWNER API - IslandExpeditions.getShimmerBonus(${index}) must expose OptionsListAccount[${174 + index}] * Dreamstuff("AllShimmerBonuses", 0)`);
-   }
    const domainValue = expeditions.getShimmerBonus(index);
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
     tolerance: 0,
-    context: `Shimmer ${description}`,
+    context: `Account-wide Shimmer ${description}`,
     debugInfo: {
      saveName,
      accountOptionIndex: 174 + index,

@@ -1,7 +1,8 @@
 /**
- * Hourly Royal Guardian Outpost collection compared for a developed outpost
- * and the saved empty row. Player-specific bonuses use the player selected by
- * the matching extraction configuration.
+ * Hourly Royal Guardian Outpost collection for a developed outpost and the
+ * raw calculated rate for the saved empty row, which is not forced to zero.
+ * Player-specific bonuses use the player selected by the matching extraction
+ * configuration.
  */
 
 import {

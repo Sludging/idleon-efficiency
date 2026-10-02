@@ -10,12 +10,7 @@
     {
       "label": "companion_51_bonus",
       "expression": "idleon.callFunction(\"Companions\", 51, 0)",
-      "description": "Companion 51 bonus (multiplier for Orion/Poppy bonuses)"
-    },
-    {
-      "label": "upgrade_level_3",
-      "expression": "idleon.getAttr(\"OptionsListAccount\")[271]",
-      "description": "Poppy upgrade 3 level (controls bonus unlock progression)"
+      "description": "Owned Companion 51 clicker effect for Orion, Poppy, and Bubba bonuses at its active level"
     },
     {
       "label": "global_bonus_0",

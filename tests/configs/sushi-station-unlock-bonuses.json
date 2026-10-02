@@ -41,46 +41,6 @@
       "label": "sushi_game_version",
       "expression": "idleon.getGameVersion()",
       "description": "Current live game title and version associated with the Sushi extraction"
-    },
-    {
-      "label": "sushi_board_tiers",
-      "expression": "idleon.getAttr(\"Sushi\")[0]",
-      "description": "Raw board tier identifiers from Sushi row 0"
-    },
-    {
-      "label": "sushi_slot_bonus_flags",
-      "expression": "idleon.getAttr(\"Sushi\")[1]",
-      "description": "Raw numeric slot-effect flags from Sushi row 1"
-    },
-    {
-      "label": "sushi_station_upgrade_levels",
-      "expression": "idleon.getAttr(\"Sushi\")[2].slice(0, 46)",
-      "description": "Raw player levels for the 46 catalogued Sushi Station upgrades"
-    },
-    {
-      "label": "sushi_fireplace_types",
-      "expression": "idleon.getAttr(\"Sushi\")[3]",
-      "description": "Raw fireplace states from Sushi row 3"
-    },
-    {
-      "label": "sushi_collection_states",
-      "expression": "idleon.getAttr(\"Sushi\")[5].slice(0, 64)",
-      "description": "Raw collection states for the 64 catalogued Sushi entries"
-    },
-    {
-      "label": "sushi_knowledge_levels",
-      "expression": "idleon.getAttr(\"Sushi\")[7].slice(0, 64)",
-      "description": "Raw Knowledge levels for the 64 catalogued Sushi entries"
-    },
-    {
-      "label": "sushi_knowledge_bonus_specific",
-      "expression": "Array.from({ length: 64 }, (_, index) => idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", index, 0))",
-      "description": "KnowledgeBonusSpecific live output for all 64 Sushi catalog entries"
-    },
-    {
-      "label": "sushi_station_upgrade_qty",
-      "expression": "Array.from({ length: 46 }, (_, index) => idleon.callFunction(\"SushiStuff\", \"UpgradeQTY\", index, 0))",
-      "description": "UpgradeQTY live output for all 46 Sushi Station upgrades"
     }
   ]
 }

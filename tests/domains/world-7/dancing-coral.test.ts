@@ -49,7 +49,7 @@ describe('Dancing Coral Domain - Calculations', () => {
    const calculatedBonus = dancingCoral.getBonusFromIndex(0);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Dancing Coral bonus 0: Daily Reef Coral',
    });
   });
@@ -59,7 +59,7 @@ describe('Dancing Coral Domain - Calculations', () => {
    const calculatedBonus = dancingCoral.getBonusFromIndex(1);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Dancing Coral bonus 1: Spelunking POW',
    });
   });
@@ -69,7 +69,7 @@ describe('Dancing Coral Domain - Calculations', () => {
    const calculatedBonus = dancingCoral.getBonusFromIndex(2);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Dancing Coral bonus 2: Spelunking Amber gain',
    });
   });
@@ -79,150 +79,150 @@ describe('Dancing Coral Domain - Calculations', () => {
    const calculatedBonus = dancingCoral.getBonusFromIndex(3);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Dancing Coral bonus 3: Class EXP gain',
    });
   });
 
-  it('validates bonus 4 calculation', () => {
+  it('matches the Research EXP bonus from Neon Coral', () => {
    const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_4');
    const calculatedBonus = dancingCoral.getBonusFromIndex(4);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
-    context: 'Dancing Coral bonus 4',
+    tolerance: 0,
+    context: 'Neon Coral bonus: Research EXP',
    });
   });
 
-  it('validates bonus 5 calculation', () => {
+  it('matches the Minehead damage and money bonus from Aegean Coral', () => {
    const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_5');
    const calculatedBonus = dancingCoral.getBonusFromIndex(5);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
-    context: 'Dancing Coral bonus 5',
+    tolerance: 0,
+    context: 'Aegean Coral bonus: Minehead damage and money',
    });
   });
 
-  it('validates bonus 6 calculation', () => {
+  it('matches the Gilded Coral bonus output; its effect is undocumented in current static metadata', () => {
    const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_6');
    const calculatedBonus = dancingCoral.getBonusFromIndex(6);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
-    context: 'Dancing Coral bonus 6',
+    tolerance: 0,
+    context: 'Gilded Coral bonus output; effect not documented in current static metadata',
    });
   });
 
-  it('validates bonus 7 calculation', () => {
+  it('matches the Twisted Coral bonus output; its effect is undocumented in current static metadata', () => {
    const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_7');
    const calculatedBonus = dancingCoral.getBonusFromIndex(7);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
-    context: 'Dancing Coral bonus 7',
+    tolerance: 0,
+    context: 'Twisted Coral bonus output; effect not documented in current static metadata',
    });
   });
 
-  it('validates bonus 8 calculation', () => {
+  it('matches the Eternal Coral bonus output; its effect is undocumented in current static metadata', () => {
    const extractedBonus = getExtractedValue(extractionResults, 'dancing_coral_bonus_8');
    const calculatedBonus = dancingCoral.getBonusFromIndex(8);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
-    context: 'Dancing Coral bonus 8',
+    tolerance: 0,
+    context: 'Eternal Coral bonus output; effect not documented in current static metadata',
    });
   });
  });
 
  describe('Cost Calculations', () => {
-  it('validates cost calculation for bonus 0', () => {
+  it('matches the next purchase cost of Reef Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_0');
    const calculatedCost = dancingCoral.bonuses[0].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 0',
+    tolerance: 0,
+    context: 'Reef Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 1', () => {
+  it('matches the next purchase cost of Vibrant Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_1');
    const calculatedCost = dancingCoral.bonuses[1].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 1',
+    tolerance: 0,
+    context: 'Vibrant Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 2', () => {
+  it('matches the next purchase cost of Glowing Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_2');
    const calculatedCost = dancingCoral.bonuses[2].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 2',
+    tolerance: 0,
+    context: 'Glowing Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 3', () => {
+  it('matches the next purchase cost of Char Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_3');
    const calculatedCost = dancingCoral.bonuses[3].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 3',
+    tolerance: 0,
+    context: 'Char Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 4', () => {
+  it('matches the next purchase cost of Neon Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_4');
    const calculatedCost = dancingCoral.bonuses[4].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 4',
+    tolerance: 0,
+    context: 'Neon Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 5', () => {
+  it('matches the next purchase cost of Aegean Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_5');
    const calculatedCost = dancingCoral.bonuses[5].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 5',
+    tolerance: 0,
+    context: 'Aegean Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 6', () => {
+  it('matches the next purchase cost of Gilded Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_6');
    const calculatedCost = dancingCoral.bonuses[6].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 6',
+    tolerance: 0,
+    context: 'Gilded Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 7', () => {
+  it('matches the next purchase cost of Twisted Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_7');
    const calculatedCost = dancingCoral.bonuses[7].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 7',
+    tolerance: 0,
+    context: 'Twisted Coral next purchase cost',
    });
   });
 
-  it('validates cost calculation for bonus 8', () => {
+  it('matches the next purchase cost of Eternal Coral', () => {
    const extractedCost = getExtractedValue(extractionResults, 'dancing_coral_cost_8');
    const calculatedCost = dancingCoral.bonuses[8].getCost();
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Dancing Coral cost for bonus 8',
+    tolerance: 0,
+    context: 'Eternal Coral next purchase cost',
    });
   });
  });

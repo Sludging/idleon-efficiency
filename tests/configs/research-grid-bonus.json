@@ -53,16 +53,6 @@
       "description": "Sticker-it To Em Research Grid bonus with a shape multiplier"
     },
     {
-      "label": "grid_bonus_125_mode1",
-      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 1)",
-      "description": "Better Button Research Grid level"
-    },
-    {
-      "label": "grid_bonus_125_mode2",
-      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 2)",
-      "description": "Better Button default secondary Research Grid bonus"
-    },
-    {
       "label": "grid_bonus_31_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 31, 2)",
       "description": "Smart Eye minimum-roll secondary bonus"
@@ -70,37 +60,37 @@
     {
       "label": "grid_bonus_67_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 67, 2)",
-      "description": "Sticker Crown secondary bonus scaled by crown count"
+      "description": "Sticky Crown bonus scaled by the account's crown count"
     },
     {
       "label": "grid_bonus_68_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 68, 2)",
-      "description": "Sticker Crown secondary bonus scaled by crown count"
+      "description": "Boony Crown bonus scaled by the account's crown count"
     },
     {
       "label": "grid_bonus_107_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 107, 2)",
-      "description": "Sticker Crown secondary bonus scaled by crown count"
+      "description": "Palettable Crown bonus scaled by the account's crown count"
     },
     {
       "label": "grid_bonus_94_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
-      "description": "Observation-level secondary bonus"
+      "description": "Observation insight experience scaled by the account's total unlocked observation levels"
     },
     {
       "label": "grid_bonus_112_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
-      "description": "Occurrence-count secondary bonus"
+      "description": "See 'Em All Research EXP per unlocked observation"
     },
     {
       "label": "grid_bonus_151_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 151, 2)",
-      "description": "Account-option secondary bonus"
+      "description": "Spelunking Research mode-2 POW bonus output"
     },
     {
       "label": "grid_bonus_168_mode2",
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 168, 2)",
-      "description": "Glimbo-trade secondary bonus"
+      "description": "Glimbo Insider Trading Secrets bonus per 100 trades"
     }
   ]
 }

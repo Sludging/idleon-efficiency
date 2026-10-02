@@ -8,6 +8,8 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
 
 const saveName = 'latest';
+// Both saved rows compare the same worker-granting rank formula; row selection is not a separate branch.
+
 const rankCases = [
     {
         mapIndex: 1,

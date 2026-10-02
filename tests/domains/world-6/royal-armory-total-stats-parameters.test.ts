@@ -18,7 +18,7 @@ describe('Purified-outpost count direct parameter', () => {
         royalArmory = loadGameDataFromSave(saveName).get('royalArmory') as RoyalArmory;
     });
 
-    it('matches the purification rank used to include a built outpost in the collection bonus', () => {
+    it("matches saved outpost row 1's purification rank below the collection-bonus threshold", () => {
         const extractionResults = loadExtractionResults(extractionResultsName);
         validateExtractionHealth(extractionResults);
         const liveValue = getExtractedValue(

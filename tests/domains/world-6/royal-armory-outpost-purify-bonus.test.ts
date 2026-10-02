@@ -1,6 +1,6 @@
 /**
- * The purified-outpost collection bonus converts reaching the purification
- * track's first rank into additional collection percentage.
+ * The purified-outpost collection bonus adds percentage points to the rate;
+ * a row's purification rank separately determines whether it receives them.
  */
 
 import {
@@ -22,7 +22,7 @@ describe('Royal Armory purified-outpost collection bonus', () => {
   royalArmory = loadGameDataFromSave(saveName).get('royalArmory') as RoyalArmory;
  });
 
- it('matches the extra collection percentage for purified outposts', () => {
+ it('matches the percentage-point bonus applied to purified outposts', () => {
   const extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
   const liveValue = getExtractedValue(extractionResults, extractionKey);

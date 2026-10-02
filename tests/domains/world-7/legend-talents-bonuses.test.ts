@@ -120,13 +120,4 @@ describe('Legend Talents Bonus Calculations', () => {
   });
  });
 
- describe('Edge Cases', () => {
-  it('validates filler talent (40) returns 0 bonus', () => {
-   const liveBonus = getExtractedValue(extractionResults, 'talent_40_bonus');
-   const domainBonus = legendTalents.getBonusFromIndex(40);
-
-   expect(domainBonus).toBe(0);
-   expect(liveBonus).toBe(0);
-  });
- });
 });

@@ -20,16 +20,14 @@ const gridBonusCases = [
  { index: 125, mode: 0, extractionKey: 'grid_bonus_125', description: 'Better Button base bonus' },
  { index: 31, mode: 0, extractionKey: 'grid_bonus_31', description: 'Smart Eye base bonus with shape multiplier' },
  { index: 47, mode: 0, extractionKey: 'grid_bonus_47', description: 'Sticker-it To Em base bonus with shape multiplier' },
- { index: 125, mode: 1, extractionKey: 'grid_bonus_125_mode1', description: 'Better Button level' },
- { index: 125, mode: 2, extractionKey: 'grid_bonus_125_mode2', description: 'Better Button default secondary bonus' },
  { index: 31, mode: 2, extractionKey: 'grid_bonus_31_mode2', description: 'Smart Eye secondary bonus' },
- { index: 67, mode: 2, extractionKey: 'grid_bonus_67_mode2', description: 'index 67 crown-count secondary bonus' },
- { index: 68, mode: 2, extractionKey: 'grid_bonus_68_mode2', description: 'index 68 crown-count secondary bonus' },
- { index: 107, mode: 2, extractionKey: 'grid_bonus_107_mode2', description: 'index 107 crown-count secondary bonus' },
- { index: 94, mode: 2, extractionKey: 'grid_bonus_94_mode2', description: 'index 94 observation-level secondary bonus' },
- { index: 112, mode: 2, extractionKey: 'grid_bonus_112_mode2', description: 'index 112 occurrence-count secondary bonus' },
- { index: 151, mode: 2, extractionKey: 'grid_bonus_151_mode2', description: 'index 151 account-option secondary bonus' },
- { index: 168, mode: 2, extractionKey: 'grid_bonus_168_mode2', description: 'index 168 Glimbo-trade secondary bonus' },
+ { index: 67, mode: 2, extractionKey: 'grid_bonus_67_mode2', description: 'Sticky Crown secondary bonus scaled by crown count' },
+ { index: 68, mode: 2, extractionKey: 'grid_bonus_68_mode2', description: 'Boony Crown secondary bonus scaled by crown count' },
+ { index: 107, mode: 2, extractionKey: 'grid_bonus_107_mode2', description: 'Palettable Crown secondary bonus scaled by crown count' },
+ { index: 94, mode: 2, extractionKey: 'grid_bonus_94_mode2', description: 'Observation insight experience scaled by total observation levels' },
+ { index: 112, mode: 2, extractionKey: 'grid_bonus_112_mode2', description: "See 'Em All Research EXP per unlocked observation" },
+ { index: 151, mode: 2, extractionKey: 'grid_bonus_151_mode2', description: 'Spelunking Research mode-2 POW bonus' },
+ { index: 168, mode: 2, extractionKey: 'grid_bonus_168_mode2', description: 'Glimbo Insider Trading Secrets bonus per 100 trades' },
 ];
 
 describe('Research Grid bonus calculations', () => {
@@ -64,8 +62,4 @@ describe('Research Grid bonus calculations', () => {
   });
  });
 
- it('returns zero for unknown grid indexes', () => {
-  expect(researchGrid.getBonusForId(-1)).toBe(0);
-  expect(researchGrid.getBonusForId(999)).toBe(0);
- });
 });

@@ -113,14 +113,12 @@ const statueParameterSpecs: Record<string, ParameterTestSpec> = {
   }
  },
  voodoo_statufication_bonus: {
-  description: 'Voodoo Statufication talent bonus (skillIndex 56) from best player (-1 = all players)',
+  description: 'Voodoo Statufication bonus selected across all saved characters by game selector -1',
   extractionKey: 'voodoo_statufication_bonus',
   domainExtractor: (gameData) => {
-   const playerData = gameData.get("players") as Player[];
-   const bestVoidMan = playerData.reduce((final, player) =>
-    final = (player.talents.find(talent => talent.skillIndex == 56)?.level ?? 0) > 0
-     && player.playerID > final.playerID ? player : final, playerData[0]);
-   return bestVoidMan?.talents.find(talent => talent.skillIndex == 56)?.getBonus() ?? 0;
+   const players = gameData.get("players") as Player[];
+   return players.reduce((highestBonus, player) =>
+    Math.max(highestBonus, player.talents.find(talent => talent.skillIndex === 56)?.getBonus() ?? 0), 0);
   }
  },
 };

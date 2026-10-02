@@ -30,72 +30,72 @@
     {
       "label": "dancing_coral_bonus_4",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
-      "description": "Dancing Coral bonus 4: Unknown"
+      "description": "Neon Coral bonus: Research EXP"
     },
     {
       "label": "dancing_coral_bonus_5",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 5, 0)",
-      "description": "Dancing Coral bonus 5: Unknown"
+      "description": "Aegean Coral bonus: Minehead damage and money"
     },
     {
       "label": "dancing_coral_bonus_6",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 6, 0)",
-      "description": "Dancing Coral bonus 6: Unknown"
+      "description": "Gilded Coral bonus output; effect not identified in available source"
     },
     {
       "label": "dancing_coral_bonus_7",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 7, 0)",
-      "description": "Dancing Coral bonus 7: Unknown"
+      "description": "Twisted Coral bonus output; effect not identified in available source"
     },
     {
       "label": "dancing_coral_bonus_8",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 8, 0)",
-      "description": "Dancing Coral bonus 8: Unknown"
+      "description": "Eternal Coral bonus output; effect not identified in available source"
     },
     {
       "label": "dancing_coral_cost_0",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 0)",
-      "description": "Dancing Coral cost for bonus 0"
+      "description": "Reef Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_1",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 1)",
-      "description": "Dancing Coral cost for bonus 1"
+      "description": "Vibrant Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_2",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 2)",
-      "description": "Dancing Coral cost for bonus 2"
+      "description": "Glowing Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_3",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 3)",
-      "description": "Dancing Coral cost for bonus 3"
+      "description": "Char Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_4",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 4)",
-      "description": "Dancing Coral cost for bonus 4"
+      "description": "Neon Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_5",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 5)",
-      "description": "Dancing Coral cost for bonus 5"
+      "description": "Aegean Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_6",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 6)",
-      "description": "Dancing Coral cost for bonus 6"
+      "description": "Gilded Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_7",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 7)",
-      "description": "Dancing Coral cost for bonus 7"
+      "description": "Twisted Coral next purchase cost"
     },
     {
       "label": "dancing_coral_cost_8",
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralCOST\", 8)",
-      "description": "Dancing Coral cost for bonus 8"
+      "description": "Eternal Coral next purchase cost"
     }
   ]
 }

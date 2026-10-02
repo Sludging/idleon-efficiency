@@ -5,7 +5,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 const saveName = 'latest';
 const extractionResultsName = 'voting-bonusz-multi-data.json';
 
-describe('Votes VotingBonuszMulti producer', () => {
+describe('Account-wide vote multiplier', () => {
   let extractionResults: ExtractionResults;
   let gameData: Map<string, any>;
 
@@ -15,7 +15,7 @@ describe('Votes VotingBonuszMulti producer', () => {
     gameData = loadGameDataFromSave(saveName);
   });
 
-  it('matches the full account-wide vote multiplier', () => {
+  it('matches the full account-wide multiplier applied to vote bonuses', () => {
     const liveValue = getExtractedValue(extractionResults, 'voting_bonusz_multi');
     const votes = gameData.get('votes') as Votes;
 

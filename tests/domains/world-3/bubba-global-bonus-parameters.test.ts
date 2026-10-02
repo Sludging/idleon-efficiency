@@ -8,7 +8,7 @@ const extractionResultsName = 'bubba-global-bonus-data.json';
 
 const parameterSpecs = {
   companion_51_bonus: {
-    description: 'Companion 51 bonus (clicker bonus multiplier)',
+    description: 'Owned Companion 51 clicker effect for Bubba bonuses at its saved active level',
     extractionKey: 'companion_51_bonus',
     domainExtractor: (gameData: Map<string, any>) =>
       getCompanionActiveBonus(gameData.get("companions") as Companion[], 51),

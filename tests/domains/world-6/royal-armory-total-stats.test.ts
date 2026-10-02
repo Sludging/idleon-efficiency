@@ -44,7 +44,7 @@ const totalStatCases = [
   index: 4,
   extractionResultsName: 'tome-score-data.json',
   extractionKey: 'tome_producer_119_royalg_total_stats_4',
-  description: 'mapped Royal Guardian outposts',
+  description: 'number of built outposts',
  },
 ] as const;
 

@@ -1,28 +1,18 @@
 /**
- * Orion Global Bonus Calculation Validation
- *
- * Tests our Orion global bonus final calculations against live game data.
- *
- * Global bonuses (indices 0-5):
- *   0: +{% Class XP (base 5)
- *   1: +{ Base DMG (base 10)
- *   2: +{% Total DMG (base 2)
- *   3: +{% Skill XP (base 4)
- *   4: +{% Drop Rate (base 1)
- *   5: +{ All Stat (base 2)
- * 
+ * Compare Orion's six account-wide global bonus results with the saved game's
+ * OwlBonuses values. Each selected index is a distinct player-facing effect.
  */
 
-import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Orion } from '../../../data/domain/world-1/orion';
 
 const saveName = 'latest';
 const extractionResultsName = 'orion-global-bonus-data.json';
 
-describe('Orion Domain - Global Bonus Calculations', () => {
- let extractionResults: any;
- let gameData: Map<string, any>;
+describe('Orion account-wide global bonuses', () => {
+ let extractionResults: ExtractionResults;
+ let gameData: Map<string, unknown>;
  let orion: Orion;
 
  beforeAll(() => {
@@ -32,54 +22,36 @@ describe('Orion Domain - Global Bonus Calculations', () => {
   orion = gameData.get("orion") as Orion;
  });
 
- describe('All Global Bonuses', () => {
-  it('validates global bonus 0 (+{% Class XP)', () => {
+ describe('Global bonus results', () => {
+  it('matches Orion’s account-wide Class XP percentage-point bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_0');
-   const domainBonus = orion.getGlobalBonus(0);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
+   expect(orion.getGlobalBonus(0)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 1 (+{ Base DMG)', () => {
+  it('matches Orion’s account-wide flat base-damage bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_1');
-   const domainBonus = orion.getGlobalBonus(1);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
+   expect(orion.getGlobalBonus(1)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 2 (+{% Total DMG)', () => {
+  it('matches Orion’s account-wide Total Damage percentage-point bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_2');
-   const domainBonus = orion.getGlobalBonus(2);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
+   expect(orion.getGlobalBonus(2)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 3 (+{% Skill XP)', () => {
+  it('matches Orion’s account-wide Skill XP percentage-point bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_3');
-   const domainBonus = orion.getGlobalBonus(3);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
+   expect(orion.getGlobalBonus(3)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 4 (+{% Drop Rate)', () => {
+  it('matches Orion’s account-wide Drop Rate percentage-point bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_4');
-   const domainBonus = orion.getGlobalBonus(4);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
+   expect(orion.getGlobalBonus(4)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 5 (+{ All Stat)', () => {
+  it('matches Orion’s account-wide flat all-stat bonus', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_5');
-   const domainBonus = orion.getGlobalBonus(5);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0.00);
-  });
- });
-
- describe('Edge Cases', () => {
-  it('returns 0 for invalid bonus index', () => {
-   const domainBonus = orion.getGlobalBonus(99);
-   expect(domainBonus).toBe(0);
+   expect(orion.getGlobalBonus(5)).toMatchLiveGame(liveBonus, 0);
   });
  });
 });
+

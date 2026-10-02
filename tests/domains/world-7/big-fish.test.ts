@@ -50,7 +50,7 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(0);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 0: W7 mob respawn rate',
    });
   });
@@ -60,7 +60,7 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(1);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 1: Max Stamina in Spelunking',
    });
   });
@@ -70,7 +70,7 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(2);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 2: Spelunking AFK Gains',
    });
   });
@@ -80,7 +80,7 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(3);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 3: Kill per Kill in W7',
    });
   });
@@ -90,7 +90,7 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(4);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 4: Class EXP Gain',
    });
   });
@@ -100,132 +100,132 @@ describe('Big Fish Domain - Calculations', () => {
    const calculatedBonus = bigFish.getBonusFromIndex(5);
 
    expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
-    tolerance: 0.01,
+    tolerance: 0,
     context: 'Big Fish bonus 5: Double Gold Food drop chance',
    });
   });
  });
 
  describe('Cost Calculations', () => {
-  it('validates cost calculation for bonus 0', () => {
+  it('matches next cost for the W7 mob respawn-rate increase', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_0');
    const calculatedCost = bigFish.getBonusNextlevelCost(0);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 0',
+    tolerance: 0,
+    context: 'Big Fish next cost for the W7 mob respawn-rate increase',
    });
   });
 
-  it('validates cost calculation for bonus 1', () => {
+  it('matches next cost for increased Spelunking Stamina', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_1');
    const calculatedCost = bigFish.getBonusNextlevelCost(1);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 1',
+    tolerance: 0,
+    context: 'Big Fish next cost for increased Spelunking Stamina',
    });
   });
 
-  it('validates cost calculation for bonus 2', () => {
+  it('matches next cost for increased Spelunking AFK Gains', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_2');
    const calculatedCost = bigFish.getBonusNextlevelCost(2);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 2',
+    tolerance: 0,
+    context: 'Big Fish next cost for increased Spelunking AFK Gains',
    });
   });
 
-  it('validates cost calculation for bonus 3', () => {
+  it('matches next cost for the W7 Kill per Kill bonus', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_3');
    const calculatedCost = bigFish.getBonusNextlevelCost(3);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 3',
+    tolerance: 0,
+    context: 'Big Fish next cost for the W7 Kill per Kill bonus',
    });
   });
 
-  it('validates cost calculation for bonus 4', () => {
+  it('matches next cost for the Class EXP bonus', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_4');
    const calculatedCost = bigFish.getBonusNextlevelCost(4);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 4',
+    tolerance: 0,
+    context: 'Big Fish next cost for the Class EXP bonus',
    });
   });
 
-  it('validates cost calculation for bonus 5', () => {
+  it('matches next cost for increased Double Gold Food drop chance', () => {
    const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_5');
    const calculatedCost = bigFish.getBonusNextlevelCost(5);
 
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
-    tolerance: 0.01,
-    context: 'Big Fish upgrade cost for bonus 5',
+    tolerance: 0,
+    context: 'Big Fish next cost for increased Double Gold Food drop chance',
    });
   });
  });
 
  describe('Unlock Level Requirement Calculations', () => {
-  it('validates unlock requirement for bonus 0', () => {
+  it('matches total-player-level unlock requirement for the W7 mob respawn-rate increase', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_0');
    const calculatedReq = bigFish.bonuses[0].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 0',
+    context: 'Big Fish player-level requirement for the W7 mob respawn-rate increase',
    });
   });
 
-  it('validates unlock requirement for bonus 1', () => {
+  it('matches total-player-level unlock requirement for increased Spelunking Stamina', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_1');
    const calculatedReq = bigFish.bonuses[1].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 1',
+    context: 'Big Fish player-level requirement for increased Spelunking Stamina',
    });
   });
 
-  it('validates unlock requirement for bonus 2', () => {
+  it('matches total-player-level unlock requirement for increased Spelunking AFK Gains', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_2');
    const calculatedReq = bigFish.bonuses[2].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 2',
+    context: 'Big Fish player-level requirement for increased Spelunking AFK Gains',
    });
   });
 
-  it('validates unlock requirement for bonus 3', () => {
+  it('matches total-player-level unlock requirement for the W7 Kill per Kill bonus', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_3');
    const calculatedReq = bigFish.bonuses[3].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 3',
+    context: 'Big Fish player-level requirement for the W7 Kill per Kill bonus',
    });
   });
 
-  it('validates unlock requirement for bonus 4', () => {
+  it('matches total-player-level unlock requirement for the Class EXP bonus', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_4');
    const calculatedReq = bigFish.bonuses[4].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 4',
+    context: 'Big Fish player-level requirement for the Class EXP bonus',
    });
   });
 
-  it('validates unlock requirement for bonus 5', () => {
+  it('matches total-player-level unlock requirement for increased Double Gold Food drop chance', () => {
    const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_5');
    const calculatedReq = bigFish.bonuses[5].getUnlockLevelRequired();
 
    expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
     tolerance: 0,
-    context: 'Big Fish unlock level requirement for bonus 5',
+    context: 'Big Fish player-level requirement for increased Double Gold Food drop chance',
    });
   });
  });

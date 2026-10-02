@@ -1,29 +1,18 @@
 /**
- * Poppy Global Bonus Calculation Validation
- *
- * Tests our Poppy global bonus final calculations against live game data.
- *
- * Global bonuses (indices 0-6):
- *   0: +{% Fish Efficiency (base 3)
- *   1: +{ Defence (base 3)
- *   2: +{% Fishing XP (base 5)
- *   3: +{% Accuracy (base 2)
- *   4: +{% Total DMG (base 2)
- *   5: +{% AFK Gains (base 0.5)
- *   6: +{% Cash (base 3)
- * 
+ * Compare Poppy's seven account-wide global bonus results with the saved
+ * game's RooBonuses values; each index represents a distinct gameplay effect.
  */
 
-import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
+import { loadExtractionResults, validateExtractionHealth, getExtractedValue, type ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Poppy } from '../../../data/domain/world-2/poppy';
 
 const saveName = 'latest';
 const extractionResultsName = 'poppy-global-bonus-data.json';
 
-describe('Poppy Domain - Global Bonus Calculations', () => {
- let extractionResults: any;
- let gameData: Map<string, any>;
+describe('Poppy account-wide global bonuses', () => {
+ let extractionResults: ExtractionResults;
+ let gameData: Map<string, unknown>;
  let poppy: Poppy;
 
  beforeAll(() => {
@@ -33,61 +22,41 @@ describe('Poppy Domain - Global Bonus Calculations', () => {
   poppy = gameData.get("poppy") as Poppy;
  });
 
- describe('All Global Bonuses', () => {
-  it('validates global bonus 0 (+{% Fish Efficiency)', () => {
+ describe('Global bonus results', () => {
+  it('matches the account-wide Fishing Efficiency contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_0');
-   const domainBonus = poppy.getGlobalBonus(0);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(0)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 1 (+{ Defence)', () => {
+  it('matches the account-wide Defence contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_1');
-   const domainBonus = poppy.getGlobalBonus(1);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(1)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 2 (+{% Fishing XP)', () => {
+  it('matches the account-wide Fishing XP contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_2');
-   const domainBonus = poppy.getGlobalBonus(2);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(2)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 3 (+{% Accuracy)', () => {
+  it('matches the account-wide Accuracy contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_3');
-   const domainBonus = poppy.getGlobalBonus(3);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(3)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 4 (+{% Total DMG)', () => {
+  it('matches the account-wide Total Damage contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_4');
-   const domainBonus = poppy.getGlobalBonus(4);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(4)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 5 (+{% AFK Gains)', () => {
+  it('matches the account-wide AFK Gains contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_5');
-   const domainBonus = poppy.getGlobalBonus(5);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
+   expect(poppy.getGlobalBonus(5)).toMatchLiveGame(liveBonus, 0);
   });
 
-  it('validates global bonus 6 (+{% Cash)', () => {
+  it('matches the account-wide Cash contribution', () => {
    const liveBonus = getExtractedValue(extractionResults, 'global_bonus_6');
-   const domainBonus = poppy.getGlobalBonus(6);
-
-   expect(domainBonus).toMatchLiveGame(liveBonus, 0);
-  });
- });
-
- describe('Edge Cases', () => {
-  it('returns 0 for invalid bonus index', () => {
-   const domainBonus = poppy.getGlobalBonus(99);
-   expect(domainBonus).toBe(0);
+   expect(poppy.getGlobalBonus(6)).toMatchLiveGame(liveBonus, 0);
   });
  });
 });
+

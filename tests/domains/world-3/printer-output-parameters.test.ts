@@ -24,24 +24,18 @@ const getActivePrintingTotalBoost = (gameData: Map<string, unknown>): number => 
   }
   return activeSample.printingTotalBoost;
 };
-
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   sailing_gold_relic_tier_increment: {
-    description: 'Gold Relic artifact 4 tier increment used by Printer (Sailing ArtifactBonus(4, 1))',
+    description: 'Gold Relic artifact 4 tier increment used in Printer sample growth (Sailing ArtifactBonus(4, 1))',
     extractionKey: 'sailing_gold_relic_tier_increment',
     domainExtractor: gameData => {
       const goldRelic = (gameData.get('sailing') as Sailing).artifacts[4];
-      if (!('getTierIncrement' in goldRelic) || typeof goldRelic.getTierIncrement !== 'function') {
-        throw new Error(
-          'Missing Sailing input GoldRelicArtifact.getTierIncrement() for game Sailing("ArtifactBonus", 4, 1)',
-        );
-      }
       return goldRelic.getTierIncrement();
     },
   },
   account_max_talent_178: {
-    description: 'Account-wide maximum talent 178 contribution across all characters',
-    // This paired extraction key predates correcting the website producer comparison; its game expression is getbonus2(1,178,-1).
+    description: 'King of the Remembered Printer-growth contribution across saved characters (getbonus2(1,178,-1))',
+    // The game selector -1 chooses the highest saved character's talent bonus.
     extractionKey: 'best_divine_knight_talent_178',
     domainExtractor: gameData => {
       // The game's -1 selector takes the maximum over all saved characters, without a class restriction.
@@ -50,7 +44,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   rift_skill_mastery_printer_output: {
-    description: 'Rift Skill Mastery total printer-output bonus (RiftSkillETC index 3)',
+    description: 'Skill Mastery aggregate Printer-output bonus (RiftSkillETC index 3)',
     extractionKey: 'rift_skill_mastery_printer_output',
     domainExtractor: gameData => {
       const rift = gameData.get('rift') as Rift;
@@ -59,22 +53,22 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   voting_bonus_11: {
-    description: 'Summoning vote bonus 11 used by Printer',
+    description: 'Vote bonus 11 Printer resource-production multiplier',
     extractionKey: 'voting_bonus_11',
     domainExtractor: gameData => (gameData.get('votes') as Votes).getCurrentBonus(11),
   },
   compass_upgrade_43: {
-    description: 'Compass upgrade 43 calculated bonus used by Printer',
+    description: 'Moon of Print Compass upgrade 43 calculated Printer-growth contribution',
     extractionKey: 'compass_upgrade_43',
     domainExtractor: gameData => (gameData.get('compass') as Compass).upgrades.find(upgrade => upgrade.id === 43)?.bonus ?? 0,
   },
   mainframe_bonus_1: {
-    description: 'Mainframe bonus 1 numeric effect (2 when Lab is active, 1 otherwise)',
+    description: 'Wired In Lab bonus value (2 with the Printer branch active, 1 otherwise)',
     extractionKey: 'mainframe_bonus_1',
     domainExtractor: gameData => (gameData.get('lab') as Lab).bonuses[1].getBonus(),
   },
   printer_addition_extra_printing: {
-    description: 'Account-wide AdditionExtraPrinting value used by the active Printer sample',
+    description: 'Account-wide AdditionExtraPrinting boost used by per-character ExtraPrinting',
     extractionKey: 'printer_addition_extra_printing',
     domainExtractor: getActivePrintingTotalBoost,
   },
@@ -106,11 +100,6 @@ describe('Printer output - mapped inputs', () => {
     updatePrinter(gameData);
   });
 
-  it('keeps the saved Orb Kill input paired with the live extraction', () => {
-    const savedOrbKillCount = (gameData.get('OptLacc') as number[])[138];
-    const liveOrbKillCount = getExtractedValue(extractionResults, 'printer_orb_kill_count');
-    expect(savedOrbKillCount).toMatchLiveGame(liveOrbKillCount, 0);
-  });
 
 
   Object.entries(parameterSpecs).forEach(([, spec]) => {

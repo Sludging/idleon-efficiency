@@ -55,6 +55,11 @@ This title recipe is not a rule for subsections, document pages, authentication 
 or a deliberately different information hierarchy. See [Legend Talents](../../app/world-7/legendTalents/content.tsx)
 and established account/world pages for context.
 
+**Page spacing:** Ordinary feature pages inherit their outer width, centering, and
+horizontal padding from the shared app layout. Keep the page-content container free
+of additional horizontal padding, max-width, or centering. Apply padding within
+sections and upgrade rows where the selected composition requires it.
+
 For a header and value that belong together:
 
 - Use `TextAndLabel` when the value is text.
@@ -136,9 +141,6 @@ automatic redesign of old pages.
 Keep route metadata and the server wrapper in `page.tsx`; put store hooks and interaction in
 client content/components where the route needs them. Do not add a redundant content file
 when a route already delegates to a suitable shared client component.
-
-The shared [ContentWrapper](../../components/contentWrapper.tsx) supplies normal page width
-and surrounding padding.
 
 When selecting several store values together, wrap the selector with `useShallow` and select
 the fields the view uses rather than subscribing to the whole store. If the page reads the

@@ -10,7 +10,7 @@ const extractionResultsName = 'tome-epilogue-bonus-data.json';
 
 const parameterSpecs: Record<string, ParameterTestSpec> = {
   grimoire_bonus_17: {
-    description: 'Grimoire upgrade 17 bonus',
+    description: 'Grimoire upgrade 17 contribution to Tome epilogue bonuses',
     extractionKey: 'grimoire_bonus_17',
     domainExtractor: (gameData) => {
       const grimoire = gameData.get('grimoire') as Grimoire;
@@ -18,7 +18,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   troll_set_bonus: {
-    description: 'Troll equipment set bonus',
+    description: 'Troll equipment set contribution to Tome epilogue bonuses',
     extractionKey: 'troll_set_bonus',
     domainExtractor: (gameData) => {
       const equipmentSets = gameData.get('equipmentSets') as EquipmentSets;
@@ -26,7 +26,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
   epilogue_bonus_unlocked_count: {
-    description: 'How many epilog bonus indexes are unlocked based on Spelunk unlock count',
+    description: 'Spelunk unlock count controlling which Tome epilogue effects are available',
     extractionKey: 'epilogue_bonus_unlocked_count',
     domainExtractor: (gameData) => {
       const tome = gameData.get('tome') as Tome;
