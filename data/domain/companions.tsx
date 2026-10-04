@@ -81,10 +81,10 @@ export class Companions extends Domain {
         companions.forEach(companion => {
             const sourceCompanion = sourceCompanions.get(companion.id);
             const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-            // Source records own the level; local edits can only override ownership.
-            companion.level = sourceCompanion?.level ?? 1;
+            // Source levels stay authoritative; enabled fakes are level two, disabled fakes keep their saved level.
+            companion.level = sourceCompanion?.level ?? (editedCompanion?.owned ? 2 : editedCompanion?.level ?? 1);
             companion.real = sourceCompanion !== undefined;
-            // Preserve the existing ownership for unowned companions without changing level state.
+            // Local edits can only override ownership for companions without a source record.
             companion.owned = companion.real || (editedCompanion?.owned ?? false);
         });
     }
