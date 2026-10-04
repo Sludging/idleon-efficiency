@@ -13,6 +13,7 @@ import { TomeLine, Tome as TomeDomain, TomeScoreColors } from '../../../data/dom
 import { CircleInformation } from 'grommet-icons';
 import TipDisplay from '../../../components/base/TipDisplay';
 import { Player } from '../../../data/domain/player';
+import BitsDisplay from '../../../components/bitsDisplay';
 
 const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine, playerIndex: number, totalAccountLevel: number }) => {
     const lineDescription = line.getLineDescription();
@@ -24,7 +25,14 @@ const LineDisplay = ({ line, playerIndex, totalAccountLevel }: { line: TomeLine,
             <Box direction='column' justify='center' gap="small">
                 <Box direction='row' justify='between'>
                     <Box direction='row' gap="small" wrap>
-                        <Text size="small">{line.getPlayerCurrentValueDisplay(playerIndex)} - {line.getLineName()}</Text>
+                        {line.index === 66 ? (
+                            <Box direction='row' align='center' gap='xsmall' wrap>
+                                <BitsDisplay value={line.getPlayerCurrentValueDisplay(playerIndex)} scale={0.75} textSize='small' />
+                                <Text size='small'> - {line.getLineName()}</Text>
+                            </Box>
+                        ) : (
+                            <Text size="small">{line.getPlayerCurrentValueDisplay(playerIndex)} - {line.getLineName()}</Text>
+                        )}
                         {lineDescription != "" && <TipDisplay
                             heading={line.getLineName()}
                             size='medium'

@@ -129,6 +129,12 @@ automatic redesign of old pages.
 - Render coin amounts with [CoinsDisplay](../../components/coinsDisplay.tsx) and
   `getCoinsArray(amount)`, as in [Upgrade Vault](../../components/account/upgradeVaultDisplay.tsx).
   This displays coin denominations and icons.
+- Render Gaming Bits with [BitsDisplay](../../components/bitsDisplay.tsx):
+  `<BitsDisplay value={amount} />`. Pass a numeric amount or an existing canonical
+  formatted Bits string. Numbers use the game formatter; strings retain its notation.
+  The component replaces the tier suffix with its matching icon; an empty string renders nothing.
+  Use `scale` and `textSize` for compact contexts, as in
+  [Tome](../../app/account/tome/content.tsx).
 - For game artwork, pass the entity's image metadata to
   [IconImage](../../components/base/IconImage.tsx), for example
   `data={upgrade.getImageData()}`. Do not build feature-specific asset URLs or dimensions.
