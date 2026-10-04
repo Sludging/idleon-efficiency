@@ -69,6 +69,7 @@ const navItems: NavItem[] = [
             { subLink: "/spelunking", label: "Spelunking (Coming Soon)" },
             { subLink: "/legendTalents", label: "Legend Talents" },
             { subLink: "/coral", label: "Coral Reef" },
+            { subLink: "/sushi", label: "Sushi Station" },
         ]
     },
     { link: "/players", label: "Players" },

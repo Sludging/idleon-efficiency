@@ -1,0 +1,1082 @@
+{
+  "timestamp": "2026-10-02T05:14:48.418Z",
+  "extractions": {
+    "sushi_knowledge_levels": {
+      "expression": "idleon.getAttr(\"Sushi\")[7].slice(0, 64)",
+      "result": [
+        6,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        9,
+        9,
+        9,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        9,
+        9,
+        9,
+        8,
+        8,
+        8,
+        7,
+        6,
+        5,
+        5,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "description": "Current Knowledge level per catalog Sushi (Sushi save row 7, consumed by KnowledgeBonusSpecific)",
+      "extractedAt": "2026-10-02T05:14:48.504Z"
+    },
+    "sushi_knowledge_experience": {
+      "expression": "idleon.getAttr(\"Sushi\")[6].slice(0, 64)",
+      "result": [
+        33.50454412532937,
+        50.783524578971566,
+        25.948857912304877,
+        41.087524578971646,
+        54.18285791230487,
+        32.80352457897172,
+        8.746544125329393,
+        63.55872457897156,
+        59.27899124563824,
+        7.6680107919959815,
+        13.04614412532945,
+        109.10065985495679,
+        91.99665985495677,
+        195.9937417261836,
+        144.3924449836872,
+        144.10684498368536,
+        16.35765245034976,
+        312.8546611928468,
+        64.92951165034744,
+        6.9385783170141755,
+        321.1219491503453,
+        346.6384824836802,
+        394.0246307503493,
+        1059.9759352836784,
+        996.0412366170112,
+        624.4424824836797,
+        308.3651491503487,
+        33.016349150349654,
+        481.38923218368103,
+        218.11031165034962,
+        31.153778317016883,
+        278.3526750595131,
+        174.0578762684022,
+        112.75863857951273,
+        49.00904613051265,
+        39.34711962755183,
+        57.230804081193824,
+        2.9934199745271686,
+        1.5434666666666654,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "description": "Within-level Knowledge experience per Sushi (Sushi save row 6; daily event adds XP and level-up subtracts the requirement)",
+      "extractedAt": "2026-10-02T05:14:48.539Z"
+    },
+    "sushi_knowledge_bonus_specific": {
+      "expression": "Array.from({ length: 64 }, (_, index) => idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusSpecific\", index, 0))",
+      "result": [
+        240,
+        20.666666666666668,
+        1.0666666666666667,
+        220.00000000000003,
+        1.1333333333333333,
+        116.66666666666667,
+        14.399999999999999,
+        246.66666666666669,
+        1.2666666666666666,
+        23.400000000000002,
+        160,
+        382.6666666666667,
+        39.199999999999996,
+        1.1466666666666667,
+        2.64,
+        81,
+        138,
+        501.3333333333333,
+        14.4,
+        294,
+        3.333333333333333,
+        1.7,
+        69.33333333333334,
+        53,
+        720,
+        18.333333333333336,
+        1.8666666666666667,
+        38,
+        174,
+        0.8850000000000001,
+        36,
+        16.266666666666666,
+        330.66666666666663,
+        50.400000000000006,
+        2.986666666666667,
+        1.3000000000000003,
+        22,
+        0.5583333333333333,
+        4.533333333333333,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "description": "Game-computed current per-Sushi Knowledge bonus, including mapped static coefficient, current level, unlock state and tier scaling",
+      "extractedAt": "2026-10-02T05:14:48.572Z"
+    },
+    "sushi_knowledge_experience_required": {
+      "expression": "Array.from({ length: 64 }, (_, index) => idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_req\", idleon.getAttr(\"Sushi\")[7][index], 0))",
+      "result": [
+        119.96575093703903,
+        64.73364712030896,
+        64.73364712030896,
+        64.73364712030896,
+        64.73364712030896,
+        64.73364712030896,
+        119.96575093703903,
+        64.73364712030896,
+        64.73364712030896,
+        119.96575093703903,
+        119.96575093703903,
+        216.57571812877714,
+        216.57571812877714,
+        383.03729674249655,
+        666.3515625,
+        666.3515625,
+        666.3515625,
+        383.03729674249655,
+        666.3515625,
+        666.3515625,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        1143.6329581392476,
+        666.3515625,
+        666.3515625,
+        666.3515625,
+        383.03729674249655,
+        383.03729674249655,
+        383.03729674249655,
+        216.57571812877714,
+        119.96575093703903,
+        64.73364712030896,
+        64.73364712030896,
+        7.82842712474619,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "description": "XP needed for each Sushi's current Knowledge level; direct KnowledgeXP_req(level) game helper value",
+      "extractedAt": "2026-10-02T05:14:48.593Z"
+    },
+    "sushi_knowledge_bonus_next_specific": {
+      "expression": "(() => { const sushi = idleon.getAttr(\"Sushi\"); const research = idleon.getAttr(\"CustomLists\").h.Research; return Array.from({ length: 64 }, (_, tier) => Math.max(0, Number(research[35][Number(research[33][tier])]) * (Number(sushi[7][tier]) + 1) * Math.min(2, 1 + Number(sushi[5][tier])) * (1 + tier / 30))); })()",
+      "result": [
+        280,
+        24.800000000000004,
+        1.2800000000000002,
+        264,
+        1.36,
+        140,
+        16.8,
+        296,
+        1.5200000000000002,
+        27.3,
+        186.66666666666666,
+        437.33333333333337,
+        44.8,
+        1.29,
+        2.9333333333333336,
+        90,
+        153.33333333333331,
+        564,
+        16,
+        326.6666666666667,
+        3.6666666666666665,
+        1.87,
+        76.26666666666667,
+        58.3,
+        792,
+        20.166666666666668,
+        2.0533333333333337,
+        41.8,
+        193.33333333333334,
+        0.9833333333333334,
+        40,
+        18.299999999999997,
+        371.99999999999994,
+        56.7,
+        3.4133333333333336,
+        1.516666666666667,
+        26.400000000000002,
+        0.6700000000000002,
+        6.8,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "description": "Pure source-derived next-level KnowledgeBonusSpecific preview using the exact captured formula and current game coefficient/unlock data, substituting current saved level + 1 without mutating game state",
+      "extractedAt": "2026-10-02T05:14:48.613Z"
+    },
+    "sushi_knowledge_passive_daily_by_tier": {
+      "expression": "(() => { const sushi = idleon.getAttr(\"Sushi\"); const gridEnabled = idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 189, 1) >= 1; return Array.from({ length: 64 }, (_, targetTier) => { let cold = 0; let milktoast = 0; if (gridEnabled) for (let slot = 0; slot < 120; slot++) { const placedTier = Number(sushi[0][slot]); const plate = Number(sushi[1][slot]); if (placedTier < 0) continue; const gain = idleon.callFunction(\"SushiStuff\", \"SlotEffect\", plate, 0) * idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_multi\", slot, 0); if (plate === 2 && targetTier < placedTier) cold += gain; if (plate === 3 && targetTier === placedTier) milktoast += gain; } return { tier: targetTier, cold, milktoast, total: cold + milktoast }; }); })()",
+      "result": [
+        {
+          "tier": 0,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 1,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 2,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 3,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 4,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 5,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 6,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 7,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 8,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 9,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 10,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 11,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 12,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 13,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 14,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 15,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 16,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 17,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 18,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 19,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 20,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 21,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 22,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 23,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 24,
+          "cold": 1.7277043200000004,
+          "milktoast": 2.8795072000000004,
+          "total": 4.607211520000001
+        },
+        {
+          "tier": 25,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 26,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 27,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 28,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 29,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 30,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 31,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 32,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 33,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 34,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 35,
+          "cold": 1.7277043200000004,
+          "milktoast": 0,
+          "total": 1.7277043200000004
+        },
+        {
+          "tier": 36,
+          "cold": 1.1518028800000002,
+          "milktoast": 0,
+          "total": 1.1518028800000002
+        },
+        {
+          "tier": 37,
+          "cold": 0.5759014400000001,
+          "milktoast": 0,
+          "total": 0.5759014400000001
+        },
+        {
+          "tier": 38,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 39,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 40,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 41,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 42,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 43,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 44,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 45,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 46,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 47,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 48,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 49,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 50,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 51,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 52,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 53,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 54,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 55,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 56,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 57,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 58,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 59,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 60,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 61,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 62,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        },
+        {
+          "tier": 63,
+          "cold": 0,
+          "milktoast": 0,
+          "total": 0
+        }
+      ],
+      "description": "Game-side sum of the actual daily 'l' event contribution for every Sushi tier: only when Research Grid 189 is enabled, Cold plate type 2 contributes to all lower tiers, Milktoast type 3 contributes to its placed tier, using SlotEffect(plate) * KnowledgeXP_multi(source slot). This does not replay missed offline days.",
+      "extractedAt": "2026-10-02T05:14:48.658Z"
+    },
+    "sushi_knowledge_passive_slot_inputs": {
+      "expression": "(() => { const sushi = idleon.getAttr(\"Sushi\"); return Array.from({ length: 120 }, (_, slot) => { const tier = Number(sushi[0][slot]); const plate = Number(sushi[1][slot]); return { slot, tier, plate, effect: (plate === 2 || plate === 3) && tier >= 0 ? idleon.callFunction(\"SushiStuff\", \"SlotEffect\", plate, 0) : 0, multiplier: (plate === 2 || plate === 3) && tier >= 0 ? idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_multi\", slot, 0) : 0 }; }).filter(input => input.tier >= 0 && (input.plate === 2 || input.plate === 3)); })()",
+      "result": [
+        {
+          "slot": 62,
+          "tier": 24,
+          "plate": 3,
+          "effect": 1.0298666666666667,
+          "multiplier": 2.7960000000000003
+        },
+        {
+          "slot": 101,
+          "tier": 36,
+          "plate": 2,
+          "effect": 0.20597333333333334,
+          "multiplier": 2.7960000000000003
+        },
+        {
+          "slot": 102,
+          "tier": 37,
+          "plate": 2,
+          "effect": 0.20597333333333334,
+          "multiplier": 2.7960000000000003
+        },
+        {
+          "slot": 103,
+          "tier": 38,
+          "plate": 2,
+          "effect": 0.20597333333333334,
+          "multiplier": 2.7960000000000003
+        }
+      ],
+      "description": "Actual occupied Cold/Milktoast source slots plus game helper outputs used as direct parameters of the daily grant; slot index is retained because fireplace modifier is source-slot based",
+      "extractedAt": "2026-10-02T05:14:48.705Z"
+    },
+    "sushi_knowledge_bonus_total_1": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"KnowledgeBonusTOT\", 1, 0)",
+      "result": 179.6,
+      "description": "Aggregate Knowledge bonus category 1, a direct input to KnowledgeXP_multi",
+      "extractedAt": "2026-10-02T05:14:48.733Z"
+    },
+    "sushi_knowledge_upgrade_qty_38": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"UpgradeQTY\", 38, 0)",
+      "result": 0,
+      "description": "Knowledge XP upgrade quantity 38, a direct input to KnowledgeXP_multi",
+      "extractedAt": "2026-10-02T05:14:48.763Z"
+    },
+    "sushi_knowledge_research_grid_189": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 189, 1)",
+      "result": 2,
+      "description": "Research Grid 189 level gate for the daily Sushi Knowledge event; no passive grant is applied when below 1",
+      "extractedAt": "2026-10-02T05:14:48.790Z"
+    },
+    "sushi_knowledge_shop_restock_seconds": {
+      "expression": "idleon.getAttr(\"TimeAway\").h.ShopRestock",
+      "result": 84397.53124523163,
+      "description": "Requested extraction to confirm the current game's exposed TimeAway.ShopRestock attribute and daily-reset timer units/semantics. Supporting state only; intentionally not a standalone copy assertion.",
+      "extractedAt": "2026-10-02T05:14:48.810Z"
+    },
+    "sushi_knowledge_eta_by_tier": {
+      "expression": "(() => { const sushi = idleon.getAttr(\"Sushi\"); const gridEnabled = idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 189, 1) >= 1; return Array.from({ length: 64 }, (_, tier) => { const level = Number(sushi[7][tier]); const xp = Number(sushi[6][tier]); const required = idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_req\", level, 0); let daily = 0; if (gridEnabled) for (let slot = 0; slot < 120; slot++) { const placedTier = Number(sushi[0][slot]); const plate = Number(sushi[1][slot]); if (placedTier < 0) continue; const gain = idleon.callFunction(\"SushiStuff\", \"SlotEffect\", plate, 0) * idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_multi\", slot, 0); if ((plate === 2 && tier < placedTier) || (plate === 3 && tier === placedTier)) daily += gain; } const days = daily > 0 ? Math.ceil(Math.max(0, required - xp) / daily) : 0; return { tier, secondsAfterNextRollover: daily > 0 ? Math.max(0, days - 1) * 86400 : null }; }); })()",
+      "result": [
+        {
+          "tier": 0,
+          "secondsAfterNextRollover": 4320000
+        },
+        {
+          "tier": 1,
+          "secondsAfterNextRollover": 691200
+        },
+        {
+          "tier": 2,
+          "secondsAfterNextRollover": 1900800
+        },
+        {
+          "tier": 3,
+          "secondsAfterNextRollover": 1123200
+        },
+        {
+          "tier": 4,
+          "secondsAfterNextRollover": 518400
+        },
+        {
+          "tier": 5,
+          "secondsAfterNextRollover": 1555200
+        },
+        {
+          "tier": 6,
+          "secondsAfterNextRollover": 5529600
+        },
+        {
+          "tier": 7,
+          "secondsAfterNextRollover": 0
+        },
+        {
+          "tier": 8,
+          "secondsAfterNextRollover": 259200
+        },
+        {
+          "tier": 9,
+          "secondsAfterNextRollover": 5529600
+        },
+        {
+          "tier": 10,
+          "secondsAfterNextRollover": 5270400
+        },
+        {
+          "tier": 11,
+          "secondsAfterNextRollover": 5356800
+        },
+        {
+          "tier": 12,
+          "secondsAfterNextRollover": 6220800
+        },
+        {
+          "tier": 13,
+          "secondsAfterNextRollover": 9331200
+        },
+        {
+          "tier": 14,
+          "secondsAfterNextRollover": 26092800
+        },
+        {
+          "tier": 15,
+          "secondsAfterNextRollover": 26092800
+        },
+        {
+          "tier": 16,
+          "secondsAfterNextRollover": 32486400
+        },
+        {
+          "tier": 17,
+          "secondsAfterNextRollover": 3456000
+        },
+        {
+          "tier": 18,
+          "secondsAfterNextRollover": 30067200
+        },
+        {
+          "tier": 19,
+          "secondsAfterNextRollover": 32918400
+        },
+        {
+          "tier": 20,
+          "secondsAfterNextRollover": 41126400
+        },
+        {
+          "tier": 21,
+          "secondsAfterNextRollover": 39830400
+        },
+        {
+          "tier": 22,
+          "secondsAfterNextRollover": 37411200
+        },
+        {
+          "tier": 23,
+          "secondsAfterNextRollover": 4147200
+        },
+        {
+          "tier": 24,
+          "secondsAfterNextRollover": 2764800
+        },
+        {
+          "tier": 25,
+          "secondsAfterNextRollover": 25920000
+        },
+        {
+          "tier": 26,
+          "secondsAfterNextRollover": 41731200
+        },
+        {
+          "tier": 27,
+          "secondsAfterNextRollover": 55468800
+        },
+        {
+          "tier": 28,
+          "secondsAfterNextRollover": 9244800
+        },
+        {
+          "tier": 29,
+          "secondsAfterNextRollover": 22377600
+        },
+        {
+          "tier": 30,
+          "secondsAfterNextRollover": 31708800
+        },
+        {
+          "tier": 31,
+          "secondsAfterNextRollover": 5184000
+        },
+        {
+          "tier": 32,
+          "secondsAfterNextRollover": 10368000
+        },
+        {
+          "tier": 33,
+          "secondsAfterNextRollover": 13478400
+        },
+        {
+          "tier": 34,
+          "secondsAfterNextRollover": 8294400
+        },
+        {
+          "tier": 35,
+          "secondsAfterNextRollover": 3974400
+        },
+        {
+          "tier": 36,
+          "secondsAfterNextRollover": 518400
+        },
+        {
+          "tier": 37,
+          "secondsAfterNextRollover": 9244800
+        },
+        {
+          "tier": 38,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 39,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 40,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 41,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 42,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 43,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 44,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 45,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 46,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 47,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 48,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 49,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 50,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 51,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 52,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 53,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 54,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 55,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 56,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 57,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 58,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 59,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 60,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 61,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 62,
+          "secondsAfterNextRollover": null
+        },
+        {
+          "tier": 63,
+          "secondsAfterNextRollover": null
+        }
+      ],
+      "description": "Game-derived subsequent full-day wait after the next scheduled rollover. The ETA core test subtracts station.nextDailyResetSeconds parsed from this same save's TimeAway.ShopRestock, then compares the remainder to secondsAfterNextRollover. The 86400-second conversion follows the daily rollover cadence; this normalization avoids false failures from the timer ticking between extraction and save. Null means no daily grant (Grid 189 disabled or no matching passive source); no continuous accrual or offline replay is assumed.",
+      "extractedAt": "2026-10-02T05:14:48.838Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true
+    }
+  }
+}

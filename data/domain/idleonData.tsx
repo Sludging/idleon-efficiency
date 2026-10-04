@@ -43,7 +43,8 @@ import { Capacity, updateCapacity } from './capacity';
 import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './world-3/construction/deathnote';
 import { Companions, updateCompanionImpact } from './companions';
 import type { CompanionState } from './companions/companionState';
-import { Domain, HandleRawDataKey } from './base/domain';
+import { HandleRawDataKey } from './base/domain';
+import type { Domain } from './base/domain';
 import { Guild } from './guild';
 import { Rift } from "./world-4/rift";
 import { Equinox, updateEquinoxBar } from './world-3/equinox';
@@ -51,7 +52,7 @@ import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
-import { SushiStation } from './world-7/sushi';
+import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
@@ -326,6 +327,8 @@ const postProcessingMap: Record<string, Function> = {
     "gallery": (doc: Cloudsave, accountData: Map<string, any>) => updateGallery(accountData),
     // Hat Rack consumes settled Minehead, companion, Event Shop and Sushi state.
     "hatRack": (doc: Cloudsave, accountData: Map<string, any>) => updateHatRack(accountData),
+    // Sushi consumes settled Arcade, Gaming, Collider, Sailing, Research, Button, Jelly and Minehead state.
+    "sushiStation": (doc: Cloudsave, accountData: Map<string, any>) => updateSushiStation(accountData),
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
