@@ -120,13 +120,16 @@ Read the [testing skill](skills/testing/SKILL.md) for:
 
 ## New Feature Implementation
 
-Before backend implementation or architecture decisions, use the [implementation patterns guide](docs/agents/implementation-patterns.md) to select applicable examples and aspects. Use its UI route when planning or changing UI.
+For any UI planning, implementation, changes, or scoped review, start with the
+[UI work guide](docs/agents/ui-patterns.md); it supplies the practical project context and
+links. Before backend implementation or architecture decisions, use the
+[implementation patterns guide](docs/agents/implementation-patterns.md) to select applicable
+examples.
 
 Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) for:
 - Prerequisites verification
 - Domain implementation
 - Data pipeline integration
-- UI development
 - Navigation integration
 - Testing requirements
 

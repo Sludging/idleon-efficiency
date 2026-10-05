@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-10-01T08:49:53.240Z",
+  "timestamp": "2026-10-05T06:01:28.256Z",
   "extractions": {
     "alchemy_bubble_y2active": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
       "result": 1.4955317247542448,
       "description": "Big P Alchemy bubble that increases linked-god passive bonuses",
-      "extractedAt": "2026-10-01T08:49:53.255Z"
+      "extractedAt": "2026-10-05T06:01:28.260Z"
     },
     "clamworks_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
       "result": 80,
       "description": "Clamworks upgrade that boosts Pearl value based on Multikill",
-      "extractedAt": "2026-10-01T08:49:53.257Z"
+      "extractedAt": "2026-10-05T06:01:28.261Z"
     },
     "divinity_minor_bonus_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "result": 117.77312332439678,
+      "result": 117.8776247647911,
       "description": "Purrmep minor-link passive bonus for the linked player",
-      "extractedAt": "2026-10-01T08:49:53.271Z"
+      "extractedAt": "2026-10-05T06:01:28.263Z"
     }
   },
   "errors": {},

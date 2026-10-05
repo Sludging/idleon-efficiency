@@ -1,59 +1,59 @@
 {
-  "timestamp": "2026-10-01T08:49:55.978Z",
+  "timestamp": "2026-10-05T06:01:29.912Z",
   "extractions": {
     "orblet_market_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 0, 0)",
       "result": 2,
       "description": "Chance to gain statue experience when a Zenith Cluster forms",
-      "extractedAt": "2026-10-01T08:49:56.010Z"
+      "extractedAt": "2026-10-05T06:01:29.925Z"
     },
     "orblet_market_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
       "result": 110,
       "description": "Resource collection for all Outposts",
-      "extractedAt": "2026-10-01T08:49:56.036Z"
+      "extractedAt": "2026-10-05T06:01:29.927Z"
     },
     "orblet_market_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 2, 0)",
       "result": 23,
       "description": "Talent Points granted to Royal Guardians",
-      "extractedAt": "2026-10-01T08:49:56.048Z"
+      "extractedAt": "2026-10-05T06:01:29.929Z"
     },
     "orblet_market_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
       "result": 4,
       "description": "Extra kills credited toward clearing mobs to build Outposts",
-      "extractedAt": "2026-10-01T08:49:56.059Z"
+      "extractedAt": "2026-10-05T06:01:29.930Z"
     },
     "orblet_market_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
       "result": 3,
       "description": "Chance for Regal Intervention to trigger",
-      "extractedAt": "2026-10-01T08:49:56.061Z"
+      "extractedAt": "2026-10-05T06:01:29.942Z"
     },
     "orblet_market_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
       "result": 5,
       "description": "Rank experience generated faster by all kingdom units",
-      "extractedAt": "2026-10-01T08:49:56.074Z"
+      "extractedAt": "2026-10-05T06:01:29.944Z"
     },
     "orblet_market_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
       "result": 70,
       "description": "Reduced cost for all Masterclass upgrades",
-      "extractedAt": "2026-10-01T08:49:56.077Z"
+      "extractedAt": "2026-10-05T06:01:29.946Z"
     },
     "orblet_market_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
       "result": 0,
       "description": "Connection range for all Outposts",
-      "extractedAt": "2026-10-01T08:49:56.079Z"
+      "extractedAt": "2026-10-05T06:01:29.948Z"
     },
     "orblet_market_bonus_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 9, 0)",
       "result": 0,
       "description": "Parchment of Enchantment drop rate from Verminous Rats",
-      "extractedAt": "2026-10-01T08:49:56.092Z"
+      "extractedAt": "2026-10-05T06:01:29.958Z"
     }
   },
   "errors": {},

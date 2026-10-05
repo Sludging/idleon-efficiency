@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-10-01T08:49:55.958Z",
+  "timestamp": "2026-10-05T06:01:29.895Z",
   "extractions": {
     "royal_armory_map_purification_row_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 0, 0)",
       "result": 0,
       "description": "Whether outpost row 0 has reached its first purification rank and earns the purified production bonus",
-      "extractedAt": "2026-10-01T08:49:55.973Z"
+      "extractedAt": "2026-10-05T06:01:29.900Z"
     },
     "royal_armory_map_purification_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 1, 0)",
       "result": 0,
       "description": "Whether outpost row 1 has reached its first purification rank and earns the purified production bonus",
-      "extractedAt": "2026-10-01T08:49:55.976Z"
+      "extractedAt": "2026-10-05T06:01:29.910Z"
     },
     "royal_armory_outpost_exp_rank_row_1_rank_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
       "result": 0,
       "description": "Outpost row 1 purification-track rank; reaching rank 1 activates its purified production bonus",
-      "extractedAt": "2026-10-01T08:49:55.977Z"
+      "extractedAt": "2026-10-05T06:01:29.912Z"
     }
   },
   "errors": {},

@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-10-01T08:49:51.673Z",
+  "timestamp": "2026-10-05T06:01:27.814Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
       "result": 75,
       "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-10-01T08:49:51.706Z"
+      "extractedAt": "2026-10-05T06:01:27.828Z"
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
       "result": 18.75,
       "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-10-01T08:49:51.720Z"
+      "extractedAt": "2026-10-05T06:01:27.829Z"
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
       "result": 2.078125,
       "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-10-01T08:49:51.737Z"
+      "extractedAt": "2026-10-05T06:01:27.843Z"
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
       "result": 41.5625,
       "description": "Accumulated Research XP bonus from saved presses",
-      "extractedAt": "2026-10-01T08:49:51.752Z"
+      "extractedAt": "2026-10-05T06:01:27.845Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
       "result": 415.625,
       "description": "Accumulated Cooking SPD bonus",
-      "extractedAt": "2026-10-01T08:49:51.769Z"
+      "extractedAt": "2026-10-05T06:01:27.847Z"
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
       "result": 51.953125,
       "description": "Accumulated Class EXP bonus from saved presses",
-      "extractedAt": "2026-10-01T08:49:51.786Z"
+      "extractedAt": "2026-10-05T06:01:27.857Z"
     }
   },
   "errors": {},

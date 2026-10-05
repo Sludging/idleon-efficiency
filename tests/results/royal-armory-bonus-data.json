@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-10-01T08:49:55.894Z",
+  "timestamp": "2026-10-05T06:01:29.862Z",
   "extractions": {
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
       "result": 0,
       "description": "Upgrade bonus that increases Dreamstuff gained from the Royal Guardian Outpost board",
-      "extractedAt": "2026-10-01T08:49:55.910Z"
+      "extractedAt": "2026-10-05T06:01:29.873Z"
     },
     "royal_armory_bonus_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
-      "result": 90,
+      "result": 110,
       "description": "Upgrade bonus that contributes to the Outpost resource-production specialization",
-      "extractedAt": "2026-10-01T08:49:55.912Z"
+      "extractedAt": "2026-10-05T06:01:29.874Z"
     }
   },
   "errors": {},

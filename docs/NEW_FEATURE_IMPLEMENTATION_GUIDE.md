@@ -6,14 +6,23 @@ This guide provides a systematic approach for implementing new game features in 
 
 ## Planning a Page for a Calculation-Ready Domain
 
-Use this plan for a page built on an existing domain. An existing domain does not need its implementation repeated.
+Use this plan for a page built on an existing domain. An existing domain does not need its
+implementation repeated.
 
-1. **Set the player goal and scope.** State what the player needs to do or learn, and what is out of scope.
-2. **Check the data.** Identify existing domain values that support the page and any missing calculations or inputs. Investigate game evidence only for calculations you add, change, or cannot confirm; see [testing guidance](TESTING_IMPLEMENTATION.md).
-3. **Choose the presentation.** Use applicable examples from the [implementation patterns guide](agents/implementation-patterns.md). Record page behavior choices those examples do not cover.
-4. **Plan runtime checks.** Name the important save states and interactions to verify in the running page, including a narrow screen. Consult [asset guidance](runbooks/sync-game-assets.md) if needed.
+1. **Set the player goal and scope.** State what the player needs to do or learn, and what is
+   out of scope.
+2. **Check the data.** Identify existing domain values and any missing calculations or inputs.
+   Investigate game evidence only for calculations you add, change, or cannot confirm; see
+   [testing guidance](TESTING_IMPLEMENTATION.md).
+3. **Plan the UI.** Start with the [UI work guide](agents/ui-patterns.md) for project context,
+   selected composition patterns, and design scope. Record only page behavior choices the
+   guide does not cover. For local browser verification and rendered previews, use the
+   [UI verification guide](agents/ui-verification.md).
+4. **Plan runtime checks.** Name important save states and interactions for the changed paths.
+   Consult [asset guidance](runbooks/sync-game-assets.md) if needed.
 
-Continue to the implementation steps below only where they apply to the planned work. Keep UI checks distinct from game-calculation verification.
+Keep UI checks distinct from game-calculation verification. Continue to the implementation
+steps below only where they apply.
 
 ## Prerequisites (Information Required from Developer)
 
@@ -97,11 +106,13 @@ Before beginning implementation, gather the following information from the devel
 ## Implementation Guidelines
 
 ### Development Workflow
-1. **Confirm prerequisites**: Verify repository and game evidence needed for the scoped work.
-2. **Select applicable examples**: Use the implementation patterns guide and name relevant aspects.
-3. **Implement domain logic**: Start with core calculations and data parsing.
-4. **Create UI components**: Follow the selected UI aspects when UI work is in scope.
-5. **Add automated tests**: Implement live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
+1. **Confirm prerequisites:** Verify repository and game evidence needed for scoped work.
+2. **Select patterns:** For UI, start with the [UI work guide](agents/ui-patterns.md); for
+   backend, use the [implementation patterns guide](agents/implementation-patterns.md).
+3. **Implement domain logic** where in scope, then create UI components following the UI
+   guide where UI is in scope.
+4. **Test domain calculations** as described in
+   [testing guidance](TESTING_IMPLEMENTATION.md).
 
 ### Verify a page with a local save
 

@@ -1,95 +1,95 @@
 {
-  "timestamp": "2026-10-01T08:49:57.280Z",
+  "timestamp": "2026-10-05T06:01:30.863Z",
   "extractions": {
     "pristine_charm_bonus_8": {
       "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 8, 0)",
       "result": 30,
       "description": "Pristine charm bonus for summoning (index 8 - Crystal Comb)",
-      "extractedAt": "2026-10-01T08:49:57.316Z"
+      "extractedAt": "2026-10-05T06:01:30.874Z"
     },
     "gem_item_purchased_11": {
       "expression": "idleon.engine.getGameAttribute(\"GemItemsPurchased\")[11]",
       "result": 5,
       "description": "Gem shop purchase 11 (Winner Bonuses)",
-      "extractedAt": "2026-10-01T08:49:57.331Z"
+      "extractedAt": "2026-10-05T06:01:30.876Z"
     },
     "artifact_bonus_32": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 32, 0)",
       "result": 125,
       "description": "Sailing artifact 32 bonus (summoning winner bonus)",
-      "extractedAt": "2026-10-01T08:49:57.344Z"
+      "extractedAt": "2026-10-05T06:01:30.877Z"
     },
     "task_board_bonus_2_5_4": {
       "expression": "idleon.engine.getGameAttribute(\"Tasks\")[2][5][4]",
       "result": 10,
       "description": "Task board merit bonus (max 10) for summoning winners",
-      "extractedAt": "2026-10-01T08:49:57.346Z"
+      "extractedAt": "2026-10-05T06:01:30.879Z"
     },
     "achievement_379_status": {
       "expression": "idleon.callFunction(\"AchieveStatus\", 379)",
       "result": 1,
       "description": "Achievement 379 completion status (winner bonus +1%)",
-      "extractedAt": "2026-10-01T08:49:57.348Z"
+      "extractedAt": "2026-10-05T06:01:30.880Z"
     },
     "achievement_373_status": {
       "expression": "idleon.callFunction(\"AchieveStatus\", 373)",
       "result": 1,
       "description": "Achievement 373 completion status (winner bonus +1%)",
-      "extractedAt": "2026-10-01T08:49:57.362Z"
+      "extractedAt": "2026-10-05T06:01:30.881Z"
     },
     "godshard_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"GODSHARD_SET\", \"Bonus\", 0, 0)",
       "result": 15,
       "description": "Godshard equipment set bonus for summoning winners",
-      "extractedAt": "2026-10-01T08:49:57.364Z"
+      "extractedAt": "2026-10-05T06:01:30.882Z"
     },
     "emperor_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 8, 0)",
       "result": 2,
       "description": "Emperor bonus 8 (summoning winner bonus)",
-      "extractedAt": "2026-10-01T08:49:57.366Z"
+      "extractedAt": "2026-10-05T06:01:30.890Z"
     },
     "win_bonus_19": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 19, 0)",
       "result": 51.597,
-      "description": "Winner bonus 19 (uses 3.5x multiplier, no recursive bonus)",
-      "extractedAt": "2026-10-01T08:49:57.379Z"
+      "description": "Library Max winner bonus (index 19; uses the 3.5x branch without winner-bonus 31)",
+      "extractedAt": "2026-10-05T06:01:30.892Z"
     },
     "win_bonus_20": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 20, 0)",
       "result": 6,
-      "description": "Winner bonus 20 (raw value only, no multipliers)",
-      "extractedAt": "2026-10-01T08:49:57.381Z"
+      "description": "Stamp Levels per Day winner bonus (index 20; game returns the unboosted effect)",
+      "extractedAt": "2026-10-05T06:01:30.893Z"
     },
     "win_bonus_22": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 22, 0)",
       "result": 25,
-      "description": "Winner bonus 22 (raw value only, no multipliers)",
-      "extractedAt": "2026-10-01T08:49:57.397Z"
+      "description": "Ballot Bonus winner bonus (index 22; game returns the unboosted effect)",
+      "extractedAt": "2026-10-05T06:01:30.894Z"
     },
     "win_bonus_24": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 24, 0)",
       "result": 14,
-      "description": "Winner bonus 24 (raw value only, no multipliers)",
-      "extractedAt": "2026-10-01T08:49:57.410Z"
+      "description": "Equinox Max Level winner bonus (index 24; game returns the unboosted effect)",
+      "extractedAt": "2026-10-05T06:01:30.896Z"
     },
     "win_bonus_26": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
       "result": 251.78400000000002,
-      "description": "Winner bonus 26 (Meal bonus - uses all multipliers + bonus 31)",
-      "extractedAt": "2026-10-01T08:49:57.412Z"
+      "description": "Meal Bonuses winner bonus (index 26; uses winner-bonus 31 and all multipliers)",
+      "extractedAt": "2026-10-05T06:01:30.897Z"
     },
     "win_bonus_31": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 31, 0)",
       "result": 15,
-      "description": "Winner bonus 31",
-      "extractedAt": "2026-10-01T08:49:57.415Z"
+      "description": "World 7 Winner Bonuses (index 31; consumed recursively by other winner bonuses)",
+      "extractedAt": "2026-10-05T06:01:30.906Z"
     },
     "win_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 5, 0)",
       "result": 2423.4210000000003,
-      "description": "Winner bonus 5 (uses 3.5x multiplier and all bonuses including recursive bonus 31)",
-      "extractedAt": "2026-10-01T08:49:57.427Z"
+      "description": "All Essence winner bonus (index 5; uses the 3.5x branch and winner-bonus 31)",
+      "extractedAt": "2026-10-05T06:01:30.908Z"
     }
   },
   "errors": {},

@@ -1,166 +1,126 @@
-# UI implementation patterns
+# UI work guide
 
-Read [Implementation patterns](implementation-patterns.md) first for choosing an example
-and understanding which parts are approved. A linked example is not approval of its entire file.
+This is the practical entry for planning, implementing, reviewing, or critiquing UI. Follow
+existing patterns unless the user approves a change. Keep review scoped to the requested
+surface and supported behavior; report actionable findings, not broad redesign proposals.
 
-Use the [UI verification guide](ui-verification.md) for private
+For Impeccable requests, use this guide for project-specific patterns and scope, then apply
+the relevant skill/playbook only to the requested surface. Critiques and audits stay within
+supported behavior; they are not permission for broad redesign or repeated polish passes.
+The [product context](../../PRODUCT.md) and [visual context](../../DESIGN.md) record project
+facts and visual references. Use the [UI verification guide](ui-verification.md) for private
 Docker Playwright feature checks and screenshots during mockup planning.
 
-## Choose a presentation for the task
+## Workflow
 
-Choose among a horizontal row, independently composed cards, a table, and an icon-first
-grid based on what the player needs to read or compare. Choose case by case: field count,
-list size, filtering, or artwork alone does not decide the layout. Then follow the selected
-example's composition consistently while keeping the feature's actual fields and game
-meaning.
+1. Define the player task and the exact page, component, or interaction in scope. Identify
+   relevant existing pages and examples before proposing a new composition.
+2. Choose the information hierarchy and composition below. Match a reference's named
+   aspects; its fields, columns, filters, calculations, and other behavior are not universal.
+   Record meaningful choices the examples do not cover.
+3. For planning, use a browser-rendered small preview with existing theme/components and
+   representative display data when composition needs evaluation. A focused mockup route
+   and scenario can render an existing component or store-backed surface; a whole page is
+   not required. Use the [UI verification guide](ui-verification.md) for the preview loop.
+   Use wireframes when only structure matters. Image generation is optional exploration,
+   not the default fidelity authority. Never present illustrative data as game evidence or
+   implement a feature's backend in a preview.
+4. Implement only the requested surface and behavior. Keep game calculations in the domain.
+5. Verify the changed paths with a real save, then fix actionable issues in one bounded
+   pass and confirm once. Stop when the scoped behavior works; do not enter repeated polish
+   loops. Preserve the save, stop the owned stack, and remove temporary scenarios/previews.
 
-- **Rows** align related fields for each upgrade. Study [Atom Collider](../../components/world-3/construction/atomCollider.tsx)
-  for the approved row composition. Its example uses a dark-1 surface, medium padding,
-  and small field gaps. It groups relevant fields with `TextAndLabel`.
-  - Labels are xsmall; bonus values are xsmall.
-  - Names and levels are small; cost values are small.
-  - Keep the fields required by the feature. Do not copy its exact columns or percentage
-    tracks as a universal schema.
-- **Cards** keep each upgrade's identity and details together. Study [Sneaking upgrades](../../components/world-6/sneaking/sneakingUpgrades.tsx).
-  - Use a dark-1 surface with medium padding.
-  - Place the image beside the name and level.
-  - Use small labels, small name and cost values, and an xsmall effect value.
-  - Leave small gaps between fields.
-  - Do not require every card to use these exact fields.
-- **Tables** suit collections where players need to compare the same information across
-  entries. Reuse the existing [EfficiencyUpgradeTable](../../components/account/shared/EfficiencyUpgradeTable.tsx)
-  for a compatible elite-class feature, preserving that family's established controls. Its
-  columns and filters must fit the feature.
-  - For a feature-specific table, [StampsTableView](../../components/world-1/stampTableView.tsx)
-    is an example composed for its own search, filter, sort, and scenario needs.
-  - Stamps also retains its icon grid. Do not add a second view by default.
-- **Icon grids** put game-art recognition and a compact overview first. [Stamps](../../app/world-1/stamps/content.tsx)
-  shows an icon/level grid with details disclosed separately. Use this when that overview
-  fits the player task, not as a compressed substitute for details the feature needs
-  visible.
+## Composition references
 
-These are alternatives, not a layout ranking. Approval of an example covers its named
-composition aspects, not its filters, calculations, field schema, or every branch. Follow
-existing feature-family patterns; the shared elite-class table is an example of that
-consistency.
+Choose rows, cards, tables, or icon grids according to what players need to read or compare;
+field count, collection size, filtering, or artwork alone does not decide. Match an existing
+feature family's pattern where applicable.
 
-For context, Stamps' table was [added as an alternate view with filters](https://github.com/Sludging/idleon-efficiency/pull/259), while the elite-class pages were [deliberately unified](https://github.com/Sludging/idleon-efficiency/pull/278).
+- **Rows:** [Atom Collider](../../components/world-3/construction/atomCollider.tsx) is an
+  approved row reference: dark-1 surface, medium padding, small field gaps, and related
+  values grouped with `TextAndLabel`. Its field sizes and percentage tracks fit that feature;
+  do not copy its exact columns or tracks as a universal schema.
+- **Cards:** [Sneaking upgrades](../../components/world-6/sneaking/sneakingUpgrades.tsx)
+  keeps identity and details together on a dark-1 surface with medium padding and small
+  gaps. Its image beside the name and level is a useful composition reference, not a
+  requirement for every card's fields.
+- **Tables:** Reuse [EfficiencyUpgradeTable](../../components/account/shared/EfficiencyUpgradeTable.tsx)
+  for a compatible elite-class feature and preserve that family's controls. Its columns
+  and filters remain feature-specific. [StampsTableView](../../components/world-1/stampTableView.tsx)
+  is an example of a feature-specific table with search, filter, and sort; Stamps also
+  retains its icon grid rather than adding another view by default.
+- **Icon grids:** [Stamps](../../app/world-1/stamps/content.tsx) prioritizes game-art
+  recognition and a compact overview, with details disclosed separately. Use this only
+  when the overview serves the player task.
 
-## Titles and field grouping
+These are alternatives, not a ranking or blanket approval of their source files. Small
+primitives and theme tokens do not enforce composition consistency: repeated rows, cards,
+resource displays, image/title groups, and grids can still drift in padding, widths,
+columns, gaps, image inset, and grid behavior. Choose a concrete reference for the
+container, spacing, image/title inset, and grid behavior, then keep those details consistent.
 
-For an ordinary feature-page title, use:
+## Page and data display conventions
 
-```tsx
-<Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>
-```
-
-This title recipe is not a rule for subsections, document pages, authentication screens,
-or a deliberately different information hierarchy. See [Legend Talents](../../app/world-7/legendTalents/content.tsx)
-and established account/world pages for context.
-
-**Page spacing:** Ordinary feature pages inherit their outer width, centering, and
-horizontal padding from the shared app layout. Keep the page-content container free
-of additional horizontal padding, max-width, or centering. Apply padding within
-sections and upgrade rows where the selected composition requires it.
-
-For a header and value that belong together:
-
-- Use `TextAndLabel` when the value is text.
-- Use `ComponentAndLabel` when the value is a more complex component.
-
-These components group a label with its value. They are not required wrappers for every
-text, image, status, or currency display. The [shared implementation](../../components/base/TextAndLabel.tsx)
-supplies small labels by default. Choose value sizing to suit its role and the selected
-composition; row examples differ, so there is no universal effect, level, or cost size. In
-the small responsive context, `TextAndLabel`'s string labels and text values become xsmall.
-
-## Records and state
-
-For new upgrade lists, show all real entries, including locked and maxed upgrades. Exclude
-filler records that are not real game content. Optional hide-locked or hide-maxed controls
-start **off** unless another default is deliberately approved.
-For existing lists, preserve the current behavior, including the shared elite table's
-defaults. A new list that follows a family's visual style does not automatically take on
-that family's hide-filter defaults.
-
-Give inactive, locked, or unowned entries reduced emphasis where that state matters.
-Existing examples use different opacity values; use the selected example's actual
-constants rather than treating one value as universal:
-
-- [Atom Collider](../../components/world-3/construction/atomCollider.tsx) dims inactive entries.
-- [Prayers](../../components/world-3/worship/prayers.tsx) dims level-zero entries.
-- [Pristine Charms](../../components/world-6/sneaking/pristineCharmsSection.tsx) dims locked entries.
-
-Follow the named example for related states such as affordability. Jade Emporium combines
-distinct opacity with green cost text. This is a feature-specific refinement, not a reason
-to create a new site-wide state system.
-
-Use [TipDisplay](../../components/base/TipDisplay.tsx) for explanations or detail that
-should not crowd the main display. Existing forms include:
-
-- The information icon from the `TextAndLabel` `tooltip` prop.
-- Details attached to a game image.
-- Exact resource counts behind compact values.
-
-Tooltips are optional; do not make every explanation hover-only.
-
-## Small screens
-The following is approved direction for **new work**, not a claim that current pages already
-behave uniformly this way:
-
-- Give text-rich cards one item per row.
-- Stack horizontal item fields underneath one another; an image may remain beside its name.
-- Keep multiple icons per row in compact icon grids, with fewer columns as the screen narrows.
-- Keep table columns and allow horizontal scrolling within the table area, not across the
-  page.
-
-Use the existing small `ResponsiveContext` and these examples as starting points:
-
-- [Farming market upgrades](../../components/world-6/farming/marketUpgrades.tsx) and
-  [Worship Totems](../../components/world-3/worship/totem.tsx) show collections becoming
-  one column at a small breakpoint.
-
-Verify the actual surface at a narrow width. Propose an exception if the feature needs one;
-do not assume the desktop layout works on mobile. This direction does not authorize
-automatic redesign of old pages.
-
-## Reuse existing UI utilities and data displays
-
-- Check [data/utility.tsx](../../data/utility.tsx) before adding a helper.
-  - Use `nFormatter` or `notateNumber` in the mode appropriate to the value.
-  - They are separate helpers, not interchangeable names for one behavior.
-- Render coin amounts with [CoinsDisplay](../../components/coinsDisplay.tsx) and
+- Ordinary feature-page title:
+  ```tsx
+  <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>
+  ```
+  This does not prescribe subsection, document, authentication, or intentionally different
+  hierarchies. See [Legend Talents](../../app/world-7/legendTalents/content.tsx) and
+  established account/world pages.
+- Ordinary feature pages inherit outer width, centering, and horizontal padding from the
+  shared app layout. Do not add another page-content max-width, centering, or horizontal
+  padding; add padding within sections and rows when their chosen composition calls for it.
+- Use `TextAndLabel` for a label with a text value and `ComponentAndLabel` for a complex
+  value. They are not mandatory wrappers for every text, image, status, or currency display.
+  `TextAndLabel` supplies small labels by default; choose value size to suit its role.
+- Use `TipDisplay` when an explanation or exact count should not crowd the main display.
+  Existing forms include the `TextAndLabel` information icon, details on a game image, and
+  exact resource counts behind compact values. Tooltips are optional; do not make every
+  explanation hover-only.
+- Check [data/utility.tsx](../../data/utility.tsx) before adding a number helper. `nFormatter`
+  is a compatibility adapter; `notateNumber` is the canonical game formatter, and
+  `commaNotation` groups without suffixes. They have distinct behavior.
+- Render coins with [CoinsDisplay](../../components/coinsDisplay.tsx) and
   `getCoinsArray(amount)`, as in [Upgrade Vault](../../components/account/upgradeVaultDisplay.tsx).
-  This displays coin denominations and icons.
-- Render Gaming Bits with [BitsDisplay](../../components/bitsDisplay.tsx):
-  `<BitsDisplay value={amount} />`. Pass a numeric amount or an existing canonical
-  formatted Bits string. Numbers use the game formatter; strings retain its notation.
-  The component replaces the tier suffix with its matching icon; an empty string renders nothing.
-  Use `scale` and `textSize` for compact contexts, as in
-  [Tome](../../app/account/tome/content.tsx).
-- For game artwork, pass the entity's image metadata to
-  [IconImage](../../components/base/IconImage.tsx), for example
-  `data={upgrade.getImageData()}`. Do not build feature-specific asset URLs or dimensions.
-- [ResourceDisplay](../../components/account/shared/ResourceDisplay.tsx) is available for
-  other resources when image, compact quantity, optional affordability colour, or exact-count
-  detail fits.
+  Render Gaming Bits with [BitsDisplay](../../components/bitsDisplay.tsx), passing a numeric
+  amount or canonical formatted Bits string. Use `scale` and `textSize` for compact contexts,
+  as in [Tome](../../app/account/tome/content.tsx). Use
+  [ResourceDisplay](../../components/account/shared/ResourceDisplay.tsx) for other resources
+  when its image, compact quantity, optional affordability color, or exact-count detail fits.
+- Pass entity image metadata to [IconImage](../../components/base/IconImage.tsx), e.g.
+  `data={upgrade.getImageData()}`. Do not construct feature-specific asset URLs or dimensions.
+- Show all real entries, including locked and maxed ones, in new upgrade lists; exclude
+  filler records. Optional hide-locked/maxed controls start off unless a different default
+  is approved. Existing lists retain current behavior, including shared-table defaults.
+  Dim inactive, locked, or unowned entries only where state matters, following the selected
+  example's actual opacity and affordability treatment; those values are not site-wide rules.
+- Keep route metadata and the server wrapper in `page.tsx`; put store hooks and interactions
+  in client content/components where needed. Avoid a redundant content file when a route
+  already delegates to a suitable shared client component. For grouped Zustand selections,
+  use `useShallow` and select only displayed values. A view reading the mutable domain `Map`
+  retains its `lastUpdated` refresh dependency. This is separate from the save timestamp used
+  for elapsed-time displays; preserve established account loading behavior.
+- Filtering and sorting are view work. Keep game formulas in the backend. For a changed
+  calculation, use the existing
+  [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md); previews
+  are not evidence.
 
-## Page state and data refresh
+## Desktop verification and review
 
-Keep route metadata and the server wrapper in `page.tsx`; put store hooks and interaction in
-client content/components where the route needs them. Do not add a redundant content file
-when a route already delegates to a suitable shared client component.
+The Docker Playwright runner uses a 1440×1000 viewport. This is a repeatable review surface,
+not a responsive test matrix or a requirement to implement mobile/tablet behavior. Existing
+responsive code stays in place; new UI work has no mobile/tablet requirement.
 
-When selecting several store values together, wrap the selector with `useShallow` and select
-the fields the view uses rather than subscribing to the whole store. If the page reads the
-mutable domain `Map`, retain the required `lastUpdated` refresh dependency even when it is
-not printed.
+Check only what the change touches:
 
-This rerender signal differs from the save timestamp used for elapsed-time displays. Keep
-the existing account refresh behavior for the page's loading path.
-
-Filtering and sorting are view work; keep game formulas in the backend rather than
-recalculating them as part of rendering. Follow [backend patterns](backend-patterns.md) for
-calculation ownership and previews. If changing a game calculation, follow the existing
-[calculation-correctness guidance](../../skills/calculation-correctness/SKILL.md) for its
-evidence and checks.
+- A real local save is loaded and the page has expected data. Confirm shown values and units
+  are presented coherently; do not infer or invent game calculations.
+- Relevant artwork loads and sits consistently with titles; long labels/effects wrap without
+  clipping, and repeated fields, cards, and columns align as intended.
+- Exercise changed tabs, filters, sorting, tooltips, navigation, loading and empty states as
+  applicable. Observe runtime errors on those paths.
+- Preserve real saves. Keep screenshots, traces, logs, and other run output under the
+  private ignored artifact directory; inspect and redact before sharing.
+- Follow the [UI verification guide](ui-verification.md) to start Docker, run a focused
+  scenario, inspect the screenshot and relevant errors, and stop/remove throwaways.

@@ -1,59 +1,59 @@
 {
-  "timestamp": "2026-10-01T08:49:56.092Z",
+  "timestamp": "2026-10-05T06:01:30.124Z",
   "extractions": {
     "royal_armory_outpost_exp_formula_0_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 0)",
       "result": 10,
       "description": "Experience needed for the first base Outpost point rank",
-      "extractedAt": "2026-10-01T08:49:56.109Z"
+      "extractedAt": "2026-10-05T06:01:30.129Z"
     },
     "royal_armory_outpost_exp_formula_0_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 2)",
       "result": 50,
       "description": "Experience needed for the first rank that grants passive workers and scales production",
-      "extractedAt": "2026-10-01T08:49:56.111Z"
+      "extractedAt": "2026-10-05T06:01:30.130Z"
     },
     "royal_armory_outpost_exp_formula_0_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 4)",
       "result": 100000,
       "description": "Experience needed for the first purification rank",
-      "extractedAt": "2026-10-01T08:49:56.124Z"
+      "extractedAt": "2026-10-05T06:01:30.132Z"
     },
     "royal_armory_outpost_exp_formula_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 0)",
       "result": 19.5,
       "description": "Experience needed for the second base Outpost point rank",
-      "extractedAt": "2026-10-01T08:49:56.126Z"
+      "extractedAt": "2026-10-05T06:01:30.141Z"
     },
     "royal_armory_outpost_exp_formula_1_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 2)",
       "result": 180,
       "description": "Experience needed for the second passive-worker and production rank",
-      "extractedAt": "2026-10-01T08:49:56.128Z"
+      "extractedAt": "2026-10-05T06:01:30.144Z"
     },
     "royal_armory_outpost_exp_formula_1_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 4)",
       "result": 1000000,
       "description": "Experience needed for the second purification rank",
-      "extractedAt": "2026-10-01T08:49:56.143Z"
+      "extractedAt": "2026-10-05T06:01:30.145Z"
     },
     "royal_armory_outpost_exp_formula_2_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 0)",
       "result": 33.800000000000004,
       "description": "Experience needed for the third base Outpost point rank",
-      "extractedAt": "2026-10-01T08:49:56.144Z"
+      "extractedAt": "2026-10-05T06:01:30.147Z"
     },
     "royal_armory_outpost_exp_formula_2_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 2)",
       "result": 486.00000000000006,
       "description": "Experience needed for the third passive-worker and production rank",
-      "extractedAt": "2026-10-01T08:49:56.156Z"
+      "extractedAt": "2026-10-05T06:01:30.151Z"
     },
     "royal_armory_outpost_exp_formula_2_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 4)",
       "result": 10000000,
       "description": "Experience needed for the third purification rank",
-      "extractedAt": "2026-10-01T08:49:56.158Z"
+      "extractedAt": "2026-10-05T06:01:30.161Z"
     }
   },
   "errors": {},

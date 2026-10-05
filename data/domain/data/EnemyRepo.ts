@@ -902,7 +902,9 @@ export const initEnemyRepo = () => {
                     "enemy": "riftAll",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceRift", "name": "The Rift", "id": 166},
-                    "portalRequirements": [100]
+                    "portalRequirements": [100],
+                    "x": 818,
+                    "y": 50
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -2234,7 +2236,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mushG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsA", "name": "Spore Meadows", "id": 1},
-                    "portalRequirements": [21]
+                    "portalRequirements": [21],
+                    "x": 603,
+                    "y": 190
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -2285,7 +2289,9 @@ export const initEnemyRepo = () => {
                     "enemy": "frogG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsB", "name": "Froggy Fields", "id": 2},
-                    "portalRequirements": [25]
+                    "portalRequirements": [25],
+                    "x": 519,
+                    "y": 211
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushR",
@@ -2333,7 +2339,9 @@ export const initEnemyRepo = () => {
                     "enemy": "beanG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsC", "name": "Valley Of The Beans", "id": 14},
-                    "portalRequirements": [50, 2000]
+                    "portalRequirements": [50, 2000],
+                    "x": 637,
+                    "y": 220
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "frogG",
@@ -2382,7 +2390,9 @@ export const initEnemyRepo = () => {
                     "enemy": "slimeG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleA", "name": "Jungle Perimeter", "id": 16},
-                    "portalRequirements": [60, 3000]
+                    "portalRequirements": [60, 3000],
+                    "x": 707,
+                    "y": 236
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "beanG",
@@ -2433,7 +2443,9 @@ export const initEnemyRepo = () => {
                     "enemy": "snakeG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleB", "name": "Winding Willows", "id": 19},
-                    "portalRequirements": [90]
+                    "portalRequirements": [90],
+                    "x": 755,
+                    "y": 256
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "slimeG",
@@ -2479,7 +2491,9 @@ export const initEnemyRepo = () => {
                     "enemy": "carrotO",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "JungleC", "name": "Vegetable Patch", "id": 24},
-                    "portalRequirements": [120, 2000]
+                    "portalRequirements": [120, 2000],
+                    "x": 670,
+                    "y": 269
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "snakeG",
@@ -2526,7 +2540,9 @@ export const initEnemyRepo = () => {
                     "enemy": "goblinG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "ForestA", "name": "Forest Outskirts", "id": 26},
-                    "portalRequirements": [130]
+                    "portalRequirements": [130],
+                    "x": 627,
+                    "y": 299
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "carrotO",
@@ -2575,7 +2591,9 @@ export const initEnemyRepo = () => {
                     "enemy": "plank",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "ForestB", "name": "Encroaching Forest Villas", "id": 27},
-                    "portalRequirements": [30, 4200]
+                    "portalRequirements": [30, 4200],
+                    "x": 545,
+                    "y": 333
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "goblinG",
@@ -2625,7 +2643,9 @@ export const initEnemyRepo = () => {
                     "enemy": "frogBIG",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "ForestC", "name": "Tucked Away", "id": 28},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 530,
+                    "y": 379
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "plank",
@@ -2672,7 +2692,9 @@ export const initEnemyRepo = () => {
                     "enemy": "branch",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "TreeInteriorA", "name": "The Base Of The Bark", "id": 13},
-                    "portalRequirements": [2500, 50000]
+                    "portalRequirements": [2500, 50000],
+                    "x": 754,
+                    "y": 204
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "ratB",
@@ -2717,7 +2739,9 @@ export const initEnemyRepo = () => {
                     "enemy": "acorn",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "TreeInteriorB", "name": "Hollowed Trunk", "id": 18},
-                    "portalRequirements": [5000]
+                    "portalRequirements": [5000],
+                    "x": 765,
+                    "y": 169
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "branch",
@@ -2764,7 +2788,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mushW",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "TreeInteriorC", "name": "Where the Branches End", "id": 31},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 793,
+                    "y": 130
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "Crystal0",
@@ -2814,7 +2840,9 @@ export const initEnemyRepo = () => {
                     "enemy": "poopSmall",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "SewerA", "name": "Poopy Sewers", "id": 8},
-                    "portalRequirements": [20000]
+                    "portalRequirements": [20000],
+                    "x": 532,
+                    "y": 142
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "frogBIG",
@@ -2862,7 +2890,9 @@ export const initEnemyRepo = () => {
                     "enemy": "ratB",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "SewerB", "name": "Rats Nest", "id": 15},
-                    "portalRequirements": [35000]
+                    "portalRequirements": [35000],
+                    "x": 501,
+                    "y": 136
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "poopSmall",
@@ -2906,7 +2936,9 @@ export const initEnemyRepo = () => {
                     "enemy": "poopD",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "SewerD", "name": "Meel's Crypt", "id": 38},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 9999,
+                    "y": 9999
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "poopBig",
@@ -3040,7 +3072,9 @@ export const initEnemyRepo = () => {
                     "enemy": "jarSand",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmA", "name": "Jar Bridge", "id": 51},
-                    "portalRequirements": [100]
+                    "portalRequirements": [100],
+                    "x": 388,
+                    "y": 188
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -3088,7 +3122,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mimicA",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmB", "name": "The Mimic Hole", "id": 52},
-                    "portalRequirements": [120, 1000]
+                    "portalRequirements": [120, 1000],
+                    "x": 429,
+                    "y": 263
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "jarSand",
@@ -3135,7 +3171,9 @@ export const initEnemyRepo = () => {
                     "enemy": "crabcake",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCalmC", "name": "Dessert Dunes", "id": 53},
-                    "portalRequirements": [150]
+                    "portalRequirements": [150],
+                    "x": 505,
+                    "y": 277
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mimicA",
@@ -3182,7 +3220,9 @@ export const initEnemyRepo = () => {
                     "enemy": "coconut",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildA", "name": "The Grandioso Canyon", "id": 57},
-                    "portalRequirements": [200]
+                    "portalRequirements": [200],
+                    "x": 608,
+                    "y": 273
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "crabcake",
@@ -3229,7 +3269,9 @@ export const initEnemyRepo = () => {
                     "enemy": "sandcastle",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildB", "name": "Shifty Sandbox", "id": 58},
-                    "portalRequirements": [250]
+                    "portalRequirements": [250],
+                    "x": 552,
+                    "y": 233
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "coconut",
@@ -3280,7 +3322,9 @@ export const initEnemyRepo = () => {
                     "enemy": "pincermin",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildC", "name": "Pincer Plateau", "id": 59},
-                    "portalRequirements": [300]
+                    "portalRequirements": [300],
+                    "x": 510,
+                    "y": 192
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "sandcastle",
@@ -3325,7 +3369,9 @@ export const initEnemyRepo = () => {
                     "enemy": "potato",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertMildD", "name": "Slamabam Straightaway", "id": 60},
-                    "portalRequirements": [500, 0]
+                    "portalRequirements": [500, 0],
+                    "x": 490,
+                    "y": 125
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "pincermin",
@@ -3371,7 +3417,9 @@ export const initEnemyRepo = () => {
                     "enemy": "steak",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightA", "name": "The Ring", "id": 62},
-                    "portalRequirements": [1000]
+                    "portalRequirements": [1000],
+                    "x": 566,
+                    "y": 130
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "potato",
@@ -3419,7 +3467,9 @@ export const initEnemyRepo = () => {
                     "enemy": "moonman",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightB", "name": "Up Up Down Down", "id": 63},
-                    "portalRequirements": [2000]
+                    "portalRequirements": [2000],
+                    "x": 661,
+                    "y": 129
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "steak",
@@ -3465,7 +3515,9 @@ export const initEnemyRepo = () => {
                     "enemy": "sandgiant",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightC", "name": "Sands of Time", "id": 64},
-                    "portalRequirements": [3000]
+                    "portalRequirements": [3000],
+                    "x": 740,
+                    "y": 181
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "moonman",
@@ -3511,7 +3563,9 @@ export const initEnemyRepo = () => {
                     "enemy": "snailZ",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertNightD", "name": "Djonnuttown", "id": 65},
-                    "portalRequirements": [1]
+                    "portalRequirements": [1],
+                    "x": 732,
+                    "y": 259
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "sandgiant",
@@ -3558,7 +3612,9 @@ export const initEnemyRepo = () => {
                     "enemy": "sheep",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowA1", "name": "Steep Sheep Ledge", "id": 101},
-                    "portalRequirements": [1000]
+                    "portalRequirements": [1000],
+                    "x": 283,
+                    "y": 275
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -3605,7 +3661,9 @@ export const initEnemyRepo = () => {
                     "enemy": "flake",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowA2", "name": "Snowfield Outskirts", "id": 103},
-                    "portalRequirements": [2000]
+                    "portalRequirements": [2000],
+                    "x": 294,
+                    "y": 227
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "sheep",
@@ -3652,7 +3710,9 @@ export const initEnemyRepo = () => {
                     "enemy": "stache",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowA3", "name": "The Stache Split", "id": 104},
-                    "portalRequirements": [3000, 100000]
+                    "portalRequirements": [3000, 100000],
+                    "x": 363,
+                    "y": 191
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "flake",
@@ -3699,7 +3759,9 @@ export const initEnemyRepo = () => {
                     "enemy": "ram",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowD1", "name": "Wam Wonderland", "id": 116},
-                    "portalRequirements": [250000]
+                    "portalRequirements": [250000],
+                    "x": 353,
+                    "y": 135
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "eye",
@@ -3746,7 +3808,9 @@ export const initEnemyRepo = () => {
                     "enemy": "bloque",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowB1", "name": "Refrigeration Station", "id": 105},
-                    "portalRequirements": [4000]
+                    "portalRequirements": [4000],
+                    "x": 426,
+                    "y": 224
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "stache",
@@ -3794,7 +3858,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mamoth",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowB2", "name": "Mamooooth Mountain", "id": 106},
-                    "portalRequirements": [6000]
+                    "portalRequirements": [6000],
+                    "x": 484,
+                    "y": 239
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "bloque",
@@ -3842,7 +3908,9 @@ export const initEnemyRepo = () => {
                     "enemy": "snowball",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowB3", "name": "Rollin' Tundra", "id": 107},
-                    "portalRequirements": [8000]
+                    "portalRequirements": [8000],
+                    "x": 567,
+                    "y": 259
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mamoth",
@@ -3888,7 +3956,9 @@ export const initEnemyRepo = () => {
                     "enemy": "penguin",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowB4", "name": "Signature Slopes", "id": 108},
-                    "portalRequirements": [11000]
+                    "portalRequirements": [11000],
+                    "x": 683,
+                    "y": 285
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "snowball",
@@ -3941,7 +4011,9 @@ export const initEnemyRepo = () => {
                     "enemy": "thermostat",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowB5", "name": "Thermonuclear Climb", "id": 109},
-                    "portalRequirements": [15000]
+                    "portalRequirements": [15000],
+                    "x": 684,
+                    "y": 245
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "penguin",
@@ -3987,7 +4059,9 @@ export const initEnemyRepo = () => {
                     "enemy": "glass",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowC1", "name": "Waterlogged Entrance", "id": 110},
-                    "portalRequirements": [18000]
+                    "portalRequirements": [18000],
+                    "x": 698,
+                    "y": 208
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "thermostat",
@@ -4033,7 +4107,9 @@ export const initEnemyRepo = () => {
                     "enemy": "snakeB",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowC2", "name": "Cryo Catacombs", "id": 111},
-                    "portalRequirements": [22000]
+                    "portalRequirements": [22000],
+                    "x": 661,
+                    "y": 167
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "glass",
@@ -4079,7 +4155,9 @@ export const initEnemyRepo = () => {
                     "enemy": "speaker",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowC3", "name": "Overpass of Sound", "id": 112},
-                    "portalRequirements": [35000]
+                    "portalRequirements": [35000],
+                    "x": 611,
+                    "y": 136
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "snakeB",
@@ -4125,7 +4203,9 @@ export const initEnemyRepo = () => {
                     "enemy": "eye",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowC4", "name": "Crystal Basecamp", "id": 113},
-                    "portalRequirements": [120000]
+                    "portalRequirements": [120000],
+                    "x": 670,
+                    "y": 121
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "speaker",
@@ -4200,7 +4280,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mushP",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA1", "name": "Spaceway Raceway", "id": 151},
-                    "portalRequirements": [5000]
+                    "portalRequirements": [5000],
+                    "x": 717,
+                    "y": 243
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -4248,7 +4330,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4a2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA2", "name": "TV Outpost", "id": 152},
-                    "portalRequirements": [12000]
+                    "portalRequirements": [12000],
+                    "x": 651,
+                    "y": 292
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushP",
@@ -4294,7 +4378,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4a3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA3", "name": "Donut Drive-In", "id": 153},
-                    "portalRequirements": [18000]
+                    "portalRequirements": [18000],
+                    "x": 587,
+                    "y": 344
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4a2",
@@ -4340,7 +4426,9 @@ export const initEnemyRepo = () => {
                     "enemy": "demonP",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceA4", "name": "Outskirts of Fallstar Isle", "id": 154},
-                    "portalRequirements": [25000]
+                    "portalRequirements": [25000],
+                    "x": 514,
+                    "y": 272
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4a3",
@@ -4386,7 +4474,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB1", "name": "Mountainous Deugh", "id": 155},
-                    "portalRequirements": [40000]
+                    "portalRequirements": [40000],
+                    "x": 394,
+                    "y": 298
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "demonP",
@@ -4432,7 +4522,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b1",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB2", "name": "Wurm Highway", "id": 156},
-                    "portalRequirements": [60000]
+                    "portalRequirements": [60000],
+                    "x": 287,
+                    "y": 321
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b2",
@@ -4479,7 +4571,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB3", "name": "Jelly Cube Bridge", "id": 157},
-                    "portalRequirements": [90000]
+                    "portalRequirements": [90000],
+                    "x": 281,
+                    "y": 234
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b1",
@@ -4525,7 +4619,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b4",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB4", "name": "Cocoa Tunnel", "id": 158},
-                    "portalRequirements": [120000]
+                    "portalRequirements": [120000],
+                    "x": 216,
+                    "y": 158
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b3",
@@ -4571,7 +4667,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4b5",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceB5", "name": "Standstill Plains", "id": 159},
-                    "portalRequirements": [150000]
+                    "portalRequirements": [150000],
+                    "x": 314,
+                    "y": 151
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b4",
@@ -4617,7 +4715,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c1",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC1", "name": "Shelled Shores", "id": 160},
-                    "portalRequirements": [190000]
+                    "portalRequirements": [190000],
+                    "x": 446,
+                    "y": 149
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4b5",
@@ -4663,7 +4763,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c2",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC2", "name": "The Untraveled Octopath", "id": 161},
-                    "portalRequirements": [250000]
+                    "portalRequirements": [250000],
+                    "x": 545,
+                    "y": 142
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c1",
@@ -4709,7 +4811,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c3",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC3", "name": "Flamboyant Bayou", "id": 162},
-                    "portalRequirements": [300000]
+                    "portalRequirements": [300000],
+                    "x": 582,
+                    "y": 70
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c2",
@@ -4755,7 +4859,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w4c4",
                     "world": "Hyperion Nebula",
                     "map": <MapNameModel>{"intName": "xSpaceC4", "name": "Enclave of Eyes", "id": 163},
-                    "portalRequirements": [350000]
+                    "portalRequirements": [350000],
+                    "x": 686,
+                    "y": 107
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w4c3",
@@ -4802,7 +4908,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA1", "name": "Naut Sake Perimeter", "id": 201},
-                    "portalRequirements": [15000]
+                    "portalRequirements": [15000],
+                    "x": 691,
+                    "y": 177
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -4849,7 +4957,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a2",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA2", "name": "Niagrilled Falls", "id": 202},
-                    "portalRequirements": [25000]
+                    "portalRequirements": [25000],
+                    "x": 631,
+                    "y": 210
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a1",
@@ -4895,7 +5005,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a3",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA3", "name": "The Killer Roundabout", "id": 203},
-                    "portalRequirements": [40000]
+                    "portalRequirements": [40000],
+                    "x": 647,
+                    "y": 263
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a2",
@@ -4942,7 +5054,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a4",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA4", "name": "Cracker Jack Lake", "id": 204},
-                    "portalRequirements": [50000]
+                    "portalRequirements": [50000],
+                    "x": 610,
+                    "y": 297
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a3",
@@ -4989,7 +5103,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5a5",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaA5", "name": "The Great Molehill", "id": 205},
-                    "portalRequirements": [75000]
+                    "portalRequirements": [75000],
+                    "x": 541,
+                    "y": 292
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a4",
@@ -5035,7 +5151,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB1", "name": "Erruption River", "id": 206},
-                    "portalRequirements": [100000]
+                    "portalRequirements": [100000],
+                    "x": 473,
+                    "y": 268
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5a5",
@@ -5081,7 +5199,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b2",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB2", "name": "Mount Doomish", "id": 207},
-                    "portalRequirements": [200000]
+                    "portalRequirements": [200000],
+                    "x": 418,
+                    "y": 280
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b1",
@@ -5128,7 +5248,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b3",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB3", "name": "OJ Bay", "id": 208},
-                    "portalRequirements": [300000]
+                    "portalRequirements": [300000],
+                    "x": 400,
+                    "y": 243
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b2",
@@ -5175,7 +5297,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b4",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB4", "name": "Lampar Lake", "id": 209},
-                    "portalRequirements": [450000]
+                    "portalRequirements": [450000],
+                    "x": 341,
+                    "y": 264
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b3",
@@ -5221,7 +5345,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b5",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB5", "name": "Spitfire River", "id": 210},
-                    "portalRequirements": [600000]
+                    "portalRequirements": [600000],
+                    "x": 290,
+                    "y": 249
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b4",
@@ -5268,7 +5394,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5b6",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaB6", "name": "Miner Mole Outskirts", "id": 211},
-                    "portalRequirements": [1000000]
+                    "portalRequirements": [1000000],
+                    "x": 221,
+                    "y": 265
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b5",
@@ -5314,7 +5442,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5c1",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaC1", "name": "Crawly Catacombs", "id": 212},
-                    "portalRequirements": [3000000]
+                    "portalRequirements": [3000000],
+                    "x": 321,
+                    "y": 357
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5b6",
@@ -5361,7 +5491,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w5c2",
                     "world": "Smolderin' Plateau",
                     "map": <MapNameModel>{"intName": "wLavaC2", "name": "The Worm Nest", "id": 213},
-                    "portalRequirements": [60000]
+                    "portalRequirements": [60000],
+                    "x": 429,
+                    "y": 377
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w5c1",
@@ -5407,7 +5539,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6a1",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA1", "name": "Gooble Goop Creek", "id": 251},
-                    "portalRequirements": [30000]
+                    "portalRequirements": [30000],
+                    "x": 634,
+                    "y": 354
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -5454,7 +5588,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6a2",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA2", "name": "Picnic Bridgeways", "id": 252},
-                    "portalRequirements": [50000]
+                    "portalRequirements": [50000],
+                    "x": 571,
+                    "y": 357
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6a1",
@@ -5500,7 +5636,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6a3",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA3", "name": "Irrigation Station", "id": 253},
-                    "portalRequirements": [100000]
+                    "portalRequirements": [100000],
+                    "x": 540,
+                    "y": 382
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6a2",
@@ -5546,7 +5684,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6a4",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA4", "name": "Troll Playground", "id": 254},
-                    "portalRequirements": [250000]
+                    "portalRequirements": [250000],
+                    "x": 476,
+                    "y": 385
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6a3",
@@ -5592,7 +5732,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6a5",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritA5", "name": "Edge of the Valley", "id": 255},
-                    "portalRequirements": [400000]
+                    "portalRequirements": [400000],
+                    "x": 401,
+                    "y": 383
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6a4",
@@ -5637,7 +5779,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6b1",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB1", "name": "Bamboo Laboredge", "id": 256},
-                    "portalRequirements": [1100000]
+                    "portalRequirements": [1100000],
+                    "x": 245,
+                    "y": 360
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6a5",
@@ -5684,7 +5828,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6b2",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB2", "name": "Lightway Path", "id": 257},
-                    "portalRequirements": [3200000]
+                    "portalRequirements": [3200000],
+                    "x": 329,
+                    "y": 293
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6b1",
@@ -5730,7 +5876,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6b3",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB3", "name": "Troll Broodnest", "id": 258},
-                    "portalRequirements": [8000000]
+                    "portalRequirements": [8000000],
+                    "x": 549,
+                    "y": 217
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6b2",
@@ -5776,7 +5924,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6b4",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritB4", "name": "Above the Clouds", "id": 259},
-                    "portalRequirements": [12000000]
+                    "portalRequirements": [12000000],
+                    "x": 656,
+                    "y": 130
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6b3",
@@ -5822,7 +5972,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6c1",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritC1", "name": "Sleepy Skyline", "id": 260},
-                    "portalRequirements": [25000000]
+                    "portalRequirements": [25000000],
+                    "x": 457,
+                    "y": 153
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6b4",
@@ -5873,7 +6025,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6c2",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritC2", "name": "Dozey Dogpark", "id": 261},
-                    "portalRequirements": [70000000]
+                    "portalRequirements": [70000000],
+                    "x": 323,
+                    "y": 179
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6c1",
@@ -5918,7 +6072,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6d1",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD1", "name": "Yolkrock Basin", "id": 262},
-                    "portalRequirements": [100000000]
+                    "portalRequirements": [100000000],
+                    "x": 218,
+                    "y": 189
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6c2",
@@ -5964,7 +6120,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6d2",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD2", "name": "Chieftain Stairway", "id": 263},
-                    "portalRequirements": [150000000]
+                    "portalRequirements": [150000000],
+                    "x": 165,
+                    "y": 124
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6d1",
@@ -6011,7 +6169,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w6d3",
                     "world": "Spirited Valley",
                     "map": <MapNameModel>{"intName": "vSpiritD3", "name": "Emperor's Castle Doorstep", "id": 264},
-                    "portalRequirements": [100]
+                    "portalRequirements": [100],
+                    "x": 200,
+                    "y": 103
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w6d2",
@@ -6247,7 +6407,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a1",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA1", "name": "Refraction Bend", "id": 301},
-                    "portalRequirements": [100000]
+                    "portalRequirements": [100000],
+                    "x": 293,
+                    "y": 86
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": undefined,
@@ -6293,7 +6455,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a2",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA2", "name": "Doodle Reef", "id": 302},
-                    "portalRequirements": [250000]
+                    "portalRequirements": [250000],
+                    "x": 215,
+                    "y": 96
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a1",
@@ -6339,7 +6503,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a3",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA3", "name": "Seaweed Street", "id": 303},
-                    "portalRequirements": [10000000, 1500000]
+                    "portalRequirements": [10000000, 1500000],
+                    "x": 270,
+                    "y": 142
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a2",
@@ -6386,7 +6552,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a4",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA4", "name": "Barnacle Curb", "id": 304},
-                    "portalRequirements": [5000000]
+                    "portalRequirements": [5000000],
+                    "x": 202,
+                    "y": 141
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a3",
@@ -6432,7 +6600,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a5",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA5", "name": "Balloon Bay", "id": 305},
-                    "portalRequirements": [20000000, 1000000]
+                    "portalRequirements": [20000000, 1000000],
+                    "x": 226,
+                    "y": 203
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a4",
@@ -6477,7 +6647,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a6",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA6", "name": "The Clamworks", "id": 306},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 153,
+                    "y": 162
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a5",
@@ -6524,7 +6696,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a7",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA7", "name": "Plastic Basin", "id": 307},
-                    "portalRequirements": [250000000, 20000000]
+                    "portalRequirements": [250000000, 20000000],
+                    "x": 397,
+                    "y": 148
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a6",
@@ -6569,7 +6743,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a8",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA8", "name": "Puffpuff Overpass", "id": 308},
-                    "portalRequirements": [60000000]
+                    "portalRequirements": [60000000],
+                    "x": 364,
+                    "y": 118
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a7",
@@ -6614,7 +6790,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a10",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA10", "name": "Middle of Nowhere", "id": 310},
-                    "portalRequirements": [500000000, 75000000]
+                    "portalRequirements": [500000000, 75000000],
+                    "x": 470,
+                    "y": 105
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a9",
@@ -6659,7 +6837,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a9",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA9", "name": "Pinpoint Summit", "id": 309},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 357,
+                    "y": 77
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a8",
@@ -6706,7 +6886,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a11",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA11", "name": "Coralcave Outskirts", "id": 311},
-                    "portalRequirements": [1000000000]
+                    "portalRequirements": [1000000000],
+                    "x": 435,
+                    "y": 75
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a10",
@@ -6752,7 +6934,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7a12",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaA12", "name": "Coralcave Perimeter", "id": 312},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 401,
+                    "y": 51
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a11",
@@ -6799,7 +6983,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b1",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB1", "name": "Deep End of the Koipond", "id": 315},
-                    "portalRequirements": [2000000]
+                    "portalRequirements": [2000000],
+                    "x": 352,
+                    "y": 261
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7a12",
@@ -6845,7 +7031,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b2",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB2", "name": "Minefield", "id": 316},
-                    "portalRequirements": [6000000]
+                    "portalRequirements": [6000000],
+                    "x": 456,
+                    "y": 241
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b1",
@@ -6891,7 +7079,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b3",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB3", "name": "Pirate Upper Deck", "id": 317},
-                    "portalRequirements": [1000000000, 40000000]
+                    "portalRequirements": [1000000000, 40000000],
+                    "x": 560,
+                    "y": 214
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b2",
@@ -6938,7 +7128,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b4",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB4", "name": "Sushi Perimeter", "id": 318},
-                    "portalRequirements": [60000000]
+                    "portalRequirements": [60000000],
+                    "x": 619,
+                    "y": 179
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b3",
@@ -6984,7 +7176,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b5",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB5", "name": "Jellofish Fields", "id": 319},
-                    "portalRequirements": [125000000]
+                    "portalRequirements": [125000000],
+                    "x": 677,
+                    "y": 156
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b4",
@@ -7030,7 +7224,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b6",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB6", "name": "Where the Kelp Meets Trench", "id": 320},
-                    "portalRequirements": [250000000]
+                    "portalRequirements": [250000000],
+                    "x": 720,
+                    "y": 128
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b5",
@@ -7076,7 +7272,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b7",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB7", "name": "Trench Precipice", "id": 321},
-                    "portalRequirements": [350000000]
+                    "portalRequirements": [350000000],
+                    "x": 792,
+                    "y": 132
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b6",
@@ -7122,7 +7320,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b8",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB8", "name": "The Glowing Underbelly", "id": 322},
-                    "portalRequirements": [500000000]
+                    "portalRequirements": [500000000],
+                    "x": 776,
+                    "y": 166
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b7",
@@ -7169,7 +7369,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b9",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB9", "name": "Ancient Fissure", "id": 323},
-                    "portalRequirements": [750000000]
+                    "portalRequirements": [750000000],
+                    "x": 744,
+                    "y": 192
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b8",
@@ -7215,7 +7417,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b10",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB10", "name": "fillername", "id": 324},
-                    "portalRequirements": [1000000000]
+                    "portalRequirements": [1000000000],
+                    "x": 729,
+                    "y": 213
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b9",
@@ -7262,7 +7466,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b11",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB11", "name": "Pirate Mess Hall", "id": 325},
-                    "portalRequirements": [2000000000]
+                    "portalRequirements": [2000000000],
+                    "x": 523,
+                    "y": 201
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b10",
@@ -7309,7 +7515,9 @@ export const initEnemyRepo = () => {
                     "enemy": "w7b12",
                     "world": "Shimmerfin Deep",
                     "map": <MapNameModel>{"intName": "uAquaB12", "name": "Dreadnaught Chamber", "id": 326},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 591,
+                    "y": 238
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "w7b11",
@@ -7415,7 +7623,9 @@ export const initEnemyRepo = () => {
                     "enemy": "mushR",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandsD", "name": "Birch Enclave", "id": 17},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 672,
+                    "y": 170
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "mushG",
@@ -7539,7 +7749,9 @@ export const initEnemyRepo = () => {
                     "enemy": "skele2",
                     "world": "Frostbite Tundra",
                     "map": <MapNameModel>{"intName": "ySnowD2", "name": "Hell Hath Frozen Over", "id": 117},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 287,
+                    "y": 114
                 },
                 "navigation": <EnemyNavModel>{
                     "prev": "skele",
@@ -11182,7 +11394,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Copper",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggA", "name": "Tunnels Entrance", "id": 6},
-                    "portalRequirements": [10]
+                    "portalRequirements": [10],
+                    "x": 393,
+                    "y": 154
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -11220,7 +11434,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Iron",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggB", "name": "Freefall Caverns", "id": 7},
-                    "portalRequirements": [25, 81]
+                    "portalRequirements": [25, 81],
+                    "x": 293,
+                    "y": 165
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -11292,7 +11508,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Plat",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggC", "name": "The Ol' Straightaway", "id": 10},
-                    "portalRequirements": [40]
+                    "portalRequirements": [40],
+                    "x": 345,
+                    "y": 180
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -11363,7 +11581,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Void",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggD", "name": "Echoing Egress", "id": 11},
-                    "portalRequirements": [50, 60]
+                    "portalRequirements": [50, 60],
+                    "x": 356,
+                    "y": 208
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -11434,7 +11654,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Starfire",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggE", "name": "Slip Slidy Ledges", "id": 12},
-                    "portalRequirements": [60]
+                    "portalRequirements": [60],
+                    "x": 254,
+                    "y": 223
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -11505,7 +11727,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Godshard",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "MininggF", "name": "Motherlode Pit", "id": 32},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 318,
+                    "y": 231
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -12235,7 +12459,9 @@ export const initEnemyRepo = () => {
                     "enemy": "FishSmall",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zFishingA", "name": "Salty Shores", "id": 54},
-                    "portalRequirements": [15]
+                    "portalRequirements": [15],
+                    "x": 230,
+                    "y": 157
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -12272,7 +12498,9 @@ export const initEnemyRepo = () => {
                     "enemy": "FishMed",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zFishingC", "name": "Deepwater Docks", "id": 61},
-                    "portalRequirements": [30]
+                    "portalRequirements": [30],
+                    "x": 227,
+                    "y": 215
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -13370,7 +13598,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Bug2",
                     "world": "Yum-Yum Desert",
                     "map": <MapNameModel>{"intName": "zDesertCavernA", "name": "Bandit Bob's Hideout", "id": 67},
-                    "portalRequirements": [0]
+                    "portalRequirements": [0],
+                    "x": 479,
+                    "y": 327
                 },
                 "navigation": undefined,
                 "bossData": undefined
@@ -15341,7 +15571,9 @@ export const initEnemyRepo = () => {
                     "enemy": "Nothing",
                     "world": "Blunder Hills",
                     "map": <MapNameModel>{"intName": "GrasslandaTown", "name": "Blunder Hills", "id": 0},
-                    "portalRequirements": [1, 0]
+                    "portalRequirements": [1, 0],
+                    "x": 562,
+                    "y": 167
                 },
                 "navigation": undefined,
                 "bossData": undefined

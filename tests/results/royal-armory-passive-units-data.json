@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-10-01T08:49:56.293Z",
+  "timestamp": "2026-10-05T06:01:30.274Z",
   "extractions": {
     "royal_armory_passive_units_rank_row_53_type_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 53, 2)",
       "result": 0,
       "description": "Worker-granting rank on outpost row 53, directly used to calculate its passive worker count",
-      "extractedAt": "2026-10-01T08:49:56.307Z"
+      "extractedAt": "2026-10-05T06:01:30.278Z"
     }
   },
   "errors": {},

@@ -1,8 +1,7 @@
 /**
  * Orblet Market rows improve statue progression, Outpost collection and
  * clearing, kingdom ranks, Regal Intervention, Masterclass costs, connection
- * range, and Parchment drops. Glorification is omitted because its gameplay
- * effect is unavailable in the extracted descriptions and no direct caller was found.
+ * range, and Parchment drops.
  */
 
 import {

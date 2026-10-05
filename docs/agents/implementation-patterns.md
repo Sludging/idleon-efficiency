@@ -1,22 +1,33 @@
 # Implementation patterns
 
-These are the user-selected patterns for backend and UI work. They apply to new features and changes to existing features.
+For any UI planning, implementation, change, scoped review, critique, or audit, start with
+the [UI work guide](ui-patterns.md). It is the practical entry for project UI context and
+desktop smoke expectations; its linked product and visual context are sufficient for UI work.
 
 ## Read the relevant guide
 
-- **Adding or changing domain objects, parsing, calculations, or purchase planning:** read [Backend patterns](backend-patterns.md).
-- **Adding or changing a page, component, or account-data display:** read [UI patterns](ui-patterns.md).
-- **Adding calculations for a page:** read both. A calculation used only by the UI still belongs with the relevant game feature's calculations.
+- **Adding or changing domain objects, parsing, calculations, or purchase planning:** read
+  [Backend patterns](backend-patterns.md).
+- **Adding or changing a page, component, or account-data display:** read the
+  [UI work guide](ui-patterns.md).
+- **Adding calculations for a page:** read both. A calculation used only by the UI still
+  belongs with the relevant game feature's calculations.
 
 ## Choose before implementing
 
-1. Identify the relevant pattern and example in the guide. In the task's existing plan or proposal, state which parts apply: for example, a bonus class's calculation ownership or an upgrade row's field layout and text sizes.
-2. Follow the approved parts. An example is not approval of its entire file, every formula, its exact fields, or all its existing behaviour. Check game calculations through the existing evidence and testing workflow.
-3. If a choice is not covered, or the guidance conflicts with the code being changed, raise it before implementing that part. Batch the open choices, give concrete examples, and recommend an answer. Include small visual choices when no approved example covers them; do not ask again about routine choices already settled here.
-4. Keep changes within the task. Following these guides does not require redesigning old pages, refactoring unrelated domains, or changing existing filter defaults.
+1. Identify the relevant pattern and example. State which aspects apply, such as calculation
+   ownership or row composition.
+2. Follow only those aspects. An example does not approve its whole file, formulas, exact
+   fields, or existing behavior. Check game calculations through the established evidence
+   workflow.
+3. Raise uncovered choices or conflicts affecting the work before implementing them. Batch
+   open choices, give concrete examples, and recommend an answer; routine UI choices are
+   already covered by the UI work guide.
+4. Keep changes within scope. These guides do not require redesigning old pages, refactoring
+   unrelated domains, or changing existing filter defaults.
 
-**Ready to implement:** the applicable pattern is identified and any uncovered choices or conflicts affecting the work have been resolved with the user. If no existing example is suitable, explain the gap rather than building a new pattern and presenting it as an existing convention.
+**Ready to implement:** applicable patterns are identified and uncovered choices affecting
+the work are resolved. If no example fits, explain the gap instead of presenting a new pattern
+as an existing convention.
 
-## Maintaining the guidance
-
-Keep each rule in its backend or UI guide and link to it from other instructions. Use simple technical English, concrete game scenarios, and names already used by the game or project. Record later changes from ordinary user feedback; no separate evaluation process is required.
+Keep backend and UI rules in their respective guides; link rather than duplicate them.

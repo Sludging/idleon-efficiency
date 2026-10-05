@@ -1,23 +1,23 @@
 {
-  "timestamp": "2026-10-01T08:49:56.446Z",
+  "timestamp": "2026-10-05T06:01:30.366Z",
   "extractions": {
     "royal_armory_support_collection": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportCollection\", 0, 0)",
       "result": 200,
       "description": "Collection-rate percentage contributed by one assigned support before caller-specific row scaling",
-      "extractedAt": "2026-10-01T08:49:56.459Z"
+      "extractedAt": "2026-10-05T06:01:30.376Z"
     },
     "royal_armory_support_collection_upgrade_43": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 43, 0)",
       "result": 0,
       "description": "Armory upgrade contribution that increases the base collection percentage from each support",
-      "extractedAt": "2026-10-01T08:49:56.460Z"
+      "extractedAt": "2026-10-05T06:01:30.377Z"
     },
     "royal_armory_support_collection_jelly_quantity_41": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 41, 0)",
       "result": 0,
       "description": "Jelly Operation quantity added after the upgrade-scaled collection bonus",
-      "extractedAt": "2026-10-01T08:49:56.462Z"
+      "extractedAt": "2026-10-05T06:01:30.378Z"
     }
   },
   "errors": {},

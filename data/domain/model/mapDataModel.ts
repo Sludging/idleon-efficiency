@@ -4,5 +4,7 @@ export interface MapDataModel {
     enemy: string,
     world: string,
     map: MapNameModel,
-    portalRequirements: number[]
+    portalRequirements: number[],
+    x: number,
+    y: number
 }

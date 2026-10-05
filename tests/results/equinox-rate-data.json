@@ -1,71 +1,71 @@
 {
-  "timestamp": "2026-10-01T08:49:53.271Z",
+  "timestamp": "2026-10-05T06:01:28.263Z",
   "extractions": {
     "voting_bonus_32": {
       "expression": "idleon.callFunction(\"Summoning\",\"VotingBonusz\", 32, 0)",
       "result": 0,
       "description": "Voting bonus that boosts Equinox Bar Fill Rate",
-      "extractedAt": "2026-10-01T08:49:53.286Z"
+      "extractedAt": "2026-10-05T06:01:28.273Z"
     },
     "research_grid_bonus_86": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\", 86, 0)",
       "result": 25,
       "description": "Equinox Nightmares Research Grid bonus; unlocks dreams and boosts bar fill rate",
-      "extractedAt": "2026-10-01T08:49:53.288Z"
+      "extractedAt": "2026-10-05T06:01:28.275Z"
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\",\"LoreEpiBon\", 8, 0)",
-      "result": 333.6776283144737,
+      "result": 333.8441246819296,
       "description": "Tome Lore Epic 8 multiplier to Equinox bar rate",
-      "extractedAt": "2026-10-01T08:49:53.291Z"
+      "extractedAt": "2026-10-05T06:01:28.277Z"
     },
     "companion_15_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 15)",
       "result": 4,
       "description": "Companion 15 bonus: 3.5x faster Equinox Bar Fill Rate",
-      "extractedAt": "2026-10-01T08:49:53.305Z"
+      "extractedAt": "2026-10-05T06:01:28.278Z"
     },
     "cosmo_bonus_2_5": {
       "expression": "idleon.callFunction(\"Holes\",\"CosmoBonusQTY\", 2, 5)",
       "result": 60,
       "description": "Equinox Maxim Cosmo upgrade multiplier to bar fill rate",
-      "extractedAt": "2026-10-01T08:49:53.308Z"
+      "extractedAt": "2026-10-05T06:01:28.280Z"
     },
     "alch_vials_eq_bar_bonus": {
       "expression": "idleon.getAttr(\"DNSM\").h.AlchVials.h.EqBar",
       "result": 345.8,
       "description": "Marble Mocha vial bonus to Equinox bar fill rate",
-      "extractedAt": "2026-10-01T08:49:53.322Z"
+      "extractedAt": "2026-10-05T06:01:28.293Z"
     },
     "arcade_bonus_41": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 41)",
       "result": 19.5,
       "description": "Arcade bonus that increases Equinox Fill Rate",
-      "extractedAt": "2026-10-01T08:49:53.338Z"
+      "extractedAt": "2026-10-05T06:01:28.295Z"
     },
     "emperor_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\",\"EmperorBon\", 5, 0)",
       "result": 157,
       "description": "Emperor bonus that increases Equinox Bar Fill Rate",
-      "extractedAt": "2026-10-01T08:49:53.341Z"
+      "extractedAt": "2026-10-05T06:01:28.297Z"
     },
     "tesseract_bonus_37": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 37, 0)",
       "result": 95.46000000000001,
       "description": "Eternal Stream Tesseract multiplier to Equinox Bar Fill Rate",
-      "extractedAt": "2026-10-01T08:49:53.354Z"
+      "extractedAt": "2026-10-05T06:01:28.308Z"
     },
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\",\"ArmoryUpgBonus\", 76, 0)",
       "result": 0,
       "description": "Farmer Joe Royal Armory bonus to Equinox bar fill rate",
-      "extractedAt": "2026-10-01T08:49:53.357Z"
+      "extractedAt": "2026-10-05T06:01:28.310Z"
     },
     "equinox_bar_rate": {
       "expression": "idleon.callFunction(\"Dreamstuff\",\"BarFillRate\", 0)",
-      "result": 100965.9559094125,
+      "result": 101004.7184920271,
       "description": "Equinox bar rate",
-      "extractedAt": "2026-10-01T08:49:53.371Z"
+      "extractedAt": "2026-10-05T06:01:28.312Z"
     }
   },
   "errors": {},

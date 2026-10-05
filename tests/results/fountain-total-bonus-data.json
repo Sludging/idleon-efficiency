@@ -1,131 +1,131 @@
 {
-  "timestamp": "2026-10-01T08:49:53.690Z",
+  "timestamp": "2026-10-05T06:01:28.458Z",
   "extractions": {
     "fountain_marble_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 8)",
       "result": 1,
       "description": "Money Back Guarantee marble multiplier before marbleization (no saved marble levels)",
-      "extractedAt": "2026-10-01T08:49:53.705Z"
+      "extractedAt": "2026-10-05T06:01:28.462Z"
     },
     "fountain_marble_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 13)",
       "result": 2.5,
       "description": "Monumental Boost marble multiplier used for Bravery monument bonuses",
-      "extractedAt": "2026-10-01T08:49:53.706Z"
+      "extractedAt": "2026-10-05T06:01:28.464Z"
     },
     "fountain_total_bonus_0_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 0)",
       "result": 699,
       "description": "Yellow Water unlock and Fountain currency value",
-      "extractedAt": "2026-10-01T08:49:53.708Z"
+      "extractedAt": "2026-10-05T06:01:28.471Z"
     },
     "fountain_total_bonus_0_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 1)",
       "result": 4650,
       "description": "Currency Booster I increase to Fountain currency value",
-      "extractedAt": "2026-10-01T08:49:53.720Z"
+      "extractedAt": "2026-10-05T06:01:28.473Z"
     },
     "fountain_total_bonus_0_5": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 5)",
       "result": 4013,
       "description": "Stackin' Silver increase to silver coin value",
-      "extractedAt": "2026-10-01T08:49:53.722Z"
+      "extractedAt": "2026-10-05T06:01:28.475Z"
     },
     "fountain_total_bonus_0_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 8)",
       "result": 223,
       "description": "Money Back Guarantee auto-collect value for coins at capacity",
-      "extractedAt": "2026-10-01T08:49:53.723Z"
+      "extractedAt": "2026-10-05T06:01:28.476Z"
     },
     "fountain_total_bonus_0_9": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 9)",
       "result": 2338,
       "description": "Fountain Filling coin generation when the Fountain fills",
-      "extractedAt": "2026-10-01T08:49:53.734Z"
+      "extractedAt": "2026-10-05T06:01:28.478Z"
     },
     "fountain_total_bonus_0_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
       "result": 73,
       "description": "Monumental Boost multiplier to Bravery monument bonuses",
-      "extractedAt": "2026-10-01T08:49:53.736Z"
+      "extractedAt": "2026-10-05T06:01:28.479Z"
     },
     "fountain_total_bonus_0_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 19)",
       "result": 333,
       "description": "Mythril Transience increase to bronze, silver, and gold coin value",
-      "extractedAt": "2026-10-01T08:49:53.737Z"
+      "extractedAt": "2026-10-05T06:01:28.481Z"
     },
     "fountain_total_bonus_1_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 0)",
       "result": 1314,
       "description": "Green Water unlock and Fountain currency value",
-      "extractedAt": "2026-10-01T08:49:53.739Z"
+      "extractedAt": "2026-10-05T06:01:28.489Z"
     },
     "fountain_total_bonus_1_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 8)",
       "result": 244,
       "description": "Royal Stacks chance and value for coins created when the Fountain fills",
-      "extractedAt": "2026-10-01T08:49:53.740Z"
+      "extractedAt": "2026-10-05T06:01:28.491Z"
     },
     "fountain_total_bonus_1_10": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 10)",
       "result": 1290,
       "description": "Marble Filling production of marble for upgrade marbleization",
-      "extractedAt": "2026-10-01T08:49:53.753Z"
+      "extractedAt": "2026-10-05T06:01:28.493Z"
     },
     "fountain_total_bonus_1_13": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
       "result": 83,
       "description": "Judicial Boost multiplier to Justice monument bonuses",
-      "extractedAt": "2026-10-01T08:49:53.755Z"
+      "extractedAt": "2026-10-05T06:01:28.495Z"
     },
     "fountain_total_bonus_1_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 19)",
       "result": 313,
       "description": "Sharp Surrogate increase to dollar, credit, and treasury bill value",
-      "extractedAt": "2026-10-01T08:49:53.756Z"
+      "extractedAt": "2026-10-05T06:01:28.497Z"
     },
     "fountain_total_bonus_2_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
       "result": 0,
       "description": "Red Water unlock and Fountain currency value",
-      "extractedAt": "2026-10-01T08:49:53.769Z"
+      "extractedAt": "2026-10-05T06:01:28.498Z"
     },
     "fountain_total_bonus_2_1": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
       "result": 300,
       "description": "Currency Booster III increase to Fountain currency value",
-      "extractedAt": "2026-10-01T08:49:53.771Z"
+      "extractedAt": "2026-10-05T06:01:28.506Z"
     },
     "fountain_total_bonus_2_2": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
       "result": 39,
       "description": "Moolahleluja unlock and Moolah Stack value",
-      "extractedAt": "2026-10-01T08:49:53.773Z"
+      "extractedAt": "2026-10-05T06:01:28.508Z"
     },
     "fountain_total_bonus_2_8": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
       "result": 29,
       "description": "Luck fo' REAL chance to make collected currency lucky",
-      "extractedAt": "2026-10-01T08:49:53.775Z"
+      "extractedAt": "2026-10-05T06:01:28.510Z"
     },
     "fountain_total_bonus_2_12": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
       "result": 55,
       "description": "Rubber Ducky production from the Fountain bar",
-      "extractedAt": "2026-10-01T08:49:53.784Z"
+      "extractedAt": "2026-10-05T06:01:28.512Z"
     },
     "fountain_total_bonus_2_18": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 18)",
       "result": 0,
       "description": "Bubba Forever permanent Meat Slice production rate",
-      "extractedAt": "2026-10-01T08:49:53.786Z"
+      "extractedAt": "2026-10-05T06:01:28.514Z"
     },
     "fountain_total_bonus_2_19": {
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
-      "result": 7,
+      "result": 8,
       "description": "Rupie Monie increase to Moolah, Shilling, and Greane Stack value",
-      "extractedAt": "2026-10-01T08:49:53.788Z"
+      "extractedAt": "2026-10-05T06:01:28.522Z"
     }
   },
   "errors": {},

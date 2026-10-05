@@ -1,107 +1,107 @@
 {
-  "timestamp": "2026-10-01T08:49:56.590Z",
+  "timestamp": "2026-10-05T06:01:30.463Z",
   "extractions": {
     "royal_armory_unit_spec_effect_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
-      "result": 140,
+      "result": 160,
       "description": "Royal Armory unit specialization percentage used by outpost resource rate",
-      "extractedAt": "2026-10-01T08:49:56.595Z"
+      "extractedAt": "2026-10-05T06:01:30.477Z"
     },
     "royal_armory_unit_spec_effect_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 1, 0)",
-      "result": 200,
+      "result": 220,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.596Z"
+      "extractedAt": "2026-10-05T06:01:30.479Z"
     },
     "royal_armory_unit_spec_effect_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 2, 0)",
-      "result": 30,
+      "result": 35,
       "description": "Royal Armory unit specialization percentage used by outpost range",
-      "extractedAt": "2026-10-01T08:49:56.606Z"
+      "extractedAt": "2026-10-05T06:01:30.480Z"
     },
     "royal_armory_unit_spec_effect_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 3, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.608Z"
+      "extractedAt": "2026-10-05T06:01:30.482Z"
     },
     "royal_armory_unit_spec_effect_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 4, 0)",
-      "result": 23691.770573566086,
+      "result": 27640.399002493767,
       "description": "Specialization bonus that increases extra kills credited toward clearing Outposts",
-      "extractedAt": "2026-10-01T08:49:56.610Z"
+      "extractedAt": "2026-10-05T06:01:30.491Z"
     },
     "royal_armory_unit_spec_effect_5": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 5, 0)",
-      "result": 0,
+      "result": 5,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.611Z"
+      "extractedAt": "2026-10-05T06:01:30.493Z"
     },
     "royal_armory_unit_spec_effect_6": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 6, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.613Z"
+      "extractedAt": "2026-10-05T06:01:30.495Z"
     },
     "royal_armory_unit_spec_effect_7": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 7, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.625Z"
+      "extractedAt": "2026-10-05T06:01:30.496Z"
     },
     "royal_armory_unit_spec_upgrade_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
-      "result": 90,
+      "result": 110,
       "description": "Armory upgrade input that increases the specialization bonus for Outpost resource collection",
-      "extractedAt": "2026-10-01T08:49:56.627Z"
+      "extractedAt": "2026-10-05T06:01:30.498Z"
     },
     "royal_armory_unit_spec_upgrade_20": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 20, 0)",
-      "result": 200,
+      "result": 220,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.628Z"
+      "extractedAt": "2026-10-05T06:01:30.509Z"
     },
     "royal_armory_unit_spec_upgrade_21": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 21, 0)",
-      "result": 5,
+      "result": 10,
       "description": "Armory upgrade input that increases the specialization bonus for Outpost connection range",
-      "extractedAt": "2026-10-01T08:49:56.630Z"
+      "extractedAt": "2026-10-05T06:01:30.511Z"
     },
     "royal_armory_unit_spec_upgrade_22": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 22, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.642Z"
+      "extractedAt": "2026-10-05T06:01:30.513Z"
     },
     "royal_armory_unit_spec_upgrade_23": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 23, 0)",
-      "result": 350,
+      "result": 425,
       "description": "Armory upgrade input that increases the specialization bonus for extra kills while clearing Outposts",
-      "extractedAt": "2026-10-01T08:49:56.644Z"
+      "extractedAt": "2026-10-05T06:01:30.515Z"
     },
     "royal_armory_unit_spec_upgrade_24": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 24, 0)",
-      "result": 0,
+      "result": 5,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.645Z"
+      "extractedAt": "2026-10-05T06:01:30.528Z"
     },
     "royal_armory_unit_spec_upgrade_25": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 25, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.647Z"
+      "extractedAt": "2026-10-05T06:01:30.530Z"
     },
     "royal_armory_unit_spec_upgrade_26": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 26, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-01T08:49:56.658Z"
+      "extractedAt": "2026-10-05T06:01:30.531Z"
     },
     "royal_armory_unit_spec_extra_clear_killz": {
       "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
       "result": 1.316209476309227,
       "description": "Extra clear-kills multiplier directly used by unit specialization index 4",
-      "extractedAt": "2026-10-01T08:49:56.660Z"
+      "extractedAt": "2026-10-05T06:01:30.541Z"
     }
   },
   "errors": {},

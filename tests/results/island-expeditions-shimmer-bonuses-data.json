@@ -1,53 +1,53 @@
 {
-  "timestamp": "2026-10-01T08:49:54.237Z",
+  "timestamp": "2026-10-05T06:01:28.792Z",
   "extractions": {
     "shimmer_bonus_0": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[174]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 44,
       "description": "Shimmer Base STR amount after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.242Z"
+      "extractedAt": "2026-10-05T06:01:28.796Z"
     },
     "shimmer_bonus_1": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[175]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 4,
       "description": "Shimmer Base AGI amount after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.254Z"
+      "extractedAt": "2026-10-05T06:01:28.797Z"
     },
     "shimmer_bonus_2": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[176]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 8,
       "description": "Shimmer Base WIS amount after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.256Z"
+      "extractedAt": "2026-10-05T06:01:28.806Z"
     },
     "shimmer_bonus_3": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[177]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 0,
       "description": "Shimmer Base LUK amount after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.258Z"
+      "extractedAt": "2026-10-05T06:01:28.808Z"
     },
     "shimmer_bonus_4": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[178]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 24,
       "description": "Shimmer Total Damage percentage points after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.273Z"
+      "extractedAt": "2026-10-05T06:01:28.810Z"
     },
     "shimmer_bonus_5": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[179]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 4,
       "description": "Shimmer Class EXP percentage points after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.275Z"
+      "extractedAt": "2026-10-05T06:01:28.812Z"
     },
     "shimmer_bonus_6": {
       "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[180]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
       "result": 52,
       "description": "Shimmer Skill Efficiency percentage points after The Shim Lantern boost",
-      "extractedAt": "2026-10-01T08:49:54.290Z"
+      "extractedAt": "2026-10-05T06:01:28.814Z"
     },
     "shimmer_artifact_31": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 31, 0)",
       "result": 5,
       "description": "The Shim Lantern artifact bonus before the Shimmer multiplier cap",
-      "extractedAt": "2026-10-01T08:49:54.291Z"
+      "extractedAt": "2026-10-05T06:01:28.825Z"
     }
   },
   "errors": {},
