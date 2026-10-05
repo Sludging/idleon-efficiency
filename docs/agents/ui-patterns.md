@@ -4,9 +4,9 @@ This is the practical entry for planning, implementing, reviewing, or critiquing
 existing patterns unless the user approves a change. Keep review scoped to the requested
 surface and supported behavior; report actionable findings, not broad redesign proposals.
 
-For Impeccable requests, use this guide for project-specific patterns and scope, then apply
-the relevant skill/playbook only to the requested surface. Critiques and audits stay within
-supported behavior; they are not permission for broad redesign or repeated polish passes.
+For new UI pages or changes to visual composition, use the `impeccable` skill for the scoped
+task. Critiques and audits stay within supported behavior; they are not permission for broad
+redesign or repeated polish passes.
 The [product context](../../PRODUCT.md) and [visual context](../../DESIGN.md) record project
 facts and visual references. Use the [UI verification guide](ui-verification.md) for private
 Docker Playwright feature checks and screenshots during mockup planning.

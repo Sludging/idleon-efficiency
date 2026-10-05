@@ -14,9 +14,10 @@ implementation repeated.
 2. **Check the data.** Identify existing domain values and any missing calculations or inputs.
    Investigate game evidence only for calculations you add, change, or cannot confirm; see
    [testing guidance](TESTING_IMPLEMENTATION.md).
-3. **Plan the UI.** Start with the [UI work guide](agents/ui-patterns.md) for project context,
-   selected composition patterns, and design scope. Record only page behavior choices the
-   guide does not cover. For local browser verification and rendered previews, use the
+3. **Plan the UI.** Start with the [UI work guide](agents/ui-patterns.md), including its
+   Impeccable requirement, for project context, selected composition patterns, and design
+   scope. Record only page behavior choices the guide does not cover. For local browser
+   verification and rendered previews, use the
    [UI verification guide](agents/ui-verification.md).
 4. **Plan runtime checks.** Name important save states and interactions for the changed paths.
    Consult [asset guidance](runbooks/sync-game-assets.md) if needed.
@@ -107,8 +108,9 @@ Before beginning implementation, gather the following information from the devel
 
 ### Development Workflow
 1. **Confirm prerequisites:** Verify repository and game evidence needed for scoped work.
-2. **Select patterns:** For UI, start with the [UI work guide](agents/ui-patterns.md); for
-   backend, use the [implementation patterns guide](agents/implementation-patterns.md).
+2. **Select patterns:** For UI, follow the [UI work guide](agents/ui-patterns.md), including
+   its Impeccable requirement; for backend, use the
+   [implementation patterns guide](agents/implementation-patterns.md).
 3. **Implement domain logic** where in scope, then create UI components following the UI
    guide where UI is in scope.
 4. **Test domain calculations** as described in
