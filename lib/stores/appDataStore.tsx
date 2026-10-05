@@ -4,7 +4,7 @@ import { Cloudsave } from '../../data/domain/cloudsave'
 import { getSubDomain, isSubDomain } from '../../data/utility'
 import { getApp } from 'firebase/app'
 import { FirestoreData } from '../../data/firebase/data'
-import { fetcher } from '../../data/fetchers/getProfile'
+import { fetcher } from '@profile-source'
 import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
 import type { CompanionState } from '../../data/domain/companions/companionState';
 import { sendEvent } from '../gtag'

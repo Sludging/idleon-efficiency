@@ -1,0 +1,71 @@
+name: idleon-ui-verification
+services:
+  app:
+    container_name: idleon-ui-verification-app
+    image: idleon-ui-verification-app:${UI_DEPS_KEY:?Start with yarn ui:up}
+    build:
+      context: ../..
+      dockerfile: sub-projects/ui-verification/app.Dockerfile
+    init: true
+    mem_limit: 4g
+    cpus: 2
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_APP_STAGE: local
+      NODE_OPTIONS: --max-old-space-size=3072
+      LOCAL_SAVE_FILE: ${UI_LOCAL_SAVE_FILE:-tests/fixtures/saves/latest.json}
+    volumes:
+      - type: bind
+        source: ${UI_REPO_ROOT:?Start with yarn ui:up}
+        target: /workspace
+        read_only: true
+      - dependencies:/workspace/node_modules
+      - yarn-state:/workspace/.yarn
+      - next-cache:/workspace/.next
+      - certificates:/certificates
+      - type: bind
+        source: ${UI_APP_CONFIG_DIR:?Start with yarn ui:up}/next-env.d.ts
+        target: /workspace/next-env.d.ts
+      - type: bind
+        source: ${UI_APP_CONFIG_DIR:?Start with yarn ui:up}/tsconfig.json
+        target: /workspace/tsconfig.json
+    healthcheck:
+      test: ["CMD", "node", "/usr/local/bin/ui-app-healthcheck.cjs"]
+      interval: 10s
+      timeout: 150s
+      start_period: 180s
+      retries: 3
+  browser:
+    container_name: idleon-ui-verification
+    image: idleon-ui-verification:local
+    build:
+      context: .
+      args:
+        PLAYWRIGHT_VERSION: ${UI_PLAYWRIGHT_VERSION:?Start with yarn ui:up}
+    depends_on:
+      app:
+        condition: service_healthy
+    init: true
+    user: ${UI_HOST_USER:-1000:1000}
+    mem_limit: 2g
+    cpus: 2
+    shm_size: 1g
+    environment:
+      HOME: /tmp
+    volumes:
+      - type: bind
+        source: ${UI_REPO_ROOT:?Start with yarn ui:up}
+        target: /workspace
+        read_only: true
+      - type: bind
+        source: ${UI_ARTIFACT_ROOT:?Start with yarn ui:up}
+        target: /artifacts
+volumes:
+  dependencies:
+    name: idleon-ui-verification-deps-${UI_DEPS_KEY:?Start with yarn ui:up}
+  yarn-state:
+    name: idleon-ui-verification-yarn-${UI_DEPS_KEY:?Start with yarn ui:up}
+  next-cache:
+    name: idleon-ui-verification-next
+  certificates:
+    name: idleon-ui-verification-certificates

@@ -17,6 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@profile-source": ["data/fetchers/getProfile.tsx"],
+      "@local-save": ["tests/fixtures/saves/latest.json"]
+    },
     "incremental": true,
     "plugins": [
       {
@@ -33,6 +38,7 @@
   ],
   "exclude": [
     "node_modules",
+    ".ui-verification",
     "assets",
     "model_generation",
     "scripts",

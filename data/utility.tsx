@@ -291,8 +291,16 @@ export const uniqueFilter = (value: any, index: number, self: any) => {
 }
 
 export const getSubDomain = () => {
+    const windowLocation = typeof window !== "undefined" ? window.location.host : "";
+    if (windowLocation === "") {
+        return "";
+    }
+
+    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_APP_STAGE === "local") {
+        return "local";
+    }
+
     const allowedTopDomains = ["idleonefficiency", "localhost:3000"];
-    const windowLocation = typeof window !== "undefined" ? window.location.host : ""
     const locationSplit = windowLocation.split('.');
 
     // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
@@ -309,7 +317,7 @@ export const getSubDomain = () => {
 export const isSubDomain = () => {
    const urlDomain = getSubDomain();
 
-    return !["localhost:3000", "www", "preview"].includes(urlDomain);
+    return urlDomain !== "" && !["localhost:3000", "www", "preview"].includes(urlDomain);
 }
 
 // Consolidated regex pattern for formatted numbers

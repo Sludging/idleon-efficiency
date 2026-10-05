@@ -3,6 +3,9 @@
 Read [Implementation patterns](implementation-patterns.md) first for choosing an example
 and understanding which parts are approved. A linked example is not approval of its entire file.
 
+Use the [UI verification guide](ui-verification.md) for private
+Docker Playwright feature checks and screenshots during mockup planning.
+
 ## Choose a presentation for the task
 
 Choose among a horizontal row, independently composed cards, a table, and an icon-first

@@ -103,29 +103,12 @@ Before beginning implementation, gather the following information from the devel
 4. **Create UI components**: Follow the selected UI aspects when UI work is in scope.
 5. **Add automated tests**: Implement live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
 
-### Verify a page with your IdleOn save
+### Verify a page with a local save
 
-Use OMP’s browser in JavaScript Eval when verification needs the save loaded in Chrome. The headless browser has separate browser data.
-
-The relay uses existing Chrome tabs; it does not create a new one. Open or duplicate an IdleOn tab in Chrome and load the save. Use a dedicated tab so verification does not change your working tab. The feature route does not need to be open yet.
-
-Attach to the existing tab using a unique part of its current URL or title. `app.target` matches existing tabs, so leave out `url` when opening:
-
-```js
-const tab = await browser.open({
-  name: "idleon-check",
-  app: { relay: true, target: "<unique part of the tab's URL or title>" },
-});
-
-try {
-  await tab.goto("https://localhost:3000/<feature-route>");
-  // Verify the page in the running app.
-} finally {
-  await tab.close();
-}
-```
-
-`tab.close()` releases OMP’s attachment but leaves the Chrome tab open. If the relay cannot connect, run `omp browser-relay` in WSL and confirm the Chrome extension is connected.
+Use the [UI verification guide](agents/ui-verification.md) for focused Docker Playwright
+feature checks and screenshots during mockup planning. Keep UI checks separate from
+game-calculation validation; read [testing guidance](TESTING_IMPLEMENTATION.md) for domain
+tests and extraction.
 
 ### Blocked Dependencies
 

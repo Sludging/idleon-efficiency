@@ -13,7 +13,10 @@
     "test:coverage": "jest --coverage",
     "test:domains": "jest domains/",
     "test:integration": "jest integration/",
-    "coverage:report": "tsx scripts/domain-class-references.ts"
+    "coverage:report": "tsx scripts/domain-class-references.ts",
+    "ui:up": "node scripts/ui-verification.cjs up",
+    "ui:run": "node scripts/ui-verification.cjs run",
+    "ui:down": "node scripts/ui-verification.cjs down"
   },
   "dependencies": {
     "@next/third-parties": "16.1.7",

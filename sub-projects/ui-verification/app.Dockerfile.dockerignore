@@ -1,0 +1,9 @@
+**
+!package.json
+!yarn.lock
+!.yarnrc.yml
+!sub-projects/
+!sub-projects/ui-verification/
+!sub-projects/ui-verification/app.Dockerfile
+!sub-projects/ui-verification/app-entrypoint.sh
+!sub-projects/ui-verification/app-healthcheck.cjs
