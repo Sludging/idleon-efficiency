@@ -13,6 +13,7 @@ import { Alchemy } from "../world-2/alchemy/alchemy";
 import { getCompanionActiveBonus } from "../companions";
 import type { ImageData } from "../imageData";
 import type { Storage } from "../storage";
+import type { MasterClasses } from "../masterClasses";
 
 // Match game number conversion for missing, boolean, and saved string values.
 const royalArmoryAsNumber = (value: unknown): number => {
@@ -63,18 +64,70 @@ type RoyalArmoryResourceRateLateInputs = {
 
 export class RoyalArmoryUpgrade {
     level: number = 0;
+    readonly displayIndex: number | undefined;
+    private readonly displayCostGrowth: number;
+    private readonly displayCostWeight: number;
+    private jellyObstruction11DiscountWeight: number = 0;
+    private jellyObstruction26DiscountWeight: number = 0;
+    private masterClassCostMultiplier: number = 1;
+    private jellyCostMultiplier: number = 1;
 
     constructor(
         public index: number,
         public data: RoyalArmoryUpgradeModel,
-    ) { }
+    ) {
+        this.displayIndex = data.displayOrder;
+        const displayIndex = this.displayIndex;
+        this.displayCostGrowth = displayIndex === undefined ? 0 : Math.pow(1.24, displayIndex);
+        this.displayCostWeight = displayIndex === undefined ? 0 : 3 + 5 * displayIndex;
+    }
 
     static fromBase(data: RoyalArmoryUpgradeBase[]): RoyalArmoryUpgrade[] {
-        return data.map((upgrade) => new RoyalArmoryUpgrade(upgrade.index, upgrade.data));
+        const upgrades = data.map((upgrade) => new RoyalArmoryUpgrade(upgrade.index, upgrade.data));
+        for (const upgrade of upgrades) {
+            // The game interprets the display index as a catalog ID for its inverse Jelly lookup.
+            // Canonical repository/save order keeps each catalog ID at that array index.
+            const jellyPosition = upgrade.displayIndex === undefined ? -1 : upgrades[upgrade.displayIndex]?.displayIndex ?? -1;
+            upgrade.jellyObstruction11DiscountWeight = Math.max(0, Math.ceil((5 - jellyPosition) / 5));
+            upgrade.jellyObstruction26DiscountWeight = Math.max(0, Math.ceil((10 - jellyPosition) / 10));
+        }
+        return upgrades;
     }
 
     getBonus(): number {
         return this.level * this.data.bonusPerLevel;
+    }
+
+    resetCostInputs(): void {
+        this.masterClassCostMultiplier = 1;
+        this.jellyCostMultiplier = 1;
+    }
+
+    updateCostInputs(masterClassCostMultiplier: number, jellyObstruction11Bonus: number, jellyObstruction26Bonus: number): void {
+        this.masterClassCostMultiplier = masterClassCostMultiplier;
+        // Settle the combined account discount once for subsequent purchase quotes.
+        this.jellyCostMultiplier = 1 / (1 + (
+            this.jellyObstruction11DiscountWeight * jellyObstruction11Bonus +
+            this.jellyObstruction26DiscountWeight * jellyObstruction26Bonus
+        ) / 100);
+    }
+
+    /** Raw one-purchase quote from the supplied owned level, using settled account discounts. */
+    getCost(level: number = this.level): number {
+        if (this.displayIndex === undefined) return 0;
+
+        // Royal Talent Points I and Solo Militia Status have cheap opening purchases before ordinary discounts.
+        if (this.index === 46 && level < 3) return 2;
+        if (this.index === 58 && level < 1) return 3;
+
+        // Preserve the game's multiplication order when applying the prepared account multipliers.
+        return 25 *
+            this.masterClassCostMultiplier *
+            this.displayCostGrowth *
+            this.displayCostWeight *
+            this.jellyCostMultiplier *
+            this.data.costBase *
+            Math.pow(this.data.costExponent, level);
     }
 }
 
@@ -243,6 +296,7 @@ export class RoyalArmory extends Domain {
 
         royalArmory.upgrades.forEach((upgrade) => {
             upgrade.level = Number(upgradeLevels[upgrade.index]) || 0;
+            upgrade.resetCostInputs();
         });
         royalArmory.orbletMarketBonuses.forEach((bonus) => {
             bonus.level = orbletMarketLevels[bonus.index] ?? 0;
@@ -259,6 +313,10 @@ export class RoyalArmory extends Domain {
             const rank = this.getOutpostExperienceRank(mapIndex, 4);
             return Math.min(rank ?? 0, 1) === 1;
         });
+    }
+
+    getUpgradeByIndex(catalogIndex: number): RoyalArmoryUpgrade | undefined {
+        return this.upgrades.find((upgrade) => upgrade.index === catalogIndex);
     }
 
     getUpgradeBonus(index: number): number {
@@ -696,5 +754,15 @@ export const updateRoyalArmoryLateInputs = (accountData: Map<string,any>) => {
         arcade.bonuses.find((bonus) => bonus.index === 70)?.getBonus(),
         w14ByPlayerID,
     );
+
+    // Shared Masterclass costs and Jelly obstruction bonuses are settled before preparing Armory prices.
+    const masterClasses = accountData.get("masterClasses") as MasterClasses;
+    const jellyOperator = accountData.get("jellyOperator") as JellyOperator;
+    const masterClassCostMultiplier = masterClasses.getUpgradeCostMultiplier();
+    const jellyObstruction11Bonus = jellyOperator.obstructions.find((obstruction) => obstruction.index === 11)!.getBonus();
+    const jellyObstruction26Bonus = jellyOperator.obstructions.find((obstruction) => obstruction.index === 26)!.getBonus();
+    for (const upgrade of royalArmory.upgrades) {
+        upgrade.updateCostInputs(masterClassCostMultiplier, jellyObstruction11Bonus, jellyObstruction26Bonus);
+    }
     return royalArmory;
 }

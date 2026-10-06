@@ -1,0 +1,46 @@
+{
+  "description": "Royal Armory current purchase prices and their three direct calculated discounts for the paired real account",
+  "target": "RoyalArmoryUpgrade.getCost()",
+  "extractions": [
+    {
+      "label": "royal_armory_upgrade_price_display_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
+      "description": "Royal Talent Points I (catalog 46): ordinary price after its cheap opening, with no positional Jelly reduction"
+    },
+    {
+      "label": "royal_armory_upgrade_price_display_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 2, 0)",
+      "description": "Solo Militia Status (catalog 58): ordinary price after its cheap opening, with no positional Jelly reduction"
+    },
+    {
+      "label": "royal_armory_upgrade_price_display_5",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 5, 0)",
+      "description": "Royal Marble (catalog 41): missing display-position lookup applies twice each Jelly reduction"
+    },
+    {
+      "label": "royal_armory_upgrade_price_display_30",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
+      "description": "Global Decree - OL (catalog 50): first Jelly lookup region applies both reductions once, even while locked"
+    },
+    {
+      "label": "royal_armory_upgrade_price_display_41",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 41, 0)",
+      "description": "Anti-Rodent Power Move II (catalog 36): second Jelly lookup region applies only obstruction 26's reduction"
+    },
+    {
+      "label": "royal_armory_price_masterclass_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "description": "Whole shared Master Classes upgrade-cost multiplier directly multiplied into ordinary Royal Armory prices"
+    },
+    {
+      "label": "royal_armory_price_jelly_quantity_11",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 11, 0)",
+      "description": "Jelly obstruction 11's calculated reduction, weighted by the first positional lookup factor"
+    },
+    {
+      "label": "royal_armory_price_jelly_quantity_26",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 26, 0)",
+      "description": "Jelly obstruction 26's calculated reduction, weighted by the second positional lookup factor"
+    }
+  ]
+}
