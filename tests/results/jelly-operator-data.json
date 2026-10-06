@@ -1,101 +1,101 @@
 {
-  "timestamp": "2026-10-05T06:01:28.825Z",
+  "timestamp": "2026-10-06T05:46:51.567Z",
   "extractions": {
     "jelly_successful_operations": {
       "expression": "idleon.getAttr(\"Research\")[7][9]",
       "result": 16,
       "description": "Account-wide completed Jelly Operator obstructions saved in Research[7][9].",
-      "extractedAt": "2026-10-05T06:01:28.830Z"
+      "extractedAt": "2026-10-06T05:46:51.576Z"
     },
     "jelly_upgrade_quantity_0": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgradeQTY\", 0, 0)",
       "result": 1,
       "description": "Amoeba Cell Cultivation quantity from its saved Research[17] level.",
-      "extractedAt": "2026-10-05T06:01:28.831Z"
+      "extractedAt": "2026-10-06T05:46:51.580Z"
     },
     "jelly_upgrade_quantity_34": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgradeQTY\", 34, 0)",
       "result": 0,
       "description": "Lower Cholesterol quantity used as the discount for every nonzero shop cost.",
-      "extractedAt": "2026-10-05T06:01:28.840Z"
+      "extractedAt": "2026-10-06T05:46:51.584Z"
     },
     "jelly_upgrade_quantity_37": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgradeQTY\", 37, 0)",
       "result": 0,
       "description": "Rift Guy's Upgrade quantity for the max-level-zero-position coverage case.",
-      "extractedAt": "2026-10-05T06:01:28.842Z"
+      "extractedAt": "2026-10-06T05:46:51.589Z"
     },
     "jelly_upgrade_requirement_0": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 0, 0)",
       "result": 15,
       "description": "Research level requirement at the first Jelly shop position.",
-      "extractedAt": "2026-10-05T06:01:28.844Z"
+      "extractedAt": "2026-10-06T05:46:51.593Z"
     },
     "jelly_upgrade_requirement_1": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 1, 0)",
       "result": 17,
       "description": "Research level requirement at the first nonzero Jelly shop position.",
-      "extractedAt": "2026-10-05T06:01:28.845Z"
+      "extractedAt": "2026-10-06T05:46:51.597Z"
     },
     "jelly_upgrade_requirement_10": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 10, 0)",
       "result": 35,
       "description": "Requirement immediately before the floor(position/11) boundary.",
-      "extractedAt": "2026-10-05T06:01:28.847Z"
+      "extractedAt": "2026-10-06T05:46:51.601Z"
     },
     "jelly_upgrade_requirement_11": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 11, 0)",
       "result": 36,
       "description": "Requirement at the floor(position/11) boundary.",
-      "extractedAt": "2026-10-05T06:01:28.859Z"
+      "extractedAt": "2026-10-06T05:46:51.605Z"
     },
     "jelly_upgrade_requirement_14": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 14, 0)",
       "result": 42,
       "description": "Requirement immediately before the floor(position/15) boundary.",
-      "extractedAt": "2026-10-05T06:01:28.861Z"
+      "extractedAt": "2026-10-06T05:46:51.609Z"
     },
     "jelly_upgrade_requirement_15": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 15, 0)",
       "result": 45,
       "description": "Requirement at the floor(position/15) boundary.",
-      "extractedAt": "2026-10-05T06:01:28.863Z"
+      "extractedAt": "2026-10-06T05:46:51.613Z"
     },
     "jelly_upgrade_requirement_33": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 33, 0)",
       "result": 80,
       "description": "Research requirement at the menu position mapping to Lower Cholesterol (upgrade 34).",
-      "extractedAt": "2026-10-05T06:01:28.865Z"
+      "extractedAt": "2026-10-06T05:46:51.616Z"
     },
     "jelly_upgrade_requirement_39": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 39, 0)",
       "result": 92,
       "description": "Research requirement at the high final Jelly shop position.",
-      "extractedAt": "2026-10-05T06:01:28.875Z"
+      "extractedAt": "2026-10-06T05:46:51.620Z"
     },
     "jelly_upgrade_cost_0": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 0, 0)",
       "result": 0,
       "description": "Jelly shop position zero has no purchase cost.",
-      "extractedAt": "2026-10-05T06:01:28.877Z"
+      "extractedAt": "2026-10-06T05:46:51.625Z"
     },
     "jelly_upgrade_cost_1": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 1, 0)",
       "result": 2047664.6732133257,
       "description": "First nonzero Jelly shop cost with the saved Lower Cholesterol discount.",
-      "extractedAt": "2026-10-05T06:01:28.879Z"
+      "extractedAt": "2026-10-06T05:46:51.629Z"
     },
     "jelly_upgrade_cost_3": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 3, 0)",
       "result": 85.71428571428572,
       "description": "Early Jelly shop cost before the late-position factors apply.",
-      "extractedAt": "2026-10-05T06:01:28.880Z"
+      "extractedAt": "2026-10-06T05:46:51.632Z"
     },
     "jelly_upgrade_cost_20": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 20, 0)",
       "result": 488740530.7089435,
       "description": "Jelly shop cost at the late-position factor boundary.",
-      "extractedAt": "2026-10-05T06:01:28.890Z"
+      "extractedAt": "2026-10-06T05:46:51.636Z"
     },
     "jelly_upgrade_cost_33": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 33, 0)",
@@ -105,7 +105,7 @@
         "original": 23159121760019160
       },
       "description": "Cost for menu position 33, whose mapped metadata upgrade is Lower Cholesterol (34).",
-      "extractedAt": "2026-10-05T06:01:28.892Z"
+      "extractedAt": "2026-10-06T05:46:51.640Z"
     },
     "jelly_upgrade_cost_39": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"UpgCost\", 39, 0)",
@@ -115,67 +115,67 @@
         "original": 552947388893247770000
       },
       "description": "High-position cost for menu position 39, mapped to max-level-zero upgrade 37.",
-      "extractedAt": "2026-10-05T06:01:28.893Z"
+      "extractedAt": "2026-10-06T05:46:51.644Z"
     },
     "jelly_upgrade_affordable_0": {
       "expression": "Number(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 0, 0))",
       "result": 0,
       "description": "Funds, prerequisite, and cap eligibility at the zero-cost first shop position.",
-      "extractedAt": "2026-10-05T06:01:28.895Z"
+      "extractedAt": "2026-10-06T05:46:51.648Z"
     },
     "jelly_upgrade_affordable_1": {
       "expression": "Number(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 1, 0))",
       "result": 1,
       "description": "Funds, prerequisite, and cap eligibility at the first nonzero shop position.",
-      "extractedAt": "2026-10-05T06:01:28.896Z"
+      "extractedAt": "2026-10-06T05:46:51.651Z"
     },
     "jelly_upgrade_affordable_33": {
       "expression": "Number(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 33, 0))",
       "result": 0,
       "description": "Affordability for the menu position mapped to Lower Cholesterol upgrade 34.",
-      "extractedAt": "2026-10-05T06:01:28.905Z"
+      "extractedAt": "2026-10-06T05:46:51.654Z"
     },
     "jelly_upgrade_affordable_39": {
       "expression": "Number(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 39, 0))",
       "result": 0,
       "description": "Affordability for the menu position mapped to max-level-zero upgrade 37.",
-      "extractedAt": "2026-10-05T06:01:28.907Z"
+      "extractedAt": "2026-10-06T05:46:51.659Z"
     },
     "jelly_upgrade_unlocked_0": {
       "expression": "Number(idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 0, 0))",
       "result": 1,
       "description": "Account-wide player-0 Research-level unlock at shop position zero.",
-      "extractedAt": "2026-10-05T06:01:28.909Z"
+      "extractedAt": "2026-10-06T05:46:51.662Z"
     },
     "jelly_upgrade_unlocked_33": {
       "expression": "Number(idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 33, 0))",
       "result": 0,
       "description": "Account-wide player-0 Research-level unlock for Lower Cholesterol position 33.",
-      "extractedAt": "2026-10-05T06:01:28.911Z"
+      "extractedAt": "2026-10-06T05:46:51.665Z"
     },
     "jelly_upgrade_unlocked_39": {
       "expression": "Number(idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 39, 0))",
       "result": 0,
       "description": "Account-wide player-0 Research-level unlock for max-level-zero position 39.",
-      "extractedAt": "2026-10-05T06:01:28.912Z"
+      "extractedAt": "2026-10-06T05:46:51.669Z"
     },
     "jelly_upgrade_buyable_0": {
       "expression": "Number(Boolean(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 0, 0))",
       "result": 0,
       "description": "Complete account-wide purchase eligibility for the zero-cost first shop position.",
-      "extractedAt": "2026-10-05T06:01:28.914Z"
+      "extractedAt": "2026-10-06T05:46:51.673Z"
     },
     "jelly_upgrade_buyable_33": {
       "expression": "Number(Boolean(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 33, 0)) && idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 33, 0))",
       "result": 0,
       "description": "Complete account-wide purchase eligibility for Lower Cholesterol position 33.",
-      "extractedAt": "2026-10-05T06:01:28.924Z"
+      "extractedAt": "2026-10-06T05:46:51.676Z"
     },
     "jelly_upgrade_buyable_39": {
       "expression": "Number(Boolean(idleon.callFunction(\"JellyOperation\", \"CanWeBuyUpg\", 39, 0)) && idleon.getAttr(\"PlayerDATABASE\").h[idleon.getAttr(\"GetPlayersUsernames\")[0]].h.Lv0[20] >= idleon.callFunction(\"JellyOperation\", \"UpgLvREQ\", 39, 0))",
       "result": 0,
       "description": "Complete account-wide purchase eligibility for max-level-zero position 39.",
-      "extractedAt": "2026-10-05T06:01:28.926Z"
+      "extractedAt": "2026-10-06T05:46:51.680Z"
     }
   },
   "errors": {},
@@ -184,7 +184,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

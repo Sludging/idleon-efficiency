@@ -1,35 +1,35 @@
 {
-  "timestamp": "2026-10-05T06:01:29.875Z",
+  "timestamp": "2026-10-06T05:46:52.673Z",
   "extractions": {
     "royal_armory_extra_clear_kills": {
       "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
       "result": 1.316209476309227,
       "description": "Extra mob kills credited toward clearing mobs for Royal Armory Outposts",
-      "extractedAt": "2026-10-05T06:01:29.878Z"
+      "extractedAt": "2026-10-06T05:46:52.682Z"
     },
     "royal_armory_extra_clear_kills_talent_231": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 231, -1)",
       "result": 1.0124688279301746,
       "description": "Warbound Politics talent bonus used by the account's strongest character to increase Outpost clearing",
-      "extractedAt": "2026-10-05T06:01:29.880Z"
+      "extractedAt": "2026-10-06T05:46:52.686Z"
     },
     "royal_armory_extra_clear_kills_orblet_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
       "result": 4,
       "description": "Full Clear Market bonus that increases extra kills while clearing mobs to build Outposts",
-      "extractedAt": "2026-10-05T06:01:29.882Z"
+      "extractedAt": "2026-10-06T05:46:52.690Z"
     },
     "royal_armory_extra_clear_kills_big_fish_6": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6, 0)",
       "result": 0,
       "description": "Big Fish bonus contribution to the extra kills credited toward Outpost clearing",
-      "extractedAt": "2026-10-05T06:01:29.893Z"
+      "extractedAt": "2026-10-06T05:46:52.694Z"
     },
     "royal_armory_extra_clear_kills_jelly_quantity_2": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 2, 0)",
       "result": 25,
       "description": "Jelly Operation contribution that increases extra kills credited toward Outpost clearing",
-      "extractedAt": "2026-10-05T06:01:29.895Z"
+      "extractedAt": "2026-10-06T05:46:52.698Z"
     }
   },
   "errors": {},
@@ -38,7 +38,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

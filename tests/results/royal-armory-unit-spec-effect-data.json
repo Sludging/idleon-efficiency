@@ -1,107 +1,107 @@
 {
-  "timestamp": "2026-10-05T06:01:30.463Z",
+  "timestamp": "2026-10-06T05:46:53.379Z",
   "extractions": {
     "royal_armory_unit_spec_effect_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
       "result": 160,
       "description": "Royal Armory unit specialization percentage used by outpost resource rate",
-      "extractedAt": "2026-10-05T06:01:30.477Z"
+      "extractedAt": "2026-10-06T05:46:53.389Z"
     },
     "royal_armory_unit_spec_effect_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 1, 0)",
       "result": 220,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.479Z"
+      "extractedAt": "2026-10-06T05:46:53.393Z"
     },
     "royal_armory_unit_spec_effect_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 2, 0)",
       "result": 35,
       "description": "Royal Armory unit specialization percentage used by outpost range",
-      "extractedAt": "2026-10-05T06:01:30.480Z"
+      "extractedAt": "2026-10-06T05:46:53.396Z"
     },
     "royal_armory_unit_spec_effect_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 3, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.482Z"
+      "extractedAt": "2026-10-06T05:46:53.399Z"
     },
     "royal_armory_unit_spec_effect_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 4, 0)",
       "result": 27640.399002493767,
       "description": "Specialization bonus that increases extra kills credited toward clearing Outposts",
-      "extractedAt": "2026-10-05T06:01:30.491Z"
+      "extractedAt": "2026-10-06T05:46:53.402Z"
     },
     "royal_armory_unit_spec_effect_5": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 5, 0)",
       "result": 5,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.493Z"
+      "extractedAt": "2026-10-06T05:46:53.405Z"
     },
     "royal_armory_unit_spec_effect_6": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 6, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.495Z"
+      "extractedAt": "2026-10-06T05:46:53.409Z"
     },
     "royal_armory_unit_spec_effect_7": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 7, 0)",
       "result": 0,
       "description": "Royal Armory unit specialization percentage used by barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.496Z"
+      "extractedAt": "2026-10-06T05:46:53.413Z"
     },
     "royal_armory_unit_spec_upgrade_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
       "result": 110,
       "description": "Armory upgrade input that increases the specialization bonus for Outpost resource collection",
-      "extractedAt": "2026-10-05T06:01:30.498Z"
+      "extractedAt": "2026-10-06T05:46:53.416Z"
     },
     "royal_armory_unit_spec_upgrade_20": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 20, 0)",
       "result": 220,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.509Z"
+      "extractedAt": "2026-10-06T05:46:53.419Z"
     },
     "royal_armory_unit_spec_upgrade_21": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 21, 0)",
       "result": 10,
       "description": "Armory upgrade input that increases the specialization bonus for Outpost connection range",
-      "extractedAt": "2026-10-05T06:01:30.511Z"
+      "extractedAt": "2026-10-06T05:46:53.423Z"
     },
     "royal_armory_unit_spec_upgrade_22": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 22, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.513Z"
+      "extractedAt": "2026-10-06T05:46:53.426Z"
     },
     "royal_armory_unit_spec_upgrade_23": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 23, 0)",
       "result": 425,
       "description": "Armory upgrade input that increases the specialization bonus for extra kills while clearing Outposts",
-      "extractedAt": "2026-10-05T06:01:30.515Z"
+      "extractedAt": "2026-10-06T05:46:53.429Z"
     },
     "royal_armory_unit_spec_upgrade_24": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 24, 0)",
       "result": 5,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.528Z"
+      "extractedAt": "2026-10-06T05:46:53.432Z"
     },
     "royal_armory_unit_spec_upgrade_25": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 25, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.530Z"
+      "extractedAt": "2026-10-06T05:46:53.436Z"
     },
     "royal_armory_unit_spec_upgrade_26": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 26, 0)",
       "result": 0,
       "description": "Armory upgrade input that increases the specialization bonus for Barrel experience",
-      "extractedAt": "2026-10-05T06:01:30.531Z"
+      "extractedAt": "2026-10-06T05:46:53.439Z"
     },
     "royal_armory_unit_spec_extra_clear_killz": {
       "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
       "result": 1.316209476309227,
       "description": "Extra clear-kills multiplier directly used by unit specialization index 4",
-      "extractedAt": "2026-10-05T06:01:30.541Z"
+      "extractedAt": "2026-10-06T05:46:53.442Z"
     }
   },
   "errors": {},
@@ -110,7 +110,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

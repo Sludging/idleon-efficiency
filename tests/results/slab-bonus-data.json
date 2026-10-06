@@ -1,29 +1,29 @@
 {
-  "timestamp": "2026-10-05T06:01:30.744Z",
+  "timestamp": "2026-10-06T05:46:53.717Z",
   "extractions": {
     "slab_bonus_multiplier": {
       "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
       "result": 1.547,
       "description": "Account-wide multiplier applied to Slab bonuses",
-      "extractedAt": "2026-10-05T06:01:30.749Z"
+      "extractedAt": "2026-10-06T05:46:53.724Z"
     },
     "meritocracy_bonus_23": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 23, 0)",
       "result": 0,
       "description": "Multi Meritocracy bonus 23 used by the Slab-wide multiplier",
-      "extractedAt": "2026-10-05T06:01:30.759Z"
+      "extractedAt": "2026-10-06T05:46:53.727Z"
     },
     "legend_talent_bonus_28": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 28, 0)",
       "result": 30,
       "description": "Legend Talent bonus 28 used by the Slab-wide multiplier",
-      "extractedAt": "2026-10-05T06:01:30.761Z"
+      "extractedAt": "2026-10-06T05:46:53.730Z"
     },
     "vault_upgrade_bonus_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
       "result": 19,
       "description": "Upgrade Vault bonus 74 used by the Slab-wide multiplier",
-      "extractedAt": "2026-10-05T06:01:30.763Z"
+      "extractedAt": "2026-10-06T05:46:53.734Z"
     }
   },
   "errors": {},
@@ -32,7 +32,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

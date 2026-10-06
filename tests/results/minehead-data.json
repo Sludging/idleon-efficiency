@@ -1,263 +1,263 @@
 {
-  "timestamp": "2026-10-05T06:01:29.159Z",
+  "timestamp": "2026-10-06T05:46:51.937Z",
   "extractions": {
     "minehead_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 0, 0)",
       "result": 10,
       "description": "Bronzehead Total Damage and Drop Rate reward; game gate requires defeating progression index 0.",
-      "extractedAt": "2026-10-05T06:01:29.163Z"
+      "extractedAt": "2026-10-06T05:46:51.944Z"
     },
     "minehead_bonus_12": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 12, 0)",
       "result": 1,
       "description": "Maizehead Research Magnifier reward; game gate requires defeating progression index 12.",
-      "extractedAt": "2026-10-05T06:01:29.165Z"
+      "extractedAt": "2026-10-06T05:46:51.947Z"
     },
     "minehead_bonus_13": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 13, 0)",
       "result": 0,
       "description": "Ironhead Grind Time bubble-level reward; remains locked until the strict defeated-count gate passes progression index 13.",
-      "extractedAt": "2026-10-05T06:01:29.175Z"
+      "extractedAt": "2026-10-06T05:46:51.951Z"
     },
     "minehead_bonus_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 0)",
       "result": 0,
       "description": "Brainhead Hat Rack bonus-multiplier reward; remains locked until its progression index is defeated.",
-      "extractedAt": "2026-10-05T06:01:29.177Z"
+      "extractedAt": "2026-10-06T05:46:51.953Z"
     },
     "minehead_bonus_31": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 0)",
       "result": 0,
       "description": "Boghead has no earned reward before its late progression defeat.",
-      "extractedAt": "2026-10-05T06:01:29.179Z"
+      "extractedAt": "2026-10-06T05:46:51.957Z"
     },
     "minehead_preview_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 21, 99)",
       "result": 2,
       "description": "Brainhead Hat Rack bonus-multiplier preview, available before its defeated-count gate.",
-      "extractedAt": "2026-10-05T06:01:29.180Z"
+      "extractedAt": "2026-10-06T05:46:51.961Z"
     },
     "minehead_preview_31": {
       "expression": "idleon.callFunction(\"Minehead\", \"BonusQTY\", 31, 99)",
       "result": 31,
       "description": "Boghead opponent preview reward before its defeated-count gate.",
-      "extractedAt": "2026-10-05T06:01:29.182Z"
+      "extractedAt": "2026-10-06T05:46:51.964Z"
     },
     "minehead_upgrade_quantity_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 0, 0)",
       "result": 109,
       "description": "Base Damage I saved quantity before downstream transformations; affects player base damage in Depth Charge.",
-      "extractedAt": "2026-10-05T06:01:29.194Z"
+      "extractedAt": "2026-10-06T05:46:51.967Z"
     },
     "minehead_upgrade_quantity_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 3, 0)",
       "result": 680,
       "description": "Bettah Numbahs saved quantity before downstream transformations; increases the odds of rolling bigger tile numbers in Depth Charge.",
-      "extractedAt": "2026-10-05T06:01:29.195Z"
+      "extractedAt": "2026-10-06T05:46:51.970Z"
     },
     "minehead_upgrade_quantity_16": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 16, 0)",
       "result": 1,
       "description": "Legal Cheating Button's current Minehead shop quantity",
-      "extractedAt": "2026-10-05T06:01:29.197Z"
+      "extractedAt": "2026-10-06T05:46:51.974Z"
     },
     "minehead_upgrade_quantity_26": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 26, 0)",
       "result": 0,
       "description": "El' Cheapo Upgrado saved quantity used by the Minehead next-level cost discount.",
-      "extractedAt": "2026-10-05T06:01:29.207Z"
+      "extractedAt": "2026-10-06T05:46:51.978Z"
     },
     "minehead_upgrade_quantity_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgradeQTY\", 29, 0)",
       "result": 0,
       "description": "Rift Guy's Upgrade quantity in its zero-max shop listing",
-      "extractedAt": "2026-10-05T06:01:29.209Z"
+      "extractedAt": "2026-10-06T05:46:51.981Z"
     },
     "minehead_upgrade_requirement_2": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 2, 0)",
       "result": 7,
       "description": "Grid Expansion's required Minehead Research level",
-      "extractedAt": "2026-10-05T06:01:29.211Z"
+      "extractedAt": "2026-10-06T05:46:51.985Z"
     },
     "minehead_upgrade_requirement_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 3, 0)",
       "result": 11,
       "description": "Bettah Numbahs' required Minehead Research level",
-      "extractedAt": "2026-10-05T06:01:29.212Z"
+      "extractedAt": "2026-10-06T05:46:51.989Z"
     },
     "minehead_upgrade_requirement_10": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 10, 0)",
       "result": 34,
       "description": "Boom Blocker's required Minehead Research level",
-      "extractedAt": "2026-10-05T06:01:29.214Z"
+      "extractedAt": "2026-10-06T05:46:51.992Z"
     },
     "minehead_upgrade_requirement_11": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 11, 0)",
       "result": 38,
       "description": "Final Round Fury's required Minehead Research level",
-      "extractedAt": "2026-10-05T06:01:29.223Z"
+      "extractedAt": "2026-10-06T05:46:51.996Z"
     },
     "minehead_upgrade_requirement_20": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0)",
       "result": 68,
       "description": "Research level requirement to unlock Classic Flags, which place flags showing nearby Depth Charges.",
-      "extractedAt": "2026-10-05T06:01:29.225Z"
+      "extractedAt": "2026-10-06T05:46:52.000Z"
     },
     "minehead_upgrade_requirement_21": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0)",
       "result": 72,
       "description": "Research level requirement to unlock Mega Damage II, which permanently increases Depth Charge damage.",
-      "extractedAt": "2026-10-05T06:01:29.227Z"
+      "extractedAt": "2026-10-06T05:46:52.003Z"
     },
     "minehead_upgrade_cost_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 0, 0)",
       "result": 81234.90761812578,
       "description": "Next-level Base Damage I price used by Depth Charge shop affordability, including server scaling and Minehead/Sushi discounts.",
-      "extractedAt": "2026-10-05T06:01:29.228Z"
+      "extractedAt": "2026-10-06T05:46:52.007Z"
     },
     "minehead_upgrade_cost_1": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 1, 0)",
       "result": 5038848,
       "description": "Next-level Numbahs price used by Depth Charge shop affordability, including server scaling and Minehead/Sushi discounts.",
-      "extractedAt": "2026-10-05T06:01:29.230Z"
+      "extractedAt": "2026-10-06T05:46:52.010Z"
     },
     "minehead_upgrade_cost_2": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 2, 0)",
       "result": 35039520.263671875,
       "description": "Grid Expansion's next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.241Z"
+      "extractedAt": "2026-10-06T05:46:52.014Z"
     },
     "minehead_upgrade_cost_3": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 3, 0)",
       "result": 60348.385765388506,
       "description": "Bettah Numbahs' next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.243Z"
+      "extractedAt": "2026-10-06T05:46:52.018Z"
     },
     "minehead_upgrade_cost_4": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 4, 0)",
       "result": 97947.03675476456,
       "description": "Mega Damage I's next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.245Z"
+      "extractedAt": "2026-10-06T05:46:52.022Z"
     },
     "minehead_upgrade_cost_5": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 5, 0)",
       "result": 146722.2884080062,
       "description": "Miney Farmey I's next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.246Z"
+      "extractedAt": "2026-10-06T05:46:52.026Z"
     },
     "minehead_upgrade_cost_9": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 9, 0)",
       "result": 136436.49888446913,
       "description": "Big Hit Combos' next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.248Z"
+      "extractedAt": "2026-10-06T05:46:52.029Z"
     },
     "minehead_upgrade_cost_10": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 10, 0)",
       "result": 1254603888083.5676,
       "description": "Boom Blocker's next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.258Z"
+      "extractedAt": "2026-10-06T05:46:52.032Z"
     },
     "minehead_upgrade_cost_26": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 26, 0)",
       "result": 19274409133.936085,
       "description": "El' Cheapo Upgrado's next-level Minehead shop price",
-      "extractedAt": "2026-10-05T06:01:29.260Z"
+      "extractedAt": "2026-10-06T05:46:52.035Z"
     },
     "minehead_upgrade_cost_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"UpgCost\", 29, 0)",
       "result": 396087843839.4885,
       "description": "Computed shop price for Rift Guy's Upgrade, whose max level is 0 and therefore cannot be purchased.",
-      "extractedAt": "2026-10-05T06:01:29.261Z"
+      "extractedAt": "2026-10-06T05:46:52.038Z"
     },
     "minehead_upgrade_affordable_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)",
       "result": 1,
       "description": "Base Damage I's Minehead affordability state",
-      "extractedAt": "2026-10-05T06:01:29.263Z"
+      "extractedAt": "2026-10-06T05:46:52.041Z"
     },
     "minehead_upgrade_affordable_1": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)",
       "result": 0,
       "description": "Numbahs' Minehead affordability state",
-      "extractedAt": "2026-10-05T06:01:29.264Z"
+      "extractedAt": "2026-10-06T05:46:52.045Z"
     },
     "minehead_upgrade_affordable_29": {
       "expression": "idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)",
       "result": 0,
       "description": "Rift Guy's Upgrade Minehead affordability state at its zero maximum",
-      "extractedAt": "2026-10-05T06:01:29.266Z"
+      "extractedAt": "2026-10-06T05:46:52.048Z"
     },
     "minehead_upgrade_unlocked_20": {
       "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
       "result": 1,
       "description": "Classic Flags Research unlock state from the Minehead shop caller",
-      "extractedAt": "2026-10-05T06:01:29.277Z"
+      "extractedAt": "2026-10-06T05:46:52.051Z"
     },
     "minehead_upgrade_unlocked_21": {
       "expression": "Number(idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
       "result": 0,
       "description": "Mega Damage II Research unlock state from the Minehead shop caller",
-      "extractedAt": "2026-10-05T06:01:29.279Z"
+      "extractedAt": "2026-10-06T05:46:52.055Z"
     },
     "minehead_upgrade_buyable_0": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 0, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 0, 0))",
       "result": 1,
       "description": "Base Damage I purchase eligibility, combining affordability/cap and Research unlock",
-      "extractedAt": "2026-10-05T06:01:29.280Z"
+      "extractedAt": "2026-10-06T05:46:52.058Z"
     },
     "minehead_upgrade_buyable_1": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 1, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 1, 0))",
       "result": 0,
       "description": "Numbahs purchase eligibility, combining affordability/cap and Research unlock",
-      "extractedAt": "2026-10-05T06:01:29.291Z"
+      "extractedAt": "2026-10-06T05:46:52.062Z"
     },
     "minehead_upgrade_buyable_20": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 20, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 20, 0))",
       "result": 0,
       "description": "Classic Flags purchase eligibility, combining affordability/cap and Research unlock",
-      "extractedAt": "2026-10-05T06:01:29.293Z"
+      "extractedAt": "2026-10-06T05:46:52.065Z"
     },
     "minehead_upgrade_buyable_21": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 21, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 21, 0))",
       "result": 0,
       "description": "Mega Damage II purchase eligibility, combining affordability/cap and Research unlock",
-      "extractedAt": "2026-10-05T06:01:29.294Z"
+      "extractedAt": "2026-10-06T05:46:52.069Z"
     },
     "minehead_upgrade_buyable_29": {
       "expression": "Number(Boolean(idleon.callFunction(\"Minehead\", \"CanWeBuyUpg\", 29, 0)) && idleon.getAttr(\"Lv0\")[20] >= idleon.callFunction(\"Minehead\", \"UpgLvREQ\", 29, 0))",
       "result": 0,
       "description": "Rift Guy's Upgrade purchase eligibility with its zero maximum",
-      "extractedAt": "2026-10-05T06:01:29.296Z"
+      "extractedAt": "2026-10-06T05:46:52.073Z"
     },
     "minehead_upgrade_maxed_0": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][0]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[0][1]))",
       "result": 0,
       "description": "Base Damage I maxed state from its saved shop level and maximum",
-      "extractedAt": "2026-10-05T06:01:29.297Z"
+      "extractedAt": "2026-10-06T05:46:52.077Z"
     },
     "minehead_upgrade_maxed_1": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][1]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[1][1]))",
       "result": 0,
       "description": "Numbahs maxed state from its saved shop level and maximum",
-      "extractedAt": "2026-10-05T06:01:29.309Z"
+      "extractedAt": "2026-10-06T05:46:52.080Z"
     },
     "minehead_upgrade_maxed_29": {
       "expression": "Number(Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]) <= 998 && Number(idleon.getAttr(\"Research\")[8][29]) >= Number(idleon.getAttr(\"CustomLists\").h.MineheadUPG[29][1]))",
       "result": 1,
       "description": "Rift Guy's Upgrade maxed state with its zero maximum",
-      "extractedAt": "2026-10-05T06:01:29.311Z"
+      "extractedAt": "2026-10-06T05:46:52.084Z"
     },
     "minehead_sushi_1": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 1, 0)",
       "result": 30,
       "description": "Eggroll Sushi discount on all Minehead upgrade prices before the shop max-combines its two Sushi discounts.",
-      "extractedAt": "2026-10-05T06:01:29.312Z"
+      "extractedAt": "2026-10-06T05:46:52.088Z"
     },
     "minehead_sushi_16": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 16, 0)",
       "result": 50,
       "description": "Tobiko Cluster Sushi discount on all Minehead upgrade prices before the shop max-combines its two Sushi discounts.",
-      "extractedAt": "2026-10-05T06:01:29.314Z"
+      "extractedAt": "2026-10-06T05:46:52.092Z"
     }
   },
   "errors": {},
@@ -266,7 +266,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

@@ -1,125 +1,125 @@
 {
-  "timestamp": "2026-10-05T06:01:29.611Z",
+  "timestamp": "2026-10-06T05:46:52.397Z",
   "extractions": {
     "printer_addition_extra_printing": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
       "result": 629.3232630093207,
       "description": "Account-wide calculated AdditionExtraPrinting factor used in each character's ExtraPrinting multiplier",
-      "extractedAt": "2026-10-05T06:01:29.615Z"
+      "extractedAt": "2026-10-06T05:46:52.408Z"
     },
     "printer_extra_printing_player_0": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 0, 0)",
       "result": 3775.9395780559244,
       "description": "Character 0 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.625Z"
+      "extractedAt": "2026-10-06T05:46:52.412Z"
     },
     "printer_extra_printing_player_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 1, 0)",
       "result": 3775.9395780559244,
       "description": "Character 1 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.627Z"
+      "extractedAt": "2026-10-06T05:46:52.416Z"
     },
     "printer_extra_printing_player_2": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 2, 0)",
       "result": 3775.9395780559244,
       "description": "Character 2 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.629Z"
+      "extractedAt": "2026-10-06T05:46:52.419Z"
     },
     "printer_extra_printing_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 3, 0)",
       "result": 3775.9395780559244,
       "description": "Character 3 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.631Z"
+      "extractedAt": "2026-10-06T05:46:52.423Z"
     },
     "printer_extra_printing_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 4, 0)",
       "result": 3775.9395780559244,
       "description": "Character 4 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.643Z"
+      "extractedAt": "2026-10-06T05:46:52.427Z"
     },
     "printer_extra_printing_player_5": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 5, 0)",
       "result": 3775.9395780559244,
       "description": "Character 5 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.645Z"
+      "extractedAt": "2026-10-06T05:46:52.431Z"
     },
     "printer_extra_printing_player_6": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 6, 0)",
       "result": 3775.9395780559244,
       "description": "Character 6 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.647Z"
+      "extractedAt": "2026-10-06T05:46:52.434Z"
     },
     "printer_extra_printing_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 7, 0)",
       "result": 3775.9395780559244,
       "description": "Character 7 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.658Z"
+      "extractedAt": "2026-10-06T05:46:52.438Z"
     },
     "printer_extra_printing_player_8": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 8, 0)",
       "result": 3775.9395780559244,
       "description": "Character 8 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.660Z"
+      "extractedAt": "2026-10-06T05:46:52.442Z"
     },
     "printer_extra_printing_player_9": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 9, 0)",
       "result": 3775.9395780559244,
       "description": "Character 9 ExtraPrinting multiplier used by active Printer output",
-      "extractedAt": "2026-10-05T06:01:29.662Z"
+      "extractedAt": "2026-10-06T05:46:52.445Z"
     },
     "sailing_gold_relic_tier_increment": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",
       "result": 5,
       "description": "Gold Relic artifact 4 tier increment used alongside the game's local base +2",
-      "extractedAt": "2026-10-05T06:01:29.664Z"
+      "extractedAt": "2026-10-06T05:46:52.449Z"
     },
     "best_divine_knight_talent_178": {
       "expression": "idleon.callFunction(\"getbonus2\", 1, 178, -1)",
       "result": 3.9583333333333335,
       "description": "Best Divine Knight talent 178 contribution used by the Printer product",
-      "extractedAt": "2026-10-05T06:01:29.674Z"
+      "extractedAt": "2026-10-06T05:46:52.452Z"
     },
     "rift_skill_mastery_printer_output": {
       "expression": "idleon.callFunction(\"RiftStuff\", \"RiftSkillETC\", 3)",
       "result": 25,
       "description": "Rift Skill Mastery bonus used by the Printer output product",
-      "extractedAt": "2026-10-05T06:01:29.676Z"
+      "extractedAt": "2026-10-06T05:46:52.456Z"
     },
     "voting_bonus_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 11, 0)",
       "result": 0,
       "description": "Summoning vote bonus 11 used by the Printer output product",
-      "extractedAt": "2026-10-05T06:01:29.679Z"
+      "extractedAt": "2026-10-06T05:46:52.459Z"
     },
     "compass_upgrade_43": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 43, 0)",
       "result": 4,
       "description": "Compass upgrade 43 calculated bonus used by the Printer output product",
-      "extractedAt": "2026-10-05T06:01:29.681Z"
+      "extractedAt": "2026-10-06T05:46:52.463Z"
     },
     "mainframe_bonus_1": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 1)",
       "result": 2,
       "description": "Mainframe bonus 1 numeric value; the game gates the Lab branch on this equaling 2",
-      "extractedAt": "2026-10-05T06:01:29.693Z"
+      "extractedAt": "2026-10-06T05:46:52.466Z"
     },
     "divinity_major_2_player_0": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 2)",
       "result": 1,
       "description": "Arctis major bonus active flag for character slot 0",
-      "extractedAt": "2026-10-05T06:01:29.694Z"
+      "extractedAt": "2026-10-06T05:46:52.471Z"
     },
     "divinity_major_3_player_0": {
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_MAJOR\", 0, 3)",
       "result": 1,
       "description": "Harriep major bonus active flag for character slot 0",
-      "extractedAt": "2026-10-05T06:01:29.696Z"
+      "extractedAt": "2026-10-06T05:46:52.475Z"
     },
     "printer_companion_17_effect": {
       "expression": "idleon.callFunction(\"Companions\", 17)",
       "result": 2,
       "description": "Cached active-level effect for owned Companion 17 used by Printer",
-      "extractedAt": "2026-10-05T06:01:29.698Z"
+      "extractedAt": "2026-10-06T05:46:52.478Z"
     }
   },
   "errors": {},
@@ -128,7 +128,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

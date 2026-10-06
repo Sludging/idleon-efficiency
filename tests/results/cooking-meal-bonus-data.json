@@ -1,89 +1,89 @@
 {
-  "timestamp": "2026-10-05T06:01:27.858Z",
+  "timestamp": "2026-10-06T05:46:50.409Z",
   "extractions": {
     "mainframe_jewel_16": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 116)",
       "result": 25.6,
       "description": "Black Diamond Rhinestone contribution to meal bonuses",
-      "extractedAt": "2026-10-05T06:01:27.862Z"
+      "extractedAt": "2026-10-06T05:46:50.418Z"
     },
     "shiny_bonus_20": {
       "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 20, -1)",
       "result": 17,
       "description": "Breeding shiny bonus contribution to the meal-bonus multiplier",
-      "extractedAt": "2026-10-05T06:01:27.863Z"
+      "extractedAt": "2026-10-06T05:46:50.422Z"
     },
     "win_bonus_26": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 26, 0)",
       "result": 251.78400000000002,
       "description": "Summoning winner bonus that increases meal bonuses",
-      "extractedAt": "2026-10-05T06:01:27.875Z"
+      "extractedAt": "2026-10-06T05:46:50.428Z"
     },
     "ribbon_bonus_meal_11": {
       "expression": "idleon.callFunction(\"Summoning\", \"RibbonBonus\", idleon.engine.getGameAttribute(\"Ribbon\")[28 + 11], 0)",
       "result": 1,
       "description": "Pancakes meal ribbon contribution to meal bonuses",
-      "extractedAt": "2026-10-05T06:01:27.877Z"
+      "extractedAt": "2026-10-06T05:46:50.432Z"
     },
     "meal_bonus_sailing": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Sailing\")",
       "result": 1671.477754688,
       "description": "Popped Corn meal Sailing Speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.878Z"
+      "extractedAt": "2026-10-06T05:46:50.436Z"
     },
     "meal_bonus_mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
       "result": 291946.5236043144,
       "description": "Combined meal bonus used for Meal Cooking Speed",
-      "extractedAt": "2026-10-05T06:01:27.880Z"
+      "extractedAt": "2026-10-06T05:46:50.440Z"
     },
     "meal_bonus_kitchen_eff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 26831.9584983912,
       "description": "Cabbage meal Kitchen Efficiency bonus",
-      "extractedAt": "2026-10-05T06:01:27.892Z"
+      "extractedAt": "2026-10-06T05:46:50.444Z"
     },
     "bonus_multi_cook_meal_1": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 1, 0)",
       "result": 1.6153846153846154,
       "description": "Cook Mastery multiplier for the Egg meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.894Z"
+      "extractedAt": "2026-10-06T05:46:50.448Z"
     },
     "bonus_multi_cook_meal_12": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 12, 0)",
       "result": 1.375,
       "description": "Cook Mastery multiplier for the Corndog meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.896Z"
+      "extractedAt": "2026-10-06T05:46:50.452Z"
     },
     "bonus_multi_cook_meal_13": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 13, 0)",
       "result": 1.5,
       "description": "Cook Mastery multiplier for the Cabbage meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.897Z"
+      "extractedAt": "2026-10-06T05:46:50.456Z"
     },
     "bonus_multi_cook_meal_43": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 43, 0)",
       "result": 1.1666666666666667,
       "description": "Cook Mastery multiplier for the Soda meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.908Z"
+      "extractedAt": "2026-10-06T05:46:50.461Z"
     },
     "bonus_multi_cook_meal_51": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 51, 0)",
       "result": 1,
       "description": "Cook Mastery multiplier for the Popped Corn meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.910Z"
+      "extractedAt": "2026-10-06T05:46:50.465Z"
     },
     "bonus_multi_cook_meal_52": {
       "expression": "idleon.callFunction(\"Summoning2\", \"BonusMultiCook\", 52, 0)",
       "result": 1.375,
       "description": "Cook Mastery multiplier for the Double Cherry meal bonus",
-      "extractedAt": "2026-10-05T06:01:27.912Z"
+      "extractedAt": "2026-10-06T05:46:50.469Z"
     },
     "companion_162_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 162, 0)",
       "result": 1.6,
       "description": "Companion effect that increases all meal bonuses",
-      "extractedAt": "2026-10-05T06:01:27.913Z"
+      "extractedAt": "2026-10-06T05:46:50.474Z"
     }
   },
   "errors": {},
@@ -92,7 +92,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

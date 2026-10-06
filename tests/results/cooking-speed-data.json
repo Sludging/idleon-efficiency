@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-10-05T06:01:27.913Z",
+  "timestamp": "2026-10-06T05:46:50.474Z",
   "extractions": {
     "final_cooking_speed": {
       "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
       "result": {
         "type": "large_number",
-        "value": "3.212100105237965e+147",
-        "original": 3.212100105237965e+147
+        "value": "3.21765756376294e+147",
+        "original": 3.21765756376294e+147
       },
       "description": "Final cooking speed result for kitchen 0",
-      "extractedAt": "2026-10-05T06:01:27.924Z"
+      "extractedAt": "2026-10-06T05:46:50.493Z"
     },
     "starsign_58_bonus": {
       "expression": "idleon.getDNSM(\"StarSigns\").h[58]",
       "result": 150,
       "description": "Star sign 58 (Gordonius Major) cooking speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.926Z"
+      "extractedAt": "2026-10-06T05:46:50.498Z"
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
@@ -25,37 +25,37 @@
         "original": 1.6425293287437326e+45
       },
       "description": "Blood Marrow talent cooking-speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.927Z"
+      "extractedAt": "2026-10-06T05:46:50.503Z"
     },
     "crop_sc_3_bonus": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"CropSCbonus\", 3, 0)",
       "result": 1813534878.2405362,
       "description": "Crop Scientist multiplicative cooking-speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.929Z"
+      "extractedAt": "2026-10-06T05:46:50.507Z"
     },
     "talent_enh_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
       "result": 5844.324873033144,
       "description": "Apocalypse Chow enhanced talent cooking-speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.930Z"
+      "extractedAt": "2026-10-06T05:46:50.511Z"
     },
     "voting_13_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 13, 0)",
       "result": 0,
       "description": "Voting bonus that boosts Cooking EXP and Cooking Speed",
-      "extractedAt": "2026-10-05T06:01:27.940Z"
+      "extractedAt": "2026-10-06T05:46:50.516Z"
     },
     "vault_upg_54_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 54, 0)",
       "result": 3078,
       "description": "Kitchen Dream-mare Vault upgrade bonus",
-      "extractedAt": "2026-10-05T06:01:27.941Z"
+      "extractedAt": "2026-10-06T05:46:50.521Z"
     },
     "meal_bonus_zmealfarm": {
       "expression": "idleon.callFunction(\"MealBonus\", \"zMealFarm\", 0, 0)",
       "result": 230046.76912982843,
       "description": "Burned Mello meal-cooking speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.943Z"
+      "extractedAt": "2026-10-06T05:46:50.525Z"
     },
     "alch_bubbles_meal_spdz_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MealSpdz",
@@ -65,109 +65,109 @@
         "original": 1.31346802776602e+44
       },
       "description": "Diamond Chef bubble bonus to meal and fire kitchen speeds",
-      "extractedAt": "2026-10-05T06:01:27.944Z"
+      "extractedAt": "2026-10-06T05:46:50.529Z"
     },
     "atom_bonuses_8_bonus": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 8, 0)",
       "result": 10733791873203.15,
       "description": "Fluoride (Void Plate Chef) atom bonus",
-      "extractedAt": "2026-10-05T06:01:27.946Z"
+      "extractedAt": "2026-10-06T05:46:50.533Z"
     },
     "msa_1_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"MSA_Bonus\", 1, 0)",
       "result": 1521,
       "description": "MSA Mealing meal-cooking speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.948Z"
+      "extractedAt": "2026-10-06T05:46:50.537Z"
     },
     "artifact_13_bonus": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 13, 0)",
-      "result": 13358.93146883251,
+      "result": 13382.217621498341,
       "description": "Triagulon Sailing artifact bonus",
-      "extractedAt": "2026-10-05T06:01:27.957Z"
+      "extractedAt": "2026-10-06T05:46:50.541Z"
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
       "result": 415.625,
       "description": "The Button's Crop Evo bonus used by kitchen speed",
-      "extractedAt": "2026-10-05T06:01:27.959Z"
+      "extractedAt": "2026-10-06T05:46:50.545Z"
     },
     "arcade_28_bonus": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 28)",
       "result": 0,
       "description": "Arcade Cook SPD multiplier",
-      "extractedAt": "2026-10-05T06:01:27.961Z"
+      "extractedAt": "2026-10-06T05:46:50.548Z"
     },
     "alch_vials_6turtle_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6turtle\"]",
       "result": 276.64,
       "description": "Turtle Tisane multiplicative Cooking Speed vial bonus",
-      "extractedAt": "2026-10-05T06:01:27.962Z"
+      "extractedAt": "2026-10-06T05:46:50.552Z"
     },
     "alch_vials_MealCook_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.MealCook",
       "result": 521.36,
       "description": "MealCook alchemy vial bonus for meal-cooking speed",
-      "extractedAt": "2026-10-05T06:01:27.972Z"
+      "extractedAt": "2026-10-06T05:46:50.556Z"
     },
     "stamp_bonus_MealCook": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"MealCook\")",
       "result": 1800,
       "description": "Meal Cooking Speed stamp bonus",
-      "extractedAt": "2026-10-05T06:01:27.974Z"
+      "extractedAt": "2026-10-06T05:46:50.560Z"
     },
     "mainframe_114_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
       "result": 920,
       "description": "Emerald Pyramite jewel meal-cooking speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.976Z"
+      "extractedAt": "2026-10-06T05:46:50.564Z"
     },
     "meal_bonus_Mcook": {
       "expression": "idleon.callFunction(\"MealBonus\", \"Mcook\")",
       "result": 291946.5236043144,
       "description": "Cooking meal bonuses that increase Meal Cooking Speed",
-      "extractedAt": "2026-10-05T06:01:27.977Z"
+      "extractedAt": "2026-10-06T05:46:50.567Z"
     },
     "summoning_win_bonus_15": {
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 15, 0)",
       "result": 4773.405,
       "description": "Summoning winner bonus input to Cooking SPD",
-      "extractedAt": "2026-10-05T06:01:27.978Z"
+      "extractedAt": "2026-10-06T05:46:50.571Z"
     },
     "holes_monument_rog_bonuses_0_2": {
       "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 2)",
       "result": 159609.8,
       "description": "Bravery monument Cooking Speed multiplier",
-      "extractedAt": "2026-10-05T06:01:27.980Z"
+      "extractedAt": "2026-10-06T05:46:50.575Z"
     },
     "holes_b_upg_56_bonus": {
       "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 56, 0)",
       "result": 51.18589301409078,
       "description": "Heavy Redstone Seasoning multiplicative Cooking Speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.990Z"
+      "extractedAt": "2026-10-06T05:46:50.578Z"
     },
     "lamp_bonuses_0": {
       "expression": "idleon.callFunction(\"Holes\", \"LampBonuses\", 0, 0)",
       "result": 2493.75,
       "description": "More Wishes lamp bonus input to kitchen speed",
-      "extractedAt": "2026-10-05T06:01:27.992Z"
+      "extractedAt": "2026-10-06T05:46:50.582Z"
     },
     "alch_vials_6cookspd_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h[\"6CookSpd\"]",
       "result": 345.8,
       "description": "Firefly Grog multiplicative Cooking Speed vial bonus",
-      "extractedAt": "2026-10-05T06:01:27.993Z"
+      "extractedAt": "2026-10-06T05:46:50.585Z"
     },
     "mainframe_100_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
       "result": 4.800000000000001,
       "description": "Amethyst Rhinestone jewel meal-cooking speed bonus",
-      "extractedAt": "2026-10-05T06:01:27.995Z"
+      "extractedAt": "2026-10-06T05:46:50.590Z"
     },
     "meal_bonus_KitchenEff": {
       "expression": "idleon.callFunction(\"MealBonus\", \"KitchenEff\")",
       "result": 26831.9584983912,
       "description": "Cabbage meal bonus used as kitchen efficiency in meal speed",
-      "extractedAt": "2026-10-05T06:01:27.996Z"
+      "extractedAt": "2026-10-06T05:46:50.594Z"
     }
   },
   "errors": {},
@@ -176,7 +176,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

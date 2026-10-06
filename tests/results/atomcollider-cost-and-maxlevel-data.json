@@ -1,119 +1,119 @@
 {
-  "timestamp": "2026-10-05T06:01:27.540Z",
+  "timestamp": "2026-10-06T05:46:50.016Z",
   "extractions": {
     "superbit_23_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 23, 0)",
       "result": 1,
       "description": "Super bit 23 bonus (max level boost, multiplied by 10)",
-      "extractedAt": "2026-10-05T06:01:27.545Z"
+      "extractedAt": "2026-10-06T05:46:50.029Z"
     },
     "compass_bonus_53": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 53, 0)",
       "result": 20,
       "description": "Compass bonus 53 (max level boost)",
-      "extractedAt": "2026-10-05T06:01:27.546Z"
+      "extractedAt": "2026-10-06T05:46:50.035Z"
     },
     "event_shop_28_owned": {
       "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 28, 0)",
       "result": 0,
       "description": "Event shop 28 owned (max level boost, 1 if owned, 0 otherwise)",
-      "extractedAt": "2026-10-05T06:01:27.556Z"
+      "extractedAt": "2026-10-06T05:46:50.041Z"
     },
     "palette_bonus_35": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 35, 0)",
       "result": 45,
       "description": "Palette bonus 35 (atom cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.558Z"
+      "extractedAt": "2026-10-06T05:46:50.046Z"
     },
     "stamp_atom_cost": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AtomCost\", 0, 0)",
       "result": 12.69406392694064,
       "description": "Stamp bonus for atom cost reduction",
-      "extractedAt": "2026-10-05T06:01:27.560Z"
+      "extractedAt": "2026-10-06T05:46:50.056Z"
     },
     "atom_bonus_9": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 9, 0)",
       "result": 50,
       "description": "Atom bonus 9 (Neon - cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.562Z"
+      "extractedAt": "2026-10-06T05:46:50.061Z"
     },
     "superbit_21_bonus": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 21, 0)",
       "result": 1,
       "description": "Super bit 21 bonus (cost reduction, multiplied by 10)",
-      "extractedAt": "2026-10-05T06:01:27.574Z"
+      "extractedAt": "2026-10-06T05:46:50.066Z"
     },
     "grimoire_bonus_51": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 51, 0)",
       "result": 135,
       "description": "Grimoire upgrade bonus 51 (cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.575Z"
+      "extractedAt": "2026-10-06T05:46:50.070Z"
     },
     "compass_bonus_50": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 50, 0)",
       "result": 144,
       "description": "Compass bonus 50 (cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.577Z"
+      "extractedAt": "2026-10-06T05:46:50.074Z"
     },
     "bubble_y5": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y5",
       "result": 13.069767441860465,
       "description": "Alchemy bubble Y5 (cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.579Z"
+      "extractedAt": "2026-10-06T05:46:50.078Z"
     },
     "collider_building_level": {
       "expression": "idleon.getAttr(\"TowerInfo\")[8]",
       "result": 200,
       "description": "Atom Collider building level (divided by 10 in cost calculation)",
-      "extractedAt": "2026-10-05T06:01:27.581Z"
+      "extractedAt": "2026-10-06T05:46:50.082Z"
     },
     "merit_atom_cost": {
       "expression": "idleon.getAttr(\"Tasks\")[2][4][6]",
       "result": 4,
       "description": "Merit level for atom cost reduction (multiplied by 7)",
-      "extractedAt": "2026-10-05T06:01:27.592Z"
+      "extractedAt": "2026-10-06T05:46:50.087Z"
     },
     "bubba_bonus_7": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
       "result": 21,
       "description": "Bubba bonus 7 (cost reduction)",
-      "extractedAt": "2026-10-05T06:01:27.594Z"
+      "extractedAt": "2026-10-06T05:46:50.091Z"
     },
     "atom_max_level": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomMaxLv\", 0, 0)",
       "result": 50,
       "description": "Atom max level calculation",
-      "extractedAt": "2026-10-05T06:01:27.595Z"
+      "extractedAt": "2026-10-06T05:46:50.096Z"
     },
     "atom_0_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 0, 0)",
       "result": 29525032.572897255,
       "description": "Hydrogen (atom 0) cost",
-      "extractedAt": "2026-10-05T06:01:27.607Z"
+      "extractedAt": "2026-10-06T05:46:50.100Z"
     },
     "atom_3_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 3, 0)",
       "result": 19383595.44913965,
       "description": "Lithium (atom 3) cost",
-      "extractedAt": "2026-10-05T06:01:27.609Z"
+      "extractedAt": "2026-10-06T05:46:50.105Z"
     },
     "atom_5_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 5, 0)",
-      "result": 348039084.12921035,
+      "result": 348039084.1292103,
       "description": "Carbon (atom 5) cost",
-      "extractedAt": "2026-10-05T06:01:27.610Z"
+      "extractedAt": "2026-10-06T05:46:50.109Z"
     },
     "atom_8_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 8, 0)",
       "result": 689071636.2969885,
       "description": "Fluoride (atom 8) cost",
-      "extractedAt": "2026-10-05T06:01:27.612Z"
+      "extractedAt": "2026-10-06T05:46:50.113Z"
     },
     "atom_11_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 11, 0)",
       "result": 2205779968.1327286,
       "description": "Sodium (atom 11) cost",
-      "extractedAt": "2026-10-05T06:01:27.615Z"
+      "extractedAt": "2026-10-06T05:46:50.118Z"
     }
   },
   "errors": {},
@@ -122,7 +122,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

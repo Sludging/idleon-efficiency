@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-10-05T06:01:28.113Z",
+  "timestamp": "2026-10-06T05:46:50.710Z",
   "extractions": {
     "coral_reef_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 0)",
       "result": 284.2170943040401,
       "description": "Next cost for Daily Grind Time bubble levels",
-      "extractedAt": "2026-10-05T06:01:28.124Z"
+      "extractedAt": "2026-10-06T05:46:50.720Z"
     },
     "coral_reef_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
       "result": 10,
       "description": "Next cost for Orange Coral upgrade (effect not described in current metadata)",
-      "extractedAt": "2026-10-05T06:01:28.127Z"
+      "extractedAt": "2026-10-06T05:46:50.725Z"
     },
     "coral_reef_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",
       "result": 4040.840849876404,
       "description": "Next cost for the Tome Epilogue bonus unlock",
-      "extractedAt": "2026-10-05T06:01:28.129Z"
+      "extractedAt": "2026-10-06T05:46:50.730Z"
     },
     "coral_reef_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 3)",
       "result": 4071.9958861156833,
       "description": "Next cost for a Ninja Knowledge upgrade",
-      "extractedAt": "2026-10-05T06:01:28.131Z"
+      "extractedAt": "2026-10-06T05:46:50.734Z"
     },
     "coral_reef_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 4)",
       "result": 4398.046511104002,
       "description": "Next cost for Gallery bonus and Trophy slot increases",
-      "extractedAt": "2026-10-05T06:01:28.142Z"
+      "extractedAt": "2026-10-06T05:46:50.738Z"
     },
     "coral_reef_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 5)",
       "result": 10,
       "description": "Next cost for Blue Coral upgrade (effect not described in current metadata)",
-      "extractedAt": "2026-10-05T06:01:28.144Z"
+      "extractedAt": "2026-10-06T05:46:50.742Z"
     }
   },
   "errors": {},
@@ -44,7 +44,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

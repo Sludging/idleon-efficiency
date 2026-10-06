@@ -1,83 +1,83 @@
 {
-  "timestamp": "2026-10-05T06:01:28.209Z",
+  "timestamp": "2026-10-06T05:46:50.821Z",
   "extractions": {
     "emporium_bonus_33": {
       "expression": "idleon.callFunction(\"Ninja\", \"EmporiumBonus\", 33, 0)",
       "result": 1,
       "description": "True Godly Blessings Jade Emporium upgrade input",
-      "extractedAt": "2026-10-05T06:01:28.214Z"
+      "extractedAt": "2026-10-06T05:46:50.829Z"
     },
     "gods_unlocked_count": {
       "expression": "idleon.engine.getGameAttribute(\"Divinity\")[25]",
       "result": 20,
       "description": "Unlocked-god count used to calculate blessing god rank",
-      "extractedAt": "2026-10-05T06:01:28.222Z"
+      "extractedAt": "2026-10-06T05:46:50.833Z"
     },
     "skill_all_efficiencies": {
       "expression": "idleon.callFunction(\"SkillStats\", \"AllEfficiencies\")",
       "result": 29194.060225114976,
       "description": "Active player's all-skill efficiency for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.224Z"
+      "extractedAt": "2026-10-06T05:46:50.840Z"
     },
     "alchemy_bubble_mineff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.MinEff",
-      "result": 36188.791933597015,
+      "result": 36566.66558092218,
       "description": "Active player's mining-efficiency bubble for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.226Z"
+      "extractedAt": "2026-10-06T05:46:50.844Z"
     },
     "alchemy_bubble_chopeff": {
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.ChopEff",
-      "result": 2090.233952882477,
+      "result": 2121.3951692062606,
       "description": "Active player's chopping-efficiency bubble for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.227Z"
+      "extractedAt": "2026-10-06T05:46:50.847Z"
     },
     "total_stats_str": {
       "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
-      "result": 6173064,
+      "result": 6173692,
       "description": "Active player's STR input for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.228Z"
+      "extractedAt": "2026-10-06T05:46:50.850Z"
     },
     "total_stats_agi": {
       "expression": "idleon.callFunction(\"TotalStats\", \"AGI\")",
-      "result": 2023756,
+      "result": 2024359,
       "description": "Active player's AGI input for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.230Z"
+      "extractedAt": "2026-10-06T05:46:50.854Z"
     },
     "total_stats_wis": {
       "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
-      "result": 2045344,
+      "result": 2045938,
       "description": "Active player's WIS input for Nobisect's BlessyBun blessing",
-      "extractedAt": "2026-10-05T06:01:28.240Z"
+      "extractedAt": "2026-10-06T05:46:50.858Z"
     },
     "divinity_blessing_2": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 2, 0)",
       "result": 1070,
       "description": "Nobisect blessing bonus shown in Divinity",
-      "extractedAt": "2026-10-05T06:01:28.242Z"
+      "extractedAt": "2026-10-06T05:46:50.862Z"
     },
     "divinity_blessing_4": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 4, 0)",
       "result": 852,
       "description": "Goharut blessing bonus shown in Divinity",
-      "extractedAt": "2026-10-05T06:01:28.244Z"
+      "extractedAt": "2026-10-06T05:46:50.866Z"
     },
     "divinity_blessing_6": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 6, 0)",
       "result": 873,
       "description": "Purrmep blessing bonus shown in Divinity",
-      "extractedAt": "2026-10-05T06:01:28.245Z"
+      "extractedAt": "2026-10-06T05:46:50.870Z"
     },
     "divinity_blessing_7": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 7, 0)",
       "result": 193.5,
       "description": "Flutterbis blessing bonus shown in Divinity",
-      "extractedAt": "2026-10-05T06:01:28.247Z"
+      "extractedAt": "2026-10-06T05:46:50.874Z"
     },
     "divinity_blessing_9": {
       "expression": "idleon.callFunction(\"Divinity\", \"BlesssBonus\", 9, 0)",
       "result": 847.5,
       "description": "Bagur blessing bonus shown in Divinity",
-      "extractedAt": "2026-10-05T06:01:28.255Z"
+      "extractedAt": "2026-10-06T05:46:50.878Z"
     }
   },
   "errors": {},
@@ -86,7 +86,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

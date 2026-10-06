@@ -1,41 +1,41 @@
 {
-  "timestamp": "2026-10-05T06:01:27.615Z",
+  "timestamp": "2026-10-06T05:46:50.118Z",
   "extractions": {
     "big_fish_bonus_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 0)",
       "result": 4.219653179190751,
       "description": "Big Fish bonus 0: W7 mob respawn rate",
-      "extractedAt": "2026-10-05T06:01:27.626Z"
+      "extractedAt": "2026-10-06T05:46:50.128Z"
     },
     "big_fish_bonus_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 1)",
       "result": 2.5205479452054793,
       "description": "Big Fish bonus 1: Max Stamina in Spelunking",
-      "extractedAt": "2026-10-05T06:01:27.628Z"
+      "extractedAt": "2026-10-06T05:46:50.132Z"
     },
     "big_fish_bonus_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 2)",
       "result": 3.6065573770491803,
       "description": "Big Fish bonus 2: Spelunking AFK Gains",
-      "extractedAt": "2026-10-05T06:01:27.630Z"
+      "extractedAt": "2026-10-06T05:46:50.137Z"
     },
     "big_fish_bonus_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 3)",
       "result": 0.38461538461538464,
       "description": "Big Fish bonus 3: Kill per Kill in W7",
-      "extractedAt": "2026-10-05T06:01:27.642Z"
+      "extractedAt": "2026-10-06T05:46:50.141Z"
     },
     "big_fish_bonus_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 4)",
       "result": 1.8518518518518516,
       "description": "Big Fish bonus 4: Class EXP Gain",
-      "extractedAt": "2026-10-05T06:01:27.644Z"
+      "extractedAt": "2026-10-06T05:46:50.145Z"
     },
     "big_fish_bonus_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 5)",
       "result": 0,
       "description": "Big Fish bonus 5: Double Gold Food drop chance",
-      "extractedAt": "2026-10-05T06:01:27.646Z"
+      "extractedAt": "2026-10-06T05:46:50.149Z"
     },
     "big_fish_cost_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 0)",
@@ -45,7 +45,7 @@
         "original": 2.7683969383865974e+30
       },
       "description": "Next purchase cost for the W7 mob respawn-rate increase",
-      "extractedAt": "2026-10-05T06:01:27.648Z"
+      "extractedAt": "2026-10-06T05:46:50.154Z"
     },
     "big_fish_cost_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 1)",
@@ -55,17 +55,17 @@
         "original": 6.3780644458109655e+31
       },
       "description": "Next purchase cost for increased Spelunking Stamina",
-      "extractedAt": "2026-10-05T06:01:27.657Z"
+      "extractedAt": "2026-10-06T05:46:50.158Z"
     },
     "big_fish_cost_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 2)",
       "result": {
         "type": "large_number",
-        "value": "2.232589560356753e+32",
-        "original": 2.232589560356753e+32
+        "value": "2.2325895603567526e+32",
+        "original": 2.2325895603567526e+32
       },
       "description": "Next purchase cost for increased Spelunking AFK Gains",
-      "extractedAt": "2026-10-05T06:01:27.659Z"
+      "extractedAt": "2026-10-06T05:46:50.162Z"
     },
     "big_fish_cost_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 3)",
@@ -75,17 +75,17 @@
         "original": 1.8076565461144807e+33
       },
       "description": "Next purchase cost for the W7 Kill per Kill bonus",
-      "extractedAt": "2026-10-05T06:01:27.661Z"
+      "extractedAt": "2026-10-06T05:46:50.167Z"
     },
     "big_fish_cost_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 4)",
       "result": {
         "type": "large_number",
-        "value": "3.1679289638042507e+35",
-        "original": 3.1679289638042507e+35
+        "value": "3.167928963804251e+35",
+        "original": 3.167928963804251e+35
       },
       "description": "Next purchase cost for the Class EXP bonus",
-      "extractedAt": "2026-10-05T06:01:27.662Z"
+      "extractedAt": "2026-10-06T05:46:50.172Z"
     },
     "big_fish_cost_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 5)",
@@ -95,43 +95,43 @@
         "original": 1.0387115103197146e+38
       },
       "description": "Next purchase cost for increased Double Gold Food drop chance",
-      "extractedAt": "2026-10-05T06:01:27.664Z"
+      "extractedAt": "2026-10-06T05:46:50.176Z"
     },
     "big_fish_unlock_req_0": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 0)",
       "result": 4000,
       "description": "Total player-level unlock requirement for the W7 mob respawn-rate increase",
-      "extractedAt": "2026-10-05T06:01:27.672Z"
+      "extractedAt": "2026-10-06T05:46:50.180Z"
     },
     "big_fish_unlock_req_1": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 1)",
       "result": 4300,
       "description": "Total player-level unlock requirement for increased Spelunking Stamina",
-      "extractedAt": "2026-10-05T06:01:27.674Z"
+      "extractedAt": "2026-10-06T05:46:50.184Z"
     },
     "big_fish_unlock_req_2": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 2)",
       "result": 4600,
       "description": "Total player-level unlock requirement for increased Spelunking AFK Gains",
-      "extractedAt": "2026-10-05T06:01:27.676Z"
+      "extractedAt": "2026-10-06T05:46:50.189Z"
     },
     "big_fish_unlock_req_3": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 3)",
       "result": 5050,
       "description": "Total player-level unlock requirement for the W7 Kill per Kill bonus",
-      "extractedAt": "2026-10-05T06:01:27.677Z"
+      "extractedAt": "2026-10-06T05:46:50.194Z"
     },
     "big_fish_unlock_req_4": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 4)",
       "result": 5600,
       "description": "Total player-level unlock requirement for the Class EXP bonus",
-      "extractedAt": "2026-10-05T06:01:27.679Z"
+      "extractedAt": "2026-10-06T05:46:50.199Z"
     },
     "big_fish_unlock_req_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
       "result": 6250,
       "description": "Total player-level unlock requirement for increased Double Gold Food drop chance",
-      "extractedAt": "2026-10-05T06:01:27.680Z"
+      "extractedAt": "2026-10-06T05:46:50.204Z"
     }
   },
   "errors": {},
@@ -140,7 +140,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

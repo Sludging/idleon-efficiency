@@ -1,71 +1,71 @@
 {
-  "timestamp": "2026-10-05T06:01:31.974Z",
+  "timestamp": "2026-10-06T05:46:55.098Z",
   "extractions": {
     "worship_efficiency": {
       "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
-      "result": 32111899927.368786,
+      "result": 32112055062.687374,
       "description": "Worship efficiency",
-      "extractedAt": "2026-10-05T06:01:31.978Z"
+      "extractedAt": "2026-10-06T05:46:55.106Z"
     },
     "food_bonus_worship_soul_boosts": {
       "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\")",
       "result": 0,
       "description": "Food bonus for worship soul boosts",
-      "extractedAt": "2026-10-05T06:01:31.980Z"
+      "extractedAt": "2026-10-06T05:46:55.110Z"
     },
     "talent_57": {
       "expression": "idleon.callFunction(\"TalentCalc\", 57)",
-      "result": 1053.134328358209,
+      "result": 1046.865671641791,
       "description": "Talent 57 bonus",
-      "extractedAt": "2026-10-05T06:01:31.981Z"
+      "extractedAt": "2026-10-06T05:46:55.113Z"
     },
     "bubba_bonus_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
       "result": 70,
       "description": "Bubba global bonus 3 (Soul Gain)",
-      "extractedAt": "2026-10-05T06:01:31.983Z"
+      "extractedAt": "2026-10-06T05:46:55.116Z"
     },
     "dementia_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0)",
       "result": 50,
       "description": "Dementia equipment set bonus",
-      "extractedAt": "2026-10-05T06:01:31.990Z"
+      "extractedAt": "2026-10-06T05:46:55.119Z"
     },
     "arcade_bonus_24": {
       "expression": "idleon.callFunction(\"ArcadeBonus\", 24)",
       "result": 7.2727272727272725,
       "description": "Arcade bonus 24",
-      "extractedAt": "2026-10-05T06:01:31.992Z"
+      "extractedAt": "2026-10-06T05:46:55.122Z"
     },
     "vault_upgrade_50": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0)",
       "result": 480,
       "description": "Vault upgrade 50 bonus",
-      "extractedAt": "2026-10-05T06:01:31.993Z"
+      "extractedAt": "2026-10-06T05:46:55.125Z"
     },
     "totem_0_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 60 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 600, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][0]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 154328663,
+      "result": 153489703,
       "description": "Soul rewards for totem 0 (Goblin Gorefest)",
-      "extractedAt": "2026-10-05T06:01:31.995Z"
+      "extractedAt": "2026-10-06T05:46:55.130Z"
     },
     "totem_2_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 1000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 10000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][2]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 50053776,
+      "result": 49781674,
       "description": "Soul rewards for totem 2 (Acorn Assault)",
-      "extractedAt": "2026-10-05T06:01:31.997Z"
+      "extractedAt": "2026-10-06T05:46:55.134Z"
     },
     "totem_5_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 25000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 250000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][5]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 16453337,
+      "result": 16363894,
       "description": "Soul rewards for totem 5 (Citric Conflict)",
-      "extractedAt": "2026-10-05T06:01:31.999Z"
+      "extractedAt": "2026-10-06T05:46:55.138Z"
     },
     "totem_7_soul_rewards": {
       "expression": "Math.floor(5 * (1 + (idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") >= 2500000 ? Math.floor(100 * Math.pow(idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\") / 25000000, 0.25)) : 0) / 100) * Math.pow((5 + idleon.getAttr(\"TotemInfo\")[0][7]) / 10, 2.6) * (1 + (idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\") + idleon.callFunction(\"GetSetBonus\", \"DEMENTIA_SET\", \"Bonus\", 0, 0) + idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)) / 100) * (1 + idleon.callFunction(\"TalentCalc\", 57) / 100) * (1 + idleon.callFunction(\"ArcadeBonus\", 24) / 100) * (1 + idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 50, 0) / 100))",
-      "result": 4785343,
+      "result": 4759329,
       "description": "Soul rewards for totem 7 (Pufferblob Brawl)",
-      "extractedAt": "2026-10-05T06:01:32.007Z"
+      "extractedAt": "2026-10-06T05:46:55.142Z"
     }
   },
   "errors": {},
@@ -74,7 +74,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }

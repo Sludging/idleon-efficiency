@@ -1,137 +1,137 @@
 {
-  "timestamp": "2026-10-05T06:01:30.383Z",
+  "timestamp": "2026-10-06T05:46:53.293Z",
   "extractions": {
     "royal_armory_total_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 0)",
       "result": 2,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.393Z"
+      "extractedAt": "2026-10-06T05:46:53.301Z"
     },
     "royal_armory_total_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 1)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 1 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.394Z"
+      "extractedAt": "2026-10-06T05:46:53.305Z"
     },
     "royal_armory_total_units_row_1_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 2)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.396Z"
+      "extractedAt": "2026-10-06T05:46:53.309Z"
     },
     "royal_armory_total_units_row_15_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 0)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 15",
-      "extractedAt": "2026-10-05T06:01:30.397Z"
+      "extractedAt": "2026-10-06T05:46:53.312Z"
     },
     "royal_armory_total_units_row_15_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 15, 2)",
       "result": 3,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 15",
-      "extractedAt": "2026-10-05T06:01:30.399Z"
+      "extractedAt": "2026-10-06T05:46:53.316Z"
     },
     "royal_armory_total_units_row_16_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 0)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 0 on outpost row 16",
-      "extractedAt": "2026-10-05T06:01:30.408Z"
+      "extractedAt": "2026-10-06T05:46:53.320Z"
     },
     "royal_armory_total_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 16, 2)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 16",
-      "extractedAt": "2026-10-05T06:01:30.410Z"
+      "extractedAt": "2026-10-06T05:46:53.324Z"
     },
     "royal_armory_total_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 26, 2)",
       "result": 2,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 26",
-      "extractedAt": "2026-10-05T06:01:30.411Z"
+      "extractedAt": "2026-10-06T05:46:53.327Z"
     },
     "royal_armory_total_units_row_51_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 51, 2)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 2 on outpost row 51",
-      "extractedAt": "2026-10-05T06:01:30.413Z"
+      "extractedAt": "2026-10-06T05:46:53.331Z"
     },
     "royal_armory_total_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 1)",
       "result": 1,
       "description": "Total assigned and passive workers of unit type 1 on outpost row 53",
-      "extractedAt": "2026-10-05T06:01:30.414Z"
+      "extractedAt": "2026-10-06T05:46:53.334Z"
     },
     "royal_armory_total_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 53, 3)",
       "result": 0,
       "description": "Total assigned and passive workers of unit type 3 on outpost row 53",
-      "extractedAt": "2026-10-05T06:01:30.423Z"
+      "extractedAt": "2026-10-06T05:46:53.337Z"
     },
     "royal_armory_passive_units_row_1_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.425Z"
+      "extractedAt": "2026-10-06T05:46:53.342Z"
     },
     "royal_armory_passive_units_row_1_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 1)",
       "result": 0,
       "description": "Passive worker contribution for unit type 1 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.427Z"
+      "extractedAt": "2026-10-06T05:46:53.346Z"
     },
     "royal_armory_passive_units_row_1_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 1, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 1",
-      "extractedAt": "2026-10-05T06:01:30.428Z"
+      "extractedAt": "2026-10-06T05:46:53.350Z"
     },
     "royal_armory_passive_units_row_15_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 15",
-      "extractedAt": "2026-10-05T06:01:30.430Z"
+      "extractedAt": "2026-10-06T05:46:53.353Z"
     },
     "royal_armory_passive_units_row_15_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 15, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 15",
-      "extractedAt": "2026-10-05T06:01:30.432Z"
+      "extractedAt": "2026-10-06T05:46:53.357Z"
     },
     "royal_armory_passive_units_row_16_selector_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 0)",
       "result": 0,
       "description": "Passive worker contribution for unit type 0 on outpost row 16",
-      "extractedAt": "2026-10-05T06:01:30.444Z"
+      "extractedAt": "2026-10-06T05:46:53.361Z"
     },
     "royal_armory_passive_units_row_16_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 16, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 16",
-      "extractedAt": "2026-10-05T06:01:30.446Z"
+      "extractedAt": "2026-10-06T05:46:53.365Z"
     },
     "royal_armory_passive_units_row_26_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 26, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 26",
-      "extractedAt": "2026-10-05T06:01:30.447Z"
+      "extractedAt": "2026-10-06T05:46:53.368Z"
     },
     "royal_armory_passive_units_row_51_selector_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 51, 2)",
       "result": 0,
       "description": "Passive worker contribution for unit type 2 on outpost row 51",
-      "extractedAt": "2026-10-05T06:01:30.460Z"
+      "extractedAt": "2026-10-06T05:46:53.372Z"
     },
     "royal_armory_passive_units_row_53_selector_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 1)",
       "result": 0,
       "description": "Passive worker contribution for unit type 1 on outpost row 53",
-      "extractedAt": "2026-10-05T06:01:30.461Z"
+      "extractedAt": "2026-10-06T05:46:53.375Z"
     },
     "royal_armory_passive_units_row_53_selector_3": {
       "expression": "idleon.callFunction(\"RoyalG\", \"PassiveUnitsz\", 53, 3)",
       "result": 0,
       "description": "Passive worker contribution for unit type 3 on outpost row 53",
-      "extractedAt": "2026-10-05T06:01:30.463Z"
+      "extractedAt": "2026-10-06T05:46:53.379Z"
     }
   },
   "errors": {},
@@ -140,7 +140,16 @@
       "server": "running",
       "cdpConnected": true,
       "injected": true,
-      "gameReady": true
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
     }
   }
 }
