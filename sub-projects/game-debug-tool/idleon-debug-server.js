@@ -30,6 +30,7 @@ class IdleonDebugServer {
 
             res.json({
                 server: 'running',
+                source: 'live',
                 cdpConnected: !!this.cdpClient,
                 injected: this.injected,
                 gameReady: this.gameReady

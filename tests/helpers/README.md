@@ -1,33 +1,36 @@
-# Game Data Extraction Helpers
+Tools for extracting data to validate domain calculations. Offline extraction
+is available for input inspection and calculation research, but it is not a
+source for `tests/fixtures/saves/latest.json`.
 
-Tools for extracting game data to validate domain code calculations. The local
-offline endpoint is the default; the live endpoint remains available through
-`GAME_SERVER_URL` for existing configs and expressions.
+## Quick Start - Batch Extraction
 
-## Quick Start - Batch Extraction (Recommended)
+The batch extractor defaults to offline port `3101` and leaves
+`tests/fixtures/saves/latest.json` untouched. It extracts data for all configs
+in `tests/configs/` serially and saves results to `tests/results/`.
 
-The easiest way to extract all test data from the default offline endpoint:
+`--refresh-save` is opt-in and is permitted only when the status endpoint
+identifies the server as live. The helper checks status before requesting
+`/cloud-save` or writing the fixture; offline or unknown-source servers fail
+without touching `latest.json`. Use an updated live HTTP server: older live
+server processes without source identification must be restarted after the
+code update.
+
+To refresh from the live server, with the real game and its debug server
+running:
 
 ```bash
-node tests/helpers/extract-all-game-data.js
+GAME_SERVER_URL=http://localhost:3100 \
+  node tests/helpers/extract-all-game-data.js --refresh-save
 ```
 
-This will:
-1. Leave `tests/fixtures/saves/latest.json` untouched by default.
-2. Extract data for all configs in `tests/configs/`, serially
-3. Save results to `tests/results/`
+The batch helper uses `GAME_SERVER_URL`, defaulting to
+`http://127.0.0.1:3101`; the default is offline. This URL controls status,
+expression execution, and (only for an identified live server) the optional
+save refresh.
 
-Pass `--refresh-save` only to request `/cloud-save` and overwrite
-`tests/fixtures/saves/latest.json` with the server's response. Result files
-are still saved normally unless `--output-dir` selects another directory.
+### Offline Extraction (No Fixture Export)
 
-Both extraction commands use `GAME_SERVER_URL`, defaulting to
-`http://127.0.0.1:3101`. It selects the server for status checks, expression
-execution, and the batch save refresh; configs do not need to change.
-
-### Offline Extraction Without Overwriting Test Data
-
-With the local offline tool already running on its default port:
+With the offline tool running, result files can be written elsewhere:
 
 ```bash
 GAME_SERVER_URL=http://127.0.0.1:3101 \
@@ -38,13 +41,15 @@ GAME_SERVER_URL=http://127.0.0.1:3101 \
 Batch options:
 
 - `--refresh-save`: request `/cloud-save` and overwrite
-  `tests/fixtures/saves/latest.json`. Default: leave the fixture untouched.
+  `tests/fixtures/saves/latest.json`, only from a server whose status source is
+  `live`. Offline and unknown sources fail before the cloud-save request and
+  fixture write. Without this option the fixture remains untouched.
 - `--output-dir <directory>`: write result files to this directory instead of
   `tests/results/`. Relative paths resolve from the current working directory.
 
-Without `--output-dir`, results still overwrite their usual files. Use
-`--output-dir` to write elsewhere. No extractor reloads, resets, or switches
-characters on the server.
+Without `--output-dir`, extraction result files overwrite their usual files.
+Use `--output-dir` to write elsewhere. No extractor reloads, resets, or
+switches characters on the server.
 
 ### Active Player Policy
 
@@ -82,15 +87,12 @@ Individual extraction never refreshes the save fixture; only its explicitly
 selected output file is written. The active-player policy applies equally
 to live and offline extraction.
 
-### Save Export (Standalone)
+### Save Input Inspection (Standalone)
 
-```bash
-curl "${GAME_SERVER_URL:-http://127.0.0.1:3101}/cloud-save" \
-  > tests/fixtures/saves/latest.json
-```
-
-The endpoint returns the complete enriched save matching the raw-data page
-representation (see debug server docs). It does not trigger or commit a save.
+`GET /cloud-save` is useful for inspecting the server's save input. It is
+read-only and does not update repository fixtures. Do not redirect offline
+cloud-save output to `latest.json`. To update that fixture, use the guarded
+batch command above against an explicitly selected live server.
 
 
 ### Live Server Prerequisites

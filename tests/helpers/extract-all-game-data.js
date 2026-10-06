@@ -86,6 +86,15 @@ class BatchExtractor {
  }
 
  async fetchCloudSave() {
+  const statusResponse = await fetch(`${DEBUG_SERVER_URL}/status`);
+  if (!statusResponse.ok) {
+   throw new Error(`Cannot update latest.json: live source verification failed (HTTP ${statusResponse.status}). Use an updated live debug server.`);
+  }
+  const status = await statusResponse.json();
+  if (status?.source !== 'live') {
+   throw new Error(`Cannot update latest.json from ${status?.source || 'unknown'} source; only source='live' is allowed. Set GAME_SERVER_URL to an updated live debug server and restart its HTTP process.`);
+  }
+
   const response = await fetch(`${DEBUG_SERVER_URL}/cloud-save`);
   const cloudSave = await response.json();
 
