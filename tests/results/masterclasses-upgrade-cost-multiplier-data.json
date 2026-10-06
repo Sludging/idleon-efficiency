@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-10-06T05:46:51.922Z",
+  "extractions": {
+    "masterclass_upgrade_cost_multiplier": {
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "result": 0.11764705882352942,
+      "description": "Whole account-wide Masterclass upgrade cost multiplier, including daily cheap-upgrade quota, Santa's Little Helper entitlement and Bargain",
+      "extractedAt": "2026-10-06T05:46:51.930Z"
+    },
+    "daily_shopping_spree_allowance": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 23, 0)",
+      "result": 8,
+      "description": "Daily Shopping Spree calculated allowance used as the strict daily cheap-upgrade threshold",
+      "extractedAt": "2026-10-06T05:46:51.933Z"
+    },
+    "bargain_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "result": 70,
+      "description": "Bargain calculated bonus used by the reciprocal reduction in the whole Masterclass upgrade cost multiplier",
+      "extractedAt": "2026-10-06T05:46:51.936Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
+    }
+  }
+}
