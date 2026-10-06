@@ -64,6 +64,7 @@ type RoyalArmoryResourceRateLateInputs = {
 
 export class RoyalArmoryUpgrade {
     level: number = 0;
+    private unlocked: boolean = false;
     readonly displayIndex: number | undefined;
     private readonly displayCostGrowth: number;
     private readonly displayCostWeight: number;
@@ -96,6 +97,19 @@ export class RoyalArmoryUpgrade {
 
     getBonus(): number {
         return this.level * this.data.bonusPerLevel;
+    }
+
+    isUnlocked(): boolean {
+        return this.unlocked;
+    }
+
+    resetUnlock(): void {
+        this.unlocked = false;
+    }
+
+    updateUnlock(unlockedUpgradeCount: number): void {
+        // Unlocks follow the displayed prefix, independently of purchase price or level cap.
+        this.unlocked = this.displayIndex !== undefined && this.displayIndex < unlockedUpgradeCount;
     }
 
     resetCostInputs(): void {
@@ -244,6 +258,8 @@ export class RoyalArmoryGlorificationBonus extends RoyalArmoryOrbletMarketBonus 
 export class RoyalArmory extends Domain {
     upgrades: RoyalArmoryUpgrade[] = [];
     orbletMarketBonuses: RoyalArmoryOrbletMarketBonus[] = [];
+    private totalUpgradeLevels: number = 0;
+    private unlockedUpgradeCount: number = 0;
     private orbletsOwned: number = 0;
     private unitSpecEffects: [number, number, number, number, number, number, number, number] = [0, 0, 0, 0, 0, 0, 0, 0];
     private extraClearKills: number = 1;
@@ -271,6 +287,8 @@ export class RoyalArmory extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.totalUpgradeLevels = 0;
+        this.unlockedUpgradeCount = 0;
         this.upgrades = RoyalArmoryUpgrade.fromBase(initRoyalArmoryUpgradeRepo());
         this.orbletMarketBonuses = RoyalArmoryOrbletMarketBonus.fromBase(initOrbletMarketBonusRepo());
         return this;
@@ -291,12 +309,16 @@ export class RoyalArmory extends Domain {
         royalArmory.outpostResourceRateEarlyInputs = undefined;
         royalArmory.outpostResourceRateLateInputs = undefined;
         royalArmory.orbletsOwned = 0;
+        // Parsing invalidates prepared progression even when the new save has no RoyalG.
+        royalArmory.totalUpgradeLevels = 0;
+        royalArmory.unlockedUpgradeCount = 0;
 
 
 
         royalArmory.upgrades.forEach((upgrade) => {
             upgrade.level = Number(upgradeLevels[upgrade.index]) || 0;
             upgrade.resetCostInputs();
+            upgrade.resetUnlock();
         });
         royalArmory.orbletMarketBonuses.forEach((bonus) => {
             bonus.level = orbletMarketLevels[bonus.index] ?? 0;
@@ -313,6 +335,36 @@ export class RoyalArmory extends Domain {
             const rank = this.getOutpostExperienceRank(mapIndex, 4);
             return Math.min(rank ?? 0, 1) === 1;
         });
+    }
+
+    getTotalUpgradeLevels(): number {
+        return this.totalUpgradeLevels;
+    }
+
+    getUnlockedUpgradeCount(): number {
+        return this.unlockedUpgradeCount;
+    }
+
+    updateUpgradeUnlocks(): void {
+        this.totalUpgradeLevels = 0;
+        // Non-displayed catalog levels also contribute to account upgrade progression.
+        for (const upgrade of this.upgrades) {
+            this.totalUpgradeLevels += upgrade.level;
+        }
+
+        this.unlockedUpgradeCount = 0;
+        // Display requirements form the capped unlock ladder, not thresholds at mapped catalog IDs.
+        for (const upgrade of this.upgrades) {
+            if (upgrade.displayIndex !== undefined
+                && upgrade.data.requiredUpgrades !== undefined
+                && this.totalUpgradeLevels >= upgrade.data.requiredUpgrades) {
+                this.unlockedUpgradeCount++;
+            }
+        }
+
+        for (const upgrade of this.upgrades) {
+            upgrade.updateUnlock(this.unlockedUpgradeCount);
+        }
     }
 
     getUpgradeByIndex(catalogIndex: number): RoyalArmoryUpgrade | undefined {
@@ -705,6 +757,7 @@ export class RoyalArmory extends Domain {
 
 export const updateRoyalArmory = (accountData: Map<string, any>) => {
     const royalArmory = accountData.get("royalArmory") as RoyalArmory;
+    royalArmory.updateUpgradeUnlocks();
     royalArmory.updateOutpostExperienceRanks();
     royalArmory.updateMapPurificationStates();
     royalArmory.updatePassiveOutpostUnits();
