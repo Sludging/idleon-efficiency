@@ -1148,11 +1148,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 119:
                 // Number of Royal Guardian outposts built.
-                line.updateAllPlayersCurrentValue(royalArmory.getOutpostsBuilt());
+                line.updateAllPlayersCurrentValue(royalArmory.getTotalStat(4));
                 break;
             case 120:
                 // Total Royal Armory resource grade.
-                line.updateAllPlayersCurrentValue(royalArmory.getTotalResourceGrade());
+                line.updateAllPlayersCurrentValue(royalArmory.getTotalStat(0));
                 break;
             case 121:
                 // Completed Jelly obstructions are account-wide Research[7][9] progress.

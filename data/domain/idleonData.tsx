@@ -69,7 +69,7 @@ import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
-import { RoyalArmory, updateRoyalArmory } from './world-6/royalArmory';
+import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';
@@ -370,6 +370,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "coralReefDailyGains": (doc: Cloudsave, accountData: Map<string, any>) => updateCoralReefDailyGain(accountData),
     "nonDepositedZenithClusters": (doc: Cloudsave, accountData: Map<string, any>) => updateNonDepositedZenithClusters(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
+    "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {
