@@ -1,495 +1,322 @@
 {
-  "timestamp": "2026-10-06T05:46:53.987Z",
   "extractions": {
     "sushi_fuel_per_hour": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0)",
-      "result": 109016865.67171155,
-      "description": "Fuel generated per hour by the current Sushi Station setup.",
-      "extractedAt": "2026-10-06T05:46:53.995Z"
+      "result": 375018017.9106877
     },
     "sushi_fuel_capacity": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FuelCap\",0,0)",
-      "result": 376900142.9993911,
-      "description": "Current Sushi Station fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.000Z"
+      "result": 376900142.9993911
     },
     "sushi_bucks_per_hour": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"CurrencyperHR\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "1.700746018044843e+23",
-        "original": 1.700746018044843e+23
-      },
-      "description": "Bucks generated per hour by the current Sushi Station setup.",
-      "extractedAt": "2026-10-06T05:46:54.005Z"
+        "value": "1.700746018044843e+23"
+      }
     },
     "sushi_upgrade_qty_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",0,0)",
-      "result": 40,
-      "description": "Sushi Slot upgrade quantity, a finite-cap upgrade.",
-      "extractedAt": "2026-10-06T05:46:54.010Z"
+      "result": 40
     },
     "sushi_upgrade_cost_display_6": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",6,0)",
       "result": {
         "type": "large_number",
-        "value": "1.4559565079457626e+23",
-        "original": 1.4559565079457626e+23
-      },
-      "description": "Next cost for record 0 (Sushi Slot), queried by its display position 6.",
-      "extractedAt": "2026-10-06T05:46:54.013Z"
+        "value": "1.4559565079457626e+23"
+      }
     },
     "sushi_upgrade_qty_1": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",1,0)",
-      "result": 28700,
-      "description": "Fuel Capacity I upgrade quantity, an effectively uncapped upgrade.",
-      "extractedAt": "2026-10-06T05:46:54.017Z"
+      "result": 28700
     },
     "sushi_upgrade_cost_display_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",3,0)",
       "result": {
         "type": "large_number",
-        "value": "45087220155304710000",
-        "original": 45087220155304710000
-      },
-      "description": "Next cost for record 1 (Fuel Capacity I), queried by its display position 3.",
-      "extractedAt": "2026-10-06T05:46:54.020Z"
+        "value": "45087220155304710000"
+      }
     },
     "sushi_upgrade_qty_20": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)",
-      "result": 8,
-      "description": "Shake N' Bake upgrade quantity, used by the shaker fuel effect.",
-      "extractedAt": "2026-10-06T05:46:54.024Z"
+      "result": 8
     },
     "sushi_upgrade_cost_display_20": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",20,0)",
       "result": {
         "type": "large_number",
-        "value": "3.27224530998659e+24",
-        "original": 3.27224530998659e+24
-      },
-      "description": "Next cost for record 20 (Shake N' Bake), queried by its display position 20.",
-      "extractedAt": "2026-10-06T05:46:54.028Z"
+        "value": "3.27224530998659e+24"
+      }
     },
     "sushi_upgrade_qty_21": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",21,0)",
-      "result": 7,
-      "description": "Bottomless Shakers upgrade quantity, used by shared free-use chance.",
-      "extractedAt": "2026-10-06T05:46:54.031Z"
+      "result": 7
     },
     "sushi_upgrade_cost_display_29": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",29,0)",
       "result": {
         "type": "large_number",
-        "value": "1.7922529462759185e+23",
-        "original": 1.7922529462759185e+23
-      },
-      "description": "Next cost for record 21 (Bottomless Shakers), queried by its display position 29.",
-      "extractedAt": "2026-10-06T05:46:54.035Z"
+        "value": "1.7922529462759185e+23"
+      }
     },
     "sushi_upgrade_qty_22": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",22,0)",
-      "result": 2,
-      "description": "Sasaphrax Saffron upgrade quantity, used by Saffron Bucks per use.",
-      "extractedAt": "2026-10-06T05:46:54.038Z"
+      "result": 2
     },
     "sushi_upgrade_cost_display_36": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",36,0)",
       "result": {
         "type": "large_number",
-        "value": "1.1326747356425023e+24",
-        "original": 1.1326747356425023e+24
-      },
-      "description": "Next cost for record 22 (Sasaphrax Saffron), queried by its display position 36.",
-      "extractedAt": "2026-10-06T05:46:54.042Z"
+        "value": "1.1326747356425023e+24"
+      }
     },
     "sushi_free_shaker_chance": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FreeShaker\",0,0)",
-      "result": 0.14,
-      "description": "Chance that a shaker action does not consume one remaining use.",
-      "extractedAt": "2026-10-06T05:46:54.047Z"
+      "result": 0.14
     },
     "sushi_perfecto_chance_occupied_tier": {
       "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return idleon.callFunction(\"SushiStuff\",\"PerfectOdds\",tier,0)})()",
-      "result": 0.00022699077472603383,
-      "description": "Pepper Perfecto chance for the first actually occupied Sushi tier in the current save.",
-      "extractedAt": "2026-10-06T05:46:54.050Z"
+      "result": 0.00022699077472603383
     },
     "sushi_saffron_bucks_per_use": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"SaffronHRS\",0,0)*idleon.callFunction(\"SushiStuff\",\"CurrencyGain\",0,0)",
       "result": {
         "type": "large_number",
-        "value": "5.102238054134529e+23",
-        "original": 5.102238054134529e+23
-      },
-      "description": "Bucks granted by one Saffron action: its configured hours times current Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.053Z"
+        "value": "5.102238054134529e+23"
+      }
     },
     "sushi_shaker_fuel_per_use": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0):0",
-      "result": 109016865.67171155,
-      "description": "Fuel granted after a shaker action only when Shake N' Bake is owned.",
-      "extractedAt": "2026-10-06T05:46:54.057Z"
+      "result": 375018017.9106877
     },
     "sushi_salt_tier_up_chance_occupied_tier": {
       "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return Math.pow(0.5,Math.max(0,tier-(Math.min(idleon.callFunction(\"SushiStuff\",\"UniqueSushi\",0,0),idleon.callFunction(\"SushiStuff\",\"MaxTier\",0,0)-10)-8)))})()",
-      "result": 1,
-      "description": "Salt tier-up chance for the first actually occupied Sushi tier in the current save, using the click-handler formula.",
-      "extractedAt": "2026-10-06T05:46:54.060Z"
+      "result": 1
     },
     "sushi_knowledge_total_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",0,0)",
-      "result": 2732,
-      "description": "Knowledge bonus total category 0 directly used by Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.064Z"
+      "result": 2732
     },
     "sushi_knowledge_total_1": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",1,0)",
-      "result": 188.93333333333334,
-      "description": "Knowledge bonus total category 1 directly used by Knowledge XP multiplier.",
-      "extractedAt": "2026-10-06T05:46:54.068Z"
+      "result": 188.93333333333334
     },
     "sushi_knowledge_total_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",3,0)",
-      "result": 971.0000000000001,
-      "description": "Knowledge bonus total category 3 directly used by fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.071Z"
+      "result": 971.0000000000001
     },
     "sushi_knowledge_total_4": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",4,0)",
-      "result": 214.10000000000002,
-      "description": "Knowledge bonus total category 4 directly used by fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.074Z"
+      "result": 214.10000000000002
     },
     "sushi_knowledge_total_5": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",5,0)",
-      "result": 4.5,
-      "description": "Knowledge bonus total category 5 directly used by shared free-use chance.",
-      "extractedAt": "2026-10-06T05:46:54.078Z"
+      "result": 4.5
     },
     "sushi_knowledge_total_6": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",6,0)",
-      "result": 60.099999999999994,
-      "description": "Knowledge bonus total category 6 directly used by Sushi upgrade costs.",
-      "extractedAt": "2026-10-06T05:46:54.081Z"
+      "result": 60.099999999999994
     },
     "sushi_knowledge_total_10": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",10,0)",
-      "result": 0,
-      "description": "Knowledge bonus total category 10 directly used by Pepper Perfecto chance.",
-      "extractedAt": "2026-10-06T05:46:54.084Z"
+      "result": 0
     },
     "sushi_knowledge_specific_27": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",27,0)",
-      "result": 38,
-      "description": "Knowledge bonus for tier 27 directly used by fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.087Z"
+      "result": 38
     },
     "sushi_knowledge_specific_36": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",36,0)",
-      "result": 26.400000000000002,
-      "description": "Knowledge bonus for tier 36 directly used by fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.090Z"
+      "result": 26.400000000000002
     },
     "sushi_knowledge_specific_45": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",45,0)",
-      "result": 0,
-      "description": "Knowledge bonus for tier 45 directly used by fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.094Z"
+      "result": 0
     },
     "sushi_knowledge_xp_base": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeXP_base\",0,0)",
-      "result": 4.6,
-      "description": "Knowledge XP base multiplier directly used by daily passive Knowledge gains.",
-      "extractedAt": "2026-10-06T05:46:54.097Z"
+      "result": 4.6
     },
     "sushi_upgrade_qty_2": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",2,0)",
-      "result": 67800,
-      "description": "Fuel Capacity II quantity used by fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.101Z"
+      "result": 67800
     },
     "sushi_upgrade_qty_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",3,0)",
-      "result": 310500,
-      "description": "Fuel Capacity III quantity used by fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.104Z"
+      "result": 310500
     },
     "sushi_upgrade_qty_4": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",4,0)",
-      "result": 870000,
-      "description": "Fuel Capacity IV quantity used by fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.107Z"
+      "result": 870000
     },
     "sushi_upgrade_qty_5": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",5,0)",
-      "result": 0,
-      "description": "Fuel Capacity V quantity used by fuel capacity.",
-      "extractedAt": "2026-10-06T05:46:54.111Z"
+      "result": 0
     },
     "sushi_upgrade_qty_8": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",8,0)",
-      "result": 7545,
-      "description": "Fastburn upgrade quantity used by Fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.115Z"
+      "result": 7545
     },
     "sushi_upgrade_qty_9": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",9,0)",
-      "result": 32700,
-      "description": "Fuel/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.118Z"
+      "result": 32700
     },
     "sushi_upgrade_qty_10": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",10,0)",
-      "result": 138750,
-      "description": "Fuel/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.121Z"
+      "result": 138750
     },
     "sushi_upgrade_qty_11": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",11,0)",
-      "result": 385000,
-      "description": "Fuel/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.124Z"
+      "result": 385000
     },
     "sushi_upgrade_qty_12": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",12,0)",
-      "result": 825000,
-      "description": "Fuel/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.128Z"
+      "result": 825000
     },
     "sushi_upgrade_qty_30": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",30,0)",
-      "result": 588,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.131Z"
+      "result": 588
     },
     "sushi_upgrade_qty_31": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",31,0)",
-      "result": 807,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.134Z"
+      "result": 807
     },
     "sushi_upgrade_qty_32": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",32,0)",
-      "result": 620,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.138Z"
+      "result": 620
     },
     "sushi_upgrade_qty_33": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",33,0)",
-      "result": 10,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.141Z"
+      "result": 10
     },
     "sushi_upgrade_qty_34": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",34,0)",
-      "result": 0,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.144Z"
+      "result": 0
     },
     "sushi_upgrade_qty_36": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",36,0)",
-      "result": 91,
-      "description": "Wholesale Pricing quantity used by Sushi upgrade costs.",
-      "extractedAt": "2026-10-06T05:46:54.147Z"
+      "result": 91
     },
     "sushi_upgrade_qty_37": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",37,0)",
-      "result": 36,
-      "description": "Knowledge XP base upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.150Z"
+      "result": 36
     },
     "sushi_upgrade_qty_38": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",38,0)",
-      "result": 0,
-      "description": "Knowledge XP multiplier upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.153Z"
+      "result": 0
     },
     "sushi_upgrade_qty_40": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",40,0)",
-      "result": 0,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.156Z"
+      "result": 0
     },
     "sushi_upgrade_qty_41": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",41,0)",
-      "result": 663,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.160Z"
+      "result": 663
     },
     "sushi_unique_count": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UniqueSushi\",0,0)",
-      "result": 41,
-      "description": "Contiguous unlocked Sushi count used by Bucks and Salt tier-up calculations.",
-      "extractedAt": "2026-10-06T05:46:54.163Z"
+      "result": 41
     },
     "sushi_unlock_bonus_26": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",26,0)",
-      "result": 25,
-      "description": "Sushi unlock bonus 26 directly used by upgrade costs.",
-      "extractedAt": "2026-10-06T05:46:54.166Z"
+      "result": 25
     },
     "sushi_unlock_bonus_44": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",44,0)",
-      "result": 0,
-      "description": "Sushi unlock bonus 44 directly used by upgrade costs.",
-      "extractedAt": "2026-10-06T05:46:54.169Z"
+      "result": 0
     },
     "sushi_dependency_thingies_have_ban_j": {
       "expression": "idleon.callFunction(\"Thingies\",\"Have_ban_j\",0,0)",
-      "result": 0,
-      "description": "Current Thingies ownership flag input used by Bucks/hour; raw/static input.",
-      "extractedAt": "2026-10-06T05:46:54.172Z"
+      "result": 0
     },
     "sushi_upgrade_qty_43": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",43,0)",
-      "result": 434,
-      "description": "Bucks/hour upgrade quantity.",
-      "extractedAt": "2026-10-06T05:46:54.174Z"
+      "result": 434
     },
     "sushi_knowledge_xp_multiplier_slot_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeXP_multi\",0,0)",
-      "result": 2.889333333333333,
-      "description": "Knowledge XP multiplier for real board slot 0.",
-      "extractedAt": "2026-10-06T05:46:54.178Z"
+      "result": 2.889333333333333
     },
     "sushi_slot_effect_1": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",1,0)",
-      "result": 51.70666666666667,
-      "description": "Slot effect kind 1 directly used by Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.181Z"
+      "result": 51.70666666666667
     },
     "sushi_slot_effect_2": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",2,0)",
-      "result": 0.2068266666666667,
-      "description": "Cold-slot effect kind 2 directly used by passive Knowledge gains.",
-      "extractedAt": "2026-10-06T05:46:54.184Z"
+      "result": 0.2068266666666667
     },
     "sushi_slot_effect_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",3,0)",
-      "result": 1.0341333333333333,
-      "description": "Milktoast-slot effect kind 3 directly used by passive Knowledge gains.",
-      "extractedAt": "2026-10-06T05:46:54.188Z"
+      "result": 1.0341333333333333
     },
     "sushi_fireplace_effect_0": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",0,0)",
-      "result": 1,
-      "description": "Orange-fire effect kind 0 directly used by fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.192Z"
+      "result": 1
     },
     "sushi_fireplace_effect_1": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",1,0)",
-      "result": 150,
-      "description": "Fireplace effect kind 1 directly used by Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.196Z"
+      "result": 150
     },
     "sushi_fireplace_effect_3": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",3,0)",
-      "result": 100,
-      "description": "Fireplace effect kind 3 directly used by Knowledge XP multiplier.",
-      "extractedAt": "2026-10-06T05:46:54.199Z"
+      "result": 100
     },
     "sushi_combo_multiplier": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"ComboMulti\",0,0)",
-      "result": 10.1839850063498,
-      "description": "Current combo multiplier directly used by Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.202Z"
+      "result": 10.1839850063498
     },
     "sushi_orange_fire_sum": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)",
-      "result": 244,
-      "description": "Board-computed orange-fire sum directly used by Fuel/hour.",
-      "extractedAt": "2026-10-06T05:46:54.205Z"
+      "result": 244
     },
     "sushi_dependency_research_188": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",
-      "result": 2.5,
-      "description": "Research Grid 188 Shakin' It value used by free shaker chance.",
-      "extractedAt": "2026-10-06T05:46:54.208Z"
+      "result": 2.5
     },
     "sushi_dependency_research_189": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",189,0)",
-      "result": 75,
-      "description": "Research Grid 189 daily Sushi grant and Bucks/hour input.",
-      "extractedAt": "2026-10-06T05:46:54.212Z"
+      "result": 75
     },
     "sushi_dependency_jelly_obstruction_18": {
       "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",18,0)",
-      "result": 0,
-      "description": "Jelly obstruction 18 reduction directly used by Sushi upgrade costs.",
-      "extractedAt": "2026-10-06T05:46:54.215Z"
+      "result": 0
     },
     "sushi_dependency_arcade_67": {
       "expression": "idleon.callFunction(\"ArcadeBonus\",67,0)",
-      "result": 0,
-      "description": "Arcade bonus 67 directly used by Sushi Bucks/hour via SushiStuff._customBlock_ArcadeBonus(67).",
-      "extractedAt": "2026-10-06T05:46:54.218Z"
+      "result": 0
     },
     "sushi_dependency_event_shop_45": {
       "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",45,0)",
-      "result": 1,
-      "description": "Event shop ownership flag 45 directly used by Sushi Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.220Z"
+      "result": 1
     },
     "sushi_dependency_button_2": {
       "expression": "idleon.callFunction(\"Minehead\",\"Button_Bonuses\",2,0)",
-      "result": 41.5625,
-      "description": "Button bonus 2 directly used by Sushi Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.223Z"
+      "result": 41.5625
     },
     "sushi_dependency_minehead_11": {
       "expression": "idleon.callFunction(\"Minehead\",\"BonusQTY\",11,0)",
-      "result": 25,
-      "description": "Minehead bonus 11 directly used by Sushi Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.227Z"
+      "result": 25
     },
     "sushi_dependency_gaming_67": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",67,0)",
-      "result": 0,
-      "description": "Gaming SuperBitType 67 directly used by Sushi Bucks/hour via SushiStuff._customBlock_GamingStatType(\"SuperBitType\",67,0).",
-      "extractedAt": "2026-10-06T05:46:54.230Z"
+      "result": 0
     },
     "sushi_dependency_atom_14": {
       "expression": "idleon.callFunction(\"AtomCollider\",\"AtomBonuses\",14,0)",
-      "result": 25,
-      "description": "Atom Collider bonus 14 directly used by Sushi Bucks/hour.",
-      "extractedAt": "2026-10-06T05:46:54.234Z"
+      "result": 25
     },
     "sushi_dependency_sailing_status_39": {
       "expression": "idleon.getAttr(\"Sailing\")[3][39]",
-      "result": 5,
-      "description": "Sailing status 39 used as a raw percentage factor by Sushi Bucks/hour; retain game status semantics.",
-      "extractedAt": "2026-10-06T05:46:54.237Z"
+      "result": 5
     },
     "sushi_bundle_flag_bon_v": {
       "expression": "idleon.getAttr(\"BundlesReceived\").h.bon_v",
-      "result": null,
-      "description": "Current save's parsed Sushi bundle flag input; raw/static state, not a calculation parameter.",
-      "extractedAt": "2026-10-06T05:46:54.240Z"
+      "result": null
     },
     "sushi_shaker_bonus_fuel_chance": {
       "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)/100:0",
-      "result": 0.08,
-      "description": "Shake N' Bake's conditional chance for an extra nine-hour FuelGen shaker grant.",
-      "extractedAt": "2026-10-06T05:46:54.245Z"
+      "result": 0.08
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

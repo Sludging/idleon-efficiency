@@ -47,9 +47,10 @@ Batch options:
 - `--output-dir <directory>`: write result files to this directory instead of
   `tests/results/`. Relative paths resolve from the current working directory.
 
-Without `--output-dir`, extraction result files overwrite their usual files.
-Use `--output-dir` to write elsewhere. No extractor reloads, resets, or
-switches characters on the server.
+Without `--output-dir`, extraction result files update their usual files only
+when the serialized output differs from the existing bytes. Identical output
+is not rewritten. Use `--output-dir` to write elsewhere. No extractor reloads,
+resets, or switches characters on the server.
 
 ### Active Player Policy
 
@@ -125,31 +126,30 @@ Create JSON config files in `tests/configs/`:
 
 ### Output Format
 
-Results are saved as JSON with timestamps and metadata:
+Results are saved as compact JSON with only `extractions` and `errors` at the
+root. Successful labels contain the resolved expression sent to the server
+and its result; failed labels contain the resolved expression and error:
 
 ```json
 {
-  "timestamp": "2024-01-01T12:00:00.000Z",
   "extractions": {
     "label": {
       "expression": "...",
-      "result": "...",
-      "description": "...",
-      "extractedAt": "..."
+      "result": "..."
     }
   },
   "errors": {
     "failed_label": {
       "expression": "...",
-      "error": "Error message",
-      "failedAt": "..."
+      "error": "Error message"
     }
-  },
-  "metadata": {
-    "serverStatus": {...}
   }
 }
 ```
+
+Timestamps, server status/metadata, and config descriptions are not persisted.
+Descriptions remain in the configs. Runtime status checks and extraction
+diagnostics still run; removing persisted status does not bypass safeguards.
 
 #### Special Result Handling
 
@@ -157,10 +157,10 @@ Results are saved as JSON with timestamps and metadata:
   ```json
   {
     "type": "large_number",
-    "value": "2.033960867763364e+107",
-    "original": 2.033960867763364e+107
+    "value": "2.033960867763364e+107"
   }
   ```
+  The wrapper contains no duplicate `original` field.
 - **Empty objects**: Converted to `null` for cleaner output
 - **Null/undefined**: Preserved as `null`
 

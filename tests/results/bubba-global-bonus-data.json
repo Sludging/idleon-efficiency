@@ -1,101 +1,57 @@
 {
-  "timestamp": "2026-10-06T05:46:50.204Z",
   "extractions": {
     "companion_51_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 51, 0)",
-      "result": 4,
-      "description": "Companion 51 bonus (multiplier for Bubba bonuses)",
-      "extractedAt": "2026-10-06T05:46:50.215Z"
+      "result": 4
     },
     "megaflesh_owned_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 1, 0)",
-      "result": 1,
-      "description": "Megaflesh ownership contribution at upgrade threshold 1",
-      "extractedAt": "2026-10-06T05:46:50.220Z"
+      "result": 1
     },
     "megaflesh_owned_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 3, 0)",
-      "result": 1,
-      "description": "Megaflesh ownership contribution at upgrade threshold 3",
-      "extractedAt": "2026-10-06T05:46:50.225Z"
+      "result": 1
     },
     "megaflesh_owned_6": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 6, 0)",
-      "result": 0,
-      "description": "Megaflesh ownership contribution at upgrade threshold 6",
-      "extractedAt": "2026-10-06T05:46:50.231Z"
+      "result": 0
     },
     "megaflesh_owned_9": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 9, 0)",
-      "result": 0,
-      "description": "Megaflesh ownership contribution at upgrade threshold 9",
-      "extractedAt": "2026-10-06T05:46:50.238Z"
+      "result": 0
     },
     "megaflesh_owned_11": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 11, 0)",
-      "result": 0,
-      "description": "Megaflesh ownership contribution at upgrade threshold 11",
-      "extractedAt": "2026-10-06T05:46:50.244Z"
+      "result": 0
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
-      "result": 140,
-      "description": "Global bonus 1: +{% Build Rate (base 10)",
-      "extractedAt": "2026-10-06T05:46:50.250Z"
+      "result": 140
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 2, 0)",
-      "result": 70,
-      "description": "Global bonus 2: +{% Critter Gain (base 5)",
-      "extractedAt": "2026-10-06T05:46:50.256Z"
+      "result": 70
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 3, 0)",
-      "result": 70,
-      "description": "Global bonus 3: +{% Soul Gain (base 5)",
-      "extractedAt": "2026-10-06T05:46:50.262Z"
+      "result": 70
     },
     "global_bonus_4": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 4, 0)",
-      "result": 210,
-      "description": "Global bonus 4: +{% Total DMG (base 15)",
-      "extractedAt": "2026-10-06T05:46:50.267Z"
+      "result": 210
     },
     "global_bonus_5": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 5, 0)",
-      "result": 14,
-      "description": "Global bonus 5: +{% All Kills (base 1)",
-      "extractedAt": "2026-10-06T05:46:50.273Z"
+      "result": 14
     },
     "global_bonus_6": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 6, 0)",
-      "result": 56,
-      "description": "Global bonus 6: {% XP Multi (base 4)",
-      "extractedAt": "2026-10-06T05:46:50.278Z"
+      "result": 56
     },
     "global_bonus_7": {
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 7, 0)",
-      "result": 21,
-      "description": "Global bonus 7: -{% Atom Cost (base 3)",
-      "extractedAt": "2026-10-06T05:46:50.282Z"
+      "result": 21
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

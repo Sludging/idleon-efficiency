@@ -1,59 +1,29 @@
 {
-  "timestamp": "2026-10-06T05:46:50.370Z",
   "extractions": {
     "companion_bonus_147": {
       "expression": "idleon.callFunction(\"Companions\", 147, 0)",
-      "result": 75,
-      "description": "Companion 147 bonus that increases The Button multiplier",
-      "extractedAt": "2026-10-06T05:46:50.382Z"
+      "result": 75
     },
     "grid_bonus_125": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 125, 0)",
-      "result": 18.75,
-      "description": "Research Grid Better Button bonus at index 125",
-      "extractedAt": "2026-10-06T05:46:50.388Z"
+      "result": 18.75
     },
     "button_bonus_multi": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_BonusMULTI\", 0, 0)",
-      "result": 2.078125,
-      "description": "The Button dynamic multiplier applied to accumulated bonuses",
-      "extractedAt": "2026-10-06T05:46:50.392Z"
+      "result": 2.078125
     },
     "button_bonus_0": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 0, 0)",
-      "result": 41.5625,
-      "description": "Accumulated Research XP bonus from saved presses",
-      "extractedAt": "2026-10-06T05:46:50.396Z"
+      "result": 41.5625
     },
     "button_bonus_7": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 7, 0)",
-      "result": 415.625,
-      "description": "Accumulated Cooking SPD bonus",
-      "extractedAt": "2026-10-06T05:46:50.404Z"
+      "result": 415.625
     },
     "button_bonus_8": {
       "expression": "idleon.callFunction(\"Minehead\", \"Button_Bonuses\", 8, 0)",
-      "result": 51.953125,
-      "description": "Accumulated Class EXP bonus from saved presses",
-      "extractedAt": "2026-10-06T05:46:50.408Z"
+      "result": 51.953125
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

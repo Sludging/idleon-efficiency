@@ -1,35 +1,13 @@
 {
-  "timestamp": "2026-10-06T05:46:52.658Z",
   "extractions": {
     "royal_armory_bonus_76": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
-      "result": 0,
-      "description": "Upgrade bonus that increases Dreamstuff gained from the Royal Guardian Outpost board",
-      "extractedAt": "2026-10-06T05:46:52.668Z"
+      "result": 0
     },
     "royal_armory_bonus_19": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
-      "result": 110,
-      "description": "Upgrade bonus that contributes to the Outpost resource-production specialization",
-      "extractedAt": "2026-10-06T05:46:52.673Z"
+      "result": 110
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

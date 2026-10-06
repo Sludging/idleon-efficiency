@@ -1,107 +1,61 @@
 {
-  "timestamp": "2026-10-06T05:46:54.365Z",
   "extractions": {
     "lore_epic_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
-      "result": 630.7706895687219,
-      "description": "Tome epilogue Bones multiplier (index 0)",
-      "extractedAt": "2026-10-06T05:46:54.376Z"
+      "result": 630.7706895687219
     },
     "lore_epic_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
-      "result": 231.87015903498067,
-      "description": "Tome epilogue Villager EXP multiplier (index 1)",
-      "extractedAt": "2026-10-06T05:46:54.381Z"
+      "result": 231.87015903498067
     },
     "lore_epic_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
-      "result": 1132.3414213056824,
-      "description": "Tome epilogue Dust multiplier (index 2)",
-      "extractedAt": "2026-10-06T05:46:54.385Z"
+      "result": 1132.3414213056824
     },
     "lore_epic_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
-      "result": 153.20937484491682,
-      "description": "Tome epilogue Artifact Find multiplier (index 3)",
-      "extractedAt": "2026-10-06T05:46:54.389Z"
+      "result": 153.20937484491682
     },
     "lore_epic_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
-      "result": 570.5175788335048,
-      "description": "Tome epilogue Amber multiplier (index 4)",
-      "extractedAt": "2026-10-06T05:46:54.393Z"
+      "result": 570.5175788335048
     },
     "lore_epic_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
-      "result": 291.4855311079834,
-      "description": "Tome epilogue Palette Luck bonus (index 5)",
-      "extractedAt": "2026-10-06T05:46:54.398Z"
+      "result": 291.4855311079834
     },
     "lore_epic_bonus_6": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
-      "result": 910.4839764052625,
-      "description": "Tome epilogue Tachyon multiplier (index 6)",
-      "extractedAt": "2026-10-06T05:46:54.402Z"
+      "result": 910.4839764052625
     },
     "lore_epic_bonus_7": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "result": 28.300100855504606,
-      "description": "Tome epilogue Research XP bonus (index 7)",
-      "extractedAt": "2026-10-06T05:46:54.406Z"
+      "result": 28.300100855504606
     },
     "lore_epic_bonus_8": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
-      "result": 333.8441246819296,
-      "description": "Tome epilogue Equinox multiplier (index 8)",
-      "extractedAt": "2026-10-06T05:46:54.411Z"
+      "result": 333.8441246819296
     },
     "lore_epic_bonus_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
-      "result": 140.32034222833695,
-      "description": "Tome epilogue World 7 Skill 3 bonus (index 9)",
-      "extractedAt": "2026-10-06T05:46:54.416Z"
+      "result": 140.32034222833695
     },
     "lore_epic_bonus_10": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
-      "result": 0,
-      "description": "Tome epilogue filler bonus (index 10)",
-      "extractedAt": "2026-10-06T05:46:54.419Z"
+      "result": 0
     },
     "grimoire_bonus_17": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
-      "result": 85,
-      "description": "Grimoire upgrade 17 contribution to Tome epilogue bonuses",
-      "extractedAt": "2026-10-06T05:46:54.423Z"
+      "result": 85
     },
     "troll_set_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
-      "result": 25,
-      "description": "Troll equipment set contribution to Tome epilogue bonuses",
-      "extractedAt": "2026-10-06T05:46:54.427Z"
+      "result": 25
     },
     "epilogue_bonus_unlocked_count": {
       "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
-      "result": 10,
-      "description": "Spelunk unlock count controlling availability of Tome epilogue effects",
-      "extractedAt": "2026-10-06T05:46:54.430Z"
+      "result": 10
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

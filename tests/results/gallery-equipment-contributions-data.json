@@ -1,89 +1,49 @@
 {
-  "timestamp": "2026-10-06T05:46:51.275Z",
   "extractions": {
     "gallery_trophy_agility_percent": {
       "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
-      "result": 15.309388830028594,
-      "description": "Trophy Agility contribution at the improved-podium boundary; the paired save has artifact33 status4 and Trophy10 in collection position62",
-      "extractedAt": "2026-10-06T05:46:51.283Z"
+      "result": 15.309388830028594
     },
     "gallery_nametag_skill_efficiency": {
       "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"GalleryNametagBonTOT\").h, \"%_SKILL_EFFICIENCY\") ? idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_SKILL_EFFICIENCY\"] : 0",
-      "result": 0,
-      "description": "Nametag Skill Efficiency contribution; absent effect keys contribute zero, following EtcBonuses own-property fallback (EtcBonuses.1.21.js:8-12)",
-      "extractedAt": "2026-10-06T05:46:51.286Z"
+      "result": 0
     },
     "gallery_chip_troph": {
       "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
-      "result": 1,
-      "description": "Active character trophy chip contribution",
-      "extractedAt": "2026-10-06T05:46:51.290Z"
+      "result": 1
     },
     "gallery_killroy_3": {
       "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
-      "result": 0,
-      "description": "Killroy bonus used by podium grades and Gallery scaling",
-      "extractedAt": "2026-10-06T05:46:51.294Z"
+      "result": 0
     },
     "gallery_alchemy_y13": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
-      "result": 12.12518440038127,
-      "description": "Codfrey Rulz Ok bubble Gallery Bonus Multi contribution before Gallery's cap of 20",
-      "extractedAt": "2026-10-06T05:46:51.297Z"
+      "result": 12.12518440038127
     },
     "gallery_card_w7a11": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
-      "result": 2,
-      "description": "J11 Shimmerfin Deep card level for its Gallery Bonus effect, before Gallery's cap of 10",
-      "extractedAt": "2026-10-06T05:46:51.300Z"
+      "result": 2
     },
     "gallery_companion_28": {
       "expression": "idleon.callFunction(\"Companions\", 28)",
-      "result": 40,
-      "description": "Worldclass Showcase companion's highest-grade podium contribution",
-      "extractedAt": "2026-10-06T05:46:51.304Z"
+      "result": 40
     },
     "gallery_companion_42": {
       "expression": "idleon.callFunction(\"Companions\", 42)",
-      "result": 3,
-      "description": "Gallery Showcase companion contribution to improved podium grade",
-      "extractedAt": "2026-10-06T05:46:51.307Z"
+      "result": 3
     },
     "gallery_companion_49": {
       "expression": "idleon.callFunction(\"Companions\", 49)",
-      "result": 50,
-      "description": "Bubba companion contribution to Gallery Bonus Multi",
-      "extractedAt": "2026-10-06T05:46:51.311Z"
+      "result": 50
     },
     "gallery_sushi_54": {
       "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 54, 0)",
-      "result": 0,
-      "description": "Sushi contribution to Gallery Bonus Multi",
-      "extractedAt": "2026-10-06T05:46:51.315Z"
+      "result": 0
     },
     "gallery_legend_9": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 9, 0)",
-      "result": 2,
-      "description": "Superb Gallerium raises the grade of the first normal Gallery showcase slots",
-      "extractedAt": "2026-10-06T05:46:51.318Z"
+      "result": 2
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

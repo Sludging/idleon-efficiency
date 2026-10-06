@@ -1,35 +1,13 @@
 {
-  "timestamp": "2026-10-06T05:46:53.133Z",
   "extractions": {
     "royal_armory_outpost_purify_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPurifyBonus\", 0, 0)",
-      "result": 200,
-      "description": "Raw percentage-point bonus added to collection rate for purified maps",
-      "extractedAt": "2026-10-06T05:46:53.142Z"
+      "result": 200
     },
     "royal_armory_outpost_purify_armory_upgrade_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 1, 0)",
-      "result": 0,
-      "description": "Perfect Purification upgrade contribution added to the purified-map collection bonus",
-      "extractedAt": "2026-10-06T05:46:53.146Z"
+      "result": 0
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

@@ -1,47 +1,21 @@
 {
-  "timestamp": "2026-10-06T05:46:53.111Z",
   "extractions": {
     "royal_armory_outpost_level_bonus_0_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 0, 0)",
-      "result": 1,
-      "description": "Baseline coefficient for the ordinary outpost-level effect",
-      "extractedAt": "2026-10-06T05:46:53.121Z"
+      "result": 1
     },
     "royal_armory_outpost_level_bonus_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 0)",
-      "result": 5,
-      "description": "Collection-rate percentage points added by each outpost level",
-      "extractedAt": "2026-10-06T05:46:53.124Z"
+      "result": 5
     },
     "royal_armory_outpost_level_bonus_1_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 1, 1)",
-      "result": 250,
-      "description": "Connection-range bonus for the alternate outpost-level effect",
-      "extractedAt": "2026-10-06T05:46:53.129Z"
+      "result": 250
     },
     "royal_armory_outpost_level_bonus_2_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostLV_Bonuses\", 2, 0)",
-      "result": 10,
-      "description": "Rank and Barrel experience percentage points added by each outpost level",
-      "extractedAt": "2026-10-06T05:46:53.133Z"
+      "result": 10
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

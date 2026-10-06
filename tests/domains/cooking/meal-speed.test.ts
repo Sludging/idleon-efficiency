@@ -47,7 +47,6 @@ describe('Cooking Domain - Meal Speed', () => {
     context: 'Kitchen 0 meal-cooking speed shown by the website',
     debugInfo: {
      ratio: ratio.toExponential(3),
-     timestamp: extractionResults.timestamp,
      possibleCauses: ratio < 0.1 ? [
       'Missing parameters in domain calculation',
       'Incorrect bonus calculations',

@@ -1,77 +1,41 @@
 {
-  "timestamp": "2026-10-06T05:46:52.989Z",
   "extractions": {
     "royal_armory_outpost_exp_formula_0_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 0)",
-      "result": 10,
-      "description": "Experience needed for the first base Outpost point rank",
-      "extractedAt": "2026-10-06T05:46:52.997Z"
+      "result": 10
     },
     "royal_armory_outpost_exp_formula_0_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 2)",
-      "result": 50,
-      "description": "Experience needed for the first rank that grants passive workers and scales production",
-      "extractedAt": "2026-10-06T05:46:53.001Z"
+      "result": 50
     },
     "royal_armory_outpost_exp_formula_0_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 4)",
-      "result": 100000,
-      "description": "Experience needed for the first purification rank",
-      "extractedAt": "2026-10-06T05:46:53.004Z"
+      "result": 100000
     },
     "royal_armory_outpost_exp_formula_1_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 0)",
-      "result": 19.5,
-      "description": "Experience needed for the second base Outpost point rank",
-      "extractedAt": "2026-10-06T05:46:53.008Z"
+      "result": 19.5
     },
     "royal_armory_outpost_exp_formula_1_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 2)",
-      "result": 180,
-      "description": "Experience needed for the second passive-worker and production rank",
-      "extractedAt": "2026-10-06T05:46:53.012Z"
+      "result": 180
     },
     "royal_armory_outpost_exp_formula_1_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 4)",
-      "result": 1000000,
-      "description": "Experience needed for the second purification rank",
-      "extractedAt": "2026-10-06T05:46:53.016Z"
+      "result": 1000000
     },
     "royal_armory_outpost_exp_formula_2_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 0)",
-      "result": 33.800000000000004,
-      "description": "Experience needed for the third base Outpost point rank",
-      "extractedAt": "2026-10-06T05:46:53.020Z"
+      "result": 33.800000000000004
     },
     "royal_armory_outpost_exp_formula_2_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 2)",
-      "result": 486.00000000000006,
-      "description": "Experience needed for the third passive-worker and production rank",
-      "extractedAt": "2026-10-06T05:46:53.025Z"
+      "result": 486.00000000000006
     },
     "royal_armory_outpost_exp_formula_2_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 4)",
-      "result": 10000000,
-      "description": "Experience needed for the third purification rank",
-      "extractedAt": "2026-10-06T05:46:53.029Z"
+      "result": 10000000
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

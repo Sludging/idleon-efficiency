@@ -1,257 +1,161 @@
 {
-  "timestamp": "2026-10-06T05:46:54.923Z",
   "extractions": {
     "vault_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 0, 0)",
-      "result": 2810.5,
-      "description": "Nonlinear Upgrade Vault bonus at index 0",
-      "extractedAt": "2026-10-06T05:46:54.931Z"
+      "result": 2810.5
     },
     "vault_bonus_60": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 60, 0)",
-      "result": 23360.4,
-      "description": "Nonlinear Upgrade Vault bonus at index 60",
-      "extractedAt": "2026-10-06T05:46:54.935Z"
+      "result": 23360.4
     },
     "vault_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 1, 0)",
-      "result": 200,
-      "description": "Direct Upgrade Vault bonus at index 1",
-      "extractedAt": "2026-10-06T05:46:54.938Z"
+      "result": 200
     },
     "vault_bonus_6": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 6, 0)",
-      "result": 200,
-      "description": "Direct Upgrade Vault bonus at index 6",
-      "extractedAt": "2026-10-06T05:46:54.941Z"
+      "result": 200
     },
     "vault_bonus_7": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 7, 0)",
-      "result": 2,
-      "description": "Direct Upgrade Vault bonus at index 7",
-      "extractedAt": "2026-10-06T05:46:54.944Z"
+      "result": 2
     },
     "vault_bonus_8": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 8, 0)",
-      "result": 1,
-      "description": "Direct Upgrade Vault bonus at index 8",
-      "extractedAt": "2026-10-06T05:46:54.947Z"
+      "result": 1
     },
     "vault_bonus_9": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 9, 0)",
-      "result": 1,
-      "description": "Direct Upgrade Vault bonus at index 9",
-      "extractedAt": "2026-10-06T05:46:54.951Z"
+      "result": 1
     },
     "vault_bonus_13": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 13, 0)",
-      "result": 488,
-      "description": "Direct Upgrade Vault bonus at index 13",
-      "extractedAt": "2026-10-06T05:46:54.954Z"
+      "result": 488
     },
     "vault_bonus_32": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 32, 0)",
-      "result": 54,
-      "description": "Direct blue mastery Upgrade Vault bonus at index 32",
-      "extractedAt": "2026-10-06T05:46:54.958Z"
+      "result": 54
     },
     "vault_bonus_33": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 33, 0)",
-      "result": 24,
-      "description": "Direct Upgrade Vault bonus at index 33",
-      "extractedAt": "2026-10-06T05:46:54.961Z"
+      "result": 24
     },
     "vault_bonus_36": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 36, 0)",
-      "result": 1,
-      "description": "Direct Upgrade Vault bonus at index 36",
-      "extractedAt": "2026-10-06T05:46:54.965Z"
+      "result": 1
     },
     "vault_bonus_40": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 40, 0)",
-      "result": 100,
-      "description": "Direct Upgrade Vault bonus at index 40",
-      "extractedAt": "2026-10-06T05:46:54.968Z"
+      "result": 100
     },
     "vault_bonus_42": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 42, 0)",
-      "result": 30,
-      "description": "Direct Upgrade Vault bonus at index 42",
-      "extractedAt": "2026-10-06T05:46:54.971Z"
+      "result": 30
     },
     "vault_bonus_43": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 43, 0)",
-      "result": 125,
-      "description": "Direct Upgrade Vault bonus at index 43",
-      "extractedAt": "2026-10-06T05:46:54.975Z"
+      "result": 125
     },
     "vault_bonus_44": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 44, 0)",
-      "result": 1,
-      "description": "Direct Upgrade Vault bonus at index 44",
-      "extractedAt": "2026-10-06T05:46:54.978Z"
+      "result": 1
     },
     "vault_bonus_49": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 49, 0)",
-      "result": 200,
-      "description": "Direct Upgrade Vault bonus at index 49",
-      "extractedAt": "2026-10-06T05:46:54.982Z"
+      "result": 200
     },
     "vault_bonus_51": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 51, 0)",
-      "result": 20,
-      "description": "Direct Upgrade Vault bonus at index 51",
-      "extractedAt": "2026-10-06T05:46:54.985Z"
+      "result": 20
     },
     "vault_bonus_52": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 52, 0)",
-      "result": 1,
-      "description": "Direct Upgrade Vault bonus at index 52",
-      "extractedAt": "2026-10-06T05:46:54.989Z"
+      "result": 1
     },
     "vault_bonus_53": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 53, 0)",
-      "result": 150,
-      "description": "Direct Upgrade Vault bonus at index 53",
-      "extractedAt": "2026-10-06T05:46:54.992Z"
+      "result": 150
     },
     "vault_bonus_57": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 57, 0)",
-      "result": 524,
-      "description": "Direct Upgrade Vault bonus at index 57",
-      "extractedAt": "2026-10-06T05:46:54.996Z"
+      "result": 524
     },
     "vault_bonus_61": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 61, 0)",
-      "result": 50,
-      "description": "Direct green mastery Upgrade Vault bonus at index 61",
-      "extractedAt": "2026-10-06T05:46:55.000Z"
+      "result": 50
     },
     "vault_bonus_64": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 64, 0)",
-      "result": 100,
-      "description": "Direct Upgrade Vault bonus at index 64",
-      "extractedAt": "2026-10-06T05:46:55.003Z"
+      "result": 100
     },
     "vault_bonus_70": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 70, 0)",
-      "result": 20,
-      "description": "Direct Upgrade Vault bonus at index 70",
-      "extractedAt": "2026-10-06T05:46:55.007Z"
+      "result": 20
     },
     "vault_bonus_73": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 73, 0)",
-      "result": 44,
-      "description": "Direct Upgrade Vault bonus at index 73",
-      "extractedAt": "2026-10-06T05:46:55.010Z"
+      "result": 44
     },
     "vault_bonus_74": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
-      "result": 19,
-      "description": "Direct Upgrade Vault bonus at index 74",
-      "extractedAt": "2026-10-06T05:46:55.014Z"
+      "result": 19
     },
     "vault_bonus_76": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 76, 0)",
-      "result": 30,
-      "description": "Direct Upgrade Vault bonus at index 76",
-      "extractedAt": "2026-10-06T05:46:55.018Z"
+      "result": 30
     },
     "vault_bonus_79": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 79, 0)",
-      "result": 10,
-      "description": "Direct Upgrade Vault bonus at index 79",
-      "extractedAt": "2026-10-06T05:46:55.021Z"
+      "result": 10
     },
     "vault_bonus_85": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 85, 0)",
-      "result": 82,
-      "description": "Direct Upgrade Vault bonus at index 85",
-      "extractedAt": "2026-10-06T05:46:55.024Z"
+      "result": 82
     },
     "vault_bonus_86": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 86, 0)",
-      "result": 25,
-      "description": "Direct Upgrade Vault bonus at index 86",
-      "extractedAt": "2026-10-06T05:46:55.028Z"
+      "result": 25
     },
     "vault_bonus_88": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 88, 0)",
-      "result": 100,
-      "description": "Direct Upgrade Vault bonus at index 88",
-      "extractedAt": "2026-10-06T05:46:55.032Z"
+      "result": 100
     },
     "vault_bonus_89": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 89, 0)",
-      "result": 24,
-      "description": "Direct red mastery Upgrade Vault bonus at index 89",
-      "extractedAt": "2026-10-06T05:46:55.035Z"
+      "result": 24
     },
     "vault_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 2, 0)",
-      "result": 1663.2,
-      "description": "Blue mastery-band Upgrade Vault bonus at index 2",
-      "extractedAt": "2026-10-06T05:46:55.038Z"
+      "result": 1663.2
     },
     "vault_bonus_31": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 31, 0)",
-      "result": 77,
-      "description": "Blue mastery-band boundary at index 31",
-      "extractedAt": "2026-10-06T05:46:55.041Z"
+      "result": 77
     },
     "vault_bonus_34": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 34, 0)",
-      "result": 75,
-      "description": "Green mastery-band Upgrade Vault bonus at index 34",
-      "extractedAt": "2026-10-06T05:46:55.045Z"
+      "result": 75
     },
     "vault_bonus_59": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 59, 0)",
-      "result": 300,
-      "description": "Green mastery-band boundary at index 59",
-      "extractedAt": "2026-10-06T05:46:55.048Z"
+      "result": 300
     },
     "vault_bonus_62": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 62, 0)",
-      "result": 124,
-      "description": "Red mastery-band Upgrade Vault bonus at index 62",
-      "extractedAt": "2026-10-06T05:46:55.052Z"
+      "result": 124
     },
     "vault_bonus_63": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 63, 0)",
-      "result": 336.04,
-      "description": "Red mastery-band Upgrade Vault bonus at index 63",
-      "extractedAt": "2026-10-06T05:46:55.055Z"
+      "result": 336.04
     },
     "vault_bonus_87": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 87, 0)",
-      "result": 214.52,
-      "description": "Red mastery-band boundary at index 87",
-      "extractedAt": "2026-10-06T05:46:55.059Z"
+      "result": 214.52
     },
     "vault_bonus_90": {
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 90, 0)",
-      "result": 0,
-      "description": "Ordinary out-of-range Upgrade Vault fallback at index 90",
-      "extractedAt": "2026-10-06T05:46:55.062Z"
+      "result": 0
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

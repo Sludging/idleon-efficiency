@@ -1,137 +1,81 @@
 {
-  "timestamp": "2026-10-06T05:46:51.680Z",
   "extractions": {
     "jewel_0_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
-      "result": 4.800000000000001,
-      "description": "Meal Cooking speed from Amethyst Rhinestone; saved Purple Jewel synergy doubles the bonus",
-      "extractedAt": "2026-10-06T05:46:51.687Z"
+      "result": 4.800000000000001
     },
     "jewel_0_bonus_multiplier": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 8)",
-      "result": 1.6,
-      "description": "Calculated Lab mainframe multiplier directly used by Jewel bonus formulas",
-      "extractedAt": "2026-10-06T05:46:51.691Z"
+      "result": 1.6
     },
     "jewel_1_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 101)",
-      "result": 0.8,
-      "description": "Purple Navette effect used by the Amethyst Rhinestone doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.695Z"
+      "result": 0.8
     },
     "jewel_2_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 102)",
-      "result": 64,
-      "description": "Purple Rhombol effect used by the Amethyst Rhinestone doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.699Z"
+      "result": 64
     },
     "jewel_3_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 103)",
-      "result": 9.600000000000001,
-      "description": "Construction building speed and slot trim from Sapphire Rhinestone; saved Blue Jewel synergy doubles the bonus",
-      "extractedAt": "2026-10-06T05:46:51.703Z"
+      "result": 9.600000000000001
     },
     "jewel_4_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 104)",
-      "result": 4.800000000000001,
-      "description": "Sapphire Navette effect used by the Sapphire Rhinestone doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.707Z"
+      "result": 4.800000000000001
     },
     "jewel_5_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 105)",
-      "result": 40,
-      "description": "Sapphire Rhombol effect used by the Sapphire Rhinestone doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.710Z"
+      "result": 40
     },
     "jewel_6_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 106)",
-      "result": 3.2,
-      "description": "Sapphire Pyramite effect used by the Sapphire Rhinestone doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.713Z"
+      "result": 3.2
     },
     "jewel_10_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
-      "result": 32,
-      "description": "All-player damage from Pyrite Pyramite; saved Orange Jewel synergy doubles the bonus",
-      "extractedAt": "2026-10-06T05:46:51.718Z"
+      "result": 32
     },
     "jewel_7_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 107)",
-      "result": 3.2,
-      "description": "Pyrite Rhinestone effect used by the Pyrite Pyramite doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.721Z"
+      "result": 3.2
     },
     "jewel_8_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 108)",
-      "result": 4.800000000000001,
-      "description": "Pyrite Navette effect used by the Pyrite Pyramite doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.725Z"
+      "result": 4.800000000000001
     },
     "jewel_9_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 109)",
-      "result": 48,
-      "description": "Pyrite Rhombol effect used by the Pyrite Pyramite doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.729Z"
+      "result": 48
     },
     "jewel_12_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 112)",
-      "result": 640,
-      "description": "All-skill base efficiency and action speed from Emerald Navette; saved Green Jewel synergy doubles the bonus",
-      "extractedAt": "2026-10-06T05:46:51.733Z"
+      "result": 640
     },
     "jewel_11_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 111)",
-      "result": 44.800000000000004,
-      "description": "Emerald Rhinestone effect used by the Emerald Navette doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.736Z"
+      "result": 44.800000000000004
     },
     "jewel_13_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 113)",
-      "result": 1.6,
-      "description": "Emerald Rhombol effect used by the Emerald Navette doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.739Z"
+      "result": 1.6
     },
     "jewel_14_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "result": 920,
-      "description": "Emerald Pyramite effect used by the Emerald Navette doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.742Z"
+      "result": 920
     },
     "jewel_15_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 115)",
-      "result": 48,
-      "description": "Emerald Ulthurite effect used by the Emerald Navette doubling gate",
-      "extractedAt": "2026-10-06T05:46:51.746Z"
+      "result": 48
     },
     "jewel_19_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 119)",
-      "result": 10,
-      "description": "Pure Opal Navette boost to active Mainframe bonuses and jewels, excluding Spelunker Obol",
-      "extractedAt": "2026-10-06T05:46:51.749Z"
+      "result": 10
     },
     "jewel_20_bonus": {
       "expression": "idleon.callFunction(\"MainframeBonus\", 120)",
-      "result": 16,
-      "description": "Pure Opal Rhombol boost to all Crop Depot bonuses",
-      "extractedAt": "2026-10-06T05:46:51.752Z"
+      "result": 16
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

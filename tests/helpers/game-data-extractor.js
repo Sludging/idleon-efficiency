@@ -22,10 +22,8 @@ class GameDataExtractor {
   this.verbose = options.verbose !== false;
   this.config = null;
   this.results = {
-   timestamp: new Date().toISOString(),
    extractions: {},
-   errors: {},
-   metadata: {}
+   errors: {}
   };
  }
 
@@ -63,7 +61,6 @@ class GameDataExtractor {
 2. Debug server auto-injection completed successfully`);
    }
 
-   this.results.metadata.serverStatus = status;
    return status.injected;
   } catch (error) {
    throw new Error(`Failed to connect to debug server: ${error.message}`);
@@ -94,7 +91,7 @@ class GameDataExtractor {
   this.log(`\n🎯 Extracting ${this.config.extractions.length} values from game...\n`);
 
   for (const extraction of this.config.extractions) {
-   const { label, expression, description } = extraction;
+   const { label, expression } = extraction;
    const executedExpression = this.resolveExpression(expression);
 
    try {
@@ -105,9 +102,7 @@ class GameDataExtractor {
 
     this.results.extractions[label] = {
      expression: executedExpression,
-     result,
-     description: description || '',
-     extractedAt: new Date().toISOString()
+     result
     };
 
     this.log(`    Result: ${JSON.stringify(result)}`);
@@ -116,9 +111,7 @@ class GameDataExtractor {
    } catch (error) {
     this.results.errors[label] = {
      expression: executedExpression,
-     error: error.message,
-     description: description || '',
-     failedAt: new Date().toISOString()
+     error: error.message
     };
 
     console.error(`    ❌ Error: ${error.message}\n`);
@@ -134,12 +127,17 @@ class GameDataExtractor {
     fs.mkdirSync(outputDir, { recursive: true });
    }
 
-   fs.writeFileSync(this.outputPath, JSON.stringify(this.results, null, 2));
+   const serializedResults = Buffer.from(JSON.stringify(this.results, null, 2), 'utf8');
+   const unchanged = fs.existsSync(this.outputPath) &&
+    fs.readFileSync(this.outputPath).equals(serializedResults);
+   if (!unchanged) {
+    fs.writeFileSync(this.outputPath, serializedResults);
+   }
 
    const extractionCount = Object.keys(this.results.extractions).length;
    const errorCount = Object.keys(this.results.errors).length;
 
-   this.log(`\n📁 Results saved to: ${this.outputPath}`);
+   this.log(`\n📁 Results ${unchanged ? 'unchanged at' : 'saved to'}: ${this.outputPath}`);
    this.log(`✅ Successful extractions: ${extractionCount}`);
    this.log(`❌ Failed extractions: ${errorCount}`);
 
@@ -267,8 +265,7 @@ class GameDataExtractor {
     (result !== 0 && Math.abs(result) < Number.MIN_VALUE)) {
     return {
      type: 'large_number',
-     value: result.toString(),
-     original: result
+     value: result.toString()
     };
    }
   }

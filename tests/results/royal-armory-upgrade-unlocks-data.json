@@ -1,65 +1,33 @@
 {
-  "timestamp": "2026-10-06T05:46:53.471Z",
   "extractions": {
     "royal_armory_total_upgrade_levels": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgTotal\", 0, 0)",
-      "result": 479,
-      "description": "Independent owned-level total across the full saved Royal upgrade catalog, including non-displayed records",
-      "extractedAt": "2026-10-06T05:46:53.479Z"
+      "result": 479
     },
     "royal_armory_unlocked_upgrade_count": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
-      "result": 30,
-      "description": "Independent unlocked displayed-upgrade count, capped by the game's display list",
-      "extractedAt": "2026-10-06T05:46:53.483Z"
+      "result": 30
     },
     "royal_armory_upgrade_unlocked_display_0": {
       "expression": "0 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
-      "result": true,
-      "description": "Game caller's displayed-prefix predicate for Collect Resources Tool (catalog 30, display 0); unlock is separate from price and purchase cap",
-      "extractedAt": "2026-10-06T05:46:53.486Z"
+      "result": true
     },
     "royal_armory_upgrade_unlocked_display_5": {
       "expression": "5 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
-      "result": true,
-      "description": "Game caller's displayed-prefix predicate for Royal Marble (catalog 41, display 5), not catalog position 5",
-      "extractedAt": "2026-10-06T05:46:53.489Z"
+      "result": true
     },
     "royal_armory_upgrade_unlocked_display_6": {
       "expression": "6 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
-      "result": true,
-      "description": "Game caller's displayed-prefix predicate for Resource Replenish (catalog 70, display 6), not catalog position 6",
-      "extractedAt": "2026-10-06T05:46:53.492Z"
+      "result": true
     },
     "royal_armory_upgrade_unlocked_last_unlocked": {
       "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count - 1 < count; })()",
-      "result": true,
-      "description": "Game caller's strict displayed-prefix predicate at the current last unlocked position (fresh game count minus one); test resolves catalog identity from independently source-verified static display mapping",
-      "extractedAt": "2026-10-06T05:46:53.496Z"
+      "result": true
     },
     "royal_armory_upgrade_unlocked_first_locked": {
       "expression": "(() => { const count = idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0); return count < count; })()",
-      "result": false,
-      "description": "Game caller's strict displayed-prefix predicate at the current first locked position (fresh game count); test resolves catalog identity from independently source-verified static display mapping",
-      "extractedAt": "2026-10-06T05:46:53.499Z"
+      "result": false
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

@@ -1,59 +1,29 @@
 {
-  "timestamp": "2026-10-06T05:46:50.710Z",
   "extractions": {
     "coral_reef_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 0)",
-      "result": 284.2170943040401,
-      "description": "Next cost for Daily Grind Time bubble levels",
-      "extractedAt": "2026-10-06T05:46:50.720Z"
+      "result": 284.2170943040401
     },
     "coral_reef_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
-      "result": 10,
-      "description": "Next cost for Orange Coral upgrade (effect not described in current metadata)",
-      "extractedAt": "2026-10-06T05:46:50.725Z"
+      "result": 10
     },
     "coral_reef_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",
-      "result": 4040.840849876404,
-      "description": "Next cost for the Tome Epilogue bonus unlock",
-      "extractedAt": "2026-10-06T05:46:50.730Z"
+      "result": 4040.840849876404
     },
     "coral_reef_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 3)",
-      "result": 4071.9958861156833,
-      "description": "Next cost for a Ninja Knowledge upgrade",
-      "extractedAt": "2026-10-06T05:46:50.734Z"
+      "result": 4071.9958861156833
     },
     "coral_reef_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 4)",
-      "result": 4398.046511104002,
-      "description": "Next cost for Gallery bonus and Trophy slot increases",
-      "extractedAt": "2026-10-06T05:46:50.738Z"
+      "result": 4398.046511104002
     },
     "coral_reef_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 5)",
-      "result": 10,
-      "description": "Next cost for Blue Coral upgrade (effect not described in current metadata)",
-      "extractedAt": "2026-10-06T05:46:50.742Z"
+      "result": 10
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

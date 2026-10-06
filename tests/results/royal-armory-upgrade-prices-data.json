@@ -1,71 +1,37 @@
 {
-  "timestamp": "2026-10-06T05:46:53.442Z",
   "extractions": {
     "royal_armory_upgrade_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
-      "result": 3151625.7994178683,
-      "description": "Royal Talent Points I (catalog 46): ordinary price after its cheap opening, with no positional Jelly reduction",
-      "extractedAt": "2026-10-06T05:46:53.449Z"
+      "result": 3151625.7994178683
     },
     "royal_armory_upgrade_price_display_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 2, 0)",
-      "result": 257207.14569225907,
-      "description": "Solo Militia Status (catalog 58): ordinary price after its cheap opening, with no positional Jelly reduction",
-      "extractedAt": "2026-10-06T05:46:53.452Z"
+      "result": 257207.14569225907
     },
     "royal_armory_upgrade_price_display_5": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 5, 0)",
-      "result": 5632031.131643181,
-      "description": "Royal Marble (catalog 41): missing display-position lookup applies twice each Jelly reduction",
-      "extractedAt": "2026-10-06T05:46:53.455Z"
+      "result": 5632031.131643181
     },
     "royal_armory_upgrade_price_display_30": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
-      "result": 190445.97988248095,
-      "description": "Global Decree - OL (catalog 50): first Jelly lookup region applies both reductions once, even while locked",
-      "extractedAt": "2026-10-06T05:46:53.459Z"
+      "result": 190445.97988248095
     },
     "royal_armory_upgrade_price_display_41": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 41, 0)",
-      "result": 4138791.1291335537,
-      "description": "Anti-Rodent Power Move II (catalog 36): second Jelly lookup region applies only obstruction 26's reduction",
-      "extractedAt": "2026-10-06T05:46:53.462Z"
+      "result": 4138791.1291335537
     },
     "royal_armory_price_masterclass_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
-      "result": 0.11764705882352942,
-      "description": "Whole shared Master Classes upgrade-cost multiplier directly multiplied into ordinary Royal Armory prices",
-      "extractedAt": "2026-10-06T05:46:53.465Z"
+      "result": 0.11764705882352942
     },
     "royal_armory_price_jelly_quantity_11": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 11, 0)",
-      "result": 50,
-      "description": "Jelly obstruction 11's calculated reduction, weighted by the first positional lookup factor",
-      "extractedAt": "2026-10-06T05:46:53.468Z"
+      "result": 50
     },
     "royal_armory_price_jelly_quantity_26": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 26, 0)",
-      "result": 0,
-      "description": "Jelly obstruction 26's calculated reduction, weighted by the second positional lookup factor",
-      "extractedAt": "2026-10-06T05:46:53.471Z"
+      "result": 0
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

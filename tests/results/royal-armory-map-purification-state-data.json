@@ -1,41 +1,17 @@
 {
-  "timestamp": "2026-10-06T05:46:52.699Z",
   "extractions": {
     "royal_armory_map_purification_row_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 0, 0)",
-      "result": 0,
-      "description": "Whether outpost row 0 has reached its first purification rank and earns the purified production bonus",
-      "extractedAt": "2026-10-06T05:46:52.709Z"
+      "result": 0
     },
     "royal_armory_map_purification_row_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"isMapPurified\", 1, 0)",
-      "result": 0,
-      "description": "Whether outpost row 1 has reached its first purification rank and earns the purified production bonus",
-      "extractedAt": "2026-10-06T05:46:52.713Z"
+      "result": 0
     },
     "royal_armory_outpost_exp_rank_row_1_rank_4": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
-      "result": 0,
-      "description": "Outpost row 1 purification-track rank; reaching rank 1 activates its purified production bonus",
-      "extractedAt": "2026-10-06T05:46:52.717Z"
+      "result": 0
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

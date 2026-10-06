@@ -1,71 +1,37 @@
 {
-  "timestamp": "2026-10-06T05:46:52.092Z",
   "extractions": {
     "legend_talent_26_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 26, 0)",
-      "result": 400,
-      "description": "Legend talent 26 bonus (Orion Overload)",
-      "extractedAt": "2026-10-06T05:46:52.100Z"
+      "result": 400
     },
     "companion_51_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 51, 0)",
-      "result": 4,
-      "description": "Companion 51 bonus (multiplier for Orion bonuses)",
-      "extractedAt": "2026-10-06T05:46:52.103Z"
+      "result": 4
     },
     "global_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 0, 0)",
-      "result": 6875,
-      "description": "Global bonus 0: +{% Class XP (base 5)",
-      "extractedAt": "2026-10-06T05:46:52.108Z"
+      "result": 6875
     },
     "global_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 1, 0)",
-      "result": 13750,
-      "description": "Global bonus 1: +{ Base DMG (base 10)",
-      "extractedAt": "2026-10-06T05:46:52.111Z"
+      "result": 13750
     },
     "global_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 2, 0)",
-      "result": 2750,
-      "description": "Global bonus 2: +{% Total DMG (base 2)",
-      "extractedAt": "2026-10-06T05:46:52.115Z"
+      "result": 2750
     },
     "global_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 3, 0)",
-      "result": 5500,
-      "description": "Global bonus 3: +{% Skill XP (base 4)",
-      "extractedAt": "2026-10-06T05:46:52.120Z"
+      "result": 5500
     },
     "global_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 4, 0)",
-      "result": 1375,
-      "description": "Global bonus 4: +{% Drop Rate (base 1)",
-      "extractedAt": "2026-10-06T05:46:52.124Z"
+      "result": 1375
     },
     "global_bonus_5": {
       "expression": "idleon.callFunction(\"Summoning\", \"OwlBonuses\", 5, 0)",
-      "result": 2200,
-      "description": "Global bonus 5: +{ All Stat (base 2)",
-      "extractedAt": "2026-10-06T05:46:52.128Z"
+      "result": 2200
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }

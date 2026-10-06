@@ -11,17 +11,11 @@ import path from 'path';
 export interface ExtractedValue {
   expression: string;
   result: any;
-  description: string;
-  extractedAt: string;
 }
 
 export interface ExtractionResults {
-  timestamp: string;
   extractions: Record<string, ExtractedValue>;
-  errors: Record<string, any>;
-  metadata: {
-    serverStatus: any;
-  };
+  errors: Record<string, { expression: string; error: string }>;
 }
 
 export const loadExtractionResults = (resultsFileName: string): ExtractionResults => {
@@ -86,16 +80,11 @@ export const validateExtractionHealth = (results: ExtractionResults): void => {
     const errorLabels = Object.keys(results.errors);
     throw new Error(`${errorCount} extraction(s) failed: ${errorLabels.join(', ')}`);
   }
-  
-  if (!results.metadata?.serverStatus?.injected) {
-    console.warn('⚠️  Game injection was not detected during extraction - results may be incomplete');
-  }
 };
 
 export const getExtractionSummary = (results: ExtractionResults): string => {
   const extractionCount = Object.keys(results.extractions).length;
   const errorCount = Object.keys(results.errors).length;
-  const extractedAt = new Date(results.timestamp).toLocaleString();
   
-  return `${extractionCount} extractions, ${errorCount} errors, captured at ${extractedAt}`;
+  return `${extractionCount} extractions, ${errorCount} errors`;
 };

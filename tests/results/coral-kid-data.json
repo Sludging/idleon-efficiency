@@ -1,95 +1,53 @@
 {
-  "timestamp": "2026-10-06T05:46:50.595Z",
   "extractions": {
     "coral_kid_bonus_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 0, 0)",
-      "result": 660,
-      "description": "CoralKid bonus 0: Divinity EXP gain",
-      "extractedAt": "2026-10-06T05:46:50.604Z"
+      "result": 660
     },
     "coral_kid_bonus_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 1, 0)",
-      "result": 50,
-      "description": "CoralKid bonus 1: Blessing max level increase",
-      "extractedAt": "2026-10-06T05:46:50.608Z"
+      "result": 50
     },
     "coral_kid_bonus_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 2, 0)",
-      "result": 14.791666666666668,
-      "description": "CoralKid bonus 2: God Rank class EXP multiplier",
-      "extractedAt": "2026-10-06T05:46:50.611Z"
+      "result": 14.791666666666668
     },
     "coral_kid_bonus_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
-      "result": 80,
-      "description": "CoralKid bonus 3: Divinity skill level boost to minor links",
-      "extractedAt": "2026-10-06T05:46:50.615Z"
+      "result": 80
     },
     "coral_kid_bonus_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 4, 0)",
-      "result": 28,
-      "description": "CoralKid bonus 4: Divinity PTS gain per Coral Reef upgrade",
-      "extractedAt": "2026-10-06T05:46:50.618Z"
+      "result": 28
     },
     "coral_kid_bonus_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 5, 0)",
-      "result": 2.4390243902439024,
-      "description": "CoralKid bonus 5: Daily Coral generation increase",
-      "extractedAt": "2026-10-06T05:46:50.623Z"
+      "result": 2.4390243902439024
     },
     "coral_kid_cost_0": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 0)",
-      "result": 5394077978.276371,
-      "description": "Coral Kid next purchase cost for the Divinity EXP bonus",
-      "extractedAt": "2026-10-06T05:46:50.626Z"
+      "result": 5394077978.276371
     },
     "coral_kid_cost_1": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 1)",
-      "result": 15881867761.018133,
-      "description": "Coral Kid next purchase cost for the blessing max-level increase",
-      "extractedAt": "2026-10-06T05:46:50.629Z"
+      "result": 15881867761.018133
     },
     "coral_kid_cost_2": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 2)",
-      "result": 312739794892.5797,
-      "description": "Coral Kid next purchase cost for the God Rank class EXP multiplier",
-      "extractedAt": "2026-10-06T05:46:50.633Z"
+      "result": 312739794892.5797
     },
     "coral_kid_cost_3": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 3)",
-      "result": 4424544463504.635,
-      "description": "Coral Kid next purchase cost for the Divinity minor-link bonus",
-      "extractedAt": "2026-10-06T05:46:50.636Z"
+      "result": 4424544463504.635
     },
     "coral_kid_cost_4": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 4)",
-      "result": 49215578432.38809,
-      "description": "Coral Kid next purchase cost for Divinity points per Coral Reef upgrade",
-      "extractedAt": "2026-10-06T05:46:50.640Z"
+      "result": 49215578432.38809
     },
     "coral_kid_cost_5": {
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 5)",
-      "result": 85536000000,
-      "description": "Coral Kid next purchase cost for daily Coral generation",
-      "extractedAt": "2026-10-06T05:46:50.644Z"
+      "result": 85536000000
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true,
-      "busy": false,
-      "stage": "ready",
-      "character": 3,
-      "playerName": "Sludgev4",
-      "evaluationTimeMs": 1791256252062,
-      "advancedMilliseconds": 1700,
-      "scheduler": "paused Chromium virtual time; original callbacks retained",
-      "scene": "ySnowD3",
-      "sceneID": 114
-    }
-  }
+  "errors": {}
 }
