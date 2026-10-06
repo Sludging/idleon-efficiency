@@ -1,0 +1,317 @@
+{
+  "timestamp": "2026-10-06T05:46:52.757Z",
+  "extractions": {
+    "orblet_market_cost_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 0, 0)",
+      "result": 5002,
+      "description": "Emulsion: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.765Z"
+    },
+    "orblet_market_bonus_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 0, 0)",
+      "result": 2,
+      "description": "Emulsion: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.770Z"
+    },
+    "orblet_market_unlocked_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 0; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Emulsion: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.774Z"
+    },
+    "orblet_market_next_bonus_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 0; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 3,
+      "description": "Emulsion: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.779Z"
+    },
+    "orblet_market_display_level_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][0]); })()",
+      "result": 2,
+      "description": "Emulsion: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.783Z"
+    },
+    "orblet_market_cost_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 1, 0)",
+      "result": 38,
+      "description": "Hydration: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.787Z"
+    },
+    "orblet_market_bonus_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
+      "result": 110,
+      "description": "Hydration: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.791Z"
+    },
+    "orblet_market_unlocked_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 1; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Hydration: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.796Z"
+    },
+    "orblet_market_next_bonus_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 1; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 115,
+      "description": "Hydration: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.801Z"
+    },
+    "orblet_market_display_level_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][1]); })()",
+      "result": 22,
+      "description": "Hydration: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.807Z"
+    },
+    "orblet_market_cost_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 2, 0)",
+      "result": 90,
+      "description": "Talented: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.813Z"
+    },
+    "orblet_market_bonus_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 2, 0)",
+      "result": 23,
+      "description": "Talented: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.817Z"
+    },
+    "orblet_market_unlocked_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 2; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Talented: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.822Z"
+    },
+    "orblet_market_next_bonus_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 2; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 24,
+      "description": "Talented: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.827Z"
+    },
+    "orblet_market_display_level_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][2]); })()",
+      "result": 23,
+      "description": "Talented: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.831Z"
+    },
+    "orblet_market_cost_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 3, 0)",
+      "result": 28,
+      "description": "Full Clear: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.834Z"
+    },
+    "orblet_market_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
+      "result": 4,
+      "description": "Full Clear: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.839Z"
+    },
+    "orblet_market_unlocked_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 3; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Full Clear: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.844Z"
+    },
+    "orblet_market_next_bonus_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 3; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 5,
+      "description": "Full Clear: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.849Z"
+    },
+    "orblet_market_display_level_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][3]); })()",
+      "result": 4,
+      "description": "Full Clear: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.854Z"
+    },
+    "orblet_market_cost_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 4, 0)",
+      "result": 32,
+      "description": "Glorification: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.859Z"
+    },
+    "orblet_market_bonus_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 4, 0)",
+      "result": 4,
+      "description": "Glorification: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.863Z"
+    },
+    "orblet_market_unlocked_4": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 4; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Glorification: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.868Z"
+    },
+    "orblet_market_cost_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 5, 0)",
+      "result": 31,
+      "description": "Intervene: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.873Z"
+    },
+    "orblet_market_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
+      "result": 3,
+      "description": "Intervene: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.879Z"
+    },
+    "orblet_market_unlocked_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 5; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Intervene: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.884Z"
+    },
+    "orblet_market_next_bonus_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 5; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 4,
+      "description": "Intervene: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.890Z"
+    },
+    "orblet_market_display_level_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][5]); })()",
+      "result": 3,
+      "description": "Intervene: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.896Z"
+    },
+    "orblet_market_cost_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 6, 0)",
+      "result": 61,
+      "description": "Stronk Rank: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.900Z"
+    },
+    "orblet_market_bonus_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
+      "result": 5,
+      "description": "Stronk Rank: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.904Z"
+    },
+    "orblet_market_unlocked_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 6; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Stronk Rank: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.909Z"
+    },
+    "orblet_market_next_bonus_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 6; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 10,
+      "description": "Stronk Rank: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.915Z"
+    },
+    "orblet_market_display_level_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][6]); })()",
+      "result": 1,
+      "description": "Stronk Rank: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.921Z"
+    },
+    "orblet_market_cost_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 7, 0)",
+      "result": 1715,
+      "description": "Bargain: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.926Z"
+    },
+    "orblet_market_bonus_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "result": 70,
+      "description": "Bargain: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.931Z"
+    },
+    "orblet_market_unlocked_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 7; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Bargain: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.936Z"
+    },
+    "orblet_market_next_bonus_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 7; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 80,
+      "description": "Bargain: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.941Z"
+    },
+    "orblet_market_display_level_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][7]); })()",
+      "result": 7,
+      "description": "Bargain: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.946Z"
+    },
+    "orblet_market_cost_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 8, 0)",
+      "result": 200,
+      "description": "Long Range: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.950Z"
+    },
+    "orblet_market_bonus_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
+      "result": 0,
+      "description": "Long Range: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.954Z"
+    },
+    "orblet_market_unlocked_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 8; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1,
+      "description": "Long Range: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.957Z"
+    },
+    "orblet_market_next_bonus_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 8; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 1,
+      "description": "Long Range: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.961Z"
+    },
+    "orblet_market_display_level_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][8]); })()",
+      "result": 0,
+      "description": "Long Range: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.965Z"
+    },
+    "orblet_market_cost_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 9, 0)",
+      "result": 500,
+      "description": "Parchmore: exact current saved-level price, floored only strictly below one million; compared by current-price and preview/reprocessing invariants",
+      "extractedAt": "2026-10-06T05:46:52.968Z"
+    },
+    "orblet_market_bonus_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 9, 0)",
+      "result": 0,
+      "description": "Parchmore: shared raw numeric current bonus used by existing consumers; compared before/after preview and repeated processing, not an exceptional description or success chance",
+      "extractedAt": "2026-10-06T05:46:52.972Z"
+    },
+    "orblet_market_unlocked_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 9; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 0,
+      "description": "Parchmore: source shop progression predicate, first entry or immediately preceding saved level >= 1; numeric 1/0 encoding for numeric-only loader. Index 5 follows saved index 4, not index 3. Source: idleon1.22.txt bytes 25690000-25691500",
+      "extractedAt": "2026-10-06T05:46:52.977Z"
+    },
+    "orblet_market_next_bonus_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 9; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 1,
+      "description": "Parchmore: read-only source-derived next bonus at actual saved numeric level + 1, never a target-level game function or game/save mutation. Thingies.1.22.js:76 gives floor(coeff * level); shop bytes 25690000-25691500 use catalog column 3 as cap. -1 explicitly encodes absent preview at cap for numeric-only loader; not a raw bonus. Uses actual Script.asNumber converter (correctness-356 research:108-109), no guessed global/Number coercion",
+      "extractedAt": "2026-10-06T05:46:52.980Z"
+    },
+    "orblet_market_display_level_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][9]); })()",
+      "result": 0,
+      "description": "Parchmore: ordinary current level presented by the list consumer after processing, compared through public getLevel(), not a raw save-array or copied-property assertion; converter as in delivered Thingies.1.22.js:70-76",
+      "extractedAt": "2026-10-06T05:46:52.984Z"
+    },
+    "calculationStorage.amountInStorageOrblet": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
+      "result": 1013,
+      "description": "Actual game-owned account Orblet currency. Direct parameter comparison: settled Storage.amountInStorage(\"Orblet\"). Core consumers compare RoyalArmory.getOrbletsOwned and economic affordability (this count >= exact Thingies price), without shop/map eligibility.",
+      "extractedAt": "2026-10-06T05:46:52.988Z"
+    }
+  },
+  "errors": {},
+  "metadata": {
+    "serverStatus": {
+      "server": "running",
+      "cdpConnected": true,
+      "injected": true,
+      "gameReady": true,
+      "busy": false,
+      "stage": "ready",
+      "character": 3,
+      "playerName": "Sludgev4",
+      "evaluationTimeMs": 1791256252062,
+      "advancedMilliseconds": 1700,
+      "scheduler": "paused Chromium virtual time; original callbacks retained",
+      "scene": "ySnowD3",
+      "sceneID": 114
+    }
+  }
+}

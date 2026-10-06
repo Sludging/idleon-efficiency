@@ -11,6 +11,8 @@ import { lavaLog } from "../../utility";
 import { Arcade } from "../world-2/arcade";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { getCompanionActiveBonus } from "../companions";
+import type { ImageData } from "../imageData";
+import type { Storage } from "../storage";
 
 // Match game number conversion for missing, boolean, and saved string values.
 const royalArmoryAsNumber = (value: unknown): number => {
@@ -79,29 +81,117 @@ export class RoyalArmoryUpgrade {
 export class RoyalArmoryOrbletMarketBonus {
     level: number = 0;
     private bonus: number = 0;
+    private predecessor: RoyalArmoryOrbletMarketBonus | undefined;
 
     constructor(
         public index: number,
         public data: OrbletMarketBonusModel,
     ) { }
     static fromBase(data: OrbletMarketBonusBase[]): RoyalArmoryOrbletMarketBonus[] {
-        return data.map((bonus) => new RoyalArmoryOrbletMarketBonus(bonus.index, bonus.data));
+        const bonuses = data.map((bonus) => {
+            switch (bonus.index) {
+                case 4: return new RoyalArmoryGlorificationBonus(bonus.index, bonus.data);
+                default: return new RoyalArmoryOrbletMarketBonus(bonus.index, bonus.data);
+            }
+        });
+        // Unlocks follow catalog IDs, including Glorification before Intervene, not list positions.
+        bonuses.forEach((bonus) => {
+            bonus.predecessor = bonuses.find((candidate) => candidate.index === bonus.index - 1);
+        });
+        return bonuses;
     }
 
     updateBonus(): void {
         // Each Orblet market level adds its listed bonus; the game rounds down the total.
-        this.bonus = Math.floor(Number(this.data.bonusPerLevel) * Number(this.level));
-        this.level = 0;
+        this.bonus = this.getBonusAtLevel(Number(this.level));
     }
 
     getBonus(): number {
         return this.bonus;
+    }
+
+    private getBonusAtLevel(level: number): number {
+        return Math.floor(Number(this.data.bonusPerLevel) * level);
+    }
+
+    getCost(): number {
+        const level = Number(this.level);
+        const cost = level + Number(this.data.costBase) * Math.pow(Number(this.data.costMultiplier), level);
+        // Million-Orblet prices retain their fractional value; only lower prices are rounded down.
+        return cost < 1_000_000 ? Math.floor(cost) : cost;
+    }
+
+    getDescription(): string {
+        return this.describeBonus(this.getBonus());
+    }
+
+    private describeBonus(bonus: number): string {
+        // Intervene displays a multiplier; the other market effects display the raw bonus.
+        return this.data.description.replace(/_/g, " ")
+            .replace(/{/g, bonus.toString())
+            .replace(/}/g, (1 + bonus / 100).toString());
+    }
+
+    getNextBonus(): number | undefined {
+        const level = Number(this.level);
+        // Preview a further level without changing the current cache or saved progression.
+        return level >= Number(this.data.maxLevel) ? undefined : this.getBonusAtLevel(level + 1);
+    }
+
+    getNextBonusDescription(): string | undefined {
+        const bonus = this.getNextBonus();
+        return bonus === undefined ? undefined : this.describeBonus(bonus);
+    }
+
+    getLevel(): number | undefined {
+        return Number(this.level);
+    }
+
+    getMaxLevel(): number | undefined {
+        return Number(this.data.maxLevel);
+    }
+
+    getImageData(): ImageData {
+        return { location: "Orblet", width: 72, height: 72 };
+    }
+
+    isUnlocked(): boolean {
+        return this.index === 0 || (this.predecessor !== undefined && Number(this.predecessor.level) >= 1);
+    }
+
+    isAffordable(orbletsOwned: number): boolean {
+        // Balance coverage is independent of progression, caps, and per-outpost attempt eligibility.
+        return orbletsOwned >= this.getCost();
+    }
+}
+
+export class RoyalArmoryGlorificationBonus extends RoyalArmoryOrbletMarketBonus {
+    override getDescription(): string {
+        // The saved market level affects price and unlocks, not the fixed chance or success effects.
+        return "10% chance per attempt to glorify an outpost. On success: +10 outpost points, 2× rank XP, +1 Worker.";
+    }
+
+    override getNextBonus(): number | undefined {
+        return undefined;
+    }
+
+    override getNextBonusDescription(): string | undefined {
+        return undefined;
+    }
+
+    override getLevel(): number | undefined {
+        return undefined;
+    }
+
+    override getMaxLevel(): number | undefined {
+        return undefined;
     }
 }
 
 export class RoyalArmory extends Domain {
     upgrades: RoyalArmoryUpgrade[] = [];
     orbletMarketBonuses: RoyalArmoryOrbletMarketBonus[] = [];
+    private orbletsOwned: number = 0;
     private unitSpecEffects: [number, number, number, number, number, number, number, number] = [0, 0, 0, 0, 0, 0, 0, 0];
     private extraClearKills: number = 1;
     // TODO: Make proper models from wiki data for these.
@@ -147,6 +237,7 @@ export class RoyalArmory extends Domain {
         royalArmory.outpostResourceRateRowsByMap = [];
         royalArmory.outpostResourceRateEarlyInputs = undefined;
         royalArmory.outpostResourceRateLateInputs = undefined;
+        royalArmory.orbletsOwned = 0;
 
 
 
@@ -196,6 +287,14 @@ export class RoyalArmory extends Domain {
 
     getOrbletMarketBonus(index: number): number {
         return this.orbletMarketBonuses.find((bonus) => bonus.index === index)!.getBonus();
+    }
+
+    getOrbletsOwned(): number {
+        return this.orbletsOwned;
+    }
+
+    updateOrbletsOwned(orbletsOwned: number): void {
+        this.orbletsOwned = orbletsOwned;
     }
 
     updateExtraClearKills(players: Player[], bigFish: BigFish, jellyOperator: JellyOperator): void {
@@ -572,6 +671,10 @@ export const updateRoyalArmoryLateInputs = (accountData: Map<string,any>) => {
     const alchemy = accountData.get("alchemy") as Alchemy;
     const arcade = accountData.get("arcade") as Arcade;
     const companions = accountData.get("companions")
+    const storage = accountData.get("storage") as Storage;
+
+    // Storage is settled here; early market bonuses remain available to their existing consumers.
+    royalArmory.updateOrbletsOwned(storage.amountInStorage("Orblet"));
 
     royalArmory.updateExtraClearKills(
         accountData.get("players") as Player[],
