@@ -11,7 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DEBUG_SERVER_URL = 'http://localhost:3100';
+const DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const TARGET_PLAYER_CONFIG_PATH = path.resolve(__dirname, '../utils/target-player.json');
 const TARGET_PLAYER_PLACEHOLDER = '__TARGET_PLAYER__';
 

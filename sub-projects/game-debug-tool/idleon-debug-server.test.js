@@ -41,7 +41,6 @@ test('addConvenienceHelpers injects a deterministic getGameVersion from RANDOlis
     await server.addConvenienceHelpers();
 
     const helpers = evaluations[0].expression;
-    assert.match(helpers, /getGameVersion: function\(\)/);
     // Execute the helper code in a mock game context to verify behavior
     const context = {
         window: {

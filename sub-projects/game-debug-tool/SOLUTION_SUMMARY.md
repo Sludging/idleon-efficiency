@@ -106,6 +106,17 @@ curl -X POST http://localhost:3100/exec \
 
 The injection creates a simple `idleon` object for easy access:
 
+Both the live debug server and the opt-in offline tool install the same
+`convenience-helpers.js` factory: `require('./convenience-helpers')` returns
+`createIdleonHelpers(registry)`. Maintain helper behavior in that module, not in
+either startup path. It is serialized into the browser, so its implementation
+must depend only on the supplied original game registry and browser JavaScript.
+`idleon.scripts` remains the legacy `ActorEvents_124` object. `idleon.allScripts`
+exposes every registry `ActorEvents` class; `callFunction` searches the original
+seven actors first (12, 124, 148, 189, 266, 345, 579), then other discovered actors,
+and invokes the original static method with its actor as receiver. Function
+counts below describe the original captured version, not a fixed coverage limit.
+
 ### **Core Methods**
 ```javascript
 // Get help

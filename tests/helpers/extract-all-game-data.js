@@ -3,8 +3,9 @@
 /**
  * Batch Game Data Extractor
  *
- * Runs all extraction configs in tests/configs/ and saves results to tests/results/
- * Save fixture is refreshed from the debug server via GET /cloud-save before extraction.
+ * Runs all extraction configs in tests/configs/ and saves results to tests/results/ by default.
+ * Cloud-save refresh is opt-in via --refresh-save; by default, the save fixture is untouched.
+ * Extraction results are still saved normally unless --output-dir selects another directory.
  * The endpoint returns the complete enriched save matching the raw-data page representation.
  */
 
@@ -12,14 +13,16 @@ const fs = require('fs');
 const path = require('path');
 const GameDataExtractor = require('./game-data-extractor');
 
-const DEBUG_SERVER_URL = 'http://localhost:3100';
+const DEBUG_SERVER_URL = process.env.GAME_SERVER_URL || 'http://127.0.0.1:3101';
 const CONFIGS_DIR = path.join(__dirname, '../configs');
 const SAVE_PATH = path.join(__dirname, '../fixtures/saves/latest.json');
 const RESULTS_DIR = path.join(__dirname, '../results');
 
 class BatchExtractor {
- constructor({ verbose = false } = {}) {
+ constructor({ verbose = false, skipSaveRefresh = true, outputDir = RESULTS_DIR } = {}) {
   this.verbose = verbose;
+  this.skipSaveRefresh = skipSaveRefresh;
+  this.outputDir = path.resolve(outputDir);
   this.configFiles = [];
   this.results = {
    successful: [],
@@ -48,7 +51,7 @@ class BatchExtractor {
    .map(file => ({
     name: file,
     configPath: path.join(CONFIGS_DIR, file),
-    resultPath: path.join(RESULTS_DIR, file.replace('.json', '-data.json'))
+    resultPath: path.join(this.outputDir, file.replace('.json', '-data.json'))
    }));
 
   this.log(`📁 Found ${this.configFiles.length} config files:\n`);
@@ -168,7 +171,7 @@ class BatchExtractor {
   console.log(`Duration:            ${durationSeconds}s`);
   console.log(`Started:             ${this.results.startedAt}`);
   console.log(`Finished:            ${this.results.finishedAt}`);
-  console.log(`Results directory:   ${RESULTS_DIR}`);
+  console.log(`Results directory:   ${this.outputDir}`);
 
   if (failedConfigs > 0) {
    console.log(`\n❌ Failed configs:`);
@@ -216,8 +219,10 @@ class BatchExtractor {
     }
    }
 
-   // Keep the save and live extraction results from the same game state.
-   await this.fetchCloudSave();
+   // Refreshing the fixture can overwrite the latest save, so only do it by explicit request.
+   if (!this.skipSaveRefresh) {
+    await this.fetchCloudSave();
+   }
    this.findConfigFiles();
    await this.extractAll();
 
@@ -238,8 +243,18 @@ class BatchExtractor {
 
 // CLI usage
 if (require.main === module) {
- const verbose = process.argv.slice(2).includes('--verbose');
- const batchExtractor = new BatchExtractor({ verbose });
+ const args = process.argv.slice(2);
+ const outputDirIndex = args.indexOf('--output-dir');
+ const outputDir = outputDirIndex === -1 ? RESULTS_DIR : args[outputDirIndex + 1];
+ if (!outputDir || outputDir.startsWith('--')) {
+  console.error('Usage: node extract-all-game-data.js [--verbose] [--refresh-save] [--output-dir <directory>]');
+  process.exit(1);
+ }
+ const batchExtractor = new BatchExtractor({
+  verbose: args.includes('--verbose'),
+  skipSaveRefresh: !args.includes('--refresh-save'),
+  outputDir
+ });
  batchExtractor.run();
 }
 
