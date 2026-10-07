@@ -68,6 +68,7 @@ export class RoyalArmoryUpgrade {
     readonly displayIndex: number | undefined;
     private readonly displayCostGrowth: number;
     private readonly displayCostWeight: number;
+    private purchaseResourceType: number | undefined;
     private jellyObstruction11DiscountWeight: number = 0;
     private jellyObstruction26DiscountWeight: number = 0;
     private masterClassCostMultiplier: number = 1;
@@ -86,6 +87,10 @@ export class RoyalArmoryUpgrade {
     static fromBase(data: RoyalArmoryUpgradeBase[]): RoyalArmoryUpgrade[] {
         const upgrades = data.map((upgrade) => new RoyalArmoryUpgrade(upgrade.index, upgrade.data));
         for (const upgrade of upgrades) {
+            // Purchases use the display row's currency, not the mapped upgrade's own catalog metadata.
+            if (upgrade.displayIndex !== undefined) {
+                upgrade.purchaseResourceType = Math.round(upgrades[upgrade.displayIndex].data.resourceType);
+            }
             // The game interprets the display index as a catalog ID for its inverse Jelly lookup.
             // Canonical repository/save order keeps each catalog ID at that array index.
             const jellyPosition = upgrade.displayIndex === undefined ? -1 : upgrades[upgrade.displayIndex]?.displayIndex ?? -1;
@@ -101,6 +106,22 @@ export class RoyalArmoryUpgrade {
 
     isUnlocked(): boolean {
         return this.unlocked;
+    }
+
+    getMaxLevel(): number {
+        return this.data.maxLevel;
+    }
+
+    isMaxLevel(): boolean {
+        return this.level >= this.getMaxLevel();
+    }
+
+    getPurchaseResourceType(): number | undefined {
+        return this.purchaseResourceType;
+    }
+
+    getImageData(): ImageData {
+        return { location: `RAupg${this.index}`, width: 48, height: 48 };
     }
 
     resetUnlock(): void {
@@ -255,6 +276,14 @@ export class RoyalArmoryGlorificationBonus extends RoyalArmoryOrbletMarketBonus 
     }
 }
 
+export class RoyalResource {
+    constructor(public readonly resourceType: number, public quantity: number) {}
+
+    getImageData(): ImageData {
+        return { location: `RGres${this.resourceType}`, width: 28, height: 28 };
+    }
+}
+
 export class RoyalArmory extends Domain {
     upgrades: RoyalArmoryUpgrade[] = [];
     orbletMarketBonuses: RoyalArmoryOrbletMarketBonus[] = [];
@@ -267,7 +296,7 @@ export class RoyalArmory extends Domain {
     royalStatueLevels: number[] = [];
     outposts: number[][] = [];
     resourceGrades: number[] = [];
-    private royalGLogValues: unknown[] = [];
+    resources: Map<number, RoyalResource> = new Map();
     private totalStats: [number, number, number, number, number] = [0, 0, 0, 0, 0];
     private mapPurificationStates: boolean[] = [];
     // Totals are calculated once after parsing so downstream callers only read settled account-wide results.
@@ -289,6 +318,8 @@ export class RoyalArmory extends Domain {
     init(_allItems: Item[], _charCount: number) {
         this.totalUpgradeLevels = 0;
         this.unlockedUpgradeCount = 0;
+        // Reinitializing an account must not expose the previous save's purchase balances.
+        this.resources = new Map();
         this.upgrades = RoyalArmoryUpgrade.fromBase(initRoyalArmoryUpgradeRepo());
         this.orbletMarketBonuses = RoyalArmoryOrbletMarketBonus.fromBase(initOrbletMarketBonusRepo());
         return this;
@@ -303,7 +334,14 @@ export class RoyalArmory extends Domain {
         royalArmory.royalStatueLevels = royalG?.[0] ?? [];
         royalArmory.outposts = royalMaps ?? [];
         royalArmory.resourceGrades = royalG?.[5] ?? [];
-        royalArmory.royalGLogValues = royalG?.[1] ?? [];
+        const resourceQuantities = royalG?.[1] ?? [];
+        royalArmory.resources = new Map();
+        resourceQuantities.forEach((quantity, resourceType) => {
+            royalArmory.resources.set(
+                resourceType,
+                new RoyalResource(resourceType, royalArmoryAsNumber(quantity)),
+            );
+        });
         royalArmory.totalStats = [0, 0, 0, 0, 0];
         royalArmory.outpostResourceRateRowsByMap = [];
         royalArmory.outpostResourceRateEarlyInputs = undefined;
@@ -369,6 +407,18 @@ export class RoyalArmory extends Domain {
 
     getUpgradeByIndex(catalogIndex: number): RoyalArmoryUpgrade | undefined {
         return this.upgrades.find((upgrade) => upgrade.index === catalogIndex);
+    }
+
+    getResource(type: number): RoyalResource | undefined {
+        return this.resources.get(type);
+    }
+
+    canPurchaseUpgrade(upgrade: RoyalArmoryUpgrade): boolean {
+        const resourceType = upgrade.getPurchaseResourceType();
+        return resourceType !== undefined &&
+            upgrade.isUnlocked() &&
+            !upgrade.isMaxLevel() &&
+            (this.getResource(resourceType)?.quantity ?? 0) >= upgrade.getCost();
     }
 
     getUpgradeBonus(index: number): number {
@@ -486,7 +536,7 @@ export class RoyalArmory extends Domain {
 
         // Each of eight saved resource totals contributes its own logarithm, including fractional progress.
         for (let index = 0; index < 8; index += 1) {
-            totalStats[3] += lavaLog(royalArmoryAsNumber(this.royalGLogValues[10 * index]));
+            totalStats[3] += lavaLog(this.getResource(10 * index)?.quantity ?? 0);
         }
 
         this.totalStats = totalStats;
