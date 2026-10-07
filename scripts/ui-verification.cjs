@@ -80,7 +80,7 @@ function compose(args, env) {
 function selectedSave() {
   const selected = process.env.LOCAL_SAVE_FILE;
   if (selected && path.isAbsolute(selected)) fail('LOCAL_SAVE_FILE must be a repository-relative JSON path under tests/fixtures/saves or profiles.');
-  const absolute = selectLocalSave({ projectRoot: repoRoot, nodeEnv: 'development', appStage: 'local', localSaveFile: selected });
+  const absolute = selectLocalSave({ projectRoot: repoRoot, nodeEnv: 'development', fixtureMode: '1', localSaveFile: selected });
   return path.relative(fs.realpathSync(repoRoot), absolute).split(path.sep).join('/');
 }
 

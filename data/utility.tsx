@@ -296,7 +296,7 @@ export const getSubDomain = () => {
         return "";
     }
 
-    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_APP_STAGE === "local") {
+    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_UI_FIXTURE_MODE === "1") {
         return "local";
     }
 

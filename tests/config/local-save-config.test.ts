@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-const { selectLocalSave } = require('../../scripts/local-save-config.cjs');
+const { getProfileModuleAliases, selectLocalSave } = require('../../scripts/local-save-config.cjs');
 
 let projectRoot: string;
 
@@ -16,7 +16,7 @@ const writeFixture = (relativePath: string, value: unknown) => {
 const select = (localSaveFile?: string) => selectLocalSave({
   projectRoot,
   nodeEnv: 'development',
-  appStage: 'local',
+  fixtureMode: '1',
   localSaveFile,
 });
 
@@ -30,8 +30,8 @@ afterEach(() => {
   fs.rmSync(projectRoot, { recursive: true, force: true });
 });
 
-describe('development local save selection', () => {
-  it('selects the latest fixture by default', () => {
+describe('opt-in development fixture selection', () => {
+  it('selects the latest fixture by default when fixture mode is enabled', () => {
     const defaultPath = 'tests/fixtures/saves/latest.json';
     writeFixture(defaultPath, { playerNames: ['Latest Fixture'] });
     writeFixture('tests/fixtures/saves/other.json', { playerNames: ['Other Fixture'] });
@@ -54,20 +54,66 @@ describe('development local save selection', () => {
     expect(select(file)).toBe(fs.realpathSync(file));
   });
 
-  it.each([
-    ['production build', 'production', 'local'],
-    ['test runtime', 'test', 'local'],
-    ['nonlocal development stage', 'development', 'preview'],
-  ])('ignores a private selector during %s without reading it', (_label, nodeEnv, appStage) => {
-    const selected = selectLocalSave({
+  it.each([undefined, 'local', 'preview'])(
+    'uses the live profile source without fixture opt-in, regardless of stage %s',
+    (appStage) => {
+      const aliases = getProfileModuleAliases({
+        projectRoot,
+        nodeEnv: 'development',
+        appStage,
+        getLocalSaveFile: () => { throw new Error('must not read LOCAL_SAVE_FILE'); },
+      });
+
+      expect(aliases).toEqual({
+        '@profile-source': path.join(projectRoot, 'data/fetchers/getProfile.tsx'),
+      });
+    },
+  );
+
+  it.each(['', '0', 'true', 'local', '01', ' 1', '1 '])(
+    'does not enable fixture mode for flag %j',
+    (fixtureMode) => {
+      const selected = selectLocalSave({
+        projectRoot,
+        nodeEnv: 'development',
+        fixtureMode,
+        getLocalSaveFile: () => { throw new Error('must not read LOCAL_SAVE_FILE'); },
+      });
+
+      expect(selected).toBeUndefined();
+    },
+  );
+
+  it('selects the fixture profile source and selected save without a local stage', () => {
+    const selected = writeFixture('profiles/selected.json', { playerNames: ['Selected Fixture'] });
+    const aliases = getProfileModuleAliases({
       projectRoot,
-      nodeEnv,
-      appStage,
-      getLocalSaveFile: () => { throw new Error('must not read LOCAL_SAVE_FILE'); },
+      nodeEnv: 'development',
+      fixtureMode: '1',
+      localSaveFile: 'profiles/selected.json',
     });
 
-    expect(selected).toBeUndefined();
+    expect(aliases).toEqual({
+      '@profile-source': path.join(projectRoot, 'data/fetchers/getProfile.local.tsx'),
+      '@local-save': fs.realpathSync(selected),
+    });
   });
+
+  it.each(['production', 'test'])(
+    'ignores fixture opt-in and the private selector during %s without reading it',
+    (nodeEnv) => {
+      const aliases = getProfileModuleAliases({
+        projectRoot,
+        nodeEnv,
+        fixtureMode: '1',
+        getLocalSaveFile: () => { throw new Error('must not read LOCAL_SAVE_FILE'); },
+      });
+
+      expect(aliases).toEqual({
+        '@profile-source': path.join(projectRoot, 'data/fetchers/getProfile.tsx'),
+      });
+    },
+  );
 
   it('rejects missing files', () => {
     expect(() => select('tests/fixtures/saves/missing.json')).toThrow(/file does not exist/);

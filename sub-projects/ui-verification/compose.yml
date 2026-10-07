@@ -12,6 +12,7 @@ services:
     environment:
       NODE_ENV: development
       NEXT_PUBLIC_APP_STAGE: local
+      NEXT_PUBLIC_UI_FIXTURE_MODE: '1'
       NODE_OPTIONS: --max-old-space-size=3072
       LOCAL_SAVE_FILE: ${UI_LOCAL_SAVE_FILE:-tests/fixtures/saves/latest.json}
     volumes:

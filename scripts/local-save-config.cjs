@@ -4,8 +4,8 @@ const path = require('node:path');
 const DEFAULT_LOCAL_SAVE_FILE = 'tests/fixtures/saves/latest.json';
 const ALLOWED_SAVE_ROOTS = ['tests/fixtures/saves', 'profiles'];
 
-function selectLocalSave({ projectRoot, nodeEnv, appStage, localSaveFile, getLocalSaveFile }) {
-  if (nodeEnv !== 'development' || appStage !== 'local') {
+function selectLocalSave({ projectRoot, nodeEnv, fixtureMode, localSaveFile, getLocalSaveFile }) {
+  if (nodeEnv !== 'development' || fixtureMode !== '1') {
     return undefined;
   }
 

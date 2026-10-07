@@ -39,9 +39,14 @@ Absolute paths, missing/non-files, invalid JSON, and paths or symlinks escaping 
 roots fail startup. Rerun `yarn ui:up` after changing the selection; no source save is
 rewritten or replaced.
 
-The app runs with `NODE_ENV=development` and `NEXT_PUBLIC_APP_STAGE=local`. Local-save
-selection is active only in that combination; production/non-local module resolution uses
-the normal profile fetcher instead. `LOCAL_SAVE_FILE` is startup configuration, not a
+The Docker app explicitly opts into fixtures with `NODE_ENV=development` and
+`NEXT_PUBLIC_UI_FIXTURE_MODE=1`. Both are required for local-save selection and the synthetic
+local profile route; production ignores the fixture flag. `NEXT_PUBLIC_APP_STAGE=local`
+remains an environment label, not a data-source switch. Normal host `yarn dev` uses live
+authenticated cloudsave data even with that stage label unless fixture mode is explicitly
+enabled.
+
+`LOCAL_SAVE_FILE` is effective only in fixture mode and is startup configuration, not a
 `NEXT_PUBLIC_*` setting. The selected save enters the local browser's client data path, so
 screenshots and reports can contain account information: keep sessions and run output
 private, inspect/redact before sharing, and never commit or upload private artifacts.

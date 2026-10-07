@@ -12,7 +12,7 @@ const { getProfileModuleAliases } = require('./scripts/local-save-config.cjs');
 const profileAliases = getProfileModuleAliases({
   projectRoot: __dirname,
   nodeEnv: process.env.NODE_ENV,
-  appStage: process.env.NEXT_PUBLIC_APP_STAGE,
+  fixtureMode: process.env.NEXT_PUBLIC_UI_FIXTURE_MODE,
   getLocalSaveFile: () => process.env.LOCAL_SAVE_FILE,
 });
 const turbopackProfileAliases = Object.fromEntries(

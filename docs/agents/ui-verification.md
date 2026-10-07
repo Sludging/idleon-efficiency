@@ -14,8 +14,12 @@ scenarios can use full Playwright APIs and visit any application or temporary pr
 
    Optional: `LOCAL_SAVE_FILE=profiles/sludger.json yarn ui:up` selects an existing
    repository-relative JSON save under `profiles/` or `tests/fixtures/saves/`; the default is
-   `tests/fixtures/saves/latest.json`. Rerun `ui:up` after changing the selection and preserve
-   the original save.
+   `tests/fixtures/saves/latest.json`. Docker explicitly enables development-only fixture
+   mode; `LOCAL_SAVE_FILE` applies only in that mode. Normal host `yarn dev` uses live data
+   even with `NEXT_PUBLIC_APP_STAGE=local`. See the
+   [fixture-mode configuration](../../sub-projects/ui-verification/README.md#local-save-selection-and-privacy)
+   for the opt-in conditions. Rerun `ui:up` after changing the selection and preserve the
+   original save.
 
 2. **Write a focused scenario.** Place a temporary `.cjs` file inside the repository, for
    example `.ui-verification/preview.cjs`. Export one async function with `module.exports`.
