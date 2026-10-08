@@ -68,6 +68,25 @@ container, spacing, image/title inset, and grid behavior, then keep those detail
   This does not prescribe subsection, document, authentication, or intentionally different
   hierarchies. See [Legend Talents](../../app/world-7/legendTalents/content.tsx) and
   established account/world pages.
+- Use [ContentTabs](../../components/base/ContentTabs.tsx) for in-content selectors in the
+  `TabButton` family:
+  ```tsx
+  <Box gap="small">
+    <ContentTabs
+      options={[{ value: 'Upgrades', label: 'Upgrades' }, { value: 'Orblets', label: 'Orblets' }]}
+      value={tab}
+      onChange={setTab}
+    />
+    {content}
+  </Box>
+  ```
+  The controlled `options`/`value`/`onChange` bar owns its centered row alignment and
+  `small` internal gap, with no external margin or layout props. Parents own placement:
+  use a parent gap for the bar and content, or wrap only the bar in an outer `Box` with
+  margin for asymmetric spacing. Preserve existing sibling spacing rather than adding a
+  gap to a broader parent. `TabButton` owns the active underline; the bar has no border.
+  Keep existing Grommet `Tabs` and `CustomTabs` surfaces as their distinct variants;
+  this bar does not replace them.
 - Ordinary feature pages inherit outer width, centering, and horizontal padding from the
   shared app layout. Do not add another page-content max-width, centering, or horizontal
   padding; add padding within sections and rows when their chosen composition calls for it.

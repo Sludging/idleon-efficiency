@@ -7,7 +7,7 @@ import {
     Text,
 } from 'grommet'
 import { useState } from 'react';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import { Hole as HoleDomain } from '../../../data/domain/world-5/hole/hole';
@@ -432,11 +432,12 @@ function Hole() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>The Hole</Heading>
             <Text size="xsmall">* This UI is purely for value testing purposes. THE UI ISN&apos;T FINAL!</Text>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                {["Overview", "Studies", "Schematics", "Measurements", "Monuments", "Bell", "Well", "Majiks", "Harp"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={["Overview", "Studies", "Schematics", "Measurements", "Monuments", "Bell", "Well", "Majiks", "Harp"].map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             {activeTab == "Overview" && <OverviewDisplay />}
             {activeTab == "Studies" && <StudiesDisplay />}

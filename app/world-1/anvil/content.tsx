@@ -14,7 +14,7 @@ import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { StaticTime } from '../../../components/base/TimeDisplay';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { getCoinsArray, nFormatter } from '../../../data/utility';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { CircleInformation } from 'grommet-icons';
@@ -260,12 +260,14 @@ function Anvil() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Anvil</Heading>
             <Box gap="small">
-                <Box align="center" direction="row" justify="center" gap="small">
-                    {["Production", "Points"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
-                </Box>
+                <ContentTabs
+                    options={[
+                        { value: "Production", label: "Production" },
+                        { value: "Points", label: "Points" },
+                    ]}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 {activeTab == "Production" && <AnvilProductionDisplay />}
                 {activeTab == "Points" && <PointsDisplay />}
             </Box>

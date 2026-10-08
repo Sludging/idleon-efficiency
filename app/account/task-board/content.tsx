@@ -9,7 +9,7 @@ import {
 } from "grommet"
 
 import { useState } from 'react';
-import TabButton from "../../../components/base/TabButton";
+import ContentTabs from "../../../components/base/ContentTabs";
 import Tasks from "../../../components/account/task-board/tasks";
 import Achivements from "../../../components/account/task-board/achievements";
 import Merits from "../../../components/account/task-board/merits";
@@ -31,10 +31,16 @@ function TaskBoard() {
                                     <Box pad={{ right: 'large', left: 'large' }} width={{ max: '1440px' }} margin={{ left: 'auto', right: 'auto' }} fill>
                                         <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Task Board</Heading>
                                         <Box pad="small">
-                                            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'medium' }}>
-                                                <TabButton isActive={subTab == "Tasks"} text="Tasks" clickHandler={() => { setSubTab("Tasks"); }} />
-                                                <TabButton isActive={subTab == "Merits"} text="Merits" clickHandler={() => { setSubTab("Merits"); }} />
-                                                <TabButton isActive={subTab == "Achievements"} text="Achievements" clickHandler={() => { setSubTab("Achievements"); }} />
+                                            <Box margin={{ bottom: 'medium' }}>
+                                                <ContentTabs
+                                                    options={[
+                                                        { value: "Tasks", label: "Tasks" },
+                                                        { value: "Merits", label: "Merits" },
+                                                        { value: "Achievements", label: "Achievements" },
+                                                    ]}
+                                                    value={subTab}
+                                                    onChange={setSubTab}
+                                                />
                                             </Box>
                                             { subTab == "Tasks" && <Tasks worldIndex={worldIndex} />}
                                             { subTab == "Achievements" && <Achivements worldIndex={worldIndex} />}

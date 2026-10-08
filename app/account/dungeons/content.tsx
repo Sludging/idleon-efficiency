@@ -8,7 +8,7 @@ import {
 } from "grommet"
 
 import { useState } from 'react';
-import TabButton from "../../../components/base/TabButton";
+import ContentTabs from "../../../components/base/ContentTabs";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import ShadowBox from "../../../components/base/ShadowBox";
@@ -287,10 +287,16 @@ function DungeonsDisplay() {
                         }
                     </Box>
                 }
-                <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'medium' }}>
-                    <TabButton isActive={subTab == "Items"} text="Items" clickHandler={() => { setSubTab("Items"); }} />
-                    <TabButton isActive={subTab == "Passives"} text="Passives" clickHandler={() => { setSubTab("Passives"); }} />
-                    <TabButton isActive={subTab == "Traits"} text="Traits" clickHandler={() => { setSubTab("Traits"); }} />
+                <Box margin={{ bottom: 'medium' }}>
+                    <ContentTabs
+                        options={[
+                            { value: "Items", label: "Items" },
+                            { value: "Passives", label: "Passives" },
+                            { value: "Traits", label: "Traits" },
+                        ]}
+                        value={subTab}
+                        onChange={setSubTab}
+                    />
                 </Box>
                 {subTab == "Items" && <DungeonItems />}
                 {subTab == "Passives" && <DungeonPassives />}

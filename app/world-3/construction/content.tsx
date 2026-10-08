@@ -17,7 +17,7 @@ import {
 import React, { useEffect, useContext, useState, useMemo } from 'react';
 
 import ShadowBox from '../../../components/base/ShadowBox';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { Refinery } from '../../../data/domain/world-3/construction/refinery';
 import { Item } from '../../../data/domain/items';
 import { Storage } from '../../../data/domain/storage';
@@ -711,12 +711,19 @@ function Construction() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Construction</Heading>
             <Box gap="small">
-                <Box align="center" direction="row" justify="center" gap="small">
-                    {["Refinery", "Salt Lick", "3D Printer", "Death Note", "Shrines", "Buildings", "Atom Collider"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
-                </Box>
+                <ContentTabs
+                    options={[
+                        { value: "Refinery", label: "Refinery" },
+                        { value: "Salt Lick", label: "Salt Lick" },
+                        { value: "3D Printer", label: "3D Printer" },
+                        { value: "Death Note", label: "Death Note" },
+                        { value: "Shrines", label: "Shrines" },
+                        { value: "Buildings", label: "Buildings" },
+                        { value: "Atom Collider", label: "Atom Collider" },
+                    ]}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 {activeTab == "Refinery" && <RefineryDisplay />}
                 {activeTab == "Salt Lick" && <SaltLickDisplay />}
                 {activeTab == "3D Printer" && <PrinterDisplay />}

@@ -3,7 +3,7 @@
 import { Box, Heading } from "grommet";
 import { useState } from "react";
 import { useShallow } from "zustand/react/shallow";
-import TabButton from "../../../components/base/TabButton";
+import ContentTabs from "../../../components/base/ContentTabs";
 import { JellyCells, JellyObstructions, JellyOverview, JellyUpgrades } from "../../../components/world-7/jelly-operator/jellyOperator";
 import { JellyOperator } from "../../../data/domain/world-7/jellyOperator";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
@@ -25,9 +25,11 @@ export default function JellyOperatorContent() {
         <Box gap="medium">
             <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'small' }} style={{ fontWeight: 'normal' }}>Jelly Operator</Heading>
             <JellyOverview jelly={jelly} />
-            <Box align="center" direction="row" justify="center" gap="small">
-                {(['Cells', 'Upgrades', 'Obstructions'] as const).map(tab => <TabButton key={tab} text={tab} isActive={section === tab} clickHandler={() => setSection(tab)} />)}
-            </Box>
+            <ContentTabs
+                options={(['Cells', 'Upgrades', 'Obstructions'] as const).map(tab => ({ value: tab, label: tab }))}
+                value={section}
+                onChange={setSection}
+            />
             {section === 'Cells' && <JellyCells jelly={jelly} />}
             {section === 'Upgrades' && <JellyUpgrades jelly={jelly} />}
             {section === 'Obstructions' && <JellyObstructions jelly={jelly} />}

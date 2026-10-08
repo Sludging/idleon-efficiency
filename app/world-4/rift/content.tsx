@@ -8,7 +8,7 @@ import {
 import { useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { ConstructionMastery, KillroyPrime, Rift, RiftBonus, SkillMastery } from '../../../data/domain/world-4/rift';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
@@ -223,11 +223,16 @@ function RiftDisplay() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Rift</Heading>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                {["Bonuses", "Skill Mastery", "Construct Mastery"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={[
+                        { value: "Bonuses", label: "Bonuses" },
+                        { value: "Skill Mastery", label: "Skill Mastery" },
+                        { value: "Construct Mastery", label: "Construct Mastery" },
+                    ]}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             {activeTab == "Bonuses" && <RiftBonusDisplay />}
             {activeTab == "Skill Mastery" && <SkillMasteryDisplay />}

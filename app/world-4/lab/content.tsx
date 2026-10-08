@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
 import { Chip, Lab as LabDomain } from '../../../data/domain/world-4/lab';
 import { Player } from '../../../data/domain/player';
@@ -234,13 +234,14 @@ function Lab() {
                     }
                 />
             </Box>
-            <Box align="center" direction="row" justify="center" gap="small">
-                {
-                    ["Mainframe", "Console"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                }
-            </Box>
+            <ContentTabs
+                options={[
+                    { value: "Mainframe", label: "Mainframe" },
+                    { value: "Console", label: "Console" },
+                ]}
+                value={activeTab}
+                onChange={setActiveTab}
+            />
             {activeTab == "Mainframe" && <MainframeDisplay />}
             {activeTab == "Console" && <ChipDisplay />}
         </Box>

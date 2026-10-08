@@ -7,7 +7,7 @@ import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { RoyalArmory, RoyalArmoryOrbletMarketBonus, RoyalArmoryUpgrade } from "../../data/domain/world-6/royalArmory";
 import IconImage from "../base/IconImage";
 import ShadowBox from "../base/ShadowBox";
-import TabButton from "../base/TabButton";
+import ContentTabs from "../base/ContentTabs";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
 import TipDisplay from "../base/TipDisplay";
 import { UpgradeTable } from "./shared/UpgradeTable";
@@ -228,9 +228,15 @@ export default function RoyalArmoryDisplay() {
     return (
         <Box>
             <ResourceBar armory={armory} resourceTypes={resourceTypes} />
-            <Box direction="row" justify="center" gap="small" margin={{ bottom: 'medium' }}>
-                <TabButton isActive={tab === 'Upgrades'} text="Upgrades" clickHandler={() => setTab('Upgrades')} />
-                <TabButton isActive={tab === 'Orblets'} text="Orblets" clickHandler={() => setTab('Orblets')} />
+            <Box margin={{ bottom: 'medium' }}>
+                <ContentTabs
+                    options={[
+                        { value: 'Upgrades', label: 'Upgrades' },
+                        { value: 'Orblets', label: 'Orblets' }
+                    ]}
+                    value={tab}
+                    onChange={setTab}
+                />
             </Box>
             {tab === 'Upgrades' ? (
                 <RoyalUpgradeTable

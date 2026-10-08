@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Divinity as DivinityDomain } from '../../../data/domain/world-5/divinity';
 import { Player } from '../../../data/domain/player';
@@ -160,11 +160,12 @@ function Divinity() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                {["Gods", "Alignment"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={["Gods", "Alignment"].map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             {activeTab == "Gods" && <GodDisplay />}
             {activeTab == "Alignment" && <AlignmentDisplay />}

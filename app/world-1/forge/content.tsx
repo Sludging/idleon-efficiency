@@ -13,7 +13,7 @@ import { Forge as ForgeDomain } from '../../../data/domain/world-1/forge';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { getCoinsArray, nFormatter } from '../../../data/utility';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { Item } from '../../../data/domain/items';
 import { TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import IconImage from '../../../components/base/IconImage';
@@ -87,12 +87,14 @@ function Forge() {
                     />
                 </ShadowBox>
             </Box>
-            <Box align="center" direction="row" justify="center" gap="small">
-                {["Slots", "Upgrades"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
-            </Box>
+            <ContentTabs
+                options={[
+                    { value: "Slots", label: "Slots" },
+                    { value: "Upgrades", label: "Upgrades" },
+                ]}
+                value={activeTab}
+                onChange={setActiveTab}
+            />
             <Box pad="small">
                 {
                     activeTab == "Upgrades" &&
