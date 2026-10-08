@@ -70,6 +70,7 @@ const navItems: NavItem[] = [
             { subLink: "/legendTalents", label: "Legend Talents" },
             { subLink: "/coral", label: "Coral Reef" },
             { subLink: "/sushi", label: "Sushi Station" },
+            { subLink: "/jelly-operator", label: "Jelly Operator" },
         ]
     },
     { link: "/players", label: "Players" },

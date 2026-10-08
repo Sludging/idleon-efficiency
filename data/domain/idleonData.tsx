@@ -56,7 +56,7 @@ import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
-import { JellyOperator, updateJellyOperator } from './world-7/jellyOperator';
+import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
 import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpedition';
@@ -347,6 +347,7 @@ const postProcessingMap: Record<string, Function> = {
 
 // I really really hate this.
 const postPostProcessingMap: Record<string, Function> = {
+    "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperatorPresentation(accountData),
     "updateSummoningUpgrades": (doc: Cloudsave, accountData: Map<string, any>) => updateSummoningUpgrades(accountData),
     "updateWorshipTotemsSoulGainBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTotemsBonuses(accountData),
     "updateOrionFeatherRate": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionFeatherRate(accountData),

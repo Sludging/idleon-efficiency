@@ -1155,7 +1155,6 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(royalArmory.getTotalStat(0));
                 break;
             case 121:
-                // Completed Jelly obstructions are account-wide Research[7][9] progress.
                 line.updateAllPlayersCurrentValue(jellyOperator.getSuccessfulOperations());
                 break;
             default:

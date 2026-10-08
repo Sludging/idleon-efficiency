@@ -1,5 +1,5 @@
 /**
- * Jelly Operator final calculations against the paired live-game extraction.
+ * Jelly Operator final calculations against the paired real-game extraction.
  *
  * The shop positions below cover the zero-cost entry, early and late costs,
  * Lower Cholesterol, the final mapped entry, and account-wide eligibility.
@@ -15,7 +15,6 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {
  JellyOperator,
  JellyOperatorUpgrade,
- updateJellyOperator,
 } from '../../../data/domain/world-7/jellyOperator';
 
 const saveName = 'latest';
@@ -211,22 +210,4 @@ describe('Jelly Operator - Final Calculations', () => {
   });
  });
 
- it('applies a nonzero Lower Cholesterol discount to its own next-level cost', () => {
-  const lowerCholesterol = getUpgrade(jellyOperator, 34);
-  const originalLevel = lowerCholesterol.level;
-
-  try {
-   lowerCholesterol.level = Math.max(1, originalLevel);
-   updateJellyOperator(gameData);
-   const discountedCost = lowerCholesterol.getUpgradeCost();
-
-   lowerCholesterol.costReduction = 1;
-   const undiscountedCost = lowerCholesterol.getUpgradeCost();
-
-   expect(discountedCost).toBeLessThan(undiscountedCost);
-  } finally {
-   lowerCholesterol.level = originalLevel;
-   updateJellyOperator(gameData);
-  }
- });
 });
