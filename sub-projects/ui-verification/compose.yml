@@ -8,6 +8,7 @@ services:
       dockerfile: sub-projects/ui-verification/app.Dockerfile
     init: true
     mem_limit: 4g
+    memswap_limit: 12g
     cpus: 2
     environment:
       NODE_ENV: development
@@ -49,6 +50,7 @@ services:
     init: true
     user: ${UI_HOST_USER:-1000:1000}
     mem_limit: 2g
+    memswap_limit: 4g
     cpus: 2
     shm_size: 1g
     environment:
