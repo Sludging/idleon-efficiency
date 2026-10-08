@@ -7,18 +7,17 @@ import TabButton from "../../../components/base/TabButton";
 import { JellyCells, JellyObstructions, JellyOverview, JellyUpgrades } from "../../../components/world-7/jelly-operator/jellyOperator";
 import { JellyOperator } from "../../../data/domain/world-7/jellyOperator";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
-import { DataStatus } from "../../../lib/stores/appDataStore";
 
 type Section = 'Cells' | 'Upgrades' | 'Obstructions';
 
 export default function JellyOperatorContent() {
-    const { theData, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })
+    const { theData } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
     const [section, setSection] = useState<Section>('Cells');
     const jelly = theData.get("jellyOperator") as JellyOperator | undefined;
 
-    if (!jelly || [DataStatus.Init, DataStatus.Loading].includes(dataStatus)) {
+    if (!jelly) {
         return <>Loading...</>
     }
 

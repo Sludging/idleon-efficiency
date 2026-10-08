@@ -1,20 +1,17 @@
 "use client"
 
 import {
-    Box, Button, Text, Spinner
+    Box, Button, Text
 } from 'grommet'
 import { useMemo, useState, useEffect } from 'react';
 import { useAppDataStore } from '../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
-import { DataStatus } from '../../lib/stores/appDataStore';
 
 function RawData() {
     const [copyMessage, setCopyMessage] = useState<string>("");
-    const { theData, lastUpdated, dataStatus } = useAppDataStore(useShallow(
-        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated, dataStatus: state.dataStatus })
+    const { theData, lastUpdated } = useAppDataStore(useShallow(
+        (state) => ({ theData: state.data.getData(), lastUpdated: state.lastUpdated })
     ));
-
-    const isLoading = [DataStatus.Init, DataStatus.Loading].includes(dataStatus);
 
     const rawData = useMemo(() => {
         if (!theData) {
@@ -57,11 +54,6 @@ function RawData() {
 
     return (
         <Box align="center" pad="medium">
-            {isLoading && (
-                <Box direction="row" gap="small" align="center" margin={{ bottom: "medium" }}>
-                    <Spinner size="small" /><Text>Loading data...</Text>
-                </Box>
-            )}
             <Box direction="row" gap="medium" align="center" margin={{ bottom: "medium" }}>
                 <Button 
                     style={{ color: "white" }}
@@ -69,18 +61,16 @@ function RawData() {
                     color={copyMessage !== "" ? "status-ok" : "brand"} 
                     label={copyMessage !== "" ? copyMessage : "Copy Raw JSON"} 
                     onClick={() => copyToClipboard()} 
-                    disabled={isLoading || !rawData}
+                    disabled={!rawData}
                 />
             </Box>
             
-            {!isLoading && (
-                !rawData ? (
-                    <Box direction="row" gap="small" align="center">
-                        <Text>No data available</Text>
-                    </Box>
-                ) : (
-                    <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
-                )
+            {!rawData ? (
+                <Box direction="row" gap="small" align="center">
+                    <Text>No data available</Text>
+                </Box>
+            ) : (
+                <pre style={{ maxWidth: "800px" }}>{JSON.stringify(rawData, null, 2)}</pre>
             )}
         </Box>
     )
