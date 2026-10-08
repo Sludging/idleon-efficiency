@@ -39,7 +39,7 @@ function presentation(upgrade: RoyalArmoryOrbletMarketBonus) {
         level: upgrade.getLevel(),
         maxLevel: upgrade.getMaxLevel(),
         nextBonus: upgrade.getNextBonus(),
-        nextDescription: upgrade.getNextBonusDescription(),
+        nextValue: upgrade.getNextValue(),
     };
 }
 
@@ -136,7 +136,11 @@ describe('Royal Armory Orblet upgrade data', () => {
             const upgrade = upgradeAt(index);
             assertCurrentValues(upgrade, name);
             assertNextBonus(upgrade);
-            upgrade.getNextBonusDescription();
+            const levelBeforePreview = upgrade.getLevel();
+            upgrade.getCurrentValue();
+            upgrade.getNextValue();
+            upgrade.getDescription(true);
+            expect(upgrade.getLevel()).toBe(levelBeforePreview);
             assertCurrentValues(upgrade, `${name} after preview`);
         });
     });
@@ -158,7 +162,7 @@ describe('Royal Armory Orblet upgrade data', () => {
             const expectedNext = getExtractedValue(extractionResults, `orblet_market_next_bonus_${index}`);
             if (expectedNext === -1) {
                 expect(display.nextBonus).toBeUndefined();
-                expect(display.nextDescription).toBeUndefined();
+                expect(display.nextValue).toBeUndefined();
             }
         });
     });
@@ -168,9 +172,58 @@ describe('Royal Armory Orblet upgrade data', () => {
         expect(display.level).toBeUndefined();
         expect(display.maxLevel).toBeUndefined();
         expect(display.nextBonus).toBeUndefined();
-        expect(display.nextDescription).toBeUndefined();
+        expect(display.nextValue).toBeUndefined();
         // The same public list consumer above still presents ordinary levels;
         // raw ID4 numeric compatibility is checked separately, not displayed.
+    });
+
+    it.each([
+        { index: 0, name: 'Emulsion percentage', current: '2%', next: '3%' },
+        { index: 1, name: 'Hydration additive percentage', current: '+110%', next: '+115%' },
+        { index: 2, name: 'Talented additive points', current: '+23', next: '+24' },
+        { index: 5, name: 'Intervene multiplier', current: '1.03x', next: '1.04x' },
+        { index: 8, name: 'Long Range pixels', current: '+0px', next: '+1px' },
+    ])('includes the sign and unit in the current and next $name values', ({ index, current, next }) => {
+        const upgrade = upgradeAt(index);
+        expect(upgrade.getCurrentValue()).toBe(current);
+        expect(upgrade.getNextValue()).toBe(next);
+        const strippedDescription = upgrade.getDescription(true);
+        expect(strippedDescription).not.toContain(current);
+        expect(strippedDescription).not.toMatch(/[{}+%_]|\bpx\b|(?:^|\s)x(?:\s|$)/);
+    });
+
+    it('strips the Emulsion effect without removing the static 1M statue amount', () => {
+        const upgrade = upgradeAt(0);
+        expect(upgrade.getDescription()).toContain('2%');
+        expect(upgrade.getDescription()).toContain('1M');
+        expect(upgrade.getDescription(true)).toContain('1M');
+        expect(upgrade.getDescription(true)).not.toMatch(/[{}%_]/);
+    });
+
+    it.each([
+        { index: 6, subject: 'Rank EXP', effect: 'faster' },
+        { index: 7, subject: 'Masterclass upgrades', effect: 'less than before' },
+        { index: 8, subject: 'Outposts', effect: 'longer connection range' },
+    ])('removes only a mid-sentence effect and normalizes its whitespace for entry $index', ({ index, subject, effect }) => {
+        const description = upgradeAt(index).getDescription(true);
+        expect(description).toContain(subject);
+        expect(description).toContain(effect);
+        expect(description).not.toMatch(/[{}+%_]|\bpx\b|\s{2,}|^\s|\s$/);
+    });
+
+    it('keeps the fixed Glorification chance separate from the cached market-level bonus', () => {
+        const upgrade = upgradeAt(4);
+        const bonusBeforePresentation = upgrade.getBonus();
+        expect(upgrade.getCurrentValue()).toBe('10%');
+        expect(upgrade.getNextValue()).toBeUndefined();
+        expect(upgrade.getDescription()).toContain('10% chance per attempt');
+        const strippedDescription = upgrade.getDescription(true);
+        expect(strippedDescription).toContain('chance per attempt');
+        expect(strippedDescription).not.toContain('10%');
+        expect(strippedDescription).toContain('+10 outpost points');
+        expect(strippedDescription).toContain('2× rank XP');
+        expect(strippedDescription).toContain('+1 Worker');
+        expect(upgrade.getBonus()).toBe(bonusBeforePresentation);
     });
 
     it('keeps current prices, numeric effects, previews and balance correct when processing the same real account again', () => {

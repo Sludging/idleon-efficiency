@@ -166,6 +166,9 @@ export class RoyalArmoryUpgrade {
     }
 }
 
+// Each ordinary market template contains one effect marker with an optional sign and unit.
+const royalArmoryOrbletEffectPlaceholder = /[+-]?[{}](?:%|px|x)?/;
+
 export class RoyalArmoryOrbletMarketBonus {
     level: number = 0;
     private bonus: number = 0;
@@ -209,13 +212,31 @@ export class RoyalArmoryOrbletMarketBonus {
         return cost < 1_000_000 ? Math.floor(cost) : cost;
     }
 
-    getDescription(): string {
+    getDescription(stripValue = false): string {
+        if (stripValue) {
+            return this.data.description.replace(royalArmoryOrbletEffectPlaceholder, "")
+                .replace(/_/g, " ").replace(/\s+/g, " ").trim();
+        }
         return this.describeBonus(this.getBonus());
     }
 
-    private describeBonus(bonus: number): string {
+    getCurrentValue(): string {
+        return this.formatValue(this.getBonus());
+    }
+
+    getNextValue(): string | undefined {
+        const bonus = this.getNextBonus();
+        return bonus === undefined ? undefined : this.formatValue(bonus);
+    }
+
+    private formatValue(bonus: number): string {
+        const placeholder = this.data.description.match(royalArmoryOrbletEffectPlaceholder)![0];
+        return this.describeBonus(bonus, placeholder);
+    }
+
+    private describeBonus(bonus: number, template = this.data.description): string {
         // Intervene displays a multiplier; the other market effects display the raw bonus.
-        return this.data.description.replace(/_/g, " ")
+        return template.replace(/_/g, " ")
             .replace(/{/g, bonus.toString())
             .replace(/}/g, (1 + bonus / 100).toString());
     }
@@ -224,11 +245,6 @@ export class RoyalArmoryOrbletMarketBonus {
         const level = Number(this.level);
         // Preview a further level without changing the current cache or saved progression.
         return level >= Number(this.data.maxLevel) ? undefined : this.getBonusAtLevel(level + 1);
-    }
-
-    getNextBonusDescription(): string | undefined {
-        const bonus = this.getNextBonus();
-        return bonus === undefined ? undefined : this.describeBonus(bonus);
     }
 
     getLevel(): number | undefined {
@@ -254,16 +270,17 @@ export class RoyalArmoryOrbletMarketBonus {
 }
 
 export class RoyalArmoryGlorificationBonus extends RoyalArmoryOrbletMarketBonus {
-    override getDescription(): string {
+    override getCurrentValue(): string {
+        return "10%";
+    }
+
+    override getDescription(stripValue = false): string {
         // The saved market level affects price and unlocks, not the fixed chance or success effects.
-        return "10% chance per attempt to glorify an outpost. On success: +10 outpost points, 2× rank XP, +1 Worker.";
+        const effect = "chance per attempt to glorify an outpost. On success: +10 outpost points, 2× rank XP, +1 Worker.";
+        return stripValue ? effect : `${this.getCurrentValue()} ${effect}`;
     }
 
     override getNextBonus(): number | undefined {
-        return undefined;
-    }
-
-    override getNextBonusDescription(): string | undefined {
         return undefined;
     }
 
@@ -315,12 +332,22 @@ export class RoyalArmory extends Domain {
         ];
     }
 
+    private resetResources(): void {
+        this.resources = new Map();
+        for (const upgrade of this.upgrades) {
+            const resourceType = upgrade.getPurchaseResourceType();
+            if (resourceType !== undefined && !this.resources.has(resourceType)) {
+                this.resources.set(resourceType, new RoyalResource(resourceType, 0));
+            }
+        }
+    }
+
     init(_allItems: Item[], _charCount: number) {
         this.totalUpgradeLevels = 0;
         this.unlockedUpgradeCount = 0;
-        // Reinitializing an account must not expose the previous save's purchase balances.
-        this.resources = new Map();
         this.upgrades = RoyalArmoryUpgrade.fromBase(initRoyalArmoryUpgradeRepo());
+        // Reinitializing an account must not expose the previous save's purchase balances.
+        this.resetResources();
         this.orbletMarketBonuses = RoyalArmoryOrbletMarketBonus.fromBase(initOrbletMarketBonusRepo());
         return this;
     }
@@ -335,12 +362,17 @@ export class RoyalArmory extends Domain {
         royalArmory.outposts = royalMaps ?? [];
         royalArmory.resourceGrades = royalG?.[5] ?? [];
         const resourceQuantities = royalG?.[1] ?? [];
-        royalArmory.resources = new Map();
+        royalArmory.resetResources();
         resourceQuantities.forEach((quantity, resourceType) => {
-            royalArmory.resources.set(
-                resourceType,
-                new RoyalResource(resourceType, royalArmoryAsNumber(quantity)),
-            );
+            const resource = royalArmory.resources.get(resourceType);
+            if (resource) {
+                resource.quantity = royalArmoryAsNumber(quantity);
+            } else {
+                royalArmory.resources.set(
+                    resourceType,
+                    new RoyalResource(resourceType, royalArmoryAsNumber(quantity)),
+                );
+            }
         });
         royalArmory.totalStats = [0, 0, 0, 0, 0];
         royalArmory.outpostResourceRateRowsByMap = [];

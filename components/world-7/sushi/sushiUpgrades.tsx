@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Box, DataTable, Text } from "grommet";
+import { Box, Text } from "grommet";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
-import { UpgradeTableFilters, FilterOptions } from "../../account/shared/UpgradeTableFilters";
+import { UpgradeTable } from "../../account/shared/UpgradeTable";
+import type { FilterOptions } from "../../account/shared/UpgradeTableFilters";
 import { SushiUpgrade } from "../../../data/domain/world-7/sushiUpgrade";
 import { notateNumber } from "../../../data/utility";
 import { sushiBucksImage } from "./sushiImages";
@@ -143,24 +143,15 @@ export const SushiUpgrades = ({ upgrades, bucks }: { upgrades: SushiUpgrade[]; b
     ];
 
     return (
-        <ShadowBox background="dark-1" pad="medium">
-            <UpgradeTableFilters
-                filters={filters}
-                onFiltersChange={setFilters}
-                sortOptions={sortOptions}
-                searchPlaceholder="Search upgrade or effect..."
-            />
-            <Box style={{ overflowX: "auto" }}>
-                <Box style={{ minWidth: "1100px" }}>
-                    <DataTable
-                        fill
-                        columns={columns}
-                        data={displayedRows}
-                        primaryKey="id"
-                        background={{ body: ["dark-1", "grey-4"] }}
-                    />
-                </Box>
-            </Box>
-        </ShadowBox>
+        <UpgradeTable
+            tableName="Sushi upgrades"
+            filters={filters}
+            onFiltersChange={setFilters}
+            sortOptions={sortOptions}
+            searchPlaceholder="Search upgrade or effect..."
+            columns={columns}
+            data={displayedRows}
+            primaryKey="id"
+        />
     );
 };
