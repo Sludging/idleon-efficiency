@@ -41,6 +41,13 @@ Use the canonical labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready
 
 Domain documentation is optional: read root `CONTEXT.md` and relevant `docs/adr/` records when present. See `docs/agents/domain.md` for discovery guidance.
 
+## Do not
+
+- Do not use or add images in `public`. Use CDN images only.
+- Do not treat mockup approval as production-code approval.
+- Do not copy static values from game code. If required values are missing, stop and follow the static value extraction process.
+- Do not update `CODEBASE_OVERVIEW.md`, `changelog.ts`, or common repository documentation during single-feature work.
+
 ## Critical Architecture Constraints
 
 ### DO NOT MODIFY — Auto-Generated Directories

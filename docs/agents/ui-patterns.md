@@ -46,10 +46,16 @@ Choose rows, cards, tables, or icon grids according to what players need to read
 field count, collection size, filtering, or artwork alone does not decide. Match an existing
 feature family's pattern where applicable.
 
-- **Rows:** [Atom Collider](../../components/world-3/construction/atomCollider.tsx) is an
-  approved row reference: dark-1 surface, medium padding, small field gaps, and related
-  values grouped with `TextAndLabel`. Its field sizes and percentage tracks fit that feature;
-  do not copy its exact columns or tracks as a universal schema.
+- **Rows:** [Atom Collider](../../components/world-3/construction/atomCollider.tsx) uses a
+  dark-1 surface, medium padding, small field gaps, and `TextAndLabel` values.
+  [Breeding upgrades](../../components/world-4/breeding/upgrades.tsx) uses small padding,
+  medium bottom margins, and compact labeled values. For new upgrade rows, put unlabeled
+  artwork beside `Name` and label the data fields. Use compact text: `xsmall` labels/effects
+  and `small` or `xsmall` names/levels. Choose columns for the feature; the examples' columns
+  and percentage tracks are not a universal schema. For new Jelly-style rows, use
+  [ResourceDisplay](../../components/account/shared/ResourceDisplay.tsx) with
+  `canAfford={available && affordable}`: green when true, neutral otherwise.
+  Existing feature families keep their color treatment.
 - **Cards:** [Sneaking upgrades](../../components/world-6/sneaking/sneakingUpgrades.tsx)
   keeps identity and details together on a dark-1 surface with medium padding and small
   gaps. Its image beside the name and level is a useful composition reference, not a
@@ -131,11 +137,18 @@ container, spacing, image/title inset, and grid behavior, then keep those detail
   already delegates to a suitable shared client component. For grouped Zustand selections,
   use `useShallow` and select only displayed values. A view reading the mutable domain `Map`
   retains its `lastUpdated` refresh dependency. This is separate from the save timestamp used
-  for elapsed-time displays; preserve established account loading behavior.
+  for elapsed-time displays.
+- Shared account loading runs in [appDataStore](../../lib/stores/appDataStore.tsx), initialized
+  through [AppDataStoreProvider / useAppDataStore](../../lib/providers/appDataStoreProvider.tsx).
+  The provider wraps routes in [the root layout](../../app/layout.tsx).
+  The header's [DataStatusDisplay](../../components/header/dataStatus.tsx) shows account
+  loading and status. Normal content reads feature data and guards missing domain data
+  locally, as in [Breeding](../../app/world-4/breeding/content.tsx).
 - Filtering and sorting are view work. Keep game formulas in the backend. For a changed
   calculation, use the existing
   [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md); previews
   are not evidence.
+- When UI work needs missing static game data, read [External data source requirements](../NEW_FEATURE_IMPLEMENTATION_GUIDE.md#2-external-data-source-requirements).
 
 ## Desktop verification and review
 
@@ -147,8 +160,10 @@ Check only what the change touches:
 
 - A real local save is loaded and the page has expected data. Confirm shown values and units
   are presented coherently; do not infer or invent game calculations.
-- Relevant artwork loads and sits consistently with titles; long labels/effects wrap without
-  clipping, and repeated fields, cards, and columns align as intended.
+- Compare the changed UI with the selected code reference and approved visual direction.
+  Check code and screenshots. Report differences in tab alignment, borders, spacing,
+  upgrade fields, artwork placement, and cost states.
+  Report the reference used and any unresolved differences.
 - Exercise changed tabs, filters, sorting, tooltips, navigation, loading and empty states as
   applicable. Observe runtime errors on those paths.
 - Preserve real saves. Keep screenshots, traces, logs, and other run output under the
