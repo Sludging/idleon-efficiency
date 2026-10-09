@@ -68,25 +68,27 @@ container, spacing, image/title inset, and grid behavior, then keep those detail
   This does not prescribe subsection, document, authentication, or intentionally different
   hierarchies. See [Legend Talents](../../app/world-7/legendTalents/content.tsx) and
   established account/world pages.
-- Use [ContentTabs](../../components/base/ContentTabs.tsx) for in-content selectors in the
-  `TabButton` family:
+- Use [ContentTabs](../../components/base/ContentTabs.tsx) for ordinary-button in-content
+  selectors:
   ```tsx
   <Box gap="small">
     <ContentTabs
-      options={[{ value: 'Upgrades', label: 'Upgrades' }, { value: 'Orblets', label: 'Orblets' }]}
+      options={[{ value: 'Overview', label: 'Overview' }, { value: 'Details', label: 'Details' }]}
       value={tab}
       onChange={setTab}
     />
     {content}
   </Box>
   ```
-  The controlled `options`/`value`/`onChange` bar owns its centered row alignment and
-  `small` internal gap, with no external margin or layout props. Parents own placement:
-  use a parent gap for the bar and content, or wrap only the bar in an outer `Box` with
-  margin for asymmetric spacing. Preserve existing sibling spacing rather than adding a
-  gap to a broader parent. `TabButton` owns the active underline; the bar has no border.
-  Keep existing Grommet `Tabs` and `CustomTabs` surfaces as their distinct variants;
-  this bar does not replace them.
+  `ContentTabs` owns its internal row composition. The caller owns selected state,
+  conditional content rendering (`content` above), and external spacing: use a parent
+  `Box` gap or an outer `Box` margin for asymmetric spacing.
+- For page-level entity selection, use Grommet `Tabs` with the shared `customTabsTheme`
+  and `CustomTabTitle` from [CustomTabs](../../components/base/CustomTabs.tsx). Grommet
+  owns tab/panel semantics and selected-panel rendering; the caller owns entity state
+  and page composition.
+- For sidebar selection, use [LeftNavButton](../../components/base/LeftNavButton.tsx).
+  The caller owns selected state, content rendering, layout, and spacing.
 - Ordinary feature pages inherit outer width, centering, and horizontal padding from the
   shared app layout. Do not add another page-content max-width, centering, or horizontal
   padding; add padding within sections and rows when their chosen composition calls for it.

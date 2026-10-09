@@ -10,12 +10,11 @@ import {
     Tip,
     Heading,
     ThemeContext,
-    Button,
     ResponsiveContext,
     Meter,
     CheckBox
 } from 'grommet'
-import { useState, useContext, useMemo, MouseEventHandler } from 'react';
+import { useState, useContext, useMemo } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
@@ -28,10 +27,11 @@ import { PlayerStatues } from '../../data/domain/world-1/statues';
 
 import { getCoinsArray, nFormatter } from '../../data/utility';
 import CoinsDisplay from '../../components/coinsDisplay';
-import { css } from 'styled-components'
 import ShadowBox from '../../components/base/ShadowBox';
+import LeftNavButton from '../../components/base/LeftNavButton';
+import { customTabsTheme, CustomTabTitle } from '../../components/base/CustomTabs';
 import TipDisplay, { TipDirection } from '../../components/base/TipDisplay';
-import { Alert, CircleInformation, Next } from 'grommet-icons';
+import { Alert, CircleInformation } from 'grommet-icons';
 import { Item, ItemStat, Food, DropSource } from '../../data/domain/items';
 import { Storage } from '../../data/domain/storage';
 import { Prayer } from '../../data/domain/world-3/prayers';
@@ -1242,18 +1242,6 @@ interface PlayerTabProps {
     player: Player
 }
 
-function SpecialButton({ isActive, text, clickHandler }: { isActive: boolean, text: string, clickHandler: MouseEventHandler }) {
-
-    return (
-        <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
-            <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
-                {isActive && <Next size="small" />}
-            </Box>
-        </Button>
-    )
-}
-
 function PlayerTab({ player }: PlayerTabProps) {
     const [index, setIndex] = useState<number>(1);
 
@@ -1277,19 +1265,19 @@ function PlayerTab({ player }: PlayerTabProps) {
         <ShadowBox flex={false}>
             <Grid rows="1" columns={['25%', '75%']}>
                 <Box pad="medium" height="100%" >
-                    <SpecialButton isActive={index == 1} clickHandler={() => onActive(1)} text={"Random Stats"} />
-                    <SpecialButton isActive={index == 2} clickHandler={() => onActive(2)} text={"Skills"} />
-                    <SpecialButton isActive={index == 3} clickHandler={() => onActive(3)} text={"Equipment"} />
-                    <SpecialButton isActive={index == 4} clickHandler={() => onActive(4)} text={"Statues"} />
-                    <SpecialButton isActive={index == 5} clickHandler={() => onActive(5)} text={"Anvil"} />
-                    <SpecialButton isActive={index == 6} clickHandler={() => onActive(6)} text={"Carry Capacity"} />
-                    <SpecialButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
-                    <SpecialButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
-                    <SpecialButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
-                    <SpecialButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
+                    <LeftNavButton isActive={index == 1} clickHandler={() => onActive(1)} text={"Random Stats"} />
+                    <LeftNavButton isActive={index == 2} clickHandler={() => onActive(2)} text={"Skills"} />
+                    <LeftNavButton isActive={index == 3} clickHandler={() => onActive(3)} text={"Equipment"} />
+                    <LeftNavButton isActive={index == 4} clickHandler={() => onActive(4)} text={"Statues"} />
+                    <LeftNavButton isActive={index == 5} clickHandler={() => onActive(5)} text={"Anvil"} />
+                    <LeftNavButton isActive={index == 6} clickHandler={() => onActive(6)} text={"Carry Capacity"} />
+                    <LeftNavButton isActive={index == 7} clickHandler={() => onActive(7)} text={"Talents"} />
+                    <LeftNavButton isActive={index == 8} clickHandler={() => onActive(8)} text={"Post Office"} />
+                    <LeftNavButton isActive={index == 9} clickHandler={() => onActive(9)} text={"Inventory"} />
+                    <LeftNavButton isActive={index == 10} clickHandler={() => onActive(10)} text={"Obols"} />
                     {
                         (player.getSubClass() == ClassIndex.Barbarian) &&
-                        <SpecialButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow/Wow"} />
+                        <LeftNavButton isActive={index == 11} clickHandler={() => onActive(11)} text={"Zow/Chow/Wow"} />
                     }
                 </Box>
                 <Box fill background="dark-1">
@@ -1310,53 +1298,6 @@ function PlayerTab({ player }: PlayerTabProps) {
     )
 }
 
-const customTabs = {
-    tab: {
-        active: {
-            color: 'brand',
-            background: 'none',
-            border: undefined,
-        },
-        border: undefined,
-        pad: {
-            vertical: 'small',
-        },
-        extend: ({ theme }: { theme: any }) => css`
-            height: 56px;
-            weight: 'none';
-        `
-    },
-    tabs: {
-        extend: ({ theme }: { theme: any }) => css`
-            max-width: 100%;
-            min-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-        `,
-        header: {
-            background: 'dark-2',
-            extend: ({ theme }: { theme: any }) => css`
-                alignItems: "center";
-                box-shadow: -7px 8px 16px 0 rgba(0,0,0,0.17);
-        `,
-        }
-    }
-}
-
-const CustomTabTitle = ({ player, isActive }: { player: Player, isActive: boolean }) => (
-    <Box direction="row" align="center" margin={{ vertical: 'xsmall' }}>
-        <Box margin={{ right: 'xsmall' }}>
-            <IconImage data={player.getClassImageData()} scale={0.6} />
-        </Box>
-        <Box margin={{ right: 'xsmall' }}>
-            <Text size="xsmall" color={isActive ? 'brand' : 'accent-2'}>
-                {player.playerName ? player.playerName : `Character ${player.playerID}`}
-            </Text>
-        </Box>
-        {/* <IconImage data={player.getActivityIcon()} scale={0.4} /> */}
-    </Box>
-);
-
 function Players() {
     const [index, setIndex] = useState<number>(0);
     
@@ -1373,7 +1314,7 @@ function Players() {
     }
     return (
         <Box>
-            <ThemeContext.Extend value={customTabs}>
+            <ThemeContext.Extend value={customTabsTheme}>
                 <Tabs activeIndex={index} onActive={onActive} >
                     {
                         playerData?.map((player, playerIndex) => {

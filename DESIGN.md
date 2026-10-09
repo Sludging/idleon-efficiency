@@ -123,9 +123,9 @@ Straightforward, compact, task-specific. Reuse shared primitives where they fit,
 ### Navigation and tabs
 
 - **Desktop shell — observed:** header height 56px, dark-1 background, grey-1 bottom border; navigation height 48px. Navigation labels use 14px/500, inactive accent-2, and active brand with a 2px bottom underline. Its local hover treatment uses brand. [Source](components/navigation.tsx).
-- **ContentTabs — shared feature bar:** controlled `options`/`value`/`onChange` selector in a centered row with a `small` internal gap and no bar-wide border. The component adds no external margin; parents own placement through a surrounding `Box` gap or an outer `Box` margin for asymmetric spacing. Its implementation primitive, `TabButton`, remains a separate plain/hover-indicator button with a 40px inner box, `small` padding, and active brand text/2px bottom underline; inactive text is accent-2. Existing Grommet tab variants remain distinct. [Source](components/base/ContentTabs.tsx).
-- **CustomTabs:** a distinct Grommet tab theme with 56px tabs, `small` top/horizontal padding, brand active text, and a dark-2 shadowed header. Its local tab background/border behavior differs from `TabButton` and the global tab theme; reuse the matching variant. [Source](components/base/CustomTabs.tsx).
-- **LeftNavButton:** a 40px sidebar row with accent-4 selected background versus dark-2 inactive background, accent-2 text, and selected bold text/arrow. It is not the shell's underline pattern. [Source](components/base/LeftNavButton.tsx).
+- **ContentTabs — shared in-content selector:** centered row, `small` internal gap, no bar-wide border. Its plain `TabButton` has a 40px inner box, `small` padding, active brand text with a 2px underline, and inactive accent-2 text. [Source](components/base/ContentTabs.tsx).
+- **Page-scope Grommet tabs — shared entity selector:** 56px tabs, `small` top/horizontal padding, brand active text, and a dark-2 shadowed header. Titles use labels or class icons. [Source](components/base/CustomTabs.tsx).
+- **LeftNavButton — shared sidebar row:** 40px height, accent-4 selected background versus dark-2 inactive background, and accent-2 text. Selection uses bold text and an arrow; optional artwork is centered. [Source](components/base/LeftNavButton.tsx).
 
 ### Labeled values, resources, artwork, and details
 

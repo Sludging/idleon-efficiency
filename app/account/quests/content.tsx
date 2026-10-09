@@ -5,22 +5,20 @@ import {
     Text,
     Grid,
     Heading,
-    Button,
     ResponsiveContext,
 } from "grommet"
 
-import { useEffect, useState, useContext, useMemo, MouseEventHandler } from 'react';
+import { useEffect, useState, useContext, useMemo } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
 import ContentTabs from "../../../components/base/ContentTabs";
+import LeftNavButton from "../../../components/base/LeftNavButton";
 import { Player } from "../../../data/domain/player";
 import { NPC, QuestInformation as SpecialQuestInfo, Quests as QuestInfo } from "../../../data/domain/quests";
-import { Next } from 'grommet-icons';
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import CoinsDisplay from "../../../components/coinsDisplay";
 import { getCoinsArray } from "../../../data/utility";
 import IconImage from "../../../components/base/IconImage";
 import { QuestTypeEnum } from "../../../data/domain/enum/questTypeEnum";
-import { ImageData } from "../../../data/domain/imageData";
 import { CharacterBox } from "../../../components/base/CharacterBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
@@ -47,23 +45,6 @@ const titleForStatus = (status: CharacterBoxStatus) => {
         case CharacterBoxStatus.Disabled: return "Not Started";
         default: return 'none';
     }
-}
-
-function SpecialButton({ isActive, text, imageData, clickHandler }: { isActive: boolean, text: string, imageData?: ImageData, clickHandler: MouseEventHandler }) {
-    return (
-        <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
-            <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Box direction="row" gap="small" align="center">
-                    {
-                        imageData &&
-                        <IconImage data={imageData} scale={0.75} />
-                    }
-                    <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
-                </Box>
-                {isActive && <Next size="small" />}
-            </Box>
-        </Button>
-    )
 }
 
 function QuestInformation({ info }: { info: SpecialQuestInfo }) {
@@ -233,7 +214,7 @@ function Quests() {
                             {
                                 npcsToShow.map(([name, info], npcIndex) => {
                                     return (
-                                        <SpecialButton imageData={info.getImageData()} key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
+                                        <LeftNavButton iconImageData={info.getImageData()} key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
                                     )
                                 })
                             }
