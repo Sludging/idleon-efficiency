@@ -34,6 +34,7 @@ if (process.env.VERCEL_ENV == "preview") {
 }
 
 const moduleExports = {
+  agentRules: false,
   ...(process.env.NODE_ENV === 'development' ? { allowedDevOrigins: ['app'] } : {}),
   // New in 16
   turbopack: {
