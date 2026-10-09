@@ -44,7 +44,9 @@ Approve the plan when it fits the issue and the evidence. Compare a material rev
 
 Read the approved plan, final code, test results, and reviewer findings. Check that the code fits the plan and works with its website callers. Confirm that the tests required by the playbook pass.
 
-Require a fresh independent `correctness-reviewer` `PASS`. If code changes after review, the coordinator must verify and review again before acceptance.
+For normal acceptance, require a fresh independent `correctness-reviewer` `PASS`. If code changes after review, the coordinator must verify and review again before acceptance.
+
+For proposed non-zero tolerance, follow the [playbook exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions): return `ESCALATE`, not `ACCEPT_CASE`.
 
 # Decisions
 

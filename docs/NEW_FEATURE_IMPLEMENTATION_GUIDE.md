@@ -10,9 +10,10 @@ Use this plan for a page built on an existing domain. An existing domain does no
 implementation repeated.
 
 1. **Set the player goal and scope.** State what the player needs to do or learn, and what is
-   out of scope.
+   out of scope. Establish the feature's player-facing game context using step 1 of the
+   [UI work guide](agents/ui-patterns.md#workflow), even when calculations already exist.
 2. **Check the data.** Identify existing domain values and any missing calculations or inputs.
-   Investigate game evidence only for calculations you add, change, or cannot confirm; see
+   Verify game calculations only where you add, change, or cannot confirm them; see
    [testing guidance](TESTING_IMPLEMENTATION.md).
 3. **Plan the UI.** Start with the [UI work guide](agents/ui-patterns.md), including its
    Impeccable requirement, for project context, selected composition patterns, and design
@@ -105,16 +106,6 @@ Before beginning implementation, gather the following information from the devel
 **See:** `docs/TESTING_IMPLEMENTATION.md` for complete testing guide
 
 ## Implementation Guidelines
-
-### Development Workflow
-1. **Confirm prerequisites:** Verify repository and game evidence needed for scoped work.
-2. **Select patterns:** For UI, follow the [UI work guide](agents/ui-patterns.md), including
-   its Impeccable requirement; for backend, use the
-   [implementation patterns guide](agents/implementation-patterns.md).
-3. **Implement domain logic** where in scope, then create UI components following the UI
-   guide where UI is in scope.
-4. **Test domain calculations** as described in
-   [testing guidance](TESTING_IMPLEMENTATION.md).
 
 ### Verify a page with a local save
 

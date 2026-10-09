@@ -28,6 +28,8 @@ Before assigning implementation, verify the recorded approved plan and Tests-sta
 
 Send test/config or coverage corrections to tests. Send implementation corrections to implementation only when the established failing test remains sufficient and no test, config, or coverage change is required. Send material plan changes to the recorded approver: the human by default, or the supervisor for an explicitly invoked case when the change stays in scope. Send other decisions to the human under the playbook. Update the plan only after the decision. Ask the human how to proceed if domain changes preceded the required tests-stage result.
 
+For proposed or existing non-zero tolerance, follow the [playbook exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions) and record the reviewed result and decision in the Case working note.
+
 # Ten-minute supervision
 
 Request a progress report after ten minutes of worker or reviewer work. The report should show completed work, remaining work, and any decision needed to continue. The coordinator remains active and owns the interval.

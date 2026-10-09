@@ -25,24 +25,20 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 1. **Establish game behavior.** Read the relevant delivered game source for the version under review. Identify the selected result, its conditions, and the calculations it uses. Use existing findings and source links where available.
 2. **Locate the domain code and tests.** Match each game calculation to the domain method and test that check it, or record that the implementation is missing. Ask the human if the meaning or owning domain/aspect is unclear.
 3. **Choose extraction values.** Each core or parameter comparison needs an entry in `tests/configs/`. Use the game function and arguments, or game value, used by the selected calculation. Each entry should support a comparison.
-4. **Obtain any new expected values.** Add or correct config entries for required values not yet configured, then request extraction. With unchanged config and usable results, continue with the existing save and results. Extraction also runs when the human requests it.
-5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code. A missing calculation should produce an explicit failure while it is unimplemented; after implementation, tests call its typed public API directly.
+4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
+5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
-The [extraction helper guide](../tests/helpers/README.md) explains runtime prerequisites, the active-player requirement, config/output formats, and the batch command:
+When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
 
-```bash
-node tests/helpers/extract-all-game-data.js
-```
-
-In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-human-approval) before changing tests or extraction configs. Use the approved scope and interface. The coordinator runs extraction and returns the result to the worker. Use new results after the command succeeds. For a technical failure with unchanged valid config, report the concrete error and any human action needed.
+In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the coordinator under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
 ## Keep tests tied to the real save
 
-Use only the current real save and its matching extracted game values. Tests exercise that saved state; do not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save actually exercises, and raise an uncovered behavior as a coverage question rather than inventing test data.
+Use only the current real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with the retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that the results match the saved state before using them. Tests exercise that state; do not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save actually exercises, and raise an uncovered behavior as a coverage question rather than inventing test data.
 
 Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
-Write the completed test against the typed public API directly and assert the calculated result. If an implementation is missing during the tests stage, temporary failure scaffolding may identify the missing calculation and game signature. Remove that scaffolding once the implementation exists: do not retain `typeof`/`in` guards, `unknown` casts, or `.call` wrappers around an implemented API.
+Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).
 
 Choose indices because they represent a game concept or scenario, and explain why they are selected. Descriptions should say what gameplay effect is compared and what website result would be wrong; keep obfuscated game identifiers and extraction mappings separately for traceability. Assert calculation results, not incidental save or object representation. Cover distinct behaviors and representative inputs rather than repeating aliases of the same path; a small exhaustive set is useful when the set itself is small and justified.
 
@@ -63,33 +59,30 @@ When a domain result uses a fixed conversion of the game value, convert the extr
 
 ### Documented non-zero tolerances
 
-The default tolerance is zero. A selected comparison may use a non-zero tolerance only when the delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that tolerance:
+Tolerance `0` is required for normal completion. A selected comparison may propose a non-zero tolerance only when delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that tolerance:
 
 - named at the aspect test site, not in the global matcher;
 - narrow and tied to the observed discrepancy;
 - explained with the game source, the domain contract, and the reason the comparison remains useful;
 - active, so differences outside the documented bound still fail.
 
-For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. This is temporary failure scaffolding for an unimplemented API; once implemented, call the typed public API directly and remove the missing-method guards and wrappers. If the selected calculation is missing, that failure can support implementation after the tests-stage approval. If a directly used calculation is missing, treat it as a dependency only when its website result is missing and the parameter comparison therefore cannot be made; a passing comparison does not invite upstream investigation.
+Document the proposed bound, source evidence, domain contract, and zero-tolerance discrepancy in the case working note. For review and completion of a proposed exception, follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions).
 
-Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. A documented non-zero tolerance is an exception only when the preceding rule is satisfied; it must describe the known semantic mismatch rather than conceal an unexplained failure. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
+Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. An unexplained numeric difference is a failure to investigate, not an exception; match the delivered formula and operation order rather than widening the bound. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
 
-After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0`, except for a named, source-backed non-zero tolerance documented under the preceding rule. New test/config needs return through the tests stage before further domain changes.
+## Verify after implementation
+
+After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0` for normal completion. Report bounded comparisons separately with the evidence required above. New test/config needs return through the tests stage before further domain changes.
 
 ## Read the test results
 
 | Result | What it establishes and what follows |
 | --- | --- |
-| Core test fails; all direct parameter tests pass | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
+| Core test fails; all direct parameter tests pass at tolerance `0` | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
 | A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing producer comparison ends its investigation for this case. |
-| Core and all direct parameter tests pass | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
+| Core and all direct parameter tests pass at tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
 | Setup fails before the selected assertions run | No calculation result was checked. Address a clear test/config problem or report the external prerequisite. |
-
-For a missing implementation, keep an active test whose extractor reports the missing calculation and game function signature. If it is the selected calculation, that failure can support implementation after the tests-stage approval. If it is a directly used calculation, treat it as a dependency only when its website result is missing and the parameter comparison therefore cannot be made; a passing comparison does not invite upstream investigation.
-
-Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. A documented non-zero tolerance is an exception only when the preceding rule is satisfied; it must describe the known semantic mismatch rather than conceal an unexplained failure. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
-
-After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0`, except for a named, source-backed non-zero tolerance documented under the preceding rule. New test/config needs return through the tests stage before further domain changes.
+| A comparison uses or proposes non-zero tolerance | Check the [source-backed bound requirements](#documented-non-zero-tolerances), report bounded results separately, and follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). |
 
 ## Test files and commands
 

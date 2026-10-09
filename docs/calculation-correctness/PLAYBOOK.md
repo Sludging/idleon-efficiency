@@ -78,11 +78,12 @@ During this stage, write tests and extraction config, not domain code. The coord
 | Result | Next step |
 | --- | --- |
 | `EXTRACTION_NEEDED`: config changed or human requested extraction | Run the extraction procedure below, then resume tests. |
-| `TESTS_READY`: core test fails or selected implementation is missing; all direct parameter comparisons pass | Accept the tests-stage result and assign implementation. |
-| `TESTS_READY`: core and all direct parameter comparisons pass | Assign review of the selected behavior and test coverage. |
+| `TESTS_READY`: core test fails or selected implementation is missing; all direct parameter comparisons pass at tolerance `0` | Accept the tests-stage result and assign implementation. |
+| `TESTS_READY`: core and all direct parameter comparisons pass at tolerance `0` | Assign review of the selected behavior and test coverage. |
 | `BLOCKED`: a direct parameter comparison fails, or a missing website result prevents that comparison; missing WikiBot fact or external prerequisite | Record the blocker and resume condition; follow the dependency procedure where applicable. |
 | Setup or extraction error prevents the selected tests from running | Address a clear test/config problem in the tests stage; report an external prerequisite to the human. |
 | `NEEDS_HUMAN`: game meaning, scope, or which aspect implements a calculation is unclear | Ask the question and pause. |
+| A non-zero tolerance is proposed or used | Follow the [exception procedure](#non-zero-tolerance-exceptions). |
 | Domain changes preceded the tests-stage approval, or the order cannot be established at review | Record what is known and ask the human how to proceed. |
 | `REPORT`: stage is incomplete | Use the reported progress to continue the same stage, narrow the next task, or ask the human. |
 
@@ -95,6 +96,7 @@ The worker follows the [implementation stage](IMPLEMENTATION_STAGE.md): correct 
 A `READY_FOR_REVIEW` result goes to a fresh reviewer. The reviewer uses the case findings to locate the relevant game source, domain code, and tests, then independently checks the selected behavior and coverage. See the [reviewer instructions](../../.omp/agents/correctness-reviewer.md).
 
 - `PASS` goes to the approver for acceptance.
+- For a proposed non-zero tolerance exception, follow the [exception procedure](#non-zero-tolerance-exceptions).
 - `CHANGES_REQUIRED` returns to the worker with the specific findings. Test/config or coverage changes go to tests first. An implementation correction can proceed when its failing test is already established. Review the corrected result again.
 - A blocker or unanswered question pauses the case. If the same finding remains after one correction, ask the human for direction.
 
@@ -102,21 +104,25 @@ A `READY_FOR_REVIEW` result goes to a fresh reviewer. The reviewer uses the case
 
 Normal completion requires implementation of the approved plan; the selected core and parameter tests, and all tests changed by the case, to pass at tolerance `0`; a fresh independent review covering the final changes to return `PASS`; and acceptance by the approver. Changes after review need verification and a fresh review of the changed behavior before normal completion.
 
-The human may accept an exception or abort. The supervisor may not waive a gate, accept an exception, or abort. Record what was completed, what was verified, and any omitted step. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
+Human-directed exceptions and aborts follow the [approval authority](#approval-authority). Record what was verified and any omitted step with the outcome. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
 
 After acceptance or abort, delete the local plan and local research file. No archive is required; reusable versioned game snippets remain.
 
+### Non-zero tolerance exceptions
+
+A proposed non-zero tolerance must meet the [testing guide's source-backed bound and evidence requirements](../TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances). Keep the tests-stage and plan prerequisites in force; a bounded pass is not a zero-tolerance result or normal completion.
+
+Obtain fresh independent review of the final implementation and proposed bound. When the independent checks are complete, the reviewer returns `NEEDS_HUMAN`, not `PASS`, with findings, any defects, and unmet normal gates. Unexplained differences, unsupported bounds, and out-of-bound comparisons remain failures with the appropriate defect or dependency status.
+
+The coordinator presents the reviewed exception to the actual human, even when the supervisor is the case approver. The supervisor returns `ESCALATE`, not `ACCEPT_CASE`, and cannot waive the completion gate. Only the actual human may accept exception completion. Record that decision, the retained bound, and the review outcome as **human-directed exception**, not normal completion.
+
 ## Extraction when needed
 
-Reuse `tests/fixtures/saves/latest.json` and existing results under `tests/results/` while the extraction config is unchanged. For a required value not yet configured, add or correct its config entry and extract. Run extraction after a config change or human request.
+Reuse `tests/fixtures/saves/latest.json` and its matching results under `tests/results/` while the extraction config is unchanged and the pair remains usable. For a required value not yet configured, add or correct its config entry and extract. Run extraction after a required config change or human request.
 
-Before extraction, require `GET http://localhost:3100/status` to report `cdpConnected: true`, `injected: true`, and `gameReady: true`. Follow the [runtime prerequisites and active-player policy](../../tests/helpers/README.md), then run:
+When extraction is needed, use the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites. Record the command, server mode, effective `GAME_SERVER_URL`, result paths, and whether the save was refreshed. Establish [save/result pairing](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-the-real-save) before using new results.
 
-```bash
-node tests/helpers/extract-all-game-data.js
-```
-
-Use new results after the command succeeds. The batch refreshes the save and values together. Report a failed extraction's concrete error and any human action needed. If an unchanged valid config has missing output because files were lost or extraction failed, explain the condition and ask for refresh direction.
+Report a failed extraction's concrete error, any artifacts already changed, and any human action needed. If an unchanged valid config has missing output because files were lost or extraction failed, explain the condition and ask for refresh direction.
 
 ## Dependencies and WikiBot
 

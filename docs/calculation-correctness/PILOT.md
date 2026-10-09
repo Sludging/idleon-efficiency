@@ -41,7 +41,7 @@ At resolution or abort, summarize the selected calculation's result and process 
 
 Mark **Tests before implementation** as `satisfied` when core and parameter tests ran before domain edits, parameter tests passed, and the coordinator approved the tests-stage result. Passing core tests can proceed directly to review. Use `violated` when domain edits came first, and `not established` when the earlier test result is unavailable.
 
-Use the [playbook's completion requirements](PLAYBOOK.md#6-complete-the-case). An exception states what was omitted or supplied through human work. Record review that ran but did not pass separately from review that never ran. Correction rounds count observed `CHANGES_REQUIRED` results.
+Use the [playbook's completion requirements](PLAYBOOK.md#6-complete-the-case). An exception states what was omitted or supplied through human work. For completion under the [non-zero tolerance exception procedure](PLAYBOOK.md#non-zero-tolerance-exceptions), record **human-directed exception**, the retained bound and human decision, and **no PASS — NEEDS_HUMAN** for a completed exception review. Record review that ran but did not pass separately from review that never ran. Correction rounds count observed `CHANGES_REQUIRED` results.
 
 ## Tracker maintenance
 

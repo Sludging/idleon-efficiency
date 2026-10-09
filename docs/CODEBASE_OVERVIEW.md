@@ -61,13 +61,9 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 
 Before backend architecture or implementation work, use the [implementation patterns guide](agents/implementation-patterns.md) to select applicable examples and aspects. Use its UI route only when planning or changing UI.
 ### **Adding New Features**
-1. **Data Sync**: Pull latest game data from WikBot project using sync command
-2. **Code Analysis**: Manually inspect minified game source code for target feature
-3. **Reverse Engineering**: Implement game calculations in relevant domain files
-4. **UI Development**: Create components to display the calculated information
-5. **Automated Testing**: Add live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
-6. **Visual Testing**: Compare website output with running game client
-7. **Enhancement**: Add value-added features beyond basic game data display
+For new feature work, follow the [New Feature Implementation Guide](NEW_FEATURE_IMPLEMENTATION_GUIDE.md).
+For a page backed by existing calculations, start with its
+[calculation-ready domain plan](NEW_FEATURE_IMPLEMENTATION_GUIDE.md#planning-a-page-for-a-calculation-ready-domain).
 
 ### **Testing Strategy**
 

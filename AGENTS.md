@@ -39,7 +39,7 @@ Use the canonical labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready
 
 ### Domain docs
 
-This is a single-context repository with root `CONTEXT.md` and `docs/adr/`. See `docs/agents/domain.md`.
+Domain documentation is optional: read root `CONTEXT.md` and relevant `docs/adr/` records when present. See `docs/agents/domain.md` for discovery guidance.
 
 ## Critical Architecture Constraints
 

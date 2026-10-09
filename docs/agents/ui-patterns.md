@@ -15,6 +15,16 @@ Docker Playwright feature checks and screenshots during mockup planning.
 
 1. Define the player task and the exact page, component, or interaction in scope. Identify
    relevant existing pages and examples before proposing a new composition.
+   Before proposing UI, establish how the feature works for players: its in-game names,
+   actions, relationships between resources/progression/bonuses, and how its screens,
+   artwork, and values are presented and used. Reuse existing feature research, delivered
+   game source and in-game observations; use the official Wiki for player-facing context.
+   Record the sources, established meanings and units, and unresolved questions that
+   affect the design. Distinguish useful information already exposed by the domain from
+   information missing there; domain properties alone do not establish the page's contents.
+   Resolve design-affecting unknowns before choosing labels, grouping, or interactions.
+   Reusing unchanged calculations does not require fresh calculation extraction or reverse
+   engineering; investigate missing game context separately from calculation verification.
 2. Choose the information hierarchy and composition below. Match a reference's named
    aspects; its fields, columns, filters, calculations, and other behavior are not universal.
    Record meaningful choices the examples do not cover.

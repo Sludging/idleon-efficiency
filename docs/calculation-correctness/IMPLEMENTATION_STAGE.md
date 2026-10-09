@@ -17,14 +17,14 @@ Read the approved local plan, assignment, case working note, and accepted `Tests
 
 - Implement the approved design while matching the game's formula, conditions, constants, numeric representation, composition, and operation order. Preserve registrations, callers, and the `init → parse → calculate` flow.
 - For a missing selected implementation, add the game behavior identified by its failing core test and connect the comparison to the implemented calculation through the tests stage where test changes are needed.
-- Keep tolerance at `0`. Resolve last-bit differences by matching delivered multiplication and composition order rather than changing the comparison.
-- If the change requires a new test, parameter, extraction value, or test/configuration correction, stop domain editing and return the finding to the tests stage. A changed extraction configuration or explicit human direction triggers the coordinator's extraction procedure before new results are used.
+- Keep tolerance at `0` for the normal path. Resolve last-bit differences by matching delivered multiplication and composition order rather than changing the comparison. A source-backed semantic difference returns through tests under the [exception procedure](PLAYBOOK.md#non-zero-tolerance-exceptions).
+- If the change requires a new test, parameter, extraction value, or test/configuration correction, stop domain editing and return the finding to the tests stage. When extraction is needed, the coordinator follows the [extraction procedure](PLAYBOOK.md#extraction-when-needed).
 
 ## Verify the selected result
 
 1. Reuse the same real save and matching extraction results used by the tests-stage comparisons. A new extraction is conditional on its documented trigger.
 2. Run every named targeted core and direct-parameter test affected by this case, including each changed comparison. Record the exact command and observed result. Report an unchanged-configuration technical failure as that failure.
-3. Confirm that the selected result, all direct parameter comparisons, and every test changed by the case pass at tolerance `0`. Keep a failing direct dependency visible; it prevents a green implementation result.
-4. Return `READY_FOR_REVIEW` only when the selected implementation and targeted tests are complete and green. The coordinator then assigns a fresh reviewer; this stage does not approve its own work.
+3. For the normal path, confirm that the selected result, all direct parameter comparisons, and every test changed by the case pass at tolerance `0`. Report a source-backed bounded comparison separately and identify the unmet zero-tolerance gate. Keep a failing direct dependency visible; a failure outside the documented bound prevents a ready result.
+4. Return `READY_FOR_REVIEW` when the selected implementation and targeted tests are complete and green at tolerance `0`, or a [documented source-backed bound](../TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances) is ready for independent review under the [exception procedure](PLAYBOOK.md#non-zero-tolerance-exceptions). Identify bounded results and unmet normal gates; `READY_FOR_REVIEW` does not make them green. The coordinator assigns a fresh reviewer.
 
 Return `REPORT` for bounded incomplete work, `EXTRACTION_NEEDED` only after a required configuration change or explicit human direction, `BLOCKED` for a concrete dependency, missing static WikiBot fact, or external prerequisite, and `NEEDS_HUMAN` for an interpretation, scope, or ownership question. Include factual `Findings/note updates`, every `Changed paths` entry, exact `Tests` results, one `Question`, and one `Next` action in the worker return contract.
