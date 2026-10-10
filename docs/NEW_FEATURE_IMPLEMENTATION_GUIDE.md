@@ -53,25 +53,24 @@ Before beginning implementation, gather the following information from the devel
 
 ## Implementation Tasks
 
-### 1. Create Domain Class (`data/domain/[feature].tsx`)
+### 1. Implement Domain Logic (`data/domain/`)
 
 **Use only the selected aspects of existing examples.** The implementation patterns guide identifies applicable backend and UI examples and boundaries; do not treat a whole feature as a template or create a skeleton in place of resolving the required design.
 
 **Implementation steps:**
-- Create main feature class extending `Domain`
-- Create item/upgrade classes if applicable
-- Update `init` function
-- Update `parse` function to handle parsing phase
+- Select concept models using [MODEL-01](../CODING_STANDARDS.md#model-01--model-responsible-concepts); extend existing domain logic where it owns the feature.
+- Create a `Domain` subclass only when the feature needs its own pipeline participant.
+- Update the owning domain's `init` and `parse` functions as needed.
 - Implement cost calculation methods (if applicable)
 - Implement bonus calculation methods with cross-feature interactions
 - Add update (not exact name, see examples in code base) function to handle cross-domain impacts.
 
 ### 2. Integrate with Data Pipeline
 
-**Add to data processing:**
-- Add new domain to `domainList` in `idleonData.tsx`
-- Configure `getRawKeys()` method with provided save file keys
-- Add any necessary post-processing functions to the processing maps
+**Register changed processing where needed:**
+- Add a new `Domain` instance to `domainList` in `idleonData.tsx` only when introducing a pipeline participant.
+- Configure the owning domain's `getRawKeys()` with required save keys and translate them during `parse` according to [PARSE-01](../CODING_STANDARDS.md#parse-01--translate-at-the-boundary).
+- Add any necessary post-processing functions to the processing maps.
 
 ### 3. UI Development
 

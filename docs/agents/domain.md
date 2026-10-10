@@ -38,11 +38,11 @@ Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
         └── docs/adr/
 ```
 
-## Use the glossary's vocabulary
+## Find vocabulary references
 
-When `CONTEXT.md` defines a domain concept, use that term in your output (in an issue title, a refactor proposal, a hypothesis, a test name). Don't drift to synonyms the glossary explicitly avoids.
+Apply [VOCAB-01](../../CODING_STANDARDS.md#vocab-01--game-vocabulary) when naming concepts in code or review output, including issue titles, proposals, hypotheses, and test names. Existing `CONTEXT.md` glossaries provide domain terms and avoided synonyms.
 
-If the concept you need isn't in an existing glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
+If a needed concept is absent, investigate whether it is unfamiliar project language or a real glossary gap; note a confirmed gap for `/domain-modeling`.
 
 ## Flag ADR conflicts
 

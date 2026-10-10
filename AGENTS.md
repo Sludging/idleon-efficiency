@@ -2,6 +2,8 @@
 
 Guidance for AI coding assistants working in this repository.
 
+Before implementing or reviewing code, you MUST read [CODING_STANDARDS.md](CODING_STANDARDS.md). When delegating implementation or review, pass its path and the relevant existing vocabulary-document paths (discovered through [domain docs](docs/agents/domain.md)); do not duplicate their rules in task prompts.
+
 ## Project Overview
 
 IdleOn Efficiency (https://www.idleonefficiency.com) is a companion website for the idle MMO "Legends of Idleon". This Next.js app reverse-engineers game mechanics to provide efficiency calculators and optimization tools for players.
