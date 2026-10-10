@@ -221,24 +221,24 @@ export const updateWorshipTotalizer = (data: Map<string, any>) => {
     worship.totalizer.totalWaves = worship.totemInfo.reduce((sum, totem) => sum += totem.maxWave, 0);
 
     worship.totalizer.unlockedBonuses = [];
+    worship.totalizer.unlocked = gaming.isSuperbitPurchased(7);
     
-    if (gaming.superbits[7].unlocked) {
-        worship.totalizer.unlocked = true;
+    if (gaming.isSuperbitPurchased(7)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.Damage);
     }
-    if (gaming.superbits[13].unlocked) {
+    if (gaming.isSuperbitPurchased(13)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.Cooking);
     }
-    if (gaming.superbits[3].unlocked) {
+    if (gaming.isSuperbitPurchased(3)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.BoatSpeed);
     }
-    if (gaming.superbits[20].unlocked) {
+    if (gaming.isSuperbitPurchased(20)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.BitValue);
     }
-    if (gaming.superbits[11].unlocked) {
+    if (gaming.isSuperbitPurchased(11)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.ExpMulti);
     }
-    if (gaming.superbits[16].unlocked) {
+    if (gaming.isSuperbitPurchased(16)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SkillExp);
     }
     if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 12)?.purchased ?? false) {
@@ -250,10 +250,10 @@ export const updateWorshipTotalizer = (data: Map<string, any>) => {
     if (sneaking.jadeUpgrades.find(upgrade => upgrade.index == 14)?.purchased ?? false) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.EssenceGain);
     }
-    if (gaming.superbits[27].unlocked || false) {
+    if (gaming.isSuperbitPurchased(27)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.SpelunkingPow);
     }
-    if (gaming.superbits[44].unlocked || false) {
+    if (gaming.isSuperbitPurchased(44)) {
         worship.totalizer.unlockedBonuses.push(TotalizerBonus.ResearchExp);
     }
 

@@ -293,7 +293,7 @@ export class SushiStation extends Domain {
         this.eventShop45 = Number(eventShop.isBonusOwned(45));
         this.button2 = button.getBonusForIndex(2);
         this.minehead11 = minehead.getBonusFromIndex(11);
-        this.gaming67 = Number(gaming.superbits[67]?.unlocked ?? 0);
+        this.gaming67 = Number(gaming.isSuperbitPurchased(67));
         this.atom14 = collider.atoms[14].getBonus();
         this.sailingArtifact39 = Number(sailing.artifacts.find(artifact => artifact.index === 39)?.status ?? 0);
         this.dailyKnowledgeEnabled = research.getBonusForId(189, 1) >= 1;

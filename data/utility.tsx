@@ -283,7 +283,7 @@ export function randomFloatBetween(e: number, t: number) {
 
 export const letterToNumber = (char: string) => {
     // Lava's unicode map doesn't have tilda (`) so, bit odd but it works.
-    return "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(char)
+    return number2letterArray.indexOf(char);
 }
 
 export const uniqueFilter = (value: any, index: number, self: any) => {
@@ -360,7 +360,7 @@ export const parseFormattedNumber = (formattedNumber: string | number): number =
 export const number2letterArray = ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's',
     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖'];
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖', '肋', '肉', '職', '耐', '者', '箱', '管', '算', '箔', '策', '答', '筒', '筍'];
 
 export const number2letter = (number: number) => {
     if (number < number2letterArray.length) {

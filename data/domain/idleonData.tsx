@@ -34,7 +34,7 @@ import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
 import { Divinity, updateDivinity } from './world-5/divinity';
 import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
-import { Gaming, updateGaming, updateSuperbitImpacts } from './world-5/gaming';
+import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
 import { updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/sailing/artifacts';
 import { Constellations } from './constellations';
@@ -51,7 +51,7 @@ import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
-import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel } from './world-6/farming';
+import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid } from './world-7/research';
@@ -271,8 +271,12 @@ const postProcessingMap: Record<string, Function> = {
     "updateCompanionImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateCompanionImpact(accountData),
     // Friend Bonuses consumes parsed companion and Event Shop state.
     "friends": (doc: Cloudsave, accountData: Map<string, any>) => updateFriends(accountData),
+    // Parsed ownership contributes to Equinox before Research and to Collider/Construction before their consumers.
+    "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
+    "farmingStickerBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingStickerBonuses(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
     "updateOrionGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateOrionGlobalBonus(accountData),
     "updatePoppyGlobalBonus": (doc: Cloudsave, accountData: Map<string, any>) => updatePoppyGlobalBonus(accountData),
@@ -280,6 +284,8 @@ const postProcessingMap: Record<string, Function> = {
     "updateBigFish": (doc: Cloudsave, accountData: Map<string, any>) => updateBigFishUnlocked(accountData),
     "updateMeritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyBonus(accountData),
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
+    // Earned Palette bonuses consume Legend Talents, not the later equipped-color Luck calculation.
+    "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
     // Daily Shopping Spree and early Royal Armory Bargain bonuses are ready before shared upgrade costs.
     "updateMasterClasses": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateMasterClasses(accountData),
     "updateSlabBonusMultiplier": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusMultiplier(accountData),
@@ -297,10 +303,8 @@ const postProcessingMap: Record<string, Function> = {
     "arcaneCultistImpact": (doc: Cloudsave, accountData: Map<string, any>) => updateArcaneCultistImpact(accountData),
     "updateAllShinies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllShinyEffects(accountData),
     "updateInfinityStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updateInfinityStarSigns(accountData),
-    "updateSuperbitImpcats": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     "playerStarSigns": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStarSigns(accountData),
     "cards": (doc: Cloudsave, accountData: Map<string, any>) => updateCards(accountData),
-    "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
     "collider": (doc: Cloudsave, accountData: Map<string, any>) => updateAtomCollider(accountData),
     "artifacts": (doc: Cloudsave, accountData: Map<string, any>) => updateArtifacts(accountData),
     "islandExpeditions": (doc: Cloudsave, accountData: Map<string, any>) => updateIslandExpeditions(accountData),
@@ -373,6 +377,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.
+    "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

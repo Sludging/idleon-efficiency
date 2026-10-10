@@ -1,0 +1,45 @@
+{
+  "extractions": {
+    "farming_sticker_bonus_0": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",0,0)",
+      "result": 178.75
+    },
+    "farming_sticker_bonus_1": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",1,0)",
+      "result": 75.625
+    },
+    "farming_sticker_bonus_2": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",2,0)",
+      "result": 206.25
+    },
+    "farming_sticker_bonus_3": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
+      "result": 2750
+    },
+    "farming_sticker_bonus_4": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",4,0)",
+      "result": 330
+    },
+    "farming_sticker_bonus_5": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",5,0)",
+      "result": 247.5
+    },
+    "farming_sticker_bonus_6": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",6,0)",
+      "result": 0
+    },
+    "sticker_research_bonus": {
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",68,2)",
+      "result": 37.5
+    },
+    "sticker_event_shop_bonus": {
+      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
+      "result": 0
+    },
+    "sticker_superbit_bonus": {
+      "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",62,0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

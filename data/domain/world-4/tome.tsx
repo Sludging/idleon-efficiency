@@ -29,7 +29,8 @@ import { Cooking } from './cooking';
 import { Lab } from './lab';
 import { Sailing } from '../world-5/sailing/sailing';
 import { Divinity } from '../world-5/divinity';
-import { ElegantSeashell, Gaming, ImmortalSnail } from '../world-5/gaming';
+import { Gaming } from '../world-5/gaming';
+import { ShellImport, ShovelImport, SnailImport } from '../world-5/gaming/imports';
 import { ArtifactStatus } from '../world-5/sailing/artifacts';
 import { Account } from '../account';
 import { Farming } from '../world-6/farming';
@@ -906,7 +907,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 59:
                 // Number of evolved Gaming plants.
-                line.updateAllPlayersCurrentValue((gaming.importBoxes.find(box => box.index == 3) as ElegantSeashell).plantsEvolved ?? 0);
+                line.updateAllPlayersCurrentValue((gaming.getImport(3) as ShellImport).evolutionProgress);
                 break;
             case 60:
                 // Weighted artifact progression by status: Obtained +1, Ancient +2, Eldritch +3, Sovereign +4, Omnipotent +5, Transcendent +6.
@@ -922,11 +923,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 63:
                 // Highest immortal snail level
-                line.updateAllPlayersCurrentValue(((gaming.importBoxes.find(box => box.index == 7) as ImmortalSnail).highestSnailLevel ?? 0));
+                line.updateAllPlayersCurrentValue((gaming.getImport(7) as SnailImport).highestLevel);
                 break;
             case 64:
                 // Best gold nugget
-                line.updateAllPlayersCurrentValue(gaming.biggestGoldNugget);
+                line.updateAllPlayersCurrentValue((gaming.getImport(1) as ShovelImport).bestNugget);
                 break;
             case 65:
                 // Number of items found.
@@ -934,7 +935,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 66:
                 // Gaming bits owned.
-                line.updateAllPlayersCurrentValue(gaming.currenBitsOwned);
+                line.updateAllPlayersCurrentValue(gaming.bits);
                 break;
             case 67:
                 // Highest Crop OG value, derived as 2^OptionsListAccount[219].

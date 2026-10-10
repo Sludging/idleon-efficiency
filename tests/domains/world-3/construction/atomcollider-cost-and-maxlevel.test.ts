@@ -63,7 +63,12 @@ describe('AtomCollider Domain - Cost and Max Level Calculations', () => {
       const liveCost = getExtractedValue(extractionResults, 'atom_5_cost');
       const domainCost = collider.atoms[5].getCost();
 
-      expect(domainCost).toMatchLiveGame(liveCost, 0);
+      // Native Chromium Math.pow(1.27, 50) is 154948.0259974694; Node returns
+      // 154948.02599746943. The resulting Carbon costs are 348039084.1292103
+      // and 348039084.12921035: one ULP apart (5.960464477539063e-8).
+      // Use an absolute bound; toMatchLiveGame uses a relative fraction.
+      const carbonPowEngineAbsoluteBound = 6e-8;
+      expect(Math.abs(domainCost - liveCost)).toBeLessThanOrEqual(carbonPowEngineAbsoluteBound);
     });
 
     it('validates Fluoride (atom 8) cost', () => {

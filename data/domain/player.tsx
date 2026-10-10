@@ -1416,7 +1416,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
 
     // Timmy/Super Bit is a non-ES increase, so it is included before Family captures Family Guy.
     players.forEach(player => {
-        const timmyTalentedBonus = gaming.superbits[47].unlocked
+        const timmyTalentedBonus = gaming.isSuperbitPurchased(47)
             ? Math.max(0, Math.floor((player.level - 500) / 100))
             : 0;
         if (player.extraLevelsFromSuperBit == 0 || player.extraLevelsFromSuperBit != timmyTalentedBonus) {

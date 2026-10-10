@@ -81,6 +81,9 @@ export class DivinityGod {
 }
 
 export class PlayerDivinityInfo {
+    // Saved primary link, independent of account-wide and ES effective links.
+    primaryGod: DivinityGod | undefined = undefined;
+
     // es has a second god, jam it in here.
     esGod: DivinityGod | undefined = undefined;
 
@@ -113,6 +116,9 @@ export class Divinity extends Domain {
     gods: DivinityGod[] = DivinityGod.fromBase(initGodInfoRepo());
     offerings: GodOffering[] = [];
     godRank: number = 0;
+    gamingGrowthMinorLinkBonus: number = 0;
+
+    getGamingGrowthMinorLinkBonus = (): number => this.gamingGrowthMinorLinkBonus;
 
     getRawKeys(): RawData[] {
         return [
@@ -163,6 +169,7 @@ export class Divinity extends Domain {
             // Player is active if actually on divinity alter or using Goharut as god and being in lab.
             const isActive = afkTarget[playerIndex] == "Divinity" || (playerLinkedGod && playerLinkedGod.index == 4 && afkTarget[playerIndex] == "Laboratory")
             divinity.playerInfo.push(new PlayerDivinityInfo(playerIndex, mantraInfo[playerMantra].data, playerLinkedGod ? [playerLinkedGod] : [], isActive));
+            divinity.playerInfo[playerIndex].primaryGod = playerLinkedGod;
 
             // Handle ES extra link talent.
             if (talentLevels.length > playerIndex) { // This should never fail but better safe than sorry.
@@ -206,6 +213,8 @@ export const updateDivinity = (data: Map<string, any>) => {
         god.blessMaxLevel += coralKidBonus1;
     })
 
+    divinity.gamingGrowthMinorLinkBonus = 0;
+
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
         player.gods.forEach(god => {
@@ -241,6 +250,11 @@ export const updateDivinity = (data: Map<string, any>) => {
 
         // Update being active or not based on linked god(s) (could have changed since parse due to owning Doot or other bonuses like that) and ES secondary god
         player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && player.isLinkedToGod(4));
+
+        // Account Gaming growth only counts saved primary links, not ES, Doot, or Pocket Divinity.
+        if (player.playerIndex < 12 && player.primaryGod?.data.bonusIndex == 6) {
+            divinity.gamingGrowthMinorLinkBonus += player.primaryGod.getMinorLinkBonus(players[player.playerIndex]);
+        }
     })
 
     return divinity;

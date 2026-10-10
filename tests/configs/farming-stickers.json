@@ -1,0 +1,56 @@
+{
+  "description": "Farming sticker bonuses and direct producer parameters observed serially in the same paused offline Jelly_Operator1.22 character3 session as Gaming. Read-only GET/cloud-save exactly equals retained latest799keys; runtime Research[0], Research[9], Gaming match decoded fixture. Seven effects cover six earned stickers and zero Threepeat Champ stickers. No fixture refresh, game mutation or recapture.",
+  "target": "Farming earned sticker bonuses and directly used enhancements",
+  "extractions": [
+    {
+      "label": "farming_sticker_bonus_0",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",0,0)",
+      "description": "Mega Mongo Sticker earned Class EXP bonus with saved stickers and Research enhancement"
+    },
+    {
+      "label": "farming_sticker_bonus_1",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",1,0)",
+      "description": "Laissez Maize Sticker earned Research EXP bonus"
+    },
+    {
+      "label": "farming_sticker_bonus_2",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",2,0)",
+      "description": "Chocotastic Muffin Sticker earned Artifact Find Chance bonus"
+    },
+    {
+      "label": "farming_sticker_bonus_3",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
+      "description": "UWU Kawaii Rice Sticker earned Gaming Bits bonus consumed by harvest calculations"
+    },
+    {
+      "label": "farming_sticker_bonus_4",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",4,0)",
+      "description": "Sporrious Stalk Sticker earned Crop Evolution bonus"
+    },
+    {
+      "label": "farming_sticker_bonus_5",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",5,0)",
+      "description": "Glassical Bananical Sticker earned Sticker Find Chance bonus"
+    },
+    {
+      "label": "farming_sticker_bonus_6",
+      "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",6,0)",
+      "description": "Threepeat Champ Sticker Spelunking POW bonus remains zero without saved stickers"
+    },
+    {
+      "label": "sticker_research_bonus",
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",68,2)",
+      "description": "Research enhancement directly used by Farming sticker bonuses"
+    },
+    {
+      "label": "sticker_event_shop_bonus",
+      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",37,0)",
+      "description": "Event Shop sticker enhancement ownership directly used by Farming sticker bonuses"
+    },
+    {
+      "label": "sticker_superbit_bonus",
+      "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",62,0)",
+      "description": "Superbit sticker enhancement ownership directly used by Farming sticker bonuses"
+    }
+  ]
+}
