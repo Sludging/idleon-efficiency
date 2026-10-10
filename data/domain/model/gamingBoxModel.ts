@@ -14,5 +14,6 @@ export interface GamingBoxModel {
     itemX: number,
     itemY: number,
     backgroundX: number,
-    backgroundY: number
+    backgroundY: number,
+    boxId: number
 }

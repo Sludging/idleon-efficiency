@@ -74,7 +74,7 @@ import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';
 import { Clamworks } from './world-7/clamworks';
-import { Meritocraty, updateMeritocratyBonus } from './world-7/meritocraty';
+import { Meritocraty, updateMeritocratyBonus, updateMeritocratyLate } from './world-7/meritocraty';
 import { LegendTalents, updateLegendTalents } from './world-7/legendTalents';
 import { MasterClasses, updateMasterClasses } from './masterClasses';
 import { Bubba, updateBubba } from './world-3/bubba';
@@ -372,6 +372,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "nonDepositedZenithClusters": (doc: Cloudsave, accountData: Map<string, any>) => updateNonDepositedZenithClusters(accountData),
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
+    "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {
