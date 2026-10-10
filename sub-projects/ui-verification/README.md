@@ -1,72 +1,78 @@
 # UI verification runtime
 
-Docker-hosted Next.js and Playwright for agents checking feature UI or planning mockups on
-the already-configured developer machine. Dependencies are the working Docker daemon with
-Compose v2 and the repository's configured Node/Yarn environment. Use the
-[agent workflow](../../docs/agents/ui-verification.md) for focused scenarios and screenshots.
+Docker-hosted Next.js and Playwright for feature UI checks and mockup screenshots on the
+configured developer machine. Requires Docker with Compose v2 and the repository's Node/Yarn
+environment. Follow the [UI verification workflow](../../docs/agents/ui-verification.md).
 
-## Runtime and configuration
+## Commands and runtime
 
-The root `yarn ui:up`, `yarn ui:run <repo-relative.cjs> [args...]`, and `yarn ui:down`
-scripts invoke [the launcher](../../scripts/ui-verification.cjs), which prepares bindings
-and configuration before calling [Compose](compose.yml). Start through these scripts rather
-than invoking Compose directly.
+The root `yarn ui:status`, `yarn ui:up`, `yarn ui:run <repo-relative.cjs> [args...]`, and
+`yarn ui:down` scripts use [the launcher](../../scripts/ui-verification.cjs) and
+[Compose configuration](compose.yml).
 
-- The owned project is `idleon-ui-verification`, with app container
-  `idleon-ui-verification-app` and browser container `idleon-ui-verification`.
-- Both services use a private Docker network and publish no host ports. The browser's fixed
-  app URL is `https://app:3000`. The app retains Next's development HTTPS configuration;
-  Playwright accepts its development certificate.
-- Source is mounted read-only, so host edits reach Next's development watcher. Writable
-  volumes hold app dependencies, Yarn install state, `.next`, and development certificates.
-  Dependency/Yarn volumes are keyed by dependency manifests and app startup/image inputs,
-  seeded from the app image rather than host-installed dependencies. Private writable copies
-  of `next-env.d.ts` and `tsconfig.json` live under `.ui-verification/app-config/` and are
-  refreshed on startup; source originals remain untouched.
-- Browser dependencies are isolated in this sub-project. [Its package manifest](package.json)
-  selects Playwright and the matching Chromium image; scenarios can `require('playwright')`
-  without a root Playwright dependency.
-- Startup builds/starts both services and waits up to 600 seconds for Compose readiness.
-  `ui:run` requires the stack already running. `ui:down` removes the owned services/network
-  while retaining caches and private artifacts.
+- `ui:status` checks Docker availability, container state, and app health without changing
+  configuration or services or creating artifacts. It exits 0 when ready and 1 otherwise.
+- `ui:up` prepares configuration, builds/starts both services, and waits up to 600 seconds for
+  Compose readiness. Startup commands serialize automatically.
+- `ui:run` requires the containers to be running.
+- `ui:down` is explicit manual shutdown. It removes services and the network while retaining
+  caches and private artifacts. Leave the containers running after verification.
 
-## Local save selection and privacy
+The Compose project is `idleon-ui-verification`; its containers are
+`idleon-ui-verification-app` and `idleon-ui-verification`. The app and browser containers are
+reused, while [the runner](runner.cjs) launches and closes Chromium for each scenario.
+Both services use a private Docker network without published host ports. The browser uses
+`https://app:3000` and accepts the app's development HTTPS certificate.
 
-The startup environment's optional `LOCAL_SAVE_FILE` selects a repository-relative existing
-JSON file under `tests/fixtures/saves/` or `profiles/`; otherwise startup uses
-`tests/fixtures/saves/latest.json`. Environment files are not consulted for this selector.
-Absolute paths, missing/non-files, invalid JSON, and paths or symlinks escaping the allowed
-roots fail startup. Rerun `yarn ui:up` after changing the selection; no source save is
-rewritten or replaced.
+Source is mounted read-only; host edits reach Next's development watcher. Writable volumes
+hold dependencies, Yarn install state, `.next`, and development certificates. Dependency
+volumes are keyed by dependency manifests and app startup/image inputs and seeded from the
+app image. Startup refreshes private writable copies of `next-env.d.ts` and `tsconfig.json`
+under `.ui-verification/app-config/`, leaving source originals untouched.
 
-The Docker app explicitly opts into fixtures with `NODE_ENV=development` and
+Browser dependencies live in [this project's package manifest](package.json), which selects
+Playwright and the matching Chromium image. App startup details live in
+[app.Dockerfile](app.Dockerfile) and [app-entrypoint.sh](app-entrypoint.sh); the browser image
+uses [Dockerfile](Dockerfile).
+
+## Local save and privacy
+
+Startup uses `tests/fixtures/saves/latest.json` by default. Optional `LOCAL_SAVE_FILE` selects
+an existing repository-relative JSON file under `tests/fixtures/saves/` or `profiles/`.
+Environment files are not consulted for this option. Absolute paths, missing/non-files,
+invalid JSON, and paths or symlinks escaping those directories fail startup. The option
+applies to app startup, not individual scenarios, and does not rewrite the source save.
+The launcher's private `tsconfig.json` copy aligns `@profile-source` and `@local-save` with the validated selected fixture; the root `tsconfig.json` and normal host `yarn dev` behavior remain unchanged.
+
+The Docker app enables fixtures with `NODE_ENV=development` and
 `NEXT_PUBLIC_UI_FIXTURE_MODE=1`. Both are required for local-save selection and the synthetic
 local profile route; production ignores the fixture flag. `NEXT_PUBLIC_APP_STAGE=local`
-remains an environment label, not a data-source switch. Normal host `yarn dev` uses live
-authenticated cloudsave data even with that stage label unless fixture mode is explicitly
-enabled.
+is an environment label, not a data-source switch. Normal host `yarn dev` uses authenticated
+cloudsave data unless fixture mode is explicitly enabled. `LOCAL_SAVE_FILE` is effective
+only in fixture mode and is not a `NEXT_PUBLIC_*` setting.
 
-`LOCAL_SAVE_FILE` is effective only in fixture mode and is startup configuration, not a
-`NEXT_PUBLIC_*` setting. The selected save enters the local browser's client data path, so
-screenshots and reports can contain account information: keep sessions and run output
-private, inspect/redact before sharing, and never commit or upload private artifacts.
+The selected save enters the browser's client data path. Screenshots and reports can contain
+account information: keep run output private, inspect/redact before sharing, and never
+commit or upload private artifacts.
 
-## Results and failure diagnosis
+## Scenario contract
 
-[The runner](runner.cjs) uses the
-[scenario contract in the agent guide](../../docs/agents/ui-verification.md#workflow).
+Place a uniquely named temporary `.cjs` file inside the repository, such as
+`.ui-verification/alchemy-preview-a1b2.cjs`, and export one async function with
+`module.exports`. The runner passes `{ page, context, browser, baseURL, artifactsDir, args }`:
 
-Private run output goes to `.ui-verification/runs/<timestamp>-<pid>/`: a best-effort
-`final.png`, `errors.json`, and `result.json` are recorded on success or failure. Directories
-use mode `0700` and JSON reports `0600`. A thrown scenario error produces exit status 1;
-console/page errors from the provided `page` are recorded but do not automatically fail a scenario.
+- `page`, `context`, and `browser` are Playwright objects from this scenario's Chromium instance.
+- `baseURL` is the internal app URL; `artifactsDir` is this run's writable output directory.
+- `args` contains arguments after the scenario path.
 
-- **Startup failure:** inspect the launcher's recent app/browser logs before retrying. An
-  HTTP 500 compile-error response is unhealthy. Check Docker/Compose availability and the
-  selected save; runtime/configuration changes belong in the launcher and Compose files.
-- **Scenario failure:** inspect the result and relevant console/page errors. Confirm the
-  `.cjs` path is repository-relative and exports an async function. Wait for the feature's
-  loaded data or visible state rather than assuming HTTP readiness proves page readiness.
-- **Maintenance:** app image/startup details live in [app.Dockerfile](app.Dockerfile) and
-  [app-entrypoint.sh](app-entrypoint.sh); browser image details live in [Dockerfile](Dockerfile).
-  Keep the launcher, Compose bindings, and runner contract aligned when changing them.
+Use these objects for browser interactions. `require('playwright')` is available for additional
+contexts or device settings. The default viewport is 1440×1000. Scenarios can visit application
+or temporary preview routes and choose screenshot scope for the UI being checked.
+
+## Run artifacts
+
+Each run writes private output to `.ui-verification/runs/<timestamp>-<pid>/`: best-effort
+`final.png`, `errors.json`, and `result.json` on success or failure. Directories use mode
+`0700` and JSON reports `0600`. A thrown scenario error produces exit status 1.
+Console/page errors from the supplied `page` are recorded but do not automatically fail
+the scenario. HTTP readiness does not establish that a route's UI and data have loaded.

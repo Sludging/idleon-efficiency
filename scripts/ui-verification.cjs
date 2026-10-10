@@ -47,8 +47,11 @@ function ensurePrivateArtifacts() {
   fs.chmodSync(runsRoot, 0o700);
 }
 
-function inspectContainer(name) {
+function inspectContainer(name, strict = false) {
   const result = spawnSync('docker', ['container', 'inspect', name], { cwd: repoRoot, encoding: 'utf8' });
+  if (strict && result.status !== 0 && !/No such (object|container):/.test(result.stderr || '')) {
+    throw new Error(result.error?.message || result.stderr?.trim() || 'Docker container inspection failed.');
+  }
   return result.status === 0 ? JSON.parse(result.stdout)[0] : undefined;
 }
 
@@ -84,25 +87,100 @@ function selectedSave() {
   return path.relative(fs.realpathSync(repoRoot), absolute).split(path.sep).join('/');
 }
 
-function prepareAppConfig() {
+function prepareAppConfig(localSaveFile) {
   fs.mkdirSync(appConfigDir, { recursive: true, mode: 0o700 });
   fs.chmodSync(appConfigDir, 0o700);
   // Next may regenerate these files in development. Only private copies are writable.
   for (const filename of ['next-env.d.ts', 'tsconfig.json']) {
     fs.copyFileSync(path.join(repoRoot, filename), path.join(appConfigDir, filename));
   }
+  const tsconfigPath = path.join(appConfigDir, 'tsconfig.json');
+  const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
+  tsconfig.compilerOptions.paths['@profile-source'] = ['data/fetchers/getProfile.local.tsx'];
+  tsconfig.compilerOptions.paths['@local-save'] = [localSaveFile];
+  fs.writeFileSync(tsconfigPath, `${JSON.stringify(tsconfig, null, 2)}\n`);
+}
+
+function reportStatus() {
+  const daemon = spawnSync('docker', ['info', '--format', '{{.ServerVersion}}'], { cwd: repoRoot, encoding: 'utf8' });
+  if (daemon.error || daemon.status !== 0) {
+    process.stdout.write(`Docker: unavailable (${daemon.error?.message || daemon.stderr?.trim() || 'daemon check failed'})\napp: unknown\nbrowser: unknown\nUI stack: not ready (exit 1).\n`);
+    process.exitCode = 1;
+    return;
+  }
+  process.stdout.write('Docker: available\n');
+  let ready = true;
+  for (const [name, service] of [[appContainerName, 'app'], [containerName, 'browser']]) {
+    let state;
+    let serviceReady = false;
+    try {
+      const container = inspectContainer(name, true);
+      if (!container) state = 'absent';
+      else if (!isOwned(container, service)) state = `conflict (${name} is not owned by this stack)`;
+      else if (container.State?.Restarting) state = 'starting (restarting)';
+      else if (container.State?.Paused) state = 'paused';
+      else if (!container.State?.Running) state = `stopped (${container.State?.Status || 'unknown'})`;
+      else if (service === 'app') {
+        const health = container.State.Health?.Status;
+        serviceReady = health === 'healthy';
+        state = health === 'starting' || health === 'unhealthy' ? health : `running (health: ${health || 'missing'})`;
+      } else {
+        state = 'running';
+        serviceReady = true;
+      }
+    } catch (error) {
+      state = `unknown (${error.message})`;
+    }
+    process.stdout.write(`${service}: ${state}\n`);
+    ready = ready && serviceReady;
+  }
+  process.exitCode = ready ? 0 : 1;
+  process.stdout.write(`UI stack: ${ready ? 'ready' : 'not ready'} (exit ${process.exitCode}).\n`);
 }
 
 function usage() {
-  process.stdout.write(`Isolated UI verification\n\n  yarn ui:up\n  yarn ui:run <repository-relative-scenario.cjs> [args...]\n  yarn ui:down\n\nui:up starts the HTTPS app and Playwright browser on a private Docker network.\nLOCAL_SAVE_FILE is an optional repository-relative JSON path under\ntests/fixtures/saves or profiles; default: tests/fixtures/saves/latest.json.\nRun ui:up again after changing the save selector. ui:down keeps caches.\nScenarios export an async function receiving\n{ page, context, browser, baseURL, artifactsDir, args }.\nbaseURL is always https://app:3000. Artifacts are private in .ui-verification/runs/.\nRequires Docker Compose v2.\n`);
+  process.stdout.write(`UI verification
+
+  yarn ui:status
+  yarn ui:up
+  yarn ui:run <repository-relative-scenario.cjs> [args...]
+  yarn ui:down  (manual shutdown; keeps caches)
+
+Check ui:status first: exit 0 means ready, exit 1 means not ready.
+If not ready, run ui:up. Startup commands wait for each other automatically.
+The HTTPS app and browser containers are reused on a private Docker network.
+Write .ui-verification/<feature>-<unique-suffix>.cjs, then run it with ui:run.
+Scenarios export an async function receiving
+{ page, context, browser, baseURL, artifactsDir, args }.
+Use the supplied page, context, and browser; Chromium is launched per scenario.
+baseURL is https://app:3000. Inspect private output in .ui-verification/runs/.
+Remove your temporary scenarios and artifacts when finished; leave containers running.
+
+LOCAL_SAVE_FILE optionally selects a repository-relative JSON path under
+tests/fixtures/saves or profiles when starting the app.
+Default: tests/fixtures/saves/latest.json.
+Startup requires Docker Compose v2 and util-linux flock.
+`);
 }
 
 async function main() {
   const [command, scenarioArg, ...scenarioArgs] = process.argv.slice(2);
   if (!command || command === '--help' || command === 'help') return usage();
-  if (!['up', 'down', 'run'].includes(command)) {
+  if (!['status', 'up', 'down', 'run'].includes(command)) {
     usage();
     fail(`Unknown command: ${command}`);
+  }
+  if (command === 'status') return reportStatus();
+  if (command === 'up') {
+    if (process.env.UI_VERIFICATION_STARTUP_LOCK !== '1') {
+      const lockFile = `/tmp/${projectName}-${process.getuid()}.lock`;
+      process.exitCode = run('flock', [
+        '--exclusive', '--no-fork', lockFile,
+        process.execPath, __filename, ...process.argv.slice(2),
+      ], { env: { ...process.env, UI_VERIFICATION_STARTUP_LOCK: '1' } });
+      return;
+    }
+    delete process.env.UI_VERIFICATION_STARTUP_LOCK;
   }
   if (typeof playwrightVersion !== 'string' || !/^\d+\.\d+\.\d+$/.test(playwrightVersion)) fail('The isolated Playwright dependency must be pinned to an exact semver version.');
   if (command === 'run' && !scenarioArg) fail('Usage: yarn ui:run <repository-relative-scenario.cjs> [args...]');
@@ -120,7 +198,7 @@ async function main() {
     }
     env.UI_LOCAL_SAVE_FILE = selectedSave();
     ensurePrivateArtifacts();
-    prepareAppConfig();
+    prepareAppConfig(env.UI_LOCAL_SAVE_FILE);
     const status = compose(['up', '--build', '--detach', '--wait', '--wait-timeout', '600'], env);
     if (status !== 0) {
       compose(['logs', '--no-color', '--tail', '100', 'app', 'browser'], env);
