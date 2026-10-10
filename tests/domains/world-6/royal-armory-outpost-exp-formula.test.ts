@@ -9,32 +9,22 @@ import {
  loadExtractionResults,
  validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
-import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { OutpostRank, OutpostRankProgress } from '../../../data/domain/world-6/royalArmory/outposts';
 
-type RankType = 0 | 2 | 4;
-
-const saveName = 'latest';
 const extractionResultsName = 'royal-armory-outpost-exp-formula-data.json';
-const formulaCases: { rank: number; rankType: RankType; track: string }[] = [
- { rank: 0, rankType: 0, track: 'base Outpost point progression' },
- { rank: 0, rankType: 2, track: 'passive-worker and production track' },
- { rank: 0, rankType: 4, track: 'purification track' },
- { rank: 1, rankType: 0, track: 'base Outpost point progression' },
- { rank: 1, rankType: 2, track: 'passive-worker and production track' },
- { rank: 1, rankType: 4, track: 'purification track' },
- { rank: 2, rankType: 0, track: 'base Outpost point progression' },
- { rank: 2, rankType: 2, track: 'passive-worker and production track' },
- { rank: 2, rankType: 4, track: 'purification track' },
+const formulaCases: { rank: number; rankType: OutpostRank; track: string }[] = [
+ { rank: 0, rankType: OutpostRank.Trading, track: 'base Outpost point progression' },
+ { rank: 0, rankType: OutpostRank.Command, track: 'passive-worker and production track' },
+ { rank: 0, rankType: OutpostRank.Purity, track: 'purification track' },
+ { rank: 1, rankType: OutpostRank.Trading, track: 'base Outpost point progression' },
+ { rank: 1, rankType: OutpostRank.Command, track: 'passive-worker and production track' },
+ { rank: 1, rankType: OutpostRank.Purity, track: 'purification track' },
+ { rank: 2, rankType: OutpostRank.Trading, track: 'base Outpost point progression' },
+ { rank: 2, rankType: OutpostRank.Command, track: 'passive-worker and production track' },
+ { rank: 2, rankType: OutpostRank.Purity, track: 'purification track' },
 ];
 
 describe('Royal Armory outpost experience requirements', () => {
- let royalArmory: RoyalArmory;
-
- beforeAll(() => {
-  royalArmory = loadGameDataFromSave(saveName).get('royalArmory') as RoyalArmory;
- });
-
  formulaCases.forEach(({ rank, rankType, track }) => {
   it(`matches the experience needed for rank ${rank} on the ${track}`, () => {
    const extractionResults = loadExtractionResults(extractionResultsName);
@@ -43,7 +33,7 @@ describe('Royal Armory outpost experience requirements', () => {
     extractionResults,
     `royal_armory_outpost_exp_formula_${rank}_${rankType}`,
    );
-   const domainValue = royalArmory.getOutpostExperienceFormula(rank, rankType);
+   const domainValue = OutpostRankProgress.getExperienceThreshold(rank, rankType);
 
    expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
     tolerance: 0,

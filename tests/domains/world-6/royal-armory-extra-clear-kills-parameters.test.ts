@@ -12,7 +12,7 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Player } from '../../../data/domain/player';
 import { BigFish } from '../../../data/domain/world-7/bigFish';
 import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-extra-clear-kills-data.json';

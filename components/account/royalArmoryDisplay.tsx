@@ -4,7 +4,11 @@ import { useMemo, useState } from "react";
 import { Box, DataTableProps, Grid, Select, Text } from "grommet";
 import { useShallow } from "zustand/react/shallow";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
-import { RoyalArmory, RoyalArmoryOrbletMarketBonus, RoyalArmoryUpgrade } from "../../data/domain/world-6/royalArmory";
+import { OUTPOST_RANKS, OutpostRank } from "../../data/domain/world-6/royalArmory/outposts";
+import { RoyalArmory } from "../../data/domain/world-6/royalArmory/royalArmory";
+import { RoyalArmoryOrbletMarketBonus } from "../../data/domain/world-6/royalArmory/orblets";
+import { RoyalArmoryUpgrade } from "../../data/domain/world-6/royalArmory/upgrades";
+import { MapInfo } from "../../data/domain/maps";
 import IconImage from "../base/IconImage";
 import ShadowBox from "../base/ShadowBox";
 import ContentTabs from "../base/ContentTabs";
@@ -203,6 +207,42 @@ function OrbletCards({ offers, orbletsOwned }: { offers: RoyalArmoryOrbletMarket
     );
 }
 
+function OutpostCards({ armory }: { armory: RoyalArmory }) {
+    return (
+        <Grid aria-label="Royal Armory Outposts" columns={{ size: 'medium', count: 'fill' }} gap="medium" fill style={{ gridAutoRows: '1fr' }}>
+            {Array.from(armory.mapStates.values()).map(outpost => {
+                if (!outpost.isOutpost()) return null;
+                const unusedPoints = outpost.getUnusedPoints();
+                return (
+                    <ShadowBox key={outpost.mapId} id={`royal-outpost-${outpost.mapId}`} background="dark-1" pad="medium" gap="small">
+                        <Text size="small" weight={500}>{MapInfo[outpost.mapId].data.map.name}</Text>
+                        <Box gap="small">
+                            {OUTPOST_RANKS.map(rank => {
+                                const progress = outpost.getRankProgress(rank);
+                                return (
+                                    <TextAndLabel
+                                        key={rank}
+                                        label={OutpostRank[rank]}
+                                        text={`Rank ${commaNotation(progress.level)} (${notateNumber(progress.currentXP, 'Smaller')} / ${notateNumber(progress.requiredXP, 'Smaller')} XP)`}
+                                        textSize="small"
+                                        labelSize="xsmall"
+                                    />
+                                );
+                            })}
+                            <TextAndLabel
+                                label="Unused points"
+                                text={commaNotation(unusedPoints)}
+                                textSize="small"
+                                labelSize="xsmall"
+                            />
+                        </Box>
+                    </ShadowBox>
+                );
+            })}
+        </Grid>
+    );
+}
+
 export default function RoyalArmoryDisplay() {
     const { theData } = useAppDataStore(useShallow(state => ({
         theData: state.data.getData(),
@@ -232,7 +272,8 @@ export default function RoyalArmoryDisplay() {
                 <ContentTabs
                     options={[
                         { value: 'Upgrades', label: 'Upgrades' },
-                        { value: 'Orblets', label: 'Orblets' }
+                        { value: 'Orblets', label: 'Orblets' },
+                        { value: 'Outposts', label: 'Outposts' }
                     ]}
                     value={tab}
                     onChange={setTab}
@@ -248,12 +289,14 @@ export default function RoyalArmoryDisplay() {
                     material={material}
                     onMaterialChange={setMaterial}
                 />
-            ) : (
+            ) : tab === 'Orblets' ? (
                 <Box>
                     <OrbletBalance armory={armory} />
                     <OrbletCards offers={armory.orbletMarketBonuses} orbletsOwned={armory.getOrbletsOwned()} />
                 </Box>
-            )}
+            ) : tab === 'Outposts' ? (
+                <OutpostCards armory={armory} />
+            ) : null}
         </Box>
     );
 }

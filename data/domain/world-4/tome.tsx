@@ -33,7 +33,7 @@ import { ElegantSeashell, Gaming, ImmortalSnail } from '../world-5/gaming';
 import { ArtifactStatus } from '../world-5/sailing/artifacts';
 import { Account } from '../account';
 import { Farming } from '../world-6/farming';
-import { RoyalArmory } from '../world-6/royalArmory';
+import { RoyalArmory } from '../world-6/royalArmory/royalArmory';
 import { SushiStation } from '../world-7/sushi';
 import { Sneaking } from '../world-6/sneaking';
 import { Summoning } from '../world-6/summoning';
@@ -1148,11 +1148,11 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 119:
                 // Number of Royal Guardian outposts built.
-                line.updateAllPlayersCurrentValue(royalArmory.getTotalStat(4));
+                line.updateAllPlayersCurrentValue(royalArmory.builtOutpostCount);
                 break;
             case 120:
                 // Total Royal Armory resource grade.
-                line.updateAllPlayersCurrentValue(royalArmory.getTotalStat(0));
+                line.updateAllPlayersCurrentValue(royalArmory.totalResourceGrade);
                 break;
             case 121:
                 line.updateAllPlayersCurrentValue(jellyOperator.getSuccessfulOperations());

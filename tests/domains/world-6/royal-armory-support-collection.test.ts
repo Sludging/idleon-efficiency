@@ -4,31 +4,21 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
-import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-support-collection-data.json';
 
 describe('Royal Armory Support Collection bonus', () => {
     let royalArmory: RoyalArmory;
-    let jellyOperator: JellyOperator;
 
     beforeAll(() => {
         const gameData = loadGameDataFromSave(saveName);
         royalArmory = gameData.get('royalArmory') as RoyalArmory;
-        jellyOperator = gameData.get('jellyOperator') as JellyOperator;
     });
 
     it('matches the per-support collection-rate percentage', () => {
-        const supportObstruction = jellyOperator.obstructions.find(candidate => candidate.index === 41);
-        if (!supportObstruction) {
-            throw new Error(
-                'Missing direct Support Collection parameter: JellyOperator.obstructions has no index 41, ' +
-                'matching JellyOperation("RoG_BonusQTY", 41, 0).',
-            );
-        }
-        const domainValue = royalArmory.getSupportCollectionBonus(supportObstruction.getBonus());
+        const domainValue = royalArmory.resourceCollectionBonuses.supportCollectionBonus;
 
         const extractionResults = loadExtractionResults(extractionResultsName);
         validateExtractionHealth(extractionResults);

@@ -9,7 +9,7 @@ import {
  validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-outpost-purify-bonus-data.json';
@@ -26,7 +26,7 @@ describe('Royal Armory purified-outpost collection bonus', () => {
   const extractionResults = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(extractionResults);
   const liveValue = getExtractedValue(extractionResults, extractionKey);
-  const domainValue = royalArmory.getOutpostPurifyBonus();
+  const domainValue = royalArmory.resourceCollectionBonuses.purificationBonus;
 
   expect(domainValue).toMatchLiveGameWithDetails(liveValue, {
    tolerance: 0,

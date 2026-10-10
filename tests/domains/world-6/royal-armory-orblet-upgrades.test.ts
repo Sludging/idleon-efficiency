@@ -13,10 +13,8 @@ import {
 import { loadGameDataFromSave, loadTestSave } from '../../utils/cloudsave-loader';
 import { updateIdleonData } from '../../../data/domain/idleonData';
 import { normalizeCompanionStates } from '../../../data/domain/companions/companionState';
-import {
-    RoyalArmory,
-    RoyalArmoryOrbletMarketBonus,
-} from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import { RoyalArmoryOrbletMarketBonus } from '../../../data/domain/world-6/royalArmory/orblets';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-orblet-upgrades-data.json';

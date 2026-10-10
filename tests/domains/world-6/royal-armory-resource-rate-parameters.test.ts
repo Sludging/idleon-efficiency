@@ -12,8 +12,9 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Arcade } from '../../../data/domain/world-2/arcade';
 import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Player } from '../../../data/domain/player';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
-import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
+import { OutpostRank } from '../../../data/domain/world-6/royalArmory/outposts';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import { RoyalUnitRole } from '../../../data/domain/world-6/royalArmory/units';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
 import { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
@@ -42,7 +43,7 @@ const parameterComparisons: ParameterComparison[] = [
   extractionKey: 'royal_armory_rate_outpost_purify_bonus',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return royalArmory.getOutpostPurifyBonus();
+   return royalArmory.resourceCollectionBonuses.purificationBonus;
   },
  },
  {
@@ -54,24 +55,11 @@ const parameterComparisons: ParameterComparison[] = [
   },
  },
  {
-  description: 'Outpost level bonus coefficient for row level',
-  extractionKey: 'royal_armory_rate_outpost_level_bonus_1',
-  domainValue: gameData => {
-   const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return royalArmory.getOutpostLevelBonus(1, 0);
-  },
- },
- {
   description: 'Support Collection bonus used by the Royal Armory rate',
   extractionKey: 'royal_armory_rate_support_collection',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   const jellyOperator = gameData.get('jellyOperator') as JellyOperator;
-   const obstruction = jellyOperator.obstructions.find(candidate => candidate.index === 41);
-   if (!obstruction) {
-    throw new Error('Missing Jelly Operator obstruction 41 for Support Collection.');
-   }
-   return royalArmory.getSupportCollectionBonus(obstruction.getBonus());
+   return royalArmory.resourceCollectionBonuses.supportCollectionBonus;
   },
  },
  {
@@ -183,7 +171,7 @@ const parameterComparisons: ParameterComparison[] = [
   extractionKey: 'royal_armory_rate_outpost_exp_rank_row_1_rank_2',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return royalArmory.getOutpostExperienceRank(1, 2);
+   return royalArmory.mapStates.get(1)!.getRankProgress(OutpostRank.Command).level;
   },
  },
  {
@@ -199,7 +187,7 @@ const parameterComparisons: ParameterComparison[] = [
   extractionKey: 'royal_armory_rate_total_units_row_1_0',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return royalArmory.getTotalOutpostUnits(1, 0);
+   return royalArmory.mapStates.get(1)!.units.getTotalCount(RoyalUnitRole.Worker);
   },
  },
  {
@@ -207,7 +195,7 @@ const parameterComparisons: ParameterComparison[] = [
   extractionKey: 'royal_armory_rate_unit_spec_effect_0',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return royalArmory.getUnitSpecEffect(0);
+   return royalArmory.units.getRole(RoyalUnitRole.Worker).effect;
   },
  },
  {
@@ -215,28 +203,29 @@ const parameterComparisons: ParameterComparison[] = [
   extractionKey: 'royal_armory_rate_is_map_purified_row_1',
   domainValue: gameData => {
    const royalArmory = gameData.get('royalArmory') as RoyalArmory;
-   return Number(royalArmory.isMapPurified(1));
+   const map = royalArmory.mapStates.get(1)!;
+   return Number(map.isOutpost() && map.purified);
   },
  },
  {
   description: 'Royal Armory resource grades that scale Outpost collection',
   extractionKey: 'royal_armory_rate_total_statz_0',
-  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(0),
+  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).totalResourceGrade,
  },
  {
   description: 'Royal Guardian outpost upgrade levels that scale collection',
   extractionKey: 'royal_armory_rate_total_statz_1',
-  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(1),
+  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).totalOutpostUpgradeLevels,
  },
  {
   description: 'purified outposts that increase the account collection bonus',
   extractionKey: 'royal_armory_rate_total_statz_2',
-  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(2),
+  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).purifiedOutpostCount,
  },
  {
   description: 'log-scaled owned Top of List resources that scale collection',
   extractionKey: 'royal_armory_rate_total_statz_3',
-  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(3),
+  domainValue: gameData => (gameData.get('royalArmory') as RoyalArmory).resourceQuantityLogTotal,
  },
  {
   description: 'W14 alchemy bubble bonus for the player used by the Outpost rate, before its cap',
@@ -244,7 +233,7 @@ const parameterComparisons: ParameterComparison[] = [
   domainValue: gameData => {
    const alchemy = gameData.get('alchemy') as Alchemy;
    const players = gameData.get("players") as Player[];
-   return alchemy.getBubbleBonusForKey('W14', getTargetPlayer(players));
+   return alchemy.getBubbleBonusForKey('W14', getTargetPlayer(players, 3));
   },
  }
 ];

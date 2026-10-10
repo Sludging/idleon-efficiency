@@ -53,7 +53,7 @@ import { Gaming } from './world-5/gaming';
 import type { Gallery } from './world-7/gallery';
 import type { HatRack } from './world-7/hatRack';
 import type { ResearchGrid } from './world-7/research';
-import { RoyalArmory } from './world-6/royalArmory';
+import { RoyalArmory } from './world-6/royalArmory/royalArmory';
 const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
 
 export class PlayerStats {

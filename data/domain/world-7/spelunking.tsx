@@ -68,6 +68,10 @@ export class Upgrade {
     constructor(public index: number, public data: SpelunkingUpgradeModel) {
     }
 
+    getBonus(): number {
+        return this.data.bonusPerLevel * this.level;
+    }
+
     static fromBase = (data: SpelunkingUpgradeBase[]): Upgrade[] => {
         return data.map(upgrade => new Upgrade(upgrade.index, upgrade.data));
     }
@@ -93,6 +97,10 @@ export class Spelunking extends Domain {
 
     getTotalShopUpgradeLevels(): number {
         return this.upgrades.reduce((total, upgrade) => total + Math.max(0, upgrade.level), 0);
+    }
+
+    getUpgradeBonus(index: number): number {
+        return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
     }
 
     getTotalDiscoveries(): number {

@@ -1,0 +1,16 @@
+{
+  "description": "Purchased Spelunking shop bonuses before mechanic-specific modifiers, paired with the retained save",
+  "target": "Spelunking Upgrade.getBonus: ShopUpgBonus(index, 1)",
+  "extractions": [
+    {
+      "label": "spelunking_purchased_bonus_59",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 59, 1)",
+      "description": "Purchased Stamina Trackometer bonus per meter level, before the current meter level multiplies its effective bonus"
+    },
+    {
+      "label": "spelunking_purchased_bonus_65",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 65, 1)",
+      "description": "Purchased Striped Hardhat bonus; this upgrade is locked in the retained save and must contribute zero rather than a negative bonus"
+    }
+  ]
+}

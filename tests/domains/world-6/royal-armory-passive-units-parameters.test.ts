@@ -5,7 +5,8 @@ import {
 } from '../../utils/live-game-data-loader';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { OutpostRank } from '../../../data/domain/world-6/royalArmory/outposts';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 // Both saved rows compare the same worker-granting rank formula; row selection is not a separate branch.
@@ -40,7 +41,7 @@ describe('Royal Armory passive-unit rank parameters', () => {
             }
             validateExtractionHealth(extractionResults);
             const liveValue = getExtractedValue(extractionResults, extractionKey);
-            const domainValue = royalArmory.getOutpostExperienceRank(mapIndex, 2);
+            const domainValue = royalArmory.mapStates.get(mapIndex)!.getRankProgress(OutpostRank.Command).level;
 
             expect(domainValue).toMatchLiveGame(liveValue, 0);
         });

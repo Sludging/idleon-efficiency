@@ -5,7 +5,7 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { JellyOperator } from '../../../data/domain/world-7/jellyOperator';
 
 const saveName = 'latest';

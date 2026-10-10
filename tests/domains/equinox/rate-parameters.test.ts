@@ -10,7 +10,7 @@ import { Emperor } from '../../../data/domain/emperor';
 import { Tesseract } from '../../../data/domain/tesseract';
 import { Tome } from '../../../data/domain/tome';
 import { ResearchGrid } from '../../../data/domain/world-7/research';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';

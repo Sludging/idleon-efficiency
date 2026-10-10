@@ -4,12 +4,13 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { OutpostRank } from '../../../data/domain/world-6/royalArmory/outposts';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-total-stats-data.json';
 const representativeBuiltOutpost = 1;
-const purificationTrack = 4;
+const purificationTrack = OutpostRank.Purity;
 
 describe('Purified-outpost count direct parameter', () => {
     let royalArmory: RoyalArmory;
@@ -25,10 +26,7 @@ describe('Purified-outpost count direct parameter', () => {
             extractionResults,
             `royal_armory_total_stats_rank_row_${representativeBuiltOutpost}_type_${purificationTrack}`,
         );
-        const domainValue = royalArmory.getOutpostExperienceRank(
-            representativeBuiltOutpost,
-            purificationTrack,
-        );
+        const domainValue = royalArmory.mapStates.get(representativeBuiltOutpost)!.getRankProgress(purificationTrack).level;
 
         expect(domainValue).toMatchLiveGame(liveValue, 0);
     });

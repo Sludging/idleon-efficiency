@@ -1,4 +1,5 @@
-import type { RoyalArmory, RoyalArmoryUpgrade } from '../../../data/domain/world-6/royalArmory';
+import type { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import type { RoyalArmoryUpgrade } from '../../../data/domain/world-6/royalArmory/upgrades';
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {

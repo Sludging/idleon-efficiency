@@ -69,7 +69,7 @@ import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
 import { Compass, updateCompassDamageEfficiency } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
-import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory';
+import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
 import { EventShop } from './eventShop';
 import { Friends, updateFriends } from './friends';

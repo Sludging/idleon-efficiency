@@ -1,7 +1,7 @@
 import { Domain } from "./base/domain";
 import type { RawData } from "./base/domain";
 import type { Item } from "./items";
-import type { RoyalArmory } from "./world-6/royalArmory";
+import type { RoyalArmory } from "./world-6/royalArmory/royalArmory";
 import type { LegendTalents } from "./world-7/legendTalents";
 
 export class MasterClasses extends Domain {

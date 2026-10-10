@@ -1,8 +1,5 @@
 /**
- * Royal Armory map purification state comparisons.
- *
- * An outpost row with fewer than two fields is not purified; otherwise
- * its purification rank is capped at one to represent purification.
+ * Whether saved maps have reached the first Purity rank and earn its production bonus.
  */
 
 import {
@@ -11,7 +8,7 @@ import {
     validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 const saveName = 'latest';
 const extractionResultsName = 'royal-armory-map-purification-state-data.json';
@@ -42,7 +39,8 @@ describe('Royal Armory map purification state', () => {
 
     purificationCases.forEach(({ mapIndex, extractionKey, description }) => {
         it(`matches the game purification state for ${description}`, () => {
-            const domainValue = royalArmory.isMapPurified(mapIndex);
+            const map = royalArmory.mapStates.get(mapIndex)!;
+            const domainValue = map.isOutpost() && map.purified;
             const extractionResults = loadExtractionResults(extractionResultsName);
             validateExtractionHealth(extractionResults);
             const liveValue = getExtractedValue(extractionResults, extractionKey);

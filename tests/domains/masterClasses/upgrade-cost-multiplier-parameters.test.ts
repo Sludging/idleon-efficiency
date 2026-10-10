@@ -1,7 +1,7 @@
 import type { ExtractionResults } from '../../utils/live-game-data-loader';
 import type { ParameterTestSpec } from '../../utils/parameter-test-config';
 import type { LegendTalents } from '../../../data/domain/world-7/legendTalents';
-import type { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import type { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import {
   getExtractedValue,
   loadExtractionResults,

@@ -13,7 +13,7 @@ import {
 } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { Farming } from '../../../data/domain/world-6/farming';
-import { RoyalArmory } from '../../../data/domain/world-6/royalArmory';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 import { Minehead } from '../../../data/domain/world-7/minehead';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
@@ -39,12 +39,12 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  royalOutpostsBuilt: {
   description: 'Royal Guardian outposts built used in Tome score',
   extractionKey: 'tome_producer_119_royalg_total_stats_4',
-  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(4),
+  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).builtOutpostCount,
  },
  royalResourceGrade: {
   description: 'Royal Armory Resource Grade used in Tome score line 120',
   extractionKey: 'tome_producer_120_royalg_total_stats_0',
-  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).getTotalStat(0),
+  domainExtractor: (gameData) => (gameData.get('royalArmory') as RoyalArmory).totalResourceGrade,
  },
 };
 

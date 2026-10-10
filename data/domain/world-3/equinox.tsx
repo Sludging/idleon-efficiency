@@ -16,7 +16,7 @@ import { Tesseract } from "../tesseract";
 import { Tome } from "../world-4/tome";
 import { EventShop } from "../eventShop";
 import { ResearchGrid } from "../world-7/research";
-import { RoyalArmory } from "../world-6/royalArmory";
+import { RoyalArmory } from "../world-6/royalArmory/royalArmory";
 
 class Challenge {
   complete: boolean = false;
