@@ -1,10 +1,8 @@
 import {
     Box,
-    Grid,
     Text,
 } from 'grommet'
-import TextAndLabel from '../../../components/base/TextAndLabel';
-import ShadowBox from "../../base/ShadowBox";
+import DataRow from "../../base/DataRow";
 import IconImage from '../../base/IconImage';
 import { Prayer } from '../../../data/domain/world-3/prayers';
 import { GroupByFunction, nFormatter } from '../../../data/utility';
@@ -32,20 +30,27 @@ export function PrayerDisplay() {
                                 const costToNextLevel = prayer.getLevelCosts();
                                 const costToMax = prayer.getCostToMax();
                                 return (
-                                    <ShadowBox key={`prayer_${index}`} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }} style={{opacity: prayer.level == 0 ? 0.5 : 1}}>
-                                        <Grid columns={{ count: 7, size: 'auto' }} gap={{ column: 'medium' }} fill>
-                                            <IconImage data={prayer.getImageData()} />
-                                            <TextAndLabel textSize='small' text={prayer.data.name} label="Name" />
-                                            <TextAndLabel textSize='small' text={`${prayer.level.toString()}/${prayer.data.maxLevel.toString()}`} label="Level" />
-                                            <TextAndLabel textSize='xsmall' text={prayer.getBonusText()} label="Bonus" />
-                                            <TextAndLabel textSize='xsmall' text={prayer.getCurseText()} label="Curse" />
-                                            {prayer.level == prayer.data.maxLevel && <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>}
-                                            {prayer.level == 0 && <TextAndLabel textSize='small' text={prayer.data.unlockWave.toString()} label="Wave Req" />}
-                                            {prayer.level > 0 && prayer.level != prayer.data.maxLevel && <TextAndLabel textSize='small' textColor={costToNextLevel < amountInStorage ? 'green-1' : 'white'} text={nFormatter(costToNextLevel, "Smaller")} label="Cost to next" />}
-                                            {prayer.level > 0 && prayer.level != prayer.data.maxLevel && <TextAndLabel textSize='small' textColor={costToMax < amountInStorage ? 'green-1' : 'white'} text={nFormatter(costToMax, "Smaller")} label="Cost to max" />}
-
-                                        </Grid>
-                                    </ShadowBox>
+                                    <DataRow
+                                        key={`prayer_${index}`}
+                                        opacity={prayer.level == 0 ? 0.5 : 1}
+                                        columns={["minmax(0, 1.6fr)", "minmax(0, 0.7fr)", "minmax(0, 1.2fr)", "minmax(0, 1.7fr)", "minmax(0, 0.8fr)", "minmax(0, 0.8fr)"]}
+                                        fields={[
+                                            { key: "identity", kind: "identity", name: prayer.data.name, artwork: <IconImage data={prayer.getImageData()} /> },
+                                            { key: "level", kind: "text", label: "Level", value: `${prayer.level.toString()}/${prayer.data.maxLevel.toString()}` },
+                                            { key: "bonus", kind: "text", label: "Bonus", value: prayer.getBonusText(), role: "description" },
+                                            { key: "curse", kind: "text", label: "Curse", value: prayer.getCurseText(), role: "description" },
+                                            ...(prayer.level == prayer.data.maxLevel ? [
+                                                { key: "maxed", kind: "content" as const, label: null, content: <Text color="green-1" size="small">Maxed!</Text> },
+                                            ] : []),
+                                            ...(prayer.level == 0 ? [
+                                                { key: "wave", kind: "text" as const, label: "Wave Req", value: prayer.data.unlockWave.toString() },
+                                            ] : []),
+                                            ...(prayer.level > 0 && prayer.level != prayer.data.maxLevel ? [
+                                                { key: "next", kind: "text" as const, label: "Cost to next", color: costToNextLevel < amountInStorage ? 'green-1' : 'white', value: nFormatter(costToNextLevel, "Smaller") },
+                                                { key: "max", kind: "text" as const, label: "Cost to max", color: costToMax < amountInStorage ? 'green-1' : 'white', value: nFormatter(costToMax, "Smaller") },
+                                            ] : []),
+                                        ]}
+                                    />
                                 )
                             })
                         }

@@ -46,16 +46,8 @@ Choose rows, cards, tables, or icon grids according to what players need to read
 field count, collection size, filtering, or artwork alone does not decide. Match an existing
 feature family's pattern where applicable.
 
-- **Rows:** [Atom Collider](../../components/world-3/construction/atomCollider.tsx) uses a
-  dark-1 surface, medium padding, small field gaps, and `TextAndLabel` values.
-  [Breeding upgrades](../../components/world-4/breeding/upgrades.tsx) uses small padding,
-  medium bottom margins, and compact labeled values. For new upgrade rows, put unlabeled
-  artwork beside `Name` and label the data fields. Use compact text: `xsmall` labels/effects
-  and `small` or `xsmall` names/levels. Choose columns for the feature; the examples' columns
-  and percentage tracks are not a universal schema. For new Jelly-style rows, use
-  [ResourceDisplay](../../components/account/shared/ResourceDisplay.tsx) with
-  `canAfford={available && affordable}`: green when true, neutral otherwise.
-  Existing feature families keep their color treatment.
+- **Rows:** use `DataRow` for aligned repeated records. Read [Data rows](ui-rows.md)
+  for composition, fields, and caller ownership.
 - **Cards:** [Sneaking upgrades](../../components/world-6/sneaking/sneakingUpgrades.tsx)
   keeps identity and details together on a dark-1 surface with medium padding and small
   gaps. Its image beside the name and level is a useful composition reference, not a
@@ -69,11 +61,9 @@ feature family's pattern where applicable.
   recognition and a compact overview, with details disclosed separately. Use this only
   when the overview serves the player task.
 
-These are alternatives, not a ranking or blanket approval of their source files. Small
-primitives and theme tokens do not enforce composition consistency: repeated rows, cards,
-resource displays, image/title groups, and grids can still drift in padding, widths,
-columns, gaps, image inset, and grid behavior. Choose a concrete reference for the
-container, spacing, image/title inset, and grid behavior, then keep those details consistent.
+Rows, cards, tables and icon grids are alternatives, not a ranking. Card/table/icon
+references prescribe only their named aspects, not blanket approval of their source files.
+Shared primitives alone do not establish a new composition convention.
 
 ## Page and data display conventions
 
@@ -108,9 +98,10 @@ container, spacing, image/title inset, and grid behavior, then keep those detail
 - Ordinary feature pages inherit outer width, centering, and horizontal padding from the
   shared app layout. Do not add another page-content max-width, centering, or horizontal
   padding; add padding within sections and rows when their chosen composition calls for it.
-- Use `TextAndLabel` for a label with a text value and `ComponentAndLabel` for a complex
-  value. They are not mandatory wrappers for every text, image, status, or currency display.
-  `TextAndLabel` supplies small labels by default; choose value size to suit its role.
+- Outside DataRow, use `TextAndLabel` for a label with a text value and
+  `ComponentAndLabel` for a complex value; they are not mandatory wrappers for every
+  text, image, status or currency. DataRow owns private fixed-size identity/text rendering
+  and rich-content label wrappers; other contexts retain primitive defaults and role sizes.
 - Use `TipDisplay` when an explanation or exact count should not crowd the main display.
   Existing forms include the `TextAndLabel` information icon, details on a game image, and
   exact resource counts behind compact values. Tooltips are optional; do not make every

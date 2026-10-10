@@ -1,51 +1,21 @@
 "use client"
 
-import { Box, CheckBox, Grid, Text } from "grommet";
+import { Box, CheckBox, Text } from "grommet";
 import { useMemo, useState } from "react";
-import { UpgradeVault, VaultUpgBonus } from "../../data/domain/upgradeVault";
+import { UpgradeVault } from "../../data/domain/upgradeVault";
 import { getCoinsArray, nFormatter } from "../../data/utility";
-import ShadowBox from "../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
+import DataRow, { type DataRowField } from "../base/DataRow";
+import { ComponentAndLabel } from "../base/TextAndLabel";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 import CoinsDisplay from "../coinsDisplay";
 import IconImage from "../base/IconImage";
+import styled from "styled-components";
 
-function UpgradeCostColumns(props: {
-    upgrade: VaultUpgBonus
-}) {
-    const { upgrade } = props;
-    const isMaxLevel = upgrade.level >= upgrade.data.max_level;
-
-    // If the upgrade is maxed, we don't need to show the cost columns
-    if (isMaxLevel) {
-        return (
-            <Box fill justify="center" align="center">
-                <Text size="large">Maxed</Text>
-            </Box>
-        )
-    }
-
-    // Otherwise, we show the cost and cost to max columns
-    return (
-        <>
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label="Next level cost"
-                component={
-                    <CoinsDisplay coinMap={getCoinsArray(upgrade.cost)} maxCoins={3} />
-                }
-            />
-            <ComponentAndLabel
-                labelSize="xsmall"
-                label="Cost to max"
-                component={
-                    <CoinsDisplay coinMap={getCoinsArray(upgrade.costToMax)} maxCoins={3} />
-                }
-            />
-        </>
-    )
-}
+const CompactCoins = styled(Box)`
+    span { font-size: 14px; line-height: 20px; }
+    > div, > div > div { align-items: center; }
+`;
 
 export function UpgradeVaultDisplay() {
     const [hideMaxed, setHideMaxed] = useState(true);
@@ -103,44 +73,46 @@ export function UpgradeVaultDisplay() {
             </Box>
             {
                 upgradesToShow.map((upgrade, index) => {
+                    const costFields: DataRowField[] = !upgrade.unlocked ? [
+                        {
+                            key: 'unlock',
+                            kind: 'content',
+                            label: null,
+                            content: <Text size="xsmall">Unlock in {upgrade.data.unlock_req - upgradeVault.totalVaultLevel}</Text>
+                        }
+                    ] : upgrade.level >= upgrade.data.max_level ? [
+                        { key: 'maxed', kind: 'content', label: null, content: <Text size="small">Maxed</Text> }
+                    ] : [
+                        {
+                            key: 'next-cost',
+                            kind: 'content',
+                            label: 'Next level cost',
+                            content: <CompactCoins><CoinsDisplay coinMap={getCoinsArray(upgrade.cost)} maxCoins={3} regularRow /></CompactCoins>
+                        },
+                        {
+                            key: 'max-cost',
+                            kind: 'content',
+                            label: 'Cost to max',
+                            content: <CompactCoins><CoinsDisplay coinMap={getCoinsArray(upgrade.costToMax)} maxCoins={3} regularRow /></CompactCoins>
+                        }
+                    ];
                     return (
-                        <ShadowBox
-                            style={{ opacity: upgrade.unlocked ? 1 : 0.6 }}
+                        <DataRow
                             key={index}
-                            background="dark-1"
-                            pad="xsmall"
-                            direction="row"
-                            align="center"
-                            justify="between"
-                            margin={{ bottom: 'small' }}
-                        >
-                            <Grid columns={["25%", "30%", "10%", "15%", "15%"]} gap="small" align="center" fill>
-                                <ComponentAndLabel
-                                    labelSize="xsmall"
-                                    label="Name"
-                                    component={
-                                        <Box direction="row" gap="small" align="center">
-                                            <IconImage data={upgrade.getImageData()} scale={0.7} />
-                                            <Text size="xsmall">{upgrade.data.name}</Text>
-                                        </Box>
-                                    }
-                                />
-                                <TextAndLabel
-                                    labelSize="xsmall"
-                                    textSize='xsmall'
-                                    text={upgrade.getDescription()}
-                                    label="Bonus"
-                                />
-                                <TextAndLabel
-                                    labelSize="xsmall"
-                                    textSize='small'
-                                    text={`${upgrade.level} / ${upgrade.data.max_level}`}
-                                    label="Level"
-                                />
-                                {upgrade.unlocked && <UpgradeCostColumns upgrade={upgrade} />}
-                                {!upgrade.unlocked && <Text size="xsmall">Unlock in {upgrade.data.unlock_req - upgradeVault.totalVaultLevel}</Text>}
-                            </Grid>
-                        </ShadowBox>
+                            opacity={upgrade.unlocked ? 1 : 0.6}
+                            columns={['25fr', '30fr', '10fr', '15fr', '15fr']}
+                            fields={[
+                                {
+                                    key: 'identity',
+                                    kind: 'identity',
+                                    name: upgrade.data.name,
+                                    artwork: <IconImage data={upgrade.getImageData()} scale={0.7} />
+                                },
+                                { key: 'bonus', kind: 'text', label: 'Bonus', value: upgrade.getDescription(), role: 'description' },
+                                { key: 'level', kind: 'text', label: 'Level', value: `${upgrade.level} / ${upgrade.data.max_level}` },
+                                ...costFields
+                            ]}
+                        />
                     )
                 })
             }

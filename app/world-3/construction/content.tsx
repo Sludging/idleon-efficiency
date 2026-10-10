@@ -17,6 +17,7 @@ import {
 import React, { useEffect, useContext, useState, useMemo } from 'react';
 
 import ShadowBox from '../../../components/base/ShadowBox';
+import DataRow from '../../../components/base/DataRow';
 import ContentTabs from '../../../components/base/ContentTabs';
 import { Refinery } from '../../../data/domain/world-3/construction/refinery';
 import { Item } from '../../../data/domain/items';
@@ -650,7 +651,7 @@ function ShrinesDisplay() {
                 label="Total Levels"
                 text={shrineData.reduce((sum, shrine) => sum += shrine.level, 0).toString()}
             />
-            <Box>
+            <Box gap="small">
                 {shrineData.map((shrine, index) => {
                     // Get map name while protecting against new maps.
                     let mapName = "Unknown";
@@ -659,42 +660,18 @@ function ShrinesDisplay() {
                     }
 
                     return (
-                        <ShadowBox key={index} background="dark-1" pad="medium" margin={{ bottom: 'small' }} style={{ opacity: shrine.level == 0 ? 0.5 : 1 }}>
-                            <Box gap="small">
-                                <Box direction="row" align="center">
-                                    <Box margin={{ right: 'small' }}>
-                                        <IconImage data={shrine.getImageData()} scale={0.5} />
-                                    </Box>
-                                    <Text size="small">{shrine.name}</Text>
-                                </Box>
-                                <Grid columns={{ count: 4, size: 'auto' }}>
-                                    <TextAndLabel
-                                        textSize='small'
-                                        label="Level"
-                                        text={shrine.level.toString()}
-                                        margin={{ right: 'medium', bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="Current Map"
-                                        textSize='small'
-                                        text={mapName}
-                                        margin={{ right: 'medium', bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="Hours"
-                                        textSize='small'
-                                        text={`${nFormatter(Math.round(shrine.accumulatedHours))}/${nFormatter(Math.round(shrine.getHourRequirement()))}`}
-                                        margin={{ right: 'medium', bottom: 'small' }}
-                                    />
-                                    <TextAndLabel
-                                        label="Bonus"
-                                        textSize='xsmall'
-                                        text={`${shrine.getBonusText(shrine.currentMap)}`}
-                                        margin={{ right: 'medium', bottom: 'small' }}
-                                    />
-                                </Grid>
-                            </Box>
-                        </ShadowBox>
+                        <DataRow
+                            key={index}
+                            opacity={shrine.level == 0 ? 0.5 : 1}
+                            columns={["minmax(0, 25fr)", "minmax(0, 9fr)", "minmax(0, 26fr)", "minmax(0, 14fr)", "minmax(0, 26fr)"]}
+                            fields={[
+                                { key: "identity", kind: "identity", name: shrine.name, artwork: <IconImage data={shrine.getImageData()} scale={0.5} /> },
+                                { key: "level", kind: "text", label: "Level", value: shrine.level.toString() },
+                                { key: "map", kind: "text", label: "Current Map", value: mapName },
+                                { key: "hours", kind: "text", label: "Hours", value: `${nFormatter(Math.round(shrine.accumulatedHours))}/${nFormatter(Math.round(shrine.getHourRequirement()))}` },
+                                { key: "bonus", kind: "text", label: "Bonus", value: `${shrine.getBonusText(shrine.currentMap)}`, role: "description" },
+                            ]}
+                        />
                     )
                 })
                 }

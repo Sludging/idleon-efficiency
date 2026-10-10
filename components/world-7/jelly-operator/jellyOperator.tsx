@@ -3,6 +3,7 @@ import { Box, Grid, Heading, Meter, ResponsiveContext, Text } from "grommet";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import DataRow from "../../base/DataRow";
 import { ResourceDisplay } from "../../account/shared/ResourceDisplay";
 import { ImageData } from "../../../data/domain/imageData";
 import { JellyOperator } from "../../../data/domain/world-7/jellyOperator";
@@ -123,22 +124,22 @@ export function JellyUpgrades({ jelly }: { jelly: JellyOperator }) {
                 const unlimited = upgrade.data.maxLevel > 998;
                 const maxed = !flavor && upgrade.isMaxed();
                 const locked = !upgrade.isAvailable();
-                return <ShadowBox key={upgrade.index} background="dark-1" pad="medium" style={{ opacity: locked || flavor ? 0.6 : 1 }}>
-                    <Grid columns={small ? ['flex'] : ['minmax(0, 1.3fr)', 'minmax(0, 2.4fr)', 'minmax(0, 0.6fr)', 'minmax(0, 1fr)']} gap="small" align="start" fill style={{ overflowWrap: 'anywhere' }}>
-                        <Box direction="row" gap="small" align="start" style={{ minWidth: 0 }}>
-                            <Artwork data={upgrade.getImageData()} size={44} />
-                            <TextAndLabel label="Name" labelSize="xsmall" textSize="small" text={upgrade.data.name} />
-                        </Box>
-                        <ComponentAndLabel label="Description" labelSize="xsmall" component={
-                            <Text size="xsmall" style={{ whiteSpace: 'pre-line' }}>{upgrade.getDescription()}</Text>
-                        } />
-                        <Box><TextAndLabel label="Level" labelSize="xsmall" text={flavor ? '—' : unlimited ? String(upgrade.level) : `${upgrade.level} / ${upgrade.data.maxLevel}`} textSize="small" /></Box>
-                        <ComponentAndLabel label={upgrade.level === 0 ? 'Unlock cost' : 'Next level cost'} labelSize="xsmall" component={
-                            maxed || flavor ? <Text size="small">{maxed ? 'Maxed' : 'Not purchasable'}</Text> :
-                                <Box><ResourceDisplay cost={upgrade.getUpgradeCost()} resourceImageData={JellyOperator.getBloodcellImageData()} resourceImageScale={0.75} textSize="small" canAfford={!locked && jelly.canAffordUpgrade(upgrade.index)} showTooltip /></Box>
-                        } />
-                    </Grid>
-                </ShadowBox>;
+                return <DataRow
+                    key={upgrade.index}
+                    columns={small ? ['flex'] : ['minmax(0, 1.3fr)', 'minmax(0, 2.4fr)', 'minmax(0, 0.6fr)', 'minmax(0, 1fr)']}
+                    opacity={locked || flavor ? 0.6 : 1}
+                    fields={[
+                        { key: 'identity', kind: 'identity', name: upgrade.data.name, artwork: <Artwork data={upgrade.getImageData()} size={44} /> },
+                        { key: 'description', kind: 'content', label: 'Description', content: <Text size="xsmall" style={{ whiteSpace: 'pre-line' }}>{upgrade.getDescription()}</Text> },
+                        { key: 'level', kind: 'text', label: 'Level', value: flavor ? '—' : unlimited ? String(upgrade.level) : `${upgrade.level} / ${upgrade.data.maxLevel}` },
+                        {
+                            key: 'cost', kind: 'content', label: upgrade.level === 0 ? 'Unlock cost' : 'Next level cost',
+                            content: maxed || flavor
+                                ? <Text size="small">{maxed ? 'Maxed' : 'Not purchasable'}</Text>
+                                : <ResourceDisplay cost={upgrade.getUpgradeCost()} resourceImageData={JellyOperator.getBloodcellImageData()} resourceImageScale={0.75} textSize="small" canAfford={!locked && jelly.canAffordUpgrade(upgrade.index)} showTooltip />,
+                        },
+                    ]}
+                />;
             })}
         </Box>
     </Box>;

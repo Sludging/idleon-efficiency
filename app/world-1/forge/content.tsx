@@ -2,15 +2,16 @@
 
 import {
     Box,
-    Grid,
     Heading,
     Text,
 } from 'grommet'
 import { useEffect, useState, useMemo } from 'react';
+import styled from 'styled-components';
 
 import ShadowBox from '../../../components/base/ShadowBox';
 import { Forge as ForgeDomain } from '../../../data/domain/world-1/forge';
-import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
+import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
+import DataRow from '../../../components/base/DataRow';
 import CoinsDisplay from '../../../components/coinsDisplay';
 import { getCoinsArray, nFormatter } from '../../../data/utility';
 import ContentTabs from '../../../components/base/ContentTabs';
@@ -20,29 +21,25 @@ import IconImage from '../../../components/base/IconImage';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
-function ForgeItem({ item, title }: { item: Item, title: string }) {
+const CompactCoins = styled(Box)`
+    span {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    > div, > div > div {
+        align-items: center;
+        justify-content: center;
+    }
+`;
+
+function ForgeItem({ item }: { item: Item }) {
     if (item.displayName == "Blank") {
-        return (
-            <Box align="center">
-                <TextAndLabel
-                    label={title}
-                    text="Empty" />
-            </Box>
-        )
+        return <Text size="small">Empty</Text>;
     }
     return (
-        <Box align="center">
-            <Box direction="row" pad={{ vertical: 'small' }} align="center">
-                <ComponentAndLabel
-                    label={title}
-                    component={
-                        <Box direction="row" align="center">
-                            <IconImage data={item.getImageData()} />
-                            <Text size="small">{nFormatter(item.count)}</Text>
-                        </Box>
-                    }
-                />
-            </Box>
+        <Box direction="row" gap="xsmall" align="center" justify="center">
+            <IconImage data={item.getImageData()} />
+            <Text size="small">{nFormatter(item.count)}</Text>
         </Box>
     )
 }
@@ -98,44 +95,41 @@ function Forge() {
             <Box pad="small">
                 {
                     activeTab == "Upgrades" &&
-                    <Box wrap direction="row">
+                    <Box gap="small">
                         {
                             forge && forge.upgrades.map((upgrade, index) => (
-                                <ShadowBox background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="medium" direction="row" fill>
-                                    <Grid columns={["10%", "40%", "50%"]} fill gap="small" align="center">
-                                        <TextAndLabel
-                                            label="Level"
-                                            text={`${upgrade.level}/${upgrade.maxLevel}`}
-                                        />
-                                        <TextAndLabel
-                                            label="Bonus"
-                                            text={upgrade.getBonusText()}
-                                        />
-
-                                        {upgrade.level < upgrade.maxLevel ?
-                                            <Box direction="row" gap="medium">
-                                                <ComponentAndLabel
-                                                    label="Next level cost"
-                                                    component={<CoinsDisplay coinMap={getCoinsArray(upgrade.getCost())} maxCoins={3} />}
-                                                />
-                                                <ComponentAndLabel
-                                                    label="Cost to max"
-                                                    component={<CoinsDisplay coinMap={getCoinsArray(upgrade.getMaxCost())} maxCoins={3} />}
-                                                />
-                                            </Box> :
-                                            <Box>
-                                                MAXED
-                                            </Box>
-                                        }
-                                    </Grid>
-                                </ShadowBox>
+                                <DataRow
+                                    key={index}
+                                    columns={["minmax(0, 1fr)", "minmax(0, 4fr)", "minmax(0, 5fr)"]}
+                                    fields={[
+                                        { key: 'level', kind: 'text', label: 'Level', value: `${upgrade.level}/${upgrade.maxLevel}` },
+                                        { key: 'bonus', kind: 'text', label: 'Bonus', value: upgrade.getBonusText(), role: 'description' },
+                                        {
+                                            key: 'cost', kind: 'content', label: null,
+                                            content: upgrade.level < upgrade.maxLevel
+                                                ? <Box direction="row" gap="small" align="center" justify="center">
+                                                    <ComponentAndLabel
+                                                        label="Next level cost"
+                                                        labelSize="xsmall"
+                                                        component={<CompactCoins align="center"><CoinsDisplay coinMap={getCoinsArray(upgrade.getCost())} maxCoins={3} regularRow /></CompactCoins>}
+                                                    />
+                                                    <ComponentAndLabel
+                                                        label="Cost to max"
+                                                        labelSize="xsmall"
+                                                        component={<CompactCoins align="center"><CoinsDisplay coinMap={getCoinsArray(upgrade.getMaxCost())} maxCoins={3} regularRow /></CompactCoins>}
+                                                    />
+                                                </Box>
+                                                : <Text size="small">MAXED</Text>,
+                                        },
+                                    ]}
+                                />
                             ))
                         }
                     </Box>
                 }
                 {
                     activeTab == "Slots" &&
-                    <Box>
+                    <Box gap="small">
                         {
                             forge && forge.slots.map((slot, index) => {
                                 const slotSpeed = slot.getSpeed(forge.upgrades[2].getStat());
@@ -144,32 +138,36 @@ function Forge() {
                                 const slotBought = index < forge.upgrades[0].getStat();
                                 if (slotBought) {
                                     return (
-                                        <ShadowBox style={{ opacity: slot.ores.count > 0 ? 1 : 0.8 }} background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" fill justify="between" align="center">
-                                            <Box>
-                                                <IconImage data={{location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36}} />
-                                            </Box>
-                                            <ForgeItem item={slot.ores} title="Ores" />
-                                            <ForgeItem item={slot.oils} title="Oils" />
-                                            <ForgeItem item={slot.bars} title="Bars" />
-                                            <Box gap="xsmall">
-                                                <ComponentAndLabel
-                                                    label="Time Till Empty"
-                                                    component={<TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />}
-                                                />
-                                                <Text size="10px">* Not fully accurate with oils yet.</Text>
-                                            </Box>
-                                        </ShadowBox>
+                                        <DataRow
+                                            key={index}
+                                            columns={['36px', 'minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 2fr)']}
+                                            opacity={slot.ores.count > 0 ? 1 : 0.8}
+                                            fields={[
+                                                { key: 'artwork', kind: 'artwork', artwork: <IconImage data={{ location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36 }} /> },
+                                                { key: 'ores', kind: 'content', label: 'Ores', content: <ForgeItem item={slot.ores} /> },
+                                                { key: 'oils', kind: 'content', label: 'Oils', content: <ForgeItem item={slot.oils} /> },
+                                                { key: 'bars', kind: 'content', label: 'Bars', content: <ForgeItem item={slot.bars} /> },
+                                                {
+                                                    key: 'timer', kind: 'content', label: 'Time Till Empty',
+                                                    content: <Box gap="xsmall" align="center">
+                                                        <TimeDown addSeconds={timeTillEmpty} size={TimeDisplaySize.Medium} />
+                                                        <Text size="10px">* Not fully accurate with oils yet.</Text>
+                                                    </Box>,
+                                                },
+                                            ]}
+                                        />
                                     )
                                 } else {
                                     return (
-                                        <ShadowBox style={{ opacity: 0.3 }} background="dark-1" pad={{ vertical: 'medium', horizontal: 'large' }} key={index} margin={{ right: 'medium', bottom: 'medium' }} gap="large" direction="row" justify="between" fill align="center">
-                                            <Box>
-                                                <IconImage data={{location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36}} />
-                                            </Box>
-                                            <Box direction='row' fill justify='center'>
-                                                <Text size="medium">You need to buy this slot in upgrades</Text>
-                                            </Box>
-                                        </ShadowBox> 
+                                        <DataRow
+                                            key={index}
+                                            columns={['36px', 'flex']}
+                                            opacity={0.3}
+                                            fields={[
+                                                { key: 'artwork', kind: 'artwork', artwork: <IconImage data={{ location: slot.brimestone ? 'GemP4' : 'ForgeA', height: 36, width: 36 }} /> },
+                                                { key: 'locked', kind: 'content', label: null, content: <Text size="small">You need to buy this slot in upgrades</Text> },
+                                            ]}
+                                        />
                                     )
                                 }
                             })

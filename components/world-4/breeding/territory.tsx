@@ -1,6 +1,5 @@
 import {
     Box,
-    Grid,
     ResponsiveContext,
     Stack,
     Text,
@@ -10,8 +9,7 @@ import { Breeding as BreedingDomain, territoryNiceNames } from "../../../data/do
 import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import DataRow from "../../base/DataRow";
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -30,52 +28,72 @@ export const TerritoryDisplay = () => {
     }
 
     return (
-        <Box>
+        <Box gap="small">
             <Text>Territory</Text>
             {
                 breeding.territory.filter(territory => territory.index != 14).map((territory, tIndex) => (
-                    <ShadowBox background="dark-1" key={tIndex} direction="row" gap="medium" margin={{ bottom: 'medium' }} align="center" pad="small" style={{ opacity: territory.unlocked ? 1 : 0.4 }}>
-                        <Grid columns={["20%", "15%", "20%", "20%", "25%"]} fill>
-                            <TextAndLabel textSize='small' label="Name" text={territoryNiceNames[territory.index]} />
+                    <DataRow
+                        key={tIndex}
+                        columns={['20fr', '15fr', '20fr', '20fr', '25fr']}
+                        opacity={territory.unlocked ? 1 : 0.4}
+                        fields={[
+                            { key: 'identity', kind: 'identity', name: territoryNiceNames[territory.index] },
                             {
-                                territory.spiceRewards.length > 0 ? territory.spiceRewards.map((spice, sIndex) => (
-                                    <ComponentAndLabel key={sIndex} label="Current Spices" component={
-                                        <Box direction="row" gap="small" align="center">
-                                            <IconImage data={{ location: spice.type, height: size == "small" ? 20 : 36, width: size == "small" ? 20 : 36 }} />
-                                            <Text size={size == "small" ? "small" : undefined}>{nFormatter(spice.count)}</Text>
-                                        </Box>
-                                    } />
-                                )) :
-                                    <Box></Box>
+                                key: 'spices',
+                                kind: 'content',
+                                label: territory.spiceRewards.length > 0 ? 'Current Spices' : null,
+                                content: (
+                                    <Box gap="small">
+                                        {
+                                            territory.spiceRewards.map((spice, sIndex) => (
+                                                <Box key={sIndex} direction="row" gap="small" align="center">
+                                                    <IconImage data={{ location: spice.type, height: size == "small" ? 20 : 36, width: size == "small" ? 20 : 36 }} />
+                                                    <Text size="small">{nFormatter(spice.count)}</Text>
+                                                </Box>
+                                            ))
+                                        }
+                                    </Box>
+                                )
+                            },
+                            {
+                                key: 'progress',
+                                kind: 'text',
+                                label: 'Progress',
+                                value: `${nFormatter(territory.currentProgress)}/${nFormatter(territory.getTrekReq())}`
+                            },
+                            territory.trekkingSpeedHr > 0 ?
+                                { key: 'speed', kind: 'text', label: 'Foraging Speed', value: `${nFormatter(territory.trekkingSpeedHr)}` } :
+                                { key: 'power', kind: 'text', label: 'Combat Power', value: `${nFormatter(territory.trekkingFightPower)}/${nFormatter(territory.data.fightPower)}`, color: 'red' },
+                            {
+                                key: 'pets',
+                                kind: 'content',
+                                label: null,
+                                content: (
+                                    <Box direction="row" wrap>
+                                        {
+                                            territory.pets.map((pet, pIndex) => {
+                                                const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
+                                                return (
+                                                    <Box key={`pet_${pIndex}`} direction="row" gap="small" align="center">
+                                                        {
+                                                            enemy ?
+                                                                <Stack anchor='bottom'>
+                                                                    <IconImage data={pet.getBackgroundImageData()} />
+                                                                    <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
+                                                                    <Text size="8px">{nFormatter(pet.power)}</Text>
+                                                                </Stack>
+                                                                :
+                                                                <IconImage data={{ location: "PetBackcard4", width: 67, height: 67 }} />
+                                                        }
+                                                    </Box>
+                                                )
+                                            })
+                                        }
+                                    </Box>
+                                )
                             }
-                            <TextAndLabel label="Progress" text={`${nFormatter(territory.currentProgress)}/${nFormatter(territory.getTrekReq())}`} />
-                            {territory.trekkingSpeedHr > 0 ?
-                                <TextAndLabel label="Foraging Speed" text={`${nFormatter(territory.trekkingSpeedHr)}`} /> :
-                                <TextAndLabel textColor='red' label="Combat Power" text={`${nFormatter(territory.trekkingFightPower)}/${nFormatter(territory.data.fightPower)}`} />
-                            }
-                            <Box direction="row" wrap>
-                                {
-                                    territory.pets.map((pet, pIndex) => {
-                                        const enemy = EnemyInfo.find(enemy => enemy.id == pet.data.petId);
-                                        return (
-                                            <Box key={`pet_${pIndex}`} direction="row" gap="small" align="center">
-                                                {
-                                                    enemy ?
-                                                        <Stack anchor='bottom'>
-                                                            <IconImage data={pet.getBackgroundImageData()} />
-                                                            <IconImage data={{ location: enemy?.id.toLowerCase() ?? "Unknown", width: 67, height: 67 }} style={{ paddingBottom: '15px' }} />
-                                                            <Text size="8px">{nFormatter(pet.power)}</Text>
-                                                        </Stack>
-                                                        :
-                                                        <IconImage data={{ location: "PetBackcard4", width: 67, height: 67 }} />
-                                                }
-                                            </Box>
-                                        )
-                                    })
-                                }
-                            </Box>
-                        </Grid>
-                    </ShadowBox>
+                        ]}
+                    />
                 ))
             }
         </Box>

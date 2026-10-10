@@ -7,9 +7,10 @@ import {
     TextInput,
 } from 'grommet'
 import { useContext, useState } from 'react';
-import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
+import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Worship as WorshipDomain } from '../../../data/domain/world-3/worship';
 import ShadowBox from "../../base/ShadowBox";
+import DataRow from "../../base/DataRow";
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 import TipDisplay from '../../base/TipDisplay';
@@ -103,18 +104,20 @@ export function TotemDisplay() {
                 <Text size="xsmall">* Base XP is assuming multiplier of 1x.</Text>
                 <Text size="xsmall">* You need a minimum efficiency of 60, 250, 1k, 3k, 8k, 25k, 250k and 2.5M on the respective totems to get bonus souls.</Text>
             </Box>
-            <Grid columns={{ count: size == "small" ? 1 : 2, size: 'auto' }}>
+            <Grid columns={{ count: size == "small" ? 1 : 2, size: 'auto' }} gap="small">
                 {
                     worship.totemInfo.map((totem, index) => (
-                        <ShadowBox key={index} background="dark-1" pad="medium" align="start" margin={{ right: 'large', bottom: 'small' }}>
-                            <Grid columns={{ count: 5, size: 'auto' }} gap={{ column: 'medium' }} fill>
-                                <TextAndLabel text={totem.name} label="Name" />
-                                <TextAndLabel text={totem.map.data.map.name ?? ""} label="Area" />
-                                <TextAndLabel text={totem.maxWave.toString()} label="Max Wave" />
-                                <TextAndLabel text={Math.floor(totem.getExpRewards() / totem.getChargeCost()).toString()} label="XP Per Charge" />
-                                <TextAndLabel text={totem.getSoulRewards(efficiency, effFoodBonus, soooulsTalentBonus, useDementiaSet).toString()} label="Souls" />
-                            </Grid>
-                        </ShadowBox>
+                        <DataRow
+                            key={index}
+                            columns={["minmax(0, 24fr)", "minmax(0, 24fr)", "minmax(0, 14fr)", "minmax(0, 18fr)", "minmax(0, 20fr)"]}
+                            fields={[
+                                { key: "identity", kind: "identity", name: totem.name },
+                                { key: "area", kind: "text", label: "Area", value: totem.map.data.map.name ?? "" },
+                                { key: "wave", kind: "text", label: "Max Wave", value: totem.maxWave.toString() },
+                                { key: "xp", kind: "text", label: "XP Per Charge", value: Math.floor(totem.getExpRewards() / totem.getChargeCost()).toString() },
+                                { key: "souls", kind: "text", label: "Souls", value: totem.getSoulRewards(efficiency, effFoodBonus, soooulsTalentBonus, useDementiaSet).toString() },
+                            ]}
+                        />
                     ))
                 }
             </Grid>
