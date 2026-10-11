@@ -2,6 +2,7 @@ import { Domain, RawData } from "../../base/domain";
 import { initRoyalArmoryUpgradeRepo } from "../../data/RoyalArmoryUpgradeRepo";
 import { initOrbletMarketBonusRepo } from "../../data/OrbletMarketBonusRepo";
 import { initRoyalResourceRepo } from "../../data/RoyalResourceRepo";
+import { initRoyalStatueRepo } from "../../data/RoyalStatueRepo";
 import type { Item } from "../../items";
 import type { Player } from "../../player";
 import { ClassIndex } from "../../talents";
@@ -16,6 +17,7 @@ import type { Storage } from "../../storage";
 import type { MasterClasses } from "../../masterClasses";
 import { RoyalArmoryUpgrade } from "./upgrades";
 import { RoyalArmoryOrbletMarketBonus } from "./orblets";
+import { RoyalStatue } from "./statues";
 import { RoyalResource, RoyalResourceNode, RoyalResourceNodes, royalArmoryAsNumber } from "./resourceNodes";
 import { RoyalUnits, RoyalUnitRole } from "./units";
 import { OUTPOST_RANKS, Outpost, OutpostRank, RankExperienceBonuses, RoyalMapSource, ResourceCollectionBonuses, RoyalGuardianContribution } from "./outposts";
@@ -56,7 +58,8 @@ export class RoyalArmory extends Domain {
     readonly resourceNodes = RoyalResourceNodes.fromBase(initRoyalResourceRepo());
     mapStates = new Map<number, RoyalMapSource>();
     resources = new Map<number, RoyalResource>();
-    royalStatueLevels: number[] = [];
+    statues: RoyalStatue[] = [];
+    additionalRoyalStatueLevels: number[] = [];
     totalResourceGrade = 0;
     totalOutpostUpgradeLevels = 0;
     purifiedOutpostCount = 0;
@@ -103,12 +106,22 @@ export class RoyalArmory extends Domain {
         this.extraClearKills = 1;
     }
 
-    init(_allItems: Item[], _charCount: number) {
+    init(allItems: Item[], _charCount: number) {
         this.resetCalculatedState();
         this.mapStates = new Map();
         this.units.reset();
         this.resourceNodes.parse([]);
-        this.royalStatueLevels = [];
+        this.additionalRoyalStatueLevels = [];
+        const statueDefinitions = initRoyalStatueRepo();
+        const statueMaterials = new Map<string, Item>();
+        for (const definition of statueDefinitions) {
+            for (const name of [definition.data.unlockItem, definition.data.upgradeItem]) {
+                if (!statueMaterials.has(name)) {
+                    statueMaterials.set(name, allItems.find(item => item.internalName === name)!);
+                }
+            }
+        }
+        this.statues = RoyalStatue.fromBase(statueDefinitions, statueMaterials);
         this.upgrades = RoyalArmoryUpgrade.fromBase(initRoyalArmoryUpgradeRepo());
         this.resetResources();
         this.orbletMarketBonuses = RoyalArmoryOrbletMarketBonus.fromBase(initOrbletMarketBonusRepo());
@@ -120,7 +133,10 @@ export class RoyalArmory extends Domain {
         const royalG = data.get("RoyalG") as readonly (readonly unknown[])[] | undefined;
         const royalMaps = data.get("RoyalMaps") as readonly (readonly unknown[])[] | undefined;
         armory.resetCalculatedState();
-        armory.royalStatueLevels = (royalG?.[0] ?? []) as number[];
+        const statueLevels = royalG?.[0] ?? [];
+        armory.statues.forEach(statue => statue.parse(statueLevels[statue.index]));
+        // Retain extra saved levels without inventing catalog definitions for them.
+        armory.additionalRoyalStatueLevels = statueLevels.slice(armory.statues.length).map(level => Number(level) || 0);
         armory.mapStates = new Map();
         royalMaps?.forEach((row, mapId) => {
             if (row === undefined || row === null) return;
@@ -227,7 +243,20 @@ export class RoyalArmory extends Domain {
     getExtraClearKills(): number { return this.extraClearKills; }
 
     getTotalRoyalStatueLevels(): number {
-        return this.royalStatueLevels.reduce((total, level) => total + Math.max(0, Number(level) || 0), 0);
+        const catalogTotal = this.statues.reduce((total, statue) => total + Math.max(0, statue.level), 0);
+        return this.additionalRoyalStatueLevels.reduce((total, level) => total + Math.max(0, level), catalogTotal);
+    }
+
+    updateStatueBonusInputs(): void {
+        const reverenceBonus = this.getUpgradeByIndex(45)!.getBonus();
+        for (const statue of this.statues) statue.updateBonusInput(reverenceBonus);
+    }
+
+    updateStatueMaterialInputs(storage: Storage): void {
+        const parchmentOwned = storage.amountInStorage(this.statues[0].enchantmentMaterial.internalName);
+        for (const statue of this.statues) {
+            statue.updateMaterialInputs(storage.amountInStorage(statue.restorationMaterial.internalName), parchmentOwned);
+        }
     }
 
     updateTotals(): void {
@@ -399,6 +428,7 @@ export class RoyalArmory extends Domain {
 export const updateRoyalArmory = (accountData: Map<string, unknown>) => {
     const armory = accountData.get("royalArmory") as RoyalArmory;
     armory.updateUpgradeUnlocks();
+    armory.updateStatueBonusInputs();
     armory.updateOutpostExperienceRanks();
     armory.updateMapPurificationStates();
     armory.updateOutpostUnits();
@@ -430,6 +460,7 @@ export const updateRoyalArmoryLateInputs = (accountData: Map<string, unknown>) =
     const storage = accountData.get("storage") as Storage;
     const jellyOperator = accountData.get("jellyOperator") as JellyOperator;
     armory.updateOrbletsOwned(storage.amountInStorage("Orblet"));
+    armory.updateStatueMaterialInputs(storage);
     armory.updateExtraClearKills(players, accountData.get("bigFish") as BigFish, jellyOperator);
     armory.units.prepareMilitiaEffect(armory.getUpgradeBonus(23), armory.getExtraClearKills());
     armory.updateOutpostResourceRateLateInputs(players, getCompanionActiveBonus(accountData.get("companions") as Companion[], 141),
