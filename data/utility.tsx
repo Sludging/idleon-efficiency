@@ -97,6 +97,21 @@ export const commaNotation = (num: number): string => {
     return result;
 }
 
+/** Formats a probability fraction from 0 through 1 as a one-in chance. */
+export function formatOneInChance(probability: number): string {
+    if (probability === 0) {
+        return 'No chance';
+    }
+
+    const denominator = 1 / probability;
+    const roundedDenominator = Math.round(denominator);
+    const integerTolerance = Number.EPSILON * Math.max(1, denominator) * 4;
+    if (Math.abs(denominator - roundedDenominator) < integerTolerance) {
+        return `1 out of ${commaNotation(roundedDenominator)}`;
+    }
+    return `approximately 1 out of ${notateNumber(denominator, 'Smaller')}`;
+}
+
 export const nFormatter = (num: number, type: string = "Smaller") => {
     switch (type) {
         case "CommaNotation":

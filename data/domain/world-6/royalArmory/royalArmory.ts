@@ -75,6 +75,8 @@ export class RoyalArmory extends Domain {
     private unlockedUpgradeCount = 0;
     private orbletsOwned = 0;
     private extraClearKills = 1;
+    private companionParchmentBonus = 0;
+    private jellyParchmentBonus = 0;
 
     getRawKeys(): RawData[] {
         return [
@@ -104,6 +106,7 @@ export class RoyalArmory extends Domain {
         this.selectedRoyalGuardian = undefined;
         this.totalUpgradeLevels = this.unlockedUpgradeCount = this.orbletsOwned = 0;
         this.extraClearKills = 1;
+        this.companionParchmentBonus = this.jellyParchmentBonus = 0;
     }
 
     init(allItems: Item[], _charCount: number) {
@@ -231,6 +234,23 @@ export class RoyalArmory extends Domain {
 
     getOrbletsOwned(): number { return this.orbletsOwned; }
     updateOrbletsOwned(orbletsOwned: number): void { this.orbletsOwned = orbletsOwned; }
+
+    updateParchmentDropInputs(companionBonus: number, jellyBonus: number): void {
+        this.companionParchmentBonus = companionBonus;
+        this.jellyParchmentBonus = jellyBonus;
+    }
+
+    getParchmentDropChance(): number {
+        // The game keeps the base probability before the parchment upgrade.
+        if (this.getUpgradeBonus(37) < 1) return 0.001;
+
+        return 0.001 * (1 + (this.getUpgradeBonus(38) +
+            (this.getOrbletMarketBonus(9) + (this.companionParchmentBonus + this.jellyParchmentBonus))) / 100);
+    }
+
+    getRoyalCastleMaximumDamage(): number {
+        return (10 + this.getUpgradeBonus(35)) * (1 + this.getUpgradeBonus(36) / 100);
+    }
 
     updateExtraClearKills(players: Player[], bigFish: BigFish, jellyOperator: JellyOperator): void {
         const maxTalent231 = players.reduce((maximum, player) => Math.max(maximum, player.getTalentBonus(231)), 0);
@@ -461,6 +481,8 @@ export const updateRoyalArmoryLateInputs = (accountData: Map<string, unknown>) =
     const jellyOperator = accountData.get("jellyOperator") as JellyOperator;
     armory.updateOrbletsOwned(storage.amountInStorage("Orblet"));
     armory.updateStatueMaterialInputs(storage);
+    armory.updateParchmentDropInputs(getCompanionActiveBonus(accountData.get("companions") as Companion[], 172),
+        jellyOperator.obstructions.find(obstruction => obstruction.index === 40)!.getBonus());
     armory.updateExtraClearKills(players, accountData.get("bigFish") as BigFish, jellyOperator);
     armory.units.prepareMilitiaEffect(armory.getUpgradeBonus(23), armory.getExtraClearKills());
     armory.updateOutpostResourceRateLateInputs(players, getCompanionActiveBonus(accountData.get("companions") as Companion[], 141),

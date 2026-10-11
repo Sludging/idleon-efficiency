@@ -5,7 +5,7 @@ import RoyalArmoryDisplay from "../../../components/account/royalArmoryDisplay";
 
 export const metadata: Metadata = {
     title: "Royal Armory",
-    description: "View your Royal Armory upgrades, resources, Orblets, and Outposts"
+    description: "View your Royal Armory upgrades, resources, Orblets, Outposts, and Royal Statues"
 };
 
 export default function Page() {

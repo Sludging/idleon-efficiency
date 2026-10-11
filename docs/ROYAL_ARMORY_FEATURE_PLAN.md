@@ -1,5 +1,23 @@
 # Royal Armory feature plan
 
+## Current Stage 5 UI delivery
+
+The current handoff is [Stage 5 issue #426](https://github.com/Sludging/idleon-efficiency/issues/426). Its accepted backend receipt supersedes the unimplemented backend checkpoint below: the human accepted the combined backend and its stated limits, then authorized local commit `ad0c29d8`. The backend is not pushed and does not complete Stage 5.
+
+Implement the approved [Royal Statues UI plan](ROYAL_ARMORY_STATUES_UI_PLAN.md) and its revision 3 preview. The authorized backend addition is limited to parchment chance per Verminous Rat defeat as a Royal Guardian and maximum damage in the Royal Castle. Keep existing statue calculations, owner boundaries, and account ordering. Record real-save backend-through-UI evidence and check limits in the current #426 handoff. Stop before independent review or commit. Efficiency work, issue closure, pushes, and deployment remain outside scope.
+
+The older checkpoints below retain approval history and evidence; they are not the current backend status.
+
+## CURRENT Stage5 combined backend approval checkpoint
+
+The human selected **both Royal Statue levels/bonuses and attempts**: “Do both, attempts are simple math not a simulation so it doesn’t seem like a big feature to split out”. The approved plan is [#426 combined backend plan](../.omp/plans/correctness-426.md). It adds the `RoyalStatue` owner within the accepted domain approach, with pure current/proposed bonuses and descriptions, nominal attempt material/cost, chance, owned quantity and affordability; future cards/UI are a separate delivery.
+
+This checkpoint supersedes older **stop-before-Statues directions only for research and planning**. The backend plan is approved, but implementation, config/tests, extraction and runtime remain stopped by the explicit human stop instruction. Deliver basic owned levels and verified bonuses/basic behavior before ANY efficiency-target discussion; attempts belong to the same backend delivery, not a second feature approval. Backend completion is not completion of all Stage5.
+
+**Unresolved gates:** selected live game version (currently UNKNOWN); matching paired real-save/core/direct-parameter outputs and tests-stage RED/GREEN; genuine zero/positive/affordable/unaffordable branch coverage. Supplied catalog/item inputs are available and known artwork exceptions are not blockers. #425 remains OPEN but does not block backend planning. No new case, closure, dependency change, commit, push or deployment is authorized. Preserve the local-only `5b183a64` qualification and every prior Stage4 evidence/diagnostic/coverage qualification below; historical receipts are not Royal Statue verification. No runtime or checks were run for this approval checkpoint.
+
+The approved plan is the current selected backend contract; work remains stopped before implementation. The earlier authorization and receipts below remain history/evidence, not broader implementation approval.
+
 ## Current authorization and mandatory stage order
 
 The human's latest direction is:

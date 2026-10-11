@@ -10,6 +10,7 @@ import { OUTPOST_RANKS, Outpost, OutpostKind, OutpostLinkDetails, OutpostRank, R
 import { RoyalArmory } from "../../data/domain/world-6/royalArmory/royalArmory";
 import { RoyalArmoryOrbletMarketBonus } from "../../data/domain/world-6/royalArmory/orblets";
 import { RoyalArmoryUpgrade } from "../../data/domain/world-6/royalArmory/upgrades";
+import { RoyalStatue } from "../../data/domain/world-6/royalArmory/statues";
 import { RoyalUnitRole } from "../../data/domain/world-6/royalArmory/units";
 import { RoyalResourceNode } from "../../data/domain/world-6/royalArmory/resourceNodes";
 import { MapInfo } from "../../data/domain/maps";
@@ -22,7 +23,7 @@ import SmallButton from "../base/SmallButton";
 import { UpgradeTable } from "./shared/UpgradeTable";
 import { FilterOptions } from "./shared/UpgradeTableFilters";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
-import { commaNotation, notateNumber, toTime } from "../../data/utility";
+import { commaNotation, formatOneInChance, nFormatter, notateNumber, toTime } from "../../data/utility";
 
 function ResourceBar({ armory, resourceTypes }: { armory: RoyalArmory, resourceTypes: number[] }) {
     return (
@@ -209,6 +210,114 @@ function OrbletCards({ offers, orbletsOwned }: { offers: RoyalArmoryOrbletMarket
                 );
             })}
         </Grid>
+    );
+}
+
+function StatueOwnedMaterial({ statue }: { statue: RoyalStatue }) {
+    return (
+        <ComponentAndLabel label="Owned" component={
+            <TipDisplay heading={commaNotation(statue.getOwnedMaterialQuantity())} body="Exact material quantity">
+                <Text size="small">{nFormatter(statue.getOwnedMaterialQuantity())}</Text>
+            </TipDisplay>
+        } />
+    );
+}
+
+function SharedStatueUpgradeMaterial({ armory, statue }: { armory: RoyalArmory, statue: RoyalStatue }) {
+    return (
+        <Box id="royal-statues-shared-parchment" direction="row" justify="between" gap="large" wrap
+            border={{ side: 'bottom', color: 'grey-1' }} pad={{ bottom: 'small' }}>
+            <Box gap="xsmall">
+                <Text size="small" weight={500}>Shared upgrade material · applies to every restored statue</Text>
+                <Box direction="row" align="center" gap="large" wrap>
+                    <Text size="small">{statue.getAttemptMaterial().displayName.replaceAll('_', ' ')}</Text>
+                    <TextAndLabel label="Required per upgrade attempt" text={nFormatter(statue.getAttemptQuantity())} textSize="small" />
+                    <ComponentAndLabel label="Owned" component={
+                        <ResourceDisplay
+                            cost={statue.getOwnedMaterialQuantity()}
+                            resourceImageData={statue.getAttemptMaterialImageData()}
+                            resourceImageScale={0.65}
+                            textSize="small"
+                            showTooltip
+                            tooltipHeading="Exact parchment balance"
+                        />
+                    } />
+                </Box>
+            </Box>
+            <Box id="royal-statues-parchment-acquisition" gap="xsmall" style={{ maxWidth: '62ch' }}>
+                <Text size="small" color="accent-2">
+                    Royal Guardians can obtain parchment from Verminous Rats in the Royal Castle&apos;s cellar dungeon.
+                </Text>
+                <Box direction="row" gap="medium" wrap>
+                    <TextAndLabel label="Parchment chance per Verminous Rat defeat"
+                        text={formatOneInChance(armory.getParchmentDropChance())} textSize="small" />
+                    <TextAndLabel label="Maximum damage in the Royal Castle"
+                        text={notateNumber(armory.getRoyalCastleMaximumDamage())} textSize="small" />
+                </Box>
+            </Box>
+        </Box>
+    );
+}
+
+function StatueCard({ statue }: { statue: RoyalStatue }) {
+    const category = statue.data.description.replace(/^}千 /, '').replaceAll('_', ' ');
+    const currentDescription = statue.getDescription().replaceAll('千', 'x');
+    const nextDescription = statue.getDescription(statue.level + 1).replaceAll('千', 'x');
+    const currentValue = currentDescription.slice(0, -(category.length + 1));
+    const nextValue = nextDescription.slice(0, -(category.length + 1));
+    const chanceText = formatOneInChance(statue.getSuccessChance());
+    const covered = statue.level === 0;
+
+    return (
+        <ShadowBox id={`royal-statue-${statue.index}`} background="dark-1" pad="medium" gap="small">
+            <Box direction="row" align="center" gap="small">
+                <Box width="65px" height="85px" align="center" justify="center" flex={false}>
+                    <IconImage data={statue.getImageData()} scale={0.5} />
+                </Box>
+                <Box gap="xxsmall">
+                    <Text size="medium" weight={500}>{category}</Text>
+                    <Text size="small" color="accent-2">Level {statue.level} · {covered ? 'Covered' : 'Restored'}</Text>
+                    <Box data-progression="inline" direction="row" align="baseline" gap="small">
+                        <Text data-current-bonus size="28px" weight={700} color="text" style={{ lineHeight: '34px' }}>{currentValue}</Text>
+                        <Text data-next-bonus size="16px" weight={400} color="accent-2" style={{ lineHeight: '24px' }}>→ {nextValue} after success</Text>
+                    </Box>
+                </Box>
+            </Box>
+            <Box gap="xsmall" border={{ side: 'top', color: 'grey-1' }} pad={{ top: 'small' }}>
+                {covered ? <>
+                    <Box direction="row" align="center" gap="large" wrap>
+                        <ComponentAndLabel label="Required per restoration attempt" component={
+                            <Box direction="row" align="center" gap="xsmall">
+                                <IconImage data={statue.getAttemptMaterialImageData()} scale={0.65} />
+                                <Text size="small">{nFormatter(statue.getAttemptQuantity())} {statue.getAttemptMaterial().displayName.replaceAll('_', ' ')}</Text>
+                            </Box>
+                        } />
+                        <StatueOwnedMaterial statue={statue} />
+                        <TextAndLabel label="Restoration chance" text={chanceText} textSize="small" />
+                    </Box>
+                    <Text size="small" color={statue.isAffordable() ? 'green-2' : 'accent-2'}>
+                        {statue.isAffordable() ? 'Materials available' : 'Not enough material'}
+                    </Text>
+                </> : <TextAndLabel label="Upgrade chance" text={chanceText} textSize="small" />}
+            </Box>
+        </ShadowBox>
+    );
+}
+
+function StatueCards({ armory }: { armory: RoyalArmory }) {
+    const statues = armory.statues.filter(statue => !/^\d+$/.test(statue.data.description.trim()));
+    const restoredStatue = statues.find(statue => statue.level > 0);
+
+    return (
+        <Box id="royal-statues" gap="small">
+            <Text id="royal-statues-chance-guide" size="small" color="accent-2" style={{ maxWidth: '75ch' }}>
+                Royal Reverence boosts statue bonuses; Parchment Recycling can save parchment. An attempt does not guarantee a level.
+            </Text>
+            {restoredStatue && <SharedStatueUpgradeMaterial armory={armory} statue={restoredStatue} />}
+            <Grid id="royal-statues-grid" aria-label="Royal Statues" columns={['1fr', '1fr']} gap="medium" fill>
+                {statues.map(statue => <StatueCard key={statue.index} statue={statue} />)}
+            </Grid>
+        </Box>
     );
 }
 
@@ -544,7 +653,8 @@ export default function RoyalArmoryDisplay() {
                     options={[
                         { value: 'Upgrades', label: 'Upgrades' },
                         { value: 'Orblets', label: 'Orblets' },
-                        { value: 'Outposts', label: 'Outposts' }
+                        { value: 'Outposts', label: 'Outposts' },
+                        { value: 'Statues', label: 'Statues' }
                     ]}
                     value={tab}
                     onChange={setTab}
@@ -567,6 +677,8 @@ export default function RoyalArmoryDisplay() {
                 </Box>
             ) : tab === 'Outposts' ? (
                 <OutpostCards armory={armory} />
+            ) : tab === 'Statues' ? (
+                <StatueCards armory={armory} />
             ) : null}
         </Box>
     );
