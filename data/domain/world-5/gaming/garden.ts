@@ -146,6 +146,12 @@ export class FertilizerUpgrade {
     getHarvestBits(): number {
         return (1 + 4 * this.level) * Math.pow(1.065, this.level);
     }
+
+    getImageData(): ImageData {
+        const width = this.index === 0 ? 108 : this.index === 1 ? 100 : 113;
+        const height = this.index === 0 ? 69 : this.index === 1 ? 78 : 76;
+        return { location: `GamingFertilizer${this.index}`, width, height };
+    }
 }
 
 export interface GardenSlot {
@@ -162,6 +168,7 @@ export interface GardenSlot {
 export class Garden {
     slots: GardenSlot[] = [];
     capacity = 3;
+    readonly maximumCapacity = 24;
     maximumStage = 4;
     growthCycleSeconds = 5000;
     harvestBits = 1;
@@ -206,7 +213,7 @@ export class Garden {
         const purchased = (id: number): number => gaming.isSuperbitPurchased(id) ? 1 : 0;
 
         // Logbook needs this stage limit before it calculates the Bits bonus.
-        this.capacity = Math.round(Math.min(24, 3 + capacityUpgrade.level
+        this.capacity = Math.round(Math.min(this.maximumCapacity, 3 + capacityUpgrade.level
             + gems.purchases.find(purchase => purchase.no === 133)!.pucrhased));
         this.maximumStage = 1 + Math.min(9, purchased(48) + purchased(57)
             + Math.min(Math.round(3 + purchased(1) + purchased(5) + purchased(18)
@@ -386,5 +393,9 @@ export class Logbook {
 
         this.bitsMultiplier = Math.max(1, Math.pow(1.08, this.totalRecordedStages)
             + alchemy.getBubbleBonusForKey("Y3") * this.totalRecordedStages / 100);
+    }
+
+    getImageData(): ImageData {
+        return { location: "GamingLogbook", width: 40, height: 40 };
     }
 }

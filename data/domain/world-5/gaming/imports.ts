@@ -33,11 +33,16 @@ export abstract class ShopUpgrade {
 
     abstract parse(data: Map<string, any>): void;
     abstract update(data: Map<string, any>): void;
+    abstract getCurrencyImageData(): ImageData;
 }
 
 export class AcornShopUpgrade extends ShopUpgrade {
     constructor(index: number, effect: ShopUpgrade["effect"]) {
         super(index, "acorns", effect);
+    }
+
+    override getCurrencyImageData(): ImageData {
+        return { location: "GamingAcorn", width: 15, height: 17 };
     }
 
     override parse(data: Map<string, any>): void {
@@ -62,6 +67,10 @@ export class AcornShopUpgrade extends ShopUpgrade {
 export class KingTokenShopUpgrade extends ShopUpgrade {
     constructor(index: number, effect: ShopUpgrade["effect"]) {
         super(index, "tokens", effect);
+    }
+
+    override getCurrencyImageData(): ImageData {
+        return { location: "GamingKingToken", width: 17, height: 16 };
     }
 
     override parse(data: Map<string, any>): void {
@@ -271,6 +280,10 @@ export class SquirrelImport extends Import {
     }
 
     override getBonusText = (): string => this.upgradeBonusText.replace("{", this.acornBonusPercent.toString());
+
+    getCurrencyImageData(): ImageData {
+        return { location: "GamingAcorn", width: 15, height: 17 };
+    }
 }
 
 export class ShellImport extends Import {
@@ -442,6 +455,10 @@ export class SnailImport extends Import {
         this.resetDestinationLevel = this.resetOutcome === "consume-protection" ? level : this.resetOutcome === "checkpoint" ? Math.min(5 * Math.floor(level / 5), checkpoint) : 0;
         this.bitsMultiplier = Math.pow(2, Math.max(0, Math.min(25, level))) * Math.pow(1.5, Math.max(0, Math.min(25, level - 25)));
     }
+
+    getMailImageData(): ImageData {
+        return { location: "GamingMail", width: 22, height: 16 };
+    }
 }
 
 export class KingRatImport extends Import {
@@ -497,5 +514,13 @@ export class KingRatImport extends Import {
             probability: Math.min(1, 0.05 * (1 + 0.5 * Number(gaming.isSuperbitPurchased(60))) * (1 + sushiBonus / 100)
                 * (1 + jellyBonus / 100) * (1 + crownBonus / 100) * Math.pow(1.5, stage)),
         }));
+    }
+
+    getCurrencyImageData(): ImageData {
+        return { location: "GamingKingToken", width: 17, height: 16 };
+    }
+
+    getCrownImageData(): ImageData {
+        return { location: "GamingRatCrown", width: 26, height: 22 };
     }
 }

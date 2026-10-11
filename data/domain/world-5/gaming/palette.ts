@@ -59,7 +59,17 @@ export class Superbit {
     }
 
     getCost(): number { return this.costBits; }
-    getBonusText(): string { return this.description; }
+    getBonusText(): string {
+        // Native GamingUpg text separates the static effect from player-specific totals.
+        // This entity exposes the effect rule, not those account-wide bonus totals.
+        const effectText = this.description.split(/Total bonus:/i)[0].trim();
+
+        return effectText
+            .replace("₣", " Bits")
+            // The exporter removes the achievement-count token but leaves its parentheses.
+            .replace(" ()", "")
+            .replace(": +% ", ": a percentage increase to ");
+    }
 }
 
 export class SuperbitBoard {
