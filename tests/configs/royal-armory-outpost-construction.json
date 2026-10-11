@@ -1,0 +1,24 @@
+{
+  "description": "Royal Armory 1.22 outpost construction requirements and real world/connection availability. Defaults use MapDetails[map][0][0] (first portal requirement), not monster count. Maps 10, 29, 112 and 166 exercise generated own-key overrides; 1, 2, 51 and 101 exercise the default in three worlds. Read-only calculations; no synthetic save mutations.",
+  "target": "RoyalMapSource.requiredOutpostKills, RoyalArmory.getUnlockedOutpostWorldCount/getOutpostWorldUnlock/getAvailableOutpostConnections; direct Armory bonuses 2..8",
+  "extractions": [
+    { "label": "required_kills_1", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 1, 0)", "description": "Built Spore Meadows default requirement" },
+    { "label": "required_kills_2", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 2, 0)", "description": "Built Froggy Fields distinct default requirement" },
+    { "label": "required_kills_10", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 10, 0)", "description": "Built map 10 own-key override" },
+    { "label": "required_kills_29", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 29, 0)", "description": "Empty map 29 own-key override takes precedence over default" },
+    { "label": "required_kills_51", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 51, 0)", "description": "World 2 default operation order" },
+    { "label": "required_kills_101", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 101, 0)", "description": "Unbuilt world 3 default operation order" },
+    { "label": "required_kills_112", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 112, 0)", "description": "Unbuilt world 3 own-key override" },
+    { "label": "required_kills_166", "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 166, 0)", "description": "Unbuilt world 4 large own-key override" },
+    { "label": "cleared_kills_101", "expression": "idleon.getAttr('RoyalMaps')[101][0]", "description": "Actual zero-kill unbuilt row remains zero progress" },
+    { "label": "unlocked_world_count", "expression": "idleon.callFunction('RoyalG', 'MapWorldsUnlocked', 0, 0)", "description": "World availability is the cumulative expansion-bonus count" },
+    { "label": "double_connection_allowed", "expression": "idleon.callFunction('RoyalG', 'CanWeDoubleConnect', 0, 0)", "description": "1.22 returns literal 1; both resource and support callers use it to allow saved slot 9" },
+    { "label": "expansion_bonus_2", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 2, 0)", "description": "Direct Kingdom Expansion II contribution" },
+    { "label": "expansion_bonus_3", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 3, 0)", "description": "Direct Kingdom Expansion III contribution" },
+    { "label": "expansion_bonus_4", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 4, 0)", "description": "Direct Kingdom Expansion IV contribution" },
+    { "label": "expansion_bonus_5", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 5, 0)", "description": "Direct Kingdom Expansion V contribution" },
+    { "label": "expansion_bonus_6", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 6, 0)", "description": "Direct Kingdom Expansion VI contribution" },
+    { "label": "expansion_bonus_7", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 7, 0)", "description": "Direct Kingdom Expansion VII contribution" },
+    { "label": "expansion_bonus_8", "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 8, 0)", "description": "Direct Kingdom Expansion VIII contribution" }
+  ]
+}

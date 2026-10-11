@@ -7,6 +7,7 @@ import type { Player } from "../../player";
 import { ClassIndex } from "../../talents";
 import type { BigFish } from "../../world-7/bigFish";
 import type { JellyOperator } from "../../world-7/jellyOperator";
+import type { Spelunking } from "../../world-7/spelunking";
 import { lavaLog } from "../../../utility";
 import type { Arcade } from "../../world-2/arcade";
 import type { Alchemy } from "../../world-2/alchemy/alchemy";
@@ -15,9 +16,14 @@ import type { Storage } from "../../storage";
 import type { MasterClasses } from "../../masterClasses";
 import { RoyalArmoryUpgrade } from "./upgrades";
 import { RoyalArmoryOrbletMarketBonus } from "./orblets";
-import { RoyalResource, RoyalResourceNodes } from "./resourceNodes";
+import { RoyalResource, RoyalResourceNode, RoyalResourceNodes, royalArmoryAsNumber } from "./resourceNodes";
 import { RoyalUnits, RoyalUnitRole } from "./units";
-import { Outpost, OutpostRank, RoyalMapSource, ResourceCollectionBonuses, RoyalGuardianContribution } from "./outposts";
+import { OUTPOST_RANKS, Outpost, OutpostRank, RankExperienceBonuses, RoyalMapSource, ResourceCollectionBonuses, RoyalGuardianContribution } from "./outposts";
+
+export type RoyalOutpostWorldUnlock = Readonly<{
+    unlocked: boolean;
+    upgrade: RoyalArmoryUpgrade | undefined;
+}>;
 
 const emptyCollectionBonuses: ResourceCollectionBonuses = {
     orbletCollectionBonus: 0, sushiCollectionBonus: 0, zenithCollectionBonus: 0,
@@ -26,6 +32,15 @@ const emptyCollectionBonuses: ResourceCollectionBonuses = {
     stockpileBonus: 0, armoryCollectionBonus: 0, commandRankBonus: 0,
     totalResourceGrade: 0, totalOutpostUpgradeLevels: 0, purifiedOutpostCount: 0,
     resourceQuantityLogTotal: 0, workerCollectionBonus: 0,
+};
+
+const emptyRankExperienceBonuses: RankExperienceBonuses = {
+    orbletExperienceBonus: 0, purityExperienceBonus: 0, selectedRankExperienceBonus: 0,
+    selectedRank: OutpostRank.Trading,
+    rankEffects: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 },
+    purifiedRanks: { 0: false, 1: false, 2: false, 3: false, 4: false },
+    intelRankBonus: 0, supportExperienceBonus: 0, jellyExperienceBonus: 0,
+    militiaExperienceEnabled: false,
 };
 
 export const getRoyalGuardianContribution = (player: Player, alchemy: Alchemy): RoyalGuardianContribution => ({
@@ -48,6 +63,10 @@ export class RoyalArmory extends Domain {
     resourceQuantityLogTotal = 0;
     builtOutpostCount = 0;
     resourceCollectionBonuses = emptyCollectionBonuses;
+    rankExperienceBonuses = emptyRankExperienceBonuses;
+    readonly productionBonuses = { savageCollectionMultiplier: 0 };
+    readonly totalResourceProduction = new Map<number, number>();
+    private selectedExperienceRank = OutpostRank.Trading;
     selectedRoyalGuardian: RoyalGuardianContribution | undefined;
     private totalUpgradeLevels = 0;
     private unlockedUpgradeCount = 0;
@@ -75,6 +94,10 @@ export class RoyalArmory extends Domain {
         this.totalResourceGrade = this.totalOutpostUpgradeLevels = this.purifiedOutpostCount = 0;
         this.resourceQuantityLogTotal = this.builtOutpostCount = 0;
         this.resourceCollectionBonuses = emptyCollectionBonuses;
+        this.rankExperienceBonuses = emptyRankExperienceBonuses;
+        this.productionBonuses.savageCollectionMultiplier = 0;
+        this.totalResourceProduction.clear();
+        this.selectedExperienceRank = OutpostRank.Trading;
         this.selectedRoyalGuardian = undefined;
         this.totalUpgradeLevels = this.unlockedUpgradeCount = this.orbletsOwned = 0;
         this.extraClearKills = 1;
@@ -106,6 +129,7 @@ export class RoyalArmory extends Domain {
             armory.mapStates.set(mapId, map);
         });
         armory.units.parse(royalG ?? []);
+        armory.selectedExperienceRank = royalArmoryAsNumber(royalG?.[3]?.[7]);
         armory.resourceNodes.parse(royalG?.[5] ?? [], royalG?.[4] ?? []);
         armory.resetResources();
         royalG?.[1]?.forEach((quantity, resourceType) => {
@@ -129,6 +153,7 @@ export class RoyalArmory extends Domain {
         for (const map of this.mapStates.values()) {
             map.units.prepare(map.getRankProgress(OutpostRank.Command).level, map.isOutpost() ? map.glorificationLevel : 0);
         }
+        for (const unit of this.units.roster) this.mapStates.get(unit.stationedMapId)?.units.addMovableUnit(unit.role);
     }
 
     getTotalUpgradeLevels(): number { return this.totalUpgradeLevels; }
@@ -161,6 +186,27 @@ export class RoyalArmory extends Domain {
 
     getUpgradeBonus(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
+    }
+
+    getUnlockedOutpostWorldCount(): number {
+        // RoyalG / MapWorldsUnlocked: preserve the game's nested addition order.
+        return Math.round(1 + (this.getUpgradeBonus(2) +
+            (this.getUpgradeBonus(3) +
+                (this.getUpgradeBonus(4) +
+                    (this.getUpgradeBonus(5) +
+                        (this.getUpgradeBonus(6) + (this.getUpgradeBonus(7) + this.getUpgradeBonus(8))))))));
+    }
+
+    getOutpostWorldUnlock(worldIndex: number): RoyalOutpostWorldUnlock {
+        return {
+            unlocked: worldIndex < this.getUnlockedOutpostWorldCount(),
+            upgrade: worldIndex === 0 ? undefined : this.getUpgradeByIndex(worldIndex + 1),
+        };
+    }
+
+    getAvailableOutpostConnections(): number {
+        // RoyalG 1.22 / CanWeDoubleConnect returns 1 for both resource and support callers.
+        return 2;
     }
 
     getOrbletMarketBonus(index: number): number {
@@ -250,6 +296,80 @@ export class RoyalArmory extends Domain {
             ? map.getResourceCollectionRate(this.resourceCollectionBonuses, this.selectedRoyalGuardian) : 0;
     }
 
+    updateOutpostRankExperience(spelunking: Spelunking, jellyExperienceBonus: number): void {
+        const purityUpgrade = spelunking.upgrades.find(upgrade => upgrade.index === 65);
+        this.rankExperienceBonuses = {
+            orbletExperienceBonus: this.getOrbletMarketBonus(6),
+            purityExperienceBonus: purityUpgrade?.unlocked ? spelunking.getUpgradeBonus(65) : 0,
+            selectedRankExperienceBonus: spelunking.getUpgradeBonus(77),
+            selectedRank: this.selectedExperienceRank,
+            rankEffects: {
+                [OutpostRank.Trading]: this.units.getRole(RoyalUnitRole.Trader).effect,
+                [OutpostRank.Intel]: this.units.getRole(RoyalUnitRole.Surveyor).effect,
+                [OutpostRank.Command]: this.units.getRole(RoyalUnitRole.Commander).effect,
+                [OutpostRank.Military]: this.units.getRole(RoyalUnitRole.Knight).effect,
+                [OutpostRank.Purity]: this.units.getRole(RoyalUnitRole.Priest).effect,
+            },
+            // The game looks up purification using the rank type, not the receiving map.
+            purifiedRanks: {
+                [OutpostRank.Trading]: this.mapStates.get(OutpostRank.Trading)?.purified ?? false,
+                [OutpostRank.Intel]: this.mapStates.get(OutpostRank.Intel)?.purified ?? false,
+                [OutpostRank.Command]: this.mapStates.get(OutpostRank.Command)?.purified ?? false,
+                [OutpostRank.Military]: this.mapStates.get(OutpostRank.Military)?.purified ?? false,
+                [OutpostRank.Purity]: this.mapStates.get(OutpostRank.Purity)?.purified ?? false,
+            },
+            intelRankBonus: this.getUpgradeBonus(72),
+            supportExperienceBonus: this.resourceCollectionBonuses.supportCollectionBonus,
+            jellyExperienceBonus,
+            militiaExperienceEnabled: this.getUpgradeBonus(17) >= 1,
+        };
+        for (const map of this.mapStates.values()) {
+            map.updateRankExperienceMultipliers(this.rankExperienceBonuses);
+            for (const rank of OUTPOST_RANKS) map.getRankProgress(rank).experiencePerHour = 0;
+            if (map.outpostEligible && map.isOutpost()) {
+                map.getRankProgress(OutpostRank.Trading).experiencePerHour =
+                    map.getRankExperienceMultiplier(OutpostRank.Trading) * map.units.getTotalCount(RoyalUnitRole.Trader);
+                map.getRankProgress(OutpostRank.Intel).experiencePerHour =
+                    map.getRankExperienceMultiplier(OutpostRank.Intel) * map.units.getTotalCount(RoyalUnitRole.Surveyor);
+            }
+        }
+        for (const unit of this.units.roster) {
+            const map = this.mapStates.get(unit.stationedMapId);
+            if (!map) continue;
+            // Movable roles add XP per placement without the stationary outpost eligibility guard.
+            if (unit.role >= RoyalUnitRole.Commander) {
+                const rank = (unit.role - 3) as OutpostRank;
+                map.getRankProgress(rank).experiencePerHour += map.getRankExperienceMultiplier(rank);
+            } else if (this.rankExperienceBonuses.militiaExperienceEnabled && map.isOutpost()) {
+                let selectedRank = OutpostRank.Trading;
+                let highestLevel = -1;
+                for (const rank of OUTPOST_RANKS) {
+                    const level = map.getRankProgress(rank).level;
+                    if (level > highestLevel) {
+                        highestLevel = level;
+                        selectedRank = rank;
+                    }
+                }
+                map.getRankProgress(selectedRank).experiencePerHour += map.getRankExperienceMultiplier(OutpostRank.Military) / 2;
+            }
+        }
+    }
+
+    updateOutpostProduction(): void {
+        this.totalResourceProduction.clear();
+        for (const map of this.mapStates.values()) {
+            if (!map.isOutpost()) continue;
+            map.updateLinks(this.resourceNodes, this.mapStates, this.getOutpostResourceRate(map.mapId),
+                this.productionBonuses.savageCollectionMultiplier);
+            for (const details of map.linkDetails) {
+                if (!(details.target instanceof RoyalResourceNode) || details.productionPerHour === 0) continue;
+                const materialId = details.target.resourceType;
+                this.totalResourceProduction.set(materialId,
+                    (this.totalResourceProduction.get(materialId) ?? 0) + details.productionPerHour);
+            }
+        }
+    }
+
     getTotalSupports(mapIndex: number): number {
         let supports = 0;
         const mapKey = String(mapIndex);
@@ -296,6 +416,10 @@ export const updateRoyalArmory = (accountData: Map<string, unknown>) => {
     const zenithMarket = accountData.get("zenithMarket") as { getBonusForId(index: number): number };
     armory.updateOutpostResourceRateEarlyInputs(sushi.getBonusFromIndex(60), zenithMarket.getBonusForId(10),
         jellyOperator.obstructions.find(obstruction => obstruction.index === 41)!.getBonus());
+    armory.updateOutpostRankExperience(accountData.get("spelunking") as Spelunking,
+        jellyOperator.obstructions.find(obstruction => obstruction.index === 1)!.getBonus());
+    armory.productionBonuses.savageCollectionMultiplier = 5 * (1 + armory.getUpgradeBonus(69) / 100);
+    armory.updateOutpostProduction();
 };
 
 export const updateRoyalArmoryLateInputs = (accountData: Map<string, unknown>) => {
@@ -310,6 +434,7 @@ export const updateRoyalArmoryLateInputs = (accountData: Map<string, unknown>) =
     armory.units.prepareMilitiaEffect(armory.getUpgradeBonus(23), armory.getExtraClearKills());
     armory.updateOutpostResourceRateLateInputs(players, getCompanionActiveBonus(accountData.get("companions") as Companion[], 141),
         arcade.bonuses.find(bonus => bonus.index === 70)!.getBonus(), alchemy);
+    armory.updateOutpostProduction();
     armory.updateOutpostUnusedPoints(jellyOperator);
     const masterClasses = accountData.get("masterClasses") as MasterClasses;
     const masterClassCostMultiplier = masterClasses.getUpgradeCostMultiplier();

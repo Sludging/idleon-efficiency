@@ -115,6 +115,10 @@ export class OutpostUnits {
     private assignedTraders = 0;
     private assignedGuards = 0;
     private assignedSurveyors = 0;
+    private assignedMilitia = 0;
+    private assignedCommanders = 0;
+    private assignedKnights = 0;
+    private assignedPriests = 0;
     private passiveWorkers = 0;
     private passiveTraders = 0;
     private passiveGuards = 0;
@@ -131,6 +135,7 @@ export class OutpostUnits {
         this.assignedTraders = 0;
         this.assignedGuards = 0;
         this.assignedSurveyors = 0;
+        this.assignedMilitia = this.assignedCommanders = this.assignedKnights = this.assignedPriests = 0;
         // The first nine characters are physical slots; subtract two to decode each role.
         for (let slotIndex = 0; slotIndex < 9; slotIndex++) {
             const role = Math.round(Number(encoding.charAt(slotIndex)) - 2);
@@ -152,6 +157,7 @@ export class OutpostUnits {
     }
 
     prepare(commandRank: number, glorificationLevel = 0): void {
+        this.assignedMilitia = this.assignedCommanders = this.assignedKnights = this.assignedPriests = 0;
         this.passiveWorkers = Math.ceil(Math.max(0, commandRank) / 4) + Math.min(1, glorificationLevel);
         this.passiveTraders = Math.ceil(Math.max(0, commandRank - 1) / 4);
         this.passiveGuards = Math.ceil(Math.max(0, commandRank - 2) / 4);
@@ -162,12 +168,25 @@ export class OutpostUnits {
         this.totalSurveyors = Math.round(this.assignedSurveyors + this.passiveSurveyors);
     }
 
+    addMovableUnit(role: RoyalUnitRole): void {
+        switch (role) {
+            case RoyalUnitRole.Militia: this.assignedMilitia++; break;
+            case RoyalUnitRole.Commander: this.assignedCommanders++; break;
+            case RoyalUnitRole.Knight: this.assignedKnights++; break;
+            case RoyalUnitRole.Priest: this.assignedPriests++; break;
+        }
+    }
+
     getAssignedCount(role: RoyalUnitRole): number {
         switch (role) {
             case RoyalUnitRole.Worker: return this.assignedWorkers;
             case RoyalUnitRole.Trader: return this.assignedTraders;
             case RoyalUnitRole.Guard: return this.assignedGuards;
             case RoyalUnitRole.Surveyor: return this.assignedSurveyors;
+            case RoyalUnitRole.Militia: return this.assignedMilitia;
+            case RoyalUnitRole.Commander: return this.assignedCommanders;
+            case RoyalUnitRole.Knight: return this.assignedKnights;
+            case RoyalUnitRole.Priest: return this.assignedPriests;
             default: return 0;
         }
     }
@@ -188,6 +207,10 @@ export class OutpostUnits {
             case RoyalUnitRole.Trader: return this.totalTraders;
             case RoyalUnitRole.Guard: return this.totalGuards;
             case RoyalUnitRole.Surveyor: return this.totalSurveyors;
+            case RoyalUnitRole.Militia: return this.assignedMilitia;
+            case RoyalUnitRole.Commander: return this.assignedCommanders;
+            case RoyalUnitRole.Knight: return this.assignedKnights;
+            case RoyalUnitRole.Priest: return this.assignedPriests;
             default: return 0;
         }
     }

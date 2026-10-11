@@ -3,10 +3,6 @@
     "spelunking_purchased_bonus_59": {
       "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 59, 1)",
       "result": 3
-    },
-    "spelunking_purchased_bonus_65": {
-      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 65, 1)",
-      "result": 0
     }
   },
   "errors": {}

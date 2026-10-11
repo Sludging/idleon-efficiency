@@ -1,23 +1,28 @@
 'use client';
 
-import { useMemo, useState } from "react";
-import { Box, DataTableProps, Grid, Select, Text } from "grommet";
+import { useContext, useMemo, useState } from "react";
+import { Box, DataTableProps, Grid, Meter, Select, Stack, Text, TextInput, ThemeContext, ThemeType } from "grommet";
 import { useShallow } from "zustand/react/shallow";
+import styled from "styled-components";
+import { normalizeColor } from "grommet/utils";
 import { useAppDataStore } from "../../lib/providers/appDataStoreProvider";
-import { OUTPOST_RANKS, OutpostRank } from "../../data/domain/world-6/royalArmory/outposts";
+import { OUTPOST_RANKS, Outpost, OutpostKind, OutpostLinkDetails, OutpostRank, RoyalMapSource } from "../../data/domain/world-6/royalArmory/outposts";
 import { RoyalArmory } from "../../data/domain/world-6/royalArmory/royalArmory";
 import { RoyalArmoryOrbletMarketBonus } from "../../data/domain/world-6/royalArmory/orblets";
 import { RoyalArmoryUpgrade } from "../../data/domain/world-6/royalArmory/upgrades";
+import { RoyalUnitRole } from "../../data/domain/world-6/royalArmory/units";
+import { RoyalResourceNode } from "../../data/domain/world-6/royalArmory/resourceNodes";
 import { MapInfo } from "../../data/domain/maps";
 import IconImage from "../base/IconImage";
 import ShadowBox from "../base/ShadowBox";
 import ContentTabs from "../base/ContentTabs";
 import TextAndLabel, { ComponentAndLabel } from "../base/TextAndLabel";
 import TipDisplay from "../base/TipDisplay";
+import SmallButton from "../base/SmallButton";
 import { UpgradeTable } from "./shared/UpgradeTable";
 import { FilterOptions } from "./shared/UpgradeTableFilters";
 import { ResourceDisplay } from "./shared/ResourceDisplay";
-import { commaNotation, notateNumber } from "../../data/utility";
+import { commaNotation, notateNumber, toTime } from "../../data/utility";
 
 function ResourceBar({ armory, resourceTypes }: { armory: RoyalArmory, resourceTypes: number[] }) {
     return (
@@ -207,39 +212,305 @@ function OrbletCards({ offers, orbletsOwned }: { offers: RoyalArmoryOrbletMarket
     );
 }
 
-function OutpostCards({ armory }: { armory: RoyalArmory }) {
+const outpostKindNames: Record<OutpostKind, string> = {
+    [OutpostKind.ResourceDepot]: 'Resource Depot',
+    [OutpostKind.SupportCamp]: 'Support Camp',
+    [OutpostKind.SavageStronghold]: 'Savage Stronghold',
+};
+
+const outpostLinkProblems: Partial<Record<OutpostLinkDetails['reason'], string>> = {
+    'source-ineligible': 'This map cannot have an active outpost.',
+    'wrong-kind': 'Connection does not match the outpost kind.',
+    'unknown-target': 'Target is not in the current catalog.',
+    'wrong-world': 'Target is in another world.',
+    'hidden-target': 'Target is outside the visible world map.',
+    'out-of-range': 'Target is outside connection range.',
+};
+
+const OutpostSurface = styled(Box) <{ $muted: string; $text: string; $focus: string }>`
+    font-variant-numeric: tabular-nums;
+    details > summary { cursor: pointer; color: ${({ $muted }) => $muted}; }
+    details > summary:hover { color: ${({ $text }) => $text}; }
+    summary:focus-visible, [tabindex]:focus-visible { outline: 2px solid ${({ $focus }) => $focus}; outline-offset: 3px; }
+    .outpost-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 12px; align-items: stretch; }
+    .outpost-ranks { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12px; line-height: 20px; }
+    .outpost-ranks th { font-weight: 400; color: ${({ $muted }) => $muted}; text-align: left; }
+    .outpost-ranks th, .outpost-ranks td { padding: 0 6px 0 0; vertical-align: middle; }
+    .outpost-ranks th:last-child, .outpost-ranks td:last-child { padding: 0; text-align: right; }
+    .outpost-ranks th:nth-child(2), .outpost-ranks td:nth-child(2) { text-align: center; }
+    .outpost-ranks col:nth-child(1) { width: 62px; }
+    .outpost-ranks col:nth-child(2) { width: 35px; }
+    .outpost-ranks col:nth-child(3) { width: 94px; }
+    .outpost-ranks col:nth-child(5) { width: 58px; }
+    .outpost-node-image { width: 48px; height: 48px; flex-shrink: 0; }
+    @media (max-width: 600px) { .outpost-connections { flex-direction: column; gap: 3px; } }
+`;
+
+function formatRankXP(value: number): string {
+    return value < 1e7 ? commaNotation(value) : notateNumber(value);
+}
+
+function formatRankETA(hours: number): string {
+    if (!Number.isFinite(hours)) return '—';
+    if (hours < 1 / 60) return '<1m';
+    if (hours < 1) return `${Math.ceil(hours * 60)}m`;
+    if (hours < 24) return `${Math.round(hours * 10) / 10}h`;
+    return `${notateNumber(hours / 24, 'Smaller')}d`;
+}
+
+function OutpostUnitsDisplay({ armory, outpost }: { armory: RoyalArmory, outpost: RoyalMapSource }) {
+    const activeRoles = armory.units.roles.filter(role => outpost.units.getTotalCount(role.role) > 0);
+    if (activeRoles.length === 0) return null;
     return (
-        <Grid aria-label="Royal Armory Outposts" columns={{ size: 'medium', count: 'fill' }} gap="medium" fill style={{ gridAutoRows: '1fr' }}>
-            {Array.from(armory.mapStates.values()).map(outpost => {
-                if (!outpost.isOutpost()) return null;
-                const unusedPoints = outpost.getUnusedPoints();
+        <Box id={`royal-outpost-${outpost.mapId}-units`} direction="row" wrap gap="small" align="center" pad={{ vertical: 'xxsmall' }} border={{ side: 'top', color: 'grey-1' }}>
+            {[false, true].map(movable => {
+                const roles = activeRoles.filter(role => (role.role >= RoyalUnitRole.Militia) === movable);
+                if (roles.length === 0) return null;
                 return (
-                    <ShadowBox key={outpost.mapId} id={`royal-outpost-${outpost.mapId}`} background="dark-1" pad="medium" gap="small">
-                        <Text size="small" weight={500}>{MapInfo[outpost.mapId].data.map.name}</Text>
-                        <Box gap="small">
-                            {OUTPOST_RANKS.map(rank => {
-                                const progress = outpost.getRankProgress(rank);
-                                return (
-                                    <TextAndLabel
-                                        key={rank}
-                                        label={OutpostRank[rank]}
-                                        text={`Rank ${commaNotation(progress.level)} (${notateNumber(progress.currentXP, 'Smaller')} / ${notateNumber(progress.requiredXP, 'Smaller')} XP)`}
-                                        textSize="small"
-                                        labelSize="xsmall"
-                                    />
-                                );
-                            })}
-                            <TextAndLabel
-                                label="Unused points"
-                                text={commaNotation(unusedPoints)}
-                                textSize="small"
-                                labelSize="xsmall"
-                            />
-                        </Box>
-                    </ShadowBox>
+                    <Box key={String(movable)} direction="row" gap="xsmall" align="center">
+                        <Text size="xsmall" color="accent-2">{movable ? 'Movable' : 'Stationary'}</Text>
+                        {roles.map(role => (
+                            <TipDisplay key={role.role} heading={role.name} body={`${commaNotation(outpost.units.getAssignedCount(role.role))} assigned, ${commaNotation(outpost.units.getPassiveCount(role.role))} passive. ${role.effectMeaning}: ${notateNumber(role.effect, 'Smaller')}${role.effectUnit === 'percent' ? '%' : ` ${role.effectUnit}`} per unit.`}>
+                                <Box id={`royal-outpost-${outpost.mapId}-role-${role.role}`} direction="row" align="center" gap="xxsmall" tabIndex={0} aria-label={`${role.name}: ${outpost.units.getTotalCount(role.role)}`}>
+                                    <IconImage data={role.getImageData()} scale={movable ? 1.5 : 0.8} />
+                                    <Text size="xsmall">×{commaNotation(outpost.units.getTotalCount(role.role))}</Text>
+                                </Box>
+                            </TipDisplay>
+                        ))}
+                    </Box>
                 );
             })}
-        </Grid>
+        </Box>
+    );
+}
+
+function OutpostNodeImage({ armory, node }: { armory: RoyalArmory, node: RoyalResourceNode }) {
+    const nodeImage = node.getImageData();
+    const resourceImage = armory.resources.get(node.resourceType)?.getImageData();
+    return (
+        <Stack className="outpost-node-image" anchor="center">
+            <IconImage data={nodeImage} scale={48 / Math.max(nodeImage.width, nodeImage.height)} />
+            {resourceImage && <IconImage data={resourceImage} scale={28 / Math.max(resourceImage.width, resourceImage.height)} />}
+        </Stack>
+    );
+}
+
+function OutpostLinks({ armory, outpost }: { armory: RoyalArmory, outpost: Outpost }) {
+    const showLinkProduction = outpost.kind === OutpostKind.ResourceDepot
+        && outpost.linkDetails[0].productionPerHour > 0
+        && outpost.linkDetails[1].productionPerHour > 0;
+    return (
+        <Box className="outpost-connections" id={`royal-outpost-${outpost.mapId}-links`} direction="row" gap="small" pad={{ top: 'xxsmall' }} border={{ side: 'top', color: 'grey-1' }}>
+            <Text size="xsmall" color="accent-2">Connections</Text>
+            <Box flex gap="xxsmall">
+                {outpost.linkDetails.map((link, slot) => {
+                    const target = link.target;
+                    if (slot >= armory.getAvailableOutpostConnections() && !link.connection) return null;
+                    const label = target instanceof RoyalResourceNode
+                        ? `Node ${target.order + 1} · Grade ${commaNotation(target.grade)}`
+                        : target ? MapInfo[target.mapId]?.data.map.name ?? 'Saved map connection' : 'Saved connection';
+                    const problem = outpostLinkProblems[link.reason];
+                    let tooltipBody = '';
+                    if (showLinkProduction) {
+                        tooltipBody = `${commaNotation(link.productionPerHour)}/h stockpile production.`;
+                    } else if (outpost.kind === OutpostKind.SavageStronghold && target instanceof RoyalResourceNode) {
+                        tooltipBody = 'Consumes node resources; does not add them to your stockpile.';
+                    }
+                    if (problem) tooltipBody = tooltipBody ? `${tooltipBody} ${problem}` : problem;
+                    return (
+                        <Box key={slot} id={`royal-outpost-${outpost.mapId}-link-${slot}`} gap="xxsmall">
+                            <Box direction="row" gap="xsmall" align="center">
+                                <Text data-outpost-link-slot-label size="xsmall" color="accent-2">Connection {slot + 1}</Text>
+                                {!link.connection && <Text data-outpost-link-empty size="xsmall" color="accent-2">Empty</Text>}
+                            </Box>
+                            {link.connection && (
+                                <Box direction="row" gap="xsmall" align="center" style={{ minWidth: 0 }}>
+                                    {target instanceof RoyalResourceNode && <OutpostNodeImage armory={armory} node={target} />}
+                                    <Box flex style={{ minWidth: 0 }}>
+                                        {target instanceof RoyalResourceNode && (
+                                            <Text data-outpost-link-availability size="small" weight={500} color={link.exhausted ? 'status-warning' : undefined} style={{ overflowWrap: 'anywhere' }}>
+                                                {link.exhausted ? 'Exhausted' : `Available ${notateNumber(target.getAvailableQuantity())} / ${notateNumber(target.getMaximumQuantity())}`}
+                                            </Text>
+                                        )}
+                                        {tooltipBody ? (
+                                            <TipDisplay heading={`Connection ${slot + 1}`} body={tooltipBody}>
+                                                <Text data-outpost-link-label size="xsmall" color="accent-2" tabIndex={0}>{label}</Text>
+                                            </TipDisplay>
+                                        ) : (
+                                            <Text data-outpost-link-label size="xsmall" color="accent-2">{label}</Text>
+                                        )}
+                                    </Box>
+                                </Box>
+                            )}
+                            {link.exhausted && (
+                                <details id={`royal-outpost-${outpost.mapId}-link-${slot}-alternatives`}>
+                                    <summary style={{ fontSize: '12px' }}>Alternatives ({commaNotation(link.alternatives.length)})</summary>
+                                    <Box gap="xsmall" pad={{ vertical: 'xsmall' }}>
+                                        {link.alternatives.length === 0 && <Text size="xsmall" color="accent-2">No available resource alternatives in range.</Text>}
+                                        {link.alternatives.map(candidate => (
+                                            <Box key={candidate.nodeId} data-outpost-alternative direction="row" gap="xsmall" align="center" style={{ minWidth: 0 }}>
+                                                <OutpostNodeImage armory={armory} node={candidate} />
+                                                <Box flex style={{ minWidth: 0 }}>
+                                                    <Text data-outpost-link-availability size="small" weight={500} style={{ overflowWrap: 'anywhere' }}>Available {notateNumber(candidate.getAvailableQuantity())} / {notateNumber(candidate.getMaximumQuantity())}</Text>
+                                                    <Text data-outpost-link-label size="xsmall" color="accent-2">Node {candidate.order + 1} · Grade {commaNotation(candidate.grade)}</Text>
+                                                </Box>
+                                            </Box>
+                                        ))}
+                                    </Box>
+                                </details>
+                            )}
+                        </Box>
+                    );
+                })}
+            </Box>
+        </Box>
+    );
+}
+
+
+function OutpostCard({ armory, outpost }: { armory: RoyalArmory, outpost: Outpost }) {
+    const unusedPoints = outpost.getUnusedPoints();
+    const productionLink = outpost.linkDetails.find(link => link.target instanceof RoyalResourceNode);
+    const resource = productionLink?.target instanceof RoyalResourceNode ? armory.resources.get(productionLink.target.resourceType) : undefined;
+    return (
+        <ShadowBox id={`royal-outpost-${outpost.mapId}`} flex={false} background="dark-1" pad="small" gap="xxsmall" border={{ color: 'grey-1', size: 'xsmall' }} style={{ minWidth: 0, borderRadius: '4px' }}>
+            <Box direction="row" justify="between" gap="xsmall" align="start">
+                <Box style={{ minWidth: 0 }}>
+                    <Text size="14px" weight={500}>{MapInfo[outpost.mapId].data.map.name}</Text>
+                    <Text size="xsmall" color="accent-2">{outpostKindNames[outpost.kind]} · {MapInfo[outpost.mapId].data.world}{outpost.glorified ? ' · Glorified' : ''}</Text>
+                </Box>
+                <TipDisplay heading="Outpost upgrades" body={`Expanded Barracks: ${outpost.expandedBarracksLevel}; Advanced Logistics: ${outpost.advancedLogisticsLevel}; Greater Education: ${outpost.greaterEducationLevel}`}>
+                    <Text size="xsmall" color="accent-2" style={{ whiteSpace: 'nowrap' }} tabIndex={0}>EB {outpost.expandedBarracksLevel} &nbsp; AL {outpost.advancedLogisticsLevel} &nbsp; GE {outpost.greaterEducationLevel}</Text>
+                </TipDisplay>
+            </Box>
+            <Box direction="row" justify="between" gap="small">
+                <ComponentAndLabel label="Production" labelSize="xsmall" component={<Box direction="row" gap="xxsmall" align="center">{resource && <IconImage data={resource.getImageData()} scale={0.65} />}<Text size="small" weight={500}>{notateNumber(outpost.productionPerHour, 'Smaller')}/h</Text></Box>} />
+                <TextAndLabel label="Range" text={commaNotation(outpost.connectionRange)} labelSize="xsmall" textSize="small" />
+                <TextAndLabel label="Unused points" text={commaNotation(unusedPoints)} labelSize="xsmall" textSize="small" textColor={unusedPoints > 0 ? 'green-2' : undefined} />
+            </Box>
+            <Box id={`royal-outpost-${outpost.mapId}-ranks`} pad={{ top: 'xxsmall' }} border={{ side: 'top', color: 'grey-1' }}>
+                <table className="outpost-ranks" aria-label={`${MapInfo[outpost.mapId].data.map.name} ranks`}>
+                    <colgroup><col /><col /><col /><col /><col /></colgroup>
+                    <thead><tr><th scope="col">Rank</th><th scope="col">Level</th><th scope="col">XP</th><th scope="col">Progress</th><th scope="col">Next rank</th></tr></thead>
+                    <tbody>{OUTPOST_RANKS.map(rank => {
+                        const progress = outpost.getRankProgress(rank);
+                        const hours = progress.getHoursToNextRank();
+                        const percentage = progress.requiredXP > 0 ? Math.min(100, Math.max(0, progress.currentXP / progress.requiredXP * 100)) : 0;
+                        return (
+                            <tr key={rank} id={`royal-outpost-${outpost.mapId}-rank-${rank}`} style={{ opacity: progress.experiencePerHour > 0 ? 1 : 0.65 }}>
+                                <td>
+                                    {progress.experiencePerHour > 0
+                                        ? <TipDisplay heading={OutpostRank[rank]} body={`${commaNotation(progress.experiencePerHour)} XP/h.`}><Text data-rank-name size="xsmall" tabIndex={0}>{OutpostRank[rank]}</Text></TipDisplay>
+                                        : <Text data-rank-name size="xsmall">{OutpostRank[rank]}</Text>}
+                                </td>
+                                <td>{progress.level}</td>
+                                <td data-rank-xp>{formatRankXP(progress.totalXP)} / {formatRankXP(progress.nextThreshold)}</td>
+                                <td><Meter aria-label={`${OutpostRank[rank]} level progress`} values={[{ value: percentage, color: 'brand' }]} max={100} thickness="6px" size="full" background="grey-1" round /></td>
+                                <td title={Number.isFinite(hours) ? toTime(hours * 3600) : undefined}>{formatRankETA(hours)}</td>
+                            </tr>
+                        );
+                    })}</tbody>
+                </table>
+            </Box>
+            <OutpostUnitsDisplay armory={armory} outpost={outpost} />
+            <OutpostLinks armory={armory} outpost={outpost} />
+        </ShadowBox>
+    );
+}
+
+function UnbuiltOutpostCard({ armory, outpost }: { armory: RoyalArmory, outpost: RoyalMapSource }) {
+    const unlock = armory.getOutpostWorldUnlock(outpost.worldIndex);
+    return (
+        <ShadowBox id={`royal-outpost-${outpost.mapId}`} flex={false} background="dark-1" pad="small" gap="xsmall" border={{ color: 'grey-1' }} style={{ minWidth: 0, borderRadius: '4px' }}>
+            <Text size="14px" weight={500}>{MapInfo[outpost.mapId].data.map.name}</Text>
+            <Text size="xsmall" color="accent-2">{MapInfo[outpost.mapId].data.world} · {unlock.unlocked ? 'Unbuilt' : 'World locked'}</Text>
+            <Text size="small">Monsters cleared: {notateNumber(outpost.clearedMonsters)}{outpost.requiredOutpostKills !== undefined && ` / ${notateNumber(outpost.requiredOutpostKills)}`}</Text>
+            {!unlock.unlocked && unlock.upgrade && <Text size="xsmall" color="accent-2">{unlock.upgrade.data.name.replace(/_/g, ' ')}: Lv. {unlock.upgrade.level} / {unlock.upgrade.getMaxLevel()}</Text>}
+            <OutpostUnitsDisplay armory={armory} outpost={outpost} />
+        </ShadowBox>
+    );
+}
+
+function OutpostCards({ armory }: { armory: RoyalArmory }) {
+    const theme = useContext<ThemeType>(ThemeContext);
+    const [search, setSearch] = useState('');
+    const [status, setStatus] = useState('All');
+    const [focus, setFocus] = useState('All');
+    const [groupBy, setGroupBy] = useState('World');
+    const maps = Array.from(armory.mapStates.values()).filter(outpost =>
+        MapInfo[outpost.mapId] && (outpost.outpostEligible || outpost.isOutpost()));
+    const worlds = [...new Set(maps.map(outpost => outpost.worldIndex))].sort((a, b) => a - b);
+    const availableConnections = armory.getAvailableOutpostConnections();
+    const hasFilters = search !== '' || status !== 'All' || focus !== 'All';
+    const filtered = maps.filter(outpost => {
+        const unlocked = armory.getOutpostWorldUnlock(outpost.worldIndex).unlocked;
+        return MapInfo[outpost.mapId].data.map.name.toLowerCase().includes(search.trim().toLowerCase())
+            && (status === 'All' || status === 'Built' && outpost.isOutpost()
+                || status === 'Unbuilt' && !outpost.isOutpost() && unlocked
+                || status === 'World locked' && !unlocked)
+            && (focus === 'All' || outpost.isOutpost() && (
+                focus === 'Unused points' && outpost.getUnusedPoints() > 0
+                || focus === 'Exhausted connections' && outpost.linkDetails.some(link => link.exhausted)
+                || focus === 'Empty connections' && outpost.linkDetails.some((link, slot) => slot < availableConnections && !link.connection)
+            ));
+    });
+    const renderCards = (entries: RoyalMapSource[]) => (
+        <div className="outpost-grid" aria-label="Royal Armory Outposts">
+            {entries.map(outpost => outpost.isOutpost()
+                ? <OutpostCard key={outpost.mapId} armory={armory} outpost={outpost} />
+                : <UnbuiltOutpostCard key={outpost.mapId} armory={armory} outpost={outpost} />)}
+        </div>
+    );
+    return (
+        <OutpostSurface id="royal-outposts-view" gap="small" $muted={normalizeColor('accent-2', theme)} $text={normalizeColor('text', theme, true)} $focus={normalizeColor('brand', theme)}>
+            <Box aria-label="Current Outpost production" background="dark-1" pad={{ horizontal: 'small', vertical: 'xsmall' }} direction="row" wrap gap="medium" align="center" border={{ color: 'grey-1' }}>
+                <Text size="small">Total production / hour</Text>
+                {Array.from(armory.totalResourceProduction).map(([type, production]) => (
+                    <Box key={type} id={`royal-production-${type}`} direction="row" align="center" gap="xsmall">
+                        <IconImage data={armory.resources.get(type)!.getImageData()} scale={0.65} />
+                        <Text size="small">{notateNumber(production, 'Smaller')}/h</Text>
+                    </Box>
+                ))}
+                {armory.totalResourceProduction.size === 0 && <Text size="small" color="accent-2">No current stockpile production.</Text>}
+            </Box>
+            <Box aria-label="Outpost filters" direction="row" wrap gap="small" align="end">
+                <Box width="220px" gap="xxsmall" style={{ maxWidth: '100%' }}>
+                    <Text size="xsmall" color="accent-2">Search</Text>
+                    <TextInput aria-label="Search Outposts" placeholder="Search Outposts" value={search} onChange={event => setSearch(event.target.value)} />
+                </Box>
+                <Box width="180px" gap="xxsmall" style={{ maxWidth: '100%' }}>
+                    <Text size="xsmall" color="accent-2">State</Text>
+                    <Select aria-label="Outpost status" options={['All', 'Built', 'Unbuilt', 'World locked']} value={status} onChange={({ option }) => setStatus(option)} />
+                </Box>
+                <Box width="260px" gap="xxsmall" style={{ maxWidth: '100%' }}>
+                    <Text size="xsmall" color="accent-2">Focus</Text>
+                    <Select aria-label="Outpost focus" options={['All', 'Unused points', 'Exhausted connections', 'Empty connections']} value={focus} onChange={({ option }) => setFocus(option)} />
+                </Box>
+                <Box width="130px" gap="xxsmall" style={{ maxWidth: '100%' }}>
+                    <Text size="xsmall" color="accent-2">Group by</Text>
+                    <Select aria-label="Group Outposts" options={['World', 'None']} value={groupBy} onChange={({ option }) => setGroupBy(option)} />
+                </Box>
+            </Box>
+            <Box direction="row" gap="small" align="center">
+                <Text size="xsmall" color="accent-2">{filtered.length} matching maps</Text>
+                {hasFilters && <SmallButton label="Clear filters" onClick={() => { setSearch(''); setStatus('All'); setFocus('All'); }} />}
+            </Box>
+            {filtered.length === 0 ? <Text size="small" color="accent-2">No maps match these filters. Change the search or filters to see Outposts.</Text>
+                : groupBy === 'None' ? renderCards(filtered)
+                    : worlds.map(worldIndex => {
+                        const entries = filtered.filter(outpost => outpost.worldIndex === worldIndex);
+                        if (entries.length === 0) return null;
+                        const unlock = armory.getOutpostWorldUnlock(worldIndex);
+                        return (
+                            <details key={worldIndex} id={`royal-outpost-world-${worldIndex}`} open={unlock.unlocked}>
+                                <summary style={{ marginBottom: '12px', fontSize: '14px' }}>
+                                    World {worldIndex + 1} ({entries.length} maps){!unlock.unlocked && ` · Locked${unlock.upgrade ? ` · ${unlock.upgrade.data.name.replace(/_/g, ' ')}: Lv. ${unlock.upgrade.level} / ${unlock.upgrade.getMaxLevel()}` : ''}`}
+                                </summary>
+                                {renderCards(entries)}
+                            </details>
+                        );
+                    })}
+        </OutpostSurface>
     );
 }
 
