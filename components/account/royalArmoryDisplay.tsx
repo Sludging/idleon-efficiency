@@ -405,6 +405,7 @@ function OutpostNodeImage({ armory, node }: { armory: RoyalArmory, node: RoyalRe
 }
 
 function OutpostLinks({ armory, outpost }: { armory: RoyalArmory, outpost: Outpost }) {
+    if (!outpost.linkDetails.some(link => link.connection)) return null;
     const showLinkProduction = outpost.kind === OutpostKind.ResourceDepot
         && outpost.linkDetails[0].productionPerHour > 0
         && outpost.linkDetails[1].productionPerHour > 0;
@@ -413,8 +414,8 @@ function OutpostLinks({ armory, outpost }: { armory: RoyalArmory, outpost: Outpo
             <Text size="xsmall" color="accent-2">Connections</Text>
             <Box flex gap="xxsmall">
                 {outpost.linkDetails.map((link, slot) => {
+                    if (!link.connection) return null;
                     const target = link.target;
-                    if (slot >= armory.getAvailableOutpostConnections() && !link.connection) return null;
                     const label = target instanceof RoyalResourceNode
                         ? `Node ${target.order + 1} · Grade ${commaNotation(target.grade)}`
                         : target ? MapInfo[target.mapId]?.data.map.name ?? 'Saved map connection' : 'Saved connection';
@@ -428,29 +429,23 @@ function OutpostLinks({ armory, outpost }: { armory: RoyalArmory, outpost: Outpo
                     if (problem) tooltipBody = tooltipBody ? `${tooltipBody} ${problem}` : problem;
                     return (
                         <Box key={slot} id={`royal-outpost-${outpost.mapId}-link-${slot}`} gap="xxsmall">
-                            <Box direction="row" gap="xsmall" align="center">
-                                <Text data-outpost-link-slot-label size="xsmall" color="accent-2">Connection {slot + 1}</Text>
-                                {!link.connection && <Text data-outpost-link-empty size="xsmall" color="accent-2">Empty</Text>}
-                            </Box>
-                            {link.connection && (
-                                <Box direction="row" gap="xsmall" align="center" style={{ minWidth: 0 }}>
-                                    {target instanceof RoyalResourceNode && <OutpostNodeImage armory={armory} node={target} />}
-                                    <Box flex style={{ minWidth: 0 }}>
-                                        {target instanceof RoyalResourceNode && (
-                                            <Text data-outpost-link-availability size="small" weight={500} color={link.exhausted ? 'status-warning' : undefined} style={{ overflowWrap: 'anywhere' }}>
-                                                {link.exhausted ? 'Exhausted' : `Available ${notateNumber(target.getAvailableQuantity())} / ${notateNumber(target.getMaximumQuantity())}`}
-                                            </Text>
-                                        )}
-                                        {tooltipBody ? (
-                                            <TipDisplay heading={`Connection ${slot + 1}`} body={tooltipBody}>
-                                                <Text data-outpost-link-label size="xsmall" color="accent-2" tabIndex={0}>{label}</Text>
-                                            </TipDisplay>
-                                        ) : (
-                                            <Text data-outpost-link-label size="xsmall" color="accent-2">{label}</Text>
-                                        )}
-                                    </Box>
+                            <Box direction="row" gap="xsmall" align="center" style={{ minWidth: 0 }}>
+                                {target instanceof RoyalResourceNode && <OutpostNodeImage armory={armory} node={target} />}
+                                <Box flex style={{ minWidth: 0 }}>
+                                    {target instanceof RoyalResourceNode && (
+                                        <Text data-outpost-link-availability size="small" weight={500} color={link.exhausted ? 'status-warning' : undefined} style={{ overflowWrap: 'anywhere' }}>
+                                            {link.exhausted ? 'Exhausted' : `Available ${notateNumber(target.getAvailableQuantity())} / ${notateNumber(target.getMaximumQuantity())}`}
+                                        </Text>
+                                    )}
+                                    {tooltipBody ? (
+                                        <TipDisplay heading="Connection" body={tooltipBody}>
+                                            <Text data-outpost-link-label size="xsmall" color="accent-2" tabIndex={0}>{label}</Text>
+                                        </TipDisplay>
+                                    ) : (
+                                        <Text data-outpost-link-label size="xsmall" color="accent-2">{label}</Text>
+                                    )}
                                 </Box>
-                            )}
+                            </Box>
                             {link.exhausted && (
                                 <details id={`royal-outpost-${outpost.mapId}-link-${slot}-alternatives`}>
                                     <summary style={{ fontSize: '12px' }}>Alternatives ({commaNotation(link.alternatives.length)})</summary>
@@ -549,7 +544,6 @@ function OutpostCards({ armory }: { armory: RoyalArmory }) {
     const maps = Array.from(armory.mapStates.values()).filter(outpost =>
         MapInfo[outpost.mapId] && (outpost.outpostEligible || outpost.isOutpost()));
     const worlds = [...new Set(maps.map(outpost => outpost.worldIndex))].sort((a, b) => a - b);
-    const availableConnections = armory.getAvailableOutpostConnections();
     const hasFilters = search !== '' || status !== 'All' || focus !== 'All';
     const filtered = maps.filter(outpost => {
         const unlocked = armory.getOutpostWorldUnlock(outpost.worldIndex).unlocked;
@@ -560,7 +554,7 @@ function OutpostCards({ armory }: { armory: RoyalArmory }) {
             && (focus === 'All' || outpost.isOutpost() && (
                 focus === 'Unused points' && outpost.getUnusedPoints() > 0
                 || focus === 'Exhausted connections' && outpost.linkDetails.some(link => link.exhausted)
-                || focus === 'Empty connections' && outpost.linkDetails.some((link, slot) => slot < availableConnections && !link.connection)
+                || focus === 'No connection' && !outpost.linkDetails.some(link => link.connection)
             ));
     });
     const renderCards = (entries: RoyalMapSource[]) => (
@@ -593,7 +587,7 @@ function OutpostCards({ armory }: { armory: RoyalArmory }) {
                 </Box>
                 <Box width="260px" gap="xxsmall" style={{ maxWidth: '100%' }}>
                     <Text size="xsmall" color="accent-2">Focus</Text>
-                    <Select aria-label="Outpost focus" options={['All', 'Unused points', 'Exhausted connections', 'Empty connections']} value={focus} onChange={({ option }) => setFocus(option)} />
+                    <Select aria-label="Outpost focus" options={['All', 'Unused points', 'Exhausted connections', 'No connection']} value={focus} onChange={({ option }) => setFocus(option)} />
                 </Box>
                 <Box width="130px" gap="xxsmall" style={{ maxWidth: '100%' }}>
                     <Text size="xsmall" color="accent-2">Group by</Text>

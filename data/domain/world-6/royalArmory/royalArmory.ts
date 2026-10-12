@@ -223,11 +223,6 @@ export class RoyalArmory extends Domain {
         };
     }
 
-    getAvailableOutpostConnections(): number {
-        // RoyalG 1.22 / CanWeDoubleConnect returns 1 for both resource and support callers.
-        return 2;
-    }
-
     getOrbletMarketBonus(index: number): number {
         return this.orbletMarketBonuses.find(bonus => bonus.index === index)!.getBonus();
     }

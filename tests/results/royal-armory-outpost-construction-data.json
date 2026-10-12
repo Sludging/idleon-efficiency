@@ -40,10 +40,6 @@
       "expression": "idleon.callFunction('RoyalG', 'MapWorldsUnlocked', 0, 0)",
       "result": 2
     },
-    "double_connection_allowed": {
-      "expression": "idleon.callFunction('RoyalG', 'CanWeDoubleConnect', 0, 0)",
-      "result": 1
-    },
     "expansion_bonus_2": {
       "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 2, 0)",
       "result": 1
