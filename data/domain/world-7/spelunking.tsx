@@ -27,25 +27,25 @@ export class Tunnel {
 
     static fromBase = (data: SpelunkingTunnelBase[]): Tunnel[] => {
         return data.map(tunnel => new Tunnel(
-            tunnel.index, 
-            tunnel.data.name, 
-            tunnel.data.loreBonus, 
-            tunnel.data.bossDepth, 
+            tunnel.index,
+            tunnel.data.name,
+            tunnel.data.loreBonus,
+            tunnel.data.bossDepth,
             Discovery.fromBase(tunnel.data.discoveries)
         ))
-        // Filter out 'future' tunnels based on number of discoveries
-        .filter(tunnel => tunnel.discoveries.length > 0); 
+            // Filter out 'future' tunnels based on number of discoveries
+            .filter(tunnel => tunnel.discoveries.length > 0);
     }
 }
 
 export class Discovery {
     unlocked: boolean = false;
-    constructor(public index: number, public name: string,public data: SpelunkingDiscoveryModel) {
+    constructor(public index: number, public name: string, public data: SpelunkingDiscoveryModel) {
     }
 
     static fromBase = (data: SpelunkingDiscoveryModel[]): Discovery[] => {
         return data.map((discovery, index) => new Discovery(index, discovery.name, discovery));
-    }   
+    }
 }
 
 export class Chapter {
@@ -64,8 +64,12 @@ export class Chapter {
 export class Upgrade {
     public level: number = 0;
     public unlocked: boolean = false;
-    
+
     constructor(public index: number, public data: SpelunkingUpgradeModel) {
+    }
+
+    getBonus(): number {
+        return this.data.bonusPerLevel * this.level;
     }
 
     static fromBase = (data: SpelunkingUpgradeBase[]): Upgrade[] => {
@@ -79,12 +83,36 @@ export class Spelunking extends Domain {
     upgrades: Upgrade[] = []
     stamina: number[] = []
     ownedAmber: number = 0;
+    // TODO: Move this out of the Spelunking domain and into a 
+    // more appropriate place. 
+    premiumHatsFound: number = 0;
+
+    getDeepestDelveDepth(): number {
+        return Math.max(0, ...this.tunnels.map(tunnel => tunnel.bestDepth));
+    }
+
+    getBiggestDelveHaul(): number {
+        return Math.max(0, ...this.tunnels.map(tunnel => tunnel.biggestHaul));
+    }
+
+    getTotalShopUpgradeLevels(): number {
+        return this.upgrades.reduce((total, upgrade) => total + Math.max(0, upgrade.level), 0);
+    }
+
+    getUpgradeBonus(index: number): number {
+        return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
+    }
+
+    getTotalDiscoveries(): number {
+        return this.tunnels.reduce((total, tunnel) => total + tunnel.discoveryCount, 0);
+    }
 
     getRawKeys(): RawData[] {
         return [
             { key: "Spelunk", perPlayer: false, default: [] }
         ]
     }
+
 
     init(_allItems: Item[], charCount: number) {
         this.tunnels = Tunnel.fromBase(initSpelunkingTunnelRepo());
@@ -96,37 +124,51 @@ export class Spelunking extends Domain {
 
     parse(data: Map<string, any>): void {
         const spelunking = data.get(this.getDataKey()) as Spelunking;
-        const spelunkingData = data.get("Spelunk") as any[][];
+        const spelunkingData = data.get("Spelunk") as unknown[][];
+
+        spelunking.premiumHatsFound = 0;
 
         // Safe guard for old accounts / missing data.
         if (!spelunkingData || spelunkingData.length == 0) {
             return;
         }
 
+        const tunnelUnlocks = (spelunkingData[0] ?? []) as number[];
+        const bestDepths = (spelunkingData[1] ?? []) as number[];
+        const biggestHauls = (spelunkingData[2] ?? []) as (number | string)[];
+        const staminaLevels = (spelunkingData[3] ?? []) as number[];
+        const shopUpgradeLevels = (spelunkingData[5] ?? []) as number[];
+        const discoveriesMade = (spelunkingData[6] ?? []) as string[];
+        spelunking.premiumHatsFound = (spelunkingData[46] ?? []).length;
+
         // Get raw discoveries and clean up the underscores so we can match
         // them to the name of discoveries
-        const discoveriesMade = spelunkingData[6] as string[];
-        const discoveriesMadeClean = discoveriesMade.map(discovery => String(discovery)?.replace(/_/g, ' '));
+        const discoveriesMadeClean = discoveriesMade.map(discovery => String(discovery).replace(/_/g, ' ').trim());
 
         spelunking.tunnels.forEach(tunnel => {
-            tunnel.unlocked = spelunkingData[0][tunnel.index] > 0;
-            tunnel.bestDepth = spelunkingData[1][tunnel.index];
-            tunnel.biggestHaul = spelunkingData[2][tunnel.index];
+            tunnel.unlocked = tunnelUnlocks[tunnel.index] > 0;
+            tunnel.bestDepth = bestDepths[tunnel.index];
+            // Cloudsave serializes very large haul values as strings.
+            tunnel.biggestHaul = Number(biggestHauls[tunnel.index] ?? 0);
+            tunnel.discoveryCount = 0;
             tunnel.discoveries.forEach(discovery => {
                 discovery.unlocked = discoveriesMadeClean.includes(discovery.name);
+                if (discovery.unlocked) {
+                    tunnel.discoveryCount++;
+                }
             });
         });
 
         spelunking.stamina.forEach((_, index) => {
-            spelunking.stamina[index] = spelunkingData[3][index];
+            spelunking.stamina[index] = staminaLevels[index];
         });
 
         spelunking.upgrades.forEach(upgrade => {
-            upgrade.level = spelunkingData[5][upgrade.index];
+            upgrade.level = shopUpgradeLevels[upgrade.index];
             upgrade.unlocked = upgrade.level != -1; // -1 means the upgrade is locked
         });
 
-        const spelunkCurrencies = spelunkingData[4] as number[];
+        const spelunkCurrencies = (spelunkingData[4] ?? []) as number[];
 
         spelunking.ownedAmber = spelunkCurrencies[0];
     }

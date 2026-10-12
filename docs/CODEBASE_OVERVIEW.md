@@ -32,7 +32,7 @@ The website provides comprehensive tracking and optimization tools for virtually
 ## **Architecture Patterns**
 - **Domain-Driven Design**: Each game system has its own domain class in `data/domain/`
 - **Three-Phase Data Pipeline** (see `idleonData.tsx`):
-  1. **Init** — One-time setup of domain instances and static game data
+  1. **Init** — Set up domain instances and static game data
   2. **Parse** — Extract raw data from cloud save (no cross-domain access, no calculations)
   3. **Calculate** — Compute values in strict dependency order (cross-domain access allowed)
 - **Real-time Updates**: Firebase integration for live game data sync
@@ -58,20 +58,38 @@ These directories are auto-generated from WikBot and should **NEVER** be manuall
 
 ## **Development Workflow**
 
+
+Before backend architecture or implementation work, use the [implementation patterns guide](agents/implementation-patterns.md) to select applicable examples and aspects. Use its UI route only when planning or changing UI.
 ### **Adding New Features**
-1. **Data Sync**: Pull latest game data from WikBot project using sync command
-2. **Code Analysis**: Manually inspect minified game source code for target feature
-3. **Reverse Engineering**: Implement game calculations in relevant domain files
-4. **UI Development**: Create components to display the calculated information
-5. **Automated Testing**: Add live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
-6. **Visual Testing**: Compare website output with running game client
-7. **Enhancement**: Add value-added features beyond basic game data display
+For new feature work, follow the [New Feature Implementation Guide](NEW_FEATURE_IMPLEMENTATION_GUIDE.md).
+For a page backed by existing calculations, start with its
+[calculation-ready domain plan](NEW_FEATURE_IMPLEMENTATION_GUIDE.md#planning-a-page-for-a-calculation-ready-domain).
 
 ### **Testing Strategy**
+
 - **Live Game Extraction Tests**: Jest suite in `tests/` validates domain calculations against values extracted from the running game client via a debug server
 - **Parameter-First**: Individual calculation inputs are tested before final composite calculations
 - **Visual Comparison**: Still required for UI and features not covered by automated tests
-- **Coverage Tracking**: `@testCovers` annotations + `yarn coverage:report` track which domain methods have tests
+- **Class Reference Inventory**: `scripts/domain-class-references.ts` inventories class declarations in editable `data/domain/**` and symbol references from `app/**`, `components/**`, and test files. A class counts when its class symbol or a declared member symbol is referenced; it does not classify core or parameter calculations.
+
+The top-level `excludedDomainDirectories` set near the top of
+`scripts/domain-class-references.ts` controls exclusions under `data/domain`.
+It currently contains `data`, `enum`, `model`, `base`, and `login`; maintainers
+add or remove top-level directory names there when exclusions change.
+
+All formats group classes into **both**, **UI-only**, **tests-only**, and
+**neither**, with entries grouped by implementation path:
+
+```bash
+yarn coverage:report                         # Markdown: coverage-report.md
+yarn coverage:report --format=markdown       # Markdown: coverage-report.md
+yarn coverage:report --format=html           # HTML: coverage-report.html
+yarn coverage:report --format=json           # JSON: coverage-report.json
+```
+
+The space-separated form is also accepted, for example
+`yarn coverage:report --format markdown`. HTML is standalone and human-readable,
+with collapsed references and search; JSON is machine-readable.
 
 See `docs/TESTING_IMPLEMENTATION.md` and `tests/README.md` for details.
 
@@ -124,5 +142,5 @@ See `docs/TESTING_IMPLEMENTATION.md` and `tests/README.md` for details.
 - Always use TypeScript for new code
 - Prefer NextJS App Router patterns for new pages
 - Use Yarn instead of npm for package management
-- Use Grommet UI components for new UI elements (existing convention)
+- Use the UI patterns named in the [implementation patterns guide](agents/implementation-patterns.md) for new UI work.
 - Never assume or guess game mechanics - always verify against the actual game 

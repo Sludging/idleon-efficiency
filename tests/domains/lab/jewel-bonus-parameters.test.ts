@@ -7,14 +7,6 @@ const saveName = 'latest';
 const extractionResultsName = 'lab-jewel-bonus-data.json';
 
 const jewelBonusParameterSpecs: Record<string, ParameterTestSpec> = {
-  jewel0Active: {
-    description: 'Amethyst Rhinestone Jewel 0 active flag',
-    extractionKey: 'jewel_0_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[0].active ? 1 : 0;
-    },
-  },
 
   jewel0BonusMultiplier: {
     description: 'Amethyst Rhinestone Jewel 0 multiplier',
@@ -40,14 +32,6 @@ const jewelBonusParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const lab = gameData.get('lab') as Lab;
       return lab.jewels[2].getBonus();
-    },
-  },
-  jewel3Active: {
-    description: 'Sapphire Rhinestone Jewel 3 active flag',
-    extractionKey: 'jewel_3_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[3].active ? 1 : 0;
     },
   },
 
@@ -78,14 +62,6 @@ const jewelBonusParameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
 
-  jewel10Active: {
-    description: 'Pyrite Pyramite Jewel 10 active flag',
-    extractionKey: 'jewel_10_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[10].active ? 1 : 0;
-    },
-  },
 
   jewel7Bonus: {
     description: 'Pyrite Rhinestone Jewel 7 bonus',
@@ -114,14 +90,6 @@ const jewelBonusParameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
 
-  jewel12Active: {
-    description: 'Emerald Navette Jewel 12 active flag',
-    extractionKey: 'jewel_12_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[12].active ? 1 : 0;
-    },
-  },
 
   jewel11Bonus: {
     description: 'Emerald Rhinestone Jewel 11 bonus',
@@ -159,23 +127,7 @@ const jewelBonusParameterSpecs: Record<string, ParameterTestSpec> = {
     },
   },
 
-  jewel19Active: {
-    description: 'Pure Opal Navette Jewel 19 active flag',
-    extractionKey: 'jewel_19_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[19].active ? 1 : 0;
-    },
-  },
 
-  jewel20Active: {
-    description: 'Pure Opal Rhombol Jewel 20 active flag',
-    extractionKey: 'jewel_20_active',
-    domainExtractor: (gameData) => {
-      const lab = gameData.get('lab') as Lab;
-      return lab.jewels[20].active ? 1 : 0;
-    },
-  },
 };
 
 describe('Lab Domain - Jewel Bonus Parameters', () => {

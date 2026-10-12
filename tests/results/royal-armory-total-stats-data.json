@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "royal_armory_total_stats_rank_row_1_type_4": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

@@ -157,7 +157,7 @@ export const initTomeRepo = () => {
                 "scalingType": TomeScalingEnum.inverseDecay,
                 "totalVal": 350,
                 "decimalDisplay": undefined,
-                "desc": "This tracks your Crystal Mob spawn chance! While this is capped at 1 in 100, you get BONUS Exp and Drops if your Crystal Spawn is better! For example, if your average kills is 20, you're getting 5x Exp and Drops from Crystals!",
+                "desc": "This tracks your Crystal Mob spawn chance! While this is capped at 1 in 10, you get BONUS Exp and Drops if your Crystal Spawn is better! For example, if your average kills is 1 in 5, you're getting 2x Exp and Drops from Crystals!",
                 "uiPositionIndex": 28
             }),
         new TomeBase(17, <TomeModel>{
@@ -1053,7 +1053,7 @@ export const initTomeRepo = () => {
             }),
         new TomeBase(116, <TomeModel>{
                 "name": "Unique Sushi Created 膛",
-                "keyQty": 63,
+                "keyQty": 64,
                 "scalingType": TomeScalingEnum.linearToMax,
                 "totalVal": 800,
                 "decimalDisplay": undefined,
@@ -1095,6 +1095,15 @@ export const initTomeRepo = () => {
                 "decimalDisplay": undefined,
                 "desc": "Resource Grade refers to the Royal Guardian resource system, where you increase each resource node's Grade by collecting all its resources.",
                 "uiPositionIndex": 108
+            }),
+        new TomeBase(121, <TomeModel>{
+                "name": "Successful Jelly Operations 膛",
+                "keyQty": 72,
+                "scalingType": TomeScalingEnum.linearToMax,
+                "totalVal": 800,
+                "decimalDisplay": undefined,
+                "desc": "This is the number of obstructions you've defeated at the Jelly Operator research game in World 7!",
+                "uiPositionIndex": 121
             })    
 ]
 }

@@ -8,9 +8,29 @@
       "description": "Companion 51 bonus (multiplier for Bubba bonuses)"
     },
     {
-      "label": "upgrade_level_3",
-      "expression": "idleon.getAttr(\"Bubba\")[1][3]",
-      "description": "Bubba upgrade 3 level (controls bonus unlock progression)"
+      "label": "megaflesh_owned_1",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 1, 0)",
+      "description": "Megaflesh ownership contribution at upgrade threshold 1"
+    },
+    {
+      "label": "megaflesh_owned_3",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 3, 0)",
+      "description": "Megaflesh ownership contribution at upgrade threshold 3"
+    },
+    {
+      "label": "megaflesh_owned_6",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 6, 0)",
+      "description": "Megaflesh ownership contribution at upgrade threshold 6"
+    },
+    {
+      "label": "megaflesh_owned_9",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 9, 0)",
+      "description": "Megaflesh ownership contribution at upgrade threshold 9"
+    },
+    {
+      "label": "megaflesh_owned_11",
+      "expression": "idleon.callFunction(\"Bubbastuff\", \"MegafleshOwned\", 11, 0)",
+      "description": "Megaflesh ownership contribution at upgrade threshold 11"
     },
     {
       "label": "global_bonus_1",

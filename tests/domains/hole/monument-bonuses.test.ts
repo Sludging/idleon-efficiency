@@ -4,8 +4,6 @@
  * Validates representative Bravery, Justice, and Wisdom monument bonuses,
  * including self multipliers and both delivered calculation branches.
  *
- * @testCovers Hole.getMonumentBonus
- * @testCovers MonumentBonus.getBonus
  */
 
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
@@ -20,67 +18,67 @@ const monumentCases = [
   monumentName: 'Bravery',
   bonusIndex: 2,
   extractionKey: 'monument_rog_bonus_0_2',
-  description: 'Bravery monument bonus 2 (linear branch; accepted root)',
+  description: 'Bravery monument Cooking Speed bonus (linear multiplier path)',
  },
  {
   monumentName: 'Bravery',
   bonusIndex: 8,
   extractionKey: 'monument_rog_bonus_0_8',
-  description: 'Bravery monument bonus 8 (nonlinear branch)',
+  description: 'Bravery monument AFK gain bonus (nonlinear path)',
  },
  {
   monumentName: 'Bravery',
   bonusIndex: 9,
   extractionKey: 'monument_rog_bonus_0_9',
-  description: 'Bravery monument bonus 9 (self multiplier)',
+  description: 'Bravery monument bonus multiplier applied to Bravery rewards',
  },
  {
   monumentName: 'Justice',
   bonusIndex: 0,
   extractionKey: 'monument_rog_bonus_1_0',
-  description: 'Justice monument bonus 0 (linear branch)',
+  description: 'Justice monument Catching Efficiency bonus (linear multiplier path)',
  },
  {
   monumentName: 'Justice',
   bonusIndex: 2,
   extractionKey: 'monument_rog_bonus_1_2',
-  description: 'Justice monument bonus 2 (nonlinear branch)',
+  description: 'Justice monument Artifact Find Chance bonus (nonlinear path)',
  },
  {
   monumentName: 'Justice',
   bonusIndex: 7,
   extractionKey: 'monument_rog_bonus_1_7',
-  description: 'Justice monument bonus 7 (nonlinear zero-level case)',
+  description: 'Justice monument daily Lamp Wishes bonus at zero saved level',
  },
  {
   monumentName: 'Justice',
   bonusIndex: 9,
   extractionKey: 'monument_rog_bonus_1_9',
-  description: 'Justice monument bonus 9 (self multiplier)',
+  description: 'Justice monument bonus multiplier applied to Justice rewards',
  },
  {
   monumentName: 'Wisdom',
   bonusIndex: 0,
   extractionKey: 'monument_rog_bonus_2_0',
-  description: 'Wisdom monument bonus 0 (linear branch)',
+  description: 'Wisdom monument Chopping Efficiency bonus (linear multiplier path)',
  },
  {
   monumentName: 'Wisdom',
   bonusIndex: 6,
   extractionKey: 'monument_rog_bonus_2_6',
-  description: 'Wisdom monument bonus 6 (nonlinear branch)',
+  description: 'Wisdom monument Player Drop Rate bonus (nonlinear path)',
  },
  {
   monumentName: 'Wisdom',
   bonusIndex: 7,
   extractionKey: 'monument_rog_bonus_2_7',
-  description: 'Wisdom monument bonus 7 (linear zero-level case)',
+  description: 'Wisdom monument Gambit Points bonus at zero saved level',
  },
  {
   monumentName: 'Wisdom',
   bonusIndex: 9,
   extractionKey: 'monument_rog_bonus_2_9',
-  description: 'Wisdom monument bonus 9 (self multiplier)',
+  description: 'Wisdom monument bonus multiplier applied to Wisdom rewards',
  },
 ];
 

@@ -14,7 +14,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { EventShop } from '../../../data/domain/eventShop';
 import { GemStore } from '../../../data/domain/gemPurchases';
 import { CoralKid } from '../../../data/domain/world-7/coralKid';
@@ -84,8 +84,7 @@ describe('CoralReef Daily Gains - Parameters', () => {
   describe('Companion Parameters', () => {
     it('validates companion 40 bonus', () => {
       const extractedValue = getExtractedValue(extractionResults, 'param_companion_40_bonus');
-      const companion40 = companions.find(companion => companion.id == 40);
-      const calculatedValue = companion40?.owned ? (companion40?.data.bonus || 0) : 0;
+      const calculatedValue = getCompanionActiveBonus(companions, 40);  
 
       expect(calculatedValue).toMatchLiveGameWithDetails(extractedValue, {
         context: 'Companion 40 bonus value',

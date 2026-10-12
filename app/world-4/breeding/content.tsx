@@ -8,7 +8,7 @@ import {
 } from 'grommet'
 import { useContext, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { TerritoryDisplay } from '../../../components/world-4/breeding/territory';
 import { PetUpgradeDisplay } from '../../../components/world-4/breeding/upgrades';
 import { ArenaBonusDisplay } from '../../../components/world-4/breeding/arena';
@@ -93,12 +93,16 @@ function Breeding() {
             <Box pad="small">
                 <EggDisplay />
             </Box>
-            <Box align="center" direction="row" justify="center" gap="small">
-                {["Territory", "Upgrades", "Arena", "Pets"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
-            </Box>
+            <ContentTabs
+                options={[
+                    { value: "Territory", label: "Territory" },
+                    { value: "Upgrades", label: "Upgrades" },
+                    { value: "Arena", label: "Arena" },
+                    { value: "Pets", label: "Pets" },
+                ]}
+                value={activeTab}
+                onChange={setActiveTab}
+            />
             {activeTab == "Arena" && <ArenaBonusDisplay />}
             {activeTab == "Upgrades" && <PetUpgradeDisplay />}
             {activeTab == "Territory" && <TerritoryDisplay />}

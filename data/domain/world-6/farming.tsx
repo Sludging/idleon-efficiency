@@ -1,6 +1,7 @@
 import { SkillsIndex } from "../SkillsIndex";
 import { Domain, RawData } from "../base/domain";
 import { initMarketInfoRepo } from "../data/MarketInfoRepo";
+import { initExoticMarketRepo } from "../data/ExoticMarketRepo";
 import { initSeedInfoRepo } from "../data/SeedInfoRepo";
 import { Item } from "../items";
 import { MarketInfoModel } from "../model/marketInfoModel";
@@ -25,12 +26,22 @@ import { Grimoire } from "../grimoire";
 import { UpgradeVault } from "../upgradeVault";
 import { LegendTalents } from "../world-7/legendTalents";
 import { Emperor } from "./emperor";
+import { FarmingStickerBase, initFarmingStickerRepo } from "../data/FarmingStickerRepo";
+import { FarmingStickerModel } from "../model/farmingStickerModel";
+import { EventShop } from "../eventShop";
+import { Gaming } from "../world-5/gaming";
+import { ResearchGrid } from "../world-7/research";
 
-// TODO: This is a temporary solution until proper Exotic Market implementation
-const exoticMarketBonusData: Record<number, { bonusPerLevel: number, diminishing: boolean }> = {
-    40: { bonusPerLevel: 20, diminishing: true }, // Crop Scientist bonus multiplier
-    48: { bonusPerLevel: 2, diminishing: true }, // Prisma Bubble Bonus
-};
+// Only the Exotic Market bonuses consumed by implemented features are supported.
+const exoticMarketBonusData = initExoticMarketRepo().reduce<Record<number, { bonusPerLevel: number, diminishing: boolean }>>((bonuses, upgrade) => {
+    if (upgrade.index === 40 || upgrade.index === 44 || upgrade.index === 48) {
+        bonuses[upgrade.index] = {
+            bonusPerLevel: upgrade.data.effect,
+            diminishing: upgrade.data.x4 === 1,
+        };
+    }
+    return bonuses;
+}, {});
 
 export class LandRankDataBase {
     unlocked: boolean = false;
@@ -504,6 +515,35 @@ export class CropScientist {
     }
 }
 
+export class FarmingSticker {
+    index: number;
+    name: string;
+    description: string;
+    bonusPerSticker: number;
+
+    count: number = 0;
+    bonusValue: number = 0;
+
+    constructor(data: FarmingStickerModel) {
+        this.index = data.index;
+        this.name = data.name;
+        this.description = data.description;
+        this.bonusPerSticker = data.bonusPerSticker;
+    }
+
+    static fromBase(data: FarmingStickerBase[]): FarmingSticker[] {
+        return data.map(sticker => new FarmingSticker(sticker.data));
+    }
+
+    updateBonus(researchAndEventMultiplier: number, superbitMultiplier: number): void {
+        this.bonusValue = researchAndEventMultiplier * superbitMultiplier * this.count * this.bonusPerSticker;
+    }
+
+    getBonus(): number {
+        return this.bonusValue;
+    }
+}
+
 export class Farming extends Domain {
     farmPlots: Plot[] = [];
     landrankDatabase: LandRankDataBase = new LandRankDataBase(); // Should init here like marketUpgrades and seeds when available from wiki bot
@@ -528,6 +568,8 @@ export class Farming extends Domain {
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
+    stickers: FarmingSticker[] = FarmingSticker.fromBase(initFarmingStickerRepo());
+    totalStickers: number = 0;
     exoticMarketLevels: number[] = [];
     marketCostMultiplier: number = 1;
 
@@ -548,6 +590,7 @@ export class Farming extends Domain {
             { key: "FarmCrop", perPlayer: false, default: [] },
             { key: "FarmUpg", perPlayer: false, default: [] },
             { key: "FarmRank", perPlayer: false, default: [] },
+            { key: "Research", perPlayer: false, default: [] },
         ]
     }
 
@@ -561,6 +604,15 @@ export class Farming extends Domain {
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];
+        const researchData = data.get("Research") as number[][] | undefined;
+        farming.stickers.forEach(sticker => {
+            sticker.count = Number(researchData?.[9]?.[sticker.index]) || 0;
+            sticker.bonusValue = 0;
+        });
+        farming.totalStickers = (researchData?.[9] ?? []).reduce(
+            (total, stickers) => Math.round(total + (Number(stickers) || 0)),
+            0,
+        );
 
         // Old accounts won't have this data, exit early.
         if (!cropsData || (!plotsData || plotsData.length == 0) || (!upgradesData || upgradesData.length == 0) || (!landRankData || landRankData.length == 0)) {
@@ -568,6 +620,7 @@ export class Farming extends Domain {
         }
 
         const upgradesLevels = upgradesData.slice(2, -2);
+        // Exotic effect i reads FarmUpg[20 + i], including Palette Luck 44 at slot 64.
         farming.exoticMarketLevels = upgradesData.slice(20, 100);
 
         farming.magicBeansOwned = upgradesData[1];
@@ -634,6 +687,14 @@ export class Farming extends Domain {
             }
             farming.farmPlots.push(plot);
         });
+    }
+
+    getTotalStickers = (): number => {
+        return this.totalStickers;
+    }
+
+    getStickerBonus(index: number): number {
+        return this.stickers.find(sticker => sticker.index === index)?.getBonus() ?? 0;
     }
 
     updateUnlockedMarketBonuses = () => {
@@ -840,6 +901,21 @@ export class Farming extends Domain {
             width: 20
         }
     }
+}
+
+export const updateFarmingStickerBonuses = (data: Map<string, any>): Farming => {
+    const farming = data.get("farming") as Farming;
+    const research = data.get("research") as ResearchGrid;
+    const eventShop = data.get("eventShop") as EventShop;
+    const gaming = data.get("gaming") as Gaming;
+
+    const researchAndEventMultiplier = 1 + (research.getBonusForId(68, 2) + 30 * (eventShop.isBonusOwned(37) ? 1 : 0)) / 100;
+    const superbitMultiplier = 1 + 20 * (gaming.isSuperbitPurchased(62) ? 1 : 0) / 100;
+    farming.stickers.forEach(sticker => {
+        sticker.updateBonus(researchAndEventMultiplier, superbitMultiplier);
+    });
+
+    return farming;
 }
 
 export const updateFarmingLevel = (data: Map<string, any>) => {

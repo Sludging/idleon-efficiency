@@ -1,10 +1,10 @@
-import { Box, CheckBox, Grid, Text } from "grommet";
+import { Box, CheckBox, Text } from "grommet";
 import { useMemo, useState } from "react";
 import { AtomCollider } from "../../../data/domain/world-3/construction/atomCollider";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
-import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
+import DataRow from "../../base/DataRow";
+import { ComponentAndLabel } from "../../base/TextAndLabel";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
@@ -46,23 +46,27 @@ export function AtomColliderDisplay() {
                     onChange={(event) => setHideMaxed(event.target.checked)}
                 />
             </Box>
+            <Box gap="small">
             {
                 atomsToShow.map((atom, index) => {
                     return (
-                        <ShadowBox style={{ opacity: atom.level > 0 ? 1 : 0.6 }} key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }}>
-                            <Grid columns={["5%", "20%", "35%", "10%", "10%", "20%"]} gap="small" align="start" fill>
-                                <IconImage data={atom.getImageData()} scale={0.5} />
-                                <TextAndLabel labelSize="xsmall" textSize='small' text={atom.data.name} label="Name" />
-                                <TextAndLabel labelSize="xsmall" textSize='xsmall' text={atom.getBonusText()} label="Bonus" />
-                                <TextAndLabel labelSize="xsmall" textSize='small' text={`${atom.level} / ${atom.getMaxLevel()}`} label="Level" />
-                                {atom.level == 0 && <TextAndLabel labelSize="xsmall" textSize='small' text={`${nFormatter(atom.getCostToUnlock())}`} label="Unlock Cost" />}
-                                {atom.level > 0 && <TextAndLabel labelSize="xsmall" textSize='small' text={`${nFormatter(atom.getCost())}`} label="Next level cost" />}
-                                <TextAndLabel labelSize="xsmall" textSize='small' text={`${nFormatter(atom.getCostToMaxLevel())}`} label="Cost to max" />
-                            </Grid>
-                        </ShadowBox>
+                        <DataRow
+                            key={index}
+                            opacity={atom.level > 0 ? 1 : 0.6}
+                            columns={["minmax(0, 25fr)", "minmax(0, 35fr)", "minmax(0, 10fr)", "minmax(0, 10fr)", "minmax(0, 20fr)"]}
+                            fields={[
+                                { key: "identity", kind: "identity", name: atom.data.name, artwork: <IconImage data={atom.getImageData()} scale={0.5} /> },
+                                { key: "bonus", kind: "text", label: "Bonus", value: atom.getBonusText(), role: "description" },
+                                { key: "level", kind: "text", label: "Level", value: `${atom.level} / ${atom.getMaxLevel()}` },
+                                ...(atom.level == 0 ? [{ key: "unlock", kind: "text" as const, label: "Unlock Cost", value: `${nFormatter(atom.getCostToUnlock())}` }] : []),
+                                ...(atom.level > 0 ? [{ key: "next", kind: "text" as const, label: "Next level cost", value: `${nFormatter(atom.getCost())}` }] : []),
+                                { key: "max", kind: "text", label: "Cost to max", value: `${nFormatter(atom.getCostToMaxLevel())}` },
+                            ]}
+                        />
                     )
                 })
             }
+            </Box>
         </Box>
     )
 

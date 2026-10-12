@@ -35,20 +35,14 @@ describe('Equinox Domain - Rate', () => {
     }
   });
 
-  describe('Bar Fill Rate Test', () => {
-    it('validates bar fill rate calculation against live game', () => {
-      // Get live game final result
+  describe('Equinox bar fill rate', () => {
+    it('matches the rate shown by the website', () => {
       const liveBarFillRate = getExtractedValue(extractionResults, 'equinox_bar_rate');
-      
-      
-      // Get our calculated bar fill rate
       const domainResult = equinox.bar.rate;
-      
-      // Use custom matcher with detailed logging
-      const ratio = domainResult / liveBarFillRate;
+
       expect(domainResult).toMatchLiveGameWithDetails(liveBarFillRate, {
-        tolerance: 0.01,
-        context: 'Equinox bar fill rate calculation',
+        tolerance: 0,
+        context: 'Equinox bar fill rate shown by the website',
       });
     });
   });

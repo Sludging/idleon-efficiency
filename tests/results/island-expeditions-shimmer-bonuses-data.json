@@ -1,0 +1,37 @@
+{
+  "extractions": {
+    "shimmer_bonus_0": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[174]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 44
+    },
+    "shimmer_bonus_1": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[175]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 4
+    },
+    "shimmer_bonus_2": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[176]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 8
+    },
+    "shimmer_bonus_3": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[177]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 0
+    },
+    "shimmer_bonus_4": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[178]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 24
+    },
+    "shimmer_bonus_5": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[179]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 4
+    },
+    "shimmer_bonus_6": {
+      "expression": "Number(idleon.getAttr(\"OptionsListAccount\")[180]) * idleon.callFunction(\"Dreamstuff\", \"AllShimmerBonuses\", 0)",
+      "result": 52
+    },
+    "shimmer_artifact_31": {
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 31, 0)",
+      "result": 5
+    }
+  },
+  "errors": {}
+}

@@ -1,0 +1,116 @@
+{
+  "description": "Extract raw equipped-chip contributions for the target player, including numeric effects and enabling values",
+  "target": "Player.getChipBonus: game chipBonuses selector aggregation",
+  "extractions": [
+    {
+      "label": "chip_bonus_def",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"def\")",
+      "description": "Equipped-chip defence contribution"
+    },
+    {
+      "label": "chip_bonus_move",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"move\")",
+      "description": "Raw equipped-chip movement contribution, before consumer conditions"
+    },
+    {
+      "label": "chip_bonus_acc",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"acc\")",
+      "description": "Equipped-chip accuracy contribution"
+    },
+    {
+      "label": "chip_bonus_dr",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"dr\")",
+      "description": "Raw equipped-chip drop-rate contribution, before consumer conditions"
+    },
+    {
+      "label": "chip_bonus_atkspd",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"atkspd\")",
+      "description": "Equipped-chip basic attack speed contribution"
+    },
+    {
+      "label": "chip_bonus_labexp",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"labexp\")",
+      "description": "Equipped-chip Lab experience contribution"
+    },
+    {
+      "label": "chip_bonus_linewidth",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"linewidth\")",
+      "description": "Equipped-chip mainframe line-width contribution"
+    },
+    {
+      "label": "chip_bonus_fafk",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"fafk\")",
+      "description": "Equipped-chip fighting AFK contribution"
+    },
+    {
+      "label": "chip_bonus_safk",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"safk\")",
+      "description": "Equipped-chip skilling AFK contribution"
+    },
+    {
+      "label": "chip_bonus_crys",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"crys\")",
+      "description": "Equipped-chip crystal revival contribution"
+    },
+    {
+      "label": "chip_bonus_resp",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"resp\")",
+      "description": "Equipped-chip monster respawn contribution"
+    },
+    {
+      "label": "chip_bonus_toteff",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",
+      "description": "Equipped-chip total skilling efficiency percentage points used by AllEfficiencies"
+    },
+    {
+      "label": "chip_bonus_dmg",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"dmg\")",
+      "description": "Equipped-chip total damage contribution"
+    },
+    {
+      "label": "chip_bonus_eff",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"eff\")",
+      "description": "Equipped-chip base skill efficiency contribution"
+    },
+    {
+      "label": "chip_bonus_mkill",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"mkill\")",
+      "description": "Equipped-chip multikill contribution"
+    },
+    {
+      "label": "chip_bonus_star",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"star\")",
+      "description": "Raw equipped-chip star-sign enabling contribution, not the resulting star-sign multiplier"
+    },
+    {
+      "label": "chip_bonus_troph",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
+      "description": "Raw equipped-chip trophy enabling contribution"
+    },
+    {
+      "label": "chip_bonus_key1",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
+      "description": "Raw equipped-chip upper-keychain enabling contribution"
+    },
+    {
+      "label": "chip_bonus_pend",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
+      "description": "Raw equipped-chip pendant enabling contribution"
+    },
+    {
+      "label": "chip_bonus_weppow",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"weppow\")",
+      "description": "Raw equipped-chip weapon-power contribution, not the resulting weapon multiplier"
+    },
+    {
+      "label": "chip_bonus_card1",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"card1\")",
+      "description": "Raw equipped-chip top-left-card enabling contribution"
+    },
+    {
+      "label": "chip_bonus_card2",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"card2\")",
+      "description": "Raw equipped-chip bottom-right-card enabling contribution"
+    }
+  ]
+}

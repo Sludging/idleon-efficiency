@@ -1,21 +1,65 @@
-# Game Data Extraction Helpers
+Tools for extracting data to validate domain calculations. Offline extraction
+is available for input inspection and calculation research, but it is not a
+source for `tests/fixtures/saves/latest.json`.
 
-Tools for extracting live game data to validate domain code calculations.
+## Quick Start - Batch Extraction
 
-## Quick Start - Batch Extraction (Recommended)
+The batch extractor defaults to offline port `3101` and leaves
+`tests/fixtures/saves/latest.json` untouched. It extracts data for all configs
+in `tests/configs/` serially and saves results to `tests/results/`.
 
-The easiest way to extract all test data from the running game:
+`--refresh-save` is opt-in and is permitted only when the status endpoint
+identifies the server as live. The helper checks status before requesting
+`/cloud-save` or writing the fixture; offline or unknown-source servers fail
+without touching `latest.json`. Use an updated live HTTP server: older live
+server processes without source identification must be restarted after the
+code update.
+
+To refresh from the live server, with the real game and its debug server
+running:
 
 ```bash
-node tests/helpers/extract-all-game-data.js
+GAME_SERVER_URL=http://localhost:3100 \
+  node tests/helpers/extract-all-game-data.js --refresh-save
 ```
 
-This will:
-1. Extract data for all configs in `tests/configs/`
-2. Save results to `tests/results/`
+The batch helper uses `GAME_SERVER_URL`, defaulting to
+`http://127.0.0.1:3101`; the default is offline. This URL controls status,
+expression execution, and (only for an identified live server) the optional
+save refresh.
 
-- The batch script refreshes `tests/fixtures/saves/latest.json` from
-  `GET http://localhost:3100/cloud-save` before extracting live values.
+### Offline Extraction (No Fixture Export)
+
+With the offline tool running, result files can be written elsewhere:
+
+```bash
+GAME_SERVER_URL=http://127.0.0.1:3101 \
+  node tests/helpers/extract-all-game-data.js \
+  --output-dir /tmp/idleon-offline-results
+```
+
+Batch options:
+
+- `--refresh-save`: request `/cloud-save` and overwrite
+  `tests/fixtures/saves/latest.json`, only from a server whose status source is
+  `live`. Offline and unknown sources fail before the cloud-save request and
+  fixture write. Without this option the fixture remains untouched.
+- `--output-dir <directory>`: write result files to this directory instead of
+  `tests/results/`. Relative paths resolve from the current working directory.
+
+Without `--output-dir`, extraction result files update their usual files only
+when the serialized output differs from the existing bytes. Identical output
+is not rewritten. Use `--output-dir` to write elsewhere. No extractor reloads,
+resets, or switches characters on the server.
+
+### Active Player Policy
+
+Extraction runs require the server's game to be loaded on the shared target player. For the live server, open that character in the game; for the offline tool, select it at startup. Set its index in `tests/utils/target-player.json`; the extractor checks it once before evaluating each config and aborts if the active player does not match.
+
+Extraction expressions may use `__TARGET_PLAYER__` for arguments that are semantically player indexes. The extractor replaces that placeholder with the shared target index before sending the expression to the debug server. Do not use it for domain indexes or for configs that intentionally cover multiple players.
+
+Configs with a real dependency on a different specific character may set `requiredActivePlayerIndex` at the top level. That override takes precedence over the shared target. Do not add it for ordinary fixture alignment.
+
 ## Individual Extraction (Advanced)
 
 If you need to extract data for a single config file:
@@ -30,17 +74,29 @@ node tests/helpers/game-data-extractor.js \
   tests/results/cooking-speed-data.json
 ```
 
-### Save Export (Standalone)
+To extract a single config from the offline endpoint without touching repository
+results:
 
 ```bash
-curl http://localhost:3100/cloud-save > tests/fixtures/saves/latest.json
+GAME_SERVER_URL=http://127.0.0.1:3101 \
+  node tests/helpers/game-data-extractor.js \
+  tests/configs/cooking-speed.json \
+  /tmp/idleon-offline-results/cooking-speed-data.json
 ```
 
-The endpoint returns the complete enriched save matching the raw-data page
-representation (see debug server docs). It does not trigger or commit a save.
+Individual extraction never refreshes the save fixture; only its explicitly
+selected output file is written. The active-player policy applies equally
+to live and offline extraction.
+
+### Save Input Inspection (Standalone)
+
+`GET /cloud-save` is useful for inspecting the server's save input. It is
+read-only and does not update repository fixtures. Do not redirect offline
+cloud-save output to `latest.json`. To update that fixture, use the guarded
+batch command above against an explicitly selected live server.
 
 
-### Prerequisites
+### Live Server Prerequisites
 
 1. **Game running** with debug port (usually port 9223)
 
@@ -57,7 +113,7 @@ Create JSON config files in `tests/configs/`:
 ```json
 {
   "description": "What this extraction is for",
-  "target": "Specific function or calculation being tested", 
+  "target": "Specific function or calculation being tested",
   "extractions": [
     {
       "label": "unique_identifier",
@@ -70,31 +126,30 @@ Create JSON config files in `tests/configs/`:
 
 ### Output Format
 
-Results are saved as JSON with timestamps and metadata:
+Results are saved as compact JSON with only `extractions` and `errors` at the
+root. Successful labels contain the resolved expression sent to the server
+and its result; failed labels contain the resolved expression and error:
 
 ```json
 {
-  "timestamp": "2024-01-01T12:00:00.000Z",
   "extractions": {
     "label": {
       "expression": "...",
-      "result": "...",
-      "description": "...",
-      "extractedAt": "..."
+      "result": "..."
     }
   },
   "errors": {
     "failed_label": {
       "expression": "...",
-      "error": "Error message",
-      "failedAt": "..."
+      "error": "Error message"
     }
-  },
-  "metadata": {
-    "serverStatus": {...}
   }
 }
 ```
+
+Timestamps, server status/metadata, and config descriptions are not persisted.
+Descriptions remain in the configs. Runtime status checks and extraction
+diagnostics still run; removing persisted status does not bypass safeguards.
 
 #### Special Result Handling
 
@@ -102,10 +157,10 @@ Results are saved as JSON with timestamps and metadata:
   ```json
   {
     "type": "large_number",
-    "value": "2.033960867763364e+107",
-    "original": 2.033960867763364e+107
+    "value": "2.033960867763364e+107"
   }
   ```
+  The wrapper contains no duplicate `original` field.
 - **Empty objects**: Converted to `null` for cleaner output
 - **Null/undefined**: Preserved as `null`
 

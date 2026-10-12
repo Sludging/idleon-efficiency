@@ -73,10 +73,27 @@ export class Quests extends Domain {
     playerData: Record<number, Record<string, number>> = {}
     dialogData: Record<number, Record<string, number>> = {}
 
+    getTotalQuestsComplete = (): number => {
+        const ignoredNPCs = ["Secretkeeper", "Game Message", "Unmade Character", "FillerNPC"];
+        const filteredNPCs = Object.entries(this.npcData)
+            .filter(([name, info]) => !ignoredNPCs.includes(name) && Object.entries(info.data.quests).length > 0);
+        let completedQuests = 0;
+        const playerQuestData = this.playerData;
+        filteredNPCs.forEach(([_, npc]) => {
+            Object.entries(npc.data.quests).forEach(([_, info]) => {
+                if (Object.entries(playerQuestData).some(playerData =>
+                    playerData[1][info.QuestName.replace(/ /g, "_")] == 1)) {
+                    completedQuests++;
+                }
+            });
+        });
+        return completedQuests;
+    }
+
     getRawKeys(): RawData[] {
         return [
-            {key: "QuestComplete_", perPlayer: true, default: {}},
-            {key: "NPCdialogue_", perPlayer: true, default: {}},
+            { key: "QuestComplete_", perPlayer: true, default: {} },
+            { key: "NPCdialogue_", perPlayer: true, default: {} },
         ]
     }
     init(allItems: Item[], _charCount: number) {

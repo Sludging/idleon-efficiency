@@ -35,32 +35,32 @@
     {
       "label": "coral_kid_cost_0",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 0)",
-      "description": "CoralKid upgrade cost for bonus 0"
+      "description": "Coral Kid next purchase cost for the Divinity EXP bonus"
     },
     {
       "label": "coral_kid_cost_1",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 1)",
-      "description": "CoralKid upgrade cost for bonus 1"
+      "description": "Coral Kid next purchase cost for the blessing max-level increase"
     },
     {
       "label": "coral_kid_cost_2",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 2)",
-      "description": "CoralKid upgrade cost for bonus 2"
+      "description": "Coral Kid next purchase cost for the God Rank class EXP multiplier"
     },
     {
       "label": "coral_kid_cost_3",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 3)",
-      "description": "CoralKid upgrade cost for bonus 3"
+      "description": "Coral Kid next purchase cost for the Divinity minor-link bonus"
     },
     {
       "label": "coral_kid_cost_4",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 4)",
-      "description": "CoralKid upgrade cost for bonus 4"
+      "description": "Coral Kid next purchase cost for Divinity points per Coral Reef upgrade"
     },
     {
       "label": "coral_kid_cost_5",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgCost\", 5)",
-      "description": "CoralKid upgrade cost for bonus 5"
+      "description": "Coral Kid next purchase cost for daily Coral generation"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "extractions": {
+    "spelunking_purchased_bonus_59": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 59, 1)",
+      "result": 3
+    }
+  },
+  "errors": {}
+}

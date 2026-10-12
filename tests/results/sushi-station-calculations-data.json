@@ -1,0 +1,322 @@
+{
+  "extractions": {
+    "sushi_fuel_per_hour": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0)",
+      "result": 375018017.9106877
+    },
+    "sushi_fuel_capacity": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FuelCap\",0,0)",
+      "result": 376900142.9993911
+    },
+    "sushi_bucks_per_hour": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"CurrencyperHR\",0,0)",
+      "result": {
+        "type": "large_number",
+        "value": "1.700746018044843e+23"
+      }
+    },
+    "sushi_upgrade_qty_0": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",0,0)",
+      "result": 40
+    },
+    "sushi_upgrade_cost_display_6": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",6,0)",
+      "result": {
+        "type": "large_number",
+        "value": "1.4559565079457626e+23"
+      }
+    },
+    "sushi_upgrade_qty_1": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",1,0)",
+      "result": 28700
+    },
+    "sushi_upgrade_cost_display_3": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",3,0)",
+      "result": {
+        "type": "large_number",
+        "value": "45087220155304710000"
+      }
+    },
+    "sushi_upgrade_qty_20": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)",
+      "result": 8
+    },
+    "sushi_upgrade_cost_display_20": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",20,0)",
+      "result": {
+        "type": "large_number",
+        "value": "3.27224530998659e+24"
+      }
+    },
+    "sushi_upgrade_qty_21": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",21,0)",
+      "result": 7
+    },
+    "sushi_upgrade_cost_display_29": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",29,0)",
+      "result": {
+        "type": "large_number",
+        "value": "1.7922529462759185e+23"
+      }
+    },
+    "sushi_upgrade_qty_22": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",22,0)",
+      "result": 2
+    },
+    "sushi_upgrade_cost_display_36": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgCost\",36,0)",
+      "result": {
+        "type": "large_number",
+        "value": "1.1326747356425023e+24"
+      }
+    },
+    "sushi_free_shaker_chance": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FreeShaker\",0,0)",
+      "result": 0.14
+    },
+    "sushi_perfecto_chance_occupied_tier": {
+      "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return idleon.callFunction(\"SushiStuff\",\"PerfectOdds\",tier,0)})()",
+      "result": 0.00022699077472603383
+    },
+    "sushi_saffron_bucks_per_use": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"SaffronHRS\",0,0)*idleon.callFunction(\"SushiStuff\",\"CurrencyGain\",0,0)",
+      "result": {
+        "type": "large_number",
+        "value": "5.102238054134529e+23"
+      }
+    },
+    "sushi_shaker_fuel_per_use": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"FuelGen\",0,0):0",
+      "result": 375018017.9106877
+    },
+    "sushi_salt_tier_up_chance_occupied_tier": {
+      "expression": "(()=>{const tiers=idleon.getAttr(\"Sushi\")[0];const tier=tiers.find(value=>value>=0);return Math.pow(0.5,Math.max(0,tier-(Math.min(idleon.callFunction(\"SushiStuff\",\"UniqueSushi\",0,0),idleon.callFunction(\"SushiStuff\",\"MaxTier\",0,0)-10)-8)))})()",
+      "result": 1
+    },
+    "sushi_knowledge_total_0": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",0,0)",
+      "result": 2732
+    },
+    "sushi_knowledge_total_1": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",1,0)",
+      "result": 188.93333333333334
+    },
+    "sushi_knowledge_total_3": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",3,0)",
+      "result": 971.0000000000001
+    },
+    "sushi_knowledge_total_4": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",4,0)",
+      "result": 214.10000000000002
+    },
+    "sushi_knowledge_total_5": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",5,0)",
+      "result": 4.5
+    },
+    "sushi_knowledge_total_6": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",6,0)",
+      "result": 60.099999999999994
+    },
+    "sushi_knowledge_total_10": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusTOT\",10,0)",
+      "result": 0
+    },
+    "sushi_knowledge_specific_27": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",27,0)",
+      "result": 38
+    },
+    "sushi_knowledge_specific_36": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",36,0)",
+      "result": 26.400000000000002
+    },
+    "sushi_knowledge_specific_45": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeBonusSpecific\",45,0)",
+      "result": 0
+    },
+    "sushi_knowledge_xp_base": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeXP_base\",0,0)",
+      "result": 4.6
+    },
+    "sushi_upgrade_qty_2": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",2,0)",
+      "result": 67800
+    },
+    "sushi_upgrade_qty_3": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",3,0)",
+      "result": 310500
+    },
+    "sushi_upgrade_qty_4": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",4,0)",
+      "result": 870000
+    },
+    "sushi_upgrade_qty_5": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",5,0)",
+      "result": 0
+    },
+    "sushi_upgrade_qty_8": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",8,0)",
+      "result": 7545
+    },
+    "sushi_upgrade_qty_9": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",9,0)",
+      "result": 32700
+    },
+    "sushi_upgrade_qty_10": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",10,0)",
+      "result": 138750
+    },
+    "sushi_upgrade_qty_11": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",11,0)",
+      "result": 385000
+    },
+    "sushi_upgrade_qty_12": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",12,0)",
+      "result": 825000
+    },
+    "sushi_upgrade_qty_30": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",30,0)",
+      "result": 588
+    },
+    "sushi_upgrade_qty_31": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",31,0)",
+      "result": 807
+    },
+    "sushi_upgrade_qty_32": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",32,0)",
+      "result": 620
+    },
+    "sushi_upgrade_qty_33": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",33,0)",
+      "result": 10
+    },
+    "sushi_upgrade_qty_34": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",34,0)",
+      "result": 0
+    },
+    "sushi_upgrade_qty_36": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",36,0)",
+      "result": 91
+    },
+    "sushi_upgrade_qty_37": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",37,0)",
+      "result": 36
+    },
+    "sushi_upgrade_qty_38": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",38,0)",
+      "result": 0
+    },
+    "sushi_upgrade_qty_40": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",40,0)",
+      "result": 0
+    },
+    "sushi_upgrade_qty_41": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",41,0)",
+      "result": 663
+    },
+    "sushi_unique_count": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UniqueSushi\",0,0)",
+      "result": 41
+    },
+    "sushi_unlock_bonus_26": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",26,0)",
+      "result": 25
+    },
+    "sushi_unlock_bonus_44": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",44,0)",
+      "result": 0
+    },
+    "sushi_dependency_thingies_have_ban_j": {
+      "expression": "idleon.callFunction(\"Thingies\",\"Have_ban_j\",0,0)",
+      "result": 0
+    },
+    "sushi_upgrade_qty_43": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",43,0)",
+      "result": 434
+    },
+    "sushi_knowledge_xp_multiplier_slot_0": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"KnowledgeXP_multi\",0,0)",
+      "result": 2.889333333333333
+    },
+    "sushi_slot_effect_1": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",1,0)",
+      "result": 51.70666666666667
+    },
+    "sushi_slot_effect_2": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",2,0)",
+      "result": 0.2068266666666667
+    },
+    "sushi_slot_effect_3": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"SlotEffect\",3,0)",
+      "result": 1.0341333333333333
+    },
+    "sushi_fireplace_effect_0": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",0,0)",
+      "result": 1
+    },
+    "sushi_fireplace_effect_1": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",1,0)",
+      "result": 150
+    },
+    "sushi_fireplace_effect_3": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"FireplaceEffect\",3,0)",
+      "result": 100
+    },
+    "sushi_combo_multiplier": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"ComboMulti\",0,0)",
+      "result": 10.1839850063498
+    },
+    "sushi_orange_fire_sum": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"OrangeFireSum\",0,0)",
+      "result": 244
+    },
+    "sushi_dependency_research_188": {
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",188,0)",
+      "result": 2.5
+    },
+    "sushi_dependency_research_189": {
+      "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",189,0)",
+      "result": 75
+    },
+    "sushi_dependency_jelly_obstruction_18": {
+      "expression": "idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",18,0)",
+      "result": 0
+    },
+    "sushi_dependency_arcade_67": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\",67,0)",
+      "result": 0
+    },
+    "sushi_dependency_event_shop_45": {
+      "expression": "idleon.callFunction(\"Summoning\",\"EventShopOwned\",45,0)",
+      "result": 1
+    },
+    "sushi_dependency_button_2": {
+      "expression": "idleon.callFunction(\"Minehead\",\"Button_Bonuses\",2,0)",
+      "result": 41.5625
+    },
+    "sushi_dependency_minehead_11": {
+      "expression": "idleon.callFunction(\"Minehead\",\"BonusQTY\",11,0)",
+      "result": 25
+    },
+    "sushi_dependency_gaming_67": {
+      "expression": "idleon.callFunction(\"GamingStatType\",\"SuperBitType\",67,0)",
+      "result": 0
+    },
+    "sushi_dependency_atom_14": {
+      "expression": "idleon.callFunction(\"AtomCollider\",\"AtomBonuses\",14,0)",
+      "result": 25
+    },
+    "sushi_dependency_sailing_status_39": {
+      "expression": "idleon.getAttr(\"Sailing\")[3][39]",
+      "result": 5
+    },
+    "sushi_bundle_flag_bon_v": {
+      "expression": "idleon.getAttr(\"BundlesReceived\").h.bon_v",
+      "result": null
+    },
+    "sushi_shaker_bonus_fuel_chance": {
+      "expression": "idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)>0?idleon.callFunction(\"SushiStuff\",\"UpgradeQTY\",20,0)/100:0",
+      "result": 0.08
+    }
+  },
+  "errors": {}
+}

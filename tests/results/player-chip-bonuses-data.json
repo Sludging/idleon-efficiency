@@ -1,0 +1,93 @@
+{
+  "extractions": {
+    "chip_bonus_def": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"def\")",
+      "result": 0
+    },
+    "chip_bonus_move": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"move\")",
+      "result": 0
+    },
+    "chip_bonus_acc": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"acc\")",
+      "result": 0
+    },
+    "chip_bonus_dr": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"dr\")",
+      "result": 0
+    },
+    "chip_bonus_atkspd": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"atkspd\")",
+      "result": 0
+    },
+    "chip_bonus_labexp": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"labexp\")",
+      "result": 0
+    },
+    "chip_bonus_linewidth": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"linewidth\")",
+      "result": 0
+    },
+    "chip_bonus_fafk": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"fafk\")",
+      "result": 0
+    },
+    "chip_bonus_safk": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"safk\")",
+      "result": 0
+    },
+    "chip_bonus_crys": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"crys\")",
+      "result": 75
+    },
+    "chip_bonus_resp": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"resp\")",
+      "result": 0
+    },
+    "chip_bonus_toteff": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"toteff\")",
+      "result": 0
+    },
+    "chip_bonus_dmg": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"dmg\")",
+      "result": 0
+    },
+    "chip_bonus_eff": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"eff\")",
+      "result": 0
+    },
+    "chip_bonus_mkill": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"mkill\")",
+      "result": 0
+    },
+    "chip_bonus_star": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"star\")",
+      "result": 1
+    },
+    "chip_bonus_troph": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
+      "result": 1
+    },
+    "chip_bonus_key1": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
+      "result": 1
+    },
+    "chip_bonus_pend": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
+      "result": 1
+    },
+    "chip_bonus_weppow": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"weppow\")",
+      "result": 0
+    },
+    "chip_bonus_card1": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"card1\")",
+      "result": 1
+    },
+    "chip_bonus_card2": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"card2\")",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

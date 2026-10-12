@@ -1,0 +1,13 @@
+{
+  "extractions": {
+    "royal_armory_outpost_purify_bonus": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostPurifyBonus\", 0, 0)",
+      "result": 200
+    },
+    "royal_armory_outpost_purify_armory_upgrade_1": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 1, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

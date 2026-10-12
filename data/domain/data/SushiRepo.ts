@@ -321,7 +321,7 @@ export const initSushiRepo = () => {
         new SushiBase(39, <SushiModel>{
                 "index": 39,
                 "name": "Bubba Grand Salmon",
-                "unlockDescription": "Bubba now produced }x more Meat Slice. Business is BOOMING!",
+                "unlockDescription": "Bubba now produces }x more Meat Slices. Business is BOOMING!",
                 "unlockBonus": 100,
                 "knowledgeBonusCategory": "}x higher Fuel Capacity",
                 "knowledgeBonusBase": 10
@@ -475,8 +475,8 @@ export const initSushiRepo = () => {
                 "name": "Golthulu Roll",
                 "unlockDescription": "+{ Max Build LVs for all Shrines in Construction",
                 "unlockBonus": 10,
-                "knowledgeBonusCategory": undefined,
-                "knowledgeBonusBase": undefined
+                "knowledgeBonusCategory": "+^% chance for free shaker usage",
+                "knowledgeBonusBase": 0.05
             }),
         new SushiBase(59, <SushiModel>{
                 "index": 59,
@@ -506,6 +506,14 @@ export const initSushiRepo = () => {
                 "index": 62,
                 "name": "Octolingo",
                 "unlockDescription": "+{% drop chance for Marble for your Royal Guardian",
+                "unlockBonus": 10,
+                "knowledgeBonusCategory": undefined,
+                "knowledgeBonusBase": undefined
+            }),
+        new SushiBase(63, <SushiModel>{
+                "index": 63,
+                "name": "Chromatic Nigiri",
+                "unlockDescription": "Organelle cell in Jelly Operator boosts adjacent cell SPD by +0.{x more than before",
                 "unlockBonus": 10,
                 "knowledgeBonusCategory": undefined,
                 "knowledgeBonusBase": undefined

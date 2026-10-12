@@ -23,12 +23,15 @@ import { Lab } from '../../../data/domain/world-4/lab';
 import { Breeding } from '../../../data/domain/world-4/breeding';
 import { Summoning } from '../../../data/domain/world-6/summoning';
 import { Cooking } from '../../../data/domain/world-4/cooking';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 
 const saveName = 'latest';
 const extractionResultsName = 'cooking-meal-bonus-data.json';
 
+// The six saved meals exercise distinct observed Cook Mastery multipliers,
+// from 1.0 (meal 51) through 1.615... (meal 1), across early and later meals.
+// They are representative values for the same calculation, not separate branches.
 const parameterSpecs: Record<string, ParameterTestSpec> = {
  mainframe_jewel_16: {
   description: 'Mainframe jewel 16 bonus (meal bonus)',
@@ -67,7 +70,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_1: {
-  description: 'BonusMultiCook multiplier for meal 1 (Egg)',
+  description: 'Cooking Mastery multiplier used in the Egg meal bonus',
   extractionKey: 'bonus_multi_cook_meal_1',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -76,7 +79,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_12: {
-  description: 'BonusMultiCook multiplier for meal 12 (Corndog)',
+  description: 'Cooking Mastery multiplier used in the Corndog meal bonus',
   extractionKey: 'bonus_multi_cook_meal_12',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -85,7 +88,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_13: {
-  description: 'BonusMultiCook multiplier for meal 13 (Cabbage)',
+  description: 'Cooking Mastery multiplier used in the Cabbage meal bonus',
   extractionKey: 'bonus_multi_cook_meal_13',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -94,7 +97,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_43: {
-  description: 'BonusMultiCook multiplier for meal 43 (Soda)',
+  description: 'Cooking Mastery multiplier used in the Soda meal bonus',
   extractionKey: 'bonus_multi_cook_meal_43',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -103,7 +106,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_51: {
-  description: 'BonusMultiCook multiplier for meal 51 (Popped Corn)',
+  description: 'Cooking Mastery multiplier used in the Popped Corn meal bonus',
   extractionKey: 'bonus_multi_cook_meal_51',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -112,7 +115,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  },
 
  bonus_multi_cook_meal_52: {
-  description: 'BonusMultiCook multiplier for meal 52 (Double Cherry)',
+  description: 'Cooking Mastery multiplier used in the Double Cherry meal bonus',
   extractionKey: 'bonus_multi_cook_meal_52',
   domainExtractor: (gameData: Map<string, any>) => {
    const cooking = gameData.get("cooking") as Cooking;
@@ -125,8 +128,7 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
   extractionKey: 'companion_162_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const companions = gameData.get("companions") as Companion[];
-   const companion = companions.find(c => c.id === 162);
-   return companion?.owned ? companion.data.bonus : 0;
+   return getCompanionActiveBonus(companions, 162);
   }
  },
 };

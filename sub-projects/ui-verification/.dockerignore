@@ -1,0 +1,8 @@
+*
+!Dockerfile
+!.dockerignore
+!package.json
+!yarn.lock
+!runner.cjs
+!scenarios/
+!scenarios/**

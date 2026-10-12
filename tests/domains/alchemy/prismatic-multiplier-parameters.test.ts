@@ -17,7 +17,7 @@ import { Slab } from '../../../data/domain/world-5/slab';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { Sigils } from '../../../data/domain/world-2/alchemy/sigils';
 import { Farming } from '../../../data/domain/world-6/farming';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Gaming } from '../../../data/domain/world-5/gaming';
 import { SushiStation } from '../../../data/domain/world-7/sushi';
 
@@ -85,8 +85,7 @@ const parameterSpecs = {
   extractionKey: 'companion_88_bonus',
   domainExtractor: (gameData: Map<string, any>) => {
    const companions = gameData.get("companions") as Companion[];
-   const companion = companions.find(c => c.id === 88);
-   return companion?.owned ? companion.data.bonus : 0;
+   return getCompanionActiveBonus(companions, 88);
   }
  },
 

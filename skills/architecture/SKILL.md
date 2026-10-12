@@ -5,12 +5,14 @@ description: Understanding data flow, domain patterns, cross-domain dependencies
 
 # Architecture Guide
 
-For comprehensive architecture documentation, read [docs/CODEBASE_OVERVIEW.md](docs/CODEBASE_OVERVIEW.md).
+For comprehensive architecture documentation, read [docs/CODEBASE_OVERVIEW.md](../../docs/CODEBASE_OVERVIEW.md).
+
+Before backend architecture decisions or implementation, use the [implementation patterns guide](../../docs/agents/implementation-patterns.md) to select applicable examples and aspects; use its UI route only when planning or changing UI.
 
 ## Key Reminders
 
 **Three-phase data pipeline:**
-1. **Init** - One-time setup of domain instances and static game data
+1. **Init** - Set up domain instances and static game data
 2. **Parse** - Extract raw data from cloud save (NO cross-domain access, NO calculations)
 3. **Calculate** - Compute values in strict dependency order (cross-domain access allowed)
 

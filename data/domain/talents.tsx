@@ -30,6 +30,8 @@ export class Talent {
     maxLevel: number = 0;
     // Represent the max level of a talent as it is displayed in-game, so not including any bonus that could affect talent levels
     bookMaxLevel: number = 0;
+    // Represent whether this talent has an active Super Talent membership.
+    isSupered: boolean = false;
 
     constructor(public name: string, public data: TalentModel) {
         this.description = data.description;

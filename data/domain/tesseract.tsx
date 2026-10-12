@@ -5,6 +5,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { TesseractUpgradeModel } from "./model/tesseractUpgradeModel";
 import { Player } from "./player";
+import { EquipmentBonus } from "./equipment-effects";
 import { ClassIndex } from "./talents";
 import {
     EfficiencyUpgrade,
@@ -931,9 +932,9 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
                 tesseract.bestArcaneCultist = arcaneCultist;
                 
                 // Set ETC bonuses from Arcane Cultist equipment
-                tesseract.etcBonus93 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Arcanist Dmg") ?? 0), 0);
-                tesseract.etcBonus94 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Arcanist Acc") ?? 0), 0);
-                tesseract.etcBonus95 = arcaneCultist.gear.equipment.reduce((sum, item) => sum + (item?.getMiscBonus("Extra Tachyons") ?? 0), 0);
+                tesseract.etcBonus93 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ArcanistDamage);
+                tesseract.etcBonus94 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ArcanistAccuracy);
+                tesseract.etcBonus95 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ExtraTachyons);
             }
 
             // Set pristine bonus 22 from sneaking

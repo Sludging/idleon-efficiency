@@ -1,8 +1,9 @@
 import { lavaLog, range } from "../../../utility";
 import { Domain, RawData } from "../../base/domain";
-import { Companion } from "../../companions";
+import { Companion, getCompanionActiveBonus } from "../../companions";
 import { Compass } from "../../compass";
 import { Divinity } from "../../world-5/divinity";
+import { GoldRelicArtifact } from "../../world-5/sailing/artifacts";
 import { EventShop } from "../../eventShop";
 import { GemStore } from "../../gemPurchases";
 import { Item } from "../../items";
@@ -39,10 +40,10 @@ export class Sample {
         }
 
         // Else do math to figure out the boost from lab / harriep.
-        let baseQuantity = this.printingQuantity;
-        baseQuantity *= this.inLab ? 2 : 1;
-        baseQuantity *= this.harriep ? 3 : 1;
-        return baseQuantity * this.printingTotalBoost;
+        let characterBoost = 1;
+        characterBoost *= this.inLab ? 2 : 1; // Lab doubles the sample quantity.
+        characterBoost *= this.harriep ? 3 : 1; // Harriep triples the sample quantity.
+        return characterBoost * this.printingTotalBoost * this.printingQuantity;
     }
 
     isOutdatedPrint = () => {
@@ -166,12 +167,13 @@ export const updatePrinter = (data: Map<string, any>) => {
     })
 
 
-    const bestDivineKnight = players.filter(player => player.classId == ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()
+    const bestDivineKnight = players.filter(player => player.getEliteClass() === ClassIndex.Divine_Knight).sort((player1, player2) => player1.getTalentBonus(178) > player2.getTalentBonus(178) ? 1 : -1).pop()
     const divineKnightOrbKills = optLacc[138] || 0;
-
+    let talent178Bonus = 1;
     if (bestDivineKnight) {
         printer.divineKnightOrbKills = divineKnightOrbKills;
         printer.bestDivineKnightPlayerId = bestDivineKnight.playerID;
+        talent178Bonus = (1 + bestDivineKnight.getTalentBonus(178) * lavaLog(divineKnightOrbKills) / 100);
     }
 
     // Printing boosts
@@ -181,12 +183,12 @@ export const updatePrinter = (data: Map<string, any>) => {
     const compassDaysSinceLastSample = optLacc[INDEX_DAYS_SINCE_SAMPLE_COMPASS] || 0;
     const legendTalentDaysSinceLastSample = optLacc[INDEX_DAYS_SINCE_SAMPLE_LEGENDTALENT] || 0;
     const pristineCharm15 = sneaking.pristineCharms.find(charm => charm.data.itemId == 15);
-    const companion17 = companions.find(companion => companion.id == 17);
-    const companion17Bonus = (companion17 && companion17.owned) ? companion17.data.bonus : 0;
+    const companion17Bonus = getCompanionActiveBonus(companions, 17);
     const compassUpgrade = compass.upgrades.find(upgrade => upgrade.id == 43);
 
-    const artifactBonus = (1 + sailing.artifacts[4].getBonus() * artifactDaysSinceLastSample / 100);
-    const divineKnightBonus = (1 + (bestDivineKnight?.getTalentBonus(178) || 0) * lavaLog(divineKnightOrbKills) / 100);
+    // Printer adds a fixed 2 to Gold Relic's tier increment for its per-day rate.
+    const goldRelicTierIncrement = (sailing.artifacts[4] as GoldRelicArtifact).getTierIncrement();
+    const artifactBonus = (1 + artifactDaysSinceLastSample * (2 + goldRelicTierIncrement) / 100);
     const bonus3 = (1 + (skillMastery.getTotalBonusByIndex(5) + (pristineCharm15 && pristineCharm15.unlocked ? pristineCharm15.data.x1 : 0)) / 100);
     const bonus4 = (1 + votes.getCurrentBonus(11) / 100);
     const eventShopBonus = (1 + eventShopDaysSinceLastSample * (eventShop.isBonusOwned(4) ? 2 : 0) / 100);
@@ -196,7 +198,7 @@ export const updatePrinter = (data: Map<string, any>) => {
 
     printer.samples.flatMap(player => player).forEach(sample => {
         // Do not uncomment this yet, in-game show it in the printer UI but doesn't use it in the calculation
-        sample.printingTotalBoost = artifactBonus * divineKnightBonus * bonus3 * bonus4 * eventShopBonus * companionBonus * compassBonus /* * legendTalentsBonus*/;
+        sample.printingTotalBoost = artifactBonus * talent178Bonus * bonus3 * bonus4 * eventShopBonus * companionBonus * compassBonus /* * legendTalentsBonus*/;
     });
 
     printer.slotsUnlocked = 4 + (gemStore.purchases.find(purchase => purchase.no == 112)?.pucrhased ?? 0);

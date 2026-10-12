@@ -1,6 +1,7 @@
 "use client"
 
 import { Box, CheckBox, Text, Select, TextInput } from "grommet";
+import type { ReactNode } from "react";
 
 export interface FilterOptions {
     hideLocked: boolean;
@@ -22,6 +23,7 @@ interface UpgradeTableFiltersProps {
     pathFilterOptions?: string[];
     sortOptions?: Array<{ label: string; value: string }>;
     searchPlaceholder?: string;
+    additionalFilters?: ReactNode;
 }
 
 export function UpgradeTableFilters({
@@ -35,7 +37,8 @@ export function UpgradeTableFilters({
         { label: 'Cost (ascending)', value: 'cost' },
         { label: 'Default Order', value: 'default' }
     ],
-    searchPlaceholder = "Search name or bonus..."
+    searchPlaceholder = "Search name or bonus...",
+    additionalFilters
 }: UpgradeTableFiltersProps) {
     const updateFilter = (key: keyof FilterOptions, value: any) => {
         onFiltersChange({
@@ -80,6 +83,7 @@ export function UpgradeTableFilters({
                         />
                     </Box>
                 )}
+                {additionalFilters}
 
                 <Box direction="row" gap="small" align="center">
                     <Text size="small">Sort by:</Text>

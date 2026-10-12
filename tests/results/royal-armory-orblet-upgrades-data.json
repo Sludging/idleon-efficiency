@@ -1,0 +1,201 @@
+{
+  "extractions": {
+    "orblet_market_cost_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 0, 0)",
+      "result": 5002
+    },
+    "orblet_market_bonus_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 0, 0)",
+      "result": 2
+    },
+    "orblet_market_unlocked_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 0; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 0; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 3
+    },
+    "orblet_market_display_level_0": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][0]); })()",
+      "result": 2
+    },
+    "orblet_market_cost_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 1, 0)",
+      "result": 38
+    },
+    "orblet_market_bonus_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
+      "result": 110
+    },
+    "orblet_market_unlocked_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 1; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 1; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 115
+    },
+    "orblet_market_display_level_1": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][1]); })()",
+      "result": 22
+    },
+    "orblet_market_cost_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 2, 0)",
+      "result": 90
+    },
+    "orblet_market_bonus_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 2, 0)",
+      "result": 23
+    },
+    "orblet_market_unlocked_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 2; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 2; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 24
+    },
+    "orblet_market_display_level_2": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][2]); })()",
+      "result": 23
+    },
+    "orblet_market_cost_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 3, 0)",
+      "result": 28
+    },
+    "orblet_market_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
+      "result": 4
+    },
+    "orblet_market_unlocked_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 3; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 3; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 5
+    },
+    "orblet_market_display_level_3": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][3]); })()",
+      "result": 4
+    },
+    "orblet_market_cost_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 4, 0)",
+      "result": 32
+    },
+    "orblet_market_bonus_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 4, 0)",
+      "result": 4
+    },
+    "orblet_market_unlocked_4": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 4; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_cost_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 5, 0)",
+      "result": 31
+    },
+    "orblet_market_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
+      "result": 3
+    },
+    "orblet_market_unlocked_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 5; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 5; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 4
+    },
+    "orblet_market_display_level_5": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][5]); })()",
+      "result": 3
+    },
+    "orblet_market_cost_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 6, 0)",
+      "result": 61
+    },
+    "orblet_market_bonus_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
+      "result": 5
+    },
+    "orblet_market_unlocked_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 6; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 6; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 10
+    },
+    "orblet_market_display_level_6": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][6]); })()",
+      "result": 1
+    },
+    "orblet_market_cost_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 7, 0)",
+      "result": 1715
+    },
+    "orblet_market_bonus_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "result": 70
+    },
+    "orblet_market_unlocked_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 7; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 7; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 80
+    },
+    "orblet_market_display_level_7": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][7]); })()",
+      "result": 7
+    },
+    "orblet_market_cost_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 8, 0)",
+      "result": 200
+    },
+    "orblet_market_bonus_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
+      "result": 0
+    },
+    "orblet_market_unlocked_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 8; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 1
+    },
+    "orblet_market_next_bonus_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 8; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 1
+    },
+    "orblet_market_display_level_8": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][8]); })()",
+      "result": 0
+    },
+    "orblet_market_cost_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketCost\", 9, 0)",
+      "result": 500
+    },
+    "orblet_market_bonus_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 9, 0)",
+      "result": 0
+    },
+    "orblet_market_unlocked_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 9; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return index === 0 || asNumber(idleon.getAttr(\"RoyalG\")[23][Math.max(0, index - 1)]) >= 1 ? 1 : 0; })()",
+      "result": 0
+    },
+    "orblet_market_next_bonus_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const index = 9; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const level = asNumber(idleon.getAttr(\"RoyalG\")[23][index]); const row = idleon.getAttr(\"CustomLists\").h.OrbletMarket[index]; return level < asNumber(row[3]) ? Math.floor(asNumber(row[4]) * (level + 1)) : -1; })()",
+      "result": 1
+    },
+    "orblet_market_display_level_9": {
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; return asNumber(idleon.getAttr(\"RoyalG\")[23][9]); })()",
+      "result": 0
+    },
+    "calculationStorage.amountInStorageOrblet": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
+      "result": 1013
+    }
+  },
+  "errors": {}
+}

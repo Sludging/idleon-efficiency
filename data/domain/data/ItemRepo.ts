@@ -20425,7 +20425,11 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -22340,11 +22344,7 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -32616,8 +32616,7 @@ export const initItemRepo = () => {
                         <SourceModel>{
                             "wikiName": "[[Royal Worm#Bossin' the Boss|Bossin' the Boss]]",
                             "txtName": "Royal Worm: Bossin' the Boss"
-                        },
-                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}
+                        }
                     ],
                     "recipeFrom": [],
                     "questAss": []
@@ -43673,7 +43672,11 @@ export const initItemRepo = () => {
                     "Type": "Obol Stack",
                     "description": "Hold down and 1 square hyper obol will drop at your feet! YOU MUST BE IN WORLD 2 TOWN TO USE THIS! This way you can trash other obols incase you're out of space! "
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -56034,6 +56037,7 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"},
                         <SourceModel>{"wikiName": "[[Dungeons#Flurbo Shop|Flurbo Shop]]", "txtName": "Dungeons: Flurbo Shop"},
                         <SourceModel>{
                             "wikiName": "[[Dungeons#Loot Rolls|Dungeon Loot Rolls]]",
@@ -56691,8 +56695,8 @@ export const initItemRepo = () => {
                     "WIS": 0,
                     "LUK": 0,
                     "Defence": 5,
-                    "miscUp1": "",
-                    "miscUp2": "[[Keychains#Misc 2 Rolling|Misc 2 Table]]",
+                    "miscUp1": "30% Money",
+                    "miscUp2": "5% Damage Multi",
                     "Upgrade_Slots_Left": 0
                 },
                 "sources": <SourcesModel>{
@@ -70663,7 +70667,7 @@ export const initItemRepo = () => {
                     "sellPrice": 100,
                     "typeGen": TypeGenEnum.dQuest,
                     "Type": "Event Wish",
-                    "description": "Hold down on this candle to see the 5th Birthday Lucky Pet winners list! There's a new winner every 5 MINUTES! WOW! "
+                    "description": "Hold down on this candle to see the Lucky Pet winners list! Who knows, maybe you'll win! "
                 },
                 "sources": undefined,
                 "notes": undefined,
@@ -70988,6 +70992,10 @@ export const initItemRepo = () => {
                 "sources": <SourcesModel>{
                     "sources": [
                         <SourceModel>{
+                            "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                            "txtName": "Wavey Wayne: Briny Tasks"
+                        },
+                        <SourceModel>{
                             "wikiName": "[[Toobus Goobus#TUNNEL EXPLORING|TUNNEL EXPLORING]]",
                             "txtName": "Toobus Goobus: TUNNEL EXPLORING"
                         },
@@ -71095,6 +71103,10 @@ export const initItemRepo = () => {
                 },
                 "sources": <SourcesModel>{
                     "sources": [
+                        <SourceModel>{
+                            "wikiName": "[[Wavey Wayne#Briny Tasks|Briny Tasks]]",
+                            "txtName": "Wavey Wayne: Briny Tasks"
+                        },
                         <SourceModel>{
                             "wikiName": "[[Toobus Goobus#RESEARCH STUDIES|RESEARCH STUDIES]]",
                             "txtName": "Toobus Goobus: RESEARCH STUDIES"
@@ -86591,7 +86603,11 @@ export const initItemRepo = () => {
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": undefined,
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
@@ -87008,6 +87024,103 @@ export const initItemRepo = () => {
                 "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats135"}, "order": 390},
                 "itemSet": undefined
             }),
+        new ItemBase("EquipmentHats139", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats139",
+                    "displayName": "Sun Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmetMTX,
+                    "Type": "Premium Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 0,
+                    "Defence": 0,
+                    "miscUp1": "1% Class Exp Multi",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats139"}, "order": 391},
+                "itemSet": undefined
+            }),
+        new ItemBase("EquipmentHats140", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats140",
+                    "displayName": "Legion Commander Bicorne",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmetMTX,
+                    "Type": "Premium Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 1,
+                    "AGI": 1,
+                    "WIS": 1,
+                    "LUK": 0,
+                    "Defence": 0,
+                    "miscUp1": "3% Marble Drop",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats140"}, "order": 398},
+                "itemSet": undefined
+            }),
+        new ItemBase("EquipmentHats141", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats141",
+                    "displayName": "Fudd Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmetMTX,
+                    "Type": "Premium Helmet",
+                    "lvReqToCraft": 5,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 1,
+                    "Defence": 0,
+                    "miscUp1": "1% Damage Multi",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": <SourcesModel>{
+                    "sources": [<SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}],
+                    "recipeFrom": [],
+                    "questAss": []
+                },
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "cropfallEvent1", "quantity": 1, "chance": 0.001}]},
+                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats141"}, "order": 392},
+                "itemSet": undefined
+            }),
         new ItemBase("EquipmentHats136", <ItemModel>{
                 "item": <ArmourItemModel>{
                     "internalName": "EquipmentHats136",
@@ -87101,23 +87214,23 @@ export const initItemRepo = () => {
                 "slabSort": undefined,
                 "itemSet": <ItemSetModel>{"set": "Gold"}
             }),
-        new ItemBase("EquipmentHats139", <ItemModel>{
+        new ItemBase("EquipmentHats142", <ItemModel>{
                 "item": <ArmourItemModel>{
-                    "internalName": "EquipmentHats139",
-                    "displayName": "Sun Hat",
+                    "internalName": "EquipmentHats142",
+                    "displayName": "Bronze Tournament Wrapped Hat",
                     "sellPrice": 1,
                     "typeGen": TypeGenEnum.aHelmetMTX,
                     "Type": "Premium Helmet",
-                    "lvReqToCraft": 5,
+                    "lvReqToCraft": 69420,
                     "lvReqToEquip": 1,
                     "Class": ClassTypeEnum.All,
                     "Weapon_Power": 0,
                     "STR": 0,
                     "AGI": 0,
                     "WIS": 0,
-                    "LUK": 0,
+                    "LUK": 1,
                     "Defence": 0,
-                    "miscUp1": "1% Class Exp Multi",
+                    "miscUp1": "",
                     "miscUp2": "00",
                     "Upgrade_Slots_Left": 5,
                     "Skill": "",
@@ -87129,52 +87242,17 @@ export const initItemRepo = () => {
                 "vendors": undefined,
                 "anvilProduction": undefined,
                 "detDrops": undefined,
-                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats139"}, "order": 391},
-                "itemSet": undefined
+                "slabSort": undefined,
+                "itemSet": <ItemSetModel>{"set": "Bronze"}
             }),
-        new ItemBase("EquipmentHats140", <ItemModel>{
+        new ItemBase("EquipmentHats143", <ItemModel>{
                 "item": <ArmourItemModel>{
-                    "internalName": "EquipmentHats140",
-                    "displayName": "Legion Commander Bicorne",
+                    "internalName": "EquipmentHats143",
+                    "displayName": "Silver Tournament Wrapped Hat",
                     "sellPrice": 1,
                     "typeGen": TypeGenEnum.aHelmetMTX,
                     "Type": "Premium Helmet",
-                    "lvReqToCraft": 5,
-                    "lvReqToEquip": 1,
-                    "Class": ClassTypeEnum.All,
-                    "Weapon_Power": 0,
-                    "STR": 1,
-                    "AGI": 1,
-                    "WIS": 1,
-                    "LUK": 0,
-                    "Defence": 0,
-                    "miscUp1": "3% Marble Drop",
-                    "miscUp2": "00",
-                    "Upgrade_Slots_Left": 5,
-                    "Skill": "",
-                    "Skill_Power": 0
-                },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Gem Shop]]", "txtName": "Gem Shop"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
-                "notes": undefined,
-                "recipe": undefined,
-                "vendors": undefined,
-                "anvilProduction": undefined,
-                "detDrops": undefined,
-                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats140"}, "order": 398},
-                "itemSet": undefined
-            }),
-        new ItemBase("EquipmentHats141", <ItemModel>{
-                "item": <ArmourItemModel>{
-                    "internalName": "EquipmentHats141",
-                    "displayName": "Fudd Hat",
-                    "sellPrice": 1,
-                    "typeGen": TypeGenEnum.aHelmetMTX,
-                    "Type": "Premium Helmet",
-                    "lvReqToCraft": 5,
+                    "lvReqToCraft": 69420,
                     "lvReqToEquip": 1,
                     "Class": ClassTypeEnum.All,
                     "Weapon_Power": 0,
@@ -87183,24 +87261,51 @@ export const initItemRepo = () => {
                     "WIS": 0,
                     "LUK": 1,
                     "Defence": 0,
-                    "miscUp1": "1% Damage Multi",
+                    "miscUp1": "",
                     "miscUp2": "00",
                     "Upgrade_Slots_Left": 5,
                     "Skill": "",
                     "Skill_Power": 0
                 },
-                "sources": <SourcesModel>{
-                    "sources": [<SourceModel>{"wikiName": "[[Bort The Cornhusk]]", "txtName": "Bort The Cornhusk"}],
-                    "recipeFrom": [],
-                    "questAss": []
-                },
+                "sources": undefined,
                 "notes": undefined,
                 "recipe": undefined,
                 "vendors": undefined,
                 "anvilProduction": undefined,
-                "detDrops": <DetDropsModel>{"sources": [<DetDropModel>{"source": "cropfallEvent1", "quantity": 1, "chance": 0.001}]},
-                "slabSort": <SlabItemSortModel>{"item": <QtylessComponentModel>{"item": "EquipmentHats141"}, "order": 392},
-                "itemSet": undefined
+                "detDrops": undefined,
+                "slabSort": undefined,
+                "itemSet": <ItemSetModel>{"set": "Silver"}
+            }),
+        new ItemBase("EquipmentHats144", <ItemModel>{
+                "item": <ArmourItemModel>{
+                    "internalName": "EquipmentHats144",
+                    "displayName": "Gold Tournament Wrapped Hat",
+                    "sellPrice": 1,
+                    "typeGen": TypeGenEnum.aHelmetMTX,
+                    "Type": "Premium Helmet",
+                    "lvReqToCraft": 69420,
+                    "lvReqToEquip": 1,
+                    "Class": ClassTypeEnum.All,
+                    "Weapon_Power": 0,
+                    "STR": 0,
+                    "AGI": 0,
+                    "WIS": 0,
+                    "LUK": 1,
+                    "Defence": 0,
+                    "miscUp1": "",
+                    "miscUp2": "00",
+                    "Upgrade_Slots_Left": 5,
+                    "Skill": "",
+                    "Skill_Power": 0
+                },
+                "sources": undefined,
+                "notes": undefined,
+                "recipe": undefined,
+                "vendors": undefined,
+                "anvilProduction": undefined,
+                "detDrops": undefined,
+                "slabSort": undefined,
+                "itemSet": <ItemSetModel>{"set": "Gold"}
             }),
         new ItemBase("RGenh", <ItemModel>{
                 "item": <DescItemModel>{

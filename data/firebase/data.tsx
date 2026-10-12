@@ -2,8 +2,10 @@ import { FirebaseApp } from "firebase/app";
 import { Unsubscribe } from "firebase/auth";
 import { child, Database, get, getDatabase, goOnline, ref } from "firebase/database";
 import { doc, Firestore, getDoc, initializeFirestore, onSnapshot } from "firebase/firestore";
-import { cloudsaveConverter } from "../domain/cloudsave";
-
+import { Cloudsave, cloudsaveConverter } from "../domain/cloudsave";
+import { mergeCompanionStates } from "../domain/companions/companionState";
+import type { CompanionState } from "../domain/companions/companionState";
+type CompanionDataUpdate = (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: CompanionState[]) => void;
 export class FirestoreData {
     app: FirebaseApp;
     db: Firestore;
@@ -11,13 +13,13 @@ export class FirestoreData {
     userUid: string
 
     charNames: string[] = [];
-    companions: number[] = [];
+    companions: CompanionState[] = [];
     serverVars: Record<string, any> = {};
 
-    onUpdateFunction: Function
+    onUpdateFunction: CompanionDataUpdate
     unsubscribe: Unsubscribe | undefined = undefined;
 
-    constructor(public uid: string, app: FirebaseApp, onUpdate: Function) {
+    constructor(public uid: string, app: FirebaseApp, onUpdate: CompanionDataUpdate) {
         this.app = app;
         this.userUid = uid;
         this.db = initializeFirestore(app, {});
@@ -32,7 +34,7 @@ export class FirestoreData {
         await this.subscribeToAccountData();
     }
 
-    getCompanions = async () => {
+    getCompanions = async (): Promise<CompanionState[]> => {
         if (!this.realDB) {
             this.realDB = getDatabase(this.app);
         }
@@ -41,12 +43,47 @@ export class FirestoreData {
         try {
             const compSnapshot = await get(child(dbRef, `_comp/${this.uid}`))
             if (compSnapshot && compSnapshot.exists()) {
-                this.companions = (compSnapshot.val()["l"] as string[]).map(comp => parseInt(comp.split(",")[0]))
+                const snapshotValue = compSnapshot.val();
+                const records = snapshotValue && typeof snapshotValue === "object" ? snapshotValue["l"] : undefined;
+                if (!Array.isArray(records)) {
+                    this.companions = [];
+                    return this.companions;
+                }
+
+                const parsedCompanions: CompanionState[] = [];
+                records.forEach((record: unknown) => {
+                    if (typeof record !== "string") {
+                        return;
+                    }
+
+                    const fields = record.split(",");
+                    // The game stores companion ID in field [0] and its level state in field [4].
+                    const idText = fields[0]?.trim();
+                    const levelText = fields[4]?.trim();
+                    if (!idText || !levelText) {
+                        return;
+                    }
+
+                    const id = Number(idText);
+                    const rawLevel = Number(levelText);
+                    if (!Number.isFinite(id) || !Number.isFinite(rawLevel)) {
+                        return;
+                    }
+
+                    // If the raw level is larger than 1, than companion level 2 is unlocked.
+                    parsedCompanions.push({ id, level: rawLevel >= 1 ? 2 : 1 });
+                });
+                this.companions = mergeCompanionStates(parsedCompanions);
+            }
+            else {
+                this.companions = [];
             }
         }
         catch (error) {
             console.log("Failed getting companion data", error);
         }
+
+        return this.companions;
     }
 
     getCharNames = async () => {

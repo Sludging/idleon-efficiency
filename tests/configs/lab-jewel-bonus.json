@@ -1,131 +1,101 @@
 {
-  "description": "Extract unique Lab Jewel bonuses and their direct game-formula inputs",
+  "description": "Extract active Lab jewel bonuses and direct calculated jewel inputs",
   "target": "Lab Jewel bonus calculations",
   "extractions": [
     {
       "label": "jewel_0_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 100)",
-      "description": "Amethyst Rhinestone Jewel 0 bonus"
-    },
-    {
-      "label": "jewel_0_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][0]",
-      "description": "Amethyst Rhinestone Jewel 0 active flag"
+      "description": "Meal Cooking speed from Amethyst Rhinestone; saved Purple Jewel synergy doubles the bonus"
     },
     {
       "label": "jewel_0_bonus_multiplier",
       "expression": "idleon.callFunction(\"MainframeBonus\", 8)",
-      "description": "Lab mainframe Jewel multiplier"
+      "description": "Calculated Lab mainframe multiplier directly used by Jewel bonus formulas"
     },
     {
       "label": "jewel_1_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 101)",
-      "description": "Purple Navette Jewel 1 bonus used by Jewel 0 doubling gate"
+      "description": "Purple Navette effect used by the Amethyst Rhinestone doubling gate"
     },
     {
       "label": "jewel_2_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 102)",
-      "description": "Purple Rhombol Jewel 2 bonus used by Jewel 0 doubling gate"
+      "description": "Purple Rhombol effect used by the Amethyst Rhinestone doubling gate"
     },
     {
       "label": "jewel_3_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 103)",
-      "description": "Sapphire Rhinestone Jewel 3 bonus"
-    },
-    {
-      "label": "jewel_3_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][3]",
-      "description": "Sapphire Rhinestone Jewel 3 active flag"
+      "description": "Construction building speed and slot trim from Sapphire Rhinestone; saved Blue Jewel synergy doubles the bonus"
     },
     {
       "label": "jewel_4_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 104)",
-      "description": "Sapphire Navette Jewel 4 bonus used by Jewel 3 doubling gate"
+      "description": "Sapphire Navette effect used by the Sapphire Rhinestone doubling gate"
     },
     {
       "label": "jewel_5_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 105)",
-      "description": "Sapphire Rhombol Jewel 5 bonus used by Jewel 3 doubling gate"
+      "description": "Sapphire Rhombol effect used by the Sapphire Rhinestone doubling gate"
     },
     {
       "label": "jewel_6_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 106)",
-      "description": "Sapphire Pyramite Jewel 6 bonus used by Jewel 3 doubling gate"
+      "description": "Sapphire Pyramite effect used by the Sapphire Rhinestone doubling gate"
     },
     {
       "label": "jewel_10_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 110)",
-      "description": "Pyrite Pyramite Jewel 10 bonus"
-    },
-    {
-      "label": "jewel_10_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][10]",
-      "description": "Pyrite Pyramite Jewel 10 active flag"
+      "description": "All-player damage from Pyrite Pyramite; saved Orange Jewel synergy doubles the bonus"
     },
     {
       "label": "jewel_7_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 107)",
-      "description": "Pyrite Rhinestone Jewel 7 bonus used by Jewel 10 doubling gate"
+      "description": "Pyrite Rhinestone effect used by the Pyrite Pyramite doubling gate"
     },
     {
       "label": "jewel_8_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 108)",
-      "description": "Pyrite Navette Jewel 8 bonus used by Jewel 10 doubling gate"
+      "description": "Pyrite Navette effect used by the Pyrite Pyramite doubling gate"
     },
     {
       "label": "jewel_9_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 109)",
-      "description": "Pyrite Rhombol Jewel 9 bonus used by Jewel 10 doubling gate"
+      "description": "Pyrite Rhombol effect used by the Pyrite Pyramite doubling gate"
     },
     {
       "label": "jewel_12_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 112)",
-      "description": "Emerald Navette Jewel 12 bonus"
-    },
-    {
-      "label": "jewel_12_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][12]",
-      "description": "Emerald Navette Jewel 12 active flag"
+      "description": "All-skill base efficiency and action speed from Emerald Navette; saved Green Jewel synergy doubles the bonus"
     },
     {
       "label": "jewel_11_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 111)",
-      "description": "Emerald Rhinestone Jewel 11 bonus used by Jewel 12 doubling gate"
+      "description": "Emerald Rhinestone effect used by the Emerald Navette doubling gate"
     },
     {
       "label": "jewel_13_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 113)",
-      "description": "Emerald Rhombol Jewel 13 bonus used by Jewel 12 doubling gate"
+      "description": "Emerald Rhombol effect used by the Emerald Navette doubling gate"
     },
     {
       "label": "jewel_14_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 114)",
-      "description": "Emerald Pyramite Jewel 14 bonus used by Jewel 12 doubling gate"
+      "description": "Emerald Pyramite effect used by the Emerald Navette doubling gate"
     },
     {
       "label": "jewel_15_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 115)",
-      "description": "Emerald Ulthurite Jewel 15 bonus used by Jewel 12 doubling gate"
+      "description": "Emerald Ulthurite effect used by the Emerald Navette doubling gate"
     },
     {
       "label": "jewel_19_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 119)",
-      "description": "Pure Opal Navette Jewel 19 bonus"
-    },
-    {
-      "label": "jewel_19_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][19]",
-      "description": "Pure Opal Navette Jewel 19 active flag"
+      "description": "Pure Opal Navette boost to active Mainframe bonuses and jewels, excluding Spelunker Obol"
     },
     {
       "label": "jewel_20_bonus",
       "expression": "idleon.callFunction(\"MainframeBonus\", 120)",
-      "description": "Pure Opal Rhombol Jewel 20 bonus"
-    },
-    {
-      "label": "jewel_20_active",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[22].behaviors.getBehavior(\"ActorEvents_548\")._GenINFO[92][20]",
-      "description": "Pure Opal Rhombol Jewel 20 active flag"
+      "description": "Pure Opal Rhombol boost to all Crop Depot bonuses"
     }
   ]
 }

@@ -1,0 +1,53 @@
+{
+  "extractions": {
+    "equipment_bonus_48": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"48\")",
+      "result": 80.26755532011438
+    },
+    "equipment_bonus_2": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"2\")",
+      "result": 3322.3652475656804
+    },
+    "equipment_bonus_3": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"3\")",
+      "result": 94.58001475203051
+    },
+    "equipment_bonus_45": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"45\")",
+      "result": 170.38265120831264
+    },
+    "equipment_bonus_32": {
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"32\")",
+      "result": 0
+    },
+    "equipment_chip_pend": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"pend\")",
+      "result": 1
+    },
+    "equipment_chip_key1": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"key1\")",
+      "result": 1
+    },
+    "equipment_chip_troph": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
+      "result": 1
+    },
+    "equipment_research_172": {
+      "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 172, 0)",
+      "result": 37.5
+    },
+    "gallery_trophy_skill_efficiency": {
+      "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
+      "result": 61.237555320114375
+    },
+    "gallery_nametag_drop_rate": {
+      "expression": "idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_DROP_RATE\"]",
+      "result": 307.2084025225738
+    },
+    "hat_rack_skill_efficiency": {
+      "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
+      "result": 19.03
+    }
+  },
+  "errors": {}
+}

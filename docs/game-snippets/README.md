@@ -1,11 +1,21 @@
 # Game Snippets
 
-Captured source code of game calculation functions, used as the formula authority for calculation-correctness work. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) defines when a case needs a snippet; this file defines how to capture and store one.
+Captured source code of game calculation functions, used to establish the intended game behavior. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) explains when a case needs a snippet; this file explains how to capture and store one.
 
 ## Rules
 
-- Read the version first (`GET http://localhost:3100/game-version`). If a snippet exists for the current version, read it from here instead of retrieving from the game.
+- Before reusing a selected function's snippet, confirm that its version matches the game version under examination. For a case checking the running game, obtain that version from `GET /game-version` on the debug server. An existing older snippet does not establish current behavior; capture the matching-version function when it is absent. If the version under review remains unclear, ask the human before choosing a snippet.
 - These files are evidence, not implementation. They are never imported by application code.
+
+## Understanding callers and finding additional source
+
+Prefer the debug server for locating functions and inspecting relevant callers. A calculation snippet may establish what a function returns without explaining how the game uses it.
+
+When the debug server is insufficient, the local game source is available at `/home/sludge/Development/IdleonWikiBot/codefiles/idleon<version>.txt`. Select the file matching the version under examination.
+
+This is a 40 MB+ obfuscated file: never load the entire file into memory or agent context. Start from an exact identifier already found in a snippet or debug-server result, such as a function name, dispatcher key, or ActorEvents identifier. Use targeted, streaming searches with bounded output, then inspect only the surrounding code needed to answer the question. Bound output by bytes or characters as well as matches or lines: a single obfuscated line can be enormous. Avoid broad mechanic-name searches and unbounded output.
+
+Use this source to resolve specific questions about callers, conditions, and usage. If source attribution remains ambiguous, ask the human rather than guessing a script. For unresolved mechanic meaning or website design, follow the worker's [mechanic and website usage guidance](../../.omp/agents/correctness-worker.md#understand-the-mechanic-and-its-website-usage).
 
 ## Structure
 
@@ -54,7 +64,7 @@ Use this procedure only when the versioned snippet for the selected function doe
      -d '{"expression":"idleon.findFunction(\"<FunctionName>\")"}'
    ```
 
-   The response must identify exactly one `scripts.ActorEvents_<number>` entry. If the function is not found, the response identifies multiple scripts, or the response is otherwise ambiguous, stop and ask the human. Never guess a script.
+   The response must identify exactly one `scripts.ActorEvents_<number>` entry before capture. If the function is not found or the response is ambiguous, use the [targeted source exploration above](#understanding-callers-and-finding-additional-source) to locate the owning function and script, then confirm that target through the debug server. If attribution remains ambiguous or runtime capture is unavailable, stop and ask the human; never guess a script or label local-file text as a runtime capture.
 
 3. Evaluate that script's entire function source:
 

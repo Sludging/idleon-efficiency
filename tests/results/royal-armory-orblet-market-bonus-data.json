@@ -1,0 +1,41 @@
+{
+  "extractions": {
+    "orblet_market_bonus_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 0, 0)",
+      "result": 2
+    },
+    "orblet_market_bonus_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 1, 0)",
+      "result": 110
+    },
+    "orblet_market_bonus_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 2, 0)",
+      "result": 23
+    },
+    "orblet_market_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 3, 0)",
+      "result": 4
+    },
+    "orblet_market_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 5, 0)",
+      "result": 3
+    },
+    "orblet_market_bonus_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 6, 0)",
+      "result": 5
+    },
+    "orblet_market_bonus_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "result": 70
+    },
+    "orblet_market_bonus_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
+      "result": 0
+    },
+    "orblet_market_bonus_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 9, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

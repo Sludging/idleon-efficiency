@@ -1,0 +1,8 @@
+{
+  "name": "idleon-ui-verification",
+  "private": true,
+  "packageManager": "yarn@4.5.1",
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}

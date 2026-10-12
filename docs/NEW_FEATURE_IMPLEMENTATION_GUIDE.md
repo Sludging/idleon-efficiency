@@ -4,6 +4,28 @@
 
 This guide provides a systematic approach for implementing new game features in the IdleOn Efficiency codebase. Follow these steps to ensure proper integration with existing systems and maintain code quality standards.
 
+## Planning a Page for a Calculation-Ready Domain
+
+Use this plan for a page built on an existing domain. An existing domain does not need its
+implementation repeated.
+
+1. **Set the player goal and scope.** State what the player needs to do or learn, and what is
+   out of scope. Establish the feature's player-facing game context using step 1 of the
+   [UI work guide](agents/ui-patterns.md#workflow), even when calculations already exist.
+2. **Check the data.** Identify existing domain values and any missing calculations or inputs.
+   Verify game calculations only where you add, change, or cannot confirm them; see
+   [testing guidance](TESTING_IMPLEMENTATION.md).
+3. **Plan the UI.** Start with the [UI work guide](agents/ui-patterns.md), including its
+   Impeccable requirement, for project context, selected composition patterns, and design
+   scope. Record only page behavior choices the guide does not cover. For local browser
+   verification and rendered previews, use the
+   [UI verification guide](agents/ui-verification.md).
+4. **Plan runtime checks.** Name important save states and interactions for the changed paths.
+   Consult [asset guidance](runbooks/sync-game-assets.md) if needed.
+
+Keep UI checks distinct from game-calculation verification. Continue to the implementation
+steps below only where they apply.
+
 ## Prerequisites (Information Required from Developer)
 
 Before beginning implementation, gather the following information from the developer:
@@ -19,7 +41,7 @@ Before beginning implementation, gather the following information from the devel
 - **Asset names**: What are the correct image location names for UI assets?
 
 ### 3. Feature Similarity and UI Requirements
-- **Similar features**: Is there an existing feature this should be modeled after?
+- **Pattern selection**: Use the implementation patterns guide to choose applicable examples and name the aspects that fit; record any uncovered choices or conflicts for resolution as described there.
 - **Navigation placement**: Under which main navigation section should this appear?
 - **Route structure**: What should the page URL/routing structure be?
 
@@ -31,27 +53,24 @@ Before beginning implementation, gather the following information from the devel
 
 ## Implementation Tasks
 
-### 1. Create Domain Class (`data/domain/[feature].tsx`)
+### 1. Implement Domain Logic (`data/domain/`)
 
-**Key considerations based on feature similarity:**
-- If modeling after an existing feature, copy the pattern from that domain
-- If not, create a skeleton as a starting point we can iterate on.
+**Use only the selected aspects of existing examples.** The implementation patterns guide identifies applicable backend and UI examples and boundaries; do not treat a whole feature as a template or create a skeleton in place of resolving the required design.
 
 **Implementation steps:**
-- Create main feature class extending `Domain`
-- Create item/upgrade classes if applicable
-- Update `init` function
-- Update `parse` function to handle parsing phase
+- Select concept models using [MODEL-01](../CODING_STANDARDS.md#model-01--model-responsible-concepts); extend existing domain logic where it owns the feature.
+- Create a `Domain` subclass only when the feature needs its own pipeline participant.
+- Update the owning domain's `init` and `parse` functions as needed.
 - Implement cost calculation methods (if applicable)
 - Implement bonus calculation methods with cross-feature interactions
 - Add update (not exact name, see examples in code base) function to handle cross-domain impacts.
 
 ### 2. Integrate with Data Pipeline
 
-**Add to data processing:**
-- Add new domain to `domainList` in `idleonData.tsx`
-- Configure `getRawKeys()` method with provided save file keys
-- Add any necessary post-processing functions to the processing maps
+**Register changed processing where needed:**
+- Add a new `Domain` instance to `domainList` in `idleonData.tsx` only when introducing a pipeline participant.
+- Configure the owning domain's `getRawKeys()` with required save keys and translate them during `parse` according to [PARSE-01](../CODING_STANDARDS.md#parse-01--translate-at-the-boundary).
+- Add any necessary post-processing functions to the processing maps.
 
 ### 3. UI Development
 
@@ -87,12 +106,12 @@ Before beginning implementation, gather the following information from the devel
 
 ## Implementation Guidelines
 
-### Development Workflow
-1. **Confirm prerequisites**: Ensure all required information is available
-2. **Identify similar features**: Use existing patterns when possible
-3. **Implement domain logic**: Start with core calculations and data parsing
-4. **Create UI components**: Build user interface following existing patterns
-5. **Add automated tests**: Implement live game extraction tests for domain calculations (see `docs/TESTING_IMPLEMENTATION.md`)
+### Verify a page with a local save
+
+Use the [UI verification guide](agents/ui-verification.md) for focused Docker Playwright
+feature checks and screenshots during mockup planning. Keep UI checks separate from
+game-calculation validation; read [testing guidance](TESTING_IMPLEMENTATION.md) for domain
+tests and extraction.
 
 ### Blocked Dependencies
 

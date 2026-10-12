@@ -1,0 +1,13 @@
+{
+  "extractions": {
+    "royal_armory_bonus_76": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
+      "result": 0
+    },
+    "royal_armory_bonus_19": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
+      "result": 110
+    }
+  },
+  "errors": {}
+}

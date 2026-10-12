@@ -1,6 +1,6 @@
 import { commaNotation, round } from "../../utility"
 import { Achievement } from "../achievements";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { Alchemy } from "../world-2/alchemy/alchemy";
 import { AtomCollider } from "../world-3/construction/atomCollider";
 import { Breeding, territoryNiceNames } from "./breeding";
@@ -666,8 +666,7 @@ export const updateCooking = (data: Map<string, any>) => {
     const companions = data.get("companions") as Companion[];
     const button = data.get("button") as Button;
     const eventShop = data.get("eventShop") as EventShop;
-    const companion162 = companions.find(companion => companion.id == 162);
-    const companion162Bonus = companion162?.owned ? companion162.data.bonus : 0;
+    const companion162Bonus = getCompanionActiveBonus(companions, 162);
 
     const bestLadleSkillLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 148)?.maxLevel ?? 0)));
     if (bestLadleSkillLevel > 0) {

@@ -8,11 +8,6 @@
       "description": "Diamond Chef final bubble bonus (MealSpdz)"
     },
     {
-      "label": "diamond_chef_prismatic_state",
-      "expression": "idleon.callFunction(\"CauldronStats\", \"isBubbleSuperr\", 3, 17, 0)",
-      "description": "Diamond Chef prismatic state"
-    },
-    {
       "label": "alchemy_prismatic_bonus",
       "expression": "idleon.callFunction(\"ArcaneType\", \"PrismaBonusMult\", 0, 0)",
       "description": "Alchemy Prismatic Bonus"
@@ -33,6 +28,21 @@
       "description": "Slab-scaled representative final bubble bonus (W2 / Slabi Orefish)"
     },
     {
+      "label": "tome_w8_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
+      "description": "Tome score-scaled W8 (+{% STR) final bubble bonus for the target player"
+    },
+    {
+      "label": "tome_a9_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
+      "description": "Tome score-scaled A9 (+{% AGI) final bubble bonus for the target player"
+    },
+    {
+      "label": "tome_m9_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
+      "description": "Tome score-scaled M9 (+{% WIS) final bubble bonus for the target player"
+    },
+    {
       "label": "ordinary_tool_w_final_bonus",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ToolW",
       "description": "Stronk Tools final bubble bonus (ToolW / Power index 7; class and 16th-bubble dependent)"
@@ -41,6 +51,46 @@
       "label": "ordinary_tool_w_base_bonus",
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 7, 0)",
       "description": "Stronk Tools base BubbleBonus (ToolW / Power index 7)"
+    },
+    {
+      "label": "y13_final_bonus",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
+      "description": "Y13 public Alchemy bubble bonus (Codfrey Rulz Ok / Kazam cauldron 3, bubble 32)"
+    },
+    {
+      "label": "y13_direct_bubble_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 3, 32, 0)",
+      "description": "Y13 direct BubbleBonus root (Kazam cauldron 3, bubble 32)"
+    },
+    {
+      "label": "ordinary_tool_w_second_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 1, 0)",
+      "description": "Power cauldron second-bubble bonus used as the class multiplier for Stronk Tools (TalentCalc source 1.21 lines 104282-104289)"
+    },
+    {
+      "label": "ordinary_tool_w_sixteenth_bonus",
+      "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 16, 0)",
+      "description": "Power cauldron 16th-bubble bonus used by Stronk Tools (TalentCalc source 1.21 lines 104270-104305)"
+    },
+    {
+      "label": "diamond_chef_meal_count",
+      "expression": "(() => { const meals = idleon.getAttr(\"Meals\")[0]; return meals.reduce((count, level) => count + (Number(level) >= 11 ? 1 : 0), 0); })()",
+      "description": "Diamond Chef qualifying meal count (Meals[0] entries at level >= 11; TalentCalc source 1.21 lines 104306-104313)"
+    },
+    {
+      "label": "daily_drip_total_alchemy_level",
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._GenINFO[87]",
+      "description": "Da Daily Drip total Alchemy level used by LiquidCap (CauldronStats source 1.21 lines 117694-117698)"
+    },
+    {
+      "label": "cropius_mapper_portal_count",
+      "expression": "(() => { const players = idleon.getAttr(\"PlayerDATABASE\").h; let opened = 0; Object.keys(players).forEach(id => { for (let i = 0; i < 13; i++) opened += Number(players[id].h.KillsLeft2Advance[251 + i][0]) < 1 ? 1 : 0; }); return opened; })()",
+      "description": "Cropius Mapper opened World 6 portal count (PlayerDATABASE KillsLeft2Advance maps 251-263; TalentCalc source 1.21 lines 104439-104452)"
+    },
+    {
+      "label": "slab_raw_obtained_count",
+      "expression": "idleon.getAttr(\"Cards\")[1].length",
+      "description": "Raw Slab item count used to scale W2/A2/M2 bubbles (TalentCalc source 1.21 lines 104314-104324)"
     }
   ]
 }

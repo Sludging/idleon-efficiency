@@ -353,6 +353,7 @@ export const initQuestNameRepo = () => {
         new QuestNameBase("Toobus Goobus7", <QuestNameModel>{"name": "FEAR HOLE! FEAR HOLE!", "difficulty": 1}),
         new QuestNameBase("Toobus Goobus10", <QuestNameModel>{"name": "READING CHALLENGE", "difficulty": 3}),
         new QuestNameBase("Zenelith1", <QuestNameModel>{"name": "1 Million Statues", "difficulty": 9}),
-        new QuestNameBase("Toobus Goobus13", <QuestNameModel>{"name": "RESEARCH STUDIES", "difficulty": 1})    
+        new QuestNameBase("Toobus Goobus13", <QuestNameModel>{"name": "RESEARCH STUDIES", "difficulty": 1}),
+        new QuestNameBase("Wavey Wayne2", <QuestNameModel>{"name": "Briny Tasks", "difficulty": 5})    
 ]
 }

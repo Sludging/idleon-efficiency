@@ -35,62 +35,62 @@
     {
       "label": "big_fish_cost_0",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 0)",
-      "description": "Big Fish upgrade cost for bonus 0"
+      "description": "Next purchase cost for the W7 mob respawn-rate increase"
     },
     {
       "label": "big_fish_cost_1",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 1)",
-      "description": "Big Fish upgrade cost for bonus 1"
+      "description": "Next purchase cost for increased Spelunking Stamina"
     },
     {
       "label": "big_fish_cost_2",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 2)",
-      "description": "Big Fish upgrade cost for bonus 2"
+      "description": "Next purchase cost for increased Spelunking AFK Gains"
     },
     {
       "label": "big_fish_cost_3",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 3)",
-      "description": "Big Fish upgrade cost for bonus 3"
+      "description": "Next purchase cost for the W7 Kill per Kill bonus"
     },
     {
       "label": "big_fish_cost_4",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 4)",
-      "description": "Big Fish upgrade cost for bonus 4"
+      "description": "Next purchase cost for the Class EXP bonus"
     },
     {
       "label": "big_fish_cost_5",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 5)",
-      "description": "Big Fish upgrade cost for bonus 5"
+      "description": "Next purchase cost for increased Double Gold Food drop chance"
     },
     {
       "label": "big_fish_unlock_req_0",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 0)",
-      "description": "Big Fish unlock level requirement for bonus 0"
+      "description": "Total player-level unlock requirement for the W7 mob respawn-rate increase"
     },
     {
       "label": "big_fish_unlock_req_1",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 1)",
-      "description": "Big Fish unlock level requirement for bonus 1"
+      "description": "Total player-level unlock requirement for increased Spelunking Stamina"
     },
     {
       "label": "big_fish_unlock_req_2",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 2)",
-      "description": "Big Fish unlock level requirement for bonus 2"
+      "description": "Total player-level unlock requirement for increased Spelunking AFK Gains"
     },
     {
       "label": "big_fish_unlock_req_3",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 3)",
-      "description": "Big Fish unlock level requirement for bonus 3"
+      "description": "Total player-level unlock requirement for the W7 Kill per Kill bonus"
     },
     {
       "label": "big_fish_unlock_req_4",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 4)",
-      "description": "Big Fish unlock level requirement for bonus 4"
+      "description": "Total player-level unlock requirement for the Class EXP bonus"
     },
     {
       "label": "big_fish_unlock_req_5",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
-      "description": "Big Fish unlock level requirement for bonus 5"
+      "description": "Total player-level unlock requirement for increased Double Gold Food drop chance"
     }
   ]
 }

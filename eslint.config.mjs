@@ -22,6 +22,35 @@ const eslintConfig = defineConfig([
             ],
         },
     },
+    {
+        files: ['app/**/*.tsx', 'components/**/*.tsx'],
+        rules: {
+            'no-restricted-syntax': [
+                'error',
+                {
+                    selector: 'JSXAttribute[name.type="JSXIdentifier"][name.name="data-testid"]',
+                    message: 'Do not add test-only attributes to production UI.',
+                },
+            ],
+        },
+    },
+    {
+        files: ['app/**/content.tsx'],
+        rules: {
+            'no-restricted-imports': [
+                'error',
+                {
+                    patterns: [
+                        {
+                            group: ['**/stores/appDataStore', '**/stores/appDataStore.tsx'],
+                            importNames: ['DataStatus'],
+                            message: 'Use shared account loading. Do not import DataStatus in content pages.',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
     // Override default ignores of eslint-config-next.
     globalIgnores([
         // Default ignores of eslint-config-next:

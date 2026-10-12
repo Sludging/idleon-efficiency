@@ -5,21 +5,20 @@ import {
     Text,
     Grid,
     Heading,
-    Button,
     ResponsiveContext,
 } from "grommet"
 
-import { useEffect, useState, useContext, useMemo, MouseEventHandler } from 'react';
+import { useEffect, useState, useContext, useMemo } from 'react';
 import ShadowBox from "../../../components/base/ShadowBox";
+import ContentTabs from "../../../components/base/ContentTabs";
+import LeftNavButton from "../../../components/base/LeftNavButton";
 import { Player } from "../../../data/domain/player";
 import { NPC, QuestInformation as SpecialQuestInfo, Quests as QuestInfo } from "../../../data/domain/quests";
-import { Next } from 'grommet-icons';
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import CoinsDisplay from "../../../components/coinsDisplay";
 import { getCoinsArray } from "../../../data/utility";
 import IconImage from "../../../components/base/IconImage";
 import { QuestTypeEnum } from "../../../data/domain/enum/questTypeEnum";
-import { ImageData } from "../../../data/domain/imageData";
 import { CharacterBox } from "../../../components/base/CharacterBox";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
@@ -46,33 +45,6 @@ const titleForStatus = (status: CharacterBoxStatus) => {
         case CharacterBoxStatus.Disabled: return "Not Started";
         default: return 'none';
     }
-}
-
-function SpecialButton({ isActive, text, imageData, clickHandler }: { isActive: boolean, text: string, imageData?: ImageData, clickHandler: MouseEventHandler }) {
-    return (
-        <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
-            <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Box direction="row" gap="small" align="center">
-                    {
-                        imageData &&
-                        <IconImage data={imageData} scale={0.75} />
-                    }
-                    <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
-                </Box>
-                {isActive && <Next size="small" />}
-            </Box>
-        </Button>
-    )
-}
-
-function TabButton({ isActive, text, clickHandler }: { isActive: boolean, text: string, clickHandler: MouseEventHandler }) {
-    return (
-        <Button hoverIndicator plain onClick={clickHandler} gap="medium">
-            <Box border={{ side: isActive ? 'bottom' : 'between', color: 'brand', size: '2px' }} pad="small" direction="row" justify="between" align="center" gap="small" height="40px">
-                <Text color={isActive ? 'brand' : 'accent-2'} size="medium">{text}</Text>
-            </Box>
-        </Button>
-    )
 }
 
 function QuestInformation({ info }: { info: SpecialQuestInfo }) {
@@ -220,15 +192,19 @@ function Quests() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Quests</Heading>
             <Box gap="small">
-                <Box align="center" direction="row" justify="center" gap="small">
-                    <TabButton isActive={activeWorld == "Blunder Hills"} text="World 1" clickHandler={() => { setActiveWorld("Blunder Hills"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Yum-Yum Desert"} text="World 2" clickHandler={() => { setActiveWorld("Yum-Yum Desert"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Frostbite Tundra"} text="World 3" clickHandler={() => { setActiveWorld("Frostbite Tundra"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Hyperion Nebula"} text="World 4" clickHandler={() => { setActiveWorld("Hyperion Nebula"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Smolderin' Plateau"} text="World 5" clickHandler={() => { setActiveWorld("Smolderin' Plateau"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Spirited Valley"} text="World 6" clickHandler={() => { setActiveWorld("Spirited Valley"); onActive(1) }} />
-                    <TabButton isActive={activeWorld == "Events"} text="Events" clickHandler={() => { setActiveWorld("Events"); onActive(1) }} />
-                </Box>
+                <ContentTabs
+                    options={[
+                        { value: "Blunder Hills", label: "World 1" },
+                        { value: "Yum-Yum Desert", label: "World 2" },
+                        { value: "Frostbite Tundra", label: "World 3" },
+                        { value: "Hyperion Nebula", label: "World 4" },
+                        { value: "Smolderin' Plateau", label: "World 5" },
+                        { value: "Spirited Valley", label: "World 6" },
+                        { value: "Events", label: "Events" },
+                    ]}
+                    value={activeWorld}
+                    onChange={(world) => { setActiveWorld(world); onActive(1) }}
+                />
                 <Box pad={{ horizontal: "large", top: "small" }}>
                     <Text size="xsmall">* Exp and Coin rewards currently don&apos;t display properly, it&apos;s a known issue.</Text>
                 </Box>
@@ -238,7 +214,7 @@ function Quests() {
                             {
                                 npcsToShow.map(([name, info], npcIndex) => {
                                     return (
-                                        <SpecialButton imageData={info.getImageData()} key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
+                                        <LeftNavButton iconImageData={info.getImageData()} key={npcIndex} isActive={index == npcIndex + 1} clickHandler={() => onActive(npcIndex + 1)} text={name} />
                                     )
                                 })
                             }

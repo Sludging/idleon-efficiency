@@ -1,0 +1,36 @@
+{
+  "description": "Correctness #425: paired real-save Royal Armory resource-node maximum and available quantities. RoyalG 1.22; observed nodes cover baseline and grade-adjusted maxima across worlds, plus untouched, depleted, and partially harvested availability.",
+  "target": "RoyalResourceNode.getMaximumQuantity(), RoyalResourceNode.getAvailableQuantity()",
+  "extractions": [
+    {
+      "label": "node_maximum_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 0, 0)",
+      "description": "Maximum harvestable quantity for resource node 0, the world 0 grade 0 baseline; an incorrect result misstates the node's capacity"
+    },
+    {
+      "label": "node_maximum_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 2, 0)",
+      "description": "Maximum harvestable quantity for resource node 2, world 0 with grade 11; checks the fractional grade-adjusted capacity"
+    },
+    {
+      "label": "node_maximum_21",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 21, 0)",
+      "description": "Maximum harvestable quantity for resource node 21 in world 1; checks the world-specific capacity factor"
+    },
+    {
+      "label": "node_available_0",
+      "expression": "Number(idleon.getAttr(\"RoyalG\")[4][0]) === -1 ? 0 : idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 0, 0) - Number(idleon.getAttr(\"RoyalG\")[4][0])",
+      "description": "Available harvest quantity for untouched resource node 0; an incorrect result misstates the resources currently ready to collect"
+    },
+    {
+      "label": "node_available_4",
+      "expression": "Number(idleon.getAttr(\"RoyalG\")[4][4]) === -1 ? 0 : idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 4, 0) - Number(idleon.getAttr(\"RoyalG\")[4][4])",
+      "description": "Available harvest quantity for resource node 4 in its depleted saved state; checks that unavailable resources are reported as zero"
+    },
+    {
+      "label": "node_available_22",
+      "expression": "Number(idleon.getAttr(\"RoyalG\")[4][22]) === -1 ? 0 : idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 22, 0) - Number(idleon.getAttr(\"RoyalG\")[4][22])",
+      "description": "Available harvest quantity for partially harvested resource node 22 in world 1; checks remaining quantity after saved harvest removal"
+    }
+  ]
+}

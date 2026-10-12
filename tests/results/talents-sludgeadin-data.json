@@ -1,126 +1,108 @@
 {
-  "timestamp": "2026-08-24T08:02:29.707Z",
   "extractions": {
     "talent_42_enhanced": {
       "expression": "idleon.callFunction(\"TalentEnh\", 42)",
-      "result": 1,
-      "description": "Talent 42 enhanced",
-      "extractedAt": "2026-08-24T08:02:29.713Z"
+      "result": 1
     },
     "talent_497_enhanced": {
       "expression": "idleon.callFunction(\"TalentEnh\", 497)",
-      "result": 1,
-      "description": "Talent 497 enhanced",
-      "extractedAt": "2026-08-24T08:02:29.722Z"
+      "result": 1
     },
     "talent_79_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 79)",
-      "result": 0,
-      "description": "Talent 79 bonus",
-      "extractedAt": "2026-08-24T08:02:29.724Z"
+      "result": 0
     },
     "talent_146_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 146)",
-      "result": 5844.324873033144,
-      "description": "Talent 146 bonus - Apocalypse Chow",
-      "extractedAt": "2026-08-24T08:02:29.726Z"
+      "result": 5844.324873033144
     },
     "talent_536_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 536)",
-      "result": 49.399293286219084,
-      "description": "Talent 536 bonus",
-      "extractedAt": "2026-08-24T08:02:29.729Z"
+      "result": 49.61937716262976
     },
     "talent_35_bonus": {
       "expression": "idleon.callFunction(\"TalentEnh\", 35)",
-      "result": 0,
-      "description": "Talent 35 bonus",
-      "extractedAt": "2026-08-24T08:02:29.737Z"
+      "result": 0
     },
     "all_talent_level_49": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"49\")",
-      "result": 0,
-      "description": "All talent level 49 - Should be 0",
-      "extractedAt": "2026-08-24T08:02:29.739Z"
+      "result": 0
     },
     "all_talent_level_146": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"146\")",
-      "result": 167,
-      "description": "All talent level 146 - Should be >0",
-      "extractedAt": "2026-08-24T08:02:29.741Z"
+      "result": 179
     },
     "talent_59_bonus": {
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "3.129117669546695e+44",
-        "original": 3.129117669546695e+44
-      },
-      "description": "Talent 59 bonus - Blood Marrow",
-      "extractedAt": "2026-08-24T08:02:29.743Z"
+        "value": "1.6425293287437326e+45"
+      }
+    },
+    "talent_112_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
+      "result": 88.37209302325581
+    },
+    "talent_91_y_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 91)",
+      "result": 11
+    },
+    "talent_8_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 8)",
+      "result": 446
+    },
+    "talent_91_x_bonus": {
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 91)",
+      "result": 478.5
     },
     "talent_max_level_149_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
-      "result": 11,
-      "description": "Talent level bonus from talent 149",
-      "extractedAt": "2026-08-24T08:02:29.746Z"
+      "result": 11
     },
     "talent_max_family_bonus_68": {
       "expression": "Math.floor(idleon.getDNSM(\"FamBonusQTYs\").h[68])",
-      "result": 15,
-      "description": "Talent level bonus from family bonus 68 - Elemental Sorcerer",
-      "extractedAt": "2026-08-24T08:02:29.754Z"
+      "result": 15
     },
     "talent_max_level_companion_bonus": {
       "expression": "idleon.callFunction(\"Companions\", 1 )",
-      "result": 25,
-      "description": "Talent level bonus from companion 1 - Rift Slug",
-      "extractedAt": "2026-08-24T08:02:29.756Z"
+      "result": 35
     },
     "talent_max_level_divinity_bonus": {
       "expression": "Math.ceil(idleon.callFunction(\"Divinity\", \"Bonus_Minor\", 0, 2))",
-      "result": 36,
-      "description": "Talent level bonus from divinity - Bear",
-      "extractedAt": "2026-08-24T08:02:29.758Z"
+      "result": 36
     },
     "talent_max_level_equinox_12_bonus": {
       "expression": "idleon.getAttr(\"Dream\")[12]",
-      "result": 33,
-      "description": "Talent level bonus from equinox 12",
-      "extractedAt": "2026-08-24T08:02:29.760Z"
+      "result": 33
     },
     "talent_max_level_ninja_mastery_bonus": {
       "expression": "5 * Math.floor((97 + idleon.getAttr(\"OptionsListAccount\")[232]) / 100)",
-      "result": 5,
-      "description": "Talent level bonus from ninja mastery",
-      "extractedAt": "2026-08-24T08:02:29.761Z"
+      "result": 5
     },
     "talent_max_level_grimoire_39_bonus": {
       "expression": "idleon.callFunction(\"Summoning\",\"GrimoireUpgBonus\", 39, 0)",
-      "result": 30,
-      "description": "Talent level bonus from grimoire 39",
-      "extractedAt": "2026-08-24T08:02:29.770Z"
+      "result": 30
     },
     "talent_max_level_set_kattlekruk_bonus": {
       "expression": "idleon.callFunction(\"GetSetBonus\", \"KATTLEKRUK_SET\", \"Bonus\", 0, 0)",
-      "result": 5,
-      "description": "Talent level bonus from kattlekruk set",
-      "extractedAt": "2026-08-24T08:02:29.771Z"
+      "result": 5
     },
     "talent_max_level_tesseract_57_bonus": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
-      "result": 0,
-      "description": "Talent level bonus from tesseract 57",
-      "extractedAt": "2026-08-24T08:02:29.773Z"
+      "result": 0
+    },
+    "talent_max_level_timmy_talented_bonus": {
+      "expression": "Math.max(0, Math.floor(((idleon.getAttr(\"Lv0\")[0] - 500) / 100) * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 47, 0)))",
+      "result": 8
+    },
+    "all_talent_level_149": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"149\")",
+      "result": 0
+    },
+    "all_talent_level_z_225_player_3": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"225|3\")",
+      "result": 0
     }
   },
-  "errors": {},
-  "metadata": {
-    "serverStatus": {
-      "server": "running",
-      "cdpConnected": true,
-      "injected": true,
-      "gameReady": true
-    }
-  }
+  "errors": {}
 }

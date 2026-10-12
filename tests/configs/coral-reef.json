@@ -5,32 +5,32 @@
     {
       "label": "coral_reef_cost_0",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 0)",
-      "description": "Coral Reef upgrade cost for upgrade 0"
+      "description": "Next cost for Daily Grind Time bubble levels"
     },
     {
       "label": "coral_reef_cost_1",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 1)",
-      "description": "Coral Reef upgrade cost for upgrade 1"
+      "description": "Next cost for Orange Coral upgrade (effect not described in current metadata)"
     },
     {
       "label": "coral_reef_cost_2",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 2)",
-      "description": "Coral Reef upgrade cost for upgrade 2"
+      "description": "Next cost for the Tome Epilogue bonus unlock"
     },
     {
       "label": "coral_reef_cost_3",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 3)",
-      "description": "Coral Reef upgrade cost for upgrade 3"
+      "description": "Next cost for a Ninja Knowledge upgrade"
     },
     {
       "label": "coral_reef_cost_4",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 4)",
-      "description": "Coral Reef upgrade cost for upgrade 4"
+      "description": "Next cost for Gallery bonus and Trophy slot increases"
     },
     {
       "label": "coral_reef_cost_5",
       "expression": "idleon.callFunction(\"Thingies\", \"ReefCost\", 5)",
-      "description": "Coral Reef upgrade cost for upgrade 5"
+      "description": "Next cost for Blue Coral upgrade (effect not described in current metadata)"
     }
   ]
 }

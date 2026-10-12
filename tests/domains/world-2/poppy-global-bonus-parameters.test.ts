@@ -1,6 +1,6 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 
 const saveName = 'latest';
@@ -17,13 +17,10 @@ const parameterSpecs = {
   },
 
   companion_51_bonus: {
-    description: 'Companion 51 bonus (clicker bonus multiplier)',
+    description: 'Owned Companion 51 clicker effect for Orion, Poppy, and Bubba bonuses at its saved active level',
     extractionKey: 'companion_51_bonus',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const companions = gameData.get("companions") as Companion[];
-      const companion51 = companions.find(c => c.id === 51);
-      return companion51?.owned ? companion51.data.bonus : 0;
-    }
+    domainExtractor: (gameData: Map<string, any>) =>
+      getCompanionActiveBonus(gameData.get('companions') as Companion[], 51),
   },
 };
 

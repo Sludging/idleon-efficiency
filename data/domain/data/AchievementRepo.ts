@@ -2945,6 +2945,496 @@ export const initAchievementRepo = () => {
                 "desc": "-",
                 "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
                 "world": "Spirited Valley"
+            }),
+        new AchievementBase(420, <AchievementModel>{
+                "name": "Valley Visitor",
+                "qty": 1,
+                "desc": "Reach World 6, the Spirited Valley! You'll love it here, all the spirits are very friendly!",
+                "rewards": "10% Money for all &characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(421, <AchievementModel>{
+                "name": "Scorin' the Ladies",
+                "qty": 1,
+                "desc": "Have a stack of exactly 250,000 Ladybugs in your Storage Chest.",
+                "rewards": "10% Catching &Efficiency",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(422, <AchievementModel>{
+                "name": "Effervess Enthusiess",
+                "qty": 1,
+                "desc": "Have a stack of exactly 5,000,000 Effervescent Logs in your Storage Chest.",
+                "rewards": "10% Choppin Efficiency",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(423, <AchievementModel>{
+                "name": "That's MY Crown",
+                "qty": 1,
+                "desc": "Have a stack of exactly 100,000,000 Royal Headpiece in your Storage Chest.",
+                "rewards": "*Dharma Mesa BG",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(424, <AchievementModel>{
+                "name": "Leet Lanterns",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Oh yea, that's a good number. Sure, it's no 69420, but it's vintage!",
+                "rewards": "4% Damage for all &characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(425, <AchievementModel>{
+                "name": "Lil' Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 32x on a single crop.",
+                "rewards": "*1.05x Crop Evo &chance",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(426, <AchievementModel>{
+                "name": "Major Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 1,024x on a single crop.",
+                "rewards": "15% Farming EXP",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(427, <AchievementModel>{
+                "name": "Unreal Overgrowth",
+                "qty": 1,
+                "desc": "Get an overgrowth of 8",
+                "rewards": "192x on a single crop.",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(428, <AchievementModel>{
+                "name": "Doctor Repellant",
+                "qty": 1,
+                "desc": "Have 10,000 or more Apple crops in your Depot at once. You can lock the first crop before it grows to guarantee an apple!",
+                "rewards": "*W6 Shop EZ Access",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(429, <AchievementModel>{
+                "name": "Cob Enjoyer",
+                "qty": 1,
+                "desc": "Have 1,000,000 or more Corn crops in your Depot at once. Mmmm, Corn!",
+                "rewards": "15% All Skill EXP",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(430, <AchievementModel>{
+                "name": "Science Undergrad",
+                "qty": 1,
+                "desc": "Find 30 unique crops, as shown by the Crop Scientist!",
+                "rewards": "10% Farm EXP",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(431, <AchievementModel>{
+                "name": "Science Graduate",
+                "qty": 1,
+                "desc": "Find 70 unique crops, as shown by the Crop Scientist!",
+                "rewards": "*Spirit Fields BG",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(432, <AchievementModel>{
+                "name": "Science Post Doc",
+                "qty": 1,
+                "desc": "Find 110 unique crops, as shown by the Crop Scientist!",
+                "rewards": "1% All Stat &for all characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(433, <AchievementModel>{
+                "name": "Crop Flooding",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ That's... That's enough... THAT'S ENOUGH WATER! THAT'S ENOUGH!",
+                "rewards": "5% Magic Beans &from Legumulyte",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(434, <AchievementModel>{
+                "name": "Legumulucky",
+                "qty": 1,
+                "desc": "Make a crop trade with the Legumulyte worth exactly 777 magic beans.",
+                "rewards": "2% Damage for all &characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(435, <AchievementModel>{
+                "name": "Big Time Land Owner",
+                "qty": 1,
+                "desc": "Get 27 plots of land in your farm.",
+                "rewards": "*1.15x Crop OG Chance",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(436, <AchievementModel>{
+                "name": "Ceramic Sneaking",
+                "qty": 1,
+                "desc": "Reach the Sneaking Floor with the Petrified Ceramist guest.",
+                "rewards": "*1.03x Jade Gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(437, <AchievementModel>{
+                "name": "Top Floor Sneaking",
+                "qty": 1,
+                "desc": "Reach what seems like the top Floor of Sneaking with the Eldar Kingulyte guest.",
+                "rewards": "*1.07x Jade Gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(438, <AchievementModel>{
+                "name": "Untying Extraordinaire",
+                "qty": 1,
+                "desc": "Untie 6 other Ninja Twins.",
+                "rewards": "*1.05x Stealth for &all Ninja Twins",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(439, <AchievementModel>{
+                "name": "Lucky Stealy",
+                "qty": 1,
+                "desc": "Successfully find 6 items in a row, in a single AFK claim within Sneaking.",
+                "rewards": "*1.05x Jade Gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(440, <AchievementModel>{
+                "name": "Yellow Belt",
+                "qty": 1,
+                "desc": "Find a 论50 Yellow Belt Sneaking Charm. Yes, exactly 论50.",
+                "rewards": "10% Sneaking EXP gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(441, <AchievementModel>{
+                "name": "Straw Hat Stacking",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ It's a shame you can't wear them all at once...",
+                "rewards": "*1.01x DMG Multiplier &for all characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(442, <AchievementModel>{
+                "name": "Best Bloomie",
+                "qty": 1,
+                "desc": "Get a Bloomy Summoning Familiar.",
+                "rewards": "*1.05x All Essence &Gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(443, <AchievementModel>{
+                "name": "Regalis My Beloved",
+                "qty": 1,
+                "desc": "Get a Regalis Summoning Familiar.",
+                "rewards": "*1.01x larger Winners &Bonuses from Summoning",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(444, <AchievementModel>{
+                "name": "This, is, Summoning!",
+                "qty": 1,
+                "desc": "Survive for 5 minutes in The King's Gambit. Find this feature in Cavern 14 of the Hole in world 5.",
+                "rewards": "*1.05x All Essence &Gain",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(445, <AchievementModel>{
+                "name": "Summoning CM",
+                "qty": 1,
+                "desc": "Get 10 Career Wins within Summoning",
+                "rewards": "3% Damage for all &characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(446, <AchievementModel>{
+                "name": "Summoning IM",
+                "qty": 1,
+                "desc": "Get 25 Career Wins within Summoning",
+                "rewards": "20% Money for all &characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(447, <AchievementModel>{
+                "name": "Summoning GM",
+                "qty": 1,
+                "desc": "Get 58 Career Wins within Summoning",
+                "rewards": "6% Drop Rate &for all characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(448, <AchievementModel>{
+                "name": "Penta Defence",
+                "qty": 1,
+                "desc": "Reach Wave 50 in Breezy Battle without placing more than 5 Towers in total.",
+                "rewards": "*Lullaby Airways BG",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(449, <AchievementModel>{
+                "name": "Spectre Stars",
+                "qty": 1,
+                "desc": "Complete all constellations in the Spirited Valley. You can check your progress within the Telescope.",
+                "rewards": "*1.01x larger Winners &Bonuses from Summoning",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(450, <AchievementModel>{
+                "name": "Beanstacker Trainee",
+                "qty": 1,
+                "desc": "Add 5 different golden foods to The Beanstalk.",
+                "rewards": "2% All Golden Food &Bonuses",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(451, <AchievementModel>{
+                "name": "Big Big Hampter",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ Hampter is worth it!",
+                "rewards": "4% Drop Rate &for all characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(452, <AchievementModel>{
+                "name": "Ghost Buster",
+                "qty": 1,
+                "desc": "SECRET ACHIEVEMENT ------------------------ You took out the baddest spirit of them all!",
+                "rewards": "*Bamboo Forest BG",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(453, <AchievementModel>{
+                "name": "Beanstacker Prodigy",
+                "qty": 1,
+                "desc": "Add 14 different golden foods to The Beanstalk.",
+                "rewards": "3% All Golden Food &Bonuses",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(454, <AchievementModel>{
+                "name": "W6 is Donezo",
+                "qty": 1,
+                "desc": "Get a Lava Skull or higher on every Spirited Valley monster in the Deathnote.",
+                "rewards": "*1.01x DMG Multiplier &for all characters",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(455, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(456, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(457, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(458, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(459, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(460, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(461, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(462, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(463, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(464, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(465, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(466, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(467, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(468, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(469, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(470, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(471, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(472, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(473, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(474, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(475, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(476, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(477, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(478, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(479, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(480, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(481, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(482, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(483, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(484, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(485, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(486, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(487, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(488, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
+            }),
+        new AchievementBase(489, <AchievementModel>{
+                "name": "FILLERZZZ ACH",
+                "qty": 20,
+                "desc": "-",
+                "rewards": "*FILLERZ &*FILLERZ &*FILLERZ",
+                "world": "Shimmerfin Deep"
             })    
 ]
 }

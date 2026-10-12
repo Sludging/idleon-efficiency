@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 
@@ -53,6 +53,7 @@ sprites
 get_id_token.js
 yarn.lock
 .vscode
+!sub-projects/ui-verification/yarn.lock
 .vs
 model_generation
 quest
@@ -77,6 +78,8 @@ base.apk
 ## Temporary 
 codex.tsx
 certificates
+.omp/plans/
+.omp/research/
 
 ## Yarn
 install-state.gz
@@ -89,8 +92,13 @@ docs/GAME_CODE*
 
 ## Trash things to hide
 coverage-report.md
+coverage-report.html
+coverage-report.json
 test-analysis.md
 tsconfig.tsbuildinfo
 
 ## Not ready for prime time
+
+# Private UI verification screenshots, traces, and logs
+/.ui-verification/
 docs/runbooks

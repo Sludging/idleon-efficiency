@@ -77,9 +77,6 @@ expect.extend({
       if (debugInfo.possibleCauses) {
         messageParts.push(`  Possible causes: ${debugInfo.possibleCauses.join(', ')}`);
       }
-      if (debugInfo.timestamp) {
-        messageParts.push(`  Extracted at: ${debugInfo.timestamp}`);
-      }
 
       return {
         message: () => messageParts.join('\n'),

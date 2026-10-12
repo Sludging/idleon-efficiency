@@ -1,0 +1,51 @@
+{
+  "description": "Experience requirements for Outpost upgrade-point progression, passive workers and production, and purification",
+  "target": "RoyalG OutpostEXPformula(rank, rankType)",
+  "extractions": [
+    {
+      "label": "royal_armory_outpost_exp_formula_0_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 0)",
+      "description": "Experience needed for the first base Outpost point rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_0_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 2)",
+      "description": "Experience needed for the first rank that grants passive workers and scales production"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_0_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 4)",
+      "description": "Experience needed for the first purification rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_1_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 0)",
+      "description": "Experience needed for the second base Outpost point rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_1_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 2)",
+      "description": "Experience needed for the second passive-worker and production rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_1_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 4)",
+      "description": "Experience needed for the second purification rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_2_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 0)",
+      "description": "Experience needed for the third base Outpost point rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_2_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 2)",
+      "description": "Experience needed for the third passive-worker and production rank"
+    },
+    {
+      "label": "royal_armory_outpost_exp_formula_2_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 4)",
+      "description": "Experience needed for the third purification rank"
+    }
+  ]
+}

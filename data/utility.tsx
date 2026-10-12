@@ -78,142 +78,53 @@ export const dateToText = (date: Date): string => {
     return Intl.DateTimeFormat(resolvedFormat.locale, options).format(date)
 } 
 
-export const bitsFormatter = (num: number) => {
-    let modifiedValue = num;
-    let bitIndex = 0;
-    for (; bitIndex < 4 ; bitIndex++) {
-        if (modifiedValue > 1e18) {
-            modifiedValue /= 1e18;
-        }
-    }
-    switch(true) {
-        case num < 1e4: return `${Math.floor(modifiedValue)}`;
-        case num < 1e5: return `${Math.floor(modifiedValue / 100) / 10}K`;
-        case num < 1e6: return `${Math.floor(modifiedValue / 1e3)}K`;
-        case num < 1e7: return `${Math.floor(modifiedValue / 1e4) / 100}M`;
-        case num < 1e8: return `${Math.floor(modifiedValue / 1e5) / 10}M`;
-        case num < 1e9: return `${Math.floor(modifiedValue / 1e6)}M`;
-        case num < 1e10: return `${Math.floor(modifiedValue / 1e7) / 100}B`;
-        case num < 1e11: return `${Math.floor(modifiedValue / 1e8) / 10}B`;
-        case num < 1e12: return `${Math.floor(modifiedValue / 1e9)}B`;
-        case num < 1e13: return `${Math.floor(modifiedValue / 1e10) / 100}T`;
-        case num < 1e14: return `${Math.floor(modifiedValue / 1e11) / 10}T`;
-        case num < 1e15: return `${Math.floor(modifiedValue / 1e12)}T`;
-        case num < 1e16: return `${Math.floor(modifiedValue / 1e13) / 100}Q`;
-        case num < 1e17: return `${Math.floor(modifiedValue / 1e14) / 10}Q`;
-        case num < 1e18: return `${Math.floor(modifiedValue / 1e15)}Q`;
-        default: return `${Math.floor((modifiedValue / Math.pow(10, Math.floor(lavaLog(modifiedValue)))) * 100) / 100}e`;
-    }
-}
-
 export const commaNotation = (num: number): string => {
-    let baseNumber = Math.round(num);
-    let suffix = "";
-    
-    // Handle large numbers by converting to M or T
-    if (num > 1e15) {
-        baseNumber = Math.round(num / 1e12);
-        suffix = "T";
-    } else if (num > 1e9) {
-        baseNumber = Math.round(num / 1e6);
-        suffix = "M";
-    }
-    
-    // Convert to string for comma processing
-    const numStr = baseNumber.toString();
-    
-    // Calculate how many groups of 3 digits we have
-    const numGroups = Math.floor((numStr.length - 1) / 3) + 1;
-    
-    // Calculate the length of the first group (can be 1, 2, or 3 digits)
-    const firstGroupLength = numStr.length - 3 * Math.floor((numStr.length - 1) / 3);
-    
+    const numString = `${Math.round(num)}`;
+    const numberGroups = Math.floor((numString.length - 1) / 3) + 1;
+    const firstGroupLength = numString.length - 3 * Math.floor((numString.length - 1) / 3);
     let result = "";
-    
-    // Build the comma-separated string
-    for (let i = 0; i < numGroups; i++) {
-        if (i === 0) {
-            // First group - take the first 1-3 digits
-            result = numStr.substring(0, firstGroupLength);
+
+    for (let group = 0; group < numberGroups; group++) {
+        if (group === 0) {
+            result = numString.substring(0, firstGroupLength);
         } else {
-            // Subsequent groups - take 3 digits each and add comma
-            const startIndex = firstGroupLength + 3 * (i - 1);
-            const endIndex = firstGroupLength + 3 * i;
-            result += "," + numStr.substring(startIndex, endIndex);
+            const startIndex = firstGroupLength + 3 * (group - 1);
+            const endIndex = firstGroupLength + 3 * group;
+            result += "," + numString.substring(startIndex, endIndex);
         }
     }
-    
-    // Add suffix if we have one
-    if (suffix !== "") {
-        result += suffix;
-    }
-    
+
     return result;
 }
 
-export const nFormatter = (num: number, type: string = "Smaller") => {
-    if (type) {
-        switch(type) {
-            case "Whole": {
-                switch (true) {
-                    case num < 1e4: return `${Math.floor(num).toString()}`;
-                    case num < 1e6: return `${Math.floor(num / 1e3)}K`
-                    case num < 1e7: return `${Math.floor(num / 1e5) / 10}M`
-                    case num < 1e9: return `${Math.floor(num / 1e6)}M`
-                    case num < 1e10: return `${Math.floor(num / 1e8) / 10}B`
-                    case num >= 1e10: return `${Math.floor(num / 1e9)}B`
-                    default: return `${num}`;
-                }
-            }
-            case "MultiplierInfo": {
-                switch (true) {
-                    case 0 == (100 * num) % 100: return `${Math.round(num)}.00`
-                    case 0 == (100 * num) % 10: return `${Math.round(10 * num) / 10}0`
-                    default: return `${Math.round(100 * num) / 100}`
-                }
-            }
-            case "Micro": {
-                switch (true) {
-                    case num > 10: return `${Math.round(num) / 1}`
-                    case num > 0.1: return `${Math.round(10 * num) / 10}`
-                    case num > 0.01: return `${Math.round(100 * num) / 100}`
-                    default: return `${Math.round(1e3 * num) / 1e3}`
-                }
-            }
-            case "Bits": {
-                return bitsFormatter(num);
-            }
-            case "CommaNotation": {
-                return commaNotation(num);
-            }       
-        }
+/** Formats a probability fraction from 0 through 1 as a one-in chance. */
+export function formatOneInChance(probability: number): string {
+    if (probability === 0) {
+        return 'No chance';
     }
-    switch (true) {
-        case num < 100 && type == "Small" && num < 1: return `${Math.round(100 * num) / 100}`
-        case num < 100 && type == "Small" && num >= 1: return `${Math.round(10 * num) / 10}`
-        case num < 100 && type == "Smallish" && num < 10: return `${Math.round(10 * num) / 10}`
-        case num < 100 && type == "Smallish" && num >= 10: return `${Math.round(num)}`
-        case num < 100 && type == "Smaller" && num < 10: return `${Math.round(100 * num) / 100}`
-        case num < 100 && type == "Smaller" && num >= 10: return `${Math.round(10 * num) / 10}`
-        case num < 1e3: return `${Math.floor(num)}`
-        case num < 1e4 && type == "Bigish": return `${Math.floor(num)}`
-        case num < 1e4: return `${Math.ceil(num / 10) / 100}K`
-        case num < 1e5: return `${Math.ceil(num / 100) / 10}K`
-        case num < 1e6: return `${Math.ceil(num / 1e3) / 1}K`
-        case num < 1e7: return `${Math.ceil(num / 1e4) / 100}M`
-        case num < 1e8: return `${Math.ceil(num / 1e5) / 10}M`
-        case num < 1e10: return `${Math.ceil(num / 1e6) / 1}M`
-        case num < 1e13: return `${Math.ceil(num / 1e9)}B`
-        case num < 1e16: return `${Math.ceil(num / 1e12)}T`
-        case num < 1e19: return `${Math.ceil(num / 1e15)}Q`
-        case num < 1e22: return `${Math.ceil(num / 1e18)}QQ`
-        case num < 1e24: return `${Math.ceil(num / 1e21)}QQQ`
-        case num >= 1e24: return `${Math.floor((num / Math.pow(10, Math.floor(lavaLog(num)))) * 100) / 100}E${Math.floor(lavaLog(num))}`
-        default: return `${num}`;
+
+    const denominator = 1 / probability;
+    const roundedDenominator = Math.round(denominator);
+    const integerTolerance = Number.EPSILON * Math.max(1, denominator) * 4;
+    if (Math.abs(denominator - roundedDenominator) < integerTolerance) {
+        return `1 out of ${commaNotation(roundedDenominator)}`;
+    }
+    return `approximately 1 out of ${notateNumber(denominator, 'Smaller')}`;
+}
+
+export const nFormatter = (num: number, type: string = "Smaller") => {
+    switch (type) {
+        case "CommaNotation":
+            return commaNotation(num);
+        case "bits":
+            return notateNumber(num, "Bits");
+        case "MultiplierInfo":
+            return notateNumber(num, type).replace("#", "");
+        default:
+            return notateNumber(num, type);
     }
 }
 
-// Stole this code/concept from the wiki, god bless their soul.
 export const getCoinsArray = (coins: number): Map<Coins, number> => {
     // 1. We floor the coins since sometimes it's fractions, and we don't care about that.
     // 2. We convert to BigInt so when we convert to string we have the full number instead of something like '1.2+e22'
@@ -387,7 +298,7 @@ export function randomFloatBetween(e: number, t: number) {
 
 export const letterToNumber = (char: string) => {
     // Lava's unicode map doesn't have tilda (`) so, bit odd but it works.
-    return "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(char)
+    return number2letterArray.indexOf(char);
 }
 
 export const uniqueFilter = (value: any, index: number, self: any) => {
@@ -395,8 +306,16 @@ export const uniqueFilter = (value: any, index: number, self: any) => {
 }
 
 export const getSubDomain = () => {
+    const windowLocation = typeof window !== "undefined" ? window.location.host : "";
+    if (windowLocation === "") {
+        return "";
+    }
+
+    if (process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_UI_FIXTURE_MODE === "1") {
+        return "local";
+    }
+
     const allowedTopDomains = ["idleonefficiency", "localhost:3000"];
-    const windowLocation = typeof window !== "undefined" ? window.location.host : ""
     const locationSplit = windowLocation.split('.');
 
     // If we have a proper domain (i.e. a.b.com), confirm that the TLD is actually 'idleonefficiency' and if it isn't just return as if we don't have a subdomain.
@@ -413,7 +332,7 @@ export const getSubDomain = () => {
 export const isSubDomain = () => {
    const urlDomain = getSubDomain();
 
-    return !["localhost:3000", "www", "preview"].includes(urlDomain);
+    return urlDomain !== "" && !["localhost:3000", "www", "preview"].includes(urlDomain);
 }
 
 // Consolidated regex pattern for formatted numbers
@@ -456,7 +375,7 @@ export const parseFormattedNumber = (formattedNumber: string | number): number =
 export const number2letterArray = ['_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's',
     't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖'];
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '肥', '肢', '肖', '肋', '肉', '職', '耐', '者', '箱', '管', '算', '箔', '策', '答', '筒', '筍'];
 
 export const number2letter = (number: number) => {
     if (number < number2letterArray.length) {
@@ -466,83 +385,95 @@ export const number2letter = (number: number) => {
     throw new Error(`Number ${number} is too large to convert to a letter`);
 }
 
-// Stolen from IdleonToolbox
-export const notateNumber = (e: number, s: string = "Smaller"): string => {
-    if (s === 'bits') {
-      let bits = e;
-      for (let i = 0; i < 4; i++) {
-        if (bits > 1e18) {
-          bits /= 1e18;
+// CoinStrings from the Idleon 1.22 CustomLists source table.
+export const CoinStrings: readonly string[] = "^&*()₣¥£€₹迷誠父夫グ껍껌꺾깰깨呼味告吹含".split("");
+
+// Mirrors scripts.ActorEvents_124._customBlock_NotateNumber in Idleon 1.22.
+export const notateNumber = (value: number, mode: string = "Big"): string => {
+    if (mode === "Bits") {
+        let bits = value;
+        let tier = 0;
+        for (let i = 0; i < 5; i++) {
+            if (bits > 1e18) {
+                bits /= 1e18;
+                tier++;
+            }
         }
-      }
-      return 1e4 > bits
-        ? Math.floor(bits).toString()
-        : 1e5 > bits
-          ? Math.floor(bits / 100) / 10 + 'K'
-          : 1e6 > bits
-            ? Math.floor(bits / 1e3) + 'K'
-            : 1e7 > bits
-              ? Math.floor(bits / 1e4) / 100 + 'M'
-              : 1e8 > bits
-                ? Math.floor(bits / 1e5) / 10 + 'M'
-                : 1e9 > bits
-                  ? Math.floor(bits / 1e6) + 'M'
-                  : 1e10 > bits
-                    ? Math.floor(bits / 1e7) / 100 + 'B'
-                    : 1e11 > bits
-                      ? Math.floor(bits / 1e8) / 10 + 'B'
-                      : 1e12 > bits
-                        ? Math.floor(bits / 1e9) + 'B'
-                        : 1e13 > bits
-                          ? Math.floor(bits / 1e10) / 100 + 'T'
-                          : 1e14 > bits
-                            ? Math.floor(bits / 1e11) / 10 + 'T'
-                            : 1e15 > bits
-                              ? Math.floor(bits / 1e12) + 'T'
-                              : 1e16 > bits
-                                ? Math.floor(bits / 1e13) / 100 + 'Q'
-                                : 1e17 > bits
-                                  ? Math.floor(bits / 1e14) / 10 + 'Q'
-                                  : 1e18 > bits
-                                    ? Math.floor(bits / 1e15) + 'Q'
-                                    : Math.floor((bits /
-                                      Math.pow(10, Math.floor(lavaLog(bits)))) * 100)
-                                    / 100 + 'E' + Math.floor(lavaLog(bits))
+
+        const suffix = CoinStrings[Math.round(5 + tier)];
+        if (bits < 1e4) return `${Math.floor(bits)}${suffix}`;
+        if (bits < 1e5) return `${Math.floor(bits / 100) / 10}K${suffix}`;
+        if (bits < 1e6) return `${Math.floor(bits / 1e3)}K${suffix}`;
+        if (bits < 1e7) return `${Math.floor(bits / 1e4) / 100}M${suffix}`;
+        if (bits < 1e8) return `${Math.floor(bits / 1e5) / 10}M${suffix}`;
+        if (bits < 1e9) return `${Math.floor(bits / 1e6)}M${suffix}`;
+        if (bits < 1e10) return `${Math.floor(bits / 1e7) / 100}B${suffix}`;
+        if (bits < 1e11) return `${Math.floor(bits / 1e8) / 10}B${suffix}`;
+        if (bits < 1e12) return `${Math.floor(bits / 1e9)}B${suffix}`;
+        if (bits < 1e13) return `${Math.floor(bits / 1e10) / 100}T${suffix}`;
+        if (bits < 1e14) return `${Math.floor(bits / 1e11) / 10}T${suffix}`;
+        if (bits < 1e15) return `${Math.floor(bits / 1e12)}T${suffix}`;
+        if (bits < 1e16) return `${Math.floor(bits / 1e13) / 100}Q${suffix}`;
+        if (bits < 1e17) return `${Math.floor(bits / 1e14) / 10}Q${suffix}`;
+        if (bits < 1e18) return `${Math.floor(bits / 1e15)}Q${suffix}`;
+        const exponent = Math.floor(lavaLog(bits));
+        return `${Math.floor((bits / Math.pow(10, exponent)) * 100) / 100}e${exponent}${suffix}`;
     }
-    return 'Whole' === s ? (1e4 > e ? '' + Math.floor(e)
-        : 1e6 > e ? Math.floor(e / 1e3) + 'K'
-          : 1e7 > e ? Math.floor(e / 1e5) / 10 + 'M'
-            : 1e9 > e ? Math.floor(e / 1e6) + 'M'
-              : 1e10 > e ? Math.floor(e / 1e8) / 10 + 'B'
-                : Math.floor(e / 1e9) + 'B')
-      : 'MultiplierInfo' === s ? (0 === (10 * e) % 10 ? Math.round(e) + '.00'
-          : 0 === (100 * e) % 10 ? Math.round(10 * e) / 10 + '0'
-            : Math.round(100 * e) / 100 + '')
-        : 'Micro' === s ? (10 < e ? '' + Math.round(e)
-            : 0.1 < e ? '' + Math.round(10 * e) / 10
-              : 0.01 < e ? '' + Math.round(100 * e) / 100
-                : '' + Math.round(1e3 * e) / 1e3)
-          : 100 > e ? ('Small' === s ? (1 > e ? '' + Math.round(100 * e) / 100
-                : '' + Math.round(10 * e) / 10)
-              : 'Smallish' === s ? (10 > e ? '' + Math.round(10 * e) / 10
-                  : '' + Math.round(e))
-                : 'Smaller' === s ? (10 > e ? '' + Math.round(100 * e) / 100
-                    : '' + Math.round(10 * e) / 10)
-                  : '' + Math.floor(e))
-            : 1e3 > e ? '' + Math.floor(e)
-              : 1e4 > e ? ('Bigish' === s ? '' + Math.floor(e)
-                  : Math.ceil(e / 10) / 100 + 'K')
-                : 1e5 > e ? Math.ceil(e / 100) / 10 + 'K'
-                  : 1e6 > e ? Math.ceil(e / 1e3) + 'K'
-                    : 1e7 > e ? Math.ceil(e / 1e4) / 100 + 'M'
-                      : 1e8 > e ? Math.ceil(e / 1e5) / 10 + 'M'
-                        : 1e10 > e ? Math.ceil(e / 1e6) + 'M'
-                          : 1e13 > e ? Math.ceil(e / 1e9) + 'B'
-                            : 1e16 > e ? Math.ceil(e / 1e12) + 'T'
-                              : 1e19 > e ? Math.ceil(e / 1e15) + 'Q'
-                                : 1e22 > e ? Math.ceil(e / 1e18) + 'QQ'
-                                  : 1e24 > e ? Math.ceil(e / 1e21) + 'QQQ'
-                                    : 'TinyE' === s
-                                      ? '' + Math.floor((e / Math.pow(10, Math.floor(lavaLog(e)))) * 10) / 10 + ('e' + Math.floor(lavaLog(e)))
-                                      : '' + Math.floor((e / Math.pow(10, Math.floor(lavaLog(e)))) * 100) / 100 + ('E' + Math.floor(lavaLog(e)))
+
+    if (mode === "Whole") {
+        if (value < 1e4) return `${Math.floor(value)}`;
+        if (value < 1e6) return `${Math.floor(value / 1e3)}K`;
+        if (value < 1e7) return `${Math.floor(value / 1e5) / 10}M`;
+        if (value < 1e9) return `${Math.floor(value / 1e6)}M`;
+        if (value < 1e10) return `${Math.floor(value / 1e8) / 10}B`;
+        return `${Math.floor(value / 1e9)}B`;
+    }
+
+    if (mode === "MultiplierInfo") {
+        if (value > 1e6) {
+            if (Math.round((value / 1e6) * 100) % 100 === 0) return `${Math.round(value / 1e6)}.00M#`;
+            if (Math.round((value / 1e6) * 100) % 10 === 0) return `${Math.round((value / 1e6) * 10) / 10}0M#`;
+            return `${Math.round((value / 1e6) * 100) / 100}M#`;
+        }
+        if (Math.round(100 * value) % 100 === 0) return `${Math.round(value)}.00#`;
+        if (Math.round(100 * value) % 10 === 0) return `${Math.round(10 * value) / 10}0#`;
+        return `${Math.round(100 * value) / 100}#`;
+    }
+
+    if (mode === "Micro") {
+        if (value > 10) return `${Math.round(value) / 1}`;
+        if (value > 0.1) return `${Math.round(10 * value) / 10}`;
+        if (value > 0.01) return `${Math.round(100 * value) / 100}`;
+        return `${Math.round(1e3 * value) / 1e3}`;
+    }
+
+    if (value < 100) {
+        if (mode === "Small") return value < 1 ? `${Math.round(100 * value) / 100}` : `${Math.round(10 * value) / 10}`;
+        if (mode === "Smallish") return value < 10 ? `${Math.round(10 * value) / 10}` : `${Math.round(value)}`;
+        if (mode === "Smaller") return value < 10 ? `${Math.round(100 * value) / 100}` : `${Math.round(10 * value) / 10}`;
+        return `${Math.floor(value)}`;
+    }
+    if (value < 1e3) return `${Math.floor(value)}`;
+    if (value < 1e4) return mode === "Bigish" ? `${Math.floor(value)}` : `${Math.ceil(value / 10) / 100}K`;
+    if (value < 1e5) return `${Math.ceil(value / 100) / 10}K`;
+    if (value < 1e6) return `${Math.ceil(value / 1e3) / 1}K`;
+    if (value < 1e7) return `${Math.ceil(value / 1e4) / 100}M`;
+    if (value < 1e8) return `${Math.ceil(value / 1e5) / 10}M`;
+    if (value < 1e9) return `${Math.ceil(value / 1e6) / 1}M`;
+    if (value < 1e10) return `${Math.ceil(value / 1e7) / 100}B`;
+    if (value < 1e11) return `${Math.ceil(value / 1e8) / 10}B`;
+    if (value < 1e12) return `${Math.ceil(value / 1e9)}B`;
+    if (value < 1e13) return `${Math.ceil(value / 1e10) / 100}T`;
+    if (value < 1e14) return `${Math.ceil(value / 1e11) / 10}T`;
+    if (value < 1e15) return `${Math.ceil(value / 1e12)}T`;
+    if (value < 1e16) return `${Math.ceil(value / 1e13) / 100}Q`;
+    if (value < 1e17) return `${Math.ceil(value / 1e14) / 10}Q`;
+    if (value < 1e18) return `${Math.ceil(value / 1e15)}Q`;
+    if (value < 1e19) return `${Math.ceil(value / 1e16) / 100}QQ`;
+    if (value < 1e20) return `${Math.ceil(value / 1e17) / 10}QQ`;
+    if (value < 1e21) return `${Math.ceil(value / 1e18)}QQ`;
+
+    const exponent = Math.floor(lavaLog(value));
+    if (mode === "TinyE") return `${Math.floor((value / Math.pow(10, exponent)) * 10) / 10}e${exponent}`;
+    return `${Math.floor((value / Math.pow(10, exponent)) * 100) / 100}E${exponent}`;
 }

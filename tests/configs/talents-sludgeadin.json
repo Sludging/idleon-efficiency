@@ -1,5 +1,6 @@
 {
   "description": "Extract talent data to test max level, bonus levels, and special talents - Currently doesn't account for different players having different bonuses",
+  "requiredActivePlayerIndex": 0,
   "target": "Talent data - Extracted as first character",
   "extractions": [
     {
@@ -48,6 +49,26 @@
       "description": "Talent 59 bonus - Blood Marrow"
     },
     {
+      "label": "talent_112_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 112)",
+      "description": "Talent 112 bonus"
+    },
+    {
+      "label": "talent_91_y_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 91)",
+      "description": "Talent 91 Y bonus - Whirl target count"
+    },
+    {
+      "label": "talent_8_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 8)",
+      "description": "Talent 8 bonus"
+    },
+    {
+      "label": "talent_91_x_bonus",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 91)",
+      "description": "Talent 91 X bonus"
+    },
+    {
       "label": "talent_max_level_149_bonus",
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1 , 149)",
       "description": "Talent level bonus from talent 149"
@@ -91,6 +112,21 @@
       "label": "talent_max_level_tesseract_57_bonus",
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\", 57, 0)",
       "description": "Talent level bonus from tesseract 57"
+    },
+    {
+      "label": "talent_max_level_timmy_talented_bonus",
+      "expression": "Math.max(0, Math.floor(((idleon.getAttr(\"Lv0\")[0] - 500) / 100) * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 47, 0)))",
+      "description": "Talent max level bonus from Timmy Talented SuperBit 47"
+    },
+    {
+      "label": "all_talent_level_149",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLV\", \"149\")",
+      "description": "All talent level 149 - gate-passing banned talent"
+    },
+    {
+      "label": "all_talent_level_z_225_player_3",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\", \"225|3\")",
+      "description": "All talent level 225 for player 3 via AllTalentLVz - Royal Guardian cap"
     }
   ]
 }

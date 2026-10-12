@@ -24,13 +24,13 @@ export const initGamingPaletteRepo = () => {
                 "green": 200,
                 "blue": 0,
                 "name": "Mossy Green",
-                "bonusValue": 1,
-                "usesDecay": 0,
+                "bonusValue": 3,
+                "usesDecay": 1,
                 "levelUpBase": 2000,
                 "levelUpExponent": 1.35,
                 "unlockChanceBase": 650000,
                 "x9": 9,
-                "bonus": "Nothing yet..."
+                "bonus": "+{% all Cell DMG in Jelly Operator"
             }),
         new GamingPaletteBase(2, <GamingPaletteModel>{
                 "red": 145,

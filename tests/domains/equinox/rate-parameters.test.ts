@@ -2,15 +2,15 @@ import { loadExtractionResults, validateExtractionHealth, getExtractedValue } fr
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { Votes } from '../../../data/domain/world-2/votes';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { Hole } from '../../../data/domain/world-5/hole/hole';
-import { number2letter } from '../../../data/utility';
 import { Alchemy } from '../../../data/domain/alchemy';
-import { Equinox } from '../../../data/domain/equinox';
 import { Arcade } from '../../../data/domain/arcade';
 import { Emperor } from '../../../data/domain/emperor';
 import { Tesseract } from '../../../data/domain/tesseract';
 import { Tome } from '../../../data/domain/tome';
+import { ResearchGrid } from '../../../data/domain/world-7/research';
+import { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
@@ -18,22 +18,16 @@ const extractionResultsName = 'equinox-rate-data.json';
 
 
 const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
-  has_bun_q: {
-    description: 'Has bun_q bundle',
-    extractionKey: 'has_bun_q',
+  research_grid_bonus_86: {
+    description: 'Equinox Nightmares Research Grid bonus that boosts bar fill rate',
+    extractionKey: 'research_grid_bonus_86',
     domainExtractor: (gameData) => {
-      const rawData = gameData.get("rawData") as Record<string, any>;
-
-      let bundleInfo: any = undefined;
-      if (rawData["BundlesReceived"] !== undefined) {
-        bundleInfo = JSON.parse(rawData["BundlesReceived"]) as Record<string, number>;
-      }
-      const hasBundle = bundleInfo == undefined ? false : bundleInfo.bun_q == 1;
-      return hasBundle;
+      const researchGrid = gameData.get("research") as ResearchGrid;
+      return researchGrid.getBonusForId(86);
     }
   },
   voting_bonus_32: {
-    description: 'Voting bonus 32',
+    description: 'Voting bonus that boosts Equinox Bar Fill Rate',
     extractionKey: 'voting_bonus_32',
     domainExtractor: (gameData) => {
       const votes = gameData.get("votes") as Votes;
@@ -41,7 +35,7 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   lore_epic_bonus_8: {
-    description: 'Lore Epic bonus 8',
+    description: 'Tome Lore Epic 8 multiplier to Equinox bar rate',
     extractionKey: 'lore_epic_bonus_8',
     domainExtractor: (gameData) => {
       const tome = gameData.get("tome") as Tome;
@@ -49,103 +43,31 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   companion_15_bonus: {
-    description: 'Companion 15 bonus',
+    description: 'Companion 15 bonus: 3.5x faster Equinox Bar Fill Rate',
     extractionKey: 'companion_15_bonus',
     domainExtractor: (gameData) => {
       const companions = gameData.get("companions") as Companion[];
-      return companions.find(c => c.id === 15)?.data.bonus ?? 0;
+      return getCompanionActiveBonus(companions, 15);
     }
   },
   cosmo_bonus_2_5: {
-    description: 'Cosmo bonus 2 - 5',
+    description: 'Equinox Maxim Cosmo upgrade multiplier to bar fill rate',
     extractionKey: 'cosmo_bonus_2_5',
     domainExtractor: (gameData) => {
       const hole = gameData.get("hole") as Hole;
       return hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 26)?.getBonus() ?? 0;
     }
   },
-  event_shop_owned_3: {
-    description: 'Event shop owned 3',
-    extractionKey: 'event_shop_owned_3',
-    domainExtractor: (gameData) => {
-      const optionList = gameData.get("OptLacc") as number[];
-      return optionList[311].toString().includes(number2letter(3)) ? 1 : 0;
-    }
-  },
-  option_320_bonus: {
-    description: 'Option 320 bonus',
-    extractionKey: 'option_320_bonus',
-    domainExtractor: (gameData) => {
-      const optionList = gameData.get("OptLacc") as number[];
-      return optionList[320] / 10;
-    }
-  },
   alch_vials_eq_bar_bonus: {
-    description: 'Alch vials eq bar bonus',
+    description: 'Marble Mocha vial bonus to Equinox bar fill rate',
     extractionKey: 'alch_vials_eq_bar_bonus',
     domainExtractor: (gameData) => {
       const alchemy = gameData.get("alchemy") as Alchemy;
       return alchemy.getVialBonusForKey("EqBar");
     }
   },
-  cloud_bonus_3: {
-    description: 'Cloud bonus 3',
-    extractionKey: 'cloud_bonus_3',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 3)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_9: {
-    description: 'Cloud bonus 9',
-    extractionKey: 'cloud_bonus_9',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 9)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_14: {
-    description: 'Cloud bonus 14',
-    extractionKey: 'cloud_bonus_14',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 14)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_19: {
-    description: 'Cloud bonus 19',
-    extractionKey: 'cloud_bonus_19',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 19)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_22: {
-    description: 'Cloud bonus 22',
-    extractionKey: 'cloud_bonus_22',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 22)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_24: {
-    description: 'Cloud bonus 24',
-    extractionKey: 'cloud_bonus_24',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 24)?.complete ? 1 : 0;
-    }
-  },
-  cloud_bonus_29: {
-    description: 'Cloud bonus 29',
-    extractionKey: 'cloud_bonus_29',
-    domainExtractor: (gameData) => {
-      const equinox = gameData.get("equinox") as Equinox;
-      return equinox.challenges.find(challenge => challenge.index == 29)?.complete ? 1 : 0;
-    }
-  },
   arcade_bonus_41: {
-    description: 'Arcade bonus 41',
+    description: 'Arcade Equinox Fill Rate bonus',
     extractionKey: 'arcade_bonus_41',
     domainExtractor: (gameData) => {
       const arcade = gameData.get("arcade") as Arcade;
@@ -153,7 +75,7 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   emperor_bonus_5: {
-    description: 'Emperor bonus 5',
+    description: 'Emperor bonus to Equinox Bar Fill Rate',
     extractionKey: 'emperor_bonus_5',
     domainExtractor: (gameData) => {
       const emperor = gameData.get("emperor") as Emperor;
@@ -161,16 +83,24 @@ const equinoxRateParameterSpecs: Record<string, ParameterTestSpec> = {
     }
   },
   tesseract_bonus_37: {
-    description: 'Tesseract bonus 37',
+    description: 'Eternal Stream Tesseract multiplier to Equinox Bar Fill Rate',
     extractionKey: 'tesseract_bonus_37',
     domainExtractor: (gameData) => {
       const tesseract = gameData.get("tesseract") as Tesseract;
       return tesseract.getUpgradeBonus(37) ?? 0;
     }
+  },
+  royal_armory_bonus_76: {
+    description: 'Farmer Joe Royal Armory bonus to Equinox bar fill rate',
+    extractionKey: 'royal_armory_bonus_76',
+    domainExtractor: (gameData) => {
+      const royalArmory = gameData.get("royalArmory") as RoyalArmory;
+      return royalArmory.getUpgradeBonus(76);
+    }
   }
 };
 
-describe('Equinox Domain - Rate - Parameters', () => {
+describe('Equinox bar fill-rate input parameters', () => {
   let extractionResults: any;
   let gameData: Map<string, any>;
 

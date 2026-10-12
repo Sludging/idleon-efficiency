@@ -17,7 +17,7 @@ import { Alchemy as AlchemyData, Cauldron, Bubble, CauldronBoostIndex, Vial } fr
 import { Achievement, AchievementConst } from '../../../data/domain/achievements'
 import { useEffect, useState, useContext } from 'react';
 import { nFormatter, round } from '../../../data/utility'
-import TabButton from "../../../components/base/TabButton";
+import ContentTabs from "../../../components/base/ContentTabs";
 import { Item } from "../../../data/domain/items";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import { Ascending } from "grommet-icons";
@@ -386,11 +386,17 @@ function Alchemy() {
         <Box>
             <Box>
                 <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Alchemy</Heading>
-                <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                    {["Bubbles", "Vials", "Sigils", "P2W"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
+                <Box margin={{ bottom: 'small' }}>
+                    <ContentTabs
+                        options={[
+                            { value: "Bubbles", label: "Bubbles" },
+                            { value: "Vials", label: "Vials" },
+                            { value: "Sigils", label: "Sigils" },
+                            { value: "P2W", label: "P2W" },
+                        ]}
+                        value={activeTab}
+                        onChange={setActiveTab}
+                    />
                 </Box>
                 {activeTab == "Bubbles" && <BubblesDisplay />}
                 {activeTab == "Vials" && <VialsDisplay />}

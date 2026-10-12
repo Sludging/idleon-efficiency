@@ -1,18 +1,18 @@
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import type { Player } from '../../../data/domain/player';
-import type { Stamp } from '../../../data/domain/world-1/stamps';
-import type { Guild } from '../../../data/domain/guild';
 import type { Achievement } from '../../../data/domain/achievements';
+import type { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
+import { EquipmentBonus } from '../../../data/domain/equipment-effects';
+import { getTargetPlayer, TARGET_PLAYER_INDEX } from '../../utils/target-player';
+import type { Guild } from '../../../data/domain/guild';
 import type { Rift } from '../../../data/domain/world-4/rift';
 import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
 import type { Arcade } from '../../../data/domain/world-2/arcade';
 import type { Votes } from '../../../data/domain/world-2/votes';
 import type { UpgradeVault } from '../../../data/domain/upgradeVault';
-import type { Deathnote } from '../../../data/domain/world-3/construction/deathnote';
 import type { Bubba } from '../../../data/domain/world-3/bubba';
 import type { AtomCollider } from '../../../data/domain/world-3/construction/atomCollider';
-import type { Storage } from '../../../data/domain/storage';
 import type { Summoning } from '../../../data/domain/world-6/summoning';
 import type { Gaming } from '../../../data/domain/world-5/gaming';
 import { lavaLog } from '../../../data/utility';
@@ -22,7 +22,7 @@ const extractionResultsName = 'player-build-speed-data.json';
 
 const parameterSpecs = {
   stamps_bonus_build_prod: {
-    description: 'Stamps bonus for Build Prod',
+    description: 'BuildProd stamp contribution to construction build speed',
     extractionKey: 'stamps_bonus_build_prod',
     domainExtractor: (gameData: Map<string, any>) => {
       const stamps = gameData.get("stamps") as Stamp[][];
@@ -30,7 +30,7 @@ const parameterSpecs = {
     }
   },
   guild_bonus_5: {
-    description: 'Guild bonus 5',
+    description: 'Make or Break guild bonus to production in town skills',
     extractionKey: 'guild_bonus_5',
     domainExtractor: (gameData: Map<string, any>) => {
       const guild = gameData.get("guild") as Guild;
@@ -38,7 +38,7 @@ const parameterSpecs = {
     }
   },
   achievement_153: {
-    description: 'Achievement 153 (5 if completed, 0 otherwise)',
+    description: 'Achievement 153 build-speed contribution (5 when completed, otherwise 0)',
     extractionKey: 'achievement_153',
     domainExtractor: (gameData: Map<string, any>) => {
       const achievements = gameData.get("achievements") as Achievement[];
@@ -71,7 +71,7 @@ const parameterSpecs = {
     }
   },
   arcade_bonus_44: {
-    description: 'Arcade bonus 44',
+    description: 'Arcade construction build rate bonus',
     extractionKey: 'arcade_bonus_44',
     domainExtractor: (gameData: Map<string, any>) => {
       const arcade = gameData.get("arcade") as Arcade;
@@ -79,7 +79,7 @@ const parameterSpecs = {
     }
   },
   voting_bonus_18: {
-    description: 'Voting bonus 18',
+    description: 'Construction Build Rate and Construction EXP voting bonus',
     extractionKey: 'voting_bonus_18',
     domainExtractor: (gameData: Map<string, any>) => {
       const votes = gameData.get("votes") as Votes;
@@ -87,7 +87,7 @@ const parameterSpecs = {
     }
   },
   vault_upgrade_48: {
-    description: 'Vault upgrade 48',
+    description: 'Buildie Sheepie upgrade build-speed bonus',
     extractionKey: 'vault_upgrade_48',
     domainExtractor: (gameData: Map<string, any>) => {
       const upgradeVault = gameData.get("upgradeVault") as UpgradeVault;
@@ -95,7 +95,7 @@ const parameterSpecs = {
     }
   },
   sheepies_killed: {
-    description: 'Total sheepies killed',
+    description: 'Log-scaled total Sheepie kills used by the Buildie Sheepie upgrade',
     extractionKey: 'sheepies_killed',
     domainExtractor: (gameData: Map<string, any>) => {
       const deathnote = gameData.get("deathnote") as Deathnote;
@@ -104,7 +104,7 @@ const parameterSpecs = {
     }
   },
   bubba_bonus_1: {
-    description: 'Bubba global bonus 1',
+    description: 'Bubba Rizz global cost reduction contribution',
     extractionKey: 'bubba_bonus_1',
     domainExtractor: (gameData: Map<string, any>) => {
       const bubba = gameData.get("bubba") as Bubba;
@@ -112,23 +112,15 @@ const parameterSpecs = {
     }
   },
   atom_collider_1: {
-    description: 'Atom collider atom 1 bonus',
+    description: 'Helium Talent Power Stacker Atom Collider bonus',
     extractionKey: 'atom_collider_1',
     domainExtractor: (gameData: Map<string, any>) => {
       const atomCollider = gameData.get("collider") as AtomCollider;
       return atomCollider.atoms.find(atom => atom.index == 1)?.getBonus() || 0;
     }
   },
-  redox_salts_in_storage: {
-    description: 'Redox salts in storage',
-    extractionKey: 'redox_salts_in_storage',
-    domainExtractor: (gameData: Map<string, any>) => {
-      const storage = gameData.get("storage") as Storage;
-      return storage.amountInStorage("Refinery1");
-    }
-  },
   winner_bonus_13: {
-    description: 'Summoning winner bonus 13',
+    description: 'Summoning construction-speed winner bonus',
     extractionKey: 'winner_bonus_13',
     domainExtractor: (gameData: Map<string, any>) => {
       const summoning = gameData.get("summoning") as Summoning;
@@ -136,7 +128,7 @@ const parameterSpecs = {
     }
   },
   palette_bonus_25: {
-    description: 'Gaming palette bonus 25',
+    description: 'Peachy Pink palette Construction Build Rate bonus',
     extractionKey: 'palette_bonus_25',
     domainExtractor: (gameData: Map<string, any>) => {
       const gaming = gameData.get("gaming") as Gaming;
@@ -144,13 +136,11 @@ const parameterSpecs = {
     }
   },
   gear_bonus_etc_bonuses_30: {
-    description: 'Active character gear bonus from EtcBonuses 30',
+    description: `Player ${TARGET_PLAYER_INDEX} equipment Build Speed`,
     extractionKey: 'gear_bonus_etc_bonuses_30',
     domainExtractor: (gameData: Map<string, any>) => {
       const players = gameData.get("players") as Player[];
-      const activePlayer = players.reduce<Player | undefined>((closest, player) =>
-        !closest || player.afkFor < closest.afkFor ? player : closest, undefined);
-      return activePlayer?.getMiscBonusFromGear("Build Spd") ?? 0;
+      return getTargetPlayer(players).getEquipmentBonus(EquipmentBonus.BuildSpeed);
     }
   },
 };

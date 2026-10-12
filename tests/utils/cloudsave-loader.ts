@@ -10,6 +10,7 @@ import path from 'path';
 import { Cloudsave } from '../../data/domain/cloudsave';
 import { initAllItems } from '../../data/domain/items';
 import { initAccountDataKeys, updateIdleonData } from '../../data/domain/idleonData';
+import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
 
 // Mock localStorage for Node.js environment
 if (typeof global !== 'undefined' && !global.localStorage) {
@@ -46,8 +47,8 @@ export const loadGameDataFromSave = (saveName: string): Map<string, any> => {
   // Parse player names and other required data
   const charNames = cloudSave.get("playerNames");
   const serverVars = cloudSave.get("servervars");
-  const companions = cloudSave.get("companions");
-  
+  const companions = normalizeCompanionStates(cloudSave.get("companions"));
+
   // Update account data with parsed cloudsave
   const idleonData = updateIdleonData(accountData, cloudSave, charNames, companions, serverVars, true);
   

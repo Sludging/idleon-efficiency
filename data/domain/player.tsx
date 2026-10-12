@@ -3,6 +3,7 @@ import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent } from './talents';
 import { Card, CardInfo } from "./cards";
 import { Item, Food, Tool, StoneProps } from "./items";
+import { EquipmentBonus, getEquipmentEffect } from './equipment-effects';
 import { lavaLog, notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
 import { EnemyData, EnemyInfo } from "./enemies";
@@ -39,7 +40,7 @@ import { Grimoire } from './grimoire';
 import { Tesseract } from './tesseract';
 import { EquipmentSets } from './misc/equipmentSets';
 import { LegendTalents } from './world-7/legendTalents';
-import { Companion } from './companions';
+import { Companion, getCompanionBonus } from './companions';
 import { Votes } from './world-2/votes';
 import { Storage } from './storage';
 import { ConstructionMastery, Rift, SkillMastery } from './world-4/rift';
@@ -49,6 +50,11 @@ import { AtomCollider } from './world-3/construction/atomCollider';
 import { Summoning } from './world-6/summoning';
 import { Construction } from './world-3/construction/construction';
 import { Gaming } from './world-5/gaming';
+import type { Gallery } from './world-7/gallery';
+import type { HatRack } from './world-7/hatRack';
+import type { ResearchGrid } from './world-7/research';
+import { RoyalArmory } from './world-6/royalArmory/royalArmory';
+const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
 
 export class PlayerStats {
     strength: number = 0;
@@ -151,6 +157,9 @@ export class Player {
     };
     killInfo: Map<number, number> = new Map();
     obolStats: ObolStats[] = [];
+    private equipmentBonusGallery!: Gallery;
+    private equipmentBonusHatRack!: HatRack;
+    private equipmentBonusResearch!: ResearchGrid;
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
@@ -168,6 +177,8 @@ export class Player {
     extraLevelsFromKattlekrukSet: number = 0;
     extraLevelsFromGrimoire: number = 0;
     extraLevelsFromTesseract: number = 0;
+    extraLevelsFromSuperBit: number = 0;
+    royalGuardianAllTalentCap: number = 0;
 
     constructor(playerID: number, playerName: string) {
         this.playerID = playerID;
@@ -178,12 +189,11 @@ export class Player {
 
     getBaseClass = (): ClassIndex => {
         switch (this.classId) {
-            case ClassIndex.Beginner:
             case ClassIndex.Journeyman:
             case ClassIndex.Maestro:
             case ClassIndex.Voidwalker:
             case ClassIndex.Infinilyte:
-                return ClassIndex.Beginner;
+                return ClassIndex.Journeyman;
             case ClassIndex.Warrior:
             case ClassIndex.Barbarian:
             case ClassIndex.Squire:
@@ -304,7 +314,8 @@ export class Player {
     getTalent = (skillIndex: number) => {
         return this.talents.find(talent => talent.skillIndex == skillIndex);
     }
-    
+
+
     markTalentAsEnhanced = (skillIndex: number) => {
         const talent = this.talents.find(talent => talent.skillIndex == skillIndex);
         if (talent && talent instanceof EnhancedTalent) {
@@ -328,56 +339,119 @@ export class Player {
         return 0;
     }
 
-    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number , companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
-        const gearBonus = this.gear.equipment.reduce((sum, gear) => sum += gear?.getMiscBonus("Gold Food Effect") ?? 0, 0);
+    getGoldFoodMulti = (familyBonus: number = 0, goldFoodStampBonus: number = 0, achievement37: boolean, achievement380: boolean, achievement383: boolean, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, starSign69: number, bribeBonus36: number, pristineBonus14: number, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legendTalentBonus25: number, cropfallEvent1Card: number) => {
+        const gearBonus = this.getEquipmentBonus(EquipmentBonus.GoldFoodEffect);
 
         const setBonus = (1 + equipmentSetBonus / 100);
         return setBonus * ((Math.max(familyBonus, 1) + gearBonus + (this.talents.find(skill => skill.skillIndex == 99)?.getBonus() ?? 0) + goldFoodStampBonus + (achievement37 ? 5 : 0) + bubbleBonus + sigilBonus + zGoldFoodMealBonus + starSign69 + bribeBonus36 + pristineBonus14 + (achievement380 ? 2 : 0) + (achievement383 ? 3 : 0) + votingBonus26 + apocalypseWoW + companion48 + legendTalentBonus25 + Math.min(cropfallEvent1Card, 50)) / 100);
     }
 
-    getMiscBonusFromGear = (bonusType: string) => {
-        let gearBonus = 0;
-        this.gear.equipment.forEach((gear, index) => {
-            if (gear) {
+    getChipBonus = (stat: string): number => {
+        let bonus = 0;
+        for (const slot of this.labInfo.chips) {
+            if (slot.chip?.data.stat == stat) {
+                bonus += slot.chip.getBonus();
+            }
+        }
+        return bonus;
+    }
 
-                if (index == 3 && this.labInfo.chips.find(chip => chip.chip?.index == 18) != undefined ||  // Pendant
-                    index == 10 && this.labInfo.chips.find(chip => chip.chip?.index == 16) != undefined || // Trophy
-                    index == 9 && this.labInfo.chips.find(chip => chip.chip?.index == 17) != undefined) {  // Upper Keychain
-                    gearBonus += gear.getMiscBonus(bonusType) * 2;
+    bindEquipmentBonusDependencies = (gallery: Gallery, hatRack: HatRack, research: ResearchGrid): void => {
+        this.equipmentBonusGallery = gallery;
+        this.equipmentBonusHatRack = hatRack;
+        this.equipmentBonusResearch = research;
+    }
+
+    getEquipmentBonus = (bonus: EquipmentBonus, inDungeon: boolean = false): number => {
+        const gallery = this.equipmentBonusGallery;
+        const hatRack = this.equipmentBonusHatRack;
+        const research = this.equipmentBonusResearch;
+
+        const effect = getEquipmentEffect(bonus);
+        if (effect === undefined) {
+            return 0;
+        }
+
+        const galleryUnlocked = gallery.isUnlocked(this);
+        const hatRackUnlocked = hatRack.isUnlocked(this);
+        // Research boosts only the final equipment slot.
+        const researchBonus = research.getBonusForId(172);
+        let equipmentBonus = 0;
+        const addItemBonus = (item: Item | undefined, slot: number, row: 0 | 1): void => {
+            if (!item || item.internalName == "Blank" || (inDungeon && !item.internalName.includes("Dung"))) {
+                return;
+            }
+            // Gallery replaces the trophy and nametag slots after this character unlocks its portal.
+            if (row == 0 && galleryUnlocked && (slot == 10 || slot == 14)) {
+                return;
+            }
+            // Hat Rack replaces the premium-hat slot after this character unlocks its portal.
+            if (row == 0 && hatRackUnlocked && slot == 8) {
+                return;
+            }
+
+            // Pendant, upper-keychain and trophy chips double bonuses in their matching slot.
+            const chipDoubles = row == 0 && (
+                (slot == 3 && this.getChipBonus("pend") == 1) ||
+                (slot == 9 && this.getChipBonus("key1") == 1) ||
+                (slot == 10 && this.getChipBonus("troph") == 1)
+            );
+            const multiplier = chipDoubles
+                ? 2
+                : row == 0 && slot == 15 && researchBonus >= 1
+                    ? 1 + researchBonus / 100
+                    : 1;
+
+            // Include both item bonuses and upgrade-stone bonuses.
+            for (const stat of item.itemStats) {
+                if ((stat.stoneName != "UQ1val" && stat.stoneName != "UQ2val" && stat.stoneName != "Nothing") || !stat.extra || stat.extra == "0") {
+                    continue;
                 }
-                else {
-                    gearBonus += gear.getMiscBonus(bonusType)
+                if (normalizeEquipmentEffect(stat.extra) == effect) {
+                    // Add bonuses separately to preserve the game's arithmetic order.
+                    equipmentBonus += stat.getValue() * multiplier;
                 }
             }
-        })
-        gearBonus = this.obolStats.flatMap(stat => stat.stats).filter(stat => stat.extra.includes(bonusType)).reduce((sum, stat) => sum += stat.getValue(), gearBonus);
+        };
 
-        return gearBonus;
+        for (let slot = 0; slot < Math.min(16, this.gear.equipment.length); slot++) {
+            addItemBonus(this.gear.equipment[slot], slot, 0);
+        }
+        for (let slot = 0; slot < Math.min(8, this.gear.tools.length); slot++) {
+            addItemBonus(this.gear.tools[slot], slot, 1);
+        }
+
+        // Game order is equipment/tools, Gallery trophy, Gallery nametag, then Hat Rack.
+        if (galleryUnlocked) {
+            equipmentBonus += gallery.getTrophyBonus(effect, this);
+            equipmentBonus += gallery.getNametagBonus(effect, this);
+        }
+        if (hatRackUnlocked) {
+            equipmentBonus += hatRack.getBonus(effect, this);
+        }
+
+        if (!inDungeon) {
+            // Personal and family obol bonuses are already combined; add them only outside dungeons.
+            for (const group of this.obolStats) {
+                for (const stat of group.stats) {
+                    if (normalizeEquipmentEffect(stat.extra) == effect) {
+                        equipmentBonus += stat.getValue();
+                    }
+                }
+            }
+        }
+
+        return equipmentBonus;
     }
 
-    setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
-        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
-        const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
-        const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
 
-        // Reset any existing data, since next section should include all the required info.
-        this.doubleClaimChance.sources = [];
-
-        this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
-        this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
-        this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
-        this.doubleClaimChance.sources.push({ name: "Alchemy Bubble", value: bubbleBonus });
-        this.doubleClaimChance.sources.push({ name: "Bribe", value: bribeBonus });
-        this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
-        this.doubleClaimChance.max = 75;
-    }
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
-        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[], 
-        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number, 
+        family: Family, goldFoodStampBonus: number, goldFoodAchievement37: boolean, goldFoodAchievement380: boolean, goldFoodAchievement383: boolean, prayers: Prayer[],
+        arcadeBonus: number, sigilBonus: number, bubbleBonus: number, zGoldFoodMealBonus: number, bribeBonus36: number, pristineBonus14: number, beanstalkingStack: number,
         beanstalkingItem: Food | undefined, equipmentSetBonus: number, votingBonus26: number, apocalypseWoW: number, companion48: number, legenTalent25: number, cropFallEventCard: number) => {
-        const gearBonus = this.getMiscBonusFromGear("Money");
+        const gearBonus = this.getEquipmentBonus(EquipmentBonus.Money);
         const goldFoodBoost = this.getGoldFoodMulti(family.classBonus.get(ClassIndex.Shaman)?.getBonus(this) ?? 0, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, sigilBonus, bubbleBonus, zGoldFoodMealBonus, this.starSigns.find(sign => sign.name == "Beanbie Major")?.getBonus("Golden Food") ?? 0, bribeBonus36, pristineBonus14, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
         const goldenFoodBonus = this.gear.food.filter(food => food && food.goldenFood != undefined && food.description.includes("Boosts coins dropped"))
             .reduce((sum, food) => sum += (food as Food).goldFoodBonus(food?.count ?? 0, goldFoodBoost), 0);
@@ -426,9 +500,27 @@ export class Player {
             name: "Talents", value: (this.talents.find(talent => talent.skillIndex == 643)?.getBonus() ?? 0) +
                 americaTipper + (this.talents.find(talent => talent.skillIndex == 22)?.getBonus() ?? 0)
         });
-        this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus});
-        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus});
+        this.monsterCash.sources.push({ name: "Pristine Charm (*)", value: pristineBonus });
+        this.monsterCash.sources.push({ name: "Beanstalking (*)", value: beanstalkingBonus });
     }
+
+    setDoubleClaimChance = (bubbleBonus: number, bribeBonus: number, guildBonus: number) => {
+        const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 47);
+        const lazyCrateBox = this.postOffice.find(box => box.name == "Lazzzy Lootcrate");
+        const boxBonus = lazyCrateBox?.bonuses[0].getBonus(lazyCrateBox.level, 0) ?? 0;
+
+        // Reset any existing data, since next section should include all the required info.
+        this.doubleClaimChance.sources = [];
+
+        this.doubleClaimChance.value = Math.min(75, bubbleBonus + bribeBonus + guildBonus + Math.min(cardBonus, 20) + boxBonus);
+        this.doubleClaimChance.sources.push({ name: "Card", value: cardBonus });
+        this.doubleClaimChance.sources.push({ name: "Post Office", value: boxBonus });
+        this.doubleClaimChance.sources.push({ name: "Alchemy Bubble", value: bubbleBonus });
+        this.doubleClaimChance.sources.push({ name: "Bribe", value: bribeBonus });
+        this.doubleClaimChance.sources.push({ name: "Guild", value: guildBonus });
+        this.doubleClaimChance.max = 75;
+    }
+
 
     setCrystalChance = (crystalSpawnStamp: number, crystalShrine: Shrine) => {
         const shrineBonus = crystalShrine.getBonus(this.currentMapId);
@@ -514,7 +606,7 @@ export class Player {
 
             weights.forEach(block => {
                 const contribution = totalBonusSpeed * (block.weight / totalWeight);
-                
+
                 if (block.name === "Additive Sources (Total)") {
                     additiveShareValue = contribution;
                     this.buildSpeed.sources.push({ name: block.name, value: contribution });
@@ -641,6 +733,7 @@ const keyFunctionMap: Record<string, Function> = {
     "talents": (doc: Cloudsave, player: Player) => parseTalents(
         doc.get(`SL_${player.playerID}`),
         doc.get(`SM_${player.playerID}`),
+        safeJsonParse(doc, "Spelunk", []) as number[][],
         player
     ),
     "postoffice": (doc: Cloudsave, player: Player) => parsePostOffice(doc.get(`POu_${player.playerID}`), player),
@@ -703,7 +796,7 @@ const parsePostOffice = (postOffice: string, player: Player) => {
     });
 }
 
-const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Player) => {
+const parseTalents = (talentLevels: string, talentMaxLevels: string, spelunkData: number[][], player: Player) => {
     const jsonTalents = JSON.parse(talentLevels);
     const jsonMaxTalents = JSON.parse(talentMaxLevels);
 
@@ -714,15 +807,21 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         })
     }
 
+    const superedTalentIndexes = new Set([
+        ...spelunkData[20 + player.playerID],
+        ...spelunkData[32 + player.playerID],
+    ]);
     player.talents.forEach((talent) => {
         talent.level = jsonTalents[talent.skillIndex] ?? 0;
         talent.pointsSpent = jsonTalents[talent.skillIndex] ?? 0;
         talent.maxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
         talent.bookMaxLevel = jsonMaxTalents[talent.skillIndex] ?? 0;
+        talent.isSupered = superedTalentIndexes.has(talent.skillIndex);
     })
     player.extraLevelsFromBear = 0;
     player.extraLevelsFromES = 0;
     player.extraLevelsFromTalent = 0;
+    player.royalGuardianAllTalentCap = 0;
 
     // Update players talents levels due to elite class level increase talents.
     const extraLevels = Math.floor(player.talents.filter(talent => [149, 374, 539].includes(talent.skillIndex)).reduce((sum, value) => sum += value.getBonus(), 0))
@@ -736,6 +835,7 @@ const parseTalents = (talentLevels: string, talentMaxLevels: string, player: Pla
         player.extraLevelsFromTalent = extraLevels;
     }
 }
+
 
 const parseSkills = (skills: Array<number>, skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     skills.forEach((skillLevel, skillIndex) => {
@@ -920,16 +1020,18 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
     const dungeonsData = data.get("dungeons") as Dungeons;
     const breeding = data.get("breeding") as Breeding;
     const arcade = data.get("arcade") as Arcade;
-    
+    const companions = data.get("companions") as Companion[];
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
+
     players.forEach(player => {
         player.talentPoints = [];
         const talentDL: number[] = [];
         const talentDLbonus: number[] = [];
         let talentDN4 = -3
 
-        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping, 
-                                            SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching, 
-                                            SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
+        const skillsToUseForTalentPoints = [SkillsIndex.Mining, SkillsIndex.Smithing, SkillsIndex.Chopping,
+        SkillsIndex.Fishing, SkillsIndex.Alchemy, SkillsIndex.Catching,
+        SkillsIndex.Trapping, SkillsIndex.Construction, SkillsIndex.Worship];
 
 
         // Base talent points
@@ -978,12 +1080,12 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
                 const bubbleMageIndex = alchemy.cauldrons[CauldronIndex.HighIQ].bubbles.findIndex(bubble => bubble.data.bonusKey == "TalWiz");
                 if (bubbleMageIndex > -1) {
                     bubbleBonus = alchemy.getBonusForPlayer(player, 2, bubbleMageIndex);
-                }                    
+                }
                 break;
-        }  
+        }
 
         for (let f = 0; 4 > f; f++) {
-                talentDLbonus[f] += bubbleBonus;       
+            talentDLbonus[f] += bubbleBonus;
         }
 
         // Sum of all sources for talent points
@@ -993,72 +1095,72 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
             alchemy.getVialBonusForKey("Tab1Pts") +
             player.starSigns.reduce((sum, sign) => sum + sign.getBonus("Talent Points"), 0) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent1" ? stamp.getBonus() : 0), 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-            (arcade.bonuses.find(bonus => bonus.index == 16)?.getBonus() ?? 0) + 
-            (achievements[54].completed ? 5 : 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+            (arcade.bonuses.find(bonus => bonus.index == 16)?.getBonus() ?? 0) +
+            (achievements[54].completed ? 5 : 0) +
             (achievements[216].completed ? 6 : 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 10)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.FirstTab, spent: 0, totalOwned: firstTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FirstTab, spent: 0, totalOwned: firstTabPoints });
 
         // Second tab
         let secondTabPoints = 0;
-        secondTabPoints = Math.floor((3 * (player.level - 9)) + talentDL[1] + talentDLbonus[1] + 
-            alchemy.getVialBonusForKey("Tab2Pts") + 
+        secondTabPoints = Math.floor((3 * (player.level - 9)) + talentDL[1] + talentDLbonus[1] +
+            alchemy.getVialBonusForKey("Tab2Pts") +
             player.getTalentBonus(119) +
             player.getTalentBonus(299) +
             player.getTalentBonus(494) +
             player.getTalentBonus(44) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent2" ? stamp.getBonus() : 0), 0) +
-            (achievements[76].completed ? 2 : 0) + 
+            (achievements[76].completed ? 2 : 0) +
             (achievements[78].completed ? 3 : 0) +
             (achievements[230].completed ? 8 : 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 11)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.SecondTab, spent: 0, totalOwned: secondTabPoints});
+        player.talentPoints.push({ tab: TalentTab.SecondTab, spent: 0, totalOwned: secondTabPoints });
 
         // Third tab
         let thirdTabPoints = 0;
-        thirdTabPoints = Math.floor((3 * (player.level - 29)) + talentDL[1] + talentDLbonus[2] + 
-            alchemy.getVialBonusForKey("Tab3Pts") + 
+        thirdTabPoints = Math.floor((3 * (player.level - 29)) + talentDL[1] + talentDLbonus[2] +
+            alchemy.getVialBonusForKey("Tab3Pts") +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent3" ? stamp.getBonus() : 0), 0) +
-            (achievements[166].completed ? 5 : 0) + 
+            (achievements[166].completed ? 5 : 0) +
             (achievements[170].completed ? 10 : 0) +
             (achievements[219].completed ? 8 : 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (breeding.shinyBonuses.find(bonus => bonus.data.index == 12)?.getBonus() ?? 0));
-        player.talentPoints.push({tab: TalentTab.ThirdTab, spent: 0, totalOwned: thirdTabPoints});
+        player.talentPoints.push({ tab: TalentTab.ThirdTab, spent: 0, totalOwned: thirdTabPoints });
 
         // Fourth tab
         let fourthTabPoints = 0;
         if (player.getEliteClass() == ClassIndex.Maestro) {
-            fourthTabPoints = Math.floor(Math.max(0, 1 + 
-                player.getTalentBonus(34) + 
-                player.getTalentBonus(45) * optionListAccount[158])); 
+            fourthTabPoints = Math.floor(Math.max(0, 1 +
+                player.getTalentBonus(34) +
+                player.getTalentBonus(45) * optionListAccount[158]));
         } else {
-            fourthTabPoints = Math.floor(Math.max(0, 
-                3 * Math.min(player.level - 89, 100) + 
+            fourthTabPoints = Math.floor(Math.max(0,
+                3 * Math.min(player.level - 89, 100) +
                 Math.max(0, 2 * (player.level - 189)) + talentDL[2] + talentDLbonus[3] +
                 stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent4" ? stamp.getBonus() : 0), 0) +
-                (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) + 
+                (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+                Math.floor((player.skills.get(SkillsIndex.Divinity)?.level ?? 0) / 2) +
                 alchemy.getVialBonusForKey("Tab4Pts") +
                 (taskBoard.merits.find(merit => merit.index == 32)?.getBonus() ?? 0) +
-                (achievements[292].completed ? 10 : 0) + 
+                (achievements[292].completed ? 10 : 0) +
                 (achievements[295].completed ? 10 : 0) +
                 (achievements[239].completed ? 10 : 0) +
                 (achievements[240].completed ? 15 : 0) +
                 (achievements[241].completed ? 12 : 0) +
                 (breeding.shinyBonuses.find(bonus => bonus.data.index == 13)?.getBonus() ?? 0)));
         }
-        player.talentPoints.push({tab: TalentTab.FourthTab, spent: 0, totalOwned: fourthTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FourthTab, spent: 0, totalOwned: fourthTabPoints });
 
         // Fifth tab
         let fifthTabPoints = 0;
-        fifthTabPoints = Math.floor(Math.max(0, 3 * (player.level - 149) + talentDL[2] + talentDLbonus[4] + 
+        fifthTabPoints = Math.floor(Math.max(0, 3 * (player.level - 149) + talentDL[2] + talentDLbonus[4] +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "Talent5" ? stamp.getBonus() : 0), 0) +
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
             (taskBoard.merits.find(merit => merit.index == 40)?.getBonus() ?? 0)));
-        player.talentPoints.push({tab: TalentTab.FifthTab, spent: 0, totalOwned: fifthTabPoints});
+        player.talentPoints.push({ tab: TalentTab.FifthTab, spent: 0, totalOwned: fifthTabPoints });
 
         // Star talents
         let specialTabPoints = 0;
@@ -1066,21 +1168,23 @@ export const updatePlayerTalentPoints = (data: Map<string, any>) => {
             player.getTalentBonus(8) +
             player.getTalentBonus(622) +
             player.getTalentBonus(17) +
-            (family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) + 
+            (family.classBonus.get(ClassIndex.Wizard)?.getBonus(player) ?? 0) +
             stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + (stamp.data.effect == "TalentS" ? stamp.getBonus() : 0), 0) +
-            Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) + 
-            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) + 
-            Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) + 
-            Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) + 
-            Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100) + 
-            (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0) + 
-            (achievements[212].completed ? 10 : 0) + 
-            (achievements[289].completed ? 20 : 0) + 
+            Math.floor(guild.guildBonuses.find(bonus => bonus.index == 11)?.getBonus() ?? 0) +
+            (dungeonsData.passives.get(PassiveType.Flurbo)?.find(passive => passive.index == 1)?.getBonus() ?? 0) +
+            Math.min(cards.find(card => card.id == "w4b2")?.getBonus() ?? 0, 50) +
+            Math.min(cards.find(card => card.id == "Boss2C")?.getBonus() ?? 0, 100) +
+            Math.min(cards.find(card => card.id == "fallEvent1")?.getBonus() ?? 0, 100) +
+            (sigils.sigils.find(sigil => sigil.index == 9)?.getBonus() ?? 0) +
+            (achievements[212].completed ? 10 : 0) +
+            (achievements[289].completed ? 20 : 0) +
             (achievements[305].completed ? 20 : 0) +
-            (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) + 
-            (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) + 
+            (breeding.shinyBonuses.find(bonus => bonus.data.index == 14)?.getBonus() ?? 0) +
+            (bribes.find(bribe => bribe.bribeIndex == 32)?.getBonus() ?? 0) +
+            upgradeVault.getBonusForId(53) +
+            getCompanionBonus(companions, 20) +
             islandExpeditions.bonusStarTalentPoints);
-        player.talentPoints.push({tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints});
+        player.talentPoints.push({ tab: TalentTab.SpecialTab, spent: 0, totalOwned: specialTabPoints });
 
         // Calculate the points spent for each tab
         ClassTalentMap[ClassIndex[player.class.replace(/ /g, "_") as keyof typeof ClassIndex]].concat(["Special Talent 1", "Special Talent 2", "Special Talent 3", "Special Talent 4"]).forEach((talentPage, pageIndex) => {
@@ -1131,11 +1235,16 @@ export const updatePlayerDeathnote = (data: Map<string, any>) => {
     });
 }
 
+// This is the ES talent-level pass: Family has already calculated and cached
+// its Elemental Sorcerer result, which this function consumes with the caller's context.
 export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const family = data.get("family") as Family;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
 
-    // Max talent level from Elemental Sorcerer
+    // Read the cached Elemental Sorcerer Family result only after Family calculation has completed.
+    // ES can also raise Family Guy, so these cached Family results must remain the source for this pass.
     players.forEach(player => {
         const esBonus = Math.floor(family.classBonus.get(ClassIndex.Elemental_Sorcerer)?.getBonus(player) ?? 0);
         // Only update if different.
@@ -1149,9 +1258,46 @@ export const updatePlayerTalentLevelESBonus = (data: Map<string, any>) => {
         }
     })
 
+    
+    // Max talent level from Royal Guardian All Talent Cap
+    // This must happen after all other talent level adjustments, but before super talents.
+    const royalGuardianAllTalentCap = royalArmory.getUpgradeBonus(55);
+    players.forEach(player => {
+        const allTalentCap = royalGuardianAllTalentCap;
+        player.talents
+            .filter(talent => 225 <= talent.skillIndex && talent.skillIndex <= 239)
+            .forEach(talent => {
+                const currentAllTalentLevels = talent.maxLevel - talent.bookMaxLevel;
+                const cappedAllTalentLevels = Math.min(allTalentCap, currentAllTalentLevels);
+                const adjustment = cappedAllTalentLevels - currentAllTalentLevels;
+                talent.maxLevel += adjustment;
+                if (talent.level > 0) {
+                    talent.level += adjustment;
+                }
+            });
+        player.royalGuardianAllTalentCap = royalGuardianAllTalentCap;
+    });
+
+    // Super-talent levels are added after the capped all-talent aggregate.
+    const superTalentBonusLevels = legendTalents.superTalentBonusLevels;
+    if (superTalentBonusLevels > 0) {
+        players.forEach(player => {
+            player.talents.filter(talent =>
+                ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                talent.skillIndex <= 614 &&
+                !(49 <= talent.skillIndex && talent.skillIndex <= 59) &&
+                talent.isSupered
+            ).forEach(talent => {
+                talent.level += talent.level > 0 ? superTalentBonusLevels : 0;
+                talent.maxLevel += superTalentBonusLevels;
+            });
+        });
+    }
+
     return players;
 }
 
+// This pass must run before Family calculation so ordinary Family Guy snapshots use non-ES talent levels.
 export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const divinity = data.get("divinity") as Divinity;
@@ -1160,7 +1306,8 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
     const grimoire = data.get("grimoire") as Grimoire;
     const tesseract = data.get("tesseract") as Tesseract;
     const optLacc = data.get("OptLacc") as (number | string)[];
-    const equipmentSets = data.get("equipmentSets") as EquipmentSets;   
+    const equipmentSets = data.get("equipmentSets") as EquipmentSets;
+    const gaming = data.get("gaming") as Gaming;
 
     // Update max talent level due to bear.
     const bearGod = divinity.gods[1];
@@ -1248,6 +1395,7 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
         players.forEach(player => {
             player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                 .forEach(talent => {
+                    talent.level += talent.level > 0 ? sneakyingMasteryBonus : 0;
                     talent.maxLevel += sneakyingMasteryBonus
                 });
             player.extraLevelsFromNinjaMastery = sneakyingMasteryBonus;
@@ -1259,11 +1407,31 @@ export const updatePlayerTalentLevelExceptESBonus = (data: Map<string, any>) => 
         players.forEach(player => {
             player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                 .forEach(talent => {
+                    talent.level += talent.level > 0 ? kattlekrukSetBonus : 0;
                     talent.maxLevel += kattlekrukSetBonus;
                 });
             player.extraLevelsFromKattlekrukSet = kattlekrukSetBonus;
         })
     }
+
+    // Timmy/Super Bit is a non-ES increase, so it is included before Family captures Family Guy.
+    players.forEach(player => {
+        const timmyTalentedBonus = gaming.isSuperbitPurchased(47)
+            ? Math.max(0, Math.floor((player.level - 500) / 100))
+            : 0;
+        if (player.extraLevelsFromSuperBit == 0 || player.extraLevelsFromSuperBit != timmyTalentedBonus) {
+            player.talents.filter(talent =>
+                ![149, 374, 539, 505].includes(talent.skillIndex) &&
+                talent.skillIndex <= 614 &&
+                !(49 <= talent.skillIndex && 59 >= talent.skillIndex)
+            ).forEach(talent => {
+                talent.level += talent.level > 0 ? timmyTalentedBonus : 0;
+                talent.maxLevel += timmyTalentedBonus;
+            });
+            player.extraLevelsFromSuperBit = timmyTalentedBonus;
+        }
+    });
+
 
     return players;
 }
@@ -1276,16 +1444,16 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
 
     // Find the highest level of the voidwalker "Enhancement Eclipse" talent.
     const enhancementLevel = Math.max(...players.flatMap(player => (player.talents.find(talent => talent.skillIndex == 49)?.level ?? 0)));
-    switch(true) {
+    switch (true) {
         case enhancementLevel >= 25:
             // Left Hand of Learning - Enhanced bonus is double xp for mman only.
             players.forEach(player => {
                 player.markTalentAsEnhanced(42);
             });
         case enhancementLevel >= 50:
-            // Pirate Flag - Gameplay only, I don't care.
+        // Pirate Flag - Gameplay only, I don't care.
         case enhancementLevel >= 75:
-            // Radiant Chainbolt - Gameplay only, I don't care.
+        // Radiant Chainbolt - Gameplay only, I don't care.
         case enhancementLevel >= 100:
             // Sleepin' On The Job - Enhanced bonus is skilling afk for mman.
             players.forEach(player => {
@@ -1302,7 +1470,7 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
                 }
             });
         case enhancementLevel >= 150:
-            // Whale Wallop - Gameplay only, I don't care.
+        // Whale Wallop - Gameplay only, I don't care.
         case enhancementLevel >= 175:
             // Right hand of action - Enhanced Bonus is double skill eff for mman only. 
             players.forEach(player => {
@@ -1314,7 +1482,7 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
                 player.markTalentAsEnhanced(536);
             });
         case enhancementLevel >= 225:
-            // Knightly Disciple - Gameplay only, I don't care.
+        // Knightly Disciple - Gameplay only, I don't care.
         case enhancementLevel >= 250:
             // Lucky Charm - Skill exp on top of class exp.
             players.forEach(player => {
@@ -1375,6 +1543,10 @@ export const updatePlayers = (data: Map<string, any>) => {
                 player.obolStats.push(newObolStat);
             });
     })
+    const gallery = data.get("gallery") as Gallery;
+    const hatRack = data.get("hatRack") as HatRack;
+    const research = data.get("research") as ResearchGrid;
+    players.forEach(player => player.bindEquipmentBonusDependencies(gallery, hatRack, research));
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -1440,7 +1612,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const companion48 = companions.find(c => c.id === 48)?.owned || false ? 5 : 0;
     const legenTalent25 = legendTalents.getBonusFromIndex(25);
     const cropFallEventCard = cards.filter(card => card.data.cardID == "cropfallEvent1").reduce((sum, card) => sum += card.getBonus(), 0);;
-    
+
     let apocalypseWoW = 0;
     const bestDeathBringer = players.filter(player => player.classId == ClassIndex.Death_Bringer).sort((player1, player2) => player1.getTalentBonus(209) > player2.getTalentBonus(209) ? 1 : -1).pop();
     const deathBringerForKills = players.filter(player => [ClassIndex.Blood_Berserker, ClassIndex.Death_Bringer].indexOf(player.classId) >= 0).sort((player1, player2) => player1.playerID > player2.playerID ? 1 : -1).pop();
@@ -1470,10 +1642,6 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
     const redoxSaltsOwned = storage.amountInStorage("Refinery1");
     const winnerBonus13 = summoning.summonBonuses.find(bonus => bonus.index == 13)?.getBonus() || 0;
     const paletteBonus25 = gaming.getPaletteBonus(25);
-    // EtcBonuses("30") reads the active character even when PlayerBuildSpd targets another player.
-    const activePlayer = players.reduce<Player | undefined>((closest, player) =>
-        !closest || player.afkFor < closest.afkFor ? player : closest, undefined);
-    const activePlayerGearBonus = activePlayer?.getMiscBonusFromGear("Build Spd") ?? 0;
 
     // Apply everything to players
     players.forEach(player => {
@@ -1492,13 +1660,13 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
             petArenaBonus1, petArenaBonus2, labBonus, ((pristineCharm16 && pristineCharm16.unlocked) ? pristineCharm16.data.x1 : 0), vialBonus,
             dungeonBonus, guildBonus8, family, goldFoodStampBonus, goldFoodAchievement37, goldFoodAchievement380, goldFoodAchievement383, prayers, arcadeBonus, sigils.sigils[14].getBonus(), goldFoodBubble,
             zGoldFoodMealBonus, bribeBonus36, ((pristineCharm14 && pristineCharm14.unlocked) ? pristineCharm14.data.x1 : 0), beanstalkingBonus?.getStackSize() ?? 0, beanstalkingBonus?.item, equipmentSetBonus, votingBonus26, apocalypseWoW, companion48, legenTalent25, cropFallEventCard);
-    
+
         // Crystal spawn chance
         player.setCrystalChance(crystalSpawnStamp, crysalShrine);
 
         // Build Speed
         const constructionBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 12);
-        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, activePlayerGearBonus, achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
+        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.getEquipmentBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
             arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
     });
 

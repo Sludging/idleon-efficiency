@@ -1,98 +1,155 @@
 # Domain Calculation Testing Guide
 
-## Overview
+## Goal
 
-Use this guide when adding or changing a test for any domain calculation. Tests compare editable domain code with values extracted from the delivered IdleOn game. The guide covers core-versus-parameter test choice, game-code-first extraction configuration, normalization, test-state limits, missing implementations, and targeted test execution.
+Use tests to determine whether a domain calculation matches the game and, when it does not, which calculation needs correction. Expected values come from the game; tests exercise the domain code used by the application.
 
-`tests/helpers/README.md` owns debug-server prerequisites, extraction configuration and output formats, and save refresh details. `tests/README.md` owns coverage tracking.
+For a supervised correctness case, the assigned stage defines which work may be done. The tests stage writes and runs tests before domain changes. The coordinator then uses those results to decide whether to assign implementation, handle a dependency, or request human input.
 
-## Reasoning and terminology
+## Core tests and parameter tests
 
-A **core test** compares the public result of a domain calculation. A **parameter test** compares one calculation consumed by that result. A calculation that has or should have its own core test owns that core test; it may also be tested as a parameter of a consuming calculation, including a consumer in the same domain, when the comparison can isolate the consumer's formula or branch. Trivial helpers do not need duplicate parameter tests.
+A **core test** compares the public result of the selected domain/aspect calculation with its extracted game value. Choose tests for distinct behaviors or branches, or a representative set of input values. Testing every value can be reasonable when the set is small, such as about ten values.
 
-Choose a parameter test only when its isolated game value can distinguish a producer, branch, or composition error in the core comparison. Do not mirror every transitive input. The delivered game code defines formulas, constants, branches, and branch-specific rules; extraction results provide expected values; domain code is the implementation under test.
+A **parameter test** compares a calculation directly used by the selected aspect with its extracted game value. Include every such calculation from another domain/aspect, including another aspect in the same domain. Keep the comparison even when that calculation has its own core test.
 
-## TDD sequence
+Static data and trivial helpers are not parameter-test targets. Calculations used only inside a dependency belong to that dependency's tests. For example, when the selected aspect uses `Rate`, test `Rate` as its parameter; the inputs used only to calculate `Rate` belong to the rate aspect.
 
-For every domain calculation test, work in this order:
+A **branch** is a condition that changes the selected calculation's behavior, such as using a different formula or returning zero until an unlock. Changing an index is not by itself a new branch: check whether the game applies a different rule or the same rule to another value.
 
-1. **Choose the calculation from delivered game code.** Read the entire delivered function from declaration through return and identify the public result for the core test plus any producer values whose isolated comparison can diagnose that result.
-2. **Create or update the extraction config.** Add game expressions for the values compared by the core and useful parameter tests. Do not derive expected values from domain code.
-3. **Run the full batch extraction.** Run `node tests/helpers/extract-all-game-data.js` so the save and results come from one fresh extraction.
-4. **Write the tests.** Add the core test and only useful parameter tests, using the fresh extraction results.
-5. **Run the targeted tests and observe red before changing domain code.** An unexplained failure is a reason to inspect the game expression, test mapping, and domain path—not to skip the test.
-6. **Implement or change the domain calculation.** Preserve the delivered game's formula, branches, constants, and operation order.
-7. **Run the targeted tests again and require green results at tolerance `0`.** Keep every test active; do not weaken a comparison to hide a failure.
+Core tests check the selected result; parameter tests help distinguish an error in that result from an error in a calculation it uses. Passing direct parameter tests are useful results, not failures to create for test-first work; under the [playbook dependency boundary](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot), they end producer investigation for this case.
 
-## Paths and responsibilities
+The [real examples below](#examples-from-existing-tests) show these distinctions in Tome and Cooking tests.
 
-- `tests/configs/` — extraction JSON built from delivered game functions.
-- `tests/domains/<domain>/` — core tests named `<aspect>.test.ts` and parameter tests named `<aspect>-parameters.test.ts`.
-- `tests/utils/parameter-test-config.ts` — parameter-test specifications.
-- `tests/utils/live-game-data-loader.ts` and `tests/utils/cloudsave-loader.ts` — extraction-result and save loading helpers used by tests.
-- `tests/helpers/README.md` — debug server, extraction commands, configuration schema, output format, and save refresh mechanics.
-- `tests/README.md` — coverage annotations and coverage reporting.
+## Prepare the comparisons
 
-## Mechanics and rules
+1. **Establish game behavior.** Read the relevant delivered game source for the version under review. Identify the selected result, its conditions, and the calculations it uses. Use existing findings and source links where available.
+2. **Locate the domain code and tests.** Match each game calculation to the domain method and test that check it, or record that the implementation is missing. Ask the human if the meaning or owning domain/aspect is unclear.
+3. **Choose extraction values.** Each core or parameter comparison needs an entry in `tests/configs/`. Use the game function and arguments, or game value, used by the selected calculation. Each entry should support a comparison.
+4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
+5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
-### Choosing core and parameter tests
+When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
 
-Put the calculation's public result in a core test. Add a parameter test when comparing the producer separately can distinguish whether a failure comes from that producer or from the consuming formula. This includes a calculation that has or should have its own core test when it is consumed by another aspect in the same domain. Use one calculation file when there are no meaningful inputs to isolate; add a `-parameters.test.ts` file when separate producer comparisons provide that isolation.
-WikiBot static values are game definitions, not calculated parameters; do not add parameter tests or extraction entries solely to compare them—test the calculation consuming static data, and block implementation when data is missing or wrong for the human’s WikiBot request.
+In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the coordinator under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
-### Building extraction configs
+## Keep tests tied to the real save
 
-Read the entire delivered function from declaration through return before writing its config, including its signature, arguments, constants, branches, and composition. Use expressions that call the game functions or read the game values that the function itself uses. Add no extraction entry that is not compared by a core or parameter test. For WikiBot static values, extract only data consumed by a tested calculation, never an entry solely for static-value comparison.
+Use only the current real save and its matching extracted game values. Result-only extraction, whether offline or live, does not establish pairing with the retained save; offline and live snapshots are not presumed equivalent. A live save refresh precedes config extraction rather than taking an atomic snapshot, so establish that the results match the saved state before using them. Tests exercise that state; do not construct synthetic saves, alter inputs to simulate a branch, or calculate expected values from the implementation. This deliberately leaves unobserved permutations uncovered. State which meaningful behavior the paired save actually exercises, and raise an uncovered behavior as a coverage question rather than inventing test data.
 
-If the game returns a raw representation and domain code applies a fixed conversion, normalize the extraction expression to the domain's output only when the delivered function establishes that conversion. Document the conversion in the extraction description; never infer it from a domain value or an observed match.
+Each extraction entry used here should support a core result or a direct parameter comparison. A parameter is a calculation the selected result directly uses, including one in the same domain; keep its comparison even when it also has a core test. Static/supporting metadata is not a calculation target.
 
-### State and comparisons
+Write the completed test against the typed public API directly and assert the calculated result. For a missing implementation during the tests stage, keep an active test whose extractor reports the missing calculation and game function signature. This temporary failure scaffolding exposes the missing API; once implemented, remove `typeof`/`in` guards, `unknown` casts, and `.call` wrappers. A missing selected implementation can support implementation after tests-stage approval; a missing directly used result follows the [dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot).
 
-The full batch extraction refreshes the sole save at `tests/fixtures/saves/latest.json` and writes its results under `tests/results/`. Tests use that save and its matching results; this one-save setup is the available test state. Do not manufacture save state in test setup or add scenarios that do not come from a real game state.
+Choose indices because they represent a game concept or scenario, and explain why they are selected. Descriptions should say what gameplay effect is compared and what website result would be wrong; keep obfuscated game identifiers and extraction mappings separately for traceability. Assert calculation results, not incidental save or object representation. Cover distinct behaviors and representative inputs rather than repeating aliases of the same path; a small exhaustive set is useful when the set itself is small and justified.
 
-Do not test raw save plumbing by asserting that a parsed save field equals a domain model field. Test formulas and calculations instead.
+### Positive patterns
 
-Use `toMatchLiveGame` for parameter comparisons and `toMatchLiveGameWithDetails` for core comparisons. New and changed comparisons use tolerance `0`. If multiplication order creates a last-bit difference, match the delivered game's operation order rather than adding tolerance.
+- **Core result:** compare the application's populated public result with the extracted game value for the same save. For example, the Cooking meal-speed test compares the kitchen's calculated `mealSpeed` with the matching `CookingR / CookingSPEED` extraction. Describe this as the kitchen's meal speed, not as a test of an obfuscated function name.
+- **Direct parameter:** compare a directly used calculation via its public typed method or property with its own extracted game value. The Tome Grimoire-bonus and Cooking meal-bonus examples below show separate parameter comparisons, including a same-domain parameter.
+- **Meaningful selection:** name the selected index by its gameplay role or observed state, and explain why it exercises a relevant behavior. The Tome example below checks locked and unlocked bonuses using one real saved state; it does not claim to cover every unlock transition.
 
-### Missing implementations and failures
+Keep the extraction key, exact game call, and domain mapping in the config/test wiring for traceability. The test description should remain understandable as a statement about the player-facing mechanic and the result the website calculates.
 
-Identify the calculation from delivered game code first, then inspect domain code to locate the implementation under test. When the implementation is absent, keep an active test whose extractor throws an explicit error naming the missing calculation and the game function signature. The test must fail visibly until the domain implementation exists; do not substitute a guessed value.
+Use these existing matchers:
 
-Never use `it.skip()`, `it.todo()`, `xit()`, test removal, or a tolerance change to suppress a failure. A failing comparison is evidence of a formula, branch, input, or missing-implementation problem to investigate.
+- Parameter comparisons: `toMatchLiveGame`, with tolerance `0`.
+- Core comparisons: `toMatchLiveGameWithDetails`, with `{ tolerance: 0, ... }` and useful calculation details.
 
-### Targeted test commands
+When a domain result uses a fixed conversion of the game value, convert the extraction value only when delivered game code establishes that conversion. Explain it in the config description. Match the game's formula and operation order when small numeric differences occur.
 
-Run only the files changed for the calculation while iterating:
+### Documented non-zero tolerances
+
+Tolerance `0` is required for normal completion. A selected comparison may propose a non-zero tolerance only when delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that tolerance:
+
+- named at the aspect test site, not in the global matcher;
+- narrow and tied to the observed discrepancy;
+- explained with the game source, the domain contract, and the reason the comparison remains useful;
+- active, so differences outside the documented bound still fail.
+
+Document the proposed bound, source evidence, domain contract, and zero-tolerance discrepancy in the case working note. For review and completion of a proposed exception, follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions).
+
+Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. An unexplained numeric difference is a failure to investigate, not an exception; match the delivered formula and operation order rather than widening the bound. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
+
+## Verify after implementation
+
+After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0` for normal completion. Report bounded comparisons separately with the evidence required above. New test/config needs return through the tests stage before further domain changes.
+
+## Read the test results
+
+| Result | What it establishes and what follows |
+| --- | --- |
+| Core test fails; all direct parameter tests pass at tolerance `0` | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
+| A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing producer comparison ends its investigation for this case. |
+| Core and all direct parameter tests pass at tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
+| Setup fails before the selected assertions run | No calculation result was checked. Address a clear test/config problem or report the external prerequisite. |
+| A comparison uses or proposes non-zero tolerance | Check the [source-backed bound requirements](#documented-non-zero-tolerances), report bounded results separately, and follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). |
+
+## Test files and commands
+
+Use core files named `<aspect>.test.ts` and parameter files named `<aspect>-parameters.test.ts` under `tests/domains/<domain>/`. A calculation with no parameter calculations needs only its core test file. `tests/utils/parameter-test-config.ts` defines the table-driven parameter test fields; existing loader helpers read game results and the save.
+
+Run the selected files while working:
 
 ```bash
 yarn test tests/domains/<domain>/<aspect>.test.ts
 yarn test tests/domains/<domain>/<aspect>-parameters.test.ts
 ```
 
-Run the second command only when the parameter test file exists. Both commands are expected to pass at tolerance `0` after implementation.
+## Class reference inventory
 
-## Troubleshooting
+The report generated by `scripts/domain-class-references.ts` inventories class
+declarations in editable `data/domain/**` and symbol references from `app/**`,
+`components/**`, and test files. A class counts when its class symbol or a
+declared member symbol is referenced. It does not classify core or parameter
+calculations.
 
-### Extraction errors or missing values
+The top-level `excludedDomainDirectories` set near the top of
+`scripts/domain-class-references.ts` controls exclusions under `data/domain`.
+It currently contains `data`, `enum`, `model`, `base`, and `login`; maintainers
+add or remove top-level directory names there when exclusions change.
 
-Check that each config expression matches the delivered game function's name, arguments, branches, and return representation. Confirm that every test key matches a config label and that the test loads the result produced with the same fresh save. For debug-server readiness, batch extraction, config schema, output shape, and save handling, follow `tests/helpers/README.md` rather than duplicating those procedures here.
+All formats group classes into **both**, **UI-only**, **tests-only**, and
+**neither**, with entries grouped by implementation path:
 
-### Calculation mismatches
+```bash
+yarn coverage:report                         # Markdown: coverage-report.md
+yarn coverage:report --format=markdown       # Markdown: coverage-report.md
+yarn coverage:report --format=html           # HTML: coverage-report.html
+yarn coverage:report --format=json           # JSON: coverage-report.json
+```
 
-Compare the failing value with the corresponding game expression, then inspect constants, branch conditions, composition order, and normalization. Check the isolated parameter comparison before changing the core formula. Do not resolve a mismatch with tolerance, skipped tests, manufactured state, or a guessed game behavior.
+The space-separated form is also accepted, for example
+`yarn coverage:report --format markdown`. HTML is standalone and human-readable,
+with collapsed references and search; JSON is machine-readable. See
+[tests/README.md](../tests/README.md) for the concise report reference.
 
-### Missing domain behavior
+## Examples from existing tests
 
-Read the game function again, including all branches used by the extracted value. Then locate the domain implementation. If it is absent, retain the explicit failing test and implement the missing calculation rather than hiding the failure.
+These examples explain individual comparisons and coverage choices. Use the linked game source and tests to understand the example; choose coverage for the aspect being worked on.
 
-## References and examples
+### Parameter test: Grimoire bonus used by Tome
 
-These real files show the same mechanics for different domains and calculations:
+Tome's epilogue bonus uses Grimoire upgrade 17 in the captured [`LoreEpiBon` game code](game-snippets/tome/Thingies.1.21.js#L273-L309). Its parameter comparison is separate from the final epilogue result:
 
-| Calculation | Config | Core test | Parameter tests |
-| --- | --- | --- | --- |
-| Cooking meal bonus | [cooking-meal-bonus.json](../tests/configs/cooking-meal-bonus.json) | [meal-bonus.test.ts](../tests/domains/cooking/meal-bonus.test.ts) | [meal-bonus-parameters.test.ts](../tests/domains/cooking/meal-bonus-parameters.test.ts) |
-| Cooking meal speed | [cooking-speed.json](../tests/configs/cooking-speed.json) | [meal-speed.test.ts](../tests/domains/cooking/meal-speed.test.ts) | [meal-speed-parameters.test.ts](../tests/domains/cooking/meal-speed-parameters.test.ts) |
-| Sailing speed | [sailing-speed.json](../tests/configs/sailing-speed.json) | [speed.test.ts](../tests/domains/sailing/speed.test.ts) | [speed-parameters.test.ts](../tests/domains/sailing/speed-parameters.test.ts) |
+| Part | Existing example |
+| --- | --- |
+| Game value | `idleon.callFunction("Summoning", "GrimoireUpgBonus", 17, 0)` |
+| Domain value | `grimoire.getUpgradeBonus(17)` |
+| Extraction key | `grimoire_bonus_17` |
 
-For extraction mechanics, see [`tests/helpers/README.md`](../tests/helpers/README.md). For coverage annotations and reporting, see [`tests/README.md`](../tests/README.md).
+The [config](../tests/configs/tome-epilogue-bonus.json#L60-L64) supplies the expected value. The [parameter test](../tests/domains/tome/epilogue-bonus-parameters.test.ts#L12-L19) obtains the domain value, and the table-driven runner compares them with `toMatchLiveGame(liveValue, 0)`. If this comparison fails, the Grimoire calculation needs attention before changing the Tome formula.
+
+**Same-domain example:** Cooking's meal-bonus [parameter test](../tests/domains/cooking/meal-bonus-parameters.test.ts#L69-L76) compares `cooking.meals[1].getBonusMultiCook()` with the [configured](../tests/configs/cooking-meal-bonus.json#L40-L44) `Summoning2 / BonusMultiCook` game call. In the [Cooking domain](../data/domain/world-4/cooking.tsx#L129-L149), `getBonus()` uses this Cooking Mastery multiplier. The multiplier remains a parameter even though both calculations are in Cooking. The captured [1.19 game function](game-snippets/cooking/Summoning2.1.19.js#L68) shows it is a calculated value, not static data.
+
+### Core test: meal speed for kitchen 0
+
+The [Cooking speed config](../tests/configs/cooking-speed.json#L5-L9) calls `CookingR / CookingSPEED` for kitchen 0. The [core test](../tests/domains/cooking/meal-speed.test.ts#L47-L71) compares that final result with `cooking.kitchens[0].mealSpeed`, which the application's calculation step has populated.
+
+This checks the combined result, rather than checking each bonus as another core test. Kitchen 0 is a representative input. Its passing result would establish that comparison for the saved state, not every kitchen or branch. The captured [CookingSPEED source](game-snippets/cooking/CookingR.1.20c.js#L118-L146) helps identify other behavior that might need separate coverage.
+
+### Branch: locked and unlocked Tome epilogue bonuses
+
+In the captured [`LoreEpiBon` function](game-snippets/tome/Thingies.1.21.js#L273-L309), the condition `Spelunk[13][2] > r` selects between calculating the bonus and returning zero. Here `Spelunk[13][2]` is the unlocked count and `r` is the bonus index. That condition is a branch. Selecting a different coefficient or threshold from a list with the index is not, by itself, another branch.
+
+The [core test](../tests/domains/tome/epilogue-bonus.test.ts#L13-L38) checks all 11 indices: a small set that is reasonable to cover in full. The [recorded extraction](../tests/results/tome-epilogue-bonus-data.json) provides a concrete example with 10 unlocked bonuses: index 0 takes the calculation path, while index 10 takes the zero path. Both paths are exercised in that saved state. This does not establish every unlock transition or score threshold; use the source and current extracted values to explain which behavior a test actually checks.
+

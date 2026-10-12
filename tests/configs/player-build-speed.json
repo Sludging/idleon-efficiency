@@ -5,17 +5,17 @@
     {
       "label": "stamps_bonus_build_prod",
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BuildProd\")",
-      "description": "Stamp bonus for Build Prod"
+      "description": "BuildProd stamp contribution to construction build speed"
     },
     {
       "label": "guild_bonus_5",
       "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
-      "description": "Guild bonus 5"
+      "description": "Make or Break guild bonus to production in town skills"
     },
     {
       "label": "achievement_153",
       "expression": "Math.min(5, 5 * idleon.callFunction(\"AchieveStatus\", 153))",
-      "description": "Achievement 153 bonus (5 if completed, 0 otherwise)"
+      "description": "Achievement 153 contribution added directly to build speed (5 when completed, otherwise 0)"
     },
     {
       "label": "construction_mastery_bonus",
@@ -35,52 +35,47 @@
     {
       "label": "arcade_bonus_44",
       "expression": "idleon.callFunction(\"ArcadeBonus\", 44)",
-      "description": "Arcade bonus 44"
+      "description": "Arcade construction build rate bonus"
     },
     {
       "label": "voting_bonus_18",
       "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 18, 0)",
-      "description": "Voting bonus 18"
+      "description": "Construction Build Rate and Construction EXP voting bonus"
     },
     {
       "label": "vault_upgrade_48",
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 48, 0)",
-      "description": "Vault upgrade 48"
+      "description": "Buildie Sheepie upgrade build-speed bonus"
     },
     {
       "label": "sheepies_killed",
       "expression": "idleon.callFunction(\"Summoning\", \"VaultKillzTotal\", 11, 0)",
-      "description": "Total sheepies killed (vault kills)"
+      "description": "Log-scaled total Sheepie kills supplied to the Buildie Sheepie build-speed multiplier"
     },
     {
       "label": "bubba_bonus_1",
       "expression": "idleon.callFunction(\"Bubbastuff\", \"BubbaRoG_Bonuses\", 1, 0)",
-      "description": "Bubba global bonus 1"
+      "description": "Bubba Rizz global cost reduction contribution"
     },
     {
       "label": "atom_collider_1",
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 1, 0)",
-      "description": "Atom collider atom 1 bonus"
-    },
-    {
-      "label": "redox_salts_in_storage",
-      "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h[\"Refinery1\"]",
-      "description": "Redox salts owned in storage"
+      "description": "Helium Talent Power Stacker Atom Collider bonus"
     },
     {
       "label": "winner_bonus_13",
       "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 13, 0)",
-      "description": "Summoning winner bonus 13"
+      "description": "Summoning construction-speed winner bonus"
     },
     {
       "label": "palette_bonus_25",
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
-      "description": "Gaming palette bonus 25"
+      "description": "Peachy Pink palette Construction Build Rate bonus"
     },
     {
       "label": "gear_bonus_etc_bonuses_30",
       "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
-      "description": "Gear bonus from EtcBonuses 30"
+      "description": "EtcBonuses 30 Build Speed input used by PlayerBuildSpd"
     },
     {
       "label": "build_speed_player_0",

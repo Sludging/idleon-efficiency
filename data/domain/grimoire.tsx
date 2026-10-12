@@ -7,6 +7,7 @@ import { ImageData } from "./imageData";
 import { Item } from "./items";
 import { GrimoireUpgradeModel } from "./model/grimoireUpgradeModel";
 import { Player } from "./player";
+import { EquipmentBonus } from "./equipment-effects";
 import { Sneaking } from "./world-6/sneaking";
 import { Arcade } from "./world-2/arcade";
 import { Lab } from "./world-4/lab";
@@ -892,8 +893,7 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
                 grimoire.bestDeathBringer = deathBringer;
 
                 // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
-                const deathBringerEquipment = deathBringer.gear.equipment;
-                grimoire.etcBonus76 = deathBringerEquipment.reduce((sum, item) => sum += item?.getMiscBonus("Extra Bones") ?? 0, 0);
+                grimoire.etcBonus76 = deathBringer.getEquipmentBonus(EquipmentBonus.ExtraBones);
             }
 
             // Set pristine bonus 18 from sneaking

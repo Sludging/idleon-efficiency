@@ -68,6 +68,9 @@ const navItems: NavItem[] = [
         link: "/world-7", label: "W7", subLinks: [
             { subLink: "/spelunking", label: "Spelunking (Coming Soon)" },
             { subLink: "/legendTalents", label: "Legend Talents" },
+            { subLink: "/coral", label: "Coral Reef" },
+            { subLink: "/sushi", label: "Sushi Station" },
+            { subLink: "/jelly-operator", label: "Jelly Operator" },
         ]
     },
     { link: "/players", label: "Players" },
@@ -76,6 +79,7 @@ const navItems: NavItem[] = [
             { subLink: "/compass", label: "Compass" },
             { subLink: "/grimoire", label: "Grimoire" },
             { subLink: "/tesseract", label: "Tesseract" },
+            { subLink: "/royal-armory", label: "Royal Armory" },
         ]
     },
     {

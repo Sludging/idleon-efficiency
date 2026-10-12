@@ -1,0 +1,76 @@
+{
+  "description": "Extract data for Tome epilogue bonus calculations",
+  "target": "Tome epilogue bonus",
+  "extractions": [
+    {
+      "label": "lore_epic_bonus_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
+      "description": "Tome epilogue Bones multiplier (index 0)"
+    },
+    {
+      "label": "lore_epic_bonus_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
+      "description": "Tome epilogue Villager EXP multiplier (index 1)"
+    },
+    {
+      "label": "lore_epic_bonus_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
+      "description": "Tome epilogue Dust multiplier (index 2)"
+    },
+    {
+      "label": "lore_epic_bonus_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
+      "description": "Tome epilogue Artifact Find multiplier (index 3)"
+    },
+    {
+      "label": "lore_epic_bonus_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
+      "description": "Tome epilogue Amber multiplier (index 4)"
+    },
+    {
+      "label": "lore_epic_bonus_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
+      "description": "Tome epilogue Palette Luck bonus (index 5)"
+    },
+    {
+      "label": "lore_epic_bonus_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
+      "description": "Tome epilogue Tachyon multiplier (index 6)"
+    },
+    {
+      "label": "lore_epic_bonus_7",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
+      "description": "Tome epilogue Research XP bonus (index 7)"
+    },
+    {
+      "label": "lore_epic_bonus_8",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
+      "description": "Tome epilogue Equinox multiplier (index 8)"
+    },
+    {
+      "label": "lore_epic_bonus_9",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
+      "description": "Tome epilogue World 7 Skill 3 bonus (index 9)"
+    },
+    {
+      "label": "lore_epic_bonus_10",
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
+      "description": "Tome epilogue filler bonus (index 10)"
+    },
+    {
+      "label": "grimoire_bonus_17",
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "description": "Grimoire upgrade 17 contribution to Tome epilogue bonuses"
+    },
+    {
+      "label": "troll_set_bonus",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "description": "Troll equipment set contribution to Tome epilogue bonuses"
+    },
+    {
+      "label": "epilogue_bonus_unlocked_count",
+      "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
+      "description": "Spelunk unlock count controlling availability of Tome epilogue effects"
+    }
+  ]
+}

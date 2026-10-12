@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { ChargeDisplay } from '../../../components/world-3/worship/charge';
 import { PrayerDisplay } from '../../../components/world-3/worship/prayers';
 import { TotemDisplay } from '../../../components/world-3/worship/totem';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 
 function Worship() {
     const [activeTab, setActiveTab] = useState<string>("Charge");
@@ -17,12 +17,15 @@ function Worship() {
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Worship</Heading>
             <Box gap="small">
-                <Box align="center" direction="row" justify="center" gap="small">
-                    {["Charge", "Totems", "Prayers"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
-                </Box>
+                <ContentTabs
+                    options={[
+                        { value: "Charge", label: "Charge" },
+                        { value: "Totems", label: "Totems" },
+                        { value: "Prayers", label: "Prayers" },
+                    ]}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 {activeTab == "Charge" && <ChargeDisplay />}
                 {activeTab == "Totems" && <TotemDisplay />}
                 {activeTab == "Prayers" && <PrayerDisplay />}

@@ -7,6 +7,20 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
+const path = require('node:path');
+const { getProfileModuleAliases } = require('./scripts/local-save-config.cjs');
+const profileAliases = getProfileModuleAliases({
+  projectRoot: __dirname,
+  nodeEnv: process.env.NODE_ENV,
+  fixtureMode: process.env.NEXT_PUBLIC_UI_FIXTURE_MODE,
+  getLocalSaveFile: () => process.env.LOCAL_SAVE_FILE,
+});
+const turbopackProfileAliases = Object.fromEntries(
+  Object.entries(profileAliases).map(([alias, target]) => [
+    alias,
+    `./${path.relative(__dirname, target).split(path.sep).join('/')}`,
+  ]),
+);
 const { withSentryConfig } = require('@sentry/nextjs');
 const nextBuildId = require('next-build-id')
 
@@ -20,8 +34,19 @@ if (process.env.VERCEL_ENV == "preview") {
 }
 
 const moduleExports = {
+  agentRules: false,
+  ...(process.env.NODE_ENV === 'development' ? { allowedDevOrigins: ['app'] } : {}),
   // New in 16
-  turbopack: {},
+  turbopack: {
+    resolveAlias: turbopackProfileAliases,
+  },
+  webpack(config) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      ...profileAliases,
+    };
+    return config;
+  },
   output: 'export',
   reactStrictMode: true,
   compiler: {

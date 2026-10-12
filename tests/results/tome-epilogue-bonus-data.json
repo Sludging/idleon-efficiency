@@ -1,0 +1,61 @@
+{
+  "extractions": {
+    "lore_epic_bonus_0": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 0, 0)",
+      "result": 630.7706895687219
+    },
+    "lore_epic_bonus_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
+      "result": 231.87015903498067
+    },
+    "lore_epic_bonus_2": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 2, 0)",
+      "result": 1132.3414213056824
+    },
+    "lore_epic_bonus_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 3, 0)",
+      "result": 153.20937484491682
+    },
+    "lore_epic_bonus_4": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 4, 0)",
+      "result": 570.5175788335048
+    },
+    "lore_epic_bonus_5": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 5, 0)",
+      "result": 291.4855311079834
+    },
+    "lore_epic_bonus_6": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 6, 0)",
+      "result": 910.4839764052625
+    },
+    "lore_epic_bonus_7": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
+      "result": 28.300100855504606
+    },
+    "lore_epic_bonus_8": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 8, 0)",
+      "result": 333.8441246819296
+    },
+    "lore_epic_bonus_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 9, 0)",
+      "result": 140.32034222833695
+    },
+    "lore_epic_bonus_10": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 10, 0)",
+      "result": 0
+    },
+    "grimoire_bonus_17": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "result": 85
+    },
+    "troll_set_bonus": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "result": 25
+    },
+    "epilogue_bonus_unlocked_count": {
+      "expression": "idleon.getAttr(\"Spelunk\")[13][2]",
+      "result": 10
+    }
+  },
+  "errors": {}
+}

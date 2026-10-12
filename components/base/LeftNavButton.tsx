@@ -8,7 +8,7 @@ export default function LeftNavButton({ isActive, text, clickHandler, iconImageD
     return (
         <Button fill="horizontal" plain active={isActive} onClick={clickHandler} gap="medium">
             <Box background={isActive ? 'accent-4' : 'dark-2'} pad={{ left: 'medium', right: 'small', top: 'xsmall', bottom: 'xsmall' }} direction="row" justify="between" align="center" gap="small" height="40px">
-                <Box direction="row" gap="small">
+                <Box direction="row" gap="small" align="center">
                     { iconImageData && <IconImage data={iconImageData} scale={0.6} /> }
                     <Text color='accent-2' size="small" weight={isActive ? 'bold' : 'normal'}>{text}</Text>
                 </Box>

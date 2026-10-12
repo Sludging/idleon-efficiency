@@ -9,7 +9,8 @@ import {
 import { useEffect, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
+import DataRow from '../../../components/base/DataRow';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { Divinity as DivinityDomain } from '../../../data/domain/world-5/divinity';
 import { Player } from '../../../data/domain/player';
@@ -100,53 +101,69 @@ function GodDisplay() {
     }, [theData]);
 
     return (
-        <Box margin={{ top: 'small' }}>
+        <Box margin={{ top: 'small' }} gap="small">
             {
                 divinity && divinity.gods.map((god, index) => {
                     return (
-                        <ShadowBox style={{ opacity: god.unlocked ? 1 : 0.5 }} key={index} background="dark-1" pad="medium" margin={{ bottom: 'small', right: 'small' }} justify="between" gap="small">
-                            <Grid columns={{ count: 5, size: 'auto' }} fill>
-                                <Box margin={{ bottom: 'small', right: 'small' }} direction="row" gap="xsmall" align="center">
-                                    <IconImage data={god.getImageData()} scale={0.5} />
-                                    <TextAndLabel textSize='xsmall' text={god.data.name} label="Name" />
-                                </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='xsmall' text={god.data.majorBonus} label="Link Bonus" />
-                                </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='xsmall' text={god.getMaxMinorLinkBonusText()} label="Minor Link Bonus" tooltip={
+                        <DataRow
+                            key={index}
+                            columns={{ count: 5, size: 'auto' }}
+                            opacity={god.unlocked ? 1 : 0.5}
+                            fields={[
+                                {
+                                    key: 'identity',
+                                    kind: 'identity',
+                                    name: god.data.name,
+                                    artwork: <IconImage data={god.getImageData()} scale={0.5} />,
+                                },
+                                {
+                                    key: 'major-bonus',
+                                    kind: 'text',
+                                    label: 'Link Bonus',
+                                    value: god.data.majorBonus,
+                                    role: 'description',
+                                },
+                                {
+                                    key: 'minor-bonus',
+                                    kind: 'text',
+                                    label: 'Minor Link Bonus',
+                                    value: god.getMaxMinorLinkBonusText(),
+                                    role: 'description',
+                                    tooltip: (
                                         <Text>This is the max possible bonus, each character gets a reduced amount based on their divinity level.</Text>
-                                    } />
-                                </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='xsmall' text={`${god.blessLevel}/${god.blessMaxLevel}`} label="Blessing Level" />
-                                </Box>
-                                <Box margin={{ bottom: 'small', right: 'small' }}>
-                                    <TextAndLabel textSize='xsmall' text={god.getBlessingBonusText()} label="Blessing Bonus" />
-                                </Box>
-                            </Grid>
-                            {
-                                god.linkedPlayers.length > 0 && (
-                                    <Box margin={{ bottom: 'small', right: 'small' }}>
-                                        <ComponentAndLabel
-                                            label="Linked Characters"
-                                            component={
-                                                <Box direction="row" wrap gap="xsmall" pad="small">
-                                                    {god.linkedPlayers.map((player, index) => {
-                                                        return (
-                                                            <CharacterBox
-                                                                key={index}
-                                                                player={player}
-                                                            />
-                                                        )
-                                                    })}
-                                                </Box>
-                                            }
-                                        />
-                                    </Box>
-                                )
-                            }
-                        </ShadowBox>
+                                    ),
+                                },
+                                {
+                                    key: 'blessing-level',
+                                    kind: 'text',
+                                    label: 'Blessing Level',
+                                    value: `${god.blessLevel}/${god.blessMaxLevel}`,
+                                },
+                                {
+                                    key: 'blessing-bonus',
+                                    kind: 'text',
+                                    label: 'Blessing Bonus',
+                                    value: god.getBlessingBonusText(),
+                                    role: 'description',
+                                },
+                            ]}
+                            details={god.linkedPlayers.length > 0 ? [
+                                {
+                                    key: 'linked-characters',
+                                    label: 'Linked Characters',
+                                    content: (
+                                        <Box direction="row" wrap gap="xsmall" pad="small">
+                                            {god.linkedPlayers.map((player, index) => (
+                                                <CharacterBox
+                                                    key={index}
+                                                    player={player}
+                                                />
+                                            ))}
+                                        </Box>
+                                    ),
+                                },
+                            ] : undefined}
+                        />
                     )
                 })
             }
@@ -160,11 +177,12 @@ function Divinity() {
     return (
         <Box>
             <Heading level="2" size="medium" style={{ fontWeight: 'normal' }}>Divinity</Heading>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                {["Gods", "Alignment"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={["Gods", "Alignment"].map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             {activeTab == "Gods" && <GodDisplay />}
             {activeTab == "Alignment" && <AlignmentDisplay />}

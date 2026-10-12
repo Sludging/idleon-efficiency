@@ -13,7 +13,7 @@ import { EnemyInfo } from "../../../data/domain/enemies";
 import { nFormatter, toTime, uniqueFilter, round } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
-import TabButton from "../../base/TabButton";
+import ContentTabs from "../../base/ContentTabs";
 import TipDisplay, { TipDirection } from "../../base/TipDisplay";
 import { CircleInformation } from 'grommet-icons';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
@@ -36,11 +36,12 @@ export const PetsDisplay = () => {
 
     return (
         <Box margin={{top: "small"}}>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{bottom: "small"}}>
-                {["All", "Shiny", "Breedability"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={["All", "Shiny", "Breedability"].map(value => ({ value, label: value }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             <Box>
             {

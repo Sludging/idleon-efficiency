@@ -18,15 +18,12 @@ import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
 
 const CompanionBox = ({ companion, editable = false, setOwned }: { companion: Companion, editable: boolean, setOwned: (companion: Companion, owned: boolean) => void }) => {
-    const [checked, setChecked] = useState<boolean>(companion.owned);
-
     const handleChecked = useCallback((changeEvent: ChangeEvent<HTMLInputElement>): void => {
         // You can't uncheck an owned companion.
         if (companion.real) {
             return;
         }
 
-        setChecked(changeEvent.target.checked);
         setOwned(companion, changeEvent.target.checked);
     }, [companion, setOwned]);
 
@@ -35,16 +32,18 @@ const CompanionBox = ({ companion, editable = false, setOwned }: { companion: Co
             <Box direction="row" gap="small" align="center">
                 <CheckBox
                     disabled={companion.real ? true : !editable}
-                    checked={checked}
+                    checked={companion.owned}
                     onChange={handleChecked}
                 />
                 <IconImage data={companion.imageData} />
                 <Text>{companion.name}</Text>
             </Box>
             <Text>{companion.getBonus()}</Text>
+            {companion.owned && companion.level === 2 && companion.data.desc2 && <Text>Level 2: {companion.data.desc2.replace(/{/g, "+")}</Text>}
         </ShadowBox>
     )
 }
+
 
 function CompanionDisplay() {
     const [allowEditing, setAllowEditing] = useState<boolean>(false);
@@ -54,8 +53,18 @@ function CompanionDisplay() {
 
     const companions = theData.get("companions") as Companion[];
 
+    const [, setCompanionRevision] = useState(0);
+
     const setOwned = (companion: Companion, owned: boolean) => {
+        if (companion.real) {
+            return;
+        }
+
         companion.owned = owned;
+        if (owned) {
+            companion.level = 2;
+        }
+        setCompanionRevision((revision) => revision + 1);
     }
 
     const editCompanions = () => {
@@ -78,13 +87,26 @@ function CompanionDisplay() {
             <Box width="medium" direction="row" gap="small">
                 {!allowEditing && <Button style={{ color: "white" }} primary color="brand" label="Edit Companions" onClick={() => editCompanions()} />}
                 {allowEditing && <Button style={{ color: "white" }} primary color="brand" label="Save edits" onClick={() => saveEdits()} />}
+                {allowEditing && <Button style={{ color: "white" }} primary color="brand" label="Enable all" onClick={() => {
+                    companions
+                        .filter((companion) => companion.data.desc !== 'Not officially in the game and may never be')
+                        .forEach((companion) => {
+                            if (!companion.real) {
+                                companion.owned = true;
+                                companion.level = 2;
+                            }
+                        });
+                    setCompanionRevision((revision) => revision + 1);
+                }} />}
                 <TipDisplay
                     body={<Box gap="xsmall">
                         <Text size="small">Want to experiment with how your account will look with certain companions?</Text>
                         <Text></Text>
-                        <Text size="small">Click 'Edit Companions' and tick the checkboxes of the companions you want to unlock.</Text>
+                        <Text size="small">Click 'Edit Companions' and tick the checkboxes to unlock a companion at Level 2.</Text>
                         <Text></Text>
-                        <Text size="small">You can then click 'Save edits' and reload the page and the effect will be active.</Text>
+                        <Text size="small">Use 'Enable all' to enable every listed companion that you don't own.</Text>
+                        <Text></Text>
+                        <Text size="small">Click 'Save edits' and reload the page to activate the companions.</Text>
                         <Text size="small">You can edit again to turn them off at any time. (You can't deactivate owned companions.)</Text>
                     </Box>}
                     size="medium"

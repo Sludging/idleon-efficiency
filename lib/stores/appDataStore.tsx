@@ -4,7 +4,9 @@ import { Cloudsave } from '../../data/domain/cloudsave'
 import { getSubDomain, isSubDomain } from '../../data/utility'
 import { getApp } from 'firebase/app'
 import { FirestoreData } from '../../data/firebase/data'
-import { fetcher } from '../../data/fetchers/getProfile'
+import { fetcher } from '@profile-source'
+import { normalizeCompanionStates } from '../../data/domain/companions/companionState';
+import type { CompanionState } from '../../data/domain/companions/companionState';
 import { sendEvent } from '../gtag'
 import { changelogData } from '../../data/changelog'
 
@@ -43,7 +45,7 @@ export type AppDataState = {
 }
 
 export type AppDataActions = {
-    handleLiveData: (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => void,
+    handleLiveData: (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: CompanionState[]) => void,
     initialize: (userUid: string) => void,
     setDataStatus: (dataStatus: DataStatus) => void,
     markChangelogsSeen: () => void,
@@ -84,10 +86,10 @@ export const initAppDataStore = (initData: Map<string, any>): AppDataState => {
 const handleStaticData = async (profile: string, currentData: IdleonData, data: { data: Map<string, any>, charNames: string[] }) => {
     const cloudsave = Cloudsave.fromJSON(data.data)
     // Fetch companion and servervar data from cloudsave if available.
-    let companions: number[] = [];
+    let companions: CompanionState[] = [];
     let serverVars: Record<string, any> = {}
     if (cloudsave.fields.has("companions")) {
-        companions = cloudsave.get("companions") as number[];
+        companions = normalizeCompanionStates(cloudsave.get("companions"));
     }
     if (cloudsave.fields.has("servervars")) {
         serverVars = cloudsave.get("servervars") as Record<string, any>;
@@ -103,7 +105,7 @@ const handleStaticData = async (profile: string, currentData: IdleonData, data: 
     return idleonData;
 };
 
-const handleLiveData = async (userUid: string, currentData: IdleonData, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
+const handleLiveData = async (userUid: string, currentData: IdleonData, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: CompanionState[]) => {
     const idleonData = await updateIdleonData(currentData.getData(), cloudsave, charNames, companions, serverVars, true);
     sendEvent({
         action: "handle_snapshot",
@@ -200,7 +202,7 @@ export const createAppDataStore = (
             //     setDataStatus(DataStatus.MissingData);
             // };
         },
-        handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: number[]) => {
+        handleLiveData: async (userUid: string, cloudsave: Cloudsave, charNames: string[], serverVars: Record<string, any>, companions: CompanionState[]) => {
             set((_) => ({ dataStatus: DataStatus.Loading }));
             const newData = await handleLiveData(userUid, get().data, cloudsave, charNames, serverVars, companions);
             set((_) => ({ dataStatus: DataStatus.LiveData, data: newData, status: AppStatus.Ready, lastUpdated: new Date() }));

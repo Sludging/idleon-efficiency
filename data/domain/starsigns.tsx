@@ -40,6 +40,7 @@ export class StarSign {
         }
 
         const duplicateSign = new StarSign(this.name, bonuses);
+        duplicateSign.hasChip = this.hasChip;
         duplicateSign.seraphCosmosBonus = this.seraphCosmosBonus;
         duplicateSign.meritocratyBonus = this.meritocratyBonus;
 

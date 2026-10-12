@@ -1,0 +1,17 @@
+{
+  "extractions": {
+    "masterclass_upgrade_cost_multiplier": {
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "result": 0.11764705882352942
+    },
+    "daily_shopping_spree_allowance": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 23, 0)",
+      "result": 8
+    },
+    "bargain_bonus": {
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "result": 70
+    }
+  },
+  "errors": {}
+}

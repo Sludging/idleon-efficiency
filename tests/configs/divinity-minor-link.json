@@ -5,17 +5,17 @@
     {
       "label": "alchemy_bubble_y2active",
       "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.AlchBubbles.h.Y2ACTIVE",
-      "description": "Alchemy bubble Y2ACTIVE for activeBubblePassiveBonus"
+      "description": "Big P Alchemy bubble that increases linked-god passive bonuses"
     },
     {
       "label": "clamworks_bonus_3",
       "expression": "idleon.callFunction(\"Thingies\", \"CoralKidUpgBonus\", 3, 0)",
-      "description": "CoralKid upgrade bonus 3"
+      "description": "Clamworks upgrade that boosts Pearl value based on Multikill"
     },
     {
       "label": "divinity_minor_bonus_6",
       "expression": "idleon.callFunction(\"Divinity\", \"Bonus_Minor\", -1, 6)",
-      "description": "Divinity minor bonus for god 6 (Purrmep)"
+      "description": "Purrmep minor-link passive bonus for the linked player"
     }
   ]
 }

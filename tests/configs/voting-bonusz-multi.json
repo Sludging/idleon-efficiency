@@ -1,0 +1,56 @@
+{
+  "description": "Extract the complete Votes multiplier and its direct game-calculation inputs",
+  "target": "Summoning2 VotingBonuszMulti",
+  "extractions": [
+    {
+      "label": "voting_bonusz_multi",
+      "expression": "idleon.callFunction(\"Summoning2\", \"VotingBonuszMulti\", 0, 0)",
+      "description": "Complete account-wide vote multiplier from its distinct percentage factors and additive bonuses"
+    },
+    {
+      "label": "meritocracy_bonus_9",
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 9, 0)",
+      "description": "Meritocracy bonus 9 used as a distinct multiplier factor"
+    },
+    {
+      "label": "hole_cosmo_bonus_2_3",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 3)",
+      "description": "Hole Cosmo quantity bonus at game coordinates 2,3, mapped to website upgrade 24"
+    },
+    {
+      "label": "summoning_win_bonus_22",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 22, 0)",
+      "description": "Summoning Win bonus 22 added to Votes"
+    },
+    {
+      "label": "gaming_palette_bonus_32",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 32, 0)",
+      "description": "Gaming Palette bonus 32 added to Votes"
+    },
+    {
+      "label": "legend_talent_bonus_22",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",
+      "description": "Legend Talent bonus 22 added to Votes"
+    },
+    {
+      "label": "sushi_rog_bonus_50",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 50, 0)",
+      "description": "Sushi unlock bonus at index 50, gated until more than 50 unique Sushi are unlocked"
+    },
+    {
+      "label": "companion_bonus_161",
+      "expression": "idleon.callFunction(\"Companions\", 161)",
+      "description": "Poppy effect used as the separate multiplicative vote contribution"
+    },
+    {
+      "label": "companion_bonus_41",
+      "expression": "idleon.callFunction(\"Companions\", 41)",
+      "description": "Companion 41 effect added to the Votes percentage sum"
+    },
+    {
+      "label": "companion_bonus_19",
+      "expression": "idleon.callFunction(\"Companions\", 19)",
+      "description": "Companion 19 effect added to the Votes percentage sum"
+    }
+  ]
+}

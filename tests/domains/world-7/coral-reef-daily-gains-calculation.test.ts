@@ -18,41 +18,41 @@ const saveName = 'latest';
 const extractionResultsName = 'coral-reef-daily-gains-data.json';
 
 describe('CoralReef Daily Gains - Calculation', () => {
-  let extractionResults: any;
-  let gameData: Map<string, any>;
-  let coralReef: CoralReef;
+ let extractionResults: any;
+ let gameData: Map<string, any>;
+ let coralReef: CoralReef;
 
-  beforeAll(() => {
-    // Load live game extraction results
-    extractionResults = loadExtractionResults(extractionResultsName);
-    validateExtractionHealth(extractionResults);
+ beforeAll(() => {
+  // Load live game extraction results
+  extractionResults = loadExtractionResults(extractionResultsName);
+  validateExtractionHealth(extractionResults);
 
-    // Load matching save data
-    try {
-      gameData = loadGameDataFromSave(saveName);
+  // Load matching save data
+  try {
+   gameData = loadGameDataFromSave(saveName);
 
-      // Run the daily gains calculation
-      updateCoralReefDailyGain(gameData);
+   // Run the daily gains calculation
+   updateCoralReefDailyGain(gameData);
 
-      // Get the updated coral reef domain
-      coralReef = gameData.get('coralReef') as CoralReef;
-      if (!coralReef) {
-        throw new Error('CoralReef domain not found in save data');
-      }
+   // Get the updated coral reef domain
+   coralReef = gameData.get('coralReef') as CoralReef;
+   if (!coralReef) {
+    throw new Error('CoralReef domain not found in save data');
+   }
 
-    } catch (error: any) {
-      throw new Error(`❌ Failed to load save data: ${error.message}`);
-    }
+  } catch (error: any) {
+   throw new Error(`❌ Failed to load save data: ${error.message}`);
+  }
+ });
+
+ describe('Daily Coral Gains Calculation', () => {
+  it('matches the website daily Coral Reef gain to the live game', () => {
+   const liveValue = getExtractedValue(extractionResults, 'reef_daily_gains');
+
+   expect(coralReef.dailyCoralGains).toMatchLiveGameWithDetails(liveValue, {
+    tolerance: 0,
+    context: 'Website daily Coral Reef gain',
+   });
   });
-
-  describe('Daily Coral Gains Calculation', () => {
-    it('validates daily coral gains calculation', () => {
-      const extractedValue = getExtractedValue(extractionResults, 'reef_daily_gains');
-      const calculatedValue = coralReef.dailyCoralGains;
-
-      expect(calculatedValue).toMatchLiveGameWithDetails(extractedValue, {
-        context: 'Coral Reef daily gains',
-      });
-    });
-  });
+ });
 });

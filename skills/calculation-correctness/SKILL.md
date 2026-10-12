@@ -1,19 +1,20 @@
 ---
 name: calculation-correctness
-description: Route calculation-correctness work to the appropriate OMP role and authoritative guidance
+description: Check and correct a selected game calculation using the correctness playbook and role instructions
 ---
 
 # Calculation Correctness
 
-This skill is a role-aware router, not a second correctness workflow.
+Use the instructions for your role to check whether the selected calculation matches the game.
 
+- **Supervisor (`correctness-supervisor`)**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and follow the supervisor role.
 - **Coordinator (`correctness-coordinator`)**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and follow the coordinator role.
-- **Diagnoser (`correctness-diagnoser`) and reviewer (`correctness-reviewer`)**: Follow the matching role and coordinator packet. Do not load the full playbook.
-- **Implementer (`correctness-implementer`)**: Follow the matching role and coordinator packet, and read [the testing implementation guide](../../docs/TESTING_IMPLEMENTATION.md) for mechanics. Do not load the full playbook.
+- **Worker (`correctness-worker`)**: Read your role instructions, the assigned stage, and the case working note. The stage links to the testing guide when needed.
+- **Reviewer (`correctness-reviewer`)**: Read your role instructions and case findings, then independently check the relevant game source, domain code, and tests.
 - **Ordinary non-role correctness work**: Read the full [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md).
 
-The role files under `.omp/agents/` define role responsibilities and return contracts; this router does not repeat them.
+The files under `.omp/agents/` define each role's responsibilities and result fields.
 
-## Generated data guardrail
+## Generated data
 
 Never modify generated content under `data/domain/data/`, `data/domain/enum/`, or `data/domain/model/`. WikiBot owns that content and its game-code extraction. Generated static data is not a parameter-test target.

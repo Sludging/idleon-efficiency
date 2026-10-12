@@ -8,11 +8,12 @@ import {
 } from "grommet"
 
 import { useState } from 'react';
-import TabButton from "../../../components/base/TabButton";
+import ContentTabs from "../../../components/base/ContentTabs";
 import { dungeonLevels, Dungeons, DungeonSetInfo, PassiveType } from "../../../data/domain/dungeons";
 import TipDisplay, { TipDirection } from "../../../components/base/TipDisplay";
 import ShadowBox from "../../../components/base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../../components/base/TextAndLabel";
+import DataRow from "../../../components/base/DataRow";
 import { dateToText } from "../../../data/utility";
 import IconImage from "../../../components/base/IconImage";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
@@ -79,57 +80,35 @@ function DungeonPassives() {
                     count: 2,
                     size: 'auto',
                 }} fill>
-                    <Box pad="medium">
+                    <Box pad="medium" gap="small">
                         <Heading level="4">Dungeon</Heading>
                         {
                             dungeonData.passives.get(PassiveType.Dungeon)?.map((passive, index) => (
-                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }} key={index}>
-                                    <Grid columns={["25%", "40%", "35%"]} key={`dungeon_${passive.index}`} pad="small" fill gap="small">
-                                        <TextAndLabel
-                                            label="Level"
-                                            textSize="small"
-                                            text={`${passive.level}/100`}
-                                            margin={{ right: 'medium' }}
-                                        />
-                                        <TextAndLabel
-                                            label="Bonus"
-                                            textSize="small"
-                                            text={`${passive.getBonus(true)}${passive.type} ${passive.effect}`}
-                                        />
-                                        <TextAndLabel
-                                            label="Cost to max"
-                                            textSize="small"
-                                            text={`${passive.getCostToMax()}`}
-                                        />
-                                    </Grid>
-                                </ShadowBox>
+                                <DataRow
+                                    key={index}
+                                    columns={["minmax(0, 5fr)", "minmax(0, 8fr)", "minmax(0, 7fr)"]}
+                                    fields={[
+                                        { key: 'level', kind: 'text', label: 'Level', value: `${passive.level}/100` },
+                                        { key: 'bonus', kind: 'text', label: 'Bonus', value: `${passive.getBonus(true)}${passive.type} ${passive.effect}`, role: 'description' },
+                                        { key: 'cost', kind: 'text', label: 'Cost to max', value: `${passive.getCostToMax()}` },
+                                    ]}
+                                />
                             ))
                         }
                     </Box>
-                    <Box pad="medium">
+                    <Box pad="medium" gap="small">
                         <Heading level="4">Flurbo</Heading>
                         {
                             dungeonData.passives.get(PassiveType.Flurbo)?.map((passive, index) => (
-                                <ShadowBox background="dark-1" margin={{ bottom: 'small' }} key={index}>
-                                    <Grid columns={["25%", "40%", "35%"]} key={`dungeon_${passive.index}`} pad="small" fill gap="small">
-                                        <TextAndLabel
-                                            label="Level"
-                                            textSize="small"
-                                            text={`${passive.level}/50`}
-                                        />
-                                        <TextAndLabel
-                                            label="Bonus"
-                                            textSize="small"
-                                            text={`${passive.getBonus(true)}${passive.type} ${passive.effect}`}
-                                        />
-                                        <TextAndLabel
-                                            label="Cost to max"
-                                            textSize="small"
-                                            text={`${passive.getCostToMax()}`}
-                                        />
-                                    </Grid>
-                                </ShadowBox>
-
+                                <DataRow
+                                    key={index}
+                                    columns={["minmax(0, 5fr)", "minmax(0, 8fr)", "minmax(0, 7fr)"]}
+                                    fields={[
+                                        { key: 'level', kind: 'text', label: 'Level', value: `${passive.level}/50` },
+                                        { key: 'bonus', kind: 'text', label: 'Bonus', value: `${passive.getBonus(true)}${passive.type} ${passive.effect}`, role: 'description' },
+                                        { key: 'cost', kind: 'text', label: 'Cost to max', value: `${passive.getCostToMax()}` },
+                                    ]}
+                                />
                             ))
                         }
                     </Box>
@@ -287,10 +266,16 @@ function DungeonsDisplay() {
                         }
                     </Box>
                 }
-                <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'medium' }}>
-                    <TabButton isActive={subTab == "Items"} text="Items" clickHandler={() => { setSubTab("Items"); }} />
-                    <TabButton isActive={subTab == "Passives"} text="Passives" clickHandler={() => { setSubTab("Passives"); }} />
-                    <TabButton isActive={subTab == "Traits"} text="Traits" clickHandler={() => { setSubTab("Traits"); }} />
+                <Box margin={{ bottom: 'medium' }}>
+                    <ContentTabs
+                        options={[
+                            { value: "Items", label: "Items" },
+                            { value: "Passives", label: "Passives" },
+                            { value: "Traits", label: "Traits" },
+                        ]}
+                        value={subTab}
+                        onChange={setSubTab}
+                    />
                 </Box>
                 {subTab == "Items" && <DungeonItems />}
                 {subTab == "Passives" && <DungeonPassives />}

@@ -1,0 +1,81 @@
+{
+  "extractions": {
+    "royal_armory_outpost_experience_rank_row_1_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 0)",
+      "result": 11
+    },
+    "royal_armory_outpost_experience_rank_row_1_type_1": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 1)",
+      "result": 0
+    },
+    "royal_armory_outpost_experience_rank_row_1_type_2": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 2)",
+      "result": 0
+    },
+    "royal_armory_outpost_experience_rank_row_1_type_3": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 3)",
+      "result": 0
+    },
+    "royal_armory_outpost_experience_rank_row_1_type_4": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 4)",
+      "result": 0
+    },
+    "royal_armory_outpost_experience_formula_rank_0_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 0)",
+      "result": 10
+    },
+    "royal_armory_outpost_experience_formula_rank_1_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 1, 0)",
+      "result": 19.5
+    },
+    "royal_armory_outpost_experience_formula_rank_2_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 2, 0)",
+      "result": 33.800000000000004
+    },
+    "royal_armory_outpost_experience_formula_rank_3_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 3, 0)",
+      "result": 54.925000000000004
+    },
+    "royal_armory_outpost_experience_formula_rank_4_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 4, 0)",
+      "result": 85.68300000000002
+    },
+    "royal_armory_outpost_experience_formula_rank_5_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 5, 0)",
+      "result": 129.95255000000003
+    },
+    "royal_armory_outpost_experience_formula_rank_6_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 6, 0)",
+      "result": 193.07236000000003
+    },
+    "royal_armory_outpost_experience_formula_rank_7_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 7, 0)",
+      "result": 282.3683265000001
+    },
+    "royal_armory_outpost_experience_formula_rank_8_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 8, 0)",
+      "result": 407.8653605000001
+    },
+    "royal_armory_outpost_experience_formula_rank_9_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 9, 0)",
+      "result": 583.2474655150002
+    },
+    "royal_armory_outpost_experience_formula_rank_10_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 10, 0)",
+      "result": 827.1509510940003
+    },
+    "royal_armory_outpost_experience_formula_rank_11_type_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 11, 0)",
+      "result": 1164.9042561240503
+    },
+    "royal_armory_outpost_experience_formula_rank_0_type_2": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 2)",
+      "result": 50
+    },
+    "royal_armory_outpost_experience_formula_rank_0_type_4": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPformula\", 0, 4)",
+      "result": 100000
+    }
+  },
+  "errors": {}
+}

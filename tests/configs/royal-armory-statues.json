@@ -1,0 +1,61 @@
+{
+  "description": "Extract representative restored and covered Royal Statue results and their direct Royal Reverence and Storage inputs",
+  "target": "Royal Statue bonuses and attempts",
+  "extractions": [
+    {
+      "label": "statue_bonus_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 0, 0)",
+      "description": "Current Damage statue bonus at the saved level"
+    },
+    {
+      "label": "statue_next_bonus_0",
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 0; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
+      "description": "Read-only Damage statue bonus at the saved level plus one; the game has no target-level preview API"
+    },
+    {
+      "label": "statue_chance_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 0, 0)",
+      "description": "Damage statue upgrade success chance as a fraction"
+    },
+    {
+      "label": "statue_affordable_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 0, 0)",
+      "description": "Numeric affordability result for one Damage statue parchment upgrade attempt"
+    },
+    {
+      "label": "statue_bonus_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueBon\", 2, 0)",
+      "description": "Current Frosty statue bonus while covered"
+    },
+    {
+      "label": "statue_next_bonus_2",
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const index = 2; const level = asNumber(idleon.getAttr(\"RoyalG\")[0][index]) + 1; const research = idleon.getAttr(\"CustomLists\").h.Research; return (1 + idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0) / 100) * (asNumber(research[41][index]) + asNumber(research[42][index]) * Math.max(0, level - 1)); })()",
+      "description": "Read-only Frosty statue bonus at the saved level plus one; the game has no target-level preview API"
+    },
+    {
+      "label": "statue_chance_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"StatueUpgOdds\", 2, 0)",
+      "description": "Frosty statue restoration success chance as a fraction"
+    },
+    {
+      "label": "statue_affordable_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"Statue_CanAfford\", 2, 0)",
+      "description": "Numeric affordability result for one Frosty statue marble restoration attempt"
+    },
+    {
+      "label": "storage_marble_2",
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGshard2\"]); })()",
+      "description": "Settled Storage marble quantity used by the Frosty statue restoration attempt"
+    },
+    {
+      "label": "royal_reverence_bonus",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 45, 0)",
+      "description": "Royal Reverence bonus used by current and next-level statue bonuses"
+    },
+    {
+      "label": "storage_parchment",
+      "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const owned = idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h; return asNumber(owned[\"RGenh\"]); })()",
+      "description": "Settled Storage parchment quantity used by the Damage statue upgrade attempt"
+    }
+  ]
+}

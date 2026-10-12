@@ -1,0 +1,61 @@
+{
+  "description": "Extract seven Friend Bonus stats and the four account-wide inputs used to calculate slots and the active multiplier.",
+  "target": "Friend Bonuses (Stats)",
+  "extractions": [
+    {
+      "label": "friend_bonus_stat_0",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 0, 0)",
+      "description": "Total Damage Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_1",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 1, 0)",
+      "description": "Class EXP gain Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_2",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 2, 0)",
+      "description": "Skill Efficiency Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_3",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 3, 0)",
+      "description": "Drop Rate Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_4",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 4, 0)",
+      "description": "Skill EXP gain Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_5",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 5, 0)",
+      "description": "More Coins Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_stat_6",
+      "expression": "idleon.callFunction(\"Thingies\", \"FriendBonusStatz\", 6, 0)",
+      "description": "Extra Kills Friend Bonus"
+    },
+    {
+      "label": "friend_bonus_companion_44",
+      "expression": "idleon.callFunction(\"Companions\", 44)",
+      "description": "Spearfish active bonus adds one Friend Bonus slot"
+    },
+    {
+      "label": "friend_bonus_companion_30",
+      "expression": "idleon.callFunction(\"Companions\", 30)",
+      "description": "Mr Pig active bonus contributes 1.5 slots and 150% to the Friend Bonus multiplier"
+    },
+    {
+      "label": "friend_bonus_companion_lv2_44",
+      "expression": "idleon.callFunction(\"CompLV2\", 44)",
+      "description": "Spearfish level-two state adds 25% to the Friend Bonus multiplier"
+    },
+    {
+      "label": "friend_bonus_event_shop_22",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 22, 0)",
+      "description": "Friendly Slot ownership adds one Friend Bonus slot"
+    }
+  ]
+}

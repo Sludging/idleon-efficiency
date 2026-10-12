@@ -1,0 +1,21 @@
+{
+  "extractions": {
+    "slab_bonus_multiplier": {
+      "expression": "idleon.callFunction(\"Sailing\", \"SlabboBonus_AllMulti\", 0, 0)",
+      "result": 1.547
+    },
+    "meritocracy_bonus_23": {
+      "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 23, 0)",
+      "result": 0
+    },
+    "legend_talent_bonus_28": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 28, 0)",
+      "result": 30
+    },
+    "vault_upgrade_bonus_74": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 74, 0)",
+      "result": 19
+    }
+  },
+  "errors": {}
+}

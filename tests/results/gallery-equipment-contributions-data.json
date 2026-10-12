@@ -1,0 +1,49 @@
+{
+  "extractions": {
+    "gallery_trophy_agility_percent": {
+      "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
+      "result": 15.309388830028594
+    },
+    "gallery_nametag_skill_efficiency": {
+      "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"GalleryNametagBonTOT\").h, \"%_SKILL_EFFICIENCY\") ? idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_SKILL_EFFICIENCY\"] : 0",
+      "result": 0
+    },
+    "gallery_chip_troph": {
+      "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
+      "result": 1
+    },
+    "gallery_killroy_3": {
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
+      "result": 0
+    },
+    "gallery_alchemy_y13": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
+      "result": 12.12518440038127
+    },
+    "gallery_card_w7a11": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
+      "result": 2
+    },
+    "gallery_companion_28": {
+      "expression": "idleon.callFunction(\"Companions\", 28)",
+      "result": 40
+    },
+    "gallery_companion_42": {
+      "expression": "idleon.callFunction(\"Companions\", 42)",
+      "result": 3
+    },
+    "gallery_companion_49": {
+      "expression": "idleon.callFunction(\"Companions\", 49)",
+      "result": 50
+    },
+    "gallery_sushi_54": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 54, 0)",
+      "result": 0
+    },
+    "gallery_legend_9": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 9, 0)",
+      "result": 2
+    }
+  },
+  "errors": {}
+}

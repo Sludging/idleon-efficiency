@@ -1534,17 +1534,17 @@ export const initCompanionRepo = () => {
             }),
         new CompanionBase(109, <CompanionModel>{
                 "id": "w4b3",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
-                "x1": 0,
+                "desc": "10x Farming Sticker find chance",
+                "bonus": 9,
+                "x1": -18,
                 "x2": 0,
-                "x3": 0,
+                "x3": -15,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x5": 180,
+                "x6": 2500,
+                "x7": 270,
+                "desc2": "20x Farming Sticker find chance",
+                "bonus2": 19
             }),
         new CompanionBase(110, <CompanionModel>{
                 "id": "w4b4",
@@ -2079,30 +2079,30 @@ export const initCompanionRepo = () => {
                 "bonus2": 75
             }),
         new CompanionBase(148, <CompanionModel>{
-                "id": "w7b8zzz",
-                "desc": "Not officially in the game and may never be",
-                "bonus": 1,
+                "id": "w7b8",
+                "desc": "Both +200 and 1.20x Max Stamina for Spelunking!",
+                "bonus": 20,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
-                "desc2": "Not officially in the game and may never be",
-                "bonus2": 1
+                "x5": 185,
+                "x6": 3500,
+                "x7": 280,
+                "desc2": "Both +350 and 1.35x Max Stamina for Spelunking!",
+                "bonus2": 35
             }),
         new CompanionBase(149, <CompanionModel>{
-                "id": "w7b9zzz",
+                "id": "w7b9",
                 "desc": "Not officially in the game and may never be",
                 "bonus": 1,
                 "x1": 0,
                 "x2": 0,
                 "x3": 0,
                 "x4": 1,
-                "x5": 100,
-                "x6": 9999,
-                "x7": 99,
+                "x5": 220,
+                "x6": 4150,
+                "x7": 320,
                 "desc2": "Not officially in the game and may never be",
                 "bonus2": 1
             }),
@@ -2455,6 +2455,48 @@ export const initCompanionRepo = () => {
                 "x7": 410,
                 "desc2": "+20000% additive Gold Food bonus effect and 2x multiplier to Gold Food",
                 "bonus2": 2
+            }),
+        new CompanionBase(175, <CompanionModel>{
+                "id": "T3a",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -9,
+                "x2": 0,
+                "x3": -17,
+                "x4": 1,
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
+            }),
+        new CompanionBase(176, <CompanionModel>{
+                "id": "T3b",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -9,
+                "x2": 0,
+                "x3": -17,
+                "x4": 1,
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
+            }),
+        new CompanionBase(177, <CompanionModel>{
+                "id": "T3c",
+                "desc": "Congratulations on winning the Tournament!",
+                "bonus": 1,
+                "x1": -9,
+                "x2": 0,
+                "x3": -17,
+                "x4": 1,
+                "x5": 10,
+                "x6": 9999,
+                "x7": 12,
+                "desc2": "Congratulations on winning the Tournament!",
+                "bonus2": 1
             })    
 ]
 }

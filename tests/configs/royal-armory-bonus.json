@@ -1,0 +1,16 @@
+{
+  "description": "Armory upgrades that directly affect outpost collection or unit specialization",
+  "target": "RoyalG ArmoryUpgBonus(index), compared for distinct in-game consumers",
+  "extractions": [
+    {
+      "label": "royal_armory_bonus_76",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 76, 0)",
+      "description": "Upgrade bonus that increases Dreamstuff gained from the Royal Guardian Outpost board"
+    },
+    {
+      "label": "royal_armory_bonus_19",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
+      "description": "Upgrade bonus that contributes to the Outpost resource-production specialization"
+    }
+  ]
+}

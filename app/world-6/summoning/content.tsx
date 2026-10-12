@@ -11,7 +11,7 @@ import IconImage from '../../../components/base/IconImage';
 import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { nFormatter } from '../../../data/utility';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { SummoningBonuses } from '../../../components/world-6/summoning/summoningBonuses';
 import { SummoningUpgrades } from '../../../components/world-6/summoning/summoningUpgrades';
 import { SummoningBattles } from '../../../components/world-6/summoning/summoningBattles';
@@ -70,12 +70,11 @@ function Summoning() {
                         ))
                     }
                 </Box>
-                <Box align="center" direction="row" justify="center" gap="small">
-                    {["Winner bonuses", "Summoning Upgrades", "Battles"].map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
-                </Box>
+                <ContentTabs
+                    options={["Winner bonuses", "Summoning Upgrades", "Battles"].map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 {activeTab == "Winner bonuses" && <SummoningBonuses bonuses={ summoning.summonBonuses } />}
                 {activeTab == "Summoning Upgrades" && <SummoningUpgrades essences={ summoning.summonEssences } upgrades={ summoning.summonUpgrades } />}
                 {activeTab == "Battles" && <SummoningBattles battlesInfos={ summoning.summonBattles } essences={ summoning.summonEssences } />}

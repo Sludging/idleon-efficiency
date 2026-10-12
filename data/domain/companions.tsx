@@ -8,10 +8,13 @@ import { EnemyInfo } from "./enemies";
 import { ImageData } from "./imageData";
 import { CompanionModel } from "./model/companionModel";
 import { Player } from "./player";
+import { mergeCompanionStates } from "./companions/companionState";
+import type { CompanionLevel, CompanionState } from "./companions/companionState";
 
 export class Companion {
     owned: boolean = false;
     real: boolean = false;
+    level: CompanionLevel = 1;
     constructor(public id: number, public name: string, public data: CompanionModel, public imageData: ImageData) { }
 
     getBonus = () => {
@@ -28,10 +31,30 @@ export class Companion {
     }
 }
 
-/** Returns the numeric bonus exposed by an owned companion to game formulas. */
-export const getCompanionBonus = (companions: Companion[], index: number): number => {
+const getCompanionBonusAtLevel = (companion: Companion, level: CompanionLevel): number => {
+    if (level === 2) {
+        return companion.level === 2 ? companion.data.bonus2 ?? 0 : 0;
+    }
+
+    return companion.data.bonus;
+};
+
+/** Returns the metadata bonus for an owned companion at the requested level. */
+export const getCompanionBonus = (companions: Companion[], index: number, level: CompanionLevel = 1): number => {
     const companion = companions.find(companion => companion.id === index);
-    return companion?.owned ? companion.data.bonus : 0;
+    return companion?.owned ? getCompanionBonusAtLevel(companion, level) : 0;
+};
+
+/** Returns the metadata bonus for an owned companion at its active level. */
+export const getCompanionActiveBonus = (companions: Companion[], index: number): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned ? getCompanionBonusAtLevel(companion, companion.level) : 0;
+};
+
+/** Returns one when an owned companion has reached level two. */
+export const isCompanionLevelTwo = (companions: Companion[], index: number): number => {
+    const companion = companions.find(companion => companion.id === index);
+    return companion?.owned && companion.level === 2 ? 1 : 0;
 };
 
 export class Companions extends Domain {
@@ -46,7 +69,7 @@ export class Companions extends Domain {
 
     parse = (data: Map<string, any>) => {
         const companions = data.get(this.getDataKey()) as Companion[];
-        const ownedCompanions = data.get("ownedCompanions") as number[]
+        const ownedCompanions = mergeCompanionStates(data.get("ownedCompanions") as CompanionState[]);
 
         const localCompanions = localStorage.getItem("companions");
         const editedCompanions: Companion[] = [];
@@ -54,15 +77,16 @@ export class Companions extends Domain {
             editedCompanions.push(...JSON.parse(localCompanions) as Companion[]);
         }
 
+        const sourceCompanions = new Map(ownedCompanions.map(companion => [companion.id, companion]));
         companions.forEach(companion => {
+            const sourceCompanion = sourceCompanions.get(companion.id);
             const editedCompanion = editedCompanions.find(c => c.id === companion.id);
-            // Check if user edited it before, else default to false.
-            const editState = editedCompanion ? editedCompanion.owned : false;
-            // We might have an old edit state, so priority for source of truth is currently owned companions
-            // if that one is false, use the edited value.
-            companion.owned = ownedCompanions.includes(companion.id) || editState;
-            companion.real = ownedCompanions.includes(companion.id);
-        })
+            // Source levels stay authoritative; enabled fakes are level two, disabled fakes keep their saved level.
+            companion.level = sourceCompanion?.level ?? (editedCompanion?.owned ? 2 : editedCompanion?.level ?? 1);
+            companion.real = sourceCompanion !== undefined;
+            // Local edits can only override ownership for companions without a source record.
+            companion.owned = companion.real || (editedCompanion?.owned ?? false);
+        });
     }
 
     getRawKeys(): RawData[] {
@@ -96,16 +120,17 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     }
 
     // Rift Slug
-    if (companions.find(c => c.id === 1)?.owned) {
+    const slugBonus = getCompanionActiveBonus(companions, 1);
+    if (slugBonus > 0) {
         players.forEach(player => {
             // avoid double handling.
-            if (player.extraLevelsFromSlug != 25) {
+            if (player.extraLevelsFromSlug != slugBonus) {
                 player.talents.filter(talent => ![149, 374, 539, 505].includes(talent.skillIndex) && talent.skillIndex <= 614 && !(49 <= talent.skillIndex && 59 >= talent.skillIndex))
                     .forEach(talent => {
-                        talent.level += talent.level > 0 ? 25 : 0;
-                        talent.maxLevel += 25;
+                        talent.level += talent.level > 0 ? slugBonus : 0;
+                        talent.maxLevel += slugBonus;
                     });
-                player.extraLevelsFromSlug = 25;
+                player.extraLevelsFromSlug = slugBonus;
             }
 
         })
@@ -120,9 +145,8 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     }
 
     // Reindeer
-    if (companions.find(c => c.id === 27)?.owned) {
-        arcade.bonuses.forEach(bonus => {
-            bonus.hasCompanion27 = true;
-        });
-    }
+    const companion27Bonus = getCompanionActiveBonus(companions, 27);
+    arcade.bonuses.forEach(bonus => {
+        bonus.companion27Bonus = companion27Bonus;
+    });
 }

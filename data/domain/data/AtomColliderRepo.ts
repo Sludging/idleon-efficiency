@@ -125,6 +125,14 @@ export const initAtomColliderRepo = () => {
                 "baseCost": 400000,
                 "bonusPerLv": 1,
                 "desc": "Boosts your Sushi Station Bucks gain by +{%! This is a new multiplier, so it's always relevant!"
+            }),
+        new AtomColliderBase(15, <AtomColliderModel>{
+                "name": "Sulfur - Jelly Bloodcell Juicer",
+                "growthFactor": 500000,
+                "baseExponent": 1.5,
+                "baseCost": 1500000,
+                "bonusPerLv": 1,
+                "desc": "Boosts your Jelly Operator Bloodcell gain by +{%! Can you guess whether this is a new multiplier? I'll give you a hint, it's always relevant..."
             })    
 ]
 }

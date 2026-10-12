@@ -1,0 +1,93 @@
+{
+  "extractions": {
+    "tome_bonus_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
+      "result": 1488.1138827372065
+    },
+    "tome_bonus_1": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
+      "result": 556.8282749131176
+    },
+    "tome_bonus_2": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 2, 0)",
+      "result": 258.61936494300573
+    },
+    "tome_bonus_3": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 3, 0)",
+      "result": 878.5365807022079
+    },
+    "tome_bonus_4": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 4, 0)",
+      "result": 96.87674027844456
+    },
+    "tome_bonus_5": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 5, 0)",
+      "result": 94.25413223140497
+    },
+    "tome_bonus_6": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 6, 0)",
+      "result": 0
+    },
+    "tome_bonus_7": {
+      "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 7, 0)",
+      "result": 0
+    },
+    "tome_bonus_score": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
+      "result": 44060
+    },
+    "tome_bonus_unlocked_0": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",
+      "result": 1
+    },
+    "tome_bonus_unlocked_1": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][1]",
+      "result": 1
+    },
+    "tome_bonus_unlocked_2": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][2]",
+      "result": 1
+    },
+    "tome_bonus_unlocked_3": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][3]",
+      "result": 1
+    },
+    "tome_bonus_unlocked_4": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][4]",
+      "result": 1
+    },
+    "tome_bonus_unlocked_5": {
+      "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][5]",
+      "result": 1
+    },
+    "tome_bonus_grimoire_17": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
+      "result": 85
+    },
+    "tome_bonus_troll_set": {
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"TROLL_SET\", \"Bonus\", 0, 0)",
+      "result": 25
+    },
+    "tome_bonus_event_shop_0": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 0, 0)",
+      "result": 0
+    },
+    "tome_bonus_event_shop_27": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 27, 0)",
+      "result": 0
+    },
+    "tome_bonus_alchemy_str": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
+      "result": 878.5365807022079
+    },
+    "tome_bonus_alchemy_agi": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",
+      "result": 96.87674027844456
+    },
+    "tome_bonus_alchemy_wis": {
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M9",
+      "result": 94.25413223140497
+    }
+  },
+  "errors": {}
+}

@@ -3,11 +3,12 @@ import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ParameterTestSpec } from '../../utils/parameter-test-config';
 import { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import { ZenithMarket } from '../../../data/domain/world-7/zenithShop';
-import { Companion } from '../../../data/domain/companions';
+import { Companion, getCompanionActiveBonus } from '../../../data/domain/companions';
 import { GemStore } from '../../../data/domain/gemPurchases';
 import { Sailing } from '../../../data/domain/sailing';
 import { Clamworks } from '../../../data/domain/world-7/clamworks';
 import { EventShop } from '../../../data/domain/eventShop';
+import { SushiStation } from '../../../data/domain/world-7/sushi';
 
 const saveName = 'latest';
 const extractionResultsName = 'legend-talents-data.json';
@@ -35,7 +36,7 @@ const legendTalentsParameterSpecs: Record<string, ParameterTestSpec> = {
     extractionKey: 'companion_37_owned',
     domainExtractor: (gameData) => {
       const companions = gameData.get("companions") as Companion[];
-      return companions.find(c => c.id === 37)?.owned ? 1 : 0;
+      return getCompanionActiveBonus(companions, 37);
     }
   },
   gem_shop_42: {
@@ -84,6 +85,14 @@ const legendTalentsParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const zenithMarket = gameData.get("zenithMarket") as ZenithMarket;
       return zenithMarket.getBonusForId(5);
+    }
+  },
+  sushi_19: {
+    description: 'Unlocking Live Squid (Sushi 19) - Contributes 1 legend point if unlocked',
+    extractionKey: 'sushi_19',
+    domainExtractor: (gameData) => {
+      const sushiStation = gameData.get("sushi") as SushiStation;
+      return sushiStation.getUniqueSushi() > 19 ? 1 : 0;
     }
   },
 

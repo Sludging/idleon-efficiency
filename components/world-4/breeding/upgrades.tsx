@@ -1,15 +1,13 @@
 import {
     Box,
-    Grid,
     Text,
 } from 'grommet'
 import { useState, useMemo, useEffect } from "react";
 import { Breeding as BreedingDomain } from "../../../data/domain/world-4/breeding";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
+import DataRow from "../../base/DataRow";
 import { Cooking } from '../../../data/domain/world-4/cooking';
-import TextAndLabel from '../../base/TextAndLabel';
 import { useAppDataStore } from '../../../lib/providers/appDataStoreProvider';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -59,33 +57,47 @@ export const PetUpgradeDisplay = () => {
         )
     }
 
-    return (<Box>
+    return (<Box gap="small">
         <Text>Upgrades</Text>
         {
             breeding.upgrade.filter(upgrade => upgrade.data.upgradeName != "Filler").map((upgrade, index) => (
-                <ShadowBox key={index} background="dark-1" margin={{ bottom: 'medium' }} align="center" pad="small" style={{ opacity: upgrade.level == 0 ? 0.5 : 1 }}>
-                    <Grid columns={{ size: 'auto', count: 5 }} fill>
-                        <IconImage data={upgrade.getImageData()} scale={0.7} />
-                        <TextAndLabel textSize='xsmall' label="Name" text={upgrade.data.upgradeName} />
-                        <TextAndLabel textSize='xsmall' label="Bonus" text={upgrade.getBonusText()} />
-                        <TextAndLabel textSize='xsmall' label="Level" text={`${upgrade.level}/${upgrade.data.maxLevel}`} />
-                        <Box direction="row" gap="small">
-                            {
-                                upgradeCosts[index].map((cost, index) => (
-                                    <Box key={`upg_${index}`} align="center" gap="xsmall">
-                                        {
-                                            cost.image &&
-                                            <IconImage data={cost.image} />
-                                        }
-                                        {
-                                            cost.cost > 0 && <Text color={cost.canAfford ? 'green-1' : ''} size="small">{nFormatter(cost.cost)}</Text>
-                                        }
-                                    </Box>
-                                ))
-                            }
-                        </Box>
-                    </Grid>
-                </ShadowBox>
+                <DataRow
+                    key={index}
+                    columns={['2fr', '2fr', '1fr', '1.2fr']}
+                    opacity={upgrade.level == 0 ? 0.5 : 1}
+                    fields={[
+                        {
+                            key: 'identity',
+                            kind: 'identity',
+                            name: upgrade.data.upgradeName,
+                            artwork: <IconImage data={upgrade.getImageData()} scale={0.7} />
+                        },
+                        { key: 'bonus', kind: 'text', label: 'Bonus', value: upgrade.getBonusText(), role: 'description' },
+                        { key: 'level', kind: 'text', label: 'Level', value: `${upgrade.level}/${upgrade.data.maxLevel}` },
+                        {
+                            key: 'costs',
+                            kind: 'content',
+                            label: 'Costs',
+                            content: (
+                                <Box direction="row" gap="small" align="center">
+                                    {
+                                        upgradeCosts[index].map((cost, index) => (
+                                            <Box key={`upg_${index}`} direction="row" align="center" gap="xsmall" title={cost.name}>
+                                                {
+                                                    cost.image &&
+                                                    <IconImage data={cost.image} />
+                                                }
+                                                {
+                                                    cost.cost > 0 && <Text color={cost.canAfford ? 'green-1' : ''} size="small">{nFormatter(cost.cost)}</Text>
+                                                }
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
+                            )
+                        }
+                    ]}
+                />
             ))
         }
     </Box>)

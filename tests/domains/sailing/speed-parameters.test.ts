@@ -14,6 +14,7 @@ import { Worship, TotalizerBonus } from '../../../data/domain/world-3/worship';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { SlabInfluencedArtifact } from '../../../data/domain/world-5/sailing/artifacts';
 import { Player } from '../../../data/domain/player';
+import { UpgradeVault } from '../../../data/domain/upgradeVault';
 
 // TODO: Make it possible to test multiple save / extraction results.
 const saveName = 'latest';
@@ -157,6 +158,50 @@ const sailingSpeedParameterSpecs: Record<string, ParameterTestSpec> = {
     domainExtractor: (gameData) => {
       const players = gameData.get("players") as Player[];
       return players[0].starSigns.find(sign => sign.name == "C. Shanti Minor")?.getBonus("Sailing SPD") ?? 0;
+    }
+  },
+  vault_upgrade_62: {
+    description: 'Upgrade Vault 62 Speedy Sailing bonus',
+    extractionKey: 'vault_upgrade_62',
+    domainExtractor: (gameData) => {
+      const upgradeVault = gameData.get("upgradeVault") as UpgradeVault;
+      return upgradeVault.getBonusForId(62);
+    }
+  },
+  boat_0_captain_speed_bonus: {
+    description: 'captain boat-speed bonus assigned to boat 0',
+    extractionKey: 'boat_0_captain_speed_bonus',
+    domainExtractor: (gameData) => {
+      const sailing = gameData.get("sailing") as Sailing;
+      return sailing.boats[0]?.captain?.traits
+        .filter(trait => trait.bonus.bonus.includes("Boat Speed"))
+        .reduce((sum, trait) => sum + trait.currentBonus, 0) ?? 0;
+    }
+  },
+  boat_1_captain_speed_bonus: {
+    description: 'captain boat-speed bonus assigned to boat 1',
+    extractionKey: 'boat_1_captain_speed_bonus',
+    domainExtractor: (gameData) => {
+      const sailing = gameData.get("sailing") as Sailing;
+      return sailing.boats[1]?.captain?.traits
+        .filter(trait => trait.bonus.bonus.includes("Boat Speed"))
+        .reduce((sum, trait) => sum + trait.currentBonus, 0) ?? 0;
+    }
+  },
+  boat_0_island_distance: {
+    description: "IslandDistance for boat 0's assigned destination",
+    extractionKey: 'boat_0_island_distance',
+    domainExtractor: (gameData) => {
+      const sailing = gameData.get("sailing") as Sailing;
+      return sailing.boats[0]?.assignIsland?.data.distance;
+    }
+  },
+  minimum_travel_time: {
+    description: 'rounded Sailing Minimumtraveltime used by BoatSpeed',
+    extractionKey: 'minimum_travel_time',
+    domainExtractor: (gameData) => {
+      const sailing = gameData.get("sailing") as Sailing;
+      return sailing.boats[0]?.minTravelTime;
     }
   }
 };

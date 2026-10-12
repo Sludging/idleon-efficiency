@@ -5,107 +5,107 @@
     {
       "label": "fountain_marble_bonus_0_8",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 8)",
-      "description": "Fountain marble bonus for water 0 upgrade 8 (zero marbleization branch)"
+      "description": "Money Back Guarantee marble multiplier before marbleization (no saved marble levels)"
     },
     {
       "label": "fountain_marble_bonus_0_13",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_MarbleBon\", 0, 13)",
-      "description": "Fountain marble bonus for water 0 upgrade 13 (positive marbleization branch)"
+      "description": "Monumental Boost marble multiplier used for Bravery monument bonuses"
     },
     {
       "label": "fountain_total_bonus_0_0",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 0)",
-      "description": "Fountain total bonus for water 0 upgrade 0"
+      "description": "Yellow Water unlock and Fountain currency value"
     },
     {
       "label": "fountain_total_bonus_0_1",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 1)",
-      "description": "Fountain total bonus for water 0 upgrade 1 (non-unit factor)"
+      "description": "Currency Booster I increase to Fountain currency value"
     },
     {
       "label": "fountain_total_bonus_0_5",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 5)",
-      "description": "Fountain total bonus for water 0 upgrade 5"
+      "description": "Stackin' Silver increase to silver coin value"
     },
     {
       "label": "fountain_total_bonus_0_8",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 8)",
-      "description": "Fountain total bonus for water 0 upgrade 8 (zero marbleization branch)"
+      "description": "Money Back Guarantee auto-collect value for coins at capacity"
     },
     {
       "label": "fountain_total_bonus_0_9",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 9)",
-      "description": "Fountain total bonus for water 0 upgrade 9"
+      "description": "Fountain Filling coin generation when the Fountain fills"
     },
     {
       "label": "fountain_total_bonus_0_13",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 13)",
-      "description": "Fountain total bonus for water 0 upgrade 13 (Bravery Monumental Boost)"
+      "description": "Monumental Boost multiplier to Bravery monument bonuses"
     },
     {
       "label": "fountain_total_bonus_0_19",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 19)",
-      "description": "Fountain total bonus for water 0 upgrade 19 (last upgrade)"
+      "description": "Mythril Transience increase to bronze, silver, and gold coin value"
     },
     {
       "label": "fountain_total_bonus_1_0",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 0)",
-      "description": "Fountain total bonus for water 1 upgrade 0"
+      "description": "Green Water unlock and Fountain currency value"
     },
     {
       "label": "fountain_total_bonus_1_8",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 8)",
-      "description": "Fountain total bonus for water 1 upgrade 8 (zero marbleization branch)"
+      "description": "Royal Stacks chance and value for coins created when the Fountain fills"
     },
     {
       "label": "fountain_total_bonus_1_10",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 10)",
-      "description": "Fountain total bonus for water 1 upgrade 10 (non-marbleizable upgrade)"
+      "description": "Marble Filling production of marble for upgrade marbleization"
     },
     {
       "label": "fountain_total_bonus_1_13",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 13)",
-      "description": "Fountain total bonus for water 1 upgrade 13"
+      "description": "Judicial Boost multiplier to Justice monument bonuses"
     },
     {
       "label": "fountain_total_bonus_1_19",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 19)",
-      "description": "Fountain total bonus for water 1 upgrade 19 (last upgrade)"
+      "description": "Sharp Surrogate increase to dollar, credit, and treasury bill value"
     },
     {
       "label": "fountain_total_bonus_2_0",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 0)",
-      "description": "Fountain total bonus for water 2 upgrade 0 (zero upgrade level)"
+      "description": "Red Water unlock and Fountain currency value"
     },
     {
       "label": "fountain_total_bonus_2_1",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 1)",
-      "description": "Fountain total bonus for water 2 upgrade 1 (large factor)"
+      "description": "Currency Booster III increase to Fountain currency value"
     },
     {
       "label": "fountain_total_bonus_2_2",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 2)",
-      "description": "Fountain total bonus for water 2 upgrade 2 (zero marbleization branch)"
+      "description": "Moolahleluja unlock and Moolah Stack value"
     },
     {
       "label": "fountain_total_bonus_2_8",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 8)",
-      "description": "Fountain total bonus for water 2 upgrade 8 (zero marbleization branch)"
+      "description": "Luck fo' REAL chance to make collected currency lucky"
     },
     {
       "label": "fountain_total_bonus_2_12",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 12)",
-      "description": "Fountain total bonus for water 2 upgrade 12"
+      "description": "Rubber Ducky production from the Fountain bar"
     },
     {
       "label": "fountain_total_bonus_2_18",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 18)",
-      "description": "Fountain total bonus for water 2 upgrade 18"
+      "description": "Bubba Forever permanent Meat Slice production rate"
     },
     {
       "label": "fountain_total_bonus_2_19",
       "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 2, 19)",
-      "description": "Fountain total bonus for water 2 upgrade 19 (last upgrade)"
+      "description": "Rupie Monie increase to Moolah, Shilling, and Greane Stack value"
     }
   ]
 }

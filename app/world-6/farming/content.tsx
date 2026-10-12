@@ -12,7 +12,7 @@ import ShadowBox from '../../../components/base/ShadowBox';
 import { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import IconImage from '../../../components/base/IconImage';
 import { nFormatter } from '../../../data/utility';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { MarketUpgradesDisplay } from '../../../components/world-6/farming/marketUpgrades';
 import { CropDepotDisplay } from '../../../components/world-6/farming/cropDepot';
 import { PlotsDisplay } from '../../../components/world-6/farming/plots';
@@ -204,12 +204,11 @@ function Farming() {
                     </Box>
                 }
                 </Box>
-                <Box align="center" direction="row" justify="center" gap="small">
-                    {tabsToShow.map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
-                </Box>
+                <ContentTabs
+                    options={tabsToShow.map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
                 <Box align="center" margin={{ top: 'small', bottom: 'small' }}>
                     {activeTab == "Plots" && <PlotsDisplay silkRodeChip={silkRodeChip} starSignEvoEquipped={isStarSignEvoActive} starSignOGEquipped={isStarSignOGActive} />}
                     {activeTab == "Market Upgrades" && <MarketUpgradesDisplay/>}

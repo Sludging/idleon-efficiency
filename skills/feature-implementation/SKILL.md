@@ -8,14 +8,13 @@ triggers:
 
 # Feature Implementation Guide
 
-For comprehensive implementation documentation, read [docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md](docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md).
+For comprehensive implementation documentation, read [docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md](../../docs/NEW_FEATURE_IMPLEMENTATION_GUIDE.md).
 
 ## Key Reminders
 
-**Prerequisites to gather before starting:**
+**Before implementation:** Use the [implementation patterns guide](../../docs/agents/implementation-patterns.md) to select applicable backend examples and aspects; use its UI route when planning or changing UI.
 - Save file keys for the feature's data
 - WikBot data availability (`../IdleonWikiBot/exported/ts/`)
-- Similar existing features to model after
 - Navigation placement in UI
 - Asset names from game files
 - Check `reference-repos/IdleonToolbox/` for reference implementations
@@ -26,6 +25,5 @@ For comprehensive implementation documentation, read [docs/NEW_FEATURE_IMPLEMENT
 - Testing is MANDATORY for domain logic - read the [testing skill](../testing/SKILL.md)
 - Always do visual validation against the actual game
 
-**Common patterns to follow:**
-- Study similar features: `stamps.tsx` (simple), `alchemy.tsx` (medium), `sailing.tsx` (complex)
-- Use Grommet UI components for consistency
+**Pattern selection:**
+- Follow only the named aspects of selected examples; the implementation patterns guide defines how to handle uncovered choices and conflicts.

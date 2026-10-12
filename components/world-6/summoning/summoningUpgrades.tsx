@@ -5,7 +5,7 @@ import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import { nFormatter } from "../../../data/utility";
 import { Summoning as SummoningDomain, SummonUpgrade, SummonEssence } from '../../../data/domain/world-6/summoning';
-import TabButton from "../../base/TabButton";
+import ContentTabs from "../../base/ContentTabs";
 import { useState } from "react";
 import TipDisplay from "../../base/TipDisplay";
 
@@ -102,11 +102,12 @@ export const SummoningUpgrades = ({ upgrades, essences }: { upgrades: SummonUpgr
     } else {
         return (
             <Box>
-                <Box align="center" margin= {{ top: 'small' }} direction="row" justify="center" gap="small">
-                    {tabsName.filter(name => name != '').map((tabName, index) => (
-                        <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                    ))
-                    }
+                <Box margin={{ top: 'small' }}>
+                    <ContentTabs
+                        options={tabsName.filter(name => name != '').map(value => ({ value, label: value }))}
+                        value={activeTab}
+                        onChange={setActiveTab}
+                    />
                 </Box>
                 <Box margin={{ top: 'small' }}>
                     {

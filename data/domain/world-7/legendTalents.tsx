@@ -1,5 +1,5 @@
 import { Domain, RawData } from "../base/domain";
-import { Companion } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { initLegendTalentsRepo, LegendTalentBase } from "../data/LegendTalentsRepo";
 import { EventShop } from "../eventShop";
 import { GemStore } from "../gemPurchases";
@@ -8,6 +8,7 @@ import { LegendTalentModel } from "../model/legendTalentModel";
 import { Player } from "../player";
 import { Sailing } from "../world-5/sailing/sailing";
 import { Clamworks } from "./clamworks";
+import { SushiStation } from "./sushi";
 import { ZenithMarket } from "./zenithShop";
 
 export class LegendTalent {
@@ -66,6 +67,7 @@ export class LegendTalents extends Domain {
         ]
     }
 
+
     init(_allItems: Item[]) {
         this.talents = LegendTalent.fromBase(initLegendTalentsRepo());
         return this;
@@ -87,6 +89,7 @@ export class LegendTalents extends Domain {
             }
         });
     }
+    
 
     getBonusFromIndex = (index: number): number => {
         const bonus = this.talents.find(talent => talent.index == index);
@@ -108,6 +111,7 @@ export const updateLegendTalents = (data: Map<string, any>) => {
     const clamworks = data.get("clamworks") as Clamworks;
     const eventShop = data.get("eventShop") as EventShop;
     const zenithMarket = data.get("zenithMarket") as ZenithMarket;
+    const sushiStation = data.get("sushi") as SushiStation;
 
     // Legend Talents Points
     let pointsOwned = 0;
@@ -118,12 +122,13 @@ export const updateLegendTalents = (data: Map<string, any>) => {
 
     const clamBonus1 = clamworks.isBonusUnlocked(1) ? 1 : 0;
     const clamBonus4 = clamworks.isBonusUnlocked(4) ? 1 : 0;
-    const companionBonus37 = companions.find(c => c.id === 37)?.owned || false ? 10 : 0;
+    const companionBonus37 = getCompanionActiveBonus(companions, 37) * 10;
     const gemBonus42 = gemStore.purchases.find(purchase => purchase.no == 42)?.pucrhased ?? 0;
-    const artifactBonus34 = Math.min(5, sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0);
+    const artifactBonus34 = Math.min(6, sailing.artifacts.find(artifact => artifact.index == 34)?.getBonus() ?? 0);
     const evenShopBonus32 = eventShop.isBonusOwned(32) ? 2 : 0;
+    const sushiBonus = sushiStation.getUniqueSushi() > 19 ? 1 : 0;
     
-    pointsOwned += clamBonus1 + clamBonus4 + companionBonus37 + gemBonus42 + artifactBonus34 + evenShopBonus32;
+    pointsOwned += clamBonus1 + clamBonus4 + companionBonus37 + gemBonus42 + artifactBonus34 + evenShopBonus32 + sushiBonus;
 
     legendTalents.pointsOwned = pointsOwned;
     legendTalents.pointsSpent = legendTalents.talents.reduce((sum, talent) => sum += talent.level, 0);

@@ -1,7 +1,7 @@
 import { Domain, RawData } from "../base/domain";
 import { ButtonBonusBase, initButtonBonusRepo } from "../data/ButtonBonusRepo";
 import { Item } from "../items";
-import { Companion, getCompanionBonus } from "../companions";
+import { Companion, getCompanionActiveBonus } from "../companions";
 import { ResearchGrid } from "./research";
 
 const BUTTON_COMPANION = 147;
@@ -77,7 +77,7 @@ export class Button extends Domain {
  }
 
  updateCalculationState(companions: Companion[], researchGrid: ResearchGrid): void {
-  this.bonusMultiplier = (1 + getCompanionBonus(companions, BUTTON_COMPANION) / 100)
+  this.bonusMultiplier = (1 + getCompanionActiveBonus(companions, BUTTON_COMPANION) / 100)
    * (1 + researchGrid.getBonusForId(BUTTON_RESEARCH_INDEX) / 100);
 
   this.bonuses.forEach(bonus => {

@@ -15,7 +15,7 @@ import { nFormatter } from '../../../data/utility';
 import { PlayerActivitySection } from '../../../components/world-6/sneaking/playerActivitySection';
 import { JadeUpgrades } from '../../../components/world-6/sneaking/jadeUpgrades';
 import { SneakingUpgrades } from '../../../components/world-6/sneaking/sneakingUpgrades';
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import { PristineCharmSection } from '../../../components/world-6/sneaking/pristineCharmsSection';
 import { SneakingInventory } from '../../../components/world-6/sneaking/sneakingInventory';
 import { BeanstalkingDisplay } from '../../../components/world-6/sneaking/beanstacking';
@@ -62,12 +62,11 @@ function Sneaking() {
             <Box margin={{ bottom: 'medium' }}>
                 <PlayerActivitySection sneakingPlayers={sneaking.players} players={players} />
             </Box>
-            <Box align="center" direction="row" justify="center" gap="small">
-                {["The Jade Emporium", "Sneaking Upgrades", "Inventory", "Pristine Charms", (sneaking.beanstalking.unlocked ? "Beanstalk" : "")].filter(tab => tab != "").map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
-            </Box>
+            <ContentTabs
+                options={["The Jade Emporium", "Sneaking Upgrades", "Inventory", "Pristine Charms", (sneaking.beanstalking.unlocked ? "Beanstalk" : "")].filter(tab => tab != "").map(tabName => ({ value: tabName, label: tabName }))}
+                value={activeTab}
+                onChange={setActiveTab}
+            />
             {activeTab == "The Jade Emporium" && <JadeUpgrades currentJade={sneaking.jade} jadeUpgrades={jadeUpgrades} />}
             {activeTab == "Sneaking Upgrades" && <SneakingUpgrades currentJade={sneaking.jade} upgrades={sneaking.sneakingUpgrades} />}
             {activeTab == "Inventory" && <SneakingInventory inventory={sneaking.inventory} />}

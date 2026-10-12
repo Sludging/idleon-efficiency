@@ -1,0 +1,21 @@
+{
+  "description": "Master Classes whole upgrade cost multiplier and its direct calculated inputs for the paired real account",
+  "target": "MasterClasses.getUpgradeCostMultiplier()",
+  "extractions": [
+    {
+      "label": "masterclass_upgrade_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "description": "Whole account-wide Masterclass upgrade cost multiplier, including daily cheap-upgrade quota, Santa's Little Helper entitlement and Bargain"
+    },
+    {
+      "label": "daily_shopping_spree_allowance",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 23, 0)",
+      "description": "Daily Shopping Spree calculated allowance used as the strict daily cheap-upgrade threshold"
+    },
+    {
+      "label": "bargain_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 7, 0)",
+      "description": "Bargain calculated bonus used by the reciprocal reduction in the whole Masterclass upgrade cost multiplier"
+    }
+  ]
+}

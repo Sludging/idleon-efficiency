@@ -2,6 +2,8 @@
 
 Guidance for AI coding assistants working in this repository.
 
+Before implementing or reviewing code, you MUST read [CODING_STANDARDS.md](CODING_STANDARDS.md). When delegating implementation or review, pass its path and the relevant existing vocabulary-document paths (discovered through [domain docs](docs/agents/domain.md)); do not duplicate their rules in task prompts.
+
 ## Project Overview
 
 IdleOn Efficiency (https://www.idleonefficiency.com) is a companion website for the idle MMO "Legends of Idleon". This Next.js app reverse-engineers game mechanics to provide efficiency calculators and optimization tools for players.
@@ -39,7 +41,14 @@ Use the canonical labels `needs-triage`, `needs-info`, `ready-for-agent`, `ready
 
 ### Domain docs
 
-This is a single-context repository with root `CONTEXT.md` and `docs/adr/`. See `docs/agents/domain.md`.
+Domain documentation is optional: read root `CONTEXT.md` and relevant `docs/adr/` records when present. See `docs/agents/domain.md` for discovery guidance.
+
+## Do not
+
+- Do not use or add images in `public`. Use CDN images only.
+- Do not treat mockup approval as production-code approval.
+- Do not copy static values from game code. If required values are missing, stop and follow the static value extraction process.
+- Do not update `CODEBASE_OVERVIEW.md`, `changelog.ts`, or common repository documentation during single-feature work.
 
 ## Critical Architecture Constraints
 
@@ -57,7 +66,7 @@ These are synced from the external IdleOn WikBot project:
 
 The application follows a strict three-phase pipeline:
 
-1. **Init Phase** — One-time initialization of game data structures
+1. **Init Phase** — Set up domain instances and static game data
 2. **Parse Phase** — Process user's cloud save and extract raw game data
 3. **Calculate Phase** — Execute domain calculations in strict dependency order
 
@@ -120,12 +129,17 @@ Read the [testing skill](skills/testing/SKILL.md) for:
 
 ## New Feature Implementation
 
-Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) for:
+For any UI planning, implementation, changes, or scoped review, start with the
+[UI work guide](docs/agents/ui-patterns.md); it supplies the practical project context and
+links. For new pages or visual composition changes, use `impeccable` as directed by the guide.
+Before backend implementation or architecture decisions, use the
+[implementation patterns guide](docs/agents/implementation-patterns.md) to select applicable
+examples.
 
+Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) for:
 - Prerequisites verification
-- Domain implementation patterns
+- Domain implementation
 - Data pipeline integration
-- UI development with Grommet
 - Navigation integration
 - Testing requirements
 

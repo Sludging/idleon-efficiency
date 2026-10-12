@@ -8,9 +8,8 @@ import { ArtifactModel } from "../../model/artifactModel";
 import { Player } from "../../player";
 import { Sailing } from "./sailing";
 import { SkillsIndex } from "../../SkillsIndex";
-import { Slab } from "../slab";
-import { LegendTalents } from "../../world-7/legendTalents";
-import { Meritocraty } from "../../world-7/meritocraty";
+import type { Slab } from "../slab";
+import { ClassIndex } from "../../talents";
 
 export enum ArtifactStatus {
     Unobtained,
@@ -35,6 +34,8 @@ export class Artifact {
                     return new ManekiKatArtifact(artifact.index, artifact.data);
                 case 3:
                     return new FauxoryTuskArtifact(artifact.index, artifact.data);
+                case 4:
+                    return new GoldRelicArtifact(artifact.index, artifact.data);
                 case 5: 
                     return new GenieLampArtifact(artifact.index, artifact.data);
                 case 2:
@@ -58,11 +59,6 @@ export class Artifact {
                     return new CrystalSteakArtifact(artifact.index, artifact.data);
                 case 8:
                     return new FunHippoeteArtifact(artifact.index, artifact.data);
-                case 4:
-                    const goldRelic = new GoldRelicArtifact(artifact.index, artifact.data);
-                    // Lava didn't update the artifact values properly, so hardcoding values.
-                    goldRelic.data.qtyBonus = 2;
-                    return goldRelic;
                 case 33:
                     return new DeathskullArtifact(artifact.index, artifact.data);
                 default: return new Artifact(artifact.index, artifact.data)
@@ -156,23 +152,21 @@ export class Artifact {
     }
 
     getBonusMultiplier = (): number => {
-        if (this.status == ArtifactStatus.Ancient) {
-            return 2;
+        // Artifact tiers scale the main quantity only when that tier's description says so.
+        switch (this.status) {
+            case ArtifactStatus.Ancient:
+                return this.data.ancientBonus == "The artifact's main bonus is doubled!" ? 2 : 1;
+            case ArtifactStatus.Eldritch:
+                return this.data.eldritchBonus == "The artifact's main bonus is tripled!" ? 3 : 1;
+            case ArtifactStatus.Sovereign:
+                return this.data.sovereignBonus == "The artifact's main bonus is quadrupled!" ? 4 : 1;
+            case ArtifactStatus.Omnipotent:
+                return this.data.omnipotentBonus == "The artifact's main bonus is quintupled!" ? 5 : 1;
+            case ArtifactStatus.Transcendent:
+                return this.data.transcendentBonus == "The artifact's main bonus is sixtupled!" ? 6 : 1;
+            default:
+                return 1;
         }
-        if (this.status == ArtifactStatus.Eldritch) { 
-            return 3;
-        }
-        if (this.status == ArtifactStatus.Sovereign) {
-            return 4;
-        }
-        if (this.status == ArtifactStatus.Omnipotent) {
-            return 5;
-        }
-        if (this.status == ArtifactStatus.Transcendent) {
-            return 6;
-        }
-
-        return 1;
     }
 
     getUnlockText = (): string => {
@@ -183,6 +177,26 @@ export class Artifact {
                 return "Unlocked through Jade Emporium in W6"
             default:
                 return "First unlock this artifact's island";
+        }
+    }
+}
+
+export class GoldRelicArtifact extends Artifact {
+    getTierIncrement = (): number => {
+        // Sailing's selector 1 uses Gold Relic's tier quantities, separate from its general artifact bonus.
+        switch (this.status) {
+            case ArtifactStatus.Ancient:
+                return this.data.ancientBonusQty;
+            case ArtifactStatus.Eldritch:
+                return this.data.eldritchBonusQty ?? 0;
+            case ArtifactStatus.Sovereign:
+                return this.data.sovereignBonusQty ?? 0;
+            case ArtifactStatus.Omnipotent:
+                return this.data.omnipotentBonusQty ?? 0;
+            case ArtifactStatus.Transcendent:
+                return this.data.transcendentBonusQty ?? 0;
+            default:
+                return 0;
         }
     }
 }
@@ -198,33 +212,20 @@ export class GenieLampArtifact extends Artifact {
     }
 }
 
-export class GoldRelicArtifact extends Artifact {
-    override getBonus = (showUnobtained: boolean = false) => {
-        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            switch(this.status) {
-                case ArtifactStatus.Unobtained: return this.data.qtyBonus; // For when showUnobtained is true.
-                case ArtifactStatus.Obtained: return this.data.qtyBonus;
-                case ArtifactStatus.Ancient: return this.data.qtyBonus + this.data.ancientBonusQty;
-                case ArtifactStatus.Eldritch: return this.data.qtyBonus + (this.data.eldritchBonusQty ?? 0);
-                case ArtifactStatus.Sovereign: return this.data.qtyBonus + (this.data.sovereignBonusQty ?? 0);
-                case ArtifactStatus.Omnipotent: return this.data.qtyBonus + (this.data.omnipotentBonusQty ?? 0);
-                case ArtifactStatus.Transcendent: return this.data.qtyBonus + (this.data.transcendentBonusQty ?? 0);
-            }
-        }
-
-        return 0;
-    }
-}
 
 export class SlabInfluencedArtifact extends Artifact {
     lootyCount: number = 0;
-    meritocratyBonus: number = 0;
-    legendTalentBonus: number = 0;
-    slabSovereignBonus: number = 0;
+    mainframeBonus: number = 0;
+    slabBonusMultiplier: number = 1;
+
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return Math.floor(Math.max(0, this.lootyCount - 500) / 10) * this.data.qtyBonus * this.getBonusMultiplier() * 
-            (1 + this.slabSovereignBonus / 100) * (1 + this.legendTalentBonus / 100) * (1 + this.meritocratyBonus / 100);
+            // Slab artifacts apply Mainframe and the complete account Slab multiplier before the floored item-count term.
+            return this.data.qtyBonus
+                * (1 + this.mainframeBonus / 100)
+                * this.slabBonusMultiplier
+                * Math.floor(Math.max(0, this.lootyCount - 500) / 10)
+                * this.getBonusMultiplier();
         }
 
         return 0;
@@ -348,13 +349,26 @@ export class TheTrueLanternArtifact extends Artifact {
 }
 
 export class CrystalSteakArtifact extends Artifact {
-    statsBonus: number = 0;
-    override getBonus = (showUnobtained: boolean = false) => {
-        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
+    getBonusForPlayer = (player: Player, showUnobtained: boolean = false) => {
+        if (!showUnobtained && this.status == ArtifactStatus.Unobtained) {
             return 0;
         }
 
-        return 0 
+        // Crystal Steak uses the selected character's class main stat in groups of 100.
+        let mainStat = player.stats.luck;
+        switch (player.getBaseClass()) {
+            case ClassIndex.Warrior:
+                mainStat = player.stats.strength;
+                break;
+            case ClassIndex.Archer:
+                mainStat = player.stats.agility;
+                break;
+            case ClassIndex.Mage:
+                mainStat = player.stats.wisdom;
+                break;
+        }
+
+        return this.data.qtyBonus * Math.floor(mainStat / 100) * this.getBonusMultiplier();
     }
 
     override hasCalculatedBonus = () => {
@@ -362,38 +376,24 @@ export class CrystalSteakArtifact extends Artifact {
     }
 
     override getCalculatedBonusText = () => {
-        return `N/A for now.`;
+        return "Character-dependent bonus";
     }
 }
 
 export class FunHippoeteArtifact extends Artifact {
     constructionSpeed: number = 0;
+
     override getBonus = (showUnobtained: boolean = false) => {
         if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return 0;
+            // The Hippoete aggregates Construction speed across every character before applying the game logarithm.
+            return this.data.qtyBonus * lavaLog(this.constructionSpeed) * this.getBonusMultiplier();
         }
 
         return 0;
-    }
-
-    override hasCalculatedBonus = () => {
-        return true;
-    }
-
-    override getCalculatedBonusText = () => {
-        return `N/A for now.`;
     }
 }
 
 export class DeathskullArtifact extends Artifact {
-    override getBonus = (showUnobtained: boolean = false) => {
-        if (showUnobtained || this.status != ArtifactStatus.Unobtained) {
-            return 0;
-        }
-
-        return 0;
-    }
-
     override getBonusText = () => {
         return "+1 Gallery Slot";
     }
@@ -426,6 +426,10 @@ export const updateArtifacts = (data: Map<string, any>) => {
     (sailing.artifacts[1] as ManekiKatArtifact).highestLevel = highestLevel;
     (sailing.artifacts[11] as AshenUrnArtifact).highestLevel = highestLevel;
 
+    // Fun Hippoete is account-wide: every character contributes their Construction build speed.
+    (sailing.artifacts[8] as FunHippoeteArtifact).constructionSpeed =
+        players.reduce((total, player) => total + player.buildSpeed.value, 0);
+
     // Cooking related (parse data)
     (sailing.artifacts[13] as TriagulonArtifact).turkeyOwned = cooking.meals[0].count;
     
@@ -438,26 +442,14 @@ export const updateArtifacts = (data: Map<string, any>) => {
 export const updateSailingArtifactSlabBoost = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const lab = data.get("lab") as Lab;
-    const meritocraty = data.get("meritocraty") as Meritocraty;
-    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const slab = data.get("slab") as Slab;
 
-    const sovereignBonus = lab.bonuses[15].active ? (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() : 0;
-    const legendTalentBonus28 = legendTalents.getBonusFromIndex(28);
-    const meritocratyBonus23 = meritocraty.getCurrentBonus(23);
+    const mainframeBonus = lab.bonuses[15].active ? (lab.bonuses[15] as SlabSovereigntyBonus).getBonus() : 0;
+    const slabBonusMultiplier = slab.getSlabBonusMultiplier();
 
-    (sailing.artifacts[2] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
-    (sailing.artifacts[2] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
-    (sailing.artifacts[2] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
-
-    (sailing.artifacts[10] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
-    (sailing.artifacts[10] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
-    (sailing.artifacts[10] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
-
-    (sailing.artifacts[18] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
-    (sailing.artifacts[18] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
-    (sailing.artifacts[18] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
-
-    (sailing.artifacts[20] as SlabInfluencedArtifact).slabSovereignBonus = sovereignBonus;
-    (sailing.artifacts[20] as SlabInfluencedArtifact).legendTalentBonus = legendTalentBonus28;
-    (sailing.artifacts[20] as SlabInfluencedArtifact).meritocratyBonus = meritocratyBonus23;
+    [2, 10, 18, 20].forEach(index => {
+        const artifact = sailing.artifacts[index] as SlabInfluencedArtifact;
+        artifact.mainframeBonus = mainframeBonus;
+        artifact.slabBonusMultiplier = slabBonusMultiplier;
+    });
 }

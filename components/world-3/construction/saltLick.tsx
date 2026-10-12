@@ -1,12 +1,11 @@
-import { Box, CheckBox, Grid, Text } from "grommet";
-import React, { useMemo, useState } from "react";
+import { Box, CheckBox, Text } from "grommet";
+import { useMemo, useState } from "react";
 import { Item } from "../../../data/domain/items";
 import { Refinery } from "../../../data/domain/world-3/construction/refinery";
 import { SaltLick } from "../../../data/domain/world-3/construction/saltLick";
 import { nFormatter } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
-import ShadowBox from "../../base/ShadowBox";
-import TextAndLabel from "../../base/TextAndLabel";
+import DataRow from "../../base/DataRow";
 import { Construction } from "../../../data/domain/world-3/construction/construction";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { useShallow } from "zustand/react/shallow";
@@ -39,8 +38,8 @@ export function SaltLickDisplay() {
     }, [saltLickData, hideMaxed])
 
     return (
-        <Box>
-            <Box margin={{ bottom: 'small' }} gap="small">
+        <Box gap="small">
+            <Box gap="small">
                 <CheckBox
                     checked={hideMaxed}
                     label="Hide max level upgrades"
@@ -60,28 +59,32 @@ export function SaltLickDisplay() {
                         const costToMax = saltLickData.getCostToMax(bonus.index);
                         const costToNextLevel = saltLickData.getCost(bonus.index);
                         return (
-                            <ShadowBox key={index} background="dark-1" pad="medium" direction="row" align="center" justify="between" margin={{ bottom: 'small' }} style={{opacity: saltLickBuildingLevel < bonus.index + 1 ? 0.5 : 1}}>
-                                <Grid columns={["35%", "10%", "20%", "15%", "15%"]} fill gap="small" align="center">
-                                    <TextAndLabel textSize='small' text={saltLickData.getBonusText(bonus.index)} label="Bonus" />
-                                    <TextAndLabel text={`${bonus.level} / ${bonus.data.maxLevel}`} label="Level" />
-                                    {bonus.level < bonus.data.maxLevel ?
-                                        <React.Fragment>
-                                            <Box direction="row" align="center">
-                                                <Box title={saltItem.displayName} margin={{ right: 'small' }}>
-                                                    <IconImage data={saltItem.getImageData()} />
+                            <DataRow
+                                key={index}
+                                opacity={saltLickBuildingLevel < bonus.index + 1 ? 0.5 : 1}
+                                columns={["minmax(0, 35fr)", "minmax(0, 10fr)", "minmax(0, 20fr)", "minmax(0, 15fr)", "minmax(0, 15fr)"]}
+                                fields={[
+                                    { key: "bonus", kind: "text", label: "Bonus", value: saltLickData.getBonusText(bonus.index), role: "description" },
+                                    { key: "level", kind: "text", label: "Level", value: `${bonus.level} / ${bonus.data.maxLevel}` },
+                                    ...(bonus.level < bonus.data.maxLevel ? [
+                                        {
+                                            key: "next", kind: "content" as const, label: "Next Level costs",
+                                            content: (
+                                                <Box direction="row" align="center" gap="small">
+                                                    <Box title={saltItem.displayName}>
+                                                        <IconImage data={saltItem.getImageData()} />
+                                                    </Box>
+                                                    <Text size="small">{nFormatter(costToNextLevel)}</Text>
                                                 </Box>
-                                                <TextAndLabel text={nFormatter(costToNextLevel)} label="Next Level costs" />
-
-                                            </Box>
-                                            <Box direction="row" align="center">
-                                                <TextAndLabel text={nFormatter(costToMax)} label="Cost to max" />
-                                            </Box>
-                                            <TextAndLabel textColor={costToNextLevel > countInStorage ? 'accent-1' : 'green-1'} text={nFormatter(countInStorage)} label="In Storage" />
-                                        </React.Fragment> :
-                                        <Box align="center" justify="center"><Text color="green-1" size="large">Maxed!</Text></Box>
-                                    }
-                                </Grid>
-                            </ShadowBox>
+                                            ),
+                                        },
+                                        { key: "max", kind: "text" as const, label: "Cost to max", value: nFormatter(costToMax) },
+                                        { key: "storage", kind: "text" as const, label: "In Storage", color: costToNextLevel > countInStorage ? 'accent-1' : 'green-1', value: nFormatter(countInStorage) },
+                                    ] : [
+                                        { key: "maxed", kind: "content" as const, label: null, content: <Text color="green-1" size="small">Maxed!</Text> },
+                                    ]),
+                                ]}
+                            />
                         )
                     }
                 }

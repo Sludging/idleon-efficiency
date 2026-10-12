@@ -20,7 +20,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 43,
                 "itemY": 137,
                 "backgroundX": 171,
-                "backgroundY": 68
+                "backgroundY": 68,
+                "boxId": 0
             }),
         new GamingBoxBase(1, <GamingBoxModel>{
                 "name": "Spaded Box",
@@ -36,7 +37,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 282,
                 "itemY": 254,
                 "backgroundX": 49,
-                "backgroundY": 70
+                "backgroundY": 70,
+                "boxId": 1
             }),
         new GamingBoxBase(2, <GamingBoxModel>{
                 "name": "Animal Box",
@@ -52,7 +54,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 524,
                 "itemY": 305,
                 "backgroundX": 355,
-                "backgroundY": 92
+                "backgroundY": 92,
+                "boxId": 2
             }),
         new GamingBoxBase(3, <GamingBoxModel>{
                 "name": "Oceanside Package",
@@ -68,7 +71,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 600,
                 "itemY": 63,
                 "backgroundX": 241,
-                "backgroundY": 21
+                "backgroundY": 21,
+                "boxId": 3
             }),
         new GamingBoxBase(4, <GamingBoxModel>{
                 "name": "Kitsune Container",
@@ -84,7 +88,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 61,
                 "itemY": 269,
                 "backgroundX": 163,
-                "backgroundY": 178
+                "backgroundY": 178,
+                "boxId": 4
             }),
         new GamingBoxBase(5, <GamingBoxModel>{
                 "name": "Organic Box",
@@ -100,7 +105,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 165,
                 "itemY": 314,
                 "backgroundX": 282,
-                "backgroundY": 180
+                "backgroundY": 180,
+                "boxId": 5
             }),
         new GamingBoxBase(6, <GamingBoxModel>{
                 "name": "Console Box",
@@ -116,7 +122,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 617,
                 "itemY": 258,
                 "backgroundX": 254,
-                "backgroundY": 178
+                "backgroundY": 178,
+                "boxId": 6
             }),
         new GamingBoxBase(7, <GamingBoxModel>{
                 "name": "Tall Slimy Package",
@@ -132,7 +139,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 285,
                 "itemY": 128,
                 "backgroundX": 292,
-                "backgroundY": 174
+                "backgroundY": 174,
+                "boxId": 7
             }),
         new GamingBoxBase(8, <GamingBoxModel>{
                 "name": "Royalty Box",
@@ -148,7 +156,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 409,
                 "itemY": 290,
                 "backgroundX": 280,
-                "backgroundY": 70
+                "backgroundY": 70,
+                "boxId": 8
             }),
         new GamingBoxBase(9, <GamingBoxModel>{
                 "name": "Empty Box",
@@ -164,7 +173,8 @@ export const initGamingBoxRepo = () => {
                 "itemX": 20,
                 "itemY": 1,
                 "backgroundX": 198,
-                "backgroundY": 174
+                "backgroundY": 174,
+                "boxId": 9
             })    
 ]
 }

@@ -1,0 +1,61 @@
+{
+  "description": "Calculated Gallery trophy, nametag, podium-grade, and bonus-multiplier values from the already-calculated game state; Gallery owns its caps and podium arithmetic.",
+  "target": "Gallery equipment contributions",
+  "extractions": [
+    {
+      "label": "gallery_trophy_agility_percent",
+      "expression": "idleon.getDNSM(\"GalleryTrophyBonTOT\").h[\"%_AGI\"]",
+      "description": "Trophy Agility contribution at the improved-podium boundary; the paired save has artifact33 status4 and Trophy10 in collection position62"
+    },
+    {
+      "label": "gallery_nametag_skill_efficiency",
+      "expression": "Object.prototype.hasOwnProperty.call(idleon.getDNSM(\"GalleryNametagBonTOT\").h, \"%_SKILL_EFFICIENCY\") ? idleon.getDNSM(\"GalleryNametagBonTOT\").h[\"%_SKILL_EFFICIENCY\"] : 0",
+      "description": "Nametag Skill Efficiency contribution; absent effect keys contribute zero, following EtcBonuses own-property fallback (EtcBonuses.1.21.js:8-12)"
+    },
+    {
+      "label": "gallery_chip_troph",
+      "expression": "idleon.callFunction(\"chipBonuses\", \"troph\")",
+      "description": "Active character trophy chip contribution"
+    },
+    {
+      "label": "gallery_killroy_3",
+      "expression": "idleon.callFunction(\"RandomEvent\", \"KillroyBonuses\", 3, 0)",
+      "description": "Killroy bonus used by podium grades and Gallery scaling"
+    },
+    {
+      "label": "gallery_alchemy_y13",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y13",
+      "description": "Codfrey Rulz Ok bubble Gallery Bonus Multi contribution before Gallery's cap of 20"
+    },
+    {
+      "label": "gallery_card_w7a11",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
+      "description": "J11 Shimmerfin Deep card level for its Gallery Bonus effect, before Gallery's cap of 10"
+    },
+    {
+      "label": "gallery_companion_28",
+      "expression": "idleon.callFunction(\"Companions\", 28)",
+      "description": "Worldclass Showcase companion's highest-grade podium contribution"
+    },
+    {
+      "label": "gallery_companion_42",
+      "expression": "idleon.callFunction(\"Companions\", 42)",
+      "description": "Gallery Showcase companion contribution to improved podium grade"
+    },
+    {
+      "label": "gallery_companion_49",
+      "expression": "idleon.callFunction(\"Companions\", 49)",
+      "description": "Bubba companion contribution to Gallery Bonus Multi"
+    },
+    {
+      "label": "gallery_sushi_54",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 54, 0)",
+      "description": "Sushi contribution to Gallery Bonus Multi"
+    },
+    {
+      "label": "gallery_legend_9",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 9, 0)",
+      "description": "Superb Gallerium raises the grade of the first normal Gallery showcase slots"
+    }
+  ]
+}

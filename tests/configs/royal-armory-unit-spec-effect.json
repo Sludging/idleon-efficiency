@@ -1,0 +1,91 @@
+{
+  "description": "Royal Guardian specialization bonuses that improve Outpost collection, reach, Barrel experience, and Outpost clearing",
+  "target": "RoyalG UnitSpecEffect(unitType), including its direct Armory-upgrade inputs",
+  "extractions": [
+    {
+      "label": "royal_armory_unit_spec_effect_0",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
+      "description": "Royal Armory unit specialization percentage used by outpost resource rate"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_1",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 1, 0)",
+      "description": "Royal Armory unit specialization percentage used by barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_2",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 2, 0)",
+      "description": "Royal Armory unit specialization percentage used by outpost range"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_3",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 3, 0)",
+      "description": "Royal Armory unit specialization percentage used by barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_4",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 4, 0)",
+      "description": "Specialization bonus that increases extra kills credited toward clearing Outposts"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_5",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 5, 0)",
+      "description": "Royal Armory unit specialization percentage used by barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_6",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 6, 0)",
+      "description": "Royal Armory unit specialization percentage used by barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_effect_7",
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 7, 0)",
+      "description": "Royal Armory unit specialization percentage used by barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_19",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Outpost resource collection"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_20",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 20, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_21",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 21, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Outpost connection range"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_22",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 22, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_23",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 23, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for extra kills while clearing Outposts"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_24",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 24, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_25",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 25, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_upgrade_26",
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 26, 0)",
+      "description": "Armory upgrade input that increases the specialization bonus for Barrel experience"
+    },
+    {
+      "label": "royal_armory_unit_spec_extra_clear_killz",
+      "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
+      "description": "Extra clear-kills multiplier directly used by unit specialization index 4"
+    }
+  ]
+}

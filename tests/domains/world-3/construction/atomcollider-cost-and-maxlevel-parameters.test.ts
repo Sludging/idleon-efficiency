@@ -21,7 +21,7 @@ const parameterSpecs = {
     extractionKey: 'superbit_23_bonus',
     domainExtractor: (gameData: Map<string, any>) => {
       const gaming = gameData.get("gaming") as Gaming;
-      return gaming.superbits[23].unlocked ? 1 : 0;
+      return gaming.isSuperbitPurchased(23) ? 1 : 0;
     }
   },
 
@@ -76,7 +76,7 @@ const parameterSpecs = {
     extractionKey: 'superbit_21_bonus',
     domainExtractor: (gameData: Map<string, any>) => {
       const gaming = gameData.get("gaming") as Gaming;
-      return gaming.superbits[21].unlocked ? 1 : 0;
+      return gaming.isSuperbitPurchased(21) ? 1 : 0;
     }
   },
 

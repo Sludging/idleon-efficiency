@@ -1,0 +1,73 @@
+{
+  "extractions": {
+    "required_kills_1": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 1, 0)",
+      "result": 156.39405897989235
+    },
+    "required_kills_2": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 2, 0)",
+      "result": 188.29877301257415
+    },
+    "required_kills_10": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 10, 0)",
+      "result": 25000
+    },
+    "required_kills_29": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 29, 0)",
+      "result": 27
+    },
+    "required_kills_51": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 51, 0)",
+      "result": 38720.91344224774
+    },
+    "required_kills_101": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 101, 0)",
+      "result": 1514470.0153365699
+    },
+    "required_kills_112": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 112, 0)",
+      "result": 80000000
+    },
+    "required_kills_166": {
+      "expression": "idleon.callFunction('RoyalG', 'OutpostKillsReq', 166, 0)",
+      "result": 4000000000
+    },
+    "cleared_kills_101": {
+      "expression": "idleon.getAttr('RoyalMaps')[101][0]",
+      "result": 0
+    },
+    "unlocked_world_count": {
+      "expression": "idleon.callFunction('RoyalG', 'MapWorldsUnlocked', 0, 0)",
+      "result": 2
+    },
+    "expansion_bonus_2": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 2, 0)",
+      "result": 1
+    },
+    "expansion_bonus_3": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 3, 0)",
+      "result": 0
+    },
+    "expansion_bonus_4": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 4, 0)",
+      "result": 0
+    },
+    "expansion_bonus_5": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 5, 0)",
+      "result": 0
+    },
+    "expansion_bonus_6": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 6, 0)",
+      "result": 0
+    },
+    "expansion_bonus_7": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 7, 0)",
+      "result": 0
+    },
+    "expansion_bonus_8": {
+      "expression": "idleon.callFunction('RoyalG', 'ArmoryUpgBonus', 8, 0)",
+      "result": 0
+    }
+  },
+  "errors": {}
+}

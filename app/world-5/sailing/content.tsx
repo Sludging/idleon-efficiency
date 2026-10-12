@@ -13,7 +13,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import IconImage from '../../../components/base/IconImage';
 import ShadowBox, { ShadowHoverBox } from '../../../components/base/ShadowBox';
 
-import TabButton from '../../../components/base/TabButton';
+import ContentTabs from '../../../components/base/ContentTabs';
 import TextAndLabel, { ComponentAndLabel } from '../../../components/base/TextAndLabel';
 import { TimeDisplaySize, TimeDown } from '../../../components/base/TimeDisplay';
 import TipDisplay, { TipDirection } from '../../../components/base/TipDisplay';
@@ -644,11 +644,12 @@ function Sailing() {
                     </Box>
                 }
             </Box>
-            <Box align="center" direction="row" justify="center" gap="small" margin={{ bottom: 'small' }}>
-                {["Overview", "Islands", "Artifacts", "Captains", "Boats"].map((tabName, index) => (
-                    <TabButton key={index} isActive={activeTab == tabName} text={tabName} clickHandler={() => { setActiveTab(tabName); }} />
-                ))
-                }
+            <Box margin={{ bottom: 'small' }}>
+                <ContentTabs
+                    options={["Overview", "Islands", "Artifacts", "Captains", "Boats"].map(tabName => ({ value: tabName, label: tabName }))}
+                    value={activeTab}
+                    onChange={setActiveTab}
+                />
             </Box>
             {activeTab == "Overview" && <OverviewDisplay silkRodeChip={silkRodeChip} starSignEquipped={isStarSignActive} />}
             {activeTab == "Islands" && <IslandDisplay />}

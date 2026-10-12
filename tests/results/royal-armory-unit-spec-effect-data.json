@@ -1,0 +1,73 @@
+{
+  "extractions": {
+    "royal_armory_unit_spec_effect_0": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 0, 0)",
+      "result": 160
+    },
+    "royal_armory_unit_spec_effect_1": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 1, 0)",
+      "result": 220
+    },
+    "royal_armory_unit_spec_effect_2": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 2, 0)",
+      "result": 35
+    },
+    "royal_armory_unit_spec_effect_3": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 3, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_effect_4": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 4, 0)",
+      "result": 27640.399002493767
+    },
+    "royal_armory_unit_spec_effect_5": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 5, 0)",
+      "result": 5
+    },
+    "royal_armory_unit_spec_effect_6": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 6, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_effect_7": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 7, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_upgrade_19": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 19, 0)",
+      "result": 110
+    },
+    "royal_armory_unit_spec_upgrade_20": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 20, 0)",
+      "result": 220
+    },
+    "royal_armory_unit_spec_upgrade_21": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 21, 0)",
+      "result": 10
+    },
+    "royal_armory_unit_spec_upgrade_22": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 22, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_upgrade_23": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 23, 0)",
+      "result": 425
+    },
+    "royal_armory_unit_spec_upgrade_24": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 24, 0)",
+      "result": 5
+    },
+    "royal_armory_unit_spec_upgrade_25": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 25, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_upgrade_26": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 26, 0)",
+      "result": 0
+    },
+    "royal_armory_unit_spec_extra_clear_killz": {
+      "expression": "idleon.callFunction(\"RoyalG\", \"XtraClearKillz\", 0, 0)",
+      "result": 1.316209476309227
+    }
+  },
+  "errors": {}
+}

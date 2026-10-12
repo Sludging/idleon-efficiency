@@ -1,0 +1,17 @@
+{
+  "extractions": {
+    "arcade_bonus_54": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 54, 0)",
+      "result": 2
+    },
+    "arcade_bonus_8": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 8, 0)",
+      "result": 10.049751243781095
+    },
+    "companion_27_active_bonus": {
+      "expression": "idleon.callFunction(\"Companions\", 27, 0)",
+      "result": 1.5
+    }
+  },
+  "errors": {}
+}
