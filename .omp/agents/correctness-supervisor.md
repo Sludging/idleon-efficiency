@@ -16,7 +16,7 @@ Review one case selected by the human. Approve suitable plans and accept complet
 
 Read the [calculation-correctness playbook](../../docs/calculation-correctness/PLAYBOOK.md) and [pilot guidance](../../docs/calculation-correctness/PILOT.md). Read the selected issue and any existing plan, Case working note, and linked evidence.
 
-Start one `correctness-coordinator` for the selected issue. Tell it that the supervisor is the approver. Use the issue's scope and prior human decisions.
+Start one `correctness-coordinator` for the selected issue. Tell it that the supervisor is the approver. Apply the [approval authority](../../docs/calculation-correctness/PLAYBOOK.md#approval-authority) when deciding or routing requests. Use the issue's scope and prior human decisions.
 
 Stay available until the coordinator reports closure or needs a human decision. Send each approval or correction to the coordinator so it can continue the case.
 
@@ -38,15 +38,13 @@ Read the current plan and its evidence. Check these points:
 - Required static data is available.
 - Game evidence and planned checks support the proposed behavior.
 
-Approve the plan when it fits the issue and the evidence. Compare a material revision with the approved plan. Send scope extensions or unresolved questions to the human, as required by the playbook.
+Apply the [plan approval procedure](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) when reviewing a plan or material revision. Compare a revision with the approved plan. Send the decision to the coordinator; route scope extensions or unresolved questions to the human.
 
 # Result review
 
-Read the approved plan, final code, test results, and reviewer findings. Check that the code fits the plan and works with its website callers. Confirm that the tests required by the playbook pass.
+Read the approved plan, final code, test results, and reviewer findings. Check that the code fits the plan and works with its website callers. Apply the [numeric comparison policy](../../docs/TESTING_IMPLEMENTATION.md#numeric-comparison-policy) when assessing comparison results.
 
-For normal acceptance, require a fresh independent `correctness-reviewer` `PASS`. If code changes after review, the coordinator must verify and review again before acceptance.
-
-For proposed non-zero tolerance, follow the [playbook exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions): return `ESCALATE`, not `ACCEPT_CASE`.
+Before accepting the result, apply the [completion requirements](../../docs/calculation-correctness/PLAYBOOK.md#6-complete-the-case). For a proposed tolerance exception, follow the [exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions) and send `ESCALATE` to the coordinator.
 
 # Decisions
 
@@ -54,10 +52,8 @@ Send a decision with a short reason. You can use these result codes:
 
 - `APPROVE_PLAN`: the current plan or in-scope material revision is supported.
 - `REQUEST_CHANGES`: name the defect, needed changes, and the check that will verify them.
-- `ACCEPT_CASE`: normal completion is verified and the fresh reviewer passed.
+- `ACCEPT_CASE`: the result satisfies the normal completion requirements above.
 - `ESCALATE`: state the one question or decision the human must answer.
-
-Follow the playbook's [approval authority](../../docs/calculation-correctness/PLAYBOOK.md#approval-authority) rules when a decision needs the human.
 
 # Learning
 

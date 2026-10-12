@@ -56,7 +56,7 @@ Keep one plan at `.omp/plans/correctness-<issue-number>.md`. Include:
 
 Keep simple cases short. An unchanged interface needs only its existing usage and the intended correction, not a redesign.
 
-The worker returns `PLAN_READY` when the proposal is ready. The coordinator presents it to the approver and waits for approval or requested changes before assigning tests. The coordinator records the decision. Plan approval does not replace the tests-stage prerequisites for implementation.
+The worker returns `PLAN_READY` when the proposal is ready. The coordinator presents it to the approver and waits for approval or requested changes before assigning tests. The coordinator records the decision. Plan approval does not replace the [tests-stage prerequisites for implementation](#4-use-the-test-results-to-choose-the-next-step).
 
 Every worker and reviewer reads the plan directly. Keep progress and results in the issue's Case working note, with the plan path; do not duplicate the plan there. Keep the file while the case is active or blocked. If it is missing on resume, re-establish the plan and obtain approval before further changes.
 
@@ -75,19 +75,19 @@ During this stage, write tests and extraction config, not domain code. The coord
 
 ### 4. Use the test results to choose the next step
 
+Use the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy) to identify normal comparisons and interpret matcher results. Normal comparisons need no exception procedure or special human acceptance.
+
 | Result | Next step |
 | --- | --- |
 | `EXTRACTION_NEEDED`: config changed or human requested extraction | Run the extraction procedure below, then resume tests. |
-| `TESTS_READY`: core test fails or selected implementation is missing; all direct parameter comparisons pass at tolerance `0` | Accept the tests-stage result and assign implementation. |
-| `TESTS_READY`: core and all direct parameter comparisons pass at tolerance `0` | Assign review of the selected behavior and test coverage. |
+| `TESTS_READY`: core test fails or selected implementation is missing; all direct parameter comparisons pass with the normal configuration | Confirm [plan approval](#2-plan-and-obtain-approval) and accept the tests-stage result before assigning implementation. |
+| `TESTS_READY`: core and all direct parameter comparisons pass with the normal configuration | Assign review of the selected behavior and test coverage. |
 | `BLOCKED`: a direct parameter comparison fails, or a missing website result prevents that comparison; missing WikiBot fact or external prerequisite | Record the blocker and resume condition; follow the dependency procedure where applicable. |
 | Setup or extraction error prevents the selected tests from running | Address a clear test/config problem in the tests stage; report an external prerequisite to the human. |
 | `NEEDS_HUMAN`: game meaning, scope, or which aspect implements a calculation is unclear | Ask the question and pause. |
-| A non-zero tolerance is proposed or used | Follow the [exception procedure](#non-zero-tolerance-exceptions). |
+| A larger-bound override is proposed or used | Follow the [exception procedure](#non-zero-tolerance-exceptions). |
 | Domain changes preceded the tests-stage approval, or the order cannot be established at review | Record what is known and ask the human how to proceed. |
 | `REPORT`: stage is incomplete | Use the reported progress to continue the same stage, narrow the next task, or ask the human. |
-
-Implementation requires an approved plan, a selected calculation failure, and passing direct parameter comparisons.
 
 ### 5. Implement and review
 
@@ -96,13 +96,13 @@ The worker follows the [implementation stage](IMPLEMENTATION_STAGE.md): correct 
 A `READY_FOR_REVIEW` result goes to a fresh reviewer. The reviewer uses the case findings to locate the relevant game source, domain code, and tests, then independently checks the selected behavior and coverage. See the [reviewer instructions](../../.omp/agents/correctness-reviewer.md).
 
 - `PASS` goes to the approver for acceptance.
-- For a proposed non-zero tolerance exception, follow the [exception procedure](#non-zero-tolerance-exceptions).
+- For a proposed larger-bound override, follow the [exception procedure](#non-zero-tolerance-exceptions).
 - `CHANGES_REQUIRED` returns to the worker with the specific findings. Test/config or coverage changes go to tests first. An implementation correction can proceed when its failing test is already established. Review the corrected result again.
 - A blocker or unanswered question pauses the case. If the same finding remains after one correction, ask the human for direction.
 
 ### 6. Complete the case
 
-Normal completion requires implementation of the approved plan; the selected core and parameter tests, and all tests changed by the case, to pass at tolerance `0`; a fresh independent review covering the final changes to return `PASS`; and acceptance by the approver. Changes after review need verification and a fresh review of the changed behavior before normal completion.
+Normal completion requires implementation of the approved plan; the selected core and parameter tests, and all tests changed by the case, to pass with the normal configuration defined by the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy); a fresh independent review covering the final changes to return `PASS`; and acceptance by the approver.
 
 Human-directed exceptions and aborts follow the [approval authority](#approval-authority). Record what was verified and any omitted step with the outcome. Close the issue using [issue-tracker guidance](../agents/issue-tracker.md), then record the outcome using [pilot guidance](PILOT.md). Iteration two is reviewed after five distinct closed cases, including resolved and aborted outcomes.
 
@@ -110,7 +110,7 @@ After acceptance or abort, delete the local plan and local research file. No arc
 
 ### Non-zero tolerance exceptions
 
-A proposed non-zero tolerance must meet the [testing guide's source-backed bound and evidence requirements](../TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances). Keep the tests-stage and plan prerequisites in force; a bounded pass is not a zero-tolerance result or normal completion.
+A proposed larger-bound override must meet the [testing guide's technical justification requirements](../TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances). Record the proposed bound and required evidence in the Case working note. Keep the plan and [tests-stage prerequisites](#4-use-the-test-results-to-choose-the-next-step) in force. A pass using that override follows exception completion, not normal completion.
 
 Obtain fresh independent review of the final implementation and proposed bound. When the independent checks are complete, the reviewer returns `NEEDS_HUMAN`, not `PASS`, with findings, any defects, and unmet normal gates. Unexplained differences, unsupported bounds, and out-of-bound comparisons remain failures with the appropriate defect or dependency status.
 

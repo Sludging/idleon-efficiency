@@ -105,10 +105,6 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "import_bonus_8", description: "same-domain King Rat crown percentage", domainExtractor: data => (data.get('gaming') as Gaming).getImport(8)!.getBonus() },
 ];
 
-// Native Math.pow(288, 0.8) differs from Node by 1.4210854715202004e-14
-// percentage points. Bound only Squirrel shop 2 by 2e-14; all other rows stay exact.
-const acornShopBonus2AbsoluteError = 2e-14;
-
 describe('Gaming direct calculation parameters', () => {
     let data: Map<string, any>;
     let results: ExtractionResults;
@@ -120,10 +116,7 @@ describe('Gaming direct calculation parameters', () => {
     it.each(parameters)('$description', ({ extractionKey, domainExtractor }) => {
         const expected = getExtractedValue(results, extractionKey);
         const liveValue = extractionKey === 'harvest_card' ? expected * 20 : expected;
-        // The matcher divides by max(abs(expected), 1); convert the absolute bound.
-        const absoluteError = extractionKey === 'acorn_shop_bonus_2' ? acornShopBonus2AbsoluteError : 0;
-        const tolerance = absoluteError / Math.max(Math.abs(liveValue), 1);
-        expect(domainExtractor(data)).toMatchLiveGame(liveValue, tolerance);
+        expect(domainExtractor(data)).toMatchLiveGame(liveValue, 0);
     });
 });
 

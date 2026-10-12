@@ -52,37 +52,53 @@ Keep the extraction key, exact game call, and domain mapping in the config/test 
 
 Use these existing matchers:
 
-- Parameter comparisons: `toMatchLiveGame`, with tolerance `0`.
+- Parameter comparisons: `toMatchLiveGame`, with configured tolerance `0`.
 - Core comparisons: `toMatchLiveGameWithDetails`, with `{ tolerance: 0, ... }` and useful calculation details.
 
-When a domain result uses a fixed conversion of the game value, convert the extraction value only when delivered game code establishes that conversion. Explain it in the config description. Match the game's formula and operation order when small numeric differences occur.
+When a domain result uses a fixed conversion of the game value, convert the extraction value only when delivered game code establishes that conversion. Explain it in the config description.
+
+### Numeric comparison policy
+
+Both matchers default the configured tolerance to `0` and use:
+
+```text
+baselineTolerance = 5e-7
+effectiveTolerance = max(configuredTolerance, baselineTolerance)
+difference = abs(actual - expected) / max(abs(expected), 1)
+pass = difference <= effectiveTolerance
+```
+
+Configured tolerance `0` uses the shared baseline; it no longer means exact equality. For expected magnitudes at least `1`, the baseline permits `0.5` parts per million. Below `1`, it permits an absolute difference of `5e-7`. This is the ordinary product accuracy policy, including very large values. The baseline requires no engine-variation proof.
+
+Failure diagnostics show full-precision expected and received values, signed delta (`actual - expected`), difference, and effective, configured, and baseline tolerances. Larger configured tolerances set the total allowance through `max`; they do not add to the baseline.
+
+Keep configured tolerance `0` for normal comparisons. Every explicit non-zero override requires a nearby comment that justifies it. For larger overrides, apply the requirements below.
 
 ### Documented non-zero tolerances
 
-Tolerance `0` is required for normal completion. A selected comparison may propose a non-zero tolerance only when delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that tolerance:
+A selected comparison may propose a larger override, above the shared baseline, only when delivered game source establishes an intentional semantic difference between the game value and the domain value. Keep that override:
 
 - named at the aspect test site, not in the global matcher;
 - narrow and tied to the observed discrepancy;
-- explained with the game source, the domain contract, and the reason the comparison remains useful;
-- active, so differences outside the documented bound still fail.
+- explained in a nearby comment with the game source, the domain contract, and the reason the comparison remains useful.
 
-Document the proposed bound, source evidence, domain contract, and zero-tolerance discrepancy in the case working note. For review and completion of a proposed exception, follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions).
+Also document the proposed bound and discrepancy with configured tolerance `0`. When proposing or using a larger override in a correctness case, follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions) for recording, review, and human approval.
 
-Keep required comparisons active. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. An unexplained numeric difference is a failure to investigate, not an exception; match the delivered formula and operation order rather than widening the bound. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
+Keep required comparisons active so differences outside the allowed bound still fail. Skipping them, substituting guessed values, or changing tolerance to hide failures does not establish correctness. An unexplained difference outside the shared baseline is a failure to investigate, not an exception; match the delivered formula and operation order rather than widening the bound. Missing or wrong WikiBot static data goes to the human for a WikiBot request; generated data is not edited by correctness agents.
 
 ## Verify after implementation
 
-After implementation, run the selected core and parameter tests and every test changed by the case. Require passing comparisons at tolerance `0` for normal completion. Report bounded comparisons separately with the evidence required above. New test/config needs return through the tests stage before further domain changes.
+After implementation, run the selected core and parameter tests and every test changed by the case. Record the commands and results, and report larger overrides separately. For the next stage and any new test/config needs, follow the [implementation and review workflow](calculation-correctness/PLAYBOOK.md#5-implement-and-review). For acceptance, use the [completion prerequisites](calculation-correctness/PLAYBOOK.md#6-complete-the-case).
 
 ## Read the test results
 
 | Result | What it establishes and what follows |
 | --- | --- |
-| Core test fails; all direct parameter tests pass at tolerance `0` | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
+| Core test fails; all direct parameter tests pass at configured tolerance `0` | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
 | A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing producer comparison ends its investigation for this case. |
-| Core and all direct parameter tests pass at tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
+| Core and all direct parameter tests pass at configured tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
 | Setup fails before the selected assertions run | No calculation result was checked. Address a clear test/config problem or report the external prerequisite. |
-| A comparison uses or proposes non-zero tolerance | Check the [source-backed bound requirements](#documented-non-zero-tolerances), report bounded results separately, and follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). |
+| A comparison uses or proposes configured tolerance above the shared baseline | Check the [source-backed bound requirements](#documented-non-zero-tolerances), report larger overrides separately, and follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). |
 
 ## Test files and commands
 

@@ -23,13 +23,13 @@ The assignment packet contains:
 - `Work/result`: reference to the worker's result
 - optional `Prior findings`
 
-Read the approved local plan directly, then the case working note and linked evidence. The plan supplies the agreed scope and website design; independently verify the game behavior and implementation. If the plan is missing or unapproved, return `NEEDS_HUMAN` so the coordinator can restore the approval step.
+Read the approved local plan directly, then the case working note and linked evidence. The plan supplies the agreed scope and website design; independently verify the game behavior and implementation. For a missing or unapproved plan, return `NEEDS_HUMAN` so the coordinator can restore the [plan approval procedure](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval).
 
 # Review boundary
 
 Review the selected calculation against game source, extracted values, and website code. Review is read-only; the reviewer does not close the case.
 
-Use the plan and case findings as the starting point, not as proof of correctness. If evidence exposes a problem in the approved design, return `NEEDS_HUMAN` with the proposed change and reason under the [plan approval rule](../../docs/calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval). Do not silently replace the agreed design.
+Use the plan and case findings as the starting point, not as proof of correctness. If evidence exposes a problem in the approved design, return `NEEDS_HUMAN` with the proposed change and reason under the plan approval procedure above.
 
 For website pattern review, use the [implementation patterns guide](../../docs/agents/implementation-patterns.md) when the case includes backend design or implementation; read its UI route only for UI planning or changes. Check the named aspects and use its selection policy for uncovered choices or conflicts.
 
@@ -40,21 +40,21 @@ Use the [research file](../../docs/calculation-correctness/PLAYBOOK.md#local-gam
 Perform these checks in order:
 
 1. **Selected game behavior.** Check the selected calculation's versioned [game source](../../docs/game-snippets/README.md#rules), website implementation, and callers. Compare its conditions, formula, and operation order with the worker's findings.
-2. **Named test results.** Run the targeted tests in `Work/result` with the matching real save and extracted results at tolerance `0` for the normal path. For a proposed non-zero tolerance, independently check the [source-backed bound and evidence requirements](../../docs/TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances) and report bounded results separately. Core tests check the public result; parameter tests check directly used calculations.
+2. **Named test results.** Run the targeted tests in `Work/result` with the matching real save and extracted results. Apply the [numeric comparison policy](../../docs/TESTING_IMPLEMENTATION.md#numeric-comparison-policy) to the comparisons and explicit overrides. For a proposed tolerance exception, independently check the bound against the [source-backed evidence requirements](../../docs/TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances). Report exception-bound results separately from normal-policy results. Core tests check the public result; parameter tests check directly used calculations.
 3. **Core coverage.** Check that tests cover distinct behaviors, branches, or representative values. State what the real save exercises; unobserved branches are coverage limits, not failures.
 4. **Direct parameters and dependencies.** For each calculation used directly across domains/aspects, check its game call, website result, and paired parameter test. If the test passes, move on. Request any missing test; follow the [dependency procedure](../../docs/calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot) only when it fails or the website result is missing.
 5. **Plan, website fit, and integration.** Check that ownership, public interface, character semantics, and scope match the approved plan and work for its website consumers. Compare the implementation with the named aspects of existing code examples selected in the plan. Check the code that uses the result. Verify registrations, callers, and the `init → parse → calculate` flow. Check that names, descriptions, tests, and comments explain the mechanic rather than the obfuscated source. If the design or integration is broken, return `NEEDS_HUMAN` with the concrete issue and let the coordinator route the approver decision. State the actual integration behavior covered.
-6. **Tests before implementation.** Check the linked tests-stage result for core and all direct parameter comparisons run before domain edits, with direct parameters passing and a meaningful selected result. An already-green result may proceed directly to review. Mark the test-first status as `violated` when implementation preceded that result and `not established` when the historical result is missing; later green results do not change either fact.
+6. **Tests before implementation.** Check the linked tests-stage result against the [test-first requirements](../../docs/calculation-correctness/PLAYBOOK.md#3-establish-tests-before-changing-domain-code) and [implementation prerequisites](../../docs/calculation-correctness/PLAYBOOK.md#4-use-the-test-results-to-choose-the-next-step). Mark the test-first status as `violated` when implementation preceded the required result and `not established` when the historical result is missing. Later green results do not change either fact.
 
 # Status decisions
 
-- `PASS`: the approved plan is implemented, game behavior and required coverage are correct, targeted tests pass at tolerance `0`, and website integration and tests-before-implementation meet the requirements. Include any limits of the saved data that do not affect acceptance.
-- `CHANGES_REQUIRED`: a concrete implementation or test defect, missing required coverage, unapproved departure from the plan, integration regression, or missing mechanic explanation. Identify the affected code and requirement. Use `NEEDS_HUMAN` when correcting the problem requires changing the approved plan.
-- `BLOCKED`: a required external prerequisite is unavailable, or a direct parameter comparison is red or cannot be made. Follow the playbook dependency procedure.
-- `NEEDS_HUMAN`: plan approval is missing, the approved design needs changing, or a meaning, scope, mapping, ownership, or character-semantics question remains after checking the available evidence. Also return this status after completing independent checks for a qualifying non-zero tolerance under the [playbook exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions); include findings and unmet normal gates.
-- `REPORT`: review work remains, or missing information about tests before implementation needs coordinator handling. A limit of the saved data alone does not prevent `PASS` when agreed coverage is satisfied.
+Use the [review transitions](../../docs/calculation-correctness/PLAYBOOK.md#5-implement-and-review) to choose a status. Apply the review obligations in the [completion requirements](../../docs/calculation-correctness/PLAYBOOK.md#6-complete-the-case) to the final changes:
 
-For an unexplained difference, unsupported bound, or out-of-bound comparison under the [testing requirements](../../docs/TESTING_IMPLEMENTATION.md#documented-non-zero-tolerances), use `CHANGES_REQUIRED` for a selected calculation/test defect or `BLOCKED` for an observed direct dependency failure.
+- `PASS`: all independent checks are complete and satisfy the normal technical-review requirements above. Include any limits of the saved data that do not affect acceptance.
+- `CHANGES_REQUIRED`: a concrete implementation or test defect, missing required coverage, unapproved departure from the plan, integration regression, or missing mechanic explanation. This includes an unsupported or out-of-bound selected comparison. Identify the affected code and requirement. Use `NEEDS_HUMAN` when correcting the problem requires changing the approved plan.
+- `BLOCKED`: a required external prerequisite is unavailable, or a direct parameter comparison is red or cannot be made. Follow the playbook dependency procedure.
+- `NEEDS_HUMAN`: plan approval is missing, the approved design needs changing, or a meaning, scope, mapping, ownership, or character-semantics question remains after checking the available evidence. For a qualifying tolerance exception, return this status after independent checks under the [exception procedure](../../docs/calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). Send findings and unmet normal gates to the coordinator.
+- `REPORT`: review work remains, or missing information about tests before implementation needs coordinator handling. A limit of the saved data alone does not prevent `PASS` when agreed coverage is satisfied.
 
 At a ten-minute stop/report request, preserve findings, commands and test results already run, changed paths, and remaining checks, then return. The coordinator decides the next interval.
 

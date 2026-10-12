@@ -3,23 +3,6 @@ import { SprinklerImport, ShovelImport, SquirrelImport, ShellImport, BogLogImpor
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { ExtractionResults, getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 
-// Only these native Chromium Math.pow results differ from Node for the paired save.
-// AcornShopBonus(2): 288^0.8 differs by 1.4210854715202004e-14 percentage points.
-const squirrelLuckAbsoluteErrorLimit = 2e-14;
-// ShellRankREQ(28): 140^1.2 propagates to a 5.820766091346741e-11 threshold error.
-const shellThresholdAbsoluteErrorLimit = 7e-11;
-// SnailStuff(0), level 47: subtraction amplifies the 23^0.16 error to
-// 5.447031714567174e-16 probability units. Reset probability remains exact.
-const snailSuccessAbsoluteErrorLimit = 6e-16;
-// SuperbitCost(48): native 10^70 is 1.0000000000000001e70, Node is 1e70.
-// This cost differs by about 1.53e-16 relative; ownership and other costs stay exact.
-const superbit48RelativeErrorLimit = 2e-16;
-const engineAbsoluteErrorLimits: Readonly<Record<string, number>> = {
-    acorn_shop_bonus_2: squirrelLuckAbsoluteErrorLimit,
-    shell_next_threshold: shellThresholdAbsoluteErrorLimit,
-    snail_stuff_0: snailSuccessAbsoluteErrorLimit,
-};
-
 // Genuine paused offline 1.22 state. Relevant saved Gaming, shops, Palette,
 // Research progress and uniform level were paired with latest before extraction.
 // This save exercises extended Snail, capped crown odds, locked colors, decay,
@@ -134,14 +117,8 @@ describe('Gaming account mechanics', () => {
     });
     it.each(cases)('%s: %s', (label, description, extract) => {
         const expected = getExtractedValue(results, label);
-        // The matcher divides by max(abs(expected), 1). Convert each named bound
-        // to those units; small probabilities must not receive a relative-sized floor.
-        const denominator = Math.max(Math.abs(expected), 1);
-        const tolerance = label === 'superbit_cost_48'
-            ? superbit48RelativeErrorLimit * Math.abs(expected) / denominator
-            : (engineAbsoluteErrorLimits[label] ?? 0) / denominator;
         expect(extract(gaming)).toMatchLiveGameWithDetails(expected, {
-            tolerance, context: description,
+            tolerance: 0, context: description,
             debugInfo: { gamingLevel: gaming.level, bits: gaming.bits, paletteLuck: gaming.palette.bonusLuck }
         });
     });
