@@ -1,11 +1,13 @@
 modelRoles:
-  correctness_coordinator: openai-codex/gpt-6-terra:low
-  correctness_supervisor: openai-codex/gpt-6-astra:low
-  correctness_worker: openai-codex/gpt-6-sol:low
-  correctness_reviewer: openai-codex/gpt-6-sol:low
-  correctness_researcher: openai-codex/gpt-5.6-luna:high
-  correctness-pattern-researcher: openai-codex/gpt-5.6-luna:high
+  correctness_coordinator: openai-codex/gpt-6.1-sol:low
+  correctness_supervisor: openai-codex/gpt-6.1-sol:low
+  correctness_worker: openai-codex/gpt-6.1-sol:medium
+  correctness_reviewer: openai-codex/gpt-6.1-sol:low
+  correctness_researcher: openai-codex/gpt-6-luna:medium
+  correctness-pattern-researcher: openai-codex/gpt-6-luna:medium
 task:
   enableEffort: false
+  maxEffort: medium
   eager: always
-  maxRecursionDepth: 4
+  maxRecursionDepth: 3
+defaultThinkingLevel: low

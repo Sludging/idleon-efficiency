@@ -1,6 +1,6 @@
 # Coding standards
 
-These rules are mandatory for new or changed handwritten code, developer comments, and user-facing text, and for reviewing those changes. They do not require rewriting generated code or migrating unrelated legacy code.
+These rules are mandatory for new or changed handwritten code, developer comments, user-facing text, and technical plans, and for reviewing those changes. They do not require rewriting generated code or migrating unrelated legacy code.
 
 ## LANG-01 — Simplified Technical English (STE)
 
@@ -12,7 +12,7 @@ Use game terminology, informed by the Wiki and established repository/domain voc
 
 ## RESEARCH-01 — Understand the player and mechanic
 
-Before implementation, learn how the mechanic works, how players interact with it, and what information the website should provide. Reading repository code alone is not enough; use game evidence and player-facing sources as appropriate.
+Before planning or implementation, learn how the mechanic works, how players interact with it, and what information the website should provide. Reading repository code alone is not enough; use game evidence and player-facing sources as appropriate.
 
 ## MODEL-01 — Model responsible concepts
 
@@ -42,3 +42,13 @@ Run each calculation after the values it uses are ready. Distinguish values read
 
 Use direct access for domains and objects that initialization always creates. Do not add `| undefined`, optional chaining or default values to handle objects that cannot be missing. Keep checks and defaults for data that can actually be missing, such as optional save fields.
 
+## PLAN-01 — Feature delivery plans
+Write plans as standalone descriptions of the feature and its delivery. Include outcomes, responsibilities, required data, integration, and verification. Keep approval history, progress, and agent instructions in the handoff. Include design details and scope boundaries only when they resolve a concrete delivery question.
+
+## SIMPLE-01 — Solve the current problem
+
+Implement the agreed requirements and the changes needed to make them work. Get approval before expanding those requirements. Design for current uses, not possible future features.
+
+Prefer clear code and established project patterns. Add extra layers, options, dependencies, or process only when they solve an identified problem in the current work. Explain that problem rather than appealing to “best practice” or “future-proofing.” Simplicity means fewer concepts to understand and maintain, not fewer lines or avoiding object-oriented design.
+
+Match error handling and operational safeguards to expected inputs and the consequences of failure. Treat this as a hobby project, not a regulated financial system. Verify changed behavior, without importing processes designed for risks this project does not face.
