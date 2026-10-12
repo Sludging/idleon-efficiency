@@ -7,6 +7,19 @@ export interface ChangelogEntryData {
 
 export const changelogData: ChangelogEntryData[] = [
   {
+    version: "1.5.0",
+    title: "World 7, Royal Armory, and Gaming",
+    date: "October 11, 2026",
+    changes: [
+      "Added Royal Armory page to track resources, upgrades, Orblets, Royal Statues, and Outpost progress.",
+      "Added Coral Reef page to track coral production, upgrades, and Dancing Coral bonuses.",
+      "Added Sushi Station page to track collection progress, resources, and upgrades.",
+      "Added Jelly Operator page to track cells, upgrades, obstructions, and operation progress.",
+      "Expanded Gaming page with plants, mutations, upgrades, Superbits, and Palette.",
+      "Added World 7 to the Task Board page.",
+    ]
+  },
+  {
     version: "1.4.0",
     title: "Cooking speed",
     date: "September 1, 2026",
