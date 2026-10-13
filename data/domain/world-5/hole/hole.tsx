@@ -36,6 +36,8 @@ import { Jar } from "./jar";
 import { LegendTalents } from "../../world-7/legendTalents";
 import { ZenithMarket } from "../../world-7/zenithShop";
 
+const holeResearchExpUpgradeBasePercent = 1;
+
 export class Villager {
     level: number = 0;
     currentExp: number = 0;
@@ -744,6 +746,12 @@ export class Hole extends Domain {
     jar: Jar = new Jar();
     gambit: Gambit = new Gambit();
     ownedOpals: number = 0;
+    researchExpUpgradeLevel: number = 0;
+
+    getResearchExpUpgradeBonus(): number {
+        return this.researchExpUpgradeLevel * holeResearchExpUpgradeBasePercent;
+    }
+
     // TODO: 
     // Well - DONE?
     // Caverns
@@ -802,6 +810,7 @@ export class Hole extends Domain {
         const hole = data.get(this.getDataKey()) as Hole;
         const holeData = data.get("Holes") as number[][];
         const optionListAccount = data.get("OptLacc") as number[];
+        hole.researchExpUpgradeLevel = Number(optionListAccount[641] ?? 0);
 
         // Old accounts won't have data, so exit early.
         if (!holeData || holeData.length == 0) {
@@ -967,8 +976,8 @@ export const updateHole = (data: Map<string, any>) => {
         measurement.accountLevel = tome.totalAccountLevel;
         // TODO: Make this less messy one day, for now should be fine.
         measurement.allSkillLevel = parseInt(tome.lines[11].getPlayerCurrentValueDisplay(0));
-        // TODO: This doesn't work on load, investigate why.
-        measurement.deathnotePts = deathnote.getTotalRank();
+        // Normal-world points exclude minibosses; the Eclipse Skulls gate is ready.
+        measurement.deathnotePts = deathnote.getTotalWorldRank();
     });
 
     // Update jar bonuses from legendary talents

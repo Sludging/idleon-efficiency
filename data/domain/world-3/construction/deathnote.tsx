@@ -26,6 +26,7 @@ export class Deathnote extends Domain {
     playerKillsByMap: Map<number, Map<number, number>> = new Map();
     hasRiftBonus: boolean = false;
     hasMinibosses: boolean = false;
+    private totalWorldRank: number = 0;
 
     getDeathnoteRank = (killCount: number) => {
         switch (true) {
@@ -39,6 +40,20 @@ export class Deathnote extends Domain {
             case killCount > 100000000 && killCount < 1000000000: return 10;
             case killCount > 1000000000: return this.hasRiftBonus ? 20 : 10;
             default: return 0;
+        }
+    }
+
+    getNormalWorldRank = (killCount: number, eclipseSkullsActive: boolean): number => {
+        switch (true) {
+            case killCount < 25000: return 0;
+            case killCount < 100000: return 1;
+            case killCount < 250000: return 2;
+            case killCount < 500000: return 3;
+            case killCount < 1000000: return 4;
+            case killCount < 5000000: return 5;
+            case killCount < 100000000: return 7;
+            case killCount > 1000000000 && eclipseSkullsActive: return 20;
+            default: return 10;
         }
     }
 
@@ -136,6 +151,22 @@ export class Deathnote extends Domain {
         return totalRank;
     }
 
+    prepareWorldRanks = (eclipseSkullsActive: boolean): void => {
+        let totalWorldRank = 0;
+        for (const world of deathNoteMobOrder) {
+            for (const monster of world) {
+                const killCount = this.mobKillCount.get(monster)!.reduce((sum, killCount) => sum + Math.round(killCount), 0);
+                totalWorldRank += this.getNormalWorldRank(killCount, eclipseSkullsActive);
+            }
+        }
+
+        this.totalWorldRank = totalWorldRank;
+    }
+
+    getTotalWorldRank = (): number => {
+        return this.totalWorldRank;
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "KLA_", perPlayer: true, default: [] }
@@ -203,6 +234,13 @@ export class Deathnote extends Domain {
             })
         })
     }
+}
+
+export const updateDeathnoteWorldRanks = (data: Map<string, any>): void => {
+    const deathNote = data.get("deathnote") as Deathnote;
+    const rift = data.get("rift") as Rift;
+
+    deathNote.prepareWorldRanks(rift.bonuses.find(bonus => bonus.name == "Eclipse Skulls")!.active);
 }
 
 export const updateDeathnote = (data: Map<string, any>) => {

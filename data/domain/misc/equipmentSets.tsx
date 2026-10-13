@@ -6,6 +6,9 @@ import { EquipmentSetsModel } from "../model/equipmentSetsModel";
 import { Player } from "../player";
 
 export class EquipmentSet {
+    // Game v1.22 (lines 241267–241314) requires six Prehistoric tools; the generated boolean omits this numeric requirement.
+    static readonly prehistoricSetRequiredToolCount = 6;
+
     unlocked: boolean = false;
     constructor(public index: number, public data: EquipmentSetsModel) { }
 
@@ -21,6 +24,44 @@ export class EquipmentSet {
             return 1 + this.data.bonusValue / 100;
         }
         return this.data.bonusValue;
+    }
+
+    isActiveFor(player?: Player): boolean {
+        let active = this.unlocked;
+        if (!active && player) {
+            let matchedCount = 0;
+            for (let index = 0; index < this.data.armors.length; index++) {
+                const armorName = this.data.armors[index];
+                if (this.data.armors.indexOf(armorName) == index &&
+                    player.gear.equipment.some(item => item?.internalName == armorName)) {
+                    matchedCount++;
+                }
+            }
+
+            const toolsRequired = this.data.name === "PREHISTORIC_SET"
+                ? EquipmentSet.prehistoricSetRequiredToolCount
+                : Number(this.data.toolsRequired);
+            let matchedTools = 0;
+            for (const toolName of this.data.tools) {
+                if (matchedTools >= toolsRequired) {
+                    break;
+                }
+                if (player.gear.tools.some(item => item?.internalName == toolName)) {
+                    matchedTools++;
+                }
+            }
+            matchedCount += matchedTools;
+
+            if (this.data.weaponRequired &&
+                this.data.weapons.some(weaponName => player.gear.equipment.some(item => item?.internalName == weaponName))) {
+                matchedCount++;
+            }
+
+            const requiredCount = this.data.armors.length + toolsRequired + Number(this.data.weaponRequired);
+            active = matchedCount >= requiredCount;
+        }
+
+        return active;
     }
 
     static fromBase = (data: EquipmentSetsBase[]) => {
@@ -81,14 +122,7 @@ export class EquipmentSets extends Domain {
             throw new Error(`Set ${setName} not found`);
         }
 
-        let active = false;
-        if (this.permanentlyActive && set.unlocked) {
-            active = true;
-        } else {
-            // TODO: Check if individual player has the set equipped.
-        }
-
-        if (active) {
+        if (set.isActiveFor(player)) {
             return set.getBonus(raw);
         }
 

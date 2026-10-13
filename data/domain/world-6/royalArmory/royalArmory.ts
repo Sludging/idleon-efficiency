@@ -180,6 +180,13 @@ export class RoyalArmory extends Domain {
     }
 
     getSelectedOutpostBonusIndex(): number { return this.selectedOutpostBonusIndex; }
+
+    getResearchExpOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 1) return 1;
+
+        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + (additionalOutposts / (40 + additionalOutposts)) * 2;
+    }
     getTotalUpgradeLevels(): number { return this.totalUpgradeLevels; }
     getUnlockedUpgradeCount(): number { return this.unlockedUpgradeCount; }
 

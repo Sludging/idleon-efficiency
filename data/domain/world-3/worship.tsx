@@ -88,6 +88,15 @@ export class Totalizer {
     unlocked: boolean = false;
     unlockedBonuses: TotalizerBonus[] = [];
 
+    // Research needs its own Superbit, not the Totalizer's general unlock.
+    getResearchExpBonus(): number {
+        if (!this.unlockedBonuses.includes(TotalizerBonus.ResearchExp)) {
+            return 0;
+        }
+
+        return 0.3 * Math.max(0, Math.floor((this.totalWaves - 300) / 10));
+    }
+
     getBonus = (bonus: TotalizerBonus) => {
         if (!this.unlocked || this.unlockedBonuses.length == 0 || !this.unlockedBonuses.includes(bonus)) {
             return 0;
@@ -105,7 +114,7 @@ export class Totalizer {
             case TotalizerBonus.Cooking: return 13 * Math.floor(this.totalWaves / 10);
             case TotalizerBonus.BitValue: return 50 * Math.floor(this.totalWaves / 10);
             case TotalizerBonus.SpelunkingPow: return 2.5 * Math.max(0, Math.floor((this.totalWaves - 300) / 10));
-            case TotalizerBonus.ResearchExp: return 0.3 * Math.max(0, Math.floor((this.totalWaves - 300) / 10));
+            case TotalizerBonus.ResearchExp: return this.getResearchExpBonus();
             default: return 0;
         }
     }

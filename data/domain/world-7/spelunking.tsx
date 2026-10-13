@@ -10,6 +10,11 @@ import { SpelunkingItemDropModel } from "../model/spelunkingItemDropModel";
 import { SpelunkingRewardLabelModel } from "../model/spelunkingRewardLabelModel";
 import { SpelunkingTunnelModel } from "../model/spelunkingTunnelModel";
 import { SpelunkingUpgradeModel } from "../model/spelunkingUpgradeModel";
+import { initTomeEpilogueBonusRepo } from "../data/TomeEpilogueBonusRepo";
+import type { EquipmentSets } from "../misc/equipmentSets";
+import type { Grimoire } from "../grimoire";
+import type { Player } from "../player";
+import type { Tome } from "../world-4/tome";
 
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
 const GRAND_DISCOVERY_UPGRADE_INDEX = 43;
@@ -170,7 +175,7 @@ export class Upgrade {
     }
 
     getBonus(): number {
-        return this.data.bonusPerLevel * this.level;
+        return this.data.bonusPerLevel * this.purchasedLevel;
     }
 
     static fromBase = (data: SpelunkingUpgradeBase[]): Upgrade[] => {
@@ -186,6 +191,8 @@ export class Spelunking extends Domain {
     ownedAmber: number = 0;
     exaltedStampFragments: number = 0;
     grandDiscoveryUpgrade!: Upgrade;
+    ownedEpilogueCount: number = 0;
+    private readonly researchExpEpilogue = initTomeEpilogueBonusRepo().find(bonus => bonus.index === 7)!;
     amber!: SpelunkingRewardLabelModel;
     // Destruction rewards are not discoveries or fixed drops. Bling bags only present the generated loot.
     sharedDestructionDrops: {
@@ -207,7 +214,7 @@ export class Spelunking extends Domain {
     }
 
     get grandDiscoveryUpgradeBonus(): number {
-        // The effective Grand gate clamps negative levels. Keep the existing raw upgrade-bonus APIs unchanged.
+        // The effective Grand gate uses purchased levels, which clamp negative saved levels to zero.
         return this.grandDiscoveryUpgrade.data.bonusPerLevel * this.grandDiscoveryUpgrade.purchasedLevel;
     }
 
@@ -243,6 +250,22 @@ export class Spelunking extends Domain {
         return this.tunnels.reduce((total, tunnel) => total + tunnel.discoveryCount, 0);
     }
 
+    getResearchExpEpilogueBonus(player: Player, tome: Tome, grimoire: Grimoire, equipmentSets: EquipmentSets): number {
+        const epilogue = this.researchExpEpilogue;
+        if (!(this.ownedEpilogueCount > epilogue.index)) {
+            return 0;
+        }
+
+        // Use this character's Tome score and equipped set, not the account's highest score.
+        const score = tome.getPlayerTotalScore(player.playerID);
+        const grimoireBonus = grimoire.getUpgradeBonus(17);
+        const trollSetBonus = equipmentSets.getSetBonus("TROLL_SET", player, true);
+        const scoreBlocks = Math.floor(Math.max(0, score - epilogue.data.x1) / 100);
+        const scorePower = Math.pow(scoreBlocks, 0.7);
+        return (1 + (grimoireBonus + trollSetBonus) / 100)
+            * epilogue.data.x0 * Math.max(0, scorePower / (25 + scorePower));
+    }
+
     getRawKeys(): RawData[] {
         return [
             { key: "Spelunk", perPlayer: false, default: [] }
@@ -275,6 +298,7 @@ export class Spelunking extends Domain {
         this.stamina = Array(charCount).fill(0);
         this.ownedAmber = 0;
         this.exaltedStampFragments = 0;
+        this.ownedEpilogueCount = 0;
         return this;
     }
 
@@ -284,6 +308,7 @@ export class Spelunking extends Domain {
         const savedStamina = (spelunkingData[3] ?? []) as (number | string)[];
         const currencies = (spelunkingData[4] ?? []) as (number | string)[];
         const shopUpgradeLevels = (spelunkingData[5] ?? []) as (number | string)[];
+        spelunking.ownedEpilogueCount = Number(spelunkingData[13]?.[2] ?? 0);
         const discoveredNames = new Set(
             (spelunkingData[6] ?? []).map(discovery => String(discovery).replace(/_/g, " ").trim())
         );

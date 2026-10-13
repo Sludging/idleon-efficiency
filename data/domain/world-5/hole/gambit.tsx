@@ -1,6 +1,7 @@
 import { lavaLog, lavaLog2, toTime } from "../../../utility";
 import { initGambitBonusRepo, GambitBonusBase } from "../../data/GambitBonusRepo";
 import { GambitBonusModel } from "../../model/gambitBonusModel";
+import type { Player } from "../../player";
 
 export enum GambitChallengeIndex {
     King = 0,
@@ -108,12 +109,14 @@ export class Gambit {
         this.bonuses = GambitBonus.fromBase(initGambitBonusRepo());
     }
 
-    getBonus(index: number): number {
+    getBonus(index: number, player?: Player): number {
+        if (player?.currentMap.includes("Tutorial")) return 0;
+
         const bonus = this.bonuses.find(bonus => bonus.index == index);
 
         if (bonus)
         {
-            return bonus.getBonus(this.getGambitTotalTime());
+            return bonus.getBonus(this.getGambitTotalScore());
         }
 
         return 0;

@@ -42,7 +42,7 @@ import { updateArtifacts, updateSailingArtifactSlabBoost } from './world-5/saili
 import { Constellations } from './constellations';
 import { Slab, updateSlabBonusDisplay, updateSlabBonusMultiplier } from './world-5/slab';
 import { Capacity, updateCapacity } from './capacity';
-import { Deathnote, updateDeathnote, updateDeathnoteMiniboss } from './world-3/construction/deathnote';
+import { Deathnote, updateDeathnote, updateDeathnoteMiniboss, updateDeathnoteWorldRanks } from './world-3/construction/deathnote';
 import { Companions, updateCompanionImpact } from './companions';
 import type { CompanionState } from './companions/companionState';
 import { HandleRawDataKey } from './base/domain';
@@ -56,7 +56,7 @@ import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, up
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
-import { ResearchGrid, updateResearchGrid } from './world-7/research';
+import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
@@ -329,6 +329,7 @@ const postProcessingMap: Record<string, Function> = {
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
     "playerTalentPoints": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentPoints(accountData),
     "tomeScore": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeScores(accountData),
+    "deathnoteWorldRanks": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteWorldRanks(accountData),
     "hole": (doc: Cloudsave, accountData: Map<string, any>) => updateHole(accountData),
     "alchemyTomeBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemyTomeBubbles(accountData),
     // Tome bonuses consume the score and Tome-adjusted bubbles above; callers pass the relevant Player to getTomeBonus.
@@ -398,6 +399,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
     // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),
+    // Research presentation needs settled producers and the selected Royal Outpost's late inputs.
+    "researchDisplay": (_doc: Cloudsave, accountData: Map<string, any>) => updateResearchDisplay(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {
