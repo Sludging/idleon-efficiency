@@ -1,0 +1,21 @@
+{
+  "description": "Player Worship Power and its direct Alchemy contributions for the retained target character",
+  "target": "Player Worship Power",
+  "extractions": [
+    {
+      "label": "worship_power",
+      "expression": "idleon.callFunction(\"TotalStats\", \"Worship_Power\")",
+      "description": "Prepared Worship Power, including equipped power and both Alchemy contributions"
+    },
+    {
+      "label": "alchemy_worship_power_m2",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M2",
+      "description": "Slabe Logsoul contribution used directly by the target character Worship Power"
+    },
+    {
+      "label": "alchemy_worship_power_m7",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M7",
+      "description": "Endgame Eff Iii contribution used directly by the target character Worship Power"
+    }
+  ]
+}

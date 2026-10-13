@@ -1,0 +1,31 @@
+{
+  "description": "Right Hand of Action prepared target recipient results, raw source curve, and enhancement for the retained paired save",
+  "target": "Talents Right Hand of Action",
+  "extractions": [
+    {
+      "label": "recipient_mining_action_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][0]",
+      "description": "Prepared target Mining efficiency bonus after the producer; recipient level is below the sole eligible source"
+    },
+    {
+      "label": "recipient_worship_action_bonus",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.CalcTalentMAP.h[43][8]",
+      "description": "Prepared target Worship efficiency bonus after the producer; recipient level is above the sole eligible source"
+    },
+    {
+      "label": "source_action_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][2], Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][0]), Number(idleon.engine.getGameAttribute(\"CustomLists\").h.TalentDescriptions[43][1][1]), idleon.engine.getGameAttribute(\"PlayerDATABASE\").h.SludgeMan.h.SkillLevels[43], 0, 0)",
+      "description": "Ordinary source action curve from raw allocated points; SludgeMan is the only eligible source in the retained save"
+    },
+    {
+      "label": "enhancement_eclipse_bonus",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 49, -1)",
+      "description": "Account Enhancement Eclipse bonus directly used to unlock the Right Hand enhancement"
+    },
+    {
+      "label": "right_hand_enhancement",
+      "expression": "idleon.callFunction(\"TalentEnh\", 43)",
+      "description": "Prepared global Right Hand enhancement flag; selected talent preparation must preserve this state"
+    }
+  ]
+}

@@ -92,6 +92,7 @@ import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenith
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies } from './skilling';
+import { updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
