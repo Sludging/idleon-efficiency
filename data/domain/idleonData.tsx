@@ -67,9 +67,9 @@ import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
-import { Grimoire, updateGrimoireEfficiency } from './grimoire';
+import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
-import { Compass, updateCompassDamageEfficiency, updateCompassExaltedStampBonus } from './compass';
+import { Compass, updateCompassDamageEfficiency, updateCompassExaltedStampBonus, updateCompassUpgradeCosts } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
 import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
@@ -296,6 +296,10 @@ const postProcessingMap: Record<string, Function> = {
     "updateMasterClasses": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateMasterClasses(accountData),
     // Tesseract prices consume both prepared Master Classes multipliers.
     "tesseractUpgradeCosts": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateTesseractUpgradeCosts(accountData),
+    // Compass prices also require the prepared shared and first-three discounts.
+    "compassUpgradeCosts": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateCompassUpgradeCosts(accountData),
+    // Grimoire prices use the same prepared account discounts as Tesseract.
+    "grimoireUpgradeCosts": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateGrimoireUpgradeCosts(accountData),
     "updateSlabBonusMultiplier": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusMultiplier(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),

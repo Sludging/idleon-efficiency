@@ -28,6 +28,9 @@ import type { Spelunking } from "./world-7/spelunking";
 import type { LegendTalents } from "./world-7/legendTalents";
 import type { SushiStation } from "./world-7/sushi";
 import type { JellyOperator } from "./world-7/jellyOperator";
+import type { MasterClasses } from "./masterClasses";
+
+const compassCostPaths = ["Elemental", "Fighter", "Survival", "Nomadic", "Abomination"] as const;
 
 interface ExaltedStampBonusInputs {
     atomBonus: number;
@@ -270,6 +273,8 @@ export class CompassUpgrade implements EfficiencyUpgrade {
     public indexInPath: number = 0;
 
     public dustServerVarMultiplier: number = 1;
+    public firstThreeUpgradeCostMultiplier: number = 1;
+    public sharedUpgradeCostMultiplier: number = 1;
 
     constructor(
         public id: number,
@@ -327,14 +332,12 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         const compassUpgrades = allUpgrades as unknown as CompassUpgrade[];
         const upgradeMetadata = args[0] as Record<string, { pathLevel: number, pathUpgrades: number[] }>;
         
+        // Capped upgrades have no actionable next-level price on the website.
         if (this.level >= this.data.maxLevel) {
             return 0;
         }
 
-
-
-        // Base dust cost from server variable
-        const baseDustCost = Math.max(this.dustServerVarMultiplier, 1);
+        const baseDustCost = Math.max(this.dustServerVarMultiplier, 6.2);
 
         // Special cost reductions for specific upgrade IDs
         let costReduction = 1;
@@ -392,22 +395,22 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         // Base cost from upgrade data
         const baseCost = this.data.baseCost / 2;
 
-        // Get the path length for scaling factor calculation
-        let pathLength = 0;
-        if (this.data.upgradeType && Object.keys(upgradeMetadata).includes(this.data.upgradeType)) {
-            pathLength = upgradeMetadata[this.data.upgradeType].pathUpgrades.length;
-        }
+        // Prices use the source group, which can differ from the displayed path.
+        const costPath = upgradeMetadata[compassCostPaths[this.data.x6]];
+        const pathLength = costPath?.pathUpgrades.length ?? 0;
+        const costIndexInPath = costPath?.pathUpgrades.indexOf(this.id) ?? -1;
+        const scalingFactor = Math.max(1, Math.pow(3.69 - pathLength / 27, costIndexInPath));
 
-        // Scaling factor based on upgrade position in path
-        const scalingFactor = Math.pow(3.2 - pathLength / 60, this.indexInPath);
-
-        // Final cost calculation
-        const cost = baseDustCost * 
-            (1 / Math.max(1, costReduction)) * 
-            generalCostReduction * 
-            baseCost * 
-            scalingFactor * 
-            Math.pow(this.data.costMult, this.level);
+        // Numeric source groups do not activate the game's additive Path-upgrade surplus.
+        // Both Master Classes discounts apply to every Compass upgrade.
+        const cost = this.firstThreeUpgradeCostMultiplier *
+            this.sharedUpgradeCostMultiplier *
+            (baseDustCost *
+                generalCostReduction *
+                (1 / Math.max(1, costReduction)) *
+                baseCost *
+                scalingFactor *
+                Math.pow(this.data.costMult, this.level));
 
         return cost;
     }
@@ -559,6 +562,8 @@ export class CompassUpgrade implements EfficiencyUpgrade {
         copy.costToUnlock = this.costToUnlock;
         copy.indexInPath = this.indexInPath;
         copy.dustServerVarMultiplier = this.dustServerVarMultiplier;
+        copy.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        copy.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         return copy;
     }
 }
@@ -567,6 +572,8 @@ export class Compass extends Domain implements EfficiencyDomain {
     upgrades: CompassUpgrade[] = [];
     exaltedStampNames: Set<string> = new Set();
     private exaltedStampBonus: number = 0;
+    private firstThreeUpgradeCostMultiplier: number = 1;
+    private sharedUpgradeCostMultiplier: number = 1;
 
     totalCompassLevel: number = 0;
     totalDustsCollected: number = 0;
@@ -612,6 +619,8 @@ export class Compass extends Domain implements EfficiencyDomain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.firstThreeUpgradeCostMultiplier = 1;
+        this.sharedUpgradeCostMultiplier = 1;
         this.upgrades = CompassUpgrade.fromBase(initCompassUpgradeRepo());
         return this;
     }
@@ -622,6 +631,8 @@ export class Compass extends Domain implements EfficiencyDomain {
         const optionList = data.get("OptLacc") as number[];
         const serverVars = data.get("servervars") as Record<string, any>;
         compass.exaltedStampNames.clear();
+        compass.firstThreeUpgradeCostMultiplier = 1;
+        compass.sharedUpgradeCostMultiplier = 1;
 
         // Exit early for older accounts that don't have a compass data array.
         if (!compassData || compassData.length == 0) {
@@ -699,6 +710,8 @@ export class Compass extends Domain implements EfficiencyDomain {
             }
 
             upgrade.dustServerVarMultiplier = dustCostServerVar;
+            upgrade.firstThreeUpgradeCostMultiplier = compass.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = compass.sharedUpgradeCostMultiplier;
         });
 
         // Before we can calculate the costs / bonus etc. for upgrades we need to 
@@ -826,8 +839,24 @@ export class Compass extends Domain implements EfficiencyDomain {
 
         // Then recalculate all bonuses and costs
         compassUpgrades.forEach(upgrade => {
+            // Replace account discounts instead of compounding them during simulation.
+            upgrade.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
             upgrade.bonus = upgrade.getBonus(compassUpgrades);
             upgrade.cost = upgrade.getCost(upgrades, this.upgradeMetadata);
+        });
+    }
+
+    updateUpgradeCosts(firstThreeMultiplier: number, sharedMultiplier: number): void {
+        this.firstThreeUpgradeCostMultiplier = firstThreeMultiplier;
+        this.sharedUpgradeCostMultiplier = sharedMultiplier;
+        this.recalculateUpgrades(this.upgrades);
+
+        this.upgrades.forEach(upgrade => {
+            upgrade.costToMax = upgrade.data.maxLevel >= 999999
+                ? 0
+                : upgrade.getCostToMax(this.upgrades, this.upgradeMetadata);
+            upgrade.costToUnlock = upgrade.getCostToUnlock(this.upgrades, this.upgradeMetadata);
         });
     }
 
@@ -969,6 +998,8 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Callers pass upgrades after applying any simulated level changes and recalculating bonuses/costs.
         tempCompass.upgrades = upgrades;
         tempCompass.upgradeMetadata = this.upgradeMetadata;
+        tempCompass.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        tempCompass.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         
         // Copy resources
         tempCompass.availableDust = availableDust;
@@ -1313,6 +1344,16 @@ export class Compass extends Domain implements EfficiencyDomain {
         return this.medallionsCollected.length;
     }
 }
+
+export const updateCompassUpgradeCosts = (accountData: Map<string, unknown>): void => {
+    const compass = accountData.get("compass") as Compass;
+    const masterClasses = accountData.get("masterClasses") as MasterClasses;
+
+    compass.updateUpgradeCosts(
+        masterClasses.getFirstThreeUpgradeCostMultiplier(),
+        masterClasses.getUpgradeCostMultiplier(),
+    );
+};
 
 export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): void => {
     const compass = accountData.get("compass") as Compass;

@@ -1,0 +1,171 @@
+{
+  "description": "Compass current upgrade prices and all 23 direct whole cost inputs for the paired retained real account",
+  "target": "CompassUpgrade current purchase cost",
+  "extractions": [
+    {
+      "label": "compass_upgrade_cost_14",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 14, 0)",
+      "description": "Tempest Damage ordinary Fighter-path price: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_45",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 45, 0)",
+      "description": "Moon of Sneak with Sneaky Sale discounts: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_48",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 48, 0)",
+      "description": "Moon of Damage with Damage Sale discounts: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_51",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 51, 0)",
+      "description": "Moon of Experience with Experience Sale discounts: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_54",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 54, 0)",
+      "description": "Pristine Collector with Pristine Sale discounts: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_57",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 57, 0)",
+      "description": "Moon of Sleep at zero owned levels with Snoozer Sale discounts: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_151",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 151, 0)",
+      "description": "Sneaky Sale I source Survival group differs from its display Nomadic path: current raw game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_123",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 123, 0)",
+      "description": "Tempest Damage efficiency goal's observed first purchase: current game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_148",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 148, 0)",
+      "description": "Dust Multiplier efficiency goal's observed first purchase: current game quote at the unchanged saved level"
+    },
+    {
+      "label": "compass_upgrade_cost_6",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 6, 0)",
+      "description": "Tempest Accuracy and Tempest Defense efficiency goals' first purchase after current-price correction: current game quote at the unchanged saved level"
+    },
+    {
+      "label": "masterclasses_upgrade_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "description": "Whole shared Master Classes cost multiplier directly used by every Compass upgrade price"
+    },
+    {
+      "label": "first_three_upgrade_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
+      "description": "Whole first-three Master Classes cost multiplier directly used by every Compass upgrade price"
+    },
+    {
+      "label": "compass_bonus_36",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 36, 0)",
+      "description": "Knockoff Compass general cost reduction: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_77",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 77, 0)",
+      "description": "Abomination Slayer XVIII general cost reduction: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_151",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 151, 0)",
+      "description": "Sneaky Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_152",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 152, 0)",
+      "description": "Sneaky Sale II: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_153",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 153, 0)",
+      "description": "Sneaky Sale III: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_154",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 154, 0)",
+      "description": "Printer Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_156",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 156, 0)",
+      "description": "Printer Sale II: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_155",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 155, 0)",
+      "description": "Damage Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_157",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 157, 0)",
+      "description": "Damage Sale II: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_158",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 158, 0)",
+      "description": "Damage Sale III: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_159",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 159, 0)",
+      "description": "Snoozer Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_160",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 160, 0)",
+      "description": "Snoozer Sale II: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_161",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 161, 0)",
+      "description": "Snoozer Sale III: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_168",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 168, 0)",
+      "description": "Snoozer Sale IV: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_162",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 162, 0)",
+      "description": "Experience Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_163",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 163, 0)",
+      "description": "Experience Sale II: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_164",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 164, 0)",
+      "description": "Experience Sale III: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_166",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 166, 0)",
+      "description": "Experience Sale IV: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_167",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 167, 0)",
+      "description": "Experience Sale V: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_165",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 165, 0)",
+      "description": "Pristine Sale I: whole bonus directly used by Compass current purchase prices"
+    },
+    {
+      "label": "compass_bonus_169",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 169, 0)",
+      "description": "Pristine Sale II: whole bonus directly used by Compass current purchase prices"
+    }
+  ]
+}
