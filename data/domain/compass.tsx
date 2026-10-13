@@ -19,6 +19,29 @@ import { EquipmentBonus } from "./equipment-effects";
 import { Sneaking } from "./world-6/sneaking";
 import { Emperor } from "./world-6/emperor";
 import { Lab } from "./world-4/lab";
+import type { AtomCollider } from "./world-3/construction/atomCollider";
+import type { EquipmentSets } from "./misc/equipmentSets";
+import type { EventShop } from "./eventShop";
+import type { Gaming } from "./world-5/gaming";
+import type { Farming } from "./world-6/farming";
+import type { Spelunking } from "./world-7/spelunking";
+import type { LegendTalents } from "./world-7/legendTalents";
+import type { SushiStation } from "./world-7/sushi";
+import type { JellyOperator } from "./world-7/jellyOperator";
+
+interface ExaltedStampBonusInputs {
+    atomBonus: number;
+    pristineCharmBonus: number;
+    compassUpgradeBonus: number;
+    emperorSetBonus: number;
+    eventShopOwned: boolean;
+    paletteBonus: number;
+    exoticMarketBonus: number;
+    stampFragments: number;
+    legendTalentBonus: number;
+    sushiBonus: number;
+    jellyBonus: number;
+}
 
 export enum WeaknessType {
     Fire = 0,
@@ -542,6 +565,8 @@ export class CompassUpgrade implements EfficiencyUpgrade {
 
 export class Compass extends Domain implements EfficiencyDomain {
     upgrades: CompassUpgrade[] = [];
+    exaltedStampNames: Set<string> = new Set();
+    private exaltedStampBonus: number = 0;
 
     totalCompassLevel: number = 0;
     totalDustsCollected: number = 0;
@@ -596,6 +621,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         const compassData = data.get("Compass") as any[][];
         const optionList = data.get("OptLacc") as number[];
         const serverVars = data.get("servervars") as Record<string, any>;
+        compass.exaltedStampNames.clear();
 
         // Exit early for older accounts that don't have a compass data array.
         if (!compassData || compassData.length == 0) {
@@ -607,7 +633,15 @@ export class Compass extends Domain implements EfficiencyDomain {
 
         const dustCostServerVar = serverVars["DustCost"] || 1;
 
-        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw,] = compassData;
+        const [upgradesLevels, abominationsRaw, portalsRaw, medallionsRaw, exaltedStamps = []] = compassData;
+        // Saved exalted stamp groups use _, a and b; item names use A, B and C.
+        for (const stampIdentifier of exaltedStamps as string[]) {
+            const stampTab = "_ab".indexOf(stampIdentifier[0]);
+            if (stampTab >= 0) {
+                const stampNumber = Number(stampIdentifier.slice(1)) + 1;
+                compass.exaltedStampNames.add(`Stamp${"ABC"[stampTab]}${stampNumber}`);
+            }
+        }
 
         compass.totalCompassLevel = upgradesLevels?.reduce((sum, level) => sum + level, 0);
     
@@ -1200,6 +1234,26 @@ export class Compass extends Domain implements EfficiencyDomain {
         });
     }
 
+    prepareExaltedStampBonus(inputs: ExaltedStampBonusInputs): void {
+        // Exalted stamps start with a 100% bonus; these account bonuses increase that bonus.
+        this.exaltedStampBonus = 100
+            + inputs.atomBonus
+            + inputs.pristineCharmBonus
+            + inputs.compassUpgradeBonus
+            + inputs.emperorSetBonus
+            + 20 * Number(inputs.eventShopOwned)
+            + inputs.paletteBonus
+            + inputs.exoticMarketBonus
+            + Math.round(inputs.stampFragments)
+            + inputs.legendTalentBonus
+            + inputs.sushiBonus
+            + inputs.jellyBonus / 100;
+    }
+
+    getExaltedStampBonus(): number {
+        return this.exaltedStampBonus;
+    }
+
     /**
      * Get the bonus value for a specific compass upgrade ID
      */
@@ -1259,6 +1313,35 @@ export class Compass extends Domain implements EfficiencyDomain {
         return this.medallionsCollected.length;
     }
 }
+
+export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): void => {
+    const compass = accountData.get("compass") as Compass;
+    const collider = accountData.get("collider") as AtomCollider;
+    const sneaking = accountData.get("sneaking") as Sneaking;
+    const equipmentSets = accountData.get("equipmentSets") as EquipmentSets;
+    const eventShop = accountData.get("eventShop") as EventShop;
+    const gaming = accountData.get("gaming") as Gaming;
+    const farming = accountData.get("farming") as Farming;
+    const spelunking = accountData.get("spelunking") as Spelunking;
+    const legendTalents = accountData.get("legendTalents") as LegendTalents;
+    const sushi = accountData.get("sushi") as SushiStation;
+    const jelly = accountData.get("jellyOperator") as JellyOperator;
+    const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 20)!;
+
+    compass.prepareExaltedStampBonus({
+        atomBonus: collider.atoms[12].getBonus(),
+        pristineCharmBonus: pristineCharm.unlocked ? pristineCharm.data.x1 : 0,
+        compassUpgradeBonus: compass.getUpgradeBonus(76),
+        emperorSetBonus: equipmentSets.getSetBonus("EMPEROR_SET", undefined, true),
+        eventShopOwned: eventShop.isBonusOwned(18),
+        paletteBonus: gaming.getPaletteBonus(23),
+        exoticMarketBonus: farming.getExoticMarketBonusValue(49),
+        stampFragments: spelunking.exaltedStampFragments,
+        legendTalentBonus: legendTalents.getBonusFromIndex(36),
+        sushiBonus: sushi.getBonusFromIndex(17),
+        jellyBonus: jelly.getRoGBonusQuantity(50),
+    });
+};
 
 /**
  * Update function for compass efficiency calculations

@@ -67,7 +67,7 @@ import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
-import { Compass, updateCompassDamageEfficiency } from './compass';
+import { Compass, updateCompassDamageEfficiency, updateCompassExaltedStampBonus } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
 import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory/royalArmory';
 import { EquipmentSets } from './misc/equipmentSets';
@@ -323,6 +323,8 @@ const postProcessingMap: Record<string, Function> = {
     "tomeBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateTomeBonuses(accountData),
     "sneaking": (doc: Cloudsave, accountData: Map<string, any>) => updateSneaking(accountData),
     "farmingCropScientist": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingCropScientistBonuses(accountData),
+    // Prepare exalted stamp scaling after its account inputs and before stamp bonuses.
+    "compassExaltedStampBonus": (_doc: Cloudsave, accountData: Map<string, any>) => updateCompassExaltedStampBonus(accountData),
     "stamps": (doc: Cloudsave, accountData: Map<string, any>) => updateStamps(accountData),
     "forge": (doc: Cloudsave, accountData: Map<string, any>) => updateForge(accountData.get("forge"), accountData.get("gems")),
     "worshipTotalizer": (doc: Cloudsave, accountData: Map<string, any>) => updateWorshipTotalizer(accountData),
@@ -361,6 +363,7 @@ const postPostProcessingMap: Record<string, Function> = {
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
     "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
+    "rightHandOfActionBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateRightHandOfActionBonuses(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
     "sailing": (doc: Cloudsave, accountData: Map<string, any>) => updateMinTravelTimeAndSpeed(accountData),

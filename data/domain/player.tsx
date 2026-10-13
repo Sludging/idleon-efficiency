@@ -1471,11 +1471,6 @@ export const updatePlayerSpecialTalents = (data: Map<string, any>) => {
             });
         case enhancementLevel >= 150:
         // Whale Wallop - Gameplay only, I don't care.
-        case enhancementLevel >= 175:
-            // Right hand of action - Enhanced Bonus is double skill eff for mman only. 
-            players.forEach(player => {
-                player.markTalentAsEnhanced(43);
-            });
         case enhancementLevel >= 200:
             // Green Tube - All Skill Exp for everyone.
             players.forEach(player => {

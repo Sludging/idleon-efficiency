@@ -8,7 +8,7 @@ Apply [STE principles](https://asd-ste100.org/about_STE.html) in developer comme
 
 ## VOCAB-01 — Game vocabulary
 
-Use game terminology, informed by the Wiki and established repository/domain vocabulary. Keep obfuscated identifiers only in raw-data mappings or source-boundary references. Research meaning first; ask the developer before choosing when meaning remains unresolved or game, Wiki, and repository terms meaningfully conflict.
+Use game terminology, informed by the Wiki and established repository/domain vocabulary. Keep obfuscated identifiers only in raw-data mappings, never in comments. Research meaning first; ask the developer before choosing when meaning remains unresolved or game, Wiki, and repository terms meaningfully conflict.
 
 ## RESEARCH-01 — Understand the player and mechanic
 

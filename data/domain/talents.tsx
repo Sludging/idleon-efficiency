@@ -2,6 +2,8 @@ import { lavaFunc } from "../utility";
 import { initTalentTreeRepo } from "./data/TalentTreeRepo";
 import { ImageData } from "./imageData";
 import { TalentModel } from "./model/talentModel";
+import type { Player } from "./player";
+import { SkillsIndex } from "./SkillsIndex";
 
 export const TalentConst = {
     NearbyOutletIndex: 478,
@@ -95,6 +97,8 @@ export class Talent {
 
     static fromBase = (talentName: string, talentInfo: TalentModel) => {
         switch (talentInfo.skillIndex) {
+            case 43:
+                return new RightHandOfActionTalent(talentName, talentInfo);
             case 59:
                 return new BloodMarrowTalent(talentName, talentInfo);
             case 131:
@@ -122,7 +126,7 @@ export class BloodMarrowTalent extends Talent {
     }
 }
 
-// Other potential talents with this logic are: 42, 43, 78, 132, 281, 491,493
+// Other potential talents with this logic are: 42, 78, 132, 281, 491,493
 export class RedoxRatesTalent extends Talent {
     override getBonus = (round: boolean = false, yBonus: boolean = false) => {
         return super.getBonusAtLevel(this.pointsSpent, round, yBonus);
@@ -131,6 +135,64 @@ export class RedoxRatesTalent extends Talent {
 
 export class EnhancedTalent extends Talent {
     isEnhanced: boolean = false;
+}
+
+export class RightHandOfActionTalent extends EnhancedTalent {
+    getActionBonus(): number {
+        // Cross-character efficiency uses allocated points, not boosted talent levels.
+        return this.getBonusAtLevel(this.pointsSpent);
+    }
+
+    getRecipientBonus(source: Player, recipient: Player, skill: SkillsIndex): number {
+        // Right Hand covers the nine skills from Mining through Worship.
+        if (skill < SkillsIndex.Mining || skill > SkillsIndex.Worship) {
+            return 0;
+        }
+
+        // Enhancement gives only the selected source twice its ordinary action bonus.
+        if (source.playerID === recipient.playerID) {
+            return this.isEnhanced ? 2 * this.getActionBonus() : 0;
+        }
+
+        if (recipient.skills.get(skill)!.level >= source.skills.get(skill)!.level) {
+            return 0;
+        }
+
+        return this.getActionBonus();
+    }
+}
+
+export const getRightHandOfActionBonus = (players: readonly Player[], recipient: Player, skill: SkillsIndex): number => {
+    let source: Player | undefined;
+    // Account character order selects the last Maestro or its advanced classes.
+    for (const player of players) {
+        if (player.classId === ClassIndex.Maestro || player.classId === ClassIndex.Voidwalker || player.classId === ClassIndex.Infinilyte) {
+            source = player;
+        }
+    }
+
+    if (!source) {
+        return 0;
+    }
+
+    const talent = source.getTalent(43) as RightHandOfActionTalent;
+    return talent.getRecipientBonus(source, recipient, skill);
+}
+
+export const updateRightHandOfActionBonuses = (accountData: Map<string, any>): void => {
+    const players = accountData.get("players") as Player[];
+    let enhancementBonus = 0;
+    for (const player of players) {
+        enhancementBonus = Math.max(enhancementBonus, player.getTalentBonus(49));
+    }
+
+    // Enhancement Eclipse unlocks Right Hand's self bonus account-wide at 175.
+    for (const player of players) {
+        const talent = player.getTalent(43);
+        if (talent instanceof RightHandOfActionTalent) {
+            talent.isEnhanced = enhancementBonus >= 175;
+        }
+    }
 }
 
 export class ApocalypseChowTalent extends EnhancedTalent {

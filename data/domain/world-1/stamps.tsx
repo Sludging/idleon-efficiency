@@ -1,3 +1,4 @@
+import { Compass } from '../compass';
 import { lavaFunc, range } from '../../utility'
 import { Account } from '../account';
 import { Alchemy } from '../world-2/alchemy/alchemy';
@@ -17,6 +18,7 @@ import { Rift } from '../world-4/rift';
 import { Sigils } from '../world-2/alchemy/sigils';
 import { Storage } from '../storage';
 import { Sneaking } from '../world-6/sneaking';
+import { UpgradeVault } from '../upgradeVault';
 
 export enum StampTab {
     Combat = 0,
@@ -43,7 +45,9 @@ export class Stamp {
 
     // Update field
     labMultiplier: number = 1;
+    healthVaultMultiplier: number = 1;
     pristineCharmMultiplier: number = 1;
+    exaltedMultiplier: number = 1;
     sigilDiscount: number = 0;
     hasBribe: boolean = false;
     vialDiscount: number = 0;
@@ -212,9 +216,9 @@ export class Stamp {
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
         if (this.removeLimitFromUnderLevel == false && skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
-            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.labMultiplier * this.pristineCharmMultiplier;
+            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.healthVaultMultiplier * this.pristineCharmMultiplier;
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.labMultiplier * this.pristineCharmMultiplier;
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.healthVaultMultiplier * this.pristineCharmMultiplier;
     }
 
     isMaxLevel = (): boolean => {
@@ -308,18 +312,26 @@ export function updateStamps(data: Map<string, any>) {
     const collider = data.get("collider") as AtomCollider;
     const rift = data.get("rift") as Rift;
     const sneaking = data.get("sneaking") as Sneaking;
-
+    const compass = data.get("compass") as Compass;
+    const upgradeVault = data.get("upgradeVault") as UpgradeVault;
     // Update gilded stamps (this can totally be done in parse if needed)
     const optLacc = data.get("OptLacc"); 
     const gildedStampCount = parseInt(optLacc[154]);
     const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
  
-    const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
     const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.data.itemId == 17);
+    const healthVaultMultiplier = 1 + upgradeVault.getBonusForId(16) / 100;
+    const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
+    const exaltedMultiplier = 1 + compass.getExaltedStampBonus() / 100;
     const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
     allButMisc.forEach(stamp => {
         stamp.labMultiplier = labBonus;
+        // The Vault increases base HP stamps after the Lab multiplier and before the Pristine Charm.
+        stamp.healthVaultMultiplier = stamp.data.effect == "BaseHP" ? healthVaultMultiplier : 1;
         stamp.pristineCharmMultiplier = (pristineCharm17 && pristineCharm17.unlocked) ? (1 + pristineCharm17.data.x1 / 100) : 1;
+        // Compass bonus applies only to exalted stamps.
+        stamp.exaltedMultiplier = compass.exaltedStampNames.has(stamp.raw_name) ? exaltedMultiplier : 1;
+
     })
 
     const limitIsRemoved = sneaking.jadeUpgrades.find(upgrade => upgrade.index == 5)?.purchased ?? false;
@@ -333,6 +345,7 @@ export function updateStamps(data: Map<string, any>) {
         stamp.gildedAvailable = stampMastery?.active ?? false;
         stamp.gildedCount = gildedStampCount;
         stamp.removeLimitFromUnderLevel = limitIsRemoved;
+        stamp.exaltedMultiplier = compass.exaltedStampNames.has(stamp.raw_name) ? exaltedMultiplier : 1;
     })
 
     return stamps;

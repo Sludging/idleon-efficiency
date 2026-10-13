@@ -1,4 +1,4 @@
-import { lavaFunc, nFormatter, number2letter, range, round } from '../../../utility'
+import { lavaFunc, lavaLog, nFormatter, number2letter, range, round } from '../../../utility'
 import { Cooking } from '../../world-4/cooking';
 import { CauldronBase, initBubbleRepo } from '../../data/BubbleRepo';
 import { ImageData } from '../../imageData';
@@ -642,6 +642,7 @@ export class Alchemy extends Domain {
         return false
     }
 
+    // Account bonuses include the 16th bubble, but exclude recipient class, level, and mana scaling.
     getBonusForBubble = (cauldron: CauldronIndex, bubble: number) => {
         let extraBonus = 1;
 
@@ -681,7 +682,27 @@ export class Alchemy extends Domain {
             extraBonus *= this.cauldrons[cauldron].bubbles[1].getBonus();
         }
 
-        return this.getBonusForBubble(cauldron, bubble) * extraBonus;
+        const selectedBubble = this.cauldrons[cauldron].bubbles[bubble];
+        const bonusKey = selectedBubble.data.bonusKey;
+        if (bonusKey === 'MinEff' || bonusKey === 'ChopEff') {
+            // health or mana scales the raw bonus before class and 16th-bubble multipliers.
+            const preparationMaximum = bonusKey === 'MinEff'
+                ? player.health.getAlchemyMaxHP()
+                : player.health.getAlchemyMaxMP();
+            let bonus = selectedBubble.getBonus() * lavaLog(preparationMaximum);
+            bonus *= extraBonus;
+            if (this._shouldBoostBubble(bubble, cauldron)) {
+                bonus *= this.cauldrons[cauldron].bubbles[16].getBonus();
+            }
+            return bonus;
+        }
+
+        let bonus = this.getBonusForBubble(cauldron, bubble) * extraBonus;
+        if (bonusKey === 'W7' || bonusKey === 'A8' || bonusKey === 'M7') {
+            // Endgame efficiency keeps factor 1 below level 520, then gains 1 per ten class levels.
+            bonus *= Math.max(1, Math.floor((player.level - 500) / 10));
+        }
+        return bonus;
     }
 
     hasAchievement = (): boolean => {
