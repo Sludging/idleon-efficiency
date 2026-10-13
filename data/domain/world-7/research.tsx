@@ -36,6 +36,7 @@ import { Minehead } from "./minehead";
 import { Sneaking } from "../world-6/sneaking";
 import { EventShop } from "../eventShop";
 import { RoyalArmory } from "../world-6/royalArmory/royalArmory";
+import type { ImageData } from "../imageData";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -230,6 +231,13 @@ const LENS_POSTY_NOTE_INDEXES = [0, 9, 12, 13];
 const CAPACITY_POSTY_NOTE_INDEXES = [3, 6, 11];
 const SHAPE_POSTY_NOTE_INDEXES = [1, 2, 4, 7, 10];
 
+export interface ResearchCompanionGroup {
+  id: "jellofish" | "riftStalker" | "neonscale";
+  name: string;
+  components: ResearchContributor[];
+  factor: number;
+}
+
 export interface ResearchContributor {
   source: string;
   value: number;
@@ -239,6 +247,7 @@ export interface ResearchContributor {
   gate?: string;
   characterID?: number;
   components?: ResearchContributor[];
+  companionGroups?: ResearchCompanionGroup[];
 }
 
 export interface ResearchProgress {
@@ -350,6 +359,11 @@ export class ResearchLens {
     public targetObservationIndex: number | undefined,
   ) {}
 
+  getImageData(): ImageData {
+    const imageIndex = this.kind === "magnifyingGlass" ? 0 : this.kind === "opticalMonocle" ? 1 : 2;
+    return { location: `ResMagni${imageIndex}`, width: 36, height: 36 };
+  }
+
   get placed(): boolean {
     return this.targetObservationIndex !== undefined;
   }
@@ -399,6 +413,10 @@ export class Observation {
     public data: ResearchObservationBase["data"],
     public map: MapDataBase,
   ) {}
+
+  getImageData(): ImageData {
+    return { location: `ResObj${this.index}`, width: 36, height: 36 };
+  }
 
   static fromBase(data: ResearchObservationBase[]): Observation[] {
     return data.map(observation => new Observation(
@@ -1002,8 +1020,10 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const companion153 = companionContribution(153, 1, "add");
   const companion153LevelTwo = companionLevelTwoContribution(153, 1, "add");
   const companion54LevelTwo = companionLevelTwoContribution(54, 0.15, "add");
-  const companionFactor = Math.max(1,
-    (1 + companion52.value) * (1 + companion153.value + companion153LevelTwo.value) * (1 + companion54LevelTwo.value));
+  const jellofishFactor = 1 + companion52.value;
+  const riftStalkerFactor = 1 + companion153.value + companion153LevelTwo.value;
+  const neonscaleFactor = 1 + companion54LevelTwo.value;
+  const companionFactor = Math.max(1, jellofishFactor * riftStalkerFactor * neonscaleFactor);
   const fountain = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 2 && upgrade.data.index === 16)!;
   const buttonBonus = button.bonuses.find(bonus => bonus.index === 0)!;
   const sushiExp = sushiContribution(0);
@@ -1013,7 +1033,12 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
     researchPercentMultiplier(`The Button: ${buttonBonus.data.name}`, button.getBonusForIndex(0)),
     researchPercentMultiplier("Killroy: Research EXP", killroy.spelunkingExpMulti),
     { source: "Companions", inputValue: companionFactor, value: companionFactor, operation: "multiply" as const,
-      gate: "Combined companion factor has a minimum of one.", components: [companion52, companion153, companion153LevelTwo, companion54LevelTwo] },
+      gate: "Combined companion factor has a minimum of one.", components: [companion52, companion153, companion153LevelTwo, companion54LevelTwo],
+      companionGroups: [
+        { id: "jellofish" as const, name: companions.find(companion => companion.id === 52)!.name, components: [companion52], factor: jellofishFactor },
+        { id: "riftStalker" as const, name: companions.find(companion => companion.id === 153)!.name, components: [companion153, companion153LevelTwo], factor: riftStalkerFactor },
+        { id: "neonscale" as const, name: companions.find(companion => companion.id === 54)!.name, components: [companion54LevelTwo], factor: neonscaleFactor },
+      ] },
     researchPercentMultiplier(sushiExp.source, sushiExp.value, sushiExp.gate),
     researchPercentMultiplier("The Hole: Researchy", hole.getResearchExpUpgradeBonus()),
     researchPercentMultiplier(`The Hole Fountain: ${fountain.data.name}`, hole.fountain.getBonus(2, 16)),

@@ -262,6 +262,41 @@ describe('Research account progress and production', () => {
         });
     });
 
+    it('retains named companion display factors and their original additive source objects', () => {
+        const companions = research.production.expMultiplierContributors.find(contributor => contributor.source === 'Companions')!;
+        const groups = companions.companionGroups!;
+        expect(groups).toHaveLength(3);
+        expect(groups.map(group => group.id).sort()).toEqual(['jellofish', 'neonscale', 'riftStalker']);
+        const ownedGate = "Owned companion's active bonus";
+        const levelTwoGate = 'Owned at level two. Pet Bonus Tokens do not grant level two.';
+        const specs = [
+            {id: 'jellofish', name: 'Jellofish', factor: 1.8, terms: [
+                {source: 'Companion: Jellofish', key: 'companion_52', scale: 1, gate: ownedGate},
+            ]},
+            {id: 'riftStalker', name: 'Rift Stalker', factor: 3, terms: [
+                {source: 'Companion: Rift Stalker', key: 'companion_153', scale: 1, gate: ownedGate},
+                {source: 'Companion: Rift Stalker level two', key: 'companion_level_two_153', scale: 1, gate: levelTwoGate},
+            ]},
+            {id: 'neonscale', name: 'Neonscale', factor: 1.15, terms: [
+                {source: 'Companion: Neonscale level two', key: 'companion_level_two_54', scale: 0.15, gate: levelTwoGate},
+            ]},
+        ];
+        expect(companions.components!.map(component => component.source)).toEqual(specs.flatMap(spec => spec.terms.map(term => term.source)));
+        for (const spec of specs) {
+            const group = groups.find(group => group.id === spec.id)!;
+            expect(group.name).toBe(spec.name);
+            expect(group.factor).toBe(spec.factor);
+            expect(group.components.map(component => component.source)).toEqual(spec.terms.map(term => term.source));
+            for (const term of spec.terms) {
+                const component = group.components.find(component => component.source === term.source)!;
+                expect(component).toBe(companions.components!.find(component => component.source === term.source));
+                expect(component).toMatchObject({operation: 'add', gate: term.gate});
+                expect(component.inputValue).toMatchLiveGameWithDetails(term.scale * value(term.key), {tolerance: 0, context: term.source});
+                expect(component.value).toMatchLiveGameWithDetails(term.scale * value(term.key), {tolerance: 0, context: term.source});
+            }
+        }
+    });
+
     it('matches eligible EXP subtotal and actual total hourly Insight', () => {
         expect(research.production.expBeforeSharedMultiplierPerHour).toMatchLiveGameWithDetails(value('exp_subtotal'), {tolerance: 0});
         const totalInsight = extracted<number[]>('observation_insight_rates').slice(0, value('eligible_count')).reduce((sum, rate) => sum + rate, 0);
