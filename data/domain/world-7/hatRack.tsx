@@ -80,6 +80,10 @@ export class HatRack extends Domain {
         hatRack.calculatedBonuses = undefined;
     }
 
+    getDepositedHatCount(): number {
+        return this.depositedHats.length;
+    }
+
     isUnlocked(player: Player): boolean {
         // This gate also controls replacement of the equipped premium hat.
         const killsLeft = this.unlockKillsLeft[player.playerID];

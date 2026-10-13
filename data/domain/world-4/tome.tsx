@@ -52,6 +52,7 @@ import { Grimoire } from '../grimoire';
 import { Bubba } from '../world-3/bubba';
 import { CoralReef } from '../world-7/coralReef';
 import { Spelunking } from '../world-7/spelunking';
+import { HatRack } from '../world-7/hatRack';
 import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, ResearchGrid } from '../world-7/research';
 import { Minehead } from '../world-7/minehead';
 import { JellyOperator } from '../world-7/jellyOperator';
@@ -448,6 +449,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const bubba = data.get("bubba") as Bubba;
     const coralReef = data.get("coralReef") as CoralReef;
     const spelunking = data.get("spelunking") as Spelunking;
+    const hatRack = data.get("hatRack") as HatRack;
     const researchGrid = data.get("research") as ResearchGrid;
     const minehead = data.get("minehead") as Minehead;
     const jellyOperator = data.get("jellyOperator") as JellyOperator;
@@ -1107,7 +1109,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 break;
             case 109:
                 // Premium Hats found.
-                line.updateAllPlayersCurrentValue(spelunking.premiumHatsFound);
+                line.updateAllPlayersCurrentValue(hatRack.getDepositedHatCount());
                 break;
             case 110:
                 // Number of Minehead opponents defeated.

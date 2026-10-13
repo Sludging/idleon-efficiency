@@ -273,7 +273,7 @@ export const updateCards = (data: Map<string, any>) => {
 
     const bonusEffectFromLegendTalents = legendTalents.getBonusFromIndex(21);
     const rubyCardsUnlocked = rift.bonuses.find(bonus => bonus.name == "Ruby Cards")?.active || false;
-    const sixStarCardsUnlocked = spelunking.tunnels.find(tunnel => tunnel.index == 2)?.unlocked ?? false;
+    const sixStarCardsUnlocked = spelunking.tunnels[2].loreCompleted;
     const cardifiedFiveStarCards = (optLacc[155] ?? "" as string).split(",") as string[];
 
     // Ensure there's a need to parse cards

@@ -1,0 +1,196 @@
+{
+  "description": "Part 1 progression outputs from original v1.22 offline game. Relevant runtime inputs were paired explicitly with retained latest save; no connected live parity. See handoff evidence.",
+  "target": "Spelunking tunnel access, Lore, ordinary summaries, Grand summaries and eligibility",
+  "extractions": [
+    {
+      "label": "available_tunnel_count",
+      "expression": "idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0)",
+      "description": "Available tunnel count from completed Lore, including initial access."
+    },
+    {
+      "label": "grand_total",
+      "expression": "idleon.callFunction(\"Spelunk\", \"GrandDiscoveries_Total\", 0, 0)",
+      "description": "Account Grand count. This remains separate from ordinary discoveries."
+    },
+    {
+      "label": "tunnel_0_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[0].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_0_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[0].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_0_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][0])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_0_grand_eligible",
+      "expression": "Number(0 < idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) && idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) >= 1 && idleon.getAttr(\"Spelunk\")[6].includes(idleon.getAttr(\"CustomLists\").h.SpelunkRocks[0].slice(-2, -1)[0][0]) && Number(idleon.getAttr(\"Spelunk\")[44][0]) < 10)",
+      "description": "Potential Grand eligibility from tunnel access and destruction caller gates. This does not compare random drop chance."
+    },
+    {
+      "label": "tunnel_1_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[1].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_1_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[1].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_1_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][1])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_2_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[2].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_2_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[2].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_2_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][2])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_3_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[3].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_3_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[3].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_3_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][3])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_4_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[4].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_4_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[4].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_4_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][4])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_5_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[5].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_5_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[5].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_5_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][5])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_6_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[6].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_6_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[6].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_6_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][6])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_6_grand_eligible",
+      "expression": "Number(6 < idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) && idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) >= 1 && idleon.getAttr(\"Spelunk\")[6].includes(idleon.getAttr(\"CustomLists\").h.SpelunkRocks[6].slice(-2, -1)[0][0]) && Number(idleon.getAttr(\"Spelunk\")[44][6]) < 10)",
+      "description": "Potential Grand eligibility from tunnel access and destruction caller gates. This does not compare random drop chance."
+    },
+    {
+      "label": "tunnel_7_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[7].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_7_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[7].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_7_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][7])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_7_grand_eligible",
+      "expression": "Number(7 < idleon.callFunction(\"Spelunk\", \"CavesUnlocked\", 0, 0) && idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0) >= 1 && idleon.getAttr(\"Spelunk\")[6].includes(idleon.getAttr(\"CustomLists\").h.SpelunkRocks[7].slice(-2, -1)[0][0]) && Number(idleon.getAttr(\"Spelunk\")[44][7]) < 10)",
+      "description": "Potential Grand eligibility from tunnel access and destruction caller gates. This does not compare random drop chance."
+    },
+    {
+      "label": "tunnel_8_lore",
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 8, 0)",
+      "description": "Lore completion, not tunnel access."
+    },
+    {
+      "label": "tunnel_8_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[8].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_8_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[8].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_8_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][8])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "tunnel_9_lore",
+      "expression": "idleon.callFunction(\"Spelunk\", \"DoWeHaveLoreN1\", 9, 0)",
+      "description": "Lore completion, not tunnel access."
+    },
+    {
+      "label": "tunnel_9_ordinary_found",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[9].slice(0, -1).filter(row => idleon.getAttr(\"Spelunk\")[6].includes(row[0])).length",
+      "description": "Ordinary collection display membership from ActorEvents_713._event_5; exclude the final Lore boss."
+    },
+    {
+      "label": "tunnel_9_ordinary_capacity",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkRocks[9].slice(0, -1).length",
+      "description": "Ordinary collection capacity from the record-panel loop, which excludes the final boss."
+    },
+    {
+      "label": "tunnel_9_grand_found",
+      "expression": "Number(idleon.getAttr(\"Spelunk\")[44][9])",
+      "description": "Saved Grand count used by the ten ordered record-panel marks."
+    },
+    {
+      "label": "grand_upgrade_bonus",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 43, 0)",
+      "description": "Effective Grand Discoveries upgrade bonus directly used by the eligibility gate; source does not modify this upgrade."
+    }
+  ]
+}

@@ -160,7 +160,7 @@ export class Gallery extends Domain {
         const cardLevel = card && card.count > 0 ? card.getLevels() + 1 : 0;
         const sushi = (data.get('sushi') as SushiStation).getBonusFromIndex(54);
         const jadePodium = (data.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 42)?.purchased ?? false;
-        const tunnelLore = (data.get('spelunking') as Spelunking).tunnels.find(tunnel => tunnel.index === 5)?.unlocked ?? false;
+        const tunnelLore = (data.get('spelunking') as Spelunking).tunnels[5].loreCompleted;
 
         const grade4 = Math.round(
             Math.min(1, getCompanionActiveBonus(companions, 28)) + Math.min(1, isCompanionLevelTwo(companions, 28))
