@@ -1,3 +1,4 @@
+import { commaNotation, notateNumber } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { initSpelunkingChapterRepo, SpelunkingChapterBase } from "../data/SpelunkingChapterRepo";
 import { initSpelunkingMetadataRepo } from "../data/SpelunkingMetadataRepo";
@@ -10,6 +11,7 @@ import { SpelunkingItemDropModel } from "../model/spelunkingItemDropModel";
 import { SpelunkingRewardLabelModel } from "../model/spelunkingRewardLabelModel";
 import { SpelunkingTunnelModel } from "../model/spelunkingTunnelModel";
 import { SpelunkingUpgradeModel } from "../model/spelunkingUpgradeModel";
+import type { ImageData } from "../imageData";
 import { initTomeEpilogueBonusRepo } from "../data/TomeEpilogueBonusRepo";
 import type { EquipmentSets } from "../misc/equipmentSets";
 import type { Grimoire } from "../grimoire";
@@ -18,6 +20,49 @@ import type { Tome } from "../world-4/tome";
 
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
 const GRAND_DISCOVERY_UPGRADE_INDEX = 43;
+
+export class AmberDenomination {
+    private readonly imageData: ImageData;
+
+    constructor(
+        public readonly tier: number,
+        public readonly name: string,
+        public readonly valueInBaseAmber: number,
+        public readonly upgradeIndex?: number
+    ) {
+        // Keep each denomination's artwork in the same contain-fit frame as other Spelunking icons.
+        this.imageData = Object.freeze({ location: `CaveAmber${tier}`, width: 50, height: 50 });
+        Object.freeze(this);
+    }
+
+    getImageData(): ImageData {
+        return this.imageData;
+    }
+
+    formatAmount(baseAmount: number): string {
+        // Saved hauls stay in base Amber. All records use the account's current denomination, including zero.
+        const amount = baseAmount / this.valueInBaseAmber;
+        if (amount > 1e14) {
+            return notateNumber(amount, "Big");
+        }
+
+        // The game's haul renderer uses rounded millions only above 1e9, not at that exact boundary.
+        // Its Big branch makes the higher comma-notation suffixes unreachable here.
+        if (amount > 1e9) {
+            return `${commaNotation(amount / 1e6)}M`;
+        }
+        return commaNotation(amount);
+    }
+}
+
+// Amber upgrades activate these account-wide units. Pink's actual conversion differs from its shop description.
+const AMBER_DENOMINATIONS: readonly AmberDenomination[] = Object.freeze([
+    new AmberDenomination(0, "Orange Amber", 1),
+    new AmberDenomination(1, "Blue Amber", 1e3, 20),
+    new AmberDenomination(2, "Green Amber", 1e9, 41),
+    new AmberDenomination(3, "Red Amber", 1e21, 51),
+    new AmberDenomination(4, "Pink Amber", 1e36, 66),
+]);
 
 export interface CollectionSummary {
     found: number;
@@ -38,6 +83,14 @@ export class Discovery {
     // x3 is the Amber factor, not a fixed drop quantity.
     // x4 enables depth scaling. x5 is its multiplier. x6 is the minimum raw spawn depth.
     constructor(public index: number, public tunnelIndex: number, public data: SpelunkingDiscoveryModel) {
+    }
+
+    getImageData(): ImageData {
+        const tunnelPrefix = this.tunnelIndex === 0
+            ? "_"
+            : String.fromCharCode("a".charCodeAt(0) + this.tunnelIndex - 1);
+        // IconImage uses contain-fit within this logical frame, not the PNG's natural dimensions.
+        return { location: `CaveRock${tunnelPrefix}${this.index}`, width: 50, height: 50 };
     }
 
     static fromBase(data: SpelunkingDiscoveryModel[], tunnelIndex: number): Discovery[] {
@@ -73,6 +126,11 @@ export class Tunnel {
             number: ordinal + 1,
             found: false,
         }));
+    }
+
+    getLoreBossImageData(): ImageData {
+        // IconImage uses contain-fit within this logical frame, not the PNG's natural dimensions.
+        return { location: `CaveBoss${this.index}`, width: 50, height: 50 };
     }
 
     get available(): boolean {
@@ -201,6 +259,17 @@ export class Spelunking extends Domain {
         unlockUpgrade?: Upgrade;
     }[] = [];
 
+    get currentAmberDenomination(): AmberDenomination {
+        // The highest active unit applies to every haul, regardless of the recorded amount.
+        for (let index = AMBER_DENOMINATIONS.length - 1; index > 0; index--) {
+            const denomination = AMBER_DENOMINATIONS[index];
+            if (denomination.upgradeIndex !== undefined && this.getUpgradeBonus(denomination.upgradeIndex) >= 1) {
+                return denomination;
+            }
+        }
+        return AMBER_DENOMINATIONS[0];
+    }
+
     get availableTunnelCount(): number {
         let availableCount = 1;
         // The highest scanned Lore completion grants access. The final released tunnel cannot unlock another.
@@ -326,4 +395,3 @@ export class Spelunking extends Domain {
         spelunking.exaltedStampFragments = Number(currencies[3] ?? 0);
     }
 }
-

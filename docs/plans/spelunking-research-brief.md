@@ -1,26 +1,340 @@
 # Spelunking: research brief
 
-**Status:** Part 1 (#435) backend and its stated check limits are accepted by the user. Product scope and the original backend plan were approved on 2026-10-12; the user subsequently approved and accepted the maintainability revision recorded below. The current request authorizes only the accepted backend layer's local commit and this handoff update. UI work remains unauthorized.
+**Status:** The human accepted the final Part 1 UI result and its stated check limits. All nine latest corrections are complete, including normalized current-tier Amber haul. Final real-route proof passed for the retained Red-tier account. Five focused suites passed all 24 tests; full TypeScript and the integrated UI detector passed. Independent Amber review found no concrete findings. The narrow handwritten-rule exception remains approved. Commit only this accepted UI layer locally, then stop. Parts 2 and 3 remain unselected.
 
-The user accepted the completed backend after the maintainability revision. Earlier implementation and review records remain historical evidence below. Stop after the authorized local commit; do not push, deploy, close the issue, or start UI work.
+The accepted progression calculations remain unchanged. The current authorization covers only the accepted UI layer's local commit and this handoff update. Preserve unrelated changes and private verification artifacts. No current Amber balance, income, Parts 2/3, push, deployment, or issue closure is authorized.
 
 ## Current handoff
 
-- **Current scope direction:** Show current progression, bonuses, requirements, and useful game information across Spelunking. Keep descriptions beside the relevant entries, not a separate mechanics guide or wiki replacement. Include maximum stamina, hourly recharge, and time to refill.
+- **Overall approved product direction:** Show progression, bonuses, requirements, and useful game information beside relevant entries. Maximum stamina, hourly recharge, and refill time remain later-part scope, not this Part 1 correction.
 - **Product boundary:** Current progression and stat displays, not efficiency or planning calculators.
 - **Display direction:** Spoilers are on by default. Where useful, a **Show locked** checkbox/filter starts enabled.
-- **Current product:** The existing route renders “Coming Soon.” Its account domain covers only part of the feature; these gaps do not reduce the intended information scope. [R1–R3]
+- **Current product:** `/world-7/spelunking` keeps the benefit-first two-column Part 1 cards, whole-card states, accepted records, source artwork, inline tunnel drops, and store/hydration pattern. Grand tooltips and global help are removed. Found images have no tooltip; missing-image tips show Spawn depth and its value only. Completed Lore cards omit Boss depth. Best depth uses the existing xlarge role, measured at 26px. A single post-heading row holds both account totals, Show locked, and a Collection status dropdown. The UI now delegates haul artwork, normalized quantity, and unit label to `currentAmberDenomination`.
 - **Current evidence:** Read-only source queries reached the offline tool at `http://127.0.0.1:3101`, which reported **Jelly_Operator v1.22**. Current tunnel access, completion, discoveries, records, and generated metadata were inspected on 2026-10-12. This is offline source evidence, not connected live-game parity. The retained v1.21 capture remains historical. [O1–O3, G1–G6]
-- **Historical check:** The earlier known upgrade extraction returned `ShopUpgBonus(59, 1) = 3`, with one success and no errors. This proves one queried bonus only. No product code changed and no checks ran for the current plan-only work. [R5]
-- **Approval and current phase:** The human approved the [product specification](spelunking-spec-draft.md) and [three delivery parts](spelunking-delivery-parts-draft.md) on 2026-10-12. The user's fallback selected **part 1 — tunnel/Lore/discovery progression (#435)**. The human then approved the revised backend draft with “I approve this draft. Publish the approved draft if needed. Record approval and stop.” Parts 2 and 3 remain unselected; no delivery dependency was added.
-- **Published issue tracker:** Parent [#434](https://github.com/Sludging/idleon-efficiency/issues/434) holds the approved specification. Its native subissues are [#435](https://github.com/Sludging/idleon-efficiency/issues/435), [#436](https://github.com/Sludging/idleon-efficiency/issues/436), and [#437](https://github.com/Sludging/idleon-efficiency/issues/437). The complete approved backend plan and current handoff are published in [#435's approval record](https://github.com/Sludging/idleon-efficiency/issues/435#issuecomment-6119488866). Its current issue status records approval and the stop. No remote blob, commit, implementation, assignment, or closure is claimed.
+- **Historical check:** The earlier known upgrade extraction returned `ShopUpgBonus(59, 1) = 3`, with one success and no errors. This proves one queried bonus only. [R5]
+- **Approval and current phase:** The human approved the product specification and three delivery parts on 2026-10-12, then selected Part 1 (#435). Backend acceptance and prior UI iterations remain history. The human has now accepted the final UI result and its stated check limits, including the approved handwritten Amber rules, and authorized only its scoped local commit plus this handoff update.
+- **Published issue tracker:** Parent [#434](https://github.com/Sludging/idleon-efficiency/issues/434) and subissues [#435](https://github.com/Sludging/idleon-efficiency/issues/435), [#436](https://github.com/Sludging/idleon-efficiency/issues/436) retain the approved delivery scope. The [published backend approval record](https://github.com/Sludging/idleon-efficiency/issues/435#issuecomment-6119488866) and issue phase text predate local backend acceptance and its maintainability revision. This local handoff governs the current production UI phase; no GitHub update was made.
 - **Steering note:** Consolidated 23 stories into 8 and made the proposal progression-first rather than a wiki/tutorial. Simplified refill wording; removed testing infrastructure, Big Fish emphasis, and routine exclusion lists from the proposal; retained the three-part split.
-- **Current gate:** Backend accepted with its stated check limits. Create only the accepted layer's local commit, then stop.
-- **Execution boundary:** Implement the approved part 1 backend without expanding scope. Grand capacity and the upgrade reference remain approved handwritten mechanic rules. The user supplied `data/domain/data/SpelunkingMetadataRepo.ts` with the required contextual labels and item associations. Consume that export without changing generated item names or requesting a handwritten mapping exception.
-- **Current work boundary:** Update this handoff and commit only accepted Part 1 backend changes. Preserve unrelated working-tree and staged changes. No push, deployment, issue closure, UI work, Parts 2/3 work, further review, or new implementation is authorized.
+- **Current gate:** Human acceptance is recorded. The accepted UI layer is the sole authorized local-commit scope. Stop after that local commit. No further implementation, verification rerun, push, deployment, issue update/closure, current Amber balance/income, or Parts 2/3 work is authorized.
+- **Accepted backend constraints:** Grand capacity and upgrade reference remain approved handwritten mechanic rules. Supplied `data/domain/data/SpelunkingMetadataRepo.ts` provides contextual labels and item associations. Preserve progression, summaries, records, and generated data. The new human exception permits only the five Amber denomination/activation rules and original recorded-haul formatting rules. It permits no unrelated static-table copy, external-repository edit, or export request.
+- **Current work boundary:** Commit only the accepted Part 1 UI, its artwork integration and Amber presentation rules, focused Amber tests/config/results, current UI plan, and this handoff. Preserve unrelated working-tree and staged changes, saves, generated data, and prior accepted progression calculations.
 - **Narrow human policy decision:** The user authorized carrying over capacity ten as a handwritten mechanic value. They rejected exporting upgrade identity 43 merely to use it as a stable handwritten mechanic reference. Use one named capacity constant and one named upgrade reference; do not extend this exception to unrelated static values. The human approved the revised overall backend plan.
 - **Audit disposition:** Follow the approved maintainability revision: Hat Rack owns deposited hats; aspects own cohesive parsing; generated metadata remains directly accessible; saved-name normalization stays at the save boundary; derived access, summaries, and Grand eligibility need no registered update hook or mutable requirement snapshots. Keep intrinsic game descriptions, not authored presentation sentences.
-- **2026-10-13 static-data correction:** The user supplied game source showing that `W7item0`–`W7item3` themselves use `Strung_Jewels`. The generated item names therefore reflect the source; this is not a WikiBot naming defect. Spelunking's contextual labels need the separate source list and destruction mapping. A request to permit handwritten contextual mappings was cancelled, so that scope change is not approved. Continue all reachable approved backend work without inventing or replacing this mapping.
+- **2026-10-13 static-data correction:** The user supplied source showing that `W7item0`–`W7item3` themselves use `Strung_Jewels`. Generated item names reflect that source, not a WikiBot naming defect. Spelunking uses the separate exported contextual labels and destruction mapping. The proposed handwritten mapping exception was cancelled; the accepted backend resolved the prerequisite through supplied metadata.
+
+### UI acceptance and local commit
+
+- **Human acceptance:** “I accept this UI result and its stated check limits.”
+- **Authorized action:** “Commit only this accepted layer's work. Update the handoff. Stop after the local commit.”
+- **Accepted evidence:** Five focused Spelunking suites passed all 24 tests; TypeScript passed; independent Amber review returned PASS; the final real-route browser packet verified all nine latest requirements.
+- **Accepted limits:** The retained Red account was exercised. Other active Amber tiers and saved Big-notation branches have source-review evidence only. No connected live-game parity, mobile matrix, performed game action, full-suite run, build, or lint is claimed. Shared Nav/ad/network errors remain recorded.
+- **Commit scope:** Production Spelunking content/display, boss/object image methods, Amber denomination selection/formatting, the verified `W7item` image-suffix fix, focused Amber tests/config/results, the UI plan, and this handoff. Exclude unrelated domain work, other feature plans/tests, product-spec drafts, fixtures, generated data, critique archives, and private screenshots/run artifacts.
+- **Commit isolation:** The tracked content, item-image helper, Spelunking domain, and handoff diffs contain this layer's changes only. Stage those files and the explicitly named new UI/test files; do not stage directories or unrelated paths.
+- **Local commit subject:** `feat(spelunking): add Part 1 progression UI`
+- **Acceptance cleanup:** Removed the owned temporary Amber correctness plan after human acceptance. Retained the minimal private source/browser proof. No checks were rerun for acceptance bookkeeping.
+- **Stop boundary:** Local commit only. No push, deployment, issue update/closure, or further implementation.
+
+### Latest nine-feedback simplification contract — 2026-10-14
+
+This contract replaces the previous nine-point, six-point, and revision 4 presentation specifications where they conflict.
+The [current card plan](spelunking-part-1-ui-plan.md) describes delivery. Approval, source provenance, and proof remain in this handoff.
+
+| User feedback | Current contract and implementation |
+|---|---|
+| 1. Remove Grand tips | Grand found/capacity and Requirements met/not met or Collection complete remain plain text. Remove the information icon, Grand details, and all hidden/popover fallbacks. |
+| 2. Simplify discovery tips | Found images are plain actual `IconImage` elements in 32px wrapping Boxes. Missing images retain opacity `0.55`; only they have a tooltip. Its heading is Spawn depth; its body is only `commaNotation(discovery.data.x6)`. No object-identity header or extra fields remain. |
+| 3. Hide completed Boss depth | Use `!tunnel.loreCompleted`, not availability. Eight completed cards omit Boss depth. Scoutpost remains available/incomplete with `115`; Exiled Throne remains locked/incomplete with `130`. |
+| 4. Strengthen Best depth | `TextAndLabel textSize="xlarge"` supplies the primary value with its default small label. Completed records use two equal columns; incomplete records use three. No empty placeholder remains. Raw values are unchanged. |
+| 5. Match game Amber progression | `currentAmberDenomination` selects the highest active account tier. `AmberDenomination` owns image and normalized haul formatting. The human-approved backend, UI cutover, tests, TypeScript, independent review, and final Red-tier rendered proof are complete. |
+| 6. Remove top help | Remove Display notes, Shared drops, their components/imports, and replacement or relocated help. Keep domain metadata and actual inline tunnel drops unchanged. |
+| 7. Consolidate account totals | One row follows the heading. Its first two entries are Account discoveries and Account Grand Discoveries, with unfiltered found/capacity totals and stronger small numbers. |
+| 8. Keep controls in order | Show locked follows both totals in that same row. Keep its initial checked state, availability filter, and existing callback. Add no duplicate or separate controls row. |
+| 9. Replace collection tabs | Collection status follows Show locked as an inline label and Grommet Select. Options are All/Found/Missing, initially All. Preserve local controlled state/callbacks and unfiltered totals, requirements, and records. |
+
+**Actual component facts:** `spelunkingDisplay.tsx` uses one row Box with `direction="row"`, `wrap`, `align="center"`, and `gap="medium"`.
+The dropdown wrapper is fixed at 130px with `flex={false}`; Select uses `size="small"` and `aria-label="Collection status"`.
+Account labels remain small/accent-2; numeric children are small with weight 500.
+The row reuses established inline-label and compact-Select patterns rather than adding a control abstraction.
+Missing-object tooltip width is at most 360px. Its heading is Spawn depth; its body contains only the formatted depth value.
+Removed component-local helpers are GrandDiscoveryDetails, DisplayNotes, and SharedDropDetails; CircleInformation and ContentTabs imports are gone.
+Whole-card fading, locked access copy, source art, inline drop rows, raw records, callbacks, and domain/store state remain unchanged.
+
+**Amber policy exception — human approved:** The user explicitly authorized handwritten Amber progression rules in the backend instead of a WikiBot export.
+The user's reason was that these values rarely change and hidden game functions are not reliable extraction targets.
+This replaces the earlier external prerequisite. No WikiBot request, new dependency issue, or external/generated-data edit is needed or authorized.
+The exception covers only the five denomination/activation rules and the original recorded-haul formatting rules needed for this outcome.
+It does not extend to other static game values or reopen current balance, income, shop UI, or Parts 2/3.
+
+**Implemented Amber ownership:** Exported `AmberDenomination` and five frozen singleton definitions live in the existing Spelunking domain.
+The denomination owns identity, base-unit divisor, optional upgrade gate, cached immutable 50×50 image data, and `formatAmount(baseAmount)`.
+`Spelunking.currentAmberDenomination` selects the highest active tier using existing `getUpgradeBonus`, with Orange as the ungated default.
+`SpelunkingDisplay` selects the owner once per render and passes it to each TunnelCard.
+Each card delegates image, normalized amount, and unit name to the denomination. Its accessible label uses formatted amount plus denomination name.
+The obsolete `getBaseAmberImageData()` API and sole UI call are removed, as is the UI `notateNumber` import.
+No compatibility alias, new update hook, mutable tier cache, or per-render denomination copies were added.
+
+| Tier | Denomination | Base Amber value | Activation through `getUpgradeBonus` |
+|---|---|---|---|
+| 0 | Orange Amber | `1` | Default |
+| 1 | Blue Amber | `1e3` | Upgrade `20`, bonus at least `1` |
+| 2 | Green Amber | `1e9` | Upgrade `41`, bonus at least `1` |
+| 3 | Red Amber | `1e21` | Upgrade `51`, bonus at least `1` |
+| 4 | Pink Amber | `1e36` | Upgrade `66`, bonus at least `1` |
+
+Current v1.22 helper source supplies these values; the Pink shop description's `1e24` base claim is incorrect.
+Use verified `CaveAmber0`–`CaveAmber4` artwork in existing logical 50px contain-fit frames. Pink uses the game's purple-looking artwork.
+The missing-structured-export finding remains valid research history, but no longer blocks the approved handwritten implementation.
+
+**Requested Amber source outcome:** The current game uses the highest active account tier for every Biggest haul record.
+For the retained account, the Red tier corresponds to `CaveAmber3` and divisor `1e21`.
+Glitter End's raw `6.907809127140328e+30` becomes `6,908M`; zero remains `0` in the same Red tier.
+Original-game formatting uses `NotateNumber(..., "Big")` only above normalized `1e14`; otherwise it uses original `CommaNotation`.
+That helper rounds to integers and uses an `M` suffix above `1e9`. Website `commaNotation` is not evidence of equivalent behavior.
+The original record renderer draws a denomination-colored glyph, while `CaveAmber3` is the matching verified website image.
+The historical raw `6.9E30`/`0` beside `CaveAmber0` was truthful base-unit presentation, but did not meet item 5.
+The [current v1.22 source evidence](local://spelunking-amber-display-evidence.md#current-v122-original-game-execution) records the tier rules and renderer formatting.
+This request concerns recorded haul only. Current balance, income, and Parts 2/3 remain outside scope.
+
+**Current source pairing:** The [paired source receipt](local://spelunking-amber-parity-receipt.json) identifies original offline Jelly_Operator v1.22 with source hash recorded below.
+Retained `tests/fixtures/saves/latest.json` haul indices 0–9 exactly match current original-runtime records.
+The four actual denomination bonuses are `777`, `1288`, `500`, and `0` for upgrades `20`, `41`, `51`, and `66`.
+Their retained purchased levels are `259`, `322`, `100`, and `-1`; selection uses bonuses, not those raw levels.
+Independent original-game expected texts include Pebbles **200,125**, Glitter End **6,908M**, and Exiled Throne **0**, all in Red Amber.
+The backend uses unrounded normalized amounts for strict branch thresholds. Rounding occurs only in the selected integer or M notation.
+This is source/pairing evidence, not a completed website test or browser pass.
+
+**Amber verification and review:** Original-source extraction completed nine canonical entries and paired the actual fixture inputs without changing the retained save.
+Permanent [extraction config](../../tests/configs/spelunking-amber-haul.json) and [results](../../tests/results/spelunking-amber-haul-data.json) support the [core](../../tests/domains/spelunking/amber-haul.test.ts) and [parameter](../../tests/domains/spelunking/amber-haul-parameters.test.ts) comparisons.
+Before implementation, the tests stage observed four meaningful missing-API core failures and four passing direct-parameter comparisons.
+After integration, the parent ran:
+`yarn test tests/domains/spelunking/amber-haul.test.ts tests/domains/spelunking/amber-haul-parameters.test.ts tests/domains/spelunking/progression.test.ts tests/domains/spelunking/progression-parameters.test.ts tests/domains/spelunking/upgrade-bonuses.test.ts --runInBand`.
+All five suites and 24 tests passed in 23.316s.
+`yarn tsc --noEmit --incremental false` passed with no output in 19.85s.
+The prior stale dev-validator failure is historical; no owned cache mutation was needed.
+The parent ran the final integrated UI detector after all source changes; it returned `[]` in 0.07s.
+Independent Amber source/code/test review returned PASS with no concrete findings.
+Review confirmed the five source-derived tiers, unrounded threshold order, real-save Red selection with Pink locked, and the three distinct actual-record behaviors plus four direct bonuses.
+No mock gates, synthetic save, tolerance exception, UI table, obsolete base alias, or added processing hook was used.
+Active Orange/Blue/Green/Pink and saved Big-notation branches are not observed by the retained fixture; their rules have source-review evidence only.
+These checks do not claim connected live-game parity or issue closure. The human subsequently accepted this UI result and its stated limits in the acceptance record above.
+
+**Final real-route proof:** `yarn ui:run .ui-verification/spelunk-current-amber-final-20261014.cjs /workspace/.ui-verification/spelunk-current-amber-expected-20261014.json` passed in run `2026-10-13T23-33-53-043Z-63101`.
+The retained [result](../../.ui-verification/verification/spelunking-current-amber-final-20261014/result.json) records `passed: true`, `error: null`.
+The [observations](../../.ui-verification/verification/spelunking-current-amber-final-20261014/observations.json) record `latestNineRequirementsPassed: true` and `currentAmberRequirementMet: true`.
+This verifies real `/world-7/spelunking` at 1440×1000 with the unchanged retained account.
+
+**Final Amber outcome:** All ten haul values match independently executed original-source expectations, in source order:
+**200,125; 266,857; 589,412; 9,866,417; 25,720,967; 14,238,412; 20,957,151; 6,908M; 5,223,768; 0**.
+Every haul uses the account's Red tier, divisor `1e21`, and verified `CaveAmber3`, including zero.
+Accessible haul labels correctly name Red Amber. Raw records remain unchanged.
+No magnitude-based denomination selection, cap, current balance, or income display was added.
+
+**Exercised latest simplifications:** One post-heading row has both DOM and visual order: ordinary summary x=48, Grand summary x=309, Show locked x=650, then the 130px Select wrapper x=879.
+All four share center y=214. Best depth uses actual 26px/32px xlarge typography, versus 14px haul.
+Eight completed cards omit Boss depth and use two record columns. Scoutpost `115` and Exiled Throne `130` remain visible in three-column records.
+Grand and both top-help triggers are absent; information-icon count is zero.
+All 23 missing-image tips were physically inspected. Each contains only Spawn depth and its numeric value.
+Found-image tooltip absence was sampled once per tunnel with found entries, nine samples; source review establishes the plain branch for all found images.
+The dropdown exercised All `105`, Found `82`, and Missing `23`; summaries remained `82/105` and `22/100`.
+Show locked produced nine/ten cards. All 129 card images loaded: ten bosses, 105 ordinary objects, ten Red Amber icons, and four inline tunnel drops.
+Non-Amber image identities/order, inline item names/art, whole-card states `1`/`0.7`/`0.4`, records, access requirements, and unfiltered eligibility markers remain preserved.
+
+**Final evidence and limits:** Retain [primary](../../.ui-verification/verification/spelunking-current-amber-final-20261014/01-final-colored-amber-primary.png), [incomplete/locked](../../.ui-verification/verification/spelunking-current-amber-final-20261014/02-final-red-amber-incomplete-locked.png), and [Spawn depth](../../.ui-verification/verification/spelunking-current-amber-final-20261014/03-final-spawn-depth.png) captures with observations/result/[errors](../../.ui-verification/verification/spelunking-current-amber-final-20261014/errors.json) and [source provenance](../../.ui-verification/verification/spelunking-current-amber-final-20261014/source-provenance.json).
+Initial navigation/reload recorded zero owned hydration errors, eight shared Nav/ad/network errors, and 14 warnings.
+Capture-only identity/dev-chrome masks changed no layout. No mobile, connected live-game parity, performed game action, fixture/store mutation, or synthetic other-tier browser state is claimed.
+Current Red records are exercised; Orange/Blue/Green/Pink activation and saved Big-notation branches remain source-reviewed limits.
+No new tests, build, lint, formatter, or checks were run by this documentation worker.
+
+**Final cleanup:** Removed the owned final scenario, expected-input JSON, successful run directory, and raw captures after preserving the seven-file packet.
+Removed the superseded eight-fix packet after copying minimal source provenance. Earlier raw-Orange proof is history, not final parity.
+The final packet uses directory mode `0700` and file mode `0600`.
+Approved references, retained save, accepted progression, generated data, unrelated work, and preexisting Docker remain unchanged.
+No external WikiBot request/edit, issue update/closure, push, or deployment occurred. The subsequent human authorization permits only this accepted layer's local commit.
+
+**Historical pre-Amber snapshot:** Run `2026-10-13T23-18-20-302Z-27309` passed the eight simplifications before Amber implementation.
+Its `allNineComplete: false` and raw-Orange values accurately described that earlier surface. The human exception and final Red proof above supersede them.
+Two harness-only corrections addressed an incidental 24px assertion and Grommet's dynamic accessible name; neither changed production code.
+That phase's source scans and stale TypeScript limit were subsequently superseded by the successful final integrated checks above.
+
+### Previous nine-point correction — historical 2026-10-14 record
+
+The following contract, base-Orange decision, checks, and browser proof describe the previous surface.
+The latest feedback above removes its Grand/global-help tips and replaces its controls, object tips, and completed-card records.
+Its raw base-Orange choice is rejected as the final game-tier outcome. Preserve source and approval history, not that choice as current acceptance.
+
+| Previous user correction | Historical contract, superseded where noted above |
+|---|---|
+| 1. Redundant missing counts | Show unfiltered found/capacity totals on cards and account summaries. Remove every numeric missing count, including Grand remaining-capacity detail. Keep object **Found / Missing**, filter names, and useful ordinary empty states. Domain summaries remain unchanged. |
+| 2. Information-icon hover | Each label and adjacent information SVG must open the same tooltip. Keep one composite local hover target, not duplicated tooltips. Final proof must hover SVG and label independently for Grand and both global-help triggers. |
+| 3. Redundant Grand tooltip | Show the final ordinary discovery's actual name, artwork, and Found/Missing state, plus the named Grand Discoveries upgrade's Active/Locked/Not active state. Remove access/count repetition and numbered ownership lists. Keep destruction/rarity mechanics once in Display notes. Collection status filters only ordinary icons. |
+| 4. Redundant Available labels | Remove visible **Available** from cards and tooltips. Keep **Locked** and **Complete [previous tunnel name] Lore** where relevant. Preserve `available` behavior. |
+| 5. Wrong fade scope | Fade the whole `ShadowBox`: locked `0.4`, available/incomplete `0.7`, completed `1`. Remove the separate boss fade. Card semantics retain access/completion; shared notes explain the cue without claiming active downstream bonuses. Tooltip portals remain fully readable. |
+| 6. Missing Amber art | Pair unchanged raw **Biggest haul** formatting with verified base Orange Amber `CaveAmber0` artwork. Current source establishes this saved unit. Advanced denomination art would require converted quantities; that conversion is outside this correction. No current balance, income, coin conversion, tier table, or later-part currency/shop feature is added. |
+| 7. Missing tunnel-drop artwork | Show every actual `tunnel.itemDrops` entry with `IconImage(Item.getImageData(drop.itemId))` and contextual `drop.displayName`. Iterate the supplied array. Do not use generic **Strung Jewels** names. |
+| 8. Hidden tunnel drops | Keep nonempty tunnel drops directly visible in concise inline card rows. Remove **Tunnel drops** tooltip/trigger. Current metadata supplies Rockenstone, Sheetmetal, Popcorn, and Pillario; these are examples, not a hardcoded one-entry assumption. |
+| 9. Misleading upgrade requirement | Use the actual `drop.unlockUpgrade` name and the player's purchased level, Locked, or Not purchased. A saved purchased level is not a required threshold or proof of a performed reward drop. Show actual item art where metadata supplies an item. |
+
+**Precise old mislabel:** The retained Prisma Bubbles row showed **Upgrade requirement: Level 179**.
+That `179` is the saved purchased level of upgrade 28, **A Scintillatingly Prismatic Find**.
+It is not a level requirement for Prisma Bubbles.
+Upgrade 29 is **A Bunch-of-Random-Junk-ly Find**; upgrade 30 retains its actual generated source name.
+The UI must use the supplied upgrade object, not handwritten aliases or index mappings.
+Generated contextual metadata and the accepted Upgrade parser establish this meaning. [R3, R10, R14]
+
+**Historical UI source and copy:** The previous `spelunkingDisplay.tsx` kept **Locked · Complete [previous tunnel] Lore** only on locked cards.
+Grand details show **[actual Grand Discoveries name] upgrade** and **Required discovery**, including final-object art/name/state.
+The shared-drop row names **Spelunking upgrade: [actual source name]** and shows **Your purchased level: [value]**, **Locked**, or **Not purchased**.
+Shared help states: **Upgrade levels are your purchased Spelunking levels, not required levels. They do not show whether you found these drops.**
+Display notes state: **Dim cards mean incomplete Lore; locked cards dim further. Lore completion does not prove downstream bonuses are active.**
+Inline item art uses actual `Item.getImageData` identities at 24px, with contextual drop names.
+Biggest haul uses `spelunking.getBaseAmberImageData()` and a 24px icon beside unchanged raw `notateNumber` output.
+Its single shared note states: **Biggest haul records base Orange Amber retained after the applicable exit toll or successful-exit bonus. It is not current Amber.**
+
+**Hover source:** Grommet's `Tip` clones its single child and attaches enter/leave handlers to the `TipDisplay` root Box.
+Local inner help/Grand subtrees use `pointerEvents: 'none'` so their labels and SVGs share that root target.
+This avoids duplicate tooltip bodies and shared-component changes. Source does not prove the original SVG-only failure's exact cause.
+Rendered SVG and label hover must establish the fix; source inspection alone is not a pass.
+
+**Historical Amber decision, not final parity:** Offline v1.22 POST source queries establish `Spelunk[2]` as unscaled base Orange Amber.
+Exit settlement writes the same unscaled retained reward into haul and balance records.
+The game's account-denomination renderer divides that record before showing its advanced-tier glyph.
+The previous correction used verified `CaveAmber0` with the raw record, not an advanced icon beside an unconverted number.
+That decision supplied artwork without conversion. The latest feedback requires normalized current-tier presentation; the subsequent human exception removes the export prerequisite.
+The owner helper returns existing `ImageData` in a logical 50px square; `IconImage` preserves natural artwork proportions.
+
+**Current Amber source provenance:** Research executed read-only `POST /exec` queries against offline `http://127.0.0.1:3101`.
+`idleon.getGameVersion()` reported **Jelly_Operator v1.22**.
+Original source `assets/distBuild/static/game/N.js` has SHA-256 `49a106e5ea60bd6eb3ec36173b7f43720a2805329d1fe08a4fada822c617165c`.
+`ActorEvents_579._customBlock_Spelunk` supplies denomination/index rules.
+`ActorEvents_713.prototype._event_5` supplies the recorded-haul renderer; `_customEvent_SpelunkStuff` supplies raw record settlement.
+Researchers inspected gameplay/renderer source without executing those handlers or requesting save mutation, reset, or time advance.
+Original format helpers were executed; their normal numeric scratch assignments are not a performed delve.
+The [current-source evidence](local://spelunking-amber-display-evidence.md#current-v122-original-game-execution) records exact source and execution results.
+
+The original renderer draws denomination-colored glyph **从**, not a CaveAmber PNG.
+For this account, its red-tier divisor is `1e21`; it renders Glitter End as `6,908M` and Exiled Throne as `0`.
+The raw saved Glitter End record is `6.907809127140328e+30`; original raw notation returns `6.9E30`.
+Exiled Throne's raw record and raw notation are `0`.
+The previous corrected website showed those raw values with base Orange/gold `CaveAmber0`, not current-tier renderer parity.
+Existing APK/CDN `CaveAmber0` identity and natural 30×27 dimensions are established by the artwork evidence.
+The logical 50px metadata frame is not a claim about source pixel dimensions.
+
+**Historical static-data finding, later waived as a prerequisite:** Generated data has no structured denomination divisor/tier/image/gate fields.
+The Pink Amber description says `1e24`, but the current helper uses `1e36`; description parsing cannot establish correct conversion.
+The initial policy required structured external metadata and normal sync rather than handwritten mappings.
+No export, generated edit, or tier conversion was added in that phase. The later human approval now permits the bounded handwritten Amber rules without an export.
+
+
+**Recorded correction checks:** The parent ran the changed-component Impeccable detector; it returned exit `0` with `[]`.
+Fresh source review returned `correct` with no findings; this is source review, not rendered acceptance.
+After refresh, LSP diagnostics reported no issues in the changed component, Amber owner, and Item image-data file.
+`yarn tsc --noEmit --incremental false` failed with TS2307 at `.next/dev/types/validator.ts:456`.
+The generated dev validator imports deleted unrelated `app/world-7/research-preview-p1-f54fa480/page.js`.
+The parent inspected that stale-cache reference without modifying the cache or unrelated route work.
+No successful full TypeScript check is claimed for this iteration. No new tests, build, lint, formatter, or typegen run is claimed.
+Backend checks below remain acceptance history; no calculation, current-tier conversion, or connected live-game parity was retested.
+
+**Initial correction browser limit:** The first attempt stopped at inline item-art readiness because `W7item0`–`W7item3` CDN requests returned HTTP `403`.
+Its capture showed broken Rockenstone/Sheetmetal images. It did not reach the tooltip assertions and is not an acceptance pass.
+The artwork fix extends the existing `Item.getImageData()` `_x1` branch to `W7item` identities, retaining its 36×36 frame.
+Original `ActorEvents_713.prototype._event_4` maps these four IDs to `W7item0_x1`–`W7item3_x1`.
+All four corrected CDN images returned HTTP `200`, `image/png`, and 36×36 dimensions.
+Their decoded RGBA matches the original APK artwork; CDN bytes also match the existing `data/icons` copies.
+No upload, fallback image, generated edit, or copied per-tunnel image mapping was needed.
+The [artwork evidence](local://spelunking-tunnel-drop-artwork-evidence.md) records the exact selector and CDN/APK hashes.
+This read-only v1.22 evidence uses the original source hash recorded above and APK manifest entries at lines 47504–47514.
+The final browser run loaded all four corrected inline images and exercised the tooltip paths successfully.
+
+**Final real-route proof:** `yarn ui:run .ui-verification/spelunk-nine-corrections-20261013.cjs /workspace/.ui-verification/spelunk-nine-amber-expected-20261013.json` passed in run `2026-10-13T22-42-24-422Z-46197`.
+Its result recorded `passed: true`, `error: null`. The superseded packet was removed after the latest simplification proof.
+At 1440×1000, all ten source-order cards and 129 card images loaded: the original 115, ten base Amber icons, and four inline tunnel-drop icons.
+The Shared drops tooltip loaded four actual item images.
+The inspected primary, incomplete/locked, and shared-drop captures showed that earlier real production surface. Those superseded screenshots are no longer retained.
+
+**Exercised nine-point behavior:** Cards and summaries showed found/capacity without numeric missing totals or visible Available labels.
+Whole-card opacity was `1`/`0.7`/`0.4`; boss artwork had relative opacity `1`.
+The four inline drops showed actual contextual names and `_x1` artwork.
+Grand tips showed only the named Active upgrade and the final discovery's artwork/name/Found or Missing state.
+They contained no repeated access/counts/capacity or numbered ownership lists.
+Shared rows named the actual upgrades and showed purchased levels `179`, `174`, and `111`, not requirement thresholds.
+All ten raw haul quantities matched independently derived retained-save expectations; Glitter End showed `6.9E30` and Exiled Throne `0`, both with `CaveAmber0`.
+
+**Direct hover proof:** Physical mouse moves targeted separately measured SVG centers and label centers for Display notes, Shared drops, and first/locked Grand tips.
+Both targets produced identical content through the same root DIV hit region with `pointerEvents: auto`.
+Their portals had opacity `1` and fit the viewport.
+An earlier Playwright `locator.hover` attempt refused the intentionally non-interactive decorative SVG.
+The harness changed to real mouse coordinates; no extra production hover change or duplicated tip was added.
+
+**Preserved behavior and limits:** All/Found/Missing remained 105/82/23 ordinary icons; Show locked remained nine/ten cards.
+Account summaries stayed `82/105` and `22/100`; Grand requirements and records stayed unfiltered.
+Initial navigation/reload recorded zero owned hydration errors.
+Its historical error record contained eight shared Nav/ad/network errors and 16 warnings; the superseded packet is no longer retained.
+This is focused website proof, not an error-free application or current-tier renderer-parity claim.
+No synthetic inactive/locked Grand-upgrade or full-capacity scenario, fixture/store mutation, mobile check, or connected live-game parity is claimed.
+Historical production/refinement passes below remain history, not substitutes for this correction proof.
+
+**Historical density and cleanup:** The following measurements describe the earlier raw-Orange correction; its packet and the later eight-fix snapshot were retired after final Red-tier proof.
+Final first-row height is 327px versus original 423px; average height is 319.8px versus 429px.
+Summaries remain at y=192 versus original y=2521; two complete rows fit.
+That phase retained three screenshots plus observations/result/errors and source provenance. Final proof now retains minimal [source provenance](../../.ui-verification/verification/spelunking-current-amber-final-20261014/source-provenance.json) in the current seven-file packet.
+The browser worker removed three owned raw runs, including the real artwork failure and SVG-actionability harness failure.
+It removed the scenario, temporary expected-data/provenance inputs, and obsolete density packet after final proof.
+The retained save and existing Docker stack remained unchanged. Private packet permissions are `0700` for the directory and `0600` for files.
+
+### Six-point hierarchy and density refinement — 2026-10-13
+
+**Historical record:** This section describes the completed six-point refinement before the nine-point correction request.
+Its boss-only opacity, missing-count display, hidden Tunnel drops, Available labels, numbered Grand lists, and requirement-level wording are superseded.
+
+**Scope:** Refine `components/world-7/spelunking/spelunkingDisplay.tsx` and the two existing UI plan/handoff documents only. Keep the approved two-column card topology, real components, source order, artwork, filters, records, counts, and Grand requirements. Preserve the accepted backend, generated data, domain API, route/store hydration correction, and authorization limits.
+
+**Historical review evidence:** Independent Impeccable and real-route reviews established the original hierarchy/density baseline. Original first-row cards were 660×423px with 24px padding/gaps; summaries appeared at y=2521/2544. Repeated destruction/Lore/record/access tips motivated the six-point refinement. These measurements are history; superseded packets were removed after final Red-tier proof. The [archived critique](../../.impeccable/critique/2026-10-13T09-00-42Z__world-7-spelunking-spelunkingdisplay-tsx-a2f2819f.md) records the first review. Its detector returned exit 0 with `[]`; this did not establish visual hierarchy quality.
+
+| Historical user feedback | Historical disposition, superseded where noted above |
+|---|---|
+| 1. Redundant information, especially destruction/drops/exit | The refinement grouped common conventions in **Display notes** and shared identities/gates in **Shared drops**. Its tooltip-only tunnel drops are superseded. |
+| 2. Buried Lore earned/not-earned tooltip | The refinement removed the Lore-status row. Its boss-only `1`/`0.5` fade is superseded by the whole-card correction. |
+| 3. Weak typography and hierarchy | The refinement moved account summaries below the title and used weight 500 for numbers and intrinsic benefits. Tunnel names/access stayed secondary. |
+| 4. Obvious repeated tooltip content | The refinement removed per-record/access tips and generic object/Grand paragraphs. Its four Grand requirements and filtered numbered list are superseded. |
+| 5. Account totals hidden at the bottom | The refinement moved account totals before controls/cards. Its numeric missing totals are superseded; found/capacity remains. |
+| 6. Poor density and scanability | The refinement aligned records and compacted collection counts while retaining 24px padding/gaps. The nine-point correction preserves this composition. |
+
+**Historical source facts:** The six-point component retained 72px boss art, the weight-500 intrinsic benefit, and **Best depth / Boss depth / Biggest haul** records. Its Available cue and boss-only completion fade were later replaced by the nine-point correction.
+
+**Historical disclosure record:** The refinement grouped common context in **Display notes** and **Shared drops**, with maximum widths 480px/420px and 70vh scrolling bodies. **Tunnel POW factor** stayed in object Base inputs. The old unnamed requirement-level label was later corrected to the actual upgrade name and saved purchased-level meaning.
+
+**Preserved baseline behavior:** The unchanged retained account has ten cards and 115 boss/object artwork loads. Ordinary All/Found/Missing counts are 105/82/23; account ordinary totals are `82/105` found, `23` missing. Grand totals are `22/100` found, `78` missing. Show locked yields nine/ten cards. Scoutpost is available with incomplete Lore; Exiled Throne is locked with **Complete Scoutpost Lore**. The baseline had no owned Lore hydration error; shared Nav/ad/network errors remain separate.
+
+**Recorded checks:** The parent ran `impeccable detect --json components/world-7/spelunking/spelunkingDisplay.tsx` once after the edit; it returned exit 0 with `[]`. `yarn tsc --noEmit --incremental false` passed with exit 0 and no output in 19.29s. Fresh review returned `correct` with no findings. Earlier tests and revision 4 browser results below remain baseline history. No tests were rerun because the backend stayed unchanged; no build, lint, formatter, or new calculation-parity check is claimed.
+
+**Historical real-route proof:** `yarn ui:run .ui-verification/spelunk-density-final-20261013.cjs` passed in run `2026-10-13T09-06-04-997Z-66116`, with recorded `passed: true`, `error: null`. First-row height fell from 423px to 317px; average height fell from 429px to 311px, 27.5% shorter. Summaries moved from y=2521 to y=192, and two rows fit. Its obsolete packet was removed after the nine-point proof; baseline/refinement metrics remain in final correction observations.
+
+**Historical exercised behavior and limits:** All/Found/Missing was 105/82/23; Grand lists were then 1–10/1–4/5–10. Show locked was nine/ten, and records/totals stayed invariant. That version used boss-only `0.5` fading and tooltip-only tunnel drops, now superseded. It recorded zero owned hydration errors, eight shared errors, and 14 warnings. No fixture/store mutation, synthetic missing domain, full Grand capacity, inactive/locked Grand-upgrade scenario, mobile check, or connected parity was claimed.
+
+**Historical cleanup:** The six-point phase removed its owned baseline/final scenarios, two raw runs, failed/raw captures, and baseline packet. Its first harness attempt timed out on a hidden checkbox input; clicking the visible label required no production change. The retained save, existing Docker stack, backend, and unrelated work remained unchanged. The subsequent nine-point phase removed the now-obsolete density evidence packet after preserving its measurements in the final correction observations.
+
+### Revision 4 production baseline, reference, and cleanup — 2026-10-13
+
+**Historical record:** Revision 4 approval and baseline proof remain valid history. The nine-point contract governs current presentation.
+The old exclusion of denominations does not prohibit the newly authorized source-correct representation of recorded Biggest haul.
+
+- **Human approval and authorization:** The human approved revision 4 and said, “Approved, make sure to clean up after all your testing/screenshot creation work. Then progress to implementation.” Production Part 1 UI, necessary existing-pattern artwork integration, focused verification, and owned scaffold cleanup are authorized. Commit, push, deployment, issue updates, issue closure, and Parts 2/3 implementation are not authorized.
+- **Approved composition:** The [card plan](spelunking-part-1-ui-plan.md) groups each released boss/tunnel's benefit, earned Lore state, artwork, records, access requirements, ordinary icons, and Grand progress in one card. Benefits lead; names are secondary. The desktop grid has two columns. Ordinary and Grand collections remain distinct card-local details, not top-level tabs. Show locked starts enabled; All/Found/Missing filters do not change account totals.
+- **Reference:** The supplied [Toolbox Lore / Bosses view](https://idleontoolbox.com/account/world-7/spelunking?profile=liiiiiiiiiiiig&t=Lore&nt=Bosses) established self-contained card grouping. The IE implementation keeps its own shell/theme and approved Sneaking composition: dark-1 `ShadowBox`, medium padding, small gaps, and adjacent artwork. It uses `IconImage`, labeled-value primitives, `TipDisplay`, and Grommet controls. It does not copy competitor implementation code or formulas.
+- **Earned versus active:** `loreCompleted` and intrinsic `data.loreBonus` describe earned Lore rewards. Completion can unlock another system; it does not prove downstream ownership or an active effective bonus. Access and completion remain distinct. Journal bonuses remain Part 2 work.
+- **Historical Amber boundary:** Revision 4 omitted current Amber balance, denomination rendering, effective shop/depth/haul bonuses, and daily income. The nine-point correction now authorizes verified Amber artwork/quantity for Biggest haul only. Current balance, income, and later shop/currency features remain with unselected [Part 3](spelunking-delivery-parts-draft.md#3-amber-equipment-and-advanced-progression).
+- **Depth and daily income distinction:** `Depthing the POW` scales with best depths across tunnels. `Unexplainable daily Amber Gains to satiate the playerbase` uses each tunnel's biggest haul, not depth. [Generated descriptions](../../data/domain/data/SpelunkingUpgradeRepo.ts) and the [Wiki Shop](https://idleon.wiki/wiki/Spelunking#Shop) support this distinction. Part 1 does not calculate either effective value.
+- **Other scope limits:** No stamina/Journal values, Manic depth, equipment, optimizer, Grand chance forecast, or personalized object POW calculation is added. Grand requirements use accepted owner getters. Records, contextual drops, and exit descriptions retain approved Part 1 conventions.
+- **Artwork evidence:** Existing CDN identities cover `CaveBoss0`–`CaveBoss9` and 105 ordinary objects. [Retained artwork evidence](../../.ui-verification/approval/spelunking-part-1-r4-20261013/artwork-evidence.json) records source identities, dimensions, CDN responses, byte equality, and decoded APK pixel equality. Production uses existing `ImageData`/`IconImage` conventions. No fictional Grand artwork, extraction, upload, or handwritten static mapping is needed.
+- **Minimal approved reference:** Retain [primary full-shell cards](../../.ui-verification/approval/spelunking-part-1-r4-20261013/01-boss-cards-primary-full-shell-top.png), [all ten cards](../../.ui-verification/approval/spelunking-part-1-r4-20261013/02-all-boss-cards-full-page-top.png), [component mapping](../../.ui-verification/approval/spelunking-part-1-r4-20261013/COMPONENTS.txt), [reference comparison](../../.ui-verification/approval/spelunking-part-1-r4-20261013/REFERENCE.txt), and [reference observations](../../.ui-verification/approval/spelunking-part-1-r4-20261013/reference-observations.json). These are private local evidence, not remote publication.
+- **Historical mockup result:** The retained revision 4 [result](../../.ui-verification/approval/spelunking-part-1-r4-20261013/result.json) records `passed: true`, `error: null`. Its [error record](../../.ui-verification/approval/spelunking-part-1-r4-20261013/errors.json) preserves runtime limits. This is approved mockup evidence, not a final production pass or an error-free-app claim.
+- **Hydration correction:** The initial route verification found server/default-domain Lore text differing from browser/parsed-domain Lore text. `content.tsx` now starts with an undefined `Spelunking` state and reads the domain in an effect keyed by `theData` and `lastUpdated`. This follows the existing Constellations loading pattern. Independent source review checked refresh semantics and found no findings. Final browser verification recorded zero owned Lore/Spelunking hydration errors on initial navigation and reload. The final reviewer returned `correct` with no findings after reading fresh evidence.
+- **Recorded focused checks:** The three Spelunking suites passed all 16 tests before the UI-only hydration correction. The domain did not change afterward, so those tests were not rerun. After the correction, `yarn tsc --noEmit --incremental false` passed with exit 0 and no diagnostics. The final manual detector command `/home/sludge/.omp/agent/skills/impeccable/scripts/impeccable detect app/world-7/spelunking/content.tsx components/world-7/spelunking/spelunkingDisplay.tsx` ran once and returned exit 0 with no output. No build, lint, full suite, connected live-game parity, or mobile check is claimed.
+- **Final production browser proof:** `yarn ui:run .ui-verification/spelunking-production-20261013.cjs` exited 0 after the correction; run `2026-10-13T07-55-39-011Z-23531`. The retained [result](../../.ui-verification/verification/spelunking-part-1-20261013/result.json) and [observations](../../.ui-verification/verification/spelunking-part-1-20261013/observations.json) record the focused pass. The actual route showed `Loading Spelunking data` on both initial navigation and reload. MainLoading was not separately captured.
+- **Exercised production behavior:** At 1440×1000, all ten source-order cards and 115 matched CDN boss/object images loaded with natural proportions. Show locked produced nine/ten cards. All/Found/Missing produced 105/82/23 ordinary icons; checked Grand entries were numbered 1–10/1–4/5–10. Empty Found ordinary/Grand and empty Missing ordinary states worked. Records, gates, and account totals stayed unchanged at ordinary `82/105` and Grand `22/100`. Scoutpost remained available with unearned Lore; Exiled Throne remained locked with its requirement. Earned, object, Grand, drop, and exit tooltips were inspected.
+- **Final captures:** [Primary full shell](../../.ui-verification/verification/spelunking-part-1-20261013/01-production-primary-full-shell-top.png), [available incomplete and locked cards](../../.ui-verification/verification/spelunking-part-1-20261013/02-production-available-incomplete-and-locked.png), and [locked empty Grand tooltip](../../.ui-verification/verification/spelunking-part-1-20261013/03-production-locked-found-empty-grand-tooltip.png) were inspected. No material layout difference from the approved cards was found. Capture-only identity masks and hidden developer chrome do not change widget dimensions.
+- **Runtime and proof limits:** The final [error record](../../.ui-verification/verification/spelunking-part-1-20261013/errors.json) retains eight runtime error events and 16 warnings. Errors include two shared Nav attribute-hydration events, two NitroPay `document.browsingTopics` errors, rlcdn CORS/`net::ERR_FAILED`, and two HTTP 403 events. Nothing was suppressed. [Pre-fix errors](../../.ui-verification/verification/spelunking-part-1-20261013/pre-fix-errors.json) are historical only. Reload exercised fresh route/store initialization; `lastUpdated`-only mutable-domain refresh has source-review evidence only. No fixture/store mutation, synthetic missing-domain state, full Grand capacity, Grand upgrade Locked/Not active state, performed game action, connected live-game parity, or mobile matrix is claimed.
+- **Baseline cleanup:** Removed owned preview scenarios, revision 1/2/3 packets, the separate reference packet, and revision 4 source archives, reopen/runtime notes, and focused captures. After baseline verification, removed the production scenario, all three owned production-run directories, raw `final.png` captures, stale proof, and the redundant initial error log. At that handoff, only the minimal revision 4 reference and final seven-file production packet remained, secured with directory mode `0700` and file mode `0600`. Existing Docker, the retained save, generated data, and unrelated files/services remained unchanged. Accepted backend calculations stayed unchanged; only existing-pattern image methods were added.
 
 ### Backend acceptance and local commit
 
@@ -248,7 +562,7 @@ These questions concern source semantics, parsing, calculations, and unaudited d
 ### Website and workflow sources
 
 - **R1:** [Route](../../app/world-7/spelunking/page.tsx):1–16.
-- **R2:** [Current content](../../app/world-7/spelunking/content.tsx):1–22 — placeholder surface.
+- **R2:** [Current content](../../app/world-7/spelunking/content.tsx) — approved benefit-first Part 1 tunnel cards with effect-based loading/refresh; focused browser verification confirmed zero owned hydration errors after correction.
 - **R3:** [Spelunking domain](../../data/domain/world-7/spelunking.tsx):12–175 — shared raw-key ownership, static initialization, saved fields, and current mapping limits.
 - **R5:** [Known extraction config](../../tests/configs/spelunking-upgrade-bonuses.json) — `idleon.callFunction('Spelunk', 'ShopUpgBonus', 59, 1)`. Ran through the existing extractor against offline port 3101; temporary output reported value 3, one success, zero errors. This proves one queried bonus only, not full-domain or live-game correctness.
 - **R6:** [Generated tunnel metadata](../../data/domain/data/SpelunkingTunnelRepo.ts) — tunnel identities, boss depths, discoveries, and intrinsic Lore descriptions. Read-only. Current part 1 comparison matches all ten released tunnels and object numeric inputs; this does not establish completeness for other metadata families.
@@ -263,4 +577,4 @@ These questions concern source semantics, parsing, calculations, and unaudited d
 - **R14:** [Generated item metadata](../../data/domain/data/ItemRepo.ts):36754–36824 gives `W7item0`–`W7item3` the same display name “Strung Jewels.” This conflicts with the four Spelunking source labels. :70807–70824 correctly maps `CaveGoldPiece` to Strange Gold Piece; :70545–70546 and :70791–70792 also provide existing Blinding Lantern and Spirit Offering identities. Individual item records do not supply the missing shared Spelunking drop-code/name/tunnel mapping.
 - **R15:** [Account pipeline](../../data/domain/idleonData.tsx):165,266–340,400–444 — existing Spelunking registration; Cards update precedes Tome score and Gallery; every parse completes before `postProcessingMap`; `postPostProcessingMap` follows those updates.
 
-**Execution boundary:** The user accepted the backend and its stated check limits, and authorized only the accepted layer's local commit plus this handoff update. Stop after that local commit. Push, deployment, issue closure, UI work, Parts 2/3 implementation, and additional review remain unauthorized.
+**Execution boundary:** The human accepted the final Part 1 UI result and its stated check limits. Commit only the accepted UI layer and this updated handoff, then stop. Preserve saves, prior accepted progression calculations, generated data, private evidence, and unrelated work. No push, deployment, issue update/closure, external WikiBot/export edit, current Amber balance/income, or Parts 2/3 implementation is authorized.

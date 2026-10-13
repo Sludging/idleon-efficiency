@@ -1,0 +1,51 @@
+{
+  "description": "Current Amber denomination and recorded haul text from original v1.22, paired with the retained real save",
+  "target": "Spelunking.currentAmberDenomination and AmberDenomination.formatAmount(saved biggest haul)",
+  "extractions": [
+    {
+      "label": "amber_tier",
+      "expression": "idleon.callFunction(\"Spelunk\", \"AmberIndex\", 0, 0)",
+      "description": "Account-wide highest active Amber denomination, independent of each record's amount"
+    },
+    {
+      "label": "amber_denominator",
+      "expression": "idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0)",
+      "description": "Base Orange Amber per current denomination; records divide by this value"
+    },
+    {
+      "label": "amber_gate_bonus_20",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 20, 0)",
+      "description": "Blue Amber activation bonus directly used by denomination selection"
+    },
+    {
+      "label": "amber_gate_bonus_41",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 41, 0)",
+      "description": "Green Amber activation bonus directly used by denomination selection"
+    },
+    {
+      "label": "amber_gate_bonus_51",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 51, 0)",
+      "description": "Red Amber activation bonus directly used by denomination selection"
+    },
+    {
+      "label": "amber_gate_bonus_66",
+      "expression": "idleon.callFunction(\"Spelunk\", \"ShopUpgBonus\", 66, 0)",
+      "description": "Locked Pink Amber activation bonus directly used by denomination selection"
+    },
+    {
+      "label": "tunnel_0_amber_text",
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][0]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "description": "Pebble Cove actual small recorded haul, normalized to current Amber and rounded with comma notation"
+    },
+    {
+      "label": "tunnel_7_amber_text",
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][7]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "description": "Glitter End actual large recorded haul, normalized to current Amber with original millions suffix"
+    },
+    {
+      "label": "tunnel_9_amber_text",
+      "expression": "(() => { const amount = Number(idleon.getAttr(\"Spelunk\")[2][9]) / idleon.callFunction(\"Spelunk\", \"AmberDenominator\", 0, 0); return amount > 1e14 ? idleon.callFunction(\"NotateNumber\", amount, \"Big\") : idleon.callFunction(\"CommaNotation\", amount); })()",
+      "description": "Exiled Throne actual zero record, presented in the same current denomination"
+    }
+  ]
+}
