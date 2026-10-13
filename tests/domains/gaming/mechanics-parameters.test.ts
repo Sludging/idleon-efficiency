@@ -75,8 +75,7 @@ const parameters: ParameterTestSpec[] = [
     { extractionKey: "harvest_meal", description: "Cooking Bits percentage", domainExtractor: data => (data.get('cooking') as Cooking).getMealBonusForKey('GamingBits') },
     { extractionKey: "harvest_talent", description: "prepared Bits talent percentage", domainExtractor: data => (data.get('players') as Player[]).reduce((best, player) => Math.max(best, player.getTalentBonus(177)), 0) },
     { extractionKey: "harvest_companion", description: "Bits companion effect", domainExtractor: data => getCompanionActiveBonus(data.get('companions') as Companion[], 53) },
-    // Native CardLv is a one-based earned level consumed as 20 * CardLv percentage.
-    // Card.getLevels() is the star tier, not this native unit.
+    // The card grants 20 percent Bits per native progression level.
     { extractionKey: "harvest_card", description: "Bits card percentage", domainExtractor: data => (data.get('cards') as Card[]).find(card => card.id === 'w7b2')!.getBonus() },
     { extractionKey: "logbook_bubble", description: "Bit By Bit calculated bubble bonus", domainExtractor: data => (data.get('alchemy') as Alchemy).getBubbleBonusForKey('Y3') },
     { extractionKey: "acorn_shop_bonus_0", description: "same-domain Squirrel Bits multiplier", domainExtractor: data => ((data.get('gaming') as Gaming).getImport(2) as SquirrelImport).shop[0].multiplier },

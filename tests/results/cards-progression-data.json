@@ -1,0 +1,17 @@
+{
+  "extractions": {
+    "equipped_crystal_spawn_chance": {
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 14)",
+      "result": 612.5
+    },
+    "card_ruby_unlock": {
+      "expression": "idleon.callFunction(\"RiftStuff\", \"5starCards\", 0)",
+      "result": 1
+    },
+    "card_six_star_unlock": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"6starCards\", 0, 0)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

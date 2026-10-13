@@ -23,7 +23,7 @@ const shouldHideCard = ({ card }: { card: Card }) => {
 }
 
 const CardBox = ({ card }: { card: Card }) => {
-    const currentCardLevel = card.getLevels();
+    const currentCardLevel = card.getStarCount();
     const cardsToNextLevel = card.count > 0 ? (card.getCardsForLevel(currentCardLevel + 1) - card.count) : 1;
     const maxLevelCard = card.getMaxCardLevel();
     const isMaxed: boolean = (currentCardLevel == maxLevelCard);

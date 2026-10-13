@@ -480,8 +480,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Total level of all stamps
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
 
-    // Total star levels across all cards.
-    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() + 1 : 0), 0);
+    // Sum native levels of owned cards, including owned zero-star cards.
+    const cardsTotalLevels = cards.reduce((sum, card) => sum + (card.count > 0 ? card.getLevels() : 0), 0);
 
     // Sum of the highest level for each talent; shared talents count once.
     const talentsSumHighestLevel = account.talentsMaxLevels.reduce((sum, talentMaxLevel) => sum + Math.round(talentMaxLevel), 0);

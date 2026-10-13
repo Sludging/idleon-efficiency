@@ -66,7 +66,7 @@ export class CardSet {
     }
 
     getCardsTotalLevels = (): number => {
-        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getLevels() : 0);}, 0)
+        return this.cards?.reduce((sum, card) => {return sum+(card.count > 0 ? card.getStarCount() : 0);}, 0)
     }
 
     getBonus = (level: number = this.getLevel()): number => {

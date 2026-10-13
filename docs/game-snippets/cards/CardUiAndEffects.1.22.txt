@@ -1,0 +1,207 @@
+
+// idleon1.22.txt:162139-162173
+162139:                                                     (this._DummyNumber2 = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23])) * c.asNumber(this._GenINFO[44][4])),
+162140:                                                     (this._DummyText =
+162141:                                                         10 > this._DummyNumber2
+162142:                                                             ? y.replace(y.replace(this._DummyText, "{", "" + Math.floor(10 * this._DummyNumber2) / 10), "+", "")
+162143:                                                             : y.replace(y.replace(this._DummyText, "{", "" + k._customBlock_NotateNumber(this._DummyNumber2, "Big")), "+", "")),
+162144:                                                     Object.prototype.hasOwnProperty.call(this._GenINFO[128].h, "" + h.string(this._GenINFO[44][3])) && (this._DummyText += "_(P)"),
+162145:                                                     (this._DummyList2 = w._customBlock_linesofText(this._DummyText, this._DummyList2)),
+162146:                                                     (this._DummyText = "*@" + h.string(this._DummyList2[0])),
+162147:                                                     (this._DummyNumber = 669),
+162148:                                                     (this._DummyNumber2 = 1 < this._DummyList2.length ? 190 : 196),
+162149:                                                     2 <= m._customBlock_Language()
+162150:                                                         ? (e.setFont(m._customBlock_LANGUAGEfont()),
+162151:                                                           1 < x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23])) &&
+162152:                                                               (this._DummyText = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23])) + ("*@" + h.string(this._DummyList2[0]))))
+162153:                                                         : 2 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23]))
+162154:                                                           ? e.setFont(c.getFont(322))
+162155:                                                           : 3 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23]))
+162156:                                                             ? e.setFont(c.getFont(323))
+162157:                                                             : 4 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23]))
+162158:                                                               ? e.setFont(c.getFont(324))
+162159:                                                               : 5 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23]))
+162160:                                                                 ? e.setFont(c.getFont(564))
+162161:                                                                 : 6 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23]))
+162162:                                                                   ? (e.setFont(c.getFont(74)), (this._DummyText = "[@" + h.string(this._DummyList2[0])))
+162163:                                                                   : 7 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23])) &&
+162164:                                                                     (e.setFont(c.getFont(244)), (this._DummyText = "贷@" + h.string(this._DummyList2[0]))));
+162165:                                             } else if (6 == i) ((this._DummyText = 1 < this._DummyList2.length ? "" + h.string(this._DummyList2[1]) : "_"), (this._DummyNumber = 669), (this._DummyNumber2 = 203));
+162166:                                             else if (7 == i)
+162167:                                                 (e.setFont(c.getFont(75)),
+162168:                                                     x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(this._GenINFO[23])) <
+162169:                                                     Math.round(5 + (m._customBlock_RiftStuff("5starCards", 0) + m._customBlock_Spelunk("6starCards", 0, 0)))
+162170:                                                         ? 1e8 < x._customBlock_RunCodeOfTypeXforThingY("CardsTillNextLV", "" + h.string(this._GenINFO[23])) + 1
+162171:                                                             ? (this._DummyText = k._customBlock_NotateNumber(x._customBlock_RunCodeOfTypeXforThingY("CardsTillNextLV", "" + h.string(this._GenINFO[23])), "Big") + "_more_cards_to_Lv_Up")
+162172:                                                             : (this._DummyText =
+162173:                                                                   q._customBlock_CommaNotation(Math.round(x._customBlock_RunCodeOfTypeXforThingY("CardsTillNextLV", "" + h.string(this._GenINFO[23])) + 1)) + "_more_cards_to_Lv_Up")
+
+// idleon1.22.txt:165180-165190
+165180:                                             c.asNumber(this._GenINFO[48]) <= i
+165181:                                                 ? ((this._UIinventory7[42][i] = k._customBlock_addImgInst("Blank.png")), (this._UIinventory7[43][i] = k._customBlock_addImgInst("CardEquipBorder0.png")))
+165182:                                                 : "B" == a.engine.getGameAttribute("Cards")[2][i]
+165183:                                                   ? ((this._UIinventory7[42][i] = k._customBlock_addImgInst("Blank.png")), (this._UIinventory7[43][i] = k._customBlock_addImgInst("Blank.png")))
+165184:                                                   : (0 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("Cards")[2][i])) ||
+165185:                                                     1 == x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("Cards")[2][i]))
+165186:                                                         ? (this._UIinventory7[43][i] = k._customBlock_addImgInst("Blank.png"))
+165187:                                                         : (this._UIinventory7[43][i] = k._customBlock_addImgInst(
+165188:                                                               "CardEquipBorder" + Math.round(x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("Cards")[2][i])) - 1) + ".png"
+165189:                                                           )),
+165190:                                                     (s = this._UIinventory7[42]),
+
+// idleon1.22.txt:165847-165895
+165847:                                                 _ = a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex].length;
+165848:                                             r < _;
+165849:                                         )
+165850:                                             ((o = r++),
+165851:                                                 "Blank" != a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][o][0] &&
+165852:                                                     ((this._DummyList[0] = c.asNumber(this._DummyList[0]) + 1),
+165853:                                                     (this._DummyNumber = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][o][0]))),
+165854:                                                     0 != this._DummyNumber && (this._DummyList[0 | this._DummyNumber] = c.asNumber(this._DummyList[0 | this._DummyNumber]) + 1),
+165855:                                                     (this._DummyNumber4 = Math.min(this._DummyNumber, this._DummyNumber4))));
+165856:                                         for (
+165857:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyNumber4),
+165858:                                                 0 == this._DummyNumber4
+165859:                                                     ? this._GenINFO[113][0 | this._DummyRepeatIndex].push(
+165860:                                                           Math.round(
+165861:                                                               c.asNumber(this._DummyList[0]) -
+165862:                                                                   (c.asNumber(this._DummyList[1]) + (c.asNumber(this._DummyList[2]) + (c.asNumber(this._DummyList[3]) + (c.asNumber(this._DummyList[4]) + c.asNumber(this._DummyList[5])))))
+165863:                                                           )
+165864:                                                       )
+165865:                                                     : this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyList[0 | this._DummyNumber4]),
+165866:                                                 this._GenINFO[113][0 | this._DummyRepeatIndex].push(this._DummyList[0]),
+165867:                                                 this._DummyList = [],
+165868:                                                 this._DummyList.push(0),
+165869:                                                 this._DummyList.push(0),
+165870:                                                 g = this._DummyNumber4 = 0,
+165871:                                                 s = a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex].length;
+165872:                                             g < s;
+165873:                                         )
+165874:                                             ((r = g++),
+165875:                                                 "Blank" != a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][r][0] &&
+165876:                                                     ((this._DummyList[0] = Math.round(
+165877:                                                         c.asNumber(this._DummyList[0]) + x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + h.string(a.engine.getGameAttribute("CustomLists").h.CardStuff[0 | this._DummyRepeatIndex][r][0]))
+165878:                                                     )),
+165879:                                                     (this._DummyList[1] = Math.round(c.asNumber(this._DummyList[1]) + 1))));
+165880:                                         (this._GenINFO[113][0 | this._DummyRepeatIndex].push(Math.floor(c.asNumber(this._DummyList[0]) / Math.max(c.asNumber(this._DummyList[1]), 1))),
+165881:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(Math.floor(c.asNumber(this._DummyList[0]))),
+165882:                                             this._GenINFO[113][0 | this._DummyRepeatIndex].push(
+165883:                                                 Math.floor(
+165884:                                                     c.asNumber(this._DummyList[1]) *
+165885:                                                         (Math.min(Math.round(5 + m._customBlock_Spelunk("6starCards", 0, 0)), Math.floor(c.asNumber(this._DummyList[0]) / Math.max(c.asNumber(this._DummyList[1]), 1))) + 1)
+165886:                                                 )
+165887:                                             ));
+165888:                                     }
+165889:                                     for (g = a.engine.getGameAttribute("Cards")[3].h, o = (_ = Object.keys(g)).length, d = 0; d < o;)
+165890:                                         for (r = _[d++], this._DummyNumber = -1, t = 0, i = a.engine.getGameAttribute("CustomLists").h.CardSets.length; t < i;)
+165891:                                             if (((s = t++), r == a.engine.getGameAttribute("CustomLists").h.CardSets[s][0])) {
+165892:                                                 ((g = a.engine.getGameAttribute("Cards")[3]),
+165893:                                                     (s = Math.round(c.asNumber(this._GenINFO[113][s][3]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.CardSets[s][1]))),
+165894:                                                     (g.h["" + r] = s));
+165895:                                                 break;
+
+// idleon1.22.txt:171365-171368
+171365:                         (p._customBlock_CardSetBonuses = function (e, t) {
+171366:                             e = a.engine.getGameAttribute("Cards")[3];
+171367:                             var i = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardSETbonus.h[t]);
+171368:                             return Object.prototype.hasOwnProperty.call(e.h, i) ? ((e = a.engine.getGameAttribute("Cards")[3]), (i = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardSETbonus.h[t])), e.h[i]) : 0;
+
+// idleon1.22.txt:104640-104737
+104640:                                                         (t.h[R] = 0),
+104641:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104642:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[55])),
+104643:                                                         (t.h[R] = 0),
+104644:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104645:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[52])),
+104646:                                                         (t.h[R] = 0)),
+104647:                                                     0.1 < m._customBlock_RiftStuff("RiftSkillBonus,18", 2) &&
+104648:                                                         ((t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104649:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[97])),
+104650:                                                         (t.h[R] = 0),
+104651:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104652:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[98])),
+104653:                                                         (t.h[R] = 0),
+104654:                                                         (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104655:                                                         (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[99])),
+104656:                                                         (t.h[R] = 0)),
+104657:                                                     0.1 < m._customBlock_Summoning("VaultUpgBonus", 44, 0) &&
+104658:                                                         ((t = a.engine.getGameAttribute("DNSM").h.CardBonusS), (R = "" + h.string(a.engine.getGameAttribute("CustomMaps").h.IDforCardBonus.h[12])), (t.h[R] = 0)),
+104659:                                                     _ = n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h,
+104660:                                                     o = (_ = Object.keys(_)).length,
+104661:                                                     g = 0;
+104662:                                                 g < o;
+104663:                                             )
+104664:                                                 ((d = _[g++]),
+104665:                                                     (t = a.engine.getGameAttribute("DNSM")),
+104666:                                                     (i = n.__cast(a.engine.getGameAttribute("PixelHelperActor")[6].behaviors.getBehavior("ActorEvents_312"), hb)._GenINFO[45].h["" + d]),
+104667:                                                     (t.h.CardBonusSdl = i),
+104668:                                                     -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Mining") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,0", 2)
+104669:                                                         ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104670:                                                           (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104671:                                                           (A = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104672:                                                           (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104673:                                                           (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104674:                                                           (i = A + c.asNumber(t.h[b])),
+104675:                                                           (y.h[R] = i))
+104676:                                                         : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Choppin") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,2", 2)
+104677:                                                           ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104678:                                                             (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104679:                                                             (b = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104680:                                                             (G = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104681:                                                             (A = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104682:                                                             (G = b + c.asNumber(G.h[A])),
+104683:                                                             (y.h[R] = G))
+104684:                                                           : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Fishing") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,3", 2)
+104685:                                                             ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104686:                                                               (t = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104687:                                                               (i = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104688:                                                               (R = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104689:                                                               (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104690:                                                               (I = i + c.asNumber(R.h[b])),
+104691:                                                               (y.h[t] = I))
+104692:                                                             : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Catching") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,5", 2)
+104693:                                                               ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104694:                                                                 (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104695:                                                                 (i = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104696:                                                                 (b = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104697:                                                                 (t = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104698:                                                                 (b = i + c.asNumber(b.h[t])),
+104699:                                                                 (y.h[I] = b))
+104700:                                                               : (-1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Trapping") ||
+104701:                                                                       "+{%_Shiny_Critter_Chance" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3]) &&
+104702:                                                                   0.1 < m._customBlock_RiftStuff("RiftSkillBonus,6", 2)
+104703:                                                                 ? ((y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104704:                                                                   (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104705:                                                                   (s = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104706:                                                                   (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104707:                                                                   (b = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104708:                                                                   (s += c.asNumber(t.h[b])),
+104709:                                                                   (y.h[I] = s))
+104710:                                                                 : ("+{%_Charge_Rate" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] ||
+104711:                                                                         "+{_Starting_Pts_in_Worship" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] ||
+104712:                                                                         "+{%_Max_Charge" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3]) &&
+104713:                                                                     0.1 < m._customBlock_RiftStuff("RiftSkillBonus,8", 2)
+104714:                                                                   ? ((b = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104715:                                                                     (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104716:                                                                     (s = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104717:                                                                     (t = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104718:                                                                     (R = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104719:                                                                     (s += c.asNumber(t.h[R])),
+104720:                                                                     (b.h[I] = s))
+104721:                                                                   : -1 != ("" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])).indexOf("Spelunking") && 0.1 < m._customBlock_RiftStuff("RiftSkillBonus,18", 2)
+104722:                                                                     ? ((s = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104723:                                                                       (y = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104724:                                                                       (d = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104725:                                                                       (r = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104726:                                                                       (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104727:                                                                       (d += c.asNumber(r.h[I])),
+104728:                                                                       (s.h[y] = d))
+104729:                                                                     : "+{%_Card_Drop_Chance" == a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3] &&
+104730:                                                                       0.1 < m._customBlock_Summoning("VaultUpgBonus", 44, 0) &&
+104731:                                                                       ((s = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104732:                                                                       (r = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104733:                                                                       (d = x._customBlock_RunCodeOfTypeXforThingY("CardLv", "" + d) * c.asNumber(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[4])),
+104734:                                                                       (y = a.engine.getGameAttribute("DNSM").h.CardBonusS),
+104735:                                                                       (I = "" + h.string(a.engine.getGameAttribute("DNSM").h.CardBonusSdl[3])),
+104736:                                                                       (d += c.asNumber(y.h[I])),
+104737:                                                                       (s.h[r] = d)));

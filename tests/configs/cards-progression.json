@@ -1,0 +1,21 @@
+{
+  "description": "Extract the target player's equipped-card crystal monster spawn chance for card progression regression coverage",
+  "target": "Card.GetTotalBonusForId equipped crystal monster spawn chance",
+  "extractions": [
+    {
+      "label": "equipped_crystal_spawn_chance",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 14)",
+      "description": "Prepared crystal monster spawn chance percentage from equipped cards, including Legend Talent and slot-chip effects"
+    },
+    {
+      "label": "card_ruby_unlock",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"5starCards\", 0)",
+      "description": "Rift Ruby Cards unlock used by the owned-card level threshold count"
+    },
+    {
+      "label": "card_six_star_unlock",
+      "expression": "idleon.callFunction(\"Spelunk\", \"6starCards\", 0, 0)",
+      "description": "Spelunking six-star card unlock used by the owned-card level threshold count"
+    }
+  ]
+}

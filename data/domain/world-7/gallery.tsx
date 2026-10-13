@@ -157,7 +157,7 @@ export class Gallery extends Domain {
         const alchemy = (data.get('alchemy') as Alchemy).getBubbleBonusForKey('Y13');
         const card = (data.get('cards') as Card[]).find(card => card.id === 'w7a11');
         // Gallery consumes card level, which includes the owned zero-star level.
-        const cardLevel = card && card.count > 0 ? card.getLevels() + 1 : 0;
+        const cardLevel = card && card.count > 0 ? card.getLevels() : 0;
         const sushi = (data.get('sushi') as SushiStation).getBonusFromIndex(54);
         const jadePodium = (data.get('sneaking') as Sneaking).jadeUpgrades.find(upgrade => upgrade.index === 42)?.purchased ?? false;
         const tunnelLore = (data.get('spelunking') as Spelunking).tunnels[5].loreCompleted;

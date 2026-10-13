@@ -113,7 +113,7 @@ export const updateShrines = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const cards = data.get("cards") as Card[];
 
-    const cchizBonus = cards.find((card) => card.id == "Boss3B")?.getBonus() ?? 0;
+    const cchizBonus = cards.find((card) => card.id == "Boss3B")!.getBonus();
     const worldTour = lab.bonuses.find(bonus => bonus.name == "Shrine World Tour")?.active ?? false;
     const shrineArtifact = sailing.artifacts[0];
     shrines.forEach(shrine => {
