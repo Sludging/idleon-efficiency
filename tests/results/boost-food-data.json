@@ -1,0 +1,37 @@
+{
+  "extractions": {
+    "boost_food_context": {
+      "expression": "(() => { const script=idleon.allScripts.ActorEvents_12, original=script._customBlock_PlayerHPmax; let calls=0,early,preparationResult; const snapshot=()=>({effectiveness:idleon.callFunction('FoodBonuses','HpBaseBoostsEffectBonus'),baseHP:idleon.callFunction('TotalFoodBonuses','HpBaseBoosts'),powerFoodEffect:Number(idleon.getDNSM('BoxRewards').h.PowerFoodEffect??0),foodStatue:idleon.callFunction('ArbitraryCode','StatueBonusGiven3'),equipmentFoodEffect:idleon.callFunction('EtcBonuses','9'),boostFoodStamp:idleon.callFunction('StampBonusOfTypeX','BFood'),starSignFoodEffect:Number(idleon.getDNSM('StarSigns').h.FoodEffect??0),cardFoodEffect:idleon.callFunction('CardBonusREAL',48),cardSetFoodEffect:idleon.callFunction('CardSetBonuses',0,'1'),talentFoodEffect:idleon.callFunction('GetTalentNumber',1,631)}); script._customBlock_PlayerHPmax=function(...args){const maximumHP=original.apply(this,args);calls++;if(calls===1)early=snapshot();return maximumHP;};try{preparationResult=idleon.callFunction('TalentCalc',-2);}finally{script._customBlock_PlayerHPmax=original;}if(calls!==1)throw new Error('Expected one actual MinEff PlayerHPmax call, received '+calls);return {calls,restored:script._customBlock_PlayerHPmax===original,preparationResult,early,final:snapshot()};})()",
+      "result": {
+        "calls": 1,
+        "restored": true,
+        "preparationResult": 1,
+        "early": {
+          "effectiveness": 856.8685004001418,
+          "baseHP": 0,
+          "powerFoodEffect": 18,
+          "foodStatue": 85214.19069935483,
+          "equipmentFoodEffect": 0,
+          "boostFoodStamp": 171.32600732600733,
+          "starSignFoodEffect": 150,
+          "cardFoodEffect": 0,
+          "cardSetFoodEffect": 0,
+          "talentFoodEffect": 33.333333333333336
+        },
+        "final": {
+          "effectiveness": 856.8685004001418,
+          "baseHP": 0,
+          "powerFoodEffect": 18,
+          "foodStatue": 85214.19069935483,
+          "equipmentFoodEffect": 0,
+          "boostFoodStamp": 171.32600732600733,
+          "starSignFoodEffect": 150,
+          "cardFoodEffect": 0,
+          "cardSetFoodEffect": 0,
+          "talentFoodEffect": 33.333333333333336
+        }
+      }
+    }
+  },
+  "errors": {}
+}

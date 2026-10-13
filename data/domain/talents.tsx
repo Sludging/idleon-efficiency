@@ -13,6 +13,23 @@ export const TalentConst = {
     ArenaSpiritIndex: 370
 }
 
+
+export interface TalentLevelInputs {
+    eliteTalentLevels: number;
+    achievementTalentLevels: number;
+    familyTalentLevels: number;
+    companionTalentLevels: number;
+    minorLinkTalentLevels: number;
+    equinoxTalentLevels: number;
+    ninjaMasteryTalentLevels: number;
+    grimoireTalentLevels: number;
+    equipmentTalentLevels: number;
+    tesseractTalentLevels: number;
+    gamingTalentLevels: number;
+    superTalentLevels: number;
+    allTalentCap: number;
+}
+
 export class Talent {
     public description: string;
     public x1: number;
@@ -47,7 +64,7 @@ export class Talent {
         this.skillIndex = data.skillIndex;
     }
 
-    protected getBonusAtLevel(level: number, round: boolean = false, yBonus: boolean = false) {
+    getBonusAtLevel(level: number, round: boolean = false, yBonus: boolean = false) {
         if (yBonus) {
             return lavaFunc(this.funcY, level, this.y1, this.y2, round);
         }
@@ -56,6 +73,25 @@ export class Talent {
 
     getBonus = (round: boolean = false, yBonus: boolean = false, maxBonus: boolean = false) => {
         return this.getBonusAtLevel(maxBonus ? this.maxLevel : this.level, round, yBonus);
+    }
+
+
+    getExtraLevels(inputs: TalentLevelInputs, superTalentMember: boolean): number {
+        if (this.skillIndex === 149 || this.skillIndex === 374 || this.skillIndex === 539
+            || this.skillIndex === 505 || this.skillIndex > 614
+            || (this.skillIndex >= 49 && this.skillIndex <= 59)) {
+            return 0;
+        }
+
+        const sharedLevels = inputs.eliteTalentLevels + inputs.achievementTalentLevels
+            + Math.floor(inputs.familyTalentLevels) + inputs.companionTalentLevels
+            + Math.ceil(inputs.minorLinkTalentLevels) + inputs.equinoxTalentLevels
+            + inputs.ninjaMasteryTalentLevels + inputs.grimoireTalentLevels
+            + inputs.equipmentTalentLevels + Math.min(5, inputs.tesseractTalentLevels)
+            + inputs.gamingTalentLevels;
+        const cap = this.skillIndex >= 225 && this.skillIndex <= 239 ? inputs.allTalentCap : 9999;
+        // Royal Guardian caps shared levels before Super Talent levels enter the rounded total.
+        return Math.floor(Math.min(cap, sharedLevels) + (superTalentMember ? inputs.superTalentLevels : 0));
     }
 
     getBonusText = (): string => {
@@ -114,7 +150,7 @@ export class Talent {
 export class BloodMarrowTalent extends Talent {
     totalMeals: number = 0;
 
-    protected override getBonusAtLevel(level: number, round: boolean = false, yBonus: boolean = false) {
+    override getBonusAtLevel(level: number, round: boolean = false, yBonus: boolean = false) {
         const baselineBonus = super.getBonusAtLevel(level, round, yBonus);
 
         // Actual special calculation for Blood Marrow.
@@ -128,9 +164,11 @@ export class BloodMarrowTalent extends Talent {
 
 // Other potential talents with this logic are: 42, 78, 132, 281, 491,493
 export class RedoxRatesTalent extends Talent {
-    override getBonus = (round: boolean = false, yBonus: boolean = false) => {
+    // Redox Rates uses allocated points in both ordinary and prepared-level evaluations.
+    override getBonusAtLevel(_level: number, round: boolean = false, yBonus: boolean = false) {
         return super.getBonusAtLevel(this.pointsSpent, round, yBonus);
     }
+
 }
 
 export class EnhancedTalent extends Talent {

@@ -1,0 +1,29 @@
+{
+  "extractions": {
+    "golden_hp": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
+      "result": 128.9972971385765
+    },
+    "golden_monster_cash": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MonsterCash\")",
+      "result": 0
+    },
+    "golden_skill_exp": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
+      "result": 15271.845815210738
+    },
+    "golden_effectivity": {
+      "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
+      "result": 743.5132159494034
+    },
+    "death_bringer_candidate_0": {
+      "expression": "(() => { const i=0,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "result": 1.4482758620689655
+    },
+    "death_bringer_candidate_7": {
+      "expression": "(() => { const i=7,p=idleon.getAttr(\"GetPlayersUsernames\")[i],d=idleon.getAttr(\"CustomLists\").h.TalentDescriptions[209][1],lv=idleon.getAttr(\"PlayerDATABASE\").h[p].h.SkillLevels[209]+idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"AllTalentLVz\",\"209|\"+i); return idleon.callFunction(\"ArbitraryCode5Inputs\",d[2],Number(d[0]),Number(d[1]),lv,0,0); })()",
+      "result": 1.4169096209912537
+    }
+  },
+  "errors": {}
+}

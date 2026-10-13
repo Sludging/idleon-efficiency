@@ -194,6 +194,7 @@ export class DivineDesignResearchGridBonus extends ResearchGridBonus {
 export class ResearchGrid extends Domain {
   bonuses: ResearchGridBonus[] = [];
   private allBonusMultiplier: number = 1;
+  private accumulatedFirstThreeUpgradeCostReduction: number = 0;
 
   getRawKeys(): RawData[] {
     return [
@@ -205,6 +206,7 @@ export class ResearchGrid extends Domain {
 
   init(_allItems: Item[], _charCount: number) {
     this.bonuses = ResearchGridBonus.fromBase(initResearchGridBonusRepo());
+    this.accumulatedFirstThreeUpgradeCostReduction = 0;
     return this;
   }
 
@@ -225,6 +227,10 @@ export class ResearchGrid extends Domain {
     // Research[12] stores Glimbo trade counts by trade.
     const glimboTradeCounts = research[12] || [];
     // OptionsListAccount[500] is the direct mode-2 value for square 151.
+    // This saved value records Research's cumulative first-three cost reduction.
+    researchGrid.accumulatedFirstThreeUpgradeCostReduction = Number(
+      (data.get("OptLacc") as number[] | undefined)?.[499] ?? 0,
+    );
     const accountOption500 = Number((data.get("OptLacc") as number[] | undefined)?.[500]) || 0;
 
     researchGrid.bonuses.forEach((bonus) => {
@@ -253,6 +259,10 @@ export class ResearchGrid extends Domain {
     (researchGrid.bonuses[151] as AccountOptionResearchGridBonus).optionValue = accountOption500;
     (researchGrid.bonuses[168] as GlimboTradesResearchGridBonus).glimboTradeCounts =
       glimboTradeCounts;
+  }
+
+  getAccumulatedFirstThreeUpgradeCostReduction(): number {
+    return this.accumulatedFirstThreeUpgradeCostReduction;
   }
 
   getBonusForId(index: number, mode: number = 0): number {

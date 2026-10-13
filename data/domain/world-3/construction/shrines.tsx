@@ -54,7 +54,7 @@ export class Shrine {
             return 0;
         }
 
-        return (this.initialBonus + ((this.level - 1) * this.increment)) * (1 + this.cchizBonus / 100);
+        return (1 + this.cchizBonus / 100) * (((this.level - 1) * this.increment) + this.initialBonus);
     }
 
     getBonusText = (map: number | undefined = undefined) => {

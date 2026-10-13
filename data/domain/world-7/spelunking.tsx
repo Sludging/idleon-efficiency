@@ -184,6 +184,7 @@ export class Spelunking extends Domain {
     upgrades: Upgrade[] = []
     stamina: number[] = []
     ownedAmber: number = 0;
+    exaltedStampFragments: number = 0;
     grandDiscoveryUpgrade!: Upgrade;
     amber!: SpelunkingRewardLabelModel;
     // Destruction rewards are not discoveries or fixed drops. Bling bags only present the generated loot.
@@ -273,6 +274,7 @@ export class Spelunking extends Domain {
         this.tunnels = Tunnel.fromBase(initSpelunkingTunnelRepo(), this, metadata.itemDrops);
         this.stamina = Array(charCount).fill(0);
         this.ownedAmber = 0;
+        this.exaltedStampFragments = 0;
         return this;
     }
 
@@ -295,6 +297,8 @@ export class Spelunking extends Domain {
             upgrade.level = Number(shopUpgradeLevels[upgrade.index] ?? -1);
         });
         spelunking.ownedAmber = Number(currencies[0] ?? 0);
+        // Exalted Stamp Fragments add to the Compass bonus for exalted stamps.
+        spelunking.exaltedStampFragments = Number(currencies[3] ?? 0);
     }
 }
 

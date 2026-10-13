@@ -1,5 +1,6 @@
 import { lavaLog, round } from "../utility";
 import { initItemRepo, ItemBase } from "./data/ItemRepo";
+import { initItemDetailRepo } from "./data/ItemDetailRepo";
 import { TypeGenEnum } from "./enum/typeGenEnum";
 import { ArmourItemModel } from "./model/armourItemModel";
 import { BaseItemModel } from "./model/baseItemModel";
@@ -10,6 +11,35 @@ import { SourcesModel } from "./model/sourcesModel";
 import { DescItemModel } from "./model/descItemModel";
 import { GoldenFoodItemModel } from "./model/goldenFoodItemModel";
 import { NoteModel } from "./model/noteModel";
+import type { CommonItemModel } from "./model/commonItemModel";
+import type { ConsumableItemModel } from "./model/consumableItemModel";
+import { Card } from "./cards";
+import { EquipmentBonus } from "./equipment-effects";
+import type { Player } from "./player";
+import type { TalentLevelInputs } from "./talents";
+
+export interface BoostFoodEffectivenessInputs {
+    boostFoodStamp: number;
+    foodStatue: number;
+}
+
+const isConsumableItemModel = (item: CommonItemModel): item is ConsumableItemModel =>
+    "Effect" in item && typeof item.Effect === "string" &&
+    "Amount" in item && typeof item.Amount === "number";
+
+const foodEffectsByName: Record<string, { effect: string, amount: number }> = {};
+const trapCapacityByName: Record<string, number> = {};
+
+for (const item of initItemDetailRepo()) {
+    if (item.data.typeGen === TypeGenEnum.cFood && isConsumableItemModel(item.data)) {
+        foodEffectsByName[item.id] = { effect: item.data.Effect, amount: item.data.Amount };
+    }
+    if (item.data.typeGen === TypeGenEnum.aTrap) {
+        trapCapacityByName[item.id] = item.data.ID;
+    }
+}
+
+export const getTrapCapacity = (internalName: string): number => trapCapacityByName[internalName] ?? 1;
 
 // Used to make slab page nicer.
 const specialNotes: Record<string, NoteModel> = {
@@ -507,8 +537,13 @@ export class Tool extends Item {
 
 export class Food extends Item {
     goldenFood: { effect: string, amount: number } | undefined
+    readonly effect: string;
+    readonly effectAmount: number;
     constructor(data: ItemModel) {
         super(data);
+        const foodEffect = foodEffectsByName[this.internalName];
+        this.effect = foodEffect.effect;
+        this.effectAmount = foodEffect.amount;
         if (isGoldenFood(data.item)) {
             this.goldenFood = {
                 effect: data.item.goldenFoodData.effect,
@@ -517,12 +552,71 @@ export class Food extends Item {
         }
     }
 
-    goldFoodBonus = (stack: number, goldFoodMulti: number = 0) => {
+    getBaseHPBoost = (): number => {
+        return this.effect === "HpBaseBoosts" ? this.effectAmount : 0;
+    }
+
+    static getBoostFoodEffectiveness(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        let postOfficeBoostFoodEffect = 0;
+        for (const box of player.postOffice) {
+            for (let index = 0; index < box.bonuses.length; index++) {
+                const bonus = box.bonuses[index];
+                if (bonus.data.bonusKey === "PowerFoodEffect") {
+                    postOfficeBoostFoodEffect += bonus.getBonus(box.level, index);
+                }
+            }
+        }
+        let starSignFoodEffect = 0;
+        for (const sign of player.starSigns) {
+            starSignFoodEffect += sign.getBonus("All Food Effect");
+        }
+        const equipmentFoodEffect = player.getEquipmentBonus(EquipmentBonus.FoodEffect);
+        const cardFoodEffect = Card.GetTotalBonusForId(player.cardInfo!.equippedCards, 48);
+        const cardSetFoodEffect = player.cardInfo!.getBonusForId(1);
+        const talentFoodEffect = player.getTalentBonusAtInputs(631, talentInputs);
+        // HP boost foods use the boost-food factor, not the separate healing-food factor.
+        // Preserve the nested sum; Alchemy can supply its earlier talent snapshot.
+        return 1 + (postOfficeBoostFoodEffect + (inputs.foodStatue + (equipmentFoodEffect
+            + (inputs.boostFoodStamp + (starSignFoodEffect + (cardFoodEffect
+                + (cardSetFoodEffect + talentFoodEffect))))))) / 100;
+    }
+
+    static getBaseHPContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        let contribution = 0;
+        let effectiveness: number | undefined;
+        for (let slot = 0; slot < player.foodSlotsOwned; slot++) {
+            const food = player.gear.food[slot];
+            if (!food || food.count === 0 || food.effect !== "HpBaseBoosts") {
+                continue;
+            }
+            // Stack quantity gates ordinary boost food; it does not scale the food's base amount.
+            if (effectiveness === undefined) {
+                effectiveness = Food.getBoostFoodEffectiveness(player, inputs, talentInputs);
+            }
+            contribution += food.getBaseHPBoost() * effectiveness;
+        }
+        return contribution;
+    }
+
+    goldFoodBonusUnrounded = (stack: number, goldFoodMulti: number = 0): number => {
         if (!this.goldenFood) {
             return 0;
         }
 
-        return round(this.goldenFood.amount * goldFoodMulti * 0.05 * lavaLog(1 + stack) * (1 + lavaLog(1 + stack) / 2.14));
+        const stackLog = lavaLog(1 + stack);
+        return this.effectAmount * goldFoodMulti * 0.05 * stackLog * (1 + stackLog / 2.14);
+    }
+
+    goldFoodBonus = (stack: number, goldFoodMulti: number = 0): number => {
+        return round(this.goldFoodBonusUnrounded(stack, goldFoodMulti));
     }
 
     getBonusText = (stack: number, goldFoodMulti: number = 0) => {

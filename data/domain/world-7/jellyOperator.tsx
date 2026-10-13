@@ -276,6 +276,11 @@ export class JellyOperator extends Domain {
         return this.successfulOperations;
     }
 
+    getObstructionBonus(index: number, preview = false): number {
+        const obstruction = this.obstructions.find(obstruction => obstruction.index === index);
+        return preview ? obstruction?.getBaseBonus() ?? 0 : obstruction?.getBonus() ?? 0;
+    }
+
     getUpgradeQuantity(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index === index)?.getQuantity() ?? 0;
     }

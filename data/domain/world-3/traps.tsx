@@ -1,9 +1,7 @@
 import { range } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { ImageData } from "../imageData";
-import { Item } from "../items";
-import { initItemDetailRepo } from "../data/ItemDetailRepo";
-import { TypeGenEnum } from "../enum/typeGenEnum";
+import { Item, getTrapCapacity } from "../items";
 import { initTrapBoxRepo } from "../data/TrapBoxRepo";
 import { TrapBoxTimeModel } from "../model/trapBoxTimeModel";
 import { initCritterRepo } from "../data/CritterRepo";
@@ -32,14 +30,8 @@ export enum TrapSet {
 }
 
 const critterRepo = initCritterRepo();
-const itemDetailRepo = initItemDetailRepo()
 const trapBoxRepo = initTrapBoxRepo()
 
-const trapIdByName = Object.fromEntries(
-    itemDetailRepo
-    .filter(item => item.data.typeGen === TypeGenEnum.aTrap)
-    .map(item => [item.id, item.data.ID ?? 0])
-) as Record<string, number>;
 
 const trapBoxBySetIndex = Object.fromEntries(
     trapBoxRepo
@@ -80,7 +72,7 @@ export class Trap {
     static getMaxTraps = (trap: Item | undefined, hasAlchemyExtraTrap: boolean) => {
         const alchemyExtraTrap = hasAlchemyExtraTrap ? 1 : 0;
         if (trap == undefined) return alchemyExtraTrap;
-        const baseTraps = trapIdByName[trap.internalName] ?? 1;
+        const baseTraps = getTrapCapacity(trap.internalName);
         return baseTraps + alchemyExtraTrap;
     }
 

@@ -3,6 +3,8 @@ import { Stamps, updateStampMaxCarry, updateStamps } from './world-1/stamps';
 import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
+import { updatePlayerTalentContexts } from './player';
+import { GoldenFood, updateGoldenFood } from './golden-food';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -90,6 +92,7 @@ import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenith
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies } from './skilling';
+import { updatePlayerHealth } from './player-health';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
     const data = doc.get(key);
@@ -121,6 +124,7 @@ const domainList: Domain[] = [
     new Prayers("prayers"),
     new Cards("cards"),
     new Players("players"),
+    new GoldenFood("goldenFood"),
     new Alchemy("alchemy"),
     new Bribes("bribes"),
     new Guild("guild"),
@@ -286,7 +290,8 @@ const postProcessingMap: Record<string, Function> = {
     "updateLegendTalents": (doc: Cloudsave, accountData: Map<string, string>) => updateLegendTalents(accountData),
     // Earned Palette bonuses consume Legend Talents, not the later equipped-color Luck calculation.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGaming(accountData),
-    // Daily Shopping Spree and early Royal Armory Bargain bonuses are ready before shared upgrade costs.
+    // Daily Shopping Spree and early Royal Armory Bargain inputs are ready before shared upgrade costs.
+    // Parsed Research accumulation and Outpost selection combine with Compounding Outposting bonus before first-three costs.
     "updateMasterClasses": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateMasterClasses(accountData),
     "updateSlabBonusMultiplier": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusMultiplier(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
@@ -343,6 +348,10 @@ const postProcessingMap: Record<string, Function> = {
     "players": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayers(accountData),
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
+    "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    "goldenFood": (_doc: Cloudsave, accountData: Map<string, any>) => updateGoldenFood(accountData),
+    // Prepare each character's normal maxima before player-aware efficiency consumers.
+    "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),

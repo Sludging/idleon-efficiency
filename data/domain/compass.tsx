@@ -1339,7 +1339,7 @@ export const updateCompassExaltedStampBonus = (accountData: Map<string, any>): v
         stampFragments: spelunking.exaltedStampFragments,
         legendTalentBonus: legendTalents.getBonusFromIndex(36),
         sushiBonus: sushi.getBonusFromIndex(17),
-        jellyBonus: jelly.getRoGBonusQuantity(50),
+        jellyBonus: jelly.getObstructionBonus(50),
     });
 };
 

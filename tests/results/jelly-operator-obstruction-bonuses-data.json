@@ -1,0 +1,29 @@
+{
+  "extractions": {
+    "jelly_rog_bonus_qty_8_normal": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 8, 0)",
+      "result": 25
+    },
+    "jelly_rog_bonus_qty_9_normal": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 9, 0)",
+      "result": 30
+    },
+    "jelly_rog_bonus_qty_9_preview": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 9, 99)",
+      "result": 30
+    },
+    "jelly_rog_bonus_qty_41_normal": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 41, 0)",
+      "result": 0
+    },
+    "jelly_rog_bonus_qty_41_preview": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 41, 99)",
+      "result": 5
+    },
+    "jelly_rog_bonus_qty_71_preview": {
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 71, 99)",
+      "result": 1
+    }
+  },
+  "errors": {}
+}

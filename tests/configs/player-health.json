@@ -1,0 +1,366 @@
+{
+  "description": "Normal-character maximum HP and MP plus their direct producer inputs for the actual shared target",
+  "target": "Player normal-character maximum HP/MP",
+  "extractions": [
+    {
+      "label": "alchemy_health_context",
+      "expression": "(() => { const script=idleon.allScripts.ActorEvents_12, original=script._customBlock_PlayerHPmax; let calls=0,early,preparationResult; const snapshot=()=>{const boxes=idleon.getDNSM('BoxRewards').h;const fam=idleon.getDNSM('FamBonusQTYs').h;const signs=idleon.getDNSM('StarSigns').h;const talentIds=[0,642,95,92,272,99];return {str:idleon.callFunction('TotalStats','STR'),card1:idleon.callFunction('CardBonusREAL',1),card8:idleon.callFunction('CardBonusREAL',8),baseHP:Number(idleon.getDNSM('AlchBubbles').h.BaseHP??0),stampBaseHP:idleon.callFunction('StampBonusOfTypeX','BaseHP'),foodHP:idleon.callFunction('TotalFoodBonuses','HpBaseBoosts'),statue:idleon.callFunction('ArbitraryCode','StatueBonusGiven4'),talents:talentIds.map(id=>{const all=idleon.callFunction('RunCodeOfTypeXforThingY','AllTalentLV',String(id));const skill=Number(idleon.getAttr('SkillLevels')[id]);return {id,allTalentLV:all,skillLevel:skill,effectiveLevel:all+skill,bonus:idleon.callFunction('GetTalentNumber',1,id)}}),etc15:idleon.callFunction('EtcBonuses','15'),shrine:idleon.callFunction('Shrine',1),goldFood:idleon.callFunction('GoldFoodBonuses','MaxHPpct'),boxBaseHP:Number(boxes.baseHP),boxPctHP:Number(boxes.pctHP),buff108:idleon.callFunction('GetBuffBonuses',108,1),family18:Number(fam[18]??0),starHP:Number(signs.TotalHP??0),goldFoodBubble:Number(idleon.getDNSM('AlchBubbles').h.GFoodz??0),accountDeathBringer:idleon.callFunction('getbonus2',1,209,-1),deathBringerMapCount:Number(idleon.getDNSM('CalcTalentMAP').h[209])};};try{script._customBlock_PlayerHPmax=function(...args){calls++;const maximumHP=original.apply(this,args);early={...snapshot(),maximumHP};return maximumHP;};preparationResult=idleon.callFunction('TalentCalc',-2);}finally{script._customBlock_PlayerHPmax=original;}if(calls!==1||!early||script._customBlock_PlayerHPmax!==original)throw new Error('HP capture must intercept exactly one call and restore PlayerHPmax');const final=snapshot();final.maximumHP=idleon.callFunction('PlayerHPmax');return {early,final,calls,preparationResult,restored:script._customBlock_PlayerHPmax===original};})()",
+      "description": "Actual target TalentCalc(-2) HP result and direct inputs; delegate original first and restore recorder in finally"
+    },
+    {
+      "label": "gold_food_achievement_37",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 37)",
+      "description": "Achievement 37 golden-food effectiveness unlock"
+    },
+    {
+      "label": "gold_food_achievement_380",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 380)",
+      "description": "Achievement 380 golden-food effectiveness unlock"
+    },
+    {
+      "label": "gold_food_achievement_383",
+      "expression": "idleon.callFunction(\"AchieveStatus\", 383)",
+      "description": "Achievement 383 golden-food effectiveness unlock"
+    },
+    {
+      "label": "card_ruby_unlock",
+      "expression": "idleon.callFunction(\"RiftStuff\", \"5starCards\", 0)",
+      "description": "Rift Ruby Cards unlock used by the owned-card level threshold count"
+    },
+    {
+      "label": "card_six_star_unlock",
+      "expression": "idleon.callFunction(\"Spelunk\", \"6starCards\", 0, 0)",
+      "description": "Spelunking six-star card unlock used by the owned-card level threshold count"
+    },
+    {
+      "label": "food_hp",
+      "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"HpBaseBoosts\")",
+      "description": "PlayerHealth-owned equipped food base-HP contribution"
+    },
+    {
+      "label": "misc_hp",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"15\")",
+      "description": "PlayerHealth-owned miscellaneous maximum-HP percentage"
+    },
+    {
+      "label": "golden_hp",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
+      "description": "PlayerHealth-owned golden-food maximum-HP multiplier"
+    },
+    {
+      "label": "shrine_card_level",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"Boss3B\")",
+      "description": "Owned Chaotic Chizoar card level consumed by shrine effects"
+    },
+    {
+      "label": "vault_base_hp",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 16, 0)",
+      "description": "Upgrade Vault base-HP stamp effectiveness"
+    },
+    {
+      "label": "alchemy_mana_context",
+      "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerMPmax; const snapshot = () => { const bubbles = idleon.getDNSM('AlchBubbles').h; const boxes = idleon.getDNSM('BoxRewards').h; return { wisdom: idleon.callFunction('TotalStats', 'WIS'), card3: idleon.callFunction('CardBonusREAL', 3), card29: idleon.callFunction('CardBonusREAL', 29), baseMP: Number(bubbles.BaseMP ?? 0), stampBaseMP: idleon.callFunction('StampBonusOfTypeX', 'BaseMP'), talent1: idleon.callFunction('GetTalentNumber', 1, 1), talent272: idleon.callFunction('GetTalentNumber', 1, 272), talent452: idleon.callFunction('GetTalentNumber', 1, 452), boxBaseMP: Number(boxes.baseMP), boxPercentMP: Number(boxes.pctMP), allTalentLevels: idleon.callFunction('RunCodeOfTypeXforThingY', 'AllTalentLV', '1'), allocatedTalent1: Number(idleon.getAttr('SkillLevels')[1]), talent149: idleon.callFunction('GetTalentNumber', 1, 149), talent374: idleon.callFunction('GetTalentNumber', 1, 374), talent539: idleon.callFunction('GetTalentNumber', 1, 539), achievement291: idleon.callFunction('AchieveStatus', 291), familyTalentLevels: Number(idleon.getDNSM('FamBonusQTYs').h[68]), companionTalentLevels: idleon.callFunction('Companions', 1), divinityTalentLevels: idleon.callFunction('Divinity', 'Bonus_Minor', __TARGET_PLAYER__, 2), coralKidMinorLinkPercent: idleon.callFunction('Thingies', 'CoralKidUpgBonus', 3, 0), equinoxTalentLevels: Number(idleon.getAttr('Dream')[12]), ninjaMastery: Number(idleon.getAttr('OptionsListAccount')[232]), grimoireTalentLevels: idleon.callFunction('Summoning', 'GrimoireUpgBonus', 39, 0), equipmentTalentLevels: idleon.callFunction('GetSetBonus', 'KATTLEKRUK_SET', 'Bonus', 0, 0), tesseractTalentLevels: idleon.callFunction('ArcaneType', 'ArcaneUpgBonus', 57, 0), gamingTalentLevelsUnlocked: idleon.callFunction('GamingStatType', 'SuperBitType', 47, 0), superTalentLevels: idleon.callFunction('Thingies', 'SuperTalentPTS_LVgiven', 0, 0), divinityBubbleMultiplier: Number(bubbles.Y2ACTIVE ?? 0) }; }; let calls = 0; let early; let preparationResult; try { script._customBlock_PlayerMPmax = function(...args) { calls++; const inputs = snapshot(); const maximumMP = original.apply(this, args); early = { ...inputs, maximumMP }; return maximumMP; }; preparationResult = idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerMPmax = original; } if (calls !== 1 || !early || script._customBlock_PlayerMPmax !== original) throw new Error('Alchemy MP capture must intercept exactly one call and restore PlayerMPmax'); const final = snapshot(); final.maximumMP = idleon.callFunction('PlayerMPmax'); return { early, final, calls, preparationResult, restored: script._customBlock_PlayerMPmax === original }; })()",
+      "description": "Actual target normal TalentCalc(-2) MP call and direct inputs; restore the delegating recorder in finally. Final MP remains a separate contract."
+    },
+    {
+      "label": "maximum_hp",
+      "expression": "idleon.callFunction(\"PlayerHPmax\")",
+      "description": "Normal-character maximum HP used by mining-efficiency bubbles"
+    },
+    {
+      "label": "maximum_mp",
+      "expression": "idleon.callFunction(\"PlayerMPmax\")",
+      "description": "Normal-character maximum MP used by chopping-efficiency bubbles"
+    },
+    {
+      "label": "total_strength",
+      "expression": "idleon.callFunction(\"TotalStats\", \"STR\")",
+      "description": "Target character total Strength used by maximum HP"
+    },
+    {
+      "label": "total_wisdom",
+      "expression": "idleon.callFunction(\"TotalStats\", \"WIS\")",
+      "description": "Target character total Wisdom used by maximum MP"
+    },
+    {
+      "label": "talent_0",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 0)",
+      "description": "First talent formula 0 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_1",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 1)",
+      "description": "First talent formula 1 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_642",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 642)",
+      "description": "First talent formula 642 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_95",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 95)",
+      "description": "First talent formula 95 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_92",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 92)",
+      "description": "First talent formula 92 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_272",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 272)",
+      "description": "First talent formula 272 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "talent_452",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 452)",
+      "description": "First talent formula 452 used by maximum HP or MP; mode 1 is not a player index"
+    },
+    {
+      "label": "card_1",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 1)",
+      "description": "Target character card bonus 1 used by maximum HP or MP"
+    },
+    {
+      "label": "card_3",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 3)",
+      "description": "Target character card bonus 3 used by maximum HP or MP"
+    },
+    {
+      "label": "card_8",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 8)",
+      "description": "Target character card bonus 8 used by maximum HP or MP"
+    },
+    {
+      "label": "card_29",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 29)",
+      "description": "Target character card bonus 29 used by maximum HP or MP"
+    },
+    {
+      "label": "stamp_base_hp",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseHP\")",
+      "description": "Base maximum HP from stamps"
+    },
+    {
+      "label": "stamp_base_mp",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseMP\")",
+      "description": "Base maximum MP from stamps"
+    },
+    {
+      "label": "health_statue",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven4\")",
+      "description": "Health statue contribution including character and account modifiers"
+    },
+    {
+      "label": "hp_shrine",
+      "expression": "idleon.callFunction(\"Shrine\", 1)",
+      "description": "HP shrine bonus applicable to the target character map"
+    },
+    {
+      "label": "equipment_hp",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"15\")",
+      "description": "Maximum HP equipment-effect aggregate"
+    },
+    {
+      "label": "active_hp_penalty",
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 108, 1)",
+      "description": "Active HP penalty; returns first talent formula only while buff 108 is active"
+    },
+    {
+      "label": "family_hp",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[18]",
+      "description": "Prepared Family maximum HP contribution for the target character"
+    },
+    {
+      "label": "post_office_baseHP",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.baseHP",
+      "description": "Prepared post-office baseHP contribution to maximum HP or MP"
+    },
+    {
+      "label": "post_office_pctHP",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.pctHP",
+      "description": "Prepared post-office pctHP contribution to maximum HP or MP"
+    },
+    {
+      "label": "post_office_baseMP",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.baseMP",
+      "description": "Prepared post-office baseMP contribution to maximum HP or MP"
+    },
+    {
+      "label": "post_office_pctMP",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h.pctMP",
+      "description": "Prepared post-office pctMP contribution to maximum HP or MP"
+    },
+    {
+      "label": "star_sign_hp",
+      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h.TotalHP; return value == null ? 0 : value; })()",
+      "description": "Total HP from target character star signs; c.asNumber maps absent/null source values to zero"
+    },
+    {
+      "label": "secret_set",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"SECRET_SET\", \"Bonus\", 0, 0)",
+      "description": "Secret equipment-set golden-food multiplier"
+    },
+    {
+      "label": "companion_174",
+      "expression": "idleon.callFunction(\"Companions\", 174)",
+      "description": "Companion 174 golden-food contribution"
+    },
+    {
+      "label": "companion_48",
+      "expression": "idleon.callFunction(\"Companions\", 48)",
+      "description": "Companion 48 golden-food contribution"
+    },
+    {
+      "label": "companion_155",
+      "expression": "idleon.callFunction(\"Companions\", 155)",
+      "description": "Companion 155 golden-food contribution"
+    },
+    {
+      "label": "family_gold_food",
+      "expression": "idleon.getDNSM(\"FamBonusQTYs\").h[66]",
+      "description": "Prepared Family golden-food contribution; website producer mapping unresolved"
+    },
+    {
+      "label": "equipment_gold_food",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"8\")",
+      "description": "Golden-food effect from equipment"
+    },
+    {
+      "label": "talent_99",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 99)",
+      "description": "Talent contribution to golden-food effectiveness"
+    },
+    {
+      "label": "stamp_gold_food",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"GFood\")",
+      "description": "Golden-food effectiveness from stamps"
+    },
+    {
+      "label": "bubble_gold_food",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.GFoodz",
+      "description": "Target character prepared golden-food Alchemy bonus"
+    },
+    {
+      "label": "sigil_gold_food",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 14, 0)",
+      "description": "Golden-food effectiveness from the fourteenth sigil"
+    },
+    {
+      "label": "meal_gold_food",
+      "expression": "idleon.callFunction(\"MealBonus\", \"zGoldFood\")",
+      "description": "Golden-food effectiveness from Cooking meals"
+    },
+    {
+      "label": "star_sign_gold_food",
+      "expression": "(() => { const value = idleon.getDNSM(\"StarSigns\").h[69]; return value == null ? 0 : value; })()",
+      "description": "Prepared golden-food star-sign contribution; source asNumber coerces absence to zero"
+    },
+    {
+      "label": "bribe_gold_food",
+      "expression": "idleon.callFunction(\"GetBribeBonus\", \"36\")",
+      "description": "Bribe contribution to golden-food effectiveness"
+    },
+    {
+      "label": "pristine_gold_food",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 14, 0)",
+      "description": "Pristine charm golden-food effectiveness"
+    },
+    {
+      "label": "vote_gold_food",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 26, 0)",
+      "description": "Voting golden-food effectiveness"
+    },
+    {
+      "label": "deathbringer_gold_food",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 209, -1) * idleon.getDNSM(\"CalcTalentMAP\").h[209]",
+      "description": "Account Death Bringer contribution to golden-food effectiveness"
+    },
+    {
+      "label": "legend_gold_food",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 25, 0)",
+      "description": "Legend Talent golden-food effectiveness"
+    },
+    {
+      "label": "card_level_cropfallEvent1",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"cropfallEvent1\")",
+      "description": "Owned cropfallEvent1 card level used by golden-food effectiveness"
+    },
+    {
+      "label": "card_level_anni5Event1",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"anni5Event1\")",
+      "description": "Owned anni5Event1 card level used by golden-food effectiveness"
+    },
+    {
+      "label": "vault_gold_food",
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 86, 0)",
+      "description": "Upgrade Vault golden-food effectiveness"
+    },
+    {
+      "label": "sushi_gold_food_10",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 10, 0)",
+      "description": "Sushi 10 golden-food contribution"
+    },
+    {
+      "label": "sushi_gold_food_51",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 51, 0)",
+      "description": "Sushi 51 golden-food contribution"
+    },
+    {
+      "label": "exalted_stamp_bonus",
+      "expression": "idleon.callFunction(\"Windwalker\", \"StampDoubler\", 0, 0)",
+      "description": "Complete exalted stamp percentage bonus"
+    },
+    {
+      "label": "exalted_atom_bonus",
+      "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 12, 0)",
+      "description": "Collider percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_pristine_bonus",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 20, 0)",
+      "description": "Pristine Charm percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_compass_bonus",
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 76, 0)",
+      "description": "Compass upgrade percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_emperor_set",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"EMPEROR_SET\", \"Bonus\", 0, 0)",
+      "description": "Emperor set percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_event_shop_owned",
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 18, 0)",
+      "description": "Event Shop ownership flag; the exalted stamp formula multiplies it by 20"
+    },
+    {
+      "label": "exalted_palette_bonus",
+      "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 23, 0)",
+      "description": "Gaming Palette percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_exotic_market_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 49, 0)",
+      "description": "Farming Exotic Market percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_legend_bonus",
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 36, 0)",
+      "description": "Legend Talent percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_sushi_bonus",
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 17, 0)",
+      "description": "Sushi unlock percentage bonus for exalted stamps"
+    },
+    {
+      "label": "exalted_jelly_bonus",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 50, 0)",
+      "description": "Jelly Operator quantity; the exalted stamp formula divides it by 100"
+    }
+  ]
+}

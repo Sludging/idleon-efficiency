@@ -71,6 +71,8 @@ export class RoyalArmory extends Domain {
     readonly totalResourceProduction = new Map<number, number>();
     private selectedExperienceRank = OutpostRank.Trading;
     selectedRoyalGuardian: RoyalGuardianContribution | undefined;
+    // The saved Outpost category weights cost reduction for the first three Master Classes.
+    private selectedOutpostBonusIndex = 0;
     private totalUpgradeLevels = 0;
     private unlockedUpgradeCount = 0;
     private orbletsOwned = 0;
@@ -104,6 +106,7 @@ export class RoyalArmory extends Domain {
         this.totalResourceProduction.clear();
         this.selectedExperienceRank = OutpostRank.Trading;
         this.selectedRoyalGuardian = undefined;
+        this.selectedOutpostBonusIndex = 0;
         this.totalUpgradeLevels = this.unlockedUpgradeCount = this.orbletsOwned = 0;
         this.extraClearKills = 1;
         this.companionParchmentBonus = this.jellyParchmentBonus = 0;
@@ -149,13 +152,14 @@ export class RoyalArmory extends Domain {
         });
         armory.units.parse(royalG ?? []);
         armory.selectedExperienceRank = royalArmoryAsNumber(royalG?.[3]?.[7]);
-        armory.resourceNodes.parse(royalG?.[5] ?? [], royalG?.[4] ?? []);
+        armory.selectedOutpostBonusIndex = Number(royalG?.[3]?.[2] ?? 0);
         armory.resetResources();
         royalG?.[1]?.forEach((quantity, resourceType) => {
             const resource = armory.resources.get(resourceType) ?? new RoyalResource(resourceType, 0);
             resource.parse(quantity);
             armory.resources.set(resourceType, resource);
         });
+        armory.resourceNodes.parse(royalG?.[5] ?? [], royalG?.[4] ?? []);
         armory.upgrades.forEach(upgrade => upgrade.parse(royalG?.[2]?.[upgrade.index]));
         armory.orbletMarketBonuses.forEach(bonus => bonus.parse((royalG?.[23]?.[bonus.index] ?? 0) as number));
     }
@@ -175,6 +179,7 @@ export class RoyalArmory extends Domain {
         for (const unit of this.units.roster) this.mapStates.get(unit.stationedMapId)?.units.addMovableUnit(unit.role);
     }
 
+    getSelectedOutpostBonusIndex(): number { return this.selectedOutpostBonusIndex; }
     getTotalUpgradeLevels(): number { return this.totalUpgradeLevels; }
     getUnlockedUpgradeCount(): number { return this.unlockedUpgradeCount; }
 
