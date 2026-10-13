@@ -68,7 +68,7 @@ import { updateVotesBonus, Votes } from './world-2/votes';
 import { Hole, updateHole } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency } from './grimoire';
-import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency } from './tesseract';
+import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
 import { Compass, updateCompassDamageEfficiency, updateCompassExaltedStampBonus } from './compass';
 import { Emperor, updateEmperorMaxAttempts, updateEmperorBonuses } from './world-6/emperor';
 import { RoyalArmory, updateRoyalArmory, updateRoyalArmoryLateInputs } from './world-6/royalArmory/royalArmory';
@@ -293,6 +293,8 @@ const postProcessingMap: Record<string, Function> = {
     // Daily Shopping Spree and early Royal Armory Bargain inputs are ready before shared upgrade costs.
     // Parsed Research accumulation and Outpost selection combine with Compounding Outposting bonus before first-three costs.
     "updateMasterClasses": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateMasterClasses(accountData),
+    // Tesseract prices consume both prepared Master Classes multipliers.
+    "tesseractUpgradeCosts": (_doc: Cloudsave, accountData: Map<string, unknown>) => updateTesseractUpgradeCosts(accountData),
     "updateSlabBonusMultiplier": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusMultiplier(accountData),
     "updatePlayerDeathnote": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDeathnote(accountData),
     "updatePlayerSpecialTalents": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSpecialTalents(accountData),

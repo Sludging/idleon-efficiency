@@ -1,4 +1,4 @@
-import { nFormatter } from "../utility";
+import { lavaLog as gameLog, nFormatter } from "../utility";
 import { Domain, RawData } from "./base/domain";
 import { TesseractUpgradeBase, initTesseractUpgradeRepo } from "./data/TesseractUpgradeRepo";
 import { ImageData } from "./imageData";
@@ -19,6 +19,7 @@ import { Sneaking } from "./world-6/sneaking";
 import { Arcade } from "./world-2/arcade";
 import { Lab } from "./world-4/lab";
 import { Emperor } from "./world-6/emperor";
+import type { MasterClasses } from "./masterClasses";
 
 export class TesseractUpgrade implements EfficiencyUpgrade {
     public level: number = 0;
@@ -26,7 +27,9 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
     public bonus: number = 0;
     public cost: number = 0;
     public costToMax: number = 0;
-    public costReductionFactor: number = 1;
+    public firstThreeUpgradeCostMultiplier: number = 1;
+    public sharedUpgradeCostMultiplier: number = 1;
+    public silverTachyonLog: number = 0;
 
     constructor(
         public id: number,
@@ -71,19 +74,24 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
         return this.level * this.data.value * (1 + upgrade39Bonus / 100);
     }
 
-    getCost = (_allUpgrades: EfficiencyUpgrade[]): number => {
+    getCost = (allUpgrades: EfficiencyUpgrade[]): number => {
         if (this.level >= this.data.max_level) {
             return 0;
         }
 
-        // Base cost calculation from game formula with cost reduction factor
-        const baseCost = this.costReductionFactor *
+        const tesseractUpgrades = allUpgrades as TesseractUpgrade[];
+        // Massivon Hoarding includes Fractal Tesseract's enhancement from the quoted upgrade list.
+        const silverDiscountBonus = tesseractUpgrades[49].getBonus(tesseractUpgrades);
+        const silverCostMultiplier = 1 / (1 + silverDiscountBonus * this.silverTachyonLog / 100);
+
+        // Both account discounts apply before the Silver Tachyon discount and level-based price.
+        return this.firstThreeUpgradeCostMultiplier *
+            this.sharedUpgradeCostMultiplier *
             3 *
+            silverCostMultiplier *
             Math.pow(1.04, this.id) *
             (this.level + (this.data.base_cost + this.level) *
                 Math.pow(this.data.scaling_factor + 0.01, this.level));
-
-        return baseCost;
     }
 
     getCostType(): number {
@@ -147,7 +155,9 @@ export class TesseractUpgrade implements EfficiencyUpgrade {
         copy.bonus = this.bonus;
         copy.cost = this.cost;
         copy.costToMax = this.costToMax;
-        copy.costReductionFactor = this.costReductionFactor;
+        copy.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        copy.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
+        copy.silverTachyonLog = this.silverTachyonLog;
         return copy;
     }
 
@@ -224,7 +234,9 @@ export class PrismaBubbleTesseractUpgrade extends TesseractUpgrade {
         copy.bonus = this.bonus;
         copy.cost = this.cost;
         copy.costToMax = this.costToMax;
-        copy.costReductionFactor = this.costReductionFactor;
+        copy.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        copy.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
+        copy.silverTachyonLog = this.silverTachyonLog;
         return copy;
     }
 
@@ -447,6 +459,8 @@ export class Tesseract extends Domain implements EfficiencyDomain {
     etcBonus94: number = 0; // Accuracy equipment bonus
     etcBonus95: number = 0; // Drop Chance equipment bonus
     emperorBonus6: number = 0; // Arcane Cultist Extra Tachyons
+    private firstThreeUpgradeCostMultiplier: number = 1;
+    private sharedUpgradeCostMultiplier: number = 1;
 
     public copyDomain(upgrades: TesseractUpgrade[], resources: Record<TesseractType, number>): Tesseract {
         const temp = new Tesseract("temp");
@@ -462,6 +476,8 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         temp.etcBonus94 = this.etcBonus94;
         temp.etcBonus95 = this.etcBonus95;
         temp.emperorBonus6 = this.emperorBonus6;
+        temp.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+        temp.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
         
         // Recalculate bonuses for the temporary tesseract's upgrades
         temp.recalculateUpgrades(upgrades);
@@ -500,19 +516,25 @@ export class Tesseract extends Domain implements EfficiencyDomain {
             upgrade39.bonus = upgrade39.getBonus(tesseractUpgrades);
         }
 
-        // Calculate cost reduction factor from upgrade 49 and Silver Tachyons 
-        let costReductionFactor = 1;
-        if (tesseractUpgrades[49]?.level > 0) {
-            const upgrade49Bonus = tesseractUpgrades[49].level * tesseractUpgrades[49].data.value;
-            const logValue = Math.log10(this.resources[TesseractType.Silver]);
-            costReductionFactor = 1 / (1 + (upgrade49Bonus * logValue) / 100);
-        }
+        const silverTachyonLog = gameLog(this.resources[TesseractType.Silver]);
 
-        // Then calculate all bonuses and costs
+        // Overwrite prepared account inputs so current and copied upgrade quotes use the same price calculation.
         tesseractUpgrades.forEach(upgrade => {
-            upgrade.costReductionFactor = costReductionFactor;
+            upgrade.firstThreeUpgradeCostMultiplier = this.firstThreeUpgradeCostMultiplier;
+            upgrade.sharedUpgradeCostMultiplier = this.sharedUpgradeCostMultiplier;
+            upgrade.silverTachyonLog = silverTachyonLog;
             upgrade.bonus = upgrade.getBonus(tesseractUpgrades);
             upgrade.cost = upgrade.getCost(tesseractUpgrades);
+        });
+    }
+
+    updateUpgradeCosts(firstThreeMultiplier: number, sharedMultiplier: number): void {
+        this.firstThreeUpgradeCostMultiplier = firstThreeMultiplier;
+        this.sharedUpgradeCostMultiplier = sharedMultiplier;
+        this.recalculateUpgrades(this.upgrades);
+
+        this.upgrades.forEach(upgrade => {
+            upgrade.costToMax = upgrade.getCostToMax(this.upgrades);
         });
     }
 
@@ -661,20 +683,9 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         }
         tesseract.hasTachyonBundle = bundleInfo == undefined ? false : bundleInfo.bun_x == 1;
 
-        // Calculate cost reduction factor from upgrade 49 and Silver Tachyons 
-        let costReductionFactor = 1;
-        if (tesseract.upgrades[49]?.level > 0) {
-            const upgrade49Bonus = tesseract.upgrades[49].level * tesseract.upgrades[49].data.value;
-            const logValue = Math.log10(tesseract.resources[TesseractType.Silver]);
-            costReductionFactor = 1 / (1 + (upgrade49Bonus * logValue) / 100);
-        }
-
-        // Set cost reduction factor for all upgrades and pre-calculate bonus, cost and cost to max
-        tesseract.upgrades.forEach((upgrade) => {
-            upgrade.costReductionFactor = costReductionFactor;
+        // Keep bonuses ready for early consumers; prices wait for the account discounts in calculate.
+        tesseract.upgrades.forEach(upgrade => {
             upgrade.bonus = upgrade.getBonus(tesseract.upgrades);
-            upgrade.cost = upgrade.getCost(tesseract.upgrades);
-            upgrade.costToMax = upgrade.getCostToMax(tesseract.upgrades);
         });
 
 
@@ -900,6 +911,16 @@ export class Tesseract extends Domain implements EfficiencyDomain {
         return player.getTalentBonus(skillIndex);
     }
 }
+
+export const updateTesseractUpgradeCosts = (accountData: Map<string, unknown>): void => {
+    const tesseract = accountData.get("tesseract") as Tesseract;
+    const masterClasses = accountData.get("masterClasses") as MasterClasses;
+
+    tesseract.updateUpgradeCosts(
+        masterClasses.getFirstThreeUpgradeCostMultiplier(),
+        masterClasses.getUpgradeCostMultiplier(),
+    );
+};
 
 export const updateArcaneCultistImpact = (accountData: Map<string, any>) => {
     const tesseract = accountData.get("tesseract") as Tesseract;

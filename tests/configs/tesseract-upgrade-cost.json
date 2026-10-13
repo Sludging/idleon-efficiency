@@ -1,0 +1,36 @@
+{
+  "description": "Tesseract current purchase prices and direct cost discounts for the paired real account",
+  "target": "TesseractUpgrade current purchase cost",
+  "extractions": [
+    {
+      "label": "tesseract_upgrade_cost_0",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 0, 0)",
+      "description": "Arcanist Damage (upgrade 0): current purchase price at its observed saved level"
+    },
+    {
+      "label": "tesseract_upgrade_cost_49",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 49, 0)",
+      "description": "Massivon Hoarding (upgrade 49): current purchase price while its Silver Tachyon discount bonus is present"
+    },
+    {
+      "label": "tesseract_upgrade_cost_57",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgCost\", 57, 0)",
+      "description": "Universe Talent (upgrade 57): raw current purchase price for the saved zero-owned-level state"
+    },
+    {
+      "label": "tesseract_silver_discount_bonus_49",
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 49, 0)",
+      "description": "Whole Massivon Hoarding Silver Tachyon discount bonus used by Tesseract purchase prices, including the Fractal Tesseract enhancement"
+    },
+    {
+      "label": "tesseract_masterclass_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
+      "description": "Whole shared Master Classes cost multiplier directly used by Tesseract purchase prices"
+    },
+    {
+      "label": "tesseract_first_three_cost_multiplier",
+      "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
+      "description": "First-three Master Classes cost multiplier directly used by Tesseract purchase prices"
+    }
+  ]
+}
