@@ -322,6 +322,10 @@ export class SpelunkingStamina {
 
     constructor(public playerID: number) {}
 
+    getImageData(): ImageData {
+        return { location: 'CaveShopUpg4', width: 34, height: 34 };
+    }
+
     parse(savedStamina: (number | string)[]): void {
         this.current = Number(savedStamina[this.playerID] ?? 0);
     }

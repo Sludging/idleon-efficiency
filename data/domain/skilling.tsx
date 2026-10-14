@@ -241,6 +241,9 @@ export class Skilling extends Domain {
             case SkillsIndex.Summoning:
                 imageSrc = 'ClassIcons59';
                 break;
+            case SkillsIndex.Spelunking:
+                imageSrc = 'ClassIcons60';
+                break;
             case SkillsIndex.Research:
                 imageSrc = 'ClassIcons61';
                 break;

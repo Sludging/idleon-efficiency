@@ -6,6 +6,7 @@ import TextAndLabel from '../../base/TextAndLabel';
 import TipDisplay from '../../base/TipDisplay';
 import type { Player } from '../../../data/domain/player';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
+import { Skilling } from '../../../data/domain/skilling';
 import type { Chapter, ChapterBonus, Spelunking } from '../../../data/domain/world-7/spelunking';
 import { commaNotation, notateNumber, toTime } from '../../../data/utility';
 
@@ -80,28 +81,26 @@ function ChapterBonusRow({ chapterIndex, bonus }: { chapterIndex: number; bonus:
         : `${bonus.data.bonus.startsWith('+') ? '+' : ''}${limit.toFixed(2)}${bonus.data.bonus.startsWith('x') ? 'x' : bonus.data.bonus.includes('%') ? '%' : ''}`;
 
     return (
-        <Grid columns={['minmax(0, 1fr)', '42px', '82px']} gap="small" align="start" data-spelunking-bonus={bonus.index} style={{ opacity: bonus.level === 0 ? 0.65 : 1 }}>
-            <Box gap="xxsmall">
-                <Text size="13px">{earnedEffect(bonus)}</Text>
-                {limit === undefined ? (
-                    <Text size="12px" color="accent-2">No soft cap</Text>
-                ) : (
-                    <Box gap="xxsmall" data-spelunking-progress={`${chapterIndex}-${bonus.index}`} data-spelunking-progress-value={progress} data-spelunking-effect-limit={limit}>
-                        <Box direction="row" justify="between" gap="xsmall">
-                            <Text size="12px" color="accent-2">{progressText}</Text>
-                            <Text size="12px" color="accent-2">Soft cap {limitText}</Text>
-                        </Box>
-                        <Meter aria-label={`Chapter ${chapterIndex + 1} bonus ${bonus.index + 1} earned progress`} values={[{ value: Math.min(99.9, percentage!), color: 'brand' }]} max={100} thickness="6px" size="full" background="grey-1" round />
+        <Box gap="xxsmall" pad={{ vertical: 'xsmall' }} border={{ side: 'bottom', color: 'grey-1' }} data-spelunking-bonus={bonus.index} style={{ opacity: bonus.level === 0 ? 0.65 : 1 }}>
+            <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small" align="center" data-bonus-main-row>
+                <Text size="13px" data-bonus-effect>{earnedEffect(bonus)}</Text>
+                <Text size="13px" textAlign="end" data-bonus-level>{commaNotation(bonus.level)}</Text>
+                <TipDisplay heading="Minimum pages per stack" body={
+                    <Text color="dark-1" size="small" data-spelunking-requirement-detail={`${chapterIndex}-${bonus.index}`}>{commaNotation(bonus.data.requiredPages)} pages per stack</Text>
+                }>
+                    <Text size="13px" textAlign="end" data-spelunking-requirement={`${chapterIndex}-${bonus.index}`}>{notateNumber(bonus.data.requiredPages)}</Text>
+                </TipDisplay>
+            </Grid>
+            {limit !== undefined && <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small">
+                <Box gap="xxsmall" data-spelunking-progress={`${chapterIndex}-${bonus.index}`} data-spelunking-progress-value={progress} data-spelunking-effect-limit={limit}>
+                    <Box direction="row" justify="between" gap="xsmall">
+                        <Text size="12px" color="accent-2">{progressText}</Text>
+                        <Text size="12px" color="accent-2">Soft cap {limitText}</Text>
                     </Box>
-                )}
-            </Box>
-            <Text size="13px">{commaNotation(bonus.level)}</Text>
-            <TipDisplay heading="Minimum pages per stack" body={
-                <Text color="dark-1" size="small" data-spelunking-requirement-detail={`${chapterIndex}-${bonus.index}`}>{commaNotation(bonus.data.requiredPages)} pages per stack</Text>
-            }>
-                <Text size="13px" data-spelunking-requirement={`${chapterIndex}-${bonus.index}`}>{notateNumber(bonus.data.requiredPages)}</Text>
-            </TipDisplay>
-        </Grid>
+                    <Meter aria-label={`Chapter ${chapterIndex + 1} bonus ${bonus.index + 1} earned progress`} values={[{ value: Math.min(99.9, percentage!), color: 'brand' }]} max={100} thickness="6px" size="full" background="grey-1" round />
+                </Box>
+            </Grid>}
+        </Box>
     );
 }
 
@@ -161,10 +160,10 @@ function ChapterCard({ chapter, players }: { chapter: Chapter; players: Player[]
                     </TipDisplay>
                 ) : ownedPagesDisplay}
             </Box>
-            <Grid columns={['minmax(0, 1fr)', '42px', '82px']} gap="small" align="end">
+            <Grid columns={['minmax(0, 1fr)', '48px', '104px']} gap="small" align="end">
                 <Text size="12px" color="accent-2">Earned bonus</Text>
-                <Text size="12px" color="accent-2">Level</Text>
-                <Text size="12px" color="accent-2">Min. pages / stack</Text>
+                <Text size="12px" color="accent-2" textAlign="end">Level</Text>
+                <Text size="12px" color="accent-2" textAlign="end">Min. pages / stack</Text>
             </Grid>
             {chapter.bonuses.map(bonus => <ChapterBonusRow key={bonus.index} chapterIndex={chapter.index} bonus={bonus} />)}
         </ShadowBox>
@@ -181,39 +180,41 @@ export function SpelunkingJournal({ spelunking, players }: SpelunkingPart2Props)
 
 export function SpelunkingCharacters({ spelunking, players }: SpelunkingPart2Props) {
     return (
-        <Box data-spelunking-character-grid>
-            <Text size="small">Characters</Text>
-            <Grid columns={{ size: 'small', count: 'fill' }} pad={{ top: 'small', bottom: 'small' }}>
+        <Box gap="xsmall" data-spelunking-character-grid>
+            <Text size="12px">Characters</Text>
+            <Grid columns={{ size: 'small', count: 'fill' }} gap="xsmall">
                 {players.map(player => {
                     const skill = player.skills.get(SkillsIndex.Spelunking)!;
                     const stamina = spelunking.stamina.find(entry => entry.playerID === player.playerID)!;
 
                     return (
-                        <Box key={player.playerID} margin={{ right: 'small', bottom: 'small' }} data-spelunking-player={player.playerID}>
+                        <Box key={player.playerID} data-spelunking-player={player.playerID}>
                             <CharacterBox player={player} borderColor="grey-1" textColor="text">
-                                <Box direction="row" margin={{ top: 'xsmall' }} align="center">
-                                    <Box pad={{ right: 'small' }} margin={{ right: 'small' }} border={{ side: 'right', color: 'grey-1' }} gap="xxsmall">
-                                        <Text size="12px" color="accent-2">Spelunking</Text>
-                                        <Text size="small">Lv {commaNotation(skill.level)}</Text>
-                                    </Box>
+                                <Box direction="row" justify="between" align="center" gap="xxsmall" margin={{ top: 'xxsmall', bottom: 'xxsmall' }}>
+                                    <TipDisplay heading="Spelunking level" body={<Text color="dark-1" size="small" data-skill-detail={player.playerID}>{player.playerName}: Level {commaNotation(skill.level)}</Text>}>
+                                        <Box direction="row" align="center" gap="xxsmall" data-skill-trigger={player.playerID}>
+                                            <IconImage data={Skilling.getSkillImageData(SkillsIndex.Spelunking)} scale={0.4} />
+                                            <Text size="11px" style={{ whiteSpace: 'nowrap' }}>Lv {commaNotation(skill.level)}</Text>
+                                        </Box>
+                                    </TipDisplay>
                                     <TipDisplay heading="Saved stamina / maximum" body={
                                         <Box gap="xsmall" data-spelunking-stamina-detail={player.playerID}>
                                             <Text color="dark-1" size="small">{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)} stamina</Text>
                                             {stamina.current > stamina.maximum && <Text color="dark-1" size="small">Saved amount exceeds maximum.</Text>}
                                         </Box>
                                     }>
-                                        <Box gap="xxsmall">
-                                            <Text size="12px" color="accent-2">Stamina</Text>
-                                            <Text size="12px" data-spelunking-stamina={player.playerID}>{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)}</Text>
+                                        <Box direction="row" align="center" gap="xxsmall" data-stamina-trigger={player.playerID}>
+                                            <IconImage data={stamina.getImageData()} scale={0.4} />
+                                            <Text size="11px" style={{ whiteSpace: 'nowrap' }} data-spelunking-stamina={player.playerID}>{commaNotation(stamina.current)} / {commaNotation(stamina.maximum)}</Text>
                                         </Box>
                                     </TipDisplay>
                                 </Box>
-                                <TipDisplay heading="EXP current-to-next-level" body={
-                                    <Text color="dark-1" size="small" data-spelunking-exp-exact={player.playerID}>
-                                        {commaNotation(skill.currentXP)} / {commaNotation(skill.xpReq)} EXP
-                                    </Text>
+                                <TipDisplay heading="Spelunking EXP" body={
+                                    <Text color="dark-1" size="small" data-spelunking-exp-exact={player.playerID}>{commaNotation(skill.currentXP)} / {commaNotation(skill.xpReq)} EXP</Text>
                                 }>
-                                    <Text size="12px" margin={{ top: 'xsmall' }} data-spelunking-exp={player.playerID}>EXP {notateNumber(skill.currentXP)} / {notateNumber(skill.xpReq)}</Text>
+                                    <Box data-spelunking-exp={player.playerID} data-exp-current={skill.currentXP} data-exp-required={skill.xpReq}>
+                                        <Meter aria-label={`${player.playerName} Spelunking EXP`} values={[{ value: skill.currentXP / skill.xpReq * 100, color: 'brand' }]} max={100} thickness="4px" size="full" background="grey-1" round />
+                                    </Box>
                                 </TipDisplay>
                             </CharacterBox>
                         </Box>
