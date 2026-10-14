@@ -6,7 +6,7 @@ import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubb
 import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
-import { updatePlayerStats } from './player-stats';
+import { updatePlayerPowers, updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -95,7 +95,7 @@ import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenith
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies } from './skilling';
-import { updateAttributeTalents, updateRightHandOfActionBonuses } from './talents';
+import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -367,6 +367,8 @@ const postProcessingMap: Record<string, Function> = {
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
     // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
     "attributeTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updateAttributeTalents(accountData),
+    // Beginner Best Class uses its own beginner-line level cap before weapon-power consumers.
+    "powerTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updatePowerTalents(accountData),
     // Land Rank bonuses use final recipient contexts before stat consumers and Farming display snapshots.
     "farmingLandRankBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLandRankBonuses(accountData),
     // Equipment and Obol attribute modifiers consume each character's final talent context.
@@ -376,6 +378,7 @@ const postProcessingMap: Record<string, Function> = {
     "playerStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStats(accountData),
     // Prepare each character's normal maxima before player-aware efficiency consumers.
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
+    "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),

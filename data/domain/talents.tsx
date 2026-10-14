@@ -94,6 +94,34 @@ export class Talent {
         return talent ? talent.getAttributeBonus() : 0;
     }
 
+    static getBeginnerWeaponPowerBonus(player: Player): number {
+        const talent = player.getTalent(616);
+        if (!talent) {
+            return 0;
+        }
+        if (!(talent instanceof BeginnerBestClassTalent)) {
+            throw new Error("Beginner Best Class must use its specialized talent factory.");
+        }
+        return talent.getWeaponPowerBonus();
+    }
+
+    static getSkillWeaponPowerBonus(player: Player): Readonly<{ progression: number; intellect: number }> {
+        const inputs = player.finalTalentInputs;
+        // These talents grant weapon power for each complete decade of their linked skill level.
+        const progression = player.getTalentBonusAtInputs(140, inputs) * Math.floor(player.skills.get(SkillsIndex.Cooking)!.level / 10)
+            + (player.getTalentBonusAtInputs(170, inputs) * Math.floor(player.skills.get(SkillsIndex.Gaming)!.level / 10)
+                + (player.getTalentBonusAtInputs(320, inputs) * Math.floor(player.skills.get(SkillsIndex.Sailing)!.level / 10)
+                    + player.getTalentBonusAtInputs(500, inputs) * Math.floor(player.skills.get(SkillsIndex.Divinity)!.level / 10)));
+        // Intellect enters the weapon-power sum after the pet effect, not inside the progression subtree.
+        const intellect = player.getTalentBonusAtInputs(530, inputs) * Math.floor(player.skills.get(SkillsIndex.Intellect)!.level / 10);
+        return { progression, intellect };
+    }
+
+    static getPetWeaponPowerBonus(player: Player, firstStoredPetPower: number): number {
+        // Animalistic Ferocity uses powers of ten of the first stored pet's power, not its level.
+        return player.getTalentBonusAtInputs(365, player.finalTalentInputs) * lavaLog(firstStoredPetPower);
+    }
+
     static getDummyTargetAllStatBonus(player: Player, bestDPS: number): number {
         // Dummy Thicc Stats grants all-stat percentage per power of ten in the Shimmer Island record, capped at 15.
         // Keep fractional points until rounding the complete attribute composition.
@@ -177,11 +205,46 @@ export class Talent {
                 return new RedoxRatesTalent(talentName, talentInfo);
             case 146:
                 return new ApocalypseChowTalent(talentName, talentInfo);
+            case 616:
+                return new BeginnerBestClassTalent(talentName, talentInfo);
             case 620:
                 return new WillOfTheEldestTalent(talentName, talentInfo);
             default:
                 return new Talent(talentName, talentInfo);
         }
+    }
+}
+
+class BeginnerBestClassTalent extends Talent {
+    private highestBeginnerLevel: number | undefined;
+
+    static preparePowerBonuses(players: readonly Player[]): void {
+        let highestBeginnerLevel = 0;
+        // Beginner Best Class includes every class below 6, including the numeric zero class.
+        for (const player of players) {
+            if (player.classId < 6) {
+                highestBeginnerLevel = Math.max(highestBeginnerLevel, player.level);
+            }
+        }
+
+        for (const player of players) {
+            const talent = player.getTalent(616);
+            if (!talent) {
+                continue;
+            }
+            if (!(talent instanceof BeginnerBestClassTalent)) {
+                throw new Error("Beginner Best Class must use its specialized talent factory.");
+            }
+            talent.highestBeginnerLevel = highestBeginnerLevel;
+        }
+    }
+
+    getWeaponPowerBonus(): number {
+        if (this.highestBeginnerLevel === undefined) {
+            throw new Error("Beginner Best Class requires prepared beginner character levels.");
+        }
+        // Cap the settled talent curve at one weapon power per ten levels of the highest eligible character.
+        return Math.min(this.getBonus(), Math.floor(this.highestBeginnerLevel / 10));
     }
 }
 
@@ -219,6 +282,11 @@ class WillOfTheEldestTalent extends Talent {
 export const updateAttributeTalents = (accountData: Map<string, any>): void => {
     const players = accountData.get("players") as Player[];
     WillOfTheEldestTalent.prepareAttributeBonuses(players);
+}
+
+export const updatePowerTalents = (accountData: Map<string, any>): void => {
+    const players = accountData.get("players") as Player[];
+    BeginnerBestClassTalent.preparePowerBonuses(players);
 }
 
 export class BloodMarrowTalent extends Talent {

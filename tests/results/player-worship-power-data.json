@@ -1,9 +1,5 @@
 {
   "extractions": {
-    "worship_power": {
-      "expression": "idleon.callFunction(\"TotalStats\", \"Worship_Power\")",
-      "result": 396.3028382474511
-    },
     "alchemy_worship_power_m2": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M2",
       "result": 44.8421052631579

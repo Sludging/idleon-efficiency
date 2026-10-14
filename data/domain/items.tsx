@@ -582,10 +582,6 @@ export class Food extends Item {
         }
     }
 
-    getBaseHPBoost = (): number => {
-        return this.effect === "HpBaseBoosts" ? this.effectAmount : 0;
-    }
-
     static getBoostFoodEffectiveness(
         player: Player,
         inputs: BoostFoodEffectivenessInputs,
@@ -608,7 +604,7 @@ export class Food extends Item {
         const cardFoodEffect = Card.GetTotalBonusForId(player.cardInfo!.equippedCards, 48);
         const cardSetFoodEffect = player.cardInfo!.getBonusForId(1);
         const talentFoodEffect = player.getTalentBonusAtInputs(631, talentInputs);
-        // HP boost foods use the boost-food factor, not the separate healing-food factor.
+        // Ordinary boost foods use the boost-food factor, not the separate healing-food factor.
         // Preserve the nested sum; Alchemy can supply its earlier talent snapshot.
         return 1 + (postOfficeBoostFoodEffect + (inputs.foodStatue + (equipmentFoodEffect
             + (inputs.boostFoodStamp + (starSignFoodEffect + (cardFoodEffect
@@ -620,18 +616,35 @@ export class Food extends Item {
         inputs: BoostFoodEffectivenessInputs,
         talentInputs: TalentLevelInputs = player.finalTalentInputs,
     ): number {
+        return Food.getBoostFoodContribution(player, inputs, "HpBaseBoosts", talentInputs);
+    }
+
+    static getWeaponPowerContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        talentInputs: TalentLevelInputs = player.finalTalentInputs,
+    ): number {
+        return Food.getBoostFoodContribution(player, inputs, "WeaponPowerBoosts", talentInputs);
+    }
+
+    private static getBoostFoodContribution(
+        player: Player,
+        inputs: BoostFoodEffectivenessInputs,
+        effect: "HpBaseBoosts" | "WeaponPowerBoosts",
+        talentInputs: TalentLevelInputs,
+    ): number {
         let contribution = 0;
         let effectiveness: number | undefined;
         for (let slot = 0; slot < player.foodSlotsOwned; slot++) {
             const food = player.gear.food[slot];
-            if (!food || food.count === 0 || food.effect !== "HpBaseBoosts") {
+            if (!food || food.count === 0 || food.effect !== effect) {
                 continue;
             }
             // Stack quantity gates ordinary boost food; it does not scale the food's base amount.
             if (effectiveness === undefined) {
                 effectiveness = Food.getBoostFoodEffectiveness(player, inputs, talentInputs);
             }
-            contribution += food.getBaseHPBoost() * effectiveness;
+            contribution += food.effectAmount * effectiveness;
         }
         return contribution;
     }

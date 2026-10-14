@@ -121,4 +121,22 @@ describe('Shared boost-food behavior for the actual target', () => {
       }
     });
   });
+
+  it('matches normal weapon-food effectiveness against the shared final boost-food factor', () => {
+    const results = loadExtractionResults('player-powers-data.json');
+    validateExtractionHealth(results);
+    expect(Food.getBoostFoodEffectiveness(player, inputs, player.finalTalentInputs)).toMatchLiveGame(
+      results.extractions.powers.result.terms.foodEffectiveness, 0,
+    );
+  });
+
+  it('matches Food-owned equipped weapon-food contribution', () => {
+    const results = loadExtractionResults('player-powers-data.json');
+    validateExtractionHealth(results);
+    // The retained aggregate is zero. Independent effectiveness coverage does not prove a nonzero food loadout.
+    expect(Food.getWeaponPowerContribution(player, inputs, player.finalTalentInputs)).toMatchLiveGameWithDetails(
+      results.extractions.powers.result.terms.foodWeapon,
+      { tolerance: 0, context: `Player ${player.playerID} ordinary equipped food Weapon Power` },
+    );
+  });
 });

@@ -1,5 +1,9 @@
 import { Card } from './cards';
 import { EquipmentBonus, type PrimaryAttribute } from './equipment-effects';
+import { SkillsIndex } from './SkillsIndex';
+import { PassiveType, type Dungeons } from './dungeons';
+import { Food } from './items';
+import type { PlayerStatues } from './world-1/statues';
 import type { Player } from './player';
 import { ClassIndex, Talent } from './talents';
 import { getCompanionActiveBonus, type Companion } from './companions';
@@ -50,6 +54,26 @@ interface AttributeSources {
     quests: Quests;
 }
 
+export type SkillPowerSkill =
+    | SkillsIndex.Mining
+    | SkillsIndex.Chopping
+    | SkillsIndex.Fishing
+    | SkillsIndex.Catching
+    | SkillsIndex.Trapping
+    | SkillsIndex.Worship;
+
+interface PowerSources {
+    alchemy: Alchemy;
+    family: Family;
+    sigils: Sigils;
+    arcade: Arcade;
+    guild: Guild;
+    dungeons: Dungeons;
+    breeding: Breeding;
+    statues: PlayerStatues[];
+    boostFoodStamp: number;
+}
+
 function secondTalentBonus(player: Player, index: number): number {
     const talent = player.getTalent(index);
     // Unallocated class talents contribute zero, including their second curve.
@@ -96,6 +120,73 @@ export class PlayerStats {
     agility: number = 0;
     wisdom: number = 0;
     luck: number = 0;
+    private preparedWeaponPower: number | undefined;
+    private skillPowers: Record<SkillPowerSkill, number> | undefined;
+
+    get weaponPower(): number {
+        if (this.preparedWeaponPower === undefined) {
+            throw new Error('Weapon Power has not been calculated');
+        }
+        return this.preparedWeaponPower;
+    }
+
+    getSkillPower(skill: SkillPowerSkill): number {
+        if (this.skillPowers === undefined) {
+            throw new Error('Skill powers have not been calculated');
+        }
+        return this.skillPowers[skill];
+    }
+
+    updatePowers(player: Player, sources: PowerSources): void {
+        const { alchemy, family, sigils, arcade, guild, dungeons, breeding, statues, boostFoodStamp } = sources;
+        const playerStatues = statues[player.playerID].statues;
+        const foodWeapon = Food.getWeaponPowerContribution(player, {
+            boostFoodStamp,
+            foodStatue: playerStatues.find(statue => statue.index === 3)!.getBonus(player),
+        }, player.finalTalentInputs);
+        const card18 = Card.GetTotalBonusForId(player.cardInfo!.equippedCards, 18);
+        const cardLevel = player.cardInfo!.cards.find(card => card.id === 'w5b2')!.getLevels();
+        let signWeapon = 0;
+        for (const sign of player.starSigns) {
+            signWeapon += sign.getBonus('Weapon Power');
+        }
+        const skillWeapon = Talent.getSkillWeaponPowerBonus(player);
+        const petWeapon = Talent.getPetWeaponPowerBonus(player, breeding.firstStoredPetPower);
+        const warriorWeapon = alchemy.getBubbleBonusForKey('W1', player);
+        const archerWeapon = alchemy.getBubbleBonusForKey('A1', player);
+        const mageWeapon = alchemy.getBubbleBonusForKey('M1', player);
+
+        // Chips and weapon bubbles scale only gear. Flat bonuses remain outside this multiplier.
+        this.preparedWeaponPower =
+            5 + postOfficeBonus(player, '12a') + dungeons.passives.get(PassiveType.Flurbo)![0].getBonus() + foodWeapon
+            + (card18 + cardLevel + (guild.guildBonuses[3].getBonus() + sigils.sigils[17].getBonus()))
+            + (player.gear.getProperty('Weapon_Power')
+                * (1 + (player.getChipBonus('weppow') + (warriorWeapon + (archerWeapon + mageWeapon))) / 100)
+                + Talent.getBeginnerWeaponPowerBonus(player)
+                + (alchemy.getVialBonusForKey('WeaponPOW') + (family.getClassBonus(ClassIndex.Barbarian)!.getBonus(player) + (signWeapon
+                    + (arcade.bonuses[17].getBonus() + (skillWeapon.progression + (petWeapon + skillWeapon.intellect)))))));
+
+        const warriorPower = alchemy.getBubbleBonusForKey('W2', player);
+        const warriorToolPower = alchemy.getBubbleBonusForKey('W7', player);
+        const magePower = alchemy.getBubbleBonusForKey('M2', player);
+        const mageToolPower = alchemy.getBubbleBonusForKey('M7', player);
+        const archerPower = alchemy.getBubbleBonusForKey('A2', player);
+        const archerToolPower = alchemy.getBubbleBonusForKey('A8', player);
+
+        // Only Mining, Chopping, Fishing, and Catching add statues. Trapping and Worship use gear and bubbles.
+        this.skillPowers = {
+            [SkillsIndex.Mining]: player.gear.getProperty('Mining_Power')
+                + (playerStatues.find(statue => statue.index === 2)!.getBonus(player) + (warriorPower + warriorToolPower)),
+            [SkillsIndex.Chopping]: player.gear.getProperty('Choppin_Power')
+                + (playerStatues.find(statue => statue.index === 6)!.getBonus(player) + (magePower + mageToolPower)),
+            [SkillsIndex.Fishing]: player.gear.getProperty('Fishing_Power')
+                + (playerStatues.find(statue => statue.index === 8)!.getBonus(player) + (warriorPower + warriorToolPower)),
+            [SkillsIndex.Catching]: player.gear.getProperty('Catching_Power')
+                + (playerStatues.find(statue => statue.index === 9)!.getBonus(player) + (archerPower + archerToolPower)),
+            [SkillsIndex.Trapping]: player.gear.getProperty('Trapping_Power') + (archerPower + archerToolPower),
+            [SkillsIndex.Worship]: player.gear.getProperty('Worship_Power') + (magePower + mageToolPower),
+        };
+    }
 
     update(player: Player, players: readonly Player[], sources: AttributeSources): void {
         const { alchemy, stamps, family, sigils, breeding, arcade, islandExpeditions, orion, companions,
@@ -236,5 +327,23 @@ export const updatePlayerStats = (accountData: Map<string, any>): void => {
     };
     for (const player of players) {
         player.stats.update(player, players, sources);
+    }
+};
+
+export const updatePlayerPowers = (accountData: Map<string, any>): void => {
+    const players = accountData.get('players') as Player[];
+    const sources: PowerSources = {
+        alchemy: accountData.get('alchemy') as Alchemy,
+        family: accountData.get('family') as Family,
+        sigils: accountData.get('sigils') as Sigils,
+        arcade: accountData.get('arcade') as Arcade,
+        guild: accountData.get('guild') as Guild,
+        dungeons: accountData.get('dungeons') as Dungeons,
+        breeding: accountData.get('breeding') as Breeding,
+        statues: accountData.get('statues') as PlayerStatues[],
+        boostFoodStamp: getStampBonusForKey(accountData.get('stamps') as Stamp[][], 'BFood'),
+    };
+    for (const player of players) {
+        player.stats.updatePowers(player, sources);
     }
 };
