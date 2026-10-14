@@ -38,6 +38,16 @@ describe('Shared golden-food results', () => {
     );
   });
 
+  it.each([
+    ['getDefencePercent', 'golden_defence_percent', 'raw Defence percentage points'],
+    ['getBaseAccuracy', 'golden_base_accuracy', 'flat base Accuracy'],
+  ] as const)('matches golden-food %s', (method, key, effect) => {
+    expect(goldenFood[method](player)).toMatchLiveGameWithDetails(
+      getExtractedValue(results, key),
+      { tolerance: 0, context: `Player ${player.playerID} golden-food ${effect}` },
+    );
+  });
+
   it.each([0, 7])('keeps candidate owner %s separate from the recipient and map owner', ownerIndex => {
     expect(Talent.getAccountTalentBonus([players[ownerIndex]], 209, player.finalTalentInputs))
       .toMatchLiveGame(getExtractedValue(results, `death_bringer_candidate_${ownerIndex}`), 0);

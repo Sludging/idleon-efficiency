@@ -28,6 +28,12 @@ import type { Farming } from './world-6/farming';
 import type { Sneaking } from './world-6/sneaking';
 import type { Summoning } from './world-6/summoning';
 import type { EquipmentSets } from './misc/equipmentSets';
+import type { UpgradeVault } from './upgradeVault';
+import type { Bribe } from './world-1/bribes';
+import type { Poppy } from './world-2/poppy';
+import { ShrineConstants, type Shrine } from './world-3/construction/shrines';
+import type { Prayer } from './world-3/prayers';
+import type { Divinity } from './world-5/divinity';
 
 interface AttributeSources {
     alchemy: Alchemy;
@@ -72,6 +78,37 @@ interface PowerSources {
     breeding: Breeding;
     statues: PlayerStatues[];
     boostFoodStamp: number;
+}
+
+interface SecondaryStatSources {
+    alchemy: Alchemy;
+    stamps: Stamp[][];
+    arcade: Arcade;
+    statues: PlayerStatues[];
+    upgradeVault: UpgradeVault;
+    companions: Companion[];
+    cooking: Cooking;
+    shrines: Shrine[];
+    bribes: Bribe[];
+    prayers: Prayer[];
+    goldenFood: GoldenFood;
+    dungeons: Dungeons;
+    equipmentSets: EquipmentSets;
+    divinity: Divinity;
+    votes: Votes;
+    poppy: Poppy;
+}
+
+function getStatCards(player: Player): Card[] {
+    // Equipped passive cards must not contribute twice. Reuse prepared card objects without a set or map.
+    const cards: Card[] = [];
+    for (const card of player.cardInfo!.equippedCards) {
+        if (!cards.includes(card)) cards.push(card);
+    }
+    for (const card of player.cardInfo!.cards) {
+        if (card.passive && !cards.includes(card)) cards.push(card);
+    }
+    return cards;
 }
 
 function secondTalentBonus(player: Player, index: number): number {
@@ -122,6 +159,22 @@ export class PlayerStats {
     luck: number = 0;
     private preparedWeaponPower: number | undefined;
     private skillPowers: Record<SkillPowerSkill, number> | undefined;
+    private preparedDefence: number | undefined;
+    private preparedAccuracy: number | undefined;
+
+    get defence(): number {
+        if (this.preparedDefence === undefined) {
+            throw new Error('Defence has not been calculated');
+        }
+        return this.preparedDefence;
+    }
+
+    get accuracy(): number {
+        if (this.preparedAccuracy === undefined) {
+            throw new Error('Accuracy has not been calculated');
+        }
+        return this.preparedAccuracy;
+    }
 
     get weaponPower(): number {
         if (this.preparedWeaponPower === undefined) {
@@ -188,18 +241,75 @@ export class PlayerStats {
         };
     }
 
+    updateSecondaryStats(player: Player, sources: SecondaryStatSources): void {
+        const { alchemy, stamps, arcade, statues, upgradeVault, companions, cooking, shrines,
+            bribes, prayers, goldenFood, dungeons, equipmentSets, divinity, votes, poppy } = sources;
+        const cards = getStatCards(player);
+        const alchemyDefPct = alchemy.getBubbleBonusForKey('DefPct', player);
+        const card26 = Card.GetTotalBonusForId(cards, 26);
+        const card15 = Card.GetTotalBonusForId(cards, 15);
+        const cardLevelW6A2 = player.cardInfo!.cards.find(card => card.id === 'w6a2')!.getLevels();
+        const stampBaseDef = getStampBonusForKey(stamps, 'BaseDef');
+        const equipmentBaseDef = player.gear.getBonus(EquipmentBonus.BaseDefence);
+        const arcade1 = arcade.bonuses[1].getBonus();
+        const statue7 = statues[player.playerID].statues.find(statue => statue.index === 7)!.getBonus(player);
+        const vault46 = upgradeVault.getBonusForId(46);
+        const companion21 = getCompanionActiveBonus(companions, 21);
+        const mealDef = cooking.getMealBonusForKey('Def');
+        const secondTalent122 = secondTalentBonus(player, 122);
+        // The Shrine owner excludes local and same-world activation from this permanent bonus.
+        const mapIndependentShrine = shrines[ShrineConstants.HpDefShrine].getMapIndependentBonus();
+        const bribe22 = bribes.find(bribe => bribe.bribeIndex === 22)!.getBonus();
+        const prayer15Curse = player.activePrayers.includes(15) ? prayers.find(prayer => prayer.index === 15)!.getCurse() : 0;
+        const prayer16Curse = player.activePrayers.includes(16) ? prayers.find(prayer => prayer.index === 16)!.getCurse() : 0;
+        let signDefence = 0;
+        for (const sign of player.starSigns) {
+            signDefence += sign.getBonus('Defence');
+        }
+        const selectedBuff124 = player.activeBuffs.find(talent => talent.skillIndex === 124)?.getBonus() ?? 0;
+        const cardSet4 = player.cardInfo!.getBonusForId(4);
+        const flurbo6 = dungeons.passives.get(PassiveType.Flurbo)![6].getBonus();
+        const chipDefence = player.getChipBonus('def');
+        const amarokSetPercent = equipmentSets.getSetBonus('AMAROK_SET', player, true);
+        const recipientSnehebatuMinor = divinity.gods[0].getMinorLinkBonus(player);
+
+        // Only gear receives this inner percentage. Floor the additive base before later multipliers.
+        const defenceBase = Math.floor(
+            postOfficeBonus(player, 'def')
+            + card26
+            + Math.min(player.level, alchemyDefPct)
+            + (stampBaseDef + equipmentBaseDef + arcade1 + statue7)
+            + (player.gear.getProperty('Defence')
+                * (1 + (alchemyDefPct + vault46 + (card15 + companion21 + 3 * cardLevelW6A2)) / 100)
+                + (mealDef + secondTalent122))
+        );
+        // Combine selected prayer curses before applying the shared lower clamp.
+        const prayerFactor = Math.max(0.05, 1 - (prayer15Curse + prayer16Curse) / 100);
+        // Poppy and Vault flat Defence remain outside the floor and all percentage multipliers.
+        this.preparedDefence = defenceBase
+            * (1 + (mapIndependentShrine + bribe22) / 100)
+            * prayerFactor
+            * (1 + (
+                goldenFood.getDefencePercent(player) + player.getTalentBonusAtInputs(9, player.finalTalentInputs)
+                + (player.gear.getBonus(EquipmentBonus.Defence) + (signDefence
+                    + (selectedBuff124 + (cardSet4 + (flurbo6 + (chipDefence + amarokSetPercent))))))
+            ) / 100)
+            * (1 + (recipientSnehebatuMinor + votes.getCurrentBonus(3)) / 100)
+            + (poppy.getGlobalBonus(1) + upgradeVault.getBonusForId(5));
+
+        this.preparedAccuracy = 2
+            + alchemy.getVialBonusForKey('baseACC')
+            + (postOfficeBonus(player, 'acc')
+                + (Card.GetTotalBonusForId(cards, 23) + player.gear.getBonus(EquipmentBonus.Accuracy) + goldenFood.getBaseAccuracy(player))
+                + (getStampBonusForKey(stamps, 'BaseAcc') + upgradeVault.getBonusForId(4)))
+            + player.gear.getProperty('Accuracy');
+    }
+
     update(player: Player, players: readonly Player[], sources: AttributeSources): void {
         const { alchemy, stamps, family, sigils, breeding, arcade, islandExpeditions, orion, companions,
             sneaking, cooking, guild, hole, lab, summoning, sailing, goldenFood, achievements,
             farming, votes, equipmentSets, quests } = sources;
-        // Equipped passive cards must not contribute twice. Reuse prepared card objects without a set or map.
-        const cards: Card[] = [];
-        for (const card of player.cardInfo!.equippedCards) {
-            if (!cards.includes(card)) cards.push(card);
-        }
-        for (const card of player.cardInfo!.cards) {
-            if (card.passive && !cards.includes(card)) cards.push(card);
-        }
+        const cards = getStatCards(player);
         const will = Talent.getClassLevelAttributeBonus(player);
         const baseAllStat = getStampBonusForKey(stamps, 'BaseAllStat');
         const orionAllStat = orion.getGlobalBonus(5);
@@ -345,5 +455,30 @@ export const updatePlayerPowers = (accountData: Map<string, any>): void => {
     };
     for (const player of players) {
         player.stats.updatePowers(player, sources);
+    }
+};
+
+export const updatePlayerSecondaryStats = (accountData: Map<string, any>): void => {
+    const players = accountData.get('players') as Player[];
+    const sources: SecondaryStatSources = {
+        alchemy: accountData.get('alchemy') as Alchemy,
+        stamps: accountData.get('stamps') as Stamp[][],
+        arcade: accountData.get('arcade') as Arcade,
+        statues: accountData.get('statues') as PlayerStatues[],
+        upgradeVault: accountData.get('upgradeVault') as UpgradeVault,
+        companions: accountData.get('companions') as Companion[],
+        cooking: accountData.get('cooking') as Cooking,
+        shrines: accountData.get('shrines') as Shrine[],
+        bribes: accountData.get('bribes') as Bribe[],
+        prayers: accountData.get('prayers') as Prayer[],
+        goldenFood: accountData.get('goldenFood') as GoldenFood,
+        dungeons: accountData.get('dungeons') as Dungeons,
+        equipmentSets: accountData.get('equipmentSets') as EquipmentSets,
+        divinity: accountData.get('divinity') as Divinity,
+        votes: accountData.get('votes') as Votes,
+        poppy: accountData.get('poppy') as Poppy,
+    };
+    for (const player of players) {
+        player.stats.updateSecondaryStats(player, sources);
     }
 };

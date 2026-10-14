@@ -59,6 +59,8 @@ export interface GoldenFoodResults {
     monsterCash: number;
     skillExp: number;
     allStatPercent: number;
+    defencePercent: number;
+    baseAccuracy: number;
 }
 
 export class GoldenFood extends Domain {
@@ -119,6 +121,16 @@ export class GoldenFood extends Domain {
         return this.getResults(player).allStatPercent;
     }
 
+    // Defence contributes raw percentage points to the normal Defence multiplier.
+    getDefencePercent(player: Player): number {
+        return this.getResults(player).defencePercent;
+    }
+
+    // Base Accuracy adds flat points, without a percentage conversion.
+    getBaseAccuracy(player: Player): number {
+        return this.getResults(player).baseAccuracy;
+    }
+
     private calculateEffectivity(account: GoldenFoodAccountInputs, character: GoldenFoodCharacterInputs,
         talent99: number, alchemy: number, deathBringer: number): number {
         const cardsAndLateBonuses = Math.min(4 * account.cropFallCardLevel, 50)
@@ -175,6 +187,8 @@ export class GoldenFood extends Domain {
             monsterCash: this.calculateEffect(player, sneaking, 'MonsterCash', effectivity),
             skillExp: this.calculateEffect(player, sneaking, 'SkillExp', effectivity),
             allStatPercent: this.calculateEffect(player, sneaking, 'AllStatz', effectivity),
+            defencePercent: this.calculateEffect(player, sneaking, 'Defence', effectivity),
+            baseAccuracy: this.calculateEffect(player, sneaking, 'BaseAcc', effectivity),
         });
     }
 

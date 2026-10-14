@@ -6,7 +6,7 @@ import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubb
 import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
-import { updatePlayerPowers, updatePlayerStats } from './player-stats';
+import { updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -379,6 +379,7 @@ const postProcessingMap: Record<string, Function> = {
     // Prepare each character's normal maxima before player-aware efficiency consumers.
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
+    "playerSecondaryStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSecondaryStats(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),

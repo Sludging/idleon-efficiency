@@ -16,6 +16,14 @@
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
       "result": 15714.882032941576
     },
+    "golden_defence_percent": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
+      "result": 25453.07635868456
+    },
+    "golden_base_accuracy": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
+      "result": 50906.15271736912
+    },
     "golden_effectivity": {
       "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
       "result": 743.5132159494034

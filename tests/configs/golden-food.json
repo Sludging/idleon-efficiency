@@ -23,6 +23,16 @@
       "description": "Golden-food all-stat contribution in raw percentage points, without rounding or division by 100."
     },
     {
+      "label": "golden_defence_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
+      "description": "Golden-food Defence in raw percentage points; no division or multiplier conversion."
+    },
+    {
+      "label": "golden_base_accuracy",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
+      "description": "Golden-food flat base Accuracy."
+    },
+    {
       "label": "golden_effectivity",
       "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
       "description": "Complete shared golden-food effectiveness."

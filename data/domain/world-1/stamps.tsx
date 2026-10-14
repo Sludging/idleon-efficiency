@@ -45,7 +45,7 @@ export class Stamp {
 
     // Update field
     labMultiplier: number = 1;
-    healthVaultMultiplier: number = 1;
+    baseStatVaultMultiplier: number = 1;
     pristineCharmMultiplier: number = 1;
     exaltedMultiplier: number = 1;
     sigilDiscount: number = 0;
@@ -71,7 +71,7 @@ export class Stamp {
     }> = {}
     maxCarryAmount: number = 0;
     maxCarryPlayer: Player | undefined;
-    
+
     // Upgrade calculator for different discount scenarios
     upgradeCalculator: StampUpgradeCalculator | undefined;
 
@@ -216,9 +216,9 @@ export class Stamp {
         const reducedLevel = Math.floor(lvlDiff * this.data.upgradeInterval / 10);
         // only second tab gets reduced level math and only if the reduced level is lower than stamp level.
         if (this.removeLimitFromUnderLevel == false && skillLevel > 0 && reducedLevel < this.level && this.data.i10 > 0) {
-            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.healthVaultMultiplier * this.pristineCharmMultiplier;
+            return lavaFunc(this.data.function, reducedLevel, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.baseStatVaultMultiplier * this.pristineCharmMultiplier;
         }
-        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.healthVaultMultiplier * this.pristineCharmMultiplier;
+        return lavaFunc(this.data.function, this.level, this.data.x1, this.data.x2, round) * this.exaltedMultiplier * this.labMultiplier * this.baseStatVaultMultiplier * this.pristineCharmMultiplier;
     }
 
     isMaxLevel = (): boolean => {
@@ -247,14 +247,14 @@ export class Stamps extends Domain {
     constructor(public dataKey: string) {
         super(dataKey);
     }
-    
+
     init = (allItems: Item[]) => {
         const stampItems = allItems.filter(item => isStampItem(item.data.item));
         const allStamps = Stamp.fromBase(stampItems);
         const combat_stamp = allStamps.filter(stamp => stamp.type == "Combat Stamp");
         const skills_stamp = allStamps.filter(stamp => stamp.type == "Skills Stamp");
         const misc_stamp = allStamps.filter(stamp => stamp.type == "Misc Stamp");
-    
+
         convertToItemClass([combat_stamp, skills_stamp, misc_stamp], allItems);
 
         return [combat_stamp, skills_stamp, misc_stamp];
@@ -264,7 +264,7 @@ export class Stamps extends Domain {
         const stamps = data.get(this.getDataKey());
         const stampLevels = data.get("StampLv") as any[] // safeJsonParse(raw, "StampLv", []) as any[];
         const stampMaxLevels = data.get("StampLvM") as any[] // safeJsonParse(raw, "StampLvM", []) as any[];
-        
+
         if (stampLevels) {
             stampLevels.forEach((tab, index) => { // for each tab in the cloud save
                 Object.entries(tab).map(([key, value]) => { // for each stamp in the current tab
@@ -284,8 +284,8 @@ export class Stamps extends Domain {
 
     getRawKeys(): RawData[] {
         return [
-            { key: "StampLv", default: [], perPlayer: false},
-            { key: "StampLvM", default: [], perPlayer: false},
+            { key: "StampLv", default: [], perPlayer: false },
+            { key: "StampLvM", default: [], perPlayer: false },
         ]
     }
 }
@@ -315,19 +315,22 @@ export function updateStamps(data: Map<string, any>) {
     const compass = data.get("compass") as Compass;
     const upgradeVault = data.get("upgradeVault") as UpgradeVault;
     // Update gilded stamps (this can totally be done in parse if needed)
-    const optLacc = data.get("OptLacc"); 
+    const optLacc = data.get("OptLacc");
     const gildedStampCount = parseInt(optLacc[154]);
     const stampMastery = rift.bonuses.find(bonus => bonus.name == "Stamp Mastery");
- 
+
     const pristineCharm17 = sneaking.pristineCharms.find(charm => charm.data.itemId == 17);
-    const healthVaultMultiplier = 1 + upgradeVault.getBonusForId(16) / 100;
+    const baseStatVaultMultiplier = 1 + upgradeVault.getBonusForId(16) / 100;
     const labBonus = (lab.bonuses.find(bonus => bonus.name == "Certified Stamp Book")?.active ?? false) ? 2 : 1;
     const exaltedMultiplier = 1 + compass.getExaltedStampBonus() / 100;
     const allButMisc = stamps.flatMap(tab => tab).filter(stamp => stamp.type != "Misc Stamp");
     allButMisc.forEach(stamp => {
         stamp.labMultiplier = labBonus;
-        // The Vault increases base HP stamps after the Lab multiplier and before the Pristine Charm.
-        stamp.healthVaultMultiplier = stamp.data.effect == "BaseHP" ? healthVaultMultiplier : 1;
+        // The Vault boosts base damage, HP, Accuracy and Defence after Lab and before the Pristine Charm.
+        // Game 1.22: StampBonusOfTypeX, lines 103250–103256.
+        const receivesBaseStatBoost = stamp.data.effect === "BaseDmg" || stamp.data.effect === "BaseHP"
+            || stamp.data.effect === "BaseAcc" || stamp.data.effect === "BaseDef";
+        stamp.baseStatVaultMultiplier = receivesBaseStatBoost ? baseStatVaultMultiplier : 1;
         stamp.pristineCharmMultiplier = (pristineCharm17 && pristineCharm17.unlocked) ? (1 + pristineCharm17.data.x1 / 100) : 1;
         // Compass bonus applies only to exalted stamps.
         stamp.exaltedMultiplier = compass.exaltedStampNames.has(stamp.raw_name) ? exaltedMultiplier : 1;
@@ -372,14 +375,14 @@ export function updateStampMaxCarry(data: Map<string, any>) {
         else {
             stamp.maxCarryAmount = ["dStone", "dQuest"].includes((stamp.materialItem as Item).typeGen) ? 999999 : 80;
         }
-        
+
         // Initialize the upgrade calculator
         stamp.upgradeCalculator = new StampUpgradeCalculator(stamp);
-        
+
         // For backward compatibility, still calculate these values using the old methods
         stamp.setMaxLevelForCarryCap(collider.atoms[0].level > 0);
         stamp.calculateCostForNextTiers(dailyAtomDiscountIncrease);
-        
+
         // Calculate all common upgrade scenarios
         stamp.upgradeCalculator.calculateAllScenarios(dailyAtomDiscountIncrease, stamp.gildedAvailable ?? false);
 
@@ -389,16 +392,16 @@ export function updateStampMaxCarry(data: Map<string, any>) {
                 const nextTierLevel = stamp.maxLevel + stamp.data.upgradeInterval;
                 const nextTierInfo = stamp.maxCarryInfo[nextTierLevel];
                 const matInStorage = storage?.amountInStorage(stamp.materialItem?.internalName ?? "");
-                
+
                 // Use the calculator to determine upgrade possibilities
                 const canUpgradeWithoutDiscounts = stamp.upgradeCalculator.canUpgradeWithoutDiscounts();
                 const canUpgradeWithGildedOnly = stamp.upgradeCalculator.canUpgradeWithGildedOnly();
                 const minAtomDiscount = stamp.upgradeCalculator.getMinimumAtomDiscount(true);
-                
+
                 // Set flags based on calculator results
                 if (canUpgradeWithoutDiscounts && matInStorage >= nextTierInfo.costToLevel) {
                     stamp.canUpgradeWithMats = true;
-                } else if (canUpgradeWithGildedOnly && stamp.gildedAvailable && matInStorage >= nextTierInfo.costToLevel ) {
+                } else if (canUpgradeWithGildedOnly && stamp.gildedAvailable && matInStorage >= nextTierInfo.costToLevel) {
                     stamp.canUpgradeWithMats = true;
                 } else if (minAtomDiscount >= 0 && minAtomDiscount <= stamp.atomDiscount && matInStorage >= nextTierInfo.costToLevel) {
                     stamp.canUpgradeWithMats = true;
@@ -427,28 +430,28 @@ export function updateStampMaxCarry(data: Map<string, any>) {
 // Example function to demonstrate how to use the new filtering capabilities
 export function getUpgradableStampsByDiscountType(data: Map<string, any>) {
     const stamps = data.get("stamps") as Stamp[][];
-    
+
     // Make sure stamps have their upgrade calculators initialized
     if (!stamps.flatMap(tab => tab)[0]?.upgradeCalculator) {
         updateStampMaxCarry(data);
     }
-    
+
     // 1. All stamps that can be upgraded without atom or gilded discount
     const noDiscountStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
         requireNoDiscounts: true
     });
-    
+
     // 2. Stamps that can be upgraded with just gilded discount
     const gildedOnlyStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
         requireGildedOnly: true
     });
-    
+
     // 3. Stamps that require gilded discount AND atom discount with a selectable discount %
     const atomWithGildedStamps = StampUpgradeCalculator.filterUpgradableStamps(stamps, {
         requireAtomDiscount: 30, // Example: 30% atom discount
         includeGildedWithAtom: true
     });
-    
+
     return {
         noDiscountStamps,
         gildedOnlyStamps,
