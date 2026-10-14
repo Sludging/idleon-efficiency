@@ -14,11 +14,11 @@ This is an Operate surface within the existing site identity. Preserve Rubik, or
 |---|---|
 | 1. Villager composition | Replace DataRows with dense cards. Use three columns at the 1440px review viewport, with five cards in game order. Keep identity, saved level, invested Opals, EXP/hour, EXP bar, and next unlock together. |
 | 2. Rate context | Remove import-audit statements and redundant equal-character controls. Equal complete numeric contexts show rates immediately. Keep the character-bound Villager Statue modifier in useful rate details. Differing contexts offer optional named inspection and a truthful range before selection. Missing rates retain visible reasons. Do not call a character rate account-wide. |
-| 3. Compact top summary | Put shared resources after the page heading and before the three tabs. Show exactly one Opal ratio: **109 / 363 available**, meaning available / earned. Do not add separate available, invested, or earned totals. Condense Lanterns to **37**, **0 / 12 today**, and **+2 hours**. Stock details show useful nonzero locations, such as **Storage: 37**. Incomplete totals remain unavailable with visible reasons. |
+| 3. Compact top summary | Put shared resources after the heading and before the tabs. Use small 14px name/value text, 0.75-scale resource art, and 12px information glyphs. Show exactly one Opal ratio: **109 / 363 available**, meaning available / earned. Keep useful Opal sources and allocation in one constrained summary tooltip. Lanterns show **37** and **0 / 12 today**, with useful nonzero location details only. No Stock label, **+2 hours**, or effect tooltip remains. Incomplete totals retain visible reasons. |
 | 4. Natural next unlock | Use **Nothing right now** when no next unlock exists. Remove “Released maximum reached” and source/version terminology. Keep actual future unlock names and required levels. |
 | 5. Upgrades shell | Preserve `ShadowBox`, the 25% medium-padded rail, `LeftNavButton` arrow/accent-4 selection, and dark-1 content panel. Studies remains the initial local selection. |
 | 6. Study hierarchy | Use two-column cards within the existing right panel. Make identity, saved level, and useful numeric benefit prominent. Replace “Stored” with **Progress to next level**, followed by current / required progress and an 8px bar. The bar measures saved Study progress toward the next level, not elapsed time or benefit strength. |
-| 7. Participation | Remove the Participation column and repeated hourly rates. Use opacity 1 for accepted target/neighbor participation and 0.6 for known inactivity. Locked cards retain **Locked**. Unknown participation remains readable with its unavailable reason. Readiness remains explicit and does not advance saved level. |
+| 7. Participation | Remove the Participation column and repeated hourly rates. Keep all Study bodies and artwork at opacity 1. A 1px `green-1` border marks known participating target/neighbors only when cavern access is known and true. Do not invent participation labels or infer participation from website selection. Locked, unknown-access/participation, unavailable, and claim-ready reasons remain visible. |
 | 8. Study descriptions | Remove authored teaching, instructions, interpretation prose, and caveats from both cards and tooltips. Keep only the six useful generated tooltip descriptions listed below, materialized from saved values. Omit secondary conditional rules that need further explanation to be honest; do not strengthen them. Keep unavailable reasons visible. |
 | 9. Study summary | Show **Study speed: 105K progress/hour** once. Remove “Studying” / “Also studying” groups and the invented participation tooltip. Visual card state shows which Studies gain progress. |
 | 10. Cavern names | Remove numeric prefixes from rails, headings, Study names, and relevant upgrade/schematic references. Preserve internal indices, ordering, IDs, and existing later-part support boundaries. |
@@ -30,9 +30,9 @@ Use `ShadowBox` dark-1 cards with medium padding and small inner gaps. Keep ordi
 
 Villager headers retain the verified 56×64 crop from `HoleUIvillager0`–`HoleUIvillager4`. Pair name/role with the saved level. Put invested Opals and EXP/hour together below, then labeled EXP progress, bar, and next unlock. Useful rate modifiers and Opal Enthusiasm remain conventional details; remove all import/session-response prose. Preserve useful shared growth sources once in their existing compact tooltip, without adding a repeated contributor table or a Study-summary tooltip.
 
-Below the villagers, retain one local Opal-source disclosure, Equal Spread, and read-only Another Try facts. Keep useful nonzero attribution and fractional adjustments without repeating the three aggregate Opal totals. Lantern stock/use moves to the shared top summary; do not repeat an inventory panel below.
+Keep useful nonzero Opal attribution, exact fractional adjustments, Equal Spread, and minimum allocation together in the top-summary tooltip. Constrain the whole tooltip body to 400px height with `overflow: auto`; hover into it must keep it open, and wheel scrolling must reach allocation. Remove the separate below-villager Opal disclosure. Keep Another Try's wish cost compact and its availability, affordability, and all four reset categories in one small constrained tooltip. Shared growth uses separate small name/value rows in its own whole-body scroller, without contributor duplication.
 
-Studies keep name/effect search, no-results/clear behavior, and **Show unlocked**, initially off. Keep all 18 records in game order. Dim only accepted inactivity or explicit locks, not missing participation. Keep lock, unavailable progress/benefit, and claim-ready notices legible. Website selection never changes participation.
+Studies keep name/effect search, no-results/clear behavior, and **Show unlocked**, initially off. Keep all 18 records in game order. Do not dim locked or inactive bodies/artwork. Keep lock, unavailable progress/benefit, and claim-ready notices legible. Website selection never changes participation.
 
 Keep the card's main numeric benefit and useful saved progression. Retain Lamp **+22 daily wishes**, Gloomie **1.21×** credited kills, Jar enchantment chance, Wisdom starting attempts, Fountain marble production, and Cove’s first **35** discounted upgrades. Harp keeps its direct string EXP and exceptional EXP chance/multiplier. Cove keeps saved purchases today, but removes the duplicate current cost factor.
 
@@ -56,6 +56,11 @@ These are distinct feature surfaces, not six instances of one shared component. 
 | [Legend Talents](../../app/world-7/legendTalents/content.tsx), lines 32–61 and 68–85 | Small top summary surfaces, strong name/level relationship, direct generated benefit text. | Duplicate total/available tiles, WIP warning, gold max-level color, five-column talent grid. |
 | [Stamps](../../app/world-1/stamps/content.tsx), lines 77–82 and 196–213 | Recognizable game images and art-attached `TipDisplay` for useful real bonus detail. | 0.2 opacity, carry-capacity tables, broad hover manuals. |
 | Players `app/players/content.tsx:1217–1248`; Obols `app/account/obols/content.tsx:108–131`; `LeftNavButton.tsx:7–17` | Existing padded rail, selected arrow/accent-4 background, dark-1 content panel. | No replacement navigation, drawers, new tab topology, or automatic owner scrolling. |
+| [Tome](../../app/account/tome/content.tsx), lines 29–46 | 0.75-scale compact art, small text, conventional information glyph. | Larger summary tiles or repeated resource totals. |
+| [Stamps compact counts](../../app/world-1/stamps/content.tsx), lines 196–213 | Small counts beside reduced artwork. | Copying its 0.4 artwork scale without considering Hole art dimensions. |
+| [Research tooltip rows](../../components/world-7/research/researchContent.tsx), lines 41–63 | `xsmall` rows, small tooltip, 620px width cap, 40vh height cap, `overflow: auto`. | Large uninterrupted source prose or clipping only an inner section. |
+| [ItemSourceDisplay](../../components/base/ItemSourceDisplay.tsx), lines 20–32; [TipDisplay](../../components/base/TipDisplay.tsx), lines 25–58 | Small source rows; caller owns tooltip scrolling. | Changing shared tooltip primitives for this feature. |
+| [Alchemy](../../app/world-2/alchemy/content.tsx), lines 261–268; [Lab](../../app/world-4/lab/content.tsx), lines 76–79 | Separate active-card border and unlock artwork. Select Alchemy's 1px green border. | Lab's 2px border, whole-card dimming, or invented participation badges. |
 
 The first six guide card density, progress, rates, summaries, hierarchy, and state. Stamps guides tooltip attachment. Players/Obols remains navigation authority. Shared primitives alone are not counted as separate examples.
 
@@ -67,30 +72,30 @@ Every surviving Study tooltip uses `Study.getDescription().replace(/_/g, " ")`, 
 
 | Identity | Decision and provenance |
 |---|---|
-| Well | Retain generated description, `StudyRepo.ts:9–14`. Saved level 16 materializes **160.00%** bucket fill and the genuine sediment rule. |
+| Well | Retain generated description, `StudyRepo.ts:9–14`. Materialize bucket fill from the saved level and retain the genuine sediment rule. |
 | Motherlode | No tooltip. Generated wording could imply a literal resource reduction. Show the concise cheaper-layer benefit, without secondary arithmetic. |
-| Dawg Den | Retain, `StudyRepo.ts:21–26`. Saved level 22 materializes **2.10x** golden-hound score and its owned respawn rule. |
-| Bravery | Retain, `StudyRepo.ts:27–32`. Saved level 26 materializes capped **32.00%** minimum damage and the owned trivial-fight skip. |
-| Bell | Retain, `StudyRepo.ts:33–38`. Saved level 21 materializes **420.00** random bonus levels every twentieth ring. |
-| Harp | No tooltip. Retained accepted evidence has description **1800.00x**, but the prepared exceptional-effect value is **1801×**. Do not fix or explain this backend discrepancy during UI planning. Show accepted effects directly. |
+| Dawg Den | Retain, `StudyRepo.ts:21–26`. Materialize golden-hound score from the saved level and retain its owned respawn rule. |
+| Bravery | Retain, `StudyRepo.ts:27–32`. Materialize capped minimum damage from the saved level and retain the owned trivial-fight skip. |
+| Bell | Retain, `StudyRepo.ts:33–38`. Materialize random bonus levels from the saved level and retain the every-twentieth-ring rule. |
+| Harp | No tooltip. Show accepted direct effects. Do not change or explain the backend description/effect discrepancy during UI delivery. |
 | Lamp | No tooltip; the generated description adds no needed detail beyond the direct daily-wish benefit. |
 | Undying Hive | No tooltip; avoid literal-reduction wording. |
 | Gloomie Mushroom Grotto | No tooltip; generated wording repeats the direct credited-kill benefit. |
-| Justice | Retain, `StudyRepo.ts:63–68`. Saved level 18 materializes **10.50x** Opal chance and the genuine additional fourteen reward days. |
+| Justice | Retain, `StudyRepo.ts:63–68`. Materialize Opal chance from the saved level and retain the genuine additional fourteen reward days. |
 | Jars | No tooltip. Generated “Double click” is an in-game instruction, not a website action. Keep enchantment chance only; omit target preference and its caveat. |
 | Evertree | No tooltip; avoid literal-reduction wording. |
 | Wisdom | No tooltip. Generated unconditional recovery wording omits the accepted normal-story capacity condition. Keep starting attempts only; omit the recovery rule and explanation. |
-| Gambit | Retain, `StudyRepo.ts:87–92`. Saved level 36 materializes **180.00%** points and the genuine **50%** attempt-preservation rule. |
+| Gambit | Retain, `StudyRepo.ts:87–92`. Materialize points from the saved level and retain the genuine **50%** attempt-preservation rule. |
 | Temple | No tooltip; generated description duplicates the direct double-torch benefit. |
 | Fountain | No tooltip. Generated repeat-marbleization wording does not establish individual upgrade eligibility. Keep marble production only; omit secondary rule, exclusions, and disclaimer. |
 | Bottomless Trench | No tooltip; avoid literal-reduction wording. |
 | Crystal Glunko Cove | No tooltip; generated description repeats the direct discounted-upgrade limit and cost. |
 
-These decisions use the accepted descriptions/effects retained in `.ui-verification/runs/2026-10-14T01-35-34-717Z-39415/hole-production-observations.json`, `publishedRealSaveBaseline.studies`. They are not fresh game-calculation research. Remove old authored Study detail bodies, the top participation tooltip, and equivalent teaching/caveat text in smaller card text. Unavailable effect reasons remain visible beside affected benefits. Apply the same concise benefit renderer to cavern-local views.
+Remove old authored Study detail bodies, the top participation tooltip, and equivalent teaching/caveat text in smaller card text. Unavailable effect reasons remain visible beside affected benefits. Apply the same concise benefit renderer to cavern-local views.
 
 ## Verified cavern image map
 
-Original game-art caller: `../IdleonWikiBot/codefiles/idleon1.22.txt:266057–266075`. The selected cavern index `_DN1` selects `HolePOI{index}.png`. Jars uses `HolePOI10_{JarAesthetic}.png`; use existing `HolePOI10_0` as neutral identity artwork, not a claim about the saved aesthetic. Generated `StudyRepo.ts:9–115` and the accepted name array establish the same identity order. All 18 local images were visually inspected together; natural dimensions were read from the actual PNGs.
+Original game-art caller: `../IdleonWikiBot/codefiles/idleon1.22.txt:266057–266075`. The selected cavern index `_DN1` selects `HolePOI{index}.png`. Jars uses `HolePOI10_{JarAesthetic}.png`; use existing `HolePOI10_0` as neutral identity artwork, not a claim about the saved aesthetic. Generated `StudyRepo.ts:9–115` and the accepted name array establish the same identity order.
 
 | Internal index | Visible name | CDN image location | Natural size |
 |---:|---|---|---|
@@ -113,34 +118,15 @@ Original game-art caller: `../IdleonWikiBot/codefiles/idleon1.22.txt:266057–26
 | 16 | Bottomless Trench | `HolePOI16` | 186×161 |
 | 17 | Crystal Glunko Cove | `HolePOI17` | 186×161 |
 
-Pass measured metadata through `IconImage`; its established accessor resolves `https://cdn2.idleonefficiency.com/images/{location}.png`. Preserve aspect ratio inside a 64×56 Study slot, 32×28 navigation slot, and larger selected-cavern slot. Do not stretch, crop away the object, add images to `public`, or run WikiBot. The visual source sheet and private metadata are under `.ui-verification/hole-dense-plan-20261014/`.
+Pass measured metadata through `IconImage`; its established accessor resolves `https://cdn2.idleonefficiency.com/images/{location}.png`. Preserve aspect ratio inside a 64×56 Study slot, 32×28 navigation slot, and larger selected-cavern slot. Do not stretch, crop away the object, add images to `public`, or run WikiBot.
 
 ## Integration and verification
 
 Read existing Hole and Player objects through `useAppDataStore`, retaining `lastUpdated`. Keep route metadata, shared navigation, calculations, and parsing unchanged. Local state owns tab/rail selection, search/filter, and optional useful character inspection. No endpoint, engine, recommendation, forecast, persistence, or game action is added.
 
-The disposable preview must render actual theme/components and accepted real-save display values at 1440×1000. Exercise all eleven decisions; missing totals/progress/rates; locked, unknown, inactive, and claim-ready states; useful named inspection; search/no-results/clear; unlocked filtering; all navigation identities; generated tooltip provenance; CDN loading; and unchanged URL/scroll/focus behavior. Clearly labeled display fixtures prove presentation, not gameplay or new calculation parity.
+Verify the actual `/world-5/hole` production surface at 1440×1000 with one real save. Focus on compact summary sizes, whole-body tooltip clipping and hover continuity, wheel access to allocation and final shared sources, compact Another Try facts, Lantern locations, and full-opacity Study bodies/artwork with truthful participation borders.
 
-For the selected copy/culling revision, exercise all 18 Study cards and cavern-local benefits. Verify that removed conditional rules, authored caveats, and secondary arithmetic are absent. Check retained Jar, Wisdom, Fountain, Harp, and Cove benefits; all six exact generated tooltips; visible unavailable reasons; and preservation of card density, bars, art, opacity, the single Opal ratio, search/filter, and local navigation. Earlier reference renders and broader checks remain prior evidence, not fresh passes.
+Use clearly labeled provider-clone display fixtures for negative/fractional adjustments; missing totals, sources, allocation, and reset inputs; locked/unaffordable resets; alternate/missing Lantern locations; unknown access/participation; claim readiness; and missing Study progress, level, or benefit. These fixtures prove presentation, not gameplay or fresh calculation parity.
 
-Capture actual incumbent surfaces where reachable and report reference-loading failures without repairing unrelated work. Preserve production/source/save hashes and the exact disposable source in private run artifacts. Remove the runnable throwaways after checks. This preview does not prove changed production behavior. Fresh human approval must precede production execution. Approval history and exercised-check limits belong in the [current handoff](hole-research-brief.md#current-handoff).
+Preserve the 3+2 villager grid, all 18 Study/art/navigation identities, 8px progress bars, all six exact generated descriptions, local navigation, and unchanged URL. Retain scenario and production source, errors, and before/after preservation records in private artifacts. Record completed commands, captures, numerical observations, failures, and check limits only in the [current handoff](hole-research-brief.md#current-handoff).
 
-## Rendered preview references
-
-Latest selected copy/culling preview: `.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/`.
-
-- [Dense Villagers and compact resource summary](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/01-villagers-and-resources.png).
-- [Studies: concise benefits, progress bars, names, and verified art](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/02-study-top.png).
-- [Jar chance, concise cross-skilling, and Wisdom attempts](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/03-study-middle.png).
-- [Wisdom, Fountain production, and useful Cove progression](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/04-study-bottom.png).
-- [Cavern-local Jar benefit](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/09-cavern-10-jars.png), [Wisdom benefit](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/09-cavern-12-wisdom.png), and [Fountain benefit](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/09-cavern-15-fountain.png).
-- [Visible missing-input reason with concise cross-skilling](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/13-missing-benefit-cavern-1.png).
-- [Genuine materialized Bell description](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/07-genuine-study-tooltip-4.png).
-- [Name-only cavern rail and neutral Jars art](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/15-jars-neutral-art.png).
-- Incumbent captures: [Anvil](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-anvil.png), [Cooking](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-cooking.png), [Research](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-research.png), [Sneaking](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-sneaking-upgrades.png), [Legend Talents](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-legend-talents.png), and [Stamps](../../.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/reference-stamps.png).
-
-The latest [focused evidence](../../.ui-verification/runs/2026-10-14T05-32-49-810Z-84398/hole-study-copy-focused-evidence.json) passes **145 check groups**, with **35 captures**, all 18 CDN image records, and five native scroll transitions. It checks all 18 Study and cavern-local benefits, all six exact generated tooltip bodies, and visible unavailable reasons. Two earlier failed attempts remain recorded; only private harness assumptions changed afterward. Tooltip captures do not reliably show the popup; exact visible-body assertions and the earlier Bell render supply the tooltip evidence. The missing-level catalogue locator capture is scroll-clipped, not a full visual catalogue.
-
-Earlier composition/reference evidence remains under `.ui-verification/runs/2026-10-14T05-09-42-371Z-23098/`: 41 captures, 22 passing groups, and two hidden-checkbox harness failures. The [visible-label confirmation](../../.ui-verification/runs/2026-10-14T05-13-54-775Z-36323/hole-dense-filter-confirm-evidence.json) passed six checks. Reference captures establish styling, not settled account values; these older checks were not rerun as new reference verification.
-
-Latest exact disposable source is preserved in `disposable-preview.tar.gz` and `sources/` in the latest focused run. Original source, verified image map, source-art contact sheet, and earlier combined evidence remain under `.ui-verification/hole-dense-plan-20261014/`. Runnable previews/scenarios were removed. Production and real-save bytes remain unchanged. See the [selected copy/culling handoff](hole-research-brief.md#selected-study-copy-and-arithmetic-revision) for commands, runtime errors, retained failures, approval gate, and check limits.

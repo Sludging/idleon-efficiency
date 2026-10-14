@@ -175,14 +175,21 @@ export default function HoleContent() {
     const sharedGrowth = (rates[0]?.[0]?.contributors ?? []).filter(row =>
         !["EXP per invested Opal", "Invested Opals", "Role multiplier", "Purchased EXP multiplier", "Opal Enthusiasm", "Villager Statue"].includes(row.source)
         && (row.value === null || row.unavailableReason || (row.unit === "percent" ? row.value !== 0 : row.unit === "multiplier" && row.value !== 1)));
-    const sharedGrowthText = sharedGrowth.map(row => {
+    const sharedGrowthRows = sharedGrowth.map(row => {
         const source = row.source.replace(/ Villager EXP$/, "");
         const name = source === "Legend" ? "Legend Talents" : source === "Pristine" ? "Pristine Charm"
             : source === "Collectible" ? "Jar collectibles" : source === "Arcane" ? "Tesseract" : source;
-        return `${name}: ${precise(row.unavailableReason ? null : row.value, row.unit === "multiplier" ? "×" : "%", row.unavailableReason)}`;
-    }).join("; ");
+        const value = row.unavailableReason ? null : row.value;
+        return { name, value: precise(value, row.unit === "multiplier" ? "×" : "%", row.unavailableReason) };
+    });
     const ledger = hole.opalLedger;
     const usefulLocations = hole.lanterns.locations.filter(location => location.quantity === null || location.quantity !== 0);
+    const usefulOpalSources = ledger.sources.filter(source => source.opals === null || source.opals !== 0);
+    const anotherTryState = hole.anotherTry.access === false ? "Locked"
+        : hole.anotherTry.access === null ? "Unavailable: Saved Lamp access is missing"
+            : hole.anotherTry.availableWishes === null || hole.anotherTry.affordable === null ? "Unavailable: Saved wish balance is missing"
+                : hole.anotherTry.affordable ? ""
+                    : `Not enough wishes (${exact(hole.anotherTry.availableWishes)} owned)`;
     const studies = hole.studies.map(study => {
         const effects = study.getEffects();
         const effectSearch = effects.map(effect => effect.key.replace(/-/g, " ")).join(" ");
@@ -194,22 +201,43 @@ export default function HoleContent() {
     return <Box gap="small" data-testid="hole-ready" style={{ minWidth: 0, fontVariantNumeric: "tabular-nums" }}>
         <Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading>
         <Box direction="row" gap="large" wrap align="center" data-testid="resource-summary">
-            <Box direction="row" gap="small" align="center"><IconImage data={Item.getImageData("Opal")} /><Text weight="bold">Opals</Text><Text data-testid="opal-ratio">{ledger.uninvested === null || ledger.earned === null ? number(null, ledger.unavailableReason ?? "Saved Opal totals are missing.") : `${number(ledger.uninvested)} / ${number(ledger.earned)} available`}</Text></Box>
-            <Box direction="row" gap="small" align="center"><IconImage data={Item.getImageData("Quest90")} /><Text weight="bold">Lanterns</Text>
-                <TipDisplay heading="Lantern stock" maxWidth="420px" body={<Box gap="xsmall" data-testid="lantern-tip-body">
-                    {usefulLocations.map(location => <Text key={location.kind === "storage" ? "storage" : location.playerId} data-testid="lantern-location">{location.kind === "storage" ? "Storage" : `${location.playerName} inventory`}: {exact(location.quantity, location.unavailableReason)}</Text>)}
-                    {usefulLocations.length === 0 && <Text>Total stock: {exact(hole.lanterns.totalStock, "Saved Lantern locations are missing.")}.</Text>}
-                </Box>}><Box direction="row" gap="xsmall" align="center" data-testid="lantern-tip"><TextAndLabel label="Stock" text={number(hole.lanterns.totalStock, hole.lanterns.locations.find(location => location.quantity === null)?.unavailableReason ?? "Saved Lantern locations are missing.")} /><CircleInformation size="small" /></Box></TipDisplay>
-                <Text data-testid="lantern-uses">{number(hole.lanterns.usesToday, hole.lanterns.usageUnavailableReason)} / {hole.lanterns.dailyLimit} today</Text>
-                <TipDisplay heading="Lantern effect" maxWidth="440px" body={<Text data-testid="lantern-effect-tip-body">Advances: {hole.lanterns.advances.join("; ")}. Excludes: {hole.lanterns.excludes.join("; ")}.</Text>}><Box direction="row" gap="xsmall" align="center" data-testid="lantern-effect-tip"><Text>+{hole.lanterns.hoursPerUse} hours</Text><CircleInformation size="small" /></Box></TipDisplay>
+            <TipDisplay heading="Opal sources and allocation" size="small" maxWidth="560px" body={<Box gap="small" data-testid="opal-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                {["Caverns", "Other sources"].map(group => <Box key={group} gap="xxsmall" flex={false}>
+                    <Text size="xsmall" weight="bold">{group}</Text>
+                    {usefulOpalSources.filter(source => source.owner.startsWith("cavern:") === (group === "Caverns")).map(source => <Grid columns={["minmax(0, 1fr)", "auto"]} gap="small" key={source.id} data-testid={`opal-source-${source.id}`}>
+                        <Text size="xsmall">{source.owner.startsWith("cavern:") && cavernArt[Number(source.owner.split(":")[1])] ? cavernArt[Number(source.owner.split(":")[1])].name : source.name.replace(/_/g, " ").replace(/\b[A-Z][A-Z]+\b/g, word => word[0] + word.slice(1).toLowerCase())}</Text>
+                        <Text size="xsmall">{exact(source.opals, source.unavailableReason)}</Text>
+                    </Grid>)}
+                </Box>)}
+                {ledger.emperorSchematicFloorAdjustment !== 0 && <Text size="xsmall" data-testid="opal-floor-adjustment">Emperor + schematic floor adjustment: {exact(ledger.emperorSchematicFloorAdjustment, ledger.unavailableReason)}</Text>}
+                {ledger.externalRoundingAdjustment !== 0 && <Text size="xsmall" data-testid="opal-rounding-adjustment">External subtotal rounding adjustment: {exact(ledger.externalRoundingAdjustment, ledger.unavailableReason)}</Text>}
+                <Text size="xsmall" data-testid="equal-spread">Equal Spread: {precise(hole.allocationEffects.equalSpreadPercent, "%", hole.allocationEffects.equalSpreadUnavailableReason)}. Minimum unlocked-villager investment: {exact(hole.allocationEffects.leastUnlockedInvestment, hole.allocationEffects.unavailableReason)} Opals.</Text>
+                {ledger.unavailableReason && <Text size="xsmall">{number(null, ledger.unavailableReason)}</Text>}
+            </Box>}>
+                <Box direction="row" gap="xsmall" align="center" data-testid="opal-tip"><IconImage data={Item.getImageData("Opal")} scale={0.75} /><Text size="small">Opals</Text><Text size="small" data-testid="opal-ratio">{ledger.uninvested === null || ledger.earned === null ? number(null, ledger.unavailableReason ?? "Saved Opal totals are missing.") : `${number(ledger.uninvested)} / ${number(ledger.earned)} available`}</Text><CircleInformation size="12px" /></Box>
+            </TipDisplay>
+            <Box direction="row" gap="xsmall" align="center"><IconImage data={Item.getImageData("Quest90")} scale={0.75} /><Text size="small">Lanterns</Text>
+                <TipDisplay heading="Lantern stock" size="small" maxWidth="420px" body={<Box gap="xxsmall" data-testid="lantern-tip-body">
+                    {usefulLocations.map(location => <Text size="xsmall" key={location.kind === "storage" ? "storage" : location.playerId} data-testid="lantern-location">{location.kind === "storage" ? "Storage" : `${location.playerName} inventory`}: {exact(location.quantity, location.unavailableReason)}</Text>)}
+                    {usefulLocations.length === 0 && <Text size="xsmall">Total stock: {exact(hole.lanterns.totalStock, "Saved Lantern locations are missing.")}.</Text>}
+                </Box>}><Box direction="row" gap="xsmall" align="center" data-testid="lantern-tip"><Text size="small">{number(hole.lanterns.totalStock, hole.lanterns.locations.find(location => location.quantity === null)?.unavailableReason ?? "Saved Lantern locations are missing.")}</Text><CircleInformation size="12px" /></Box></TipDisplay>
+                <Text size="small" data-testid="lantern-uses">{number(hole.lanterns.usesToday, hole.lanterns.usageUnavailableReason)} / {hole.lanterns.dailyLimit} today</Text>
             </Box>
         </Box>
         <Box data-testid="hole-feature" gap="small">
             <Box data-testid="hole-tabs"><ContentTabs<Tab> options={[{ value: "Villagers", label: "Villagers" }, { value: "Upgrades", label: "Upgrades" }, { value: "Caverns", label: "Caverns" }]} value={tab} onChange={setTab} /></Box>
             {tab === "Villagers" && <Box gap="small" data-testid="villagers-panel">
-                <TipDisplay heading="Shared growth bonuses" body={<Text data-testid="shared-growth-tip-body">{sharedGrowthText || "No nonzero shared bonuses available."}</Text>} maxWidth="420px">
-                    <Box direction="row" gap="xsmall" align="center" data-testid="shared-growth-tip"><Text size="small">Shared growth bonuses</Text><CircleInformation size="small" /></Box>
-                </TipDisplay>
+                <Box direction="row" gap="medium" align="center" wrap>
+                    <TipDisplay heading="Shared growth bonuses" size="small" body={<Box gap="xxsmall" data-testid="shared-growth-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                        {sharedGrowthRows.map(row => <Grid columns={["minmax(0, 1fr)", "auto"]} gap="small" key={row.name}><Text size="xsmall">{row.name}</Text><Text size="xsmall">{row.value}</Text></Grid>)}
+                        {sharedGrowthRows.length === 0 && <Text size="xsmall">No nonzero shared bonuses available.</Text>}
+                    </Box>} maxWidth="420px">
+                        <Box direction="row" gap="xsmall" align="center" data-testid="shared-growth-tip"><Text size="small">Shared growth bonuses</Text><CircleInformation size="12px" /></Box>
+                    </TipDisplay>
+                    <TipDisplay heading="Another Try" size="small" maxWidth="460px" body={<Box gap="small" data-testid="another-try-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                        {hole.anotherTry.resets.map(reset => <Box key={reset.category} gap="xxsmall"><Text size="xsmall" weight="bold">{reset.category}</Text><Text size="xsmall">Clears: {reset.clears.join("; ")}.</Text><Text size="xsmall">Retains: {reset.retains.join("; ")}.</Text></Box>)}
+                    </Box>}><Box direction="row" gap="xsmall" align="center" data-testid="another-try-tip"><Text size="small">Another Try: {exact(hole.anotherTry.wishCost)} wishes{anotherTryState ? ` · ${anotherTryState}` : ""}</Text><CircleInformation size="12px" /></Box></TipDisplay>
+                </Box>
                 {!equal && <Box direction="row" gap="small" align="center"><Text size="small">{complete ? "Character rates differ" : "Some character rates are unavailable. Ranges show available contexts only."}</Text><select data-testid="inspect-character" aria-label="Inspect character rates" value={characterId ?? ""} onChange={event => setCharacterId(event.target.value === "" ? null : Number(event.target.value))} style={{ font: "inherit", color: "inherit", background: "#1E2127", padding: "8px" }}><option value="">Choose a character (optional)</option>{characters.map(character => <option key={character.playerId} value={character.playerId}>{character.playerName}</option>)}</select></Box>}
                 <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small" data-testid="villager-grid">{hole.villagers.map(villager => {
                     const rows = rates[villager.index];
@@ -248,13 +276,6 @@ export default function HoleContent() {
                         {villager.claimReady === null && <Text size="small">{number(null, villager.requirementUnavailableReason ?? "Saved progression is missing.")}</Text>}
                     </ShadowBox>;
                 })}</Grid>
-                <details data-testid="opal-sources"><summary style={{ cursor: "pointer" }}>Opal sources and allocation</summary><Box background="dark-1" pad="medium" gap="small" margin={{ top: "small" }}>
-                    {ledger.sources.filter(source => source.opals === null || source.opals !== 0).map(source => <Box direction="row" justify="between" key={source.id} data-testid={`opal-source-${source.id}`}><Text size="small">{source.owner.startsWith("cavern:") && cavernArt[Number(source.owner.split(":")[1])] ? cavernArt[Number(source.owner.split(":")[1])].name : source.name.replace(/_/g, " ").replace(/\b[A-Z][A-Z]+\b/g, word => word[0] + word.slice(1).toLowerCase())}</Text><Text size="small">{exact(source.opals, source.unavailableReason)}</Text></Box>)}
-                    {ledger.emperorSchematicFloorAdjustment !== 0 && <Text size="small" data-testid="opal-floor-adjustment">Emperor + schematic floor adjustment: {exact(ledger.emperorSchematicFloorAdjustment, ledger.unavailableReason)}</Text>}
-                    {ledger.externalRoundingAdjustment !== 0 && <Text size="small" data-testid="opal-rounding-adjustment">External subtotal rounding adjustment: {exact(ledger.externalRoundingAdjustment, ledger.unavailableReason)}</Text>}
-                    <Text size="small" data-testid="equal-spread">Equal Spread: {precise(hole.allocationEffects.equalSpreadPercent, "%", hole.allocationEffects.equalSpreadUnavailableReason)}. Minimum unlocked-villager investment: {number(hole.allocationEffects.leastUnlockedInvestment, hole.allocationEffects.unavailableReason)} Opals.</Text>
-                    <TipDisplay heading="Another Try" maxWidth="460px" body={<Box gap="small" data-testid="another-try-tip-body">{hole.anotherTry.resets.map(reset => <Box key={reset.category}><Text weight="bold">{reset.category}</Text><Text>Clears: {reset.clears.join("; ")}.</Text><Text>Retains: {reset.retains.join("; ")}.</Text></Box>)}</Box>}><Box direction="row" gap="xsmall" align="center" data-testid="another-try-tip"><Text size="small">Another Try: {exact(hole.anotherTry.wishCost)} wishes · {number(hole.anotherTry.availableWishes, "Saved wish balance is missing.")} owned · {hole.anotherTry.access === null ? "Availability unavailable" : hole.anotherTry.access ? "Available" : "Not available"} · {hole.anotherTry.affordable === null ? "Affordability unavailable" : hole.anotherTry.affordable ? "Affordable" : "Not affordable"}</Text><CircleInformation size="small" /></Box></TipDisplay>
-                </Box></details>
             </Box>}
             {tab === "Upgrades" && <ShadowBox flex={false} data-testid="upgrades-panel"><Grid rows="1" columns={["25%", "75%"]}>
                 <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => setUpgrade(name)} /></Box>)}</Box>
@@ -282,11 +303,11 @@ export default function HoleContent() {
 }
 
 function StudyCard({ study, effects }: { study: Study; effects: StudyEffect[] }) {
-    const dim = study.access === false || (study.access === true && study.participation === "inactive");
+    const active = study.access === true && (study.participation === "target" || study.participation === "neighbor");
     const description = study.levelAvailable && study.level >= 1 && genuineTips.has(study.index) ? study.getDescription().replace(/_/g, " ") : null;
     const art = <Box direction="row" gap="xxsmall" align="center" data-testid={`study-art-${study.index}`}><CavernImage index={study.index} />{description !== null && <CircleInformation size="small" />}</Box>;
-    return <ShadowBox background="dark-1" pad="medium" gap="small" data-testid={`study-card-${study.index}`} data-participation={study.participation} data-access={String(study.access)} style={{ minWidth: 0 }}>
-        <Box gap="small" style={{ opacity: dim ? 0.6 : 1 }} data-testid={`study-body-${study.index}`}>
+    return <ShadowBox background="dark-1" pad="medium" gap="small" border={active ? { color: "green-1", size: "1px" } : undefined} data-testid={`study-card-${study.index}`} data-participation={study.participation} data-access={String(study.access)} style={{ minWidth: 0 }}>
+        <Box gap="small" style={{ opacity: 1 }} data-testid={`study-body-${study.index}`}>
             <Box direction="row" gap="small" align="center">{description !== null ? <TipDisplay heading={`${cavernArt[study.index].name} Study`} body={<Text data-testid={`study-tip-body-${study.index}`}>{description}</Text>} maxWidth="420px"><Box data-testid={`study-tip-${study.index}`}>{art}</Box></TipDisplay> : art}<Box flex><Text>{cavernArt[study.index].name}</Text><Text size="large" data-testid={`study-level-${study.index}`}>Level {number(study.levelAvailable ? study.level : null, "Saved Study level is missing.")}</Text></Box></Box>
             <Benefit index={study.index} effects={effects} dailyPurchases={study.dailyCoveUpgradesPurchased} />
             <Progress current={study.progressAvailable ? study.progress : null} required={study.getRequirement()} requiredReason="Saved Study level is missing." label="Progress to next level" testId={`study-progress-${study.index}`} />
