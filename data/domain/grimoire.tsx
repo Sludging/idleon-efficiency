@@ -925,7 +925,7 @@ export const updateGrimoireEfficiency = (accountData: Map<string, any>) => {
                 grimoire.bestDeathBringer = deathBringer;
 
                 // Set ETC bonus 76 from Death Bringer equipment (EXTRA_BONES)
-                grimoire.etcBonus76 = deathBringer.getEquipmentBonus(EquipmentBonus.ExtraBones);
+                grimoire.etcBonus76 = deathBringer.gear.getBonus(EquipmentBonus.ExtraBones);
             }
 
             // Set pristine bonus 18 from sneaking

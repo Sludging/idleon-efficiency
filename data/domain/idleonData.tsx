@@ -4,6 +4,7 @@ import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
+import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
@@ -359,6 +360,8 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    // Equipment and Obol attribute modifiers consume each character's final talent context.
+    "equipmentProperties": (_doc: Cloudsave, accountData: Map<string, any>) => updateEquipmentProperties(accountData),
     "goldenFood": (_doc: Cloudsave, accountData: Map<string, any>) => updateGoldenFood(accountData),
     // Prepare each character's normal maxima before player-aware efficiency consumers.
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),

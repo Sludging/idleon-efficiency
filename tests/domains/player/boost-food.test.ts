@@ -46,7 +46,9 @@ const parameterSpecs: {
   },
   {
     key: 'equipmentFoodEffect', description: 'equipment food effectiveness',
-    getValue: (_gameData, player) => player.getEquipmentBonus(EquipmentBonus.FoodEffect),
+    getValue: (_gameData, player) => {
+      return player.gear.getBonus(EquipmentBonus.FoodEffect);
+    },
   },
   {
     key: 'boostFoodStamp', description: 'boost-food stamp effectiveness',

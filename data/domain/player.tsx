@@ -2,8 +2,9 @@ import { StarSignMap, StarSign, StarSigns } from './starsigns';
 import { Box, initPostOffice, PostOfficeConst } from './world-2/postoffice';
 import { ClassIndex, Talent, ClassTalentMap, GetTalentArray, TalentConst, ApocalypseChowTalent, EnhancedTalent, BloodMarrowTalent, type TalentLevelInputs } from './talents';
 import { Card, CardInfo } from "./cards";
-import { Item, Food, Tool, StoneProps } from "./items";
-import { EquipmentBonus, getEquipmentEffect } from './equipment-effects';
+import { Item } from "./items";
+import { EquipmentBonus } from './equipment-effects';
+import { PlayerEquipment } from './equipment';
 import type { GoldenFood } from './golden-food';
 import { lavaLog, notUndefined, range } from '../utility';
 import { Cloudsave } from "./cloudsave";
@@ -23,7 +24,7 @@ import { Stamp, StampConsts, StampTab } from "./world-1/stamps";
 import { Achievement } from "./achievements";
 import { safeJsonParse } from "./idleonData";
 import { Arcade } from "./world-2/arcade";
-import { ObolsData, ObolStats } from "./world-2/obols";
+import { ObolsData } from "./world-2/obols";
 import { ImageData } from "./imageData";
 import { Sigils } from "./world-2/alchemy/sigils";
 import { SkillsIndex } from './SkillsIndex';
@@ -58,7 +59,6 @@ import { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import { PlayerHealth } from './player-health';
 import type { CoralKid } from './world-7/coralKid';
 export type { TalentLevelInputs } from './talents';
-const normalizeEquipmentEffect = (effect: string): string => effect.toUpperCase().replace(/_/g, ' ');
 
 export class PlayerStats {
     strength: number = 0;
@@ -76,17 +76,6 @@ export class PlayerStats {
     }
 }
 
-export class PlayerEquipment {
-    equipment: Array<Item | undefined>;
-    tools: Array<Tool | undefined>;
-    food: Array<Food | undefined>;
-
-    constructor() {
-        this.equipment = [];
-        this.tools = [];
-        this.food = [];
-    }
-}
 
 export class SkillData {
     constructor(public level: number, public currentXP: number, public xpReq: number) { }
@@ -166,10 +155,6 @@ export class Player {
         chips: [...Array(chipSlotReq.length)].map((_, index) => new ChipSlot(undefined, chipSlotReq[index])),
     };
     killInfo: Map<number, number> = new Map();
-    obolStats: ObolStats[] = [];
-    private equipmentBonusGallery!: Gallery;
-    private equipmentBonusHatRack!: HatRack;
-    private equipmentBonusResearch!: ResearchGrid;
     // Stats
     doubleClaimChance: Stat = new Stat("Double XP Chance", "%");
     monsterCash: Stat = new Stat("Monster Cash", "x");
@@ -406,100 +391,13 @@ export class Player {
         return bonus;
     }
 
-    bindEquipmentBonusDependencies = (gallery: Gallery, hatRack: HatRack, research: ResearchGrid): void => {
-        this.equipmentBonusGallery = gallery;
-        this.equipmentBonusHatRack = hatRack;
-        this.equipmentBonusResearch = research;
-    }
-
-    getEquipmentBonus = (bonus: EquipmentBonus, inDungeon: boolean = false): number => {
-        const gallery = this.equipmentBonusGallery;
-        const hatRack = this.equipmentBonusHatRack;
-        const research = this.equipmentBonusResearch;
-
-        const effect = getEquipmentEffect(bonus);
-        if (effect === undefined) {
-            return 0;
-        }
-
-        const galleryUnlocked = gallery.isUnlocked(this);
-        const hatRackUnlocked = hatRack.isUnlocked(this);
-        // Research boosts only the final equipment slot.
-        const researchBonus = research.getBonusForId(172);
-        let equipmentBonus = 0;
-        const addItemBonus = (item: Item | undefined, slot: number, row: 0 | 1): void => {
-            if (!item || item.internalName == "Blank" || (inDungeon && !item.internalName.includes("Dung"))) {
-                return;
-            }
-            // Gallery replaces the trophy and nametag slots after this character unlocks its portal.
-            if (row == 0 && galleryUnlocked && (slot == 10 || slot == 14)) {
-                return;
-            }
-            // Hat Rack replaces the premium-hat slot after this character unlocks its portal.
-            if (row == 0 && hatRackUnlocked && slot == 8) {
-                return;
-            }
-
-            // Pendant, upper-keychain and trophy chips double bonuses in their matching slot.
-            const chipDoubles = row == 0 && (
-                (slot == 3 && this.getChipBonus("pend") == 1) ||
-                (slot == 9 && this.getChipBonus("key1") == 1) ||
-                (slot == 10 && this.getChipBonus("troph") == 1)
-            );
-            const multiplier = chipDoubles
-                ? 2
-                : row == 0 && slot == 15 && researchBonus >= 1
-                    ? 1 + researchBonus / 100
-                    : 1;
-
-            // Include both item bonuses and upgrade-stone bonuses.
-            for (const stat of item.itemStats) {
-                if ((stat.stoneName != "UQ1val" && stat.stoneName != "UQ2val" && stat.stoneName != "Nothing") || !stat.extra || stat.extra == "0") {
-                    continue;
-                }
-                if (normalizeEquipmentEffect(stat.extra) == effect) {
-                    // Add bonuses separately to preserve the game's arithmetic order.
-                    equipmentBonus += stat.getValue() * multiplier;
-                }
-            }
-        };
-
-        for (let slot = 0; slot < Math.min(16, this.gear.equipment.length); slot++) {
-            addItemBonus(this.gear.equipment[slot], slot, 0);
-        }
-        for (let slot = 0; slot < Math.min(8, this.gear.tools.length); slot++) {
-            addItemBonus(this.gear.tools[slot], slot, 1);
-        }
-
-        // Game order is equipment/tools, Gallery trophy, Gallery nametag, then Hat Rack.
-        if (galleryUnlocked) {
-            equipmentBonus += gallery.getTrophyBonus(effect, this);
-            equipmentBonus += gallery.getNametagBonus(effect, this);
-        }
-        if (hatRackUnlocked) {
-            equipmentBonus += hatRack.getBonus(effect, this);
-        }
-
-        if (!inDungeon) {
-            // Personal and family obol bonuses are already combined; add them only outside dungeons.
-            for (const group of this.obolStats) {
-                for (const stat of group.stats) {
-                    if (normalizeEquipmentEffect(stat.extra) == effect) {
-                        equipmentBonus += stat.getValue();
-                    }
-                }
-            }
-        }
-
-        return equipmentBonus;
-    }
 
 
 
     setMonsterCash = (strBubbleBonus: number, wisBubbleBonus: number, agiBubbleBonus: number, mealBonus: number,
         petArenaBonus1: number, petArenaBonus2: number, labBonus: number, pristineBonus: number, vialBonus: number, dungeonBonus: number, guildBonus: number,
         prayers: Prayer[], arcadeBonus: number, goldenFood: GoldenFood) => {
-        const gearBonus = this.getEquipmentBonus(EquipmentBonus.Money);
+        const gearBonus = this.gear.getBonus(EquipmentBonus.Money);
         const goldenFoodBonus = goldenFood.getMonsterCash(this);
         const cardBonus = Card.GetTotalBonusForId(this.cardInfo?.equippedCards ?? [], 11);
         const poBox = this.postOffice.find(box => box.index == 13);
@@ -763,7 +661,9 @@ export class Player {
 }
 
 const keyFunctionMap: Record<string, Function> = {
-    "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => parseEquipment(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), player, allItems),
+    "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => {
+        player.gear = PlayerEquipment.parse(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), allItems);
+    },
     "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
     "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
@@ -922,57 +822,6 @@ const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, s
     player.classExpReq = skillXPReqs[0];
 }
 
-const parseEquipment = (
-    equipment: Array<Record<number, string>>,
-    equipCount: Array<Record<number, number>>,
-    equipStones: Record<number, StoneProps>,
-    toolStones: Record<number, StoneProps>,
-    player: Player,
-    allItems: Item[]
-) => {
-    const playerEquipment = new PlayerEquipment();
-    equipment?.forEach((data, equipIndex) => {
-        if (equipIndex == 0) { // armor 
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
-                if (theItem) {
-                    theItem.addStone(equipStones[Number(location)])
-                }
-                else if (name != "Blank") {
-                    console.log("Armor not found", name, location);
-                }
-                playerEquipment.equipment.push(theItem);
-            })
-        }
-        if (equipIndex == 1) { // tools
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const theItem = allItems.find((item) => item.internalName == name)?.duplicate();
-                if (theItem) {
-                    theItem.addStone(toolStones[Number(location)])
-                }
-                else if (name != "Blank") {
-                    console.log("Tool not found", name, location);
-                }
-                playerEquipment.tools.push(theItem);
-
-            })
-        }
-        if (equipIndex == 2) { // food
-            Object.entries(data).filter(([location, _]) => location != "length").forEach(([location, name], _) => {
-                const item = allItems.find(item => item.internalName == name)?.duplicate() as Food | undefined;
-                if (item) {
-                    item.count = equipCount[equipIndex][Number(location)];
-                }
-                else if (name != "Blank") {
-                    console.log("Food not found", name, location);
-                }
-                playerEquipment.food[Number(location)] = item;
-            })
-        }
-    });
-
-    player.gear = playerEquipment;
-}
 
 export class Players extends Domain {
     getRawKeys(): RawData[] {
@@ -1457,32 +1306,19 @@ export const updatePlayers = (data: Map<string, any>) => {
         }
     })
 
-    // Reset data, next section will calculate it.
-    players.forEach(player => player.obolStats = []);
-
-    // Update player obols info so we can use it in maths
-    players.forEach(player => {
-        obols.playerStats[player.playerID]?.stats.filter(stat => stat.getValue() > 0).forEach(stat => {
-            const matchingFamilyStat = obols.familyStats.stats.find(famStat => stat.extra == '' ? famStat.displayName == stat.displayName : stat.extra == famStat.extra && famStat.getValue() > 0);
-            const newObolStat = new ObolStats();
-            newObolStat.addStat(stat);
-            if (matchingFamilyStat) {
-                newObolStat.addStat(matchingFamilyStat);
-            }
-            player.obolStats.push(newObolStat);
-        })
-        obols.familyStats.stats.filter(stat => obols.playerStats[player.playerID].stats.find(playerStat => stat.extra == '' ? playerStat.displayName == stat.displayName : stat.extra == playerStat.extra) == undefined)
-            .filter(stat => stat.shouldDisplay() && stat.getValue() > 0)
-            .forEach(stat => {
-                const newObolStat = new ObolStats();
-                newObolStat.addStat(stat);
-                player.obolStats.push(newObolStat);
-            });
-    })
+    obols.updateCombinedStats(players);
     const gallery = data.get("gallery") as Gallery;
     const hatRack = data.get("hatRack") as HatRack;
     const research = data.get("research") as ResearchGrid;
-    players.forEach(player => player.bindEquipmentBonusDependencies(gallery, hatRack, research));
+    const finalSlotResearchPercent = research.getBonusForId(172);
+    for (const player of players) {
+        player.gear.updateUniqueEffects(player, { gallery, hatRack, obols: obols.getStats(player.playerID) }, {
+            pendantChip: player.getChipBonus("pend"),
+            upperKeychainChip: player.getChipBonus("key1"),
+            trophyChip: player.getChipBonus("troph"),
+            finalSlotResearchPercent,
+        });
+    }
 
     // I dunno why I have to sort it now, I never had to before. Need to think about it further.
     return players;
@@ -1573,7 +1409,7 @@ export const playerExtraCalculations = (data: Map<string, any>) => {
 
         // Build Speed
         const constructionBubbleBonus = alchemy.getBonusForPlayer(player, CauldronIndex.Power, 12);
-        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.getEquipmentBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
+        player.setBuildSpeed(buildSpeedStampBonus, constructionBubbleBonus, guildBonus5, player.gear.getBonus(EquipmentBonus.BuildSpeed), achievement153, constructionMasteryBonus, vialEquinoxFishBonus, vialTurtleBonus,
             arcadeBonus44, votingBonus18, vaultUpgrade48, sheepiesKilled, bubbaBonus1, atomCollider1, redoxSaltsOwned, winnerBonus13, paletteBonus25);
     });
 

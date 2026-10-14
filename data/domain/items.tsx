@@ -15,6 +15,7 @@ import type { CommonItemModel } from "./model/commonItemModel";
 import type { ConsumableItemModel } from "./model/consumableItemModel";
 import { Card } from "./cards";
 import { EquipmentBonus } from "./equipment-effects";
+import type { ItemProperty } from "./equipment-effects";
 import type { Player } from "./player";
 import type { TalentLevelInputs } from "./talents";
 
@@ -134,7 +135,9 @@ export class ItemStat {
     getDisplay = () => {
         // This is probably, misc? 
         if (this.extra != '') {
-            return `${this.displayName}: ${this.getValue()}${this.extra.replace(/_/g, ' ')}${this.stone != 0 ? ` (${this.stone})` : ''}`;
+            // Stone-only unique effects keep their existing combined display without an upgrade suffix.
+            const stoneOnlyEffect = this.value === 0 && (this.stoneName === 'UQ1val' || this.stoneName === 'UQ2val');
+            return `${this.displayName}: ${this.getValue()}${this.extra.replace(/_/g, ' ')}${this.stone != 0 && !stoneOnlyEffect ? ` (${this.stone})` : ''}`;
         }
         return `${this.displayName}: ${this.getValue()}${this.stone != 0 ? ` (${this.stone})` : ''}`
     }
@@ -221,6 +224,10 @@ export class Item {
             this.itemStats.push(new ItemStat("WIS", "WIS", data.item.WIS));
             this.itemStats.push(new ItemStat("LUK", "LUK", data.item.LUK));
             this.itemStats.push(new ItemStat("Defence", "Defence", data.item.Defence));
+            // Stat items can supply weapon power without being weapons or tools.
+            if (!isArmorModel(data.item) && !isWeaponModel(data.item) && this.weaponPower !== 0) {
+                this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", this.weaponPower));
+            }
             this.itemStats.push(new ItemStat("Upgrade Slots Left", "Upgrade_Slots_Left", data.item.Upgrade_Slots_Left));
 
             // If we have misc but it's not a keychain
@@ -241,7 +248,12 @@ export class Item {
         if (isArmorModel(data.item)) {
             this.skill = data.item.Skill ?? '';
             this.skillPower = data.item.Skill_Power ?? 0;
-            this.itemStats.push(new ItemStat(`${data.item.Skill} Power`, "Weapon_Power", data.item.Skill_Power));
+            // Obols also have skill fields. An empty skill retains their ordinary weapon power.
+            if (this.skill !== '') {
+                this.itemStats.push(new ItemStat(`${this.skill} Power`, "Weapon_Power", this.skillPower));
+            } else if (!isWeaponModel(data.item)) {
+                this.itemStats.push(new ItemStat("Weapon Power", "Weapon_Power", this.weaponPower));
+            }
         }
         if (isWeaponModel(data.item)) {
             this.speed = data.item.Speed ?? 0;
@@ -258,7 +270,16 @@ export class Item {
     }
 
     duplicate = () => {
-        return new Item(this.data);
+        const copy = new Item(this.data);
+        copy.itemStats = this.itemStats.map(stat => stat.duplicate());
+        return copy;
+    }
+
+    getProperty(property: ItemProperty): ItemStat | undefined {
+        for (const stat of this.itemStats) {
+            if (stat.stoneName === property) return stat;
+        }
+        return undefined;
     }
 
 
@@ -272,29 +293,34 @@ export class Item {
         }
 
         Object.keys(data).forEach((key) => {
-            // logic is as follows:
-            // 1. Check if the value is a number, and if it's 0 ignore it.
-            // 2. Check if we already have a stat that matches this value, and if so update it to know about the stone modifications
-            // 3. Else if it's a unique value, it's value is larger then 0 and we don't have a stat that matches the stone name, add it as a new value (this is usually keychains).
-
-            const asNumber = Number(data[key as keyof StoneProps]);
-            // ignore 0 values.
-            if (!isNaN(asNumber) && asNumber == 0) {
+            if (key === "UQ1txt" || key === "UQ2txt") {
+                const stoneName = key === "UQ1txt" ? "UQ1val" : "UQ2val";
+                const value = data[stoneName];
+                const label = data[key];
+                if (label && isNaN(Number(label)) && value !== undefined && value > 0) {
+                    const stat = this.itemStats.find(stat => stat.stoneName === stoneName);
+                    if (!stat) {
+                        this.itemStats.push(new ItemStat("Misc", stoneName, 0, label, value));
+                    } else if (!stat.extra || stat.extra === '0') {
+                        // An empty definition effect can acquire its label from the upgrade.
+                        stat.extra = label;
+                        stat.stone = value;
+                    }
+                }
                 return;
             }
+            const asNumber = Number(data[key as keyof StoneProps]);
+            if (!isNaN(asNumber) && asNumber === 0) return;
 
             const matchingStat = this.itemStats.find((stat) => stat.stoneName == key);
             if (matchingStat) {
                 matchingStat.stone = asNumber;
-            }
-            else {
-                // If this is unique txt, it's actually a text and we have a value for it, add it as a new misc
-                if (key == "UQ1txt" && isNaN(asNumber) && data.UQ1val && data.UQ1val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ1val") == undefined) {
-                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ1val, data.UQ1txt))
-                }
-                if (key == "UQ2txt" && isNaN(asNumber) && data.UQ2val && data.UQ2val > 0 && this.itemStats.find((stat) => stat.stoneName == "UQ2val") == undefined) {
-                    this.itemStats.push(new ItemStat("Misc", "Nothing", data.UQ2val, data.UQ2txt))
-                }
+            } else if (!isNaN(asNumber) && (
+                key === "STR" || key === "AGI" || key === "WIS" || key === "LUK"
+                || key === "Defence" || key === "Weapon_Power" || key === "Reach"
+            )) {
+                // Upgrade-only properties keep their stone contribution and existing display format.
+                this.itemStats.push(new ItemStat(key === "Weapon_Power" ? "Weapon Power" : key, key, 0, '', asNumber));
             }
         })
     }
@@ -521,7 +547,9 @@ export class Equipment extends Item {
     }
 
     override duplicate = () => {
-        return new Equipment(this.data);
+        const copy = new Equipment(this.data);
+        copy.itemStats = this.itemStats.map(stat => stat.duplicate());
+        return copy;
     }
 }
 
@@ -531,7 +559,9 @@ export class Tool extends Item {
     }
 
     override duplicate = () => {
-        return new Tool(this.data);
+        const copy = new Tool(this.data);
+        copy.itemStats = this.itemStats.map(stat => stat.duplicate());
+        return copy;
     }
 }
 
@@ -574,7 +604,7 @@ export class Food extends Item {
         for (const sign of player.starSigns) {
             starSignFoodEffect += sign.getBonus("All Food Effect");
         }
-        const equipmentFoodEffect = player.getEquipmentBonus(EquipmentBonus.FoodEffect);
+        const equipmentFoodEffect = player.gear.getBonus(EquipmentBonus.FoodEffect);
         const cardFoodEffect = Card.GetTotalBonusForId(player.cardInfo!.equippedCards, 48);
         const cardSetFoodEffect = player.cardInfo!.getBonusForId(1);
         const talentFoodEffect = player.getTalentBonusAtInputs(631, talentInputs);
@@ -628,7 +658,9 @@ export class Food extends Item {
     }
 
     override duplicate = () => {
-        return new Food(this.data);
+        const copy = new Food(this.data);
+        copy.itemStats = this.itemStats.map(stat => stat.duplicate());
+        return copy;
     }
 }
 

@@ -256,7 +256,7 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
         goldenFood.updatePlayer(player, sneaking, accountInputs, {
             secretSetPercent: equipmentSets.getSetBonus('SECRET_SET', player, true),
             family: family.getClassBonus(ClassIndex.Shaman)!.getBonus(player),
-            equipment: player.getEquipmentBonus(EquipmentBonus.GoldFoodEffect),
+            equipment: player.gear.getBonus(EquipmentBonus.GoldFoodEffect),
             starSign: player.starSigns.find(sign => sign.name === 'Beanbie Major')?.getBonus('Golden Food') ?? 0,
             alchemy: alchemy.getBubbleBonusForKey('GFoodz', player),
             alchemyBeforeHealth,

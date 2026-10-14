@@ -930,7 +930,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 3: ETC bonus multiplier - specifically for ETC bonus 86 "Tempest Damage"
         let etcBonusMultiplier = 1;
         if (includeEquipment && this.bestWindWalker.gear?.equipment) {
-            etcBonusMultiplier += this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDamage);
+            etcBonusMultiplier += this.bestWindWalker.gear.getBonus(EquipmentBonus.TempestDamage);
         }
         damage *= etcBonusMultiplier;
 
@@ -1195,7 +1195,7 @@ export class Compass extends Domain implements EfficiencyDomain {
         // Step 4: ETC bonus 87 multiplier (1 + EtcBonuses(87) / 100)
         let etcBonus87 = 0;
         if (this.bestWindWalker.gear?.equipment) {
-            etcBonus87 = this.bestWindWalker.getEquipmentBonus(EquipmentBonus.TempestDefence);
+            etcBonus87 = this.bestWindWalker.gear.getBonus(EquipmentBonus.TempestDefence);
         }
         defense *= (1 + etcBonus87 / 100);
 
@@ -1405,8 +1405,8 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
                 compass.bestWindWalker = windWalker;
 
                 // Set ETC bonuses from Wind Walker equipment
-                compass.etcBonus85 = windWalker.getEquipmentBonus(EquipmentBonus.DustMulti);
-                compass.etcBonus79 = windWalker.getEquipmentBonus(EquipmentBonus.ExtraDust);
+                compass.etcBonus85 = windWalker.gear.getBonus(EquipmentBonus.DustMulti);
+                compass.etcBonus79 = windWalker.gear.getBonus(EquipmentBonus.ExtraDust);
             }
 
             // Set pristine bonus 19 from sneaking

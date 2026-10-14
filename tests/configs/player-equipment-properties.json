@@ -1,0 +1,301 @@
+{
+  "description": "Paired target3 M1 source oracle. Replay only TotalStats.1.22.js:26-110,254-352. Gallery initializers always return 1 but can mutate missing maps; require already prepared maps and never call initializers. No cache writes or website helpers.",
+  "target": "M1 Equipment properties and source-owner numerical gates",
+  "extractions": [
+    {
+      "label": "gear_properties",
+      "expression": "(() => {\n const replay = selector => {\n const attr = key => idleon.engine.getGameAttribute(key);\n const number = value => value == null ? 0 : Number(value);\n const owns = (map, key) => Object.prototype.hasOwnProperty.call(map, key);\n const order = attr(\"EquipmentOrder\"), maps = attr(\"EquipmentMap\");\n const definitions = attr(\"ItemDefinitionsGET\").h;\n const suffixes = attr(\"CustomLists\").h.PowerSuffixes;\n const galleryOn = idleon.callFunction(\"Gallery\", \"GalleryBonusSystemON\", 0, 0) == 1;\n const hatOn = idleon.callFunction(\"Gallery\", \"PremHatBonusesSystemON\", 0, 0) == 1;\n const prepared = attr(\"DNSM\").h;\n let total = 0;\n for (let pass = 0; pass < 2; pass++) {\n  for (let slot = 0; slot < 8 + 8 * (1 - pass); slot++) {\n   const name = order[pass][slot];\n   if (name === \"Blank\" || name.includes(\"Dung\") || (pass === 0 && ((galleryOn && (slot === 10 || slot === 14)) || (hatOn && slot === 8)))) continue;\n   let property = selector;\n   if (selector.includes(\"Power\")) {\n    const family = selector.substring(0, selector.indexOf(\"_\"));\n    let selected = false;\n    if (pass === 0) {\n     for (let index = 0; index < suffixes.length; index++) {\n      if (name.includes(suffixes[index])) { selected = suffixes[index] === family; break; }\n      if (index + 1 === suffixes.length && family === \"Weapon\") selected = true;\n     }\n    } else selected = suffixes.indexOf(family) === slot;\n    if (!selected) continue;\n    property = \"Weapon_Power\";\n   }\n   const upgrade = maps[pass][slot].h;\n   total += owns(upgrade, property) ? number(definitions[name].h[property]) + number(upgrade[property]) : number(definitions[name].h[property]);\n  }\n }\n if (galleryOn) {\n  for (const key of [\"GalleryTrophyBonTOT\", \"GalleryNametagBonTOT\"]) {\n   if (!owns(prepared, key)) throw new Error(\"Missing prepared replacement \" + key);\n   if (owns(prepared[key].h, selector)) total += number(prepared[key].h[selector]);\n  }\n }\n if (hatOn) {\n  if (!owns(prepared, \"PremHatBonTOT\")) throw new Error(\"Missing prepared premium-hat replacement\");\n  if (owns(prepared.PremHatBonTOT.h, selector)) total += number(prepared.PremHatBonTOT.h[selector]);\n }\n const primary = {STR:96, AGI:276, WIS:456, LUK:21};\n if (owns(primary, selector)) total *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, primary[selector]) + idleon.callFunction(\"StampBonusOfTypeX\", \"Pct\" + selector)) / 100;\n let obol = 0;\n for (const row of attr(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === selector) obol += number(row[3]);\n const secondary = {STR:111, AGI:291, WIS:486, LUK:36};\n if (owns(secondary, selector)) obol *= 1 + (idleon.callFunction(\"GetTalentNumber\", 1, secondary[selector]) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100;\n return total + obol;\n };\n const result = {};\n for (const selector of [\"STR\", \"AGI\", \"WIS\", \"LUK\", \"Defence\", \"Accuracy\", \"Weapon_Power\", \"Mining_Power\", \"Choppin_Power\", \"Fishing_Power\", \"Catching_Power\", \"Trapping_Power\", \"Worship_Power\"]) result[selector] = replay(selector);\n return result;\n})()",
+      "description": "Thirteen normal gear contributions from one local source replay of TotalStats.1.22.js:26-110,254-352. Source order and modifier arithmetic remain unchanged."
+    },
+    {
+      "label": "obol_raw_STR",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"STR\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol STR; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_STR",
+      "expression": "((() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"STR\") total += Number(row[3]); return total; })()) * (1 + (idleon.callFunction(\"GetTalentNumber\", 1, 111) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100)",
+      "description": "Obol STR contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_AGI",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"AGI\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol AGI; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_AGI",
+      "expression": "((() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"AGI\") total += Number(row[3]); return total; })()) * (1 + (idleon.callFunction(\"GetTalentNumber\", 1, 291) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100)",
+      "description": "Obol AGI contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_WIS",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"WIS\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol WIS; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_WIS",
+      "expression": "((() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"WIS\") total += Number(row[3]); return total; })()) * (1 + (idleon.callFunction(\"GetTalentNumber\", 1, 486) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100)",
+      "description": "Obol WIS contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_LUK",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"LUK\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol LUK; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_LUK",
+      "expression": "((() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"LUK\") total += Number(row[3]); return total; })()) * (1 + (idleon.callFunction(\"GetTalentNumber\", 1, 36) + 40 * idleon.callFunction(\"GamingStatType\", \"SuperBitType\", 2, 0)) / 100)",
+      "description": "Obol LUK contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Defence",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Defence\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Defence; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Defence",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Defence\") total += Number(row[3]); return total; })()",
+      "description": "Obol Defence contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Accuracy",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Accuracy\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Accuracy; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Accuracy",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Accuracy\") total += Number(row[3]); return total; })()",
+      "description": "Obol Accuracy contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Weapon_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Weapon_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Weapon_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Weapon_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Weapon_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Weapon_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Mining_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Mining_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Mining_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Mining_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Mining_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Mining_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Choppin_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Choppin_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Choppin_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Choppin_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Choppin_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Choppin_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Fishing_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Fishing_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Fishing_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Fishing_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Fishing_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Fishing_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Catching_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Catching_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Catching_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Catching_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Catching_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Catching_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Trapping_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Trapping_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Trapping_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Trapping_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Trapping_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Trapping_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "obol_raw_Worship_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Worship_Power\") total += Number(row[3]); return total; })()",
+      "description": "Combined personal/family Obol Worship_Power; row columns are collection passes, not base and upgrade."
+    },
+    {
+      "label": "obol_adjusted_Worship_Power",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"Worship_Power\") total += Number(row[3]); return total; })()",
+      "description": "Obol Worship_Power contribution after its source-owned attribute modifier."
+    },
+    {
+      "label": "trophy_STR",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
+      "description": "Already prepared trophy raw STR; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "trophy_AGI",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
+      "description": "Already prepared trophy raw AGI; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "trophy_WIS",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
+      "description": "Already prepared trophy raw WIS; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "trophy_LUK",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
+      "description": "Already prepared trophy raw LUK; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "trophy_Defence",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
+      "description": "Already prepared trophy raw Defence; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "trophy_Weapon_Power",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
+      "description": "Already prepared trophy raw Weapon_Power; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_STR",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
+      "description": "Already prepared nametag raw STR; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_AGI",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
+      "description": "Already prepared nametag raw AGI; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_WIS",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
+      "description": "Already prepared nametag raw WIS; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_LUK",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
+      "description": "Already prepared nametag raw LUK; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_Defence",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
+      "description": "Already prepared nametag raw Defence; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "nametag_Weapon_Power",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
+      "description": "Already prepared nametag raw Weapon_Power; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_STR",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"STR\") ? Number(map[\"STR\"]) : 0; })()",
+      "description": "Already prepared hat raw STR; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_AGI",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"AGI\") ? Number(map[\"AGI\"]) : 0; })()",
+      "description": "Already prepared hat raw AGI; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_WIS",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"WIS\") ? Number(map[\"WIS\"]) : 0; })()",
+      "description": "Already prepared hat raw WIS; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_LUK",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"LUK\") ? Number(map[\"LUK\"]) : 0; })()",
+      "description": "Already prepared hat raw LUK; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_Defence",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Defence\") ? Number(map[\"Defence\"]) : 0; })()",
+      "description": "Already prepared hat raw Defence; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "hat_Weapon_Power",
+      "expression": "(() => { const map = idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h; return Object.prototype.hasOwnProperty.call(map, \"Weapon_Power\") ? Number(map[\"Weapon_Power\"]) : 0; })()",
+      "description": "Already prepared hat raw Weapon_Power; source own-key absence contributes zero, no initializer rebuild."
+    },
+    {
+      "label": "primary_talent_STR",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 96)",
+      "description": "Final recipient talent percentage for primary gear STR."
+    },
+    {
+      "label": "stamp_STR",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctSTR\")",
+      "description": "Primary gear STR stamp percentage."
+    },
+    {
+      "label": "primary_talent_AGI",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 276)",
+      "description": "Final recipient talent percentage for primary gear AGI."
+    },
+    {
+      "label": "stamp_AGI",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctAGI\")",
+      "description": "Primary gear AGI stamp percentage."
+    },
+    {
+      "label": "primary_talent_WIS",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 456)",
+      "description": "Final recipient talent percentage for primary gear WIS."
+    },
+    {
+      "label": "stamp_WIS",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctWIS\")",
+      "description": "Primary gear WIS stamp percentage."
+    },
+    {
+      "label": "primary_talent_LUK",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 21)",
+      "description": "Final recipient talent percentage for primary gear LUK."
+    },
+    {
+      "label": "stamp_LUK",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"PctLUK\")",
+      "description": "Primary gear LUK stamp percentage."
+    },
+    {
+      "label": "secondary_talent_STR",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 111)",
+      "description": "Final recipient talent percentage for Obol STR."
+    },
+    {
+      "label": "secondary_talent_AGI",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 291)",
+      "description": "Final recipient talent percentage for Obol AGI."
+    },
+    {
+      "label": "secondary_talent_WIS",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 486)",
+      "description": "Final recipient talent percentage for Obol WIS."
+    },
+    {
+      "label": "secondary_talent_LUK",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 36)",
+      "description": "Final recipient talent percentage for Obol LUK."
+    },
+    {
+      "label": "obol_effect_DropRate",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"%_DROP_RATE\") total += Number(row[3]); return total; })()",
+      "description": "Combined Obol DropRate unique effect, without attribute adjustment."
+    },
+    {
+      "label": "obol_effect_BuildSpeed",
+      "expression": "(() => { let total = 0; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) if (row[0] === \"%_BUILD_SPD\") total += Number(row[3]); return total; })()",
+      "description": "Combined Obol BuildSpeed unique effect, without attribute adjustment."
+    }
+  ]
+}

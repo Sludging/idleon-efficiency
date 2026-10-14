@@ -43,4 +43,22 @@ describe('Gallery Domain - Equipment Contributions', () => {
       });
     });
   });
+  for (const property of ['STR', 'AGI', 'WIS', 'LUK', 'Defence', 'Weapon_Power'] as const) {
+    for (const channel of ['trophy', 'nametag'] as const) {
+      it(`matches collected ${channel} raw ${property}`, () => {
+        const results = loadExtractionResults('player-equipment-properties-data.json');
+        validateExtractionHealth(results);
+        const gallery = gameData.get('gallery') as Gallery;
+        let amount: number;
+        if (channel === 'trophy') {
+          amount = gallery.getTrophyProperty(property, player);
+        } else {
+          amount = gallery.getNametagProperty(property, player);
+        }
+        expect(amount).toMatchLiveGameWithDetails(getExtractedValue(results, `${channel}_${property}`), {
+          tolerance: 0, context: `Target player Gallery ${channel} raw ${property}`,
+        });
+      });
+    }
+  }
 });

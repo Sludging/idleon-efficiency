@@ -135,7 +135,9 @@ const parameterSpecs: ParameterSpec[] = [
   {
     key: 'equipment_hp',
     description: 'maximum HP percentage from equipment effects',
-    getValue: (_gameData, player) => player.getEquipmentBonus(EquipmentBonus.MaxHp),
+    getValue: (_gameData, player) => {
+      return player.gear.getBonus(EquipmentBonus.MaxHp);
+    },
   },
   {
     key: 'active_hp_penalty',
@@ -182,7 +184,9 @@ const parameterSpecs: ParameterSpec[] = [
   {
     key: 'equipment_gold_food',
     description: 'golden-food effectiveness from equipment',
-    getValue: (_gameData, player) => player.getEquipmentBonus(EquipmentBonus.GoldFoodEffect),
+    getValue: (_gameData, player) => {
+      return player.gear.getBonus(EquipmentBonus.GoldFoodEffect);
+    },
   },
   {
     key: 'talent_99',

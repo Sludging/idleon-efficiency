@@ -126,7 +126,7 @@ export class PlayerHealth {
 
     updateMiscHP(player: Player): void {
         // Maximum-HP equipment effects supply the miscellaneous percentage in the health formula.
-        this.miscHPPercent = player.getEquipmentBonus(EquipmentBonus.MaxHp);
+        this.miscHPPercent = player.gear.getBonus(EquipmentBonus.MaxHp);
     }
 
     getMiscHP(): number {
