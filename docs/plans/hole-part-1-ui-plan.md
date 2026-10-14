@@ -1,120 +1,112 @@
 # The Hole part 1: UI plan
 
-## Outcomes and scope
+## Player outcome and boundary
 
-For [#441 — Villager growth, Opals, and Studies](https://github.com/Sludging/idleon-efficiency/issues/441), provide read-only inspection of the accepted [backend](hole-part-1-backend-plan.md):
+For [#441](https://github.com/Sludging/idleon-efficiency/issues/441), help players read saved villager progression, Opal investments, growth rates, Lantern resources, and owned Study benefits. Use the accepted backend without changing calculations or save state.
 
-- Compare all five villagers' rescue state, saved progression, investments, requirements, claim readiness, and next intrinsic unlocks. Inspect growth rates and contributors for every named imported character.
-- Reconcile cavern and external Opals into earned, invested, and uninvested totals. Explain current allocation effects and each Another Try reset category.
-- Inspect all 18 Studies, the saved target, eligible neighbors, stored progression, current participation, rates, and owned effective effects.
-- Inspect Blinding Lantern stock by location and account-wide usage out of 12. Keep Lantern use separate from skilling claims.
+Keep exactly **Villagers → Upgrades → Caverns**. Upgrades keeps **Majik → Schematics → Studies → Measurements**. Caverns keeps all 18 numbered identities in game order. This part does not implement later-part tools. The new presentation has no deep links, URL selection, source destinations, return links, or automatic scroll/focus movement.
 
-Follow the [selected information architecture](hole-ui-information-architecture.md). Use exactly **Villagers → Upgrades → Caverns**. Studies remains under **Upgrades → Studies**. Other Hole systems retain their identities and an honest unsupported-state explanation. This part does not implement their full interfaces.
-
-## Composition and interactions
+## Information hierarchy
 
 ### Villagers
 
-Open the page on Villagers. Show a short snapshot notice, followed by the character-rate inspection selector and five aligned `DataRow` records. Keep Polonai, Kaipu, Cosmo, Minau, and Bolaia visible together.
+Open on Villagers. Keep all five villagers visible together as aligned `DataRow` records. Each record shows name/role, level, invested Opals, stored EXP / next requirement, EXP/hour, and one concise next-unlock statement. Show rescue or claim-ready status only when it changes interpretation. Do not repeat “rescued”, “not ready”, ownership, or save instructions on every record. Use **Ready to claim in game** without increasing the saved level.
 
-Each row shows:
+Keep numbers visually stronger than muted labels. Group stored EXP and its requirement in one field. Keep next unlock as plain text, not a link. Use **Next cavern**, **Next schematic**, **Next Measurement**, **Next Majik point**, or **Study speed** instead of “intrinsic unlock” or schema language. For availability rather than purchase, the label or tooltip states that distinction once. Say **All released caverns available** where appropriate.
 
-1. Name, role, and personal rescue/access state.
-2. Saved level and invested Opals.
-3. Stored EXP, next EXP requirement, and claim readiness.
-4. Current EXP/hour for the explicitly inspected character.
-5. Next intrinsic unlock, its required level, and a named owner link. Show the released maximum when applicable.
+Attach a conventional `TipDisplay` to the rate label/value. Keep useful nonzero modifiers, purchased multiplier, role multiplier, and the character-bound Villager Statue effect once. Use canonical helpers to round displayed non-count percentages and multipliers to meaningful precision. Explain equal imported rates in one short sentence. Keep exact arithmetic and game-parity limits in backend evidence, not this tooltip. Remove Growth details buttons, repeated contributor tables, owner columns, raw combination/unit metadata, neutral multipliers, and zero bonuses. Keep reasons for unavailable rates visible; a tooltip may supply further context. Shared modifiers need not be duplicated as a full breakdown under every villager.
 
-The character selector initially has no selection. Prompt the player to inspect a character. After selection, label the rates **Rates for [character name]**. Offer every imported character, using stable Player identity. Changing this selection changes only the inspected rate and matched contributors. It does not change shared progression or game assignments. Do not infer an active, best, first, or account-wide primary rate.
+Below the records:
 
-A row's **Growth details** disclosure shows the full matched contributor set. Separate the character's Statue percentage and factor from account contributors. Retain each contributor's unit, combination rule, owner link, and unavailable reason. Include the purchased EXP multiplier separately from Majik enhancement. Do not present a contributor percentage as the complete rate.
+- **Opals:** available, invested, and earned counts, with cavern/external attribution in the earned-count tooltip. Keep a local **Opal sources** disclosure for useful nonzero source counts and reconciliation adjustments. Names are text. Omit verified zero rows; retain missing attribution and incomplete-total warnings. Exact fractional counts remain available.
+- **Investment bonuses:** Equal Spread's current bonus and minimum unlocked-villager investment. Put each villager's Opal Enthusiasm bonus beside its investment tooltip, rather than repeating five investments in another table.
+- **Another Try:** one compact read-only summary of six-wish cost, owned wishes, and availability/affordability. A tooltip explains the four reset categories and what each retains. No reset button or instruction-manual section.
+- **Blinding Lanterns:** total stock, uses today / 12, and **+2 hours**. A stock tooltip lists only nonzero locations, such as **Storage: 37**. No eleven zero-only inventory rows or disclosure button when only one location matters. Missing location inputs remain unavailable, not zero. A concise effect tooltip retains relevant exclusions.
 
-Show saved levels even when stored EXP meets the next requirement. Use **Ready to claim in game**, not an increased level or an unlocked reward. For Kaipu and Minau, next availability is not construction or purchase. Bolaia's next capability is Study rate, not a new Study catalogue entry.
+### Character-dependent growth
 
-Below the five rows, keep these task-local sections:
+Only the accepted **Villager Statue** contributor is character-bound here. Its backend owner is `statues:{playerId}:28`. Hole reads Statue index 28 through that same imported Player's statue record. The game multiplies villager EXP/hour by **1 + Villager Statue bonus / 100**. Shared Hole progression, Opal investment, and other prepared growth inputs do not change when inspecting a character.
 
-- **Opals:** earned, invested, and uninvested totals, with cavern and external subtotals. Put Opal artwork beside the resource label. **Opal sources** reveals the complete ledger, including zero contributions, acquisition meanings, source-owner links, and backend floor/rounding adjustments. Show exact counts where compact notation would obscure reconciliation.
-- **Allocation effects:** show Equal Spread's current least-unlocked-villager investment and effective percentage. Show each villager's Opal Enthusiasm investment tens and effective percentage. Link the effects to their Majik owner. Do not recommend or simulate an allocation.
-- **Another Try reset details:** show current access, wish cost, wish stock, and affordability. List what each category clears and retains. Opal reset retains earned Opals, saved levels, and stored EXP. Show the Majik, Jar enchantment, and Summoning doubler consequences as explanations, not tools. Link to Lamp and explain the competing wish cost. Provide no reset button.
-- **Blinding Lanterns:** compact stock, uses today / 12, and the two-hour effect. **Lantern locations** reveals storage and every named character inventory, including zero stock. Show the backend's supported accrual and exclusion lists. Do not infer remaining skilling claims, a refill, or a reset countdown.
+Retained real-save evidence shows all 11 imported characters have the same Villager Statue bonus and five rates. Display rates at approximately **1.65T, 407B, 3.57T, 407B, 407B EXP/hour**. Keep unrounded Statue values and character-context parity limits in the [retained evidence](hole-research-brief.md#fifteen-finding-ui-revision-planning).
 
-These sections are not extra top-level destinations or an always-visible shared-resource dashboard.
+Compare complete backend numeric records, not rounded display strings. When all imported contexts are available and equal, show rates immediately with **Same rates for all 11 imported characters**. Remove the selector and identical comparisons. The tooltip shows the character-bound Villager Statue effect once and explains the imported equality once. Do not call this an account-wide rate or choose an arbitrary character's rate as one.
+
+When contexts differ or one context is unavailable, show **Character rates differ** or **Some character rates unavailable**. Offer an optional, initially unselected named-character inspection control. Shared progression stays visible. Before selection show the truthful range of available rates, with the incomplete-context warning where needed; after selection show **Rates for [name]** and that character's matched tooltip. Never treat unavailable contexts as equal or silently omit them from an “all characters” claim.
 
 ### Upgrades → Studies
 
-Use `LeftNavButton` for **Majik → Schematics → Studies → Measurements**. Select Studies on the first visit to Upgrades. Keep later selection while this page remains open. Other subsystems show their name and **Full details are not available on this website yet**. This website-support state does not imply a game lock.
+Use the players/obols composition: `ShadowBox`, a 25% left rail padded medium, and a dark-1 right panel. Use the unmodified `LeftNavButton` selected background, muted label, bold selection, and arrow. No detached blue side pills, extra borders, or competing selected colors. Select Studies on first entry; retain local selection while mounted.
 
-Above the list, show the saved target, immediate eligible neighbors, and shared Study progress/hour. Give the shared rate its own contributor disclosure. Explain that Superbit participation follows the saved target and eligible immediate neighbors. The website does not change that target.
+Show current Study speed once, plus **Studying: Wisdom** and **Also studying: Evertree, Gambit** for the retained save. Explain neighbor participation in one tooltip. Do not repeat the full shared rate breakdown on every Study.
 
-Provide **Search Studies** by name and effect, and **Show unlocked**, initially off. Default to game order. Do not add time sorting, extra views, or recommendations.
+Keep **Search Studies** by name and effect, and **Show unlocked**, initially off. Show all 18 records in game order. Each shows cavern identity/artwork when verified, saved level, stored progress / next requirement, current rate or inactive status, and one useful owned-benefit presentation. Use **Studying**, **Also studying**, and **Inactive** for participation. Known inactive zero is not an unavailable rate. Claim-ready and lock states remain truthful.
 
-Show all 18 Studies as aligned rows. Each row contains numbered cavern identity, saved Study level, stored progress / next requirement, readiness, participation, progress/hour, and an owned-effect summary. Use explicit participation labels: **Saved target**, **Eligible neighbor**, **Inactive**, or **Unavailable**. Known inactive rates may be zero; missing rates are unavailable, not zero.
+Replace Study details tables with direct benefit language and justified tooltips. Do not show a generated description and a second complete copy of its effects. Display actual values with their unit embedded: **+22 daily wishes**, **1.21× credited Gloomie kills**, or **First 35 upgrades each day cost 15% less**, as applicable to imported values. For cross-skilling Studies, the main row shows only **Cheaper layers in other skilling caverns**. Its tooltip holds the per-completed-layer and current accumulated arithmetic. Explain once that completed layers, other Studies, and collectibles combine to lower resource costs. Do not present accumulated percentages as resource reductions. Use no divisor, unit, or scope terminology and add no reduction calculator.
 
-**Study details** exposes the materialized generated description and complete typed `getEffects()` results, including units, scope, notes, discrete rules, and unavailable reasons. Do not display raw description-template markers. Keep owned effects separate from potential effects and full cavern outputs. In particular:
+Retain important conditions once: Jar preference is not guaranteed; Wisdom recovery needs normal-story Instamatch capacity; Fountain's owned repeat-marbleization rule does not prove upgrade eligibility; Cove limits discounted upgrades, not purchases. Keep missing-input reasons readable beside affected benefits. Remove **Unit: percent**, **Scope: owned study contribution**, **Effect type**, owner fields, raw keys, and repeated rule metadata.
 
-- Cross-skilling percentages are additive resource-divisor contributions, not literal percentage reductions or complete requirements.
-- Fountain's Study description does not establish complete marbleization permission. Preserve the backend's separate owned rule and permission distinction.
-- Cove's daily counter limits discounted upgrades, not purchases.
-- Jar preference does not guarantee selection. Wisdom recovery retains its capacity condition.
+Apply the same precision and repetition rules to surviving tooltips. Preserve exact resource counts, fractional grants, necessary conditions, and missing-input reasons.
 
-Each Study links to its exact cavern. A cavern links back to that Study's detail under Upgrades → Studies.
+### Caverns
 
-### Caverns and owner links
+Use the same players/obols rail and all 18 names. Each selected cavern shows its own identity, its earned Opal count where useful, and only its local owned Study benefit. Do not copy other Studies' complete effects into every cavern. Do not create contributor/source landing surfaces to replace removed links. Show one concise website-support notice for undelivered local tools; do not imply a game lock.
 
-Keep all 18 numbered cavern identities individually reachable in canonical order. For this part, a cavern exposes only the relevant accepted Study effect and earned Opal source context. State that full cavern details are not delivered. Do not display the old incomplete cavern interface or imply that a missing website surface is locked in game.
+## Visual and integration contract
 
-Owner links retain the correct destination. Internal Hole links select the named tab, subsystem, cavern, or Study detail. Use the existing `/world-5/hole` route, with query state for shareable owner selection. Keep inspected character and search/filter choices local; do not add a persistence store. External links use verified existing source routes. When no source page exists, show a named source explanation rather than guessing a route or returning unrelated values.
+Preserve Rubik, ordinary medium/normal feature heading, inherited page width/inset, charcoal surfaces, and shared component typography. Use brand blue for ordinary selected content tabs, accent-2 labels, and accent-4 rail selection. Surviving local disclosure controls inherit established Grommet/SmallButton treatment. No deep-link anchors remain inside feature content. Do not import competitor color, layout, five-tab topology, drawers, cards, ETA sorting, or total villager-rate calculation.
 
-## Visual references and artwork
+Reuse `DataRow`, `ContentTabs`, `LeftNavButton`, `TextAndLabel`, `ComponentAndLabel`, `TipDisplay`, `IconImage`, and canonical number/resource formatters. Use selective medium values, short muted labels, and game imagery beside identity. Avoid a second page wrapper or new generic presentation framework.
 
-Preserve the incumbent **Rubik, charcoal surfaces, blue selection, and shared app layout** from [DESIGN.md](../../DESIGN.md). Use the ordinary feature heading. Do not add another outer width or horizontal inset.
+Verified broader asset inventory supplies `HoleUIvillager0`–`HoleUIvillager4`, each **303×64**, visibly matching Polonai through Bolaia. All five loaded from this site's CDN with those native dimensions. Render each banner through `IconImage` with measured metadata, clipping its left **56×64** artwork region at an appropriate scale; do not show baked-in heading text or create replacement portraits. Reuse Bolaia's verified artwork for the Studies heading where useful. Opal and Lantern keep existing item metadata. This fixes the earlier narrow search's false claim that villager art was unavailable. The broader inventory includes Hole POI, Study-page, schematic, and local-resource art, but no verified identity-to-thumbnail mapping yet; do not guess that mapping or use unrelated images as cavern portraits.
 
-Reuse [DataRow](../agents/ui-rows.md) for aligned villager and Study records, including its shell, spacing, and identity alignment. Reuse `ContentTabs`, `LeftNavButton`, `TextAndLabel`, `ComponentAndLabel`, `TipDisplay`, and existing number/resource helpers where appropriate. Cards are not a second default view. Keep full explanations in local disclosures, not hover-only text.
+Read accepted domain values through the existing store, with `lastUpdated` for mutable-domain refresh. Keep route wrapper and navigation entry intact. Local state owns tabs, rail selection, search/filter, and optional character inspection. Remove URL parser/writer, owner maps used only for navigation, source panels, destination effects, selected-Study pinning for deep links, and obsolete link-specific tests when implementing this plan. No new endpoint, store, engine, forecast, recommendation, or game action.
 
-Relevant incumbent examples include [Divinity rows](../../app/world-5/divinity/content.tsx), [Forge](../../app/world-1/forge/content.tsx), [Research rows](../../app/world-7/research/researchContent.tsx), and [Atom Collider](../../components/world-3/construction/atomCollider.tsx). The selected shared-row API, not any example's field count, governs row composition.
+## Fifteen presentation decisions
 
-Use `IconImage` with existing metadata: `Item.getImageData("Opal")`, `Item.getImageData("Quest90")`, and character class metadata beside an inspected character where useful. Both resource PNGs were reachable on the site's CDN. No villager or Study portrait accessor was found. Toolbox's portrait and Study-rate filenames were not reachable on this CDN. The preview therefore uses clear villager/Study names without invented portraits. Do not copy competitor assets, add public images, or silently invent metadata. Portraits are not required to understand these outcomes.
+1. Use concise game terms and player-facing labels; remove intrinsic/owner/scope/combination jargon.
+2. Browser-inspect Toolbox for adjacent progression, recognizable imagery, rate tooltips, participation, and benefit clarity only.
+3. Restore actual shared component colors; remove default-colored deep-link anchors rather than recoloring obsolete links.
+4. Delete every deep link and link-only destination. Selection stays local.
+5. Replace Growth details buttons with rate tooltips for useful advanced context.
+6. Remove duplicated fields, descriptions/effects, zero rows, neutral modifiers, and repeated contributor inventories.
+7. Strengthen value/label hierarchy and aligned grouping through established rows and labeled-value patterns.
+8. Name Villager Statue (Statue28), prove imported equality, hide redundant selector only when complete numeric contexts agree.
+9. Show truthful Lantern total/use; disclose only useful nonzero locations and missing-location reasons.
+10. Keep only progression/effect context, normally in tooltips; remove manual-like prose.
+11. Remove all automatic scrolling/focusing from tab and rail selection.
+12. Match actual players/obols padded rail, selected arrow/background, and dark-1 content panel without changing ownership.
+13. Use verified site/CDN metadata for relevant imagery; do not guess portraits, dimensions, or competitor URLs.
+14. Keep cavern benefits local. Do not replicate the full Study catalogue or invent filler destinations.
+15. Present numerical benefits with contextual units and one necessary condition; preserve unavailable state without engine schema.
 
-The browser-rendered [IdleonToolbox Hole page](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig) provides reference for artwork recognition, adjacent progression fields, and owned Study descriptions. Its **Explore / Engineer / Bonuses / Measure / Study** topology, ETA fields, time sorting, total villager rate, colors, cards, and calculations are not adopted. Follow the selected IE hierarchy and named character-rate contract instead.
+## Verification
 
-## Data responsibilities and integration
+The disposable preview must render actual incumbent components/theme and imported backend values at 1440×1000. Exercise equal-context immediate rates, optional differing/unavailable context inspection as clearly labeled view fixtures, rate/benefit/resource tooltips, all tabs/rails, searches, missing-versus-zero states, nonzero Lantern locations, no feature anchors/URL changes, no owner scroll/focus, image loading, and local-only cavern benefits. Capture comparisons with players/obols navigation and relevant feature references. Save private screenshots/results, then remove temporary runnable routes/scenarios. Preview checks prove presentation only, not changed production behavior or new game parity. Production implementation requires a separate approved execution phase.
 
-Keep route metadata and the server wrapper in `app/world-5/hole/page.tsx`. Replace the existing placeholder client content with the approved read-only surface in the later implementation phase. Restore the existing World 5 Hole navigation entry then. Do not create another account owner, endpoint, or backend calculation layer.
-
-Read the accepted Hole domain through `useAppDataStore`. Use `useShallow` for grouped selections and retain `lastUpdated` when reading the mutable domain map. Read the real save timestamp for snapshot text; do not use the refresh dependency as the save timestamp.
-
-| Information | Accepted backend owner |
-|---|---|
-| Villager state, requirements, readiness, next unlock | `Villager` fields, `getExpRequirement()`, `claimReady`, `nextUnlock` |
-| Named growth context and contributors | `Villager.characterRates`, matched by Player identity |
-| Ledger and reconciliation adjustments | `Hole.opalLedger` |
-| Allocation effects and reset facts | `Hole.allocationEffects`, `Hole.anotherTry` |
-| Lantern locations, stock, and usage | `Hole.lanterns` |
-| Saved Study target, neighbors, shared rate/contributors | `Hole.savedStudyTarget`, target availability, eligible neighbors, `studyRate`, `studyContributors` |
-| Study progression, participation, effects, rules | `Study` fields, `getRequirement()`, `claimReady`, `getEffects()`, `ownedRule` |
-
-The UI formats and filters these values. It does not recompute game requirements, rates, attribution, access, allocation effects, or reset costs. Resolve unlock identities through existing generated catalogue names. Do not create authored game-benefit descriptions.
-
-Preserve meaningful decimal precision for multipliers, percentages, and ledger adjustments. Compact count formatting must not turn a cost multiplier into zero.
-
-## States and verification
-
-Keep account loading in the existing header/provider flow. Guard genuinely unavailable feature data locally. Distinguish game lock, unsupported website content, missing inputs, verified zero, and snapshot state. These states may coexist. Keep all identities available during partial support. Preserve independent values when another field is missing. Display each dependent unavailable value with its backend reason; do not publish a complete ledger or balance when attribution is incomplete.
-
-In the later implementation phase, use the existing Docker Playwright workflow with a preserved real local save. Verify:
-
-- Five villagers, every imported character selection, same-character contributor identity, readiness without claiming, and named unlock links.
-- Complete ledger reconciliation, source/acquisition links, allocation context, all reset consequences, Lantern locations, and usage separation.
-- All 18 Studies, target/neighbor/inactive states, owned numeric and discrete effects, contributor details, search/no-results/clear, and the initially unfiltered catalogue.
-- All three top tabs, four upgrade identities, 18 cavern identities, exact owner links, unsupported explanations, and missing-versus-zero presentation.
-- Desktop rendering at 1440×1000, loaded CDN imagery, readable wrapping, and relevant browser errors.
-
-The planning preview evaluates actual component composition and imported backend display values. It does not add game-output parity or establish unobserved gameplay branches. Backend acceptance limits remain intact. Forecasts, import-to-now accrual, countdowns, simulations, recommendations, and game actions remain outside this part.
+For the selected clarity revision, verify rounded non-count values, one Statue effect and equality explanation, and all four cross-skilling rows/tooltips. Check surviving tooltip conditions and missing-input reasons. Retain broader checks as prior evidence; do not imply new coverage.
 
 ## Sources
 
-- [Approved issue #441](https://github.com/Sludging/idleon-efficiency/issues/441), [specification](hole-spec-draft.md), and [canonical IA](hole-ui-information-architecture.md).
-- [Accepted backend and evidence limits](hole-research-brief.md#backend-acceptance-and-local-commit), including retained game source and extraction results.
-- [Research mechanics](hole-research-brief.md#2-camp-shared-progression-and-resource-competition) and [official Wiki revision 103847](https://idleon.wiki/index.php?title=The_Caverns&oldid=103847) for player actions and terminology.
-- [UI work guide](../agents/ui-patterns.md), [row contract](../agents/ui-rows.md), and [UI verification](../agents/ui-verification.md).
-- [Toolbox Hole reference](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig&t=Study), inspected in Chromium. Static reader output incorrectly presented the initial profile URL as a 404; the rendered route loaded.
+- [Current handoff and accepted evidence](hole-research-brief.md#current-handoff), [backend plan](hole-part-1-backend-plan.md#character-context-growth-mechanics).
+- [UI guide](../agents/ui-patterns.md), [row contract](../agents/ui-rows.md), [verification](../agents/ui-verification.md), [DESIGN.md](../../DESIGN.md).
+- Players `app/players/content.tsx:1217–1248`; Obols `app/account/obols/content.tsx:108–131`; `LeftNavButton.tsx:7–17`.
+- `TextAndLabel.tsx:8–37`; `TipDisplay.tsx:25–59`; `ResourceDisplay.tsx:19–43`; Atom Collider `atomCollider.tsx:31–69`; Sneaking `sneakingUpgrades.tsx:19–36`; Legend Talents `content.tsx:30–59`.
+- Accepted named contributor `data/domain/world-5/hole/villager.tsx:341–369`; effects `hole.tsx:372–451`.
+- Retained imported equality: `.ui-verification/runs/2026-10-14T01-35-34-717Z-39415/hole-production-observations.json`, numeric `publishedRealSaveBaseline.villagers[].characterRates`.
+- [Toolbox public Hole profile](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig), browser-inspected Explore and Study. Its literal percentage-reduction wording is not calculation authority.
+- Broader source-art inventory: `data/icons/assets/data/HoleUIvillager0.png`–`HoleUIvillager4.png`, visually inspected and matched to accepted villager identities. Site CDN loaded all five at 303×64.
+
+## Rendered preview references
+
+The disposable preview uses actual IE components/theme and imported backend display values. Latest affected renders and final source: `.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/`. The focused first run is `.ui-verification/runs/2026-10-14T03-15-31-921Z-5081/`. Unchanged broader references remain from `.ui-verification/runs/2026-10-14T03-04-25-025Z-73138/`.
+
+- [Villagers and immediate equal-context rates](../../.ui-verification/runs/2026-10-14T03-04-25-025Z-73138/01-villagers-equal.png).
+- [Rounded Statue effect and single equality explanation](../../.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/baseline-rounded-rate.png).
+- [Lantern stock with only its nonzero location](../../.ui-verification/runs/2026-10-14T03-04-25-025Z-73138/04-lantern-tooltip.png).
+- [Studies with named skilling benefit and tooltip arithmetic](../../.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/baseline-study-1-arithmetic.png).
+- [All four revised skilling tooltips and missing-input displays](../../.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/confirmation-contact-sheet.png).
+- [Cove-local benefit without links or unrelated Studies](../../.ui-verification/runs/2026-10-14T03-04-25-025Z-73138/17-caverns-local.png).
+- [Lantern exclusions without repeated allowance text](../../.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/lantern-no-repeat.png).
+- [Unavailable Statue once, with visible rate reason](../../.ui-verification/runs/2026-10-14T03-20-57-369Z-21418/unavailable-statue-once.png).
+
+The prior broader directory retains all 18 Study captures, view fixtures, players/obols references, and interaction evidence. The focused and final directories record only their exercised clarity checks. These are presentation proofs, not production changes or new gameplay parity. Approval, exact commands, preservation, and check limits belong in the [current handoff](hole-research-brief.md#fifteen-finding-ui-revision-planning).
