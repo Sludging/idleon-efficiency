@@ -60,6 +60,25 @@ export function assertPopulatedAccount(data: Map<string, unknown>): void {
             expect(bonus.data.requiredPages).toBe(Number(tuple[5]));
             expect(bonus.data.func).toBe(tuple[3]);
             expect([bonus.data.x1, bonus.data.x2, bonus.data.x3]).toEqual([Number(tuple[1]), Number(tuple[2]), Number(tuple[4])]);
+            const savedLevel = saved('Spelunk')[8][4 * chapter.index + bonus.index];
+            const artifactMultiplier = Number(tuple[4]) === 1 ? 1 + expected('artifact_35') / 100 : 1;
+            if (tuple[3] === 'add') {
+                expect(bonus.getEffectLimit()).toBeUndefined();
+                expect(bonus.getProgressToEffectLimit()).toBeUndefined();
+            } else {
+                if (tuple[3] !== 'decay' && tuple[3] !== 'decayMulti') {
+                    throw new Error(`Unsupported extracted Journal function: ${tuple[3]}`);
+                }
+                // Use the original extracted helper equations, not the generated chapter data.
+                const effectLimit = (tuple[3] === 'decayMulti' ? 1 + Number(tuple[1]) : Number(tuple[1])) * artifactMultiplier;
+                expect(Number.isFinite(bonus.getEffectLimit())).toBe(true);
+                expect(bonus.getEffectLimit()).toMatchLiveGameWithDetails(effectLimit, {
+                    tolerance: 0, context: `${chapter.name}: ${tuple[3]} finite effect limit`,
+                });
+                expect(bonus.getProgressToEffectLimit()).toMatchLiveGameWithDetails(savedLevel / (savedLevel + Number(tuple[2])), {
+                    tolerance: 0, context: `${chapter.name}: earned progress at saved level ${savedLevel}`,
+                });
+            }
         });
         const chest = storage.chest.filter(item => item.internalName === chapter.pageItem.internalName);
         expect(chapter.chestPageStacks).toEqual(chest);
@@ -95,15 +114,22 @@ export function assertPopulatedAccount(data: Map<string, unknown>): void {
             tolerance: 0, context: 'Saved-snapshot estimate; all originating amounts are full or above the cap',
         });
     });
+    expect(owner.getHoursUntilAllFull()).toMatchLiveGameWithDetails(
+        Math.max(...characterIDs.map(id => expected(`refill_hours_player_${id}`))),
+        { tolerance: 0, context: 'Account refill time is the maximum extracted character refill time, not the sum' },
+    );
 }
 
 export function snapshot(data: Map<string, unknown>): string {
     const owner = data.get('spelunking') as Spelunking;
     return JSON.stringify({
         chapters: owner.chapters.map(chapter => ({ index: chapter.index, page: chapter.pageItem.internalName,
-            source: chapter.gatheringSource.id, bonuses: chapter.bonuses.map(bonus => [bonus.level, bonus.getBonus()]),
+            source: chapter.gatheringSource.id, bonuses: chapter.bonuses.map(bonus => [
+                bonus.level, bonus.getBonus(), bonus.getEffectLimit(), bonus.getProgressToEffectLimit(),
+            ]),
             chest: chapter.chestPageStacks.map(item => item.count), players: chapter.playerPageStacks.map(stacks => stacks.map(item => item.count)) })),
         reads: [owner.dailyReadLimit, owner.dailyReadsUsed, owner.dailyReadsRemaining], recharge: owner.hourlyRecharge,
+        hoursUntilAllFull: owner.getHoursUntilAllFull(),
         players: (data.get('players') as Player[]).map(player => [player.playerID, player.playerName, player.skills.get(SkillsIndex.Spelunking)]),
         stamina: owner.stamina.map(stamina => [stamina.playerID, stamina.current, stamina.maximum, stamina.getHoursUntilFull(owner.hourlyRecharge)]),
     });

@@ -108,5 +108,10 @@ describe('new Royal Outpost and same-domain stamina producers', () => {
             expect((data.get('spelunking') as Spelunking).stamina[id].maximum)
                 .toMatchLiveGame(expected(`stamina_max_player_${id}`), 0);
         });
+        it(`matches character ${id}'s refill time used directly by the account refill estimate`, () => {
+            const owner = data.get('spelunking') as Spelunking;
+            expect(owner.stamina[id].getHoursUntilFull(owner.hourlyRecharge))
+                .toMatchLiveGame(expected(`refill_hours_player_${id}`), 0);
+        });
     });
 });

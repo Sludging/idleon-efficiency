@@ -1,82 +1,92 @@
-# Spelunking part 2: backend plan
+# Spelunking Part 2: backend delivery plan
 
 ## Outcomes
 
-Provide the backend information for [#436 — gathering, Journal, and character progression](https://github.com/Sludging/idleon-efficiency/issues/436):
+Provide the information for [#436 — gathering, Journal, and character progression](https://github.com/Sludging/idleon-efficiency/issues/436):
 
-- Show gathering caves, their Spelunky Pages, page uses, and quantities in shared storage and each character's inventory.
-- Show shared Journal chapters, each bonus's owned level and current effect, minimum page-stack requirements, and account-wide daily reads: limit, used, and remaining.
-- Show each character's name, Spelunking level and EXP, saved current stamina, calculated maximum stamina, hourly recharge, and estimated hours until full.
+- Inspect six Journal chapters, all 20 bonus levels and effects, and minimum page-stack requirements.
+- Distinguish bonuses with diminishing returns from bonuses without a finite formula limit. Support progress toward finite limits.
+- Show cave/page metadata and compact page quantities, with storage and named character locations available as details.
+- Show account-wide daily reads as remaining/limit. Keep usage available without requiring a third displayed value.
+- Show each character's skill level/EXP and saved/maximum stamina. Provide shared recharge and an account refill estimate with individual estimates available.
 
-Use descriptions from generated game data only. Expose calculated amounts separately from intrinsic descriptions. Do not create explanatory sentences, copied description tables, or frontend-specific display records in the backend.
+Expose generated descriptions and numeric results only. Do not add authored game-description sentences or presentation records to the backend. Density, instruction removal, empty-location wording, and Sneaking/Lab character composition belong to UI delivery.
 
-## Responsibilities
+## Mechanics and required data
 
-Extend [Spelunking](../../data/domain/world-7/spelunking.tsx), not a second account domain.
+### Journal limits
 
-- **Spelunking** coordinates initialization, aspect parsing, shared reading allowance, and account modifier preparation. It owns the shared hourly recharge rate and the Trackometer level needed by maximum stamina.
-- **Chapter** retains generated chapter metadata, its page item and gathering source, and its bonus objects. Its cohesive parser translates the flattened saved bonus levels.
-- **ChapterBonus** wraps one generated bonus and owns its saved level and current effect. Use `lavaFunc` with the generated formula and parameters. Apply the Sailing artifact multiplier only where generated `x3` permits it. Keep minimum page-stack requirements directly accessible from metadata.
-- **SpelunkingStamina** owns one character's saved amount, calculated cap, and refill-duration behavior. Replace the unused public numeric stamina array with these indexed aspects. Keep character names, levels, and EXP on `Player`; join by `playerID`, not display name.
-- **Storage** remains the owner of chest and character inventory items. Expose page quantities by those locations. Retain individual stack amounts where page requirements need them. Do not treat storage totals or pooled stacks as pages already available for an in-game read.
-- **RoyalArmory** supplies the missing stamina-recharge Outpost multiplier through a small owner method, parallel to its existing Research Outpost method. Spelunking must not reimplement Royal Outpost selection and scaling.
+Let `L` be the saved bonus level. Let `A` be `1 + artifactBonus / 100` when generated `x3 === 1`; otherwise use `1`.
 
-Selected [backend pattern](../agents/backend-patterns.md) aspects: FriendBonus/Meal supply generated-data wrappers and owner calculations; Hole aspects supply cohesive parsing; Storage supplies item ownership; Master Classes supplies saved daily-counter parsing; Player health supplies preparation of character maxima. Reuse [utility `lavaFunc`](../../data/utility.tsx) after matching its relevant branches to the game. These patterns do not require a new framework or purchase-planning API.
+| Formula | Current effect | Limit at the current artifact strength | Progress toward the earned portion |
+|---|---|---|---|
+| `add`, with generated `x2 = 0` | `A * x1 * L` | No finite limit | No finite-limit progress |
+| `decay` | `A * x1 * L / (L + x2)` | `A * x1` | `L / (L + x2)` |
+| `decayMulti` | `A * (1 + x1 * L / (L + x2))` | `A * (1 + x1)` | `L / (L + x2)` |
 
-## Required data
+These are asymptotic limits, not hard maximum levels or reached effect caps. The inspected page-reading caller adds gained levels without a maximum-level clamp. The bonus helper does not clamp levels or effects. For the positive decay parameters, each additional level gives less effect. A finite level does not mathematically reach the asymptote. Display rounding must not imply completion.
 
-### Save boundary
+The 20 real bonuses contain **2 `add`, 16 `decay`, and 2 `decayMulti`** entries. Both Base Spelunking Efficiency bonuses grow without a finite formula limit. All 20 current generated artifact flags are enabled. Limits therefore change with the account's current artifact strength; they are not universal maxima.
 
-| Input | Meaning and use |
+The two Chapter Two multipliers approach `5 * A`, not `4 * A`. Their formula includes a baseline of `1 * A`. Other multiplier-worded bonuses use `decay`, not `decayMulti`: Chapter Five's Amber and POW effects approach `3 * A`; Chapter Six's POW and Amber effects approach `10 * A`. Follow the generated formula, not the wording's `x` unit. Progress excludes the baseline so level-zero entries remain zero-progress and unearned.
+
+### Existing inputs
+
+| Data | Existing owner and use |
 |---|---|
-| `Spelunk[8][4 * chapterIndex + bonusIndex]` | Shared owned level for that chapter bonus. Chapters with three bonuses still use four-slot strides. |
-| `OptionsListAccount[410]` | Account reads already used in the saved daily period. Parse through Spelunking's account raw-key declaration. |
-| `Spelunk[3][playerID]` | That character's saved current stamina. Preserve the recorded amount; do not add time since the save. |
-| `Spelunk[4][8]` | Trackometer level, used only for the maximum-stamina dependency in this part. |
-| Existing parsed upgrades and `Player.skills` | Stamina upgrade levels and character Spelunking level/EXP. Do not parse them again. |
-| Existing `Storage.chest` and `Storage.playerStorage[playerID]` | Page identities, quantities, and locations. Do not parse inventory keys again. |
+| Generated `func`, `x1`, `x2`, `x3`, `requiredPages`, and intrinsic bonus text | `ChapterBonus.data`; calculate limits without a copied table. |
+| Saved Journal levels | `Chapter.parse`: `Spelunk[8][4 * chapterIndex + bonusIndex]`. Preserve four-slot strides. |
+| Sailing artifact 35 | Existing `updateSpelunkingChapterBonuses` prepares its current bonus. |
+| Page item and cave metadata | Existing `Chapter.pageItem` and `gatheringSource`. Preserve the six real associations and exclude FILLER. |
+| Storage and character page stacks | Existing `chestPageStacks` and `playerPageStacks[playerID]`, sourced from Storage. Preserve individual stacks. |
+| Reading allowance | Existing `dailyReadLimit`, `dailyReadsUsed`, and `dailyReadsRemaining`; usage comes from `OptionsListAccount[410]`. |
+| Character identity, skill level, and EXP | Existing `Player`, joined by `playerID`. |
+| Saved stamina and calculated maximum | Existing `SpelunkingStamina.current` and `maximum`. Preserve above-maximum saved amounts. |
+| Shared recharge and individual refill | Existing `Spelunking.hourlyRecharge` and `SpelunkingStamina.getHoursUntilFull(rate)`. |
 
-Parsing must replace prior owned levels, usage, stamina, and Trackometer state. Missing optional save fields use their established initial state. Parsing must not read other domains or calculate bonuses.
+The account refill estimate is the **maximum**, not the sum, of individual refill durations. This summary assumes concurrent recharge at the shared rate for every character. It describes the saved snapshot with unchanged recharge and no spending. It does not establish or simulate actual recharge eligibility, elapsed time, or team activity.
 
-### Static information
+## Responsibilities and integration
 
-- [Chapter metadata](../../data/domain/data/SpelunkingChapterRepo.ts) provides names, bonus descriptions, `func`, `x1`, `x2`, artifact applicability in `x3`, and `requiredPages`.
-- [Page item metadata](../../data/domain/data/ItemRepo.ts) provides `Spelunking0`–`Spelunking5`, page names, intrinsic use descriptions, artwork identities, and named gathering sources.
-- [Enemy metadata](../../data/domain/data/EnemyRepo.ts) provides the six gathering nodes with Spelunking AFK type. Match each page's exported source name to the node's exported name. These gathering caves are not Part 1 delve tunnels.
-- Associate chapter index with its source-verified page item identity during initialization. Reuse existing item and enemy owners; do not copy the six associations into a handwritten table.
+Retain the accepted Spelunking backend and its existing producers. Add only:
 
-The requested cave/page information can use these exports. Area-map data is not required for these outcomes. No missing static extraction prerequisite has been demonstrated for this plan.
+- **ChapterBonus:** `getEffectLimit(): number | undefined` returns the artifact-scaled asymptote for `decay` or `decayMulti`. `undefined` means the actual `add` bonus has no finite limit.
+- **ChapterBonus:** `getProgressToEffectLimit(): number | undefined` returns the earned-portion ratio above for bounded formulas. Unbounded bonuses have no ratio. Keep current `getBonus()` behavior unchanged.
+- **Spelunking:** `getHoursUntilAllFull(): number` returns the largest existing individual estimate using the shared recharge rate. Iterate existing stamina aspects directly. The initialized empty collection returns zero; the UI must retain its account-loading guard rather than showing a loaded-account conclusion.
 
-### Calculated inputs
+Use the existing prepared state. Add no saved fields, static exports, domain registration, preparation hook, cached presentation snapshot, or Royal Armory change. Limits automatically follow artifact preparation in `postProcessingMap`. Account refill uses maxima and recharge already prepared in `postPostProcessingMap`, after the existing producers.
 
-| Result | Required direct inputs |
-|---|---|
-| Current chapter effect | Owned bonus level, generated formula/parameters/applicability, and Sailing artifact 35's current bonus. |
-| Daily read limit | Five base reads plus Rift Skill Mastery's Spelunking daily-read bonus. The existing mastery API returns the complete extra allowance, not a Boolean. |
-| Maximum stamina | Character skill level; upgrades 4, 5, and 61; World 7 stamina merit; companion 148; chapter bonuses `(2,0)` and `(3,0)`; Spelunking mastery maximum-stamina reward; highest account Spelunking Specialty talent effect; Big Fish's Advice on Being Tired; Trackometer level. |
-| Hourly recharge | Meritocracy bonus 17; Legend Talent 30; Royal Outpost category 2 multiplier; Sushi bonus 11; upgrade 5; Alchemy bubble `Y11`; chapter bonuses `(2,1)` and `(5,2)`; Spelunking mastery recharge reward; native card level for `w7a10`. |
+Selected [backend patterns](../agents/backend-patterns.md): FriendBonus/Meal keep bonus behavior with its generated-data wrapper. Totalizer demonstrates getters over prepared inputs. Lab demonstrates account-wide ownership rather than repeated per-character calculation. Follow these aspects only; do not introduce a generic cap framework or new aspect class.
 
-Use each existing producer's public API. Rift mastery already supplies the complete `15`, `3`, and `10` effects for the relevant unlocked rewards; do not apply those factors twice. The card term is `min(2 * nativeLevel, 20)`, not its equipment-boosted bonus. Upgrade 61's effective stamina contribution multiplies its raw bonus by saved Trackometer level. Keep the existing raw upgrade-bonus API unchanged.
+Existing data already supports the other feedback:
 
-Preserve the original maximum formula's final floor and grouping. The Trackometer, merit, and additive companion terms sit outside the Big Fish and companion multipliers. Source adds the relevant chapter and talent terms inside the base sum; do not infer their operation from a `%` description.
-
-Remaining reads are `max(0, limit - used)`. Estimated refill is `max(0, maximum - savedCurrent) / hourlyRecharge` hours. The source recharge formula has a positive base rate. The estimate describes the saved snapshot under unchanged recharge and no spending; it does not replay away time, predict readiness, or roll daily usage forward.
-
-## Integration
-
-- Retain existing `domainList` registration and initialization. Add only the account read-counter raw key and the aspect-owned saved mappings above.
-- Initialize page/chapter/gathering relationships once from existing metadata. Keep static descriptions accessible without mutable presentation projections.
-- Prepare the Sailing input for chapter effects in `postProcessingMap`, after artifact preparation. Chapter bonus getters then serve stamina and future existing-domain callers without UI arithmetic.
-- Prepare the Part 2 character display stats and page-location quantities in `postPostProcessingMap`, after `meritocraty`'s late preparation. This placement also follows settled Alchemy, Cards, Sushi, Player talent contexts, Royal Armory, and Storage. These results currently serve only the requested UI.
-- Gather shared modifier values once, select the highest talent effect across actual characters, then calculate each character's cap. The current recharge formula uses shared inputs, so prepare its rate once and reuse it for all character rows.
-- Add only Royal Armory's required recharge getter. Preserve existing Part 1 records, collection summaries, Amber formatting, and Cards/Gallery/Tome behavior. Do not restore Part 1's removed updater or add a Trackometer progression display.
+- Remove instructions and empty-inventory messages in the UI; no domain change is needed.
+- Compact page counts and location tooltips can use existing stack amounts. Any display subtotal must retain its location meaning. A combined owned-pages count must not be labeled chest storage or treated as a readable stack.
+- Render stamina as saved/maximum without clamping the saved amount. Show recharge once because the original formula has no character-specific input.
+- Render daily reads as `dailyReadsRemaining / dailyReadLimit`: the retained snapshot displays `8/8`, not `0/8`. Keep saved-period ownership; do not add a reset timer.
+- Keep individual refill getters for character details. The account summary adds only the domain-owned maximum above.
 
 ## Prerequisites and verification
 
-- Match current original-game helper and caller semantics to the supplied save. Map every direct input to the typed owner API before comparing composite results. Required source branches are `ChapterBonus`, `MaxDailyPageReads`, `StaminaMax`, `StaminaRegenRate`, and upgrade 61's effective scaling.
-- Add focused extraction configs/results and core tests for chapter effects, shared read allowance, character maxima, recharge, and refill duration. Add parameter comparisons for every directly used calculation, including chapter effects and producer APIs. Follow [domain testing guidance](../TESTING_IMPLEMENTATION.md), use configured tolerance `0`, and retain actual originating-save pairing.
-- Compare representative `add`, `decay`, and `decayMulti` chapter effects. Check levels per bonus, three-/four-entry chapters, minimum stack requirements, page/chapter/source identity, and chest versus character page quantities. Do not derive a read-success forecast from aggregate pages.
-- Compare representative characters with distinct skill levels and stamina amounts. Check native card-level scaling, Trackometer-scaled upgrade 61, the best account talent contribution, and full/partial refill behavior only where the paired real save provides it. Record unobserved branches rather than inventing synthetic game evidence.
-- Run focused Part 2 tests, existing Spelunking regressions, and TypeScript after implementation. Exercise two fresh normal-account-factory passes. Inspect populated chapter levels, page locations, shared allowance, and every character's stats; confirm repeated calculation does not stack bonuses.
-- If a direct producer comparison fails, resolve its dependency or return the required scope decision. Do not substitute a guessed value, silently modify unrelated domains, or weaken the comparison.
-- Verify page and character information through the real route in the later approved UI phase. Backend tests do not prove rendered UI or connected live-game parity.
+All required metadata and calculation inputs already exist. No static extraction or WikiBot work is required. Approval and implementation authorization remain separate gates, recorded in the handoff.
+
+After authorization, follow [domain testing guidance](../TESTING_IMPLEMENTATION.md):
+
+1. Keep the existing paired Part 2 save/results and all current core/direct-parameter comparisons. Check the two formula families with finite limits, both unbounded entries, and level-zero progress through the typed new APIs.
+2. Use the retained original helper equations and extracted chapter tuples as the limit oracle. Do not approximate a limit by calling the formula with a very large level or infinite input. Compare the account's extracted artifact bonus directly at configured tolerance `0`.
+3. Check the `decayMulti` baseline, artifact scaling, and multiplier-worded `decay` cases. Confirm current effects and saved levels remain unchanged. Do not manufacture saves to exercise unsupported artifact states.
+4. Verify account refill against the maximum of independently checked character estimates from the paired save. Keep individual estimates as direct parameter comparisons. The current save proves only zero account refill; positive refill remains a coverage question until real paired data provides it.
+5. Run focused Part 2 suites and Spelunking regressions. Check TypeScript and two fresh normal-account-factory passes. Confirm repeated processing does not accumulate state and new getters use settled inputs. Record unrelated failures without fixing or waiving them.
+6. In the later approved UI phase, verify finite-limit information, correct progress meaning, no unbounded completion bars, named location details, saved/maximum stamina, shared recharge/refill, and remaining/limit reads. Compare the actual route with the newly approved preview. UI experiments must retain every character and all 20 bonuses.
+
+Historical acceptance does not prove these new APIs. No checks run during planning. Offline source and paired saved-snapshot evidence do not prove connected live-game parity, performed reads/resets, or elapsed refill.
+
+## Source references
+
+- **Original formula branches:** [ArbitraryCode5Inputs.1.22.js](../game-snippets/players/ArbitraryCode5Inputs.1.22.js#L8-L24), lines 8–24. Arguments map to `(func, x1, x2, level, x4, x5)`. These branches establish linear growth, decay, and the multiplier baseline.
+- **Original chapter application:** [Spelunk.1.22.js](../game-snippets/spelunking/Spelunk.1.22.js#L8), line 8, `ChapterBonus`. Source accessor: `idleon.allScripts.ActorEvents_579._customBlock_Spelunk.toString()`. The branch passes saved level to the helper and multiplies its complete result by artifact 35 when tuple position 4 equals 1.
+- **Original level update:** [PageRead.1.22.js](../game-snippets/spelunking/PageRead.1.22.js#L8), line 8, `SPELUNKY_PAGE`. Accessor: `idleon.allScripts.ActorEvents_38.prototype._event_InvItem4custom.toString()`. Assignment is existing `Spelunk[8][bonusSlot] + PageReadingLVgains(stackQuantity, 0)`; no level clamp appears in that branch. Daily allowance limits reads, not bonus levels.
+- **Original tuples:** [retained Part 2 extraction](../../tests/results/spelunking-part-2-data.json), JSON path `extractions.chapter_metadata.result`, from `idleon.getAttr("CustomLists").h.SpelunkChapters`. [Generated metadata](../../data/domain/data/SpelunkingChapterRepo.ts#L13-L237), lines 13–237, matches all 20 real tuples. It is the implementation data source, not a table to copy.
+- **Existing domain contracts:** [Spelunking](../../data/domain/world-7/spelunking.tsx#L225-L326), lines 225–326; shared counters/rate at 351–363; preparation at 532–594. [Current paired comparisons](../../tests/domains/spelunking/part-2-test-helpers.ts#L47-L97), lines 47–97.
+- **Recharge and refill semantics:** Existing findings P2-G6/P2-G7 in the [research handoff](spelunking-research-brief.md#mechanics-and-evidence-for-judging-the-plan) identify original `StaminaRegenRate` and `ActorEvents_713.prototype._customEvent_SpelunkStuff2`. The refill summary is derived from the approved snapshot estimate, not an observed game summary.
+- **Player vocabulary:** [Wiki Spelunking](https://idleon.wiki/wiki/Spelunking), Lore Journal and Cave Nodes. Formula authority remains the captured game source, not the competitor or Wiki presentation.

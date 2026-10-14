@@ -233,6 +233,24 @@ export class ChapterBonus {
         const multiplier = this.data.x3 === 1 ? 1 + this.artifactBonus / 100 : 1;
         return multiplier * lavaFunc(this.data.func, this.level, this.data.x1, this.data.x2);
     }
+
+    getEffectLimit(): number | undefined {
+        const multiplier = this.data.x3 === 1 ? 1 + this.artifactBonus / 100 : 1;
+        if (this.data.func === "decay") {
+            return this.data.x1 * multiplier;
+        }
+        if (this.data.func === "decayMulti") {
+            return (1 + this.data.x1) * multiplier;
+        }
+        return undefined;
+    }
+
+    getProgressToEffectLimit(): number | undefined {
+        if (this.data.func === "decay" || this.data.func === "decayMulti") {
+            return this.level / (this.level + this.data.x2);
+        }
+        return undefined;
+    }
 }
 
 export class Chapter {
@@ -360,6 +378,14 @@ export class Spelunking extends Domain {
 
     get dailyReadsRemaining(): number {
         return Math.max(0, this.dailyReadLimit - this.dailyReadsUsed);
+    }
+
+    getHoursUntilAllFull(): number {
+        let hoursUntilAllFull = 0;
+        for (const stamina of this.stamina) {
+            hoursUntilAllFull = Math.max(hoursUntilAllFull, stamina.getHoursUntilFull(this.hourlyRecharge));
+        }
+        return hoursUntilAllFull;
     }
 
     getTrackometerStaminaBonus(): number {
