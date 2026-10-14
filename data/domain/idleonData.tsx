@@ -6,6 +6,7 @@ import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubb
 import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
+import { updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -369,6 +370,8 @@ const postProcessingMap: Record<string, Function> = {
     // Equipment and Obol attribute modifiers consume each character's final talent context.
     "equipmentProperties": (_doc: Cloudsave, accountData: Map<string, any>) => updateEquipmentProperties(accountData),
     "goldenFood": (_doc: Cloudsave, accountData: Map<string, any>) => updateGoldenFood(accountData),
+    // Calculate primary attributes after Golden Food and before attribute-dependent health.
+    "playerStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStats(accountData),
     // Prepare each character's normal maxima before player-aware efficiency consumers.
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),

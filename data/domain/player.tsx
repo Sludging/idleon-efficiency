@@ -57,24 +57,10 @@ import type { HatRack } from './world-7/hatRack';
 import type { ResearchGrid } from './world-7/research';
 import { RoyalArmory } from './world-6/royalArmory/royalArmory';
 import { PlayerHealth } from './player-health';
+import { PlayerStats } from './player-stats';
 import type { CoralKid } from './world-7/coralKid';
 export type { TalentLevelInputs } from './talents';
 
-export class PlayerStats {
-    strength: number = 0;
-    agility: number = 0;
-    wisdom: number = 0;
-    luck: number = 0;
-
-    constructor() { }
-
-    setStats(statsArray: Array<number>) {
-        this.strength = statsArray[0];
-        this.agility = statsArray[1];
-        this.wisdom = statsArray[2];
-        this.luck = statsArray[3];
-    }
-}
 
 
 export class SkillData {
@@ -647,7 +633,7 @@ const keyFunctionMap: Record<string, Function> = {
     "equipment": (doc: Cloudsave, player: Player, allItems: Item[]) => {
         player.gear = PlayerEquipment.parse(doc.get(`EquipOrder_${player.playerID}`), doc.get(`EquipQTY_${player.playerID}`), JSON.parse(doc.get(`EMm0_${player.playerID}`)), JSON.parse(doc.get(`EMm1_${player.playerID}`)), allItems);
     },
-    "stats": (doc: Cloudsave, player: Player) => parseStats(doc.get(`PVStatList_${player.playerID}`), doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
+    "classProgress": (doc: Cloudsave, player: Player) => parseClassProgress(doc.get(`Lv0_${player.playerID}`), doc.get(`Exp0_${player.playerID}`), doc.get(`ExpReq0_${player.playerID}`), player),
     "class": (doc: Cloudsave, player: Player) => {
         player.class = ClassIndex[doc.get(`CharacterClass_${player.playerID}`)]?.replace(/_/g, " ") || "New Class?";
         player.classId = doc.get(`CharacterClass_${player.playerID}`) as ClassIndex;
@@ -798,8 +784,7 @@ const parseMap = (currentMap: number, player: Player) => {
     }
 }
 
-const parseStats = (stats: number[], lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
-    player.stats.setStats(stats);
+const parseClassProgress = (lvZero: number[], skillXP: Array<number>, skillXPReqs: Array<number>, player: Player) => {
     player.level = lvZero[0];
     player.classExp = skillXP[0];
     player.classExpReq = skillXPReqs[0];
