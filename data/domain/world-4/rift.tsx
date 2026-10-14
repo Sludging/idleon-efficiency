@@ -472,8 +472,12 @@ export class Rift extends Domain {
         if (optionList.length > 232) {
             const sneakMastery = rift.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
             sneakMastery.currentMastery = optionList[231];
-            sneakMastery.highestMastery = optionList[232];
         }
+    }
+
+    updateHighestSneakMastery(completedMasteries: number): void {
+        const sneakMastery = this.bonuses.find(bonus => bonus.name == "Sneak Mastery") as SneakMastery;
+        sneakMastery.highestMastery = completedMasteries;
     }
 }
 

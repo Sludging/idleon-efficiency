@@ -664,9 +664,6 @@ export class Compass extends Domain implements EfficiencyDomain {
         compass.availableDust[DustType.Novadust] = optionList[361];
         compass.totalDustsCollected = optionList[362];
 
-        // Game state
-        compass.completedMasteries = optionList[232] || 0; // Number of completed masteries
-
         // Store raw compass data for calculations
         compass.medallionsCollected = medallionsRaw || [];
         compass.titansKilled = abominationsRaw || [];
@@ -1395,6 +1392,9 @@ export const updateCompassDamageEfficiency = (accountData: Map<string, any>) => 
     const arcade = accountData.get("arcade") as Arcade;
     const emperor = accountData.get("emperor") as Emperor;
     const lab = accountData.get("lab") as Lab;
+
+    // Keep a prepared count so upgrade simulations use the same mastery progression.
+    compass.completedMasteries = sneaking.completedMasteries;
 
     if (compass && players) {
         try {

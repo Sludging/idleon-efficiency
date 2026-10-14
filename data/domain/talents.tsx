@@ -1,4 +1,4 @@
-import { lavaFunc } from "../utility";
+import { lavaFunc, lavaLog } from "../utility";
 import { initTalentTreeRepo } from "./data/TalentTreeRepo";
 import { ImageData } from "./imageData";
 import { TalentModel } from "./model/talentModel";
@@ -62,6 +62,42 @@ export class Talent {
         this.funcY = data.funcY;
         this.lvlUpText = data.lvlUpText;
         this.skillIndex = data.skillIndex;
+    }
+
+    /** Select the highest candidate bonus using candidate allocations and presets with the recipient's shared modifiers. */
+    static getAccountTalentBonus(players: readonly Player[], skillIndex: number, recipientInputs: TalentLevelInputs): number {
+        let maximum = 0;
+        for (const owner of players) {
+            const talent = owner.getTalent(skillIndex);
+            if (!talent) {
+                continue;
+            }
+            // Candidates keep their allocation and both presets, but share the recipient's modifiers.
+            const extraLevels = talent.pointsSpent > 0.5
+                ? talent.getExtraLevels(recipientInputs, owner.allPresetSuperTalentIndexes.has(skillIndex))
+                : 0;
+            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels));
+        }
+        return maximum;
+    }
+
+    static getClassLevelAttributeBonus(player: Player): number {
+        const talent = player.talents.find((talent): talent is WillOfTheEldestTalent => {
+            if (talent.skillIndex !== 620) {
+                return false;
+            }
+            if (!(talent instanceof WillOfTheEldestTalent)) {
+                throw new Error("Will Of The Eldest must use its specialized talent factory.");
+            }
+            return true;
+        });
+        return talent ? talent.getAttributeBonus() : 0;
+    }
+
+    static getDummyTargetAllStatBonus(player: Player, bestDPS: number): number {
+        // Dummy Thicc Stats grants all-stat percentage per power of ten in the Shimmer Island record, capped at 15.
+        // Keep fractional points until rounding the complete attribute composition.
+        return Math.min(15, lavaLog(bestDPS) * player.getTalentBonusAtInputs(653, player.finalTalentInputs));
     }
 
     getBonusAtLevel(level: number, round: boolean = false, yBonus: boolean = false) {
@@ -141,10 +177,48 @@ export class Talent {
                 return new RedoxRatesTalent(talentName, talentInfo);
             case 146:
                 return new ApocalypseChowTalent(talentName, talentInfo);
+            case 620:
+                return new WillOfTheEldestTalent(talentName, talentInfo);
             default:
                 return new Talent(talentName, talentInfo);
         }
     }
+}
+
+class WillOfTheEldestTalent extends Talent {
+    private highestCharacterLevel: number | undefined;
+
+    static prepareAttributeBonuses(players: readonly Player[]): void {
+        let highestCharacterLevel = 0;
+        // Will Of The Eldest uses the highest character level across every class.
+        for (const player of players) {
+            highestCharacterLevel = Math.max(highestCharacterLevel, player.level);
+        }
+
+        for (const player of players) {
+            const talent = player.getTalent(620);
+            if (!talent) {
+                continue;
+            }
+            if (!(talent instanceof WillOfTheEldestTalent)) {
+                throw new Error("Will Of The Eldest must use its specialized talent factory.");
+            }
+            talent.highestCharacterLevel = highestCharacterLevel;
+        }
+    }
+
+    getAttributeBonus(): number {
+        if (this.highestCharacterLevel === undefined) {
+            throw new Error("Will Of The Eldest requires prepared character levels.");
+        }
+        // The attribute effect caps the ordinary talent curve at one point per ten character levels.
+        return Math.min(this.getBonus(), Math.floor(this.highestCharacterLevel / 10));
+    }
+}
+
+export const updateAttributeTalents = (accountData: Map<string, any>): void => {
+    const players = accountData.get("players") as Player[];
+    WillOfTheEldestTalent.prepareAttributeBonuses(players);
 }
 
 export class BloodMarrowTalent extends Talent {

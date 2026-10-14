@@ -1,0 +1,31 @@
+{
+  "description": "Land Rank formula branches and their direct owner bonuses for the retained real save",
+  "target": "Land Rank Database, Dank Ranks, and Plump Database",
+  "extractions": [
+    {
+      "label": "land_rank_0_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 0, 0)",
+      "description": "Evolution Boost uses the diminishing Land Rank formula"
+    },
+    {
+      "label": "land_rank_19_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
+      "description": "Seed of Stats uses the linear Land Rank formula and grants All Stat percentage points"
+    },
+    {
+      "label": "account_dank_ranks_bonus",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 207, -1)",
+      "description": "Raw account maximum Dank Ranks bonus before the Land Rank minimum multiplier"
+    },
+    {
+      "label": "plump_database_bonus",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 14, 0)",
+      "description": "Plump Database percentage boost to Land Rank bonuses"
+    },
+    {
+      "label": "dank_ranks_candidate_0_bonus",
+      "expression": "idleon.callFunction(\"ArbitraryCode5Inputs\", \"decayMulti\", 2, 200, Number(idleon.engine.getGameAttribute(\"PlayerDATABASE\").h[idleon.engine.getGameAttribute(\"GetPlayersUsernames\")[0]].h.SkillLevels[207]) + idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"AllTalentLVz\", \"207|0\", 0), 0, 0)",
+      "description": "Allocated candidate Sludgadin's native Dank Ranks curve with candidate-specific extra levels; source query from correctness-451-m2-landrank-source.md:45-54"
+    }
+  ]
+}

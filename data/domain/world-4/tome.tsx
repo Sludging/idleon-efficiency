@@ -57,6 +57,7 @@ import type { CrownCountResearchGridBonus, GlimboTradesResearchGridBonus, Resear
 import { Minehead } from '../world-7/minehead';
 import { JellyOperator } from '../world-7/jellyOperator';
 import { EventShop } from '../eventShop';
+import { IslandExpeditions } from '../world-2/islandExpedition';
 
 export enum TomeScoreColors {
     Platinum = "#6EE3FF",
@@ -439,6 +440,7 @@ export const updateTomeScores = (data: Map<string, any>) => {
     const farming = data.get("farming") as Farming;
     const royalArmory = data.get("royalArmory") as RoyalArmory;
     const sneaking = data.get("sneaking") as Sneaking;
+    const islandExpeditions = data.get("islandExpeditions") as IslandExpeditions;
     const summoning = data.get("summoning") as Summoning;
     const arcade = data.get("arcade") as Arcade;
     const prayers = data.get("prayers") as Prayer[];
@@ -595,10 +597,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
     // Total Summoning victories.
     const summoningVictories = summoning.summonBattles.getTotalVictories();
 
-    // Number of Ninja floors unlocked
+    // Each completed mastery contributes all twelve floors; otherwise use current floor progress.
     let ninjaFloorsUnlocked = 0;
-    if (0 < (optionListAccount[232] ?? 0)) {
-        ninjaFloorsUnlocked = 12 * optionListAccount[232];
+    if (0 < sneaking.completedMasteries) {
+        ninjaFloorsUnlocked = 12 * sneaking.completedMasteries;
     } else {
         ninjaFloorsUnlocked = Math.min(12, sneaking.getUnlockedFloors());
     }
@@ -723,8 +725,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(totalAFKTime);
                 break;
             case 14:
-                // DPS record on Shimmer Island on dummy in W2
-                line.updateAllPlayersCurrentValue((optionListAccount[172] ?? 0));
+                // Best Dummy Target DPS recorded on Shimmer Island.
+                line.updateAllPlayersCurrentValue(islandExpeditions.dummyTargetBestDPS);
                 break;
             case 15:
                 // Star Talent points are character-specific.

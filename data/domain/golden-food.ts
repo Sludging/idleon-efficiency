@@ -2,7 +2,7 @@ import { Domain, type RawData } from './base/domain';
 import type { Item } from './items';
 import type { Player } from './player';
 import type { Sneaking } from './world-6/sneaking';
-import { ClassIndex } from './talents';
+import { ClassIndex, Talent } from './talents';
 import { getCompanionActiveBonus, type Companion } from './companions';
 import type { Achievement } from './achievements';
 import type { Card } from './cards';
@@ -16,7 +16,7 @@ import type { Sigils } from './world-2/alchemy/sigils';
 import type { Votes } from './world-2/votes';
 import type { Cooking } from './world-4/cooking';
 import type { LegendTalents } from './world-7/legendTalents';
-import type { SushiStation } from './world-7/sushi';
+import type { JellyOperator } from './world-7/jellyOperator';
 import type { UpgradeVault } from './upgradeVault';
 
 interface GoldenFoodAccountInputs {
@@ -36,8 +36,8 @@ interface GoldenFoodAccountInputs {
     cropFallCardLevel: number;
     anniversaryCardLevel: number;
     vault: number;
-    sushi10: number;
-    sushi51: number;
+    jelly10: number;
+    jelly51: number;
 }
 
 interface GoldenFoodCharacterInputs {
@@ -58,6 +58,7 @@ export interface GoldenFoodResults {
     alchemyHP: number;
     monsterCash: number;
     skillExp: number;
+    allStatPercent: number;
 }
 
 export class GoldenFood extends Domain {
@@ -113,12 +114,17 @@ export class GoldenFood extends Domain {
         return this.getResults(player).skillExp;
     }
 
+    // All Stat contributes percentage points before the attribute calculation applies its multiplier.
+    getAllStatPercent(player: Player): number {
+        return this.getResults(player).allStatPercent;
+    }
+
     private calculateEffectivity(account: GoldenFoodAccountInputs, character: GoldenFoodCharacterInputs,
         talent99: number, alchemy: number, deathBringer: number): number {
         const cardsAndLateBonuses = Math.min(4 * account.cropFallCardLevel, 50)
             + Math.min(5 * account.anniversaryCardLevel, 50)
             + (account.companion155 + 1e4 * account.companion174
-                + (account.vault + (account.sushi10 + account.sushi51)));
+                + (account.vault + (account.jelly10 + account.jelly51)));
         const accountBonuses = 2 * account.achievement380 + 3 * account.achievement383
             + (account.vote + (deathBringer + (account.companion48 + (account.legend + cardsAndLateBonuses))));
         const additiveBonus = character.equipment + (talent99 + (account.stamp + (account.achievement37
@@ -168,6 +174,7 @@ export class GoldenFood extends Domain {
             alchemyHP: 1 + this.calculateEffect(player, sneaking, 'MaxHPpct', alchemyEffectivity) / 100,
             monsterCash: this.calculateEffect(player, sneaking, 'MonsterCash', effectivity),
             skillExp: this.calculateEffect(player, sneaking, 'SkillExp', effectivity),
+            allStatPercent: this.calculateEffect(player, sneaking, 'AllStatz', effectivity),
         });
     }
 
@@ -193,7 +200,7 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
     const sneaking = accountData.get('sneaking') as Sneaking;
     const legendTalents = accountData.get('legendTalents') as LegendTalents;
     const upgradeVault = accountData.get('upgradeVault') as UpgradeVault;
-    const sushi = accountData.get('sushi') as SushiStation;
+    const jelly = accountData.get('jellyOperator') as JellyOperator;
     const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 14)!;
     const accountInputs: GoldenFoodAccountInputs = {
         companion174: getCompanionActiveBonus(companions, 174),
@@ -213,8 +220,9 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
         cropFallCardLevel: cards.find(card => card.id === 'cropfallEvent1')!.getLevels(),
         anniversaryCardLevel: cards.find(card => card.id === 'anni5Event1')!.getLevels(),
         vault: upgradeVault.getBonusForId(86),
-        sushi10: sushi.getBonusFromIndex(10),
-        sushi51: sushi.getBonusFromIndex(51),
+        // Jelly obstruction rewards use the successful-operation unlock gate.
+        jelly10: jelly.getObstructionBonus(10),
+        jelly51: jelly.getObstructionBonus(51),
     };
     // The greatest-index Death Bringer supplies maps, independently of the best account talent candidate.
     let mapOwner: Player | undefined;
@@ -250,8 +258,8 @@ export const updateGoldenFood = (accountData: Map<string, any>): void => {
         const finalInputs = player.finalTalentInputs;
         const beforeActiveBubbleMultiplierInputs = player.beforeActiveBubbleMultiplierTalentInputs;
         // Account candidates retain owner allocation and preset membership, but use the recipient's modifiers.
-        const deathBringer = player.getAccountTalentBonus(players, 209, finalInputs) * billionKillMaps;
-        const alchemyDeathBringer = player.getAccountTalentBonus(players, 209, beforeActiveBubbleMultiplierInputs)
+        const deathBringer = Talent.getAccountTalentBonus(players, 209, finalInputs) * billionKillMaps;
+        const alchemyDeathBringer = Talent.getAccountTalentBonus(players, 209, beforeActiveBubbleMultiplierInputs)
             * billionKillMaps;
         goldenFood.updatePlayer(player, sneaking, accountInputs, {
             secretSetPercent: equipmentSets.getSetBonus('SECRET_SET', player, true),

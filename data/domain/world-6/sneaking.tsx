@@ -15,6 +15,7 @@ import { NinjaItemModel } from '../model/ninjaItemModel';
 import { NinjaWeaponModel } from '../model/ninjaWeaponModel';
 import { NinjaTrinketModel } from '../model/ninjaTrinketModel';
 import { BaseNinjaItemModel } from "../model/baseNinjaItemModel";
+import type { Rift } from "../world-4/rift";
 
 export enum SneakingActivity {
     Sneaking = "Sneaking",
@@ -365,6 +366,7 @@ export class Sneaking extends Domain {
     pristineCharms: PristineCharm[] = [];
     doors: SneakingDoor[] = [];
     jade: number = 0;
+    completedMasteries: number = 0;
     beanstalking: Beanstalking = new Beanstalking();
 
     minibossKills: number[] = [];
@@ -397,6 +399,7 @@ export class Sneaking extends Domain {
     getRawKeys(): RawData[] {
         return [
             { key: "Ninja", perPlayer: false, default: [] },
+            { key: "OptLacc", perPlayer: false, default: [] },
             { key: "Lv0_", perPlayer: true, default: [] },
         ]
     }
@@ -414,6 +417,8 @@ export class Sneaking extends Domain {
         const ninjaData = data.get("Ninja") as any[];
         const serverVars = data.get("servervars");
         const charCount = data.get("charCount") as number;
+        const optionList = data.get("OptLacc") as (number | string)[];
+        sneaking.completedMasteries = Number(optionList[232] ?? 0);
         sneaking.pristineCharms.forEach(charm => {
             charm.unlocked = false;
         });
@@ -516,6 +521,16 @@ export class Sneaking extends Domain {
         sneaking.updatePlayersActivity();
     }
 
+    getMasteryAllStatBonus(): number {
+        // Completed mastery milestones grant all-stat percentage points.
+        return 10 * Math.floor((98 + this.completedMasteries) / 100);
+    }
+
+    getMasteryTalentLevels(): number {
+        // All-talent levels start one completed mastery after the all-stat milestone.
+        return 5 * Math.floor((97 + this.completedMasteries) / 100);
+    }
+
     getUnlockedFloors = (): number => {
         let floorUnlocked: number = 0;
         let i: number = 0;
@@ -556,6 +571,10 @@ export class Sneaking extends Domain {
 export const updateSneaking = (data: Map<string, any>) => {
     const alchemy = data.get("alchemy") as Alchemy;
     const sneaking = data.get("sneaking") as Sneaking;
+    const rift = data.get("rift") as Rift;
+
+    // The highest mastery display uses completed runs, not the selected difficulty.
+    rift.updateHighestSneakMastery(sneaking.completedMasteries);
 
     const currencyConduitUpgrade = sneaking.sneakingUpgrades.find(upgrade => upgrade.index == 8);
     if (currencyConduitUpgrade) {

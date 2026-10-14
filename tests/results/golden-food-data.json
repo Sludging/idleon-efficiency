@@ -12,6 +12,10 @@
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
       "result": 15271.845815210738
     },
+    "golden_all_stat_percent": {
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
+      "result": 15714.882032941576
+    },
     "golden_effectivity": {
       "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
       "result": 743.5132159494034

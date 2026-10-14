@@ -1,0 +1,491 @@
+{
+  "description": "Existing attribute producers for offline game 1.22 target 3 Sludgev4, paired retained save ed192e74636dc5303ac8a9fa158259a20b07c931c4537f0021ba4c2de93a6cdc. Read-only calls; no final attribute composition.",
+  "target": "M2 S1 existing four-attribute producer readiness",
+  "extractions": [
+    {
+      "label": "bubble_TotalSTR",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalSTR",
+      "description": "Alchemy TotalSTR attribute contribution"
+    },
+    {
+      "label": "bubble_TotalAGI",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalAGI",
+      "description": "Alchemy TotalAGI attribute contribution"
+    },
+    {
+      "label": "bubble_TotalWIS",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalWIS",
+      "description": "Alchemy TotalWIS attribute contribution"
+    },
+    {
+      "label": "bubble_TotalLUK",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.TotalLUK",
+      "description": "Alchemy TotalLUK attribute contribution"
+    },
+    {
+      "label": "bubble_W4",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.W4",
+      "description": "Alchemy W4 attribute contribution"
+    },
+    {
+      "label": "bubble_A4",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.A4",
+      "description": "Alchemy A4 attribute contribution"
+    },
+    {
+      "label": "bubble_M4",
+      "expression": "idleon.getDNSM(\"AlchBubbles\").h.M4",
+      "description": "Alchemy M4 attribute contribution"
+    },
+    {
+      "label": "talent_10",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 10)",
+      "description": "Talent 10 attribute contribution"
+    },
+    {
+      "label": "talent_11",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 11)",
+      "description": "Talent 11 attribute contribution"
+    },
+    {
+      "label": "talent_12",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 12)",
+      "description": "Talent 12 attribute contribution"
+    },
+    {
+      "label": "talent_13",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 13)",
+      "description": "Talent 13 attribute contribution"
+    },
+    {
+      "label": "talent_98",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 98)",
+      "description": "Talent 98 attribute contribution"
+    },
+    {
+      "label": "talent_203",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 203)",
+      "description": "Talent 203 attribute contribution"
+    },
+    {
+      "label": "talent_278",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 278)",
+      "description": "Talent 278 attribute contribution"
+    },
+    {
+      "label": "talent_428",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 428)",
+      "description": "Talent 428 attribute contribution"
+    },
+    {
+      "label": "talent_459",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 459)",
+      "description": "Talent 459 attribute contribution"
+    },
+    {
+      "label": "talent_593",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 593)",
+      "description": "Talent 593 attribute contribution"
+    },
+    {
+      "label": "talent_23",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 23)",
+      "description": "Talent 23 attribute contribution"
+    },
+    {
+      "label": "talent_652",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 652)",
+      "description": "Talent 652 attribute contribution"
+    },
+    {
+      "label": "talent_618",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 618)",
+      "description": "Talent 618 attribute contribution"
+    },
+    {
+      "label": "talent_143",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 143)",
+      "description": "Talent 143 attribute contribution"
+    },
+    {
+      "label": "talent_368",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 368)",
+      "description": "Talent 368 attribute contribution"
+    },
+    {
+      "label": "talent_533",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 533)",
+      "description": "Talent 533 attribute contribution"
+    },
+    {
+      "label": "talent_653",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 653)",
+      "description": "Talent 653 attribute contribution"
+    },
+    {
+      "label": "talent_142_second",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 142)",
+      "description": "Talent 142 second-curve flat attribute contribution"
+    },
+    {
+      "label": "talent_367_second",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 367)",
+      "description": "Talent 367 second-curve flat attribute contribution"
+    },
+    {
+      "label": "talent_532_second",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 2, 532)",
+      "description": "Talent 532 second-curve flat attribute contribution"
+    },
+    {
+      "label": "stamp_BaseSTR",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseSTR\")",
+      "description": "Stamp BaseSTR attribute contribution"
+    },
+    {
+      "label": "stamp_BaseAGI",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAGI\")",
+      "description": "Stamp BaseAGI attribute contribution"
+    },
+    {
+      "label": "stamp_BaseWIS",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseWIS\")",
+      "description": "Stamp BaseWIS attribute contribution"
+    },
+    {
+      "label": "stamp_BaseLUK",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseLUK\")",
+      "description": "Stamp BaseLUK attribute contribution"
+    },
+    {
+      "label": "stamp_BaseAllStat",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"BaseAllStat\")",
+      "description": "Stamp BaseAllStat attribute contribution"
+    },
+    {
+      "label": "stamp_AllStatPct",
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AllStatPct\")",
+      "description": "Stamp AllStatPct attribute contribution"
+    },
+    {
+      "label": "sign_STR",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.STR",
+      "description": "Selected Star Signs STR complete contribution"
+    },
+    {
+      "label": "sign_pctSTR",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctSTR",
+      "description": "Selected Star Signs pctSTR complete contribution"
+    },
+    {
+      "label": "sign_AGI",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.AGI",
+      "description": "Selected Star Signs AGI complete contribution"
+    },
+    {
+      "label": "sign_pctAGI",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctAGI",
+      "description": "Selected Star Signs pctAGI complete contribution"
+    },
+    {
+      "label": "sign_WIS",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.WIS",
+      "description": "Selected Star Signs WIS complete contribution"
+    },
+    {
+      "label": "sign_pctWIS",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctWIS",
+      "description": "Selected Star Signs pctWIS complete contribution"
+    },
+    {
+      "label": "sign_LUK",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.LUK",
+      "description": "Selected Star Signs LUK complete contribution"
+    },
+    {
+      "label": "sign_pctLUK",
+      "expression": "idleon.getDNSM(\"StarSigns\").h.pctLUK",
+      "description": "Selected Star Signs pctLUK complete contribution"
+    },
+    {
+      "label": "post_office_23b",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"23b\"]",
+      "description": "Post Office 23b flat attribute contribution"
+    },
+    {
+      "label": "post_office_21b",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"21b\"]",
+      "description": "Post Office 21b flat attribute contribution"
+    },
+    {
+      "label": "post_office_22b",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"22b\"]",
+      "description": "Post Office 22b flat attribute contribution"
+    },
+    {
+      "label": "post_office_15c",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"15c\"]",
+      "description": "Post Office 15c flat attribute contribution"
+    },
+    {
+      "label": "post_office_LUK",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"LUK\"]",
+      "description": "Post Office LUK flat attribute contribution"
+    },
+    {
+      "label": "post_office_20a",
+      "expression": "idleon.getDNSM(\"BoxRewards\").h[\"20a\"]",
+      "description": "Post Office 20a flat attribute contribution"
+    },
+    {
+      "label": "card_9",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 9)",
+      "description": "Prepared active and passive card effect 9 attribute contribution"
+    },
+    {
+      "label": "card_7",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 7)",
+      "description": "Prepared active and passive card effect 7 attribute contribution"
+    },
+    {
+      "label": "card_5",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 5)",
+      "description": "Prepared active and passive card effect 5 attribute contribution"
+    },
+    {
+      "label": "card_2",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 2)",
+      "description": "Prepared active and passive card effect 2 attribute contribution"
+    },
+    {
+      "label": "card_82",
+      "expression": "idleon.callFunction(\"CardBonusREAL\", 82)",
+      "description": "Prepared active and passive card effect 82 attribute contribution"
+    },
+    {
+      "label": "sigil_0",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 0, 0)",
+      "description": "Sigil 0 flat attribute contribution"
+    },
+    {
+      "label": "shiny_6",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 6, -1)",
+      "description": "Shiny pet 6 flat attribute contribution"
+    },
+    {
+      "label": "arcade_19",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 19)",
+      "description": "Arcade 19 flat attribute contribution"
+    },
+    {
+      "label": "sigil_1",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 1, 0)",
+      "description": "Sigil 1 flat attribute contribution"
+    },
+    {
+      "label": "shiny_7",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 7, -1)",
+      "description": "Shiny pet 7 flat attribute contribution"
+    },
+    {
+      "label": "arcade_20",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 20)",
+      "description": "Arcade 20 flat attribute contribution"
+    },
+    {
+      "label": "sigil_2",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 2, 0)",
+      "description": "Sigil 2 flat attribute contribution"
+    },
+    {
+      "label": "shiny_8",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 8, -1)",
+      "description": "Shiny pet 8 flat attribute contribution"
+    },
+    {
+      "label": "arcade_21",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 21)",
+      "description": "Arcade 21 flat attribute contribution"
+    },
+    {
+      "label": "sigil_3",
+      "expression": "idleon.callFunction(\"Labb\", \"SigilBonus\", \"Blank\", 3, 0)",
+      "description": "Sigil 3 flat attribute contribution"
+    },
+    {
+      "label": "shiny_9",
+      "expression": "idleon.callFunction(\"Breeding\", \"ShinyBonusS\", \"Nah\", 9, -1)",
+      "description": "Shiny pet 9 flat attribute contribution"
+    },
+    {
+      "label": "arcade_22",
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 22)",
+      "description": "Arcade 22 flat attribute contribution"
+    },
+    {
+      "label": "companion_8",
+      "expression": "idleon.callFunction(\"Companions\", 8)",
+      "description": "Companion 8 active attribute contribution"
+    },
+    {
+      "label": "pristine_4",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 4, 0)",
+      "description": "Unlocked pristine charm 4 attribute percentage"
+    },
+    {
+      "label": "pristine_1",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 1, 0)",
+      "description": "Unlocked pristine charm 1 attribute percentage"
+    },
+    {
+      "label": "pristine_10",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 10, 0)",
+      "description": "Unlocked pristine charm 10 attribute percentage"
+    },
+    {
+      "label": "pristine_5",
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 5, 0)",
+      "description": "Unlocked pristine charm 5 attribute percentage"
+    },
+    {
+      "label": "buff_94",
+      "expression": "idleon.callFunction(\"GetBuffBonuses\", 94, 1)",
+      "description": "Selected ordinary Strength buff contribution"
+    },
+    {
+      "label": "quest_count",
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"TotalQuestsComplete\")",
+      "description": "Account completed quest count for Quest Chungus"
+    },
+    {
+      "label": "meal_stat",
+      "expression": "idleon.callFunction(\"MealBonus\", \"Stat\")",
+      "description": "Cooking naturally empty Stat meal sum"
+    },
+    {
+      "label": "guild_stat",
+      "expression": "idleon.callFunction(\"GuildBonuses\", 1)",
+      "description": "Guild shared flat All Stat contribution"
+    },
+    {
+      "label": "vial_all_stat",
+      "expression": "idleon.getDNSM(\"AlchVials\").h.AllStatPCT",
+      "description": "Alchemy vial All Stat percentage"
+    },
+    {
+      "label": "hole_pocket_divinity",
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 2, 0)",
+      "description": "Pocket Divinity Cosmo contribution"
+    },
+    {
+      "label": "summoning_all_stat",
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 18, 0)",
+      "description": "Summoning victory All Stat percentage"
+    },
+    {
+      "label": "sailing_all_stat",
+      "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 28, 0)",
+      "description": "Sailing artifact All Stat percentage with tier modifiers"
+    },
+    {
+      "label": "jelly_10",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 10, 0)",
+      "description": "Jelly obstruction 10 normal unlocked reward"
+    },
+    {
+      "label": "jelly_51",
+      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 51, 0)",
+      "description": "Jelly obstruction 51 normal unlocked reward"
+    },
+    {
+      "label": "equipment_51",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"51\")",
+      "description": "Equipment StrengthFlat attribute contribution"
+    },
+    {
+      "label": "equipment_52",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"52\")",
+      "description": "Equipment AgilityFlat attribute contribution"
+    },
+    {
+      "label": "equipment_53",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"53\")",
+      "description": "Equipment WisdomFlat attribute contribution"
+    },
+    {
+      "label": "equipment_54",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"54\")",
+      "description": "Equipment LuckFlat attribute contribution"
+    },
+    {
+      "label": "equipment_57",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"57\")",
+      "description": "Equipment Strength attribute contribution"
+    },
+    {
+      "label": "equipment_58",
+      "expression": "idleon.callFunction(\"EtcBonuses\", \"58\")",
+      "description": "Equipment Wisdom attribute contribution"
+    },
+    {
+      "label": "farming_all_stat",
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"LankRankUpgBonus\", 19, 0)",
+      "description": "Land Rank upgrade All Stat percentage"
+    },
+    {
+      "label": "votes_all_stat",
+      "expression": "idleon.callFunction(\"Summoning\", \"VotingBonusz\", 2, 0)",
+      "description": "Current vote All Stat percentage"
+    },
+    {
+      "label": "marbiglass_all_stat",
+      "expression": "idleon.callFunction(\"GetSetBonus\", \"MARBIGLASS_SET\", \"Bonus\", 0, 0)",
+      "description": "Marbiglass equipment set additive All Stat percentage; no multiplier conversion"
+    },
+    {
+      "label": "sneaking_mastery_all_stat_bonus",
+      "expression": "10*Math.floor((98+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
+      "description": "Completed Sneaking mastery All Stat percentage points; bounded mastery component from the AllStatPCT source"
+    },
+    {
+      "label": "sneaking_mastery_talent_levels",
+      "expression": "5*Math.floor((97+Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[232]))/100)",
+      "description": "Completed Sneaking mastery extra talent levels; bounded mastery component from the GetTalentLV sourceAllTalentLV branch"
+    },
+    {
+      "label": "eternal_strength",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 51, -1)",
+      "description": "Eternal Str account maximum flat Strength contribution"
+    },
+    {
+      "label": "eternal_agility",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 52, -1)",
+      "description": "Eternal Agi account maximum flat Agility contribution"
+    },
+    {
+      "label": "eternal_wisdom",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 53, -1)",
+      "description": "Eternal Wis account maximum flat Wisdom contribution"
+    },
+    {
+      "label": "eternal_luck",
+      "expression": "idleon.callFunction(\"getbonus2\", 1, 54, -1)",
+      "description": "Eternal Luk account maximum flat Luck contribution"
+    },
+    {
+      "label": "will_of_the_eldest_attributes",
+      "expression": "idleon.callFunction(\"TalentCalc\", 620)",
+      "description": "Will Of The Eldest flat All Stat contribution capped by highest character level across all classes"
+    },
+    {
+      "label": "talent_620",
+      "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 620)",
+      "description": "Will Of The Eldest ordinary allocated talent effect before its highest-character-level cap"
+    },
+    {
+      "label": "dummy_target_all_stat_bonus",
+      "expression": "Math.min(15,idleon.callFunction(\"getLOG\",Number(idleon.engine.getGameAttribute(\"OptionsListAccount\")[172]))*idleon.callFunction(\"GetTalentNumber\",1,653))",
+      "description": "Dummy Thicc Stats All Stat percentage points; exact bounded Dummy Target component from AllStatPCT, using the ordinary talent effect"
+    }
+  ]
+}

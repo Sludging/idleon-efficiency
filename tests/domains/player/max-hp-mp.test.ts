@@ -1,5 +1,6 @@
 import type { Player } from '../../../data/domain/player';
 import type { GoldenFood } from '../../../data/domain/golden-food';
+import { Talent } from '../../../data/domain/talents';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import {
   ExtractionResults,
@@ -93,7 +94,7 @@ describe('Player normal-character maximum health and mana', () => {
     for (const talent of oracle.talents) {
       expect(player.getTalentBonusAtInputs(talent.id, inputs)).toMatchLiveGame(talent.bonus, 0);
     }
-    expect(player.getAccountTalentBonus(players, 209, inputs)).toMatchLiveGame(oracle.accountDeathBringer, 0);
+    expect(Talent.getAccountTalentBonus(players, 209, inputs)).toMatchLiveGame(oracle.accountDeathBringer, 0);
     expect(stage === 'early' ? goldenFood.getAlchemyHP(player) : goldenFood.getHP(player))
       .toMatchLiveGame(oracle.goldFood, 0);
   });

@@ -602,7 +602,8 @@ export class Alchemy extends Domain {
     _shouldBoostPlayer = (player: Player, cauldron: CauldronIndex, bubble: number) => {
         const bonusKey = this.cauldrons[cauldron].bubbles[bubble].data.bonusKey;
         // Class boosts exclude multiplier, active, all-character, and late bubbles; the 16th-bubble pass is independent.
-        if (bubble === 16 || bubble >= 30 || bonusKey.includes("passz") || bonusKey.includes("ACTIVE") || bonusKey.includes("AllCharz")) {
+        // The game calculates the first stat bubble before it prepares the class multiplier.
+        if (bubble === 0 || bubble === 16 || bubble >= 30 || bonusKey.includes("passz") || bonusKey.includes("ACTIVE") || bonusKey.includes("AllCharz")) {
             return false;
         }
 

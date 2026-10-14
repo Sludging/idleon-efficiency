@@ -54,7 +54,7 @@ import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
-import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
+import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
@@ -93,7 +93,7 @@ import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenith
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies } from './skilling';
-import { updateRightHandOfActionBonuses } from './talents';
+import { updateAttributeTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -360,6 +360,10 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
+    "attributeTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updateAttributeTalents(accountData),
+    // Land Rank bonuses use final recipient contexts before stat consumers and Farming display snapshots.
+    "farmingLandRankBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLandRankBonuses(accountData),
     // Equipment and Obol attribute modifiers consume each character's final talent context.
     "equipmentProperties": (_doc: Cloudsave, accountData: Map<string, any>) => updateEquipmentProperties(accountData),
     "goldenFood": (_doc: Cloudsave, accountData: Map<string, any>) => updateGoldenFood(accountData),

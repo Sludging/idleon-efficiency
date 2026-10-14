@@ -168,7 +168,6 @@ export class Player {
     extraLevelsFromSlug: number = 0;
     extraLevelsFromEquinox: number = 0;
     extraLevelsFromNinjaMastery: number = 0;
-    ninjaMasteryQuantity: number = 0;
     extraLevelsFromAchievements: number = 0;
     extraLevelsFromKattlekrukSet: number = 0;
     extraLevelsFromGrimoire: number = 0;
@@ -330,22 +329,6 @@ export class Player {
         const extraLevels = talent.getExtraLevels(inputs,
             this.activeSuperTalentIndexes.has(skillIndex));
         return talent.getBonusAtLevel(talent.pointsSpent + extraLevels);
-    }
-
-    getAccountTalentBonus(players: readonly Player[], skillIndex: number, inputs: TalentLevelInputs): number {
-        let maximum = 0;
-        for (const owner of players) {
-            const talent = owner.getTalent(skillIndex);
-            if (!talent) {
-                continue;
-            }
-            // Candidates keep their allocation and both presets, but share the recipient's modifiers.
-            const extraLevels = talent.pointsSpent > 0.5
-                ? talent.getExtraLevels(inputs, owner.allPresetSuperTalentIndexes.has(skillIndex))
-                : 0;
-            maximum = Math.max(maximum, talent.getBonusAtLevel(talent.pointsSpent + extraLevels));
-        }
-        return maximum;
     }
 
     applyTalentLevelInputs(inputs: TalentLevelInputs): void {
@@ -835,7 +818,6 @@ export class Players extends Domain {
         const playerNames = data.get("playerNames") as string[];
         const charCount = data.get("charCount") as number;
         const allItems = data.get("itemsData") as Item[];
-        const accountOptions = data.get("OptLacc") as (number | string)[];
 
         const players = data.get(this.getDataKey()) as Player[];
 
@@ -858,7 +840,6 @@ export class Players extends Domain {
         const raw = Cloudsave.fromJSON(data.get("rawData"))
 
         players.map(player => {
-            player.ninjaMasteryQuantity = Number(accountOptions[232]);
             Object.entries(keyFunctionMap).forEach(([key, toExecute]) => {
                 try {
                     if (key == "equipment") {
@@ -1145,6 +1126,7 @@ const getPlayerTalentLevelInputs = (
     const equipmentSets = data.get("equipmentSets") as EquipmentSets;
     const tesseract = data.get("tesseract") as Tesseract;
     const gaming = data.get("gaming") as Gaming;
+    const sneaking = data.get("sneaking") as Sneaking;
     return {
         eliteTalentLevels: player.getTalentBonus(149) + player.getTalentBonus(374) + player.getTalentBonus(539),
         achievementTalentLevels: achievements[291].completed ? 1 : 0,
@@ -1152,7 +1134,7 @@ const getPlayerTalentLevelInputs = (
         companionTalentLevels: getCompanionActiveBonus(companions, 1),
         minorLinkTalentLevels,
         equinoxTalentLevels: equinox.upgrades[10].getBonus(),
-        ninjaMasteryTalentLevels: 5 * Math.floor((97 + player.ninjaMasteryQuantity) / 100),
+        ninjaMasteryTalentLevels: sneaking.getMasteryTalentLevels(),
         grimoireTalentLevels: grimoire.getUpgradeBonus(39),
         equipmentTalentLevels: equipmentSets.getSetBonus("KATTLEKRUK_SET", player),
         tesseractTalentLevels: tesseract.getUpgradeBonus(57),

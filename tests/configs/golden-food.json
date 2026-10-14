@@ -18,6 +18,11 @@
       "description": "Golden-food skill experience percentage."
     },
     {
+      "label": "golden_all_stat_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
+      "description": "Golden-food all-stat contribution in raw percentage points, without rounding or division by 100."
+    },
+    {
       "label": "golden_effectivity",
       "expression": "(function(){idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\");return idleon.getDNSM(\"GfoodBonusMULTI\")})()",
       "description": "Complete shared golden-food effectiveness."
