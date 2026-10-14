@@ -31,6 +31,7 @@ import { Hole } from "../world-5/hole/hole";
 import { Votes } from "../world-2/votes";
 import { EquipmentSets } from "../misc/equipmentSets";
 import { Stat } from "../base/stat";
+import type { Rift } from "./rift";
 
 const spiceValues: number[] = "0 3 5 8 10 13 15 19 20 23 27 31 33 37 41 45 48 50 53 56 58 60 63 66 70 73".split(" ").map(value => parseInt(value));
 const mealLuckValues: number[] = "1 .20 .10 .05 .02 .01 .004 .001 .0005 .0003".split(" ").map(value => parseFloat(value));
@@ -440,6 +441,10 @@ export class Cooking extends Domain {
 
     starSignUnlocked: boolean = false;
     starSignInfinity: boolean = false;
+
+    isCookingMasteryUnlocked(rift: Rift, companions: Companion[]): boolean {
+        return rift.level > 58 || getCompanionActiveBonus(companions, 87) > 0.1;
+    }
 
     getMaxMeals = () => {
         return this.meals.length;

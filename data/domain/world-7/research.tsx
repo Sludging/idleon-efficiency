@@ -37,6 +37,10 @@ import { Sneaking } from "../world-6/sneaking";
 import { EventShop } from "../eventShop";
 import { RoyalArmory } from "../world-6/royalArmory/royalArmory";
 import type { ImageData } from "../imageData";
+import { Glimbo } from "./glimbo";
+import { TaskBoard } from "../tasks";
+import { Rift } from "../world-4/rift";
+import { commaNotation, nFormatter, notateNumber } from "../../utility";
 
 const RESEARCH_GRID_ALL_MULTI_CHALLENGES = [71, 72, 76];
 const RESEARCH_GRID_ALL_MULTI_COMPANION = 55;
@@ -44,11 +48,37 @@ const DOOT_COMPANION = 0;
 const DOOT_RESEARCH_INDEX = 173;
 const RESEARCH_GRID_ALL_MULTI_SUSHI = 53;
 
-// Research[1] stores the shape index covering each grid square. -1 means no shape.
-// These are the shape multipliers from CustomLists.Research[5].
-const RESEARCH_GRID_SHAPE_BONUS_PERCENTAGES = [25, 15, 50, 20, 20, 35, 25, 30, 35, 60];
+const RESEARCH_GRID_COLUMNS = 20;
 
 type ResearchGridBonusData = ResearchGridBonusBase["data"];
+
+export interface ResearchPointBalance {
+  earned: number;
+  spent: number;
+  available: number;
+  contributors: ResearchContributor[];
+  milestone: ResearchPointMilestone;
+}
+
+export type ResearchGridPrerequisite =
+  | { kind: "lore"; tunnelIndex: number; name: string; met: boolean }
+  | { kind: "cookingMastery"; met: boolean }
+  | { kind: "undeadBattalion"; qualifyingBoatCount: number; totalBoatCount: number; met: boolean };
+
+export type ResearchLinkedState =
+  | { kind: "eclecticSigils"; researchGranted: boolean; loreCompleted: boolean; effectiveUnlocked: boolean }
+  | { kind: "cookingMastery"; researchGranted: boolean; masteryUnlocked: boolean; effectiveActive: boolean; expMultiplier: number }
+  | { kind: "undeadBattalion"; researchGranted: boolean; qualifyingBoatCount: number; totalBoatCount: number; effectiveBoatCount: number }
+  | { kind: "crowns"; crownCount: number; bonusPerCrown: number; totalBonus: number }
+  | { kind: "glimboTrades"; totalTrades: number; completeTradeBlocks: number; bonusPerBlock: number; totalBonus: number }
+  | { kind: "masterclass"; researchGranted: boolean; classes: readonly ["Deathbringer", "Windwalker", "Arcane Cultist"]; dailyReductionPercent: number; accumulatedReduction: number; accumulatedReductionPercent: number; costMultiplier: number }
+  | { kind: "divineDesign"; dropRatePercent: number; arctisGranted: boolean; dootActive: boolean; sharedGridContributionPercent: number };
+
+interface ResearchLinkedInputs {
+  sigilLore: { index: number; name: string; completed: boolean };
+  cookingMasteryUnlocked: boolean;
+  undeadBattalion: { qualifyingBoatCount: number; totalBoatCount: number };
+}
 
 /**
  * A single Research Grid square.
@@ -60,11 +90,23 @@ export class ResearchGridBonus {
   level: number = 0;
   allBonusMultiplier: number = 1;
   shapeBonusPercent: number = 0;
+  activeOwner: number | undefined;
+  reachable: boolean = false;
+  affordable: boolean = false;
+  prerequisites: ResearchGridPrerequisite[] = [];
+  linkedState: ResearchLinkedState | undefined;
+  accumulatedReductionPercent: number = 0;
 
   constructor(
     public index: number,
     public data: ResearchGridBonusData,
   ) {}
+
+  parse(savedOwner: number | undefined, shapes: ResearchShape[]): void {
+    this.activeOwner = savedOwner === undefined || Number(savedOwner) === -1 ? undefined : Number(savedOwner);
+    this.shapeBonusPercent = this.activeOwner === undefined
+      ? 0 : shapes[this.activeOwner].data.bonusPercent;
+  }
 
   protected getLevelValue(): number {
     return this.level;
@@ -72,6 +114,109 @@ export class ResearchGridBonus {
 
   getLevel(): number {
     return Math.round(this.level);
+  }
+
+  get maxLevel(): number {
+    return Math.round(this.data.maxLevel);
+  }
+
+  get atCap(): boolean {
+    return this.level >= this.maxLevel;
+  }
+
+  get primaryBonus(): number {
+    return this.getBonus();
+  }
+
+  get secondaryBonus(): number {
+    return this.getBonusMode2();
+  }
+
+  get shapeMultiplier(): number {
+    return 1 + this.shapeBonusPercent / 100;
+  }
+
+  get primaryMultiplier(): number {
+    return 1 + this.getBonus() / 100;
+  }
+
+  get secondaryMultiplier(): number {
+    return 1 + this.getBonusMode2() / 100;
+  }
+
+  protected getDescriptionTemplate(): string {
+    return this.data.description;
+  }
+
+  getDescription(): string {
+    const primary = Math.round(100 * this.getBonus()) / 100;
+    const primaryText = primary > 100 ? commaNotation(primary) : notateNumber(primary, "Small");
+    return this.getDescriptionTemplate()
+      .replace(/{/g, primaryText)
+      .replace(/}/g, nFormatter(1 + primary / 100, "MultiplierInfo"))
+      .replace(/\$/g, commaNotation(this.getBonusMode2()))
+      .replace(/\^/g, nFormatter(this.secondaryMultiplier, "MultiplierInfo"))
+      .replace(/&/g, String(this.accumulatedReductionPercent))
+      .replace(/\|/g, String(this.getLevel()));
+  }
+
+  preparePresentation(bonuses: ResearchGridBonus[], accumulatedReduction: number, inputs: ResearchLinkedInputs): void {
+    const column = this.index % RESEARCH_GRID_COLUMNS;
+    const startingSquare = column >= 9 && column <= 10 && this.index >= 100 && this.index <= 140;
+    const neighbors: number[] = [];
+    if (this.index >= RESEARCH_GRID_COLUMNS) neighbors.push(this.index - RESEARCH_GRID_COLUMNS);
+    if (column > 0) neighbors.push(this.index - 1);
+    if (column < RESEARCH_GRID_COLUMNS - 1) neighbors.push(this.index + 1);
+    if (this.index + RESEARCH_GRID_COLUMNS < bonuses.length) neighbors.push(this.index + RESEARCH_GRID_COLUMNS);
+    this.reachable = startingSquare || this.level >= 1
+      || (this.data.name !== "Name" && neighbors.some(index => bonuses[index].level >= 1));
+    this.accumulatedReductionPercent = Math.floor(1e4 * (1 - 1 / (1 + accumulatedReduction / 100))) / 100;
+    this.prerequisites = [];
+    this.linkedState = undefined;
+
+    switch (this.index) {
+      case 128: {
+        const researchGranted = this.getBonus() >= 1;
+        this.prerequisites = [{
+          kind: "lore", tunnelIndex: inputs.sigilLore.index, name: inputs.sigilLore.name, met: inputs.sigilLore.completed,
+        }];
+        this.linkedState = {
+          kind: "eclecticSigils", researchGranted, loreCompleted: inputs.sigilLore.completed,
+          effectiveUnlocked: researchGranted && inputs.sigilLore.completed,
+        };
+        break;
+      }
+      case 190: {
+        const researchGranted = this.level >= 1;
+        this.prerequisites = [{ kind: "cookingMastery", met: inputs.cookingMasteryUnlocked }];
+        this.linkedState = {
+          kind: "cookingMastery", researchGranted, masteryUnlocked: inputs.cookingMasteryUnlocked,
+          effectiveActive: researchGranted && inputs.cookingMasteryUnlocked, expMultiplier: this.primaryMultiplier,
+        };
+        break;
+      }
+      case 105: {
+        const researchGranted = this.getLevel() >= 1;
+        const { qualifyingBoatCount, totalBoatCount } = inputs.undeadBattalion;
+        this.prerequisites = [{
+          kind: "undeadBattalion", qualifyingBoatCount, totalBoatCount, met: qualifyingBoatCount > 0,
+        }];
+        this.linkedState = {
+          kind: "undeadBattalion", researchGranted, qualifyingBoatCount, totalBoatCount,
+          effectiveBoatCount: researchGranted ? qualifyingBoatCount : 0,
+        };
+        break;
+      }
+      case 150:
+        this.linkedState = {
+          kind: "masterclass", researchGranted: this.level >= 1,
+          classes: ["Deathbringer", "Windwalker", "Arcane Cultist"],
+          dailyReductionPercent: this.getBonus(), accumulatedReduction,
+          accumulatedReductionPercent: this.accumulatedReductionPercent,
+          costMultiplier: 1 / (1 + accumulatedReduction / 100),
+        };
+        break;
+    }
   }
 
   /**
@@ -137,6 +282,13 @@ export class CrownCountResearchGridBonus extends ResearchGridBonus {
   override getBonusMode2(): number {
     return this.getBonus() * this.crownCount;
   }
+
+  override preparePresentation(bonuses: ResearchGridBonus[], accumulatedReduction: number, inputs: ResearchLinkedInputs): void {
+    super.preparePresentation(bonuses, accumulatedReduction, inputs);
+    this.linkedState = {
+      kind: "crowns", crownCount: this.crownCount, bonusPerCrown: this.getBonus(), totalBonus: this.getBonusMode2(),
+    };
+  }
 }
 
 /**
@@ -196,18 +348,19 @@ export class AccountOptionResearchGridBonus extends ResearchGridBonus {
 
 /** Glimbo Insider Trading Secrets grants a secondary bonus per 100 trades. */
 export class GlimboTradesResearchGridBonus extends ResearchGridBonus {
-  glimboTradeCounts: number[] = [];
   totalGlimboTrades: number = 0;
-
-  override updateDerivedValues(): void {
-    this.totalGlimboTrades = this.glimboTradeCounts.reduce(
-      (sum, value) => sum + (Number(value) || 0),
-      0,
-    );
-  }
 
   override getBonusMode2(): number {
     return this.getBonus() * Math.floor(this.totalGlimboTrades / 100);
+  }
+
+  override preparePresentation(bonuses: ResearchGridBonus[], accumulatedReduction: number, inputs: ResearchLinkedInputs): void {
+    super.preparePresentation(bonuses, accumulatedReduction, inputs);
+    this.linkedState = {
+      kind: "glimboTrades", totalTrades: this.totalGlimboTrades,
+      completeTradeBlocks: Math.floor(this.totalGlimboTrades / 100),
+      bonusPerBlock: this.getBonus(), totalBonus: this.getBonusMode2(),
+    };
   }
 }
 
@@ -217,6 +370,23 @@ export class GlimboTradesResearchGridBonus extends ResearchGridBonus {
  */
 export class DivineDesignResearchGridBonus extends ResearchGridBonus {
   dootBonus: number = 0;
+  activeDootBonus: number = 0;
+
+  protected override getDescriptionTemplate(): string {
+    const sentence = this.activeDootBonus === 1
+      ? "Arctis_nods_in_approval..._all_Research_Grid_bonuses_are_1.05x_higher"
+      : "You_are_now_permanently_linked_to_Arctis_on_all_characters.";
+    return this.data.description.replace("<", sentence);
+  }
+
+  override preparePresentation(bonuses: ResearchGridBonus[], accumulatedReduction: number, inputs: ResearchLinkedInputs): void {
+    super.preparePresentation(bonuses, accumulatedReduction, inputs);
+    this.linkedState = {
+      kind: "divineDesign", dropRatePercent: this.getBonus(), arctisGranted: this.getBonus() >= 1,
+      dootActive: this.activeDootBonus === 1,
+      sharedGridContributionPercent: this.getGridBonusAllmultiContribution(),
+    };
+  }
 
   override getGridBonusAllmultiContribution(): number {
     return 5 * Math.min(1, this.getLevelValue() * this.dootBonus);
@@ -375,6 +545,65 @@ export interface ResearchPointMilestone {
 export interface ResearchPapers {
   consumable: { item: Item; count: number; grantHours: number; includesMineheadCurrency: true; explanation: string };
   permanent: { purchase: GemPurchase; purchasedCount: number; offlinePercent: number };
+}
+
+export interface ResearchShapePlacement {
+  x: number;
+  y: number;
+  rotationDegrees: number;
+}
+
+export class ResearchShape {
+  placement: ResearchShapePlacement | undefined;
+  owned: boolean = false;
+  coveredUpgrades: ResearchGridBonus[] = [];
+  rotationUnlocked: boolean = false;
+  rotationRequiredLevel: number = 0;
+  rotationStepDegrees: number = 0;
+
+  constructor(public index: number, public data: ResearchShapeBase["data"]) {}
+
+  static fromBase(definitions: ResearchShapeBase[]): ResearchShape[] {
+    return definitions.map(shape => new ResearchShape(shape.index, shape.data));
+  }
+
+  parse(savedPlacement: number[]): void {
+    const offset = 4 * this.index;
+    this.placement = savedPlacement[offset] === undefined
+      || savedPlacement[offset + 1] === undefined || savedPlacement[offset + 2] === undefined
+      ? undefined : {
+        x: Number(savedPlacement[offset]), y: Number(savedPlacement[offset + 1]),
+        rotationDegrees: Number(savedPlacement[offset + 2]),
+      };
+    this.coveredUpgrades = [];
+  }
+
+  get rotationModuloDegrees(): number | undefined {
+    if (this.placement === undefined) {
+      return undefined;
+    }
+    const rotationDegrees = this.placement.rotationDegrees;
+    return rotationDegrees - 360 * Math.floor(rotationDegrees / 360);
+  }
+
+  get bonusMultiplier(): number {
+    return 1 + this.data.bonusPercent / 100;
+  }
+
+  getDescription(): string {
+    return this.data.descriptionTemplate
+      .replace(/{/g, String(this.data.bonusPercent))
+      .replace(/}/g, nFormatter(this.bonusMultiplier, "MultiplierInfo"));
+  }
+
+  prepareCoverage(ownership: ResearchShapeOwnership, upgrades: ResearchGridBonus[]): void {
+    this.owned = this.index < ownership.count;
+    this.rotationUnlocked = ownership.rotationUnlocked;
+    this.rotationRequiredLevel = ownership.rotationRequiredLevel;
+    this.rotationStepDegrees = ownership.rotationStepDegrees;
+    // The saved square owner selects one effective Shape, even when Shapes overlap.
+    this.coveredUpgrades = upgrades.filter(upgrade => upgrade.activeOwner === this.index);
+  }
 }
 
 export type ResearchLensKind = "magnifyingGlass" | "opticalMonocle" | "kaleidoscope";
@@ -644,6 +873,9 @@ const sumContributors = (contributors: ResearchContributor[]): number =>
 
 export class ResearchGrid extends Domain {
   bonuses: ResearchGridBonus[] = [];
+  upgrades: ResearchGridBonus[] = [];
+  shapes: ResearchShape[] = [];
+  points!: ResearchPointBalance;
   observations: Observation[] = [];
   lenses: ResearchLens[] = [];
   lensDefinitions: ResearchLensBase[] = [];
@@ -661,7 +893,7 @@ export class ResearchGrid extends Domain {
   pointMilestone!: ResearchPointMilestone;
   papers!: ResearchPapers;
   pendingEffectiveProgressSeconds: number = 0;
-  private shapeDefinitions: ResearchShapeBase[] = [];
+  private purchasedLevels: number[] = [];
   private savedLenses: ResearchLens[] = [];
   private paperItem!: Item;
   private remainingAttempts: number = 0;
@@ -681,11 +913,13 @@ export class ResearchGrid extends Domain {
 
   init(allItems: Item[], _charCount: number) {
     this.bonuses = ResearchGridBonus.fromBase(initResearchGridBonusRepo());
+    this.upgrades = this.bonuses.filter(bonus => bonus.data.name !== "Name");
+    this.purchasedLevels = [];
     this.accumulatedFirstThreeUpgradeCostReduction = 0;
     this.observations = Observation.fromBase(initResearchObservationRepo());
     this.lensDefinitions = initResearchLensRepo();
     this.postyNotes = PostyNote.fromBase(initResearchPostyNoteRepo());
-    this.shapeDefinitions = initResearchShapeRepo();
+    this.shapes = ResearchShape.fromBase(initResearchShapeRepo());
     this.paperItem = allItems.find(item => item.internalName === "Quest115")!;
     return this;
   }
@@ -694,6 +928,7 @@ export class ResearchGrid extends Domain {
     const researchGrid = data.get(this.getDataKey()) as ResearchGrid;
     const research = (data.get("Research") as number[][]) || [];
     const gridLevels = research[0] || [];
+    researchGrid.purchasedLevels = gridLevels.map(level => Number(level) || 0);
     // Research[1] identifies the shape covering each square; -1 means none.
     const shapeIndexes = research[1] || [];
     // Research[2] tracks which observations have been found.
@@ -702,10 +937,7 @@ export class ResearchGrid extends Domain {
     const observationInsightLevels = research[4] || [];
     // The raw Lv0_i arrays are declared above; SkillsIndex keeps the skill slot explicit.
     const researchSkillLevels = getResearchSkillLevels(data);
-    // Research[11] contains one entry for every reclaimed King Rat Crown.
-    const crownCount = (research[11] || []).length;
-    // Research[12] stores Glimbo trade counts by trade.
-    const glimboTradeCounts = research[12] || [];
+    researchGrid.shapes.forEach(shape => shape.parse(research[6] || []));
     // OptionsListAccount[500] is the direct mode-2 value for square 151.
     // This saved value records Research's cumulative first-three cost reduction.
     researchGrid.accumulatedFirstThreeUpgradeCostReduction = Number(
@@ -744,19 +976,11 @@ export class ResearchGrid extends Domain {
     researchGrid.bonuses.forEach((bonus) => {
       bonus.level = Number(gridLevels[bonus.index]) || 0;
 
-      const shapeIndex = Number(shapeIndexes[bonus.index]);
-      const shapeBonus =
-        Number.isFinite(shapeIndex) && shapeIndex >= 0
-          ? RESEARCH_GRID_SHAPE_BONUS_PERCENTAGES[shapeIndex] || 0
-          : 0;
-      bonus.shapeBonusPercent = shapeBonus;
+      bonus.parse(shapeIndexes[bonus.index], researchGrid.shapes);
     });
 
     // The repository keeps each square at its numeric game index, so these casts
     // assign raw inputs to the matching specialized square objects.
-    (researchGrid.bonuses[67] as CrownCountResearchGridBonus).crownCount = crownCount;
-    (researchGrid.bonuses[68] as CrownCountResearchGridBonus).crownCount = crownCount;
-    (researchGrid.bonuses[107] as CrownCountResearchGridBonus).crownCount = crownCount;
     const observationLevelBonus = researchGrid.bonuses[94] as ObservationLevelResearchGridBonus;
     observationLevelBonus.occurrenceFoundState = occurrenceFoundState;
     observationLevelBonus.observationInsightLevels = observationInsightLevels;
@@ -765,8 +989,6 @@ export class ResearchGrid extends Domain {
     occurrenceCountBonus.occurrenceFoundState = occurrenceFoundState;
     occurrenceCountBonus.researchSkillLevels = researchSkillLevels;
     (researchGrid.bonuses[151] as AccountOptionResearchGridBonus).optionValue = accountOption500;
-    (researchGrid.bonuses[168] as GlimboTradesResearchGridBonus).glimboTradeCounts =
-      glimboTradeCounts;
   }
 
   getAccumulatedFirstThreeUpgradeCostReduction(): number {
@@ -817,6 +1039,8 @@ export class ResearchGrid extends Domain {
    * CloudBonus(71, 72, 76) + SushiStuff(53)) / 100.
    */
   updateCalculationState(companions: Companion[], equinox: Equinox, sushi: SushiStation): void {
+    const divineDesignActiveBonus = getCompanionActiveBonus(companions, DOOT_COMPANION);
+    (this.bonuses[DOOT_RESEARCH_INDEX] as DivineDesignResearchGridBonus).activeDootBonus = divineDesignActiveBonus;
     this.progress.highestLevel = Math.max(...this.researchSkillLevels, 0);
     this.progress.eligibleObservationCount = getOccurrencesToBeFound(
       this.observations.map(observation => observation.found ? 1 : 0), this.researchSkillLevels,
@@ -957,7 +1181,7 @@ export class ResearchGrid extends Domain {
     const count = Math.min(RESEARCH_SHAPE_CAP, uncappedCount);
     this.shapeOwnership = {
       count, uncappedCount, cap: RESEARCH_SHAPE_CAP,
-      ownedShapes: this.shapeDefinitions.slice(0, count).map(shape => ({ index: shape.index, name: shape.data.name })),
+      ownedShapes: this.shapes.slice(0, count).map(shape => ({ index: shape.index, name: shape.data.name })),
       contributors: shapeContributors, rotationUnlocked: level >= this.metadata.shapeRotationResearchLevel,
       rotationRequiredLevel: this.metadata.shapeRotationResearchLevel, rotationStepDegrees: this.metadata.shapeRotationStepDegrees,
     };
@@ -972,6 +1196,29 @@ export class ResearchGrid extends Domain {
     };
     this.papers = inputs.papers;
     this.postyNotes.forEach(note => note.update(level, this.lensOwnership, this.shapeOwnership, this.pointMilestone));
+  }
+
+  prepareGridDisplay(outsidePointContributors: ResearchContributor[], linkedInputs: ResearchLinkedInputs): void {
+    const contributors = [
+      researchContribution("Research level", this.progress.highestLevel, "add"),
+      ...outsidePointContributors,
+      researchContribution("Posty Notes: Points every ten Research levels", this.pointMilestone.cumulativeMilestonePoints, "add"),
+    ];
+    const earned = Math.floor(sumContributors(contributors));
+    // Every purchased rank costs one Point. The game rounds each running addition.
+    let spent = 0;
+    for (const purchasedLevel of this.purchasedLevels) {
+      spent = Math.round(spent + purchasedLevel);
+    }
+    spent = Math.round(spent);
+    this.points = {
+      earned, spent, available: Math.round(earned - spent), contributors, milestone: this.pointMilestone,
+    };
+    this.upgrades.forEach(upgrade => {
+      upgrade.affordable = this.points.available > 0;
+      upgrade.preparePresentation(this.bonuses, this.accumulatedFirstThreeUpgradeCostReduction, linkedInputs);
+    });
+    this.shapes.forEach(shape => shape.prepareCoverage(this.shapeOwnership, this.upgrades));
   }
 
   getPaperItem(): Item {
@@ -1020,17 +1267,17 @@ const getOccurrencesToBeFound = (
 );
 
 export const updateResearchGrid = (data: Map<string, any>) => {
-  const researchGrid = data.get("research") as ResearchGrid | undefined;
-  const companions = data.get("companions") as Companion[] | undefined;
-  const equinox = data.get("equinox") as Equinox | undefined;
-  const sushi = data.get("sushi") as SushiStation | undefined;
+  const researchGrid = data.get("research") as ResearchGrid;
+  const companions = data.get("companions") as Companion[];
+  const equinox = data.get("equinox") as Equinox;
+  const sushi = data.get("sushi") as SushiStation;
+  const gaming = data.get("gaming") as Gaming;
+  const glimbo = data.get("glimbo") as Glimbo;
 
-  if (!researchGrid || !companions || !equinox || !sushi) {
-    throw new Error(
-      "Research Grid calculation requires Research, companions, Equinox, and Sushi data",
-    );
+  for (const index of [67, 68, 107]) {
+    (researchGrid.bonuses[index] as CrownCountResearchGridBonus).crownCount = gaming.reclaimedCrownCount;
   }
-
+  (researchGrid.bonuses[168] as GlimboTradesResearchGridBonus).totalGlimboTrades = glimbo.totalTrades;
   researchGrid.updateCalculationState(companions, equinox, sushi);
   return researchGrid;
 };
@@ -1053,7 +1300,7 @@ const researchPercentMultiplier = (
   };
 };
 
-/** Prepare Part 1 only after every producer, including late Royal Armory inputs. */
+/** Prepare Research presentation after all producers, including late Royal Armory inputs. */
 export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const research = data.get("research") as ResearchGrid;
   const players = data.get("players") as Player[];
@@ -1365,5 +1612,22 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
     additiveExp, expMultipliers, offline, ownership, opticalMonocles, kaleidoscopes,
     maximumRoll, dailyAllocation, insight, kaleidoscope, shapeOwnership, papers, localInsight: gridContribution(93),
   }, referencePlayer);
+  const taskboard = data.get("taskboard") as TaskBoard;
+  const rift = data.get("rift") as Rift;
+  const pointMerit = taskboard.merits.find(merit => merit.index === 51)!;
+  const pointArtifact = sailing.artifacts.find(artifact => artifact.index === 37)!;
+  const sigilLore = spelunking.tunnels.find(tunnel => tunnel.index === 6)!;
+  research.prepareGridDisplay([
+    companionContribution(153, 10, "add", "Points"),
+    companionLevelTwoContribution(153, 5, "add", "Points"),
+    sushiContribution(3, "add", "Points"), sushiContribution(13, "add", "Points"),
+    researchContribution(`Sailing artifact: ${pointArtifact.data.name}`, Math.round(pointArtifact.status), "add", 10),
+    researchContribution(`World 7 merit: ${pointMerit.descLine1}`, pointMerit.level, "add"),
+    jellyContribution(4, "add", "Points"), jellyContribution(57, "add", "Points"),
+  ], {
+    sigilLore: { index: sigilLore.index, name: sigilLore.data.name, completed: sigilLore.loreCompleted },
+    cookingMasteryUnlocked: cooking.isCookingMasteryUnlocked(rift, companions),
+    undeadBattalion: sailing.getUndeadBattalionQualification(),
+  });
   return research;
 };

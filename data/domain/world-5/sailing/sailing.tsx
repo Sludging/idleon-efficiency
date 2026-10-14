@@ -142,6 +142,10 @@ export class Boat {
     minTravelTime = 120;
 
     constructor(public index: number, public assignIsland: Island | undefined, public distanceTravelled: number, public lootUpgrades: number, public speedUpgrades: number, public captain: Captain | undefined, public routeState: number = 0) { }
+    isUndeadBattalionQualified(): boolean {
+        return this.lootUpgrades + this.speedUpgrades >= 400;
+    }
+
 
     getSpeedUpgradeType = () => {
         if (this.index < 2) {
@@ -297,6 +301,13 @@ export class Sailing extends Domain {
         this.researchExpSlabBonus = 0.1 * (1 + lab.bonuses[15].getBonus() / 100)
             * slab.getSlabBonusMultiplier() * itemMilestones;
     }
+    getUndeadBattalionQualification(): { qualifyingBoatCount: number; totalBoatCount: number } {
+        return {
+            qualifyingBoatCount: this.boats.reduce((count, boat) => count + Number(boat.isUndeadBattalionQualified()), 0),
+            totalBoatCount: this.boats.length,
+        };
+    }
+
 
     nextCaptainCost = () => {
         return (60 * this.captainsUnlocked + 15 * Math.pow(this.captainsUnlocked, 2.2)) * Math.pow(1.52, this.captainsUnlocked) * .6;
