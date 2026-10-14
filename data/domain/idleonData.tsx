@@ -55,7 +55,7 @@ import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
 import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
-import { Spelunking } from './world-7/spelunking';
+import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
@@ -326,6 +326,8 @@ const postProcessingMap: Record<string, Function> = {
     "storage": (doc: Cloudsave, accountData: Map<string, any>) => updateStorage(accountData),
     "lab": (doc: Cloudsave, accountData: Map<string, any>) => updateLab(accountData),
     "artifactsSlabBonus": (doc: Cloudsave, accountData: Map<string, any>) => updateSailingArtifactSlabBoost(accountData),
+    // Journal effects consume the prepared Sailing artifact, including its Slab boost.
+    "spelunkingChapterBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingChapterBonuses(accountData),
     "alchemySlabBubbles": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemySlabBubbles(accountData),
     "deathnoteMiniboss": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnoteMiniboss(accountData),
     "alchemy": (doc: Cloudsave, accountData: Map<string, any>) => updateAlchemy(accountData),
@@ -399,6 +401,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "alerts": (doc: Cloudsave, accountData: Map<string, any>) => updateAlerts(accountData),
     "royalArmoryLate": (doc: Cloudsave, accountData: Map<string, any>) => updateRoyalArmoryLateInputs(accountData),
     "meritocraty": (doc: Cloudsave, accountData: Map<string, any>) => updateMeritocratyLate(accountData),
+    // Saved-snapshot stamina and page locations need late Meritocracy and final character talent contexts.
+    "spelunkingPresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateSpelunkingPresentation(accountData),
     // These Gaming results are UI-only; Imports, Garden and Palette chances need the settled account inputs above.
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),
     // Research presentation needs settled producers and the selected Royal Outpost's late inputs.

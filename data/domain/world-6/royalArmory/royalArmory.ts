@@ -187,6 +187,14 @@ export class RoyalArmory extends Domain {
         const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
         return 1 + (additionalOutposts / (40 + additionalOutposts)) * 2;
     }
+
+    getSpelunkingRechargeOutpostMultiplier(): number {
+        if (this.selectedOutpostBonusIndex !== 2) return 1;
+
+        // The selected recharge Outpost uses the built-count scale without Research's doubled effect.
+        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + additionalOutposts / (40 + additionalOutposts);
+    }
     getTotalUpgradeLevels(): number { return this.totalUpgradeLevels; }
     getUnlockedUpgradeCount(): number { return this.unlockedUpgradeCount; }
 
