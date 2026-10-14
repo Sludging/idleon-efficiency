@@ -181,11 +181,28 @@ export class RoyalArmory extends Domain {
 
     getSelectedOutpostBonusIndex(): number { return this.selectedOutpostBonusIndex; }
 
+    getResearchExpOutpostReward(): {
+        multiplier: number; available: boolean; selected: boolean; builtOutpostCount: number; selectorName: string;
+    } {
+        const selector = this.upgrades.find(upgrade => upgrade.index === 79)!;
+        return {
+            multiplier: this.getResearchExpOutpostPreviewMultiplier(),
+            available: selector.isUnlocked(),
+            selected: this.selectedOutpostBonusIndex === 1,
+            builtOutpostCount: this.builtOutpostCount,
+            selectorName: selector.data.name,
+        };
+    }
+
+    private getResearchExpOutpostPreviewMultiplier(): number {
+        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
+        return 1 + (additionalOutposts / (40 + additionalOutposts)) * 2;
+    }
+
     getResearchExpOutpostMultiplier(): number {
         if (this.selectedOutpostBonusIndex !== 1) return 1;
 
-        const additionalOutposts = Math.max(1, this.builtOutpostCount - 6);
-        return 1 + (additionalOutposts / (40 + additionalOutposts)) * 2;
+        return this.getResearchExpOutpostPreviewMultiplier();
     }
 
     getSpelunkingRechargeOutpostMultiplier(): number {

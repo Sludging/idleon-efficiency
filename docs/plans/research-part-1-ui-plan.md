@@ -2,129 +2,78 @@
 
 ## Player outcome and scope
 
-Players can read current Research growth, discovery limits, lens production, Insight, offline gains, Papers, and milestone rewards together.
+Players can read current Research growth, Observation discovery limits, actual lens production, Insight, Papers, and Posty Note rewards.
 
-This plan delivers [Part 1 — #462](https://github.com/Sludging/idleon-efficiency/issues/462), using its accepted backend. The [product specification](research-spec-draft.md), [delivery part](research-delivery-parts-draft.md#1-account-growth-discoveries-and-lens-production), and [backend plan](research-part-1-backend-plan.md) define the information boundary. The [current handoff](research-research-brief.md#current-handoff) records decisions and preview evidence.
+This plan delivers [Part 1 — #462](https://github.com/Sludging/idleon-efficiency/issues/462) with its accepted backend. The [product specification](research-spec-draft.md) and [delivery outcomes](research-delivery-parts-draft.md#1-account-growth-discoveries-and-lens-production) define scope. The [current handoff](research-research-brief.md#current-handoff) records approvals, current status, evidence, and limits.
 
-Use one read-only World 7 Research page. Show all 43 Observations and all 14 Posty Notes by default. Search Observations by name or map. Do not add a second view, a filter, or a tab set for this part.
+Keep one read-only World 7 Research route. Use common content tabs for Observations, Lenses, Posty Notes, and Papers. Observations are selected initially. Empty search shows all 43 Observations. All 14 Posty Notes remain available in their tab. Do not add an Overview tab.
 
-Exclude game boards, placement controls, discovery actions, purchases, planning, forecasts, and activity navigation. Point balances, the Grid catalogue, and Shape placement or coverage remain Part 2. Shape ownership and cumulative Point milestone context appear only to explain Posty Notes.
+Exclude game actions, purchases, placement controls, planners, forecasts, and related-activity navigation. Point balances, the Grid catalogue, and Shape placement or coverage remain Part 2. Keep current Shape ownership only as milestone context.
 
-## Direction and established patterns
+## Visual direction
 
-Use Impeccable's Operate mode within the existing **Game Ledger** visual system. Preserve Rubik, charcoal surfaces, theme colors, and game artwork. Familiar list structure serves the player task better than a new visual identity.
+Use Impeccable Operate mode, with distill, clarify, and layout guidance. Preserve the incumbent Game Ledger identity: Rubik, charcoal surfaces, recognizable game artwork, and the existing theme-blue selection treatment. Use `dark-1` (#1E2127), `dark-2` (#1B1D24), text (#efefef), brand (#0376E3), and supporting grey (#BEC2CC). No new font, palette, or outer content wrapper is required.
 
-Follow [UI patterns](../agents/ui-patterns.md) and [Data rows](../agents/ui-rows.md). Use the ordinary feature heading and inherited app content wrapper. Do not add another content width, centering rule, or outer horizontal inset.
+Three compact top groups separate the Research skill, Observation discovery, and current gains. Place the skill artwork beside the plain level. Avoid one undifferentiated metric grid. Put common `ContentTabs` below these groups and render only the selected content.
 
-- Use `TextAndLabel` for account totals and simple named values.
-- Use `DataRow` for Observations, actual lens placements, and Posty Notes. Stack rows with `Box gap="small"`. Keep the component's shell and typography.
-- Keep identity, game artwork, current values, and requirements aligned. Put hints, conditions, relationships, and contributors in always-visible row details.
-- Use plain `dark-1` sections for singleton production, ownership, and offline summaries. Do not make every stat a separate card.
-- Reuse the existing Observation-style search control from Stamps. Filtering stays in the view.
-- Use `IconImage` with entity image metadata. Add narrow `getImageData()` methods to Observation and ResearchLens during approved UI delivery. Keep feature asset mapping with its owner, not route URLs. Existing Paper item artwork needs no new mapping.
-- Use existing `notateNumber`, `commaNotation`, and date formatting. Keep exact counts or rates available when compact formatting hides precision. Do not change calculation units.
+Use illustrated Observation cards on `dark-1`, with medium padding and small internal gaps. Put the game artwork beside the name and map. Found cards use full opacity. Revealed but missing cards use 0.65 opacity. Unrevealed cards use 0.35 opacity. Retain these states in accessible names, without repeated visible status labels. Owned cards show current Insight level, partial EXP, a theme-blue progress bar, and actual hourly rates. Missing cards retain location hints, required roll, and the separate study requirement. Do not present the study level as a discovery gate.
 
-References inspected: World 7 Coral for summaries and rows; Spelunking for store refresh and identity artwork; Sushi for collection identity and progress; Jelly Operator for existing image composition. These references supply named traits, not their unrelated controls or fields.
+Show one concise reveal-availability line only on currently hidden, not-found cards. Derive the first Research level that includes the entry in the game's visible prefix through the responsible domain visibility rule. Keep study levels independent. Found and already-revealed missing cards show no reveal line. When the first discovery remains incomplete, name that prerequisite instead of implying level alone unlocks the remaining catalogue.
 
-## Page order and information
+Keep name/map search and three sorts: Game order, Research EXP highest, and Insight highest. Break rate ties by game index. Give Search and Sort persistent, aligned labels through shared `ComponentAndLabel` wrappers. Match both control heights at 48px. Stack their wrappers with aligned left edges on narrow screens. Keep narrow tab labels at 12px and wrap only between words. Do not add an Activity filter or a filtered-result fraction. The shared tab reads `Observations (found/total)` from actual discovery ownership. Keep this count stable during search and sorting, without repeating it in the summary.
 
-### Account progress
+Apply the established Insight palette to Observation artwork through `IconImage` wrapper filters. Select the current Insight level, clamped to palette indexes zero through ten. Keep the reference hue stable above level ten instead of applying the game's excess-level darkening. Use neutral grayscale at level zero; derive hue and saturation from the selected RGB entry for higher levels, with brightness 1.3. This is deliberate website artwork presentation, not a claim that the game tints its images. Keep the original sprite, CDN path, and dimensions. Use theme `brand` for progress fill and `grey-1` for its track.
 
-Show highest saved account Research level, discoveries out of 43, total Observation Insight levels, and exact source-save timestamp.
+Use illustrated `ShadowBox` cards for owned lenses and Posty Notes, following Sneaking's artwork/name grouping, `dark-1` surface, medium padding, and small internal gaps. Posty Notes use real colored note artwork, concise rewards, level thresholds, reached opacity, and a clear next note. Do not repeat ownership totals in every card. Pictured Shape artwork does not promise a particular next Shape.
 
-Show **Saved EXP copy / same-copy requirement**, character name, and character ID. Explain that both values come from one saved character copy. Choose the lowest character ID among copies at the highest saved Research level. State: **This saved copy does not establish total account Research EXP. It does not establish total account progress.** Do not show separate character progression, sum copies, or choose maximum EXP.
+Sources inspected: shared `ContentTabs`, `DataRow`, `TipDisplay`, `TextAndLabel`, `IconImage`; Sneaking upgrade cards; Atom Collider rows; Stamps artwork and search; and the authorized [Idleon Toolbox Research reference](https://idleontoolbox.com/account/world-7/research?profile=liiiiiiiiiiiig). The reference supports selected content, game-art recognition, and short milestone cards. Do not copy its visual style, drawers, timers, duplicate rate fields, or implementation.
 
-Use `progress.saveGlobalTime`, not the store refresh time, for save provenance. Render the timestamp in UTC with its timezone. If EXP or its requirement is absent, show the specific unavailable value rather than zero.
+## Information choices
 
-### Discovery limits
+### Top groups
 
-Show remaining account attempts separately from daily allocation. Show inclusive minimum and maximum roll values, shared failed-roll count, current failed-roll bonus, and its cap.
+- Research: account skill level, formatted Research EXP progress when available, and total Observation Insight levels.
+- Observation discovery: remaining attempts, daily attempts, and inclusive roll range. Actual found catalogue count appears once in the Observations tab.
+- Current gains: actual Research EXP per hour, actual Insight per hour, and current offline percentage.
 
-Keep allocation, minimum-roll, and maximum-roll contributors beside their values. Show contribution operations, current values, caps, and supplied gates. Do not infer attempts used from allocation minus remaining. Do not add a reset timer or map-access claim.
+Do not label level as highest saved. Do not expose character identity, saved-copy policy, provenance, source timestamps, or cloud-save explanations. Preserve reference-character selection and calculations internally.
 
-### Current production and lens ownership
+Remove failed-roll count, duplicate failure bonus/cap displays, before-multiplier production, game-displayed Insight, rule paragraphs, exact precision panels, and repeated totals. These fields remain in the backend; they do not need alternative public access.
 
-Show current Research EXP per hour, production before the shared multiplier, and the shared multiplier. Group additive Research EXP bonuses as percentages and independent multipliers as × factors. Explain that EXP bonus percentages are added together before independent multipliers apply. Do not use generic operation-debug labels. Show all supported sources, including zero or inactive contributions, with supplied context and nested components.
+### Source context
 
-Use player-facing contributor names and bonus or multiplier wording. Do not repeat unchanged raw inputs. Keep a differing input when it explains a cap or conversion. Present the permanent Paper source as **Professional Papers**, not its internal item name. Remove description placeholders from the Hole Gambit label without changing its contribution. Format the Hole Gambit score requirement with the established number formatter. Keep its exact source value available through `TipDisplay`, beside the formatted requirement.
+Attach shared `TipDisplay` directly to an affected value. A dotted underline and keyboard focus identify values with useful extra context. Observation Research EXP gets a tooltip only when its current rate is positive. Show inactive zero rates as plain text. Tooltips list concise source identities and current contributions for active sources. For inactive sources with verified reward metadata, show the obtainable reward with inactive opacity alone. Do not add inactive, acquired, or not-acquired labels. Label bare Grid rewards per level and preserve conditional units. Do not show neutral current values as unlock rewards or infer future totals.
 
-Show actual Insight accrual per hour and **Game-displayed Insight per hour** separately. Include the backend discrepancy explanation beside both values. Insight levels Observations; it is not Research skill EXP.
+Keep additive EXP percentages separate from actual multiplicative factors through short labels, not formula exposition. Companion factors use the backend's named groups and already-calculated factors. Offline additions use percentage points. Local Observation tooltips show actual assigned lenses, adjacent Kaleidoscope identities, support factor, and the local Insight EXP effect where useful. Do not repeat shared external source catalogues in every Observation.
 
-Keep local Research EXP benefit per Insight level separate from the total-Observation-level Research EXP benefit. Show their named contributors. Show current Kaleidoscope boost and its contributors. Orthogonal supporting lenses add their boosts; diagonals and the supporting lens itself do not contribute.
+### Lenses
 
-Show owned lens total, ownership cap, all three fixed-kind counts, unplaced count, and capacity per Observation. Keep ownership sources and capacity sources beside those values. Do not imply players can switch a lens kind.
+Show current owned total, fixed-kind counts, capacity per Observation, unplaced count, and every actual owned lens target. Remove raw coordinates and IDs from visible text.
 
-### Observations
+The original `MagnifiersOwned` helper clamps producer-derived ownership at 80. Source allocation/drawing uses the owned prefix of a reserved slot array. This verifies an engine/storage ceiling, not an obtainable maximum. Do not present 80 as a player target. No all-source attainable maximum is claimed. Ownership and capacity source tooltips use prepared current contributor results.
 
-Use one flat, game-order list. Empty search shows all 43 named entries, including undiscovered and level-gated entries. Case-insensitive search matches name or map. Show the current result count. A search with no matches shows a clear empty result without changing account totals.
+### Posty Notes and Papers
 
-Each row includes:
+Show all 14 notes in level order. Use typed reward context for short, accurate rewards. Show current owned Shapes once with source context; do not repeat cap or uncapped totals. Show the next note threshold once. Keep ownership-sensitive no-additional-Shape context when relevant, without promising a particular pictured Shape.
 
-- Name and Observation artwork; map name; location hint.
-- Required Research level and discovery roll threshold; found state.
-- Distinct level, already-discovered, exhausted-attempt, and insufficient-maximum-roll conditions. Use readable met or blocked labels, not raw booleans. Render all applicable conditions, not one generic unavailable status.
-- Insight level, saved partial Insight EXP, and next requirement.
-- Actual Research EXP per hour, actual Insight accrual per hour, and game-displayed Insight per hour.
-- Assigned owned lens IDs and fixed names; actual supporting Kaleidoscope IDs and target Observation names.
-- Current support multiplier, local Insight benefit, and the row's production contributor operations. The shared multiplier refers to the visible shared source group; do not repeat its full external catalogue in every row.
+Separate consumable Half Finished Research Papers from permanent Professional Papers. Consumables show inventory, artwork, and the two-hour progress grant including Minehead Currency. Permanent Papers show purchase count and offline percentage-point bonus. Do not add use/purchase controls, pending-save explanation, or balances for other activities.
 
-Use zero for a real zero rate. Do not imply an undiscovered entry produces, a missing requirement equals zero, or a roll threshold grants map access. Keep readable status text; do not rely on color alone. Do not dim entire locked rows because their requirements remain useful.
+## Data and responsibility
 
-### Actual owned lens placements
+Keep the route wrapper and metadata in `app/world-7/research/page.tsx`. Render the current client component directly. Keep tab, search, and sort state in `components/world-7/research/researchContent.tsx`.
 
-List each actual owned lens once. Show its ID, fixed kind, artwork, target Observation or **Unplaced**, and saved position `(x, y)`. Coordinates describe saved state, not website placement controls. Do not display reserved saved slots as owned lenses.
+Use `useShallow` with `lastUpdated` to refresh the mutable domain. Wait for completed StaticData or LiveData before displaying prepared values. Do not mutate domain data or add formulas to pass display checks.
 
-### Offline gains and Papers
+Reuse all existing prepared backend totals, parsing, reference-character selection, ownership, contexts, and producer results. Observation owns separate revealed-prefix and study state. Research contributor display metadata owns intrinsic rewards and acquisition state; current contribution arithmetic remains unchanged. Keep the source-backed Insight palette beside its narrow artwork-presentation method. Preserve the existing source progress-color metadata and numerical results. Do not edit generated data or public assets. `IconImage` resolves verified image metadata through the existing CDN.
 
-Show online gains at 100%. Show current offline percentage with its 1% baseline, 100% cap, unclamped value, and current source contributions. Label additive offline contributions as **+40 percentage points**, not **Add percentage +40%**. Explain that these points add to the baseline before the cap applies. Keep final percentages distinct from contribution units. Do not turn current rates into away-time predictions.
+Research owns the reveal requirement accessor. Reuse the same prefix calculation used by current visibility and numerical consumers; do not add UI formulas, per-entry reveal tables, or index interpolation. The narrow accessor does not change parsing, production arithmetic, or generated study metadata.
 
-Show **Half Finished Research Papers** with existing item artwork, inventory count, and the two-hour progress grant. Explain the grant once. State: **Papers also grant Minehead Currency, but this page does not show its balance.** Keep the caveat: **Pending progress is not applied to this saved view.** Do not show a Minehead Currency balance or activity panel.
+## Verification and boundary
 
-Show **Professional Papers** separately with permanent purchase count and current offline bonus in percentage points. Do not add a use button, purchase button, stock claim, or time-skip calculation.
+Use the normal private real-save fixture and Docker runner. Update the existing production scenario for three card states, stable discovered tab counts, labeled controls, sorting, image tint, themed bars, and inactive rewards. Compare the complete backend snapshot with retained accepted evidence, projecting only the existing semantic metadata differences and the narrow artwork presentation value. Preserve the save and shared stack.
 
-### Posty Notes
+Exercise all four tabs, all 43 default cards, name/map search, empty result, reset, highest-rate sorting, stable ties, actual rates, and image loading. Verify the real 24/43 found count stays unchanged across search and sorting. Check the real Reef's revealed state and separate level-72 study requirement. Verify computed artwork filters at low and high real Insight levels, original image paths/dimensions, and consistent themed progress colors. Confirm found, revealed-missing, and unrevealed opacity at desktop and narrow widths. Check persistent aligned Search/Sort labels and absence of visible repeated statuses or Activity controls. Confirm no zero-rate EXP tooltip and a working positive-rate tooltip. Read genuine inactive Event Shop and Jelly rewards with opacity and no inactive text. Preserve note rewards, summaries, lenses, and Papers. Check overflow and Research-attributed errors. Assert absence of native disclosures, page links, provenance, precision reveals, and repeated mechanic prose.
 
-Show all 14 notes in level order. Each row includes required Research level, reached or upcoming state, reward description, and typed current reward context.
+Verify every genuinely hidden entry against source-backed tier boundaries. In the retained level-70 save, indices 34–37 reveal at 80, 38–41 at 90, and 42 at 100. Check actual rendered reveal-line absence on all found and revealed-missing entries at desktop and narrow widths. Compare the complete backend with the immediately preceding presentation result without adding numerical projections. Preserve the existing search, sorting, source-tooltip, image, opacity, and layout assertions.
 
-- Lens notes: additional lens reward, current lens ownership, and cap.
-- Capacity notes: milestone capacity and current capacity.
-- Shape notes: additional Shape reward and current owned Shape names/count/cap. Show shared current ownership contributors once beside these notes. Explain that outside rewards affect current ownership. A pictured Shape does not guarantee the next Shape received.
-- Point note: current Points per ten-level block and cumulative milestone contribution. Do not show available or spent Point balances.
-- Rotation note: required Research level, current unlocked state, and rotation step.
-
-Descriptions and typed contexts come from the backend. Do not parse descriptions to derive mechanics or add a structured reward framework.
-
-## Data and delivery responsibilities
-
-| Surface | Accepted backend input |
-|---|---|
-| Account and provenance | `ResearchGrid.progress` |
-| Attempts and roll sources | `ResearchGrid.discoveryAllowance` |
-| Ownership, capacity, placements | `ResearchGrid.lensOwnership`, `lenses`, `lensDefinitions` |
-| Observation catalogue and local state | `observations`, joined `Observation.map`, assigned/supporting lenses |
-| Actual production and discrepancy | `production`, Observation rates and contributor arrays |
-| Offline gains and Papers | `offlineGains`, `papers` |
-| Notes and ownership-sensitive rewards | `postyNotes` and their typed `context` |
-
-Keep route metadata and the server wrapper in `app/world-7/research/page.tsx`. Render `components/world-7/research/researchContent.tsx` directly from the route. Put store hooks, search state, and display composition in this `ResearchContent` client component. Use `useShallow` for displayed store selections and retain `lastUpdated` as the mutable-domain refresh dependency.
-
-Wait for the store's completed `StaticData` or `LiveData` status before reading prepared Research details. Initialized singleton fields alone do not establish load completion. Guard genuine unloaded data locally; do not invent fallback domain objects or hide missing note contexts.
-
-The existing account loader and late Research preparation already supply these results. No new formulas, parsing, producer API, persistence layer, store, or backend framework is required. Research supplies named companion groups, their additive terms, and the same calculated factors used by production. The UI renders these groups without reconstructing their factors or inferring membership from array positions. Narrow image and contributor display metadata APIs do not change the accepted calculations. Add the Research link to existing World 7 navigation only during approved production delivery.
-
-## Preview and verification boundary
-
-The disposable preview must load `tests/fixtures/saves/latest.json` through the existing Docker fixture-mode loader. Current values must come from populated accepted public APIs, not literal demonstration values. Keep captures and backend evidence private under `.ui-verification/`.
-
-For approved delivery, verify the rendered values against the loaded public backend; catalogue counts; default visibility; name and map search; separate discovery conditions; owned placements; support relationships; EXP and Insight units; contributor meanings; Papers; and all note contexts. Check saved-copy wording and provenance, additive offline percentage points, separate EXP percentages and × factors, the formatted Hole Gambit requirement and exact-value detail, the single Paper grant explanation, and the pending-progress caveat. Exercise loading and no-result states without synthetic saves. Record real-save branches that remain unobserved.
-
-Browser screenshots prove presentation only. They do not re-establish calculation parity, connected live-game parity, or fresh version confirmation. No mobile/tablet matrix or assistive-technology certification is required by this scoped plan. Preserve existing component semantics and responsive behavior.
-
-Record preview captures, exercised assertions, runtime errors, reproduction files, and coverage limits in the [current handoff](research-research-brief.md#current-handoff).
-
-## Game and source references
-
-- [Wiki: Research](https://idleon.wiki/wiki/Research): names, landmarks, lens meanings, and Posty Notes. The current article identifies itself as a recent addition.
-- [Wiki: Half Finished Research Papers](https://idleon.wiki/wiki/Half_Finished_Research_Papers) and [Gem Shop](https://idleon.wiki/wiki/Gem_Shop#World_7): consumable versus permanent purchases.
-- [Approved source ledger](research-research-brief.md#sources) and [source/caller findings](research-research-brief.md#source-and-caller-findings): authoritative rules, hourly units, saved-copy policy, and Insight display discrepancy.
-- [Accepted public domain](../../data/domain/world-7/research.tsx): current values and typed contributor/context results. Reuse its calculations unchanged.
+Inspect desktop and narrow screenshots together. Record scoped type/lint results, density measurements, inherited errors, unobserved real-save branches, and source/live-version limits in the handoff. Keep captures and account evidence private. Rendered checks establish the exercised surface, not certification or fresh connected-game parity.

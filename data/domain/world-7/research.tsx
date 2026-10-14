@@ -224,18 +224,47 @@ export class DivineDesignResearchGridBonus extends ResearchGridBonus {
 }
 // Observation targets use eight columns. Saved pixel coordinates do not define neighbors.
 const RESEARCH_OBSERVATION_COLUMNS = 8;
+const RESEARCH_OBSERVATION_REVEAL_CAP = 43;
 const RESEARCH_LENS_CAP = 80;
 const RESEARCH_OBSERVATION_SUPPORT_SLOTS = 80;
 const RESEARCH_SHAPE_CAP = 10;
 const LENS_POSTY_NOTE_INDEXES = [0, 9, 12, 13];
 const CAPACITY_POSTY_NOTE_INDEXES = [3, 6, 11];
 const SHAPE_POSTY_NOTE_INDEXES = [1, 2, 4, 7, 10];
+// Game 1.22, Research menu drawing: next Insight level selects the progress-fill color.
+const RESEARCH_INSIGHT_PROGRESS_PALETTE = [
+  [149, 148, 148], [152, 116, 99], [116, 187, 207], [204, 167, 93],
+  [77, 115, 239], [202, 47, 225], [225, 47, 47], [44, 151, 69],
+  [255, 138, 195], [255, 137, 46], [118, 104, 121],
+];
+
+export interface ResearchContributorReward {
+  value: number;
+  operation: ResearchContributor["operation"];
+  unit: string;
+  basis?: string;
+  acquired: boolean;
+  active: boolean;
+  requiredResearchLevel?: number;
+  grid?: {
+    level: number;
+    mode: number;
+    conditionalBasis?: { count: number; unit: string };
+  };
+  companion?: {
+    owned: boolean;
+    level: 1 | 2;
+    bonusTokenActive: boolean;
+    requiredLevel: 1 | 2;
+  };
+}
 
 export interface ResearchCompanionGroup {
   id: "jellofish" | "riftStalker" | "neonscale";
   name: string;
   components: ResearchContributor[];
   factor: number;
+  reward: ResearchContributorReward;
 }
 
 export interface ResearchContributor {
@@ -248,6 +277,7 @@ export interface ResearchContributor {
   characterID?: number;
   components?: ResearchContributor[];
   companionGroups?: ResearchCompanionGroup[];
+  reward?: ResearchContributorReward;
 }
 
 export interface ResearchProgress {
@@ -380,10 +410,17 @@ export class ResearchLens {
 }
 
 export interface ResearchDiscoveryConditions {
-  unmetResearchLevel: boolean;
+  outsideRevealedPrefix: boolean;
   alreadyDiscovered: boolean;
   exhaustedAttempts: boolean;
   insufficientMaximumRoll: boolean;
+}
+
+export interface ResearchObservationStudy {
+  requiredResearchLevel: number;
+  unmetResearchLevel: boolean;
+  eligible: boolean;
+  state: "notRevealed" | "notFound" | "requiresResearchLevel" | "eligible";
 }
 
 export class Observation {
@@ -392,8 +429,10 @@ export class Observation {
   insightLevel: number = 0;
   nextInsightRequirement: number = 0;
   eligibleForProduction: boolean = false;
+  revealed: boolean = false;
+  study: ResearchObservationStudy;
   discoveryConditions: ResearchDiscoveryConditions = {
-    unmetResearchLevel: false, alreadyDiscovered: false, exhaustedAttempts: false, insufficientMaximumRoll: false,
+    outsideRevealedPrefix: true, alreadyDiscovered: false, exhaustedAttempts: false, insufficientMaximumRoll: false,
   };
   assignedLenses: ResearchLens[] = [];
   supportingKaleidoscopes: ResearchLens[] = [];
@@ -412,10 +451,44 @@ export class Observation {
     public index: number,
     public data: ResearchObservationBase["data"],
     public map: MapDataBase,
-  ) {}
+  ) {
+    this.study = {
+      requiredResearchLevel: data.requiredResearchLevel,
+      unmetResearchLevel: true,
+      eligible: false,
+      state: "notRevealed",
+    };
+  }
 
   getImageData(): ImageData {
     return { location: `ResObj${this.index}`, width: 36, height: 36 };
+  }
+
+  getInsightProgressColor(): string {
+    const nextInsightLevel = Math.round(this.insightLevel + 1);
+    const color = RESEARCH_INSIGHT_PROGRESS_PALETTE[Math.min(10, nextInsightLevel)];
+    const darkening = 8 * Math.max(0, nextInsightLevel - 10);
+    return `rgb(${color.map(channel => Math.max(0, channel - darkening)).join(", ")})`;
+  }
+
+  getInsightImageFilter(): string {
+    // Use a stable palette hue for UI artwork, not game image parity.
+    const level = Math.min(10, Math.max(0, Math.round(this.insightLevel)));
+    if (level === 0) return "grayscale(1) brightness(1.3)";
+
+    const [red, green, blue] = RESEARCH_INSIGHT_PROGRESS_PALETTE[level];
+    const maximum = Math.max(red, green, blue);
+    const minimum = Math.min(red, green, blue);
+    const delta = maximum - minimum;
+    let hue = 0;
+    if (delta !== 0) {
+      if (maximum === red) hue = 60 * (((green - blue) / delta) % 6);
+      else if (maximum === green) hue = 60 * ((blue - red) / delta + 2);
+      else hue = 60 * ((red - green) / delta + 4);
+      if (hue < 0) hue += 360;
+    }
+    const strength = 5 * delta / maximum;
+    return `sepia(1) saturate(${strength}) hue-rotate(${hue - 40}deg) brightness(1.3)`;
   }
 
   static fromBase(data: ResearchObservationBase[]): Observation[] {
@@ -435,8 +508,17 @@ export class Observation {
     level: number, allowance: ResearchDiscoveryAllowance, eligibleCount: number,
     lenses: ResearchLens[], savedLenses: ResearchLens[], production: ResearchProduction,
   ): void {
+    this.revealed = this.index < eligibleCount;
+    const unmetStudyLevel = level < this.data.requiredResearchLevel;
+    this.study = {
+      requiredResearchLevel: this.data.requiredResearchLevel,
+      unmetResearchLevel: unmetStudyLevel,
+      eligible: this.revealed && this.found && !unmetStudyLevel,
+      state: !this.revealed ? "notRevealed" : !this.found ? "notFound"
+        : unmetStudyLevel ? "requiresResearchLevel" : "eligible",
+    };
     this.discoveryConditions = {
-      unmetResearchLevel: level < this.data.requiredResearchLevel,
+      outsideRevealedPrefix: !this.revealed,
       alreadyDiscovered: this.found,
       exhaustedAttempts: allowance.remainingAttempts <= 0,
       insufficientMaximumRoll: allowance.maximumRoll < this.data.discoveryRollRequirement,
@@ -455,7 +537,16 @@ export class Observation {
     this.localInsightExpContributor = researchPercentMultiplier(
       production.localInsightExpPerLevelContributor.source, this.localInsightExpBonusPercent,
       `Observation Insight level ${this.insightLevel}`,
+      production.localInsightExpPerLevelContributor.reward,
     );
+    const localReward = this.localInsightExpContributor.reward;
+    if (localReward) {
+      localReward.active = localReward.acquired && this.insightLevel > 0;
+      localReward.grid = {
+        ...localReward.grid!,
+        conditionalBasis: { count: this.insightLevel, unit: "Observation Insight level" },
+      };
+    }
     this.baseExpPerGlassPerHour = (4 + (this.index / 2 + Math.floor(this.index / 4)))
       * (1 + Math.pow(this.index, 1 + this.index / 15 * 0.4) / 10)
       + (Math.pow(this.index, 1.5) + 1.5 * this.index);
@@ -499,6 +590,14 @@ export class PostyNote {
 
   static fromBase(data: ResearchPostyNoteBase[]): PostyNote[] {
     return data.map(note => new PostyNote(note.index, note.data));
+  }
+
+  getImageData(): ImageData {
+    return {
+      location: `ResPosty${this.index}`,
+      width: 112,
+      height: 111,
+    };
   }
 
   update(level: number, lenses: ResearchLensOwnership, shapes: ResearchShapeOwnership, points: ResearchPointMilestone): void {
@@ -695,6 +794,23 @@ export class ResearchGrid extends Domain {
     return this.allBonusMultiplier;
   }
 
+  getObservationRevealRequirement(index: number): { researchLevel: number; requiresFirstDiscovery: boolean } | undefined {
+    if (!Number.isInteger(index) || index < 0 || index >= RESEARCH_OBSERVATION_REVEAL_CAP) {
+      return undefined;
+    }
+
+    // Find the first level that reveals this index after the first discovery.
+    let researchLevel = 1;
+    while (getRevealedObservationCount(researchLevel, true) <= index) {
+      researchLevel += 1;
+    }
+
+    return {
+      researchLevel,
+      requiresFirstDiscovery: index > 0 && !this.observations[0].found,
+    };
+  }
+
   /**
    * Game formula:
    * 1 + (Companions(55) + Divine Design's Doot contribution +
@@ -773,9 +889,16 @@ export class ResearchGrid extends Domain {
     this.lenses = this.savedLenses.slice(0, total);
     const capacityContributors = [
       researchContribution("Base lens capacity per Observation", 1, "add"),
-      ...this.postyNotes.filter(note => CAPACITY_POSTY_NOTE_INDEXES.includes(note.index)).map(note =>
-        researchContribution(`Posty Note: Research level ${note.data.requiredResearchLevel}`,
-          level >= note.data.requiredResearchLevel ? 1 : 0, "add", undefined, `Research level ${note.data.requiredResearchLevel}`)),
+      ...this.postyNotes.filter(note => CAPACITY_POSTY_NOTE_INDEXES.includes(note.index)).map(note => {
+        const reached = level >= note.data.requiredResearchLevel;
+        const contribution = researchContribution(`Posty Note: Research level ${note.data.requiredResearchLevel}`,
+          reached ? 1 : 0, "add", undefined, `Research level ${note.data.requiredResearchLevel}`);
+        contribution.reward = {
+          value: 1, operation: "add", unit: "lens capacity per Observation", basis: "milestone",
+          acquired: reached, active: reached, requiredResearchLevel: note.data.requiredResearchLevel,
+        };
+        return contribution;
+      }),
     ];
     const capacity = Math.min(4, sumContributors(capacityContributors));
     this.lensOwnership = {
@@ -824,6 +947,11 @@ export class ResearchGrid extends Domain {
         source: `Posty Note: Research level ${note.data.requiredResearchLevel}`,
         value: level >= note.data.requiredResearchLevel ? 1 : 0, inputValue: 1, operation: "add" as const,
         gate: `Research level ${note.data.requiredResearchLevel}`,
+        reward: {
+          value: 1, operation: "add" as const, unit: "Shapes", basis: "milestone",
+          acquired: level >= note.data.requiredResearchLevel, active: level >= note.data.requiredResearchLevel,
+          requiredResearchLevel: note.data.requiredResearchLevel,
+        },
       }))];
     const uncappedCount = Math.round(sumContributors(shapeContributors));
     const count = Math.min(RESEARCH_SHAPE_CAP, uncappedCount);
@@ -859,30 +987,37 @@ const getResearchSkillLevels = (data: Map<string, any>): number[] => {
 };
 
 /**
- * The game unlocks Research observations from the highest character Research
- * level. Once Research[2][0] is non-zero, the delivered formula reveals up to
- * 43 observations using the level thresholds below.
+ * The game reveals a level-based Observation prefix after the first discovery.
+ * The delivered formula caps this prefix at 43 Observations.
  */
-const getOccurrencesToBeFound = (
-  occurrenceFoundState: number[],
-  researchSkillLevels: number[],
+const getRevealedObservationCount = (
+  researchLevel: number,
+  firstDiscoveryComplete: boolean,
 ): number => {
-  const researchLevel = Math.max(...researchSkillLevels, 0);
   if (researchLevel < 1) {
     return 0;
   }
-  if (Number(occurrenceFoundState[0]) === 0) {
+  if (!firstDiscoveryComplete) {
     return 1;
   }
 
   return Math.min(
-    43,
+    RESEARCH_OBSERVATION_REVEAL_CAP,
     5 * Math.floor((researchLevel + 10) / 10) -
       Math.floor(researchLevel / 20) -
       Math.floor(researchLevel / 30) -
       Math.floor(researchLevel / 50),
   );
 };
+
+/** Keep the highest-character-level and raw first-discovery adapter semantics. */
+const getOccurrencesToBeFound = (
+  occurrenceFoundState: number[],
+  researchSkillLevels: number[],
+): number => getRevealedObservationCount(
+  Math.max(...researchSkillLevels, 0),
+  Number(occurrenceFoundState[0]) !== 0,
+);
 
 export const updateResearchGrid = (data: Map<string, any>) => {
   const researchGrid = data.get("research") as ResearchGrid | undefined;
@@ -909,8 +1044,13 @@ const researchContribution = (
   return { source, inputValue, value, operation, cap, gate, characterID };
 };
 
-const researchPercentMultiplier = (source: string, percent: number, gate?: string): ResearchContributor => {
-  return { source, inputValue: percent, value: 1 + percent / 100, operation: "multiply", gate };
+const researchPercentMultiplier = (
+  source: string, percent: number, gate?: string, reward?: ResearchContributorReward,
+): ResearchContributor => {
+  return {
+    source, inputValue: percent, value: 1 + percent / 100, operation: "multiply", gate,
+    reward: reward && { ...reward, value: 1 + reward.value / 100, operation: "multiply" },
+  };
 };
 
 /** Prepare Part 1 only after every producer, including late Royal Armory inputs. */
@@ -953,38 +1093,105 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       referencePlayer = player;
     }
   }
-  const gridContribution = (index: number, mode: number = 0, operation: ResearchContributor["operation"] = "addPercent"): ResearchContributor => {
+  const gridContribution = (
+    index: number, mode: number = 0,
+    operation: ResearchContributor["operation"] = "addPercent", unit: string = "EXP",
+  ): ResearchContributor => {
     const bonus = research.bonuses.find(bonus => bonus.index === index)!;
-    return researchContribution(`Research Grid: ${bonus.data.name}`, research.getBonusForId(index, mode), operation);
+    const contribution = researchContribution(`Research Grid: ${bonus.data.name}`, research.getBonusForId(index, mode), operation);
+    let conditionalBasis: { count: number; unit: string } | undefined;
+    if (mode === 2 && bonus instanceof ObservationLevelResearchGridBonus) {
+      conditionalBasis = { count: bonus.totalObservationLevels, unit: "total Insight level" };
+    } else if (mode === 2 && bonus instanceof OccurrenceCountResearchGridBonus) {
+      conditionalBasis = { count: bonus.totalOccurrencesFound, unit: "found Observation" };
+    }
+    const condition = conditionalBasis?.unit ?? (index === 93 ? "Observation Insight level" : undefined);
+    const acquired = bonus.getLevel() > 0;
+    contribution.reward = {
+      value: mode === 1 ? 1 : bonus.data.bonusPerLevel, operation, unit,
+      basis: `per Grid level${condition ? ` per ${condition}` : ""}`,
+      acquired, active: acquired && (conditionalBasis === undefined || conditionalBasis.count > 0),
+      grid: { level: bonus.getLevel(), mode, conditionalBasis },
+    };
+    return contribution;
   };
-  const sushiContribution = (index: number, operation: ResearchContributor["operation"] = "addPercent"): ResearchContributor => {
-    const reward = sushi.sushi.find(reward => reward.index === index)!;
-    return researchContribution(`Sushi: ${reward.data.name}`, sushi.getBonusFromIndex(index), operation, undefined, "Discovered Sushi reward");
+  const sushiContribution = (
+    index: number, operation: ResearchContributor["operation"] = "addPercent", unit: string = "EXP",
+  ): ResearchContributor => {
+    const sushiReward = sushi.sushi.find(reward => reward.index === index)!;
+    const contribution = researchContribution(`Sushi: ${sushiReward.data.name}`, sushi.getBonusFromIndex(index), operation, undefined, "Discovered Sushi reward");
+    contribution.reward = {
+      value: sushiReward.getBaseBonus(), operation, unit, basis: "unlock",
+      acquired: sushiReward.unlocked, active: sushiReward.unlocked,
+    };
+    return contribution;
   };
-  const jellyContribution = (index: number): ResearchContributor => {
+  const jellyContribution = (
+    index: number, operation: ResearchContributor["operation"] = "addPercent", unit: string = "EXP",
+  ): ResearchContributor => {
     const obstruction = jelly.obstructions.find(obstruction => obstruction.index === index)!;
-    return researchContribution(`Jelly Operator: ${obstruction.data.name}`, jelly.getObstructionBonus(index), "addPercent", undefined, "Completed obstruction");
+    const contribution = researchContribution(`Jelly Operator: ${obstruction.data.name}`, jelly.getObstructionBonus(index), operation, undefined, "Completed obstruction");
+    contribution.reward = {
+      value: jelly.getObstructionBonus(index, true), operation, unit, basis: "unlock",
+      acquired: obstruction.completed, active: obstruction.completed,
+    };
+    return contribution;
   };
   const mineheadContribution = (index: number, operation: ResearchContributor["operation"]): ResearchContributor => {
     const opponent = minehead.opponents.find(opponent => opponent.index === index)!;
-    return researchContribution(`Minehead: ${opponent.data.name}`, minehead.getBonusFromIndex(index), operation, undefined, "Defeated opponent reward");
+    const contribution = researchContribution(`Minehead: ${opponent.data.name}`, minehead.getBonusFromIndex(index), operation, undefined, "Defeated opponent reward");
+    contribution.reward = {
+      value: opponent.getBaseBonus(), operation, unit: operation === "addPercent" ? "AFK gains" : "Magnifying Glasses",
+      basis: "unlock", acquired: opponent.defeated, active: opponent.defeated,
+    };
+    return contribution;
   };
   const eventContribution = (index: number, scale: number = 1): ResearchContributor => {
     const bonus = events.bonuses.find(bonus => bonus.index === index)!;
-    return researchContribution(`Event Shop: ${bonus.data.name}`, Number(events.isBonusOwned(index)) * scale, "add", undefined, "Owned Event Shop bonus");
+    const owned = events.isBonusOwned(index);
+    const contribution = researchContribution(`Event Shop: ${bonus.data.name}`, Number(owned) * scale, "add", undefined, "Owned Event Shop bonus");
+    const units: Record<number, string> = {
+      33: "Kaleidoscopes", 34: "Magnifying Glasses", 35: "attempts/day", 36: "Shapes",
+    };
+    contribution.reward = { value: scale, operation: "add", unit: units[index], basis: "unlock", acquired: owned, active: owned };
+    return contribution;
   };
   const activeCompanionBonuses = new Map([28, 52, 54, 153].map(index =>
     [index, getCompanionActiveBonus(companions, index)] as const));
   const levelTwoCompanionBonuses = new Map([54, 153].map(index =>
     [index, isCompanionLevelTwo(companions, index)] as const));
-  const companionContribution = (index: number, scale: number, operation: ResearchContributor["operation"]): ResearchContributor => {
+  const companionReward = (
+    companion: Companion, value: number, operation: ResearchContributor["operation"],
+    unit: string, requiredLevel: 1 | 2,
+  ): ResearchContributorReward => ({
+    value, operation, unit, basis: requiredLevel === 2 ? "level two" : "unlock",
+    acquired: companion.owned && companion.level >= requiredLevel,
+    active: requiredLevel === 2 ? companion.owned && companion.level === 2
+      : companion.owned || companion.bonusTokenActive,
+    companion: {
+      owned: companion.owned, level: companion.level,
+      bonusTokenActive: companion.bonusTokenActive, requiredLevel,
+    },
+  });
+  const companionContribution = (
+    index: number, scale: number, operation: ResearchContributor["operation"],
+    unit: string = "factor units", rewardScale: number = scale,
+  ): ResearchContributor => {
     const companion = companions.find(companion => companion.id === index)!;
     const gate = companion.bonusTokenActive ? "Active through a Pet Bonus Token" : "Owned companion's active bonus";
-    return researchContribution(`Companion: ${companion.name}`, scale * activeCompanionBonuses.get(index)!, operation, undefined, gate);
+    const contribution = researchContribution(`Companion: ${companion.name}`, scale * activeCompanionBonuses.get(index)!, operation, undefined, gate);
+    const metadataBonus = companion.level === 2 && !companion.bonusTokenActive
+      ? companion.data.bonus2! : companion.data.bonus;
+    contribution.reward = companionReward(companion, rewardScale * metadataBonus, operation, unit, 1);
+    return contribution;
   };
-  const companionLevelTwoContribution = (index: number, scale: number, operation: ResearchContributor["operation"] = "addPercent"): ResearchContributor => {
+  const companionLevelTwoContribution = (
+    index: number, scale: number, operation: ResearchContributor["operation"] = "addPercent", unit: string = "factor units",
+  ): ResearchContributor => {
     const companion = companions.find(companion => companion.id === index)!;
-    return researchContribution(`Companion: ${companion.name} level two`, scale * levelTwoCompanionBonuses.get(index)!, operation, undefined, "Owned at level two. Pet Bonus Tokens do not grant level two.");
+    const contribution = researchContribution(`Companion: ${companion.name} level two`, scale * levelTwoCompanionBonuses.get(index)!, operation, undefined, "Owned at level two. Pet Bonus Tokens do not grant level two.");
+    contribution.reward = companionReward(companion, scale, operation, unit, 2);
+    return contribution;
   };
   const sticker = farming.stickers.find(sticker => sticker.index === 1)!;
   const coralBonus = coral.bonuses.find(bonus => bonus.index === 4)!;
@@ -992,6 +1199,19 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const researchSuperbit = gaming.superbits.find(superbit => superbit.superbitId === 44)!;
   const slabSuperbit = gaming.superbits.find(superbit => superbit.superbitId === 34)!;
   const shopUpgrade = spelunking.upgrades.find(upgrade => upgrade.index === 63)!;
+  const shopExp = researchContribution(`Spelunking shop: ${shopUpgrade.data.name}`, spelunking.getUpgradeBonus(63), "addPercent");
+  shopExp.reward = {
+    value: shopUpgrade.data.bonusPerLevel, operation: "addPercent", unit: "EXP", basis: "per shop level",
+    acquired: shopUpgrade.purchasedLevel > 0, active: shopUpgrade.purchasedLevel > 0,
+  };
+  const prehistoricSet = sets.equipmentSets.find(set => set.data.name === "PREHISTORIC_SET")!;
+  const prehistoricExp = researchContribution("Equipment set: Prehistoric set", sets.getSetBonus("PREHISTORIC_SET", referencePlayer, true), "addPercent", 50, "Permanent activation or reference character's equipped set", referencePlayer?.playerID);
+  prehistoricExp.reward = {
+    // Research caps this set's raw EXP reward at 50%.
+    value: Math.min(prehistoricExp.cap!, prehistoricSet.getBonus(true)), operation: "addPercent", unit: "EXP",
+    basis: "when active or equipped",
+    acquired: prehistoricSet.unlocked, active: prehistoricSet.isActiveFor(referencePlayer),
+  };
   const additiveExp = [
     researchContribution(`Farming sticker: ${sticker.name}`, farming.getStickerBonus(1), "addPercent"),
     researchContribution("Cooking meals: Research EXP", cooking.getMealBonusForKey("ResearchXP"), "addPercent"),
@@ -1008,13 +1228,13 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       return researchContribution(`Owned card: ${card.displayName}`, scale * card.getLevels(), "addPercent", cap);
     }),
     researchContribution(`Arcade: ${arcade.bonuses[63].effect}`, arcade.bonuses[63].getBonus(), "addPercent"),
-    researchContribution("Equipment set: Prehistoric set", sets.getSetBonus("PREHISTORIC_SET", referencePlayer, true), "addPercent", 50, "Permanent activation or reference character's equipped set", referencePlayer?.playerID),
+    prehistoricExp,
     gridContribution(94, 2), gridContribution(31), gridContribution(51),
     ...[{ id: "w7a11", scale: 1, cap: 10 }, { id: "w7b8", scale: 3, cap: 20 }].map(({ id, scale, cap }) => {
       const card = cards.find(card => card.id === id)!;
       return researchContribution(`Owned card: ${card.displayName}`, scale * card.getLevels(), "addPercent", cap);
     }),
-    researchContribution(`Spelunking shop: ${shopUpgrade.data.name}`, spelunking.getUpgradeBonus(63), "addPercent"),
+    shopExp,
   ];
   const companion52 = companionContribution(52, 1, "add");
   const companion153 = companionContribution(153, 1, "add");
@@ -1024,83 +1244,110 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const riftStalkerFactor = 1 + companion153.value + companion153LevelTwo.value;
   const neonscaleFactor = 1 + companion54LevelTwo.value;
   const companionFactor = Math.max(1, jellofishFactor * riftStalkerFactor * neonscaleFactor);
+  const companionGroup = (
+    id: ResearchCompanionGroup["id"], index: number, components: ResearchContributor[],
+    factor: number, requiredLevel: 1 | 2 = 1,
+  ): ResearchCompanionGroup => {
+    const companion = companions.find(companion => companion.id === index)!;
+    const intrinsicTerms = components.filter(component =>
+      component.reward!.companion!.requiredLevel === 1 || requiredLevel === 2 || companion.level === 2);
+    const intrinsicFactor = 1 + intrinsicTerms.reduce((sum, component) => sum + component.reward!.value, 0);
+    return {
+      id, name: companion.name, components, factor,
+      reward: companionReward(companion, intrinsicFactor, "multiply", "EXP", requiredLevel),
+    };
+  };
   const fountain = hole.fountain.upgrades.find(upgrade => upgrade.data.waterIndex === 2 && upgrade.data.index === 16)!;
   const buttonBonus = button.bonuses.find(bonus => bonus.index === 0)!;
   const sushiExp = sushiContribution(0);
+  const gridExp = gridContribution(70);
+  const outpostReward = armory.getResearchExpOutpostReward();
+  const outpostExp = researchContribution("Royal Armory: Research Outpost", Math.max(1, armory.getResearchExpOutpostMultiplier()), "multiply", undefined, "Selected Research Outpost category");
+  outpostExp.reward = {
+    value: outpostReward.multiplier, operation: "multiply", unit: "EXP",
+    basis: `with Research EXP selected (${outpostReward.builtOutpostCount} built Outposts)${outpostReward.available ? "" : "; requires the selector to be unlocked"}`,
+    acquired: outpostReward.available, active: outpostReward.selected,
+  };
   const expMultipliers = [
-    researchPercentMultiplier(`Research Grid: ${research.bonuses.find(bonus => bonus.index === 70)!.data.name}`, research.getBonusForId(70)),
+    researchPercentMultiplier(gridExp.source, research.getBonusForId(70), gridExp.gate, gridExp.reward),
     researchPercentMultiplier(`Equinox: ${equinox.upgrades.find(upgrade => upgrade.index === 12)!.data.name}`, equinox.getResearchExpBonus()),
     researchPercentMultiplier(`The Button: ${buttonBonus.data.name}`, button.getBonusForIndex(0)),
     researchPercentMultiplier("Killroy: Research EXP", killroy.spelunkingExpMulti),
     { source: "Companions", inputValue: companionFactor, value: companionFactor, operation: "multiply" as const,
       gate: "Combined companion factor has a minimum of one.", components: [companion52, companion153, companion153LevelTwo, companion54LevelTwo],
       companionGroups: [
-        { id: "jellofish" as const, name: companions.find(companion => companion.id === 52)!.name, components: [companion52], factor: jellofishFactor },
-        { id: "riftStalker" as const, name: companions.find(companion => companion.id === 153)!.name, components: [companion153, companion153LevelTwo], factor: riftStalkerFactor },
-        { id: "neonscale" as const, name: companions.find(companion => companion.id === 54)!.name, components: [companion54LevelTwo], factor: neonscaleFactor },
+        companionGroup("jellofish", 52, [companion52], jellofishFactor),
+        companionGroup("riftStalker", 153, [companion153, companion153LevelTwo], riftStalkerFactor),
+        companionGroup("neonscale", 54, [companion54LevelTwo], neonscaleFactor, 2),
       ] },
-    researchPercentMultiplier(sushiExp.source, sushiExp.value, sushiExp.gate),
+    researchPercentMultiplier(sushiExp.source, sushiExp.value, sushiExp.gate, sushiExp.reward),
     researchPercentMultiplier("The Hole: Researchy", hole.getResearchExpUpgradeBonus()),
-    researchPercentMultiplier(`The Hole Fountain: ${fountain.data.name}`, hole.fountain.getBonus(2, 16)),
+    researchPercentMultiplier(`The Hole Fountain: ${fountain.data.name}`, hole.fountain.getBonus(2, 16), undefined, {
+      value: fountain.data.bonusPerLevel, operation: "addPercent", unit: "EXP", basis: "per Fountain level before Marbleization",
+      acquired: fountain.level > 0, active: fountain.level > 0,
+    }),
     ...[0, 23, 46, 54].map(index => {
       const contribution = jellyContribution(index);
-      return researchPercentMultiplier(contribution.source, contribution.value, contribution.gate);
+      return researchPercentMultiplier(contribution.source, contribution.value, contribution.gate, contribution.reward);
     }),
-    researchContribution("Royal Armory: Research Outpost", Math.max(1, armory.getResearchExpOutpostMultiplier()), "multiply", undefined, "Selected Research Outpost category"),
+    outpostExp,
   ];
   const purchase = gems.purchases.find(purchase => purchase.no === 45)!;
   const artifact = sailing.artifacts.find(artifact => artifact.index === 36)!;
   const offlineCard = cards.find(card => card.id === "w7b11")!;
   const gambit = hole.gambit.bonuses.find(bonus => bonus.index === 15)!;
   const offline = [
-    companionContribution(28, 1, "addPercent"),
+    companionContribution(28, 1, "addPercent", "AFK gains"),
     researchContribution(`The Hole Gambit: ${gambit.data.name}`, referencePlayer ? hole.gambit.getBonus(15, referencePlayer) : 0, "addPercent", undefined,
       `Requires score ${gambit.getScoreThreshold()} and a non-Tutorial scene for the reference character`, referencePlayer?.playerID),
     mineheadContribution(1, "addPercent"), mineheadContribution(10, "addPercent"),
-    gridContribution(71), gridContribution(111),
+    gridContribution(71, 0, "addPercent", "AFK gains"), gridContribution(111, 0, "addPercent", "AFK gains"),
     researchContribution(`Sailing artifact: ${artifact.data.name}`, Math.round(artifact.status), "addPercent", 6),
     researchContribution(`Owned card: ${offlineCard.displayName}`, offlineCard.getLevels(), "addPercent", 10),
-    companionContribution(153, 20, "addPercent"), companionLevelTwoContribution(153, 10),
+    companionContribution(153, 20, "addPercent", "AFK gains"), companionLevelTwoContribution(153, 10, "addPercent", "AFK gains"),
     researchContribution(purchase.name, 2 * purchase.pucrhased, "addPercent", undefined, "Two percentage points per permanent purchase"),
-    sushiContribution(4), sushiContribution(24),
+    sushiContribution(4, "addPercent", "AFK gains"), sushiContribution(24, "addPercent", "AFK gains"),
   ];
   const opticalMonocles = Math.round(research.getBonusForId(91, 1));
-  const kaleidoscopeSources = [gridContribution(72, 1, "add"), eventContribution(33)];
+  const kaleidoscopeSources = [gridContribution(72, 1, "add", "Kaleidoscopes"), eventContribution(33)];
   const kaleidoscopes = Math.round(sumContributors(kaleidoscopeSources));
   const ownership = [
     researchContribution("Base Magnifying Glass", 1, "add"),
-    gridContribution(91, 1, "add"), ...kaleidoscopeSources,
+    gridContribution(91, 1, "add", "Optical Monocles"), ...kaleidoscopeSources,
     ...[2, 12, 20].map(index => mineheadContribution(index, "add")),
-    eventContribution(34), companionContribution(153, 1, "add"), sushiContribution(8, "add"),
+    eventContribution(34), companionContribution(153, 1, "add", "Magnifying Glasses"), sushiContribution(8, "add", "Magnifying Glasses"),
   ];
   const maximumRoll = [
     researchContribution("Base maximum discovery roll", research.metadata.baseDiscoveryMaxRoll, "add"),
-    gridContribution(51, 1, "add"), sushiContribution(30, "add"),
-    { ...jellyContribution(12), operation: "add" as const },
+    gridContribution(51, 1, "add", "maximum discovery roll"), sushiContribution(30, "add", "maximum discovery roll"),
+    jellyContribution(12, "add", "maximum discovery roll"),
   ];
   const dailyAllocation = [
     researchContribution("Base daily discovery attempts", research.metadata.baseDiscoveryRollsPerDay, "add"),
-    gridContribution(90, 1, "add"), eventContribution(35, 3), sushiContribution(2, "add"),
+    gridContribution(90, 1, "add", "attempts/day"), eventContribution(35, 3), sushiContribution(2, "add", "attempts/day"),
   ];
   const jade = sneaking.jadeUpgrades.find(upgrade => upgrade.index === 46)!;
   const jadeOwned = Number(jade.purchased);
-  const jellyInsight = jellyContribution(7);
+  const jellyInsight = jellyContribution(7, "addPercent", "Insight");
   const insight = [
-    gridContribution(92), gridContribution(91),
+    gridContribution(92, 0, "addPercent", "Insight"), gridContribution(91, 0, "addPercent", "Insight"),
     researchPercentMultiplier(`Sneaking Emporium: ${jade.data.name}`, 35 * jadeOwned, "Purchased Emporium upgrade"),
-    researchPercentMultiplier(jellyInsight.source, jellyInsight.value, jellyInsight.gate),
+    researchPercentMultiplier(jellyInsight.source, jellyInsight.value, jellyInsight.gate, jellyInsight.reward),
   ];
   const kaleidoscope = [
     researchContribution("Base Kaleidoscope adjacent boost", research.metadata.baseKaleidoscopeAdjacentBoostPercent, "addPercent"),
-    gridContribution(52), gridContribution(72),
+    gridContribution(52, 0, "addPercent", "Kaleidoscope effect"), gridContribution(72, 0, "addPercent", "Kaleidoscope effect"),
     researchContribution(`Sneaking Emporium: ${jade.data.name}`, 6 * jadeOwned, "addPercent", undefined, "Purchased Emporium upgrade"),
-    jellyContribution(25),
+    jellyContribution(25, "addPercent", "Kaleidoscope effect"),
   ];
   const shapeLevelGate = Math.floor(research.progress.highestLevel / research.postyNotes.find(note => note.index === 1)!.data.requiredResearchLevel);
-  const shapeCompanion = companionContribution(54, shapeLevelGate, "add");
+  const shapeCompanion = companionContribution(54, shapeLevelGate, "add", "Shapes", 1);
   shapeCompanion.value = Math.min(1, Math.max(0, shapeCompanion.inputValue));
   shapeCompanion.cap = 1;
   shapeCompanion.gate += ". Requires Research level 20.";
+  const shapeRequiredLevel = research.postyNotes.find(note => note.index === 1)!.data.requiredResearchLevel;
+  shapeCompanion.reward!.requiredResearchLevel = shapeRequiredLevel;
+  shapeCompanion.reward!.active = shapeCompanion.reward!.active && research.progress.highestLevel >= shapeRequiredLevel;
   const lore = spelunking.tunnels.find(tunnel => tunnel.index === 7)!;
   const shapeOwnership = [
     eventContribution(36), shapeCompanion,
