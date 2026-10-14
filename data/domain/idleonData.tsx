@@ -36,7 +36,7 @@ import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy
 import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
-import { Divinity, updateDivinity } from './world-5/divinity';
+import { Divinity, updateDivinity, updateDivinityBlessings } from './world-5/divinity';
 import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
@@ -380,6 +380,9 @@ const postProcessingMap: Record<string, Function> = {
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
+    // Nobisect reads independent all-skill efficiency after attributes and health-scaled bubbles are ready.
+    "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
+    "divinityBlessings": (_doc: Cloudsave, accountData: Map<string, any>) => updateDivinityBlessings(accountData),
 }
 
 // I really really hate this.
@@ -393,7 +396,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
-    "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
     "rightHandOfActionBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateRightHandOfActionBonuses(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),

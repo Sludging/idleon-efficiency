@@ -24,7 +24,7 @@ const parameters: ParameterTestSpec[] = [
   {
     description: 'Nobisect blessing adds base efficiency for the target character',
     extractionKey: 'nobisect_base_efficiency',
-    domainExtractor: data => (data.get('divinity') as Divinity).gods[2].getBlessingBonus(),
+    domainExtractor: data => (data.get('divinity') as Divinity).gods[2].getBlessingBonus(targetPlayer(data)),
   },
   {
     description: 'Myriad Crate adds base efficiency for the target character',
