@@ -590,6 +590,10 @@ export class ResearchShape {
     return 1 + this.data.bonusPercent / 100;
   }
 
+  getImageData(): ImageData {
+    return { location: `ResShape${this.index}`, width: this.data.width, height: this.data.height };
+  }
+
   getDescription(): string {
     return this.data.descriptionTemplate
       .replace(/{/g, String(this.data.bonusPercent))

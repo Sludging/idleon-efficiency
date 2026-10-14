@@ -51,6 +51,8 @@ Apply [shared verification](#shared-verification) to account growth, discovery c
 
 **Blocked by:** None. Part 2 does not depend on Part 1's delivered data or UI. Required mappings, metadata, current calculations, and display evidence remain work within Part 2.
 
+**Completion:** All six Part 2 outcomes are complete and accepted by the delegated supervisor on 2026-10-14. The [acceptance and closeout handoff](research-research-brief.md#part-2-delegated-ui-acceptance-and-local-closeout--2026-10-14) permits only the selected local UI commit and scoped document update, then stop.
+
 ### Backend data and UI information needs
 
 - **Backend:** Provide earned, spent, and available Points. Include level, milestone, and supported outside contributions. Each purchased upgrade level consumes one Point. A next-level cost is not the full cost of a distant target.
@@ -62,14 +64,16 @@ Apply [shared verification](#shared-verification) to account growth, discovery c
 
 ### Acceptance outcomes
 
-- [ ] Players can distinguish earned, spent, and available Points. Supported level, milestone, and outside contributions appear beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
-- [ ] Players can browse all real upgrades in a flat catalogue and search names and effects. All entries remain visible by default. Placeholder positions do not inflate the count.
-- [ ] Players can inspect each upgrade's purchased level, cap, verified current effect, orthogonal reachability, and additional prerequisites. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors appear beside affected effects.
-- [ ] Players can understand Research-owned linked unlocks and their conditions without related activity progression, resources, actions, or navigation. Eclectic Sigils also requires Spelunking Lore Boss 7. Masterius Cookerius requires Rift 61. Revival of the Undead Battalion requires boat level 400. Crown effects use externally owned reclaimed Gaming crowns. Glimbo scaling uses complete 100-trade blocks. Masterclass Research affects Deathbringer, Windwalker, and Arcane Cultist, not Royal Guardian. Divine Design preserves conditional Arctis/Doot multiplier behavior.
-- [ ] Players can inspect all Shape definitions, current ownership, supported ownership sources, and actual saved positions and rotations. Rotation unlocks at Research level 90. Ownership has a cap of ten. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
-- [ ] Players can inspect actual covered upgrades and each square's single active Shape owner. Code-backed modifiers appear beside affected upgrade effects.
+- [x] Players can distinguish earned, spent, and available Points. Supported level, milestone, and outside contributions appear beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
+- [x] Players can browse all real upgrades in a flat catalogue and search names and effects. All entries remain visible by default. Placeholder positions do not inflate the count.
+- [x] Players can inspect each upgrade's purchased level, cap, verified current effect, orthogonal reachability, and additional prerequisites. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors appear beside affected effects.
+- [x] Players can understand Research-owned linked unlocks and their conditions without related activity progression, resources, actions, or navigation. Eclectic Sigils also requires Spelunking Lore Boss 7. Masterius Cookerius requires Rift 61. Revival of the Undead Battalion requires boat level 400. Crown effects use externally owned reclaimed Gaming crowns. Glimbo scaling uses complete 100-trade blocks. Masterclass Research affects Deathbringer, Windwalker, and Arcane Cultist, not Royal Guardian. Divine Design preserves conditional Arctis/Doot multiplier behavior.
+- [x] Players can inspect all Shape definitions, current ownership, supported ownership sources, and actual saved positions and rotations. Rotation unlocks at Research level 90. Ownership has a cap of ten. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
+- [x] Players can inspect actual covered upgrades and each square's single active Shape owner. Code-backed modifiers appear beside affected upgrade effects.
 
 ### Evidence and verification
+
+Supplied final actual UI evidence records **1,445 browser assertions / 0 failures** at **1440×1000 desktop**, **19** preserved provider snapshots, exact prepared accepted-backend equality, approved-preview prepared-value equality, and preserved Part 1. The [closeout handoff](research-research-brief.md#part-2-delegated-ui-acceptance-and-local-closeout--2026-10-14) retains the final run path, inherited errors, unobserved branches, and offline 1.22 limits. This acceptance record adds no new proof and reruns no application checks.
 
 The [approved brief](research-research-brief.md) records supporting sources G1, G4, G7, P1, P3–P5, and R1–R3. Complete metadata, Point dependencies, upgrade effects, prerequisites, and Shape mappings still need supporting evidence where not established. Catalogue coverage does not prove formula parity for all 60 upgrades. Current code-backed Shape effects take precedence over conflicting descriptions. All-source Shape obtainability remains unverified. Historical correctness issue #386 does not certify the whole Grid.
 

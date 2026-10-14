@@ -14,11 +14,13 @@ import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import { useAppDataStore } from "../../../lib/providers/appDataStoreProvider";
 import { DataStatus } from "../../../lib/stores/appDataStore";
+import ResearchGridDisplay from "./researchGrid";
+import ResearchShapes from "./researchShapes";
 
 const amount = (value: number) => notateNumber(value, "Smaller");
 const percent = (value: number) => `${amount(value)}%`;
 const rate = (value: number) => `${amount(value)} / hour`;
-const tabs = ["Observations", "Lenses", "Posty Notes", "Papers"] as const;
+const tabs = ["Observations", "Lenses", "Posty Notes", "Papers", "Grid", "Shapes"] as const;
 type ResearchTab = typeof tabs[number];
 const sorts = ["Game order", "Research EXP highest", "Insight highest"] as const;
 
@@ -246,6 +248,8 @@ export default function ResearchContent() {
                     <TextAndLabel label="Offline gains bonus" text={`+${amount(papers.permanent.offlinePercent)} percentage points`} textSize="small" labelSize="xsmall" />
                 </ShadowBox>
             </Grid>}
+            {tab === "Grid" && <ResearchGridDisplay research={research} />}
+            {tab === "Shapes" && <ResearchShapes research={research} />}
         </Box>
     </Box>;
 }
