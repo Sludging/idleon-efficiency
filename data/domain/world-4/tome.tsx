@@ -1044,8 +1044,8 @@ export const updateTomeScores = (data: Map<string, any>) => {
                 line.updateAllPlayersCurrentValue(totalDestroyedResourceLayers);
                 break;
             case 93:
-                // Total Opals found in the Hole.
-                line.updateAllPlayersCurrentValue(hole.ownedOpals);
+                // Cavern-earned Opals exclude external grants.
+                line.updateAllPlayersCurrentValue(hole.cavernEarnedOpals);
                 break;
             case 94:
                 // Best Pure Memory round reached.

@@ -402,6 +402,10 @@ export class Sneaking extends Domain {
     }
 
     init(_allItems: Item[], _charCount: number) {
+        this.pristineCharms = this.baseItems
+            .filter(item => item.data.itemType === NinjaItemTypeEnum.PristineCharm)
+            .slice().sort((first, second) => first.data.itemId - second.data.itemId)
+            .map(item => new PristineCharm(item.index, item.data as NinjaPristineCharmModel, false));
         return this;
     }
 
@@ -410,6 +414,9 @@ export class Sneaking extends Domain {
         const ninjaData = data.get("Ninja") as any[];
         const serverVars = data.get("servervars");
         const charCount = data.get("charCount") as number;
+        sneaking.pristineCharms.forEach(charm => {
+            charm.unlocked = false;
+        });
 
         // Old accounts won't have this data, exit early.
         if (!ninjaData || ninjaData.length == 0) {
@@ -455,16 +462,9 @@ export class Sneaking extends Domain {
         sneaking.updateUnlockedUpgrades();
 
         const pristineCharmUnlocking: number[] = ninjaData[107];
-        sneaking.pristineCharms = [];
-        sneaking.baseItems
-            .filter(item => item.data.itemType == NinjaItemTypeEnum.PristineCharm)
-            .slice().sort((item1, item2) => item1.data.itemId - item2.data.itemId).forEach((item, _) => {
-                let unlocked: boolean = false;
-                if (item.data.itemId < pristineCharmUnlocking.length) {
-                    unlocked = (pristineCharmUnlocking[item.data.itemId] == 1);
-                }
-                sneaking.pristineCharms.push(new PristineCharm(item.index, item.data as NinjaPristineCharmModel, unlocked));
-            })
+        sneaking.pristineCharms.forEach(charm => {
+            charm.unlocked = pristineCharmUnlocking[charm.data.itemId] == 1;
+        });
 
         // Yes, Lava stores the enabled upgrades as letters in a single string, need to take that and convert to indexes.
         const lettersOfEnabledUpgrades = ninjaData[102][9] ?? "";

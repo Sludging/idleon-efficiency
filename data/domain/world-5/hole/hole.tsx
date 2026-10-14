@@ -4,7 +4,7 @@ import { initLampWishRepo, LampWishBase } from "../../data/LampWishRepo";
 import { Item } from "../../items";
 import { CosmoUpgradeModel } from "../../model/cosmoUpgradeModel";
 import { LampWishModel } from "../../model/lampWishModel";
-import { VillagerIndex, Villagers } from "./villager";
+import { HoleContributor, Villager, VillagerAccountGrowthInputs, VillagerIndex, Villagers, VillagerSharedGrowthInputs } from "./villager";
 import { CosmoTypeEnum } from "../../enum/cosmoTypeEnum";
 import { HoleBuildingBase, initHoleBuildingRepo } from "../../data/HoleBuildingRepo";
 import { HoleBuildingModel } from "../../model/holeBuildingModel";
@@ -35,965 +35,1628 @@ import { Tesseract } from "../../tesseract";
 import { Jar } from "./jar";
 import { LegendTalents } from "../../world-7/legendTalents";
 import { ZenithMarket } from "../../world-7/zenithShop";
+import { Player } from "../../player";
+import { PlayerStatues } from "../../world-1/statues";
+import { Storage } from "../../storage";
+import { Companion, getCompanionActiveBonus } from "../../companions";
+import { Compass } from "../../compass";
+import { Grimoire } from "../../grimoire";
+import { UpgradeVault } from "../../upgradeVault";
+import { Arcade } from "../../world-2/arcade";
+import { Sneaking } from "../../world-6/sneaking";
+import { Summoning } from "../../world-6/summoning";
+import { Emperor } from "../../world-6/emperor";
+import { EventShop } from "../../eventShop";
+import { GemStore } from "../../gemPurchases";
+import { Card } from "../../cards";
+import { Gaming } from "../gaming";
+import { Stamp, getStampBonusForKey } from "../../world-1/stamps";
+import { SushiStation } from "../../world-7/sushi";
 
 const holeResearchExpUpgradeBasePercent = 1;
 
-export class Villager {
-    level: number = 0;
-    currentExp: number = 0;
-    opals: number = 0;
-    gemshopUpgrade: boolean = false;
-    constructor(public index: number, public name: string, public title: string) { }
-}
 
 export class Wish {
-    wishCount: number = 0;
+ wishCount: number = 0;
 
-    constructor(public index: number, public data: LampWishModel) { }
+ constructor(public index: number, public data: LampWishModel) { }
 
-    static fromBase(data: LampWishBase[]) {
-        return data.map(d => new Wish(d.index, d.data));
-    }
+ static fromBase(data: LampWishBase[]) {
+  return data.map(d => new Wish(d.index, d.data));
+ }
 }
 
 export class CosmoUpgrade {
-    unlocked: boolean = false;
-    level: number = 0;
+ unlocked: boolean = false;
+ level: number = 0;
 
-    constructor(public index: number, public data: CosmoUpgradeModel) {
-        this.data.name = this.data.name.replace(/_/g, " ");
-        this.data.desc = this.data.desc.replace(/_/g, " ");
-    }
+ constructor(public index: number, public data: CosmoUpgradeModel) {
+  this.data.name = this.data.name.replace(/_/g, " ");
+  this.data.desc = this.data.desc.replace(/_/g, " ");
+ }
 
-    static fromBase(data: CosmoUpgradeBase[]) {
-        return data.filter(d => d.data.name != "Confused_Bonus").map(d => {
-            // Special handling for Pocket Divinity upgrade
-            if (d.index == 21) {
-                return new PocketDivinityUpgrade(d.index, d.data);
-            }
-            return new CosmoUpgrade(d.index, d.data);
-        });
-    }
+ static fromBase(data: CosmoUpgradeBase[]) {
+  return data.filter(d => d.data.name != "Confused_Bonus").map(d => {
+   // Special handling for Pocket Divinity upgrade
+   if (d.index == 21) {
+    return new PocketDivinityUpgrade(d.index, d.data);
+   }
+   return new CosmoUpgrade(d.index, d.data);
+  });
+ }
 
-    getBonus(): number {
-        // Special case: Forge upgrade.
-        if (this.index === 22) {
-            return Math.floor(Math.max(1, Math.pow(3, this.level)));
-        }
-        // Default: perLvl * level
-        return Math.floor((this.data.perLvl ?? 1) * this.level);
-    }
+ getBonus(): number {
+  // Special case: Forge upgrade.
+  if (this.index === 22) {
+   return Math.floor(Math.max(1, Math.pow(3, this.level)));
+  }
+  // Default: perLvl * level
+  return Math.floor((this.data.perLvl ?? 1) * this.level);
+ }
 
-    // This is pretty messy but meh.
-    getDescription(): string {
-        // If we have a multiplier
-        if (this.data.desc.includes(" x")) {
-            // Special case for Beeg Beeg Forge
-            if (this.data.name == "Beeg Beeg Forge") {
-                return this.data.desc.replace(/ x/g, ` ${(this.getBonus())}x`);
-            }
-            return this.data.desc.replace(/ x/g, ` ${(1 + (this.getBonus() / 100)).toFixed(0)}x`);
-        }
-        // If we have a percentage
-        if (this.data.desc.includes("+%")) {
-            return this.data.desc.replace(/\+%/g, `+${this.getBonus().toFixed(0)}%`);
-        }
-        // Everything else.
-        return this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(0));
-    }
+ // This is pretty messy but meh.
+ getDescription(): string {
+  // If we have a multiplier
+  if (this.data.desc.includes(" x")) {
+   // Special case for Beeg Beeg Forge
+   if (this.data.name == "Beeg Beeg Forge") {
+    return this.data.desc.replace(/ x/g, ` ${(this.getBonus())}x`);
+   }
+   return this.data.desc.replace(/ x/g, ` ${(1 + (this.getBonus() / 100)).toFixed(0)}x`);
+  }
+  // If we have a percentage
+  if (this.data.desc.includes("+%")) {
+   return this.data.desc.replace(/\+%/g, `+${this.getBonus().toFixed(0)}%`);
+  }
+  // Everything else.
+  return this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(0));
+ }
 }
 
 
 export class PocketDivinityUpgrade extends CosmoUpgrade {
-    linkedGods: number[] = [];
+ linkedGods: number[] = [];
 
-    constructor(public index: number, public data: CosmoUpgradeModel) {
-        super(index, data);
-    }
+ constructor(public index: number, public data: CosmoUpgradeModel) {
+  super(index, data);
+ }
 }
 
 export class Majiks {
-    HoleUpgrades: CosmoUpgrade[] = [];
-    VillageUpgrades: CosmoUpgrade[] = [];
-    IdleonUpgrades: CosmoUpgrade[] = [];
+ HoleUpgrades: CosmoUpgrade[] = [];
+ VillageUpgrades: CosmoUpgrade[] = [];
+ IdleonUpgrades: CosmoUpgrade[] = [];
 
-    constructor() {
-        const allUpgrades = CosmoUpgrade.fromBase(initCosmoUpgradeRepo());
-        this.HoleUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Hole);
-        this.VillageUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Village);
-        this.IdleonUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Idleon);
-    }
+ constructor() {
+  const allUpgrades = CosmoUpgrade.fromBase(initCosmoUpgradeRepo());
+  this.HoleUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Hole);
+  this.VillageUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Village);
+  this.IdleonUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Idleon);
+ }
 }
 
 type SchematicBonusLookup = (schematicIndex: number, baseMultiplier: number) => number;
 
 export class Schematic {
-    unlocked: boolean = false;
+ unlocked: boolean = false;
 
-    // Data references populated during parsing
-    sedimentMulti: number[] = [];
-    wellSediment: number[] = [];
-    extraCalculations: number[] = [];
-    bellImprovementMethods: number[] = [];
+ // Data references populated during parsing
+ sedimentMulti: number[] = [];
+ wellSediment: number[] = [];
+ extraCalculations: number[] = [];
+ bellImprovementMethods: number[] = [];
 
-    // Study bonus value
-    studyBolaiaBonuses: number = 0;
+ // Study bonus value
+ studyBolaiaBonuses: number = 0;
 
 
-    // Cached calculations for performance
-    private sedimentSum?: number;
-    private bellSum?: number;
+ // Cached calculations for performance
+ private sedimentSum?: number;
+ private bellSum?: number;
 
-    constructor(
-        public index: number,
-        public data: HoleBuildingModel,
-        private readonly getSchematicBonus: SchematicBonusLookup = () => 0,
-    ) { }
+ constructor(
+  public index: number,
+  public data: HoleBuildingModel,
+  private readonly getSchematicBonus: SchematicBonusLookup = () => 0,
+ ) { }
 
-    static fromBase(data: HoleBuildingBase[], getSchematicBonus: SchematicBonusLookup = () => 0) {
-        return data.map(d => new Schematic(d.index, d.data, getSchematicBonus));
-    }
+ static fromBase(data: HoleBuildingBase[], getSchematicBonus: SchematicBonusLookup = () => 0) {
+  return data.map(d => new Schematic(d.index, d.data, getSchematicBonus));
+ }
 
-    getBonus(baseMultiplier: number = 1): number {
-        // Return 0 if not unlocked
-        if (!this.unlocked) {
-            return 0;
-        }
+ prepareStudyBonus(bonus: number): void {
+  this.studyBolaiaBonuses = bonus;
+  this.sedimentSum = undefined;
+  this.bellSum = undefined;
+ }
 
-        // TODO: Provide more context for some of the bonuses / extra calculations instead of just the index
-        switch (this.index) {
-            case 14: // Sediment-based bonus
-                return this.getSedimentBonus();
+ getBonus(baseMultiplier: number = 1): number {
+  // Return 0 if not unlocked
+  if (!this.unlocked) {
+   return 0;
+  }
 
-            case 45: // Bell improvement bonus
-                return this.getBellBonus();
+  // TODO: Provide more context for some of the bonuses / extra calculations instead of just the index
+  switch (this.index) {
+   case 14: // Sediment-based bonus
+    return this.getSedimentBonus();
 
-            case 46: // 5x extraCalculations[26]
-                return 5 * (this.extraCalculations[26] || 0);
+   case 45: // Bell improvement bonus
+    return this.getBellBonus();
 
-            case 47: // 25x extraCalculations[26]
-                return 25 * (this.extraCalculations[26] || 0);
+   case 46: // 5x extraCalculations[26]
+    return 5 * (this.extraCalculations[26] || 0);
 
-            case 48: // 10x extraCalculations[26]
-                return 10 * (this.extraCalculations[26] || 0);
+   case 47: // 25x extraCalculations[26]
+    return 25 * (this.extraCalculations[26] || 0);
 
-            case 49: // Resource-layer formula with nested schematic calls
-                return this.resourceLayersBonus(baseMultiplier);
+   case 48: // 10x extraCalculations[26]
+    return 10 * (this.extraCalculations[26] || 0);
 
-            case 52: // 60 * LOG(wellSediment[0])
-                return 60 * Math.floor(lavaLog(this.wellSediment[0] || 0));
+   case 49: // Resource-layer formula with nested schematic calls
+    return this.resourceLayersBonus(baseMultiplier);
 
-            case 53: // 4 * LOG(wellSediment[13])
-                return 4 * Math.floor(lavaLog(this.wellSediment[13] || 0));
+   case 52: // 60 * LOG(wellSediment[0])
+    return 60 * Math.floor(lavaLog(this.wellSediment[0] || 0));
 
-            case 54: // 1.2^LOG(wellSediment[15])
-                return Math.pow(1.2, Math.floor(lavaLog(this.wellSediment[15] || 0)));
+   case 53: // 4 * LOG(wellSediment[13])
+    return 4 * Math.floor(lavaLog(this.wellSediment[13] || 0));
 
-            case 55: // 10 * LOG(wellSediment[11])
-                return 10 * Math.floor(lavaLog(this.wellSediment[11] || 0));
+   case 54: // 1.2^LOG(wellSediment[15])
+    return Math.pow(1.2, Math.floor(lavaLog(this.wellSediment[15] || 0)));
 
-            case 56: // 1.3^LOG(wellSediment[2])
-                return Math.pow(1.3, Math.floor(lavaLog(this.wellSediment[2] || 0)));
+   case 55: // 10 * LOG(wellSediment[11])
+    return 10 * Math.floor(lavaLog(this.wellSediment[11] || 0));
 
-            case 57: // 20 * LOG(wellSediment[1])
-                return 20 * Math.floor(lavaLog(this.wellSediment[1] || 0));
+   case 56: // 1.3^LOG(wellSediment[2])
+    return Math.pow(1.3, Math.floor(lavaLog(this.wellSediment[2] || 0)));
 
-            case 58: // 5 * LOG(extraCalculations[32])
-                return 5 * lavaLog(this.extraCalculations[32] || 0);
+   case 57: // 20 * LOG(wellSediment[1])
+    return 20 * Math.floor(lavaLog(this.wellSediment[1] || 0));
 
-            case 59: // Sum of extraCalculations[33-36] / 100 * 10
-                return (
-                    ((this.extraCalculations[33] || 0) +
-                        ((this.extraCalculations[34] || 0) +
-                            ((this.extraCalculations[35] || 0) + (this.extraCalculations[36] || 0)))) /
-                    100
-                ) * 10;
+   case 58: // 5 * LOG(extraCalculations[32])
+    return 5 * lavaLog(this.extraCalculations[32] || 0);
 
-            case 82:
-            case 83:
-            case 84: // All use extraCalculations[55] with base multiplier
-                return baseMultiplier * (this.extraCalculations[55] || 0);
+   case 59: // Sum of extraCalculations[33-36] / 100 * 10
+    return (
+     ((this.extraCalculations[33] || 0) +
+      ((this.extraCalculations[34] || 0) +
+       ((this.extraCalculations[35] || 0) + (this.extraCalculations[36] || 0)))) /
+     100
+    ) * 10;
 
-            default:
-                return baseMultiplier; // Base multiplier for unknown schematics
-        }
-    }
+   case 82:
+   case 83:
+   case 84: // All use extraCalculations[55] with base multiplier
+    return baseMultiplier * (this.extraCalculations[55] || 0);
 
-    private getSedimentBonus(): number {
-        if (this.sedimentSum === undefined) {
-            this.sedimentSum = this.sedimentMulti.slice(0, 10).reduce((sum, val) => sum + (val || 0), 0);
-            this.sedimentSum *= (20 + this.studyBolaiaBonuses);
-        }
-        return this.sedimentSum;
-    }
+   default:
+    return baseMultiplier; // Base multiplier for unknown schematics
+  }
+ }
 
-    private getBellBonus(): number {
-        if (this.bellSum === undefined) {
-            this.bellSum = this.bellImprovementMethods.reduce((sum, val) => sum + (val || 0), 0);
-        }
-        return Math.max(1, Math.pow(1.1, Math.floor(this.bellSum / 25)));
-    }
+ private getSedimentBonus(): number {
+  if (this.sedimentSum === undefined) {
+   this.sedimentSum = this.sedimentMulti.slice(0, 10).reduce((sum, val) => sum + (val || 0), 0);
+   this.sedimentSum *= (20 + this.studyBolaiaBonuses);
+  }
+  return this.sedimentSum;
+ }
 
-    private resourceLayersBonus(baseMultiplier: number = 1): number {
-        // Match B_UPG(49): apply the caller factor to the weighted resource-layer total.
-        const resourceLayers = this.extraCalculations[1] +
-            (this.extraCalculations[3] * this.getSchematicBonus(50, 1) +
-                (this.extraCalculations[5] * this.getSchematicBonus(79, 1) +
-                    this.extraCalculations[7] * this.getSchematicBonus(98, 1)));
+ private getBellBonus(): number {
+  if (this.bellSum === undefined) {
+   this.bellSum = this.bellImprovementMethods.reduce((sum, val) => sum + (val || 0), 0);
+  }
+  return Math.max(1, Math.pow(1.1, Math.floor(this.bellSum / 25)));
+ }
 
-        return baseMultiplier * resourceLayers;
-    }
+ private resourceLayersBonus(baseMultiplier: number = 1): number {
+  // Match B_UPG(49): apply the caller factor to the weighted resource-layer total.
+  const resourceLayers = this.extraCalculations[1] +
+   (this.extraCalculations[3] * this.getSchematicBonus(50, 1) +
+    (this.extraCalculations[5] * this.getSchematicBonus(79, 1) +
+     this.extraCalculations[7] * this.getSchematicBonus(98, 1)));
 
-    getDescription(): string {
-        const description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
+  return baseMultiplier * resourceLayers;
+ }
 
-        // Special dynamic placeholders would need additional logic
-        // For now we have placeholder N/A for all dynamic placeholders
-        /*         if (description.includes("!")) {
-                    description = description.replace(/!/g, "N/A");
-                } 
-                if (description.includes("#")) {
-                    description = description.replace(/\#/g, "N/A");
-                }
-                if (description.includes("$")) {
-                    description = description.replace(/\$/g, "N/A");
-                }
-                if (description.includes("%")) {
-                    description = description.replace(/\%/g, "N/A");
-                }*/
+ getDescription(): string {
+  const description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
 
-        return description;
-    }
+  // Special dynamic placeholders would need additional logic
+  // For now we have placeholder N/A for all dynamic placeholders
+  /*         if (description.includes("!")) {
+              description = description.replace(/!/g, "N/A");
+          } 
+          if (description.includes("#")) {
+              description = description.replace(/\#/g, "N/A");
+          }
+          if (description.includes("$")) {
+              description = description.replace(/\$/g, "N/A");
+          }
+          if (description.includes("%")) {
+              description = description.replace(/\%/g, "N/A");
+          }*/
+
+  return description;
+ }
+}
+
+export interface StudyEffect {
+ key: string;
+ value: number | boolean | null;
+ unit: "percent" | "multiplier" | "levels" | "wishes/day" | "attempts" | "days" | "upgrades" | "rule";
+ owner: string;
+ scope: "owned-study-contribution" | "owned-study-rule";
+ note: string | null;
+ unavailableReason: string | null;
 }
 
 export class Study {
-    level: number = 0;
-    unlocked: boolean = false;
+ level: number = 0;
+ progress: number = 0;
+ unlocked: boolean = false;
+ levelAvailable: boolean = false;
+ progressAvailable: boolean = false;
+ saveAvailable: boolean = false;
+ access: boolean | null = null;
+ participation: "target" | "neighbor" | "inactive" | "unavailable" = "unavailable";
+ progressPerHour: number | null = null;
+ rateUnavailableReason: string | null = null;
+ contributors: HoleContributor[] = [];
+ completedLayers: number | null = null;
+ dailyCoveUpgradesPurchased: number | null = null;
 
-    constructor(public index: number, public data: StudyModel) { }
+ constructor(public index: number, public data: StudyModel) { }
 
-    static fromBase(data: StudyBase[]) {
-        return data.map(d => new Study(d.index, d.data));
-    }
+ static fromBase(data: StudyBase[]) {
+  return data.map(d => new Study(d.index, d.data));
+ }
 
-    // Calculate study bonus
-    getBonus(): number {
-        // Must have at least level 1 to get bonuses
-        if (!this.unlocked) {
-            return 0;
-        }
+ parse(savedHoleData: number[][], optionListAccount: number[]): void {
+  const level = savedHoleData[26]?.[this.index];
+  const progress = savedHoleData[27]?.[this.index];
+  this.level = Number(level ?? 0);
+  this.progress = Number(progress ?? 0);
+  this.saveAvailable = level != null && progress != null;
+  this.levelAvailable = level != null;
+  this.progressAvailable = progress != null;
+  this.access = null;
+  this.unlocked = false;
+  this.participation = "unavailable";
+  this.progressPerHour = null;
+  this.rateUnavailableReason = null;
+  this.contributors = [];
+  this.completedLayers = null;
+  this.dailyCoveUpgradesPurchased = null;
 
-        // Special cases for specific studies
-        if (this.index === 9) {
-            // Study 9 (JUSTICE): 50 + (level × multiplier)
-            return 50 + this.level * this.data.multiplier;
-        } else if (this.index === 3) {
-            // Study 3 (BRAVERY): min(32, 12 + (level × multiplier))
-            return Math.min(32, 12 + this.level * this.data.multiplier);
-        } else {
-            // Default: level × multiplier
-            return this.level * this.data.multiplier;
-        }
-    }
+  const resourceIndex = [1, 7, 11, 16].indexOf(this.index);
+  this.completedLayers = resourceIndex < 0 || savedHoleData[11]?.[2 * resourceIndex + 1] == null
+   ? null : Number(savedHoleData[11][2 * resourceIndex + 1]);
+  if (this.index === 17) {
+   this.dailyCoveUpgradesPurchased = optionListAccount[604] == null ? null : Number(optionListAccount[604]);
+  }
+ }
 
-    getDescription(): string {
-        if (this.data.description.includes("}x")) {
-            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
-        }
-        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
-    }
+ prepareAccess(cavernCount: number | null): void {
+  this.access = cavernCount === null ? null : this.index < cavernCount;
+  this.unlocked = this.access === true;
+ }
+
+ getRequirement(): number | null {
+  return this.levelAvailable ? 4000 * Math.pow(1.25, this.level) * Math.pow(1.5, Math.floor(this.index / 5)) : null;
+ }
+
+ get claimReady(): boolean | null {
+  const requirement = this.getRequirement();
+  return requirement === null || !this.progressAvailable || this.access === null ? null : this.access && this.progress >= requirement;
+ }
+
+ get ownedRule(): boolean {
+  return this.level >= 1;
+ }
+
+ getBonus(): number {
+  if (this.index === 9) return this.ownedRule ? 50 + this.level * this.data.multiplier : 0;
+  if (this.index === 3) return this.ownedRule ? Math.min(32, 12 + this.level * this.data.multiplier) : 0;
+  return this.level * this.data.multiplier;
+ }
+
+ prepareRate(participation: Study["participation"], rate: number | null, contributors: HoleContributor[], reason: string | null): void {
+  this.participation = participation;
+  this.progressPerHour = participation === "inactive" ? 0 : rate;
+  this.contributors = participation === "inactive" ? [] : contributors;
+  this.rateUnavailableReason = reason;
+ }
+
+ getEffects(): StudyEffect[] {
+  const bonus = this.getBonus();
+  const owned = this.ownedRule;
+  const owner = `cavern:${this.index}`;
+  const effects: StudyEffect[] = [];
+  const effect = (key: string, value: number | boolean | null, unit: StudyEffect["unit"], reason: string | null = null,
+   note: string | null = null) => {
+   effects.push({ key, value: this.levelAvailable ? value : null, unit, owner,
+    scope: unit === "rule" ? "owned-study-rule" : "owned-study-contribution", note,
+    unavailableReason: this.levelAvailable ? reason : "Saved Study level is missing." });
+  };
+  switch (this.index) {
+   case 0:
+    effect("sediment-retained-after-expansion", owned ? 75 : 50, "percent");
+    effect("bucket-fill-per-expansion", bonus, "percent");
+    break;
+   case 1:
+   case 7:
+   case 11:
+   case 16:
+    effect("skilling-requirement-divisor-contribution-per-layer", bonus, "percent", null,
+     "Each completed layer adds this percentage to the Study divisor contribution.");
+    effect("skilling-requirement-divisor-contribution", this.completedLayers === null ? null : bonus * this.completedLayers,
+     "percent", this.completedLayers === null ? "Saved skilling progression is missing." : null,
+     "Summed Study and collectible contributions form the denominator 1 + sum / 100. This additive contribution is not a literal requirement reduction.");
+    break;
+   case 2:
+    effect("score-per-defeated-golden-hound", 1 + bonus / 100, "multiplier");
+    effect("golden-hound-respawns", owned, "rule");
+    break;
+   case 3:
+    effect("minimum-damage-share-of-maximum", bonus, "percent");
+    effect("skip-guaranteed-one-hit-fights", owned, "rule");
+    break;
+   case 4:
+    effect("random-bonus-levels-every-twentieth-ring", bonus, "levels");
+    break;
+   case 5:
+    effect("string-experience", 1 + Number(owned), "multiplier");
+    effect("exceptional-string-experience-chance", owned ? 1 : 0, "percent");
+    effect("exceptional-string-experience", owned ? 1 + bonus : 1, "multiplier");
+    break;
+   case 6:
+    effect("additional-daily-wishes", bonus, "wishes/day");
+    break;
+   case 8:
+    effect("credited-gloomie-kills", 1 + bonus / 100, "multiplier");
+    break;
+   case 9:
+    effect("additional-linear-reward-days", owned ? 14 : 0, "days");
+    effect("opal-reward-chance", 1 + bonus / 100, "multiplier");
+    break;
+   case 10:
+    effect("choose-enchantment-target", owned, "rule");
+    effect("enchantment-chance", 1 + bonus / 100, "multiplier");
+    break;
+   case 12:
+    effect("instamatch-when-round-ends-with-none", owned, "rule", null,
+     "The round caller also requires normal-story instamatch capacity of at least one.");
+    effect("additional-starting-attempts", bonus, "attempts");
+    break;
+   case 13:
+    effect("total-gambit-points", bonus, "percent");
+    effect("preserve-daily-attempt-chance", owned ? 50 : 0, "percent");
+    break;
+   case 14:
+    effect("additional-double-torch-chance", bonus, "percent");
+    break;
+   case 15:
+    effect("owned-repeat-marbleization-rule", owned, "rule", null,
+     "This is the owned Study rule, not cavern permission. The delivered marbleization caller checks upgrade exclusions without a Study check.");
+    effect("marble-production", 1 + bonus / 100, "multiplier");
+    break;
+   case 17:
+    effect("daily-discounted-upgrades", bonus, "upgrades");
+    effect("discounted-upgrade-cost", owned ? 0.85 : 1, "multiplier");
+    effect("current-upgrade-cost", this.dailyCoveUpgradesPurchased === null ? null
+     : this.dailyCoveUpgradesPurchased < bonus ? 0.85 : 1, "multiplier",
+     this.dailyCoveUpgradesPurchased === null ? "Saved Cove purchases today are missing." : null);
+    break;
+  }
+  return effects;
+ }
+
+ getDescription(): string {
+  if (this.data.description.includes("}x")) {
+   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+  }
+  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+ }
 }
 
 export class Measurement {
-    unlocked: boolean = false;
-    level: number = 0;
-    cosmosBonus: number = 0; // CosmoBonusQTY from cosmos upgrades [TODO]
+ unlocked: boolean = false;
+ level: number = 0;
+ cosmosBonus: number = 0; // CosmoBonusQTY from cosmos upgrades [TODO]
 
-    // Variables for MeasurementQTYfound calculations by measurement type
-    gloomieKills: number = 0; // Type 0: Gloomie Kills [DONE]
-    cropsCount: number = 0; // Type 1: Crops [DONE]
-    accountLevel: number = 0; // Type 2: Account lv [DONE]
-    tomeScore: number = 0; // Type 3: Tome score [DONE]
-    allSkillLevel: number = 0; // Type 4: All skill lv [DONE]
-    // Type 5: Always returns 0
-    deathnotePts: number = 0; // Type 6: Deathnote pts [DONE]
-    highestDmg: number = 0; // Type 7: Highest DMG [DONE]
-    slabItems: number = 0; // Type 8: Slab Items [DONE]
-    studiesDone: number = 0; // Type 9: Studies done [DONE]
-    golemKills: number = 0; // Type 10: Golem kills [DONE]
+ // Variables for MeasurementQTYfound calculations by measurement type
+ gloomieKills: number = 0; // Type 0: Gloomie Kills [DONE]
+ cropsCount: number = 0; // Type 1: Crops [DONE]
+ accountLevel: number = 0; // Type 2: Account lv [DONE]
+ tomeScore: number = 0; // Type 3: Tome score [DONE]
+ allSkillLevel: number = 0; // Type 4: All skill lv [DONE]
+ // Type 5: Always returns 0
+ deathnotePts: number = 0; // Type 6: Deathnote pts [DONE]
+ highestDmg: number = 0; // Type 7: Highest DMG [DONE]
+ slabItems: number = 0; // Type 8: Slab Items [DONE]
+ studiesDone: number = 0; // Type 9: Studies done [DONE]
+ golemKills: number = 0; // Type 10: Golem kills [DONE]
 
-    constructor(public index: number, public data: MeasurementModel) { }
+ constructor(public index: number, public data: MeasurementModel) { }
 
-    static fromBase(data: MeasurementBase[]) {
-        return data.map(d => new Measurement(d.index, d.data));
+ static fromBase(data: MeasurementBase[]) {
+  return data.map(d => new Measurement(d.index, d.data));
+ }
+
+ /**
+  * Calculate the measurement quantity found based on measurement type
+  * This determines the multiplier strength for the measurement bonus
+  * @param isForMultiplier - If true (99), applies scaling for multiplier calculation
+  */
+ getMeasurementQTYfound(isForMultiplier: boolean = false): number {
+  const measurementType = parseInt(this.data.measurementType.type);
+
+  // Calculation logic verified against game source code
+  switch (measurementType) {
+   case 0: // Gloomie Kills
+    return isForMultiplier ? lavaLog(this.gloomieKills) : this.gloomieKills;
+
+   case 1: // Crops
+    return isForMultiplier ? this.cropsCount / 14 : this.cropsCount;
+
+   case 2: // Account lv
+    return isForMultiplier ? this.accountLevel / 500 : this.accountLevel;
+
+   case 3: // Tome score  
+    return isForMultiplier ? this.tomeScore / 2500 : this.tomeScore;
+
+   case 4: // All skill lv
+    if (isForMultiplier) {
+     return this.allSkillLevel / 5000 + Math.max(0, this.allSkillLevel - 18000) / 1500;
     }
+    return this.allSkillLevel;
 
-    /**
-     * Calculate the measurement quantity found based on measurement type
-     * This determines the multiplier strength for the measurement bonus
-     * @param isForMultiplier - If true (99), applies scaling for multiplier calculation
-     */
-    getMeasurementQTYfound(isForMultiplier: boolean = false): number {
-        const measurementType = parseInt(this.data.measurementType.type);
+   case 5: // Always 0
+    return 0;
 
-        // Calculation logic verified against game source code
-        switch (measurementType) {
-            case 0: // Gloomie Kills
-                return isForMultiplier ? lavaLog(this.gloomieKills) : this.gloomieKills;
+   case 6: // Deathnote pts
+    return isForMultiplier ? this.deathnotePts / 125 : this.deathnotePts;
 
-            case 1: // Crops
-                return isForMultiplier ? this.cropsCount / 14 : this.cropsCount;
+   case 7: // Highest DMG
+    return isForMultiplier ? lavaLog(this.highestDmg) / 2 : this.highestDmg;
 
-            case 2: // Account lv
-                return isForMultiplier ? this.accountLevel / 500 : this.accountLevel;
+   case 8: // Slab Items
+    return isForMultiplier ? this.slabItems / 150 : this.slabItems;
 
-            case 3: // Tome score  
-                return isForMultiplier ? this.tomeScore / 2500 : this.tomeScore;
+   case 9: // Studies done
+    return isForMultiplier ? this.studiesDone / 6 : this.studiesDone;
 
-            case 4: // All skill lv
-                if (isForMultiplier) {
-                    return this.allSkillLevel / 5000 + Math.max(0, this.allSkillLevel - 18000) / 1500;
-                }
-                return this.allSkillLevel;
+   case 10: // Golem kills
+    return isForMultiplier ? Math.max(0, lavaLog(this.golemKills) - 2) : this.golemKills;
 
-            case 5: // Always 0
-                return 0;
+   default:
+    return 0;
+  }
+ }
 
-            case 6: // Deathnote pts
-                return isForMultiplier ? this.deathnotePts / 125 : this.deathnotePts;
+ /**
+  * Calculate the measurement multiplier based on quantity found
+  * Uses a progressive scaling system with different rates above/below 5
+  */
+ getMeasurementMulti(): number {
+  const qtyFound = this.getMeasurementQTYfound(true); // Use multiplier scaling
 
-            case 7: // Highest DMG
-                return isForMultiplier ? lavaLog(this.highestDmg) / 2 : this.highestDmg;
+  if (qtyFound < 5) {
+   // Below 5: 1 + (18% * qtyFound)
+   return 1 + (18 * qtyFound) / 100;
+  } else {
+   // Above 5: 1 + (18% * qtyFound) + (8% * (qtyFound - 5))
+   return 1 + (18 * qtyFound + 8 * (qtyFound - 5)) / 100;
+  }
+ }
 
-            case 8: // Slab Items
-                return isForMultiplier ? this.slabItems / 150 : this.slabItems;
+ /**
+  * Calculate the base bonus for this measurement
+  * Based on the measurement's formula and current buff level
+  */
+ getMeasurementBaseBonus(): number {
+  const formula = this.data.formula;
+  const formulaType = this.data.formulaType;
+  const cosmosMultiplier = 1 + this.cosmosBonus / 100;
 
-            case 9: // Studies done
-                return isForMultiplier ? this.studiesDone / 6 : this.studiesDone;
+  // Check if this is a TOT (total) type measurement
+  if (formulaType === "TOT") {
+   // Extract the base value from formula (e.g., "45TOT" -> 45)
+   const baseValue = parseFloat(formula.replace("TOT", ""));
 
-            case 10: // Golem kills
-                return isForMultiplier ? Math.max(0, lavaLog(this.golemKills) - 2) : this.golemKills;
+   // For TOT measurements, use the diminishing returns formula
+   return cosmosMultiplier * ((baseValue * this.level) / (100 + this.level));
+  } else {
+   // For regular measurements, use simple multiplication
+   const baseValue = parseFloat(formula);
+   return cosmosMultiplier * baseValue * this.level;
+  }
+ }
 
-            default:
-                return 0;
-        }
-    }
+ getBonus(): number {
+  // Calculate the total measurement bonus (base * multiplier)
+  return this.getMeasurementBaseBonus() * this.getMeasurementMulti();
+ }
 
-    /**
-     * Calculate the measurement multiplier based on quantity found
-     * Uses a progressive scaling system with different rates above/below 5
-     */
-    getMeasurementMulti(): number {
-        const qtyFound = this.getMeasurementQTYfound(true); // Use multiplier scaling
+ getCost(): number {
+  // Formula: (250 + 50 * level) * 1.6^(index - 6 * floor(index / 10)) * 1.1^level
+  return (
+   (250 + 50 * this.level) *
+   Math.pow(1.6, this.index - 6 * Math.floor(this.index / 10)) *
+   Math.pow(1.1, this.level)
+  );
+ }
 
-        if (qtyFound < 5) {
-            // Below 5: 1 + (18% * qtyFound)
-            return 1 + (18 * qtyFound) / 100;
-        } else {
-            // Above 5: 1 + (18% * qtyFound) + (8% * (qtyFound - 5))
-            return 1 + (18 * qtyFound + 8 * (qtyFound - 5)) / 100;
-        }
-    }
-
-    /**
-     * Calculate the base bonus for this measurement
-     * Based on the measurement's formula and current buff level
-     */
-    getMeasurementBaseBonus(): number {
-        const formula = this.data.formula;
-        const formulaType = this.data.formulaType;
-        const cosmosMultiplier = 1 + this.cosmosBonus / 100;
-
-        // Check if this is a TOT (total) type measurement
-        if (formulaType === "TOT") {
-            // Extract the base value from formula (e.g., "45TOT" -> 45)
-            const baseValue = parseFloat(formula.replace("TOT", ""));
-
-            // For TOT measurements, use the diminishing returns formula
-            return cosmosMultiplier * ((baseValue * this.level) / (100 + this.level));
-        } else {
-            // For regular measurements, use simple multiplication
-            const baseValue = parseFloat(formula);
-            return cosmosMultiplier * baseValue * this.level;
-        }
-    }
-
-    getBonus(): number {
-        // Calculate the total measurement bonus (base * multiplier)
-        return this.getMeasurementBaseBonus() * this.getMeasurementMulti();
-    }
-
-    getCost(): number {
-        // Formula: (250 + 50 * level) * 1.6^(index - 6 * floor(index / 10)) * 1.1^level
-        return (
-            (250 + 50 * this.level) *
-            Math.pow(1.6, this.index - 6 * Math.floor(this.index / 10)) *
-            Math.pow(1.1, this.level)
-        );
-    }
-
-    getDescription(): string {
-        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
-    }
+ getDescription(): string {
+  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+ }
 }
 
 export class MonumentBonus {
-    level: number = 0;
-    monumentSelfBoost: number = 0;
-    cosmoBonus: number = 0;
-    fountainBonus: number = 0;
+ level: number = 0;
+ monumentSelfBoost: number = 0;
+ cosmoBonus: number = 0;
+ fountainBonus: number = 0;
 
-    constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
+ constructor(public index: number, public data: MonumentBonusModel, public monumentIndex: number) { }
 
-    getBonus(): number {
-        let bonusMultiplier = 1;
+ getBonus(): number {
+  let bonusMultiplier = 1;
 
-        // Apply ROG and Cosmo bonuses if i != 9
-        if (this.index !== 9) {
-            bonusMultiplier = 1 + this.monumentSelfBoost / 100;
-            bonusMultiplier += this.cosmoBonus / 100;
-        }
+  // Apply ROG and Cosmo bonuses if i != 9
+  if (this.index !== 9) {
+   bonusMultiplier = 1 + this.monumentSelfBoost / 100;
+   bonusMultiplier += this.cosmoBonus / 100;
+  }
 
-        // Fountain bonuses apply to every monument bonus, including bonus 9.
-        bonusMultiplier *= 1 + this.fountainBonus / 100;
+  // Fountain bonuses apply to every monument bonus, including bonus 9.
+  bonusMultiplier *= 1 + this.fountainBonus / 100;
 
-        if (this.data.multiplier < 30) {
-            return this.level * this.data.multiplier * Math.max(1, bonusMultiplier);
-        } else {
-            return (
-                0.1 *
-                Math.ceil(
-                    (this.level / (250 + this.level)) *
-                    10 *
-                    this.data.multiplier *
-                    Math.max(1, bonusMultiplier)
-                )
-            );
-        }
-    }
+  if (this.data.multiplier < 30) {
+   return this.level * this.data.multiplier * Math.max(1, bonusMultiplier);
+  } else {
+   return (
+    0.1 *
+    Math.ceil(
+     (this.level / (250 + this.level)) *
+     10 *
+     this.data.multiplier *
+     Math.max(1, bonusMultiplier)
+    )
+   );
+  }
+ }
 
-    getDescription(): string {
-        if (this.data.description.includes("}x")) {
-            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
-        }
-        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
-    }
+ getDescription(): string {
+  if (this.data.description.includes("}x")) {
+   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+  }
+  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+ }
 }
 
 export class MonumentUnlock {
-    unlocked: boolean = false;
-    constructor(public index: number, public data: MonumentUnlockModel) { }
+ unlocked: boolean = false;
+ constructor(public index: number, public data: MonumentUnlockModel) { }
 }
 
 export class Monument {
-    hours: number = 0;
-    bonuses: MonumentBonus[] = [];
-    unlocks: MonumentUnlock[] = [];
-    highestRound: number = 0;
+ hours: number = 0;
+ bonuses: MonumentBonus[] = [];
+ unlocks: MonumentUnlock[] = [];
+ highestRound: number = 0;
 
-    constructor(
-        public index: number,
-        public name: string,
-        public bonusesData: MonumentBonusModel[],
-        public unlocksData: MonumentUnlockModel[],
-    ) {
-        this.bonusesData.forEach(bonus => {
-            this.bonuses.push(new MonumentBonus(bonus.index, bonus, this.index));
-        })
-        this.unlocksData.forEach(unlock => {
-            this.unlocks.push(new MonumentUnlock(unlock.index, unlock));
-        })
-    }
+ constructor(
+  public index: number,
+  public name: string,
+  public bonusesData: MonumentBonusModel[],
+  public unlocksData: MonumentUnlockModel[],
+ ) {
+  this.bonusesData.forEach(bonus => {
+   this.bonuses.push(new MonumentBonus(bonus.index, bonus, this.index));
+  })
+  this.unlocksData.forEach(unlock => {
+   this.unlocks.push(new MonumentUnlock(unlock.index, unlock));
+  })
+ }
 }
 
 export class WisdomMonument extends Monument {
-    highestPureMemoryRound: number = 0;
+ highestPureMemoryRound: number = 0;
 }
 
 export class Monuments {
-    monuments: Record<string, Monument> = {}
-    constructor() {
-        const data = initMonumentRepo();
-        data.forEach(monument => {
-            if (monument.data.name == "Wisdom") {
-                this.monuments[monument.data.name] = new WisdomMonument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
-            } else {
-                this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
-            }
-        })
-    }
+ monuments: Record<string, Monument> = {}
+ constructor() {
+  const data = initMonumentRepo();
+  data.forEach(monument => {
+   if (monument.data.name == "Wisdom") {
+    this.monuments[monument.data.name] = new WisdomMonument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+   } else {
+    this.monuments[monument.data.name] = new Monument(monument.index, monument.data.name, monument.data.bonuses, monument.data.unlocks);
+   }
+  })
+ }
 }
 
 export class BellImprovement {
-    level: number = 0;
+ level: number = 0;
 
-    constructor(public index: number, public data: BellImprovementModel) { }
+ constructor(public index: number, public data: BellImprovementModel) { }
 }
 
 export class BellBonus {
-    level: number = 0;
+ level: number = 0;
 
-    constructor(public index: number, public data: BellBonusModel) { }
+ constructor(public index: number, public data: BellBonusModel) { }
 
-    /*    if ("BellUpgAfford" == e)
-           return (
-               0 == t
-                   ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Money")), (e.h.HoleozDN = s))
-                   : 1 == t
-                     ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][3]), (e.h.HoleozDN = s))
-                     : 2 == t
-                       ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Gaming")[0]), (e.h.HoleozDN = s))
-                       : 3 == t
-                         ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][14]), (e.h.HoleozDN = s))
-                         : 4 == t
-                           ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Divinity")[39]), (e.h.HoleozDN = s))
-                           : 5 == t && ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][25]), (e.h.HoleozDN = s)),
-               c.asNumber(a.engine.getGameAttribute("DNSM").h.HoleozDN) >= n._customBlock_Holes("BellCosts", t, 0) ? 1 : 0
-           );
-       if ("BellCosts" == e)
-           return 0 == t
-               ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.25, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
-               : 2 == t
-                 ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.5, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
-                 : c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.1, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]));
-       if ("BellBonuss" == e) return c.asNumber(a.engine.getGameAttribute("Holes")[17][0 | t]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[59][Math.round(2 * t + 1)]); */
+ /*    if ("BellUpgAfford" == e)
+        return (
+            0 == t
+                ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Money")), (e.h.HoleozDN = s))
+                : 1 == t
+                  ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][3]), (e.h.HoleozDN = s))
+                  : 2 == t
+                    ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Gaming")[0]), (e.h.HoleozDN = s))
+                    : 3 == t
+                      ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][14]), (e.h.HoleozDN = s))
+                      : 4 == t
+                        ? ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Divinity")[39]), (e.h.HoleozDN = s))
+                        : 5 == t && ((e = a.engine.getGameAttribute("DNSM")), (s = a.engine.getGameAttribute("Holes")[9][25]), (e.h.HoleozDN = s)),
+            c.asNumber(a.engine.getGameAttribute("DNSM").h.HoleozDN) >= n._customBlock_Holes("BellCosts", t, 0) ? 1 : 0
+        );
+    if ("BellCosts" == e)
+        return 0 == t
+            ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.25, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
+            : 2 == t
+              ? c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.5, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]))
+              : c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[42][0 | t]) * Math.pow(1.1, c.asNumber(a.engine.getGameAttribute("Holes")[16][0 | t]));
+    if ("BellBonuss" == e) return c.asNumber(a.engine.getGameAttribute("Holes")[17][0 | t]) * c.asNumber(a.engine.getGameAttribute("CustomLists").h.HolesInfo[59][Math.round(2 * t + 1)]); */
 
-    getBonus(): number {
-        return this.level * parseFloat(this.data.value);
-    }
+ getBonus(): number {
+  return this.level * parseFloat(this.data.value);
+ }
 
-    getDescription(): string {
-        if (this.data.description.includes("}x")) {
-            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
-        }
-        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
-    }
+ getDescription(): string {
+  if (this.data.description.includes("}x")) {
+   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+  }
+  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+ }
 }
 
 
 
 
 export class Bell {
-    // TODO: Improvement logic / costs / speed / exp per hour etc not done.
-    improvements: BellImprovement[] = [];
-    bonuses: BellBonus[] = [];
-    // TODO: Think if we need bell actions.
+ // TODO: Improvement logic / costs / speed / exp per hour etc not done.
+ improvements: BellImprovement[] = [];
+ bonuses: BellBonus[] = [];
+ // TODO: Think if we need bell actions.
 
-    constructor() {
-        const improvementData = initBellImprovementRepo();
-        improvementData.forEach(improvement => {
-            this.improvements.push(new BellImprovement(improvement.index, improvement.data));
-        })
-        const bonusData = initBellBonusRepo();
-        bonusData.forEach(bonus => {
-            this.bonuses.push(new BellBonus(bonus.index, bonus.data));
-        })
-    }
+ constructor() {
+  const improvementData = initBellImprovementRepo();
+  improvementData.forEach(improvement => {
+   this.improvements.push(new BellImprovement(improvement.index, improvement.data));
+  })
+  const bonusData = initBellBonusRepo();
+  bonusData.forEach(bonus => {
+   this.bonuses.push(new BellBonus(bonus.index, bonus.data));
+  })
+ }
 }
 
 export class ResourceCavren {
-    layer: number = 0;
-    resourceExtracted: number = 0;
-    efficiencyType: string = "";
+ layer: number = 0;
+ resourceExtracted: number = 0;
+ efficiencyType: string = "";
 
-    constructor(public index: number, public name: string, public resource: string) {
-        switch (resource) {
-            case "Ores":
-                this.efficiencyType = "Mining";
-                break;
-            case "Bugs":
-                this.efficiencyType = "Catching";
-                break;
-            case "Logs":
-                this.efficiencyType = "Chopping";
-                break;
-            case "Fish":
-                this.efficiencyType = "Fishing";
-                break;
-            default:
-                this.efficiencyType = "";
-                break;
-        }
-    }
+ constructor(public index: number, public name: string, public resource: string) {
+  switch (resource) {
+   case "Ores":
+    this.efficiencyType = "Mining";
+    break;
+   case "Bugs":
+    this.efficiencyType = "Catching";
+    break;
+   case "Logs":
+    this.efficiencyType = "Chopping";
+    break;
+   case "Fish":
+    this.efficiencyType = "Fishing";
+    break;
+   default:
+    this.efficiencyType = "";
+    break;
+  }
+ }
 }
 
 export class ResourceCavrens {
-    cavrens: Record<string, ResourceCavren> = {
-        "Motherload": new ResourceCavren(0, "Motherload", "Ores"),
-        "The Hive": new ResourceCavren(1, "The Hive", "Bugs"),
-        "Evertree": new ResourceCavren(2, "Evertree", "Logs"),
-        "The Bottomless Trench": new ResourceCavren(3, "The Bottomless Trench", "Fish"),
+ cavrens: Record<string, ResourceCavren> = {
+  "Motherload": new ResourceCavren(0, "Motherload", "Ores"),
+  "The Hive": new ResourceCavren(1, "The Hive", "Bugs"),
+  "Evertree": new ResourceCavren(2, "Evertree", "Logs"),
+  "The Bottomless Trench": new ResourceCavren(3, "The Bottomless Trench", "Fish"),
 
-    }
+ }
 
-    parse(extraCalculations: number[] = []): void {
-        Object.values(this.cavrens).forEach(cavren => {
-            cavren.layer = extraCalculations[cavren.index * 2 + 1] || 0;
-            cavren.resourceExtracted = extraCalculations[cavren.index * 2] || 0;
-        });
-    }
+ parse(extraCalculations: number[] = []): void {
+  Object.values(this.cavrens).forEach(cavren => {
+   cavren.layer = extraCalculations[cavren.index * 2 + 1] || 0;
+   cavren.resourceExtracted = extraCalculations[cavren.index * 2] || 0;
+  });
+ }
 
-    getTotalResourceLayers(): number {
-        return Object.values(this.cavrens).reduce(
-            (sum, cavren) => sum + Math.round(Math.max(0, cavren.layer)),
-            0,
-        );
-    }
+ getTotalResourceLayers(): number {
+  return Object.values(this.cavrens).reduce(
+   (sum, cavren) => sum + Math.round(Math.max(0, cavren.layer)),
+   0,
+  );
+ }
 }
 
 export class HarpString {
-    level: number = 0;
-    unlocked: boolean = false;
-    constructor(public index: number, public data: HarpStringModel) { }
+ level: number = 0;
+ unlocked: boolean = false;
+ constructor(public index: number, public data: HarpStringModel) { }
 
-    getBonus(): number {
-        return 0;
-    }
+ getBonus(): number {
+  return 0;
+ }
 
-    getDescription(): string {
-        if (this.data.description.includes("}x")) {
-            return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
-        }
-        return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
-    }
+ getDescription(): string {
+  if (this.data.description.includes("}x")) {
+   return this.data.description.replace(/}/g, (1 + (this.getBonus() / 100)).toFixed(2));
+  }
+  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+ }
 }
 
 export class Harp {
-    notes: { name: string, index: number, current: number }[] = [];
-    strings: HarpString[] = [];
-    stringCount = 0;
+ notes: { name: string, index: number, current: number }[] = [];
+ strings: HarpString[] = [];
+ stringCount = 0;
 
-    constructor() {
-        const harpNotes = initHarpNotesRepo();
-        harpNotes.forEach(note => {
-            this.notes.push({ name: note.data.noteName, index: note.index, current: 0 });
-        })
-        const harpStrings = initHarpStringsRepo();
-        harpStrings.forEach(string => {
-            this.strings.push(new HarpString(string.index, string.data));
-        })
-    }
+ constructor() {
+  const harpNotes = initHarpNotesRepo();
+  harpNotes.forEach(note => {
+   this.notes.push({ name: note.data.noteName, index: note.index, current: 0 });
+  })
+  const harpStrings = initHarpStringsRepo();
+  harpStrings.forEach(string => {
+   this.strings.push(new HarpString(string.index, string.data));
+  })
+ }
 
-    parse(holeData: number[][]): void {
-        const noteData = holeData[9].slice(10, 20);
-        this.notes.forEach((note, index) => {
-            note.current = noteData[index];
-        })
+ parse(holeData: number[][]): void {
+  const noteData = holeData[9].slice(10, 20);
+  this.notes.forEach((note, index) => {
+   note.current = noteData[index];
+  })
 
-        const stringData = holeData[19];
-        this.strings.forEach((string, index) => {
-            string.level = stringData[2 * index];
-            // TODO: Verify this.
-            string.unlocked = string.level > 0;
-        })
-    }
+  const stringData = holeData[19];
+  this.strings.forEach((string, index) => {
+   string.level = stringData[2 * index];
+   // TODO: Verify this.
+   string.unlocked = string.level > 0;
+  })
+ }
 }
 
 export class Lamp {
-    zenithMarketBonus: number = 0;
-    wishes: Wish[] = [];
-    // This is hard-coded in the game, can move to the repo maybe.
-    specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
+ zenithMarketBonus: number = 0;
+ wishes: Wish[] = [];
+ // This is hard-coded in the game, can move to the repo maybe.
+ specialBonusArray = "25,10,8;15,40,10;20,35,12;5,1,1;2,2,2".split(";");
 
-    constructor() {
-        this.wishes = Wish.fromBase(initLampWishRepo());
-    }
+ constructor() {
+  this.wishes = Wish.fromBase(initLampWishRepo());
+ }
 
-    getBonus(holeBonus: boolean = false, specialIndex?: number, inlineIndex?: number): number {
-        // This implementation is pretty odd so writing some notes.
-        // 1. Wish 7 gives bonus of 25 * wishCount for hold related resources.
-        // 2. Everything else comes from a weird string which is indexed on 2 indexes.
+ getBonus(holeBonus: boolean = false, specialIndex?: number, inlineIndex?: number): number {
+  // This implementation is pretty odd so writing some notes.
+  // 1. Wish 7 gives bonus of 25 * wishCount for hold related resources.
+  // 2. Everything else comes from a weird string which is indexed on 2 indexes.
 
-        // TODO: Wonder if we should make this code nicer at some point.
-        if (holeBonus) {
-            return 25 * this.wishes[7].wishCount * (1 + this.zenithMarketBonus / 100);
-        }
+  // TODO: Wonder if we should make this code nicer at some point.
+  if (holeBonus) {
+   return 25 * this.wishes[7].wishCount * (1 + this.zenithMarketBonus / 100);
+  }
 
-        if (specialIndex != undefined && inlineIndex != undefined) {
-            const wishIndex = Math.min(11, Math.round(4 + 2 * specialIndex));
-            return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount * (1 + this.zenithMarketBonus / 100);
-        }
+  if (specialIndex != undefined && inlineIndex != undefined) {
+   const wishIndex = Math.min(11, Math.round(4 + 2 * specialIndex));
+   return Number(this.specialBonusArray[specialIndex].split(",")[inlineIndex]) * this.wishes[wishIndex].wishCount * (1 + this.zenithMarketBonus / 100);
+  }
 
-        return 0;
-    }
+  return 0;
+ }
 }
 
 export class DawgDen {
-    bestScore: number = 0;
+ bestScore: number = 0;
 }
 
+export interface OpalSource {
+ id: string;
+ owner: string;
+ name: string;
+ acquisition: string;
+ opals: number | null;
+ unit: "Opals";
+ unavailableReason: string | null;
+}
+
+export interface OpalLedger {
+ sources: OpalSource[];
+ cavernEarned: number | null;
+ externalEarned: number | null;
+ emperorSchematicFloorAdjustment: number | null;
+ externalRoundingAdjustment: number | null;
+ earned: number | null;
+ invested: number | null;
+ uninvested: number | null;
+ unavailableReason: string | null;
+}
+
+export interface LanternLocation {
+ kind: "storage" | "character";
+ playerId: number | null;
+ playerName: string | null;
+ quantity: number | null;
+ unavailableReason: string | null;
+}
+
+export interface LanternSummary {
+ itemId: "Quest90";
+ name: "Blinding Lantern";
+ locations: LanternLocation[];
+ totalStock: number | null;
+ usesToday: number | null;
+ usageUnavailableReason: string | null;
+ dailyLimit: number;
+ hoursPerUse: number;
+ advances: string[];
+ excludes: string[];
+}
+
+export interface AnotherTryReset {
+ category: "Opals" | "Majik" | "Jar enchantments" | "Summoning doublers";
+ clears: string[];
+ retains: string[];
+}
+
+
 export class Hole extends Domain {
-    // Raw
-    playerLocationData: number[] = []
+ // Raw
+ playerLocationData: number[] = []
 
-    // Processed
-    villagers: Villager[] = Villagers.getVillagers();
-    majiks = new Majiks();
-    schematics: Schematic[] = Schematic.fromBase(
-        initHoleBuildingRepo(),
-        (schematicIndex, baseMultiplier) => this.getSchematicBonus(schematicIndex, baseMultiplier),
-    );
-    studies: Study[] = Study.fromBase(initStudyRepo());
-    measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
-    monuments: Monuments = new Monuments();
-    bell: Bell = new Bell();
-    well: Well = new Well();
-    fountain: Fountain = new Fountain();
-    resourceCavrens = new ResourceCavrens();
-    harp: Harp = new Harp();
-    lamp: Lamp = new Lamp();
-    dawgDen: DawgDen = new DawgDen();
-    jar: Jar = new Jar();
-    gambit: Gambit = new Gambit();
-    ownedOpals: number = 0;
-    researchExpUpgradeLevel: number = 0;
+ // Processed
+ villagers: Villager[] = Villagers.getVillagers();
+ majiks = new Majiks();
+ schematics: Schematic[] = Schematic.fromBase(
+  initHoleBuildingRepo(),
+  (schematicIndex, baseMultiplier) => this.getSchematicBonus(schematicIndex, baseMultiplier),
+ );
+ studies: Study[] = Study.fromBase(initStudyRepo());
+ measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
+ monuments: Monuments = new Monuments();
+ bell: Bell = new Bell();
+ well: Well = new Well();
+ fountain: Fountain = new Fountain();
+ resourceCavrens = new ResourceCavrens();
+ harp: Harp = new Harp();
+ lamp: Lamp = new Lamp();
+ dawgDen: DawgDen = new DawgDen();
+ jar: Jar = new Jar();
+ gambit: Gambit = new Gambit();
+ cavernEarnedOpals: number = 0;
+ cavernOpalSources: OpalSource[] = [];
+ cavernAttributionUnavailableReason: string | null = null;
+ opalLedger: OpalLedger = { sources: [], cavernEarned: null, externalEarned: null,
+  emperorSchematicFloorAdjustment: null, externalRoundingAdjustment: null,
+  earned: null, invested: null, uninvested: null, unavailableReason: "Not prepared." };
+ private reservedVillagerInvestments: number[] | null = null;
+ private unreleasedCavernOpals: number[] = [];
+ savedStudyTarget: number | null = null;
+ studyTargetAvailable: boolean = false;
+ studyTargetUnavailableReason: string | null = null;
+ eligibleStudyNeighbors: number[] | null = null;
+ studyNeighborEligibilityUnavailableReason: string | null = "Not prepared.";
+ superbitOwnershipSaveAvailable: boolean = false;
+ studyRate: number | null = null;
+ studyContributors: HoleContributor[] = [];
+ dailyLanternUses: number | null = null;
+ lanterns: LanternSummary = { itemId: "Quest90", name: "Blinding Lantern", locations: [],
+  totalStock: null, usesToday: null, usageUnavailableReason: "Saved Lantern usage is missing.",
+  dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: [] };
+ earlyExplorerExpUpgrade: number | null = null;
+ villagerBundleBonus: number | null = null;
+ wishesAvailable: number | null = null;
+ anotherTry: { access: boolean | null; wishCost: number; availableWishes: number | null; affordable: boolean | null; resets: AnotherTryReset[] } =
+  { access: null, wishCost: this.lamp.wishes[1].data.x1, availableWishes: null, affordable: null, resets: [] };
+ allocationEffects: { leastUnlockedInvestment: number | null; equalSpreadPercent: number | null;
+  unavailableReason: string | null; equalSpreadUnavailableReason: string | null;
+  opalEnthusiasm: { villagerId: number; investedTens: number | null; percent: number | null; unavailableReason: string | null }[] } =
+  { leastUnlockedInvestment: null, equalSpreadPercent: null, unavailableReason: "Not prepared.",
+   equalSpreadUnavailableReason: "Not prepared.", opalEnthusiasm: [] };
+ storageSaveAvailable: boolean = false;
+ inventorySaveAvailable: Map<number, boolean> = new Map();
+ statueSaveAvailable: Map<number, boolean> = new Map();
+ sourceSaveAvailable: Record<string, boolean> = {};
+ sharedGrowthUnavailableReason: string | null = null;
+ studyInputsUnavailableReason: string | null = null;
+ growthInputs: VillagerAccountGrowthInputs | null = null;
+ researchExpUpgradeLevel: number = 0;
 
-    getResearchExpUpgradeBonus(): number {
-        return this.researchExpUpgradeLevel * holeResearchExpUpgradeBasePercent;
+ getResearchExpUpgradeBonus(): number {
+  return this.researchExpUpgradeLevel * holeResearchExpUpgradeBasePercent;
+ }
+
+ // TODO: 
+ // Well - DONE?
+ // Caverns
+ // Engineer - DONE?
+ // Bravery
+ // Bell
+ // Wishes - DONE?
+ // Harp?
+ // Measurement?
+
+ // Get the bonus for a specific schematic by index
+ getSchematicBonus(schematicIndex: number, baseMultiplier: number = 1): number {
+  const schematic = this.schematics.find(s => s.index === schematicIndex);
+  return schematic?.getBonus(baseMultiplier) || 0;
+ }
+
+ /**
+  * Get study bonus
+  * @param studyIndex - Index of the study to get bonus for
+  */
+ getStudyBolaiaBonuses(studyIndex: number): number {
+  const study = this.studies.find(s => s.index === studyIndex);
+  return study?.getBonus() || 0;
+ }
+
+ getMonumentBonus(monumentName: string, bonusIndex: number): number {
+  const monument = this.monuments.monuments[monumentName];
+  return monument.bonuses.find(bonus => bonus.index == bonusIndex)?.getBonus() ?? 0;
+ }
+
+ getFountainBonus(waterIndex: number, upgradeIndex: number): number {
+  return this.fountain.getBonus(waterIndex, upgradeIndex);
+ }
+
+ getMonumentBonusByText(text: string): number {
+  const allBonuses = Object.values(this.monuments.monuments).flatMap(monument => monument.bonuses);
+  return allBonuses.reduce((sum, bonus) => {
+   if (bonus.data.description.includes(text)) {
+    return sum + bonus.getBonus();
+   }
+   return sum;
+  }, 0);
+ }
+
+ prepareSharedStudyEffects(): void {
+  this.cavernEarnedOpals = this.cavernOpalSources.reduce((sum, source) => sum + (source.opals ?? 0), 0)
+   + this.unreleasedCavernOpals.reduce((sum, opals) => sum + opals, 0);
+  const explorer = this.villagers[VillagerIndex.Polonai];
+  const cavernCount = explorer.saveAvailable ? Math.min(this.studies.length, explorer.level) : null;
+  this.studies.forEach(study => study.prepareAccess(cavernCount));
+  this.schematics.forEach(schematic => {
+   schematic.prepareStudyBonus(this.getStudyBolaiaBonuses(0));
+  });
+ }
+
+ prepareInspection(): void {
+  const explorer = this.villagers[VillagerIndex.Polonai];
+  const cavernCount = explorer.saveAvailable ? Math.min(this.studies.length, explorer.level) : null;
+  // The exported order stores catalogue IDs by availability slot, not inverse ranks.
+  const schematicOrder = this.schematics.map(schematic => schematic.data.order);
+  this.villagers.forEach(villager => villager.prepareNextUnlock(schematicOrder, this.measurements.length, this.studies.length));
+  const wish = this.lamp.wishes[1];
+  const wishCost = Math.floor(wish.wishCount * wish.data.x2 + wish.data.x1);
+  const access = cavernCount === null ? null : cavernCount > 6;
+  this.anotherTry = { access, wishCost, availableWishes: this.wishesAvailable,
+   affordable: access === null || this.wishesAvailable === null ? null : access && this.wishesAvailable >= wishCost,
+   resets: [
+    { category: "Opals", clears: ["All villager Opal investments"],
+     retains: ["Earned Opals", "Villager levels", "Stored villager EXP"] },
+    { category: "Majik", clears: ["All three Majik investment categories"],
+     retains: ["Cosmo's saved level", "Purchased Majik points"] },
+    { category: "Jar enchantments", clears: ["Collectible enchantment levels above one"],
+     retains: ["Discovered collectibles at level one", "Undiscovered collectibles at level zero"] },
+    { category: "Summoning doublers", clears: ["All doubler assignments"],
+     retains: ["Earned Summoning doublers", "Summoning victories"] },
+   ] };
+ }
+
+ prepareOpalLedger(externalSources: OpalSource[]): void {
+  const sources = [...this.cavernOpalSources, ...externalSources];
+  const missingCavern = this.cavernOpalSources.find(source => source.opals === null);
+  const missingExternal = externalSources.find(source => source.opals === null);
+  const investmentsAvailable = this.villagers.every(villager => villager.investmentAvailable)
+   && this.reservedVillagerInvestments !== null;
+  const invested = investmentsAvailable ? this.villagers.reduce((sum, villager) => sum + villager.opals, 0)
+   + this.reservedVillagerInvestments!.reduce((sum, opals) => sum + opals, 0) : null;
+  const cavernEarned = missingCavern || this.cavernAttributionUnavailableReason !== null ? null : this.cavernEarnedOpals;
+  const gemShop = externalSources.find(source => source.id === "gem-shop")!.opals;
+  const grimoire = externalSources.find(source => source.id === "grimoire")!.opals;
+  const companion = externalSources.find(source => source.id === "companion")!.opals;
+  const compass = externalSources.find(source => source.id === "compass")!.opals;
+  const emperor = externalSources.find(source => source.id === "emperor")!.opals;
+  const schematic = externalSources.find(source => source.id === "schematic")!.opals;
+  const arcane = externalSources.find(source => source.id === "arcane")!.opals;
+  const sushi = externalSources.find(source => source.id === "sushi")!.opals;
+  const combinedFloor = emperor === null || schematic === null ? null : Math.floor(emperor + schematic);
+  const emperorSchematicFloorAdjustment = combinedFloor === null ? null : combinedFloor - (emperor! + schematic!);
+  // Refresh floors the two contributions together, then rounds the nested account subtotal.
+  const externalUnrounded = missingExternal ? null : gemShop! + grimoire!
+   + (companion! + (compass! + (combinedFloor! + (arcane! + sushi!))));
+  const externalEarned = externalUnrounded === null ? null : Math.round(externalUnrounded);
+  const earned = cavernEarned === null || externalEarned === null ? null : cavernEarned + externalEarned;
+  this.opalLedger = { sources, cavernEarned, externalEarned, emperorSchematicFloorAdjustment,
+   externalRoundingAdjustment: externalUnrounded === null ? null : externalEarned! - externalUnrounded,
+   earned, invested,
+   uninvested: earned === null || invested === null ? null : earned - invested,
+   unavailableReason: this.cavernAttributionUnavailableReason ?? missingCavern?.unavailableReason ?? missingExternal?.unavailableReason
+    ?? (invested === null ? "Saved Opal investments are missing." : null) };
+ }
+
+ prepareLanternSummary(storage: Storage, players: Player[]): void {
+  const locations: LanternLocation[] = [{
+   kind: "storage", playerId: null, playerName: null,
+   quantity: this.storageSaveAvailable
+    ? storage.chest.reduce((sum, item) => sum + (item.internalName === "Quest90" ? item.count : 0), 0) : null,
+   unavailableReason: this.storageSaveAvailable ? null : "Saved storage contents are missing.",
+  }, ...players.map((player): LanternLocation => ({
+   kind: "character", playerId: player.playerID, playerName: player.playerName,
+   quantity: this.inventorySaveAvailable.get(player.playerID)
+    ? storage.playerStorage[player.playerID].reduce((sum, item) => sum + (item.internalName === "Quest90" ? item.count : 0), 0) : null,
+   unavailableReason: this.inventorySaveAvailable.get(player.playerID) ? null : "Saved character inventory is missing.",
+  }))];
+  this.lanterns = { itemId: "Quest90", name: "Blinding Lantern", locations,
+   totalStock: locations.some(location => location.quantity === null) ? null : locations.reduce((sum, location) => sum + location.quantity!, 0),
+   usesToday: this.dailyLanternUses, usageUnavailableReason: this.dailyLanternUses === null ? "Saved Lantern usage is missing." : null,
+   dailyLimit: 12, hoursPerUse: 2,
+   advances: ["Rescued villager EXP", "Selected and eligible adjacent Study progress", "Supported passive cavern accrual", "Monument lifetime hours"],
+   excludes: ["Skilling layers and resource extraction", "Active challenges", "Other daily claim allowances"],
+  };
+ }
+
+ prepareStudyProgress(superbitOwned: boolean | null, stampBonus: number): void {
+  const bolaia = this.villagers[VillagerIndex.Bolaia];
+  const fountain = this.getFountainBonus(1, 14);
+  const perLevel = 5 + (this.getSchematicBonus(85, 2) + (this.getSchematicBonus(87, 3)
+   + (this.getSchematicBonus(88, 5) + this.getSchematicBonus(99, 5))));
+  const schematicUnavailableReason = this.sourceSaveAvailable.schematics ? null : "Saved Hole schematic inputs are missing.";
+  const fountainUnavailableReason = !this.sourceSaveAvailable.fountainUpgrades ? "Saved Fountain upgrade inputs are missing."
+   : !this.sourceSaveAvailable.fountainMarbleization ? "Saved Fountain marbleization inputs are missing." : null;
+  const villageMajikUnavailableReason = this.sourceSaveAvailable.villageMajik ? null : "Saved Village Majik inputs are missing.";
+  const stampUnavailableReason = this.sourceSaveAvailable.studyStamps ? null : "Saved Study stamp inputs are missing.";
+  const bolaiaUnavailableReason = bolaia.saveAvailable ? null : "Saved Bolaia level is missing.";
+  const collectibleUnavailableReason = !this.sourceSaveAvailable.collectibleLegendTalent
+   ? "Saved collectible Legend Talent input is missing."
+   : !this.sourceSaveAvailable.collectibles ? "Saved Hole collectible inputs are missing." : null;
+  const collectible = collectibleUnavailableReason === null ? this.jar.getBonus(16) : null;
+  const majik = this.majiks.VillageUpgrades[4].getBonus();
+  this.studyContributors = [
+   { source: "Base Study rate", owner: "hole", value: 100, unit: "progress/hour", combination: "base" },
+   { source: "Bolaia level", owner: "villager:4", value: bolaia.saveAvailable ? bolaia.level : null,
+    unit: "count", combination: "additive", unavailableReason: bolaiaUnavailableReason },
+   { source: "Base progress per Bolaia level", owner: "villager:4", value: 5, unit: "percent", combination: "additive" },
+   { source: this.schematics[85].data.name, owner: "schematic:85",
+    value: schematicUnavailableReason === null ? this.getSchematicBonus(85, 2) : null,
+    unit: "percent", combination: "additive", unavailableReason: schematicUnavailableReason },
+   { source: this.schematics[87].data.name, owner: "schematic:87",
+    value: schematicUnavailableReason === null ? this.getSchematicBonus(87, 3) : null,
+    unit: "percent", combination: "additive", unavailableReason: schematicUnavailableReason },
+   { source: this.schematics[88].data.name, owner: "schematic:88",
+    value: schematicUnavailableReason === null ? this.getSchematicBonus(88, 5) : null,
+    unit: "percent", combination: "additive", unavailableReason: schematicUnavailableReason },
+   { source: this.schematics[99].data.name, owner: "schematic:99",
+    value: schematicUnavailableReason === null ? this.getSchematicBonus(99, 5) : null,
+    unit: "percent", combination: "additive", unavailableReason: schematicUnavailableReason },
+   { source: "Fountain Study rate", owner: "cavern:15", value: fountainUnavailableReason === null ? fountain : null,
+    unit: "percent", combination: "multiplicative", unavailableReason: fountainUnavailableReason },
+   { source: this.jar.jarBonuses[16].data.name, owner: "jar-collectible:16", value: collectible, unit: "percent", combination: "additive",
+    unavailableReason: collectibleUnavailableReason },
+   { source: "Study stamp", owner: "stamps", value: stampUnavailableReason === null ? stampBonus : null,
+    unit: "percent", combination: "additive", unavailableReason: stampUnavailableReason },
+   { source: "Study All Nighter", owner: "majik:13", value: villageMajikUnavailableReason === null ? majik : null,
+    unit: "percent", combination: "additive", unavailableReason: villageMajikUnavailableReason },
+  ];
+  const reason = bolaiaUnavailableReason ?? this.studyInputsUnavailableReason;
+  this.studyRate = reason === null ? 100 * (1 + fountain / 100) * (1 + perLevel * bolaia.level / 100)
+   * (1 + (collectible! + (stampBonus + majik)) / 100) : null;
+  this.eligibleStudyNeighbors = [];
+  this.studyNeighborEligibilityUnavailableReason = null;
+  const target = this.savedStudyTarget === null ? null : this.studies[this.savedStudyTarget];
+  const targetReason = !this.studyTargetAvailable ? "Saved Study target is missing."
+   : this.savedStudyTarget !== null && (!target || target.access !== true) ? "Saved Study target is not an available released Study." : null;
+  this.studyTargetUnavailableReason = targetReason;
+  const potentialNeighbors = target && target.access === true && bolaia.rescued === true
+   ? [target.index - 1, target.index + 1]
+    .filter(index => index >= 0 && index < this.studies.length && this.studies[index].access === true)
+   : [];
+  if (bolaia.rescued === false || (this.studyTargetAvailable && target === null)) {
+   this.eligibleStudyNeighbors = [];
+  } else if (targetReason !== null || target?.access === null || bolaia.rescued === null) {
+   this.eligibleStudyNeighbors = null;
+   this.studyNeighborEligibilityUnavailableReason = targetReason ?? "Saved Study access is missing.";
+  } else if (superbitOwned === null && potentialNeighbors.length > 0) {
+   this.eligibleStudyNeighbors = null;
+   this.studyNeighborEligibilityUnavailableReason = "Saved Superbit ownership is missing.";
+  } else if (superbitOwned === true) {
+   this.eligibleStudyNeighbors = potentialNeighbors;
+  }
+  this.studies.forEach(study => {
+   if (study.access === false || bolaia.rescued === false || (this.studyTargetAvailable && target === null)) {
+    study.prepareRate("inactive", 0, [], null);
+   } else if (study.access === null || bolaia.rescued === null || targetReason !== null || target === null) {
+    study.prepareRate("unavailable", null, [], targetReason ?? "Saved Study access is missing.");
+   } else if (study.index === target.index) {
+    study.prepareRate("target", this.studyRate, [...this.studyContributors], reason);
+   } else if (potentialNeighbors.includes(study.index) && superbitOwned === null) {
+    study.prepareRate("unavailable", null, [], "Saved Superbit ownership is missing.");
+   } else if (this.eligibleStudyNeighbors?.includes(study.index)) {
+    study.prepareRate("neighbor", this.studyRate, [...this.studyContributors], reason);
+   } else {
+    study.prepareRate("inactive", 0, [], null);
+   }
+  });
+ }
+
+ prepareVillagerGrowth(players: Player[], statues: PlayerStatues[], inputs: VillagerAccountGrowthInputs): void {
+  this.growthInputs = this.sharedGrowthUnavailableReason === null ? inputs : null;
+  const villageMajiks = this.majiks.VillageUpgrades;
+  const unlockedVillagers = this.villagers.filter(villager => villager.rescued === true);
+  const allocationsAvailable = this.villagers.every(villager => villager.saveAvailable)
+   && this.villagers[0].investmentAvailable && unlockedVillagers.every(villager => villager.investmentAvailable);
+  const leastInvestment = allocationsAvailable
+   ? unlockedVillagers.length > 0 ? Math.min(...unlockedVillagers.map(villager => villager.opals)) : this.villagers[0].opals
+   : null;
+  const villageMajikReason = this.sourceSaveAvailable.villageMajik ? null : "Saved Village Majik inputs are missing.";
+  const schematicUnavailableReason = this.sourceSaveAvailable.schematics ? null : "Saved Hole schematic inputs are missing.";
+  const gloomieSchematicUnavailableReason = schematicUnavailableReason
+   ?? (this.schematics[48].unlocked && !this.sourceSaveAvailable.gloomieColonyCounter
+    ? "Saved Gloomie colony counter is missing." : null);
+  const fountainUnavailableReason = !this.sourceSaveAvailable.fountainUpgrades ? "Saved Fountain upgrade inputs are missing."
+   : !this.sourceSaveAvailable.fountainMarbleization ? "Saved Fountain marbleization inputs are missing." : null;
+  const monumentUnavailableReason = !this.sourceSaveAvailable.monumentalVibes ? "Saved Monumental Vibes input is missing."
+   : !this.sourceSaveAvailable.monumentRewards ? "Saved monument reward inputs are missing." : fountainUnavailableReason;
+  const collectibleUnavailableReason = !this.sourceSaveAvailable.collectibleLegendTalent
+   ? "Saved collectible Legend Talent input is missing."
+   : !this.sourceSaveAvailable.collectibles ? "Saved Hole collectible inputs are missing." : null;
+  const legendUnavailableReason = this.sourceSaveAvailable.legendTalents ? null : "Saved Legend Talent and Tome inputs are missing.";
+  const pristineUnavailableReason = this.sourceSaveAvailable.sneaking ? null : "Saved Sneaking inputs are missing.";
+  const farmingUnavailableReason = this.sourceSaveAvailable.farming ? null : "Saved Farming inputs are missing.";
+  const arcadeUnavailableReason = this.sourceSaveAvailable.arcade ? null : "Saved Arcade inputs are missing.";
+  const grimoireUnavailableReason = this.sourceSaveAvailable.grimoire ? null : "Saved Grimoire inputs are missing.";
+  const arcaneUnavailableReason = this.sourceSaveAvailable.tesseract ? null : "Saved Tesseract inputs are missing.";
+  const gemPurchasesUnavailableReason = this.sourceSaveAvailable.gems ? null : "Saved Gem Shop purchase inputs are missing.";
+  const emperorUnavailableReason = this.sourceSaveAvailable.emperor ? null : "Saved Emperor inputs are missing.";
+  const summoningUnavailableReason = !this.sourceSaveAvailable.summoning ? "Saved Summoning inputs are missing."
+   : pristineUnavailableReason ?? gemPurchasesUnavailableReason ?? emperorUnavailableReason;
+  const vaultUnavailableReason = this.sourceSaveAvailable.vault ? null : "Saved Vault inputs are missing.";
+  const measurementUnavailableReason = !this.sourceSaveAvailable.measurements ? "Saved Hole Measurement inputs are missing." : villageMajikReason;
+  const bellUnavailableReason = this.sourceSaveAvailable.bellBonuses ? null : "Saved Bell bonus inputs are missing.";
+  const contentedCreatorUnavailableReason = villageMajikReason ?? schematicUnavailableReason;
+  const tomeUnavailableReason = legendUnavailableReason ?? grimoireUnavailableReason;
+  const compassUnavailableReason = this.sourceSaveAvailable.compass ? null : "Saved Compass inputs are missing.";
+  const allocationReason = allocationsAvailable ? null : "Saved villager access or Opal investment is missing.";
+  const equalSpreadReason = allocationReason ?? villageMajikReason;
+  const equalSpread = equalSpreadReason === null ? villageMajiks[5].getBonus() * Math.floor(leastInvestment! / 5) : null;
+  const enthusiasmPerTen = villageMajikReason === null ? villageMajiks[0].getBonus() : null;
+  this.allocationEffects = { leastUnlockedInvestment: leastInvestment, equalSpreadPercent: equalSpread,
+   unavailableReason: equalSpreadReason, equalSpreadUnavailableReason: equalSpreadReason,
+   opalEnthusiasm: this.villagers.map(villager => ({ villagerId: villager.index,
+    investedTens: villager.investmentAvailable ? Math.floor(villager.opals / 10) : null,
+    percent: villager.investmentAvailable && enthusiasmPerTen !== null ? enthusiasmPerTen * Math.floor(villager.opals / 10) : null,
+    unavailableReason: villager.investmentAvailable ? villageMajikReason : "Saved Opal investment is missing." })) };
+  const jarPercent = collectibleUnavailableReason === null
+   ? this.jar.getBonus(4) + (this.jar.getBonus(10) + (this.jar.getBonus(12)
+    + (this.jar.getBonus(22) + (this.jar.getBonus(29) + this.jar.getBonus(35))))) : null;
+  const builtSchematics = this.schematics.filter(schematic => schematic.unlocked).length;
+  const sharedInputs: VillagerSharedGrowthInputs = {
+   ...inputs, unavailableReason: this.sharedGrowthUnavailableReason,
+   earlyExplorerExpUpgrade: this.earlyExplorerExpUpgrade, cosmoFountainPercent: this.getFountainBonus(0, 14),
+   bundleBonus: this.villagerBundleBonus, opalExp: 100 + this.getSchematicBonus(0, 25), jarPercent,
+   collectibleUnavailableReason, compassUnavailableReason,
+   legendUnavailableReason, tomeUnavailableReason, pristineUnavailableReason, farmingUnavailableReason,
+   arcadeUnavailableReason, grimoireUnavailableReason, arcaneUnavailableReason, summoningUnavailableReason, vaultUnavailableReason,
+   schematicUnavailableReason, fountainUnavailableReason, measurementUnavailableReason, bellUnavailableReason, contentedCreatorUnavailableReason,
+   equalSpreadPercent: equalSpread, equalSpreadUnavailableReason: equalSpreadReason,
+   enthusiasmPerTen, villageMajikUnavailableReason: villageMajikReason,
+   contentedCreator: villageMajiks[1].getBonus() * builtSchematics, enhancedMajik: villageMajiks[2].getBonus(),
+   bravery: monumentUnavailableReason === null ? this.getMonumentBonus("Bravery", 3) : null,
+   justice: monumentUnavailableReason === null ? this.getMonumentBonus("Justice", 3) : null,
+   wisdom: monumentUnavailableReason === null ? this.getMonumentBonus("Wisdom", 3) : null,
+   monumentUnavailableReason, slabItemsMeasurement: this.measurements[7].getBonus(),
+   gloomieSchematic: this.getSchematicBonus(48),
+   gloomieSchematicUnavailableReason,
+   gloomieCardPercent: this.sourceSaveAvailable.cards ? Math.min(4 * inputs.gloomieCardLevel, 50) : null,
+   gloomieCardUnavailableReason: this.sourceSaveAvailable.cards ? null : "Saved card inputs are missing.",
+   bell: this.bell.bonuses[1].getBonus(), tomeMeasurement: this.measurements[0].getBonus(),
+  };
+  const characterInputs = players.map(player => {
+   const playerStatues = statues.find(statues => statues.playerID === player.playerID)!;
+   const statue = playerStatues.statues.find(statue => statue.index === 28)!;
+   return {
+    playerId: player.playerID, playerName: player.playerName,
+    statueBonus: this.statueSaveAvailable.get(player.playerID) ? statue.getBonus(player) : null,
+   };
+  });
+  this.villagers.forEach(villager => villager.prepareCharacterRates(characterInputs, sharedInputs));
+ }
+
+ getRawKeys(): RawData[] {
+  return [
+   { key: "Holes", perPlayer: false, default: [] },
+   { key: "DoOnceREAL", perPlayer: false, default: null },
+   { key: "BundlesReceived", perPlayer: false, default: null },
+   { key: "Gaming", perPlayer: false, default: null },
+   { key: "Spelunk", perPlayer: false, default: null },
+  ]
+ }
+
+ init(_allItems: Item[], _charCount: number) {
+  return this;
+ }
+
+ parse(data: Map<string, any>): void {
+  const hole = data.get(this.getDataKey()) as Hole;
+  const savedHoleData = (data.get("Holes") ?? []) as number[][];
+  const spelunkData = data.get("Spelunk") as number[][] | null;
+  const holeData = Array.from({ length: 35 }, (_, index) => savedHoleData[index] ?? []);
+  const optionListAccount = (data.get("OptLacc") ?? []) as number[];
+  const rawData = data.get("rawData") as Record<string, unknown>;
+  const playerNames = data.get("playerNames") as string[];
+  const releaseVersion = data.get("DoOnceREAL") == null ? null : Number(data.get("DoOnceREAL"));
+  const bundles = (data.get("BundlesReceived") ?? null) as Record<string, number> | null;
+  hole.researchExpUpgradeLevel = Number(optionListAccount[641] ?? 0);
+  hole.earlyExplorerExpUpgrade = optionListAccount[355] == null ? null : Number(optionListAccount[355]);
+  hole.villagerBundleBonus = bundles === null ? null : Number(bundles.bun_u ?? 0);
+  hole.playerLocationData = [...holeData[0]];
+  hole.villagers.forEach(villager => villager.parse(savedHoleData, releaseVersion));
+  hole.studies.forEach(study => study.parse(savedHoleData, optionListAccount));
+  const target = savedHoleData[11]?.[61];
+  hole.studyTargetAvailable = target != null;
+  hole.savedStudyTarget = target == null || Number(target) < 0 ? null : Number(target);
+  hole.studyTargetUnavailableReason = target == null ? "Saved Study target is missing." : null;
+  hole.eligibleStudyNeighbors = null;
+  hole.studyNeighborEligibilityUnavailableReason = "Not prepared.";
+  const gamingData = data.get("Gaming") as unknown[] | null;
+  hole.superbitOwnershipSaveAvailable = gamingData?.[12] != null;
+  hole.studyRate = null;
+  hole.studyContributors = [];
+  hole.growthInputs = null;
+  hole.allocationEffects = { leastUnlockedInvestment: null, equalSpreadPercent: null,
+   unavailableReason: "Not prepared.", equalSpreadUnavailableReason: "Not prepared.", opalEnthusiasm: [] };
+  hole.anotherTry = { access: null, wishCost: hole.lamp.wishes[1].data.x1,
+   availableWishes: null, affordable: null, resets: [] };
+  hole.dailyLanternUses = savedHoleData[11]?.[84] == null ? null : Number(savedHoleData[11][84]);
+  hole.wishesAvailable = savedHoleData[11]?.[25] == null ? null : Number(savedHoleData[11][25]);
+  const reservedInvestments = savedHoleData[3]?.slice(5, 8);
+  hole.reservedVillagerInvestments = reservedInvestments?.length === 3 && reservedInvestments.every(value => value != null)
+   ? reservedInvestments.map(Number) : null;
+  hole.unreleasedCavernOpals = holeData[7].slice(hole.studies.length).map(Number);
+  hole.cavernEarnedOpals = 0;
+  hole.cavernAttributionUnavailableReason = hole.unreleasedCavernOpals.some(value => value !== 0)
+   ? "Saved Opals include an unreleased cavern source." : null;
+  const cavernAcquisitions = [
+   "Purchased an Opal with Well sediment.",
+   "Destroyed a Motherlode layer.",
+   "Reached a Den score milestone.",
+   "Collected an Opal reward from a Bravery run.",
+   "Received an Opal from a Bell Ping.",
+   "Plucked an Opal reward from a Harp string.",
+   "Received an Opal from a Lamp wish.",
+   "Harvested a Hive layer.",
+   "Defeated a Gloomie colony.",
+   "Collected an Opal reward from a Justice run.",
+   "Broke a Tall Jar that contained an Opal.",
+   "Whittled an Evertree trunk.",
+   "Collected an Opal reward from a Wisdom run.",
+   "Reached a Gambit points milestone.",
+   "Defeated the Temple challenge golem.",
+   "Purchased an Opal with Fountain currency.",
+   "Completed a Trench depth.",
+   "Purchased an Opal upgrade in the Cove.",
+  ];
+  hole.cavernOpalSources = hole.studies.map(study => ({
+   id: `cavern:${study.index}`, owner: `cavern:${study.index}`, name: study.data.name,
+   acquisition: cavernAcquisitions[study.index],
+   opals: savedHoleData[7]?.[study.index] == null ? null : Number(savedHoleData[7][study.index]),
+   unit: "Opals", unavailableReason: savedHoleData[7]?.[study.index] == null ? "Saved cavern Opals are missing." : null,
+  }));
+  hole.opalLedger = { sources: [], cavernEarned: null, externalEarned: null,
+   emperorSchematicFloorAdjustment: null, externalRoundingAdjustment: null,
+   earned: null, invested: null, uninvested: null, unavailableReason: "Not prepared." };
+  hole.lanterns = { itemId: "Quest90", name: "Blinding Lantern", locations: [], totalStock: null,
+   usesToday: hole.dailyLanternUses, usageUnavailableReason: hole.dailyLanternUses === null ? "Saved Lantern usage is missing." : null,
+   dailyLimit: 12, hoursPerUse: 2, advances: [], excludes: [] };
+  hole.storageSaveAvailable = rawData.ChestOrder != null && rawData.ChestQuantity != null;
+  hole.inventorySaveAvailable = new Map(playerNames.map((_, id) =>
+   [id, rawData[`InventoryOrder_${id}`] != null && rawData[`ItemQTY_${id}`] != null]));
+  hole.statueSaveAvailable = new Map(playerNames.map((_, id) => [id, rawData[`StatueLevels_${id}`] != null]));
+  hole.sourceSaveAvailable = {
+   gems: rawData.GemItemsPurchased != null, grimoire: rawData.Grimoire != null,
+   compass: rawData.Compass != null, emperor: rawData.OptLacc != null,
+   tesseract: rawData.Arcane != null, sushi: rawData.Sushi != null,
+   schematics: savedHoleData[13] != null,
+   gloomieColonyCounter: savedHoleData[11]?.[26] != null,
+   cards: rawData.Cards0 != null, villageMajik: savedHoleData[5] != null,
+   monumentalVibes: savedHoleData[4]?.[0] != null,
+   collectibleLegendTalent: spelunkData?.[18]?.[29] != null,
+   legendTalents: rawData.Spelunk != null, sneaking: rawData.Ninja != null,
+   summoning: rawData.Summon != null, farming: rawData.FarmUpg != null,
+   arcade: rawData.ArcadeUpg != null, vault: rawData.UpgVault != null,
+   monumentRewards: savedHoleData[15] != null, bellBonuses: savedHoleData[17] != null,
+   measurements: savedHoleData[22] != null, collectibles: savedHoleData[24] != null,
+   fountainUpgrades: savedHoleData[31] != null, fountainMarbleization: savedHoleData[32] != null,
+   studyStamps: rawData.StampLv != null,
+  };
+  const missingGrowthInputs = [
+   ["Compass", rawData.Compass], ["Legend Talents and Tome", rawData.Spelunk],
+   ["Collectible Legend Talent", hole.sourceSaveAvailable.collectibleLegendTalent ? true : null],
+   ["Sneaking", rawData.Ninja], ["Summoning", rawData.Summon],
+   ["Gem Shop purchases", hole.sourceSaveAvailable.gems ? true : null],
+   ["Emperor", hole.sourceSaveAvailable.emperor ? true : null],
+   ["Farming", rawData.FarmUpg], ["Arcade", rawData.ArcadeUpg],
+   ["Grimoire", rawData.Grimoire], ["Tesseract", rawData.Arcane], ["Vault", rawData.UpgVault],
+   ["Cards", rawData.Cards0],
+   ["Hole Majik", savedHoleData[5]], ["Hole schematics", savedHoleData[13]],
+   ["Monumental Vibes", savedHoleData[4]?.[0]],
+   ["Hole monument rewards", savedHoleData[15]], ["Hole Bell bonuses", savedHoleData[17]],
+   ["Hole Measurements", savedHoleData[22]], ["Hole collectibles", savedHoleData[24]],
+   ["Hole Fountain upgrades", savedHoleData[31]], ["Hole Fountain marbleization", savedHoleData[32]],
+  ].filter(([, value]) => value == null).map(([name]) => name);
+  hole.sharedGrowthUnavailableReason = missingGrowthInputs.length > 0
+   ? `Saved inputs are missing: ${missingGrowthInputs.join(", ")}.` : null;
+  const missingStudyInputs = [
+   ["Hole Majik", savedHoleData[5]], ["Hole schematics", savedHoleData[13]],
+   ["Hole collectibles", savedHoleData[24]], ["Hole Fountain upgrades", savedHoleData[31]],
+   ["Hole Fountain marbleization", savedHoleData[32]], ["Study stamps", rawData.StampLv],
+   ["Collectible Legend Talent", spelunkData?.[18]?.[29]],
+  ].filter(([, value]) => value == null).map(([name]) => name);
+  hole.studyInputsUnavailableReason = missingStudyInputs.length > 0
+   ? `Saved Study inputs are missing: ${missingStudyInputs.join(", ")}.` : null;
+
+  // Parse cosmo upgrades based on their type
+  hole.majiks.HoleUpgrades.forEach((upgrade, index) => {
+   upgrade.level = Number(holeData[4][index] ?? 0);
+   upgrade.unlocked = upgrade.level > 0;
+  });
+
+  hole.majiks.VillageUpgrades.forEach((upgrade, index) => {
+   upgrade.level = Number(holeData[5][index] ?? 0);
+   upgrade.unlocked = upgrade.level > 0;
+  });
+
+  hole.majiks.IdleonUpgrades.forEach((upgrade, index) => {
+   upgrade.level = Number(holeData[6][index] ?? 0);
+   upgrade.unlocked = upgrade.level > 0;
+
+   if (upgrade.index == 21) {
+    const pocketUpgrade = upgrade as PocketDivinityUpgrade;
+    pocketUpgrade.linkedGods = [];
+    if (pocketUpgrade.level >= 1) {
+     pocketUpgrade.linkedGods.push(holeData[11][29]);
     }
-
-    // TODO: 
-    // Well - DONE?
-    // Caverns
-    // Engineer - DONE?
-    // Bravery
-    // Bell
-    // Wishes - DONE?
-    // Harp?
-    // Measurement?
-
-    // Get the bonus for a specific schematic by index
-    getSchematicBonus(schematicIndex: number, baseMultiplier: number = 1): number {
-        const schematic = this.schematics.find(s => s.index === schematicIndex);
-        return schematic?.getBonus(baseMultiplier) || 0;
+    if (pocketUpgrade.level == 2) {
+     pocketUpgrade.linkedGods.push(holeData[11][30]);
     }
+   }
+  });
 
-    /**
-     * Get study bonus
-     * @param studyIndex - Index of the study to get bonus for
-     */
-    getStudyBolaiaBonuses(studyIndex: number): number {
-        const study = this.studies.find(s => s.index === studyIndex);
-        return study?.getBonus() || 0;
-    }
-
-    getMonumentBonus(monumentName: string, bonusIndex: number): number {
-        const monument = this.monuments.monuments[monumentName];
-        return monument.bonuses.find(bonus => bonus.index == bonusIndex)?.getBonus() ?? 0;
-    }
-
-    getFountainBonus(waterIndex: number, upgradeIndex: number): number {
-        return this.fountain.getBonus(waterIndex, upgradeIndex);
-    }
-
-    getMonumentBonusByText(text: string): number {
-        const allBonuses = Object.values(this.monuments.monuments).flatMap(monument => monument.bonuses);
-        return allBonuses.reduce((sum, bonus) => {
-            if (bonus.data.description.includes(text)) {
-                return sum + bonus.getBonus();
-            }
-            return sum;
-        }, 0);
-    }
-
-    getRawKeys(): RawData[] {
-        return [
-            { key: "Holes", perPlayer: false, default: [] }
-        ]
-    }
-
-    init(_allItems: Item[], _charCount: number) {
-        return this;
-    }
-
-    parse(data: Map<string, any>): void {
-        const hole = data.get(this.getDataKey()) as Hole;
-        const holeData = data.get("Holes") as number[][];
-        const optionListAccount = data.get("OptLacc") as number[];
-        hole.researchExpUpgradeLevel = Number(optionListAccount[641] ?? 0);
-
-        // Old accounts won't have data, so exit early.
-        if (!holeData || holeData.length == 0) {
-            return;
-        }
-
-        hole.playerLocationData = holeData[0];
-        hole.villagers.forEach(villager => {
-            villager.level = holeData[1][villager.index];
-            villager.currentExp = holeData[2][villager.index];
-            villager.opals = holeData[3][villager.index];
-            villager.gemshopUpgrade = holeData[23][villager.index] == 1;
-        });
-
-        // Parse cosmo upgrades based on their type
-        hole.majiks.HoleUpgrades.forEach((upgrade, index) => {
-            upgrade.level = holeData[4][index];
-            upgrade.unlocked = upgrade.level > 0;
-        });
-
-        hole.majiks.VillageUpgrades.forEach((upgrade, index) => {
-            upgrade.level = holeData[5][index];
-            upgrade.unlocked = upgrade.level > 0;
-        });
-
-        hole.majiks.IdleonUpgrades.forEach((upgrade, index) => {
-            upgrade.level = holeData[6][index];
-            upgrade.unlocked = upgrade.level > 0;
-
-            if (upgrade.index == 21) {
-                const pocketUpgrade = upgrade as PocketDivinityUpgrade;
-                if (pocketUpgrade.level >= 1) {
-                    pocketUpgrade.linkedGods.push(holeData[11][29]);
-                }
-                if (pocketUpgrade.level == 2) {
-                    pocketUpgrade.linkedGods.push(holeData[11][30]);
-                }
-            }
-        });
-
-        hole.lamp.wishes.forEach(wish => {
-            wish.wishCount = holeData[21][wish.index];
-        });
+  hole.lamp.wishes.forEach(wish => {
+   wish.wishCount = Number(holeData[21][wish.index] ?? 0);
+  });
 
 
-        hole.studies.forEach(study => {
-            study.level = holeData[26] ? holeData[26][study.index] || 0 : 0;
-            study.unlocked = hole.villagers[VillagerIndex.Bolai].level > study.index;
-        });
 
-        hole.schematics.forEach(schematic => {
-            schematic.unlocked = holeData[13][schematic.index] == 1;
+  hole.schematics.forEach(schematic => {
+   schematic.unlocked = holeData[13][schematic.index] == 1;
 
-            // Populate data references for bonus calculations
-            schematic.sedimentMulti = holeData[8] || [];
-            schematic.wellSediment = holeData[9] || [];
-            schematic.extraCalculations = holeData[11] || [];
-            schematic.bellImprovementMethods = holeData[16] || [];
+   // Populate data references for bonus calculations
+   schematic.sedimentMulti = holeData[8] || [];
+   schematic.wellSediment = holeData[9] || [];
+   schematic.extraCalculations = holeData[11] || [];
+   schematic.bellImprovementMethods = holeData[16] || [];
 
-            // Populate study bonus for sediment calculation
-            schematic.studyBolaiaBonuses = hole.getStudyBolaiaBonuses(0);
-        });
+  });
 
-        hole.measurements.forEach(measurement => {
-            measurement.level = holeData[22] ? holeData[22][measurement.index] || 0 : 0;
-            measurement.unlocked = hole.villagers[VillagerIndex.Minau].level > measurement.index;
+  hole.measurements.forEach(measurement => {
+   measurement.level = holeData[22] ? holeData[22][measurement.index] || 0 : 0;
+   measurement.unlocked = hole.villagers[VillagerIndex.Minau].level > measurement.index;
 
-            measurement.gloomieKills = holeData[11][28] || 0;
-            measurement.golemKills = holeData[11][63] || 0;
-            // Sum all studies for studiesDone
-            measurement.studiesDone = hole.studies.reduce((sum, value) => sum + (value.level || 0), 0);
-            // Cosmo Bonus - Lengthmeister
-            measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() || 0;
-        });
+   measurement.gloomieKills = holeData[11][28] || 0;
+   measurement.golemKills = holeData[11][63] || 0;
+   // Sum all studies for studiesDone
+   measurement.studiesDone = hole.studies.reduce((sum, value) => sum + (value.level || 0), 0);
+   // Cosmo Bonus - Lengthmeister
+   measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() || 0;
+  });
 
-        hole.fountain.parse(holeData);
+  hole.fountain.parse(holeData);
 
-        // Monument Jazz
-        const braveryMonument = hole.monuments.monuments["Bravery"];
-        braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
-        braveryMonument.highestRound = holeData[11][73] || 0;
+  // Monument Jazz
+  const braveryMonument = hole.monuments.monuments["Bravery"];
+  braveryMonument.hours = holeData[14][2 * braveryMonument.index] || 0;
+  braveryMonument.highestRound = holeData[11][73] || 0;
 
-        const justiceMonument = hole.monuments.monuments["Justice"];
-        justiceMonument.hours = holeData[14][2 * justiceMonument.index] || 0;
-        justiceMonument.highestRound = holeData[11][74] || 0;
+  const justiceMonument = hole.monuments.monuments["Justice"];
+  justiceMonument.hours = holeData[14][2 * justiceMonument.index] || 0;
+  justiceMonument.highestRound = holeData[11][74] || 0;
 
-        const wisdomMonument = hole.monuments.monuments["Wisdom"] as WisdomMonument;
-        wisdomMonument.hours = holeData[14][2 * wisdomMonument.index] || 0;
-        wisdomMonument.highestRound = holeData[11][75] || 0;
-        wisdomMonument.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
+  const wisdomMonument = hole.monuments.monuments["Wisdom"] as WisdomMonument;
+  wisdomMonument.hours = holeData[14][2 * wisdomMonument.index] || 0;
+  wisdomMonument.highestRound = holeData[11][75] || 0;
+  wisdomMonument.highestPureMemoryRound = Math.round(Math.min(12, optionListAccount[353] ?? 0) + 1);
 
-        [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
-            monument.unlocks.forEach(unlock => {
-                unlock.unlocked = monument.hours > unlock.data.hours_required;
-            });
-            monument.bonuses.forEach(bonus => {
-                bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
-                // Monumental Vibes
-                bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() || 0;
-                bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13);
-            });
-            monument.bonuses.forEach(bonus => {
-                bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
-            });
-        });
+  [braveryMonument, justiceMonument, wisdomMonument].forEach(monument => {
+   monument.unlocks.forEach(unlock => {
+    unlock.unlocked = monument.hours > unlock.data.hours_required;
+   });
+   monument.bonuses.forEach(bonus => {
+    bonus.level = holeData[15][10 * monument.index + bonus.index] || 0;
+    // Monumental Vibes
+    bonus.cosmoBonus = hole.majiks.HoleUpgrades.find(upgrade => upgrade.index == 0)?.getBonus() || 0;
+    bonus.fountainBonus = hole.fountain.getBonus(monument.index, 13);
+   });
+   monument.bonuses.forEach(bonus => {
+    bonus.monumentSelfBoost = monument.bonuses[9].getBonus();
+   });
+  });
 
-        // Bell 
-        hole.bell.improvements.forEach(improvement => {
-            improvement.level = holeData[16][improvement.index] || 0;
-        });
-        hole.bell.bonuses.forEach(bonus => {
-            bonus.level = holeData[17][bonus.index] || 0;
-        });
+  // Bell 
+  hole.bell.improvements.forEach(improvement => {
+   improvement.level = holeData[16][improvement.index] || 0;
+  });
+  hole.bell.bonuses.forEach(bonus => {
+   bonus.level = holeData[17][bonus.index] || 0;
+  });
 
-        // Resource Caverns
-        // TODO: Calculate required efficiency, and required resource for next layer.
-        hole.resourceCavrens.parse(holeData[11] || []);
+  // Resource Caverns
+  // TODO: Calculate required efficiency, and required resource for next layer.
+  hole.resourceCavrens.parse(holeData[11] || []);
 
-        hole.well.parse(hole, holeData);
-        // TODO: Finish this, missing information
-        hole.harp.parse(holeData);
+  hole.well.parse(hole, holeData);
+  // TODO: Finish this, missing information
+  hole.harp.parse(holeData);
 
-        hole.dawgDen.bestScore = holeData[11][8] || 0;
+  hole.dawgDen.bestScore = holeData[11][8] || 0;
 
-        hole.ownedOpals = (holeData[7] as number[]).reduce((sum, value) => sum + value, 0);
 
-        // Gambit
-        hole.gambit.challenges.forEach(challenge => {
-            challenge.maxTime = holeData[11][challenge.index + 65] || 0;
-        });
+  // Gambit
+  hole.gambit.challenges.forEach(challenge => {
+   challenge.maxTime = holeData[11][challenge.index + 65] || 0;
+  });
 
-        // Jar
-        const ownedJars = holeData[11][37] || 0;
-        hole.jar.jarTypes.forEach(jar => {
-            jar.unlocked = ownedJars >= jar.index;
-        });
-        const jarBonusesLevels = holeData[24] as number[];
-        this.jar.jarBonuses.forEach(bonus => {
-            if (bonus.index < jarBonusesLevels.length) {
-                bonus.level = jarBonusesLevels[bonus.index];
-            }
-        });
-    }
+  // Jar
+  const ownedJars = holeData[11][37] || 0;
+  hole.jar.jarTypes.forEach(jar => {
+   jar.unlocked = ownedJars >= jar.index;
+  });
+  const jarBonusesLevels = holeData[24] as number[];
+  this.jar.jarBonuses.forEach(bonus => {
+   bonus.level = Number(jarBonusesLevels[bonus.index] ?? 0);
+  });
+ }
 }
 
 export const updateHole = (data: Map<string, any>) => {
-    const hole = data.get("hole") as Hole;
-    const slab = data.get("slab") as Slab;
-    const taskboard = data.get("taskboard") as TaskBoard;
-    const tome = data.get("tome") as Tome;
-    const farming = data.get("farming") as Farming;
-    const deathnote = data.get("deathnote") as Deathnote;
-    const tesseract = data.get("tesseract") as Tesseract;
-    const legendTalents = data.get("legendTalents") as LegendTalents;
-    const zenithMarket = data.get("zenithMarket") as ZenithMarket;
+ const hole = data.get("hole") as Hole;
+ const slab = data.get("slab") as Slab;
+ const taskboard = data.get("taskboard") as TaskBoard;
+ const tome = data.get("tome") as Tome;
+ const farming = data.get("farming") as Farming;
+ const deathnote = data.get("deathnote") as Deathnote;
+ const tesseract = data.get("tesseract") as Tesseract;
+ const legendTalents = data.get("legendTalents") as LegendTalents;
+ const zenithMarket = data.get("zenithMarket") as ZenithMarket;
 
-    // Update measurements with various cross domain data
-    hole.measurements.forEach(measurement => {
-        measurement.slabItems = slab.rawObtainedCount;
-        measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
-        measurement.tomeScore = tome.getHighestScore();
-        measurement.cropsCount = farming.discoveredCrops;
-        measurement.accountLevel = tome.totalAccountLevel;
-        // TODO: Make this less messy one day, for now should be fine.
-        measurement.allSkillLevel = parseInt(tome.lines[11].getPlayerCurrentValueDisplay(0));
-        // Normal-world points exclude minibosses; the Eclipse Skulls gate is ready.
-        measurement.deathnotePts = deathnote.getTotalWorldRank();
-    });
+ // Update measurements with various cross domain data
+ hole.measurements.forEach(measurement => {
+  measurement.slabItems = slab.rawObtainedCount;
+  measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
+  measurement.tomeScore = tome.getHighestScore();
+  measurement.cropsCount = farming.discoveredCrops;
+  measurement.accountLevel = tome.totalAccountLevel;
+  // TODO: Make this less messy one day, for now should be fine.
+  measurement.allSkillLevel = parseInt(tome.lines[11].getPlayerCurrentValueDisplay(0));
+  // Normal-world points exclude minibosses; the Eclipse Skulls gate is ready.
+  measurement.deathnotePts = deathnote.getTotalWorldRank();
+ });
 
-    // Update jar bonuses from legendary talents
-    const legendTalentBonus = 1 + legendTalents.getBonusFromIndex(29) / 100;
-    hole.jar.jarBonuses.forEach(bonus => {
-        bonus.legendTalentBonus = legendTalentBonus;
-    });
+ // Update jar bonuses from legendary talents
+ const legendTalentBonus = 1 + legendTalents.getBonusFromIndex(29) / 100;
+ hole.jar.jarBonuses.forEach(bonus => {
+  bonus.legendTalentBonus = legendTalentBonus;
+ });
 
-    // Update the lamp bonuses from zenith market
-    hole.lamp.zenithMarketBonus = zenithMarket.getBonusForId(2);
+ // Update the lamp bonuses from zenith market
+ hole.lamp.zenithMarketBonus = zenithMarket.getBonusForId(2);
 
-    // Update the gambit multiplier
-    let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
-    gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
-    gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
-    gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
-    hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
-    hole.gambit.updateUnlockedBonuses();
+ // Update the gambit multiplier
+ let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
+ gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
+ gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
+ gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
+ hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+ hole.gambit.updateUnlockedBonuses();
 }
+
+export const updateHoleStudyEffects = (data: Map<string, any>): void => {
+ const hole = data.get("hole") as Hole;
+ hole.prepareSharedStudyEffects();
+};
+
+export const updateHolePresentation = (data: Map<string, any>): void => {
+ const hole = data.get("hole") as Hole;
+ const players = data.get("players") as Player[];
+ const statues = data.get("statues") as PlayerStatues[];
+ const storage = data.get("storage") as Storage;
+ const compass = data.get("compass") as Compass;
+ const grimoire = data.get("grimoire") as Grimoire;
+ const tesseract = data.get("tesseract") as Tesseract;
+ const emperor = data.get("emperor") as Emperor;
+ const sushi = data.get("sushi") as SushiStation;
+ const gems = data.get("gems") as GemStore;
+ const companions = data.get("companions") as Companion[];
+ const legendTalents = data.get("legendTalents") as LegendTalents;
+ const sneaking = data.get("sneaking") as Sneaking;
+ const arcade = data.get("arcade") as Arcade;
+ const farming = data.get("farming") as Farming;
+ const summoning = data.get("summoning") as Summoning;
+ const vault = data.get("upgradeVault") as UpgradeVault;
+ const eventShop = data.get("eventShop") as EventShop;
+ const tome = data.get("tome") as Tome;
+ const cards = data.get("cards") as Card[];
+ const gaming = data.get("gaming") as Gaming;
+ const stamps = data.get("stamps") as Stamp[][];
+ const companionBonus = getCompanionActiveBonus(companions, 13);
+ const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 21)!;
+ const externalSources: OpalSource[] = [
+  { id: "gem-shop", owner: "gems", name: "Gem Shop", acquisition: "Purchased Opals.",
+   opals: gems.purchases.find(purchase => purchase.no === 5)!.pucrhased, unit: "Opals", unavailableReason: null },
+  { id: "grimoire", owner: "grimoire", name: "Grimoire", acquisition: "Earned the Opal upgrade bonus.",
+   opals: grimoire.getUpgradeBonus(11), unit: "Opals", unavailableReason: null },
+  { id: "companion", owner: "companions", name: "Companion", acquisition: "Current active Opal companion bonus.",
+   opals: 25 * companionBonus, unit: "Opals", unavailableReason: null },
+  { id: "compass", owner: "compass", name: "Compass", acquisition: "Earned the Opal upgrade bonus.",
+   opals: compass.getUpgradeBonus(52), unit: "Opals", unavailableReason: null },
+  { id: "emperor", owner: "emperor", name: "Emperor", acquisition: "Unrounded Opal contribution from Emperor victories.",
+   opals: emperor.emperorBonuses[3].getBonus(), unit: "Opals", unavailableReason: null },
+  { id: "schematic", owner: "schematics", name: "Schematic", acquisition: "Unrounded Opal contribution from the built reward schematic.",
+   opals: hole.getSchematicBonus(102, 1), unit: "Opals", unavailableReason: null },
+  { id: "arcane", owner: "tesseract", name: "Arcane", acquisition: "Earned the Opal upgrade bonus.",
+   opals: tesseract.getUpgradeBonus(25), unit: "Opals", unavailableReason: null },
+  { id: "sushi", owner: "sushi", name: "Sushi", acquisition: "Unlocked the Opal Sushi reward.",
+   opals: sushi.getBonusFromIndex(56), unit: "Opals", unavailableReason: null },
+ ];
+ hole.prepareOpalLedger(externalSources.map(source => {
+  const owner = source.owner;
+  if (owner !== "companions" && !hole.sourceSaveAvailable[owner]) {
+   return { ...source, opals: null, unavailableReason: `Saved ${source.name} inputs are missing.` };
+  }
+  return source;
+ }));
+ hole.prepareInspection();
+ hole.prepareLanternSummary(storage, players);
+ hole.prepareStudyProgress(hole.superbitOwnershipSaveAvailable ? gaming.isSuperbitPurchased(43) : null,
+  getStampBonusForKey(stamps, "VillageStudy"));
+ hole.prepareVillagerGrowth(players, statues, {
+  compassPercent: compass.getUpgradeBonus(59),
+  legendPercent: legendTalents.getBonusFromIndex(12),
+  pristinePercent: pristineCharm.unlocked ? (pristineCharm.getBonus() - 1) * 100 : 0,
+  companionBonus, eventShopOwned: eventShop.isBonusOwned(6), lorePercent: tome.getEpilogueBonus(1),
+  exoticPercent: farming.getExoticMarketBonusValue(51), arcadePercent: arcade.bonuses[38].getBonus(),
+  grimoirePercent: grimoire.getUpgradeBonus(29), arcanePercent: tesseract.getUpgradeBonus(32),
+  gloomieCardLevel: cards.find(card => card.id === "caveB")!.getLevels(),
+  summoningPercent: summoning.getSummoningWinnerBonusFromIndex(21), vaultPercent: vault.getBonusForId(73),
+ });
+};

@@ -1,0 +1,657 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "playerNames": [
+          "Sludgadin",
+          "Sludgev2",
+          "Sludgev3",
+          "Sludgev4",
+          "Sludgev5",
+          "Sludgev6",
+          "SludgeMan",
+          "Sludgev8",
+          "Sludgev9",
+          "Sludgev10",
+          "Sludgev11"
+        ],
+        "version": 389.1
+      }
+    },
+    "paired_hole_inputs": {
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "result": {
+        "levels": [
+          20,
+          48,
+          68,
+          30,
+          150
+        ],
+        "exp": [
+          1419803559855799.2,
+          385722911122946.06,
+          2007516633842639.8,
+          134904463139950.81,
+          48287845241860.37
+        ],
+        "investments": [
+          114,
+          30,
+          50,
+          30,
+          30,
+          0,
+          0,
+          0
+        ],
+        "purchased": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "studyLevels": [
+          16,
+          15,
+          22,
+          26,
+          21,
+          18,
+          22,
+          22,
+          21,
+          18,
+          16,
+          36,
+          36,
+          36,
+          26,
+          36,
+          36,
+          35
+        ],
+        "studyProgress": [
+          72953.12089583318,
+          57619.70706045802,
+          153151.24217304398,
+          13248.171722550194,
+          126144.93953988569,
+          25026.784486555378,
+          663226.7005584541,
+          686473.5915335849,
+          645050.2468780265,
+          214429.636600765,
+          221428.0462261185,
+          9796150.081561891,
+          9640620.626113473,
+          10522676.311262997,
+          840302.5741329693,
+          1076598.0439762478,
+          1076614.8450074797,
+          20312931.911190987
+        ],
+        "target": 12,
+        "cavernOpals": [
+          19,
+          19,
+          14,
+          12,
+          20,
+          8,
+          9,
+          17,
+          12,
+          10,
+          6,
+          19,
+          7,
+          6,
+          18,
+          14,
+          9,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "lanternUses": 0,
+        "wishes": 3128,
+        "layers": [
+          19,
+          17,
+          19,
+          9
+        ],
+        "covePurchases": 0
+      }
+    },
+    "paired_direct_save_inputs": {
+      "expression": "({ earlyExplorerUpgrade: idleon.getAttr('OptionsListAccount')[355], bundle: idleon.getAttr('BundlesReceived').h.bun_u ?? null, gemOpals: idleon.getAttr('GemItemsPurchased')[5], statueLevels: idleon.getAttr('StatueLevels') })",
+      "result": {
+        "earlyExplorerUpgrade": 0,
+        "bundle": null,
+        "gemOpals": 18,
+        "statueLevels": [
+          [
+            522,
+            433756725511.9607
+          ],
+          [
+            550,
+            1097070366844.5295
+          ],
+          [
+            526,
+            762829454935.7544
+          ],
+          [
+            538,
+            1630338902641.5308
+          ],
+          [
+            499,
+            339966421748.4123
+          ],
+          [
+            102,
+            2469.70639736455
+          ],
+          [
+            525,
+            762642126215.4348
+          ],
+          [
+            330,
+            9469257.978612516
+          ],
+          [
+            340,
+            24047630.15321205
+          ],
+          [
+            327,
+            12636053.032807186
+          ],
+          [
+            287,
+            2541515.973191528
+          ],
+          [
+            302,
+            4811762.043427331
+          ],
+          [
+            282,
+            3266970.6535467654
+          ],
+          [
+            481,
+            109915769800.96153
+          ],
+          [
+            451,
+            39715322829.678116
+          ],
+          [
+            155,
+            18561.7498254505
+          ],
+          [
+            228,
+            402358.43326976884
+          ],
+          [
+            367,
+            23138936.33122752
+          ],
+          [
+            135,
+            10796.2111493706
+          ],
+          [
+            253,
+            755829.0877959057
+          ],
+          [
+            245,
+            334012.98207846074
+          ],
+          [
+            234,
+            194856.76079267403
+          ],
+          [
+            243,
+            603248.6177726939
+          ],
+          [
+            210,
+            167488.03483042796
+          ],
+          [
+            121,
+            9593.868597108
+          ],
+          [
+            294,
+            4420978.078673141
+          ],
+          [
+            278,
+            2205476.512480544
+          ],
+          [
+            268,
+            1210308.0117024193
+          ],
+          [
+            245,
+            389981.326843138
+          ],
+          [
+            248,
+            481047.6482600017
+          ],
+          [
+            52,
+            389.623938879456
+          ],
+          [
+            73,
+            1131.4843840744606
+          ]
+        ]
+      }
+    },
+    "compass_59": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 59, 0)",
+      "result": 0
+    },
+    "legend_12": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 12, 0)",
+      "result": 100
+    },
+    "pristine_21": {
+      "expression": "idleon.callFunction(\"Ninja\", \"PristineBon\", 21, 0)",
+      "result": 40
+    },
+    "companion_13": {
+      "expression": "idleon.callFunction(\"Companions\", 13)",
+      "result": 1.34
+    },
+    "statue_28": {
+      "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\")",
+      "result": 5291.688929032258
+    },
+    "statue_factor": {
+      "expression": "1 + idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven28\") / 100",
+      "result": 53.91688929032258
+    },
+    "jar_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 4, 0)",
+      "result": 251.99999999999997
+    },
+    "jar_10": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 10, 0)",
+      "result": 168
+    },
+    "jar_12": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 12, 0)",
+      "result": 210
+    },
+    "jar_16": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 16, 0)",
+      "result": 42
+    },
+    "jar_22": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 22, 0)",
+      "result": 179.2
+    },
+    "jar_29": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 29, 0)",
+      "result": 212.79999999999998
+    },
+    "jar_35": {
+      "expression": "idleon.callFunction(\"Holes\", \"JarCollectibleBonus\", 35, 0)",
+      "result": 168
+    },
+    "event_6": {
+      "expression": "idleon.callFunction(\"Summoning\", \"EventShopOwned\", 6, 0)",
+      "result": 0
+    },
+    "lore_1": {
+      "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 1, 0)",
+      "result": 231.87015903498067
+    },
+    "exotic_51": {
+      "expression": "idleon.callFunction(\"FarmingStuffs\", \"ExoticBonusQTY\", 51, 0)",
+      "result": 0
+    },
+    "arcade_38": {
+      "expression": "idleon.callFunction(\"ArcadeBonus\", 38)",
+      "result": 9.23076923076923
+    },
+    "grimoire_11": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0)",
+      "result": 25
+    },
+    "grimoire_29": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 29, 0)",
+      "result": 172.5
+    },
+    "arcane_25": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0)",
+      "result": 25
+    },
+    "arcane_32": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 32, 0)",
+      "result": 184.47
+    },
+    "schematic_0_25": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 0, 25)",
+      "result": 25
+    },
+    "schematic_48_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 48, 0)",
+      "result": 120
+    },
+    "schematic_85_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 85, 2)",
+      "result": 2
+    },
+    "schematic_87_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 87, 3)",
+      "result": 3
+    },
+    "schematic_88_5": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 88, 5)",
+      "result": 5
+    },
+    "schematic_99_5": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 99, 5)",
+      "result": 5
+    },
+    "schematic_102_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)",
+      "result": 0
+    },
+    "fountain_0_14": {
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 0, 14)",
+      "result": 418
+    },
+    "fountain_1_14": {
+      "expression": "idleon.callFunction(\"Holes2\", \"Fountain_BonTOT\", 1, 14)",
+      "result": 1215
+    },
+    "monument_0_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 0, 3)",
+      "result": 8314.38
+    },
+    "monument_1_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 1, 3)",
+      "result": 6035.34
+    },
+    "monument_2_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"MonumentROGbonuses\", 2, 3)",
+      "result": 676
+    },
+    "measurement_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
+      "result": 308.2993627118644
+    },
+    "measurement_7": {
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
+      "result": 291.5489793510325
+    },
+    "majik_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)",
+      "result": 150
+    },
+    "majik_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 1)",
+      "result": 4
+    },
+    "majik_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 2)",
+      "result": 30
+    },
+    "majik_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 4)",
+      "result": 100
+    },
+    "majik_5": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 5)",
+      "result": 8
+    },
+    "built_schematics": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosSchBlt\", 0, 0)",
+      "result": 101
+    },
+    "gloomie_card": {
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"caveB\")",
+      "result": 4
+    },
+    "bell_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"BellBonuss\", 1, 0)",
+      "result": 1117.5
+    },
+    "summoning_21": {
+      "expression": "idleon.callFunction(\"Summoning\", \"WinBonus\", 21, 0)",
+      "result": 288.5025
+    },
+    "vault_73": {
+      "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 73, 0)",
+      "result": 44
+    },
+    "study_stamp": {
+      "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"VillageStudy\")",
+      "result": 13.728813559322035
+    },
+    "compass_52": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0)",
+      "result": 25
+    },
+    "emperor_3": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0)",
+      "result": 5
+    },
+    "sushi_56": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)",
+      "result": 0
+    },
+    "least_investment": {
+      "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
+      "result": 30
+    },
+    "caverns_owned": {
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0)",
+      "result": 18
+    },
+    "study_rate": {
+      "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",
+      "result": 104247.85084745761
+    },
+    "study_bonus_0": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
+      "result": 160
+    },
+    "study_bonus_1": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 1, 0)",
+      "result": 30
+    },
+    "study_bonus_2": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 2, 0)",
+      "result": 110
+    },
+    "study_bonus_3": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 3, 0)",
+      "result": 32
+    },
+    "study_bonus_4": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 4, 0)",
+      "result": 420
+    },
+    "study_bonus_5": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 5, 0)",
+      "result": 1800
+    },
+    "study_bonus_6": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 6, 0)",
+      "result": 22
+    },
+    "study_bonus_7": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 7, 0)",
+      "result": 110
+    },
+    "study_bonus_8": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 8, 0)",
+      "result": 21
+    },
+    "study_bonus_9": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 9, 0)",
+      "result": 950
+    },
+    "study_bonus_10": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 10, 0)",
+      "result": 400
+    },
+    "study_bonus_11": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 11, 0)",
+      "result": 180
+    },
+    "study_bonus_12": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 12, 0)",
+      "result": 36
+    },
+    "study_bonus_13": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 13, 0)",
+      "result": 180
+    },
+    "study_bonus_14": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 14, 0)",
+      "result": 780
+    },
+    "study_bonus_15": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 15, 0)",
+      "result": 180
+    },
+    "study_bonus_16": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 16, 0)",
+      "result": 108
+    },
+    "study_bonus_17": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 17, 0)",
+      "result": 35
+    },
+    "villager_requirement_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 0, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "24466375307807030"
+      }
+    },
+    "villager_requirement_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
+      "result": 484586051248228.8
+    },
+    "villager_requirement_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
+      "result": 2822131140760417
+    },
+    "villager_requirement_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
+      "result": 1163506640486400
+    },
+    "villager_requirement_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
+      "result": 154849997288232.7
+    },
+    "study_requirement_0": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",
+      "result": 142108.54715202004
+    },
+    "study_requirement_1": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 1, 0)",
+      "result": 113686.83772161603
+    },
+    "study_requirement_2": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 2, 0)",
+      "result": 542101.0862427523
+    },
+    "study_requirement_3": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 3, 0)",
+      "result": 1323488.9800848444
+    },
+    "study_requirement_4": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 4, 0)",
+      "result": 433680.86899420177
+    },
+    "study_requirement_5": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 5, 0)",
+      "result": 333066.90738754696
+    },
+    "study_requirement_6": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 6, 0)",
+      "result": 813151.6293641285
+    },
+    "study_requirement_7": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 7, 0)",
+      "result": 813151.6293641285
+    },
+    "study_requirement_8": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 8, 0)",
+      "result": 650521.3034913026
+    },
+    "study_requirement_9": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 9, 0)",
+      "result": 333066.90738754696
+    },
+    "study_requirement_10": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 10, 0)",
+      "result": 319744.2310920451
+    },
+    "study_requirement_11": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 11, 0)",
+      "result": 27733391.1991762
+    },
+    "study_requirement_12": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 12, 0)",
+      "result": 27733391.1991762
+    },
+    "study_requirement_13": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 13, 0)",
+      "result": 27733391.1991762
+    },
+    "study_requirement_14": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 14, 0)",
+      "result": 2977850.2051909
+    },
+    "study_requirement_15": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 15, 0)",
+      "result": 41600086.798764296
+    },
+    "study_requirement_16": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 16, 0)",
+      "result": 41600086.798764296
+    },
+    "study_requirement_17": {
+      "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 17, 0)",
+      "result": 33280069.439011436
+    }
+  },
+  "errors": {}
+}

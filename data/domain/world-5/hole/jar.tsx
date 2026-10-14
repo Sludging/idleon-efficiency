@@ -25,14 +25,8 @@ export class Jar {
     jarBonuses: JarBonus[] = [];
 
     constructor() {
-        const jarTypes = initHoleJarRepo();
-        jarTypes.forEach(jar => {
-            jarTypes.push(new JarType(jar.index, jar.data));
-        });
-        const jarBonuses = initHoleJarBonusRepo();
-        jarBonuses.forEach(bonus => {
-            jarBonuses.push(new JarBonus(bonus.index, bonus.data));
-        });
+        this.jarTypes = initHoleJarRepo().map(jar => new JarType(jar.index, jar.data));
+        this.jarBonuses = initHoleJarBonusRepo().map(bonus => new JarBonus(bonus.index, bonus.data));
     }
 
     getBonus(index: number): number {

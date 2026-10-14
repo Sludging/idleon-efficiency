@@ -65,7 +65,7 @@ import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpe
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
-import { Hole, updateHole } from './world-5/hole/hole';
+import { Hole, updateHole, updateHolePresentation, updateHoleStudyEffects } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
@@ -269,6 +269,8 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 // ORDER IS IMPORTANT, the keys are not relevant as data doesn't get persisted.
 // This allows for multiple calls that touch the same data to happen in the same map (artifacts + sailing for example)
 const postProcessingMap: Record<string, Function> = {
+    // Study effects use saved state and must be ready before schematic consumers.
+    "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),
@@ -401,6 +403,8 @@ const postPostProcessingMap: Record<string, Function> = {
     "gaming": (doc: Cloudsave, accountData: Map<string, any>) => updateGamingDisplay(accountData),
     // Research presentation needs settled producers and the selected Royal Outpost's late inputs.
     "researchDisplay": (_doc: Cloudsave, accountData: Map<string, any>) => updateResearchDisplay(accountData),
+    // Hole inspection uses settled account bonuses, Player contexts and matching Statue bonuses.
+    "holePresentation": (_doc: Cloudsave, accountData: Map<string, any>) => updateHolePresentation(accountData),
 }
 
 export const updateIdleonData = (accountData: Map<string, any>, data: Cloudsave, charNames: string[], companions: CompanionState[], serverVars: Record<string, any>, isStatic: boolean = false) => {

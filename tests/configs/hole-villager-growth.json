@@ -1,0 +1,111 @@
+{
+  "description": "Extract Five villager growth rates, progression and intrinsic unlocks from the genuine active character and paired save.",
+  "target": "Five villager growth rates, progression and intrinsic unlocks",
+  "extractions": [
+    {
+      "label": "active_context",
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "description": "Capture real active character identity and version; do not switch or synthesize a context."
+    },
+    {
+      "label": "paired_hole_inputs",
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "description": "Saved inputs directly used by part 1; runtime counter mismatches remain failures."
+    },
+    {
+      "label": "growth_0",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 0, 0)",
+      "description": "Current villager 0 EXP/hour in the captured character context."
+    },
+    {
+      "label": "requirement_0",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 0, 0)",
+      "description": "Next requirement from saved villager 0 level."
+    },
+    {
+      "label": "ready_0",
+      "expression": "Number(idleon.getAttr(\"Holes\")[1][0]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][0]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 0, 0)",
+      "description": "Stored EXP meets requirement without claiming a level."
+    },
+    {
+      "label": "growth_1",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 1, 0)",
+      "description": "Current villager 1 EXP/hour in the captured character context."
+    },
+    {
+      "label": "requirement_1",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
+      "description": "Next requirement from saved villager 1 level."
+    },
+    {
+      "label": "ready_1",
+      "expression": "Number(idleon.getAttr(\"Holes\")[1][1]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][1]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
+      "description": "Stored EXP meets requirement without claiming a level."
+    },
+    {
+      "label": "growth_2",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 2, 0)",
+      "description": "Current villager 2 EXP/hour in the captured character context."
+    },
+    {
+      "label": "requirement_2",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
+      "description": "Next requirement from saved villager 2 level."
+    },
+    {
+      "label": "ready_2",
+      "expression": "Number(idleon.getAttr(\"Holes\")[1][2]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][2]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
+      "description": "Stored EXP meets requirement without claiming a level."
+    },
+    {
+      "label": "growth_3",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 3, 0)",
+      "description": "Current villager 3 EXP/hour in the captured character context."
+    },
+    {
+      "label": "requirement_3",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
+      "description": "Next requirement from saved villager 3 level."
+    },
+    {
+      "label": "ready_3",
+      "expression": "Number(idleon.getAttr(\"Holes\")[1][3]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][3]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
+      "description": "Stored EXP meets requirement without claiming a level."
+    },
+    {
+      "label": "growth_4",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 4, 0)",
+      "description": "Current villager 4 EXP/hour in the captured character context."
+    },
+    {
+      "label": "requirement_4",
+      "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
+      "description": "Next requirement from saved villager 4 level."
+    },
+    {
+      "label": "ready_4",
+      "expression": "Number(idleon.getAttr(\"Holes\")[1][4]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][4]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
+      "description": "Stored EXP meets requirement without claiming a level."
+    },
+    {
+      "label": "caverns_owned",
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0)",
+      "description": "Released caverns available from saved Polonai level."
+    },
+    {
+      "label": "schematics_available",
+      "expression": "idleon.callFunction(\"Holes\", \"SchematicsAvailable\", 0, 0)",
+      "description": "Available schematic count, not built count."
+    },
+    {
+      "label": "schematic_order",
+      "expression": "idleon.getAttr(\"CustomLists\").h.HolesInfo[40]",
+      "description": "Forward schematic IDs by availability slot."
+    },
+    {
+      "label": "measurements_owned",
+      "expression": "idleon.callFunction(\"Holes\", \"MeasurementsOwned\", 0, 0)",
+      "description": "Intrinsic Measurement access from saved Minau level."
+    }
+  ]
+}

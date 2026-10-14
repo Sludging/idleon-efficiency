@@ -1,0 +1,316 @@
+{
+  "extractions": {
+    "active_context": {
+      "expression": "({ playerId: idleon.getAttr(\"GetPlayersUsernames\").indexOf(idleon.getAttr(\"UserInfo\")[0]), playerName: idleon.getAttr('UserInfo')[0], playerNames: idleon.getAttr('GetPlayersUsernames'), version: idleon.getAttr('DoOnceREAL') })",
+      "result": {
+        "playerId": 3,
+        "playerName": "Sludgev4",
+        "playerNames": [
+          "Sludgadin",
+          "Sludgev2",
+          "Sludgev3",
+          "Sludgev4",
+          "Sludgev5",
+          "Sludgev6",
+          "SludgeMan",
+          "Sludgev8",
+          "Sludgev9",
+          "Sludgev10",
+          "Sludgev11"
+        ],
+        "version": 389.1
+      }
+    },
+    "paired_hole_inputs": {
+      "expression": "({ levels: idleon.getAttr(\"Holes\")[1].slice(0,5), exp: idleon.getAttr(\"Holes\")[2].slice(0,5), investments: idleon.getAttr(\"Holes\")[3].slice(0,8), purchased: idleon.getAttr(\"Holes\")[23].slice(0,5), studyLevels: idleon.getAttr(\"Holes\")[26].slice(0,18), studyProgress: idleon.getAttr(\"Holes\")[27].slice(0,18), target: idleon.getAttr(\"Holes\")[11][61], cavernOpals: idleon.getAttr(\"Holes\")[7], lanternUses: idleon.getAttr(\"Holes\")[11][84], wishes: idleon.getAttr(\"Holes\")[11][25], layers: [idleon.getAttr(\"Holes\")[11][1],idleon.getAttr(\"Holes\")[11][3],idleon.getAttr(\"Holes\")[11][5],idleon.getAttr(\"Holes\")[11][7]], covePurchases: idleon.getAttr('OptionsListAccount')[604] })",
+      "result": {
+        "levels": [
+          20,
+          48,
+          68,
+          30,
+          150
+        ],
+        "exp": [
+          1419803559855799.2,
+          385722911122946.06,
+          2007516633842639.8,
+          134904463139950.81,
+          48287845241860.37
+        ],
+        "investments": [
+          114,
+          30,
+          50,
+          30,
+          30,
+          0,
+          0,
+          0
+        ],
+        "purchased": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "studyLevels": [
+          16,
+          15,
+          22,
+          26,
+          21,
+          18,
+          22,
+          22,
+          21,
+          18,
+          16,
+          36,
+          36,
+          36,
+          26,
+          36,
+          36,
+          35
+        ],
+        "studyProgress": [
+          72953.12089583318,
+          57619.70706045802,
+          153151.24217304398,
+          13248.171722550194,
+          126144.93953988569,
+          25026.784486555378,
+          663226.7005584541,
+          686473.5915335849,
+          645050.2468780265,
+          214429.636600765,
+          221428.0462261185,
+          9796150.081561891,
+          9640620.626113473,
+          10522676.311262997,
+          840302.5741329693,
+          1076598.0439762478,
+          1076614.8450074797,
+          20312931.911190987
+        ],
+        "target": 12,
+        "cavernOpals": [
+          19,
+          19,
+          14,
+          12,
+          20,
+          8,
+          9,
+          17,
+          12,
+          10,
+          6,
+          19,
+          7,
+          6,
+          18,
+          14,
+          9,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "lanternUses": 0,
+        "wishes": 3128,
+        "layers": [
+          19,
+          17,
+          19,
+          9
+        ],
+        "covePurchases": 0
+      }
+    },
+    "external_total": {
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0))))))",
+      "result": 132
+    },
+    "emperor_schematic_floor_adjustment": {
+      "expression": "Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) - (idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1))",
+      "result": 0
+    },
+    "external_rounding_adjustment": {
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))) - (Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0))))))",
+      "result": 0.5
+    },
+    "cavern_total": {
+      "expression": "idleon.getAttr(\"Holes\")[7].reduce((sum,value)=>Math.round(sum+Number(value)),0)",
+      "result": 231
+    },
+    "earned": {
+      "expression": "Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))) + (idleon.getAttr(\"Holes\")[7].reduce((sum,value)=>Math.round(sum+Number(value)),0))",
+      "result": 363
+    },
+    "invested": {
+      "expression": "idleon.getAttr(\"Holes\")[3].slice(0,8).reduce((sum,value)=>sum+Number(value),0)",
+      "result": 254
+    },
+    "uninvested": {
+      "expression": "(() => { let balance=Math.round(Number(idleon.getAttr(\"GemItemsPurchased\")[5]) + idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0) + (25 * idleon.callFunction(\"Companions\", 13) + (idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0) + (Math.floor(idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0) + idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)) + (idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0) + idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)))))); for(const value of idleon.getAttr(\"Holes\")[7]) balance=Math.round(balance+Number(value)); for(const value of idleon.getAttr(\"Holes\")[3].slice(0,8)) balance=Math.round(balance-Number(value)); return balance; })()",
+      "result": 109
+    },
+    "least_investment": {
+      "expression": "idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)",
+      "result": 30
+    },
+    "equal_spread": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 5) * Math.floor(idleon.callFunction(\"Holes2\", \"LeastOpalsInVillager\", 0, 0)/5)",
+      "result": 48
+    },
+    "another_try_cost": {
+      "expression": "idleon.callFunction(\"Holes\", \"LampWishCost\", 1, 0)",
+      "result": 6
+    },
+    "another_try_access": {
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) > 6",
+      "result": true
+    },
+    "another_try_affordable": {
+      "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0) > 6 && Number(idleon.getAttr(\"Holes\")[11][25]) >= idleon.callFunction(\"Holes\", \"LampWishCost\", 1, 0)",
+      "result": true
+    },
+    "source_gem-shop": {
+      "expression": "Number(idleon.getAttr(\"GemItemsPurchased\")[5])",
+      "result": 18
+    },
+    "source_grimoire": {
+      "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 11, 0)",
+      "result": 25
+    },
+    "source_companion": {
+      "expression": "25 * idleon.callFunction(\"Companions\", 13)",
+      "result": 33.5
+    },
+    "source_compass": {
+      "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 52, 0)",
+      "result": 25
+    },
+    "source_emperor": {
+      "expression": "idleon.callFunction(\"Thingies\", \"EmperorBon\", 3, 0)",
+      "result": 5
+    },
+    "source_schematic": {
+      "expression": "idleon.callFunction(\"Holes\", \"B_UPG\", 102, 1)",
+      "result": 0
+    },
+    "source_arcane": {
+      "expression": "idleon.callFunction(\"ArcaneType\", \"ArcaneUpgBonus\", 25, 0)",
+      "result": 25
+    },
+    "source_sushi": {
+      "expression": "idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 56, 0)",
+      "result": 0
+    },
+    "cavern_0": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][0])",
+      "result": 19
+    },
+    "cavern_1": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][1])",
+      "result": 19
+    },
+    "cavern_2": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][2])",
+      "result": 14
+    },
+    "cavern_3": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][3])",
+      "result": 12
+    },
+    "cavern_4": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][4])",
+      "result": 20
+    },
+    "cavern_5": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][5])",
+      "result": 8
+    },
+    "cavern_6": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][6])",
+      "result": 9
+    },
+    "cavern_7": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][7])",
+      "result": 17
+    },
+    "cavern_8": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][8])",
+      "result": 12
+    },
+    "cavern_9": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][9])",
+      "result": 10
+    },
+    "cavern_10": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][10])",
+      "result": 6
+    },
+    "cavern_11": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][11])",
+      "result": 19
+    },
+    "cavern_12": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][12])",
+      "result": 7
+    },
+    "cavern_13": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][13])",
+      "result": 6
+    },
+    "cavern_14": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][14])",
+      "result": 18
+    },
+    "cavern_15": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][15])",
+      "result": 14
+    },
+    "cavern_16": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][16])",
+      "result": 9
+    },
+    "cavern_17": {
+      "expression": "Number(idleon.getAttr(\"Holes\")[7][17])",
+      "result": 12
+    },
+    "enthusiasm_0": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][0])/10)",
+      "result": 1650
+    },
+    "enthusiasm_1": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][1])/10)",
+      "result": 450
+    },
+    "enthusiasm_2": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][2])/10)",
+      "result": 750
+    },
+    "enthusiasm_3": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][3])/10)",
+      "result": 450
+    },
+    "enthusiasm_4": {
+      "expression": "idleon.callFunction(\"Holes\", \"CosmoBonusQTY\", 1, 0)*Math.floor(Number(idleon.getAttr(\"Holes\")[3][4])/10)",
+      "result": 450
+    }
+  },
+  "errors": {}
+}
