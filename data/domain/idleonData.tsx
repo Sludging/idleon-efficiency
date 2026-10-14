@@ -60,6 +60,7 @@ import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
 import { Minehead, updateMinehead } from './world-7/minehead';
+import { Glimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
 import { StarSigns, updateInfinityStarSigns, updateStarSignsUnlocked } from './starsigns';
@@ -172,6 +173,7 @@ const domainList: Domain[] = [
     new Spelunking("spelunking"),
     new ResearchGrid("research"),
     new Minehead("minehead"),
+    new Glimbo("glimbo"),
     new JellyOperator("jellyOperator"),
     new StarSigns("starsigns"),
     new Button("button"),

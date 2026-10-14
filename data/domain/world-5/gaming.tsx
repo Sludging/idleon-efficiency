@@ -19,6 +19,7 @@ import { PaletteColor, PaletteProgress, Superbit, SuperbitBoard } from "./gaming
 export class Gaming extends Domain {
     level = 0;
     bits = 0;
+    reclaimedCrownCount = 0;
     metadata: GamingMetadataModel = initGamingMetadataRepo()[0].data;
     plants: Plant[] = Plant.fromBase(initGamingSpeciesRepo());
     fertilizer: FertilizerUpgrade[] = FertilizerUpgrade.fromBase(initGamingUpgradeRepo());
@@ -53,6 +54,7 @@ export class Gaming extends Domain {
     init(_allItems: Item[], _charCount: number): Gaming {
         this.level = 0;
         this.bits = 0;
+        this.reclaimedCrownCount = 0;
 
         this.metadata = initGamingMetadataRepo()[0].data;
         this.plants = Plant.fromBase(initGamingSpeciesRepo());
@@ -77,6 +79,8 @@ export class Gaming extends Domain {
         const skillLevels = data.get("Lv0_0") as number[] ?? [];
         gaming.level = Number(skillLevels[SkillsIndex.Gaming] ?? 0);
         gaming.bits = Number(savedGaming[0] ?? 0);
+        const research = data.get("Research") as unknown[][] ?? [];
+        gaming.reclaimedCrownCount = research[11]?.length ?? 0;
 
         // Parse purchase flags before the aspects that use them.
         gaming.imports.forEach(importItem => importItem.parse(data));
