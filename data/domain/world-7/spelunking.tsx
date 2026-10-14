@@ -1,9 +1,10 @@
-import { commaNotation, notateNumber } from "../../utility";
+import { commaNotation, lavaFunc, notateNumber } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { initSpelunkingChapterRepo, SpelunkingChapterBase } from "../data/SpelunkingChapterRepo";
 import { initSpelunkingMetadataRepo } from "../data/SpelunkingMetadataRepo";
 import { initSpelunkingTunnelRepo, SpelunkingTunnelBase } from "../data/SpelunkingTunnelRepo";
 import { initSpelunkingUpgradeRepo, SpelunkingUpgradeBase } from "../data/SpelunkingUpgradeRepo";
+import { AFKTypeEnum } from "../enum/aFKTypeEnum";
 import { Item } from "../items";
 import { ChapterBonusModel } from "../model/chapterBonusModel";
 import { SpelunkingDiscoveryModel } from "../model/spelunkingDiscoveryModel";
@@ -17,6 +18,21 @@ import type { EquipmentSets } from "../misc/equipmentSets";
 import type { Grimoire } from "../grimoire";
 import type { Player } from "../player";
 import type { Tome } from "../world-4/tome";
+import { EnemyData, EnemyInfo } from "../enemies";
+import { SpelunkingChapterModel } from "../model/spelunkingChapterModel";
+import { SkillsIndex } from "../SkillsIndex";
+import { Companion, getCompanionActiveBonus } from "../companions";
+import type { Storage } from "../storage";
+import type { TaskBoard } from "../tasks";
+import type { Sailing } from "../world-5/sailing/sailing";
+import type { Rift, SkillMastery } from "../world-4/rift";
+import type { RoyalArmory } from "../world-6/royalArmory/royalArmory";
+import type { Card } from "../cards";
+import type { Alchemy } from "../world-2/alchemy/alchemy";
+import type { BigFish } from "./bigFish";
+import type { LegendTalents } from "./legendTalents";
+import type { Meritocraty } from "./meritocraty";
+import type { SushiStation } from "./sushi";
 
 const GRAND_DISCOVERIES_PER_TUNNEL = 10;
 const GRAND_DISCOVERY_UPGRADE_INDEX = 43;
@@ -206,16 +222,129 @@ export class Tunnel {
     }
 }
 
-export class Chapter {
-    constructor(
-        public index: number,
-        public name: string,
-        public bonuses: ChapterBonusModel[]
-    ) {
+export class ChapterBonus {
+    level: number = 0;
+    artifactBonus: number = 0;
+
+    constructor(public index: number, public data: ChapterBonusModel) {}
+
+    getBonus(): number {
+        // Only marked Journal bonuses receive the Sailing artifact's multiplier.
+        const multiplier = this.data.x3 === 1 ? 1 + this.artifactBonus / 100 : 1;
+        return multiplier * lavaFunc(this.data.func, this.level, this.data.x1, this.data.x2);
     }
 
-    static fromBase = (data: SpelunkingChapterBase[]): Chapter[] => {
-        return data.map(chapter => new Chapter(chapter.index, chapter.data.name, chapter.data.bonuses));
+    getEffectLimit(): number | undefined {
+        const multiplier = this.data.x3 === 1 ? 1 + this.artifactBonus / 100 : 1;
+        if (this.data.func === "decay") {
+            return this.data.x1 * multiplier;
+        }
+        if (this.data.func === "decayMulti") {
+            return (1 + this.data.x1) * multiplier;
+        }
+        return undefined;
+    }
+
+    getProgressToEffectLimit(): number | undefined {
+        if (this.data.func === "decay" || this.data.func === "decayMulti") {
+            return this.level / (this.level + this.data.x2);
+        }
+        return undefined;
+    }
+}
+
+export class Chapter {
+    bonuses: ChapterBonus[];
+    chestPageStacks: Item[] = [];
+    playerPageStacks: Item[][] = [];
+
+    constructor(
+        public index: number,
+        public data: SpelunkingChapterModel,
+        public pageItem: Item,
+        public gatheringSource: EnemyData
+    ) {
+        this.bonuses = data.bonuses.map((bonus, index) => new ChapterBonus(index, bonus));
+    }
+
+    get name(): string {
+        return this.data.name;
+    }
+
+    parse(savedLevels: (number | string)[]): void {
+        // Three-bonus chapters still occupy four saved Journal slots.
+        this.bonuses.forEach(bonus => {
+            bonus.level = Number(savedLevels[4 * this.index + bonus.index] ?? 0);
+        });
+    }
+
+    prepareArtifactBonus(artifactBonus: number): void {
+        this.bonuses.forEach(bonus => { bonus.artifactBonus = artifactBonus; });
+    }
+
+    preparePageStacks(storage: Storage): void {
+        // Retain Storage's individual stacks; pooled pages do not establish read eligibility.
+        this.chestPageStacks = storage.chest.filter(item => item.internalName === this.pageItem.internalName);
+        this.playerPageStacks = storage.playerStorage.map(
+            inventory => inventory.filter(item => item.internalName === this.pageItem.internalName)
+        );
+    }
+
+    static fromBase(data: SpelunkingChapterBase[], allItems: Item[]): Chapter[] {
+        return data.flatMap(chapter => {
+            const pageItem = allItems.find(item => item.internalName === `Spelunking${chapter.index}`)!;
+            const gatheringSource = EnemyInfo.find(enemy =>
+                enemy.details.AFKtype === AFKTypeEnum.Spelunking
+                && pageItem.sources.sources?.some(source => source.txtName === enemy.details.Name)
+            );
+            if (!gatheringSource) return [];
+            return [new Chapter(chapter.index, chapter.data, pageItem, gatheringSource)];
+        });
+    }
+}
+
+interface StaminaMaximumInputs {
+    upgrade4: number;
+    upgrade5: number;
+    trackometerStamina: number;
+    meritStamina: number;
+    companion: number;
+    chapterStamina: number;
+    masteryStamina: number;
+    chapterSpecialty: number;
+    highestSpecialty: number;
+    fishAdvice: number;
+}
+
+export class SpelunkingStamina {
+    current: number = 0;
+    maximum: number = 0;
+
+    constructor(public playerID: number) {}
+
+    getImageData(): ImageData {
+        return { location: 'CaveShopUpg4', width: 34, height: 34 };
+    }
+
+    parse(savedStamina: (number | string)[]): void {
+        this.current = Number(savedStamina[this.playerID] ?? 0);
+    }
+
+    prepareMaximum(skillLevel: number, inputs: StaminaMaximumInputs): void {
+        const level = Math.max(0, skillLevel);
+        // Journal Specialty and the talent add flat stamina despite their percentage descriptions.
+        const base = 14 + level + inputs.upgrade4 * Math.floor(level / 10)
+            + inputs.chapterStamina + inputs.masteryStamina
+            + inputs.upgrade5 + inputs.chapterSpecialty + inputs.highestSpecialty;
+        // Trackometer, merit and the companion's flat stamina stay outside both multipliers.
+        this.maximum = Math.floor(
+            inputs.trackometerStamina + inputs.meritStamina + 10 * inputs.companion
+            + base * (1 + inputs.fishAdvice / 100) * (1 + inputs.companion / 100)
+        );
+    }
+
+    getHoursUntilFull(hourlyRecharge: number): number {
+        return Math.max(0, this.maximum - this.current) / hourlyRecharge;
     }
 }
 
@@ -245,7 +374,28 @@ export class Spelunking extends Domain {
     tunnels: Tunnel[] = []
     chapters: Chapter[] = []
     upgrades: Upgrade[] = []
-    stamina: number[] = []
+    stamina: SpelunkingStamina[] = []
+    dailyReadLimit: number = 5;
+    dailyReadsUsed: number = 0;
+    hourlyRecharge: number = 5;
+    trackometerLevel: number = 0;
+
+    get dailyReadsRemaining(): number {
+        return Math.max(0, this.dailyReadLimit - this.dailyReadsUsed);
+    }
+
+    getHoursUntilAllFull(): number {
+        let hoursUntilAllFull = 0;
+        for (const stamina of this.stamina) {
+            hoursUntilAllFull = Math.max(hoursUntilAllFull, stamina.getHoursUntilFull(this.hourlyRecharge));
+        }
+        return hoursUntilAllFull;
+    }
+
+    getTrackometerStaminaBonus(): number {
+        // Maxima-Track scales its raw upgrade bonus by the saved Trackometer level.
+        return this.getUpgradeBonus(61) * this.trackometerLevel;
+    }
     ownedAmber: number = 0;
     exaltedStampFragments: number = 0;
     grandDiscoveryUpgrade!: Upgrade;
@@ -336,14 +486,16 @@ export class Spelunking extends Domain {
     }
 
     getRawKeys(): RawData[] {
+        // Account slot 410 records successful Journal reads in the saved daily period.
         return [
-            { key: "Spelunk", perPlayer: false, default: [] }
+            { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "OptLacc", perPlayer: false, default: [] },
         ]
     }
 
 
-    init(_allItems: Item[], charCount: number) {
-        this.chapters = Chapter.fromBase(initSpelunkingChapterRepo());
+    init(allItems: Item[], charCount: number) {
+        this.chapters = Chapter.fromBase(initSpelunkingChapterRepo(), allItems);
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());
         const metadata = initSpelunkingMetadataRepo()[0].data;
         this.amber = metadata.rewardLabels.find(label => label.dropCode === "_")!;
@@ -364,7 +516,11 @@ export class Spelunking extends Domain {
             });
         this.grandDiscoveryUpgrade = this.upgrades[GRAND_DISCOVERY_UPGRADE_INDEX];
         this.tunnels = Tunnel.fromBase(initSpelunkingTunnelRepo(), this, metadata.itemDrops);
-        this.stamina = Array(charCount).fill(0);
+        this.stamina = Array.from({ length: charCount }, (_, playerID) => new SpelunkingStamina(playerID));
+        this.dailyReadLimit = 5;
+        this.dailyReadsUsed = 0;
+        this.hourlyRecharge = 5;
+        this.trackometerLevel = 0;
         this.ownedAmber = 0;
         this.exaltedStampFragments = 0;
         this.ownedEpilogueCount = 0;
@@ -373,19 +529,26 @@ export class Spelunking extends Domain {
 
     parse(data: Map<string, any>): void {
         const spelunking = data.get(this.getDataKey()) as Spelunking;
+        const charCount = data.get("charCount") as number;
+        spelunking.stamina = Array.from({ length: charCount }, (_, playerID) =>
+            spelunking.stamina.find(stamina => stamina.playerID === playerID) ?? new SpelunkingStamina(playerID)
+        );
         const spelunkingData = (data.get("Spelunk") ?? []) as unknown[][];
         const savedStamina = (spelunkingData[3] ?? []) as (number | string)[];
         const currencies = (spelunkingData[4] ?? []) as (number | string)[];
         const shopUpgradeLevels = (spelunkingData[5] ?? []) as (number | string)[];
+        const savedChapterLevels = (spelunkingData[8] ?? []) as (number | string)[];
+        const accountOptions = (data.get("OptLacc") ?? []) as (number | string)[];
+        spelunking.dailyReadsUsed = Number(accountOptions[410] ?? 0);
+        spelunking.trackometerLevel = Number(currencies[8] ?? 0);
+        spelunking.chapters.forEach(chapter => chapter.parse(savedChapterLevels));
         spelunking.ownedEpilogueCount = Number(spelunkingData[13]?.[2] ?? 0);
         const discoveredNames = new Set(
             (spelunkingData[6] ?? []).map(discovery => String(discovery).replace(/_/g, " ").trim())
         );
 
         spelunking.tunnels.forEach(tunnel => tunnel.parse(spelunkingData, discoveredNames));
-        spelunking.stamina.forEach((_, index) => {
-            spelunking.stamina[index] = Number(savedStamina[index] ?? 0);
-        });
+        spelunking.stamina.forEach(stamina => stamina.parse(savedStamina));
         // Missing shop slots stay locked. Every parse replaces levels; unlocked derives from the saved sentinel.
         spelunking.upgrades.forEach(upgrade => {
             upgrade.level = Number(shopUpgradeLevels[upgrade.index] ?? -1);
@@ -395,3 +558,68 @@ export class Spelunking extends Domain {
         spelunking.exaltedStampFragments = Number(currencies[3] ?? 0);
     }
 }
+
+export const updateSpelunkingChapterBonuses = (data: Map<string, any>): void => {
+    const spelunking = data.get("spelunking") as Spelunking;
+    const sailing = data.get("sailing") as Sailing;
+    const artifactBonus = sailing.artifacts[35].getBonus();
+    spelunking.chapters.forEach(chapter => chapter.prepareArtifactBonus(artifactBonus));
+};
+
+export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
+    const spelunking = data.get("spelunking") as Spelunking;
+    const players = data.get("players") as Player[];
+    const storage = data.get("storage") as Storage;
+    const taskBoard = data.get("taskboard") as TaskBoard;
+    const companions = data.get("companions") as Companion[];
+    const rift = data.get("rift") as Rift;
+    const mastery = rift.bonuses.find(bonus => bonus.name === "Skill Mastery") as SkillMastery;
+    const bigFish = data.get("bigFish") as BigFish;
+    const meritocracy = data.get("meritocraty") as Meritocraty;
+    const legendTalents = data.get("legendTalents") as LegendTalents;
+    const royalArmory = data.get("royalArmory") as RoyalArmory;
+    const sushi = data.get("sushi") as SushiStation;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const cards = data.get("cards") as Card[];
+    const nativeCardLevel = cards.find(card => card.id === "w7a10")!.getLevels();
+    let highestSpecialty = 0;
+    // Each contributor supplies its own final talent context, not the recipient's context.
+    players.forEach(player => {
+        highestSpecialty = Math.max(highestSpecialty, player.getTalentBonus(236));
+    });
+
+    const upgrade5 = spelunking.getUpgradeBonus(5);
+    const maximumInputs: StaminaMaximumInputs = {
+        upgrade4: spelunking.getUpgradeBonus(4),
+        upgrade5,
+        trackometerStamina: spelunking.getTrackometerStaminaBonus(),
+        meritStamina: taskBoard.merits.find(merit => merit.index === 50)!.getBonus(),
+        companion: getCompanionActiveBonus(companions, 148),
+        chapterStamina: spelunking.chapters[2].bonuses[0].getBonus(),
+        masteryStamina: mastery.getSkillBonus(SkillsIndex.Spelunking, 3),
+        chapterSpecialty: spelunking.chapters[3].bonuses[0].getBonus(),
+        highestSpecialty,
+        fishAdvice: bigFish.getBonusFromIndex(1),
+    };
+    // Mastery already returns the full reward amounts, not unlock indicators.
+    spelunking.dailyReadLimit = 5 + mastery.getSkillBonus(SkillsIndex.Spelunking, 4);
+    // Recharge uses the native card level; equipped card boosts do not apply.
+    const additiveRecharge = upgrade5 + alchemy.getBubbleBonusForKey("Y11")
+        + spelunking.chapters[2].bonuses[1].getBonus()
+        + spelunking.chapters[5].bonuses[2].getBonus()
+        + mastery.getSkillBonus(SkillsIndex.Spelunking, 5)
+        + Math.min(2 * nativeCardLevel, 20);
+    spelunking.hourlyRecharge = 5
+        * (1 + meritocracy.getCurrentBonus(17) / 100)
+        * (1 + legendTalents.getBonusFromIndex(30) / 100)
+        * Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier())
+        * (1 + sushi.getBonusFromIndex(11) / 100)
+        * (1 + additiveRecharge / 100);
+
+    players.forEach(player => {
+        spelunking.stamina[player.playerID].prepareMaximum(
+            player.skills.get(SkillsIndex.Spelunking)!.level, maximumInputs
+        );
+    });
+    spelunking.chapters.forEach(chapter => chapter.preparePageStacks(storage));
+};

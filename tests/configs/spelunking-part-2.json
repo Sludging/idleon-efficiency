@@ -1,0 +1,416 @@
+{
+  "description": "Spelunking Part 2 original offline Jelly_Operator 1.22 comparisons. Originating latest.json raw SHA-256 42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0; normalized save/cloud SHA-256 dcef3f9d237625c64a4f5245ef24c2ff9a762a8ca6dc78617e90e3360b33ffcc. Runtime player 6 current is 2550; original saved current is 2635. No partial refill branch observed.",
+  "target": "ChapterBonus, MaxDailyPageReads, StaminaMax, StaminaRegenRate and every direct producer",
+  "extractions": [
+    {
+      "label": "pairing_before",
+      "expression": "(() => { const s = idleon.getAttr(\"Spelunk\"); const names = idleon.getAttr(\"UserNames\"); return {chapters:s[8].slice(0,24), upgrades:[s[5][4],s[5][5],s[5][61]], trackometer:s[4][8], current:s[3].slice(0,11), dailyUsed:idleon.getAttr(\"OptionsListAccount\")[410]}; })()",
+      "description": "Read-only runtime inputs before extraction. Player 6 current differs from originating save; preserve saved 2635."
+    },
+    {
+      "label": "chapter_2_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",2,0)",
+      "description": "Current Journal effect for chapter 2 bonus 0"
+    },
+    {
+      "label": "chapter_3_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",3,0)",
+      "description": "Current Journal effect for chapter 3 bonus 0"
+    },
+    {
+      "label": "chapter_2_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",2,1)",
+      "description": "Current Journal effect for chapter 2 bonus 1"
+    },
+    {
+      "label": "chapter_5_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",5,2)",
+      "description": "Current Journal effect for chapter 5 bonus 2"
+    },
+    {
+      "label": "chapter_0_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",0,0)",
+      "description": "Current Journal effect for chapter 0 bonus 0"
+    },
+    {
+      "label": "chapter_0_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",0,1)",
+      "description": "Current Journal effect for chapter 0 bonus 1"
+    },
+    {
+      "label": "chapter_0_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",0,2)",
+      "description": "Current Journal effect for chapter 0 bonus 2"
+    },
+    {
+      "label": "chapter_1_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",1,0)",
+      "description": "Current Journal effect for chapter 1 bonus 0"
+    },
+    {
+      "label": "chapter_1_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",1,1)",
+      "description": "Current Journal effect for chapter 1 bonus 1"
+    },
+    {
+      "label": "chapter_1_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",1,2)",
+      "description": "Current Journal effect for chapter 1 bonus 2"
+    },
+    {
+      "label": "chapter_1_3",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",1,3)",
+      "description": "Current Journal effect for chapter 1 bonus 3"
+    },
+    {
+      "label": "chapter_2_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",2,2)",
+      "description": "Current Journal effect for chapter 2 bonus 2"
+    },
+    {
+      "label": "chapter_3_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",3,1)",
+      "description": "Current Journal effect for chapter 3 bonus 1"
+    },
+    {
+      "label": "chapter_3_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",3,2)",
+      "description": "Current Journal effect for chapter 3 bonus 2"
+    },
+    {
+      "label": "chapter_3_3",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",3,3)",
+      "description": "Current Journal effect for chapter 3 bonus 3"
+    },
+    {
+      "label": "chapter_4_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",4,0)",
+      "description": "Current Journal effect for chapter 4 bonus 0"
+    },
+    {
+      "label": "chapter_4_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",4,1)",
+      "description": "Current Journal effect for chapter 4 bonus 1"
+    },
+    {
+      "label": "chapter_4_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",4,2)",
+      "description": "Current Journal effect for chapter 4 bonus 2"
+    },
+    {
+      "label": "chapter_5_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",5,0)",
+      "description": "Current Journal effect for chapter 5 bonus 0"
+    },
+    {
+      "label": "chapter_5_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ChapterBonus\",5,1)",
+      "description": "Current Journal effect for chapter 5 bonus 1"
+    },
+    {
+      "label": "daily_reads_limit",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"MaxDailyPageReads\",0,0)",
+      "description": "Account-wide daily page-read limit"
+    },
+    {
+      "label": "daily_reads_used",
+      "expression": "idleon.getAttr(\"OptionsListAccount\")[410]",
+      "description": "Account-wide daily page reads already used"
+    },
+    {
+      "label": "stamina_recharge_hourly",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Shared source-derived stamina recharge per hour"
+    },
+    {
+      "label": "stamina_max_player_0",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)",
+      "description": "Player 0 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)",
+      "description": "Player 1 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)",
+      "description": "Player 2 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_3",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)",
+      "description": "Player 3 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_4",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)",
+      "description": "Player 4 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_5",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)",
+      "description": "Player 5 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_6",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)",
+      "description": "Player 6 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_7",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)",
+      "description": "Player 7 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_8",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)",
+      "description": "Player 8 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_9",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)",
+      "description": "Player 9 maximum stamina"
+    },
+    {
+      "label": "stamina_max_player_10",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)",
+      "description": "Player 10 maximum stamina"
+    },
+    {
+      "label": "artifact_35",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Sailing(\"ArtifactBonus\",35,0)",
+      "description": "Sailing artifact 35 producer"
+    },
+    {
+      "label": "upgrade_4_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",4,1)",
+      "description": "Raw Spelunking upgrade 4 bonus"
+    },
+    {
+      "label": "upgrade_5_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",5,1)",
+      "description": "Raw Spelunking upgrade 5 bonus"
+    },
+    {
+      "label": "upgrade_61_raw",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,1)",
+      "description": "Raw Spelunking upgrade 61 bonus"
+    },
+    {
+      "label": "upgrade_61_effective",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"ShopUpgBonus\",61,0)",
+      "description": "Trackometer-scaled effective upgrade 61 bonus"
+    },
+    {
+      "label": "merit_50_level",
+      "expression": "idleon.getAttr(\"Tasks\")[2][6][2]",
+      "description": "World 7 stamina merit 50 saved level"
+    },
+    {
+      "label": "merit_50_stamina_additive",
+      "expression": "20*idleon.getAttr(\"Tasks\")[2][6][2]",
+      "description": "Source-derived additive stamina from World 7 merit 50"
+    },
+    {
+      "label": "companion_148",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Companions(148)",
+      "description": "Active companion 148 bonus"
+    },
+    {
+      "label": "mastery_stamina_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "description": "Rift Spelunking mastery maximum-stamina reward indicator"
+    },
+    {
+      "label": "mastery_daily_reads_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "description": "Rift Spelunking mastery daily-read reward indicator"
+    },
+    {
+      "label": "mastery_recharge_indicator",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "description": "Rift Spelunking mastery recharge reward indicator"
+    },
+    {
+      "label": "mastery_stamina_effect",
+      "expression": "15*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",3)",
+      "description": "Full source stamina mastery contribution"
+    },
+    {
+      "label": "mastery_daily_reads_effect",
+      "expression": "3*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",4)",
+      "description": "Full source daily-read mastery contribution"
+    },
+    {
+      "label": "mastery_recharge_effect",
+      "expression": "10*idleon.allScripts.ActorEvents_579._customBlock_RiftStuff(\"RiftSkillBonus,18\",5)",
+      "description": "Full source recharge mastery contribution"
+    },
+    {
+      "label": "talent_236_player_0",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,0)",
+      "description": "Spelunking Specialty first-effect output for player 0"
+    },
+    {
+      "label": "talent_236_player_3",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,3)",
+      "description": "Spelunking Specialty first-effect output for player 3"
+    },
+    {
+      "label": "talent_236_player_1",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,1)",
+      "description": "Spelunking Specialty first-effect output for player 1"
+    },
+    {
+      "label": "talent_236_player_2",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,2)",
+      "description": "Spelunking Specialty first-effect output for player 2"
+    },
+    {
+      "label": "talent_236_player_4",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,4)",
+      "description": "Spelunking Specialty first-effect output for player 4"
+    },
+    {
+      "label": "talent_236_player_5",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,5)",
+      "description": "Spelunking Specialty first-effect output for player 5"
+    },
+    {
+      "label": "talent_236_player_6",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,6)",
+      "description": "Spelunking Specialty first-effect output for player 6"
+    },
+    {
+      "label": "talent_236_player_7",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,7)",
+      "description": "Spelunking Specialty first-effect output for player 7"
+    },
+    {
+      "label": "talent_236_player_8",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,8)",
+      "description": "Spelunking Specialty first-effect output for player 8"
+    },
+    {
+      "label": "talent_236_player_9",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,9)",
+      "description": "Spelunking Specialty first-effect output for player 9"
+    },
+    {
+      "label": "talent_236_player_10",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,10)",
+      "description": "Spelunking Specialty first-effect output for player 10"
+    },
+    {
+      "label": "talent_236_best",
+      "expression": "idleon.allScripts.ActorEvents_345._customBlock_getbonus2(1,236,-1)",
+      "description": "Highest account Spelunking Specialty first effect"
+    },
+    {
+      "label": "big_fish_advice_1",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"BigFishBonuses\",1,0)",
+      "description": "Big Fish Advice on Being Tired output"
+    },
+    {
+      "label": "meritocracy_17",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Summoning2(\"MeritocBonusz\",17,0)",
+      "description": "Meritocracy bonus 17 output"
+    },
+    {
+      "label": "legend_talent_30",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_Thingies(\"LegendPTS_bonus\",30,0)",
+      "description": "Legend talent 30 output"
+    },
+    {
+      "label": "royal_outpost_category_2",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_RoyalG(\"OutpostROGbon\",2,0)",
+      "description": "Royal Outpost category 2 recharge multiplier"
+    },
+    {
+      "label": "sushi_11",
+      "expression": "idleon.allScripts.ActorEvents_579._customBlock_SushiStuff(\"RoG_BonusQTY\",11,0)",
+      "description": "Sushi bonus 11 output"
+    },
+    {
+      "label": "bubble_Y11",
+      "expression": "idleon.getAttr(\"DNSM\").h.AlchBubbles.h.Y11",
+      "description": "Alchemy bubble Y11 recharge value"
+    },
+    {
+      "label": "native_card_w7a10",
+      "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\",\"CardLv\",\"w7a10\")",
+      "description": "Native card level for w7a10"
+    },
+    {
+      "label": "refill_hours_player_0",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",0,0)-1893)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 1893; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_1",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",1,0)-2553)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2553; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_2",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",2,0)-2555)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2555; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_3",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",3,0)-2390)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2390; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_4",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",4,0)-2555)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2555; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_5",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",5,0)-2559)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2559; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_6",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",6,0)-2635)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2635; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_7",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",7,0)-2467)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2467; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_8",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",8,0)-2556)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2556; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_9",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",9,0)-2638)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2638; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "refill_hours_player_10",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaMax\",10,0)-2301)/idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"StaminaRegenRate\",0,0)",
+      "description": "Saved-snapshot refill estimate from originating save current 2301; no gameplay refill handler or away-time simulation."
+    },
+    {
+      "label": "chapter_metadata",
+      "expression": "idleon.getAttr(\"CustomLists\").h.SpelunkChapters.slice(0,6)",
+      "description": "Source tuples for the six actual page-backed chapters. FILLER chapter 6 is excluded."
+    },
+    {
+      "label": "daily_reads_remaining",
+      "expression": "Math.max(0,idleon.allScripts.ActorEvents_579._customBlock_Spelunk(\"MaxDailyPageReads\",0,0)-idleon.getAttr(\"OptionsListAccount\")[410])",
+      "description": "Remaining shared allowance in the saved daily period."
+    },
+    {
+      "label": "pairing_after",
+      "expression": "(() => { const s = idleon.getAttr(\"Spelunk\"); const names = idleon.getAttr(\"UserNames\"); return {chapters:s[8].slice(0,24), upgrades:[s[5][4],s[5][5],s[5][61]], trackometer:s[4][8], current:s[3].slice(0,11), dailyUsed:idleon.getAttr(\"OptionsListAccount\")[410]}; })()",
+      "description": "Same read-only runtime input receipt after all formula queries."
+    }
+  ]
+}

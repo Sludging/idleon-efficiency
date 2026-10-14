@@ -8,12 +8,12 @@
 
 | Player outcome | Backend information for the read-only UI |
 |---|---|
-| Account growth | Highest saved Research level, one provenance-labeled saved EXP copy and requirement, save timestamp, discovery total, and total Observation levels. |
-| Discoveries | All 43 Observations with maps, hints, required levels, thresholds, and found state. Separate unmet-level, already-discovered, exhausted-attempts, and insufficient-maximum-roll conditions. Multiple conditions can apply. |
+| Account growth | Highest saved Research level, one supported saved EXP copy and same-copy requirement, discovery total, and total Observation levels. Retain character and timestamp provenance internally; the UI presents plain account Research progress. |
+| Discoveries | All 43 Observations with maps, hints, study levels, roll thresholds, and found state. Separate revealed-prefix, already-discovered, exhausted-attempts, and insufficient-maximum-roll conditions. Expose study eligibility and the earliest reveal level independently through the shared visibility rule. Multiple conditions can apply. |
 | Discovery allowance | Remaining attempts, daily allocation, inclusive roll bounds, failed-roll counter, current bonus, and modifiers. Allocation minus remaining is not attempts used. |
 | Actual lenses | Ownership and sources, fixed kinds, saved positions, targets, assignments, and capacity. Distinguish unplaced lenses from production. |
 | Insight and EXP | Each Observation's Insight level, partial progress, requirement, local effect, EXP contribution, and Insight production. Separate total-level effects and identify supporting Kaleidoscopes. |
-| Online and offline gains | Total and per-Observation Research EXP per hour. Insight accrual per hour, with the game's differing displayed Insight figure identified separately. Offline percentage, 1% baseline, 100% cap, and contributors. Online gains are 100%. |
+| Online and offline gains | Total and per-Observation Research EXP per hour and actual Insight accrual per hour. Retain the game's differing displayed Insight figure internally. Offline percentage, 1% baseline, 100% cap, and contributors. Online gains are 100%. |
 | Papers | Consumable inventory versus permanent purchases and offline bonuses. Explain the two-hour grant, including Minehead Currency, without Currency balances or forecasts. |
 | Milestones | All 14 Posty Notes, thresholds, reached/upcoming state, and lens, capacity, rotation, Shape, and Point rewards. Show ownership-sensitive Shape context, not guaranteed pictured rewards. |
 
@@ -26,11 +26,11 @@ Part 1 remains independent of Part 2. It consumes existing Grid bonuses and mini
 Extend the account domain already registered as `research` in [research.tsx](../../data/domain/world-7/research.tsx). Keep its existing Grid bonus API and current consumers. Do not create a second parser or Research service.
 
 - **Research domain:** Own account progress, allowance, lens ownership/capacity, aggregate production, offline percentage, and milestone context. Prepare external inputs once.
-- **Observation:** Wrap generated metadata. Own discovery and Insight state, conditions, assignments, local effects, and production calculations.
+- **Observation:** Wrap generated metadata. Own discovery and Insight state, revealed-prefix conditions, separate study requirement and eligibility, assignments, local effects, and production calculations.
 - **Research lens:** Own fixed kind, saved position, and assignment. Translate unplaced targets at the boundary.
 - **Posty Note:** Wrap generated metadata. Determine reached state from account level and combine reward text with prepared ownership context.
 - **External producers:** Storage owns consumable inventory; Gem Store owns permanent purchases. Consume other domains' public bonuses without importing their activity progression.
-- **Contributors:** Use named value records with source, value, operation, and relevant cap/gate. Derive records and totals through the same calculation. Preserve additive percentages versus separate multipliers.
+- **Contributors:** Use named value records with source, value, operation, and relevant cap/gate. Derive records and totals through the same calculation. Preserve additive percentages versus separate multipliers. Optional display rewards carry intrinsic amount, operation, units or conditional basis, and acquisition state without changing effective contributions. Reuse producer base/preview APIs, metadata, and existing Research scales. Bare Grid rewards describe one level, not an attainable total.
 
 Reuse repository-backed wrappers from [Friends](../../data/domain/friends.tsx) and [Cooking](../../data/domain/world-4/cooking.tsx). Use [Sushi](../../data/domain/world-7/sushi.tsx) for named placements, [Spelunking](../../data/domain/world-7/spelunking.tsx) for account summaries, and [Lab](../../data/domain/world-4/lab.tsx) for prepared inputs. These aspects do not require simulations or new generic frameworks.
 
@@ -40,7 +40,7 @@ Reuse repository-backed wrappers from [Friends](../../data/domain/friends.tsx) a
 
 | Source | Use |
 |---|---|
-| [ResearchObservationRepo](../../data/domain/data/ResearchObservationRepo.ts) | All 43 identities, map IDs, hints, required levels, and roll thresholds. Join map IDs to `MapInfo` records by `data.map.id`, not array position. |
+| [ResearchObservationRepo](../../data/domain/data/ResearchObservationRepo.ts) | All 43 identities, map IDs, hints, study levels, and roll thresholds. Preserve generated `requiredResearchLevel`; translate its study meaning in the handwritten owner. Join map IDs to `MapInfo` records by `data.map.id`, not array position. |
 | [ResearchLensRepo](../../data/domain/data/ResearchLensRepo.ts) | Magnifying Glass, Optical Monocle, and Kaleidoscope identities and descriptions. |
 | [ResearchMetadataRepo](../../data/domain/data/ResearchMetadataRepo.ts) | Base roll bounds, base daily allocation, base Kaleidoscope boost, and rotation requirement. |
 | [ResearchPostyNoteRepo](../../data/domain/data/ResearchPostyNoteRepo.ts) | All 14 thresholds and reward descriptions. Descriptions suffice for reward text; no new structured reward framework is required. |
@@ -63,6 +63,8 @@ Observation owns the index-based EXP curve and Insight requirement formula. Rese
 
 Use one owner for each shared rule. The adjacency calculation uses one named eight-column constant, not repeated literals. Formula coefficients stay in their calculation; they do not need a generic rule object. Reuse exported milestone thresholds and existing producer values where they express the required rule. Do not parse reward prose into calculation inputs.
 
+The versioned 1.22 source separates discovery visibility from study. Its revealed prefix includes Big Ol Reef at Research level 70. Actor 672 rolls against the row's discovery threshold without checking its study level. Actor 741 requires level 72 before assigning a lens. Apply this distinction to every Observation; do not special-case Reef. The account view uses its existing highest-level reference context and does not guarantee an action on every character. Source references and current-live-version limits remain in the scoped handoff.
+
 The [source-data evidence](research-research-brief.md#source-data-and-calculation-boundary) identifies verified mechanics and metadata. A new export requires a concrete current maintenance reason, not merely a missing field or catalogue location. Do not export formula coefficients or generate per-Observation production tables merely to avoid numeric literals. No metadata migration layer is needed.
 
 ### Hole's verified base reward
@@ -75,7 +77,7 @@ The [base-reward evidence](research-research-brief.md#hole-upgrade-base-reward-e
 
 ### Saved-state boundary
 
-The [approved brief's mapping ledger](research-research-brief.md#raw-mapping-ledger) records source evidence. Parsing translates raw arrays into named state before calculations.
+The [planning revision evidence](research-research-brief.md#part-1-planning-revision-evidence) records source mappings and caller context. Parsing translates raw arrays into named state before calculations.
 
 | Raw input | Named state and supported rule |
 |---|---|
@@ -90,7 +92,7 @@ The [approved brief's mapping ledger](research-research-brief.md#raw-mapping-led
 | Storage inventories | `Storage.amountInStorage("Quest115")` counts Papers across chest and characters. |
 | Gem Store purchases | Professional Papers use purchase number `45`, backed by `GemItemsPurchased[45]`. Consume the existing purchased-count field. |
 
-Use one reference-character context for saved EXP and character-dependent production inputs. Default to the lowest character ID among highest-level saved copies. This is a display policy, not a game rule that selects account EXP. Label the saved EXP copy with that character's name and level. Keep one account progression surface; do not show separate character progression or aggregate EXP copies.
+Use one reference-character context for saved EXP and character-dependent production inputs. Default to the lowest character ID among highest-level saved copies. This is an internal selection policy, not a game rule that selects account EXP. Retain the source character and same-copy requirement in backend results. Public UI shows plain Research progress without character identity or save-copy exposition. Do not show separate character progression or aggregate EXP copies.
 
 Reuse `Player.skills.get(SkillsIndex.Research)` for the saved level, `currentXP`, and `xpReq` after parsing. The requirement belongs to that same saved copy. Do not recompute it from a different character's level. Preserve missing save requirements as missing evidence, not zero progress.
 
@@ -107,7 +109,7 @@ The [captured Research helper](../game-snippets/research/ResearchStuff.1.22.js):
 - **Research EXP:** Each Observation counts placed kind-`0` lenses. Apply its source-derived base curve, local Insight effect from Grid `93`, and Kaleidoscope support. Multiply this subtotal by the shared EXP multiplier for its final contribution. Sum only the source helper's eligible Observation range. Saved assignments outside that range remain visible but do not inflate totals.
 - **Shared EXP multiplier:** Preserve the source's additive group and separate multiplicative factors. The additive group includes Farming, meals, Dancing Coral, Grid, Zenith Market, Worship Totalizer, Sailing/Slab, Spelunking epilogue, owned card levels, Arcade, the Prehistoric set, and Spelunking shop reward. Attribute the Totalizer contribution to its generated Gaming Superbit name. Separate factors cover Grid `70`, Equinox, The Button, Killroy, companions, Sushi, The Hole, Jelly, and the selected Royal Outpost contribution. Use the producer contract below rather than description arithmetic.
 - **Insight:** Parse each Observation's partial EXP from `Research[3]`. Calculate its next requirement from its index and current Insight level through the source-derived requirement rule. Optical Monocles produce the base rate, modified by Grid `91/92`, Emporium `46`, Jelly `7`, and actual Kaleidoscope support. Grid `93` modifies local Research EXP; Grid `94` uses total Observation levels. Do not merge those effects.
-- **Units and source discrepancy:** Both EXP and Insight accrual use hourly rates; the caller multiplies by effective seconds divided by `3600`. The original UI labels both rates per hour. Its Insight display additionally multiplies by the shared Research EXP multiplier, while accrual does not. Expose Insight accrual and game-displayed Insight as distinct named results. Label the discrepancy; do not assert the displayed figure is actual production.
+- **Units and source discrepancy:** Both EXP and Insight accrual use hourly rates; the caller multiplies by effective seconds divided by `3600`. The original UI labels both rates per hour. Its Insight display additionally multiplies by the shared Research EXP multiplier, while accrual does not. Retain accrual and game-displayed Insight as distinct named backend results. The public UI shows actual accrual only; it does not expose the game's differing displayed figure.
 - **Offline percentage:** Add percentage-point contributions to the 1% baseline, then apply the 1% floor and 100% cap. Sources are companion `28`, The Hole Gambit `15`, Minehead rewards `1/10`, Grid `71/111`, Sailing artifact `36` status capped at six, owned card `w7b11` level capped at ten, companion `153` active and level-two bonuses, Professional Papers purchases, and Sushi rewards `4/24`. Companion `153` contributes `20 × active bonus + 10 × level-two bonus`; Papers contribute two percentage points per purchase. The Research branch does not use the generic skilling AFK additions.
 - **Ownership-sensitive milestones:** Reached notes follow account level. Shape milestones occur at `20/30/50/80/110`. Current Shape count adds Event Shop `36` and level-20-gated companion `54` and Spelunking Lore `7`, then caps at ten. Shapes occupy the ordered catalogue prefix up to that count. Show a Shape milestone's extra count and current external ownership context, not its illustration as a promised next reward. Do not attribute current outside rewards to an earlier note. At the cap, an upcoming Shape milestone cannot add another owned Shape.
 - **Point milestone context:** From level `60`, the current Points-per-ten-level term gains an additional Point for every reached ten-level block. Grid `50` purchased level also contributes to that term. Explain this cumulative rule beside the note; Point balances remain Part 2.
@@ -170,7 +172,7 @@ The later World 7 UI consumes typed results through existing account data flow. 
 ## Delivery prerequisites
 
 - **Producer completion:** Add source-equivalent direct outputs where existing owners lack them, including temporary equipment sets and the selected Royal Outpost bonus. Use the public API and phase contract above. These are Part 1 integration responsibilities, not missing product scope.
-- **Saved EXP provenance:** The proposed reference-copy policy supplies supported saved EXP context without inventing account EXP authority. It must remain visible in the public result and rendered text.
+- **Saved EXP provenance:** The reference-copy policy supplies supported saved EXP context without inventing account EXP authority. Retain provenance in the public domain result for comparisons; omit provenance labels from rendered text.
 - **Paired evidence:** Obtain original-game values matching the retained real save and reference character. Historical warmed offline outputs and source-only queries do not establish pairing or connected live-game parity.
 
 Keep prerequisites within Part 1; do not reduce scope or create prerequisite tickets. Reset-time claims and away-time simulations are unnecessary.

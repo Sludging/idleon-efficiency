@@ -1,4 +1,4 @@
-import { Box, CheckBox, Grid, Heading, Select, Text } from 'grommet';
+import { Box, CheckBox, Grid, Select, Text } from 'grommet';
 import IconImage from '../../base/IconImage';
 import ShadowBox from '../../base/ShadowBox';
 import TextAndLabel, { ComponentAndLabel } from '../../base/TextAndLabel';
@@ -31,7 +31,6 @@ export default function SpelunkingDisplay({
 
     return (
         <Box gap="medium">
-            <Heading level="2" size="medium" margin={{ top: 'medium', bottom: 'none' }} style={{ fontWeight: 'normal' }}>Spelunking</Heading>
             <Box direction="row" wrap align="center" gap="medium">
                 <Text size="small" color="accent-2">Account discoveries: <Text size="small" weight={500}>{ordinarySummary.found} / {ordinarySummary.capacity}</Text> found</Text>
                 <Text size="small" color="accent-2">Account Grand Discoveries: <Text size="small" weight={500}>{grandSummary.found} / {grandSummary.capacity}</Text> found</Text>
