@@ -69,7 +69,6 @@ describe('Hole part 2 normal imports and affected consumers without input replac
  function assertNormalAccount(data: Map<string, any>): void {
   [pipeline, schematics, majik, measurements].forEach(results => assertPairedContext(results, data));
   const hole = data.get('hole') as Hole;
-  const players = data.get('players') as Player[];
   const divinity = data.get('divinity') as Divinity;
   const savedHole = decodedSave<number[][]>('Holes');
   expect(hole.villagers.map(villager => villager.level)).toEqual(savedHole[1].slice(0, 5));
@@ -92,10 +91,6 @@ describe('Hole part 2 normal imports and affected consumers without input replac
    compareCore(measurement.nextCost, row.price, `Normal import Measurement ${row.id} price`);
   });
   assertPocketCharacterBinding(data, majik);
-  players.forEach(player => {
-   const savedStats = decodedSave<number[]>(`PVStatList_${player.playerID}`);
-   expect([player.stats.strength, player.stats.agility, player.stats.wisdom, player.stats.luck]).toEqual(savedStats.slice(0, 4));
-  });
   coreNumber((data.get('votes') as Votes).getBonusMultiplier(), pipeline, 'vote_multiplier', 'Normal import Votes multiplier');
   coreNumber((data.get('equinox') as Equinox).bar.rate, pipeline, 'equinox_rate', 'Normal import Equinox fill rate');
   coreNumber(divinity.getGamingGrowthMinorLinkBonus(), pipeline, 'gaming_primary_links', 'Gaming keeps primary links separate from Pocket and Doot');

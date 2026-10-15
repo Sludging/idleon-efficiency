@@ -250,7 +250,8 @@ export class Villager {
             ? null : Math.floor(this.opals / 10) * inputs.enthusiasmPerTen;
         const enthusiasmReason = !this.investmentAvailable ? "Saved Opal investment is missing."
             : inputs.villageMajikUnavailableReason;
-        const additiveBonus = (inputs.bravery ?? 0) + ((inputs.justice ?? 0) + (inputs.wisdom ?? 0) + (inputs.slabItemsMeasurement
+        const additiveBonus = inputs.slabItemsMeasurement === null || inputs.tomeMeasurement === null
+            ? null : (inputs.bravery ?? 0) + ((inputs.justice ?? 0) + (inputs.wisdom ?? 0) + (inputs.slabItemsMeasurement
             + ((enthusiasm ?? 0) + (inputs.contentedCreator + (inputs.enhancedMajik + (inputs.gloomieSchematic
             + ((inputs.gloomieCardPercent ?? 0) + (inputs.bell + (inputs.tomeMeasurement
             + (inputs.summoningPercent + inputs.vaultPercent))))))))));
@@ -348,13 +349,16 @@ export class Villager {
                     ?? inputs.equalSpreadUnavailableReason
                     ?? inputs.monumentUnavailableReason
                     ?? inputs.gloomieSchematicUnavailableReason
-                    ?? (context.statueBonus === null ? "Saved Villager Statue state is missing for this character." : null);
+                    ?? (context.statueBonus === null ? "Saved Villager Statue state is missing for this character." : null)
+                    ?? (additiveBonus === null ? inputs.measurementUnavailableReason
+                        ?? (inputs.slabItemsMeasurement === null ? "Saved Slab Measurement inputs are missing."
+                            : "Saved Tome Measurement inputs are missing.") : null);
             const accountMultiplier = (1 + inputs.compassPercent / 100) * (1 + inputs.legendPercent / 100)
                 * (1 + inputs.pristinePercent / 100) * (1 + 2 * inputs.companionBonus)
                 * (1 + (context.statueBonus ?? 0) / 100) * (1 + (inputs.jarPercent ?? 0) / 100)
                 * (1 + 25 * Number(inputs.eventShopOwned) / 100) * (1 + inputs.lorePercent / 100)
                 * (1 + 50 * (inputs.bundleBonus ?? 0) / 100);
-            const growth: VillagerGrowthInputs | null = reason === null ? {
+            const growth: VillagerGrowthInputs | null = reason === null && additiveBonus !== null ? {
                 roleMultiplier, opalExp: inputs.opalExp, accountMultiplier, exoticBonus: inputs.exoticPercent,
                 arcadeBonus: inputs.arcadePercent, grimoireBonus: inputs.grimoirePercent,
                 arcaneBonus: inputs.arcanePercent, equalSpreadBonus: inputs.equalSpreadPercent!, additiveBonus,
