@@ -140,7 +140,8 @@ const parameterSpecs = {
     extractionKey: 'gear_bonus_etc_bonuses_30',
     domainExtractor: (gameData: Map<string, any>) => {
       const players = gameData.get("players") as Player[];
-      return getTargetPlayer(players).getEquipmentBonus(EquipmentBonus.BuildSpeed);
+      const player = getTargetPlayer(players);
+      return player.gear.getBonus(EquipmentBonus.BuildSpeed);
     }
   },
 };

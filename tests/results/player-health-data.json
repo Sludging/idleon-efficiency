@@ -436,14 +436,6 @@
       "expression": "idleon.callFunction(\"Summoning\", \"VaultUpgBonus\", 86, 0)",
       "result": 25
     },
-    "sushi_gold_food_10": {
-      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 10, 0)",
-      "result": 100
-    },
-    "sushi_gold_food_51": {
-      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 51, 0)",
-      "result": 0
-    },
     "exalted_stamp_bonus": {
       "expression": "idleon.callFunction(\"Windwalker\", \"StampDoubler\", 0, 0)",
       "result": 211.5018315018315

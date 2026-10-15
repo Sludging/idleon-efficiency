@@ -1,5 +1,6 @@
 import type { GoldenFood } from '../../../data/domain/golden-food';
 import type { Player } from '../../../data/domain/player';
+import { Talent } from '../../../data/domain/talents';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
@@ -30,8 +31,32 @@ describe('Shared golden-food results', () => {
     );
   });
 
+  it('matches the golden-food all-stat contribution in raw percentage points', () => {
+    expect(goldenFood.getAllStatPercent(player)).toMatchLiveGameWithDetails(
+      getExtractedValue(results, 'golden_all_stat_percent'),
+      { tolerance: 0, context: `Player ${player.playerID} golden-food all-stat percentage points` },
+    );
+  });
+
+  it.each([
+    ['getDefencePercent', 'golden_defence_percent', 'raw Defence percentage points'],
+    ['getBaseAccuracy', 'golden_base_accuracy', 'flat base Accuracy'],
+  ] as const)('matches golden-food %s', (method, key, effect) => {
+    expect(goldenFood[method](player)).toMatchLiveGameWithDetails(
+      getExtractedValue(results, key),
+      { tolerance: 0, context: `Player ${player.playerID} golden-food ${effect}` },
+    );
+  });
+
+  it('matches golden-food drop rate in raw percentage points', () => {
+    expect(goldenFood.getDropRatePercent(player)).toMatchLiveGameWithDetails(
+      getExtractedValue(results, 'golden_drop_rate_percent'),
+      { tolerance: 0, context: `Player ${player.playerID} golden-food drop-rate percentage points` },
+    );
+  });
+
   it.each([0, 7])('keeps candidate owner %s separate from the recipient and map owner', ownerIndex => {
-    expect(player.getAccountTalentBonus([players[ownerIndex]], 209, player.finalTalentInputs))
+    expect(Talent.getAccountTalentBonus([players[ownerIndex]], 209, player.finalTalentInputs))
       .toMatchLiveGame(getExtractedValue(results, `death_bringer_candidate_${ownerIndex}`), 0);
   });
 });

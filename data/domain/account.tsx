@@ -8,6 +8,7 @@ import { Item } from "./items";
 import { Player } from "./player";
 import { Quests } from "./quests";
 import { Storage } from "./storage";
+import { WeeklyBoss } from "./weekly-boss";
 
 // Option List Indexes:
 // 15 = Colo1 Tix
@@ -124,6 +125,10 @@ export class Account extends Domain {
     miniBosses: Miniboss[] = [];
     totalMoney: number = 0;
     talentsMaxLevels: number[] = [];
+    plunderousMobKills: number = 0;
+    hasDeathBringerBundle: boolean = false;
+    hasExplorerBundle: boolean = false;
+    weeklyBoss: WeeklyBoss = new WeeklyBoss();
 
     // corresponds to a.engine.getGameAttribute("CurrenciesOwned").h.TalentPoints
     talentPointsOwned: number[] = [];
@@ -184,6 +189,15 @@ export class Account extends Domain {
         const minigamesHighscores = data.get("FamValMinigameHiscores") as number[];
         const talentPointsOwned = data.get("CYTalentPoints") as number[];
         const charCount = data.get("charCount") as number;
+
+        account.plunderousMobKills = Number(optionList?.[139] ?? 0);
+        account.weeklyBoss.parse(optionList);
+        const rawData = data.get("rawData") as Record<string, string | undefined>;
+        const bundles: Record<string, string | number> = rawData.BundlesReceived === undefined
+            ? {}
+            : JSON.parse(rawData.BundlesReceived);
+        account.hasDeathBringerBundle = Number(bundles.bun_v) === 1;
+        account.hasExplorerBundle = Number(bundles.bun_p) === 1;
 
         account.talentPointsOwned = [];
         talentPointsOwned.forEach((points) => {

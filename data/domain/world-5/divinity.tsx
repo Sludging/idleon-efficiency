@@ -9,6 +9,7 @@ import { DivinityStyleModel } from "../model/divinityStyleModel";
 import { GodInfoModel } from "../model/godInfoModel";
 import { Activity, Player } from "../player";
 import { SkillsIndex } from "../SkillsIndex";
+import type { Skilling } from "../skilling";
 import { Hole } from "./hole/hole";
 import { Sneaking } from "../world-6/sneaking";
 import { CoralKid } from "../world-7/coralKid";
@@ -28,7 +29,9 @@ export class DivinityGod {
 
 
     static fromBase = (data: GodInfoBase[]): DivinityGod[] => {
-        const godData = data.map(god => new DivinityGod(god.index, god.data));
+        const godData = data.map(god => god.index == 2
+            ? new NobisectGod(god.index, god.data)
+            : new DivinityGod(god.index, god.data));
         const godCopy = JSON.parse(JSON.stringify(godData));
 
         // Fix up the bonus texts based on bonus index, because ... Lava.
@@ -60,12 +63,7 @@ export class DivinityGod {
         return this.data.blessingBonus.replace("{", this.getBlessingBonus().toString());
     }
 
-    getBlessingBonus = () => {
-        if (this.index == 2) {
-            // TODO: Fix this properly, bit weird with skilling eff
-            return 0;
-        }
-
+    getBlessingBonus = (_player?: Player): number => {
         return this.blessLevel *
             this.data.blessingPerLevel *
             (1 + (this.jadeUpgradeBlessingBonus / 100) * this.godRank);
@@ -77,6 +75,49 @@ export class DivinityGod {
             width: 108,
             height: 97
         }
+    }
+}
+
+export class NobisectGod extends DivinityGod {
+    private alchemy!: Alchemy;
+    private skilling!: Skilling;
+
+    updateBlessingInputs(alchemy: Alchemy, skilling: Skilling): void {
+        this.alchemy = alchemy;
+        this.skilling = skilling;
+    }
+
+    override getBlessingBonusText = (): string => {
+        return "Base skill efficiency bonus varies by character.";
+    }
+
+    override getBlessingBonus = (player?: Player): number => {
+        if (!player) {
+            throw new Error("Nobisect's blessing bonus requires an explicit player.");
+        }
+
+        const allEfficiencies = this.skilling.getAllEfficiencies(player);
+        const miningEfficiency = this.alchemy.getBubbleBonusForKey("MinEff", player);
+        const choppingEfficiency = this.alchemy.getBubbleBonusForKey("ChopEff", player);
+
+        // Nobisect adds base efficiency; independent all-skill efficiency, bubbles and attributes set its scaling input.
+        // Source: docs/game-snippets/divinity/Divinity.1.22.js:50-55.
+        const efficiencyBase = Math.max(
+            1,
+            allEfficiencies
+            + Math.pow((miningEfficiency + choppingEfficiency) / 100, 2)
+            + Math.pow((player.stats.strength + (player.stats.agility + player.stats.wisdom)) / 3, 0.5) / 7,
+        );
+        // Higher efficiency damps the blessing multiplier, clamped from 0.1 to 1.8.
+        // Source: docs/game-snippets/divinity/Divinity.1.22.js:57-65.
+        const efficiencyFactor = Math.min(
+            1.8,
+            Math.max(
+                0.1,
+                4 * Math.pow(((efficiencyBase + 10000) / Math.max(10 * efficiencyBase + 10, 1)) * 0.01, 2),
+            ),
+        );
+        return this.blessLevel * this.data.blessingPerLevel * efficiencyFactor;
     }
 }
 
@@ -239,4 +280,12 @@ export const updateDivinity = (data: Map<string, any>) => {
     })
 
     return divinity;
+}
+
+export const updateDivinityBlessings = (data: Map<string, any>): void => {
+    const divinity = data.get("divinity") as Divinity;
+    const alchemy = data.get("alchemy") as Alchemy;
+    const skilling = data.get("skilling") as Skilling;
+
+    (divinity.gods[2] as NobisectGod).updateBlessingInputs(alchemy, skilling);
 }

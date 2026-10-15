@@ -60,6 +60,16 @@ describe('Hat Rack Domain - Premium Hat Bonuses', () => {
    });
   });
  });
+ for (const property of ['AGI', 'WIS', 'LUK', 'Defence'] as const) {
+  it(`matches deposited hats raw ${property}`, () => {
+   const results = loadExtractionResults('player-equipment-properties-data.json');
+   validateExtractionHealth(results);
+   const rack = gameData.get('hatRack') as HatRack;
+   expect(rack.getProperty(property, player)).toMatchLiveGameWithDetails(getExtractedValue(results, `hat_${property}`), {
+    tolerance: 0, context: `Target player Hat Rack raw ${property}`,
+   });
+  });
+ }
  it('matches the complete eligible premium-hat catalog', () => {
   const expectedNames = getExtractedNames(extractionResults, 'hat_rack_eligible_hats');
   const actualNames = (gameData.get('hatRack') as HatRack).hats.map(hat => hat.internalName);

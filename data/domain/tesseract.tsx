@@ -953,9 +953,9 @@ export const updateTesseractEfficiency = (accountData: Map<string, any>) => {
                 tesseract.bestArcaneCultist = arcaneCultist;
                 
                 // Set ETC bonuses from Arcane Cultist equipment
-                tesseract.etcBonus93 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ArcanistDamage);
-                tesseract.etcBonus94 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ArcanistAccuracy);
-                tesseract.etcBonus95 = arcaneCultist.getEquipmentBonus(EquipmentBonus.ExtraTachyons);
+                tesseract.etcBonus93 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistDamage);
+                tesseract.etcBonus94 = arcaneCultist.gear.getBonus(EquipmentBonus.ArcanistAccuracy);
+                tesseract.etcBonus95 = arcaneCultist.gear.getBonus(EquipmentBonus.ExtraTachyons);
             }
 
             // Set pristine bonus 22 from sneaking

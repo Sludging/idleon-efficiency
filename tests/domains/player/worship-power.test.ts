@@ -1,43 +1,24 @@
 import type { Player } from '../../../data/domain/player';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import * as PlayerDomain from '../../../data/domain/player';
+import { updatePlayerPowers } from '../../../data/domain/player-stats';
+import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import {
-  getExtractedValue,
   loadExtractionResults,
   validateExtractionHealth,
 } from '../../utils/live-game-data-loader';
 import { getTargetPlayer } from '../../utils/target-player';
 
 // The retained target character equips a Worship skull. Its power belongs in this total.
-const extractionResultsName = 'player-worship-power-data.json';
-
-// Remove these missing-API adapters when Player owns the prepared Worship Power result.
-const getWorshipPower = (player: Player): number => {
-  const candidate = player as Player & { getWorshipPower?: () => number };
-  if (typeof candidate.getWorshipPower !== 'function') {
-    throw new Error('Missing Player.getWorshipPower(): Worship Power must match TotalStats("Worship_Power").');
-  }
-  return candidate.getWorshipPower();
-};
-
-const updateWorshipPower = (gameData: Map<string, any>): void => {
-  const candidate = PlayerDomain as typeof PlayerDomain & {
-    updatePlayerWorshipPower?: (accountData: Map<string, any>) => void;
-  };
-  if (typeof candidate.updatePlayerWorshipPower !== 'function') {
-    throw new Error('Missing updatePlayerWorshipPower(accountData): prepare Player Worship Power from TotalStats("Worship_Power").');
-  }
-  candidate.updatePlayerWorshipPower(gameData);
-};
+const extractionResultsName = 'player-powers-data.json';
 
 const getExpectedPower = (): number => {
   const results = loadExtractionResults(extractionResultsName);
   validateExtractionHealth(results);
-  return getExtractedValue(results, 'worship_power');
+  return results.extractions.powers.result.powers.worship;
 };
 
 describe('Player Worship Power', () => {
-  let gameData: Map<string, any>;
+  let gameData: Map<string, unknown>;
   let player: Player;
 
   beforeAll(() => {
@@ -45,19 +26,12 @@ describe('Player Worship Power', () => {
     player = getTargetPlayer(gameData.get('players') as Player[]);
   });
 
-  it('matches the target character Worship Power after normal account processing', () => {
-    const actual = getWorshipPower(player);
-    expect(actual).toMatchLiveGameWithDetails(getExpectedPower(), {
-      tolerance: 0,
-      context: `Player ${player.playerID} Worship Power`,
-    });
-  });
 
   it('keeps Worship Power unchanged when the same equipment and account bonuses are prepared twice', () => {
-    updateWorshipPower(gameData);
-    const firstPower = getWorshipPower(player);
-    updateWorshipPower(gameData);
-    const repeatedPower = getWorshipPower(player);
+    updatePlayerPowers(gameData);
+    const firstPower = player.stats.getSkillPower(SkillsIndex.Worship);
+    updatePlayerPowers(gameData);
+    const repeatedPower = player.stats.getSkillPower(SkillsIndex.Worship);
     const expected = getExpectedPower();
 
     expect(firstPower).toMatchLiveGameWithDetails(expected, {

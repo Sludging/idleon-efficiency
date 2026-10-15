@@ -1,12 +1,7 @@
 {
-  "description": "Player Worship Power and its direct Alchemy contributions for the retained target character",
-  "target": "Player Worship Power",
+  "description": "Direct M2/M7 Alchemy Worship Power contributions for the retained target. Authoritative core oracle moved to player-powers.json bounded native replay.",
+  "target": "Worship Power direct Alchemy inputs",
   "extractions": [
-    {
-      "label": "worship_power",
-      "expression": "idleon.callFunction(\"TotalStats\", \"Worship_Power\")",
-      "description": "Prepared Worship Power, including equipped power and both Alchemy contributions"
-    },
     {
       "label": "alchemy_worship_power_m2",
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.M2",

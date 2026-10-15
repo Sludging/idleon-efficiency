@@ -6,12 +6,12 @@ import { ImageData } from '../../imageData';
 import { Item } from '../../items';
 import { Lab } from '../../world-4/lab';
 import { Sailing } from '../../world-5/sailing/sailing';
-import { ArtifactStatus } from '../../world-5/sailing/artifacts';
 
 export const ShrineConstants = {
     DmgShrine: 0,
     HpDefShrine: 1,
     CarryShrine: 3,
+    DropRateShrine: 4,
     ExpShrine: 5,
     CrystalShrine: 6
 }
@@ -55,6 +55,15 @@ export class Shrine {
         }
 
         return (1 + this.cchizBonus / 100) * (((this.level - 1) * this.increment) + this.initialBonus);
+    }
+
+    getMapIndependentBonus(): number {
+        // Source 1.22: only Moai Head's permanent activation survives map-independent calculations.
+        if (!this.artifactAcquired || !(this.level > 0.5)) {
+            return 0;
+        }
+
+        return this.getBonus();
     }
 
     getBonusText = (map: number | undefined = undefined) => {
@@ -113,12 +122,13 @@ export const updateShrines = (data: Map<string, any>) => {
     const sailing = data.get("sailing") as Sailing;
     const cards = data.get("cards") as Card[];
 
-    const cchizBonus = cards.find((card) => card.id == "Boss3B")!.getBonus();
+    // Source 1.22: Chaotic Chizoar adds five percentage points per native card level, without bonus amplification.
+    const cchizBonus = 5 * cards.find((card) => card.id == "Boss3B")!.getLevels();
     const worldTour = lab.bonuses.find(bonus => bonus.name == "Shrine World Tour")?.active ?? false;
-    const shrineArtifact = sailing.artifacts[0];
+    const artifactAcquired = sailing.artifacts[0].getBonus() >= 1;
     shrines.forEach(shrine => {
         shrine.worldTour = worldTour
-        shrine.artifactAcquired = shrineArtifact.status != ArtifactStatus.Unobtained;
+        shrine.artifactAcquired = artifactAcquired;
         shrine.cchizBonus = cchizBonus;
     });
 

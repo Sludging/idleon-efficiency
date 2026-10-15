@@ -23,7 +23,6 @@ import type { Sneaking } from '../../../data/domain/world-6/sneaking';
 import type { Votes } from '../../../data/domain/world-2/votes';
 import type { LegendTalents } from '../../../data/domain/world-7/legendTalents';
 import type { UpgradeVault } from '../../../data/domain/upgradeVault';
-import type { SushiStation } from '../../../data/domain/world-7/sushi';
 import type { Family } from '../../../data/domain/family';
 import { ClassIndex } from '../../../data/domain/talents';
 import type { Divinity } from '../../../data/domain/world-5/divinity';
@@ -46,6 +45,7 @@ const extractionResultsName = 'player-health-data.json';
 type ParameterSpec = {
   key: string;
   description: string;
+  resultsFile?: 'player-attribute-sources-data.json';
   getValue: (gameData: Map<string, any>, player: Player) => number;
 };
 
@@ -135,7 +135,9 @@ const parameterSpecs: ParameterSpec[] = [
   {
     key: 'equipment_hp',
     description: 'maximum HP percentage from equipment effects',
-    getValue: (_gameData, player) => player.getEquipmentBonus(EquipmentBonus.MaxHp),
+    getValue: (_gameData, player) => {
+      return player.gear.getBonus(EquipmentBonus.MaxHp);
+    },
   },
   {
     key: 'active_hp_penalty',
@@ -182,7 +184,9 @@ const parameterSpecs: ParameterSpec[] = [
   {
     key: 'equipment_gold_food',
     description: 'golden-food effectiveness from equipment',
-    getValue: (_gameData, player) => player.getEquipmentBonus(EquipmentBonus.GoldFoodEffect),
+    getValue: (_gameData, player) => {
+      return player.gear.getBonus(EquipmentBonus.GoldFoodEffect);
+    },
   },
   {
     key: 'talent_99',
@@ -243,9 +247,10 @@ const parameterSpecs: ParameterSpec[] = [
     getValue: (gameData) => (gameData.get('upgradeVault') as UpgradeVault).getBonusForId(86),
   },
   ...[10, 51].map((index): ParameterSpec => ({
-    key: `sushi_gold_food_${index}`,
-    description: `golden-food effectiveness from Sushi ${index}`,
-    getValue: (gameData) => (gameData.get('sushi') as SushiStation).getBonusFromIndex(index),
+    key: `jelly_${index}`,
+    description: `golden-food effectiveness from Jelly obstruction ${index}`,
+    resultsFile: 'player-attribute-sources-data.json',
+    getValue: (gameData) => (gameData.get('jellyOperator') as JellyOperator).getObstructionBonus(index),
   })),
   {
     key: 'family_gold_food',
@@ -350,17 +355,20 @@ describe.each([
   let gameData: Map<string, any>;
   let player: Player;
   let extractionResults: ExtractionResults;
+  let attributeResults: ExtractionResults;
 
   beforeAll(() => {
     gameData = loadGameDataFromSave('latest');
     player = getTargetPlayer(gameData.get('players') as Player[]);
     extractionResults = loadExtractionResults(extractionResultsName);
     validateExtractionHealth(extractionResults);
+    attributeResults = loadExtractionResults('player-attribute-sources-data.json');
+    validateExtractionHealth(attributeResults);
   });
 
-  specs.forEach(({ key, description, getValue }) => {
+  specs.forEach(({ key, description, getValue, resultsFile }) => {
     it(`matches ${description}`, () => {
-      const expected = getExtractedValue(extractionResults, key);
+      const expected = getExtractedValue(resultsFile ? attributeResults : extractionResults, key);
       expect(getValue(gameData, player)).toMatchLiveGame(expected, 0);
     });
   });

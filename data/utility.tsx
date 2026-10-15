@@ -20,6 +20,13 @@ export const lavaFunc = (func: string, level: number, x1: number, x2: number, ro
                 result = level * x1;
             }
             break;
+        case 'addDECAY':
+            if (level < 50001) {
+                result = x1 * level;
+            } else {
+                result = x1 * Math.min(50000, level) + ((level - 50000) / (level - 50000 + 150000)) * x1 * 50000;
+            }
+            break;
         case 'decay':
             result = (level * x1) / (level + x2);
             break;

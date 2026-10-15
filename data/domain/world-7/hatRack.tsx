@@ -8,6 +8,7 @@ import type { Minehead } from "./minehead";
 import type { SushiStation } from "./sushi";
 import { TypeGenEnum } from "../enum/typeGenEnum";
 import type { ArmourItemModel } from "../model/armourItemModel";
+import type { ItemProperty } from "../equipment-effects";
 
 type ItemEffect = { effect: string; value: number };
 
@@ -97,6 +98,11 @@ export class HatRack extends Domain {
         if (!this.isUnlocked(player)) return 0;
         return this.calculatedBonuses.get(effect) ?? 0;
     }
+    getProperty(property: ItemProperty, player: Player): number {
+        // Keep the existing display key for the prepared weapon-power channel.
+        return this.getBonus(property === "Weapon_Power" ? "Weapon Power" : property, player);
+    }
+
 
     updateContributions(data: Map<string, any>): void {
         const companions = data.get("companions") as Companion[];

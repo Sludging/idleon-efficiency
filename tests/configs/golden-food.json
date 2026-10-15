@@ -3,6 +3,11 @@
   "target": "Golden food",
   "extractions": [
     {
+      "label": "golden_drop_rate_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"DropRatez\")",
+      "description": "Golden-food drop-rate contribution in raw percentage points, with equipped and Beanstalk effects."
+    },
+    {
       "label": "golden_hp",
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
       "description": "Golden-food maximum-HP multiplier."
@@ -16,6 +21,21 @@
       "label": "golden_skill_exp",
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"SkillExp\")",
       "description": "Golden-food skill experience percentage."
+    },
+    {
+      "label": "golden_all_stat_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"AllStatz\")",
+      "description": "Golden-food all-stat contribution in raw percentage points, without rounding or division by 100."
+    },
+    {
+      "label": "golden_defence_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"Defence\")",
+      "description": "Golden-food Defence in raw percentage points; no division or multiplier conversion."
+    },
+    {
+      "label": "golden_base_accuracy",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"BaseAcc\")",
+      "description": "Golden-food flat base Accuracy."
     },
     {
       "label": "golden_effectivity",

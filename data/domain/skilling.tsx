@@ -101,7 +101,7 @@ export class Skilling extends Domain {
 
             // Preserve the source's A/B/E addition tree and six-factor multiplication order.
             const factorA = 1 + ((family.getClassBonus(ClassIndex.Hunter)?.getBonus(player) ?? 0)
-                + (player.getEquipmentBonus(EquipmentBonus.SkillEfficiency) + vialSkillEfficiency
+                + (player.gear.getBonus(EquipmentBonus.SkillEfficiency) + vialSkillEfficiency
                     + (artifactBonus + questBonus))) / 100;
             const factorB = 1 + (mealSkillEfficiency + player.getTalentBonus(646)
                 + (tome.getTomeBonus(1, player) + paletteBonus)
@@ -163,7 +163,7 @@ export class Skilling extends Domain {
         const prayerIncrease = prayers.filter(prayer => [2, 17].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getBonus(), 0) ?? 0;
         const prayerDecrease = prayers.filter(prayer => [1, 9].includes(prayer.index) && player.activePrayers.includes(prayer.index)).reduce((sum, prayer) => sum += prayer.getCurse(), 0) ?? 0;
         const masteroBuff = player.activeBuffs.find(talent => talent.skillIndex == 40)?.getBonus() ?? 0;
-        const equipmentBonus = player.getEquipmentBonus(EquipmentBonus.SkillExp);
+        const equipmentBonus = player.gear.getBonus(EquipmentBonus.SkillExp);
         const starSignBonus = player.starSigns.reduce((sum, sign) => sum += sign.getBonus("Skill EXP gain"), 0);
         const summoningBonus = summoning.summonBonuses?.find(bonus => bonus.data.bonusId == 13)?.getBonus() || 0;
         const guildBonus = guild.guildBonuses.find(bonus => bonus.index == 14)?.getBonus() ?? 0;

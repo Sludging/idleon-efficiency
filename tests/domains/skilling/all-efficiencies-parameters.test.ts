@@ -63,7 +63,10 @@ const parameterSpecs: Record<string, ParameterTestSpec> = {
  all_eff_etc_bonus_48: {
   description: 'Target Player equipment EtcBonuses(48) / Skill Efficiency',
   extractionKey: 'all_eff_etc_bonus_48',
-  domainExtractor: (gameData) => getPlayer(gameData).getEquipmentBonus(EquipmentBonus.SkillEfficiency),
+  domainExtractor: (gameData) => {
+   const player = getPlayer(gameData);
+   return player.gear.getBonus(EquipmentBonus.SkillEfficiency);
+  },
  },
  all_eff_vial_6_skill_eff: {
   description: 'Alchemy 6SkillEff vial bonus',

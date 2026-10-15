@@ -298,16 +298,6 @@
       "description": "Upgrade Vault golden-food effectiveness"
     },
     {
-      "label": "sushi_gold_food_10",
-      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 10, 0)",
-      "description": "Sushi 10 golden-food contribution"
-    },
-    {
-      "label": "sushi_gold_food_51",
-      "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 51, 0)",
-      "description": "Sushi 51 golden-food contribution"
-    },
-    {
       "label": "exalted_stamp_bonus",
       "expression": "idleon.callFunction(\"Windwalker\", \"StampDoubler\", 0, 0)",
       "description": "Complete exalted stamp percentage bonus"

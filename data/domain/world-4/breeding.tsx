@@ -401,6 +401,7 @@ export class Breeding extends Domain {
     basePets: Pet[] = [];
     fenceyardPets: Pet[] = [];
     storedPets: Pet[] = [];
+    firstStoredPetPower: number = 0;
     shinyBonuses: ShinyBonus[] = [];
 
     speciesUnlocks: number[] = [];
@@ -480,7 +481,10 @@ export class Breeding extends Domain {
         const breeding = data.get(this.getDataKey()) as Breeding;
         const optionList = data.get("OptLacc") as number[];
 
-        const petsStored = data.get("PetsStored") as any[][];
+        const petsStored = (data.get("PetsStored") ?? []) as [string, number | string, number, number][];
+        // Animalistic Ferocity uses the first raw slot, even when its species is filtered from the display list.
+        // Empty storage starts with zero-power slots in the game. Replace this input before any parse early return.
+        breeding.firstStoredPetPower = petsStored.length === 0 ? 0 : petsStored[0][2];
         const pets = data.get("Pets") as any[][];
         const territory = data.get("Territory") as any[][];
         const breedingData = data.get("Breeding") as number[][];

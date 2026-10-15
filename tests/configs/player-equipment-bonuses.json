@@ -61,6 +61,21 @@
       "label": "hat_rack_skill_efficiency",
       "expression": "idleon.getDNSM(\"PremHatBonTOT\").h[\"%_SKILL_EFFICIENCY\"]",
       "description": "Calculated Hat Rack Skill Efficiency contribution"
+    },
+    {
+      "label": "equipment_prepared_effects",
+      "expression": "idleon.engine.getGameAttribute(\"DNSM\").h.TotalStatsETCmap.h",
+      "description": "Complete already prepared ETC snapshot. Read only; never rebuild the cache. Raw property entries are not unique effects."
+    },
+    {
+      "label": "equipment_replacement_effects",
+      "expression": "({trophy: idleon.engine.getGameAttribute(\"DNSM\").h.GalleryTrophyBonTOT.h, nametag: idleon.engine.getGameAttribute(\"DNSM\").h.GalleryNametagBonTOT.h, hat: idleon.engine.getGameAttribute(\"DNSM\").h.PremHatBonTOT.h})",
+      "description": "Complete prepared replacement contributions for direct numerical unique-effect comparisons."
+    },
+    {
+      "label": "equipment_obol_effects",
+      "expression": "(() => { const values = {}; for (const row of idleon.engine.getGameAttribute(\"PixelHelperActor\")[0].behaviors.getBehavior(\"ActorEvents_29\")._ScrollCircleINFO[43]) values[row[0]] = Number(row[3]); return values; })()",
+      "description": "Combined Obol row totals. Unique effects remain unmodified by attribute percentages."
     }
   ]
 }

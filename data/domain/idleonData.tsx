@@ -4,7 +4,9 @@ import { Statues, updateStatueBonuses } from './world-1/statues';
 import { Players, playerExtraCalculations, updatePlayerDeathnote, updatePlayerStarSigns, updatePlayerTalentLevelExceptESBonus, updatePlayers, updatePlayerTalentLevelESBonus, updatePlayerTalentPoints, Player, updatePlayerSpecialTalents } from './player';
 import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubbles } from './world-2/alchemy/alchemy';
 import { updatePlayerTalentContexts } from './player';
+import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
+import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -12,7 +14,7 @@ import { Shrines, updateShrines } from './world-3/construction/shrines';
 import { Item } from './items';
 import { Storage, updateStorage } from './storage';
 import { Quests } from './quests';
-import { Prayers } from './world-3/prayers';
+import { Prayers, updatePrayerPlayerBonuses } from './world-3/prayers';
 import { Refinery, updateRefinery } from './world-3/construction/refinery';
 import { SaltLick } from './world-3/construction/saltLick';
 import { Printer, updatePrinter } from './world-3/construction/printer';
@@ -34,7 +36,7 @@ import { Sigils, updateSigils, updateSigilsChargeSpeed } from './world-2/alchemy
 import { AnvilWrapper, updateAnvil } from './world-1/anvil';
 import { Alerts, updateAlerts } from './alerts';
 import { Account, updateAccount } from './account';
-import { Divinity, updateDivinity } from './world-5/divinity';
+import { Divinity, updateDivinity, updateDivinityBlessings } from './world-5/divinity';
 import { Sailing, updateSailing, updateMinTravelTimeAndSpeed } from './world-5/sailing/sailing';
 import { Gaming, updateGaming, updateGamingDisplay, updateSuperbitImpacts } from './world-5/gaming';
 import { AtomCollider, updateAtomCollider } from './world-3/construction/atomCollider';
@@ -53,11 +55,11 @@ import { Equinox, updateEquinoxBar } from './world-3/equinox';
 import { POExtra } from './world-2/postoffice';
 import { Sneaking, updateSneaking } from './world-6/sneaking';
 import { Summoning, updateSummoningUpgrades, updateSummoningWinnerBonusBoost, updateSummoningWinnerImpact } from './world-6/summoning';
-import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
+import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, updateFarmingLandRankBonuses, updateFarmingLevel, updateFarmingStickerBonuses } from './world-6/farming';
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
-import { Minehead, updateMinehead } from './world-7/minehead';
+import { Minehead, updateMinehead, updateMineheadDropRate } from './world-7/minehead';
 import { Glimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
@@ -93,7 +95,7 @@ import { updateNonDepositedZenithClusters, ZenithMarket } from './world-7/zenith
 import { Gallery, updateGallery } from './world-7/gallery';
 import { HatRack, updateHatRack } from './world-7/hatRack';
 import { Skilling, updateAllEfficiencies } from './skilling';
-import { updateRightHandOfActionBonuses } from './talents';
+import { updateAttributeTalents, updatePowerTalents, updateRightHandOfActionBonuses } from './talents';
 import { updatePlayerHealth } from './player-health';
 
 export const safeJsonParse = <T,>(doc: Cloudsave, key: string, emptyValue: T): T => {
@@ -286,6 +288,8 @@ const postProcessingMap: Record<string, Function> = {
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
+    "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),
     // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
     "farmingStickerBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingStickerBonuses(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
@@ -365,15 +369,34 @@ const postProcessingMap: Record<string, Function> = {
     "capacity": (doc: Cloudsave, accountData: Map<string, any>) => updateCapacity(accountData),
     "votes": (doc: Cloudsave, accountData: Map<string, any>) => updateVotesBonus(accountData),
     "playerTalentContexts": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerTalentContexts(accountData),
+    // Prepare Will Of The Eldest's account-wide level cap before attribute source consumers.
+    "attributeTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updateAttributeTalents(accountData),
+    // Beginner Best Class uses its own beginner-line level cap before weapon-power consumers.
+    "powerTalents": (_doc: Cloudsave, accountData: Map<string, any>) => updatePowerTalents(accountData),
+    // Land Rank bonuses use final recipient contexts before stat consumers and Farming display snapshots.
+    "farmingLandRankBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updateFarmingLandRankBonuses(accountData),
+    // Equipment and Obol attribute modifiers consume each character's final talent context.
+    "equipmentProperties": (_doc: Cloudsave, accountData: Map<string, any>) => updateEquipmentProperties(accountData),
     "goldenFood": (_doc: Cloudsave, accountData: Map<string, any>) => updateGoldenFood(accountData),
+    // Calculate primary attributes after Golden Food and before attribute-dependent health.
+    "playerStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerStats(accountData),
     // Prepare each character's normal maxima before player-aware efficiency consumers.
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
+    "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
+    "playerSecondaryStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSecondaryStats(accountData),
+    // Character Prayer bonuses use parsed Superbits and preserve the distinction between absent and empty saved slots.
+    "prayerPlayerBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updatePrayerPlayerBonuses(accountData),
+    // Drop rate follows Luck and every prepared persistent source, including late Lab and Sigil results.
+    "playerDropRates": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDropRates(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),
     "construction": (doc: Cloudsave, accountData: Map<string, any>) => updateConstruction(accountData),
     "deathnoteEquinox": (doc: Cloudsave, accountData: Map<string, any>) => updateDeathnote(accountData),
     "equinox": (doc: Cloudsave, accountData: Map<string, any>) => updateEquinoxBar(accountData),
+    // Nobisect reads independent all-skill efficiency after attributes and health-scaled bubbles are ready.
+    "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
+    "divinityBlessings": (_doc: Cloudsave, accountData: Map<string, any>) => updateDivinityBlessings(accountData),
 }
 
 // I really really hate this.
@@ -387,7 +410,6 @@ const postPostProcessingMap: Record<string, Function> = {
     "traps": (doc: Cloudsave, accountData: Map<string, any>) => updateTrapDisplayData(accountData),
     "slab": (doc: Cloudsave, accountData: Map<string, any>) => updateSlabBonusDisplay(accountData),
     "playersExtraMaths": (doc: Cloudsave, accountData: Map<string, any>) => playerExtraCalculations(accountData),
-    "allEfficiencies": (doc: Cloudsave, accountData: Map<string, any>) => updateAllEfficiencies(accountData),
     "rightHandOfActionBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateRightHandOfActionBonuses(accountData),
     "anvil": (doc: Cloudsave, accountData: Map<string, any>) => updateAnvil(accountData),
     "refinery": (doc: Cloudsave, accountData: Map<string, any>) => updateRefinery(accountData),
