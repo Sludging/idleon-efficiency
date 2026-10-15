@@ -1,5 +1,5 @@
 {
-  "description": "Existing attribute producers for offline game 1.22 target 3 Sludgev4, paired retained save ed192e74636dc5303ac8a9fa158259a20b07c931c4537f0021ba4c2de93a6cdc. Read-only calls; no final attribute composition.",
+  "description": "Native four-attribute producers for delivered game 1.22 and the shared target player. Read-only calls; no final attribute composition.",
   "target": "M2 S1 existing four-attribute producer readiness",
   "extractions": [
     {

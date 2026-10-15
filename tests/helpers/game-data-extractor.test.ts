@@ -1,6 +1,8 @@
+import { createServer } from 'http';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import BatchExtractor from './extract-all-game-data';
 import GameDataExtractor from './game-data-extractor';
 import targetPlayerConfig from '../utils/target-player.json';
 
@@ -67,6 +69,84 @@ describe('GameDataExtractor active-player policy', () => {
       expression: `game.callFunction(${targetPlayerConfig.index})`,
       result: targetPlayerConfig.index
     });
+  });
+});
+
+describe('GameDataExtractor offline busy handling', () => {
+  const busyError = 'Offline runtime is busy; send requests serially';
+  const response = (status: number, body: Record<string, unknown>) => ({
+    ok: status >= 200 && status < 300,
+    status,
+    json: async () => body,
+  } as Response);
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.useRealTimers();
+  });
+
+  it('waits for pre-execution busy responses, then sends the same expression serially', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json');
+    const fetchMock = jest.spyOn(global, 'fetch')
+      .mockResolvedValueOnce(response(409, { error: busyError }))
+      .mockResolvedValueOnce(response(409, { error: busyError }))
+      .mockResolvedValueOnce(response(200, { result: 42 }));
+    const result = expect(extractor.executeExpression('game.value()')).resolves.toBe(42);
+
+    await jest.advanceTimersByTimeAsync(0);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await jest.advanceTimersByTimeAsync(250);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    await jest.advanceTimersByTimeAsync(250);
+    await result;
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    for (const [, options] of fetchMock.mock.calls) {
+      expect(JSON.parse(String(options?.body))).toEqual({ expression: 'game.value()' });
+    }
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  it.each([
+    [409, 'Another conflict'],
+    [500, 'Native evaluation failed'],
+    [500, busyError],
+  ])('does not retry terminal HTTP %s errors: %s', async (status, error) => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json');
+    const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue(response(status, { error }));
+
+    await expect(extractor.executeExpression('game.value()')).rejects.toThrow(
+      `Execution failed: ${error}`
+    );
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  it('does not retry network errors after a possibly executed expression', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json');
+    const fetchMock = jest.spyOn(global, 'fetch').mockRejectedValue(new Error('Connection lost'));
+
+    await expect(extractor.executeExpression('game.value()')).rejects.toThrow('Connection lost');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  it('fails after thirty seconds of pre-execution busy responses without another request', async () => {
+    const extractor = new GameDataExtractor('/tmp/config.json', '/tmp/results.json');
+    const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue(response(409, { error: busyError }));
+    const result = expect(extractor.executeExpression('game.value()')).rejects.toThrow(
+      'Offline runtime remained busy for 30000ms; expression was not executed'
+    );
+
+    await jest.advanceTimersByTimeAsync(30000);
+    await result;
+    expect(fetchMock).toHaveBeenCalledTimes(120);
+    await jest.advanceTimersByTimeAsync(1000);
+    expect(fetchMock).toHaveBeenCalledTimes(120);
+    expect(jest.getTimerCount()).toBe(0);
   });
 });
 
@@ -184,4 +264,58 @@ describe('GameDataExtractor persisted results', () => {
       expect(fs.statSync(outputPath).mtimeMs).not.toBe(originalMtime);
     }
   );
+});
+describe('BatchExtractor player server routing', () => {
+  it('routes a config requiring player zero to its explicitly selected server', async () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'batch-player-server-'));
+    const configPath = path.join(tempDir, 'player-zero.json');
+    const resultPath = path.join(tempDir, 'player-zero-data.json');
+    fs.writeFileSync(configPath, JSON.stringify({
+      requiredActivePlayerIndex: 0,
+      extractions: [{ label: 'value', expression: 'game.value()' }],
+    }));
+
+    const requests: Array<{ path: string; expression?: string }> = [];
+    const server = createServer(async (request, response) => {
+      if (request.url === '/status') {
+        requests.push({ path: request.url });
+        response.writeHead(200, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify({ status: 'ready', injected: true }));
+        return;
+      }
+
+      const chunks: Buffer[] = [];
+      for await (const chunk of request) chunks.push(Buffer.from(chunk));
+      const { expression } = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+      requests.push({ path: request.url || '', expression });
+      response.writeHead(200, { 'Content-Type': 'application/json' });
+      response.end(JSON.stringify({
+        result: expression.includes('GetPlayersUsernames') ? 0 : 'player-zero-value',
+      }));
+    });
+
+    try {
+      await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+      const address = server.address();
+      if (!address || typeof address === 'string') throw new Error('Test server did not bind');
+
+      const batch = new BatchExtractor({
+        outputDir: tempDir,
+        playerServers: { 0: `http://127.0.0.1:${address.port}` },
+      });
+      batch.configFiles = [{ name: 'player-zero.json', configPath, resultPath }];
+      await batch.extractAll();
+
+      expect(requests.map(request => request.path)).toEqual(['/status', '/exec', '/exec']);
+      expect(requests[1].expression).toContain('GetPlayersUsernames');
+      expect(requests[2]).toMatchObject({ path: '/exec', expression: 'game.value()' });
+      expect(JSON.parse(fs.readFileSync(resultPath, 'utf8')).extractions.value.result)
+        .toBe('player-zero-value');
+    } finally {
+      await new Promise<void>((resolve, reject) =>
+        server.close(error => error ? reject(error) : resolve())
+      );
+      fs.rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
 });

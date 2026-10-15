@@ -1,5 +1,5 @@
 {
-  "description": "Independent native M7 normal map-neutral Drop_Rarity replay. Canonical paired save ed192e74636dc5303ac8a9fa158259a20b07c931c4537f0021ba4c2de93a6cdc. Reuses accepted M3 attribute replay unchanged; no final cached result is an expected input. Requires prepared native owner maps and account talent candidate records. getbonus2, AllTalentLVz and exact native getters may write benign DNSM scratch/memoization. Parent must establish helper readiness before execution; never replay an initializer, reset, hook, saved-input mutation or character/context switch. Clover4 uses explicit permanent source gate. Dungeon, Arcane map and map216 replacements are omitted.",
+  "description": "Independent native normal map-neutral Drop_Rarity replay for delivered game 1.22 and the shared target player. Reuses the attribute replay; cached totals are diagnostic only. Requires prepared native owner maps and account talent candidate records. Native getters may write derived scratch or memoized values. Never replay an initializer or change saved inputs or character context.",
   "target": "Persistent Drop_Rarity and every immediate numerical source owner",
   "extractions": [
     {

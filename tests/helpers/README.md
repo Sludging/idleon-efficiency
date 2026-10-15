@@ -24,9 +24,12 @@ GAME_SERVER_URL=http://localhost:3100 \
 ```
 
 The batch helper uses `GAME_SERVER_URL`, defaulting to
-`http://127.0.0.1:3101`; the default is offline. This URL controls status,
-expression execution, and (only for an identified live server) the optional
-save refresh.
+`http://127.0.0.1:3101`, as its primary extraction and save server. Each config
+with `requiredActivePlayerIndex` uses a matching `--player-server` override
+when provided; all other configs use the primary server. Each extractor checks
+status and active-player policy on the same server it uses for expressions.
+`--refresh-save` always checks and fetches from the primary server, never a
+`--player-server` override.
 
 ### Offline Extraction (No Fixture Export)
 
@@ -41,24 +44,47 @@ GAME_SERVER_URL=http://127.0.0.1:3101 \
 Batch options:
 
 - `--refresh-save`: request `/cloud-save` and overwrite
-  `tests/fixtures/saves/latest.json`, only from a server whose status source is
-  `live`. Offline and unknown sources fail before the cloud-save request and
-  fixture write. Without this option the fixture remains untouched.
+  `tests/fixtures/saves/latest.json`, only from the primary server whose status
+  source is `live`. Offline and unknown sources fail before the cloud-save
+  request and fixture write. Player-server overrides never affect save refresh.
 - `--output-dir <directory>`: write result files to this directory instead of
   `tests/results/`. Relative paths resolve from the current working directory.
+- `--player-server <player-index>=<http(s) URL>`: route configs whose
+  `requiredActivePlayerIndex` matches this non-negative index to this server.
+  Repeat the option for additional indexes. Without a matching override, a
+  config uses the primary server and fails its normal active-player check if
+  that server has the wrong character loaded.
+
+For example, use the default primary server for ordinary configs and route
+player-zero configs to a second server:
+
+```bash
+node tests/helpers/extract-all-game-data.js \
+  --player-server 0=http://127.0.0.1:3102
+```
 
 Without `--output-dir`, extraction result files update their usual files only
 when the serialized output differs from the existing bytes. Identical output
 is not rewritten. Use `--output-dir` to write elsewhere. No extractor reloads,
 resets, or switches characters on the server.
 
-### Active Player Policy
+If another offline request holds the runtime lock, `/exec` returns HTTP `409`
+with `Offline runtime is busy; send requests serially` before evaluating the
+expression. The extractor retries only this exact rejection, waiting 250 ms
+between attempts for at most 30 seconds. A busy timeout fails the extraction
+explicitly; it does not supply a result. Other HTTP errors, native evaluation
+errors, and network errors are not retried because an expression may have
+already executed. Configs and labels still run serially.
 
-Extraction runs require the server's game to be loaded on the shared target player. For the live server, open that character in the game; for the offline tool, select it at startup. Set its index in `tests/utils/target-player.json`; the extractor checks it once before evaluating each config and aborts if the active player does not match.
+Extraction runs require the server's game to be loaded on the required active
+player. For the live server, open that character in the game; for the offline
+tool, select it at startup. Set the shared index in
+`tests/utils/target-player.json`; the extractor checks the selected server once
+before evaluating each config and aborts if the active player does not match.
 
-Extraction expressions may use `__TARGET_PLAYER__` for arguments that are semantically player indexes. The extractor replaces that placeholder with the shared target index before sending the expression to the debug server. Do not use it for domain indexes or for configs that intentionally cover multiple players.
-
-Configs with a real dependency on a different specific character may set `requiredActivePlayerIndex` at the top level. That override takes precedence over the shared target. Do not add it for ordinary fixture alignment.
+Configs with a real dependency on a different specific character may set
+`requiredActivePlayerIndex` at the top level. Batch `--player-server` routing
+uses that configured index. Do not add it for ordinary fixture alignment.
 
 ## Individual Extraction (Advanced)
 

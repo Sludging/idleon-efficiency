@@ -1,5 +1,5 @@
 {
-  "description": "Independent bounded native four-attribute source replay for Jelly_Operator1.22 target3 Sludgev4. Canonical retained save ed192e74636dc5303ac8a9fa158259a20b07c931c4537f0021ba4c2de93a6cdc. Reuses M1 gear replay and M2 native getters. Requires prepared maps and highest-level key620. Excludes dungeon equipment/stats, temporary forms, and map overrides. No TotalStats, TalentCalc, cache clearing, initializer replay, context switch, or saved-input mutation. Native producer scratch/memoization writes are permitted. Cached final totals are diagnostics only.",
+  "description": "Independent native four-attribute source replay for delivered game 1.22 and the shared target player. Reuses the gear replay and native getters. Requires prepared maps and the highest-character-level talent cap. Excludes dungeon equipment/stats, temporary forms, and map overrides. No TotalStats, TalentCalc, cache clearing, initializer replay, context switch, or saved-input mutation. Native producers may write derived scratch or memoized values.",
   "target": "M3 calculated persistent Strength, Agility, Wisdom, Luck",
   "extractions": [
     {
