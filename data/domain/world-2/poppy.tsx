@@ -84,7 +84,7 @@ export class Poppy extends Domain {
     // Fish rate boost
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
-    gambitBonus8: number = 0;
+    gambitBonus8: number | null = 0;
     
     getRawKeys(): RawData[] {
         return [];

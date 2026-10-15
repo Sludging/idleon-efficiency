@@ -450,6 +450,11 @@ export interface ResearchContributor {
   reward?: ResearchContributorReward;
 }
 
+export type ResearchOfflineContributor = Omit<ResearchContributor, "value" | "inputValue"> & {
+  value: number | null;
+  inputValue: number | null;
+};
+
 export interface ResearchProgress {
   highestLevel: number;
   savedExpCopy: {
@@ -513,13 +518,13 @@ export interface ResearchProduction {
 
 export interface ResearchOfflineGains {
   onlinePercent: number;
-  percent: number;
-  fraction: number;
-  unclampedPercent: number;
+  percent: number | null;
+  fraction: number | null;
+  unclampedPercent: number | null;
   baselinePercent: number;
   floorPercent: number;
   capPercent: number;
-  contributors: ResearchContributor[];
+  contributors: ResearchOfflineContributor[];
 }
 
 export interface ResearchShapeOwnership {
@@ -857,7 +862,7 @@ export class PostyNote {
 interface ResearchDisplayInputs {
   additiveExp: ResearchContributor[];
   expMultipliers: ResearchContributor[];
-  offline: ResearchContributor[];
+  offline: ResearchOfflineContributor[];
   ownership: ResearchContributor[];
   opticalMonocles: number;
   kaleidoscopes: number;
@@ -1162,11 +1167,18 @@ export class ResearchGrid extends Domain {
       this.production.gameDisplayedInsightPerHour += observation.gameDisplayedInsightPerHour;
     });
     this.production.expPerHour = this.production.expBeforeSharedMultiplierPerHour * this.production.expMultiplier;
-    const offlineBonusPercent = sumContributors(inputs.offline);
-    const unclampedPercent = 1 + offlineBonusPercent;
-    const fraction = Math.max(0.01, Math.min(1, 0.01 + offlineBonusPercent / 100));
+    let offlineBonusPercent: number | null = 0;
+    for (const contributor of inputs.offline) {
+      if (contributor.value === null) {
+        offlineBonusPercent = null;
+        break;
+      }
+      offlineBonusPercent += contributor.value;
+    }
+    const unclampedPercent = offlineBonusPercent === null ? null : 1 + offlineBonusPercent;
+    const fraction = offlineBonusPercent === null ? null : Math.max(0.01, Math.min(1, 0.01 + offlineBonusPercent / 100));
     this.offlineGains = {
-      onlinePercent: 100, percent: 100 * fraction, fraction, unclampedPercent,
+      onlinePercent: 100, percent: fraction === null ? null : 100 * fraction, fraction, unclampedPercent,
       baselinePercent: 1, floorPercent: 1, capPercent: 100, contributors: inputs.offline,
     };
     const shapeContributors = [...inputs.shapeOwnership, ...this.postyNotes
@@ -1547,16 +1559,19 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
   const artifact = sailing.artifacts.find(artifact => artifact.index === 36)!;
   const offlineCard = cards.find(card => card.id === "w7b11")!;
   const gambit = hole.gambit.bonuses.find(bonus => bonus.index === 15)!;
-  const offline = [
+  const gambitOfflineBonus = referencePlayer ? hole.gambit.getBonus(15, referencePlayer) : 0;
+  const papersOfflineBonus = researchContribution(purchase.name, 2 * purchase.pucrhased, "addPercent", undefined, "Two percentage points per permanent purchase");
+  const offline: ResearchOfflineContributor[] = [
     companionContribution(28, 1, "addPercent", "AFK gains"),
-    researchContribution(`The Hole Gambit: ${gambit.data.name}`, referencePlayer ? hole.gambit.getBonus(15, referencePlayer) : 0, "addPercent", undefined,
-      `Requires score ${gambit.getScoreThreshold()} and a non-Tutorial scene for the reference character`, referencePlayer?.playerID),
+    { source: `The Hole Gambit: ${gambit.data.name}`, inputValue: gambitOfflineBonus, value: gambitOfflineBonus,
+      operation: "addPercent", gate: `Requires score ${gambit.getScoreThreshold()} and a non-Tutorial scene for the reference character`,
+      characterID: referencePlayer?.playerID },
     mineheadContribution(1, "addPercent"), mineheadContribution(10, "addPercent"),
     gridContribution(71, 0, "addPercent", "AFK gains"), gridContribution(111, 0, "addPercent", "AFK gains"),
     researchContribution(`Sailing artifact: ${artifact.data.name}`, Math.round(artifact.status), "addPercent", 6),
     researchContribution(`Owned card: ${offlineCard.displayName}`, offlineCard.getLevels(), "addPercent", 10),
     companionContribution(153, 20, "addPercent", "AFK gains"), companionLevelTwoContribution(153, 10, "addPercent", "AFK gains"),
-    researchContribution(purchase.name, 2 * purchase.pucrhased, "addPercent", undefined, "Two percentage points per permanent purchase"),
+    papersOfflineBonus,
     sushiContribution(4, "addPercent", "AFK gains"), sushiContribution(24, "addPercent", "AFK gains"),
   ];
   const opticalMonocles = Math.round(research.getBonusForId(91, 1));
@@ -1610,7 +1625,7 @@ export const updateResearchDisplay = (data: Map<string, any>): ResearchGrid => {
       includesMineheadCurrency: true,
       explanation: "Each Half Finished Research Paper grants two hours of progress, including Minehead Currency. Pending progress is not applied to this saved view.",
     },
-    permanent: { purchase, purchasedCount: purchase.pucrhased, offlinePercent: offline.find(contributor => contributor.source === purchase.name)!.value },
+    permanent: { purchase, purchasedCount: purchase.pucrhased, offlinePercent: papersOfflineBonus.value },
   };
   research.prepareDisplay({
     additiveExp, expMultipliers, offline, ownership, opticalMonocles, kaleidoscopes,

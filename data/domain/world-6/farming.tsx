@@ -568,6 +568,7 @@ export class Farming extends Domain {
     growthRate: number = 0;
     magicBeansFromDepot: number = 0;
     discoveredCrops: number = 0;
+    registeredCropCount: number | null = null;
     stickers: FarmingSticker[] = FarmingSticker.fromBase(initFarmingStickerRepo());
     totalStickers: number = 0;
     exoticMarketLevels: number[] = [];
@@ -601,6 +602,7 @@ export class Farming extends Domain {
     parse(data: Map<string, any>): void {
         const farming = data.get(this.dataKey) as Farming;
         const cropsData = data.get("FarmCrop") as object;
+        farming.registeredCropCount = cropsData == null ? null : Object.keys(cropsData).length;
         const plotsData = data.get("FarmPlot") as number[][];
         const landRankData = data.get("FarmRank") as number[][];
         const upgradesData = data.get("FarmUpg") as number[];

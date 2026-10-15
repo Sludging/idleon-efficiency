@@ -50,8 +50,12 @@ function freshAccount(): AccountRun {
    expect(hole.anotherTry.resets.map(reset => reset.category))
     .toEqual(['Opals', 'Majik', 'Jar enchantments', 'Summoning doublers']);
    loader.validateGameDataStructure(data);
-   run = { data, save, process: pipeline.updateIdleonData, present: holeModule.updateHolePresentation,
-    holeParseData: new Map(holeParse.mock.calls[0][0]), sneakingParseData: new Map(sneakingParse.mock.calls[0][0]) };
+   run = { data, save, process: pipeline.updateIdleonData, present: preparedData => {
+    const preparedHole = preparedData.get('hole') as Hole;
+    preparedHole.prepareSharedUpgradeEffects();
+    holeModule.updateHole(preparedData);
+    holeModule.updateHolePresentation(preparedData);
+   }, holeParseData: new Map(holeParse.mock.calls[0][0]), sneakingParseData: new Map(sneakingParse.mock.calls[0][0]) };
   } finally {
    holeParse.mockRestore();
    sneakingParse.mockRestore();
@@ -481,13 +485,16 @@ describe('Hole part 1 H10–H11 and H15–H16 narrow omissions of captured real 
        [4, 10, 12, 22, 29, 35].map(index => `jar-collectible:${index}`)));
       const baselineRate = baselineRates.find((saved: { playerId: number }) => saved.playerId === rate.playerId)!;
       const dependentOwners = missingInput === 'parsed Spelunk'
-       ? ['cavern:10', 'legendTalents:12', 'tome:epilogue:1'] : ['cavern:10'];
+       ? ['cavern:10', 'legendTalents:12', 'tome:epilogue:1', 'measurement:0'] : ['cavern:10'];
       if (missingInput === 'parsed Spelunk') {
        for (const owner of ['legendTalents:12', 'tome:epilogue:1']) {
         expect(rate.contributors.find(row => row.owner === owner)).toMatchObject({
          value: null, unavailableReason: 'Saved Legend Talent and Tome inputs are missing.',
         });
        }
+       expect(rate.contributors.find(row => row.owner === 'measurement:0')).toMatchObject({
+        value: null, unavailableReason: 'Saved Tome Measurement inputs are missing.',
+       });
       }
       const independent = rate.contributors.filter(row => !dependentOwners.includes(row.owner));
       const savedIndependent = baselineRate.contributors.filter((row: HoleContributor) =>

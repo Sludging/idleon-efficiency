@@ -9,7 +9,7 @@ import { DivinityStyleModel } from "../model/divinityStyleModel";
 import { GodInfoModel } from "../model/godInfoModel";
 import { Activity, Player } from "../player";
 import { SkillsIndex } from "../SkillsIndex";
-import { Hole, PocketDivinityUpgrade } from "./hole/hole";
+import { Hole } from "./hole/hole";
 import { Sneaking } from "../world-6/sneaking";
 import { CoralKid } from "../world-7/coralKid";
 
@@ -86,23 +86,24 @@ export class PlayerDivinityInfo {
 
     // es has a second god, jam it in here.
     esGod: DivinityGod | undefined = undefined;
+    dootActive: boolean = false;
 
     constructor(public playerIndex: number, public style: DivinityStyleModel, public gods: DivinityGod[], public active: boolean = false) { }
+
+    get ordinaryGods(): DivinityGod[] {
+        if (!this.primaryGod) return [];
+        if (this.esGod?.unlocked && this.esGod.index !== this.primaryGod.index) {
+            return [this.primaryGod, this.esGod];
+        }
+        return [this.primaryGod];
+    }
 
     divinityPerHour = (): number => {
         return 0;
     }
 
     isLinkedToGod = (godIndex: number): boolean => {
-        if (!this.esGod && this.gods.length == 0) {
-            return false;
-        }
-
-        if (this.gods.find(god => god.index == godIndex)) {
-            return true;
-        }
-
-        return this.esGod?.index == godIndex;
+        return this.gods.some(god => god.index === godIndex);
     }
 }
 
@@ -139,13 +140,14 @@ export class Divinity extends Domain {
         const afkTarget = range(0, charCount).map((_, index) => data.get(`AFKtarget_${index}`)) as string[];
         const talentLevels = range(0, charCount).map((_, index) => data.get(`SL_${index}`)) as Record<number, number>[];
 
-        if (divinityData.length == 0) {
-            return;
-        }
-
-        // Some divinity data has no "persistence", so we reset the previous data.
         divinity.playerInfo = [];
         divinity.offerings = [];
+        divinity.gods.forEach(god => {
+            god.linkedPlayers = [];
+        });
+        if (divinityData.length === 0) {
+            return;
+        }
 
         // Index 25 = Number of gods unlocked?
         const numberOfUnlockedGods = divinityData[25];
@@ -210,43 +212,22 @@ export const updateDivinity = (data: Map<string, any>) => {
         god.coralKidUpgrade3 = coralKidBonus3;
         // Reset previous info as it will be calculated again in the next section.
         god.linkedPlayers = [];
-        god.blessMaxLevel += coralKidBonus1;
+        god.blessMaxLevel = 100 + coralKidBonus1;
     })
 
     divinity.gamingGrowthMinorLinkBonus = 0;
 
     // Update the linked player to each god by iterating on each player's data.
     divinity.playerInfo.forEach(player => {
+        const pocketGodIds = hole.majiks.pocketDivinity.linkedGods;
+        const effectiveGods = player.dootActive ? divinity.gods
+            : [...player.ordinaryGods, ...pocketGodIds.map(id => divinity.gods[id])];
+        player.gods = [...new Map(effectiveGods.map(god => [god.index, god])).values()];
         player.gods.forEach(god => {
-            god.coralKidUpgrade3 = coralKidBonus3;
-            god.blessMaxLevel += coralKidBonus1;
-            // Due to Doot double linking can happen, so avoid that.
-            if (!god.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
+            if (!god.linkedPlayers.some(linked => linked.playerID === player.playerIndex)) {
                 god.linkedPlayers.push(players[player.playerIndex]);
             }
         });
-
-        // Get Pocket Divinity linked gods
-        const pocketDivinity = hole.majiks.IdleonUpgrades.find(upgrade => upgrade.index == 21) as PocketDivinityUpgrade;
-        if (pocketDivinity) {
-            // Each linked god in the pocket divinity upgrade applies to all players.
-            pocketDivinity.linkedGods.forEach(godIndex => {
-                // Make sure this is reflected in the divinity gods linked players.
-                if (!divinity.gods[godIndex].linkedPlayers.find(p => p.playerID == player.playerIndex)) {
-                    divinity.gods[godIndex].linkedPlayers.push(players[player.playerIndex]);
-                }
-                // And also add it to the player's gods.
-                if (!player.gods.find(g => g.index == godIndex)) {
-                    player.gods.push(divinity.gods[godIndex]);
-                }
-            });
-
-
-        }
-
-        if (player.esGod && !player.esGod.linkedPlayers.find(p => p.playerID == player.playerIndex)) {
-            player.esGod.linkedPlayers.push(players[player.playerIndex]);
-        };
 
         // Update being active or not based on linked god(s) (could have changed since parse due to owning Doot or other bonuses like that) and ES secondary god
         player.active = (players[player.playerIndex].getActivityType() == Activity.Divinity || players[player.playerIndex].getActivityType() == Activity.Lab && player.isLinkedToGod(4));

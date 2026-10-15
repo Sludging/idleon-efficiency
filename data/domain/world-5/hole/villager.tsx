@@ -95,13 +95,13 @@ export interface VillagerSharedGrowthInputs extends VillagerAccountGrowthInputs 
     justice: number | null;
     wisdom: number | null;
     monumentUnavailableReason: string | null;
-    slabItemsMeasurement: number;
+    slabItemsMeasurement: number | null;
     gloomieSchematic: number;
     gloomieSchematicUnavailableReason: string | null;
     gloomieCardPercent: number | null;
     gloomieCardUnavailableReason: string | null;
     bell: number;
-    tomeMeasurement: number;
+    tomeMeasurement: number | null;
 }
 
 export interface VillagerCharacterInput {
@@ -311,7 +311,8 @@ export class Villager {
                 unavailableReason: inputs.monumentUnavailableReason },
             { source: "Slab items Measurement", owner: "measurement:7",
                 value: inputs.measurementUnavailableReason === null ? inputs.slabItemsMeasurement : null,
-                unit: "percent", combination: "additive", unavailableReason: inputs.measurementUnavailableReason },
+                unit: "percent", combination: "additive", unavailableReason: inputs.measurementUnavailableReason
+                    ?? (inputs.slabItemsMeasurement === null ? "Saved Slab Measurement inputs are missing." : null) },
             { source: "Opal Enthusiasm", owner: "majik:9", value: enthusiasm, unit: "percent", combination: "allocation",
                 unavailableReason: enthusiasmReason },
             { source: "Contented Creator", owner: "majik:10",
@@ -330,7 +331,8 @@ export class Villager {
                 unit: "percent", combination: "additive", unavailableReason: inputs.bellUnavailableReason },
             { source: "Tome score Measurement", owner: "measurement:0",
                 value: inputs.measurementUnavailableReason === null ? inputs.tomeMeasurement : null,
-                unit: "percent", combination: "additive", unavailableReason: inputs.measurementUnavailableReason },
+                unit: "percent", combination: "additive", unavailableReason: inputs.measurementUnavailableReason
+                    ?? (inputs.tomeMeasurement === null ? "Saved Tome Measurement inputs are missing." : null) },
             { source: "Summoning Villager EXP", owner: "summoning:21",
                 value: inputs.summoningUnavailableReason === null ? inputs.summoningPercent : null,
                 unit: "percent", combination: "additive", unavailableReason: inputs.summoningUnavailableReason },

@@ -52,6 +52,30 @@ import { Card } from "../../cards";
 import { Gaming } from "../gaming";
 import { Stamp, getStampBonusForKey } from "../../world-1/stamps";
 import { SushiStation } from "../../world-7/sushi";
+import { HoleCurrencyBase, initHoleCurrencyRepo } from "../../data/HoleCurrencyRepo";
+import { HoleCurrencyModel } from "../../model/holeCurrencyModel";
+import { initGodInfoRepo } from "../../data/GodInfoRepo";
+import type { Divinity } from "../divinity";
+
+export interface HoleUpgradeEffect {
+ key: string;
+ value: number | boolean | null;
+ unit: "percent" | "multiplier" | "count" | "per-hour" | "rule";
+}
+
+export class HoleCurrency {
+ stock: number | null = null;
+
+ constructor(public index: number, public data: HoleCurrencyModel) { }
+
+ static fromBase(records: HoleCurrencyBase[]): HoleCurrency[] {
+  return records.map(record => new HoleCurrency(record.index, record.data));
+ }
+
+ parse(wallets: number[] | undefined): void {
+  this.stock = wallets?.[this.index] == null ? null : Number(wallets[this.index]);
+ }
+}
 
 const holeResearchExpUpgradeBasePercent = 1;
 
@@ -66,72 +90,258 @@ export class Wish {
  }
 }
 
+interface CosmoUpgradePreparationInputs {
+ access: boolean | null;
+ enhancementAllowed: boolean | null;
+ remainingPoints: number | null;
+ createdSchematics: number | null;
+}
+
 export class CosmoUpgrade {
  unlocked: boolean = false;
  level: number = 0;
+ saveAvailable: boolean = false;
+ initialLevel: number = 0;
+ enhancementLevel: number = 0;
+ enhancementAllowed: boolean | null = null;
+ currentCap: number | null = null;
+ prerequisiteId: number | null = null;
+ prerequisiteMet: boolean | null = null;
+ private prerequisiteLevel: number | null = null;
+ access: boolean | null = null;
+ pointsRequired: number = 1;
+ canPurchase: boolean | null = null;
+ createdSchematics: number | null = null;
+ equalSpreadPercent: number | null = null;
 
- constructor(public index: number, public data: CosmoUpgradeModel) {
-  this.data.name = this.data.name.replace(/_/g, " ");
-  this.data.desc = this.data.desc.replace(/_/g, " ");
+ constructor(public index: number, public data: CosmoUpgradeModel, public treePosition: number) { }
+
+ get name(): string {
+  return this.data.name.replace(/_/g, " ");
  }
 
- static fromBase(data: CosmoUpgradeBase[]) {
-  return data.filter(d => d.data.name != "Confused_Bonus").map(d => {
-   // Special handling for Pocket Divinity upgrade
-   if (d.index == 21) {
-    return new PocketDivinityUpgrade(d.index, d.data);
+ static fromBase(data: CosmoUpgradeBase[]): CosmoUpgrade[] {
+  const positions = new Map<CosmoTypeEnum, number>();
+  return data.flatMap(record => {
+   const position = positions.get(record.data.cosmoType) ?? 0;
+   positions.set(record.data.cosmoType, position + 1);
+   if (record.data.name === "Confused_Bonus") {
+    return [];
    }
-   return new CosmoUpgrade(d.index, d.data);
+   return [record.index === 21
+    ? new PocketDivinityUpgrade(record.index, record.data, position)
+    : new CosmoUpgrade(record.index, record.data, position)];
   });
  }
 
+ parse(investments: number[] | undefined): void {
+  this.saveAvailable = investments?.[this.treePosition] != null;
+  this.level = Number(investments?.[this.treePosition] ?? 0);
+  this.prerequisiteId = this.treePosition === 0 ? null : this.index - 1;
+  const previousLevel = investments?.[this.treePosition - 1];
+  this.prerequisiteLevel = previousLevel == null ? null : Number(previousLevel);
+  this.unlocked = this.level > 0;
+  this.initialLevel = 0;
+  this.enhancementLevel = 0;
+  this.createdSchematics = null;
+  this.equalSpreadPercent = null;
+  this.enhancementAllowed = null;
+  this.currentCap = null;
+  this.prerequisiteMet = null;
+  this.canPurchase = null;
+  this.access = null;
+ }
+
+ prepare(inputs: CosmoUpgradePreparationInputs): void {
+  this.initialLevel = Math.min(1, this.level);
+  this.enhancementLevel = Math.max(0, this.level - 1);
+  this.createdSchematics = inputs.createdSchematics;
+  this.access = inputs.access;
+  this.enhancementAllowed = inputs.enhancementAllowed;
+  this.currentCap = this.enhancementAllowed === null ? null
+   : 1 + (this.enhancementAllowed ? this.data.maxEnhance : 0);
+  this.prerequisiteMet = this.prerequisiteId === null ? true
+   : this.prerequisiteLevel === null ? null : this.prerequisiteLevel > 0;
+  this.canPurchase = !this.saveAvailable || this.access === null || this.prerequisiteMet === null
+   || this.currentCap === null || inputs.remainingPoints === null ? null
+   : this.access && this.prerequisiteMet && this.level < this.currentCap && inputs.remainingPoints >= this.pointsRequired;
+ }
+
  getBonus(): number {
-  // Special case: Forge upgrade.
   if (this.index === 22) {
    return Math.floor(Math.max(1, Math.pow(3, this.level)));
   }
-  // Default: perLvl * level
-  return Math.floor((this.data.perLvl ?? 1) * this.level);
+  return Math.floor(this.data.perLvl * this.level);
  }
 
- // This is pretty messy but meh.
+ getEffects(): HoleUpgradeEffect[] {
+  if (!this.saveAvailable) {
+   return [{ key: `majik:${this.index}`, value: null, unit: "rule" }];
+  }
+  if (this.index === 4) {
+   return [
+    { key: "fountain-stack-capacity", value: this.level, unit: "count" },
+    { key: "fountain-coin-value", value: 1 + 25 * this.level / 100, unit: "multiplier" },
+    { key: "fountain-marble-rate", value: 1 + 10 * this.level / 100, unit: "multiplier" },
+   ];
+  }
+  if (this.index === 10) {
+   return [{ key: "villager-exp", value: this.createdSchematics === null ? null
+    : this.getBonus() * this.createdSchematics, unit: "percent" }];
+  }
+  if (this.index === 11) {
+   return [
+    { key: "enhance-majik", value: this.level >= 1, unit: "rule" },
+    { key: "villager-exp", value: this.getBonus(), unit: "percent" },
+   ];
+  }
+  if (this.index === 14) {
+   return [{ key: "villager-exp", value: this.equalSpreadPercent, unit: "percent" }];
+  }
+  return [{ key: `majik:${this.index}`, value: this.getBonus(),
+   unit: this.index === 22 ? "multiplier" : this.index === 1 || this.index === 21 ? "count" : "percent" }];
+ }
+
  getDescription(): string {
-  // If we have a multiplier
-  if (this.data.desc.includes(" x")) {
-   // Special case for Beeg Beeg Forge
-   if (this.data.name == "Beeg Beeg Forge") {
-    return this.data.desc.replace(/ x/g, ` ${(this.getBonus())}x`);
-   }
-   return this.data.desc.replace(/ x/g, ` ${(1 + (this.getBonus() / 100)).toFixed(0)}x`);
+  if (!this.saveAvailable) {
+   return this.data.desc.replace(/_/g, " ");
   }
-  // If we have a percentage
-  if (this.data.desc.includes("+%")) {
-   return this.data.desc.replace(/\+%/g, `+${this.getBonus().toFixed(0)}%`);
-  }
-  // Everything else.
-  return this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(0));
+  return this.data.desc.replace(/_/g, " ")
+   .replace(/ x/g, ` ${this.index === 22 ? this.getBonus() : 1 + this.getBonus() / 100}x`)
+   .replace(/\+%/g, `+${this.getBonus()}%`)
+   .replace(/[{}]/g, this.getBonus().toString())
+   .replace(/\|/g, this.createdSchematics === null ? "|" : (this.getBonus() * this.createdSchematics).toString())
+   .replace(/\$/g, this.equalSpreadPercent === null ? "$" : this.equalSpreadPercent.toString());
  }
 }
 
+export interface PocketGodSelection {
+ slot: number;
+ godId: number;
+ bonusId: number;
+ name: string;
+ active: boolean | null;
+}
+
+export interface PocketCharacterActivation {
+ playerId: number;
+ playerName: string;
+ primaryGodId: number | null;
+ secondaryGodId: number | null;
+ dootEligible: boolean;
+ ordinaryLinksAvailable: boolean;
+ pocketActivationAvailable: boolean;
+ pocketGodIds: number[] | null;
+ overlappingGodIds: number[] | null;
+ addedGodIds: number[] | null;
+ effectiveGodIds: number[] | null;
+ allStatPercent: number | null;
+}
 
 export class PocketDivinityUpgrade extends CosmoUpgrade {
- linkedGods: number[] = [];
+ selections: PocketGodSelection[] = [];
+ characters: PocketCharacterActivation[] = [];
+ selectionSaveAvailable: boolean = false;
 
- constructor(public index: number, public data: CosmoUpgradeModel) {
-  super(index, data);
+ get linkedGods(): number[] {
+  return [...new Set(this.selections.filter(selection => selection.active).map(selection => selection.godId))];
+ }
+
+ parseSelections(savedSelections: (number | undefined)[]): void {
+  const gods = initGodInfoRepo();
+  this.selectionSaveAvailable = savedSelections.every(selection => selection != null);
+  this.selections = savedSelections.flatMap((value, slot) => {
+   const god = gods.find(god => god.index === Number(value));
+   return value == null || !god ? [] : [{ slot, godId: god.index, bonusId: god.data.bonusIndex,
+    name: god.data.name, active: this.saveAvailable ? this.level > slot : null }];
+  });
+  this.characters = [];
+ }
+
+ prepareCharacters(players: Player[], divinity: Divinity): void {
+  this.characters = players.map(player => {
+   const links = divinity.playerInfo.find(info => info.playerIndex === player.playerID);
+   const ordinaryGodIds = links?.ordinaryGods.map(god => god.index) ?? [];
+   const dootEligible = links?.dootActive ?? false;
+   const previousGodIds = dootEligible ? divinity.gods.map(god => god.index) : ordinaryGodIds;
+   const pocketGodIds = this.linkedGods;
+   const pocketActivationAvailable = this.saveAvailable &&
+    this.selections.filter(selection => selection.active === true).length === Math.min(2, this.level);
+   return {
+    playerId: player.playerID, playerName: player.playerName,
+    primaryGodId: links?.primaryGod?.index ?? null, secondaryGodId: links?.esGod?.index ?? null,
+    dootEligible, ordinaryLinksAvailable: links !== undefined,
+    pocketActivationAvailable, pocketGodIds: pocketActivationAvailable ? pocketGodIds : null,
+    overlappingGodIds: pocketActivationAvailable && (dootEligible || links !== undefined)
+     ? pocketGodIds.filter(id => previousGodIds.includes(id)) : null,
+    addedGodIds: pocketActivationAvailable && (dootEligible || links !== undefined)
+     ? pocketGodIds.filter(id => !previousGodIds.includes(id)) : null,
+    effectiveGodIds: dootEligible || pocketActivationAvailable && links !== undefined
+     ? [...new Set([...previousGodIds, ...pocketGodIds])] : null,
+    allStatPercent: !dootEligible ? 0 : this.saveAvailable ? 15 * this.level : null,
+   };
+  });
+ }
+
+ getDescription(): string {
+  return super.getDescription().replace("Y", this.selections.find(selection => selection.slot === 0 && selection.active)?.name ?? "")
+   .replace("Z", this.selections.find(selection => selection.slot === 1 && selection.active)?.name ?? "");
  }
 }
 
 export class Majiks {
- HoleUpgrades: CosmoUpgrade[] = [];
- VillageUpgrades: CosmoUpgrade[] = [];
- IdleonUpgrades: CosmoUpgrade[] = [];
+ HoleUpgrades: CosmoUpgrade[];
+ VillageUpgrades: CosmoUpgrade[];
+ IdleonUpgrades: CosmoUpgrade[];
+ earnedPoints: number | null = null;
+ investedPoints: number | null = null;
+ remainingPoints: number | null = null;
+ purchasedPoints: number | null = null;
+ private investments: { level: number }[] | null = null;
 
  constructor() {
   const allUpgrades = CosmoUpgrade.fromBase(initCosmoUpgradeRepo());
-  this.HoleUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Hole);
-  this.VillageUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Village);
-  this.IdleonUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType == CosmoTypeEnum.Idleon);
+  this.HoleUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType === CosmoTypeEnum.Hole);
+  this.VillageUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType === CosmoTypeEnum.Village);
+  this.IdleonUpgrades = allUpgrades.filter(upgrade => upgrade.data.cosmoType === CosmoTypeEnum.Idleon);
+ }
+
+ get upgrades(): CosmoUpgrade[] {
+  return [...this.HoleUpgrades, ...this.VillageUpgrades, ...this.IdleonUpgrades];
+ }
+
+ get pocketDivinity(): PocketDivinityUpgrade {
+  return this.IdleonUpgrades.find(upgrade => upgrade.index === 21) as PocketDivinityUpgrade;
+ }
+
+ parse(savedHole: number[][], purchasedPoints: number | undefined): void {
+  const trees = [savedHole[4], savedHole[5], savedHole[6]];
+  this.investments = trees.every(tree => tree != null)
+   ? trees.flatMap(tree => tree.map(level => ({ level: Number(level) }))) : null;
+  this.purchasedPoints = purchasedPoints == null ? null : Number(purchasedPoints);
+  [this.HoleUpgrades, this.VillageUpgrades, this.IdleonUpgrades].forEach((upgrades, tree) =>
+   upgrades.forEach(upgrade => upgrade.parse(trees[tree])));
+  this.pocketDivinity.parseSelections([savedHole[11]?.[29], savedHole[11]?.[30]]);
+  this.earnedPoints = null;
+  this.investedPoints = null;
+  this.remainingPoints = null;
+ }
+
+ prepare(cosmo: Villager, createdSchematics: number | null): void {
+  this.earnedPoints = this.purchasedPoints === null || !cosmo.saveAvailable ? null
+   : Math.round(cosmo.level + this.purchasedPoints);
+  this.investedPoints = this.investments === null ? null
+   : this.investments.reduce((total, investment) => total + investment.level, 0);
+  this.remainingPoints = this.earnedPoints === null || this.investedPoints === null ? null
+   : Math.round(this.earnedPoints - this.investedPoints);
+  const enhancement = this.VillageUpgrades.find(upgrade => upgrade.index === 11)!;
+  const inputs: CosmoUpgradePreparationInputs = {
+   access: cosmo.rescued,
+   enhancementAllowed: enhancement.saveAvailable ? enhancement.level >= 1 : null,
+   remainingPoints: this.remainingPoints,
+   createdSchematics,
+  };
+  this.upgrades.forEach(upgrade => upgrade.prepare(inputs));
  }
 }
 
@@ -139,12 +349,177 @@ type SchematicBonusLookup = (schematicIndex: number, baseMultiplier: number) => 
 
 export class Schematic {
  unlocked: boolean = false;
+ saveAvailable: boolean = false;
+ availabilitySlot: number = -1;
+ released: boolean = false;
+ available: boolean | null = null;
+ requiredKaipuLevel: number | null = null;
+ currency!: HoleCurrency;
+ discountStacks: number | null = null;
+ discountMultiplier: number | null = null;
+ currentCost: number | null = null;
+ shortfall: number | null = null;
+ affordable: boolean | null = null;
 
- // Data references populated during parsing
+ get built(): boolean {
+  return this.unlocked;
+ }
+
+ parse(savedHole: number[][]): void {
+  this.saveAvailable = savedHole[13]?.[this.index] != null;
+  this.unlocked = Number(savedHole[13]?.[this.index] ?? 0) === 1;
+  this.discountStacks = savedHole[21]?.[5] == null ? null : Number(savedHole[21][5]);
+  this.sedimentMulti = savedHole[8]?.map(Number) ?? [];
+  this.resourceLayers = {
+   motherlode: Number(savedHole[11]?.[1] ?? 0), hive: Number(savedHole[11]?.[3] ?? 0),
+   evertree: Number(savedHole[11]?.[5] ?? 0), trench: Number(savedHole[11]?.[7] ?? 0),
+  };
+  this.walletBalances = {
+   gravel: Number(savedHole[9]?.[0] ?? 0), goldust: Number(savedHole[9]?.[1] ?? 0),
+   redstone: Number(savedHole[9]?.[2] ?? 0), naturalNotes: Number(savedHole[9]?.[11] ?? 0),
+   trebelNotes: Number(savedHole[9]?.[13] ?? 0), quaverNotes: Number(savedHole[9]?.[15] ?? 0),
+  };
+  this.gloomieColonies = Number(savedHole[11]?.[26] ?? 0);
+  this.motherlodeOreMined = Number(savedHole[11]?.[32] ?? 0);
+  this.houndBestRuns = savedHole[11]?.slice(33, 37).map(Number) ?? [];
+  this.golemSanctums = Number(savedHole[11]?.[55] ?? 0);
+  this.whiteRupies = Number(savedHole[11]?.[38] ?? 0);
+  this.darkRupies = Number(savedHole[11]?.[39] ?? 0);
+  this.rupieStocks = savedHole[9]?.slice(20, 30).map(Number) ?? [];
+  this.savedStringTypes = savedHole[20]?.map(Number) ?? null;
+  this.uniqueHarpStrings = null;
+  this.bellImprovementMethods = savedHole[16]?.map(Number) ?? [];
+  let requiredInputs: unknown[] = [];
+  switch (this.index) {
+   case 14: requiredInputs = [savedHole[8], savedHole[26]?.[0]]; break;
+   case 15: requiredInputs = [savedHole[11]?.[1]]; break;
+   case 38: requiredInputs = [savedHole[20]]; break;
+   case 41: requiredInputs = [savedHole[11]?.[3]]; break;
+   case 45: requiredInputs = [savedHole[16]]; break;
+   case 46: case 47: case 48: requiredInputs = [savedHole[11]?.[26]]; break;
+   case 49: requiredInputs = [savedHole[11]?.[1], savedHole[11]?.[3], savedHole[11]?.[5], savedHole[11]?.[7], savedHole[13]]; break;
+   case 52: requiredInputs = [savedHole[9]?.[0]]; break;
+   case 53: requiredInputs = [savedHole[9]?.[13]]; break;
+   case 54: requiredInputs = [savedHole[9]?.[15]]; break;
+   case 55: requiredInputs = [savedHole[9]?.[11]]; break;
+   case 56: requiredInputs = [savedHole[9]?.[2]]; break;
+   case 57: requiredInputs = [savedHole[9]?.[1]]; break;
+   case 58: requiredInputs = [savedHole[11]?.[32]]; break;
+   case 59: requiredInputs = [savedHole[11]?.[33], savedHole[11]?.[34], savedHole[11]?.[35], savedHole[11]?.[36]]; break;
+   case 72: requiredInputs = [savedHole[11]?.[38]]; break;
+   case 73: requiredInputs = [savedHole[11]?.[39]]; break;
+   case 76: requiredInputs = Array.from({ length: 10 }, (_, index) => savedHole[9]?.[20 + index]); break;
+   case 80: requiredInputs = [savedHole[11]?.[5]]; break;
+   case 82: case 83: case 84: requiredInputs = [savedHole[11]?.[55]]; break;
+   case 94: requiredInputs = [savedHole[11]?.[7]]; break;
+  }
+  this.numericBenefitAvailable = this.saveAvailable && (!this.built || requiredInputs.every(value => value != null));
+  this.sedimentSum = undefined;
+  this.bellSum = undefined;
+  this.available = null;
+  this.currentCost = null;
+  this.shortfall = null;
+  this.affordable = null;
+ }
+
+ prepareInspection(kaipu: Villager, availableCount: number | null): void {
+  this.available = availableCount === null ? null : this.released && this.availabilitySlot < availableCount;
+  this.requiredKaipuLevel = null;
+  if (this.released) {
+   let level = 0;
+   while (Math.min(105, Math.round(1 + 3 * level + Math.floor(level / 5))) <= this.availabilitySlot) {
+    level++;
+   }
+   this.requiredKaipuLevel = Math.max(1, level);
+  }
+  if (kaipu.rescued === false) {
+   this.available = false;
+  }
+  this.discountMultiplier = this.discountStacks === null ? null : Math.max(0.01, Math.pow(0.85, this.discountStacks));
+  this.currentCost = !this.saveAvailable || this.built ? null : this.getCost();
+  this.shortfall = this.currentCost === null || this.currency.stock === null ? null
+   : Math.max(0, this.currentCost - this.currency.stock);
+  this.affordable = this.currentCost === null || this.currency.stock === null ? null
+   : this.currency.stock >= this.currentCost;
+ }
+
+ getCost(): number | null {
+  if (this.discountMultiplier === null || this.availabilitySlot < 0) {
+   return null;
+  }
+  const slot = this.availabilitySlot;
+  if (this.data.costCalcType) {
+   return this.discountMultiplier * this.data.baseCost;
+  }
+  if (this.currency.index < 10) {
+   return 50 * this.discountMultiplier * Math.pow(1.28, slot + Math.floor(slot / 2.7));
+  }
+  if (this.currency.index < 20) {
+   return 50 * this.discountMultiplier * Math.pow(1.28, slot - 16 + Math.floor((slot - 16) / 2.7))
+    * Math.pow(1.23, Math.min(Math.max(0, (slot - 16) / 2), 14));
+  }
+  return 40 * this.discountMultiplier * Math.pow(1.34, slot - 54 + Math.floor((slot - 54) / 2.7))
+   * Math.pow(1.26, Math.min(Math.max(0, (slot - 54) / 2), 14));
+ }
+
+ getEffects(): HoleUpgradeEffect[] {
+  const effects: HoleUpgradeEffect[] = [
+   { key: `schematic:${this.index}:owned`, value: this.saveAvailable ? this.built : null, unit: "rule" },
+  ];
+  if (this.index === 49) {
+   effects.push({ key: "all-skill-efficiency", value: this.getBonus(15), unit: "percent" },
+    { key: "all-skill-exp", value: this.getBonus(10), unit: "percent" });
+  } else if ([82, 83, 84].includes(this.index)) {
+   effects.push({ key: `schematic:${this.index}:bonus`,
+    value: this.getBonus(this.index === 82 ? 20 : this.index === 83 ? 40 : 100), unit: "percent" });
+  } else if ([14, 45, 46, 47, 48, 52, 53, 54, 55, 56, 57, 58, 59].includes(this.index)) {
+   effects.push({ key: `schematic:${this.index}:bonus`,
+    value: this.index === 53 ? 1 + this.getBonus() / 100 : this.getBonus(),
+    unit: [45, 53, 54, 56].includes(this.index) ? "multiplier" : [58, 59].includes(this.index) ? "per-hour" : "percent" });
+  } else if ([15, 38, 41, 72, 73, 76, 80, 94].includes(this.index)) {
+   effects.push({ key: `schematic:${this.index}:intrinsic`, value: this.getIntrinsicBonus(),
+    unit: [38, 72].includes(this.index) ? "percent" : "multiplier" });
+  }
+  return effects.map(effect => effect.unit === "rule" || this.numericBenefitAvailable ? effect : { ...effect, value: null });
+ }
+
  sedimentMulti: number[] = [];
- wellSediment: number[] = [];
- extraCalculations: number[] = [];
+ resourceLayers = { motherlode: 0, hive: 0, evertree: 0, trench: 0 };
+ walletBalances = { gravel: 0, goldust: 0, redstone: 0, naturalNotes: 0, trebelNotes: 0, quaverNotes: 0 };
+ gloomieColonies: number = 0;
+ motherlodeOreMined: number = 0;
+ houndBestRuns: number[] = [];
+ golemSanctums: number = 0;
  bellImprovementMethods: number[] = [];
+ whiteRupies: number = 0;
+ darkRupies: number = 0;
+ rupieStocks: number[] = [];
+ uniqueHarpStrings: number | null = null;
+ private savedStringTypes: number[] | null = null;
+ numericBenefitAvailable: boolean = false;
+
+ prepareHarpStrings(stringSlots: number | null): void {
+  this.uniqueHarpStrings = this.savedStringTypes === null || stringSlots === null ? null
+   : new Set(this.savedStringTypes.slice(0, stringSlots)).size;
+ }
+
+ getIntrinsicBonus(): number | null {
+  if (!this.numericBenefitAvailable) {
+   return null;
+  }
+  const owned = this.built ? 1 : 0;
+  switch (this.index) {
+   case 15: return Math.max(1, owned * Math.pow(1.1, this.resourceLayers.motherlode));
+   case 38: return this.uniqueHarpStrings === null ? null : owned * 30 * this.uniqueHarpStrings;
+   case 41: return Math.max(1, owned * Math.pow(1.1, this.resourceLayers.hive));
+   case 72: return owned * 10 * lavaLog(this.whiteRupies);
+   case 73: return Math.max(1, owned * Math.pow(1.1, lavaLog(this.darkRupies)));
+   case 76: return Math.pow(1.02, owned * this.rupieStocks.reduce((sum, stock) => sum + Math.ceil(lavaLog(stock)), 0));
+   case 80: return Math.max(1, owned * Math.pow(1.1, this.resourceLayers.evertree));
+   case 94: return Math.max(1, owned * Math.pow(1.1, this.resourceLayers.trench));
+   default: return null;
+  }
+ }
 
  // Study bonus value
  studyBolaiaBonuses: number = 0;
@@ -176,62 +551,25 @@ export class Schematic {
    return 0;
   }
 
-  // TODO: Provide more context for some of the bonuses / extra calculations instead of just the index
   switch (this.index) {
-   case 14: // Sediment-based bonus
-    return this.getSedimentBonus();
-
-   case 45: // Bell improvement bonus
-    return this.getBellBonus();
-
-   case 46: // 5x extraCalculations[26]
-    return 5 * (this.extraCalculations[26] || 0);
-
-   case 47: // 25x extraCalculations[26]
-    return 25 * (this.extraCalculations[26] || 0);
-
-   case 48: // 10x extraCalculations[26]
-    return 10 * (this.extraCalculations[26] || 0);
-
-   case 49: // Resource-layer formula with nested schematic calls
-    return this.resourceLayersBonus(baseMultiplier);
-
-   case 52: // 60 * LOG(wellSediment[0])
-    return 60 * Math.floor(lavaLog(this.wellSediment[0] || 0));
-
-   case 53: // 4 * LOG(wellSediment[13])
-    return 4 * Math.floor(lavaLog(this.wellSediment[13] || 0));
-
-   case 54: // 1.2^LOG(wellSediment[15])
-    return Math.pow(1.2, Math.floor(lavaLog(this.wellSediment[15] || 0)));
-
-   case 55: // 10 * LOG(wellSediment[11])
-    return 10 * Math.floor(lavaLog(this.wellSediment[11] || 0));
-
-   case 56: // 1.3^LOG(wellSediment[2])
-    return Math.pow(1.3, Math.floor(lavaLog(this.wellSediment[2] || 0)));
-
-   case 57: // 20 * LOG(wellSediment[1])
-    return 20 * Math.floor(lavaLog(this.wellSediment[1] || 0));
-
-   case 58: // 5 * LOG(extraCalculations[32])
-    return 5 * lavaLog(this.extraCalculations[32] || 0);
-
-   case 59: // Sum of extraCalculations[33-36] / 100 * 10
-    return (
-     ((this.extraCalculations[33] || 0) +
-      ((this.extraCalculations[34] || 0) +
-       ((this.extraCalculations[35] || 0) + (this.extraCalculations[36] || 0)))) /
-     100
-    ) * 10;
-
+   case 14: return this.getSedimentBonus();
+   case 45: return this.getBellBonus();
+   case 46: return 5 * this.gloomieColonies;
+   case 47: return 25 * this.gloomieColonies;
+   case 48: return 10 * this.gloomieColonies;
+   case 49: return this.resourceLayersBonus(baseMultiplier);
+   case 52: return 60 * Math.floor(lavaLog(this.walletBalances.gravel));
+   case 53: return 4 * Math.floor(lavaLog(this.walletBalances.trebelNotes));
+   case 54: return Math.pow(1.2, Math.floor(lavaLog(this.walletBalances.quaverNotes)));
+   case 55: return 10 * Math.floor(lavaLog(this.walletBalances.naturalNotes));
+   case 56: return Math.pow(1.3, Math.floor(lavaLog(this.walletBalances.redstone)));
+   case 57: return 20 * Math.floor(lavaLog(this.walletBalances.goldust));
+   case 58: return 5 * lavaLog(this.motherlodeOreMined);
+   case 59: return this.houndBestRuns.reduce((sum, bestRun) => sum + bestRun, 0) / 100 * 10;
    case 82:
    case 83:
-   case 84: // All use extraCalculations[55] with base multiplier
-    return baseMultiplier * (this.extraCalculations[55] || 0);
-
-   default:
-    return baseMultiplier; // Base multiplier for unknown schematics
+   case 84: return baseMultiplier * this.golemSanctums;
+   default: return baseMultiplier;
   }
  }
 
@@ -252,32 +590,31 @@ export class Schematic {
 
  private resourceLayersBonus(baseMultiplier: number = 1): number {
   // Match B_UPG(49): apply the caller factor to the weighted resource-layer total.
-  const resourceLayers = this.extraCalculations[1] +
-   (this.extraCalculations[3] * this.getSchematicBonus(50, 1) +
-    (this.extraCalculations[5] * this.getSchematicBonus(79, 1) +
-     this.extraCalculations[7] * this.getSchematicBonus(98, 1)));
+  const resourceLayers = this.resourceLayers.motherlode +
+   (this.resourceLayers.hive * this.getSchematicBonus(50, 1) +
+    (this.resourceLayers.evertree * this.getSchematicBonus(79, 1) +
+     this.resourceLayers.trench * this.getSchematicBonus(98, 1)));
 
   return baseMultiplier * resourceLayers;
  }
 
  getDescription(): string {
-  const description = this.data.desc.replace(/[{}]/g, this.getBonus().toFixed(2));
-
-  // Special dynamic placeholders would need additional logic
-  // For now we have placeholder N/A for all dynamic placeholders
-  /*         if (description.includes("!")) {
-              description = description.replace(/!/g, "N/A");
-          } 
-          if (description.includes("#")) {
-              description = description.replace(/\#/g, "N/A");
-          }
-          if (description.includes("$")) {
-              description = description.replace(/\$/g, "N/A");
-          }
-          if (description.includes("%")) {
-              description = description.replace(/\%/g, "N/A");
-          }*/
-
+  if (!this.numericBenefitAvailable) {
+   return this.data.desc;
+  }
+  const bonus = this.getIntrinsicBonus() ?? (this.index === 53 ? 1 + this.getBonus() / 100
+   : this.index === 82 ? this.getBonus(20) : this.index === 83 ? this.getBonus(40)
+    : this.index === 84 ? this.getBonus(100) : this.getBonus());
+  let description = this.data.desc.replace(/[{}]/g, bonus.toFixed(2));
+  if (this.index === 58) {
+   description = description.replace("#", this.motherlodeOreMined.toString());
+  } else if (this.index === 59) {
+   ["!", "#", "$", "%"].forEach((placeholder, index) => {
+    description = description.replace(placeholder, (this.houndBestRuns[index] ?? 0).toString());
+   });
+  } else if (this.index === 38 && this.uniqueHarpStrings !== null) {
+   description = description.replace("$", this.uniqueHarpStrings.toString()).replace("#", bonus.toString());
+  }
   return description;
  }
 }
@@ -461,136 +798,180 @@ export class Study {
  }
 }
 
+export type MeasurementStatisticUnit = "kills" | "crops" | "levels" | "points" | "damage" | "items" | "study-levels" | "none";
+
 export class Measurement {
  unlocked: boolean = false;
+ access: boolean | null = null;
  level: number = 0;
- cosmosBonus: number = 0; // CosmoBonusQTY from cosmos upgrades [TODO]
-
- // Variables for MeasurementQTYfound calculations by measurement type
- gloomieKills: number = 0; // Type 0: Gloomie Kills [DONE]
- cropsCount: number = 0; // Type 1: Crops [DONE]
- accountLevel: number = 0; // Type 2: Account lv [DONE]
- tomeScore: number = 0; // Type 3: Tome score [DONE]
- allSkillLevel: number = 0; // Type 4: All skill lv [DONE]
- // Type 5: Always returns 0
- deathnotePts: number = 0; // Type 6: Deathnote pts [DONE]
- highestDmg: number = 0; // Type 7: Highest DMG [DONE]
- slabItems: number = 0; // Type 8: Slab Items [DONE]
- studiesDone: number = 0; // Type 9: Studies done [DONE]
- golemKills: number = 0; // Type 10: Golem kills [DONE]
+ saveAvailable: boolean = false;
+ cosmosBonus: number = 0;
+ fountainDiscountPercent: number | null = null;
+ currency!: HoleCurrency;
+ shortfall: number | null = null;
+ affordable: boolean | null = null;
+ statisticAvailable: boolean = false;
+ statisticUnavailableReason: string | null = "Not prepared.";
+ benefitAvailable: boolean = false;
+ gloomieKills: number = 0;
+ cropsCount: number = 0;
+ accountLevel: number = 0;
+ tomeScore: number = 0;
+ allSkillLevel: number = 0;
+ deathnotePts: number = 0;
+ highestDmg: number = 0;
+ slabItems: number = 0;
+ studiesDone: number = 0;
+ golemKills: number = 0;
+ private savedGloomieKills: number | null = null;
+ private savedGolemKills: number | null = null;
 
  constructor(public index: number, public data: MeasurementModel) { }
 
- static fromBase(data: MeasurementBase[]) {
-  return data.map(d => new Measurement(d.index, d.data));
+ static fromBase(data: MeasurementBase[]): Measurement[] {
+  return data.map(record => new Measurement(record.index, record.data));
  }
 
- /**
-  * Calculate the measurement quantity found based on measurement type
-  * This determines the multiplier strength for the measurement bonus
-  * @param isForMultiplier - If true (99), applies scaling for multiplier calculation
-  */
+ get statisticType(): number {
+  return Number(this.data.measurementType.type);
+ }
+
+ get statisticId(): string {
+  return `hole-measurement-statistic:${this.statisticType}`;
+ }
+
+ get statisticUnit(): MeasurementStatisticUnit {
+  switch (this.statisticType) {
+   case 0: case 10: return "kills";
+   case 1: return "crops";
+   case 2: case 4: return "levels";
+   case 3: case 6: return "points";
+   case 7: return "damage";
+   case 8: return "items";
+   case 9: return "study-levels";
+   default: return "none";
+  }
+ }
+
+ get rawStatistic(): number | null {
+  return this.statisticAvailable ? this.getMeasurementQTYfound() : null;
+ }
+
+ get normalizedQuantity(): number | null {
+  return this.statisticAvailable ? this.getMeasurementQTYfound(true) : null;
+ }
+
+ get multiplier(): number | null {
+  return this.statisticAvailable ? this.getMeasurementMulti() : null;
+ }
+
+ get baseBenefit(): number | null {
+  return this.saveAvailable && this.level === 0 ? 0 : this.benefitAvailable ? this.getMeasurementBaseBonus() : null;
+ }
+
+ get effectiveBenefit(): number | null {
+  return this.saveAvailable && this.level === 0 ? 0
+   : this.benefitAvailable && this.statisticAvailable ? this.getBonus() : null;
+ }
+
+ get nextCost(): number | null {
+  return this.saveAvailable && this.fountainDiscountPercent !== null ? this.getCost() : null;
+ }
+
+ parse(savedHole: number[][]): void {
+  this.saveAvailable = savedHole[22]?.[this.index] != null;
+  this.level = Number(savedHole[22]?.[this.index] ?? 0);
+  this.savedGloomieKills = savedHole[11]?.[28] == null ? null : Number(savedHole[11][28]);
+  this.savedGolemKills = savedHole[11]?.[63] == null ? null : Number(savedHole[11][63]);
+  this.access = null;
+  this.unlocked = false;
+  this.statisticAvailable = false;
+  this.statisticUnavailableReason = "Not prepared.";
+  this.benefitAvailable = false;
+  this.fountainDiscountPercent = null;
+  this.shortfall = null;
+  this.affordable = null;
+ }
+
+ prepareCampEffects(minau: Villager, lengthmeister: CosmoUpgrade): void {
+  this.access = minau.saveAvailable ? minau.level > this.index : null;
+  this.unlocked = this.access === true;
+  this.cosmosBonus = lengthmeister.getBonus();
+  this.benefitAvailable = this.saveAvailable && lengthmeister.saveAvailable;
+ }
+
+ prepare(inputs: { minau: Villager; lengthmeister: CosmoUpgrade; fountainDiscountPercent: number | null;
+  crops: number | null; accountLevel: number | null; tomeScore: number | null; skillLevel: number | null;
+  deathnotePoints: number | null; highestDamage: number | null; slabItems: number | null; studyLevels: number | null }): void {
+  this.prepareCampEffects(inputs.minau, inputs.lengthmeister);
+  this.fountainDiscountPercent = inputs.fountainDiscountPercent;
+  const statistics: Record<number, number | null> = {
+   0: this.savedGloomieKills, 1: inputs.crops, 2: inputs.accountLevel, 3: inputs.tomeScore,
+   4: inputs.skillLevel, 5: 0, 6: inputs.deathnotePoints, 7: inputs.highestDamage,
+   8: inputs.slabItems, 9: inputs.studyLevels, 10: this.savedGolemKills,
+  };
+  this.statisticAvailable = statistics[this.statisticType] != null;
+  this.statisticUnavailableReason = this.statisticAvailable ? null : "Saved statistic inputs are missing.";
+  this.gloomieKills = this.savedGloomieKills ?? 0;
+  this.golemKills = this.savedGolemKills ?? 0;
+  this.cropsCount = inputs.crops ?? 0;
+  this.accountLevel = inputs.accountLevel ?? 0;
+  this.tomeScore = inputs.tomeScore ?? 0;
+  this.allSkillLevel = inputs.skillLevel ?? 0;
+  this.deathnotePts = inputs.deathnotePoints ?? 0;
+  this.highestDmg = inputs.highestDamage ?? 0;
+  this.slabItems = inputs.slabItems ?? 0;
+  this.studiesDone = inputs.studyLevels ?? 0;
+ }
+
+ prepareInspection(): void {
+  const cost = this.nextCost;
+  this.shortfall = cost === null || this.currency.stock === null ? null : Math.max(0, cost - this.currency.stock);
+  this.affordable = cost === null || this.currency.stock === null ? null : this.currency.stock >= cost;
+ }
+
  getMeasurementQTYfound(isForMultiplier: boolean = false): number {
-  const measurementType = parseInt(this.data.measurementType.type);
-
-  // Calculation logic verified against game source code
-  switch (measurementType) {
-   case 0: // Gloomie Kills
-    return isForMultiplier ? lavaLog(this.gloomieKills) : this.gloomieKills;
-
-   case 1: // Crops
-    return isForMultiplier ? this.cropsCount / 14 : this.cropsCount;
-
-   case 2: // Account lv
-    return isForMultiplier ? this.accountLevel / 500 : this.accountLevel;
-
-   case 3: // Tome score  
-    return isForMultiplier ? this.tomeScore / 2500 : this.tomeScore;
-
-   case 4: // All skill lv
-    if (isForMultiplier) {
-     return this.allSkillLevel / 5000 + Math.max(0, this.allSkillLevel - 18000) / 1500;
-    }
-    return this.allSkillLevel;
-
-   case 5: // Always 0
-    return 0;
-
-   case 6: // Deathnote pts
-    return isForMultiplier ? this.deathnotePts / 125 : this.deathnotePts;
-
-   case 7: // Highest DMG
-    return isForMultiplier ? lavaLog(this.highestDmg) / 2 : this.highestDmg;
-
-   case 8: // Slab Items
-    return isForMultiplier ? this.slabItems / 150 : this.slabItems;
-
-   case 9: // Studies done
-    return isForMultiplier ? this.studiesDone / 6 : this.studiesDone;
-
-   case 10: // Golem kills
-    return isForMultiplier ? Math.max(0, lavaLog(this.golemKills) - 2) : this.golemKills;
-
-   default:
-    return 0;
+  switch (this.statisticType) {
+   case 0: return isForMultiplier ? lavaLog(this.gloomieKills) : this.gloomieKills;
+   case 1: return isForMultiplier ? this.cropsCount / 14 : this.cropsCount;
+   case 2: return isForMultiplier ? this.accountLevel / 500 : this.accountLevel;
+   case 3: return isForMultiplier ? this.tomeScore / 2500 : this.tomeScore;
+   case 4: return isForMultiplier
+    ? this.allSkillLevel / 5000 + Math.max(0, this.allSkillLevel - 18000) / 1500 : this.allSkillLevel;
+   case 6: return isForMultiplier ? this.deathnotePts / 125 : this.deathnotePts;
+   case 7: return isForMultiplier ? lavaLog(this.highestDmg) / 2 : this.highestDmg;
+   case 8: return isForMultiplier ? this.slabItems / 150 : this.slabItems;
+   case 9: return isForMultiplier ? this.studiesDone / 6 : this.studiesDone;
+   case 10: return isForMultiplier ? Math.max(0, lavaLog(this.golemKills) - 2) : this.golemKills;
+   default: return 0;
   }
  }
 
- /**
-  * Calculate the measurement multiplier based on quantity found
-  * Uses a progressive scaling system with different rates above/below 5
-  */
  getMeasurementMulti(): number {
-  const qtyFound = this.getMeasurementQTYfound(true); // Use multiplier scaling
-
-  if (qtyFound < 5) {
-   // Below 5: 1 + (18% * qtyFound)
-   return 1 + (18 * qtyFound) / 100;
-  } else {
-   // Above 5: 1 + (18% * qtyFound) + (8% * (qtyFound - 5))
-   return 1 + (18 * qtyFound + 8 * (qtyFound - 5)) / 100;
-  }
+  const quantity = this.getMeasurementQTYfound(true);
+  return quantity < 5 ? 1 + 18 * quantity / 100 : 1 + (18 * quantity + 8 * (quantity - 5)) / 100;
  }
 
- /**
-  * Calculate the base bonus for this measurement
-  * Based on the measurement's formula and current buff level
-  */
  getMeasurementBaseBonus(): number {
-  const formula = this.data.formula;
-  const formulaType = this.data.formulaType;
-  const cosmosMultiplier = 1 + this.cosmosBonus / 100;
-
-  // Check if this is a TOT (total) type measurement
-  if (formulaType === "TOT") {
-   // Extract the base value from formula (e.g., "45TOT" -> 45)
-   const baseValue = parseFloat(formula.replace("TOT", ""));
-
-   // For TOT measurements, use the diminishing returns formula
-   return cosmosMultiplier * ((baseValue * this.level) / (100 + this.level));
-  } else {
-   // For regular measurements, use simple multiplication
-   const baseValue = parseFloat(formula);
-   return cosmosMultiplier * baseValue * this.level;
-  }
+  const base = parseFloat(this.data.formula);
+  const multiplier = 1 + this.cosmosBonus / 100;
+  return this.data.formulaType === "TOT" ? multiplier * (base * this.level / (100 + this.level))
+   : multiplier * base * this.level;
  }
 
  getBonus(): number {
-  // Calculate the total measurement bonus (base * multiplier)
   return this.getMeasurementBaseBonus() * this.getMeasurementMulti();
  }
 
  getCost(): number {
-  // Formula: (250 + 50 * level) * 1.6^(index - 6 * floor(index / 10)) * 1.1^level
-  return (
-   (250 + 50 * this.level) *
-   Math.pow(1.6, this.index - 6 * Math.floor(this.index / 10)) *
-   Math.pow(1.1, this.level)
-  );
+  return 1 / (1 + (this.fountainDiscountPercent ?? 0) / 100)
+   * (250 + 50 * this.level) * Math.pow(1.6, this.index - 6 * Math.floor(this.index / 10))
+   * Math.pow(1.1, this.level);
  }
 
  getDescription(): string {
-  return this.data.description.replace(/[{}]/g, this.getBonus().toFixed(2));
+  const benefit = this.effectiveBenefit;
+  return benefit === null ? this.data.description : this.data.description.replace(/[{}]/g, benefit.toFixed(2));
  }
 }
 
@@ -942,6 +1323,16 @@ export class Hole extends Domain {
  );
  studies: Study[] = Study.fromBase(initStudyRepo());
  measurements: Measurement[] = Measurement.fromBase(initMeasurementRepo());
+ currencies: HoleCurrency[] = HoleCurrency.fromBase(initHoleCurrencyRepo());
+ schematicAvailabilityCount: number | null = null;
+
+ get schematicCatalogue(): Schematic[] {
+  return [...this.schematics].sort((left, right) => left.availabilitySlot - right.availabilitySlot);
+ }
+
+ get releasedSchematics(): Schematic[] {
+  return this.schematicCatalogue.filter(schematic => schematic.released);
+ }
  monuments: Monuments = new Monuments();
  bell: Bell = new Bell();
  well: Well = new Well();
@@ -961,6 +1352,7 @@ export class Hole extends Domain {
  private reservedVillagerInvestments: number[] | null = null;
  private unreleasedCavernOpals: number[] = [];
  savedStudyTarget: number | null = null;
+ savedStudyLevelsForMeasurements: number[] | null = null;
  studyTargetAvailable: boolean = false;
  studyTargetUnavailableReason: string | null = null;
  eligibleStudyNeighbors: number[] | null = null;
@@ -1050,6 +1442,16 @@ export class Hole extends Domain {
   });
  }
 
+ prepareSharedUpgradeEffects(): void {
+  const lengthmeister = this.majiks.VillageUpgrades.find(upgrade => upgrade.index === 12)!;
+  this.measurements.forEach(measurement => measurement.prepareCampEffects(this.villagers[VillagerIndex.Minau], lengthmeister));
+  const additionalStrings = this.majiks.HoleUpgrades.find(upgrade => upgrade.index === 1)!;
+  const stringSlots = additionalStrings.saveAvailable && this.sourceSaveAvailable.schematics
+   ? Math.min(15, Math.round(1 + additionalStrings.getBonus() +
+    [32, 33, 34, 35, 36].reduce((sum, id) => sum + this.getSchematicBonus(id, 1), 0))) : null;
+  this.schematics.forEach(schematic => schematic.prepareHarpStrings(stringSlots));
+ }
+
  prepareInspection(): void {
   const explorer = this.villagers[VillagerIndex.Polonai];
   const cavernCount = explorer.saveAvailable ? Math.min(this.studies.length, explorer.level) : null;
@@ -1071,6 +1473,20 @@ export class Hole extends Domain {
     { category: "Summoning doublers", clears: ["All doubler assignments"],
      retains: ["Earned Summoning doublers", "Summoning victories"] },
    ] };
+ }
+
+ prepareUpgradeInspection(players: Player[], divinity: Divinity): void {
+  const kaipu = this.villagers[VillagerIndex.Kaipu];
+  this.schematicAvailabilityCount = kaipu.saveAvailable
+   ? Math.min(105, this.schematics.length, Math.round(1 + 3 * kaipu.level + Math.floor(kaipu.level / 5))) : null;
+  this.schematics.forEach(schematic => schematic.prepareInspection(kaipu, this.schematicAvailabilityCount));
+  const createdSchematics = this.sourceSaveAvailable.schematics
+   ? this.schematics.filter(schematic => schematic.built).length : null;
+  this.majiks.prepare(this.villagers[VillagerIndex.Cosmo], createdSchematics);
+  const equalSpread = this.majiks.VillageUpgrades.find(upgrade => upgrade.index === 14)!;
+  equalSpread.equalSpreadPercent = this.allocationEffects.equalSpreadPercent;
+  this.majiks.pocketDivinity.prepareCharacters(players, divinity);
+  this.measurements.forEach(measurement => measurement.prepareInspection());
  }
 
  prepareOpalLedger(externalSources: OpalSource[]): void {
@@ -1274,12 +1690,12 @@ export class Hole extends Domain {
    bravery: monumentUnavailableReason === null ? this.getMonumentBonus("Bravery", 3) : null,
    justice: monumentUnavailableReason === null ? this.getMonumentBonus("Justice", 3) : null,
    wisdom: monumentUnavailableReason === null ? this.getMonumentBonus("Wisdom", 3) : null,
-   monumentUnavailableReason, slabItemsMeasurement: this.measurements[7].getBonus(),
+   monumentUnavailableReason, slabItemsMeasurement: this.measurements[7].effectiveBenefit,
    gloomieSchematic: this.getSchematicBonus(48),
    gloomieSchematicUnavailableReason,
    gloomieCardPercent: this.sourceSaveAvailable.cards ? Math.min(4 * inputs.gloomieCardLevel, 50) : null,
    gloomieCardUnavailableReason: this.sourceSaveAvailable.cards ? null : "Saved card inputs are missing.",
-   bell: this.bell.bonuses[1].getBonus(), tomeMeasurement: this.measurements[0].getBonus(),
+   bell: this.bell.bonuses[1].getBonus(), tomeMeasurement: this.measurements[0].effectiveBenefit,
   };
   const characterInputs = players.map(player => {
    const playerStatues = statues.find(statues => statues.playerID === player.playerID)!;
@@ -1299,10 +1715,21 @@ export class Hole extends Domain {
    { key: "BundlesReceived", perPlayer: false, default: null },
    { key: "Gaming", perPlayer: false, default: null },
    { key: "Spelunk", perPlayer: false, default: null },
+   { key: "GemItemsPurchased", perPlayer: false, default: null },
   ]
  }
 
  init(_allItems: Item[], _charCount: number) {
+  // The generated order maps an availability slot to a stable building ID.
+  const buildingOrder = this.schematics.map(schematic => schematic.data.order);
+  this.schematics.forEach(schematic => {
+   schematic.availabilitySlot = buildingOrder.indexOf(schematic.index);
+   schematic.released = schematic.availabilitySlot >= 0 && schematic.availabilitySlot < 105;
+   schematic.currency = this.currencies.find(currency => currency.index === schematic.data.costCurrencyId)!;
+  });
+  this.measurements.forEach(measurement => {
+   measurement.currency = this.currencies.find(currency => currency.index === Number(measurement.data.itemRequirement.id))!;
+  });
   return this;
  }
 
@@ -1322,6 +1749,7 @@ export class Hole extends Domain {
   hole.playerLocationData = [...holeData[0]];
   hole.villagers.forEach(villager => villager.parse(savedHoleData, releaseVersion));
   hole.studies.forEach(study => study.parse(savedHoleData, optionListAccount));
+  hole.savedStudyLevelsForMeasurements = savedHoleData[26]?.map(Number) ?? null;
   const target = savedHoleData[11]?.[61];
   hole.studyTargetAvailable = target != null;
   hole.savedStudyTarget = target == null || Number(target) < 0 ? null : Number(target);
@@ -1383,6 +1811,12 @@ export class Hole extends Domain {
    [id, rawData[`InventoryOrder_${id}`] != null && rawData[`ItemQTY_${id}`] != null]));
   hole.statueSaveAvailable = new Map(playerNames.map((_, id) => [id, rawData[`StatueLevels_${id}`] != null]));
   hole.sourceSaveAvailable = {
+   measurementCharacterLevels: playerNames.every((_, id) => rawData[`Lv0_${id}`] != null),
+   measurementDeathnote: playerNames.every((_, id) => rawData[`KLA_${id}`] != null),
+   measurementCrops: rawData.FarmCrop != null,
+   measurementTome: rawData.Spelunk != null,
+   measurementTasks: rawData.TaskZZ0 != null && rawData.TaskZZ1 != null,
+   measurementSlab: rawData.Cards1 != null,
    gems: rawData.GemItemsPurchased != null, grimoire: rawData.Grimoire != null,
    compass: rawData.Compass != null, emperor: rawData.OptLacc != null,
    tesseract: rawData.Arcane != null, sushi: rawData.Sushi != null,
@@ -1425,32 +1859,9 @@ export class Hole extends Domain {
   hole.studyInputsUnavailableReason = missingStudyInputs.length > 0
    ? `Saved Study inputs are missing: ${missingStudyInputs.join(", ")}.` : null;
 
-  // Parse cosmo upgrades based on their type
-  hole.majiks.HoleUpgrades.forEach((upgrade, index) => {
-   upgrade.level = Number(holeData[4][index] ?? 0);
-   upgrade.unlocked = upgrade.level > 0;
-  });
-
-  hole.majiks.VillageUpgrades.forEach((upgrade, index) => {
-   upgrade.level = Number(holeData[5][index] ?? 0);
-   upgrade.unlocked = upgrade.level > 0;
-  });
-
-  hole.majiks.IdleonUpgrades.forEach((upgrade, index) => {
-   upgrade.level = Number(holeData[6][index] ?? 0);
-   upgrade.unlocked = upgrade.level > 0;
-
-   if (upgrade.index == 21) {
-    const pocketUpgrade = upgrade as PocketDivinityUpgrade;
-    pocketUpgrade.linkedGods = [];
-    if (pocketUpgrade.level >= 1) {
-     pocketUpgrade.linkedGods.push(holeData[11][29]);
-    }
-    if (pocketUpgrade.level == 2) {
-     pocketUpgrade.linkedGods.push(holeData[11][30]);
-    }
-   }
-  });
+  const gemPurchases = data.get("GemItemsPurchased") as number[] | null;
+  hole.majiks.parse(savedHoleData, gemPurchases?.[4]);
+  hole.currencies.forEach(currency => currency.parse(savedHoleData[9]));
 
   hole.lamp.wishes.forEach(wish => {
    wish.wishCount = Number(holeData[21][wish.index] ?? 0);
@@ -1458,28 +1869,8 @@ export class Hole extends Domain {
 
 
 
-  hole.schematics.forEach(schematic => {
-   schematic.unlocked = holeData[13][schematic.index] == 1;
-
-   // Populate data references for bonus calculations
-   schematic.sedimentMulti = holeData[8] || [];
-   schematic.wellSediment = holeData[9] || [];
-   schematic.extraCalculations = holeData[11] || [];
-   schematic.bellImprovementMethods = holeData[16] || [];
-
-  });
-
-  hole.measurements.forEach(measurement => {
-   measurement.level = holeData[22] ? holeData[22][measurement.index] || 0 : 0;
-   measurement.unlocked = hole.villagers[VillagerIndex.Minau].level > measurement.index;
-
-   measurement.gloomieKills = holeData[11][28] || 0;
-   measurement.golemKills = holeData[11][63] || 0;
-   // Sum all studies for studiesDone
-   measurement.studiesDone = hole.studies.reduce((sum, value) => sum + (value.level || 0), 0);
-   // Cosmo Bonus - Lengthmeister
-   measurement.cosmosBonus = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index == 12)?.getBonus() || 0;
-  });
+  hole.schematics.forEach(schematic => schematic.parse(savedHoleData));
+  hole.measurements.forEach(measurement => measurement.parse(savedHoleData));
 
   hole.fountain.parse(holeData);
 
@@ -1559,18 +1950,23 @@ export const updateHole = (data: Map<string, any>) => {
  const legendTalents = data.get("legendTalents") as LegendTalents;
  const zenithMarket = data.get("zenithMarket") as ZenithMarket;
 
- // Update measurements with various cross domain data
- hole.measurements.forEach(measurement => {
-  measurement.slabItems = slab.rawObtainedCount;
-  measurement.highestDmg = taskboard.tasks.find(task => task.name == "Road to Max Damage")?.count || 0;
-  measurement.tomeScore = tome.getHighestScore();
-  measurement.cropsCount = farming.discoveredCrops;
-  measurement.accountLevel = tome.totalAccountLevel;
-  // TODO: Make this less messy one day, for now should be fine.
-  measurement.allSkillLevel = parseInt(tome.lines[11].getPlayerCurrentValueDisplay(0));
-  // Normal-world points exclude minibosses; the Eclipse Skulls gate is ready.
-  measurement.deathnotePts = deathnote.getTotalWorldRank();
- });
+ // Tome quantities are numeric prepared inputs, not display-formatted strings.
+ const studyLevels = hole.savedStudyLevelsForMeasurements === null ? null
+  : hole.savedStudyLevelsForMeasurements.reduce((sum, level) => sum + level, 0);
+ const lengthmeister = hole.majiks.VillageUpgrades.find(upgrade => upgrade.index === 12)!;
+ const fountainDiscountPercent = hole.sourceSaveAvailable.fountainUpgrades && hole.sourceSaveAvailable.fountainMarbleization
+  ? hole.getFountainBonus(2, 14) : null;
+ hole.measurements.forEach(measurement => measurement.prepare({
+  minau: hole.villagers[VillagerIndex.Minau], lengthmeister, fountainDiscountPercent,
+  crops: hole.sourceSaveAvailable.measurementCrops ? farming.registeredCropCount : null,
+  accountLevel: hole.sourceSaveAvailable.measurementCharacterLevels ? tome.totalAccountLevel : null,
+  tomeScore: hole.sourceSaveAvailable.measurementTome ? tome.getHighestScore() : null,
+  skillLevel: hole.sourceSaveAvailable.measurementCharacterLevels ? tome.totalSkillLevel : null,
+  deathnotePoints: hole.sourceSaveAvailable.measurementDeathnote ? deathnote.getTotalWorldRank() : null,
+  highestDamage: hole.sourceSaveAvailable.measurementTasks ? Number(taskboard.tasks.find(task => task.name === "Road to Max Damage")!.count) : null,
+  slabItems: hole.sourceSaveAvailable.measurementSlab ? slab.rawObtainedCount : null,
+  studyLevels,
+ }));
 
  // Update jar bonuses from legendary talents
  const legendTalentBonus = 1 + legendTalents.getBonusFromIndex(29) / 100;
@@ -1582,17 +1978,27 @@ export const updateHole = (data: Map<string, any>) => {
  hole.lamp.zenithMarketBonus = zenithMarket.getBonusForId(2);
 
  // Update the gambit multiplier
- let gambitMultipliers = (hole.measurements.find(measurement => measurement.index == 13)?.getBonus() ?? 0) + hole.getStudyBolaiaBonuses(13);
- gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
- gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
- gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
- hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+ const measurementGambitBonus = hole.measurements[13].effectiveBenefit;
+ if (measurementGambitBonus === null) {
+  hole.gambit.gambitPointsMulti = null;
+ } else {
+  let gambitMultipliers = measurementGambitBonus + hole.getStudyBolaiaBonuses(13);
+  gambitMultipliers += tesseract.getUpgradeBonus(47) + (hole.monuments.monuments["Wisdom"].bonuses.find(bonus => bonus.index == 7)?.getBonus() ?? 0);
+  gambitMultipliers += hole.schematics.find(schem => schem.index == 78)?.getBonus(10) ?? 0;
+  gambitMultipliers += hole.jar.getBonus(23) + hole.jar.getBonus(30);
+  hole.gambit.gambitPointsMulti = 1 + gambitMultipliers / 100;
+ }
  hole.gambit.updateUnlockedBonuses();
 }
 
 export const updateHoleStudyEffects = (data: Map<string, any>): void => {
  const hole = data.get("hole") as Hole;
  hole.prepareSharedStudyEffects();
+};
+
+export const updateHoleUpgradeEffects = (data: Map<string, any>): void => {
+ const hole = data.get("hole") as Hole;
+ hole.prepareSharedUpgradeEffects();
 };
 
 export const updateHolePresentation = (data: Map<string, any>): void => {
@@ -1659,4 +2065,5 @@ export const updateHolePresentation = (data: Map<string, any>): void => {
   gloomieCardLevel: cards.find(card => card.id === "caveB")!.getLevels(),
   summoningPercent: summoning.getSummoningWinnerBonusFromIndex(21), vaultPercent: vault.getBonusForId(73),
  });
+ hole.prepareUpgradeInspection(players, data.get("divinity") as Divinity);
 };
