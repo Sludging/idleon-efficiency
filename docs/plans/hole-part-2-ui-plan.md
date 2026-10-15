@@ -1,5 +1,7 @@
 # The Hole part 2: UI plan
 
+**Status:** Accepted as complete by the human on 2026-10-15. The selected production direction is this approved plan as amended in the [current handoff](hole-research-brief.md#current-handoff), including the later Doot, cost, and unavailable-value refinements. This document records the target and does not replace the handoff's verification limits.
+
 ## Player outcome and scope
 
 Let players scan **Upgrades → Majik / Schematics / Measurements** for owned benefits, useful unowned rewards, and the next purchase. Keep each benefit beside its progression. Use compact cards rather than an audit of backend fields.
@@ -143,4 +145,4 @@ Use the private Docker Playwright workflow at **1440×1000** with the retained r
 
 Use separately labelled detached display examples for absent real-save states: locked/unbuilt, missing ownership/access/cost/statistic/benefit, verified zero, unowned reward, point shortage, prerequisite/enhancement gate, and inactive/unavailable Pocket. Do not mutate prepared source objects or the save. Such examples prove presentation only, not alternate game branches or parity.
 
-Record exact commands, exits, browser errors, scope, and limits in the handoff. Preserve source/save/generated fingerprints. Remove owned disposable routes and executable scenarios after capture; keep private source copies and screenshots. A preview is not production implementation or acceptance. Stop for judgment before production work or commit.
+The human accepted the implemented part on 2026-10-15. The current handoff records production evidence, the later approved amendments, and verification limits. This standalone plan defines selected presentation only; it does not extend acceptance to unexercised states or checks.

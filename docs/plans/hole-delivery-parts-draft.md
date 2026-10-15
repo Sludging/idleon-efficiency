@@ -1,6 +1,6 @@
 # The Hole: approved delivery parts
 
-**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PART 1 COMPLETE — Original approval recorded on 2026-10-12. Part 1 [#441](https://github.com/Sludging/idleon-efficiency/issues/441) is accepted as complete on 2026-10-14. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) and parts 2–7 remain open. No further part is selected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
+**Status:** APPROVED PRODUCT/DELIVERY SCOPE / PUBLISHED / PARTS 1–2 COMPLETE — Original approval recorded on 2026-10-12. Part 1 [#441](https://github.com/Sludging/idleon-efficiency/issues/441) was accepted as complete on 2026-10-14; part 2 [#442](https://github.com/Sludging/idleon-efficiency/issues/442) was accepted as complete on 2026-10-15. Parent [#440](https://github.com/Sludging/idleon-efficiency/issues/440) remains open. Parts 3–7 remain open and unselected. Acceptance, execution evidence, and limits remain in the [current handoff](hole-research-brief.md#current-handoff).
 
 **Scope sources:** [Approved research brief](hole-research-brief.md) and [approved product specification](hole-spec-draft.md).
 
@@ -24,7 +24,7 @@ All seven parts are required to cover camp, all five villagers, and all 18 relea
 
 **No approved delivery-part blockers exist.** The parts define delivery and ownership boundaries, not navigation, tabs, pages, or a required player-facing sequence. Technical dependencies have not been assessed; this scope does not claim full implementation independence. Each part owns verification of the camp, character, cavern, and cross-account inputs required for its outcomes. Consuming another part's information does not establish an approved blocking edge.
 
-**Whole-feature information architecture is documented.** For planning any part's Hole pages, use the [canonical IA — Delivery-part reference map](hole-ui-information-architecture.md#delivery-part-reference-map) to reach the named tab paths and relevant owner sections. This human-selected direction is a page-planning reference, not an implementation ticket. Part 1 received separate planning and execution authority. Parts 2–7 still require human selection and authorization.
+**Whole-feature information architecture is documented.** For planning any part's Hole pages, use the [canonical IA — Delivery-part reference map](hole-ui-information-architecture.md#delivery-part-reference-map) to reach the named tab paths and relevant owner sections. This human-selected direction is a page-planning reference, not an implementation ticket. Parts 1 and 2 received separate planning and execution authority and are complete. Parts 3–7 still require human selection and authorization.
 
 Every part follows these boundaries:
 
@@ -58,20 +58,22 @@ Every part follows these boundaries:
 
 **Outcome:** Players can understand all camp upgrades, their owned effective benefits, and competing requirements and costs, including Pocket Divinity.
 
-**Blocked by:** No approved delivery-part blockers. Shared planning gates and unassessed technical dependencies are stated in the delivery contract.
+**Completion:** Human accepted this part as complete on 2026-10-15. The [current handoff](hole-research-brief.md#current-handoff) records accepted implementation, evidence, and limits. The latest approved [part 2 UI plan](hole-part-2-ui-plan.md) narrows how backend information is presented; it does not remove accepted backend calculations.
 
 ### Backend data and UI information needs
 
 - **Backend:** Provide Kaipu schematic identity/order, availability, built status, currency, current discounted cost, balance/shortfall, and intrinsic/effective benefit.
 - **Backend:** Provide all three Majik trees, their single shared point pool, prerequisites, base/enhanced levels and caps, effective effects, and saved Pocket Divinity selections with ordinary-link/Doot overlap.
 - **Backend:** Provide all 17 Measurements with access, purchased level, measured account statistic and units, multiplier, effective benefit, currency, next cost, and shortfall. Include the camp and cross-account modifiers required for displayed prices, caps, and benefits.
-- **UI:** Let players inspect schematics, all Majik trees and Pocket Divinity, and Measurements alongside access requirements, ownership, costs, effective benefits, and shared-resource competition. Browsing, search, and filters by effect, currency, access, ownership, or affordability can support understanding where useful.
+- **UI:** Let players inspect schematics, all Majik trees and Pocket Divinity, and Measurements alongside access requirements, ownership, costs, and effective benefits. Presentation follows the latest approved plan; detailed shortfall/competition disclosures, explicit shortfall labels, and per-bonus/resource tooltips are not required.
 
 ### Acceptance outcomes
 
-- [ ] Players can distinguish schematic availability from construction and inspect correctly matched costs, active next-construction discounts, shortfalls, built benefits, and competing resource uses, including locked released entries.
-- [ ] Players can inspect all Majik trees as one point pool, prerequisites, base/enhanced caps and effects, and saved Pocket gods with verified normal-link/Doot interactions, without implying duplicate activation.
-- [ ] Players can inspect all 17 Measurements with meaningful measured values/units, multipliers and effective benefits alongside purchase requirements, rather than unexplained percentages or false zeroes for missing inputs.
+- [x] Players can distinguish schematic availability from construction and inspect correctly matched costs, active next-construction discounts, shortfalls, built benefits, and released locked entries. The UI hides purchased costs and omits explicit shortfall/competition disclosures as approved; backend values remain available.
+- [x] Players can inspect all Majik trees as one point pool, prerequisites, base/enhanced caps and effects, and saved Pocket gods with verified normal-link/Doot interactions, without implying duplicate activation. The approved UI hides saved selections only when active Doot replaces their ordinary benefit presentation; otherwise it preserves selected identities and art.
+- [x] Players can inspect all 17 Measurements with meaningful measured values/units, multipliers and effective benefits alongside purchase requirements, rather than unexplained percentages or false zeroes for missing inputs.
+
+**Accepted UI amendments:** Show only the prepared Pocket All Stat contribution and Divinity Lv. 2+ context under active Doot; hide all selected god names, art, slots, and ordinary bonus text in that branch. In inactive Doot, retain saved selections and their identities, art, and text. Purchased schematics have no currency or historical cost. Unknown cost operands stay unavailable and neutral. No per-bonus/resource tooltips, exact-count or competition disclosures, explicit shortfall labels, or non-Doot shortfall text are required. These presentation decisions do not delete backend calculation outcomes.
 
 **Data note:** Verify source-backed schematic availability/order, effective modifier inputs, shared Majik pool and enhancement caps, Pocket/Doot aggregation, and Measurement statistic/currency mappings within this part.
 
@@ -199,4 +201,4 @@ The original product/delivery approval changed scope documents only. It ran no b
 
 The human approved the [product specification](hole-spec-draft.md) and these seven delivery parts on 2026-10-12, and authorized publication. That approval settled product and delivery scope only. At publication, all seven parts were unselected and stopped; no ready-for-agent label or execution authorization followed from publication.
 
-The human later selected the three-tab IA on 2026-10-12 and separately authorized part 1's planning and execution. Final part 1 completion is accepted on 2026-10-14; the [handoff](hole-research-brief.md#current-handoff) retains approvals, results, and check limits. Parts 2–7 remain open and unselected. This settlement does not authorize their planning or implementation. The rejected historical rail preview remains historical, not selected-direction proof.
+The human later selected the three-tab IA on 2026-10-12 and separately authorized parts 1 and 2 through completion. Part 1 was accepted on 2026-10-14; part 2 was accepted on 2026-10-15. The [handoff](hole-research-brief.md#current-handoff) retains their approvals, results, and check limits. Parts 3–7 remain open and unselected; no other part is authorized. The rejected historical rail preview remains historical, not selected-direction proof.

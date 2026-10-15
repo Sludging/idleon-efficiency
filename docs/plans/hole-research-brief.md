@@ -1,11 +1,32 @@
 # The Hole: research brief
 
-**Status:** Human accepted the reviewed part 2 UI on 2026-10-15 and authorized a local commit of only the three selected production files, amended UI plan, and this handoff. Final review: zero confirmed standards or specification findings. Preserve stated check limits below.
+**Status:** Human accepted part 2 as complete on 2026-10-15. Relevant documentation and issue records are settled; the accepted local commit contains only the four documentation paths listed in the final receipt below. Final UI review found zero confirmed standards or specification findings. Preserve stated check limits below.
+
+**Final acceptance (2026-10-15):** The human said, “Ok I approve settling this part work as complete, well done. Make sure to record and update any relevant documentation and issues and commit any uncommited code that is relevant to this work”. This accepts selected part 2 as complete and authorizes relevant documentation/tracker settlement and commitment of relevant uncommitted work. Part 1 remains complete; parts 3–7 remain unselected. The parent remains open.
+
+**Accepted implementation:** Backend `9674d14c0c506e6496005ac752aa5adecd9fd579`, approved production UI commit `6d6d9c18`, and reconciled prerequisite commit `8c77f22` are accepted. The supplied `HoleBuildingRepo`, `holeBuildingModel`, `HoleCurrencyRepo`, and `holeCurrencyModel` exports are required unchanged prerequisites; they are already tracked in `8c77f22`, not part of current uncommitted scope. Preserve prior publication comments and all accepted evidence/check limits below.
 
 ## Current handoff
 
-- **Selected part and authority:** The human selected part 2 only: [#442 — Schematics, Majik, and Measurements](https://github.com/Sludging/idleon-efficiency/issues/442). The amended plan and evidence were published in [#442 comment 6187512984](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6187512984). The parent remains a read-only delegated supervisor under [the feature workflow](../human/feature-workflow.md). Workers and delegates run strictly serially. Preserve completed part 1, canonical navigation, Studies, cavern identities, unrelated work, accepted calculations, and supplied generated prerequisites.
-- **Current gate (2026-10-15):** Human acceptance authorizes a local commit of exactly `data/domain/world-5/hole/hole.tsx`, `components/world-5/hole/majik.tsx`, `components/world-5/hole/upgradeInspection.tsx`, `docs/plans/hole-part-2-ui-plan.md`, and `docs/plans/hole-research-brief.md`. Preserve all unrelated dirty changes and ignored local icon assets; stage no tests, fixtures, configs, generated files, asset artifacts, or private proof. Stop after the local commit; no push, PR, deployment, issue closure, or other-part work.
+- **Selected part and authority:** The human selected part 2 only: [#442 — Schematics, Majik, and Measurements](https://github.com/Sludging/idleon-efficiency/issues/442). Final acceptance on 2026-10-15 accepts the part as complete. The amended plan and evidence were published in [#442 comment 6187512984](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6187512984). The parent remains a read-only delegated supervisor under [the feature workflow](../human/feature-workflow.md). Workers and delegates run strictly serially. Preserve completed part 1, canonical navigation, Studies, cavern identities, unrelated work, accepted calculations, and supplied generated prerequisites.
+- **Current gate (2026-10-15):** Part 2 settlement is complete: #442 is closed as completed; #440 remains open; parts 3–7 remain open and unselected. The local settlement commit is recorded below. Preserve unrelated dirty changes and all prior evidence, publication history, approvals, and check limits. No push, PR, deployment, generated-file edit, or other-part work.
+
+### Part 2 final acceptance and settlement — 2026-10-15
+
+The human accepted part 2 as complete. [#442 is closed as completed](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6189832814). [Parent #440 remains open](https://github.com/Sludging/idleon-efficiency/issues/440#issuecomment-6189886404); parts 3–7 remain open and unselected. Prior approvals and publication comments remain unchanged. No other issue was closed or selected.
+
+The accepted production direction preserves backend calculations and the approved UI amendments: active Doot shows prepared Pocket **+30% All Stat / Divinity Lv. 2+** and hides saved god identity/art/slots/ordinary text; inactive Doot retains saved identity, art, and text. Purchased schematics show no cost. Unknown cost operands remain neutral and unavailable. Backend shortfalls, resource identities, and calculations remain accepted; explicit shortfall labels, detailed competition/exact-count disclosures, and per-bonus/resource tooltips are not required.
+
+**Behavior evidence and limits:** This settlement ran no game, UI, test, build, lint, formatter, or extraction checks. Retained production evidence remains authoritative: the normal-route smoke passed **11/11 assertions**, and the later production-component capture exercised active/inactive Doot, **101** purchased schematics with no costs, all **17** Measurements, and unavailable Cost operands. The focused domain command remains red: **3 suites / 213 tests; 188 passed / 25 failed**. Paired extraction inputs differ from the current fixture; complete original per-test output is unavailable. Preserve known shared browser errors, historical failures, and all check limits in the phase records above. No failure was cleared or relabelled.
+
+**Final local commit receipt:** `docs(hole): settle part 2 UI acceptance`. This commit contains only the four documentation paths below; its hash is reported with the completion result, not embedded in its own handoff.
+
+- `docs/plans/hole-research-brief.md` — records final authority, current status, issue receipts, accepted amendments, retained evidence limits, and this commit receipt.
+- `docs/plans/hole-spec-draft.md` — reconciles part 2 completion and preserves parts 3–7 as unselected.
+- `docs/plans/hole-delivery-parts-draft.md` — records part 2 completion, marks its three acceptance outcomes complete, and distinguishes retained backend outcomes from amended UI disclosures.
+- `docs/plans/hole-part-2-ui-plan.md` — marks the approved plan accepted and replaces its stale pre-implementation stop gate with the final acceptance boundary.
+
+No uncommitted part 2 production code, tests, fixtures, configs, or generated metadata remain. The four supplied generated prerequisites (`HoleBuildingRepo.ts`, `holeBuildingModel.ts`, `HoleCurrencyRepo.ts`, `holeCurrencyModel.ts`) are unchanged and tracked in commit `8c77f22b`; they are not part of this commit. Preserve them as required provenance. Unrelated dirty and already-staged workspace changes, including unrelated Spelunking tests, and historical untracked Hole IA materials remain untouched and excluded.
 
 ### Part 2 phase 9 evidence-only revision for the three selected findings
 
