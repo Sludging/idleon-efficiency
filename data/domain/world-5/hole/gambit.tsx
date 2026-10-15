@@ -69,7 +69,7 @@ export class GambitChallenges {
 }
 
 export class GambitBonus {
-    unlocked: boolean = false;
+    unlocked: boolean | null = false;
 
     constructor(public index: number, public data: GambitBonusModel) {}
 
@@ -77,11 +77,13 @@ export class GambitBonus {
         return data.map(d => new GambitBonus(d.index, d.data));
     }
 
-    getBonus(gambitTotalScore: number): number {
+    getBonus(gambitTotalScore: number | null): number | null {
+        if (this.unlocked === null) return null;
         if(!this.unlocked)
         {
             return 0;
         }
+        if (gambitTotalScore === null) return null;
 
         // Special case
         if (this.index == 0) {
@@ -103,13 +105,13 @@ export class GambitBonus {
 export class Gambit {
     bonuses: GambitBonus[] = [];
     challenges: GambitChallenge[] = GambitChallenges.getChallenges();
-    gambitPointsMulti: number = 1;
+    gambitPointsMulti: number | null = 1;
 
     constructor() {
         this.bonuses = GambitBonus.fromBase(initGambitBonusRepo());
     }
 
-    getBonus(index: number, player?: Player): number {
+    getBonus(index: number, player?: Player): number | null {
         if (player?.currentMap.includes("Tutorial")) return 0;
 
         const bonus = this.bonuses.find(bonus => bonus.index == index);
@@ -129,6 +131,7 @@ export class Gambit {
             // Bonuses increasing with Gambit Score
             if (bonus.data.x1 == 1) {
                 const value = bonus.getBonus(this.getGambitTotalTime());
+                if (value === null) return "Unavailable";
                 return bonus.data.name.replace('{', value.toString()).replace('}', (1 + value / 100).toString()+"x");
             } else {
                 return bonus.data.name.replace('{', bonus.data.x0.toString()).replace('}', bonus.data.x0.toString()+"x");
@@ -142,15 +145,17 @@ export class Gambit {
         return this.challenges.reduce((sum, challenge) => sum + challenge.maxTime, 0);
     }
 
-    getGambitTotalScore(): number {
-        return this.challenges.reduce((sum, challenge) => sum += challenge.getScoreValue(), 0) * this.gambitPointsMulti;
+    getGambitTotalScore(): number | null {
+        const baseScore = this.challenges.reduce((sum, challenge) => sum + challenge.getScoreValue(), 0);
+        if (baseScore === 0) return 0;
+        return this.gambitPointsMulti === null ? null : baseScore * this.gambitPointsMulti;
     }
 
     updateUnlockedBonuses() {
         const totalGambitScore = this.getGambitTotalScore();
 
         this.bonuses.forEach(bonus => {
-            bonus.unlocked = totalGambitScore >= bonus.getScoreThreshold();
+            bonus.unlocked = totalGambitScore === null ? null : totalGambitScore >= bonus.getScoreThreshold();
         });
     }
 }

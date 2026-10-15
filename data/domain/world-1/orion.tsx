@@ -50,7 +50,7 @@ export class Orion extends Domain {
     // Feather rate boost
     vaultUpgrade21: number = 0;
     meritoBonus12: number = 0;
-    gambitBonus8: number = 0;
+    gambitBonus8: number | null = 0;
     
     getRawKeys(): RawData[] {
         return [];
@@ -77,10 +77,15 @@ export class Orion extends Domain {
     }
 
     // This rate is per second
-    getFeatherRate(): number {
-        return (1 + 9 * this.getMegafeatherQuantity(0)) 
-            * (1 + this.vaultUpgrade21 / 100) * (1 + this.meritoBonus12 / 100) * (1 + this.gambitBonus8 / 100) 
-            * (this.getUpgradeLevel(0) + 5 * this.getUpgradeLevel(5) + 2 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(3) + 4 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(7))
+    getFeatherRate(): number | null {
+        const baseRate = this.getUpgradeLevel(0) + 5 * this.getUpgradeLevel(5)
+            + 2 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(3)
+            + 4 * this.getMegafeatherQuantity(4) * this.getUpgradeLevel(7);
+        if (baseRate === 0) return 0;
+        if (this.gambitBonus8 === null) return null;
+        return (1 + 9 * this.getMegafeatherQuantity(0))
+            * (1 + this.vaultUpgrade21 / 100) * (1 + this.meritoBonus12 / 100) * (1 + this.gambitBonus8 / 100)
+            * baseRate
             * (1 + 5 * this.getUpgradeLevel(2) / 100) * Math.pow(3 + 2 * this.getMegafeatherQuantity(6), this.getUpgradeLevel(4)) 
             * (1 + this.ownedShinyFeather * this.getUpgradeLevel(6) / 100)
     }

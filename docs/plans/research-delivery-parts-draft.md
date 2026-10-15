@@ -1,6 +1,6 @@
 # Research: delivery parts
 
-**Approved delivery scope.** See the [current handoff](research-research-brief.md#current-handoff) for approval and phase decisions.
+**Approved delivery scope.** Part 1 and Part 2 are complete and human-accepted. See the [current handoff](research-research-brief.md#current-handoff) for approval and phase decisions and [final Part 2 acceptance and closeout](research-research-brief.md#human-final-part-2-acceptance-and-closeout--2026-10-15).
 
 **Scope sources:** [Approved research brief](research-research-brief.md) and [approved product specification](research-spec-draft.md).
 
@@ -10,7 +10,7 @@ Exactly two substantial parts deliver backend information through read-only UI. 
 
 Each part includes its required parsing, catalogue data, source mapping. Existing saved inputs and Grid calculations do not establish complete data or calculation readiness. Resolve missing evidence within the relevant part. Missing parsing or metadata does not reduce its scope.
 
-Part 1 uses shared Observations, Lenses, Posty Notes, and Papers tabs. Empty Observation search shows every entry. Part 2 uses lists with all entries visible by default; an optional **Show unlocked** checkbox may narrow a useful list. Keep current contributors beside the affected stat. Part 1 omits raw coordinates; Part 2 coordinates may explain actual state without requiring a spatial board or invented upgrade categories.
+Part 1 uses shared Observations, Lenses, Posty Notes, and Papers tabs. Empty Observation search shows every entry. Part 2 uses dense flat card catalogues with all entries visible by default. Grid starts at State All with Show maxed checked; Shapes starts at State All. Keep name/effect search and clear behavior. Keep supported contributors in value-attached tooltips beside Points and Shape ownership. Part 1 omits raw coordinates; Part 2 retains actual saved placement and rotation without requiring a spatial board or invented upgrade categories.
 Orthogonal neighbors are slots directly left, right, above, or below.
 
 Related activities own their progression, resources, and actions. Research consumes externally owned values only when needed for its effects or contributors. Exclude activity panels, cross-domain navigation, simulators, recommendations, optimizers, hypothetical comparisons, discovery probabilities, and ETA planning. All website interactions remain read-only.
@@ -51,7 +51,7 @@ Apply [shared verification](#shared-verification) to account growth, discovery c
 
 **Blocked by:** None. Part 2 does not depend on Part 1's delivered data or UI. Required mappings, metadata, current calculations, and display evidence remain work within Part 2.
 
-**Completion:** All six Part 2 outcomes are complete and accepted by the delegated supervisor on 2026-10-14. The [acceptance and closeout handoff](research-research-brief.md#part-2-delegated-ui-acceptance-and-local-closeout--2026-10-14) permits only the selected local UI commit and scoped document update, then stop.
+See the [current handoff](research-research-brief.md#current-handoff) for Part 2 status, approval decisions, and execution evidence.
 
 ### Backend data and UI information needs
 
@@ -59,21 +59,19 @@ Apply [shared verification](#shared-verification) to account growth, discovery c
 - **Backend:** Match all real upgrades to names, effect descriptions, purchased levels, caps, and verified current effects. Include reachability through owned orthogonal neighbors and additional prerequisites. Exclude placeholder positions.
 - **Backend:** Preserve Research-owned unlock descriptions and conditional effects. Consume external values only where needed. These include reclaimed Gaming crowns, Glimbo trades, Lore, Rift, boat levels, and conditional Arctis/Doot inputs.
 - **Backend:** Provide all Shape definitions, ownership, cap, actual positions, and rotations. Include rotation requirements, covered upgrades, and each square's single active Shape owner. Provide code-backed current modifiers and supported ownership and effect sources.
-- **UI:** Support the complete flat upgrade list with name and effect search. Keep Point balances and sources together. Show levels, caps, current effects, reachability, prerequisites, and unlock descriptions beside each upgrade.
-- **UI:** Explain owned Shapes, actual coverage, active ownership, and current modifiers beside Shape and upgrade entries. Do not require a game-like Grid.
+- **UI:** Use a complete flat catalogue of dense Grid cards with name/effect search. Show Points as available/earned only, with sources in the existing value-attached tooltip pattern. Show Level ratios and complete current effects. Express purchased/reachable-unleveled/unreachable state with opacity 1/0.65/0.35; purchase wins display classification without changing source reachability. No Grid access column or tooltip. Start State at All with exclusive All/Leveled/Reachable/Unreachable choices and Show maxed checked.
+- **UI:** Show the shared Grid factor once above the catalogue. Use compact top-right active Shape artwork with a hover/focus name-and-factor tooltip. Dense illustrated Shape cards retain complete descriptions, code-backed modifiers, actual placement/rotation, and complete active coverage. Ownership summary and sources use a value-attached tooltip; State offers All/Owned/Not owned. Do not invent Shape levels, maxed, or access states. Preserve linked conditions in focusable details where density requires them. No game-like Grid is required.
 
 ### Acceptance outcomes
 
-- [x] Players can distinguish earned, spent, and available Points. Supported level, milestone, and outside contributions appear beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
-- [x] Players can browse all real upgrades in a flat catalogue and search names and effects. All entries remain visible by default. Placeholder positions do not inflate the count.
-- [x] Players can inspect each upgrade's purchased level, cap, verified current effect, orthogonal reachability, and additional prerequisites. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors appear beside affected effects.
+- [x] Players can read available Points relative to earned Points without separate earned/spent fields. Supported level, milestone, and outside contributions remain in a tooltip beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
+- [x] Players can browse all real upgrades in a dense flat catalogue and search names and effects. All entries remain visible by default. Grid State and Show maxed filters start at All and checked. Placeholder positions do not inflate the count.
+- [x] Players can inspect each upgrade's purchased level, cap, verified current effect, and additional prerequisites. Catalogue opacity and State preserve independent orthogonal reachability without access labels/tooltips. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors remain beside affected effects through focusable details where needed.
 - [x] Players can understand Research-owned linked unlocks and their conditions without related activity progression, resources, actions, or navigation. Eclectic Sigils also requires Spelunking Lore Boss 7. Masterius Cookerius requires Rift 61. Revival of the Undead Battalion requires boat level 400. Crown effects use externally owned reclaimed Gaming crowns. Glimbo scaling uses complete 100-trade blocks. Masterclass Research affects Deathbringer, Windwalker, and Arcane Cultist, not Royal Guardian. Divine Design preserves conditional Arctis/Doot multiplier behavior.
-- [x] Players can inspect all Shape definitions, current ownership, supported ownership sources, and actual saved positions and rotations. Rotation unlocks at Research level 90. Ownership has a cap of ten. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
-- [x] Players can inspect actual covered upgrades and each square's single active Shape owner. Code-backed modifiers appear beside affected upgrade effects.
+- [x] Players can inspect all ten illustrated Shape definitions, current ownership, supported ownership source tooltips, and actual saved positions and rotations. The ownership filter defaults to All. Rotation unlocks at Research level 90. Ownership has a cap of ten, not upgrade levels or maxed state. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
+- [x] Players can inspect complete saved-owner covered upgrades and each square's single active Shape owner. Code-backed modifiers remain available beside affected upgrade effects through active-owner tooltips. The shared Grid factor appears once above the catalogue.
 
 ### Evidence and verification
-
-Supplied final actual UI evidence records **1,445 browser assertions / 0 failures** at **1440×1000 desktop**, **19** preserved provider snapshots, exact prepared accepted-backend equality, approved-preview prepared-value equality, and preserved Part 1. The [closeout handoff](research-research-brief.md#part-2-delegated-ui-acceptance-and-local-closeout--2026-10-14) retains the final run path, inherited errors, unobserved branches, and offline 1.22 limits. This acceptance record adds no new proof and reruns no application checks.
 
 The [approved brief](research-research-brief.md) records supporting sources G1, G4, G7, P1, P3–P5, and R1–R3. Complete metadata, Point dependencies, upgrade effects, prerequisites, and Shape mappings still need supporting evidence where not established. Catalogue coverage does not prove formula parity for all 60 upgrades. Current code-backed Shape effects take precedence over conflicting descriptions. All-source Shape obtainability remains unverified. Historical correctness issue #386 does not certify the whole Grid.
 

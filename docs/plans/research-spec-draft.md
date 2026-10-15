@@ -14,7 +14,7 @@ Provide a read-only Research surface for account growth, discoveries, lens produ
 Explain unfamiliar terms beside their entries. Show supported current contributors beside the stats they affect.
 
 Use dense illustrated Observation cards within shared Part 1 tabs for Observations, Lenses, Posty Notes, and Papers. Keep complete catalogues available; empty Observation search shows all entries.
-Use a flat Part 2 upgrade catalogue with all information visible by default. Support Observation search by name or map and upgrade search by name or effect. Gameplay actions remain in the game.
+Use dense flat Part 2 Grid and Shape card catalogues with all entries visible by default. Retain name/effect search. Grid adds Show maxed and an exclusive State filter; Shapes adds an ownership State filter. Gameplay actions remain in the game.
 Show current information, not a planner or recreated game boards.
 
 Exactly two substantial parts deliver backend information through independently usable UI:
@@ -44,7 +44,7 @@ Existing Grid calculations do not establish complete data readiness. Gameplay in
    As a player, I want reached and upcoming Posty Notes so I can understand rewards.
 
 6. **Point balance — Part 2**
-   As a player, I want my current Point balance and sources so I can understand earned Points and spending.
+   As a player, I want available Points relative to earned Points and their sources so I can understand my current balance.
 
 7. **Grid upgrades and linked unlocks — Part 2**
    As a player, I want Grid upgrade effects and requirements so I can understand current bonuses and linked unlocks.
@@ -61,19 +61,19 @@ The [approved delivery parts](research-delivery-parts-draft.md) retain detailed 
 - **Complete coverage:** Include all named Observations, Grid upgrades, Shape definitions, and Posty Notes.
   Placeholder Grid positions are not upgrades. Missing parsing or metadata does not reduce this scope.
 - **Browsing:** Part 1 uses shared content tabs, name/map search, and Game order, Research EXP highest, and Insight highest sorts.
-  Show actual discovery ownership once as `Observations (found/43)`. Do not add an Overview tab, Activity filter, page-jump links, or exact-number reveals. Part 2 keeps all information visible by default; an optional **Show unlocked** checkbox may narrow useful lists. Use readable adjacency and coverage references where needed. Do not require spatial boards or invent upgrade categories.
+  Show actual discovery ownership once as `Observations (found/43)`. Do not add an Overview tab, Activity filter, page-jump links, or exact-number reveals. Part 2 defaults to all 60 upgrades and ten Shape definitions. Grid starts with **Show maxed** checked and **State: All**, with exclusive All/Leveled/Reachable/Unreachable choices. Reachable means not leveled but reachable. Shapes uses All/Owned/Not owned and no maxed control. Keep name/effect search and clear behavior. Grid opacity is 1/0.65/0.35 for purchased/reachable-unleveled/unreachable; purchase wins display classification without changing prepared reachability. Shapes uses ownership opacity 1/0.35. Do not add Grid access labels or tooltips. Do not require spatial boards or invent upgrade categories.
 - **Discovery and study:** Separate revealed-prefix visibility, prior discovery, exhausted account attempts, and maximum roll below threshold. Keep study-level requirements independent.
   These conditions can coexist and do not establish map access. Only currently hidden, not-found cards show their source-backed reveal level. Keep the first-discovery prerequisite distinct. Use 1/0.65/0.35 opacity for found/revealed-missing/hidden cards without repeated visible state labels.
 - **Current effects:** Describe actual lens placements, Insight, and Kaleidoscope support.
   Kaleidoscopes affect slots directly left, right, above, and below, not diagonals.
   Insight levels individual Observations; it is not Research skill EXP. Keep local effects distinct from total-Observation-level effects.
-  Show actual Shape coverage and each square's active Shape.
+  Show actual Shape coverage and each square's active Shape. Grid cards use top-right active Shape artwork with a hover/focus name-and-factor tooltip. Show the shared Grid factor once above the catalogue. Shape cards retain complete static descriptions, actual saved placement/rotation, code-backed factors, and complete saved-owner coverage; secondary coverage and linked context may use focusable tooltips.
 - **Papers and milestones:** Distinguish consumable Half Finished Research Papers from permanent Professional Papers.
   Posty Notes are level milestones. Their pictured Shapes do not guarantee the next Shape awarded.
 - **Ownership:** Research owns its stats, upgrades, effects, and unlock descriptions.
   Related activities own their progression, resources, records, and actions. Consume required external values without transferring ownership.
 - **Contributors:** Show supported current contributors beside EXP, offline percentage, Insight, Kaleidoscope effects, roll modifiers, Points, lenses, and Shapes.
-  Preserve additive versus multiplicative meaning. Do not sum unlike description percentages. Part 1 attaches concise source tooltips to affected values, shows intrinsic inactive rewards through opacity, and omits inactive suffixes. Only positive Observation EXP rates have tooltips.
+  Preserve additive versus multiplicative meaning. Do not sum unlike description percentages. Part 1 attaches concise source tooltips to affected values, shows intrinsic inactive rewards through opacity, and omits inactive suffixes. Only positive Observation EXP rates have tooltips. Part 2 uses this value-attached tooltip pattern for Points and Shape ownership, without visible source catalogues. Show Points as available/earned only, without separate earned/spent fields. Label upgrade ratios **Level**; omit repeated Maxed and visible active Shape factors.
 
 - **Independent delivery:** Keep shared route, account parsing, integration, targeted research, and static-export audits inside the relevant part.
   Do not create extra prerequisite, data, or verification tickets.
@@ -113,13 +113,13 @@ The following testing seams are a delivery proposal.
 - **Rendered UI seam:** Verify each part with a real saved account.
   Compare rendered information with populated backend state and verified metadata.
   Check catalogue counts, current values, ownership, requirements, discovery conditions, contributors, search, and default visibility.
-  For Part 1, check four tabs, three sorts, stable discovery counts, distinct discovery/study requirements, hidden-only reveal lines, illustrated rewards, and shared theme progress bars. Artwork tint uses approximate current-level palette-derived CSS hue, not exact in-game artwork parity. Check any optional Part 2 **Show unlocked** filter.
+  For Part 1, check four tabs, three sorts, stable discovery counts, distinct discovery/study requirements, hidden-only reveal lines, illustrated rewards, and shared theme progress bars. Artwork tint uses approximate current-level palette-derived CSS hue, not exact in-game artwork parity. For Part 2, check full default catalogues, all State options, combined search/filters, Show maxed, clears, source and active-owner tooltips, linked conditions, actual placement/rotation, and complete saved-owner coverage.
 ## Out of Scope
 
 - Separate character Research progression or an assumed maximum-EXP account policy.
 - Unverified rate units, claim behavior, cache/save-age projections, reset timers, or UTC-midnight assumptions presented as facts.
 - Simulations, optimizers, recommendations, hypothetical placements or comparisons, discovery probabilities, away-time forecasts, or ETA planning.
-- Required spatial boards, invented upgrade families or categories, and unapproved layout changes beyond the selected Part 1 presentation.
+- Required spatial boards, invented upgrade families or categories, and layout changes beyond the selected Part 1 and Part 2 presentation.
 - Related activity progression panels, resource tables, trade inventories, or activity actions.
   Cross-domain navigation and a standalone outside-contributor catalogue are also excluded.
 

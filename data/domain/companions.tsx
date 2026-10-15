@@ -112,23 +112,17 @@ export const updateCompanionImpact = (data: Map<string, any>) => {
     const players = data.get("players") as Player[];
     const alchemy = data.get("alchemy") as Alchemy;
     const arcade = data.get("arcade") as Arcade;
-    // Doot
-    if (companions.find(c => c.id === 0)?.owned) {
-
-        // If we have Doot, all gods are unlocked.
+    const dootOwned = getCompanionActiveBonus(companions, 0) > 0;
+    if (dootOwned) {
         divinity.gods.forEach(god => {
             god.unlocked = true;
-        })
-
-        // And all players are linked to all gods.
-        divinity.playerInfo.forEach(player => {
-            // Doot is activated only for characters that are level 2 or above in divinity
-            const divLevel = players.find(playerFind => playerFind.playerID == player.playerIndex)?.skills.get(SkillsIndex.Divinity)?.level ?? 0;
-            if (divLevel >= 2) {
-                player.gods = divinity.gods;
-            }
-        })
+        });
     }
+    divinity.playerInfo.forEach(info => {
+        const player = players.find(player => player.playerID === info.playerIndex)!;
+        info.dootActive = dootOwned && (player.skills.get(SkillsIndex.Divinity)?.level ?? 0) >= 2;
+        info.gods = info.dootActive ? [...divinity.gods] : info.primaryGod ? [info.primaryGod] : [];
+    });
 
     // Rift Slug
     const slugBonus = getCompanionActiveBonus(companions, 1);

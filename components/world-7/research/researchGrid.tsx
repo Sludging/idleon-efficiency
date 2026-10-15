@@ -1,14 +1,16 @@
-import { Box, Button, Grid, ResponsiveContext, Text, TextInput } from "grommet";
-import { useContext, useState } from "react";
+import { Box, Button, CheckBox, Grid, Select, Text, TextInput } from "grommet";
+import { useState } from "react";
 import type { ResearchGrid, ResearchGridBonus } from "../../../data/domain/world-7/research";
 import { commaNotation, notateNumber } from "../../../data/utility";
-import DataRow, { type DataRowDetail } from "../../base/DataRow";
 import IconImage from "../../base/IconImage";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
-import ResearchSources from "./researchSources";
+import TipDisplay from "../../base/TipDisplay";
+import ResearchSources, { ResearchSourceValue, useResearchTooltipScroll } from "./researchSources";
 
 const amount = (value: number) => notateNumber(value, "Smaller");
 const yesNo = (value: boolean) => value ? "Yes" : "No";
+const gridStates = ["All", "Leveled", "Reachable", "Unreachable"] as const;
+type GridState = typeof gridStates[number];
 type LinkedField = { key: string; label: string; value: string };
 
 function linkedFields(upgrade: ResearchGridBonus): LinkedField[] {
@@ -94,76 +96,96 @@ function linkedFields(upgrade: ResearchGridBonus): LinkedField[] {
     return fields;
 }
 
-function UpgradeRow({ research, upgrade, description }: { research: ResearchGrid; upgrade: ResearchGridBonus; description: string }) {
+function upgradeState(upgrade: ResearchGridBonus): Exclude<GridState, "All"> {
+    if (upgrade.getLevel() > 0) return "Leveled";
+    return upgrade.reachable ? "Reachable" : "Unreachable";
+}
+
+function UpgradeCard({ research, upgrade, description }: { research: ResearchGrid; upgrade: ResearchGridBonus; description: string }) {
+    const state = upgradeState(upgrade);
     const shape = upgrade.activeOwner === undefined ? undefined : research.shapes[upgrade.activeOwner];
     const image = shape?.getImageData();
     const linked = linkedFields(upgrade);
-    const details: DataRowDetail[] = [{
-        key: "factors", label: "Current factors", content: <Box direction="row" wrap gap="small" align="center">
-            <Text size="xsmall">Shared Grid factor: ×{amount(upgrade.allBonusMultiplier)}</Text>
-            {shape && image ? <Box direction="row" align="center"><IconImage data={image} scale={Math.min(1, 36 / Math.max(image.width, image.height))} /><Text size="xsmall">{shape.data.name}: ×{amount(upgrade.shapeMultiplier)}</Text></Box>
-                : <Text size="xsmall">No active Shape</Text>}
-        </Box>,
-    }];
-    if (linked.length > 0) {
-        details.push({ key: "linked", label: "Linked effect and conditions", content: <Box direction="row" wrap gap="small">
-            {linked.map(field => <TextAndLabel key={field.key} label={field.label} text={field.value} textSize="xsmall" labelSize="xsmall" />)}
-        </Box> });
-    }
-    return <Box data-upgrade-index={upgrade.index}>
-        <DataRow opacity={upgrade.getLevel() > 0 ? 1 : 0.6}
-            columns={["minmax(0, 23fr)", "minmax(0, 12fr)", "minmax(0, 43fr)", "minmax(0, 22fr)"]}
-            fields={[
-                { key: "identity", kind: "identity", name: upgrade.data.name },
-                { key: "level", kind: "text", label: "Level / cap", value: `${commaNotation(upgrade.getLevel())} / ${commaNotation(upgrade.maxLevel)}${upgrade.atCap ? " · Maxed" : ""}` },
-                { key: "effect", kind: "text", label: "Current effect", value: description, role: "description" },
-                { key: "access", kind: "text", label: "Grid access", value: upgrade.reachable ? "Reachable" : "Requires a purchased adjacent square",
-                    tooltip: <Text size="small">Adjacent squares are directly left, right, above, or below. Point balance and other requirements do not determine Grid access.</Text> },
-            ]}
-            details={details} />
+    const { ref: tooltipRef, onKeyDown: onTooltipKeyDown } = useResearchTooltipScroll();
+    return <Box background="dark-1" pad="small" gap="small" data-upgrade-index={upgrade.index}
+        style={{ opacity: state === "Leveled" ? 1 : state === "Reachable" ? 0.65 : 0.35, minWidth: 0 }}>
+        <Box direction="row" justify="between" align="start" gap="xsmall">
+            <Box gap="xxsmall" flex style={{ minWidth: 0 }}>
+                <Text size="small" weight="bold" data-card-name>{upgrade.data.name}</Text>
+                <Text size="xsmall" data-card-level>Level {commaNotation(upgrade.getLevel())}/{commaNotation(upgrade.maxLevel)}</Text>
+            </Box>
+            {shape && image && <TipDisplay heading={shape.data.name} maxWidth="620px" size="small"
+                body={<Box data-active-owner-tooltip={upgrade.index}><Text size="small">Grid bonus: ×{amount(upgrade.shapeMultiplier)}</Text></Box>}>
+                <Box tabIndex={0} data-active-owner={shape.index} aria-label={`Active Shape for ${upgrade.data.name}: ${shape.data.name}`}
+                    flex={false} style={{ cursor: "help" }}>
+                    <IconImage data={image} scale={Math.min(1, 36 / Math.max(image.width, image.height))} />
+                </Box>
+            </TipDisplay>}
+        </Box>
+        <ComponentAndLabel label="Description" labelSize="small"
+            component={<Text size="small" data-card-description>{description}</Text>} />
+        {linked.length > 0 && <TipDisplay heading="Linked effect and conditions" maxWidth="620px" size="small"
+            body={<Box ref={tooltipRef} tabIndex={0} flex={false} data-linked-details-tooltip={upgrade.index} gap="small"
+                style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                {linked.map(field => <Box flex={false} key={field.key}>
+                    <TextAndLabel label={field.label} text={field.value} textSize="xsmall" labelSize="xsmall" labelColor="dark-1" />
+                </Box>)}
+            </Box>}>
+            <Text tabIndex={0} onKeyDown={onTooltipKeyDown} size="xsmall" data-linked-details aria-label={`Linked details for ${upgrade.data.name}`}
+                style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>Linked details</Text>
+        </TipDisplay>}
     </Box>;
 }
 
 export default function ResearchGridDisplay({ research }: { research: ResearchGrid }) {
-    const size = useContext(ResponsiveContext);
     const [query, setQuery] = useState("");
+    const [state, setState] = useState<GridState>("All");
+    const [showMaxed, setShowMaxed] = useState(true);
     const normalizedQuery = query.trim().toLowerCase();
     const upgrades = research.upgrades.map(upgrade => ({
         upgrade,
         description: upgrade.getDescription().replace(/_/g, " ").replace(/\s*@\s*/g, " ").trim(),
-    })).filter(({ upgrade, description }) => upgrade.data.name.toLowerCase().includes(normalizedQuery)
-        || description.toLowerCase().includes(normalizedQuery));
-    const { points, pointMilestone } = research;
+    })).filter(({ upgrade, description }) => (upgrade.data.name.toLowerCase().includes(normalizedQuery)
+        || description.toLowerCase().includes(normalizedQuery))
+        && (state === "All" || upgradeState(upgrade) === state)
+        && (showMaxed || upgrade.getLevel() < upgrade.maxLevel));
+    const { points } = research;
+    const changed = query !== "" || state !== "All" || !showMaxed;
     return <Box as="section" id="research-grid" gap="small" aria-label="Grid">
-        <Box background="dark-1" pad="medium" gap="small" data-research-points>
-            <Text size="small" weight="bold">Points</Text>
-            <Grid columns={["minmax(0, 38fr)", "minmax(0, 62fr)"]} gap="medium">
-                <Box gap="small">
-                    <Box direction="row" wrap gap="medium">
-                        <TextAndLabel label="Available" text={points.available < 0 ? `-${commaNotation(Math.abs(points.available))}` : commaNotation(points.available)} textSize="small" labelSize="xsmall" />
-                        <TextAndLabel label="Earned" text={commaNotation(points.earned)} textSize="small" labelSize="xsmall" />
-                        <TextAndLabel label="Spent" text={commaNotation(points.spent)} textSize="small" labelSize="xsmall" />
-                    </Box>
-                    <Text size="xsmall">Each purchased level costs 1 Point.</Text>
-                    <Text size="xsmall">{commaNotation(pointMilestone.cumulativeMilestonePoints)} cumulative Points · {commaNotation(pointMilestone.pointsPerTenLevelBlock)} Points per ten Research levels</Text>
-                </Box>
-                <Box gap="small">
-                    <Text size="xsmall" weight="bold">Point sources · applied Points</Text>
+        <Box direction="row" wrap gap="medium" align="end" data-research-points>
+            <ResearchSourceValue label="Points" value={`${points.available < 0 ? "-" : ""}${commaNotation(Math.abs(points.available))}/${commaNotation(points.earned)} available`}>
+                <Box flex={false} gap="small">
                     <ResearchSources entries={points.contributors} unit="Point" />
+                    <Text size="small">Each purchased level costs 1 Point.</Text>
+                    <Text size="small">{commaNotation(points.milestone.pointsPerTenLevelBlock)} Points per ten-level block; {commaNotation(points.milestone.reachedTenLevelBlocks)} blocks reached.</Text>
+                    <Text size="small">{points.milestone.explanation}</Text>
                 </Box>
-            </Grid>
+            </ResearchSourceValue>
+            <TextAndLabel label="Shared Grid factor" text={`×${amount(research.getGridBonusAllmulti())}`} textSize="small" labelSize="xsmall" />
         </Box>
-        <Box direction={size === "small" ? "column" : "row"} wrap={size !== "small"} gap="small" align={size === "small" ? "start" : "end"}>
-            <Box width={size === "small" ? "100%" : "medium"}>
+        <Box direction="row" wrap gap="small" align="center">
+            <Box width="medium">
                 <ComponentAndLabel label={<label htmlFor="research-grid-search"><Text size="xsmall" color="accent-2">Search</Text></label>}
                     component={<TextInput id="research-grid-search" aria-label="Search Grid upgrade names or effects" placeholder="Search names or effects"
                         style={{ height: "48px" }} value={query} onChange={event => setQuery(event.target.value)} />} />
             </Box>
+            <Box width="small">
+                <ComponentAndLabel label={<label htmlFor="research-grid-state"><Text size="xsmall" color="accent-2">State</Text></label>}
+                    component={<Select id="research-grid-state" aria-label="Grid State" size="medium" options={[...gridStates]}
+                        value={state} onChange={({ option }) => setState(option)} />} />
+            </Box>
+            <Box justify="center">
+                <CheckBox id="research-show-maxed" label={<Text size="small">Show maxed</Text>} checked={showMaxed}
+                    onChange={event => setShowMaxed(event.target.checked)} />
+            </Box>
             {query && <Button plain label={<Text size="small" color="brand">Clear search</Text>} onClick={() => setQuery("")} />}
+            {changed && <Button plain label={<Text size="small" color="brand">Clear filters</Text>}
+                onClick={() => { setQuery(""); setState("All"); setShowMaxed(true); }} />}
+            <Text size="xsmall" color="accent-2">{upgrades.length} upgrades</Text>
         </Box>
-        <Box gap="small">
-            {upgrades.map(({ upgrade, description }) => <UpgradeRow key={upgrade.index} research={research} upgrade={upgrade} description={description} />)}
-        </Box>
-        {upgrades.length === 0 && <Box background="dark-1" pad="medium"><Text data-research-grid-empty>No Grid upgrades match this search.</Text></Box>}
+        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
+            {upgrades.map(({ upgrade, description }) => <UpgradeCard key={upgrade.index} research={research} upgrade={upgrade} description={description} />)}
+        </Grid>
+        {upgrades.length === 0 && <Box background="dark-1" pad="small"><Text data-research-grid-empty>No Grid upgrades match these filters.</Text></Box>}
     </Box>;
 }

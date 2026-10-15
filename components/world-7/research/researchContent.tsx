@@ -8,7 +8,7 @@ import IconImage from "../../base/IconImage";
 import ShadowBox from "../../base/ShadowBox";
 import TextAndLabel, { ComponentAndLabel } from "../../base/TextAndLabel";
 import TipDisplay from "../../base/TipDisplay";
-import type { Observation, PostyNote, ResearchContributor, ResearchContributorReward, ResearchGrid } from "../../../data/domain/world-7/research";
+import type { Observation, PostyNote, ResearchOfflineContributor, ResearchContributorReward, ResearchGrid } from "../../../data/domain/world-7/research";
 import { Skilling } from "../../../data/domain/skilling";
 import { SkillsIndex } from "../../../data/domain/SkillsIndex";
 import { commaNotation, notateNumber } from "../../../data/utility";
@@ -40,13 +40,18 @@ function sourceName(source: string) {
     return source.replace(/^(Research Grid|Sushi|Companion|Owned card|Farming sticker): /, "");
 }
 
-function Contributions({ entries, percentagePoints = false }: { entries: readonly ResearchContributor[]; percentagePoints?: boolean }) {
+function Contributions({ entries, percentagePoints = false }: { entries: readonly ResearchOfflineContributor[]; percentagePoints?: boolean }) {
     return <Box gap="xxsmall">
         {entries.flatMap((entry, index) => {
             if (entry.companionGroups) {
                 return entry.companionGroups.map(group => <Text key={group.id} size="xsmall" data-companion-group={group.id} style={{ opacity: group.reward.active ? 1 : 0.6 }}>
                     {group.name}: {group.reward.active ? `×${amount(group.factor)}` : obtainableReward(group.reward, percentagePoints)}
                 </Text>);
+            }
+            if (entry.value === null) {
+                return [<Text key={`${entry.source}-${index}`} size="xsmall" data-contributor-source={entry.source}>
+                    {sourceName(entry.source)}: Unavailable
+                </Text>];
             }
             const inactive = entry.reward ? !entry.reward.active : entry.operation === "multiply" ? entry.value === 1 : entry.value === 0;
             const value = entry.operation === "multiply" ? `×${amount(entry.value)}`
@@ -189,7 +194,7 @@ export default function ResearchContent() {
                 <Text size="small" weight="bold">Current gains</Text>
                 <SourceValue label="Research EXP" value={rate(production.expPerHour)}><ExpBonuses research={research} /></SourceValue>
                 <SourceValue label="Insight" value={rate(production.insightAccrualPerHour)}><Contributions entries={production.insightContributors} /></SourceValue>
-                <SourceValue label="Offline gains" value={percent(offline.percent)}><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
+                <SourceValue label="Offline gains" value={offline.percent === null ? "Unavailable" : percent(offline.percent)}><Contributions entries={offline.contributors} percentagePoints /></SourceValue>
             </Box>
         </Grid>
         <Box gap="medium" style={{ overflowWrap: "normal" }}>

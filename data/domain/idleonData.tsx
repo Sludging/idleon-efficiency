@@ -68,7 +68,7 @@ import { IslandExpeditions, updateIslandExpeditions } from './world-2/islandExpe
 import { Tome, updateTomeBonuses, updateTomeScores } from './world-4/tome';
 import { KillRoy } from './world-2/killroy';
 import { updateVotesBonus, Votes } from './world-2/votes';
-import { Hole, updateHole, updateHolePresentation, updateHoleStudyEffects } from './world-5/hole/hole';
+import { Hole, updateHole, updateHolePresentation, updateHoleStudyEffects, updateHoleUpgradeEffects } from './world-5/hole/hole';
 import { UpgradeVault } from './upgradeVault';
 import { Grimoire, updateGrimoireEfficiency, updateGrimoireUpgradeCosts } from './grimoire';
 import { Tesseract, updateArcaneCultistImpact, updateTesseractEfficiency, updateTesseractUpgradeCosts } from './tesseract';
@@ -275,6 +275,8 @@ export const initAccountDataKeys = (allItems: Item[]) => {
 const postProcessingMap: Record<string, Function> = {
     // Study effects use saved state and must be ready before schematic consumers.
     "holeStudyEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleStudyEffects(accountData),
+    // Camp effects use parsed Majik and Harp state before their shared consumers.
+    "holeUpgradeEffects": (_doc: Cloudsave, accountData: Map<string, any>) => updateHoleUpgradeEffects(accountData),
     // Minehead rewards are account-wide inputs to downstream bonus consumers.
     "minehead": (doc: Cloudsave, accountData: Map<string, any>) => updateMinehead(accountData),
     "jellyOperator": (doc: Cloudsave, accountData: Map<string, any>) => updateJellyOperator(accountData),

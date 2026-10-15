@@ -302,12 +302,15 @@ export class Tome extends Domain {
     unlocked: boolean = false;
     charCount: number = 0;
     totalAccountLevel: number = 0;
+    totalSkillLevel: number = 0;
+    accountSkillLevels: number[][] = [];
 
     bonuses: TomeBonus[] = [];
     getRawKeys(): RawData[] {
         return [
             { key: "OptLacc", perPlayer: false, default: [] },
-            { key: "Spelunk", perPlayer: false, default: [] }
+            { key: "Spelunk", perPlayer: false, default: [] },
+            { key: "Lv0_", perPlayer: true, default: [] }
         ]
     }
 
@@ -327,6 +330,8 @@ export class Tome extends Domain {
         const serverVars = data.get("servervars") as Record<string, any>;
         const charCount = data.get("charCount") as number;
         const spelunk = data.get("Spelunk") as any[];
+        tome.accountSkillLevels = Array.from({ length: charCount }, (_, playerIndex) =>
+            ((data.get(`Lv0_${playerIndex}`) ?? []) as number[]).slice(1, 22).map(Number));
 
         tome.charCount = charCount;
 
@@ -474,10 +479,10 @@ export const updateTomeScores = (data: Map<string, any>) => {
         }
     });
 
-    // Sum all skill levels across players.
-    const sumOfSkillsLevels = players.reduce((sum, player) =>
-        sum + [...player.skills.values()].reduce((skillSum, skill) => skillSum + skill.level, 0),
-        0);
+    // Tome counts all 21 saved skill slots, including slots without a released skill.
+    tome.totalSkillLevel = tome.accountSkillLevels.reduce((total, levels) =>
+        total + levels.reduce((sum, level) => sum + Math.max(0, level), 0), 0);
+    const sumOfSkillsLevels = tome.totalSkillLevel;
 
     // Total level of all stamps
     const stampsTotalLevels = stamps.flatMap(tab => tab).reduce((sum, stamp) => sum + stamp.level, 0);
