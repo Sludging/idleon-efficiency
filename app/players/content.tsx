@@ -18,6 +18,7 @@ import { useState, useContext, useMemo } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
 import type { GoldenFood } from '../../data/domain/golden-food';
+import type { SkillPowerSkill } from '../../data/domain/player-stats';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
 import { Capacity, playerInventoryBagMapping } from '../../data/domain/capacity';
@@ -25,7 +26,7 @@ import { Alchemy, Bubble } from "../../data/domain/world-2/alchemy/alchemy";
 import { Shrine } from '../../data/domain/world-3/construction/shrines';
 import { PlayerStatues } from '../../data/domain/world-1/statues';
 
-import { getCoinsArray, nFormatter } from '../../data/utility';
+import { commaNotation, getCoinsArray, nFormatter, notateNumber } from '../../data/utility';
 import CoinsDisplay from '../../components/coinsDisplay';
 import ShadowBox from '../../components/base/ShadowBox';
 import LeftNavButton from '../../components/base/LeftNavButton';
@@ -189,6 +190,15 @@ function ShowSkills(props: SkillProps) {
     );
 }
 
+const skillPowerSkills: SkillPowerSkill[] = [
+    SkillsIndex.Mining,
+    SkillsIndex.Chopping,
+    SkillsIndex.Fishing,
+    SkillsIndex.Catching,
+    SkillsIndex.Trapping,
+    SkillsIndex.Worship,
+];
+
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
         (state) => ({ theData: state.data.getData(), lastUpdated: state.data.getLastUpdated(true) as Date | undefined, realLastUpdated: state.lastUpdated })
@@ -217,6 +227,13 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
         }
         return [];
     }, [theData, player]);
+
+    const passivePrayers = player.activePrayers.length === 0
+        ? (theData.get("prayers") as Prayer[])
+            .map(prayer => ({ prayer, bonus: prayer.getBonusForPlayer(player) }))
+            // Vacuous Tissue only affects Dungeons, which are outside this summary.
+            .filter(({ prayer, bonus }) => bonus !== 0 && prayer.index !== 14)
+        : [];
 
     const playerWorshipInfo = useMemo(() => {
         const chargeRate = worship?.playerData[player.playerID]?.chargeRate ?? 0;
@@ -298,10 +315,41 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                         <Text size="small">Away Since =</Text>
                         {player.afkFor < 100 ? "Active" : <TimeUp addSeconds={player.afkFor + secondsSinceUpdate} />}
                     </Box>
-                    <Text size="small">STR = {player.stats.strength}</Text>
-                    <Text size="small">AGI = {player.stats.agility}</Text>
-                    <Text size="small">WIS = {player.stats.wisdom}</Text>
-                    <Text size="small">LUK = {player.stats.luck}</Text>
+                    <Box role="region" aria-label="Persistent stats" gap="small" margin={{ top: "small" }}>
+                        <Text>Persistent stats</Text>
+                        <Text size="xsmall" color="accent-2">
+                            Excludes dungeon stats, temporary forms, and map-dependent effects.
+                        </Text>
+                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
+                            <TextAndLabel label="STR" text={commaNotation(player.stats.strength)} textSize="small" />
+                            <TextAndLabel label="AGI" text={commaNotation(player.stats.agility)} textSize="small" />
+                            <TextAndLabel label="WIS" text={commaNotation(player.stats.wisdom)} textSize="small" />
+                            <TextAndLabel label="LUK" text={commaNotation(player.stats.luck)} textSize="small" />
+                            <TextAndLabel label="Defence" text={notateNumber(player.stats.defence)} textSize="small" />
+                            <TextAndLabel label="Accuracy" text={notateNumber(player.stats.accuracy)} textSize="small" />
+                            <TextAndLabel label="Weapon power" text={notateNumber(player.stats.weaponPower)} textSize="small" />
+                            <TextAndLabel
+                                label="Drop rate"
+                                text={`${notateNumber(player.stats.dropRateMultiplier, "MultiplierInfo").replace("#", "")}x`}
+                                textSize="small"
+                            />
+                        </Grid>
+                    </Box>
+                    <Box role="region" aria-label="Skill power" gap="small" margin={{ vertical: "small" }}>
+                        <Text>Skill power</Text>
+                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
+                            {skillPowerSkills.map(skill => (
+                                <Box key={skill} direction="row" gap="small" align="center">
+                                    <IconImage data={Skilling.getSkillImageData(skill)} scale={0.6} />
+                                    <TextAndLabel
+                                        label={SkillsIndex[skill]}
+                                        text={notateNumber(player.stats.getSkillPower(skill))}
+                                        textSize="small"
+                                    />
+                                </Box>
+                            ))}
+                        </Grid>
+                    </Box>
                     <Stat stat={player.crystalChance} />
                     <Stat stat={player.doubleClaimChance} />
                     <Stat stat={player.monsterCash} />
@@ -456,6 +504,24 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
 
                                 }
                             </Box>
+                        </Box>
+                    }
+                    {
+                        passivePrayers.length > 0 &&
+                        <Box role="region" aria-label="Passive Prayers" gap="small">
+                            <Text>Passive Prayers</Text>
+                            <Text size="xsmall" color="accent-2">
+                                Unlocked Prayer bonuses apply without curses when no Prayers are equipped. Dungeon bonuses are excluded.
+                            </Text>
+                            {passivePrayers.map(({ prayer, bonus }) => (
+                                <Box key={prayer.index} direction="row" gap="small" align="center">
+                                    <IconImage data={prayer.getImageData()} scale={0.6} />
+                                    <Box gap="xxsmall">
+                                        <Text size="xsmall" color="accent-2">{prayer.data.name} (Lv. {prayer.level})</Text>
+                                        <Text size="small">{prayer.data.bonus.replace("{", bonus.toString())}</Text>
+                                    </Box>
+                                </Box>
+                            ))}
                         </Box>
                     }
                     {
