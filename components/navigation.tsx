@@ -24,6 +24,7 @@ const navItems: NavItem[] = [
             { subLink: "/stamps", label: "Stamps" },
             { subLink: "/forge", label: "Forge" },
             { subLink: "/anvil", label: "Anvil" },
+            { subLink: "/bribes", label: "Bribes" },
         ]
     },
     {
@@ -38,6 +39,7 @@ const navItems: NavItem[] = [
             { subLink: "/worship", label: "Worship" },
             { subLink: "/trapping", label: "Trapping" },
             { subLink: "/equinox", label: "Equinox" },
+            { subLink: "/armor-smithy", label: "Armor Smithy" },
         ]
     },
     {
@@ -71,6 +73,7 @@ const navItems: NavItem[] = [
             { subLink: "/coral", label: "Coral Reef" },
             { subLink: "/sushi", label: "Sushi Station" },
             { subLink: "/jelly-operator", label: "Jelly Operator" },
+            { subLink: "/advice-fish", label: "Advice Fish" },
         ]
     },
     { link: "/players", label: "Players" },
@@ -95,6 +98,8 @@ const navItems: NavItem[] = [
             { subLink: "/cards", label: "Cards" },
             { subLink: "/tome", label: "The Tome" },
             { subLink: "/upgrade-vault", label: "Upgrade Vault" },
+            { subLink: "/guild", label: "Guild" },
+            { subLink: "/event-shop", label: "Event Shop" },
         ]
     },
     { link: "/raw-data", label: "Raw Data" },

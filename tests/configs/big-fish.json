@@ -91,6 +91,21 @@
       "label": "big_fish_unlock_req_5",
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
       "description": "Total player-level unlock requirement for increased Double Gold Food drop chance"
+    },
+    {
+      "label": "big_fish_bonus_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6)",
+      "description": "Big Fish Advice on Settlement bonus for extra mob clears credited toward Royal Guardian"
+    },
+    {
+      "label": "big_fish_cost_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 6)",
+      "description": "Next purchase cost for the Advice on Settlement bonus"
+    },
+    {
+      "label": "big_fish_unlock_req_6",
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 6)",
+      "description": "Total player-level unlock requirement for Advice on Settlement"
     }
   ]
 }

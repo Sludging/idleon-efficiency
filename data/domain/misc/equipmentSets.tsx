@@ -1,6 +1,7 @@
 import { nFormatter } from "../../utility";
 import { Domain, RawData } from "../base/domain";
 import { EquipmentSetsBase, initEquipmentSetsRepo } from "../data/EquipmentSetsRepo";
+import { ImageData } from "../imageData";
 import { Item } from "../items";
 import { EquipmentSetsModel } from "../model/equipmentSetsModel";
 import { Player } from "../player";
@@ -10,11 +11,13 @@ export class EquipmentSet {
     static readonly prehistoricSetRequiredToolCount = 6;
 
     unlocked: boolean = false;
-    constructor(public index: number, public data: EquipmentSetsModel) { }
+    constructor(public index: number, public data: EquipmentSetsModel, public imageData: ImageData) { }
+
+    getImageData = () => this.imageData;
 
     getDescription = () => {
         if (this.data.description.includes("x ")) {
-            return this.data.description.replace("x ", nFormatter(this.getBonus(), "MultiplierInfo"));
+            return this.data.description.replace("x ", `${nFormatter(this.getBonus(), "MultiplierInfo")}x `);
         }
         return this.data.description.replace("{", this.getBonus().toFixed(2));
     }
@@ -64,8 +67,22 @@ export class EquipmentSet {
         return active;
     }
 
-    static fromBase = (data: EquipmentSetsBase[]) => {
-        return data.map((equipmentSet, index) => new EquipmentSet(index, equipmentSet.data));
+    static fromBase = (data: EquipmentSetsBase[], allItems: Item[]) => {
+        const itemsByName = new Map(allItems.map(item => [item.internalName, item]));
+        return data.map((equipmentSet, index) => {
+            const itemName = [
+                ...equipmentSet.data.armors,
+                ...equipmentSet.data.weapons,
+                ...equipmentSet.data.tools,
+            ].find(name => name !== "none" && itemsByName.has(name));
+            const item = itemName ? itemsByName.get(itemName) : undefined;
+
+            if (!item) {
+                throw new Error(`No equipment image item found for ${equipmentSet.data.name}`);
+            }
+
+            return new EquipmentSet(index, equipmentSet.data, item.getImageData());
+        });
     }
 }
 
@@ -79,8 +96,8 @@ export class EquipmentSets extends Domain {
         return [];
     }
 
-    init(_allItems: Item[], _charCount: number) {
-        this.equipmentSets = EquipmentSet.fromBase(initEquipmentSetsRepo());
+    init(allItems: Item[], _charCount: number) {
+        this.equipmentSets = EquipmentSet.fromBase(initEquipmentSetsRepo(), allItems);
         return this;
     }
 

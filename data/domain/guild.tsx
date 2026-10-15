@@ -1,5 +1,6 @@
-import { lavaFunc } from "../utility"
 import { Domain, RawData } from "./base/domain"
+import { ImageData } from "./imageData"
+import { lavaFunc } from "../utility"
 import { GuildBonusBase, initGuildBonusRepo } from "./data/GuildBonusRepo"
 import { Item } from "./items"
 import { GuildBonusModel } from "./model/guildBonusModel"
@@ -38,6 +39,18 @@ export class GuildBonus {
     getBonus = () => {
         return lavaFunc(this.func, this.level, this.x1, this.x2);
     }
+    getBonusDisplayValue = () => {
+        // Small-guild GP descriptions show the boost left after the level-based reduction.
+        const bonusValue = this.getBonus();
+        return this.bonus.includes("}") ? 100 - bonusValue : bonusValue;
+    }
+    getImageData = (): ImageData => {
+        return {
+            location: `Gbonus${this.index}`,
+            width: 56,
+            height: 56
+        }
+    }
 
     static fromBase = (data: GuildBonusBase[]) => {
         return data.map(bonus => new GuildBonus(bonus.index, bonus.data))
@@ -56,6 +69,9 @@ export class Guild extends Domain {
     init(_allItems: Item[], _charCount: number) {
         this.guildBonuses = GuildBonus.fromBase(initGuildBonusRepo());
         return this;
+    }
+    getSmallGuildBonusMemberLimit = () => {
+        return Math.round(Number(this.guildBonuses[9].level) + 10);
     }
     parse(data: Map<string, any>): void {
         const guild = data.get(this.getDataKey()) as Guild;

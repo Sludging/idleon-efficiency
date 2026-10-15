@@ -3,7 +3,7 @@
  *
  * Tests our Big Fish bonus, cost, and unlock requirement calculations against live game data.
  *
- * Big Fish provides 6 advice upgrades that affect various game mechanics:
+ * Big Fish provides 7 advice upgrades that affect various game mechanics:
  * - Bonus formula: level / (100 + level) * x0 (0 if not unlocked)
  * - Cost formula: 1.15^level * 10.01^x1
  * - Unlock requirement: 4000 + (300 + 50 * max(0, index - 2)) * index
@@ -14,7 +14,7 @@
 
 import { loadExtractionResults, validateExtractionHealth, getExtractedValue } from '../../utils/live-game-data-loader';
 import { loadGameDataFromSave } from '../../utils/cloudsave-loader';
-import { BigFish } from '../../../data/domain/world-7/bigFish';
+import { BigFish, updateBigFishUnlocked } from '../../../data/domain/world-7/bigFish';
 
 const saveName = 'latest';
 const extractionResultsName = 'big-fish-data.json';
@@ -104,6 +104,15 @@ describe('Big Fish Domain - Calculations', () => {
     context: 'Big Fish bonus 5: Double Gold Food drop chance',
    });
   });
+  it('validates Advice on Settlement bonus (extra mob clear for Royal Guardian)', () => {
+   const extractedBonus = getExtractedValue(extractionResults, 'big_fish_bonus_6');
+   const calculatedBonus = bigFish.getBonusFromIndex(6);
+
+   expect(calculatedBonus).toMatchLiveGameWithDetails(extractedBonus, {
+    tolerance: 0,
+    context: 'Big Fish bonus 6: extra mob clear for Royal Guardian',
+   });
+  });
  });
 
  describe('Cost Calculations', () => {
@@ -164,6 +173,15 @@ describe('Big Fish Domain - Calculations', () => {
    expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
     tolerance: 0,
     context: 'Big Fish next cost for increased Double Gold Food drop chance',
+   });
+  });
+  it('matches next cost for the Advice on Settlement bonus', () => {
+   const extractedCost = getExtractedValue(extractionResults, 'big_fish_cost_6');
+   const calculatedCost = bigFish.getBonusNextlevelCost(6);
+
+   expect(calculatedCost).toMatchLiveGameWithDetails(extractedCost, {
+    tolerance: 0,
+    context: 'Big Fish next cost for the Advice on Settlement bonus',
    });
   });
  });
@@ -227,6 +245,23 @@ describe('Big Fish Domain - Calculations', () => {
     tolerance: 0,
     context: 'Big Fish player-level requirement for increased Double Gold Food drop chance',
    });
+  });
+  it('matches total-player-level unlock requirement for Advice on Settlement', () => {
+   const extractedReq = getExtractedValue(extractionResults, 'big_fish_unlock_req_6');
+   const calculatedReq = bigFish.bonuses[6].getUnlockLevelRequired();
+
+   expect(calculatedReq).toMatchLiveGameWithDetails(extractedReq, {
+    tolerance: 0,
+    context: 'Big Fish player-level requirement for Advice on Settlement',
+   });
+  });
+
+  it('marks all Advice Fish entries unlocked for the retained account', () => {
+   updateBigFishUnlocked(gameData);
+
+   expect(bigFish.bonuses.map((bonus) => bonus.unlocked)).toEqual([
+    true, true, true, true, true, true, true,
+   ]);
   });
  });
 });

@@ -1,0 +1,81 @@
+{
+  "extractions": {
+    "guild_bonus_0": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 0)",
+      "result": 33.333333333333336
+    },
+    "guild_bonus_1": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 1)",
+      "result": 2.962962962962963
+    },
+    "guild_bonus_2": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 2)",
+      "result": 6.363636363636363
+    },
+    "guild_bonus_3": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 3)",
+      "result": 1.3793103448275863
+    },
+    "guild_bonus_4": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 4)",
+      "result": 1.0714285714285714
+    },
+    "guild_bonus_5": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 5)",
+      "result": 0
+    },
+    "guild_bonus_6": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 6)",
+      "result": 4.576271186440678
+    },
+    "guild_bonus_7": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 7)",
+      "result": 0.9090909090909091
+    },
+    "guild_bonus_8": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 8)",
+      "result": 2.608695652173913
+    },
+    "guild_bonus_9": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 9)",
+      "result": 3.9215686274509802
+    },
+    "guild_bonus_10": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 10)",
+      "result": 11.428571428571429
+    },
+    "guild_bonus_11": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 11)",
+      "result": 10.909090909090908
+    },
+    "guild_bonus_12": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 12)",
+      "result": 8.275862068965518
+    },
+    "guild_bonus_13": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 13)",
+      "result": 1.4545454545454546
+    },
+    "guild_bonus_14": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 14)",
+      "result": 0.24793388429752067
+    },
+    "guild_bonus_15": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 15)",
+      "result": 3
+    },
+    "guild_bonus_16": {
+      "expression": "idleon.callFunction(\"GuildBonuses\", 16)",
+      "result": 0
+    },
+    "guild_bonus_9_display_percentage": {
+      "expression": "100 - idleon.callFunction(\"GuildBonuses\", 9)",
+      "result": 96.07843137254902
+    },
+    "guild_member_limit": {
+      "expression": "Math.round(Number(idleon.getAttr(\"GuildTasks\")[0][9]) + 10)",
+      "result": 11
+    }
+  },
+  "errors": {}
+}

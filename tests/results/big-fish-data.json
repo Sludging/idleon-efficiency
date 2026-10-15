@@ -89,6 +89,21 @@
     "big_fish_unlock_req_5": {
       "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 5)",
       "result": 6250
+    },
+    "big_fish_bonus_6": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishBonuses\", 6)",
+      "result": 0
+    },
+    "big_fish_cost_6": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishCost\", 6)",
+      "result": {
+        "type": "large_number",
+        "value": "1.0418307620239161e+41"
+      }
+    },
+    "big_fish_unlock_req_6": {
+      "expression": "idleon.callFunction(\"Spelunk\", \"BigFishUpgLVREQ\", 6)",
+      "result": 7000
     }
   },
   "errors": {}
