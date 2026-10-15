@@ -34,7 +34,7 @@
     },
     "talent_127_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 127)",
-      "result": 91.30434782608695
+      "result": 91.37931034482759
     },
     "talent_292_bonus": {
       "expression": "idleon.callFunction(\"GetTalentNumber\", 1, 292)",
@@ -54,11 +54,11 @@
     },
     "statue_0_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven0\")",
-      "result": 1205257.8336599967
+      "result": 1318911.675742035
     },
     "statue_1_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven1\")",
-      "result": 22127.17925780645
+      "result": 24138.74100851613
     },
     "statue_5_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven5\")",
@@ -70,47 +70,47 @@
     },
     "statue_2_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven2\")",
-      "result": 121449.35258719503
+      "result": 135355.90927930517
     },
     "statue_3_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven3\")",
-      "result": 85214.19069935483
+      "result": 95826.36686451612
     },
     "statue_6_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven6\")",
-      "result": 63364.19514735483
+      "result": 70364.43003982451
     },
     "statue_7_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven7\")",
-      "result": 99992.73064123421
+      "result": 180057.4429422914
     },
     "statue_8_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven8\")",
-      "result": 16155.850281290323
+      "result": 25326.67117625806
     },
     "statue_9_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven9\")",
-      "result": 15538.126594064515
+      "result": 25326.67117625806
     },
     "statue_10_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven10\")",
-      "result": 4545.812775225808
+      "result": 7396.845177806453
     },
     "statue_11_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven11\")",
-      "result": 23916.994043870964
+      "result": 43795.02551741935
     },
     "statue_12_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven12\")",
-      "result": 22333.087153548386
+      "result": 38092.960712258064
     },
     "statue_13_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven13\")",
-      "result": 15237.184284903224
+      "result": 16662.70048619355
     },
     "statue_14_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven14\")",
-      "result": 57147.36060283871
+      "result": 62596.0003055484
     },
     "statue_17_bonus": {
       "expression": "idleon.callFunction(\"ArbitraryCode\", \"StatueBonusGiven17\")",

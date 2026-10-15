@@ -2,7 +2,7 @@
   "extractions": {
     "outpost_range_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 1, 0)",
-      "result": 96
+      "result": 136
     },
     "outpost_range_6": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 6, 0)",
@@ -10,7 +10,7 @@
     },
     "outpost_range_51": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostRange\", 51, 0)",
-      "result": 124
+      "result": 169
     },
     "range_orblet_bonus": {
       "expression": "idleon.callFunction(\"Thingies\", \"OrbletMarketBonus\", 8, 0)",
@@ -18,7 +18,7 @@
     },
     "range_guard_effect": {
       "expression": "idleon.callFunction(\"RoyalG\", \"UnitSpecEffect\", 2, 0)",
-      "result": 35
+      "result": 40
     },
     "range_military_rank_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 74, 0)",
@@ -26,11 +26,11 @@
     },
     "range_guard_count_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 1, 2)",
-      "result": 0
+      "result": 1
     },
     "range_guard_count_51": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalUnitsz\", 51, 2)",
-      "result": 1
+      "result": 2
     },
     "range_military_rank_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"OutpostEXPrank\", 1, 3)",

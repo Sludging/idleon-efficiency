@@ -39,7 +39,7 @@
         9,
         8,
         7,
-        6,
+        7,
         6,
         4,
         3,
@@ -72,46 +72,46 @@
     "sushi_knowledge_experience": {
       "expression": "idleon.getAttr(\"Sushi\")[6].slice(0, 64)",
       "result": [
-        38.88286476532939,
-        56.161845218971585,
-        31.327178552304865,
-        46.465845218971666,
-        59.56117855230489,
-        38.18184521897174,
-        14.124864765329397,
-        4.20339809866259,
-        64.65731188563825,
-        13.046331431995984,
-        18.424464765329446,
-        114.47898049495674,
-        97.37498049495673,
-        201.37206236618368,
-        149.77076562368728,
-        149.48516562368545,
-        21.73597309034975,
-        318.23298183284686,
-        70.30783229034739,
-        12.316898957014178,
-        326.5002697903454,
-        352.0168031236803,
-        399.40295139034936,
-        1065.3542559236785,
-        1014.2811572570113,
-        668.4056031236796,
-        352.3282697903488,
-        89.84106979034961,
-        231.98719032367978,
-        157.73453752368215,
-        572.8215666903506,
-        372.6751666903493,
-        220.83170016590566,
-        120.94766247701641,
-        177.27938410840235,
-        139.50915706384626,
-        111.83710405421819,
-        17.222146400884878,
-        17.29838445452719,
-        11.68754642192048,
+        55.017826685329446,
+        72.29680713897154,
+        47.46214047230492,
+        62.600807138971724,
+        75.6961404723048,
+        54.3168071389718,
+        30.259826685329365,
+        20.338360018662588,
+        80.79227380563812,
+        29.181293351995954,
+        34.55942668532943,
+        130.61394241495668,
+        113.5099424149566,
+        217.50702428618393,
+        165.90572754368753,
+        165.6201275436857,
+        37.87093501034975,
+        334.3679437528471,
+        86.44279421034726,
+        28.451860877014152,
+        342.63523171034564,
+        368.15176504368054,
+        415.5379133103496,
+        1081.4892178436787,
+        1030.4161191770115,
+        684.5405650436799,
+        368.4632317103491,
+        105.97603171034947,
+        248.12215224368003,
+        200.7611026436823,
+        615.8481318103512,
+        415.70173181034943,
+        236.9666620859059,
+        137.0826243970165,
+        193.4143460284026,
+        176.84766501051308,
+        15.91892773051249,
+        41.26972101421824,
+        35.967638427860535,
+        17.065867061920482,
         4.861600000000001,
         0,
         0,
@@ -177,7 +177,7 @@
         56.7,
         3.4133333333333336,
         1.516666666666667,
-        26.400000000000002,
+        30.800000000000004,
         0.6700000000000002,
         9.066666666666666,
         69,
@@ -246,7 +246,7 @@
         666.3515625,
         383.03729674249655,
         216.57571812877717,
-        119.96575093703903,
+        216.57571812877717,
         119.96575093703903,
         33.75,
         16.794228634059948,
@@ -315,7 +315,7 @@
         63,
         3.84,
         1.7333333333333336,
-        30.800000000000004,
+        35.2,
         0.7816666666666667,
         11.333333333333332,
         92,
@@ -555,14 +555,14 @@
         {
           "tier": 34,
           "cold": 1.7927735466666666,
-          "milktoast": 5.975911822222222,
-          "total": 7.768685368888889
+          "milktoast": 0,
+          "total": 1.7927735466666666
         },
         {
           "tier": 35,
-          "cold": 1.7927735466666666,
-          "milktoast": 2.987955911111111,
-          "total": 4.7807294577777775
+          "cold": 1.1951823644444444,
+          "milktoast": 0,
+          "total": 1.1951823644444444
         },
         {
           "tier": 36,
@@ -572,9 +572,9 @@
         },
         {
           "tier": 37,
-          "cold": 0.5975911822222222,
+          "cold": 1.1951823644444444,
           "milktoast": 0,
-          "total": 0.5975911822222222
+          "total": 1.1951823644444444
         },
         {
           "tier": 38,
@@ -752,27 +752,6 @@
           "multiplier": 2.889333333333333
         },
         {
-          "slot": 61,
-          "tier": 34,
-          "plate": 3,
-          "effect": 1.0341333333333333,
-          "multiplier": 2.889333333333333
-        },
-        {
-          "slot": 62,
-          "tier": 34,
-          "plate": 3,
-          "effect": 1.0341333333333333,
-          "multiplier": 2.889333333333333
-        },
-        {
-          "slot": 76,
-          "tier": 35,
-          "plate": 3,
-          "effect": 1.0341333333333333,
-          "multiplier": 2.889333333333333
-        },
-        {
           "slot": 99,
           "tier": 31,
           "plate": 3,
@@ -781,7 +760,7 @@
         },
         {
           "slot": 101,
-          "tier": 36,
+          "tier": 35,
           "plate": 2,
           "effect": 0.2068266666666667,
           "multiplier": 2.889333333333333
@@ -795,7 +774,7 @@
         },
         {
           "slot": 103,
-          "tier": 37,
+          "tier": 38,
           "plate": 2,
           "effect": 0.2068266666666667,
           "multiplier": 2.889333333333333
@@ -816,42 +795,42 @@
     },
     "sushi_knowledge_shop_restock_seconds": {
       "expression": "idleon.getAttr(\"TimeAway\").h.ShopRestock",
-      "result": 5358.813245296478
+      "result": 3855.2722449302673
     },
     "sushi_knowledge_eta_by_tier": {
       "expression": "(() => { const sushi = idleon.getAttr(\"Sushi\"); const gridEnabled = idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 189, 1) >= 1; return Array.from({ length: 64 }, (_, tier) => { const level = Number(sushi[7][tier]); const xp = Number(sushi[6][tier]); const required = idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_req\", level, 0); let daily = 0; if (gridEnabled) for (let slot = 0; slot < 120; slot++) { const placedTier = Number(sushi[0][slot]); const plate = Number(sushi[1][slot]); if (placedTier < 0) continue; const gain = idleon.callFunction(\"SushiStuff\", \"SlotEffect\", plate, 0) * idleon.callFunction(\"SushiStuff\", \"KnowledgeXP_multi\", slot, 0); if ((plate === 2 && tier < placedTier) || (plate === 3 && tier === placedTier)) daily += gain; } const days = daily > 0 ? Math.ceil(Math.max(0, required - xp) / daily) : 0; return { tier, secondsAfterNextRollover: daily > 0 ? Math.max(0, days - 1) * 86400 : null }; }); })()",
       "result": [
         {
           "tier": 0,
-          "secondsAfterNextRollover": 3888000
+          "secondsAfterNextRollover": 3110400
         },
         {
           "tier": 1,
-          "secondsAfterNextRollover": 345600
+          "secondsAfterNextRollover": 0
         },
         {
           "tier": 2,
-          "secondsAfterNextRollover": 1555200
+          "secondsAfterNextRollover": 777600
         },
         {
           "tier": 3,
-          "secondsAfterNextRollover": 864000
+          "secondsAfterNextRollover": 86400
         },
         {
           "tier": 4,
-          "secondsAfterNextRollover": 172800
+          "secondsAfterNextRollover": 0
         },
         {
           "tier": 5,
-          "secondsAfterNextRollover": 1209600
+          "secondsAfterNextRollover": 432000
         },
         {
           "tier": 6,
-          "secondsAfterNextRollover": 5097600
+          "secondsAfterNextRollover": 4320000
         },
         {
           "tier": 7,
-          "secondsAfterNextRollover": 5529600
+          "secondsAfterNextRollover": 4752000
         },
         {
           "tier": 8,
@@ -859,127 +838,127 @@
         },
         {
           "tier": 9,
-          "secondsAfterNextRollover": 5097600
+          "secondsAfterNextRollover": 4320000
         },
         {
           "tier": 10,
-          "secondsAfterNextRollover": 4838400
+          "secondsAfterNextRollover": 4060800
         },
         {
           "tier": 11,
-          "secondsAfterNextRollover": 4838400
+          "secondsAfterNextRollover": 4060800
         },
         {
           "tier": 12,
-          "secondsAfterNextRollover": 5702400
+          "secondsAfterNextRollover": 4924800
         },
         {
           "tier": 13,
-          "secondsAfterNextRollover": 8726400
+          "secondsAfterNextRollover": 7948800
         },
         {
           "tier": 14,
-          "secondsAfterNextRollover": 24883200
+          "secondsAfterNextRollover": 24105600
         },
         {
           "tier": 15,
-          "secondsAfterNextRollover": 24883200
+          "secondsAfterNextRollover": 24105600
         },
         {
           "tier": 16,
-          "secondsAfterNextRollover": 31017600
+          "secondsAfterNextRollover": 30240000
         },
         {
           "tier": 17,
-          "secondsAfterNextRollover": 3110400
-        },
-        {
-          "tier": 18,
-          "secondsAfterNextRollover": 28684800
-        },
-        {
-          "tier": 19,
-          "secondsAfterNextRollover": 31449600
-        },
-        {
-          "tier": 20,
-          "secondsAfterNextRollover": 39312000
-        },
-        {
-          "tier": 21,
-          "secondsAfterNextRollover": 38102400
-        },
-        {
-          "tier": 22,
-          "secondsAfterNextRollover": 35856000
-        },
-        {
-          "tier": 23,
-          "secondsAfterNextRollover": 3715200
-        },
-        {
-          "tier": 24,
-          "secondsAfterNextRollover": 6220800
-        },
-        {
-          "tier": 25,
-          "secondsAfterNextRollover": 22896000
-        },
-        {
-          "tier": 26,
-          "secondsAfterNextRollover": 38102400
-        },
-        {
-          "tier": 27,
-          "secondsAfterNextRollover": 50716800
-        },
-        {
-          "tier": 28,
-          "secondsAfterNextRollover": 43891200
-        },
-        {
-          "tier": 29,
-          "secondsAfterNextRollover": 17798400
-        },
-        {
-          "tier": 30,
-          "secondsAfterNextRollover": 1641600
-        },
-        {
-          "tier": 31,
-          "secondsAfterNextRollover": 5270400
-        },
-        {
-          "tier": 32,
-          "secondsAfterNextRollover": 21427200
-        },
-        {
-          "tier": 33,
-          "secondsAfterNextRollover": 26265600
-        },
-        {
-          "tier": 34,
-          "secondsAfterNextRollover": 2246400
-        },
-        {
-          "tier": 35,
-          "secondsAfterNextRollover": 1382400
-        },
-        {
-          "tier": 36,
-          "secondsAfterNextRollover": 518400
-        },
-        {
-          "tier": 37,
-          "secondsAfterNextRollover": 14774400
-        },
-        {
-          "tier": 38,
           "secondsAfterNextRollover": 2332800
         },
         {
+          "tier": 18,
+          "secondsAfterNextRollover": 27907200
+        },
+        {
+          "tier": 19,
+          "secondsAfterNextRollover": 30672000
+        },
+        {
+          "tier": 20,
+          "secondsAfterNextRollover": 38534400
+        },
+        {
+          "tier": 21,
+          "secondsAfterNextRollover": 37324800
+        },
+        {
+          "tier": 22,
+          "secondsAfterNextRollover": 35078400
+        },
+        {
+          "tier": 23,
+          "secondsAfterNextRollover": 2937600
+        },
+        {
+          "tier": 24,
+          "secondsAfterNextRollover": 5443200
+        },
+        {
+          "tier": 25,
+          "secondsAfterNextRollover": 22118400
+        },
+        {
+          "tier": 26,
+          "secondsAfterNextRollover": 37324800
+        },
+        {
+          "tier": 27,
+          "secondsAfterNextRollover": 49939200
+        },
+        {
+          "tier": 28,
+          "secondsAfterNextRollover": 43113600
+        },
+        {
+          "tier": 29,
+          "secondsAfterNextRollover": 17020800
+        },
+        {
+          "tier": 30,
+          "secondsAfterNextRollover": 864000
+        },
+        {
+          "tier": 31,
+          "secondsAfterNextRollover": 4492800
+        },
+        {
+          "tier": 32,
+          "secondsAfterNextRollover": 20649600
+        },
+        {
+          "tier": 33,
+          "secondsAfterNextRollover": 25488000
+        },
+        {
+          "tier": 34,
+          "secondsAfterNextRollover": 9072000
+        },
+        {
+          "tier": 35,
+          "secondsAfterNextRollover": 2851200
+        },
+        {
+          "tier": 36,
+          "secondsAfterNextRollover": 14428800
+        },
+        {
+          "tier": 37,
+          "secondsAfterNextRollover": 5616000
+        },
+        {
+          "tier": 38,
+          "secondsAfterNextRollover": 0
+        },
+        {
           "tier": 39,
-          "secondsAfterNextRollover": 691200
+          "secondsAfterNextRollover": 0
         },
         {
           "tier": 40,

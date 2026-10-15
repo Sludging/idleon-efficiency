@@ -14,11 +14,11 @@
     },
     "palette_bonus_35": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 35, 0)",
-      "result": 45
+      "result": 67.5
     },
     "stamp_atom_cost": {
       "expression": "idleon.callFunction(\"StampBonusOfTypeX\", \"AtomCost\", 0, 0)",
-      "result": 12.69406392694064
+      "result": 12.857142857142858
     },
     "atom_bonus_9": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomBonuses\", 9, 0)",
@@ -38,7 +38,7 @@
     },
     "bubble_y5": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.Y5",
-      "result": 13.069767441860465
+      "result": 13.664670658682635
     },
     "collider_building_level": {
       "expression": "idleon.getAttr(\"TowerInfo\")[8]",
@@ -58,23 +58,23 @@
     },
     "atom_0_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 0, 0)",
-      "result": 29525032.572897255
+      "result": 28384388.38849394
     },
     "atom_3_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 3, 0)",
-      "result": 19383595.44913965
+      "result": 18634746.642036773
     },
     "atom_5_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 5, 0)",
-      "result": 348039084.1292103
+      "result": 334593247.7435306
     },
     "atom_8_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 8, 0)",
-      "result": 689071636.2969885
+      "result": 662450647.7294455
     },
     "atom_11_cost": {
       "expression": "idleon.callFunction(\"AtomCollider\", \"AtomCost\", 11, 0)",
-      "result": 2205779968.1327286
+      "result": 2120563801.596353
     }
   },
   "errors": {}

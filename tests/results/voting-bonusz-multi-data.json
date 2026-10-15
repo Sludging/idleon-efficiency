@@ -2,7 +2,7 @@
   "extractions": {
     "voting_bonusz_multi": {
       "expression": "idleon.callFunction(\"Summoning2\", \"VotingBonuszMulti\", 0, 0)",
-      "result": 6.116666666666667
+      "result": 6.25
     },
     "meritocracy_bonus_9": {
       "expression": "idleon.callFunction(\"Summoning2\", \"MeritocBonusz\", 9, 0)",
@@ -18,7 +18,7 @@
     },
     "gaming_palette_bonus_32": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 32, 0)",
-      "result": 6.666666666666667
+      "result": 10
     },
     "legend_talent_bonus_22": {
       "expression": "idleon.callFunction(\"Thingies\", \"LegendPTS_bonus\", 22, 0)",

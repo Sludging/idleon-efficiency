@@ -2,51 +2,51 @@
   "extractions": {
     "compass_upgrade_cost_14": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 14, 0)",
-      "result": 8876194.313445799
+      "result": 39451470.25011073
     },
     "compass_upgrade_cost_45": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 45, 0)",
-      "result": 26468522038.392895
+      "result": 117642997988.4795
     },
     "compass_upgrade_cost_48": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 48, 0)",
-      "result": 1429690342.9061365
+      "result": 6354455979.4721155
     },
     "compass_upgrade_cost_51": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 51, 0)",
-      "result": 5037393239.367156
+      "result": 22389389247.592182
     },
     "compass_upgrade_cost_54": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 54, 0)",
-      "result": 648789404674.8545
+      "result": 2883634020758.683
     },
     "compass_upgrade_cost_57": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 57, 0)",
-      "result": 7910255.0927051855
+      "result": 35158220.11556407
     },
     "compass_upgrade_cost_151": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 151, 0)",
-      "result": 797055840.8548801
+      "result": 3542624652.271286
     },
     "compass_upgrade_cost_123": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 123, 0)",
-      "result": 3696582.9744974053
+      "result": 16429973.03749154
     },
     "compass_upgrade_cost_148": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 148, 0)",
-      "result": 24621598.26520973
+      "result": 109434090.46359774
     },
     "compass_upgrade_cost_6": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassUpgCost\", 6, 0)",
-      "result": 22114617587043.93
+      "result": 98291468958293.5
     },
     "masterclasses_upgrade_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
-      "result": 0.11764705882352942
+      "result": 0.5555555555555556
     },
     "first_three_upgrade_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
-      "result": 0.0231310140636565
+      "result": 0.021771314116520026
     },
     "compass_bonus_36": {
       "expression": "idleon.callFunction(\"Windwalker\", \"CompassBonus\", 36, 0)",

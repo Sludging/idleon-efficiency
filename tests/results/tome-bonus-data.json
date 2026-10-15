@@ -2,19 +2,19 @@
   "extractions": {
     "tome_bonus_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 0, 0)",
-      "result": 1488.1138827372065
+      "result": 1492.8455685419763
     },
     "tome_bonus_1": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 1, 0)",
-      "result": 556.8282749131176
+      "result": 558.7757153589777
     },
     "tome_bonus_2": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 2, 0)",
-      "result": 258.61936494300573
+      "result": 259.62427081074213
     },
     "tome_bonus_3": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 3, 0)",
-      "result": 878.5365807022079
+      "result": 922.4263224645649
     },
     "tome_bonus_4": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomeBonus\", 4, 0)",
@@ -34,7 +34,7 @@
     },
     "tome_bonus_score": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44060
+      "result": 44258
     },
     "tome_bonus_unlocked_0": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",
@@ -78,7 +78,7 @@
     },
     "tome_bonus_alchemy_str": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.W8",
-      "result": 878.5365807022079
+      "result": 922.4263224645649
     },
     "tome_bonus_alchemy_agi": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.A9",

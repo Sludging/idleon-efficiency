@@ -2,7 +2,7 @@
   "extractions": {
     "first_three_upgrade_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
-      "result": 0.0231310140636565
+      "result": 0.021771314116520026
     },
     "armory_upgrade_79_bonus": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 79, 0)",

@@ -14,7 +14,7 @@
     },
     "construction_mastery_bonus": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ConstMasteryBonus\", 2, 0)",
-      "result": 1570
+      "result": 1585
     },
     "vial_equinox_fish_bonus": {
       "expression": "idleon.getDNSM(\"AlchVials\").h.Contspd",
@@ -54,7 +54,7 @@
     },
     "palette_bonus_25": {
       "expression": "idleon.callFunction(\"GamingStatType\", \"PaletteBonus\", 25, 0)",
-      "result": 78
+      "result": 130.5
     },
     "gear_bonus_etc_bonuses_30": {
       "expression": "idleon.callFunction(\"EtcBonuses\", \"30\")",
@@ -62,43 +62,43 @@
     },
     "build_speed_player_0": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 0, 0)",
-      "result": 519357680379.9828
+      "result": 794799762005.7596
     },
     "build_speed_player_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 1, 0)",
-      "result": 286694494552.2318
+      "result": 457864228208.41876
     },
     "build_speed_player_2": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 2, 0)",
-      "result": 220558564415.1892
+      "result": 286972246744.0583
     },
     "build_speed_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 10051449260084.975
+      "result": 13865122810887.35
     },
     "build_speed_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",
-      "result": 220218724388.99167
+      "result": 286530075495.3015
     },
     "build_speed_player_5": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 5, 0)",
-      "result": 262955401025.2236
+      "result": 459635526062.5823
     },
     "build_speed_player_6": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 6, 0)",
-      "result": 649782388494.0248
+      "result": 1136508780058.7617
     },
     "build_speed_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 7, 0)",
-      "result": 839565022861.5497
+      "result": 1092435123427.5199
     },
     "build_speed_player_8": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 8, 0)",
-      "result": 245155394484.9399
+      "result": 453747553296.74286
     },
     "build_speed_player_9": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 9, 0)",
-      "result": 293941974260.74945
+      "result": 382452565329.5477
     }
   },
   "errors": {}

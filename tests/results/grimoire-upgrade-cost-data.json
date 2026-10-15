@@ -2,23 +2,23 @@
   "extractions": {
     "grimoire_upgrade_cost_0": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 0, 0)",
-      "result": 12565099052.27311
+      "result": 55847316309.82157
     },
     "grimoire_upgrade_cost_25": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 25, 0)",
-      "result": 11463051796.789888
+      "result": 50949115236.411964
     },
     "grimoire_upgrade_cost_49": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgCost\", 49, 0)",
-      "result": 44036868655.562035
+      "result": 195727938384.72205
     },
     "grimoire_masterclass_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"AllMasterclassCostRedux\", 0, 0)",
-      "result": 0.11764705882352942
+      "result": 0.5555555555555556
     },
     "grimoire_first_three_cost_multiplier": {
       "expression": "idleon.callFunction(\"Summoning\", \"First3MC_CostRedux\", 0, 0)",
-      "result": 0.0231310140636565
+      "result": 0.021771314116520026
     }
   },
   "errors": {}

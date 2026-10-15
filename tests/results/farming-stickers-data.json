@@ -14,15 +14,15 @@
     },
     "farming_sticker_bonus_3": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",3,0)",
-      "result": 2750
+      "result": 3093.75
     },
     "farming_sticker_bonus_4": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",4,0)",
-      "result": 330
+      "result": 385
     },
     "farming_sticker_bonus_5": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",5,0)",
-      "result": 247.5
+      "result": 288.75
     },
     "farming_sticker_bonus_6": {
       "expression": "idleon.callFunction(\"FarmingStuffs\",\"StickerBonus\",6,0)",

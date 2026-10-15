@@ -593,17 +593,17 @@
           1,
           1,
           1,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
+          1,
           0,
           1,
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          1,
           0,
           0,
           0,
@@ -669,15 +669,15 @@
           10,
           7,
           7,
-          7,
+          8,
           7,
           8,
           3,
           7,
           6,
-          0,
-          0,
-          0,
+          4,
+          3,
+          3,
           8,
           0,
           0,
@@ -821,8 +821,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4223.20000000001,
-        "spelunkingReduction": 10558
+        "accumulatedReduction": 4493.20000000001,
+        "spelunkingReduction": 11233
       }
     },
     "points_earned": {
@@ -1078,7 +1078,7 @@
           "cap": 4,
           "level": 4,
           "primary": 6.25,
-          "secondary": 1100,
+          "secondary": 1168.75,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1166,7 +1166,7 @@
           "cap": 1,
           "level": 1,
           "primary": 7.1875,
-          "secondary": 172.5,
+          "secondary": 215.625,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1320,7 +1320,7 @@
           "cap": 2,
           "level": 2,
           "primary": 75,
-          "secondary": 10558,
+          "secondary": 11233,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1824,11 +1824,11 @@
     },
     "observation_levels": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalObsLVs\",-1,0)",
-      "result": 176
+      "result": 187
     },
     "discoveries": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"TotalOccurrencesFound\",-1,0)",
-      "result": 24
+      "result": 30
     },
     "glimbo_trades": {
       "expression": "idleon.callFunction(\"Minehead\",\"GlimboTotalTrades\",0,0)",
@@ -2168,7 +2168,7 @@
         },
         {
           "index": 94,
-          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.3%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,100%"
+          "text": "Design_problem,_why_would_players_level_up_old_Observations?_How_about..._+6.3%_Research_EXP_per_TOTAL_Observation_LV!_@_Total_Bonus:1,169%"
         },
         {
           "index": 105,
@@ -2200,7 +2200,7 @@
         },
         {
           "index": 112,
-          "text": "+7.2%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+173%"
+          "text": "+7.2%_Research_EXP_gain_per_Observation_found!_@_Total_Bonus:+216%"
         },
         {
           "index": 125,
@@ -2252,11 +2252,11 @@
         },
         {
           "index": 150,
-          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_30%_every_day,_FOREVER!_Total_Reduction:-97.68%"
+          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_30%_every_day,_FOREVER!_Total_Reduction:-97.82%"
         },
         {
           "index": 151,
-          "text": "Boosts_Spelunking_POW_by_+75%_every_day,_FOREVER!_@_Total_Boost:106.58x_POW"
+          "text": "Boosts_Spelunking_POW_by_+75%_every_day,_FOREVER!_@_Total_Boost:113.33x_POW"
         },
         {
           "index": 152,
@@ -2326,11 +2326,11 @@
     },
     "accumulated_reduction_percent": {
       "expression": "Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100",
-      "result": 97.68
+      "result": 97.82
     },
     "masterclass_cost_multiplier": {
       "expression": "1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)",
-      "result": 0.0231310140636565
+      "result": 0.021771314116520026
     },
     "pairing_after": {
       "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
@@ -2925,17 +2925,17 @@
           1,
           1,
           1,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
+          1,
           0,
           1,
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          1,
           0,
           0,
           0,
@@ -3001,15 +3001,15 @@
           10,
           7,
           7,
-          7,
+          8,
           7,
           8,
           3,
           7,
           6,
-          0,
-          0,
-          0,
+          4,
+          3,
+          3,
           8,
           0,
           0,
@@ -3153,8 +3153,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4223.20000000001,
-        "spelunkingReduction": 10558
+        "accumulatedReduction": 4493.20000000001,
+        "spelunkingReduction": 11233
       }
     }
   },

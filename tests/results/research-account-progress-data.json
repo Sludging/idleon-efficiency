@@ -27,17 +27,17 @@
           1,
           1,
           1,
-          0,
-          0,
+          1,
+          1,
+          1,
+          1,
+          1,
           0,
           1,
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          1,
           0,
           0,
           0,
@@ -103,15 +103,15 @@
           10,
           7,
           7,
-          7,
+          8,
           7,
           8,
           3,
           7,
           6,
-          0,
-          0,
-          0,
+          4,
+          3,
+          3,
           8,
           0,
           0,
@@ -168,61 +168,61 @@
           0
         ],
         "lenses": [
-          748,
-          111,
-          19,
+          784,
+          113,
+          20,
           0,
-          672,
-          111,
-          17,
+          710,
+          151,
+          26,
           1,
-          824,
-          111,
-          21,
+          860,
+          113,
+          22,
           0,
-          836,
-          123,
-          21,
-          0,
-          786,
+          799,
           111,
           20,
+          0,
+          822,
+          113,
+          21,
           2,
+          875,
+          111,
+          22,
+          0,
+          874,
+          124,
+          22,
+          0,
           868,
           77,
           14,
-          0,
-          760,
-          123,
-          19,
-          0,
-          786,
-          71,
-          12,
           2,
-          862,
+          748,
+          151,
+          27,
+          1,
+          837,
           111,
-          22,
-          1,
-          798,
-          83,
-          12,
+          21,
           2,
-          874,
-          123,
-          22,
+          760,
+          163,
+          27,
           1,
-          684,
-          123,
-          17,
+          722,
+          163,
+          26,
           1,
+          836,
+          124,
+          21,
+          2,
           798,
-          123,
+          124,
           20,
-          2,
-          716,
-          77,
-          10,
           0,
           875,
           310,
@@ -489,7 +489,7 @@
           -1,
           0
         ],
-        "attempts": 9,
+        "attempts": 3,
         "pendingSeconds": 0
       }
     },
@@ -499,7 +499,7 @@
         "level": 70,
         "requirement": 13333054299.729195,
         "name": "Sludgev4",
-        "failedRolls": 4
+        "failedRolls": 0
       }
     },
     "eligible_count": {
@@ -508,15 +508,15 @@
     },
     "discoveries": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalOccurrencesFound\", -1, 0)",
-      "result": 24
+      "result": 30
     },
     "observation_levels": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"TotalObsLVs\", -1, 0)",
-      "result": 176
+      "result": 187
     },
     "minimum_roll": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"MinRoll\", 0, 0)",
-      "result": 13
+      "result": 1
     },
     "maximum_roll": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"MaxRoll\", 0, 0)",
@@ -548,15 +548,15 @@
     },
     "epilogue_refresh": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", -1, 0)",
-      "result": 630.7706895687219
+      "result": 631.4481367142912
     },
     "exp_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPmulti\", 0, 0)",
-      "result": 3231.3100651018644
+      "result": 3442.3757882238774
     },
     "exp_total": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"ResearchEXPrateTOT\", 0, 0)",
-      "result": 36111541.95983567
+      "result": 78964611.11647023
     },
     "kaleidoscope_base": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Kalei_MultiBase\", 0, 0)",
@@ -591,19 +591,19 @@
         0,
         0,
         0,
-        151.02642847332493,
-        0,
-        0,
-        0,
-        402.1588465544427,
         0,
         0,
         0,
         0,
-        4730.297072975443,
         0,
-        5892.028894275942,
         0,
+        0,
+        0,
+        0,
+        0,
+        7080.211289209767,
+        0,
+        15858.77503140129,
         0,
         0,
         0,
@@ -646,17 +646,17 @@
         0,
         0,
         0,
-        20.142674999999997,
+        0,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
         0,
         20.142674999999997,
-        0,
-        0,
-        0,
-        0,
-        0,
+        20.142674999999997,
         0,
         0,
         0,
@@ -694,15 +694,15 @@
         13937.962801796362,
         2746.2612599994845,
         3236.8440794310363,
-        3795.0602827373023,
+        6959.09061882295,
         4427.2158083767135,
         9478.290914977402,
         509.5300000000001,
         6835.434279953429,
         4213.651486806631,
-        113.84899999999999,
-        127.08799999999998,
-        141.375,
+        1381.3507977495055,
+        834.054230864,
+        934.915283203125,
         24469.09446507304,
         173.26099999999997,
         190.944,
@@ -729,32 +729,32 @@
         1,
         1,
         1,
-        3.42,
+        1,
+        1,
+        2.21,
         1,
         1,
         1,
         1,
         1,
         1,
-        3.42,
-        3.42,
-        3.42,
+        5.84,
+        1,
+        2.21,
+        1,
+        1,
+        1,
+        1,
+        4.63,
+        1,
+        5.84,
         1,
         1,
         1,
         1,
         1,
-        3.42,
-        3.42,
-        3.42,
         1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        3.42,
-        1,
+        4.63,
         1,
         1,
         1,
@@ -772,7 +772,7 @@
     },
     "exp_subtotal": {
       "expression": "Array.from({length:idleon.callFunction(\"ResearchStuff\",\"OccurrencesToBeFound\",0,0)},(_,index)=>idleon.callFunction(\"ResearchStuff\",\"ResearchEXPrateObj\",index,0)).reduce((sum,value)=>sum+value,0)",
-      "result": 11175.511242279154
+      "result": 22938.986320611057
     },
     "point_term": {
       "expression": "Math.round(1+Math.min(1,Math.floor(idleon.getAttr(\"Lv0\")[20]/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))",
@@ -852,7 +852,7 @@
     },
     "grid_94_2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 94, 2)",
-      "result": 1100
+      "result": 1168.75
     },
     "grid_110_0": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 110, 0)",
@@ -864,7 +864,7 @@
     },
     "grid_112_2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 112, 2)",
-      "result": 172.5
+      "result": 215.625
     },
     "farming_sticker": {
       "expression": "idleon.callFunction(\"FarmingStuffs\", \"StickerBonus\", 1, 0)",
@@ -880,7 +880,7 @@
     },
     "coral_research": {
       "expression": "idleon.callFunction(\"Thingies\", \"DancingCoralBonus\", 4, 0)",
-      "result": 279
+      "result": 300
     },
     "zenith_research": {
       "expression": "idleon.callFunction(\"Thingies\", \"ZenithMarketBonus\", 8, 0)",
@@ -896,7 +896,7 @@
     },
     "epilogue_research": {
       "expression": "idleon.callFunction(\"Thingies\", \"LoreEpiBon\", 7, 0)",
-      "result": 28.300100855504606
+      "result": 28.346052683324945
     },
     "card_w7b1": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b1\")",
@@ -908,7 +908,7 @@
     },
     "card_w7a11": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7a11\")",
-      "result": 2
+      "result": 4
     },
     "card_w7b8": {
       "expression": "idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b8\")",
@@ -1092,7 +1092,7 @@
     },
     "tome_reference": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44060
+      "result": 44258
     },
     "grimoire_epilogue": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",
@@ -1104,7 +1104,7 @@
     },
     "gambit_score": {
       "expression": "idleon.callFunction(\"Holes\", \"GambitPts\", 777, 0)",
-      "result": 4104954.3765447172
+      "result": 4318260.9105447335
     },
     "offline_contributions": {
       "expression": "[idleon.callFunction(\"Companions\", 28),idleon.callFunction(\"Holes\", \"GambitBonuses\", 15, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 1, 0),idleon.callFunction(\"Minehead\", \"BonusQTY\", 10, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 71, 0),idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 111, 0),Math.min(6,Math.round(idleon.getAttr(\"Sailing\")[3][36])),Math.min(idleon.callFunction(\"RunCodeOfTypeXforThingY\", \"CardLv\", \"w7b11\"),10),20*idleon.callFunction(\"Companions\", 153),10*idleon.callFunction(\"CompLV2\", 153),2*idleon.getAttr(\"GemItemsPurchased\")[45],idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 4, 0),idleon.callFunction(\"SushiStuff\", \"RoG_BonusQTY\", 24, 0)]",
@@ -1142,11 +1142,11 @@
     },
     "shared_insight_multiplier": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"ObservationInsightExpRate\",17,0)/(3*idleon.getAttr(\"Research\")[5].filter((kind,index)=>index%4===3&&kind===1&&idleon.getAttr(\"Research\")[5][index-1]===17).length*idleon.callFunction(\"ResearchStuff\",\"Kalei_MultiTot\",17,0))",
-      "result": 3.3571124999999995
+      "result": null
     },
     "gambit_points_multiplier": {
       "expression": "idleon.callFunction(\"Holes\",\"GambitPTSmulti\",0,0)",
-      "result": 4.745666859205776
+      "result": 4.992266859205776
     },
     "gambit_score_requirement": {
       "expression": "idleon.callFunction(\"Holes\",\"GambitPtsREQ\",15,0)",
@@ -1170,15 +1170,15 @@
     },
     "gambit_jar_23": {
       "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",23,0)",
-      "result": 8.399999999999999
+      "result": 9.600000000000001
     },
     "gambit_jar_30": {
       "expression": "idleon.callFunction(\"Holes\",\"JarCollectibleBonus\",30,0)",
-      "result": 2.8
+      "result": 3.2
     },
     "gambit_tesseract_47": {
       "expression": "idleon.callFunction(\"ArcaneType\",\"ArcaneUpgBonus\",47,0)",
-      "result": 110.94
+      "result": 134
     },
     "gambit_measurement_base_13": {
       "expression": "idleon.callFunction(\"Holes\",\"MeasurementBaseBonus\",13,0)",

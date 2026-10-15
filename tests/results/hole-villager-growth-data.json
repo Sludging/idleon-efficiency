@@ -32,11 +32,11 @@
           150
         ],
         "exp": [
-          1419803559855799.2,
-          385722911122946.06,
-          2007516633842639.8,
-          134904463139950.81,
-          48287845241860.37
+          2111430406566116.2,
+          556469569359472.06,
+          3505933161051056.5,
+          305651121377109.06,
+          219034503478928.1
         ],
         "investments": [
           114,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          9796150.081561891,
-          9640620.626113473,
-          10522676.311262997,
+          32706458.99977714,
+          32550929.54432672,
+          33432985.229478654,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -129,7 +129,7 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3128,
+        "wishes": 3397,
         "layers": [
           19,
           17,
@@ -141,7 +141,7 @@
     },
     "growth_0": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 0, 0)",
-      "result": 1647576939020.6885
+      "result": 4265140310610.3086
     },
     "requirement_0": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 0, 0)",
@@ -156,7 +156,7 @@
     },
     "growth_1": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 1, 0)",
-      "result": 406747813386.6402
+      "result": 1052966741665.9032
     },
     "requirement_1": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
@@ -164,11 +164,11 @@
     },
     "ready_1": {
       "expression": "Number(idleon.getAttr(\"Holes\")[1][1]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][1]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
-      "result": false
+      "result": true
     },
     "growth_2": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 2, 0)",
-      "result": 3569486888183.667
+      "result": 9240484521690.385
     },
     "requirement_2": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
@@ -176,11 +176,11 @@
     },
     "ready_2": {
       "expression": "Number(idleon.getAttr(\"Holes\")[1][2]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][2]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
-      "result": false
+      "result": true
     },
     "growth_3": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 3, 0)",
-      "result": 406747813386.6402
+      "result": 1052966741665.9032
     },
     "requirement_3": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
@@ -192,7 +192,7 @@
     },
     "growth_4": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpPerHour\", 4, 0)",
-      "result": 406747813386.6402
+      "result": 1052966741665.9032
     },
     "requirement_4": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
@@ -200,7 +200,7 @@
     },
     "ready_4": {
       "expression": "Number(idleon.getAttr(\"Holes\")[1][4]) >= 1 && Number(idleon.getAttr(\"Holes\")[2][4]) >= idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
-      "result": false
+      "result": true
     },
     "caverns_owned": {
       "expression": "idleon.callFunction(\"Holes\", \"CavernsOwned\", 0, 0)",

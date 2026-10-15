@@ -2,11 +2,11 @@
   "extractions": {
     "royal_armory_support_collection": {
       "expression": "idleon.callFunction(\"RoyalG\", \"SupportCollection\", 0, 0)",
-      "result": 200
+      "result": 204
     },
     "royal_armory_support_collection_upgrade_43": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgBonus\", 43, 0)",
-      "result": 0
+      "result": 2
     },
     "royal_armory_support_collection_jelly_quantity_41": {
       "expression": "idleon.callFunction(\"JellyOperation\", \"RoG_BonusQTY\", 41, 0)",
