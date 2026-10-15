@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Box, Text } from "grommet";
 import { CircleInformation } from "grommet-icons";
-import type { Hole, HoleCurrency, Measurement, Schematic } from "../../../data/domain/world-5/hole/hole";
+import type { HoleCurrency, Measurement } from "../../../data/domain/world-5/hole/hole";
 import { commaNotation, notateNumber } from "../../../data/utility";
 import IconImage from "../../base/IconImage";
 import TipDisplay from "../../base/TipDisplay";
@@ -23,12 +23,6 @@ export function purpose(value: string): string {
         .replace(/\s+/g, " ").trim();
 }
 
-export function schematicState(row: Schematic): string {
-    if (!row.saveAvailable) return "Ownership unavailable";
-    if (row.built) return `Built${row.available === null ? " · Access unavailable" : row.available === false ? " · Locked" : ""}`;
-    return row.available === null ? "Access unavailable" : row.available ? "Available" : "Locked";
-}
-
 export function measurementName(row: Measurement): string {
     switch (row.statisticUnit) {
         case "study-levels": return "Total Study levels";
@@ -43,33 +37,19 @@ export function LocalTip({ heading, body, children }: { heading: string; body: R
     </TipDisplay>;
 }
 
-export function ResourceCost({ hole, currency, cost, shortfall, built = false, owner }: {
-    hole: Hole; currency: HoleCurrency; cost: number | null; shortfall: number | null; built?: boolean; owner: string;
+export function Cost({ currency, cost, affordable, id }: {
+    currency: HoleCurrency; cost: number | null; affordable: boolean | null; id: string;
 }) {
     const image = currency.getImageData();
-    const schematics = hole.releasedSchematics.filter(row => row.currency.index === currency.index && owner !== `s-${row.index}`);
-    const measurements = hole.measurements.filter(row => row.currency.index === currency.index && owner !== `m-${row.index}`);
-    return <LocalTip heading={readable(currency.data.name)} body={<>
-        <Text size="small">Exact stock: {exact(currency.stock)} {readable(currency.data.name)}</Text>
-        <Text size="small">{built ? "Built; no next construction cost or shortfall." : `Current cost: ${exact(cost)}. Exact shortfall: ${exact(shortfall)}.`}</Text>
-        {schematics.length > 0 && <Box gap="xxsmall">
-            <Text size="small" weight="bold">Other Schematics</Text>
-            {schematics.map(row => <Text size="xsmall" key={row.index}>{readable(row.data.name)} · {schematicState(row)} · {row.saveAvailable && row.built ? "No next cost" : `${exact(row.currentCost)} ${readable(currency.data.name)}`}</Text>)}
-        </Box>}
-        {measurements.length > 0 && <Box gap="xxsmall">
-            <Text size="small" weight="bold">Other Measurements</Text>
-            {measurements.map(row => <Text size="xsmall" key={row.index}>{measurementName(row)} · {purpose(row.data.description)} · Lv. {number(row.saveAvailable ? row.level : null)} · {row.access === null ? "Access unavailable" : row.access ? "Available" : "Locked"} · {exact(row.nextCost)} {readable(currency.data.name)}</Text>)}
-        </Box>}
-        {(schematics.length > 0 || measurements.length > 0) && <Text size="xsmall">These purchases share stock. Individually affordable purchases compete for the same stock.</Text>}
-    </>}>
-        <Box direction="row" align="center" gap="xsmall">
-            {image && <Box flex={false}><IconImage data={image} scale={0.65} /></Box>}
-            <Box gap="xxsmall">
-                <Text size="small">{readable(currency.data.name)}{built ? "" : ` · ${number(cost)}`}</Text>
-                {!built && <Text size="xsmall" color="accent-2">Shortfall: {number(shortfall)}</Text>}
-            </Box>
-        </Box>
-    </LocalTip>;
+    const known = cost !== null && currency.stock !== null && affordable !== null;
+    const state = known ? affordable ? "sufficient" : "insufficient" : "unavailable";
+    const color = known ? affordable ? "green-2" : "status-critical" : "text";
+    return <Box data-cost={id} data-cost-state={state} direction="row" align="center" gap="xsmall">
+        {image && <Box data-resource-art flex={false}><IconImage data={image} scale={0.6} /></Box>}
+        <Text data-cost-value size="14px" color={color}>
+            {cost === null ? "Cost unavailable" : number(cost)}{image ? "" : ` ${readable(currency.data.name)}`}
+        </Text>
+    </Box>;
 }
 
 function scrollOwner(element: HTMLElement | null): HTMLElement {

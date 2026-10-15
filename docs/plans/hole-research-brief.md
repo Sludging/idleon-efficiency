@@ -1,14 +1,275 @@
 # The Hole: research brief
 
-**Status:** Reopened part 2 [#442](https://github.com/Sludging/idleon-efficiency/issues/442) **density/Pocket UI accepted with its stated check limits for local commit** on 2026-10-15. Fresh independent review after H44 found zero Standards / zero Specification findings. The [published amended plan](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6183432469) supersedes earlier Pocket inspection UI requirements, not accepted backend mechanics. See the [acceptance receipt](#part-2-density-and-pocket-ui-acceptance-and-local-commit).
+**Status:** Human accepted the reviewed part 2 phase 7 cards and Doot UI with stated check limits, and authorized a local commit of only this accepted layer. The scoped commit receipt is returned with the handoff result. Accepted UI `8f85ab84` and backend `9674d14c` remain historical baselines.
 
 ## Current handoff
 
 - **Selected part and authority:** The human selected part 2 only: [#442 — Schematics, Majik, and Measurements](https://github.com/Sludging/idleon-efficiency/issues/442). The parent remains a read-only delegated supervisor under [the feature workflow](../human/feature-workflow.md). Workers and delegates run strictly serially. Preserve completed part 1, canonical navigation, Studies, cavern identities, unrelated work, accepted calculations, and supplied generated prerequisites.
-- **Current gate (2026-10-15):** The human accepted this demonstrated UI result and its stated check limits, authorized only the accepted layer's local commit, and required a stop afterward. The delegated supervisor accepted the actual production density/Pocket revision against the latest feedback and amended plan after inspecting its evidence and fresh independent review: **zero actionable Standards / zero Specification findings**. **H44 is resolved.** Record this acceptance without claiming the human has personally inspected the revised visuals; their own review is next. No further refinement, other-part work, publication, push, PR, deployment, issue closure, or generated/WikiBot work is authorized.
+- **Current gate (2026-10-15):** Human acceptance authorizes local commit of exactly these ten paths: `app/world-5/hole/content.tsx`; `components/world-5/hole/{majik,measurements,schematics,upgradeInspection}.tsx`; `data/domain/world-5/hole/hole.tsx`; `tests/domains/hole/{majik,schematics}.test.ts`; `docs/plans/hole-part-2-ui-plan.md`; and this handoff. Fresh phase 8 review after test-only revision found **0 Standards** and **0 Specification** findings. The updated schematic suite passed **133/133**, exit **0**. Production proof remains **492/492**, exit **0**, with **55 captures**, **40 detached presentation examples**, and **105 decoded icons**. The broad run remains failed. See the [fresh final review](#part-2-phase-8-final-cards-and-doot-review-after-test-fix) and evidence below. No push, PR, deployment, closure, generated/WikiBot work, or other-part work is authorized.
 - **Part 2 prerequisite resolved:** Supplied `HoleBuildingModel.costCurrencyId` preserves the original Hole wallet ID. `HoleCurrencyRepo` supplies all 39 identities across Sediment, HarpNote, Rupie, and Fountain families. Required joins now resolve: building 45 → 12 → Bass Note; 67 → 27 → Rupie 7; 94 → 31 → Silver Coins; 102 → 36 → Moolah Stacks. Building 94 also retains literal base cost 500. Preserve these supplied generated changes. No generated directory or WikiBot work is authorized.
 - **Historical accepted evidence and limits:** H43 passed **1 affected suite / 53 tests**. Phase 7 passed **8 selected suites / 268 tests**; the full command was not rerun after H43. H42's **270 tests** includes two subsequently deleted tests. Historical production evidence covers **278 description checks, 11 character inspections, 105 schematic checks, 17 Measurement checks, and 26 captures**, then failed its global error assertion with **4 page / 10 console / 13 failed requests / 3 HTTP errors**. These remain historical, not evidence for the new design. Unrelated Nobisect **expected 1070 / received 0** and AGI **live 2024359 / imported 2024269** remain unchanged. Game parity still covers one matched save and active Player 3 only. No tests or game parity were rerun for this replan.
-- **Execution contract:** Read `CODING_STANDARDS.md`, `docs/agents/domain.md`, `docs/plans/hole-spec-draft.md`, and relevant vocabulary in this brief. Root `CONTEXT.md`, `CONTEXT-MAP.md`, and `docs/adr/` discovery found no files. Pass these paths to each executor/reviewer. Run workers and independent reviews serially. Use this handoff for selected-part authority rather than rewriting phase prompts. Return each exact workflow gate for supervisor judgment. Approval does not itself start implementation.
+- **Historical phase 7 execution contract:** Read `CODING_STANDARDS.md`, `docs/agents/domain.md`, `docs/plans/hole-spec-draft.md`, and relevant vocabulary in this brief. Root `CONTEXT.md`, `CONTEXT-MAP.md`, and `docs/adr/` discovery found no files. These phase-specific instructions are retained as history, not current authorization.
+
+### Part 2 phase 8 final cards and Doot review after test fix
+
+**Method and scope (2026-10-15):** Fresh independent review followed [phase 8](../human/feature-workflow.md#8-review-the-ui-independently), starting with [scoped UI guidance](../agents/ui-patterns.md). Reviewed the current selected UI/domain/test diff against `HEAD`, the approved [fourteen-point plan](hole-part-2-ui-plan.md), issue [#442](https://github.com/Sludging/idleon-efficiency/issues/442), and current handoff. Compared production and approved-preview captures, actual Royal Statues hierarchy, and retained end-to-end evidence. Unrelated concurrent dirty work remained outside attribution. No checks or edits to code, tests, generated data, save, or evidence were made.
+
+#### Standards
+
+**Zero confirmed actionable Standards findings.** The prior test-maintainability finding is resolved: `tests/domains/hole/schematics.test.ts` now checks public foreground metadata content for all 105 released entries, not object identity. No other maintainability, standards, excessive edge-case, impossible-undefined, or overengineering issue was confirmed in the selected diff.
+
+#### Specification and player outcome
+
+**Zero confirmed actionable Specification findings.** Production matches the approved cards and Doot direction: saved Pocket gods accompany the prepared `+30% All Stat` and `Divinity Lv. 2+`; schematic cards retain verified artwork, checked Show Owned default, search, distinct state and icon-first costs; Measurement effects dominate compact level/statistic/cost support at the approved 20px/700 hierarchy. Comparison evidence records zero sampled card width/height deltas against the approved preview. No scope expansion or unnecessary inspection surface was confirmed.
+
+#### Evidence and limits
+
+- The selected test revision passed **1 suite / 133 tests**, exit **0**; this review did not rerun it. Retained production browser evidence passed **492/492**, exit **0**, with **55 captures**, **40 detached presentation examples**, and **105 decoded icons**.
+- The broad run remains failed: **2,524/2,556**, exit **137**. It retains **13 nonzero actual-owner scroll transitions**; do not treat it as green. Shared browser errors remain **3 page / 9 console / 21 failed requests / 3 HTTP errors** and were not suppressed.
+- Evidence covers one save at **1440×1000**. Detached states prove presentation only. No fresh game parity, alternate branch, authenticated-cloud, mobile/tablet, accessibility, build, type-check, or broad-suite pass is claimed.
+
+**Summary and stop:** Standards **0**; Specification **0**. Prior test finding resolved. Report this verdict and limits for human judgment. No acceptance, approval, commit, publication, push, PR, deployment, issue closure, WikiBot work, or other-part work occurred.
+
+
+### Part 2 phase 8 cards and Doot independent UI review
+
+**Method and scope (2026-10-15):** Followed [phase 8](../human/feature-workflow.md#8-review-the-ui-independently), starting with [scoped UI guidance](../agents/ui-patterns.md). Read coding standards, domain guidance, Hole specification/vocabulary, issue [#442](https://github.com/Sludging/idleon-efficiency/issues/442), and the approved [fourteen-point UI plan](hole-part-2-ui-plan.md) and current handoff. Reviewed the current selected production diff against `HEAD`, all eight selected changed files, final production captures, approved preview captures, and retained proof. Unrelated concurrent test/config work remains unattributed and outside review.
+
+#### Standards
+
+- **One test-maintainability finding — `tests/domains/hole/schematics.test.ts:37-42`:** The `toBe(imageData)` assertion requires reference identity, an internal object-reuse detail rather than a player-visible result. `docs/TESTING_IMPLEMENTATION.md` § “Keep tests tied to the real save,” line 43, says to assert calculated results, not incidental object representation. Retain public metadata content or consumer icon behavior checks; remove the reference-identity assertion. The retained browser proof already decoded all 105 production foregrounds.
+
+No other confirmed standards or maintainability findings. Required domain owners use direct access; nullable inputs correspond to prepared missing-data contracts. The selected display helpers remain local and narrowly scoped. The retained shortfall/unknown presentation and scroll helper serve accepted outcomes, not new frameworks.
+
+#### Specification and player outcome
+
+**Zero confirmed actionable player-facing specification findings.** Compared final production Majik/Pocket, Schematics, and Measurements with the approved preview and current plan. Doot shows the prepared `+30% All Stat` amount with `Divinity Lv. 2+` and saved gods without ordinary bonus prose. Schematic cards retain the checked Show Owned default, verified art, distinct ownership/access state, and icon-first costs. Measurement effects dominate supporting statistics and prices, matching the plan's 20px/700 hierarchy and the actual Royal Statues reference. Scope remains the three selected panes and the approved display exposures; no formula, character inspection surface, forecast, purchase control, or unrelated feature was added.
+
+#### Evidence and limits
+
+- The production evidence index records the final focused run at **492/492**, exit **0**, **55 captures**, **40 detached presentation examples**, and **105 decoded icons**. Four affected domain suites passed **177 tests**. These are retained execution results; this review ran no checks.
+- The failed broad run remains failed: **2,524/2,556**, exit **137**, with **119 hover checks** and **13 nonzero actual-owner scroll transitions** preserved as scoped evidence. Do not call the broad run green. Final scoped browser errors remain **3 page / 9 console / 21 failed requests / 3 HTTP errors**; recorded causes are shared ad/vendor/navigation paths, not a selected-pane exception.
+- The render comparison is bounded to one local save at **1440×1000**. Detached clones establish presentation only. No fresh game parity, alternate branch, mobile/tablet, accessibility, build, type check, or broad-suite claim follows.
+
+**Summary and stop:** Standards: **1** test-maintainability finding. Specification: **0** confirmed actionable player-facing findings. Production code, tests, generated data, save, and evidence were read-only; only this handoff changed. Return the finding and check limits for human judgment. No fix, acceptance, approval, commit, publication, push, PR, deployment, issue closure, WikiBot work, or other-part work occurred.
+
+### Part 2 phase 8 selected test revision
+
+**Authority and scope (2026-10-15):** Addressed only the selected test-maintainability finding from the independent UI review. Production, domain behavior, generated data, browser evidence, and all other tests remained unchanged.
+
+- Removed the `toBe(imageData)` reference-identity assertion. The test still checks public stable-ID foreground metadata (`location`, `width`, and `height`) for all 105 released schematics. No identity, call-count, caching, source-text, or wiring assertion replaced it.
+- `yarn test tests/domains/hole/schematics.test.ts --runInBand` — exit **0**; **1 suite / 133 tests passed**.
+- Retained browser proof already decoded all **105 correct foregrounds**. No browser rerun was needed for this test-only change.
+
+**Summary and stop:** Selected finding resolved. Production behavior and the 14-item outcome remain unchanged. No commit, acceptance, publication, push, PR, deployment, closure, WikiBot work, or other-part work occurred.
+
+
+### Part 2 phase 7 cards and Doot execution authorization
+
+**Authority (2026-10-15):** The human requested: “Implement the UI for Hole, using my selected part and its approved UI plan and preview.” This freshly authorizes selected part 2 production cutover and actual UI verification. The approved standalone plan's fourteen-point checklist is exhaustive. Reuse its source evidence, rendered Royal Statues reference, and approved preview. Only the initialization-owned schematic image metadata and Pocket-owned existing prepared common eligible amount may extend domain exposure. No formulas, localized Doot prose, imported-stat recalculation, or generated catalogue changes are authorized. Record final evidence and cleanup below, then stop before review or commit.
+
+### Part 2 phase 7 cards and Doot production result
+
+**Method and scope (2026-10-15):** Executed the fresh authorization above against the [approved standalone plan](hole-part-2-ui-plan.md) and its [publication](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6184622562). The cutover scout, owner-accessor worker, production worker, proof preparer, bounded correction worker, and proof-only technical worker were fresh and strictly serial. Read the standards, domain guidance, Hole vocabulary/specification, UI guide, verification guide, and Impeccable context/craft guidance. No scope change was needed.
+
+#### Delivered production and owner exposure
+
+- Changed [Hole content](../../app/world-5/hole/content.tsx) only for typed companion pass-through; changed the three selected panes and their [local helpers](../../components/world-5/hole/upgradeInspection.tsx). Preserved the server wrapper, canonical tabs/rail, portraits, grouped `useShallow`, `lastUpdated`, Studies, shared resources, part 1, and the actual scroll-owner helper.
+- Added only approved display exposure in [Hole domain](../../data/domain/world-5/hole/hole.tsx): initialization-owned `Schematic.getImageData()` returns one stable-ID **97×97** metadata object; `PocketDivinityUpgrade.getDootAllStatPercent()` exposes the common existing prepared eligible amount. Missing saved level, missing eligible amount, disagreement, or no eligible records returns `null`; known zero stays zero. No formula, preparation order, imported-stat calculation, generated catalogue, or localized Doot sentence changed.
+- Extended existing Majik and schematic core tests for the paired-save prepared Pocket amount, foreground metadata/object identity, and released stable ID 105. Static image checks are not game-calculation parity. No synthetic saves or fabricated game oracles were added.
+- Removed obsolete resource-cost tooltip/competition rendering and `schematicState` after their last selected callers disappeared. Kept valid backend APIs, common formatting/purpose helpers, shared pool/Lamp help, and `usePreservedScroll`. No preview code or hidden probe remains in production.
+
+#### Fourteen-point outcome
+
+| Item | Production result and exercised evidence |
+|---|---|
+| 1 — Majik tips | Removed per-bonus tips. Shared point-pool contributors remain separate. Blocking named prerequisites, enhancement gates, and independent unknown/locked states remain local. |
+| 2 — Doot | Normal-store production shows **+30% All Stat**, **Divinity Lv. 2+**, and saved **Arctis / Snehebatu** art/names without ordinary god paragraphs. Detached inactive, missing, unowned, zero, disagreement, and no-eligible presentations remain distinct. |
+| 3 — Maxed | No Maxed labels. Identity and level/current cap remain beside each effect. |
+| 4 — Schematic cards/art | All **105** stable-ID foregrounds decoded at **97×97** against retained verified source mappings. Stable **31** Bee String stays excluded; stable **105** remains released. Two-column dense cards match the approved preview. |
+| 5 — Construction/access | Built, unbuilt/unlocked, locked, unknown ownership, and unknown access remain distinct. Restrained opacity preserves readability. Unlocked cards have no Built/Available/Kaipu checklist; locked requirements remain local. |
+| 6 — Resource presentation | Purchased schematics have no resource area or historical/current/base construction cost. Unbuilt costs use verified icons without repeated names; canonical text remains only without verified art. |
+| 7 — Schematic disclosures | No resource tips, exact stock/cost disclosure, competition list, or full-width audit. |
+| 8 — Show Owned/search | Exactly one checkbox starts checked. Unchecked hides only known built entries. Name/effect/currency search, combination, canonical order, clear, no-results, and retention of unknown ownership were exercised. |
+| 9 — Measurement resources | Compact icon-first next costs. **Bronze Coins** retains its canonical text fallback without guessed art. |
+| 10 — Measurement cards | All **17** remain in game order in dense two-column cards. |
+| 11 — Measurement tips | Removed benefit, level, statistic, exact-count, and resource tips. Compact named statistics, units, multipliers, and independent next prices remain. |
+| 12 — Hierarchy | Complete effects use **20px/700**, above **12px** supports and **14px** costs. Actual Royal Statues confirms **28px/700** current bonuses and **16px/400** next outcomes. |
+| 13 — Affordability | Known sufficient costs/points use **green-2**; insufficient uses **status-critical**. Missing values remain neutral, including null stock with a truthy detached affordability flag. Access/prerequisites remain independent of cost color. |
+| 14 — Preservation | No shortfall labels. Coverage remains **17 / 105 / 17**. Useful unowned purposes, H44 built missing benefit, owned Contented Creator missing total, missing versus zero statistics, independent access/ownership, five villagers, 18 Studies, all 18 cavern identities, and shared resources were exercised. |
+
+#### Actual production proof, comparison, and limits
+
+Primary route is **`/world-5/hole`**, using the normal retained local-save import/store at **1440×1000**. A disposable separate route exposed that same fixture's normal prepared owners and rendered actual production components for labelled detached states. It did not prepare or mutate imported objects. The final [private evidence index](../../.ui-verification/hole-part2-cards-production-20261015/handoff-evidence.json), [focused manifest](../../.ui-verification/runs/2026-10-15T05-49-05-132Z-18780/technical-continuation-manifest.json), and [exact command receipts](../../.ui-verification/hole-part2-cards-production-20261015/command-results.json) retain all evidence and failures.
+
+- **Final focused result:** **492/492**, exit **0**, **55 captures**, all **40 detached examples**, all **105 mapped foregrounds decoded**, all three Majik trees, catalogue controls, all 17 Measurements, actual Royal hierarchy, and preservation checks. The final original Hole/Divinity/companion fingerprint is exactly equal before/after: **`ddc0a39c1a61ba4a9c8fe6dc90fa80279853733a7832e6c2becfe7f787e5265a`**; compact first difference is `null`. Different runs are not asserted to have identical whole-object fingerprints.
+- **Retained exhaustive/hover/scroll evidence:** The failed broad confirmation still contains completed per-entry **105 schematic / 17 Measurement** checks, **119 actual hover checks** with no disclosure opened, and **13 exact nonzero actual-owner transitions**. These preserve **1400→1400**, **600→600**, **700→700**, or **1000→1000** across trees, rail panes, Studies, outer tabs, and shorter panels. They read the actual StyledGrommet owner, not window `0→0`. The broad run remains failed; its scoped evidence is not a global pass.
+- **Rendered comparison:** Personally inspected the approved captures, actual Royal Statues, retained actual viewport captures, final primary Pocket/tree captures, missing/zero/unowned/affordability captures, and all final captures through seven contact sheets. The [comparison record](../../.ui-verification/hole-part2-cards-production-20261015/production-preview-comparison.json) records **zero width/height deltas** across all **17 Majik / 105 schematic / 17 Measurement** cards against the approved preview. Card width is **474px**. Mean heights: Hole **78.2px**, Village **81px**, Idleon **99.73px**, Schematics **79.09px**, Measurements **117.32px**. No new border, outer inset, or visual world was introduced.
+- **Capture limit:** Some final full-locator screenshots include blank offscreen extent below the nested scroll viewport. Use the retained actual [Schematics viewport](../../.ui-verification/runs/2026-10-15T05-21-12-179Z-92889/production-schematics.png) and [Measurements viewport](../../.ui-verification/runs/2026-10-15T05-21-12-179Z-92889/production-measurements.png) for the primary catalogue comparison; production did not change afterward. The final [Pocket pane](../../.ui-verification/runs/2026-10-15T05-49-05-132Z-18780/technical-production-final-majik-idleon.png) and [Royal reference](../../.ui-verification/runs/2026-10-15T05-49-05-132Z-18780/technical-actual-royal-statues.png) remain directly readable. This is a screenshot-extent limit, not a clean whole-page capture claim.
+- **Prepared values, not new parity:** Normal store retains **14 / 80** remaining/earned points, Pocket **+30%**, Beeg Beeg Forge **243×**, first Measurement **+309.52%**, **44.3K Tome points**, **5.20283×**, and **1.06T** next cost. Shared resources remain **109/363 Opals**, **37 Lanterns**, **0/12 today**. Detached examples prove presentation only, not alternate game branches, parsing, or game calculations. H44 explicitly says **Benefit unavailable**; its inherited purpose helper still leaves the approved incomplete historical-quantity clause instead of inventing new game prose.
+- **Browser errors:** Final scoped run retains **3 page / 9 console / 21 failed requests / 3 HTTP errors**. Page errors are NitroPay's removed `browsingTopics`; console/network records include shared Navigation hydration, rlcdn CORS, advertising 403, and aborted analytics/vendor requests. No selected Hole component exception was observed. Earlier Royal hydration and probe errors remain in their original failed runs. Exit 0 is not a clean-console claim.
+
+#### Commands and bounded corrections
+
+```text
+yarn ui:status
+Exit 0. Docker available; app healthy; browser running.
+
+yarn test tests/domains/hole/majik.test.ts tests/domains/hole/schematics.test.ts tests/domains/hole/majik-parameters.test.ts tests/domains/hole/schematics-parameters.test.ts --runInBand
+Exit 0. 4 suites / 177 tests passed.
+
+yarn eslint app/world-5/hole/content.tsx components/world-5/hole/majik.tsx components/world-5/hole/schematics.tsx components/world-5/hole/measurements.tsx components/world-5/hole/upgradeInspection.tsx
+Exit 1. 67 restrictions: 55 inherited content-page loading/test attributes and 12 new pane test attributes.
+
+yarn eslint components/world-5/hole/majik.tsx components/world-5/hole/schematics.tsx components/world-5/hole/measurements.tsx components/world-5/hole/upgradeInspection.tsx
+Exit 0 after removing the 12 new test attributes.
+
+/home/sludge/.omp/agent/skills/impeccable/scripts/impeccable detect --json app/world-5/hole/content.tsx components/world-5/hole/majik.tsx components/world-5/hole/schematics.tsx components/world-5/hole/measurements.tsx components/world-5/hole/upgradeInspection.tsx
+Exit 0. Findings [].
+```
+
+One bounded production correction removed the twelve newly added test-only attributes. It changed no visual design or calculation. The same pass corrected probe-only getter assignments and readiness. Later work repaired only disposable verification code, with no further production edits or polish. Existing content-page restrictions were preserved outside the selected change; no full-content lint pass is claimed.
+
+| Browser command | Run under `.ui-verification/runs/` | Actual result |
+|---|---|---|
+| `yarn ui:run .ui-verification/hole-part2-cards-production-20261015/scenario.cjs` | `2026-10-15T05-02-18-281Z-68176` | Host timeout **600s**, no runner exit result. Partial **38/42**, no captures. Probe assigned a getter-only `built` value; dependent sections cascaded. Owned remaining runner/browser were terminated. |
+| Same broad command | `2026-10-15T05-21-12-179Z-92889` | Exit **137**, **2,524/2,556** before termination. Selector scope, selected non-button navigation, and stale fingerprint baseline checks failed. Repeated full fingerprints produced a **330MB** report. Docker `OOMKilled: true` was observed but can be historical; it does not alone prove this exit's cause. |
+| `yarn ui:run .ui-verification/hole-part2-cards-production-20261015/technical-continuation.cjs` | `2026-10-15T05-35-08-536Z-8840` | Exit **1**, **55/76**. Wrong private expected IDs, wrapper clicks, an out-of-scope comparison variable, detached Royal capture, and LiveData-only probe readiness. |
+| Same focused command | `2026-10-15T05-45-32-289Z-16205` | Exit **1**. **401/401 assertions** passed, but two sections threw: Royal hydration reset and a point selector matched two cards. Not an all-pass result. |
+| Same focused command | `2026-10-15T05-47-44-778Z-17773` | Exit **1**, **490/492**. All 40 examples and 55 captures completed. Two private assertions incorrectly scanned a sibling's Total Bonus and expected another god's text for Pocket purpose. Source fingerprint already matched exactly. |
+| Same focused command | `2026-10-15T05-49-05-132Z-18780` | Exit **0**, **492/492**, **55 captures**, all 40 examples, **105 decoded icons**, exact unchanged source fingerprint. |
+
+All failed commands remain failed and retained. Final technical completion does not relabel the broad suite. No full build, full type check, formatter, authenticated-cloud, mobile/tablet, accessibility pass, live extraction, or fresh game parity was run. Historical one-matched-save/active-Player-3-only parity, Nobisect **1070/0**, and AGI **2024359/2024269** remain unchanged.
+
+#### Protection, cleanup, and stop
+
+[Protection](../../.ui-verification/hole-part2-cards-production-20261015/protection-final.json) covers **1,390 baseline files**, including **546 generated files**, with **zero generated deltas**. Exactly eight assigned production/test paths changed. Seventeen other test/config/helper/result deltas appeared during execution; these were not edited by this work and remain unattributed concurrent changes. Do not revert them or claim the whole workspace stayed unchanged. Fixture SHA-256 remains **`2a4a4d96d9932c476495278f5ba73b19d9658735b10a511a9b5b70327d9cd519`**.
+
+Removed the owned disposable route and both executable scenarios. Retained final source copies, screenshots, raw before/after fingerprints, manifests, errors, command receipts, and [cleanup proof](../../.ui-verification/hole-part2-cards-production-20261015/cleanup-proof.json) privately. Shared containers remain running. No save or artifact was published.
+
+**Stop:** Production outcome and scoped verification are complete with the stated limits. Return for human/supervisor judgment before independent review or commit. No implementation blocker remains. No review, approval, acceptance, publication, commit, push, PR, deployment, issue closure, generated/WikiBot edit, or other-part work occurred.
+
+### Part 2 fourteen-point cards and Doot plan approval and publication
+
+**Approval (2026-10-15):** The human stated: “I approve this draft. Publish the approved draft if needed. Record approval and stop.” The read-only delegated supervisor judged the amended [standalone UI plan](hole-part-2-ui-plan.md) and primary actual preview captures under `.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/`: Schematics, Measurements, and Majik Hole/Village/Idleon. Approval covers this selected part 2 revision only; earlier approvals, publications, accepted UI `8f85ab84`, and backend `9674d14c` remain history.
+
+- **Approved direction:** All fourteen findings mapped below: dense schematic and bonus-dominant Measurement cards; all **105 verified stable-ID foregrounds**; **Show Owned checked by default**; **green-2 / status-critical** affordability with neutral unknowns; no per-bonus Majik, Measurement, or schematic resource tooltips, Maxed labels, competition/exact-count disclosures, or shortfall labels. Shared Majik-pool contributor help remains separate. Preserve complete released coverage, useful unobtained rewards, truthful missing benefits, navigation/scroll, and part 1.
+- **Doot and display-only scope:** Use the verified original display-caller branch and existing prepared common eligible Pocket amount: **+30% All Stat** in the retained example, scoped to **Divinity Lv. 2+**. Preserve saved god identities/art without ordinary major-bonus paragraphs under active Doot. No copied localized source prose, character UI, new formula, or imported-stat recalculation. Necessary display exposure is limited to initialization-owned `Schematic.getImageData()` metadata and a Pocket-owned accessor to the existing prepared common amount.
+- **Publication receipt:** Published the complete standalone plan verbatim, with approval, preview references, and retained limits, as a new [#442 comment](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6184622562). The publication command returned exit **0**. Earlier [UI publication](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6181911071) and [density/Pocket publication](https://github.com/Sludging/idleon-efficiency/issues/442#issuecomment-6183432469) remain unchanged.
+- **Retained evidence, not new checks:** Broad previews remain failed: **1,186/1,194** and **1,285/1,286**, both exit **1**. Focused technical continuation remains **128/128**, exit **0**, including **13 nonzero scroll transitions**. Restored accepted missing/access guards remain **51/51**, exit **0**. Startup/finalizer failures, browser errors, and all exact command receipts below remain visible. These scoped passes do not make the broad previews all-green or establish a clean console.
+- **Limits and stop:** One local save at **1440×1000**; detached examples prove presentation only. No new parity, alternate game branch, authenticated-cloud, mobile/tablet, or accessibility claim. Historical active-Player-3-only parity, Nobisect **1070/0**, and AGI **2024359/2024269** remain unchanged. Approval/publication ran no checks, tests, lint, build, formatter, browser scenario, game call, or extraction. Only this handoff changed locally; the plan bytes, production, backend, generated prerequisites, private evidence, and unrelated work remain unchanged. Workers remain strictly serial. Stop before implementation, acceptance, commit, push, PR, deployment, issue closure, generated/WikiBot work, or another part.
+
+### Part 2 phase 6 selected card and Doot replan
+
+**Authority and baseline (2026-10-15):** The human reopened phase 6 only for fourteen selected findings, then approved the amended [standalone UI plan](hole-part-2-ui-plan.md) and preview. The [approval and separate publication receipt](#part-2-fourteen-point-cards-and-doot-plan-approval-and-publication) above is the current gate. Historical accepted UI `8f85ab84` and backend `9674d14c` remain unchanged. The exact phase prompts and reusable revision placeholder in [the feature workflow](../human/feature-workflow.md) remain unchanged. Workers and delegates remain strictly serial.
+
+**Resolved Doot text:** The [original-source evidence](../../.ui-verification/hole-part2-cards-replan-20261015/source-evidence.json) identifies `_event_Hole` line 1, character offset 24895. Its active-Doot branch replaces ordinary selected-god text with: “The Divine feel their obsolescence, and grant +{allStatPercent}% ALL STAT for all your characters... may your stats loom large!” The original `Companions(0)` gate excludes the active character below Divinity level two. Existing prepared `PocketDivinityUpgrade.characters[].allStatPercent` supplies the accepted eligible-character amount. Existing `getCompanionActiveBonus(companions, 0)` supplies account activation, including its existing token behavior.
+
+- **Presentation decision:** Show a compact typed **+30% All Stat** contribution for the retained Pocket level-two example and **Divinity Lv. 2+** scope context. Preserve saved Arctis/Snehebatu names and verified art without their ordinary major-bonus paragraphs under active Doot. Do not claim a recomputed account-wide main stat. Do not restore character selection, alignment/eligibility inspection, or union/overlap lists.
+- **Display exposure, not mechanics:** A small Pocket-owned accessor may expose the common known amount already prepared for eligible records. It must not select an arbitrary character or add the formula in React. Missing safe prepared amount remains **Benefit unavailable**, not zero. The full Doot sentence lives in the original display caller, not the supplied generated Pocket description. It is source evidence, not a new handwritten production description. Full localized prose would require normal static extraction if requested; compact typed-value presentation needs no generated change.
+
+**Resolved schematic artwork:** The same evidence records the original `_customEvent_HoleStuffz` caller, original availability order, all **105 released identity mappings**, and **110/110 successful PNG requests**, including five optional game backgrounds. Every native asset is **97×97** and its CDN payload matches the local SHA-256. Foreground identity is `HoleUIbuildUpg{stableBuildingId}`; `squareImageType` selects a separate background. Slot 2 is stable ID 58. Bee String is stable ID **31**, slot **105**, and remains excluded. Stable ID **105** is released. The plan uses verified foregrounds on this website's dark card surface, not copied colored game backgrounds.
+
+- **Display exposure:** Propose initialization-owned `Schematic.getImageData()` metadata only. Existing static identity is sufficient. No generated field, copied catalogue, WikiBot action, public image, runtime URL construction, or formula change is required.
+- **Research correction:** The first scout stopped at absent current accessors and did not locate the original branches. A fresh serial source worker resolved both questions from retained original functions and read-only original-runtime source requests. The retained/current function text and metadata match. The initial scout's missing-source/art claims are not blockers or authoritative conclusions.
+
+**Control decision:** **Show Owned starts checked.** This preserves the prior all-visible catalogue and the UI guide's conservative default. The unchecked state hides only known built entries. Unknown ownership remains visible. No existing strongly matching opposite default was found; Toolbox's hidden-owned default is not this website's convention.
+
+#### Rendered composition and references
+
+Personally inspected the final disposable [Hole Majik](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/preview-majik-hole.png), [Village Majik](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/preview-majik-village.png), [Idleon/Doot Pocket](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/preview-majik-idleon.png), [Schematics](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/preview-schematics.png), and [Measurements](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/preview-measurements.png). They use this website's actual theme, shell, store-backed prepared values, two-column cards, portraits, god artwork, and verified schematic foregrounds. They are previews, not production changes.
+
+- **Concrete hierarchy reference:** Inspected actual rendered [Royal Armory Statues](../../.ui-verification/runs/2026-10-15T04-20-57-092Z-73542/actual-royal-statues.png) and its [statue detail](../../.ui-verification/runs/2026-10-15T04-20-57-092Z-73542/actual-royal-statue-detail.png). Current bonus is **28px/700**, next outcome **16px/400**, and level/supporting information **14px/400**. Hole's complete Measurement effect is **20px/700**, above **12px/400** level/statistic and **14px/400** cost. This deliberately matches useful bonus dominance, not Statue controls or exact type size.
+- **Toolbox reference:** Located and exercised [Account → World 5 → Hole](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig). Inspected [Engineer](../../.ui-verification/hole-part2-cards-replan-20261015/toolbox-engineer.webp), [Bonuses](../../.ui-verification/hole-part2-cards-replan-20261015/toolbox-bonuses.webp), and [Measure](../../.ui-verification/hole-part2-cards-replan-20261015/toolbox-measure.webp). Reused recognition art and effect/progression/resource relationships only. Do not copy its hidden-owned default, Bee String, source placeholders, ETA, public-profile values, or visual layout. A Pocket-name wait timed out because Bonuses does not display that name; the loaded text and screenshots were subsequently inspected. No clean-error audit of the external site is claimed.
+- **Readability and state:** Inspected [unbuilt unlocked](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/example-unbuilt-unlocked.png), [locked](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/example-locked-schematic.png), [H44 benefit unavailable](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/example-h44-benefit-unavailable.png), [missing statistic](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/example-missing-statistic.png), and [unknown stock](../../.ui-verification/runs/2026-10-15T04-26-15-028Z-85495/example-cost-stock-missing.png) examples. Missing benefits remain explicit; unknown stock leaves the independent cost neutral. The inherited purpose helper leaves an incomplete historical-quantity clause in the H44 example. No invented quantity appears, and no production copy changes were made.
+
+#### Fourteen selected findings and evidence
+
+The [preview evidence index](../../.ui-verification/hole-part2-cards-replan-20261015/preview-handoff-evidence.json) links assertion indices, all captures, hover inspections, prepared values, typography, error records, and source copies.
+
+| Finding | Planned and demonstrated result |
+|---|---|
+| 1 — Majik per-bonus tips | Removed card-level tooltips. Shared pool contributor help remains separate. Genuine blocking prerequisites stay local. |
+| 2 — Doot Pocket text | Existing prepared **+30% All Stat** with **Divinity Lv. 2+** context. Saved god identities/art remain; ordinary major paragraphs and character inspection do not. |
+| 3 — Majik Maxed | No Maxed labels. Current level/cap remains beside identity. |
+| 4 — Schematic icons/cards | Two-column dense cards; **105 unique foreground images decoded** against the verified identity map. |
+| 5 — Construction state | Unlocked entries have no Kaipu/Built checklist. Restrained opacity, unbuilt cost, locked-only requirement, and explicit unknown states remain distinct. |
+| 6 — Resource names/purchased costs | Verified resource icons replace repeated names. Built cards have no resource nodes or historical/base/current costs. Canonical fallback names remain only without verified art. |
+| 7 — Schematic disclosures | No resource tips, exact stock/cost disclosures, competition lists, or full-width resource audits. |
+| 8 — Show Owned | Exactly one checkbox starts checked. Name/effect/currency search combines with it. Clear/no-results and unknown-ownership retention were exercised. |
+| 9 — Measurement resources | Icon-first compact costs. Bronze Coins keeps a compact name fallback, not guessed art. |
+| 10 — Measurement cards | All **17** remain in game order in a dense two-column grid. |
+| 11 — Measurement tooltips | Removed benefit, level, statistic, exact-count, and resource tips. Supporting values remain compact. |
+| 12 — Benefit dominance | Actual rendered Statue reference and same-run technical comparison retained. Measurement effects use **20px/700**, with **12–14px** supports, versus Statue current bonuses at **28px/700**. Initial comparison timeout remains historical. |
+| 13 — Affordability | Known costs/points use **green-2** or **status-critical**. Detached unknown inputs stay neutral. Access/prerequisite meaning remains local and independent. |
+| 14 — Shortfalls/preservation | No shortfall labels. **17 / 105 / 17** coverage, useful unowned rewards, missing/zero distinctions, canonical identities, and unchanged same-run prepared fingerprints remain. Technical continuation proves **13 nonzero actual-owner scroll transitions**, **18 Studies**, and **18 cavern identities**. Broad locator failures remain historical. |
+
+#### Broad preview verification and limits
+
+```text
+yarn ui:status
+Exit 0. Docker app healthy and browser running.
+
+yarn ui:run .ui-verification/hole-part2-cards-replan-20261015/cards-scenario.cjs
+Initial: .ui-verification/runs/2026-10-15T04-20-57-092Z-73542/
+Exit 1. 1,186 / 1,194 assertions; 33 captures.
+Confirmation: .ui-verification/runs/2026-10-15T04-26-15-028Z-85495/
+Exit 1. 1,285 / 1,286 assertions; two section timeouts; 39 captures.
+```
+
+These two runs are not all-pass results. The initial run hit hidden checkbox-input locators and invalid scroll selectors. Its **0→0** records failed and prove no scroll retention. The confirmation corrected checkbox interaction and exercised catalogue search/filter/clear/no-results, all released records, **105 decoded schematic foregrounds**, **70 hover inspections**, **21 detached examples**, compact costs, known/unknown affordability, missing benefits, and absence of removed controls/disclosures. It retained one valid actual-owner **1400→1400** Schematics-to-Majik transition, then a nonexistent tree selector timed out. A redundant Royal Statues capture also timed out, leaving one comparison assertion failed. These harness/readiness failures remain visible in the index; passing assertion counts do not erase them.
+
+- **Browser errors:** Initial **2 page / 7 console / 39 failed requests / 2 HTTP errors**. Confirmation **3 / 6 / 14 / 2**. Unsuppressed NitroPay, Royal/shared-navigation hydration, advertising/CORS/403, and analytics errors remain. No selected-pane calculation exception was identified. Scoped completion never means clean-console.
+- **Detector:** Ran once on the completed disposable card composition: exit **0**, findings **`[]`**. It predates the later state-only restoration of accepted Majik missing/access guards. No detector rerun, build, lint, formatter, domain test, fresh game parity, or extraction ran.
+- **Prepared inputs and fixture:** Preview uses the current retained local fixture, not a newly paired game save. Its first Measurement shows **+309.52% villager EXP**, **44.3K Tome points**, **5.20283×**, and **1.06T** next cost. These are current prepared display values, not the historical matched-save numbers. Original prepared-domain fingerprint remains **`b178040efbc2bd79d6e3162ac27eefefefa89afb56a3a18590b011cababe6b2b`** before/after. No calculation or imported object was changed.
+- **Protection:** [Before/after protection](../../.ui-verification/hole-part2-cards-replan-20261015/protection-result.json) retains **1,390 unchanged files**, including **546 generated files**. Current fixture SHA-256 remains **`2a4a4d96d9932c476495278f5ba73b19d9658735b10a511a9b5b70327d9cd519`**. Earlier source-time fixture hashes remain historical, not evidence that this fixture was changed by this work.
+- **Scope limits:** One local save at **1440×1000**. Detached examples prove presentation, not alternate game branches, missing-save parsing, account calculations, or parity. Historical game parity remains one matched save and active Player 3 only. Nobisect **1070 / 0** and AGI **2024359 / 2024269** remain unchanged historical limits. No authenticated-cloud, mobile/tablet, or accessibility pass is claimed.
+- **Cleanup:** Retained private [source copies](../../.ui-verification/hole-part2-cards-replan-20261015/source-copies/) and all **72** captures. The initial preview worker removed its owned disposable route and executable scenario; its [cleanup proof](../../.ui-verification/hole-part2-cards-replan-20261015/preview-cleanup-proof.json) remains. Shared containers stay running.
+
+#### Focused technical continuation
+
+A fresh serial worker restored the exact retained preview sources without changing their bytes, layout, or styling. The [technical evidence](../../.ui-verification/hole-part2-cards-replan-20261015/technical-handoff-evidence.json) and [run report](../../.ui-verification/runs/2026-10-15T04-35-55-442Z-8558/technical-continuation-report.json) retain **128/128 assertions, exit 0**, for the previously incomplete interactions. This was a harness-only continuation, not another design or polish pass.
+
+```text
+yarn ui:run .ui-verification/hole-part2-cards-replan-20261015/technical-continuation.cjs
+Startup-only: .ui-verification/runs/2026-10-15T04-34-25-299Z-4378/
+Exit 1. Relative filesystem path ENOENT before navigation.
+Startup-only: .ui-verification/runs/2026-10-15T04-34-49-153Z-5613/
+Exit 1. 2/3 guards; overstrict cross-run fingerprint check stopped interactions.
+Focused execution: .ui-verification/runs/2026-10-15T04-35-55-442Z-8558/
+Exit 0. 128/128 assertions; 13 nonzero scroll transitions; four captures.
+```
+
+- **Actual scroll owner:** `DIV.StyledGrommet-sc-19lkkz7-0.hxfjAc`, `overflowY: auto`. Thirteen transitions preserve exact **600**, **700**, **1000**, or **1400** positions across short/long trees, Majik/Schematics/Measurements/Studies, and Upgrades/Villagers/Caverns. Element clicks avoid locator auto-scroll. The real catalogue supplies extent; no fake height or source/style change was added. Page and owner stay **1440px client / 1440px scroll** before/after every recorded transition. **18 Studies**, **18 unique caverns**, and return to the selected Study pane are confirmed.
+- **Same-run hierarchy:** Inspected the new [actual Statue detail](../../.ui-verification/runs/2026-10-15T04-35-55-442Z-8558/technical-actual-royal-statue-detail.png) and [Measurement detail](../../.ui-verification/runs/2026-10-15T04-35-55-442Z-8558/technical-measurement-detail.png). Four actual Statue bonuses are **28px/700**; all **17** Measurement effects are **20px/700**, above **51** supporting nodes at **12px/400** or **14px/400**. The first Royal tab click was lost during hydration; a retained 20-second wait timed out, then a second real DOM click rendered Statues. No Royal code was changed.
+- **Fingerprints:** Same-run prepared fingerprint remains **`66be1c45d30f96941f5a4e8ea990163625f96ad908dcde68bf14b4161ccc0d42`**. Named prepared display fields match the earlier preview exactly. The earlier raw cross-run fingerprint differs only in **11 linked-player `afkFor` fields**, retained in [startup diagnosis](../../.ui-verification/hole-part2-cards-replan-20261015/technical-startup-diagnosis.json). That wall-clock field difference is not a changed calculation, source file, save, or displayed Hole value. All **1,390 protected files**, **546 generated files**, fixture hash, and restored preview-source hashes remain unchanged.
+- **Errors and cleanup:** Total **3 page / 6 console / 15 failed requests / 2 HTTP errors**; the Hole preview alone has **1 / 4 / 8 / 1**. Recorded NitroPay, shared/Royal hydration, CORS/403, advertising, and analytics errors remain unsuppressed. No selected-pane exception was observed. Scoped exit 0 is not a clean-console claim. [Cleanup proof](../../.ui-verification/hole-part2-cards-replan-20261015/technical-cleanup-proof.json) confirms removal of the restored route and new executable scenario; source copies and all earlier evidence remain. Containers stay running.
+
+#### Accepted missing/access contract restored in the disposable preview
+
+Source inspection found that the disposable rewrite had omitted two existing Majik guards: unresolved owned-effect inputs and explicit false access. A fresh serial worker restored those accepted contracts only, plus the existing non-Doot missing-major-text context. No layout, type, artwork, cost, navigation, formula, production source, or prepared object changed.
+
+The [focused evidence](../../.ui-verification/hole-part2-cards-replan-20261015/missing-contract-handoff-evidence.json) retains the final [revised pane source](../../.ui-verification/hole-part2-cards-replan-20261015/source-copies/missing-contract-panes.tsx). This source supersedes only those conditional state guards in the earlier retained pane source. Normal Contented Creator and Doot Pocket text match their earlier values exactly. All normal composition captures and the byte-identical technical scroll proof remain applicable to their unchanged paths.
+
+```text
+yarn ui:run .ui-verification/hole-part2-cards-replan-20261015/missing-contract.cjs
+Initial: .ui-verification/runs/2026-10-15T04-42-26-189Z-23382/
+Exit 1. Report finalizer EROFS under read-only /workspace.
+Four captures and before/after fingerprints retained; assertion totals not emitted.
+Finalizer-corrected: .ui-verification/runs/2026-10-15T04-43-20-687Z-25701/
+Exit 0. 51/51 assertions; four captures. UI unchanged between these runs.
+```
+
+- Inspected [owned Contented Creator with missing input](../../.ui-verification/runs/2026-10-15T04-43-20-687Z-25701/missing-contract-owned-creator.png): **Lv. 4 / 4**, genuine **+4% villager EXP per schematic** purpose, and **Benefit unavailable**, without an unresolved token or false zero.
+- Inspected [false access with met prerequisite](../../.ui-verification/runs/2026-10-15T04-43-20-687Z-25701/missing-contract-access-locked.png): **Locked** remains local, and no purchase or duplicate prerequisite checklist appears.
+- Inspected [non-Doot Kattlekruk missing text](../../.ui-verification/runs/2026-10-15T04-43-20-687Z-25701/missing-contract-pocket-major-unavailable.png): genuine independent purpose remains with explicit unavailable amount/Bubble selection. No selected character or invented Bubble/value is added.
+- Inspected [untouched-original recovery](../../.ui-verification/runs/2026-10-15T04-43-20-687Z-25701/missing-contract-recovered-original.png): the normal **+404%** total returns from the original record. Actual catalogue coverage stays **17 / 105 / 17**. Removed Majik tooltips, Maxed labels, and shortfalls remain absent. Detached examples establish presentation only.
+- Final same-run fingerprint is **`e0880599e5bce367f92398666efc59c1a76587e7877475e5f4d01fd8b2c4b32e`** before/after. Named prepared display fields match the retained expectation. All **1,390 protected files**, **546 generated files**, the fixture hash, and **seven prior retained sources** remain unchanged.
+- Final errors: **1 page / 4 console / 6 failed requests / 1 HTTP error**, from recorded NitroPay, shared hydration, CORS/403, and analytics paths. No selected-pane exception was observed. Exit 0 proves only these scoped assertions, not a clean console or broad rerun.
+- [Final cleanup proof](../../.ui-verification/hole-part2-cards-replan-20261015/missing-contract-cleanup-proof.json) confirms removal of the restored route and executable scenario. Revised/prior source copies and private evidence remain. Containers remain running. No further visual comparison, filter/scroll/Royal matrix, detector, test, build, lint, formatter, game call, or calculation ran.
+
+**Replan boundary (before the approval recorded above):** Only this handoff and the standalone plan were persistent selected edits. The amended plan, rendered references, and stated limits were returned for judgment. Production, accepted backend, generated prerequisites, part 1, and unrelated work remained unchanged. No approval, publication, acceptance, commit, push, PR, deployment, issue closure, WikiBot work, or other-part work occurred during replanning.
+
 
 ### Part 2 density and Pocket UI acceptance and local commit
 

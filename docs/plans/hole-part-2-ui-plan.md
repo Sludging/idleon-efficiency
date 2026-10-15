@@ -1,90 +1,107 @@
 # The Hole part 2: UI plan
 
-## Player outcome
+## Player outcome and scope
 
-Let players scan **Upgrades → Majik / Schematics / Measurements** to understand owned benefits, available upgrades, requirements, and competing resources. Put each benefit beside its progression. Pocket Divinity shows the saved selected bonuses only; the dedicated Divinity page owns character alignments.
+Let players scan **Upgrades → Majik / Schematics / Measurements** for owned benefits, useful unowned rewards, and the next purchase. Keep each benefit beside its progression. Use compact cards rather than an audit of backend fields.
 
-Scope follows [#442](https://github.com/Sludging/idleon-efficiency/issues/442), the [part 2 outcomes](hole-delivery-parts-draft.md#2-schematics-majik-and-measurements), and the [accepted backend](hole-part-2-backend-plan.md). The latest selected human direction in the [current handoff](hole-research-brief.md#current-handoff) governs this UI. Backend information is not a display checklist.
+Scope follows [#442](https://github.com/Sludging/idleon-efficiency/issues/442), the [part 2 outcomes](hole-delivery-parts-draft.md#2-schematics-majik-and-measurements), and the [accepted backend](hole-part-2-backend-plan.md). The latest selected presentation direction in the [current handoff](hole-research-brief.md#current-handoff) controls this revision. Backend formulas and imported player stats do not change.
 
-## Sources and mechanic meaning
+Preserve all **17 released Majik upgrades, 105 released schematics, and 17 Measurements**. Keep useful unobtained purposes, truthful missing benefits, complete static multi-effects, and known zeroes. Preserve completed part 1, shared Hole resources, Studies, all cavern identities, and unrelated work.
 
-- Kaipu makes schematics available. Construction is a separate state and spends the named resource. Lamp discounts the next construction. Built schematics have no next construction price.
-- All three Majik trees spend one point pool. A first purchase grants one level. **Cosmo, Enhance!** allows additional levels within each prepared cap. Prerequisites and point sufficiency remain separate from ownership.
-- Pocket keeps saved canonical god selections. Display their genuine selected-bonus text without claiming an extra activation or a character-specific result.
-- Minau unlocks Measurements. Their purchased levels and measured account statistics determine prepared benefits. Lengthmeister affects benefits; Fountain affects prices. Missing inputs are not zero.
+## Sources and visual direction
 
-Reuse the [Hole vocabulary and mechanic evidence](hole-research-brief.md#kaipu-construction-is-not-unlock), [official Wiki camp context](https://idleon.wiki/wiki/The_Caverns#Camp), supplied static descriptions, and accepted prepared domain APIs. Existing game evidence establishes meanings and units. Preview data does not establish new game parity.
+Use the incumbent Rubik typography, charcoal surfaces, blue navigation selection, and verified game imagery. Follow the [UI guide](../agents/ui-patterns.md) and [UI feedback](../insights/ui-feedback.md). This is a focused Operate-mode refinement, not a new visual system.
 
-Use [IdleonToolbox's public Hole page](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig), reached through Account → World 5 → Hole, for content reference. Engineer provides construction identities, purposes, states, and costs. Bonuses groups the three Majik trees. Measure connects effects with purchased levels and measured statistics. Do not copy Toolbox's styling, ETA, default hiding, placeholders, or source-only Bee String.
+Keep the shared outer wrapper and the canonical **Villagers / Upgrades / Caverns** tabs. Preserve the **Majik / Schematics / Studies / Measurements** rail and its existing 25% / 75% composition. Do not add a page width, horizontal inset, destination, or cross-content link.
 
-## Composition and website references
+Retain Sneaking Upgrades' close identity/level/effect grouping and dark-1 card surface. Use a dense two-column grid inside the existing Hole pane. Use small gaps and enough internal padding for readable grouping. Card heights follow their content; do not impose tall empty bodies.
 
-Keep the existing Rubik typography, charcoal surfaces, blue selection, and verified game artwork. Use the shared page wrapper without another content width or horizontal inset. Preserve **Villagers / Upgrades / Caverns**, the **Majik / Schematics / Studies / Measurements** rail, and its existing 25% / 75% layout. Preserve completed part 1, shared Hole resources, Studies, and all cavern identities.
+Inspect actual rendered **Royal Armory → Statues** at `/master-classes/royal-armory` for Measurement hierarchy. Its current bonus is 28px bold, above smaller level, next outcome, and purchase information. Match bonus dominance, not its restoration controls, next-level forecast, or shared-material panel. In Hole's narrower cards, keep the complete Measurement effect at 20px/700 and supporting level, statistic, multiplier, and cost at 12–14px. Do not extract a large number and repeat the same effect sentence below it.
 
-Use actual rendered **Sneaking Upgrades** at `/world-6/sneaking` as the Majik card reference. Match its close image/name/level relationship, dark-1 surface, medium card padding, and small internal gaps. Keep two columns within the narrower Hole pane; Sneaking's column count and purchase fields are not requirements.
+Use [IdleonToolbox's public Hole page](https://idleontoolbox.com/account/world-5/hole?profile=liiiiiiiiiiiig), under Account → World 5 → Hole, for content reference. Engineer confirms schematic recognition art and construction-versus-access relationships. Bonuses groups the three trees. Measure connects effect, level, statistic, and cost. Do not copy Toolbox's styling, hidden-owned default, placeholder entries, Bee String, ETA, or unexplained balance/cost pairs.
 
-Use actual rendered **Atom Collider** at `/world-3/construction` as the repeated-row reference. Match aligned benefit, current/cap, and cost relationships, compact label/value typography, small row padding, and small row gaps. Use `DataRow` without overriding its owned shell or alignment. Feature-specific field widths remain local.
+## Game meaning and available data
 
-The [UI guide](../agents/ui-patterns.md), [row guide](../agents/ui-rows.md), and [UI feedback](../insights/ui-feedback.md) govern composition. Retain `ContentTabs`, `LeftNavButton`, `TipDisplay`, `IconImage`, existing number formatters, and resource displays where suitable. Use `notateNumber` for compact game values and `commaNotation` for exact counts. Use domain image metadata; do not invent schematic, node, or currency artwork.
+- Kaipu grants schematic access. Construction is separate and spends the matched Hole wallet. Lamp discounts the next construction. Purchased schematics have no next construction cost.
+- All three Majik trees use one prepared point pool. A first level and each permitted enhancement cost points. **Cosmo, Enhance!** controls enhancement access. A current cap of one does not imply the final enhancement cap.
+- Pocket's selected god identities are saved state. Original game display uses a different benefit when King Doot is active. Ordinary selected-god major text must not stand in for that Doot benefit.
+- Minau grants Measurement access. Saved purchased levels, account statistics, and Lengthmeister determine the prepared benefit. Fountain changes price. Missing data is not zero.
 
-Keep one incumbent portrait/pane title. Remove additional subsystem introductions, repeated tree/count headings, state paragraphs, repeated effect sentences, field checklists, audit panels, and explanations of website purchase limitations. Use one shared summary per subsystem. Keep inactive content readable; use restrained state emphasis rather than heavy dimming.
+Reuse the [existing mechanic evidence](hole-research-brief.md), [official Wiki camp context](https://idleon.wiki/wiki/The_Caverns#Camp), generated descriptions, and accepted owner APIs. Reuse unchanged calculation evidence. A disposable preview does not establish new game parity.
 
-## Majik
+## Majik and Pocket Divinity
 
-Show one compact **remaining / earned points** summary above the Hole, Village, and Idleon tree tabs. Its local tooltip shows invested points and purchased-point contributions. Purchased points are included in earned points. Read the authoritative pool; do not reconstruct it from the visible released nodes.
+Show one compact **remaining / earned points** summary above the Hole, Village, and Idleon tabs. Its existing shared-pool tooltip may retain invested and purchased-point contributors. Read the authoritative pool, including investment in undisplayed placeholders.
 
-Show all **17 released upgrades**, in game order: **5 Hole, 6 Village, 6 Idleon**. Exclude Confused Bonus placeholders without removing their investment from pool accounting.
+Keep **5 Hole / 6 Village / 6 Idleon** upgrades in game order. Each card groups game name, **level / current cap**, and its complete useful effect once. Remove every per-bonus tooltip. Remove **Maxed** labels. Level/cap communicates completion without another state sentence.
 
-Each two-column card groups the game identity, **level / current cap**, and genuine benefit closely. Show its complete useful game effect once. Keep unowned purpose or reward text useful; do not replace it with zero contribution or invent a next-level benefit. Keep multi-effect and nonlinear prepared benefits intact without adding a duplicate typed-effect list.
+Show only a genuinely blocking named prerequisite or **Cosmo, Enhance! required** beside the affected card. Preserve a local locked state when prepared access is false and no named requirement explains it. Keep access or progression unavailable when inputs are missing. An owned effect with unresolved inputs retains its genuine independent purpose and **Benefit unavailable**, not unresolved tokens or a false zero. Where a next purchase is permitted, show its compact point cost using the established affordability colors. Do not show a next purchase at cap. Do not repeat investment, cap, or prerequisite checklists. Remove every shortfall label.
 
-A level tooltip contains initial versus enhancement investment, the named preceding requirement and its state, full enhancement cap, and the **Cosmo, Enhance!** requirement when relevant. This distinguishes a current cap of one from the final enhancement allowance without separate visible fields. Show unmet named prerequisites and missing points beside the affected card. Reserve **Maxed** for the final enhancement cap. If the current cap blocks further levels, show the enhancement requirement instead. Keep locked and unowned upgrades visible.
+### Doot-specific benefit
 
-### Pocket Divinity
+Read active King Doot status through the existing companion API, including its existing token behavior. Do not infer activation from raw ownership alone or from one selected character.
 
-Keep saved selections inside the owning Idleon Majik card. Show canonical god names, verified god artwork, and useful genuine selected major-bonus text. Preserve saved slot identity and distinguish inactive or unavailable selections. Do not show a numeric raw god ID as a name.
+For active Doot, show the prepared Pocket contribution as **+30% All Stat** for the retained level-two example. Keep **Divinity Lv. 2+** as compact scope context. The amount means Pocket's contribution for eligible characters, not a recomputed account-wide main stat. Render saved **Arctis / Snehebatu** identities and verified art without ordinary major-bonus paragraphs beneath them.
 
-Do not add character selection, ordinary or secondary alignments, Doot eligibility, effective/overlapping/added god lists, a union explanation, or separate All Stat inspection. Do not add a Divinity deep link or another inspection surface. Do not derive an account-wide numeric god benefit from one character's record. Where selected text needs an unavailable input, retain the genuine independent purpose and a local unavailable state without unresolved placeholders.
+The original `_event_Hole` branch says: “The Divine feel their obsolescence, and grant +{allStatPercent}% ALL STAT for all your characters... may your stats loom large!” Its `Companions(0)` gate excludes characters below Divinity level two. The source establishes the meaning; the short **All Stat** label presents an existing typed value. Do not copy the caller's whole sentence into handwritten production descriptions: the generated Pocket description does not contain it.
+
+A small Pocket-owned display accessor may expose the common known `allStatPercent` already prepared for eligible records. It must not add a formula, choose a website-selected character, recalculate imported stats, or add a character inspection surface. If the saved level or safe prepared amount is missing, show **Benefit unavailable**, not zero. If no eligible prepared value exists, retain source-backed eligibility context without inventing a total. The original sentence would require a normal static-data prerequisite if its full localization were requested; it is not required for this compact typed-value presentation.
+
+For inactive Doot, keep saved selected gods and their genuine independent major-bonus purpose. Preserve inactive and unavailable saved slots. Do not claim duplicate activation. Do not restore character selection, alignments, eligibility lists, union/overlap inspection, separate stat inspection, or Divinity navigation.
 
 ## Schematics
 
-Show all **105 released schematics** in game order, including built and locked entries. Exclude Bee String. Stable building IDs do not become display prefixes or unlock rules.
+Show all **105 released identities** in original order. Exclude only the unreleased slot containing Bee String, not stable building ID 105. Stable IDs are not availability slots or display prefixes.
 
-Place Kaipu's saved level and the active **next construction discount** together once. Its local tooltip can explain the saved Lamp stacks and their next-construction meaning. Do not repeat discount multipliers or construction-consumption prose across rows. A known zero discount differs from missing data.
+Place Kaipu level and the next-construction Lamp discount once above the cards. Keep the existing catalogue search over name, effect, and currency, with clear and compact result count. Add exactly one **Show Owned** checkbox. It starts **checked**, preserving the prior all-visible default. Unchecking hides only known built entries; unknown ownership remains visible. Search and checkbox combine without changing canonical order. Do not add other filters, sorting, or view toggles.
 
-Keep one search over game name, effect, and currency because the catalogue has 105 entries. Do not add ownership filters, show-unlocked controls, sorting, or view toggles. Show the result count compactly. A no-result state needs only a clear result and the existing search clear action.
+Use two-column dense cards with verified schematic foreground art beside name and effect. The original caller maps `HolesInfo[40][availabilitySlot]` to stable building ID, then uses `HoleUIbuildUpg{stableBuildingId}`. All 105 released foregrounds are verified 97×97 PNGs on the existing CDN. `squareImageType` selects a separate background, not identity art. Use foreground art on the website's dark card surface; do not add the game's colored square backgrounds merely because they exist.
 
-Each `DataRow` groups identity, useful genuine benefit or unobtained purpose, and concise **Built / Available / Locked** state. Keep Kaipu requirements local. Availability and construction remain independent: a built item can still have an unavailable access state. Do not repeat a state as a full sentence.
+Expose this metadata through an initialization-owned `Schematic.getImageData()` accessor during separately approved production work. Create metadata once per instance and return it directly. Do not add generated fields, handwritten catalogue tables, public images, or asset URL construction in React.
 
-Unbuilt rows show the named current discounted cost and any shortfall. Built rows show **Built**, not a fake next cost or catalogue base price. Use verified resource artwork beside the named currency. Never substitute an unrelated icon for absent artwork.
+Distinguish built, unbuilt-but-unlocked, and locked entries through restrained readable opacity and local state treatment. Built entries retain full identity/effect emphasis and have no resource area. Unbuilt unlocked entries retain readable subdued identity/effect and a current cost. Locked entries remain readable, with a lock affordance and **Requires Kaipu Lv. N**. Do not repeat **Built**, **Available**, or Kaipu checklists on unlocked entries. Keep access unknown explicitly unavailable rather than making it locked. Construction and access remain independent if unusual imported states coexist.
 
-Attach a useful local resource tooltip to the row's cost/resource. Include exact stock, current cost, shortfall, and other released schematic/Measurement uses of that wallet. Identify competing entries and their built/locked state and current prices where available. Do not reserve funds, sum speculative future purchases, or imply that individually affordable purchases are affordable together. Remove full-width shared-wallet audit disclosures.
+Built cards show neither a currency icon nor current, historical, or base construction cost. Keep **Benefit unavailable** when a built numeric effect lacks required inputs, beside its genuine independent purpose. Do not disguise an unknown benefit as resolved.
+
+Unbuilt cards show only the compact current cost beside verified resource art. Do not repeat the resource name when art exists. Use a compact canonical name only when no verified icon exists. Show **Cost unavailable** neutrally when needed. Remove resource tooltips, exact-count disclosures, competition lists, and shortfall labels.
 
 ## Measurements
 
-Show all **17 Measurements** in game order. Use the genuine effect to identify the reward and pair it directly with purchased level. Keep the corresponding named raw statistic, units, and multiplier compact and aligned. Repeated statistics do not make different rewards interchangeable. Do not invent Measurement names or a cap.
+Show all **17 Measurements** in original order as two-column dense cards. Use each genuine effect as its identity; do not invent names or caps. Make its complete useful benefit the strongest text, larger and bolder than cost or contributing statistics. Pair purchased level with that effect, then show one compact named statistic with its unit and multiplier. No repeated effect sentence or synthetic next-level benefit is needed.
 
-Show Minau's saved level and the **Fountain price discount** once above the list. Do not repeat the discount or an access paragraph on every row. No extra sorting, filter, search, or view controls are needed for this list.
+Show Minau level and Fountain price discount once above the grid. Keep the accepted statistic mappings and units, including Tome points, total Study levels, account/skill levels, crops, Slab items, damage, Death Note points, and Gloomie/Golem kills. Use compact game formatting, not unformatted exact counts.
 
-Each `DataRow` contains the useful genuine effect beside its level, the measured quantity with its unit and multiplier, and the next named resource cost with any shortfall. Show the required Minau level when locked. Use the existing `requiredMinauLevel` accessor. Use local tooltips for exact statistics, useful base-benefit/Lengthmeister contributors, access detail, and resource competition. Do not show normalized quantities, formula derivations, duplicate effects, or full-width audits.
+Show current next cost beside verified resource art without repeating its name. Keep canonical **Bronze Coins** as compact text when no verified currency icon exists. Show required Minau level only when access is locked; keep unavailable access separate. Remove **all Measurement tooltips**, including benefit, statistic, level, exact-count, and resource disclosures. Add no search, sorting, or filter controls.
 
-Keep the established statistic meanings: Tome score is points, account level is levels, total Study levels are Study levels, and all skill levels are levels. Slab items, crops, Gloomie kills, Golem kills, highest recorded damage, and Death Note points retain their own identities and units. The generated row-to-statistic mapping remains authoritative for all 17 rows.
+Read nullable prepared `rawStatistic`, `multiplier`, `baseBenefit`, `effectiveBenefit`, and `nextCost`. Missing statistics leave dependent benefits unavailable while independent level, access, and cost remain. Keep **Benefit unavailable** explicit and retain the genuine purpose without unresolved tokens. Known zero remains zero. Unowned rewards retain useful genuine purpose, not merely zero contribution. Remove every shortfall label.
 
-Read nullable prepared `rawStatistic`, `multiplier`, `baseBenefit`, `effectiveBenefit`, and `nextCost`. Missing statistics leave dependent benefits unavailable, while independent level, access, and price remain visible. Verified zero remains zero. An unowned reward retains useful genuine source purpose rather than only a zero contribution. Do not invent hypothetical next-level values. Bronze Coins keeps its canonical name even when no verified icon exists.
+## Affordability and integration
 
-## Integration and boundaries
+Use the existing Royal Armory purchase-cost colors: **green-2** for known sufficient resources and **status-critical** for known insufficient resources. Apply the same convention to schematic costs, Measurement costs, and permitted Majik point costs. Read accepted affordability or known prepared inputs; do not add formulas or fake stock. A missing input stays neutral with an unavailable value. Access and prerequisites remain independent: show the blocking requirement and do not imply that a green resource cost grants access.
 
-Keep the existing route/server wrapper and prepared store data. Use `useShallow` for grouped displayed selections and retain `lastUpdated` for mutable-domain refresh. Limit eventual production changes to the three panes and their necessary local/shared display. Remove obsolete Pocket inspection UI and audit helpers when their final caller is removed; retain unrelated callers and domain calculations.
+Reuse `ContentTabs`, `LeftNavButton`, `ShadowBox`, `IconImage`, existing number formatters, and suitable resource primitives. Any local cost renderer must avoid tooltip behavior for these panes. Use `notateNumber` for compact game values. Remove obsolete cost-tooltip, competition, row, or state helpers only after their selected final caller is removed; preserve the actual scroll-owner helper and unrelated callers.
 
-No domain formula, pool accounting, currency mapping, prerequisite, discount, statistic, god aggregation, or consumer calculation changes are needed. Keep supplied generated files and existing verified image accessors unchanged. Reuse existing static descriptions and owner APIs. Missing game-owned static data requires the normal extraction prerequisite, not handwritten replacements.
+Keep the existing route/server wrapper, store ownership, grouped `useShallow` selections, and `lastUpdated` refresh dependency. Production scope is the selected three panes and necessary local display exposure only. Preserve current scroll-owner retention across trees, rail panes, outer tabs, and Studies. Search and Show Owned remain local controls. No formulas, discounts, currency mappings, prerequisites, god aggregation, imported stats, purchases, forecasts, new engine, generated changes, or later-part tools change.
 
-Keep navigation local. Tab changes must preserve scroll without automatic focus or owner scrolling. Shorter panels must not force a scroll jump; preserve sufficient local panel extent where needed. Keep search state local. Do not add cross-content deep links, purchases, allocation controls, forecasts, ETA, recommendations, a new engine, later-part tools, or another Divinity page.
+## Fourteen-point preview and delivery checklist
 
-## Verification and preview
+1. No per-bonus Majik tooltips; only genuinely blocking requirements remain local.
+2. Doot uses source-confirmed Pocket All Stat meaning and existing prepared amount, without character inspection or guessed major text.
+3. No Majik Maxed labels.
+4. Dense schematic cards use all 105 verified identity icons.
+5. Unlocked cards have no Kaipu/Built checklist; built, unbuilt, locked, and unknown states remain distinct.
+6. Resource icons replace repeated names; purchased schematics have no resource or historical cost.
+7. No schematic resource tooltips, competition lists, or exact stock/cost disclosures.
+8. One Show Owned checkbox starts checked; search/filter/clear preserve unknown ownership and released order.
+9. Measurement costs use resource icons or a verified-icon-absent compact name fallback.
+10. All 17 Measurements use dense cards.
+11. No Measurement tooltips or exact-count disclosures.
+12. Measurement benefits dominate cost/statistics; compare actual rendered Royal Armory Statues.
+13. Costs and point affordability use established colors; unknowns stay neutral and access/prerequisites remain truthful.
+14. No shortfall labels. Preserve coverage, useful unobtained purposes, missing benefits, navigation/scroll, accepted mechanics, and part 1.
 
-Use the private Docker Playwright workflow at **1440×1000** with the real imported save. Compare actual rendered Sneaking cards and Atom rows before judging the preview. Retain reference captures, preview captures, useful dimensions, and comparison notes in the handoff.
+Use the private Docker Playwright workflow at **1440×1000** with the retained real save. Retain actual Royal Statue and Toolbox references, preview captures, decoded-image evidence, effect/support typography, state/affordability checks, and nonzero actual-owner scroll checks. Demonstrate all three trees, all released catalogue identities, the Show Owned/search combination, no results and clear, and all Measurements. Test removed-tooltip targets and check no page-wide overflow or selected-pane exception.
 
-Exercise all three trees and the unchanged pool; confirm **17 Majik / 105 schematics / 17 Measurements**. Confirm Pocket saved identities, decoded game imagery, genuine selected text, and absence of the removed character/eligibility/alignment/stat controls. Exercise useful pool/level/effect/resource tooltips, schematic search/clear/no-results, local resource competition, named costs/shortfalls, and tab scroll preservation. Check no horizontal overflow, cross-content deep links, repeated effect sentences, or full-width audit disclosures.
+Use separately labelled detached display examples for absent real-save states: locked/unbuilt, missing ownership/access/cost/statistic/benefit, verified zero, unowned reward, point shortage, prerequisite/enhancement gate, and inactive/unavailable Pocket. Do not mutate prepared source objects or the save. Such examples prove presentation only, not alternate game branches or parity.
 
-Demonstrate locked, available, built, unowned, maxed, insufficient-resource, missing-input, and verified-zero states. If the real save lacks a state, label a separate display-only example and leave the original prepared domain unchanged. Such examples prove presentation only, not alternate game branches. Record browser errors and command exits without claiming clean results from scoped assertions alone.
-
-Keep private saves and artifacts private. Remove owned disposable routes and executable scenarios after capture; retain private source copies and screenshot/report references. A preview proves composition and exercised interaction, not production implementation or new game parity. Production changes require a separate approval gate.
+Record exact commands, exits, browser errors, scope, and limits in the handoff. Preserve source/save/generated fingerprints. Remove owned disposable routes and executable scenarios after capture; keep private source copies and screenshots. A preview is not production implementation or acceptance. Stop for judgment before production work or commit.

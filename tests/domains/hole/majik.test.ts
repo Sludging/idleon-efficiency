@@ -189,6 +189,15 @@ describe('Hole Majik shared investment, effects and character-bound Pocket Divin
   expect(sorcerer.effectiveGodIds!.filter(id => id === sorcerer.secondaryGodId)).toHaveLength(1);
  });
 
+ it('exposes the common prepared eligible Pocket All Stat contribution for the paired save', () => {
+  const pocket = hole.majiks.pocketDivinity;
+  const allStatPercent = pocket.getDootAllStatPercent();
+  coreNumber(allStatPercent, results, 'pocket_all_stat', 'Prepared eligible Pocket All Stat contribution');
+  const eligibleCharacters = pocket.characters.filter(character => character.dootEligible);
+  expect(eligibleCharacters.length).toBeGreaterThan(0);
+  eligibleCharacters.forEach(character => expect(character.allStatPercent).toBe(allStatPercent));
+ });
+
  it('matches Player 3 runtime activation and binds every real named primary and secondary link', () => {
   assertPocketCharacterBinding(data, results);
  });

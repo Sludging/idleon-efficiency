@@ -289,6 +289,24 @@ export class PocketDivinityUpgrade extends CosmoUpgrade {
   });
  }
 
+ getDootAllStatPercent(): number | null {
+  if (!this.saveAvailable) {
+   return null;
+  }
+  let allStatPercent: number | null = null;
+  for (const character of this.characters) {
+   if (!character.dootEligible) {
+    continue;
+   }
+   if (character.allStatPercent === null ||
+    allStatPercent !== null && character.allStatPercent !== allStatPercent) {
+    return null;
+   }
+   allStatPercent = character.allStatPercent;
+  }
+  return allStatPercent;
+ }
+
  getDescription(): string {
   return super.getDescription().replace("Y", this.selections.find(selection => selection.slot === 0 && selection.active)?.name ?? "")
    .replace("Z", this.selections.find(selection => selection.slot === 1 && selection.active)?.name ?? "");
@@ -374,6 +392,11 @@ export class Schematic {
  currentCost: number | null = null;
  shortfall: number | null = null;
  affordable: boolean | null = null;
+ private readonly imageData: ImageData;
+
+ getImageData(): ImageData {
+  return this.imageData;
+ }
 
  get built(): boolean {
   return this.unlocked;
@@ -547,7 +570,9 @@ export class Schematic {
   public index: number,
   public data: HoleBuildingModel,
   private readonly getSchematicBonus: SchematicBonusLookup = () => 0,
- ) { }
+ ) {
+  this.imageData = { location: `HoleUIbuildUpg${index}`, width: 97, height: 97 };
+ }
 
  static fromBase(data: HoleBuildingBase[], getSchematicBonus: SchematicBonusLookup = () => 0) {
   return data.map(d => new Schematic(d.index, d.data, getSchematicBonus));

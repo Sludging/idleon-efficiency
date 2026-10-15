@@ -15,6 +15,7 @@ import Majik from "../../../components/world-5/hole/majik";
 import Schematics from "../../../components/world-5/hole/schematics";
 import Measurements from "../../../components/world-5/hole/measurements";
 import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInspection";
+import type { Companion } from "../../../data/domain/companions";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
 import type { Divinity } from "../../../data/domain/world-5/divinity";
@@ -287,7 +288,7 @@ export default function HoleContent() {
                 <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => preserveScroll(() => setUpgrade(name))} /></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="small" style={{ minWidth: 0 }}>
                     <Box direction="row" gap="small" align="center"><Portrait index={upgrade === "Majik" ? 2 : upgrade === "Schematics" ? 1 : upgrade === "Measurements" ? 3 : 4} /><Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small" data-testid="study-speed">Study speed: {number(hole.studyRate, hole.studyInputsUnavailableReason)} progress/hour</Text>}</Box>
-                    {upgrade === "Majik" && <Majik hole={hole} divinity={data.get("divinity") as Divinity} />}
+                    {upgrade === "Majik" && <Majik hole={hole} divinity={data.get("divinity") as Divinity} companions={data.get("companions") as Companion[]} />}
                     {upgrade === "Schematics" && <Schematics hole={hole} />}
                     {upgrade === "Measurements" && <Measurements hole={hole} />}
                     {upgrade === "Studies" && <>

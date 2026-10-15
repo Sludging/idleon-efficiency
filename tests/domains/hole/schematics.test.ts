@@ -30,7 +30,15 @@ describe('Hole Schematics catalogue, current purchases and owned effects', () =>
   expect(hole.schematics).toHaveLength(106);
   expect(hole.releasedSchematics).toHaveLength(105);
   expect(hole.releasedSchematics.some(schematic => schematic.index === 31)).toBe(false);
+  expect(hole.releasedSchematics.some(schematic => schematic.index === 105)).toBe(true);
   coreNumber(hole.schematicAvailabilityCount, results, 'availability', 'Kaipu available schematic count');
+ });
+
+ it('retains verified stable-ID foreground metadata for each released schematic', () => {
+  hole.releasedSchematics.forEach(schematic => {
+   const imageData = schematic.getImageData();
+   expect(imageData).toEqual({ location: `HoleUIbuildUpg${schematic.index}`, width: 97, height: 97 });
+  });
  });
 
  // Exhaustive small catalogue covers literal, Sediment, Harp, Rupie and Fountain price branches.
