@@ -4,6 +4,13 @@ import { createHash } from 'crypto';
 import type { Spelunking } from '../../../data/domain/world-7/spelunking';
 import type { Player } from '../../../data/domain/player';
 import type { Storage } from '../../../data/domain/storage';
+import type { Alchemy } from '../../../data/domain/world-2/alchemy/alchemy';
+import type { Rift, SkillMastery } from '../../../data/domain/world-4/rift';
+import type { Card } from '../../../data/domain/cards';
+import type { Meritocraty } from '../../../data/domain/world-7/meritocraty';
+import type { LegendTalents } from '../../../data/domain/world-7/legendTalents';
+import type { RoyalArmory } from '../../../data/domain/world-6/royalArmory/royalArmory';
+import type { SushiStation } from '../../../data/domain/world-7/sushi';
 import { SkillsIndex } from '../../../data/domain/SkillsIndex';
 import { getExtractedValue, loadExtractionResults, validateExtractionHealth } from '../../utils/live-game-data-loader';
 import { initSpelunkingChapterRepo } from '../../../data/domain/data/SpelunkingChapterRepo';
@@ -37,6 +44,54 @@ export function assertPairing(): void {
     // Runtime amount differs; the website must retain the originating saved amount.
     expect(before.current[6]).toBe(2550);
     expect(saved('Spelunk')[3][6]).toBe(2635);
+}
+
+export function assertRechargeContributors(data: Map<string, unknown>): void {
+    const owner = data.get('spelunking') as Spelunking;
+    const alchemy = data.get('alchemy') as Alchemy;
+    const bubble = alchemy.cauldrons.flatMap(cauldron => cauldron.bubbles)
+        .find(entry => entry.data.bonusKey === 'Y11')!;
+    const mastery = (data.get('rift') as Rift).bonuses.find(bonus => bonus.name === 'Skill Mastery') as SkillMastery;
+    const card = (data.get('cards') as Card[]).find(entry => entry.id === 'w7a10')!;
+    const meritocracy = data.get('meritocraty') as Meritocraty;
+    const legendTalents = data.get('legendTalents') as LegendTalents;
+    const royalArmory = data.get('royalArmory') as RoyalArmory;
+    const sushi = data.get('sushi') as SushiStation;
+
+    expect(owner.baseHourlyRecharge).toBe(5);
+    expect(owner.additiveRechargeContributors.map(contributor => contributor.source)).toEqual([
+        owner.upgrades.find(upgrade => upgrade.index === 5)!.data.name,
+        bubble.data.name,
+        owner.chapters[2].pageItem.displayName,
+        owner.chapters[5].pageItem.displayName,
+        mastery.name,
+        card.displayName,
+    ]);
+    expect(owner.additiveRechargeContributors[2].source).not.toBe(owner.additiveRechargeContributors[3].source);
+    [
+        expected('upgrade_5_raw'), expected('bubble_Y11'), expected('chapter_2_1'),
+        expected('chapter_5_2'), expected('mastery_recharge_effect'),
+        // The original recharge helper doubles the native card level and caps the percentage at 20.
+        Math.min(2 * expected('native_card_w7a10'), 20),
+    ].forEach((value, index) => {
+        expect(owner.additiveRechargeContributors[index].value).toMatchLiveGameWithDetails(value, {
+            tolerance: 0, context: `Prepared additive recharge: ${owner.additiveRechargeContributors[index].source}`,
+        });
+    });
+    expect(owner.rechargeMultiplierContributors.map(contributor => contributor.source)).toEqual([
+        meritocracy.bonuses.find(bonus => bonus.index === 17)!.data.text,
+        legendTalents.talents.find(talent => talent.index === 30)!.data.name,
+        royalArmory.upgrades.find(upgrade => upgrade.index === 79)!.data.name,
+        sushi.sushi.find(entry => entry.index === 11)!.data.name,
+    ]);
+    [
+        1 + expected('meritocracy_17') / 100, 1 + expected('legend_talent_30') / 100,
+        Math.max(1, expected('royal_outpost_category_2')), 1 + expected('sushi_11') / 100,
+    ].forEach((value, index) => {
+        expect(owner.rechargeMultiplierContributors[index].value).toMatchLiveGameWithDetails(value, {
+            tolerance: 0, context: `Prepared recharge multiplier: ${owner.rechargeMultiplierContributors[index].source}`,
+        });
+    });
 }
 
 export function assertPopulatedAccount(data: Map<string, unknown>): void {
@@ -94,6 +149,7 @@ export function assertPopulatedAccount(data: Map<string, unknown>): void {
     expect(owner.dailyReadsUsed).toBe(saved('OptLacc')[410]);
     expect(owner.dailyReadsRemaining).toMatchLiveGameWithDetails(expected('daily_reads_remaining'), { tolerance: 0 });
     expect(owner.hourlyRecharge).toMatchLiveGameWithDetails(expected('stamina_recharge_hourly'), { tolerance: 0 });
+    assertRechargeContributors(data);
     expect(owner.trackometerLevel).toBe(saved('Spelunk')[4][8]);
     expect(players.map(player => player.playerID)).toEqual(characterIDs);
     expect(owner.stamina).toHaveLength(players.length);
@@ -129,6 +185,9 @@ export function snapshot(data: Map<string, unknown>): string {
             ]),
             chest: chapter.chestPageStacks.map(item => item.count), players: chapter.playerPageStacks.map(stacks => stacks.map(item => item.count)) })),
         reads: [owner.dailyReadLimit, owner.dailyReadsUsed, owner.dailyReadsRemaining], recharge: owner.hourlyRecharge,
+        baseHourlyRecharge: owner.baseHourlyRecharge,
+        additiveRechargeContributors: owner.additiveRechargeContributors,
+        rechargeMultiplierContributors: owner.rechargeMultiplierContributors,
         hoursUntilAllFull: owner.getHoursUntilAllFull(),
         players: (data.get('players') as Player[]).map(player => [player.playerID, player.playerName, player.skills.get(SkillsIndex.Spelunking)]),
         stamina: owner.stamina.map(stamina => [stamina.playerID, stamina.current, stamina.maximum, stamina.getHoursUntilFull(owner.hourlyRecharge)]),

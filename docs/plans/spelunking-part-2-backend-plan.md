@@ -1,92 +1,114 @@
-# Spelunking Part 2: backend delivery plan
+# Spelunking Part 2: stamina-recharge contributors
 
 ## Outcomes
 
-Provide the information for [#436 — gathering, Journal, and character progression](https://github.com/Sludging/idleon-efficiency/issues/436):
+Extend [Part 2 (#436)](https://github.com/Sludging/idleon-efficiency/issues/436) with truthful contributors for the shared stamina-recharge tooltip.
+Show the base hourly rate, six additive percentage contributions, and four independent multipliers.
+Keep current recharge, character stamina, refill estimates, Journal effects, pages, and daily reads numerically unchanged.
 
-- Inspect six Journal chapters, all 20 bonus levels and effects, and minimum page-stack requirements.
-- Distinguish bonuses with diminishing returns from bonuses without a finite formula limit. Support progress toward finite limits.
-- Show cave/page metadata and compact page quantities, with storage and named character locations available as details.
-- Show account-wide daily reads as remaining/limit. Keep usage available without requiring a third displayed value.
-- Show each character's skill level/EXP and saved/maximum stamina. Provide shared recharge and an account refill estimate with individual estimates available.
+Expose source identities and numeric contributions, not UI-formatted rows or authored descriptions.
+Use existing owner names and generated text. Do not add explanation strings, copied descriptions, or a new bonus framework.
 
-Expose generated descriptions and numeric results only. Do not add authored game-description sentences or presentation records to the backend. Density, instruction removal, empty-location wording, and Sneaking/Lab character composition belong to UI delivery.
+## Responsibilities and API
 
-## Mechanics and required data
+**Spelunking owns the breakdown.** Its current updater calculates the rate but discards the contributing values.
+`hourlyRecharge` alone cannot recover the ten contributions or their grouping.
+Reading producer domains again in the component would duplicate the formula and bypass the prepared owner contract.
 
-### Journal limits
+Add only these members to the existing `Spelunking` owner:
 
-Let `L` be the saved bonus level. Let `A` be `1 + artifactBonus / 100` when generated `x3 === 1`; otherwise use `1`.
+- `readonly baseHourlyRecharge: number = 5`, naming the existing source-verified base, not a new static value.
+- `additiveRechargeContributors: RechargeContributor[]`, containing percentages in existing summation order.
+- `rechargeMultiplierContributors: RechargeContributor[]`, containing applied factors in existing multiplication order.
+- A local `RechargeContributor` value shape with only `source: string` and `value: number`.
 
-| Formula | Current effect | Limit at the current artifact strength | Progress toward the earned portion |
+The two collections define the operation. Do not duplicate operation fields, formatted units, availability forecasts, or obtainable rewards.
+Keep zero contributions and neutral factors so the tooltip can identify inactive sources without inventing future bonuses.
+The UI owns category labels, numeric formatting, and neutral-entry styling.
+
+Prepare both collections in `updateSpelunkingPresentation`, where the current inputs already settle.
+Use those same values to calculate `hourlyRecharge`; do not maintain a second independently calculated breakdown.
+Preserve left-to-right additive order and multiply sequentially from the base in the current factor order.
+Reset the collections during initialization and replace them on each preparation pass.
+Reuse the existing upgrade-5 value already shared with maximum-stamina preparation.
+
+Selected [backend patterns](../agents/backend-patterns.md): Research owns numeric contributors used by its totals; Totalizer prepares settled producer inputs; FriendBonus/Meal retain static identity on existing owners.
+Reuse these aspects only. Do not import Research's feature-specific types, private helpers, reward structures, or authored gate strings into Spelunking.
+
+## Required data and source identity
+
+All inputs already exist. No new save fields, extraction tables, or producer calculations are needed.
+Use each producer API below, not a fresh implementation of its bonus.
+Names in this table explain identity; implementation reads owner metadata rather than copying these strings.
+
+| Group, in calculation order | Existing input | Source identity for details | Paired result |
 |---|---|---|---|
-| `add`, with generated `x2 = 0` | `A * x1 * L` | No finite limit | No finite-limit progress |
-| `decay` | `A * x1 * L / (L + x2)` | `A * x1` | `L / (L + x2)` |
-| `decayMulti` | `A * (1 + x1 * L / (L + x2))` | `A * (1 + x1)` | `L / (L + x2)` |
+| Additive 1 | `spelunking.getUpgradeBonus(5)` | Upgrade 5 `data.name`: Stamina Resurgence | `95` |
+| Additive 2 | `alchemy.getBubbleBonusForKey("Y11")` | Matching bubble `data.name`: Faster Nrg | `19.380037197768132` |
+| Additive 3 | `spelunking.chapters[2].bonuses[1].getBonus()` | Chapter Three `pageItem.displayName`; intrinsic `data.bonus` remains available | `10.670731707317074` |
+| Additive 4 | `spelunking.chapters[5].bonuses[2].getBonus()` | Chapter Six `pageItem.displayName`; intrinsic `data.bonus` remains available | `0` |
+| Additive 5 | `mastery.getSkillBonus(SkillsIndex.Spelunking, 5)` | Existing `SkillMastery.name`; UI identifies its Spelunking context | `10` |
+| Additive 6 | `Math.min(2 * nativeCardLevel, 20)` | Card `w7a10` `displayName`: Spearfish | `2` from native level `1` |
+| Multiplier 1 | `1 + meritocracy.getCurrentBonus(17) / 100` | Bonus 17 generated `data.text`; it has no name field | `1` from `0%` |
+| Multiplier 2 | `1 + legendTalents.getBonusFromIndex(30) / 100` | Talent 30 `data.name`: Lightning Fast Naps | `1.5` from `50%` |
+| Multiplier 3 | `Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier())` | Upgrade 79 `data.name`: Compounding Outposting | `1` |
+| Multiplier 4 | `1 + sushi.getBonusFromIndex(11) / 100` | Sushi 11 `data.name`: Toro Nigiri | `1.25` from `25%` |
 
-These are asymptotic limits, not hard maximum levels or reached effect caps. The inspected page-reading caller adds gained levels without a maximum-level clamp. The bonus helper does not clamp levels or effects. For the positive decay parameters, each additional level gives less effect. A finite level does not mathematically reach the asymptote. Display rounding must not imply completion.
+Find the Alchemy identity through `bubble.data.bonusKey`, as its public calculation does.
+The current export has one matching bubble. Do not hardcode its cauldron position or recalculate its bonus.
+Keep the complete mastery reward; multiplying its returned `10` by ten would count it twice.
+Keep native card scaling and the cap; `Card.getBonus()` includes boosts that this mechanic does not use.
+Keep Royal Armory's selected-category behavior. Do not use Research's doubled Outpost scaling or preview reward.
+Do not substitute maximum-stamina contributors for recharge contributors.
 
-The 20 real bonuses contain **2 `add`, 16 `decay`, and 2 `decayMulti`** entries. Both Base Spelunking Efficiency bonuses grow without a finite formula limit. All 20 current generated artifact flags are enabled. Limits therefore change with the account's current artifact strength; they are not universal maxima.
+The unchanged grouping is:
 
-The two Chapter Two multipliers approach `5 * A`, not `4 * A`. Their formula includes a baseline of `1 * A`. Other multiplier-worded bonuses use `decay`, not `decayMulti`: Chapter Five's Amber and POW effects approach `3 * A`; Chapter Six's POW and Amber effects approach `10 * A`. Follow the generated formula, not the wording's `x` unit. Progress excludes the baseline so level-zero entries remain zero-progress and unearned.
+```text
+baseHourlyRecharge
+* meritocracyFactor * legendTalentFactor * royalOutpostFactor * sushiFactor
+* (1 + sum(additiveRechargeContributors) / 100)
+```
 
-### Existing inputs
+The retained paired extraction gives `22.223509584851737` stamina/hour.
+This rate remains account-wide; character level is not an input.
 
-| Data | Existing owner and use |
-|---|---|
-| Generated `func`, `x1`, `x2`, `x3`, `requiredPages`, and intrinsic bonus text | `ChapterBonus.data`; calculate limits without a copied table. |
-| Saved Journal levels | `Chapter.parse`: `Spelunk[8][4 * chapterIndex + bonusIndex]`. Preserve four-slot strides. |
-| Sailing artifact 35 | Existing `updateSpelunkingChapterBonuses` prepares its current bonus. |
-| Page item and cave metadata | Existing `Chapter.pageItem` and `gatheringSource`. Preserve the six real associations and exclude FILLER. |
-| Storage and character page stacks | Existing `chestPageStacks` and `playerPageStacks[playerID]`, sourced from Storage. Preserve individual stacks. |
-| Reading allowance | Existing `dailyReadLimit`, `dailyReadsUsed`, and `dailyReadsRemaining`; usage comes from `OptionsListAccount[410]`. |
-| Character identity, skill level, and EXP | Existing `Player`, joined by `playerID`. |
-| Saved stamina and calculated maximum | Existing `SpelunkingStamina.current` and `maximum`. Preserve above-maximum saved amounts. |
-| Shared recharge and individual refill | Existing `Spelunking.hourlyRecharge` and `SpelunkingStamina.getHoursUntilFull(rate)`. |
+## Integration and UI contract
 
-The account refill estimate is the **maximum**, not the sum, of individual refill durations. This summary assumes concurrent recharge at the shared rate for every character. It describes the saved snapshot with unchanged recharge and no spending. It does not establish or simulate actual recharge eligibility, elapsed time, or team activity.
+Keep the existing pipeline registration at [idleonData.tsx:404–411](../../data/domain/idleonData.tsx#L404-L411).
+Preparation remains after late Royal Armory and Meritocracy inputs in `postPostProcessingMap`.
+Do not add a domain, processing hook, store, dependency order change, or Royal Armory API.
+Descriptions stay on their existing owners. The new `source` strings identify those owners; they do not describe new mechanics.
+If intrinsic Meritocracy text is displayed, the UI substitutes its existing multiplier placeholder using the applied factor.
+Do not use Rift's handwritten `getBonusText` override as a new generated description.
 
-## Responsibilities and integration
-
-Retain the accepted Spelunking backend and its existing producers. Add only:
-
-- **ChapterBonus:** `getEffectLimit(): number | undefined` returns the artifact-scaled asymptote for `decay` or `decayMulti`. `undefined` means the actual `add` bonus has no finite limit.
-- **ChapterBonus:** `getProgressToEffectLimit(): number | undefined` returns the earned-portion ratio above for bounded formulas. Unbounded bonuses have no ratio. Keep current `getBonus()` behavior unchanged.
-- **Spelunking:** `getHoursUntilAllFull(): number` returns the largest existing individual estimate using the shared recharge rate. Iterate existing stamina aspects directly. The initialized empty collection returns zero; the UI must retain its account-loading guard rather than showing a loaded-account conclusion.
-
-Use the existing prepared state. Add no saved fields, static exports, domain registration, preparation hook, cached presentation snapshot, or Royal Armory change. Limits automatically follow artifact preparation in `postProcessingMap`. Account refill uses maxima and recharge already prepared in `postPostProcessingMap`, after the existing producers.
-
-Selected [backend patterns](../agents/backend-patterns.md): FriendBonus/Meal keep bonus behavior with its generated-data wrapper. Totalizer demonstrates getters over prepared inputs. Lab demonstrates account-wide ownership rather than repeated per-character calculation. Follow these aspects only; do not introduce a generic cap framework or new aspect class.
-
-Existing data already supports the other feedback:
-
-- Remove instructions and empty-inventory messages in the UI; no domain change is needed.
-- Compact page counts and location tooltips can use existing stack amounts. Any display subtotal must retain its location meaning. A combined owned-pages count must not be labeled chest storage or treated as a readable stack.
-- Render stamina as saved/maximum without clamping the saved amount. Show recharge once because the original formula has no character-specific input.
-- Render daily reads as `dailyReadsRemaining / dailyReadLimit`: the retained snapshot displays `8/8`, not `0/8`. Keep saved-period ownership; do not add a reset timer.
-- Keep individual refill getters for character details. The account summary adds only the domain-owned maximum above.
+The later UI phase reads the two collections and base beside `hourlyRecharge`.
+Follow Research's current-gains tooltip: separate additive bonuses from multipliers, format numbers in UI, and dim neutral entries.
+Research's `Contributions` and `SourceValue` are private components; their reuse does not require exporting a shared framework.
+The other seven presentation requests need no backend change. Their exact requests and owner mapping remain in the handoff.
 
 ## Prerequisites and verification
 
-All required metadata and calculation inputs already exist. No static extraction or WikiBot work is required. Approval and implementation authorization remain separate gates, recorded in the handoff.
+Required producer APIs, static identities, and paired results are present.
+After separate implementation authorization, extend the existing Part 2 tests under [domain testing guidance](../TESTING_IMPLEMENTATION.md):
 
-After authorization, follow [domain testing guidance](../TESTING_IMPLEMENTATION.md):
+1. Compare each exposed additive value and multiplier with the matching extraction in `tests/results/spelunking-part-2-data.json`. Keep configured tolerance `0`.
+2. Retain the core `hourlyRecharge` comparison and every direct producer comparison. Assert the prepared public breakdown, not an expected value calculated from the implementation.
+3. Check intrinsic source identities, both distinct chapter sources, native card conversion, six additive entries, and four multipliers. Keep zero and neutral entries.
+4. Exercise fresh normal-account factories and repeated processing through `part-2-pipeline.test.ts`. Confirm contributors do not duplicate or stack.
+5. Run focused Part 2 and existing Spelunking regressions after implementation. Preserve saved amounts, maxima, refill, Journal, reads, and page locations.
+6. Later UI verification opens the actual recharge tooltip and reconciles its values and groups with the prepared owner. Verify the seven presentation requests there, not during backend work.
 
-1. Keep the existing paired Part 2 save/results and all current core/direct-parameter comparisons. Check the two formula families with finite limits, both unbounded entries, and level-zero progress through the typed new APIs.
-2. Use the retained original helper equations and extracted chapter tuples as the limit oracle. Do not approximate a limit by calling the formula with a very large level or infinite input. Compare the account's extracted artifact bonus directly at configured tolerance `0`.
-3. Check the `decayMulti` baseline, artifact scaling, and multiplier-worded `decay` cases. Confirm current effects and saved levels remain unchanged. Do not manufacture saves to exercise unsupported artifact states.
-4. Verify account refill against the maximum of independently checked character estimates from the paired save. Keep individual estimates as direct parameter comparisons. The current save proves only zero account refill; positive refill remains a coverage question until real paired data provides it.
-5. Run focused Part 2 suites and Spelunking regressions. Check TypeScript and two fresh normal-account-factory passes. Confirm repeated processing does not accumulate state and new getters use settled inputs. Record unrelated failures without fixing or waiving them.
-6. In the later approved UI phase, verify finite-limit information, correct progress meaning, no unbounded completion bars, named location details, saved/maximum stamina, shared recharge/refill, and remaining/limit reads. Compare the actual route with the newly approved preview. UI experiments must retain every character and all 20 bonuses.
+Reuse the unchanged real-save/result pair. A changed config or missing expected value requires pairing before comparison.
+Current evidence observes a neutral Royal multiplier, inactive Meritocracy, and zero Chapter Six recharge.
+It does not prove enhanced Royal recharge, active Meritocracy, card-cap boundaries, positive refill, or connected live-game parity.
+Record uncovered states rather than manufacturing saves.
+Shared runtime errors and the historical unrelated TS18047 remain failed and unwaived; this work does not fix them.
 
-Historical acceptance does not prove these new APIs. No checks run during planning. Offline source and paired saved-snapshot evidence do not prove connected live-game parity, performed reads/resets, or elapsed refill.
+## Evidence references
 
-## Source references
-
-- **Original formula branches:** [ArbitraryCode5Inputs.1.22.js](../game-snippets/players/ArbitraryCode5Inputs.1.22.js#L8-L24), lines 8–24. Arguments map to `(func, x1, x2, level, x4, x5)`. These branches establish linear growth, decay, and the multiplier baseline.
-- **Original chapter application:** [Spelunk.1.22.js](../game-snippets/spelunking/Spelunk.1.22.js#L8), line 8, `ChapterBonus`. Source accessor: `idleon.allScripts.ActorEvents_579._customBlock_Spelunk.toString()`. The branch passes saved level to the helper and multiplies its complete result by artifact 35 when tuple position 4 equals 1.
-- **Original level update:** [PageRead.1.22.js](../game-snippets/spelunking/PageRead.1.22.js#L8), line 8, `SPELUNKY_PAGE`. Accessor: `idleon.allScripts.ActorEvents_38.prototype._event_InvItem4custom.toString()`. Assignment is existing `Spelunk[8][bonusSlot] + PageReadingLVgains(stackQuantity, 0)`; no level clamp appears in that branch. Daily allowance limits reads, not bonus levels.
-- **Original tuples:** [retained Part 2 extraction](../../tests/results/spelunking-part-2-data.json), JSON path `extractions.chapter_metadata.result`, from `idleon.getAttr("CustomLists").h.SpelunkChapters`. [Generated metadata](../../data/domain/data/SpelunkingChapterRepo.ts#L13-L237), lines 13–237, matches all 20 real tuples. It is the implementation data source, not a table to copy.
-- **Existing domain contracts:** [Spelunking](../../data/domain/world-7/spelunking.tsx#L225-L326), lines 225–326; shared counters/rate at 351–363; preparation at 532–594. [Current paired comparisons](../../tests/domains/spelunking/part-2-test-helpers.ts#L47-L97), lines 47–97.
-- **Recharge and refill semantics:** Existing findings P2-G6/P2-G7 in the [research handoff](spelunking-research-brief.md#mechanics-and-evidence-for-judging-the-plan) identify original `StaminaRegenRate` and `ActorEvents_713.prototype._customEvent_SpelunkStuff2`. The refill summary is derived from the approved snapshot estimate, not an observed game summary.
-- **Player vocabulary:** [Wiki Spelunking](https://idleon.wiki/wiki/Spelunking), Lore Journal and Cave Nodes. Formula authority remains the captured game source, not the competitor or Wiki presentation.
+- Original v1.22 `StaminaRegenRate`: [Spelunk.1.22.js:8](../game-snippets/spelunking/Spelunk.1.22.js#L8), retained accessor `idleon.allScripts.ActorEvents_579._customBlock_Spelunk.toString()`.
+- Current preparation and loss of individual inputs: [spelunking.tsx:569–625](../../data/domain/world-7/spelunking.tsx#L569-L625).
+- Royal selection/scaling: [royalArmory.ts:182–214](../../data/domain/world-6/royalArmory/royalArmory.ts#L182-L214).
+- Research ownership: [research.tsx:434–445,1128–1133,1278–1293](../../data/domain/world-7/research.tsx#L434-L445). Tooltip grouping: [researchContent.tsx:41–71,187–190](../../components/world-7/research/researchContent.tsx#L41-L71).
+- Existing comparisons: [part-2-parameters.test.ts:46–104](../../tests/domains/spelunking/part-2-parameters.test.ts#L46-L104), [part-2-test-helpers.ts:95–115](../../tests/domains/spelunking/part-2-test-helpers.ts#L95-L115), and [extraction config](../../tests/configs/spelunking-part-2.json).
+- [Wiki Spelunking](https://idleon.wiki/wiki/Spelunking) supplies player vocabulary, not the formula oracle.

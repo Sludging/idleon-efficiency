@@ -24,7 +24,7 @@ function freshAccount(): AccountRun {
 describe('Spelunking Part 2 normal account factory and repeated calculation', () => {
     beforeAll(assertPairing);
 
-    it('populates chapters, page locations, shared reads, and every character on two independent factories', () => {
+    it('populates chapters, page locations, shared reads, recharge contributors, and every character on two independent factories', () => {
         const first = freshAccount();
         assertPopulatedAccount(first.data);
         const firstSnapshot = snapshot(first.data);
@@ -34,7 +34,7 @@ describe('Spelunking Part 2 normal account factory and repeated calculation', ()
         expect(second.data.get('spelunking')).not.toBe(first.data.get('spelunking'));
     });
 
-    it('does not stack effects or lose saved inputs when the normal pipeline repeats', () => {
+    it('does not stack effects or recharge contributors, or lose saved inputs when the normal pipeline repeats', () => {
         const run = freshAccount();
         assertPopulatedAccount(run.data);
         const initial = snapshot(run.data);

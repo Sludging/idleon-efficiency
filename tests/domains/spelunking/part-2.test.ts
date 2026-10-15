@@ -11,7 +11,7 @@ describe('Spelunking Part 2 shared Journal and saved character progression', () 
         data = loadGameDataFromSave('latest');
     });
 
-    it('populates all six page-backed chapters, stack locations, reads, and every character', () => {
+    it('populates all six page-backed chapters, stack locations, reads, recharge contributors, and every character', () => {
         assertPopulatedAccount(data);
     });
 

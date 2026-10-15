@@ -370,6 +370,11 @@ export class Upgrade {
     }
 }
 
+interface RechargeContributor {
+    source: string;
+    value: number;
+}
+
 export class Spelunking extends Domain {
     tunnels: Tunnel[] = []
     chapters: Chapter[] = []
@@ -377,7 +382,10 @@ export class Spelunking extends Domain {
     stamina: SpelunkingStamina[] = []
     dailyReadLimit: number = 5;
     dailyReadsUsed: number = 0;
-    hourlyRecharge: number = 5;
+    readonly baseHourlyRecharge: number = 5;
+    additiveRechargeContributors: RechargeContributor[] = [];
+    rechargeMultiplierContributors: RechargeContributor[] = [];
+    hourlyRecharge: number = this.baseHourlyRecharge;
     trackometerLevel: number = 0;
 
     get dailyReadsRemaining(): number {
@@ -519,7 +527,9 @@ export class Spelunking extends Domain {
         this.stamina = Array.from({ length: charCount }, (_, playerID) => new SpelunkingStamina(playerID));
         this.dailyReadLimit = 5;
         this.dailyReadsUsed = 0;
-        this.hourlyRecharge = 5;
+        this.additiveRechargeContributors = [];
+        this.rechargeMultiplierContributors = [];
+        this.hourlyRecharge = this.baseHourlyRecharge;
         this.trackometerLevel = 0;
         this.ownedAmber = 0;
         this.exaltedStampFragments = 0;
@@ -581,7 +591,8 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     const sushi = data.get("sushi") as SushiStation;
     const alchemy = data.get("alchemy") as Alchemy;
     const cards = data.get("cards") as Card[];
-    const nativeCardLevel = cards.find(card => card.id === "w7a10")!.getLevels();
+    const rechargeCard = cards.find(card => card.id === "w7a10")!;
+    const nativeCardLevel = rechargeCard.getLevels();
     let highestSpecialty = 0;
     // Each contributor supplies its own final talent context, not the recipient's context.
     players.forEach(player => {
@@ -603,18 +614,29 @@ export const updateSpelunkingPresentation = (data: Map<string, any>): void => {
     };
     // Mastery already returns the full reward amounts, not unlock indicators.
     spelunking.dailyReadLimit = 5 + mastery.getSkillBonus(SkillsIndex.Spelunking, 4);
+    const rechargeBubble = alchemy.cauldrons
+        .find(cauldron => cauldron.bubbles.some(bubble => bubble.data.bonusKey === "Y11"))!
+        .bubbles.find(bubble => bubble.data.bonusKey === "Y11")!;
     // Recharge uses the native card level; equipped card boosts do not apply.
-    const additiveRecharge = upgrade5 + alchemy.getBubbleBonusForKey("Y11")
-        + spelunking.chapters[2].bonuses[1].getBonus()
-        + spelunking.chapters[5].bonuses[2].getBonus()
-        + mastery.getSkillBonus(SkillsIndex.Spelunking, 5)
-        + Math.min(2 * nativeCardLevel, 20);
-    spelunking.hourlyRecharge = 5
-        * (1 + meritocracy.getCurrentBonus(17) / 100)
-        * (1 + legendTalents.getBonusFromIndex(30) / 100)
-        * Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier())
-        * (1 + sushi.getBonusFromIndex(11) / 100)
-        * (1 + additiveRecharge / 100);
+    spelunking.additiveRechargeContributors = [
+        { source: spelunking.upgrades.find(upgrade => upgrade.index === 5)!.data.name, value: upgrade5 },
+        { source: rechargeBubble.data.name, value: alchemy.getBubbleBonusForKey("Y11") },
+        { source: spelunking.chapters[2].pageItem.displayName, value: spelunking.chapters[2].bonuses[1].getBonus() },
+        { source: spelunking.chapters[5].pageItem.displayName, value: spelunking.chapters[5].bonuses[2].getBonus() },
+        { source: mastery.name, value: mastery.getSkillBonus(SkillsIndex.Spelunking, 5) },
+        { source: rechargeCard.displayName, value: Math.min(2 * nativeCardLevel, 20) },
+    ];
+    spelunking.rechargeMultiplierContributors = [
+        { source: meritocracy.bonuses.find(bonus => bonus.index === 17)!.data.text, value: 1 + meritocracy.getCurrentBonus(17) / 100 },
+        { source: legendTalents.talents.find(talent => talent.index === 30)!.data.name, value: 1 + legendTalents.getBonusFromIndex(30) / 100 },
+        { source: royalArmory.upgrades.find(upgrade => upgrade.index === 79)!.data.name, value: Math.max(1, royalArmory.getSpelunkingRechargeOutpostMultiplier()) },
+        { source: sushi.sushi.find(entry => entry.index === 11)!.data.name, value: 1 + sushi.getBonusFromIndex(11) / 100 },
+    ];
+    const additiveRecharge = spelunking.additiveRechargeContributors.reduce((total, contributor) => total + contributor.value, 0);
+    // Multiply from the base to preserve the existing left-to-right operation order.
+    spelunking.hourlyRecharge = spelunking.rechargeMultiplierContributors.reduce(
+        (rate, contributor) => rate * contributor.value, spelunking.baseHourlyRecharge
+    ) * (1 + additiveRecharge / 100);
 
     players.forEach(player => {
         spelunking.stamina[player.playerID].prepareMaximum(
