@@ -20,10 +20,10 @@ function Pocket({ row, divinity, companions }: { row: PocketDivinityUpgrade; div
             <Text size="small" weight={500}>{amount === null ? "Benefit unavailable" : `+${number(amount)}% All Stat`}</Text>
             <Text size="12px" color="accent-2">Divinity Lv. 2+</Text>
         </Box>}
-        {[0, 1].map(slot => {
+        {!doot && [0, 1].map(slot => {
             const selected = row.selections.find(selection => selection.slot === slot);
             const god = selected ? divinity.gods.find(god => god.index === selected.godId)! : null;
-            const missingBonus = !doot && god !== null && hasMissingValue(god.data.majorBonus);
+            const missingBonus = god !== null && hasMissingValue(god.data.majorBonus);
             const bonus = god === null ? null : missingBonus
                 ? purpose(god.data.majorBonus.split(" @ ").filter(part => !part.includes("#")).join(" @ ")).replace(/:\s*·/g, ". ·")
                 : readable(god.data.majorBonus);
@@ -31,7 +31,7 @@ function Pocket({ row, divinity, companions }: { row: PocketDivinityUpgrade; div
                 {god && <IconImage data={god.getImageData()} scale={0.3} />}
                 <Box gap="xxsmall">
                     <Text size="small">{god ? readable(god.data.name) : "Saved selection unavailable"}{selected ? selected.active === null ? " · Activation unavailable" : selected.active ? "" : " · Inactive" : ""}</Text>
-                    {!doot && bonus && <Text size="12px">{bonus}</Text>}
+                    {bonus && <Text size="12px">{bonus}</Text>}
                     {missingBonus && <Text size="12px">Major-bonus amount and Bubble selection unavailable.</Text>}
                 </Box>
             </Box>;

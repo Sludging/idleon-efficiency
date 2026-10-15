@@ -64,11 +64,24 @@ export interface HoleUpgradeEffect {
  unit: "percent" | "multiplier" | "count" | "per-hour" | "rule";
 }
 
+const fountainCurrencyImages: Partial<Record<number, ImageData>> = {
+ 31: { location: "HoleSilverCoins", width: 23, height: 28 },
+ 32: { location: "HoleGoldenCoins", width: 23, height: 28 },
+ 33: { location: "HoleDollarBills", width: 35, height: 28 },
+ 34: { location: "HoleCreditBills", width: 35, height: 28 },
+ 35: { location: "HoleTreasuryBills", width: 35, height: 28 },
+ 36: { location: "HoleMoolahStacks", width: 33, height: 28 },
+ 37: { location: "HoleShillingStacks", width: 33, height: 28 },
+ 38: { location: "HoleGreaneStacks", width: 33, height: 28 },
+};
+
 export class HoleCurrency {
  stock: number | null = null;
- imageData: ImageData | null = null;
+ imageData: ImageData | null;
 
- constructor(public index: number, public data: HoleCurrencyModel) { }
+ constructor(public index: number, public data: HoleCurrencyModel) {
+  this.imageData = fountainCurrencyImages[index] ?? null;
+ }
 
  static fromBase(records: HoleCurrencyBase[]): HoleCurrency[] {
   return records.map(record => new HoleCurrency(record.index, record.data));
@@ -1776,7 +1789,9 @@ export class Hole extends Domain {
   this.currencies.forEach(currency => {
    const requirement = this.measurements.find(measurement => Number(measurement.data.itemRequirement.id) === currency.index)
     ?.data.itemRequirement;
-   currency.imageData = requirement && requirement.name !== "Unknown30" ? Item.getImageData(requirement.name) : null;
+   if (requirement && requirement.name !== "Unknown30") {
+    currency.imageData = Item.getImageData(requirement.name);
+   }
   });
   return this;
  }

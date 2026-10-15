@@ -47,7 +47,7 @@ export function Cost({ currency, cost, affordable, id }: {
     return <Box data-cost={id} data-cost-state={state} direction="row" align="center" gap="xsmall">
         {image && <Box data-resource-art flex={false}><IconImage data={image} scale={0.6} /></Box>}
         <Text data-cost-value size="14px" color={color}>
-            {cost === null ? "Cost unavailable" : number(cost)}{image ? "" : ` ${readable(currency.data.name)}`}
+            {number(currency.stock)} / {number(cost)}{image ? "" : ` ${readable(currency.data.name)}`}
         </Text>
     </Box>;
 }

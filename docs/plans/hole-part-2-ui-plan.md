@@ -29,6 +29,45 @@ Use [IdleonToolbox's public Hole page](https://idleontoolbox.com/account/world-5
 
 Reuse the [existing mechanic evidence](hole-research-brief.md), [official Wiki camp context](https://idleon.wiki/wiki/The_Caverns#Camp), generated descriptions, and accepted owner APIs. Reuse unchanged calculation evidence. A disposable preview does not establish new game parity.
 
+### Currency artwork and cost values
+
+Show each unpurchased schematic and Measurement cost as compact **current / required** values beside its currency icon. Use prepared wallet stock and current discounted/next cost; keep their existing known-affordability colors. A missing operand stays unavailable and neutral, not zero. Purchased schematics retain no currency image or historical cost.
+
+Fountain currency IDs **31–38** (Silver Coins through Greane Stacks) have canonical identities and font-glyph tokens in `HoleCurrencyRepo` and `FountainCurrencyRepo`; IDs **36–38** are Moolah, Shilling, and Greane Stacks. Measurement requirements cover IDs only through **30**, whose `Unknown30` entry is explicitly excluded from image lookup. Upstream `HoleCurrencyRepo.py` reads these tokens from the shared `HoleInfo[29][0]` glyph map. The original `_event_Hole` caller selects game font **675**, indexes that glyph map with the building's currency ID, and draws the resulting character (`.ui-verification/hole-part2-backend-20261014/hole-part2-description-formulas.txt:74-76`). The extracted original atlas is `apk/assets/assets/graphics/1x/font-675.png`, with authoritative glyph rectangles in `font-675.fnt`; entries for all IDs 31–38 are present. For example, Moolah, Shilling, and Greane use `欧`, `欣`, and `欢` (`font-675.fnt:28,30,34`); the other affected Fountain tokens also have entries (`font-675.fnt:59,63,74,78,113`). This verifies identity-to-art through the actual game glyph path, not a sprite ordinal.
+
+Use the existing offline glyph extractor, not a runtime atlas reader. It reads `font-675.fnt`, crops `font-675.png`, and writes a standalone transparent PNG to `data/icons/assets/data/`. Run:
+
+```sh
+node data/extract-icon.js font 675 27494 HoleSilverCoins.png
+node data/extract-icon.js font 675 27468 HoleGoldenCoins.png
+node data/extract-icon.js font 675 27465 HoleDollarBills.png
+node data/extract-icon.js font 675 27454 HoleCreditBills.png
+node data/extract-icon.js font 675 27450 HoleTreasuryBills.png
+node data/extract-icon.js font 675 27431 HoleMoolahStacks.png
+node data/extract-icon.js font 675 27427 HoleShillingStacks.png
+node data/extract-icon.js font 675 27426 HoleGreaneStacks.png
+```
+
+These are canonical Fountain IDs 31–38: Silver Coins (武, 23×28), Golden Coins (歌, 23×28), Dollar Bills (歉, 35×28), Credit Bills (款, 35×28), Treasury Bills (欺, 35×28), Moolah Stacks (欧, 33×28), Shilling Stacks (欣, 33×28), and Greane Stacks (欢, 33×28). Populate the existing `HoleCurrency.imageData` metadata with each extensionless basename and native dimensions; `Cost` and ordinary `ImageData`/`IconImage` need no crop API or runtime parser. Do not add a rectangle table, `Coins6`–`Coins10` guesses, or generated edits.
+
+These eight output files are not present in `data/icons/assets/data/`. The original `font-675.png` and `.fnt` are already available locally, so no device extraction is needed. After separate implementation approval, publish only these eight PNGs:
+
+```sh
+aws --profile idleon s3 sync data/icons/assets/data/ s3://idleon-efficiency-images/images/ \
+  --exclude '*' \
+  --include HoleSilverCoins.png --include HoleGoldenCoins.png \
+  --include HoleDollarBills.png --include HoleCreditBills.png \
+  --include HoleTreasuryBills.png --include HoleMoolahStacks.png \
+  --include HoleShillingStacks.png --include HoleGreaneStacks.png \
+  --acl bucket-owner-full-control --cache-control max-age=2592000,public \
+  --expires 2044-01-01T00:00:00Z --content-type image/png
+```
+
+The local AWS profile exists but its SSO session is expired; a human must run `aws sso login --profile idleon` before upload. Do not request ADB pairing. An earlier `font-675.png` CDN 403 only shows the atlas URL is unavailable; it does not block dedicated PNG delivery. No production files or assets were changed during planning.
+
+
+The focused browser preview decodes all eight affected Fountain glyphs from the extracted game atlas and shows the verified Moolah icon beside its retained **1.17B / 104B** cost pair. It preserves the active Doot **+30% All Stat / Divinity Lv. 2+** example. Other currency rows verify glyph identity only; no costs were invented. This preview establishes asset rendering, not game calculation parity.
+
 ## Majik and Pocket Divinity
 
 Show one compact **remaining / earned points** summary above the Hole, Village, and Idleon tabs. Its existing shared-pool tooltip may retain invested and purchased-point contributors. Read the authoritative pool, including investment in undisplayed placeholders.
@@ -41,13 +80,13 @@ Show only a genuinely blocking named prerequisite or **Cosmo, Enhance! required*
 
 Read active King Doot status through the existing companion API, including its existing token behavior. Do not infer activation from raw ownership alone or from one selected character.
 
-For active Doot, show the prepared Pocket contribution as **+30% All Stat** for the retained level-two example. Keep **Divinity Lv. 2+** as compact scope context. The amount means Pocket's contribution for eligible characters, not a recomputed account-wide main stat. Render saved **Arctis / Snehebatu** identities and verified art without ordinary major-bonus paragraphs beneath them.
+For active Doot, show the prepared Pocket contribution as **+30% All Stat** for the retained level-two example. Keep **Divinity Lv. 2+** as compact scope context. The amount means Pocket's contribution for eligible characters, not a recomputed account-wide main stat. Hide all saved Pocket selections in this branch: no god names, art, slots, or ordinary bonus text.
 
 The original `_event_Hole` branch says: “The Divine feel their obsolescence, and grant +{allStatPercent}% ALL STAT for all your characters... may your stats loom large!” Its `Companions(0)` gate excludes characters below Divinity level two. The source establishes the meaning; the short **All Stat** label presents an existing typed value. Do not copy the caller's whole sentence into handwritten production descriptions: the generated Pocket description does not contain it.
 
 A small Pocket-owned display accessor may expose the common known `allStatPercent` already prepared for eligible records. It must not add a formula, choose a website-selected character, recalculate imported stats, or add a character inspection surface. If the saved level or safe prepared amount is missing, show **Benefit unavailable**, not zero. If no eligible prepared value exists, retain source-backed eligibility context without inventing a total. The original sentence would require a normal static-data prerequisite if its full localization were requested; it is not required for this compact typed-value presentation.
 
-For inactive Doot, keep saved selected gods and their genuine independent major-bonus purpose. Preserve inactive and unavailable saved slots. Do not claim duplicate activation. Do not restore character selection, alignments, eligibility lists, union/overlap inspection, separate stat inspection, or Divinity navigation.
+For inactive Doot, retain each saved selected slot, canonical god name, verified god art, and genuine independent major-bonus purpose. Preserve inactive and unavailable selections. Do not claim duplicate activation. Do not restore character selection, alignments, eligibility lists, union/overlap inspection, separate stat inspection, or Divinity navigation.
 
 ## Schematics
 
@@ -63,7 +102,7 @@ Distinguish built, unbuilt-but-unlocked, and locked entries through restrained r
 
 Built cards show neither a currency icon nor current, historical, or base construction cost. Keep **Benefit unavailable** when a built numeric effect lacks required inputs, beside its genuine independent purpose. Do not disguise an unknown benefit as resolved.
 
-Unbuilt cards show only the compact current cost beside verified resource art. Do not repeat the resource name when art exists. Use a compact canonical name only when no verified icon exists. Show **Cost unavailable** neutrally when needed. Remove resource tooltips, exact-count disclosures, competition lists, and shortfall labels.
+Unbuilt cards pair compact **current wallet / required current discounted cost** values beside the correct currency icon. Apply the existing affordability color to known pairs: green-2 when sufficient, status-critical when insufficient. Keep unknown stock, cost, or affordability unavailable and neutral; do not render a fabricated zero. Do not repeat resource names when verified art is present. Retain canonical text only where no actual icon can be verified. Remove resource tooltips, exact-count disclosures, competition lists, and shortfall labels.
 
 ## Measurements
 
@@ -71,7 +110,7 @@ Show all **17 Measurements** in original order as two-column dense cards. Use ea
 
 Show Minau level and Fountain price discount once above the grid. Keep the accepted statistic mappings and units, including Tome points, total Study levels, account/skill levels, crops, Slab items, damage, Death Note points, and Gloomie/Golem kills. Use compact game formatting, not unformatted exact counts.
 
-Show current next cost beside verified resource art without repeating its name. Keep canonical **Bronze Coins** as compact text when no verified currency icon exists. Show required Minau level only when access is locked; keep unavailable access separate. Remove **all Measurement tooltips**, including benefit, statistic, level, exact-count, and resource disclosures. Add no search, sorting, or filter controls.
+Show each Measurement's current wallet / required next cost beside the correct currency icon, using compact game formatting. Use the same established affordability colors; keep any unknown operand unavailable and neutral, never as zero. Retain canonical text only where no actual icon can be verified. Remove **all Measurement tooltips**, including benefit, statistic, level, exact-count, and resource disclosures. Add no search, sorting, or filter controls.
 
 Read nullable prepared `rawStatistic`, `multiplier`, `baseBenefit`, `effectiveBenefit`, and `nextCost`. Missing statistics leave dependent benefits unavailable while independent level, access, and cost remain. Keep **Benefit unavailable** explicit and retain the genuine purpose without unresolved tokens. Known zero remains zero. Unowned rewards retain useful genuine purpose, not merely zero contribution. Remove every shortfall label.
 
@@ -86,19 +125,19 @@ Keep the existing route/server wrapper, store ownership, grouped `useShallow` se
 ## Fourteen-point preview and delivery checklist
 
 1. No per-bonus Majik tooltips; only genuinely blocking requirements remain local.
-2. Doot uses source-confirmed Pocket All Stat meaning and existing prepared amount, without character inspection or guessed major text.
+2. Doot shows only the prepared Pocket All Stat benefit and Divinity Lv. 2+ scope; hides all saved god identities/art/slots/ordinary text. Non-Doot retains saved selected bonuses.
 3. No Majik Maxed labels.
 4. Dense schematic cards use all 105 verified identity icons.
 5. Unlocked cards have no Kaipu/Built checklist; built, unbuilt, locked, and unknown states remain distinct.
-6. Resource icons replace repeated names; purchased schematics have no resource or historical cost.
-7. No schematic resource tooltips, competition lists, or exact stock/cost disclosures.
+6. Purchased schematics have no resource icon or current/historical cost. Unpurchased schematic wallet/current-cost pairs sit beside the verified resource icon.
+7. No schematic resource tooltips, competition lists, exact-count disclosures, or shortfall labels.
 8. One Show Owned checkbox starts checked; search/filter/clear preserve unknown ownership and released order.
-9. Measurement costs use resource icons or a verified-icon-absent compact name fallback.
+9. Measurement current-wallet/required-cost pairs sit beside verified currency icons.
 10. All 17 Measurements use dense cards.
-11. No Measurement tooltips or exact-count disclosures.
+11. No Measurement tooltips, exact-count disclosures, or shortfall labels.
 12. Measurement benefits dominate cost/statistics; compare actual rendered Royal Armory Statues.
-13. Costs and point affordability use established colors; unknowns stay neutral and access/prerequisites remain truthful.
-14. No shortfall labels. Preserve coverage, useful unobtained purposes, missing benefits, navigation/scroll, accepted mechanics, and part 1.
+13. Known affordability uses existing green-2/status-critical colors; unknown operands stay unavailable and neutral.
+14. Preserve coverage, useful unobtained purposes, missing benefits, navigation/scroll, accepted mechanics, and part 1.
 
 Use the private Docker Playwright workflow at **1440×1000** with the retained real save. Retain actual Royal Statue and Toolbox references, preview captures, decoded-image evidence, effect/support typography, state/affordability checks, and nonzero actual-owner scroll checks. Demonstrate all three trees, all released catalogue identities, the Show Owned/search combination, no results and clear, and all Measurements. Test removed-tooltip targets and check no page-wide overflow or selected-pane exception.
 
