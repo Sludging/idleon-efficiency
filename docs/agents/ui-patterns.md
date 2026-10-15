@@ -135,10 +135,9 @@ Shared primitives alone do not establish a new composition convention.
   The header's [DataStatusDisplay](../../components/header/dataStatus.tsx) shows account
   loading and status. Normal content reads feature data and guards missing domain data
   locally, as in [Breeding](../../app/world-4/breeding/content.tsx).
-- Filtering and sorting are view work. Keep game formulas in the backend. For a changed
-  calculation, use the existing
-  [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md); previews
-  are not evidence.
+- Filtering and sorting are view work. Keep game formulas in the backend.
+  Verify new or changed calculations through the selected workflow's game-evidence and testing requirements; previews are not evidence.
+  Use the [calculation-correctness workflow](../../skills/calculation-correctness/SKILL.md) when checking or correcting an existing calculation.
 - When UI work needs missing static game data, read [External data source requirements](../NEW_FEATURE_IMPLEMENTATION_GUIDE.md#2-external-data-source-requirements).
 
 ## Desktop verification and review

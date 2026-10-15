@@ -2,43 +2,44 @@
 
 ## Goal
 
-Establish whether the selected calculation matches the game and whether an observed mismatch comes from that calculation or a directly used calculation whose parameter comparison fails or cannot be made because its website result is missing.
+Determine whether a mismatch comes from the selected calculation or a directly used calculation.
 
-This stage writes tests and extraction config, not domain code. Read the approved local plan, assignment, and case working note, then the [testing guide](../TESTING_IMPLEMENTATION.md) for comparison mechanics. Use existing source findings and focused captured evidence; delegate missing game-source, caller, debug-server, or Wiki evidence to `correctness-researcher`. Follow [source capture guidance](../game-snippets/README.md) when more evidence is needed.
+Write tests and extraction config, not domain code. Read the approved plan, phase prompt, and Case working note. Use the [testing guide](../TESTING_IMPLEMENTATION.md) for test conventions and comparison mechanics. Follow the [shared research rule](../../AGENTS.md#research-specialists) before exploratory research; use focused evidence to verify the comparisons below.
 
 ## Establish the selected calculation
 
-1. Use the approved scope, public interface, and ownership. Locate the selected calculation and each calculation it uses directly. Direct means an immediate calculation used by the selected result; inputs used only inside that calculation belong to its own case.
-2. Establish the selected behavior from delivered game code: its inputs, conditions, formula, and operation order. Use the findings already recorded and inspect focused source evidence captured by the researcher, following the [snippet version rules](../game-snippets/README.md#rules).
-3. Map every direct calculation to its domain implementation or an explicit missing status. A missing selected implementation is a selected-core failure to expose. Report a dependency only for an observed failing direct parameter comparison, or a missing website result that prevents the comparison. A passing comparison ends investigation of that producer for this case; the playbook's dependency boundary prohibits tracing its internal formula or upstream dependencies. Record any incidental suspicion for the human as non-blocking.
-4. If evidence calls for a material change to the plan, return the proposed change and reason under the [plan approval rule](PLAYBOOK.md#2-plan-and-obtain-approval). Do not choose a different interface to make the tests fit.
+1. Use approved scope, interface, and ownership. Locate the selected calculation and every calculation it uses directly. Inputs used only inside a dependency belong to that dependency's case.
+2. Establish inputs, conditions, representation, formula, and operation order from delivered game code under [snippet version rules](../game-snippets/README.md#rules).
+3. Map direct calculations to domain implementations or explicit missing status. Expose a missing selected implementation as a core failure. Report dependencies only for failing direct parameter comparisons or missing website results that prevent comparison. A passing comparison ends investigation of that dependency; report incidental suspicions as non-blocking notes.
+4. Return material plan changes under [plan approval](PLAYBOOK.md#2-plan-and-obtain-approval). Do not change the interface to make tests fit.
 
 ## Coverage target
 
-Use the [testing guide's core and parameter definitions](../TESTING_IMPLEMENTATION.md#core-tests-and-parameter-tests) when choosing coverage. For this case:
+Use the [core and parameter definitions](../TESTING_IMPLEMENTATION.md#core-tests-and-parameter-tests):
 
-- Parameter tests compare every calculation used directly across domains/aspects by the selected aspect, including another aspect in the same domain. Static data, trivial helpers, raw save plumbing, and inputs used only by dependencies are outside this selected coverage.
-- Core tests compare the selected result for the paired real save. Choose meaningful observed behaviors or representative inputs, and describe the gameplay effect and website result being checked. State what the save actually exercises; unobserved permutations remain uncovered. Do not synthesize saves, alter inputs to simulate branches, or derive expected values from domain code. Raise coverage questions rather than inventing data.
+- Parameter tests compare every directly used cross-domain/aspect calculation, including other aspects in the same domain. Exclude static facts, trivial helpers, raw save plumbing, and dependency internals.
+- Core tests compare the selected public result for the paired real save. Choose meaningful observed behaviors, branches, or representative inputs. Explain gameplay effect and website result checked. State actual save coverage and unobserved limits.
 
-Record the selected result, parameter calculations, chosen core tests, and any coverage question in the stage result.
+Use real-save evidence, not synthetic saves, altered branch inputs, or expected values derived from domain code. Raise unresolved coverage questions. Record selected result, direct parameters, core coverage, and questions.
 
 ## Build and run the comparisons
 
-1. Locate existing extraction configuration, tests, save, and result files before adding anything. Reuse a usable real save with its matching extraction results under the [testing guide's pairing rule](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-the-real-save).
-2. Ensure each expected core and parameter value has an extraction entry using the exact delivered-game expression or value. Add or correct required entries; a WikiBot static fact alone is not a calculation comparison. After a configuration change, return `EXTRACTION_NEEDED` with the changed path and the extraction command for the coordinator. An unchanged-configuration technical extraction/output failure is reported as that concrete failure.
-   When extraction is needed, use the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction) for the command; the coordinator follows the [playbook extraction procedure](PLAYBOOK.md#extraction-when-needed).
-3. Add or update active core and parameter tests using the matchers and settings required by the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy). Compare the paired real save with its matching extraction values, preserve the delivered representation and any conversion established by game code, and describe the mechanic rather than obfuscated identifiers. For a missing selected implementation, temporary failure scaffolding keeps the core path active and names the missing calculation and game function signature. Once implemented, call the typed public API directly and remove guards, `unknown` casts, and `.call` wrappers. Keep any failing direct parameter comparison visible and report the game call and domain location or missing status.
-4. Run every targeted test file for this aspect. Record each exact command and observed result. Keep test changes within the selected aspect; generated directories `data/domain/data/`, `data/domain/enum/`, and `data/domain/model/` remain unchanged.
+1. Locate and reuse existing configs, tests, saves, and results under the [pairing rule](../TESTING_IMPLEMENTATION.md#keep-tests-tied-to-the-real-save).
+2. Give every expected core and parameter value an extraction entry with its exact delivered-game expression/value. A WikiBot fact alone is not a calculation comparison. After required config changes, return `EXTRACTION_NEEDED` with changed path and command from the [helper guide](../../tests/helpers/README.md#quick-start---batch-extraction). Follow the [extraction procedure](PLAYBOOK.md#extraction-when-needed); report unchanged-config failures as concrete technical errors.
+3. Write active comparisons under the [numeric comparison policy](../TESTING_IMPLEMENTATION.md#numeric-comparison-policy). Preserve delivered representation and source-backed conversions. For missing selected implementations, keep active failure scaffolding naming the calculation and game function signature. After implementation, call the typed public API directly; remove guards, `unknown` casts, and `.call` wrappers through this stage. Keep failing direct parameters visible with game call and domain location or missing status.
+4. Run every targeted test file. Record exact commands and observed results. Keep edits within selected tests/config; leave generated data unchanged under the playbook.
 
 ## Result classification and completion
 
-Classify the observed test results as one of these:
+Classify observed results:
 
-- **Selected-core failure:** the selected result mismatches the game or its implementation is explicitly missing, while every direct parameter comparison passes under normal policy.
-- **Dependency failure:** an observed direct parameter comparison fails, or its website result is missing and comparison cannot be made. Preserve the evidence and return it under the [dependency procedure](PLAYBOOK.md#dependencies-and-wikibot).
-- **Setup/extraction failure:** configuration, matching save/results, game access, test mapping, or command setup prevented a meaningful comparison. State the concrete in-scope repair or external prerequisite.
-- **Already green:** core and all direct parameter comparisons pass under normal policy.
-- **Proposed human exception:** a comparison proposes or uses an exception bound. Follow the [exception procedure](PLAYBOOK.md#non-zero-tolerance-exceptions). Report bound results and remaining normal-policy failures separately, then send the result to the coordinator.
-- **No meaningful selected failure:** no selected mismatch or explicit missing implementation was established.
+- **Selected-core failure:** selected mismatch or explicit missing implementation; all direct parameters pass normally.
+- **Dependency failure:** direct parameter fails or its missing website result prevents comparison. Return evidence under the [dependency procedure](PLAYBOOK.md#dependencies-and-wikibot).
+- **Setup/extraction failure:** config, save/result pairing, game access, mapping, or command setup prevents meaningful comparison. Name the in-scope repair or external prerequisite.
+- **Already green:** core and every direct parameter pass normally.
+- **Proposed human exception:** report bound results separately from normal-policy failures under the [exception procedure](PLAYBOOK.md#non-zero-tolerance-exceptions).
+- **No meaningful selected failure:** no mismatch or explicit missing selected implementation was established.
 
-Return `TESTS_READY` after the coverage, exact commands and results, changed paths, and one classification are complete. Return `EXTRACTION_NEEDED` when a required configuration entry changed or the human directed extraction. Return `BLOCKED` for a qualifying direct dependency issue, missing static WikiBot fact, or external prerequisite. Return `NEEDS_HUMAN` for an unresolved interpretation, scope, mapping, or ownership question. Return `REPORT` while bounded work remains. The coordinator must use the [next-step table](PLAYBOOK.md#4-use-the-test-results-to-choose-the-next-step) to route this result; `TESTS_READY` alone does not authorize domain edits.
+Return `TESTS_READY` with completed coverage, actual results, changed paths, and classification. Return `EXTRACTION_NEEDED` after required config changes or human extraction direction. Use `BLOCKED` for qualifying dependencies, missing WikiBot facts, or external prerequisites; `NEEDS_HUMAN` for unresolved interpretation, scope, mapping, or ownership; `REPORT` for incomplete work.
+
+Use the playbook's [shared result fields](PLAYBOOK.md#assignments-and-progress) and [next-step table](PLAYBOOK.md#4-use-the-test-results-to-choose-the-next-step). `TESTS_READY` alone never authorizes domain edits.

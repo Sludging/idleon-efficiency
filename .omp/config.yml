@@ -1,10 +1,6 @@
 modelRoles:
-  correctness_coordinator: openai-codex/gpt-6.1-sol:low
-  correctness_supervisor: openai-codex/gpt-6.1-sol:low
-  correctness_worker: openai-codex/gpt-6.1-sol:medium
-  correctness_reviewer: openai-codex/gpt-6.1-sol:low
-  correctness_researcher: openai-codex/gpt-6-luna:medium
-  correctness-pattern-researcher: openai-codex/gpt-6-luna:medium
+  pattern_researcher: openai-codex/gpt-6-luna:medium
+  game_researcher: openai-codex/gpt-6-luna:medium
 task:
   enableEffort: false
   maxEffort: medium

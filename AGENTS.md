@@ -19,7 +19,7 @@ Context-specific guidance lives in [`skills/`](skills/). Read the relevant skill
 | Skill | When to use |
 |-------|-------------|
 | [architecture](skills/architecture/SKILL.md) | Data flow, domain patterns, cross-domain dependencies |
-| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — supervised canonical-case workflow with demand-driven live/game-code evidence |
+| [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — canonical-case workflow with demand-driven live/game-code evidence |
 | [testing](skills/testing/SKILL.md) | Live game extraction testing, domain test writing, validation |
 | [feature-implementation](skills/feature-implementation/SKILL.md) | Implementing new game features and domain logic |
 | [update-game-version](skills/update-game-version/SKILL.md) | New Idleon version released — extract from Steam, process via WikiBot, sync data |
@@ -142,6 +142,20 @@ Read the [feature-implementation skill](skills/feature-implementation/SKILL.md) 
 - Data pipeline integration
 - Navigation integration
 - Testing requirements
+
+### Research specialists
+
+- Read the existing handoff and findings first. Reuse sufficient research; request specialists only when further research is needed.
+- You MUST delegate exploratory game-source, caller, runtime, player-meaning, and WikiBot static-data research directly to [game-researcher](.omp/agents/game-researcher.md).
+- You MUST delegate repository backend/UI pattern discovery and comparison directly to [pattern-researcher](.omp/agents/pattern-researcher.md) before choosing patterns.
+
+Delegate before broad searches of your own. Routine code inspection and formula-only changes with unchanged structure need no new pattern research.
+Give specialists the scope, open questions, and existing findings from the current handoff.
+The selected workflow controls research scope, phase boundaries, session freshness, concurrency, and decision authority.
+Specialists provide findings; they do not approve decisions or advance phases.
+Consumers MUST inspect focused sources and code for implementation and independent verification of relevant interfaces and behavior.
+Distinguish mandatory rules, observed patterns, recommendations, and unresolved choices. Applicable standards constrain approved plans and specialist recommendations; approval is not an exemption.
+Support departures from observed patterns with evidence. Get approval before changing the affected scope or approved decisions.
 
 ## Key Technical Considerations
 

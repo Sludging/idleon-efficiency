@@ -1,6 +1,6 @@
 # Game Snippets
 
-Captured source code of game calculation functions, used to establish the intended game behavior. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) explains when a case needs a snippet; this file explains how to capture and store one.
+Captured game calculation functions establish intended game behavior for feature research and calculation checks. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) defines evidence needs for correctness cases; this file explains how to capture and store snippets.
 
 ## Rules
 
@@ -9,13 +9,13 @@ Captured source code of game calculation functions, used to establish the intend
 
 ## Understanding callers and finding additional source
 
-Prefer the debug server for locating functions and inspecting relevant callers. A calculation snippet may establish what a function returns without explaining how the game uses it.
+Follow the shared [research specialists rule](../../AGENTS.md#research-specialists) before exploratory research. Prefer the debug server for locating functions and inspecting relevant callers. A calculation snippet may establish what a function returns without explaining how the game uses it.
 
 When the debug server is insufficient, the local game source is available at `/home/sludge/Development/IdleonWikiBot/codefiles/idleon<version>.txt`. Select the file matching the version under examination.
 
 This is a 40 MB+ obfuscated file: never load the entire file into memory or agent context. Start from an exact identifier already found in a snippet or debug-server result, such as a function name, dispatcher key, or ActorEvents identifier. Use targeted, streaming searches with bounded output, then inspect only the surrounding code needed to answer the question. Bound output by bytes or characters as well as matches or lines: a single obfuscated line can be enormous. Avoid broad mechanic-name searches and unbounded output.
 
-Use this source to resolve specific questions about callers, conditions, and usage. If source attribution remains ambiguous, ask the human rather than guessing a script. For unresolved mechanic meaning or website design, follow the worker's [mechanic and website usage guidance](../../.omp/agents/correctness-worker.md#understand-the-mechanic-and-its-website-usage).
+Use this source to resolve specific questions about callers, conditions, and usage. If source attribution remains ambiguous, ask the human rather than guessing a script. Apply [RESEARCH-01](../../CODING_STANDARDS.md#research-01--understand-the-player-and-mechanic) to mechanic meaning. For website design, use the [implementation patterns guide](../agents/implementation-patterns.md).
 
 ## Structure
 
@@ -39,7 +39,7 @@ A metadata header added by us, followed by the verbatim `toString()` output. The
  * Function: _customBlock_<FunctionName> (from <ActorEventsScript>)
  * Game version: <version> ("<patch title>")
  * Captured: <date> via game-debug-tool (findFunction + toString)
- * Case reference: <correctness case issue number>
+ * Work reference: <feature or issue reference>
  */
 ```
 

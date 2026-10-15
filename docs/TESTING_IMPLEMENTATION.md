@@ -4,7 +4,7 @@
 
 Use tests to determine whether a domain calculation matches the game and, when it does not, which calculation needs correction. Expected values come from the game; tests exercise the domain code used by the application.
 
-For a supervised correctness case, the assigned stage defines which work may be done. The tests stage writes and runs tests before domain changes. The coordinator then uses those results to decide whether to assign implementation, handle a dependency, or request human input.
+For a correctness case, the selected stage defines allowed work. The tests stage writes and runs tests before domain changes. Return results for the human's next-stage decision, or to a supervising session within explicit human delegation.
 
 ## Core tests and parameter tests
 
@@ -16,13 +16,13 @@ Static data and trivial helpers are not parameter-test targets. Calculations use
 
 A **branch** is a condition that changes the selected calculation's behavior, such as using a different formula or returning zero until an unlock. Changing an index is not by itself a new branch: check whether the game applies a different rule or the same rule to another value.
 
-Core tests check the selected result; parameter tests help distinguish an error in that result from an error in a calculation it uses. Passing direct parameter tests are useful results, not failures to create for test-first work; under the [playbook dependency boundary](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot), they end producer investigation for this case.
+Core tests check the selected result; parameter tests help distinguish an error in that result from an error in a calculation it uses. Passing direct parameter tests are useful results, not failures to create for test-first work; under the [playbook dependency boundary](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot), they end investigation of that dependency for this case.
 
 The [real examples below](#examples-from-existing-tests) show these distinctions in Tome and Cooking tests.
 
 ## Prepare the comparisons
 
-1. **Establish game behavior.** Read the relevant delivered game source for the version under review. Identify the selected result, its conditions, and the calculations it uses. Use existing findings and source links where available.
+1. **Establish game behavior.** Follow the [shared research rule](../AGENTS.md#research-specialists) before exploratory research. Verify the selected result, its conditions, and directly used calculations against focused delivered game source for the version under review.
 2. **Locate the domain code and tests.** Match each game calculation to the domain method and test that check it, or record that the implementation is missing. Ask the human if the meaning or owning domain/aspect is unclear.
 3. **Choose extraction values.** Each core or parameter comparison needs an entry in `tests/configs/`. Use the game function and arguments, or game value, used by the selected calculation. Each entry should support a comparison.
 4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
@@ -30,7 +30,7 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 
 When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
 
-In a supervised correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the coordinator under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
+For a correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the human or explicitly delegated supervising session under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).
 
 ## Keep tests tied to the real save
 
@@ -95,8 +95,8 @@ After implementation, run the selected core and parameter tests and every test c
 | Result | What it establishes and what follows |
 | --- | --- |
 | Core test fails; all direct parameter tests pass at configured tolerance `0` | The selected calculation needs correction. An explicit error for a missing selected implementation also establishes this. |
-| A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing producer comparison ends its investigation for this case. |
-| Core and all direct parameter tests pass at configured tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing producers. |
+| A direct parameter test fails, or the website result is missing so its comparison cannot be made | Only this observed result warrants dependency investigation; keep a failing comparison visible where available and follow the [playbook dependency procedure](calculation-correctness/PLAYBOOK.md#dependencies-and-wikibot). A passing direct parameter comparison ends investigation of that dependency for this case. |
+| Core and all direct parameter tests pass at configured tolerance `0` | The existing behavior passes these comparisons. Proceed to review the selected calculation's source/behavior, website implementation and consumers, and direct-parameter mapping; do not investigate internal formulas or upstream dependencies of passing dependencies. |
 | Setup fails before the selected assertions run | No calculation result was checked. Address a clear test/config problem or report the external prerequisite. |
 | A comparison uses or proposes configured tolerance above the shared baseline | Check the [source-backed bound requirements](#documented-non-zero-tolerances), report larger overrides separately, and follow the [playbook exception procedure](calculation-correctness/PLAYBOOK.md#non-zero-tolerance-exceptions). |
 
