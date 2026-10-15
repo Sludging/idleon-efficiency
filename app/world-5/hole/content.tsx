@@ -14,6 +14,7 @@ import TipDisplay from "../../../components/base/TipDisplay";
 import Majik from "../../../components/world-5/hole/majik";
 import Schematics from "../../../components/world-5/hole/schematics";
 import Measurements from "../../../components/world-5/hole/measurements";
+import { usePreservedScroll } from "../../../components/world-5/hole/upgradeInspection";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
 import type { Divinity } from "../../../data/domain/world-5/divinity";
@@ -159,6 +160,7 @@ function Benefit({ index, effects, dailyPurchases }: { index: number; effects: S
 }
 
 export default function HoleContent() {
+    const { ref, minHeight, preserveScroll } = usePreservedScroll();
     const { data, dataStatus } = useAppDataStore(useShallow(state => ({ data: state.data.getData(), dataStatus: state.dataStatus, lastUpdated: state.lastUpdated })));
     const [tab, setTab] = useState<Tab>("Villagers");
     const [upgrade, setUpgrade] = useState<typeof upgradeNames[number]>("Studies");
@@ -202,7 +204,7 @@ export default function HoleContent() {
     });
     const visibleStudies = studies.filter(view => (!showUnlocked || view.study.access === true) && view.searchable.includes(search.toLowerCase()));
 
-    return <Box gap="small" data-testid="hole-ready" style={{ minWidth: 0, fontVariantNumeric: "tabular-nums" }}>
+    return <Box gap="small" data-testid="hole-ready" ref={ref} style={{ minWidth: 0, minHeight, fontVariantNumeric: "tabular-nums" }}>
         <Heading level="2" size="medium" style={{ fontWeight: "normal" }}>The Hole</Heading>
         <Box direction="row" gap="large" wrap align="center" data-testid="resource-summary">
             <TipDisplay heading="Opal sources and allocation" size="small" maxWidth="560px" body={<Box gap="small" data-testid="opal-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
@@ -229,7 +231,7 @@ export default function HoleContent() {
             </Box>
         </Box>
         <Box data-testid="hole-feature" gap="small">
-            <Box data-testid="hole-tabs"><ContentTabs<Tab> options={[{ value: "Villagers", label: "Villagers" }, { value: "Upgrades", label: "Upgrades" }, { value: "Caverns", label: "Caverns" }]} value={tab} onChange={setTab} /></Box>
+            <Box data-testid="hole-tabs"><ContentTabs<Tab> options={[{ value: "Villagers", label: "Villagers" }, { value: "Upgrades", label: "Upgrades" }, { value: "Caverns", label: "Caverns" }]} value={tab} onChange={value => preserveScroll(() => setTab(value))} /></Box>
             {tab === "Villagers" && <Box gap="small" data-testid="villagers-panel">
                 <Box direction="row" gap="medium" align="center" wrap>
                     <TipDisplay heading="Shared growth bonuses" size="small" body={<Box gap="xxsmall" data-testid="shared-growth-tip-body" style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
@@ -282,7 +284,7 @@ export default function HoleContent() {
                 })}</Grid>
             </Box>}
             {tab === "Upgrades" && <ShadowBox flex={false} data-testid="upgrades-panel"><Grid rows="1" columns={["25%", "75%"]}>
-                <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => setUpgrade(name)} /></Box>)}</Box>
+                <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => preserveScroll(() => setUpgrade(name))} /></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="small" style={{ minWidth: 0 }}>
                     <Box direction="row" gap="small" align="center"><Portrait index={upgrade === "Majik" ? 2 : upgrade === "Schematics" ? 1 : upgrade === "Measurements" ? 3 : 4} /><Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small" data-testid="study-speed">Study speed: {number(hole.studyRate, hole.studyInputsUnavailableReason)} progress/hour</Text>}</Box>
                     {upgrade === "Majik" && <Majik hole={hole} divinity={data.get("divinity") as Divinity} />}
