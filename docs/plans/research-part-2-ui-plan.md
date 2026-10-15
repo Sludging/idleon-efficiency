@@ -38,8 +38,8 @@ Search [names or effects]  State [All]  [Clear filters when changed]
 [Game art + name]
 [Complete static description]
 [Grid bonus ×prepared factor]
-[Saved position in px; rotation in degrees, when owned]
-[Active coverage (count) tooltip with every saved-owner upgrade]
+[Owned-only focusable Active coverage (N) trigger opens Shape details]
+[Details: saved position in px, modulo rotation in degrees, complete saved-owner coverage]
 ...ten cards in game order...
 ```
 
@@ -117,7 +117,7 @@ The analogy stops at ownership. Shapes have no level/cap or maxed concept. Do no
 
 Keep complete source descriptions visible. Show each Shape's prepared **Grid bonus** factor once. Preserve Cyan Hexagon and Maroon Triangle's EXP prose separately from their code-backed Grid factors. Do not invent extra EXP production or rewrite the descriptions.
 
-Show the Research level 90 rotation requirement once above the catalogue. Owned Shapes retain actual saved position in pixels and modulo rotation in degrees. Genuine absent placement remains **No saved placement**. Unowned definitions receive no hypothetical position, rotation, or active coverage.
+Show the Research level 90 rotation requirement once above the catalogue. Disclose owned Shapes' actual saved position in pixels and modulo rotation in degrees in the existing focusable Shape details tooltip. Genuine absent placement remains **No saved placement** in that tooltip. Unowned definitions receive no hypothetical position, rotation, or active coverage.
 
 A focusable **Active coverage (N)** tooltip lists every `coveredUpgrades` name in game order. This is saved single-owner coverage, not polygon intersection. Owned Shapes with no active real upgrades show **No active upgrade coverage**. Upgrade artwork tooltips provide the reverse reference. Preserve all names; do not replace them with a sample, ellipsis, or geometric estimate.
 

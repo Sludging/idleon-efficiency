@@ -107,7 +107,7 @@ function UpgradeCard({ research, upgrade, description }: { research: ResearchGri
     const image = shape?.getImageData();
     const linked = linkedFields(upgrade);
     const { ref: tooltipRef, onKeyDown: onTooltipKeyDown } = useResearchTooltipScroll();
-    return <Box background="dark-1" pad="small" gap="xsmall" data-upgrade-index={upgrade.index}
+    return <Box background="dark-1" pad="small" gap="small" data-upgrade-index={upgrade.index}
         style={{ opacity: state === "Leveled" ? 1 : state === "Reachable" ? 0.65 : 0.35, minWidth: 0 }}>
         <Box direction="row" justify="between" align="start" gap="xsmall">
             <Box gap="xxsmall" flex style={{ minWidth: 0 }}>
@@ -122,7 +122,8 @@ function UpgradeCard({ research, upgrade, description }: { research: ResearchGri
                 </Box>
             </TipDisplay>}
         </Box>
-        <Text size="small" data-card-description>{description}</Text>
+        <ComponentAndLabel label="Description" labelSize="small"
+            component={<Text size="small" data-card-description>{description}</Text>} />
         {linked.length > 0 && <TipDisplay heading="Linked effect and conditions" maxWidth="620px" size="small"
             body={<Box ref={tooltipRef} tabIndex={0} flex={false} data-linked-details-tooltip={upgrade.index} gap="small"
                 style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
@@ -148,33 +149,32 @@ export default function ResearchGridDisplay({ research }: { research: ResearchGr
         || description.toLowerCase().includes(normalizedQuery))
         && (state === "All" || upgradeState(upgrade) === state)
         && (showMaxed || upgrade.getLevel() < upgrade.maxLevel));
-    const { points, pointMilestone } = research;
+    const { points } = research;
     const changed = query !== "" || state !== "All" || !showMaxed;
     return <Box as="section" id="research-grid" gap="small" aria-label="Grid">
         <Box direction="row" wrap gap="medium" align="end" data-research-points>
             <ResearchSourceValue label="Points" value={`${points.available < 0 ? "-" : ""}${commaNotation(Math.abs(points.available))}/${commaNotation(points.earned)} available`}>
                 <Box flex={false} gap="small">
                     <ResearchSources entries={points.contributors} unit="Point" />
-                    <Text size="xsmall">Each purchased level costs 1 Point.</Text>
-                    <Text size="xsmall">{commaNotation(pointMilestone.pointsPerTenLevelBlock)} Points per ten Research levels across {commaNotation(pointMilestone.reachedTenLevelBlocks)} reached blocks.</Text>
-                    <Text size="xsmall">{pointMilestone.explanation}</Text>
-                    <Text size="xsmall">Purchased Point-reward Grid level: {commaNotation(pointMilestone.purchasedGrid50Level)}.</Text>
+                    <Text size="small">Each purchased level costs 1 Point.</Text>
+                    <Text size="small">{commaNotation(points.milestone.pointsPerTenLevelBlock)} Points per ten-level block; {commaNotation(points.milestone.reachedTenLevelBlocks)} blocks reached.</Text>
+                    <Text size="small">{points.milestone.explanation}</Text>
                 </Box>
             </ResearchSourceValue>
             <TextAndLabel label="Shared Grid factor" text={`×${amount(research.getGridBonusAllmulti())}`} textSize="small" labelSize="xsmall" />
         </Box>
-        <Box direction="row" wrap gap="small" align="end">
+        <Box direction="row" wrap gap="small" align="center">
             <Box width="medium">
                 <ComponentAndLabel label={<label htmlFor="research-grid-search"><Text size="xsmall" color="accent-2">Search</Text></label>}
                     component={<TextInput id="research-grid-search" aria-label="Search Grid upgrade names or effects" placeholder="Search names or effects"
                         style={{ height: "48px" }} value={query} onChange={event => setQuery(event.target.value)} />} />
             </Box>
-            <Box width="220px">
+            <Box width="small">
                 <ComponentAndLabel label={<label htmlFor="research-grid-state"><Text size="xsmall" color="accent-2">State</Text></label>}
                     component={<Select id="research-grid-state" aria-label="Grid State" size="medium" options={[...gridStates]}
                         value={state} onChange={({ option }) => setState(option)} />} />
             </Box>
-            <Box height="48px" justify="center">
+            <Box justify="center">
                 <CheckBox id="research-show-maxed" label={<Text size="small">Show maxed</Text>} checked={showMaxed}
                     onChange={event => setShowMaxed(event.target.checked)} />
             </Box>

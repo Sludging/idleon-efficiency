@@ -25,18 +25,19 @@ function ShapeCard({ shape, description }: { shape: ResearchShape; description: 
         <Text size="small" data-card-description>{description}</Text>
         <TextAndLabel label="Grid bonus" text={`×${notateNumber(shape.bonusMultiplier, "Smaller")}`} textSize="small" labelSize="xsmall" />
         {shape.owned && <>
-            {placement === undefined ? <Text size="xsmall">No saved placement</Text> : <Box direction="row" wrap gap="small">
-                <TextAndLabel label="Position" text={`x: ${signedCount(placement.x)} px · y: ${signedCount(placement.y)} px`} textSize="xsmall" labelSize="xsmall" />
-                <TextAndLabel label="Rotation" text={`${signedCount(rotation!)}°`} textSize="xsmall" labelSize="xsmall" />
-            </Box>}
-            {shape.coveredUpgrades.length === 0 ? <Text size="xsmall">No active upgrade coverage</Text> : <TipDisplay heading="Active coverage" maxWidth="620px" size="small"
+            <TipDisplay heading="Shape details" maxWidth="620px" size="small"
                 body={<Box ref={tooltipRef} tabIndex={0} flex={false} data-shape-coverage-tooltip={shape.index} gap="xxsmall"
                     style={{ maxHeight: "40vh", overflowY: "auto", overflowWrap: "anywhere" }}>
+                    <Text size="xsmall" style={{ flexShrink: 0 }}>{placement
+                        ? `Saved position: x ${signedCount(placement.x)} px, y ${signedCount(placement.y)} px; rotation: ${signedCount(rotation!)}°`
+                        : "No saved placement"}</Text>
+                    <Text size="xsmall" weight="bold" style={{ flexShrink: 0 }}>Active upgrade coverage</Text>
+                    {shape.coveredUpgrades.length === 0 && <Text size="xsmall" style={{ flexShrink: 0 }}>No active upgrade coverage</Text>}
                     {shape.coveredUpgrades.map(upgrade => <Text key={upgrade.index} size="xsmall" style={{ flexShrink: 0 }}>{upgrade.data.name}</Text>)}
                 </Box>}>
-                <Text tabIndex={0} onKeyDown={onTooltipKeyDown} size="xsmall" data-shape-coverage aria-label={`Active coverage for ${shape.data.name}`}
-                    style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>Active coverage ({shape.coveredUpgrades.length})</Text>
-            </TipDisplay>}
+                <Text tabIndex={0} onKeyDown={onTooltipKeyDown} size="xsmall" data-shape-coverage aria-label={`Placement and active coverage for ${shape.data.name}`}
+                    style={{ textDecoration: "underline dotted", textUnderlineOffset: "4px", cursor: "help" }}>{shape.coveredUpgrades.length === 0 ? "No active upgrade coverage" : `Active coverage (${shape.coveredUpgrades.length})`}</Text>
+            </TipDisplay>
         </>}
     </Box>;
 }
@@ -57,11 +58,8 @@ export default function ResearchShapes({ research }: { research: ResearchGrid })
         <Box direction="row" wrap gap="medium" align="end">
             <ResearchSourceValue label="Owned Shapes" value={`${commaNotation(ownership.count)}/${commaNotation(ownership.cap)}`}>
                 <Box flex={false} gap="small">
-                    <Text size="xsmall">{ownership.ownedShapes.map(shape => shape.name).join(", ") || "None"}</Text>
                     <ResearchSources entries={ownership.contributors} unit="Shape" />
-                    <Text size="xsmall">Ownership cap: {commaNotation(ownership.cap)} Shapes.</Text>
-                    <Text size="xsmall">Posty Note rewards add Shapes at their Research level milestones.</Text>
-                    <Text size="xsmall">Supported ownership sources are not a complete list of ways to obtain Shapes.</Text>
+                    <Text size="small">Supported sources do not show every way to obtain Shapes.</Text>
                 </Box>
             </ResearchSourceValue>
             <Text size="small">Rotation requires Research level {commaNotation(ownership.rotationRequiredLevel)}</Text>

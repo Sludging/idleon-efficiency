@@ -1,6 +1,6 @@
 # Research: delivery parts
 
-**Approved delivery scope.** See the [current handoff](research-research-brief.md#current-handoff) for approval and phase decisions.
+**Approved delivery scope.** Part 1 and Part 2 are complete and human-accepted. See the [current handoff](research-research-brief.md#current-handoff) for approval and phase decisions and [final Part 2 acceptance and closeout](research-research-brief.md#human-final-part-2-acceptance-and-closeout--2026-10-15).
 
 **Scope sources:** [Approved research brief](research-research-brief.md) and [approved product specification](research-spec-draft.md).
 
@@ -64,12 +64,12 @@ See the [current handoff](research-research-brief.md#current-handoff) for Part 2
 
 ### Acceptance outcomes
 
-- Players can read available Points relative to earned Points without separate earned/spent fields. Supported level, milestone, and outside contributions remain in a tooltip beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
-- Players can browse all real upgrades in a dense flat catalogue and search names and effects. All entries remain visible by default. Grid State and Show maxed filters start at All and checked. Placeholder positions do not inflate the count.
-- Players can inspect each upgrade's purchased level, cap, verified current effect, and additional prerequisites. Catalogue opacity and State preserve independent orthogonal reachability without access labels/tooltips. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors remain beside affected effects through focusable details where needed.
-- Players can understand Research-owned linked unlocks and their conditions without related activity progression, resources, actions, or navigation. Eclectic Sigils also requires Spelunking Lore Boss 7. Masterius Cookerius requires Rift 61. Revival of the Undead Battalion requires boat level 400. Crown effects use externally owned reclaimed Gaming crowns. Glimbo scaling uses complete 100-trade blocks. Masterclass Research affects Deathbringer, Windwalker, and Arcane Cultist, not Royal Guardian. Divine Design preserves conditional Arctis/Doot multiplier behavior.
-- Players can inspect all ten illustrated Shape definitions, current ownership, supported ownership source tooltips, and actual saved positions and rotations. The ownership filter defaults to All. Rotation unlocks at Research level 90. Ownership has a cap of ten, not upgrade levels or maxed state. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
-- Players can inspect complete saved-owner covered upgrades and each square's single active Shape owner. Code-backed modifiers remain available beside affected upgrade effects through active-owner tooltips. The shared Grid factor appears once above the catalogue.
+- [x] Players can read available Points relative to earned Points without separate earned/spent fields. Supported level, milestone, and outside contributions remain in a tooltip beside the balance. Each purchased upgrade level costs one Point. This cost does not represent the full cost of a distant target.
+- [x] Players can browse all real upgrades in a dense flat catalogue and search names and effects. All entries remain visible by default. Grid State and Show maxed filters start at All and checked. Placeholder positions do not inflate the count.
+- [x] Players can inspect each upgrade's purchased level, cap, verified current effect, and additional prerequisites. Catalogue opacity and State preserve independent orthogonal reachability without access labels/tooltips. Reachability, unlock flags, and scaled bonuses remain distinct. Current contributors remain beside affected effects through focusable details where needed.
+- [x] Players can understand Research-owned linked unlocks and their conditions without related activity progression, resources, actions, or navigation. Eclectic Sigils also requires Spelunking Lore Boss 7. Masterius Cookerius requires Rift 61. Revival of the Undead Battalion requires boat level 400. Crown effects use externally owned reclaimed Gaming crowns. Glimbo scaling uses complete 100-trade blocks. Masterclass Research affects Deathbringer, Windwalker, and Arcane Cultist, not Royal Guardian. Divine Design preserves conditional Arctis/Doot multiplier behavior.
+- [x] Players can inspect all ten illustrated Shape definitions, current ownership, supported ownership source tooltips, and actual saved positions and rotations. The ownership filter defaults to All. Rotation unlocks at Research level 90. Ownership has a cap of ten, not upgrade levels or maxed state. Milestone illustrations do not guarantee the next Shape received. The website does not assert complete all-source obtainability.
+- [x] Players can inspect complete saved-owner covered upgrades and each square's single active Shape owner. Code-backed modifiers remain available beside affected upgrade effects through active-owner tooltips. The shared Grid factor appears once above the catalogue.
 
 ### Evidence and verification
 
