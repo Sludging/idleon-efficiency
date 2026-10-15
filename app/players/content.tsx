@@ -18,7 +18,6 @@ import { useState, useContext, useMemo } from 'react';
 
 import { Activity, Player, SkillData } from '../../data/domain/player';
 import type { GoldenFood } from '../../data/domain/golden-food';
-import type { SkillPowerSkill } from '../../data/domain/player-stats';
 import { SkillsIndex } from "../../data/domain/SkillsIndex";
 import { ClassIndex, ClassTalentMap, GetTalentArray } from '../../data/domain/talents';
 import { Capacity, playerInventoryBagMapping } from '../../data/domain/capacity';
@@ -106,30 +105,32 @@ function ShowSkills(props: SkillProps) {
         <Box pad={{ left: "large", top: "medium" }} gap="medium">
             <Text size='medium'>Skills</Text>
             <Grid
-                columns={['25%', '25%', '25%', '25%']}
+                columns={['minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 1fr)', 'minmax(0, 1fr)']}
+                gap={{ column: 'small', row: 'medium' }}
                 areas={[
                     ['mining', 'fishing', 'trapping', 'cooking'],
                     ['smithing', 'alchemy', 'construction', 'breeding'],
                     ['chopping', 'catching', 'worship', 'intellect'],
-                    ['sailing', 'farming', 'empty', 'empty'],
-                    ['divinity', 'sneaking', 'empty', 'empty'],
-                    ['gaming', 'summoning', 'empty', 'empty'],
+                    ['sailing', 'farming', 'spelunking', '.'],
+                    ['divinity', 'sneaking', 'research', '.'],
+                    ['gaming', 'summoning', '.', '.'],
                 ]}
             >
                 {
                     Array.from(props.skillsMap).map(([skillIndex, skill]) => {
                         const skillRank = props.skillsRank.get(skillIndex);
                         return (
-                            <Box key={`skill_${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} gridArea={`${SkillsIndex[skillIndex].toLowerCase() ?? 'Unknown'}`} direction="row" gap="medium" margin={{ right: 'small', bottom: 'medium' }}>
-                                <Box direction="row" align="center" gap="small" border={{ color: 'grey-1' }} pad="small">
-                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} />
-                                    <Box gap="small">
-                                        <Box direction="row" gap="small">
+                            <Box key={`skill_${skillIndex}`} gridArea={SkillsIndex[skillIndex].toLowerCase()} style={{ minWidth: 0 }}>
+                                <Box direction="row" align="center" gap="small" border={{ color: 'grey-1' }} pad="small" fill="horizontal" style={{ minWidth: 0 }}>
+                                    <IconImage data={Skilling.getSkillImageData(skillIndex)} scale={size == "small" ? 0.5 : 0.75} style={{ flexShrink: 0 }} />
+                                    <Box gap="small" style={{ flex: '1 1 0', minWidth: 0 }}>
+                                        <Text size="small">{SkillsIndex[skillIndex]}</Text>
+                                        <Box direction="row" gap="small" wrap>
                                             <Text size="small">{skill.level}</Text>
                                             {skillRank != undefined && size != "small" && <Text size="xsmall">(Ranked {nth(skillRank + 1)})</Text>}
                                         </Box>
                                         <Meter
-                                            size="small"
+                                            size="full"
                                             thickness='2px'
                                             type="bar"
                                             background="grey-1"
@@ -142,7 +143,7 @@ function ShowSkills(props: SkillProps) {
                                                 }
                                             ]}
                                             max={skill.xpReq} />
-                                        <Box direction="row" justify="between">
+                                        <Box direction="row" justify="between" gap="small" wrap>
                                             <Text size="xsmall">{nFormatter(skill.currentXP)}</Text>
                                             <Text size="xsmall">{nFormatter(skill.xpReq)}</Text>
                                         </Box>
@@ -189,15 +190,6 @@ function ShowSkills(props: SkillProps) {
         </Box>
     );
 }
-
-const skillPowerSkills: SkillPowerSkill[] = [
-    SkillsIndex.Mining,
-    SkillsIndex.Chopping,
-    SkillsIndex.Fishing,
-    SkillsIndex.Catching,
-    SkillsIndex.Trapping,
-    SkillsIndex.Worship,
-];
 
 function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: Bubble[] }) {
     const { theData, lastUpdated } = useAppDataStore(useShallow(
@@ -333,21 +325,6 @@ function MiscStats({ player, activeBubbles }: { player: Player, activeBubbles: B
                                 text={`${notateNumber(player.stats.dropRateMultiplier, "MultiplierInfo").replace("#", "")}x`}
                                 textSize="small"
                             />
-                        </Grid>
-                    </Box>
-                    <Box role="region" aria-label="Skill power" gap="small" margin={{ vertical: "small" }}>
-                        <Text>Skill power</Text>
-                        <Grid columns={["minmax(0, 1fr)", "minmax(0, 1fr)"]} gap="small">
-                            {skillPowerSkills.map(skill => (
-                                <Box key={skill} direction="row" gap="small" align="center">
-                                    <IconImage data={Skilling.getSkillImageData(skill)} scale={0.6} />
-                                    <TextAndLabel
-                                        label={SkillsIndex[skill]}
-                                        text={notateNumber(player.stats.getSkillPower(skill))}
-                                        textSize="small"
-                                    />
-                                </Box>
-                            ))}
                         </Grid>
                     </Box>
                     <Stat stat={player.crystalChance} />

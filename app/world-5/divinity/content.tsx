@@ -107,6 +107,10 @@ function GodDisplay() {
         <Box margin={{ top: 'small' }} gap="small">
             {
                 divinity && divinity.gods.map((god, index) => {
+                    const unlinkedBlessingPlayers = god instanceof NobisectGod
+                        ? players.filter(player => !god.linkedPlayers.some(linkedPlayer => linkedPlayer.playerID === player.playerID))
+                        : [];
+
                     return (
                         <DataRow
                             key={index}
@@ -154,26 +158,36 @@ function GodDisplay() {
                                 ...(god.linkedPlayers.length > 0 ? [
                                     {
                                         key: 'linked-characters',
-                                        label: 'Linked Characters',
+                                        label: god instanceof NobisectGod
+                                            ? 'Linked Characters (base skill efficiency)'
+                                            : 'Linked Characters',
                                         content: (
-                                            <Box direction="row" wrap gap="xsmall" pad="small">
+                                            <Box direction="row" wrap gap="xsmall" pad="small" data-nobisect-blessings={god instanceof NobisectGod ? true : undefined}>
                                                 {god.linkedPlayers.map((player, index) => (
                                                     <CharacterBox
                                                         key={index}
                                                         player={player}
-                                                    />
+                                                    >
+                                                        {god instanceof NobisectGod && (
+                                                            <Box align="end">
+                                                                <Text size="small" data-nobisect-blessing={player.playerID}>
+                                                                    +{commaNotation(god.getBlessingBonus(player))}
+                                                                </Text>
+                                                            </Box>
+                                                        )}
+                                                    </CharacterBox>
                                                 ))}
                                             </Box>
                                         ),
                                     },
                                 ] : []),
-                                ...(god instanceof NobisectGod ? [
+                                ...(god instanceof NobisectGod && unlinkedBlessingPlayers.length > 0 ? [
                                     {
-                                        key: 'blessing-by-character',
-                                        label: 'Blessing by character (base skill efficiency)',
+                                        key: 'unlinked-character-blessings',
+                                        label: 'Blessing for unlinked characters (base skill efficiency)',
                                         content: (
                                             <Box direction="row" wrap gap="xsmall" pad="small" data-nobisect-blessings>
-                                                {players.map(player => (
+                                                {unlinkedBlessingPlayers.map(player => (
                                                     <CharacterBox key={player.playerID} player={player}>
                                                         <Box align="end">
                                                             <Text size="small" data-nobisect-blessing={player.playerID}>
