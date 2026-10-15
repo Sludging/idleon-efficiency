@@ -2,111 +2,148 @@
 
 ## Player outcome and scope
 
-Players can distinguish earned, spent, and available Points. They can inspect all 60 real Grid upgrades and all ten Shapes. Current effects, separate conditions, and actual saved coverage explain what their account receives now.
+Players see available Points relative to earned Points. They can scan all 60 real Grid upgrades and all ten Shapes. Current effects, linked conditions, and saved active coverage explain their account's benefits.
 
-This plan delivers [Part 2 — #463](https://github.com/Sludging/idleon-efficiency/issues/463) through the accepted backend. The [specification](research-spec-draft.md), [delivery outcomes](research-delivery-parts-draft.md#2-grid-upgrades-points-and-shapes), and [backend plan](research-part-2-backend-plan.md) define scope. The [current handoff](research-research-brief.md#current-handoff) owns approval state, preview references, supplied evidence, and limits.
+This plan covers [Part 2 — #463](https://github.com/Sludging/idleon-efficiency/issues/463) through the accepted backend. The [specification](research-spec-draft.md), [delivery outcomes](research-delivery-parts-draft.md#2-grid-upgrades-points-and-shapes), and [backend plan](research-part-2-backend-plan.md) define scope. The [current handoff](research-research-brief.md#current-handoff) owns selection, approvals, preview references, evidence, and limits.
 
-Extend `/world-7/research`. Preserve Part 1's three summary groups, four tabs, initial Observations selection, searches, sorts, illustrations, and source tooltips. Append **Grid** and **Shapes** to the same `ContentTabs`. Render only the selected content. Points belong above the Grid catalogue, not in another page-wide summary.
+Refine Grid and Shapes within `/world-7/research`. Preserve Part 1's three summary groups, artwork, tabs, initial Observations selection, searches, sorts, and source tooltips. Keep Grid and Shapes in the same `ContentTabs`. Render only the selected content.
 
-No board, invented upgrade categories, view switch, optional unlocked filter, planner, purchase control, Shape placement control, activity panel, or related-activity navigation is needed. Search and tab selection remain read-only.
+No board, invented categories, view switch, planner, purchase control, placement control, activity panel, or related-activity navigation is included. Search, filters, tabs, and tooltips remain read-only.
 
 ## Visual direction and composition
 
-Use Impeccable Operate mode inside the existing Game Ledger world. Preserve Rubik, `dark-1` (#1E2127), `dark-2` (#1B1D24), pale text (#efefef), brand blue (#0376E3), and supporting grey (#BEC2CC). Keep the ordinary Research heading and shared outer wrapper. Add no new page width, font, palette, or horizontal inset.
+Use Impeccable Operate mode within the existing Game Ledger world. Preserve Rubik, charcoal surfaces, pale text, brand blue, shared tabs, and the ordinary Research heading. Inherit the shared page width and outer padding.
 
-Use full-width **DataRow** records for upgrades. The player compares identity, purchased level, current effect, and reachability across many records. Aligned rows make these differences easier to scan than 60 variable-height cards. Preserve DataRow's shell, small padding, compact typography, field gaps, and details composition. Stack rows with `gap="small"`.
+Use dense `dark-1` cards in a flat catalogue. At 1440×1000, use four equal columns with small card padding and small gaps. Keep complete effect text visible without truncation. Cards may grow for longer descriptions; do not force clipping or a fixed height. Keep name, Level ratio, and effect together. Do not add card borders, new colors, or upgrade sprites.
 
-Use DataRow records for Shapes too. Each record keeps recognizable game artwork beside its generated name. Fields show ownership, the code-backed bonus factor, actual position, and rotation. Visible details show the static description and complete covered-upgrade names. Do not draw a second game board.
+The Sneaking card reference supplies identity/detail grouping and dark surfaces. The human-selected density is smaller than Sneaking's medium padding. Part 1 Observation cards supply the relevant three-state opacity analogy. These are scoped choices, not new site-wide defaults.
 
 ```
 Research
-[Accepted Part 1 summary groups]
+[Unchanged Part 1 summary groups]
 Observations | Lenses | Posty Notes | Papers | Grid | Shapes
 
 Grid
-Points: available | earned | spent     Point sources: name + applied Points
-Each purchased level costs 1 Point.
-Search [names or effects]  [Clear search]
-Name       Level / cap       Current effect                 Grid access
-           Shared Grid factor; active Shape; linked conditions when relevant
-...all 60 upgrades in game order...
+Points  0/115 available [source tooltip]     Shared Grid factor ×[prepared value]
+Search [names or effects]  State [All]  [checked] Show maxed  [Clear filters when changed]
+[Name                         active Shape art]
+[Level 1/5]
+[Complete current effect]
+[Linked details tooltip, only when relevant]
+...60 cards in game order...
 
 Shapes
-Owned Shapes / 10 | Rotation requirement     Supported ownership sources
-Name + art   Owned / Not owned   Bonus factor   Position (px)   Rotation
-             Static description; complete active covered-upgrade names
-...all ten definitions in game order...
+Owned Shapes 5/10 [source tooltip]     Rotation requires Research level 90
+Search [names or effects]  State [All]  [Clear filters when changed]
+[Game art + name]
+[Complete static description]
+[Grid bonus ×prepared factor]
+[Saved position in px; rotation in degrees, when owned]
+[Active coverage (count) tooltip with every saved-owner upgrade]
+...ten cards in game order...
 ```
 
-Use existing game imagery where the game provides it. Keep the accepted Research skill artwork in the summary. Shape artwork belongs beside Shape names and beside active Shape references in upgrade details. Do not invent one upgrade sprite per entry when the game identifies upgrades with text. Route all images through `IconImage` with verified metadata and the existing CDN. Never add images to `public`.
+Use `IconImage` with the existing domain image metadata and CDN. Shape artwork belongs beside Shape names and at the top-right of upgrades with an active Shape. Preserve aspect ratio. Bound active-owner artwork to 36px; use a compact display size that does not compete with the name. Do not fabricate artwork for upgrades without game sprites. Do not add images to `public`.
 
 ## Information and interactions
 
-### Points and sources
+### Points and shared factor
 
-Keep available, earned, and spent Points together in one dark-1 section. Put all prepared Point contributor names and applied values beside these totals. Use a compact two-column source list within the same section. Keep zero contributions readable with the existing inactive source opacity; do not imply they are acquired rewards. A capped contributor may show its prepared cap and condition in a value-attached `TipDisplay`.
+Show one **Points** value: **0/115 available** for the retained save. The numerator is `points.available`; the denominator is `points.earned`. This is available/earned, not an earned or spent summary. Do not render separate earned or spent fields. Preserve a negative available value if supplied.
 
-Show the prepared cumulative ten-level reward and its Points-per-ten-level context. Do not infer the next award or recompute totals. State **Each purchased level costs 1 Point.** Do not add target costs, affordability forecasts, or a purchase button. Preserve a negative available balance if the backend supplies one.
+Attach the existing value-source `TipDisplay` pattern to Points. Match the four Part 1 examples: Research EXP, offline percentage, Insight, and lens ownership. Keep source names, intrinsic rewards, applied values, supported caps, and conditions readable. Use inactive source opacity without an inactive suffix. Preserve cumulative ten-level reward context and **Each purchased level costs 1 Point.** within this tooltip. Do not add a visible source catalogue or a spending forecast.
 
-### Complete upgrade catalogue
+Long source tooltips scroll within the viewport. Keep each source's text and conditions together without shrinking or overlapping blocks. The scrollable body remains focusable so players can reach every source by keyboard.
 
-An empty search shows all 60 `research.upgrades` records in game order, including unpurchased and maxed upgrades. Exclude the 180 placeholder positions. A persistent **Search** label and **Search names or effects** placeholder match Part 1's control treatment. Case-insensitive search matches generated names and the displayed populated effect descriptions. Clear search restores all entries. No match shows **No Grid upgrades match this search.**
+Show the prepared **Shared Grid factor** once above the catalogue. It remains separate from each active Shape's factor. Do not repeat it on every card or invent a constituent breakdown.
 
-Each row shows:
+### Grid cards and state
+
+Keep all 60 `research.upgrades` records in game order. Exclude placeholder positions. Each card shows:
 
 - Generated name.
-- Purchased level and cap from `getLevel()` and `maxLevel`; identify a reached cap without hiding the record.
-- The complete populated `getDescription()` as **Current effect**. Render the existing underscore and `@` separators through the normal display convention. Do not rewrite static prose.
-- **Grid access:** reachable, or requires a purchased adjacent square. Explain adjacent as directly left, right, above, or below. Do not imply Point balance or an outside prerequisite determines reachability.
-- Visible details for the shared Grid factor, one active Shape name and factor, and relevant linked inputs or requirements. A square without an owner shows **No active Shape**. Do not add together overlapping Shapes.
+- **Level** with purchased level/cap from `getLevel()` and `maxLevel`.
+- Complete populated `getDescription()`, using the existing underscore and `@` formatting.
+- A small top-right active Shape image, only when an owner exists.
+- Relevant linked conditions and secondary context through a focusable details tooltip.
 
-Keep purchased rows at full opacity and unpurchased rows at 0.6, following the selected upgrade-row reference. Keep textual reachability separate from this purchase-state treatment. Each populated description already includes its current numeric effects. Do not add an unlabeled second number for every primary or secondary backend value. Show a separate secondary result only when it clarifies a linked effect that the description does not fully establish.
+Do not use **Level / cap**, **Maxed**, **Grid Access**, or **No active Shape** labels. The ratio already communicates the cap. No Grid access column or tooltip is included.
 
-### Linked effects and separate conditions
+Classify display state in this order:
 
-Keep these details beside their owning upgrade, not in another activity catalogue:
+1. `getLevel() > 0`: **Leveled**, opacity **1**.
+2. Not leveled and prepared `reachable`: **Reachable**, opacity **0.65**.
+3. Not leveled and not prepared `reachable`: **Unreachable**, opacity **0.35**.
 
-| Upgrade or family | Visible state and condition |
+Purchased state wins the presentation classification. Preserve the independent prepared reachability fact unchanged. Do not infer reachability from Point balance, external prerequisites, or opacity. These opacities express catalogue state, not linked-unlock state.
+
+The active Shape artwork has a hover/focus tooltip with its generated name and prepared bonus factor. Do not repeat its name or factor visibly within the card. An owner-free upgrade has no artwork or empty tooltip. Saved single-owner state remains authoritative; do not add overlapping factors.
+
+### Grid controls
+
+Retain persistent **Search** labeling and **Search names or effects**. Match generated names and populated displayed effects case-insensitively.
+
+Add **State** with exactly **All**, **Leveled**, **Reachable**, and **Unreachable**. The categories are mutually exclusive. Reachable means not leveled but reachable. Start at **All**.
+
+Add **Show maxed**, initially checked. When unchecked, exclude records whose purchased level reaches their cap. Apply search, State, and Show maxed together. The defaults show all 60 entries, including maxed and unreachable entries. Do not add sorting or an unlocked checkbox.
+
+A no-match result says **No Grid upgrades match these filters.** Keep Point context and controls visible. **Clear search** clears only search text. **Clear filters** resets search, State to All, and Show maxed to checked. Show the reset action when any control differs from its default.
+
+Classification, filtering, and maxed comparison are view-owned display logic. They do not change backend state or recalculate game arithmetic.
+
+### Linked conditions and source descriptions
+
+Keep complete static descriptions visible. A linked details tooltip remains beside its owning card. Do not create another activity catalogue. Keep these supported facts complete:
+
+| Upgrade or family | Required details |
 |---|---|
-| Eclectic Sigils | Research grant, Lore Boss 7 requirement, owning tunnel identity from the prepared prerequisite (`Bizarrio`), and effective unlocked state. The tunnel name is not the boss name. |
-| Masterius Cookerius | Unchanged static Rift 61 description, Cooking Mastery unlocked state, Research grant, current EXP multiplier, and effective active state. Use the accepted code-based state. Do not infer a hard Rift 61 gate from prose. |
-| Revival of the Undead Battalion | Combined boat loot and speed level 400 condition, qualifying boat count, Research grant, and effective affected-boat count. No boat progression list. |
-| Crown upgrades | Reclaimed Gaming crowns, prepared bonus per crown, and prepared total. No Gaming inventory. |
-| Glimbo Insider Trading Secrets | Total trades, complete 100-trade blocks, prepared bonus per block, and prepared total. No trade catalogue. |
-| Masterclass Research | Deathbringer, Windwalker, and Arcane Cultist; daily reduction and accumulated current reduction. Do not include Royal Guardian. |
-| Divine Design | Drop Rate, Arctis grant, King Doot condition, and prepared shared Grid contribution remain separate. Use the backend's selected source-authored description. Do not impose an unconditional ×1.05 factor. |
+| Eclectic Sigils | Research grant, Lore Boss 7 requirement, prepared tunnel identity `Bizarrio`, and effective unlocked state. The tunnel is not the boss name. |
+| Masterius Cookerius | Unchanged Rift 61 source description, code-backed Cooking Mastery unlocked state, Research grant, current EXP multiplier, and effective active state. Do not derive the gate from prose. |
+| Revival of the Undead Battalion | Combined boat loot/speed level 400 condition, qualifying boat count, Research grant, and affected-boat count. |
+| Crown upgrades | Reclaimed Gaming crowns, prepared bonus per crown, and total. |
+| Glimbo Insider Trading Secrets | Total trades, complete 100-trade blocks, bonus per block, and total. |
+| Masterclass Research | Deathbringer, Windwalker, Arcane Cultist, daily reduction, and accumulated current reduction. Exclude Royal Guardian. |
+| Divine Design | Separate Drop Rate, Arctis grant, King Doot condition, and prepared shared Grid contribution. Preserve the selected source-authored description. |
 
-### Shapes and active coverage
+Do not duplicate numbers already explained by the populated effect. Tooltip relocation reduces card height without deleting conditions or confusing them with catalogue reachability.
 
-Show all ten definitions in game order. Ownership already follows an ordered prefix, so no ownership sort is needed. Show one **Owned Shapes: count / 10** summary. Its adjacent sources use `shapeOwnership.contributors`; explain that supported sources are not a complete obtainability promise. Do not repeat the cap in every row.
+### Shapes and coverage
 
-Show the prepared rotation requirement once: Research level 90. An owned Shape shows its actual saved x/y position in **pixels** and `rotationModuloDegrees` in **degrees**. A genuinely absent placement shows **No saved placement**. Unowned definitions show no hypothetical coordinates or implied active coverage. No drag, rotate, or placement controls appear.
+Show all ten definitions in game order. Keep one **Owned Shapes 5/10** summary for the retained save. Attach supported ownership sources to this value through the same focusable source tooltip pattern. Do not show a visible source catalogue. Explain within the tooltip that supported sources do not establish complete all-source obtainability. Preserve milestone context without promising the next pictured Shape.
 
-Each Shape shows its prepared `bonusMultiplier` as **Grid bonus factor**. Show its unchanged populated static description separately. This preserves Cyan Hexagon and Maroon Triangle's source text without claiming extra Research EXP; the numeric Grid factor follows game code.
+Use dense illustrated cards. Owned Shapes have opacity **1**; unowned Shapes have opacity **0.35**. Do not repeat **Owned** or **Not owned** labels on cards. Show one **State** dropdown with **All**, **Owned**, and **Not owned**, initially All. Keep name/effect search and the same clear/no-results behavior. Search matches generated names and populated descriptions. **No Shapes match these filters.** remains separate from actual ownership.
 
-List every `coveredUpgrades` name beside its Shape. These are upgrades for which that Shape is the saved active owner, not a reconstructed polygon intersection. An owned Shape with no active real upgrades shows **No active upgrade coverage**. Each upgrade row names its own active Shape, providing the reverse reference. No geometric-overlap or strongest-Shape rule is inferred.
+The analogy stops at ownership. Shapes have no level/cap or maxed concept. Do not add Level, Reachable, Unreachable, Show maxed, or invented access state. Keep the ownership summary stable while filtering.
+
+Keep complete source descriptions visible. Show each Shape's prepared **Grid bonus** factor once. Preserve Cyan Hexagon and Maroon Triangle's EXP prose separately from their code-backed Grid factors. Do not invent extra EXP production or rewrite the descriptions.
+
+Show the Research level 90 rotation requirement once above the catalogue. Owned Shapes retain actual saved position in pixels and modulo rotation in degrees. Genuine absent placement remains **No saved placement**. Unowned definitions receive no hypothetical position, rotation, or active coverage.
+
+A focusable **Active coverage (N)** tooltip lists every `coveredUpgrades` name in game order. This is saved single-owner coverage, not polygon intersection. Owned Shapes with no active real upgrades show **No active upgrade coverage**. Upgrade artwork tooltips provide the reverse reference. Preserve all names; do not replace them with a sample, ellipsis, or geometric estimate.
+
+Keep linked-detail and coverage tooltips within the viewport. Preserve readable block heights and allow scrolling instead of clipping or overlapping long lists.
 
 ## Data, integration, and states
 
-The existing Research client component owns selected tab state. Separate Grid and Shape renderers consume `ResearchGrid` without moving backend logic into React. Preserve `useShallow`, `lastUpdated`, the completed-load guard, route metadata, and Part 1's normal account provider.
+The existing client surface owns tabs and catalogue controls. Grid and Shape renderers consume the accepted `ResearchGrid`. Preserve grouped store selection, `lastUpdated`, completed-load guarding, metadata, and normal account provider behavior.
 
-Use prepared `points`, `pointMilestone`, `upgrades`, `shapeOwnership`, and `shapes`. Upgrades own populated descriptions, cap, reachability, shared factor, active owner, prerequisites, and `linkedState`. Shapes own saved placement, display rotation, modifier, and reverse coverage. Format numbers with `notateNumber` and `commaNotation`; search and formatting are view work. Do not derive Point formulas, game gates, coverage, or special effects in the UI.
+Reuse `points`, `pointMilestone`, `upgrades`, `shapeOwnership`, and `shapes`. Reuse existing `ResearchShape.getImageData()` for artwork. Reuse prepared descriptions, level, cap, reachability, shared factor, active owner, prerequisites, linked state, saved placement, display rotation, modifier, and reverse coverage. Format with existing `notateNumber` and `commaNotation` helpers. Add no backend fields, formulas, endpoints, exports, or generated changes.
 
-The accepted backend supplies all requested numerical and condition state. Shape sprite identities are source-backed: `../IdleonWikiBot/codefiles/idleon1.22.txt:284483` creates `ResShape{index}.png`. All ten actual CDN images loaded in Chromium; their natural dimensions match generated Shape width/height. Production needs only a narrow `ResearchShape.getImageData()` accessor using those existing fields, not a new static catalogue or generated edit. The disposable preview supplies this metadata locally. No backend edit is made during planning. Show the prepared shared Grid factor without inventing a constituent breakdown the backend does not expose.
+Loading uses existing account status and local missing-domain guarding. Default controls preserve 60 upgrades and ten definitions even when no upgrades or Shapes are owned. Filtering does not remove account context or rewrite ownership. Preserve zero effects and genuine missing placement. Do not synthesize saves to demonstrate branches.
 
-Loading uses the existing account status and local missing-domain guard. A zero-owned account still shows ten definitions. Zero purchased upgrades still shows 60 entries. No-match search does not remove Point context. Preserve genuine missing placements and valid zero effects. Do not synthesize save states to demonstrate these cases.
+## Preview and delivery verification
 
-## Verification
+Use a disposable route, existing theme/components, and the retained real save through the normal provider. Render actual prepared values. Production files remain read-only during planning. Never set store state, mutate the fixture, copy backend formulas, or rerun accepted backend tests.
 
-Use the private Docker real-save fixture and existing UI runner. A disposable preview uses the accepted provider, theme, shared tabs, DataRow, and game CDN assets. Compare rendered labels and values with public prepared backend results. Never set store state, mutate the save, rerun accepted backend tests, or present mock data as game evidence.
+Capture Grid and Shapes at 1440×1000. Inspect catalogue density, full descriptions, three Grid opacities, active-owner artwork, source tooltips, linked details, saved placement, rotation, and complete coverage. Exercise defaults, every State option, Show maxed, name/effect searches, combined filters, no-results, and both clear actions. Check source/owner/detail tooltips by hover and focus. Preserve Part 1's initial selection, tabs, searches, sorts, and tooltips.
 
-For UI delivery, exercise six shared tabs, 60 default upgrades, ten Shape definitions, Point totals and source values, purchased levels/caps, full effect text, reachability, linked conditions, active owner references, ownership, saved positions, display rotations, and complete reverse coverage. Check name search, effect search, clear search, no-match state, and loaded game artwork. Confirm no new backend arithmetic or gameplay controls. Preserve the real fixture and all Part 1 behavior.
+Compare visible information with prepared domain results. Record exact screenshots, exercised controls, observed states, fixture preservation, errors, and cleanup in the current handoff. Separate inherited errors from Research failures. Unobserved real-save branches remain unobserved. Preview proof does not establish fresh original-game parity, geometry, gameplay actions, or all-source obtainability.
 
-Inspect the 1440×1000 desktop preview and scoped console/page errors. Record inherited errors separately from Research failures. Keep screenshots and runtime evidence private. Unobserved real-save branches remain unobserved; rendering does not establish new original-game parity, rotation actions, geometry, all-source obtainability, or current connected-release parity.
+Remove disposable routes/scenarios after capture. Preserve private evidence and the real save.
 
 ## References
 
-- [UI work guide](../agents/ui-patterns.md), [Data rows](../agents/ui-rows.md), and [UI verification](../agents/ui-verification.md).
-- [Accepted Part 1 UI plan](research-part-1-ui-plan.md), shared ContentTabs, Research summary, Stamps search, Atom DataRow fields, and Sneaking artwork/name grouping.
-- [Official Research Wiki](https://idleon.wiki/wiki/Research): player terminology, Points spent on adjacent Grid tiles, Shape recognition, and single-owner coverage context. Accepted code and human decisions govern conflicting prose.
-- [IdleonToolbox Research public profile](https://idleontoolbox.com/account/world-7/research?profile=liiiiiiiiiiiig): observed Grid card names, level/cap, populated effects, and Shape multiplier context. Retain those useful information relationships, not its dashboard, timers, view switch, card borders, spatial board, sidebar, or colors.
+- [UI work guide](../agents/ui-patterns.md) and [UI verification](../agents/ui-verification.md).
+- [Accepted Part 1 UI plan](research-part-1-ui-plan.md), Observation card state treatment, four value-source tooltip examples, shared ContentTabs, and Sneaking identity/detail grouping.
+- [IdleonToolbox Research public profile](https://idleontoolbox.com/account/world-7/research?profile=liiiiiiiiiiiig): Grid names, ratios, effects, and Shape relationships. Reference only; preserve this website's typography, layout, surfaces, and controls.
+- [Official Research Wiki](https://idleon.wiki/wiki/Research): established player terminology and adjacency/Shape context. Accepted source rules and human decisions govern conflicts.
