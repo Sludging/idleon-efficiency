@@ -4,6 +4,8 @@ import { initSpelunkingChapterRepo, SpelunkingChapterBase } from "../data/Spelun
 import { initSpelunkingMetadataRepo } from "../data/SpelunkingMetadataRepo";
 import { initSpelunkingTunnelRepo, SpelunkingTunnelBase } from "../data/SpelunkingTunnelRepo";
 import { initSpelunkingUpgradeRepo, SpelunkingUpgradeBase } from "../data/SpelunkingUpgradeRepo";
+import { initSpelunkingElixirRepo, SpelunkingElixirBase } from "../data/SpelunkingElixirRepo";
+import { initSpelunkingToolRepo, SpelunkingToolBase } from "../data/SpelunkingToolRepo";
 import { AFKTypeEnum } from "../enum/aFKTypeEnum";
 import { Item } from "../items";
 import { ChapterBonusModel } from "../model/chapterBonusModel";
@@ -346,6 +348,9 @@ export class SpelunkingStamina {
     getHoursUntilFull(hourlyRecharge: number): number {
         return Math.max(0, this.maximum - this.current) / hourlyRecharge;
     }
+    get eligibleForTeam(): boolean {
+        return this.current >= this.maximum / 2;
+    }
 }
 
 export class Upgrade {
@@ -361,12 +366,174 @@ export class Upgrade {
         return this.level !== -1;
     }
 
+    parse(savedLevel: number | string | undefined): void {
+        this.level = Number(savedLevel ?? -1);
+    }
+
     getBonus(): number {
         return this.data.bonusPerLevel * this.purchasedLevel;
     }
 
+    getEffectiveBonus(manicTotalDepth: number, trackometerLevel: number): number {
+        const bonus = this.getBonus();
+        if (this.index >= 54 && this.index <= 56) {
+            return bonus * (1 + 5 * manicTotalDepth / 100);
+        }
+        if (this.index >= 59 && this.index <= 61) {
+            return bonus * trackometerLevel;
+        }
+        return bonus;
+    }
+
     static fromBase = (data: SpelunkingUpgradeBase[]): Upgrade[] => {
         return data.map(upgrade => new Upgrade(upgrade.index, upgrade.data));
+    }
+}
+
+export class SpelunkingTool {
+    constructor(public index: number, public data: SpelunkingToolBase["data"]) {
+    }
+
+    isUnlocked(getUpgradeBonus: (index: number) => number): boolean {
+        const unlock = this.data.unlock;
+        if (unlock.kind === "default") {
+            return true;
+        }
+        if (unlock.kind !== "upgrade" || unlock.upgradeIndex === undefined) {
+            return false;
+        }
+        return getUpgradeBonus(unlock.upgradeIndex) >= (unlock.minimumBonus ?? 0);
+    }
+
+    static fromBase = (data: SpelunkingToolBase[]): SpelunkingTool[] =>
+        data.map(tool => new SpelunkingTool(tool.index, tool.data));
+}
+
+interface SpelunkingElixirUpgradeBonuses {
+    owned: number;
+    equipmentSlots: number;
+    duplicates: number;
+    memorizedSlots: number;
+    consumptionReduction: number;
+}
+
+export class SpelunkingElixirs {
+    records: SpelunkingElixirBase[] = [];
+    equippedSlots: number[] = [];
+    memorizedIndices: number[] = [];
+    ownedCount: number = 0;
+    slotLimit: number = 0;
+    duplicateLimit: number = 0;
+    memorizeLimit: number = 0;
+    private upgradeConsumptionReduction: number = 0;
+    private chapterConsumptionReduction: number = 0;
+
+    get consumptionReduction(): number {
+        return Math.min(0.6, (this.upgradeConsumptionReduction + this.chapterConsumptionReduction) / 100);
+    }
+
+    init(): void {
+        this.records = initSpelunkingElixirRepo();
+        this.equippedSlots = [];
+        this.memorizedIndices = [];
+        this.ownedCount = 0;
+        this.slotLimit = 0;
+        this.duplicateLimit = 0;
+        this.memorizeLimit = 0;
+        this.upgradeConsumptionReduction = 0;
+        this.chapterConsumptionReduction = 0;
+    }
+
+    parse(equippedSlots: (number | string)[], memorizedIndices: (number | string)[],
+        upgradeBonuses: SpelunkingElixirUpgradeBonuses): void {
+        this.equippedSlots = Array.from({ length: 5 }, (_, index) => Number(equippedSlots[index] ?? -1));
+        this.memorizedIndices = memorizedIndices.map(index => Number(index));
+        this.ownedCount = Math.round(Math.min(12, upgradeBonuses.owned));
+        this.slotLimit = Math.round(Math.min(5, 1 + upgradeBonuses.equipmentSlots));
+        this.duplicateLimit = Math.round(Math.min(5, upgradeBonuses.duplicates));
+        this.memorizeLimit = Math.round(upgradeBonuses.memorizedSlots);
+        this.upgradeConsumptionReduction = upgradeBonuses.consumptionReduction;
+        this.chapterConsumptionReduction = 0;
+    }
+
+    prepareChapterConsumptionReduction(chapterBonus: number): void {
+        this.chapterConsumptionReduction = chapterBonus;
+    }
+}
+
+export class SpelunkingManic {
+    unlocked: boolean = false;
+    enabled: boolean = false;
+    depthByTunnel: number[] = [];
+    readonly staminaCostMultiplier: number = 30;
+
+    get totalDepth(): number {
+        return this.depthByTunnel.reduce((total, depth) => Math.round(total + depth), 0);
+    }
+
+    parse(enabled: number | string | undefined, depthByTunnel: (number | string)[], unlocked: boolean): void {
+        this.enabled = Number(enabled ?? 0) === 1;
+        this.depthByTunnel = depthByTunnel.map(depth => Number(depth));
+        this.unlocked = unlocked;
+    }
+}
+
+export class SpelunkingOverstim {
+    unlocked: boolean = false;
+    level: number = 0;
+    fill: number = 0;
+
+    get threshold(): number {
+        return 100 * Math.pow(1.3, this.level);
+    }
+
+    get bonusPerLevel(): number {
+        return 30 + this.upgradeBonus;
+    }
+
+    get bonus(): number {
+        return this.bonusPerLevel * this.level;
+    }
+
+    get amberMultiplier(): number {
+        return 1 + this.upgradeBonus * this.bonus / 100;
+    }
+
+    private upgradeBonus: number = 0;
+
+    parse(level: number | string | undefined, fill: number | string | undefined, upgradeBonus: number): void {
+        this.level = Number(level ?? 0);
+        this.fill = Number(fill ?? 0);
+        this.upgradeBonus = upgradeBonus;
+        this.unlocked = upgradeBonus >= 1;
+    }
+}
+
+export class SpelunkingTrackometer {
+    level: number = 0;
+    fill: number = 0;
+    unlocked: boolean = false;
+
+    get threshold(): number {
+        return 1000 * Math.pow(1.5, this.level);
+    }
+
+    parse(level: number | string | undefined, fill: number | string | undefined, unlocked: boolean): void {
+        this.level = Number(level ?? 0);
+        this.fill = Number(fill ?? 0);
+        this.unlocked = unlocked;
+    }
+}
+
+export class SpelunkingAutomaticToolUse {
+    fullClearSetting: boolean = false;
+    eligible: boolean = false;
+
+    parse(fullClearSetting: number | string | undefined, accountProgress: number | string | undefined,
+        autoButtonBonus: number, gemPurchaseCount: number | string | undefined): void {
+        this.fullClearSetting = Number(fullClearSetting ?? 0) === 1;
+        this.eligible = (autoButtonBonus >= 1 || Number(gemPurchaseCount ?? 0) > 0)
+            && Number(accountProgress ?? 0) >= 15;
     }
 }
 
@@ -379,6 +546,12 @@ export class Spelunking extends Domain {
     tunnels: Tunnel[] = []
     chapters: Chapter[] = []
     upgrades: Upgrade[] = []
+    tools: SpelunkingTool[] = [];
+    elixirs: SpelunkingElixirs = new SpelunkingElixirs();
+    manic: SpelunkingManic = new SpelunkingManic();
+    overstim: SpelunkingOverstim = new SpelunkingOverstim();
+    trackometer: SpelunkingTrackometer = new SpelunkingTrackometer();
+    automaticToolUse: SpelunkingAutomaticToolUse = new SpelunkingAutomaticToolUse();
     stamina: SpelunkingStamina[] = []
     dailyReadLimit: number = 5;
     dailyReadsUsed: number = 0;
@@ -386,7 +559,13 @@ export class Spelunking extends Domain {
     additiveRechargeContributors: RechargeContributor[] = [];
     rechargeMultiplierContributors: RechargeContributor[] = [];
     hourlyRecharge: number = this.baseHourlyRecharge;
-    trackometerLevel: number = 0;
+    get trackometerLevel(): number {
+        return this.trackometer.level;
+    }
+
+    set trackometerLevel(level: number) {
+        this.trackometer.level = level;
+    }
 
     get dailyReadsRemaining(): number {
         return Math.max(0, this.dailyReadLimit - this.dailyReadsUsed);
@@ -472,6 +651,11 @@ export class Spelunking extends Domain {
     getUpgradeBonus(index: number): number {
         return this.upgrades.find(upgrade => upgrade.index === index)?.getBonus() ?? 0;
     }
+    getEffectiveUpgradeBonus(index: number): number {
+        return this.upgrades.find(upgrade => upgrade.index === index)?.getEffectiveBonus(
+            this.manic.totalDepth, this.trackometerLevel
+        ) ?? 0;
+    }
 
     getTotalDiscoveries(): number {
         return this.tunnels.reduce((total, tunnel) => total + tunnel.discoveryCount, 0);
@@ -498,6 +682,7 @@ export class Spelunking extends Domain {
         return [
             { key: "Spelunk", perPlayer: false, default: [] },
             { key: "OptLacc", perPlayer: false, default: [] },
+            { key: "GemItemsPurchased", perPlayer: false, default: [] },
         ]
     }
 
@@ -505,6 +690,12 @@ export class Spelunking extends Domain {
     init(allItems: Item[], charCount: number) {
         this.chapters = Chapter.fromBase(initSpelunkingChapterRepo(), allItems);
         this.upgrades = Upgrade.fromBase(initSpelunkingUpgradeRepo());
+        this.tools = SpelunkingTool.fromBase(initSpelunkingToolRepo());
+        this.elixirs.init();
+        this.manic = new SpelunkingManic();
+        this.overstim = new SpelunkingOverstim();
+        this.trackometer = new SpelunkingTrackometer();
+        this.automaticToolUse = new SpelunkingAutomaticToolUse();
         const metadata = initSpelunkingMetadataRepo()[0].data;
         this.amber = metadata.rewardLabels.find(label => label.dropCode === "_")!;
         this.sharedDestructionDrops = metadata.rewardLabels
@@ -531,6 +722,8 @@ export class Spelunking extends Domain {
         this.rechargeMultiplierContributors = [];
         this.hourlyRecharge = this.baseHourlyRecharge;
         this.trackometerLevel = 0;
+        this.trackometer.fill = 0;
+        this.trackometer.unlocked = false;
         this.ownedAmber = 0;
         this.exaltedStampFragments = 0;
         this.ownedEpilogueCount = 0;
@@ -549,6 +742,7 @@ export class Spelunking extends Domain {
         const shopUpgradeLevels = (spelunkingData[5] ?? []) as (number | string)[];
         const savedChapterLevels = (spelunkingData[8] ?? []) as (number | string)[];
         const accountOptions = (data.get("OptLacc") ?? []) as (number | string)[];
+        const gemPurchases = (data.get("GemItemsPurchased") ?? []) as (number | string)[];
         spelunking.dailyReadsUsed = Number(accountOptions[410] ?? 0);
         spelunking.trackometerLevel = Number(currencies[8] ?? 0);
         spelunking.chapters.forEach(chapter => chapter.parse(savedChapterLevels));
@@ -560,9 +754,32 @@ export class Spelunking extends Domain {
         spelunking.tunnels.forEach(tunnel => tunnel.parse(spelunkingData, discoveredNames));
         spelunking.stamina.forEach(stamina => stamina.parse(savedStamina));
         // Missing shop slots stay locked. Every parse replaces levels; unlocked derives from the saved sentinel.
-        spelunking.upgrades.forEach(upgrade => {
-            upgrade.level = Number(shopUpgradeLevels[upgrade.index] ?? -1);
-        });
+        spelunking.upgrades.forEach(upgrade => upgrade.parse(shopUpgradeLevels[upgrade.index]));
+        spelunking.automaticToolUse.parse(
+            accountOptions[538], accountOptions[478], spelunking.getUpgradeBonus(12), gemPurchases[43]
+        );
+        spelunking.elixirs.parse(
+            (spelunkingData[7] ?? []) as (number | string)[],
+            (spelunkingData[48] ?? []) as (number | string)[],
+            {
+                owned: spelunking.getUpgradeBonus(23),
+                equipmentSlots: spelunking.getUpgradeBonus(24),
+                duplicates: spelunking.getUpgradeBonus(25),
+                memorizedSlots: spelunking.getUpgradeBonus(57),
+                consumptionReduction: spelunking.getUpgradeBonus(26),
+            }
+        );
+        spelunking.manic.parse(
+            spelunkingData[4]?.[10] as number | string | undefined,
+            (spelunkingData[47] ?? []) as (number | string)[],
+            spelunking.getUpgradeBonus(53) >= 1
+        );
+        spelunking.overstim.parse(
+            currencies[1], currencies[2], spelunking.getUpgradeBonus(6)
+        );
+        spelunking.trackometer.parse(
+            currencies[8], currencies[9], spelunking.getUpgradeBonus(59) >= 1
+        );
         spelunking.ownedAmber = Number(currencies[0] ?? 0);
         // Exalted Stamp Fragments add to the Compass bonus for exalted stamps.
         spelunking.exaltedStampFragments = Number(currencies[3] ?? 0);
@@ -574,6 +791,7 @@ export const updateSpelunkingChapterBonuses = (data: Map<string, any>): void => 
     const sailing = data.get("sailing") as Sailing;
     const artifactBonus = sailing.artifacts[35].getBonus();
     spelunking.chapters.forEach(chapter => chapter.prepareArtifactBonus(artifactBonus));
+    spelunking.elixirs.prepareChapterConsumptionReduction(spelunking.chapters[3].bonuses[2].getBonus());
 };
 
 export const updateSpelunkingPresentation = (data: Map<string, any>): void => {

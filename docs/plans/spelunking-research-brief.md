@@ -1,3 +1,83 @@
+## Part 3 Phase 3 — backend plan approved, 2026-10-15
+
+The human selected approved Part 3 (#437), “Amber, equipment, and advanced progression.” Accepted Parts 1 (#435) and 2 (#436) remain closed and unchanged.
+
+**Human direction:** Continue after supplying `data/domain/data/SpelunkingToolRepo.ts`; its seven identities, stats, and default/upgrade/unavailable unlock states are available directly. The human rejected further elixir exports. Use existing indexed `SpelunkingElixirRepo` descriptions unchanged beside saved ownership, equipped and memorized state, and limits. Do not parse effects from descriptions or invent missing names/descriptions. Do not run WikiBot.
+
+**Superseded blocker:** The prior supervisor decision below blocked planning on additional tool/elixir records and Manic depth-writer timing. Human-supplied tool data and the elixir-description boundary supersede that prerequisite. Read cloud-save Manic depths `[47]`; verified field identity and meaning suffice without writer-timing research.
+
+**Plan status:** The revised [Part 3 backend delivery plan](spelunking-part-3-backend-plan.md) was approved and published unchanged as [issue comment](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6187098498), with approval recorded separately in [issue comment](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6187099938). Phase 4 execution is now authorized by the current human request. Preserve accepted Part 1 Amber-haul denomination/formatting and Part 2 stamina/recharge/Trackometer maximum-stamina behavior. No commit is authorized.
+
+**Price research:** Serial game and repository pattern specialists checked the source formula, candidate APIs, and order. Website candidates are `Player.getTalentBonusAtInputs` / account talent calculations, `Cooking.getMealBonusForKey("SplkUpg")`, `Sushi.getBonusFromIndex(6|27)`, Jelly obstruction bonus index 22, saved upgrade levels, and `players[0]`'s Spelunking skill level. The source requires the first saved username's Spelunking level, not an arbitrary or highest-level character. Pipeline order is Jelly, Cooking, Sushi, players, and talent contexts before late Spelunking presentation. Talent 235 equivalence and full meal/Sushi/Jelly numerical mappings remain unverified. POST `http://127.0.0.1:3101/exec` with `{"expression":"1+1"}` returned HTTP 500; no representative source-versus-website price output was accessible. The plan exposes generated static cost facts and omits dynamic price/affordability until mapped inputs and a source-output comparison verify a case.
+
+**Evidence limits:** Retained source is Jelly_Operator v1.22 and one unpaired saved snapshot, not connected-game parity. Preserve all prior approval history, shared failures, and unobserved-state limits; no tests/build/lint/formatters were run for this planning revision.
+
+**Research references:** Mechanic evidence: `docs/game-snippets/spelunking/Spelunk.1.22.js:1-8`; [tools and automatic use](#tools-player-selection-and-automatic-use), [elixir state](#elixirs-ownership-memorization-equipment-and-limits), [Manic, Overstim, and Trackometer](#manic-mode-overstim-and-trackometer), and [shop price inputs](#shop-next-price-and-affordability). Static records: `data/domain/data/SpelunkingToolRepo.ts`, `SpelunkingElixirRepo.ts`, `SpelunkingUpgradeRepo.ts`, and `SpelunkingChapterRepo.ts`.
+
+**History:** The prior supervisor decision recorded in this handoff withheld approval pending externally supplied tool/elixir records and cited unobserved Manic writer timing. Human direction supersedes those blockers only; source/save, approval, and Parts 1/2 boundaries remain unchanged.
+
+## Part 3 Phase 4 — backend executed, 2026-10-15
+
+**Status:** Implemented approved Part 3 backend for #437. Stop before review, acceptance, issue action, staging, or commit. Parts 1 and 2 remain unchanged.
+
+**Owned changes:** `data/domain/world-7/spelunking.tsx` adds tool metadata and unlock checks, automatic-use setting and gates, separate saved elixir equipment/memorization and limits, saved Manic/Overstim/Trackometer progress, thresholds/effects, effective upgrade bonuses, and the saved-stamina team eligibility rule. The existing Spelunking owner, save key, parser, and pipeline registrations remain. `Upgrade.getBonus`, `getUpgradeBonus`, `trackometerLevel`, and `getTrackometerStaminaBonus` retain their prior contracts. Existing late Chapter processing prepares elixir consumption reduction after its Sailing artifact input is ready.
+
+**Scope:** Reused supplied `SpelunkingToolRepo`, unchanged indexed `SpelunkingElixirRepo` descriptions, shop metadata, and saved fields. Exposed the source-backed character stamina eligibility rule without inventing current team selection. Tunnel-specific player slot counts have no supplied typed repository fields; this backend does not copy or reconstruct that static table. Did not infer tool/AUTO run selections or active elixir effects. Did not add current shop prices or affordability because approved source-input and price parity remain unverified. No WikiBot, generated-data edits, authored descriptions, or progression simulation occurred.
+
+**Runtime and test evidence:** `tests/domains/spelunking/part-3-pipeline.test.ts` runs fresh normal account factories and repeats the normal account pipeline twice. `yarn test tests/domains/spelunking/part-3-pipeline.test.ts --runInBand` passed both tests. The test verifies populated fields, generated records, unlocks, saved team eligibility, limits, progression thresholds, effective upgrade bonuses, fresh instances, and stable repeated processing. The first run exposed that elixir consumption reduction read a Chapter bonus before its artifact input was prepared (`artifact://62`); the final implementation derives it in the existing Chapter preparation step, and the final Part 3 run passed. Full suite output is retained at [`../../.omp/research/spelunking-part-3-tests.log`](../../.omp/research/spelunking-part-3-tests.log); final focused account-runtime output is retained at [`../../.omp/research/spelunking-part-3-runtime.log`](../../.omp/research/spelunking-part-3-runtime.log).
+
+**Existing-suite failure:** `yarn test tests/domains/spelunking --runInBand` ran 9 suites: 6 passed and 3 failed, with 26 tests passing and 71 failing. All failures occur at existing Part 2 fixture-pairing assertions: those tests expect SHA-256 `42139b34b95e9fcad751187d25a04ae760238e798410a1a397902f826261a6b0`, while the already-modified `tests/fixtures/saves/latest.json` hashes to `b5d705c3427e10cb15400d08099f858b8c31565d058ba465c62f69f73844ea88`. That fixture was modified before this phase. The Part 3 suite passed in the same run. No fixture or historical pairing assertion was changed.
+
+**Evidence limits:** Runtime exercise used the retained account-factory save, not a connected game session. Existing source evidence remains offline Jelly_Operator v1.22 and an unpaired save. The previously reported source `/exec` HTTP 500 remains untested; no game endpoint was queried or gameplay performed. Toggle-on Manic, partial/absent state, threshold crossing, overflow, and alternate accounts remain unobserved. Dynamic prices/affordability remain intentionally omitted. No full TypeScript check, build, lint, formatter, or review ran.
+
+**Preservation:** Kept prior Part 1/2 code and pending user-owned changes, including the existing Part 1/2 changes in `spelunking.tsx` and the modified save fixture. Supplied tool data and generated directories were not edited. No staging, commit, or tracker action occurred.
+ 
+## Part 3 Phase 5 — independent backend review, 2026-10-15
+
+**Scope and method:** Reviewed the Part 3 delta in `data/domain/world-7/spelunking.tsx` and `tests/domains/spelunking/part-3-pipeline.test.ts` against issue #437, the approved backend plan, `CODING_STANDARDS.md`, and backend patterns. Code stayed read-only. No checks were run or rerun.
+
+**Standards finding:**
+- **MODEL-01:** `spelunking.tsx:761-765` calculates elixir ownership, equipment-slot, duplicate, memorization, and upgrade-consumption values in the parent parser. `SpelunkingElixirs.parse` only copies those values. Move these aspect calculations onto `SpelunkingElixirs`; pass the required upgrade inputs. This splits one concept's rules across parent and child.
+
+**Spec findings:**
+- **Tunnel slots:** Issue #437 requires slot requirements, and the approved plan states tunnel-specific player slots range from 3–12 (`spelunking-part-3-backend-plan.md:19`). The backend exposes stamina eligibility (`spelunking.tsx:348-350`) but no tunnel capacity. The execution handoff notes that available typed static data lacks these counts. Do not copy or reconstruct the static table; obtain approved generated metadata or revise the scope explicitly.
+- **Parse coverage:** The plan requires absent, partial, populated, changed, and repeated parses (`spelunking-part-3-backend-plan.md:45-49`). The new tests cover one populated save and repeated processing of that same save (`part-3-pipeline.test.ts:45-120`). They do not verify state replacement for absent, partial, changed saves, empty equipped slots, or alternate AUTO gates. Add those cases when authorized data is available.
+
+**Evidence and boundaries:** The retained focused Jest receipt shows two normal account-factory tests passed, including fresh factories and repeated processing. It is not separate connected-game evidence; the approved plan does not require gameplay execution. Source evidence remains offline v1.22 and one unpaired save. The broader suite remains blocked by the previously recorded fixture hash mismatch; no rerun or clean-suite claim. Review found no authored descriptions, frontend-specific backend coupling, speculative price support, or Part 1/2 regression in the reviewed delta. No acceptance, tracker action, staging, or commit occurred.
+
+**Decision:** Return the standards finding and both spec findings for human direction. Stop before changes.
+
+## Part 3 selected backend revision addressing Phase 5 review, 2026-10-15
+
+**Authority and disposition:** The human selected MODEL-01 and parse-coverage findings only. Supervisor rejected the tunnel-player-slot finding: equipment/elixir slot rules remain required, but pre-delve team capacity was incidental research, not a team-planning outcome. The prior review text above remains unchanged. The backend plan now states that team-selection capacity is outside this outcome; no player-slot table, team planner, or team-selection UI was added.
+
+**Backend revision:** `Spelunking.parse` now passes saved elixir fields and shop-upgrade bonuses to `SpelunkingElixirs.parse`. The elixir owner calculates ownership, equipment slots, duplicate cap, memorization limit, and upgrade consumption contribution. Chapter consumption remains prepared in the existing late Chapter/Sailing step. Raw save translation stays at the parse boundary; no generic aspect framework was added.
+
+**Regression coverage:** Replaced generated-repository equality assertions with consumer-visible rule assertions. The focused account-factory test covers populated-to-absent elixir fields, partial and changed equipment/memorization state, `-1` empty slots, replaced upgrade-derived limits, prepared Chapter consumption reduction, and AUTO access through upgrade or gem purchase while enforcing account progress. Inputs use isolated in-memory `Cloudsave` copies; `latest.json` and historical fixture-pairing tests were not changed.
+
+**Verification:** `yarn test tests/domains/spelunking/part-3-pipeline.test.ts --runInBand` passed: 1 suite, 4 tests. A disposable non-Jest normal account-factory smoke passed through populated, repeated, absent-elixir-fields, partial-empty-slot, changed-elixir/upgrades, gem-purchase AUTO, and below-progress-gate states. Its retained output is [`../../.omp/research/spelunking-part3-runtime-smoke.log`]; the temporary TypeScript runner was removed. The smoke used in-memory save copies and an empty localStorage environment shim.
+
+**Limits:** This exercises the existing retained account snapshot, not a connected game; source evidence remains offline Jelly_Operator v1.22 and one unpaired save. The known wider Spelunking fixture-hash failure was not rerun. The reported offline source `/exec` HTTP 500 was not retried. No build, lint, formatter, TypeScript check, independent review, tracker action, staging, or commit occurred.
+
+**Stop:** Phase 5 review history and Parts 1/2 work remain preserved. Stop before fresh independent review, acceptance, publication, or commit.
+
+## Part 3 backend acceptance and isolated commit preparation, 2026-10-15
+
+**Acceptance:** The human accepted the reviewed Part 3 backend. The fresh independent Phase 5 review found zero Standards and zero Spec findings.
+
+**Accepted evidence:** Four focused Part 3 tests passed. The expanded non-Jest normal-factory smoke passed seven scenarios; provenance is retained in `.omp/research/spelunking-part3-runtime-smoke-expanded.log`. These checks were not rerun.
+
+**Accepted limits, not waivers:** Evidence uses one unpaired save and offline Jelly_Operator v1.22, not connected-game parity. The source `/exec` returned HTTP 500. No positive upgrade 61 contribution was observed. The wider suite remains failed on the existing fixture hash mismatch. No TypeScript, build, or lint claim is made. No UI acceptance is implied.
+
+**Commit isolation:** Reconstructed `/tmp/spelunking-part3-prepart3.tsx` from the Part 3 worker's recorded pre-edit source inspection, accepted Part 2 recharge implementation packet, and audited current Part 1/2-only fields/reset. This is not a byte-for-byte retained full-file image. Baseline SHA-256 is `2497bda4294237ffcd0d79c750df275e491ce9584d5e0e90c3028d92912f632b`. It retains Part 1/2 `baseHourlyRecharge`, contributor arrays, recharge reset, and direct `trackometerLevel`, while excluding Part 3 code. `/tmp/spelunking-part3-accepted.patch` contains only Part 3 backend delta, owned test, approved plan, and Part 3 handoff records. No Part 2 recharge fields/reset, generated exports, or unrelated handoff history are added. Artifact hashes are recorded in `/tmp/spelunking-part3-isolation.txt`.
+
+**Fresh acceptance method:** Do not commit until Part 1/2 foundation is already in `HEAD`; otherwise a Part 3 blob necessarily captures or removes overlapping Part 2 source. Once foundation is committed, create a disposable index from `HEAD`, apply this patch, verify its four paths and diff, then commit from that index. Never stage through the user's index or use reset, checkout, restore, or clean.
+
+**Preservation evidence:** Real index SHA-256 before and after isolation is `a626f1143de03ad0e0f26bbb9b2d60394d9147b41eb84c4f43ba6c2cba862a28`. Current worktree SHA-256 values: `spelunking.tsx` `4e08ad4da1ce75c0f3b678854ffbb768e38d4c2ec8100e325ed0918444ecfef0`; modified save `latest.json` `b5d705c3427e10cb15400d08099f858b8c31565d058ba465c62f69f73844ea88`; supplied tool export `f27462c0f00e118ff803cc2f94c24720d7fc8c75f159216391b0084aac39bedd`; elixir export `c9319f558b8dd51c2e508f6f026b90adc02a517264232d628aa30023f9c7120e`. Isolation did not edit production, test, generated export, or other handoff content.
+
+**Local commit:** Accepted Part 3 backend committed locally. The commit hash is returned in the acceptance receipt. No tests or runtime checks were rerun; isolation checks covered artifact scope and preservation hashes only. No push, PR, deployment, or issue action occurred.
+
+
 # Spelunking: research brief
 
 **Status:** The delegated supervisor accepted the selected Part 2 (#436) compact-layout UI and its stated check limits on 2026-10-14. Fresh Phase 8 Standards review has zero actionable findings; Spec review has zero concrete findings. All three approved outcomes are complete. Overall verification remains `passed: false`, exit 1, with `scopedAssertionsPassed: true`, `runtimeClean: false`, five errors, and nine warnings. Acceptance covers scoped outcomes and limits, not clean runtime. Shared failures and historical TS18047 remain failed and unwaived. Commit only this accepted layer and stop.
