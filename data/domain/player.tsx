@@ -133,6 +133,7 @@ export class Player {
     cardInfo: CardInfo | undefined = undefined; // TODO: Do BETTER!
     activeBuffs: Talent[] = [];
     activePrayers: number[] = [];
+    savedPrayerSlotCount: number = 0;
     cooldown: Map<Talent, number> = new Map();
     invBagsUsed: Record<string, number> = {};
     labInfo: LabInfo = {
@@ -687,6 +688,7 @@ const keyFunctionMap: Record<string, Function> = {
     },
     "activePrayers": (doc: Cloudsave, player: Player) => {
         const activePrayers = safeJsonParse(doc, `Prayers_${player.playerID}`, []) as number[];
+        player.savedPrayerSlotCount = activePrayers.length;
         player.activePrayers = activePrayers.filter((prayer) => prayer != -1);
     },
     "cooldowns": (doc: Cloudsave, player: Player) => {

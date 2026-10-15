@@ -382,8 +382,7 @@ export class PlayerStats {
         for (const sign of player.starSigns) {
             signDropPercent += sign.getBonus('Drop Rate') + sign.getBonus('Drop Rarity');
         }
-        const selectedPrayerPercent = player.activePrayers.includes(7)
-            ? prayers.find(prayer => prayer.index === 7)!.getBonus() : 0;
+        const prayerPercent = prayers.find(prayer => prayer.index === 7)!.getBonusForPlayer(player);
         const cloverShrinePercent = shrines[ShrineConstants.DropRateShrine].getMapIndependentBonus();
         const shinyDropPercent = breeding.shinyBonuses.find(bonus => bonus.data.index === 0)?.getBonus() ?? 0;
         const wisdomMonumentPercent = hole.monuments.monuments.Wisdom.bonuses.find(bonus => bonus.index === 6)!.getBonus();
@@ -423,7 +422,7 @@ export class PlayerStats {
                 + (5 * dreamDropLevel + (summoning.getSummoningWinnerBonusFromIndex(9)
                     + (tome.getTomeBonus(2, player)
                         + (firstAdditivePercent + (research.getBonusForId(173, 0) + companion132))))));
-        const prayerAndAccountPercent = selectedPrayerPercent
+        const prayerAndAccountPercent = prayerPercent
             + (sigils.sigils[11].getBonus()
                 + (shinyDropPercent + (arcade.bonuses[27].getBonus()
                     + (getCompanionActiveBonus(companions, 3) + companion50 + laterAdditivePercent))));

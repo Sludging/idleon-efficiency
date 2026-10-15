@@ -14,7 +14,7 @@ import { Shrines, updateShrines } from './world-3/construction/shrines';
 import { Item } from './items';
 import { Storage, updateStorage } from './storage';
 import { Quests } from './quests';
-import { Prayers } from './world-3/prayers';
+import { Prayers, updatePrayerPlayerBonuses } from './world-3/prayers';
 import { Refinery, updateRefinery } from './world-3/construction/refinery';
 import { SaltLick } from './world-3/construction/saltLick';
 import { Printer, updatePrinter } from './world-3/construction/printer';
@@ -382,6 +382,8 @@ const postProcessingMap: Record<string, Function> = {
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
     "playerSecondaryStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSecondaryStats(accountData),
+    // Character Prayer bonuses use parsed Superbits and preserve the distinction between absent and empty saved slots.
+    "prayerPlayerBonuses": (_doc: Cloudsave, accountData: Map<string, any>) => updatePrayerPlayerBonuses(accountData),
     // Drop rate follows Luck and every prepared persistent source, including late Lab and Sigil results.
     "playerDropRates": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDropRates(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),

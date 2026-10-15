@@ -42,6 +42,7 @@ describe('Persistent drop-rate immediate owner results', () => {
   let data: Map<string, unknown>;
   let player: Player;
   let terms: Record<string, number>;
+  let recipientPrayer7: number;
   const owner = <T,>(key: string): T => data.get(key) as T;
   beforeAll(() => {
     const results = loadExtractionResults('player-drop-rate-data.json');
@@ -49,6 +50,12 @@ describe('Persistent drop-rate immediate owner results', () => {
     terms = results.extractions.drop_rate.result.terms;
     data = loadGameDataFromSave('latest');
     player = getTargetPlayer(data.get('players') as Player[]);
+    const prayerResults = loadExtractionResults('prayer-player-bonuses-data.json');
+    validateExtractionHealth(prayerResults);
+    const nativeRecipients = prayerResults.extractions.prayer_player_bonuses.result.players as {
+      playerId: number; bonuses: Record<number, number>;
+    }[];
+    recipientPrayer7 = nativeRecipients.find(recipient => recipient.playerId === player.playerID)!.bonuses[7];
   });
   const cards = (): Card[] => [...new Set([...player.cardInfo!.equippedCards, ...player.cardInfo!.cards.filter(card => card.passive)])];
   const office = (key: string): number => player.postOffice.reduce((total, box) => total + box.bonuses.reduce(
@@ -78,7 +85,9 @@ describe('Persistent drop-rate immediate owner results', () => {
     { key: "signDrop", name: "saved Drop Rate and Drop Rarity star signs", getValue: () => player.starSigns.reduce((total, sign) => total + sign.getBonus('Drop Rate') + sign.getBonus('Drop Rarity'), 0) },
     { key: "guild10", name: "Guild drop rate", getValue: () => owner<Guild>('guild').guildBonuses[10].getBonus() },
     { key: "shrine4", name: "permanently enabled Clover Shrine", getValue: () => owner<Shrine[]>('shrines')[4].getMapIndependentBonus() },
-    { key: "prayer7", name: "saved drop-rate prayer selection", getValue: () => player.activePrayers.includes(7) ? owner<Prayer[]>('prayers').find(prayer => prayer.index === 7)!.getBonus() : 0 },
+    { key: "prayer7", name: "complete recipient drop-rate Prayer bonus", getValue: () =>
+      owner<Prayer[]>('prayers').find(prayer => prayer.index === 7)!.getBonusForPlayer(player),
+      getExpected: () => recipientPrayer7 },
     { key: "sigil11", name: "prepared drop-rate Sigil", getValue: () => owner<Sigils>('sigils').sigils[11].getBonus() },
     { key: "shinyDrop", name: "Shiny pet drop rate", getValue: () => owner<Breeding>('breeding').shinyBonuses.find(bonus => bonus.data.index === 0)?.getBonus() ?? 0 },
     { key: "arcade27", name: "Arcade drop rate", getValue: () => owner<Arcade>('arcade').bonuses[27].getBonus() },
