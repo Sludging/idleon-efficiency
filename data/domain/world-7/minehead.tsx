@@ -6,6 +6,7 @@ import { SkillsIndex } from "../SkillsIndex";
 import { MineheadOpponentModel } from "../model/mineheadOpponentModel";
 import { MineheadUpgradeModel } from "../model/mineheadUpgradeModel";
 import { SushiStation } from "./sushi";
+import type { ResearchGrid } from "./research";
 
 export class MineheadOpponent {
     defeated: boolean = false;
@@ -76,6 +77,7 @@ export class Minehead extends Domain {
     opponentsDefeated: number = 0;
     currency: number = 0;
     serverCostScaling: number = 1;
+    private preparedTradeDropRateMultiplier: number | undefined;
 
     getRawKeys(): RawData[] {
         return [
@@ -97,6 +99,7 @@ export class Minehead extends Domain {
 
     parse(data: Map<string, any>): void {
         const minehead = data.get(this.getDataKey()) as Minehead;
+        minehead.preparedTradeDropRateMultiplier = undefined;
         const researchData = (data.get("Research") as number[][] | undefined) || [];
         const upgradeLevels = researchData[8] || [];
         const player0Skills = (data.get("Lv0_0") as number[] | undefined) || [];
@@ -111,6 +114,18 @@ export class Minehead extends Domain {
             upgrade.level = Number(upgradeLevels[upgrade.index]) || 0;
             upgrade.unlocked = researchLevel >= upgrade.getRequiredLevel();
         });
+    }
+
+    prepareTradeDropRateMultiplier(researchBonus: number, tradeBonusPercent: number): void {
+        // Insider Trading Secrets grants its trade bonus only when its primary Research bonus reaches one.
+        this.preparedTradeDropRateMultiplier = researchBonus >= 1 ? 1 + tradeBonusPercent / 100 : 1;
+    }
+
+    getTradeDropRateMultiplier(): number {
+        if (this.preparedTradeDropRateMultiplier === undefined) {
+            throw new Error("Minehead trade drop-rate multiplier has not been calculated");
+        }
+        return this.preparedTradeDropRateMultiplier;
     }
 
     getOpponentsDefeated(): number {
@@ -157,4 +172,10 @@ export const updateMinehead = (data: Map<string, any>) => {
         upgrade.sushiCostReduction = sushiCostReduction;
     });
     return minehead;
+};
+
+export const updateMineheadDropRate = (data: Map<string, any>): void => {
+    const minehead = data.get("minehead") as Minehead;
+    const research = data.get("research") as ResearchGrid;
+    minehead.prepareTradeDropRateMultiplier(research.getBonusForId(168, 0), research.getBonusForId(168, 2));
 };

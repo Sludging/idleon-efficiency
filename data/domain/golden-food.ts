@@ -61,6 +61,7 @@ export interface GoldenFoodResults {
     allStatPercent: number;
     defencePercent: number;
     baseAccuracy: number;
+    dropRatePercent: number;
 }
 
 export class GoldenFood extends Domain {
@@ -131,6 +132,11 @@ export class GoldenFood extends Domain {
         return this.getResults(player).baseAccuracy;
     }
 
+    // Drop rate contributes percentage points before the character's drop-rate multiplier is composed.
+    getDropRatePercent(player: Player): number {
+        return this.getResults(player).dropRatePercent;
+    }
+
     private calculateEffectivity(account: GoldenFoodAccountInputs, character: GoldenFoodCharacterInputs,
         talent99: number, alchemy: number, deathBringer: number): number {
         const cardsAndLateBonuses = Math.min(4 * account.cropFallCardLevel, 50)
@@ -189,6 +195,7 @@ export class GoldenFood extends Domain {
             allStatPercent: this.calculateEffect(player, sneaking, 'AllStatz', effectivity),
             defencePercent: this.calculateEffect(player, sneaking, 'Defence', effectivity),
             baseAccuracy: this.calculateEffect(player, sneaking, 'BaseAcc', effectivity),
+            dropRatePercent: this.calculateEffect(player, sneaking, 'DropRatez', effectivity),
         });
     }
 

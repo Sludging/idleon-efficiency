@@ -6,7 +6,7 @@ import { Food } from './items';
 import type { PlayerStatues } from './world-1/statues';
 import type { Player } from './player';
 import { ClassIndex, Talent } from './talents';
-import { getCompanionActiveBonus, type Companion } from './companions';
+import { getCompanionActiveBonus, isCompanionLevelTwo, type Companion } from './companions';
 import { getStampBonusForKey, type Stamp } from './world-1/stamps';
 import type { Achievement } from './achievements';
 import type { Family } from './family';
@@ -34,6 +34,20 @@ import type { Poppy } from './world-2/poppy';
 import { ShrineConstants, type Shrine } from './world-3/construction/shrines';
 import type { Prayer } from './world-3/prayers';
 import type { Divinity } from './world-5/divinity';
+import type { Account } from './account';
+import type { Grimoire } from './grimoire';
+import type { Friends } from './friends';
+import type { Equinox } from './world-3/equinox';
+import type { Tome } from './world-4/tome';
+import { CropScientistBonusText } from './world-6/farming';
+import type { Emperor } from './world-6/emperor';
+import type { RoyalArmory } from './world-6/royalArmory/royalArmory';
+import type { ResearchGrid } from './world-7/research';
+import type { Minehead } from './world-7/minehead';
+import type { LegendTalents } from './world-7/legendTalents';
+import type { Spelunking } from './world-7/spelunking';
+import type { SushiStation } from './world-7/sushi';
+import type { JellyOperator } from './world-7/jellyOperator';
 
 interface AttributeSources {
     alchemy: Alchemy;
@@ -99,6 +113,42 @@ interface SecondaryStatSources {
     poppy: Poppy;
 }
 
+interface DropRateSources {
+    account: Account;
+    alchemy: Alchemy;
+    stamps: Stamp[][];
+    family: Family;
+    sigils: Sigils;
+    breeding: Breeding;
+    arcade: Arcade;
+    guild: Guild;
+    hole: Hole;
+    shrines: Shrine[];
+    prayers: Prayer[];
+    goldenFood: GoldenFood;
+    equipmentSets: EquipmentSets;
+    votes: Votes;
+    orion: Orion;
+    companions: Companion[];
+    sneaking: Sneaking;
+    summoning: Summoning;
+    achievements: Achievement[];
+    farming: Farming;
+    grimoire: Grimoire;
+    upgradeVault: UpgradeVault;
+    emperor: Emperor;
+    friends: Friends;
+    legendTalents: LegendTalents;
+    spelunking: Spelunking;
+    royalArmory: RoyalArmory;
+    tome: Tome;
+    research: ResearchGrid;
+    minehead: Minehead;
+    equinox: Equinox;
+    sushi: SushiStation;
+    jellyOperator: JellyOperator;
+}
+
 function getStatCards(player: Player): Card[] {
     // Equipped passive cards must not contribute twice. Reuse prepared card objects without a set or map.
     const cards: Card[] = [];
@@ -161,6 +211,7 @@ export class PlayerStats {
     private skillPowers: Record<SkillPowerSkill, number> | undefined;
     private preparedDefence: number | undefined;
     private preparedAccuracy: number | undefined;
+    private preparedDropRateMultiplier: number | undefined;
 
     get defence(): number {
         if (this.preparedDefence === undefined) {
@@ -174,6 +225,13 @@ export class PlayerStats {
             throw new Error('Accuracy has not been calculated');
         }
         return this.preparedAccuracy;
+    }
+
+    get dropRateMultiplier(): number {
+        if (this.preparedDropRateMultiplier === undefined) {
+            throw new Error('Drop-rate multiplier has not been calculated');
+        }
+        return this.preparedDropRateMultiplier;
     }
 
     get weaponPower(): number {
@@ -303,6 +361,115 @@ export class PlayerStats {
                 + (Card.GetTotalBonusForId(cards, 23) + player.gear.getBonus(EquipmentBonus.Accuracy) + goldenFood.getBaseAccuracy(player))
                 + (getStampBonusForKey(stamps, 'BaseAcc') + upgradeVault.getBonusForId(4)))
             + player.gear.getProperty('Accuracy');
+    }
+
+    updateDropRate(player: Player, players: readonly Player[], sources: DropRateSources): void {
+        this.preparedDropRateMultiplier = undefined;
+        const { account, alchemy, stamps, family, sigils, breeding, arcade, guild, hole, shrines,
+            prayers, goldenFood, equipmentSets, votes, orion, companions, sneaking, summoning,
+            achievements, farming, grimoire, upgradeVault, emperor, friends, legendTalents,
+            spelunking, royalArmory, tome, research, minehead, equinox, sushi, jellyOperator } = sources;
+        const cards = getStatCards(player);
+        const talentInputs = player.finalTalentInputs;
+        const miniBossCardLevel = player.cardInfo!.cards.find(card => card.id === 'mini5a')!.getLevels();
+        const caveCCardLevel = player.cardInfo!.cards.find(card => card.id === 'caveC')!.getLevels();
+        const caveDCardLevel = player.cardInfo!.cards.find(card => card.id === 'caveD')!.getLevels();
+        const anniversaryCardLevel = player.cardInfo!.cards.find(card => card.id === 'anni4Event1')!.getLevels();
+        const luckEventCardLevel = player.cardInfo!.cards.find(card => card.id === 'luckEvent1')!.getLevels();
+        const companion132 = getCompanionActiveBonus(companions, 132);
+        const companion50 = getCompanionActiveBonus(companions, 50);
+        let signDropPercent = 0;
+        for (const sign of player.starSigns) {
+            signDropPercent += sign.getBonus('Drop Rate') + sign.getBonus('Drop Rarity');
+        }
+        const selectedPrayerPercent = player.activePrayers.includes(7)
+            ? prayers.find(prayer => prayer.index === 7)!.getBonus() : 0;
+        const cloverShrinePercent = shrines[ShrineConstants.DropRateShrine].getMapIndependentBonus();
+        const shinyDropPercent = breeding.shinyBonuses.find(bonus => bonus.data.index === 0)?.getBonus() ?? 0;
+        const wisdomMonumentPercent = hole.monuments.monuments.Wisdom.bonuses.find(bonus => bonus.index === 6)!.getBonus();
+        const dreamDropLevel = equinox.upgrades.find(upgrade => upgrade.index === 8)!.level;
+        const cloudDropCompleted = Number(equinox.challenges.find(challenge => challenge.index === 69)!.complete);
+
+        // Luck changes curves at 1,000. Neither branch rounds its contribution.
+        const luckFraction = this.luck < 1000
+            ? (Math.pow(this.luck + 1, 0.37) - 1) / 40
+            : ((this.luck - 1000) / (this.luck + 2500)) * 0.5 + 0.297;
+        // Preserve these nested progression additions before the ordinary percentage sum.
+        const progressionDropPercent = hole.schematics.find(schematic => schematic.index === 82)!.getBonus(20)
+            + (wisdomMonumentPercent
+                + (emperor.emperorBonuses.find(bonus => bonus.index === 11)!.getBonus()
+                    + (equipmentSets.getSetBonus('EFAUNT_SET', player, true)
+                        + (farming.getExoticMarketBonusValue(59)
+                            + (friends.getFriendBonus(3) + (legendTalents.getBonusFromIndex(1)
+                                + (spelunking.getUpgradeBonus(50) + (getCompanionActiveBonus(companions, 111)
+                                    + player.getTalentBonusAtInputs(239, talentInputs) * (royalArmory.totalResourceGrade / 1)))))))));
+        const firstAdditivePercent = Math.min(1.5 * miniBossCardLevel, 10)
+            + (Math.min(4 * caveCCardLevel + 6 * caveDCardLevel, 100)
+                + (Math.min(2 * anniversaryCardLevel, 20) + Math.min(3 * luckEventCardLevel, 25)))
+            + (goldenFood.getDropRatePercent(player)
+                + (6 * Number(achievements[377].completed) + 4 * Number(achievements[381].completed)
+                    + (orion.getGlobalBonus(4)
+                        + (farming.landrankDatabase.getUpgradeBonusForPlayer(9, player)
+                            + (votes.getCurrentBonus(27)
+                                + (hole.schematics.find(schematic => schematic.index === 46)!.getBonus()
+                                    + (farming.cropScientist.getBonus(CropScientistBonusText.DropRate)
+                                        + (grimoire.getUpgradeBonus(44) + (upgradeVault.getBonusForId(18)
+                                            + (hole.measurements.find(measurement => measurement.index === 15)!.getBonus()
+                                                + (getCompanionActiveBonus(companions, 22)
+                                                    + getCompanionActiveBonus(companions, 158) + progressionDropPercent)))))))))));
+        // Boss Battle Spillover uses this week's high-water count, not the selected boss difficulty.
+        const laterAdditivePercent = getStampBonusForKey(stamps, 'DropRate')
+            + (player.getTalentBonusAtInputs(655, talentInputs) * account.weeklyBoss.defeatedDifficultiesThisWeek
+                + (5 * dreamDropLevel + (summoning.getSummoningWinnerBonusFromIndex(9)
+                    + (tome.getTomeBonus(2, player)
+                        + (firstAdditivePercent + (research.getBonusForId(173, 0) + companion132))))));
+        const prayerAndAccountPercent = selectedPrayerPercent
+            + (sigils.sigils[11].getBonus()
+                + (shinyDropPercent + (arcade.bonuses[27].getBonus()
+                    + (getCompanionActiveBonus(companions, 3) + companion50 + laterAdditivePercent))));
+        const signAndSetPercent = signDropPercent
+            + (guild.guildBonuses[10].getBonus()
+                + (player.cardInfo!.getBonusForId(5) + (player.cardInfo!.getBonusForId(6)
+                    + (cloverShrinePercent + prayerAndAccountPercent))));
+        const additivePercent = player.getTalentBonusAtInputs(279, talentInputs)
+            + (postOfficeBonus(player, 'DropRate')
+                + (player.gear.getBonus(EquipmentBonus.DropRate) + player.gear.getBonus(EquipmentBonus.DropChance)
+                    + (alchemy.getBubbleBonusForKey('DropRate', player) + (Card.GetTotalBonusForId(cards, 10)
+                        + (player.getTalentBonusAtInputs(24, talentInputs) + signAndSetPercent)))));
+        // Only percentage points divide by 100. The Luck contribution remains outside that division.
+        let multiplier = 1.4 * luckFraction + additivePercent / 100 + 1;
+        // Chips can raise a base below five to five, but cannot reduce a larger base.
+        if (multiplier < 5) {
+            multiplier = Math.min(5, multiplier + player.getChipBonus('dr') / 100);
+        }
+        // These flat bundle and mastery additions occur on opposite sides of the pirate talent multiplier.
+        if (account.hasDeathBringerBundle) multiplier += 2;
+        multiplier *= Talent.getArchlordOfThePiratesMultiplier(players, talentInputs, account.plunderousMobKills);
+        if (sneaking.completedMasteries >= 1) multiplier += 0.3;
+        if (account.hasExplorerBundle) multiplier = 1.2 * multiplier;
+
+        // Map multipliers stay excluded. Minehead's two rewards are permanent account progression.
+        multiplier *= 1 + royalArmory.statues.find(statue => statue.index === 1)!.getBonus() / 100;
+        multiplier *= 1 + Card.GetTotalBonusForId(cards, 101) / 100;
+        multiplier *= 1 + family.getClassBonus(ClassIndex.Royal_Guardian)!.getBonus(player) / 100;
+        multiplier *= 1 + 0.3 * getCompanionActiveBonus(companions, 168);
+        multiplier *= 1 + (Math.min(0.5, companion132) + 0.2 * isCompanionLevelTwo(companions, 132));
+        multiplier *= 1 + (sushi.getBonusFromIndex(48) + jellyOperator.getObstructionBonus(14)) / 100;
+        multiplier *= Math.max(1, minehead.getTradeDropRateMultiplier());
+        multiplier *= 1 + tome.getTomeBonus(7, player) / 100;
+        multiplier *= 1 + player.gear.getBonus(EquipmentBonus.BonusDropRate) / 100;
+        multiplier *= 1 + minehead.getBonusFromIndex(0) / 100;
+        multiplier *= 1 + 5 * cloudDropCompleted / 100;
+
+        // This pristine charm already exposes a complete multiplier, unlike the percentage owner inputs.
+        const pristineCharm = sneaking.pristineCharms.find(charm => charm.data.itemId === 3)!;
+        multiplier *= pristineCharm.unlocked ? pristineCharm.getBonus() : 1;
+        multiplier *= 1 + player.gear.getBonus(EquipmentBonus.DropRateMulti) / 100;
+        multiplier *= 1 + alchemy.getVialBonusForKey('7drMulto') / 100;
+        multiplier *= Math.max(1, Math.min(1.3, 1 + getCompanionActiveBonus(companions, 26))
+            * (1 + 0.5 * getCompanionActiveBonus(companions, 160)));
+        multiplier *= Math.max(1, Math.min(1.01, 1 + companion50 / 2500));
+        this.preparedDropRateMultiplier = multiplier;
     }
 
     update(player: Player, players: readonly Player[], sources: AttributeSources): void {
@@ -480,5 +647,47 @@ export const updatePlayerSecondaryStats = (accountData: Map<string, any>): void 
     };
     for (const player of players) {
         player.stats.updateSecondaryStats(player, sources);
+    }
+};
+
+export const updatePlayerDropRates = (accountData: Map<string, any>): void => {
+    const players = accountData.get('players') as Player[];
+    const sources: DropRateSources = {
+        account: accountData.get('account') as Account,
+        alchemy: accountData.get('alchemy') as Alchemy,
+        stamps: accountData.get('stamps') as Stamp[][],
+        family: accountData.get('family') as Family,
+        sigils: accountData.get('sigils') as Sigils,
+        breeding: accountData.get('breeding') as Breeding,
+        arcade: accountData.get('arcade') as Arcade,
+        guild: accountData.get('guild') as Guild,
+        hole: accountData.get('hole') as Hole,
+        shrines: accountData.get('shrines') as Shrine[],
+        prayers: accountData.get('prayers') as Prayer[],
+        goldenFood: accountData.get('goldenFood') as GoldenFood,
+        equipmentSets: accountData.get('equipmentSets') as EquipmentSets,
+        votes: accountData.get('votes') as Votes,
+        orion: accountData.get('orion') as Orion,
+        companions: accountData.get('companions') as Companion[],
+        sneaking: accountData.get('sneaking') as Sneaking,
+        summoning: accountData.get('summoning') as Summoning,
+        achievements: accountData.get('achievements') as Achievement[],
+        farming: accountData.get('farming') as Farming,
+        grimoire: accountData.get('grimoire') as Grimoire,
+        upgradeVault: accountData.get('upgradeVault') as UpgradeVault,
+        emperor: accountData.get('emperor') as Emperor,
+        friends: accountData.get('friends') as Friends,
+        legendTalents: accountData.get('legendTalents') as LegendTalents,
+        spelunking: accountData.get('spelunking') as Spelunking,
+        royalArmory: accountData.get('royalArmory') as RoyalArmory,
+        tome: accountData.get('tome') as Tome,
+        research: accountData.get('research') as ResearchGrid,
+        minehead: accountData.get('minehead') as Minehead,
+        equinox: accountData.get('equinox') as Equinox,
+        sushi: accountData.get('sushi') as SushiStation,
+        jellyOperator: accountData.get('jellyOperator') as JellyOperator,
+    };
+    for (const player of players) {
+        player.stats.updateDropRate(player, players, sources);
     }
 };

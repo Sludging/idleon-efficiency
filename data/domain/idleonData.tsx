@@ -6,7 +6,7 @@ import { Alchemy, updateAlchemy, updateAlchemySlabBubbles, updateAlchemyTomeBubb
 import { updatePlayerTalentContexts } from './player';
 import { updateEquipmentProperties } from './equipment';
 import { GoldenFood, updateGoldenFood } from './golden-food';
-import { updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerStats } from './player-stats';
+import { updatePlayerDropRates, updatePlayerPowers, updatePlayerSecondaryStats, updatePlayerStats } from './player-stats';
 import { Bribes } from './world-1/bribes';
 import { GemStore } from './gemPurchases';
 import { Achievements } from './achievements';
@@ -59,7 +59,7 @@ import { Farming, updateFarmingCropScientistBonuses, updateFarmingDisplayData, u
 import { SushiStation, updateSushiStation } from './world-7/sushi';
 import { Spelunking, updateSpelunkingChapterBonuses, updateSpelunkingPresentation } from './world-7/spelunking';
 import { ResearchGrid, updateResearchGrid, updateResearchDisplay } from './world-7/research';
-import { Minehead, updateMinehead } from './world-7/minehead';
+import { Minehead, updateMinehead, updateMineheadDropRate } from './world-7/minehead';
 import { Glimbo } from './world-7/glimbo';
 import { JellyOperator, updateJellyOperator, updateJellyOperatorPresentation } from './world-7/jellyOperator';
 import { Button, updateButton } from './world-7/button';
@@ -286,6 +286,8 @@ const postProcessingMap: Record<string, Function> = {
     "gamingSuperbitImpacts": (doc: Cloudsave, accountData: Map<string, any>) => updateSuperbitImpacts(accountData),
     // Research consumes parsed companion, Equinox, and Sushi state before downstream consumers calculate.
     "researchGrid": (doc: Cloudsave, accountData: Map<string, any>) => updateResearchGrid(accountData),
+    // Minehead's trade multiplier consumes prepared Research without delaying early opponent rewards.
+    "mineheadDropRate": (_doc: Cloudsave, accountData: Map<string, any>) => updateMineheadDropRate(accountData),
     // Stickers need calculated Research; Event Shop, Superbit ownership and sticker counts are parsed inputs.
     "farmingStickerBonuses": (doc: Cloudsave, accountData: Map<string, any>) => updateFarmingStickerBonuses(accountData),
     "button": (doc: Cloudsave, accountData: Map<string, any>) => updateButton(accountData),
@@ -380,6 +382,8 @@ const postProcessingMap: Record<string, Function> = {
     "playerHealth": (doc: Cloudsave, accountData: Map<string, any>) => updatePlayerHealth(accountData),
     "playerPowers": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerPowers(accountData),
     "playerSecondaryStats": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerSecondaryStats(accountData),
+    // Drop rate follows Luck and every prepared persistent source, including late Lab and Sigil results.
+    "playerDropRates": (_doc: Cloudsave, accountData: Map<string, any>) => updatePlayerDropRates(accountData),
     "printer": (doc: Cloudsave, accountData: Map<string, any>) => updatePrinter(accountData),
     "worship": (doc: Cloudsave, accountData: Map<string, any>) => updateWorship(accountData),
     "account": (doc: Cloudsave, accountData: Map<string, any>) => updateAccount(accountData),

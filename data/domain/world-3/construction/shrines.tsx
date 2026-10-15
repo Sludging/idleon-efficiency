@@ -11,6 +11,7 @@ export const ShrineConstants = {
     DmgShrine: 0,
     HpDefShrine: 1,
     CarryShrine: 3,
+    DropRateShrine: 4,
     ExpShrine: 5,
     CrystalShrine: 6
 }

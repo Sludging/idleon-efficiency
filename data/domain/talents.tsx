@@ -81,6 +81,16 @@ export class Talent {
         return maximum;
     }
 
+    static getArchlordOfThePiratesMultiplier(
+        players: readonly Player[],
+        recipientInputs: TalentLevelInputs,
+        plunderousMobKills: number,
+    ): number {
+        // Plunderous Mob kill decades scale the best candidate bonus for this recipient.
+        const talentBonus = Talent.getAccountTalentBonus(players, 328, recipientInputs);
+        return 1 + talentBonus * lavaLog(plunderousMobKills) / 100;
+    }
+
     static getClassLevelAttributeBonus(player: Player): number {
         const talent = player.talents.find((talent): talent is WillOfTheEldestTalent => {
             if (talent.skillIndex !== 620) {

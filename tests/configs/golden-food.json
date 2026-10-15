@@ -3,6 +3,11 @@
   "target": "Golden food",
   "extractions": [
     {
+      "label": "golden_drop_rate_percent",
+      "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"DropRatez\")",
+      "description": "Golden-food drop-rate contribution in raw percentage points, with equipped and Beanstalk effects."
+    },
+    {
       "label": "golden_hp",
       "expression": "idleon.callFunction(\"GoldFoodBonuses\", \"MaxHPpct\")",
       "description": "Golden-food maximum-HP multiplier."

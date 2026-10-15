@@ -35,7 +35,7 @@ import { Talent } from "../talents";
 
 // Only the Exotic Market bonuses consumed by implemented features are supported.
 const exoticMarketBonusData = initExoticMarketRepo().reduce<Record<number, { bonusPerLevel: number, diminishing: boolean }>>((bonuses, upgrade) => {
-    if (upgrade.index === 14 || upgrade.index === 40 || upgrade.index === 44 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 51) {
+    if (upgrade.index === 14 || upgrade.index === 40 || upgrade.index === 44 || upgrade.index === 48 || upgrade.index === 49 || upgrade.index === 51 || upgrade.index === 59) {
         bonuses[upgrade.index] = {
             bonusPerLevel: upgrade.data.effect,
             diminishing: upgrade.data.x4 === 1,

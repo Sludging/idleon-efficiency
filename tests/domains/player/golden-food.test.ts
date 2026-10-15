@@ -48,6 +48,13 @@ describe('Shared golden-food results', () => {
     );
   });
 
+  it('matches golden-food drop rate in raw percentage points', () => {
+    expect(goldenFood.getDropRatePercent(player)).toMatchLiveGameWithDetails(
+      getExtractedValue(results, 'golden_drop_rate_percent'),
+      { tolerance: 0, context: `Player ${player.playerID} golden-food drop-rate percentage points` },
+    );
+  });
+
   it.each([0, 7])('keeps candidate owner %s separate from the recipient and map owner', ownerIndex => {
     expect(Talent.getAccountTalentBonus([players[ownerIndex]], 209, player.finalTalentInputs))
       .toMatchLiveGame(getExtractedValue(results, `death_bringer_candidate_${ownerIndex}`), 0);
