@@ -11,8 +11,12 @@ import ShadowBox from "../../../components/base/ShadowBox";
 import SmallButton from "../../../components/base/SmallButton";
 import TextAndLabel from "../../../components/base/TextAndLabel";
 import TipDisplay from "../../../components/base/TipDisplay";
+import Majik from "../../../components/world-5/hole/majik";
+import Schematics from "../../../components/world-5/hole/schematics";
+import Measurements from "../../../components/world-5/hole/measurements";
 import { Item } from "../../../data/domain/items";
 import type { Player } from "../../../data/domain/player";
+import type { Divinity } from "../../../data/domain/world-5/divinity";
 import { Hole, type Study, type StudyEffect } from "../../../data/domain/world-5/hole/hole";
 import type { Villager, VillagerCharacterRate } from "../../../data/domain/world-5/hole/villager";
 import { commaNotation, nFormatter, notateNumber } from "../../../data/utility";
@@ -280,8 +284,11 @@ export default function HoleContent() {
             {tab === "Upgrades" && <ShadowBox flex={false} data-testid="upgrades-panel"><Grid rows="1" columns={["25%", "75%"]}>
                 <Box pad="medium" height="100%" data-testid="upgrade-rail">{upgradeNames.map(name => <Box key={name} data-testid={`upgrade-nav-${name}`}><LeftNavButton text={name} isActive={upgrade === name} clickHandler={() => setUpgrade(name)} /></Box>)}</Box>
                 <Box fill background="dark-1" pad="medium" gap="small" style={{ minWidth: 0 }}>
-                    <Box direction="row" gap="small" align="center">{upgrade === "Studies" && <Portrait index={4} />}<Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small" data-testid="study-speed">Study speed: {number(hole.studyRate, hole.studyInputsUnavailableReason)} progress/hour</Text>}</Box>
-                    {upgrade !== "Studies" ? <Text data-testid="unsupported-upgrade">These upgrade tools are not supported on this website yet.</Text> : <>
+                    <Box direction="row" gap="small" align="center"><Portrait index={upgrade === "Majik" ? 2 : upgrade === "Schematics" ? 1 : upgrade === "Measurements" ? 3 : 4} /><Heading level="3" size="small" margin="none">{upgrade}</Heading>{upgrade === "Studies" && <Text size="small" data-testid="study-speed">Study speed: {number(hole.studyRate, hole.studyInputsUnavailableReason)} progress/hour</Text>}</Box>
+                    {upgrade === "Majik" && <Majik hole={hole} divinity={data.get("divinity") as Divinity} />}
+                    {upgrade === "Schematics" && <Schematics hole={hole} />}
+                    {upgrade === "Measurements" && <Measurements hole={hole} />}
+                    {upgrade === "Studies" && <>
                         <Box direction="row" gap="small" align="center"><TextInput data-testid="study-search" aria-label="Search Studies" placeholder="Search Studies" value={search} onChange={event => setSearch(event.target.value)} /><CheckBox data-testid="study-unlocked" label="Show unlocked" checked={showUnlocked} onChange={event => setShowUnlocked(event.target.checked)} />{search !== "" && <SmallButton data-testid="clear-study-search" label="Clear search" onClick={() => setSearch("")} style={{ whiteSpace: "nowrap", minWidth: "88px", flexShrink: 0 }} />}</Box>
                         <Text size="small" color="accent-2" data-testid="study-count">{visibleStudies.length} of {hole.studies.length} Studies</Text>
                         {visibleStudies.length === 0 && <Text data-testid="study-no-results">No Studies match. Clear search or turn off Show unlocked.</Text>}

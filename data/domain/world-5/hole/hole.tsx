@@ -56,6 +56,7 @@ import { HoleCurrencyBase, initHoleCurrencyRepo } from "../../data/HoleCurrencyR
 import { HoleCurrencyModel } from "../../model/holeCurrencyModel";
 import { initGodInfoRepo } from "../../data/GodInfoRepo";
 import type { Divinity } from "../divinity";
+import type { ImageData } from "../../imageData";
 
 export interface HoleUpgradeEffect {
  key: string;
@@ -65,6 +66,7 @@ export interface HoleUpgradeEffect {
 
 export class HoleCurrency {
  stock: number | null = null;
+ imageData: ImageData | null = null;
 
  constructor(public index: number, public data: HoleCurrencyModel) { }
 
@@ -74,6 +76,10 @@ export class HoleCurrency {
 
  parse(wallets: number[] | undefined): void {
   this.stock = wallets?.[this.index] == null ? null : Number(wallets[this.index]);
+ }
+
+ getImageData(): ImageData | null {
+  return this.imageData;
  }
 }
 
@@ -312,6 +318,14 @@ export class Majiks {
 
  get pocketDivinity(): PocketDivinityUpgrade {
   return this.IdleonUpgrades.find(upgrade => upgrade.index === 21) as PocketDivinityUpgrade;
+ }
+
+ getImageData(tree: CosmoTypeEnum): ImageData {
+  switch (tree) {
+   case CosmoTypeEnum.Hole: return { location: "HoleUIcosmoUpgA1", width: 45, height: 64 };
+   case CosmoTypeEnum.Village: return { location: "HoleUIcosmoUpgB1", width: 48, height: 48 };
+   case CosmoTypeEnum.Idleon: return { location: "HoleUIcosmoUpgC1", width: 45, height: 45 };
+  }
  }
 
  parse(savedHole: number[][], purchasedPoints: number | undefined): void {
@@ -827,6 +841,10 @@ export class Measurement {
  private savedGolemKills: number | null = null;
 
  constructor(public index: number, public data: MeasurementModel) { }
+
+ get requiredMinauLevel(): number {
+  return this.index + 1;
+ }
 
  static fromBase(data: MeasurementBase[]): Measurement[] {
   return data.map(record => new Measurement(record.index, record.data));
@@ -1729,6 +1747,11 @@ export class Hole extends Domain {
   });
   this.measurements.forEach(measurement => {
    measurement.currency = this.currencies.find(currency => currency.index === Number(measurement.data.itemRequirement.id))!;
+  });
+  this.currencies.forEach(currency => {
+   const requirement = this.measurements.find(measurement => Number(measurement.data.itemRequirement.id) === currency.index)
+    ?.data.itemRequirement;
+   currency.imageData = requirement && requirement.name !== "Unknown30" ? Item.getImageData(requirement.name) : null;
   });
   return this;
  }
