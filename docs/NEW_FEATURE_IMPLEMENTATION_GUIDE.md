@@ -100,9 +100,9 @@ Before beginning implementation, gather the following information from the devel
 
 ## Testing Implementation
 
-### 6. Live Game Extraction Testing
+### 6. Game Extraction Testing
 
-**See:** `docs/TESTING_IMPLEMENTATION.md` for complete testing guide
+Use the [testing implementation guide](TESTING_IMPLEMENTATION.md) for test design and the [canonical game-access policy](../tests/helpers/README.md#game-access) for offline defaults, readiness, version checks, and live exceptions.
 
 ## Implementation Guidelines
 

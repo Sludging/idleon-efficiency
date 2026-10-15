@@ -74,10 +74,8 @@ class BatchExtractor {
    this.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
 
    if (!status.injected) {
-    console.warn(`\n⚠️  WARNING: Game not detected. Extractions will likely fail.`);
-    console.warn(`   Make sure:`);
-    console.warn(`   1. Game is running with --remote-debugging-port=9223`);
-    console.warn(`   2. Debug server auto-injection completed successfully\n`);
+    console.warn(`\n⚠️  WARNING: Game not detected. Start offline server and wait for IDLEON_OFFLINE_READY.`);
+    console.warn(`   Use live mode only to refresh a save. See tests/helpers/README.md#game-access.\n`);
    }
 
    return status.injected;

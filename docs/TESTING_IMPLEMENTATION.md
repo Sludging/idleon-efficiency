@@ -28,6 +28,8 @@ The [real examples below](#examples-from-existing-tests) show these distinctions
 4. **Obtain any new expected values.** Follow the [playbook extraction triggers](calculation-correctness/PLAYBOOK.md#extraction-when-needed). With unchanged config and usable results, continue with the existing matching save and results.
 5. **Write and run the tests.** Use the matchers below and record the actual commands and results before changing domain code.
 
+For server selection, readiness, version lookup, and live-only save refresh, follow the [canonical game-access policy](../tests/helpers/README.md#game-access).
+
 When extraction is needed, use the [extraction helper guide](../tests/helpers/README.md#quick-start---batch-extraction) for commands, server selection, save refresh, and active-player prerequisites.
 
 For a correctness case, follow the [plan approval step](calculation-correctness/PLAYBOOK.md#2-plan-and-obtain-approval) before changing tests or extraction configs. Use the approved scope and interface. When extraction is needed, return the request to the human or explicitly delegated supervising session under the [playbook extraction procedure](calculation-correctness/PLAYBOOK.md#extraction-when-needed).

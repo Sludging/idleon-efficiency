@@ -70,12 +70,8 @@ function createIdleonHelpers(registry) {
                 return "Search error: " + e.message; 
             }
         },
-        // Current game version, from the live RANDOlist patch entry.
-        // The game keeps legacy patch entries elsewhere (e.g. PatchNotesInfo),
-        // so max-sorting version numbers across the game yields stale results
-        // after a version reset. RANDOlist holds exactly one current-patch
-        // string of the form "<Title>_v<version>"; returning it verbatim keeps
-        // detection deterministic, and ambiguity is surfaced instead of guessed.
+        // Current game version from the RANDOlist patch entry. Legacy patch entries elsewhere
+        // can be stale after a version reset, so report the single current-patch value.
         getGameVersion: function() {
             try {
                 const rando = registry["scripts.CustomLists"].RANDOlist();
@@ -251,7 +247,7 @@ function createIdleonHelpers(registry) {
                 // Game data
                 getAttr: "Get any game attribute: getAttr('PlayerHP')",
                 getDNSM: "Get DNSM data keys: getDNSM() or getDNSM('BoxRewards')",
-                getGameVersion: "Current game version from the live RANDOlist patch entry: getGameVersion() -> { title, version }",
+                getGameVersion: "Current game version from the RANDOlist patch entry: getGameVersion() -> { title, version }",
                 getTalent: "Get talent level: getTalent(characterIndex, talentId)",
                 getPlayer: "Get player data keys",
                 getPlayerData: "Safe player access: getPlayerData(0) or getPlayerData(0, 'StatueLevels')",

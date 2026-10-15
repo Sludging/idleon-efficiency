@@ -13,6 +13,8 @@ Make the selected domain/aspect match the game through an interface and implemen
 
 Delivered game code defines formulas, conditions, representation, and operation order. Extracted game values supply expected results. Domain code is the implementation under test. The Wiki helps explain player-facing meaning; it does not override game evidence. The [testing guide](../TESTING_IMPLEMENTATION.md) defines core tests, parameter tests, and branches.
 
+For every game interaction, follow the [canonical game-access policy](../../tests/helpers/README.md#game-access) for offline default, readiness, version lookup, and live exceptions.
+
 ## Approval authority
 
 The human is the **approver** by default and directs progression, decisions, and recording. A human may explicitly delegate one selected case to a supervising session. Record the delegation and its bounds in the Case working note. Within those bounds, that session may approve plans and material in-scope changes, manage execution sessions and records, and accept normal completion. A session name grants no authority. Delegated normal acceptance needs no additional human acceptance.

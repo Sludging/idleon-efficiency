@@ -1,6 +1,6 @@
-# Live Game Testing Infrastructure
+# Game Testing Infrastructure
 
-Testing approach that validates domain calculations against live game data extracted from running game.
+Testing approach that validates domain calculations against extracted game values. Use the [canonical game-access policy](helpers/README.md#game-access) to select the default offline server or justify live access.
 
 ## Automatic Domain Class Reference Report
 

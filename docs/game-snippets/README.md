@@ -1,10 +1,10 @@
 # Game Snippets
 
-Captured game calculation functions establish intended game behavior for feature research and calculation checks. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) defines evidence needs for correctness cases; this file explains how to capture and store snippets.
+Captured game calculation functions establish intended game behavior for feature research and calculation checks. The [calculation-correctness playbook](../calculation-correctness/PLAYBOOK.md) defines evidence needs for correctness cases; this file explains how to capture and store snippets. Follow the [canonical game-access policy](../../tests/helpers/README.md#game-access) for offline default, readiness, and version checks.
 
 ## Rules
 
-- Before reusing a selected function's snippet, confirm that its version matches the game version under examination. For a case checking the running game, obtain that version from `GET /game-version` on the debug server. An existing older snippet does not establish current behavior; capture the matching-version function when it is absent. If the version under review remains unclear, ask the human before choosing a snippet.
+- Before reusing a selected function's snippet, confirm that its version matches the game version under examination. Use `GET /game-version` on the selected ready server; an existing older snippet does not establish current behavior. Capture the matching-version function when it is absent. If the version under review remains unclear, ask the human before choosing a snippet.
 - These files are evidence, not implementation. They are never imported by application code.
 
 ## Understanding callers and finding additional source
@@ -27,7 +27,7 @@ docs/game-snippets/
 
 - **Folder** = domain, matching `data/domain/` and `tests/domains/` naming.
 - **File** = the **entire** game function (`_customBlock_CookingR` whole, all branches), not just the branch under investigation. Captured once, reused by any case.
-- **Version** = the game version the capture came from (from `GET /game-version` on the debug server). New version → new file; diffs between versions are reviewable formula-change evidence.
+- **Version** = the game version returned by `GET /game-version` on the selected server. New version → new file; diffs between versions are reviewable formula-change evidence.
 
 ## File format
 
@@ -47,29 +47,29 @@ A metadata header added by us, followed by the verbatim `toString()` output. The
 
 Use this procedure only when the versioned snippet for the selected function does not already exist. Replace every `<...>` placeholder in the commands and metadata before running them.
 
-1. Require a ready game and record the exact version. Proceed only when the status response contains `cdpConnected: true`, `injected: true`, and `gameReady: true`; otherwise stop and ask the human:
+1. Select and verify the server as described in the [canonical game-access policy](../../tests/helpers/README.md#game-access). Use the returned `version` and patch `title` exactly in the path and metadata.
 
    ```bash
-   curl -fsS http://localhost:3100/status
-   curl -fsS http://localhost:3100/game-version
+   GAME_SERVER_URL=${GAME_SERVER_URL:-http://127.0.0.1:3101}
+   curl -fsS "$GAME_SERVER_URL/status"
+   curl -fsS "$GAME_SERVER_URL/game-version"
    ```
-
-   Use the returned `version` and patch `title` exactly in the path and metadata.
 
 2. Ask the game which script contains the function:
 
    ```bash
-   curl -fsS -X POST http://localhost:3100/exec \
+   curl -fsS -X POST "$GAME_SERVER_URL/exec" \
      -H "Content-Type: application/json" \
      -d '{"expression":"idleon.findFunction(\"<FunctionName>\")"}'
    ```
 
-   The response must identify exactly one `scripts.ActorEvents_<number>` entry before capture. If the function is not found or the response is ambiguous, use the [targeted source exploration above](#understanding-callers-and-finding-additional-source) to locate the owning function and script, then confirm that target through the debug server. If attribution remains ambiguous or runtime capture is unavailable, stop and ask the human; never guess a script or label local-file text as a runtime capture.
+
+   The response must identify exactly one `scripts.ActorEvents_<number>` entry before capture. If the function is not found or the response is ambiguous, use the [targeted source exploration above](#understanding-callers-and-finding-additional-source) to locate the owning function and script, then confirm that target through the selected server. If attribution remains ambiguous or runtime capture is unavailable, stop and ask the human; never guess a script or label local-file text as a runtime capture.
 
 3. Evaluate that script's entire function source:
 
    ```bash
-   curl -fsS -X POST http://localhost:3100/exec \
+   curl -fsS -X POST "$GAME_SERVER_URL/exec" \
      -H "Content-Type: application/json" \
      -d '{"expression":"window.frames[0].__idleon_cheats__[\"<ActorEventsScript>\"]._customBlock_<FunctionName>.toString()"}'
    ```

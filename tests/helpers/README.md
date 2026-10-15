@@ -1,27 +1,29 @@
-Tools for extracting data to validate domain calculations. Offline extraction
-is available for input inspection and calculation research, but it is not a
-source for `tests/fixtures/saves/latest.json`.
+Tools for extracting game values to validate domain calculations.
 
-## Quick Start - Batch Extraction
+## Game access
 
-The batch extractor defaults to offline port `3101` and leaves
-`tests/fixtures/saves/latest.json` untouched. It extracts data for all configs
-in `tests/configs/` serially and saves results to `tests/results/`.
+Use offline game server by default for snippets, extraction-config testing, and value extraction. It runs original local game assets without connecting to the real game. Follow the [offline tool guide](../../sub-projects/idleon-offline/README.md#startup) to set up and start it.
 
-`--refresh-save` is opt-in and is permitted only when the status endpoint
-identifies the server as live. The helper checks status before requesting
-`/cloud-save` or writing the fixture; offline or unknown-source servers fail
-without touching `latest.json`. Use an updated live HTTP server: older live
-server processes without source identification must be restarted after the
-code update.
+Select a server through `GAME_SERVER_URL`; default is `http://127.0.0.1:3101`. Before evaluating expressions, check `GET /status` on that same URL. Require `source: "offline"` and `cdpConnected`, `injected`, and `gameReady` to be `true`. The live server requires the same readiness fields and reports `source: "live"`; restart older live processes that do not report their source.
 
-To refresh from the live server, with the real game and its debug server
-running:
+Use `GET /game-version` to read the selected server's `{ "title": "...", "version": "..." }`. The offline version identifies its local game assets; it does not identify the latest online release. For older server processes without this route, use `POST /exec` with `{"expression":"idleon.getGameVersion()"}`.
+
+Use a live server only when the task requires current real-game state, behavior unavailable offline, or an explicit live observation. State why live access is needed and verify `source: "live"` before use. Offline extraction is the default and never refreshes the save fixture.
+
+`--refresh-save` is the only extraction-helper path that updates `tests/fixtures/saves/latest.json`. Use it only when a human requests a save refresh, against a ready server verified as live:
 
 ```bash
 GAME_SERVER_URL=http://localhost:3100 \
   node tests/helpers/extract-all-game-data.js --refresh-save
 ```
+
+Refresh from the real game only. The command captures the live save before extracting configured values; it does not create an atomic save/results snapshot. Confirm that extracted results match the refreshed save before using the pair. Result-only extraction, including offline extraction, does not establish fixture provenance or replace the real save.
+
+## Quick Start - Batch Extraction
+
+The batch helper extracts all configs in `tests/configs/` serially and saves
+results to `tests/results/`. Follow [Game access](#game-access) for server
+selection and the only fixture-refresh workflow.
 
 The batch helper uses `GAME_SERVER_URL`, defaulting to
 `http://127.0.0.1:3101`, as its primary extraction and save server. Each config
@@ -43,10 +45,9 @@ GAME_SERVER_URL=http://127.0.0.1:3101 \
 
 Batch options:
 
-- `--refresh-save`: request `/cloud-save` and overwrite
-  `tests/fixtures/saves/latest.json`, only from the primary server whose status
-  source is `live`. Offline and unknown sources fail before the cloud-save
-  request and fixture write. Player-server overrides never affect save refresh.
+- `--refresh-save`: refresh the save fixture through the guarded live-only
+  workflow in [Game access](#game-access). Player-server overrides do not
+  select the refresh server.
 - `--output-dir <directory>`: write result files to this directory instead of
   `tests/results/`. Relative paths resolve from the current working directory.
 - `--player-server <player-index>=<http(s) URL>`: route configs whose
@@ -114,23 +115,13 @@ Individual extraction never refreshes the save fixture; only its explicitly
 selected output file is written. The active-player policy applies equally
 to live and offline extraction.
 
-### Save Input Inspection (Standalone)
+### Save Input Inspection
 
-`GET /cloud-save` is useful for inspecting the server's save input. It is
-read-only and does not update repository fixtures. Do not redirect offline
-cloud-save output to `latest.json`. To update that fixture, use the guarded
-batch command above against an explicitly selected live server.
+`GET /cloud-save` is useful for inspecting the selected server's save input. It is read-only and does not update repository fixtures. Follow [Game access](#game-access) before selecting a server or refreshing a fixture.
 
+### Live Server
 
-### Live Server Prerequisites
-
-1. **Game running** with debug port (usually port 9223)
-
-2. **Debug server running**:
-   ```bash
-   cd sub-projects/game-debug-tool
-   node idleon-debug-server.js
-   ```
+Live setup is only needed for an explicitly justified live observation or requested save refresh. Follow the [game-debug-tool guide](../../sub-projects/game-debug-tool/SOLUTION_SUMMARY.md) and [Game access](#game-access); do not treat live startup as the routine extraction setup.
 
 ### Configuration Format
 

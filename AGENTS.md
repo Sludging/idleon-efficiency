@@ -4,6 +4,8 @@ Guidance for AI coding assistants working in this repository.
 
 Before implementing or reviewing code, you MUST read [CODING_STANDARDS.md](CODING_STANDARDS.md). When delegating implementation or review, pass its path and the relevant existing vocabulary-document paths (discovered through [domain docs](docs/agents/domain.md)); do not duplicate their rules in task prompts.
 
+For every game interaction, use the [canonical game-access policy](tests/helpers/README.md#game-access) for offline defaults, readiness and version checks, and justified live access.
+
 ## Project Overview
 
 IdleOn Efficiency (https://www.idleonefficiency.com) is a companion website for the idle MMO "Legends of Idleon". This Next.js app reverse-engineers game mechanics to provide efficiency calculators and optimization tools for players.
@@ -20,7 +22,7 @@ Context-specific guidance lives in [`skills/`](skills/). Read the relevant skill
 |-------|-------------|
 | [architecture](skills/architecture/SKILL.md) | Data flow, domain patterns, cross-domain dependencies |
 | [calculation-correctness](skills/calculation-correctness/SKILL.md) | A backend main calculation is wrong or missing — canonical-case workflow with demand-driven live/game-code evidence |
-| [testing](skills/testing/SKILL.md) | Live game extraction testing, domain test writing, validation |
+| [testing](skills/testing/SKILL.md) | Offline-first game extraction, domain test writing, validation |
 | [feature-implementation](skills/feature-implementation/SKILL.md) | Implementing new game features and domain logic |
 | [update-game-version](skills/update-game-version/SKILL.md) | New Idleon version released — extract from Steam, process via WikiBot, sync data |
 | [sync-game-assets](skills/sync-game-assets/SKILL.md) | Sync new/changed game images from Android APK to S3 CDN |
@@ -108,11 +110,11 @@ yarn test
   /utils                     # Utility functions
 /reference-repos             # Competitor codebases for implementation reference (domain/parser logic only)
 /tests                       # Jest test suite
-  /configs                   # Live game extraction configurations
+  /configs                   # Game extraction configurations
   /domains                   # Domain calculation tests
   /fixtures                  # Test data and cloud save snapshots
   /helpers                   # Test utilities and data extraction tools
-  /results                   # Extracted live game data
+  /results                   # Extracted game values
   /utils                     # Test helpers
 ```
 
@@ -123,7 +125,7 @@ yarn test
 Read the [testing skill](skills/testing/SKILL.md) for:
 
 - Creating extraction configurations
-- Running live game data extraction
+- Running game data extraction (offline by default; see [game-access policy](tests/helpers/README.md#game-access))
 - Writing parameter and calculation tests
 - Debugging test failures
 

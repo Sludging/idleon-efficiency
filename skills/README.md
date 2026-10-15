@@ -10,11 +10,11 @@ See [AGENTS.md](../AGENTS.md) for the full project bootstrap.
 
 **Auto-triggers (Claude Code):** Files in `tests/` or `*.test.ts` / `*.test.tsx`
 
-**When to use:** Writing tests for domain logic, live game extraction, validation
+**When to use:** Writing tests for domain logic, offline-first game extraction, validation
 
 **Covers:** Extraction configs, parameter/calculation tests, debugging failures, test patterns
 
-**Points to:** [docs/TESTING_IMPLEMENTATION.md](../docs/TESTING_IMPLEMENTATION.md)
+**Points to:** [docs/TESTING_IMPLEMENTATION.md](../docs/TESTING_IMPLEMENTATION.md) and the [canonical game-access policy](../tests/helpers/README.md#game-access)
 
 ### feature-implementation
 

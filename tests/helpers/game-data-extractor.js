@@ -57,9 +57,8 @@ class GameDataExtractor {
    this.log(`✅ Game injection: ${status.injected ? 'Active' : 'Not detected'}`);
 
    if (!status.injected) {
-    console.warn(`⚠️  Game not detected. Make sure:
-1. Game is running with --remote-debugging-port=9223
-2. Debug server auto-injection completed successfully`);
+    console.warn(`⚠️  Game not detected. Start the offline server and wait for IDLEON_OFFLINE_READY.
+Use live mode only to refresh a save. See tests/helpers/README.md#game-access.`);
    }
 
    return status.injected;

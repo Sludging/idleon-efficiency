@@ -13,9 +13,10 @@ Answer mechanic and player questions, not website architecture or whole-implemen
 
 # Evidence
 
+Use the [canonical game-access policy](../../tests/helpers/README.md#game-access) for offline default, readiness, and version checks. Require a task-specific reason before using the live server.
+
 1. Read [CODING_STANDARDS.md](../../CODING_STANDARDS.md) and applicable vocabulary references through [domain guidance](../../docs/agents/domain.md).
-2. Follow [game-snippet guidance](../../docs/game-snippets/README.md) for version checks, source discovery, bounded searches, and capture.
-   Reuse evidence only when its version and context apply.
+2. Follow [game-snippet guidance](../../docs/game-snippets/README.md) for source discovery, bounded searches, and capture. Reuse evidence only when its version and context apply.
 3. Inspect the relevant game functions and callers.
    Establish player-facing names and meaning, inputs, units, branches, operation order, and character/account scope.
    Trace caller conditions and transformations that affect how the game uses a result.
