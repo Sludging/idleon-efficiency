@@ -1,6 +1,6 @@
 ## Current handoff — selected Part 3 complete and recorded, 2026-10-17
 
-**Human authority:** “Ok I approve settling this part work as complete, well done. Make sure to record and update any relevant documentation and issues. If any work you have isn't commited commit it now, don't touch unrelated changes so if there are shared changes only commit your hunk”. The human accepted selected Part 3's backend and UI work as complete within the recorded limits. This does not claim runtime-clean status, full feature deployment, issue closure, push, PR, or deployment.
+**Human authority:** The human accepted selected Part 3 backend/UI work as complete within recorded limits and then explicitly authorized closing #437 and parent #434 as completed. Completion does not claim runtime-clean status, full-feature deployment, push, PR, or deployment.
 
 **Accepted Part 3 outcomes:** Amber and Shop progression show source-backed descriptions/effects, prerequisites and potential benefits, saved levels/caps, next and bulk costs, and affordability. Elixirs show saved ownership/equipment/memorization, resolved descriptions and memorized cues; summary shows Manic, Overstim, and Trackometer progress. Tools/AUTO/Advanced UI is removed by latest human feedback; existing backend tool APIs remain available. Preserve Parts 1/2 unchanged.
 
@@ -8,7 +8,7 @@
 
 **Limits:** Shared hydration, NitroPay, CORS, failed-resource, and HTTP 403 errors remain unwaived. Pricing evidence remains offline v1.22, one account, and five price comparisons; no connected-game parity is claimed. No full suite, TypeScript, build, lint, or formatter claim is made. Historical Zenith duplicate-`totalOwnedClusters` compile failure and Sneaking TS2304 remain recorded.
 
-**Publication and commit boundary:** Whole selected Part 3 completion and accepted outcomes are recorded on [#437](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226758375); selected Part 3 status is recorded on parent [#434](https://github.com/Sludging/idleon-efficiency/issues/434#issuecomment-6226758396). Commit only owned accepted Part 3 work and this handoff. Preserve user route/Part 2 overlap, staged deletions, generated files, and all unrelated work. No push, PR, deployment, issue closure, or verification rerun.
+**Closure and commit boundary:** Issue [#437](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226898022) and parent [#434](https://github.com/Sludging/idleon-efficiency/issues/434#issuecomment-6226899621) are closed as completed under explicit human authority. Parts #435/#436 remain closed unchanged. Accepted Part 3 work is recorded in backend commit `22cbc143` and UI commit `7e38a940`; completion record `4524c8d7` remains the approved baseline. Closure did not rerun checks or waive recorded limits. No push, PR, deployment, connected-game parity, or runtime-clean claim.
 
 ## Part 3 Phase 14 — fresh final UI review after DATA-01 fix, 2026-10-16
 

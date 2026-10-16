@@ -1,6 +1,6 @@
 # Spelunking: approved delivery parts
 
-**Status:** APPROVED DELIVERY SCOPE / PARTS 1 AND 2 CLOSED; SELECTED PART 3 COMPLETE — Scope was approved on 2026-10-12. The human accepted selected Part 3 backend and UI work as complete on 2026-10-17 within recorded evidence limits. Issues #434/#437 remain open. This does not claim a clean runtime, whole-feature deployment, push, PR, or issue closure.
+**Status:** APPROVED DELIVERY SCOPE / PARTS 1–3 CLOSED AS COMPLETED; PARENT #434 CLOSED AS COMPLETED — Scope was approved on 2026-10-12. The human accepted Part 3 on 2026-10-17 within recorded evidence limits and explicitly authorized closing #437 and #434 as completed. This does not claim a clean runtime, whole-feature deployment, push, PR, or connected-game parity.
 
 **Scope sources:** [Approved research brief](spelunking-research-brief.md) and [approved product specification](spelunking-spec-draft.md).
 
@@ -59,7 +59,7 @@ The page focuses on current progression and stats, not efficiency or planning ca
 
 ## 3. Amber, equipment, and advanced progression
 
-**Delivery issue:** [#437](https://github.com/Sludging/idleon-efficiency/issues/437). **Phase:** SELECTED PART COMPLETE — human accepted backend and UI outcomes on 2026-10-17; issue remains open. [Acceptance record and limits](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226758375).
+**Delivery issue:** [#437](https://github.com/Sludging/idleon-efficiency/issues/437). **Phase:** COMPLETE / CLOSED AS COMPLETED under explicit human authority on 2026-10-17. [Acceptance record](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226758375); [closing handoff and retained limits](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226898022).
 
 **Outcome:** Players can inspect Amber and Shop progression, Elixirs, and Manic, Overstim, and Trackometer summary progress through accepted backend data and UI.
 
@@ -83,4 +83,4 @@ The page focuses on current progression and stats, not efficiency or planning ca
 
 ## Approval and current boundary
 
-The human approved these three parts and the [product specification](spelunking-spec-draft.md) on 2026-10-12. Prior Part 1 backend/UI acceptance and Part 2 direct completion approval on 2026-10-14 remain valid. Explicit human authority on 2026-10-15 closed accepted #435/#436; earlier keep-open instructions remain historical. Those parts remain closed as completed; Part 3 is now accepted complete within its retained limits. Parent #434 and issue #437 remain open. No clean-runtime, whole-feature deployment, push, PR, or issue-closure claim is made. Preserve approvals and evidence limits in the [current handoff](spelunking-research-brief.md#current-handoff).
+The human approved these three parts and the [product specification](spelunking-spec-draft.md) on 2026-10-12. Prior Part 1 backend/UI acceptance and Part 2 direct completion approval on 2026-10-14 remain valid. Explicit human authority on 2026-10-15 closed accepted #435/#436; Part 3 #437 and parent #434 were closed as completed under later explicit authority on 2026-10-17. Earlier keep-open instructions remain historical and superseded only for their authorized issues. Accepted evidence limits remain unchanged; no clean-runtime, whole-feature deployment, push, PR, connected-game parity, or verification rerun is claimed. See [Part 3 closing handoff](https://github.com/Sludging/idleon-efficiency/issues/437#issuecomment-6226898022), [parent closing handoff](https://github.com/Sludging/idleon-efficiency/issues/434#issuecomment-6226899621), and [current handoff](spelunking-research-brief.md#current-handoff).
