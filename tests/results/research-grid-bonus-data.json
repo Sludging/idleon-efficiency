@@ -66,7 +66,7 @@
     },
     "grid_bonus_151_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 151, 2)",
-      "result": 11233
+      "result": 11308
     },
     "grid_bonus_168_mode2": {
       "expression": "idleon.callFunction(\"ResearchStuff\", \"Grid_Bonus\", 168, 2)",

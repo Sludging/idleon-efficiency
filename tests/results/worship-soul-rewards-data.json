@@ -2,7 +2,7 @@
   "extractions": {
     "worship_efficiency": {
       "expression": "idleon.callFunction(\"skillstats2\", \"WorshipEfficiency\")",
-      "result": 32639166626.142254
+      "result": 32639394307.62541
     },
     "food_bonus_worship_soul_boosts": {
       "expression": "idleon.callFunction(\"TotalFoodBonuses\", \"WorshipSoulBoosts\")",

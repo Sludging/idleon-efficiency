@@ -74,7 +74,7 @@
     },
     "build_speed_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 3, 0)",
-      "result": 13865122810887.35
+      "result": 13875423075493.686
     },
     "build_speed_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"PlayerBuildSpd\", 4, 0)",

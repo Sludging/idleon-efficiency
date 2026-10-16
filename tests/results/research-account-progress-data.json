@@ -489,15 +489,15 @@
           -1,
           0
         ],
-        "attempts": 3,
+        "attempts": 9,
         "pendingSeconds": 0
       }
     },
     "reference_state": {
       "expression": "({level:idleon.getAttr(\"Lv0\")[20],requirement:idleon.getAttr(\"ExpReq0\")[20],name:idleon.getAttr(\"UserInfo\")[0],failedRolls:idleon.getAttr(\"OptionsListAccount\")[514]})",
       "result": {
-        "level": 70,
-        "requirement": 13333054299.729195,
+        "level": 71,
+        "requirement": 18539717943.246014,
         "name": "Sludgev4",
         "failedRolls": 0
       }
@@ -1092,7 +1092,7 @@
     },
     "tome_reference": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44258
+      "result": 44272
     },
     "grimoire_epilogue": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",

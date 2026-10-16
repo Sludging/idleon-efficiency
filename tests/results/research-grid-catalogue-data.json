@@ -802,7 +802,7 @@
           0,
           0
         ],
-        "researchLevel": 70,
+        "researchLevel": 71,
         "artifactStatus": 5,
         "researchMerit": 0,
         "rift": [
@@ -821,13 +821,13 @@
           0,
           0
         ],
-        "accumulatedReduction": 4493.20000000001,
-        "spelunkingReduction": 11233
+        "accumulatedReduction": 4523.20000000001,
+        "spelunkingReduction": 11308
       }
     },
     "points_earned": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSearned\",0,0)",
-      "result": 115
+      "result": 116
     },
     "points_spent": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSspent\",-1,0)",
@@ -835,7 +835,7 @@
     },
     "points_available": {
       "expression": "idleon.callFunction(\"ResearchStuff\",\"Grid_PTSavailable\",0,0)",
-      "result": 0
+      "result": 1
     },
     "catalogue": {
       "expression": "idleon.getAttr(\"CustomLists\").h.ResGridSquares.map((square, index) => ({ index, name: square[0], template: square[5], cap: idleon.callFunction(\"ResearchStuff\",\"Grid_MaxLV\",index,0), level: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,1), primary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,0), secondary: idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",index,2), reachable: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeSelect\",index,0), canUpgrade: idleon.callFunction(\"ResearchStuff\",\"Grid_CanWeUpgrade\",index,0) })).filter(square => square.name !== \"Name\")",
@@ -926,7 +926,7 @@
           "primary": 37.5,
           "secondary": 937.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 68,
@@ -992,7 +992,7 @@
           "primary": 25,
           "secondary": 25,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 87,
@@ -1014,7 +1014,7 @@
           "primary": 75,
           "secondary": 75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 89,
@@ -1025,7 +1025,7 @@
           "primary": 900,
           "secondary": 900,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 90,
@@ -1190,7 +1190,7 @@
           "primary": 3.75,
           "secondary": 3.75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 127,
@@ -1223,7 +1223,7 @@
           "primary": 15,
           "secondary": 15,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 130,
@@ -1234,7 +1234,7 @@
           "primary": 7.5,
           "secondary": 7.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 131,
@@ -1245,7 +1245,7 @@
           "primary": 7.5,
           "secondary": 7.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 132,
@@ -1256,7 +1256,7 @@
           "primary": 7.5,
           "secondary": 7.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 146,
@@ -1267,7 +1267,7 @@
           "primary": 12.5,
           "secondary": 12.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 147,
@@ -1278,7 +1278,7 @@
           "primary": 31.25,
           "secondary": 31.25,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 148,
@@ -1289,7 +1289,7 @@
           "primary": 31.25,
           "secondary": 31.25,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 149,
@@ -1320,7 +1320,7 @@
           "cap": 2,
           "level": 2,
           "primary": 75,
-          "secondary": 11233,
+          "secondary": 11308,
           "reachable": 1,
           "canUpgrade": 0
         },
@@ -1333,7 +1333,7 @@
           "primary": 7.5,
           "secondary": 7.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 166,
@@ -1344,7 +1344,7 @@
           "primary": 18.75,
           "secondary": 18.75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 167,
@@ -1355,7 +1355,7 @@
           "primary": 18.75,
           "secondary": 18.75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 168,
@@ -1377,7 +1377,7 @@
           "primary": 15,
           "secondary": 15,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 170,
@@ -1388,7 +1388,7 @@
           "primary": 0,
           "secondary": 0,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 171,
@@ -1399,7 +1399,7 @@
           "primary": 75,
           "secondary": 75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 172,
@@ -1410,7 +1410,7 @@
           "primary": 37.5,
           "secondary": 37.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 173,
@@ -1432,7 +1432,7 @@
           "primary": 6.25,
           "secondary": 6.25,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 186,
@@ -1443,7 +1443,7 @@
           "primary": 5,
           "secondary": 5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 187,
@@ -1454,7 +1454,7 @@
           "primary": 37.5,
           "secondary": 37.5,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 188,
@@ -1476,7 +1476,7 @@
           "primary": 75,
           "secondary": 75,
           "reachable": 1,
-          "canUpgrade": 0
+          "canUpgrade": 1
         },
         {
           "index": 190,
@@ -1810,7 +1810,7 @@
     "point_contributions": {
       "expression": "[Number(idleon.getAttr(\"Lv0\")[20]),10*idleon.callFunction(\"Companions\",153),5*idleon.callFunction(\"CompLV2\",153),idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",3,0),idleon.callFunction(\"SushiStuff\",\"RoG_BonusQTY\",13,0),Math.min(10,Math.round(Number(idleon.getAttr(\"Sailing\")[3][37]))),Number(idleon.getAttr(\"Tasks\")[2][6][3]),idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",4,0),idleon.callFunction(\"JellyOperation\",\"RoG_BonusQTY\",57,0),Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/10)*Math.round(1+Math.min(1,Math.floor(Number(idleon.getAttr(\"Lv0\")[20])/60))+idleon.callFunction(\"ResearchStuff\",\"Grid_Bonus\",50,1))]",
       "result": [
-        70,
+        71,
         10,
         5,
         2,
@@ -2252,11 +2252,11 @@
         },
         {
           "index": 150,
-          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_30%_every_day,_FOREVER!_Total_Reduction:-97.82%"
+          "text": "Reduces_the_cost_of_all_OG_Masterclass_upgrades_(DB,_WW,_AC)_by_30%_every_day,_FOREVER!_Total_Reduction:-97.83%"
         },
         {
           "index": 151,
-          "text": "Boosts_Spelunking_POW_by_+75%_every_day,_FOREVER!_@_Total_Boost:113.33x_POW"
+          "text": "Boosts_Spelunking_POW_by_+75%_every_day,_FOREVER!_@_Total_Boost:114.08x_POW"
         },
         {
           "index": 152,
@@ -2326,11 +2326,11 @@
     },
     "accumulated_reduction_percent": {
       "expression": "Math.floor(1e4*(1-1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)))/100",
-      "result": 97.82
+      "result": 97.83
     },
     "masterclass_cost_multiplier": {
       "expression": "1/(1+Number(idleon.getAttr(\"OptionsListAccount\")[499])/100)",
-      "result": 0.021771314116520026
+      "result": 0.021630039799273186
     },
     "pairing_after": {
       "expression": "(() => { const research = idleon.getAttr(\"Research\"); return { levels: research[0], owners: research[1], placements: research[6], found: research[2], insightLevels: research[4], crowns: research[11], trades: research[12], researchLevel: Number(idleon.getAttr(\"Lv0\")[20]), artifactStatus: Number(idleon.getAttr(\"Sailing\")[3][37]), researchMerit: Number(idleon.getAttr(\"Tasks\")[2][6][3]), rift: idleon.getAttr(\"Rift\"), accumulatedReduction: Number(idleon.getAttr(\"OptionsListAccount\")[499]), spelunkingReduction: Number(idleon.getAttr(\"OptionsListAccount\")[500]) }; })()",
@@ -3134,7 +3134,7 @@
           0,
           0
         ],
-        "researchLevel": 70,
+        "researchLevel": 71,
         "artifactStatus": 5,
         "researchMerit": 0,
         "rift": [
@@ -3153,8 +3153,8 @@
           0,
           0
         ],
-        "accumulatedReduction": 4493.20000000001,
-        "spelunkingReduction": 11233
+        "accumulatedReduction": 4523.20000000001,
+        "spelunkingReduction": 11308
       }
     }
   },

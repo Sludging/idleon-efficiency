@@ -4,7 +4,7 @@
       "expression": "idleon.callFunction(\"CookingR\", \"CookingSPEED\", 0, 0)",
       "result": {
         "type": "large_number",
-        "value": "2.008914259872975e+149"
+        "value": "2.082106495592509e+149"
       }
     },
     "starsign_58_bonus": {
@@ -15,7 +15,7 @@
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "2.7762315358426554e+45"
+        "value": "2.877380000484569e+45"
       }
     },
     "crop_sc_3_bonus": {

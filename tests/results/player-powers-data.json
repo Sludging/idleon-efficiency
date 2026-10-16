@@ -83,7 +83,7 @@
           "playerName": "Sludgev4",
           "characterClass": 16,
           "level": 1384,
-          "currentMap": 50,
+          "currentMap": 100,
           "dungeon": -1,
           "version": {
             "title": "Jelly_Operator",
@@ -100,10 +100,14 @@
           "intellectLevel": 474
         },
         "cachedTotals": {
-          "WIS": 2263617,
+          "WIS": 2264517,
           "Worship_Power": 396.3028382474511,
-          "STR": 6657613,
-          "AGI": 2242168
+          "STR": 6578131,
+          "AGI": 2261752,
+          "Accuracy": 62949.554913536085,
+          "LUK": 2097199,
+          "Weapon_Power": 3368.5955804071164,
+          "MaxDmg812": 4.975258141047525e+28
         }
       }
     }

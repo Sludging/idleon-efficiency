@@ -2,47 +2,47 @@
   "extractions": {
     "printer_addition_extra_printing": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"AdditionExtraPrinting\", 0, 0)",
-      "result": 631.9615853364662
+      "result": 631.9744053932127
     },
     "printer_extra_printing_player_0": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 0, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_1": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 1, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_2": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 2, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_3": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 3, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_4": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 4, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_5": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 5, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_6": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 6, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_7": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 7, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_8": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 8, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "printer_extra_printing_player_9": {
       "expression": "idleon.callFunction(\"WorkbenchStuff\", \"ExtraPrinting\", 9, 0)",
-      "result": 3791.7695120187973
+      "result": 3791.846432359276
     },
     "sailing_gold_relic_tier_increment": {
       "expression": "idleon.callFunction(\"Sailing\", \"ArtifactBonus\", 4, 1)",

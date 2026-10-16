@@ -89,11 +89,11 @@
     },
     "min_eff_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.MinEff",
-      "result": 40575.8341014712
+      "result": 40557.24973547218
     },
     "chop_eff_final_bonus": {
       "expression": "idleon.getDNSM(\"AlchBubbles\").h.ChopEff",
-      "result": 2351.6211665148767
+      "result": 2351.6833865379126
     },
     "raw_w7_bonus": {
       "expression": "idleon.callFunction(\"CauldronStats\", \"BubbleBonus\", 0, 26, 0)",
@@ -121,19 +121,19 @@
     },
     "player_alchemy_max_hp": {
       "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerHPmax; let calls = 0; let maximumHP; try { script._customBlock_PlayerHPmax = function(...args) { calls++; maximumHP = original.apply(this, args); return maximumHP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerHPmax = original; } if (calls !== 1 || script._customBlock_PlayerHPmax !== original) throw new Error('Alchemy HP capture must intercept exactly one call and restore PlayerHPmax'); return maximumHP; })()",
-      "result": 814376562727.6115
+      "result": 804210839403.576
     },
     "player_max_mp": {
       "expression": "idleon.callFunction(\"PlayerMPmax\")",
-      "result": 3127493.5999999996
+      "result": 3128731.0999999996
     },
     "player_alchemy_max_mp": {
       "expression": "(() => { const script = idleon.allScripts.ActorEvents_12; const original = script._customBlock_PlayerMPmax; let calls = 0; let maximumMP; try { script._customBlock_PlayerMPmax = function(...args) { calls++; maximumMP = original.apply(this, args); return maximumMP; }; idleon.callFunction('TalentCalc', -2); } finally { script._customBlock_PlayerMPmax = original; } if (calls !== 1 || script._customBlock_PlayerMPmax !== original) throw new Error('Alchemy MP capture must intercept exactly one call and restore PlayerMPmax'); return maximumMP; })()",
-      "result": 3126765.125
+      "result": 3128002.625
     },
     "w8_tome_score": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44258
+      "result": 44272
     },
     "w8_grimoire_bonus": {
       "expression": "idleon.callFunction(\"Summoning\", \"GrimoireUpgBonus\", 17, 0)",

@@ -94,7 +94,7 @@
     },
     "tome_pts_22": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 22, 0)",
-      "result": 1328
+      "result": 1332
     },
     "tome_pts_23": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 23, 0)",
@@ -486,7 +486,7 @@
     },
     "tome_pts_120": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 120, 0)",
-      "result": 333
+      "result": 343
     },
     "tome_pts_121": {
       "expression": "idleon.callFunction(\"Summoning\", \"TomePTS\", 121, 0)",
@@ -557,7 +557,7 @@
     },
     "tome_producer_120_royalg_total_stats_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"TotalStatz\", 0, 0)",
-      "result": 339
+      "result": 358
     }
   },
   "errors": {}

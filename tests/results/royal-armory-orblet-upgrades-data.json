@@ -194,7 +194,7 @@
     },
     "calculationStorage.amountInStorageOrblet": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[5].behaviors.getBehavior(\"ActorEvents_232\")._ItemsAndStorageOWNED.h.Orblet",
-      "result": 135
+      "result": 80
     }
   },
   "errors": {}

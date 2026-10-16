@@ -36,7 +36,7 @@
       "expression": "idleon.callFunction(\"TalentCalc\", 59)",
       "result": {
         "type": "large_number",
-        "value": "2.7762315358426554e+45"
+        "value": "2.877380000484569e+45"
       }
     },
     "talent_112_bonus": {

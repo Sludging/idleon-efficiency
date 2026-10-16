@@ -1,0 +1,12 @@
+{
+  "extractions": {
+    "construction_cog_build_rate": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 21, 0)",
+      "result": {
+        "type": "large_number",
+        "value": "1543270985855238100"
+      }
+    }
+  },
+  "errors": {}
+}

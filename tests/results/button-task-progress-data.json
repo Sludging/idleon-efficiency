@@ -1,0 +1,53 @@
+{
+  "extractions": {
+    "button_task_0_index": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_Task\", 0, 0)",
+      "result": 44
+    },
+    "button_task_0_requirement": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_REQ\", 0, 0)",
+      "result": 216
+    },
+    "button_task_0_have": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 44, 0)",
+      "result": 206
+    },
+    "button_task_1_index": {
+      "expression": "Math.round(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1) % 100] - idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length * Math.floor(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1) % 100] / idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length))",
+      "result": 36
+    },
+    "button_task_1_requirement": {
+      "expression": "Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[36][1]) * Math.pow(Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[36][3]), idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1)",
+      "result": 2999062754.1746006
+    },
+    "button_task_1_have": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 36, 0)",
+      "result": 11670985534.820656
+    },
+    "button_task_2_index": {
+      "expression": "Math.round(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2) % 100] - idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length * Math.floor(idleon.engine.getGameAttribute(\"CustomLists\").h.Research[39][(idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2) % 100] / idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks.length))",
+      "result": 20
+    },
+    "button_task_2_requirement": {
+      "expression": "Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][1]) * Math.pow(Number(idleon.engine.getGameAttribute(\"CustomLists\").h.ButtonTasks[20][3]), idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2)",
+      "result": 3723.571761363372
+    },
+    "button_task_2_have": {
+      "expression": "idleon.callFunction(\"Minehead\", \"Button_uHave\", 20, 0)",
+      "result": 61821
+    },
+    "button_task_0_press_count": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594]",
+      "result": 83
+    },
+    "button_task_1_press_count": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 1",
+      "result": 84
+    },
+    "button_task_2_press_count": {
+      "expression": "idleon.engine.getGameAttribute(\"OptionsListAccount\")[594] + 2",
+      "result": 85
+    }
+  },
+  "errors": {}
+}

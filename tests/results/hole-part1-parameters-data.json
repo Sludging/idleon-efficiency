@@ -26,17 +26,17 @@
       "result": {
         "levels": [
           20,
-          48,
-          68,
+          49,
+          69,
           30,
-          150
+          151
         ],
         "exp": [
-          2111430406566116.2,
-          556469569359472.06,
-          3505933161051056.5,
-          305651121377109.06,
-          219034503478928.1
+          2126310372778975,
+          75557045711636.7,
+          716039671260143.1,
+          309324648977493.2,
+          67858033791072.32
         ],
         "investments": [
           114,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          32706458.99977714,
-          32550929.54432672,
-          33432985.229478654,
+          33080817.04944553,
+          32925287.59399511,
+          33807343.279147044,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -129,7 +129,7 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3397,
+        "wishes": 3427,
         "layers": [
           19,
           17,
@@ -176,27 +176,27 @@
           ],
           [
             594,
-            52134834979.55866
+            123025930248.25847
           ],
           [
             533,
-            9792280235.804173
+            87873769467.70424
           ],
           [
             533,
-            10230126647.813572
+            79979116800.9635
           ],
           [
             467,
-            1290841156.5513253
+            9546722598.751324
           ],
           [
             553,
-            20101023505.76088
+            41268513719.210884
           ],
           [
             481,
-            2517928604.7923203
+            15705070791.192322
           ],
           [
             526,
@@ -411,7 +411,7 @@
     },
     "measurement_0": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 0, 0)",
-      "result": 309.52441220338983
+      "result": 309.6110318644068
     },
     "measurement_7": {
       "expression": "idleon.callFunction(\"Holes\", \"MeasurementBonusTOTAL\", 7, 0)",
@@ -483,7 +483,7 @@
     },
     "study_rate": {
       "expression": "idleon.callFunction(\"Holes\", \"BolaiaStudyRate\", 0, 0)",
-      "result": 106693.75084745763
+      "result": 107382.09762711865
     },
     "study_bonus_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyBolaiaBonuses\", 0, 0)",
@@ -566,11 +566,11 @@
     },
     "villager_requirement_1": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 1, 0)",
-      "result": 484586051248228.8
+      "result": 789522461584300.9
     },
     "villager_requirement_2": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 2, 0)",
-      "result": 2822131140760417
+      "result": 4050113796981134
     },
     "villager_requirement_3": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 3, 0)",
@@ -578,7 +578,7 @@
     },
     "villager_requirement_4": {
       "expression": "idleon.callFunction(\"Holes\", \"VillagerExpREQ\", 4, 0)",
-      "result": 154849997288232.7
+      "result": 176494020228985.6
     },
     "study_requirement_0": {
       "expression": "idleon.callFunction(\"Holes2\", \"StudyReqForBolaia\", 0, 0)",

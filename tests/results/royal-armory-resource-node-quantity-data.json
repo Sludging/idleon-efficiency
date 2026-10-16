@@ -6,7 +6,7 @@
     },
     "node_maximum_2": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 2, 0)",
-      "result": 11084189.100265503
+      "result": 16626283.650398254
     },
     "node_maximum_21": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 21, 0)",
@@ -18,11 +18,11 @@
     },
     "node_available_4": {
       "expression": "Number(idleon.getAttr(\"RoyalG\")[4][4]) === -1 ? 0 : idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 4, 0) - Number(idleon.getAttr(\"RoyalG\")[4][4])",
-      "result": 2461519.619580593
+      "result": 0
     },
     "node_available_22": {
       "expression": "Number(idleon.getAttr(\"RoyalG\")[4][22]) === -1 ? 0 : idleon.callFunction(\"RoyalG\", \"ResNodeQTYmax\", 22, 0) - Number(idleon.getAttr(\"RoyalG\")[4][22])",
-      "result": 0
+      "result": 5120393.475821119
     }
   },
   "errors": {}

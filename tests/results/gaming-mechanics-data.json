@@ -584,11 +584,11 @@
     },
     "water_charges": {
       "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[25][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",0,0)/100)/3600,0.75))",
-      "result": 8
+      "result": 15
     },
     "squirrel_acorns_ready": {
       "expression": "Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[27][1]*(1+idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",2,0)/100)/3600,0.85))",
-      "result": 37
+      "result": 74
     },
     "shell_next_threshold": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ShellRankREQ\",idleon.getAttr(\"GamingSprout\")[28][2]+1,0)",
@@ -608,7 +608,7 @@
     },
     "shovel_digs": {
       "expression": "Math.round(Math.floor(Math.pow(idleon.getAttr(\"GamingSprout\")[26][1]/3600,0.44))*(1+(25*idleon.callFunction(\"RandomEvent\",\"FractalIslandBonus\",4,999)+idleon.callFunction(\"GetBribeBonus\",\"37\")+idleon.callFunction(\"ArcadeBonus\",31,0))/100)*(1+idleon.callFunction(\"Summoning\",\"VotingBonusz\",22,0)/100))",
-      "result": 1
+      "result": 2
     },
     "shovel_nugget_minimum": {
       "expression": "idleon.callFunction(\"GamingStatType\",\"ImportItemBonus\",1,0)*(1+idleon.getAttr(\"Dream\")[9]*idleon.getAttr(\"OptionsListAccount\")[192]/100)",

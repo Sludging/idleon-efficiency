@@ -26,17 +26,17 @@
       "result": {
         "levels": [
           20,
-          48,
-          68,
+          49,
+          69,
           30,
-          150
+          151
         ],
         "exp": [
-          2111430406566116.2,
-          556469569359472.06,
-          3505933161051056.5,
-          305651121377109.06,
-          219034503478928.1
+          2126310372778975,
+          75557045711636.7,
+          716039671260143.1,
+          309324648977493.2,
+          67858033791072.32
         ],
         "investments": [
           114,
@@ -87,9 +87,9 @@
           645050.2468780265,
           214429.636600765,
           221428.0462261185,
-          32706458.99977714,
-          32550929.54432672,
-          33432985.229478654,
+          33080817.04944553,
+          32925287.59399511,
+          33807343.279147044,
           840302.5741329693,
           1076598.0439762478,
           1076614.8450074797,
@@ -129,7 +129,7 @@
           0
         ],
         "lanternUses": 0,
-        "wishes": 3397,
+        "wishes": 3427,
         "layers": [
           19,
           17,
@@ -211,16 +211,16 @@
           "tree": 0,
           "position": 4,
           "name": "Profoun-tain",
-          "level": 0,
-          "initial": 0,
-          "enhancement": 0,
+          "level": 5,
+          "initial": 1,
+          "enhancement": 4,
           "gate": true,
           "cap": 5,
           "prerequisiteId": 3,
           "prerequisiteMet": true,
           "access": true,
-          "canPurchase": true,
-          "bonus": 0
+          "canPurchase": false,
+          "bonus": 5
         },
         {
           "id": 9,
@@ -420,16 +420,16 @@
       "expression": "(() => {const h=idleon.getAttr('Holes'),purchased=Number(idleon.getAttr('GemItemsPurchased')[4]),earned=Math.round(idleon.callFunction('Holes','VillagerLV',2,0)+purchased);return {purchased,earned,invested:[4,5,6].reduce((s,t)=>s+h[t].reduce((a,v)=>a+Number(v),0),0),remaining:idleon.callFunction('Holes','CosmoPtsLeft',0,0),rawInvestments:h.slice(4,7),rawNames:idleon.getAttr('CustomLists').h.CosmoUpgrades.map(rows=>rows.map(row=>row[2]))};})()",
       "result": {
         "purchased": 12,
-        "earned": 80,
-        "invested": 66,
-        "remaining": 14,
+        "earned": 81,
+        "invested": 71,
+        "remaining": 10,
         "rawInvestments": [
           [
             4,
             5,
             3,
             5,
-            0,
+            5,
             0,
             0,
             0,
@@ -590,9 +590,9 @@
     "fountain_effects": {
       "expression": "(() => {const level=Number(idleon.getAttr('Holes')[4][4]);return {capacity:level,coin:1+0.25*level,marble:1+0.1*level};})()",
       "result": {
-        "capacity": 0,
-        "coin": 1,
-        "marble": 1
+        "capacity": 5,
+        "coin": 2.25,
+        "marble": 1.5
       }
     },
     "village_schematic_effect": {
@@ -688,7 +688,7 @@
     },
     "cosmo_level": {
       "expression": "idleon.callFunction('Holes','VillagerLV',2,0)",
-      "result": 68
+      "result": 69
     }
   },
   "errors": {}

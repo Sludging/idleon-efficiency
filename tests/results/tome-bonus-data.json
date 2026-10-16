@@ -34,7 +34,7 @@
     },
     "tome_bonus_score": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[84]",
-      "result": 44258
+      "result": 44272
     },
     "tome_bonus_unlocked_0": {
       "expression": "idleon.getAttr(\"PixelHelperActor\")[4].behaviors.getBehavior(\"ActorEvents_229\")._GenInfo[81][0]",

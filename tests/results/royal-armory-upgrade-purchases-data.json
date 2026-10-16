@@ -2,7 +2,7 @@
   "extractions": {
     "royal_armory_can_purchase_display_1": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 1; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
-      "result": false
+      "result": true
     },
     "royal_armory_can_purchase_display_0": {
       "expression": "(() => { const idleon = window.frames[0].idleon; const asNumber = window.frames[0].__idleon_cheats__[\"com.stencyl.behavior.Script\"].asNumber; const d = 0; const lists = idleon.getAttr(\"CustomLists\").h; const royalG = idleon.getAttr(\"RoyalG\"); const k = 0 | asNumber(lists.Research[43][d]); const r = Math.round(asNumber(lists.ArmoryUpg[d][3])); return d < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0) && asNumber(royalG[1][r]) >= idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", d, 0) && asNumber(royalG[2][k]) < asNumber(lists.ArmoryUpg[k][4]); })()",
@@ -18,7 +18,7 @@
     },
     "royal_armory_purchase_price_display_1": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 1, 0)",
-      "result": 134305268.77167675
+      "result": 26861053.75433535
     },
     "royal_armory_purchase_price_display_0": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 0, 0)",
@@ -26,11 +26,11 @@
     },
     "royal_armory_purchase_price_display_24": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 24, 0)",
-      "result": 72833823.76248156
+      "result": 14566764.752496313
     },
     "royal_armory_purchase_price_display_30": {
       "expression": "idleon.callFunction(\"RoyalG\", \"ArmoryUpgCost\", 30, 0)",
-      "result": 188016135.1474726
+      "result": 37603227.02949452
     },
     "royal_armory_purchase_unlocked_display_1": {
       "expression": "1 < idleon.callFunction(\"RoyalG\", \"ArmoryUpgUNLOCKED\", 0, 0)",
@@ -58,7 +58,7 @@
             "catalogIndex": 46,
             "purchaseResourceType": 0,
             "catalogResourceType": 22,
-            "rawQuantity": 16276575.707658293,
+            "rawQuantity": 46418944.6511968,
             "level": 126,
             "maxLevel": 200
           },
@@ -67,7 +67,7 @@
             "catalogIndex": 30,
             "purchaseResourceType": 0,
             "catalogResourceType": 14,
-            "rawQuantity": 16276575.707658293,
+            "rawQuantity": 46418944.6511968,
             "level": 1,
             "maxLevel": 1
           },
@@ -76,7 +76,7 @@
             "catalogIndex": 80,
             "purchaseResourceType": 11,
             "catalogResourceType": 9,
-            "rawQuantity": 5393905.4961574385,
+            "rawQuantity": 6769485.000198439,
             "level": 6,
             "maxLevel": 100
           },
@@ -85,7 +85,7 @@
             "catalogIndex": 50,
             "purchaseResourceType": 14,
             "catalogResourceType": 23,
-            "rawQuantity": 6201981.842377104,
+            "rawQuantity": 7998482.484593188,
             "level": 8,
             "maxLevel": 100
           }

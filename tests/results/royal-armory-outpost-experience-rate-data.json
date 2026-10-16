@@ -62,7 +62,7 @@
     },
     "xp_saved_6_0": {
       "expression": "Number(idleon.getAttr(\"RoyalMaps\")[6][3])",
-      "result": 2064.252893970074
+      "result": 2084.5377023693222
     },
     "xp_hourly_6_1": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[6]; let gain = 0; if (1 < 2) { if (call(\"HasOutpost\",6,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",1,6) * call(\"TotalUnitsz\",6,3); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 6) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 1) gain += call(\"BarExpRate\",role-3,6); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",6,t); if (level > best) { best = level; selected = t; } } if (selected === 1) gain += call(\"BarExpRate\",3,6) / 2; } } } return gain; })()",
@@ -90,7 +90,7 @@
     },
     "xp_saved_53_0": {
       "expression": "Number(idleon.getAttr(\"RoyalMaps\")[53][3])",
-      "result": 5577.690176746598
+      "result": 5622.316755224945
     },
     "xp_hourly_51_2": {
       "expression": "(() => { const call = (name,t,i) => idleon.callFunction(\"RoyalG\",name,t,i); const rows = idleon.getAttr(\"RoyalMaps\"); const g = idleon.getAttr(\"RoyalG\"); const row = rows[51]; let gain = 0; if (2 < 2) { if (call(\"HasOutpost\",51,0) === 1 && row.length > 2) gain = call(\"BarExpRate\",2,51) * call(\"TotalUnitsz\",51,3); } for (let w = 0; w < 8; w++) { const roles = g[6+2*w] || []; const maps = g[7+2*w] || []; for (let u = 0; u < roles.length; u++) { if (Number(maps[u]) !== 51) continue; const role = Number(roles[u]); if (role >= 5 && role - 3 === 2) gain += call(\"BarExpRate\",role-3,51); else if (role === 4 && row.length !== 1 && call(\"ArmoryUpgBonus\",17,0) >= 1) { let selected = 0; let best = -1; for (let t = 0; t < 5; t++) { const level = call(\"OutpostEXPrank\",51,t); if (level > best) { best = level; selected = t; } } if (selected === 2) gain += call(\"BarExpRate\",3,51) / 2; } } } return gain; })()",
