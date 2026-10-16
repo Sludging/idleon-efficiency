@@ -63,7 +63,7 @@ Initially expose all 18 individual entries below, named in this order. Mechanica
 Each cavern owns its local progression, production, wallets, upgrades, rewards, character capability, and relevant source/modifier links.
 Access/requirements, owned effective benefits, and relevant Study effects stay with the affected information. Keep the account-wide Opal summary; do not repeat local Earned Opals when completed progress communicates cavern progress.
 
-For the accepted part 3 presentation, the table's numeric prefixes show canonical order; they are not displayed navigation indices. Follow the [part 3 UI plan](hole-part-3-ui-plan.md) for the selected four-cavern detail and navigation presentation.
+For part 3, preserve all 18 cavern names in canonical order without displayed navigation indices. Follow the [part 3 UI plan](hole-part-3-ui-plan.md) for the selected four-cavern detail.
 
 | Cavern | Distinct information retained from the approved scopes |
 |---|---|
